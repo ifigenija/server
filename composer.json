@@ -1,0 +1,28 @@
+{
+    "name": "IFIGENIJA",
+    "description": "Informacijska gledališka nacionalna aplikacija",
+    "license": "GPL-2.0",
+    "keywords": [
+        "IFIGENIJA",
+        "zf2"
+    ],
+    "homepage": "http://svn.max.si/projects/IFIGENIJA",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.4",
+	"ext-intl": "*",
+        "ext-apcu": "*",
+        "ext-pdo_pgsql": "*",
+	"ext-gd": "*",
+        "zendframework/zendframework": "2.3.1",
+        "doctrine/doctrine-orm-module": "dev-master",
+        "doctrine/orm":"2.4",
+        "doctrine/migrations": "dev-master",
+        "zendframework/zend-developer-tools": "dev-master",
+        "bjyoungblood/bjy-profiler": "dev-master",
+	"neilime/zf2-mobile-detect": "dev-master",
+        "codeception/codeception": "dev-master",
+        "flow/jsonpath": "dev-master",
+        "zf-commons/zfc-rbac": "~2.4"
+    }
+}
