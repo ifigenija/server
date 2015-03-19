@@ -183,9 +183,9 @@ module.exports = function (grunt) {
             clean_config: {
                 cmd: function () {
                     if (os.platform() === 'win32') {
-                        return 'del data\\module-config-cache.897sdfsd65wer4q6dayvdr46we87rw9er3224.php';
+                        return 'del data\\module-config-cache.4q6dayvdr46we87rw9er3224.php';
                     }
-                    return  'rm -f data/module-config-cache.897sdfsd65wer4q6dayvdr46we87rw9er3224.php';
+                    return  'rm -f data/module-config-cache.4q6dayvdr46we87rw9er3224.php';
                 }
             },
             clean_tmp: {

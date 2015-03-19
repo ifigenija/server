@@ -1,0 +1,31 @@
+<tr class="row">
+    <td>
+        <a href="<?=
+        $this->newtab('aaa', [
+            'controller' => 'Permission',
+            'action' => 'pregled',
+            'id' => $resource->id
+        ])
+        ?>"><?= $resource->name ?></a>
+    </td>
+    <td>
+        <?= $resource->description ?>
+    </td>
+
+    <td>
+        <a href="<?=
+        $this->url('aaa', [
+            'controller' => 'Permission',
+            'action' => 'brisi',
+            'id' => $resource->id
+        ])
+        ?>"><i class="icon-trash"></i></a>
+        <a href="<?=
+        $this->newtab('aaa', [
+            'controller' => 'Permission',
+            'action' => 'uredi',
+            'id' => $resource->id
+        ])
+        ?>"><i class="icon-edit"></i></a>
+    </td>
+</tr>

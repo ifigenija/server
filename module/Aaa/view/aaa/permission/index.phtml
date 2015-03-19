@@ -1,0 +1,40 @@
+<?php
+$this->headTitle()->append('Dovoljenja');
+$tf = $this->plugin('tipformat');
+$ma = $this->plugin('marionette');
+$ma->filter($filter);
+?>
+
+<div class="page-header">
+    <h2><?= $this->translate('Dovoljenja', 'default') ?></h2>
+</div>
+
+<table class="table table-condensed table-hover">
+    <thead>
+        <tr class="row">
+            <th><?= $this->sortLink('name', $sort) ?></th>
+            <th><?= $this->sortLink('description', $sort) ?></th>
+
+
+            <th><?= $this->translate('Akcije', 'default') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        if ($paginator) {
+            foreach ($paginator as $resource) {
+                echo $this->partial('aaa/permission/listitem', ['resource' => $resource]);
+            }
+        }
+        ?>
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-md-12">
+        <?php
+        if ($paginator) {
+            echo $this->paginationControl($paginator, 'sliding', 'tip/paginator/standard', array());
+        }
+        ?>
+    </div>
+</div>

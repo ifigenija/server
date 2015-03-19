@@ -1,0 +1,39 @@
+<?php
+$this->headTitle()->append('Skupina');
+$this->headTitle()->append($object->getName());
+$tf = $this->plugin('tipformat');
+?>
+
+<div class="page-header">
+    <h2>
+        <small><?= $this->translate('Skupina', 'default') ?></small> <?= $object->getName() ?>
+    </h2>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?= $this->translate('Člani skupine', 'default') ?>
+            </div>
+            <div class="list-group">
+                <?php
+                foreach ($object->getUsers() as $user) {
+                    ?>
+                    <a class="list-group-item" href="<?=
+                       $this->newtab('aaa',
+                               [
+                           'controller' => 'User',
+                           'action' => 'pregled',
+                           'id' => $user->getId()
+                       ])
+                       ?>"><?= $user->getSurname() ?>, <?= $user->getName() ?></a>
+                       <?php
+                   }
+                   ?>
+            </div>
+        </div>
+
+    </div>
+
+</div>

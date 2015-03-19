@@ -1,0 +1,5 @@
+<?php
+$formHelper = $this->plugin('formtwb');
+$formHelper->setFormType('inline');
+$userForm->prepare();
+echo $formHelper->render($userForm);

@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * Local Configuration Override
+ *
+ * This configuration override file is for overriding environment-specific and
+ * security-sensitive configuration information. Copy this file without the
+ * .dist extension at the end and populate values as needed.
+ *
+ */
+return array(
+    'tip' => array(
+        'useOptimizedJs' => true,
+        'firma' => '0001'
+    ),
+    'doctrine' => array(
+        'connection' => array(
+            'orm_default' => array(
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'params' => array(
+                    'host' => 'host', // pusti host in port prazno za unix socket connect
+                    'port' => '5432',
+                    'user' => 'user',
+                    'password' => 'password',
+                    'dbname' => 'dbname',
+                )
+            )
+        ),
+        'configuration' => array(
+            'orm_default' => array(
+                'metadata_cache' => 'apc',
+                'query_cache' => 'apc',
+                'result_cache' => 'apc',
+                'driver' => 'orm_default',
+                'generate_proxies' => false,
+            )
+        ),
+    ),
+    'zenddevelopertools' => array(
+        'profiler' => array(
+            'enabled' => false,
+        ),
+        'toolbar' => array(
+            'enabled' => true,
+        )
+    )
+);
