@@ -23,7 +23,7 @@
                 'port' => '5432',
                 'user' => 'user',
                 'password' => 'geslo',
-                'dbname' => 'TipStage',
+                'dbname' => 'IfiStage',
             ];
         case 'acc':
             return [
@@ -31,7 +31,7 @@
                 'port' => '5432',
                 'user' => 'user',
                 'password' => 'geslo',
-                'dbname' => 'TipAcceptance'
+                'dbname' => 'IfiAcceptance'
             ];
         default:
             return [
@@ -39,16 +39,15 @@
                 'port' => '5432',
                 'user' => 'user',
                 'password' => 'geslo',
-                'dbname' => 'TipFunctional',
+                'dbname' => 'IfiFunctional',
             ];
     }
 
 };
 
 return [
-    'tip' => [
+    'ifigenija' => [
         'useOptimizedJs' => false,
-        'firma' => '0001',
         'revision_listener' => 0
     ],
     'doctrine' => [
@@ -68,13 +67,5 @@ return [
             ]
         ],
     ],
-    'zenddevelopertools' => [
-        'profiler' => [
-            'enabled' => false,
-        ],
-        'toolbar' => [
-            'enabled' => false,
-        ]
-    ]
 ];
 

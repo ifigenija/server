@@ -1,1 +1,5 @@
-vendor/**
+/vendor/
+/config/autoload/local.php
+/config/autoload/local.test.php
+/nbproject/private/
+/node_modules/
