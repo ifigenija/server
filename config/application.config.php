@@ -6,8 +6,6 @@ return [
         //    'ZendDeveloperTools',
         'DoctrineModule',
         'DoctrineORMModule',
-        'Neilime\MobileDetect',
-        'TwBootstrap',
         'ZfcRbac',
         'Aaa',
     ],

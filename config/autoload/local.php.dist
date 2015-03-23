@@ -9,10 +9,6 @@
  *
  */
 return array(
-    'tip' => array(
-        'useOptimizedJs' => true,
-        'firma' => '0001'
-    ),
     'doctrine' => array(
         'connection' => array(
             'orm_default' => array(

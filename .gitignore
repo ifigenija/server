@@ -3,3 +3,4 @@
 /config/autoload/local.test.php
 /nbproject/private/
 /node_modules/
+**/autoload_classmap.php

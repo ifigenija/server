@@ -53,7 +53,16 @@ return [
             'Aaa\Permission' => 'Aaa\Controller\PermissionController'
         ]
     ],
-    'zfc_rbac' => include __DIR__ . '/rbac.config.php',
+    'zfc_rbac' => [
+        'guards' => [
+            'ZfcRbac\Guard\RouteGuard' => [
+                'login' => ['*'],
+                'changepass' => ['prijavljen-uporabnik'],
+                'aaa' => ['administrator-dostopov'],
+                'acljson' => ['prijavljen-uporabnik']
+            ]
+        ]
+    ],
     'router' => [
         'routes' => [
             'login' => [

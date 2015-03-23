@@ -25,21 +25,13 @@
                 'password' => 'geslo',
                 'dbname' => 'IfiStage',
             ];
-        case 'acc':
-            return [
-                'host' => '127.0.0.1', // pusti host in port prazno za unix socket connect
-                'port' => '5432',
-                'user' => 'user',
-                'password' => 'geslo',
-                'dbname' => 'IfiAcceptance'
-            ];
         default:
             return [
                 'host' => '127.0.0.1', // pusti host in port prazno za unix socket connect
                 'port' => '5432',
                 'user' => 'user',
                 'password' => 'geslo',
-                'dbname' => 'IfiFunctional',
+                'dbname' => 'IfiFunc',
             ];
     }
 

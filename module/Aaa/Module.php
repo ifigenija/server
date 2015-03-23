@@ -23,10 +23,8 @@ use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
-const UUID = '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}';
-
 Class Module
-    implements ConsoleUsageProviderInterface
+        implements ConsoleUsageProviderInterface
 {
 
     public function getConfig()
@@ -56,10 +54,7 @@ Class Module
         $eventManager->attach($sm->get('rbac_strategy'));
         $authService = $sm->get('Zend\Authentication\AuthenticationService');
 
-        $em = $sm->get('doctrine.entitymanager.orm_default');
-        $evm = $em->getEventManager();
-        $list = new PrePersistListener('anon');
-        $evm->addEventSubscriber($list);
+
 
         if ($e->getRequest() instanceof Request) {
             // handling autorizacij preko konzole
@@ -77,13 +72,9 @@ Class Module
         }
 
         $list->setIdentity($identity);
-
-        // priklopi listenerje za audit trail
-
-        $config = $sm->get('config')['tip'];
-        if (!empty($config['revision_listener'])) {
-            $evm->addEventSubscriber(new RevisionsListener($sm, $identity));
-        }
+        $em = $sm->get('doctrine.entitymanager.orm_default');
+        $evm = $em->getEventManager();
+        $evm->addEventSubscriber(new RevisionsListener($sm, $identity));
     }
 
     /**
@@ -102,22 +93,22 @@ Class Module
             $role = new Role();
             $role->setName('tip-vse');
             $role->setBuiltIn(true);
- 
+
             $guest = new Role();
             $guest->setName('guest');
             $guest->setBuiltIn(true);
-            
+
             $pu = new Role();
             $pu->setName('prijavljen-uporabnik');
             $pu->setBuiltIn(true);
- 
+
             $user = new User();
             $user->setUsername('console')
-                ->setName('console')
-                ->setSurname('console')
-                ->setPassword('console')
-                ->setEnabled('true')
-                ->setEmail('console@locahost');
+                    ->setName('console')
+                    ->setSurname('console')
+                    ->setPassword('console')
+                    ->setEnabled('true')
+                    ->setEmail('console@locahost');
             $user->getRoles()->add($role);
             $user->getHierRoles()->add($role);
 

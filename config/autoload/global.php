@@ -12,13 +12,10 @@
  * file.
  */
 return [
-    'tip' => [
+    'ifigenija' => [
         'fixtures' => [
             'module/Aaa/fixture',
-            'module/Tip/fixture',
-            'module/Narocila/fixture',
-            'module/Logistika/fixture',
-            'module/Workflow/fixture'
+            'module/Sifrant/fixture'
         ]
     ],
     'service_manager' => [

@@ -89,14 +89,14 @@ class Rbac
         foreach ($roles as $role) {
 
 // vloga tip-vse ima dostop do vsega, tako da takoj vrnemo true
-            if ($role === 'tip-vse') {
+            if ($role === 'ifi-vse') {
                 return true;
             }
 
 // če je zahtevan -read in -lookup, potem pogledamo če ima uporabnik vlogo branja,
 // vsega v modulu ali pa globalno vlogo -beri-vse        
             if ($is_read) {
-                if ($role === 'tip-beri-vse') {
+                if ($role === 'ifi-beri-vse') {
                     return true;
                 }
 
@@ -131,11 +131,10 @@ class Rbac
     {
 // preverimo ali smo v modulu, ki predvideva  wildcard vloge 
         if (in_array($perm, [
-                'tehnologija',
-                'proizvodnja',
-                'logistika',
-                'narocila',
-                'materialno',
+                'predprodukcija',
+                'produkcija',
+                'arhiv',
+                'statistika',
                 'workflow',
                 'vfs'], true)) {
 // prvi del permission stringa se ujema z imenom modula
