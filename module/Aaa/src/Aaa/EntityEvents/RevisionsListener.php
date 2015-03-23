@@ -46,7 +46,7 @@ class RevisionsListener
     private $identity;
 
     /**
-     * @var \Tip\Annotation\EntityMetadataFactory
+     * @var \Max\Annotation\EntityMetadataFactory
      */
     private $metaFactory;
 
@@ -333,7 +333,7 @@ class RevisionsListener
 
     protected function isEntity($obj)
     {
-        if (is_object($obj) && $obj instanceof \Tip\Entity\Base) {
+        if (is_object($obj) && $obj instanceof \Max\Entity\Base) {
             return true;
         }
         return false;
@@ -357,16 +357,16 @@ class RevisionsListener
     }
 
     /**
-     * Zahteva da entiteta deduje \Tip\Entity\Base
+     * Zahteva da entiteta deduje \Max\Entity\Base
      *
-     * @param \Tip\Entity\Base $entity
-     * @throws \Tip\Exception\TipException
+     * @param \Max\Entity\Base $entity
+     * @throws \Max\Exception\MaxException
      */
     protected function checkBaseEntity($entity)
     {
-        if (!$entity instanceof \Tip\Entity\Base) {
+        if (!$entity instanceof \Max\Entity\Base) {
             $class = get_class($entity);
-            throw new \Tip\Exception\TipException("Entiteta '$class' mora dedovati '\\Tip\\Entity\\Base'", 'TIP-REV-0001');
+            throw new \Max\Exception\MaxException("Entiteta '$class' mora dedovati '\\Max\\Entity\\Base'", 'TIP-REV-0001');
         }
     }
 

@@ -3,7 +3,7 @@
 namespace Aaa\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
-    Tip\Annotation\Entity as Tip,
+    Max\Annotation\Entity as Max,
     Zend\InputFilter\Factory as InputFactory,
     Zend\InputFilter\InputFilter,
     Zend\InputFilter\InputFilterAwareInterface,
@@ -17,11 +17,11 @@ use Doctrine\ORM\Mapping as ORM,
  * @ORM\Entity(repositoryClass="Aaa\Repository\Users")
  * @ORM\Table(name="uporabniki")
  *
- * @Tip\I18n(label="Uporabnik", plural="Uporabniki")
- * @Tip\Lookup(ident="username",label="fullName")
+ * @Max\I18n(label="Uporabnik", plural="Uporabniki")
+ * @Max\Lookup(ident="username",label="fullName")
  */
 class User
-    extends \Tip\Entity\Base
+    extends \Max\Entity\Base
     implements \ZfcRbac\Identity\IdentityInterface
 {
 
@@ -32,8 +32,8 @@ class User
      * @ORM\Column(type="guid",unique=true);
      * @ORM\GeneratedValue(strategy="NONE")
      *
-     * @Tip\I18n(label="ID", hint="ID uporabnika", description="ID uporabnika")
-     * @Tip\Ui(type="id")
+     * @Max\I18n(label="ID", hint="ID uporabnika", description="ID uporabnika")
+     * @Max\Ui(type="id")
      */
     protected $id;
 
@@ -43,7 +43,7 @@ class User
      * @ORM\Column(length=10, unique=true,nullable=false)
      * @var string
      *
-     * @Tip\I18n(label="Uporabniško ime", hint="Uporabniško ime", description="Uporabniško ime")
+     * @Max\I18n(label="Uporabniško ime", hint="Uporabniško ime", description="Uporabniško ime")
      * @TIp\Ui(group="Login", type="naziv", ident=true)
      */
     protected $username;
@@ -53,7 +53,7 @@ class User
      *
      * @ORM\Column(type="string")
      *
-     * @Tip\I18n(label="Ime", hint="Ime uporabnika", description="Ime uporabnika")
+     * @Max\I18n(label="Ime", hint="Ime uporabnika", description="Ime uporabnika")
      * @TIp\Ui(group="Uporabnik", type="naziv")
      */
     protected $name;
@@ -63,7 +63,7 @@ class User
      *
      * @ORM\Column(type="string", nullable=true)
      *
-     * @Tip\I18n(label="Priimek", hint="Priimek uporabnika", description="Priimek uporabnika")
+     * @Max\I18n(label="Priimek", hint="Priimek uporabnika", description="Priimek uporabnika")
      * @TIp\Ui(group="Uporabnik", type="naziv")
      */
     protected $surname;
@@ -73,8 +73,8 @@ class User
      *
      * @ORM\Column(type="string",unique=true,nullable=false)
      *
-     * @Tip\I18n(label="E-mail", hint="E-poštni naslov", description="Naslov elektronske pošte uporabnika")
-     * @Tip\Ui(type="email", group="Uporabnik")
+     * @Max\I18n(label="E-mail", hint="E-poštni naslov", description="Naslov elektronske pošte uporabnika")
+     * @Max\Ui(type="email", group="Uporabnik")
      */
     protected $email;
 
@@ -83,8 +83,8 @@ class User
      *
      * @ORM\Column(length=90)
      *
-     * @Tip\I18n(label="Geslo", hint="Geslo", description="Geslo")
-     * @Tip\Ui(group="Login", type="password")
+     * @Max\I18n(label="Geslo", hint="Geslo", description="Geslo")
+     * @Max\Ui(group="Login", type="password")
      */
     protected $password;
 
@@ -92,8 +92,8 @@ class User
      * Uporabnik omogočen/onemogočen
      *
      * @ORM\Column(type="boolean")
-     * @Tip\I18n(label="Aktiven", hint="Uporabnik aktiven (D/N)", description="Uporabnik aktiven")
-     * @Tip\UI(type="checkbox", group="Uporabnik")
+     * @Max\I18n(label="Aktiven", hint="Uporabnik aktiven (D/N)", description="Uporabnik aktiven")
+     * @Max\UI(type="checkbox", group="Uporabnik")
      */
     protected $enabled;
 
@@ -102,8 +102,8 @@ class User
      *
      * @ORM\Column(length=90, nullable=true);
      *
-     * @Tip\I18n(label="Api Ključ", description="Api ključ za dostop preko rest vmesnikov")
-     * @Tip\Ui(type="text", group="Login")
+     * @Max\I18n(label="Api Ključ", description="Api ključ za dostop preko rest vmesnikov")
+     * @Max\Ui(type="text", group="Login")
      */
     protected $apiKey;
 
@@ -112,8 +112,8 @@ class User
      *  Uporabljeno za določitev dostopov
      *
      * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
-     * @Tip\I18n(label="Skupine", hint="Skupine katerih član je uporabnik", description="Skupine, katerih član je uporabnik")
-     * @Tip\UI(group="Skupine")
+     * @Max\I18n(label="Skupine", hint="Skupine katerih član je uporabnik", description="Skupine, katerih član je uporabnik")
+     * @Max\UI(group="Skupine")
      */
     protected $groups;
 
@@ -123,8 +123,8 @@ class User
      *  Uporabljeno za določitev dostopov
      *
      * @ORM\ManyToMany(targetEntity="Role")     
-     * @Tip\I18n(label="Vloge", hint="ID-ji Skupin", description="Skupine, katerih član je uporabnik")
-     * @Tip\UI(group="Vloge")
+     * @Max\I18n(label="Vloge", hint="ID-ji Skupin", description="Skupine, katerih član je uporabnik")
+     * @Max\UI(group="Vloge")
      */
     protected $roles;
 
@@ -141,8 +141,8 @@ class User
      * Veljavnost - po tem datumu se uporabnik ne more prijaviti
      *
      * @ORM\Column(type="date", nullable=true)
-     * @Tip\I18n(label="Veljavnost", hint="Datum veljavnosti ali prazno (veljavnost ne poteče)", description="Po tem datumu se uporabnik ne more prijaviti")
-     * @Tip\Ui(group="Uporabnik")
+     * @Max\I18n(label="Veljavnost", hint="Datum veljavnosti ali prazno (veljavnost ne poteče)", description="Po tem datumu se uporabnik ne more prijaviti")
+     * @Max\Ui(group="Uporabnik")
      */
     protected $expires;
 
@@ -150,14 +150,14 @@ class User
      * Začetna pot za uporabnika
      *
      * @ORM\Column(type="text", nullable=true)
-     * @Tip\I18n(label="Privzeta pot ob prijavi", hint="Route ali prazno ('home')", description="Privzeta pot v aplikaciji po prijavi")
+     * @Max\I18n(label="Privzeta pot ob prijavi", hint="Route ali prazno ('home')", description="Privzeta pot v aplikaciji po prijavi")
      * @TIp\Ui(group="Zagon", type="text")
      */
     protected $defaultRoute;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Tip\I18n(label="Parametri za pot", hint="param=>vrednost ali prazno", description="Parametri za privzeto pot v aplikaciji po prijavi")
+     * @Max\I18n(label="Parametri za pot", hint="param=>vrednost ali prazno", description="Parametri za privzeto pot v aplikaciji po prijavi")
      * @TIp\Ui(group="Zagon", type="textarea")
      */
     protected $defaultRouteParams;

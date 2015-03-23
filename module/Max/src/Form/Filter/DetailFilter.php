@@ -5,7 +5,7 @@
  *  
  */
 
-namespace Tip\Form\Filter;
+namespace Max\Form\Filter;
 
 /**
  * Forma za preverjanje polj iz query parametrov master[group]master[nivo]master[id]

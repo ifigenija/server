@@ -5,32 +5,32 @@
  *  
  */
 
-namespace Tip\Service;
+namespace Max\Service;
 
 use Aaa\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManager;
-use Tip\Consts;
-use Tip\Entity\Base;
-use Tip\Exception\TipException;
-use Tip\Filter\StripEntity;
+use Max\Consts;
+use Max\Entity\Base;
+use Max\Exception\MaxException;
+use Max\Filter\StripEntity;
 use Workflow\Repository\JobManager;
 use Zend\Mvc\I18n\Translator;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use ZfcRbac\Service\AuthorizationService;
 
 /**
- * Description of AbstractTipService
+ * Description of AbstractMaxService
  *
  * @author boris
  */
-class AbstractTipService
+class AbstractMaxService
     implements ServiceLocatorAwareInterface
 {
 
     use \Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-use \Tip\Expect\ExpectTrait;
+use \Max\Expect\ExpectTrait;
 
     /**
      * Referenca na translator
@@ -147,7 +147,7 @@ use \Tip\Expect\ExpectTrait;
 
         if (is_array($task)) {
             if (empty($task['task'])) {
-                throw new TipException($this->translate('Task ni določen'), 'TIP-JOB-0098');
+                throw new MaxException($this->translate('Task ni določen'), 'TIP-JOB-0098');
             }
             $params = $task;
             $params['data'] = $data;

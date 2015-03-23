@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-namespace Tip\Stdlib\Hydrator\Strategy;
+namespace Max\Stdlib\Hydrator\Strategy;
 
 /**
  * Description of DateString
@@ -25,10 +25,10 @@ class ObjectValueStrategy
         $rep = $objectManager->getRepository($entityClass);
         $rep->setServiceLocator($serviceLocator);
         $this->setServiceLocator($serviceLocator);
-        if ($rep instanceof \Tip\Repository\AbstractTipRepository) {
+        if ($rep instanceof \Max\Repository\AbstractMaxRepository) {
             $this->hydr = $rep->getJsonHydrator($options);
         } else {
-            $this->hydr = new \Tip\Stdlib\Hydrator\Json($objectManager, $entityClass);
+            $this->hydr = new \Max\Stdlib\Hydrator\Json($objectManager, $entityClass);
             $this->hydr->setServiceLocator($serviceLocator);
         }
     }

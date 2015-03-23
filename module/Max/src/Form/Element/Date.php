@@ -1,8 +1,8 @@
 <?php
 
-namespace Tip\Form\Element;
+namespace Max\Form\Element;
 
-use Tip\Filter\IsoDateFilter;
+use Max\Filter\IsoDateFilter;
 use Zend\Filter\Null;
 use Zend\Form\Element\Date as ZendDate;
 use Zend\Validator\Callback;

@@ -3,17 +3,17 @@
 namespace Aaa\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Tip\Annotation\Entity as Tip;
+use Max\Annotation\Entity as Max;
 
 /**
  * Entiteta Dovoljenja za dostop
  *
  * @ORM\Entity(repositoryClass="Aaa\Repository\Permissions")
  *
- * @Tip\I18n(label="Dovoljenje",plural="Dovoljenja")
- * @Tip\Lookup(ident="name", label="description")
+ * @Max\I18n(label="Dovoljenje",plural="Dovoljenja")
+ * @Max\Lookup(ident="name", label="description")
  */
-class Permission extends \Tip\Entity\Base
+class Permission extends \Max\Entity\Base
 {
 
     /**
@@ -23,7 +23,7 @@ class Permission extends \Tip\Entity\Base
      * @ORM\Column(type="guid",unique=true);
      * @ORM\GeneratedValue(strategy="NONE")
      *
-     * @Tip\Ui(type="id")
+     * @Max\Ui(type="id")
      */
     protected $id;
 
@@ -33,8 +33,8 @@ class Permission extends \Tip\Entity\Base
      * @ORM\Column(length=255)
      * @var string
      *
-     * @Tip\I18n(label="Naziv", hint="Naziv dovoljenja", description="Naziv dovoljenja")
-     * @Tip\Ui(type="sifra",ident=true )
+     * @Max\I18n(label="Naziv", hint="Naziv dovoljenja", description="Naziv dovoljenja")
+     * @Max\Ui(type="sifra",ident=true )
      */
     protected $name;
 
@@ -44,8 +44,8 @@ class Permission extends \Tip\Entity\Base
      *
      * @ORM\Column(type="text", nullable=true)
      *
-     * @Tip\I18n(label="Opis", hint="Opis dovoljenja", description="Opis dovoljenja")
-     * @Tip\Ui(type="naziv")
+     * @Max\I18n(label="Opis", hint="Opis dovoljenja", description="Opis dovoljenja")
+     * @Max\Ui(type="naziv")
      */
     protected $description;
     
@@ -53,7 +53,7 @@ class Permission extends \Tip\Entity\Base
      * A je dovoljene vgrajeno v sistem, ali pa dodano kasneje.
      * @ORM\Column(type="boolean")
      *
-     * @Tip\I18n(label="Vgrajeno", hint="Dovoljene, ki pride z namestitvijo sistema")
+     * @Max\I18n(label="Vgrajeno", hint="Dovoljene, ki pride z namestitvijo sistema")
      */
     protected $builtIn = false;
     
@@ -70,7 +70,7 @@ class Permission extends \Tip\Entity\Base
     /**
      * @ORM\ManyToMany(targetEntity="Role", mappedBy="permissions")
      *
-     * @Tip\I18n(label="Vloge", description="Vloge, ki imajo to dovoljenje")
+     * @Max\I18n(label="Vloge", description="Vloge, ki imajo to dovoljenje")
      */
     protected $roles;   
 

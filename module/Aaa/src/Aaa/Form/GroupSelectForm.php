@@ -2,10 +2,10 @@
 
 namespace Aaa\Form;
 
-use Tip\Form\FormModeInterface;
-use Tip\Form\ManagedFieldset;
-use Tip\Stdlib\Hydrator\ClassMethods;
-use Tip\Stdlib\Hydrator\DoctrineObject;
+use Max\Form\FormModeInterface;
+use Max\Form\ManagedFieldset;
+use Max\Stdlib\Hydrator\ClassMethods;
+use Max\Stdlib\Hydrator\DoctrineObject;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Tip\Form;
+namespace Max\Form;
 
 use Exception;
 use stdClass;
-use Tip\Filter\StripEntity;
-use Tip\Form\ManagedForm;
-use Tip\Stdlib\Hydrator\Json;
+use Max\Filter\StripEntity;
+use Max\Form\ManagedForm;
+use Max\Stdlib\Hydrator\Json;
 use Zend\Form\Element\Collection;
 
 class JsonForm

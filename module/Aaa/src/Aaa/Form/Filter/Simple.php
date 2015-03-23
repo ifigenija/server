@@ -3,7 +3,7 @@
 namespace Aaa\Form\Filter;
 
 
-class Simple extends \Tip\Form\Filter\Prazna
+class Simple extends \Max\Form\Filter\Prazna
 {
 
     public function init()

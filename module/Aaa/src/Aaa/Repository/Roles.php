@@ -5,20 +5,20 @@ namespace Aaa\Repository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineORMModule\Proxy\__CG__\Aaa\Entity\Role;
-use Tip\Repository\AbstractTipRepository;
-use Tip\Repository\LookupInterface;
-use Tip\Repository\PagingInterface;
+use Max\Repository\AbstractMaxRepository;
+use Max\Repository\LookupInterface;
+use Max\Repository\PagingInterface;
 
 /**
  * Role - vloge uporabnikov
  */
-class Roles extends AbstractTipRepository implements LookupInterface, PagingInterface
+class Roles extends AbstractMaxRepository implements LookupInterface, PagingInterface
 {
 
     /**
      * default sort opcije
      *
-     * @var \Tip\Config\Sort
+     * @var \Max\Config\Sort
      */
     protected $sortOptions = [
         'default' => [

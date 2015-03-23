@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Tip\Form\Filter;
+namespace Max\Form\Filter;
 
-use Tip\Form\JsonForm;
+use Max\Form\JsonForm;
 
 abstract class Prazna extends JsonForm implements FilterDataDefaultsInterface {
 

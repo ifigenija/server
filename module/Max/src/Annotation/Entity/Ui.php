@@ -4,7 +4,7 @@
  * (copyleft) Licenca
  */
 
-namespace Tip\Annotation\Entity;
+namespace Max\Annotation\Entity;
 
 /**
  * Ui služi na pomoč pri prebiranju form elementa. V Ui lahko specificiramo tip elementa
@@ -18,7 +18,7 @@ namespace Tip\Annotation\Entity;
 class Ui {
 
     /**
-     * Tip form elementa, ki se uporablja za to polje. String se poišče preko
+     * Max form elementa, ki se uporablja za to polje. String se poišče preko
      * form element managerja. Lahko ja class ali pa ime registriranega form elementa
      * privzeto
      * @var string

@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-namespace Tip\Stdlib\Hydrator\Strategy;
+namespace Max\Stdlib\Hydrator\Strategy;
 
 class JsonString implements \Zend\Stdlib\Hydrator\Strategy\StrategyInterface {
     public function extract($value) {

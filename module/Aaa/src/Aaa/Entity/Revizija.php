@@ -6,7 +6,7 @@
 
 namespace Aaa\Entity;
 
-use Tip\Annotation\Entity as Tip;
+use Max\Annotation\Entity as Max;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -68,7 +68,7 @@ class Revizija
     protected $datum;
 
     /**
-     * Tip spremembe: upd, ins, del
+     * Max spremembe: upd, ins, del
      *
      * @ORM\Column(length=3)
      * @var type
@@ -133,12 +133,12 @@ class Revizija
         $this->datum = $datum;
     }
 
-    public function getTip()
+    public function getMax()
     {
         return $this->tip;
     }
 
-    public function setTip($tip)
+    public function setMax($tip)
     {
         $this->tip = $tip;
     }

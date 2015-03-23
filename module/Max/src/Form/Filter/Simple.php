@@ -1,8 +1,8 @@
 <?php
 
-namespace Tip\Form\Filter;
+namespace Max\Form\Filter;
 
-use Tip\Form\Filter\Prazna;
+use Max\Form\Filter\Prazna;
 
 class Simple extends Prazna
 {

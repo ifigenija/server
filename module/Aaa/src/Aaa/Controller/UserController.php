@@ -6,9 +6,9 @@ use Aaa\Form\LoginForm;
 use Aaa\Navigation\User;
 use Doctrine\ORM\EntityRepository;
 use Exception;
-use Tip\Controller\AbstractTipController;
-use Tip\Exception\EntitetaNeObstaja;
-use Tip\Exception\NepopolniParametriZaAkcijo;
+use Max\Controller\AbstractMaxController;
+use Max\Exception\EntitetaNeObstaja;
+use Max\Exception\NepopolniParametriZaAkcijo;
 use Zend\Console\Prompt\Line;
 use Zend\Session\Container;
 use Zend\View\Model\JsonModel;
@@ -18,13 +18,13 @@ use Zend\View\Model\ViewModel;
  * Kontroler za uporabnike
  */
 class UserController
-    extends AbstractTipController
+    extends AbstractMaxController
 {
 
-    use \Tip\Controller\ActionTrait\EntityPaginator,
-        \Tip\Controller\ActionTrait\EntityPregled,
-        \Tip\Controller\ActionTrait\EntityUredi,
-        \Tip\Controller\ActionTrait\EntityBrisi,
+    use \Max\Controller\ActionTrait\EntityPaginator,
+        \Max\Controller\ActionTrait\EntityPregled,
+        \Max\Controller\ActionTrait\EntityUredi,
+        \Max\Controller\ActionTrait\EntityBrisi,
         \Aaa\Controller\ActionTrait\RoleSelect;
 
     protected $entityClass = 'Aaa\Entity\User';

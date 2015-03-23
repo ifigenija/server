@@ -1,14 +1,14 @@
 <?php
 
-namespace Tip\Form\Element;
+namespace Max\Form\Element;
 
 use DoctrineModule\Validator\NoObjectExists;
 use DoctrineModule\Validator\UniqueObject;
 use Exception;
-use Tip\Annotation\EntityMetadata;
-use Tip\Exception\NevaljavenEntityMetadata;
-use Tip\Form\FormModeInterface;
-use Tip\Repository\AbstractTipRepository;
+use Max\Annotation\EntityMetadata;
+use Max\Exception\NevaljavenEntityMetadata;
+use Max\Form\FormModeInterface;
+use Max\Repository\AbstractMaxRepository;
 use Traversable;
 use Zend\Form\Element\Text;
 use Zend\Form\ElementInterface;
@@ -43,7 +43,7 @@ class Sifra
 
     /**
      *
-     * @var AbstractTipRepository
+     * @var AbstractMaxRepository
      */
     protected $repository;
     protected $uniqueProperty;

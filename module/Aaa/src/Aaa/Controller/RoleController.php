@@ -7,7 +7,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use DoctrineModule\Paginator\Adapter\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Tip\Controller\AbstractTipController;
+use Max\Controller\AbstractMaxController;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 Use Doctrine\Common\Collections\Criteria;
 
@@ -15,13 +15,13 @@ Use Doctrine\Common\Collections\Criteria;
  * Kontroler za vloge
  *
  */
-class RoleController extends AbstractTipController
+class RoleController extends AbstractMaxController
 {
 
-    use \Tip\Controller\ActionTrait\EntityPaginator,
-        \Tip\Controller\ActionTrait\EntityBrisi,
-        \Tip\Controller\ActionTrait\EntityUredi,
-        \Tip\Controller\ActionTrait\EntityPregled,
+    use \Max\Controller\ActionTrait\EntityPaginator,
+        \Max\Controller\ActionTrait\EntityBrisi,
+        \Max\Controller\ActionTrait\EntityUredi,
+        \Max\Controller\ActionTrait\EntityPregled,
         \Aaa\Controller\ActionTrait\RoleSelect;
 
     /**

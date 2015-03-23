@@ -5,7 +5,7 @@
  *  
  */
 
-namespace Tip\Controller\ActionTrait;
+namespace Max\Controller\Traits;
 
 /**
  * Description of JsonResponseTrait
@@ -17,7 +17,7 @@ trait JsonResponseTrait
 
     /**
      * Vrne filtriran nivo klasifikacije iz query parametra
-     * @return \Tip\Entity\Klasifikacija
+     * @return \Max\Entity\Klasifikacija
      */
     public function getNivo()
     {
@@ -36,7 +36,7 @@ trait JsonResponseTrait
     private function getGrouping(array $groups, $required = false)
     {
 
-        $form = $this->getForm('\Tip\Form\Filter\DetailFilter');
+        $form = $this->getForm('\Max\Form\Filter\DetailFilter');
         $valOpts = [];
         foreach ($groups as $group) {
             $valOpts[$group] = $group;
@@ -52,7 +52,7 @@ trait JsonResponseTrait
             }
         }
         if ($required) {
-            throw new \Tip\Exception\TipException('Grouping podatki so obvezni', 'TIP-FRM-0244');
+            throw new \Max\Exception\MaxException('Grouping podatki so obvezni', 'TIP-FRM-0244');
         }
         return [];
     }
@@ -65,12 +65,12 @@ trait JsonResponseTrait
      * @param array $groups
      * @param boolean $required ali je master forma obvezna
      * @return array
-     * @throws \Tip\Exception\TipException
+     * @throws \Max\Exception\MaxException
      */
     private function getMaster(array $groups, $required = false)
     {
 
-        $form = $this->getForm('\Tip\Form\Filter\DetailFilter');
+        $form = $this->getForm('\Max\Form\Filter\DetailFilter');
         $valOpts = [];
         foreach ($groups as $group) {
             $valOpts[$group] = $group;
@@ -84,7 +84,7 @@ trait JsonResponseTrait
             }
         }
         if ($required) {
-            throw new \Tip\Exception\TipException('Master podatki so obvezni', 'TIP-FRM-0254');
+            throw new \Max\Exception\MaxException('Master podatki so obvezni', 'TIP-FRM-0254');
         }
         return [];
     }

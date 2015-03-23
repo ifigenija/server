@@ -2,7 +2,7 @@
 
 namespace Aaa\Form;
 
-use Tip\Form\ManagedForm;
+use Max\Form\ManagedForm;
 
 class ChangePasswordForm
         extends ManagedForm

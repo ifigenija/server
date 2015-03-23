@@ -1,14 +1,14 @@
 <?php
 
-namespace Tip\Form;
+namespace Max\Form;
 
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
-use Tip\Annotation\EntityMetadata;
-use Tip\Exception\BrezMetapodatkovPaNeGre;
-use Tip\Exception\TipException;
-use Tip\Form\FormModeInterface;
-use Tip\Repository\IzbirneOpcije;
+use Max\Annotation\EntityMetadata;
+use Max\Exception\BrezMetapodatkovPaNeGre;
+use Max\Exception\MaxException;
+use Max\Form\FormModeInterface;
+use Max\Repository\IzbirneOpcije;
 use Zend\Form\Fieldset;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -115,7 +115,7 @@ class ManagedFieldset
     /**
      * getter za metadata factory
      *
-     * @return Tip\Annotation\EntityMetadataFactory;
+     * @return Max\Annotation\EntityMetadataFactory;
      */
     public function getMf()
     {
@@ -190,7 +190,7 @@ class ManagedFieldset
      * @param string $name
      * @param array $options
      * @param string $type
-     * @throws Tip\Exception\BrezMetapodatkovNeGre
+     * @throws Max\Exception\BrezMetapodatkovNeGre
      */
     public function addWithMeta($name, $options = [], $type = null)
     {
@@ -293,7 +293,7 @@ class ManagedFieldset
             }
             if ($type == 'toone' || $type == 'lookupSelect') {
                 if ($mapping['type'] !== 'guid') {
-                    throw new TipException('Tip ni guid. Lookup samo na guid polja!', 'TIP-MFS-0002');
+                    throw new MaxException('Max ni guid. Lookup samo na guid polja!', 'TIP-MFS-0002');
                 }
                 $target = $this->getUiTargetEntityFromMeta($name);
                 if (!$target) {
@@ -359,7 +359,7 @@ class ManagedFieldset
 
         $master = $this->getUiMasterFromMeta($name);
         if ($master !== null) {
-            throw new TipException('Select je samo za taka polja, ki nimajo master odvisnosti. Uporabi tip lookupSelect polje', 'TIP-MFS-0066');
+            throw new MaxException('Select je samo za taka polja, ki nimajo master odvisnosti. Uporabi tip lookupSelect polje', 'TIP-MFS-0066');
         }
         $sort = ['sort_by' => 'ident', 'order' => 'asc'];
         $rep = $this->em->getRepository($targetEntity);
@@ -599,7 +599,7 @@ class ManagedFieldset
     }
 
     /**
-     * Samodejno ugotovi tip vonosnega polja iz Tip anotacij in doctrine anotacij
+     * Samodejno ugotovi tip vonosnega polja iz Max anotacij in doctrine anotacij
      *
      * @param string $name
      * @return string

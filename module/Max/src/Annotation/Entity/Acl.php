@@ -3,7 +3,7 @@
 /**
  * (copyleft) Licenca
  */
-namespace Tip\Annotation\Entity;
+namespace Max\Annotation\Entity;
 
 /**
  * Vloge potrebne za posamezne opreacije nad entitetami

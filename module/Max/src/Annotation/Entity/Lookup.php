@@ -4,7 +4,7 @@
  * (copyleft) Licenca
  */
 
-namespace Tip\Annotation\Entity;
+namespace Max\Annotation\Entity;
 
 /**
  * Lookup definicije  za entity anotacije

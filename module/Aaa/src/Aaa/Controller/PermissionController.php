@@ -7,7 +7,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use DoctrineModule\Paginator\Adapter\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Tip\Controller\AbstractTipController;
+use Max\Controller\AbstractMaxController;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 Use Doctrine\Common\Collections\Criteria;
 
@@ -15,13 +15,13 @@ Use Doctrine\Common\Collections\Criteria;
  * Kontroler za dovoljenja
  *
  */
-class PermissionController extends AbstractTipController
+class PermissionController extends AbstractMaxController
 {
 
-    use \Tip\Controller\ActionTrait\EntityPaginator,
-        \Tip\Controller\ActionTrait\EntityPregled,
-        \Tip\Controller\ActionTrait\EntityUredi,
-        \Tip\Controller\ActionTrait\EntityBrisi;
+    use \Max\Controller\ActionTrait\EntityPaginator,
+        \Max\Controller\ActionTrait\EntityPregled,
+        \Max\Controller\ActionTrait\EntityUredi,
+        \Max\Controller\ActionTrait\EntityBrisi;
 
     /**
      * Ime razred entitete

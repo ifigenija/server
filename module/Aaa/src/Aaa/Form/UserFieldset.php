@@ -2,7 +2,7 @@
 
 namespace Aaa\Form;
 
-use Tip\Form\ManagedFieldset;
+use Max\Form\ManagedFieldset;
 
 class UserFieldset extends ManagedFieldset 
 {

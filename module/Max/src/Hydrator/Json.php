@@ -18,7 +18,7 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace Tip\Stdlib\Hydrator;
+namespace Max\Stdlib\Hydrator;
 
 use DateTime;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;

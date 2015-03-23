@@ -7,15 +7,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Rbac\Role\RoleInterface;
-use Tip\Annotation\Entity as Tip;
+use Max\Annotation\Entity as Max;
 
 /**
  * @ORM\Entity(repositoryClass="Aaa\Repository\Roles")
- * @Tip\Lookup(ident="name",label="description")
- * @Tip\I18n(label="Vloga",plural="Vloge",description="Uporabnik mora imeti vloge za dostop do delov aplikacije")
+ * @Max\Lookup(ident="name",label="description")
+ * @Max\I18n(label="Vloga",plural="Vloge",description="Uporabnik mora imeti vloge za dostop do delov aplikacije")
  */
 class Role
-    extends \Tip\Entity\Base
+    extends \Max\Entity\Base
     implements RoleInterface
 {
 
@@ -24,24 +24,24 @@ class Role
      * @ORM\Column(type="guid",unique=true);
      * @ORM\GeneratedValue(strategy="NONE")
      *
-     * @Tip\I18n(label="ID", hint="ID vloge", description="ID vloge")
-     * @Tip\Ui(type="id")
+     * @Max\I18n(label="ID", hint="ID vloge", description="ID vloge")
+     * @Max\Ui(type="id")
      */
     protected $id;
 
     /**
      * @ORM\Column(length=150, unique=true)
      *
-     * @Tip\I18n(label="Naziv", hint="Naziv vloge")
-     * @Tip\Ui(type="sifra", group="Vloga",ident=true)
+     * @Max\I18n(label="Naziv", hint="Naziv vloge")
+     * @Max\Ui(type="sifra", group="Vloga",ident=true)
      */
     protected $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      *
-     * @Tip\I18n(label="Opis", hint="Opis vloge")
-     * @Tip\Ui(type="naziv", group="Vloga")
+     * @Max\I18n(label="Opis", hint="Opis vloge")
+     * @Max\Ui(type="naziv", group="Vloga")
      */
     protected $description = '';
 
@@ -49,15 +49,15 @@ class Role
      * A je vloga vgrajena v sistem, ali pa dodana na user instalaciji.
      * @ORM\Column(type="boolean")
      *
-     * @Tip\I18n(label="Vgrajena", hint="Vloga, ki pride z namestitvijo sistema")
+     * @Max\I18n(label="Vgrajena", hint="Vloga, ki pride z namestitvijo sistema")
      */
     protected $builtIn = false;
 
     /**
      * @ORM\ManyToMany(targetEntity="Permission", inversedBy="roles", indexBy="name", fetch="LAZY")
      *
-     * @Tip\I18n(label="Dovoljenja", hint="Dovoljenja", description="Dovoljenja")
-     * @Tip\Ui(group="Dovoljenja")
+     * @Max\I18n(label="Dovoljenja", hint="Dovoljenja", description="Dovoljenja")
+     * @Max\Ui(group="Dovoljenja")
      */
     protected $permissions;
 
@@ -72,7 +72,7 @@ class Role
     /**
      * @ORM\ManyToMany(targetEntity="User", mappedBy="hierRoles")
      *
-     * @Tip\I18n(label="Uporabniki", hint="Uporabniki", description="Uporabniki, člani skupine")
+     * @Max\I18n(label="Uporabniki", hint="Uporabniki", description="Uporabniki, člani skupine")
      */
     protected $users;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace TipFixture;
+namespace MaxFixture;
 
 use Aaa\Entity\Role;
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -60,7 +60,7 @@ class RolesFixture
     public function getDependencies()
     {
         return [
-            'TipFixture\PermissionFixture'
+            'MaxFixture\PermissionFixture'
         ];
     }
 

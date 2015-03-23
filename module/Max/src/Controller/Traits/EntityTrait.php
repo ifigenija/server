@@ -6,13 +6,13 @@
  * and open the template in the editor.
  */
 
-namespace Tip\Controller\ActionTrait;
+namespace Max\Controller\Traits;
 
 use DoctrineORMModule\Options\EntityManager;
-use Tip\Exception\EntitetaNeObstaja;
-use Tip\Exception\NepopolniParametriZaAkcijo;
-use Tip\Filter\DecorateEntity;
-use Tip\Filter\StripEntity;
+use Max\Exception\EntitetaNeObstaja;
+use Max\Exception\NepopolniParametriZaAkcijo;
+use Max\Filter\DecorateEntity;
+use Max\Filter\StripEntity;
 use ZfcRbac\Service\AuthorizationService;
 
 /**
@@ -106,7 +106,7 @@ trait EntityTrait
     /**
      * Naredi formo poljubnega razreda s pomočjo FormElementManagerja
      * @param string $class class forme
-     * @return \Tip\Form\ManagedForm
+     * @return \Max\Form\ManagedForm
      */
     public function getForm($class = null)
     {
@@ -120,7 +120,7 @@ trait EntityTrait
      * za entiteto razreda $class
      * 
      * @param string $class razred entitete
-     * @return \Tip\Form\EntityForm
+     * @return \Max\Form\EntityForm
      */
     public function getEntityForm($class = null)
     {
@@ -144,7 +144,7 @@ trait EntityTrait
     {
 
         $formManager = $this->serviceLocator->get('FormElementManager');
-        $form = $formManager->get('\Tip\Form\JsonForm');
+        $form = $formManager->get('\Max\Form\JsonForm');
         if (!$class) {
             return $form->setEntity($this->getEntityClass());
         } else {
@@ -229,4 +229,6 @@ trait EntityTrait
     }
 
     abstract public function getServiceLocator();
+    
+    
 }

@@ -10,7 +10,7 @@ namespace Aaa\Navigation;
  *
  *
  */
-class Toolbar extends \Tip\Navigation\BaseToolbar
+class Toolbar extends \Max\Navigation\BaseToolbar
 {
 
     public function getIndexPages()

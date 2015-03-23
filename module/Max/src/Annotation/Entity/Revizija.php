@@ -4,7 +4,7 @@
  * (copyleft) Licenca
  */
 
-namespace Tip\Annotation\Entity;
+namespace Max\Annotation\Entity;
 
 /**
  * Revizja služi za nastavitve logiranje revizij specifičnih fieldov

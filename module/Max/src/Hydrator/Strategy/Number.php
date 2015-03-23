@@ -1,6 +1,6 @@
 <?php
 
-namespace Tip\Stdlib\Hydrator\Strategy;
+namespace Max\Stdlib\Hydrator\Strategy;
 
 /**
  * Description of Number

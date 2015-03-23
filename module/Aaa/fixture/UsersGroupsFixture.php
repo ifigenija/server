@@ -1,6 +1,6 @@
 <?php
 
-namespace TipFixture;
+namespace MaxFixture;
 
 use Aaa\Entity\Group;
 use Aaa\Entity\User;
@@ -95,7 +95,7 @@ class UsersGroupsFixture extends AbstractFixture implements FixtureInterface, De
     public function getDependencies()
     {
         return [
-            'TipFixture\RolesFixture'
+            'MaxFixture\RolesFixture'
         ];
     }
 

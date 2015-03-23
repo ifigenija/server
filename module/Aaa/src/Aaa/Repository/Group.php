@@ -4,21 +4,21 @@ namespace Aaa\Repository;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Tip\Repository\AbstractTipRepository;
-use Tip\Repository\LookupInterface;
-use Tip\Repository\PagingInterface;
+use Max\Repository\AbstractMaxRepository;
+use Max\Repository\LookupInterface;
+use Max\Repository\PagingInterface;
 
 /**
  * Group - skupine uporabnikov
  *
  */
-class Group extends AbstractTipRepository implements LookupInterface, PagingInterface
+class Group extends AbstractMaxRepository implements LookupInterface, PagingInterface
 {
 
     /**
      * default sort opcije
      *
-     * @var \Tip\Config\Sort
+     * @var \Max\Config\Sort
      */
     protected $sortOptions = [
         'default' => [

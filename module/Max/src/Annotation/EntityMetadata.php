@@ -4,14 +4,14 @@
  *  (copyleft) Licenca
  */
 
-namespace Tip\Annotation;
+namespace Max\Annotation;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
-use Tip\Annotation\Entity\Acl;
-use Tip\Annotation\Entity\I18n;
-use Tip\Annotation\Entity\Lookup;
-use Tip\Annotation\Entity\Ui;
-use Tip\Annotation\Entity\Revizija;
+use Max\Annotation\Entity\Acl;
+use Max\Annotation\Entity\I18n;
+use Max\Annotation\Entity\Lookup;
+use Max\Annotation\Entity\Ui;
+use Max\Annotation\Entity\Revizija;
 
 /**
  * Vmesnik MetadataInterface da na voljo metode, s katerimi lahko pridemo do podatkov
@@ -45,7 +45,7 @@ class EntityMetadata
     /**
      * Shrani doctrine metadata mapping
      * @param ClassMetadata $mapping
-     * @return \Tip\Annotation\EntityMetadata
+     * @return \Max\Annotation\EntityMetadata
      */
     public function setMapping($mapping)
     {
@@ -73,7 +73,7 @@ class EntityMetadata
      *
      * @param string $entityName
 
-     * @return \Tip\Annotation\EntityMetadata
+     * @return \Max\Annotation\EntityMetadata
      */
     public function setEntityName($entityName)
     {
@@ -105,7 +105,7 @@ class EntityMetadata
     /**
      * Nastavi class  I18n
      * @param I18n $classI18n
-     * @return \Tip\Annotation\EntityMetadata
+     * @return \Max\Annotation\EntityMetadata
      */
     public function setI18n($classI18n)
     {
@@ -204,7 +204,7 @@ class EntityMetadata
 
     /**
      * Vrne vse property I18n-je kot polje
-     * @return array<\Tip\Annotation\Entity\I18n>
+     * @return array<\Max\Annotation\Entity\I18n>
      */
     public function getPropertyI18n()
     {
@@ -214,8 +214,8 @@ class EntityMetadata
     /**
      * Shrani polje I18n jev za propertije
      *
-     * @param array<\Tip\Annotation\Entity\I18n> $propertyI18n
-     * @return \Tip\Annotation\EntityMetadata
+     * @param array<\Max\Annotation\Entity\I18n> $propertyI18n
+     * @return \Max\Annotation\EntityMetadata
      */
     public function setPropertyI18n($propertyI18n)
     {
@@ -225,7 +225,7 @@ class EntityMetadata
 
     /**
      * Vrne polje property Ui klasov
-     * @return array<\Tip\Annotation\Entity\Ui>
+     * @return array<\Max\Annotation\Entity\Ui>
      */
     public function getPropertyUi()
     {
@@ -234,8 +234,8 @@ class EntityMetadata
 
     /**
      * Nastavi seznam property Ui objektov
-     * @param array<\Tip\Annotation\Entity\Ui> $propertyUI
-     * @return \Tip\Annotation\EntityMetadata
+     * @param array<\Max\Annotation\Entity\Ui> $propertyUI
+     * @return \Max\Annotation\EntityMetadata
      */
     public function setPropertyUi($propertyUi)
     {
@@ -245,7 +245,7 @@ class EntityMetadata
 
     /**
      * Vrne polje property Revizija klasov
-     * @return array<\Tip\Annotation\Entity\Revizija>
+     * @return array<\Max\Annotation\Entity\Revizija>
      */
     public function getPropertyRevizija()
     {
@@ -254,8 +254,8 @@ class EntityMetadata
 
     /**
      * Nastavi seznam property Ui objektov
-     * @param array<\Tip\Annotation\Entity\Revizija> $propertyRevizija
-     * @return \Tip\Annotation\EntityMetadata
+     * @param array<\Max\Annotation\Entity\Revizija> $propertyRevizija
+     * @return \Max\Annotation\EntityMetadata
      */
     public function setPropertyRevizija($propertyRevizija)
     {

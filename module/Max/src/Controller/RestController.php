@@ -1,14 +1,14 @@
 <?php
 
-namespace Tip\Controller;
+namespace Max\Controller;
 
-use Tip\Controller\AbstractRestfulController;
-use Tip\Exception\EntitetaNeObstaja;
-use Tip\Exception\TipAccessDeniedException;
-use Tip\Exception\TipException;
-use Tip\Form\JsonForm;
-use Tip\Repository\AbstractTipRepository;
-use Tip\Stdlib\Hydrator\Json;
+use Max\Controller\AbstractRestfulController;
+use Max\Exception\EntitetaNeObstaja;
+use Max\Exception\MaxAccessDeniedException;
+use Max\Exception\MaxException;
+use Max\Form\JsonForm;
+use Max\Repository\AbstractMaxRepository;
+use Max\Stdlib\Hydrator\Json;
 use Zend\Paginator\Paginator;
 use Zend\View\Model\JsonModel;
 
@@ -23,6 +23,26 @@ class RestController
 
     use ActionTrait\EntityTrait;
 
+       /**
+     *  Servis za dostop do ACL-jev
+     * @var \ZfcRbac\Service\AuthorizationService
+     */
+    protected $authorization;
+
+    /**
+     *  @var EntityManager
+
+      protected $em;
+     */
+
+    /**
+     * Ali getList vrne seznam objektov če je query prazen
+     *
+     * @var boolean
+     */
+    protected $listAllIfEmptyQuery = false;
+
+    
     /**
      * Forma za validacijo entitet
      * 
@@ -57,7 +77,7 @@ class RestController
     {
 
         if (!class_exists($this->entityClass)) {
-            throw new TipException('Razred entitete ni nastavljen', 'TIP-REST-002');
+            throw new MaxException('Razred entitete ni nastavljen', 'TIP-REST-002');
         }
 
         $this->hydr = $this->getRepository()->getJsonHydrator($this->hydratorOptions);
@@ -80,7 +100,7 @@ class RestController
             if ($object) {
                 $perm = $this->getEntityPermission('read');
                 if (!$this->isGranted($perm, $object)) {
-                    throw new TipAccessDeniedException($perm, $object->id);
+                    throw new MaxAccessDeniedException($perm, $object->id);
                 }
                 $data = $this->hydr->extract($object);
                 return new JsonModel($data);
@@ -106,14 +126,14 @@ class RestController
         $paginatorName = $this->params()->fromQuery('paginator', 'default');
         
 
-        /* @var $sr  AbstractTipRepository */
+        /* @var $sr  AbstractMaxRepository */
         $sr = $this->getRepository();
         try {
             
            
             $perm = $this->getEntityPermission('read');
             if (!$this->isGranted($perm)) {
-                throw new TipAccessDeniedException($perm);
+                throw new MaxAccessDeniedException($perm);
             }
             
             if (isset($queryParams['filter'])) {
@@ -167,7 +187,7 @@ class RestController
      */
     public function update($id, $data)
     {
-        /* @var $sr  AbstractTipRepository */
+        /* @var $sr  AbstractMaxRepository */
         $sr = $this->getRepository();
 
         $this->form->setMode('EDIT');
@@ -176,11 +196,11 @@ class RestController
             
             $perm = $this->getEntityPermission('update');
             if (!$this->isGranted($perm, $object)) {
-                throw new TipAccessDeniedException($perm, $object->id);
+                throw new MaxAccessDeniedException($perm, $object->id);
             }
             
             if (!$object) {
-                throw new TipException('Objekt ne obstaja', 'TIP-CRD-0001');
+                throw new MaxException('Objekt ne obstaja', 'TIP-CRD-0001');
             }
             
             $this->form->bind($object);
@@ -189,7 +209,7 @@ class RestController
 
             if ($this->form->isValid()) {
 
-                /* @var $sr  AbstractTipRepository */
+                /* @var $sr  AbstractMaxRepository */
                 $sr = $this->getRepository();
                 $sr->update($object);
 
@@ -216,7 +236,7 @@ class RestController
             $object = new $this->entityClass;
             $perm = $this->getEntityPermission('create');
             if (!$this->isGranted($perm, $object)) {
-                throw new TipAccessDeniedException($perm, null);
+                throw new MaxAccessDeniedException($perm, null);
             }
 
             $this->form->setMode('NEW');
@@ -224,7 +244,7 @@ class RestController
             $this->form->setData(['fieldset' => $data]);
 
             if ($this->form->isValid()) {
-                /* @var $sr  AbstractTipRepository */
+                /* @var $sr  AbstractMaxRepository */
                 $sr = $this->getRepository();
                 $sr->create($object);
                 $this->em->flush();
@@ -247,7 +267,7 @@ class RestController
      */
     public function delete($id)
     {
-        /* @var $sr  AbstractTipRepository */
+        /* @var $sr  AbstractMaxRepository */
         $sr = $this->getRepository();
         $object = $sr->find($id);
 
@@ -256,7 +276,7 @@ class RestController
 
         $perm = $this->getEntityPermission('delete');
         if (!$this->isGranted($perm, $object)) {
-            throw new TipAccessDeniedException($perm, $object->id);
+            throw new MaxAccessDeniedException($perm, $object->id);
         }
 
         if (method_exists($sr, 'delete')) {
@@ -304,7 +324,91 @@ class RestController
         }
         $translator = $this->getServiceManager()->get('translator');
         $msg = $translator->translate('Neveljavna REST akcija');
-        throw new TipException($msg, 'TIP-REST-001');
+        throw new MaxException($msg, 'TIP-REST-001');
     }
 
+    
+        
+
+ 
+    /**
+     * Dispatch metoda
+     *
+     * @param MvcEvent $e
+     * @return mixed
+     */
+    public function onDispatch(MvcEvent $e)
+    {
+        $this->authorization = $this->serviceLocator->get('ZfcRbac\Service\AuthorizationService');
+        $this->em = $this->serviceLocator->get('doctrine.entitymanager.orm_default');
+
+        $this->init();
+        return parent::onDispatch($e);
+    }
+
+    /**
+     * Vrne metapodatke iz paginatorja za enkodiranje v JSON
+     *
+     * @param Paginator $paginator
+     */
+    public function getPaginatorArray($paginator)
+    {
+        if ($paginator instanceof Paginator) {
+            if ($paginator->getItemCountPerPage() < 1) {
+                $lastPage = 1;
+            } else {
+                $lastPage = ceil($paginator->getTotalItemCount() / $paginator->getItemCountPerPage());
+            }
+            return [ 'currentPage' => $paginator->getCurrentPageNumber(),
+                'totalRecords' => $paginator->getTotalItemCount(),
+                'lastPage' => $lastPage,
+                'pageSize' => $paginator->getItemCountPerPage(),
+            ];
+        } else {
+            $c = count($paginator);
+            return ['currentPage' => 1,
+                'totalRecords' => $c,
+                'lastPage' => 1,
+                'pageSize' => max($c,1)];
+        }
+    }
+
+    /**
+     * Nastavi stran in količino na stran iz query parametrov
+     *
+     * @param Paginator $paginator
+     */
+    public function setPaginatorParams($paginator)
+    {
+        if ($paginator->getDefaultItemCountPerPage() > 1) {
+            $paginator->setCurrentPageNumber($this->params()->fromQuery('page', 1));
+            $paginator->setItemCountPerPage($this->params()->fromQuery('per_page', $paginator->getItemCountPerPage()));
+        }
+    }
+
+
+
+    /**
+     * Posreduje podatke o zahtevanem sortu v repositorij
+     * Poskrbi za persistenco sort podatkov v sessionu
+     *
+     * @param AbstractMaxRepository $repository
+     * @param string $paginatorName
+     */
+    public function manageSort($repository, $paginatorName = 'default',  $suffix = 'sort')
+    {
+
+        if ($this->params()->fromQuery('sort_by')) {
+            $field = $this->params()->fromQuery('sort_by');
+            $dir = $this->params()->fromQuery('order');
+            if (!$dir) {
+                $so = $repository->getSort();
+                if (isset($so->options[$field]['dir']))
+                    $dir = $so->options[$field]['dir'];
+                else
+                    $dir = 'ASC';
+            }
+            $repository->setSort($field, $dir, $paginatorName);
+        }
+    }
 }

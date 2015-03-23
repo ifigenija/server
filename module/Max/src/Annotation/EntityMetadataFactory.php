@@ -4,17 +4,17 @@
  * (copyleft) Licenca
  */
 
-namespace Tip\Annotation;
+namespace Max\Annotation;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\ORM\EntityManager;
 use ReflectionClass;
-use Tip\Annotation\Entity\Acl;
-use Tip\Annotation\Entity\I18n;
-use Tip\Annotation\Entity\Lookup;
-use Tip\Annotation\Entity\Ui;
-use Tip\Annotation\Entity\Revizija;
+use Max\Annotation\Entity\Acl;
+use Max\Annotation\Entity\I18n;
+use Max\Annotation\Entity\Lookup;
+use Max\Annotation\Entity\Ui;
+use Max\Annotation\Entity\Revizija;
 use Zend\Filter\Word\CamelCaseToSeparator;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -22,7 +22,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 /**
  *  Naredi novi metadata objekt entity class.
  * uporablja se kot service 'metadata.factory'
- * Proizvaja nove \Tip\Annotation\EntityMetadata objekte z metodo factory($entityName)
+ * Proizvaja nove \Max\Annotation\EntityMetadata objekte z metodo factory($entityName)
  *
  * @author Boris Lašič <boris@max.si>
  * Ustvarjeno: 18.3.2013
@@ -47,7 +47,7 @@ class EntityMetadataFactory
         'razKol' => 'Razpisana Količina',
         'kolicina' => 'Količina',
         'zacetek' => 'Začetek',
-        'dok' => 'Tip dokumenta',
+        'dok' => 'Max dokumenta',
         'posta' => 'Pošta',
         'postaNaziv' => 'Kraj',
         'drzava' => 'Država',
@@ -97,7 +97,7 @@ class EntityMetadataFactory
      * Vrne specializiran Metadata objekt z naloženimi anotacijami
      *
      * @param string $entityName
-     * @return Tip\Annotation\EntityMetadata
+     * @return Max\Annotation\EntityMetadata
      */
     public function factory($entityName)
     {
@@ -110,7 +110,7 @@ class EntityMetadataFactory
         } else {
 
             // pripravim novo instanco Metadata v katero polnim annotacije
-            $meta = new \Tip\Annotation\EntityMetadata($entityName);
+            $meta = new \Max\Annotation\EntityMetadata($entityName);
 
             // naložim metapodatke iz anotacij
             $reader = new AnnotationReader();
@@ -189,15 +189,15 @@ class EntityMetadataFactory
      * Napolni metapodatke z privzetimi vrednosmi, kjer jih ni na anotacijah
      *
      * @param type $entityName
-     * @param \Tip\Annotation\Entity $meta
+     * @param \Max\Annotation\Entity $meta
      */
-    public function getClassDefaults(\Tip\Annotation\EntityMetadata $meta)
+    public function getClassDefaults(\Max\Annotation\EntityMetadata $meta)
     {
 
         // če ni i18n na entiteti
         if (!$meta->getI18n()) {
             $f = new CamelCaseToSeparator(' ');
-            $ent = str_replace('Tip\Entity\\', '', $meta->getEntityName());
+            $ent = str_replace('Max\Entity\\', '', $meta->getEntityName());
             $ent = $f->filter($ent);
             $i18n = new I18n();
             $i18n->label = $ent;

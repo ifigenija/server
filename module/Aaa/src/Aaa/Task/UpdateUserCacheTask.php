@@ -10,11 +10,11 @@ namespace Aaa\Task;
 use Aaa\Entity\Permission;
 use Aaa\Entity\Role;
 use Doctrine\Common\Collections\ArrayCollection;
-use Tip\Task\AbstractTask;
-use Tip\Annotation\Task as Tip;
+use Max\Task\AbstractTask;
+use Max\Annotation\Task as Max;
 /**
  * Task, ki posodobi "flat" cache vlog na uporabniku in dovoljenjih
- * @Tip\Meta(name="Posodobi uporabnika", acl="Aaa-User-update")
+ * @Max\Meta(name="Posodobi uporabnika", acl="Aaa-User-update")
  * @author boris
  */
 class UpdateUserCacheTask

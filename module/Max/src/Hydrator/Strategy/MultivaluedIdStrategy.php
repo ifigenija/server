@@ -18,7 +18,7 @@
  * <http://www.doctrine-project.org>.
  */
 
-namespace Tip\Stdlib\Hydrator\Strategy;
+namespace Max\Stdlib\Hydrator\Strategy;
 
 use InvalidArgumentException;
 use Doctrine\Common\Collections\Collection;

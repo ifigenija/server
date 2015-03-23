@@ -150,7 +150,7 @@ Class Module
 
         $resolver = new DoctrineResolver($em, '\Aaa\Entity\User');
         $adapter = new Http([
-            'realm' => 'Tip',
+            'realm' => 'Max',
             'accept_schemes' => 'basic',
         ]);
         $adapter->setBasicResolver($resolver);

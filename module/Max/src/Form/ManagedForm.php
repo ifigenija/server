@@ -1,6 +1,6 @@
 <?php
 
-namespace Tip\Form;
+namespace Max\Form;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;

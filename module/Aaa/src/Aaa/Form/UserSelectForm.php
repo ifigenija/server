@@ -3,10 +3,10 @@
 namespace Aaa\Form;
 
 use Aaa\Entity\User;
-use Tip\Form\FormModeInterface;
-use Tip\Form\ManagedForm;
-use Tip\Stdlib\Hydrator\ClassMethods;
-use Tip\Stdlib\Hydrator\DoctrineObject;
+use Max\Form\FormModeInterface;
+use Max\Form\ManagedForm;
+use Max\Stdlib\Hydrator\ClassMethods;
+use Max\Stdlib\Hydrator\DoctrineObject;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 

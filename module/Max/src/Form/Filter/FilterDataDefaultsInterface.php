@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Tip\Form\Filter;
+namespace Max\Form\Filter;
 
 /**
  * interface za filter forme 

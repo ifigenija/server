@@ -4,7 +4,7 @@
  * (copyleft) Licenca
  */
 
-namespace Tip\Repository;
+namespace Max\Repository;
 
 use DateTime;
 use Doctrine\ORM\EntityRepository;
@@ -12,32 +12,32 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\UnitOfWork;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use stdClass;
-use Tip\Annotation\EntityMetadata;
-use Tip\Entity\Base;
-use Tip\Exception\NeveljavnoLookupPoljeException;
-use Tip\Exception\TipException;
-use Tip\Filter\StripEntity;
-use Tip\Stdlib\Hydrator\Json;
+use Max\Annotation\EntityMetadata;
+use Max\Entity\Base;
+use Max\Exception\NeveljavnoLookupPoljeException;
+use Max\Exception\MaxException;
+use Max\Filter\StripEntity;
+use Max\Stdlib\Hydrator\Json;
 use Zend\Paginator\Paginator as Paginator2;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use ZfcRbac\Service\AuthorizationService;
 
 /**
- * AbstractTipRepository implementira metode iz PagingInterface in LookupInterface.
+ * AbstractMaxRepository implementira metode iz PagingInterface in LookupInterface.
  * To so privzete implementacije, ki imajo odvisnost v anotacijah.
  * Za entiteo priskrbi metapodatke iz metadata-factoy
  *
  * @author Boris Lašič <boris@max.si>
  *         Ustvarjeno: 16.3.2013
  */
-abstract class AbstractTipRepository
+abstract class AbstractMaxRepository
     extends EntityRepository
     implements PagingInterface, LookupInterface, ServiceLocatorAwareInterface
 {
 
     use \Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-use \Tip\Expect\ExpectTrait;
+use \Max\Expect\ExpectTrait;
 
     /**
      * Metadata helper odgovoren za to entiteto
@@ -71,7 +71,7 @@ use \Tip\Expect\ExpectTrait;
 
     /**
      *
-     * @return \Tip\Annotation\EntityMetadata;
+     * @return \Max\Annotation\EntityMetadata;
      */
     public function getMeta()
     {
@@ -114,7 +114,7 @@ use \Tip\Expect\ExpectTrait;
         $qb->from($this->getEntityName(), 'look');
         // sestavim polja iz lookup definition - poiščem joine
         if (!$meta->getLookup())
-            throw new TipException('Entiteta ne podpira lookup-a. Ni anotiranih metapodatkov', 'TIP-LKP-0003');
+            throw new MaxException('Entiteta ne podpira lookup-a. Ni anotiranih metapodatkov', 'TIP-LKP-0003');
 
         $joinfields = [];
         $orCond = $qb->expr()->orx();
@@ -385,7 +385,7 @@ use \Tip\Expect\ExpectTrait;
                 && $map->isSingleValuedAssociation($assoc)) {
                 $map = $this->getEntityManager()->getClassMetadata($map->getAssociationTargetClass($assoc));
             } else {
-                throw new TipException('Asociacija ne obstaja ', 'TIP-LKP-0006');
+                throw new MaxException('Asociacija ne obstaja ', 'TIP-LKP-0006');
             }
 
             $f = $this->serviceLocator->get('entity.metadata.factory');
@@ -398,7 +398,7 @@ use \Tip\Expect\ExpectTrait;
             if (!$meta->getMapping()->hasAssociation($field)
                 && !$meta->getMapping()->isSingleValuedAssociation($field)
                 && !$map->getReflectionClass()->hasMethod('get' . ucfirst($name))) {
-                throw new TipException(
+                throw new MaxException(
                 "Razrešeno polje ne obstaja ali pa je asociacija. ({$field})"
                 , 'TIP-LKP-0007');
             }
@@ -503,7 +503,7 @@ use \Tip\Expect\ExpectTrait;
 
     /**
      * Podprte sort opcije za paginator.
-     * Manjkajoče labele potegne iz anotacij @Tip\I18n
+     * Manjkajoče labele potegne iz anotacij @Max\I18n
      *
      * @param type $name
      * @return array
@@ -604,7 +604,7 @@ use \Tip\Expect\ExpectTrait;
                 $this->paginatorSort[$name] = $sort;
             }
         } else {
-            throw new TipException('Sort opcije ne obstajajo', 'TIP-CRD-296');
+            throw new MaxException('Sort opcije ne obstajajo', 'TIP-CRD-296');
         }
 
         return $this;
@@ -621,7 +621,7 @@ use \Tip\Expect\ExpectTrait;
     {
         if (!isset($this->paginatorSort[$name])) {
             if (!isset($this->sortOptions[$name])) {
-                throw new TipException(sprintf('Sort opcije za paginator  %s manjkajo', $name), 'TIP-CNT-00298');
+                throw new MaxException(sprintf('Sort opcije za paginator  %s manjkajo', $name), 'TIP-CNT-00298');
             }
             $keys = array_keys($this->sortOptions[$name]);
             $firstField = reset($keys);

@@ -7,7 +7,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use DoctrineModule\Paginator\Adapter\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Tip\Controller\AbstractTipController;
+use Max\Controller\AbstractMaxController;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 Use Doctrine\Common\Collections\Criteria;
 
@@ -15,13 +15,13 @@ Use Doctrine\Common\Collections\Criteria;
  * Kontroler za skupine
  *
  */
-class GroupController extends AbstractTipController
+class GroupController extends AbstractMaxController
 {
 
-    use \Tip\Controller\ActionTrait\EntityPaginator,
-        \Tip\Controller\ActionTrait\EntityPregled,
-        \Tip\Controller\ActionTrait\EntityUredi,
-        \Tip\Controller\ActionTrait\EntityBrisi;
+    use \Max\Controller\ActionTrait\EntityPaginator,
+        \Max\Controller\ActionTrait\EntityPregled,
+        \Max\Controller\ActionTrait\EntityUredi,
+        \Max\Controller\ActionTrait\EntityBrisi;
 
     protected $entityClass = 'Aaa\Entity\Group';
 
@@ -146,8 +146,8 @@ class GroupController extends AbstractTipController
      * Odstrani uproabnika iz skupine
      *
      * @return redidrect
-     * @throws \Tip\Exception\NepopolniParametriZaAkcijo
-     * @throws \Tip\Exception\EntitetaNeObstaja
+     * @throws \Max\Exception\NepopolniParametriZaAkcijo
+     * @throws \Max\Exception\EntitetaNeObstaja
      */
     public function odstraniUporabnikaAction()
     {

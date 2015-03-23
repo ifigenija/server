@@ -1,6 +1,6 @@
 <?php
 
-namespace Tip\Form\Element;
+namespace Max\Form\Element;
 
 use Zend\Form\Element;
 use Zend\Validator\Regex as RegexValidator;

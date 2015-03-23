@@ -3,7 +3,7 @@
 namespace Aaa\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
-    Tip\Annotation\Entity as Tip,
+    Max\Annotation\Entity as Max,
     Zend\InputFilter\Factory as InputFactory,
     Zend\InputFilter\InputFilter,
     Zend\InputFilter\InputFilterAwareInterface,
@@ -15,10 +15,10 @@ use Doctrine\ORM\Mapping as ORM,
  *
  * @ORM\Entity(repositoryClass="Aaa\Repository\Group"))
  * @ORM\Table(name="skupine")
- * @Tip\Lookup(label="name",ident="description")
- * @Tip\I18n(label="Skupina uporabnikov",plural="Skupine uporabnikov",description="Skupina uporabnikov")
+ * @Max\Lookup(label="name",ident="description")
+ * @Max\I18n(label="Skupina uporabnikov",plural="Skupine uporabnikov",description="Skupina uporabnikov")
  */
-class Group extends \Tip\Entity\Base {
+class Group extends \Max\Entity\Base {
 
     /**
      * @ORM\Id
@@ -31,8 +31,8 @@ class Group extends \Tip\Entity\Base {
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
      *
-     * @Tip\I18n(label="Naziv", hint="Naziv skupine", description="Naziv skupine uporabnikov")
-     * @Tip\Ui(type="sifra",group="Skupina",ident=true)
+     * @Max\I18n(label="Naziv", hint="Naziv skupine", description="Naziv skupine uporabnikov")
+     * @Max\Ui(type="sifra",group="Skupina",ident=true)
 
      */
     protected $name;
@@ -40,8 +40,8 @@ class Group extends \Tip\Entity\Base {
     /**
      * @ORM\Column(type="text", nullable=true)
      *
-     * @Tip\I18n(label="Opis", description="Opis skupine uporabnikov")
-     * @Tip\Ui(group="Skupina")
+     * @Max\I18n(label="Opis", description="Opis skupine uporabnikov")
+     * @Max\Ui(group="Skupina")
      */
     protected $description;
     
@@ -49,7 +49,7 @@ class Group extends \Tip\Entity\Base {
     /**
      * @ORM\ManyToMany(targetEntity="User", inversedBy="groups")
      *
-     * @Tip\I18n(label="Uporabniki", hint="Uporabniki", description="Uporabniki, člani skupine")
+     * @Max\I18n(label="Uporabniki", hint="Uporabniki", description="Uporabniki, člani skupine")
      */
     protected $users;
 

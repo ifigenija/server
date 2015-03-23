@@ -5,15 +5,15 @@ namespace Aaa\Repository;
 use Aaa\Entity\Permission;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Tip\Repository\AbstractTipRepository;
-use Tip\Repository\LookupInterface;
-use Tip\Repository\PagingInterface;
+use Max\Repository\AbstractMaxRepository;
+use Max\Repository\LookupInterface;
+use Max\Repository\PagingInterface;
 
 /**
  * Resource - dovoljenja
  *
  */
-class Permissions extends AbstractTipRepository implements LookupInterface, PagingInterface
+class Permissions extends AbstractMaxRepository implements LookupInterface, PagingInterface
 {
 
     /**
@@ -79,4 +79,7 @@ class Permissions extends AbstractTipRepository implements LookupInterface, Pagi
         }
         return $ret;
     }
+    
+    
+    
 }

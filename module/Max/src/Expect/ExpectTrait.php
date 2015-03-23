@@ -5,10 +5,10 @@
  * Licenca GPL V3 or later
  *  
  */
-namespace Tip\Expect;
+namespace Max\Expect;
 
-use Tip\Consts;
-use Tip\Exception\TipException;
+use Max\Consts;
+use Max\Exception\MaxException;
 
 /**
  * TRait za expect funckcionalnost  
@@ -25,12 +25,12 @@ trait ExpectTrait
      * @param type $truth
      * @param type $message
      * @param type $code
-     * @throws TipException
+     * @throws MaxException
      */
     protected function expect($truth, $message = '', $code = 'TIP-TASK-0000')
     {
         if (!$truth) {
-            throw new TipException("Pogoj: {$message}", $code);
+            throw new MaxException("Pogoj: {$message}", $code);
         }
     }
 

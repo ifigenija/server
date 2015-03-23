@@ -1,6 +1,6 @@
 <?php
 
-namespace TipFixture;
+namespace MaxFixture;
 
 use Aaa\Entity\Permission;
 use Doctrine\Common\DataFixtures\AbstractFixture;

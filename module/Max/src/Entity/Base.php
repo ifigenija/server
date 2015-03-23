@@ -1,9 +1,9 @@
 <?php
 
-namespace Tip\Entity;
+namespace Max\Entity;
 
 use Doctrine\Common\Util\ClassUtils;
-use Tip\Exception\TipException;
+use Max\Exception\MaxException;
 
 /**
  * Base class za entitete.
@@ -82,12 +82,12 @@ class Base
      * @param boolean $truth
      * @param string $message
      * @param string $code
-     * @throws TipException
+     * @throws MaxException
      */
     protected function expect($truth, $message = '', $code = 'TIP-CNS-0000')
     {
         if (!$truth) {
-            throw new TipException("Pogoj: {$message}", $code);
+            throw new MaxException("Pogoj: {$message}", $code);
         }
     }
 

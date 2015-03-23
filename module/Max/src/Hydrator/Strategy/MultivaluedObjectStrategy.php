@@ -1,6 +1,6 @@
 <?php
 
-namespace Tip\Stdlib\Hydrator\Strategy;
+namespace Max\Stdlib\Hydrator\Strategy;
 
 use InvalidArgumentException;
 use Doctrine\Common\Collections\Collection;
@@ -19,7 +19,7 @@ class MultivaluedObjectStrategy extends \DoctrineModule\Stdlib\Hydrator\Strategy
     function __construct($objectManager, $entityClass, $options, $serviceLocator)
     {
         // @TODO uporaba hidratorja objekta bi lahko bila optional
-        //$this->hydr = new \Tip\Stdlib\Hydrator\Json($objectManager, $entityClass);
+        //$this->hydr = new \Max\Stdlib\Hydrator\Json($objectManager, $entityClass);
         $rep = $objectManager->getRepository($entityClass);
         $rep->setServiceLocator($serviceLocator);
         $this->hydr = $rep->getJsonHydrator($options);

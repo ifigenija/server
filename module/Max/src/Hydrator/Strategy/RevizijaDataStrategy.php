@@ -1,6 +1,6 @@
 <?php
 
-namespace Tip\Stdlib\Hydrator\Strategy;
+namespace Max\Stdlib\Hydrator\Strategy;
 
 use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
@@ -19,12 +19,12 @@ class RevizijaDataStrategy implements StrategyInterface, ServiceLocatorAwareInte
     protected $em;
     
     /**
-     * @var Tip\Annotation\EntityMetadata
+     * @var Max\Annotation\EntityMetadata
      */
     protected $ann;
     
     /**
-     * @var Tip\Repository\IzbirneOpcije
+     * @var Max\Repository\IzbirneOpcije
      */
     protected $options;
     
@@ -60,16 +60,16 @@ class RevizijaDataStrategy implements StrategyInterface, ServiceLocatorAwareInte
      * Vrne repozitorij entitete
      * 
      * @param string $entityClass
-     * @return \Tip\Repository\AbstractTipRepository
-     * @throws \Tip\Exception\TipException
+     * @return \Max\Repository\AbstractMaxRepository
+     * @throws \Max\Exception\MaxException
      */
     protected function getRepository($entityClass) {
         $rep = $this->em->getRepository($entityClass);
-        if ($rep instanceof \Tip\Repository\AbstractTipRepository) {
+        if ($rep instanceof \Max\Repository\AbstractMaxRepository) {
             $rep->setServiceLocator($this->getServiceLocator());
             return $rep;
         } else {
-            throw new \Tip\Exception\TipException("Repozitorij entitete '$entityClass' mora dedovati '\Tip\Repository\AbstractTipRepository'.", 'TIP-REV-0002');
+            throw new \Max\Exception\MaxException("Repozitorij entitete '$entityClass' mora dedovati '\Max\Repository\AbstractMaxRepository'.", 'TIP-REV-0002');
         }
     }
 

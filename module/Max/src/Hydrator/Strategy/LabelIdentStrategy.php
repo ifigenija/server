@@ -4,7 +4,7 @@
  * 
  */
 
-namespace Tip\Stdlib\Hydrator\Strategy;
+namespace Max\Stdlib\Hydrator\Strategy;
 
 /**
  * Strategija, ki hidrira objekte v {id:"",ident:"",label:""}
@@ -19,7 +19,7 @@ class LabelIdentStrategy
 
     /**
      *
-     * @var \Tip\Repository\AbstractTipRepository
+     * @var \Max\Repository\AbstractMaxRepository
      *  
      */
     protected $rep;
