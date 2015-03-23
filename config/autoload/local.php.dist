@@ -11,7 +11,7 @@
 return array(
     'tip' => array(
         'useOptimizedJs' => true,
-        'firma' => '0001'
+        'firma' => '7777'
     ),
     'doctrine' => array(
         'connection' => array(
