@@ -12,7 +12,9 @@ use Max\Repository\PagingInterface;
 /**
  * Role - vloge uporabnikov
  */
-class Roles extends AbstractMaxRepository implements LookupInterface, PagingInterface
+class Roles
+        extends AbstractMaxRepository
+        implements LookupInterface, PagingInterface
 {
 
     /**
@@ -22,10 +24,17 @@ class Roles extends AbstractMaxRepository implements LookupInterface, PagingInte
      */
     protected $sortOptions = [
         'default' => [
-            'naziv' => [
-                'alias' => 'r.name',
-                'alias' => 'r.description'
-            ]
+            'name' => [ 'alias' => 'r.name',],
+            'description' => [ 'alias' => 'r.description']
+        ]
+    ];
+    
+    protected $hydratorOptions = [
+        'default' => [
+            'exclude' => ['roles']
+        ],
+        'roles' => [
+            'byValue' => ['roles']
         ]
     ];
 
@@ -91,41 +100,6 @@ class Roles extends AbstractMaxRepository implements LookupInterface, PagingInte
     }
 
     /**
-     * odstrani dovoljenja iz objekta
-     *
-     * @param $object
-     * @param $resIds array id ključ dovoljenj
-     */
-    public function removeChildren($object, $resIds)
-    {
-
-        if ($resIds) {
-            foreach ($resIds as $resId => $v) {
-                $perm = $this->findOneById($resId);
-                $object->getChildren()->removeElement($perm);
-            }
-        }
-    }
-
-    /**
-     * dodaja izbrana dovoljenja v objekt
-     *
-     * @param $object
-     * @param $resIds array id ključ dovoljenja
-     */
-    public function addChildren($object, $resIds)
-    {
-        if ($resIds) {
-            foreach ($resIds as $resId => $v) {
-                $perm = $this->findOneById($resId);
-                if (!$object->getChildren()->contains($perm)) {
-                    $object->getChildren()->add($perm);
-                };
-            }
-        }
-    }
-
-    /**
      * Vrne seznam role objektov, kot array collection 
      * @param string[] $names
      * @return Role[]
@@ -142,25 +116,5 @@ class Roles extends AbstractMaxRepository implements LookupInterface, PagingInte
         return $ret;
     }
 
-    /**
-     *   Poišče podvloge, ali pa vse vloge, ki so vrhnje
-     * 
-     */
-    public function getRoleLevel($parent = null)
-    {
-
-        if ($parent == null) {
-            $q = $this->getEntityManager()->createQuery('select r from \Aaa\Entity\Role r '
-                    . 'where r.id  not in '
-                    . '(select chld.id from \Aaa\Entity\Role prnt '
-                    . 'Join prnt.children chld)');
-            $res = $q->getResult();
-        } else {
-            $role = $this->find($parent);
-            $res = $role->getChildren();
-        }
-
-        return $res;
-    }
 
 }

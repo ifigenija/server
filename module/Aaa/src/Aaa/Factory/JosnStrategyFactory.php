@@ -14,7 +14,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @author  boris@max.si
  * @licence MIT
  */
-class AcceptHeaderStrategyFactory implements FactoryInterface
+class JsonStrategyFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}

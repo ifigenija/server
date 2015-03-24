@@ -10,7 +10,7 @@
 return [
     'doctrine' => [
         'driver' => [
-            'aaa_module' => [
+            'aaa' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'apc',
                 'paths' => [
@@ -19,7 +19,7 @@ return [
             ],
             'orm_default' => [
                 'drivers' => [
-                    'Aaa\Entity' => 'aaa_module'
+                    'Aaa\Entity' => 'aaa'
                 ]
             ]
         ],
@@ -29,129 +29,44 @@ return [
                 'identity_class' => 'Aaa\Entity\User',
                 'identity_property' => 'username',
                 'credential_property' => 'password',
-                'credential_callable' => 'Aaa\Entity\User::checkPassword'
+                'credential_callable' => 'Aaa\Service\AaaService::checkPassword'
             ]
         ]
     ],
     'service_manager' => [
         'factories' => [
-            'Rbac\Rbac' => 'Aaa\Factory\RbacFactory',
-            'rbac_strategy' => 'Aaa\Factory\AcceptHeaderStrategyFactory',
+            'rbac_strategy' => 'Aaa\Factory\JsonStrategyFactory',
             'Zend\Authentication\AuthenticationService' => 'Aaa\Factory\AuthenticationServiceFactory',
-        ]
-    ],
-    'view_manager' => [
-        'template_path_stack' => [
-            __DIR__ . '/../view'
         ]
     ],
     'controllers' => [
         'invokables' => [
             'Aaa\User' => 'Aaa\Controller\UserController',
             'Aaa\Role' => 'Aaa\Controller\RoleController',
-            'Aaa\Group' => 'Aaa\Controller\GroupController',
+            'Aaa\Rpc' => 'Aaa\Controller\RpcController',
             'Aaa\Permission' => 'Aaa\Controller\PermissionController'
-        ]
-    ],
-    'zfc_rbac' => [
-        'guards' => [
-            'ZfcRbac\Guard\RouteGuard' => [
-                'login' => ['*'],
-                'changepass' => ['prijavljen-uporabnik'],
-                'aaa' => ['administrator-dostopov'],
-                'acljson' => ['prijavljen-uporabnik']
-            ]
         ]
     ],
     'router' => [
         'routes' => [
-            'login' => [
-                'type' => 'Segment',
-                'options' => [
-                    'route' => '/login[/:action]',
-                    'defaults' => [
-                        'action' => 'login',
-                        'controller' => 'Aaa\User',
-                    ],
-                    'constraints' => [
-                        'action' => 'login|logout'
-                    ],
-                ]
-            ],
-            'changepass' => [
-                'type' => 'Literal',
-                'options' => [
-                    'route' => '/changepass',
-                    'defaults' => [
-                        'controller' => 'Aaa\User',
-                        'action' => 'changePassword'
-                    ]
-                ],
-            ],
-            'aaa' => [
-                'type' => 'Segment',
-                'options' => [
-                    'route' => '/aaa/:controller[/:action][/:id]',
-                    'constraints' => [
-                        'controller' => implode('|', [
-                            'Group',
-                            'User',
-                            'Role',
-                            'Permission',
-                        ]),
-                        'action' => implode('|', [
-                            'dodaj',
-                            'urediDovoljenja',
-                            'uredi',
-                            'pregled',
-                            'brisi',
-                            'index',
-                            'group',
-                            'odstraniUporabnika',
-                            'odstraniVlogo',
-                            'dodajUporabnika',
-                            'dodajVlogo',
-                            'updateCache',
-                        ]),
-                        'id' => \Aaa\UUID
-                    ],
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Aaa',
-                        'controller' => 'User',
-                        'action' => 'index'
-                    ],
-                ]
-            ],
-            'acljson' => [
-                'type' => 'Literal',
-                'options' => [
-                    'route' => '/aaa/acljson'
-                ],
-                'may_terminate' => false,
+            'rpc' => [
                 'child_routes' => [
-                    'group' => [
+                    [
                         'type' => 'Literal',
                         'options' => [
-                            'route' => '/groups',
+                            'route' => '/aaa',
                             'defaults' => [
-                                'controller' => 'Group',
-                                'action' => 'getGroupList'
-                            ]
-                        ]
-                    ],
-                    'user' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/users',
-                            'defaults' => [
-                                'controller' => 'User',
-                                'action' => 'getUserList'
-                            ]
+                                'action' => 'login',
+                                'controller' => 'Aaa\User',
+                            ],
+                            'constraints' => [
+                                'action' => 'aaa|logout'
+                            ],
                         ]
                     ]
-                ]
-            ],
-        ]
+                ],
+            ]
+        ],
     ],
     'console' => [
         'router' => [
@@ -171,15 +86,6 @@ return [
                         'defaults' => [
                             'controller' => 'Aaa\User',
                             'action' => 'enable'
-                        ]
-                    ]
-                ],
-                'user-setgroup-removegroup' => [
-                    'options' => [
-                        'route' => 'user (setgroup|removegroup):mode <username> <group>',
-                        'defaults' => [
-                            'controller' => 'Aaa\User',
-                            'action' => 'group'
                         ]
                     ]
                 ],

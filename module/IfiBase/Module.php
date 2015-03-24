@@ -5,16 +5,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Aaa\Controller;
+
 /**
- * Description of UserController
+ * Base nastavitve za Ifigenijo
  *
  * @author boris
  */
-class UserController extends \Max\Controller\RestController
+class Module
 {
-    
-    protected $entityClass = "Aaa\Entity\Role";
-    
-    
+    //put your code here
 }

@@ -20,8 +20,8 @@ class Permission extends \Max\Entity\Base
      * ID
      *
      * @ORM\Id
-     * @ORM\Column(type="guid",unique=true);
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="integer",unique=true);
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      *
      * @Max\Ui(type="id")
      */
@@ -57,16 +57,7 @@ class Permission extends \Max\Entity\Base
      */
     protected $builtIn = false;
     
-    /**
-     * Cache za vse vloge, v katerih je permission
-     * 
-     * 
-     * @ORM\ManyToMany(targetEntity="Role")
-     * @ORM\JoinTable(name="permission_allrole")
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     */
-    protected $allRoles;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="Role", mappedBy="permissions")
      *

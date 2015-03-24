@@ -21,8 +21,8 @@ class Role
 
     /**
      * @ORM\Id
-     * @ORM\Column(type="guid",unique=true);
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="integer",unique=true);
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      *
      * @Max\I18n(label="ID", hint="ID vloge", description="ID vloge")
      * @Max\Ui(type="id")
@@ -56,7 +56,7 @@ class Role
     /**
      * @ORM\ManyToMany(targetEntity="Permission", inversedBy="roles", indexBy="name", fetch="LAZY")
      *
-     * @Max\I18n(label="Dovoljenja", hint="Dovoljenja", description="Dovoljenja")
+     * @Max\I18n(label="Dovoljenja", hint="Dovoljenja")
      * @Max\Ui(group="Dovoljenja")
      */
     protected $permissions;
@@ -72,7 +72,7 @@ class Role
     /**
      * @ORM\ManyToMany(targetEntity="User", mappedBy="hierRoles")
      *
-     * @Max\I18n(label="Uporabniki", hint="Uporabniki", description="Uporabniki, člani skupine")
+     * @Max\I18n(label="Uporabniki", hint="Uporabniki, ki s to vlogo")
      */
     protected $users;
 

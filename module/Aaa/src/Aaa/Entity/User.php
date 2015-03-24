@@ -29,7 +29,7 @@ class User
      * ID uporabnika
      *
      * @ORM\Id
-     * @ORM\Column(type="guid",unique=true);
+     * @ORM\Column(type="integer",unique=true);
      * @ORM\GeneratedValue(strategy="NONE")
      *
      * @Max\I18n(label="ID", hint="ID uporabnika", description="ID uporabnika")
@@ -108,16 +108,6 @@ class User
     protected $apiKey;
 
     /**
-     * Skupine v katere spada uporabnik
-     *  Uporabljeno za določitev dostopov
-     *
-     * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
-     * @Max\I18n(label="Skupine", hint="Skupine katerih član je uporabnik", description="Skupine, katerih član je uporabnik")
-     * @Max\UI(group="Skupine")
-     */
-    protected $groups;
-
-    /**
      * Vloge, ki ijih ima uporabnik - tukaj so vse vloge, ki jih ima uporabnik
      * preračunane glede na članstvo v hierRoles
      *  Uporabljeno za določitev dostopov
@@ -128,14 +118,6 @@ class User
      */
     protected $roles;
 
-    /**
-     * Hierarhične vloge na uporabniku
-     * 
-     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
-     * @ORM\JoinTable(name="user_hierroles")
-     * @var ArrayCollection 
-     */
-    protected $hierRoles;
 
     /**
      * Veljavnost - po tem datumu se uporabnik ne more prijaviti
@@ -162,28 +144,11 @@ class User
      */
     protected $defaultRouteParams;
 
-    /**
-     * Interno polje - uporabnik, ki je zadnji spreminjal entiteto
-     * To polje se ne vnaša. Uporabnika dobimo iz prijave v aplikacijo.
-     *
-     *  @ORM\Column(length=10,nullable=true)
-     */
-    protected $upor;
-
-    /**
-     * Interno polje - datum in ura zadnjega spreminjanja entitete
-     * To polje se ne vnaša. Podatek vzamemo iz tekočega datuma in ure.
-     *
-     * @ORM\Column(type="datetime",nullable=true)
-     * @var string
-     */
-    protected $datKnj;
 
     public function __construct()
     {
-        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
         $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->hierRoles = new \Doctrine\Common\Collections\ArrayCollection();
+
     }
 
 
@@ -211,34 +176,7 @@ class User
         return $this;
     }
 
-    public function getHierRoles()
-    {
-        return $this->hierRoles;
-    }
 
-    public function setHierRoles($allRoles)
-    {
-        $this->hierRoles = $allRoles;
-        return $this;
-    }
-
-    public function addGroups(\Doctrine\Common\Collections\Collection $groups)
-    {
-        foreach ($groups as $group) {
-            if (!$this->groups->contains($group)) {
-                $this->groups->add($group);
-            }
-        }
-    }
-
-    public function removeGroups(\Doctrine\Common\Collections\Collection $groups)
-    {
-        foreach ($groups as $group) {
-            if ($this->groups->contains($group)) {
-                $this->groups->removeElement($group);
-            }
-        }
-    }
 
     public function getUpor()
     {

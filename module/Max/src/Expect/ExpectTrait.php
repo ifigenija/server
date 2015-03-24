@@ -1,10 +1,10 @@
 <?php
 
-
 /*
  * Licenca GPL V3 or later
  *  
  */
+
 namespace Max\Expect;
 
 use Max\Consts;
@@ -18,31 +18,28 @@ use Max\Exception\MaxException;
  */
 trait ExpectTrait
 {
-       /**
+
+    /**
      * Osnovni expect statement. pričakujem resnico Če resnice ni 
      * izpolnjena potem sprožim exception 
      * 
-     * @param type $truth
-     * @param type $message
+     * @param bool $truth
+     * @param string $message
      * @param type $code
      * @throws MaxException
      */
-    protected function expect($truth, $message = '', $code = 'TIP-TASK-0000')
+    protected function expect($truth, $code = 970001, $msgFormat, $params = [])
     {
         if (!$truth) {
-            throw new MaxException("Pogoj: {$message}", $code);
+
+            if ($params) {
+                array_unshift($params, $msgFormat);
+                $msg = call_user_func(['\sprintf', $params]);
+            } else {
+                $msg = $msgFormat;
+            }
+            throw new MaxException($msg, $code);
         }
     }
 
-    /**
-     * Preveri avtorizacijo za akcijo na objektu, glede na vrsto entitete
-     * @param string $id
-     * @param string $message sporočilo ob napaki 
-     * @param string $code koda napake 
-     */
-    protected function expectUUID($id, $message, $code)
-    {
-        $match = preg_match(Consts::UUID_RE, $id);
-        $this->expect($match, $message, $code);
-    }
 }

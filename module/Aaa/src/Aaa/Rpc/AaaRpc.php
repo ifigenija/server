@@ -5,16 +5,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Aaa\Controller;
+namespace Aaa\Rpc;
 /**
- * Description of UserController
+ * Wrapper za strežbo rpc klicev v AaaService
  *
  * @author boris
  */
-class UserController extends \Max\Controller\RestController
+class AaaRpcService extends \Max\Service\AbstractMaxService
 {
-    
-    protected $entityClass = "Aaa\Entity\Role";
-    
-    
+   
+    /**
+     * 
+     */
+    public function getPermissions()
+    {
+        
+    }
 }

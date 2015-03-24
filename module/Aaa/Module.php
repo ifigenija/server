@@ -55,6 +55,7 @@ Class Module
         $authService = $sm->get('Zend\Authentication\AuthenticationService');
 
 
+$identity = $this->setConsoleAuthorization($authService, $em);
 
         if ($e->getRequest() instanceof Request) {
             // handling autorizacij preko konzole

@@ -83,168 +83,6 @@ use \Max\Expect\ExpectTrait;
     }
 
     /**
-     * Generična lookup metoda, ki iz metapodatkov pridobi podatke o
-     * poljih
-     *
-     * @param type $srch
-     * @param type $sort
-     * @param array $sort
-     * @return array<Entites>
-     */
-    public function lookup($srch, $sort = null, $fixedParams = [])
-    {
-        if (is_null($sort))
-            $sort = [
-                'order' => 'asc',
-                'sort_by' => 'ident'
-            ];
-
-        if (is_array($srch)) {
-            $text = isset($srch['q']) ? $srch['q'] : '';
-        } else {
-            $text = $srch;
-        }
-        $text = strtolower($text);
-        $meta = $this->getMeta();
-
-        $em = $this->getEntityManager();
-
-        $qb = $em->createQueryBuilder();
-        $qb->select('look');
-        $qb->from($this->getEntityName(), 'look');
-        // sestavim polja iz lookup definition - poiščem joine
-        if (!$meta->getLookup())
-            throw new MaxException('Entiteta ne podpira lookup-a. Ni anotiranih metapodatkov', 'TIP-LKP-0003');
-
-        $joinfields = [];
-        $orCond = $qb->expr()->orx();
-        foreach ($meta->getLookup()->search as $fld) {
-            if ($loc = strchr($fld, '.')) {
-
-                list ($join, $jfield) = explode('.', $fld);
-
-                if (array_search($join, $joinfields) === false) {
-                    $qb->leftJoin('look.' . $join, 'j' . $join);
-                    $joinfields[] = $join;
-                }
-
-                if ($this->getClassMetadata()->hasAssociation($join)) {
-                    $assoc = $this->getClassMetadata()->getAssociationMapping($join);
-
-                    $classmeta = $this->getEntityManager()->getClassMetadata($assoc['targetEntity']);
-                    $map = $classmeta->getFieldMapping($jfield);
-                    if (($map['type'] == 'string' || $map['type'] == 'text') && $text) {
-                        $orCond->add($qb->expr()->like("lower(j$join.$jfield)", ":p$join$jfield"));
-                        $qb->setParameter("p$join$jfield", "%$text%", 'string');
-                    }
-                } else {
-                    throw new NeveljavnoLookupPoljeException(
-                    sprintf('Asociacija %s ne obstaja na entiteti %s'
-                        , $fld
-                        , $this->getEntityName())
-                    , 'TIP-ATR-0001');
-                }
-            } else {
-                // pohendlam polja v seznamu
-                if ($this->getClassMetadata()->hasField($fld)) {
-                    $assoc = $this->getClassMetadata()->getFieldMapping($fld);
-                    $type = $assoc['type'];
-
-                    $ui = $meta->getFieldUi($fld);
-                    $ident = $ui ? $ui->ident : false;
-                    if (($type == 'string' || $type == 'text') && $text) {
-                        $orCond->add($qb->expr()->like("lower(look.$fld)", ":f$fld"));
-                        if ($ident) {
-                            $qb->setParameter("f$fld", "$text%", 'string');
-                        } else {
-                            $qb->setParameter("f$fld", "%$text%", 'string');
-                        }
-                    }
-                } else {
-                    throw new NeveljavnoLookupPoljeException(
-                    sprintf('Polje %s ne obstaja na entiteti %s'
-                        , $fld
-                        , $this->getEntityName())
-                    , 'TIP-ATR-0002');
-                }
-            }
-        }
-
-        /** fiksirani parametri, ki se iščejo po eq
-         * 
-         */
-        foreach ($fixedParams as $fld => $value) {
-            if ($loc = strstr($fld, '.')) {
-
-                list ($join, $jfield) = explode('.', $fld);
-
-                if (array_search($join, $joinfields) === false) {
-                    $qb->leftJoin('look.' . $join, 'j' . $join);
-                    $joinfields[] = $join;
-                }
-
-                if ($this->getClassMetadata()->hasAssociation($join)) {
-                    $assoc = $this->getClassMetadata()->getAssociationMapping($join);
-
-                    $qb->andWhere($qb->expr()->eq("j$join.$jfield", ":p$join$jfield"));
-                    $qb->setParameter("p$join$jfield", $value);
-                } else {
-                    throw new NeveljavnoLookupPoljeException(
-                    sprintf('Asociacija %s ne obstaja na entiteti %s'
-                        , $fld
-                        , $this->getEntityName())
-                    , 'TIP-ATR-0001');
-                }
-            } else {
-                // pohendlam polja v seznamu
-                if ($this->getClassMetadata()->hasField($fld)) {
-                    $assoc = $this->getClassMetadata()->getFieldMapping($fld);
-
-                    $qb->andWhere($qb->expr()->eq("look.$fld", ":f$fld"));
-                    $qb->setParameter("f$fld", $value);
-                } else if ($this->getClassMetadata()->hasAssociation($fld)) {
-                    $assoc = $this->getClassMetadata()->getAssociationMapping($fld);
-
-                    $qb->andWhere($qb->expr()->eq("look.$fld", ":f$fld"));
-                    $qb->setParameter("f$fld", $value);
-                } else {
-                    throw new NeveljavnoLookupPoljeException(
-                    sprintf('Polje %s ne obstaja na entiteti $s'
-                        , $fld
-                        , $this->getEntityName())
-                    , 'TIP-ATR-0002');
-                }
-            }
-        }
-
-        if ($orCond->count() > 0) {
-            $qb->andWhere($orCond);
-        }
-
-        $sortf = $sort['sort_by'];
-        if ($sortf == 'ident' || $sortf == 'label') {
-            $field = $meta->getLookup()->$sortf;
-        } else {
-            $extra = $meta->getLookup()->extra;
-            $i = array_search($sortf, $extra);
-            if ($i !== false) {
-                $field = $extra[$i];
-            } else {
-                $field = $meta->getLookup()->ident;
-            };
-        }
-        if (strpos($field, '.') !== false) {
-            list ($join, $jfield) = explode('.', $field);
-            $field = "j$join.$jfield";
-        } else {
-            $field = "look.$field";
-        }
-        $qb->orderBy($field, $sort['order']);
-        //    $q = $qb->getQuery()->getSQL();
-        return $qb;
-    }
-
-    /**
      *
      * @return AuthorizationService
      */
@@ -253,62 +91,6 @@ use \Max\Expect\ExpectTrait;
         return $this->serviceLocator->get('ZfcRbac\Service\AuthorizationService');
     }
 
-    /**
-     * filtrira entiteto v lookup vrednost {id: xxx, ident: xxx, label: xxx}
-     *
-     * @param mixed $value Objekt, ki je instanca entitete z anotacijo lookup
-     * @return type
-     */
-    public function filterForLookup($value, $lookupMeta = [], $minimum = false)
-    {
-        // Array s fieldi, ki imajo številke
-        $numbers = [];
-        $dates = [];
-        foreach ($lookupMeta as $l) {
-            if ($l['cell'] == 'number') {
-                $numbers[] = $l['name'];
-            }
-            if ($l['cell'] == 'date') {
-                $dates[] = $l['name'];
-            }
-        }
-
-        $lookup = $this->getMeta()->getLookup();
-        $ident = $this->resolveField($lookup->ident, $value);
-        if (array_search('ident', $numbers) !== false) {
-            $ident = (float) $ident;
-        }
-
-        $label = $this->resolveField($lookup->label, $value);
-        $arr = [
-            'id' => $value->id,
-            'ident' => $ident,
-            'label' => $label
-        ];
-
-        if (!$minimum) {
-            foreach (array_merge($lookup->hidden, $lookup->extra) as $field) {
-
-                switch (true) {
-                    case array_search($field, $numbers) !== FALSE:
-                        $arr[$field] = (float) $this->resolveField($field, $value);
-                        break;
-                    case array_search($field, $dates) !== false :
-                        $date = $this->resolveField($field, $value);
-                        if ($date instanceof DateTime) {
-                            $arr[$field] = $this->resolveField($field, $value)
-                                ->format(DateTime::ISO8601);
-                        } else {
-                            $arr[$field] = $date;
-                        }
-                        break;
-                    default:
-                        $arr[$field] = $this->resolveField($field, $value);
-                }
-            }
-        }
-        return $arr;
-    }
 
     /**
      * filtrira entiteto v lookup vrednost {id: xxx, ident: xxx, label: xxx}
@@ -318,7 +100,6 @@ use \Max\Expect\ExpectTrait;
      */
     public function filterForSelect($value)
     {
-
 
         $lookup = $this->getMeta()->getLookup();
         $ident = $this->resolveField($lookup->ident, $value);
@@ -333,40 +114,7 @@ use \Max\Expect\ExpectTrait;
         return $ret;
     }
 
-    /**
-     * Vrne vrednost
-     * @param type $name
-     * @param type $value
-     * @return type
-     */
-    public function resolveField($name, $value)
-    {
 
-        if (strpos($name, '.')) {
-            list ($assoc, $field) = explode('.', $name);
-            $ameth = 'get' . ucfirst($assoc);
-            $fmeth = 'get' . ucfirst($field);
-            if ($value->$ameth()) {
-                $result = $value->$ameth()->$fmeth();
-                if (is_object($result) && method_exists($result, 'getId')) {
-                    $result = $result->getId();
-                }
-                if ($result instanceof DateTime) {
-                    $result = $result->format(DATE_ISO8601);
-                }
-            } else {
-                $result = '';
-            }
-        } else {
-            $fmeth = 'get' . ucfirst($name);
-            $result = $value->$fmeth();
-            if ($result instanceof DateTime) {
-                $result = $result->format(DATE_ISO8601);
-            }
-        }
-
-        return $result;
-    }
 
     /**
      * Vrne vrednost

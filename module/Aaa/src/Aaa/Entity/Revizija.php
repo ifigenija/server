@@ -47,7 +47,7 @@ class Revizija
 
     /**
      * ID objekta nad katerim se je zgodila sprememba
-     * @ORM\Column(type="guid")
+     * @ORM\Column(type="integer")
      * @var string
      */
     protected $objectId;
@@ -55,7 +55,7 @@ class Revizija
     /**
      * Uporabnik ki je spremenil objekt
      *
-     * @ORM\Column(type="guid", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      * @var string
      */
     protected $upor;
