@@ -6,3 +6,5 @@
 **/autoload_classmap.php
 /tests/acceptance.suite.yml
 /tests/api.suite.yml
+.DS_Store
+/data/
