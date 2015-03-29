@@ -11,12 +11,44 @@ module.exports = function (grunt) {
 // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        exec: {          
+        exec: {
+            autoload_util: {
+                cwd: 'module/Util',
+                cmd: classmap_generator
+            },
+            autoload_max: {
+                cwd: 'module/Max',
+                cmd: classmap_generator
+            },
             autoload_aaa: {
                 cwd: 'module/Aaa',
                 cmd: classmap_generator
             },
-           
+            autoload_App: {
+                cwd: 'module/App',
+                cmd: classmap_generator    
+            },
+            autoload_Produkcija: {
+                cwd: 'module/Produkcija',
+                cmd: classmap_generator
+            },
+            autoload_Koledar: {
+                cwd: 'module/Koledar',
+                cmd: classmap_generator
+            },
+            autoload_Prisotnost: {
+                cwd: 'module/Prisotnost',
+                cmd: classmap_generator
+            },   
+            autoload_abonmaji: {
+                cwd: 'module/Abonmaji',
+                cmd: classmap_generator
+            },               
+            autoload_prodaja: {
+                cwd: 'module/Prodaja',
+                cmd: classmap_generator
+            },               
+
             proxies: {
                 cmd: function () {
                     if (os.platform() === 'win32') {
@@ -46,14 +78,9 @@ module.exports = function (grunt) {
 
     });
 
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-requirejs');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-exec');
-    grunt.loadNpmTasks('grunt-contrib-qunit');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
 
 // Default task(s).
-    grunt.registerTask('default', ['cssmin', 'requirejs', 'exec', 'jshint']);
+    grunt.registerTask('default', [  'exec']);
 
 };

@@ -83,7 +83,7 @@ trait JsonErrorsTrait
      */
     public function addErrorFromException($exception, $cargo = null)
     {
-        if ($exception instanceof \MaxAccesDeniedException) {
+        if ($exception instanceof \Max\Exception\UnauthorizedException) {
             $this->getResponse()->setStatusCode('403');
         }
 

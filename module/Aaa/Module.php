@@ -8,19 +8,17 @@
 
 namespace Aaa;
 
-use Aaa\Entity\Role;
-use Aaa\Entity\User;
-use Aaa\EntityEvents\PrePersistListener;
 use Aaa\EntityEvents\RevisionsListener;
 use Aaa\Resolver\DoctrineResolver;
 use Doctrine\ORM\EntityManager;
+use Exception;
+use Max\Exception\UnauthException;
 use Zend\Authentication\Adapter\Http;
-use Zend\Authentication\Storage\NonPersistent;
+use Zend\Authentication\AuthenticationService;
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\Console\Request;
 use Zend\Http\Response;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
-use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
 Class Module
@@ -29,7 +27,7 @@ Class Module
 
     public function getConfig()
     {
-        return include __DIR__ . '/config/module.config.php';
+        return array_merge(include __DIR__ . '/config/module.config.php', include __DIR__ . '/config/doctrine.config.php');
     }
 
     public function getAutoloaderConfig()
@@ -44,108 +42,57 @@ Class Module
     public function onBootstrap(MvcEvent $e)
     {
 
-        $eventManager = $e->getApplication()->getEventManager();
         $sm = $e->getApplication()->getServiceManager();
+        $em = $sm->get('doctrine.entitymanager.orm_default');
+        $auth = $sm->get('Zend\Authentication\AuthenticationService');
 
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
-
-        // strategija za reagiranje ob neautoriziranem dostopu
-        $eventManager->attach($sm->get('rbac_strategy'));
-        $authService = $sm->get('Zend\Authentication\AuthenticationService');
-
-
-$identity = $this->setConsoleAuthorization($authService, $em);
-
+        // poskrbim za identiteto uporabnika 
         if ($e->getRequest() instanceof Request) {
             // handling autorizacij preko konzole
-            $identity = $this->setConsoleAuthorization($authService, $em);
-            // za consolne zahteve nastavim politiko na allow
-            $gm = $sm->get('ZfcRbac\Guard\GuardPluginManager');
-            $rbac = $gm->get('ZfcRbac\Guard\ControllerGuard');
-            $rbac->setProtectionPolicy('allow');
+            $this->setIdentity('console', $auth, $em);
         } else {
-            if ($authService->hasIdentity()) {
-                $identity = $authService->getIdentity();
-            } else {
-                $identity = $this->tryHttpAuth($authService, $em, $e);
+            if (!$auth->hasIdentity()) {
+                $identity = $this->tryHttpAuth($auth, $em, $e);
+                if (!$identity) {
+                    $this->setIdentity('anonymous', $auth, $em);
+                }
             }
         }
 
-        $list->setIdentity($identity);
-        $em = $sm->get('doctrine.entitymanager.orm_default');
+        $identity = $auth->getIdentity();
+        // $identity = $this->setConsoleAuthorization($authService, $em);
         $evm = $em->getEventManager();
         $evm->addEventSubscriber(new RevisionsListener($sm, $identity));
     }
 
     /**
-     * Privzeto hendlanje autorizacij preko konzole 
+     * Privzeta identiteta za anonimnega uporabnika 
      */
-    public function setConsoleAuthorization(\Zend\Authentication\AuthenticationService $authService, EntityManager $em)
+    public function setIdentity($name, AuthenticationService $authService, EntityManager $em)
     {
 
         $rep = $em->getRepository('Aaa\Entity\User');
         try {
-            $user = $rep->findOneByUsername('console');
-        } catch (\Exception $e) {
+            $user = $rep->findOneByUsername($name);
+        } catch (Exception $e) {
             $user = null;
         }
         if (!$user) {
-            $role = new Role();
-            $role->setName('tip-vse');
-            $role->setBuiltIn(true);
-
-            $guest = new Role();
-            $guest->setName('guest');
-            $guest->setBuiltIn(true);
-
-            $pu = new Role();
-            $pu->setName('prijavljen-uporabnik');
-            $pu->setBuiltIn(true);
-
-            $user = new User();
-            $user->setUsername('console')
-                    ->setName('console')
-                    ->setSurname('console')
-                    ->setPassword('console')
-                    ->setEnabled('true')
-                    ->setEmail('console@locahost');
-            $user->getRoles()->add($role);
-            $user->getHierRoles()->add($role);
-
-            $em->persist($user);
-            $em->persist($role);
-            $em->persist($guest);
-            $em->persist($pu);
-            $em->flush();
+            throw new UnauthException('Access denied identity not found');
         }
+
         $storage = $authService->getStorage();
         $storage->write($user);
         return $user;
     }
 
-    public function getServiceConfig()
-    {
-        return [
-            'factories' => [
-                'Zend\Authentication\AuthenticationService' => function ($serviceManager) {
-                    return $serviceManager->get('Zend\Authentication\AuthenticationService');
-                }
-            ]
-        ];
-    }
-
-    public function getConsoleUsage(AdapterInterface $console)
-    {
-        return [
-            'Upravljanje uporabnikov',
-            'user resetpass <username>' => 'Ponastavi uporabnikovo geslo',
-            'user (enable|disable) <username>' => 'Omogoči/onemogoči uporabnika',
-            'user (setgroup|removegroup) <username> <group>' => 'Dodaj/odstrani uporabnika v/iz skupino(e)',
-            'user updateCache' => 'Kreira job za update uporabniškega medpomnilnika'
-        ];
-    }
-
+    /**
+     * 
+     * @param type $authService
+     * @param type $em
+     * @param \App\MvcEvent $e
+     * @return type
+     */
     public function tryHttpAuth($authService, $em, MvcEvent $e)
     {
 
@@ -171,6 +118,28 @@ $identity = $this->setConsoleAuthorization($authService, $em);
             $authService->setAdapter($originalAdapter);
         }
         return $authResult->isValid();
+    }
+
+    public function getServiceConfig()
+    {
+        return [
+            'factories' => [
+                'Zend\Authentication\AuthenticationService' => function ($serviceManager) {
+                    return $serviceManager->get('Zend\Authentication\AuthenticationService');
+                }
+            ]
+        ];
+    }
+
+    public function getConsoleUsage(AdapterInterface $console)
+    {
+        return [
+            'Upravljanje uporabnikov',
+            'user resetpass <username>' => 'Ponastavi uporabnikovo geslo',
+            'user (enable|disable) <username>' => 'Omogoči/onemogoči uporabnika',
+            'user (setgroup|removegroup) <username> <group>' => 'Dodaj/odstrani uporabnika v/iz skupino(e)',
+            'user updateCache' => 'Kreira job za update uporabniškega medpomnilnika'
+        ];
     }
 
 }

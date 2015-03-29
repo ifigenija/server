@@ -21,7 +21,7 @@ class Role
 
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer",unique=true);
+     * @ORM\Column(type="integer");
      * @ORM\GeneratedValue(strategy="IDENTITY")
      *
      * @Max\I18n(label="ID", hint="ID vloge", description="ID vloge")
@@ -30,7 +30,7 @@ class Role
     protected $id;
 
     /**
-     * @ORM\Column(length=150, unique=true)
+     * @ORM\Column(unique=true, length=150, nullable=true)
      *
      * @Max\I18n(label="Naziv", hint="Naziv vloge")
      * @Max\Ui(type="sifra", group="Vloga",ident=true)
@@ -47,35 +47,42 @@ class Role
 
     /**
      * A je vloga vgrajena v sistem, ali pa dodana na user instalaciji.
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      *
      * @Max\I18n(label="Vgrajena", hint="Vloga, ki pride z namestitvijo sistema")
      */
     protected $builtIn = false;
 
+
     /**
-     * @ORM\ManyToMany(targetEntity="Permission", inversedBy="roles", indexBy="name", fetch="LAZY")
+     * 
+     * 
      *
      * @Max\I18n(label="Dovoljenja", hint="Dovoljenja")
      * @Max\Ui(group="Dovoljenja")
+     * @ORM\ManyToMany(targetEntity="Aaa\Entity\Permission", mappedBy="roles")
      */
     protected $permissions;
 
 
     /**
-     * @var HierarchicalRoleInterface[]|Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Role")
-     */
-    protected $children;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="hierRoles")
+     * 
      *
      * @Max\I18n(label="Uporabniki", hint="Uporabniki, ki s to vlogo")
+     * @ORM\ManyToMany(targetEntity="Aaa\Entity\User", inversedBy="roles")
+     * @ORM\JoinTable(
+     *     name="User2Role",
+     *     joinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false, unique=true)},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)}
+     * )
+     * 
      */
     protected $users;
 
+
+
+    
+    
     /**
      * Init the Doctrine collection
      */
@@ -86,51 +93,13 @@ class Role
 
     }
 
-    /**
-     * Interno polje - uporabnik, ki je zadnji spreminjal entiteto
-     * To polje se ne vnaša. Uporabnika dobimo iz prijave v aplikacijo.
-     *
-     *  @ORM\Column(length=10,nullable=true)
-     */
-    protected $upor;
-
-    /**
-     * Interno polje - datum in ura zadnjega spreminjanja entitete
-     * To polje se ne vnaša. Podatek vzamemo iz tekočega datuma in ure.
-     *
-     * @ORM\Column(type="datetime",nullable=true)
-     * @var string
-     */
-    protected $datKnj;
-
-
-
+    
     public function getName()
     {
         return $this->name;
     }
 
-    public function getUpor()
-    {
-        return $this->upor;
-    }
 
-    public function setUpor($upor)
-    {
-        $this->upor = $upor;
-        return $this;
-    }
-
-    public function getDatKnj()
-    {
-        return $this->datKnj;
-    }
-
-    public function setDatKnj($datKnj)
-    {
-        $this->datKnj = $datKnj;
-        return $this;
-    }
 
     public function getId()
     {
@@ -153,25 +122,7 @@ class Role
         $this->name = (string) $name;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function addChild(RoleInterface $child)
-    {
-        $this->children[] = $child;
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function addPermission($permission)
-    {
-        if (is_string($permission)) {
-            $permission = new Permission($permission);
-        }
-
-        $this->permissions[(string) $permission] = $permission;
-    }
 
     /**
      * {@inheritDoc}
@@ -184,21 +135,6 @@ class Role
         return isset($this->permissions[(string) $permission]);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getChildren()
-    {
-        return $this->children;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function hasChildren()
-    {
-        return !$this->children->isEmpty();
-    }
 
     function getPermissions()
     {

@@ -6,8 +6,8 @@ use Zend\Http\Response;
 use Zend\Json\Server\Server;
 use Zend\Json\Server\Smd;
 
-trait RpcTrait
-        {
+class RpcController {
+        
 
     protected function handleJsonRpcCall($service)
     {

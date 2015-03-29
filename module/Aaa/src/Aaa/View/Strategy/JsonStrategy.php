@@ -3,13 +3,11 @@
 namespace Aaa\View\Strategy;
 
 use Zend\Authentication\AuthenticationServiceInterface;
-use Zend\Http\Response as HttpResponse;
 use Zend\Http\Request as HttpRequest;
+use Zend\Http\Response as HttpResponse;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\JsonModel;
-use Zend\View\Model\ViewModel;
 use ZfcRbac\Exception\UnauthorizedExceptionInterface;
-use ZfcRbac\Guard\GuardInterface;
 use ZfcRbac\View\Strategy\AbstractStrategy;
 
 class JsonStrategy

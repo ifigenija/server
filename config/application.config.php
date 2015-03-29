@@ -2,12 +2,18 @@
 
 $env = getenv('APP_ENV') ? : (isset($_SERVER['APP_ENV'])? $_SERVER['APP_ENV'] : 'XXX');
 return [
-    'modules' => [
-        //    'ZendDeveloperTools',
+    'modules' => [        
         'DoctrineModule',
         'DoctrineORMModule',
         'ZfcRbac',
+        'Max',
+        'App',
         'Aaa',
+        'Produkcija',
+        'Koledar',
+        'Prisotnost',
+        'Abonmaji',
+        'Prodaja',
     ],
     'module_listener_options' => [
         'config_glob_paths' => [

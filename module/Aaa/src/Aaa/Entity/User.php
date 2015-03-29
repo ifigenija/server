@@ -29,8 +29,8 @@ class User
      * ID uporabnika
      *
      * @ORM\Id
-     * @ORM\Column(type="integer",unique=true);
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="integer");
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      *
      * @Max\I18n(label="ID", hint="ID uporabnika", description="ID uporabnika")
      * @Max\Ui(type="id")
@@ -40,21 +40,21 @@ class User
     /**
      * Uporabniško ime za dostop
      *
-     * @ORM\Column(length=10, unique=true,nullable=false)
+     * @ORM\Column(unique=true, length=10, nullable=false)
      * @var string
      *
      * @Max\I18n(label="Uporabniško ime", hint="Uporabniško ime", description="Uporabniško ime")
-     * @TIp\Ui(group="Login", type="naziv", ident=true)
+     * @Max\Ui(group="Login", type="naziv", ident=true)
      */
     protected $username;
 
     /**
      * Ime uporabnika (dejansko ime)
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
      * @Max\I18n(label="Ime", hint="Ime uporabnika", description="Ime uporabnika")
-     * @TIp\Ui(group="Uporabnik", type="naziv")
+     * @Max\Ui(group="Uporabnik", type="naziv")
      */
     protected $name;
 
@@ -64,14 +64,14 @@ class User
      * @ORM\Column(type="string", nullable=true)
      *
      * @Max\I18n(label="Priimek", hint="Priimek uporabnika", description="Priimek uporabnika")
-     * @TIp\Ui(group="Uporabnik", type="naziv")
+     * @Max\Ui(group="Uporabnik", type="naziv")
      */
     protected $surname;
 
     /**
      * Naslov e-pošte uporabnika
      *
-     * @ORM\Column(type="string",unique=true,nullable=false)
+     * @ORM\Column(type="string", unique=true, nullable=false)
      *
      * @Max\I18n(label="E-mail", hint="E-poštni naslov", description="Naslov elektronske pošte uporabnika")
      * @Max\Ui(type="email", group="Uporabnik")
@@ -81,7 +81,7 @@ class User
     /**
      * Geslo
      *
-     * @ORM\Column(length=90)
+     * @ORM\Column(length=90, nullable=true)
      *
      * @Max\I18n(label="Geslo", hint="Geslo", description="Geslo")
      * @Max\Ui(group="Login", type="password")
@@ -91,9 +91,9 @@ class User
     /**
      * Uporabnik omogočen/onemogočen
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      * @Max\I18n(label="Aktiven", hint="Uporabnik aktiven (D/N)", description="Uporabnik aktiven")
-     * @Max\UI(type="checkbox", group="Uporabnik")
+     * @Max\Ui(type="checkbox", group="Uporabnik")
      */
     protected $enabled;
 
@@ -112,9 +112,12 @@ class User
      * preračunane glede na članstvo v hierRoles
      *  Uporabljeno za določitev dostopov
      *
-     * @ORM\ManyToMany(targetEntity="Role")     
+     *      
      * @Max\I18n(label="Vloge", hint="ID-ji Skupin", description="Skupine, katerih član je uporabnik")
      * @Max\UI(group="Vloge")
+     * @ORM\ManyToMany(targetEntity="Aaa\Entity\Role", mappedBy="users")
+     * 
+     * 
      */
     protected $roles;
 
@@ -123,7 +126,7 @@ class User
      * Veljavnost - po tem datumu se uporabnik ne more prijaviti
      *
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="Veljavnost", hint="Datum veljavnosti ali prazno (veljavnost ne poteče)", description="Po tem datumu se uporabnik ne more prijaviti")
+     * @Max\I18n(label="Veljavnost",  description="Po tem datumu se uporabnik ne more prijaviti")
      * @Max\Ui(group="Uporabnik")
      */
     protected $expires;
@@ -133,16 +136,17 @@ class User
      *
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="Privzeta pot ob prijavi", hint="Route ali prazno ('home')", description="Privzeta pot v aplikaciji po prijavi")
-     * @TIp\Ui(group="Zagon", type="text")
+     * @Max\Ui(group="Zagon", type="text")
      */
     protected $defaultRoute;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="Parametri za pot", hint="param=>vrednost ali prazno", description="Parametri za privzeto pot v aplikaciji po prijavi")
-     * @TIp\Ui(group="Zagon", type="textarea")
+     * @Max\Ui(group="Zagon", type="textarea")
      */
     protected $defaultRouteParams;
+
 
 
     public function __construct()
@@ -240,24 +244,7 @@ class User
         return $this;
     }
 
-    /**
-     * Preveri geslo uporabnika (vnos hasha in primerja z vnosom v bazi)
-     *
-     * @param string $user
-     * @param string $passwordGiven
-     */
-    public static function checkPassword($user, $passwordGiven)
-    {
-        $bcrypt = new \Zend\Crypt\Password\Bcrypt();
-        $bcrypt->setSalt(51292170311201451452855644564);
-        $bcrypt->setCost(5);
-        $passwordGiven = $bcrypt->create($passwordGiven);
-        if ($user->getEnabled()) {
-            return ($user->password === $passwordGiven ? true : false);
-        } else {
-            return false;
-        }
-    }
+    
 
     public function getEnabled()
     {
@@ -334,34 +321,10 @@ class User
     {
         return "{$this->getName()} {$this->getSurname()}";
     }
-
-    function setApiKey($apiKey)
+    public function __toString()
     {
-        if ($apiKey !== '') {
-            $bcrypt = new Bcrypt();
-            $bcrypt->setSalt(512703111111201451452855644564);
-            $bcrypt->setCost(6);
-            $this->apiKey = $bcrypt->create($apiKey);
-        }
+        return $this->getFullName();
     }
 
-    /**
-     * Preveri geslo uporabnika (vnos hasha in primerja z vnosom v bazi)
-     *
-     * @param string $user
-     * @param string $passwordGiven
-     */
-    public static function checkApiKey($user, $passwordGiven)
-    {
-        $bcrypt = new \Zend\Crypt\Password\Bcrypt();
-        $bcrypt->setSalt(512703111111201451452855644564);
-        $bcrypt->setCost(6);
-        $passwordGiven = $bcrypt->create($passwordGiven);
-        if ($user->getEnabled()) {
-            return ($user->apiKey === $passwordGiven ? true : false);
-        } else {
-            return false;
-        }
-    }
 
 }

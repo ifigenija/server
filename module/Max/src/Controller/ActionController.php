@@ -26,7 +26,7 @@ use ZfcRbac\Service\AuthorizationServiceAwareInterface;
  *
  * @author boris
  */
-class AbstractMaxController
+class ActionController
     extends AbstractActionController
     implements AuthorizationServiceAwareInterface
 {
@@ -90,22 +90,9 @@ class AbstractMaxController
     public function onDispatch(MvcEvent $e)
     {
 
-        $this->sess = new Container('Max');
-        $this->nast = $this->serviceLocator->get('nastavitve.service');
+      
 
-
-        Paginator::setDefaultItemCountPerPage($this->nast->get('perpage'));
-
-        if ($this->request instanceof Request) {
-            $headers = $this->request->getHeaders();
-            if ($headers->has('X-Max2-fragment')) {
-
-                $this->fragment(true);
-            }
-            $landing = substr($this->request->getRequestUri(), strlen($this->request->getBaseUrl() . '/'));
-            $this->response->getHeaders()->addHeaders(['X-Max2-Url' => $landing]);
-        }
-        $this->init();
+        
 
         return parent::onDispatch($e);
     }
@@ -250,45 +237,7 @@ class AbstractMaxController
         return true;
     }
 
-    /**
-     * Naredi child view model za toolbar. 
-     * Če je $name default, potem se ustvari privzeti toolbar, ki je child od layouta
-     * 
-     * Če 
-     * 
-     * @param BaseToolbar $model toolbar model
-     * @param ViewModel $parent na kateri view model naj se pripne renderiran toolbar
-     * @param string $name ime toolbara 
-     * @return null
-     */
-    public function setToolbar( BaseToolbar $model, ViewModel $parent = null, $name = "default")
-    {
-        if (!$model->hasPages()) {
-            return null;
-        }
-
-        // ime je lahko nastavljeno kot parameter ali pa pride 
-        // iz base toolbara. Če je nastavljeno v baseToolbaru, potem 
-        // pogledmao, če je override v parametru, če pa ni 
-        if ($model->getName() === 'default' && $name !== 'default') {
-            $model->setName($name);
-        }
-
-        $vm = new ViewModel([
-            'groups' => $model->serializeGroups($model->getPages()),
-            'navigation' => $model,
-            'name' => $model->getName(),
-            'class' => $model->getClass(),
-        ]);
-
-        $vm->setTemplate('toolbarGroupsJson');
-
-        if ('default' === $name && $parent == null) {
-            $this->layout()->addChild($vm, 'toolbarDefault');
-        } else {
-            $parent->addChild($vm, $model->getName());
-        }
-    }
+   
 
     public function getPage()
     {

@@ -20,7 +20,7 @@ class Permission extends \Max\Entity\Base
      * ID
      *
      * @ORM\Id
-     * @ORM\Column(type="integer",unique=true);
+     * @ORM\Column(type="integer");
      * @ORM\GeneratedValue(strategy="IDENTITY")
      *
      * @Max\Ui(type="id")
@@ -30,75 +30,52 @@ class Permission extends \Max\Entity\Base
     /**
      * Naziv
      *
-     * @ORM\Column(length=255)
+     * @ORM\Column(length=150, nullable=true)
      * @var string
      *
-     * @Max\I18n(label="Naziv", hint="Naziv dovoljenja", description="Naziv dovoljenja")
+     * @Max\I18n(label="Naziv", description="Naziv dovoljenja")
      * @Max\Ui(type="sifra",ident=true )
      */
     protected $name;
 
-    
     /**
      * Opis
      *
      * @ORM\Column(type="text", nullable=true)
      *
-     * @Max\I18n(label="Opis", hint="Opis dovoljenja", description="Opis dovoljenja")
+     * @Max\I18n(label="Opis", description="Opis dovoljenja")
      * @Max\Ui(type="naziv")
      */
     protected $description;
     
         /**
      * A je dovoljene vgrajeno v sistem, ali pa dodano kasneje.
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      *
      * @Max\I18n(label="Vgrajeno", hint="Dovoljene, ki pride z namestitvijo sistema")
      */
     protected $builtIn = false;
     
-
     /**
-     * @ORM\ManyToMany(targetEntity="Role", mappedBy="permissions")
+     * 
      *
      * @Max\I18n(label="Vloge", description="Vloge, ki imajo to dovoljenje")
+     * @ORM\ManyToMany(targetEntity="Aaa\Entity\Role", inversedBy="permissions")
+     * @ORM\JoinTable(
+     *     name="Role2Permission",
+     *     joinColumns={@ORM\JoinColumn(name="permission_id", referencedColumnName="id", nullable=false)},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false, unique=true)}
+     * )
      */
     protected $roles;   
 
-    /**
-     * Interno polje - uporabnik, ki je zadnji spreminjal entiteto
-     * To polje se ne vnaša. Uporabnika dobimo iz prijave v aplikacijo.
-     *
-     *  @ORM\Column(length=10,nullable=true)
-     */
-    protected $upor;
-
-    /**
-     * Interno polje - datum in ura zadnjega spreminjanja entitete
-     * To polje se ne vnaša. Podatek vzamemo iz tekočega datuma in ure.
-     *
-     * @ORM\Column(type="datetime",nullable=true)
-     * @var string
-     */
-    protected $datKnj;
-
-    public function __construct()
+  
+    public function __construct($name = '')
     {
-        $this->allRoles = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->name = $name;
         $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
-    
-    public function getAllRoles()
-    {
-        return $this->allRoles;
-    }
-
-    public function setAllRoles(\Doctrine\Common\Collections\ArrayCollection $allRoles)
-    {
-        $this->allRoles = $allRoles;
-        return $this;
-    }
     
     function getId()
     {
@@ -115,16 +92,7 @@ class Permission extends \Max\Entity\Base
         return $this->description;
     }
 
-    function getUpor()
-    {
-        return $this->upor;
-    }
-
-    function getDatKnj()
-    {
-        return $this->datKnj;
-    }
-
+   
     function setId($id)
     {
         $this->id = $id;
@@ -143,17 +111,6 @@ class Permission extends \Max\Entity\Base
         return $this;
     }
 
-    function setUpor($upor)
-    {
-        $this->upor = $upor;
-        return $this;
-    }
-
-    function setDatKnj($datKnj)
-    {
-        $this->datKnj = $datKnj;
-        return $this;
-    }
 
     public function __toString()
     {

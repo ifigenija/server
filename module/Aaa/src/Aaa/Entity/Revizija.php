@@ -15,8 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Boris Lašič <boris@max.si>
  * Ustvarjeno: 18.4.2013
  *
- * @ORM\Entity(readOnly=true)
  * @ORM\Entity(repositoryClass="Aaa\Repository\Revizije")
+ * 
  * @ORM\Table(name="revizije")
  */
 class Revizija
@@ -40,14 +40,14 @@ class Revizija
 
     /**
      * Razred objekta, ki je bil spremenjen
-     * @ORM\Column(length=100)
+     * @ORM\Column(length=100, nullable=true)
      * @var string
      */
     protected $razred;
 
     /**
      * ID objekta nad katerim se je zgodila sprememba
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @var string
      */
     protected $objectId;
@@ -62,7 +62,7 @@ class Revizija
 
     /**
      * Čas spremembe
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @var DateTime
      */
     protected $datum;
@@ -70,7 +70,7 @@ class Revizija
     /**
      * Max spremembe: upd, ins, del
      *
-     * @ORM\Column(length=3)
+     * @ORM\Column(length=3, nullable=true)
      * @var type
      */
     protected $tip;
@@ -78,7 +78,7 @@ class Revizija
     /**
      * serializirana nova vrednost objekta
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      * @var string
      */
     protected $data;

@@ -6,18 +6,16 @@
 
 namespace Max\Repository;
 
-use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\UnitOfWork;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
-use stdClass;
 use Max\Annotation\EntityMetadata;
 use Max\Entity\Base;
-use Max\Exception\NeveljavnoLookupPoljeException;
 use Max\Exception\MaxException;
 use Max\Filter\StripEntity;
 use Max\Stdlib\Hydrator\Json;
+use stdClass;
 use Zend\Paginator\Paginator as Paginator2;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use ZfcRbac\Service\AuthorizationService;
@@ -30,9 +28,9 @@ use ZfcRbac\Service\AuthorizationService;
  * @author Boris Lašič <boris@max.si>
  *         Ustvarjeno: 16.3.2013
  */
-abstract class AbstractMaxRepository
+class AbstractMaxRepository
     extends EntityRepository
-    implements PagingInterface, LookupInterface, ServiceLocatorAwareInterface
+    implements  ServiceLocatorAwareInterface
 {
 
     use \Zend\ServiceManager\ServiceLocatorAwareTrait;

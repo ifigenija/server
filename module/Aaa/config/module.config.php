@@ -8,44 +8,35 @@
 
 
 return [
-    'doctrine' => [
-        'driver' => [
-            'aaa' => [
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'apc',
-                'paths' => [
-                    __DIR__ . '/../src/Aaa/Entity'
-                ]
-            ],
-            'orm_default' => [
-                'drivers' => [
-                    'Aaa\Entity' => 'aaa'
-                ]
-            ]
-        ],
-        'authentication' => [
-            'orm_default' => [
-                'object_manager' => 'Doctrine\ORM\EntityManager',
-                'identity_class' => 'Aaa\Entity\User',
-                'identity_property' => 'username',
-                'credential_property' => 'password',
-                'credential_callable' => 'Aaa\Service\AaaService::checkPassword'
-            ]
-        ]
-    ],
     'service_manager' => [
         'factories' => [
-            'rbac_strategy' => 'Aaa\Factory\JsonStrategyFactory',
+            'rbac_strategy' => '\Aaa\Factory\JsonStrategyFactory',
             'Zend\Authentication\AuthenticationService' => 'Aaa\Factory\AuthenticationServiceFactory',
         ]
     ],
     'controllers' => [
-        'invokables' => [
-            'Aaa\User' => 'Aaa\Controller\UserController',
+        'factories' => [
+            'Aaa\User' => 'Max\Factories\RestControllerFactorie',
             'Aaa\Role' => 'Aaa\Controller\RoleController',
-            'Aaa\Rpc' => 'Aaa\Controller\RpcController',
             'Aaa\Permission' => 'Aaa\Controller\PermissionController'
+        ],
+        'invokables' => [
+            'Aaa\Rpc' => 'Aaa\Controller\RpcController',
         ]
+    ],
+    'rest_controller_config' => [
+        'Aaa\User' => [
+            'hydrator' => [
+                
+            ],
+            'lists' => [
+                'default' => [ 
+                    
+                ]
+            ],            
+        ],
+        'Aaa\Role' => [],
+        'Aaa\Permission' => [],
     ],
     'router' => [
         'routes' => [
@@ -71,44 +62,74 @@ return [
     'console' => [
         'router' => [
             'routes' => [
-                'user-reset-password' => [
+                'user-password' => [
                     'options' => [
-                        'route' => 'user resetpass <username>',
+                        'route' => 'user pass <username>',
                         'defaults' => [
-                            'controller' => 'Aaa\User',
+                            'controller' => 'Aaa\Cli',
                             'action' => 'password'
                         ]
                     ]
                 ],
-                'user-enable-disable' => [
+                'user-enable' => [
                     'options' => [
-                        'route' => 'user (enable|disable):mode <username>',
+                        'route' => 'user enable <username>',
                         'defaults' => [
-                            'controller' => 'Aaa\User',
+                            'controller' => 'Aaa\Cli',
                             'action' => 'enable'
                         ]
                     ]
                 ],
-                'user-update-cache' => [
+                'user-disable' => [
                     'options' => [
-                        'route' => 'user updateCache',
+                        'route' => 'user disable <username>',
                         'defaults' => [
-                            'controller' => 'Aaa\User',
-                            'action' => 'updateCache'
+                            'controller' => 'Aaa\Cli',
+                            'action' => 'disable'
                         ]
                     ]
-                ]
+                ],
+                'user-grant' => [
+                    'options' => [
+                        'route' => 'user grant <role>',
+                        'defaults' => [
+                            'controller' => 'Aaa\Cli',
+                            'action' => 'enable'
+                        ]
+                    ]
+                ],
+                'user-revoke' => [
+                    'options' => [
+                        'route' => 'user revoke <role>',
+                        'defaults' => [
+                            'controller' => 'Aaa\Cli',
+                            'action' => 'disable'
+                        ]
+                    ]
+                ],                
+                'user-list' => [
+                    'options' => [
+                        'route' => '(user|role):what list <name> [--role=:role] [--user=:user] ',
+                        'defaults' => [
+                            'controller' => 'Aaa\Cli',
+                            'action' => 'list'
+                        ]
+                    ]
+                ]                
             ]
         ]
     ],
     'form_elements' => [
         'invokables' => [
 // elementi
-            // forme           
+// forme           
             'Aaa-UserFieldset' => 'Aaa\Form\UserFieldset',
             'Aaa-GroupFieldset' => 'Aaa\Form\GroupFieldset',
             'Aaa-RoleFieldset' => 'Aaa\Form\RoleFieldset',
             'Aaa-PermissionFieldset' => 'Aaa\Form\PermissionFieldset'
         ]
+    ],
+    'fixtures' => [
+        __DIR__ . '../fixture'
     ]
 ];

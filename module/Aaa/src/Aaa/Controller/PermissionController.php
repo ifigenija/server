@@ -16,5 +16,22 @@ class PermissionController extends \Max\Controller\RestController
     
     protected $entityClass = "Aaa\Entity\Permission";
     
+    public function create($data)
+    {
+        return $this->notSupported();
+    }
+
+    public function delete($id)
+    {
+        return $this->notSupported();
+    }
+
+    public function update($id, $data)
+    {
+        return $this->notSupported();
+    }
+
+            
+            
     
 }

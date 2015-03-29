@@ -2,11 +2,11 @@
 
 namespace Aaa\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
+use Exception;
 use Max\Repository\AbstractMaxRepository;
-use Max\Repository\LookupInterface;
-use Max\Repository\PagingInterface;
 
 /**
  * User - uporabniki
@@ -14,13 +14,13 @@ use Max\Repository\PagingInterface;
  */
 class Users
     extends AbstractMaxRepository
-    implements LookupInterface, PagingInterface
+   
 {
 
     /**
      * default sort opcije
      *
-     * @var \Max\Config\Sort
+     * @var array
      */
     protected $sortOptions = [
         'default' => [
@@ -56,7 +56,7 @@ class Users
             $qb->setParameter('name', "%" . $srch . "%");
             $qb->setParameter('surname', "%" . $srch . "%");
         }
-        return new \DoctrineORMModule\Paginator\Adapter\DoctrinePaginator(new Paginator($qb));
+        return new DoctrinePaginator(new Paginator($qb));
     }
 
     
@@ -77,7 +77,7 @@ class Users
         $qb->from('\Aaa\Entity\User', 's');
 
 
-        $l = $qb->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        $l = $qb->getQuery()->getResult(Query::HYDRATE_ARRAY);
         $list = [];
         foreach ($l as $g) {
             if ($g['username'] === 'SYSTEM')
@@ -127,7 +127,7 @@ class Users
         if ($user) {
             $user->setEnabled($act);
         } else {
-            throw new \Exception('Ne najdem uporabnika ' . $username);
+            throw new Exception('Ne najdem uporabnika ' . $username);
         }
     }
 
@@ -142,7 +142,7 @@ class Users
             $user->setPassword($password);
             $em->flush();
         } else {
-            throw new \Exception('Ne najdem uporabnika ' . $username);
+            throw new Exception('Ne najdem uporabnika ' . $username);
         }
     }
 

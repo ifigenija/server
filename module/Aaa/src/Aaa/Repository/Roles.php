@@ -4,23 +4,22 @@ namespace Aaa\Repository;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use DoctrineORMModule\Proxy\__CG__\Aaa\Entity\Role;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
+use Aaa\Entity\Role;
 use Max\Repository\AbstractMaxRepository;
-use Max\Repository\LookupInterface;
-use Max\Repository\PagingInterface;
 
 /**
  * Role - vloge uporabnikov
  */
 class Roles
         extends AbstractMaxRepository
-        implements LookupInterface, PagingInterface
+      
 {
 
     /**
      * default sort opcije
      *
-     * @var \Max\Config\Sort
+     * @var array
      */
     protected $sortOptions = [
         'default' => [
@@ -60,7 +59,7 @@ class Roles
             $qb->Where($ex->like('lower(r.name)', ':name'));
             $qb->setParameter('name', "%" . $srch . "%");
         }
-        return new \DoctrineORMModule\Paginator\Adapter\DoctrinePaginator(new Paginator($qb));
+        return new DoctrinePaginator(new Paginator($qb));
     }
 
     /**

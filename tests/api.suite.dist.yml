@@ -1,0 +1,21 @@
+class_name: ApiTester
+modules:
+    enabled: [PhpBrowser, REST,  Db, Asserts, ApiHelper]
+    config:
+        Db:
+            dsn: 'pgsql:host=localhost;dbname=TipFunctional'
+            user: 'posl'
+            password: 'posl1234'
+            dump: 'tests/_data/DumpFunctional.sql'
+            populate: true
+            cleanup: false
+        PhpBrowser:
+            url: http://127.0.0.1:8008
+        REST:
+            url: http://127.0.0.1:8008
+env:
+    xdbg: 
+        modules:
+            config:
+                REST:
+                    xdebug_remote: netbeans-xdebug

@@ -13,7 +13,7 @@ class Simple extends \Max\Form\Filter\Prazna
 
         //Text
         $this->add([
-            'name' => 'text',
+            'name' => 'q',
             'type' => 'Zend\Form\Element\Text',
             'attributes' => [
                 'placeholder' => 'Išči...',
@@ -26,7 +26,7 @@ class Simple extends \Max\Form\Filter\Prazna
 
     public function getDefaults()
     {
-        return ['text' => ''];
+        return ['q' => ''];
     }
 
 }

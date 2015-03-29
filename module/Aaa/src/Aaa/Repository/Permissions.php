@@ -5,15 +5,14 @@ namespace Aaa\Repository;
 use Aaa\Entity\Permission;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
-use Max\Repository\LookupInterface;
-use Max\Repository\PagingInterface;
 
 /**
  * Resource - dovoljenja
  *
  */
-class Permissions extends AbstractMaxRepository implements LookupInterface, PagingInterface
+class Permissions extends AbstractMaxRepository 
 {
 
     /**
@@ -60,7 +59,7 @@ class Permissions extends AbstractMaxRepository implements LookupInterface, Pagi
             $qb->setParameter('name', "%" . $srch . "%");
             $qb->setParameter('description', "%" . $srch . "%");
         }
-        return new \DoctrineORMModule\Paginator\Adapter\DoctrinePaginator(new Paginator($qb));
+        return new DoctrinePaginator(new Paginator($qb));
     }
 
 

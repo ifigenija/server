@@ -12,12 +12,6 @@
  * file.
  */
 return [
-    'ifigenija' => [
-        'fixtures' => [
-            'module/Aaa/fixture',
-            'module/Sifrant/fixture'
-        ]
-    ],
     'service_manager' => [
         'factories' => [
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
@@ -75,4 +69,5 @@ return [
             ]
         ]
     ]
+    
 ];

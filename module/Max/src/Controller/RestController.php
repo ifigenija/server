@@ -3,14 +3,16 @@
 namespace Max\Controller;
 
 use Max\Controller\AbstractRestfulController;
-use Max\Exception\EntitetaNeObstaja;
-use Max\Exception\MaxAccessDeniedException;
+use Max\Exception\EntitetaNotFound;
+use Max\Exception\UnauthorizedException;
 use Max\Exception\MaxException;
 use Max\Form\JsonForm;
 use Max\Repository\AbstractMaxRepository;
 use Max\Stdlib\Hydrator\Json;
+use Zend\Mvc\MvcEvent;
 use Zend\Paginator\Paginator;
 use Zend\View\Model\JsonModel;
+use ZfcRbac\Service\AuthorizationService;
 
 /**
  * Kontroler za splošni cikel list / view / create / update
@@ -18,14 +20,15 @@ use Zend\View\Model\JsonModel;
  *
  */
 class RestController
-    extends AbstractRestfulController
+        extends AbstractRestfulController
 {
 
-    use ActionTrait\EntityTrait;
+    use ActionTrait\EntityTrait,
+        JsonErrorsTrait;
 
-       /**
+    /**
      *  Servis za dostop do ACL-jev
-     * @var \ZfcRbac\Service\AuthorizationService
+     * @var AuthorizationService
      */
     protected $authorization;
 
@@ -42,7 +45,6 @@ class RestController
      */
     protected $listAllIfEmptyQuery = false;
 
-    
     /**
      * Forma za validacijo entitet
      * 
@@ -70,22 +72,7 @@ class RestController
      */
     protected $hydratorOptions = [];
 
-    /**
-     * @throws Exception Brez entitete ne gre
-     */
-    public function init()
-    {
 
-        if (!class_exists($this->entityClass)) {
-            throw new MaxException('Razred entitete ni nastavljen', 'TIP-REST-002');
-        }
-
-        $this->hydr = $this->getRepository()->getJsonHydrator($this->hydratorOptions);
-
-        if (!$this->request->isGet() && !$this->form) {
-            $this->form = $this->getJsonForm();
-        }
-    }
 
     /**
      * Rest get metoda
@@ -124,18 +111,18 @@ class RestController
         $queryParams = $this->params()->fromQuery();
 
         $paginatorName = $this->params()->fromQuery('paginator', 'default');
-        
+
 
         /* @var $sr  AbstractMaxRepository */
         $sr = $this->getRepository();
         try {
-            
-           
+
+
             $perm = $this->getEntityPermission('read');
             if (!$this->isGranted($perm)) {
                 throw new MaxAccessDeniedException($perm);
             }
-            
+
             if (isset($queryParams['filter'])) {
                 $params = $queryParams['filter'];
             } else {
@@ -151,7 +138,7 @@ class RestController
                 }
                 $params = $filter->getData();
             }
-            
+
             $this->manageSort($sr, $paginatorName);
             $paginator = new Paginator($sr->getPaginator($params, $paginatorName));
             $this->setPaginatorParams($paginator);
@@ -193,16 +180,16 @@ class RestController
         $this->form->setMode('EDIT');
         $object = $sr->find($id);
         try {
-            
+
             $perm = $this->getEntityPermission('update');
             if (!$this->isGranted($perm, $object)) {
                 throw new MaxAccessDeniedException($perm, $object->id);
             }
-            
+
             if (!$object) {
                 throw new MaxException('Objekt ne obstaja', 'TIP-CRD-0001');
             }
-            
+
             $this->form->bind($object);
             $data['id'] = $id;
             $this->form->setData(['fieldset' => $data]);
@@ -272,7 +259,7 @@ class RestController
         $object = $sr->find($id);
 
         if (!$object)
-            throw new EntitetaNeObstaja('Entiteta ne obstaja', 'TIP-CRD-000X');
+            throw new \Max\Exception\EntityNotFound('Entiteta ne obstaja', 'TIP-CRD-000X');
 
         $perm = $this->getEntityPermission('delete');
         if (!$this->isGranted($perm, $object)) {
@@ -322,15 +309,22 @@ class RestController
         if ($this->request->isDelete()) {
             return 'delete';
         }
-        $translator = $this->getServiceManager()->get('translator');
-        $msg = $translator->translate('Neveljavna REST akcija');
-        throw new MaxException($msg, 'TIP-REST-001');
+        return $this->notSupported();
     }
 
-    
-        
+    /**
+     * 
+     * Vrne napako s sporočilom, da akcija ni podprta
+     * @param integer $code
+     * @return array
+     */
+    protected function notSupported($code = 980404)
+    {
+        $translator = $this->getServiceManager()->get('translator');
+        $this->addError($this->translate('Neveljavna REST akcija'), $code);
+        return $this->getErrors();
+    }
 
- 
     /**
      * Dispatch metoda
      *
@@ -339,10 +333,17 @@ class RestController
      */
     public function onDispatch(MvcEvent $e)
     {
-        $this->authorization = $this->serviceLocator->get('ZfcRbac\Service\AuthorizationService');
+        $this->auth = $this->serviceLocator->get('ZfcRbac\Service\AuthorizationService');
         $this->em = $this->serviceLocator->get('doctrine.entitymanager.orm_default');
-
-        $this->init();
+    
+        if (!class_exists($this->entityClass)) {
+            $this->addError($this->translate('Razred entitete ni nastavljen'), 920100);
+        }
+        
+        if (!$this->request->isGet() && !$this->form) {
+            $this->form = $this->getJsonForm();
+        }
+    
         return parent::onDispatch($e);
     }
 
@@ -369,7 +370,7 @@ class RestController
             return ['currentPage' => 1,
                 'totalRecords' => $c,
                 'lastPage' => 1,
-                'pageSize' => max($c,1)];
+                'pageSize' => max($c, 1)];
         }
     }
 
@@ -386,8 +387,6 @@ class RestController
         }
     }
 
-
-
     /**
      * Posreduje podatke o zahtevanem sortu v repositorij
      * Poskrbi za persistenco sort podatkov v sessionu
@@ -395,7 +394,7 @@ class RestController
      * @param AbstractMaxRepository $repository
      * @param string $paginatorName
      */
-    public function manageSort($repository, $paginatorName = 'default',  $suffix = 'sort')
+    public function manageSort($repository, $paginatorName = 'default', $suffix = 'sort')
     {
 
         if ($this->params()->fromQuery('sort_by')) {
@@ -411,4 +410,5 @@ class RestController
             $repository->setSort($field, $dir, $paginatorName);
         }
     }
+
 }

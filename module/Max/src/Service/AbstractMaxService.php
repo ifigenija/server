@@ -143,7 +143,7 @@ use \Max\Expect\ExpectTrait;
         /* @var $jobManager JobManager */
         $jobManager = $this->getServiceLocator()->get('jobmanager.service');
         /* @var $em EntityManager */
-        $em = $this->getServiceLocator()->get('doctrine.entity_manager.orm_default');
+        $em = $this->getEm();
 
         if (is_array($task)) {
             if (empty($task['task'])) {
