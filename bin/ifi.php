@@ -11,5 +11,5 @@ ini_set('xdebug.max_nesting_level', '200');
 include 'init_autoloader.php';
 
 // Run the application!
-$app = Zend\Mvc\Application::init(include 'config/entity_only.config.php');
+$app = Zend\Mvc\Application::init(include 'config/application.config.php');
 $app->run();

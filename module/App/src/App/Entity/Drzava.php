@@ -80,14 +80,14 @@ class Drzava
     protected $opomba;
 
     /**
-     * @ORM\Column(length=10, nullable=true)
+     * 
      * @Max\Exclude
      * @var string
      */
     protected $upor;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * 
      * @Max\Exclude
      * @var string
      */

@@ -14,7 +14,7 @@ use Zend\Config\Config;
  *
  * @author boris
  */
-class RolesFixture
+class IfiFixture
         extends AbstractFixture
         implements FixtureInterface, DependentFixtureInterface
 {
@@ -23,25 +23,91 @@ class RolesFixture
 
     public function load(ObjectManager $manager)
     {
+        
 
-        $this->repo = $manager->getRepository('\Aaa\Entity\Role');
-        $this->pr = $manager->getRepository('\Aaa\Entity\Permission');
-        $res = $this->getData();
+        $res = $this->getData($modules, 'Option');
         foreach ($res as $val) {
-            if ($o = $this->populateRole($val)) {
-                $manager->persist($o);
-            };
-            $manager->flush();
+            $this->populateOptions($manager, $val);
+        }
+        $manager->flush();
+
+        $res = $this->getData($modules, 'Role');
+        foreach ($res as $val) {
+            $this->populateRole($manager, $val);
+        }
+        $manager->flush();
+    }
+        $res = $this->getData($modules, 'Role');
+        foreach ($res as $val) {
+            $this->populateUser($manager, $val)) 
+        }
+        $manager->flush();
+    }
+            /**
+     * Dodajanje skupin
+     * @param \Doctrine\ORM\EntityManager $em 
+     * @param array $valarray
+     */
+    public function populateUser($em, $valarray)
+    {
+        $val = new Config($valarray);
+        $ur = $em->getRepository('\Aaa\Entity\User');
+        $rr = $em->getRepository('\Aaa\Entity\Role');
+        $o = $ur->findOneByUsername($val->username);
+        if (!$o) {
+            $o = new User;
+            $o->setId($val->id);
+            $o->setUsername($val->username);
+            $o->setEmail($val->email);
+            $o->setPassword($val->password);
+            echo "User $val->name geslo $val->password\n";
+            $o->setName($val->name);
+            $o->setSurname($val->surname);
+            $o->setEnabled(true);           
+            $o->setRoles($rr->resolveNames($val->roles));
+            $em->persist($o);
+
+            $this->addReference('user-' . $val->username, $o);
+        }
+    }
+    
+
+    public function getData($modules, $entity)
+    {
+        $data = [];
+        $file = 'module/' . $module . '/fixture/*.data.php';
+        if (file_exists('module/' . $module . '/fixture/*.data.php')) {
+            $data = array_merge($data, include $file);
+        }
+        return $data;
+    }
+
+    /**
+     * Dodajanje skupin
+     * @param string $val
+     */
+    public function populateOptions($em, $valarray)
+    {
+        $val = new Config($valarray);
+        $pr = $em->getRepository('\App\Entity\Option');
+        $o = $pr->findOneByName($val->name);
+        if (!$o) {
+            $o = new \App\Entity\Option();
+            $o->setName($val->name);
+            $o->setDescription($val->description);
+            $o->setBuiltIn($val->readOnly);
+            $o->setReadOnly($val->readOnly);
+            $o->setValue($val->value);
+            $em->persist($o);
         }
     }
 
-    public function getData()
+    public function populateRole($manager, $valarray)
     {
-        return  include __DIR__ . '/data/roles.data.php';
-    }
 
-    public function populateRole($valarray)
-    {
+        $this->repo = $manager->getRepository('\Aaa\Entity\Role');
+        $this->pr = $manager->getRepository('\Aaa\Entity\Permission');
+
         $val = new Config($valarray);
         $o = $this->repo->findOneByName($val->name);
         if (!$o) {
@@ -61,9 +127,7 @@ class RolesFixture
 
     public function getDependencies()
     {
-        return [
-            'AaaFixture\PermissionFixture'
-        ];
+        
     }
 
 }

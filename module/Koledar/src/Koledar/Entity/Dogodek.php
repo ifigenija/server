@@ -51,7 +51,7 @@ class Dogodek
     private $ime;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * 
      */
     private $prostor_id;
 
@@ -84,6 +84,12 @@ class Dogodek
      * @ORM\JoinColumn(name="dogodek_izven_id", referencedColumnName="id", unique=true)
      */
     private $dogodekIzven;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Prodaja\Entity\Prostor")
+     * @ORM\JoinColumn(name="prostor_id", referencedColumnName="id", unique=true)
+     */
+    private $prostor;
 
     /**
      * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="dogodek")

@@ -22,8 +22,10 @@ return [
         'routes' => [
             'meta' => [
                 'type' => 'Literal',
+                
                 'may_terminate' => false,
                 'options' => [
+                    'route' => '/meta',
                     'child_routes' => [
                         [
                             'type' => 'Segment',

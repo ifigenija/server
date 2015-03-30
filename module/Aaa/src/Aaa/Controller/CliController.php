@@ -3,7 +3,7 @@
 /*
 * cli vmesnik za upravljanje uorabnikov
  */
-namespace \Aaa\Controller;
+namespace Aaa\Controller;
 /**
  * Description of Cli
  *

@@ -53,4 +53,9 @@ class Uprizoritev
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Gostujoca", mappedBy="uprizoritev")
      */
     private $gostujoc;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Produkcija\Entity\Rekvizit", mappedBy="uprizoritev")
+     */
+    private $rekvizit;
 }

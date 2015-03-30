@@ -50,7 +50,7 @@ class Posta
      * Interno polje - uporabnik, ki je zadnji spreminjal entiteto
      * To polje se ne vnaša. Uporabnika dobimo iz prijave v aplikacijo.
      *
-     *  @ORM\Column(length=10, nullable=true)
+     *  
      */
     protected $upor;
 
@@ -58,7 +58,7 @@ class Posta
      * Interno polje - datum in ura zadnjega spreminjanja entitete
      * To polje se ne vnaša. Podatek vzamemo iz tekočega datuma in ure.
      *
-     * @ORM\Column(type="datetime", nullable=true)
+     * 
      * @var string
      */
     protected $datKnj;

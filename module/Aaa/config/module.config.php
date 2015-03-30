@@ -22,6 +22,7 @@ return [
         ],
         'invokables' => [
             'Aaa\Rpc' => 'Aaa\Controller\RpcController',
+            'Aaa\Cli' => 'Aaa\Controller\CliController',
         ]
     ],
     'rest_controller_config' => [
@@ -37,27 +38,6 @@ return [
         ],
         'Aaa\Role' => [],
         'Aaa\Permission' => [],
-    ],
-    'router' => [
-        'routes' => [
-            'rpc' => [
-                'child_routes' => [
-                    [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/aaa',
-                            'defaults' => [
-                                'action' => 'login',
-                                'controller' => 'Aaa\User',
-                            ],
-                            'constraints' => [
-                                'action' => 'aaa|logout'
-                            ],
-                        ]
-                    ]
-                ],
-            ]
-        ],
     ],
     'console' => [
         'router' => [
@@ -91,7 +71,7 @@ return [
                 ],
                 'user-grant' => [
                     'options' => [
-                        'route' => 'user grant <role>',
+                        'route' => 'user grant <user> <role>',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
                             'action' => 'enable'
@@ -100,7 +80,7 @@ return [
                 ],
                 'user-revoke' => [
                     'options' => [
-                        'route' => 'user revoke <role>',
+                        'route' => 'user revoke <user> <role>',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
                             'action' => 'disable'
@@ -109,7 +89,7 @@ return [
                 ],                
                 'user-list' => [
                     'options' => [
-                        'route' => '(user|role):what list <name> [--role=:role] [--user=:user] ',
+                        'route' => '(user|role):what list [<name>] [--role=<role>] [--user=<user>]',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
                             'action' => 'list'

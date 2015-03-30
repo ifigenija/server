@@ -1,0 +1,13 @@
+<?php
+$error = [
+    'success' => false,
+    'error' => [
+        'message' => $this->exception->getMessage(),
+        'code' => $this->exception->getCode(),
+        'file' => $this->exception->getFile(),
+        'lineNum' => $this->exception->getLine(),
+        'trace' => $this->exception->getTraceAsString()
+    ]
+];
+
+echo \Zend\Json\Json::encode($error);

@@ -2,14 +2,14 @@
 
 namespace Aaa\Entity;
 
-use Doctrine\ORM\Mapping as ORM,
-    Max\Annotation\Entity as Max,
-    Zend\InputFilter\Factory as InputFactory,
-    Zend\InputFilter\InputFilter,
-    Zend\InputFilter\InputFilterAwareInterface,
-    Zend\InputFilter\InputFilterInterface,
-    Doctrine\ORM\PersistentCollection,
-    Zend\Crypt\Password\Bcrypt;
+use Aaa\Repository\Users;
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Annotation\Entity as Max;
+use Max\Entity\Base;
+use Zend\Crypt\Password\Bcrypt;
+use ZfcRbac\Identity\IdentityInterface;
 
 /**
  * Entiteta za uporabnike
@@ -21,8 +21,8 @@ use Doctrine\ORM\Mapping as ORM,
  * @Max\Lookup(ident="username",label="fullName")
  */
 class User
-    extends \Max\Entity\Base
-    implements \ZfcRbac\Identity\IdentityInterface
+    extends Base
+    implements IdentityInterface
 {
 
     /**
@@ -97,15 +97,6 @@ class User
      */
     protected $enabled;
 
-    /**
-     * Api key 
-     *
-     * @ORM\Column(length=90, nullable=true);
-     *
-     * @Max\I18n(label="Api Ključ", description="Api ključ za dostop preko rest vmesnikov")
-     * @Max\Ui(type="text", group="Login")
-     */
-    protected $apiKey;
 
     /**
      * Vloge, ki ijih ima uporabnik - tukaj so vse vloge, ki jih ima uporabnik
@@ -151,7 +142,7 @@ class User
 
     public function __construct()
     {
-        $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->roles = new ArrayCollection();
 
     }
 
@@ -180,29 +171,6 @@ class User
         return $this;
     }
 
-
-
-    public function getUpor()
-    {
-        return $this->upor;
-    }
-
-    public function setUpor($upor)
-    {
-        $this->upor = $upor;
-        return $this;
-    }
-
-    public function getDatKnj()
-    {
-        return $this->datKnj;
-    }
-
-    public function setDatKnj($datKnj)
-    {
-        $this->datKnj = $datKnj;
-        return $this;
-    }
 
     public function getId()
     {
@@ -244,12 +212,10 @@ class User
         return $this;
     }
 
-    
-
     public function getEnabled()
     {
         if (isset($this->expires)) {
-            if ($this->expires < new \DateTime) {
+            if ($this->expires < new DateTime) {
                 $this->enabled = false;
             }
         }

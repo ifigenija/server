@@ -15,6 +15,7 @@ use Exception;
 use Max\Exception\UnauthException;
 use Zend\Authentication\Adapter\Http;
 use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Storage\Session;
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\Console\Request;
 use Zend\Http\Response;
@@ -45,7 +46,8 @@ Class Module
         $sm = $e->getApplication()->getServiceManager();
         $em = $sm->get('doctrine.entitymanager.orm_default');
         $auth = $sm->get('Zend\Authentication\AuthenticationService');
-
+        $auth->setStorage(new Session('ifigenija'));
+        
         // poskrbim za identiteto uporabnika 
         if ($e->getRequest() instanceof Request) {
             // handling autorizacij preko konzole
@@ -137,8 +139,8 @@ Class Module
             'Upravljanje uporabnikov',
             'user resetpass <username>' => 'Ponastavi uporabnikovo geslo',
             'user (enable|disable) <username>' => 'Omogoči/onemogoči uporabnika',
-            'user (setgroup|removegroup) <username> <group>' => 'Dodaj/odstrani uporabnika v/iz skupino(e)',
-            'user updateCache' => 'Kreira job za update uporabniškega medpomnilnika'
+            'user (grant|revoke) <username> <role>' => 'Dodaj/odstrani uporabnika v/iz skupino(e)',
+            '(user|role) list [--user=user] [--role=role]' => 'Seznam uporavnikov / vlog'
         ];
     }
 

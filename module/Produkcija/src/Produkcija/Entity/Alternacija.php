@@ -30,4 +30,10 @@ class Alternacija
      * @ORM\JoinColumn(name="sodelovanje_id", referencedColumnName="id")
      */
     private $sodelovanje;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="alternacija")
+     * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
+     */
+    private $oseba;
 }

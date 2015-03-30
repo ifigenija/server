@@ -35,13 +35,5 @@ return array(
                 'generate_proxies' => false,
             )
         ),
-    ),
-    'zenddevelopertools' => array(
-        'profiler' => array(
-            'enabled' => false,
-        ),
-        'toolbar' => array(
-            'enabled' => true,
-        )
     )
 );

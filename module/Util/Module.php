@@ -26,10 +26,16 @@ Class Module
     {
         return [
             'Zend\Loader\ClassMapAutoloader' => [
+                 'module/Max/autoload_classmap.php',
                  'module/Util/autoload_classmap.php',
                  'module/Aaa/autoload_classmap.php',
                  'module/App/autoload_classmap.php',
                  'module/Util/autoload_classmap.php',
+                 'module/Prisotnost/autoload_classmap.php',
+                 'module/Prodaja/autoload_classmap.php',
+                 'module/Produkcija/autoload_classmap.php',
+                 'module/Koledar/autoload_classmap.php',
+                 'module/Abonmaji/autoload_classmap.php',
             ]
         ];
     }

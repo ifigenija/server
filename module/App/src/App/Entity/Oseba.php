@@ -136,6 +136,11 @@ class Oseba
     protected $email = '';
 
     /**
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="oseba")
+     */
+    private $alternacija;
+
+    /**
      * Interno polje - uporabnik, ki je zadnji spreminjal entiteto
      * To polje se ne vnaša. Uporabnika dobimo iz prijave v aplikacijo.
      *

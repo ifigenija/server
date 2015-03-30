@@ -41,8 +41,6 @@ Class Module
     public function getConsoleUsage(AdapterInterface $console)
     {
         return [
-            'Pomožne operacije ',
-            'populate' => 'Vnese inicialne podatke v prazno bazo. Če se požene na polni bazi poskuša dopolniti manjkajoče vnose'
         ];
     }
 

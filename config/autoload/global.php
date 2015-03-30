@@ -48,14 +48,10 @@ return [
         'not_found_template' => 'error/404',
         'exception_template' => 'error/index',
         'template_map' => [
-            'layout/layout' => 'layout/fragment.phtml',
-            'layout/requireconfig' => 'layout/requireconfig.phtml',
-            'layout/stoposto' => 'layout/stoposto.phtml',
-            'layout/appstart' => 'layout/appstart.phtml',
-            'layout/print' => 'layout/print.phtml',
-            'error/404' => 'layout/error/404.phtml',
-            'error/403' => 'layout/error/403.phtml',
-            'error/index' => 'layout/error/index.phtml',
+            'layout/layout' => 'module/App/layout/layout.phtml',
+            'error/404' => 'module/App/layout/error/404.phtml',
+            'error/403' => 'module/App/layout/error/403.phtml',
+            'error/index' => 'module/App/layout/error/index.phtml',
         ]
     ],
     'zfc_rbac' => [

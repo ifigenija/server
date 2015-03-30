@@ -15,16 +15,27 @@ return [
             'Rest\oseba' => 'Max\Factory\RestControllerFactory',
             'Rest\posta' => 'Max\Factory\RestControllerFactory',
             'Rest\postniNaslov' => 'Max\Factory\RestControllerFactory',
-            'Rest\role' => '',
+            'Rest\role' => 'Max\Factory\RestControllerFactory',
         ],
         'invokables' => [
             'Rest\options' => 'App\Controller\OptionsRestController',
             'Rpc\app' => '\App\Controller\RpcController',
+            'App\index' => '\App\Controller\IndexController',
 
         ]
     ],
     'router' => [
         'routes' => [
+            'home' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/',
+                    'defaults' => [
+                        'controller' => 'App\index',
+                        'action' => 'index'
+                    ]
+                ],
+            ],
             'rpc' => [
                 'type' => 'Literal',
                 'options' => [
@@ -54,7 +65,7 @@ return [
                         '__NAMESPACE__' => 'Rest'
                     ],
                     'constraints' => [
-                        'entity' => '[A-Za-z]+-[A-Za-z]+',
+                        'controller' => '[A-Za-z]+',
                         'id' => '[0-9]+'
                     ]
                 ],
@@ -64,5 +75,11 @@ return [
     'form_elements' => [
         'invokables' => [
         ]
-    ]
+    ],
+    'view_manager' => [
+        'template_path_stack' => [
+            __DIR__ . '/../view',
+        ],
+    ],
+    
 ];
