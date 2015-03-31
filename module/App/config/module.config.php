@@ -60,12 +60,14 @@ return [
             'rest' => [
                 'type' => 'Segment',
                 'options' => [
-                    'route' => '/rest/:controller[/:id]',
+                    'route' => '/rest/:controller[/:view][/:id]',
                     'defaults' => [
-                        '__NAMESPACE__' => 'Rest'
+                        '__NAMESPACE__' => 'Rest',
+                        'view' => 'default'
                     ],
                     'constraints' => [
                         'controller' => '[A-Za-z]+',
+                        'view' => '[A-Za-z]+',
                         'id' => '[0-9]+'
                     ]
                 ],

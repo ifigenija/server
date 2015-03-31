@@ -9,16 +9,16 @@
 return [
     'doctrine' => [
         'driver' => [
-            'Produkcija' => [
+            'ModuleTemplate' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'apc',
                 'paths' => [
-                    __DIR__ . '/../src/Produkcija/Entity'
+                    __DIR__ . '/../src/ModuleTemplate/Entity'
                 ]
             ],
             'orm_default' => [
                 'drivers' => [
-                    'Produkcija\Entity' => 'Produkcija'
+                    'ModuleTemplate\Entity' => 'ModuleTemplate'
                 ]
             ]
         ],

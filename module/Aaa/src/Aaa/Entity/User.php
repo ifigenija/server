@@ -51,7 +51,7 @@ class User
     /**
      * Ime uporabnika (dejansko ime)
      *
-     * @ORM\Column(type="string", nullable=true)
+     * 
      *
      * @Max\I18n(label="Ime", hint="Ime uporabnika", description="Ime uporabnika")
      * @Max\Ui(group="Uporabnik", type="naziv")
@@ -61,7 +61,7 @@ class User
     /**
      * Priimek uporabnika
      *
-     * @ORM\Column(type="string", nullable=true)
+     * 
      *
      * @Max\I18n(label="Priimek", hint="Priimek uporabnika", description="Priimek uporabnika")
      * @Max\Ui(group="Uporabnik", type="naziv")
@@ -71,7 +71,7 @@ class User
     /**
      * Naslov e-pošte uporabnika
      *
-     * @ORM\Column(type="string", unique=true, nullable=false)
+     * 
      *
      * @Max\I18n(label="E-mail", hint="E-poštni naslov", description="Naslov elektronske pošte uporabnika")
      * @Max\Ui(type="email", group="Uporabnik")
@@ -137,6 +137,11 @@ class User
      * @Max\Ui(group="Zagon", type="textarea")
      */
     protected $defaultRouteParams;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Oseba", mappedBy="user")
+     */
+    private $oseba;
 
 
 

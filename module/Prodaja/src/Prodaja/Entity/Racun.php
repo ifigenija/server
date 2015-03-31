@@ -30,4 +30,16 @@ class Racun
      * @ORM\JoinColumn(name="prodaja_predstave_id", referencedColumnName="id")
      */
     private $prodajaPredstave;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Prodaja\Entity\NacinPlacina")
+     * @ORM\JoinColumn(name="nacin_placina_id", referencedColumnName="id", nullable=false)
+     */
+    private $nacinPlacina;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Prodaja\Entity\PlacilniInstrument", inversedBy="racun")
+     * @ORM\JoinColumn(name="placilni_instrument_id", referencedColumnName="id")
+     */
+    private $placilniInstrument;
 }

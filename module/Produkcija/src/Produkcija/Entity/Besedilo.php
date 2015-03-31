@@ -13,4 +13,14 @@ class Besedilo
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $naslov;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $avtor;
 }

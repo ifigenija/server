@@ -20,6 +20,11 @@ class KoprodukcijaDelitev
     private $odstotekFinanciranja;
 
     /**
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="koprodukcija")
+     */
+    private $alternacije;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Koproducent", inversedBy="koprodukcije")
      * @ORM\JoinColumn(name="koproducent_id", referencedColumnName="id", nullable=false)
      */

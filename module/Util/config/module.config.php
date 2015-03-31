@@ -43,6 +43,6 @@ return [
         ]
     ],
     'fixtures' => [
-        __DIR__ . '/../../Aaa/fixture'
+        __DIR__ . '/../fixture'
     ]
 ];

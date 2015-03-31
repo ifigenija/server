@@ -44,11 +44,63 @@ class OptionValue         extends \Max\Entity\Base
     private $option;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Aaa\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * 
+     * 
      */
     private $user;
     
     
     //put your code here
+    
+    function getId()
+    {
+        return $this->id;
+    }
+
+    function getValue()
+    {
+        return unserialize($this->value);
+    }
+
+    function getGlobal()
+    {
+        return $this->global;
+    }
+
+    function getOption()
+    {
+        return $this->option;
+    }
+
+    function getUser()
+    {
+        return $this->user;
+    }
+
+    function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    function setValue($value)
+    {
+        $this->value = serialize($value);
+    }
+
+    function setGlobal($global)
+    {
+        $this->global = $global;
+    }
+
+    function setOption($option)
+    {
+        $this->option = $option;
+    }
+
+    function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+
 }

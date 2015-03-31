@@ -238,6 +238,17 @@ use \Max\Expect\ExpectTrait;
     }
 
     /**
+     * 
+     * 
+     * @param array $options filter opcije
+     * @param string $name ime paginatorja
+     * @return \Zend\Paginator\Adapter\AdapterInterface
+     */
+    public function getPaginator(array $options, $name = "default") {
+ 
+    }
+
+    /**
      * Vrne imena paginatorjev, ki jih repozitorij podpira
      *
      * @return string

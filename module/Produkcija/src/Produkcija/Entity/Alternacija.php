@@ -36,4 +36,10 @@ class Alternacija
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      */
     private $oseba;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\KoprodukcijaDelitev", inversedBy="alternacije")
+     * @ORM\JoinColumn(name="koprodukcija_delitev_id", referencedColumnName="id")
+     */
+    private $koprodukcija;
 }

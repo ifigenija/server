@@ -8,6 +8,13 @@
 
 namespace Max\Factory;
 
+use Doctrine\ORM\EntityManager;
+use Max\Controller\RestController;
+use Zend\Config\Config;
+use Zend\Config\Reader\Yaml;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
 /**
  * Injecta Max\Controller\RestController
  *
@@ -15,37 +22,50 @@ namespace Max\Factory;
  * returns \Max\Controller\RestController
  */
 class RestControllerFactory
-        implements \Zend\ServiceManager\FactoryInterface
+        implements FactoryInterface
 {
 
-    //put your code here
-    public function createService(\Zend\ServiceManager\ServiceLocatorInterface $serviceLocator)
+
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $app \Zend\Mvc\Application */
-        $app = $serviceLocator->get('Application');
-        $e = $app->getEvent();
 
-        /* @var $em \Doctrine\ORM\EntityManager */
-        $em = $serviceLocator->get('doctrine.entityManager.orm_default');
+        
+        $parentLocator = $serviceLocator->getServiceLocator();
+        $parentLocator->get('Zend\ServiceManager\ServiceLocatorInterface');
 
+        $app = $parentLocator->get('Application');
+        /* @var $event \Zend\Mvc\MvcEvent */ 
+        $event = $app->getMvcEvent();
+        $controller = $event->getRouteMatch()->getParam('controller');
+        
+        $config = $this->loadControllerConfig($controller);
 
-        $names = $em->getConfiguration()->getMetadataDriverImpl()->getAllClassNames();
-
-
-        $cont = new \Max\Controller\RestController();
-
-        $cont->setEntityClass($entity);
-
+        $cont = new RestController();
+        $cont->setEm($parentLocator->get('doctrine.entityManager.orm_default'));
+        $cont->setAuth($parentLocator->get('ZfcRbac\Service\AuthorizationService'));
+        $cont->setConfig($config);     
+            
         return $controller;
     }
 
-    protected function resolveIntoEntityClass($em, $e)
+    /**
+     * Naloži konfiguracijo kontrollerja
+     * @param type $controller
+     */
+    protected function loadControllerConfig($controller)
     {
-        $names = $em->getConfiguration()->getMetadataDriverImpl()->getAllClassNames();
-        $name = $e->getRouteMatch()->getParam('controller');
 
-        return $names[$name];
-        
+        $configName = preg_replace('/\\*/', '.', strtolower($controller));
+
+        $glob = 'module/*/config/' . $configName . '.yml';
+        echo $glob;
+        $files = glob($glob);
+        foreach ($files as $file) {
+            $reader = new Yaml();
+            echo "$file" .PHP_EOL;
+            $data = $reader->fromFile($file);
+            return new Config($data);
+        }
     }
 
 }

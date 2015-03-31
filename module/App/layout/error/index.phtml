@@ -1,13 +1,33 @@
 <?php
+
 $error = [
     'success' => false,
     'error' => [
         'message' => $this->exception->getMessage(),
         'code' => $this->exception->getCode(),
         'file' => $this->exception->getFile(),
-        'lineNum' => $this->exception->getLine(),
-        'trace' => $this->exception->getTraceAsString()
-    ]
+        'line' => $this->exception->getLine(),
+        'trace' => explode("\n", $this->exception->getTraceAsString())
+    ],
+    'prev' => []
 ];
 
+function formatDebug(&$err, Exception $exception)
+{
+    $err['error']['prev'][] = [
+        'type' => get_class($exception),
+        'message' => $exception->getMessage(),
+        'file' => $exception->getFile(),
+        'line' => $exception->getLine()
+    ];
+    if ($e = $exception->getPrevious()) {
+        formatDebug($err, $e);
+    }
+}
+
+if ($exception->getPrevious()) {
+    formatDebug($error, $exception->getPrevious());
+}
+header('Content-type: application/json; charset=UTF-8');
 echo \Zend\Json\Json::encode($error);
+

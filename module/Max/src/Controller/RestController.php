@@ -2,9 +2,8 @@
 
 namespace Max\Controller;
 
-use Max\Controller\AbstractRestfulController;
-use Max\Exception\EntitetaNotFound;
-use Max\Exception\UnauthorizedException;
+use Zend\Mvc\Controller\AbstractRestfulController;
+use Max\Exception\EntityNotFound;
 use Max\Exception\MaxException;
 use Max\Form\JsonForm;
 use Max\Repository\AbstractMaxRepository;
@@ -23,20 +22,8 @@ class RestController
         extends AbstractRestfulController
 {
 
-    use ActionTrait\EntityTrait,
-        JsonErrorsTrait;
-
-    /**
-     *  Servis za dostop do ACL-jev
-     * @var AuthorizationService
-     */
-    protected $authorization;
-
-    /**
-     *  @var EntityManager
-
-      protected $em;
-     */
+    use Traits\EntityTrait,
+        Traits\JsonErrorsTrait;
 
     /**
      * Ali getList vrne seznam objektov če je query prazen
@@ -72,8 +59,6 @@ class RestController
      */
     protected $hydratorOptions = [];
 
-
-
     /**
      * Rest get metoda
      * @param string $id
@@ -82,10 +67,11 @@ class RestController
     public function get($id)
     {
         try {
+            $view = $this->params('view', 'default');
             $sr = $this->getRepository();
             $object = $sr->find($id);
             if ($object) {
-                $perm = $this->getEntityPermission('read');
+                $perm = $this->getEntityPermission($view);
                 if (!$this->isGranted($perm, $object)) {
                     throw new MaxAccessDeniedException($perm, $object->id);
                 }
@@ -110,7 +96,7 @@ class RestController
 
         $queryParams = $this->params()->fromQuery();
 
-        $paginatorName = $this->params()->fromQuery('paginator', 'default');
+        $paginatorName = $this->params('view', 'default');
 
 
         /* @var $sr  AbstractMaxRepository */
@@ -118,7 +104,7 @@ class RestController
         try {
 
 
-            $perm = $this->getEntityPermission('read');
+            $perm = $this->getEntityPermission($paginatorName);
             if (!$this->isGranted($perm)) {
                 throw new MaxAccessDeniedException($perm);
             }
@@ -259,7 +245,7 @@ class RestController
         $object = $sr->find($id);
 
         if (!$object)
-            throw new \Max\Exception\EntityNotFound('Entiteta ne obstaja', 'TIP-CRD-000X');
+            throw new EntityNotFound('Entiteta ne obstaja', 'TIP-CRD-000X');
 
         $perm = $this->getEntityPermission('delete');
         if (!$this->isGranted($perm, $object)) {
@@ -331,21 +317,11 @@ class RestController
      * @param MvcEvent $e
      * @return mixed
      */
-    public function onDispatch(MvcEvent $e)
-    {
-        $this->auth = $this->serviceLocator->get('ZfcRbac\Service\AuthorizationService');
-        $this->em = $this->serviceLocator->get('doctrine.entitymanager.orm_default');
-    
-        if (!class_exists($this->entityClass)) {
-            $this->addError($this->translate('Razred entitete ni nastavljen'), 920100);
-        }
-        
-        if (!$this->request->isGet() && !$this->form) {
-            $this->form = $this->getJsonForm();
-        }
-    
-        return parent::onDispatch($e);
-    }
+//    public function onDispatch(MvcEvent $e)
+//    {
+//    
+//        return parent::onDispatch($e);
+//    }
 
     /**
      * Vrne metapodatke iz paginatorja za enkodiranje v JSON
@@ -410,5 +386,22 @@ class RestController
             $repository->setSort($field, $dir, $paginatorName);
         }
     }
+
+    function getAuth()
+    {
+        return $this->auth;
+    }
+
+    function getEm()
+    {
+        return $this->em;
+    }
+
+    function setAuth(AuthorizationService $auth)
+    {
+        $this->auth = $auth;
+    }
+
+
 
 }

@@ -31,11 +31,11 @@ if (isset($this->reason) && $this->reason) {
     if (isset($this->controller) && $this->controller) {
 
         if (isset($this->controller_class) && $this->controller_class && $this->controller_class != $this->controller) {
-            $error['controllerClass'] = strintf($this->translate('resolves to %s'), $this->escapeHtml($this->controller_class));
+            $error['controllerClass'] = sprintf($this->translate('resolves to %s'), $this->escapeHtml($this->controller_class));
         }
 
         $error['controller'] = $this->escapeHtml($this->controller);
     }
 }
-
+header('Content-type: application/json; charset=UTF-8');
 echo \Zend\Json\Json::encode($error);

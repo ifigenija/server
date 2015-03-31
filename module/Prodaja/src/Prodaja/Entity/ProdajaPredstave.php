@@ -20,6 +20,11 @@ class ProdajaPredstave
     private $racun;
 
     /**
+     * @ORM\OneToMany(targetEntity="Prodaja\Entity\RazpisanSedez", mappedBy="prodajaPredstave")
+     */
+    private $razpisanSedez;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\SedezniRed", inversedBy="prodajePredstave")
      * @ORM\JoinColumn(name="sedezni_red_id", referencedColumnName="id")
      */

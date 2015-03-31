@@ -25,7 +25,7 @@ class Pogodba
     private $vrednostPredstave;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true, scale=12, precision=2)
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      */
     private $vrednostUre;
 

@@ -8,12 +8,13 @@
 
 namespace Max\Controller\Traits;
 
-use DoctrineORMModule\Options\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
 use Max\Exception\EntitetaNeObstaja;
 use Max\Exception\NepopolniParametriZaAkcijo;
 use Max\Filter\DecorateEntity;
 use Max\Filter\StripEntity;
-use ZfcRbac\Service\AuthorizationService;
+use Max\Form\ManagedForm;
 
 /**
  * Description of EntityTrait
@@ -30,8 +31,18 @@ trait EntityTrait
     protected $em;
     protected $entity;
     protected $entityClass;
-    protected $serviceName;
 
+    /**
+     *  Servis za dostop do ACL-jev
+     * @var AuthorizationService
+     */
+    protected $auth;
+
+    /**
+     * @var array
+     */
+    protected $config;
+    
     public function init()
     {
         return $this;
@@ -40,12 +51,6 @@ trait EntityTrait
     function getEntityClass()
     {
         return $this->entityClass;
-    }
-
-    function setAuthorizationService(AuthorizationService $authorizationService)
-    {
-        $this->authorizationService = $authorizatioService;
-        return $this;
     }
 
     public function getEm()
@@ -90,7 +95,7 @@ trait EntityTrait
      * kontroller kodi
      * 
      * @param string $class
-     * @return \Doctrine\ORM\EntityRepository
+     * @return EntityRepository
      */
     public function getRepository($class = null)
     {
@@ -106,7 +111,7 @@ trait EntityTrait
     /**
      * Naredi formo poljubnega razreda s pomočjo FormElementManagerja
      * @param string $class class forme
-     * @return \Max\Form\ManagedForm
+     * @return ManagedForm
      */
     public function getForm($class = null)
     {
@@ -228,7 +233,28 @@ trait EntityTrait
         return $f->filter($this->entityClass) . '-' . $action;
     }
 
+    
     abstract public function getServiceLocator();
     
-    
+    function getAuth()
+    {
+        return $this->auth;
+    }
+
+    function getConfig()
+    {
+        return $this->config;
+    }
+
+    function setAuth(AuthorizationService $auth)
+    {
+        $this->auth = $auth;
+    }
+
+    function setConfig($config)
+    {
+        $this->config = $config;
+    }
+
+
 }

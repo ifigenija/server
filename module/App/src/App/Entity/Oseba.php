@@ -47,7 +47,7 @@ class Oseba
      *
      * @var string
      *
-     * @ORM\Column(length=3, nullable=true)
+     * 
      * @Max\I18n(label="Zaporedna")
      *
      * @Max\Ui(type="sifra")
@@ -68,11 +68,16 @@ class Oseba
     protected $naziv;
 
     /**
+     * @ORM\Column(length=40, nullable=true)
+     */
+    private $funkcija;
+
+    /**
      * Opis delovnega mesta
      *
      * @var string
      *
-     * @ORM\Column(length=40, nullable=true)
+     * 
      *
      * @Max\I18n(label="Delovno mesto", description="Opis delovnega mesta")
      */
@@ -134,6 +139,12 @@ class Oseba
      * @Max\Ui(type="email",icon="fa fa-afna")
      */
     protected $email = '';
+
+    /**
+     * @ORM\OneToOne(targetEntity="Aaa\Entity\User", inversedBy="oseba")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)
+     */
+    private $user;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="oseba")

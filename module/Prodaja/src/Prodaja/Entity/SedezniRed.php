@@ -30,7 +30,12 @@ class SedezniRed
     private $prodajePredstave;
 
     /**
-     * @ORM\OneToMany(targetEntity="Prodaja\Entity\Vrsta", mappedBy="sedezniRed")
+     * @ORM\OneToMany(targetEntity="Prodaja\Entity\Sedez", mappedBy="sedezniRed")
+     */
+    private $sedez;
+
+    /**
+     * 
      */
     private $vrste;
 }

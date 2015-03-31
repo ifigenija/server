@@ -1,0 +1,35 @@
+## YAML Template.
+---
+type: rest
+entityClass: \App\Entity\Drzava
+form:
+    default: 
+        elements:
+            - sifra            
+            - name: sifraDolg
+              options: 
+                  required: true                                   
+            - isoNum
+            - isoNaziv
+            - naziv
+            - opomba
+lists:
+    default:
+        filter:
+            type: simple            
+        table: 
+            - name: sifra
+              editable: false
+              sortable: true          
+            - name: naziv
+              editable: true
+              sortable: true
+            - isoNum           
+        hydrate:
+#            byValue:
+#                - 
+#            virtual:
+#    
+#            exclude:            
+#                    
+                

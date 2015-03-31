@@ -15,7 +15,7 @@ class PostavkaRacuna
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Prodaja\Entity\ProdanSedez", mappedBy="postavkaRacuna")
+     * @ORM\OneToMany(targetEntity="Prodaja\Entity\RazpisanSedez", mappedBy="postavkaRacuna")
      */
     private $prodanSedez;
 

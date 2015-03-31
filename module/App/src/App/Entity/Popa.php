@@ -151,7 +151,7 @@ class Popa
      *
      * @var string
      *
-     * @ORM\Column(type="integer", nullable=true)
+     * 
      *
      * @Max\Ui(icon="fa fa-time",group="Komercialni pogoji")
      * @Max\I18n(label="Rok plačila", description="Dogovorjeni rok plačila za kupca")
@@ -163,7 +163,7 @@ class Popa
      *
      * @var string
      *
-     * @ORM\Column(type="integer", nullable=true)
+     * 
      *
      * @Max\Ui(icon="fa fa-time",group="Komercialni pogoji")
      * @Max\I18n(label="Rok plačila", description="Dogovorjeni rok plačila za dobavitelja")
@@ -175,7 +175,7 @@ class Popa
      *
      * @var string
      *
-     * @ORM\Column(type="integer", nullable=true)
+     * 
      * @Max\Ui(icon="fa fa-time",group="Komercialni pogoji")
      * @Max\I18n(label="Dni potrditve", description="Dogovorjeni rok v dnevih za potrditve naročil")
      */
@@ -184,7 +184,7 @@ class Popa
     /**
      * Rabat
      *
-     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=6)
+     * 
      * @Max\Ui(type="procent",group="Komercialni pogoji")
      * @Max\I18n(label="Rabat")
      * @var float
@@ -246,7 +246,7 @@ class Popa
      *
      * @var string
      *
-     * @ORM\Column(type="guid", nullable=true)
+     * 
      * @Max\Ui(targetEntity="Max\Entity\Kontaktna",type="toone",master="potnik",group="Zastopnik")
      * @Max\I18n(label="Kontaktna oseba", description="Kontaktna oseba zastopnika")
      */
@@ -257,7 +257,7 @@ class Popa
      *
      * @var string
      *
-     * @ORM\Column(length=60, nullable=true)
+     * 
      * @Max\Ui(group="Komercialni pogoji")
      * @Max\I18n(label="Izjava")
      */
