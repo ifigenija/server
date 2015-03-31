@@ -8,10 +8,9 @@
 
 namespace Max\Factory;
 
-use Doctrine\ORM\EntityManager;
 use Max\Controller\RestController;
-use Zend\Config\Config;
-use Zend\Config\Reader\Yaml;
+use Symfony\Component\Yaml\Yaml;
+use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -25,47 +24,80 @@ class RestControllerFactory
         implements FactoryInterface
 {
 
-
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
 
-        
+
         $parentLocator = $serviceLocator->getServiceLocator();
         $parentLocator->get('Zend\ServiceManager\ServiceLocatorInterface');
 
         $app = $parentLocator->get('Application');
-        /* @var $event \Zend\Mvc\MvcEvent */ 
+        /* @var $event MvcEvent */
         $event = $app->getMvcEvent();
-        $controller = $event->getRouteMatch()->getParam('controller');
-        
-        $config = $this->loadControllerConfig($controller);
+        $controller =  $event->getRouteMatch()->getParam('controller');
+        $entity =  str_replace('Rest\\', '', $controller);
 
+        $em = $parentLocator->get('doctrine.entityManager.orm_default');
+        $defaults = $this->getDefaultConfig($entity, $em);
+        $config = $this->loadControllerConfig('rest', entity, $defaults);
+        
+
+        $dt = strlen($config['type']);
+        $tip = $config['type']; 
+        if (substr($controller, 0, $dt) !== $tip ){
+        throw  new \Max\Exception\ParamsException('Napačni tip konfiga', );
+        }
+        
         $cont = new RestController();
-        $cont->setEm($parentLocator->get('doctrine.entityManager.orm_default'));
+        $cont->setEm($em);
         $cont->setAuth($parentLocator->get('ZfcRbac\Service\AuthorizationService'));
-        $cont->setConfig($config);     
-            
-        return $controller;
+        $cont->setConfig($config);
+
+        return $cont;
     }
 
     /**
      * Naloži konfiguracijo kontrollerja
      * @param type $controller
      */
-    protected function loadControllerConfig($controller)
+    protected function loadControllerConfig($type, $controller, $data = [])
     {
 
-        $configName = str_replace('Rest\\', '', $controller);
-                
-        $glob = __DIR__ . '/../../../*/config/' . $configName . '.yml';
-        echo $glob;
+        $glob = __DIR__ . "/../../../*/config/rest.$controller.yml";
         $files = glob($glob);
         foreach ($files as $file) {
             $content = file_get_contents($file);
-            $data = \Symfony\Component\Yaml\Yaml::parse($content);
-            
-            return $data;
+            $data = array_merge($data, Yaml::parse($content));
         }
+        return [];
+    }
+
+    /**
+     * Get default config 
+     * 
+     * @param string $controller
+     * @param \Doctrine\ORM\EntityManager $em 
+     */
+    protected function getDefaultConfig($controller, $em)
+    {
+        $classes = $em->getConfiguration()->getMetadataDriverImpl()->getAllClassNames();
+        $dl = strlen($controller);
+        $found = array_filter($array, function ($i) use ($controller, $dl) {
+            return substr($i, -$dl) === $controller;
+        });
+        
+        if ()
+        
+        return [
+            'entityClass' => $entity,
+            'form' => [
+                'default' => []
+            ],
+            'list' => [
+                'default' => []
+            ]
+            
+        ]
     }
 
 }

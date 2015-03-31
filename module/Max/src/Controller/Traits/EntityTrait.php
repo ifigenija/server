@@ -29,11 +29,19 @@ trait EntityTrait
      * @var EntityManager
      */
     protected $em;
-    protected $entity;
+
+    /**
+     *
+     * Razred entitete, ki jo obdelujemo z rest controllerjem.
+     * 
+     * 
+     * @var string
+     */
     protected $entityClass;
 
     /**
      *  Servis za dostop do ACL-jev
+     * 
      * @var AuthorizationService
      */
     protected $auth;
@@ -42,11 +50,6 @@ trait EntityTrait
      * @var array
      */
     protected $config;
-    
-    public function init()
-    {
-        return $this;
-    }
 
     function getEntityClass()
     {
@@ -64,29 +67,6 @@ trait EntityTrait
     public function setEm(EntityManager $em)
     {
         $this->em = $em;
-        return $this;
-    }
-
-    /**
-     * vrne kratko ime entitete, ki se uporablja v URL-jih
-     *
-     * @return string
-     */
-    public function getEntity()
-    {
-        return $this->entity;
-    }
-
-    /**
-     * Nastavi kratko ime entitete
-     *
-     * @param string $entity
-     */
-    public function setEntity($entity)
-    {
-        $this->entity = $entity;
-        $f = new DecorateEntity();
-        $this->entityClass = $f->filter($entity);
         return $this;
     }
 
@@ -233,9 +213,8 @@ trait EntityTrait
         return $f->filter($this->entityClass) . '-' . $action;
     }
 
-    
     abstract public function getServiceLocator();
-    
+
     function getAuth()
     {
         return $this->auth;
@@ -251,10 +230,21 @@ trait EntityTrait
         $this->auth = $auth;
     }
 
+    /**
+     * Nastavimo konfig iz razreda entitete
+     * 
+     * @param type $config
+     * @throws \Max\Exception\ParamsException
+     */
     function setConfig($config)
     {
         $this->config = $config;
+        
+        if (empty($config['entityClass'])) {
+            throw new \Max\Exception\ParamsException('EntityClass', 100000);
+        }
+        $this->setEntityClass($config['entityClass']);
+        
     }
-
 
 }
