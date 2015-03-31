@@ -21,8 +21,8 @@ use ZfcRbac\Identity\IdentityInterface;
  * @Max\Lookup(ident="username",label="fullName")
  */
 class User
-    extends Base
-    implements IdentityInterface
+        extends Base
+        implements IdentityInterface
 {
 
     /**
@@ -67,7 +67,6 @@ class User
      */
     protected $enabled;
 
-
     /**
      * Vloge, ki ijih ima uporabnik - tukaj so vse vloge, ki jih ima uporabnik
      * preračunane glede na članstvo v hierRoles
@@ -81,7 +80,6 @@ class User
      * 
      */
     protected $roles;
-
 
     /**
      * Veljavnost - po tem datumu se uporabnik ne more prijaviti
@@ -113,14 +111,10 @@ class User
      */
     private $oseba;
 
-
-
     public function __construct()
     {
         $this->roles = new ArrayCollection();
-
     }
-
 
     public function getName()
     {
@@ -132,8 +126,6 @@ class User
         $this->name = $name;
         return $this;
     }
-    
-    
 
     function getRoles()
     {
@@ -146,11 +138,19 @@ class User
         return $this;
     }
 
+    public function addRoles($role)
+    {
+        // pri Many2Many dodajamo na owner strani
+        $role->assignedToUser($this);
+        $this->roles[] = $role;
+        return $this;
+    }
 
     public function getId()
     {
         return $this->id;
     }
+
     public function setId($id)
     {
         $this->id = $id;
@@ -175,7 +175,6 @@ class User
         return $this;
     }
 
-        
     public function setPassword($password)
     {
         if ($password !== '') {
@@ -233,7 +232,7 @@ class User
         $this->oseba = $oseba;
     }
 
-            public function setDefaultRouteParams($defaultRouteParams)
+    public function setDefaultRouteParams($defaultRouteParams)
     {
         $this->defaultRouteParams = $defaultRouteParams;
     }
@@ -242,10 +241,10 @@ class User
     {
         return "{$this->getName()} {$this->getSurname()}";
     }
+
     public function __toString()
     {
         return $this->getFullName();
     }
-
 
 }

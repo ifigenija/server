@@ -79,6 +79,7 @@ class Role
      */
     protected $users;
 
+    private $assignedUsers = null;
 
 
     
@@ -89,6 +90,7 @@ class Role
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->permissions = new ArrayCollection();
 
     }
@@ -186,4 +188,8 @@ class Role
         return $this;
     }
 
+    public function assignedToUser($user)
+    {
+        $this->users[] = $user;
+    }
 }

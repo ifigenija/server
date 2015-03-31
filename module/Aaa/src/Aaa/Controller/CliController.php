@@ -21,7 +21,16 @@ class CliController
      */
     public function passwordAction()
     {
-        echo "pass.\n";
+        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $username = $this->params('username');
+        $password = $this->params('password');
+
+        // nastavimo novo geslo
+        $user = $em->getRepository("Aaa\Entity\User")
+                ->resetPassword($username, $password);
+
+        $em->flush();
+        echo "Uporabniku  " . $username . " zamenjano geslo." . PHP_EOL;
     }
 
     /**
@@ -31,12 +40,11 @@ class CliController
     {
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $username = $this->params('username');
-       
+
         // nastavimo na enable
         $user = $em->getRepository("Aaa\Entity\User")
-                ->enable($username,TRUE);
-        
-        
+                ->enable($username, TRUE);
+
         $em->flush();
         echo "Uporabnik  " . $username . "  enable-an." . PHP_EOL;
     }
@@ -48,11 +56,11 @@ class CliController
     {
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $username = $this->params('username');
-       
+
         // postavimo na disable 
         $user = $em->getRepository("Aaa\Entity\User")
-                ->enable($username,false);
-        
+                ->enable($username, false);
+
         $em->flush();
         echo "Uporabnik " . $username . "  disable-an." . PHP_EOL;
     }
@@ -63,7 +71,34 @@ class CliController
      */
     public function grantAction()
     {
-        echo "grant\n";
+        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $username = $this->params('username');
+        $rolename = $this->params('role');
+
+        // dodamo role uporabniku 
+        $userR = $em->getRepository("Aaa\Entity\User");
+        $user = $userR->findOneByUsername($username);
+        if (!$user) {
+            echo 'ni user -ja';
+            throw new \Exception();
+        }
+        $roleR = $em->getRepository("Aaa\Entity\Role");
+        $role = $roleR->findOneByName($rolename);
+        if (!$role) {
+            echo 'Ni role\n';
+            throw new \Exception();
+        }
+        $roles = $user->getRoles();
+
+        // z metodo contains bomo preverili, če uporabnik že ima vlogo
+        if (!$roles->contains($role)) {
+            // vloga uporabniku se ni dodeljena, zato jo dodaj:
+            $user->addRoles($role);  // dodajamo na owner strani
+            $em->flush();
+            echo "dodana vloga.\n";
+            return;
+        }
+        echo "user že ima vlogo.\n";
     }
 
     /**

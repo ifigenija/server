@@ -133,14 +133,10 @@ class Users
 
     public function resetPassword($username, $password)
     {
-
-        $em = $this->getEntityManager();
-        $rep = $em->getRepository('\Aaa\Entity\User');
-        $user = $rep->findOneBy(['username' => $username]);
+        $user = $this->findOneBy(['username' => $username]);
 
         if ($user) {
             $user->setPassword($password);
-            $em->flush();
         } else {
             throw new Exception('Ne najdem uporabnika ' . $username);
         }
