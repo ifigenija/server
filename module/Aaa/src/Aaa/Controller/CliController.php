@@ -29,7 +29,14 @@ class CliController extends \Zend\Mvc\Controller\AbstractActionController
         echo "enable\n";
     }
     
-    
+    /**
+     * Omogoči / onemogoči uporabnika
+     */
+    public function disableAction()
+    {
+        echo "dienable\n";
+    }
+        
         /**
      * Granta vlogo uporabniku uporabnika
          *

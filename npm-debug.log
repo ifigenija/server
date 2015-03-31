@@ -1,0 +1,82 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', '-g', 'install', 'gunt-cli' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose cache add [ 'gunt-cli', null ]
+5 verbose cache add name=undefined spec="gunt-cli" args=["gunt-cli",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'gunt-cli',
+6 verbose parsed url   path: 'gunt-cli',
+6 verbose parsed url   href: 'gunt-cli' }
+7 silly lockFile 3ff50da1-gunt-cli gunt-cli
+8 verbose lock gunt-cli /Users/boris/.npm/3ff50da1-gunt-cli.lock
+9 silly lockFile 3ff50da1-gunt-cli gunt-cli
+10 silly lockFile 3ff50da1-gunt-cli gunt-cli
+11 verbose addNamed [ 'gunt-cli', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile a5d8e885-gunt-cli gunt-cli@
+14 verbose lock gunt-cli@ /Users/boris/.npm/a5d8e885-gunt-cli.lock
+15 silly addNameRange { name: 'gunt-cli', range: '*', hasData: false }
+16 verbose request where is /gunt-cli
+17 verbose request registry https://registry.npmjs.org/
+18 verbose request id 9bead3914da3a73d
+19 verbose url raw /gunt-cli
+20 verbose url resolving [ 'https://registry.npmjs.org/', './gunt-cli' ]
+21 verbose url resolved https://registry.npmjs.org/gunt-cli
+22 verbose request where is https://registry.npmjs.org/gunt-cli
+23 info trying registry request attempt 1 at 08:57:58
+24 http GET https://registry.npmjs.org/gunt-cli
+25 http 404 https://registry.npmjs.org/gunt-cli
+26 verbose headers { date: 'Tue, 31 Mar 2015 06:57:59 GMT',
+26 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+26 verbose headers   'content-type': 'application/json',
+26 verbose headers   'cache-control': 'max-age=0',
+26 verbose headers   'content-length': '51',
+26 verbose headers   'accept-ranges': 'bytes',
+26 verbose headers   via: '1.1 varnish',
+26 verbose headers   age: '0',
+26 verbose headers   'x-served-by': 'cache-fra1225-FRA',
+26 verbose headers   'x-cache': 'MISS',
+26 verbose headers   'x-cache-hits': '0',
+26 verbose headers   'x-timer': 'S1427785079.170379,VS0,VE178',
+26 verbose headers   'keep-alive': 'timeout=10, max=50',
+26 verbose headers   connection: 'Keep-Alive' }
+27 silly registry.get cb [ 404,
+27 silly registry.get   { date: 'Tue, 31 Mar 2015 06:57:59 GMT',
+27 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+27 silly registry.get     'content-type': 'application/json',
+27 silly registry.get     'cache-control': 'max-age=0',
+27 silly registry.get     'content-length': '51',
+27 silly registry.get     'accept-ranges': 'bytes',
+27 silly registry.get     via: '1.1 varnish',
+27 silly registry.get     age: '0',
+27 silly registry.get     'x-served-by': 'cache-fra1225-FRA',
+27 silly registry.get     'x-cache': 'MISS',
+27 silly registry.get     'x-cache-hits': '0',
+27 silly registry.get     'x-timer': 'S1427785079.170379,VS0,VE178',
+27 silly registry.get     'keep-alive': 'timeout=10, max=50',
+27 silly registry.get     connection: 'Keep-Alive' } ]
+28 silly lockFile a5d8e885-gunt-cli gunt-cli@
+29 silly lockFile a5d8e885-gunt-cli gunt-cli@
+30 error 404 404 Not Found: gunt-cli
+30 error 404
+30 error 404 'gunt-cli' is not in the npm registry.
+30 error 404 You should bug the author to publish it
+30 error 404
+30 error 404 Note that you can also install from a
+30 error 404 tarball, folder, or http url, or git url.
+31 error System Darwin 14.1.0
+32 error command "node" "/usr/local/bin/npm" "-g" "install" "gunt-cli"
+33 error cwd /Users/boris/NetBeansProjects/ifiServer
+34 error node -v v0.10.32
+35 error npm -v 1.4.28
+36 error code E404
+37 verbose exit [ 1, true ]

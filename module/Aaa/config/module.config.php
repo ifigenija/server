@@ -44,7 +44,7 @@ return [
             'routes' => [
                 'user-password' => [
                     'options' => [
-                        'route' => 'user pass <username>',
+                        'route' => 'user resetpass <username>',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
                             'action' => 'password'
@@ -74,7 +74,7 @@ return [
                         'route' => 'user grant <user> <role>',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
-                            'action' => 'enable'
+                            'action' => 'grant'
                         ]
                     ]
                 ],
@@ -83,7 +83,7 @@ return [
                         'route' => 'user revoke <user> <role>',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
-                            'action' => 'disable'
+                            'action' => 'revoke'
                         ]
                     ]
                 ],                

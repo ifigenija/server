@@ -76,6 +76,7 @@ Class Module
         $rep = $em->getRepository('Aaa\Entity\User');
         try {
             $user = $rep->findOneByUsername($name);
+            
         } catch (Exception $e) {
             $user = null;
         }

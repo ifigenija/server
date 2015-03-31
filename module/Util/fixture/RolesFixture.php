@@ -30,27 +30,27 @@ class RolesFixture
     {
         $modules = ['Aaa', 'App'];
 
-        echo "Nalagam - opcije" .PHP_EOL;
+        echo "Nalagam - opcije" . PHP_EOL;
         $res = $this->getData($modules, 'options');
         foreach ($res as $val) {
             $this->populateOptions($manager, $val);
         }
         $manager->flush();
 
-        echo "Nalagam - dovoljenja" .PHP_EOL;
+        echo "Nalagam - dovoljenja" . PHP_EOL;
         $res = $this->getData($modules, 'permissions');
         foreach ($res as $val) {
             $this->populatePermissions($manager, $val);
         }
         $manager->flush();
-echo "Nalagam - vloge" .PHP_EOL;
+        echo "Nalagam - vloge" . PHP_EOL;
         $res = $this->getData($modules, 'roles');
         foreach ($res as $val) {
             $this->populateRole($manager, $val);
         }
         $manager->flush();
 
-        echo "Nalagam - uporabnike" .PHP_EOL;
+        echo "Nalagam - uporabnike" . PHP_EOL;
         $res = $this->getData($modules, 'users');
         foreach ($res as $val) {
             $this->populateUser($manager, $val);
@@ -160,13 +160,12 @@ echo "Nalagam - vloge" .PHP_EOL;
 
 
         $val = new Config($valarray);
-        
+
         $o = $this->pr->findOneByName($val->name);
         if (!$o) {
             $o = new Permission();
             $o->setName($val->name);
             $o->setDescription($val->description);
-            
         }
         $manager->persist($o);
         return false;

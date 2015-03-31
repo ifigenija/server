@@ -52,9 +52,9 @@ module.exports = function (grunt) {
             proxies: {
                 cmd: function () {
                     if (os.platform() === 'win32') {
-                        return 'bin\\ifi.bat orm:generate-proxies';
+                        return 'bin\\util.bat orm:generate-proxies';
                     }
-                    return  './vendor/bin/doctrine-module orm:generate-proxies';
+                    return  'php ./bin/util.php  orm:generate-proxies';
                 }
 
             },

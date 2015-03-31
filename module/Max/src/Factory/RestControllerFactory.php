@@ -55,16 +55,16 @@ class RestControllerFactory
     protected function loadControllerConfig($controller)
     {
 
-        $configName = preg_replace('/\\*/', '.', strtolower($controller));
-
-        $glob = 'module/*/config/' . $configName . '.yml';
+        $configName = str_replace('Rest\\', '', $controller);
+                
+        $glob = __DIR__ . '/../../../*/config/' . $configName . '.yml';
         echo $glob;
         $files = glob($glob);
         foreach ($files as $file) {
-            $reader = new Yaml();
-            echo "$file" .PHP_EOL;
-            $data = $reader->fromFile($file);
-            return new Config($data);
+            $content = file_get_contents($file);
+            $data = \Symfony\Component\Yaml\Yaml::parse($content);
+            
+            return $data;
         }
     }
 
