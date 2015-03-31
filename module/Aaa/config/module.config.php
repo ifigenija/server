@@ -42,7 +42,7 @@ return [
             'routes' => [
                 'user-password' => [
                     'options' => [
-                        'route' => 'user resetpass <username>',
+                        'route' => 'user resetpass <username> <password>',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
                             'action' => 'password'
@@ -69,7 +69,7 @@ return [
                 ],
                 'user-grant' => [
                     'options' => [
-                        'route' => 'user grant <user> <role>',
+                        'route' => 'user grant <username> <role>',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
                             'action' => 'grant'
@@ -78,7 +78,7 @@ return [
                 ],
                 'user-revoke' => [
                     'options' => [
-                        'route' => 'user revoke <user> <role>',
+                        'route' => 'user revoke <username> <role>',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
                             'action' => 'revoke'
@@ -87,7 +87,7 @@ return [
                 ],
                 'user-list' => [
                     'options' => [
-                        'route' => '(user|role):what list [<name>] [--role=<role>] [--user=<user>]',
+                        'route' => '(username|role):what list [<name>] [--role=<role>] [--user=<user>]',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
                             'action' => 'list'
