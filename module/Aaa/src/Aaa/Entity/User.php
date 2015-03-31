@@ -49,36 +49,6 @@ class User
     protected $username;
 
     /**
-     * Ime uporabnika (dejansko ime)
-     *
-     * 
-     *
-     * @Max\I18n(label="Ime", hint="Ime uporabnika", description="Ime uporabnika")
-     * @Max\Ui(group="Uporabnik", type="naziv")
-     */
-    protected $name;
-
-    /**
-     * Priimek uporabnika
-     *
-     * 
-     *
-     * @Max\I18n(label="Priimek", hint="Priimek uporabnika", description="Priimek uporabnika")
-     * @Max\Ui(group="Uporabnik", type="naziv")
-     */
-    protected $surname;
-
-    /**
-     * Naslov e-pošte uporabnika
-     *
-     * 
-     *
-     * @Max\I18n(label="E-mail", hint="E-poštni naslov", description="Naslov elektronske pošte uporabnika")
-     * @Max\Ui(type="email", group="Uporabnik")
-     */
-    protected $email;
-
-    /**
      * Geslo
      *
      * @ORM\Column(length=90, nullable=true)
@@ -233,57 +203,37 @@ class User
         return $this;
     }
 
-    public function getGroups()
-    {
-        return $this->groups;
-    }
-
-    public function setGroups($groups)
-    {
-        $this->groups = $groups;
-    }
-
-    public function getExpires()
+    function getExpires()
     {
         return $this->expires;
     }
 
-    public function setExpires($expires)
-    {
-        $this->expires = $expires;
-    }
-
-    public function getDefaultRoute()
+    function getDefaultRoute()
     {
         return $this->defaultRoute;
     }
 
-    public function setDefaultRoute($defaultRoute)
+    function getOseba()
+    {
+        return $this->oseba;
+    }
+
+    function setExpires($expires)
+    {
+        $this->expires = $expires;
+    }
+
+    function setDefaultRoute($defaultRoute)
     {
         $this->defaultRoute = $defaultRoute;
     }
 
-    public function getDefaultRouteParams()
+    function setOseba($oseba)
     {
-        return $this->defaultRouteParams;
+        $this->oseba = $oseba;
     }
 
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    public function getSurname()
-    {
-        return $this->surname;
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-        public function setDefaultRouteParams($defaultRouteParams)
+            public function setDefaultRouteParams($defaultRouteParams)
     {
         $this->defaultRouteParams = $defaultRouteParams;
     }
