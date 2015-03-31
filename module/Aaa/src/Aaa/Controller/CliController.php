@@ -32,15 +32,13 @@ class CliController
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $username = $this->params('username');
        
-        // poiščemo uporabnika v tabeli
-        $user = $em->getRepository("Aaa\Entity\User")
-                ->findOneBy(array('username' => $username));
-
         // nastavimo na enable
-        $user->setEnabled(TRUE); 
+        $user = $em->getRepository("Aaa\Entity\User")
+                ->enable($username,TRUE);
+        
         
         $em->flush();
-        echo "Uporabnik " . $username . "  enable-an." . PHP_EOL;
+        echo "Uporabnik  " . $username . "  enable-an." . PHP_EOL;
     }
 
     /**
@@ -51,12 +49,9 @@ class CliController
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $username = $this->params('username');
        
-        // poiščemo uporabnika v tabeli
+        // postavimo na disable 
         $user = $em->getRepository("Aaa\Entity\User")
-                ->findOneBy(array('username' => $username));
-
-        // nastavimo na disable
-        $user->setEnabled(FALSE); 
+                ->enable($username,false);
         
         $em->flush();
         echo "Uporabnik " . $username . "  disable-an." . PHP_EOL;
