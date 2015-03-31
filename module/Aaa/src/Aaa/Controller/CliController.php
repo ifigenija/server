@@ -1,26 +1,29 @@
 <?php
 
 /*
-* cli vmesnik za upravljanje uorabnikov
+ * cli vmesnik za upravljanje uorabnikov
  */
+
 namespace Aaa\Controller;
+
 /**
  * Description of Cli
  *
  * @author boris
  */
-class CliController extends \Zend\Mvc\Controller\AbstractActionController
+class CliController
+        extends \Zend\Mvc\Controller\AbstractActionController
 {
     //put your code here
-    
+
     /**
      * Reset gesla preko cli
      */
-    public function  passwordAction() {
+    public function passwordAction()
+    {
         echo "pass.\n";
     }
-    
-    
+
     /**
      * Omogoči / onemogoči uporabnika
      */
@@ -28,15 +31,18 @@ class CliController extends \Zend\Mvc\Controller\AbstractActionController
     {
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $username = $this->params('username');
-
+       
         // poiščemo uporabnika v tabeli
-        $user = $em->getRepository(Aaa\Entity\User)
-                ->findOneBy(array('username' => $name));
-        $user -> setEnable(true);      
+        $user = $em->getRepository("Aaa\Entity\User")
+                ->findOneBy(array('username' => $username));
+
+        // nastavimo na enable
+        $user->setEnabled(TRUE); 
         
-        echo "enable.\n";
+        $em->flush();
+        echo "Uporabnik " . $username . "  enable-an." . PHP_EOL;
     }
-    
+
     /**
      * Omogoči / onemogoči uporabnika
      */
@@ -44,32 +50,35 @@ class CliController extends \Zend\Mvc\Controller\AbstractActionController
     {
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $username = $this->params('username');
-
+       
         // poiščemo uporabnika v tabeli
-        $user = $em->getRepository(Aaa\Entity\User)
-                ->findOneBy(array('username' => $name));
-        $user -> setEnable(false);      
+        $user = $em->getRepository("Aaa\Entity\User")
+                ->findOneBy(array('username' => $username));
+
+        // nastavimo na disable
+        $user->setEnabled(FALSE); 
         
-        echo "disable.\n";
+        $em->flush();
+        echo "Uporabnik " . $username . "  disable-an." . PHP_EOL;
     }
-        
-        /**
+
+    /**
      * Granta vlogo uporabniku uporabnika
-         *
+     *
      */
     public function grantAction()
     {
         echo "grant\n";
     }
-    
+
     /**
      * Odstrani vlogo uporabniku 
      */
-    public function revokeAction()            {
+    public function revokeAction()
+    {
         echo "revoke\n";
     }
-    
-    
+
     /**
      * Prikaže seznam uporabnikov
      * - user list  - prikaže vse
@@ -77,10 +86,11 @@ class CliController extends \Zend\Mvc\Controller\AbstractActionController
      * - role list  - prikaže vse vloge 
      * - role list --user=user - prikaže vloge za uporabnika 
      */
-    public function listAction() {
+    public function listAction()
+    {
         echo "list\n";
     }
-    
+
     /**
      * 
      */
