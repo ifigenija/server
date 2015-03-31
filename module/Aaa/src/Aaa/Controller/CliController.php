@@ -17,7 +17,7 @@ class CliController extends \Zend\Mvc\Controller\AbstractActionController
      * Reset gesla preko cli
      */
     public function  passwordAction() {
-        echo "pass\n";
+        echo "pass.\n";
     }
     
     
@@ -26,7 +26,15 @@ class CliController extends \Zend\Mvc\Controller\AbstractActionController
      */
     public function enableAction()
     {
-        echo "enable\n";
+        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $username = $this->params('username');
+
+        // poiščemo uporabnika v tabeli
+        $user = $em->getRepository(Aaa\Entity\User)
+                ->findOneBy(array('username' => $name));
+        $user -> setEnable(true);      
+        
+        echo "enable.\n";
     }
     
     /**
@@ -34,7 +42,15 @@ class CliController extends \Zend\Mvc\Controller\AbstractActionController
      */
     public function disableAction()
     {
-        echo "dienable\n";
+        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $username = $this->params('username');
+
+        // poiščemo uporabnika v tabeli
+        $user = $em->getRepository(Aaa\Entity\User)
+                ->findOneBy(array('username' => $name));
+        $user -> setEnable(false);      
+        
+        echo "disable.\n";
     }
         
         /**

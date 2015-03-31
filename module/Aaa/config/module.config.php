@@ -28,13 +28,11 @@ return [
     'rest_controller_config' => [
         'Aaa\User' => [
             'hydrator' => [
-                
             ],
             'lists' => [
-                'default' => [ 
-                    
+                'default' => [
                 ]
-            ],            
+            ],
         ],
         'Aaa\Role' => [],
         'Aaa\Permission' => [],
@@ -86,7 +84,7 @@ return [
                             'action' => 'revoke'
                         ]
                     ]
-                ],                
+                ],
                 'user-list' => [
                     'options' => [
                         'route' => '(user|role):what list [<name>] [--role=<role>] [--user=<user>]',
@@ -95,7 +93,7 @@ return [
                             'action' => 'list'
                         ]
                     ]
-                ]                
+                ]
             ]
         ]
     ],
