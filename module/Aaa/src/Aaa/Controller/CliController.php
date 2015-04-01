@@ -75,7 +75,6 @@ class CliController
         $username = $this->params('username');
         $rolename = $this->params('role');
 
-        // dodamo role uporabniku 
         $userR = $em->getRepository("Aaa\Entity\User");
         $user = $userR->findOneByUsername($username);
         if (!$user) {
@@ -106,7 +105,34 @@ class CliController
      */
     public function revokeAction()
     {
-        echo "revoke\n";
+//         removeRoles($role)
+        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $username = $this->params('username');
+        $rolename = $this->params('role');
+
+        $userR = $em->getRepository("Aaa\Entity\User");
+        $user = $userR->findOneByUsername($username);
+        if (!$user) {
+            echo 'ni user -ja\n';
+            throw new \Exception();
+        }
+        $roleR = $em->getRepository("Aaa\Entity\Role");
+        $role = $roleR->findOneByName($rolename);
+        if (!$role) {
+            echo 'Ni role\n';
+            throw new \Exception();
+        }
+        $roles = $user->getRoles();
+
+        // z metodo contains bomo preverili, če uporabnik že ima vlogo
+        if ($roles->contains($role)) {
+            // vloga uporabniku se ni dodeljena, zato jo dodaj:
+            $user->removeRoles($role);  // odstranimo na owner strani
+            $em->flush();
+            echo "odstranjena vloga.\n";
+            return;
+        }
+        echo "uporabnik ni imel vloge.\n";
     }
 
     /**
