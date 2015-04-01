@@ -13,6 +13,9 @@ return [
         'factories' => [
         ]
     ],
+        'entity_map' => [
+        'Abonmaji\Entity\Abonma' => 'a001',
+    ],
     'controllers' => [
         'invokables' => [
             

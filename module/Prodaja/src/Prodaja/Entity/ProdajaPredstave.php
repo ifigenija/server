@@ -9,8 +9,8 @@ class ProdajaPredstave
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -23,6 +23,11 @@ class ProdajaPredstave
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\RazpisanSedez", mappedBy="prodajaPredstave")
      */
     private $razpisanSedez;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Prodaja\Entity\Rezervacija", mappedBy="prodajaPredstave")
+     */
+    private $rezervacija;
 
     /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\SedezniRed", inversedBy="prodajePredstave")

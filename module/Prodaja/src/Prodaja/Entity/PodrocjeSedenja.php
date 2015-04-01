@@ -9,8 +9,8 @@ class PodrocjeSedenja
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
 
@@ -35,7 +35,7 @@ class PodrocjeSedenja
     private $barva;
 
     /**
-     * @ORM\OneToMany(targetEntity="Prodaja\Entity\Vrsta", mappedBy="podrocjaSedenja")
+     * @ORM\OneToMany(targetEntity="Prodaja\Entity\VrstaSedezev", mappedBy="podrocjaSedenja")
      */
     private $vrsta;
 

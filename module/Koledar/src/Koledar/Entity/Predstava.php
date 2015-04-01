@@ -9,8 +9,8 @@ class Predstava         extends \Max\Entity\Base
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
 

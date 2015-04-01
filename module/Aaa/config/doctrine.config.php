@@ -31,5 +31,16 @@ return [
                 'credential_callable' => '\Aaa\Service\AaaService::checkPassword'
             ]
         ]
-    ]
+    ],
+    'entity_config' => [
+        'Aaa\Entity\User' => [
+            'key' => 'f002'
+        ],
+        'Aaa\Entity\Role' => [
+            'key' => 'f003'
+        ],
+        'Aaa\Entity\Permission' => [
+            'key' => 'f004'
+        ],
+    ],
 ];

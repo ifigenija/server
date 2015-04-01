@@ -30,10 +30,11 @@ return [
                         [
                             'type' => 'Segment',
                             'options' => [
-                                'route' => '/table[/:entity[/:table]]',
+                                'route' => '/table[/:entity[/:view]]',
                                 'defaults' => [
-                                    'action' => 'tableMeta',
+                                    'action' => 'table',
                                     'controller' => 'Max\Meta',
+                                    'view' => 'default'
                                 ],
                                 'constraints' => [
                                     'entity' => '[A-Za-z0-9-]+',
@@ -44,10 +45,25 @@ return [
                         [
                             'type' => 'Segment',
                             'options' => [
-                                'route' => '/form[/:entity[/:form]]',
+                                'route' => '/form[/:entity[/:view]]',
                                 'defaults' => [
-                                    'action' => 'formMeta',
+                                    'action' => 'form',
                                     'controller' => 'Max\Meta',
+                                     'view' => 'default'
+                                ],
+                                'constraints' => [
+                                    'entity' => '[A-Za-z0-9-]+'
+                                ],
+                            ]
+                        ],
+                        [
+                            'type' => 'Segment',
+                            'options' => [
+                                'route' => '/filter[/:entity[/:view]]',
+                                'defaults' => [
+                                    'action' => 'filter',
+                                    'controller' => 'Max\Meta',
+                                     'view' => 'default'
                                 ],
                                 'constraints' => [
                                     'entity' => '[A-Za-z0-9-]+'

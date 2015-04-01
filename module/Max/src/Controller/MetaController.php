@@ -4,7 +4,6 @@ namespace Max\Controller;
 
 use Exception;
 use Max\Exception\MaxException;
-use Max\Filter\DecorateEntity;
 use Max\Repository\AbstractMaxRepository;
 use Zend\View\Model\JsonModel;
 
@@ -12,15 +11,22 @@ use Zend\View\Model\JsonModel;
  * Kontroller, ki vrne metapodatke o paginatorju
  */
 class FormMetaController
-    extends \Max\Controller\AbstractRestfulController
+        extends AbstractActionController
 {
 
     use \Max\Controller\JsonErrorsTrait;
+
     /**
      * @var AbstractMaxRepository
      */
-    protected $sr;
+    protected $em;
 
+    /**
+     *
+     * @var \Zend\Form\FormElementManager
+     */
+    protected $auth;
+  
     /**
      *
      * @var \Zend\Form\FormElementManager
@@ -33,21 +39,14 @@ class FormMetaController
      */
     protected $form;
 
-    /**
-     *
-     * @throws MaxException
-     */
-    public function init()
-    {
-        
-    }
+  
 
     /**
      * Vrne seznam kontekstov
      *
      * @return JsonModel
      */
-    public function getList()
+    public function formAction()
     {
         $result = [];
         try {
@@ -55,19 +54,9 @@ class FormMetaController
             if (!$this->params('ent'))
                 throw new MaxException('Ni nastavljene entitete', 'TIP-MET-0001');
 
-            $this->entity = $this->params('ent');
 
-            $f = new DecorateEntity();
-            $this->entityClass = $f->filter($this->entity);
-            if (class_exists($this->entityClass)) {
-                $fm = $this->getServiceLocator()->get('FormElementManager');
-                $this->form = $fm->get('Max\Form\JsonForm');
-            } else {
-                throw new MaxException('Entiteta ali fieldset ne obstaja', 'TIP-MET-0004');
-            }
-
-            if ($this->params('fieldset')) {
-                $this->form->setFieldSet($this->params('fieldset'));
+            if ($this->params('view')) {
+                $this->form->setFieldSet($this->params('view'));
             } else {
                 $this->form->setEntity($this->entityClass);
             }
@@ -88,7 +77,7 @@ class FormMetaController
      *
      * @return JsonModel
      */
-    public function filterFormMetaAction()
+    public function filterAction()
     {
         $result = [];
         try {
@@ -118,6 +107,8 @@ class FormMetaController
             $this->addErrorFromException($e);
             return $this->getErrors();
         }
-    }
-
+ 
+        }
+        
 }
+    

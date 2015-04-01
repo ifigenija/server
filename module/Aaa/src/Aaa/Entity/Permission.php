@@ -20,8 +20,8 @@ class Permission extends \Max\Entity\Base
      * ID
      *
      * @ORM\Id
-     * @ORM\Column(type="integer");
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(type="guid");
+     * @ORM\GeneratedValue(strategy="NONE")
      *
      * @Max\Ui(type="id")
      */

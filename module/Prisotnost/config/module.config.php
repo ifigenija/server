@@ -15,8 +15,10 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-            
         ]
+    ],
+    'entity_map' => [
+        'Prisotnost\Entity\TerminStoritve' => 'b001',
     ],
     'router' => [
         'routes' => [
@@ -25,13 +27,11 @@ return [
     'console' => [
         'router' => [
             'routes' => [
-        
             ]
         ]
     ],
     'form_elements' => [
         'invokables' => [
-
         ]
     ]
 ];

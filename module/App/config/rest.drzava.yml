@@ -2,7 +2,7 @@
 ---
 type: rest
 entityClass: \App\Entity\Drzava
-form:
+forms:
     default: 
         elements:
             - sifra            

@@ -5,12 +5,12 @@ use Doctrine\ORM\Mapping AS ORM;
 /**
  * @ORM\Entity
  */
-class Vrsta
+class VrstaSedezev
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
 
@@ -39,10 +39,4 @@ class Vrsta
      * @ORM\JoinColumn(name="podrocja_sedenja_id", referencedColumnName="id", nullable=false)
      */
     private $podrocjaSedenja;
-
-    /**
-     * 
-     * 
-     */
-    private $sedezniRed;
 }

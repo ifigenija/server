@@ -8,13 +8,13 @@
 
 namespace Max\Controller\Traits;
 
-use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Max\Exception\EntitetaNeObstaja;
 use Max\Exception\NepopolniParametriZaAkcijo;
-use Max\Filter\DecorateEntity;
-use Max\Filter\StripEntity;
+use Max\Exception\ParamsException;
 use Max\Form\ManagedForm;
+use ZfcRbac\Service\AuthorizationService;
 
 /**
  * Description of EntityTrait
@@ -51,11 +51,19 @@ trait EntityTrait
      */
     protected $config;
 
+    /**
+     * Getter za entityClass
+     * @return string 
+     */
     function getEntityClass()
     {
         return $this->entityClass;
     }
 
+    /**
+     * Geter za EntityManager
+     * @return EntityManager;
+     */
     public function getEm()
     {
         if (!$this->em) {
@@ -64,6 +72,11 @@ trait EntityTrait
         return $this->em;
     }
 
+    /**
+     * Seter za entityManager 
+     * @param EntityManager $em
+     * 
+     */
     public function setEm(EntityManager $em)
     {
         $this->em = $em;
@@ -79,6 +92,8 @@ trait EntityTrait
      */
     public function getRepository($class = null)
     {
+        echo $this->getEntityClass();
+        
         if (!$class) {
             $rep = $this->getEm()->getRepository($this->getEntityClass());
         } else {
@@ -196,8 +211,6 @@ trait EntityTrait
     function setEntityClass($entityClass)
     {
         $this->entityClass = $entityClass;
-        $f = new StripEntity();
-        $this->entity = $f->filter($entityClass);
         return $this;
     }
 
@@ -209,8 +222,29 @@ trait EntityTrait
      */
     public function getEntityPermission($action)
     {
-        $f = new StripEntity();
-        return $f->filter($this->entityClass) . '-' . $action;
+        $prefix = $this->getConfig('permPrefix', $this->getDefaultPermPerfix());
+        return $prefix . '-' . $action;
+    }
+
+    /**
+     * Privzeti permission prefix je zadnji del entitete \Max\Entity\Entiteta -> entiteta
+     * return string
+     */
+    public function getDefaultPermPrefix()
+    {
+        if ($this->entityClass) {
+            $segments = split('\\', $this->entityClass);
+
+            return strtolower(array_pop($segments));
+        } else {
+            throw new ParamsException('Entity class ni nastavljen', 100003);
+        }
+    }
+
+    public function stripEntity()
+    {
+        $segments = split('\\', $this->entityClass);
+        return strtolower(array_pop($segments));
     }
 
     abstract public function getServiceLocator();
@@ -220,9 +254,21 @@ trait EntityTrait
         return $this->auth;
     }
 
-    function getConfig()
+    function getConfig($name = null, $default = null)
     {
-        return $this->config;
+        if (!$name) {
+            return $this->config;
+        } else {
+            $fields = split('.', $name);
+            foreach ($fields as $f) {
+                if (isset($config[$f])) {
+                    $config = $config[$f];
+                } else {
+                    return $default;
+                }
+            }
+            return $config;
+        }
     }
 
     function setAuth(AuthorizationService $auth)
@@ -234,17 +280,17 @@ trait EntityTrait
      * Nastavimo konfig iz razreda entitete
      * 
      * @param type $config
-     * @throws \Max\Exception\ParamsException
+     * @throws ParamsException
      */
     function setConfig($config)
     {
         $this->config = $config;
-        
+
         if (empty($config['entityClass'])) {
-            throw new \Max\Exception\ParamsException('EntityClass', 100000);
+            throw new ParamsException('EntityClass missing in controller config', 100000);
         }
-        $this->setEntityClass($config['entityClass']);
-        
+        $this->entityClass = $config['entityClass'];
+        echo "ec:" . var_dump($config['entityClass']);
     }
 
 }

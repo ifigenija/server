@@ -33,7 +33,7 @@ class Revizija
      *
      * @ORM\Id
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      * @var int
      */
     protected $id;

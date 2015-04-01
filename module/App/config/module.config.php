@@ -10,7 +10,7 @@
 return [
 
     'controllers' => [
-        'factories' => [           
+        'factories' => [
             'Rest\drzava' => 'Max\Factory\RestControllerFactory',
             'Rest\oseba' => 'Max\Factory\RestControllerFactory',
             'Rest\posta' => 'Max\Factory\RestControllerFactory',
@@ -21,9 +21,9 @@ return [
             'Rest\options' => 'App\Controller\OptionsRestController',
             'Rpc\app' => '\App\Controller\RpcController',
             'App\index' => '\App\Controller\IndexController',
-
         ]
     ],
+
     'router' => [
         'routes' => [
             'home' => [
@@ -83,5 +83,4 @@ return [
             __DIR__ . '/../view',
         ],
     ],
-    
 ];

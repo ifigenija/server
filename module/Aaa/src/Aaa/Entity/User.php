@@ -29,8 +29,8 @@ class User
      * ID uporabnika
      *
      * @ORM\Id
-     * @ORM\Column(type="integer");
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(type="guid");
+     * @ORM\GeneratedValue(strategy="NONE")
      *
      * @Max\I18n(label="ID", hint="ID uporabnika", description="ID uporabnika")
      * @Max\Ui(type="id")
@@ -112,6 +112,11 @@ class User
      * @ORM\OneToOne(targetEntity="App\Entity\Oseba", mappedBy="user")
      */
     private $oseba;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OptionValue", mappedBy="user")
+     */
+    private $optionValue;
 
 
 

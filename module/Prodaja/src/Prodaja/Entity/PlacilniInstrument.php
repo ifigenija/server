@@ -9,8 +9,8 @@ class PlacilniInstrument
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
 

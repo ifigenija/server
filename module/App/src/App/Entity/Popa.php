@@ -23,8 +23,8 @@ class Popa
      * ID klienta
      *
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
      * @var integer
      */
     protected $id;
@@ -98,7 +98,7 @@ class Popa
     /**
      * Telefonska številka
      *
-     * @ORM\Column(length=20, nullable=true)
+     * 
      * @Max\Ui(type="naziv",group="Kontaktni podatki",icon="fa fa-phone")
      * @Max\I18n(label="Telefon", description="Telefonska številka")
      * @var string
@@ -108,7 +108,7 @@ class Popa
     /**
      * Fax številka
      *
-     * @ORM\Column(length=20, nullable=true)
+     * 
      * @Max\Ui(type="naziv",group="Kontaktni podatki",icon="fa fa-phone")
      * @Max\I18n(label="Telefax", description="Fax številka")
      * @var string
@@ -218,6 +218,11 @@ class Popa
 
      */
     protected $naslovi;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Telefonska", mappedBy="popa")
+     */
+    private $telefonske;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="popa")

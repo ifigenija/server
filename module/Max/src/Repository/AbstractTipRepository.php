@@ -29,8 +29,8 @@ use ZfcRbac\Service\AuthorizationService;
  *         Ustvarjeno: 16.3.2013
  */
 class AbstractMaxRepository
-    extends EntityRepository
-    implements  ServiceLocatorAwareInterface
+        extends EntityRepository
+        implements ServiceLocatorAwareInterface
 {
 
     use \Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -89,7 +89,6 @@ use \Max\Expect\ExpectTrait;
         return $this->serviceLocator->get('ZfcRbac\Service\AuthorizationService');
     }
 
-
     /**
      * filtrira entiteto v lookup vrednost {id: xxx, ident: xxx, label: xxx}
      *
@@ -112,8 +111,6 @@ use \Max\Expect\ExpectTrait;
         return $ret;
     }
 
-
-
     /**
      * Vrne vrednost
      * @param type $name
@@ -127,8 +124,7 @@ use \Max\Expect\ExpectTrait;
         if (strpos($name, '.')) {
             list ($assoc, $field) = explode('.', $name);
             $assClass = $map->getAssociationTargetClass($assoc);
-            if ($map->hasAssociation($assoc)
-                && $map->isSingleValuedAssociation($assoc)) {
+            if ($map->hasAssociation($assoc) && $map->isSingleValuedAssociation($assoc)) {
                 $map = $this->getEntityManager()->getClassMetadata($map->getAssociationTargetClass($assoc));
             } else {
                 throw new MaxException('Asociacija ne obstaja ', 'TIP-LKP-0006');
@@ -141,9 +137,7 @@ use \Max\Expect\ExpectTrait;
         }
 
         if (!$meta->hasField($field)) {
-            if (!$meta->getMapping()->hasAssociation($field)
-                && !$meta->getMapping()->isSingleValuedAssociation($field)
-                && !$map->getReflectionClass()->hasMethod('get' . ucfirst($name))) {
+            if (!$meta->getMapping()->hasAssociation($field) && !$meta->getMapping()->isSingleValuedAssociation($field) && !$map->getReflectionClass()->hasMethod('get' . ucfirst($name))) {
                 throw new MaxException(
                 "Razrešeno polje ne obstaja ali pa je asociacija. ({$field})"
                 , 'TIP-LKP-0007');
@@ -164,8 +158,8 @@ use \Max\Expect\ExpectTrait;
             if ($cellType == 'select') {
                 if ($meta->getFieldUi($field)->opts) {
                     $opts = $this->serviceLocator
-                        ->get('options.service')
-                        ->getOptions($meta->getFieldUi($field)->opts);
+                            ->get('options.service')
+                            ->getOptions($meta->getFieldUi($field)->opts);
                     $result['optionValues'] = $opts;
                 }
             }
@@ -244,8 +238,9 @@ use \Max\Expect\ExpectTrait;
      * @param string $name ime paginatorja
      * @return \Zend\Paginator\Adapter\AdapterInterface
      */
-    public function getPaginator(array $options, $name = "default") {
- 
+    public function getPaginator(array $options, $name = "default")
+    {
+        return new \DoctrineModule\Paginator\Adapter\Collection($this->findAll());
     }
 
     /**
@@ -489,9 +484,9 @@ use \Max\Expect\ExpectTrait;
     public function getJsonHydrator($options = [])
     {
         $hydr = new Json($this->getEntityManager()
-            , $this->getEntityName()
-            , $options
-            , $this->getServiceLocator());
+                , $this->getEntityName()
+                , $options
+                , $this->getServiceLocator());
         return $hydr;
     }
 

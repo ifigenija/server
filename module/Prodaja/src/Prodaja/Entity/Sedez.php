@@ -9,8 +9,8 @@ class Sedez
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
 
@@ -50,7 +50,7 @@ class Sedez
     private $prodanSedez;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Vrsta", inversedBy="sedezi")
+     * @ORM\ManyToOne(targetEntity="Prodaja\Entity\VrstaSedezev", inversedBy="sedezi")
      * @ORM\JoinColumn(name="vrsta_id", referencedColumnName="id", nullable=false)
      */
     private $vrsta;

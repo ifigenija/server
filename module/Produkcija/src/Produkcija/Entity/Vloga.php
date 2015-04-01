@@ -9,8 +9,8 @@ class Vloga
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
 
@@ -45,4 +45,10 @@ class Vloga
      * @ORM\JoinColumn(name="alternacija_id", referencedColumnName="id")
      */
     private $privzeti;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\TipVloge", inversedBy="vloge", fetch="EAGER")
+     * @ORM\JoinColumn(name="tip_vloge_id", referencedColumnName="id")
+     */
+    private $tipVloge;
 }

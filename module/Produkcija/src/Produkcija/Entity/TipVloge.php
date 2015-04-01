@@ -1,11 +1,11 @@
 <?php
-namespace Prodaja\Entity;
+namespace Produkcija\Entity;
 use Doctrine\ORM\Mapping AS ORM;
 
 /**
  * @ORM\Entity
  */
-class Prostor
+class TipVloge
 {
     /**
      * @ORM\Id
@@ -15,22 +15,27 @@ class Prostor
     private $id;
 
     /**
-     * @ORM\Column(type="string", unique=true, nullable=false)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $ime;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $jePrizorisce;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $kapaciteta;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $opis;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $dovoliPrekrivanje;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $maxPrekrivanj;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Vloga", mappedBy="tipVloge", fetch="EXTRA_LAZY")
+     */
+    private $vloge;
 }

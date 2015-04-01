@@ -22,6 +22,7 @@ class Posta
      *
      * @ORM\Id
      * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
      * @var string
      */
     protected $id;

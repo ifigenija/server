@@ -21,7 +21,8 @@ class PostniNaslov
      * ID naslova
      *
      * @ORM\Id
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
      * @var integer
      *
      * @Max\I18n(label="Id", hint="ID naslova", description="ID poštnega naslova")

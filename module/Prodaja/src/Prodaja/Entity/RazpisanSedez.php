@@ -9,8 +9,8 @@ class RazpisanSedez
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
 
@@ -36,4 +36,10 @@ class RazpisanSedez
      * @ORM\JoinColumn(name="prodaja_predstave_id", referencedColumnName="id")
      */
     private $prodajaPredstave;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Rezervacija", inversedBy="razpisaniSedezi")
+     * @ORM\JoinColumn(name="rezervacija_id", referencedColumnName="id")
+     */
+    private $rezervacija;
 }

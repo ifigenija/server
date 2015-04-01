@@ -15,7 +15,6 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-            
         ]
     ],
     'router' => [
@@ -25,13 +24,11 @@ return [
     'console' => [
         'router' => [
             'routes' => [
-        
             ]
         ]
     ],
     'form_elements' => [
         'invokables' => [
-
         ]
     ]
 ];

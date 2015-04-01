@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM,
     Max\Annotation\Entity as Max;
 
 /**
- * @ORM\Entity(repositoryClass="\App\Repository\Kontaktne")
+ * @ORM\Entity(repositoryClass="\App\Repository\Osebe")
  * @ORM\Table(name="kose")
  *
  * @Max\I18n(label="Kontaktna oseba",plural="Kontaktne osebe")
@@ -20,7 +20,8 @@ class Oseba
      * ID kontaktne osebe
      *
      * @ORM\Id
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
      * @var string
      *
      * @Max\I18n(label="ID", description="ID kontaktne osebe")
@@ -88,7 +89,7 @@ class Oseba
      *
      * @var string
      *
-     * @ORM\Column(length=20, nullable=true)
+     * 
      *
      * @Max\I18n(label="Telefonska številka")
      * @Max\Ui(icon="fa fa-phone")
@@ -100,7 +101,7 @@ class Oseba
      *
      * @var string
      *
-     * @ORM\Column(length=20, nullable=true)
+     * 
      *
      * @Max\I18n(label="Fax")
      * @Max\Ui(icon="fa fa-inbox")
@@ -112,7 +113,7 @@ class Oseba
      *
      * @var string
      *
-     * @ORM\Column(length=20, nullable=true)
+     * 
      *
      * @Max\I18n(label="Mobilna številka")
      * @Max\Ui(icon="fa fa-mobile-phone")
@@ -145,6 +146,11 @@ class Oseba
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Telefonska", mappedBy="oseba")
+     */
+    private $telefonske;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="oseba")

@@ -19,8 +19,8 @@ class OptionValue         extends \Max\Entity\Base
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $id;
 
@@ -46,7 +46,8 @@ class OptionValue         extends \Max\Entity\Base
     /**
      * 
      * 
-     */
+     @ORM\ManyToOne(targetEntity="Aaa\Entity\User", inversedBy="optionValue")
+     @ORM\JoinColumn(name="user_id", referencedColumnName="id")*/
     private $user;
     
     

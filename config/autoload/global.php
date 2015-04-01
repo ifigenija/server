@@ -15,7 +15,8 @@ return [
     'service_manager' => [
         'factories' => [
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
-            'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
+            'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+            'Zend\Session\Config\ConfigInterface' => 'Zend\Session\Service\SessionConfigFactory'
         ]
     ],
     'translator' => [
@@ -64,6 +65,8 @@ return [
                 'role_name_property' => 'name'
             ]
         ]
-    ]
-    
+    ],
+    'session_config' => array(
+        'savePath' => 'data'
+    ),
 ];

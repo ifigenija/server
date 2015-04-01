@@ -8,6 +8,7 @@
 
 namespace Util;
 
+use App\EntityEvents\PrePersistListener;
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\Mvc\MvcEvent;
@@ -42,7 +43,13 @@ Class Module
 
     public function onBootstrap(MvcEvent $e)
     {
-
+        $eventManager = $e->getApplication()->getEventManager();        
+        
+        $sm = $e->getApplication()->getServiceManager();
+        $em = $sm->get('doctrine.entitymanager.orm_default');
+        $evm = $em->getEventManager();
+        $config = $sm->get('Config');        
+        $evm->addEventSubscriber(new PrePersistListener($config['entity_config']));
         
     }
 

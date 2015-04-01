@@ -21,8 +21,8 @@ class Role
 
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer");
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(type="guid");
+     * @ORM\GeneratedValue(strategy="NONE")
      *
      * @Max\I18n(label="ID", hint="ID vloge", description="ID vloge")
      * @Max\Ui(type="id")
