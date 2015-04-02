@@ -46,7 +46,7 @@ class RevisionsListener
     private $identity;
 
     /**
-     * @var \Max\Annotation\EntityMetadataFactory
+     * @var \Max\Ann\EntityMetadataFactory
      */
     private $metaFactory;
 
@@ -344,10 +344,16 @@ class RevisionsListener
         return is_object($obj) && $obj instanceof \Doctrine\ORM\PersistentCollection;
     }
 
+    protected function isEntityTracked($entityClass)
+    {
+        $ann = $this->metaFactory->factory($entityClass);
+        return $ann->getTracking()->log;
+    }
+
     protected function isFieldTracked($entityClass, $field)
     {
         $ann = $this->metaFactory->factory($entityClass);
-        return $ann->getFieldRevizija($field)->log;
+        return $ann->getFieldTracking($field)->log;
     }
 
     protected function isCollectionTracked($collection)
@@ -366,7 +372,7 @@ class RevisionsListener
     {
         if (!$entity instanceof \Max\Entity\Base) {
             $class = get_class($entity);
-            throw new \Max\Exception\MaxException("Entiteta '$class' mora dedovati '\\Max\\Entity\\Base'", 'TIP-REV-0001');
+            throw new \Max\Exception\MaxException("Entiteta '$class' mora dedovati '\\Max\\Entity\\Base'", 100077);
         }
     }
 

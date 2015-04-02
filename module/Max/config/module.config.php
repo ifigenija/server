@@ -10,7 +10,7 @@
 return [
     'service_manager' => [
         'invokables' => [
-            'entity.metadata.factory' => '\Max\Annotation\EntityMetadataFactory'
+            'entity.metadata.factory' => '\Max\Ann\EntityMetadataFactory'
         ]
     ],
     'controllers' => [

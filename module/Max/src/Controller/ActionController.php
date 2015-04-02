@@ -3,7 +3,7 @@
 namespace Max\Controller;
 
 use Doctrine\ORM\EntityManager;
-use Max\Annotation\EntityMetadata;
+use Max\Ann\EntityMetadata;
 use Max\Entity\Base;
 use Max\Navigation\BaseToolbar;
 use Max\Repository\AbstractMaxRepository;

@@ -19,7 +19,7 @@ class RevizijaDataStrategy implements StrategyInterface, ServiceLocatorAwareInte
     protected $em;
     
     /**
-     * @var Max\Annotation\EntityMetadata
+     * @var Max\Ann\EntityMetadata
      */
     protected $ann;
     

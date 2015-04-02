@@ -35,7 +35,6 @@ class RestControllerFactory
         $entity = $this->getEntityName($locator);        
         $config = $this->loadControllerConfig('rest', $entity, $locator);
 
-        var_dump($config);
         $cont = new RestController();
         $cont->setEm($locator->get('doctrine.entitymanager.orm_default'));
         $cont->setAuth($locator->get('ZfcRbac\Service\AuthorizationService'));

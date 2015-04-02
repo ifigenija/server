@@ -3,10 +3,19 @@
 return [
 
     [
+        'name' => 'beri-vse',
+        'description' => 'Polni dostop do vsega v aplikaciji.',
+        'permissions' => []
+    ],
+    [
         'name' => 'administrator-dostopov',
         'description' => 'Uporavljanje uporabnikov, skupin, vlog in dovoljenj.',
-        'children' => [],
         'permissions' => []
+    ],
+    [
+        'name' => 'anonimous',
+        'description' => 'Vloga za javne - neavtenticirane uporabnike',
+        'permissions' => ['drzava-default', 'popa-default']
     ],
     [
         'name' => 'ifi-vse',
@@ -14,11 +23,5 @@ return [
         'children' => [],
         'permissions' => []
     ],
-    [
-        'name' => 'vfs-admin',
-        'description' => 'Omogoča polni dostop do naloženih dokumentov in datotek',
-        'children' => [
-        ],
-        'permissions' => []
-    ]
+   
 ];

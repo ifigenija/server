@@ -3,7 +3,7 @@
 namespace Aaa\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Max\Annotation\Entity as Max;
+use Max\Ann\Entity as Max;
 
 /**
  * Entiteta Dovoljenja za dostop

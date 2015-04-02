@@ -8,19 +8,8 @@
 
 namespace Aaa;
 
-use Aaa\EntityEvents\RevisionsListener;
-use Aaa\Resolver\DoctrineResolver;
-use Doctrine\ORM\EntityManager;
-use Exception;
-use Max\Exception\UnauthException;
-use Zend\Authentication\Adapter\Http;
-use Zend\Authentication\AuthenticationService;
-use Zend\Authentication\Storage\Session;
 use Zend\Console\Adapter\AdapterInterface;
-use Zend\Console\Request;
-use Zend\Http\Response;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
-use Zend\Mvc\MvcEvent;
 
 Class Module
         implements ConsoleUsageProviderInterface

@@ -6,7 +6,7 @@
 
 namespace Aaa\Entity;
 
-use Max\Annotation\Entity as Max;
+use Max\Ann\Entity as Max;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

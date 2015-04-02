@@ -3,7 +3,7 @@
 /**
  * (copyleft) Licenca
  */
-namespace Max\Annotation\Entity;
+namespace Max\Ann\Entity;
 /**
  * Anotacija, ki pomeni, da se element ne daje na forme
  *

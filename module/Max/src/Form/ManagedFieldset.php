@@ -4,7 +4,7 @@ namespace Max\Form;
 
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
-use Max\Annotation\EntityMetadata;
+use Max\Ann\EntityMetadata;
 use Max\Exception\BrezMetapodatkovPaNeGre;
 use Max\Exception\MaxException;
 use Max\Form\FormModeInterface;
@@ -115,7 +115,7 @@ class ManagedFieldset
     /**
      * getter za metadata factory
      *
-     * @return Max\Annotation\EntityMetadataFactory;
+     * @return Max\Ann\EntityMetadataFactory;
      */
     public function getMf()
     {

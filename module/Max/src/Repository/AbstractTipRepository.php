@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\UnitOfWork;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
-use Max\Annotation\EntityMetadata;
+use Max\Ann\EntityMetadata;
 use Max\Entity\Base;
 use Max\Exception\MaxException;
 use Max\Filter\StripEntity;
@@ -69,7 +69,7 @@ use \Max\Expect\ExpectTrait;
 
     /**
      *
-     * @return \Max\Annotation\EntityMetadata;
+     * @return \Max\Ann\EntityMetadata;
      */
     public function getMeta()
     {

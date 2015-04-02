@@ -18,6 +18,15 @@ class Module
     {
         return include __DIR__ . '/config/module.config.php';
     }
+    
+    /**
+     * 
+     */
+    public function onBootstrap() {
+               // dodaj driver za anotacije
+        AnnotationRegistry::registerAutoloadNamespace('Max\Ann\Entity', __DIR__ . '/src');
+ 
+    }
 
     public function getAutoloaderConfig()
     {

@@ -2,12 +2,11 @@
 
 namespace Aaa\Entity;
 
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Rbac\Role\RoleInterface;
-use Max\Annotation\Entity as Max;
+use Max\Ann\Entity as Max;
 
 /**
  * @ORM\Entity(repositoryClass="Aaa\Repository\Roles")
@@ -15,8 +14,8 @@ use Max\Annotation\Entity as Max;
  * @Max\I18n(label="Vloga",plural="Vloge",description="Uporabnik mora imeti vloge za dostop do delov aplikacije")
  */
 class Role
-    extends \Max\Entity\Base
-    implements RoleInterface
+        extends \Max\Entity\Base
+        implements RoleInterface
 {
 
     /**
@@ -53,17 +52,15 @@ class Role
      */
     protected $builtIn = false;
 
-
     /**
      * 
      * 
      *
      * @Max\I18n(label="Dovoljenja", hint="Dovoljenja")
      * @Max\Ui(group="Dovoljenja")
-     * @ORM\ManyToMany(targetEntity="Aaa\Entity\Permission", mappedBy="roles")
+     * @ORM\ManyToMany(targetEntity="Aaa\Entity\Permission", mappedBy="roles", indexBy="name")
      */
     protected $permissions;
-
 
     /**
      * 
@@ -79,27 +76,19 @@ class Role
      */
     protected $users;
 
-
-
-    
-    
     /**
      * Init the Doctrine collection
      */
     public function __construct()
     {
-        $this->children = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->permissions = new ArrayCollection();
-
     }
 
-    
     public function getName()
     {
         return $this->name;
     }
-
-
 
     public function getId()
     {
@@ -122,8 +111,6 @@ class Role
         $this->name = (string) $name;
     }
 
-
-
     /**
      * {@inheritDoc}
      */
@@ -131,10 +118,8 @@ class Role
     {
 // This can be a performance problem if your role has a lot of permissions. Please refer
 // to the cookbook to an elegant way to solve this issue
-
         return isset($this->permissions[(string) $permission]);
     }
-
 
     function getPermissions()
     {
@@ -186,4 +171,16 @@ class Role
         return $this;
     }
 
+    public function assignedToUser($user)
+    {
+        $this->users[] = $user;
+    }
+
+    public function unassignedToUser($user)
+    {
+        // userja odstranimo iz array-a
+        if (in_array($user, $this->users)) {
+            unset($this->users[array_search($user, $this->users)]);
+        }
+    }
 }

@@ -1,7 +1,7 @@
 ## YAML Template.
 ---
 type: rest
-entityClass: \App\Entity\Drzava
+entityClass: App\Entity\Drzava
 forms:
     default: 
         elements:
@@ -17,14 +17,7 @@ lists:
     default:
         filter:
             type: simple            
-        table: 
-            - name: sifra
-              editable: false
-              sortable: true          
-            - name: naziv
-              editable: true
-              sortable: true
-            - isoNum           
+        sort:           
         hydrate:
 #            byValue:
 #                - 

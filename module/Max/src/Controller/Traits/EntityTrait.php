@@ -108,29 +108,19 @@ trait EntityTrait
      * @param string $class class forme
      * @return ManagedForm
      */
-    public function getForm($class = null)
+    public function getForm($config = null)
     {
+        if (is_string($config)) {
+            
+        }
         $formManager = $this->serviceLocator->get('FormElementManager');
+        $formManager = $this->serviceLocator->get('FormElementManager');
+        
+        if (isset($config['type'])) {
         $form = $formManager->get($class);
         return $form;
-    }
-
-    /**
-     * Vrne nastavljeno, ali pa naredi privzeto formo 
-     * za entiteto razreda $class
-     * 
-     * @param string $class razred entitete
-     * @return \Max\Form\EntityForm
-     */
-    public function getEntityForm($class = null)
-    {
-
-        $formManager = $this->serviceLocator->get('FormElementManager');
-        $form = $formManager->get('EntityForm');
-        if (!$class) {
-            return $form->setEntity($this->getEntityClass());
         } else {
-            return $form->setEntity($class);
+            
         }
     }
 
@@ -161,16 +151,16 @@ trait EntityTrait
      * @return string
      * @throws NepopolniParametriZaAkcijo
      */
-    public function getEntityId($param = 'id', $optional = false)
+    public function getFromRouteOrQuery($param = 'id', $optional = false)
     {
-        $id = $this->params()->fromRoute($param, null);
+        $id = $this->params($param, null);
         if (!$id) {
             $id = $this->params()->fromQuery($param, null);
         }
         if (!($optional || $id)) {
             $translator = $this->getServiceLocator()->get('translator');
             $msg = sprintf($translator->translate('Parameter %s je obvezen'), $param);
-            throw new NepopolniParametriZaAkcijo($msg, 'TIP-CRD-0001');
+            throw new NepopolniParametriZaAkcijo($msg, 100004);
         }
         return $id;
     }
@@ -187,7 +177,7 @@ trait EntityTrait
      */
     public function loadEntity($class = null, $param = 'id', $optional = false)
     {
-        $id = $this->getEntityId($param, $optional);
+        $id = $this->getParamFromAny($param, $optional);
         if (!$id && $optional) {
             return null;
         }
@@ -197,7 +187,7 @@ trait EntityTrait
         if (!$object && !$optional) {
             $translator = $this->getServiceLocator()->get('translator');
             $msg = sprintf($translator->translate('Entiteta z id (%s) ne obstaja v %s'), $id, $sr->getClassName());
-            throw new EntitetaNeObstaja($msg, 'TIP-CRD-0002');
+            throw new EntitetaNeObstaja($msg, 100097);
         }
 
         return $object;
@@ -222,7 +212,7 @@ trait EntityTrait
      */
     public function getEntityPermission($action)
     {
-        $prefix = $this->getConfig('permPrefix', $this->getDefaultPermPerfix());
+        $prefix = $this->getConfig('permPrefix', $this->getDefaultPermPrefix());
         return $prefix . '-' . $action;
     }
 
@@ -232,8 +222,9 @@ trait EntityTrait
      */
     public function getDefaultPermPrefix()
     {
+        
         if ($this->entityClass) {
-            $segments = split('\\', $this->entityClass);
+            $segments = explode('\\', $this->entityClass);
 
             return strtolower(array_pop($segments));
         } else {
@@ -243,7 +234,7 @@ trait EntityTrait
 
     public function stripEntity()
     {
-        $segments = split('\\', $this->entityClass);
+        $segments = explode('\\', $this->entityClass);
         return strtolower(array_pop($segments));
     }
 
@@ -259,7 +250,7 @@ trait EntityTrait
         if (!$name) {
             return $this->config;
         } else {
-            $fields = split('.', $name);
+            $fields = explode('.', $name);
             foreach ($fields as $f) {
                 if (isset($config[$f])) {
                     $config = $config[$f];
@@ -271,15 +262,22 @@ trait EntityTrait
         }
     }
 
+    /**
+     * 
+     * 
+     * @param AuthorizationService $auth
+     * @return self
+     */
     function setAuth(AuthorizationService $auth)
     {
         $this->auth = $auth;
+        return $this;
     }
 
     /**
      * Nastavimo konfig iz razreda entitete
      * 
-     * @param type $config
+     * @param array $config
      * @throws ParamsException
      */
     function setConfig($config)
@@ -289,8 +287,8 @@ trait EntityTrait
         if (empty($config['entityClass'])) {
             throw new ParamsException('EntityClass missing in controller config', 100000);
         }
-        $this->entityClass = $config['entityClass'];
-        echo "ec:" . var_dump($config['entityClass']);
+        $this->entityClass = $config['entityClass'];  
+        return $this;
     }
 
 }

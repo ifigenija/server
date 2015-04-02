@@ -3,7 +3,7 @@
 namespace Max\Controller\Traits;
 
 use Exception;
-use Max\Annotation\EntityMetadata;
+use Max\Ann\EntityMetadata;
 use Zend\Console\Response;
 use Zend\Form\Fieldset;
 use Zend\Json\Json;

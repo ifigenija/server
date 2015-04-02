@@ -3,7 +3,7 @@
 /**
  * (copyleft) Licenca
  */
-namespace Max\Annotation\Entity;
+namespace Max\Ann\Entity;
 /**
  * Služi za anotacijo entitet in njihovih polj. Nastavimo lahko labele, hinte, description plural
  * @Annotation

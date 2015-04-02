@@ -16,7 +16,7 @@ use Exception;
 use Max\Exception\UnauthException;
 use Zend\Authentication\Adapter\Http;
 use Zend\Authentication\AuthenticationService;
-use Zend\Cache\Storage\Adapter\Session;
+use Zend\Authentication\Storage\Session;
 use Zend\Console\Request;
 use Zend\EventManager\EventInterface;
 use Zend\Http\Response;
@@ -59,7 +59,7 @@ class Module
         $sm = $e->getApplication()->getServiceManager();
         $em = $sm->get('doctrine.entitymanager.orm_default');
         $auth = $sm->get('Zend\Authentication\AuthenticationService');
-        $auth->setStorage(new Session('ifigenija'));
+        $auth->setStorage(new Session('tralla'));
         
         // poskrbim za identiteto uporabnika 
         if ($e->getRequest() instanceof Request) {
@@ -87,11 +87,9 @@ class Module
      */
     public function setIdentity($name, AuthenticationService $authService, EntityManager $em)
     {
-
         $rep = $em->getRepository('Aaa\Entity\User');
         try {
-            $user = $rep->findOneByUsername($name);
-            
+            $user = $rep->findOneByUsername($name);            
         } catch (Exception $e) {
             $user = null;
         }

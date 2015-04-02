@@ -23,6 +23,7 @@ class RestController
 {
 
     use Traits\EntityTrait,
+        \Max\Expect\ExpectTrait,
         Traits\JsonErrorsTrait;
 
     /**
@@ -66,19 +67,19 @@ class RestController
      */
     public function get($id)
     {
+        $view = $this->params('view', 'default');
+        $this->isApiEnabled('get', $view);
         try {
-            $view = $this->params('view', 'default');
+            
             $sr = $this->getRepository();
             $object = $sr->find($id);
             if ($object) {
-                $perm = $this->getEntityPermission($view);
-                if (!$this->isGranted($perm, $object)) {
-                    throw new MaxAccessDeniedException($perm, $object->id);
-                }
+                $perm = $this->getApiPermission('read', $view);
+                $this->expect($this->isGranted($perm, $object), $this->translate('Api dostop zavrnjen'), 100099);
                 $data = $this->hydr->extract($object);
                 return new JsonModel($data);
             } else {
-                $this->addError('Ni entitete z id-jem', 'TIP-CRD-000X', 'warning');
+                $this->addError('Ni entitete z id-jem', 100098, 'warning');
             }
             return $this->getErrors();
         } catch (\Exception $e) {
@@ -94,29 +95,22 @@ class RestController
     public function getList()
     {
 
-        $queryParams = $this->params()->fromQuery();
+        $listName = $this->params('view', 'default');
 
-        $paginatorName = $this->params('view', 'default');
-
-
+        $this->isApiEnabled('list', $listName);
         /* @var $sr  AbstractMaxRepository */
         $sr = $this->getRepository();
+        $trnsl = $this->getTranslator();
+
         try {
 
+            $perm = $this->getApiPermission('list', $listName);
+            $this->expect($this->isGranted($perm), $trnsl->translate('Api dostop zavrnjen'), 100012);
 
-            $perm = $this->getEntityPermission($paginatorName);
-            if (!$this->isGranted($perm)) {
-                throw new MaxAccessDeniedException($perm);
-            }
 
-            if (isset($queryParams['filter'])) {
-                $params = $queryParams['filter'];
-            } else {
-                $params = $queryParams;
-            }
-
+            $filter = $this->buildFilterForm($this->getConfig('list.' . $listName));
             if ($this->filterFormName) {
-                $filter = $this->getForm($this->filterFormName);
+                $params = $this->params()->fromQuery();
                 $filter->setData($params);
                 if (!$filter->isValid()) {
                     $this->addFormMessages($filter);
@@ -125,17 +119,17 @@ class RestController
                 $params = $filter->getData();
             }
 
-            $this->manageSort($sr, $paginatorName);
-            $paginator = new Paginator($sr->getPaginator($params, $paginatorName));
+            $this->manageSort($sr, $listName);
+            $paginator = new Paginator($sr->getPaginator($params, $listName));
             $this->setPaginatorParams($paginator);
             $jsonList = [];
 
-            $filter = method_exists($sr, 'jsonFilter');
+            $filter = $this->getConfig("lists.$listName.jsonFilter");
             foreach ($paginator as $object) {
 
                 $array = $this->hydr->extract($object);
                 if ($filter) {
-                    $jsonList[] = $sr->jsonFilter($array, $paginatorName);
+                    $jsonList[] = $sr->jsonFilter($array, $listName);
                 } else {
                     $jsonList[] = $array;
                 }
@@ -143,7 +137,7 @@ class RestController
             }
 
             return new JsonModel([
-                'state' => array_merge($sr->getSortJson($paginatorName), $this->getPaginatorArray($paginator)),
+                'state' => array_merge($sr->getSortJson($listName), $this->getPaginatorArray($paginator)),
                 'data' => $jsonList,
             ]);
         } catch (\Exception $e) {
@@ -160,20 +154,22 @@ class RestController
      */
     public function update($id, $data)
     {
+        $view = $this->params('view', 'default');
+        // preverim, če je api spoloh omogočen         
+        $this->isApiEnabled('update');
+
         /* @var $sr  AbstractMaxRepository */
         $sr = $this->getRepository();
+        $trnsl = $this->getTranslator();
 
         $this->form->setMode('EDIT');
         $object = $sr->find($id);
         try {
-
             $perm = $this->getEntityPermission('update');
-            if (!$this->isGranted($perm, $object)) {
-                throw new MaxAccessDeniedException($perm, $object->id);
-            }
+            $this->expect($this->isGranted($perm, $object), $trnsl->translate('Dostop do api zavrnjen.'));
 
             if (!$object) {
-                throw new MaxException('Objekt ne obstaja', 'TIP-CRD-0001');
+                throw new MaxException($trnsl->translate('Objekt ne obstaja'), 100100);
             }
 
             $this->form->bind($object);
@@ -205,16 +201,15 @@ class RestController
      */
     public function create($data)
     {
+        $this->isApiEnabled('create');
         try {
             $object = new $this->entityClass;
             $perm = $this->getEntityPermission('create');
-            if (!$this->isGranted($perm, $object)) {
-                throw new MaxAccessDeniedException($perm, null);
-            }
+            $this->expect($this->isGranted($perm, $object), "Api access denied", 100008);
 
             $this->form->setMode('NEW');
             $this->form->bind($object);
-            $this->form->setData(['fieldset' => $data]);
+            $this->form->setData($data);
 
             if ($this->form->isValid()) {
                 /* @var $sr  AbstractMaxRepository */
@@ -240,12 +235,15 @@ class RestController
      */
     public function delete($id)
     {
+        
+        
         /* @var $sr  AbstractMaxRepository */
         $sr = $this->getRepository();
         $object = $sr->find($id);
 
-        if (!$object)
-            throw new EntityNotFound('Entiteta ne obstaja', 'TIP-CRD-000X');
+        if (!$object) {
+            throw new EntityNotFound($trnsl->translate('Entiteta ne obstaja'), 100009);
+        }
 
         $perm = $this->getEntityPermission('delete');
         if (!$this->isGranted($perm, $object)) {
@@ -256,46 +254,25 @@ class RestController
             try {
                 $sr->delete($object);
                 $this->em->flush();
-                $this->addError('Uspešno brisano.', 'info');
+                $this->addError($trnsl->translate('Uspešno brisano.'), 'info');
                 return $this->getErrors('200');
             } catch (\Exception $exc) {
                 $this->addErrorFromException($exc);
-                $this->addError('Brisanje ni uspelo! ');
+                $this->addError($trnsl->translate('Brisanje ni uspelo!'));
             }
         } else {
             try {
                 $this->em->remove($object);
                 $this->em->flush();
-                $this->addError('Uspešno brisano.', 'info');
+                $this->addError($trnsl->translate('Uspešno brisano.'), 'info');
                 return $this->getErrors('200');
             } catch (\Exception $exc) {
                 $this->addErrorFromException($exc);
-                $this->addError('Brisanje ni uspelo! ');
+                $this->addError($trnsl->translate('Brisanje ni uspelo!'));
             }
         }
 
         return $this->getErrors();
-    }
-
-    public function getAction()
-    {
-        if ($this->request->isGet()) {
-            if ($this->params('id')) {
-                return 'get';
-            } else {
-                return 'getList';
-            }
-        }
-        if ($this->request->isPost()) {
-            return 'create';
-        }
-        if ($this->request->isPut()) {
-            return 'update';
-        }
-        if ($this->request->isDelete()) {
-            return 'delete';
-        }
-        return $this->notSupported();
     }
 
     /**
@@ -311,18 +288,7 @@ class RestController
         return $this->getErrors();
     }
 
-    /**
-     * Dispatch metoda
-     *
-     * @param MvcEvent $e
-     * @return mixed
-     */
-//    public function onDispatch(MvcEvent $e)
-//    {
-//    
-//        return parent::onDispatch($e);
-//    }
-
+    
     /**
      * Vrne metapodatke iz paginatorja za enkodiranje v JSON
      *
@@ -368,9 +334,9 @@ class RestController
      * Poskrbi za persistenco sort podatkov v sessionu
      *
      * @param AbstractMaxRepository $repository
-     * @param string $paginatorName
+     * @param string $listName
      */
-    public function manageSort($repository, $paginatorName = 'default', $suffix = 'sort')
+    public function manageSort($repository, $listName = 'default', $suffix = 'sort')
     {
 
         if ($this->params()->fromQuery('sort_by')) {
@@ -383,25 +349,39 @@ class RestController
                 else
                     $dir = 'ASC';
             }
-            $repository->setSort($field, $dir, $paginatorName);
+            $repository->setSort($field, $dir, $listName);
         }
     }
 
-    function getAuth()
-    {
-        return $this->auth;
+    /**
+     * Preveri ali je posamezna metoda za konkretni 
+     * API omogočena ali ne.
+     * 
+     * @param string $method
+     * @param string $view
+     */
+    public function isApiEnabled($method, $view = null) {
+        
+        $globalyDisabled = $this->getConfig('disabledMethods', []);
+                
+        if (in_array($method, ['get', 'create', 'delete', 'update'])) {
+            $viewDisabled = $this->getConfig("forms.$view.disabledMethods", []);
+        } else {
+            $viewDisabled = $this->getConfig("lists.$view.disabledMethods", []);
+        }
+
+        $disabled = array_merge($globalyDisabled, $viewDisabled);
+        
+        $this->expect(!in_array($method, $disabled), "$method disabled");
+        
     }
-
-    function getEm()
+    
+    
+    public function buildFilterForm($config)
     {
-        return $this->em;
+        $fm = $this->getForm();
+        $this->form = new JsonForm();
+        $this->form->setConfig($config);
     }
-
-    function setAuth(AuthorizationService $auth)
-    {
-        $this->auth = $auth;
-    }
-
-
 
 }

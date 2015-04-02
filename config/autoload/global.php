@@ -55,17 +55,6 @@ return [
             'error/index' => 'module/App/layout/error/index.phtml',
         ]
     ],
-    'zfc_rbac' => [
-        'protection_policy' => \ZfcRbac\Guard\GuardInterface::POLICY_ALLOW,
-        'guest_role' => 'guest',
-        'role_provider' => [
-            'ZfcRbac\Role\ObjectRepositoryRoleProvider' => [
-                'object_manager' => 'doctrine.entitymanager.orm_default',
-                'class_name' => 'Aaa\Entity\Role',
-                'role_name_property' => 'name'
-            ]
-        ]
-    ],
     'session_config' => array(
         'savePath' => 'data'
     ),

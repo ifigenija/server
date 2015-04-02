@@ -23,7 +23,6 @@ return [
             'App\index' => '\App\Controller\IndexController',
         ]
     ],
-
     'router' => [
         'routes' => [
             'home' => [
@@ -63,7 +62,8 @@ return [
                     'route' => '/rest/:controller[/:view][/:id]',
                     'defaults' => [
                         '__NAMESPACE__' => 'Rest',
-                        'view' => 'default'
+                        'view' => 'default',
+                        'action' => null
                     ],
                     'constraints' => [
                         'controller' => '[A-Za-z]+',
@@ -82,5 +82,19 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
+        'strategies' => [
+            'ViewJsonStrategy'
+        ],
+    ],
+    'zfc_rbac' => [
+        'protection_policy' => \ZfcRbac\Guard\GuardInterface::POLICY_ALLOW,
+        'guest_role' => 'anonymous',
+        'role_provider' => [
+            'ZfcRbac\Role\ObjectRepositoryRoleProvider' => [
+                'object_manager' => 'doctrine.entitymanager.orm_default',
+                'class_name' => 'Aaa\Entity\Role',
+                'role_name_property' => 'name'
+            ]
+        ]
     ],
 ];

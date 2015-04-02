@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
-    Max\Annotation\Entity as Max;
+    Max\Ann\Entity as Max;
 
 /**
  * Entiteta za poslovne partnerje

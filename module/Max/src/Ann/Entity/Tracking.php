@@ -4,16 +4,16 @@
  * (copyleft) Licenca
  */
 
-namespace Max\Annotation\Entity;
+namespace Max\Ann\Entity;
 
 /**
  * Revizja služi za nastavitve logiranje revizij specifičnih fieldov
  *
  * @Annotation
- * @Target("PROPERTY")
+ * @Target({"PROPERTY", "CLASS"})
  * Ustvarjeno: 13.9.2013
  */
-class Revizija {
+class Tracking {
 
     /**
      * Ali RevisionListener zapisuje spremembe tega fielda

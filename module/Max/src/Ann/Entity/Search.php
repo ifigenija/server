@@ -4,7 +4,7 @@
  * (copyleft) Licenca
  */
 
-namespace Max\Annotation\Entity;
+namespace Max\Ann\Entity;
 
 /**
  * Lookup definicije  za entity anotacije
@@ -14,15 +14,15 @@ namespace Max\Annotation\Entity;
  * @author Boris Lašič <boris@max.si>
  * Ustvarjeno: 16.3.2013
  */
-class Lookup
+class Search
 {
 
     /**
      * Identifikacijsko polje
      *
-     * @var string
+     * @var array<\Max\Ann\Entity\Filter>
      */
-    public $ident = 'sifra';
+    public $filters = 'sifra';
 
     /**
      * Opisno polje za lookup

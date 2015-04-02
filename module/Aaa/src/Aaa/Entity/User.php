@@ -6,7 +6,7 @@ use Aaa\Repository\Users;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Max\Annotation\Entity as Max;
+use Max\Ann\Entity as Max;
 use Max\Entity\Base;
 use Zend\Crypt\Password\Bcrypt;
 use ZfcRbac\Identity\IdentityInterface;
@@ -21,8 +21,8 @@ use ZfcRbac\Identity\IdentityInterface;
  * @Max\Lookup(ident="username",label="fullName")
  */
 class User
-    extends Base
-    implements IdentityInterface
+        extends Base
+        implements IdentityInterface
 {
 
     /**
@@ -67,7 +67,6 @@ class User
      */
     protected $enabled;
 
-
     /**
      * Vloge, ki ijih ima uporabnik - tukaj so vse vloge, ki jih ima uporabnik
      * preračunane glede na članstvo v hierRoles
@@ -81,7 +80,6 @@ class User
      * 
      */
     protected $roles;
-
 
     /**
      * Veljavnost - po tem datumu se uporabnik ne more prijaviti
@@ -123,64 +121,39 @@ class User
     public function __construct()
     {
         $this->roles = new ArrayCollection();
-
     }
 
-
-    public function getName()
+    public function addRoles($role)
     {
-        return $this->name;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-    
-    
-
-    function getRoles()
-    {
-        return $this->roles;
-    }
-
-    function setRoles($roles)
-    {
-        $this->roles = $roles;
+        // pri Many2Many dodajamo (kličemo metodo) na owner strani
+        $role->assignedToUser($this);
+        $this->roles[] = $role;
         return $this;
     }
 
+    public function removeRoles($role)
+    {
+        // pri Many2Many odstranimo (kličemo metodo) na owner strani
+        $role->unassignedToUser($this);
+        // odstranimi role-o iz array-a
+        if (in_array($role, $this->roles)) {
+            unset($this->roles[array_search($role, $this->roles)]);
+        }
+        return $this;
+    }
 
     public function getId()
     {
         return $this->id;
     }
+
     public function setId($id)
     {
         $this->id = $id;
         return $this;
     }
 
-    public function setUsername($username)
-    {
-        $this->username = $username;
-        return $this;
-    }
 
-    public function setSurname($surname)
-    {
-        $this->surname = $surname;
-        return $this;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-        
     public function setPassword($password)
     {
         if ($password !== '') {
@@ -202,10 +175,26 @@ class User
         return $this->enabled;
     }
 
-    public function setEnabled($enabled)
+
+
+    public function getFullName()
     {
-        $this->enabled = $enabled;
-        return $this;
+        return "{$this->getName()} {$this->getSurname()}";
+    }
+
+    public function __toString()
+    {
+        return $this->getFullName();
+    }
+    
+    function getUsername()
+    {
+        return $this->username;
+    }
+
+    function getRoles()
+    {
+        return $this->roles;
     }
 
     function getExpires()
@@ -218,9 +207,29 @@ class User
         return $this->defaultRoute;
     }
 
+    function getDefaultRouteParams()
+    {
+        return $this->defaultRouteParams;
+    }
+
     function getOseba()
     {
         return $this->oseba;
+    }
+
+    function getOptionValue()
+    {
+        return $this->optionValue;
+    }
+
+    function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     function setExpires($expires)
@@ -233,23 +242,19 @@ class User
         $this->defaultRoute = $defaultRoute;
     }
 
+    function setDefaultRouteParams($defaultRouteParams)
+    {
+        $this->defaultRouteParams = $defaultRouteParams;
+    }
+
     function setOseba($oseba)
     {
         $this->oseba = $oseba;
     }
 
-            public function setDefaultRouteParams($defaultRouteParams)
+    function setOptionValue($optionValue)
     {
-        $this->defaultRouteParams = $defaultRouteParams;
-    }
-
-    public function getFullName()
-    {
-        return "{$this->getName()} {$this->getSurname()}";
-    }
-    public function __toString()
-    {
-        return $this->getFullName();
+        $this->optionValue = $optionValue;
     }
 
 

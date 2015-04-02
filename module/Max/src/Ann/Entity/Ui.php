@@ -4,7 +4,7 @@
  * (copyleft) Licenca
  */
 
-namespace Max\Annotation\Entity;
+namespace Max\Ann\Entity;
 
 /**
  * Ui služi na pomoč pri prebiranju form elementa. V Ui lahko specificiramo tip elementa

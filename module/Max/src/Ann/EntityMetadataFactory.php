@@ -4,17 +4,17 @@
  * (copyleft) Licenca
  */
 
-namespace Max\Annotation;
+namespace Max\Ann;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\ORM\EntityManager;
 use ReflectionClass;
-use Max\Annotation\Entity\Acl;
-use Max\Annotation\Entity\I18n;
-use Max\Annotation\Entity\Lookup;
-use Max\Annotation\Entity\Ui;
-use Max\Annotation\Entity\Revizija;
+use Max\Ann\Entity\Acl;
+use Max\Ann\Entity\I18n;
+use Max\Ann\Entity\Lookup;
+use Max\Ann\Entity\Ui;
+use Max\Ann\Entity\Revizija;
 use Zend\Filter\Word\CamelCaseToSeparator;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -22,7 +22,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 /**
  *  Naredi novi metadata objekt entity class.
  * uporablja se kot service 'metadata.factory'
- * Proizvaja nove \Max\Annotation\EntityMetadata objekte z metodo factory($entityName)
+ * Proizvaja nove \Max\Ann\EntityMetadata objekte z metodo factory($entityName)
  *
  * @author Boris Lašič <boris@max.si>
  * Ustvarjeno: 18.3.2013
@@ -97,7 +97,7 @@ class EntityMetadataFactory
      * Vrne specializiran Metadata objekt z naloženimi anotacijami
      *
      * @param string $entityName
-     * @return Max\Annotation\EntityMetadata
+     * @return Max\Ann\EntityMetadata
      */
     public function factory($entityName)
     {
@@ -105,12 +105,12 @@ class EntityMetadataFactory
         $this->em = $this->serviceLocator->get('\Doctrine\ORM\EntityManager');
         $cache = $this->em->getConfiguration()->getMetadataCacheImpl();
         // pogledam, če so metapodatki v cache
-        if ($cache->contains('tip-anotacije-' . $entityName)) {
-            $meta = $cache->fetch('tip-anotacije-' . $entityName);
+        if ($cache->contains('ifi-meta' . $entityName)) {
+            $meta = $cache->fetch('ifi-meta-' . $entityName);
         } else {
 
             // pripravim novo instanco Metadata v katero polnim annotacije
-            $meta = new \Max\Annotation\EntityMetadata($entityName);
+            $meta = new \Max\Ann\EntityMetadata($entityName);
 
             // naložim metapodatke iz anotacij
             $reader = new AnnotationReader();
@@ -137,8 +137,8 @@ class EntityMetadataFactory
                     if ($ann instanceof Acl) {
                         $meta->setAcl($ann);
                     }
-                    if ($ann instanceof Revizija) {
-                        $meta->setRevizija($ann);
+                    if ($ann instanceof Tracking) {
+                        $meta->setTracking($ann);
                     }
                 }
             }
@@ -159,7 +159,7 @@ class EntityMetadataFactory
                         if ($ann instanceof Ui) {
                             $ui[$p->name] = $ann;
                         }
-                        if ($ann instanceof Revizija) {
+                        if ($ann instanceof Tracking) {
                             $rev[$p->name] = $ann;
                         }
                     }
@@ -170,17 +170,17 @@ class EntityMetadataFactory
                         $i18n[$p->name] = $i;
                     }
 
-                    if (!isset($rev[$p->name])) {
-                        $rev[$p->name] = new Revizija();
+                    if (!isset($trc[$p->name])) {
+                        $trc[$p->name] = new Tracking();
                     }
                 }
             }
             $meta->setPropertyI18n($i18n);
             $meta->setPropertyUi($ui);
-            $meta->setPropertyRevizija($rev);
+            $meta->setPropertyRevizija($trc);
 
             // shranim metapodatke za entiteto v cache
-            $cache->save('tip-anotacije-' . $entityName, $meta);
+            $cache->save('ifi-meta-' . $entityName, $meta);
         }
         return $meta;
     }
@@ -189,9 +189,9 @@ class EntityMetadataFactory
      * Napolni metapodatke z privzetimi vrednosmi, kjer jih ni na anotacijah
      *
      * @param type $entityName
-     * @param \Max\Annotation\Entity $meta
+     * @param \Max\Ann\Entity $meta
      */
-    public function getClassDefaults(\Max\Annotation\EntityMetadata $meta)
+    public function getClassDefaults(\Max\Ann\EntityMetadata $meta)
     {
 
         // če ni i18n na entiteti

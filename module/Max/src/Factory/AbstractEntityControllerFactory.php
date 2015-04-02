@@ -47,6 +47,13 @@ abstract class AbstractEntityControllerFactory
         }
         return $data;
     }
+    
+    /**
+     * 
+     */
+    protected function getEntityMeta() {
+        
+    }
 
     /**
      * Get default config 

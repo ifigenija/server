@@ -7,7 +7,7 @@ return [
         'description' => 'Šifranti - Poslovni partner - Briši'
     ],
     [
-        'name' => 'Popa-read',
+        'name' => 'Popa-defaut',
         'description' => 'Šifranti - Poslovni partner - Beri'
     ],
     [
@@ -27,7 +27,7 @@ return [
         'description' => 'Šifranti - Pošta - Briši'
     ],
     [
-        'name' => 'Posta-read',
+        'name' => 'Posta-defaut',
         'description' => 'Šifranti - Pošta - Beri'
     ],
     [
@@ -47,7 +47,7 @@ return [
         'description' => 'Šifranti - Poštni naslov - Briši'
     ],
     [
-        'name' => 'PostniNaslov-read',
+        'name' => 'PostniNaslov-defaut',
         'description' => 'Šifranti - Poštni naslov - Beri'
     ],
     [
@@ -58,9 +58,6 @@ return [
         'name' => 'PostniNaslov-create',
         'description' => 'Šifranti - Poštni naslov - Ustvari'
     ],
-    [
-        'name' => 'PostniNaslov-lookup',
-        'description' => 'Šifranti - Poštni naslov - Iskanje'
-    ]
+
  
 ];
