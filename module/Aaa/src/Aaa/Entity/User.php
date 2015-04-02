@@ -161,6 +161,25 @@ class User
         return $this;
     }
 
+    public function addRoles($role)
+    {
+        // pri Many2Many dodajamo (kličemo metodo) na owner strani
+        $role->assignedToUser($this);
+        $this->roles[] = $role;
+        return $this;
+    }
+
+    public function removeRoles($role)
+    {
+        // pri Many2Many odstranimo (kličemo metodo) na owner strani
+        $role->unassignedToUser($this);
+        // odstranimi role-o iz array-a
+        if (in_array($role, $this->roles)) {
+            unset($this->roles[array_search($role, $this->roles)]);
+        }
+        return $this;
+    }
+
     public function getId()
     {
         return $this->id;
@@ -264,11 +283,6 @@ class User
     function setDefaultRouteParams($defaultRouteParams)
     {
         $this->defaultRouteParams = $defaultRouteParams;
-    }
-
-    function setOseba($oseba)
-    {
-        $this->oseba = $oseba;
     }
 
 }
