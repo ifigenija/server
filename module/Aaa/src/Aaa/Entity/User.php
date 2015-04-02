@@ -252,10 +252,7 @@ class User
         $this->oseba = $oseba;
     }
 
-    function setOptionValue($optionValue)
-    {
-        $this->optionValue = $optionValue;
+
+
+
     }
-
-
-}

@@ -75,6 +75,7 @@ class Role
      * 
      */
     protected $users;
+    private $assignedUsers = null;
 
     /**
      * Init the Doctrine collection
