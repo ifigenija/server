@@ -4,17 +4,19 @@
  * (copyleft) Licenca
  */
 
-namespace Max\Ann;
+namespace Max\Factory;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\ORM\EntityManager;
-use ReflectionClass;
 use Max\Ann\Entity\Acl;
 use Max\Ann\Entity\I18n;
-use Max\Ann\Entity\Lookup;
+use Max\Ann\Entity\Id;
+use Max\Ann\Entity\Search;
+use Max\Ann\Entity\Tracking;
 use Max\Ann\Entity\Ui;
-use Max\Ann\Entity\Revizija;
+use Max\Ann\EntityMetadata;
+use ReflectionClass;
 use Zend\Filter\Word\CamelCaseToSeparator;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -37,27 +39,6 @@ class EntityMetadataFactory
      * @var array<string>
      */
     protected $nameMap = [
-        'sifra' => 'Šifra',
-        'maticna' => 'Matična',
-        'stevilka' => 'Številka',
-        'stev' => 'Številka',
-        'pos' => 'Pozicija',
-        'pomozni' => 'Pomožni',
-        'oper' => 'Operacija',
-        'razKol' => 'Razpisana Količina',
-        'kolicina' => 'Količina',
-        'zacetek' => 'Začetek',
-        'dok' => 'Max dokumenta',
-        'posta' => 'Pošta',
-        'postaNaziv' => 'Kraj',
-        'drzava' => 'Država',
-        'kw' => 'Teden',
-        'datKnj' => 'Zadnja sprememba',
-        'upor' => 'Uporabnik',
-        'datDog' => 'Datum dogodka',
-        'delKol' => 'Delovna količina',
-        'norEta' => 'Norma etalon',
-        'expires' => 'Veljavnost',
     ];
 
     /**
@@ -97,7 +78,7 @@ class EntityMetadataFactory
      * Vrne specializiran Metadata objekt z naloženimi anotacijami
      *
      * @param string $entityName
-     * @return Max\Ann\EntityMetadata
+     * @return EntityMetadata
      */
     public function factory($entityName)
     {
@@ -110,7 +91,7 @@ class EntityMetadataFactory
         } else {
 
             // pripravim novo instanco Metadata v katero polnim annotacije
-            $meta = new \Max\Ann\EntityMetadata($entityName);
+            $meta = new EntityMetadata($entityName);
 
             // naložim metapodatke iz anotacij
             $reader = new AnnotationReader();
@@ -121,18 +102,23 @@ class EntityMetadataFactory
 
             $classAnn = $annotationReader->getClassAnnotations($reflClass);
 
-            $meta->setMapping($this->em->getClassMetadata($entityName));
             // metapodatki za class
             if ($classAnn) {
                 foreach ($classAnn as $ann) {
+
                     if ($ann instanceof I18n) {
                         $meta->setI18n($ann);
                     }
                     if ($ann instanceof Ui) {
                         $meta->setUi($ann);
                     }
-                    if ($ann instanceof Lookup) {
-                        $meta->setLookup($ann);
+
+                    if ($ann instanceof Id) {
+                        $meta->setId($ann);
+                    }
+
+                    if ($ann instanceof Search) {
+                        $meta->setSearch($ann);
                     }
                     if ($ann instanceof Acl) {
                         $meta->setAcl($ann);
@@ -142,6 +128,7 @@ class EntityMetadataFactory
                     }
                 }
             }
+
             // poskušam dobiti manjkajoče podatke iz defaultov
             $this->getClassDefaults($meta);
             $ui = [];
@@ -177,11 +164,15 @@ class EntityMetadataFactory
             }
             $meta->setPropertyI18n($i18n);
             $meta->setPropertyUi($ui);
-            $meta->setPropertyRevizija($trc);
+            $meta->setPropertyTracking($trc);
 
             // shranim metapodatke za entiteto v cache
             $cache->save('ifi-meta-' . $entityName, $meta);
         }
+        
+        $meta->setMapping($this->em->getClassMetadata($entityName));
+        
+        
         return $meta;
     }
 
@@ -191,17 +182,30 @@ class EntityMetadataFactory
      * @param type $entityName
      * @param \Max\Ann\Entity $meta
      */
-    public function getClassDefaults(\Max\Ann\EntityMetadata $meta)
+    public function getClassDefaults(EntityMetadata $meta)
     {
+
+        $f = new CamelCaseToSeparator(' ');
+        $ent = explode('\\', $meta->getEntityName());
+        $ent = $f->filter(array_pop($ent));
 
         // če ni i18n na entiteti
         if (!$meta->getI18n()) {
-            $f = new CamelCaseToSeparator(' ');
-            $ent = str_replace('Max\Entity\\', '', $meta->getEntityName());
-            $ent = $f->filter($ent);
             $i18n = new I18n();
             $i18n->label = $ent;
             $meta->setI18n($i18n);
+        }
+
+
+        // če ni i18n na entiteti
+        if (!$meta->getId()) {
+            $id = new Id();
+            $meta->setId($id);
+        }
+        // če ni i18n na entiteti
+        if (!$meta->getTracking()) {
+            $id = new Tracking();
+            $meta->setTracking($id);
         }
     }
 
@@ -219,6 +223,30 @@ class EntityMetadataFactory
         } else {
             return ucfirst($f->filter($name));
         }
+    }
+
+    /**
+     * 
+     * Vrne array z imeni 
+     */
+    public function getAllEntityConfig()
+    {
+        $this->em = $this->serviceLocator->get('\Doctrine\ORM\EntityManager');
+        $cache = $this->em->getConfiguration()->getMetadataCacheImpl();
+        $cacheId = 'entity-config-1123';
+        // pogledam, če so metapodatki v cache
+        if ($cache->contains($cacheId)) {         
+            $config = $cache->fetch($cacheId);
+        } else {
+            $entites = $this->em->getConfiguration()->getMetadataDriverImpl()->getAllClassNames();
+            $config = [];
+            foreach ($entites as $class) {
+                $name=array_pop(explode('\\', $class));
+                $config[$name] = $this->factory($class)->getId()->prefix;
+            }
+            $cache->save($cacheId, $config);
+        }
+        return $config;
     }
 
 }

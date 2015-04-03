@@ -5,7 +5,6 @@ ini_set('xdebug.max_nesting_level', '200');
 
 
 require_once __DIR__ . '/api/module/FormMetaTester.php';
-require_once __DIR__ . '/acceptance/BasicCest.php';
 
 
 \Codeception\Util\Autoload::registerSuffix('Page', __DIR__.DIRECTORY_SEPARATOR.'_pages');

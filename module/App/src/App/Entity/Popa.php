@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM,
  *
  * @ORM\Table(name="popa")
  * @Max\I18n(label="Poslovni partner",plural="Poslovni partnerji")
- * @Max\Lookup(search={"sifra","naziv","email","naziv1"})
  */
 class Popa
               extends \Max\Entity\Base
@@ -96,26 +95,6 @@ class Popa
     protected $panoga = '';
 
     /**
-     * Telefonska številka
-     *
-     * 
-     * @Max\Ui(type="naziv",group="Kontaktni podatki",icon="fa fa-phone")
-     * @Max\I18n(label="Telefon", description="Telefonska številka")
-     * @var string
-     */
-    protected $tel;
-
-    /**
-     * Fax številka
-     *
-     * 
-     * @Max\Ui(type="naziv",group="Kontaktni podatki",icon="fa fa-phone")
-     * @Max\I18n(label="Telefax", description="Fax številka")
-     * @var string
-     */
-    protected $fax;
-
-    /**
      * Email naslov
      *
      * @ORM\Column(length=50, nullable=true)
@@ -146,50 +125,6 @@ class Popa
      */
     protected $opomba;
 
-    /**
-     * Dogovorjeni rok plačila za kupca
-     *
-     * @var string
-     *
-     * 
-     *
-     * @Max\Ui(icon="fa fa-time",group="Komercialni pogoji")
-     * @Max\I18n(label="Rok plačila", description="Dogovorjeni rok plačila za kupca")
-     */
-    protected $rokPlacilaK;
-
-    /**
-     * Dogovorjeni rok plačila pri dobavitelju
-     *
-     * @var string
-     *
-     * 
-     *
-     * @Max\Ui(icon="fa fa-time",group="Komercialni pogoji")
-     * @Max\I18n(label="Rok plačila", description="Dogovorjeni rok plačila za dobavitelja")
-     */
-    protected $rokPlacilaD;
-
-    /**
-     * Dogovorjeni rok v dnevih za potrditve naročil
-     *
-     * @var string
-     *
-     * 
-     * @Max\Ui(icon="fa fa-time",group="Komercialni pogoji")
-     * @Max\I18n(label="Dni potrditve", description="Dogovorjeni rok v dnevih za potrditve naročil")
-     */
-    protected $dniPotrditve;
-
-    /**
-     * Rabat
-     *
-     * 
-     * @Max\Ui(type="procent",group="Komercialni pogoji")
-     * @Max\I18n(label="Rabat")
-     * @var float
-     */
-    protected $rabat;
 
     /**
      * Država klienta
@@ -229,44 +164,7 @@ class Popa
      */
     private $pogodba;
 
-    /**
-     * 
-     */
-    private $kupec;
 
-    /**
-     * ID zastopnika
-     *
-     * @var Popa
-     *
-     * 
-     *
-     * @Max\Ui(group="Zastopnik")
-     * @Max\I18n(label="Zastopnik")
-     */
-    protected $potnik;
-
-    /**
-     * ID kontaktne osebe zastopnika
-     *
-     * @var string
-     *
-     * 
-     * @Max\Ui(targetEntity="Max\Entity\Kontaktna",type="toone",master="potnik",group="Zastopnik")
-     * @Max\I18n(label="Kontaktna oseba", description="Kontaktna oseba zastopnika")
-     */
-    protected $potnikKontakt;
-
-    /**
-     * Izjava
-     *
-     * @var string
-     *
-     * 
-     * @Max\Ui(group="Komercialni pogoji")
-     * @Max\I18n(label="Izjava")
-     */
-    protected $izjava;
 
     /**
      * ID za DDV klienta
@@ -334,6 +232,11 @@ class Popa
      * @var string
      */
     protected $datnZav;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    private $tel;
 
     /**
      * Interno polje - uporabnik, ki je zadnji spreminjal entiteto

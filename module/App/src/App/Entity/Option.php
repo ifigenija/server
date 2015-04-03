@@ -30,7 +30,6 @@ class Option         extends \Max\Entity\Base
      */
     private $defaultValue;
 
-
     /**
      * @ORM\Column(type="boolean", nullable=true, options={"default":true})
      */

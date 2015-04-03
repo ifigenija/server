@@ -7,11 +7,13 @@
 namespace Max\Ann;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
-use Max\Ann\Entity\PermBase;
+use Max\Ann\Entity\Acl;
 use Max\Ann\Entity\I18n;
+use Max\Ann\Entity\Id;
 use Max\Ann\Entity\Lookup;
+use Max\Ann\Entity\Tracking;
+use Max\Ann\Entity\Search;
 use Max\Ann\Entity\Ui;
-use Max\Ann\Entity\Revizija;
 
 /**
  * Vmesnik MetadataInterface da na voljo metode, s katerimi lahko pridemo do podatkov
@@ -23,15 +25,43 @@ use Max\Ann\Entity\Revizija;
 class EntityMetadata
 {
 
-    public $classI18n;
-    public $lookup;
+    protected $i18n;
     protected $classAcl;
     protected $propertyI18n;
-    public $propertyUi;
-    protected $propertyRevizija;
+    protected $propertyUi;
+    protected $propertyTracking;
     protected $entityName;
-    public $mapping;
+    protected $mapping;
+    protected $tracking;
+    protected $search;
+    protected $id;
 
+    /**
+     * Magic getter
+     * @param mixed $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        return $this->$name;
+    }
+
+    /**
+     * 
+     * 
+     * @return Tracking podatki o sledenju
+     */
+    function getTracking()
+    {
+        return $this->tracking;
+    }
+
+    function setTracking($tracking)
+    {
+        $this->tracking = $tracking;
+    }
+
+    
     /**
      * Vrne doctrine mapping povezan s to entiteto
      *
@@ -45,7 +75,7 @@ class EntityMetadata
     /**
      * Shrani doctrine metadata mapping
      * @param ClassMetadata $mapping
-     * @return \Max\Ann\EntityMetadata
+     * @return EntityMetadata
      */
     public function setMapping($mapping)
     {
@@ -73,7 +103,7 @@ class EntityMetadata
      *
      * @param string $entityName
 
-     * @return \Max\Ann\EntityMetadata
+     * @return EntityMetadata
      */
     public function setEntityName($entityName)
     {
@@ -91,25 +121,60 @@ class EntityMetadata
         return $this->classAcl;
     }
 
+    function getSearch()
+    {
+        return $this->search;
+    }
+
+    /**
+     * Vrne default search parametre
+     * 
+     * @param Search $search
+     */
+    function setSearch($search)
+    {
+        $this->search = $search;
+    }
+
     /**
      * Vrne translacijski ključ za ime entitete
      *
+     * @return I18n
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * Nastavi class  Id
+     * @param Id $id
+     * @return EntityMetadata
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * Vrne translacijski ključ za ime entitete
+     *
      * @return I18n
      */
     public function getI18n()
     {
-        return $this->classI18n;
+        return $this->i18n;
     }
 
     /**
      * Nastavi class  I18n
-     * @param I18n $classI18n
-     * @return \Max\Ann\EntityMetadata
+     * @param I18n $i18n
+     * @return EntityMetadata
      */
-    public function setI18n($classI18n)
+    public function setI18n($i18n)
     {
-        $this->classI18n = $classI18n;
+        $this->i18n = $i18n;
         return $this;
     }
 
@@ -171,12 +236,12 @@ class EntityMetadata
 
     /**
      * Vrne metapodatke revizije
-     * @return Revizija
+     * @return Tracking
      */
-    public function getFieldRevizija($field)
+    public function getFieldTracking($field)
     {
-        if (array_key_exists($field, $this->propertyRevizija)) {
-            return $this->propertyRevizija[$field];
+        if (array_key_exists($field, $this->propertyTracking)) {
+            return $this->propertyTracking[$field];
         } else {
             return null;
         }
@@ -215,7 +280,7 @@ class EntityMetadata
      * Shrani polje I18n jev za propertije
      *
      * @param array<\Max\Ann\Entity\I18n> $propertyI18n
-     * @return \Max\Ann\EntityMetadata
+     * @return EntityMetadata
      */
     public function setPropertyI18n($propertyI18n)
     {
@@ -235,7 +300,7 @@ class EntityMetadata
     /**
      * Nastavi seznam property Ui objektov
      * @param array<\Max\Ann\Entity\Ui> $propertyUI
-     * @return \Max\Ann\EntityMetadata
+     * @return EntityMetadata
      */
     public function setPropertyUi($propertyUi)
     {
@@ -244,22 +309,22 @@ class EntityMetadata
     }
 
     /**
-     * Vrne polje property Revizija klasov
-     * @return array<\Max\Ann\Entity\Revizija>
+     * Vrne polje property Tracking klasov
+     * @return array<\Max\Ann\Entity\Tracking>
      */
-    public function getPropertyRevizija()
+    public function getPropertyTracking()
     {
-        return $this->propertyRevizija;
+        return $this->propertyTracking;
     }
 
     /**
      * Nastavi seznam property Ui objektov
-     * @param array<\Max\Ann\Entity\Revizija> $propertyRevizija
-     * @return \Max\Ann\EntityMetadata
+     * @param array<\Max\Ann\Entity\Tracking> $propertyTracking
+     * @return EntityMetadata
      */
-    public function setPropertyRevizija($propertyRevizija)
+    public function setPropertyTracking($propertyTracking)
     {
-        $this->propertyRevizija = $propertyRevizija;
+        $this->propertyTracking = $propertyTracking;
         return $this;
     }
 
@@ -292,7 +357,7 @@ class EntityMetadata
      */
     public function getLabel()
     {
-        return $this->classI18n->label;
+        return $this->i18n->label;
     }
 
     /**
@@ -300,8 +365,7 @@ class EntityMetadata
      */
     public function getPlural()
     {
-        return $this->classI18n->plural;
+        return $this->i18n->plural;
     }
 
 }
-

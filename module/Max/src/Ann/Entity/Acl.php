@@ -38,18 +38,18 @@ class Acl {
      * dovoljenje, potrebno za ustvarjanje entitete / post 
      * @var string
      */
-    public $create = 'create';
+    public $create = 'write';
 
     /**
      * podaljšek akcije pri posodabljanju / put 
      * @var string
      */
-    public $update = 'update';
+    public $update = 'write';
 
     /**
      * podaljšek akcije pri brisanju / delete
      * @var string
      */
-    public $delete = 'delete';
+    public $delete = 'write';
 
 }

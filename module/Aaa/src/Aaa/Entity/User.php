@@ -16,9 +16,10 @@ use ZfcRbac\Identity\IdentityInterface;
  *
  * @ORM\Entity(repositoryClass="Aaa\Repository\Users")
  * @ORM\Table(name="uporabniki")
- *
+ * @Max\Id(prefix="0001")
  * @Max\I18n(label="Uporabnik", plural="Uporabniki")
- * @Max\Lookup(ident="username",label="fullName")
+ * @Max\Acl(delete="admi")
+ * 
  */
 class User
         extends Base
@@ -106,48 +107,9 @@ class User
      */
     protected $defaultRouteParams;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Oseba", mappedBy="user")
-     */
-    private $oseba;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\OptionValue", mappedBy="user")
-     */
-    private $optionValue;
-
-
-
     public function __construct()
     {
         $this->roles = new ArrayCollection();
-    }
-
-    public function addRoles($role)
-    {
-        // pri Many2Many dodajamo (kličemo metodo) na owner strani
-        $role->assignedToUser($this);
-        $this->roles[] = $role;
-        return $this;
-    }
-
-    public function removeRoles($role)
-    {
-        // pri Many2Many odstranimo (kličemo metodo) na owner strani
-        $role->unassignedToUser($this);
-        // odstranimi role-o iz array-a
-        if (in_array($role, $this->roles)) {
-            unset($this->roles[array_search($role, $this->roles)]);
-        }
-        return $this;
-    }
-
-    public function addRoles($role)
-    {
-        // pri Many2Many dodajamo (kličemo metodo) na owner strani
-        $role->assignedToUser($this);
-        $this->roles[] = $role;
-        return $this;
     }
 
     public function removeRoles($role)
@@ -240,16 +202,6 @@ class User
         return $this->defaultRouteParams;
     }
 
-    function getOseba()
-    {
-        return $this->oseba;
-    }
-
-    function getOptionValue()
-    {
-        return $this->optionValue;
-    }
-
     function setUsername($username)
     {
         $this->username = $username;
@@ -274,5 +226,12 @@ class User
     {
         $this->defaultRouteParams = $defaultRouteParams;
     }
+    function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    }
+
+
+
 
 }

@@ -9,11 +9,11 @@ use Max\Ann\Entity as Max;
  * Entiteta Dovoljenja za dostop
  *
  * @ORM\Entity(repositoryClass="Aaa\Repository\Permissions")
- *
+ * @Max\Id(prefix="0002")
  * @Max\I18n(label="Dovoljenje",plural="Dovoljenja")
- * @Max\Lookup(ident="name", label="description")
  */
-class Permission extends \Max\Entity\Base
+class Permission
+        extends \Max\Entity\Base
 {
 
     /**
@@ -47,15 +47,15 @@ class Permission extends \Max\Entity\Base
      * @Max\Ui(type="naziv")
      */
     protected $description;
-    
-        /**
+
+    /**
      * A je dovoljene vgrajeno v sistem, ali pa dodano kasneje.
      * @ORM\Column(type="boolean", nullable=true)
      *
      * @Max\I18n(label="Vgrajeno", hint="Dovoljene, ki pride z namestitvijo sistema")
      */
     protected $builtIn = false;
-    
+
     /**
      * 
      *
@@ -67,16 +67,14 @@ class Permission extends \Max\Entity\Base
      *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false, unique=true)}
      * )
      */
-    protected $roles;   
+    protected $roles;
 
-  
     public function __construct($name = '')
     {
         $this->name = $name;
         $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
-    
+
     function getId()
     {
         return $this->id;
@@ -92,7 +90,6 @@ class Permission extends \Max\Entity\Base
         return $this->description;
     }
 
-   
     function setId($id)
     {
         $this->id = $id;
@@ -111,7 +108,6 @@ class Permission extends \Max\Entity\Base
         return $this;
     }
 
-
     public function __toString()
     {
         return $this->name;
@@ -127,7 +123,7 @@ class Permission extends \Max\Entity\Base
         $this->roles = $roles;
         return $this;
     }
-    
+
     function getBuiltIn()
     {
         return $this->builtIn;
@@ -138,7 +134,5 @@ class Permission extends \Max\Entity\Base
         $this->builtIn = $builtIn;
         return $this;
     }
-
-
 
 }

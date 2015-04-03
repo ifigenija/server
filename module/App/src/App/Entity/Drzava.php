@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM,
  * Entiteta za države
  * @ORM\Entity(repositoryClass="App\Repository\Drzave")
  * @ORM\Table(name="drza")
- * @Max\Lookup
  * @Max\I18n(label="Država",plural="Države",description="Evidenca držav")
  *
  */

@@ -20,7 +20,7 @@ class Alternacija
     private $terminiStoritve;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Vloga", inversedBy="alternacije")
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Funkcija", inversedBy="alternacije")
      * @ORM\JoinColumn(name="vloga_id", referencedColumnName="id", nullable=false)
      */
     private $vloga;

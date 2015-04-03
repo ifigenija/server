@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM,
  *
  * @ORM\Entity
  * @Max\I18n(label="Pošta",plural="Pošte")
- * @Max\Lookup
  */
 class Posta
         

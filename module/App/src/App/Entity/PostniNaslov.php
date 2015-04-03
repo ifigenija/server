@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM,
  *
  * @ORM\Entity(repositoryClass="\App\Repository\PostniNaslovi")
  * @Max\I18n(label="Poštni naslov",plural="Poštni naslovi")
- * @Max\Lookup(ident="naziv",label="ulica",search={},required={"popa|kontaktna"})
  * @ORM\Table(name="PostniNaslovi")
  */
 class PostniNaslov

@@ -5,7 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 namespace Max\Ann\Entity;
+
 /**
  * Filter rule za privzeto iskanje 
  * @Annotation
@@ -14,14 +16,41 @@ namespace Max\Ann\Entity;
  */
 class Filter
 {
+
+    /**
+     * Ime polja za klienta
+     * @var string 
+     */
+    public $field;
+
+    /**
+     * eq | like | ...
+     * @var string 
+     */
+    public $operator = 'eq';
+
+    /**
+     * Tip filtra
+     * @var string
+     */
+    public $type = 'text';
+
     /**
      *
      * @var type 
      */
-    public $field;
+    public $targetEntity = '';
+
     /**
-     *
-     * @var type 
-     */    
-    public $operator;
+     * A je vrednost filtra zahtevana 
+     * @var boolean
+     */
+    public $required;
+
+    /**
+     * s pikami ločena pot do polja, ki ga filtriramo
+     * @var $string
+     */
+    public $path;
+
 }

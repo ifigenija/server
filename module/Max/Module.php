@@ -6,6 +6,8 @@
  * and open the template in the editor.
  */
 namespace Max;
+
+use Doctrine\Common\Annotations\AnnotationRegistry;
 /**
  * Base nastavitve za Ifigenijo
  *

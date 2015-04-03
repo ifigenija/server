@@ -1,13 +1,21 @@
 <?php
 
+$loadConfigOnly = 'App';
+
+
 return array(
     'modules' => array(
         //'ZendDeveloperTools',
         'DoctrineModule',
         'DoctrineORMModule',
         'Max',
-        'Util',
-        'IfiApp'  
+        'Aaa',
+        'Produkcija',
+        'Abonmaji',
+        'Koledar',
+        'Prisotnost',
+        'Prodaja',
+        'TestAssets'
     ),
     'module_listener_options' => array(
         'config_glob_paths' => array(
@@ -15,7 +23,8 @@ return array(
         ),
         'module_paths' => array(
             'module',
-            'vendor'
+            'vendor',
+            'tests',
         ),
     )
 );

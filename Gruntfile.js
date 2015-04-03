@@ -48,6 +48,10 @@ module.exports = function (grunt) {
                 cwd: 'module/Prodaja',
                 cmd: classmap_generator
             },               
+            autoload_testAssets: {
+                cwd: 'tests/TestAssets',
+                cmd: classmap_generator
+            },               
 
             proxies: {
                 cmd: function () {

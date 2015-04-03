@@ -22,7 +22,7 @@ class Id
      * 
      * @var string
      */
-    protected $prefix;    
+    public $prefix = '0000';    
     
 
 }

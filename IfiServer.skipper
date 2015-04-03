@@ -174,7 +174,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="OptionValue" to="User" caption="User OptionValue" owner-alias="optionValue" inverse-alias="user" many-owner="true" many-inverse="false" uuid="82a71af7-7182-44cf-b400-d8759b3421b4">
+    <association from="OptionValue" to="User" caption="User OptionValue" inverse-alias="user" many-owner="true" many-inverse="false" uuid="82a71af7-7182-44cf-b400-d8759b3421b4">
       <association-field from="user_id" to="id"/>
     </association>
     <entity name="Oseba" uuid="a6483ebe-f05c-4c66-bc91-05500180d567">
@@ -203,7 +203,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="Oseba" to="User" caption="User Oseba" owner-alias="oseba" inverse-alias="user" many-owner="false" many-inverse="false" uuid="8d5911c5-482c-483e-938b-bb2717597962">
+    <association from="Oseba" to="User" caption="User Oseba" inverse-alias="user" many-owner="false" many-inverse="false" uuid="8d5911c5-482c-483e-938b-bb2717597962">
       <association-field from="user_id" to="id"/>
     </association>
     <entity name="Popa" uuid="ba185002-2a7a-43f9-b269-7eb203e6e29c">
@@ -230,6 +230,7 @@
       <field name="datZav" type="date" uuid="a29a9f69-3e7c-4a5e-81c1-d62d744a2afd"/>
       <field name="datnZav" type="date" uuid="7e1055f2-17fc-4405-bddf-38f816f03480"/>
       <field name="drzava_id" required="true" uuid="88711ba4-8bf3-432f-94a7-cbb2d0b077ea"/>
+      <field name="tel" uuid="d605debc-77b7-466b-b2e8-48674a124b64"/>
       <orm-attributes>
         <attribute name="repository-class">\Max\Repository\Popa</attribute>
         <attribute name="table">popa</attribute>
@@ -372,7 +373,7 @@
       <field name="oseba_id" uuid="6db019ec-f3d0-4219-8e45-c3e26cfb331b"/>
       <field name="koprodukcija_delitev_id" uuid="46528ef1-f5f5-4b7b-9c24-9c8a1575b9ce"/>
     </entity>
-    <association from="Alternacija" to="Vloga" owner-alias="alternacije" inverse-alias="vloga" many-owner="true" many-inverse="false" parent-required="true" uuid="3f85f126-e696-4e0b-91fd-9425bf88b93f">
+    <association from="Alternacija" to="Funkcija" owner-alias="alternacije" inverse-alias="vloga" many-owner="true" many-inverse="false" parent-required="true" uuid="3f85f126-e696-4e0b-91fd-9425bf88b93f">
       <association-field from="vloga_id" to="id"/>
     </association>
     <association from="Alternacija" to="Sodelovanje" caption="Sodelovanje Alternacija" owner-alias="alternacija" inverse-alias="sodelovanje" many-owner="true" many-inverse="false" uuid="182e073f-fbca-4cce-aba7-c7fedb721cdb">
@@ -458,7 +459,7 @@
     <association from="KoprodukcijaDelitev" to="Koproducent" caption="Koproducent KoprodukcijaDelitev" owner-alias="koprodukcije" inverse-alias="koproducent" many-owner="true" many-inverse="false" parent-required="true" uuid="f50f3026-dd91-40f0-af6f-1b898b657780">
       <association-field from="koproducent_id" to="id"/>
     </association>
-    <entity name="Vloga" description="Vloga na uprizoritvi" uuid="2e881e9c-8460-48b3-b6b4-bbaf371fcbc3">
+    <entity name="Funkcija" description="Vloga na uprizoritvi" uuid="2e881e9c-8460-48b3-b6b4-bbaf371fcbc3">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="8c1dda7f-823b-47dd-b7fa-c96ad1edf946">
         <orm-attributes>
           <attribute name="generator">
@@ -473,13 +474,13 @@
       <field name="alternacija_id" uuid="63907e3d-6015-47d1-aa14-a9fee3cdd0d6"/>
       <field name="tip_vloge_id" uuid="4bb8d35a-77d9-4892-8bc8-440b0af1e557"/>
     </entity>
-    <association from="Vloga" to="Uprizoritev" owner-alias="vloge" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" parent-required="true" uuid="a303d5d9-bf84-4df5-9228-9a6abfae3a97">
+    <association from="Funkcija" to="Uprizoritev" owner-alias="vloge" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" parent-required="true" uuid="a303d5d9-bf84-4df5-9228-9a6abfae3a97">
       <association-field from="uprizoritev_id" to="id"/>
     </association>
-    <association from="Vloga" to="Alternacija" caption="Privzeti Alter" inverse-alias="privzeti" many-owner="true" many-inverse="false" uuid="925004f9-4191-4cc6-931c-421d69ae0565">
+    <association from="Funkcija" to="Alternacija" caption="Privzeti Alter" inverse-alias="privzeti" many-owner="true" many-inverse="false" uuid="925004f9-4191-4cc6-931c-421d69ae0565">
       <association-field from="alternacija_id" to="id"/>
     </association>
-    <association from="Vloga" to="TipVloge" caption="TipVloge Vloga" owner-alias="vloge" inverse-alias="tipVloge" many-owner="true" many-inverse="false" uuid="ae42540c-d529-4668-b731-741e16d6f47b">
+    <association from="Funkcija" to="TipFunkcije" caption="Vrsta funkcije" owner-alias="vloge" inverse-alias="tipVloge" many-owner="true" many-inverse="false" uuid="ae42540c-d529-4668-b731-741e16d6f47b">
       <association-field from="tip_vloge_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning">
@@ -524,7 +525,7 @@
         <many-to-many-field from="uprizoritev_id" to="id"/>
       </many-to-many-entity>
     </many-to-many>
-    <entity name="TipVloge" uuid="772b7b64-6546-43a8-908c-5400c169be85">
+    <entity name="TipFunkcije" uuid="772b7b64-6546-43a8-908c-5400c169be85">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="1d4743d1-7121-4746-8d3e-e198687dab8d">
         <orm-attributes>
           <attribute name="generator">
@@ -646,7 +647,7 @@
       </field>
       <field name="uprizoritev_id" uuid="3ad286bb-672b-4100-a0bb-d994717b49f0"/>
     </entity>
-    <association from="Gostujoca" to="Uprizoritev" caption="Uprizoritev Gostujoc" owner-alias="gostujoc" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" uuid="f068b6aa-da3c-4623-a53c-c7bca363748d">
+    <association from="Gostujoca" to="Uprizoritev" caption="Gostujoc Uprizoritve " owner-alias="gostujoc" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" uuid="f068b6aa-da3c-4623-a53c-c7bca363748d">
       <association-field from="uprizoritev_id" to="id"/>
     </association>
     <entity name="Zasedenost" uuid="fa27fac4-77b6-4b38-a043-78375bbc658d">

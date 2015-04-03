@@ -35,7 +35,7 @@ class Uprizoritev
     private $koprodukcija;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Vloga", mappedBy="uprizoritev")
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Funkcija", mappedBy="uprizoritev")
      */
     private $vloge;
 

@@ -10,7 +10,7 @@ use Max\Ann\Entity as Max;
 
 /**
  * @ORM\Entity(repositoryClass="Aaa\Repository\Roles")
- * @Max\Lookup(ident="name",label="description")
+ * @Max\Acl(delete="admin")
  * @Max\I18n(label="Vloga",plural="Vloge",description="Uporabnik mora imeti vloge za dostop do delov aplikacije")
  */
 class Role
@@ -54,11 +54,9 @@ class Role
 
     /**
      * 
-     * 
-     *
      * @Max\I18n(label="Dovoljenja", hint="Dovoljenja")
-     * @Max\Ui(group="Dovoljenja")
-     * @ORM\ManyToMany(targetEntity="Aaa\Entity\Permission", mappedBy="roles", indexBy="name")
+     * @Max\Ui(type="list")
+     * @ORM\ManyToMany(targetEntity="Aaa\Entity\Permission", mappedBy="roles")
      */
     protected $permissions;
 
@@ -75,7 +73,7 @@ class Role
      * 
      */
     protected $users;
-    private $assignedUsers = null;
+    
 
     /**
      * Init the Doctrine collection
