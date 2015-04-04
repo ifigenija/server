@@ -12,7 +12,8 @@ use Max\Repository\AbstractMaxRepository;
  * Resource - dovoljenja
  *
  */
-class Permissions extends AbstractMaxRepository 
+class Permissions
+        extends AbstractMaxRepository
 {
 
     /**
@@ -62,23 +63,22 @@ class Permissions extends AbstractMaxRepository
         return new DoctrinePaginator(new Paginator($qb));
     }
 
-
-        /** 
+    /**
      * Vrne seznam Permission objektov, kot array collection 
      * @param string[] $names
      * @return Permission[]
      */
-    public function resolveNames($names) {
+    public function resolveNames($role, $names)
+    {
         $ret = new ArrayCollection([]);
-        foreach($names as $name) {
+        foreach ($names as $name) {
             $r = $this->findOneByName($name);
             if ($r) {
-                $ret->add($r);
+                $role->getPermissions()->add($r);
+                $r->getRoles()->add($role);
             }
         }
         return $ret;
     }
-    
-    
-    
+
 }

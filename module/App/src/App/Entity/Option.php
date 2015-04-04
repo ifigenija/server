@@ -12,6 +12,8 @@ class Option         extends \Max\Entity\Base
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
+     * @var string
+     * 
      */
     private $id;
 
@@ -147,7 +149,7 @@ class Option         extends \Max\Entity\Base
         $this->description = $description;
     }
 
-
+  
     
     
 }

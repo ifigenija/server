@@ -48,8 +48,8 @@ Class Module
         $sm = $e->getApplication()->getServiceManager();
         $em = $sm->get('doctrine.entitymanager.orm_default');
         $evm = $em->getEventManager();
-        $config = $sm->get('Config');        
-        $evm->addEventSubscriber(new PrePersistListener($config['entity_config']));
+        $config = $sm->get('entity.metadata.factory')->getAllEntityConfig();        
+        $evm->addEventSubscriber(new PrePersistListener($config));
         
     }
 

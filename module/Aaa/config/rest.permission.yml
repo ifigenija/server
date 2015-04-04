@@ -1,6 +1,17 @@
 ## YAML Template.
 ---
-disableMethods: 
-    - create
-    - post
-    - put
+entityClass: Aaa\Entity\Permission
+disabledMethods: 
+    - delete
+permPrefix: User    
+forms:
+    default: 
+        disabledMethods:
+            - update
+            - read
+    extra:
+        disabledMethods:
+            - create
+            - read
+            
+            

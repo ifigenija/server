@@ -44,11 +44,6 @@ class Pogodba
      */
     private $alternacije;
 
-    /**
-     * 
-     * 
-     */
-    private $sodelovanje;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="pogodba")

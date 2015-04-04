@@ -39,6 +39,11 @@ class User
     protected $id;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $name;
+
+    /**
      * Uporabniško ime za dostop
      *
      * @ORM\Column(unique=true, length=10, nullable=false)
@@ -76,7 +81,12 @@ class User
      *      
      * @Max\I18n(label="Vloge", hint="ID-ji Skupin", description="Skupine, katerih član je uporabnik")
      * @Max\UI(group="Vloge")
-     * @ORM\ManyToMany(targetEntity="Aaa\Entity\Role", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="Aaa\Entity\Role", inversedBy="users")
+     * @ORM\JoinTable(
+     *     name="Role2User",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false)}
+     * )
      * 
      * 
      */
@@ -106,6 +116,11 @@ class User
      * @Max\Ui(group="Zagon", type="textarea")
      */
     protected $defaultRouteParams;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $email;
 
     public function __construct()
     {
@@ -167,16 +182,20 @@ class User
 
 
 
-    public function getFullName()
-    {
-        return "{$this->getName()} {$this->getSurname()}";
-    }
+
 
     public function __toString()
     {
         return $this->getFullName();
     }
+
     
+
+    function getName()
+    {
+        return $this->name;
+    }
+
     function getUsername()
     {
         return $this->username;
@@ -200,6 +219,16 @@ class User
     function getDefaultRouteParams()
     {
         return $this->defaultRouteParams;
+    }
+
+    function getEmail()
+    {
+        return $this->email;
+    }
+
+    function setName($name)
+    {
+        $this->name = $name;
     }
 
     function setUsername($username)
@@ -226,10 +255,16 @@ class User
     {
         $this->defaultRouteParams = $defaultRouteParams;
     }
+
+    function setEmail($email)
+    {
+        $this->email = $email;
+    }
     function setEnabled($enabled)
     {
         $this->enabled = $enabled;
     }
+
 
 
 

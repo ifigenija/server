@@ -26,7 +26,7 @@ class EntityMetadata
 {
 
     protected $i18n;
-    protected $classAcl;
+    protected $acl;
     protected $propertyI18n;
     protected $propertyUi;
     protected $propertyTracking;
@@ -118,7 +118,7 @@ class EntityMetadata
     public function getAcl()
     {
 
-        return $this->classAcl;
+        return $this->acl;
     }
 
     function getSearch()
@@ -183,9 +183,9 @@ class EntityMetadata
      * @param Acl
      * @return I18n
      */
-    public function setAcl(Acl $classAcl)
+    public function setAcl(Acl $acl)
     {
-        $this->classAcl = $classAcl;
+        $this->acl = $acl;
         return $this;
     }
 

@@ -56,7 +56,12 @@ class Role
      * 
      * @Max\I18n(label="Dovoljenja", hint="Dovoljenja")
      * @Max\Ui(type="list")
-     * @ORM\ManyToMany(targetEntity="Aaa\Entity\Permission", mappedBy="roles")
+     * @ORM\ManyToMany(targetEntity="Aaa\Entity\Permission", inversedBy="roles")
+     * @ORM\JoinTable(
+     *     name="Permission2Role",
+     *     joinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false)},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="permission_id", referencedColumnName="id", nullable=false)}
+     * )
      */
     protected $permissions;
 
@@ -64,12 +69,8 @@ class Role
      * 
      *
      * @Max\I18n(label="Uporabniki", hint="Uporabniki, ki s to vlogo")
-     * @ORM\ManyToMany(targetEntity="Aaa\Entity\User", inversedBy="roles")
-     * @ORM\JoinTable(
-     *     name="User2Role",
-     *     joinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false, unique=true)},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)}
-     * )
+     * @ORM\ManyToMany(targetEntity="Aaa\Entity\User", mappedBy="roles")
+     * 
      * 
      */
     protected $users;
@@ -120,55 +121,6 @@ class Role
         return isset($this->permissions[(string) $permission]);
     }
 
-    function getPermissions()
-    {
-        return $this->permissions;
-    }
-
-    function setPermissions($permissions)
-    {
-        $this->permissions = $permissions;
-        return $this;
-    }
-
-    function getDescription()
-    {
-        return $this->description;
-    }
-
-    function setDescription($description)
-    {
-        $this->description = $description;
-        return $this;
-    }
-
-    function getBuiltIn()
-    {
-        return $this->builtIn;
-    }
-
-    function getUsers()
-    {
-        return $this->users;
-    }
-
-    function setBuiltIn($builtIn)
-    {
-        $this->builtIn = $builtIn;
-        return $this;
-    }
-
-    function setUsers($users)
-    {
-        $this->users = $users;
-        return $this;
-    }
-
-    function setChildren($children)
-    {
-        $this->children = $children;
-        return $this;
-    }
 
     public function assignedToUser($user)
     {
@@ -182,4 +134,47 @@ class Role
             unset($this->users[array_search($user, $this->users)]);
         }
     }
+    
+    
+    function getDescription()
+    {
+        return $this->description;
+    }
+
+    function getBuiltIn()
+    {
+        return $this->builtIn;
+    }
+
+    function getPermissions()
+    {
+        return $this->permissions;
+    }
+
+    function getUsers()
+    {
+        return $this->users;
+    }
+
+    function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    function setBuiltIn($builtIn)
+    {
+        $this->builtIn = $builtIn;
+    }
+
+    function setPermissions($permissions)
+    {
+        $this->permissions = $permissions;
+    }
+
+    function setUsers($users)
+    {
+        $this->users = $users;
+    }
+
+
 }

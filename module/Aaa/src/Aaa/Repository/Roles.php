@@ -75,6 +75,7 @@ class Roles
             foreach ($resIds as $resId => $v) {
                 $perm = $rr->findOneById($resId);
                 $object->getPermissions()->removeElement($perm);
+                $perm->getRoles()->removeElement($object);
             }
         }
     }
@@ -93,6 +94,7 @@ class Roles
                 $perm = $rr->findOneById($resId);
                 if (!$object->getPermissions()->contains($perm)) {
                     $object->getPermissions()->add($perm);
+                    $perm->getRoles()->add($object);
                 }
             }
         }
@@ -100,19 +102,19 @@ class Roles
 
     /**
      * Vrne seznam role objektov, kot array collection 
+     * @param \Aaa\Entity\User $user
      * @param string[] $names
-     * @return Role[]
      */
-    public function resolveNames($names)
+    public function resolveNames(\Aaa\Entity\User $user, $names)
     {
-        $ret = new ArrayCollection();
+        
         foreach ($names as $name) {
             $r = $this->findOneByName($name);
             if ($r) {
-                $ret->add($r);
+                $user->getRoles()->add($r);
+                $r->getUsers()->add($user);
             }
         }
-        return $ret;
     }
 
 

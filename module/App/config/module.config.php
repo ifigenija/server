@@ -50,7 +50,7 @@ return [
                         'options' => [
                             'route' => '/:controller/:action',
                             'constraints' => [
-                                'controller' => 'aaa|app|sodelavci||arhiv|seznam',
+                                'controller' => '[a-zA-Z0-9]+',
                             ],
                         ]
                     ]
@@ -68,7 +68,7 @@ return [
                     'constraints' => [
                         'controller' => '[A-Za-z]+',
                         'view' => '[A-Za-z]+',
-                        'id' => '[0-9]+'
+                        'id' => \Max\Consts::UUID
                     ]
                 ],
             ],

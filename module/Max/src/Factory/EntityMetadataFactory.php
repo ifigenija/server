@@ -102,32 +102,7 @@ class EntityMetadataFactory
 
             $classAnn = $annotationReader->getClassAnnotations($reflClass);
 
-            // metapodatki za class
-            if ($classAnn) {
-                foreach ($classAnn as $ann) {
-
-                    if ($ann instanceof I18n) {
-                        $meta->setI18n($ann);
-                    }
-                    if ($ann instanceof Ui) {
-                        $meta->setUi($ann);
-                    }
-
-                    if ($ann instanceof Id) {
-                        $meta->setId($ann);
-                    }
-
-                    if ($ann instanceof Search) {
-                        $meta->setSearch($ann);
-                    }
-                    if ($ann instanceof Acl) {
-                        $meta->setAcl($ann);
-                    }
-                    if ($ann instanceof Tracking) {
-                        $meta->setTracking($ann);
-                    }
-                }
-            }
+            $this->set($meta, $classAnn);
 
             // poskušam dobiti manjkajoče podatke iz defaultov
             $this->getClassDefaults($meta);
@@ -169,11 +144,46 @@ class EntityMetadataFactory
             // shranim metapodatke za entiteto v cache
             $cache->save('ifi-meta-' . $entityName, $meta);
         }
-        
+
         $meta->setMapping($this->em->getClassMetadata($entityName));
-        
-        
+
+
         return $meta;
+    }
+
+    /**
+     * 
+     * @param EntiyMeta $meta
+     * @param array $classAnn
+     */
+    public function set($meta, $classAnn)
+    {
+        // metapodatki za class
+        if ($classAnn) {
+            foreach ($classAnn as $ann) {
+
+                if ($ann instanceof I18n) {
+                    $meta->setI18n($ann);
+                }
+                if ($ann instanceof Ui) {
+                    $meta->setUi($ann);
+                }
+
+                if ($ann instanceof Id) {
+                    $meta->setId($ann);
+                }
+
+                if ($ann instanceof Search) {
+                    $meta->setSearch($ann);
+                }
+                if ($ann instanceof Acl) {
+                        $meta->setAcl($ann);
+                }
+                if ($ann instanceof Tracking) {
+                    $meta->setTracking($ann);
+                }
+            }
+        }
     }
 
     /**
@@ -185,9 +195,8 @@ class EntityMetadataFactory
     public function getClassDefaults(EntityMetadata $meta)
     {
 
-        $f = new CamelCaseToSeparator(' ');
-        $ent = explode('\\', $meta->getEntityName());
-        $ent = $f->filter(array_pop($ent));
+        $a = explode('\\', $meta->getEntityName());
+        $ent = array_pop($a);
 
         // če ni i18n na entiteti
         if (!$meta->getI18n()) {
@@ -196,7 +205,14 @@ class EntityMetadataFactory
             $meta->setI18n($i18n);
         }
 
-
+        if (!$meta->acl) {
+            $acl = new Acl;
+            $acl->base = $ent;
+            $meta->setAcl($acl);
+        } 
+        if (!$meta->acl->base) {
+            $meta->acl->base = $ent;
+        }
         // če ni i18n na entiteti
         if (!$meta->getId()) {
             $id = new Id();
@@ -235,14 +251,14 @@ class EntityMetadataFactory
         $cache = $this->em->getConfiguration()->getMetadataCacheImpl();
         $cacheId = 'entity-config-1123';
         // pogledam, če so metapodatki v cache
-        if ($cache->contains($cacheId)) {         
+        if ($cache->contains($cacheId)) {
             $config = $cache->fetch($cacheId);
         } else {
             $entites = $this->em->getConfiguration()->getMetadataDriverImpl()->getAllClassNames();
             $config = [];
             foreach ($entites as $class) {
                 $array = explode('\\', $class);
-                $name=array_pop($array);
+                $name = array_pop($array);
                 $config[$name] = $this->factory($class)->getId()->prefix;
             }
             $cache->save($cacheId, $config);

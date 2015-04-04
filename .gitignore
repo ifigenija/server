@@ -1,6 +1,6 @@
 /vendor/
 /config/autoload/local.php
-/config/autoload/local.test.php
+/config/autoload/local.*.php
 /nbproject/private/
 /node_modules/
 **/autoload_classmap.php

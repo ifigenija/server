@@ -1,0 +1,15 @@
+-
+    name: Administrator
+    email: admin@max.si
+    username: admin
+    roles: [ifi-vse]
+-
+    name: Konzolni
+    email: rootmail@max.si
+    username: console
+    roles: {  }
+-
+    name: Anonimni
+    email: noreply@max.si
+    username: anonymous
+    roles: [anonymous]

@@ -14,7 +14,7 @@ forms:
             - naziv
             - opomba
 lists:
-    default:
+    default:      
         filter:
             type: simple            
         sort:           

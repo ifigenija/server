@@ -46,7 +46,7 @@ class PrePersistListener
         $map = $meta->getFieldMapping($id);
         if ($map['type'] == 'guid') {
             if (!$entity->$getid()) {
-                $entity->$setid($this->getNewId($entity));
+                $entity->$setid($this->getNewId($meta->name));
             }
         }
     }
@@ -57,8 +57,8 @@ class PrePersistListener
      */
     public function getNewID($entity)
     {
-        
-        $prefix = $this->map[array_pop(explode('\\',$entity))];
+        $arr = explode('\\',$entity);
+        $prefix = $this->map[array_pop($arr)];
         $time = time();
         return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
                 // entity prefix, tennant 

@@ -16,9 +16,9 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            'Aaa\User' => 'Max\Factories\RestControllerFactorie',
-            'Aaa\Role' => 'Aaa\Controller\RoleController',
-            'Aaa\Permission' => 'Aaa\Controller\PermissionController'
+            'Rest\User' => 'Max\Factory\RestControllerFactory',
+            'Rest\Role' => 'Max\Factory\RestControllerFactory',
+            'Rest\Permission' => 'Max\Factory\RestControllerFactory'
         ],
         'invokables' => [
             'Aaa\Rpc' => 'Aaa\Controller\RpcController',

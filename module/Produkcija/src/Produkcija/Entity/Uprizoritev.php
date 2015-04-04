@@ -77,13 +77,8 @@ class Uprizoritev
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $datumZaključka;
-
-    /**
-     * 
-     */
-    private $datumZaključka;
-
+    private $datumZakljucka;
+ 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */

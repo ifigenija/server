@@ -1,4 +1,9 @@
 <?php
+header('Content-type: application/json; charset=UTF-8');
+if ($this->exception instanceof \Max\Exception\ApiDisabledException) {
+    echo Zend\Json\Json::encode(["success"=>false, "error" => $this->exception->getMessage()]);
+    return;
+}
 
 $error = [
     'success' => false,
@@ -28,6 +33,5 @@ function formatDebug(&$err, Exception $exception)
 if ($exception->getPrevious()) {
     formatDebug($error, $exception->getPrevious());
 }
-header('Content-type: application/json; charset=UTF-8');
 echo \Zend\Json\Json::encode($error);
 

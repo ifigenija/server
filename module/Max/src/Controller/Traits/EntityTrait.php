@@ -92,7 +92,7 @@ trait EntityTrait
      */
     public function getRepository($class = null)
     {
-        
+
         if (!$class) {
             $rep = $this->getEm()->getRepository($this->getEntityClass());
         } else {
@@ -114,10 +114,10 @@ trait EntityTrait
         }
         $formManager = $this->serviceLocator->get('FormElementManager');
         $formManager = $this->serviceLocator->get('FormElementManager');
-        
+
         if (isset($config['type'])) {
-        $form = $formManager->get($class);
-        return $form;
+            $form = $formManager->get($class);
+            return $form;
         } else {
             
         }
@@ -176,7 +176,7 @@ trait EntityTrait
      */
     public function loadEntity($class = null, $param = 'id', $optional = false)
     {
-        $id = $this->getParamFromAny($param, $optional);
+        $id = $this->getFromRouteOrQuery($param, $optional);
         if (!$id && $optional) {
             return null;
         }
@@ -212,7 +212,9 @@ trait EntityTrait
     public function getEntityPermission($action)
     {
         $prefix = $this->getConfig('permPrefix', $this->getDefaultPermPrefix());
-        return $prefix . '-' . $action;
+
+        $acl = $this->getConfig('meta.acl');
+        return $prefix . '-' . $acl->$action;
     }
 
     /**
@@ -221,11 +223,10 @@ trait EntityTrait
      */
     public function getDefaultPermPrefix()
     {
-        
-        if ($this->entityClass) {
-            $segments = explode('\\', $this->entityClass);
 
-            return strtolower(array_pop($segments));
+        if ($this->entityClass) {
+            $acl = $this->getConfig('meta.acl');
+            return $acl->base;
         } else {
             throw new ParamsException('Entity class ni nastavljen', 100003);
         }
@@ -250,14 +251,24 @@ trait EntityTrait
             return $this->config;
         } else {
             $fields = explode('.', $name);
+            $config = $this->config;
             foreach ($fields as $f) {
-                if (isset($config[$f])) {
-                    $config = $config[$f];
+                $level = null;
+                if (is_object($config)) {
+                    $level = $config->$f;
+                } elseif (is_array($config)) {
+                    if (isset($config[$f])) {
+                        $level = $config[$f];
+                    }
                 } else {
+                    throw new \Max\Exception\MaxException('neveljavna pot v controller configu', 100101);
+                }
+                if (!$level) {
                     return $default;
                 }
+                $config = $level;
             }
-            return $config;
+            return $level;
         }
     }
 
@@ -286,7 +297,7 @@ trait EntityTrait
         if (empty($config['entityClass'])) {
             throw new ParamsException('EntityClass missing in controller config', 100000);
         }
-        $this->entityClass = $config['entityClass'];  
+        $this->entityClass = $config['entityClass'];
         return $this;
     }
 

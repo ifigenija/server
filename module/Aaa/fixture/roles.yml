@@ -1,0 +1,16 @@
+-
+    name: beri-vse
+    description: 'Polni dostop do vsega v aplikaciji.'
+    permissions: {  }
+-
+    name: administrator-dostopov
+    description: 'Uporavljanje uporabnikov, skupin, vlog in dovoljenj.'
+    permissions: {  }
+-
+    name: anonymous
+    description: 'Vloga za javne - neavtenticirane uporabnike'
+    permissions: [Drzava-list, Permission-list]
+-
+    name: ifi-vse
+    description: 'Polni dostop do vsega v aplikaciji.'
+    permissions: {  }

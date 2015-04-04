@@ -60,12 +60,8 @@ class Permission
      * 
      *
      * @Max\I18n(label="Vloge", description="Vloge, ki imajo to dovoljenje")
-     * @ORM\ManyToMany(targetEntity="Aaa\Entity\Role", inversedBy="permissions")
-     * @ORM\JoinTable(
-     *     name="Role2Permission",
-     *     joinColumns={@ORM\JoinColumn(name="permission_id", referencedColumnName="id", nullable=false)},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false, unique=true)}
-     * )
+     * @ORM\ManyToMany(targetEntity="Aaa\Entity\Role", mappedBy="permissions")
+     * 
      */
     protected $roles;
 

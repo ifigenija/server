@@ -8,8 +8,8 @@
 
 namespace Max\Factory;
 
-use Max\Controller\RestController;
 use Symfony\Component\Yaml\Yaml;
+use Zend\Mvc\Controller\ControllerManager;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -45,14 +45,17 @@ abstract class AbstractEntityControllerFactory
         if (!isset($data['entityClass'])) {
             $data['entityClass'] = $this->getEntityClass($controller, $locator);
         }
+        $data['meta'] = $this->getEntityMeta($data['entityClass'], $locator);
         return $data;
     }
     
     /**
-     * 
+     * Pridobi metapodatke za entiteto
      */
-    protected function getEntityMeta() {
+    protected function getEntityMeta($entity, $locator) {
+        $f = $locator->get('entity.metadata.factory');
         
+        return $f->factory($entity);
     }
 
     /**
@@ -117,7 +120,7 @@ abstract class AbstractEntityControllerFactory
     /**
      * Pridobi globalni service manager iz controller managerja 
      * 
-     * @param \Zend\Mvc\Controller\ControllerManager $locator
+     * @param ControllerManager $locator
      */
     protected function getParentLocator($locator) 
     {

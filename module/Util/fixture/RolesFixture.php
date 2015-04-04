@@ -36,6 +36,7 @@ class RolesFixture
             $this->populateOptions($manager, $val);
         }
         $manager->flush();
+        $manager->clear();
 
         echo "Nalagam - dovoljenja" . PHP_EOL;
         $res = $this->getData($modules, 'permissions');
@@ -43,12 +44,14 @@ class RolesFixture
             $this->populatePermissions($manager, $val);
         }
         $manager->flush();
+        $manager->clear();
         echo "Nalagam - vloge" . PHP_EOL;
         $res = $this->getData($modules, 'roles');
         foreach ($res as $val) {
             $this->populateRole($manager, $val);
         }
         $manager->flush();
+        $manager->clear();
 
         echo "Nalagam - uporabnike" . PHP_EOL;
         $res = $this->getData($modules, 'users');
@@ -56,6 +59,7 @@ class RolesFixture
             $this->populateUser($manager, $val);
         }
         $manager->flush();
+        $manager->clear();
     }
 
     /**
@@ -74,12 +78,12 @@ class RolesFixture
             $o->setId($val->id);
             $o->setUsername($val->username);
             $o->setEmail($val->email);
-            $o->setPassword($val->password);
-            echo "User $val->name geslo $val->password\n";
+            $password = uniqid() . uniqid();
+            $o->setPassword($password);
+            echo "User $val->name geslo $password\n";
             $o->setName($val->name);
-            $o->setSurname($val->surname);
             $o->setEnabled(true);
-            $o->setRoles($rr->resolveNames($val->roles));
+            $rr->resolveNames($o, $val->roles);
             $em->persist($o);
 
             $this->addReference('user-' . $val->username, $o);
@@ -90,9 +94,12 @@ class RolesFixture
     {
         $data = [];
         foreach ($modules as $module) {
-            $file = 'module/' . $module . '/fixture/' . $entity . '.data.php';
-            if (file_exists($file)) {
-                $data = array_merge($data, include $file);
+            $f = 'module/' .$module . '/fixture/' . $entity . '.yml';
+            if (file_exists($f)) {
+                $file = file_get_contents($f);
+                $data = array_merge($data, \Symfony\Component\Yaml\Yaml::parse($file));
+                
+                file_put_contents($f, \Symfony\Component\Yaml\Yaml::dump($data));
             }
         }
         return $data;
@@ -144,7 +151,7 @@ class RolesFixture
             $o->setDescription($val->description);
             $o->setBuiltIn(true);
             if ($val->permissions) {
-                $o->setPermissions($this->pr->resolveNames($val->permissions));
+                $this->pr->resolveNames($o, $val->permissions);
             }
             $o->setBuiltIn(true);
             $manager->persist($o);
