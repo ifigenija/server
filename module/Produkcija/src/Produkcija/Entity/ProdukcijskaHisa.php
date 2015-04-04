@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping AS ORM;
 /**
  * @ORM\Entity
  */
-class Koproducent
+class ProdukcijskaHisa
 {
     /**
      * @ORM\Id
@@ -26,8 +26,7 @@ class Koproducent
     private $popa;
 
     /**
-     * 
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\KoprodukcijaDelitev", mappedBy="koproducent")
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\ProdukcijaDelitev", mappedBy="koproducent")
      */
     private $koprodukcije;
 }

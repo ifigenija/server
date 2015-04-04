@@ -1,14 +1,13 @@
 <?php
 
+use Max\Exception\MaxException;
+
 /*
  * Licenca GPL V3 or later
  *  
  */
 
 namespace Max\Expect;
-
-use Max\Consts;
-use Max\Exception\MaxException;
 
 /**
  * TRait za expect funckcionalnost  
@@ -28,7 +27,7 @@ trait ExpectTrait
      * @param type $code
      * @throws MaxException
      */
-    protected function expect($truth, $code = 970001, $msgFormat, $params = [])
+    protected function expect($truth, $msgFormat, $code = 970001, $params = [])
     {
         if (!$truth) {
 
@@ -38,7 +37,7 @@ trait ExpectTrait
             } else {
                 $msg = $msgFormat;
             }
-            throw new MaxException($msg, $code);
+            throw new \Max\Exception\MaxException($msg, $code);
         }
     }
 

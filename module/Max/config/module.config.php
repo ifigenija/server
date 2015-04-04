@@ -76,6 +76,11 @@ return [
             ]
         ]
     ],
+    'controller_plugins' => [
+        'invokables' => [
+            'trnsl' => 'Max\Plugin\Trnsl'
+        ],
+    ],
     'form_elements' => [
         'invokables' => [
 // elementi

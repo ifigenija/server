@@ -144,6 +144,12 @@ class Popa
      *     inverseJoinColumns={@ORM\JoinColumn(name="oseba_id", referencedColumnName="id", nullable=false)}
      * )
      */
+    private $osebe;
+
+    /**
+     * 
+     * 
+     */
     private $oseba;
 
     /**
@@ -160,7 +166,17 @@ class Popa
     private $telefonske;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="popa")
+     */
+    private $trrji;
+
+    /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="popa")
+     */
+    private $pogodbe;
+
+    /**
+     * 
      */
     private $pogodba;
 
@@ -235,6 +251,11 @@ class Popa
 
     /**
      * @ORM\Column(nullable=true)
+     */
+    private $zamejstvo;
+
+    /**
+     * 
      */
     private $tel;
 

@@ -30,8 +30,23 @@ class Pogodba
     private $vrednostUre;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Sodelovanje", inversedBy="pogodba")
-     * @ORM\JoinColumn(name="sodelovanje_id", referencedColumnName="id")
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $aktivna;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $opis;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="pogodba")
+     */
+    private $alternacije;
+
+    /**
+     * 
+     * 
      */
     private $sodelovanje;
 
@@ -42,8 +57,14 @@ class Pogodba
     private $oseba;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="pogodba")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="pogodbe")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
      */
     private $popa;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trr")
+     * @ORM\JoinColumn(name="trr_id", referencedColumnName="id")
+     */
+    private $trr;
 }

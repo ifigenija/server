@@ -92,6 +92,11 @@ class Dogodek
     private $prostor;
 
     /**
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Arhivalija", mappedBy="dogodek")
+     */
+    private $arhiv;
+
+    /**
      * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="dogodek")
      */
     private $terminiStoritve;
@@ -105,5 +110,11 @@ class Dogodek
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\ProdajaPredstave", mappedBy="dogodek")
      */
     private $prodajaPredstave;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona", inversedBy="dogodki")
+     * @ORM\JoinColumn(name="sezona_id", referencedColumnName="id")
+     */
+    private $sezona;
 
 }

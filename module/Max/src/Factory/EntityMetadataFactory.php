@@ -241,7 +241,8 @@ class EntityMetadataFactory
             $entites = $this->em->getConfiguration()->getMetadataDriverImpl()->getAllClassNames();
             $config = [];
             foreach ($entites as $class) {
-                $name=array_pop(explode('\\', $class));
+                $array = explode('\\', $class);
+                $name=array_pop($array);
                 $config[$name] = $this->factory($class)->getId()->prefix;
             }
             $cache->save($cacheId, $config);

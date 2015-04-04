@@ -25,12 +25,13 @@ class Rekvizit
     private $vrsta;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="rekvizit")
-     * @ORM\JoinTable(
-     *     name="Uprizoritev2Rekvizit",
-     *     joinColumns={@ORM\JoinColumn(name="rekvizit_id", referencedColumnName="id", nullable=false)},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id", nullable=false)}
-     * )
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Rekviziterstvo", mappedBy="rekvizit")
+     */
+    private $rekviziterstvo;
+
+    /**
+     * 
+     * 
      */
     private $uprizoritev;
 }

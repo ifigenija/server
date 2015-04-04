@@ -2,16 +2,14 @@
 
 namespace Max\Controller;
 
-use Zend\Mvc\Controller\AbstractRestfulController;
 use Max\Exception\EntityNotFound;
 use Max\Exception\MaxException;
 use Max\Form\JsonForm;
 use Max\Repository\AbstractMaxRepository;
 use Max\Stdlib\Hydrator\Json;
-use Zend\Mvc\MvcEvent;
+use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\Paginator\Paginator;
 use Zend\View\Model\JsonModel;
-use ZfcRbac\Service\AuthorizationService;
 
 /**
  * Kontroler za splošni cikel list / view / create / update
@@ -70,16 +68,16 @@ class RestController
         $view = $this->params('view', 'default');
         $this->isApiEnabled('get', $view);
         try {
-            
             $sr = $this->getRepository();
             $object = $sr->find($id);
             if ($object) {
-                $perm = $this->getApiPermission('read', $view);
-                $this->expect($this->isGranted($perm, $object), $this->translate('Api dostop zavrnjen'), 100099);
+                $perm = $this->getApiPermission('get', $view);
+                $this->expect($this->isGranted($perm, $object)
+                        , $this->trnslt('Api dostop zavrnjen'), 100099);
                 $data = $this->hydr->extract($object);
                 return new JsonModel($data);
             } else {
-                $this->addError('Ni entitete z id-jem', 100098, 'warning');
+                $this->addError($this->trnslt('Ni entitete z id-jem'), 100098, 'warning');
             }
             return $this->getErrors();
         } catch (\Exception $e) {
@@ -100,12 +98,11 @@ class RestController
         $this->isApiEnabled('list', $listName);
         /* @var $sr  AbstractMaxRepository */
         $sr = $this->getRepository();
-        $trnsl = $this->getTranslator();
 
         try {
 
-            $perm = $this->getApiPermission('list', $listName);
-            $this->expect($this->isGranted($perm), $trnsl->translate('Api dostop zavrnjen'), 100012);
+            $perm = $this->getListPermission($listName);
+            $this->expect($this->isGranted($perm), $this->trnsl('Api dostop zavrnjen'), 100012);
 
 
             $filter = $this->buildFilterForm($this->getConfig('list.' . $listName));
@@ -160,16 +157,16 @@ class RestController
 
         /* @var $sr  AbstractMaxRepository */
         $sr = $this->getRepository();
-        $trnsl = $this->getTranslator();
+
 
         $this->form->setMode('EDIT');
         $object = $sr->find($id);
         try {
-            $perm = $this->getEntityPermission('update');
-            $this->expect($this->isGranted($perm, $object), $trnsl->translate('Dostop do api zavrnjen.'));
+            $perm = $this->getApiPermission('update', $view);
+            $this->expect($this->isGranted($perm, $object), $this->trnsl('Dostop do api zavrnjen.'));
 
             if (!$object) {
-                throw new MaxException($trnsl->translate('Objekt ne obstaja'), 100100);
+                throw new MaxException($this->trnsl('Objekt ne obstaja'), 100100);
             }
 
             $this->form->bind($object);
@@ -205,7 +202,7 @@ class RestController
         try {
             $object = new $this->entityClass;
             $perm = $this->getEntityPermission('create');
-            $this->expect($this->isGranted($perm, $object), "Api access denied", 100008);
+            $this->expect($this->isGranted($perm, $object), $this->trnsl("Api access denied"), 100008);
 
             $this->form->setMode('NEW');
             $this->form->bind($object);
@@ -235,14 +232,14 @@ class RestController
      */
     public function delete($id)
     {
-        
-        
+
+
         /* @var $sr  AbstractMaxRepository */
         $sr = $this->getRepository();
         $object = $sr->find($id);
 
         if (!$object) {
-            throw new EntityNotFound($trnsl->translate('Entiteta ne obstaja'), 100009);
+            throw new EntityNotFound($this->trnsl('Entiteta ne obstaja'), 100009);
         }
 
         $perm = $this->getEntityPermission('delete');
@@ -254,21 +251,21 @@ class RestController
             try {
                 $sr->delete($object);
                 $this->em->flush();
-                $this->addError($trnsl->translate('Uspešno brisano.'), 'info');
+                $this->addError($this->trnsl('Uspešno brisano.'), 'info');
                 return $this->getErrors('200');
             } catch (\Exception $exc) {
                 $this->addErrorFromException($exc);
-                $this->addError($trnsl->translate('Brisanje ni uspelo!'));
+                $this->addError($this->trnsl('Brisanje ni uspelo!'));
             }
         } else {
             try {
                 $this->em->remove($object);
                 $this->em->flush();
-                $this->addError($trnsl->translate('Uspešno brisano.'), 'info');
+                $this->addError($this->trnsl('Uspešno brisano.'), 'info');
                 return $this->getErrors('200');
             } catch (\Exception $exc) {
                 $this->addErrorFromException($exc);
-                $this->addError($trnsl->translate('Brisanje ni uspelo!'));
+                $this->addError($this->trnsl('Brisanje ni uspelo!'));
             }
         }
 
@@ -283,12 +280,10 @@ class RestController
      */
     protected function notSupported($code = 980404)
     {
-        $translator = $this->getServiceManager()->get('translator');
-        $this->addError($this->translate('Neveljavna REST akcija'), $code);
+        $this->addError($this->trnsl('Neveljavna REST akcija'), $code);
         return $this->getErrors();
     }
 
-    
     /**
      * Vrne metapodatke iz paginatorja za enkodiranje v JSON
      *
@@ -360,10 +355,11 @@ class RestController
      * @param string $method
      * @param string $view
      */
-    public function isApiEnabled($method, $view = null) {
-        
+    public function isApiEnabled($method, $view = null)
+    {
+
         $globalyDisabled = $this->getConfig('disabledMethods', []);
-                
+
         if (in_array($method, ['get', 'create', 'delete', 'update'])) {
             $viewDisabled = $this->getConfig("forms.$view.disabledMethods", []);
         } else {
@@ -371,12 +367,33 @@ class RestController
         }
 
         $disabled = array_merge($globalyDisabled, $viewDisabled);
-        
-        $this->expect(!in_array($method, $disabled), "$method disabled");
+
+        $this->expect(!in_array($method, $disabled), "$method disabled", 100020);
+    }
+
+    public function getListPermission($view)
+    {
+
+        $p1 = $this->getConfig("lists.$view.perm");
+        if ($p1) {
+            return $p1['perm'];
+        }
+        if ($this->getConfig("")) {
+            
+        }
+        return 'api-api';
+    }
+
+    public function getFormPermission($param)
+    {
         
     }
-    
-    
+
+    public function getPermission($prefix, $action)
+    {
+        
+    }
+
     public function buildFilterForm($config)
     {
         $fm = $this->getForm();

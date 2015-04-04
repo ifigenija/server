@@ -35,7 +35,7 @@ class Oseba
      *
      * @Max\Ui(type="toone")
      * @Max\I18n(label="Klient", hint="ID klienta", description="Poslovni partner od katerega je kontaktna oseba")
-     * @ORM\ManyToMany(targetEntity="App\Entity\Popa", mappedBy="oseba")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Popa", mappedBy="osebe")
      */
     protected $popa;
 
@@ -50,6 +50,21 @@ class Oseba
      * @Max\Ui(ident=true)
      */
     protected $naziv;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    private $ime;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    private $priimek;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    private $pesvdonim;
 
     /**
      * @ORM\Column(length=40, nullable=true)
@@ -78,6 +93,46 @@ class Oseba
     protected $email = '';
 
     /**
+     * @ORM\Column(nullable=true)
+     */
+    private $datumRojstva;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    private $emso;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    private $davcna;
+
+    /**
+     * @ORM\Column(type="string", length=1, nullable=true)
+     */
+    private $spol;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $opombe;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    private $drzavljanstvo;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    private $drzavaRojstva;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    private $krajRojstva;
+
+    /**
      * @ORM\OneToOne(targetEntity="Aaa\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)
      */
@@ -87,6 +142,11 @@ class Oseba
      * @ORM\OneToMany(targetEntity="App\Entity\Telefonska", mappedBy="oseba")
      */
     private $telefonske;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="oseba")
+     */
+    private $trrji;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="oseba")
@@ -99,7 +159,7 @@ class Oseba
     private $pogodba;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Sodelovanje", mappedBy="oseba")
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Zaposlitev", mappedBy="oseba")
      */
     private $sodelovanje;
 

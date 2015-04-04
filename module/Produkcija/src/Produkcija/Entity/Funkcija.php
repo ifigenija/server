@@ -30,6 +30,16 @@ class Funkcija
     private $velikost;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $pomembna;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $sort;
+
+    /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="vloga")
      */
     private $alternacije;

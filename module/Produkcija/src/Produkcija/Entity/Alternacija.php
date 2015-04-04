@@ -15,6 +15,11 @@ class Alternacija
     private $id;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $zaposlen;
+
+    /**
      * 
      */
     private $terminiStoritve;
@@ -26,7 +31,7 @@ class Alternacija
     private $vloga;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Sodelovanje", inversedBy="alternacija")
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Zaposlitev", inversedBy="alternacija")
      * @ORM\JoinColumn(name="sodelovanje_id", referencedColumnName="id")
      */
     private $sodelovanje;
@@ -38,8 +43,14 @@ class Alternacija
     private $oseba;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\KoprodukcijaDelitev", inversedBy="alternacije")
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ProdukcijaDelitev", inversedBy="alternacije")
      * @ORM\JoinColumn(name="koprodukcija_delitev_id", referencedColumnName="id")
      */
     private $koprodukcija;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Pogodba", inversedBy="alternacije")
+     * @ORM\JoinColumn(name="pogodba_id", referencedColumnName="id")
+     */
+    private $pogodba;
 }

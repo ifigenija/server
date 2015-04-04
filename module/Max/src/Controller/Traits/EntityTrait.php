@@ -92,7 +92,6 @@ trait EntityTrait
      */
     public function getRepository($class = null)
     {
-        echo $this->getEntityClass();
         
         if (!$class) {
             $rep = $this->getEm()->getRepository($this->getEntityClass());

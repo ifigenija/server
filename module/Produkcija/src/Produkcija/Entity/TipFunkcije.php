@@ -35,6 +35,11 @@ class TipFunkcije
     private $maxPrekrivanj;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $nastopajoc;
+
+    /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Funkcija", mappedBy="tipVloge", fetch="EXTRA_LAZY")
      */
     private $vloge;

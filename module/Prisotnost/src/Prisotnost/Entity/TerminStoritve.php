@@ -50,4 +50,10 @@ class TerminStoritve
      * @ORM\JoinColumn(name="alternacija_id", referencedColumnName="id")
      */
     private $alternacija;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba")
+     * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id", nullable=false)
+     */
+    private $oseba;
 }

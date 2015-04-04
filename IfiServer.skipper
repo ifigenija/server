@@ -186,10 +186,21 @@
         </orm-attributes>
       </field>
       <field name="naziv" size="40" uuid="4cdbd64f-69b6-40e5-8adc-8b5652c141a7"/>
+      <field name="ime" uuid="643d4746-8c96-4373-971a-42c0d23ac17e"/>
+      <field name="priimek" uuid="d4471f4e-d5bd-411d-a705-6c57303815bb"/>
+      <field name="pesvdonim" uuid="5a2640e6-84b2-4978-bad8-3f65f1b72ca0"/>
       <field name="funkcija" size="40" uuid="35fb5dcb-b9a8-40aa-a7e2-263eb5edf43d"/>
       <field name="email" size="40" uuid="ee9e205c-7c9f-4762-8274-c4a403d44069"/>
       <field name="naslov_id" uuid="44442b08-1383-4eb8-b9a4-90fba43033be"/>
       <field name="user_id" unique="true" uuid="9ac58228-b074-4e01-90e1-db0abaceeacd"/>
+      <field name="datumRojstva" uuid="dde14358-0b9e-4b51-91e8-b5308d0a595e"/>
+      <field name="emso" uuid="1e834d70-eec5-4a5e-91f7-89fc82aeec3d"/>
+      <field name="davcna" uuid="348dcfc1-c023-4be1-83b9-7083e1b42ad9"/>
+      <field name="spol" type="string" size="1" uuid="e3ef6945-aee7-4ad6-8ec4-6cf2726f3f94"/>
+      <field name="opombe" type="text" uuid="d89794cc-8a6f-453c-9e33-35c71f13fc41"/>
+      <field name="drzavljanstvo" uuid="c92e021b-c8c4-49c5-9ab1-d73b40b95dee"/>
+      <field name="drzavaRojstva" uuid="ee4f9ade-c657-4bd1-853b-bbb46ae14005"/>
+      <field name="krajRojstva" uuid="e2397acd-8114-4f87-87a5-fe84fd94dab4"/>
       <orm-attributes>
         <attribute name="repository-class">\App\Repository\Osebe</attribute>
         <attribute name="table">kose</attribute>
@@ -230,7 +241,7 @@
       <field name="datZav" type="date" uuid="a29a9f69-3e7c-4a5e-81c1-d62d744a2afd"/>
       <field name="datnZav" type="date" uuid="7e1055f2-17fc-4405-bddf-38f816f03480"/>
       <field name="drzava_id" required="true" uuid="88711ba4-8bf3-432f-94a7-cbb2d0b077ea"/>
-      <field name="tel" uuid="d605debc-77b7-466b-b2e8-48674a124b64"/>
+      <field name="zamejstvo" uuid="1e2db4a3-6b54-40cf-a9d3-0601da092b2f"/>
       <orm-attributes>
         <attribute name="repository-class">\Max\Repository\Popa</attribute>
         <attribute name="table">popa</attribute>
@@ -305,7 +316,7 @@
       <many-to-many-entity name="Popa" owning-side="true" alias="popa" uuid="0aa45968-a541-4ce7-9843-e104bb45b9e5">
         <many-to-many-field from="popa_id" to="id"/>
       </many-to-many-entity>
-      <many-to-many-entity name="Oseba" owning-side="false" alias="oseba" uuid="93552f3c-eac7-4c53-80ae-456faf93ff83">
+      <many-to-many-entity name="Oseba" owning-side="false" alias="osebe" uuid="93552f3c-eac7-4c53-80ae-456faf93ff83">
         <many-to-many-field from="oseba_id" to="id"/>
       </many-to-many-entity>
     </many-to-many>
@@ -329,6 +340,21 @@
     <association from="Telefonska" to="Popa" caption="Popa Telefonske" owner-alias="telefonske" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="27667b50-2424-4f64-a6f3-d0fd9d264a2f">
       <association-field from="popa_id" to="id"/>
     </association>
+    <entity name="Trr" uuid="1d43e294-aeee-4624-80a9-4e648b8a02a9">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="a0434b9c-f6fd-458c-86bb-8de6962461b4"/>
+      <field name="stevilka" type="string" uuid="ee6c896c-b4d2-4308-ae0b-ab1eb9bc79d7"/>
+      <field name="swift" type="string" uuid="e3733024-cee7-4937-8bc1-dcd6d507633d"/>
+      <field name="bic" type="string" uuid="135699e2-858f-4854-b7b0-c226122d0cd7"/>
+      <field name="banka" type="string" uuid="1b36a7f9-3289-4893-ae34-9cb4406d39e4"/>
+      <field name="popa_id" type="guid" uuid="d1fc3df9-cb2e-40f6-b638-0b22238adef2"/>
+      <field name="oseba_id" type="guid" uuid="22435644-18c7-4b7a-be3a-25245703fb6c"/>
+    </entity>
+    <association from="Trr" to="Popa" caption="Popa Trr" owner-alias="trrji" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="2882f490-7861-4c06-adf9-9a068a485140">
+      <association-field from="popa_id" to="id"/>
+    </association>
+    <association from="Trr" to="Oseba" caption="Oseba Trr" owner-alias="trrji" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="0fc4d8d7-d475-4df6-8a13-81f2db028b8a">
+      <association-field from="oseba_id" to="id"/>
+    </association>
     <orm-attributes>
       <attribute name="namespace">App\Entity</attribute>
       <attribute name="filename-format">entity-name-only</attribute>
@@ -345,8 +371,32 @@
       </field>
       <field name="faza" description="plan/ predprodukcija / produkcija / postprodukcija / arhiv" type="string" size="20" uuid="8c601729-7d98-467b-a054-0aa6c080ff5b"/>
       <field name="naslov" type="string" uuid="b2a4aedb-3fff-4d3a-bcb4-a23cd121ca95"/>
+      <field name="besedilo_id" type="guid" uuid="398d033a-e140-42b6-b6a9-6d73a9888bb4"/>
+      <field name="podnaslov" type="string" uuid="b4764ad6-4241-4b83-a427-d8fea6c53bfd"/>
+      <field name="delovniNaslov" type="string" uuid="7ae74f10-8d90-47b9-8f7e-63a5a525acc1"/>
+      <field name="datumPremiere" type="date" uuid="4ee21fae-5a16-4c56-8c15-83ee1031b1cc"/>
+      <field name="stOdmorov" type="integer" uuid="530e2461-e3f6-4e39-9fcc-1d14d10b93fe"/>
+      <field name="avtor" type="string" uuid="3461dbc3-d765-457d-b5c5-df1a448cdeaa"/>
+      <field name="gostujoca" type="boolean" uuid="2eba572f-683c-4404-815f-ffd9e656ddbf"/>
+      <field name="trajanje" type="integer" uuid="7fb426ad-6e51-4c9e-8032-c87ff744a5f3"/>
+      <field name="opis" type="text" uuid="2ad74c08-0b46-4e67-90ed-faef26705b71"/>
+      <field name="arhIdent" type="string" uuid="a102a79b-122e-42bb-be93-1034eee3a0e7"/>
+      <field name="arhOpomba" type="string" uuid="8a63b0f3-697b-40ad-9fa7-a895e5856b80"/>
+      <field name="datumZaklju&#x10D;ka" type="date" uuid="6c36eee8-dd78-40c9-bf1d-35d8666d65d3"/>
+      <field name="sloAvtor" type="boolean" uuid="5e17a9bb-3ae3-4838-9fc3-64838ff1fcc0"/>
+      <field name="zvrst_uprizoritve_id" type="integer" uuid="916e1fb8-3e25-402a-8ccc-2143f5bb49b3"/>
+      <field name="zvrst_surs_id" type="integer" uuid="b773e1ce-40ad-4df3-a344-ef39d0d47e7e"/>
     </entity>
-    <entity name="Koproducent" description="Ozna&#x10D;uje poslovnega partnerja, kot koproducenta, da se ga lahko uporabi na uprizoritvi" uuid="cdfc51b0-b6c4-4af5-8780-217a46067f1b">
+    <association from="Uprizoritev" to="Besedilo" caption="Besedilo Uprizoritev" inverse-alias="besedilo" many-owner="true" many-inverse="false" uuid="64ecf746-b184-4c08-926a-04c21e5bb259">
+      <association-field from="besedilo_id" to="id"/>
+    </association>
+    <association from="Uprizoritev" to="ZvrstUprizoritve" inverse-alias="zvrstUprizoritve" many-owner="true" many-inverse="false" uuid="0300f696-e490-4ffc-a4c5-fe2eac899118">
+      <association-field from="zvrst_uprizoritve_id" to="id"/>
+    </association>
+    <association from="Uprizoritev" to="ZvrstSurs" inverse-alias="zvrstSurs" many-owner="true" many-inverse="false" uuid="3f7a9446-4108-4cfc-821e-1ff0e166cddf">
+      <association-field from="zvrst_surs_id" to="id"/>
+    </association>
+    <entity name="ProdukcijskaHisa" description="Ozna&#x10D;uje poslovnega partnerja, kot koproducenta, da se ga lahko uporabi na uprizoritvi" uuid="cdfc51b0-b6c4-4af5-8780-217a46067f1b">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="34507d17-578f-4a36-a0ba-d977c0077586">
         <orm-attributes>
           <attribute name="generator">
@@ -357,7 +407,7 @@
       <field name="popa_id" unique="true" uuid="39efb28b-e8ae-448c-b643-3bd1b8784abd"/>
       <field name="status" type="string" size="20" uuid="f1cb72c2-499c-4e20-b3c3-c86ebef80a6d"/>
     </entity>
-    <association from="Koproducent" to="Popa" caption="Popa Koproducent" inverse-alias="popa" many-owner="false" many-inverse="false" uuid="8d8d5277-f842-4fed-a4a6-886a12699abf">
+    <association from="ProdukcijskaHisa" to="Popa" caption="Popa Koproducent" inverse-alias="popa" many-owner="false" many-inverse="false" uuid="8d8d5277-f842-4fed-a4a6-886a12699abf">
       <association-field from="popa_id" to="id"/>
     </association>
     <entity name="Alternacija" uuid="fb1b38f3-d0ef-4a6a-acbb-5f30f5c0c384">
@@ -372,18 +422,23 @@
       <field name="sodelovanje_id" uuid="94dbee7a-fbe8-49b5-afe2-2f25174fdd7c"/>
       <field name="oseba_id" uuid="6db019ec-f3d0-4219-8e45-c3e26cfb331b"/>
       <field name="koprodukcija_delitev_id" uuid="46528ef1-f5f5-4b7b-9c24-9c8a1575b9ce"/>
+      <field name="pogodba_id" type="guid" uuid="5e349566-ffe7-493c-8ff2-ea26fd154be9"/>
+      <field name="zaposlen" type="boolean" uuid="5960d6a1-ef9e-4372-989e-324f4e90af68"/>
     </entity>
     <association from="Alternacija" to="Funkcija" owner-alias="alternacije" inverse-alias="vloga" many-owner="true" many-inverse="false" parent-required="true" uuid="3f85f126-e696-4e0b-91fd-9425bf88b93f">
       <association-field from="vloga_id" to="id"/>
     </association>
-    <association from="Alternacija" to="Sodelovanje" caption="Sodelovanje Alternacija" owner-alias="alternacija" inverse-alias="sodelovanje" many-owner="true" many-inverse="false" uuid="182e073f-fbca-4cce-aba7-c7fedb721cdb">
+    <association from="Alternacija" to="Zaposlitev" caption="Sodelovanje Alternacija" owner-alias="alternacija" inverse-alias="sodelovanje" many-owner="true" many-inverse="false" uuid="182e073f-fbca-4cce-aba7-c7fedb721cdb">
       <association-field from="sodelovanje_id" to="id"/>
     </association>
     <association from="Alternacija" to="Oseba" caption="Oseba Alternacija" owner-alias="alternacija" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="c3be1a92-b961-45d5-9bd5-ae1847ff41a1">
       <association-field from="oseba_id" to="id"/>
     </association>
-    <association from="Alternacija" to="KoprodukcijaDelitev" owner-alias="alternacije" inverse-alias="koprodukcija" many-owner="true" many-inverse="false" uuid="8eb23c3e-27cf-40c5-82e3-b2b82448f6a8">
+    <association from="Alternacija" to="ProdukcijaDelitev" owner-alias="alternacije" inverse-alias="koprodukcija" many-owner="true" many-inverse="false" uuid="8eb23c3e-27cf-40c5-82e3-b2b82448f6a8">
       <association-field from="koprodukcija_delitev_id" to="id"/>
+    </association>
+    <association from="Alternacija" to="Pogodba" caption="Pogodba Alternacija" owner-alias="alternacije" inverse-alias="pogodba" many-owner="true" many-inverse="false" uuid="c012b288-5a27-45bf-b5e0-44ec1c3d18c5">
+      <association-field from="pogodba_id" to="id"/>
     </association>
     <entity name="Pogodba" uuid="5fb1263c-ed9f-4a50-9df7-f10c603b109a">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="d9cba9ce-25d2-4316-a0d3-02dbf81f2132">
@@ -393,7 +448,6 @@
           </attribute>
         </orm-attributes>
       </field>
-      <field name="sodelovanje_id" uuid="ea771783-b5a5-4c97-a60c-8b3e9598ce58"/>
       <field name="oseba_id" required="true" uuid="f13304ee-c9ec-4640-9a67-9704c02fe59a"/>
       <field name="popa_id" uuid="35eae08f-29d4-4180-b29d-dc64e977db62"/>
       <field name="vrednostVaje" type="decimal" uuid="d03abd0e-eb8f-48da-9da2-f12d444d10c0">
@@ -414,17 +468,20 @@
           <attribute name="precision">12</attribute>
         </orm-attributes>
       </field>
+      <field name="trr_id" type="integer" uuid="7486afaf-e9ab-4a65-85a3-5a2c3d79b4dd"/>
+      <field name="aktivna" type="boolean" uuid="7302c493-a938-4438-941d-96dabcf053b8"/>
+      <field name="opis" type="text" uuid="621d8322-b12f-46c1-8215-95ececda011c"/>
     </entity>
-    <association from="Pogodba" to="Sodelovanje" owner-alias="pogodba" inverse-alias="sodelovanje" many-owner="true" many-inverse="false" uuid="de4de280-27c8-48e1-a4d6-7da612dca9e2">
-      <association-field from="sodelovanje_id" to="id"/>
-    </association>
     <association from="Pogodba" to="Oseba" caption="Oseba Pogodba" owner-alias="pogodba" inverse-alias="oseba" many-owner="true" many-inverse="false" parent-required="true" uuid="097b822b-6bcf-4694-9461-ada2fe5de6a6">
       <association-field from="oseba_id" to="id"/>
     </association>
-    <association from="Pogodba" to="Popa" caption="Popa Pogodba" owner-alias="pogodba" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="4a3cb2e9-3c1e-4a28-a85e-cae38ba91a56">
+    <association from="Pogodba" to="Popa" caption="Popa Pogodba" owner-alias="pogodbe" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="4a3cb2e9-3c1e-4a28-a85e-cae38ba91a56">
       <association-field from="popa_id" to="id"/>
     </association>
-    <entity name="Sodelovanje" uuid="93c567ba-43dc-49fd-a680-7799524cab0c">
+    <association from="Pogodba" to="Trr" caption="Trr Pogodba" inverse-alias="trr" many-owner="true" many-inverse="false" uuid="c3bf1c85-08bc-4663-93cd-7d8fd2619dee">
+      <association-field from="trr_id" to="id"/>
+    </association>
+    <entity name="Zaposlitev" uuid="93c567ba-43dc-49fd-a680-7799524cab0c">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="1ece2f42-99f9-47c4-94b5-05663ef575be">
         <orm-attributes>
           <attribute name="generator">
@@ -437,11 +494,17 @@
       <field name="konec" type="date" uuid="899a3f8a-4e67-4410-9df2-1666f7c4be07"/>
       <field name="tip" description="zaposlitev / pogodba / voluntersko" type="integer" uuid="5ba4b1b0-3914-405b-9b50-a177e202d978"/>
       <field name="oseba_id" uuid="43289ab2-273e-4627-9d91-8b18401b63b2"/>
+      <field name="delovnaObveza" type="integer" uuid="28508023-f063-436d-a6e4-3a7be1aaea17"/>
+      <field name="malica" uuid="851e413a-ce88-41f6-9b57-b1b9db43a8ea"/>
+      <field name="izmenskoDelo" type="boolean" uuid="c6b50dd7-1c8a-4bbe-9bcd-cfbf99af67c7"/>
+      <field name="individualnaPogodba" type="boolean" uuid="71ea983c-26fb-4935-9c43-b041fdab7a30"/>
+      <field name="jeZaposlenVdrugemJz" type="boolean" uuid="f8502ac0-0cf7-4e92-9e01-2f36fdb508d8"/>
+      <field name="jeNastopajoci" type="boolean" uuid="984f8b46-8b5d-4cb6-89df-163e4435822f"/>
     </entity>
-    <association from="Sodelovanje" to="Oseba" caption="Oseba Sodelovanje" owner-alias="sodelovanje" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="913f58ca-5980-4103-ad46-7fb28666ab3f">
+    <association from="Zaposlitev" to="Oseba" caption="Oseba Sodelovanje" owner-alias="sodelovanje" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="913f58ca-5980-4103-ad46-7fb28666ab3f">
       <association-field from="oseba_id" to="id"/>
     </association>
-    <entity name="KoprodukcijaDelitev" uuid="85fc6aa4-1cde-4b7c-a4e3-48af305373de">
+    <entity name="ProdukcijaDelitev" uuid="85fc6aa4-1cde-4b7c-a4e3-48af305373de">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="1810f546-c403-4c28-b28a-2ca765920d7f">
         <orm-attributes>
           <attribute name="generator">
@@ -452,11 +515,12 @@
       <field name="uprizoritev_id" required="true" uuid="cf77655c-4ae9-4b32-ae2b-be8f1bc41a11"/>
       <field name="odstotekFinanciranja" type="decimal" uuid="fc9fbb5c-e859-441e-a3c6-e42dc7c7a625"/>
       <field name="koproducent_id" required="true" uuid="1a9f45c9-7604-4afb-ac02-8cc4fddc344b"/>
+      <field name="vrstaKoproducenta" uuid="3938454d-4655-4aab-b3d0-55e68da69ac8"/>
     </entity>
-    <association from="KoprodukcijaDelitev" to="Uprizoritev" owner-alias="koprodukcija" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" parent-required="true" uuid="a31e2f56-cc75-4f4c-bc23-33616f1350a3">
+    <association from="ProdukcijaDelitev" to="Uprizoritev" owner-alias="koprodukcija" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" parent-required="true" uuid="a31e2f56-cc75-4f4c-bc23-33616f1350a3">
       <association-field from="uprizoritev_id" to="id"/>
     </association>
-    <association from="KoprodukcijaDelitev" to="Koproducent" caption="Koproducent KoprodukcijaDelitev" owner-alias="koprodukcije" inverse-alias="koproducent" many-owner="true" many-inverse="false" parent-required="true" uuid="f50f3026-dd91-40f0-af6f-1b898b657780">
+    <association from="ProdukcijaDelitev" to="ProdukcijskaHisa" owner-alias="koprodukcije" inverse-alias="koproducent" many-owner="true" many-inverse="false" parent-required="true" uuid="f50f3026-dd91-40f0-af6f-1b898b657780">
       <association-field from="koproducent_id" to="id"/>
     </association>
     <entity name="Funkcija" description="Vloga na uprizoritvi" uuid="2e881e9c-8460-48b3-b6b4-bbaf371fcbc3">
@@ -473,6 +537,8 @@
       <field name="uprizoritev_id" required="true" uuid="ce3b8f9a-2c29-41ec-b939-2b9235932bae"/>
       <field name="alternacija_id" uuid="63907e3d-6015-47d1-aa14-a9fee3cdd0d6"/>
       <field name="tip_vloge_id" uuid="4bb8d35a-77d9-4892-8bc8-440b0af1e557"/>
+      <field name="pomembna" type="boolean" uuid="6b6614ec-5e2d-4859-b666-8533f4b70777"/>
+      <field name="sort" type="integer" uuid="66dfe073-e8b8-4319-9719-55169e692988"/>
     </entity>
     <association from="Funkcija" to="Uprizoritev" owner-alias="vloge" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" parent-required="true" uuid="a303d5d9-bf84-4df5-9228-9a6abfae3a97">
       <association-field from="uprizoritev_id" to="id"/>
@@ -501,6 +567,14 @@
       </field>
       <field name="naslov" type="string" uuid="d3c2e1d8-47cc-43b8-b14b-f9d575f1eadb"/>
       <field name="avtor" type="string" uuid="153ccede-6947-4ae0-9014-4e551281c087"/>
+      <field name="podnaslov" type="string" uuid="8cdb4cb3-b2e9-4124-aa1a-7faab62d008f"/>
+      <field name="jezik" type="string" uuid="fa019238-1656-46dd-93be-3550340a579c"/>
+      <field name="naslovIzvirnika" type="string" uuid="6c490596-a1c9-40f3-8cfb-7ee5b8be116b"/>
+      <field name="datumPrejema" type="string" uuid="ea2174cb-0141-49b2-8527-f66c702453c9"/>
+      <field name="moskeVloge" type="integer" uuid="ae842bf2-1504-404f-bae8-5142d8ad9cdd"/>
+      <field name="zenskeVloge" type="integer" uuid="deebf805-fb7e-4888-ba16-afe9499e3978"/>
+      <field name="prevajalec" type="string" uuid="3fd6e0db-76c8-4e4f-9a41-bcd6c931cda2"/>
+      <field name="povzetekVsebine" type="string" uuid="c4875c8e-3c32-484f-88e9-55273b379c21"/>
     </entity>
     <entity name="Rekvizit" uuid="c966f43d-ea94-4ff6-bf91-dc47ab5f399a">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="71c5ebc9-b775-4ad0-b9af-c6ffe3bdb778">
@@ -513,18 +587,6 @@
       <field name="ime" type="string" uuid="4cf50e6c-0f06-4651-8b5a-656f83abfadb"/>
       <field name="vrsta" type="string" uuid="e40530ca-122b-4874-b9f7-973e4690b1be"/>
     </entity>
-    <entity name="Uprizoritev2Rekvizit" uuid="95a97d1a-3843-4607-b482-3d6f2d50684a">
-      <field name="uprizoritev_id" required="true" primary="true" uuid="4422f562-5e55-4055-8ffd-905ec482ae90"/>
-      <field name="rekvizit_id" required="true" primary="true" uuid="b47ae3ae-7372-46bc-a319-6f7cc0d445e7"/>
-    </entity>
-    <many-to-many mn-entity="Uprizoritev2Rekvizit" uuid="412de1f8-b62f-44a1-9884-2c00fc4c917f">
-      <many-to-many-entity name="Rekvizit" owning-side="true" alias="rekvizit" uuid="91b94fe9-ef5f-4686-aec9-733d42a43535">
-        <many-to-many-field from="rekvizit_id" to="id"/>
-      </many-to-many-entity>
-      <many-to-many-entity name="Uprizoritev" owning-side="false" alias="uprizoritev" uuid="84930868-b4c3-47d1-8d61-3cd972ae693c">
-        <many-to-many-field from="uprizoritev_id" to="id"/>
-      </many-to-many-entity>
-    </many-to-many>
     <entity name="TipFunkcije" uuid="772b7b64-6546-43a8-908c-5400c169be85">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="1d4743d1-7121-4746-8d3e-e198687dab8d">
         <orm-attributes>
@@ -537,7 +599,52 @@
       <field name="opis" type="text" uuid="b3219c9c-cf82-4a90-9fe9-d59527e6711a"/>
       <field name="dovoliPrekrivanje" type="boolean" uuid="9acd8781-b113-483e-b11f-66deecd9d809"/>
       <field name="maxPrekrivanj" type="integer" uuid="3058b61c-9f19-4757-b97a-4689484c283e"/>
+      <field name="nastopajoc" type="boolean" uuid="cd639534-771b-45c6-b39c-c00dd1ce8cf9"/>
     </entity>
+    <entity name="Arhivalija" uuid="a04c0db3-b7d2-4a9a-bf5a-da3120744ced">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="c85ab7c1-8877-41f3-842b-6bb16332950a"/>
+      <field name="dogodek_id" type="guid" uuid="17c516fb-2efe-4893-a737-f77bfa001da0"/>
+      <field name="uprizoritev_id" type="guid" uuid="049f8ae7-2085-4e9c-9d95-b2822437f1a9"/>
+      <field name="oznakaDatuma" type="string" uuid="14cc2f44-32ff-4312-a33a-c5eaf3481614"/>
+      <field name="datum" type="date" uuid="0f6a0910-cbc6-4b06-b874-b9f45eaa9ec5"/>
+      <field name="fizicnaOblika" type="string" uuid="5c2dfb98-e21d-458e-95a8-b2040d65b342"/>
+      <field name="izvorDigitalizata" type="string" uuid="22f06c9b-42df-4a6c-a9aa-f06606167911"/>
+      <field name="povzetek" type="text" uuid="17a39344-d654-49ce-b34e-4cf66c772df6"/>
+      <field name="opombe" type="text" uuid="387ced95-1806-4754-ac39-4c634760e4d6"/>
+      <field name="lokacijaOriginala" type="string" uuid="c183d33c-6d38-4a10-9932-1282984b0166"/>
+      <field name="objavljeno" type="string" uuid="751ce4d6-e862-4aca-9003-8441c25c4f35"/>
+      <field name="naslov" type="string" uuid="4da22e5d-b302-47e3-b906-590375534d27"/>
+      <field name="avtorstvo" type="string" uuid="092f5d59-6d70-4169-9ab9-afc002bd3e12"/>
+    </entity>
+    <association from="Arhivalija" to="Dogodek" caption="Dogodek Arhiv" owner-alias="arhiv" inverse-alias="dogodek" many-owner="true" many-inverse="false" uuid="d35b51f5-c9be-4e1e-9628-118e2d5a9fc6">
+      <association-field from="dogodek_id" to="id"/>
+    </association>
+    <association from="Arhivalija" to="Uprizoritev" caption="Uprizoritev Arhiv" owner-alias="arhiv" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" uuid="b96e9abb-286f-4fef-ba15-9fa829ac968e">
+      <association-field from="uprizoritev_id" to="id"/>
+    </association>
+    <entity name="ZvrstUprizoritve" uuid="064b8109-e697-4483-a021-6290e08bd8a9">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="7e35196f-f7f1-49b0-ae81-43f1b1a641cd"/>
+      <field name="ime" type="string" uuid="b96d2c89-db84-40e0-a4c3-0ff5d38c127c"/>
+      <field name="opis" type="string" uuid="126e83b6-146b-467c-a1e6-ef755fe8f8b1"/>
+    </entity>
+    <entity name="ZvrstSurs" uuid="0590ef21-6b77-4fb7-a82b-16bf5d3b3180">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="55bab13a-abbb-4a43-9723-b0f75a926091"/>
+      <field name="ime" type="string" uuid="f3207710-0e0b-46e1-915b-1b07b748b135"/>
+      <field name="naziv" type="string" uuid="1cc199a0-f0d8-47bd-bdf7-1bb20507e016"/>
+    </entity>
+    <entity name="Rekviziterstvo" uuid="3b7195b9-35b7-49a0-bd54-0a2fd59709ff">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="33cdb1b4-f0d4-464d-a332-c128af0e33d3"/>
+      <field name="namenUporabe" type="boolean" uuid="2f6aacb6-358b-48a8-8653-3068c3b5243f"/>
+      <field name="opisPostavitve" type="text" uuid="90a8d94a-0397-42f6-898e-79d70c5eee62"/>
+      <field name="rekvizit_id" type="guid" uuid="7073bc68-bef9-4f31-aee1-c8ac35c41098"/>
+      <field name="uprizoritev_id" type="guid" uuid="c21d5ba5-d385-439b-a5ce-b8801948d04f"/>
+    </entity>
+    <association from="Rekviziterstvo" to="Rekvizit" caption="Rekvizit Rekviziterstvo" owner-alias="rekviziterstvo" inverse-alias="rekvizit" many-owner="true" many-inverse="false" uuid="8635ad22-49e0-49d2-8ccd-2d1d3f139091">
+      <association-field from="rekvizit_id" to="id"/>
+    </association>
+    <association from="Rekviziterstvo" to="Uprizoritev" caption="Uprizoritev Rekviziterstvo" owner-alias="rekviziti" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" uuid="f284cd27-323b-4a15-8b10-2bb40c623fd1">
+      <association-field from="uprizoritev_id" to="id"/>
+    </association>
     <orm-attributes>
       <attribute name="namespace">Produkcija\Entity</attribute>
       <attribute name="filename-format">entity-name-only</attribute>
@@ -564,6 +671,7 @@
       <field name="ime" type="string" uuid="5d09a65b-4300-49df-8399-83558fc78e1d"/>
       <field name="dogodek_izven_id" type="integer" unique="true" uuid="0514fd18-cc72-4123-9387-9015ae4a885f"/>
       <field name="prostor_id" type="integer" unique="true" uuid="5e6c624d-603b-4bcc-b723-d897155fa9ce"/>
+      <field name="sezona_id" type="integer" uuid="b7472670-26c6-4f44-af8e-0ad680a5b260"/>
       <index name="zacetek">
         <index-field name="zacetek"/>
       </index>
@@ -588,6 +696,9 @@
     </association>
     <association from="Dogodek" to="Prostor" caption="Prostor Dogodek" inverse-alias="prostor" many-owner="false" many-inverse="false" uuid="0a253b35-54a8-4eff-9fed-a003fafe8a9a">
       <association-field from="prostor_id" to="id"/>
+    </association>
+    <association from="Dogodek" to="Sezona" caption="Sezona Dogodek" owner-alias="dogodki" inverse-alias="sezona" many-owner="true" many-inverse="false" uuid="01f1c255-6b31-4f51-8ef8-8516233cd51f">
+      <association-field from="sezona_id" to="id"/>
     </association>
     <entity name="Gostovanje" description="Ko se gre na gostovanje " uuid="839a6864-c7e1-4f7f-94c5-39c430703662">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="6e37db4a-ac9f-4a2a-97ba-e94547c25dd9">
@@ -668,6 +779,13 @@
         </orm-attributes>
       </field>
     </entity>
+    <entity name="Sezona" uuid="4b4bded0-aec2-461d-82ea-4fb1dbac103e">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="f48f299d-a978-462d-ab60-b0e66301efbd"/>
+      <field name="imeSezone" type="string" uuid="cdfd84d6-73d1-46e6-9a1f-e74c450c45a3"/>
+      <field name="zacetek" type="date" uuid="5588228b-d0f4-420f-8677-0fbd1930c656"/>
+      <field name="konec" type="date" uuid="b0225fb5-113f-4807-8769-8159c88cc2a0"/>
+      <field name="aktivna" type="boolean" uuid="81eee70e-1cba-4640-8d75-b486f4cb65cc"/>
+    </entity>
     <orm-attributes>
       <attribute name="namespace">Koledar\Entity</attribute>
       <attribute name="filename-format">entity-name-only</attribute>
@@ -703,12 +821,16 @@
       <field name="zacetek" type="datetime" uuid="8a41f39b-bed9-4ce5-bf91-acc993e0c5be"/>
       <field name="konec" type="datetime" uuid="c0f402d6-9756-4337-a09a-e9cb9a5f9b92"/>
       <field name="planiranoTraja" type="decimal" uuid="71b2b0c8-8660-41f7-93dc-c3b3b09288f0"/>
+      <field name="oseba_id" type="guid" required="true" uuid="5af35d60-a550-4f68-a3c0-4011a7733ce6"/>
     </entity>
     <association from="TerminStoritve" to="Dogodek" caption="Dogodek TerminStoritve" owner-alias="terminiStoritve" inverse-alias="dogodek" many-owner="true" many-inverse="false" uuid="c165a486-3e42-4676-b647-cf9bde007c92">
       <association-field from="dogodek_id" to="id"/>
     </association>
     <association from="TerminStoritve" to="Alternacija" caption="Alternacija TerminStoritve" inverse-alias="alternacija" many-owner="true" many-inverse="false" uuid="028f3b57-750f-49ab-bd0c-d386238dc984">
       <association-field from="alternacija_id" to="id"/>
+    </association>
+    <association from="TerminStoritve" to="Oseba" caption="Oseba TerminStoritve" inverse-alias="oseba" many-owner="true" many-inverse="false" parent-required="true" uuid="5c552318-2760-4dbc-b55e-15c195189aaf">
+      <association-field from="oseba_id" to="id"/>
     </association>
     <orm-attributes>
       <attribute name="filename-format">entity-name-only</attribute>
@@ -948,56 +1070,68 @@
   <visual-data>
     <entity uuid="002db539-6b1d-43ca-b1c6-aabb02423e5c" bg-color="4294967295" hdr-color="4292006610" position-x="371" position-y="28" size-x="0" size-x2="115" size-y="0" size-y2="60"/>
     <association uuid="00a4d94b-ce9b-4bdf-8c1b-53246e8e7aa6" caption1-position-x="-10" caption1-position-y="35" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="01f1c255-6b31-4f51-8ef8-8516233cd51f" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="028f3b57-750f-49ab-bd0c-d386238dc984" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
+    <association uuid="0300f696-e490-4ffc-a4c5-fe2eac899118" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="04a5be80-1359-4276-9cc4-2b2203c65829" caption1-position-x="77" caption1-position-y="83" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <entity uuid="0590ef21-6b77-4fb7-a82b-16bf5d3b3180" bg-color="4294967295" hdr-color="4292006610" position-x="92" position-y="164" size-x="0" size-x2="75" size-y="0" size-y2="59"/>
+    <entity uuid="064b8109-e697-4483-a021-6290e08bd8a9" bg-color="4294967295" hdr-color="4292006610" position-x="401" position-y="586" size-x="0" size-x2="77" size-y="0" size-y2="59"/>
     <association uuid="07d7cc37-79a4-479e-9ad9-52dbd99e0e31" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="097b822b-6bcf-4694-9461-ada2fe5de6a6" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="0a253b35-54a8-4eff-9fed-a003fafe8a9a" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <many-to-many-association-entity uuid="0aa45968-a541-4ce7-9843-e104bb45b9e5" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0"/>
     <association uuid="0d11f65b-5b58-441c-b2c0-7cf22d4de780" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="0fc4d8d7-d475-4df6-8a13-81f2db028b8a" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="142a04fd-0736-4d43-84ea-7f8e1d76378b" bg-color="4294967295" hdr-color="4292006610" position-x="236" position-y="383" size-x="0" size-x2="96" size-y="0" size-y2="60"/>
     <association uuid="182e073f-fbca-4cce-aba7-c7fedb721cdb" caption1-position-x="-55" caption1-position-y="5" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <module uuid="1c11ba6b-dc14-4ab2-bb77-f92c53686ca3" bg-color="4294897635" position-x="1727" position-y="610" size-x="3" size-x2="792" size-y="-3" size-y2="330"/>
-    <entity uuid="1f68be83-ac13-4ab5-ba28-a5352fc33f3b" bg-color="4294967295" hdr-color="4292006610" position-x="291" position-y="478" size-x="0" size-x2="127" size-y="0" size-y2="59"/>
+    <module uuid="1c11ba6b-dc14-4ab2-bb77-f92c53686ca3" bg-color="4294897635" position-x="1728" position-y="688" size-x="3" size-x2="792" size-y="-27" size-y2="330"/>
+    <entity uuid="1d43e294-aeee-4624-80a9-4e648b8a02a9" bg-color="4294967295" hdr-color="4292006610" position-x="33" position-y="607" size-x="0" size-x2="86" size-y="0" size-y2="115"/>
+    <entity uuid="1f68be83-ac13-4ab5-ba28-a5352fc33f3b" bg-color="4294967295" hdr-color="4292006610" position-x="645" position-y="502" size-x="0" size-x2="92" size-y="0" size-y2="59"/>
     <entity uuid="250fcf52-3173-45dc-a1fa-0aab3e9916c2" bg-color="4294967295" hdr-color="4292006610" position-x="-389" position-y="25" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
     <entity uuid="2525a53d-338c-4ceb-873a-e1b68c728f29" bg-color="4294967295" hdr-color="4292006610" position-x="289" position-y="20" size-x="0" size-x2="101" size-y="0" size-y2="129"/>
     <association uuid="25f9afc1-dd4b-4983-b323-df7912af77b7" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="2644e9ed-4490-41ec-aab8-3505e88e84b6" bg-color="4294967295" hdr-color="4292006610" position-x="574" position-y="71" size-x="0" size-x2="101" size-y="0" size-y2="59"/>
-    <module uuid="26a39b04-dc43-4ef3-9963-490198aeae62" bg-color="4293584113" position-x="1538" position-y="33" size-x="-185" size-x2="979" size-y="-3" size-y2="559"/>
+    <entity uuid="2644e9ed-4490-41ec-aab8-3505e88e84b6" bg-color="4294967295" hdr-color="4292006610" position-x="405" position-y="22" size-x="0" size-x2="101" size-y="0" size-y2="59"/>
+    <module uuid="26a39b04-dc43-4ef3-9963-490198aeae62" bg-color="4293584113" position-x="1538" position-y="33" size-x="-179" size-x2="979" size-y="-3" size-y2="603"/>
     <association uuid="27667b50-2424-4f64-a6f3-d0fd9d264a2f" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="2882f490-7861-4c06-adf9-9a068a485140" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="2924dd49-c2a1-470f-80b0-b8ee5649d736" bg-color="4294967295" hdr-color="4292006610" position-x="-320" position-y="110" size-x="0" size-x2="113" size-y="0" size-y2="45"/>
-    <entity uuid="2e881e9c-8460-48b3-b6b4-bbaf371fcbc3" bg-color="4294967295" hdr-color="4292006610" position-x="125" position-y="373" size-x="0" size-x2="113" size-y="0" size-y2="101"/>
-    <entity uuid="2ed4c60f-977f-4c00-8af4-a48cf0cfb44a" bg-color="4294967295" hdr-color="4292006610" position-x="360" position-y="222" size-x="0" size-x2="146" size-y="0" size-y2="59"/>
+    <entity uuid="2e881e9c-8460-48b3-b6b4-bbaf371fcbc3" bg-color="4294967295" hdr-color="4292006610" position-x="170" position-y="531" size-x="0" size-x2="109" size-y="0" size-y2="143"/>
+    <entity uuid="2ed4c60f-977f-4c00-8af4-a48cf0cfb44a" bg-color="4294967295" hdr-color="4292006610" position-x="379" position-y="320" size-x="0" size-x2="111" size-y="0" size-y2="87"/>
     <association uuid="32285cf2-efa7-42a9-8291-371e39fc5290" color="4287255714"/>
     <association uuid="3290e250-80a6-414c-85bf-d26744c117e4" center-position-x="0" center-position-y="0" color="4291674923"/>
     <entity uuid="33c37275-c415-483d-9d90-a9f42a021142" bg-color="4294967295" hdr-color="4292006610" position-x="228" position-y="224" size-x="0" size-x2="87" size-y="0" size-y2="59"/>
     <entity uuid="35ea88cd-3631-4796-b245-36a8156d6576" bg-color="4294967295" hdr-color="4292006610" position-x="137" position-y="32" size-x="0" size-x2="96" size-y="0" size-y2="87"/>
+    <entity uuid="3b7195b9-35b7-49a0-bd54-0a2fd59709ff" bg-color="4294967295" hdr-color="4292006610" position-x="474" position-y="203" size-x="0" size-x2="126" size-y="0" size-y2="87"/>
+    <association uuid="3f7a9446-4108-4cfc-821e-1ff0e166cddf" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="3f85f126-e696-4e0b-91fd-9425bf88b93f" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="4122e19e-43dc-4743-b178-5a4ded27a837" bg-color="4294967295" hdr-color="4292006610" position-x="84" position-y="30" size-x="0" size-x2="102" size-y="0" size-y2="101"/>
-    <many-to-many-association uuid="412de1f8-b62f-44a1-9884-2c00fc4c917f" color="4288059030"/>
+    <entity uuid="4122e19e-43dc-4743-b178-5a4ded27a837" bg-color="4294967295" hdr-color="4292006610" position-x="65" position-y="90" size-x="0" size-x2="102" size-y="0" size-y2="101"/>
     <association uuid="4a3cb2e9-3c1e-4a28-a85e-cae38ba91a56" caption1-position-x="8" caption1-position-y="-6" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <entity uuid="4b4bded0-aec2-461d-82ea-4fb1dbac103e" bg-color="4294967295" hdr-color="4292006610" position-x="331" position-y="311" size-x="0" size-x2="99" size-y="0" size-y2="87"/>
     <entity uuid="4e0f088d-bb63-4a58-9548-d2d76829c4c2" bg-color="4294967295" hdr-color="4292006610" position-x="217" position-y="487" size-x="0" size-x2="100" size-y="0" size-y2="101"/>
     <association uuid="52d1b1c6-8370-45bc-8220-bc683ed0a77f" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="52f7b214-82a7-49bd-a5c0-6a939dfb92bb" bg-color="4294967295" hdr-color="4292006610" position-x="617" position-y="455" size-x="0" size-x2="146" size-y="0" size-y2="87"/>
+    <entity uuid="52f7b214-82a7-49bd-a5c0-6a939dfb92bb" bg-color="4294967295" hdr-color="4292006610" position-x="845" position-y="436" size-x="0" size-x2="111" size-y="0" size-y2="101"/>
     <association uuid="54077895-b617-4198-b631-3bc8e4a0906c" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="549b0800-61e6-47c2-9244-2abca7f26629" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <association uuid="5622c428-af19-41f9-b52d-3e61c3ece72c" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <module uuid="5a3860bf-fced-4c01-909d-0f0c94622f55" bg-color="4293391869" position-x="829" position-y="468" size-x="137" size-x2="874" size-y="-145" size-y2="901"/>
+    <association uuid="5c552318-2760-4dbc-b55e-15c195189aaf" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <association uuid="5c5a3be4-5efe-490a-9550-6e82a5df2064" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="5ee77396-9866-4df9-a017-7371a6935946" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <entity uuid="5fb1263c-ed9f-4a50-9df7-f10c603b109a" bg-color="4294967295" hdr-color="4292006610" position-x="-100" position-y="249" size-x="0" size-x2="138" size-y="0" size-y2="115"/>
     <entity uuid="62dd4bde-fda1-4e2b-bd4b-7f850d3ea140" bg-color="4294967295" hdr-color="4292006610" position-x="220" position-y="111" size-x="0" size-x2="111" size-y="0" size-y2="87"/>
+    <association uuid="64ecf746-b184-4c08-926a-04c21e5bb259" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <many-to-many-association uuid="6ccb656f-8d2f-4c69-ad43-36a013d26bee" color="4288059030"/>
     <association uuid="726a1f36-e91d-406c-aee4-67ad889403b1" caption1-position-x="0" caption1-position-y="-15" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="737a41cb-0b4c-4a1d-91dc-a715db661610" bg-color="4294967295" hdr-color="4292006610" position-x="-36" position-y="242" size-x="0" size-x2="115" size-y="0" size-y2="73"/>
     <entity uuid="7713dae5-f407-4aa8-979c-d9337cd5333a" bg-color="4294967295" hdr-color="4292006610" position-x="-62" position-y="-66" size-x="0" size-x2="118" size-y="0" size-y2="185"/>
-    <entity uuid="772b7b64-6546-43a8-908c-5400c169be85" bg-color="4294967295" hdr-color="4292006610" position-x="57" position-y="210" size-x="0" size-x2="133" size-y="0" size-y2="87"/>
-    <module uuid="7f39557d-626b-4091-868b-01d09d6f1b96" bg-color="4294831087" position-x="1350" position-y="993" size-x="-374" size-x2="803" size-y="40" size-y2="368"/>
+    <entity uuid="772b7b64-6546-43a8-908c-5400c169be85" bg-color="4294967295" hdr-color="4292006610" position-x="77" position-y="312" size-x="0" size-x2="133" size-y="0" size-y2="101"/>
+    <module uuid="7f39557d-626b-4091-868b-01d09d6f1b96" bg-color="4294831087" position-x="1350" position-y="993" size-x="-374" size-x2="1093" size-y="-93" size-y2="368"/>
     <association uuid="82a71af7-7182-44cf-b400-d8759b3421b4" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="839a6864-c7e1-4f7f-94c5-39c430703662" bg-color="4294967295" hdr-color="4292006610" position-x="212" position-y="145" size-x="0" size-x2="88" size-y="0" size-y2="59"/>
-    <entity uuid="85fc6aa4-1cde-4b7c-a4e3-48af305373de" bg-color="4294967295" hdr-color="4292006610" position-x="275" position-y="663" size-x="0" size-x2="146" size-y="0" size-y2="73"/>
+    <entity uuid="85fc6aa4-1cde-4b7c-a4e3-48af305373de" bg-color="4294967295" hdr-color="4292006610" position-x="395" position-y="728" size-x="0" size-x2="146" size-y="0" size-y2="87"/>
+    <association uuid="8635ad22-49e0-49d2-8ccd-2d1d3f139091" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <module uuid="8717f907-ed7b-4cef-a29b-74566e9f5d1f" bg-color="4293391335" position-x="1213" position-y="125" size-x="523" size-x2="493" size-y="86" size-y2="466"/>
-    <entity uuid="87619b62-5c71-4547-a101-0e2116458bc7" bg-color="4294967295" hdr-color="4292006610" position-x="687" position-y="92" size-x="0" size-x2="101" size-y="0" size-y2="59"/>
+    <entity uuid="87619b62-5c71-4547-a101-0e2116458bc7" bg-color="4294967295" hdr-color="4292006610" position-x="597" position-y="87" size-x="0" size-x2="152" size-y="0" size-y2="87"/>
     <entity uuid="8b0b1e29-9c2c-4fe7-b5ab-517e05ead7e1" bg-color="4294967295" hdr-color="4292006610" position-x="335" position-y="204" size-x="0" size-x2="93" size-y="0" size-y2="185"/>
     <association uuid="8d5911c5-482c-483e-938b-bb2717597962" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="8d8d5277-f842-4fed-a4a6-886a12699abf" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
@@ -1006,15 +1140,14 @@
     <many-to-many-association uuid="8fbc2a53-0998-4a40-bd70-d428922c85b2" color="4288059030"/>
     <association uuid="8fece4d3-1187-4efe-8b3b-a2e6248d2961" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="913f58ca-5980-4103-ad46-7fb28666ab3f" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="916cf60e-68a0-4df5-938d-be661930dc78" bg-color="4294967295" hdr-color="4292006610" position-x="337" position-y="33" size-x="0" size-x2="121" size-y="0" size-y2="59"/>
-    <many-to-many-association-entity uuid="91b94fe9-ef5f-4686-aec9-733d42a43535" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0"/>
+    <entity uuid="916cf60e-68a0-4df5-938d-be661930dc78" bg-color="4294967295" hdr-color="4292006610" position-x="482" position-y="151" size-x="0" size-x2="86" size-y="0" size-y2="59"/>
     <association uuid="925004f9-4191-4cc6-931c-421d69ae0565" color="4288059030"/>
-    <entity uuid="92695dba-a7f2-4afd-b930-6da76a3ec22d" bg-color="4294967295" hdr-color="4292006610" position-x="650" position-y="299" size-x="0" size-x2="80" size-y="0" size-y2="59"/>
-    <entity uuid="93c567ba-43dc-49fd-a680-7799524cab0c" bg-color="4294967295" hdr-color="4292006610" position-x="-27" position-y="506" size-x="0" size-x2="113" size-y="0" size-y2="115"/>
+    <entity uuid="92695dba-a7f2-4afd-b930-6da76a3ec22d" bg-color="4294967295" hdr-color="4292006610" position-x="546" position-y="515" size-x="0" size-x2="123" size-y="0" size-y2="171"/>
+    <entity uuid="93c567ba-43dc-49fd-a680-7799524cab0c" bg-color="4294967295" hdr-color="4292006610" position-x="-98" position-y="434" size-x="0" size-x2="154" size-y="0" size-y2="185"/>
     <entity uuid="93d17e5f-69ad-4167-bded-4ffcac55eb3d" bg-color="4294967295" hdr-color="4292006610" position-x="227" position-y="22" size-x="0" size-x2="90" size-y="0" size-y2="73"/>
-    <entity uuid="95a97d1a-3843-4607-b482-3d6f2d50684a" bg-color="4294967295" hdr-color="4292006610" position-x="420" position-y="185" size-x="0" size-x2="121" size-y="0" size-y2="60"/>
     <association uuid="9af33b7d-f7b4-4049-a3a1-e93f352b3ca1" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="9fde8670-f234-4772-a774-7047354a2fbe" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <entity uuid="a04c0db3-b7d2-4a9a-bf5a-da3120744ced" bg-color="4294967295" hdr-color="4292006610" position-x="737" position-y="510" size-x="0" size-x2="120" size-y="0" size-y2="199"/>
     <association uuid="a303d5d9-bf84-4df5-9228-9a6abfae3a97" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="a31e2f56-cc75-4f4c-bc23-33616f1350a3" center-position-x="-32" center-position-y="4" color="4288059030"/>
     <entity uuid="a457fa98-63a2-461f-b8bc-fe4e80ba4681" bg-color="4294967295" hdr-color="4292006610" position-x="186" position-y="185" size-x="0" size-x2="92" size-y="0" size-y2="143"/>
@@ -1023,45 +1156,49 @@
     <association uuid="a6f2906f-548f-4218-9f2b-92495116b958" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="a93f3e89-6a37-44fb-8689-3a79eac7ec2d" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="ab621734-ca60-403e-9d8c-d4547622b93b" center-position-x="0" center-position-y="0" color="4281230255"/>
-    <entity uuid="ac1b966a-88ac-4a3d-9486-609c45197a87" bg-color="4294967295" hdr-color="4292006610" position-x="597" position-y="234" size-x="0" size-x2="20" size-y="0" size-y2="20"/>
+    <entity uuid="ac1b966a-88ac-4a3d-9486-609c45197a87" bg-color="4294967295" hdr-color="4292006610" position-x="216" position-y="412" size-x="0" size-x2="111" size-y="0" size-y2="45"/>
     <association uuid="ae42540c-d529-4668-b731-741e16d6f47b" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="b19f1902-f837-4071-b2d3-5637e7333e22" center-position-x="0" center-position-y="0" color="4291261615"/>
     <many-to-many-association uuid="b4cbabc4-b16c-4738-93cb-d884c742dd84" color="4288059030"/>
     <association uuid="b6351580-48db-498a-9d72-f3b8074bd618" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="b82efdc1-2337-44a3-bdb7-b4eb85623b14" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="b916b076-b548-4c3b-bc01-1938841c01de" bg-color="4294967295" hdr-color="4292006610" position-x="822" position-y="11" size-x="0" size-x2="143" size-y="0" size-y2="59"/>
-    <entity uuid="b9334951-8846-4588-8929-61da3a964a3f" bg-color="4294967295" hdr-color="4292006610" position-x="201" position-y="218" size-x="0" size-x2="92" size-y="0" size-y2="45"/>
+    <entity uuid="b916b076-b548-4c3b-bc01-1938841c01de" bg-color="4294967295" hdr-color="4292006610" position-x="714" position-y="220" size-x="0" size-x2="143" size-y="0" size-y2="87"/>
+    <entity uuid="b9334951-8846-4588-8929-61da3a964a3f" bg-color="4294967295" hdr-color="4292006610" position-x="240" position-y="283" size-x="0" size-x2="81" size-y="0" size-y2="45"/>
+    <association uuid="b96e9abb-286f-4fef-ba15-9fa829ac968e" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="ba185002-2a7a-43f9-b269-7eb203e6e29c" bg-color="4294967295" hdr-color="4292006610" position-x="31" position-y="226" size-x="0" size-x2="107" size-y="0" size-y2="409"/>
+    <association uuid="c012b288-5a27-45bf-b5e0-44ec1c3d18c5" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="c165a486-3e42-4676-b647-cf9bde007c92" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <association uuid="c3be1a92-b961-45d5-9bd5-ae1847ff41a1" caption1-position-x="-2" caption1-position-y="44" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="c438c6fa-7b39-41dd-b53e-4b164a97734e" bg-color="4294967295" hdr-color="4292006610" position-x="214" position-y="387" size-x="0" size-x2="90" size-y="0" size-y2="59"/>
+    <association uuid="c3bf1c85-08bc-4663-93cd-7d8fd2619dee" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
+    <entity uuid="c438c6fa-7b39-41dd-b53e-4b164a97734e" bg-color="4294967295" hdr-color="4292006610" position-x="399" position-y="501" size-x="0" size-x2="90" size-y="0" size-y2="59"/>
     <module uuid="c600450e-ac8c-4363-b93d-c96985d15d26" bg-color="4293391335" position-x="62" position-y="59" size-x="42" size-x2="616" size-y="17" size-y2="531"/>
     <entity uuid="c932c817-ea71-4c1f-900b-6dac30d21f4e" bg-color="4294967295" hdr-color="4292006610" position-x="27" position-y="15" size-x="0" size-x2="89" size-y="0" size-y2="60"/>
-    <entity uuid="c966f43d-ea94-4ff6-bf91-dc47ab5f399a" bg-color="4294967295" hdr-color="4292006610" position-x="651" position-y="185" size-x="0" size-x2="74" size-y="0" size-y2="59"/>
+    <entity uuid="c966f43d-ea94-4ff6-bf91-dc47ab5f399a" bg-color="4294967295" hdr-color="4292006610" position-x="781" position-y="180" size-x="0" size-x2="74" size-y="0" size-y2="59"/>
     <association uuid="ca5be931-6132-44f3-81b5-d47bee30d204" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="cc0d35c4-636b-49b4-9356-10d64f832899" bg-color="4294967295" hdr-color="4292006610" position-x="448" position-y="381" size-x="0" size-x2="94" size-y="0" size-y2="45"/>
+    <entity uuid="cc0d35c4-636b-49b4-9356-10d64f832899" bg-color="4294967295" hdr-color="4292006610" position-x="561" position-y="270" size-x="0" size-x2="80" size-y="0" size-y2="45"/>
     <entity uuid="cc254018-2bf3-458c-b25a-946543dcb3be" bg-color="4294967295" hdr-color="4292006610" position-x="384" position-y="154" size-x="0" size-x2="90" size-y="0" size-y2="73"/>
-    <entity uuid="cdfc51b0-b6c4-4af5-8780-217a46067f1b" bg-color="4294967295" hdr-color="4292006610" position-x="571" position-y="719" size-x="0" size-x2="94" size-y="0" size-y2="59"/>
-    <module uuid="d4b2f7b7-9b65-4678-989a-03d79520bc9c" bg-color="4294897635" position-x="20" position-y="621" size-x="0" size-x2="657" size-y="9" size-y2="747"/>
-    <entity uuid="d620642a-e03d-46b4-8ce4-6590730cc510" bg-color="4294967295" hdr-color="4292006610" position-x="56" position-y="561" size-x="0" size-x2="69" size-y="0" size-y2="59"/>
+    <entity uuid="cdfc51b0-b6c4-4af5-8780-217a46067f1b" bg-color="4294967295" hdr-color="4292006610" position-x="668" position-y="766" size-x="0" size-x2="94" size-y="0" size-y2="59"/>
+    <association uuid="d35b51f5-c9be-4e1e-9628-118e2d5a9fc6" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <module uuid="d4b2f7b7-9b65-4678-989a-03d79520bc9c" bg-color="4294897635" position-x="20" position-y="621" size-x="0" size-x2="657" size-y="9" size-y2="749"/>
+    <entity uuid="d620642a-e03d-46b4-8ce4-6590730cc510" bg-color="4294967295" hdr-color="4292006610" position-x="272" position-y="668" size-x="0" size-x2="69" size-y="0" size-y2="59"/>
     <association uuid="d738d1b4-84a3-47ff-a39e-24bc982ce209" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <association uuid="de4de280-27c8-48e1-a4d6-7da612dca9e2" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="df0697ec-3f9d-41a9-9470-072bcf827a0f" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="e001ffb1-6f55-4da8-a05d-7a0c69ad8be4" bg-color="4294967295" hdr-color="4292006610" position-x="807" position-y="253" size-x="0" size-x2="143" size-y="0" size-y2="157"/>
+    <entity uuid="e001ffb1-6f55-4da8-a05d-7a0c69ad8be4" bg-color="4294967295" hdr-color="4292006610" position-x="829" position-y="22" size-x="0" size-x2="108" size-y="0" size-y2="157"/>
     <association uuid="e6103a2d-2009-400c-8b44-6475f4fe1ed5" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="eb9dfa31-61c4-47ec-ba4b-93d9e5631b3f" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="ede963bb-83f3-4fb8-b4f0-4e099a276d65" color="4288059030"/>
     <entity uuid="efd49162-c9bd-4808-b14c-9272905f9d71" bg-color="4294967295" hdr-color="4292006610" position-x="-230" position-y="218" size-x="0" size-x2="113" size-y="0" size-y2="45"/>
     <association uuid="f068b6aa-da3c-4623-a53c-c7bca363748d" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="f25eaf99-3ef5-4ab2-9ff3-c7ec90588127" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="f284cd27-323b-4a15-8b10-2bb40c623fd1" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <project uuid="f455d66d-f4c9-4990-a223-945f0b64403c" size-x="17" size-x2="2550" size-y="0" size-y2="1409"/>
-    <association uuid="f50f3026-dd91-40f0-af6f-1b898b657780" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="f50f3026-dd91-40f0-af6f-1b898b657780" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="f98b7456-3f89-4382-bafd-2d2ba4ffa808" bg-color="4294967295" hdr-color="4292006610" position-x="232" position-y="141" size-x="0" size-x2="92" size-y="0" size-y2="115"/>
     <entity uuid="f9a3365c-4694-4029-95b6-6b1c74cb63d6" bg-color="4294967295" hdr-color="4292006610" position-x="22" position-y="125" size-x="0" size-x2="129" size-y="0" size-y2="185"/>
     <entity uuid="fa27fac4-77b6-4b38-a043-78375bbc658d" bg-color="4294967295" hdr-color="4292006610" position-x="-494" position-y="-35" size-x="0" size-x2="67" size-y="0" size-y2="31"/>
-    <entity uuid="fb1b38f3-d0ef-4a6a-acbb-5f30f5c0c384" bg-color="4294967295" hdr-color="4292006610" position-x="74" position-y="664" size-x="0" size-x2="153" size-y="0" size-y2="87"/>
+    <entity uuid="fb1b38f3-d0ef-4a6a-acbb-5f30f5c0c384" bg-color="4294967295" hdr-color="4292006610" position-x="75" position-y="772" size-x="0" size-x2="118" size-y="0" size-y2="87"/>
     <association uuid="fbd5abd1-cae4-4d42-b645-da4655e15d85" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="fd572a6a-d40c-4db3-80a0-7607c2b3ecc2" bg-color="4294967295" hdr-color="4292006610" position-x="573" position-y="140" size-x="0" size-x2="131" size-y="0" size-y2="129"/>
+    <entity uuid="fd572a6a-d40c-4db3-80a0-7607c2b3ecc2" bg-color="4294967295" hdr-color="4292006610" position-x="523" position-y="182" size-x="0" size-x2="131" size-y="0" size-y2="143"/>
     <association uuid="ffab0b04-a348-4248-8a52-04797776a798" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
   </visual-data>
 </skipper>

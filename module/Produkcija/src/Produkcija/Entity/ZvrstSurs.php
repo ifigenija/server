@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping AS ORM;
 /**
  * @ORM\Entity
  */
-class Sodelavec
+class ZvrstSurs
 {
     /**
      * @ORM\Id
@@ -15,7 +15,12 @@ class Sodelavec
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Sodelovanje", mappedBy="sodelavec")
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $sodelovanje;
+    private $ime;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $naziv;
 }
