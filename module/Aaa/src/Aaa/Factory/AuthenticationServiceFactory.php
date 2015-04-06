@@ -19,11 +19,8 @@ class AuthenticationServiceFactory implements FactoryInterface
      * {@inheritDoc}
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
-    {
-        
+    {        
         /** @var DoctrineModule\Authentication\Adapter\ObjectRepository $authenticationService */
-        return $serviceLocator->get('doctrine.authenticationservice.orm_default');
-
-        
+        return $serviceLocator->get('doctrine.authenticationservice.orm_default');        
     }
 }

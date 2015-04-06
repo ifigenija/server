@@ -83,7 +83,7 @@ class DoctrineResolver implements ResolverInterface
         $rep = $this->em->getRepository($this->entityClass);
         $user = $rep->findOneBy(['username' => $username]);
         if ($user) {
-            $authenticated = $user->checkPassword($user, $password);
+            $authenticated = \Aaa\Service\AaaService::checkPassword($user, $password);
             if ($authenticated)
                 return new Result(Result::SUCCESS, $user);
         }

@@ -70,7 +70,7 @@ class Zaposlitev
     private $alternacija;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="sodelovanje")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="sodelovanja")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      */
     private $oseba;

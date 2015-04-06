@@ -93,10 +93,7 @@ class RestController
     {
 
         $listName = $this->params('view', 'default');
-
         $this->isApiEnabled('list', $listName);
-        /* @var $sr  AbstractMaxRepository */
-        $sr = $this->getRepository();
 
         try {
 
@@ -114,7 +111,8 @@ class RestController
                 }
                 $params = $filter->getData();
             }
-
+            /* @var $sr  AbstractMaxRepository */
+            $sr = $this->getRepository();
             $this->manageSort($sr, $listName);
             $paginator = new Paginator($sr->getPaginator($params, $listName));
             $this->setPaginatorParams($paginator);

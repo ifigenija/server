@@ -139,7 +139,7 @@ class Oseba
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Telefonska", mappedBy="oseba")
+     * @ORM\OneToMany(targetEntity="App\Entity\Telefonska", mappedBy="oseba", orphanRemoval=true)
      */
     private $telefonske;
 
@@ -151,17 +151,17 @@ class Oseba
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="oseba")
      */
-    private $alternacija;
+    private $alternacije;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="oseba")
      */
-    private $pogodba;
+    private $pogodbe;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Zaposlitev", mappedBy="oseba")
      */
-    private $sodelovanje;
+    private $sodelovanja;
 
     function getId()
     {
@@ -173,24 +173,29 @@ class Oseba
         return $this->popa;
     }
 
-    function getPozkose()
-    {
-        return $this->pozkose;
-    }
-
     function getNaziv()
     {
         return $this->naziv;
     }
 
+    function getIme()
+    {
+        return $this->ime;
+    }
+
+    function getPriimek()
+    {
+        return $this->priimek;
+    }
+
+    function getPesvdonim()
+    {
+        return $this->pesvdonim;
+    }
+
     function getFunkcija()
     {
         return $this->funkcija;
-    }
-
-    function getDela()
-    {
-        return $this->dela;
     }
 
     function getNaslov()
@@ -203,6 +208,46 @@ class Oseba
         return $this->email;
     }
 
+    function getDatumRojstva()
+    {
+        return $this->datumRojstva;
+    }
+
+    function getEmso()
+    {
+        return $this->emso;
+    }
+
+    function getDavcna()
+    {
+        return $this->davcna;
+    }
+
+    function getSpol()
+    {
+        return $this->spol;
+    }
+
+    function getOpombe()
+    {
+        return $this->opombe;
+    }
+
+    function getDrzavljanstvo()
+    {
+        return $this->drzavljanstvo;
+    }
+
+    function getDrzavaRojstva()
+    {
+        return $this->drzavaRojstva;
+    }
+
+    function getKrajRojstva()
+    {
+        return $this->krajRojstva;
+    }
+
     function getUser()
     {
         return $this->user;
@@ -213,19 +258,24 @@ class Oseba
         return $this->telefonske;
     }
 
-    function getAlternacija()
+    function getTrrji()
     {
-        return $this->alternacija;
+        return $this->trrji;
     }
 
-    function getPogodba()
+    function getAlternacije()
     {
-        return $this->pogodba;
+        return $this->alternacije;
     }
 
-    function getSodelovanje()
+    function getPogodbe()
     {
-        return $this->sodelovanje;
+        return $this->pogodbe;
+    }
+
+    function getSodelovanja()
+    {
+        return $this->sodelovanja;
     }
 
     function setId($id)
@@ -238,24 +288,29 @@ class Oseba
         $this->popa = $popa;
     }
 
-    function setPozkose($pozkose)
-    {
-        $this->pozkose = $pozkose;
-    }
-
     function setNaziv($naziv)
     {
         $this->naziv = $naziv;
     }
 
+    function setIme($ime)
+    {
+        $this->ime = $ime;
+    }
+
+    function setPriimek($priimek)
+    {
+        $this->priimek = $priimek;
+    }
+
+    function setPesvdonim($pesvdonim)
+    {
+        $this->pesvdonim = $pesvdonim;
+    }
+
     function setFunkcija($funkcija)
     {
         $this->funkcija = $funkcija;
-    }
-
-    function setDela($dela)
-    {
-        $this->dela = $dela;
     }
 
     function setNaslov($naslov)
@@ -268,6 +323,46 @@ class Oseba
         $this->email = $email;
     }
 
+    function setDatumRojstva($datumRojstva)
+    {
+        $this->datumRojstva = $datumRojstva;
+    }
+
+    function setEmso($emso)
+    {
+        $this->emso = $emso;
+    }
+
+    function setDavcna($davcna)
+    {
+        $this->davcna = $davcna;
+    }
+
+    function setSpol($spol)
+    {
+        $this->spol = $spol;
+    }
+
+    function setOpombe($opombe)
+    {
+        $this->opombe = $opombe;
+    }
+
+    function setDrzavljanstvo($drzavljanstvo)
+    {
+        $this->drzavljanstvo = $drzavljanstvo;
+    }
+
+    function setDrzavaRojstva($drzavaRojstva)
+    {
+        $this->drzavaRojstva = $drzavaRojstva;
+    }
+
+    function setKrajRojstva($krajRojstva)
+    {
+        $this->krajRojstva = $krajRojstva;
+    }
+
     function setUser($user)
     {
         $this->user = $user;
@@ -278,19 +373,25 @@ class Oseba
         $this->telefonske = $telefonske;
     }
 
-    function setAlternacija($alternacija)
+    function setTrrji($trrji)
     {
-        $this->alternacija = $alternacija;
+        $this->trrji = $trrji;
     }
 
-    function setPogodba($pogodba)
+    function setAlternacije($alternacije)
     {
-        $this->pogodba = $pogodba;
+        $this->alternacije = $alternacije;
     }
 
-    function setSodelovanje($sodelovanje)
+    function setPogodbe($pogodbe)
     {
-        $this->sodelovanje = $sodelovanje;
+        $this->pogodbe = $pogodbe;
     }
+
+    function setSodelovanja($sodelovanja)
+    {
+        $this->sodelovanja = $sodelovanja;
+    }
+
 
 }

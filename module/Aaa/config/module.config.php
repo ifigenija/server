@@ -12,6 +12,8 @@ return [
         'factories' => [
             'rbac_strategy' => '\Aaa\Factory\JsonStrategyFactory',
             'Zend\Authentication\AuthenticationService' => 'Aaa\Factory\AuthenticationServiceFactory',
+            'Rbac\Rbac' => 'Aaa\Factory\RbacFactory',
+                
         ]
     ],
     'controllers' => [
@@ -24,18 +26,6 @@ return [
             'Aaa\Rpc' => 'Aaa\Controller\RpcController',
             'Aaa\Cli' => 'Aaa\Controller\CliController',
         ]
-    ],
-    'rest_controller_config' => [
-        'Aaa\User' => [
-            'hydrator' => [
-            ],
-            'lists' => [
-                'default' => [
-                ]
-            ],
-        ],
-        'Aaa\Role' => [],
-        'Aaa\Permission' => [],
     ],
     'console' => [
         'router' => [
@@ -97,16 +87,15 @@ return [
             ]
         ]
     ],
-    'form_elements' => [
-        'invokables' => [
-// elementi
-// forme           
-            'Aaa-UserFieldset' => 'Aaa\Form\UserFieldset',
-            'Aaa-GroupFieldset' => 'Aaa\Form\GroupFieldset',
-            'Aaa-RoleFieldset' => 'Aaa\Form\RoleFieldset',
-            'Aaa-PermissionFieldset' => 'Aaa\Form\PermissionFieldset'
-        ]
-    ],
+    'session' => array(
+        'config' => array(
+            'class' => 'Zend\Session\Config\SessionConfig',
+            'options' => array(
+                'name' => 'ifigenija',
+            ),
+        ),
+        'storage' => 'Zend\Session\Storage\SessionArrayStorage'
+    ),
     'fixtures' => [
         __DIR__ . '../fixture'
     ]

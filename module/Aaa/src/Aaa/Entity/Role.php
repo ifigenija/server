@@ -2,11 +2,12 @@
 
 namespace Aaa\Entity;
 
+use Aaa\Repository\Roles;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
-use Rbac\Role\RoleInterface;
 use Max\Ann\Entity as Max;
+use Rbac\Role\RoleInterface;
 
 /**
  * @ORM\Entity(repositoryClass="Aaa\Repository\Roles")
@@ -74,7 +75,6 @@ class Role
      * 
      */
     protected $users;
-    
 
     /**
      * Init the Doctrine collection
@@ -116,11 +116,12 @@ class Role
      */
     public function hasPermission($permission)
     {
-// This can be a performance problem if your role has a lot of permissions. Please refer
-// to the cookbook to an elegant way to solve this issue
-        return isset($this->permissions[(string) $permission]);
-    }
 
+        $criteria = Criteria::create()->where(Criteria::expr()->eq('name', (string) $permission));
+        $result = $this->permissions->matching($criteria);
+
+        return count($result) > 0;
+    }
 
     public function assignedToUser($user)
     {
@@ -134,8 +135,7 @@ class Role
             unset($this->users[array_search($user, $this->users)]);
         }
     }
-    
-    
+
     function getDescription()
     {
         return $this->description;
@@ -175,6 +175,5 @@ class Role
     {
         $this->users = $users;
     }
-
 
 }

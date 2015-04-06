@@ -3,7 +3,7 @@
 entityClass: Aaa\Entity\Permission
 disabledMethods: 
     - delete
-permPrefix: User    
+permPrefix: Permission    
 forms:
     default: 
         disabledMethods:

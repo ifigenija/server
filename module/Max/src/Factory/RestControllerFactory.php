@@ -20,7 +20,6 @@ class RestControllerFactory
         extends AbstractEntityControllerFactory
 {
 
-    
     /**
      * factory za kreiranje standardiziranega rest controllerja  
      * 
@@ -30,11 +29,13 @@ class RestControllerFactory
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $locator = $this->getParentLocator($serviceLocator);
+        // najprej dobim privzeto ime entitete 
+        $controler  = $this->stripControllerName($locator->get('Application')->getMvcEvent());        
+        // naložim konfig za kontroller oz vsaj določim privzeti 
+        // entity class 
+        $config = $this->loadControllerConfig('rest', $controler, $locator);
 
-
-        $entity = $this->getEntityName($locator);        
-        $config = $this->loadControllerConfig('rest', $entity, $locator);
-
+        // ustvarim kontroller in mu nastavim em, auth in konfig 
         $cont = new RestController();
         $cont->setEm($locator->get('doctrine.entitymanager.orm_default'));
         $cont->setAuth($locator->get('ZfcRbac\Service\AuthorizationService'));

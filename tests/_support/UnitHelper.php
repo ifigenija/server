@@ -45,5 +45,3 @@ class UnitHelper
     }
 
 }
-
-require_once __DIR__ . '/../unit/AbstractTest.php';

@@ -209,11 +209,13 @@
         <attribute name="export-file-name">Oseba.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="Oseba" to="PostniNaslov" owner-alias="" inverse-alias="naslov" many-owner="true" many-inverse="false" uuid="b19f1902-f837-4071-b2d3-5637e7333e22">
+    <association from="Oseba" to="PostniNaslov" inverse-alias="naslov" many-owner="true" many-inverse="false" uuid="b19f1902-f837-4071-b2d3-5637e7333e22">
       <association-field from="naslov_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <association from="Oseba" to="User" caption="User Oseba" inverse-alias="user" many-owner="false" many-inverse="false" uuid="8d5911c5-482c-483e-938b-bb2717597962">
@@ -300,7 +302,9 @@
       <association-field from="klient_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <association from="PostniNaslov" to="Drzava" owner-alias="" inverse-alias="drzava" many-owner="true" many-inverse="false" uuid="ab621734-ca60-403e-9d8c-d4547622b93b">
@@ -338,9 +342,19 @@
     </entity>
     <association from="Telefonska" to="Oseba" caption="Oseba Telefonske" owner-alias="telefonske" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="f25eaf99-3ef5-4ab2-9ff3-c7ec90588127">
       <association-field from="oseba_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-inverse">
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
+      </orm-attributes>
     </association>
     <association from="Telefonska" to="Popa" caption="Popa Telefonske" owner-alias="telefonske" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="27667b50-2424-4f64-a6f3-d0fd9d264a2f">
       <association-field from="popa_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-inverse">
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
+      </orm-attributes>
     </association>
     <entity name="Trr" uuid="1d43e294-aeee-4624-80a9-4e648b8a02a9">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="a0434b9c-f6fd-458c-86bb-8de6962461b4"/>

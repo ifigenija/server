@@ -54,8 +54,5 @@ return [
             'error/403' => 'module/App/layout/error/403.phtml',
             'error/index' => 'module/App/layout/error/index.phtml',
         ]
-    ],
-    'session_config' => array(
-        'savePath' => 'data'
-    ),
+    ]
 ];

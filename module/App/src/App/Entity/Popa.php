@@ -147,21 +147,15 @@ class Popa
     private $osebe;
 
     /**
-     * 
-     * 
-     */
-    private $oseba;
-
-    /**
      * Klientovi naslovi
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="klient")
+     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="klient", orphanRemoval=true)
 
      */
     protected $naslovi;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Telefonska", mappedBy="popa")
+     * @ORM\OneToMany(targetEntity="App\Entity\Telefonska", mappedBy="popa", orphanRemoval=true)
      */
     private $telefonske;
 
@@ -174,11 +168,6 @@ class Popa
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="popa")
      */
     private $pogodbe;
-
-    /**
-     * 
-     */
-    private $pogodba;
 
 
 
@@ -254,39 +243,13 @@ class Popa
      */
     private $zamejstvo;
 
-    /**
-     * 
-     */
-    private $tel;
-
-    /**
-     * Interno polje - uporabnik, ki je zadnji spreminjal entiteto
-     * To polje se ne vnaša. Uporabnika dobimo iz prijave v aplikacijo.
-     *
-     *  
-     */
-    protected $upor;
-
-    /**
-     * Interno polje - datum in ura zadnjega spreminjanja entitete
-     * To polje se ne vnaša. Podatek vzamemo iz tekočega datuma in ure.
-     *
-     * 
-     * @var string
-     */
-    protected $datKnj;
-
-    /**
-     * Kontaktne osebe klienta
-     *
-     * 
-     */
-    protected $kontaktne;
 
     public function __construct()
     {
-        $this->kontaktne = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->osebe = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->trrji = new \Doctrine\Common\Collections\ArrayCollection();
         $this->naslovi = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pogodbe = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     public function __toString()

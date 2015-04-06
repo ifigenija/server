@@ -67,26 +67,25 @@ class RolesFixture
      * @param EntityManager $em 
      * @param array $valarray
      */
-    public function populateUser($em, $valarray)
+    public function populateUser($em, $val)
     {
-        $val = new Config($valarray);
+       
         $ur = $em->getRepository('\Aaa\Entity\User');
         $rr = $em->getRepository('\Aaa\Entity\Role');
-        $o = $ur->findOneByUsername($val->username);
+        $o = $ur->findOneByUsername($val['username']);
         if (!$o) {
             $o = new User;
-            $o->setId($val->id);
-            $o->setUsername($val->username);
-            $o->setEmail($val->email);
+            $o->setUsername($val['username']);
+            $o->setEmail($val['email']);
             $password = uniqid() . uniqid();
             $o->setPassword($password);
-            echo "User $val->name geslo $password\n";
-            $o->setName($val->name);
+            echo "User {$val['name']} geslo $password\n";
+        $o->setName($val['name']);
             $o->setEnabled(true);
-            $rr->resolveNames($o, $val->roles);
+            $rr->resolveNames($o, $val['roles']);
             $em->persist($o);
 
-            $this->addReference('user-' . $val->username, $o);
+            $this->addReference('user-' . $val['username'], $o);
         }
     }
 
@@ -94,11 +93,11 @@ class RolesFixture
     {
         $data = [];
         foreach ($modules as $module) {
-            $f = 'module/' .$module . '/fixture/' . $entity . '.yml';
+            $f = 'module/' . $module . '/fixture/' . $entity . '.yml';
             if (file_exists($f)) {
                 $file = file_get_contents($f);
                 $data = array_merge($data, \Symfony\Component\Yaml\Yaml::parse($file));
-                
+
                 file_put_contents($f, \Symfony\Component\Yaml\Yaml::dump($data));
             }
         }
@@ -137,21 +136,22 @@ class RolesFixture
         }
     }
 
-    public function populateRole($manager, $valarray)
+    public function populateRole($manager, $val)
     {
 
         $this->repo = $manager->getRepository('\Aaa\Entity\Role');
         $this->pr = $manager->getRepository('\Aaa\Entity\Permission');
 
-        $val = new Config($valarray);
-        $o = $this->repo->findOneByName($val->name);
+
+        $o = $this->repo->findOneByName($val['name']);
         if (!$o) {
+            var_dump($val);
             $o = new Role;
-            $o->setName($val->name);
-            $o->setDescription($val->description);
+            $o->setName($val['name']);
+            $o->setDescription($val['description']);
             $o->setBuiltIn(true);
-            if ($val->permissions) {
-                $this->pr->resolveNames($o, $val->permissions);
+            if ($val['permissions']) {
+                $this->pr->resolveNames($o, $val['permissions']);
             }
             $o->setBuiltIn(true);
             $manager->persist($o);

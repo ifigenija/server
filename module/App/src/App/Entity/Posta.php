@@ -46,89 +46,36 @@ class Posta
      */
     protected $naziv;
 
-    /**
-     * Interno polje - uporabnik, ki je zadnji spreminjal entiteto
-     * To polje se ne vnaša. Uporabnika dobimo iz prijave v aplikacijo.
-     *
-     *  
-     */
-    protected $upor;
-
-    /**
-     * Interno polje - datum in ura zadnjega spreminjanja entitete
-     * To polje se ne vnaša. Podatek vzamemo iz tekočega datuma in ure.
-     *
-     * 
-     * @var string
-     */
-    protected $datKnj;
-
-    public function getMeta()
-    {
-        $meta = new \stdClass();
-        $meta->label = 'Pošta';
-        $meta->mlabel = 'Pošte';
-        $meta->ident = 'sifra';
-        $meta->search = 'sifra,naziv';
-        $meta->description = 'Pomožni seznam pošt';
-
-        return $meta;
-    }
-
-    public function getId()
+    function getId()
     {
         return $this->id;
     }
 
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    public function getSifra()
+    function getSifra()
     {
         return $this->sifra;
     }
 
-    public function setSifra($sifra)
-    {
-        $this->sifra = $sifra;
-        return $this;
-    }
-
-    public function getNaziv()
+    function getNaziv()
     {
         return $this->naziv;
     }
 
-    public function setNaziv($naziv)
+    function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    function setSifra($sifra)
+    {
+        $this->sifra = $sifra;
+    }
+
+    function setNaziv($naziv)
     {
         $this->naziv = $naziv;
-        return $this;
     }
 
-    public function getUpor()
-    {
-        return $this->upor;
-    }
-
-    public function setUpor($upor)
-    {
-        $this->upor = $upor;
-        return $this;
-    }
-
-    public function getDatKnj()
-    {
-        return $this->datKnj;
-    }
-
-    public function setDatKnj($datKnj)
-    {
-        $this->datKnj = $datKnj;
-        return $this;
-    }
 
 }
 

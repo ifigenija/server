@@ -52,15 +52,21 @@ class Module
     {
         Paginator::setDefaultItemCountPerPage(30);
 
-        $eventManager = $e->getApplication()->getEventManager();        
+        $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 
         $sm = $e->getApplication()->getServiceManager();
         $em = $sm->get('doctrine.entitymanager.orm_default');
         $auth = $sm->get('Zend\Authentication\AuthenticationService');
-        $auth->setStorage(new Session('tralla'));
-        
+
+        $session = $sm->get('Zend\Session\SessionManager');
+        $session->start();
+
+        $auth->setStorage(new Session('ifigenijasess'));
+
+
+
         // poskrbim za identiteto uporabnika 
         if ($e->getRequest() instanceof Request) {
             // handling autorizacij preko konzole
@@ -72,32 +78,35 @@ class Module
                     $this->setIdentity('anonymous', $auth, $em);
                 }
             }
-        }
+            
+         }
 
         $identity = $auth->getIdentity();
         // $identity = $this->setConsoleAuthorization($authService, $em);
         $evm = $em->getEventManager();
         $evm->addEventSubscriber(new RevisionsListener($sm, $identity));
-        
+
         $config = $sm->get('entity.metadata.factory')->getAllEntityConfig();
         $evm->addEventSubscriber(new PrePersistListener($config));
     }
 
     /**
-     * Privzeta identiteta za anonimnega uporabnika 
+     * Za programsko nastavljanje identitete. Se uporablja za
+     * nastavitve identitete v konzolnih requestih in 
+     * nastavitev identitete za anonimni dostop
+     * 
      */
     public function setIdentity($name, AuthenticationService $authService, EntityManager $em)
     {
         $rep = $em->getRepository('Aaa\Entity\User');
         try {
-            $user = $rep->findOneByUsername($name);            
+            $user = $rep->findOneByUsername($name);
         } catch (Exception $e) {
             $user = null;
         }
         if (!$user) {
             throw new UnauthException('Access denied identity not found');
         }
-
         $storage = $authService->getStorage();
         $storage->write($user);
         return $user;
@@ -136,4 +145,5 @@ class Module
         }
         return $authResult->isValid();
     }
+
 }

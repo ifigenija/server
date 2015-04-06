@@ -40,14 +40,14 @@ class Revizija
 
     /**
      * Razred objekta, ki je bil spremenjen
-     * @ORM\Column(length=100, nullable=true)
+     * @ORM\Column(length=100, nullable=false)
      * @var string
      */
     protected $razred;
 
     /**
      * ID objekta nad katerim se je zgodila sprememba
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="guid", nullable=false)
      * @var string
      */
     protected $objectId;
@@ -55,14 +55,14 @@ class Revizija
     /**
      * Uporabnik ki je spremenil objekt
      *
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="guid", nullable=true)
      * @var string
      */
     protected $upor;
 
     /**
      * Čas spremembe
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=false)
      * @var DateTime
      */
     protected $datum;
@@ -70,7 +70,7 @@ class Revizija
     /**
      * Max spremembe: upd, ins, del
      *
-     * @ORM\Column(length=3, nullable=true)
+     * @ORM\Column(length=3, nullable=false)
      * @var type
      */
     protected $tip;
@@ -78,7 +78,7 @@ class Revizija
     /**
      * serializirana nova vrednost objekta
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=false)
      * @var string
      */
     protected $data;

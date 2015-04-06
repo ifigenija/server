@@ -8,7 +8,11 @@
 
 
 return [
-
+    'service_manager' => [
+        'factories' => [
+            'Zend\Session\SessionManager' => 'App\Factory\SessionFactory'
+        ]
+    ],
     'controllers' => [
         'factories' => [
             'Rest\drzava' => 'Max\Factory\RestControllerFactory',

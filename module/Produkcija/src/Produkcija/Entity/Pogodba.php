@@ -46,7 +46,7 @@ class Pogodba
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="pogodba")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="pogodbe")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id", nullable=false)
      */
     private $oseba;

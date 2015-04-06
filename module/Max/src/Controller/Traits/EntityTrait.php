@@ -57,6 +57,7 @@ trait EntityTrait
      */
     function getEntityClass()
     {
+        if (!$this->entityClass())
         return $this->entityClass;
     }
 
@@ -211,8 +212,7 @@ trait EntityTrait
      */
     public function getEntityPermission($action)
     {
-        $prefix = $this->getConfig('permPrefix', $this->getDefaultPermPrefix());
-
+        $prefix = $this->getConfig('permPrefix', $this->getDefaultPermPrefix());       
         $acl = $this->getConfig('meta.acl');
         return $prefix . '-' . $acl->$action;
     }
