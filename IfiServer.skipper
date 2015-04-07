@@ -25,12 +25,12 @@
           </attribute>
         </orm-attributes>
       </field>
-      <field name="razred" size="100" uuid="739377db-c4a4-4fb8-a2e4-966054c52bff"/>
-      <field name="objectId" type="integer" uuid="61617743-80bc-4fd5-81e6-2cb70379c12e"/>
-      <field name="upor" type="integer" uuid="adcd7b5f-f65c-4441-b32e-334d03818165"/>
-      <field name="datum" type="datetime" uuid="4a833751-f023-44d0-b986-456d659d249d"/>
-      <field name="tip" size="3" uuid="24313ea4-ae69-43dc-b9be-5149a4999f84"/>
-      <field name="data" type="text" uuid="c4b8e62b-2d40-4bc1-8ece-699ed09719d4"/>
+      <field name="razred" size="100" required="true" uuid="739377db-c4a4-4fb8-a2e4-966054c52bff"/>
+      <field name="objectId" type="guid" required="true" uuid="61617743-80bc-4fd5-81e6-2cb70379c12e"/>
+      <field name="upor" type="guid" uuid="adcd7b5f-f65c-4441-b32e-334d03818165"/>
+      <field name="datum" type="datetime" required="true" uuid="4a833751-f023-44d0-b986-456d659d249d"/>
+      <field name="tip" size="3" required="true" uuid="24313ea4-ae69-43dc-b9be-5149a4999f84"/>
+      <field name="data" type="text" required="true" uuid="c4b8e62b-2d40-4bc1-8ece-699ed09719d4"/>
       <orm-attributes>
         <attribute name="repository-class">Aaa\Repository\Revizije</attribute>
         <attribute name="table">revizije</attribute>
@@ -447,7 +447,7 @@
     <association from="Alternacija" to="Zaposlitev" caption="Sodelovanje Alternacija" owner-alias="alternacija" inverse-alias="sodelovanje" many-owner="true" many-inverse="false" uuid="182e073f-fbca-4cce-aba7-c7fedb721cdb">
       <association-field from="sodelovanje_id" to="id"/>
     </association>
-    <association from="Alternacija" to="Oseba" caption="Oseba Alternacija" owner-alias="alternacija" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="c3be1a92-b961-45d5-9bd5-ae1847ff41a1">
+    <association from="Alternacija" to="Oseba" caption="Oseba Alternacija" owner-alias="alternacije" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="c3be1a92-b961-45d5-9bd5-ae1847ff41a1">
       <association-field from="oseba_id" to="id"/>
     </association>
     <association from="Alternacija" to="ProdukcijaDelitev" owner-alias="alternacije" inverse-alias="koprodukcija" many-owner="true" many-inverse="false" uuid="8eb23c3e-27cf-40c5-82e3-b2b82448f6a8">
@@ -488,7 +488,7 @@
       <field name="aktivna" type="boolean" uuid="7302c493-a938-4438-941d-96dabcf053b8"/>
       <field name="opis" type="text" uuid="621d8322-b12f-46c1-8215-95ececda011c"/>
     </entity>
-    <association from="Pogodba" to="Oseba" caption="Oseba Pogodba" owner-alias="pogodba" inverse-alias="oseba" many-owner="true" many-inverse="false" parent-required="true" uuid="097b822b-6bcf-4694-9461-ada2fe5de6a6">
+    <association from="Pogodba" to="Oseba" caption="Oseba Pogodba" owner-alias="pogodbe" inverse-alias="oseba" many-owner="true" many-inverse="false" parent-required="true" uuid="097b822b-6bcf-4694-9461-ada2fe5de6a6">
       <association-field from="oseba_id" to="id"/>
     </association>
     <association from="Pogodba" to="Popa" caption="Popa Pogodba" owner-alias="pogodbe" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="4a3cb2e9-3c1e-4a28-a85e-cae38ba91a56">
@@ -517,7 +517,7 @@
       <field name="jeZaposlenVdrugemJz" type="boolean" uuid="f8502ac0-0cf7-4e92-9e01-2f36fdb508d8"/>
       <field name="jeNastopajoci" type="boolean" uuid="984f8b46-8b5d-4cb6-89df-163e4435822f"/>
     </entity>
-    <association from="Zaposlitev" to="Oseba" caption="Oseba Sodelovanje" owner-alias="sodelovanje" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="913f58ca-5980-4103-ad46-7fb28666ab3f">
+    <association from="Zaposlitev" to="Oseba" caption="Oseba Sodelovanje" owner-alias="sodelovanja" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="913f58ca-5980-4103-ad46-7fb28666ab3f">
       <association-field from="oseba_id" to="id"/>
     </association>
     <entity name="ProdukcijaDelitev" uuid="85fc6aa4-1cde-4b7c-a4e3-48af305373de">
