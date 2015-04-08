@@ -71,13 +71,6 @@ class CliController
      */
     public function grantAction()
     {
-        /* $$
-         * zaenkrat še napaka  
-         * pri php bin/ifi.php user grant  admin ifi-vse
-         * An exception occurred while executing 'INSERT INTO User2Role (role_id, user_id) VALUES (?, ?)' with params [2, 1]:
-         * 
-         */
-
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $username = $this->params('username');
         $rolename = $this->params('role');
