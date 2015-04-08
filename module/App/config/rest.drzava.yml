@@ -4,7 +4,7 @@ type: rest
 entityClass: App\Entity\Drzava
 forms:
     default: 
-        perm: Drzava-list
+#        perm: Drzava-list
         hydrator:    
             exclude:
         elements:

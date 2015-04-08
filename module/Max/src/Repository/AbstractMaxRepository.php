@@ -13,11 +13,8 @@ use DoctrineModule\Paginator\Adapter\Collection;
 use Max\Ann\EntityMetadata;
 use Max\Entity\Base;
 use Max\Exception\MaxException;
-use Max\Filter\StripEntity;
-use Max\Stdlib\Hydrator\Json;
 use stdClass;
 use Zend\Paginator\Adapter\AdapterInterface;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use ZfcRbac\Service\AuthorizationService;
 
 /**
@@ -233,10 +230,10 @@ use \Max\Expect\ExpectTrait;
      */
     public function delete($object)
     {
-        if (method_exists($object, $lahko_brisem)) {
+        if (method_exists($object, 'lahkoBrisem')) {
             $object->lahkoBrisem();
         }
-        $this->getEntityManager()->remove($entity);
+        $this->getEntityManager()->remove($object);
     }
 
     /**

@@ -32,8 +32,7 @@ trait ExpectTrait
         if (!$truth) {
 
             if ($params) {
-                array_unshift($params, $msgFormat);
-                $msg = call_user_func(['\sprintf', $params]);
+                $msg = vsprintf($msgFormat, $params);
             } else {
                 $msg = $msgFormat;
             }

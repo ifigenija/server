@@ -13,6 +13,6 @@ namespace IfiTest;
 class AuthPage
 {
     public static $admin = "admin";
-    public static $adminPass = "Admin1234!";
+    public static $adminPass = "Admin1234";
     
 }

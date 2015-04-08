@@ -213,7 +213,7 @@ class ApiHelper
         $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
-        return $I->grabDataFromResponseByJsonPath('$.error')[0];
+        return $I->grabDataFromResponseByJsonPath('$.error');
     }
 
     /**

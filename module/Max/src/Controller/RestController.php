@@ -25,6 +25,7 @@ class RestController
         \Max\Expect\ExpectTrait,
         Traits\JsonErrorsTrait;
 
+    const DENIED = "Api dostop zavrnjen %s %s";
     /**
      * Rest get metoda
      * @param string $id
@@ -36,10 +37,11 @@ class RestController
         $this->isApiEnabled('read', $view);
         $perm = $this->getFormPermission('read', $view);
         try {
-            $sr = $this->getRepository();
+            $sr     = $this->getRepository();
             $object = $sr->find($id);
             $this->expect($this->isGranted($perm, $object)
-                    , $this->trnsl('Api dostop zavrnjen'), 100099);
+                    , $this->trnsl(self::DENIED)
+                    , 100099, [$perm, $this->getUsername()]);
 
             $this->expect($object, $this->trnsl('Ni entitete z id-jem'), 100098);
 
@@ -65,7 +67,9 @@ class RestController
 
         try {
             $perm = $this->getListPermission($listName);
-            $this->expect($this->isGranted($perm), $this->trnsl('Api dostop zavrnjen'), 100012);
+            $this->expect($this->isGranted($perm)
+                    , $this->trnsl(self::DENIED)
+                    , 100012, [$perm, $this->getUsername()]);
 
             $filter = $this->buildFilterForm($listName);
 
@@ -80,17 +84,17 @@ class RestController
             $data = $filter->getData();
 
             /* @var $sr  AbstractMaxRepository */
-            $sr = $this->getRepository();
+            $sr        = $this->getRepository();
             //    $this->manageSort($sr, $listName);
             $paginator = new Paginator($sr->getPaginator($data, $listName));
             $this->setPaginatorParams($paginator);
-            $jsonList = [];
+            $jsonList  = [];
 
             $hydr = $this->getHydrator($listName, 'lists');
 //            $outFilter = $this->getConfig("lists.$listName.jsonFilter");
             foreach ($paginator as $object) {
 
-                $array = $hydr->extract($object);
+                $array      = $hydr->extract($object);
 //                if ($outFilter) {
 //                    $jsonList[] = $sr->jsonFilter($array, $listName);
 //                } else {
@@ -99,12 +103,12 @@ class RestController
             }
 
             return new JsonModel(
-        //[
-                //               'state' => array_merge($sr->getSortJson($listName), $this->getPaginatorArray($paginator)),
-          //      'data' => 
-                $jsonList
-            //]
-                    );
+                    //[
+                    //               'state' => array_merge($sr->getSortJson($listName), $this->getPaginatorArray($paginator)),
+                    //      'data' => 
+                    $jsonList
+                    //]
+            );
         } catch (\Exception $e) {
             $this->addErrorFromException($e);
             return $this->getErrors();
@@ -129,7 +133,9 @@ class RestController
         $object = $sr->find($id);
         try {
             $perm = $this->getFormPermission('update', $view);
-            $this->expect($this->isGranted($perm, $object), $this->trnsl('Dostop do api zavrnjen.'));
+            $this->expect($this->isGranted($perm, $object)
+                    , $this->trnsl(self::DENIED)
+                    , 1000101, [$perm, $this->getUsername()]);
 
             $this->expect($object, $this->trnsl('Objekt ne obstaja'), 100100);
 
@@ -170,8 +176,10 @@ class RestController
         $this->isApiEnabled('create', $view);
         try {
             $object = new $this->entityClass;
-            $perm = $this->getFormPermission('create', $view);
-            $this->expect($this->isGranted($perm, $object), $this->trnsl("Api access denied"), 100008);
+            $perm   = $this->getFormPermission('create', $view);
+            $this->expect($this->isGranted($perm, $object)
+                    , $this->trnsl(self::DENIED)
+                    , 100008, [$perm, $this->getUsername()]);
 
             $form = $this->buildForm($view);
             $form->setMode('NEW');
@@ -209,11 +217,14 @@ class RestController
 
         $this->isApiEnabled('delete');
         /* @var $sr  AbstractMaxRepository */
-        $sr = $this->getRepository();
+        $sr     = $this->getRepository();
         $object = $sr->find($id);
 
         $perm = $this->getEntityPermission('delete');
-        $this->expect($this->isGranted($perm, $object), $this->trnsl('Dostop zavrnjen'), 100201);
+        $this->expect($this->isGranted($perm, $object)
+                , $this->trnsl(self::DENIED)
+                , 100201
+                , [$perm, $this->getUsername()]);
 
         if ($sr instanceof CrudInterface) {
             try {
@@ -259,6 +270,7 @@ class RestController
     {
         return $this->notSupported();
     }
+
     public function patch($id, $data)
     {
         return $this->notSupported();
@@ -294,17 +306,17 @@ class RestController
             } else {
                 $lastPage = ceil($paginator->getTotalItemCount() / $paginator->getItemCountPerPage());
             }
-            return [ 'currentPage' => $paginator->getCurrentPageNumber(),
+            return [ 'currentPage'  => $paginator->getCurrentPageNumber(),
                 'totalRecords' => $paginator->getTotalItemCount(),
-                'lastPage' => $lastPage,
-                'pageSize' => $paginator->getItemCountPerPage(),
+                'lastPage'     => $lastPage,
+                'pageSize'     => $paginator->getItemCountPerPage(),
             ];
         } else {
             $c = count($paginator);
-            return ['currentPage' => 1,
+            return ['currentPage'  => 1,
                 'totalRecords' => $c,
-                'lastPage' => 1,
-                'pageSize' => max($c, 1)];
+                'lastPage'     => 1,
+                'pageSize'     => max($c, 1)];
         }
     }
 
@@ -333,9 +345,9 @@ class RestController
 
         if ($this->params()->fromQuery('sort_by')) {
             $field = $this->params()->fromQuery('sort_by');
-            $dir = $this->params()->fromQuery('order');
+            $dir   = $this->params()->fromQuery('order');
             if (!$dir) {
-                $so = $repository->getSort();
+                $so  = $repository->getSort();
                 if (isset($so->options[$field]['dir']))
                     $dir = $so->options[$field]['dir'];
                 else
@@ -417,7 +429,7 @@ class RestController
 
         // default je simple filter forma, ki vsebuje samo en element
         // in sicer q tipa string.
-        if (empty($fc['elements']) && empty($fc['class'])) {            
+        if (empty($fc['elements']) && empty($fc['class'])) {
             return $this->getForm('Max\Form\Filter\Simple');
         }
         // če je v konfigu class, potem naredim formo tistega class-a 
@@ -488,4 +500,15 @@ class RestController
         return $hydr;
     }
 
+    
+    public function getUsername() {
+         $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+         $ident = $auth->getIdentity();
+         if ($ident) {
+             return $ident->getUsername();
+         } else {
+             return "anon";
+         }
+
+    }
 }

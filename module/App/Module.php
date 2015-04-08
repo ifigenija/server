@@ -52,6 +52,7 @@ class Module
     {
         Paginator::setDefaultItemCountPerPage(30);
 
+        ini_set('html_errors', 'Off');
         $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
@@ -64,20 +65,18 @@ class Module
         // Narediti session tako, da se virtual hosti ne bodo med seboj mešali 
         // da se avtentikacija ne prenaša med vhosti
         
-        
-        
         // poskrbim za identiteto uporabnika 
         if ($e->getRequest() instanceof Request) {
             // handling autorizacij preko konzole
             $this->setIdentity('console', $auth, $em);
         } else {
-            if (!$auth->hasIdentity()) {
-                $identity = $this->tryHttpAuth($auth, $em, $e);
-                if (!$identity) {
+            $id = $this->tryHttpAuth($auth, $em, $e);
+            
+            if (!$id) {
+                if (!$auth->hasIdentity()) {
                     $this->setIdentity('anonymous', $auth, $em);
                 }
-            }
-            
+            }            
          }
 
         $identity = $auth->getIdentity();
@@ -134,15 +133,18 @@ class Module
 
         // shranim si doctrine adapter
         $originalAdapter = $authService->getAdapter();
+        
         $authService->setAdapter($adapter);
+        /* @var $authService \Zend\Authentication\AuthenticationService */
         $authResult = $authService->authenticate();
         if ($authResult->isValid()) {
             $identity = $authResult->getIdentity();
             $authService->getStorage()->write($identity);
         } else {
             $authService->setAdapter($originalAdapter);
+            $identity = null;
         }
-        return $authResult->isValid();
+        return $identity;
     }
 
 }

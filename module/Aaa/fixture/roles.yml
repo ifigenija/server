@@ -9,7 +9,7 @@
 -
     name: anonymous
     description: 'Vloga za javne - neavtenticirane uporabnike'
-    permissions: [Drzava-list, Permission-list]
+    permissions: [Drzava-read, Permission-list]
 -
     name: ifi-vse
     description: 'Polni dostop do vsega v aplikaciji.'
@@ -17,4 +17,4 @@
 -
     name: admin
     description: 'Polni dostop do vsega v aplikaciji.'
-    permissions: [Drzava-create, Drzava-update, Drzava-delete]
+    permissions: [Drzava-write, Drzava-read]
