@@ -126,7 +126,6 @@ class RestController
         /* @var $sr  AbstractMaxRepository */
         $sr = $this->getRepository();
 
-
         $object = $sr->find($id);
         try {
             $perm = $this->getFormPermission('update', $view);
@@ -134,24 +133,24 @@ class RestController
 
             $this->expect($object, $this->trnsl('Objekt ne obstaja'), 100100);
 
-            $form = $this->buildEntityForm($view);
-            $this->form->setMode('EDIT');
+            $form = $this->buildForm($view);
+            $form->setMode('EDIT');
 
-            $this->form->bind($object);
+            $form->bind($object);
             $data['id'] = $id;
-            $this->form->setData(['fieldset' => $data]);
+            $form->setData($data);
 
-            if ($this->form->isValid()) {
-
+            if ($form->isValid()) {
                 /* @var $sr  AbstractMaxRepository */
                 $sr = $this->getRepository();
                 $sr->update($object);
 
                 $this->getEm()->flush();
-                $data = $this->hydr->extract($object);
+                $hydr = $this->getHydrator($view);
+                $data = $hydr->extract($object);
                 return new JsonModel($data);
             } else {
-                $this->addFormMessages($this->form);
+                $this->addFormMessages($form);
             }
         } catch (\Exception $e) {
             $this->addErrorFromException($e);
@@ -174,11 +173,12 @@ class RestController
             $perm = $this->getFormPermission('create', $view);
             $this->expect($this->isGranted($perm, $object), $this->trnsl("Api access denied"), 100008);
 
-            $this->form->setMode('NEW');
-            $this->form->bind($object);
-            $this->form->setData($data);
+            $form = $this->buildForm($view);
+            $form->setMode('NEW');
+            $form->bind($object);
+            $form->setData($data);
 
-            if ($this->form->isValid()) {
+            if ($form->isValid()) {
                 /* @var $sr  AbstractMaxRepository */
                 $sr = $this->getRepository();
                 if ($sr instanceof CrudInterface) {
@@ -190,7 +190,7 @@ class RestController
                 $data = $hydr->extract($object);
                 return new JsonModel($data);
             } else {
-                $this->addFormMessages($this->form);
+                $this->addFormMessages($form);
             }
         } catch (\Exception $e) {
             $this->addErrorFromException($e);
@@ -255,6 +255,10 @@ class RestController
         return $this->notSupported();
     }
 
+    public function replaceList($data)
+    {
+        return $this->notSupported();
+    }
     public function patch($id, $data)
     {
         return $this->notSupported();
@@ -441,16 +445,16 @@ class RestController
         $fc = $this->getConfig("forms.$view");
 
         // če je v konfigu class, potem naredim formo tistega class-a 
-        if ($fc['class']) {
+        if (!empty($fc['class'])) {
             $form = $this->getForm($fc['class']);
             return $form;
         }
 
         // če je v konfiguraciji navedeno polje elementov, potem iz tega naredimo
         // formo
-        if ($fc['elements']) {
-            $form = new JsonForm();
-            $form->setEntity($this->getEntityClass());
+        if (!empty($fc['elements'])) {
+            $form = $this->getForm('\Max\Form\JsonForm');
+            $form->setEntityClass($this->getEntityClass());
             foreach ($fc['elements'] as $opts) {
                 if (is_array($opts)) {
                     $form->addWithMeta($opts['name'], $opts['options']);

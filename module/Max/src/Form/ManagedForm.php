@@ -4,6 +4,7 @@ namespace Max\Form;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Max\Ann\EntityMetadata;
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
@@ -13,8 +14,8 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
  * @author boris
  */
 class ManagedForm
-    extends Form
-    implements ServiceLocatorAwareInterface
+        extends Form
+        implements ServiceLocatorAwareInterface
 {
 
     use \Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -34,10 +35,13 @@ class ManagedForm
     public function init()
     {
         parent::init();
-        $sm = $this->getServiceLocator()->getServiceLocator();
-        $this->em = $sm->get('doctrine.entitymanager.orm_default');
+        $this->sm = $this->getServiceLocator()->getServiceLocator();
+        $this->em = $this->sm->get('doctrine.entitymanager.orm_default');
+        $this->mf = $this->sm->get('entity.metadata.factory');
+        //$this->opts = $sm->get('options.service');
     }
 
+    
     public function getObjectRepository()
     {
         return $this->objectRepository;
@@ -67,11 +71,41 @@ class ManagedForm
 
     protected function ensureIdElement()
     {
-        if (!$this->baseFieldset->has('id')) {
-            if ($this->baseFieldset instanceof ManagedFieldset && $this->baseFieldset->getEntityClass()) {
-                $this->getBaseFieldset()->addWithMeta('id');
-            }
+        if (!$this->has('id')) {
+            $this->addWithMeta('id');
         }
+    }
+
+    /**
+     * getter za metadata
+     *
+     * @return EntityMetadata
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+
+    /**
+     * setter za metadata
+     *
+     * @param EntityMetadata $metadata
+     * @return ManagedFieldset
+     */
+    public function setMetadata($metadata)
+    {
+        $this->metadata = $metadata;
+        return $this;
+    }
+
+    /**
+     * getter za metadata factory
+     *
+     * @return Max\Ann\EntityMetadataFactory;
+     */
+    public function getMf()
+    {
+        return $this->mf;
     }
 
 }

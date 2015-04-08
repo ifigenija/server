@@ -84,7 +84,20 @@ return [
     'form_elements' => [
         'invokables' => [
 // elementi
-        // forme           
+            'id' => 'Max\Form\Element\Id',
+            'naziv' => 'Max\Form\Element\Naziv',
+            'sifra' => 'Max\Form\Element\Sifra',
+            'integer' => 'Max\Form\Element\Integer',
+            'decimal' => 'Max\Form\Element\Decimal',
+            'multiselect' => 'Max\Form\Element\Multiselect',
+            'boolcheckbox' => 'Max\Form\Element\BoolCheckbox',
+            'date' => 'Max\Form\Element\Date',
+            'email' => 'Max\Form\Element\Email',
+            'toone' => 'Max\Form\Element\EntityToOne',
+            'lookupSelect' => 'Max\Form\Element\LookupSelect',
+            // forme
+            'EntityForm' => 'Tip\Form\EntityForm'
+       
         ]
     ]
 ];

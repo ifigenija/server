@@ -14,7 +14,6 @@ return array(
   'Aaa\Factory\JsonStrategyFactory'          => __DIR__ . '/src/Aaa/Factory/JsonStrategyFactory.php',
   'Aaa\Factory\RbacFactory'                  => __DIR__ . '/src/Aaa/Factory/RbacFactory.php',
   'Aaa\Form\ChangePasswordForm'              => __DIR__ . '/src/Aaa/Form/ChangePasswordForm.php',
-  'Aaa\Form\Filter\Simple'                   => __DIR__ . '/src/Aaa/Form/Filter/Simple.php',
   'Aaa\Form\LoginForm'                       => __DIR__ . '/src/Aaa/Form/LoginForm.php',
   'Aaa\Rbac'                                 => __DIR__ . '/src/Aaa/Rbac.php',
   'Aaa\Repository\Permissions'               => __DIR__ . '/src/Aaa/Repository/Permissions.php',
