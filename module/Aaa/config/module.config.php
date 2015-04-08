@@ -78,7 +78,9 @@ return [
                     'options' => [
                         //  --role / --user sta spremenjena v --rolename / --username, ker se user/role besedi uporabljata že levo v (user|role)
                         //  drugače ne deluje
-                        'route'    => '(user|role):what list [--rolename=<rolename>] [--username=<username>]',
+                        //      spremenil tudi --rolename=<rolename>      v le --rolename=  (in podobno pri username), 
+                        //      ker je ta krajša oblika glede na dokumentacijo podprto (isto delovanje)
+                        'route'    => '(user|role):what list [--rolename=] [--username=]',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
                             'action'     => 'list'
