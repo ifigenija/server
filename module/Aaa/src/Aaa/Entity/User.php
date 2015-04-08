@@ -128,25 +128,24 @@ class User
         $this->roles = new ArrayCollection();
     }
 
-    public function removeRoles($role)
-    {
-        // pri Many2Many odstranimo (kličemo metodo) na owner strani
-        $role->unassignedToUser($this);
-        // odstranimi role-o iz array-a
-        if (in_array($role, $this->roles)) {
-            unset($this->roles[array_search($role, $this->roles)]);
-        }
-        return $this;
-    }
-
     public function addRoles($role)
     {
         // pri Many2Many dodajamo (kličemo metodo) na owner strani
-        $role->assignedToUser($this);
-        $this->roles[] = $role;
+        $role->addUser($this);
+        $this->roles->add($role);
         return $this;
     }
 
+    public function removeRoles($role)
+    {
+        // pri Many2Many odstranimo (kličemo metodo) na owner strani
+        $role->removeUser($this);
+
+        // odstranimi role-o iz array-a
+        $this->roles->removeElement($role);
+
+        return $this;
+    }
 
     public function getId()
     {
@@ -159,11 +158,10 @@ class User
         return $this;
     }
 
-
     public function setPassword($password)
     {
         if ($password !== '') {
-            $bcrypt = new Bcrypt();
+            $bcrypt         = new Bcrypt();
             $bcrypt->setSalt(51292170311201451452855644564);
             $bcrypt->setCost(5);
             $this->password = $bcrypt->create($password);
@@ -181,16 +179,10 @@ class User
         return $this->enabled;
     }
 
-
-
-
-
     public function __toString()
     {
         return $this->getUsername();
     }
-
-    
 
     function getName()
     {
@@ -261,13 +253,10 @@ class User
     {
         $this->email = $email;
     }
+
     function setEnabled($enabled)
     {
         $this->enabled = $enabled;
     }
-
-
-
-
 
 }

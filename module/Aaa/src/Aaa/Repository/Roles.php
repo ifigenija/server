@@ -13,7 +13,6 @@ use Max\Repository\AbstractMaxRepository;
  */
 class Roles
         extends AbstractMaxRepository
-      
 {
 
     /**
@@ -23,16 +22,15 @@ class Roles
      */
     protected $sortOptions = [
         'default' => [
-            'name' => [ 'alias' => 'r.name',],
+            'name'        => [ 'alias' => 'r.name',],
             'description' => [ 'alias' => 'r.description']
         ]
     ];
-    
     protected $hydratorOptions = [
         'default' => [
             'exclude' => ['roles']
         ],
-        'roles' => [
+        'roles'   => [
             'byValue' => ['roles']
         ]
     ];
@@ -47,9 +45,9 @@ class Roles
     {
         $srch = strtolower($options['text']);
 
-        $em = $this->getEntityManager();
-        $qb = $em->createQueryBuilder();
-        $ex = $qb->expr();
+        $em   = $this->getEntityManager();
+        $qb   = $em->createQueryBuilder();
+        $ex   = $qb->expr();
         $qb->select('r');
         $qb->from('\Aaa\Entity\Role', 'r');
         $sort = $this->getSort($name);
@@ -107,7 +105,7 @@ class Roles
      */
     public function resolveNames(\Aaa\Entity\User $user, $names)
     {
-        
+
         foreach ($names as $name) {
             $r = $this->findOneByName($name);
             if ($r) {
@@ -117,5 +115,22 @@ class Roles
         }
     }
 
+    // vrne userje za vse vloge
+    public function getRolesUsersArray()
+    {
+        $dql   = "SELECT r,u FROM Aaa\Entity\Role r JOIN r.users u" .
+                " ORDER BY r.name,u.username ASC";
+        $query = $this->getEntityManager()->createQuery($dql);
+        return $query->getArrayResult();
+    }
+
+    // vrne userje za eno vlogo
+    public function getRoleUsersArray($rolename)
+    {
+        $dql   = "SELECT r,u FROM Aaa\Entity\Role r JOIN r.users u" .
+                " WHERE r.name='$rolename'ORDER BY u.username ASC";
+        $query = $this->getEntityManager()->createQuery($dql);
+        return $query->getArrayResult();
+    }
 
 }
