@@ -11,14 +11,13 @@ class Simple extends Prazna
     {
         //Text
         $this->add([
-            'name' => 'text',
+            'name' => 'q',
             'type' => 'Zend\Form\Element\Text',
             'attributes' => [
                 'placeholder' => 'Išči...',
             ],
             'options' => [
-                'formgroupClass' => 'col-xs-6 col-sm-3',
-                'label' => 'Išči'
+                'label' => 'Išči',
             ]
         ]);
     }

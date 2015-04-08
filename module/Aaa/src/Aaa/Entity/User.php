@@ -61,6 +61,7 @@ class User
      *
      * @Max\I18n(label="Geslo", hint="Geslo", description="Geslo")
      * @Max\Ui(group="Login", type="password")
+     * @Max\Tracking(log=false)
      */
     protected $password;
 

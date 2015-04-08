@@ -21,7 +21,7 @@
       <field name="id" type="integer" required="true" primary="true" uuid="ff51db03-8db6-4030-9a89-b9d080079556">
         <orm-attributes>
           <attribute name="generator">
-            <attribute name="strategy">NONE</attribute>
+            <attribute name="strategy">SEQUENCE</attribute>
           </attribute>
         </orm-attributes>
       </field>
@@ -357,7 +357,13 @@
       </orm-attributes>
     </association>
     <entity name="Trr" uuid="1d43e294-aeee-4624-80a9-4e648b8a02a9">
-      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="a0434b9c-f6fd-458c-86bb-8de6962461b4"/>
+      <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="a0434b9c-f6fd-458c-86bb-8de6962461b4">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
       <field name="stevilka" type="string" uuid="ee6c896c-b4d2-4308-ae0b-ab1eb9bc79d7"/>
       <field name="swift" type="string" uuid="e3733024-cee7-4937-8bc1-dcd6d507633d"/>
       <field name="bic" type="string" uuid="135699e2-858f-4854-b7b0-c226122d0cd7"/>
@@ -618,7 +624,13 @@
       <field name="nastopajoc" type="boolean" uuid="cd639534-771b-45c6-b39c-c00dd1ce8cf9"/>
     </entity>
     <entity name="Arhivalija" uuid="a04c0db3-b7d2-4a9a-bf5a-da3120744ced">
-      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="c85ab7c1-8877-41f3-842b-6bb16332950a"/>
+      <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="c85ab7c1-8877-41f3-842b-6bb16332950a">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
       <field name="dogodek_id" type="guid" uuid="17c516fb-2efe-4893-a737-f77bfa001da0"/>
       <field name="uprizoritev_id" type="guid" uuid="049f8ae7-2085-4e9c-9d95-b2822437f1a9"/>
       <field name="oznakaDatuma" type="string" uuid="14cc2f44-32ff-4312-a33a-c5eaf3481614"/>
@@ -639,17 +651,35 @@
       <association-field from="uprizoritev_id" to="id"/>
     </association>
     <entity name="ZvrstUprizoritve" uuid="064b8109-e697-4483-a021-6290e08bd8a9">
-      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="7e35196f-f7f1-49b0-ae81-43f1b1a641cd"/>
+      <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="7e35196f-f7f1-49b0-ae81-43f1b1a641cd">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
       <field name="ime" type="string" uuid="b96d2c89-db84-40e0-a4c3-0ff5d38c127c"/>
       <field name="opis" type="string" uuid="126e83b6-146b-467c-a1e6-ef755fe8f8b1"/>
     </entity>
     <entity name="ZvrstSurs" uuid="0590ef21-6b77-4fb7-a82b-16bf5d3b3180">
-      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="55bab13a-abbb-4a43-9723-b0f75a926091"/>
+      <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="55bab13a-abbb-4a43-9723-b0f75a926091">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
       <field name="ime" type="string" uuid="f3207710-0e0b-46e1-915b-1b07b748b135"/>
       <field name="naziv" type="string" uuid="1cc199a0-f0d8-47bd-bdf7-1bb20507e016"/>
     </entity>
     <entity name="Rekviziterstvo" uuid="3b7195b9-35b7-49a0-bd54-0a2fd59709ff">
-      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="33cdb1b4-f0d4-464d-a332-c128af0e33d3"/>
+      <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="33cdb1b4-f0d4-464d-a332-c128af0e33d3">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
       <field name="namenUporabe" type="boolean" uuid="2f6aacb6-358b-48a8-8653-3068c3b5243f"/>
       <field name="opisPostavitve" type="text" uuid="90a8d94a-0397-42f6-898e-79d70c5eee62"/>
       <field name="rekvizit_id" type="guid" uuid="7073bc68-bef9-4f31-aee1-c8ac35c41098"/>
@@ -796,7 +826,13 @@
       </field>
     </entity>
     <entity name="Sezona" uuid="4b4bded0-aec2-461d-82ea-4fb1dbac103e">
-      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="f48f299d-a978-462d-ab60-b0e66301efbd"/>
+      <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="f48f299d-a978-462d-ab60-b0e66301efbd">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
       <field name="imeSezone" type="string" uuid="cdfd84d6-73d1-46e6-9a1f-e74c450c45a3"/>
       <field name="zacetek" type="date" uuid="5588228b-d0f4-420f-8677-0fbd1930c656"/>
       <field name="konec" type="date" uuid="b0225fb5-113f-4807-8769-8159c88cc2a0"/>
@@ -829,7 +865,13 @@
   </module>
   <module name="Prisotnost\Entity" import-format="Doctrine2Php" import-path="module/Prisotnost/src/Prisotnost/Entity" uuid="7f39557d-626b-4091-868b-01d09d6f1b96">
     <entity name="TerminStoritve" uuid="fd572a6a-d40c-4db3-80a0-7607c2b3ecc2">
-      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="0d53afef-9837-4fdd-a652-5810005d306d"/>
+      <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="0d53afef-9837-4fdd-a652-5810005d306d">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
       <field name="dogodek_id" type="integer" uuid="35aafebd-a244-4e93-8185-17af66b7f5fb"/>
       <field name="alternacija_id" type="integer" uuid="1cd621c9-51bf-4693-8426-0c07dd67f78f"/>
       <field name="planiranZacetek" type="datetime" uuid="e6086f7d-5e7f-4f46-be1b-8a2be14e883e"/>
@@ -1100,14 +1142,14 @@
     <many-to-many-association uuid="11624642-ff2f-46bb-914b-003e564a9f77" color="4288059030"/>
     <entity uuid="142a04fd-0736-4d43-84ea-7f8e1d76378b" bg-color="4294967295" hdr-color="4292006610" position-x="236" position-y="383" size-x="0" size-x2="96" size-y="0" size-y2="60"/>
     <association uuid="182e073f-fbca-4cce-aba7-c7fedb721cdb" caption1-position-x="-55" caption1-position-y="5" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <module uuid="1c11ba6b-dc14-4ab2-bb77-f92c53686ca3" bg-color="4294897635" position-x="2108" position-y="688" size-x="3" size-x2="792" size-y="-27" size-y2="330"/>
+    <module uuid="1c11ba6b-dc14-4ab2-bb77-f92c53686ca3" bg-color="4294897635" position-x="1818" position-y="630" size-x="3" size-x2="792" size-y="-27" size-y2="330"/>
     <entity uuid="1d43e294-aeee-4624-80a9-4e648b8a02a9" bg-color="4294967295" hdr-color="4292006610" position-x="33" position-y="607" size-x="0" size-x2="86" size-y="0" size-y2="115"/>
     <entity uuid="1f68be83-ac13-4ab5-ba28-a5352fc33f3b" bg-color="4294967295" hdr-color="4292006610" position-x="645" position-y="502" size-x="0" size-x2="92" size-y="0" size-y2="59"/>
     <entity uuid="250fcf52-3173-45dc-a1fa-0aab3e9916c2" bg-color="4294967295" hdr-color="4292006610" position-x="-389" position-y="25" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
     <entity uuid="2525a53d-338c-4ceb-873a-e1b68c728f29" bg-color="4294967295" hdr-color="4292006610" position-x="374" position-y="-85" size-x="0" size-x2="101" size-y="0" size-y2="143"/>
     <association uuid="25f9afc1-dd4b-4983-b323-df7912af77b7" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="2644e9ed-4490-41ec-aab8-3505e88e84b6" bg-color="4294967295" hdr-color="4292006610" position-x="405" position-y="22" size-x="0" size-x2="101" size-y="0" size-y2="59"/>
-    <module uuid="26a39b04-dc43-4ef3-9963-490198aeae62" bg-color="4293584113" position-x="1384" position-y="33" size-x="-179" size-x2="1155" size-y="-3" size-y2="603"/>
+    <module uuid="26a39b04-dc43-4ef3-9963-490198aeae62" bg-color="4293584113" position-x="1616" position-y="36" size-x="-179" size-x2="1155" size-y="-3" size-y2="603"/>
     <association uuid="27667b50-2424-4f64-a6f3-d0fd9d264a2f" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="2882f490-7861-4c06-adf9-9a068a485140" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="2924dd49-c2a1-470f-80b0-b8ee5649d736" bg-color="4294967295" hdr-color="4292006610" position-x="-320" position-y="110" size-x="0" size-x2="113" size-y="0" size-y2="45"/>
@@ -1142,7 +1184,7 @@
     <entity uuid="737a41cb-0b4c-4a1d-91dc-a715db661610" bg-color="4294967295" hdr-color="4292006610" position-x="-36" position-y="242" size-x="0" size-x2="115" size-y="0" size-y2="73"/>
     <entity uuid="7713dae5-f407-4aa8-979c-d9337cd5333a" bg-color="4294967295" hdr-color="4292006610" position-x="-62" position-y="-66" size-x="0" size-x2="118" size-y="0" size-y2="185"/>
     <entity uuid="772b7b64-6546-43a8-908c-5400c169be85" bg-color="4294967295" hdr-color="4292006610" position-x="77" position-y="312" size-x="0" size-x2="133" size-y="0" size-y2="101"/>
-    <module uuid="7f39557d-626b-4091-868b-01d09d6f1b96" bg-color="4294831087" position-x="1273" position-y="993" size-x="-374" size-x2="1093" size-y="-93" size-y2="368"/>
+    <module uuid="7f39557d-626b-4091-868b-01d09d6f1b96" bg-color="4294831087" position-x="1467" position-y="906" size-x="-374" size-x2="1093" size-y="-93" size-y2="368"/>
     <association uuid="82a71af7-7182-44cf-b400-d8759b3421b4" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="839a6864-c7e1-4f7f-94c5-39c430703662" bg-color="4294967295" hdr-color="4292006610" position-x="212" position-y="145" size-x="0" size-x2="88" size-y="0" size-y2="59"/>
     <entity uuid="85fc6aa4-1cde-4b7c-a4e3-48af305373de" bg-color="4294967295" hdr-color="4292006610" position-x="395" position-y="728" size-x="0" size-x2="146" size-y="0" size-y2="87"/>
@@ -1164,7 +1206,7 @@
     <entity uuid="93d17e5f-69ad-4167-bded-4ffcac55eb3d" bg-color="4294967295" hdr-color="4292006610" position-x="227" position-y="22" size-x="0" size-x2="90" size-y="0" size-y2="73"/>
     <association uuid="9af33b7d-f7b4-4049-a3a1-e93f352b3ca1" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="9fde8670-f234-4772-a774-7047354a2fbe" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="a04c0db3-b7d2-4a9a-bf5a-da3120744ced" bg-color="4294967295" hdr-color="4292006610" position-x="737" position-y="510" size-x="0" size-x2="120" size-y="0" size-y2="199"/>
+    <entity uuid="a04c0db3-b7d2-4a9a-bf5a-da3120744ced" bg-color="4294967295" hdr-color="4292006610" position-x="729" position-y="376" size-x="0" size-x2="120" size-y="0" size-y2="199"/>
     <association uuid="a303d5d9-bf84-4df5-9228-9a6abfae3a97" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="a31e2f56-cc75-4f4c-bc23-33616f1350a3" center-position-x="-32" center-position-y="4" color="4288059030"/>
     <entity uuid="a457fa98-63a2-461f-b8bc-fe4e80ba4681" bg-color="4294967295" hdr-color="4292006610" position-x="186" position-y="185" size-x="0" size-x2="92" size-y="0" size-y2="143"/>

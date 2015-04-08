@@ -1,9 +1,7 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Licenca GPLv3 or later
  */
 
 namespace App\Repository;
@@ -15,10 +13,6 @@ namespace App\Repository;
  */
 class Osebe extends \Max\Repository\AbstractMaxRepository
 {
-    
-    public function getPaginator(array $options, $name = "default")
-    {
-        return parent::getPaginator($options, $name);
-    }
+
 
 }

@@ -21,10 +21,13 @@ class CliController
      */
     public function passwordAction()
     {
+        /* @var $em \Doctrine\ORM\EntityManager */
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $username = $this->params('username');
         $password = $this->params('password');
 
+        $conf = $this->serviceLocator->get("Config");
+        var_dump($conf['doctrine']['connection']);
         // nastavimo novo geslo
         $user = $em->getRepository("Aaa\Entity\User")
                 ->resetPassword($username, $password);
@@ -89,6 +92,7 @@ class CliController
         }
         $roles = $user->getRoles();
 
+        
         // z metodo contains bomo preverili, če uporabnik že ima vlogo
         if (!$roles->contains($role)) {
             // vloga uporabniku se ni dodeljena, zato jo dodaj:

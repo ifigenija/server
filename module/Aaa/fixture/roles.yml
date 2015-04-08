@@ -14,3 +14,7 @@
     name: ifi-vse
     description: 'Polni dostop do vsega v aplikaciji.'
     permissions: {  }
+-
+    name: admin
+    description: 'Polni dostop do vsega v aplikaciji.'
+    permissions: [Drzava-create, Drzava-update, Drzava-delete]

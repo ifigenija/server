@@ -6,59 +6,10 @@ namespace Codeception\Module;
 // all public methods declared in helper class will be available in $I
 
 class ApiHelper
-    extends \Codeception\Module
+        extends \Codeception\Module
 {
 
     const ID_RE = '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/';
-
-    /**
-     * Lookup entitete direktno preko GuzzleHttp
-     * 
-     * @param string $entity ime entitete - kartka oblika 
-     * @param string $ident ident po katerem povprašujemo
-     * @param boolean $returnIdOnly a vrnemo samo id ali pa celi lookup objekt
-     * @param string $route dodatek k default lookup url-ju
-     * @return typeSkoči po ID entitete 
-     */
-    public function lookupEntity($entity, $ident, $returnIdOnly = true, $route = '')
-    {
-
-        $br = $this->getModule('PhpBrowser');
-        $client = new \GuzzleHttp\Client ();
-
-        /* @var $a \Codeception\Module\Asserts */
-        $a = $this->getModule('Asserts');
-
-        if ($route && substr($route, 0, 1) !== '/') {
-            $route = '/' . $route;
-        }
-
-
-        $url = $br->_getUrl() . "/tip/lookup/$entity$route?";
-        if (preg_match(self::ID_RE, $ident)) {
-            $url .= "ids=$ident&page=1&per_page=30";
-        } else {
-            $url .= "ident=" . urlencode($ident) . "&page=1&per_page=30";
-        }
-
-        $res = $client->get($url, ['auth' => ['admin', 'Admin1234']]);
-
-        $a->assertEquals('application/json; charset=utf-8', $res->getHeader('content-type'), "Lookup $entity z identom $ident ni vrnil pravega content type");
-        $json = $res->getBody();
-
-        $decoded = json_decode($json, true);
-        $a->assertEquals(JSON_ERROR_NONE, json_last_error(), "Lookup $entity z identom $ident ni vrnil pravilnega json-a");
-
-        $a->assertEquals("200", $res->getStatusCode(), "Lookup $entity z identom $ident ni vrnil pravega statusa ");
-
-        $a->assertTrue(count($decoded['data']) > 0, "Lookup $entity z identom $ident ni našel entitete.");
-
-        if ($returnIdOnly) {
-            return $decoded['data'][0]['id'];
-        } else {
-            return $decoded['data'][0];
-        }
-    }
 
     /**
      * Post rest metoda z data v body requesta
@@ -193,7 +144,7 @@ class ApiHelper
     {
         $I = $this->getModule('REST');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPUT($url . '/' . $id, $data);
+        $I->sendPUT("$url/$id", $data);
         $I->seeResponseCodeIs('200');
         $I->seeResponseIsJson();
         return $I->grabDataFromResponseByJsonPath('$')[0];
@@ -207,7 +158,7 @@ class ApiHelper
     public function successfullyDelete($url, $id)
     {
         $I = $this->getModule('REST');
-        $I->sendDELETE($url . '/' . $id);
+        $I->sendDELETE("$url/$id");
         $I->seeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => true]);
@@ -219,15 +170,16 @@ class ApiHelper
      * @param string $url
      * @param array $data
      */
-    public function failToCreate($url, $data)
+    public function failToCreate($url, $id, $data)
     {
         $I = $this->getModule('REST');
 
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST($url, $data);
-        $I->seeResponseCodeIs('400');
+        $I->sendPOST("$url/$id", $data);
+        $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
+        return $I->grabDataFromResponseByJsonPath('$.error')[0];
     }
 
     /**
@@ -241,9 +193,10 @@ class ApiHelper
         $I = $this->getModule('REST');
 
         $I->sendGET($url, $filter);
-        $I->seeResponseCodeIs('400');
+        $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
+        return $I->grabDataFromResponseByJsonPath('$.error')[0];
     }
 
     /**
@@ -257,9 +210,10 @@ class ApiHelper
         $I = $this->getModule('REST');
 
         $I->sendGET($url . '/' . $id);
-        $I->seeResponseCodeIs('400');
+        $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
+        return $I->grabDataFromResponseByJsonPath('$.error')[0];
     }
 
     /**
@@ -275,9 +229,10 @@ class ApiHelper
         $I = $this->getModule('REST');
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPUT($url . '/' . $id, $data);
-        $I->seeResponseCodeIs('400');
+        $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
+        return $I->grabDataFromResponseByJsonPath('$.error')[0];
     }
 
     /**
@@ -291,9 +246,10 @@ class ApiHelper
     {
         $I = $this->getModule('REST');
         $I->sendDELETE($url . '/' . $id);
-        $I->seeResponseCodeIs('400');
+        $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
+        return $I->grabDataFromResponseByJsonPath('$.error')[0];
     }
 
     /**
@@ -306,9 +262,9 @@ class ApiHelper
         $dbh = $this->getModule('Db')->driver->getDbh();
 
         if (!is_array($ids)) {
-           $ids = [$ids]; 
+            $ids = [$ids];
         }
-        
+
         foreach ($ids as $insertId) {
             try {
                 $dbh->exec("delete from $table where $field = '$insertId'");

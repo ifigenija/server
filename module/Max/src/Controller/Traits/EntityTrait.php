@@ -57,7 +57,6 @@ trait EntityTrait
      */
     function getEntityClass()
     {
-        if (!$this->entityClass())
         return $this->entityClass;
     }
 
@@ -100,6 +99,7 @@ trait EntityTrait
             $rep = $this->getEm()->getRepository($class);
         }
         $rep->setServiceLocator($this->getServiceLocator());
+        $rep->setAuth($this->getAuth());        
         return $rep;
     }
 
@@ -108,20 +108,11 @@ trait EntityTrait
      * @param string $class class forme
      * @return ManagedForm
      */
-    public function getForm($config = null)
+    public function getForm($class = null)
     {
-        if (is_string($config)) {
-            
-        }
         $formManager = $this->serviceLocator->get('FormElementManager');
-        $formManager = $this->serviceLocator->get('FormElementManager');
-
-        if (isset($config['type'])) {
-            $form = $formManager->get($class);
-            return $form;
-        } else {
-            
-        }
+        $form = $formManager->get($class);
+        return $form;
     }
 
     /**
@@ -212,7 +203,7 @@ trait EntityTrait
      */
     public function getEntityPermission($action)
     {
-        $prefix = $this->getConfig('permPrefix', $this->getDefaultPermPrefix());       
+        $prefix = $this->getConfig('permPrefix', $this->getDefaultPermPrefix());
         $acl = $this->getConfig('meta.acl');
         return $prefix . '-' . $acl->$action;
     }

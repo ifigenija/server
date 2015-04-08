@@ -3,9 +3,9 @@ modules:
     enabled: [PhpBrowser, REST,  Db, Asserts, ApiHelper]
     config:
         Db:
-            dsn: 'pgsql:host=localhost;dbname=TipFunctional'
-            user: 'posl'
-            password: 'posl1234'
+            dsn: 'pgsql:host=localhost;dbname=IfiFunc'
+            user: 'ifi'
+            password: 'geslo'
             dump: 'tests/_data/DumpFunctional.sql'
             populate: true
             cleanup: false

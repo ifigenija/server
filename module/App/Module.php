@@ -60,13 +60,12 @@ class Module
         $em = $sm->get('doctrine.entitymanager.orm_default');
         $auth = $sm->get('Zend\Authentication\AuthenticationService');
 
-        $session = $sm->get('Zend\Session\SessionManager');
-        $session->start();
-
-        $auth->setStorage(new Session('ifigenijasess'));
-
-
-
+        //
+        // Narediti session tako, da se virtual hosti ne bodo med seboj mešali 
+        // da se avtentikacija ne prenaša med vhosti
+        
+        
+        
         // poskrbim za identiteto uporabnika 
         if ($e->getRequest() instanceof Request) {
             // handling autorizacij preko konzole

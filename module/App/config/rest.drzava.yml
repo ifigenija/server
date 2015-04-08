@@ -4,6 +4,9 @@ type: rest
 entityClass: App\Entity\Drzava
 forms:
     default: 
+        perm: Drzava-list
+        hydrator:    
+            exclude:
         elements:
             - sifra            
             - name: sifraDolg
@@ -16,13 +19,19 @@ forms:
 lists:
     default:      
         filter:
-            type: simple            
-        sort:           
-        hydrate:
+                       
+        sort: 
+       
+        hydrator:
 #            byValue:
 #                - 
 #            virtual:
 #    
 #            exclude:            
 #                    
+hydrator:
+    exclude: 
+        - opomba
+    virtual:
+        - tralala
                 

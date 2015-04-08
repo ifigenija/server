@@ -3,8 +3,10 @@
 namespace Max\Controller;
 
 use Max\Exception\ApiDisabledException;
+use Max\Form\Filter\Simple;
 use Max\Form\JsonForm;
 use Max\Repository\AbstractMaxRepository;
+use Max\Repository\CrudInterface;
 use Max\Stdlib\Hydrator\Json;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\Paginator\Paginator;
@@ -24,40 +26,6 @@ class RestController
         Traits\JsonErrorsTrait;
 
     /**
-     * Ali getList vrne seznam objektov če je query prazen
-     *
-     * @var boolean
-     */
-    protected $listAllIfEmptyQuery = false;
-
-    /**
-     * Forma za validacijo entitet
-     * 
-     * @var JsonForm
-     */
-    protected $form = null;
-
-    /**
-     * ime Forme za parsanje parametrov v getList metodi
-     * 
-     * @var string
-     */
-    protected $filterFormName = null;
-
-    /**
-     * Ime entitete
-     *
-     * @var Json
-     */
-    protected $hydr;
-
-    /**
-     * Opcije hidratorja - kaj se hidrira po vrednosti in kaj se ne hidrira
-     * @var type
-     */
-    protected $hydratorOptions = [];
-
-    /**
      * Rest get metoda
      * @param string $id
      * @return JsonModel
@@ -66,19 +34,19 @@ class RestController
     {
         $view = $this->params('view', 'default');
         $this->isApiEnabled('read', $view);
+        $perm = $this->getFormPermission('read', $view);
         try {
             $sr = $this->getRepository();
             $object = $sr->find($id);
-            if ($object) {
-                $perm = $this->getFormPermission('read', $view);
-                $this->expect($this->isGranted($perm, $object)
-                        , $this->trnslt('Api dostop zavrnjen'), 100099);
-                $data = $this->hydr->extract($object);
-                return new JsonModel($data);
-            } else {
-                $this->addError($this->trnslt('Ni entitete z id-jem'), 100098, 'warning');
-            }
-            return $this->getErrors();
+            $this->expect($this->isGranted($perm, $object)
+                    , $this->trnsl('Api dostop zavrnjen'), 100099);
+
+            $this->expect($object, $this->trnsl('Ni entitete z id-jem'), 100098);
+
+            $hydr = $this->getHydrator($view);
+
+            $data = $hydr->extract($object);
+            return new JsonModel($data);
         } catch (\Exception $e) {
             $this->addErrorFromException($e);
             return $this->getErrors();
@@ -96,44 +64,47 @@ class RestController
         $this->isApiEnabled('list', $listName);
 
         try {
-
             $perm = $this->getListPermission($listName);
             $this->expect($this->isGranted($perm), $this->trnsl('Api dostop zavrnjen'), 100012);
 
+            $filter = $this->buildFilterForm($listName);
 
-            $filter = $this->buildFilterForm($this->getConfig('list.' . $listName));
-            if ($this->filterFormName) {
-                $params = $this->params()->fromQuery();
-                $filter->setData($params);
-                if (!$filter->isValid()) {
-                    $this->addFormMessages($filter);
-                    return $this->getErrors();
-                }
-                $params = $filter->getData();
+            $this->expect($filter, $this->trnsl('Filter ni nastavljen'), 100013);
+
+            $params = $this->params()->fromQuery();
+            $filter->setData($params);
+            if (!$filter->isValid()) {
+                $this->addFormMessages($filter);
+                return $this->getErrors();
             }
+            $data = $filter->getData();
+
             /* @var $sr  AbstractMaxRepository */
             $sr = $this->getRepository();
-            $this->manageSort($sr, $listName);
-            $paginator = new Paginator($sr->getPaginator($params, $listName));
+            //    $this->manageSort($sr, $listName);
+            $paginator = new Paginator($sr->getPaginator($data, $listName));
             $this->setPaginatorParams($paginator);
             $jsonList = [];
 
-            $filter = $this->getConfig("lists.$listName.jsonFilter");
+            $hydr = $this->getHydrator($listName, 'lists');
+//            $outFilter = $this->getConfig("lists.$listName.jsonFilter");
             foreach ($paginator as $object) {
 
-                $array = $this->hydr->extract($object);
-                if ($filter) {
-                    $jsonList[] = $sr->jsonFilter($array, $listName);
-                } else {
-                    $jsonList[] = $array;
-                }
-                //  }
+                $array = $hydr->extract($object);
+//                if ($outFilter) {
+//                    $jsonList[] = $sr->jsonFilter($array, $listName);
+//                } else {
+                $jsonList[] = $array;
+//                }
             }
 
-            return new JsonModel([
-                'state' => array_merge($sr->getSortJson($listName), $this->getPaginatorArray($paginator)),
-                'data' => $jsonList,
-            ]);
+            return new JsonModel(
+        //[
+                //               'state' => array_merge($sr->getSortJson($listName), $this->getPaginatorArray($paginator)),
+          //      'data' => 
+                $jsonList
+            //]
+                    );
         } catch (\Exception $e) {
             $this->addErrorFromException($e);
             return $this->getErrors();
@@ -163,6 +134,7 @@ class RestController
 
             $this->expect($object, $this->trnsl('Objekt ne obstaja'), 100100);
 
+            $form = $this->buildEntityForm($view);
             $this->form->setMode('EDIT');
 
             $this->form->bind($object);
@@ -209,9 +181,13 @@ class RestController
             if ($this->form->isValid()) {
                 /* @var $sr  AbstractMaxRepository */
                 $sr = $this->getRepository();
-                $sr->create($object);
+                if ($sr instanceof CrudInterface) {
+                    $sr->create($object);
+                }
                 $this->em->flush();
-                $data = $this->hydr->extract($object);
+
+                $hydr = $this->getHydrator($view);
+                $data = $hydr->extract($object);
                 return new JsonModel($data);
             } else {
                 $this->addFormMessages($this->form);
@@ -239,7 +215,7 @@ class RestController
         $perm = $this->getEntityPermission('delete');
         $this->expect($this->isGranted($perm, $object), $this->trnsl('Dostop zavrnjen'), 100201);
 
-        if (method_exists($sr, 'delete')) {
+        if ($sr instanceof CrudInterface) {
             try {
                 $sr->delete($object);
                 $this->em->flush();
@@ -396,6 +372,12 @@ class RestController
         }
     }
 
+    /**
+     * Vrne permission za seznam, ki ga zahtevamo.
+     * 
+     * @param string $view
+     * @return string
+     */
     public function getListPermission($view)
     {
         $p1 = $this->getConfig("lists.$view.perm");
@@ -405,20 +387,101 @@ class RestController
         return $this->getEntityPermission('list');
     }
 
+    /**
+     * Zgradi permission string za akcijo v določenem viewu
+     * @param string $action
+     * @param string $view
+     * @return string
+     */
     public function getFormPermission($action, $view = 'default')
     {
-        $p1 = $this->getConfig("forms.$view.perm.$");
+        $p1 = $this->getConfig("forms.$view.perm");
         if ($p1) {
             return $p1;
         }
         return $this->getEntityPermission($action);
     }
 
-    public function buildFilterForm($config)
+    /**
+     * Zgradi filter formo iz podatkov v konfigu
+     * 
+     * @param string  $view
+     */
+    public function buildFilterForm($view)
     {
-        $fm = $this->getForm();
-        $this->form = new JsonForm();
-        $this->form->setConfig($config);
+        $fc = $this->getConfig("lists.$view.filter");
+
+        // default je simple filter forma, ki vsebuje samo en element
+        // in sicer q tipa string.
+        if (empty($fc['elements']) && empty($fc['class'])) {            
+            return $this->getForm('Max\Form\Filter\Simple');
+        }
+        // če je v konfigu class, potem naredim formo tistega class-a 
+        if ($fc['class']) {
+            $form = $this->getForm($fc['class']);
+            return $form;
+        }
+
+        // če je v konfiguraciji namedeno polje elementov, potem iz tega naredimo
+        // filter formo
+        if ($fc['elements']) {
+            $form = new JsonForm();
+            $form->add($fc['elements']);
+            return $form;
+        }
+    }
+
+    /**
+     * Zgradi filter formo iz podatkov v konfigu
+     * 
+     * @param string  $view
+     */
+    public function buildForm($view)
+    {
+        $fc = $this->getConfig("forms.$view");
+
+        // če je v konfigu class, potem naredim formo tistega class-a 
+        if ($fc['class']) {
+            $form = $this->getForm($fc['class']);
+            return $form;
+        }
+
+        // če je v konfiguraciji navedeno polje elementov, potem iz tega naredimo
+        // formo
+        if ($fc['elements']) {
+            $form = new JsonForm();
+            $form->setEntity($this->getEntityClass());
+            foreach ($fc['elements'] as $opts) {
+                if (is_array($opts)) {
+                    $form->addWithMeta($opts['name'], $opts['options']);
+                } else {
+
+                    $form->addWithMeta($opts);
+                }
+            }
+            return $form;
+        }
+    }
+
+    /**
+     * Vrne json hidrator za entiteto
+     *
+     * @return Json
+     */
+    public function getHydrator($name = 'default', $section = 'forms')
+    {
+
+        $options = $this->getConfig("$section.$name.hydrator");
+
+        if (empty($options)) {
+            $options = $this->getConfig('hydrator');
+        }
+
+        $hydr = new Json($this->getEm()
+                , $this->entityClass
+                , $options
+                , $this->getServiceLocator());
+        return $hydr;
     }
 
 }

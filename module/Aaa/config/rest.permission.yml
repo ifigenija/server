@@ -1,17 +1,21 @@
 ## YAML Template.
 ---
 entityClass: Aaa\Entity\Permission
+permPrefix: Drzava
 disabledMethods: 
     - delete
-permPrefix: Permission    
+    - create
+    - update
 forms:
-    default: 
+    default:
         disabledMethods:
             - update
-            - read
     extra:
         disabledMethods:
             - create
             - read
-            
-            
+lists:
+    default:
+hydrator:
+    exclude: 
+        - builtIn

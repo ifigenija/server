@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM,
  * @ORM\Entity(repositoryClass="App\Repository\Drzave")
  * @ORM\Table(name="drza")
  * @Max\I18n(label="Država",plural="Države",description="Evidenca držav")
+ * @Max\Id(prefix="0004")
  *
  */
 class Drzava
@@ -92,6 +93,9 @@ class Drzava
      */
     protected $datKnj;
 
+    public function getTralala() {
+        return "to je to ";
+    }
     public function getSifra()
     {
         return $this->sifra;

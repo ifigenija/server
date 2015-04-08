@@ -1,6 +1,6 @@
 <?php
 
-$env = getenv('IFI_ENV') ? : (isset($_SERVER['IFI_ENV']) ? $_SERVER['IFI_ENV'] : 'XXX');
+$env = getenv('APP_ENV') ? : (isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : 'XXX');
 return [
     'modules' => [
         'DoctrineModule',
