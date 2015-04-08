@@ -81,7 +81,7 @@ class Role
      */
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->users       = new ArrayCollection();
         $this->permissions = new ArrayCollection();
     }
 
@@ -118,7 +118,7 @@ class Role
     {
 
         $criteria = Criteria::create()->where(Criteria::expr()->eq('name', (string) $permission));
-        $result = $this->permissions->matching($criteria);
+        $result   = $this->permissions->matching($criteria);
 
         return count($result) > 0;
     }
@@ -174,6 +174,16 @@ class Role
     function setUsers($users)
     {
         $this->users = $users;
+    }
+
+    public function addUser($user)
+    {
+        $this->users->add($user);
+    }
+
+    public function removeUser($user)
+    {
+        $this->users->removeElement($user);
     }
 
 }

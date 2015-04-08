@@ -21,13 +21,10 @@ class CliController
      */
     public function passwordAction()
     {
-        /* @var $em \Doctrine\ORM\EntityManager */
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $username = $this->params('username');
         $password = $this->params('password');
 
-        $conf = $this->serviceLocator->get("Config");
-        var_dump($conf['doctrine']['connection']);
         // nastavimo novo geslo
         $user = $em->getRepository("Aaa\Entity\User")
                 ->resetPassword($username, $password);
@@ -74,25 +71,34 @@ class CliController
      */
     public function grantAction()
     {
+        /* $$
+         * zaenkrat še napaka  
+         * pri php bin/ifi.php user grant  admin ifi-vse
+         * An exception occurred while executing 'INSERT INTO User2Role (role_id, user_id) VALUES (?, ?)' with params [2, 1]:
+         * 
+         */
+
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $username = $this->params('username');
         $rolename = $this->params('role');
-
+        var_dump($username);
+        var_dump($rolename);
+        
+        
         $userR = $em->getRepository("Aaa\Entity\User");
         $user = $userR->findOneByUsername($username);
         if (!$user) {
-            echo 'ni user -ja';
+            echo "ni user -ja \n";
             throw new \Exception();
         }
         $roleR = $em->getRepository("Aaa\Entity\Role");
         $role = $roleR->findOneByName($rolename);
         if (!$role) {
-            echo 'Ni role\n';
+            echo "Ni role\n";
             throw new \Exception();
         }
         $roles = $user->getRoles();
 
-        
         // z metodo contains bomo preverili, če uporabnik že ima vlogo
         if (!$roles->contains($role)) {
             // vloga uporabniku se ni dodeljena, zato jo dodaj:
@@ -109,6 +115,7 @@ class CliController
      */
     public function revokeAction()
     {
+
 //         removeRoles($role)
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $username = $this->params('username');
@@ -117,13 +124,13 @@ class CliController
         $userR = $em->getRepository("Aaa\Entity\User");
         $user = $userR->findOneByUsername($username);
         if (!$user) {
-            echo 'ni user -ja\n';
+            echo "ni user -ja\n";
             throw new \Exception();
         }
         $roleR = $em->getRepository("Aaa\Entity\Role");
         $role = $roleR->findOneByName($rolename);
         if (!$role) {
-            echo 'Ni role\n';
+            echo "Ni role\n";
             throw new \Exception();
         }
         $roles = $user->getRoles();
@@ -142,16 +149,57 @@ class CliController
     /**
      * Prikaže seznam uporabnikov
      * - user list  - prikaže vse
-     * - user list --role=role - prikaže uporabnike za vlogo
+     * - user list --rolename=rolename - prikaže uporabnike za vlogo
      * - role list  - prikaže vse vloge 
-     * - role list --user=user - prikaže vloge za uporabnika 
+     * - role list --username=username - prikaže vloge za uporabnika 
      */
     public function listAction()
     {
-        echo "list\n";
+        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $what = $this->params('what');
+        $username = $this->params('username');
+        $rolename = $this->params('rolename');
+
+        if ($what == 'user') {
+            if (strlen($username) > 0) {
+                echo "        *** parameter --username se v kombinaciji z user  ne upošteva ***\n";
+            }
+            if (strlen($rolename) > 0) {
+                // 1 vloga         
+                $roleA = $em->getRepository("Aaa\Entity\Role")->getRoleUsersArray($rolename);
+            } else {
+                // vse vloge
+                $roleA = $em->getRepository("Aaa\Entity\Role")->getRolesUsersArray();
+            }
+            // še izpis:
+            foreach ($roleA as $role) {
+                echo "vloga      : " . $role["name"] . "\n";
+                foreach ($role['users'] as $user) {
+                    echo " uporabnik :  " . $user['username'] . "\n";
+                }
+            }
+        }
+
+        // ali prikažem vloge         
+        if ($what == 'role') {
+            if (strlen($rolename) > 0) {
+                echo "        *** parameter --rolename se v kombinaciji z role  ne upošteva ***\n";
+            }
+            if (strlen($username) > 0) {
+                //  1 uporabnik
+                $userA = $em->getRepository("Aaa\Entity\User")->getUserRolesArray($username);
+            } else {
+                // vse uporabnike
+                $userA = $em->getRepository("Aaa\Entity\User")->getUsersRolesArray();
+            }
+            // še izpis:
+            foreach ($userA as $user) {
+                echo "uporabnik  : " . $user["username"] . "\n";
+                foreach ($user['roles'] as $role) {
+                    echo "     vloga :  " . $role['name'] . "\n";
+                }
+            }
+        }
     }
 
-    /**
-     * 
-     */
 }

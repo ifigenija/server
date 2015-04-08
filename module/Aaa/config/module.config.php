@@ -10,16 +10,15 @@
 return [
     'service_manager' => [
         'factories' => [
-            'rbac_strategy' => '\Aaa\Factory\JsonStrategyFactory',
+            'rbac_strategy'                             => '\Aaa\Factory\JsonStrategyFactory',
             'Zend\Authentication\AuthenticationService' => 'Aaa\Factory\AuthenticationServiceFactory',
-            'Rbac\Rbac' => 'Aaa\Factory\RbacFactory',
-                
+            'Rbac\Rbac'                                 => 'Aaa\Factory\RbacFactory',
         ]
     ],
-    'controllers' => [
-        'factories' => [
-            'Rest\User' => 'Max\Factory\RestControllerFactory',
-            'Rest\Role' => 'Max\Factory\RestControllerFactory',
+    'controllers'     => [
+        'factories'  => [
+            'Rest\User'       => 'Max\Factory\RestControllerFactory',
+            'Rest\Role'       => 'Max\Factory\RestControllerFactory',
             'Rest\Permission' => 'Max\Factory\RestControllerFactory'
         ],
         'invokables' => [
@@ -27,76 +26,78 @@ return [
             'Aaa\Cli' => 'Aaa\Controller\CliController',
         ]
     ],
-    'console' => [
+    'console'         => [
         'router' => [
             'routes' => [
                 'user-password' => [
                     'options' => [
-                        'route' => 'user resetpass <username> <password>',
+                        'route'    => 'user resetpass <username> <password>',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
-                            'action' => 'password'
+                            'action'     => 'password'
                         ]
                     ]
                 ],
-                'user-enable' => [
+                'user-enable'   => [
                     'options' => [
-                        'route' => 'user enable <username>',
+                        'route'    => 'user enable <username>',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
-                            'action' => 'enable'
+                            'action'     => 'enable'
                         ]
                     ]
                 ],
-                'user-disable' => [
+                'user-disable'  => [
                     'options' => [
-                        'route' => 'user disable <username>',
+                        'route'    => 'user disable <username>',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
-                            'action' => 'disable'
+                            'action'     => 'disable'
                         ]
                     ]
                 ],
-                'user-grant' => [
+                'user-grant'    => [
                     'options' => [
-                        'route' => 'user grant <username> <role>',
+                        'route'    => 'user grant <username> <role>',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
-                            'action' => 'grant'
+                            'action'     => 'grant'
                         ]
                     ]
                 ],
-                'user-revoke' => [
+                'user-revoke'   => [
                     'options' => [
-                        'route' => 'user revoke <username> <role>',
+                        'route'    => 'user revoke <username> <role>',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
-                            'action' => 'revoke'
+                            'action'     => 'revoke'
                         ]
                     ]
                 ],
-                'user-list' => [
+                'user-list'     => [
                     'options' => [
-                        'route' => '(username|role):what list [<name>] [--role=<role>] [--user=<user>]',
+                        //  --role / --user sta spremenjena v --rolename / --username, ker se user/role besedi uporabljata že levo v (user|role)
+                        //  drugače ne deluje
+                        'route'    => '(user|role):what list [--rolename=<rolename>] [--username=<username>]',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
-                            'action' => 'list'
+                            'action'     => 'list'
                         ]
                     ]
                 ]
             ]
         ]
     ],
-    'session' => array(
-        'config' => array(
-            'class' => 'Zend\Session\Config\SessionConfig',
+    'session'         => array(
+        'config'  => array(
+            'class'   => 'Zend\Session\Config\SessionConfig',
             'options' => array(
                 'name' => 'ifigenija',
             ),
         ),
         'storage' => 'Zend\Session\Storage\SessionArrayStorage'
     ),
-    'fixtures' => [
+    'fixtures'        => [
         __DIR__ . '../fixture'
     ]
 ];

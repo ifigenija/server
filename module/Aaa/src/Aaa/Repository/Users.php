@@ -13,8 +13,7 @@ use Max\Repository\AbstractMaxRepository;
  *
  */
 class Users
-    extends AbstractMaxRepository
-   
+        extends AbstractMaxRepository
 {
 
     /**
@@ -24,7 +23,7 @@ class Users
      */
     protected $sortOptions = [
         'default' => [
-            'ime' => ['alias' => 'u.name'],
+            'ime'     => ['alias' => 'u.name'],
             'priimek' => ['alias' => 'u.surname']
         ]
     ];
@@ -40,9 +39,9 @@ class Users
 
         $srch = strtolower($options['text']);
 
-        $em = $this->getEntityManager();
-        $qb = $em->createQueryBuilder();
-        $ex = $qb->expr();
+        $em   = $this->getEntityManager();
+        $qb   = $em->createQueryBuilder();
+        $ex   = $qb->expr();
         $sort = $this->getSort($name);
 
         $qb->select('u');
@@ -51,7 +50,7 @@ class Users
 
         if ($srch) {
             $qb->Where($ex->orx(
-                    $ex->like('lower(u.name)', ':name'), $ex->like('lower(u.surname)', ':surname')
+                            $ex->like('lower(u.name)', ':name'), $ex->like('lower(u.surname)', ':surname')
             ));
             $qb->setParameter('name', "%" . $srch . "%");
             $qb->setParameter('surname', "%" . $srch . "%");
@@ -59,14 +58,12 @@ class Users
         return new DoctrinePaginator(new Paginator($qb));
     }
 
-    
     public function shrani($object, $data)
     {
 
         $object->defaultRouteParams = preg_replace('/\s+/', '', $object->defaultRouteParams);
         parent::shrani($object, $data);
     }
-
 
     public function getList()
     {
@@ -77,7 +74,7 @@ class Users
         $qb->from('\Aaa\Entity\User', 's');
 
 
-        $l = $qb->getQuery()->getResult(Query::HYDRATE_ARRAY);
+        $l    = $qb->getQuery()->getResult(Query::HYDRATE_ARRAY);
         $list = [];
         foreach ($l as $g) {
             if ($g['username'] === 'SYSTEM')
@@ -100,7 +97,7 @@ class Users
         if (!$id) {
             return true;
         }
-        $em = $this->getEntityManager();
+        $em   = $this->getEntityManager();
         $user = $this->getUser($id);
         $em->remove($user);
         $em->flush();
@@ -109,10 +106,10 @@ class Users
     public function login($username, $password)
     {
         $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
-        $adapter = $authService->getAdapter();
+        $adapter     = $authService->getAdapter();
         $adapter->setIdentityValue($username);
         $adapter->setCredentialValue($password);
-        $authResult = $authService->authenticate();
+        $authResult  = $authService->authenticate();
         if ($authResult->isValid()) {
             $identity = $authResult->getIdentity();
             $authService->getStorage()->write($identity);
@@ -176,6 +173,24 @@ class Users
                 }
             }
         }
+    }
+
+    // vrne vloge vseh userjev
+    public function getUsersRolesArray()
+    {
+        $dql   = "SELECT u,r FROM Aaa\Entity\User u JOIN u.roles r" .
+                " ORDER BY r.name ASC";
+        $query = $this->getEntityManager()->createQuery($dql);
+        return $query->getArrayResult();
+    }
+
+    // vrne vloge 1 userja
+    public function getUserRolesArray($username)
+    {
+        $dql   = "SELECT u,r FROM Aaa\Entity\User u JOIN u.roles r" .
+                " WHERE u.username='$username' ORDER BY r.name ASC";
+        $query = $this->getEntityManager()->createQuery($dql);
+        return $query->getArrayResult();
     }
 
 }
