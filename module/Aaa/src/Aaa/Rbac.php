@@ -60,10 +60,16 @@ class Rbac
     {
 
         foreach ($roles as $role) {
-
-// vloga tip-vse ima dostop do vsega, tako da takoj vrnemo true
-            if ($role === 'tip-vse') {
+// vloga ifi-all ima dostop do vsega, tako da takoj vrnemo true
+            if ($role === 'ifi-all') {
                 return true;
+            }
+// 
+            if ($role === 'ifi-readall') {
+                $part = substr($permission, -5);
+                if ($part === '-read' || $part === '-list') {
+                    return true;
+                }
             }
         }
 
@@ -79,22 +85,22 @@ class Rbac
      * @param string  $perm
      * @return bool
      */
-    private function matchRoles($roles, $perm) {
+    private function matchRoles($roles, $perm)
+    {
         /* @var $em EntityManager */
         $em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        
+
         $qb = $em->createQueryBuilder();
-        $e = $qb->expr();
+        $e  = $qb->expr();
         $qb->select('count(r) c');
         $qb->from('Aaa\Entity\Role', 'r');
         $qb->join('r.permissions', 'perm');
         $qb->where($e->eq('perm.name', ':perm'));
         $qb->andWhere($e->in('r.name', $roles));
-        
+
         $qb->setParameter('perm', $perm);
         $cnt = $qb->getQuery()->getSingleScalarResult();
         return $cnt > 0;
-        
     }
 
 }

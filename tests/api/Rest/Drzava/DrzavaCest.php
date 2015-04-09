@@ -15,8 +15,9 @@ use ApiTester;
 class DrzavaCest
 {
 
-    private $permUrl = '/rest/drzava';
+    private $restUrl = '/rest/drzava';
     private $id      = '00000000-0000-0000-0000-000000000000';
+    private $obj;
 
     public function _before(ApiTester $I)
     {
@@ -30,7 +31,7 @@ class DrzavaCest
 
     public function getList(ApiTester $I)
     {
-        $list     = $I->successfullyGetList($this->permUrl, []);
+        $list     = $I->successfullyGetList($this->restUrl, []);
         $I->assertNotEmpty($list);
         $this->id = array_pop($list)['id'];
     }
@@ -38,40 +39,47 @@ class DrzavaCest
     // tests
     public function create(ApiTester $I)
     {
-        $data = [
-            'sifra'     => 'xx',
+        $data      = [
+            'sifra'     => 'XX',
             'sifraDolg' => 'xx',
             'isoNum'    => 'xx',
             'isoNaziv'  => 'xx',
             'naziv'     => 'xx',
-            'opis'      => 'xx',
+            'opomba'    => 'xx',
         ];
-        $drz  = $I->successfullyCreate($this->permUrl, []);
-        $I->assertEquals('xx', $drz['opis']);
+        $this->obj = $drz       = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals('xx', $drz['opomba']);
+        $I->assertNotEmpty($drz['id']);
     }
-//
-//    // tests
-//    public function update(ApiTester $I)
-//    {
-//        $err   = $I->failToDelete($this->permUrl, '00000000-0000-0000-0000-000000000000');
-//        $words = explode(" ", $err['message']);
-//        $I->assertEquals('disabled', array_pop($words));
-//    }
-//
-//    // tests
-//    public function read(ApiTester $I)
-//    {
-//        $err   = $I->failToDelete($this->permUrl, '00000000-0000-0000-0000-000000000000');
-//        $words = explode(" ", $err['message']);
-//        $I->assertEquals('disabled', array_pop($words));
-//    }
-//
-//    // tests
-//    public function delete(ApiTester $I)
-//    {
-//        $err   = $I->failToCreate($this->permUrl, '00000000-0000-0000-0000-000000000000', ['name' => "xxxx"]);
-//        $words = explode(" ", $err['message']);
-//        $I->assertEquals('disabled', array_pop($words));
-//    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function update(ApiTester $I)
+    {
+        $drz           = $this->obj;
+        $drz['opomba'] = 'tralala';
+
+        $drz = $I->successfullyUpdate($this->restUrl, $drz['id'], $drz);
+
+        $I->assertEquals('tralala', $drz['opomba']);
+    }
+
+    // tests
+    public function read(ApiTester $I)
+    {
+        $drz = $I->successfullyGet($this->restUrl, $this->obj['id']);
+
+        $I->assertEquals('tralala', $drz['opomba']);
+    }
+
+    // tests
+    public function delete(ApiTester $I)
+    {
+        $drz = $I->successfullyDelete($this->restUrl, $this->obj['id']);
+
+        $I->failToGet($this->restUrl, $this->obj['id']);
+    }
 
 }

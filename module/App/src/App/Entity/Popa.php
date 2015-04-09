@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM,
 /**
  * Entiteta za poslovne partnerje
  *
- * @ORM\Entity(repositoryClass="\Max\Repository\Popa")
+ * @ORM\Entity(repositoryClass="App\Repository\Popa")
  *
  * @ORM\Table(name="popa")
  * @Max\I18n(label="Poslovni partner",plural="Poslovni partnerji")

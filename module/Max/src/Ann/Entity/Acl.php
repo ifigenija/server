@@ -26,7 +26,7 @@ class Acl {
      * dovoljenje, ki je potrebno za seznam / get list 
      * @var string
      */
-    public $list= 'list';
+    public $list= 'read';
     
     /**
      * dovoljenje, ki je potrebno za pregled / get 

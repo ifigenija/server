@@ -2,7 +2,7 @@
     name: Administrator
     email: admin@max.si
     username: admin
-    roles: [ifi-vse, admin]
+    roles: [ifi-all]
 -
     name: Konzolni
     email: rootmail@max.si

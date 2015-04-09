@@ -2,17 +2,19 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM,
-    Max\Ann\Entity as Max;
+use App\Repository\Poste;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
 
 /**
  * Entiteta za pošte
  *
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\Poste")
  * @Max\I18n(label="Pošta",plural="Pošte")
+ * @Max\Id(prefix="0005")
  */
-class Posta
+class Posta extends \Max\Entity\Base
         
 {
 
@@ -29,7 +31,7 @@ class Posta
     /**
      * Šifra pošte
      *
-     * @ORM\Column(length=20, nullable=true)
+     * @ORM\Column(unique=true, length=20, nullable=true)
      * @var string
      * @Max\Ui(type="sifra")
      * @Max\I18n(label="Poštna številka", description="Poštna številka")

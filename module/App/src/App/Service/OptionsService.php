@@ -28,7 +28,7 @@ class SettingsService
     public function getValue($name)
     {
         $em = $this->getEm();
-        $em->getRepository('\App\Entity\Option');
+        $rep = $em->getRepository('App\Entity\Option');
         $option = $this->find($name);
         
         $this->expectAuthenticated();
@@ -45,9 +45,9 @@ class SettingsService
     public function setValue($name, $value, $global = false)
     {
         $em = $this->getEm();
-        $orep = $em->getRepository();
+        $orep = $em->getRepository('App\Entity\Option');
         
-        $opt = $orep->find($option);
+        $opt = $orep->find($name);
         
         $user = $this->getIdentity();
         

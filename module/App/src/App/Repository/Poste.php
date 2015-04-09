@@ -11,7 +11,7 @@ namespace App\Repository;
  *
  * @author boris
  */
-class Drzave extends \Max\Repository\AbstractMaxRepository
+class Poste extends \Max\Repository\AbstractMaxRepository
 {
 
 
