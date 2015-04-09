@@ -14,5 +14,20 @@ namespace App\Repository;
 class Osebe extends \Max\Repository\AbstractMaxRepository
 {
 
+    public function create($object)
+    {
+        parent::create($object);
+        
+        $object->setNaziv($object->getPriimek() . ', ' . $object->getIme());
+    }
+
+    public function update($object)
+    {
+        parent::update($object);
+        
+        
+        $object->setNaziv($object->getPriimek() . ', ' . $object->getIme());
+    }
+
 
 }

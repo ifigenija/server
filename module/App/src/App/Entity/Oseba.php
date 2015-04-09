@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity(repositoryClass="\App\Repository\Osebe")
+ * @ORM\Entity(repositoryClass="App\Repository\Osebe")
  * @ORM\Table(name="kose")
  *
  * @Max\I18n(label="Kontaktna oseba",plural="Kontaktne osebe")
@@ -392,6 +392,7 @@ class Oseba
     {
         $this->sodelovanja = $sodelovanja;
     }
+
 
 
 }

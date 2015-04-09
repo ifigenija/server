@@ -15,6 +15,7 @@ use Max\Entity\Base;
 use Max\Exception\MaxException;
 use stdClass;
 use Zend\Paginator\Adapter\AdapterInterface;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use ZfcRbac\Service\AuthorizationService;
 
 /**
@@ -26,12 +27,12 @@ use ZfcRbac\Service\AuthorizationService;
 
  */
 class AbstractMaxRepository
-        extends EntityRepository implements CrudInterface
+        extends EntityRepository
+        implements CrudInterface, ServiceLocatorAwareInterface
 {
 
     use \Zend\ServiceManager\ServiceLocatorAwareTrait;
-
-use \Max\Expect\ExpectTrait;
+    use \Max\Expect\ExpectTrait;
 
     /**
      * Metadata helper odgovoren za to entiteto
@@ -109,22 +110,22 @@ use \Max\Expect\ExpectTrait;
         if (isset($this->sortOptions[$name])) {
             if (is_object($srt)) {
                 if (array_key_exists($srt->field, $this->sortOptions[$name])) {
-                    $sort = new stdClass();
+                    $sort        = new stdClass();
                     $sort->order = $getAlias($srt->field);
-                    $sort->dir = $direction;
+                    $sort->dir   = $direction;
                     $sort->field = $srt->field;
 
                     $this->paginatorSort[$name] = $sort;
                 }
             } else {
                 if ($srt == null) {
-                    $a = array_keys($this->sortOptions[$name]);
+                    $a   = array_keys($this->sortOptions[$name]);
                     $srt = array_shift($a);
                 }
-                $sort = new stdClass();
-                $sort->order = $getAlias($srt);
-                $sort->dir = isset($this->sortOptions[$name][$srt]['dir']) ? $this->sortOptions[$name][$srt]['dir'] : $direction;
-                $sort->field = $srt;
+                $sort                       = new stdClass();
+                $sort->order                = $getAlias($srt);
+                $sort->dir                  = isset($this->sortOptions[$name][$srt]['dir']) ? $this->sortOptions[$name][$srt]['dir'] : $direction;
+                $sort->field                = $srt;
                 $this->paginatorSort[$name] = $sort;
             }
         } else {
@@ -144,12 +145,12 @@ use \Max\Expect\ExpectTrait;
     public function getSort($name = 'default')
     {
         if (!isset($this->paginatorSort[$name])) {
-            if (!isset($this->sortOptions[$name])) {             
+            if (!isset($this->sortOptions[$name])) {
                 throw new MaxException('Sort opcije manjkajo', 1000077);
             }
-            $keys = array_keys($this->sortOptions[$name]);
-            $firstField = reset($keys);
-            $sort = new stdClass();
+            $keys        = array_keys($this->sortOptions[$name]);
+            $firstField  = reset($keys);
+            $sort        = new stdClass();
             $sort->field = $firstField;
 
             if (isset($this->sortOptions[$name][$firstField]['dir']))
@@ -160,10 +161,10 @@ use \Max\Expect\ExpectTrait;
             if (!($sort->dir === 'ASC' || $sort->dir === 'DESC'))
                 $sort->dir = 'ASC';
 
-            $sort->order = $this->sortOptions[$name][$firstField]['alias'];
+            $sort->order                = $this->sortOptions[$name][$firstField]['alias'];
             $this->paginatorSort[$name] = $sort;
         }
-        $clone = clone $this->paginatorSort[$name];
+        $clone          = clone $this->paginatorSort[$name];
         $clone->options = $this->getSortOptions($name);
         return $clone;
     }
@@ -173,7 +174,7 @@ use \Max\Expect\ExpectTrait;
         $s = $this->getSort($name);
         return [
             'sortKey' => $s->field,
-            'order' => strtolower($s->dir)
+            'order'   => strtolower($s->dir)
         ];
     }
 
@@ -257,7 +258,7 @@ use \Max\Expect\ExpectTrait;
      */
     public function expectAuthorized($perm, $object, $code = 1000034)
     {
-        
+
         $this->expect($this->auth->isGranted($perm, $object), 'Ni dostopa ' . $perm, $code);
     }
 
@@ -290,6 +291,5 @@ use \Max\Expect\ExpectTrait;
     {
         $this->paginatorConfig = $paginatorConfig;
     }
-
 
 }

@@ -1,0 +1,11 @@
+## YAML Template.
+---
+type: rest
+entityClass: App\Entity\Posta
+forms:
+    default: 
+        elements:
+            - sifra
+            - naziv
+
+                

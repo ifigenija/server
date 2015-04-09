@@ -21,7 +21,7 @@
       <field name="id" type="integer" required="true" primary="true" uuid="ff51db03-8db6-4030-9a89-b9d080079556">
         <orm-attributes>
           <attribute name="generator">
-            <attribute name="strategy">SEQUENCE</attribute>
+            <attribute name="strategy">IDENTITY</attribute>
           </attribute>
         </orm-attributes>
       </field>
@@ -204,7 +204,7 @@
       <field name="drzavaRojstva" uuid="ee4f9ade-c657-4bd1-853b-bbb46ae14005"/>
       <field name="krajRojstva" uuid="e2397acd-8114-4f87-87a5-fe84fd94dab4"/>
       <orm-attributes>
-        <attribute name="repository-class">\App\Repository\Osebe</attribute>
+        <attribute name="repository-class">App\Repository\Osebe</attribute>
         <attribute name="table">kose</attribute>
         <attribute name="export-file-name">Oseba.php</attribute>
       </orm-attributes>
@@ -247,7 +247,7 @@
       <field name="drzava_id" required="true" uuid="88711ba4-8bf3-432f-94a7-cbb2d0b077ea"/>
       <field name="zamejstvo" uuid="1e2db4a3-6b54-40cf-a9d3-0601da092b2f"/>
       <orm-attributes>
-        <attribute name="repository-class">\Max\Repository\Popa</attribute>
+        <attribute name="repository-class">App\Repository\Popa</attribute>
         <attribute name="table">popa</attribute>
         <attribute name="export-file-name">Popa.php</attribute>
       </orm-attributes>
@@ -267,10 +267,11 @@
           </attribute>
         </orm-attributes>
       </field>
-      <field name="sifra" size="20" uuid="b7544ce4-1bca-4b6a-8512-43f492876f91"/>
+      <field name="sifra" size="20" unique="true" uuid="b7544ce4-1bca-4b6a-8512-43f492876f91"/>
       <field name="naziv" size="40" uuid="a85756b2-9f98-45b4-80e6-6e0aeb9a3a72"/>
       <orm-attributes>
         <attribute name="export-file-name">Posta.php</attribute>
+        <attribute name="repository-class">App\Repository\Poste</attribute>
       </orm-attributes>
     </entity>
     <entity name="PostniNaslov" uuid="8b0b1e29-9c2c-4fe7-b5ab-517e05ead7e1">

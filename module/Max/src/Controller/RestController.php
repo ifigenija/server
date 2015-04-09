@@ -26,6 +26,7 @@ class RestController
         Traits\JsonErrorsTrait;
 
     const DENIED = "Api dostop zavrnjen %s %s";
+
     /**
      * Rest get metoda
      * @param string $id
@@ -139,6 +140,9 @@ class RestController
 
             $this->expect($object, $this->trnsl('Objekt ne obstaja'), 100100);
 
+            $this->expect(!empty($data), $this->trnsl('Ni podatkov za spremembo'), 100101);
+            $this->expect(is_array($data), $this->trnsl('Nepravilen tip podatkov'), 100102);
+
             $form = $this->buildForm($view);
             $form->setMode('EDIT');
 
@@ -180,6 +184,9 @@ class RestController
             $this->expect($this->isGranted($perm, $object)
                     , $this->trnsl(self::DENIED)
                     , 100008, [$perm, $this->getUsername()]);
+
+            $this->expect(!empty($data), $this->trnsl('Ni podatkov za spremembo'), 100103);
+            $this->expect(is_array($data), $this->trnsl('Nepravilen tip podatkov'), 100104);
 
             $form = $this->buildForm($view);
             $form->setMode('NEW');
@@ -500,15 +507,15 @@ class RestController
         return $hydr;
     }
 
-    
-    public function getUsername() {
-         $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
-         $ident = $auth->getIdentity();
-         if ($ident) {
-             return $ident->getUsername();
-         } else {
-             return "anon";
-         }
-
+    public function getUsername()
+    {
+        $auth  = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+        $ident = $auth->getIdentity();
+        if ($ident) {
+            return $ident->getUsername();
+        } else {
+            return "anon";
+        }
     }
+
 }

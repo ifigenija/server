@@ -40,7 +40,7 @@ class DrzavaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'sifra'     => 'xx',
+            'sifra'     => 'XX',
             'sifraDolg' => 'xx',
             'isoNum'    => 'xx',
             'isoNaziv'  => 'xx',
@@ -52,7 +52,10 @@ class DrzavaCest
         $I->assertNotEmpty($drz['id']);
     }
 
-    // tests
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
     public function update(ApiTester $I)
     {
         $drz           = $this->obj;

@@ -11,8 +11,12 @@
     description: 'Vloga za javne - neavtenticirane uporabnike'
     permissions: [Drzava-read, Permission-list]
 -
-    name: ifi-vse
+    name: ifi-all
     description: 'Polni dostop do vsega v aplikaciji.'
+    permissions: {  }
+-
+    name: ifi-readall
+    description: 'Dostop do vseh -read in -list dovoljenj.'
     permissions: {  }
 -
     name: admin

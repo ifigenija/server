@@ -1,0 +1,13 @@
+## YAML Template.
+---
+type: rest
+entityClass: App\Entity\Oseba
+forms:
+    default: 
+        elements:                      
+            - ime
+            - priimek
+            - psevdonim
+            - funkcija
+            - email
+                

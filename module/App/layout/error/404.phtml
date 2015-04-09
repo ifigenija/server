@@ -1,4 +1,5 @@
 <?php
+
 if (isset($this->reason) && $this->reason) {
     $reasonMessage = '';
     switch ($this->reason) {
@@ -24,8 +25,13 @@ if (isset($this->reason) && $this->reason) {
     }
 
     $error = [
-        'code' => 404,
-        'message' => $reasonMessage
+        'success' => false,
+        'errors'  => [
+            [
+                'code'    => 404,
+                'message' => $reasonMessage
+            ]
+        ]
     ];
 
     if (isset($this->controller) && $this->controller) {
