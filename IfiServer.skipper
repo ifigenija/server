@@ -204,7 +204,7 @@
       <field name="drzavaRojstva" uuid="ee4f9ade-c657-4bd1-853b-bbb46ae14005"/>
       <field name="krajRojstva" uuid="e2397acd-8114-4f87-87a5-fe84fd94dab4"/>
       <orm-attributes>
-        <attribute name="repository-class">\App\Repository\Osebe</attribute>
+        <attribute name="repository-class">App\Repository\Osebe</attribute>
         <attribute name="table">kose</attribute>
         <attribute name="export-file-name">Oseba.php</attribute>
       </orm-attributes>
@@ -247,7 +247,7 @@
       <field name="drzava_id" required="true" uuid="88711ba4-8bf3-432f-94a7-cbb2d0b077ea"/>
       <field name="zamejstvo" uuid="1e2db4a3-6b54-40cf-a9d3-0601da092b2f"/>
       <orm-attributes>
-        <attribute name="repository-class">\Max\Repository\Popa</attribute>
+        <attribute name="repository-class">Max\Repository\Popa</attribute>
         <attribute name="table">popa</attribute>
         <attribute name="export-file-name">Popa.php</attribute>
       </orm-attributes>
@@ -293,7 +293,7 @@
       <field name="klient_id" uuid="9a28e1e1-1c98-4268-a1cf-b6104726677a"/>
       <field name="drzava_id" uuid="85a861d5-0b22-4135-9b73-3b0ead950a6e"/>
       <orm-attributes>
-        <attribute name="repository-class">\App\Repository\PostniNaslovi</attribute>
+        <attribute name="repository-class">App\Repository\PostniNaslovi</attribute>
         <attribute name="table">PostniNaslovi</attribute>
         <attribute name="export-file-name">PostniNaslov.php</attribute>
       </orm-attributes>
@@ -1172,7 +1172,7 @@
     <association uuid="54077895-b617-4198-b631-3bc8e4a0906c" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="549b0800-61e6-47c2-9244-2abca7f26629" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <association uuid="5622c428-af19-41f9-b52d-3e61c3ece72c" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <module uuid="5a3860bf-fced-4c01-909d-0f0c94622f55" bg-color="4293391869" position-x="906" position-y="468" size-x="137" size-x2="874" size-y="-145" size-y2="1024"/>
+    <module uuid="5a3860bf-fced-4c01-909d-0f0c94622f55" bg-color="4293391869" position-x="916" position-y="468" size-x="137" size-x2="874" size-y="-145" size-y2="1024"/>
     <association uuid="5c552318-2760-4dbc-b55e-15c195189aaf" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <association uuid="5c5a3be4-5efe-490a-9550-6e82a5df2064" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="5ee77396-9866-4df9-a017-7371a6935946" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
