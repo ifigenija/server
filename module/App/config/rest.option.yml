@@ -1,0 +1,37 @@
+## YAML Template.
+---
+type: rest
+entityClass: App\Entity\Drzava
+forms:
+    default: 
+#        perm: Drzava-list
+        hydrator:    
+            exclude:
+        elements:
+            - sifra            
+            - name: sifraDolg
+              options: 
+                  required: true                                   
+            - isoNum
+            - isoNaziv
+            - naziv
+            - opomba
+lists:
+    default:      
+        filter:
+                       
+        sort: 
+       
+        hydrator:
+#            byValue:
+#                - 
+#            virtual:
+#    
+#            exclude:            
+#                    
+hydrator:
+    exclude: 
+        - opomba
+    virtual:
+        - tralala
+                
