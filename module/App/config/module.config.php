@@ -13,46 +13,47 @@ return [
             'Zend\Session\SessionManager' => 'App\Factory\SessionFactory'
         ]
     ],
-    'controllers' => [
-        'factories' => [
-            'Rest\drzava' => 'Max\Factory\RestControllerFactory',
-            'Rest\oseba' => 'Max\Factory\RestControllerFactory',
-            'Rest\posta' => 'Max\Factory\RestControllerFactory',
+    'controllers'     => [
+        'factories'  => [
+            'Rest\drzava'       => 'Max\Factory\RestControllerFactory',
+            'Rest\oseba'        => 'Max\Factory\RestControllerFactory',
+            'Rest\posta'        => 'Max\Factory\RestControllerFactory',
             'Rest\postniNaslov' => 'Max\Factory\RestControllerFactory',
-            'Rest\role' => 'Max\Factory\RestControllerFactory',
+            'Rest\trr'          => 'Max\Factory\RestControllerFactory',
+            'Rest\role'         => 'Max\Factory\RestControllerFactory',
         ],
         'invokables' => [
             'Rest\options' => 'App\Controller\OptionsRestController',
-            'Rpc\app' => '\App\Controller\RpcController',
-            'App\index' => '\App\Controller\IndexController',
+            'Rpc\app'      => '\App\Controller\RpcController',
+            'App\index'    => '\App\Controller\IndexController',
         ]
     ],
-    'router' => [
+    'router'          => [
         'routes' => [
             'home' => [
-                'type' => 'Literal',
+                'type'    => 'Literal',
                 'options' => [
-                    'route' => '/',
+                    'route'    => '/',
                     'defaults' => [
                         'controller' => 'App\index',
-                        'action' => 'index'
+                        'action'     => 'index'
                     ]
                 ],
             ],
-            'rpc' => [
-                'type' => 'Literal',
-                'options' => [
-                    'route' => '/rpc',
+            'rpc'  => [
+                'type'          => 'Literal',
+                'options'       => [
+                    'route'    => '/rpc',
                     'defaults' => [
                         '__NAMESPACE__' => 'Rpc',
                     ]
                 ],
                 'may_terminate' => false,
-                'child_routes' => [
+                'child_routes'  => [
                     'settings' => [
-                        'type' => 'Segment',
+                        'type'    => 'Segment',
                         'options' => [
-                            'route' => '/:controller/:action',
+                            'route'       => '/:controller/:action',
                             'constraints' => [
                                 'controller' => '[a-zA-Z0-9]+',
                             ],
@@ -61,42 +62,42 @@ return [
                 ]
             ],
             'rest' => [
-                'type' => 'Segment',
+                'type'    => 'Segment',
                 'options' => [
-                    'route' => '/rest/:controller[/:view][/:id]',
-                    'defaults' => [
+                    'route'       => '/rest/:controller[/:view][/:id]',
+                    'defaults'    => [
                         '__NAMESPACE__' => 'Rest',
-                        'view' => 'default',
-                        'action' => null
+                        'view'          => 'default',
+                        'action'        => null
                     ],
                     'constraints' => [
-                        'controller' => '[A-Za-z]+',
-                        'view' => '[A-Za-z]+',
-                        'id' => \Max\Consts::UUID
+                        'controller' =>  '[A-Za-z]+',
+                        'view'       => '[A-Za-z]+',
+                        'id'         => \Max\Consts::UUID
                     ]
                 ],
             ],
         ]
     ],
-    'form_elements' => [
+    'form_elements'   => [
         'invokables' => [
         ]
     ],
-    'view_manager' => [
+    'view_manager'    => [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
-        'strategies' => [
+        'strategies'          => [
             'ViewJsonStrategy'
         ],
     ],
-    'zfc_rbac' => [
+    'zfc_rbac'        => [
         'protection_policy' => \ZfcRbac\Guard\GuardInterface::POLICY_ALLOW,
-        'guest_role' => 'anonymous',
-        'role_provider' => [
+        'guest_role'        => 'anonymous',
+        'role_provider'     => [
             'ZfcRbac\Role\ObjectRepositoryRoleProvider' => [
-                'object_manager' => 'doctrine.entitymanager.orm_default',
-                'class_name' => 'Aaa\Entity\Role',
+                'object_manager'     => 'doctrine.entitymanager.orm_default',
+                'class_name'         => 'Aaa\Entity\Role',
                 'role_name_property' => 'name'
             ]
         ]

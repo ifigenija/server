@@ -1,11 +1,14 @@
 ## YAML Template.
 ---
 type: rest
-entityClass: App\Entity\Posta
+entityClass: App\Entity\Trr
 forms:
     default: 
         elements:
-            - sifra
             - naziv
-
+            - nazivDva
+            - stevilka
+            - swift
+            - bic
+            - banka
                 

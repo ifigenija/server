@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM,
 /**
  * Entiteta za naslove
  *
- * @ORM\Entity(repositoryClass="\App\Repository\PostniNaslovi")
+ * @ORM\Entity(repositoryClass="App\Repository\PostniNaslovi")
  * @Max\I18n(label="Poštni naslov",plural="Poštni naslovi")
  * @ORM\Table(name="PostniNaslovi")
  */

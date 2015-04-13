@@ -40,7 +40,6 @@ class RestControllerFactory
         $cont->setEm($locator->get('doctrine.entitymanager.orm_default'));
         $cont->setAuth($locator->get('ZfcRbac\Service\AuthorizationService'));
         $cont->setConfig($config);
-
         return $cont;
     }
 

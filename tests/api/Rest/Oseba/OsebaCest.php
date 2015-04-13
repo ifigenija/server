@@ -12,10 +12,10 @@ use ApiTester;
  * - read 
  * 
  */
-class DrzavaCest
+class OsebaCest
 {
 
-    private $restUrl = '/rest/drzava';
+    private $restUrl = '/rest/oseba';
     private $id      = '00000000-0000-0000-0000-000000000000';
     private $obj;
 
@@ -40,16 +40,24 @@ class DrzavaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'sifra'     => 'XX',
-            'sifraDolg' => 'xx',
-            'isoNum'    => 'xx',
-            'isoNaziv'  => 'xx',
-            'naziv'     => 'xx',
-            'opomba'    => 'xx',
+            'naziv'         => 'XX',
+            'ime'           => 'XX',
+            'priimek'       => 'XX',
+            'pesvdonim'     => 'XX',
+            'funkcija'      => 'XX',
+            'email'         => 'XX',
+            'datumRojstva'  => 'XX',
+            'emso'          => 'XX',
+            'davcna'        => 'XX',
+            'spol'          => 'XX',
+            'opombe'        => 'XX',
+            'drzavljanstvo' => 'XX',
+            'drzavaRojstva' => 'XX',
+            'krajRojstva'   => 'XX',
         ];
-        $this->obj = $drz       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('xx', $drz['opomba']);
-        $I->assertNotEmpty($drz['id']);
+        $this->obj = $oseba       = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals('xx', $oseba['opombe']);
+        $I->assertNotEmpty($oseba['id']);
     }
 
     /**
@@ -58,26 +66,26 @@ class DrzavaCest
      */
     public function update(ApiTester $I)
     {
-        $drz           = $this->obj;
-        $drz['opomba'] = 'tralala';
+        $oseba           = $this->obj;
+        $oseba['opombe'] = 'tralala';
 
-        $drz = $I->successfullyUpdate($this->restUrl, $drz['id'], $drz);
+        $oseba = $I->successfullyUpdate($this->restUrl, $oseba['id'], $oseba);
 
-        $I->assertEquals('tralala', $drz['opomba']);
+        $I->assertEquals('tralala', $oseba['opombe']);
     }
 
     // tests
     public function read(ApiTester $I)
     {
-        $drz = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $oseba = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals('tralala', $drz['opomba']);
+        $I->assertEquals('tralala', $oseba['opombe']);
     }
 
     // tests
     public function delete(ApiTester $I)
     {
-        $drz = $I->successfullyDelete($this->restUrl, $this->obj['id']);
+        $oseba = $I->successfullyDelete($this->restUrl, $this->obj['id']);
 
         $I->failToGet($this->restUrl, $this->obj['id']);
     }

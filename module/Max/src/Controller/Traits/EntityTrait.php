@@ -92,14 +92,13 @@ trait EntityTrait
      */
     public function getRepository($class = null)
     {
-
         if (!$class) {
             $rep = $this->getEm()->getRepository($this->getEntityClass());
         } else {
             $rep = $this->getEm()->getRepository($class);
         }
         $rep->setServiceLocator($this->getServiceLocator());
-        $rep->setAuth($this->getAuth());        
+        $rep->setAuth($this->getAuth());
         return $rep;
     }
 
@@ -111,7 +110,7 @@ trait EntityTrait
     public function getForm($class = null)
     {
         $formManager = $this->serviceLocator->get('FormElementManager');
-        $form = $formManager->get($class);
+        $form        = $formManager->get($class);
         return $form;
     }
 
@@ -125,7 +124,7 @@ trait EntityTrait
     {
 
         $formManager = $this->serviceLocator->get('FormElementManager');
-        $form = $formManager->get('\Max\Form\JsonForm');
+        $form        = $formManager->get('\Max\Form\JsonForm');
         if (!$class) {
             return $form->setEntity($this->getEntityClass());
         } else {
@@ -150,7 +149,7 @@ trait EntityTrait
         }
         if (!($optional || $id)) {
             $translator = $this->getServiceLocator()->get('translator');
-            $msg = sprintf($translator->translate('Parameter %s je obvezen'), $param);
+            $msg        = sprintf($translator->translate('Parameter %s je obvezen'), $param);
             throw new NepopolniParametriZaAkcijo($msg, 100004);
         }
         return $id;
@@ -173,11 +172,11 @@ trait EntityTrait
             return null;
         }
 
-        $sr = $this->getRepository($class);
+        $sr     = $this->getRepository($class);
         $object = $sr->find($id);
         if (!$object && !$optional) {
             $translator = $this->getServiceLocator()->get('translator');
-            $msg = sprintf($translator->translate('Entiteta z id (%s) ne obstaja v %s'), $id, $sr->getClassName());
+            $msg        = sprintf($translator->translate('Entiteta z id (%s) ne obstaja v %s'), $id, $sr->getClassName());
             throw new EntitetaNeObstaja($msg, 100097);
         }
 
@@ -204,7 +203,7 @@ trait EntityTrait
     public function getEntityPermission($action)
     {
         $prefix = $this->getConfig('permPrefix', $this->getDefaultPermPrefix());
-        $acl = $this->getConfig('meta.acl');
+        $acl    = $this->getConfig('meta.acl');
         return $prefix . '-' . $acl->$action;
     }
 

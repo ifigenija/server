@@ -1,6 +1,6 @@
 <?php
 
-namespace Rest\Drzava;
+namespace Rest\Option;
 
 use ApiTester;
 
@@ -12,10 +12,10 @@ use ApiTester;
  * - read 
  * 
  */
-class DrzavaCest
+class OptionCest
 {
 
-    private $restUrl = '/rest/drzava';
+    private $restUrl = '/rest/option';
     private $id      = '00000000-0000-0000-0000-000000000000';
     private $obj;
 
@@ -40,16 +40,12 @@ class DrzavaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'sifra'     => 'XX',
-            'sifraDolg' => 'xx',
-            'isoNum'    => 'xx',
-            'isoNaziv'  => 'xx',
-            'naziv'     => 'xx',
-            'opomba'    => 'xx',
+            'sifra' => 'xx',
+            'naziv' => 'xx',
         ];
-        $this->obj = $drz       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('xx', $drz['opomba']);
-        $I->assertNotEmpty($drz['id']);
+        $this->obj = $option     = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals('xx', $option['name']);
+        $I->assertNotEmpty($option['id']);
     }
 
     /**
@@ -58,26 +54,26 @@ class DrzavaCest
      */
     public function update(ApiTester $I)
     {
-        $drz           = $this->obj;
-        $drz['opomba'] = 'tralala';
+        $option          = $this->obj;
+        $option['naziv'] = 'tralala';
 
-        $drz = $I->successfullyUpdate($this->restUrl, $drz['id'], $drz);
+        $option = $I->successfullyUpdate($this->restUrl, $option['id'], $option);
 
-        $I->assertEquals('tralala', $drz['opomba']);
+        $I->assertEquals('tralala', $option['name']);
     }
 
     // tests
     public function read(ApiTester $I)
     {
-        $drz = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $option = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals('tralala', $drz['opomba']);
+        $I->assertEquals('tralala', $option['name']);
     }
 
     // tests
     public function delete(ApiTester $I)
     {
-        $drz = $I->successfullyDelete($this->restUrl, $this->obj['id']);
+        $option = $I->successfullyDelete($this->restUrl, $this->obj['id']);
 
         $I->failToGet($this->restUrl, $this->obj['id']);
     }

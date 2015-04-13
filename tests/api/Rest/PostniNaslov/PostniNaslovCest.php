@@ -1,21 +1,21 @@
 <?php
 
-namespace Rest\Drzava;
+namespace Rest\PostniNaslov;
 
 use ApiTester;
 
 /**
- * - list 
  * - create
+ * - list 
  * - update
  * - delete 
  * - read 
  * 
  */
-class DrzavaCest
+class PostniNaslovCest
 {
 
-    private $restUrl = '/rest/drzava';
+    private $restUrl = '/rest/postninaslov';
     private $id      = '00000000-0000-0000-0000-000000000000';
     private $obj;
 
@@ -29,27 +29,31 @@ class DrzavaCest
         
     }
 
+    /**
+     *  napolnimo vsaj en zapis
+     *
+     * @param ApiTester $I
+     */
+    public function create(ApiTester $I)
+    {
+        $data      = [
+            'sifra' => 'zz',
+            'naziv' => 'zz',
+        ];
+        $this->obj = $pnaslov   = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals('zz', $pnaslov['naziv']);
+        $I->assertNotEmpty($pnaslov['id']);
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
     public function getList(ApiTester $I)
     {
         $list     = $I->successfullyGetList($this->restUrl, []);
         $I->assertNotEmpty($list);
         $this->id = array_pop($list)['id'];
-    }
-
-    // tests
-    public function create(ApiTester $I)
-    {
-        $data      = [
-            'sifra'     => 'XX',
-            'sifraDolg' => 'xx',
-            'isoNum'    => 'xx',
-            'isoNaziv'  => 'xx',
-            'naziv'     => 'xx',
-            'opomba'    => 'xx',
-        ];
-        $this->obj = $drz       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('xx', $drz['opomba']);
-        $I->assertNotEmpty($drz['id']);
     }
 
     /**
@@ -58,26 +62,25 @@ class DrzavaCest
      */
     public function update(ApiTester $I)
     {
-        $drz           = $this->obj;
-        $drz['opomba'] = 'tralala';
+        $pnaslov          = $this->obj;
+        $pnaslov['naziv'] = 'tralala';
 
-        $drz = $I->successfullyUpdate($this->restUrl, $drz['id'], $drz);
+        $pnaslov = $I->successfullyUpdate($this->restUrl, $pnaslov['id'], $pnaslov);
 
-        $I->assertEquals('tralala', $drz['opomba']);
+        $I->assertEquals('tralala', $pnaslov['naziv']);
     }
 
     // tests
     public function read(ApiTester $I)
     {
-        $drz = $I->successfullyGet($this->restUrl, $this->obj['id']);
-
-        $I->assertEquals('tralala', $drz['opomba']);
+        $pnaslov = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $I->assertEquals('tralala', $pnaslov['naziv']);
     }
 
     // tests
     public function delete(ApiTester $I)
     {
-        $drz = $I->successfullyDelete($this->restUrl, $this->obj['id']);
+        $pnaslov = $I->successfullyDelete($this->restUrl, $this->obj['id']);
 
         $I->failToGet($this->restUrl, $this->obj['id']);
     }

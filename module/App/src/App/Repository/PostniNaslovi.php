@@ -7,12 +7,12 @@
 namespace App\Repository;
 
 /**
- * Description of Drzave
+ * Description of PostniNaslovi
  *
- * @author boris
+ * @author rado
  */
-class Poste extends \Max\Repository\AbstractMaxRepository
+class PostniNaslovi
+        extends \Max\Repository\AbstractMaxRepository
 {
-
-
+    
 }

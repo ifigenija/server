@@ -1,6 +1,6 @@
 <?php
 
-namespace Rest\Drzava;
+namespace Rest\Posta;
 
 use ApiTester;
 
@@ -12,10 +12,10 @@ use ApiTester;
  * - read 
  * 
  */
-class DrzavaCest
+class PostaCest
 {
 
-    private $restUrl = '/rest/drzava';
+    private $restUrl = '/rest/posta';
     private $id      = '00000000-0000-0000-0000-000000000000';
     private $obj;
 
@@ -40,16 +40,12 @@ class DrzavaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'sifra'     => 'XX',
-            'sifraDolg' => 'xx',
-            'isoNum'    => 'xx',
-            'isoNaziv'  => 'xx',
-            'naziv'     => 'xx',
-            'opomba'    => 'xx',
+            'sifra' => 'xx',
+            'naziv' => 'xx',
         ];
-        $this->obj = $drz       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('xx', $drz['opomba']);
-        $I->assertNotEmpty($drz['id']);
+        $this->obj = $posta     = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals('xx', $posta['naziv']);
+        $I->assertNotEmpty($posta['id']);
     }
 
     /**
@@ -58,26 +54,26 @@ class DrzavaCest
      */
     public function update(ApiTester $I)
     {
-        $drz           = $this->obj;
-        $drz['opomba'] = 'tralala';
+        $posta          = $this->obj;
+        $posta['naziv'] = 'tralala';
 
-        $drz = $I->successfullyUpdate($this->restUrl, $drz['id'], $drz);
+        $posta = $I->successfullyUpdate($this->restUrl, $posta['id'], $posta);
 
-        $I->assertEquals('tralala', $drz['opomba']);
+        $I->assertEquals('tralala', $posta['naziv']);
     }
 
     // tests
     public function read(ApiTester $I)
     {
-        $drz = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $posta = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals('tralala', $drz['opomba']);
+        $I->assertEquals('tralala', $posta['naziv']);
     }
 
     // tests
     public function delete(ApiTester $I)
     {
-        $drz = $I->successfullyDelete($this->restUrl, $this->obj['id']);
+        $posta = $I->successfullyDelete($this->restUrl, $this->obj['id']);
 
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
