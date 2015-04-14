@@ -33,22 +33,22 @@ class PopaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'sifra'    => 'zz',
-            'tipkli'    => 'zz', 
-            'stakli'    => 'zz', 
-            'naziv'    => 'zz',
-            'naziv1'    => 'zz',
+//            'sifra'    => 'zz',
+//            'tipkli'    => 'zz', 
+//            'stakli'    => 'zz', 
+//            'naziv'    => 'zz',
+//            'naziv1'    => 'zz',
             'panoga'    => 'zz', 
-            'email'    => 'zz', 
-            'url'    => 'zz', 
-            'opomba'    => 'zz', 
-            'idddv'    => 'zz', 
-            'maticna'    => 'zz', 
-            'zavezanec'    => 'zz', 
-            'jeeu'    => 'zz', 
-            'datZav'    => 'zz',            
-            'datnZav'    => 'zz', 
-            'zamejstvo'    => 'zz', 
+//            'email'    => 'zz', 
+//            'url'    => 'zz', 
+//            'opomba'    => 'zz', 
+//            'idddv'    => 'zz', 
+//            'maticna'    => 'zz', 
+//            'zavezanec'    => 'zz', 
+//            'jeeu'    => 'zz', 
+//            'datZav'    => 'zz',            
+//            'datnZav'    => 'zz', 
+//            'zamejstvo'    => 'zz', 
             ];
         $this->obj = $popa       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals('zz', $popa['panoga']);

@@ -174,21 +174,26 @@ class RestController
      */
     public function create($data)
     {
-//        echo ' znotraj create    ';
         $view = $this->params('view', 'default');
 
         $this->isApiEnabled('create', $view);
         try {
             $object = new $this->entityClass;
             $perm   = $this->getFormPermission('create', $view);
+      echo '      pred  isgranted      ';
             $this->expect($this->isGranted($perm, $object)
                     , $this->trnsl(self::DENIED)
                     , 100008, [$perm, $this->getUsername()]);
-
+            var_dump($data);
+      echo '      za  isgranted      ';
             $this->expect(!empty($data), $this->trnsl('Ni podatkov za spremembo'), 100103);
+      echo '      za not empty data      ';
             $this->expect(is_array($data), $this->trnsl('Nepravilen tip podatkov'), 100104);
+      echo '      pred buildForm      ';
             $form = $this->buildForm($view);
+      echo '      za BuildForm     ';
             $form->setMode('NEW');
+      echo '      za setMOde      ';
             $form->bind($object);
             $form->setData($data);
             if ($form->isValid()) {
@@ -460,9 +465,11 @@ class RestController
      */
     public function buildForm($view)
     {
+   echo '      znotraj buildForm      ';        
         $fc = $this->getConfig("forms.$view");
+        var_dump($fc);
 
-        // če je v konfigu class, potem naredim formo tistega class-a 
+       // če je v konfigu class, potem naredim formo tistega class-a 
         if (!empty($fc['class'])) {
             $form = $this->getForm($fc['class']);
             return $form;
@@ -473,16 +480,22 @@ class RestController
         if (!empty($fc['elements'])) {
             $form = $this->getForm('\Max\Form\JsonForm');
             $form->setEntityClass($this->getEntityClass());
+            echo '   pred foreac fc elements            ';
             foreach ($fc['elements'] as $opts) {
+                var_dump($opts);
                 if (is_array($opts)) {
                     $form->addWithMeta($opts['name'], $opts['options']);
                 } else {
 
+            echo '    pred addwithmeta/opts           ';
                     $form->addWithMeta($opts);
+            echo '    za addwithmeta/opts           ';
                 }
             }
+            echo '   pred return form';
             return $form;
         }
+            echo '   konec build form ';
     }
 
     /**
