@@ -70,7 +70,7 @@ class TrrCest
     /**
      * @depends create
      */
-    public function read(ApiTester $I)
+    public function readTrrZaTralala(ApiTester $I)
     {
         $trr = $I->successfullyGet($this->restUrl, $this->obj['id']);
 

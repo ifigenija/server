@@ -1,22 +1,19 @@
 <?php
-
 namespace App\Entity;
-
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
+use Doctrine\ORM\Mapping AS ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\Options")
- * @Max\Id(prefix="0008")
+ * @ORM\Entity
  */
-class Option
-        extends \Max\Entity\Base
-{
+class Option         extends \Max\Entity\Base
 
+{
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
+     * @var string
+     * 
      */
     private $id;
 
@@ -59,7 +56,7 @@ class Option
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-
+    
     function getId()
     {
         return $this->id;
@@ -77,8 +74,10 @@ class Option
 
     function getDefaultValue()
     {
-        return $this->defaultValue;
+        return unserialize($this->defaultValue);
     }
+
+
 
     function getPerUser()
     {
@@ -100,11 +99,6 @@ class Option
         return $this->role;
     }
 
-    function getDescription()
-    {
-        return $this->description;
-    }
-
     function setId($id)
     {
         $this->id = $id;
@@ -122,7 +116,7 @@ class Option
 
     function setDefaultValue($defaultValue)
     {
-        $this->defaultValue = $defaultValue;
+        $this->defaultValue = serialize($defaultValue);
     }
 
     function setPerUser($perUser)
@@ -145,9 +139,17 @@ class Option
         $this->role = $role;
     }
 
+    function getDescription()
+    {
+        return $this->description;
+    }
+
     function setDescription($description)
     {
         $this->description = $description;
     }
 
+  
+    
+    
 }
