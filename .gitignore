@@ -9,4 +9,4 @@
 /tests/api.suite.yml
 .DS_Store
 /data/
-/bin/local.*.php
+/bin/dumpStage.sh
