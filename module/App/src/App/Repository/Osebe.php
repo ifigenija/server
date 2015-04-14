@@ -11,23 +11,21 @@ namespace App\Repository;
  *
  * @author boris
  */
-class Osebe extends \Max\Repository\AbstractMaxRepository
+class Osebe
+        extends \Max\Repository\AbstractMaxRepository
 {
-
-    public function create($object)
-    {
-        parent::create($object);
-        
-        $object->setNaziv($object->getPriimek() . ', ' . $object->getIme());
-    }
-
-    public function update($object)
-    {
-        parent::update($object);
-        
-        
-        $object->setNaziv($object->getPriimek() . ', ' . $object->getIme());
-    }
-
-
+//    public function create($object)
+//    {
+//        parent::create($object);
+//        
+//        $object->setNaziv($object->getPriimek() . ', ' . $object->getIme());
+//    }
+//
+//    public function update($object)
+//    {
+//        parent::update($object);
+//        
+//        
+//        $object->setNaziv($object->getPriimek() . ', ' . $object->getIme());
+//    }
 }

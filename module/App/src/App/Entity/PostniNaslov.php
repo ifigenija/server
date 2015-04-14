@@ -11,7 +11,8 @@ use Doctrine\ORM\Mapping as ORM,
  * @ORM\Entity(repositoryClass="App\Repository\PostniNaslovi")
  * @Max\I18n(label="Poštni naslov",plural="Poštni naslovi")
  * @ORM\Table(name="PostniNaslovi")
- */
+ * @Max\Id(prefix="0006")
+ *  */
 class PostniNaslov
         extends \Max\Entity\Base
 {

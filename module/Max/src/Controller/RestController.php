@@ -174,6 +174,7 @@ class RestController
      */
     public function create($data)
     {
+//        echo ' znotraj create    ';
         $view = $this->params('view', 'default');
 
         $this->isApiEnabled('create', $view);
