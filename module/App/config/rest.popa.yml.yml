@@ -1,0 +1,23 @@
+## YAML Template.
+---
+type: rest
+entityClass: App\Entity\Popa
+forms:
+    default: 
+        elements:
+            - sifra 
+            - tipkli  
+            - stakli  
+            - naziv 
+            - naziv1 
+            - panoga  
+            - email  
+            - url  
+            - opomba  
+            - idddv  
+            - maticna  
+            - zavezanec  
+            - jeeu  
+            - datZav             
+            - datnZav  
+            - zamejstvo  

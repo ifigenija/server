@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM,
  *
  * @ORM\Table(name="popa")
  * @Max\I18n(label="Poslovni partner",plural="Poslovni partnerji")
+ *  @Max\Id(prefix="0008")
  */
 class Popa
               extends \Max\Entity\Base
