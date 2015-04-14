@@ -1,0 +1,14 @@
+## YAML Template.
+---
+type: rest
+entityClass: App\Entity\Trr
+forms:
+    default: 
+        elements:
+            - naziv
+            - nazivDva
+            - stevilka
+            - swift
+            - bic
+            - banka
+                
