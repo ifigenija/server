@@ -5,9 +5,8 @@ namespace Rest\Trr;
 use ApiTester;
 
 /**
- * - create0 za polnjenje podatkov - improvizacija $$rb
- * - list 
  * - create
+ * - list 
  * - update
  * - delete 
  * - read 

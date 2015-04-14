@@ -1,12 +1,16 @@
 <?php
+
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping AS ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Trrji")
- **/
+ * */
 class Trr
+        extends \Max\Entity\Base
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
@@ -45,7 +49,7 @@ class Trr
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      */
     private $oseba;
-    
+
     function getId()
     {
         return $this->id;
@@ -115,6 +119,5 @@ class Trr
     {
         $this->oseba = $oseba;
     }
-
 
 }

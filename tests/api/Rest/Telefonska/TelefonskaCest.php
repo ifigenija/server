@@ -1,22 +1,21 @@
 <?php
 
-namespace Rest\Trr;
+namespace Rest\Telefonska;
 
 use ApiTester;
 
 /**
- * - create0 za polnjenje podatkov - improvizacija $$rb
- * - list 
  * - create
+ * - list 
  * - update
  * - delete 
  * - read 
  * 
  */
-class TrrCest
+class TelefonskaCest
 {
 
-    private $restUrl = '/rest/trr';
+    private $restUrl = '/rest/telefonska';
     private $id      = '00000000-0000-0000-0000-000000000000';
     private $obj;
 
@@ -34,14 +33,13 @@ class TrrCest
     public function create(ApiTester $I)
     {
         $data      = [
+            'vrsta'    => 'zz',
             'stevilka' => 'zz',
-            'swift'    => 'zz',
-            'bic'      => 'zz',
-            'banka'    => 'zz',
+            'privzeta' => 'zz',
         ];
-        $this->obj = $trr       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('zz', $trr['banka']);
-        $I->assertNotEmpty($trr['id']);
+        $this->obj = $tel       = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals('zz', $tel['privzeta']);
+        $I->assertNotEmpty($tel['id']);
     }
 
     /**
@@ -60,12 +58,12 @@ class TrrCest
      */
     public function update(ApiTester $I)
     {
-        $trr          = $this->obj;
-        $trr['banka'] = 'tralala';
+        $tel          = $this->obj;
+        $tel['privzeta'] = 'tralala';
 
-        $trr = $I->successfullyUpdate($this->restUrl, $trr['id'], $trr);
+        $tel = $I->successfullyUpdate($this->restUrl, $tel['id'], $tel);
 
-        $I->assertEquals('tralala', $trr['banka']);
+        $I->assertEquals('tralala', $tel['privzeta']);
     }
 
     /**
@@ -73,9 +71,9 @@ class TrrCest
      */
     public function read(ApiTester $I)
     {
-        $trr = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $tel = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals('tralala', $trr['banka']);
+        $I->assertEquals('tralala', $tel['privzeta']);
     }
 
     /**
@@ -83,7 +81,7 @@ class TrrCest
      */
     public function delete(ApiTester $I)
     {
-        $trr = $I->successfullyDelete($this->restUrl, $this->obj['id']);
+        $tel = $I->successfullyDelete($this->restUrl, $this->obj['id']);
 
         $I->failToGet($this->restUrl, $this->obj['id']);
     }

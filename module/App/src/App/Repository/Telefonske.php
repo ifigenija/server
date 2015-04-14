@@ -11,7 +11,7 @@ namespace App\Repository;
  *
  * @author rado
  */
-class Trrji
+class Telefonske
         extends \Max\Repository\AbstractMaxRepository
 {
     

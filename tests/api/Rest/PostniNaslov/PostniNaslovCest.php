@@ -37,11 +37,11 @@ class PostniNaslovCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'sifra' => 'zz',
+            'nazivDva' => 'zz',
             'naziv' => 'zz',
         ];
         $this->obj = $pnaslov   = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('zz', $pnaslov['naziv']);
+        $I->assertEquals('zz', $pnaslov['nazivDva']);
         $I->assertNotEmpty($pnaslov['id']);
     }
 

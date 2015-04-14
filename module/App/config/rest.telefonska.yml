@@ -1,14 +1,10 @@
 ## YAML Template.
 ---
 type: rest
-entityClass: App\Entity\Trr
+entityClass: App\Entity\Telefonska
 forms:
     default: 
         elements:
-            - naziv
-            - nazivDva
+            - vrsta
             - stevilka
-            - swift
-            - bic
-            - banka
-                
+            - privzeta

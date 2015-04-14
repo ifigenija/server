@@ -34,14 +34,11 @@ class RestController
      */
     public function get($id)
     {
-      echo 'znotraj get id'; //$$
         $view = $this->params('view', 'default');
         $perm = $this->getFormPermission('read', $view);
         try {
-      echo '        znotraj try,pred get repository       '; //$$
-            
+
             $sr     = $this->getRepository();
-      echo '        znotraj try,za get repository       '; //$$
             $object = $sr->find($id);
             $this->expect($this->isGranted($perm, $object)
                     , $this->trnsl(self::DENIED)
@@ -189,18 +186,17 @@ class RestController
 
             $this->expect(!empty($data), $this->trnsl('Ni podatkov za spremembo'), 100103);
             $this->expect(is_array($data), $this->trnsl('Nepravilen tip podatkov'), 100104);
-
             $form = $this->buildForm($view);
             $form->setMode('NEW');
             $form->bind($object);
             $form->setData($data);
-
             if ($form->isValid()) {
                 /* @var $sr  AbstractMaxRepository */
                 $sr = $this->getRepository();
                 if ($sr instanceof CrudInterface) {
                     $sr->create($object);
                 }
+
                 $this->em->flush();
 
                 $hydr = $this->getHydrator($view);
