@@ -42,7 +42,7 @@ class OsebaCest
             'datumRojstva'    => 'zz',
             'emso'    => 'zz',
             'davcna'    => 'zz',
-            'spol'    => 'zz',
+            'spol'    => 'z',
             'opombe'    => 'zz',
             'drzavljanstvo'    => 'zz',
             'drzavaRojstva'    => 'zz',

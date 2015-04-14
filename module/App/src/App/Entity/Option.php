@@ -1,19 +1,22 @@
 <?php
+
 namespace App\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping AS ORM,
+    Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\Options")
+ * @Max\Id(prefix="0008")
  */
-class Option         extends \Max\Entity\Base
-
+class Option
+        extends \Max\Entity\Base
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
-     * @var string
-     * 
      */
     private $id;
 
@@ -56,7 +59,7 @@ class Option         extends \Max\Entity\Base
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-    
+
     function getId()
     {
         return $this->id;
@@ -74,10 +77,8 @@ class Option         extends \Max\Entity\Base
 
     function getDefaultValue()
     {
-        return unserialize($this->defaultValue);
+        return $this->defaultValue;
     }
-
-
 
     function getPerUser()
     {
@@ -99,6 +100,11 @@ class Option         extends \Max\Entity\Base
         return $this->role;
     }
 
+    function getDescription()
+    {
+        return $this->description;
+    }
+
     function setId($id)
     {
         $this->id = $id;
@@ -116,7 +122,7 @@ class Option         extends \Max\Entity\Base
 
     function setDefaultValue($defaultValue)
     {
-        $this->defaultValue = serialize($defaultValue);
+        $this->defaultValue = $defaultValue;
     }
 
     function setPerUser($perUser)
@@ -139,17 +145,9 @@ class Option         extends \Max\Entity\Base
         $this->role = $role;
     }
 
-    function getDescription()
-    {
-        return $this->description;
-    }
-
     function setDescription($description)
     {
         $this->description = $description;
     }
 
-  
-    
-    
 }

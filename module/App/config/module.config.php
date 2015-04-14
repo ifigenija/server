@@ -21,6 +21,7 @@ return [
             'Rest\postniNaslov' => 'Max\Factory\RestControllerFactory',
             'Rest\trr'          => 'Max\Factory\RestControllerFactory',
             'Rest\Telefonska'   => 'Max\Factory\RestControllerFactory',
+            'Rest\option'        => 'Max\Factory\RestControllerFactory',
             'Rest\role'         => 'Max\Factory\RestControllerFactory',
         ],
         'invokables' => [

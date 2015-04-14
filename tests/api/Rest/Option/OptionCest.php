@@ -5,8 +5,8 @@ namespace Rest\Option;
 use ApiTester;
 
 /**
- * - list 
  * - create
+ * - list 
  * - update
  * - delete 
  * - read 
@@ -29,23 +29,32 @@ class OptionCest
         
     }
 
+    // napolnimo vsaj en zapis
+    public function create(ApiTester $I)
+    {
+        $data      = [
+            'name'          => 'zz',
+            'type'          => 'zz',
+            'defaultValue'  => 'zz',
+            'perUser'       => 'zz',
+            'readOnly'      => 'zz',
+            'public'        => 'zz',
+            'role'          => 'zz',
+            'description'   => 'zz',
+        ];
+        $this->obj = $opcija       = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals('zz', $opcija['name']);
+        $I->assertNotEmpty($opcija['id']);
+    }
+
+    /**
+     * @depends create
+     */
     public function getList(ApiTester $I)
     {
         $list     = $I->successfullyGetList($this->restUrl, []);
         $I->assertNotEmpty($list);
         $this->id = array_pop($list)['id'];
-    }
-
-    // tests
-    public function create(ApiTester $I)
-    {
-        $data      = [
-            'sifra' => 'xx',
-            'naziv' => 'xx',
-        ];
-        $this->obj = $option     = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('xx', $option['name']);
-        $I->assertNotEmpty($option['id']);
     }
 
     /**
@@ -54,26 +63,30 @@ class OptionCest
      */
     public function update(ApiTester $I)
     {
-        $option          = $this->obj;
-        $option['naziv'] = 'tralala';
+        $opcija          = $this->obj;
+        $opcija['name'] = 'tralala';
 
-        $option = $I->successfullyUpdate($this->restUrl, $option['id'], $option);
+        $opcija = $I->successfullyUpdate($this->restUrl, $opcija['id'], $opcija);
 
-        $I->assertEquals('tralala', $option['name']);
+        $I->assertEquals('tralala', $opcija['name']);
     }
 
-    // tests
+    /**
+     * @depends create
+     */
     public function read(ApiTester $I)
     {
-        $option = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $opcija = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals('tralala', $option['name']);
+        $I->assertEquals('tralala', $opcija['name']);
     }
 
-    // tests
+    /**
+     * @depends create
+     */
     public function delete(ApiTester $I)
     {
-        $option = $I->successfullyDelete($this->restUrl, $this->obj['id']);
+        $opcija = $I->successfullyDelete($this->restUrl, $this->obj['id']);
 
         $I->failToGet($this->restUrl, $this->obj['id']);
     }

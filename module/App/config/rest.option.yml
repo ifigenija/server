@@ -5,6 +5,11 @@ entityClass: App\Entity\Option
 forms:
     default: 
         elements:
-            - name          
-            - type
-                
+            - name           
+            - type           
+            - defaultValue   
+            - perUser        
+            - readOnly       
+            - public         
+            - role           
+            - description    

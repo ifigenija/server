@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\Mapping AS ORM,
+    Max\Ann\Entity as Max;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Trrji")
- * */
+ * @Max\Id(prefix="0007")
+ *  */
 class Trr
         extends \Max\Entity\Base
 {
