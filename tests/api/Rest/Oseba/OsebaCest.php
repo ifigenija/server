@@ -33,7 +33,20 @@ class OsebaCest
     public function create(ApiTester $I)
     {
         $data      = [
+            'naziv'    => 'zz',
             'ime'    => 'zz',
+            'priimek'    => 'zz',
+            'pesvdonim'    => 'zz',
+            'funkcija'    => 'zz',
+            'email'    => 'x@xxx.xx',
+            'datumRojstva'    => 'zz',
+            'emso'    => 'zz',
+            'davcna'    => 'zz',
+            'spol'    => 'zz',
+            'opombe'    => 'zz',
+            'drzavljanstvo'    => 'zz',
+            'drzavaRojstva'    => 'zz',
+            'krajRojstva'    => 'zz',
         ];
         $this->obj = $oseba       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals('zz', $oseba['ime']);
