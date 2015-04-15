@@ -33,7 +33,6 @@ class PopaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'drzava_id' => '00040000-552e-03fa-423a-e7988482dcb3',   // $$rb  guid se menjuje
             'sifra'    => 'zz',
 //            'tipkli'    => 'zz', 
 //            'stakli'    => 'zz', 
