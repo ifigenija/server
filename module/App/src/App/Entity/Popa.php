@@ -45,13 +45,13 @@ class Popa
      *  D-dobavitelj
      *  E-evidenčni partner
      *  K-koproducent
-     *
+     * 
      * @ORM\Column(length=1, nullable=true)
      * @Max\Ui(type="select",opts="popa.Maxkli",group="Osnovni podatki",required=true)
      * @Max\I18n(label="Tip klienta", hint="K-kupec, D-dobavitelj, E-evidenčno", description="Max klienta (kupec, dobavitelj, evidenčni partner)")
      * @var string
      */
-    protected $tipkli;
+     protected $tipkli;
 
     /**
      * Status klienta
@@ -131,7 +131,8 @@ class Popa
      * Država klienta
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
-     * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id")
+     * $$rb echo  nullable=false
      * @Max\Ui(group="Kontaktni podatki",required=true)
      * @Max\I18n(label="Država", description="Država klienta")
      */
