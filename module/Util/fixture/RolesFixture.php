@@ -96,6 +96,7 @@ class RolesFixture
             $f = 'module/' . $module . '/fixture/' . $entity . '.yml';
             if (file_exists($f)) {
                 $file = file_get_contents($f);
+                
                 $data = array_merge($data, \Symfony\Component\Yaml\Yaml::parse($file));
 
                 file_put_contents($f, \Symfony\Component\Yaml\Yaml::dump($data));
@@ -108,32 +109,27 @@ class RolesFixture
      * Dodajanje skupin
      * @param string $val
      */
-    public function populateOptions($em, $valarray)
+    public function populateOptions($em, $val)
     {
-        $val = new Config($valarray);
+        
 
-        $pr = $em->getRepository('\App\Entity\Option');
-        $o = $pr->findOneByName($val->name);
+        $pr = $em->getRepository('App\Entity\Option');
+        $o = $pr->findOneByName($val['name']);
+        
         if (!$o) {
             $o = new Option();
-            $o->setName($val->name);
-            $o->setType($val->type);
-            $o->setDescription($val->description);
-            $o->setReadOnly($val->readOnly || false);
-            if ($val->type === 'map') {
-                $def = $val->defaultValue;
-                if ($def) {
-                    $def = $def->toArray();
-                }
-            } else {
-                $def = $val;
-            }
-            $o->setDefaultValue($val->defaultValue);
-            $o->setPerUser($val->perUser || false);
-            $o->setPublic($val->public || false);
-            $o->setRole($val->role);
             $em->persist($o);
         }
+            
+            $o->setName($val['name']);
+            $o->setType($val['type']);
+            $o->setDescription($val['description']);
+            $o->setReadOnly(empty($val['readOnly']) ? false : $val['readOnly']);
+            $o->setDefaultValue(empty($val['defaultValue']) ? null : $val['defaultValue']);
+            $o->setPerUser(empty($val['perUser']) ? false: $val['perUser']);
+            $o->setPublic(empty($val['public']) ? false: $val['public']);
+            $o->setRole(empty($val['role']) ? null:$val['role'] );
+            
     }
 
     public function populateRole($manager, $val)
@@ -145,7 +141,6 @@ class RolesFixture
 
         $o = $this->repo->findOneByName($val['name']);
         if (!$o) {
-            var_dump($val);
             $o = new Role;
             $o->setName($val['name']);
             $o->setDescription($val['description']);

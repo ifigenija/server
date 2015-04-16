@@ -11,6 +11,9 @@ return [
     'service_manager' => [
         'factories' => [
             'Zend\Session\SessionManager' => 'App\Factory\SessionFactory'
+        ],
+        'invokables' => [
+                        'options.service' => '\App\Service\OptionsService'
         ]
     ],
     'controllers'     => [

@@ -46,7 +46,8 @@ class Popa
      *  E-evidenčni partner
      *  K-koproducent
      * 
-     * @ORM\Column(length=1, nullable=true)
+     *   $$rb: začasno sem dodal nullable = true 
+     * @ORM\Column(length=1,nullable=true)
      * @Max\Ui(type="select",opts="popa.Maxkli",group="Osnovni podatki",required=true)
      * @Max\I18n(label="Tip klienta", hint="K-kupec, D-dobavitelj, E-evidenčno", description="Max klienta (kupec, dobavitelj, evidenčni partner)")
      * @var string
@@ -670,6 +671,67 @@ class Popa
         $this->datKnj = $datKnj;
         return $this;
     }
+
+    function getTipkli()
+    {
+        return $this->tipkli;
+    }
+
+    function getOsebe()
+    {
+        return $this->osebe;
+    }
+
+    function getTelefonske()
+    {
+        return $this->telefonske;
+    }
+
+    function getTrrji()
+    {
+        return $this->trrji;
+    }
+
+    function getPogodbe()
+    {
+        return $this->pogodbe;
+    }
+
+    function getZamejstvo()
+    {
+        return $this->zamejstvo;
+    }
+
+    function setTipkli($tipkli)
+    {
+        $this->tipkli = $tipkli;
+    }
+
+    function setOsebe($osebe)
+    {
+        $this->osebe = $osebe;
+    }
+
+    function setTelefonske($telefonske)
+    {
+        $this->telefonske = $telefonske;
+    }
+
+    function setTrrji($trrji)
+    {
+        $this->trrji = $trrji;
+    }
+
+    function setPogodbe($pogodbe)
+    {
+        $this->pogodbe = $pogodbe;
+    }
+
+    function setZamejstvo($zamejstvo)
+    {
+        $this->zamejstvo = $zamejstvo;
+    }
+
 
 }
 

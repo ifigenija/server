@@ -12,14 +12,19 @@ namespace App\Controller;
  * @author boris
  */
 class RpcController
- extends \Max\Controller\RpcController
+ extends \Zend\Mvc\Controller\AbstractActionController
 {
+    
+    use \Max\Controller\Traits\RpcTrait;
     /**
      * Akcije ki streže nastavitve preko JsonRpc
      * 
      */
-    public function settingsAction() {
+    public function optionsAction() {
         
+        $srv = $this->getServiceLocator()->get('options.service');
+        
+        return $this->handleJsonRpcCall($srv);
     }
     
 }

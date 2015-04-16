@@ -34,7 +34,7 @@ class PopaCest
     {
         $data      = [
             'sifra'    => 'zz',
-//            'tipkli'    => 'zz', 
+//            'tipkli'    => '3', 
 //            'stakli'    => 'zz', 
             'naziv'    => 'zz',
 //            'naziv1'    => 'zz',
@@ -51,8 +51,12 @@ class PopaCest
 //            'zamejstvo'    => 'zz', 
             ];
         $this->obj = $popa       = $I->successfullyCreate($this->restUrl, $data);
+        
+//        codecept_debug($popa);
         $I->assertEquals('zz', $popa['panoga']);
+//        $I->assertEquals('1', $popa['tipkli']);
         $I->assertNotEmpty($popa['id']);
+        
     }
 
     /**

@@ -1,15 +1,19 @@
 -
-    name: kravaXXX
-    type: color
-    perUser: true
--
     name: privzetInspicient
+    description: 'Privzeti inspicient'
     type: entity
+    perUser: false
     targetEntity: \Sodelavci\Entity\Sodelavec
 -
     name: dogodek-status
-    type: map
+    type: array
     public: true
     description: 'Tabela statusa dogodkov'
-    tags: [a, b, c]
-    defaultValue: [{ key: planiran, value: Dolgoročno, tag: '' }, { key: planiran, value: Planiran, tag: '' }]
+    defaultValue: [{ key: planiran, value: Dolgoročno }, { key: planiran, value: Planiran }]
+-
+    name: popa.Maxkli
+    type: array
+    public: false
+    readOnly: true
+    description: 'Tip poslovnega partnerja'
+    defaultValue: [{ key: 1, value: odprto }, { key: 2, value: zaprto }]

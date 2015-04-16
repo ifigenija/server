@@ -1,4 +1,15 @@
 <?php
+
+/**
+ * uporabimo, če hočemo videti napake v produkciji
+ * v razvoju nastavimo rajši v /etc/php5/apache2/php.ini, da velja za vse projekte
+ */
+//if ($_SERVER['APP_ENV'] == 'development') {
+//     error_reporting(E_ALL);
+//     ini_set("display_errors", 1);
+// }
+
+
 /**
  * This makes our life easier when dealing with paths. Everything is relative
  * to the application root now.

@@ -16,6 +16,8 @@ class JsonForm
 
     private $entityClass;
     private $mode;
+    private $opts;
+    private $mf;
 
     public function __construct($name = null, $options = [])
     {
@@ -23,6 +25,13 @@ class JsonForm
         $this->setAttribute('method', 'POST');
     }
 
+    public function init()
+    {
+         $sm = $this->getServiceLocator()->getServiceLocator();
+        $this->em = $sm->get('doctrine.entitymanager.orm_default');
+        $this->mf = $sm->get('entity.metadata.factory');
+        $this->opts = $sm->get('options.service');
+    }
     public function getIzbirne($opcije)
     {
         return $this->getServiceLocator()
@@ -800,5 +809,26 @@ class JsonForm
         $this->setObject(new $this->entityClass);
         return $this;
     }
+
+    function getOpts()
+    {
+        return $this->opts;
+    }
+
+    function getMf()
+    {
+        return $this->mf;
+    }
+
+    function setOpts($opts)
+    {
+        $this->opts = $opts;
+    }
+
+    function setMf($mf)
+    {
+        $this->mf = $mf;
+    }
+
 
 }

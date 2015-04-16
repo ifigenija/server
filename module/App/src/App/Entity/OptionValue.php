@@ -34,7 +34,7 @@ class OptionValue
     /**
      * @ORM\Column(type="boolean", nullable=true, options={"default":false})
      */
-    private $global;
+    private $global = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Option")

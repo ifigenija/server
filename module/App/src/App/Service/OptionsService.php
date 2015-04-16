@@ -15,27 +15,12 @@ namespace App\Service;
  *
  * @author boris
  */
-class SettingsService
-        extends Max\Service\AbstractMaxService
+class OptionsService
+        extends \Max\Service\AbstractMaxService
 {
 
     /**
-     * Preberi vrednost nastavitve 
-     * 
-     * @param string $name 
-     * @return array {
-     */
-    public function getValue($name)
-    {
-        $em = $this->getEm();
-        $rep = $em->getRepository('App\Entity\Option');
-        $option = $this->find($name);
-        
-        $this->expectAuthenticated();
-        return $value;
-    }
-
-    /**
+     * Za nastavljanje vrednosti opcij
      * 
      * @param string $name
      * @param mixed $value
@@ -44,22 +29,70 @@ class SettingsService
      */
     public function setValue($name, $value, $global = false)
     {
-        $em = $this->getEm();
+        $em   = $this->getEm();
         $orep = $em->getRepository('App\Entity\Option');
-        
+
         $opt = $orep->find($name);
-        
+
         $user = $this->getIdentity();
-        
+
         $this->expectPermission('options-');
     }
 
-    public function setValues($values)
+    /**
+     * Vrne vrednost opcij po logiki per user -> globalno -> default 
+     * 
+     * @param string $name
+     * @return mixed
+     */
+    public function getOptions($name)
     {
-        foreach ($values as $v) {
+        $em = $this->getEm();
 
-            $this->setValue($v['option'], $v['value'], $v['global']);
+        $rep    = $em->getRepository('App\Entity\Option');
+        $valRep = $em->getRepository('App\Entity\OptionValue');
+
+        /* @var $opt \App\Entity\Option */
+        $opt = $rep->findOneByName($name);
+
+        $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000200);
+
+        if ($opt->getReadOnly()) {
+            return $opt->getDefaultValue();
         }
+
+        if ($opt->getPerUser()) {
+
+            $auth = $this->getAuth();
+            if ($auth->hasIdentity()) {
+                $ident    = $auth->getIdentity();
+                $userOpts = $valRep->findOneBy([
+                    'user'   => $ident->getId()
+                    , 'name'   => $name
+                    , 'global' => false
+                ]);
+                if ($userOpts) {
+                    return $userOpts->getValue();
+                }
+            }
+        }
+
+        $globalOpts = $valRep->findOneBy([
+            'name'   => $name
+            , 'global' => true
+        ]);
+
+        if ($globalOpts) {
+            return $globalOpts->getValue();
+        } else {
+            return $opt->getDefaultValue();
+        }
+    }
+
+    public function getOptionsWithFlags($name)
+    {
+
+        throw new Exception('implementiraj ali ukini', 9999999);
     }
 
 }
