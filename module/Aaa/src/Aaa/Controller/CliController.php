@@ -183,7 +183,8 @@ class CliController
                 $userA = $em->getRepository("Aaa\Entity\User")->getUserRolesArray($username);
             } else {
                 // vse uporabnike
-                $userA = $em->getRepository("Aaa\Entity\User")->getUsersRolesArray();
+                $userRR = $em->getRepository("Aaa\Entity\User"); //$$rb  začasno zaradi debugginga
+                $userA = $userRR->getUsersRolesArray();
             }
             // še izpis:
             foreach ($userA as $user) {

@@ -109,6 +109,7 @@ class Oseba
 
     /**
      * @ORM\Column(type="string", length=1, nullable=true)
+     * @Max\Ui(type="select",opts="oseba.spol",group="Osnovni podatki",required=true)
      */
     private $spol;
 

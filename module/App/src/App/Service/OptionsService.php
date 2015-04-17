@@ -77,6 +77,7 @@ class OptionsService
             }
         }
 
+        // imeti mora globalno nastavitev v OptionValue
         $globalOpts = $valRep->findOneBy([
             'name'   => $name
             , 'global' => true

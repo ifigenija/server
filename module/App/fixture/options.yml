@@ -16,4 +16,38 @@
     public: false
     readOnly: true
     description: 'Tip poslovnega partnerja'
-    defaultValue: [{ key: 1, value: odprto }, { key: 2, value: zaprto }]
+    defaultValue: [{ key: 1, value: odprt }, { key: 2, value: zaprt }, { key: 3, value: blabla }]
+-
+    name: popa.stakli
+    type: array
+    public: false
+    readOnly: true
+    description: 'Status poslovnega partnerja'
+    defaultValue: [{ key: AK, value: aktiven }, { key: NA, value: neaktiven }]
+-
+    name: oseba.spol
+    type: array
+    public: false
+    readOnly: true
+    description: 'spol osebe'
+    defaultValue: [{ key: M, value: moški }, { key: Ž, value: ženska }]
+-
+    name: test1.barva.ozadja
+    type: array
+    public: false
+    readOnly: false
+    description: 'barva ozadja'
+    defaultValue: [{ key: b, value: bela }]
+    optionValue:
+        global:
+            value: [{ key: m, value: modra }]
+        user: 
+            - 
+                username: anonymous
+                value: [{ key: z, value: zelena }]
+#            - 
+#                username: neobstoječ
+#                value: [{ key: s, value: siva }]
+            - 
+                username: admin
+                value: [{ key: r, value: rumena }]

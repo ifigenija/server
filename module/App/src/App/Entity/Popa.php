@@ -12,13 +12,12 @@ use Doctrine\ORM\Mapping as ORM,
  *
  * @ORM\Table(name="popa")
  * @Max\I18n(label="Poslovni partner",plural="Poslovni partnerji")
- *  @Max\Id(prefix="0008")
+ * @Max\Id(prefix="0008")
  */
 class Popa
-              extends \Max\Entity\Base
-
+        extends \Max\Entity\Base
 {
-    
+
     /**
      * ID klienta
      *
@@ -52,7 +51,7 @@ class Popa
      * @Max\I18n(label="Tip klienta", hint="K-kupec, D-dobavitelj, E-evidenčno", description="Max klienta (kupec, dobavitelj, evidenčni partner)")
      * @var string
      */
-     protected $tipkli;
+    protected $tipkli;
 
     /**
      * Status klienta
@@ -75,7 +74,7 @@ class Popa
      * @var string
      */
     protected $naziv;
-    
+
     /**
      * Dodatno polje za naziv klienta
      *
@@ -116,7 +115,6 @@ class Popa
      */
     protected $url = '';
 
-  
     /**
      * Opomba
      *  tekstovno polje za dodatne podatke o klientu
@@ -126,7 +124,6 @@ class Popa
      * @var string
      */
     protected $opomba;
-
 
     /**
      * Država klienta
@@ -171,8 +168,6 @@ class Popa
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="popa")
      */
     private $pogodbe;
-
-
 
     /**
      * ID za DDV klienta
@@ -246,18 +241,17 @@ class Popa
      */
     private $zamejstvo;
 
-
     public function __construct()
     {
-        $this->osebe = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->trrji = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->osebe   = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->trrji   = new \Doctrine\Common\Collections\ArrayCollection();
         $this->naslovi = new \Doctrine\Common\Collections\ArrayCollection();
         $this->pogodbe = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     public function __toString()
     {
-        return $this->getSifra() . ' ' .  $this->getNaziv();
+        return $this->getSifra() . ' ' . $this->getNaziv();
     }
 
     public function addNaslovi($emb)
@@ -287,6 +281,7 @@ class Popa
             $this->kontaktne->removeElement($emb);
         }
     }
+
     public function getKlasifikacija()
     {
         return $this->klasifikacija;
@@ -298,7 +293,7 @@ class Popa
         return $this;
     }
 
-        public function getKontaktne()
+    public function getKontaktne()
     {
         return $this->kontaktne;
     }
@@ -732,6 +727,4 @@ class Popa
         $this->zamejstvo = $zamejstvo;
     }
 
-
 }
-

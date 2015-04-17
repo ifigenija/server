@@ -9,10 +9,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Description of ParamValue
- * @ORM\Entity
+ * 
+ *       value      : vrednost opcije
+ *       global     : ali ta vrednost ("value") velja globalno in ne za userja
+ * 
+ * @todo: property username to be implemented
+ * 
+ * @ORM\Entity(repositoryClass="App\Repository\OptionValues")
  * @author boris
  */
 class OptionValue
@@ -51,6 +57,20 @@ class OptionValue
     private $user;
 
     //put your code here
+
+
+    public function addOption($option)
+    {
+        $this->option=$option;
+        return $this;
+    }
+
+    public function addUser($user)
+    {
+        $this->user=$user;
+        return $this;
+    }
+
 
     function getId()
     {
