@@ -13,6 +13,9 @@ return [
             'rbac_strategy'                             => '\Aaa\Factory\JsonStrategyFactory',
             'Zend\Authentication\AuthenticationService' => 'Aaa\Factory\AuthenticationServiceFactory',
             'Rbac\Rbac'                                 => 'Aaa\Factory\RbacFactory',
+        ],
+        'invokables' => [
+            'auth.rpc.service' => 'Aaa\Rpc\AuthRpcService'
         ]
     ],
     'controllers'     => [
@@ -22,7 +25,7 @@ return [
             'Rest\Permission' => 'Max\Factory\RestControllerFactory'
         ],
         'invokables' => [
-            'Aaa\Rpc' => 'Aaa\Controller\RpcController',
+            'Rpc\aaa' => 'Aaa\Controller\RpcController',
             'Aaa\Cli' => 'Aaa\Controller\CliController',
         ]
     ],

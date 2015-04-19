@@ -1,25 +1,24 @@
 <?php
 
-/*
- * 
- */
 
 namespace App\Controller;
 
 /**
  * Kontroller za index akcijo 
+ * 
+ * redirecta na klient aplikacijo.
  *
  * @author boris
  */
 class IndexController extends \Zend\Mvc\Controller\AbstractActionController
 {
    /**
+    * Redirect na client aplikacijo 
     * 
     */  
    public function indexAction() {
        
-       return new \Zend\View\Model\ViewModel(['hello' => 'world']);
-       
+       return $this->redirect()->toUrl('/client/index.html');       
    }
    
    

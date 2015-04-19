@@ -3,7 +3,7 @@
 /config/autoload/local.*.php
 /nbproject/private/
 /node_modules/
-**/autoload_classmap.php
+autoload_classmap.php
 /tests/acceptance.suite.yml
 /tests/_output/
 /tests/api.suite.yml

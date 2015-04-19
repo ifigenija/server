@@ -12,7 +12,7 @@ namespace Aaa\Controller;
  * @author boris
  */
 class RpcController
- extends Zend\Mvc\Controller\AbstractActionController
+ extends \Zend\Mvc\Controller\AbstractActionController
 {
     use \Max\Controller\Traits\RpcTrait;
     
@@ -20,8 +20,11 @@ class RpcController
      * Akcije ki streže nastavitve preko JsonRpc
      * 
      */
-    public function aaaAction() {
+    public function authAction() {
         
+        $srv = $this->getServiceLocator()->get('auth.rpc.service');
+        
+        return $this->handleJsonRpcCall($srv);
     }
     
 }

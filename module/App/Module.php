@@ -16,7 +16,6 @@ use Exception;
 use Max\Exception\UnauthException;
 use Zend\Authentication\Adapter\Http;
 use Zend\Authentication\AuthenticationService;
-use Zend\Authentication\Storage\Session;
 use Zend\Console\Request;
 use Zend\EventManager\EventInterface;
 use Zend\Http\Response;
@@ -53,35 +52,33 @@ class Module
         Paginator::setDefaultItemCountPerPage(30);
 
         ini_set('html_errors', 'Off');
-        $eventManager = $e->getApplication()->getEventManager();
+        $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 
-        $sm = $e->getApplication()->getServiceManager();
-        $em = $sm->get('doctrine.entitymanager.orm_default');
+        $sm   = $e->getApplication()->getServiceManager();
+        $em   = $sm->get('doctrine.entitymanager.orm_default');
         $auth = $sm->get('Zend\Authentication\AuthenticationService');
 
         //
         // Narediti session tako, da se virtual hosti ne bodo med seboj mešali 
         // da se avtentikacija ne prenaša med vhosti
-        
         // poskrbim za identiteto uporabnika 
         if ($e->getRequest() instanceof Request) {
             // handling autorizacij preko konzole
             $this->setIdentity('console', $auth, $em);
         } else {
-            $id = $this->tryHttpAuth($auth, $em, $e);
-            
-            if (!$id) {
-                if (!$auth->hasIdentity()) {
+            if (!$auth->hasIdentity()) {
+                $id = $this->tryHttpAuth($auth, $em, $e);
+                if (!$id) {
                     $this->setIdentity('anonymous', $auth, $em);
                 }
-            }            
-         }
+            }
+        }
 
         $identity = $auth->getIdentity();
         // $identity = $this->setConsoleAuthorization($authService, $em);
-        $evm = $em->getEventManager();
+        $evm      = $em->getEventManager();
         $evm->addEventSubscriber(new RevisionsListener($sm, $identity));
 
         $config = $sm->get('entity.metadata.factory')->getAllEntityConfig();
@@ -121,8 +118,8 @@ class Module
     {
 
         $resolver = new DoctrineResolver($em, '\Aaa\Entity\User');
-        $adapter = new Http([
-            'realm' => 'Max',
+        $adapter  = new Http([
+            'realm'          => 'Max',
             'accept_schemes' => 'basic',
         ]);
         $adapter->setBasicResolver($resolver);
@@ -133,9 +130,9 @@ class Module
 
         // shranim si doctrine adapter
         $originalAdapter = $authService->getAdapter();
-        
+
         $authService->setAdapter($adapter);
-        /* @var $authService \Zend\Authentication\AuthenticationService */
+        /* @var $authService AuthenticationService */
         $authResult = $authService->authenticate();
         if ($authResult->isValid()) {
             $identity = $authResult->getIdentity();
