@@ -1,6 +1,9 @@
 ## YAML Template.
 ---
 type: rest
+disabledMethods: 
+#    - list
+    - update
 entityClass: App\Entity\Drzava
 forms:
     default: 
@@ -18,6 +21,9 @@ forms:
             - opomba
 lists:
     default:      
+        disabledMethods: 
+#            - list
+            - update
         filter:
                        
         sort: 

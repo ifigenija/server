@@ -29,6 +29,9 @@ class Rbac
     /**
      * Determines if access is granted by checking the roles for permission.
      *
+     * Prodecura pogleda v MtM relacijo entitet role:permission, če obstaja relacija med
+     * konkretno vlogo in konkretnim dovoljenjem
+     * 
      * @param  RoleInterface|RoleInterface[]|Traversable $roles
      * @param  mixed                                     $permission
      * @return bool

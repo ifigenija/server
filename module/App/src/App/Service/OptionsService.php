@@ -61,6 +61,7 @@ class OptionsService
             return $opt->getDefaultValue();
         }
 
+        // ali je opcija uporabniško nastavljiva
         if ($opt->getPerUser()) {
 
             $auth = $this->getAuth();
@@ -83,6 +84,7 @@ class OptionsService
             , 'global' => true
         ]);
 
+        // če mima globalne nastavitve vrne default-no iz entitete Option
         if ($globalOpts) {
             return $globalOpts->getValue();
         } else {

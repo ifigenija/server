@@ -2,11 +2,13 @@
     name: privzetInspicient
     description: 'Privzeti inspicient'
     type: entity
+    readOnly: true
     perUser: false
     targetEntity: \Sodelavci\Entity\Sodelavec
 -
     name: dogodek-status
     type: array
+    readOnly: true
     public: true
     description: 'Tabela statusa dogodkov'
     defaultValue: [{ key: planiran, value: Dolgoročno }, { key: planiran, value: Planiran }]
@@ -36,6 +38,7 @@
     type: array
     public: false
     readOnly: false
+    perUser: true
     description: 'barva ozadja'
     defaultValue: [{ key: b, value: bela }]
     optionValue:

@@ -40,6 +40,12 @@ class RestController
 
             $sr     = $this->getRepository();
             $object = $sr->find($id);
+            /**
+             * funkcija isGranted preveri, če ima uporabniško ime tako vlogo, ki ima ustrezno dovoljenje
+             *  npr. "Drzava-read"
+             * To pogleda v entitete user, role, permission in njihovi relaciji user:role, role:permission
+             * 
+             */
             $this->expect($this->isGranted($perm, $object)
                     , $this->trnsl(self::DENIED)
                     , 100099, [$perm, $this->getUsername()]);
@@ -364,6 +370,8 @@ class RestController
     /**
      * Preveri ali je posamezna metoda za konkretni 
      * API omogočena ali ne.
+     * 
+     * to preveri glede na konfiguracijo, ki se dobi in iz rest yml datoteke 
      * 
      * @param string $method
      * @param string $view

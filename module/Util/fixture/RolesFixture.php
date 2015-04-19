@@ -112,9 +112,9 @@ class OptionsFixture
     /**
      * Dodajanje opcij
      * 
-     * Vsebino yml datoteke ažurira v entiteti Option in OptionValue
+     * Vsebino yml datoteke ažurira v entitetah Option in OptionValue
      * 
-     * @param type $em
+     * @param type $em  entity manager
      * @param type $val Ena opcija iz yml datoteke
      */
     public function populateOptions($em, $val)
