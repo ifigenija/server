@@ -63,14 +63,23 @@ class OptionsService
         if ($opt->getPerUser()) {
             //  s katerim uporabniškim imenom je uporabnik prijavljen
             $username = $this->getUsername();
-            $gname=$opt->getName();
-            $optValA  = $em->getRepository('App\Entity\OptionValue')
+            $optValue = $em->getRepository('App\Entity\OptionValue')
                     ->getOptionValuesUserValue($opt->getName(), $username);
-            $a        = 1;
-            return $optValA->getValue();     //$$ rb to je še potrebno urediti!
+            if (!empty($optValue)) {
+                return $optValue;
+            }
         }
 
-        // 
+        // preveri, če ima globalno opcijo
+        if (!$opt->getReadOnly()) {
+            $optValue = $em->getRepository('App\Entity\OptionValue')
+                    ->getOptionValuesGlobalValue($opt->getName());
+            if (!empty($optValue)) {
+                return $optValue;
+            }
+        }
+                
+        // če nima niti uporabniške niti globalne nastavitve
         return $opt->getDefaultValue();
     }
 
