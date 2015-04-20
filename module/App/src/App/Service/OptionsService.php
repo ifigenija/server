@@ -78,9 +78,53 @@ class OptionsService
                 return $optValue;
             }
         }
-                
+
         // če nima niti uporabniške niti globalne nastavitve
         return $opt->getDefaultValue();
+    }
+
+    /**
+     * 
+     * Nastavi globalno opcijo v OptionValue entiteti
+     * 
+     * param type $value   vrednost, ki jo vstavi
+     * 
+     * @param type $name    Ime opcij
+     * @param type $value   vrednost, ki jo vstavi
+     * @return boolean
+     */
+    public function setGlobalOption($name, $value)
+    {
+        $em  = $this->getEm();
+        $rep = $em->getRepository('App\Entity\Option');
+
+        /* @var $opt \App\Entity\Option */
+        $opt = $rep->findOneByName($name);
+
+        $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000201);
+
+        if ($opt->getReadOnly()) {
+        // preveri, če ima globalno opcijo
+            $this->expect($opt, 'Opcija ni globalna ' . $name, 1000202);
+        }
+
+        $optValR == $em->getRepository('App\Entity\OptionValue');
+        $globalValue = $optValR->getOptionValuesGlobalValue($name);
+        if (empty($globalValue)) {
+            // kreiramo nov zapis v OptionValue
+            $optVal = new OptionValue();
+            $optVal->setValue($value);
+            $optVal->setGlobal(true);
+            $optVal->addOption($opt);
+        } else {
+            // le zamenjamo vrednost
+            $optVal = $optValR->findOneByName($name);
+            $optVal-> setValue($value);
+        }
+        $em->persist($optVal);  // $$ ali je lahko več persistov pred flush-em?
+        $em->flush();
+
+        return true;
     }
 
     public function getOptionsWithFlags($name)
