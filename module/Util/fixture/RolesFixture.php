@@ -159,29 +159,30 @@ class OptionsFixture
             }
 
             // ali obstajajo uporabniške vrednosti 
-            $optValueUserY = $val['optionValue']['user'];
-            foreach ($optValueUserY as $user) {
+            if (!empty($val['optionValue']['user'])) {
+                $optValueUserY = $val['optionValue']['user'];
+                foreach ($optValueUserY as $user) {
 
-                echo "  user    " . $user['username'] . PHP_EOL;
+                    echo "  user    " . $user['username'] . PHP_EOL;
 
-                // najprej preverim, če uporabniško ime že obstaja v entiteti User
-                $u = $em->getRepository('Aaa\Entity\User')
-                        ->findOneByUsername($user['username']);
-                $this->expect($u, "Ni tega uporabnika", 1000300); // $$ rb potrebno še implementirati trnsl 
+                    // najprej preverim, če uporabniško ime že obstaja v entiteti User
+                    $u = $em->getRepository('Aaa\Entity\User')
+                            ->findOneByUsername($user['username']);
+                    $this->expect($u, "Ni tega uporabnika", 1000300); // $$ rb potrebno še implementirati trnsl 
+                    // ali obstajajo  opcije userja
+                    $optValue = $em->getRepository('App\Entity\OptionValue')
+                            ->getOptionValuesUserValue($val['name'], $user['username']);
 
-                // ali obstajajo  opcije userja
-                $optValue = $em->getRepository('App\Entity\OptionValue')
-                        ->getOptionValuesUserValue($val['name'], $user['username']);
-
-                if (empty($optValue)) {
-                    $optVal = new OptionValue();
-                    $optVal->setValue($user['value']);
-                    $optVal->setGlobal(false);
-                    $optVal->addOption($o);
-                    $optVal->addUser($u);
-                    $em->persist($optVal);  // $$ ali je lahko več persistov pred flush-em?
-                }
+                    if (empty($optValue)) {
+                        $optVal = new OptionValue();
+                        $optVal->setValue($user['value']);
+                        $optVal->setGlobal(false);
+                        $optVal->addOption($o);
+                        $optVal->addUser($u);
+                        $em->persist($optVal);  // $$ ali je lahko več persistov pred flush-em?
+                    }
                     echo "     opt val: " . $user['value'][0]['key'] . " " . $user['value'][0]['value'] . PHP_EOL;
+                }
             }
         }
     }

@@ -54,3 +54,16 @@
             - 
                 username: admin
                 value: [{ key: r, value: rumena }]
+                
+#           za test - le globalna vrednost
+-
+    name: test2.glob
+    type: array
+    public: false
+    readOnly: false
+    perUser: false
+    description: 'test2 le globalna vrednost'
+    defaultValue: [{ key: d, value: defaultna  }]
+    optionValue:
+        global:
+            value: [{ key: g, value: globalna }]
