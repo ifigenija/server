@@ -42,6 +42,8 @@ class OptionsService
     /**
      * Vrne vrednost opcij po logiki per user -> globalno -> default 
      * 
+     * Prebere iz entitet Option in OptionValue
+     * 
      * @param string $name
      * @return mixed
      */
@@ -57,39 +59,19 @@ class OptionsService
 
         $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000200);
 
-        if ($opt->getReadOnly()) {
-            return $opt->getDefaultValue();
-        }
-
-        // ali je opcija uporabniško nastavljiva
+        // najprej preveri ali je opcija uporabniško nastavljiva
         if ($opt->getPerUser()) {
-
-            $auth = $this->getAuth();
-            if ($auth->hasIdentity()) {
-                $ident    = $auth->getIdentity();
-                $userOpts = $valRep->findOneBy([
-                    'user'   => $ident->getId()
-                    , 'name'   => $name
-                    , 'global' => false
-                ]);
-                if ($userOpts) {
-                    return $userOpts->getValue();
-                }
-            }
+            //  s katerim uporabniškim imenom je uporabnik prijavljen
+            $username = $this->getUsername();
+            $gname=$opt->getName();
+            $optValA  = $em->getRepository('App\Entity\OptionValue')
+                    ->getOptionValuesUserValue($opt->getName(), $username);
+            $a        = 1;
+            return $optValA->getValue();     //$$ rb to je še potrebno urediti!
         }
 
-        // imeti mora globalno nastavitev v OptionValue
-        $globalOpts = $valRep->findOneBy([
-            'name'   => $name
-            , 'global' => true
-        ]);
-
-        // če mima globalne nastavitve vrne default-no iz entitete Option
-        if ($globalOpts) {
-            return $globalOpts->getValue();
-        } else {
-            return $opt->getDefaultValue();
-        }
+        // 
+        return $opt->getDefaultValue();
     }
 
     public function getOptionsWithFlags($name)

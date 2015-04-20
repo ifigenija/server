@@ -191,7 +191,7 @@ class RestController
                     , 100008, [$perm, $this->getUsername()]);
             $this->expect(!empty($data), $this->trnsl('Ni podatkov za spremembo'), 100103);
             $this->expect(is_array($data), $this->trnsl('Nepravilen tip podatkov'), 100104);
-            $form = $this->buildForm($view);
+            $form   = $this->buildForm($view);
             $form->setMode('NEW');
             $form->bind($object);
             $form->setData($data);
@@ -468,7 +468,7 @@ class RestController
     {
         $fc = $this->getConfig("forms.$view");
 
-       // če je v konfigu class, potem naredim formo tistega class-a 
+        // če je v konfigu class, potem naredim formo tistega class-a 
         if (!empty($fc['class'])) {
             $form = $this->getForm($fc['class']);
             return $form;
@@ -519,7 +519,7 @@ class RestController
         if ($ident) {
             return $ident->getUsername();
         } else {
-            return "anon";
+            return "anonymous";
         }
     }
 
