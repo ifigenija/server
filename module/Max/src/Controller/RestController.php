@@ -40,6 +40,12 @@ class RestController
 
             $sr     = $this->getRepository();
             $object = $sr->find($id);
+            /**
+             * funkcija isGranted preveri, če ima uporabniško ime tako vlogo, ki ima ustrezno dovoljenje
+             *  npr. "Drzava-read"
+             * To pogleda v entitete user, role, permission in njihovi relaciji user:role, role:permission
+             * 
+             */
             $this->expect($this->isGranted($perm, $object)
                     , $this->trnsl(self::DENIED)
                     , 100099, [$perm, $this->getUsername()]);
@@ -185,7 +191,7 @@ class RestController
                     , 100008, [$perm, $this->getUsername()]);
             $this->expect(!empty($data), $this->trnsl('Ni podatkov za spremembo'), 100103);
             $this->expect(is_array($data), $this->trnsl('Nepravilen tip podatkov'), 100104);
-            $form = $this->buildForm($view);
+            $form   = $this->buildForm($view);
             $form->setMode('NEW');
             $form->bind($object);
             $form->setData($data);
@@ -365,6 +371,8 @@ class RestController
      * Preveri ali je posamezna metoda za konkretni 
      * API omogočena ali ne.
      * 
+     * to preveri glede na konfiguracijo, ki se dobi in iz rest yml datoteke 
+     * 
      * @param string $method
      * @param string $view
      */
@@ -460,7 +468,7 @@ class RestController
     {
         $fc = $this->getConfig("forms.$view");
 
-       // če je v konfigu class, potem naredim formo tistega class-a 
+        // če je v konfigu class, potem naredim formo tistega class-a 
         if (!empty($fc['class'])) {
             $form = $this->getForm($fc['class']);
             return $form;
@@ -511,7 +519,7 @@ class RestController
         if ($ident) {
             return $ident->getUsername();
         } else {
-            return "anon";
+            return "anonymous";
         }
     }
 

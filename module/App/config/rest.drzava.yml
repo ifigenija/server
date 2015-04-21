@@ -1,6 +1,9 @@
 ## YAML Template.
 ---
 type: rest
+disabledMethods: 
+#    - list
+    - update
 entityClass: App\Entity\Drzava
 forms:
     default: 

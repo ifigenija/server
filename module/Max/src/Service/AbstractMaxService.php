@@ -25,7 +25,7 @@ use ZfcRbac\Service\AuthorizationService;
  * @author boris
  */
 class AbstractMaxService
-    implements ServiceLocatorAwareInterface
+        implements ServiceLocatorAwareInterface
 {
 
     use \Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -103,15 +103,15 @@ use \Max\Expect\ExpectTrait;
             foreach ($operacije as $operacija) {
                 $perm = $this->getEntity($object) . '-' . $operacija;
                 $this->expect($auth->isGranted($perm, $object)
-                    , sprintf($this->translate($message), $perm)
-                    , 420001
+                        , sprintf($this->translate($message), $perm)
+                        , 420001
                 );
             }
         } else {
             $perm = $this->getEntity($object) . '-' . $operacije;
             $this->expect($auth->isGranted($perm, $object)
-                , sprintf($this->translate($message), $perm)
-                , 420001
+                    , sprintf($this->translate($message), $perm)
+                    , 420001
             );
         }
     }
@@ -125,79 +125,9 @@ use \Max\Expect\ExpectTrait;
     {
         $auth = $this->getAuth();
         $this->expect($auth->isGranted($perm, $object)
-            , sprintf($this->translate('Nimate dovoljenja %s. Dostop zavrnjen'), $perm)
-            , 420002
+                , sprintf($this->translate('Nimate dovoljenja %s. Dostop zavrnjen'), $perm)
+                , 420002
         );
-    }
-
-    /**
-     * Poganjanje taskov preko job managerja 
-     * 
-     * @param string|array $task razred taska ali pa array za create job 
-     * @param array $data  parametri za task 
-     * @param string $name  iz
-     * @param boolean $runNow naj se job požene sinhrono
-     */
-    protected function addJob($task, $data = [])
-    {
-        /* @var $jobManager JobManager */
-        $jobManager = $this->getServiceLocator()->get('jobmanager.service');
-        /* @var $em EntityManager */
-        $em = $this->getEm();
-
-        if (is_array($task)) {
-            if (empty($task['task'])) {
-                throw new MaxException($this->translate('Task ni določen'), 'TIP-JOB-0098');
-            }
-            $params = $task;
-            $params['data'] = $data;
-        } else {
-            $params = [
-                'task' => $task,
-                'data' => $data
-            ];
-        }
-
-        $job = $jobManager->createJob($params);
-        $em->flush();
-
-        return $jobManager->jobJson($job);
-    }
-
-    /**
-     * 
-     * Wrapper za zagon standardnega print job-a 
-     * 
-     * @param string $task
-     * @param  $entity
-     * @param array $options
-     * @return $job
-     */
-    protected function docPrint($task, $entity, $options = [])
-    {
-        $taskData = $options;
-        ini_set('html_errors', 0);
-        $taskDef = [];
-        $taskData['id'] = $entity;
-
-        $this->expect(is_string($task), $this->translate('Task mora biti string'), 4200001);
-        $taskDef['task'] = $task;
-
-        $makePdf = isset($options['pdf']) ? $options['pdf'] : false;
-        $sync = isset($options['sync']) ? $options['sync'] : false;
-        $prt = isset($options['printer']) ? $options['printer'] : false;
-
-        if ($makePdf) {
-            $taskData['pdf'] = true;
-        }
-        if (preg_match(Consts::UUID_RE, $prt)) {
-            $taskData['toPrinter'] = $prt;
-        }
-        if ($sync) {
-            $taskDef['sync'] = true;
-        }
-
-        return $this->addJob($taskDef, $taskData);
     }
 
     /**
@@ -213,6 +143,17 @@ use \Max\Expect\ExpectTrait;
         }
 
         return $this->translator->translate($text, $domain);
+    }
+
+    public function getUsername()
+    {
+        $auth  = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+        $ident = $auth->getIdentity();
+        if ($ident) {
+            return $ident->getUsername();
+        } else {
+            return "anonymous";
+        }
     }
 
 }

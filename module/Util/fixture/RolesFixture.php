@@ -115,9 +115,9 @@ class OptionsFixture
     /**
      * Dodajanje opcij
      * 
-     * Vsebino yml datoteke ažurira v entiteti Option in OptionValue
+     * Vsebino yml datoteke ažurira v entitetah Option in OptionValue
      * 
-     * @param type $em
+     * @param type $em  entity manager
      * @param type $val Ena opcija iz yml datoteke
      */
     public function populateOptions($em, $val)
@@ -145,10 +145,10 @@ class OptionsFixture
                 echo "  global" . PHP_EOL;
 
                 // ali obstaja globalna opcija ?
-                $optValA = $em->getRepository('App\Entity\OptionValue')->getOptionValuesGlobalArray($val['name']);
+                $optValue = $em->getRepository('App\Entity\OptionValue')->getOptionValuesGlobalValue($val['name']);
 
                 // pričakujemo, da najde največ 1 globalno vrednost. 
-                if (empty($optValA)) {
+                if (empty($optValue)) {
                     $optVal = new OptionValue();
                     $optVal->setValue($val['optionValue']['global']['value']);
                     $optVal->setGlobal(true);
@@ -162,28 +162,30 @@ class OptionsFixture
             }
 
             // ali obstajajo uporabniške vrednosti 
-            $optValueUserY = $val['optionValue']['user'];
-            foreach ($optValueUserY as $user) {
+            if (!empty($val['optionValue']['user'])) {
+                $optValueUserY = $val['optionValue']['user'];
+                foreach ($optValueUserY as $user) {
 
-                echo "  user    " . $user['username'] . PHP_EOL;
+                    echo "  user    " . $user['username'] . PHP_EOL;
 
-                // najprej preverim, če uporabniško ime že obstaja v entiteti User
-                $u = $em->getRepository('Aaa\Entity\User')
-                        ->findOneByUsername($user['username']);
-                $this->expect($u, "Ni tega uporabnika", 1000300); // $$ rb potrebno še implementirati trnsl 
-                // ali obstajajo  opcije userja
-                $optValA = $em->getRepository('App\Entity\OptionValue')
-                        ->getOptionValuesUserArray($val['name'], $user['username']);
+                    // najprej preverim, če uporabniško ime že obstaja v entiteti User
+                    $u = $em->getRepository('Aaa\Entity\User')
+                            ->findOneByUsername($user['username']);
+                    $this->expect($u, "Ni tega uporabnika", 1000300); // $$ rb potrebno še implementirati trnsl 
+                    // ali obstajajo  opcije userja
+                    $optValue = $em->getRepository('App\Entity\OptionValue')
+                            ->getOptionValuesUserValue($val['name'], $user['username']);
 
-                if (empty($optValA)) {
-                    $optVal = new OptionValue();
-                    $optVal->setValue($user['value']);
-                    $optVal->setGlobal(false);
-                    $optVal->addOption($o);
-                    $optVal->addUser($u);
-                    $em->persist($optVal);  // $$ ali je lahko več persistov pred flush-em?
+                    if (empty($optValue)) {
+                        $optVal = new OptionValue();
+                        $optVal->setValue($user['value']);
+                        $optVal->setGlobal(false);
+                        $optVal->addOption($o);
+                        $optVal->addUser($u);
+                        $em->persist($optVal);  // $$ ali je lahko več persistov pred flush-em?
+                    }
+                    echo "     opt val: " . $user['value'][0]['key'] . " " . $user['value'][0]['value'] . PHP_EOL;
                 }
-                echo "     opt val: " . $user['value'][0]['key'] . " " . $user['value'][0]['value'] . PHP_EOL;
             }
         }
     }

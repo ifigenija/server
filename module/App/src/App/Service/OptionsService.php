@@ -42,6 +42,8 @@ class OptionsService
     /**
      * Vrne vrednost opcij po logiki per user -> globalno -> default 
      * 
+     * Prebere iz entitet Option in OptionValue
+     * 
      * @param string $name
      * @return mixed
      */
@@ -57,37 +59,28 @@ class OptionsService
 
         $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000200);
 
-        if ($opt->getReadOnly()) {
-            return $opt->getDefaultValue();
-        }
-
+        // najprej preveri ali je opcija uporabniško nastavljiva
         if ($opt->getPerUser()) {
-
-            $auth = $this->getAuth();
-            if ($auth->hasIdentity()) {
-                $ident    = $auth->getIdentity();
-                $userOpts = $valRep->findOneBy([
-                    'user'   => $ident->getId()
-                    , 'name'   => $name
-                    , 'global' => false
-                ]);
-                if ($userOpts) {
-                    return $userOpts->getValue();
-                }
+            //  s katerim uporabniškim imenom je uporabnik prijavljen
+            $username = $this->getUsername();
+            $optValue = $em->getRepository('App\Entity\OptionValue')
+                    ->getOptionValuesUserValue($opt->getName(), $username);
+            if (!empty($optValue)) {
+                return $optValue;
             }
         }
 
-        // imeti mora globalno nastavitev v OptionValue
-        $globalOpts = $valRep->findOneBy([
-            'name'   => $name
-            , 'global' => true
-        ]);
-
-        if ($globalOpts) {
-            return $globalOpts->getValue();
-        } else {
-            return $opt->getDefaultValue();
+        // preveri, če ima globalno opcijo
+        if (!$opt->getReadOnly()) {
+            $optValue = $em->getRepository('App\Entity\OptionValue')
+                    ->getOptionValuesGlobalValue($opt->getName());
+            if (!empty($optValue)) {
+                return $optValue;
+            }
         }
+                
+        // če nima niti uporabniške niti globalne nastavitve
+        return $opt->getDefaultValue();
     }
 
     public function getOptionsWithFlags($name)
