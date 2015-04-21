@@ -224,13 +224,13 @@ class PostniNaslov
         return $this;
     }
 
-    public function setPopa(\Max\Entity\Popa $popa = null)
+    public function setPopa(\App\Entity\Popa $popa = null)
     {
         $this->popa = $popa;
         return $this;
     }
 
-    public function setOseba(\Max\Entity\Oseba $oseba = null)
+    public function setOseba(\App\Entity\Oseba $oseba = null)
     {
         $this->oseba = $oseba;
         return $this;

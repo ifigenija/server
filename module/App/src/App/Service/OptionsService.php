@@ -104,13 +104,13 @@ class OptionsService
         $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000201);
 
         if ($opt->getReadOnly()) {
-        // preveri, če ima globalno opcijo
+            // preveri, če ima globalno opcijo
             $this->expect($opt, 'Opcija ni globalna ' . $name, 1000202);
         }
 
-        $optValR == $em->getRepository('App\Entity\OptionValue');
-        $globalValue = $optValR->getOptionValuesGlobalValue($name);
-        if (empty($globalValue)) {
+        $optValR = $em->getRepository('App\Entity\OptionValue');
+        $globalValueId = $optValR->getOptionValuesGlobalId($name);
+        if (empty($globalValueId)) {
             // kreiramo nov zapis v OptionValue
             $optVal = new OptionValue();
             $optVal->setValue($value);
@@ -118,8 +118,8 @@ class OptionsService
             $optVal->addOption($opt);
         } else {
             // le zamenjamo vrednost
-            $optVal = $optValR->findOneByName($name);
-            $optVal-> setValue($value);
+            $optVal = $optValR->findOneById($globalValueId);
+            $optVal->setValue($value);
         }
         $em->persist($optVal);  // $$ ali je lahko več persistov pred flush-em?
         $em->flush();

@@ -10,3 +10,4 @@ autoload_classmap.php
 .DS_Store
 /data/
 /bin/dumpStage.sh
+q

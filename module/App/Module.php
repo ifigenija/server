@@ -79,7 +79,7 @@ class Module
         $identity = $auth->getIdentity();
         // $identity = $this->setConsoleAuthorization($authService, $em);
         $evm      = $em->getEventManager();
-        $evm->addEventSubscriber(new RevisionsListener($sm, $identity));
+    //    $evm->addEventSubscriber(new RevisionsListener($sm, $identity));
 
         $config = $sm->get('entity.metadata.factory')->getAllEntityConfig();
         $evm->addEventSubscriber(new PrePersistListener($config));
