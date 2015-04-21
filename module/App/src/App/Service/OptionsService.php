@@ -54,10 +54,9 @@ class OptionsService
         $rep    = $em->getRepository('App\Entity\Option');
         $valRep = $em->getRepository('App\Entity\OptionValue');
 
-        /* @var $opt \App\Entity\Option */
         $opt = $rep->findOneByName($name);
 
-        $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000200);
+        $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000403);
 
         // najprej preveri ali je opcija uporabniško nastavljiva
         if ($opt->getPerUser()) {
@@ -85,13 +84,63 @@ class OptionsService
 
     /**
      * 
-     * Nastavi globalno opcijo v OptionValue entiteti
+     * Nastavi uporabniško opcijo v OptionValue entiteti
+     * 
+     * @param type $name    Ime opcij
+     * @param type $value   vrednost, ki jo vstavi
+     * @return boolean
+     */
+    public function setUserOption($name, $value)
+    {
+        $em  = $this->getEm();
+        $rep = $em->getRepository('App\Entity\Option');
+
+        /* @var $opt \App\Entity\Option */
+        $opt = $rep->findOneByName($name);
+
+        $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000404);
+
+        if ($opt->getReadOnly()) {
+            // preveri, če ima globalno opcijo
+            $this->expect($opt, 'Opcija ni globalna ' . $name, 1000405);
+        }
+        if (!$opt->getPerUser()) {
+            // preveri, če je opcije uporabniško nastavljiva
+            $this->expect($opt, 'Opcija ni uporabniško nastavljiva ' . $name, 1000406);
+        }
+
+        $username = $this->getUsername();
+
+        $optValR    = $em->getRepository('App\Entity\OptionValue');
+        $optValueId = $optValR->getOptionValuesUserId($name, $username);
+        if (empty($globalValueId)) {
+            // kreiramo nov zapis v OptionValue
+            $optVal = new OptionValue();
+            $optVal->setValue($value);
+            $optVal->setGlobal(false);
+            $optVal->addOption($opt);
+            $user   = $em->getRepository('Aaa\Entity\User')->findOneByUsername($username);
+            $optVal->addUser($user);
+        } else {
+            // le zamenjamo vrednost
+            $optVal = $optValR->findOneById($optValueId);
+            $optVal->setValue($value);
+        }
+        $em->persist($optVal);
+        $em->flush();
+
+        return true;
+    }
+
+    /**
+     * 
+     * Nastavi uporabniško opcijo v OptionValue entiteti
      * 
      * param type $value   vrednost, ki jo vstavi
      * 
      * @param type $name    Ime opcij
      * @param type $value   vrednost, ki jo vstavi
-     * @return boolean
+     * @return boolean   
      */
     public function setGlobalOption($name, $value)
     {
@@ -101,14 +150,14 @@ class OptionsService
         /* @var $opt \App\Entity\Option */
         $opt = $rep->findOneByName($name);
 
-        $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000201);
+        $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000401);
 
         if ($opt->getReadOnly()) {
-            // preveri, če ima globalno opcijo
-            $this->expect($opt, 'Opcija ni globalna ' . $name, 1000202);
+            // preveri, če ima globalno opcijo 
+            $this->expect($opt, 'Opcija ni globalna ' . $name, 1000402);
         }
 
-        $optValR = $em->getRepository('App\Entity\OptionValue');
+        $optValR       = $em->getRepository('App\Entity\OptionValue');
         $globalValueId = $optValR->getOptionValuesGlobalId($name);
         if (empty($globalValueId)) {
             // kreiramo nov zapis v OptionValue
