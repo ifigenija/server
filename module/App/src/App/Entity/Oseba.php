@@ -162,6 +162,11 @@ class Oseba
      */
     private $sodelovanja;
 
+    /**
+     * 
+     * 
+     * @param string $mode
+     */
     public function validate($mode = 'update')
     {
         $this->expect($this->ime, "Ime je obvezen podatek", 1000301);

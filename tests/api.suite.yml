@@ -10,9 +10,9 @@ modules:
             populate: true
             cleanup: false
         PhpBrowser:
-            url: http://127.0.0.1:8008
+            url: http://ifigenija.local:8080
         REST:
-            url: http://127.0.0.1:8008
+            url: http://ifigenija.local:8080
 env:
     xdbg: 
         modules:

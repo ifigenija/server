@@ -57,7 +57,8 @@ class Trr
     
     public function validate($mode = 'update')
     {
-        $this->expect($this->popa || $this->oseba, 'Lastnik računa ni nastavljen - Poslovni partner ali oseba', 1000200);
+        $this->expect($this->popa || $this->oseba, 'Lastnik računa ni nastavljen - Poslovni partner ali oseba', 1000200);        
+        $this->expect(!($this->popa && $this->oseba), "Lastnika računa je lahko samo poslovni partner ali oseba", 1000203);
         $this->expect($this->banka, "Banka je obvezen podatek na računu", 1000201);
         $this->expect($this->stevilka, "Številka računa je obvezen podatek", 1000202);
                 

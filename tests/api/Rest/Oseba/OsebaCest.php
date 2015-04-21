@@ -39,7 +39,11 @@ class OsebaCest
         
     }
 
-    // napolnimo vsaj en zapis
+    /**
+     *  napolnimo vsaj en zapis
+     * 
+     * @param ApiTester $I
+     */
     public function create(ApiTester $I)
     {
         $data      = [
