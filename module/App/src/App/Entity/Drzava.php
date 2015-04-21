@@ -23,7 +23,7 @@ class Drzava
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
      * @Max\Ui(type="id")
-     * @Max\I18n(label="ID države", hint="ID države", description="ID države")
+     * @Max\I18n(label="ID države",  description="ID države")
      * @var string
      */
     protected $id;
@@ -32,7 +32,7 @@ class Drzava
      * Šifra države
      * @ORM\Column(unique=true, length=2, nullable=true)
      * @var string
-     * @Max\I18n(label="Koda države",hint="ISO koda države")
+     * @Max\I18n(label="Koda države",description="ISO koda države")
      * @Max\Ui(type="sifra",class="sifra",icon="fa fa-flag",ident=true)
      */
     protected $sifra;
@@ -41,7 +41,7 @@ class Drzava
      * Trimestna iso koda drzave
      * @ORM\Column(unique=true, length=3, nullable=true)
      * @var string
-     * @Max\I18n(label="Trimestna koda",hint="Trimestna ISO koda države")
+     * @Max\I18n(label="Trimestna koda",description="Trimestna ISO koda države")
      * @Max\Ui(type="sifra",class="sifra",icon="fa fa-flag", required=true)
      */
     protected $sifraDolg;
@@ -50,7 +50,7 @@ class Drzava
      * Številčna iso koda drzave
      * @ORM\Column(unique=true, length=3, nullable=true)
      * @var string
-     * @Max\I18n(label="Številčna koda",hint="Trimestna ISO številčna koda države")
+     * @Max\I18n(label="Številčna koda",description="Trimestna ISO številčna koda države")
      * @Max\Ui(class="sifra",icon="fa fa-flag", required=true)
      */
     protected $isoNum;
@@ -58,7 +58,7 @@ class Drzava
     /**
      * Iso Naziv države
      * @ORM\Column(unique=true, length=50, nullable=true)
-     * @Max\I18n(label="Iso Naziv",hint="ISO Naziv države")
+     * @Max\I18n(label="Iso Naziv",description="ISO Naziv države")
      * @var string
      */
     protected $isoNaziv;
@@ -66,7 +66,7 @@ class Drzava
     /**
      * Naziv države
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="Naziv",hint="Naziv države")
+     * @Max\I18n(label="Naziv",description="Naziv države")
      * @var string
      */
     protected $naziv;
@@ -74,7 +74,7 @@ class Drzava
     /**
      * Naziv države
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="Opomba",hint="Opis")
+     * @Max\I18n(label="Opomba",description="Opis")
      * @var string
      */
     protected $opomba;

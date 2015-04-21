@@ -5,7 +5,15 @@ entityClass: App\Entity\PostniNaslov
 forms:
     default: 
         elements:
+            - popa
+            - oseba
             - naziv
-            - nazivDva
+            - ulica
+            - ulicaDva
+            - posta
+            - pokrajina
+            - drzava
+            - jeeu
+            - privzeti
 
                 

@@ -161,8 +161,8 @@ class JsonForm
 
         $field->type = self::filterType($type);
 
-        if (isset($opts['hint']) || isset($opts['description'])) {
-            $field->help = $opts['description'] ? : $opts['hint'];
+        if (isset($opts['description'])) {
+            $field->help = $opts['description'] ;
         } else {
             $field->help = "";
         }
@@ -474,7 +474,6 @@ class JsonForm
             }
         }
 
-        $options = $this->addOptionIf($options, 'hint', $this->getHintFromMeta($name));
         $options = $this->addOptionIf($options, 'label', $this->getLabelFromMeta($name));
         $options = $this->addOptionIf($options, 'description', $this->getDescriptionFromMeta($name));
         $options = $this->addOptionIf($options, 'prependIcon', $this->getUiIconFromMeta($name));
@@ -512,21 +511,7 @@ class JsonForm
         return $arr;
     }
 
-    /**
-     * Potegne hint iz metapodatkov
-     *
-     * @param string $name
-     * @return string null
-     */
-    public function getHintFromMeta($name)
-    {
-        $str = $this->metadata->getFieldI18n($name);
-        if ($str) {
-            return $str->hint;
-        } else {
-            return null;
-        }
-    }
+
 
     /**
      * Potegne label iz metapodatkov

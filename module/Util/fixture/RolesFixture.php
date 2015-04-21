@@ -32,18 +32,17 @@ class OptionsFixture
 
     public function load(ObjectManager $manager)
     {
-        $modules = ['Aaa', 'App'];
 
 
         echo "Nalagam - dovoljenja" . PHP_EOL;
-        $res = $this->getData($modules, 'permissions');
+        $res = $this->getData('permissions');
         foreach ($res as $val) {
             $this->populatePermissions($manager, $val);
         }
         $manager->flush();
         $manager->clear();
         echo "Nalagam - vloge" . PHP_EOL;
-        $res = $this->getData($modules, 'roles');
+        $res = $this->getData('roles');
         foreach ($res as $val) {
             $this->populateRole($manager, $val);
         }
@@ -51,7 +50,7 @@ class OptionsFixture
         $manager->clear();
 
         echo "Nalagam - uporabnike" . PHP_EOL;
-        $res = $this->getData($modules, 'users');
+        $res = $this->getData('users');
         foreach ($res as $val) {
             $this->populateUser($manager, $val);
         }
@@ -60,7 +59,7 @@ class OptionsFixture
 
         // opcije je potrebno naložiti za uporabniki
         echo "Nalagam - opcije" . PHP_EOL;
-        $res = $this->getData($modules, 'options');
+        $res = $this->getData('options');
         foreach ($res as $val) {
             $this->populateOptions($manager, $val);
         }
@@ -95,11 +94,15 @@ class OptionsFixture
         }
     }
 
-    public function getData($modules, $entity)
+    public function getData($entity)
     {
+        
+        $pattern =  'module/*/fixture/' . $entity . '.yml';
+
+        $files = glob($pattern);
+        
         $data = [];
-        foreach ($modules as $module) {
-            $f = 'module/' . $module . '/fixture/' . $entity . '.yml';
+        foreach ($files as $f) {
             if (file_exists($f)) {
                 $file = file_get_contents($f);
 

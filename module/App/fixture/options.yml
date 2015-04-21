@@ -1,38 +1,42 @@
 -
-    name: privzetInspicient
-    description: 'Privzeti inspicient'
-    type: entity
-    readOnly: true
-    perUser: false
-    targetEntity: \Sodelavci\Entity\Sodelavec
--
-    name: dogodek-status
-    type: array
-    readOnly: true
-    public: true
-    description: 'Tabela statusa dogodkov'
-    defaultValue: [{ key: planiran, value: Dolgoročno }, { key: planiran, value: Planiran }]
--
-    name: popa.Maxkli
+    name: popa.tipkli
     type: array
     public: false
     readOnly: true
     description: 'Tip poslovnega partnerja'
-    defaultValue: [{ key: 1, value: odprt }, { key: 2, value: zaprt }, { key: 3, value: blabla }]
+    defaultValue: 
+        - { key: dobavitelj, value: Dobavitelj }
+        - { key: kupec, value: Kupec }
+        - { key: koproducent, value: Koproducent }
+        - { key: multi, value: Več vlog }
 -
     name: popa.stakli
     type: array
     public: false
     readOnly: true
     description: 'Status poslovnega partnerja'
-    defaultValue: [{ key: AK, value: aktiven }, { key: NA, value: neaktiven }]
+    defaultValue: 
+        - { key: AK, value: aktiven }
+        - { key: NA, value: neaktiven }
 -
     name: oseba.spol
     type: array
     public: false
     readOnly: true
-    description: 'spol osebe'
-    defaultValue: [{ key: M, value: moški }, { key: Ž, value: ženska }]
+    description: 'Spol osebe'
+    defaultValue: 
+        - { key: M, value: Moški }
+        - { key: Z, value: Ženska }
+-
+    name: telefonska.vrsta
+    type: array
+    public: false
+    readOnly: true
+    description: 'Vrsta telefonske številke'
+    defaultValue: 
+        -  {key: mobilna, value: Mobilni } 
+        -  {key: domaca, value: Domač }
+        -  {key: fiksna, value: Fiksni }
 -
     name: test1.barva.ozadja
     type: array
@@ -40,10 +44,12 @@
     readOnly: false
     perUser: true
     description: 'barva ozadja'
-    defaultValue: [{ key: b, value: bela }]
+    defaultValue: 
+        - { key: b, value: bela }
     optionValue:
         global:
-            value: [{ key: m, value: modra }]
+            value: 
+                - { key: m, value: modra }
         user: 
             - 
                 username: anonymous

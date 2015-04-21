@@ -33,7 +33,7 @@ class User
      * @ORM\Column(type="guid");
      * @ORM\GeneratedValue(strategy="NONE")
      *
-     * @Max\I18n(label="ID", hint="ID uporabnika", description="ID uporabnika")
+     * @Max\I18n(label="ID",  description="ID uporabnika")
      * @Max\Ui(type="id")
      */
     protected $id;
@@ -49,7 +49,7 @@ class User
      * @ORM\Column(unique=true, length=10, nullable=false)
      * @var string
      *
-     * @Max\I18n(label="Uporabniško ime", hint="Uporabniško ime", description="Uporabniško ime")
+     * @Max\I18n(label="Uporabniško ime",  description="Uporabniško ime")
      * @Max\Ui(group="Login", type="naziv", ident=true)
      */
     protected $username;
@@ -59,7 +59,7 @@ class User
      *
      * @ORM\Column(length=90, nullable=true)
      *
-     * @Max\I18n(label="Geslo", hint="Geslo", description="Geslo")
+     * @Max\I18n(label="Geslo",  description="Geslo")
      * @Max\Ui(group="Login", type="password")
      * @Max\Tracking(log=false)
      */
@@ -69,7 +69,7 @@ class User
      * Uporabnik omogočen/onemogočen
      *
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="Aktiven", hint="Uporabnik aktiven (D/N)", description="Uporabnik aktiven")
+     * @Max\I18n(label="Aktiven",  description="Uporabnik aktiven")
      * @Max\Ui(type="checkbox", group="Uporabnik")
      */
     protected $enabled;
@@ -80,7 +80,7 @@ class User
      *  Uporabljeno za določitev dostopov
      *
      *      
-     * @Max\I18n(label="Vloge", hint="ID-ji Skupin", description="Skupine, katerih član je uporabnik")
+     * @Max\I18n(label="Vloge",  description="Skupine, katerih član je uporabnik")
      * @Max\UI(group="Vloge")
      * @ORM\ManyToMany(targetEntity="Aaa\Entity\Role", inversedBy="users")
      * @ORM\JoinTable(
@@ -106,14 +106,14 @@ class User
      * Začetna pot za uporabnika
      *
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="Privzeta pot ob prijavi", hint="Route ali prazno ('home')", description="Privzeta pot v aplikaciji po prijavi")
+     * @Max\I18n(label="Privzeta pot ob prijavi",  description="Privzeta pot v aplikaciji po prijavi")
      * @Max\Ui(group="Zagon", type="text")
      */
     protected $defaultRoute;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="Parametri za pot", hint="param=>vrednost ali prazno", description="Parametri za privzeto pot v aplikaciji po prijavi")
+     * @Max\I18n(label="Parametri za pot",  description="Parametri za privzeto pot v aplikaciji po prijavi")
      * @Max\Ui(group="Zagon", type="textarea")
      */
     protected $defaultRouteParams;

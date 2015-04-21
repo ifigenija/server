@@ -7,34 +7,17 @@ disabledMethods:
 entityClass: App\Entity\Drzava
 forms:
     default: 
-#        perm: Drzava-list
-        hydrator:    
-            exclude:
         elements:
             - sifra            
-            - name: sifraDolg
-              options: 
-                  required: true                                   
+            - sifDolg                               
             - isoNum
             - isoNaziv
             - naziv
             - opomba
 lists:
     default:      
-        disabledMethods: 
-#            - list
-            - update
-        filter:
-                       
+        filter:                       
         sort: 
-       
-        hydrator:
-#            byValue:
-#                - 
-#            virtual:
-#    
-#            exclude:            
-#                    
 hydrator:
     exclude: 
         - opomba
