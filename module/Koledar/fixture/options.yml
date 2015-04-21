@@ -1,0 +1,10 @@
+## YAML Template.
+---
+-
+    name: dogodek.status
+    type: array
+    public: true
+    description: 'Tabela statusa dogodkov'
+    defaultValue: 
+        - { key: planiran, value: Dolgoročno }
+        - { key: planiran, value: Planiran }
