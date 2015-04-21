@@ -89,7 +89,7 @@ class OptionValues
      * @param type $username  uprabniško ime
      * @return  Id ali null
      */
-    public function getOptionValuesUserValue($optname, $username)
+    public function getOptionValuesUserId($optname, $username)
     {
         $dql    = "SELECT v,o,u FROM App\Entity\OptionValue v JOIN v.option o JOIN v.user u" .
                 " WHERE v.global = false  AND  o.name='$optname' and u.username='$username' ";
