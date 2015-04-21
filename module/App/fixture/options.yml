@@ -63,7 +63,8 @@
                 username: admin
                 value: [{ key: r, value: rumena }]
                 
-#           za test - globalna vrednost, nima user opcije 
+#           za teste- globalna vrednost, nima user opcije 
+#           ne spreminjaj vrednosti
 -
     name: test2.glob
     type: array
@@ -74,14 +75,16 @@
     defaultValue: [{ key: d, value: defaultna  }]
     optionValue:
         global:
-            value: [{ key: g, value: globalna }]
+            value: 
+                - { key: g, value: globalna }
             
-#            za test - le defaultna vrednost - nima globalne ali user vrednosti
+#            za test - le defaultna vrednost - nima globalne ali user vrednosti,
 -
-    name: test3.user
+    name: test3.readonly
     type: array
     public: false
-    readOnly: false
-    perUser: true
-    description: 'test2 le globalna vrednost'
-    defaultValue: [{ key: sadje, value: jabolko  }]
+    readOnly: true
+    perUser: false
+    description: 'test3 le privzeta vrednost'
+    defaultValue: 
+            - privzeta trojka
