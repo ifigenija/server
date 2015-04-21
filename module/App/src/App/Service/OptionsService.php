@@ -49,11 +49,12 @@ class OptionsService
      */
     public function getOptions($name)
     {
-        $em = $this->getEm();
+         $em = $this->getEm();
 
         $rep    = $em->getRepository('App\Entity\Option');
         $valRep = $em->getRepository('App\Entity\OptionValue');
 
+        /* @var $opt \App\Entity\Option */
         $opt = $rep->findOneByName($name);
 
         $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000403);
