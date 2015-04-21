@@ -8,6 +8,8 @@
 
 namespace App\Service;
 
+use App\Entity\OptionValue;
+
 /**
  * 
  * Ponuja vmesnik do nastavitev aplikacije 
@@ -49,7 +51,7 @@ class OptionsService
      */
     public function getOptions($name)
     {
-         $em = $this->getEm();
+        $em = $this->getEm();
 
         $rep    = $em->getRepository('App\Entity\Option');
         $valRep = $em->getRepository('App\Entity\OptionValue');
@@ -153,10 +155,8 @@ class OptionsService
 
         $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000401);
 
-        if ($opt->getReadOnly()) {
-            // preveri, če ima globalno opcijo 
-            $this->expect($opt, 'Opcija ni globalna ' . $name, 1000402);
-        }
+        // preveri, če ima globalno opcijo 
+        $this->expect(!$opt->getReadOnly(), 'Opcija ni globalna ' . $name, 1000402);
 
         $optValR       = $em->getRepository('App\Entity\OptionValue');
         $globalValueId = $optValR->getOptionValuesGlobalId($name);
