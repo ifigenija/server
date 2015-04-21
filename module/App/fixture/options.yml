@@ -37,6 +37,8 @@
         -  {key: mobilna, value: Mobilni } 
         -  {key: domaca, value: Domač }
         -  {key: fiksna, value: Fiksni }
+
+#       za test; ima vse 3 vrednosti : defaultno, globalno in uporabniško
 -
     name: test1.barva.ozadja
     type: array
@@ -61,7 +63,7 @@
                 username: admin
                 value: [{ key: r, value: rumena }]
                 
-#           za test - le globalna vrednost
+#           za test - globalna vrednost, nima user opcije 
 -
     name: test2.glob
     type: array
@@ -73,3 +75,13 @@
     optionValue:
         global:
             value: [{ key: g, value: globalna }]
+            
+#            za test - le defaultna vrednost - nima globalne ali user vrednosti
+-
+    name: test3.user
+    type: array
+    public: false
+    readOnly: false
+    perUser: true
+    description: 'test2 le globalna vrednost'
+    defaultValue: [{ key: sadje, value: jabolko  }]

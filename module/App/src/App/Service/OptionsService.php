@@ -114,7 +114,7 @@ class OptionsService
 
         $optValR    = $em->getRepository('App\Entity\OptionValue');
         $optValueId = $optValR->getOptionValuesUserId($name, $username);
-        if (empty($globalValueId)) {
+        if (empty($optValueId)) {
             // kreiramo nov zapis v OptionValue
             $optVal = new OptionValue();
             $optVal->setValue($value);
