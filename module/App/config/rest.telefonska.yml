@@ -5,6 +5,8 @@ entityClass: App\Entity\Telefonska
 forms:
     default: 
         elements:
+            - popa
+            - oseba
             - vrsta
             - stevilka
             - privzeta

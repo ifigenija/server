@@ -52,7 +52,7 @@ class Permission
      * A je dovoljene vgrajeno v sistem, ali pa dodano kasneje.
      * @ORM\Column(type="boolean", nullable=true)
      *
-     * @Max\I18n(label="Vgrajeno", hint="Dovoljene, ki pride z namestitvijo sistema")
+     * @Max\I18n(label="Vgrajeno", description="Dovoljene, ki pride z namestitvijo sistema")
      */
     protected $builtIn = false;
 

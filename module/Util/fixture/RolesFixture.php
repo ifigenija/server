@@ -32,18 +32,17 @@ class OptionsFixture
 
     public function load(ObjectManager $manager)
     {
-        $modules = ['Aaa', 'App'];
 
 
         echo "Nalagam - dovoljenja" . PHP_EOL;
-        $res = $this->getData($modules, 'permissions');
+        $res = $this->getData('permissions');
         foreach ($res as $val) {
             $this->populatePermissions($manager, $val);
         }
         $manager->flush();
         $manager->clear();
         echo "Nalagam - vloge" . PHP_EOL;
-        $res = $this->getData($modules, 'roles');
+        $res = $this->getData('roles');
         foreach ($res as $val) {
             $this->populateRole($manager, $val);
         }
@@ -51,7 +50,7 @@ class OptionsFixture
         $manager->clear();
 
         echo "Nalagam - uporabnike" . PHP_EOL;
-        $res = $this->getData($modules, 'users');
+        $res = $this->getData('users');
         foreach ($res as $val) {
             $this->populateUser($manager, $val);
         }
@@ -60,7 +59,7 @@ class OptionsFixture
 
         // opcije je potrebno naložiti za uporabniki
         echo "Nalagam - opcije" . PHP_EOL;
-        $res = $this->getData($modules, 'options');
+        $res = $this->getData('options');
         foreach ($res as $val) {
             $this->populateOptions($manager, $val);
         }
@@ -95,11 +94,15 @@ class OptionsFixture
         }
     }
 
-    public function getData($modules, $entity)
+    public function getData($entity)
     {
+        
+        $pattern =  'module/*/fixture/' . $entity . '.yml';
+
+        $files = glob($pattern);
+        
         $data = [];
-        foreach ($modules as $module) {
-            $f = 'module/' . $module . '/fixture/' . $entity . '.yml';
+        foreach ($files as $f) {
             if (file_exists($f)) {
                 $file = file_get_contents($f);
 
@@ -168,7 +171,6 @@ class OptionsFixture
                 $u = $em->getRepository('Aaa\Entity\User')
                         ->findOneByUsername($user['username']);
                 $this->expect($u, "Ni tega uporabnika", 1000300); // $$ rb potrebno še implementirati trnsl 
-
                 // ali obstajajo  opcije userja
                 $optValA = $em->getRepository('App\Entity\OptionValue')
                         ->getOptionValuesUserArray($val['name'], $user['username']);
@@ -181,7 +183,7 @@ class OptionsFixture
                     $optVal->addUser($u);
                     $em->persist($optVal);  // $$ ali je lahko več persistov pred flush-em?
                 }
-                    echo "     opt val: " . $user['value'][0]['key'] . " " . $user['value'][0]['value'] . PHP_EOL;
+                echo "     opt val: " . $user['value'][0]['key'] . " " . $user['value'][0]['value'] . PHP_EOL;
             }
         }
     }

@@ -23,15 +23,14 @@ class I18n {
      */
     public $plural = '';
 
-    /**
-     * @var string
-     */
-    public $hint = '';
 
     /**
      * @var string
      */
     public $description = '';
+    
+    
+    
 
 }
 

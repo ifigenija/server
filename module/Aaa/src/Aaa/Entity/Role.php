@@ -24,7 +24,7 @@ class Role
      * @ORM\Column(type="guid");
      * @ORM\GeneratedValue(strategy="NONE")
      *
-     * @Max\I18n(label="ID", hint="ID vloge", description="ID vloge")
+     * @Max\I18n(label="ID",  description="ID vloge")
      * @Max\Ui(type="id")
      */
     protected $id;
@@ -32,7 +32,7 @@ class Role
     /**
      * @ORM\Column(unique=true, length=150, nullable=true)
      *
-     * @Max\I18n(label="Naziv", hint="Naziv vloge")
+     * @Max\I18n(label="Naziv", description="Naziv vloge")
      * @Max\Ui(type="sifra", group="Vloga",ident=true)
      */
     protected $name;
@@ -40,7 +40,7 @@ class Role
     /**
      * @ORM\Column(type="text", nullable=true)
      *
-     * @Max\I18n(label="Opis", hint="Opis vloge")
+     * @Max\I18n(label="Opis", description="Opis vloge")
      * @Max\Ui(type="naziv", group="Vloga")
      */
     protected $description = '';
@@ -49,13 +49,13 @@ class Role
      * A je vloga vgrajena v sistem, ali pa dodana na user instalaciji.
      * @ORM\Column(type="boolean", nullable=true)
      *
-     * @Max\I18n(label="Vgrajena", hint="Vloga, ki pride z namestitvijo sistema")
+     * @Max\I18n(label="Vgrajena", description="Vloga, ki pride z namestitvijo sistema")
      */
     protected $builtIn = false;
 
     /**
      * 
-     * @Max\I18n(label="Dovoljenja", hint="Dovoljenja")
+     * @Max\I18n(label="Dovoljenja", description="Dovoljenja")
      * @Max\Ui(type="list")
      * @ORM\ManyToMany(targetEntity="Aaa\Entity\Permission", inversedBy="roles")
      * @ORM\JoinTable(
@@ -69,7 +69,7 @@ class Role
     /**
      * 
      *
-     * @Max\I18n(label="Uporabniki", hint="Uporabniki, ki s to vlogo")
+     * @Max\I18n(label="Uporabniki", description="Uporabniki, ki s to vlogo")
      * @ORM\ManyToMany(targetEntity="Aaa\Entity\User", mappedBy="roles")
      * 
      * 

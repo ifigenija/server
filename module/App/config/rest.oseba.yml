@@ -14,8 +14,17 @@ forms:
             - datumRojstva      
             - emso      
             - davcna      
-            - spol      
+#            - spol      
             - opombe      
             - drzavljanstvo      
             - drzavaRojstva      
             - krajRojstva           
+lists:
+    full: 
+        hydrator: 
+            - byValue: [trrji, naslovi, telefonske]
+    default: 
+        hydrator:
+            - byValue: [telefonske, naslovi]
+            - exclude: [trrji, datumRojstva, emso, davcna, drzavljanstvo, krajRojstva]
+hydrator:             

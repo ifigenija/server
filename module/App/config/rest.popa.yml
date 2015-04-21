@@ -6,18 +6,16 @@ forms:
     default: 
         elements:
             - sifra 
-#            - tipkli  
-#            - stakli  
+            - tipkli  
+            - stakli  
             - naziv 
-#            - naziv1 
+            - naziv1 
             - panoga  
-#            - email  
-#            - url  
-#            - opomba  
-#            - idddv  
-#            - maticna  
-#            - zavezanec  
-#            - jeeu  
-#            - datZav             
-#            - datnZav  
-#            - zamejstvo  
+            - email  
+            - url  
+            - opomba  
+            - idddv  
+            - maticna  
+            - zavezanec  
+            - jeeu  
+            - zamejstvo  

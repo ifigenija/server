@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM,
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Osebe")
- * @ORM\Table(name="kose")
  * @Max\I18n(label="Kontaktna oseba",plural="Kontaktne osebe")
  * @Max\Id(prefix="0003")
  */
@@ -34,7 +33,7 @@ class Oseba
      * @var Popa
      *
      * @Max\Ui(type="toone")
-     * @Max\I18n(label="Klient", hint="ID klienta", description="Poslovni partner od katerega je kontaktna oseba")
+     * @Max\I18n(label="Klient",  description="Poslovni partner od katerega je kontaktna oseba")
      * @ORM\ManyToMany(targetEntity="App\Entity\Popa", mappedBy="osebe")
      */
     protected $popa;
@@ -46,40 +45,39 @@ class Oseba
      *
      * @ORM\Column(length=40, nullable=true)
      *
-     * @Max\I18n(label="Naziv", description="Naziv kontaktne osebe")
+     * @Max\I18n(label="Naziv", description="Naziv osebe  (g., dr., ga, prof.dr.) ")
      * @Max\Ui(ident=true)
      */
     protected $naziv;
 
     /**
-     * @ORM\Column(nullable=true)
+     * @ORM\Column()
      */
     private $ime;
 
     /**
-     * @ORM\Column(nullable=true)
+     * @ORM\Column()
      */
     private $priimek;
 
     /**
      * @ORM\Column(nullable=true)
      */
-    private $pesvdonim;
+    private $srednjeIme;
 
     /**
-     * @ORM\Column(length=40, nullable=true)
+     * @ORM\Column(nullable=true)
      */
-    private $funkcija;
+    private $psevdonim;
 
     /**
      * Naslov kontaktne osebe
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
-     * @ORM\JoinColumn(name="naslov_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="oseba")
      *
-     * @Max\Ui(targetEntity="Max\Entity\PostniNaslov",type="addresslookup", master="popa")
+     * @Max\Ui(targetEntity="Max\Entity\PostniNaslov", master="oseba")
      */
-    protected $naslov;
+    protected $naslovi;
 
     /**
      * Elektronski naslov
@@ -164,234 +162,274 @@ class Oseba
      */
     private $sodelovanja;
 
-    function getId()
+    public function validate($mode = 'update')
+    {
+        $this->expect($this->ime, "Ime je obvezen podatek", 1000301);
+        $this->expect($this->priimek, "Priimek je obvezen podatek", 1000302);
+    }
+
+    /**
+     * Vrne polno ime Osebe. Uporablja se za prikaze v seznamih 
+     * 
+     * @return type
+     */
+    function getPolnoIme()
+    {
+        return sprintf("%s %s %s", $this->ime, $this->srednjeIme, $this->priimek);
+    }
+
+    public function getId()
     {
         return $this->id;
     }
 
-    function getPopa()
+    public function getPopa()
     {
         return $this->popa;
     }
 
-    function getNaziv()
+    public function getNaziv()
     {
         return $this->naziv;
     }
 
-    function getIme()
+    public function getIme()
     {
         return $this->ime;
     }
 
-    function getPriimek()
+    public function getPriimek()
     {
         return $this->priimek;
     }
 
-    function getPesvdonim()
+    public function getSrednjeIme()
     {
-        return $this->pesvdonim;
+        return $this->srednjeIme;
     }
 
-    function getFunkcija()
+    public function getPsevdonim()
     {
-        return $this->funkcija;
+        return $this->psevdonim;
     }
 
-    function getNaslov()
+    public function getNaslov()
     {
         return $this->naslov;
     }
 
-    function getEmail()
+    public function getEmail()
     {
         return $this->email;
     }
 
-    function getDatumRojstva()
+    public function getDatumRojstva()
     {
         return $this->datumRojstva;
     }
 
-    function getEmso()
+    public function getEmso()
     {
         return $this->emso;
     }
 
-    function getDavcna()
+    public function getDavcna()
     {
         return $this->davcna;
     }
 
-    function getSpol()
+    public function getSpol()
     {
         return $this->spol;
     }
 
-    function getOpombe()
+    public function getOpombe()
     {
         return $this->opombe;
     }
 
-    function getDrzavljanstvo()
+    public function getDrzavljanstvo()
     {
         return $this->drzavljanstvo;
     }
 
-    function getDrzavaRojstva()
+    public function getDrzavaRojstva()
     {
         return $this->drzavaRojstva;
     }
 
-    function getKrajRojstva()
+    public function getKrajRojstva()
     {
         return $this->krajRojstva;
     }
 
-    function getUser()
+    public function getUser()
     {
         return $this->user;
     }
 
-    function getTelefonske()
+    public function getTelefonske()
     {
         return $this->telefonske;
     }
 
-    function getTrrji()
+    public function getTrrji()
     {
         return $this->trrji;
     }
 
-    function getAlternacije()
+    public function getAlternacije()
     {
         return $this->alternacije;
     }
 
-    function getPogodbe()
+    public function getPogodbe()
     {
         return $this->pogodbe;
     }
 
-    function getSodelovanja()
+    public function getSodelovanja()
     {
         return $this->sodelovanja;
     }
 
-    function setId($id)
+    public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
-    function setPopa(Popa $popa)
+    public function setPopa(Popa $popa)
     {
         $this->popa = $popa;
+        return $this;
     }
 
-    function setNaziv($naziv)
+    public function setNaziv($naziv)
     {
         $this->naziv = $naziv;
+        return $this;
     }
 
-    function setIme($ime)
+    public function setIme($ime)
     {
         $this->ime = $ime;
+        return $this;
     }
 
-    function setPriimek($priimek)
+    public function setPriimek($priimek)
     {
         $this->priimek = $priimek;
+        return $this;
     }
 
-    function setPesvdonim($pesvdonim)
+    public function setSrednjeIme($srednjeIme)
     {
-        $this->pesvdonim = $pesvdonim;
+        $this->srednjeIme = $srednjeIme;
+        return $this;
     }
 
-    function setFunkcija($funkcija)
+    public function setPsevdonim($psevdonim)
     {
-        $this->funkcija = $funkcija;
+        $this->psevdonim = $psevdonim;
+        return $this;
     }
 
-    function setNaslov($naslov)
+    public function setNaslov($naslov)
     {
         $this->naslov = $naslov;
+        return $this;
     }
 
-    function setEmail($email)
+    public function setEmail($email)
     {
         $this->email = $email;
+        return $this;
     }
 
-    function setDatumRojstva($datumRojstva)
+    public function setDatumRojstva($datumRojstva)
     {
         $this->datumRojstva = $datumRojstva;
+        return $this;
     }
 
-    function setEmso($emso)
+    public function setEmso($emso)
     {
         $this->emso = $emso;
+        return $this;
     }
 
-    function setDavcna($davcna)
+    public function setDavcna($davcna)
     {
         $this->davcna = $davcna;
+        return $this;
     }
 
-    function setSpol($spol)
+    public function setSpol($spol)
     {
         $this->spol = $spol;
+        return $this;
     }
 
-    function setOpombe($opombe)
+    public function setOpombe($opombe)
     {
         $this->opombe = $opombe;
+        return $this;
     }
 
-    function setDrzavljanstvo($drzavljanstvo)
+    public function setDrzavljanstvo($drzavljanstvo)
     {
         $this->drzavljanstvo = $drzavljanstvo;
+        return $this;
     }
 
-    function setDrzavaRojstva($drzavaRojstva)
+    public function setDrzavaRojstva($drzavaRojstva)
     {
         $this->drzavaRojstva = $drzavaRojstva;
+        return $this;
     }
 
-    function setKrajRojstva($krajRojstva)
+    public function setKrajRojstva($krajRojstva)
     {
         $this->krajRojstva = $krajRojstva;
+        return $this;
     }
 
-    function setUser($user)
+    public function setUser($user)
     {
         $this->user = $user;
+        return $this;
     }
 
-    function setTelefonske($telefonske)
+    public function setTelefonske($telefonske)
     {
         $this->telefonske = $telefonske;
+        return $this;
     }
 
-    function setTrrji($trrji)
+    public function setTrrji($trrji)
     {
         $this->trrji = $trrji;
+        return $this;
     }
 
-    function setAlternacije($alternacije)
+    public function setAlternacije($alternacije)
     {
         $this->alternacije = $alternacije;
+        return $this;
     }
 
-    function setPogodbe($pogodbe)
+    public function setPogodbe($pogodbe)
     {
         $this->pogodbe = $pogodbe;
+        return $this;
     }
 
-    function setSodelovanja($sodelovanja)
+    public function setSodelovanja($sodelovanja)
     {
         $this->sodelovanja = $sodelovanja;
+        return $this;
     }
+
 
 }

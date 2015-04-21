@@ -65,7 +65,6 @@ class EntityToOne
     ];
     protected $validators;
 
-
     /*
      * Set options for an element. Accepted options are:
      * - label: label to associate with the element
@@ -87,7 +86,7 @@ class EntityToOne
             $this->repository          = $this->em->getRepository($this->getOption('targetEntity'));
             $this->repository->setServiceLocator($this->serviceLocator->getServiceLocator());
             $this->options['metadata'] = $this->sm
-                    ->get('enetity.metadata.factory')
+                    ->get('entity.metadata.factory')
                     ->factory($this->getOption('targetEntity'));
         }
 
@@ -148,6 +147,10 @@ class EntityToOne
         if (null === $this->validators) {
 
             $chain = new \Zend\Validator\ValidatorChain();
+            $v     = new \DoctrineModule\Validator\ObjectExists([
+                'object_repository' => $this->repository,
+                'fields'            => 'id'
+            ]);
 
             if ($this->getOption('required') !== true) {
                 $chain->addValidator(new \Zend\Validator\NotEmpty(), true);
@@ -155,10 +158,7 @@ class EntityToOne
             } else {
                 $chain->addValidator(new \Zend\Validator\Regex('/^$|[a-z0-9-]{36}/'), true);
             }
-            $v                = new \DoctrineModule\Validator\ObjectExists([
-                'object_repository' => $this->repository,
-                'fields'            => 'id'
-            ]);
+
             $chain->addValidator($v, true);
             $this->validators = $chain;
         }

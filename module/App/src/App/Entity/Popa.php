@@ -39,16 +39,14 @@ class Popa
     protected $sifra;
 
     /**
-     * Tip klienta
-     *  K-kupec
-     *  D-dobavitelj
-     *  E-evidenčni partner
-     *  K-koproducent
+     * Tip klienta - označuje vrsto poslovnega partnerja. 
+     * !!!!Sicer nima pravega pomena - mogoče za odstraniti, ker bomo 
+     * !!!!kupca tako ali tako dodali v tabelo kupcev 
      * 
-     *   $$rb: začasno sem dodal nullable = true 
-     * @ORM\Column(length=1,nullable=true)
-     * @Max\Ui(type="select",opts="popa.Maxkli",group="Osnovni podatki",required=true)
-     * @Max\I18n(label="Tip klienta", hint="K-kupec, D-dobavitelj, E-evidenčno", description="Max klienta (kupec, dobavitelj, evidenčni partner)")
+     * @ORM\Column(length=20)
+     * @Max\Ui(type="select",opts="popa.tipkli",group="Osnovni podatki",required=true)
+     * @Max\I18n(label="Tip klienta", 
+     * description="Tip klienta (kupec, dobavitelj, koproducent, )")
      * @var string
      */
     protected $tipkli;
@@ -60,7 +58,7 @@ class Popa
      *
      * @ORM\Column(length=2, nullable=true)
      * @Max\Ui(type="select",opts="popa.stakli",group="Osnovni podatki", required=true)
-     * @Max\I18n(label="Status klienta", hint="AK-aktiven, NA-neaktiven")
+     * @Max\I18n(label="Status klienta", description="AK-aktiven, NA-neaktiven")
      * @var string
      */
     protected $stakli;
@@ -84,16 +82,6 @@ class Popa
      * @var string
      */
     protected $naziv1 = '';
-
-    /**
-     * Panoga
-     *
-     * @ORM\Column(length=60, nullable=true)
-     * @Max\Ui(type="naziv",group="Osnovni podatki")
-     * @Max\I18n(label="Panoga", description="Panoga")
-     * @var string
-     */
-    protected $panoga = '';
 
     /**
      * Email naslov
@@ -130,7 +118,6 @@ class Popa
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
      * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id")
-     * $$rb echo  nullable=false
      * @Max\Ui(group="Kontaktni podatki",required=true)
      * @Max\I18n(label="Država", description="Država klienta")
      */
@@ -219,7 +206,7 @@ class Popa
      *
      * @ORM\Column(type="date", nullable=true)
      * @Max\Ui(group="Davčni podatki")
-     * @Max\I18n(label="Zavezanec za DDV od", hint="Datum", description="Zavezanec za DDV od dne")
+     * @Max\I18n(label="Zavezanec za DDV od",  description="Zavezanec za DDV od dne")
      * @var string
      */
     protected $datZav;
@@ -231,15 +218,20 @@ class Popa
      *
      * @ORM\Column(type="date", nullable=true)
      * @Max\Ui(group="Davčni podatki")
-     * @Max\I18n(label="Zavezanec za DDV do", hint="Datum", description="Zavezanec za DDV do dne")
+     * @Max\I18n(label="Zavezanec za DDV do", description="Zavezanec za DDV do dne")
      * @var string
      */
     protected $datnZav;
 
     /**
-     * @ORM\Column(nullable=true)
+     * A je poslovni partner iz zamejstva 
+     * 
+     * @ORM\Column(type="boolean")
+     * @Max\Ui(type="boolcheckbox")
+     * @Max\I18n(label="Iz zamejstva", description="Je poslovni partner iz zamejstva")
+     * 
      */
-    private $zamejstvo;
+    private $zamejstvo = false;
 
     public function __construct()
     {
@@ -268,42 +260,7 @@ class Popa
         }
     }
 
-    public function addKontaktne($emb)
-    {
-        if (!$this->kontaktne->contains($emb)) {
-            $this->kontaktne->add($emb);
-        }
-    }
-
-    public function removeKontaktne($emb)
-    {
-        if ($this->kontaktne->contains($emb)) {
-            $this->kontaktne->removeElement($emb);
-        }
-    }
-
-    public function getKlasifikacija()
-    {
-        return $this->klasifikacija;
-    }
-
-    public function setKlasifikacija($klasifikacija)
-    {
-        $this->klasifikacija = $klasifikacija;
-        return $this;
-    }
-
-    public function getKontaktne()
-    {
-        return $this->kontaktne;
-    }
-
-    public function setKontaktne($kontaktne)
-    {
-        $this->kontaktne = $kontaktne;
-        return $this;
-    }
-
+   
     public function getId()
     {
         return $this->id;
@@ -323,17 +280,6 @@ class Popa
     public function setSifra($sifra)
     {
         $this->sifra = $sifra;
-        return $this;
-    }
-
-    public function getMaxkli()
-    {
-        return $this->Maxkli;
-    }
-
-    public function setMaxkli($Maxkli)
-    {
-        $this->Maxkli = $Maxkli;
         return $this;
     }
 
@@ -370,42 +316,95 @@ class Popa
         return $this;
     }
 
-    public function getPanoga()
+    public function getTipkli()
     {
-        return $this->panoga;
-    }
-
-    public function setPanoga($panoga)
-    {
-        $this->panoga = $panoga;
-        return $this;
-    }
-
-    public function getTel()
-    {
-        return $this->tel;
-    }
-
-    public function setTel($tel)
-    {
-        $this->tel = $tel;
-        return $this;
-    }
-
-    public function getFax()
-    {
-        return $this->fax;
-    }
-
-    public function setFax($fax)
-    {
-        $this->fax = $fax;
-        return $this;
+        return $this->tipkli;
     }
 
     public function getEmail()
     {
         return $this->email;
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function getOpomba()
+    {
+        return $this->opomba;
+    }
+
+    public function getDrzava()
+    {
+        return $this->drzava;
+    }
+
+    public function getOsebe()
+    {
+        return $this->osebe;
+    }
+
+    public function getNaslovi()
+    {
+        return $this->naslovi;
+    }
+
+    public function getTelefonske()
+    {
+        return $this->telefonske;
+    }
+
+    public function getTrrji()
+    {
+        return $this->trrji;
+    }
+
+    public function getPogodbe()
+    {
+        return $this->pogodbe;
+    }
+
+    public function getIdddv()
+    {
+        return $this->idddv;
+    }
+
+    public function getMaticna()
+    {
+        return $this->maticna;
+    }
+
+    public function getZavezanec()
+    {
+        return $this->zavezanec;
+    }
+
+    public function getJeeu()
+    {
+        return $this->jeeu;
+    }
+
+    public function getDatZav()
+    {
+        return $this->datZav;
+    }
+
+    public function getDatnZav()
+    {
+        return $this->datnZav;
+    }
+
+    public function getZamejstvo()
+    {
+        return $this->zamejstvo;
+    }
+
+    public function setTipkli($tipkli)
+    {
+        $this->tipkli = $tipkli;
+        return $this;
     }
 
     public function setEmail($email)
@@ -414,53 +413,10 @@ class Popa
         return $this;
     }
 
-    public function getTrr1()
+    public function setUrl($url)
     {
-        return $this->trr1;
-    }
-
-    public function setTrr1($trr1)
-    {
-        $this->trr1 = $trr1;
+        $this->url = $url;
         return $this;
-    }
-
-    public function getTrr2()
-    {
-        return $this->trr2;
-    }
-
-    public function setTrr2($trr2)
-    {
-        $this->trr2 = $trr2;
-        return $this;
-    }
-
-    public function getTrr3()
-    {
-        return $this->trr3;
-    }
-
-    public function setTrr3($trr3)
-    {
-        $this->trr3 = $trr3;
-        return $this;
-    }
-
-    public function getTrr4()
-    {
-        return $this->trr4;
-    }
-
-    public function setTrr4($trr4)
-    {
-        $this->trr4 = $trr4;
-        return $this;
-    }
-
-    public function getOpomba()
-    {
-        return $this->opomba;
     }
 
     public function setOpomba($opomba)
@@ -469,163 +425,16 @@ class Popa
         return $this;
     }
 
-    public function getRokPlacilaK()
-    {
-        return $this->rokPlacilaK;
-    }
-
-    public function setRokPlacilaK($rokPlacilaK)
-    {
-        $this->rokPlacilaK = $rokPlacilaK;
-        return $this;
-    }
-
-    public function getRokPlacilaD()
-    {
-        return $this->rokPlacilaD;
-    }
-
-    public function setRokPlacilaD($rokPlacilaD)
-    {
-        $this->rokPlacilaD = $rokPlacilaD;
-        return $this;
-    }
-
-    public function getDniPotrditve()
-    {
-        return $this->dniPotrditve;
-    }
-
-    public function setDniPotrditve($dniPotrditve)
-    {
-        $this->dniPotrditve = $dniPotrditve;
-        return $this;
-    }
-
-    public function getRabat()
-    {
-        return $this->rabat;
-    }
-
-    public function setRabat($rabat)
-    {
-        $this->rabat = $rabat;
-        return $this;
-    }
-
-    public function getDrzava()
-    {
-        return $this->drzava;
-    }
-
     public function setDrzava($drzava)
     {
         $this->drzava = $drzava;
         return $this;
     }
 
-    public function getPotnik()
+    public function setOsebe($osebe)
     {
-        return $this->potnik;
-    }
-
-    public function setPotnik($potnik)
-    {
-        $this->potnik = $potnik;
+        $this->osebe = $osebe;
         return $this;
-    }
-
-    public function getIzjava()
-    {
-        return $this->izjava;
-    }
-
-    public function setIzjava($izjava)
-    {
-        $this->izjava = $izjava;
-        return $this;
-    }
-
-    public function getIdddv()
-    {
-        return $this->idddv;
-    }
-
-    public function setIdddv($idddv)
-    {
-        $this->idddv = $idddv;
-        return $this;
-    }
-
-    public function getMaticna()
-    {
-        return $this->maticna;
-    }
-
-    public function setMaticna($maticna)
-    {
-        $this->maticna = $maticna;
-        return $this;
-    }
-
-    public function getZavezanec()
-    {
-        return $this->zavezanec;
-    }
-
-    public function setZavezanec($zavezanec)
-    {
-        $this->zavezanec = $zavezanec;
-        return $this;
-    }
-
-    public function getJeeu()
-    {
-        return $this->jeeu;
-    }
-
-    public function setJeeu($jeeu)
-    {
-        $this->jeeu = $jeeu;
-        return $this;
-    }
-
-    public function getDatZav()
-    {
-        return $this->datZav;
-    }
-
-    public function setDatZav($datZav)
-    {
-        $this->datZav = $datZav;
-        return $this;
-    }
-
-    public function getDatnZav()
-    {
-        return $this->datnZav;
-    }
-
-    public function setDatnZav($datnZav)
-    {
-        $this->datnZav = $datnZav;
-        return $this;
-    }
-
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    public function setUrl($url)
-    {
-        $this->url = $url;
-        return $this;
-    }
-
-    public function getNaslovi()
-    {
-        return $this->naslovi;
     }
 
     public function setNaslovi($naslovi)
@@ -634,97 +443,66 @@ class Popa
         return $this;
     }
 
-    public function getPotnikKontakt()
-    {
-        return $this->potnikKontakt;
-    }
-
-    public function setPotnikKontakt($potnikKontakt)
-    {
-        $this->potnikKontakt = $potnikKontakt;
-        return $this;
-    }
-
-    public function getUpor()
-    {
-        return $this->upor;
-    }
-
-    public function setUpor($upor)
-    {
-        $this->upor = $upor;
-        return $this;
-    }
-
-    public function getDatKnj()
-    {
-        return $this->datKnj;
-    }
-
-    public function setDatKnj($datKnj)
-    {
-        $this->datKnj = $datKnj;
-        return $this;
-    }
-
-    function getTipkli()
-    {
-        return $this->tipkli;
-    }
-
-    function getOsebe()
-    {
-        return $this->osebe;
-    }
-
-    function getTelefonske()
-    {
-        return $this->telefonske;
-    }
-
-    function getTrrji()
-    {
-        return $this->trrji;
-    }
-
-    function getPogodbe()
-    {
-        return $this->pogodbe;
-    }
-
-    function getZamejstvo()
-    {
-        return $this->zamejstvo;
-    }
-
-    function setTipkli($tipkli)
-    {
-        $this->tipkli = $tipkli;
-    }
-
-    function setOsebe($osebe)
-    {
-        $this->osebe = $osebe;
-    }
-
-    function setTelefonske($telefonske)
+    public function setTelefonske($telefonske)
     {
         $this->telefonske = $telefonske;
+        return $this;
     }
 
-    function setTrrji($trrji)
+    public function setTrrji($trrji)
     {
         $this->trrji = $trrji;
+        return $this;
     }
 
-    function setPogodbe($pogodbe)
+    public function setPogodbe($pogodbe)
     {
         $this->pogodbe = $pogodbe;
+        return $this;
     }
 
-    function setZamejstvo($zamejstvo)
+    public function setIdddv($idddv)
+    {
+        $this->idddv = $idddv;
+        return $this;
+    }
+
+    public function setMaticna($maticna)
+    {
+        $this->maticna = $maticna;
+        return $this;
+    }
+
+    public function setZavezanec($zavezanec)
+    {
+        $this->zavezanec = $zavezanec;
+        return $this;
+    }
+
+    public function setJeeu($jeeu)
+    {
+        $this->jeeu = $jeeu;
+        return $this;
+    }
+
+    public function setDatZav($datZav)
+    {
+        $this->datZav = $datZav;
+        return $this;
+    }
+
+    public function setDatnZav($datnZav)
+    {
+        $this->datnZav = $datnZav;
+        return $this;
+    }
+
+    public function setZamejstvo($zamejstvo)
     {
         $this->zamejstvo = $zamejstvo;
+        return $this;
     }
+
+
 
 }

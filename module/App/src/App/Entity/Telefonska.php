@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
+use Max\Ann\Entity as Max;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Telefonske")
@@ -19,27 +20,42 @@ class Telefonska
     private $id;
 
     /**
+     * Vrsta telefonske številke - domača 
+     * 
      * @ORM\Column(type="string", length=20, nullable=false)
+     * @Max\Ui(type="select", opts="telefonska.vrsta")
+  
      */
     private $vrsta;
 
     /**
-     * @ORM\Column(type="string", length=30, nullable=false)
+     * Številka 
+     * 
+     * @ORM\Column(type="string", length=30)
+     * @Max\I18n(label="Številka", description="Telefonska številka")
      */
     private $stevilka;
 
     /**
-     * @ORM\Column(nullable=false)
+     * A je to privzeta telefonska številka 
+     * 
+     * @ORM\Column(type="boolean")
+     * @Max\Ui(type="boolcheckbox",required=false)
      */
-    private $privzeta;
+    private $privzeta = false;
 
     /**
+     * Lastnike telefonske številke - če gre za osebo
+     * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="telefonske")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
+     *
      */
     private $oseba;
 
     /**
+     * Lastnik telfonske številke, če gre za 
+     * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="telefonske")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
      */
@@ -95,12 +111,12 @@ class Telefonska
         $this->privzeta = $privzeta;
     }
 
-    function setOseba($oseba)
+    function setOseba(Oseba $oseba = null)
     {
         $this->oseba = $oseba;
     }
 
-    function setPopa($popa)
+    function setPopa(Popa $popa = null)
     {
         $this->popa = $popa;
     }

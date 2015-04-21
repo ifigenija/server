@@ -21,7 +21,7 @@ class Trr
     private $id;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      */
     private $stevilka;
 
@@ -36,21 +36,32 @@ class Trr
     private $bic;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      */
     private $banka;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="trrji")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
+     * @Max\Ui(type="toone")
      */
     private $popa;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="trrji")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
+     * @Max\Ui(type="toone")
      */
     private $oseba;
+    
+    
+    public function validate($mode = 'update')
+    {
+        $this->expect($this->popa || $this->oseba, 'Lastnik računa ni nastavljen - Poslovni partner ali oseba', 1000200);
+        $this->expect($this->banka, "Banka je obvezen podatek na računu", 1000201);
+        $this->expect($this->stevilka, "Številka računa je obvezen podatek", 1000202);
+                
+    }
 
     function getId()
     {
