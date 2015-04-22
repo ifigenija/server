@@ -43,16 +43,6 @@ class User
      */
     private $name;
 
-    /**
-     * Uporabniško ime za dostop
-     *
-     * 
-     * @var string
-     *
-     * @Max\I18n(label="Uporabniško ime",  description="Uporabniško ime")
-     * @Max\Ui(group="Login", type="naziv", ident=true)
-     */
-    protected $username;
 
     /**
      * Geslo
@@ -212,10 +202,7 @@ class User
         return $this->name;
     }
 
-    function getUsername()
-    {
-        return $this->username;
-    }
+ 
 
     function getRoles()
     {
@@ -247,10 +234,6 @@ class User
         $this->name = $name;
     }
 
-    function setUsername($username)
-    {
-        $this->username = $username;
-    }
 
     function setRoles($roles)
     {

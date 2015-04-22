@@ -150,7 +150,7 @@ use \Max\Expect\ExpectTrait;
         $auth  = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
         $ident = $auth->getIdentity();
         if ($ident) {
-            return $ident->getUsername();
+            return $ident->getEmail();
         } else {
             return "anonymous";
         }

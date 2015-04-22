@@ -32,6 +32,11 @@ class OptionCest
 
     private $rpcUrl = '/rpc/app/options';
 
+    public function _before(ApiTester $I)
+    {
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+    }
+
     /**
      *  -  getOptions  defaultValue 
      * 
@@ -72,16 +77,17 @@ class OptionCest
     public function preberiUserOpcijoIzFixturjev(ApiTester $I)
     {
         //  pričakujemo enako, kot smo nastavili v fixture-ju
-        // zelena je pri anonymous -u
-        $pricakovano = array(array("key" => "z", "value" => "zelena"));
+        //  rumena je pri admin@ifigenija.si
+        $pricakovano = array(array("key" => "r", "value" => "rumena"));
 
         $opt = $I->successfullyCallRpc($this->rpcUrl, 'getOptions', ["name" => "test1.barva.ozadja"]);
         $I->assertNotEmpty($opt);
+
         $I->assertEquals($pricakovano, $opt);
         $I->seeResponseIsJson();
     }
 
-        /**
+    /**
      * - setGlobalOption zamenja vrednost
      * 
      * @param ApiTester $I
@@ -127,7 +133,6 @@ class OptionCest
         $I->seeResponseIsJson();
     }
 
-    
     /**
      *  - setUserOption zamenja vrednosti
      * 
@@ -155,7 +160,7 @@ class OptionCest
         $I->assertTrue($odg);
     }
 
-        /**
+    /**
      * - getOptions  user vrednost prebere prej kreirano
      *  
      * @depends kreirajUserOpcijo
@@ -171,14 +176,12 @@ class OptionCest
         $I->seeResponseIsJson();
     }
 
-
-
     /**
      * - getOptions    opcija ne obstaja
      * 
      * @param ApiTester $I
      */
-    public function getOptionNeobstojeca(ApiTester $I)
+    public function poskusiPrebratiNeobstojeco(ApiTester $I)
     {
 
         $odg = $I->failCallRpc($this->rpcUrl, 'getOptions', ["name" => "neobstojeca"]);
@@ -196,7 +199,6 @@ class OptionCest
         $I->seeResponseIsJson();
     }
 
-    
 //- setUserOption vrednosti ne more kreirati, ker ni perUser
     public function poskusiKreiratiOnemogocenoUserOpcijo(ApiTester $I)
     {
@@ -206,7 +208,5 @@ class OptionCest
         $I->assertNotEmpty($odg);
         $I->seeResponseIsJson();
     }
-
-
 
 }
