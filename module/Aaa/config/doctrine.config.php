@@ -26,21 +26,11 @@ return [
             'orm_default' => [
                 'object_manager' => 'Doctrine\ORM\EntityManager',
                 'identity_class' => '\Aaa\Entity\User',
-                'identity_property' => 'username',
+                'identity_property' => 'email',
                 'credential_property' => 'password',
                 'credential_callable' => '\Aaa\Service\AaaService::checkPassword'
             ]
         ]
-    ],
-    'entity_config' => [
-        'Aaa\Entity\User' => [
-            'key' => 'f002'
-        ],
-        'Aaa\Entity\Role' => [
-            'key' => 'f003'
-        ],
-        'Aaa\Entity\Permission' => [
-            'key' => 'f004'
-        ],
-    ],
+    ]
+  
 ];

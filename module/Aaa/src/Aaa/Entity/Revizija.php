@@ -47,7 +47,7 @@ class Revizija
 
     /**
      * ID objekta nad katerim se je zgodila sprememba
-     * @ORM\Column(type="guid", nullable=false)
+     * @ORM\Column(type="guid", nullable=true)
      * @var string
      */
     protected $objectId;

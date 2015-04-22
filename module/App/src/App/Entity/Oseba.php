@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM,
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Osebe")
+ * @ORM\Table(name="kose")
  * @Max\I18n(label="Kontaktna oseba",plural="Kontaktne osebe")
  * @Max\Id(prefix="0003")
  */
@@ -51,14 +52,24 @@ class Oseba
     protected $naziv;
 
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      */
     private $ime;
 
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      */
     private $priimek;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    private $pesvdonim;
+
+    /**
+     * @ORM\Column(length=40, nullable=true)
+     */
+    private $funkcija;
 
     /**
      * @ORM\Column(nullable=true)
@@ -161,6 +172,12 @@ class Oseba
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Zaposlitev", mappedBy="oseba")
      */
     private $sodelovanja;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
+     * @ORM\JoinColumn(name="naslov_id", referencedColumnName="id")
+     */
+    private $naslov;
 
     /**
      * 

@@ -23,8 +23,8 @@ class Users
      */
     protected $sortOptions = [
         'default' => [
-            'ime'     => ['alias' => 'u.name'],
-            'priimek' => ['alias' => 'u.surname']
+            'name'     => ['alias' => 'u.name'],
+            'email' => ['alias' => 'u.email']
         ]
     ];
 
@@ -49,11 +49,10 @@ class Users
         $qb->orderBy($sort->order, $sort->dir);
 
         if ($srch) {
-            $qb->Where($ex->orx(
-                            $ex->like('lower(u.name)', ':name'), $ex->like('lower(u.surname)', ':surname')
-            ));
+            $qb->Where(
+                            $ex->like('lower(u.name)', ':name')
+            );
             $qb->setParameter('name', "%" . $srch . "%");
-            $qb->setParameter('surname', "%" . $srch . "%");
         }
         return new DoctrinePaginator(new Paginator($qb));
     }
@@ -79,17 +78,9 @@ class Users
         foreach ($l as $g) {
             if ($g['username'] === 'SYSTEM')
                 continue;
-            $list[] = ['id' => $g['id'], 'name' => $g['surname'] . ', ' . $g['name'] . ' (' . $g['username'] . ')'];
+            $list[] = ['id' => $g['id'], 'name' => $g['surname'] . ', ' . $g['name'] . ' (' . $g['email'] . ')'];
         }
         return $list;
-    }
-
-    public function getJsonHydrator($options = [])
-    {
-        $defaults = ['exclude' => ['groups', 'expires', 'defaultRouteParams', 'defaultRoute', 'upor', 'datKnj']];
-
-        $options = array_merge_recursive($defaults, $options);
-        return parent::getJsonHydrator($options);
     }
 
     public function removeUser($id)
@@ -103,11 +94,17 @@ class Users
         $em->flush();
     }
 
-    public function login($username, $password)
+    /**
+     * 
+     * @param string $email
+     * @param string $password
+     * @return boolean
+     */
+    public function login($email, $password)
     {
         $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
         $adapter     = $authService->getAdapter();
-        $adapter->setIdentityValue($username);
+        $adapter->setIdentityValue($email);
         $adapter->setCredentialValue($password);
         $authResult  = $authService->authenticate();
         if ($authResult->isValid()) {
@@ -119,7 +116,7 @@ class Users
 
     public function enable($username, $act)
     {
-        $user = $this->findOneBy(['username' => $username]);
+        $user = $this->findOneBy(['email' => $username]);
 
         if ($user) {
             $user->setEnabled($act);
@@ -130,7 +127,7 @@ class Users
 
     public function resetPassword($username, $password)
     {
-        $user = $this->findOneBy(['username' => $username]);
+        $user = $this->findOneBy(['email' => $username]);
 
         if ($user) {
             $user->setPassword($password);
@@ -188,7 +185,7 @@ class Users
     public function getUserRolesArray($username)
     {
         $dql   = "SELECT u,r FROM Aaa\Entity\User u JOIN u.roles r" .
-                " WHERE u.username='$username' ORDER BY r.name ASC";
+                " WHERE u.email='$username' ORDER BY r.name ASC";
         $query = $this->getEntityManager()->createQuery($dql);
         return $query->getArrayResult();
     }

@@ -39,14 +39,14 @@ class User
     protected $id;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=false)
      */
     private $name;
 
     /**
      * Uporabniško ime za dostop
      *
-     * @ORM\Column(unique=true, length=10, nullable=false)
+     * 
      * @var string
      *
      * @Max\I18n(label="Uporabniško ime",  description="Uporabniško ime")
@@ -105,23 +105,46 @@ class User
     /**
      * Začetna pot za uporabnika
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Privzeta pot ob prijavi",  description="Privzeta pot v aplikaciji po prijavi")
      * @Max\Ui(group="Zagon", type="text")
      */
     protected $defaultRoute;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Parametri za pot",  description="Parametri za privzeto pot v aplikaciji po prijavi")
      * @Max\Ui(group="Zagon", type="textarea")
      */
     protected $defaultRouteParams;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=false)
+     * @Max\Ui(type="email")
+     * @Max\I18n(label="Email", description="Elektronski naslov, ki služi za prijavo uporabnika") 
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     * @Max\I18n(label="Čas zadnje priajve")
+     */
+    private $lastLogon;
+
+    /**
+     * Token, ki ga pošljemo po mailu uporabniku, ki je pozabil geslo
+     * 
+     * @ORM\Column(type="string", nullable=true)
+     * 
+     */
+    private $passRestToken;
+
+    /**
+     * Veljavnost tokna, za reset gesla
+     * 
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $tokenExpires;
 
     public function __construct()
     {
@@ -258,5 +281,39 @@ class User
     {
         $this->enabled = $enabled;
     }
+
+    public function getLastLogon()
+    {
+        return $this->lastLogon;
+    }
+
+    public function getPassRestToken()
+    {
+        return $this->passRestToken;
+    }
+
+    public function getTokenExpires()
+    {
+        return $this->tokenExpires;
+    }
+
+    public function setLastLogon($lastLogon)
+    {
+        $this->lastLogon = $lastLogon;
+        return $this;
+    }
+
+    public function setPassRestToken($passRestToken)
+    {
+        $this->passRestToken = $passRestToken;
+        return $this;
+    }
+
+    public function setTokenExpires($tokenExpires)
+    {
+        $this->tokenExpires = $tokenExpires;
+        return $this;
+    }
+
 
 }

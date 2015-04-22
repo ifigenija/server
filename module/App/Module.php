@@ -66,20 +66,21 @@ class Module
         // poskrbim za identiteto uporabnika 
         if ($e->getRequest() instanceof Request) {
             // handling autorizacij preko konzole
-            $this->setIdentity('console', $auth, $em);
+            $this->setIdentity('console@ifigenija.si', $auth, $em);
         } else {
-            if (!$auth->hasIdentity()) {
-                $id = $this->tryHttpAuth($auth, $em, $e);
-                if (!$id) {
-                    $this->setIdentity('anonymous', $auth, $em);
-                }
+            /* @var $request \Zend\Http\Request */
+            $request = $e->getRequest();
+            $header  = $request->getHeader('Authorization');
+
+            if ($header instanceof \Zend\Http\Header\Authorization && strlen($header->getFieldValue()) > 10) {
+                $this->tryHttpAuth($auth, $em, $e);
             }
         }
 
         $identity = $auth->getIdentity();
-        // $identity = $this->setConsoleAuthorization($authService, $em);
-        $evm      = $em->getEventManager();
-    //    $evm->addEventSubscriber(new RevisionsListener($sm, $identity));
+
+        $evm = $em->getEventManager();
+        $evm->addEventSubscriber(new RevisionsListener($sm, $identity));
 
         $config = $sm->get('entity.metadata.factory')->getAllEntityConfig();
         $evm->addEventSubscriber(new PrePersistListener($config));
@@ -95,7 +96,7 @@ class Module
     {
         $rep = $em->getRepository('Aaa\Entity\User');
         try {
-            $user = $rep->findOneByUsername($name);
+            $user = $rep->findOneByEmail($name);
         } catch (Exception $e) {
             $user = null;
         }

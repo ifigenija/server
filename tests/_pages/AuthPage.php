@@ -12,7 +12,7 @@ namespace IfiTest;
  */
 class AuthPage
 {
-    public static $admin = "admin";
+    public static $admin = "admin@ifigenija.si";
     public static $adminPass = "Admin1234";
     
 }

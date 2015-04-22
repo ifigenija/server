@@ -31,7 +31,7 @@ class Telefonska
     /**
      * Številka 
      * 
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=30, nullable=true)
      * @Max\I18n(label="Številka", description="Telefonska številka")
      */
     private $stevilka;
@@ -39,7 +39,7 @@ class Telefonska
     /**
      * A je to privzeta telefonska številka 
      * 
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      * @Max\Ui(type="boolcheckbox",required=false)
      */
     private $privzeta = false;

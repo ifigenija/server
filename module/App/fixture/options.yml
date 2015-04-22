@@ -52,15 +52,9 @@
         global:
             value: 
                 - { key: m, value: modra }
-        user: 
+        user:            
             - 
-                username: anonymous
-                value: [{ key: z, value: zelena }]
-#            - 
-#                username: neobstoječ
-#                value: [{ key: s, value: siva }]
-            - 
-                username: admin
+                email: admin@ifigenija.si
                 value: [{ key: r, value: rumena }]
                 
 #           za teste- globalna vrednost, nima user opcije 

@@ -45,7 +45,7 @@ class OptionValues
      * Vrne Id globalne opcijo, če le-ta obstaja
      * 
      * @param type $name ime opcije
-     * @return type      Id ali null
+     * @return string|null      Id ali null
      */
     public function getOptionValuesGlobalId($name)
     {
@@ -64,14 +64,14 @@ class OptionValues
     /**
      * Vrne uporabniško opcijo, če le-ta obstaja
      * 
-     * @param type $name      ime opcije
-     * @param type $username  uprabniško ime
-     * @return type map Global Value ali null
+     * @param string $name      ime opcije
+     * @param string $email  uprabniško ime
+     * @return  mixed
      */
-    public function getOptionValuesUserValue($optname, $username)
+    public function getOptionValuesUserValue($optname, $email)
     {
         $dql    = "SELECT v,o,u FROM App\Entity\OptionValue v JOIN v.option o JOIN v.user u" .
-                " WHERE v.global = false  AND  o.name='$optname' and u.username='$username' ";
+                " WHERE v.global = false  AND  o.name='$optname' and u.email='$email' ";
         $query  = $this->getEntityManager()->createQuery($dql);
         $optval = $query->getOneOrNullResult();
         if (is_null($optval)) {
@@ -86,13 +86,13 @@ class OptionValues
      * Vrne Id uporabniške opcije, če le-ta obstaja
      * 
      * @param type $name      ime opcije
-     * @param type $username  uprabniško ime
+     * @param type $email  uprabniško ime
      * @return  Id ali null
      */
-    public function getOptionValuesUserId($optname, $username)
+    public function getOptionValuesUserId($optname, $email)
     {
         $dql    = "SELECT v,o,u FROM App\Entity\OptionValue v JOIN v.option o JOIN v.user u" .
-                " WHERE v.global = false  AND  o.name='$optname' and u.username='$username' ";
+                " WHERE v.global = false  AND  o.name='$optname' and u.email='$email' ";
         $query  = $this->getEntityManager()->createQuery($dql);
         $optval = $query->getOneOrNullResult();
         if (is_null($optval)) {

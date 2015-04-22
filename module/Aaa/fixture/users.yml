@@ -1,15 +1,10 @@
 -
     name: Administrator
-    email: admin@max.si
-    username: admin
+    email: admin@ifigenija.si
+    enabled: true
     roles: [ifi-all]
 -
     name: Konzolni
-    email: rootmail@max.si
-    username: console
-    roles: {  }
--
-    name: Anonimni
-    email: noreply@max.si
-    username: anonymous
-    roles: [anonymous]
+    email: console@ifigenija.si
+    enabled: true
+    roles: [ifi-all]

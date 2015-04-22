@@ -21,7 +21,7 @@ class Trr
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $stevilka;
 
@@ -36,7 +36,7 @@ class Trr
     private $bic;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $banka;
 

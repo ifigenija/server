@@ -4,10 +4,10 @@
 /nbproject/private/
 /node_modules/
 autoload_classmap.php
-/tests/acceptance.suite.yml
+acceptance.suite.yml
 /tests/_output/
-/tests/api.suite.yml
+api.suite.yml
 .DS_Store
 /data/
-/bin/dumpStage.sh
-q
+dumpStage.sh
+

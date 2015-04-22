@@ -43,7 +43,7 @@ class Popa
      * !!!!Sicer nima pravega pomena - mogoče za odstraniti, ker bomo 
      * !!!!kupca tako ali tako dodali v tabelo kupcev 
      * 
-     * @ORM\Column(length=20)
+     * @ORM\Column(length=20, nullable=true)
      * @Max\Ui(type="select",opts="popa.tipkli",group="Osnovni podatki",required=true)
      * @Max\I18n(label="Tip klienta", 
      * description="Tip klienta (kupec, dobavitelj, koproducent, )")
@@ -84,6 +84,11 @@ class Popa
     protected $naziv1 = '';
 
     /**
+     * @ORM\Column(length=60, nullable=true)
+     */
+    private $panoga;
+
+    /**
      * Email naslov
      *
      * @ORM\Column(length=50, nullable=true)
@@ -117,7 +122,7 @@ class Popa
      * Država klienta
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
-     * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id", nullable=false)
      * @Max\Ui(group="Kontaktni podatki",required=true)
      * @Max\I18n(label="Država", description="Država klienta")
      */
@@ -136,7 +141,7 @@ class Popa
     /**
      * Klientovi naslovi
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="klient", orphanRemoval=true)
+     * 
 
      */
     protected $naslovi;
@@ -226,7 +231,7 @@ class Popa
     /**
      * A je poslovni partner iz zamejstva 
      * 
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      * @Max\Ui(type="boolcheckbox")
      * @Max\I18n(label="Iz zamejstva", description="Je poslovni partner iz zamejstva")
      * 

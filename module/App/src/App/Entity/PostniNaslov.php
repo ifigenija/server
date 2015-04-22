@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM,
  * Entiteta za naslove
  *
  * @ORM\Entity(repositoryClass="App\Repository\PostniNaslovi")
+ * @ORM\Table(name="PostniNaslovi")
  * @Max\I18n(label="Poštni naslov",plural="Poštni naslovi")
  *
  * @Max\Id(prefix="0006")
@@ -33,7 +34,7 @@ class PostniNaslov
      * Lastnik postnega naslova če gre za klienta 
      * 
      * @var \Max\Entity\Popa
-     * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="naslovi")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Popa")
      * @ORM\JoinColumn(name="klient_id", referencedColumnName="id")
      * @Max\Ui(type="toone")
      */
@@ -59,6 +60,11 @@ class PostniNaslov
      * @Max\Ui(ident=true)
      */
     protected $naziv;
+
+    /**
+     * @ORM\Column(length=50, nullable=true)
+     */
+    private $nazivDva;
 
     /**
      * Ulica naslovnika
@@ -128,7 +134,7 @@ class PostniNaslov
      * Je klient iz EU
      *  checkbox 
      *
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", length=1, nullable=true)
      * @var bool
      *
      * @Max\Ui(type="boolcheckbox",group="Davčni podatki")
@@ -140,7 +146,7 @@ class PostniNaslov
      * Oznaka ali je naslov privzet
      *  (npr. za poslovnega partnerja, ki lahko ima več naslovov)
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      * @var boolean
      *
      * @Max\Ui(type="boolcheckbox")

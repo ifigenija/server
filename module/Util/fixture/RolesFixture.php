@@ -77,20 +77,19 @@ class OptionsFixture
 
         $ur = $em->getRepository('\Aaa\Entity\User');
         $rr = $em->getRepository('\Aaa\Entity\Role');
-        $o  = $ur->findOneByUsername($val['username']);
+        $o  = $ur->findOneByEmail($val['email']);
         if (!$o) {
-            $o        = new User;
-            $o->setUsername($val['username']);
+            $o        = new User();
             $o->setEmail($val['email']);
             $password = uniqid() . uniqid();
             $o->setPassword($password);
             echo "User {$val['name']} geslo $password\n";
             $o->setName($val['name']);
-            $o->setEnabled(true);
+            $o->setEnabled($val['enabled']);
             $rr->resolveNames($o, $val['roles']);
             $em->persist($o);
 
-            $this->addReference('user-' . $val['username'], $o);
+            $this->addReference('user-' . $val['email'], $o);
         }
     }
 
@@ -166,15 +165,15 @@ class OptionsFixture
                 $optValueUserY = $val['optionValue']['user'];
                 foreach ($optValueUserY as $user) {
 
-                    echo "  user    " . $user['username'] . PHP_EOL;
+                    echo "  user    " . $user['email'] . PHP_EOL;
 
                     // najprej preverim, če uporabniško ime že obstaja v entiteti User
                     $u = $em->getRepository('Aaa\Entity\User')
-                            ->findOneByUsername($user['username']);
+                            ->findOneByemail($user['email']);
                     $this->expect($u, "Ni tega uporabnika", 1000300); // $$ rb potrebno še implementirati trnsl 
                     // ali obstajajo  opcije userja
                     $optValue = $em->getRepository('App\Entity\OptionValue')
-                            ->getOptionValuesUserValue($val['name'], $user['username']);
+                            ->getOptionValuesUserValue($val['name'], $user['email']);
 
                     if (empty($optValue)) {
                         $optVal = new OptionValue();
