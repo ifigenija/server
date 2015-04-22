@@ -64,9 +64,10 @@ class OptionsService
         // najprej preveri ali je opcija uporabniško nastavljiva
         if ($opt->getPerUser()) {
             //  s katerim uporabniškim imenom je uporabnik prijavljen
-            $username = $this->getUsername();
-            $optValue = $em->getRepository('App\Entity\OptionValue')
-                    ->getOptionValuesUserValue($opt->getName(), $username);
+            $user = $this->getAuth()->getIdentity();
+
+            $optValueR = $em->getRepository('App\Entity\OptionValue');
+            $optValue  = $optValueR->getOptionValuesUserValue($opt, $user);
             if (!empty($optValue)) {
                 return $optValue;
             }
@@ -103,26 +104,24 @@ class OptionsService
 
         $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000404);
 
-        if ($opt->getReadOnly()) {
-            // preveri, če ima globalno opcijo
-            $this->expect($opt, 'Opcija ni globalna ' . $name, 1000405);
-        }
-        if (!$opt->getPerUser()) {
-            // preveri, če je opcije uporabniško nastavljiva
-            $this->expect($opt, 'Opcija ni uporabniško nastavljiva ' . $name, 1000406);
-        }
+        // preveri, če ima globalno opcijo
+        $this->expect(!$opt->getReadOnly(), 'Opcija ni globalna ' . $name, 1000405);
 
-        $username = $this->getUsername();
+        // preveri, če je opcije uporabniško nastavljiva
+        $this->expect($opt->getPerUser(), 'Opcija ni uporabniško nastavljiva ' . $name, 1000406);
+
+        //  s katerim uporabniškim imenom je uporabnik prijavljen
+        $user = $this->getAuth()->getIdentity();
 
         $optValR    = $em->getRepository('App\Entity\OptionValue');
-        $optValueId = $optValR->getOptionValuesUserId($name, $username);
+        $optValueId = $optValR->getOptionValuesUserId($opt, $user);
         if (empty($optValueId)) {
             // kreiramo nov zapis v OptionValue
             $optVal = new OptionValue();
             $optVal->setValue($value);
             $optVal->setGlobal(false);
             $optVal->addOption($opt);
-            $user   = $em->getRepository('Aaa\Entity\User')->findOneByUsername($username);
+//            $user   = $em->getRepository('Aaa\Entity\User')->findOneByUsername($username);
             $optVal->addUser($user);
         } else {
             // le zamenjamo vrednost
