@@ -1,12 +1,12 @@
 /vendor/
-/bin/dumpStage.sh
+***/dumpStage.sh
 /config/autoload/local.php
 /config/autoload/local.*.php
 /nbproject/private/
 /node_modules/
 autoload_classmap.php
-acceptance.suite.yml
+***/acceptance.suite.yml
 /tests/_output/
-api.suite.yml
+***/api.suite.yml
 .DS_Store
 /data/
