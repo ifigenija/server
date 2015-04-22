@@ -24,15 +24,18 @@ class OptionValues
     /**
      * Vrne globalno opcijo, če le-ta obstaja
      * 
-     * @param type $name ime opcije
+     * @param \App\Entity\Option $option      ime opcije
      * @return type map Global Value ali null
      */
-    public function getOptionValuesGlobalValue($name)
+    public function getOptionValuesGlobalValue($option)
     {
-        $dql    = "SELECT v,o FROM App\Entity\OptionValue v JOIN v.option o" .
-                " WHERE v.global = true  AND  o.name='$name'";
-        $query  = $this->getEntityManager()->createQuery($dql);
-        $optval = $query->getOneOrNullResult();
+//        $dql    = "SELECT v,o FROM App\Entity\OptionValue v JOIN v.option o" .
+//                " WHERE v.global = true  AND  o.name='$name'";
+//        $query  = $this->getEntityManager()->createQuery($dql);
+//        $optval = $query->getOneOrNullResult();
+        $optval = $this->findOneBy(["option" => $option->getId(), "global" => true]);
+
+        
         if (is_null($optval)) {
             $value = null;
         } else {
@@ -70,11 +73,6 @@ class OptionValues
      */
     public function getOptionValuesUserValue($option, $user)
     {
-//        $dql    = "SELECT v,o,u FROM App\Entity\OptionValue v JOIN v.option o JOIN v.user u" .
-//                " WHERE v.global = false  AND  o.name='$optname' and u.email='$email' ";
-//        $query  = $this->getEntityManager()->createQuery($dql);
-//        $optval = $query->getOneOrNullResult();
-
         $optval = $this->findOneBy(["user"   => $user->getId(),
             "option" => $option->getId(),
             "global" => false]);
@@ -96,16 +94,10 @@ class OptionValues
      */
     public function getOptionValuesUserId($option, $user)
     {
-//        $dql    = "SELECT v,o,u FROM App\Entity\OptionValue v JOIN v.option o JOIN v.user u" .
-//                " WHERE v.global = false  AND  o.name='$optname' and u.email='$email' ";
-//        $query  = $this->getEntityManager()->createQuery($dql);
-//        $optval = $query->getOneOrNullResult();
-//        $optval = $this->findBy(["user" => $user->getId(), "option" => $option->getId()]);
         $optval = $this->findOneBy(["user"   => $user->getId(),
             "option" => $option->getId(),
             "global" => false]);
 
-        
         if (is_null($optval)) {
             $id = null;
         } else {

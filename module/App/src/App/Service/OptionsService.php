@@ -76,7 +76,7 @@ class OptionsService
         // preveri, če ima globalno opcijo
         if (!$opt->getReadOnly()) {
             $optValue = $em->getRepository('App\Entity\OptionValue')
-                    ->getOptionValuesGlobalValue($opt->getName());
+                    ->getOptionValuesGlobalValue($opt);
             if (!empty($optValue)) {
                 return $optValue;
             }

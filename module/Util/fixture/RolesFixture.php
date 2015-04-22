@@ -144,7 +144,7 @@ class OptionsFixture
                 echo "  global" . PHP_EOL;
 
                 // ali obstaja globalna opcija ?
-                $optValue = $em->getRepository('App\Entity\OptionValue')->getOptionValuesGlobalValue($val['name']);
+                $optValue = $em->getRepository('App\Entity\OptionValue')->getOptionValuesGlobalValue($o);
 
                 // pričakujemo, da najde največ 1 globalno vrednost. 
                 if (empty($optValue)) {
@@ -173,7 +173,7 @@ class OptionsFixture
                     $this->expect($u, "Ni tega uporabnika", 1000300); // $$ rb potrebno še implementirati trnsl 
                     // ali obstajajo  opcije userja
                     $optValue = $em->getRepository('App\Entity\OptionValue')
-                            ->getOptionValuesUserValue($val['name'], $user['email']);
+                            ->getOptionValuesUserValue($o, $u);
 
                     if (empty($optValue)) {
                         $optVal = new OptionValue();
