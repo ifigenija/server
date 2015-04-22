@@ -11,7 +11,9 @@ class Zasedenost extends \Koledar\Entity\Dogodek
      * 
      * 
      * 
-     */
+     @ORM\Id
+     @ORM\Column(type="guid")
+     @ORM\GeneratedValue(strategy="NONE")*/
     private $id;
 
     /**

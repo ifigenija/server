@@ -66,14 +66,14 @@ class DoctrineResolver implements ResolverInterface
      * authentication realm, and the password or hash, each delimited by
      * colons.
      *
-     * @param  string $username Username
+     * @param  string $email Username
      * @param  string $realm    Authentication Realm
      * @return Result  Authentication result
      * 
      */
-    public function resolve($username, $realm, $password = null)
+    public function resolve($email, $realm, $password = null)
     {
-        if (empty($username)) {
+        if (empty($email)) {
             return new Result(Result::FAILURE);
         }
 
@@ -81,7 +81,7 @@ class DoctrineResolver implements ResolverInterface
         ErrorHandler::start(E_WARNING);
 
         $rep = $this->em->getRepository($this->entityClass);
-        $user = $rep->findOneBy(['username' => $username]);
+        $user = $rep->findOneBy(['email' => $email]);
         if ($user) {
             $authenticated = \Aaa\Service\AaaService::checkPassword($user, $password);
             if ($authenticated)
