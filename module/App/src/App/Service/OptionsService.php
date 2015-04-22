@@ -158,7 +158,7 @@ class OptionsService
         $this->expect(!$opt->getReadOnly(), 'Opcija ni globalna ' . $name, 1000402);
 
         $optValR       = $em->getRepository('App\Entity\OptionValue');
-        $globalValueId = $optValR->getOptionValuesGlobalId($name);
+        $globalValueId = $optValR->getOptionValuesGlobalId($opt);
         if (empty($globalValueId)) {
             // kreiramo nov zapis v OptionValue
             $optVal = new OptionValue();

@@ -25,16 +25,11 @@ class OptionValues
      * Vrne globalno opcijo, če le-ta obstaja
      * 
      * @param \App\Entity\Option $option      ime opcije
-     * @return type map Global Value ali null
+     * @return mixed 
      */
     public function getOptionValuesGlobalValue($option)
     {
-//        $dql    = "SELECT v,o FROM App\Entity\OptionValue v JOIN v.option o" .
-//                " WHERE v.global = true  AND  o.name='$name'";
-//        $query  = $this->getEntityManager()->createQuery($dql);
-//        $optval = $query->getOneOrNullResult();
         $optval = $this->findOneBy(["option" => $option->getId(), "global" => true]);
-
         
         if (is_null($optval)) {
             $value = null;
@@ -47,15 +42,13 @@ class OptionValues
     /**
      * Vrne Id globalne opcijo, če le-ta obstaja
      * 
-     * @param type $name ime opcije
+     * @param \App\Entity\Option $option      ime opcije
      * @return string|null      Id ali null
      */
-    public function getOptionValuesGlobalId($name)
+    public function getOptionValuesGlobalId($option)
     {
-        $dql    = "SELECT v,o FROM App\Entity\OptionValue v JOIN v.option o" .
-                " WHERE v.global = true  AND  o.name='$name'";
-        $query  = $this->getEntityManager()->createQuery($dql);
-        $optval = $query->getOneOrNullResult();
+        $optval = $this->findOneBy(["option" => $option->getId(), "global" => true]);
+
         if (is_null($optval)) {
             $id = null;
         } else {
