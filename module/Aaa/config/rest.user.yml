@@ -1,0 +1,23 @@
+## YAML Template.
+---
+entityClass: Aaa\Entity\User
+permPrefix: Aaa
+disabledMethods: 
+    - delete
+    - create
+    - update
+forms:
+    default:
+        elements:
+            - name
+            - email
+            - password
+            - expires
+            - enabled
+            - roles
+            - defaultRoute                       
+lists:
+    default:
+hydrator:
+    exclude: 
+        - builtIn

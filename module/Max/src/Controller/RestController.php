@@ -271,9 +271,25 @@ class RestController
         return $this->notSupported();
     }
 
+    /**
+     * Vrne metapodatke o formi, ki se uporablja za kontroller 
+     * 
+     */
     public function options()
     {
-        return $this->notSupported();
+        $view = $this->params('view', 'default');
+
+        try {            
+            $form = $this->buildForm($view);
+            $this->expect($form, $this->trnsl("forma ne obstaja"),980405);
+            $result = $form->getSchemaFromMeta();
+            $r = $this->getResponse();
+            $r->setContent(\Zend\Json\Json::encode($result));
+            header('Content-type: application/json; charset=UTF-8');
+        } catch (Exception $e) {
+            $this->addErrorFromException($e);
+            return $this->getErrors();
+        }
     }
 
     public function replaceList($data)

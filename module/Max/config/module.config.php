@@ -95,6 +95,7 @@ return [
             'date' => 'Max\Form\Element\Date',
             'email' => 'Max\Form\Element\Email',
             'toone' => 'Max\Form\Element\EntityToOne',
+            'tomany' => 'Max\Form\Element\EntityToMany',
             'lookupSelect' => 'Max\Form\Element\LookupSelect',
             // forme
             'EntityForm' => 'Tip\Form\EntityForm'

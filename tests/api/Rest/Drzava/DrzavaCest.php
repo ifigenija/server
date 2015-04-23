@@ -29,6 +29,20 @@ class DrzavaCest
         
     }
 
+    /**
+     * get meta
+     * 
+     * @param ApiTester $I
+     */
+    public function getMeta(\ApiTester $I)
+    {
+        $controller = "drzava";
+        $view = "";
+        $expected = "";
+        $I->testFormMeta('drzava', '');
+        
+    }
+
     public function getList(ApiTester $I)
     {
         $list     = $I->successfullyGetList($this->restUrl, []);
@@ -45,11 +59,11 @@ class DrzavaCest
             'isoNum'    => 'xx',
             'isoNaziv'  => 'xx',
             'naziv'     => 'xx',
-            'opomba'    => 'xx',
         ];
-        $this->obj = $drz       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('xx', $drz['opomba']);
+        $drz       = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals('xx', $data['sifraDolg']);
         $I->assertNotEmpty($drz['id']);
+        $this->obj = $drz;
     }
 
     /**
@@ -58,23 +72,31 @@ class DrzavaCest
      */
     public function update(ApiTester $I)
     {
-        $drz           = $this->obj;
-        $drz['opomba'] = 'tralala';
+        $drz          = $this->obj;
+        $drz['naziv'] = 'tralala';
 
         $drz = $I->successfullyUpdate($this->restUrl, $drz['id'], $drz);
 
-        $I->assertEquals('tralala', $drz['opomba']);
+        $I->assertEquals('tralala', $drz['naziv']);
     }
 
-    // tests
+    /**
+     * 
+     * @depends update
+     * @param ApiTester $I
+     */
     public function read(ApiTester $I)
     {
         $drz = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals('tralala', $drz['opomba']);
+        $I->assertEquals('tralala', $drz['naziv']);
     }
 
-    // tests
+    /**
+     * 
+     * @depends create 
+     * @param ApiTester $I
+     */
     public function delete(ApiTester $I)
     {
         $drz = $I->successfullyDelete($this->restUrl, $this->obj['id']);
