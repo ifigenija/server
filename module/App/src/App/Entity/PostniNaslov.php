@@ -33,7 +33,7 @@ class PostniNaslov
     /**
      * Lastnik postnega naslova če gre za klienta 
      * 
-     * @var \Max\Entity\Popa
+     * @var App\Entity\Popa
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa")
      * @ORM\JoinColumn(name="klient_id", referencedColumnName="id")
      * @Max\Ui(type="toone")
@@ -43,7 +43,7 @@ class PostniNaslov
     /**
      * Lastnik poštnega naslova če gre ze osebo 
      * 
-     * @var \Max\Entity\Oseba
+     * @var App\Entity\Oseba
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="naslovi")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\Ui(type="toone")
@@ -241,13 +241,13 @@ class PostniNaslov
         return $this;
     }
 
-    public function setPopa(\Max\Entity\Popa $popa)
+    public function setPopa(\App\Entity\Popa $popa)
     {
         $this->popa = $popa;
         return $this;
     }
 
-    public function setOseba(\Max\Entity\Oseba $oseba)
+    public function setOseba(\App\Entity\Oseba $oseba)
     {
         $this->oseba = $oseba;
         return $this;

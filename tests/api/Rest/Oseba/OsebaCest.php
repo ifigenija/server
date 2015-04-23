@@ -29,7 +29,9 @@ class OsebaCest
     private $obj;
     private $trr;
     private $postni;
+    private $postniG;
     private $tel;
+    private $tel2;
 
     public function _before(ApiTester $I)
     {
@@ -128,6 +130,7 @@ class OsebaCest
     /**
      * Dodam telefonsko številko 
      * @param ApiTester $I
+     * @depends create
      */
     public function dodajTelefonskoStevilko(\ApiTester $I)
     {
@@ -140,6 +143,18 @@ class OsebaCest
         ];
 
         $tel = $I->successfullyCreate($this->telUrl, $data);
+        $I->assertNotEmpty($tel);
+    }
+
+    /**
+     * Preberem  telefonsko številko 
+     * @param ApiTester $I
+     * @depends dodajTelefonskoStevilko
+     */
+    public function preberiTelefonskoStevilko(\ApiTester $I)
+    {
+        $list = $I->successfullyGetList($this->telUrl, []);
+        $I->assertNotEmpty($list);
     }
 
     /**
@@ -151,6 +166,7 @@ class OsebaCest
     public function dodajPostniNaslov(\ApiTester $I)
     {
         $data = [
+        //    "oseba"     => $this->obj['id'],
             "oseba"     => $this->obj['id'],
             "naziv"     => "privzeti naslov",
             "ulica"     => "cmd 16",
@@ -165,6 +181,18 @@ class OsebaCest
         $postni         = $I->successfullyCreate($this->naslUrl, $data);
         $I->assertNotEmpty($postni, "naslov ni vpisan");   // $$ rb naslova ne doda pri ($form->isValid())
         $I->assertEquals('privzeti naslov', $postni['naziv'], "naziv naslova ni isti");
+    }
+
+    /**
+     * preberem poštni naslov  
+     * @depends dodajPostniNaslov
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiPostniNaslov(\ApiTester $I)                  //$$ rb ne deluje, nedokončano
+    {
+        $list = $I->successfullyGetList($this->naslUrl, []);
+        $I->assertNotEmpty($list);
     }
 
     /**
@@ -186,13 +214,14 @@ class OsebaCest
         $I->assertTrue(isset($oseba['trrji']));
         $I->assertTrue(isset($oseba['datumRojstva']));
         $I->assertTrue(isset($oseba['telefonske']));
-        $I->assertTrue(isset($oseba['naslov']), "naslova ni");
+        $I->assertTrue(isset($oseba['naslovi']), "naslova ni");
         $I->assertEquals(2, count($oseba['trrji']));
         $I->assertEquals(1, count($oseba['telefonske']));
     }
 
     /**
      * @depends create
+     * @depends read
      */
     public function delete(ApiTester $I)
     {

@@ -33,7 +33,7 @@ class Oseba
      *
      * @var Popa
      *
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="toone")  //$$ rb začasno odstranil
      * @Max\I18n(label="Klient",  description="Poslovni partner od katerega je kontaktna oseba")
      * @ORM\ManyToMany(targetEntity="App\Entity\Popa", mappedBy="osebe")
      */
@@ -86,13 +86,14 @@ class Oseba
      *
      * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="oseba")
      *
-     * @Max\Ui(targetEntity="Max\Entity\PostniNaslov", master="oseba")
+     * @Max\Ui(targetEntity="App\Entity\PostniNaslov", master="oseba")
      */
     protected $naslovi;
 
     /**
      * Elektronski naslov
      *  naslov e-pošte
+     * Uporablja se tudi kot uporabniško ime pri prijavi v aplikacijo.
      *
      * @ORM\Column(length=40, nullable=true)
      * @var string
@@ -174,12 +175,6 @@ class Oseba
     private $sodelovanja;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
-     * @ORM\JoinColumn(name="naslov_id", referencedColumnName="id")
-     */
-    private $naslov;
-
-    /**
      * 
      * 
      * @param string $mode
@@ -225,6 +220,16 @@ class Oseba
         return $this->priimek;
     }
 
+    public function getPesvdonim()
+    {
+        return $this->pesvdonim;
+    }
+
+    public function getFunkcija()
+    {
+        return $this->funkcija;
+    }
+
     public function getSrednjeIme()
     {
         return $this->srednjeIme;
@@ -235,9 +240,9 @@ class Oseba
         return $this->psevdonim;
     }
 
-    public function getNaslov()
+    public function getNaslovi()
     {
-        return $this->naslov;
+        return $this->naslovi;
     }
 
     public function getEmail()
@@ -345,6 +350,18 @@ class Oseba
         return $this;
     }
 
+    public function setPesvdonim($pesvdonim)
+    {
+        $this->pesvdonim = $pesvdonim;
+        return $this;
+    }
+
+    public function setFunkcija($funkcija)
+    {
+        $this->funkcija = $funkcija;
+        return $this;
+    }
+
     public function setSrednjeIme($srednjeIme)
     {
         $this->srednjeIme = $srednjeIme;
@@ -357,9 +374,9 @@ class Oseba
         return $this;
     }
 
-    public function setNaslov($naslov)
+    public function setNaslovi($naslovi)
     {
-        $this->naslov = $naslov;
+        $this->naslovi = $naslovi;
         return $this;
     }
 
@@ -452,6 +469,5 @@ class Oseba
         $this->sodelovanja = $sodelovanja;
         return $this;
     }
-
 
 }
