@@ -104,7 +104,7 @@ class User
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Parametri za pot",  description="Parametri za privzeto pot v aplikaciji po prijavi")
-     * @Max\Ui(group="Zagon"")
+     * @Max\Ui(group="Zagon")
      */
     protected $defaultRouteParams;
 
