@@ -24,9 +24,9 @@ class PostniNaslov
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
-     * @var integer
      *
      * @Max\I18n(label="Id", description="ID poštnega naslova")
+     * @var integer
      */
     protected $id;
 
@@ -54,10 +54,10 @@ class PostniNaslov
      * Naziv
      *
      * @ORM\Column(length=50, nullable=true)
-     * @var string
      *
      * @Max\I18n(label="Naziv", description="Naziv naslova")
      * @Max\Ui(ident=true)
+     * @var string
      */
     protected $naziv;
 
@@ -156,9 +156,8 @@ class PostniNaslov
 
     public function validate($mode = 'update')
     {
-        $this->expect($this->oseba || $this->popa, "Naslov nima lastnika. Oseba ali posslovni partner sta obvezna", 1000304);
+        $this->expect($this->oseba || $this->popa, "Naslov nima lastnika. Oseba ali poslovni partner sta obvezna", 1000304);
     }
-
     public function getId()
     {
         return $this->id;
@@ -224,21 +223,45 @@ class PostniNaslov
         return $this->privzeti;
     }
 
+    public function setJeeu($jeeu)
+    {
+        $this->jeeu = $jeeu;
+        return $this;
+    }
+
+    public function setPrivzeti($privzeti)
+    {
+        $this->privzeti = $privzeti;
+        return $this;
+    }
+
     public function setId($id)
     {
         $this->id = $id;
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa = null)
+    public function setPopa(\Max\Entity\Popa $popa)
     {
         $this->popa = $popa;
         return $this;
     }
 
-    public function setOseba(\App\Entity\Oseba $oseba = null)
+    public function setOseba(\Max\Entity\Oseba $oseba)
     {
         $this->oseba = $oseba;
+        return $this;
+    }
+
+    public function setNaziv($naziv)
+    {
+        $this->naziv = $naziv;
+        return $this;
+    }
+
+    public function setNazivDva($nazivDva)
+    {
+        $this->nazivDva = $nazivDva;
         return $this;
     }
 
@@ -278,16 +301,7 @@ class PostniNaslov
         return $this;
     }
 
-    public function setJeeu($jeeu)
-    {
-        $this->jeeu = $jeeu;
-        return $this;
-    }
 
-    public function setPrivzeti($privzeti)
-    {
-        $this->privzeti = $privzeti;
-        return $this;
-    }
+
 
 }

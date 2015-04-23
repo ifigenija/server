@@ -5,12 +5,14 @@ namespace Rest\Oseba;
 use ApiTester;
 
 /**
- * - ustvarim osebo,
- * - posodobim osebo 
- * - dodam telefonsko številko
- * - dodam poštni naslov  
- * - dodam trr 
- * - preberem ustvarjeno osebo in preverim, da ima trr-je, 
+ *      - ustvarim osebo,
+ *      - preberem (vse) osebo (e)
+ *      - posodobim osebo 
+ *      - dodam 2 trr 
+ *      - dodam telefonsko številko
+ *      - dodam poštni naslov  
+ * - preberem poštni naslov
+ *      - preberem ustvarjeno osebo in preverim, da ima trr-je, 
  *   poštni naslovi n telefonske številke 
  * - brišem osebo in se morajo pčistiti poštni naslov, 
  *   trrji in telefonske številke, ker je orphan removal = true
@@ -20,10 +22,10 @@ class OsebaCest
 {
 
     private $restUrl = '/rest/oseba';
-    private $trrUrl = '/rest/trr';
+    private $trrUrl  = '/rest/trr';
     private $naslUrl = '/rest/postninaslov';
-    private $telUrl = '/rest/telefonska';
-    private $id ;
+    private $telUrl  = '/rest/telefonska';
+    private $id;
     private $obj;
     private $trr;
     private $postni;
@@ -83,7 +85,7 @@ class OsebaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function update(ApiTester $I)
+    public function updateOseba(ApiTester $I)
     {
         $oseba        = $this->obj;
         $oseba['ime'] = 'tralala';
@@ -95,10 +97,11 @@ class OsebaCest
 
     /**
      * Dodam dva računa 
+     * 
      * @depends  create
      * @param ApiTester $I
      */
-    public function dodajTrr(\ApiTester $I)
+    public function dodajDvaTrr(\ApiTester $I)
     {
 
         $data = [
@@ -112,17 +115,16 @@ class OsebaCest
         $trr = $I->successfullyCreate($this->trrUrl, $data);
         $I->assertEquals('NLB', $trr['banka']);
 
-        $I->assertEquals($trr['oseba'], $this->obj['id'], "useba je");
+        $I->assertEquals($trr['oseba'], $this->obj['id'], "oseba je");
         $I->assertEmpty($trr['popa'], "popa mora biti null");
 
         $data['stevilka'] = "44444444";
         $data['banka']    = "NKBM";
-        $trr = $this->trr             = $I->successfullyCreate($this->trrUrl, $data);
+        $trr              = $this->trr        = $I->successfullyCreate($this->trrUrl, $data);
 
         $I->assertEquals('44444444', $trr['stevilka'], "stevilka  drugi trr");
     }
 
-    
     /**
      * Dodam telefonsko številko 
      * @param ApiTester $I
@@ -130,17 +132,16 @@ class OsebaCest
     public function dodajTelefonskoStevilko(\ApiTester $I)
     {
         $data = [
-            "oseba" => $this->obj['id'],
+            "oseba"    => $this->obj['id'],
             "stevilka" => "7777-122123",
-            "vrsta" => "mobilna",
+//            "vrsta" => "mobilna",         
+            "vrsta"    => "Mobilni", //$$ rb - to je začasno, dokler se ne popravijo form-> setData... nastavljanje filtrov iz configa (v .yml)
             "privzeta" => false
         ];
-        
+
         $tel = $I->successfullyCreate($this->telUrl, $data);
-        
     }
 
-    
     /**
      * Dodam poštni naslov na osebo 
      * @depends create
@@ -150,35 +151,44 @@ class OsebaCest
     public function dodajPostniNaslov(\ApiTester $I)
     {
         $data = [
-            "useba" => $this->obj['id'],            
-            'naziv' => "privzeti naslov",
-            "ulica" => "cmd 16",
-            "posta" => "2250 Ptuj",
-            "pokrajina" => "Štajerska",            
+            "oseba"     => $this->obj['id'],
+            "naziv"     => "privzeti naslov",
+            "ulica"     => "cmd 16",
+            "posta"     => "2250 Ptuj",
+            "pokrajina" => "Štajerska",
         ];
-        
-        $list = $I->successfullyGetList('/rest/drzava', ["q" => "SI"]);        
+
+        $list           = $I->successfullyGetList('/rest/drzava', ["q" => "SI"]);
         $I->assertNotEmpty($list, "prazen seznam držav");
-        $drz = array_pop($list);
-        $data["drzava"] = $drz['id'];        
-        $I->successfullyCreate($this->naslUrl, $data);
-                
+        $drz            = array_pop($list);
+        $data["drzava"] = $drz['id'];
+        $postni         = $I->successfullyCreate($this->naslUrl, $data);
+        $I->assertNotEmpty($postni, "naslov ni vpisan");   // $$ rb naslova ne doda pri ($form->isValid())
+        $I->assertEquals('privzeti naslov', $postni['naziv'], "naziv naslova ni isti");
     }
-    
+
     /**
-     * 
      * Preberem osebo in preverim, če ima vse dodane trr-je,
      * telefonske številke in poštne naslove 
+     * 
      * @depends create
+     * @depends updateOseba
+     * @depends dodajDvaTrr
+     * @depends dodajTelefonskoStevilko
+     * @depends dodajPostniNaslov
      */
     public function read(ApiTester $I)
     {
         $oseba = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
+        $I->assertNotEmpty($oseba, "osebe ni");
         $I->assertEquals('tralala', $oseba['ime']);
-        $I->assertTrue(!isset($oseba['trrji']));
-        $I->assertTrue(!isset($oseba['datumRojstva']));
+        $I->assertTrue(isset($oseba['trrji']));
+        $I->assertTrue(isset($oseba['datumRojstva']));
+        $I->assertTrue(isset($oseba['telefonske']));
+        $I->assertTrue(isset($oseba['naslov']), "naslova ni");
         $I->assertEquals(2, count($oseba['trrji']));
+        $I->assertEquals(1, count($oseba['telefonske']));
     }
 
     /**

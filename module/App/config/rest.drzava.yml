@@ -3,7 +3,7 @@
 type: rest
 disabledMethods: 
 #    - list
-    - update
+#    - update
 entityClass: App\Entity\Drzava
 forms:
     default: 
@@ -19,8 +19,8 @@ lists:
         filter:                       
         sort: 
 hydrator:
-    exclude: 
-        - opomba
-    virtual:
-        - tralala
+#    exclude: 
+#        - opomba
+#    virtual:
+#        - tralala
                 
