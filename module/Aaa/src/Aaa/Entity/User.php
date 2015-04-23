@@ -202,10 +202,7 @@ class User
         return $this->name;
     }
 
-    function getUsername()
-    {
-        return $this->username;
-    }
+ 
 
     function getRoles()
     {
@@ -237,10 +234,6 @@ class User
         $this->name = $name;
     }
 
-    function setUsername($username)
-    {
-        $this->username = $username;
-    }
 
     function setRoles($roles)
     {
