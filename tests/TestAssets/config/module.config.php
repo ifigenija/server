@@ -8,4 +8,7 @@
 
 
 return [
+        'fixtures' => [
+        __DIR__ . '/../fixture'
+    ]
 ];

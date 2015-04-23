@@ -27,11 +27,12 @@ class JsonForm
 
     public function init()
     {
-         $sm = $this->getServiceLocator()->getServiceLocator();
-        $this->em = $sm->get('doctrine.entitymanager.orm_default');
-        $this->mf = $sm->get('entity.metadata.factory');
+        $sm         = $this->getServiceLocator()->getServiceLocator();
+        $this->em   = $sm->get('doctrine.entitymanager.orm_default');
+        $this->mf   = $sm->get('entity.metadata.factory');
         $this->opts = $sm->get('options.service');
     }
+
     public function getIzbirne($opcije)
     {
         return $this->getServiceLocator()
@@ -126,6 +127,7 @@ class JsonForm
 
         // ali doctrine anotacije
         try {
+            
             $map = $meta->getMapping()->getFieldMapping($element->getName());
         } catch (Exception $e) {
             $map = null;
@@ -148,7 +150,6 @@ class JsonForm
      */
     public static function getFieldSchema($element)
     {
-        $f                 = new StripEntity();
         $opts              = $element->getOptions();
         $field             = new stdClass();
         $type              = $element->getAttribute('type');
@@ -162,7 +163,7 @@ class JsonForm
         $field->type = self::filterType($type);
 
         if (isset($opts['description'])) {
-            $field->help = $opts['description'] ;
+            $field->help = $opts['description'];
         } else {
             $field->help = "";
         }
@@ -195,7 +196,11 @@ class JsonForm
             $field->decimals            = 0;
         }
         if (isset($opts['targetEntity'])) {
-            $field->targetEntity = $f->filter($opts['targetEntity']);
+            
+            
+             $arr = explode('\\' ,$opts['targetEntity']);
+             
+             $field->targetEntity = array_pop($arr);
         }
 
         if (isset($opts['minLength'])) {
@@ -237,26 +242,7 @@ class JsonForm
         return get_object_vars($field);
     }
 
-    public function getCollectionMeta(Collection $collection)
-    {
-        $result = [];
-        $fs     = $collection->getTargetElement();
-        foreach ($fs as $element) {
 
-
-            if ($element instanceof Collection) {
-                $field = $this->getCollectionMeta($element);
-            } else {
-                $field = $this->getFieldMeta($element);
-            }
-
-            $result[] = $field;
-        }
-        return ['name'      => $collection->getName(),
-            'type'      => 'Object',
-            'subSchema' => $result
-        ];
-    }
 
     public function getCollectionSchema(Collection $collection)
     {
@@ -278,7 +264,6 @@ class JsonForm
         ];
     }
 
-
     /**
      * getter za mode
      *
@@ -299,8 +284,8 @@ class JsonForm
     public function setMode($mode)
     {
         $this->mode = $mode;
-        
-         if ($mode == 'EDIT') {
+
+        if ($mode == 'EDIT') {
             $this->ensureIdElement();
         }
         foreach ($this->elements as $el) {
@@ -333,7 +318,7 @@ class JsonForm
      */
     public function addWithMeta($name, $options = [], $type = null)
     {
-        
+
         if (!$this->metadata) {
             throw new MaxException($name . ': Polja ni mogoče dodati brez metapodatkov', 1000107);
         }
@@ -443,6 +428,15 @@ class JsonForm
                 $options = $this->addOptionIf($options, 'targetEntity', $target);
                 $options = $this->addOptionIf($options, 'master', $this->getUiMasterFromMeta($name));
             }
+            if ($type == 'tomany') {
+                $target = $this->getUiTargetEntityFromMeta($name);
+                if (!$target) {
+                    throw new MaxException("No target entity on $name", 1000400);
+                }
+                $options                           = $this->addOptionIf($options, 'targetEntity', $target);
+                $options['should_create_template'] = false;
+                $options['allow_add']              = true;
+            }
             if ($type == 'addresslookup') {
                 $target  = $this->getUiTargetEntityFromMeta($name);
                 $options = $this->addOptionIf($options, 'targetEntity', $target);
@@ -479,7 +473,6 @@ class JsonForm
         $options = $this->addOptionIf($options, 'prependIcon', $this->getUiIconFromMeta($name));
         $options = $this->addOptionIf($options, 'class', $this->getUiClassFromMeta($name));
         $options = $this->addOptionIf($options, 'group', $this->getUiGroupFromMeta($name));
-
         $options = $this->addOptionIf($options, 'metadata', $this->metadata);
 
 
@@ -510,8 +503,6 @@ class JsonForm
         }
         return $arr;
     }
-
-
 
     /**
      * Potegne label iz metapodatkov
@@ -814,6 +805,5 @@ class JsonForm
     {
         $this->mf = $mf;
     }
-
 
 }

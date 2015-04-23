@@ -40,19 +40,9 @@ class User
 
     /**
      * @ORM\Column(type="string", nullable=false)
+     * @Max\I18n(label="Polno ime", description="Polno ime uporabnika. Ime in priimek oz. opis za api uporabnike")
      */
     private $name;
-
-    /**
-     * Uporabniško ime za dostop
-     *
-     * 
-     * @var string
-     *
-     * @Max\I18n(label="Uporabniško ime",  description="Uporabniško ime")
-     * @Max\Ui(group="Login", type="naziv", ident=true)
-     */
-    protected $username;
 
     /**
      * Geslo
@@ -81,7 +71,7 @@ class User
      *
      *      
      * @Max\I18n(label="Vloge",  description="Skupine, katerih član je uporabnik")
-     * @Max\UI(group="Vloge")
+     * @Max\UI(group="Vloge", type="tomany")
      * @ORM\ManyToMany(targetEntity="Aaa\Entity\Role", inversedBy="users")
      * @ORM\JoinTable(
      *     name="Role2User",
@@ -107,14 +97,14 @@ class User
      *
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Privzeta pot ob prijavi",  description="Privzeta pot v aplikaciji po prijavi")
-     * @Max\Ui(group="Zagon", type="text")
+     * @Max\Ui(group="Zagon")
      */
     protected $defaultRoute;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Parametri za pot",  description="Parametri za privzeto pot v aplikaciji po prijavi")
-     * @Max\Ui(group="Zagon", type="textarea")
+     * @Max\Ui(group="Zagon"")
      */
     protected $defaultRouteParams;
 

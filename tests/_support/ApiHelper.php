@@ -27,9 +27,9 @@ class ApiHelper
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPOST($url, [
             'jsonrpc' => '2.0',
-            'method' => $method,
-            'params' => $params,
-            'id' => 3
+            'method'  => $method,
+            'params'  => $params,
+            'id'      => 3
         ]);
         $I->seeResponseCodeIs('200');
         $I->seeResponseIsJson();
@@ -56,10 +56,10 @@ class ApiHelper
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendPOST($url, [
-            'method' => $method,
-            'params' => $params,
+            'method'  => $method,
+            'params'  => $params,
             'jsonrpc' => '2.0',
-            'id' => 3
+            'id'      => 3
         ]);
         $I->seeResponseCodeIs('200');
         $I->seeResponseIsJson();
@@ -272,6 +272,43 @@ class ApiHelper
                 $this->debug("coudn\'t delete record {$insertId} from {$table}");
             }
         }
+    }
+
+    /**
+     * 
+     * Z OPTIONS metodo testira pridobivanje metapodatkov za formo 
+     * 
+     * 
+     * @param string $controler 
+     * @param string $view
+     * @param array $expected
+     */
+    public function testFormMeta($controller, $view, $expected = [])
+    {
+         $I = $this->getModule('REST');
+          $I->sendOPTIONS("/rest/$controller" .( $view ? "/$view" : ""));
+        $I->seeResponseCodeIs('200');
+        $I->seeResponseIsJson();
+        $formMeta = $I->grabDataFromJsonResponse();
+
+        codecept_debug($formMeta);
+        $I->assertNotEmpty($formMeta, "Prazni metapodatki za $controller/$view" );
+
+        
+        foreach ($formMeta as $field) {
+
+                if (!empty($expected['field'])) {
+                    unset ($expected['field']);
+                }
+         
+            $I->assertTrue(array_key_exists('name', $field), "Ima name");
+            $I->assertTrue(array_key_exists('type', $field), "Ima type");
+            $I->assertTrue(array_key_exists('editorAttrs', $field), "ima editorAttrs");
+            $I->assertTrue(array_key_exists('help', $field), "Ima help");
+            $I->assertTrue(array_key_exists('validators', $field), "Ima validators");
+        }
+        
+        $I->assertEmpty($expected);
     }
 
 }

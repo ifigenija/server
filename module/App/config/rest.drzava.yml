@@ -1,9 +1,6 @@
 ## YAML Template.
 ---
 type: rest
-disabledMethods: 
-#    - list
-    - update
 entityClass: App\Entity\Drzava
 forms:
     default: 
@@ -14,6 +11,8 @@ forms:
             - isoNaziv
             - naziv
             - opomba
+        hydrator: 
+            
 lists:
     default:      
         filter:                       
@@ -21,6 +20,5 @@ lists:
 hydrator:
     exclude: 
         - opomba
-    virtual:
-        - tralala
+
                 

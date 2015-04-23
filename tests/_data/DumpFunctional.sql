@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.5
 -- Dumped by pg_dump version 9.3.5
--- Started on 2015-04-22 11:46:40 CEST
+-- Started on 2015-04-23 08:29:07 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -5102,7 +5102,7 @@ CREATE INDEX zacetek ON dogodek USING btree (zacetek);
 
 
 --
--- TOC entry 2696 (class 2606 OID 2801471)
+-- TOC entry 2698 (class 2606 OID 2801471)
 -- Name: fk_11e93b5d10398482; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5111,7 +5111,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2699 (class 2606 OID 2801456)
+-- TOC entry 2695 (class 2606 OID 2801456)
 -- Name: fk_11e93b5d14a6c237; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5120,7 +5120,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2698 (class 2606 OID 2801461)
+-- TOC entry 2696 (class 2606 OID 2801461)
 -- Name: fk_11e93b5d18640538; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5129,7 +5129,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2694 (class 2606 OID 2801481)
+-- TOC entry 2700 (class 2606 OID 2801481)
 -- Name: fk_11e93b5d3a0e32e3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5138,7 +5138,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2700 (class 2606 OID 2801451)
+-- TOC entry 2694 (class 2606 OID 2801451)
 -- Name: fk_11e93b5d5ac894aa; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5147,7 +5147,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2695 (class 2606 OID 2801476)
+-- TOC entry 2699 (class 2606 OID 2801476)
 -- Name: fk_11e93b5dcc3aa562; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5183,7 +5183,7 @@ ALTER TABLE ONLY placilniinstrument
 
 
 --
--- TOC entry 2713 (class 2606 OID 2801551)
+-- TOC entry 2714 (class 2606 OID 2801551)
 -- Name: fk_20d95c7fa81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5192,7 +5192,7 @@ ALTER TABLE ONLY prodajapredstave
 
 
 --
--- TOC entry 2714 (class 2606 OID 2801546)
+-- TOC entry 2713 (class 2606 OID 2801546)
 -- Name: fk_20d95c7fb31ae31; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5210,7 +5210,7 @@ ALTER TABLE ONLY vaja
 
 
 --
--- TOC entry 2735 (class 2606 OID 2801666)
+-- TOC entry 2737 (class 2606 OID 2801666)
 -- Name: fk_23aeb9584dc36c21; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5219,7 +5219,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 2737 (class 2606 OID 2801656)
+-- TOC entry 2735 (class 2606 OID 2801656)
 -- Name: fk_23aeb95862b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5246,7 +5246,7 @@ ALTER TABLE ONLY kupec
 
 
 --
--- TOC entry 2740 (class 2606 OID 2801671)
+-- TOC entry 2738 (class 2606 OID 2801671)
 -- Name: fk_2decfc5910389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5264,7 +5264,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 2738 (class 2606 OID 2801681)
+-- TOC entry 2740 (class 2606 OID 2801681)
 -- Name: fk_2decfc59fa5529ee; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5273,7 +5273,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 2746 (class 2606 OID 2801721)
+-- TOC entry 2748 (class 2606 OID 2801721)
 -- Name: fk_344a77a3b262815; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5291,7 +5291,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2748 (class 2606 OID 2801711)
+-- TOC entry 2746 (class 2606 OID 2801711)
 -- Name: fk_344a77af35157b1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5300,7 +5300,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2692 (class 2606 OID 2801446)
+-- TOC entry 2693 (class 2606 OID 2801446)
 -- Name: fk_37f6541a10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5309,7 +5309,7 @@ ALTER TABLE ONLY trr
 
 
 --
--- TOC entry 2693 (class 2606 OID 2801441)
+-- TOC entry 2692 (class 2606 OID 2801441)
 -- Name: fk_37f6541a6beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5318,7 +5318,7 @@ ALTER TABLE ONLY trr
 
 
 --
--- TOC entry 2685 (class 2606 OID 2801411)
+-- TOC entry 2686 (class 2606 OID 2801411)
 -- Name: fk_4472a4c610389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5327,7 +5327,7 @@ ALTER TABLE ONLY oseba2popa
 
 
 --
--- TOC entry 2686 (class 2606 OID 2801406)
+-- TOC entry 2685 (class 2606 OID 2801406)
 -- Name: fk_4472a4c66beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5336,7 +5336,7 @@ ALTER TABLE ONLY oseba2popa
 
 
 --
--- TOC entry 2682 (class 2606 OID 2801396)
+-- TOC entry 2683 (class 2606 OID 2801396)
 -- Name: fk_466966d769e8d4; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5345,7 +5345,7 @@ ALTER TABLE ONLY oseba
 
 
 --
--- TOC entry 2683 (class 2606 OID 2801391)
+-- TOC entry 2682 (class 2606 OID 2801391)
 -- Name: fk_466966d7a76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5372,7 +5372,7 @@ ALTER TABLE ONLY gostujoca
 
 
 --
--- TOC entry 2677 (class 2606 OID 2801361)
+-- TOC entry 2676 (class 2606 OID 2801361)
 -- Name: fk_4ff23396d60322ac; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5381,7 +5381,7 @@ ALTER TABLE ONLY permission2role
 
 
 --
--- TOC entry 2676 (class 2606 OID 2801366)
+-- TOC entry 2677 (class 2606 OID 2801366)
 -- Name: fk_4ff23396fed90cca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5390,7 +5390,7 @@ ALTER TABLE ONLY permission2role
 
 
 --
--- TOC entry 2724 (class 2606 OID 2801611)
+-- TOC entry 2726 (class 2606 OID 2801611)
 -- Name: fk_52ed210b1c0dc15a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5408,7 +5408,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2726 (class 2606 OID 2801601)
+-- TOC entry 2724 (class 2606 OID 2801601)
 -- Name: fk_52ed210bef943358; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5417,7 +5417,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2705 (class 2606 OID 2801496)
+-- TOC entry 2703 (class 2606 OID 2801496)
 -- Name: fk_602f6e4662b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5426,7 +5426,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 2703 (class 2606 OID 2801506)
+-- TOC entry 2705 (class 2606 OID 2801506)
 -- Name: fk_602f6e466f7e7a33; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5444,7 +5444,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 2719 (class 2606 OID 2801591)
+-- TOC entry 2722 (class 2606 OID 2801591)
 -- Name: fk_667e35d117619010; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5453,7 +5453,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2721 (class 2606 OID 2801581)
+-- TOC entry 2720 (class 2606 OID 2801581)
 -- Name: fk_667e35d1c146c3f3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5462,7 +5462,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2722 (class 2606 OID 2801576)
+-- TOC entry 2719 (class 2606 OID 2801576)
 -- Name: fk_667e35d1f5e1d2d3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5471,7 +5471,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2720 (class 2606 OID 2801586)
+-- TOC entry 2721 (class 2606 OID 2801586)
 -- Name: fk_667e35d1fe7b16e1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5480,7 +5480,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2679 (class 2606 OID 2801371)
+-- TOC entry 2678 (class 2606 OID 2801371)
 -- Name: fk_704d3abca76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5489,7 +5489,7 @@ ALTER TABLE ONLY role2user
 
 
 --
--- TOC entry 2678 (class 2606 OID 2801376)
+-- TOC entry 2679 (class 2606 OID 2801376)
 -- Name: fk_704d3abcd60322ac; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5516,7 +5516,7 @@ ALTER TABLE ONLY postavkaracuna
 
 
 --
--- TOC entry 2745 (class 2606 OID 2801701)
+-- TOC entry 2744 (class 2606 OID 2801701)
 -- Name: fk_8198265413e60bc0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5525,7 +5525,7 @@ ALTER TABLE ONLY rekviziterstvo
 
 
 --
--- TOC entry 2744 (class 2606 OID 2801706)
+-- TOC entry 2745 (class 2606 OID 2801706)
 -- Name: fk_8198265462b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5543,7 +5543,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2689 (class 2606 OID 2801416)
+-- TOC entry 2687 (class 2606 OID 2801416)
 -- Name: fk_89c1f9d2a233cb39; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5552,7 +5552,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2687 (class 2606 OID 2801426)
+-- TOC entry 2689 (class 2606 OID 2801426)
 -- Name: fk_89c1f9d2ee4b985a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5561,7 +5561,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2742 (class 2606 OID 2801686)
+-- TOC entry 2741 (class 2606 OID 2801686)
 -- Name: fk_97af082e62b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5570,7 +5570,7 @@ ALTER TABLE ONLY produkcijadelitev
 
 
 --
--- TOC entry 2741 (class 2606 OID 2801691)
+-- TOC entry 2742 (class 2606 OID 2801691)
 -- Name: fk_97af082ec532925b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5588,7 +5588,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2731 (class 2606 OID 2801626)
+-- TOC entry 2729 (class 2606 OID 2801626)
 -- Name: fk_a4b7244f1f9ae227; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5597,7 +5597,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2728 (class 2606 OID 2801641)
+-- TOC entry 2732 (class 2606 OID 2801641)
 -- Name: fk_a4b7244f5bc4d310; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5606,7 +5606,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2732 (class 2606 OID 2801621)
+-- TOC entry 2728 (class 2606 OID 2801621)
 -- Name: fk_a4b7244f8b21fb79; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5615,7 +5615,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2729 (class 2606 OID 2801636)
+-- TOC entry 2731 (class 2606 OID 2801636)
 -- Name: fk_a4b7244fdbdb4006; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5633,7 +5633,7 @@ ALTER TABLE ONLY zaposlitev
 
 
 --
--- TOC entry 2715 (class 2606 OID 2801571)
+-- TOC entry 2718 (class 2606 OID 2801571)
 -- Name: fk_b5b84f4533341ab8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5642,7 +5642,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2716 (class 2606 OID 2801566)
+-- TOC entry 2717 (class 2606 OID 2801566)
 -- Name: fk_b5b84f45a420584d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5651,7 +5651,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2718 (class 2606 OID 2801556)
+-- TOC entry 2715 (class 2606 OID 2801556)
 -- Name: fk_b5b84f45bc902d3b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5660,7 +5660,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2717 (class 2606 OID 2801561)
+-- TOC entry 2716 (class 2606 OID 2801561)
 -- Name: fk_b5b84f45fe7b16e1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5669,7 +5669,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2733 (class 2606 OID 2801651)
+-- TOC entry 2734 (class 2606 OID 2801651)
 -- Name: fk_bbff875562b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5678,7 +5678,7 @@ ALTER TABLE ONLY arhivalija
 
 
 --
--- TOC entry 2734 (class 2606 OID 2801646)
+-- TOC entry 2733 (class 2606 OID 2801646)
 -- Name: fk_bbff8755a81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5705,7 +5705,7 @@ ALTER TABLE ONLY produkcijskahisa
 
 
 --
--- TOC entry 2680 (class 2606 OID 2801386)
+-- TOC entry 2681 (class 2606 OID 2801386)
 -- Name: fk_ef01221fa76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5714,7 +5714,7 @@ ALTER TABLE ONLY optionvalue
 
 
 --
--- TOC entry 2681 (class 2606 OID 2801381)
+-- TOC entry 2680 (class 2606 OID 2801381)
 -- Name: fk_ef01221fa7c41d6f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5723,7 +5723,7 @@ ALTER TABLE ONLY optionvalue
 
 
 --
--- TOC entry 2691 (class 2606 OID 2801431)
+-- TOC entry 2690 (class 2606 OID 2801431)
 -- Name: fk_ef76e55910389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5732,7 +5732,7 @@ ALTER TABLE ONLY telefonska
 
 
 --
--- TOC entry 2690 (class 2606 OID 2801436)
+-- TOC entry 2691 (class 2606 OID 2801436)
 -- Name: fk_ef76e5596beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5741,7 +5741,7 @@ ALTER TABLE ONLY telefonska
 
 
 --
--- TOC entry 2707 (class 2606 OID 2801526)
+-- TOC entry 2709 (class 2606 OID 2801526)
 -- Name: fk_fef7d84b10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5759,7 +5759,7 @@ ALTER TABLE ONLY terminstoritve
 
 
 --
--- TOC entry 2709 (class 2606 OID 2801516)
+-- TOC entry 2707 (class 2606 OID 2801516)
 -- Name: fk_fef7d84ba81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5767,7 +5767,7 @@ ALTER TABLE ONLY terminstoritve
     ADD CONSTRAINT fk_fef7d84ba81ccef6 FOREIGN KEY (dogodek_id) REFERENCES dogodek(id);
 
 
--- Completed on 2015-04-22 11:46:41 CEST
+-- Completed on 2015-04-23 08:29:07 CEST
 
 --
 -- PostgreSQL database dump complete

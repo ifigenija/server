@@ -56,7 +56,7 @@ class Role
     /**
      * 
      * @Max\I18n(label="Dovoljenja", description="Dovoljenja")
-     * @Max\Ui(type="list")
+     * @Max\Ui(type="tomany")
      * @ORM\ManyToMany(targetEntity="Aaa\Entity\Permission", inversedBy="roles")
      * @ORM\JoinTable(
      *     name="Permission2Role",
@@ -72,7 +72,7 @@ class Role
      * @Max\I18n(label="Uporabniki", description="Uporabniki, ki s to vlogo")
      * @ORM\ManyToMany(targetEntity="Aaa\Entity\User", mappedBy="roles")
      * 
-     * 
+     * @Max\Ui(type="tomany")
      */
     protected $users;
 
