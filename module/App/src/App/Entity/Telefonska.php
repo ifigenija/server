@@ -60,6 +60,14 @@ class Telefonska
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
      */
     private $popa;
+    
+    
+    public function validate($mode = 'update')
+    {
+        $this->expect($this->popa || $this->oseba, 'Lastnik računa ni nastavljen - Poslovni partner ali oseba', 1000460);        
+        $this->expect(!($this->popa && $this->oseba), "Lastnika računa je lahko samo poslovni partner ali oseba", 1000461);
+        $this->expect($this->stevilka, "Telefonska številka  je obvezen podatek", 1000462);
+    }
 
     function getId()
     {

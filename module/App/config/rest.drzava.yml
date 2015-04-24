@@ -1,6 +1,9 @@
 ## YAML Template.
 ---
 type: rest
+disabledMethods: 
+#    - list
+#    - update
 entityClass: App\Entity\Drzava
 forms:
     default: 
@@ -18,7 +21,7 @@ lists:
         filter:                       
         sort: 
 hydrator:
-    exclude: 
-        - opomba
-
-                
+#    exclude: 
+#        - opomba
+#    virtual:
+#        - tralala
