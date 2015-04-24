@@ -9,11 +9,12 @@ use ApiTester;
  *      - preberem (vse) osebo (e)
  *      - posodobim osebo 
  *      - dodam 2 trr 
+ *      - preberem 1 trr
  *      - dodam telefonsko številko
+ *      - preberem telefonsko številko
  *      - dodam poštni naslov  
- * - preberem poštni naslov
- *      - preberem ustvarjeno osebo in preverim, da ima trr-je, 
- *   poštni naslovi n telefonske številke 
+ *      - preberem poštni naslov
+ *      - preberem ustvarjeno osebo in preverim, da ima trr-je, telefonske številke in naslov
  * - brišem osebo in se morajo pčistiti poštni naslov, 
  *   trrji in telefonske številke, ker je orphan removal = true
  * 
@@ -27,9 +28,11 @@ class OsebaCest
     private $telUrl  = '/rest/telefonska';
     private $id;
     private $obj;
+    private $objpostni;
+    private $objtrr;
+    private $objtel;
     private $trr;
     private $postni;
-    private $postniG;
     private $tel;
     private $tel2;
 
@@ -114,7 +117,7 @@ class OsebaCest
             "bic"      => "xxxx"
         ];
 
-        $trr = $I->successfullyCreate($this->trrUrl, $data);
+        $this->objtrr = $trr          = $I->successfullyCreate($this->trrUrl, $data);
         $I->assertEquals('NLB', $trr['banka']);
 
         $I->assertEquals($trr['oseba'], $this->obj['id'], "oseba je");
@@ -125,6 +128,19 @@ class OsebaCest
         $trr              = $this->trr        = $I->successfullyCreate($this->trrUrl, $data);
 
         $I->assertEquals('44444444', $trr['stevilka'], "stevilka  drugi trr");
+    }
+
+    /**
+     * Preberem prvi kreirani TRR
+     * @param ApiTester $I
+     * @depends dodajDvaTrr
+     */
+    public function preberiTrr(\ApiTester $I)
+    {
+        $trr = $I->successfullyGet($this->trrUrl, $this->objtrr['id']);
+        $I->assertNotEmpty($trr);
+        $I->assertTrue(isset($trr['banka']));
+        $I->assertEquals("NLB", $trr['banka']);
     }
 
     /**
@@ -142,7 +158,7 @@ class OsebaCest
             "privzeta" => false
         ];
 
-        $tel = $I->successfullyCreate($this->telUrl, $data);
+        $this->objtel = $tel          = $I->successfullyCreate($this->telUrl, $data);
         $I->assertNotEmpty($tel);
     }
 
@@ -153,8 +169,10 @@ class OsebaCest
      */
     public function preberiTelefonskoStevilko(\ApiTester $I)
     {
-        $list = $I->successfullyGetList($this->telUrl, []);
-        $I->assertNotEmpty($list);
+        $tel = $I->successfullyGet($this->telUrl, $this->objtel['id']);
+        $I->assertNotEmpty($tel);
+        $I->assertTrue(isset($tel['stevilka']));
+        $I->assertEquals("7777-122123", $tel['stevilka']);
     }
 
     /**
@@ -166,7 +184,7 @@ class OsebaCest
     public function dodajPostniNaslov(\ApiTester $I)
     {
         $data = [
-        //    "oseba"     => $this->obj['id'],
+            //    "oseba"     => $this->obj['id'],
             "oseba"     => $this->obj['id'],
             "naziv"     => "privzeti naslov",
             "ulica"     => "cmd 16",
@@ -174,11 +192,11 @@ class OsebaCest
             "pokrajina" => "Štajerska",
         ];
 
-        $list           = $I->successfullyGetList('/rest/drzava', ["q" => "SI"]);
+        $list            = $I->successfullyGetList('/rest/drzava', ["q" => "SI"]);
         $I->assertNotEmpty($list, "prazen seznam držav");
-        $drz            = array_pop($list);
-        $data["drzava"] = $drz['id'];
-        $postni         = $I->successfullyCreate($this->naslUrl, $data);
+        $drz             = array_pop($list);
+        $data["drzava"]  = $drz['id'];
+        $this->objpostni = $postni          = $I->successfullyCreate($this->naslUrl, $data);
         $I->assertNotEmpty($postni, "naslov ni vpisan");   // $$ rb naslova ne doda pri ($form->isValid())
         $I->assertEquals('privzeti naslov', $postni['naziv'], "naziv naslova ni isti");
     }
@@ -191,8 +209,10 @@ class OsebaCest
      */
     public function preberiPostniNaslov(\ApiTester $I)                  //$$ rb ne deluje, nedokončano
     {
-        $list = $I->successfullyGetList($this->naslUrl, []);
-        $I->assertNotEmpty($list);
+        $postni = $I->successfullyGet($this->naslUrl, $this->objpostni['id']);
+        $I->assertNotEmpty($postni);
+        $I->assertTrue(isset($postni['pokrajina']));
+        $I->assertEquals("Štajerska", $postni['pokrajina']);
     }
 
     /**
@@ -217,6 +237,7 @@ class OsebaCest
         $I->assertTrue(isset($oseba['naslovi']), "naslova ni");
         $I->assertEquals(2, count($oseba['trrji']));
         $I->assertEquals(1, count($oseba['telefonske']));
+        $I->assertEquals(1, count($oseba['naslovi']));
     }
 
     /**

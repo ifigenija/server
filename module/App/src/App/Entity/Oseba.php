@@ -33,7 +33,7 @@ class Oseba
      *
      * @var Popa
      *
-     * @Max\Ui(type="toone")  //$$ rb začasno odstranil
+     * @Max\Ui(type="toone")  
      * @Max\I18n(label="Klient",  description="Poslovni partner od katerega je kontaktna oseba")
      * @ORM\ManyToMany(targetEntity="App\Entity\Popa", mappedBy="osebe")
      */
@@ -84,7 +84,7 @@ class Oseba
     /**
      * Naslov kontaktne osebe
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="oseba")
+     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="oseba", orphanRemoval=true)
      *
      * @Max\Ui(targetEntity="App\Entity\PostniNaslov", master="oseba")
      */
@@ -155,7 +155,7 @@ class Oseba
     private $telefonske;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="oseba")
+     * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="oseba", orphanRemoval=true)
      */
     private $trrji;
 

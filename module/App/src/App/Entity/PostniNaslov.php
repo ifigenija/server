@@ -157,6 +157,8 @@ class PostniNaslov
     public function validate($mode = 'update')
     {
         $this->expect($this->oseba || $this->popa, "Naslov nima lastnika. Oseba ali poslovni partner sta obvezna", 1000304);
+        $this->expect(!($this->popa && $this->oseba), "Nalov je lahko samo ali poslovni partner ali oseba", 1000305);
+        $this->expect($this->naziv, "naziv je obvezen podatek", 1000306);
     }
     public function getId()
     {
