@@ -108,6 +108,7 @@ class JsonForm
             case 'Hidden':
             case 'TextArea':
             case 'Toone':
+            case 'Tomany':
             case 'LookupSelect':
                 return $type;
                 break;
@@ -434,6 +435,7 @@ class JsonForm
                     throw new MaxException("No target entity on $name", 1000400);
                 }
                 $options                           = $this->addOptionIf($options, 'targetEntity', $target);
+                var_dump($options);
                 $options['should_create_template'] = false;
                 $options['allow_add']              = true;
             }
@@ -761,10 +763,10 @@ class JsonForm
         }
         if ($this->metadata->getMapping()->hasAssociation($name)) {
             $fieldMapping = $this->metadata->getMapping()->getAssociationMapping($name);
-            if ($fieldMapping['type'] && 3) {
+            if ($fieldMapping['type'] === 3) {
                 return 'toone';
             }
-            if ($fieldMapping['type'] && 12) {
+            if ($fieldMapping['type'] === 12) {
                 return 'tomany';
             }
         }
