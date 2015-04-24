@@ -309,9 +309,9 @@ class User
         return $this;
     }
 
-    public function getPassword()
+    public function getPassword()  // $$ rb ali bomo sploh dovolili to metodo?
     {
-        return $this->password;
+        return $this->password;    
     }
 
 }

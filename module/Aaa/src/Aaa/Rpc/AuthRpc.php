@@ -22,7 +22,7 @@ class AuthRpcService
      * 
      * Če gre za anonymous uporabnika, potem vrnemo prazen seznam.
      * 
-     * @returns arra
+     * @returns array
      */
     public function checkLogin()
     {
@@ -73,7 +73,7 @@ class AuthRpcService
         }
 
         $tr = $this->getServiceLocator()->get('translator');
-        throw new \Max\Exception\UnauthException($tr->translate('Vpis ni uspel'), 100998);
+        throw new \Max\Exception\UnauthException($tr->translate('Vpis ni uspel'), 1000998);
     }
 
     /**
@@ -90,7 +90,8 @@ class AuthRpcService
         };
         return [
             'name'               => $identity->getName(),
-            'username'           => $identity->getUserName(),
+//            'username'           => $identity->getUserName(),
+            'username'           => $identity->getEmail(),
             'defaultRoute'       => $identity->getDefaultRoute(),
             'defaultRouteParams' => $identity->getDefaultRouteParams(),
             'roles'              => $roles
