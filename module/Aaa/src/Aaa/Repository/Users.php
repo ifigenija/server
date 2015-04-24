@@ -76,7 +76,8 @@ class Users
         $l    = $qb->getQuery()->getResult(Query::HYDRATE_ARRAY);
         $list = [];
         foreach ($l as $g) {
-            if ($g['username'] === 'SYSTEM')
+//            if ($g['username'] === 'SYSTEM')
+            if ($g['email'] === 'SYSTEM')
                 continue;
             $list[] = ['id' => $g['id'], 'name' => $g['surname'] . ', ' . $g['name'] . ' (' . $g['email'] . ')'];
         }

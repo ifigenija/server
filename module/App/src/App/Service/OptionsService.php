@@ -121,7 +121,6 @@ class OptionsService
             $optVal->setValue($value);
             $optVal->setGlobal(false);
             $optVal->addOption($opt);
-//            $user   = $em->getRepository('Aaa\Entity\User')->findOneByUsername($username);
             $optVal->addUser($user);
         } else {
             // le zamenjamo vrednost

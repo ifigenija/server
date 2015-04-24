@@ -132,6 +132,7 @@ class User
     /**
      * Veljavnost žetona, za reset gesla
      * 
+     * zaenkrat se to polje ne uporablja. Tudi datetime funkcionalnost še ne deluje (npr. ne sprejme formata: '1973-28-03T04:30:00'     
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $tokenExpires;

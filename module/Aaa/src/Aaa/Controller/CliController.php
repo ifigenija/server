@@ -74,12 +74,9 @@ class CliController
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $username = $this->params('username');
         $rolename = $this->params('role');
-        var_dump($username);
-        var_dump($rolename);
-        
         
         $userR = $em->getRepository("Aaa\Entity\User");
-        $user = $userR->findOneByUsername($username);
+        $user = $userR->findOneByEmail($username);
         if (!$user) {
             echo "ni user -ja \n";
             throw new \Exception();
@@ -115,7 +112,7 @@ class CliController
         $rolename = $this->params('role');
 
         $userR = $em->getRepository("Aaa\Entity\User");
-        $user = $userR->findOneByUsername($username);
+        $user = $userR->findOneByEmail($username);
         if (!$user) {
             echo "ni user -ja\n";
             throw new \Exception();
@@ -136,7 +133,7 @@ class CliController
             echo "odstranjena vloga.\n";
             return;
         }
-        echo "uporabnik ni imel vloge.\n";
+        echo "uporabnik nima vloge.\n";
     }
 
     /**
@@ -168,7 +165,7 @@ class CliController
             foreach ($roleA as $role) {
                 echo "vloga      : " . $role["name"] . "\n";
                 foreach ($role['users'] as $user) {
-                    echo " uporabnik :  " . $user['username'] . "\n";
+                    echo " uporabnik :  " . $user['email'] . "\n";
                 }
             }
         }
@@ -188,7 +185,7 @@ class CliController
             }
             // še izpis:
             foreach ($userA as $user) {
-                echo "uporabnik  : " . $user["username"] . "\n";
+                echo "uporabnik  : " . $user["email"] . "\n";
                 foreach ($user['roles'] as $role) {
                     echo "     vloga :  " . $role['name'] . "\n";
                 }

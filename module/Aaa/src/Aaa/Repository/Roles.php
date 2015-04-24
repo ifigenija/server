@@ -119,7 +119,7 @@ class Roles
     public function getRolesUsersArray()
     {
         $dql   = "SELECT r,u FROM Aaa\Entity\Role r JOIN r.users u" .
-                " ORDER BY r.name,u.username ASC";
+                " ORDER BY r.name,u.email ASC";
         $query = $this->getEntityManager()->createQuery($dql);
         return $query->getArrayResult();
     }
@@ -128,7 +128,7 @@ class Roles
     public function getRoleUsersArray($rolename)
     {
         $dql   = "SELECT r,u FROM Aaa\Entity\Role r JOIN r.users u" .
-                " WHERE r.name='$rolename'ORDER BY u.username ASC";
+                " WHERE r.name='$rolename'ORDER BY u.email ASC";
         $query = $this->getEntityManager()->createQuery($dql);
         return $query->getArrayResult();
     }
