@@ -2,20 +2,21 @@
 ---
 entityClass: Aaa\Entity\User
 permPrefix: Aaa
-disabledMethods: 
-    - delete
-    - create
-    - update
+#disabledMethods: 
+#    - delete
+#    - create
+#    - update
 forms:
     default:
         elements:
-            - name
             - email
+            - name
             - password
-            - expires
             - enabled
-            - roles
-            - defaultRoute                       
+            - expires
+            - defaultRoute
+            - defaultRouteParams
+#            - passRestToken
 lists:
     default:
 hydrator:

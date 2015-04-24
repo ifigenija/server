@@ -60,7 +60,7 @@ class User
      *
      * @ORM\Column(type="boolean", nullable=true)
      * @Max\I18n(label="Aktiven",  description="Uporabnik aktiven")
-     * @Max\Ui(type="checkbox", group="Uporabnik")
+     * @Max\Ui(type="boolCheckbox", group="Uporabnik")
      */
     protected $enabled;
 
@@ -130,7 +130,7 @@ class User
     private $passRestToken;
 
     /**
-     * Veljavnost tokna, za reset gesla
+     * Veljavnost žetona, za reset gesla
      * 
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -139,6 +139,12 @@ class User
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+    }
+
+    public function validate($mode = 'update')
+    {
+        $this->expect($this->email, "Email (uporabniško ime) je obvezen podatek", 1000470);
+        $this->expect($this->name, "Name je obvezen podatek", 1000471);
     }
 
     public function addRoles($role)
@@ -160,22 +166,11 @@ class User
         return $this;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-
     public function setPassword($password)
     {
         if ($password !== '') {
             $bcrypt         = new Bcrypt();
-            $bcrypt->setSalt(51292170311201451452855644564);
+            $bcrypt->setSalt(51292170311201451452855644564);  //$$ rb potrebno še dopolniti, da se bo salt generiral dinamično
             $bcrypt->setCost(5);
             $this->password = $bcrypt->create($password);
         }
@@ -197,72 +192,39 @@ class User
         return $this->getUsername();
     }
 
-    function getName()
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getName()
     {
         return $this->name;
     }
 
- 
-
-    function getRoles()
+    public function getRoles()
     {
         return $this->roles;
     }
 
-    function getExpires()
+    public function getExpires()
     {
         return $this->expires;
     }
 
-    function getDefaultRoute()
+    public function getDefaultRoute()
     {
         return $this->defaultRoute;
     }
 
-    function getDefaultRouteParams()
+    public function getDefaultRouteParams()
     {
         return $this->defaultRouteParams;
     }
 
-    function getEmail()
+    public function getEmail()
     {
         return $this->email;
-    }
-
-    function setName($name)
-    {
-        $this->name = $name;
-    }
-
-
-    function setRoles($roles)
-    {
-        $this->roles = $roles;
-    }
-
-    function setExpires($expires)
-    {
-        $this->expires = $expires;
-    }
-
-    function setDefaultRoute($defaultRoute)
-    {
-        $this->defaultRoute = $defaultRoute;
-    }
-
-    function setDefaultRouteParams($defaultRouteParams)
-    {
-        $this->defaultRouteParams = $defaultRouteParams;
-    }
-
-    function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
     }
 
     public function getLastLogon()
@@ -278,6 +240,48 @@ class User
     public function getTokenExpires()
     {
         return $this->tokenExpires;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
+    public function setExpires($expires)
+    {
+        $this->expires = $expires;
+        return $this;
+    }
+
+    public function setDefaultRoute($defaultRoute)
+    {
+        $this->defaultRoute = $defaultRoute;
+        return $this;
+    }
+
+    public function setDefaultRouteParams($defaultRouteParams)
+    {
+        $this->defaultRouteParams = $defaultRouteParams;
+        return $this;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
     }
 
     public function setLastLogon($lastLogon)
@@ -298,5 +302,15 @@ class User
         return $this;
     }
 
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
 
 }

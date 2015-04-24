@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.6
 -- Dumped by pg_dump version 9.3.6
--- Started on 2015-04-24 09:23:37 CEST
+-- Started on 2015-04-24 12:14:24 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -35,7 +35,7 @@ SET search_path = public, pg_catalog;
 SET default_with_oids = false;
 
 --
--- TOC entry 179 (class 1259 OID 1157458)
+-- TOC entry 179 (class 1259 OID 1252873)
 -- Name: abonma; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -50,7 +50,7 @@ CREATE TABLE abonma (
 
 
 --
--- TOC entry 225 (class 1259 OID 1157941)
+-- TOC entry 225 (class 1259 OID 1253356)
 -- Name: alternacija; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -66,7 +66,7 @@ CREATE TABLE alternacija (
 
 
 --
--- TOC entry 224 (class 1259 OID 1157924)
+-- TOC entry 224 (class 1259 OID 1253339)
 -- Name: arhivalija; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -88,7 +88,7 @@ CREATE TABLE arhivalija (
 
 
 --
--- TOC entry 217 (class 1259 OID 1157840)
+-- TOC entry 217 (class 1259 OID 1253255)
 -- Name: besedilo; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -108,7 +108,7 @@ CREATE TABLE besedilo (
 
 
 --
--- TOC entry 193 (class 1259 OID 1157624)
+-- TOC entry 193 (class 1259 OID 1253039)
 -- Name: dogodek; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -131,7 +131,7 @@ CREATE TABLE dogodek (
 
 
 --
--- TOC entry 196 (class 1259 OID 1157665)
+-- TOC entry 196 (class 1259 OID 1253080)
 -- Name: dogodekizven; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -141,7 +141,7 @@ CREATE TABLE dogodekizven (
 
 
 --
--- TOC entry 189 (class 1259 OID 1157586)
+-- TOC entry 189 (class 1259 OID 1253001)
 -- Name: drza; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -157,7 +157,7 @@ CREATE TABLE drza (
 
 
 --
--- TOC entry 212 (class 1259 OID 1157790)
+-- TOC entry 212 (class 1259 OID 1253205)
 -- Name: funkcija; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -175,7 +175,7 @@ CREATE TABLE funkcija (
 
 
 --
--- TOC entry 191 (class 1259 OID 1157611)
+-- TOC entry 191 (class 1259 OID 1253026)
 -- Name: gostovanje; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -187,7 +187,7 @@ CREATE TABLE gostovanje (
 
 
 --
--- TOC entry 195 (class 1259 OID 1157659)
+-- TOC entry 195 (class 1259 OID 1253074)
 -- Name: gostujoca; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -224,7 +224,7 @@ CREATE TABLE kose (
 
 
 --
--- TOC entry 201 (class 1259 OID 1157708)
+-- TOC entry 201 (class 1259 OID 1253123)
 -- Name: kupec; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -235,7 +235,7 @@ CREATE TABLE kupec (
 
 
 --
--- TOC entry 205 (class 1259 OID 1157733)
+-- TOC entry 205 (class 1259 OID 1253148)
 -- Name: nacinplacina; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -247,7 +247,7 @@ CREATE TABLE nacinplacina (
 
 
 --
--- TOC entry 187 (class 1259 OID 1157560)
+-- TOC entry 187 (class 1259 OID 1252975)
 -- Name: option; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -265,7 +265,7 @@ CREATE TABLE option (
 
 
 --
--- TOC entry 180 (class 1259 OID 1157467)
+-- TOC entry 180 (class 1259 OID 1252882)
 -- Name: optionvalue; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -279,7 +279,7 @@ CREATE TABLE optionvalue (
 
 
 --
--- TOC entry 181 (class 1259 OID 1157478)
+-- TOC entry 181 (class 1259 OID 1252893)
 -- Name: oseba; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -306,7 +306,7 @@ CREATE TABLE oseba (
 
 
 --
--- TOC entry 184 (class 1259 OID 1157530)
+-- TOC entry 184 (class 1259 OID 1252945)
 -- Name: oseba2popa; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -317,7 +317,7 @@ CREATE TABLE oseba2popa (
 
 
 --
--- TOC entry 176 (class 1259 OID 1157432)
+-- TOC entry 176 (class 1259 OID 1252847)
 -- Name: permission; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -330,7 +330,7 @@ CREATE TABLE permission (
 
 
 --
--- TOC entry 178 (class 1259 OID 1157451)
+-- TOC entry 178 (class 1259 OID 1252866)
 -- Name: permission2role; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -341,7 +341,7 @@ CREATE TABLE permission2role (
 
 
 --
--- TOC entry 206 (class 1259 OID 1157740)
+-- TOC entry 206 (class 1259 OID 1253155)
 -- Name: placilniinstrument; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -353,7 +353,7 @@ CREATE TABLE placilniinstrument (
 
 
 --
--- TOC entry 210 (class 1259 OID 1157770)
+-- TOC entry 210 (class 1259 OID 1253185)
 -- Name: podrocjesedenja; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -367,7 +367,7 @@ CREATE TABLE podrocjesedenja (
 
 
 --
--- TOC entry 221 (class 1259 OID 1157882)
+-- TOC entry 221 (class 1259 OID 1253297)
 -- Name: pogodba; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -385,7 +385,7 @@ CREATE TABLE pogodba (
 
 
 --
--- TOC entry 183 (class 1259 OID 1157510)
+-- TOC entry 183 (class 1259 OID 1252925)
 -- Name: popa; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -412,7 +412,7 @@ CREATE TABLE popa (
 
 
 --
--- TOC entry 186 (class 1259 OID 1157552)
+-- TOC entry 186 (class 1259 OID 1252967)
 -- Name: posta; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -424,7 +424,7 @@ CREATE TABLE posta (
 
 
 --
--- TOC entry 202 (class 1259 OID 1157714)
+-- TOC entry 202 (class 1259 OID 1253129)
 -- Name: postavkaracuna; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -456,7 +456,7 @@ CREATE TABLE postninaslov (
 
 
 --
--- TOC entry 185 (class 1259 OID 1157537)
+-- TOC entry 185 (class 1259 OID 1252952)
 -- Name: postninaslovi; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -478,7 +478,7 @@ CREATE TABLE postninaslovi (
 
 
 --
--- TOC entry 190 (class 1259 OID 1157603)
+-- TOC entry 190 (class 1259 OID 1253018)
 -- Name: predstava; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -491,7 +491,7 @@ CREATE TABLE predstava (
 
 
 --
--- TOC entry 204 (class 1259 OID 1157726)
+-- TOC entry 204 (class 1259 OID 1253141)
 -- Name: prodajapredstave; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -503,7 +503,7 @@ CREATE TABLE prodajapredstave (
 
 
 --
--- TOC entry 216 (class 1259 OID 1157831)
+-- TOC entry 216 (class 1259 OID 1253246)
 -- Name: produkcijadelitev; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -517,7 +517,7 @@ CREATE TABLE produkcijadelitev (
 
 
 --
--- TOC entry 220 (class 1259 OID 1157875)
+-- TOC entry 220 (class 1259 OID 1253290)
 -- Name: produkcijskahisa; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -529,7 +529,7 @@ CREATE TABLE produkcijskahisa (
 
 
 --
--- TOC entry 208 (class 1259 OID 1157755)
+-- TOC entry 208 (class 1259 OID 1253170)
 -- Name: prostor; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -543,7 +543,7 @@ CREATE TABLE prostor (
 
 
 --
--- TOC entry 200 (class 1259 OID 1157699)
+-- TOC entry 200 (class 1259 OID 1253114)
 -- Name: racun; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -557,7 +557,7 @@ CREATE TABLE racun (
 
 
 --
--- TOC entry 199 (class 1259 OID 1157689)
+-- TOC entry 199 (class 1259 OID 1253104)
 -- Name: razpisansedez; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -572,7 +572,7 @@ CREATE TABLE razpisansedez (
 
 
 --
--- TOC entry 219 (class 1259 OID 1157865)
+-- TOC entry 219 (class 1259 OID 1253280)
 -- Name: rekvizit; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -584,7 +584,7 @@ CREATE TABLE rekvizit (
 
 
 --
--- TOC entry 215 (class 1259 OID 1157821)
+-- TOC entry 215 (class 1259 OID 1253236)
 -- Name: rekviziterstvo; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -598,7 +598,7 @@ CREATE TABLE rekviziterstvo (
 
 
 --
--- TOC entry 173 (class 1259 OID 1157403)
+-- TOC entry 173 (class 1259 OID 1252818)
 -- Name: revizije; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -614,7 +614,7 @@ CREATE TABLE revizije (
 
 
 --
--- TOC entry 172 (class 1259 OID 1157401)
+-- TOC entry 172 (class 1259 OID 1252816)
 -- Name: revizije_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -636,7 +636,7 @@ ALTER SEQUENCE revizije_id_seq OWNED BY revizije.id;
 
 
 --
--- TOC entry 209 (class 1259 OID 1157764)
+-- TOC entry 209 (class 1259 OID 1253179)
 -- Name: rezervacija; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -647,7 +647,7 @@ CREATE TABLE rezervacija (
 
 
 --
--- TOC entry 177 (class 1259 OID 1157441)
+-- TOC entry 177 (class 1259 OID 1252856)
 -- Name: role; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -660,7 +660,7 @@ CREATE TABLE role (
 
 
 --
--- TOC entry 175 (class 1259 OID 1157425)
+-- TOC entry 175 (class 1259 OID 1252840)
 -- Name: role2user; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -671,7 +671,7 @@ CREATE TABLE role2user (
 
 
 --
--- TOC entry 211 (class 1259 OID 1157778)
+-- TOC entry 211 (class 1259 OID 1253193)
 -- Name: sedez; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -690,7 +690,7 @@ CREATE TABLE sedez (
 
 
 --
--- TOC entry 203 (class 1259 OID 1157720)
+-- TOC entry 203 (class 1259 OID 1253135)
 -- Name: sedeznired; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -702,7 +702,7 @@ CREATE TABLE sedeznired (
 
 
 --
--- TOC entry 197 (class 1259 OID 1157670)
+-- TOC entry 197 (class 1259 OID 1253085)
 -- Name: sezona; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -716,7 +716,7 @@ CREATE TABLE sezona (
 
 
 --
--- TOC entry 182 (class 1259 OID 1157502)
+-- TOC entry 182 (class 1259 OID 1252917)
 -- Name: telefonska; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -731,7 +731,7 @@ CREATE TABLE telefonska (
 
 
 --
--- TOC entry 198 (class 1259 OID 1157676)
+-- TOC entry 198 (class 1259 OID 1253091)
 -- Name: terminstoritve; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -749,7 +749,7 @@ CREATE TABLE terminstoritve (
 
 
 --
--- TOC entry 218 (class 1259 OID 1157856)
+-- TOC entry 218 (class 1259 OID 1253271)
 -- Name: tipfunkcije; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -764,7 +764,7 @@ CREATE TABLE tipfunkcije (
 
 
 --
--- TOC entry 188 (class 1259 OID 1157572)
+-- TOC entry 188 (class 1259 OID 1252987)
 -- Name: trr; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -780,7 +780,7 @@ CREATE TABLE trr (
 
 
 --
--- TOC entry 174 (class 1259 OID 1157412)
+-- TOC entry 174 (class 1259 OID 1252827)
 -- Name: uporabniki; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -800,7 +800,7 @@ CREATE TABLE uporabniki (
 
 
 --
--- TOC entry 223 (class 1259 OID 1157906)
+-- TOC entry 223 (class 1259 OID 1253321)
 -- Name: uprizoritev; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -827,7 +827,7 @@ CREATE TABLE uprizoritev (
 
 
 --
--- TOC entry 192 (class 1259 OID 1157618)
+-- TOC entry 192 (class 1259 OID 1253033)
 -- Name: vaja; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -838,7 +838,7 @@ CREATE TABLE vaja (
 
 
 --
--- TOC entry 207 (class 1259 OID 1157747)
+-- TOC entry 207 (class 1259 OID 1253162)
 -- Name: vrstasedezev; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -852,7 +852,7 @@ CREATE TABLE vrstasedezev (
 
 
 --
--- TOC entry 214 (class 1259 OID 1157813)
+-- TOC entry 214 (class 1259 OID 1253228)
 -- Name: zaposlitev; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -873,7 +873,7 @@ CREATE TABLE zaposlitev (
 
 
 --
--- TOC entry 194 (class 1259 OID 1157646)
+-- TOC entry 194 (class 1259 OID 1253061)
 -- Name: zasedenost; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -889,7 +889,7 @@ CREATE TABLE zasedenost (
 
 
 --
--- TOC entry 222 (class 1259 OID 1157896)
+-- TOC entry 222 (class 1259 OID 1253311)
 -- Name: zvrstsurs; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -901,7 +901,7 @@ CREATE TABLE zvrstsurs (
 
 
 --
--- TOC entry 213 (class 1259 OID 1157803)
+-- TOC entry 213 (class 1259 OID 1253218)
 -- Name: zvrstuprizoritve; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -913,7 +913,7 @@ CREATE TABLE zvrstuprizoritve (
 
 
 --
--- TOC entry 2121 (class 2604 OID 1157406)
+-- TOC entry 2121 (class 2604 OID 1252821)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -921,7 +921,7 @@ ALTER TABLE ONLY revizije ALTER COLUMN id SET DEFAULT nextval('revizije_id_seq':
 
 
 --
--- TOC entry 2636 (class 0 OID 1157458)
+-- TOC entry 2636 (class 0 OID 1252873)
 -- Dependencies: 179
 -- Data for Name: abonma; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -931,7 +931,7 @@ COPY abonma (id, stpredstav, stkuponov, ime, opis, kapaciteta) FROM stdin;
 
 
 --
--- TOC entry 2682 (class 0 OID 1157941)
+-- TOC entry 2682 (class 0 OID 1253356)
 -- Dependencies: 225
 -- Data for Name: alternacija; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -941,7 +941,7 @@ COPY alternacija (id, vloga_id, sodelovanje_id, oseba_id, koprodukcija_delitev_i
 
 
 --
--- TOC entry 2681 (class 0 OID 1157924)
+-- TOC entry 2681 (class 0 OID 1253339)
 -- Dependencies: 224
 -- Data for Name: arhivalija; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -951,7 +951,7 @@ COPY arhivalija (id, dogodek_id, uprizoritev_id, oznakadatuma, datum, fizicnaobl
 
 
 --
--- TOC entry 2674 (class 0 OID 1157840)
+-- TOC entry 2674 (class 0 OID 1253255)
 -- Dependencies: 217
 -- Data for Name: besedilo; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -961,7 +961,7 @@ COPY besedilo (id, naslov, avtor, podnaslov, jezik, naslovizvirnika, datumprejem
 
 
 --
--- TOC entry 2650 (class 0 OID 1157624)
+-- TOC entry 2650 (class 0 OID 1253039)
 -- Dependencies: 193
 -- Data for Name: dogodek; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -971,7 +971,7 @@ COPY dogodek (id, predstava_id, zasedenost_id, vaja_id, gostovanje_id, dogodek_i
 
 
 --
--- TOC entry 2653 (class 0 OID 1157665)
+-- TOC entry 2653 (class 0 OID 1253080)
 -- Dependencies: 196
 -- Data for Name: dogodekizven; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -981,266 +981,266 @@ COPY dogodekizven (id) FROM stdin;
 
 
 --
--- TOC entry 2646 (class 0 OID 1157586)
+-- TOC entry 2646 (class 0 OID 1253001)
 -- Dependencies: 189
 -- Data for Name: drza; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY drza (id, sifra, sifradolg, isonum, isonaziv, naziv, opomba) FROM stdin;
-00040000-5539-ef77-fc99-69eea74aa4ed	AF	AFG	004	Afghanistan 	Afganistan	\N
-00040000-5539-ef77-2a65-b9cccd901f65	AX	ALA	248	Ålland Islands 	Alandski otoki	Otočje v Baltiku.
-00040000-5539-ef77-ee34-d7fdf26f9c8a	AL	ALB	008	Albania 	Albanija	\N
-00040000-5539-ef77-a46f-3748f084a25c	DZ	DZA	012	Algeria 	Alžirija	Koda po kabilskem nazivu: Dzayer.
-00040000-5539-ef77-9a09-993252ddfa28	AS	ASM	016	American Samoa 	Ameriška Samoa	Zunanji teritorij ZDA v južnem Tihem oceanu.
-00040000-5539-ef77-45e4-60f0dd8ee83c	AD	AND	020	Andorra 	Andora	\N
-00040000-5539-ef77-eaa4-d3314ce259d3	AO	AGO	024	Angola 	Angola	\N
-00040000-5539-ef77-1b3f-aed1b40ddc93	AI	AIA	660	Anguilla 	Angvila	Čezmorska skupnost Velike Britanije, predhodno je AI predstavljal francoski: Afar and Issas.
-00040000-5539-ef77-6177-19c62cbd4637	AQ	ATA	010	Antarctica 	Antarktika	Koda pa francoskem nazivu: Antarctique.
-00040000-5539-ef77-ea53-5524b7286310	AG	ATG	028	Antigua and Barbuda 	Antigva in Barbuda	Otoška država v malih Antilih v Karibskem morju.
-00040000-5539-ef77-22ae-fb3216b2d33b	AR	ARG	032	Argentina 	Argenitna	\N
-00040000-5539-ef77-7dce-2afabc6fa277	AM	ARM	051	Armenia 	Armenija	\N
-00040000-5539-ef77-d276-6935b2d980de	AW	ABW	533	Aruba 	Aruba	Otok v Karibskem morju, del kraljevine Nizozemske.
-00040000-5539-ef77-2caa-88ed497fc5ff	AU	AUS	036	Australia 	Avstralija	\N
-00040000-5539-ef77-fa19-075959d79b5d	AT	AUT	040	Austria 	Avstrija	\N
-00040000-5539-ef77-fb15-dec9347b561a	AZ	AZE	031	Azerbaijan 	Azerbajdžan	\N
-00040000-5539-ef77-a15b-64d8cb613dde	BS	BHS	044	Bahamas 	Bahami	\N
-00040000-5539-ef77-fcb7-78d7ced5bc77	BH	BHR	048	Bahrain 	Bahrajn	\N
-00040000-5539-ef77-3940-a995df930d2b	BD	BGD	050	Bangladesh 	Bangladeš	\N
-00040000-5539-ef77-187b-daebaa498095	BB	BRB	052	Barbados 	Barbados	\N
-00040000-5539-ef77-39f9-3531b7771e09	BY	BLR	112	Belarus 	Belorusija	Bivši ISO naziv države: Byelorussian SSR.
-00040000-5539-ef77-e486-90cd65d56b50	BE	BEL	056	Belgium 	Belgija	\N
-00040000-5539-ef77-74ca-6754a6c48caf	BZ	BLZ	084	Belize 	Belize	\N
-00040000-5539-ef77-94cd-a0351166b9bf	BJ	BEN	204	Benin 	Benin	Bivši ISO naziv države: Dahomey (DY).
-00040000-5539-ef77-efed-5363d97eb3d1	BM	BMU	060	Bermuda 	Bermudi	\N
-00040000-5539-ef77-7a28-2f19df7d033d	BT	BTN	064	Bhutan 	Butan	\N
-00040000-5539-ef77-9ad0-36adb053db51	BO	BOL	068	Bolivia, Plurinational State of 	Bolivija	\N
-00040000-5539-ef77-6b3c-b2e2650ae4e3	BQ	BES	535	Bonaire, Sint Eustatius and Saba 	Otočje Bonaire, Sv. Eustatij in Saba	Otočje v karibih pod nizozemsko upravo (the BES Islands). Bivši ISO naziv države: Bonaire, Saint Eustatius and Saba. BQ je prej predstavljal: British Antarctic Territory.
-00040000-5539-ef77-da85-4e632eaf6951	BA	BIH	070	Bosnia and Herzegovina 	Bosna in Hercegovina	\N
-00040000-5539-ef77-f5a7-5f21f001cdfc	BW	BWA	072	Botswana 	Bocvana	\N
-00040000-5539-ef77-8e59-9534f9e47600	BV	BVT	074	Bouvet Island 	Bouvetov otok	Norveški otok v južnem Atlantskem oceanu.
-00040000-5539-ef77-8676-838e701d2b33	BR	BRA	076	Brazil 	Brazilija	\N
-00040000-5539-ef77-9841-ed92848cd99b	IO	IOT	086	British Indian Ocean Territory 	Britansko ozemlje v Indijskem oceanu	\N
-00040000-5539-ef77-65b8-25f99eb03d10	BN	BRN	096	Brunei Darussalam 	Brunej	ISO naziv države po nazivu v ZN. Otoška država na otok Borneo v JV Aziji.
-00040000-5539-ef77-bd87-3e92ebf4adde	BG	BGR	100	Bulgaria 	Bolgarija	\N
-00040000-5539-ef77-047f-68a303dbf0c1	BF	BFA	854	Burkina Faso 	Burkina Faso	Bivši ISO naziv države: Upper Volta (HV).
-00040000-5539-ef77-5164-f61b95bf63b5	BI	BDI	108	Burundi 	Burundi 	\N
-00040000-5539-ef77-c900-610966a91ac4	KH	KHM	116	Cambodia 	Kambodža	Koda po bivšem nazivu: Khmer Republic. Bivši ISO naziv države: Kampuchea.
-00040000-5539-ef77-4365-3ed7ba8c4e83	CM	CMR	120	Cameroon 	Kamerun	\N
-00040000-5539-ef77-ca52-a177c6bbae45	CA	CAN	124	Canada 	Kanada	\N
-00040000-5539-ef77-2d5f-6f8e831a4819	CV	CPV	132	Cape Verde 	Kapverdski otoki (Zelenortski otoki)	Otočje v Atlantskem oceanu ob Afriki.
-00040000-5539-ef77-ba25-02cafd534420	KY	CYM	136	Cayman Islands 	Kajmanski otoki	\N
-00040000-5539-ef77-d3bd-1f78900ecb6d	CF	CAF	140	Central African Republic 	Srednjeafriška republika	Prej znana kot francoska kolonija Ubangi-Shari.
-00040000-5539-ef77-cec4-72c48287a692	TD	TCD	148	Chad 	Čad	Koda po francoskem nazivu: Tchad.
-00040000-5539-ef77-1ec3-d80a8af615ca	CL	CHL	152	Chile 	Čile	\N
-00040000-5539-ef77-1a09-c61c02702c8b	CN	CHN	156	China 	Kitajska	\N
-00040000-5539-ef77-d953-7f1358056a07	CX	CXR	162	Christmas Island 	Božični otok	Avstralsko ozemlje v Indijskem oceanu.
-00040000-5539-ef77-9c0d-f3834d552374	CC	CCK	166	Cocos (Keeling) Islands 	Kokosovi in Keelingovi otoki	Otočje pod upravo Avstralije v Indijskem oceanu.
-00040000-5539-ef77-7349-bae29d28de94	CO	COL	170	Colombia 	Kolumbija	\N
-00040000-5539-ef77-e717-4067a6213541	KM	COM	174	Comoros 	Komori	Otočje v Indijskem oceanu. Koda po nazivu v komorščini: Komori.
-00040000-5539-ef77-ff6a-078c2cc487bc	CG	COG	178	Congo 	Kongo	Srednji Kongo (celinska država brez morja).
-00040000-5539-ef77-ba06-e65a4bbcfe9a	CD	COD	180	Congo, the Democratic Republic of the 	Demokratična republika Kongo	Bivše ime: Zaire (ZR), obmorska država.
-00040000-5539-ef77-4c7d-ec3fce5adee3	CK	COK	184	Cook Islands 	Cookovi otoki	\N
-00040000-5539-ef77-99c1-e9994ebece22	CR	CRI	188	Costa Rica 	Kostarika	\N
-00040000-5539-ef77-58f6-5fe596b59d66	CI	CIV	384	Côte d'Ivoire 	Slonokoščena obala	\N
-00040000-5539-ef77-77d2-ebc4bc9455ad	HR	HRV	191	Croatia 	Hrvaška	Koda po nazivu v hrvaščini: Hrvatska.
-00040000-5539-ef77-1f00-cd2b559498b0	CU	CUB	192	Cuba 	Kuba	\N
-00040000-5539-ef77-eb45-415eeee072c8	CW	CUW	531	Curaçao 	Kurasao	Spada v čezmorsko ozemlje Nizozemske, Nizozemski Antili.
-00040000-5539-ef77-58fd-16a2a5d5c51e	CY	CYP	196	Cyprus 	Ciper	\N
-00040000-5539-ef77-57a9-faac6c2e1b7a	CZ	CZE	203	Czech Republic 	Češka	\N
-00040000-5539-ef77-0ad9-042a71b99dcd	DK	DNK	208	Denmark 	Danska	\N
-00040000-5539-ef77-7b16-38b9b921f536	DJ	DJI	262	Djibouti 	Džibuti	Staro ime: French Afar and Issas (AI).
-00040000-5539-ef77-1371-c677e3712114	DM	DMA	212	Dominica 	Dominika	Otoška država v malih Antilih v Karibskem morju.
-00040000-5539-ef77-986d-d58cdcda9404	DO	DOM	214	Dominican Republic 	Dominikanska republika	\N
-00040000-5539-ef77-250d-bc55c3d7268b	EC	ECU	218	Ecuador 	Ekvador	\N
-00040000-5539-ef77-0a60-384866df7b81	EG	EGY	818	Egypt 	Egipt	\N
-00040000-5539-ef77-9148-65ec46796b8b	SV	SLV	222	El Salvador 	Salvador	\N
-00040000-5539-ef77-02b3-399caa654d42	GQ	GNQ	226	Equatorial Guinea 	Ekvatorialna Gvineja	Koda po francoskem nazivu: Guinée équatoriale.
-00040000-5539-ef77-3dca-b59658fc9b12	ER	ERI	232	Eritrea 	Eritreja	\N
-00040000-5539-ef77-8cc5-0cf6cbca3004	EE	EST	233	Estonia 	Estonija	Koda po estonskem nazivu: Eesti.
-00040000-5539-ef77-c98d-7951b91d0b76	ET	ETH	231	Ethiopia 	Etiopija	\N
-00040000-5539-ef77-5d7e-35e46ef93738	FK	FRO	234	Falkland Islands (Malvinas) 	Falkalndski otoki	Čezmorsko otočje velike Britanije.
-00040000-5539-ef77-1814-b8bdc365484c	FO	FLK	238	Faroe Islands 	Ferski otoki	\N
-00040000-5539-ef77-7382-5ff3d8a94b24	FJ	FJI	242	Fiji 	Fidži	Otočje v južnem Tihem oceanu.
-00040000-5539-ef77-f633-ec8ebd1380d9	FI	FIN	246	Finland 	Finska	\N
-00040000-5539-ef77-6cda-5f820a8436b1	FR	FRA	250	France 	Francija	\N
-00040000-5539-ef77-c054-0e08cd3d3db8	GF	GUF	254	French Guiana 	Francoska Gvajana	Koda po francoskem nazivu: Guyane française.
-00040000-5539-ef77-46f4-6b0669a8e2c7	NL	NLD	528	Netherlands 	Nizozemska	\N
-00040000-5539-ef77-ba82-3647521b9224	PF	PYF	258	French Polynesia 	Francoska Polinezija	Čezmorsko otočje Francije v južnem Tihem oceanu. Koda po francoskem nazivu: Polynésie française.
-00040000-5539-ef77-b12c-e7fd527dccd8	TF	ATF	260	French Southern Territories 	Francoska južna ozemlja	Predstavlja francoske vulkanske otoke JV od Afrike v Indijskem oceanu in del antarktike, ki Franciji niso mednarodno priznani. Koda po francokem nazivu: Terres australes françaises.
-00040000-5539-ef77-f49b-4e56eee88b05	GA	GAB	266	Gabon 	Gabon	\N
-00040000-5539-ef77-cade-c2b6626b308f	GM	GMB	270	Gambia 	Gambija	\N
-00040000-5539-ef77-15c4-abf4bbe846b3	GE	GEO	268	Georgia 	Gruzija	Koda GE je prej predstavljala Gilbertove in Ellisijine otoke.
-00040000-5539-ef77-c397-f14fafabae6b	DE	DEU	276	Germany 	Nemčija	Koda po nemškem nazivu: Deutschland. Koda pred 1990 v uporabi za Zahodno Nemčijo.
-00040000-5539-ef77-2aee-5cc157bf7ace	GH	GHA	288	Ghana 	Gana	\N
-00040000-5539-ef77-cfd6-9f208aec6397	GI	GIB	292	Gibraltar 	Gibraltar	\N
-00040000-5539-ef77-33b2-43bfee3a811a	GR	GRC	300	Greece 	Grčija	\N
-00040000-5539-ef77-3b4c-5c57b5e99e9a	GL	GRL	304	Greenland 	Grenlandija	\N
-00040000-5539-ef77-0fdd-9d6c742d8c06	GD	GRD	308	Grenada 	Grenada	\N
-00040000-5539-ef77-f8f0-573c2622d883	GP	GLP	312	Guadeloupe 	Guadeloupe	Čezmorski otok Francije v Karibskem morju.
-00040000-5539-ef77-7499-3a6e6440e1d8	GU	GUM	316	Guam 	Guam	Zunanji teritorij ZDA v Tihem oceanu (tudi Guahan).
-00040000-5539-ef77-d5e1-2934134ddea5	GT	GTM	320	Guatemala 	Gvatemala	\N
-00040000-5539-ef77-3286-cb1d3c10df04	GG	GGY	831	Guernsey 	Otok Guernsey	Bailwick of Goursey je Britanski otok ob Franciji.
-00040000-5539-ef77-c4ec-0040dad5b182	GN	GIN	324	Guinea 	Gvineja	\N
-00040000-5539-ef77-9027-bf6cc2de9fdf	GW	GNB	624	Guinea-Bissau 	Gvineja-Bissau	\N
-00040000-5539-ef77-a174-1b604c395635	GY	GUY	328	Guyana 	Gvajana	\N
-00040000-5539-ef77-5182-cc0ed91e5820	HT	HTI	332	Haiti 	Haiti	\N
-00040000-5539-ef77-743b-86f0d7a2b967	HM	HMD	334	Heard Island and McDonald Islands 	Otok Heard in otočje McDonald	Nenaseljeno otočje v Indijskem oceanu pod upravo Avstralije.
-00040000-5539-ef77-6b18-08a3b44d3db3	VA	VAT	336	Holy See (Vatican City State) 	Vatikan	Bivši ISO naziv države: Vatican City State (Vatikanska mestna država).
-00040000-5539-ef77-fd21-2f5a663273ff	HN	HND	340	Honduras 	Honduras	\N
-00040000-5539-ef77-9158-da4cf6d731f0	HK	HKG	344	Hong Kong 	Hong Kong	\N
-00040000-5539-ef77-e383-d501962df047	HU	HUN	348	Hungary 	Madžarska	\N
-00040000-5539-ef77-d4b9-1beb8486337b	IS	ISL	352	Iceland 	Islandija	Koda po nazivu v islandščini: Ísland.
-00040000-5539-ef77-63e5-10863dfaff09	IN	IND	356	India 	Indija	\N
-00040000-5539-ef77-98d2-0f5774550872	ID	IDN	360	Indonesia 	Indonezija	\N
-00040000-5539-ef77-2463-602543c5a24b	IR	IRN	364	Iran, Islamic Republic of 	Iran	\N
-00040000-5539-ef77-bbd6-9cdc3a7f3fd7	IQ	IRQ	368	Iraq 	Irak	\N
-00040000-5539-ef77-8915-ba6310617a75	IE	IRL	372	Ireland 	Irska	\N
-00040000-5539-ef77-78a6-ea1d31df996d	IM	IMN	833	Isle of Man 	Otok Man	Spada neposredno pod Britansko krono a ni del Velike Britanije, nahaja se med Irsko in Veliko Britanijo.
-00040000-5539-ef77-62cc-e369b86f42ee	IL	ISR	376	Israel 	Izrael	\N
-00040000-5539-ef77-559d-8b30f417f712	IT	ITA	380	Italy 	Italija	\N
-00040000-5539-ef77-ce25-3927a7f7e4ae	JM	JAM	388	Jamaica 	Jamajka	\N
-00040000-5539-ef77-d947-87a1d0afe131	JP	JPN	392	Japan 	Japonska	\N
-00040000-5539-ef77-ede3-195698047535	JE	JEY	832	Jersey 	Otok Jersey	Bailwick of Jersey je Britanski otok med Anglijo in Francijo.
-00040000-5539-ef77-6014-f4fd1621ba2c	JO	JOR	400	Jordan 	Jordanija	\N
-00040000-5539-ef77-3f2f-da70b0839bfe	KZ	KAZ	398	Kazakhstan 	Kazahstan	Bivši ISO naziv države: Kazakstan.
-00040000-5539-ef77-bd03-ea8c54bc1588	KE	KEN	404	Kenya 	Kenija	\N
-00040000-5539-ef77-6f45-68c5fae38bdc	KI	KIR	296	Kiribati 	Kiribati	Razpršeno otočje v Tihem oceanu. Stari naziv: Gilbertovi otoki.
-00040000-5539-ef77-e8ea-ca2e6494a42b	KP	PRK	408	Korea, Democratic People's Republic of 	Severna Koreja	ISO naziv države po uradnem nazivu v ZN (splošno ime: Severna Koreja).
-00040000-5539-ef77-b2af-08da49374d1d	KR	KOR	410	Korea, Republic of 	Južna Koreja	ISO naziv države po uradnem nazivu v ZN (splošno ime: Južna Koreja).
-00040000-5539-ef77-b4a8-d11ebb84f507	KW	KWT	414	Kuwait 	Kuvajt	\N
-00040000-5539-ef77-764f-36f3c03a215b	KG	KGZ	417	Kyrgyzstan 	Kirgizistan (Kirgizija)	\N
-00040000-5539-ef77-5e1a-da202c3e662b	LA	LAO	418	Lao People's Democratic Republic 	Laos	\N
-00040000-5539-ef77-1df6-b0da10d05afa	LV	LVA	428	Latvia 	Latvija	\N
-00040000-5539-ef77-a33a-a0d3cede7c93	LB	LBN	422	Lebanon 	Libanon	\N
-00040000-5539-ef77-cfdd-d21244c11c09	LS	LSO	426	Lesotho 	Lesoto	\N
-00040000-5539-ef77-7499-81a517c6265f	LR	LBR	430	Liberia 	Liberija	\N
-00040000-5539-ef77-7760-761e2ef55cb2	LY	LBY	434	Libya 	Libija	Bivši ISO naziv države: Libyan Arab Jamahiriya.
-00040000-5539-ef77-5351-056a70b9a678	LI	LIE	438	Liechtenstein 	Lihtenštajn	\N
-00040000-5539-ef77-2d01-9345bbb4bb05	LT	LTU	440	Lithuania 	Litva	\N
-00040000-5539-ef77-48c7-7cb9f32c509f	LU	LUX	442	Luxembourg 	Luksemburg	\N
-00040000-5539-ef77-da85-da4df40af881	MO	MAC	446	Macao 	Makao	Bivši ISO naziv države: Macau.
-00040000-5539-ef77-e7af-3216e9b2ac71	MK	MKD	807	Macedonia, the former Yugoslav Republic of 	Makedonija	ISO naziv države glede na spor o nazivu države. Uradno domače ime države: Republika Makedonija.
-00040000-5539-ef77-0896-8b617408fae8	MG	MDG	450	Madagascar 	Madagaskar	\N
-00040000-5539-ef77-9059-bc7c351f9303	MW	MWI	454	Malawi 	Malavi	\N
-00040000-5539-ef77-9c96-851100722c4a	MY	MYS	458	Malaysia 	Malezija	\N
-00040000-5539-ef77-da4b-585f6a0887f7	MV	MDV	462	Maldives 	Maldivi	\N
-00040000-5539-ef77-dd26-9a2ed4c88fa4	ML	MLI	466	Mali 	Mali	\N
-00040000-5539-ef77-ce2a-bee55881fc93	MT	MLT	470	Malta 	Malta	\N
-00040000-5539-ef77-118b-a4eb4f665613	MH	MHL	584	Marshall Islands 	Maršalovi otoki	Majhno otočje v Tihem oceanu.
-00040000-5539-ef77-3f8c-b279d8c513cb	MQ	MTQ	474	Martinique 	Martinik	Čezmorski otok Francije v malih Antilih v Karibsekm morju.
-00040000-5539-ef77-a4ab-a1388052c96a	MR	MRT	478	Mauritania 	Mavretanija	\N
-00040000-5539-ef77-8f64-7357d13cb723	MU	MUS	480	Mauritius 	Mauricius (Moris)	Domačini v kreolščini imenujejo otok: Moris.
-00040000-5539-ef77-e8f6-1e4c07c2b17f	YT	MYT	175	Mayotte 	Francoska skupnost Mejot	Čezmorska skupnost Francije ob vzhodni obali Afrike.
-00040000-5539-ef77-50ac-2d66facbcecd	MX	MEX	484	Mexico 	Mehika	\N
-00040000-5539-ef77-8698-dbcf41de0f68	FM	FSM	583	Micronesia, Federated States of 	Mikronezija	Bivši ISO naziv države: Micronesia. Nahaja se v Tihem oceanu.
-00040000-5539-ef77-d0b8-cea38f33ae88	MD	MDA	498	Moldova, Republic of 	Moldavija	\N
-00040000-5539-ef77-3474-40777dae4a22	MC	MCO	492	Monaco 	Monako	\N
-00040000-5539-ef77-c22e-28111f62cec4	MN	MNG	496	Mongolia 	Mongolija	\N
-00040000-5539-ef77-cbf9-89a0309d349c	ME	MNE	499	Montenegro 	Črna Gora	\N
-00040000-5539-ef77-e076-070d77df2010	MS	MSR	500	Montserrat 	Montserat	Otok v Antilih v Karibskem morju odvisen od Velike Britanije.
-00040000-5539-ef77-a0d4-ef28c009a252	MA	MAR	504	Morocco 	Maroko	\N
-00040000-5539-ef77-6bf0-c99f40acaec2	MZ	MOZ	508	Mozambique 	Mozambik	\N
-00040000-5539-ef77-1f7a-3cf1f62df6c3	MM	MMR	104	Myanmar 	Mjanmar	Bivši naziv: Burma (BU).
-00040000-5539-ef77-c757-da7e60b4de8c	NA	NAM	516	Namibia 	Namibija	\N
-00040000-5539-ef77-a612-e7ca8c69059e	NR	NRU	520	Nauru 	Nauru	Otoška država v Južnem Tihem oceanu.
-00040000-5539-ef77-9a6f-138b24516c34	NP	NPL	524	Nepal 	Nepal	\N
-00040000-5539-ef77-1666-8e811df57621	NC	NCL	540	New Caledonia 	Nova Kaledonija	Čezmorsko otočje Francije v Pacifiku.
-00040000-5539-ef77-71fb-86866f87d0b6	NZ	NZL	554	New Zealand 	Nova Zelandija	\N
-00040000-5539-ef77-6a6b-3086974d2a2d	NI	NIC	558	Nicaragua 	Nikaragva	\N
-00040000-5539-ef77-5854-89aaf1001303	NE	NER	562	Niger 	Niger 	\N
-00040000-5539-ef77-24e8-a4132127cd02	NG	NGA	566	Nigeria 	Nigerija	\N
-00040000-5539-ef77-38d3-6ccba81f9c11	NU	NIU	570	Niue 	Niu	Otoška država v Južnem Tihem oceanu.
-00040000-5539-ef77-76e1-a0be3aa5d901	NF	NFK	574	Norfolk Island 	Otok Norflok	Del Avstralije s samoupravo.
-00040000-5539-ef77-6838-810cf7289ea8	MP	MNP	580	Northern Mariana Islands 	Severni Marianski otoki	Ameriško otočje v severnem Tihem oceanu.
-00040000-5539-ef77-abb0-a5e431e13734	NO	NOR	578	Norway 	Norveška	\N
-00040000-5539-ef77-69df-7adba9b26f64	OM	OMN	512	Oman 	Oman	\N
-00040000-5539-ef77-2b2a-f662033d980d	PK	PAK	586	Pakistan 	Pakistan	\N
-00040000-5539-ef77-6379-de359386fbb2	PW	PLW	585	Palau 	Palau 	Majhna otoška država v Tihem oceanu.
-00040000-5539-ef77-ee3e-c4221922f08b	PS	PSE	275	Palestinian Territory, Occupied 	Palestina	Sestavljena iz Zahodnega brega in Gaze.
-00040000-5539-ef77-9a6a-ac3fbb071b81	PA	PAN	591	Panama 	Panama	\N
-00040000-5539-ef77-e731-2f3a05d9c978	PG	PNG	598	Papua New Guinea 	Papua Nova Gvineja	\N
-00040000-5539-ef77-a9aa-f9821e5b65b2	PY	PRY	600	Paraguay 	Paragvaj	\N
-00040000-5539-ef77-b00e-2f7bb267de01	PE	PER	604	Peru 	Peru	\N
-00040000-5539-ef77-c775-80b60d8a2b67	PH	PHL	608	Philippines 	Filipini	\N
-00040000-5539-ef77-080d-6fee2adb69d6	PN	PCN	612	Pitcairn 	Pitcairnovi otoki	Čezmorsko otočje Velike Britanije v Tihem oceanu.
-00040000-5539-ef77-141b-8e1b3f7308df	PL	POL	616	Poland 	Poljska	\N
-00040000-5539-ef77-4bc0-3c371d5a6b1d	PT	PRT	620	Portugal 	Portugalska	\N
-00040000-5539-ef77-3132-91aab70ab833	PR	PRI	630	Puerto Rico 	Portoriko	\N
-00040000-5539-ef77-c7da-b7fcbff9a52a	QA	QAT	634	Qatar 	Katar	\N
-00040000-5539-ef77-f2b0-1191a6a1dbcd	RE	REU	638	Réunion 	Francoska skupnost Reunion	Čezmorska otoška skupnost Francije v Indijskem oceanu.
-00040000-5539-ef77-4461-87b53edf185c	RO	ROU	642	Romania 	Romunija	\N
-00040000-5539-ef77-6e85-b9c65e510369	RU	RUS	643	Russian Federation 	Ruska federacija	\N
-00040000-5539-ef77-9b26-9e3ba0ed5c0a	RW	RWA	646	Rwanda 	Ruanda	\N
-00040000-5539-ef77-21d8-132dbef8c9bb	BL	BLM	652	Saint Barthélemy 	Sveti Bartolomej	Čezmosrksa skupnost Francije.
-00040000-5539-ef77-fc2e-cd8a836dbedf	SH	SHN	654	Saint Helena, Ascension and Tristan da Cunha 	Sveta Helena	Čezmorsko ozemlje Sveta Helena Velike Britanije v Atlantskem oceanu. Bivši ISO naziv države: Saint Helena.
-00040000-5539-ef77-3b99-0701b9adc41e	KN	KNA	659	Saint Kitts and Nevis 	Sveti Kits in Nevis	Otoška državica v karibskih Malih Antilih. Bivši ISO naziv države: Saint Kitts-Nevis-Anguilla.
-00040000-5539-ef77-b536-949d88eb5e5b	LC	LCA	662	Saint Lucia 	Sveta Lucija	Otoška država v južnem Karibskem morju.
-00040000-5539-ef77-333d-fe5585406115	MF	MAF	663	Saint Martin (French part) 	Otok svetega Martina	Čezmorsko otočje Francije v Karibskem morju. Nizozmski del otoka Sv. Martina ima kodo SX.
-00040000-5539-ef77-6201-83f2e81ecf2b	PM	SPM	666	Saint Pierre and Miquelon 	Sveta Pierre in Miquelon	Čezmorsko otočje Francije ob Kanadi in Grenlandiji.
-00040000-5539-ef77-b6eb-e5eddb6b570e	VC	VCT	670	Saint Vincent and the Grenadines 	Sveti Vincent in Grenadini	Majhna otoška država v Karibskem otočju.
-00040000-5539-ef77-dc7b-2b444150fa95	WS	WSM	882	Samoa 	Samoa	Koda nastala po bivšem nazivu: Western Samoa (Zahodna Samoa).
-00040000-5539-ef77-ec24-07a33b36690e	SM	SMR	674	San Marino 	San Marino	\N
-00040000-5539-ef77-1829-d170c77e417f	ST	STP	678	Sao Tome and Principe 	Sao Tome in Principe	Majhna otoška država v Gvinejskem zalivu ob Afriki.
-00040000-5539-ef77-8af2-d1ff1eb1c78a	SA	SAU	682	Saudi Arabia 	Savdska Arabija	\N
-00040000-5539-ef77-0262-3e243e633c87	SN	SEN	686	Senegal 	Senegal	\N
-00040000-5539-ef77-be69-91e55a54a658	RS	SRB	688	Serbia 	Srbija	Koda po uradnem nazivu: Republika Srbija.
-00040000-5539-ef77-3b3e-6b5cb3aaad9d	SC	SYC	690	Seychelles 	Sejšeli	\N
-00040000-5539-ef77-4043-791b7c13b93b	SL	SLE	694	Sierra Leone 	Siera Leone	\N
-00040000-5539-ef77-d7d2-e22d4da1647a	SG	SGP	702	Singapore 	Singapur	\N
-00040000-5539-ef77-32d0-afb5c643420d	SX	SXM	534	Sint Maarten (Dutch part) 	Otok svetega.Martina (Nizozemska)	Francoski del otoka Sv. Martina ima ISO kodo MF. Nahaja se v Karibskem morju.
-00040000-5539-ef77-a614-73e84c6f7a31	SK	SVK	703	Slovakia 	Slovaška	SK je prej predstavljal: Sikkim.
-00040000-5539-ef77-6090-c500dcee9943	SI	SVN	705	Slovenia 	Slovenija	\N
-00040000-5539-ef77-d6a3-6c497b96e255	SB	SLB	090	Solomon Islands 	Solomonovi otoki	Koda izhaja iz starega naziva: British Solomon Islands.
-00040000-5539-ef77-fcd1-d33ab4a5cafd	SO	SOM	706	Somalia 	Somalija	\N
-00040000-5539-ef77-2085-22218365e21b	ZA	ZAF	710	South Africa 	Južna afrika	Koda iz naziva v nizozemščini: Zuid-Afrika.
-00040000-5539-ef77-dedc-e01456dbed91	GS	SGS	239	South Georgia and the South Sandwich Islands 	Južna Georgia in Južni Sandwichevi otoki	Čezmorsko otočje Velike Britanije na jugu Atlantskega oceana.
-00040000-5539-ef77-9e09-68904821d634	SS	SSD	728	South Sudan 	Južni Sudan	\N
-00040000-5539-ef77-4559-6aa0d609af3d	ES	ESP	724	Spain 	Španija	Koda po nazivu v spanščini: España.
-00040000-5539-ef77-f106-c238bf08aa3f	LK	LKA	144	Sri Lanka 	Šri Lanka	\N
-00040000-5539-ef77-3e71-6f3c7858e0b7	SD	SDN	729	Sudan 	Sudan	\N
-00040000-5539-ef77-700b-28d289e46dc2	SR	SUR	740	Suriname 	Surinam	\N
-00040000-5539-ef77-f1d0-a4ee514a85a2	SJ	SJM	744	Svalbard and Jan Mayen 	Svalbard in Jan Majen 	Sestavljata ga dva arktična ozemlja pod suverenostjo Norveške: Svalbardski otoki in otok Jan Mayen.
-00040000-5539-ef77-f707-1b34f69c34aa	SZ	SWZ	748	Swaziland 	Svazi	\N
-00040000-5539-ef77-185d-ba2b80ab07b2	SE	SWE	752	Sweden 	Švedska	\N
-00040000-5539-ef77-8f97-5a086acf8d54	CH	CHE	756	Switzerland 	Švica	Koda je narejena po nazivu v latinščini: Confoederatio Helvetica.
-00040000-5539-ef77-b266-172b99b58d04	SY	SYR	760	Syrian Arab Republic 	Sirija	\N
-00040000-5539-ef77-1605-a90777dae0a3	TW	TWN	158	Taiwan, Province of China 	Tajvan	\N
-00040000-5539-ef77-04ad-74648050ed28	TJ	TJK	762	Tajikistan 	Tadžikistan	\N
-00040000-5539-ef77-b42c-69fc65282b8b	TZ	TZA	834	Tanzania, United Republic of 	Tanzanija	\N
-00040000-5539-ef77-34ab-c8e2f40e7e0b	TH	THA	764	Thailand 	Tajska	\N
-00040000-5539-ef77-ff29-824b01cf17bf	TL	TLS	626	Timor-Leste 	Vzhodni Timor	Bivši naziv: East Timor (TP). Majhna otoška država v JV Aziji.
-00040000-5539-ef77-720f-aaf2de2b9d5b	TG	TGO	768	Togo 	Togo	\N
-00040000-5539-ef77-3d96-fca3f763e3bc	TK	TKL	772	Tokelau 	Tokelau	Trije koralni otoki pod upravo Nove Zelandije.
-00040000-5539-ef77-f8bc-c4bda68a0c3e	TO	TON	776	Tonga 	Tonga	Majhna otoška država v Tihem oceanu.
-00040000-5539-ef77-8821-25431fa93d24	TT	TTO	780	Trinidad and Tobago 	Trinidad in Tobago	\N
-00040000-5539-ef77-7aad-51389c1a10ab	TN	TUN	788	Tunisia 	Tunizija	\N
-00040000-5539-ef77-c2a4-dbad4f559bfc	TR	TUR	792	Turkey 	Turčija	\N
-00040000-5539-ef77-bffe-a9fcadee917f	TM	TKM	795	Turkmenistan 	Turkmenistan	\N
-00040000-5539-ef77-7f81-ead80351f126	TC	TCA	796	Turks and Caicos Islands 	Tirški in Kajkoški otoki	Čezmorska skupnost Velike Britanije v Karibskem morju.
-00040000-5539-ef77-97f8-19eb491b2d7b	TV	TUV	798	Tuvalu 	Tuvalu	Majhna otoška država v Tihem oceanu.
-00040000-5539-ef77-e564-0b9b73c379fd	UG	UGA	800	Uganda 	Uganda	\N
-00040000-5539-ef77-27d5-a9a55246ed21	UA	UKR	804	Ukraine 	Ukrajina	Bivši ISO naziv države: Ukrainian SSR. 
-00040000-5539-ef77-e22c-d43c7a2e1cdb	AE	ARE	784	United Arab Emirates 	Združeni Arabski Emirati	\N
-00040000-5539-ef77-ec51-b9578957f2d2	GB	GBR	826	United Kingdom 	Velika Britanija	Koda po nazivu: Great Britain (iz uradnega naziva: United Kingdom of Great Britain and Northern Ireland). 
-00040000-5539-ef77-8231-5eae5df8da9a	US	USA	840	United States 	Združene države Amerike	\N
-00040000-5539-ef77-529a-ce528c8943cd	UM	UMI	581	United States Minor Outlying Islands 	ZDA zunanji otoki	Sestavljeno iz devetih manjših otokov ZDA: Baker Island, Howland Island, Jarvis Island, Johnston Atoll, Kingman Reef, Midway Islands, Navassa Island, Palmyra Atoll, and Wake Island.
-00040000-5539-ef77-8bf0-0f7dcf28e3dd	UY	URY	858	Uruguay 	Urugvaj	\N
-00040000-5539-ef77-1eca-4c09cdb9ca3b	UZ	UZB	860	Uzbekistan 	Uzbekistan	\N
-00040000-5539-ef77-0eb8-9d3071d27c09	VU	VUT	548	Vanuatu 	Republika Vanuatu	Stari naziv: New Hebrides (NH).
-00040000-5539-ef77-8dbb-aa0941fcf1cb	VE	VEN	862	Venezuela, Bolivarian Republic of 	Venezuela	\N
-00040000-5539-ef77-dfc9-d9373e1922f9	VN	VNM	704	Viet Nam 	Vietnam	\N
-00040000-5539-ef77-63af-5687cb328efd	VG	VGB	092	Virgin Islands, British 	Britanski Deviški otoki	Čezmorska skupnost Velike Britanije v Karibskem morju.
-00040000-5539-ef77-477e-e59b1fc9526f	VI	VIR	850	Virgin Islands, U.S. 	Ameriški Deviški otoki	\N
-00040000-5539-ef77-b79d-4e6e135f6f65	WF	WLF	876	Wallis and Futuna 	Otočje Valis in Futuna	Čezmorska skupnost Francije v Pacifiku.
-00040000-5539-ef77-07f2-dcde8545930d	EH	ESH	732	Western Sahara 	Zahodna Sahara	Bivši ISO naziv države: Spanish Sahara (koda po španskem nazivu: Sahara español).
-00040000-5539-ef77-6860-9449546d207c	YE	YEM	887	Yemen 	Jemen	Bivši ISO naziv države: Republic of Yemen, koda se je uporabljala za Severni Jemen pred letom 1990.
-00040000-5539-ef77-1cd1-f3089ccc522c	ZM	ZMB	894	Zambia 	Zambija	\N
-00040000-5539-ef77-f7ed-19874a5b58eb	ZW	ZWE	716	Zimbabwe 	Zimbabve	Naziv se je spremenil iz: Suthern Rhodesia (RH, Južna Rodezija).
+00040000-553a-177d-42aa-ffcca87f157a	AF	AFG	004	Afghanistan 	Afganistan	\N
+00040000-553a-177d-8735-f44a534a37ed	AX	ALA	248	Ålland Islands 	Alandski otoki	Otočje v Baltiku.
+00040000-553a-177d-837c-e47d5c5d4162	AL	ALB	008	Albania 	Albanija	\N
+00040000-553a-177d-4891-92c5e1920dc3	DZ	DZA	012	Algeria 	Alžirija	Koda po kabilskem nazivu: Dzayer.
+00040000-553a-177d-29a0-c61b1da69479	AS	ASM	016	American Samoa 	Ameriška Samoa	Zunanji teritorij ZDA v južnem Tihem oceanu.
+00040000-553a-177d-7ae2-1acedd762c5d	AD	AND	020	Andorra 	Andora	\N
+00040000-553a-177d-1f29-eeaf77188faf	AO	AGO	024	Angola 	Angola	\N
+00040000-553a-177d-8db8-e02a32346ecd	AI	AIA	660	Anguilla 	Angvila	Čezmorska skupnost Velike Britanije, predhodno je AI predstavljal francoski: Afar and Issas.
+00040000-553a-177d-4611-11aa365fffc9	AQ	ATA	010	Antarctica 	Antarktika	Koda pa francoskem nazivu: Antarctique.
+00040000-553a-177d-3a8e-9a6aa37d8569	AG	ATG	028	Antigua and Barbuda 	Antigva in Barbuda	Otoška država v malih Antilih v Karibskem morju.
+00040000-553a-177d-3024-0d57a8e0586e	AR	ARG	032	Argentina 	Argenitna	\N
+00040000-553a-177d-b2e1-22299e3006fe	AM	ARM	051	Armenia 	Armenija	\N
+00040000-553a-177d-5821-835de736f844	AW	ABW	533	Aruba 	Aruba	Otok v Karibskem morju, del kraljevine Nizozemske.
+00040000-553a-177d-55d8-b1c1dd6a6f4c	AU	AUS	036	Australia 	Avstralija	\N
+00040000-553a-177d-9f51-06b8a98a721e	AT	AUT	040	Austria 	Avstrija	\N
+00040000-553a-177d-195c-c71c1957ff02	AZ	AZE	031	Azerbaijan 	Azerbajdžan	\N
+00040000-553a-177d-bc1b-d5ff013205c5	BS	BHS	044	Bahamas 	Bahami	\N
+00040000-553a-177d-b1f3-1bb601a23299	BH	BHR	048	Bahrain 	Bahrajn	\N
+00040000-553a-177d-7f72-f9bfa68e8af5	BD	BGD	050	Bangladesh 	Bangladeš	\N
+00040000-553a-177d-18a4-e970f5358fa5	BB	BRB	052	Barbados 	Barbados	\N
+00040000-553a-177d-343f-1a4c0863e14c	BY	BLR	112	Belarus 	Belorusija	Bivši ISO naziv države: Byelorussian SSR.
+00040000-553a-177d-ffc9-3c5ecc89a2ec	BE	BEL	056	Belgium 	Belgija	\N
+00040000-553a-177d-7820-e72ddc1c4a84	BZ	BLZ	084	Belize 	Belize	\N
+00040000-553a-177d-77fd-b42f268aba5c	BJ	BEN	204	Benin 	Benin	Bivši ISO naziv države: Dahomey (DY).
+00040000-553a-177d-f267-b96f2cb476e3	BM	BMU	060	Bermuda 	Bermudi	\N
+00040000-553a-177d-6d23-fae5ff6bc436	BT	BTN	064	Bhutan 	Butan	\N
+00040000-553a-177d-ee84-2048e3d12b10	BO	BOL	068	Bolivia, Plurinational State of 	Bolivija	\N
+00040000-553a-177d-27cd-51c0149e0222	BQ	BES	535	Bonaire, Sint Eustatius and Saba 	Otočje Bonaire, Sv. Eustatij in Saba	Otočje v karibih pod nizozemsko upravo (the BES Islands). Bivši ISO naziv države: Bonaire, Saint Eustatius and Saba. BQ je prej predstavljal: British Antarctic Territory.
+00040000-553a-177d-b42e-5a6cc14928b9	BA	BIH	070	Bosnia and Herzegovina 	Bosna in Hercegovina	\N
+00040000-553a-177d-a3e9-4428a1e94178	BW	BWA	072	Botswana 	Bocvana	\N
+00040000-553a-177d-c47e-b7472836966d	BV	BVT	074	Bouvet Island 	Bouvetov otok	Norveški otok v južnem Atlantskem oceanu.
+00040000-553a-177d-5b50-92a95f043687	BR	BRA	076	Brazil 	Brazilija	\N
+00040000-553a-177d-2578-774ca05eb11b	IO	IOT	086	British Indian Ocean Territory 	Britansko ozemlje v Indijskem oceanu	\N
+00040000-553a-177d-dfc2-0e8e047ddb0c	BN	BRN	096	Brunei Darussalam 	Brunej	ISO naziv države po nazivu v ZN. Otoška država na otok Borneo v JV Aziji.
+00040000-553a-177d-fba4-8ae2e98156e5	BG	BGR	100	Bulgaria 	Bolgarija	\N
+00040000-553a-177d-acd0-6e2f3a5e96f5	BF	BFA	854	Burkina Faso 	Burkina Faso	Bivši ISO naziv države: Upper Volta (HV).
+00040000-553a-177d-306f-544bd6257777	BI	BDI	108	Burundi 	Burundi 	\N
+00040000-553a-177d-2a25-74a4cf00e557	KH	KHM	116	Cambodia 	Kambodža	Koda po bivšem nazivu: Khmer Republic. Bivši ISO naziv države: Kampuchea.
+00040000-553a-177d-59c4-77ffabc19e52	CM	CMR	120	Cameroon 	Kamerun	\N
+00040000-553a-177d-292c-9e6f8bf2fb29	CA	CAN	124	Canada 	Kanada	\N
+00040000-553a-177d-fd73-4772573de9d5	CV	CPV	132	Cape Verde 	Kapverdski otoki (Zelenortski otoki)	Otočje v Atlantskem oceanu ob Afriki.
+00040000-553a-177d-42e9-f3155e167584	KY	CYM	136	Cayman Islands 	Kajmanski otoki	\N
+00040000-553a-177d-a834-bb8bee63349d	CF	CAF	140	Central African Republic 	Srednjeafriška republika	Prej znana kot francoska kolonija Ubangi-Shari.
+00040000-553a-177d-1e36-67897ba53b6c	TD	TCD	148	Chad 	Čad	Koda po francoskem nazivu: Tchad.
+00040000-553a-177d-3f9e-22d00243b6e5	CL	CHL	152	Chile 	Čile	\N
+00040000-553a-177d-5660-071bae452f88	CN	CHN	156	China 	Kitajska	\N
+00040000-553a-177d-4280-d217dcba0a58	CX	CXR	162	Christmas Island 	Božični otok	Avstralsko ozemlje v Indijskem oceanu.
+00040000-553a-177d-3c7a-96ac100c87fa	CC	CCK	166	Cocos (Keeling) Islands 	Kokosovi in Keelingovi otoki	Otočje pod upravo Avstralije v Indijskem oceanu.
+00040000-553a-177d-e91a-4a57c39ad4aa	CO	COL	170	Colombia 	Kolumbija	\N
+00040000-553a-177d-8c8c-56f46e1e9015	KM	COM	174	Comoros 	Komori	Otočje v Indijskem oceanu. Koda po nazivu v komorščini: Komori.
+00040000-553a-177d-c6d4-68c2d954d465	CG	COG	178	Congo 	Kongo	Srednji Kongo (celinska država brez morja).
+00040000-553a-177d-ecb9-39b75227ba83	CD	COD	180	Congo, the Democratic Republic of the 	Demokratična republika Kongo	Bivše ime: Zaire (ZR), obmorska država.
+00040000-553a-177d-7325-877697f1dbb9	CK	COK	184	Cook Islands 	Cookovi otoki	\N
+00040000-553a-177d-1944-8c9fcadffd9f	CR	CRI	188	Costa Rica 	Kostarika	\N
+00040000-553a-177d-278a-f13c90dd4bf3	CI	CIV	384	Côte d'Ivoire 	Slonokoščena obala	\N
+00040000-553a-177d-8933-fdb76a189024	HR	HRV	191	Croatia 	Hrvaška	Koda po nazivu v hrvaščini: Hrvatska.
+00040000-553a-177d-6a3f-d3dd60e37fe4	CU	CUB	192	Cuba 	Kuba	\N
+00040000-553a-177d-5d1f-9c4499042696	CW	CUW	531	Curaçao 	Kurasao	Spada v čezmorsko ozemlje Nizozemske, Nizozemski Antili.
+00040000-553a-177d-44a9-fd233ccee0a7	CY	CYP	196	Cyprus 	Ciper	\N
+00040000-553a-177d-4a0f-4563df2a6745	CZ	CZE	203	Czech Republic 	Češka	\N
+00040000-553a-177d-f2a2-1ca0550a5eb6	DK	DNK	208	Denmark 	Danska	\N
+00040000-553a-177d-81ca-4537ee573680	DJ	DJI	262	Djibouti 	Džibuti	Staro ime: French Afar and Issas (AI).
+00040000-553a-177d-ef9d-88c95ddc40d4	DM	DMA	212	Dominica 	Dominika	Otoška država v malih Antilih v Karibskem morju.
+00040000-553a-177d-b445-5ff268735193	DO	DOM	214	Dominican Republic 	Dominikanska republika	\N
+00040000-553a-177d-cfe0-c8812c584146	EC	ECU	218	Ecuador 	Ekvador	\N
+00040000-553a-177d-e3d0-77ed4b0fa300	EG	EGY	818	Egypt 	Egipt	\N
+00040000-553a-177d-7439-7d6cae764521	SV	SLV	222	El Salvador 	Salvador	\N
+00040000-553a-177d-e0a0-4567f548fdf4	GQ	GNQ	226	Equatorial Guinea 	Ekvatorialna Gvineja	Koda po francoskem nazivu: Guinée équatoriale.
+00040000-553a-177d-f0ef-4fbf41170631	ER	ERI	232	Eritrea 	Eritreja	\N
+00040000-553a-177d-dc40-0828dc329f38	EE	EST	233	Estonia 	Estonija	Koda po estonskem nazivu: Eesti.
+00040000-553a-177d-e814-79e1bb72fa9d	ET	ETH	231	Ethiopia 	Etiopija	\N
+00040000-553a-177d-13c1-b76c9897f6e6	FK	FRO	234	Falkland Islands (Malvinas) 	Falkalndski otoki	Čezmorsko otočje velike Britanije.
+00040000-553a-177d-02a5-4a2cae30998a	FO	FLK	238	Faroe Islands 	Ferski otoki	\N
+00040000-553a-177e-33a9-fb08604706a3	FJ	FJI	242	Fiji 	Fidži	Otočje v južnem Tihem oceanu.
+00040000-553a-177e-a01f-ace50e9a2ed4	FI	FIN	246	Finland 	Finska	\N
+00040000-553a-177e-db62-8ba728aa6294	FR	FRA	250	France 	Francija	\N
+00040000-553a-177e-1b89-26db392b1ccb	GF	GUF	254	French Guiana 	Francoska Gvajana	Koda po francoskem nazivu: Guyane française.
+00040000-553a-177e-2df9-83d47ce449a8	NL	NLD	528	Netherlands 	Nizozemska	\N
+00040000-553a-177e-47ec-125a75343a2b	PF	PYF	258	French Polynesia 	Francoska Polinezija	Čezmorsko otočje Francije v južnem Tihem oceanu. Koda po francoskem nazivu: Polynésie française.
+00040000-553a-177e-c11a-af3dc8b9575d	TF	ATF	260	French Southern Territories 	Francoska južna ozemlja	Predstavlja francoske vulkanske otoke JV od Afrike v Indijskem oceanu in del antarktike, ki Franciji niso mednarodno priznani. Koda po francokem nazivu: Terres australes françaises.
+00040000-553a-177e-2b3a-560d6a40efef	GA	GAB	266	Gabon 	Gabon	\N
+00040000-553a-177e-e824-7d530a4e1224	GM	GMB	270	Gambia 	Gambija	\N
+00040000-553a-177e-dc4c-ede6fcf8e0e1	GE	GEO	268	Georgia 	Gruzija	Koda GE je prej predstavljala Gilbertove in Ellisijine otoke.
+00040000-553a-177e-124e-6ed36789008f	DE	DEU	276	Germany 	Nemčija	Koda po nemškem nazivu: Deutschland. Koda pred 1990 v uporabi za Zahodno Nemčijo.
+00040000-553a-177e-d91a-5a3dc2dbaaee	GH	GHA	288	Ghana 	Gana	\N
+00040000-553a-177e-9304-3c00a93a21ff	GI	GIB	292	Gibraltar 	Gibraltar	\N
+00040000-553a-177e-e856-93c2d3ce4b6c	GR	GRC	300	Greece 	Grčija	\N
+00040000-553a-177e-3a29-0b84bea4f9e6	GL	GRL	304	Greenland 	Grenlandija	\N
+00040000-553a-177e-924e-5112ddc59bcf	GD	GRD	308	Grenada 	Grenada	\N
+00040000-553a-177e-3ae1-39e35ce0c014	GP	GLP	312	Guadeloupe 	Guadeloupe	Čezmorski otok Francije v Karibskem morju.
+00040000-553a-177e-5729-8917765e90a0	GU	GUM	316	Guam 	Guam	Zunanji teritorij ZDA v Tihem oceanu (tudi Guahan).
+00040000-553a-177e-ee5d-7bf0a5ab4acc	GT	GTM	320	Guatemala 	Gvatemala	\N
+00040000-553a-177e-f7f8-9ee652d2a729	GG	GGY	831	Guernsey 	Otok Guernsey	Bailwick of Goursey je Britanski otok ob Franciji.
+00040000-553a-177e-8470-006776d47577	GN	GIN	324	Guinea 	Gvineja	\N
+00040000-553a-177e-4209-4e11c31f9eb4	GW	GNB	624	Guinea-Bissau 	Gvineja-Bissau	\N
+00040000-553a-177e-88db-7febdb6178b1	GY	GUY	328	Guyana 	Gvajana	\N
+00040000-553a-177e-5983-e1504e40ec5c	HT	HTI	332	Haiti 	Haiti	\N
+00040000-553a-177e-8319-1dd3ba9e7752	HM	HMD	334	Heard Island and McDonald Islands 	Otok Heard in otočje McDonald	Nenaseljeno otočje v Indijskem oceanu pod upravo Avstralije.
+00040000-553a-177e-de3d-9d0f2b7deab2	VA	VAT	336	Holy See (Vatican City State) 	Vatikan	Bivši ISO naziv države: Vatican City State (Vatikanska mestna država).
+00040000-553a-177e-758e-d9320591f49f	HN	HND	340	Honduras 	Honduras	\N
+00040000-553a-177e-aa57-e9f92009e95a	HK	HKG	344	Hong Kong 	Hong Kong	\N
+00040000-553a-177e-8092-a8574ed56350	HU	HUN	348	Hungary 	Madžarska	\N
+00040000-553a-177e-8004-91a99c53b30b	IS	ISL	352	Iceland 	Islandija	Koda po nazivu v islandščini: Ísland.
+00040000-553a-177e-c06c-46fbf9f53145	IN	IND	356	India 	Indija	\N
+00040000-553a-177e-6c7f-fea0d39c18d0	ID	IDN	360	Indonesia 	Indonezija	\N
+00040000-553a-177e-f980-21b3576814f4	IR	IRN	364	Iran, Islamic Republic of 	Iran	\N
+00040000-553a-177e-041f-d80d60e7c782	IQ	IRQ	368	Iraq 	Irak	\N
+00040000-553a-177e-a5f1-2b0e236edaba	IE	IRL	372	Ireland 	Irska	\N
+00040000-553a-177e-7289-5343f88b3803	IM	IMN	833	Isle of Man 	Otok Man	Spada neposredno pod Britansko krono a ni del Velike Britanije, nahaja se med Irsko in Veliko Britanijo.
+00040000-553a-177e-9bf3-a00c90762cf0	IL	ISR	376	Israel 	Izrael	\N
+00040000-553a-177e-fd54-84611ec520b8	IT	ITA	380	Italy 	Italija	\N
+00040000-553a-177e-86ba-70f3e59f81af	JM	JAM	388	Jamaica 	Jamajka	\N
+00040000-553a-177e-de13-17f7761c8319	JP	JPN	392	Japan 	Japonska	\N
+00040000-553a-177e-c0cd-fabaa46998f2	JE	JEY	832	Jersey 	Otok Jersey	Bailwick of Jersey je Britanski otok med Anglijo in Francijo.
+00040000-553a-177e-ed16-d6a974187b92	JO	JOR	400	Jordan 	Jordanija	\N
+00040000-553a-177e-e641-49e504cbd1c3	KZ	KAZ	398	Kazakhstan 	Kazahstan	Bivši ISO naziv države: Kazakstan.
+00040000-553a-177e-9b2e-db4ea17bbb0b	KE	KEN	404	Kenya 	Kenija	\N
+00040000-553a-177e-27ba-0ed2fcd50139	KI	KIR	296	Kiribati 	Kiribati	Razpršeno otočje v Tihem oceanu. Stari naziv: Gilbertovi otoki.
+00040000-553a-177e-9d55-06f861da4ee2	KP	PRK	408	Korea, Democratic People's Republic of 	Severna Koreja	ISO naziv države po uradnem nazivu v ZN (splošno ime: Severna Koreja).
+00040000-553a-177e-93a7-887f1da09921	KR	KOR	410	Korea, Republic of 	Južna Koreja	ISO naziv države po uradnem nazivu v ZN (splošno ime: Južna Koreja).
+00040000-553a-177e-1c18-5051a4608f18	KW	KWT	414	Kuwait 	Kuvajt	\N
+00040000-553a-177e-5899-eb79b53136f6	KG	KGZ	417	Kyrgyzstan 	Kirgizistan (Kirgizija)	\N
+00040000-553a-177e-24bf-d3d1a8c44a67	LA	LAO	418	Lao People's Democratic Republic 	Laos	\N
+00040000-553a-177e-271f-b427b43d88ac	LV	LVA	428	Latvia 	Latvija	\N
+00040000-553a-177e-3c0e-28b4a80a4fe3	LB	LBN	422	Lebanon 	Libanon	\N
+00040000-553a-177e-d917-ce1fd3fcfa13	LS	LSO	426	Lesotho 	Lesoto	\N
+00040000-553a-177e-d717-c1fd7f361297	LR	LBR	430	Liberia 	Liberija	\N
+00040000-553a-177e-4935-25c1a5e766c0	LY	LBY	434	Libya 	Libija	Bivši ISO naziv države: Libyan Arab Jamahiriya.
+00040000-553a-177e-79fd-abd8ec3bf2f0	LI	LIE	438	Liechtenstein 	Lihtenštajn	\N
+00040000-553a-177e-395a-8deaf3d88713	LT	LTU	440	Lithuania 	Litva	\N
+00040000-553a-177e-1ffc-e3e84e5fa765	LU	LUX	442	Luxembourg 	Luksemburg	\N
+00040000-553a-177e-57de-4dc20168e38e	MO	MAC	446	Macao 	Makao	Bivši ISO naziv države: Macau.
+00040000-553a-177e-3ec1-50d60f9baa2c	MK	MKD	807	Macedonia, the former Yugoslav Republic of 	Makedonija	ISO naziv države glede na spor o nazivu države. Uradno domače ime države: Republika Makedonija.
+00040000-553a-177e-16ea-a7eba7d34ce6	MG	MDG	450	Madagascar 	Madagaskar	\N
+00040000-553a-177e-cd36-ef5f896de9c6	MW	MWI	454	Malawi 	Malavi	\N
+00040000-553a-177e-ef7e-5143007da24b	MY	MYS	458	Malaysia 	Malezija	\N
+00040000-553a-177e-a7f3-8877869f374f	MV	MDV	462	Maldives 	Maldivi	\N
+00040000-553a-177e-04b8-6ac3da18b819	ML	MLI	466	Mali 	Mali	\N
+00040000-553a-177e-c811-2658c0eb9b06	MT	MLT	470	Malta 	Malta	\N
+00040000-553a-177e-530b-be5f2ba4bbd1	MH	MHL	584	Marshall Islands 	Maršalovi otoki	Majhno otočje v Tihem oceanu.
+00040000-553a-177e-0a75-ff4a50af3ace	MQ	MTQ	474	Martinique 	Martinik	Čezmorski otok Francije v malih Antilih v Karibsekm morju.
+00040000-553a-177e-35f2-e93e5d7748fc	MR	MRT	478	Mauritania 	Mavretanija	\N
+00040000-553a-177e-56e6-c992526e7509	MU	MUS	480	Mauritius 	Mauricius (Moris)	Domačini v kreolščini imenujejo otok: Moris.
+00040000-553a-177e-59bb-cdae0135af1f	YT	MYT	175	Mayotte 	Francoska skupnost Mejot	Čezmorska skupnost Francije ob vzhodni obali Afrike.
+00040000-553a-177e-a837-2c6ba7c3a96c	MX	MEX	484	Mexico 	Mehika	\N
+00040000-553a-177e-0c0d-a5de59968009	FM	FSM	583	Micronesia, Federated States of 	Mikronezija	Bivši ISO naziv države: Micronesia. Nahaja se v Tihem oceanu.
+00040000-553a-177e-fc6d-5e3b7bc633ef	MD	MDA	498	Moldova, Republic of 	Moldavija	\N
+00040000-553a-177e-84d9-c3253b745f66	MC	MCO	492	Monaco 	Monako	\N
+00040000-553a-177e-acb8-7274bb210940	MN	MNG	496	Mongolia 	Mongolija	\N
+00040000-553a-177e-5c96-4e7cff9d0c65	ME	MNE	499	Montenegro 	Črna Gora	\N
+00040000-553a-177e-3bca-edc40f95f61b	MS	MSR	500	Montserrat 	Montserat	Otok v Antilih v Karibskem morju odvisen od Velike Britanije.
+00040000-553a-177e-696e-131540dd3861	MA	MAR	504	Morocco 	Maroko	\N
+00040000-553a-177e-8a5e-5129af60ba7c	MZ	MOZ	508	Mozambique 	Mozambik	\N
+00040000-553a-177e-c719-d07c7d02eb7c	MM	MMR	104	Myanmar 	Mjanmar	Bivši naziv: Burma (BU).
+00040000-553a-177e-4135-6651fdb8cff8	NA	NAM	516	Namibia 	Namibija	\N
+00040000-553a-177e-2da6-f021e4ebbbe0	NR	NRU	520	Nauru 	Nauru	Otoška država v Južnem Tihem oceanu.
+00040000-553a-177e-a5ab-1c7e69514bd1	NP	NPL	524	Nepal 	Nepal	\N
+00040000-553a-177e-cd6b-b51d510b0fb9	NC	NCL	540	New Caledonia 	Nova Kaledonija	Čezmorsko otočje Francije v Pacifiku.
+00040000-553a-177e-e3ff-83c9de49c112	NZ	NZL	554	New Zealand 	Nova Zelandija	\N
+00040000-553a-177e-65f1-4cd813a981e9	NI	NIC	558	Nicaragua 	Nikaragva	\N
+00040000-553a-177e-da8f-a0bb2d50c88e	NE	NER	562	Niger 	Niger 	\N
+00040000-553a-177e-10ed-64f18695d45f	NG	NGA	566	Nigeria 	Nigerija	\N
+00040000-553a-177e-e52c-9c61b3e93482	NU	NIU	570	Niue 	Niu	Otoška država v Južnem Tihem oceanu.
+00040000-553a-177e-8c76-60e28d90cfad	NF	NFK	574	Norfolk Island 	Otok Norflok	Del Avstralije s samoupravo.
+00040000-553a-177e-dee9-e6675da97253	MP	MNP	580	Northern Mariana Islands 	Severni Marianski otoki	Ameriško otočje v severnem Tihem oceanu.
+00040000-553a-177e-9e8a-a0587dd7a255	NO	NOR	578	Norway 	Norveška	\N
+00040000-553a-177e-5624-e4afd5f5d843	OM	OMN	512	Oman 	Oman	\N
+00040000-553a-177e-5898-ff82c85c6dcb	PK	PAK	586	Pakistan 	Pakistan	\N
+00040000-553a-177e-ad2d-3fb0e65349c1	PW	PLW	585	Palau 	Palau 	Majhna otoška država v Tihem oceanu.
+00040000-553a-177e-a3d2-15c2d4c88fdc	PS	PSE	275	Palestinian Territory, Occupied 	Palestina	Sestavljena iz Zahodnega brega in Gaze.
+00040000-553a-177e-e09d-b1b5203b7088	PA	PAN	591	Panama 	Panama	\N
+00040000-553a-177e-7c91-cff8431c25d8	PG	PNG	598	Papua New Guinea 	Papua Nova Gvineja	\N
+00040000-553a-177e-43fc-801c26152791	PY	PRY	600	Paraguay 	Paragvaj	\N
+00040000-553a-177e-cb2c-6f521e4aa6ce	PE	PER	604	Peru 	Peru	\N
+00040000-553a-177e-2328-56df5a13ebb4	PH	PHL	608	Philippines 	Filipini	\N
+00040000-553a-177e-36ba-cb90096aa6fa	PN	PCN	612	Pitcairn 	Pitcairnovi otoki	Čezmorsko otočje Velike Britanije v Tihem oceanu.
+00040000-553a-177e-2759-a8a2afd8f828	PL	POL	616	Poland 	Poljska	\N
+00040000-553a-177e-f212-1f64dfc92412	PT	PRT	620	Portugal 	Portugalska	\N
+00040000-553a-177e-5194-921362c39422	PR	PRI	630	Puerto Rico 	Portoriko	\N
+00040000-553a-177e-0ad7-6c0779d22d8d	QA	QAT	634	Qatar 	Katar	\N
+00040000-553a-177e-0a0a-8bec93c12933	RE	REU	638	Réunion 	Francoska skupnost Reunion	Čezmorska otoška skupnost Francije v Indijskem oceanu.
+00040000-553a-177e-42d6-d62dc3e13018	RO	ROU	642	Romania 	Romunija	\N
+00040000-553a-177e-f0e6-0e6ab83c60c1	RU	RUS	643	Russian Federation 	Ruska federacija	\N
+00040000-553a-177e-913b-1d070d000241	RW	RWA	646	Rwanda 	Ruanda	\N
+00040000-553a-177e-0477-1dd0657b39ac	BL	BLM	652	Saint Barthélemy 	Sveti Bartolomej	Čezmosrksa skupnost Francije.
+00040000-553a-177e-d434-686d07640d2f	SH	SHN	654	Saint Helena, Ascension and Tristan da Cunha 	Sveta Helena	Čezmorsko ozemlje Sveta Helena Velike Britanije v Atlantskem oceanu. Bivši ISO naziv države: Saint Helena.
+00040000-553a-177e-c664-701e6316fb17	KN	KNA	659	Saint Kitts and Nevis 	Sveti Kits in Nevis	Otoška državica v karibskih Malih Antilih. Bivši ISO naziv države: Saint Kitts-Nevis-Anguilla.
+00040000-553a-177e-8c5b-f4714c4e16b1	LC	LCA	662	Saint Lucia 	Sveta Lucija	Otoška država v južnem Karibskem morju.
+00040000-553a-177e-5786-10b287fdefa4	MF	MAF	663	Saint Martin (French part) 	Otok svetega Martina	Čezmorsko otočje Francije v Karibskem morju. Nizozmski del otoka Sv. Martina ima kodo SX.
+00040000-553a-177e-0deb-cca3a192708b	PM	SPM	666	Saint Pierre and Miquelon 	Sveta Pierre in Miquelon	Čezmorsko otočje Francije ob Kanadi in Grenlandiji.
+00040000-553a-177e-de0f-07eed2a450ce	VC	VCT	670	Saint Vincent and the Grenadines 	Sveti Vincent in Grenadini	Majhna otoška država v Karibskem otočju.
+00040000-553a-177e-ef1d-49ac25036fd0	WS	WSM	882	Samoa 	Samoa	Koda nastala po bivšem nazivu: Western Samoa (Zahodna Samoa).
+00040000-553a-177e-819c-7e1b6dd61445	SM	SMR	674	San Marino 	San Marino	\N
+00040000-553a-177e-88e5-f49a2f34370a	ST	STP	678	Sao Tome and Principe 	Sao Tome in Principe	Majhna otoška država v Gvinejskem zalivu ob Afriki.
+00040000-553a-177e-3839-e97fc2d6360d	SA	SAU	682	Saudi Arabia 	Savdska Arabija	\N
+00040000-553a-177e-c771-c45761e36c84	SN	SEN	686	Senegal 	Senegal	\N
+00040000-553a-177e-2510-b33c1af7da98	RS	SRB	688	Serbia 	Srbija	Koda po uradnem nazivu: Republika Srbija.
+00040000-553a-177e-62ca-f3e214004944	SC	SYC	690	Seychelles 	Sejšeli	\N
+00040000-553a-177e-3d74-fb6d9e8eae18	SL	SLE	694	Sierra Leone 	Siera Leone	\N
+00040000-553a-177e-d561-2f7f1967e8f9	SG	SGP	702	Singapore 	Singapur	\N
+00040000-553a-177e-1910-6554ae5cf551	SX	SXM	534	Sint Maarten (Dutch part) 	Otok svetega.Martina (Nizozemska)	Francoski del otoka Sv. Martina ima ISO kodo MF. Nahaja se v Karibskem morju.
+00040000-553a-177e-faa7-d2e800a59b34	SK	SVK	703	Slovakia 	Slovaška	SK je prej predstavljal: Sikkim.
+00040000-553a-177e-aa72-484cda4bfa7b	SI	SVN	705	Slovenia 	Slovenija	\N
+00040000-553a-177e-6dd0-a2f01343730d	SB	SLB	090	Solomon Islands 	Solomonovi otoki	Koda izhaja iz starega naziva: British Solomon Islands.
+00040000-553a-177e-5a94-c1f8e2677d2b	SO	SOM	706	Somalia 	Somalija	\N
+00040000-553a-177e-292f-c33f1358fdfa	ZA	ZAF	710	South Africa 	Južna afrika	Koda iz naziva v nizozemščini: Zuid-Afrika.
+00040000-553a-177e-4c95-afa144445aea	GS	SGS	239	South Georgia and the South Sandwich Islands 	Južna Georgia in Južni Sandwichevi otoki	Čezmorsko otočje Velike Britanije na jugu Atlantskega oceana.
+00040000-553a-177e-a21d-f272ddc0a274	SS	SSD	728	South Sudan 	Južni Sudan	\N
+00040000-553a-177e-fe1b-c54e2c4b1392	ES	ESP	724	Spain 	Španija	Koda po nazivu v spanščini: España.
+00040000-553a-177e-34ef-aa6fd285fd46	LK	LKA	144	Sri Lanka 	Šri Lanka	\N
+00040000-553a-177e-73ab-c73504b03457	SD	SDN	729	Sudan 	Sudan	\N
+00040000-553a-177e-12b1-b4ddc28ca830	SR	SUR	740	Suriname 	Surinam	\N
+00040000-553a-177e-6e87-9f2d67e2d9b6	SJ	SJM	744	Svalbard and Jan Mayen 	Svalbard in Jan Majen 	Sestavljata ga dva arktična ozemlja pod suverenostjo Norveške: Svalbardski otoki in otok Jan Mayen.
+00040000-553a-177e-56b7-90748cded4de	SZ	SWZ	748	Swaziland 	Svazi	\N
+00040000-553a-177e-51d4-8eefa05e8368	SE	SWE	752	Sweden 	Švedska	\N
+00040000-553a-177e-8408-bc62bbc7958c	CH	CHE	756	Switzerland 	Švica	Koda je narejena po nazivu v latinščini: Confoederatio Helvetica.
+00040000-553a-177e-1356-2db0c935d7d1	SY	SYR	760	Syrian Arab Republic 	Sirija	\N
+00040000-553a-177e-f97a-78b90e61aa89	TW	TWN	158	Taiwan, Province of China 	Tajvan	\N
+00040000-553a-177e-67f7-cd4de547ad2d	TJ	TJK	762	Tajikistan 	Tadžikistan	\N
+00040000-553a-177e-b0bf-dd96ce338542	TZ	TZA	834	Tanzania, United Republic of 	Tanzanija	\N
+00040000-553a-177e-2927-3b2e4fc2f6be	TH	THA	764	Thailand 	Tajska	\N
+00040000-553a-177e-6dec-45cd72433dff	TL	TLS	626	Timor-Leste 	Vzhodni Timor	Bivši naziv: East Timor (TP). Majhna otoška država v JV Aziji.
+00040000-553a-177e-d3b2-108978aea870	TG	TGO	768	Togo 	Togo	\N
+00040000-553a-177e-4015-d6f7c749bd66	TK	TKL	772	Tokelau 	Tokelau	Trije koralni otoki pod upravo Nove Zelandije.
+00040000-553a-177e-3434-ea7a44e19fdf	TO	TON	776	Tonga 	Tonga	Majhna otoška država v Tihem oceanu.
+00040000-553a-177e-01ad-cdb5d6e0690f	TT	TTO	780	Trinidad and Tobago 	Trinidad in Tobago	\N
+00040000-553a-177e-f803-a801d93af80f	TN	TUN	788	Tunisia 	Tunizija	\N
+00040000-553a-177e-98a5-5fd4fb2f9d9f	TR	TUR	792	Turkey 	Turčija	\N
+00040000-553a-177e-13bd-1fe27a09e83e	TM	TKM	795	Turkmenistan 	Turkmenistan	\N
+00040000-553a-177e-2019-9dfd6337f49a	TC	TCA	796	Turks and Caicos Islands 	Tirški in Kajkoški otoki	Čezmorska skupnost Velike Britanije v Karibskem morju.
+00040000-553a-177e-b773-ad62a4c5f5a1	TV	TUV	798	Tuvalu 	Tuvalu	Majhna otoška država v Tihem oceanu.
+00040000-553a-177e-a47b-35ebd71b4683	UG	UGA	800	Uganda 	Uganda	\N
+00040000-553a-177e-e1c6-4b2fd3dca562	UA	UKR	804	Ukraine 	Ukrajina	Bivši ISO naziv države: Ukrainian SSR. 
+00040000-553a-177e-d2da-177669ca205c	AE	ARE	784	United Arab Emirates 	Združeni Arabski Emirati	\N
+00040000-553a-177e-c0b7-0ee96044753c	GB	GBR	826	United Kingdom 	Velika Britanija	Koda po nazivu: Great Britain (iz uradnega naziva: United Kingdom of Great Britain and Northern Ireland). 
+00040000-553a-177e-6e29-75839c209088	US	USA	840	United States 	Združene države Amerike	\N
+00040000-553a-177e-e750-b9ed5f31e045	UM	UMI	581	United States Minor Outlying Islands 	ZDA zunanji otoki	Sestavljeno iz devetih manjših otokov ZDA: Baker Island, Howland Island, Jarvis Island, Johnston Atoll, Kingman Reef, Midway Islands, Navassa Island, Palmyra Atoll, and Wake Island.
+00040000-553a-177e-f461-fd20b8476d54	UY	URY	858	Uruguay 	Urugvaj	\N
+00040000-553a-177e-9ff6-3425bbda7066	UZ	UZB	860	Uzbekistan 	Uzbekistan	\N
+00040000-553a-177e-8c51-72d237b94fe0	VU	VUT	548	Vanuatu 	Republika Vanuatu	Stari naziv: New Hebrides (NH).
+00040000-553a-177e-bc74-ed4a6560a94e	VE	VEN	862	Venezuela, Bolivarian Republic of 	Venezuela	\N
+00040000-553a-177e-21f3-6660d88e4f12	VN	VNM	704	Viet Nam 	Vietnam	\N
+00040000-553a-177e-2595-fa9b1a1f0680	VG	VGB	092	Virgin Islands, British 	Britanski Deviški otoki	Čezmorska skupnost Velike Britanije v Karibskem morju.
+00040000-553a-177e-bb89-7de6515aae16	VI	VIR	850	Virgin Islands, U.S. 	Ameriški Deviški otoki	\N
+00040000-553a-177e-69ba-2adc896329a9	WF	WLF	876	Wallis and Futuna 	Otočje Valis in Futuna	Čezmorska skupnost Francije v Pacifiku.
+00040000-553a-177e-2ad0-b0cd05a507ae	EH	ESH	732	Western Sahara 	Zahodna Sahara	Bivši ISO naziv države: Spanish Sahara (koda po španskem nazivu: Sahara español).
+00040000-553a-177e-734c-39d2c839781a	YE	YEM	887	Yemen 	Jemen	Bivši ISO naziv države: Republic of Yemen, koda se je uporabljala za Severni Jemen pred letom 1990.
+00040000-553a-177e-6ece-ce61fe321dce	ZM	ZMB	894	Zambia 	Zambija	\N
+00040000-553a-177e-33b9-ad58e827dd2e	ZW	ZWE	716	Zimbabwe 	Zimbabve	Naziv se je spremenil iz: Suthern Rhodesia (RH, Južna Rodezija).
 \.
 
 
 --
--- TOC entry 2669 (class 0 OID 1157790)
+-- TOC entry 2669 (class 0 OID 1253205)
 -- Dependencies: 212
 -- Data for Name: funkcija; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1250,7 +1250,7 @@ COPY funkcija (id, uprizoritev_id, alternacija_id, tip_vloge_id, podrocje, naziv
 
 
 --
--- TOC entry 2648 (class 0 OID 1157611)
+-- TOC entry 2648 (class 0 OID 1253026)
 -- Dependencies: 191
 -- Data for Name: gostovanje; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1260,7 +1260,7 @@ COPY gostovanje (id, drzava_id, vrsta) FROM stdin;
 
 
 --
--- TOC entry 2652 (class 0 OID 1157659)
+-- TOC entry 2652 (class 0 OID 1253074)
 -- Dependencies: 195
 -- Data for Name: gostujoca; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1280,7 +1280,7 @@ COPY kose (id, naslov_id, user_id, naziv, ime, priimek, pesvdonim, funkcija, ema
 
 
 --
--- TOC entry 2658 (class 0 OID 1157708)
+-- TOC entry 2658 (class 0 OID 1253123)
 -- Dependencies: 201
 -- Data for Name: kupec; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1290,7 +1290,7 @@ COPY kupec (id, popa_id) FROM stdin;
 
 
 --
--- TOC entry 2662 (class 0 OID 1157733)
+-- TOC entry 2662 (class 0 OID 1253148)
 -- Dependencies: 205
 -- Data for Name: nacinplacina; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1300,40 +1300,40 @@ COPY nacinplacina (id, ime, vrsta) FROM stdin;
 
 
 --
--- TOC entry 2644 (class 0 OID 1157560)
+-- TOC entry 2644 (class 0 OID 1252975)
 -- Dependencies: 187
 -- Data for Name: option; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY option (id, name, type, defaultvalue, peruser, readonly, public, role, description) FROM stdin;
-00000000-5539-ef79-d847-957e3c308bdb	popa.tipkli	array	a:4:{i:0;a:2:{s:3:"key";s:10:"dobavitelj";s:5:"value";s:10:"Dobavitelj";}i:1;a:2:{s:3:"key";s:5:"kupec";s:5:"value";s:5:"Kupec";}i:2;a:2:{s:3:"key";s:11:"koproducent";s:5:"value";s:11:"Koproducent";}i:3;a:2:{s:3:"key";s:5:"multi";s:5:"value";s:9:"Več vlog";}}	f	t	f	\N	Tip poslovnega partnerja
-00000000-5539-ef79-c700-1a62c51a179b	popa.stakli	array	a:2:{i:0;a:2:{s:3:"key";s:2:"AK";s:5:"value";s:7:"aktiven";}i:1;a:2:{s:3:"key";s:2:"NA";s:5:"value";s:9:"neaktiven";}}	f	t	f	\N	Status poslovnega partnerja
-00000000-5539-ef79-89e5-e14f121778c3	oseba.spol	array	a:2:{i:0;a:2:{s:3:"key";s:1:"M";s:5:"value";s:6:"Moški";}i:1;a:2:{s:3:"key";s:1:"Z";s:5:"value";s:7:"Ženska";}}	f	t	f	\N	Spol osebe
-00000000-5539-ef79-3ec1-c515c2fe2cfb	telefonska.vrsta	array	a:3:{i:0;a:2:{s:3:"key";s:7:"mobilna";s:5:"value";s:7:"Mobilni";}i:1;a:2:{s:3:"key";s:6:"domaca";s:5:"value";s:6:"Domač";}i:2;a:2:{s:3:"key";s:6:"fiksna";s:5:"value";s:6:"Fiksni";}}	f	t	f	\N	Vrsta telefonske številke
-00000000-5539-ef79-de54-72699d2d321b	test1.barva.ozadja	array	a:1:{i:0;a:2:{s:3:"key";s:1:"b";s:5:"value";s:4:"bela";}}	t	f	f	\N	barva ozadja
-00000000-5539-ef79-53a8-9c5cf5493019	test2.glob	array	a:1:{i:0;a:2:{s:3:"key";s:1:"d";s:5:"value";s:9:"defaultna";}}	f	f	f	\N	test2 le globalna vrednost
-00000000-5539-ef79-0f39-ed470936a619	test3.readonly	array	a:1:{i:0;s:15:"privzeta trojka";}	f	t	f	\N	za test- le privzeta vrednost, onemogočeni globalna in user opcija
-00000000-5539-ef79-dca1-7a802e7acc79	test4	array	a:1:{i:0;s:17:"privzeta štirica";}	t	f	f	\N	za test globalna in user vrednost se lahko kreirata
-00000000-5539-ef79-76c8-e82efe85fbf7	test5.notperUser	array	a:1:{i:0;s:17:"privzeta štirica";}	f	f	f	\N	za test - user opcija onemogočena
-00000000-5539-ef79-fe06-30b287d82c57	dogodek.status	array	a:2:{i:0;a:2:{s:3:"key";s:8:"planiran";s:5:"value";s:11:"Dolgoročno";}i:1;a:2:{s:3:"key";s:8:"planiran";s:5:"value";s:8:"Planiran";}}	f	f	t	\N	Tabela statusa dogodkov
+00000000-553a-177f-6d62-398e74afaba8	popa.tipkli	array	a:4:{i:0;a:2:{s:3:"key";s:10:"dobavitelj";s:5:"value";s:10:"Dobavitelj";}i:1;a:2:{s:3:"key";s:5:"kupec";s:5:"value";s:5:"Kupec";}i:2;a:2:{s:3:"key";s:11:"koproducent";s:5:"value";s:11:"Koproducent";}i:3;a:2:{s:3:"key";s:5:"multi";s:5:"value";s:9:"Več vlog";}}	f	t	f	\N	Tip poslovnega partnerja
+00000000-553a-177f-e8b4-198288dc6a9c	popa.stakli	array	a:2:{i:0;a:2:{s:3:"key";s:2:"AK";s:5:"value";s:7:"aktiven";}i:1;a:2:{s:3:"key";s:2:"NA";s:5:"value";s:9:"neaktiven";}}	f	t	f	\N	Status poslovnega partnerja
+00000000-553a-177f-9ea3-acdfbf798f79	oseba.spol	array	a:2:{i:0;a:2:{s:3:"key";s:1:"M";s:5:"value";s:6:"Moški";}i:1;a:2:{s:3:"key";s:1:"Z";s:5:"value";s:7:"Ženska";}}	f	t	f	\N	Spol osebe
+00000000-553a-177f-1b45-582ee26631e4	telefonska.vrsta	array	a:3:{i:0;a:2:{s:3:"key";s:7:"mobilna";s:5:"value";s:7:"Mobilni";}i:1;a:2:{s:3:"key";s:6:"domaca";s:5:"value";s:6:"Domač";}i:2;a:2:{s:3:"key";s:6:"fiksna";s:5:"value";s:6:"Fiksni";}}	f	t	f	\N	Vrsta telefonske številke
+00000000-553a-177f-d1db-3f36e46569d7	test1.barva.ozadja	array	a:1:{i:0;a:2:{s:3:"key";s:1:"b";s:5:"value";s:4:"bela";}}	t	f	f	\N	barva ozadja
+00000000-553a-177f-5450-9d4591eb3c95	test2.glob	array	a:1:{i:0;a:2:{s:3:"key";s:1:"d";s:5:"value";s:9:"defaultna";}}	f	f	f	\N	test2 le globalna vrednost
+00000000-553a-177f-76c7-17c5400be8ba	test3.readonly	array	a:1:{i:0;s:15:"privzeta trojka";}	f	t	f	\N	za test- le privzeta vrednost, onemogočeni globalna in user opcija
+00000000-553a-177f-415d-e57d91222ad8	test4	array	a:1:{i:0;s:17:"privzeta štirica";}	t	f	f	\N	za test globalna in user vrednost se lahko kreirata
+00000000-553a-177f-8ec2-d0808b46d553	test5.notperUser	array	a:1:{i:0;s:17:"privzeta štirica";}	f	f	f	\N	za test - user opcija onemogočena
+00000000-553a-177f-2362-47bf6a52bcb8	dogodek.status	array	a:2:{i:0;a:2:{s:3:"key";s:8:"planiran";s:5:"value";s:11:"Dolgoročno";}i:1;a:2:{s:3:"key";s:8:"planiran";s:5:"value";s:8:"Planiran";}}	f	f	t	\N	Tabela statusa dogodkov
 \.
 
 
 --
--- TOC entry 2637 (class 0 OID 1157467)
+-- TOC entry 2637 (class 0 OID 1252882)
 -- Dependencies: 180
 -- Data for Name: optionvalue; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY optionvalue (id, option_id, user_id, value, global) FROM stdin;
-00000000-5539-ef79-9949-2837aaa2aebf	00000000-5539-ef79-de54-72699d2d321b	\N	a:1:{i:0;a:2:{s:3:"key";s:1:"m";s:5:"value";s:5:"modra";}}	t
-00000000-5539-ef79-ff19-5c86388723b7	00000000-5539-ef79-de54-72699d2d321b	00010000-5539-ef79-1f2b-2eb6892c6a36	a:1:{i:0;a:2:{s:3:"key";s:1:"r";s:5:"value";s:6:"rumena";}}	f
-00000000-5539-ef79-0174-6cd857ec2b5c	00000000-5539-ef79-53a8-9c5cf5493019	\N	a:1:{i:0;a:2:{s:3:"key";s:1:"g";s:5:"value";s:8:"globalna";}}	t
+00000000-553a-177f-63de-44d848d7e382	00000000-553a-177f-d1db-3f36e46569d7	\N	a:1:{i:0;a:2:{s:3:"key";s:1:"m";s:5:"value";s:5:"modra";}}	t
+00000000-553a-177f-b28f-667bf2c6277a	00000000-553a-177f-d1db-3f36e46569d7	00010000-553a-177f-114e-9b7524c332ba	a:1:{i:0;a:2:{s:3:"key";s:1:"r";s:5:"value";s:6:"rumena";}}	f
+00000000-553a-177f-5580-f800d6d8e903	00000000-553a-177f-5450-9d4591eb3c95	\N	a:1:{i:0;a:2:{s:3:"key";s:1:"g";s:5:"value";s:8:"globalna";}}	t
 \.
 
 
 --
--- TOC entry 2638 (class 0 OID 1157478)
+-- TOC entry 2638 (class 0 OID 1252893)
 -- Dependencies: 181
 -- Data for Name: oseba; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1343,7 +1343,7 @@ COPY oseba (id, user_id, naziv, ime, priimek, pesvdonim, funkcija, srednjeime, p
 
 
 --
--- TOC entry 2641 (class 0 OID 1157530)
+-- TOC entry 2641 (class 0 OID 1252945)
 -- Dependencies: 184
 -- Data for Name: oseba2popa; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1353,1697 +1353,1697 @@ COPY oseba2popa (popa_id, oseba_id) FROM stdin;
 
 
 --
--- TOC entry 2633 (class 0 OID 1157432)
+-- TOC entry 2633 (class 0 OID 1252847)
 -- Dependencies: 176
 -- Data for Name: permission; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY permission (id, name, description, builtin) FROM stdin;
-00020000-5539-ef77-2770-a34ad160d76f	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-fa3c-34e92825cc7d	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-6303-696196b34a03	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-3eb6-ab6f1a42a6f1	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-8cab-e0a51080c84e	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-92f9-e1d38342c150	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-2a63-7f9b0b5a93bc	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-6cd0-5a6c99329c49	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-025f-13aa3372ce5b	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-b27c-004d675b964b	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-e4d0-f996e1bbf40f	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-8c74-ddb1655e7fb3	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-e940-4a076902eb58	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-ca83-dfb76d22c85b	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-3199-aefcf9e24341	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-a714-661a200b0508	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-9887-a3b7388ffb03	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-4e73-14c93c61b01f	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-69e3-71c84cdb1285	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-593a-46e5e4c9d0aa	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-d18c-3cc9a5a7c31e	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-efc2-bfef920ed12a	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-f901-aef8ecb64856	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-3329-7b1cd28f97b2	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-a249-5241b16ead5a	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-2781-7d87c240699e	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-4533-6b85f914ee98	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-00b2-e8e201a699ec	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-baf5-3197d1feeffa	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-0439-579e5ba4a0a4	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-ccd5-ffbc27bb6de1	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-39c2-cbd95821aac0	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-fb23-aa281c798dd9	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-15f9-ba8fbc9d4d61	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-5f6c-d236cbb7d4aa	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-4d9c-02f7826f8c74	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-d18b-0c1b26f79fb0	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-a444-458fcd3d5fb2	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-19ed-423f93578124	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-73a3-4980513cc97c	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-c5ed-c79227322c88	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-4fc8-32558a6f3b0f	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-1c8c-8e763c1f5db3	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-6ee1-80bfed044b47	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-a744-c5a0cc48afe1	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-2b76-9d21e7ade968	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-87cc-a87e70d5832f	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-d986-d3b367fbe4b4	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-131a-6384e3374cd3	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-2ef4-592807936293	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-b7ab-12e13388907b	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-7eab-f190906bd803	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-94ae-7283edcbeb8b	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-c45b-25e1dbde8c19	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-a339-53311b05f038	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-0790-7413f1d6cc20	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-8d2c-e0327c211fec	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-8fc3-6e11227e61cb	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-05b8-e30ce5d633e1	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-5747-8bccb575241c	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-8063-d222575e9788	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-564a-821678eab034	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-f565-225fc1d098c5	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-021b-e539e06aa41f	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-6f6c-99a39bdcddf5	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-a351-3937b4cb62d1	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-276d-9e8348c56103	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-643c-f247add8058b	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-f66d-1ef6dfef921d	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-1026-f20b1af2cd24	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-5039-b7357f6785bd	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-ae34-3166c725f1a2	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-e6ac-e7a4581a172e	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-febb-30635fad9642	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-b4ef-6c6130488b48	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-955d-8cead8e5a5e2	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-7bab-0a4c95042b77	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-708c-6483a6fa0361	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-0875-eb5e0bc1112e	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-b3c6-750d41f0fc7b	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-d37c-3803c0d039ac	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-12e9-051d6fb43d69	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-5a1b-ed1e7ced6ec2	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-2a57-7c86990c389d	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-e1b8-9b9729c51fbb	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-9095-2a4a284478cc	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-1834-981186f4e0e2	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-4493-239990304a94	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-5425-53fc89f8e28e	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-f61a-f1c6dbb64dc2	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-30e5-c3642a44a800	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-6d25-3cef0dec2e0f	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-607c-a7874bf3d4a3	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-86cb-9af6e6db9fda	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-8b37-5b60a078f663	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-387b-00e60b4fe7f6	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-f445-8531108413c3	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-380c-f957fc95f200	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-1450-ca4d5d9d43b5	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-ab71-c0c756f36221	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-63d8-1c36198eeaac	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-2022-dc599b9e057e	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-b92b-a8d60c78ea5e	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-6269-be7b184e5d9a	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-09bb-3f87602b0be0	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-5111-120ce516143e	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-8b75-56ede108c0a4	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-8088-4b16e906a553	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-786e-63bccd210144	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-e19d-ccd77e2aab2f	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-914e-a4f5add48ceb	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-04a5-9511f090e463	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-b66f-a536b0d097b2	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-053b-1ce978b53985	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-8ad6-879f79199bec	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-0d25-2d3934a2bbdb	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-055a-f575d89d477e	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-5dc3-6090f424c23b	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-a7d0-00bd76d60f6b	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-8343-b6deebb37cb7	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-4be1-f0e278df6cce	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-3757-7c0f8a4fd6f9	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-2aba-0b70049dced2	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-0725-2e35aeb301d8	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-de1e-859bbed06581	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-8743-a1ff28a7ad0a	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-a945-7428fef5cfc9	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-92b1-d3bb65d99e09	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-d522-c47a23b9ce1b	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-da57-2d8f592d5705	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-68f8-b9a51b035a20	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-45f3-a9a5311d1766	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-9c72-e8ea38dbe75b	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-5d28-f48abb3a8959	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-cbae-eeda5434ad79	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-1f3e-4d341eba3b59	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-65ec-6ed500b6ede2	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-a4d8-dcad7d6b67a9	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-1b11-75d769192dcf	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-258b-63dc15a5b5c8	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-19fc-a0694727d583	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-0bd7-e3dfd6d3d0f7	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-04c2-c1e23da894bf	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-4ed4-ddc5d2c0439a	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-4d7f-c90da6116fc4	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-395a-4bb59f3d9c29	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-fad5-763aa75effc0	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-32a3-4c9bbf5adc4e	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-0c60-dfdc5b031415	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-8caf-fdb66c7c0b9c	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-a5e2-a362d0bbff52	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-7968-9a95ffd3eed0	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-1765-98ced9f631e7	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-b5bc-61cbe2997373	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-704f-717fbe04ac83	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-b797-b85153df125a	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-c898-6edbcdbf19cf	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-5070-fee666c3783f	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-c98a-39003fae3c04	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-f5e8-e0e0eaa5e9f1	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-d088-7e4aa6622c9f	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-b60c-da367a81942e	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-0204-645f1d8ed3bb	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-b4fd-0a3b7b797184	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-1667-6263fdb40039	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-5a02-08d356e32dd3	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-58f7-cba3d443709d	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-dcdb-1576b1c07fa1	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-aa9e-bc1dfcacb81d	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-9be8-1665d6e2c264	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-6289-e4550cd8e6df	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-8722-652907930c39	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-756e-00908f95fd74	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-104b-f589112a9ebb	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-e6f3-d676888b0869	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-fe25-a9b93b68dad3	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-388f-9eb4fc1068a1	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-e036-9aca17c07422	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-c120-0eb694c95fe6	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-6aa7-0fe391d0298a	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-f4ce-c7131ed8a6e9	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-74c2-612fd0b1c8f3	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-0879-8e5b77b4f034	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-f9d7-1f324fe97a65	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-97a8-92c6ef9ff6dd	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-754f-146a13bdb6dc	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-83e7-b63ae99a368a	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-9e22-770943d7179d	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-6729-ce31162860ee	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-864c-9aba684d6d87	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-3f2a-5a6828ea262a	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-140d-55550a72d417	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-1dda-12a90700c70f	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-eadf-cc2cd387d914	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-f384-d3239af8eb4d	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-2def-a48697c3a92c	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-8188-14fa4cf028e4	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-63d5-0516153c8efe	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-a8b4-41a3c7f54a29	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-db88-669047ce363f	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-9e86-de84a5b3bdf5	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-2f05-3305c8ea4f94	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-7837-0260eb5d771a	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-eb56-e82370413bcb	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-811b-60641d370296	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-9860-c3c55ce50d68	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-d614-276197a8c387	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-01fd-ac9287863051	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-00b7-15df559e8129	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-8424-e517050d0f39	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-f4cf-6423b392018c	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-5ce3-fa8b37835869	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-fd0f-3787f07cfec4	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-7597-34d0104de1a3	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-86d2-35ee9cfc18e9	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-fac4-b56bfae716c6	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-e27c-b52d713433d3	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef77-53fb-7852456b0f43	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef77-8073-704cafa13a46	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef77-4ab1-7d30152d93c8	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef77-2c12-5eeeffeafedd	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef77-4db4-7dea44a4f32a	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef77-a5fb-f96975f11bb3	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef77-87c1-e61a882c9cff	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef77-f39d-5aa507d4976c	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef77-2ffd-4ffe361efb15	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef77-770f-1c40552bdb2e	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef77-2f4d-5c2d45be0f75	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef77-0802-a0a7d20c5d80	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef77-f5d3-ed08464769fb	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef77-2bf9-59860a787e69	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-d40d-ea74c148b8a7	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-8b66-99d1c0a8b122	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-6ec8-35c0dedd9e0c	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-f4a6-07fb0b5cf34e	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-e63d-8a3431337f23	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-e305-2341d1ad768a	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-d835-4cb5c7a2e26e	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-247c-c98c5996bdc9	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-b1c8-8f228c627399	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-eaf9-36ed51c09075	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-26ab-df3e16044c99	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-ea35-10f039aa882e	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-f629-ee12ba523b6d	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-42c7-5f833f1025ca	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-7d6e-afd0f060c842	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-cbae-2a00d561f18d	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-efaa-8120cf703c7b	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-29e0-6c29786c0c59	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-bf00-ef908f8cb8dc	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-9ae5-fb49e4051a1f	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-2cea-a92ee8cb40dd	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-37f3-d718229ccc1a	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-a12d-ecfff3c4f75b	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-7f59-4f8a56b56172	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-242c-870875680c77	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-396d-a133ecf7080a	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-7b93-ecaaabd22abe	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-d568-f2ed4b4d7626	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-5e97-4066101f8ddf	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-4b3b-a646ba33b8ac	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-a230-aa5d251bad08	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-d179-0664816ec23d	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-4244-cf789673a9a1	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-7945-7f4a85ebd2ed	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-8c71-687873e03f31	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-7dcc-bc8148b04dbb	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-d81e-00dcbea24edf	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-50fe-79356c84a29c	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-51dc-53caf992cda9	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-674f-2cea79aa0206	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-c582-601a66440921	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-9b73-5bd24793c6db	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-5ab3-48e13dc99743	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-8b7c-95d549e383b4	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-484d-bc77e0f34eab	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-4d1b-0f9911db82bb	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-3a16-b87af38cf48c	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-0479-42db15e58dbc	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-3e95-58954c744dbb	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-1ee0-b4c7314f8580	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-816d-e9799b2556d0	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-3878-392da9feeb5b	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-9573-bfc5273c205d	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-c644-f2d14fc747f6	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-4869-d08d453c79f5	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-92f8-8ee9a8a86108	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-da47-1d550e823582	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-7dae-e568c386f34f	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-4e47-440d0d6abc33	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-b95e-6c06ef777100	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-30f5-bed47f8bb175	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-bf52-9464a966686e	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-635b-2eb6639f8b4c	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-ca6b-5d07863ef8a0	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-4ac5-d6d3a80e0adf	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-b569-a41df6b66dc5	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-098c-8263e5096a78	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-faf4-fe4804050a98	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-17ff-331ec5c7317c	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-50a2-da002a657cb8	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-1c61-cc6e33e4f9be	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-4dc4-6d407d5e8e6c	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-2868-8e779baae3dd	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-1240-2c82d1148a43	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-a361-c37e22e80178	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-2705-c4430372923c	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-6589-02d63838636e	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-81ca-ee0f63cb674a	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-c027-7082e1cd8d1b	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-c44d-68c12f5eab62	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-6190-99573393553a	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-eba8-8b483ddcfb1e	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-0bc2-9d62ef97b48d	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-bb0e-97c2ef7a7575	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-b84c-eecdb2a6eaab	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-aa53-8e0ee5ee8203	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-3ff9-37dc54ede29c	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-c4a7-ffe9acf390c2	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-6659-52b8ce0a9ad1	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-2aa5-54c3df10fa11	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-f1d9-e3bef8b6bd9f	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-ec91-609119524357	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-dfc2-54bca59e7349	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-6cb3-153530d2c8c8	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-3196-f7765701b111	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-ea35-477962a993af	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-7bef-7c38a7d9e8e8	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-175d-1993767edc54	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-02eb-ce666a1c8a2d	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-433e-1d4a3cee73c5	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-d016-a43d49aaec8f	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-1d1d-1e61bd4daced	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-57c0-9918df84fbb8	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-d023-187d39618365	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-f083-a04a6529a730	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-6a92-15fd7f62b589	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-755b-7902ec45776a	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-7405-d07f9d193a2c	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-a591-4ef3ae2bd85f	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-0f14-6645b80d2d00	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-a394-0a49db4e3254	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-03bb-b30c1db68d0e	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-e8ff-369e4c2a7f9c	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-4bfd-673f49f83654	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-fbaf-92fb10f1af7f	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-e4e4-a7ca89a8ca3b	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-9f30-55feeb96ae49	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-3e05-84cbbd577eda	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-b1fd-af0ad9f8122d	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-e165-d0a58d6046e4	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-8304-fa3121daad6e	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-379c-5ddd1f3fba1e	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-8b00-3fb692810937	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-ffef-bb8323d088bd	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-c5f8-8084fd01377b	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-7a84-fb12e05eebd0	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-b532-07a8270a183f	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-dce5-c787067e96a3	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-f94b-fd19c2f14857	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-2ca8-fefcd189cbd3	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-af31-30d5dcffca89	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-d4c7-6e7c56c7403a	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-7ac5-8d77521ffd70	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-2b49-eece7d6cbe7b	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-35fb-f6d5f763a652	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-7077-e5f4022710df	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-0451-b4fabab73221	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-f704-7aaede514d0b	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-f196-3f8c7de97bf4	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-18e9-64a70a9500db	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-a379-586b5ef9d14d	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-233f-199a4041240d	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-c997-727b9d8adeab	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-53aa-4bca833ffdad	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-9583-e02f546372c1	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-d97e-cec4ea0ee0f1	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-7ffc-644e018638e1	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-d7e1-cca6fd4f1a6f	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-6fed-870a20cb13df	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-272c-37eabeb0054e	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-682e-3ffdbc082276	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-e5c7-7f0be9bf5d8e	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-d70e-b1029e8445c1	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-f3b3-9303269ed6c1	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-e541-9ec7bd47c0da	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-5782-83d122c2609b	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-e499-c4776215ab2f	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-68cb-2588108d547c	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-f8d2-e3f5ad9983da	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-a5dc-facc9bc158cc	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-6e11-2de48695514f	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-2101-7dae52829972	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-aae3-053a88682673	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-9c23-81d455f1449b	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-a9c5-7a74d4341114	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-7212-76ea92b9e32a	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-63c6-e5a359f7a598	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-992f-5efc67942719	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-2faa-db7aba8f7212	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-90d1-4d615a35c866	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-54f8-addedebbd081	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-c8cd-127daa544e22	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-e9a2-d0b7315db830	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-8d77-94cb18ab8c9f	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-8f1f-b750456608dc	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-d95c-9f1a189908fe	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-235f-c50d23447d2c	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-9ac7-d6f8ef5ec7eb	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-18d4-ae6d87ea96f6	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-95d1-b37940e8df32	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-41e5-aa8688e6b691	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-4606-798ebc7e5a6d	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-9463-e6f0451d574b	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-3b81-91d9f12aa991	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-2605-e407e27822a8	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-c716-2e0f2dced0e7	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-4e7c-f2b38289dda6	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-f83a-23df7a15a2fa	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-421a-6b923797da43	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-6b8f-ecce90fd9c6e	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-55b1-cee3d7e67b53	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-af00-6b146c98be95	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-7475-77b0efea2466	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-4e6e-89644fa407a3	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-a289-9a7048a33451	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-6fe3-deb56da05aba	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-8f01-e4bb56350634	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-dbb7-684cfecb8df7	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-2674-67be592c46b2	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-2dee-dafcaed27301	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-bd8e-4ef8c64b8d9f	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-c0dd-388003c2da11	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-71bc-96a865af0260	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-fa57-86e0ad430b1b	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-0c05-2bb4aab61e6a	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-d61f-640bf1505b72	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-06e8-47dc9733e021	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-4721-4cea1a8ba84a	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-8a42-1f82f3ccc793	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-549e-4320ce6963df	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-04df-64bb6542a37c	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-0b0d-a0a7d5c674e5	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-9caa-3b8b11dee4c2	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-734c-a7fa1e0d9bb7	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-85a2-d751ae9b816d	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-9c03-ce7cf400414c	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-e591-2f8dd8ebc077	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-a8ae-67f67c61ec77	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-2714-ea9f10ae7b14	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-1dff-7d689e9b140a	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-2a42-5251e2888f3e	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-2721-3c88c2d09571	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-c94f-a144bafa6e3d	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-21cd-fe0663f2b075	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-0e44-435ea63ef2ed	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-f8a6-e04af841b6f4	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-27f0-d2ab9d4e083b	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-f1b5-6e3403ab605d	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-59b9-862930a5d18c	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-e7d7-ec74554d2ab0	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-6f8b-db4a834de5d7	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-edb3-fe8bf85a2b08	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-5860-cc47a30e8422	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-d2b8-8f872badf491	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-7dfa-00c0572564bf	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-91f7-b2de1c9fe5b7	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-81e2-40ebe7de7917	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-690f-f78d0989b96e	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-eb54-ef90ccc39e42	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-6e15-51527282a3ff	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-d98f-584f0a427a44	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-fdb9-bec8b9d1d6e6	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-9990-b6a313376ec3	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-39ff-3a7195734612	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-8cad-0b1c6cb4b790	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-479b-f1f6096ebdbd	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-58c0-f0d83a4400f6	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-58a4-b9a5f13fbdec	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-6616-72c7d428e83e	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-594b-f202f43ef79f	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-0520-6bf8adcf60c0	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-981b-8f9220f0c08f	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-bea2-802168be07e4	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-56a5-0e5003135cd1	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-c66d-f0aab9909d75	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-d936-a8502c6229f9	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-d971-259a7a817ec0	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-7029-aabf0411a34b	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-834f-beabca98839e	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-9071-ee62a84bfdbc	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-d687-7af0fa2e7884	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-c73f-608c42051d49	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-8bbf-a8856bf6d0ce	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-b376-9ba873c723a7	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-339d-0661f4287f42	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-bd09-252eb47844cc	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-3657-21743c03429d	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-8567-cc84f5c23327	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-a43b-a03a77b086dd	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-c9b6-6fb96217b613	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-e647-c3ec58be4ad0	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-890c-300601078b02	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-5b79-994a0ca9051f	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-a4bf-080753b535b9	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-217d-581a6ee769a9	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-5d17-0f2047e790c3	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-2cc3-ebbc57bbee8e	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-7883-262b6c7974cd	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-66fa-9a02a8701b3a	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-1fcb-a624366b361e	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-e1e9-0748e1bf9b7c	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-79b1-20c812601f25	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-1c6e-eb42efdba336	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-7f8d-442cb7454f03	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-29e4-c012acc263a2	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-3c94-4530ffe64c8d	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-6697-7760e067357b	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-95d4-f9b873aa995f	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-2d53-10bf0704b6af	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-31c7-1f9e68287552	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-2cbd-7d0e750956ae	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-3d6b-4f19f366b97c	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-9b2f-dea57dda6047	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-0211-2c629274540b	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-935f-4f3aa08caf3b	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-0248-4153579424e0	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-47ca-6954604da9b2	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-eae4-477f0a71ace4	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-b3f0-95059d024287	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-cbd7-041c14e7cf7e	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-a568-5a00c92c5650	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-af4c-3f305ccc1234	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-4d2d-b64c1d58d8f0	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-d3aa-9aadc7db87c5	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-ca77-c2eef9343997	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-f873-8e13b1cbaf8e	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-da3c-869800280a2d	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-2756-67cc8885172d	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-9aab-cbe17acf2071	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-96b7-72e41b7c60e2	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-2b42-11aa26bd6117	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-04b9-6c86711f956c	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-2ea7-402f89c7e728	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-9f7e-cfed89dfd5fb	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-30e8-989637c5d7f6	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-7e3b-4b0858f5d78b	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-a696-933461385ec5	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-4374-2f2d4238f7a1	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-4d58-95251601bfbf	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-d9e8-f1de70bbf0b3	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-21d7-c1fc01f21e1b	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-cc04-8be51d736926	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-0bd7-465cfb1a8288	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-b782-805a46e27e93	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-16d2-ba71767ae222	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-28c1-7c6b3e9a6914	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-c2c5-7991f932bc7d	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-2255-fe87b8c10f06	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-86a8-9aea0442543b	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-56d3-2b5e3a78f1ca	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-65dc-d66efccd0f97	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-6f7f-1858ed5b71f5	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-f454-7a1f629a803c	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-431e-2c3fc8502024	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-9ee1-325618e8ef2d	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-5d4b-36459abf50ac	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-011f-67ce065b7a72	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-0183-18249e580f39	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-0147-5eaa8cabbb8c	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-2fe6-fe3f437fc02d	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-6a0d-5a1796313c4f	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-d23e-591624dbe9aa	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-a47b-b15df17594aa	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-f229-348c8847f290	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-e309-426490d4824c	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-16e8-9fcda2b2040c	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-aca7-44bc866b3bd6	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-e8ee-92fb304039b3	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-5d67-ffed6d81952b	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-7beb-85edb74ae2ed	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-97ce-816f14084c6a	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-9df9-76fb204b4193	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-6446-eb2f7d1e8e06	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-cc9e-1e6427136351	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-6ffc-dd419d32a845	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-5c3d-94ee36695ea2	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-52c1-bb4838bd6811	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-2845-4d6743652c29	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-6eca-cc10e011b01f	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-e13e-c1ca23c5c035	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-4132-8ce16ee3d7ec	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-a856-c3f746df7924	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-a7e9-8cf46b14b6dd	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-a760-6fb73786d057	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-c878-235e92ee9298	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-9098-69d93631c600	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-778f-2be3ea5d0c5f	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-64a7-66becd161301	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-64e8-b1fa27b82ecf	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-a17b-3e0277c4d920	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-93de-ea144e8e44b6	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-e0a8-47103d62c4c4	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-7dcb-b6a41a1f95fa	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-4266-67b0d658adce	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-942f-18c31573c818	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-3cb2-736c7741e806	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-96f2-e7ab03e2d04b	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-377b-01521218e520	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-631e-deff9d587e85	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-59ac-1973943d50a3	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-71d8-d08de6a44d8c	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-3033-7570e2735672	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-6a59-d58778b75a89	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-950f-c413517ae5cf	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-aab3-e2d02cad3f86	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-27af-fe4c38e81294	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-5546-665819fa7dc3	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-3c0a-f719e024ae35	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-8a72-906a499868f4	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-8677-ce6897f7d111	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-e167-47793eeeb829	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-4314-f451510f1e89	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-aee9-306502ad3b35	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-24fc-ebd491a8d202	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-4741-8076803d8e7d	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-fd44-448a26ee74e1	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-a216-caf787edf1a1	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-8f0e-f3fcf9360b16	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-513b-16b64ad5cedd	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-4443-677ad0a2e44e	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-26a0-8677497e2a70	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-9001-9c816c23fe5e	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-94fe-0cc00f27d868	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-388a-8092a2edcd8e	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-96b9-3e89e894360a	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-61d3-f0ebedbf28d2	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-45ac-c59bae52b07d	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-9f92-8507cd994c67	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-6e2a-2111716b1e22	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-c26d-108bb5422483	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-5d22-91e8e7fd9f8d	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-8370-78bb5c052ae5	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-8c42-3ea7dab71f48	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-c7bd-447479144ca0	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-369b-6b5579606cd0	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-d76b-843dfd52980e	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-215d-c4dca1505803	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-5c32-84d1e3b987bb	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-5fee-ccc5a0ff35af	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-ed7d-fb1652519c42	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-c29f-afacc6b94a20	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-fb3a-bc04304b973a	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-d2da-bff61fe3ea00	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-c9b5-832b00405695	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-8132-ca15d29ce3a3	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-cf23-49a70893dc70	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-819c-911bb67396c8	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-5ff1-70739979ab15	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-e136-4286f236dd87	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-0c8e-cd00748e732f	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-449d-f17424e16134	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-c2fe-c8dc0c95dbe7	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-ce8f-f133a283379d	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-f296-a64b6a0d2e96	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-dbe1-cc19c5ae0ed0	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-041d-45ba79de973e	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-ee67-4670451a274f	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-5ecf-0ba61b7db9b4	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-20e1-224a08e5b431	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-8085-ad3146bd894c	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-2fdd-19b1c899d168	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-e2df-7d428fe50425	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-3913-30520feb2ae6	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-3625-0bb5aad4078e	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-0037-a7d8e9e436fe	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-1192-27ec82248113	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-ab16-31259627559b	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-affb-d16c45321081	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-faf1-14cf11c99dce	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-7cb9-4e916879939e	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-0e74-aca9db5f2dbf	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-02cd-65207b68bf27	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-8d82-945041ef07ac	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-52b6-096f653b2f09	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-3fed-c3ff78a3ad71	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-4fe1-1874d7d16a18	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-4825-659468916fb3	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-bef5-838c54944031	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-8093-5535050dfce9	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-5e1e-3aff2e1684d5	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-3390-4205a2ed9787	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-4332-4421a1a6ac94	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-ccbb-a65df9ddb23b	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-547f-19dfc42d45fa	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-4fd8-03b8d5dcc592	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-f2f7-423ae8efb800	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-4a23-503d5b759257	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-88b9-ce5fd3d5490e	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-9cc0-22883b6e4da2	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-d85f-d378bc67ae75	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-a137-4af5fcfc20e4	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-ef3e-f77a995cba66	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-50f6-c2d939d740bb	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-a788-57d56c14131b	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-bd64-8ac215c65c6f	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-5339-a4fc5ee1a7b8	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-564b-69eec07cd078	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-63e6-65445f6ace53	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-b93f-05cd3092c2ca	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-d38c-f1be7acd0d87	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-bd0f-153d0c7e53b7	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-c3ca-7247064b16a6	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-0a80-4a28a2dd55df	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-3d2c-ba68d50cfd9e	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-942d-b6aee1c54d42	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-ef0d-81a00ee28f01	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-31a6-17d45fb0a214	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-4828-b2f9517ce92b	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-fd9b-0611cdd81341	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-e01f-e755031b4fae	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-60c0-c8925fe7846e	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-aa4a-f30c28ab4ca4	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-1abd-ce7580dcac67	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-6ad9-fa3fc4d46865	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-187e-865e6e5dada7	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-a818-88dc2fc00a6d	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-1ba3-ad36ca3c372f	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-cc37-69391912da1e	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-e3f4-82f783fce1c4	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-0abf-600593c9bcd1	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-ff85-fb8b148b00c8	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-19f6-c7e18d7573a3	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-85ee-dc4a13e5c817	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-a7c7-fb3af8e3db3e	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-72eb-987b16bf9335	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-893a-321dfc5e8341	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-464c-accfb4c7ae38	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-1339-6506a2eeb93b	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-0bcb-8afd6236f115	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-6a25-79f0b0c1f455	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-028c-af97b22148ef	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-8f03-44702688957d	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-ad3a-e06adfbe0c38	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-a007-f309e03af254	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-a419-af136ea3f9a5	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-0d57-98578019f361	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-8f18-f1d86053acb6	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-dc6b-655447d3567c	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-968e-48042273de50	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-8fd9-01305dd8a352	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-a37c-6b4aebde01a0	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-4c1a-7704f77fe76b	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-a373-18b580ea6fe8	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-9cd8-cdc91d0ca73d	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-2dc8-efb12a102f6d	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-1bc0-01327ca24131	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-4ecf-e3f27fa19de3	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-b157-de6dec1f99e4	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-0a2b-934141f5fb7b	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-bcc8-72cbc83f1b5c	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-6231-60c4f0eddfda	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-be4a-56318e592de0	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-a56d-e50749a36650	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-9c49-d1725ae5058f	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-6607-ff9b00d9c3a8	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-4e60-4045e926e220	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-1027-66e566bf5e84	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-2cc8-11ea42ab1d3c	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-7d25-32cac04adfb6	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-b933-fc8252743824	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-f229-9d7c2734a8bc	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-e20b-5556da99f1c1	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-a9c5-02c98ab31893	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-0435-801d62b04ae5	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-efca-4bc889ea6120	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-edef-3483eb1b5986	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-018d-93aedce987d1	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-7e67-b55e5f8bac3d	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-5b4a-c05d13ef9b5c	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-a564-0044244a1af5	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-5530-75c26544c677	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-79a2-88638c559b98	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-94fa-8e922fe373d3	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-ed9f-a61419b639e7	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-ef9a-1b290a38fed5	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-5559-758086c3ac00	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-46eb-52253600223c	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-54c8-ee23bd097604	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-c343-9e075ce0c80d	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-0d27-79b28a0efd89	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-9e56-ddfb8d54265d	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-e993-b55cc36101db	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-93f4-b81761e282a5	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-cb08-3478305ae0d0	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-6cc8-44e8f043cc12	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-427e-5faee0fd185e	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-7d65-f545b2ba0bba	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-6443-ae70d39ffc98	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-af1f-6da9d4aeda86	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-6a01-b827faa644a3	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-9f37-1c137edc3276	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-2a99-75a77d082e52	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-484d-99931480f33a	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-6abd-05552b27dc4d	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-9e22-fad6ccfd612e	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-c3d0-f37b9fc0c3db	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-fd67-9cdfc891221a	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-8417-490756737586	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-67a3-d074e6d53c86	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-548c-2b3a0e3de819	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-d6fb-ef0fa4aee4d1	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-e2a0-a7064f3c3879	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-df80-f7576e1f8402	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-8fe7-856c09a5ae94	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-25c3-8cba280d39e1	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-a26b-9703c362d613	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-d356-84082eb7735a	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-26a0-5cc09d13d161	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-f1ac-bb3eb87d8d1b	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-6607-acb31981a739	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-cab1-2a03908908c0	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-7d5a-8c029a4ea42c	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-0eb4-8f563236aa9b	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-d2f5-0439bcc77788	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-dec2-8839bda21264	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-b639-1cf586aafba0	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-bfbc-44a35c7ca8cf	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-a988-73401b2d6a87	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-47d6-ecfea65b3b2a	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-6cf2-ef2281726de2	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-75eb-66c88bdefa06	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-bb7a-b8fdd29d8d56	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-abaf-58dfbf5c17ba	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-49d7-840d88f03bb6	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-edbe-a277d797a395	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-7925-83b3bf70a42d	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-ef92-1f5e18fce4a4	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-ca6f-7cb29a7ca6aa	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-5071-7cf69e2136cb	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-79ed-87497ab03c1d	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-b782-9af548f674e9	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-82cd-47e0f5ca29ad	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-f737-b1a994b4fb65	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-8548-d7e7a5d2af10	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-d36e-42287d5f27ec	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-b939-8f5b5a9d896d	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-1926-6ea3d45c7e74	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-a8d6-a0d7940858fb	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-f136-8945219cc7c7	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-afb8-9d9453c98378	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-f7b5-9c4c6499a29a	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-074d-6ece1e7b8386	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-a7c7-4a73ab633636	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-092a-8416e0181e72	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-db99-a64eafc80e25	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-1c1f-027c52354832	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-c212-aa578f4cae36	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-309c-ff8786c2f701	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-f32f-f0f1f607979a	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-7ccc-73f30fb4abc8	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-7b86-833c37f0e786	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-5426-ebf9fb06a037	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-3d61-597db1201963	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-33cb-abb44fcc853c	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-5b8b-a2acb5718226	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-631f-e314b4d51331	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-1192-ef1f290cde9e	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-cddb-697faaaaf69f	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-d824-3228912d8d77	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-fe7a-d3f0e71a17fd	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-ad4b-596cb75189d7	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-62bf-73ec552a2ada	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-ebf4-695a726b9e76	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-22f8-6796966e54b9	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-92f6-d387b43fc500	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-4361-1ed6d2cb93d4	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-e5fb-9e742f45f4ab	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-ef4a-68713d367a87	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-de8d-1d051ca150af	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-b259-122862671065	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-90f5-13a9b6a253f1	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-e9ba-8265f4a8a0e6	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-5994-779d1005c9e2	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-28df-17ec2c63c519	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-a56c-fede7840828c	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-ff11-b2b14f111ad4	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-c1c2-5c5571db1d66	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-f9f2-2c0a2228d3fb	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-0c46-98ce308e8d93	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-aaea-c56b5fb2e63d	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-d5cc-0ca69e39b0d9	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-14e9-133bbf87707c	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-f660-058836804ac4	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-7519-cad93fb2ae6c	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-68ce-75bc86dfd61a	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-9451-1ea8eed89b14	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-2faa-d3ed59b21b2a	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-33fb-5ca476a80fd3	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-7dcd-27f99cb65819	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-c201-4efc70b0aef1	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-e3f9-7db2fa811570	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-b548-46a6bad56479	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-9ad0-ab658021a245	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-68ee-2467b196338d	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-3f8b-458d70164f10	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-4f6b-3ba0f33b7fa1	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-ddb5-d0ae2ea9191b	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-0346-6c8cb937a8cf	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-ede6-920751a230e1	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-7c88-08751cd189c0	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-bf7f-cc837ec53f48	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-4970-024cf16780cc	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-fb76-741d4a38c37f	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-118b-afffbf696f46	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-742d-047265c8369b	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-86b4-8531994b9226	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-e16c-3f2448aea40c	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-cf37-0d7d5fe02e6d	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-09ba-e4c19bd4245b	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-5dcc-4d748a70c4a6	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-70ab-d72dd8268ca9	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-71b4-bc1503d5e337	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-97c6-0272f6db7da5	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-7f26-5eb2e0e28e62	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-54f6-d2f72fdb6466	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-699a-c45d5182691a	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-7c01-9fe60bd58a06	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-ecf7-d26cd5aaf966	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-9336-028301914b08	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-8a88-e4a24e05bfd7	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-d6e9-6db073c08d4a	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-8221-95033f8b554f	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-0d81-5f60fe134849	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-8caa-ca677d60b78b	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-eeb2-5664c3b88cb9	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-8da9-e54c7ede1020	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-26b0-fa754b57b713	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-914b-3e8e84688585	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-4dc1-39a2eac92d6f	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-d471-3b82dc58a1c5	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-389b-1578b6dd2435	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-461a-bd5ca995166b	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-6434-ddffd00e705f	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-364a-1124e7e6ed7f	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-9e39-4fce680f158a	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-da7a-5f52faa55b69	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-97f9-032ac8adc198	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-9a6f-3418d1ac3e62	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-6ed9-a046ec0b3fab	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-f859-dd33dd426ea8	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-1c02-e32f47bc97e9	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-2b8a-4f2537fdce5d	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-ff58-b7cd42b4396d	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-a5e2-c80478f30e0f	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-ba92-6af391054e9f	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-2d49-5983d28b4aca	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-7026-ae7e0cdd1b5e	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-afb8-7d54e77b7625	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-771a-591f2cb2cb15	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-f8c0-4d6bdae12231	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-92a4-ee61c4333d30	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-f280-39fb2c05f044	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-8aee-630b6fc801f6	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-f01c-97f66f8a0261	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-63bd-732822ea27f3	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-1edd-4fda4765ba7d	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-6c84-b89e0eacf2bb	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-879f-e9b7b40a05ad	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-6bbb-3f25d4222b96	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-3ca0-71d2f8303dfe	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-6001-2b37f691f0d1	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-89c9-d0bb85ea8df3	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-584e-5997511213f9	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-5fd2-af61a35c308a	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-1e9d-ba8b7b86af44	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-98ba-f1e3bbaa6935	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-ccd7-93daf40a4f36	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-fa51-c67fcb3c85c8	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-cb29-d156f41a1fca	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-629d-2d3dab96e69c	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-2d0c-529aabb75252	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-4550-42d4ba3a3b72	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-a9d2-48326e424db7	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-f3df-6cae8ab175e5	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-9a6f-ed6a68d4734a	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-c9e3-fcf6fcb1088b	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-d036-00119f832741	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-6706-a73b485d7ce2	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-64bf-b5422863397a	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-d22f-8b0b4f95e66e	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-9fa4-8c7c881ac36c	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-092a-aa413b43be39	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-96d8-aca33aeca2b9	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-229c-39494197a83b	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-adbc-5757d14766e5	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-f653-684abbc2af67	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-8673-82e323eaee78	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-7f89-57e874c2f052	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-c443-8ec607325c89	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-b7e8-bb559f7d7878	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-a3d4-c5802021bc35	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-45f3-d0fa66aaa375	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-c279-8128cc2fbd94	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-9bae-a8f633c54e19	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-ba4e-7c9e68b91b21	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-e635-2920fe364db9	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-e7e0-41da99349ebc	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-875b-8ebd5e460ec4	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-f1b7-19c97f85d75a	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-6700-34424675e0bf	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-6e03-68eb1acba6f0	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-0797-20ba15cc72b6	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-e4fd-3fec3804dfe5	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-5da8-bf43f1743813	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-c60d-c9824ee3a8b1	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-551b-b82e3456f73d	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-3f30-41ac888574f9	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-eb06-73763ae76657	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-1279-26409a1ef5e7	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-aa2c-a9005e0bfdfa	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-bffe-bf5d05616d34	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-d2d6-bf410646aad0	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-830f-3f51a09defc5	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-1ab0-e03cfe118d0a	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-12e2-249b6c6f6094	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-f2e7-4aaa5bd87b50	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-1097-b5d946f59ef8	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-da0e-e2524e8732fd	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-7cb0-64a6b119d08c	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-c078-9a406beb0d85	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-3b69-8549ff889d4c	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-aee9-e8a80dc2deda	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-2d75-1bcfd4e548c9	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-4d44-fa9cb2ebb97a	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-5359-eef7d6c4f07c	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-27f8-ec3aa853c3f2	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-a56c-d2ee7cf02bf2	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-8c69-caeb6f600df3	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-4b97-df6c352b8428	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-0548-fbb4322c94f8	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-a4c5-f78069fa99a5	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-2c77-de1339f62b4e	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-0ccf-ca60c79591c3	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-c457-d0bda6e6576a	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-e9d9-c1f740d7e51c	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-e850-b42e6e181e8d	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-9f1a-3dcedca7e0e5	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-7edd-41ecf64cc694	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-240b-d9e1b17b2357	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-a6b0-e457c1153cff	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-51dd-c8328b8c85a1	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-0aae-b25f08834a9b	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-958e-3da585b4f595	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-5cef-73e8975fd123	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-2e4c-12dddb1c1635	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-703d-7317e6e8c7b7	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-b1b7-8c79f42d4321	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-aebb-077db061d4c7	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-0029-5fa712893bec	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-0bad-83d3af84a602	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-1b51-775dbd04f7db	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-38f1-650a335a9b6f	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-fe9a-fb22d9dd82d1	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-28d2-7db64a553bbc	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-9112-f0b9f2b77f26	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-ee0a-e1d82f2d4254	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-94cf-4c79bd74f77b	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-94db-a86594691a0c	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-8659-214ff6e85e2a	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-4275-cb65b704be18	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-e834-e65096955d0e	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-6dca-772af5a474d0	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-9734-be7956c012b0	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-9fa1-54e2a63153c9	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-459e-3e6de22c8141	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-2d87-3855520f4233	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-b88d-82307dafede6	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-f063-309fa398aeaa	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-3d2b-e653a5137061	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-4f7b-b3002d92afc9	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-907e-9e6d3f5766b2	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-fc35-6ee42e29a51f	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-4259-1aaacc53284f	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-126f-025c041d9a93	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-6a47-e2301d492ba5	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-513f-f5818b5c6521	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-9f40-176bbc227b7e	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-b7a8-04aa10c50aa9	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-777b-896eaf808ca1	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-e9e0-efccdfffa011	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-6ffb-d990121079e1	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-8454-4db3c2b772ae	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-7762-dccfd76c9d1c	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-9bb4-8f2e2840c8a1	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-ca6e-c7664b54bc7d	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-edbb-1ba5d5983e3d	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-4736-2fa5d9454647	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-ccb5-721840f3e438	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-e6df-90dc4419ca06	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-8dac-9d9fe13a13d9	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-bb22-376c536720eb	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-fc74-ebb6975615ab	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-2fae-f5f9e9c4a38c	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-f93c-8a5027bc3869	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-d880-002e6a0ec4af	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-f2af-913bd283d2f1	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-93a0-133af0d37a88	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-62af-0c56cd6206ac	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-9baa-75875a9fca34	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-89a7-178ba52fed26	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-7dbe-e76065af75d2	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-e98c-a1f6eb7edb4e	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-36a6-d93c65937ea1	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-165b-771bd798e064	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-ed39-3b81f10604d4	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-aa45-eac1f8acedcf	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-9d47-03552135565c	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-cd73-72086c772b3b	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-1085-8ef6375d67d9	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-c445-9613d7d64da2	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-47d5-78cd70940f65	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-ece4-e0e1d2d60568	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-7e52-05e70c0a2219	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-9c8f-ad983c048adc	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-1cd0-ee6ad25ab1bc	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-07a3-c065da5ca6d1	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-2eb0-20e8fd954674	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-abe7-0d7123a480d5	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-2c7b-e8c073c0c691	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-d6dd-7d6c5d04d473	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-85c4-8ccb1bbfa28d	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-7fcb-be7028a25aaf	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-0f1a-36eaa3a41d2d	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-6d45-7c2e956e1fb9	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-4bae-777421f3509e	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-cc4b-ce408686b34b	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-9d5e-8e288b0792ff	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-91c1-80cb7e870253	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-d0d1-330eb4ba8eba	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-74cb-8e2e07d55d16	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-1cfe-53320a3de321	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-b1ba-83c2fc001b03	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-4172-6398399dbc50	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-4017-359ee4c30b57	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-710a-480534fbb754	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-4bc8-89a2aa8311ab	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-30a0-066f4a3d75c2	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-3dc2-dfe596a4970a	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-d6a6-8ed690bc23ff	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-626f-2c783fd53175	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-3407-71f23ab3e253	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-6529-209e615c1b85	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-91ed-d5d4ec9ad685	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-0d0c-da7003bc753b	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-56af-5b383549f819	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-1070-0a3f03bf5b6e	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-366d-bcacce932717	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-2425-18b8c2ec3e9c	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-e31f-6bbfdf80ef26	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-f879-0c45a27df4ba	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-4978-3fde9e0f52ca	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-25e6-269759428314	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-5b50-f5cd51d615e2	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-af65-4f5547206489	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-fa54-dc88c3d1329a	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-c897-71a973a0ceda	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-ebde-c53462d39548	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-a6b1-a3c263b58bdc	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-16a0-ca944df8d3cd	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-1af0-7a53b8b4beae	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-3d4c-aa7414f79a9b	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-181e-2bc45d21e411	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-c6bf-6b94496f03e6	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-d68d-8fea8b6c20b5	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-2288-5f8e8fc48437	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-bf80-74f268fff4a0	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-51f4-48c9d15baaea	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-9117-46af7216b1ab	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-14ce-1f2f02bf7122	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-bc36-4cf763a42a0c	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-e04c-52317b397e21	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-2e0d-0f6954a1fd58	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-ed42-3e09393e86c8	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-bfb7-a0111dc3dfd8	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-9a38-b8ad1cf133b2	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-a5a1-d4d596590893	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-e31e-e3dcc5b43fd7	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-f21a-728595650ee3	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-7822-edc23e745f49	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-d459-9368c2fd42d1	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-4ec9-f7d38c2ab821	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-291b-f0ff325a7dc8	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-1607-418033b88ff2	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-c035-d95676718add	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-88dd-523f1f83fa8f	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-f40e-09a903613e70	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-9c09-f8aac5bcc184	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-b23f-97a54b6c7b4a	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-84c9-c9e4d620c88d	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-11dd-ab18ed6f68d5	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-a913-ab580253bcf5	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-44ca-08b1f3bd5615	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-79c6-f3c2b3963cc2	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-19a0-9103fbc20569	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-3d1b-6d681df01c50	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-070f-2d0f48adcd3a	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-34aa-fa58af718756	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-60ec-7d43b428f935	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-b6ca-e3c75d4bd5b1	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-6d17-560fa761085f	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-4f0f-aa7803a18ee4	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-3910-7fd2bc57cd1d	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-27a7-c69a5e1544e2	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-0894-38d302963f42	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-e429-396e2c06c15d	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-4e37-8272a2c62677	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-9d77-199a2c38d377	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-08bd-cd7c09c2dd3d	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-6994-ccdf2a1bf91f	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-38cd-1b3e9f88f8c7	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-1578-20ef2ceaf287	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-07bd-793980efb3c5	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-58ae-b822315beeb2	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-4657-5c6d798b3b0a	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-1afc-b7177fa89d55	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-d5fb-f8504a06c768	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-185b-b508f9236c44	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-0e83-e9b52eaf766f	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-a546-ffbd6fa60573	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-90b9-affbcb4114cf	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-0f4f-18bf87ab2cba	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-7a1b-7c110ecbd1e3	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-af27-921c14994a3a	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-9a21-987b5519c257	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-efda-3444c2a8c54f	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-b586-8d3345a4f767	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-0bf2-d64055e7708c	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-fa0c-22f3b5df45d8	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-a213-c944d2b1487a	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-524f-31e685a0df37	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-14aa-d8a27d01fc8e	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-ca31-ed1c762e5d1e	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-9bad-91b78dab76fe	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-8768-fa62eabb6d68	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-3bac-cb3b3ec7718e	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-0f36-0ff72d62581b	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-448b-690c7b2dd229	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-6c2f-e5cdf70fbd79	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-7a00-68f309076467	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-43a2-34818e3ca786	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-1b1d-bfd59c7265d6	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-231a-b00db8335df8	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-fe79-e6db0642578e	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-578a-e839509bc279	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-a1a2-cd4be3645c9e	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-274a-9dbb0c473236	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-8807-0bf5653a4e06	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-2092-14ad472c8359	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-e59e-fa69a55da725	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-0e01-ce668f0bcfe7	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-a884-71b359fb7517	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-a1e2-8ca1374ae866	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-7daf-caadc8e54241	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-e71a-a330167ee858	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-191b-babd7aca5616	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-84a3-97b93baac46e	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-6103-978eba7d6260	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-0a2b-3e4e907e67fe	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-466a-daf1c78e1941	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-a26c-0a30adc10e45	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-39ad-0d2039e30c5d	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-3cfd-6aa5f3940b20	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-d4f6-9f3aa3362cbb	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-6e5b-1f9bc0c9d7ff	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-0366-5c16b010549b	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-b084-44f38a0e0ec8	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-a0c1-a23ad2b09e52	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-f7ec-c39f996d832c	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-b3da-dc389f7b4acb	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-ec2d-5d55737df1ac	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-fd8d-d4b5706d163a	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-9065-fa2a69061982	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-edc6-a2b4b308a6a5	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-9148-ff4b7d83d85c	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-f985-5fd76a128304	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-9544-2e31deae571a	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-dd12-553c01486e9e	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-7509-d488799b4190	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-e686-beabe7295b07	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-4d5f-aa75fa8eaa4a	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-14ea-c45a9d556869	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-189b-20dc4ea5c985	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-104f-82ab7f121df3	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-4595-b182bb093f6e	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-7152-2c00cb36a10c	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-2b71-32962ea9d0ec	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-4ae6-68af40c27f9b	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-96ad-07840503e8e7	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-528f-4bd9a471772d	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-96dd-9a42a4c0a0a9	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-ab90-64bed455a87b	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-d0ad-ee77d3b0e6d0	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-07e5-cb03df4b6b6a	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-295c-ff119f6a010f	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-ddd8-710d5f6b5936	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-098d-008618880624	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-b3f8-3ce4a243cf8d	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-f6a9-efec58d20a2d	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-c7e6-3363fa24c590	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-ffa5-2419343a967d	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-4c26-3dfced510ac4	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-9013-b02d1ca56491	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-959b-e329cfe39245	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-32ac-41dc8c92dcdb	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-443d-7940bbbe5010	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-1f19-6c41d5490dc5	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-38b1-371852210bea	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-b6ad-e4c6e0354869	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-4209-8520df7d0e63	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-42b9-b42e435cb328	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-c01b-1673592b726e	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-ee18-092b269c3b05	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-f2b7-11c72ff949ea	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-0cd7-9399810bf3b2	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-231a-7011ff3e3d2b	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-56b4-6ee92eddab87	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-cc9f-5e889c7f1aa4	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-6b95-1a5f6071419b	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-ea89-89d5229a6483	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-1531-91e467623a03	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-5345-e16b99ae2e00	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-d80d-4860249a49e7	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-5e37-baae192f06f7	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-14fb-820c555cdc6d	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-6db1-2e2c45948ee5	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-7232-104bf8693bb1	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-88b5-9bc9de142ea5	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-b211-6c144e9502a2	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-3f6c-16ab02f7bdac	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-00b8-e3b000bd7cc0	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-7a99-4ecbfd6d3dfa	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-3eb6-fd3923b8ddd3	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-474c-18e738d71617	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-a41e-3c7fec12cb74	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-8600-b9f8ab371378	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-006d-b2be59c972c5	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-48ed-0bcb9121f596	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-ca36-d7b6157ed48c	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-782e-a5f394204dd2	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-b807-a384208f8329	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-4b23-1c1ea7f190a3	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-10af-5d2103cad1c8	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-4e96-ac35e375b109	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-f154-dd0e50297c4f	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-4fc3-4218bc729746	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-ecc4-6ab74cfa141d	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-87d4-4d1ccc870937	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-a8af-a73a1237f6f2	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-792d-2e4f2391b97f	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-b042-d30aeacec6d2	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-8f74-84d32a9fea02	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-d7ad-2155cc8a72c4	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-fba7-bebd2ef2882f	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-3224-f26010e01198	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-0bd6-5f3242b219ac	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-81a4-10084c279c8f	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-b282-74063ac97e4e	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-c2c4-521d563bedc1	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-daa3-4604b2bb2ff5	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-d045-8966a6fba26c	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-7696-b1e575ffb8d3	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-eec1-9adfec680c36	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-1364-eb44abd7ba77	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-968a-48099af00789	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-0d5e-0e635825d162	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-b74c-cb1383f5864c	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-5d3c-477dd36a3f35	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-a6ac-930f73a8b3ca	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-7387-18bb7329734d	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-1237-c7827b789d40	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-1ee7-8976777b3d4d	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-7990-27ad1ece677f	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-f109-aaedf8a773be	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-8a34-c87bf2955580	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-edcb-41a96a3db659	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-c307-0f8dfe22f454	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-ba55-b7666310ce4f	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-cc37-be637c84e95a	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-4406-093e7b08ebf5	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-31ef-ac9c2e2c824a	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-5fdb-98aaf9f4ebb4	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-118d-0e440693ffd8	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-453f-49bfb3a11da5	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-6d52-9ec47f624d23	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-60a6-5df9636bf214	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-85b2-d11db7efc068	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-91a6-1496c1208f13	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-7fa0-3614e1b5a9b8	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-9698-86f8db29232b	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-b51b-319a475e86b1	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-33bc-bcbcb84373f9	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-8990-addd7a6d982f	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-cb59-da51d6487e91	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-9759-0a558f8ef92d	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-33ef-e75c98d1309e	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-1062-ac2af18a1991	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-76e2-e80a33010cb8	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-5c64-4cd56196a567	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-5143-2cbe5182410c	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-93f7-61100ff314f2	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-e991-442bad1a3cfe	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-2231-273ace27186f	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-e097-a1fbee14cc9a	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-a08b-081d99a153ac	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-1388-ef2b179cd081	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-8d72-ef9d6ebc077e	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-902d-655f3964a8f0	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-a393-5f1dfbd0c8de	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-b540-f37b6add8994	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-3faa-d819c713332d	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-4a30-5075a1c8fc83	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-8ea8-732a27591baa	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-0d30-58fb1581328d	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-4c33-61979c938421	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-4794-43a78909694c	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-513c-2e57fd97e478	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-2689-43afc5b1552e	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-49c2-7ec698816233	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-2c63-f471d970a709	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-c038-05aa68be36b0	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-99cb-86ea9ed69f14	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-c1da-955f2c1951fd	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-d3d6-b8e3cf3fb2d6	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-a4bb-11ce0d7cdfee	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-2472-8e6dfd51a084	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-f832-a5f34febfb45	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-85e8-a95b0a960929	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-142a-1ade14e2442d	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-7863-f8a7e14e2baa	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-1438-90dbe17b6c9c	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-761d-c258d10016d0	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-c4d5-5dc5692ffbb1	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-da81-d6514d39f5d3	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-0393-ef6115eb9a09	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-7765-40d4476e3087	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-49ef-7e03f7091302	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-6322-7f6602b2a64d	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-efc7-eb95fd1f01b2	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-c435-dca9ce2dfa17	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-d4ac-fedcb280564e	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-23f4-498f5b71c760	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-502f-79b8c11ba065	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-9038-e422e323aa07	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-4af8-1dca854a3f76	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-e3cb-0b0a90824f4c	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-acda-683492defaeb	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-ab82-d62f50932301	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-1e0b-ff9eed8b33c9	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-54c3-2ab94fe9cdc8	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-7f69-32c7e9425902	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-0000-9cfa4e0d8285	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-d0ec-c593b28ecf7c	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-469c-5885f6cebd20	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-62d4-b4ccef031727	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-f1e2-7c3e32064c0d	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-0ed7-54bfad77d0ad	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-24e8-64b228ecd0b3	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-052c-2fe6d529f2ad	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-daf4-85dd1d70f5ed	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-c856-d935e26e26f3	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-ec68-0ba13e180636	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-460c-874c01da77cb	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-c7dc-5163f69c3b8c	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-37d0-3e041b7814a3	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-42ee-331bb7f24f84	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-1b8e-af23bd91164f	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-51c6-a7620ffa18c7	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-f45a-913b65320164	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-d1ec-521672de7235	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-57eb-c59859d6058e	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-01f5-49a0260ecdde	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-95e9-00cab8b093da	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-255f-426f0f3cb66d	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-de81-d2dd719d8e2a	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-decd-bc9a1d090af1	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-4393-207b6e499611	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-d89d-f50e2252fbde	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-ebe1-f47809f536df	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-b758-e314720d4dd9	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-e643-26131df99e23	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-3c91-31d19acabc1d	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-0f6b-4864b73d9cb9	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-9f4c-1673d08fc0cf	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-2202-a66526c5a4db	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-4d56-7e22e84f1cab	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-eb0e-6d8408b81b7a	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-7b85-0d3614382523	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-1ce5-c0a4136fcf00	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-493c-12e4a37fb102	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-963c-e0d21b8d86b8	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-3c54-15fe3992ac07	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-3ee9-aef0b20b4e62	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-c0fe-61b25fa97030	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-35e3-c1786f315866	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-c3bb-6707a649e71b	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-c001-edf3afaf52c8	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-8b16-df54b9814c6c	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-32dc-01838c78784b	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-2c3f-2ea3897fac07	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-2d17-a1b8af98af03	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-1ad7-b7e5f03d0020	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-dcf3-ce65906456a0	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-963a-79023a6ca751	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-8955-0e0f600a7a69	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-b1c1-3e90ef56c14e	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-5eff-31d4621dfd42	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-356a-5b352983cc08	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-879b-64d355bcee96	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-9e4e-52703010b5e4	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-d158-8e887e2bee54	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-b5c5-060e0f333934	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-fdde-310e95a05574	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-de55-599d8d1f7a7f	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-1b63-c3ffe8ea7d11	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-b6c9-abfc892cae98	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-fd48-be99e207bc1f	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-56f1-86663abb1440	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-93e7-10be452e7d2b	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-0c73-c66af76e595d	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-0e59-d1b35dc17b47	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-6b75-58a8aa53ff72	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-f022-7570c64e34c0	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-323d-b79f3e4860b9	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-d71c-ea656529434f	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-29cd-260e3b259325	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-1cd5-eadf11414416	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-1018-b3a33f9f7ff0	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-e0ed-9f3a8ec1fb66	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-51c6-306a4c4eb9a0	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-d699-781a7c226e63	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-80cd-3b7eb6d3d485	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-453f-00f8cbe1b98a	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-702b-537363a2a392	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-71cd-ed48fd5e2c7f	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-0564-c54081503ca9	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-9226-659ff5415e3e	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-ddb9-eceffa10a6c1	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-1e3a-fb35b41ba450	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-f10f-1f0b29058d9b	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-7dbc-c84ea7ffdbb7	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-d3af-60f0ef3ca27d	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-7708-c327f05d6f0c	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-4ec5-d505ac01a8d1	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-718e-4936d0527cee	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-8bf7-5ede957f8a51	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-21c2-27900285c5d9	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-e131-8df4ee2c5c85	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-e4b5-fc62d149104e	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-d0b0-c8fbe85da2ed	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-d2d9-c5dcbfebc5ac	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-1eef-e6163b838ce8	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-89bc-08f50ae644ee	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-90f8-7961f13cc1f3	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-f199-0d7bcb57af31	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-ed5b-512c0af9ee09	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-7774-cfd36568638d	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-1bc7-555ee750e9e0	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-2afe-77341f9065d3	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-4886-569fe7f41fd1	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-0caa-fc0a87204d87	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-074d-21d1e880afd8	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-cc67-f4e02f4c9f05	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-4cc4-0bb07c3c8ff5	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-fd31-ab33ce29d287	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-88c7-1ad858ea828e	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-f6e8-efcbfdaae9b8	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-088b-8636d2302409	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-b64d-d0e04030a24b	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-e8a9-1d395c3fad56	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-01e2-951e2d99c2d8	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-13b0-7c6cc553c774	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-99ec-078fce4aa7f8	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-d01a-f6ae7e651c63	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-5a6a-64178feae45a	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-3419-0f3c21f5b023	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-131f-d3603b2d32c7	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-be9b-5ceecb7e5ded	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-46ea-e06a701ea14a	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-0cc8-aac347eedbe7	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-3564-5365e41de6ab	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-4a71-333806079a8e	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-2c7e-c71b1d2da9a2	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-2f14-4929dad141aa	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-1cc9-6405974b3e97	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-61b3-9e0c646f8969	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-5aee-392a5f15083d	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-767d-b628bba5ccf8	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-39a2-63d92c8df368	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-ce23-831a685d5d08	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-1df6-15d6869a0219	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-5224-a0a5b7d62a9f	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-5c2f-124562108ea2	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-c36f-9eccbe7afcd0	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-c684-7c8160644210	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-7f37-0220f0b74c5d	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-c188-9719008bb9d4	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-b995-6393ff440551	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-6c0d-663b8a3a04ca	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-5980-ecbfe9645feb	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-ed53-111d6dab3f91	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-2c72-fd4405fdd08d	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-a3b2-1bf86751b8ed	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-7233-fe2ee0de6837	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-9694-293dc97c4292	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-4c53-f2608ff34d84	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-732e-25df58677db9	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-a869-0e6cec1009e3	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-dc14-27f8cdd42d86	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-9314-6c020c20b632	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-80fb-1d973e168a48	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-1328-9d67d8bb0fcf	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-47b2-5a88d990c644	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-f8cb-111d2703ef5e	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-ff16-2d5dbb1f5391	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-df40-814c8f485a47	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-2b37-7d3f20368607	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-5f1b-6e429ebcdc78	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-e448-7be839a62caa	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-94a6-7898d21ecf9f	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-f896-a07faa57f4ad	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-511c-1c06cd8d1326	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-7fcc-dc291ca7101a	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-09ab-b7be00acea8b	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-30ed-aa6f0e6b2ffd	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-b210-efd1b52e76c5	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-ee1f-074e8cc44da6	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-8ba2-0de314fe5c52	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-fe3a-3ac8776563ef	User-delete	Aaa - Uporabnik - Briši	f
-00020000-5539-ef78-6b26-29167429583b	User-read	Aaa - Uporabnik - Beri	f
-00020000-5539-ef78-ff07-df9a114e5048	User-update	Aaa - Uporabnik - Posodobi	f
-00020000-5539-ef78-63f0-1bcbd837c672	User-create	Aaa - Uporabnik - Ustvari	f
-00020000-5539-ef78-66b7-a50d72eec67b	User-lookup	Aaa - Uporabnik - Iskanje	f
-00020000-5539-ef78-4082-32d718339fee	Role-delete	Aaa - Vloga - Briši	f
-00020000-5539-ef78-5a51-0d6c291780e9	Role-read	Aaa - Vloga - Beri	f
-00020000-5539-ef78-f667-f4ce97efeeed	Role-update	Aaa - Vloga - Posodobi	f
-00020000-5539-ef78-7707-13a541e6f0e1	Role-create	Aaa - Vloga - Ustvari	f
-00020000-5539-ef78-4c6a-66371cf058ca	Permission-delete	Aaa - Dovoljenje - Briši	f
-00020000-5539-ef78-294f-4946a7b37226	Permission-read	Aaa - Dovoljenje - Beri	f
-00020000-5539-ef78-6805-501023b9dda9	Permission-update	Aaa - Dovoljenje - Posodobi	f
-00020000-5539-ef78-d487-2d84fe377dbc	Permission-create	Aaa - Dovoljenje - Ustvari	f
-00020000-5539-ef78-bdb0-2bacc97f11bc	Permission-list	Aaa - Dovoljenje - Seznam	f
-00020000-5539-ef78-0d4c-ead8d0f4e1e8	Drzava-read	Seznam držav	f
-00020000-5539-ef78-e769-0a74483b1f89	Drzava-write	Urejanje držav	f
-00020000-5539-ef78-52ca-64d667e61bb1	Popa-delete	Poslovni partner - Briši	f
-00020000-5539-ef78-3c37-30a165c92f14	Popa-list	Poslovni partner - Beri	f
-00020000-5539-ef78-2029-38403ff6d14a	Popa-update	Poslovni partner - Posodobi	f
-00020000-5539-ef78-ee83-aa2be0e62306	Popa-create	Poslovni partner - Ustvari	f
-00020000-5539-ef78-6580-c3da61011df9	Posta-delete	Pošta - Briši	f
-00020000-5539-ef78-a9e6-81ad7e11439b	Posta-list	Pošta - Beri	f
-00020000-5539-ef78-1b15-e12296760c92	Posta-update	Pošta - Posodobi	f
-00020000-5539-ef78-818f-5bf53fa371df	Posta-create	Pošta - Ustvari	f
-00020000-5539-ef78-bc38-0dac7a541738	PostniNaslov-delete	Poštni naslov - Briši	f
-00020000-5539-ef78-597c-ccf078130b62	PostniNaslov-list	Poštni naslov - Beri	f
-00020000-5539-ef78-0c86-3a792b958205	PostniNaslov-update	Poštni naslov - Posodobi	f
-00020000-5539-ef78-a1de-e9be0a02160f	PostniNaslov-create	Poštni naslov - Ustvari	f
+00020000-553a-177e-f5dc-b660b4937fe3	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-2b9f-c92466813a73	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-9717-2e3c2248d958	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-7c5b-d30c7e8e0edb	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-5236-3ca67ae28d27	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-91c9-e300a97237c0	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-ae89-2aba27673061	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-1656-38aaa45559e9	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-7917-0f9ae9f626ae	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-a550-4a8f94fb9ea0	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-fa42-e0a70d1fbc64	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-eb4f-09fecac121e9	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-78c5-f33a3ce9fda2	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-0cbe-61a50ae4d212	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-c792-3aeb5560d6af	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-4b46-3437bce4762c	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-c8d9-c5732a61089e	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-53e3-15759a42411c	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-24a0-ed70b5588eab	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-01e8-cb591d822146	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-c6d2-76719e6cd30e	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-4d1f-1a6177d64d1a	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-63f8-558e44f4f663	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-68cb-f7da030e3e1b	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-8a54-f98c42625070	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-06f9-c11b4e604648	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-94c6-10e6b4e70279	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-f3f5-c71688c5e338	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-7bdf-fe55686154e0	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-7df4-8404543b024a	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-6829-18ef9c26c489	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-2e87-f1b3d1206de0	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-6d6e-b889bd65d686	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-41d5-f103ffa121de	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-ec36-3899ac543ab5	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-cac5-c687e63d707e	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-8524-53d2540e6658	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-9ce4-faffd2d5b42d	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-bdc2-bf282592d94d	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-4b31-f82553224cc4	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-6c22-78da9e53d7c2	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-1003-9e32d171eb03	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-c2bd-21715f338e12	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-acc0-875f2d79fe7c	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-a643-19677415cb35	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-08c8-4d95b7e2ebb4	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-80a6-6c04e27e3ae8	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-0b1b-d3ab83d0e50e	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-88e9-d24d60e2a0c2	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-f4c2-952e32fbe41f	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-dd2c-309f9ee5a790	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-8ece-a6917dfd8833	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-0eea-a152a0ef078c	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-eb79-019147120c0d	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-25cd-82848c724560	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-10fe-cabf57e934b5	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-b0d5-b04cd1c2fab2	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-d5ee-000dd3dab8f8	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-542f-5b10074432a2	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-3d5b-8e3310bd28f8	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-fc34-408515dd046b	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-5b4f-2a9d56cb22c0	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-a337-7b215fdfafb8	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-024d-b146b6061476	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-5cac-54590f92dafc	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-1e58-47938511b04d	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-6314-47c287b03fae	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-745a-e4e50ae5327a	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-4c50-f371b66df32b	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-5f2b-3790039226ad	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-c8db-8bc234a426dd	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-9b69-7cb8470a825e	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-9d9b-bf4252d8c3e9	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-36c5-abc908a91fbe	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-0ad8-c1bf550134fe	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-f4c8-2cdd53f48e92	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-ae19-3c4dbf4e8820	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-bd46-a0db97b523b3	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-5a72-48fddedfda87	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-3b6f-7dbd12980d0f	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-bee1-02d27a5ff470	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-167f-c391393de730	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-c7ab-eb8c116746fb	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-7bfb-76ee102f4f47	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-716f-e11ec64e9a3e	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-149c-0d8284ee575a	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-f2f5-ab405d7970d5	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-4e39-0b418e73bc9f	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-65de-bce66644ed8c	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-1da3-17709c4b7d55	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-3e71-3f228f39465e	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-5817-73c60ef776ea	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-f7ac-4726f7da0b31	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-90ed-3e5ef018a6a7	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-e0b8-7bb1091cab1c	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-8f0f-18aac211dd78	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-731d-c856da66bf21	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-cd76-306a25cdbe55	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-4406-e943d3cda2b6	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-22ed-ca383fde0927	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-cd62-d61db176514f	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-ccc5-c5c77a099633	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-42d3-c0113ac33143	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-d1e2-a0736147d504	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-63fc-8125886a4525	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-3090-48b58493c154	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-c640-147412ec8254	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-47e8-331c0f03f5d5	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-adf9-3d61ad5850ac	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-37d5-190cc670b302	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-b3ae-660a3bee9b7c	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-c58c-dd7aab878b86	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-0822-8caa94bcb13f	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-43f9-2b49ec500016	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-8fef-210375f00e44	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-a2ea-92c16b08ceda	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-4ebf-69c6e0d42ae2	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-08ed-3cbe741da760	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-224f-349aba067684	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-9c6d-5ee57da4236e	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-8d13-70d54133f10e	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-4ffc-a4a275659c91	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-eb73-5e8fec380caf	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-5a60-16bfea27932d	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-7656-1a170603fff1	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-c214-234cb1a39947	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-678d-853a3cfab8da	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-8dde-67bafeb11edf	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-a1a2-a86c5cb7a26a	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-d248-63acdde3121f	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-948a-835d4d61980c	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-d9a8-da022f359991	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-77d6-ea22bc8761d8	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-2b39-45f8ae0b5e9a	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-1713-8756f4277c0c	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-39db-2c378a9a6519	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-76c8-72e85ad8c607	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-f918-c575c46a9eee	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-4772-e503fb46dc30	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-06c5-87e9e6c51d5b	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-9ca2-3d550b808b3e	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-6feb-ae6d1aab4469	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-2040-ac8c361af015	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-4c68-95eb05727e57	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-6ad0-6babfd2608d1	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-a277-c4f3c41ff3d9	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-27d2-7539615a8270	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-04ca-426588e21004	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-3bd5-b5e890e35c77	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-eaf1-beb9ad313ce0	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-e9f1-847b738ba8e7	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-5be3-c607f6f1a171	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-6184-611f9a60c788	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-15ff-5774570645ce	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-8d1a-0018b56d1f71	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-b429-fb98c5b673bb	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-43eb-040758eade7c	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-3307-109f2a3a65a7	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-3f8f-7a4fefea576c	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-15b6-7c411a5cfcc8	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-b364-acdf4434eb39	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-52b7-4c06f5c27aa0	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-aa65-c0f39cd57775	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-e4b7-59f5396deb8d	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-8869-ef34753d569a	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-e112-251870c38bfb	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-ec1b-6898e4bce68d	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-b0b4-9a8792057efe	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-9f0d-5eb8687b1138	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-315c-6496383f5662	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-b710-48852f91b637	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-90b3-d352e49009f5	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-f4ea-e5fe1b1d2735	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-f4ce-e81b424648bb	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-5b52-b6465470b8e3	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-0daa-88568400ce42	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-e5b5-ffe3e9010366	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-97ce-ca2608e37e41	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-c6dd-3c0700dd82f0	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-23e4-cd307d058443	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-ca1a-a4f85436bb79	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-0312-eeed193623ba	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-ed08-af714fa8d0a1	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-1524-bccf0716cf68	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-57f4-851a24ab5b64	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-f8ce-7255a193334b	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-0722-212ed9175fe7	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-e75e-961a40033f49	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-e2d1-0259b0c65196	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-42c0-ea0a8ea8866e	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-f5aa-2c7abc30d270	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-d2c6-0ce6a4e5ec22	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-12a9-ffd90966aa3e	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-2f45-a32ffe72a0d2	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-7149-f7a18f605df2	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-e351-84fb4ef448bb	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-f5aa-1ed39196bb79	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-1bb1-950d3f8eb03b	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-4d91-87b34652dbf7	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-b484-0a9a877ca045	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-db59-2e88004cdd54	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-7ea8-ad48d5536e74	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-c8f4-deba54255c73	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-0b2a-badef1eddd8d	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-87ea-8785ff3d838c	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-be91-2a6de11e886b	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-eaba-7ba78a93c618	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-66b9-87cd6a5af080	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-3735-af4408a8b574	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-a9de-d99d195f9faf	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-014d-9150254fa301	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-10d6-ecb920770bd0	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-dcdc-45a92492e56e	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-f7c8-e1e4d3b29d8e	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-4853-0533b777afbc	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-8d9b-6e9beeccb526	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-e66a-68124bc6d89d	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-e0b4-9ae655c2226d	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-a8f1-322aee95a5ab	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-1148-555ca814c524	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-9c13-284fb2787e44	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-96f5-a2d3bf4b4f88	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-5a58-f3efcd6dadd3	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-cb17-8ef72df426b7	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-02d2-60e5fce570a3	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-f20c-5e9b6f44830d	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-60d2-e6fe6230d4e4	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-300c-dfd2315c0538	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-a998-ed5c15cd515b	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-b674-ad1f5ef3c9d4	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-782e-0dd8f1858fcf	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-4448-82c396b6b15d	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-35f3-d46be7c63f74	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-7366-b82807992ac4	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-5238-103409d133cd	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-2828-25b1872ca3a9	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-d7aa-e30ad895fa60	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-d8e0-ee84f894c4c7	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-b4ef-221737af5e0d	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-db08-ebf1511c5216	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-1ef4-06f88763cf6a	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-f862-d4c7681d199f	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-7e07-7c6a04454d53	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-ca63-a06f6a908a0a	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-6829-b68eb52cc82d	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-2f47-0e6188877bc8	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-8592-ce8d783c3d22	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-4ed4-7fcc91d5d02f	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-ad18-a3f8fb397e41	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-b656-e95e689adc28	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-8fdd-2f7679dc2033	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-be99-542b8fe51428	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-d22e-8f01489484ad	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-ac31-132fd54e7702	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-1cd9-3bcd7ee99d76	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-c3ac-dcfb0724c952	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-f2ef-e6ce74e37a24	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-85d9-094663cac1bf	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-97a3-3a8accd4ea9b	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-63d2-c396718b1e1b	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-190b-49a8c80942dd	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-85b3-0c6b6d393490	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-f76c-2f238a3b20b5	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-89ca-45cdf13d237e	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-9005-7a453e71b66f	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-371e-5b7e6694844b	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-7433-4c29e98d4a21	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-9797-a0fcd6f9ce06	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-fcf5-b753c38803bb	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-1867-2c2caacd80b2	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-7d4d-927343d744d1	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-a1d5-ebd60f7e8af1	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-453d-93997fdb0717	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-cb9c-84cc2085225c	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-794f-eaa459d973db	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-fe07-f3fe37bd3514	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-0ab6-ca202ece0229	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-e448-de2bc03c7e85	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-84e9-dfa195ba546b	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-c748-bc55201457f4	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-871a-f9e4e729a929	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-7519-d49281028835	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-bbf5-0f2feb50344a	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-926b-517864478a64	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-ceaa-c8b1ec83327f	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-10ab-657310c8a82c	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-0c56-9f3b32dbe8eb	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-f327-f62d0c71b362	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-dac0-7c5e7f7de966	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-4a5c-edbd48809e0f	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-440a-dabe37ab8070	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-4956-e22484630b08	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-6eb8-bf325ba90250	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-2028-c71b82fb1ef4	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-27fd-c958170cfd49	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-f162-cdd798a87b9f	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-364a-54f323678f8f	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-2fda-1856462dc440	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-e309-a476dbbb45ab	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-e050-4a2b8d033c22	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-1901-26443f4409f0	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-d09d-799fdb4504ec	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-9aa9-3197253168da	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-08d9-f435533e6591	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-f646-c77db9e3c4a6	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-7990-4fa82e0e5dcd	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-2aee-782e97c1482d	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-185d-a8d868ce4f84	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-1f0c-b1069f5482c8	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-8bf1-56fdc532197d	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-514c-630b5daaa7d0	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-0cfb-feeee2d33ef4	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-4dbf-09484cca8cd2	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-b2a3-9d86bc13ec32	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-34d9-90c5e5681feb	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-4fd6-dd92a2e16cca	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-d436-910bb9adb2bc	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-74b5-210e09eb169e	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-24d1-5f64906edb3a	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-12eb-57f13d018a27	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-adac-94a09d999425	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-b44d-7a57acb56897	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-3a66-5b74e8418bf5	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-0f93-20a4a5d54fff	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-6630-8b2e74f06f6b	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-b6fe-e7e2b9506ae9	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-5617-deb5978a70f0	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-402b-9609d00c669b	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-98dd-e14221c6056d	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-b396-0b7600573a4c	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-b143-54affe450f07	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-8e9e-ab0a64aad19e	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-53cb-d50c604cf985	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-6a84-14a260341f6c	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-0967-80cd05acf8f5	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-b2bf-a1092e9bdb68	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-a886-4fbc34494c72	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-a36a-61fc72d91f5d	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-dbf6-68dec75c1c70	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-ce83-c35486a760c2	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-66cd-5e5724f4da51	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-0d6b-8e696ae5ebf4	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-7bb7-d9ea8a32039b	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-9ed9-05d418bcc8a6	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-0b43-23b4c894623e	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-ca10-b68a872a4354	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-a696-f1594d1e0d8a	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-f1e7-09b01fa323d6	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-0d9f-0012780077c6	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-6469-2eefd8c83c68	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-b90a-3c29fcaf640a	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-6b98-3edaa0d9456f	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-f325-84944b47a95b	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-cc85-2af1c14333ac	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-82ad-2aaaf22e2ab8	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-2ac0-f553dcd67c0e	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-85fe-af76467edbd2	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-9e67-4cd1d6572074	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-b1d4-bc311ac80be2	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-5de6-8e587154a6d8	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-617a-09f86fab775d	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-e5e9-d05ae3c84839	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-19bd-374a188e56fa	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-2949-0bc96d94790b	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-cf82-ba2245573a3b	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-0fc7-59560277f5f9	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-1e9a-a9bf2569e38a	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-3a37-d92bf23f25e5	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-0f6d-7da9ea9d0622	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-c14c-03fd468fc3af	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-f7c1-fc90e16bdf4d	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-5e94-32a09c2744f3	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-5f31-d10cd079d64b	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-87ad-cacd3548de1d	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-5ce8-ffff4d8c62e0	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-dce3-0dcb1b99aaaa	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-5345-0aef6e20364e	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-9b40-f2aecaca1d26	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-ee1b-27189f3259a1	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-82f0-0d0775dbd5a6	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-6f1e-7fb6b8ea1c30	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-0a28-e9b05721c03a	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-b2f5-9387603ed447	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-d8c1-ffe1dd47a70c	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-3d4a-eb22ceb91498	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-5647-83aa2435af22	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-638e-940900548be7	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-5a1a-ca0cbe16cd7e	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-99c5-6c67f91a0f35	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-22b5-7003f2a79e80	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-c33d-1cbb1d075d17	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-7433-abe478298b81	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-0fff-d45f91ce8c9e	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-4dd2-1548bc20f4ad	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-5bbe-72573b1c3cfc	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-bc57-8aba9c2564a9	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-00e1-5d92c9d0bea3	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-07cb-90f8fef110f6	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-0697-7ffff8f21ae4	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-614b-ffd17badb671	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-e004-2d716fd172cd	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-f12e-cae0bf56cba3	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-3cdc-0bee54c382d8	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-8804-4fd3280372e1	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-72b4-d45fd2e4cb6e	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-0f63-3f15f2d04578	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-91fe-b89a34c5eca7	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-bca5-8dde84424832	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-7cf4-ed74fd715c69	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-ae3f-af4a738889b4	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-f85c-d528ef063cb3	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-1a09-eef1fbd87d8a	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-bb44-e3e54a8b4d2d	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-7894-e828ee4208bf	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-91aa-7330653b1d84	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-cf5f-7d33fd30da83	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-6758-6a9a253b171c	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-bb8d-241cab337a25	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-a31b-62a58408f582	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-f472-0f5de97eb544	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-8cc5-c17eb1957b11	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-7c6c-7dd89b997c08	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-b538-0b36662da1db	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-05a8-dfb0b74e5830	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-5c88-4a3fb8532896	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-d264-d6289d547979	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-eb59-9104cd890432	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-59a9-8e1238e447bf	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-5695-d484e7a80e0c	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-2ce0-1f37910d6fce	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-7c19-62016413c765	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-2872-98de94976546	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-358b-5e6cc22f9991	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-0cb2-5f0f19d1d0a7	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-dd0a-c6a002aa91a8	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-cc8f-54a7fd95d003	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-6577-09042743e478	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-c06d-dff8a8bfd059	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-183f-91a12c02be43	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-48c0-c09df2499fab	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-a1c2-c30bdadbb23d	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-d6c7-e5f7bcfc004c	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-e601-b58d3f09ae36	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-df3c-3f0f0a271657	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-47ea-28541aab1e00	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-4a42-fea5304d946c	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-0802-987d53c2b988	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-e8ea-8819cf54e517	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-3d19-1f548d559a51	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-3529-99a312ff8e2f	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-c51f-c1026f75c86d	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-afd0-04eb3fb76b6e	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-62fb-79dc80a9b3c9	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-546c-5995d27dbbc4	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-68bd-194fe4700c2c	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-06ba-cae6955b7bb6	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-8849-faa29e866e09	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-8a72-eb51fadd0b75	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-31d2-0070ba9e310e	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-d953-aa6aa1a22d3e	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-2b93-63b202792332	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-bc3e-45282313682c	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-e464-c111ce924115	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-266a-01c35cbafcb1	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-f4d6-5344e6ccb72a	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-977f-987dc4497752	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-224a-368dcadfe015	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-57c5-23b45b7d409f	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-faba-660f1bdfd985	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-fc27-aa394fd96f8d	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-ebd5-c8daf79e5676	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-0cc0-12e6578c363b	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-a1d3-bd1736bc689a	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-c16f-29d678179b74	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-8bcb-9b35a1f16a0c	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-1236-005a7f53d0df	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-232d-a51f172df30f	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-2829-1ccd674b5504	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-d7e9-52b04a5a874c	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-3010-cc51b8f8e8bf	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-f3bf-3ff714702bfc	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-a931-a424d30b977f	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-817c-9714c28dff09	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-2e0a-d2af42d9b432	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-712d-03cf169b7cce	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-e7fd-07dae56f8fe5	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-b174-6295f9fdda6c	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-d226-59f0d369a5f4	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-a3ae-00af6a606841	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-c221-2cd3be56d6c8	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-7d6d-5a1b260c12e8	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-dd74-46b5f32feb7c	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-58b7-b12ff6b122ab	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-dcc8-70d6b8471357	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-ff0c-9a5c8012fa23	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-d952-45b05dc8c023	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-040b-d893d186f9f4	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-b3ac-8473b57e31ea	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-e067-68c6f7712b37	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-6557-b8bcd941b486	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-b304-2c8565253c92	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-eff2-f2cd0385202f	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-48ec-5740ae256148	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-6753-8f7a721784b7	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-d71f-2a2f864c6445	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-5422-972c703df14b	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-7a3b-ed3248430b70	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-0c0f-638bf017e7f2	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-2068-fb2644c811c6	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-15cd-b69bd281d606	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-8588-2f6884ba8ec4	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-c08c-c91712571695	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-fc98-9ea14f8fe17a	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-e115-408344614b30	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-d1e3-52c0f22efd33	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-8ec0-20dc3a56317e	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-c395-e9adebdd235e	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-710c-a0e3f7448b74	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-8df6-d51442ef6e12	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-697f-170343ad6be3	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-fef2-9db0822768d8	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-85a0-612fa1afcefd	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-486a-efb6c9b522e5	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-6373-d4845d7f1127	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-b2a5-e216191edba8	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-44ce-e82da6f4b3e6	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-57a2-bf19116c6440	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-20cf-6c6f384b53ce	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-ba8c-5ece6019c68c	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-d4c5-34af51eca6ba	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-f7ad-d1c2c69ed9a6	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-46f7-b514c65c7a0a	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-44b0-d35d637b1f40	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-a27a-76c513161f90	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-988b-8fa56153cbd9	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-9bc3-aeb83a426f04	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-f1dd-440158a7bc10	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-9232-c36b13a2c7f7	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-4d02-d2c0fde96e79	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-8472-5a5efdccc39f	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-6a62-67de97e2a900	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-b8ec-37576e3658d2	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-b4de-8ae25b627cff	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-fa57-22c1dd4a9162	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-ac15-2312c719d9ab	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-ab0d-71fb650577b5	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-e783-5c07f7b6bf76	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-05ad-34f650706672	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-2d32-1c8d4c2ce236	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-57f3-e58064222782	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-2802-5217432e994e	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-fc5d-e1beaf39b8db	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-e635-6a8abdfacea1	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-b0fe-445d559fba22	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-47e8-48ef0cbe3224	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-961e-b0630130c117	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-bc31-d44db7fc2e28	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-dd2c-2b1d6cd4a16e	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-6401-de97f07adf91	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-5dd4-a302b146a43d	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-6d87-0abae93c133d	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-4515-78a3972d1ee4	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-ee27-c3b2ae6dfca5	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-2fc3-988a1e820565	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-202e-b1dbd5de0ff2	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-b6a9-aeda6630494c	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-6e42-5481fa1d6957	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-7475-e9a64596f200	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-6934-3b7e1430d0b0	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-41a4-32e9f51d234c	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-747e-64eb829c26a0	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-6948-43e85b65d51f	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-4890-2261d520bfa4	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-c234-1f88c4fc46a9	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-4294-8d724aba71c8	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-4a93-98503f9b9004	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-359f-4e316cc85934	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-1e48-1cbe8abbccfa	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-d3fb-c4ad94d7caa5	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-2a11-6bea4a861f2d	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-5d30-0e408f152edf	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-b792-37bdbf061d1a	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-c1e8-3f2da204880e	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-9765-ab62e9d356e2	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-6b34-e57ec4557368	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-b293-62aeacf460be	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-7191-5cc22fab7b4d	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-4cc7-a5dd5c880d3c	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-ac94-68c3f70bf19d	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-3f91-500d68fecbcb	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-eb54-ca96f03dc899	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-4091-9762ed756646	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-b57e-b3d583448dbb	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-ca1c-2d726fbd24e0	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-9e98-b7dfc5809489	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-dae5-c657f1f2b7f6	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-d4bc-3fda3cc72e8a	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-7841-1e1e5a7f2bdc	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-c103-1f37c9bbe489	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-3422-b32844ba3d31	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-4131-c1cee6cd6ce1	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-1ab0-8dea8bf61344	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-2e90-2e40d5a13492	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-e8fb-dd5610ef4884	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-808f-3f7557f34358	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-c7e0-6e1dcdac658e	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-dc49-f47220e6ae6f	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-fc86-2e794d5aad1b	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-3c93-0458d982aa22	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-3887-fcb4ea201077	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-a9d5-34279d47ba82	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-e736-6fa351c6a7e0	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-8bfd-3eb7f5b29738	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-0593-5a3b2e78c871	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-5b6d-907eec7d9a0f	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-0893-0de4f36473a5	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-8cb7-5ef90485ed50	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-3d9f-5ba48bdb25c9	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-c567-df5f2b581094	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-9601-81e63565b5db	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-8295-316dd94d67c5	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-e6d8-c69b20c4d06d	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-49d0-ac604f1d39da	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-3aa3-088ca2ee38e5	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-5576-c2910a6c34e0	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-395e-36ade0daef63	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-e958-b7d28753fffc	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-bf05-213dc5e6552e	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-0e28-9d61a1ec8066	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-2857-03333269013e	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-d364-eba9ed5d79f7	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-9230-31074ae82299	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-746f-5346d96bba6a	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-121e-81c1005715a6	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-de69-beb58f5e06b3	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-e94d-a85c32203d1f	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-aaea-6ca6aa79da67	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-f27d-93f0a5ee16b6	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-6ffc-92856b5cb921	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-8ac3-1b843ad25491	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-696f-79ba0a40f656	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-e849-58a0858ce884	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-f123-c9352d95fc85	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-a983-08ea57c8a50a	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-6121-a047d66d3577	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-ffdc-37bd08c9faef	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-2981-310837ef7e26	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-8443-b103fedccd6c	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-11e8-4cde1b182eee	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-0e36-3039359bf825	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-ba22-9f5d04368b51	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-268c-0f94f36374c8	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-a4e3-c726cd0f2994	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-c169-6f9c29777c06	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-35e5-3faadb6d04b1	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-82cc-e3a000162446	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-9fc9-c57b1edd2fe5	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-2632-f6c6e655f2ae	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-6e80-792c03409232	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-70c4-86097abd5711	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-e1eb-b4d152b1b3eb	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-4b2e-0bddf4754c92	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-256e-570315eecc6b	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-a6bb-ff74a4ce9f4b	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-6936-9f972813f744	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-4d5c-5b8123b684e2	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-cbac-5024eeb9c1cc	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-b776-4e58785ef812	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-d815-e205fd41840f	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-337c-9721c8c2575b	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-eb26-cc2436373586	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-b63f-1d41c88a740d	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-4956-ff873ceeb5a4	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-4236-d632267aa9e7	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-a564-cb4b9161d8cc	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-6c21-15a3cdac4145	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-7132-783afb873de9	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-ace4-de49340c17c4	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-c644-19c769cf5601	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-0361-46ad7e24f8a8	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-4755-ee1a93b6f691	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-8b01-fd19ac806218	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-3bd6-080a67e623b8	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-3ae0-a78662b8a932	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-9b0a-3a3006fa4a76	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-056f-8c25e1eb92d4	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-ae97-e12acc412751	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-60f5-45b593f81060	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-32b2-607c19b37e04	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-f423-a5a97d7b55f7	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-62b9-72a1fc6deb9d	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-a47c-8c9dc60bc056	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-3787-df8f744a5e5f	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-3b8b-273b8696ff28	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-e478-3a7faec6b1c4	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-721a-7694325aeabe	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-1b56-029a172be0f7	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-5f4d-01b2298df4fb	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-a3b7-aa7b6d68938d	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-7c69-d35c4a4730a2	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-98b8-e5d3d93ff769	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-5e75-9f9adcff0ac8	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-3e94-f5fea6dfc5fc	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-e371-5b03acbb99f7	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-97fc-9815c9a8460e	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-503b-8e2b2e8f18d4	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-70b5-635e679d8020	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-a52f-26504a70dde0	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-cf7d-a77b28a2c807	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-c60a-73b43aa26be7	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-72a5-31124f54d1d8	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-8b87-31195d032d8a	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-5d4c-6b24ea4cf1c1	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-99f3-8edc9683fd3b	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-6160-e29c6d77f71d	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-3c8a-0c62059a6924	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-34c9-71149b1cba84	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-c596-58c398ff40be	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-0918-a168b17104a7	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-1671-51a76d56724c	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-1039-35573e1937fd	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-10b0-a6cb79e242fd	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-9464-8d5a025b3ec3	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-d2c5-88b9aaa61a2c	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-029e-a9825f16214c	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-b556-55a69adf49ae	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-db5d-b35069a3a940	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-ea2f-1d74aed2f2c9	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-53db-01fd83bfd99f	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-08e6-3719d0bb01b9	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-ffb6-45125b0cc698	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-b9e7-f2d5e8971b93	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-d495-a604f901553b	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-e062-b99cc64c4c1b	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-056b-329449e7a295	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-9be2-ee362cf1e67b	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-1a6b-e57128852537	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-c1c1-6a9ea725d5b3	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-865c-e56c27a5fc18	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-b748-cfcffb113804	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-fadc-3726e1a773b9	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-0954-4b4f985d8061	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-0bea-f3667453a550	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-e786-654165f35f8d	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-c1aa-9d77b6f2b4ee	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-c905-f79a3ef98812	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-2ccb-eae16e2ae971	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-154a-489c34c759fa	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-15fa-c0a1ede5c950	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-1ec5-bd5a1debea28	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-8e89-d08fd435eb0b	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-85dd-8ca3ae2635cc	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-7565-a4246d67332b	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-4374-b279d0ef9a4c	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-5e5c-5f9565fb2ef8	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-5b1c-6ace90639714	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-1d17-ec67e2bae562	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-a0b0-804e23402d34	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-83ef-8f3096995ba4	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-2f03-d3c8193bfeb5	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-edf0-7eeba2150e90	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-5f31-9f688c5b944a	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-a0d9-26face062849	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-3f32-ea5c281b6556	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-b1d5-ac67276a2830	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-6ff0-c45e3f2d24ea	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-d40a-48f21df193ed	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-46e2-f46d5ff9160f	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-9d2d-fbd33a3f8aec	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-a2c0-4c365ef3c353	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-0358-b87393d4ecc8	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-2305-73996ebbd000	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-1507-96c1a7912d12	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-f674-25a4537b3daf	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-7b27-b285c544995e	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-e804-e53888e0042e	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-5a04-b02802159894	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-1f9c-cf9c8b82b3b3	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-d3a6-1f899a3b93cc	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-0e81-3d96cab51694	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-3ebb-fe9d41e1f377	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-dbdc-1457519efd51	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-aed5-404eec44ce13	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-e6f1-7c56764d1345	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-f102-aee14c618e3c	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-1449-6d99fe148c6d	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-c740-f33f0ac643bf	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-1ad3-2cea0e271a56	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-06ed-a0c8d858ecfa	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-091e-7ef0eec5f977	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-9f0f-96b6e0e6a96c	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-29c9-4513baad7e9e	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-2860-305fd8c4b45c	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-40b7-a88f6dadf914	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-02fb-3d7db16a2f92	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-2315-383c798ac41d	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-35a0-ed36bc9bda3f	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-93a3-e7432602b5db	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-51e8-5f9dd2452091	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-06cf-80c2ac89ffbd	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-0389-318e663f4df9	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-29f0-35c25b7b10d4	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-ca27-5096754d7d5a	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-dbac-99f919cfb5d9	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-95ad-f53f9c67cc67	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-475e-861faf001e01	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-6a7a-d9e2cf2b2039	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-8358-271b092d4b75	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-1ba5-6b6563c7b7d3	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-22c0-68837800de76	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-f191-5a7872801cd6	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-f5b1-9eb6ec701900	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-8268-d19b1a969bd7	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-305c-4c80ba140e01	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-4c2c-b710059f1049	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-7ce2-6411966a1d38	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-2778-e32b73f95fa5	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-34b8-d55002e3dfa7	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-1a6e-14e18a84c582	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-ba13-5bcca2c4706c	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-bacc-2a5eec3a2dd7	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-c68f-e55668f9d58a	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-2134-069b19f18f23	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-ab46-15fb073c973f	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-414d-387cd1c8bbef	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-04fe-41fc27b4105f	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-84c1-eba666230592	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-4da1-e33c26a9abf7	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-de41-a40f518e0db2	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-e52f-f17b132c4654	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-d4a2-f5044e1d7a08	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-aff7-4e52c3169bb9	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-7c0c-d8a9aea90aa0	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-6f06-b6a5d6b9db52	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-ae19-7bd874a4f9b1	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-dd2c-bb8f72301d2b	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-588d-89e4c3a82b21	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-caf1-f4c64c453f32	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-3666-c53fa6cb43bc	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-9c87-3bed6f2dcca0	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-791a-325af80234ff	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-3767-479061c51809	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-5b61-e68a082b75c1	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-02b5-b76708b23394	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-8ff1-a9e550a24e1d	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-7267-be3e6f4eb9f9	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-06ea-b6b48504cf6b	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-2e81-577c427ba3d8	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-42b6-34c51a0c02ac	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-7a1e-4bc2e25769c2	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-54a3-f38b7ed8fe53	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-e771-6c0623838ba6	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-0061-9cccde675147	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-c0b6-e84796fd26ee	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-9427-c08da0f3fafb	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-20cf-0605f0861b20	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-c864-97500673ba87	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-e367-e85397fbdab5	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-08d4-95b5eea9ccfb	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-2f7f-267704017518	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-0aec-f8c745a00611	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-79a9-ccc1376867a4	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-01db-b68aa0ea9aa0	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-bc37-35634429a7de	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-544f-0e27e1465da7	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-3230-dacb9480914f	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-0697-0d8eea85d1ab	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-878c-6010f8ce8837	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-17aa-beeec1459fb3	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-4d25-3f7d8a412ec4	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-11c6-14c24c234f88	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-bd88-f90fdc0590a0	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-15a1-2d886f8cb21b	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-c1cf-e6a2fe6c4376	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-35e7-ddca449eb2d7	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-d5a6-18dc468e744d	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-1490-d51ba96915b6	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-adac-8bac88b6a214	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-21d7-c2bc598740c2	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-9ac6-14fc405672b1	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-4f73-8add2a5ab7b8	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-284f-fdcba7a51c6f	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-6d34-e7ecf03f4184	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-3e53-009ecc4ea256	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-c961-2f9893ee6d00	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-79fb-afd572402cb0	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-18a5-b4b8c7f6ca10	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-5c11-3557d5431c14	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-9173-d81bda6fc117	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-8d26-eb5cfe0f700d	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-d796-c66befccd98b	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-13d3-7379eefc2f80	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-c811-b692f1484bae	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-4553-ab42fb7db510	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-eaeb-c5be25231229	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-d709-200aafae6a25	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-20d5-bca198148e6a	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-282c-3496027e80bc	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-fdfa-6e04fe3ca45a	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-2220-7a2266d59cde	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-8b5e-306574109513	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-3ddf-72e9dc62d4c5	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-235e-d834b1239146	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-5bf3-4452706df72c	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-b02d-abc53513eed7	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-b242-a23ae29c38b7	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-65dd-7736becdf538	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-3283-98eebf68e357	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-2964-317a0ef2312a	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-1a24-e3c253ae2bdc	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-e5c9-041b57f999e1	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-1f94-89b2ba528890	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-28c3-bfb950453ef1	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-6c21-452aae416bcd	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-ec81-c01d4470b1eb	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-3188-b31d603d050b	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-6624-fe1c6b63e475	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-9397-d0cd9d782420	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-3f99-3ed297cf2324	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-0531-cc1c173dd23a	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-9216-a682dcbe0edc	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-4e39-1d777fdf01ef	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-4c93-94412391df5a	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-2e2c-79c99841d652	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-5772-51c138e2f222	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-265e-992f4bb0d316	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-582c-478b90d91f2f	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-f96c-9f7d7196eeee	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-50da-96fa0cf032d2	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-8d97-2417c2560859	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-0e17-731e2a848e2a	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-fbcc-7839173e175d	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-ee43-1a0f1d498792	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-b983-4c9c56fee63e	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-389e-23bd3019f8a3	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-782b-76361c8d5e8b	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-8cbf-47cb2afa404e	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-1269-224efde00774	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-82e8-6389868d38da	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-d73e-8dee82eb03fe	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-c792-45b030c064d5	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-2cad-b24a66f41d84	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-6ee4-1a0a2f52ef5a	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-710f-a60b1ac4d141	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-8891-57c5650344af	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-71f9-1bf19d4947c2	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-10f4-00d73db3c0fd	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-2526-bf2c5e07f3da	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-c297-80c193c7a0d3	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-0c5d-7017cb35a616	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-205d-f7a6f1c5e063	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-ecbb-da978cc54306	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-138f-0d5f25e5721b	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-d4d6-2af0963cf94f	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-bb54-5858d154d6da	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-fb75-be18f3e05807	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-87f7-d29b0e3bfe47	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-51a6-9bd96d64a7c3	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-090b-42d1350f0538	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-d5a8-20a87b7280f1	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-6cdc-d602725fbd16	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-d280-d9fa71af8834	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-ad4b-5832c881a17d	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-772d-48763f2cd3e7	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-04cb-f0774d2427c0	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-50f8-bcda17b400aa	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-2277-01ef1d08ffb2	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-8d03-4fe29763d5ed	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-f07c-b9ade9451d40	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-bb2b-a32fe30c58b1	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-d63f-7ae198e6ead9	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-f2e9-7a7ced4a7c15	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-94be-36b0c1640176	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-1ee0-80dfb1acb889	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-33cc-a312e1453361	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-d5dc-3084322babdc	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-5b02-30cc70cc672c	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-4f46-eaa0d3a1ee22	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-8ece-4c8b2db06b4e	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-afae-47b4f35323a1	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-3424-6e591867d61a	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-66b1-06c5dc20180d	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-ef86-fa68191fd2ad	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-dfe2-30073123cf0d	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-1b13-a9706ee56713	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-fe9c-51d9565ddbe4	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-4094-7535bd0b056a	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-fd24-0f2974f60d7e	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-46a3-e16fef8d4bd4	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-7ea9-4061a6bd7aa7	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-62a1-3775e826e05f	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-f631-68b4ea8f506c	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-ada6-d274c631118f	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-189a-1b3098205b31	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-3758-50cea81088fd	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-b862-f10e82038ce7	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-97d5-44c3e566882b	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-71e8-661e5afc72db	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-e161-716d9d2bb605	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-634f-0bf847eccd78	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-a90f-7eafe394864c	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-3a2c-0ef883a78c8e	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-9835-720490a3602d	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-b0bc-8b5f6a9b8dda	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-bff5-b530f722c54c	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-2a5a-d7a7a1516c1d	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-0be0-d4c694c59143	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-e9ec-3c5480d4b175	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-12e2-8882ae316c51	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-ab75-548fadfac6ad	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-9f84-5d2c164d0bc1	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-4866-954d2b1d28ff	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-391d-45286c999616	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-ed67-2df681197d8d	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-7781-f23aea8cb85a	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-a462-74e494179dd7	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-bedf-05083164857a	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-ffee-0e7b7c270fb9	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-d36d-82288012f242	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-929b-0bdc6eadecfa	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-d264-855480ac75e8	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-be7a-5145542b6e14	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-6427-468a6e46a7b0	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-f8fb-1f054a9a1ff2	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-0953-d24ffd17828f	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-0b3c-4f4d0222bda9	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-863b-d439e10b1cb5	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-3802-10ac66ac304f	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-4516-786e50045e88	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-c3f2-787d28d436b4	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-01c9-ab2200d5d9fc	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-729f-3496dfb4f2b0	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-da8e-5630eb26869b	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-d2c0-e5fa157e0e9d	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-1877-0492b7242933	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-3036-f5aae8701e22	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-40b9-39616e9286dc	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-c9a5-df05b2733137	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-268a-cc47b89bcb2b	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-6d62-e3a79ca4b32b	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-ab49-7a2f37b23a00	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-64da-85995a52b637	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-bcb9-38c15354ed58	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-3cd7-2c73b7c09441	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-d506-3febeb98dc00	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-084a-96b7aa6a7c5b	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-e137-e02ed3d4c15a	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-24a9-61ebb81afb53	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-f00f-eb35729efafb	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-9142-1672464a4eee	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-3fe8-0c2ea5585db3	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-adf3-db57d5d9e4de	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-9773-30385fcc25b6	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177e-0eda-653e7095f3e4	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177e-6711-1ef0a9911798	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177e-b5e8-3a65f3723d87	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177e-c19d-72f7214ad25b	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177e-4e3d-108690be9bea	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177e-db0a-76f8682d7d1f	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177e-954b-6526c75e2410	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177e-23f8-bc4f94c2383e	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177e-6b66-264010d7300a	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177e-9814-0c56a8fdcb8d	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177e-f316-822c120dc822	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177e-82dc-a887b2a6eb22	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177e-8410-c6c74b977bba	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177e-e09b-21ce123123b4	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-2aec-f250895166f4	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-b70f-b0e87aa95561	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-b5fc-b0c554b8b75c	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-012e-f15007b4a56a	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-6b03-01d6bffdcc37	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-f4d7-225a46023e51	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-da9c-faae8193a883	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-3965-cec28e2c2636	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-43b4-ac05f4e7a071	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-12a2-0f5d48238146	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-63ad-87f2b582486c	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-86b5-272f803218e6	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-f651-0a139d08fb2e	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-5541-f5e613097c47	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-9ed9-2df3696953ec	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-79ae-28b79d9b217b	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-10b2-4bbc425e9616	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-8e7b-ff8b25b16070	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-bcca-cf2313e787cc	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-200a-ae8d2d3e2d99	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-54ea-007a97ad4d76	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-15aa-d6ecf5bdc8ff	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-2f39-b79dff4dcab5	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-2b18-c702b5dc70a2	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-d762-025e85038ef3	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-1a98-4740fb2deb0d	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-5d07-bee4ad4c5d98	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-84ce-a518789a475f	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-88d3-253610897e7b	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-4582-9f39f0ffd33c	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-69ac-28ad8b9d7077	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-3ee6-3474956106a6	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-0c83-7ae1480a4d35	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-1333-e29f95f8c20a	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-badd-3e291f54aafb	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-1d30-e98de72cead8	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-25a1-d9b824d97ff7	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-d9c3-83a9ecad64d5	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-05a1-64d081dacf54	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-3937-db222c66bd4a	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-8ed6-1838e568605e	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-6eef-3563433ba332	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-f0b1-edb6a05a14af	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-6cf1-c8384fd62865	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-d375-42a3db549772	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-a81e-cdb27d40d075	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-a0c8-7eb47c82ee03	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-a304-c88978ca04ae	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-1a30-5bf37c7519e7	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-8662-19fce4155488	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-f9a4-f8f9c1fc6924	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-be59-cd4f250f2114	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-1c4c-5957b2928555	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-b1fb-8c614cda5259	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-0ad6-e77b579712f8	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-927e-2ad6365fb12c	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-fe8f-dc7b945c5778	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-1323-9ce7a189b445	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-db27-108b818dbd22	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-fc51-49ca626a4bcf	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-c43d-c98fde880b11	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-122c-3467ea67d6a6	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-7b2a-80eb826bfa7e	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-c560-1b6a5fdf428b	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-d46d-0557213f4237	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-08d3-3c2088073b81	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-dcbc-1569b8cd611b	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-0d52-c76f75ddd265	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-a58a-22803cb20a42	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-3b29-d720524164f7	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-dc0e-5c7d10ab0071	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-7a26-51abf8105ef6	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-6794-d0ce23d93f19	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-4f51-6f90b22918cb	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-1f31-2e9168c379f0	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-d6e7-9b1bd5edc1cd	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-c5ca-8840075c44b1	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-4833-77e0fc906020	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-c381-97b0bdb9f891	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-7644-946bd0e68db8	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-c48d-d9fda0248e6d	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-8cb8-f15d288adeed	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-174a-faf523a1fe22	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-2136-3eacad6b0e90	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-ec5f-fa4e7da7250e	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-8827-050fc24828dd	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-c14a-f06db093c662	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-72d2-ac31e8055b9c	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-eade-6b7160077707	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-f7b1-b6a309844499	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-2b46-9f00b2c6ed5a	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-eb34-3013cf3c5aa2	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-cc49-280e16121579	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-51ba-8ee5cf4451ca	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-1495-ad0b678fc33a	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-1044-431241baeddb	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-6ec7-4d6af6dc8b44	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-1511-789af44ba373	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-e57c-d6a18c09ba22	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-5142-1e3644354d8d	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-9cd4-1a5793bc0879	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-3817-38397961cbde	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-e25c-ba064bca1b0f	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-a4f9-6da672bfbdc8	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-335b-b0c08378291f	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-09c8-19571199a527	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-c0ab-7f103c615dba	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-9e0a-5d1048198f65	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-0902-5c6863cec169	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-d8a3-bca0216e1add	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-e9f0-213036768137	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-831d-6f694bad27d1	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-c353-edb98e28d538	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-b3f1-42524fcb74ca	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-7dd5-c9d0d56b1af1	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-32da-e588c99bdf46	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-e9a1-aca799f23997	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-c46f-4ca5696e7e7a	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-bd2b-3cfd80a10d0d	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-0b11-8575716f9a4e	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-d35a-a763157ba2b5	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-fdb1-b756fd17e0d8	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-5b54-244d1a21c32c	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-ac8f-2042f46358ad	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-19b8-41c9dcc92ff5	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-adb0-c446c7c8e350	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-4049-33fa43b71458	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-e35b-5b2c14197042	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-69e2-89aaa909ff45	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-f16d-4ff9e5ab66fe	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-895b-814e2221bd18	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-cd4e-42db26f3e6ca	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-e628-c8fac50814dd	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-c56e-a0e529f8a4e7	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-af05-6fc9a0e52fdf	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-8db3-fd79b389a3cc	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-3286-d88b999288e5	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-ee3a-31cb6dff5f9f	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-c49b-186e18a63127	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-97cb-2a46e3359893	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-3e5c-8493bbcf7dfb	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-7aff-9902873588d4	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-c38d-e66da4d26d4f	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-0743-37abb349fd5b	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-bd89-a111b53bad16	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-34b5-5bf7856619fa	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-931a-80887d5af82c	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-28f9-483c940e7869	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-0fa4-7079339610a7	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-c159-277729eb6336	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-1542-9baa6fb6288c	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-3950-183ca6722753	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-8144-3e81225a2ada	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-1da4-7edf706350f4	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-c30b-8814ab591260	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-4ace-b6f513749d70	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-6bb1-f484c0d8c8c0	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-5608-74e05d5bbd7b	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-4fec-470621792c14	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-a885-954f6d6a2905	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-a3a5-0b27e5d46afd	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-bff5-a0f1a36b5dde	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-c2a3-aa3f3febdde1	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-4539-bb8b403973c0	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-80f9-99c4626d37eb	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-0f3f-d55216dbead9	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-57ea-c21ae3f90b4e	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-d1b2-7513023b0a70	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-5e40-cf6ed8c3ad3e	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-fdd9-b5dd6d384819	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-379a-9aa8be95986f	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-d565-1005e8fd2c38	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-2cad-2ff77266c63f	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-a605-58fbd45acbbd	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-a5ff-ddff328e96da	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-d287-74aae44eafce	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-19f9-cc56941f5778	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-3121-5027dcecc5b4	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-b963-452d3231d7e7	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-1621-9bdcdacc36d1	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-96fe-9d8eceb18db8	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-7c56-6a39938a20bf	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-80f6-79a221d7e885	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-d086-4a95d9067999	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-346f-e9890f29d105	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-937d-284e1e751d8c	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-9f16-f99e779ca768	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-c6d4-018be3939a07	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-a989-058c6c5cead2	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-8775-0126eb241b82	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-d774-b2f6ecfbc4ab	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-a498-5a531799a4a2	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-87ad-053b297fd853	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-ee52-e6b7aab926d3	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-31ee-9580b8811df1	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-287e-3adf7d618041	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-ee95-c43577380ce1	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-f089-e476fdbf762a	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-9f02-33da63aad7e0	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-1bd7-54e8ce0ed5b2	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-f8f4-5ff9a7bd6548	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-c297-294fe206e3ef	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-be66-d0b0096da0a4	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-eeb9-d671a8002609	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-6391-75c8b0b49619	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-0ca7-32a444fbdd06	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-8b92-8d45bf561c0f	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-f77f-adeda6e13f29	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-4b6e-1e221e32dc71	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-3d40-fa27109e5123	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-e07a-398baf3a1183	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-d6e1-c56743567d35	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-11f4-6868a159eb81	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-2768-931973b6d258	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-7266-3fdf1d173715	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-9751-f9653b36f041	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-ad7e-d8bca8ed1283	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-d45f-aba6be853f54	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-e8dd-36bff68ab230	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-0997-727f8bd602f7	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-b506-c801eaa4c71a	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-9a47-a830f09b6420	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-7d38-5a2b01956013	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-a7f1-83db07961b21	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-8c90-26c4646c674b	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-8f05-76196fd31006	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-9a0e-a1be8a3a1e32	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-9212-104940a27f21	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-1e4d-b420984e788c	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-7394-af7aedb11de8	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-2f76-3d99a0e924ed	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-7e1d-8cfdfb34a163	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-1410-ceafcc746ef2	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-127d-a9a1d1417421	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-2485-05a801121cf0	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-661d-fb17fee7a90b	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-4ffe-b78d96acbffc	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-26c4-4b0c8f5a0d19	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-1659-84276a01114d	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-15dd-42b19fce7d54	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-2413-e5f781fd8eea	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-b2e8-9910b3411f56	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-c88d-0788f41665f1	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-b66f-a341382f6222	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-c8da-a5085b98eaff	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-624b-e00f4facaa9a	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-114e-cfc72c109119	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-5896-0c8358375597	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-8359-7f102257bc25	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-b94b-b9ddad45186f	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-3ae7-fe731895d36a	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-68fa-78f3f048260f	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-db2f-ba4c1ff3d8a2	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-2e16-34dded231be7	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-b12a-b32c114e1a4c	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-c4b7-7c9648152b17	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-0bf1-1cb44532eeff	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-141f-82afacfe8bd6	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-99c6-64b8fcb1059d	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-73fa-05fe7995a1b0	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-f462-e2f7b984f0a5	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-6c6e-7138a28bb906	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-efd1-2484a732ec02	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-2470-86e3a97ca792	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-4ce4-568368b896ef	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-455f-a97b1ee6163c	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-a675-7a0dc0695f7d	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-fc6f-5cd819cd3c11	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-55cc-12a81fcc0558	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-e523-dcb1920f9c74	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-ba2b-a3a257a9dc1b	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-ffec-868740822c55	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-d021-c2fc7fcb9079	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-9808-047304483bba	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-aff4-0a8f39d12c31	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-6c70-1c541c888f83	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-2d0b-5b7ed8852905	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-1c99-aff25a83822d	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-ec97-e9dbd7889dc6	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-6240-7234ea20af93	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-fc7e-7bc049cf67e9	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-a087-6ad416f6d0f7	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-6e93-ed6232f88576	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-2be4-5b5011e23426	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-df18-a468da4801fe	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-4fa6-baaaf545c953	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-8325-6b3dc27dfd0a	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-0a04-2d0657031a2e	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-06b1-02b5283f0173	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-99ec-a29e0fddd48e	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-1143-7a36aecd09c8	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-8aa5-7e4389f90fa9	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-c4eb-b73af9a3beea	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-4a1f-7d5c217eafa0	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-77a2-b1e36f427f9c	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-4a02-321712cbc779	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-6b08-17e7f4e2c5d0	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-ce29-ba052e1fcb74	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-f6e2-5a0a9d53c45e	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-06b7-d90403b74f27	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-806c-cdc9892f60b6	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-7a75-cfea257cb7ce	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-9463-3f54680fa94c	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-7200-6269484656ea	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-1df4-ca0870e68d01	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-2b43-65166e64b562	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-0874-44707a3a71f3	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-1bcf-511ecc63910f	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-2350-470a660b67dc	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-a99d-1353b4431b6e	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-36bd-a52c309cecde	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-56a1-8d6f1220648f	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-a125-6fa912b49014	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-6084-0e6fa312bc80	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-8c4d-2ee963d947e9	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-8c3b-c840f324809d	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-c704-8cbf7a01e221	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-3dc8-a63cd3105f42	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-abc6-0f906c5ccf5f	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-02fe-34c3576d3834	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-23b1-be9645b7a65b	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-f1c3-077b602f6176	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-a2f3-387b617f8af5	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-af4c-c81266a0494e	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-6f33-36d97c571031	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-6557-f6128fceb58a	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-ccde-d7134c0c864d	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-b076-b681ae5fcb56	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-cf1d-1e29fe41e381	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-4e27-0112f7579141	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-d8c1-956fc32bcf90	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-662b-ff62b3a8ea20	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-50a2-b3100d791c61	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-8438-aba00414b18e	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-6ed9-a9efc5491465	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-bf3c-2e2e45c53a8b	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-af84-bc03145fd3dd	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-2cf9-e185b68bdb69	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-c012-6ed3121349fd	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-5058-8ddf9698e683	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-9f9a-40d4703a576f	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-92de-f277216d286e	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-9052-4c1b7c5436fd	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-30e4-8e866cb2ad0c	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-4ebf-86aa78f1ec00	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-b648-b8b9a8123afd	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-42ae-4471949be203	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-4613-be03f92fe5ca	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-6934-dbc3b391b8b7	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-dfbd-f99c32e05dcb	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-a6ab-593a182227d2	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-f037-dac761fae9fe	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-5856-be06300719f8	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-f845-0e05cf7a7a30	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-899e-4945fc0d140c	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-7eba-1f0ac0151c70	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-945b-7b299b274dba	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-10c3-a0a1d1fd40f3	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-5f04-043c89aa49de	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-e649-993a714cea44	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-7822-549fec54284f	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-19a3-5c856cd4adc2	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-6ca7-d4cb88b18069	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-676a-31eb4a2c24a7	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-4012-c0e438e8f58c	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-1f94-7024745d0fd7	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-f00c-48266d11a729	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-1024-efb775f5b143	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-faf3-6c42ce457e1f	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-b592-8716cb3f1426	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-5d40-861671682837	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-ca45-d4ac2ec953b4	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-4b96-abe6b551ac52	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-ed80-2e2501d55471	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-1ba7-f82e077b9c40	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-7f74-eb6b4046702a	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-3ad5-cb8f46b841bb	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-3a13-bbda5191a4cb	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-d136-1293f278195c	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-d42d-9caf12c8e640	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-1e28-f85f2dfda7ed	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-23f4-b6715c182c53	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-11df-b535b13cf14c	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-1d83-cab0844f5ab9	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-0f27-c1d97ae6bf09	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-f6b1-70e1522e589e	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-5186-d7043fa8e928	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-e24e-15648e10f822	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-d97b-b729f4066353	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-3621-33e535faf22e	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-495f-aa3f29c699f1	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-d114-d2ef1c9e7836	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-0dea-de89de5ffd56	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-58dd-dbb855447fdd	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-c2c2-6550729fc907	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-99bf-6f246aa0cff5	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-d9f3-500cc4bef566	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-0206-201096acb712	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-3702-94f0d2c231c1	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-309b-b7cf7f882ba0	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-56a3-250916e27ff1	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-cb31-aba227071f68	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-8ce6-1123a8da6085	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-250c-bb9b66207926	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-1da2-fae4055fcbe3	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-c08d-2fc8f40c395c	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-c951-b2ba0dbb5d93	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-d821-fb363659c325	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-789e-edde5e0487ec	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-c981-b3a73448c741	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-2203-86671350947f	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-8609-28d5a1668c66	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-8427-b7f09a58d7a5	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-8f54-037a9790b3ac	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-e17a-645bf69aa08f	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-8402-0feb615e8905	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-8290-b36d38fe3f11	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-5c0c-bda2342522af	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-4230-047dc374d717	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-fe8c-5cf251ea52b3	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-a158-4eebe9226164	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-b5cc-2f5acab26758	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-a77d-073291098a16	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-9f1d-8db8a254959a	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-ab87-104dbf6f819d	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-c8fb-35b4a1f5f552	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-6be6-025a88490af0	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-42f8-869db508e85b	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-139d-17b3cbda8673	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-7b66-72eba098aeaa	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-c6b9-4382f23ac094	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-67ef-feea89a1edef	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-ce33-435bcb514f8d	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-f9a5-53f03dcaab6d	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-2317-c5122ce2c78e	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-4dca-3e88af0ef263	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-c6fd-c4bbdad479ff	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-82ed-644d90a63fba	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-d265-4398fc1a877f	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-a376-813d0d2700bc	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-4bd8-79ea15658bdd	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-e195-ed8455093691	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-a1ec-f61887d00557	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-9d1d-72f2281ef3e7	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-cfb0-1a94f0835dbe	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-1276-7cd99598f740	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-ec02-9d35849bca3c	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-05af-5ea40f41877c	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-626e-c264d2bbef56	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-cf86-18e09aadc2b7	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-6611-2f579bddf2df	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-f55f-aa6275061fbb	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-dd16-5097278f483e	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-c94c-a7c685c5a26e	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-b5e3-82f0e7784365	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-343c-8f15aeb01112	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-e591-0a5412de5338	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-456c-f432a2a52c31	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-1a21-ea77017ba666	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-344f-f63f8a517e34	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-a5ab-9efb094cd323	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-1eb0-0fe5e2a5dec9	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-55a0-d6f57e6f8d38	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-bda6-70ec7f1ae0fc	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-d70d-297d0136c4a4	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-79f2-f104632d5093	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-4ca7-c70dbc428e7d	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-17ed-9e73835dcc1b	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-9aa3-2a74ff5784af	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-4717-2b49ed6b5ecd	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-8584-ed44bd865c36	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-6bfe-56e90e3b62de	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-7ad0-0aaef3dd50fe	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-60b7-ad6fdf262c38	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-58ed-2b2510d24366	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-6999-e66ee034668b	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-d9a6-43db0af25e36	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-6acb-bda5543119d1	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-72e3-bebef76ee7bb	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-5536-48b13145fca8	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-7c1c-eaeb3b049492	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-8e3d-5b57065eac24	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-d6c7-412683f6282f	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-ec2d-ad0e0978d341	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-ab0c-9b3f93cc1bdf	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-7889-2d68ed011b09	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-952c-548e68845703	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-5931-78535ae42884	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-35fe-4c2a63380279	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-ebb3-d9177f438b81	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-152e-c153c91a7df2	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-9137-61935d4aa475	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-b51e-e60243fbc561	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-9709-d94c37b843b0	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-f456-1ccefeca38ee	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-870f-8030d8b12c5a	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-1257-80059b27001e	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-0207-42a816d230a6	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-199d-d4adff89f16b	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-6c82-aa32ea60db9d	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-35cd-c0c7e7c482ca	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-2772-92b2bef2f92d	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-6334-3a2c1e2b7e95	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-b8a2-4c638c72e389	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-302c-6b57850e02bf	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-4843-9133238f1c23	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-557f-9ebc9353fda7	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-2bef-ea7f94d05630	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-7303-05b94a2f2421	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-a72d-ab40e8578f0f	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-15cc-34cb256ff823	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-4643-3884a05e09c7	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-0535-7735fba75e2d	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-de98-1c3f0a8d2e94	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-0fb5-bee38eced3f7	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-8e61-0f5b7911433d	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-3eab-499eb26f7be0	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-a264-ffa8db0b13dc	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-076c-f9a875116b37	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-bf4e-c4df8c1c3c21	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-b168-89fd6cfeccab	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-fcaa-f7a78b0d5fe1	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-8f3b-564e513a3cd3	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-24e9-0e4b68504a6e	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-d08b-9c370e40336f	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-01b0-d98f0cae46e4	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-c818-8ec09892b289	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-b8bd-071dbc76fece	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-010b-bbb061a188ff	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-f349-39f18dd3011f	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-31df-47d7c96a3504	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-4917-406068de0570	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-bb7b-8c4f5e85e5b7	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-0136-65201b3944bd	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-1e4c-80f5e96b09bf	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-bbf6-9aef2d411283	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-44f4-d43f1f7508e9	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-5026-6dcf611e505c	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-ba8c-d7917edbe210	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-2670-88198aad1cfb	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-24f5-5fc3bd942878	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-586c-59d3181656e9	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-8636-4a1e63895a1a	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-bfb1-764a45f129de	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-5b4d-8404e838bafd	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-f8cf-bc95401c0ac3	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-6f74-42b75701af54	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-b569-e0cc89c41261	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-dfcd-eac1787a16d6	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-f61f-ea5b4d4dc674	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-261c-5b351ffc17cb	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-1933-b5b948888f75	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-28d7-fc27f360dde3	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-21c3-0da721404c41	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-7139-9595e74c6dd1	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-40f5-1dff3bf5c703	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-a6d8-5fded7bb63ab	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-ac90-e39c2a5dbe90	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-c3f3-3b1db2999cb4	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-4d2a-326d3a81f23a	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-76ed-8073d1b30efa	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-6afd-2888b8016098	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-20bc-18bc7e38ea17	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-04a1-2ed193fc8ea7	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-4105-44f44c5bcd16	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-1ac6-3bd97f623af8	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-3b12-b10daaa751d5	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-af5b-ca261488c619	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-cf67-07559d82cb79	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-c550-af6ae805c01e	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-004f-f515de4b4d43	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-d292-80f6483e1845	User-delete	Aaa - Uporabnik - Briši	f
+00020000-553a-177f-7b5c-8056823b2708	User-read	Aaa - Uporabnik - Beri	f
+00020000-553a-177f-fcc6-5ce07fedd801	User-update	Aaa - Uporabnik - Posodobi	f
+00020000-553a-177f-74ed-1dabc39ffd86	User-create	Aaa - Uporabnik - Ustvari	f
+00020000-553a-177f-85b7-b765b8d5f71e	User-lookup	Aaa - Uporabnik - Iskanje	f
+00020000-553a-177f-96a6-de7d1ec1a7b6	Role-delete	Aaa - Vloga - Briši	f
+00020000-553a-177f-26a5-43d05903a6b3	Role-read	Aaa - Vloga - Beri	f
+00020000-553a-177f-3fca-07ee8dc8d54d	Role-update	Aaa - Vloga - Posodobi	f
+00020000-553a-177f-ca9e-d6e737773cb7	Role-create	Aaa - Vloga - Ustvari	f
+00020000-553a-177f-8e84-093c990fe328	Permission-delete	Aaa - Dovoljenje - Briši	f
+00020000-553a-177f-fc00-1784370140bf	Permission-read	Aaa - Dovoljenje - Beri	f
+00020000-553a-177f-f2e4-3970a9d3f559	Permission-update	Aaa - Dovoljenje - Posodobi	f
+00020000-553a-177f-e21b-f83d2c3a0a8a	Permission-create	Aaa - Dovoljenje - Ustvari	f
+00020000-553a-177f-bfd4-d68e952a35cb	Permission-list	Aaa - Dovoljenje - Seznam	f
+00020000-553a-177f-c8bc-972a59225493	Drzava-read	Seznam držav	f
+00020000-553a-177f-024e-abbda5cabe28	Drzava-write	Urejanje držav	f
+00020000-553a-177f-337b-03a7da505ee5	Popa-delete	Poslovni partner - Briši	f
+00020000-553a-177f-a1b2-c3f7d7a1a130	Popa-list	Poslovni partner - Beri	f
+00020000-553a-177f-3c02-dbded9906ff6	Popa-update	Poslovni partner - Posodobi	f
+00020000-553a-177f-64ea-8100806a9343	Popa-create	Poslovni partner - Ustvari	f
+00020000-553a-177f-248e-e828c37e5474	Posta-delete	Pošta - Briši	f
+00020000-553a-177f-3247-8c7784417807	Posta-list	Pošta - Beri	f
+00020000-553a-177f-1464-4c61b4b20cb9	Posta-update	Pošta - Posodobi	f
+00020000-553a-177f-28bf-e90700527162	Posta-create	Pošta - Ustvari	f
+00020000-553a-177f-f8c9-17488d7fc736	PostniNaslov-delete	Poštni naslov - Briši	f
+00020000-553a-177f-f533-345ac178a999	PostniNaslov-list	Poštni naslov - Beri	f
+00020000-553a-177f-bea7-072b55f73faa	PostniNaslov-update	Poštni naslov - Posodobi	f
+00020000-553a-177f-6979-6a29f05ee4e3	PostniNaslov-create	Poštni naslov - Ustvari	f
 \.
 
 
 --
--- TOC entry 2635 (class 0 OID 1157451)
+-- TOC entry 2635 (class 0 OID 1252866)
 -- Dependencies: 178
 -- Data for Name: permission2role; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY permission2role (role_id, permission_id) FROM stdin;
-00000000-5539-ef79-6f09-8cc89027bb17	00020000-5539-ef78-0d4c-ead8d0f4e1e8
-00000000-5539-ef79-6f09-8cc89027bb17	00020000-5539-ef77-ca83-dfb76d22c85b
-00000000-5539-ef79-c027-beb72bff0a24	00020000-5539-ef78-e769-0a74483b1f89
-00000000-5539-ef79-c027-beb72bff0a24	00020000-5539-ef78-0d4c-ead8d0f4e1e8
+00000000-553a-177f-11f8-aae723dcefd3	00020000-553a-177f-c8bc-972a59225493
+00000000-553a-177f-11f8-aae723dcefd3	00020000-553a-177e-0cbe-61a50ae4d212
+00000000-553a-177f-93fd-94340d00a0a1	00020000-553a-177f-024e-abbda5cabe28
+00000000-553a-177f-93fd-94340d00a0a1	00020000-553a-177f-c8bc-972a59225493
 \.
 
 
 --
--- TOC entry 2663 (class 0 OID 1157740)
+-- TOC entry 2663 (class 0 OID 1253155)
 -- Dependencies: 206
 -- Data for Name: placilniinstrument; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3053,7 +3053,7 @@ COPY placilniinstrument (id, nacin_placina_id, ime) FROM stdin;
 
 
 --
--- TOC entry 2667 (class 0 OID 1157770)
+-- TOC entry 2667 (class 0 OID 1253185)
 -- Dependencies: 210
 -- Data for Name: podrocjesedenja; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3063,7 +3063,7 @@ COPY podrocjesedenja (id, ime, kapaciteta, templateplaceholder, barva) FROM stdi
 
 
 --
--- TOC entry 2678 (class 0 OID 1157882)
+-- TOC entry 2678 (class 0 OID 1253297)
 -- Dependencies: 221
 -- Data for Name: pogodba; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3073,7 +3073,7 @@ COPY pogodba (id, oseba_id, popa_id, trr_id, vrednostvaje, vrednostpredstave, vr
 
 
 --
--- TOC entry 2640 (class 0 OID 1157510)
+-- TOC entry 2640 (class 0 OID 1252925)
 -- Dependencies: 183
 -- Data for Name: popa; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3083,495 +3083,495 @@ COPY popa (id, drzava_id, sifra, tipkli, stakli, naziv, naziv1, panoga, email, u
 
 
 --
--- TOC entry 2643 (class 0 OID 1157552)
+-- TOC entry 2643 (class 0 OID 1252967)
 -- Dependencies: 186
 -- Data for Name: posta; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY posta (id, sifra, naziv) FROM stdin;
-00050000-5539-ef77-ddc8-b42df7dc3304	8341	Adlešiči
-00050000-5539-ef77-99be-fdac1f18d488	5270	Ajdovščina
-00050000-5539-ef77-bfa5-d239d8a66848	6280	Ankaran/Ancarano
-00050000-5539-ef77-a7a7-5b0a36afeafa	9253	Apače
-00050000-5539-ef77-86dc-94beaf48eabb	8253	Artiče
-00050000-5539-ef77-feaf-7e0e6d2192aa	4275	Begunje na Gorenjskem
-00050000-5539-ef77-e95c-1d8792b37613	1382	Begunje pri Cerknici
-00050000-5539-ef77-27b0-070ab5554930	9231	Beltinci
-00050000-5539-ef77-a632-b0eab34a95d1	2234	Benedikt
-00050000-5539-ef77-ac7e-5aa6fca6e32b	2345	Bistrica ob Dravi
-00050000-5539-ef77-5805-bda817642bba	3256	Bistrica ob Sotli
-00050000-5539-ef77-8f7f-ff441d0b1acd	8259	Bizeljsko
-00050000-5539-ef77-91bc-3f42472c6584	1223	Blagovica
-00050000-5539-ef77-5333-3401cd9dbfa4	8283	Blanca
-00050000-5539-ef77-36fc-aedc5a858c88	4260	Bled
-00050000-5539-ef77-03e5-6fc8cbafab37	4273	Blejska Dobrava
-00050000-5539-ef77-9104-1fa88bcf6f5e	9265	Bodonci
-00050000-5539-ef77-7fa3-e9c7c4b2a4a7	9222	Bogojina
-00050000-5539-ef77-a7f7-17b607c4c011	4263	Bohinjska Bela
-00050000-5539-ef77-c3b7-35bf75e2dbc9	4264	Bohinjska Bistrica
-00050000-5539-ef77-42c5-2dc6ddd162d5	4265	Bohinjsko jezero
-00050000-5539-ef77-8440-b5e273c27ec5	1353	Borovnica
-00050000-5539-ef77-43e5-adcf22472809	8294	Boštanj
-00050000-5539-ef77-586b-cb8e475b96db	5230	Bovec
-00050000-5539-ef77-c3de-188813d004ae	5295	Branik
-00050000-5539-ef77-f653-d739862c4d33	3314	Braslovče
-00050000-5539-ef77-0b6c-d3c3cc0f057e	5223	Breginj
-00050000-5539-ef77-c4dc-3bfe9d3f3651	8280	Brestanica
-00050000-5539-ef77-a099-d75e7a1a9ef6	2354	Bresternica
-00050000-5539-ef77-3b62-7873e7eadb13	4243	Brezje
-00050000-5539-ef77-13fe-ef33b7cf5422	1351	Brezovica pri Ljubljani
-00050000-5539-ef77-00da-a7154b7c1466	8250	Brežice
-00050000-5539-ef77-0f00-cf6787136e9f	4210	Brnik - Aerodrom
-00050000-5539-ef77-f0ce-023e95a99881	8321	Brusnice
-00050000-5539-ef77-3e6b-3fded02c0e19	3255	Buče
-00050000-5539-ef77-3bf1-eea7a2600ff5	8276	Bučka 
-00050000-5539-ef77-4159-85335548098c	9261	Cankova
-00050000-5539-ef77-dc5d-381c82f5b21a	3000	Celje 
-00050000-5539-ef77-c9a5-60860aa705ec	3001	Celje - poštni predali
-00050000-5539-ef77-f7e4-56d62fd756f7	4207	Cerklje na Gorenjskem
-00050000-5539-ef77-b6cc-62e2e9eeabaa	8263	Cerklje ob Krki
-00050000-5539-ef77-d11c-8006239893a8	1380	Cerknica
-00050000-5539-ef77-b946-15aa6f6e93f2	5282	Cerkno
-00050000-5539-ef77-399d-8803b1cda8ac	2236	Cerkvenjak
-00050000-5539-ef77-5a06-c86a0a893f3a	2215	Ceršak
-00050000-5539-ef77-a20b-2c8220ad5ec1	2326	Cirkovce
-00050000-5539-ef77-d84d-1dc4d722ff2a	2282	Cirkulane
-00050000-5539-ef77-336e-c32a8a001662	5273	Col
-00050000-5539-ef77-2888-daf82af7bd9c	8251	Čatež ob Savi
-00050000-5539-ef77-fb21-f55fb585181a	1413	Čemšenik
-00050000-5539-ef77-8887-d2fc85402542	5253	Čepovan
-00050000-5539-ef77-c798-3a2a86199f26	9232	Črenšovci
-00050000-5539-ef77-be7a-044058277858	2393	Črna na Koroškem
-00050000-5539-ef77-1d4b-cebb20e1fced	6275	Črni Kal
-00050000-5539-ef77-219e-54794ab9f56b	5274	Črni Vrh nad Idrijo
-00050000-5539-ef77-bf87-9f6487c95152	5262	Črniče
-00050000-5539-ef77-7491-49b7921c4a10	8340	Črnomelj
-00050000-5539-ef77-e9e6-0c93af7df167	6271	Dekani
-00050000-5539-ef77-39eb-13dc1e7fa170	5210	Deskle
-00050000-5539-ef77-1ce3-da1a9b364b86	2253	Destrnik
-00050000-5539-ef77-211c-adcfa1698063	6215	Divača
-00050000-5539-ef77-90c9-c65c96afe3d5	1233	Dob
-00050000-5539-ef77-92dc-2cd4c74d990c	3224	Dobje pri Planini
-00050000-5539-ef77-21e6-39ff4dc1433c	8257	Dobova
-00050000-5539-ef77-4fbc-3186f381b74c	1423	Dobovec
-00050000-5539-ef77-bdb1-1e934a55efe1	5263	Dobravlje
-00050000-5539-ef77-0bdf-5fe83d9e7c9f	3204	Dobrna
-00050000-5539-ef77-b467-2d711a9df86f	8211	Dobrnič
-00050000-5539-ef77-9cf0-8a5f729be3b8	1356	Dobrova
-00050000-5539-ef77-d6a4-617f4930e06b	9223	Dobrovnik/Dobronak 
-00050000-5539-ef77-c277-bcadfc81f720	5212	Dobrovo v Brdih
-00050000-5539-ef77-586a-08655a45693c	1431	Dol pri Hrastniku
-00050000-5539-ef77-3b44-770c527f1593	1262	Dol pri Ljubljani
-00050000-5539-ef77-2b21-4ea24dc1fd44	1273	Dole pri Litiji
-00050000-5539-ef77-311e-b7e4bbdde05e	1331	Dolenja vas
-00050000-5539-ef77-e9c1-a3d7b69dfa23	8350	Dolenjske Toplice
-00050000-5539-ef77-d59f-0e4c9e3d1da1	1230	Domžale
-00050000-5539-ef77-c6b5-aad2db41db1a	2252	Dornava
-00050000-5539-ef77-5fa2-9824b874d128	5294	Dornberk
-00050000-5539-ef77-60f5-ee1191279d17	1319	Draga
-00050000-5539-ef77-65a7-dde0cc8eef2c	8343	Dragatuš
-00050000-5539-ef77-ce32-ce07dab35c42	3222	Dramlje
-00050000-5539-ef77-1764-a63707e186bb	2370	Dravograd
-00050000-5539-ef77-1bd4-8ba41b02203d	4203	Duplje
-00050000-5539-ef77-8f76-c948ed14082a	6221	Dutovlje
-00050000-5539-ef77-ce99-4f5f83193e57	8361	Dvor
-00050000-5539-ef77-2026-a9a5d69007c7	2343	Fala
-00050000-5539-ef77-a640-ffb00081f733	9208	Fokovci
-00050000-5539-ef77-212f-79dfb89a055d	2313	Fram
-00050000-5539-ef77-7582-6821cc4fe95c	3213	Frankolovo
-00050000-5539-ef77-ac2c-96f73bc47c57	1274	Gabrovka
-00050000-5539-ef77-0bbf-3336f2731b7a	8254	Globoko
-00050000-5539-ef77-5582-497baee281b0	5275	Godovič
-00050000-5539-ef77-a336-11a5dd7c2af4	4204	Golnik
-00050000-5539-ef77-6ed8-aca6328d681f	3303	Gomilsko
-00050000-5539-ef77-27cc-4cc335bb9480	4224	Gorenja vas
-00050000-5539-ef77-560c-447334bba260	3263	Gorica pri Slivnici
-00050000-5539-ef77-b1da-e93182e59543	2272	Gorišnica
-00050000-5539-ef77-7b1d-104ad343b5d4	9250	Gornja Radgona
-00050000-5539-ef77-573f-404bd7126884	3342	Gornji Grad
-00050000-5539-ef77-e3ef-7232312f1e2e	4282	Gozd Martuljek
-00050000-5539-ef77-e9ed-24627060e7f0	6272	Gračišče
-00050000-5539-ef77-9dc6-d96bd64543d8	9264	Grad
-00050000-5539-ef77-9764-e16d98c361df	8332	Gradac
-00050000-5539-ef77-7b50-daaad9d84a3d	1384	Grahovo
-00050000-5539-ef77-24a3-4d2926e50692	5242	Grahovo ob Bači
-00050000-5539-ef77-6eb8-fcb86742acdb	5251	Grgar
-00050000-5539-ef77-95f5-58bf6242e52c	3302	Griže
-00050000-5539-ef77-972a-041dc68b0c1d	3231	Grobelno
-00050000-5539-ef77-5af0-1538dd66cecc	1290	Grosuplje
-00050000-5539-ef77-d862-9464f35d1435	2288	Hajdina
-00050000-5539-ef77-5374-646bf257e608	8362	Hinje
-00050000-5539-ef77-7ea8-ed9e139b3fd8	2311	Hoče
-00050000-5539-ef77-3fbd-23296672badd	9205	Hodoš/Hodos
-00050000-5539-ef77-96b5-7b0c8350a608	1354	Horjul
-00050000-5539-ef77-963a-e905db6d3dd0	1372	Hotedršica
-00050000-5539-ef77-ed9c-70270dc4f9ae	1430	Hrastnik
-00050000-5539-ef77-df4c-64230249acf7	6225	Hruševje
-00050000-5539-ef77-ea6f-09f6a2f9a7c6	4276	Hrušica
-00050000-5539-ef77-b7a1-ae9f1139e49b	5280	Idrija
-00050000-5539-ef77-a00b-c552a32271f4	1292	Ig
-00050000-5539-ef77-84aa-1637db030dc4	6250	Ilirska Bistrica
-00050000-5539-ef77-326c-033ffbc496af	6251	Ilirska Bistrica-Trnovo
-00050000-5539-ef77-f0e7-8b1426ac969c	1295	Ivančna Gorica
-00050000-5539-ef77-ba2f-c2f48a900db9	2259	Ivanjkovci
-00050000-5539-ef77-c2e2-51fe1c7365dd	1411	Izlake
-00050000-5539-ef77-b0f2-a3f6865f8fa0	6310	Izola/Isola
-00050000-5539-ef77-3d99-41105b6ee48e	2222	Jakobski Dol
-00050000-5539-ef77-f5ee-9578f20acfea	2221	Jarenina
-00050000-5539-ef77-6268-0e906bed1dad	6254	Jelšane
-00050000-5539-ef77-e17f-52ed31206af4	4270	Jesenice
-00050000-5539-ef77-e2ce-553b20d73e26	8261	Jesenice na Dolenjskem
-00050000-5539-ef77-74a2-60d3b8f78564	3273	Jurklošter
-00050000-5539-ef77-382f-151c55d00ea8	2223	Jurovski Dol
-00050000-5539-ef77-11b6-c9e2eee2866e	2256	Juršinci
-00050000-5539-ef77-2bbf-4405799cd1c0	5214	Kal nad Kanalom
-00050000-5539-ef77-41e8-8112490a4df5	3233	Kalobje
-00050000-5539-ef77-78a6-91010abb6656	4246	Kamna Gorica
-00050000-5539-ef77-7f34-2584be4e1e70	2351	Kamnica
-00050000-5539-ef77-f627-af95898d78c3	1241	Kamnik
-00050000-5539-ef77-5bf4-c50205f96991	5213	Kanal
-00050000-5539-ef77-51b5-af68d96c4e9a	8258	Kapele
-00050000-5539-ef77-f359-0ea841803ad1	2362	Kapla
-00050000-5539-ef77-06f3-0ae971458875	2325	Kidričevo
-00050000-5539-ef77-e703-3e696e56d82c	1412	Kisovec
-00050000-5539-ef77-7221-e19da290cd2c	6253	Knežak
-00050000-5539-ef77-7c8a-62804fb8838e	5222	Kobarid
-00050000-5539-ef77-e1d7-7ab1b6040544	9227	Kobilje
-00050000-5539-ef77-41f9-f8515a474793	1330	Kočevje
-00050000-5539-ef77-f194-19ceed152c03	1338	Kočevska Reka
-00050000-5539-ef77-5586-3704a95dfe32	2276	Kog
-00050000-5539-ef77-ee7b-4cad97cfb436	5211	Kojsko
-00050000-5539-ef77-6abb-d3f05801e849	6223	Komen
-00050000-5539-ef77-295a-f340e1b38fe8	1218	Komenda
-00050000-5539-ef77-6161-a13ac51c1d3a	6000	Koper/Capodistria 
-00050000-5539-ef77-bd24-e42935568dba	6001	Koper/Capodistria - poštni predali
-00050000-5539-ef77-f9fe-72449b2bb760	8282	Koprivnica
-00050000-5539-ef77-793f-188b3fb41213	5296	Kostanjevica na Krasu
-00050000-5539-ef77-5445-aacb31fdbd10	8311	Kostanjevica na Krki
-00050000-5539-ef77-564f-1e2df505d1ff	1336	Kostel
-00050000-5539-ef77-3a73-1d2a1c46069b	6256	Košana
-00050000-5539-ef77-41dd-865f863992c3	2394	Kotlje
-00050000-5539-ef77-30d7-340a5bbb1b9f	6240	Kozina
-00050000-5539-ef77-ec67-e014904d06eb	3260	Kozje
-00050000-5539-ef77-ddc2-01b25d1a4cc5	4000	Kranj 
-00050000-5539-ef77-3dbb-6b26927a882c	4001	Kranj - poštni predali
-00050000-5539-ef77-8f81-b37664a7d791	4280	Kranjska Gora
-00050000-5539-ef77-0a51-36fbe70e00ad	1281	Kresnice
-00050000-5539-ef77-732b-07049498a445	4294	Križe
-00050000-5539-ef77-56c4-16ab47444f41	9206	Križevci
-00050000-5539-ef77-5cb4-a4f8546aed9c	9242	Križevci pri Ljutomeru
-00050000-5539-ef77-caa2-7d69a7502ecb	1301	Krka
-00050000-5539-ef77-7da3-54eda4f6525c	8296	Krmelj
-00050000-5539-ef77-3384-7fe37a45c1a4	4245	Kropa
-00050000-5539-ef77-b7c2-751da48d581d	8262	Krška vas
-00050000-5539-ef77-9bf1-08a7e11472c0	8270	Krško
-00050000-5539-ef77-99ae-1a432a9bbf31	9263	Kuzma
-00050000-5539-ef77-55b0-ca7efa0ec8b8	2318	Laporje
-00050000-5539-ef77-f0ec-782462ee4ddb	3270	Laško
-00050000-5539-ef77-16bc-790130c8d4db	1219	Laze v Tuhinju
-00050000-5539-ef77-8b5b-4b578ebd0b54	2230	Lenart v Slovenskih goricah
-00050000-5539-ef77-1f8b-b4dc34202a50	9220	Lendava/Lendva
-00050000-5539-ef77-2864-e8a7d6c30740	4248	Lesce
-00050000-5539-ef77-b088-03d91332c4de	3261	Lesično
-00050000-5539-ef77-205c-12b987ba350d	8273	Leskovec pri Krškem
-00050000-5539-ef77-af1d-42cae55f9dff	2372	Libeliče
-00050000-5539-ef77-15cd-276bc85c6baa	2341	Limbuš
-00050000-5539-ef77-56b2-28e8bfee0330	1270	Litija
-00050000-5539-ef77-eb90-8887bd1e9be6	3202	Ljubečna
-00050000-5539-ef77-5b43-72bb0093cfd3	1000	Ljubljana 
-00050000-5539-ef77-262d-2cc8c5b56972	1001	Ljubljana - poštni predali
-00050000-5539-ef77-a212-23dbc06e1f2c	1231	Ljubljana - Črnuče
-00050000-5539-ef77-5447-0f9682b2211f	1261	Ljubljana - Dobrunje
-00050000-5539-ef77-42f8-277990c87362	1260	Ljubljana - Polje
-00050000-5539-ef77-82cd-f4195d69c354	1210	Ljubljana - Šentvid
-00050000-5539-ef77-f3af-f8328ba17a87	1211	Ljubljana - Šmartno
-00050000-5539-ef77-5d85-f8a346e81f1b	3333	Ljubno ob Savinji
-00050000-5539-ef77-93f7-cb766c2fba7b	9240	Ljutomer
-00050000-5539-ef77-aaf3-6dd1009a1d3b	3215	Loče
-00050000-5539-ef77-d834-63de06c2bbaf	5231	Log pod Mangartom
-00050000-5539-ef77-3048-27cb7ee1940b	1358	Log pri Brezovici
-00050000-5539-ef77-9370-c8cbbe2ac361	1370	Logatec
-00050000-5539-ef77-d646-9bba861102e0	1371	Logatec
-00050000-5539-ef77-7b95-90f9be6c929e	1434	Loka pri Zidanem Mostu
-00050000-5539-ef77-fa53-370281115198	3223	Loka pri Žusmu
-00050000-5539-ef77-29c3-a9bdaa19262d	6219	Lokev
-00050000-5539-ef77-6109-e59e15139d50	1318	Loški Potok
-00050000-5539-ef77-0178-275cceb09c4e	2324	Lovrenc na Dravskem polju
-00050000-5539-ef77-0f4d-8cb873d9ff7b	2344	Lovrenc na Pohorju
-00050000-5539-ef77-8d13-69c13a43786e	3334	Luče
-00050000-5539-ef77-e997-527cc537080d	1225	Lukovica
-00050000-5539-ef77-b898-f745fe87edd3	9202	Mačkovci
-00050000-5539-ef77-207a-7535b590fb67	2322	Majšperk
-00050000-5539-ef77-7242-a596ea833da4	2321	Makole
-00050000-5539-ef77-bb21-b4c5f38fb236	9243	Mala Nedelja
-00050000-5539-ef77-ebca-17714936c9c8	2229	Malečnik
-00050000-5539-ef77-91a7-57ac2d60abd1	6273	Marezige
-00050000-5539-ef77-0613-425ec4bd582a	2000	Maribor 
-00050000-5539-ef77-aab7-19377f84e6d5	2001	Maribor - poštni predali
-00050000-5539-ef77-dadb-d487caead93d	2206	Marjeta na Dravskem polju
-00050000-5539-ef77-45e9-0260de176d3e	2281	Markovci
-00050000-5539-ef77-45a5-b3ef5a0f1870	9221	Martjanci
-00050000-5539-ef77-9e1f-42b8becce535	6242	Materija
-00050000-5539-ef77-c805-e82973ab931c	4211	Mavčiče
-00050000-5539-ef77-965a-f19ff21b4477	1215	Medvode
-00050000-5539-ef77-018e-dc468a680503	1234	Mengeš
-00050000-5539-ef77-db5e-c420e016818f	8330	Metlika
-00050000-5539-ef77-d1e4-aefdc3bcc2af	2392	Mežica
-00050000-5539-ef77-7057-15142d593fa0	2204	Miklavž na Dravskem polju
-00050000-5539-ef77-5ecf-c2fc7e9f1146	2275	Miklavž pri Ormožu
-00050000-5539-ef77-1667-8517d8689db5	5291	Miren
-00050000-5539-ef77-2b14-e77e94de0a49	8233	Mirna
-00050000-5539-ef77-63a8-9852276689c0	8216	Mirna Peč
-00050000-5539-ef77-d7ba-d9242f2d9112	2382	Mislinja
-00050000-5539-ef77-97ec-1ab607837569	4281	Mojstrana
-00050000-5539-ef77-7651-ce62058689d8	8230	Mokronog
-00050000-5539-ef77-913f-2127b6544b6b	1251	Moravče
-00050000-5539-ef77-9639-b6e05ec9206b	9226	Moravske Toplice
-00050000-5539-ef77-00b5-3a66a70feb3c	5216	Most na Soči
-00050000-5539-ef77-0b0e-0d1d9574b98d	1221	Motnik
-00050000-5539-ef77-bf67-c1ef6bf699ab	3330	Mozirje
-00050000-5539-ef77-0846-849580b1880d	9000	Murska Sobota 
-00050000-5539-ef77-904f-f7277c972850	9001	Murska Sobota - poštni predali
-00050000-5539-ef77-c917-ce684e000af8	2366	Muta
-00050000-5539-ef77-8602-ea14bbf121b2	4202	Naklo
-00050000-5539-ef77-e5e8-b69f24dee1f6	3331	Nazarje
-00050000-5539-ef77-7027-f47c656adf4f	1357	Notranje Gorice
-00050000-5539-ef77-dc88-e730a3f6d13b	3203	Nova Cerkev
-00050000-5539-ef77-04de-86ba42ed6fcc	5000	Nova Gorica 
-00050000-5539-ef77-46f1-96cf8136cc42	5001	Nova Gorica - poštni predali
-00050000-5539-ef77-3811-bd5a1a66f763	1385	Nova vas
-00050000-5539-ef77-22b1-6e81a8ebfede	8000	Novo mesto
-00050000-5539-ef77-6b8d-17fd94b7c38c	8001	Novo mesto - poštni predali
-00050000-5539-ef77-a2ff-50cb266e9eac	6243	Obrov
-00050000-5539-ef77-0ccc-c0ea685c334d	9233	Odranci
-00050000-5539-ef77-a54d-a555c624765a	2317	Oplotnica
-00050000-5539-ef77-6e9b-a8f542a796b8	2312	Orehova vas
-00050000-5539-ef77-c0ad-3e0057418847	2270	Ormož
-00050000-5539-ef77-4cfb-bee6eeb668c1	1316	Ortnek
-00050000-5539-ef77-e045-69445a1736aa	1337	Osilnica
-00050000-5539-ef77-91ff-f8586f90eb66	8222	Otočec
-00050000-5539-ef77-d99d-078fd613b5bd	2361	Ožbalt
-00050000-5539-ef77-0122-aaefd1f7471a	2231	Pernica
-00050000-5539-ef77-e439-18da998b875f	2211	Pesnica pri Mariboru
-00050000-5539-ef77-45e1-243600713cd9	9203	Petrovci
-00050000-5539-ef77-c1b0-2b70f5429b9e	3301	Petrovče
-00050000-5539-ef77-37d4-1309227daf8d	6330	Piran/Pirano
-00050000-5539-ef77-ad64-58156bd57197	8255	Pišece
-00050000-5539-ef77-3810-f823a302882c	6257	Pivka
-00050000-5539-ef77-f550-f674588b800f	6232	Planina
-00050000-5539-ef77-7429-cff2a8e9c4a9	3225	Planina pri Sevnici
-00050000-5539-ef77-f4fe-968541d680b1	6276	Pobegi
-00050000-5539-ef77-9c32-bdc346dbfd04	8312	Podbočje
-00050000-5539-ef77-7e17-8c9596300c0f	5243	Podbrdo
-00050000-5539-ef77-1089-5929fd6dab07	3254	Podčetrtek
-00050000-5539-ef77-5d4c-abfc62dba607	2273	Podgorci
-00050000-5539-ef77-275c-f46c87fae9a3	6216	Podgorje
-00050000-5539-ef77-1dee-eb92e698d0dd	2381	Podgorje pri Slovenj Gradcu
-00050000-5539-ef77-6bc4-c1fe36a08068	6244	Podgrad
-00050000-5539-ef77-0f63-aa4148307c8a	1414	Podkum
-00050000-5539-ef77-0a3b-533d64250690	2286	Podlehnik
-00050000-5539-ef77-e522-31b431771d21	5272	Podnanos
-00050000-5539-ef77-a04d-78842b2d9ac2	4244	Podnart
-00050000-5539-ef77-76da-5324a487085e	3241	Podplat
-00050000-5539-ef77-d4ed-de06ae2bae08	3257	Podsreda
-00050000-5539-ef77-9e42-727239d9ec2d	2363	Podvelka
-00050000-5539-ef77-dfec-254a2008f5a8	2208	Pohorje
-00050000-5539-ef77-6ce1-a04c17a33955	2257	Polenšak
-00050000-5539-ef77-aba6-fd3613ef05d0	1355	Polhov Gradec
-00050000-5539-ef77-fc11-5619fbcd1b52	4223	Poljane nad Škofjo Loko
-00050000-5539-ef77-01d9-c461e80ac184	2319	Poljčane
-00050000-5539-ef77-3054-2f4782b6ef74	1272	Polšnik
-00050000-5539-ef77-7749-e2b4394a4615	3313	Polzela
-00050000-5539-ef77-7c8f-688fee6367ce	3232	Ponikva
-00050000-5539-ef77-a9dc-12316a5fc18b	6320	Portorož/Portorose
-00050000-5539-ef77-c95d-5ebdc63cfa4f	6230	Postojna
-00050000-5539-ef77-7e4a-96e35665a4b1	2331	Pragersko
-00050000-5539-ef77-9ecd-ec85072761dd	3312	Prebold
-00050000-5539-ef77-fbce-44e8936adbd9	4205	Preddvor
-00050000-5539-ef77-c89d-9b04905a7fcc	6255	Prem
-00050000-5539-ef77-aec1-234bb6034d35	1352	Preserje
-00050000-5539-ef77-a93b-f3ab55900683	6258	Prestranek
-00050000-5539-ef77-61e4-d9aa62199af5	2391	Prevalje
-00050000-5539-ef77-96ac-d5bbb82a3e0c	3262	Prevorje
-00050000-5539-ef77-9f53-1d0e4864ef72	1276	Primskovo 
-00050000-5539-ef77-97a4-f6077f3fc6d2	3253	Pristava pri Mestinju
-00050000-5539-ef77-a192-9c8cf16735ee	9207	Prosenjakovci/Partosfalva
-00050000-5539-ef77-3851-fe796b45201d	5297	Prvačina
-00050000-5539-ef77-948f-20b727af2f29	2250	Ptuj
-00050000-5539-ef77-ca8b-05110873bb33	2323	Ptujska Gora
-00050000-5539-ef77-629b-46425399a9c7	9201	Puconci
-00050000-5539-ef77-d74e-bfe605eb2c0b	2327	Rače
-00050000-5539-ef77-a166-f296660e36c9	1433	Radeče
-00050000-5539-ef77-5f38-c90e90bf87a1	9252	Radenci
-00050000-5539-ef77-42bc-7e6955092635	2360	Radlje ob Dravi
-00050000-5539-ef77-dcb3-cf06ca35d89a	1235	Radomlje
-00050000-5539-ef77-e208-cb2c95df5b9c	4240	Radovljica
-00050000-5539-ef77-76ea-2aa2dd8b6978	8274	Raka
-00050000-5539-ef77-82d6-e4cc27c47ab4	1381	Rakek
-00050000-5539-ef77-8ae6-6bf91d87a3e9	4283	Rateče - Planica
-00050000-5539-ef77-74ec-193cc6aa9070	2390	Ravne na Koroškem
-00050000-5539-ef77-d6dc-7cd1b84e9a88	9246	Razkrižje
-00050000-5539-ef77-cea1-1c6f2bbd856a	3332	Rečica ob Savinji
-00050000-5539-ef77-5d29-53109a3cddbc	5292	Renče
-00050000-5539-ef77-ffaf-7d756782165c	1310	Ribnica
-00050000-5539-ef77-5675-0794d1e774e8	2364	Ribnica na Pohorju
-00050000-5539-ef77-d73a-f8ae6ef55efc	3272	Rimske Toplice
-00050000-5539-ef77-b988-4fdf9986932e	1314	Rob
-00050000-5539-ef77-4858-15cfb684f3c8	5215	Ročinj
-00050000-5539-ef77-efd7-020ecc6ca68e	3250	Rogaška Slatina
-00050000-5539-ef77-1b2a-a3ca28c8a5c2	9262	Rogašovci
-00050000-5539-ef77-aad6-57d994c4c2b6	3252	Rogatec
-00050000-5539-ef77-1477-24ea53ce6968	1373	Rovte
-00050000-5539-ef77-2302-7e0cb919fa4a	2342	Ruše
-00050000-5539-ef77-fb48-d8a687ca6cfe	1282	Sava
-00050000-5539-ef77-af84-791f0ef152db	6333	Sečovlje/Sicciole
-00050000-5539-ef77-48cc-a94e91ed573a	4227	Selca
-00050000-5539-ef77-828a-88210f28835d	2352	Selnica ob Dravi
-00050000-5539-ef77-3d21-959983aa1424	8333	Semič
-00050000-5539-ef77-dd81-5aa933b48d71	8281	Senovo
-00050000-5539-ef77-d2e1-ff91db64490d	6224	Senožeče
-00050000-5539-ef77-6549-6f95da40df13	8290	Sevnica
-00050000-5539-ef77-661c-b2534e2a7edd	6210	Sežana
-00050000-5539-ef77-fdf8-9c5cb68ed6bb	2214	Sladki Vrh
-00050000-5539-ef77-0f27-c3970d29d65f	5283	Slap ob Idrijci
-00050000-5539-ef77-2983-a115943c8255	2380	Slovenj Gradec
-00050000-5539-ef77-4c78-50300040183b	2310	Slovenska Bistrica
-00050000-5539-ef77-b562-345ea4409958	3210	Slovenske Konjice
-00050000-5539-ef77-bf56-a60767bef9fb	1216	Smlednik
-00050000-5539-ef77-3761-1d8e1c4b04b0	5232	Soča
-00050000-5539-ef77-b8eb-2e63e34f9d3c	1317	Sodražica
-00050000-5539-ef77-c817-d3857e149cd3	3335	Solčava
-00050000-5539-ef77-87fd-4e205dae3adc	5250	Solkan
-00050000-5539-ef77-b544-39e5ce925dd9	4229	Sorica
-00050000-5539-ef77-9673-f7dcfb32213c	4225	Sovodenj
-00050000-5539-ef77-1852-1bd9695dd465	5281	Spodnja Idrija
-00050000-5539-ef77-2086-4130809c51a6	2241	Spodnji Duplek
-00050000-5539-ef77-4e77-92e2f3246f96	9245	Spodnji Ivanjci
-00050000-5539-ef77-26ab-3c9d480714b4	2277	Središče ob Dravi
-00050000-5539-ef77-fa08-60dc59638777	4267	Srednja vas v Bohinju
-00050000-5539-ef77-b07f-90e3940ba56a	8256	Sromlje 
-00050000-5539-ef77-c28f-580a3c8e8ac1	5224	Srpenica
-00050000-5539-ef77-c363-2cbc4922b4f5	1242	Stahovica
-00050000-5539-ef77-3b4b-4fac3d61e0c6	1332	Stara Cerkev
-00050000-5539-ef77-5fa3-6719684f6e60	8342	Stari trg ob Kolpi
-00050000-5539-ef77-2857-a47aa7efa2b7	1386	Stari trg pri Ložu
-00050000-5539-ef77-4273-249e22824785	2205	Starše
-00050000-5539-ef77-14c9-29222e37f44e	2289	Stoperce
-00050000-5539-ef77-3f99-f14ff756e1da	8322	Stopiče
-00050000-5539-ef77-5331-9a52451edbbb	3206	Stranice
-00050000-5539-ef77-9e5a-2fda83448fed	8351	Straža
-00050000-5539-ef77-d0a4-1d2dc47b2cb2	1313	Struge
-00050000-5539-ef77-dba4-3d095541e3bc	8293	Studenec
-00050000-5539-ef77-a48c-ed4441150947	8331	Suhor
-00050000-5539-ef77-404a-555ee3fc1c23	2233	Sv. Ana v Slovenskih goricah
-00050000-5539-ef77-da6c-331c13c61b77	2235	Sv. Trojica v Slovenskih goricah
-00050000-5539-ef77-8e5e-fcd29ed4f81c	2353	Sveti Duh na Ostrem Vrhu
-00050000-5539-ef77-88e5-86298cd08295	9244	Sveti Jurij ob Ščavnici
-00050000-5539-ef77-0e19-fcc5972bf27c	3264	Sveti Štefan
-00050000-5539-ef77-35ca-a2b83b2328db	2258	Sveti Tomaž
-00050000-5539-ef77-3f9d-0d7215dc67de	9204	Šalovci
-00050000-5539-ef77-2a31-536f1f569ffd	5261	Šempas
-00050000-5539-ef77-b738-9eb65230ff62	5290	Šempeter pri Gorici
-00050000-5539-ef77-8779-61582da2780e	3311	Šempeter v Savinjski dolini
-00050000-5539-ef77-b058-d976524c9f92	4208	Šenčur
-00050000-5539-ef77-f09c-a72f97d51386	2212	Šentilj v Slovenskih goricah
-00050000-5539-ef77-9d3f-552e5313f01d	8297	Šentjanž
-00050000-5539-ef77-2ef6-f859826ff655	2373	Šentjanž pri Dravogradu
-00050000-5539-ef77-cc63-31587fe3df0c	8310	Šentjernej
-00050000-5539-ef77-5f6e-1a7630921e78	3230	Šentjur
-00050000-5539-ef77-67cf-0a02aa1a6fcf	3271	Šentrupert
-00050000-5539-ef77-2152-d4f3a1aa2596	8232	Šentrupert
-00050000-5539-ef77-89ff-e3f550da545e	1296	Šentvid pri Stični
-00050000-5539-ef77-7d70-6671c9500873	8275	Škocjan
-00050000-5539-ef77-e662-99c75f5e1f22	6281	Škofije
-00050000-5539-ef77-8634-8580dcd3da44	4220	Škofja Loka
-00050000-5539-ef77-058a-efebcf81b02f	3211	Škofja vas
-00050000-5539-ef77-783f-60d0bec44100	1291	Škofljica
-00050000-5539-ef77-892e-07faa8366081	6274	Šmarje
-00050000-5539-ef77-58d3-5342e89bea0a	1293	Šmarje - Sap
-00050000-5539-ef77-e925-652dbbb2ada2	3240	Šmarje pri Jelšah
-00050000-5539-ef77-4d76-c6106a50af33	8220	Šmarješke Toplice
-00050000-5539-ef77-8eed-b2234d794c70	2315	Šmartno na Pohorju
-00050000-5539-ef77-04a2-370c0c6490ca	3341	Šmartno ob Dreti
-00050000-5539-ef77-7223-0f393cf80653	3327	Šmartno ob Paki
-00050000-5539-ef77-2791-cf21915ee387	1275	Šmartno pri Litiji
-00050000-5539-ef77-3af0-c83ac746292c	2383	Šmartno pri Slovenj Gradcu
-00050000-5539-ef77-860c-5b969d36baef	3201	Šmartno v Rožni dolini
-00050000-5539-ef77-7944-773f927ba175	3325	Šoštanj
-00050000-5539-ef77-faeb-445fbf5fc7ec	6222	Štanjel
-00050000-5539-ef77-d5c2-a20c23194e0a	3220	Štore
-00050000-5539-ef77-6120-1c1139925986	3304	Tabor
-00050000-5539-ef77-c17f-23e533dba32c	3221	Teharje
-00050000-5539-ef77-7eb8-289d30f84e90	9251	Tišina
-00050000-5539-ef77-e086-f70965869b80	5220	Tolmin
-00050000-5539-ef77-7ce1-382a925e3faf	3326	Topolšica
-00050000-5539-ef77-ae46-285608e5e61f	2371	Trbonje
-00050000-5539-ef77-d221-efe3b2d8e0e1	1420	Trbovlje
-00050000-5539-ef77-b89e-a35f600990e1	8231	Trebelno 
-00050000-5539-ef77-13df-1268969c0d4e	8210	Trebnje
-00050000-5539-ef77-08fa-828f0dfe94af	5252	Trnovo pri Gorici
-00050000-5539-ef77-2ae5-1a4415621e68	2254	Trnovska vas
-00050000-5539-ef77-4e49-565ec071d1a1	1222	Trojane
-00050000-5539-ef77-5e6a-11391b5e6150	1236	Trzin
-00050000-5539-ef77-8358-31ea88232fd6	4290	Tržič
-00050000-5539-ef77-5b4f-fe3bbf177621	8295	Tržišče
-00050000-5539-ef77-0cbb-3b07af17791c	1311	Turjak
-00050000-5539-ef77-b159-de688a9884ac	9224	Turnišče
-00050000-5539-ef77-b990-e52a822060ea	8323	Uršna sela
-00050000-5539-ef77-5873-1bea9a813418	1252	Vače
-00050000-5539-ef77-01c9-2d017b208cf7	3320	Velenje 
-00050000-5539-ef77-02fa-40502449dd5f	3322	Velenje - poštni predali
-00050000-5539-ef77-aca1-a3b58679cb5a	8212	Velika Loka
-00050000-5539-ef77-04b5-a30393f3b406	2274	Velika Nedelja
-00050000-5539-ef77-b438-4eceaf3378dd	9225	Velika Polana
-00050000-5539-ef77-37a3-0152f2eb3ac4	1315	Velike Lašče
-00050000-5539-ef77-60aa-05cecf2fa119	8213	Veliki Gaber
-00050000-5539-ef77-8e59-a1fd36cc4d6f	9241	Veržej
-00050000-5539-ef77-3e14-d217afbe3d42	1312	Videm - Dobrepolje
-00050000-5539-ef77-eabd-32dd4dffa6db	2284	Videm pri Ptuju
-00050000-5539-ef77-d55a-2f11156fe7ef	8344	Vinica
-00050000-5539-ef77-c2a9-3d3ff13c5c7b	5271	Vipava
-00050000-5539-ef77-819c-a0733ba1f7e7	4212	Visoko
-00050000-5539-ef77-59d6-441e68fcc5f2	1294	Višnja Gora
-00050000-5539-ef77-3461-918d35d90fe5	3205	Vitanje
-00050000-5539-ef77-f46d-0374821a6978	2255	Vitomarci
-00050000-5539-ef77-efec-29cb7655f7b9	1217	Vodice
-00050000-5539-ef77-8fe6-a379d157da8f	3212	Vojnik\t
-00050000-5539-ef77-7a1e-8bb36b19b5e6	5293	Volčja Draga
-00050000-5539-ef77-432a-f95c024d732d	2232	Voličina
-00050000-5539-ef77-b175-c737ec06df9f	3305	Vransko
-00050000-5539-ef77-bec2-c34eb5944717	6217	Vremski Britof
-00050000-5539-ef77-50a7-ee604aeeecf0	1360	Vrhnika
-00050000-5539-ef77-9496-1efba9c105c9	2365	Vuhred
-00050000-5539-ef77-9b65-e04735c61629	2367	Vuzenica
-00050000-5539-ef77-de7b-3508512b6e96	8292	Zabukovje 
-00050000-5539-ef77-4765-ed18a63938e9	1410	Zagorje ob Savi
-00050000-5539-ef77-12b0-bae3e3c8095e	1303	Zagradec
-00050000-5539-ef77-ea45-98e335cbe507	2283	Zavrč
-00050000-5539-ef77-9956-507a50ad9cd0	8272	Zdole 
-00050000-5539-ef77-5cf0-520d8e819a2b	4201	Zgornja Besnica
-00050000-5539-ef77-5331-46bac6c056b2	2242	Zgornja Korena
-00050000-5539-ef77-dc54-2134b23777f5	2201	Zgornja Kungota
-00050000-5539-ef77-c1fc-70ace8dcfb0a	2316	Zgornja Ložnica
-00050000-5539-ef77-1853-007ec4527c6b	2314	Zgornja Polskava
-00050000-5539-ef77-47f3-9ff38e3497cd	2213	Zgornja Velka
-00050000-5539-ef77-147e-b74f5a6a4c75	4247	Zgornje Gorje
-00050000-5539-ef77-a1da-18187226d5ae	4206	Zgornje Jezersko
-00050000-5539-ef77-966d-a3e92b01612e	2285	Zgornji Leskovec
-00050000-5539-ef77-04f5-a787640fc705	1432	Zidani Most
-00050000-5539-ef77-2f74-777bdd5d79bb	3214	Zreče
-00050000-5539-ef77-2454-8f5a45f9e5c7	4209	Žabnica
-00050000-5539-ef77-9755-75da373068e2	3310	Žalec
-00050000-5539-ef77-5359-a883d30f32b6	4228	Železniki
-00050000-5539-ef77-3899-66e240b278dd	2287	Žetale
-00050000-5539-ef77-a80c-190b26247f78	4226	Žiri
-00050000-5539-ef77-8881-c49813c9cff9	4274	Žirovnica
-00050000-5539-ef77-7a44-6c9c56fdf5ac	8360	Žužemberk
+00050000-553a-177d-caa9-a43b319eef1c	8341	Adlešiči
+00050000-553a-177d-7895-2683ca907cf1	5270	Ajdovščina
+00050000-553a-177d-ef70-eb1f9b59aa89	6280	Ankaran/Ancarano
+00050000-553a-177d-fb19-cfc3660f3db5	9253	Apače
+00050000-553a-177d-339c-b9bc2c24279c	8253	Artiče
+00050000-553a-177d-b650-903cabe18146	4275	Begunje na Gorenjskem
+00050000-553a-177d-8b70-c7cb60c03a6c	1382	Begunje pri Cerknici
+00050000-553a-177d-9a75-b80a12194cee	9231	Beltinci
+00050000-553a-177d-8116-294e34029b5e	2234	Benedikt
+00050000-553a-177d-3358-dbbcc4d042e6	2345	Bistrica ob Dravi
+00050000-553a-177d-687e-b079901fc7f0	3256	Bistrica ob Sotli
+00050000-553a-177d-4855-252087171db8	8259	Bizeljsko
+00050000-553a-177d-1f1d-5e72d7ca9f31	1223	Blagovica
+00050000-553a-177d-159a-9d225b930742	8283	Blanca
+00050000-553a-177d-f4c0-0f179f277893	4260	Bled
+00050000-553a-177d-8c1e-1b2ea7bfcd80	4273	Blejska Dobrava
+00050000-553a-177d-b978-6d09c5fce0b9	9265	Bodonci
+00050000-553a-177d-9b29-7ada91e382f4	9222	Bogojina
+00050000-553a-177d-47a7-c99ffe81c1fd	4263	Bohinjska Bela
+00050000-553a-177d-2ee7-f27832a51bc8	4264	Bohinjska Bistrica
+00050000-553a-177d-f924-aab980acf760	4265	Bohinjsko jezero
+00050000-553a-177d-5ace-6632ba759715	1353	Borovnica
+00050000-553a-177d-4822-6ebfdc43e167	8294	Boštanj
+00050000-553a-177d-1eff-9adc7e0e9e97	5230	Bovec
+00050000-553a-177d-85bc-cb3acad4df94	5295	Branik
+00050000-553a-177d-d014-9067eab3c176	3314	Braslovče
+00050000-553a-177d-21b2-add72d33b332	5223	Breginj
+00050000-553a-177d-a903-3d618441ab05	8280	Brestanica
+00050000-553a-177d-455e-438b4af83a1c	2354	Bresternica
+00050000-553a-177d-d825-5a4e0bd144db	4243	Brezje
+00050000-553a-177d-b157-5c52d3587662	1351	Brezovica pri Ljubljani
+00050000-553a-177d-a105-022fd1b892df	8250	Brežice
+00050000-553a-177d-5506-de72a6e566f1	4210	Brnik - Aerodrom
+00050000-553a-177d-b646-7ca2a2041e1b	8321	Brusnice
+00050000-553a-177d-b42e-9ad4e7777ac5	3255	Buče
+00050000-553a-177d-9cab-a291dc5edfb0	8276	Bučka 
+00050000-553a-177d-dc35-5a880065c34f	9261	Cankova
+00050000-553a-177d-05fe-06e0e34c5d00	3000	Celje 
+00050000-553a-177d-e1dc-a71084577dd2	3001	Celje - poštni predali
+00050000-553a-177d-c3d4-278f8bd0b2c1	4207	Cerklje na Gorenjskem
+00050000-553a-177d-90e7-7fd2443c7f76	8263	Cerklje ob Krki
+00050000-553a-177d-e40a-a50526f13d23	1380	Cerknica
+00050000-553a-177d-dec2-ac009fde562c	5282	Cerkno
+00050000-553a-177d-bf2e-2823406d8be2	2236	Cerkvenjak
+00050000-553a-177d-fd31-1ad7b0ee1437	2215	Ceršak
+00050000-553a-177d-71fd-e15d68f0e7b0	2326	Cirkovce
+00050000-553a-177d-9d85-04eb8bf27dbe	2282	Cirkulane
+00050000-553a-177d-6ee8-dd5e62ab65af	5273	Col
+00050000-553a-177d-c0a3-d8b9f1a82279	8251	Čatež ob Savi
+00050000-553a-177d-0ae6-f1a84a6bf959	1413	Čemšenik
+00050000-553a-177d-df50-e06f0c011821	5253	Čepovan
+00050000-553a-177d-976a-6a0e95e946a2	9232	Črenšovci
+00050000-553a-177d-0a70-c7f2ddf6d122	2393	Črna na Koroškem
+00050000-553a-177d-4c03-de904f4f828f	6275	Črni Kal
+00050000-553a-177d-8348-8031bad09b7c	5274	Črni Vrh nad Idrijo
+00050000-553a-177d-ef72-cd0c84459a8d	5262	Črniče
+00050000-553a-177d-42a5-ad4da44e7fa0	8340	Črnomelj
+00050000-553a-177d-c3ae-d52f0f444619	6271	Dekani
+00050000-553a-177d-d26b-7029ba22b52d	5210	Deskle
+00050000-553a-177d-4506-cf9f04fef77d	2253	Destrnik
+00050000-553a-177d-b885-9420f96a0af8	6215	Divača
+00050000-553a-177d-49ed-fcf117549c00	1233	Dob
+00050000-553a-177d-e81d-caac104b807b	3224	Dobje pri Planini
+00050000-553a-177d-9fd6-ddc4170fdb95	8257	Dobova
+00050000-553a-177d-1e84-5c3c36672382	1423	Dobovec
+00050000-553a-177d-80fd-4388189b7870	5263	Dobravlje
+00050000-553a-177d-d728-ce3b38e1b3a8	3204	Dobrna
+00050000-553a-177d-4046-425f445a25c0	8211	Dobrnič
+00050000-553a-177d-dab1-f0996781a30c	1356	Dobrova
+00050000-553a-177d-3dfb-b07737e5da06	9223	Dobrovnik/Dobronak 
+00050000-553a-177d-77f1-20a25feb132c	5212	Dobrovo v Brdih
+00050000-553a-177d-b295-4d0118109732	1431	Dol pri Hrastniku
+00050000-553a-177d-a287-b4fcf3cbced6	1262	Dol pri Ljubljani
+00050000-553a-177d-2002-7d37bf83c6d9	1273	Dole pri Litiji
+00050000-553a-177d-12b1-fefc2c312a9d	1331	Dolenja vas
+00050000-553a-177d-12d7-0511dc53f1db	8350	Dolenjske Toplice
+00050000-553a-177d-edd6-8da5f023a7eb	1230	Domžale
+00050000-553a-177d-7b02-fb9deaa9cd97	2252	Dornava
+00050000-553a-177d-e57d-02b0dc5f97a0	5294	Dornberk
+00050000-553a-177d-646c-2288e878c5fd	1319	Draga
+00050000-553a-177d-2382-d6c0175fc345	8343	Dragatuš
+00050000-553a-177d-556f-0886b4f290b3	3222	Dramlje
+00050000-553a-177d-a11f-fad33a43b03e	2370	Dravograd
+00050000-553a-177d-77bf-43ed0821b2cb	4203	Duplje
+00050000-553a-177d-613e-025261c291d3	6221	Dutovlje
+00050000-553a-177d-d795-5bae5da91de0	8361	Dvor
+00050000-553a-177d-c054-8cc32ebda79e	2343	Fala
+00050000-553a-177d-5b97-a22743ee1f0c	9208	Fokovci
+00050000-553a-177d-f85e-b50d2d1174a1	2313	Fram
+00050000-553a-177d-74c2-08b3fbd0e135	3213	Frankolovo
+00050000-553a-177d-7fd4-3531867a4e60	1274	Gabrovka
+00050000-553a-177d-b770-e7c4caca878a	8254	Globoko
+00050000-553a-177d-f005-689261074f93	5275	Godovič
+00050000-553a-177d-251a-87d770ff30fe	4204	Golnik
+00050000-553a-177d-6011-abe296141cea	3303	Gomilsko
+00050000-553a-177d-02db-f0f7d8797606	4224	Gorenja vas
+00050000-553a-177d-8b08-7e31ce71aaf6	3263	Gorica pri Slivnici
+00050000-553a-177d-4612-7c5917b06f80	2272	Gorišnica
+00050000-553a-177d-e530-70d00d8e6c1c	9250	Gornja Radgona
+00050000-553a-177d-9d0a-20d363990b65	3342	Gornji Grad
+00050000-553a-177d-55bb-e9e38a97e595	4282	Gozd Martuljek
+00050000-553a-177d-2c0d-d522c802987f	6272	Gračišče
+00050000-553a-177d-39aa-a037a996893a	9264	Grad
+00050000-553a-177d-3540-f2a8110d4c44	8332	Gradac
+00050000-553a-177d-2a24-1387ceb5a219	1384	Grahovo
+00050000-553a-177d-2758-cc8918bd87f4	5242	Grahovo ob Bači
+00050000-553a-177d-bea8-dff6be5706a7	5251	Grgar
+00050000-553a-177d-a5ef-3f625714b63f	3302	Griže
+00050000-553a-177d-36e8-1008b4b52927	3231	Grobelno
+00050000-553a-177d-8206-cb8c22f7668b	1290	Grosuplje
+00050000-553a-177d-2902-4e680a2d5d3e	2288	Hajdina
+00050000-553a-177d-6b3a-ef22f9f92f39	8362	Hinje
+00050000-553a-177d-8b40-ce8dd01015ec	2311	Hoče
+00050000-553a-177d-2cc7-8c2043d74cfe	9205	Hodoš/Hodos
+00050000-553a-177d-e7c2-c0b285d068e6	1354	Horjul
+00050000-553a-177d-ba95-9744bf4a4112	1372	Hotedršica
+00050000-553a-177d-76b3-fb94a5f4709e	1430	Hrastnik
+00050000-553a-177d-a415-700e94f1c5eb	6225	Hruševje
+00050000-553a-177d-8bcd-18243a49fec6	4276	Hrušica
+00050000-553a-177d-1125-e8f29721189a	5280	Idrija
+00050000-553a-177d-b0ca-ddd2cc8457cf	1292	Ig
+00050000-553a-177d-00e8-74c69c7d286c	6250	Ilirska Bistrica
+00050000-553a-177d-1a3f-e74b0419a549	6251	Ilirska Bistrica-Trnovo
+00050000-553a-177d-824e-c77fd3bc3c41	1295	Ivančna Gorica
+00050000-553a-177d-a47c-9f5b8ff5e016	2259	Ivanjkovci
+00050000-553a-177d-ce94-53487c67ec3f	1411	Izlake
+00050000-553a-177d-ecbc-db4c0d35ae44	6310	Izola/Isola
+00050000-553a-177d-1516-783b14e88e02	2222	Jakobski Dol
+00050000-553a-177d-5c88-51b1d9e5cf5e	2221	Jarenina
+00050000-553a-177d-ecb4-84750fe0f8e8	6254	Jelšane
+00050000-553a-177d-af10-473a01fa8c15	4270	Jesenice
+00050000-553a-177d-8dfd-3fb75aebbe38	8261	Jesenice na Dolenjskem
+00050000-553a-177d-d70f-b5df722e281a	3273	Jurklošter
+00050000-553a-177d-2763-457136b4d07d	2223	Jurovski Dol
+00050000-553a-177d-ec4e-72147a3ca03e	2256	Juršinci
+00050000-553a-177d-3956-363abea386ad	5214	Kal nad Kanalom
+00050000-553a-177d-6678-4d59f37499ed	3233	Kalobje
+00050000-553a-177d-fc9a-2ec142bcdaaa	4246	Kamna Gorica
+00050000-553a-177d-4e18-dd53c277070a	2351	Kamnica
+00050000-553a-177d-89c5-200a1be85bae	1241	Kamnik
+00050000-553a-177d-8b5b-4f63db736f38	5213	Kanal
+00050000-553a-177d-3a33-7058f48d2bb5	8258	Kapele
+00050000-553a-177d-c543-c6d54b7c10ad	2362	Kapla
+00050000-553a-177d-eded-9574bcabf356	2325	Kidričevo
+00050000-553a-177d-d5a1-92a54b9140e1	1412	Kisovec
+00050000-553a-177d-eae3-947b7764306e	6253	Knežak
+00050000-553a-177d-23b2-923806948eee	5222	Kobarid
+00050000-553a-177d-ac8d-8edbab4585dd	9227	Kobilje
+00050000-553a-177d-3645-177b043ebb05	1330	Kočevje
+00050000-553a-177d-5339-15ad6d12fc6c	1338	Kočevska Reka
+00050000-553a-177d-e0cd-49d8e6f30cff	2276	Kog
+00050000-553a-177d-a04d-074eceb8a7be	5211	Kojsko
+00050000-553a-177d-a6c2-4414d3f97b25	6223	Komen
+00050000-553a-177d-1f3c-047aa2554c21	1218	Komenda
+00050000-553a-177d-aede-125cef089a9f	6000	Koper/Capodistria 
+00050000-553a-177d-123e-d98b148e38bd	6001	Koper/Capodistria - poštni predali
+00050000-553a-177d-17a7-e62c6df0c797	8282	Koprivnica
+00050000-553a-177d-fdac-1a323f74058f	5296	Kostanjevica na Krasu
+00050000-553a-177d-8090-50095b394c5b	8311	Kostanjevica na Krki
+00050000-553a-177d-d89d-cc0ff2c70f29	1336	Kostel
+00050000-553a-177d-0ced-7893b751c031	6256	Košana
+00050000-553a-177d-5b9b-fbce8b631ae9	2394	Kotlje
+00050000-553a-177d-0cf0-8b95641d550a	6240	Kozina
+00050000-553a-177d-dd23-4831c89f7b53	3260	Kozje
+00050000-553a-177d-5c63-9b3ad7f41e34	4000	Kranj 
+00050000-553a-177d-1fe6-0ba0f69dcd24	4001	Kranj - poštni predali
+00050000-553a-177d-57b3-6fa119880c09	4280	Kranjska Gora
+00050000-553a-177d-adb1-0b9a832f225a	1281	Kresnice
+00050000-553a-177d-72a4-7da9048ebd71	4294	Križe
+00050000-553a-177d-7e42-ce8cd9e804ec	9206	Križevci
+00050000-553a-177d-210d-1a889f657cf0	9242	Križevci pri Ljutomeru
+00050000-553a-177d-8cb7-a269a327cca1	1301	Krka
+00050000-553a-177d-fe0d-0959fc810982	8296	Krmelj
+00050000-553a-177d-11bf-a1cbf60b573d	4245	Kropa
+00050000-553a-177d-f236-254ecb2b1c1f	8262	Krška vas
+00050000-553a-177d-948d-ea00cfba6b29	8270	Krško
+00050000-553a-177d-92e8-99873036c2cb	9263	Kuzma
+00050000-553a-177d-6a72-99f8e8a461ce	2318	Laporje
+00050000-553a-177d-ca9d-4ec19c6ce7db	3270	Laško
+00050000-553a-177d-778e-22531714830e	1219	Laze v Tuhinju
+00050000-553a-177d-558b-4641bee621e8	2230	Lenart v Slovenskih goricah
+00050000-553a-177d-4ac1-5ad5ae36c03b	9220	Lendava/Lendva
+00050000-553a-177d-458e-313623b3d2fc	4248	Lesce
+00050000-553a-177d-ff07-721f6c5bb752	3261	Lesično
+00050000-553a-177d-b535-62dd1b7b776c	8273	Leskovec pri Krškem
+00050000-553a-177d-1589-a26fe77c2050	2372	Libeliče
+00050000-553a-177d-c05d-481dd4496914	2341	Limbuš
+00050000-553a-177d-c419-7bed05b4c1e7	1270	Litija
+00050000-553a-177d-1861-2b8cd14874e5	3202	Ljubečna
+00050000-553a-177d-1ce0-76382a09d85c	1000	Ljubljana 
+00050000-553a-177d-e6d3-56c4d7a4b020	1001	Ljubljana - poštni predali
+00050000-553a-177d-538b-d12ae02c936b	1231	Ljubljana - Črnuče
+00050000-553a-177d-af0c-f2dcdfcc3479	1261	Ljubljana - Dobrunje
+00050000-553a-177d-6b43-649a4c3ffd67	1260	Ljubljana - Polje
+00050000-553a-177d-cbb1-feb56e5069f7	1210	Ljubljana - Šentvid
+00050000-553a-177d-e453-3cd48b1d1c3b	1211	Ljubljana - Šmartno
+00050000-553a-177d-1dbd-856d0e582c7a	3333	Ljubno ob Savinji
+00050000-553a-177d-3636-4c9aebf09e0b	9240	Ljutomer
+00050000-553a-177d-76a0-8687eef9f45a	3215	Loče
+00050000-553a-177d-5015-5bb2ec693560	5231	Log pod Mangartom
+00050000-553a-177d-d3b6-235feec2b4f4	1358	Log pri Brezovici
+00050000-553a-177d-ac7d-fd3051ee727a	1370	Logatec
+00050000-553a-177d-044e-2999899f0555	1371	Logatec
+00050000-553a-177d-9be8-d6cd764fd57d	1434	Loka pri Zidanem Mostu
+00050000-553a-177d-3c65-3bdab6dd459c	3223	Loka pri Žusmu
+00050000-553a-177d-6b21-b855e2411709	6219	Lokev
+00050000-553a-177d-1479-bb63b738c847	1318	Loški Potok
+00050000-553a-177d-74dc-ffed9673bf80	2324	Lovrenc na Dravskem polju
+00050000-553a-177d-4ce9-b1f882e7974d	2344	Lovrenc na Pohorju
+00050000-553a-177d-ad31-caa25b07af73	3334	Luče
+00050000-553a-177d-5111-a457f9ba20c4	1225	Lukovica
+00050000-553a-177d-464c-bdb149ad1b97	9202	Mačkovci
+00050000-553a-177d-0138-b4de0fea51e2	2322	Majšperk
+00050000-553a-177d-f58d-090e6307f425	2321	Makole
+00050000-553a-177d-f57c-5fdb107c7ed3	9243	Mala Nedelja
+00050000-553a-177d-41e0-6407e6eed2ac	2229	Malečnik
+00050000-553a-177d-be40-e8d16cef5b9c	6273	Marezige
+00050000-553a-177d-a3aa-6c2cec80191a	2000	Maribor 
+00050000-553a-177d-ca5b-86830a838a76	2001	Maribor - poštni predali
+00050000-553a-177d-8cd1-cc7a682fbb78	2206	Marjeta na Dravskem polju
+00050000-553a-177d-3f5d-31c2591f5c0c	2281	Markovci
+00050000-553a-177d-cd17-fe8629f52865	9221	Martjanci
+00050000-553a-177d-0fb5-a3a698b6f785	6242	Materija
+00050000-553a-177d-3365-216e314fb247	4211	Mavčiče
+00050000-553a-177d-de65-df73b7d1c130	1215	Medvode
+00050000-553a-177d-03fa-660cbc3b2729	1234	Mengeš
+00050000-553a-177d-51f5-ed531bf8f303	8330	Metlika
+00050000-553a-177d-d7e0-2559902bbf58	2392	Mežica
+00050000-553a-177d-9e26-02d4d08b570a	2204	Miklavž na Dravskem polju
+00050000-553a-177d-f9d1-2bf2ccf02081	2275	Miklavž pri Ormožu
+00050000-553a-177d-94fb-1cb57a849653	5291	Miren
+00050000-553a-177d-ed01-e9aa5a9b9cc9	8233	Mirna
+00050000-553a-177d-1fb3-707b1b2ef4f6	8216	Mirna Peč
+00050000-553a-177d-b92b-d33876039ddf	2382	Mislinja
+00050000-553a-177d-3ec8-7e8c1dc1efd8	4281	Mojstrana
+00050000-553a-177d-8f70-9eccaf5f6546	8230	Mokronog
+00050000-553a-177d-5efc-c776b720defa	1251	Moravče
+00050000-553a-177d-52d4-7c90ade19682	9226	Moravske Toplice
+00050000-553a-177d-43d3-bf016baae20c	5216	Most na Soči
+00050000-553a-177d-decd-2f087a6fb04b	1221	Motnik
+00050000-553a-177d-d5df-fd594236c276	3330	Mozirje
+00050000-553a-177d-0898-ae98c5a804c7	9000	Murska Sobota 
+00050000-553a-177d-2f3d-9e31eea13a19	9001	Murska Sobota - poštni predali
+00050000-553a-177d-6062-fae28ca6c705	2366	Muta
+00050000-553a-177d-6872-109aea1dfe45	4202	Naklo
+00050000-553a-177d-3a2a-52b0dcfebdd0	3331	Nazarje
+00050000-553a-177d-f93c-4d008422cbf2	1357	Notranje Gorice
+00050000-553a-177d-6ff4-b73aa1e72418	3203	Nova Cerkev
+00050000-553a-177d-e640-dabeb1c8b070	5000	Nova Gorica 
+00050000-553a-177d-3893-28dd61008892	5001	Nova Gorica - poštni predali
+00050000-553a-177d-1fdd-15e9db61656b	1385	Nova vas
+00050000-553a-177d-de33-f41211de0b06	8000	Novo mesto
+00050000-553a-177d-c88d-a3500eb5cdc6	8001	Novo mesto - poštni predali
+00050000-553a-177d-b6cd-06eecae9fa97	6243	Obrov
+00050000-553a-177d-a067-a2590d4b685e	9233	Odranci
+00050000-553a-177d-ed85-ccd405d6b582	2317	Oplotnica
+00050000-553a-177d-2a3f-a3e1318d1795	2312	Orehova vas
+00050000-553a-177d-ec1b-bc693d4bd7b1	2270	Ormož
+00050000-553a-177d-4ab4-068bcc2cd686	1316	Ortnek
+00050000-553a-177d-6230-0ca2721edfff	1337	Osilnica
+00050000-553a-177d-f10f-de7959c5d7ef	8222	Otočec
+00050000-553a-177d-ef67-3970cad13271	2361	Ožbalt
+00050000-553a-177d-9eee-a411fe490d56	2231	Pernica
+00050000-553a-177d-8b26-b46fca75f294	2211	Pesnica pri Mariboru
+00050000-553a-177d-3038-20ae81204f7c	9203	Petrovci
+00050000-553a-177d-0d69-4c12bb4ce6ea	3301	Petrovče
+00050000-553a-177d-3c48-1a9a48ebb07f	6330	Piran/Pirano
+00050000-553a-177d-d898-370341706b28	8255	Pišece
+00050000-553a-177d-26d4-87c058461220	6257	Pivka
+00050000-553a-177d-7d8f-0f8da40ff7b2	6232	Planina
+00050000-553a-177d-b9af-346218bc341f	3225	Planina pri Sevnici
+00050000-553a-177d-d6c4-66596d9926fb	6276	Pobegi
+00050000-553a-177d-6015-14502eda0cd2	8312	Podbočje
+00050000-553a-177d-ad2e-e11e932bb984	5243	Podbrdo
+00050000-553a-177d-411a-8a736eb6d595	3254	Podčetrtek
+00050000-553a-177d-35be-a653bc47a22c	2273	Podgorci
+00050000-553a-177d-d195-a59a3e52a62c	6216	Podgorje
+00050000-553a-177d-30c1-85a38a091e4c	2381	Podgorje pri Slovenj Gradcu
+00050000-553a-177d-26b6-d4b30a024a43	6244	Podgrad
+00050000-553a-177d-2845-9620fafbaf6c	1414	Podkum
+00050000-553a-177d-2f2c-e7504a424b75	2286	Podlehnik
+00050000-553a-177d-3262-5370f39770d8	5272	Podnanos
+00050000-553a-177d-dd99-554438cc9b32	4244	Podnart
+00050000-553a-177d-9465-7e023037c8e3	3241	Podplat
+00050000-553a-177d-5e7b-04c3fdd13635	3257	Podsreda
+00050000-553a-177d-90a5-d969006d74b5	2363	Podvelka
+00050000-553a-177d-2b6c-fa85bb65f90e	2208	Pohorje
+00050000-553a-177d-e29e-a85c403b08b0	2257	Polenšak
+00050000-553a-177d-c37d-6dc9d6e839b8	1355	Polhov Gradec
+00050000-553a-177d-93f3-1a5a47a69bce	4223	Poljane nad Škofjo Loko
+00050000-553a-177d-f9a4-f6ce77567764	2319	Poljčane
+00050000-553a-177d-ef3a-8d4df3b10bfe	1272	Polšnik
+00050000-553a-177d-37fd-c906e9df2375	3313	Polzela
+00050000-553a-177d-3930-45242a18bf15	3232	Ponikva
+00050000-553a-177d-0c1f-46eaf097dd6c	6320	Portorož/Portorose
+00050000-553a-177d-b794-dc610df465e3	6230	Postojna
+00050000-553a-177d-8e83-2d959b82ed68	2331	Pragersko
+00050000-553a-177d-f9dd-08d730c719f9	3312	Prebold
+00050000-553a-177d-5b25-b364c736dc3a	4205	Preddvor
+00050000-553a-177d-c5dd-6399aa2c63f1	6255	Prem
+00050000-553a-177d-85f1-046c2f5a418b	1352	Preserje
+00050000-553a-177d-855f-0a3dcb46c677	6258	Prestranek
+00050000-553a-177d-9e34-8246754988ff	2391	Prevalje
+00050000-553a-177d-61f8-4f0611be7e9a	3262	Prevorje
+00050000-553a-177d-c23a-8fa48cf01d4e	1276	Primskovo 
+00050000-553a-177d-8dc2-a6aba82b574c	3253	Pristava pri Mestinju
+00050000-553a-177d-6209-6d6bc902cbd3	9207	Prosenjakovci/Partosfalva
+00050000-553a-177d-c782-050c26c34f88	5297	Prvačina
+00050000-553a-177d-1304-ac51dde26413	2250	Ptuj
+00050000-553a-177d-7bda-d5219c9d8785	2323	Ptujska Gora
+00050000-553a-177d-64e7-f27139ab6457	9201	Puconci
+00050000-553a-177d-5274-98708cfd0794	2327	Rače
+00050000-553a-177d-0ec6-8bd407a475f7	1433	Radeče
+00050000-553a-177d-3ba6-941536e44c99	9252	Radenci
+00050000-553a-177d-81f9-cafabf4e0065	2360	Radlje ob Dravi
+00050000-553a-177d-8f83-d440a9cfcb09	1235	Radomlje
+00050000-553a-177d-dba9-fc5b3d9154c5	4240	Radovljica
+00050000-553a-177d-5ee1-351078cda16a	8274	Raka
+00050000-553a-177d-44cd-ba775da1321b	1381	Rakek
+00050000-553a-177d-8641-a10029a580c8	4283	Rateče - Planica
+00050000-553a-177d-9fbf-696a96a19d24	2390	Ravne na Koroškem
+00050000-553a-177d-4c82-d909c5c31308	9246	Razkrižje
+00050000-553a-177d-d244-b878214c930b	3332	Rečica ob Savinji
+00050000-553a-177d-a530-b74211fec075	5292	Renče
+00050000-553a-177d-176e-224b285c1d9d	1310	Ribnica
+00050000-553a-177d-b4d3-9d5bc4ca36db	2364	Ribnica na Pohorju
+00050000-553a-177d-0b47-6f02699d371b	3272	Rimske Toplice
+00050000-553a-177d-4b29-212b510793f2	1314	Rob
+00050000-553a-177d-26d9-f9876e7369ed	5215	Ročinj
+00050000-553a-177d-25e9-7745d39075a7	3250	Rogaška Slatina
+00050000-553a-177d-3abc-90eae635d9d3	9262	Rogašovci
+00050000-553a-177d-3246-f95ce39bcf24	3252	Rogatec
+00050000-553a-177d-9e2c-c631fbb3c179	1373	Rovte
+00050000-553a-177d-4d93-746dc85d6b85	2342	Ruše
+00050000-553a-177d-cd94-d87440a986f6	1282	Sava
+00050000-553a-177d-fb69-fa8a33c4dbd4	6333	Sečovlje/Sicciole
+00050000-553a-177d-916b-b18bbcd1d95b	4227	Selca
+00050000-553a-177d-2de2-3eb639deb7be	2352	Selnica ob Dravi
+00050000-553a-177d-3e72-c2ebc1a46b00	8333	Semič
+00050000-553a-177d-87a1-3a0c02bd4527	8281	Senovo
+00050000-553a-177d-6b97-b6d71edd3ce6	6224	Senožeče
+00050000-553a-177d-0ad6-bddb33cc47fb	8290	Sevnica
+00050000-553a-177d-6625-9e41ba211685	6210	Sežana
+00050000-553a-177d-18d4-2749a90d8cbd	2214	Sladki Vrh
+00050000-553a-177d-82ee-09dfa6a63fd0	5283	Slap ob Idrijci
+00050000-553a-177d-2f06-12be26d3b074	2380	Slovenj Gradec
+00050000-553a-177d-704d-9a11ac2b2ed2	2310	Slovenska Bistrica
+00050000-553a-177d-170f-028ea2bc1e0f	3210	Slovenske Konjice
+00050000-553a-177d-d039-a24c7d5c1b45	1216	Smlednik
+00050000-553a-177d-f1be-7e31f2fe2602	5232	Soča
+00050000-553a-177d-f2ec-331579ea92f5	1317	Sodražica
+00050000-553a-177d-6172-6b47a45def36	3335	Solčava
+00050000-553a-177d-44df-127f5a158782	5250	Solkan
+00050000-553a-177d-e5aa-35bb12f5f0d7	4229	Sorica
+00050000-553a-177d-5c68-994f4e2620b6	4225	Sovodenj
+00050000-553a-177d-c931-8d1441b84835	5281	Spodnja Idrija
+00050000-553a-177d-460a-7e311aee2588	2241	Spodnji Duplek
+00050000-553a-177d-40c9-2f8125eb9f42	9245	Spodnji Ivanjci
+00050000-553a-177d-7b3b-9460b5cebe4a	2277	Središče ob Dravi
+00050000-553a-177d-0b09-8dc3d32a8f08	4267	Srednja vas v Bohinju
+00050000-553a-177d-24b2-d4782d3a4850	8256	Sromlje 
+00050000-553a-177d-c894-3a53e1adaa2b	5224	Srpenica
+00050000-553a-177d-9c3f-f55c7efefa44	1242	Stahovica
+00050000-553a-177d-dad5-448372027d7f	1332	Stara Cerkev
+00050000-553a-177d-1a84-4f71d6c704f4	8342	Stari trg ob Kolpi
+00050000-553a-177d-f3d8-d03112b673b6	1386	Stari trg pri Ložu
+00050000-553a-177d-5091-e67de1b7d60a	2205	Starše
+00050000-553a-177d-d794-81899209fe74	2289	Stoperce
+00050000-553a-177d-fbfb-2cec65968c5c	8322	Stopiče
+00050000-553a-177d-a5ba-97a47568f949	3206	Stranice
+00050000-553a-177d-1ce3-4bba199b165d	8351	Straža
+00050000-553a-177d-bcc8-4080c27534e4	1313	Struge
+00050000-553a-177d-0445-000e7192dbd4	8293	Studenec
+00050000-553a-177d-4e0c-f48048447088	8331	Suhor
+00050000-553a-177d-f2fb-0ed5ed0c9d3b	2233	Sv. Ana v Slovenskih goricah
+00050000-553a-177d-89d9-4fe07fa4219c	2235	Sv. Trojica v Slovenskih goricah
+00050000-553a-177d-aa96-f80dd5fed879	2353	Sveti Duh na Ostrem Vrhu
+00050000-553a-177d-f5ce-c246a03cedf0	9244	Sveti Jurij ob Ščavnici
+00050000-553a-177d-55f6-521080f8c898	3264	Sveti Štefan
+00050000-553a-177d-c65d-843bed6b20f6	2258	Sveti Tomaž
+00050000-553a-177d-fa16-2167fd649dc4	9204	Šalovci
+00050000-553a-177d-f202-879a85e765b5	5261	Šempas
+00050000-553a-177d-e2d0-a060ba14945b	5290	Šempeter pri Gorici
+00050000-553a-177d-03a2-4a8f7a5243b8	3311	Šempeter v Savinjski dolini
+00050000-553a-177d-51bd-1f027ba8932a	4208	Šenčur
+00050000-553a-177d-b806-c25eadaa10ee	2212	Šentilj v Slovenskih goricah
+00050000-553a-177d-6cc4-3d2ff4d12922	8297	Šentjanž
+00050000-553a-177d-f8d0-2ff3dfd3654c	2373	Šentjanž pri Dravogradu
+00050000-553a-177d-0e4d-802ac8fe9e16	8310	Šentjernej
+00050000-553a-177d-6cda-0b7f4624d593	3230	Šentjur
+00050000-553a-177d-a243-cc3dcb8186d5	3271	Šentrupert
+00050000-553a-177d-c72e-e92af047705d	8232	Šentrupert
+00050000-553a-177d-44f9-63b3e257e540	1296	Šentvid pri Stični
+00050000-553a-177d-86d1-ad299c9010e6	8275	Škocjan
+00050000-553a-177d-612b-b211303b6272	6281	Škofije
+00050000-553a-177d-117a-f93195f1fbf2	4220	Škofja Loka
+00050000-553a-177d-de1a-6a54b9f302b2	3211	Škofja vas
+00050000-553a-177d-04bf-f6bf9bd9f952	1291	Škofljica
+00050000-553a-177d-6823-4815336d4622	6274	Šmarje
+00050000-553a-177d-674c-6848afda2d3b	1293	Šmarje - Sap
+00050000-553a-177d-f580-340e48348bda	3240	Šmarje pri Jelšah
+00050000-553a-177d-326e-809a0a926dbe	8220	Šmarješke Toplice
+00050000-553a-177d-128e-1588d048d7b5	2315	Šmartno na Pohorju
+00050000-553a-177d-fb98-847e3749d867	3341	Šmartno ob Dreti
+00050000-553a-177d-a3a9-087ba8e35bcc	3327	Šmartno ob Paki
+00050000-553a-177d-ac7f-6a89db944204	1275	Šmartno pri Litiji
+00050000-553a-177d-7fdc-ae67468b282b	2383	Šmartno pri Slovenj Gradcu
+00050000-553a-177d-4915-20d07427fb89	3201	Šmartno v Rožni dolini
+00050000-553a-177d-a4f8-a240cc66fe5e	3325	Šoštanj
+00050000-553a-177d-d703-9652edb9fae0	6222	Štanjel
+00050000-553a-177d-092c-7f56c20cceed	3220	Štore
+00050000-553a-177d-1ecd-562d103fb4f4	3304	Tabor
+00050000-553a-177d-513b-4c8b232b21f3	3221	Teharje
+00050000-553a-177d-0259-939c45ac5feb	9251	Tišina
+00050000-553a-177d-807a-aff2081f8d61	5220	Tolmin
+00050000-553a-177d-d3fe-2bad0f6ed4a6	3326	Topolšica
+00050000-553a-177d-c74d-9fcf9f94e2f6	2371	Trbonje
+00050000-553a-177d-5bef-f83f208cf21c	1420	Trbovlje
+00050000-553a-177d-51dc-0e6efe56c490	8231	Trebelno 
+00050000-553a-177d-e61a-677fbe28df2e	8210	Trebnje
+00050000-553a-177d-95e0-73134248de3d	5252	Trnovo pri Gorici
+00050000-553a-177d-498c-d14d6f8ddad5	2254	Trnovska vas
+00050000-553a-177d-8d84-fe40939e23bb	1222	Trojane
+00050000-553a-177d-6b2c-8e4f09952b0a	1236	Trzin
+00050000-553a-177d-b05e-2cea27633fb7	4290	Tržič
+00050000-553a-177d-d34c-ace89cd4c5ac	8295	Tržišče
+00050000-553a-177d-ed10-e38777e6a291	1311	Turjak
+00050000-553a-177d-21d9-f2ea00231e26	9224	Turnišče
+00050000-553a-177d-3b19-32d4400aaaaa	8323	Uršna sela
+00050000-553a-177d-9886-5aaa6fe0836e	1252	Vače
+00050000-553a-177d-7a47-74fe190d0269	3320	Velenje 
+00050000-553a-177d-b19a-02aefc837261	3322	Velenje - poštni predali
+00050000-553a-177d-d77b-34f2fbbcb2d1	8212	Velika Loka
+00050000-553a-177d-c886-8e8aced41521	2274	Velika Nedelja
+00050000-553a-177d-99b6-e0a5da0da714	9225	Velika Polana
+00050000-553a-177d-b700-53bc7a8d7e1e	1315	Velike Lašče
+00050000-553a-177d-3b57-66d1aa2d4ad3	8213	Veliki Gaber
+00050000-553a-177d-9e98-eb1e69c048d9	9241	Veržej
+00050000-553a-177d-5852-9754865add6f	1312	Videm - Dobrepolje
+00050000-553a-177d-fe5b-8ec5db8d33db	2284	Videm pri Ptuju
+00050000-553a-177d-6d7a-5f2fa04c94c0	8344	Vinica
+00050000-553a-177d-30ea-7db9b20e74f6	5271	Vipava
+00050000-553a-177d-1af2-555d344a32f8	4212	Visoko
+00050000-553a-177d-ba28-373d948cedc4	1294	Višnja Gora
+00050000-553a-177d-55a5-d49c71543426	3205	Vitanje
+00050000-553a-177d-cd35-3e0cf16cd123	2255	Vitomarci
+00050000-553a-177d-e3d7-848cc05749ec	1217	Vodice
+00050000-553a-177d-ca46-8fcef23e1649	3212	Vojnik\t
+00050000-553a-177d-103c-91f2938a2ab8	5293	Volčja Draga
+00050000-553a-177d-5368-68798f3f8934	2232	Voličina
+00050000-553a-177d-22a2-2af1567056f6	3305	Vransko
+00050000-553a-177d-3c57-eec67e3cc747	6217	Vremski Britof
+00050000-553a-177d-7b74-8d1390fb202d	1360	Vrhnika
+00050000-553a-177d-86c4-c11482043297	2365	Vuhred
+00050000-553a-177d-f28a-8faf0dc62d9d	2367	Vuzenica
+00050000-553a-177d-2946-3a518f18b8ac	8292	Zabukovje 
+00050000-553a-177d-b6d4-774d461c3e35	1410	Zagorje ob Savi
+00050000-553a-177d-4ed0-435a4f6c5d50	1303	Zagradec
+00050000-553a-177d-ab19-b5a3b3e3a016	2283	Zavrč
+00050000-553a-177d-4bb7-f73d9077d24c	8272	Zdole 
+00050000-553a-177d-cac2-788b2974cb5e	4201	Zgornja Besnica
+00050000-553a-177d-2385-d0e152e89081	2242	Zgornja Korena
+00050000-553a-177d-3ea2-15551f9d5423	2201	Zgornja Kungota
+00050000-553a-177d-5130-627c47964397	2316	Zgornja Ložnica
+00050000-553a-177d-6571-5329f099af4e	2314	Zgornja Polskava
+00050000-553a-177d-c169-d061badfdb83	2213	Zgornja Velka
+00050000-553a-177d-6052-499602aa27b7	4247	Zgornje Gorje
+00050000-553a-177d-9c04-bfb11fcacf71	4206	Zgornje Jezersko
+00050000-553a-177d-856c-34f8357b58d8	2285	Zgornji Leskovec
+00050000-553a-177d-844a-8086320cd91e	1432	Zidani Most
+00050000-553a-177d-275c-1ef97b391b88	3214	Zreče
+00050000-553a-177d-dcc7-5b44f1c84416	4209	Žabnica
+00050000-553a-177d-33f6-41fcdccb9c18	3310	Žalec
+00050000-553a-177d-0ab9-baad50da5f4f	4228	Železniki
+00050000-553a-177d-1699-9088b8300cf2	2287	Žetale
+00050000-553a-177d-844b-740414a92a20	4226	Žiri
+00050000-553a-177d-9248-bca43e9c9d5c	4274	Žirovnica
+00050000-553a-177d-c07d-0fd365bd5989	8360	Žužemberk
 \.
 
 
 --
--- TOC entry 2659 (class 0 OID 1157714)
+-- TOC entry 2659 (class 0 OID 1253129)
 -- Dependencies: 202
 -- Data for Name: postavkaracuna; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3591,7 +3591,7 @@ COPY postninaslov (id, klient_id, oseba_id, drzava_id, naziv, ulica, ulicadva, p
 
 
 --
--- TOC entry 2642 (class 0 OID 1157537)
+-- TOC entry 2642 (class 0 OID 1252952)
 -- Dependencies: 185
 -- Data for Name: postninaslovi; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3601,7 +3601,7 @@ COPY postninaslovi (id, klient_id, oseba_id, drzava_id, naziv, nazivdva, ulica, 
 
 
 --
--- TOC entry 2647 (class 0 OID 1157603)
+-- TOC entry 2647 (class 0 OID 1253018)
 -- Dependencies: 190
 -- Data for Name: predstava; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3611,7 +3611,7 @@ COPY predstava (id, uprizoritev_id, gostovanje_id, gostujoc_id) FROM stdin;
 
 
 --
--- TOC entry 2661 (class 0 OID 1157726)
+-- TOC entry 2661 (class 0 OID 1253141)
 -- Dependencies: 204
 -- Data for Name: prodajapredstave; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3621,7 +3621,7 @@ COPY prodajapredstave (id, sedezni_red_id, dogodek_id) FROM stdin;
 
 
 --
--- TOC entry 2673 (class 0 OID 1157831)
+-- TOC entry 2673 (class 0 OID 1253246)
 -- Dependencies: 216
 -- Data for Name: produkcijadelitev; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3631,7 +3631,7 @@ COPY produkcijadelitev (id, uprizoritev_id, koproducent_id, odstotekfinanciranja
 
 
 --
--- TOC entry 2677 (class 0 OID 1157875)
+-- TOC entry 2677 (class 0 OID 1253290)
 -- Dependencies: 220
 -- Data for Name: produkcijskahisa; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3641,7 +3641,7 @@ COPY produkcijskahisa (id, popa_id, status) FROM stdin;
 
 
 --
--- TOC entry 2665 (class 0 OID 1157755)
+-- TOC entry 2665 (class 0 OID 1253170)
 -- Dependencies: 208
 -- Data for Name: prostor; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3651,7 +3651,7 @@ COPY prostor (id, ime, jeprizorisce, kapaciteta, opis) FROM stdin;
 
 
 --
--- TOC entry 2657 (class 0 OID 1157699)
+-- TOC entry 2657 (class 0 OID 1253114)
 -- Dependencies: 200
 -- Data for Name: racun; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3661,7 +3661,7 @@ COPY racun (id, kupec_id, prodaja_predstave_id, nacin_placina_id, placilni_instr
 
 
 --
--- TOC entry 2656 (class 0 OID 1157689)
+-- TOC entry 2656 (class 0 OID 1253104)
 -- Dependencies: 199
 -- Data for Name: razpisansedez; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3671,7 +3671,7 @@ COPY razpisansedez (id, postavka_racuna_id, sedez_id, prodaja_predstave_id, reze
 
 
 --
--- TOC entry 2676 (class 0 OID 1157865)
+-- TOC entry 2676 (class 0 OID 1253280)
 -- Dependencies: 219
 -- Data for Name: rekvizit; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3681,7 +3681,7 @@ COPY rekvizit (id, ime, vrsta) FROM stdin;
 
 
 --
--- TOC entry 2672 (class 0 OID 1157821)
+-- TOC entry 2672 (class 0 OID 1253236)
 -- Dependencies: 215
 -- Data for Name: rekviziterstvo; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3691,13 +3691,13 @@ COPY rekviziterstvo (id, rekvizit_id, uprizoritev_id, namenuporabe, opispostavit
 
 
 --
--- TOC entry 2630 (class 0 OID 1157403)
+-- TOC entry 2630 (class 0 OID 1252818)
 -- Dependencies: 173
 -- Data for Name: revizije; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY revizije (id, razred, objectid, upor, datum, tip, data) FROM stdin;
-1	Aaa\\Entity\\User	00010000-5539-ef79-1f2b-2eb6892c6a36	00010000-5539-ef79-5e2c-24b076b37762	2015-04-24 09:23:37	UPD	a:1:{s:8:"password";a:2:{i:0;s:60:"$2y$05$NS4xMjkyMTcwMzExMjAxROAGQEKh5KMOjuJZYF6zDRXR77nLIOUOq";i:1;s:60:"$2y$05$NS4xMjkyMTcwMzExMjAxROvZ3ZK1rCz1z6kWFFbQn0D.v3kzLt6iq";}}
+1	Aaa\\Entity\\User	00010000-553a-177f-114e-9b7524c332ba	00010000-553a-177f-06e5-59036ed60423	2015-04-24 12:14:24	UPD	a:1:{s:8:"password";a:2:{i:0;s:60:"$2y$05$NS4xMjkyMTcwMzExMjAxRO9KZH5.Cop9C4.lE9q2eUUNdumD7966W";i:1;s:60:"$2y$05$NS4xMjkyMTcwMzExMjAxROvZ3ZK1rCz1z6kWFFbQn0D.v3kzLt6iq";}}
 \.
 
 
@@ -3711,7 +3711,7 @@ SELECT pg_catalog.setval('revizije_id_seq', 1, true);
 
 
 --
--- TOC entry 2666 (class 0 OID 1157764)
+-- TOC entry 2666 (class 0 OID 1253179)
 -- Dependencies: 209
 -- Data for Name: rezervacija; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3721,35 +3721,35 @@ COPY rezervacija (id, prodaja_predstave_id) FROM stdin;
 
 
 --
--- TOC entry 2634 (class 0 OID 1157441)
+-- TOC entry 2634 (class 0 OID 1252856)
 -- Dependencies: 177
 -- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY role (id, name, description, builtin) FROM stdin;
-00000000-5539-ef79-df01-c04353554bff	beri-vse	Polni dostop do vsega v aplikaciji.	t
-00000000-5539-ef79-a26a-6dd5f86da753	administrator-dostopov	Uporavljanje uporabnikov, skupin, vlog in dovoljenj.	t
-00000000-5539-ef79-6f09-8cc89027bb17	anonymous	Vloga za javne - neavtenticirane uporabnike	t
-00000000-5539-ef79-1575-5ff858855f5b	ifi-all	Polni dostop do vsega v aplikaciji.	t
-00000000-5539-ef79-c329-ae94e443509b	ifi-readall	Dostop do vseh -read in -list dovoljenj.	t
-00000000-5539-ef79-c027-beb72bff0a24	admin	Polni dostop do vsega v aplikaciji.	t
+00000000-553a-177f-7453-c397587cf10f	beri-vse	Polni dostop do vsega v aplikaciji.	t
+00000000-553a-177f-4227-f7a9ef153a06	administrator-dostopov	Uporavljanje uporabnikov, skupin, vlog in dovoljenj.	t
+00000000-553a-177f-11f8-aae723dcefd3	anonymous	Vloga za javne - neavtenticirane uporabnike	t
+00000000-553a-177f-a0ca-ac63ef7a66b7	ifi-all	Polni dostop do vsega v aplikaciji.	t
+00000000-553a-177f-623d-93571913f765	ifi-readall	Dostop do vseh -read in -list dovoljenj.	t
+00000000-553a-177f-93fd-94340d00a0a1	admin	Polni dostop do vsega v aplikaciji.	t
 \.
 
 
 --
--- TOC entry 2632 (class 0 OID 1157425)
+-- TOC entry 2632 (class 0 OID 1252840)
 -- Dependencies: 175
 -- Data for Name: role2user; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY role2user (user_id, role_id) FROM stdin;
-00010000-5539-ef79-1f2b-2eb6892c6a36	00000000-5539-ef79-1575-5ff858855f5b
-00010000-5539-ef79-5e2c-24b076b37762	00000000-5539-ef79-1575-5ff858855f5b
+00010000-553a-177f-114e-9b7524c332ba	00000000-553a-177f-a0ca-ac63ef7a66b7
+00010000-553a-177f-06e5-59036ed60423	00000000-553a-177f-a0ca-ac63ef7a66b7
 \.
 
 
 --
--- TOC entry 2668 (class 0 OID 1157778)
+-- TOC entry 2668 (class 0 OID 1253193)
 -- Dependencies: 211
 -- Data for Name: sedez; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3759,7 +3759,7 @@ COPY sedez (id, vrsta_id, sedezni_red_id, podrocja_sedenja_id, stevilka, oznaka,
 
 
 --
--- TOC entry 2660 (class 0 OID 1157720)
+-- TOC entry 2660 (class 0 OID 1253135)
 -- Dependencies: 203
 -- Data for Name: sedeznired; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3769,7 +3769,7 @@ COPY sedeznired (id, kapaciteta, ime) FROM stdin;
 
 
 --
--- TOC entry 2654 (class 0 OID 1157670)
+-- TOC entry 2654 (class 0 OID 1253085)
 -- Dependencies: 197
 -- Data for Name: sezona; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3779,7 +3779,7 @@ COPY sezona (id, imesezone, zacetek, konec, aktivna) FROM stdin;
 
 
 --
--- TOC entry 2639 (class 0 OID 1157502)
+-- TOC entry 2639 (class 0 OID 1252917)
 -- Dependencies: 182
 -- Data for Name: telefonska; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3789,7 +3789,7 @@ COPY telefonska (id, oseba_id, popa_id, vrsta, stevilka, privzeta) FROM stdin;
 
 
 --
--- TOC entry 2655 (class 0 OID 1157676)
+-- TOC entry 2655 (class 0 OID 1253091)
 -- Dependencies: 198
 -- Data for Name: terminstoritve; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3799,7 +3799,7 @@ COPY terminstoritve (id, dogodek_id, alternacija_id, oseba_id, planiranzacetek, 
 
 
 --
--- TOC entry 2675 (class 0 OID 1157856)
+-- TOC entry 2675 (class 0 OID 1253271)
 -- Dependencies: 218
 -- Data for Name: tipfunkcije; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3809,7 +3809,7 @@ COPY tipfunkcije (id, ime, opis, dovoliprekrivanje, maxprekrivanj, nastopajoc) F
 
 
 --
--- TOC entry 2645 (class 0 OID 1157572)
+-- TOC entry 2645 (class 0 OID 1252987)
 -- Dependencies: 188
 -- Data for Name: trr; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3819,19 +3819,19 @@ COPY trr (id, popa_id, oseba_id, stevilka, swift, bic, banka) FROM stdin;
 
 
 --
--- TOC entry 2631 (class 0 OID 1157412)
+-- TOC entry 2631 (class 0 OID 1252827)
 -- Dependencies: 174
 -- Data for Name: uporabniki; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY uporabniki (id, name, password, enabled, expires, defaultroute, defaultrouteparams, email, lastlogon, passresttoken, tokenexpires) FROM stdin;
-00010000-5539-ef79-5e2c-24b076b37762	Konzolni	$2y$05$NS4xMjkyMTcwMzExMjAxROyb5fCa5FLAGJMdPVfcZ.YG036/kaglS	t	\N	\N	\N	console@ifigenija.si	\N	\N	\N
-00010000-5539-ef79-1f2b-2eb6892c6a36	Administrator	$2y$05$NS4xMjkyMTcwMzExMjAxROvZ3ZK1rCz1z6kWFFbQn0D.v3kzLt6iq	t	\N	\N	\N	admin@ifigenija.si	\N	\N	\N
+00010000-553a-177f-06e5-59036ed60423	Konzolni	$2y$05$NS4xMjkyMTcwMzExMjAxRO/hH3UeErdN1c0kfjqe4XGeOpJJz4UVG	t	\N	\N	\N	console@ifigenija.si	\N	\N	\N
+00010000-553a-177f-114e-9b7524c332ba	Administrator	$2y$05$NS4xMjkyMTcwMzExMjAxROvZ3ZK1rCz1z6kWFFbQn0D.v3kzLt6iq	t	\N	\N	\N	admin@ifigenija.si	\N	\N	\N
 \.
 
 
 --
--- TOC entry 2680 (class 0 OID 1157906)
+-- TOC entry 2680 (class 0 OID 1253321)
 -- Dependencies: 223
 -- Data for Name: uprizoritev; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3841,7 +3841,7 @@ COPY uprizoritev (id, besedilo_id, zvrst_uprizoritve_id, zvrst_surs_id, faza, na
 
 
 --
--- TOC entry 2649 (class 0 OID 1157618)
+-- TOC entry 2649 (class 0 OID 1253033)
 -- Dependencies: 192
 -- Data for Name: vaja; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3851,7 +3851,7 @@ COPY vaja (id, uprizoritev_id) FROM stdin;
 
 
 --
--- TOC entry 2664 (class 0 OID 1157747)
+-- TOC entry 2664 (class 0 OID 1253162)
 -- Dependencies: 207
 -- Data for Name: vrstasedezev; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3861,7 +3861,7 @@ COPY vrstasedezev (id, podrocja_sedenja_id, kapaciteta, poravnava, oblika) FROM 
 
 
 --
--- TOC entry 2671 (class 0 OID 1157813)
+-- TOC entry 2671 (class 0 OID 1253228)
 -- Dependencies: 214
 -- Data for Name: zaposlitev; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3871,7 +3871,7 @@ COPY zaposlitev (id, oseba_id, status, zacetek, konec, tip, delovnaobveza, malic
 
 
 --
--- TOC entry 2651 (class 0 OID 1157646)
+-- TOC entry 2651 (class 0 OID 1253061)
 -- Dependencies: 194
 -- Data for Name: zasedenost; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3881,7 +3881,7 @@ COPY zasedenost (id, zacetek, konec, status, razred, termin, ime) FROM stdin;
 
 
 --
--- TOC entry 2679 (class 0 OID 1157896)
+-- TOC entry 2679 (class 0 OID 1253311)
 -- Dependencies: 222
 -- Data for Name: zvrstsurs; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3891,7 +3891,7 @@ COPY zvrstsurs (id, ime, naziv) FROM stdin;
 
 
 --
--- TOC entry 2670 (class 0 OID 1157803)
+-- TOC entry 2670 (class 0 OID 1253218)
 -- Dependencies: 213
 -- Data for Name: zvrstuprizoritve; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3901,7 +3901,7 @@ COPY zvrstuprizoritve (id, ime, opis) FROM stdin;
 
 
 --
--- TOC entry 2275 (class 2606 OID 1157466)
+-- TOC entry 2275 (class 2606 OID 1252881)
 -- Name: abonma_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3910,7 +3910,7 @@ ALTER TABLE ONLY abonma
 
 
 --
--- TOC entry 2441 (class 2606 OID 1157945)
+-- TOC entry 2441 (class 2606 OID 1253360)
 -- Name: alternacija_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3919,7 +3919,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2437 (class 2606 OID 1157938)
+-- TOC entry 2437 (class 2606 OID 1253353)
 -- Name: arhivalija_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3928,7 +3928,7 @@ ALTER TABLE ONLY arhivalija
 
 
 --
--- TOC entry 2416 (class 2606 OID 1157855)
+-- TOC entry 2416 (class 2606 OID 1253270)
 -- Name: besedilo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3937,7 +3937,7 @@ ALTER TABLE ONLY besedilo
 
 
 --
--- TOC entry 2328 (class 2606 OID 1157636)
+-- TOC entry 2328 (class 2606 OID 1253051)
 -- Name: dogodek_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3946,7 +3946,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2344 (class 2606 OID 1157669)
+-- TOC entry 2344 (class 2606 OID 1253084)
 -- Name: dogodekizven_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3955,7 +3955,7 @@ ALTER TABLE ONLY dogodekizven
 
 
 --
--- TOC entry 2311 (class 2606 OID 1157598)
+-- TOC entry 2311 (class 2606 OID 1253013)
 -- Name: drza_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3964,7 +3964,7 @@ ALTER TABLE ONLY drza
 
 
 --
--- TOC entry 2398 (class 2606 OID 1157799)
+-- TOC entry 2398 (class 2606 OID 1253214)
 -- Name: funkcija_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3973,7 +3973,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 2322 (class 2606 OID 1157616)
+-- TOC entry 2322 (class 2606 OID 1253031)
 -- Name: gostovanje_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3982,7 +3982,7 @@ ALTER TABLE ONLY gostovanje
 
 
 --
--- TOC entry 2341 (class 2606 OID 1157663)
+-- TOC entry 2341 (class 2606 OID 1253078)
 -- Name: gostujoca_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4000,7 +4000,7 @@ ALTER TABLE ONLY kose
 
 
 --
--- TOC entry 2365 (class 2606 OID 1157712)
+-- TOC entry 2365 (class 2606 OID 1253127)
 -- Name: kupec_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4009,7 +4009,7 @@ ALTER TABLE ONLY kupec
 
 
 --
--- TOC entry 2377 (class 2606 OID 1157739)
+-- TOC entry 2377 (class 2606 OID 1253154)
 -- Name: nacinplacina_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4018,7 +4018,7 @@ ALTER TABLE ONLY nacinplacina
 
 
 --
--- TOC entry 2304 (class 2606 OID 1157570)
+-- TOC entry 2304 (class 2606 OID 1252985)
 -- Name: option_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4027,7 +4027,7 @@ ALTER TABLE ONLY option
 
 
 --
--- TOC entry 2279 (class 2606 OID 1157475)
+-- TOC entry 2279 (class 2606 OID 1252890)
 -- Name: optionvalue_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4036,7 +4036,7 @@ ALTER TABLE ONLY optionvalue
 
 
 --
--- TOC entry 2294 (class 2606 OID 1157534)
+-- TOC entry 2294 (class 2606 OID 1252949)
 -- Name: oseba2popa_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4045,7 +4045,7 @@ ALTER TABLE ONLY oseba2popa
 
 
 --
--- TOC entry 2281 (class 2606 OID 1157500)
+-- TOC entry 2281 (class 2606 OID 1252915)
 -- Name: oseba_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4054,7 +4054,7 @@ ALTER TABLE ONLY oseba
 
 
 --
--- TOC entry 2273 (class 2606 OID 1157455)
+-- TOC entry 2273 (class 2606 OID 1252870)
 -- Name: permission2role_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4063,7 +4063,7 @@ ALTER TABLE ONLY permission2role
 
 
 --
--- TOC entry 2266 (class 2606 OID 1157440)
+-- TOC entry 2266 (class 2606 OID 1252855)
 -- Name: permission_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4072,7 +4072,7 @@ ALTER TABLE ONLY permission
 
 
 --
--- TOC entry 2380 (class 2606 OID 1157745)
+-- TOC entry 2380 (class 2606 OID 1253160)
 -- Name: placilniinstrument_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4081,7 +4081,7 @@ ALTER TABLE ONLY placilniinstrument
 
 
 --
--- TOC entry 2391 (class 2606 OID 1157777)
+-- TOC entry 2391 (class 2606 OID 1253192)
 -- Name: podrocjesedenja_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4090,7 +4090,7 @@ ALTER TABLE ONLY podrocjesedenja
 
 
 --
--- TOC entry 2428 (class 2606 OID 1157892)
+-- TOC entry 2428 (class 2606 OID 1253307)
 -- Name: pogodba_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4099,7 +4099,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 2289 (class 2606 OID 1157527)
+-- TOC entry 2289 (class 2606 OID 1252942)
 -- Name: popa_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4108,7 +4108,7 @@ ALTER TABLE ONLY popa
 
 
 --
--- TOC entry 2301 (class 2606 OID 1157558)
+-- TOC entry 2301 (class 2606 OID 1252973)
 -- Name: posta_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4117,7 +4117,7 @@ ALTER TABLE ONLY posta
 
 
 --
--- TOC entry 2369 (class 2606 OID 1157718)
+-- TOC entry 2369 (class 2606 OID 1253133)
 -- Name: postavkaracuna_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4135,7 +4135,7 @@ ALTER TABLE ONLY postninaslov
 
 
 --
--- TOC entry 2299 (class 2606 OID 1157548)
+-- TOC entry 2299 (class 2606 OID 1252963)
 -- Name: postninaslovi_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4144,7 +4144,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2320 (class 2606 OID 1157607)
+-- TOC entry 2320 (class 2606 OID 1253022)
 -- Name: predstava_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4153,7 +4153,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 2375 (class 2606 OID 1157730)
+-- TOC entry 2375 (class 2606 OID 1253145)
 -- Name: prodajapredstave_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4162,7 +4162,7 @@ ALTER TABLE ONLY prodajapredstave
 
 
 --
--- TOC entry 2414 (class 2606 OID 1157837)
+-- TOC entry 2414 (class 2606 OID 1253252)
 -- Name: produkcijadelitev_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4171,7 +4171,7 @@ ALTER TABLE ONLY produkcijadelitev
 
 
 --
--- TOC entry 2422 (class 2606 OID 1157880)
+-- TOC entry 2422 (class 2606 OID 1253295)
 -- Name: produkcijskahisa_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4180,7 +4180,7 @@ ALTER TABLE ONLY produkcijskahisa
 
 
 --
--- TOC entry 2385 (class 2606 OID 1157762)
+-- TOC entry 2385 (class 2606 OID 1253177)
 -- Name: prostor_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4189,7 +4189,7 @@ ALTER TABLE ONLY prostor
 
 
 --
--- TOC entry 2363 (class 2606 OID 1157703)
+-- TOC entry 2363 (class 2606 OID 1253118)
 -- Name: racun_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4198,7 +4198,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2357 (class 2606 OID 1157694)
+-- TOC entry 2357 (class 2606 OID 1253109)
 -- Name: razpisansedez_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4207,7 +4207,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2420 (class 2606 OID 1157874)
+-- TOC entry 2420 (class 2606 OID 1253289)
 -- Name: rekvizit_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4216,7 +4216,7 @@ ALTER TABLE ONLY rekvizit
 
 
 --
--- TOC entry 2410 (class 2606 OID 1157828)
+-- TOC entry 2410 (class 2606 OID 1253243)
 -- Name: rekviziterstvo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4225,7 +4225,7 @@ ALTER TABLE ONLY rekviziterstvo
 
 
 --
--- TOC entry 2258 (class 2606 OID 1157411)
+-- TOC entry 2258 (class 2606 OID 1252826)
 -- Name: revizije_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4234,7 +4234,7 @@ ALTER TABLE ONLY revizije
 
 
 --
--- TOC entry 2389 (class 2606 OID 1157768)
+-- TOC entry 2389 (class 2606 OID 1253183)
 -- Name: rezervacija_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4243,7 +4243,7 @@ ALTER TABLE ONLY rezervacija
 
 
 --
--- TOC entry 2264 (class 2606 OID 1157429)
+-- TOC entry 2264 (class 2606 OID 1252844)
 -- Name: role2user_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4252,7 +4252,7 @@ ALTER TABLE ONLY role2user
 
 
 --
--- TOC entry 2268 (class 2606 OID 1157449)
+-- TOC entry 2268 (class 2606 OID 1252864)
 -- Name: role_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4261,7 +4261,7 @@ ALTER TABLE ONLY role
 
 
 --
--- TOC entry 2396 (class 2606 OID 1157786)
+-- TOC entry 2396 (class 2606 OID 1253201)
 -- Name: sedez_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4270,7 +4270,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2371 (class 2606 OID 1157725)
+-- TOC entry 2371 (class 2606 OID 1253140)
 -- Name: sedeznired_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4279,7 +4279,7 @@ ALTER TABLE ONLY sedeznired
 
 
 --
--- TOC entry 2346 (class 2606 OID 1157675)
+-- TOC entry 2346 (class 2606 OID 1253090)
 -- Name: sezona_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4288,7 +4288,7 @@ ALTER TABLE ONLY sezona
 
 
 --
--- TOC entry 2286 (class 2606 OID 1157507)
+-- TOC entry 2286 (class 2606 OID 1252922)
 -- Name: telefonska_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4297,7 +4297,7 @@ ALTER TABLE ONLY telefonska
 
 
 --
--- TOC entry 2351 (class 2606 OID 1157685)
+-- TOC entry 2351 (class 2606 OID 1253100)
 -- Name: terminstoritve_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4306,7 +4306,7 @@ ALTER TABLE ONLY terminstoritve
 
 
 --
--- TOC entry 2418 (class 2606 OID 1157864)
+-- TOC entry 2418 (class 2606 OID 1253279)
 -- Name: tipfunkcije_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4315,7 +4315,7 @@ ALTER TABLE ONLY tipfunkcije
 
 
 --
--- TOC entry 2309 (class 2606 OID 1157583)
+-- TOC entry 2309 (class 2606 OID 1252998)
 -- Name: trr_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4324,7 +4324,7 @@ ALTER TABLE ONLY trr
 
 
 --
--- TOC entry 2260 (class 2606 OID 1157424)
+-- TOC entry 2260 (class 2606 OID 1252839)
 -- Name: uporabniki_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4333,7 +4333,7 @@ ALTER TABLE ONLY uporabniki
 
 
 --
--- TOC entry 2435 (class 2606 OID 1157920)
+-- TOC entry 2435 (class 2606 OID 1253335)
 -- Name: uprizoritev_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4342,7 +4342,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2326 (class 2606 OID 1157622)
+-- TOC entry 2326 (class 2606 OID 1253037)
 -- Name: vaja_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4351,7 +4351,7 @@ ALTER TABLE ONLY vaja
 
 
 --
--- TOC entry 2383 (class 2606 OID 1157753)
+-- TOC entry 2383 (class 2606 OID 1253168)
 -- Name: vrstasedezev_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4360,7 +4360,7 @@ ALTER TABLE ONLY vrstasedezev
 
 
 --
--- TOC entry 2406 (class 2606 OID 1157819)
+-- TOC entry 2406 (class 2606 OID 1253234)
 -- Name: zaposlitev_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4369,7 +4369,7 @@ ALTER TABLE ONLY zaposlitev
 
 
 --
--- TOC entry 2339 (class 2606 OID 1157658)
+-- TOC entry 2339 (class 2606 OID 1253073)
 -- Name: zasedenost_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4378,7 +4378,7 @@ ALTER TABLE ONLY zasedenost
 
 
 --
--- TOC entry 2430 (class 2606 OID 1157905)
+-- TOC entry 2430 (class 2606 OID 1253320)
 -- Name: zvrstsurs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4387,7 +4387,7 @@ ALTER TABLE ONLY zvrstsurs
 
 
 --
--- TOC entry 2403 (class 2606 OID 1157812)
+-- TOC entry 2403 (class 2606 OID 1253227)
 -- Name: zvrstuprizoritve_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4396,7 +4396,7 @@ ALTER TABLE ONLY zvrstuprizoritve
 
 
 --
--- TOC entry 2329 (class 1259 OID 1157643)
+-- TOC entry 2329 (class 1259 OID 1253058)
 -- Name: idx_11e93b5d3a0e32e3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4404,7 +4404,7 @@ CREATE INDEX idx_11e93b5d3a0e32e3 ON dogodek USING btree (sezona_id);
 
 
 --
--- TOC entry 2287 (class 1259 OID 1157529)
+-- TOC entry 2287 (class 1259 OID 1252944)
 -- Name: idx_1c7adba5ee4b985a; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4436,7 +4436,7 @@ CREATE INDEX idx_1db842d6ee4b985a ON postninaslov USING btree (drzava_id);
 
 
 --
--- TOC entry 2378 (class 1259 OID 1157746)
+-- TOC entry 2378 (class 1259 OID 1253161)
 -- Name: idx_1df2e9faa420584d; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4444,7 +4444,7 @@ CREATE INDEX idx_1df2e9faa420584d ON placilniinstrument USING btree (nacin_placi
 
 
 --
--- TOC entry 2372 (class 1259 OID 1157732)
+-- TOC entry 2372 (class 1259 OID 1253147)
 -- Name: idx_20d95c7fa81ccef6; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4452,7 +4452,7 @@ CREATE INDEX idx_20d95c7fa81ccef6 ON prodajapredstave USING btree (dogodek_id);
 
 
 --
--- TOC entry 2373 (class 1259 OID 1157731)
+-- TOC entry 2373 (class 1259 OID 1253146)
 -- Name: idx_20d95c7fb31ae31; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4460,7 +4460,7 @@ CREATE INDEX idx_20d95c7fb31ae31 ON prodajapredstave USING btree (sedezni_red_id
 
 
 --
--- TOC entry 2324 (class 1259 OID 1157623)
+-- TOC entry 2324 (class 1259 OID 1253038)
 -- Name: idx_2390fc9662b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4468,7 +4468,7 @@ CREATE INDEX idx_2390fc9662b4ffca ON vaja USING btree (uprizoritev_id);
 
 
 --
--- TOC entry 2399 (class 1259 OID 1157802)
+-- TOC entry 2399 (class 1259 OID 1253217)
 -- Name: idx_23aeb9584dc36c21; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4476,7 +4476,7 @@ CREATE INDEX idx_23aeb9584dc36c21 ON funkcija USING btree (tip_vloge_id);
 
 
 --
--- TOC entry 2400 (class 1259 OID 1157800)
+-- TOC entry 2400 (class 1259 OID 1253215)
 -- Name: idx_23aeb95862b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4484,7 +4484,7 @@ CREATE INDEX idx_23aeb95862b4ffca ON funkcija USING btree (uprizoritev_id);
 
 
 --
--- TOC entry 2401 (class 1259 OID 1157801)
+-- TOC entry 2401 (class 1259 OID 1253216)
 -- Name: idx_23aeb958740eb038; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4492,7 +4492,7 @@ CREATE INDEX idx_23aeb958740eb038 ON funkcija USING btree (alternacija_id);
 
 
 --
--- TOC entry 2424 (class 1259 OID 1157893)
+-- TOC entry 2424 (class 1259 OID 1253308)
 -- Name: idx_2decfc5910389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4500,7 +4500,7 @@ CREATE INDEX idx_2decfc5910389148 ON pogodba USING btree (oseba_id);
 
 
 --
--- TOC entry 2425 (class 1259 OID 1157894)
+-- TOC entry 2425 (class 1259 OID 1253309)
 -- Name: idx_2decfc596beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4508,7 +4508,7 @@ CREATE INDEX idx_2decfc596beede51 ON pogodba USING btree (popa_id);
 
 
 --
--- TOC entry 2426 (class 1259 OID 1157895)
+-- TOC entry 2426 (class 1259 OID 1253310)
 -- Name: idx_2decfc59fa5529ee; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4516,7 +4516,7 @@ CREATE INDEX idx_2decfc59fa5529ee ON pogodba USING btree (trr_id);
 
 
 --
--- TOC entry 2431 (class 1259 OID 1157923)
+-- TOC entry 2431 (class 1259 OID 1253338)
 -- Name: idx_344a77a3b262815; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4524,7 +4524,7 @@ CREATE INDEX idx_344a77a3b262815 ON uprizoritev USING btree (zvrst_surs_id);
 
 
 --
--- TOC entry 2432 (class 1259 OID 1157922)
+-- TOC entry 2432 (class 1259 OID 1253337)
 -- Name: idx_344a77a8e27eb8d; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4532,7 +4532,7 @@ CREATE INDEX idx_344a77a8e27eb8d ON uprizoritev USING btree (zvrst_uprizoritve_i
 
 
 --
--- TOC entry 2433 (class 1259 OID 1157921)
+-- TOC entry 2433 (class 1259 OID 1253336)
 -- Name: idx_344a77af35157b1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4540,7 +4540,7 @@ CREATE INDEX idx_344a77af35157b1 ON uprizoritev USING btree (besedilo_id);
 
 
 --
--- TOC entry 2306 (class 1259 OID 1157585)
+-- TOC entry 2306 (class 1259 OID 1253000)
 -- Name: idx_37f6541a10389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4548,7 +4548,7 @@ CREATE INDEX idx_37f6541a10389148 ON trr USING btree (oseba_id);
 
 
 --
--- TOC entry 2307 (class 1259 OID 1157584)
+-- TOC entry 2307 (class 1259 OID 1252999)
 -- Name: idx_37f6541a6beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4556,7 +4556,7 @@ CREATE INDEX idx_37f6541a6beede51 ON trr USING btree (popa_id);
 
 
 --
--- TOC entry 2291 (class 1259 OID 1157536)
+-- TOC entry 2291 (class 1259 OID 1252951)
 -- Name: idx_4472a4c610389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4564,7 +4564,7 @@ CREATE INDEX idx_4472a4c610389148 ON oseba2popa USING btree (oseba_id);
 
 
 --
--- TOC entry 2292 (class 1259 OID 1157535)
+-- TOC entry 2292 (class 1259 OID 1252950)
 -- Name: idx_4472a4c66beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4572,7 +4572,7 @@ CREATE INDEX idx_4472a4c66beede51 ON oseba2popa USING btree (popa_id);
 
 
 --
--- TOC entry 2387 (class 1259 OID 1157769)
+-- TOC entry 2387 (class 1259 OID 1253184)
 -- Name: idx_48f1f62bfe7b16e1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4580,7 +4580,7 @@ CREATE INDEX idx_48f1f62bfe7b16e1 ON rezervacija USING btree (prodaja_predstave_
 
 
 --
--- TOC entry 2342 (class 1259 OID 1157664)
+-- TOC entry 2342 (class 1259 OID 1253079)
 -- Name: idx_4a45d07962b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4588,7 +4588,7 @@ CREATE INDEX idx_4a45d07962b4ffca ON gostujoca USING btree (uprizoritev_id);
 
 
 --
--- TOC entry 2270 (class 1259 OID 1157456)
+-- TOC entry 2270 (class 1259 OID 1252871)
 -- Name: idx_4ff23396d60322ac; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4596,7 +4596,7 @@ CREATE INDEX idx_4ff23396d60322ac ON permission2role USING btree (role_id);
 
 
 --
--- TOC entry 2271 (class 1259 OID 1157457)
+-- TOC entry 2271 (class 1259 OID 1252872)
 -- Name: idx_4ff23396fed90cca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4604,7 +4604,7 @@ CREATE INDEX idx_4ff23396fed90cca ON permission2role USING btree (permission_id)
 
 
 --
--- TOC entry 2392 (class 1259 OID 1157789)
+-- TOC entry 2392 (class 1259 OID 1253204)
 -- Name: idx_52ed210b1c0dc15a; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4612,7 +4612,7 @@ CREATE INDEX idx_52ed210b1c0dc15a ON sedez USING btree (podrocja_sedenja_id);
 
 
 --
--- TOC entry 2393 (class 1259 OID 1157788)
+-- TOC entry 2393 (class 1259 OID 1253203)
 -- Name: idx_52ed210bb31ae31; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4620,7 +4620,7 @@ CREATE INDEX idx_52ed210bb31ae31 ON sedez USING btree (sedezni_red_id);
 
 
 --
--- TOC entry 2394 (class 1259 OID 1157787)
+-- TOC entry 2394 (class 1259 OID 1253202)
 -- Name: idx_52ed210bef943358; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4628,7 +4628,7 @@ CREATE INDEX idx_52ed210bef943358 ON sedez USING btree (vrsta_id);
 
 
 --
--- TOC entry 2316 (class 1259 OID 1157608)
+-- TOC entry 2316 (class 1259 OID 1253023)
 -- Name: idx_602f6e4662b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4636,7 +4636,7 @@ CREATE INDEX idx_602f6e4662b4ffca ON predstava USING btree (uprizoritev_id);
 
 
 --
--- TOC entry 2317 (class 1259 OID 1157610)
+-- TOC entry 2317 (class 1259 OID 1253025)
 -- Name: idx_602f6e466f7e7a33; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4644,7 +4644,7 @@ CREATE INDEX idx_602f6e466f7e7a33 ON predstava USING btree (gostujoc_id);
 
 
 --
--- TOC entry 2318 (class 1259 OID 1157609)
+-- TOC entry 2318 (class 1259 OID 1253024)
 -- Name: idx_602f6e46ef0f30b; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4652,7 +4652,7 @@ CREATE INDEX idx_602f6e46ef0f30b ON predstava USING btree (gostovanje_id);
 
 
 --
--- TOC entry 2352 (class 1259 OID 1157698)
+-- TOC entry 2352 (class 1259 OID 1253113)
 -- Name: idx_667e35d117619010; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4660,7 +4660,7 @@ CREATE INDEX idx_667e35d117619010 ON razpisansedez USING btree (rezervacija_id);
 
 
 --
--- TOC entry 2353 (class 1259 OID 1157696)
+-- TOC entry 2353 (class 1259 OID 1253111)
 -- Name: idx_667e35d1c146c3f3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4668,7 +4668,7 @@ CREATE INDEX idx_667e35d1c146c3f3 ON razpisansedez USING btree (sedez_id);
 
 
 --
--- TOC entry 2354 (class 1259 OID 1157695)
+-- TOC entry 2354 (class 1259 OID 1253110)
 -- Name: idx_667e35d1f5e1d2d3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4676,7 +4676,7 @@ CREATE INDEX idx_667e35d1f5e1d2d3 ON razpisansedez USING btree (postavka_racuna_
 
 
 --
--- TOC entry 2355 (class 1259 OID 1157697)
+-- TOC entry 2355 (class 1259 OID 1253112)
 -- Name: idx_667e35d1fe7b16e1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4684,7 +4684,7 @@ CREATE INDEX idx_667e35d1fe7b16e1 ON razpisansedez USING btree (prodaja_predstav
 
 
 --
--- TOC entry 2261 (class 1259 OID 1157430)
+-- TOC entry 2261 (class 1259 OID 1252845)
 -- Name: idx_704d3abca76ed395; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4692,7 +4692,7 @@ CREATE INDEX idx_704d3abca76ed395 ON role2user USING btree (user_id);
 
 
 --
--- TOC entry 2262 (class 1259 OID 1157431)
+-- TOC entry 2262 (class 1259 OID 1252846)
 -- Name: idx_704d3abcd60322ac; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4700,7 +4700,7 @@ CREATE INDEX idx_704d3abcd60322ac ON role2user USING btree (role_id);
 
 
 --
--- TOC entry 2381 (class 1259 OID 1157754)
+-- TOC entry 2381 (class 1259 OID 1253169)
 -- Name: idx_7069c3c41c0dc15a; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4708,7 +4708,7 @@ CREATE INDEX idx_7069c3c41c0dc15a ON vrstasedezev USING btree (podrocja_sedenja_
 
 
 --
--- TOC entry 2367 (class 1259 OID 1157719)
+-- TOC entry 2367 (class 1259 OID 1253134)
 -- Name: idx_80b6f3595b3d808c; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4716,7 +4716,7 @@ CREATE INDEX idx_80b6f3595b3d808c ON postavkaracuna USING btree (racun_id);
 
 
 --
--- TOC entry 2407 (class 1259 OID 1157829)
+-- TOC entry 2407 (class 1259 OID 1253244)
 -- Name: idx_8198265413e60bc0; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4724,7 +4724,7 @@ CREATE INDEX idx_8198265413e60bc0 ON rekviziterstvo USING btree (rekvizit_id);
 
 
 --
--- TOC entry 2408 (class 1259 OID 1157830)
+-- TOC entry 2408 (class 1259 OID 1253245)
 -- Name: idx_8198265462b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4732,7 +4732,7 @@ CREATE INDEX idx_8198265462b4ffca ON rekviziterstvo USING btree (uprizoritev_id)
 
 
 --
--- TOC entry 2295 (class 1259 OID 1157550)
+-- TOC entry 2295 (class 1259 OID 1252965)
 -- Name: idx_89c1f9d210389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4740,7 +4740,7 @@ CREATE INDEX idx_89c1f9d210389148 ON postninaslovi USING btree (oseba_id);
 
 
 --
--- TOC entry 2296 (class 1259 OID 1157549)
+-- TOC entry 2296 (class 1259 OID 1252964)
 -- Name: idx_89c1f9d2a233cb39; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4748,7 +4748,7 @@ CREATE INDEX idx_89c1f9d2a233cb39 ON postninaslovi USING btree (klient_id);
 
 
 --
--- TOC entry 2297 (class 1259 OID 1157551)
+-- TOC entry 2297 (class 1259 OID 1252966)
 -- Name: idx_89c1f9d2ee4b985a; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4756,7 +4756,7 @@ CREATE INDEX idx_89c1f9d2ee4b985a ON postninaslovi USING btree (drzava_id);
 
 
 --
--- TOC entry 2411 (class 1259 OID 1157838)
+-- TOC entry 2411 (class 1259 OID 1253253)
 -- Name: idx_97af082e62b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4764,7 +4764,7 @@ CREATE INDEX idx_97af082e62b4ffca ON produkcijadelitev USING btree (uprizoritev_
 
 
 --
--- TOC entry 2412 (class 1259 OID 1157839)
+-- TOC entry 2412 (class 1259 OID 1253254)
 -- Name: idx_97af082ec532925b; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4772,7 +4772,7 @@ CREATE INDEX idx_97af082ec532925b ON produkcijadelitev USING btree (koproducent_
 
 
 --
--- TOC entry 2442 (class 1259 OID 1157948)
+-- TOC entry 2442 (class 1259 OID 1253363)
 -- Name: idx_a4b7244f10389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4780,7 +4780,7 @@ CREATE INDEX idx_a4b7244f10389148 ON alternacija USING btree (oseba_id);
 
 
 --
--- TOC entry 2443 (class 1259 OID 1157947)
+-- TOC entry 2443 (class 1259 OID 1253362)
 -- Name: idx_a4b7244f1f9ae227; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4788,7 +4788,7 @@ CREATE INDEX idx_a4b7244f1f9ae227 ON alternacija USING btree (sodelovanje_id);
 
 
 --
--- TOC entry 2444 (class 1259 OID 1157950)
+-- TOC entry 2444 (class 1259 OID 1253365)
 -- Name: idx_a4b7244f5bc4d310; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4796,7 +4796,7 @@ CREATE INDEX idx_a4b7244f5bc4d310 ON alternacija USING btree (pogodba_id);
 
 
 --
--- TOC entry 2445 (class 1259 OID 1157946)
+-- TOC entry 2445 (class 1259 OID 1253361)
 -- Name: idx_a4b7244f8b21fb79; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4804,7 +4804,7 @@ CREATE INDEX idx_a4b7244f8b21fb79 ON alternacija USING btree (vloga_id);
 
 
 --
--- TOC entry 2446 (class 1259 OID 1157949)
+-- TOC entry 2446 (class 1259 OID 1253364)
 -- Name: idx_a4b7244fdbdb4006; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4812,7 +4812,7 @@ CREATE INDEX idx_a4b7244fdbdb4006 ON alternacija USING btree (koprodukcija_delit
 
 
 --
--- TOC entry 2404 (class 1259 OID 1157820)
+-- TOC entry 2404 (class 1259 OID 1253235)
 -- Name: idx_b244904110389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4820,7 +4820,7 @@ CREATE INDEX idx_b244904110389148 ON zaposlitev USING btree (oseba_id);
 
 
 --
--- TOC entry 2358 (class 1259 OID 1157707)
+-- TOC entry 2358 (class 1259 OID 1253122)
 -- Name: idx_b5b84f4533341ab8; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4828,7 +4828,7 @@ CREATE INDEX idx_b5b84f4533341ab8 ON racun USING btree (placilni_instrument_id);
 
 
 --
--- TOC entry 2359 (class 1259 OID 1157706)
+-- TOC entry 2359 (class 1259 OID 1253121)
 -- Name: idx_b5b84f45a420584d; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4836,7 +4836,7 @@ CREATE INDEX idx_b5b84f45a420584d ON racun USING btree (nacin_placina_id);
 
 
 --
--- TOC entry 2360 (class 1259 OID 1157704)
+-- TOC entry 2360 (class 1259 OID 1253119)
 -- Name: idx_b5b84f45bc902d3b; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4844,7 +4844,7 @@ CREATE INDEX idx_b5b84f45bc902d3b ON racun USING btree (kupec_id);
 
 
 --
--- TOC entry 2361 (class 1259 OID 1157705)
+-- TOC entry 2361 (class 1259 OID 1253120)
 -- Name: idx_b5b84f45fe7b16e1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4860,7 +4860,7 @@ CREATE INDEX idx_b7229ce169e8d4 ON kose USING btree (naslov_id);
 
 
 --
--- TOC entry 2438 (class 1259 OID 1157940)
+-- TOC entry 2438 (class 1259 OID 1253355)
 -- Name: idx_bbff875562b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4868,7 +4868,7 @@ CREATE INDEX idx_bbff875562b4ffca ON arhivalija USING btree (uprizoritev_id);
 
 
 --
--- TOC entry 2439 (class 1259 OID 1157939)
+-- TOC entry 2439 (class 1259 OID 1253354)
 -- Name: idx_bbff8755a81ccef6; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4876,7 +4876,7 @@ CREATE INDEX idx_bbff8755a81ccef6 ON arhivalija USING btree (dogodek_id);
 
 
 --
--- TOC entry 2323 (class 1259 OID 1157617)
+-- TOC entry 2323 (class 1259 OID 1253032)
 -- Name: idx_cae790c7ee4b985a; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4884,7 +4884,7 @@ CREATE INDEX idx_cae790c7ee4b985a ON gostovanje USING btree (drzava_id);
 
 
 --
--- TOC entry 2276 (class 1259 OID 1157477)
+-- TOC entry 2276 (class 1259 OID 1252892)
 -- Name: idx_ef01221fa76ed395; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4892,7 +4892,7 @@ CREATE INDEX idx_ef01221fa76ed395 ON optionvalue USING btree (user_id);
 
 
 --
--- TOC entry 2277 (class 1259 OID 1157476)
+-- TOC entry 2277 (class 1259 OID 1252891)
 -- Name: idx_ef01221fa7c41d6f; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4900,7 +4900,7 @@ CREATE INDEX idx_ef01221fa7c41d6f ON optionvalue USING btree (option_id);
 
 
 --
--- TOC entry 2283 (class 1259 OID 1157508)
+-- TOC entry 2283 (class 1259 OID 1252923)
 -- Name: idx_ef76e55910389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4908,7 +4908,7 @@ CREATE INDEX idx_ef76e55910389148 ON telefonska USING btree (oseba_id);
 
 
 --
--- TOC entry 2284 (class 1259 OID 1157509)
+-- TOC entry 2284 (class 1259 OID 1252924)
 -- Name: idx_ef76e5596beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4916,7 +4916,7 @@ CREATE INDEX idx_ef76e5596beede51 ON telefonska USING btree (popa_id);
 
 
 --
--- TOC entry 2347 (class 1259 OID 1157688)
+-- TOC entry 2347 (class 1259 OID 1253103)
 -- Name: idx_fef7d84b10389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4924,7 +4924,7 @@ CREATE INDEX idx_fef7d84b10389148 ON terminstoritve USING btree (oseba_id);
 
 
 --
--- TOC entry 2348 (class 1259 OID 1157687)
+-- TOC entry 2348 (class 1259 OID 1253102)
 -- Name: idx_fef7d84b740eb038; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4932,7 +4932,7 @@ CREATE INDEX idx_fef7d84b740eb038 ON terminstoritve USING btree (alternacija_id)
 
 
 --
--- TOC entry 2349 (class 1259 OID 1157686)
+-- TOC entry 2349 (class 1259 OID 1253101)
 -- Name: idx_fef7d84ba81ccef6; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4940,7 +4940,7 @@ CREATE INDEX idx_fef7d84ba81ccef6 ON terminstoritve USING btree (dogodek_id);
 
 
 --
--- TOC entry 2330 (class 1259 OID 1157645)
+-- TOC entry 2330 (class 1259 OID 1253060)
 -- Name: konec; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4948,7 +4948,7 @@ CREATE INDEX konec ON dogodek USING btree (konec);
 
 
 --
--- TOC entry 2331 (class 1259 OID 1157641)
+-- TOC entry 2331 (class 1259 OID 1253056)
 -- Name: uniq_11e93b5d10398482; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4956,7 +4956,7 @@ CREATE UNIQUE INDEX uniq_11e93b5d10398482 ON dogodek USING btree (dogodek_izven_
 
 
 --
--- TOC entry 2332 (class 1259 OID 1157638)
+-- TOC entry 2332 (class 1259 OID 1253053)
 -- Name: uniq_11e93b5d14a6c237; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4964,7 +4964,7 @@ CREATE UNIQUE INDEX uniq_11e93b5d14a6c237 ON dogodek USING btree (zasedenost_id)
 
 
 --
--- TOC entry 2333 (class 1259 OID 1157639)
+-- TOC entry 2333 (class 1259 OID 1253054)
 -- Name: uniq_11e93b5d18640538; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4972,7 +4972,7 @@ CREATE UNIQUE INDEX uniq_11e93b5d18640538 ON dogodek USING btree (vaja_id);
 
 
 --
--- TOC entry 2334 (class 1259 OID 1157637)
+-- TOC entry 2334 (class 1259 OID 1253052)
 -- Name: uniq_11e93b5d5ac894aa; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4980,7 +4980,7 @@ CREATE UNIQUE INDEX uniq_11e93b5d5ac894aa ON dogodek USING btree (predstava_id);
 
 
 --
--- TOC entry 2335 (class 1259 OID 1157642)
+-- TOC entry 2335 (class 1259 OID 1253057)
 -- Name: uniq_11e93b5dcc3aa562; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4988,7 +4988,7 @@ CREATE UNIQUE INDEX uniq_11e93b5dcc3aa562 ON dogodek USING btree (prostor_id);
 
 
 --
--- TOC entry 2336 (class 1259 OID 1157640)
+-- TOC entry 2336 (class 1259 OID 1253055)
 -- Name: uniq_11e93b5def0f30b; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4996,7 +4996,7 @@ CREATE UNIQUE INDEX uniq_11e93b5def0f30b ON dogodek USING btree (gostovanje_id);
 
 
 --
--- TOC entry 2290 (class 1259 OID 1157528)
+-- TOC entry 2290 (class 1259 OID 1252943)
 -- Name: uniq_1c7adba5559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5004,7 +5004,7 @@ CREATE UNIQUE INDEX uniq_1c7adba5559828a3 ON popa USING btree (sifra);
 
 
 --
--- TOC entry 2312 (class 1259 OID 1157599)
+-- TOC entry 2312 (class 1259 OID 1253014)
 -- Name: uniq_2d10c3c4559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5012,7 +5012,7 @@ CREATE UNIQUE INDEX uniq_2d10c3c4559828a3 ON drza USING btree (sifra);
 
 
 --
--- TOC entry 2313 (class 1259 OID 1157601)
+-- TOC entry 2313 (class 1259 OID 1253016)
 -- Name: uniq_2d10c3c45841b2e7; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5020,7 +5020,7 @@ CREATE UNIQUE INDEX uniq_2d10c3c45841b2e7 ON drza USING btree (isonum);
 
 
 --
--- TOC entry 2314 (class 1259 OID 1157600)
+-- TOC entry 2314 (class 1259 OID 1253015)
 -- Name: uniq_2d10c3c4a73e48e1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5028,7 +5028,7 @@ CREATE UNIQUE INDEX uniq_2d10c3c4a73e48e1 ON drza USING btree (sifradolg);
 
 
 --
--- TOC entry 2315 (class 1259 OID 1157602)
+-- TOC entry 2315 (class 1259 OID 1253017)
 -- Name: uniq_2d10c3c4bec28cef; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5036,7 +5036,7 @@ CREATE UNIQUE INDEX uniq_2d10c3c4bec28cef ON drza USING btree (isonaziv);
 
 
 --
--- TOC entry 2366 (class 1259 OID 1157713)
+-- TOC entry 2366 (class 1259 OID 1253128)
 -- Name: uniq_2d2009bb6beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5044,7 +5044,7 @@ CREATE UNIQUE INDEX uniq_2d2009bb6beede51 ON kupec USING btree (popa_id);
 
 
 --
--- TOC entry 2282 (class 1259 OID 1157501)
+-- TOC entry 2282 (class 1259 OID 1252916)
 -- Name: uniq_466966d7a76ed395; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5052,7 +5052,7 @@ CREATE UNIQUE INDEX uniq_466966d7a76ed395 ON oseba USING btree (user_id);
 
 
 --
--- TOC entry 2305 (class 1259 OID 1157571)
+-- TOC entry 2305 (class 1259 OID 1252986)
 -- Name: uniq_5d2a05865e237e06; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5060,7 +5060,7 @@ CREATE UNIQUE INDEX uniq_5d2a05865e237e06 ON option USING btree (name);
 
 
 --
--- TOC entry 2386 (class 1259 OID 1157763)
+-- TOC entry 2386 (class 1259 OID 1253178)
 -- Name: uniq_952dd21955cca980; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5076,7 +5076,7 @@ CREATE UNIQUE INDEX uniq_b7229ce1a76ed395 ON kose USING btree (user_id);
 
 
 --
--- TOC entry 2302 (class 1259 OID 1157559)
+-- TOC entry 2302 (class 1259 OID 1252974)
 -- Name: uniq_ba25e4b6559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5084,7 +5084,7 @@ CREATE UNIQUE INDEX uniq_ba25e4b6559828a3 ON posta USING btree (sifra);
 
 
 --
--- TOC entry 2423 (class 1259 OID 1157881)
+-- TOC entry 2423 (class 1259 OID 1253296)
 -- Name: uniq_e6fc20286beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5092,7 +5092,7 @@ CREATE UNIQUE INDEX uniq_e6fc20286beede51 ON produkcijskahisa USING btree (popa_
 
 
 --
--- TOC entry 2269 (class 1259 OID 1157450)
+-- TOC entry 2269 (class 1259 OID 1252865)
 -- Name: uniq_f75b25545e237e06; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5100,7 +5100,7 @@ CREATE UNIQUE INDEX uniq_f75b25545e237e06 ON role USING btree (name);
 
 
 --
--- TOC entry 2337 (class 1259 OID 1157644)
+-- TOC entry 2337 (class 1259 OID 1253059)
 -- Name: zacetek; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5108,7 +5108,7 @@ CREATE INDEX zacetek ON dogodek USING btree (zacetek);
 
 
 --
--- TOC entry 2471 (class 2606 OID 1158081)
+-- TOC entry 2471 (class 2606 OID 1253496)
 -- Name: fk_11e93b5d10398482; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5117,7 +5117,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2474 (class 2606 OID 1158066)
+-- TOC entry 2474 (class 2606 OID 1253481)
 -- Name: fk_11e93b5d14a6c237; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5126,7 +5126,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2473 (class 2606 OID 1158071)
+-- TOC entry 2473 (class 2606 OID 1253486)
 -- Name: fk_11e93b5d18640538; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5135,7 +5135,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2469 (class 2606 OID 1158091)
+-- TOC entry 2469 (class 2606 OID 1253506)
 -- Name: fk_11e93b5d3a0e32e3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5144,7 +5144,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2475 (class 2606 OID 1158061)
+-- TOC entry 2475 (class 2606 OID 1253476)
 -- Name: fk_11e93b5d5ac894aa; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5153,7 +5153,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2470 (class 2606 OID 1158086)
+-- TOC entry 2470 (class 2606 OID 1253501)
 -- Name: fk_11e93b5dcc3aa562; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5162,7 +5162,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2472 (class 2606 OID 1158076)
+-- TOC entry 2472 (class 2606 OID 1253491)
 -- Name: fk_11e93b5def0f30b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5171,7 +5171,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2456 (class 2606 OID 1157996)
+-- TOC entry 2456 (class 2606 OID 1253411)
 -- Name: fk_1c7adba5ee4b985a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5180,7 +5180,7 @@ ALTER TABLE ONLY popa
 
 
 --
--- TOC entry 2492 (class 2606 OID 1158176)
+-- TOC entry 2492 (class 2606 OID 1253591)
 -- Name: fk_1df2e9faa420584d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5189,7 +5189,7 @@ ALTER TABLE ONLY placilniinstrument
 
 
 --
--- TOC entry 2490 (class 2606 OID 1158171)
+-- TOC entry 2490 (class 2606 OID 1253586)
 -- Name: fk_20d95c7fa81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5198,7 +5198,7 @@ ALTER TABLE ONLY prodajapredstave
 
 
 --
--- TOC entry 2491 (class 2606 OID 1158166)
+-- TOC entry 2491 (class 2606 OID 1253581)
 -- Name: fk_20d95c7fb31ae31; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5207,7 +5207,7 @@ ALTER TABLE ONLY prodajapredstave
 
 
 --
--- TOC entry 2468 (class 2606 OID 1158056)
+-- TOC entry 2468 (class 2606 OID 1253471)
 -- Name: fk_2390fc9662b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5216,7 +5216,7 @@ ALTER TABLE ONLY vaja
 
 
 --
--- TOC entry 2498 (class 2606 OID 1158216)
+-- TOC entry 2498 (class 2606 OID 1253631)
 -- Name: fk_23aeb9584dc36c21; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5225,7 +5225,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 2500 (class 2606 OID 1158206)
+-- TOC entry 2500 (class 2606 OID 1253621)
 -- Name: fk_23aeb95862b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5234,7 +5234,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 2499 (class 2606 OID 1158211)
+-- TOC entry 2499 (class 2606 OID 1253626)
 -- Name: fk_23aeb958740eb038; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5243,7 +5243,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 2488 (class 2606 OID 1158156)
+-- TOC entry 2488 (class 2606 OID 1253571)
 -- Name: fk_2d2009bb6beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5252,7 +5252,7 @@ ALTER TABLE ONLY kupec
 
 
 --
--- TOC entry 2509 (class 2606 OID 1158251)
+-- TOC entry 2509 (class 2606 OID 1253666)
 -- Name: fk_2decfc5910389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5261,7 +5261,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 2508 (class 2606 OID 1158256)
+-- TOC entry 2508 (class 2606 OID 1253671)
 -- Name: fk_2decfc596beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5270,7 +5270,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 2507 (class 2606 OID 1158261)
+-- TOC entry 2507 (class 2606 OID 1253676)
 -- Name: fk_2decfc59fa5529ee; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5279,7 +5279,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 2510 (class 2606 OID 1158276)
+-- TOC entry 2510 (class 2606 OID 1253691)
 -- Name: fk_344a77a3b262815; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5288,7 +5288,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2511 (class 2606 OID 1158271)
+-- TOC entry 2511 (class 2606 OID 1253686)
 -- Name: fk_344a77a8e27eb8d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5297,7 +5297,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2512 (class 2606 OID 1158266)
+-- TOC entry 2512 (class 2606 OID 1253681)
 -- Name: fk_344a77af35157b1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5306,7 +5306,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2462 (class 2606 OID 1158031)
+-- TOC entry 2462 (class 2606 OID 1253446)
 -- Name: fk_37f6541a10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5315,7 +5315,7 @@ ALTER TABLE ONLY trr
 
 
 --
--- TOC entry 2463 (class 2606 OID 1158026)
+-- TOC entry 2463 (class 2606 OID 1253441)
 -- Name: fk_37f6541a6beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5324,7 +5324,7 @@ ALTER TABLE ONLY trr
 
 
 --
--- TOC entry 2457 (class 2606 OID 1158006)
+-- TOC entry 2457 (class 2606 OID 1253421)
 -- Name: fk_4472a4c610389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5333,7 +5333,7 @@ ALTER TABLE ONLY oseba2popa
 
 
 --
--- TOC entry 2458 (class 2606 OID 1158001)
+-- TOC entry 2458 (class 2606 OID 1253416)
 -- Name: fk_4472a4c66beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5342,7 +5342,7 @@ ALTER TABLE ONLY oseba2popa
 
 
 --
--- TOC entry 2453 (class 2606 OID 1157981)
+-- TOC entry 2453 (class 2606 OID 1253396)
 -- Name: fk_466966d7a76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5351,7 +5351,7 @@ ALTER TABLE ONLY oseba
 
 
 --
--- TOC entry 2494 (class 2606 OID 1158186)
+-- TOC entry 2494 (class 2606 OID 1253601)
 -- Name: fk_48f1f62bfe7b16e1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5360,7 +5360,7 @@ ALTER TABLE ONLY rezervacija
 
 
 --
--- TOC entry 2476 (class 2606 OID 1158096)
+-- TOC entry 2476 (class 2606 OID 1253511)
 -- Name: fk_4a45d07962b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5369,7 +5369,7 @@ ALTER TABLE ONLY gostujoca
 
 
 --
--- TOC entry 2450 (class 2606 OID 1157961)
+-- TOC entry 2450 (class 2606 OID 1253376)
 -- Name: fk_4ff23396d60322ac; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5378,7 +5378,7 @@ ALTER TABLE ONLY permission2role
 
 
 --
--- TOC entry 2449 (class 2606 OID 1157966)
+-- TOC entry 2449 (class 2606 OID 1253381)
 -- Name: fk_4ff23396fed90cca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5387,7 +5387,7 @@ ALTER TABLE ONLY permission2role
 
 
 --
--- TOC entry 2495 (class 2606 OID 1158201)
+-- TOC entry 2495 (class 2606 OID 1253616)
 -- Name: fk_52ed210b1c0dc15a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5396,7 +5396,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2496 (class 2606 OID 1158196)
+-- TOC entry 2496 (class 2606 OID 1253611)
 -- Name: fk_52ed210bb31ae31; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5405,7 +5405,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2497 (class 2606 OID 1158191)
+-- TOC entry 2497 (class 2606 OID 1253606)
 -- Name: fk_52ed210bef943358; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5414,7 +5414,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2466 (class 2606 OID 1158036)
+-- TOC entry 2466 (class 2606 OID 1253451)
 -- Name: fk_602f6e4662b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5423,7 +5423,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 2464 (class 2606 OID 1158046)
+-- TOC entry 2464 (class 2606 OID 1253461)
 -- Name: fk_602f6e466f7e7a33; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5432,7 +5432,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 2465 (class 2606 OID 1158041)
+-- TOC entry 2465 (class 2606 OID 1253456)
 -- Name: fk_602f6e46ef0f30b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5441,7 +5441,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 2480 (class 2606 OID 1158131)
+-- TOC entry 2480 (class 2606 OID 1253546)
 -- Name: fk_667e35d117619010; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5450,7 +5450,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2482 (class 2606 OID 1158121)
+-- TOC entry 2482 (class 2606 OID 1253536)
 -- Name: fk_667e35d1c146c3f3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5459,7 +5459,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2483 (class 2606 OID 1158116)
+-- TOC entry 2483 (class 2606 OID 1253531)
 -- Name: fk_667e35d1f5e1d2d3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5468,7 +5468,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2481 (class 2606 OID 1158126)
+-- TOC entry 2481 (class 2606 OID 1253541)
 -- Name: fk_667e35d1fe7b16e1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5477,7 +5477,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2448 (class 2606 OID 1157951)
+-- TOC entry 2448 (class 2606 OID 1253366)
 -- Name: fk_704d3abca76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5486,7 +5486,7 @@ ALTER TABLE ONLY role2user
 
 
 --
--- TOC entry 2447 (class 2606 OID 1157956)
+-- TOC entry 2447 (class 2606 OID 1253371)
 -- Name: fk_704d3abcd60322ac; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5495,7 +5495,7 @@ ALTER TABLE ONLY role2user
 
 
 --
--- TOC entry 2493 (class 2606 OID 1158181)
+-- TOC entry 2493 (class 2606 OID 1253596)
 -- Name: fk_7069c3c41c0dc15a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5504,7 +5504,7 @@ ALTER TABLE ONLY vrstasedezev
 
 
 --
--- TOC entry 2489 (class 2606 OID 1158161)
+-- TOC entry 2489 (class 2606 OID 1253576)
 -- Name: fk_80b6f3595b3d808c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5513,7 +5513,7 @@ ALTER TABLE ONLY postavkaracuna
 
 
 --
--- TOC entry 2503 (class 2606 OID 1158226)
+-- TOC entry 2503 (class 2606 OID 1253641)
 -- Name: fk_8198265413e60bc0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5522,7 +5522,7 @@ ALTER TABLE ONLY rekviziterstvo
 
 
 --
--- TOC entry 2502 (class 2606 OID 1158231)
+-- TOC entry 2502 (class 2606 OID 1253646)
 -- Name: fk_8198265462b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5531,7 +5531,7 @@ ALTER TABLE ONLY rekviziterstvo
 
 
 --
--- TOC entry 2460 (class 2606 OID 1158016)
+-- TOC entry 2460 (class 2606 OID 1253431)
 -- Name: fk_89c1f9d210389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5540,7 +5540,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2461 (class 2606 OID 1158011)
+-- TOC entry 2461 (class 2606 OID 1253426)
 -- Name: fk_89c1f9d2a233cb39; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5549,7 +5549,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2459 (class 2606 OID 1158021)
+-- TOC entry 2459 (class 2606 OID 1253436)
 -- Name: fk_89c1f9d2ee4b985a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5558,7 +5558,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2505 (class 2606 OID 1158236)
+-- TOC entry 2505 (class 2606 OID 1253651)
 -- Name: fk_97af082e62b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5567,7 +5567,7 @@ ALTER TABLE ONLY produkcijadelitev
 
 
 --
--- TOC entry 2504 (class 2606 OID 1158241)
+-- TOC entry 2504 (class 2606 OID 1253656)
 -- Name: fk_97af082ec532925b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5576,7 +5576,7 @@ ALTER TABLE ONLY produkcijadelitev
 
 
 --
--- TOC entry 2517 (class 2606 OID 1158301)
+-- TOC entry 2517 (class 2606 OID 1253716)
 -- Name: fk_a4b7244f10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5585,7 +5585,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2518 (class 2606 OID 1158296)
+-- TOC entry 2518 (class 2606 OID 1253711)
 -- Name: fk_a4b7244f1f9ae227; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5594,7 +5594,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2515 (class 2606 OID 1158311)
+-- TOC entry 2515 (class 2606 OID 1253726)
 -- Name: fk_a4b7244f5bc4d310; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5603,7 +5603,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2519 (class 2606 OID 1158291)
+-- TOC entry 2519 (class 2606 OID 1253706)
 -- Name: fk_a4b7244f8b21fb79; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5612,7 +5612,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2516 (class 2606 OID 1158306)
+-- TOC entry 2516 (class 2606 OID 1253721)
 -- Name: fk_a4b7244fdbdb4006; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5621,7 +5621,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2501 (class 2606 OID 1158221)
+-- TOC entry 2501 (class 2606 OID 1253636)
 -- Name: fk_b244904110389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5630,7 +5630,7 @@ ALTER TABLE ONLY zaposlitev
 
 
 --
--- TOC entry 2484 (class 2606 OID 1158151)
+-- TOC entry 2484 (class 2606 OID 1253566)
 -- Name: fk_b5b84f4533341ab8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5639,7 +5639,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2485 (class 2606 OID 1158146)
+-- TOC entry 2485 (class 2606 OID 1253561)
 -- Name: fk_b5b84f45a420584d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5648,7 +5648,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2487 (class 2606 OID 1158136)
+-- TOC entry 2487 (class 2606 OID 1253551)
 -- Name: fk_b5b84f45bc902d3b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5657,7 +5657,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2486 (class 2606 OID 1158141)
+-- TOC entry 2486 (class 2606 OID 1253556)
 -- Name: fk_b5b84f45fe7b16e1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5666,7 +5666,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2513 (class 2606 OID 1158286)
+-- TOC entry 2513 (class 2606 OID 1253701)
 -- Name: fk_bbff875562b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5675,7 +5675,7 @@ ALTER TABLE ONLY arhivalija
 
 
 --
--- TOC entry 2514 (class 2606 OID 1158281)
+-- TOC entry 2514 (class 2606 OID 1253696)
 -- Name: fk_bbff8755a81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5684,7 +5684,7 @@ ALTER TABLE ONLY arhivalija
 
 
 --
--- TOC entry 2467 (class 2606 OID 1158051)
+-- TOC entry 2467 (class 2606 OID 1253466)
 -- Name: fk_cae790c7ee4b985a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5693,7 +5693,7 @@ ALTER TABLE ONLY gostovanje
 
 
 --
--- TOC entry 2506 (class 2606 OID 1158246)
+-- TOC entry 2506 (class 2606 OID 1253661)
 -- Name: fk_e6fc20286beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5702,7 +5702,7 @@ ALTER TABLE ONLY produkcijskahisa
 
 
 --
--- TOC entry 2451 (class 2606 OID 1157976)
+-- TOC entry 2451 (class 2606 OID 1253391)
 -- Name: fk_ef01221fa76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5711,7 +5711,7 @@ ALTER TABLE ONLY optionvalue
 
 
 --
--- TOC entry 2452 (class 2606 OID 1157971)
+-- TOC entry 2452 (class 2606 OID 1253386)
 -- Name: fk_ef01221fa7c41d6f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5720,7 +5720,7 @@ ALTER TABLE ONLY optionvalue
 
 
 --
--- TOC entry 2455 (class 2606 OID 1157986)
+-- TOC entry 2455 (class 2606 OID 1253401)
 -- Name: fk_ef76e55910389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5729,7 +5729,7 @@ ALTER TABLE ONLY telefonska
 
 
 --
--- TOC entry 2454 (class 2606 OID 1157991)
+-- TOC entry 2454 (class 2606 OID 1253406)
 -- Name: fk_ef76e5596beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5738,7 +5738,7 @@ ALTER TABLE ONLY telefonska
 
 
 --
--- TOC entry 2477 (class 2606 OID 1158111)
+-- TOC entry 2477 (class 2606 OID 1253526)
 -- Name: fk_fef7d84b10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5747,7 +5747,7 @@ ALTER TABLE ONLY terminstoritve
 
 
 --
--- TOC entry 2478 (class 2606 OID 1158106)
+-- TOC entry 2478 (class 2606 OID 1253521)
 -- Name: fk_fef7d84b740eb038; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5756,7 +5756,7 @@ ALTER TABLE ONLY terminstoritve
 
 
 --
--- TOC entry 2479 (class 2606 OID 1158101)
+-- TOC entry 2479 (class 2606 OID 1253516)
 -- Name: fk_fef7d84ba81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5764,7 +5764,7 @@ ALTER TABLE ONLY terminstoritve
     ADD CONSTRAINT fk_fef7d84ba81ccef6 FOREIGN KEY (dogodek_id) REFERENCES dogodek(id);
 
 
--- Completed on 2015-04-24 09:23:37 CEST
+-- Completed on 2015-04-24 12:14:24 CEST
 
 --
 -- PostgreSQL database dump complete

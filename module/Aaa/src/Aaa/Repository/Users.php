@@ -140,7 +140,7 @@ class Users
      * odstrani vloge iz uporabnika
      *
      * @param $object
-     * @param $resIds array id ključ vlog
+     * @param array $resIds array id ključ vlog
      */
     public function removeRoles($object, $resIds)
     {
@@ -157,7 +157,7 @@ class Users
      * dodaja izbrane vloge v objekt
      *
      * @param $object
-     * @param $resIds array id ključ dovoljenja
+     * @param array $resIds array id ključ dovoljenja
      */
     public function addRoles($object, $resIds)
     {
