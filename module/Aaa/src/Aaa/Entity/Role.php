@@ -48,7 +48,7 @@ class Role
     /**
      * A je vloga vgrajena v sistem, ali pa dodana na user instalaciji.
      * @ORM\Column(type="boolean", nullable=true)
-     *
+     * @Max\Ui(type = value1)
      * @Max\I18n(label="Vgrajena", description="Vloga, ki pride z namestitvijo sistema")
      */
     protected $builtIn = false;

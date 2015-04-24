@@ -776,6 +776,7 @@
       <field name="sloAvtor" type="boolean" uuid="5e17a9bb-3ae3-4838-9fc3-64838ff1fcc0"/>
       <field name="zvrst_uprizoritve_id" type="integer" uuid="916e1fb8-3e25-402a-8ccc-2143f5bb49b3"/>
       <field name="zvrst_surs_id" type="integer" uuid="b773e1ce-40ad-4df3-a344-ef39d0d47e7e"/>
+      <field name="kartkiNaslov" type="string" uuid="7f3923fd-8952-449e-835f-6afdbd3d0619"/>
       <orm-attributes>
         <attribute name="export-file-name">Uprizoritev.php</attribute>
       </orm-attributes>
