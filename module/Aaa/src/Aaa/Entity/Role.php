@@ -13,7 +13,8 @@ use Rbac\Role\RoleInterface;
  * @ORM\Entity(repositoryClass="Aaa\Repository\Roles")
  * @Max\Acl(delete="admin")
  * @Max\I18n(label="Vloga",plural="Vloge",description="Uporabnik mora imeti vloge za dostop do delov aplikacije")
- */
+ * @Max\Id(prefix="0002") 
+ *  */
 class Role
         extends \Max\Entity\Base
         implements RoleInterface
@@ -30,7 +31,7 @@ class Role
     protected $id;
 
     /**
-     * @ORM\Column(unique=true, length=150, nullable=true)
+     * @ORM\Column(unique=true, length=150, nullable=false)
      *
      * @Max\I18n(label="Naziv", description="Naziv vloge")
      * @Max\Ui(type="sifra", group="Vloga",ident=true)
@@ -84,32 +85,6 @@ class Role
         $this->permissions = new ArrayCollection();
     }
 
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * Set the role name
-     *
-     * @param  string $name
-     * @return void
-     */
-    public function setName($name)
-    {
-        $this->name = (string) $name;
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -122,6 +97,12 @@ class Role
         return count($result) > 0;
     }
 
+    public function validate($mode = 'update')
+    {
+        $this->expect($this->name, "rolename je obvezen podatek", 1000346);
+    }
+    
+    
     public function assignedToUser($user)
     {
         $this->users[] = $user;
@@ -135,46 +116,6 @@ class Role
         }
     }
 
-    function getDescription()
-    {
-        return $this->description;
-    }
-
-    function getBuiltIn()
-    {
-        return $this->builtIn;
-    }
-
-    function getPermissions()
-    {
-        return $this->permissions;
-    }
-
-    function getUsers()
-    {
-        return $this->users;
-    }
-
-    function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    function setBuiltIn($builtIn)
-    {
-        $this->builtIn = $builtIn;
-    }
-
-    function setPermissions($permissions)
-    {
-        $this->permissions = $permissions;
-    }
-
-    function setUsers($users)
-    {
-        $this->users = $users;
-    }
-
     public function addUser($user)
     {
         $this->users->add($user);
@@ -183,6 +124,72 @@ class Role
     public function removeUser($user)
     {
         $this->users->removeElement($user);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function getBuiltIn()
+    {
+        return $this->builtIn;
+    }
+
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
+
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    public function setBuiltIn($builtIn)
+    {
+        $this->builtIn = $builtIn;
+        return $this;
+    }
+
+    public function setPermissions($permissions)
+    {
+        $this->permissions = $permissions;
+        return $this;
+    }
+
+    public function setUsers($users)
+    {
+        $this->users = $users;
+        return $this;
     }
 
 }

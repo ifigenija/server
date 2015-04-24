@@ -1,28 +1,29 @@
 <?php
 
-namespace Rest\User;
+namespace Rest\Role;
 
 use ApiTester;
 
+
 /**
- *      - ustvarim userja,
- *      - preberem userja
- *      - posodobim userja 
- *      - preberem userja in podrobno preverim polja
- *      - user grant; dodam 2 roli
- *      - preberem userja in preverim, če ima  role
- *      - user revoke; odstranim 2 roli
- *      - brišem userja 
+ *      - ustvarim rolo,
+ *      - preberem rolo
+ *      - posodobim rolo 
+ *      - preberem rolo in podrobno preverim polja
+ *      - role grant; dodam 2 permission-a
+ *      - preberem rolo in preverim, če ima permission-e
+ *      - role revoke; odstranim 2 permission-a
+ *      - brišem rolo
  */
-class UserCest
+class RoleCest
 {
 
     private $restUrl = '/rest/user';
-    private $rpcUrl  = '/rpc/aaa/user';
+    private $rpcUrl  = '/rpc/aaa/role';
     private $id;
     private $obj;
-    private $user;
     private $role;
+    private $perm;
     private $sess;
 
     public function _before(ApiTester $I)
@@ -145,23 +146,7 @@ class UserCest
         $I->assertTrue($res);
     }
 
-    /**
-     * Preverim, ali ima user 2 roli
-     * 
-     * @param ApiTester $I
-     * @depends create
-     * @depends userGrantDveRoli
-     */
-    public function preberiUserjaSteviloRol(\ApiTester $I)
-    {
-        $user = $I->successfullyGet($this->restUrl, $this->obj['id']);
-        $I->assertNotEmpty($user);
-
-        $I->assertTrue(isset($user['roles']), "rol ni");
-        $I->assertEquals(2, count($user['roles']));
-    }
-
-    /**
+     /**
      * Userju odvzame dve roli userju
      * 
      * @depends create
@@ -177,9 +162,9 @@ class UserCest
 
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
-
+        
         // še 2. rolo
-        $res = $I->successfullyCallRpc($this->rpcUrl, 'revoke', [
+        $res  = $I->successfullyCallRpc($this->rpcUrl, 'revoke', [
             'username' => $user['email'],
             'rolename' => 'beri-vse',
         ]);
@@ -188,7 +173,7 @@ class UserCest
         $I->assertTrue($res);
 
         // probamo ponovno revoke-ati rolo
-        $res = $I->successfullyCallRpc($this->rpcUrl, 'revoke', [
+        $res  = $I->successfullyCallRpc($this->rpcUrl, 'revoke', [
             'username' => $user['email'],
             'rolename' => 'beri-vse',
         ]);
@@ -197,6 +182,8 @@ class UserCest
         $I->assertTrue($res);
     }
 
+    
+    
     /**
      * @depends create
      */
@@ -205,5 +192,4 @@ class UserCest
         $user = $I->successfullyDelete($this->restUrl, $this->obj['id']);
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
-
 }

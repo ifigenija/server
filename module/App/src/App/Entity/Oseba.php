@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM,
  * @ORM\Entity(repositoryClass="App\Repository\Osebe")
  * 
  * @Max\I18n(label="Kontaktna oseba",plural="Kontaktne osebe")
- * @Max\Id(prefix="0003")
+ * @Max\Id(prefix="0009")
  */
 class Oseba
         extends \Max\Entity\Base

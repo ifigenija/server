@@ -109,7 +109,7 @@ class User
     protected $defaultRouteParams;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", unique=true, nullable=false)
      * @Max\Ui(type="email")
      * @Max\I18n(label="Email", description="Elektronski naslov, ki služi za prijavo uporabnika") 
      */
@@ -311,7 +311,7 @@ class User
 
     public function getPassword()  // $$ rb ali bomo sploh dovolili to metodo?
     {
-        return $this->password;    
+        return $this->password;
     }
 
 }

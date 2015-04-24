@@ -9,7 +9,7 @@ use Max\Ann\Entity as Max;
  * Entiteta Dovoljenja za dostop
  *
  * @ORM\Entity(repositoryClass="Aaa\Repository\Permissions")
- * @Max\Id(prefix="0002")
+ * @Max\Id(prefix="0003")
  * @Max\I18n(label="Dovoljenje",plural="Dovoljenja")
  */
 class Permission

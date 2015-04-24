@@ -1,17 +1,16 @@
 ## YAML Template.
 ---
-entityClass: Aaa\Entity\User
+entityClass: Aaa\Entity\Role
 permPrefix: Aaa
-disabledMethods: 
-    - delete
-    - create
-    - update
+#disabledMethods: 
+#    - delete
+#    - create
+#    - update
 forms:
     default:
         elements:
             - name
             - description
-            - permissions
 lists:
     default:
 hydrator:
