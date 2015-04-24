@@ -131,12 +131,12 @@ class AuthRpcService
 
             if ($user) {
                 // potrebno poslati link do pravega tennanta 
-                // shraiti si je potrebno ključ, ki ga pošljemo in poskrbeti, 
+                // shraniti si je potrebno ključ, ki ga pošljemo in poskrbeti, 
                 // da ključ ne bo aktiven neskončno časa
                 // 
                 $to = $user->getEmail();
 
-                throw new \Max\Exception\MaxException('not implemented', 100997);
+                throw new \Max\Exception\MaxException('not implemented', 1000997);
             }
         } catch (\Exception $e) {
             return ["error" => "Error", "code" => 1000996];

@@ -26,5 +26,12 @@ class RpcController
         
         return $this->handleJsonRpcCall($srv);
     }
+
+    public function userAction() {
+        
+        $srv = $this->getServiceLocator()->get('user.rpc.service');
+        
+        return $this->handleJsonRpcCall($srv);
+    }
     
 }

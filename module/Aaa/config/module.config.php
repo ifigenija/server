@@ -15,7 +15,8 @@ return [
             'Rbac\Rbac'                                 => 'Aaa\Factory\RbacFactory',
         ],
         'invokables' => [
-            'auth.rpc.service' => 'Aaa\Rpc\AuthRpcService'
+            'auth.rpc.service' => 'Aaa\Rpc\AuthRpcService',
+            'user.rpc.service' => 'Aaa\Rpc\UserRpcService',
         ]
     ],
     'controllers'     => [

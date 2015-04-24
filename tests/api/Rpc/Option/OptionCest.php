@@ -5,7 +5,6 @@ namespace Rpc\Option;
 use ApiTester;
 
 /**
- * 
  * Testiranje metod OptionsService-a
  * 
  * testi iz fixturj-jev:
@@ -25,7 +24,6 @@ use ApiTester;
  *      - getOptions    opcija ne obstaja
  *      - setGlobalOption vrednosti ne more kreirati, ker je readonly
  *      - setUserOption vrednosti ne more kreirati, ker ni perUser
- * 
  */
 class OptionCest
 {
