@@ -67,8 +67,18 @@ class Permission
 
     public function __construct($name = '')
     {
-        $this->name = $name;
+        $this->name  = $name;
         $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function addRole($role)
+    {
+        $this->roles->add($role);
+    }
+
+    public function removeRole($role)
+    {
+        $this->roles->removeElement($role);
     }
 
     function getId()

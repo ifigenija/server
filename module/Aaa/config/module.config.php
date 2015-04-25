@@ -17,6 +17,7 @@ return [
         'invokables' => [
             'auth.rpc.service' => 'Aaa\Rpc\AuthRpcService',
             'user.rpc.service' => 'Aaa\Rpc\UserRpcService',
+            'role.rpc.service' => 'Aaa\Rpc\RoleRpcService',
         ]
     ],
     'controllers'     => [

@@ -126,6 +126,25 @@ class Role
         $this->users->removeElement($user);
     }
 
+    public function addPermissions($perm)
+    {
+        $perm->addRole($this);
+        $this->permissions->add($perm);
+        return $this;
+    }
+
+    public function removePermissions($perm)
+    {
+        $perm->removeRole($this);
+
+        // odstranimi role-o iz array-a
+        $this->permissions->removeElement($perm);
+
+        return $this;
+    }
+      
+    
+    
     public function getId()
     {
         return $this->id;

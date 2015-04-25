@@ -11,7 +11,7 @@ namespace Aaa\Rpc;
 /**
  * Wrapper za strežbo rpc klicev v AaaService
  *
- * @author boris
+ * @author rado
  */
 class UserRpcService
         extends \Max\Service\AbstractMaxService
@@ -53,6 +53,17 @@ class UserRpcService
         return true;
     }
 
+    /**
+     * Odvzem vloge userju
+     * 
+     * procedura deluje podobno kot konzolni ukaz: 
+     *              bin/ifi user revoke <username> <rolename>
+     * 
+     * @param string $username
+     * @param string $rolename
+     * 
+     * @returns boolean uspešno/neuspešno
+     */
     public function revoke($username, $rolename)
     {
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
