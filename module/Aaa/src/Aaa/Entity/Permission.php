@@ -30,7 +30,7 @@ class Permission
     /**
      * Naziv
      *
-     * @ORM\Column(length=150, nullable=true)
+     * @ORM\Column(length=150, nullable=true, unique=true)
      * @var string
      *
      * @Max\I18n(label="Naziv", description="Naziv dovoljenja")
