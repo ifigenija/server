@@ -2940,7 +2940,7 @@ trait ApiTesterActions
      * @param array $data
      * @see \Codeception\Module\ApiHelper::failToCreate()
      */
-    public function failToCreate($url, $id, $data) {
+    public function failToCreate($url, $data) {
         return $this->scenario->runStep(new \Codeception\Step\Action('failToCreate', func_get_args()));
     }
 

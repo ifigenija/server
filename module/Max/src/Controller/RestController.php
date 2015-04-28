@@ -75,7 +75,7 @@ class RestController
             $perm = $this->getListPermission($listName);
             $this->expect($this->isGranted($perm)
                     , $this->trnsl(self::DENIED)
-                    , 100012, [$perm, $this->getUsername()]);
+                    , 1000012, [$perm, $this->getUsername()]);
 
             $filter = $this->buildFilterForm($listName);
 
@@ -189,8 +189,8 @@ class RestController
             $this->expect($this->isGranted($perm, $object)
                     , $this->trnsl(self::DENIED)
                     , 100008, [$perm, $this->getUsername()]);
-            $this->expect(!empty($data), $this->trnsl('Ni podatkov za spremembo'), 100103);
-            $this->expect(is_array($data), $this->trnsl('Nepravilen tip podatkov'), 100104);
+            $this->expect(!empty($data), $this->trnsl('Ni podatkov za spremembo'), 1000103);
+            $this->expect(is_array($data), $this->trnsl('Nepravilen tip podatkov'), 1000104);
             $form   = $this->buildForm($view);
             $form->setMode('NEW');
             $form->bind($object);

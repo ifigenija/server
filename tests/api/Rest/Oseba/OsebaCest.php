@@ -51,29 +51,29 @@ class OsebaCest
      * 
      * @param ApiTester $I
      */
-    public function create(ApiTester $I)
-    {
-        $data      = [
-            'naziv'         => 'zz',
-            'ime'           => 'zz',
-            'priimek'       => 'zz',
-            'pesvdonim'     => 'zz',
-            'funkcija'      => 'zz',
-            'email'         => 'x@xxx.xx',
-            'datumRojstva'  => 'zz',
-            'emso'          => 'zz',
-            'davcna'        => 'zz',
-            'spol'          => 'Z',
-            'opombe'        => 'zz',
-            'drzavljanstvo' => 'zz',
-            'drzavaRojstva' => 'zz',
-            'datumRojstva'  => '1973-28-03T04:30:00',
-            'krajRojstva'   => 'zz',
-        ];
-        $this->obj = $oseba     = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('zz', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
-    }
+        public function create(ApiTester $I)
+        {
+            $data      = [
+                'naziv'         => 'zz',
+                'ime'           => 'zz',
+                'priimek'       => 'zz',
+                'pesvdonim'     => 'zz',
+                'funkcija'      => 'zz',
+                'email'         => 'x@xxx.xx',
+                'datumRojstva'  => 'zz',
+                'emso'          => 'zz',
+                'davcna'        => 'zz',
+                'spol'          => 'Z',
+                'opombe'        => 'zz',
+                'drzavljanstvo' => 'zz',
+                'drzavaRojstva' => 'zz',
+                'datumRojstva'  => '1973-28-03T04:30:00',
+                'krajRojstva'   => 'zz',
+            ];
+            $this->obj = $oseba     = $I->successfullyCreate($this->restUrl, $data);
+            $I->assertEquals('zz', $oseba['ime']);
+            $I->assertNotEmpty($oseba['id']);
+        }
 
     /**
      * @depends create

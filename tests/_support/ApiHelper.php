@@ -170,16 +170,16 @@ class ApiHelper
      * @param string $url
      * @param array $data
      */
-    public function failToCreate($url, $id, $data)
+    public function failToCreate($url, $data)
     {
         $I = $this->getModule('REST');
 
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST("$url/$id", $data);
+        $I->sendPOST($url, $data);
         $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
-        return $I->grabDataFromResponseByJsonPath('$.error')[0];
+        return $I->grabDataFromResponseByJsonPath('$.errors')[0];
     }
 
     /**
@@ -196,7 +196,7 @@ class ApiHelper
         $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
-        return $I->grabDataFromResponseByJsonPath('$.error')[0];
+        return $I->grabDataFromResponseByJsonPath('$.errors')[0];
     }
 
     /**
@@ -213,7 +213,7 @@ class ApiHelper
         $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
-        return $I->grabDataFromResponseByJsonPath('$.error');
+        return $I->grabDataFromResponseByJsonPath('$.errors');
     }
 
     /**
@@ -232,7 +232,7 @@ class ApiHelper
         $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
-        return $I->grabDataFromResponseByJsonPath('$.error')[0];
+        return $I->grabDataFromResponseByJsonPath('$.errors')[0];
     }
 
     /**
@@ -244,12 +244,20 @@ class ApiHelper
      */
     public function failToDelete($url, $id)
     {
+//        $I = $this->getModule('REST');
+//        $I->sendDELETE("$url/$id");
         $I = $this->getModule('REST');
-        $I->sendDELETE($url . '/' . $id);
+        $I->sendDELETE("$url/$id");
+//        $I->dontSeeResponseCodeIs('200');
+//        $I->seeResponseIsJson();
+//        $I->seeResponseContainsJson(['success' => false]);
+//        return $I->grabDataFromResponseByJsonPath('$.errors')[0];
+// 
+
         $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
-        return $I->grabDataFromResponseByJsonPath('$.error')[0];
+        return $I->grabDataFromResponseByJsonPath('$.errors')[0];
     }
 
     /**
@@ -285,29 +293,29 @@ class ApiHelper
      */
     public function testFormMeta($controller, $view, $expected = [])
     {
-         $I = $this->getModule('REST');
-          $I->sendOPTIONS("/rest/$controller" .( $view ? "/$view" : ""));
+        $I        = $this->getModule('REST');
+        $I->sendOPTIONS("/rest/$controller" . ( $view ? "/$view" : ""));
         $I->seeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $formMeta = $I->grabDataFromJsonResponse();
 
         codecept_debug($formMeta);
-        $I->assertNotEmpty($formMeta, "Prazni metapodatki za $controller/$view" );
+        $I->assertNotEmpty($formMeta, "Prazni metapodatki za $controller/$view");
 
-        
+
         foreach ($formMeta as $field) {
 
-                if (!empty($expected['field'])) {
-                    unset ($expected['field']);
-                }
-         
+            if (!empty($expected['field'])) {
+                unset($expected['field']);
+            }
+
             $I->assertTrue(array_key_exists('name', $field), "Ima name");
             $I->assertTrue(array_key_exists('type', $field), "Ima type");
             $I->assertTrue(array_key_exists('editorAttrs', $field), "ima editorAttrs");
             $I->assertTrue(array_key_exists('help', $field), "Ima help");
             $I->assertTrue(array_key_exists('validators', $field), "Ima validators");
         }
-        
+
         $I->assertEmpty($expected);
     }
 
