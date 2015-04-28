@@ -63,11 +63,11 @@ class Rbac
     {
 
         foreach ($roles as $role) {
-// vloga ifi-all ima dostop do vsega, tako da takoj vrnemo true
+            // vloga ifi-all ima dostop do vsega, tako da takoj vrnemo true
             if ($role === 'ifi-all') {
                 return true;
             }
-// 
+ 
             if ($role === 'ifi-readall') {
                 $part = substr($permission, -5);
                 if ($part === '-read' || $part === '-list') {
@@ -76,7 +76,7 @@ class Rbac
             }
         }
 
-// default je prepovedan, in jee potrebno preveriti ali 
+        // default je prepovedan, in je potrebno preveriti ali 
         return false;
     }
 

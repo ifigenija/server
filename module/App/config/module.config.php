@@ -9,11 +9,11 @@
 
 return [
     'service_manager' => [
-        'factories' => [
+        'factories'  => [
             'Zend\Session\SessionManager' => 'App\Factory\SessionFactory'
         ],
         'invokables' => [
-                        'options.service' => '\App\Service\OptionsService'
+            'options.service' => '\App\Service\OptionsService'
         ]
     ],
     'controllers'     => [
@@ -77,7 +77,7 @@ return [
                         'action'        => null
                     ],
                     'constraints' => [
-                        'controller' =>  '[A-Za-z]+',
+                        'controller' => '[A-Za-z]+',
                         'view'       => '[A-Za-z]+',
                         'id'         => \Max\Consts::UUID
                     ]
@@ -99,6 +99,15 @@ return [
     ],
     'zfc_rbac'        => [
         'protection_policy' => \ZfcRbac\Guard\GuardInterface::POLICY_ALLOW,
+        'assertion_manager' => [
+            "invokables" => [
+                "chck-oseba" => "App\Assertion\AssertOseba",
+            ],
+        ],
+        "assertion_map" => [
+            "Oseba-write" => "chck-oseba" 
+        ],
+        
         'guest_role'        => 'anonymous',
         'role_provider'     => [
             'ZfcRbac\Role\ObjectRepositoryRoleProvider' => [
