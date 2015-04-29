@@ -188,7 +188,7 @@ class RestController
             $perm   = $this->getFormPermission('create', $view);
             $this->expect($this->isGranted($perm, $object)
                     , $this->trnsl(self::DENIED)
-                    , 100008, [$perm, $this->getUsername()]);
+                    , 1000008, [$perm, $this->getUsername()]);
             $this->expect(!empty($data), $this->trnsl('Ni podatkov za spremembo'), 1000103);
             $this->expect(is_array($data), $this->trnsl('Nepravilen tip podatkov'), 1000104);
             $form   = $this->buildForm($view);
@@ -201,8 +201,12 @@ class RestController
                 if ($sr instanceof CrudInterface) {
                     $sr->create($object);
                 }
+                // še enkrat preverjamo avtorizacijo - sedaj ,ko je kontektst = $object napolnjen zaradi morebitnega preverjanja z assert
+                 $this->expect($this->isGranted($perm, $object)
+                    , $this->trnsl(self::DENIED)
+                    , 1000009, [$perm, $this->getUsername()]);
 
-                $this->em->flush();
+                 $this->em->flush();
 
                 $hydr = $this->getHydrator($view);
                 $data = $hydr->extract($object);
@@ -412,7 +416,7 @@ class RestController
 
         $disabled = array_merge($globalyDisabled, $viewDisabled);
         if (in_array($method, $disabled)) {
-            throw new ApiDisabledException("$method disabled", 100020);
+            throw new ApiDisabledException("$method disabled", 1000020);
         }
     }
 

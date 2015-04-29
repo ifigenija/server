@@ -25,12 +25,23 @@ class AssertOseba
     {
 //                       'priimek' => 'write protected12345', //to je vrednost, ki je assert ne dovoli
         if (!$oseba) {
-            //če je null vrne null
+            //če je null vrne ok
             return true;
         } else {
-            $priimek=$oseba->getPriimek();
-            $ret=!('write protected12345' === $priimek);
+//            $roles = $authorizationService->roleService->getIdentityRoles();
+//            if (!$authorizationService->rbac->isGranted($roles, $permission)) {
+//                return false;
+//            }
+//            $isG = $authorizationService->rbac->isGranted($roles, "Oseba-vse"));
+            $iden = $authorizationService->getIdentity();
+            $user = $iden->getEmail();
+            if ($user == "admin@ifigenija.si") {          // $$ rb začasno, dokler shortCircuit ne preskoči tega assert-a
+                return true;
+            }
+            $priimek = $oseba->getPriimek();
+            $ret     = !('write protected12345' === $priimek);
             return $ret;
         }
     }
+
 }

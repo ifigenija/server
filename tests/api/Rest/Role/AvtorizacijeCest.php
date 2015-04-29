@@ -432,13 +432,40 @@ class AvtorizacijeCest
     }
 
     /**
-     * 
+     * Enemu userju je z assert omogočen dostop do vsebine, drugemu ne
      * 
      * @param ApiTester $I
      */
     public function assertPoVsebiniNaUserja(ApiTester $I)
     {
+        /*
+         * naredili bi verjetno takole
+         * User / Role / permission:
+         * Tehnicni  /Tehnicni  /TerminStoritveViewTehn-write
+         * Inspecient/Inspecient/TerminStoritveViewInsp-write
+         * 
+         * assert na permissione:
+         *    "TerminStoritveViewTehn-write" => "check-ViewTehn" => "AssertTehn"
+         *    "TerminStoritveViewInsp-write" => "check-ViewInsp" => "AssertInsp"
+         * 
+         * v metodah assert pa preverjamo vrednosti za te view-e
+         *  AssertTehn->assert        : preveri če je alternacija tehnik
+         *  AssertInsp->assert        : preveri če je alternacija umetniška ekipa
+         * 
+         */
+        
          $I->assertTrue(1===2); //$$ rb za narediti še- kako assert po vsebini glede na userja oz. role
+    }
+    /**
+     * Dostopi na many to many relacije
+     * 
+     * @todo    to be implemented   //$$ rb ko bodo view-i in manytomany
+     * @param ApiTester $I
+     */
+    public function dostopiNaManyToManyView(ApiTester $I)
+    {
+        
+         $I->assertTrue(1===2); 
     }
 
 }
