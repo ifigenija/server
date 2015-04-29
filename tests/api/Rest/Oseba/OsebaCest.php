@@ -63,7 +63,7 @@ class OsebaCest
                 'datumRojstva'  => 'zz',
                 'emso'          => 'zz',
                 'davcna'        => 'zz',
-                'spol'          => 'Z',
+                'spol'          => 'M',            
                 'opombe'        => 'zz',
                 'drzavljanstvo' => 'zz',
                 'drzavaRojstva' => 'zz',

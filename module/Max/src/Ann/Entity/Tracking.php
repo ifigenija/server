@@ -7,7 +7,7 @@
 namespace Max\Ann\Entity;
 
 /**
- * Revizja služi za nastavitve logiranje revizij specifičnih fieldov
+ * Revizija služi za nastavitve logiranje revizij specifičnih fieldov
  *
  * @Annotation
  * @Target({"PROPERTY", "CLASS"})

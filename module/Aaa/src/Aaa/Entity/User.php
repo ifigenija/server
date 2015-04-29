@@ -18,7 +18,7 @@ use ZfcRbac\Identity\IdentityInterface;
  * @ORM\Table(name="uporabniki")
  * @Max\Id(prefix="0001")
  * @Max\I18n(label="Uporabnik", plural="Uporabniki")
- * @Max\Acl(delete="admi")
+ * @Max\Acl(delete="admin")
  * 
  */
 class User
@@ -71,7 +71,7 @@ class User
      *
      *      
      * @Max\I18n(label="Vloge",  description="Skupine, katerih član je uporabnik")
-     * @Max\UI(group="Vloge", type="tomany")
+     * @Max\Ui(group="Vloge", type="tomany")
      * @ORM\ManyToMany(targetEntity="Aaa\Entity\Role", inversedBy="users")
      * @ORM\JoinTable(
      *     name="Role2User",
