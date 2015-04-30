@@ -8,8 +8,9 @@ forms:
             - naziv      
             - ime      
             - priimek      
-            - pesvdonim      
-            - funkcija      
+            - funkcija    
+            - srednjeIme
+            - psevdonim
             - email   
             - datumRojstva      
             - emso      
