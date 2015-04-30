@@ -63,7 +63,8 @@ class PostniNaslov
 
     /**
      * @ORM\Column(length=50, nullable=true)
-     */
+     * @Max\I18n(label="Dodatni naziv", description="Dodatni naziv naslova")
+    */
     private $nazivDva;
 
     /**
