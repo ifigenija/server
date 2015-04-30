@@ -14,7 +14,12 @@ use ApiTester;
  *      - preberem telefonsko številko
  *      - dodam poštni naslov  
  *      - preberem poštni naslov
- *      - preberem ustvarjeno osebo in preverim, da ima trr-je, telefonske številke in naslov
+ *  - popa
+ *  - user
+ *  - alternacije
+ *  - pogodbe
+ *  - sodelovanja
+ *      - preberem ustvarjeno osebo in preverim, da ima trr-je ipd. z vseh relacij
  * - brišem osebo in se morajo pčistiti poštni naslov, 
  *   trrji in telefonske številke, ker je orphan removal = true
  * 

@@ -6,8 +6,8 @@ forms:
     default: 
         elements:
             - sifra 
-            - tipkli  
-            - stakli  
+#            - tipkli           # $$ rb ko bodo opcije porihtane
+#            - stakli           # $$ rb ko bodo opcije porihtane
             - naziv 
             - naziv1 
             - panoga  
