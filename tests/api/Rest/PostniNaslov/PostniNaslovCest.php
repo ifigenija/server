@@ -8,30 +8,33 @@ use ApiTester;
  * Priprava ostalih relacij, ki so pogoj za kreiranje
  *      - create oseba
  * - create popa
+ *      - list država
  * akcije z entiteto PostniNaslov
- * - create naslov osebe
+ *      - create naslov osebe
  * - create naslov popa
+ * 
+ *      - list 
+ *      - update
+ *      - read, preveri vsa polja
  * validacija
  * - create naslov oseba+popa 
  * - create naslov prazen naziv
  * 
- * - list 
- * - update
- * - update .drzava
- * -read, preveri vsa polja
- * - delete 
+ *      - delete 
  * 
  */
 class PostniNaslovCest
 {
 
-    private $restUrl  = '/rest/postninaslov';
-    private $osebaUrl = '/rest/oseba';
-    private $popaUrl  = '/rest/popa';
-    private $id       = '00000000-0000-0000-0000-000000000000';
+    private $restUrl   = '/rest/postninaslov';
+    private $osebaUrl  = '/rest/oseba';
+    private $popaUrl   = '/rest/popa';
+    private $drzavaUrl = '/rest/drzava';
+    private $id        = '00000000-0000-0000-0000-000000000000';
     private $obj;
     private $objOseba;
     private $objPopa;
+    private $objDrzava;
 
     public function _before(ApiTester $I)
     {
@@ -73,6 +76,17 @@ class PostniNaslovCest
 //    }
 
     /**
+     * @param ApiTester $I
+     */
+    public function getListDrzava(ApiTester $I)
+    {
+        $list            = $I->successfullyGetList($this->drzavaUrl, []);
+        $I->assertNotEmpty($list);
+        // najdi slovenijo $$
+        $this->objDrzava = array_pop($list);
+    }
+
+    /**
      *  napolnimo vsaj en zapis
      *
      * @param ApiTester $I
@@ -80,7 +94,7 @@ class PostniNaslovCest
     public function create(ApiTester $I)
     {
         $data      = [
-//            'popa'       => null,
+            'popa'       => null,
             'oseba'      => $this->objOseba['id'],
             'naziv'      => 'zz',
             'nazivDva'   => 'zz',
@@ -89,9 +103,9 @@ class PostniNaslovCest
             'posta'      => 'zz',
             'postaNaziv' => 'zz',
             'pokrajina'  => 'zz',
-            'drzava'     => 'zz',
-            'jeeu '      => 'zz',
-            'privzeti '  => 'zz',
+            'drzava'     => $this->objDrzava['id'],
+            'jeeu'       => FALSE,
+            'privzeti'   => true,
         ];
         $this->obj = $pnaslov   = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals('zz', $pnaslov['nazivDva']);
@@ -141,12 +155,32 @@ class PostniNaslovCest
         $I->assertEquals('zz', $pnaslov['posta']);
         $I->assertEquals('zz', $pnaslov['postaNaziv']);
         $I->assertEquals('zz', $pnaslov['pokrajina']);
-        $I->assertEquals('zz', $pnaslov['drzava']);
-        $I->assertEquals('zz', $pnaslov['jeeu ']);
-        $I->assertEquals('zz', $pnaslov['privzeti ']);
+        $I->assertEquals($this->objDrzava['id'], $pnaslov['drzava'], "ni prava država");
+        $I->assertEquals(false, $pnaslov['jeeu']);
+        $I->assertEquals(true, $pnaslov['privzeti']);
     }
 
-    // tests
+        /**
+     *  probamo kreirati PostniNaslov brez osebe in poslovnega partnerja, kar mora validator preprečiti
+     *
+     * @param ApiTester $I
+     */
+    public function createNaslovBrezPopaInOsebe(ApiTester $I)
+    {
+        $data      = [
+            'popa'       => null,
+            'oseba'      => null,
+            'naziv'      => 'xx',
+        ];
+        $pnaslov   = $I->failToCreate($this->restUrl, $data);
+    }
+    
+    /**
+     * zbriše PostniNaslov
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
     public function delete(ApiTester $I)
     {
         $pnaslov = $I->successfullyDelete($this->restUrl, $this->obj['id']);

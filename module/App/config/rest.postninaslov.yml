@@ -12,7 +12,8 @@ forms:
             - posta
             - postaNaziv
             - pokrajina
-            - jeeu 
-            - privzeti
-            - oseba
+            - jeeu      
+            - privzeti   
+            - oseba    
             - popa
+            - drzava
