@@ -64,7 +64,6 @@ class TelefonskaCest
             'stevilka' => '12-34',
             'privzeta' => true,
             'oseba'    => $this->objOseba['id'],
-            'popa'     => null,
         ];
         $this->obj = $tel       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($tel['stevilka'], '12-34');
@@ -135,8 +134,6 @@ class TelefonskaCest
             'vrsta'    => 'Mobilni', //$$ rb - popraviti opcije, kasneje M namesto mobilni
             'stevilka' => '12-34',
             'privzeta' => true,
-//            'oseba'    => "",
-//            'popa'     => "",
         ];
         // test validacije - obstajati mora ali oseba ali popa
         $resp = $I->failToCreate($this->restUrl, $data);

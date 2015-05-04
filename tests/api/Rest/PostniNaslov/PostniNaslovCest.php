@@ -172,8 +172,8 @@ class PostniNaslovCest
     public function createNaslovBrezPopaInOsebe(ApiTester $I)
     {
         $data    = [
-            'popa'  => null,
-            'oseba' => null,
+//            'popa'  => null,
+//            'oseba' => null,
             'naziv' => 'xx',
         ];
         $resp = $I->failToCreate($this->restUrl, $data);
