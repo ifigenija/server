@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Licenca GPLv3 or later
+ * LicencOa GPLv3 or later
  */
 
 namespace App\Repository;
@@ -15,6 +15,10 @@ class Osebe
         extends \Max\Repository\AbstractMaxRepository
 {
 
-    
+    protected $sortOptions = [
+        "default" => [
+            "sifra" => ["alias" => "sifra"]
+        ]
+    ];
     
 }

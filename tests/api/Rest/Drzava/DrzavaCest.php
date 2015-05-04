@@ -46,8 +46,8 @@ class DrzavaCest
     public function getList(ApiTester $I)
     {
         $list     = $I->successfullyGetList($this->restUrl, []);
-        $I->assertNotEmpty($list);
-        $this->id = array_pop($list)['id'];
+        $I->assertNotEmpty($list['data']);
+        $this->id = array_pop($list['data'])['id'];
     }
 
     // tests

@@ -86,8 +86,8 @@ class OsebaCest
     public function getList(ApiTester $I)
     {
         $list     = $I->successfullyGetList($this->restUrl, []);
-        $I->assertNotEmpty($list);
-        $this->id = array_pop($list)['id'];
+        $I->assertNotEmpty($list['data']);
+        $this->id = array_pop($list['data'])['id'];
     }
 
     /**
@@ -199,7 +199,7 @@ class OsebaCest
 
         $list            = $I->successfullyGetList('/rest/drzava', ["q" => "SI"]);
         $I->assertNotEmpty($list, "prazen seznam držav");
-        $drz             = array_pop($list);
+        $drz             = array_pop($list['data']);
         $data["drzava"]  = $drz['id'];
         $this->objpostni = $postni          = $I->successfullyCreate($this->naslUrl, $data);
         $I->assertNotEmpty($postni, "naslov ni vpisan");   // $$ rb naslova ne doda pri ($form->isValid())
