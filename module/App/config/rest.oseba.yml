@@ -8,13 +8,14 @@ forms:
             - naziv      
             - ime      
             - priimek      
-            - pesvdonim      
-            - funkcija      
+            - funkcija    
+            - srednjeIme
+            - psevdonim
             - email   
             - datumRojstva      
             - emso      
             - davcna      
-#            - spol      
+#            - spol     # $$ rb v filter validator haystack trenutno narobe zloži Moški in Ženska namesto M in Z   
             - opombe      
             - drzavljanstvo      
             - drzavaRojstva      

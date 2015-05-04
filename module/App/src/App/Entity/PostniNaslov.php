@@ -56,13 +56,14 @@ class PostniNaslov
      * @ORM\Column(length=50, nullable=true)
      *
      * @Max\I18n(label="Naziv", description="Naziv naslova")
-     * @Max\Ui(ident=true)
+     * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
     protected $naziv;
 
     /**
      * @ORM\Column(length=50, nullable=true)
+     * @Max\I18n(label="Dodatni naziv", description="Dodatni naziv naslova")
      */
     private $nazivDva;
 
@@ -160,6 +161,7 @@ class PostniNaslov
         $this->expect(!($this->popa && $this->oseba), "Nalov je lahko samo ali poslovni partner ali oseba", 1000305);
         $this->expect($this->naziv, "naziv je obvezen podatek", 1000306);
     }
+
     public function getId()
     {
         return $this->id;
@@ -302,8 +304,5 @@ class PostniNaslov
         $this->drzava = $drzava;
         return $this;
     }
-
-
-
 
 }

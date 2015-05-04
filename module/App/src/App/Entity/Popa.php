@@ -153,11 +153,13 @@ class Popa
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="popa")
+     * @var App\Entity\Trr
      */
     private $trrji;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="popa")
+     * @var array
      */
     private $pogodbe;
 
@@ -234,7 +236,7 @@ class Popa
      * @ORM\Column(type="boolean", nullable=true)
      * @Max\Ui(type="boolcheckbox")
      * @Max\I18n(label="Iz zamejstva", description="Je poslovni partner iz zamejstva")
-     * 
+     * @var boolean
      */
     private $zamejstvo = false;
 

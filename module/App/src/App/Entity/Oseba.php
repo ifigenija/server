@@ -31,9 +31,9 @@ class Oseba
      * Klient
      *  Poslovni partner od katerega je kontaktna oseba
      *
-     * @var Popa
+     * @var App\Entity\Popa
      *
-     * @Max\Ui(type="toone")  
+     * @Max\Ui(type="tomany")  
      * @Max\I18n(label="Klient",  description="Poslovni partner od katerega je kontaktna oseba")
      * @ORM\ManyToMany(targetEntity="App\Entity\Popa", mappedBy="osebe")
      */
@@ -47,37 +47,41 @@ class Oseba
      * @ORM\Column(length=40, nullable=true)
      *
      * @Max\I18n(label="Naziv", description="Naziv osebe  (g., dr., ga, prof.dr.) ")
-     * @Max\Ui(ident=true)
      */
     protected $naziv;
 
     /**
      * @ORM\Column(nullable=true)
+     * @Max\I18n(label="Ime", description="Ime osebe ")
+     * @var string
      */
     private $ime;
 
     /**
      * @ORM\Column(nullable=true)
+     * @Max\I18n(label="Priimek", description="Priimek osebe ")
+     * @var string
      */
     private $priimek;
 
     /**
-     * @ORM\Column(nullable=true)
-     */
-    private $pesvdonim;
-
-    /**
      * @ORM\Column(length=40, nullable=true)
+     * @Max\I18n(label="Funkcija", description="Funkcija osebe ")
+     * @var string
      */
     private $funkcija;
 
     /**
      * @ORM\Column(nullable=true)
+     * @Max\I18n(label="Srednje ime", description="Srednje ime osebe ")
+     * @var string
      */
     private $srednjeIme;
 
     /**
      * @ORM\Column(nullable=true)
+     * @Max\I18n(label="Psevdonim", description="Psevdonim osebe ")
+     * @var string
      */
     private $psevdonim;
 
@@ -86,7 +90,7 @@ class Oseba
      *
      * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="oseba", orphanRemoval=true)
      *
-     * @Max\Ui(targetEntity="App\Entity\PostniNaslov", master="oseba")
+     * @Max\Ui(type="tomany")
      */
     protected $naslovi;
 
@@ -98,79 +102,104 @@ class Oseba
      * @ORM\Column(length=40, nullable=true)
      * @var string
      *
+     * @Max\I18n(label="E-pošta", description="Naslov elektronske pošte")   
      * @Max\Ui(type="email",icon="fa fa-afna")
      */
     protected $email = '';
 
     /**
      * @ORM\Column(nullable=true)
+     * @Max\I18n(label="Datum rojstva", description="Rojstni datum oseba")   
+     * @Max\Ui(icon="fa fa-birthday-cake")
      */
     private $datumRojstva;
 
     /**
      * @ORM\Column(nullable=true)
+     * @Max\I18n(label="Emšo", description="Enotna matična številka občana")   
      */
     private $emso;
 
     /**
      * @ORM\Column(nullable=true)
+     * @Max\I18n(label="Davčna", description="Davčna številka osebe")   
      */
     private $davcna;
 
     /**
      * @ORM\Column(type="string", length=1, nullable=true)
+     * @Max\I18n(label="Spol", description="Spol osebe")   
      * @Max\Ui(type="select",opts="oseba.spol",group="Osnovni podatki",required=true)
+     * @var string
      */
     private $spol;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Max\I18n(label="Opombe", description="Opombe za osebo")   
+     * @var string
      */
     private $opombe;
 
     /**
      * @ORM\Column(nullable=true)
+     * @Max\I18n(label="Državljanstvo", description="Državljanstvo osebe")   
+     * @var string
      */
     private $drzavljanstvo;
 
     /**
      * @ORM\Column(nullable=true)
+     * @Max\I18n(label="Država rojstva", description="Država rojstva osebe")   
      */
     private $drzavaRojstva;
 
     /**
      * @ORM\Column(nullable=true)
+     * @Max\I18n(label="Kraj rojstva", description="Kraj rojstva osebe")   
      */
     private $krajRojstva;
 
     /**
      * @ORM\OneToOne(targetEntity="Aaa\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)
+     * @Max\Ui(type="toone")
+     * @var Aaa\Entity\User
      */
     private $user;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Telefonska", mappedBy="oseba", orphanRemoval=true)
+     * @Max\Ui(type="tomany")
+     * @var array
      */
     private $telefonske;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="oseba", orphanRemoval=true)
+     * @Max\Ui(type="tomany")
+     * @var array
      */
     private $trrji;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="oseba")
+     * @Max\Ui(type="tomany")
+     * @var array
      */
     private $alternacije;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="oseba")
+     * @Max\Ui(type="tomany")
+     * @var array
      */
     private $pogodbe;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Zaposlitev", mappedBy="oseba")
+     * @Max\Ui(type="tomany")
+     * @var array
      */
     private $sodelovanja;
 
@@ -218,11 +247,6 @@ class Oseba
     public function getPriimek()
     {
         return $this->priimek;
-    }
-
-    public function getPesvdonim()
-    {
-        return $this->pesvdonim;
     }
 
     public function getFunkcija()
@@ -326,7 +350,7 @@ class Oseba
         return $this;
     }
 
-    public function setPopa(Popa $popa)
+    public function setPopa($popa)
     {
         $this->popa = $popa;
         return $this;
@@ -347,12 +371,6 @@ class Oseba
     public function setPriimek($priimek)
     {
         $this->priimek = $priimek;
-        return $this;
-    }
-
-    public function setPesvdonim($pesvdonim)
-    {
-        $this->pesvdonim = $pesvdonim;
         return $this;
     }
 
@@ -469,5 +487,6 @@ class Oseba
         $this->sodelovanja = $sodelovanja;
         return $this;
     }
+
 
 }

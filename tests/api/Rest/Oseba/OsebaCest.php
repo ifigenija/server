@@ -14,7 +14,12 @@ use ApiTester;
  *      - preberem telefonsko številko
  *      - dodam poštni naslov  
  *      - preberem poštni naslov
- *      - preberem ustvarjeno osebo in preverim, da ima trr-je, telefonske številke in naslov
+ *  - popa
+ *  - user
+ *  - alternacije
+ *  - pogodbe
+ *  - sodelovanja
+ *      - preberem ustvarjeno osebo in preverim, da ima trr-je ipd. z vseh relacij
  * - brišem osebo in se morajo pčistiti poštni naslov, 
  *   trrji in telefonske številke, ker je orphan removal = true
  * 
@@ -51,29 +56,29 @@ class OsebaCest
      * 
      * @param ApiTester $I
      */
-        public function create(ApiTester $I)
-        {
-            $data      = [
-                'naziv'         => 'zz',
-                'ime'           => 'zz',
-                'priimek'       => 'zz',
-                'pesvdonim'     => 'zz',
-                'funkcija'      => 'zz',
-                'email'         => 'x@xxx.xx',
-                'datumRojstva'  => 'zz',
-                'emso'          => 'zz',
-                'davcna'        => 'zz',
-                'spol'          => 'Z',
-                'opombe'        => 'zz',
-                'drzavljanstvo' => 'zz',
-                'drzavaRojstva' => 'zz',
-                'datumRojstva'  => '1973-28-03T04:30:00',
-                'krajRojstva'   => 'zz',
-            ];
-            $this->obj = $oseba     = $I->successfullyCreate($this->restUrl, $data);
-            $I->assertEquals('zz', $oseba['ime']);
-            $I->assertNotEmpty($oseba['id']);
-        }
+    public function create(ApiTester $I)
+    {
+        $data      = [
+            'naziv'         => 'zz',
+            'ime'           => 'zz',
+            'priimek'       => 'zz',
+            'funkcija'      => 'zz',
+            'srednjeIme'    => 'zz',
+            'psevdonim'     => 'zz',
+            'email'         => 'x@xxx.xx',
+            'datumRojstva'  => '1973-28-03T04:30:00',
+            'emso'          => 'zz',
+            'davcna'        => 'zz',
+            'spol'          => 'M',
+            'opombe'        => 'zz',
+            'drzavljanstvo' => 'zz',
+            'drzavaRojstva' => 'zz',
+            'krajRojstva'   => 'zz',
+        ];
+        $this->obj = $oseba     = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals('zz', $oseba['ime']);
+        $I->assertNotEmpty($oseba['id']);
+    }
 
     /**
      * @depends create
@@ -230,7 +235,29 @@ class OsebaCest
         $oseba = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertNotEmpty($oseba, "osebe ni");
+
+        // preverim vsa vidna polja
+        $I->assertEquals('zz', $oseba['naziv']);
         $I->assertEquals('tralala', $oseba['ime']);
+        $I->assertEquals('zz', $oseba['priimek']);
+        $I->assertEquals('zz', $oseba['funkcija']);
+        $I->assertEquals('zz', $oseba['srednjeIme']);
+        $I->assertEquals('zz', $oseba['psevdonim']);
+        $I->assertEquals('x@xxx.xx', $oseba['email']);
+        $I->assertEquals('1973-28-03T04:30:00', $oseba['datumRojstva']);
+        $I->assertEquals('zz', $oseba['emso']);
+        $I->assertEquals('zz', $oseba['davcna']);
+//        $I->assertEquals('M', $oseba['spol'],"spol ni pravilen");   //$$ rb validator pri create-u javi napako
+        $I->assertEquals('zz', $oseba['opombe']);
+        $I->assertEquals('zz', $oseba['drzavljanstvo']);
+        $I->assertEquals('zz', $oseba['drzavaRojstva']);
+        $I->assertEquals('zz', $oseba['krajRojstva']);
+        $I->assertEquals('zz', $oseba['naziv']);
+        $I->assertEquals('zz', $oseba['priimek']);
+        $I->assertEquals('zz', $oseba['funkcija']);
+        $I->assertEquals('zz', $oseba['srednjeIme']);
+        $I->assertEquals('zz', $oseba['psevdonim']);
+
         $I->assertTrue(isset($oseba['trrji']));
         $I->assertTrue(isset($oseba['datumRojstva']));
         $I->assertTrue(isset($oseba['telefonske']));
@@ -242,7 +269,6 @@ class OsebaCest
 
     /**
      * @depends create
-     * @depends read
      */
     public function delete(ApiTester $I)
     {
