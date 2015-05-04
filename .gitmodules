@@ -1,0 +1,3 @@
+[submodule "module/Max"]
+	path = module/Max
+	url = http://git.max.si/tip2/max
