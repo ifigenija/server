@@ -28,7 +28,7 @@ class AuthRpcService
     {
         $ident = $this->getAuth()->getIdentity();
 
-        if (!$ident || $ident->getUsername() === 'anonymous') {
+        if (!$ident) {
             return [];
         }
 

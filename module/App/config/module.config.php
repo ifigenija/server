@@ -41,7 +41,7 @@ return [
                 'options' => [
                     'route'    => '/',
                     'defaults' => [
-                        'controller' => 'App\index',
+                        'controller' => 'Tip\index',
                         'action'     => 'index'
                     ]
                 ],

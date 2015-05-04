@@ -17,6 +17,7 @@ return array(
         'Koledar',
         'Prisotnost',
         'Prodaja',
+        'Checklist',
         'TestAssets'
     ),
     'module_listener_options' => array(
