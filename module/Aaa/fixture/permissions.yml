@@ -1,10 +1,13 @@
 # ročno vzrževano:
 -
-    name: Ass-read
+    name: Aaa-read
     description: Aaa (User,Role,Permission) - branje
 -
     name: Aaa-write
     description: Aaa (User,Role,Permission)- spreminjanje
+-
+    name: Oseba-vse
+    description: Oseba - vse - za testiranje assert
 
 # avtomatsko pridobljeno:
 -

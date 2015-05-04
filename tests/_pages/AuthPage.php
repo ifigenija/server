@@ -26,5 +26,8 @@ class AuthPage
     
     public static $test3     = "test3@ifigenija.si";
     public static $test3Pass = "Test3abc";
+    
+    public static $test4     = "test4@ifigenija.si";
+    public static $test4Pass = "Test4abc";
 
 }

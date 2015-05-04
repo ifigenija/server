@@ -31,20 +31,17 @@ class AssertOseba
             return true;
         } else {
 
-//            $rolesService = $this->getServiceLocator()->getServiceLocator()->get("ZfcRbac\Service\RoleService");
-//            $roles        = $roleService->getIdentityRoles();
             //
-            $iden         = $authorizationService->getIdentity();
-            $user         = $iden->getEmail();
+            $iden = $authorizationService->getIdentity();
+            $user = $iden->getEmail();
             if ($user == "admin@ifigenija.si") {          // $$ rb začasno, dokler shortCircuit ne preskoči tega assert-a
                 return true;
             }
-            $isG = $authorizationService->isGranted("Oseba-vse", $oseba);  //ker je drug perm, se ne bi smel zaciklati
+            $isG     = $authorizationService->isGranted("Oseba-vse", $oseba);  //ker je drug perm, se ne bi smel zaciklati
             $priimek = $oseba->getPriimek();
             // za zaščiten zapis potrebujemo dodaten permission Oseba-vse
-            $ret     = !('write protected12345' === $priimek) or $isG;
+            $ret     = (!('write protected12345' === $priimek) or $isG);
             return $ret;
         }
     }
-
 }

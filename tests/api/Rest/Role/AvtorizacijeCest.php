@@ -53,6 +53,7 @@ class AvtorizacijeCest
         
     }
 
+    
     /**
      * kreiramo 3 role 
      * 
@@ -89,17 +90,18 @@ class AvtorizacijeCest
 
         $I->assertEquals('TEST3RW', $role['name']);
         $I->assertNotEmpty($role['id']);
- 
+
         // 4. vloga
         $data = [
-            'name'        => 'TEST4RW',
+            'name'        => 'TEST4RWVSE',
             'description' => 'Testna vloga',
         ];
         $role = $I->successfullyCreate($this->roleUrl, $data);
 
-        $I->assertEquals('TEST4RW', $role['name']);
+        $I->assertEquals('TEST4RWVSE', $role['name']);
         $I->assertNotEmpty($role['id']);
     }
+
 
     /**
      * Doda dovoljenja vlogam
@@ -144,21 +146,21 @@ class AvtorizacijeCest
 
         // 4. vlogi read + write
         $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
-            'rolename' => "TEST4RW",
+            'rolename' => "TEST4RWVSE",
             'permname' => 'Oseba-read',
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
 
         $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
-            'rolename' => "TEST4RW",
+            'rolename' => "TEST4RWVSE",
             'permname' => 'Oseba-write',
         ]);
         $I->assertNotEmpty($res);
 
         $I->assertTrue($res);
         $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
-            'rolename' => "TEST4RW",
+            'rolename' => "TEST4RWVSE",
             'permname' => 'Oseba-vse',
         ]);
         $I->assertNotEmpty($res);
@@ -170,7 +172,7 @@ class AvtorizacijeCest
      * 
      * @param ApiTester $I
      */
-    public function createTriUserje(ApiTester $I)
+    public function createUserje(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
 
@@ -203,15 +205,25 @@ class AvtorizacijeCest
         $user = $I->successfullyCreate($this->userUrl, $data);
         $I->assertEquals(\IfiTest\AuthPage::$test3, $user['email']);
         $I->assertNotEmpty($user['id']);
+ 
+        $data = [
+            'email'    => \IfiTest\AuthPage::$test4,
+            'name'     => 'Testni uporabnik za Cest testiranje',
+            'password' => \IfiTest\AuthPage::$test4Pass,
+            'enabled'  => true,
+        ];
+        $user = $I->successfullyCreate($this->userUrl, $data);
+        $I->assertEquals(\IfiTest\AuthPage::$test4, $user['email']);
+        $I->assertNotEmpty($user['id']);
     }
 
     /**
      * Doda 3 vloge 3 uporabnikom
      * 
-     * @depends createTriUserje
+     * @depends createUserje
      * @param ApiTester $I
      */
-    public function grantTriRoleTremUporabnikom(ApiTester $I)
+    public function grantRoleUporabnikom(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
 
@@ -235,6 +247,13 @@ class AvtorizacijeCest
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
+        
+        $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
+            'username' => \IfiTest\AuthPage::$test4,
+            'rolename' => 'TEST4RWVSE',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
     }
 
     /**
@@ -242,7 +261,7 @@ class AvtorizacijeCest
      * 
      * @param ApiTester $I
      */
-    public function createTriOsebe(ApiTester $I)
+    public function createOsebe(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
 
@@ -282,7 +301,7 @@ class AvtorizacijeCest
     /**
      * Sproba getList dostop z Read uporabnikom
      * 
-     * @depends createTriUserje
+     * @depends createUserje
      * @param ApiTester $I
      */
     public function getListZReadUserjem(ApiTester $I)
@@ -297,7 +316,7 @@ class AvtorizacijeCest
     /**
      * sproba get, update, write, delete dostope z read uporabnikom
      * 
-     * @depends createTriUserje
+     * @depends createUserje
      * @param ApiTester $I
      */
     public function dostopiZReadUserjem(ApiTester $I)
@@ -328,7 +347,7 @@ class AvtorizacijeCest
     /**
      * Sprobam getlist dostope z write uporabnikom
      * 
-     * @depends createTriUserje
+     * @depends createUserje
      * @param ApiTester $I
      */
     public function getListZWriteUserjem(ApiTester $I)
@@ -341,7 +360,7 @@ class AvtorizacijeCest
     /**
      * sproba get, update, write, delete dostope z write uporabnikom
      * 
-     * @depends createTriUserje
+     * @depends createUserje
      * @param ApiTester $I
      */
     public function dostopiZWriteUserjem(ApiTester $I)
@@ -375,7 +394,7 @@ class AvtorizacijeCest
     /**
      * Getlist dostop z Read Write uporabnikom
      * 
-     * @depends createTriUserje
+     * @depends createUserje
      * @param ApiTester $I
      */
     public function getListZRwUserjem(ApiTester $I)
@@ -389,7 +408,7 @@ class AvtorizacijeCest
     /**
      * get, update, write, delete dostop z Read Write uporabnikom
      * 
-     * @depends createTriUserje
+     * @depends createUserje
      * @param ApiTester $I
      */
     public function dostopiZRwUserjem(ApiTester $I)
@@ -425,7 +444,7 @@ class AvtorizacijeCest
     /**
      * assert dostop z Read Write uporabnikom
      * 
-     * @depends createTriUserje
+     * @depends createUserje
      * @param ApiTester $I
      */
     public function assertDostopZRwUserjem(ApiTester $I)
@@ -464,33 +483,23 @@ class AvtorizacijeCest
     }
 
     /**
-     * Enemu userju je z assert omogočen dostop do vsebine, drugemu ne
+     * Preverimo, ali je userju z dodatnim specialnim dovoljenjem omogočen dostop
      * 
      * @param ApiTester $I
      */
     public function assertPoVsebiniNaUserja(ApiTester $I)
     {
-        /*
-         * naredili bi verjetno takole
-         * User / Role / permission:
-         * Tehnicni  /Tehnicni  /TerminStoritveViewTehn-write
-         * Inspecient/Inspecient/TerminStoritveViewInsp-write
-         * 
-         * assert na permissione:
-         *    "TerminStoritveViewTehn-write" => "check-ViewTehn" => "AssertTehn"
-         *    "TerminStoritveViewInsp-write" => "check-ViewInsp" => "AssertInsp"
-         * 
-         * v metodah assert pa preverjamo vrednosti za te view-e
-         *  AssertTehn->assert        : preveri če je alternacija tehnik
-         *  AssertInsp->assert        : preveri če je alternacija umetniška ekipa
-         * 
-         */
-         $I->amHttpAuthenticated(\IfiTest\AuthPage::$test3, \IfiTest\AuthPage::$test3Pass);
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$test4, \IfiTest\AuthPage::$test4Pass);
+        // oseba, ki je z assert zaščitena 
+        //update
+        $oseba        = $this->objOseba3Prot;
+        $oseba['ime'] = 'cirkocarko';
 
-        
-        objOseba3Prot
-         $I->assertTrue(1===2); //$$ rb za narediti še- kako assert po vsebini glede na userja oz. role
+        // dostop uspe zaradi posebnega dovoljenja "Oseba-vse"
+        $I->successfullyUpdate($this->osebaUrl, $oseba['id'], $oseba);
+        $I->assertEquals($oseba['ime'], 'cirkocarko');
     }
+
     /**
      * Dostopi na many to many relacije
      * 
@@ -499,8 +508,8 @@ class AvtorizacijeCest
      */
     public function dostopiNaManyToManyView(ApiTester $I)
     {
-        
-         $I->assertTrue(1===2); 
+
+        $I->assertTrue(1 === 2);
     }
 
 }

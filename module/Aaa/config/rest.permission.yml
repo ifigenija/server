@@ -1,7 +1,7 @@
 ## YAML Template.
 ---
 entityClass: Aaa\Entity\Permission
-permPrefix: Drzava
+permPrefix: Aaa
 disabledMethods: 
     - delete
     - create
