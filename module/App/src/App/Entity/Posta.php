@@ -14,8 +14,8 @@ use Max\Ann\Entity as Max;
  * @Max\I18n(label="Pošta",plural="Pošte")
  * @Max\Id(prefix="0005")
  */
-class Posta extends \Max\Entity\Base
-        
+class Posta
+        extends \Max\Entity\Base
 {
 
     /**
@@ -24,7 +24,8 @@ class Posta extends \Max\Entity\Base
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
-     * @var string
+     * @Max\Ui(type="id")
+     *  * @var string
      */
     protected $id;
 
@@ -45,39 +46,41 @@ class Posta extends \Max\Entity\Base
      * @var string
      *
      * @Max\I18n(label="Naziv",description="Naziv")
+     * @Max\Ui(type="naziv")
      */
     protected $naziv;
 
-    function getId()
+    public function getId()
     {
         return $this->id;
     }
 
-    function getSifra()
+    public function getSifra()
     {
         return $this->sifra;
     }
 
-    function getNaziv()
+    public function getNaziv()
     {
         return $this->naziv;
     }
 
-    function setId($id)
+    public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
-    function setSifra($sifra)
+    public function setSifra($sifra)
     {
         $this->sifra = $sifra;
+        return $this;
     }
 
-    function setNaziv($naziv)
+    public function setNaziv($naziv)
     {
         $this->naziv = $naziv;
+        return $this;
     }
 
-
 }
-

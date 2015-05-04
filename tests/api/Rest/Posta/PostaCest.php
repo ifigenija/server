@@ -5,11 +5,11 @@ namespace Rest\Posta;
 use ApiTester;
 
 /**
- * - list 
- * - create
- * - update
- * - delete 
- * - read 
+ *      - list 
+ *      - create
+ *      - update
+ *      - delete 
+ *      - read 
  * 
  */
 class PostaCest
@@ -31,7 +31,8 @@ class PostaCest
 
     public function getList(ApiTester $I)
     {
-        $list     = $I->successfullyGetList($this->restUrl, []);
+        $resp     = $I->successfullyGetList($this->restUrl, []);
+        $list     = $resp["data"];
         $I->assertNotEmpty($list);
         $this->id = array_pop($list)['id'];
     }
@@ -40,7 +41,7 @@ class PostaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'sifra' => 'xx',
+            'sifra' => 'UU',
             'naziv' => 'xx',
         ];
         $this->obj = $posta     = $I->successfullyCreate($this->restUrl, $data);
@@ -67,7 +68,9 @@ class PostaCest
     {
         $posta = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
+        // preverimo vsa polja
         $I->assertEquals('tralala', $posta['naziv']);
+        $I->assertEquals('UU', $posta['sifra']);
     }
 
     // tests

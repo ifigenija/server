@@ -7,5 +7,7 @@ forms:
         elements:
             - sifra
             - naziv
-
-                
+lists:
+    default: 
+        hydrator:
+            - exclude: []
