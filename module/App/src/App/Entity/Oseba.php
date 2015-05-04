@@ -349,7 +349,7 @@ class Oseba
         return $this;
     }
 
-    public function setPopa(App\Entity\Popa $popa)
+    public function setPopa(\App\Entity\Popa $popa = null)
     {
         $this->popa = $popa;
         return $this;
@@ -451,7 +451,7 @@ class Oseba
         return $this;
     }
 
-    public function setUser(Aaa\Entity\User $user)
+    public function setUser(\Aaa\Entity\User $user =null)
     {
         $this->user = $user;
         return $this;
