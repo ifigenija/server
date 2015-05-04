@@ -31,11 +31,11 @@ class Oseba
      * Klient
      *  Poslovni partner od katerega je kontaktna oseba
      *
-     * @var App\Entity\Popa
+     * @var \App\Entity\Popa
      *
      * @Max\Ui(type="tomany")  
      * @Max\I18n(label="Klient",  description="Poslovni partner od katerega je kontaktna oseba")
-     * @ORM\ManyToMany(targetEntity="App\Entity\Popa", mappedBy="osebe")
+     * @ORM\ManyToMany(targetEntity="\App\Entity\Popa", mappedBy="osebe")
      */
     protected $popa;
 
@@ -161,7 +161,7 @@ class Oseba
     private $krajRojstva;
 
     /**
-     * @ORM\OneToOne(targetEntity="Aaa\Entity\User")
+     * @ORM\OneToOne(targetEntity="\Aaa\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)
      * @Max\Ui(type="toone")
      * @var Aaa\Entity\User
@@ -223,7 +223,6 @@ class Oseba
     {
         return sprintf("%s %s %s", $this->ime, $this->srednjeIme, $this->priimek);
     }
-
     public function getId()
     {
         return $this->id;
@@ -350,7 +349,7 @@ class Oseba
         return $this;
     }
 
-    public function setPopa($popa)
+    public function setPopa(App\Entity\Popa $popa)
     {
         $this->popa = $popa;
         return $this;
@@ -452,7 +451,7 @@ class Oseba
         return $this;
     }
 
-    public function setUser($user)
+    public function setUser(Aaa\Entity\User $user)
     {
         $this->user = $user;
         return $this;
