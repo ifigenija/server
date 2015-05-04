@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM,
  * @ORM\Table(name="drza")
  * @Max\I18n(label="Država",plural="Države",description="Evidenca držav")
  * @Max\Id(prefix="0004")
- *
+ * @Max\Lookup
  */
 class Drzava
                extends \Max\Entity\Base

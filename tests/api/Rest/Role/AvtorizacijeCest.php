@@ -488,7 +488,6 @@ class AvtorizacijeCest
          $I->amHttpAuthenticated(\IfiTest\AuthPage::$test3, \IfiTest\AuthPage::$test3Pass);
 
         
-        objOseba3Prot
          $I->assertTrue(1===2); //$$ rb za narediti še- kako assert po vsebini glede na userja oz. role
     }
     /**
