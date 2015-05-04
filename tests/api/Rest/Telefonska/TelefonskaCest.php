@@ -130,8 +130,8 @@ class TelefonskaCest
      */
     public function createTelefonskeBrezOsebeAliPopa(ApiTester $I)
     {
-      
-        $data      = [
+
+        $data = [
             'vrsta'    => 'Mobilni', //$$ rb - popraviti opcije, kasneje M namesto mobilni
             'stevilka' => '12-34',
             'privzeta' => true,
@@ -139,11 +139,10 @@ class TelefonskaCest
 //            'popa'     => "",
         ];
         // test validacije - obstajati mora ali oseba ali popa
-        $resp      = $I->failToCreate($this->restUrl, $data);
+        $resp = $I->failToCreate($this->restUrl, $data);
         $I->assertNotEmpty($resp);
-        // testiramo na enako besedilo, kot je v validaciji
-        $I->assertContains('Pogoj: Lastnik',$resp[0]['message']);
-        
+        // testiramo na enako številko napake kot je v validaciji
+        $I->assertEquals(1000460, $resp[0]['code']);
     }
 
 }

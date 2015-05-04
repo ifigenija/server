@@ -176,7 +176,11 @@ class PostniNaslovCest
             'oseba' => null,
             'naziv' => 'xx',
         ];
-        $pnaslov = $I->failToCreate($this->restUrl, $data);
+        $resp = $I->failToCreate($this->restUrl, $data);
+        
+        $I->assertNotEmpty($resp);
+        // testiramo na enako številko napake kot je v validaciji
+        $I->assertEquals(1000304,$resp[0]['code']);
     }
 
     /**
