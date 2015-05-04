@@ -18,8 +18,10 @@ namespace App\Assertion;
  * @return bool
  */
 class AssertOseba
-        implements \ZfcRbac\Assertion\AssertionInterface
+        implements \ZfcRbac\Assertion\AssertionInterface, \Zend\ServiceManager\ServiceLocatorAwareInterface
 {
+
+    use \Zend\ServiceManager\ServiceLocatorAwareTrait;
 
     public function assert(\ZfcRbac\Service\AuthorizationService $authorizationService, $oseba = null)
     {
@@ -28,18 +30,19 @@ class AssertOseba
             //če je null vrne ok
             return true;
         } else {
-//            $roles = $authorizationService->roleService->getIdentityRoles();
-//            if (!$authorizationService->rbac->isGranted($roles, $permission)) {
-//                return false;
-//            }
-//            $isG = $authorizationService->rbac->isGranted($roles, "Oseba-vse"));
-            $iden = $authorizationService->getIdentity();
-            $user = $iden->getEmail();
+
+//            $rolesService = $this->getServiceLocator()->getServiceLocator()->get("ZfcRbac\Service\RoleService");
+//            $roles        = $roleService->getIdentityRoles();
+            //
+            $iden         = $authorizationService->getIdentity();
+            $user         = $iden->getEmail();
             if ($user == "admin@ifigenija.si") {          // $$ rb začasno, dokler shortCircuit ne preskoči tega assert-a
                 return true;
             }
+            $isG = $authorizationService->isGranted("Oseba-vse", $oseba);  //ker je drug perm, se ne bi smel zaciklati
             $priimek = $oseba->getPriimek();
-            $ret     = !('write protected12345' === $priimek);
+            // za zaščiten zapis potrebujemo dodaten permission Oseba-vse
+            $ret     = !('write protected12345' === $priimek) or $isG;
             return $ret;
         }
     }

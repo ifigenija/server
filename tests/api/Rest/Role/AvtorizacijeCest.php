@@ -58,7 +58,7 @@ class AvtorizacijeCest
      * 
      * @param ApiTester $I
      */
-    public function createTriVloge(ApiTester $I)
+    public function createVloge(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
         $data = [
@@ -89,15 +89,25 @@ class AvtorizacijeCest
 
         $I->assertEquals('TEST3RW', $role['name']);
         $I->assertNotEmpty($role['id']);
+ 
+        // 4. vloga
+        $data = [
+            'name'        => 'TEST4RW',
+            'description' => 'Testna vloga',
+        ];
+        $role = $I->successfullyCreate($this->roleUrl, $data);
+
+        $I->assertEquals('TEST4RW', $role['name']);
+        $I->assertNotEmpty($role['id']);
     }
 
     /**
-     * Doda 3 dovoljenja 3 vlogam
+     * Doda dovoljenja vlogam
      * 
-     * @depends createTriVloge
+     * @depends createVloge
      * @param ApiTester $I
      */
-    public function grantTriPermissioneTremVlogam(ApiTester $I)
+    public function grantPermissioneVlogam(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
 
@@ -128,6 +138,28 @@ class AvtorizacijeCest
         $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
             'rolename' => "TEST3RW",
             'permname' => 'Oseba-write',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+
+        // 4. vlogi read + write
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "TEST4RW",
+            'permname' => 'Oseba-read',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "TEST4RW",
+            'permname' => 'Oseba-write',
+        ]);
+        $I->assertNotEmpty($res);
+
+        $I->assertTrue($res);
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "TEST4RW",
+            'permname' => 'Oseba-vse',
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
@@ -453,7 +485,10 @@ class AvtorizacijeCest
          *  AssertInsp->assert        : preveri če je alternacija umetniška ekipa
          * 
          */
+         $I->amHttpAuthenticated(\IfiTest\AuthPage::$test3, \IfiTest\AuthPage::$test3Pass);
+
         
+        objOseba3Prot
          $I->assertTrue(1===2); //$$ rb za narediti še- kako assert po vsebini glede na userja oz. role
     }
     /**

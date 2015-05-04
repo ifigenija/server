@@ -31,9 +31,9 @@ class Drzava
     /**
      * Šifra države
      * @ORM\Column(unique=true, length=2, nullable=true)
-     * @var string
      * @Max\I18n(label="Koda države",description="ISO koda države")
      * @Max\Ui(type="sifra",class="sifra",icon="fa fa-flag",ident=true)
+     * @var string
      */
     protected $sifra;
 
@@ -43,7 +43,7 @@ class Drzava
      * @var string
      * @Max\I18n(label="Trimestna koda",description="Trimestna ISO koda države")
      * @Max\Ui(type="sifra",class="sifra",icon="fa fa-flag", required=true)
-     */
+     *      */
     protected $sifraDolg;
 
     /**
@@ -52,7 +52,8 @@ class Drzava
      * @var string
      * @Max\I18n(label="Številčna koda",description="Trimestna ISO številčna koda države")
      * @Max\Ui(class="sifra",icon="fa fa-flag", required=true)
-     */
+     * @var string
+     *  */
     protected $isoNum;
 
     /**
@@ -67,6 +68,7 @@ class Drzava
      * Naziv države
      * @ORM\Column(length=50, nullable=true)
      * @Max\I18n(label="Naziv",description="Naziv države")
+     * @Max\Ui(class="naziv", required=true)
      * @var string
      */
     protected $naziv;
@@ -79,32 +81,29 @@ class Drzava
      */
     protected $opomba;
 
-    /**
-     * 
-     * @Max\Exclude
-     * @var string
-     */
-    protected $upor;
-
-    /**
-     * 
-     * @Max\Exclude
-     * @var string
-     */
-    protected $datKnj;
-
-    public function getTralala() {
-        return "to je to ";
+    public function getId()
+    {
+        return $this->id;
     }
+
     public function getSifra()
     {
         return $this->sifra;
     }
 
-    public function setSifra($sifra)
+    public function getSifraDolg()
     {
-        $this->sifra = $sifra;
-        return $this;
+        return $this->sifraDolg;
+    }
+
+    public function getIsoNum()
+    {
+        return $this->isoNum;
+    }
+
+    public function getIsoNaziv()
+    {
+        return $this->isoNaziv;
     }
 
     public function getNaziv()
@@ -112,15 +111,9 @@ class Drzava
         return $this->naziv;
     }
 
-    public function setNaziv($naziv)
+    public function getOpomba()
     {
-        $this->naziv = $naziv;
-        return $this;
-    }
-
-    public function getId()
-    {
-        return $this->id;
+        return $this->opomba;
     }
 
     public function setId($id)
@@ -129,66 +122,40 @@ class Drzava
         return $this;
     }
 
-    public function getUpor()
+    public function setSifra($sifra)
     {
-        return $this->upor;
-    }
-
-    public function setUpor($upor)
-    {
-        $this->upor = $upor;
+        $this->sifra = $sifra;
         return $this;
-    }
-
-    public function getDatKnj()
-    {
-        return $this->datKnj;
-    }
-
-    public function setDatKnj($datKnj)
-    {
-        $this->datKnj = $datKnj;
-        return $this;
-    }
-
-    public function getSifraDolg()
-    {
-        return $this->sifraDolg;
     }
 
     public function setSifraDolg($sifraDolg)
     {
         $this->sifraDolg = $sifraDolg;
-    }
-
-    public function getIsoNum()
-    {
-        return $this->isoNum;
+        return $this;
     }
 
     public function setIsoNum($isoNum)
     {
         $this->isoNum = $isoNum;
-    }
-
-    public function getIsoNaziv()
-    {
-        return $this->isoNaziv;
+        return $this;
     }
 
     public function setIsoNaziv($isoNaziv)
     {
         $this->isoNaziv = $isoNaziv;
+        return $this;
     }
 
-    public function getOpomba()
+    public function setNaziv($naziv)
     {
-        return $this->opomba;
+        $this->naziv = $naziv;
+        return $this;
     }
 
     public function setOpomba($opomba)
     {
         $this->opomba = $opomba;
+        return $this;
     }
 
 }
