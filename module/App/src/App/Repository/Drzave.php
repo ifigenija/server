@@ -14,5 +14,10 @@ namespace App\Repository;
 class Drzave extends \Max\Repository\AbstractMaxRepository
 {
 
+    protected $sortOptions = [
+        "default" => [
+            "sifra" => ["alias" => "sifra"]
+        ]
+    ];
 
 }
