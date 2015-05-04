@@ -33,10 +33,9 @@ class PostniNaslov
     /**
      * Lastnik postnega naslova če gre za klienta 
      * 
-     * @var App\Entity\Popa
-     * @ORM\ManyToOne(targetEntity="App\Entity\Popa")
-     * @ORM\JoinColumn(name="klient_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="naslovi")
      * @Max\Ui(type="toone")
+     * @var \App\Entity\Popa
      */
     protected $popa;
 
@@ -245,7 +244,7 @@ class PostniNaslov
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa)
+    public function setPopa(\App\Entity\Popa $popa =null)
     {
         $this->popa = $popa;
         return $this;

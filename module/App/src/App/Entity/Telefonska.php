@@ -9,13 +9,15 @@ use Max\Ann\Entity as Max;
  * @ORM\Entity(repositoryClass="App\Repository\Telefonske")
  */
 class Telefonska
-            extends \Max\Entity\Base
+        extends \Max\Entity\Base
 {
 
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
+     * @Max\Ui(type="id")
+     * @var string
      */
     private $id;
 
@@ -23,8 +25,8 @@ class Telefonska
      * Vrsta telefonske številke - domača 
      * 
      * @ORM\Column(type="string", length=20, nullable=false)
+     * @Max\I18n(label="Vrsta tel. številke", description="Vrsta telefonske številke")   
      * @Max\Ui(type="select", opts="telefonska.vrsta")
-  
      */
     private $vrsta;
 
@@ -33,6 +35,8 @@ class Telefonska
      * 
      * @ORM\Column(type="string", length=30, nullable=true)
      * @Max\I18n(label="Številka", description="Telefonska številka")
+     * @Max\Ui(type="sifra")
+     * @var string
      */
     private $stevilka;
 
@@ -40,6 +44,7 @@ class Telefonska
      * A je to privzeta telefonska številka 
      * 
      * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="Privzeta", description="Ali je privzeta telefonska številka")   
      * @Max\Ui(type="boolcheckbox",required=false)
      */
     private $privzeta = false;
@@ -49,84 +54,91 @@ class Telefonska
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="telefonske")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
+     * @var \App\Entity\Oseba
      *
      */
     private $oseba;
 
     /**
-     * Lastnik telfonske številke, če gre za 
+     * Lastnik telfonske številke, če gre za poslovnega partnerja
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="telefonske")
-     * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
+     * @Max\Ui(type="toone")
+     * @var \App\Entity\Popa
      */
-    private $popa;
-    
-    
+    protected $popa;
+
     public function validate($mode = 'update')
     {
-        $this->expect($this->popa || $this->oseba, 'Lastnik računa ni nastavljen - Poslovni partner ali oseba', 1000460);        
+        $this->expect($this->popa || $this->oseba, 'Lastnik računa ni nastavljen - Poslovni partner ali oseba', 1000460);
         $this->expect(!($this->popa && $this->oseba), "Lastnika računa je lahko samo poslovni partner ali oseba", 1000461);
         $this->expect($this->stevilka, "Telefonska številka  je obvezen podatek", 1000462);
     }
 
-    function getId()
+    public function getId()
     {
         return $this->id;
     }
 
-    function getVrsta()
+    public function getVrsta()
     {
         return $this->vrsta;
     }
 
-    function getStevilka()
+    public function getStevilka()
     {
         return $this->stevilka;
     }
 
-    function getPrivzeta()
+    public function getPrivzeta()
     {
         return $this->privzeta;
     }
 
-    function getOseba()
+    public function getOseba()
     {
         return $this->oseba;
     }
 
-    function getPopa()
+    public function getPopa()
     {
         return $this->popa;
     }
 
-    function setId($id)
+    public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
-    function setVrsta($vrsta)
+    public function setVrsta($vrsta)
     {
         $this->vrsta = $vrsta;
+        return $this;
     }
 
-    function setStevilka($stevilka)
+    public function setStevilka($stevilka)
     {
         $this->stevilka = $stevilka;
+        return $this;
     }
 
-    function setPrivzeta($privzeta)
+    public function setPrivzeta($privzeta)
     {
         $this->privzeta = $privzeta;
+        return $this;
     }
 
-    function setOseba(Oseba $oseba = null)
+    public function setOseba(\App\Entity\Oseba $oseba = null)
     {
         $this->oseba = $oseba;
+        return $this;
     }
 
-    function setPopa(Popa $popa = null)
+    public function setPopa(\App\Entity\Popa $popa)
     {
         $this->popa = $popa;
+        return $this;
     }
 
 }

@@ -17,3 +17,7 @@ forms:
             - oseba    
             - popa
             - drzava
+lists:
+    default: 
+        hydrator:
+            - exclude: []

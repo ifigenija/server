@@ -15,4 +15,10 @@ class PostniNaslovi
         extends \Max\Repository\AbstractMaxRepository
 {
     
+    protected $sortOptions = [
+        "default" => [
+            "naziv" => ["alias" => "naziv"]
+        ]
+    ];
+    
 }

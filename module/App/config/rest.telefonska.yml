@@ -7,6 +7,10 @@ forms:
         elements:
             - popa
             - oseba
-            - vrsta
+            - vrsta   
             - stevilka
             - privzeta
+lists:
+    default: 
+        hydrator:
+            - exclude: []

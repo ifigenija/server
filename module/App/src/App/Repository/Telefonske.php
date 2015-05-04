@@ -14,5 +14,11 @@ namespace App\Repository;
 class Telefonske
         extends \Max\Repository\AbstractMaxRepository
 {
-    
+
+    protected $sortOptions = [
+        "default" => [
+            "stevilka" => ["alias" => "stevilka"]
+        ]
+    ];
+
 }

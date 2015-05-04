@@ -80,10 +80,13 @@ class PostniNaslovCest
      */
     public function getListDrzava(ApiTester $I)
     {
-        $list            = $I->successfullyGetList($this->drzavaUrl, []);
+
+
+        $resp            = $I->successfullyGetList($this->drzavaUrl, []);
+        $list            = $resp['data'];
         $I->assertNotEmpty($list);
-        // najdi slovenijo $$
-        $this->objDrzava = array_pop($list);
+        $this->objDrzava = $drzava          = array_pop($list);
+        $I->assertNotEmpty($drzava);
     }
 
     /**
@@ -118,7 +121,8 @@ class PostniNaslovCest
      */
     public function getList(ApiTester $I)
     {
-        $list     = $I->successfullyGetList($this->restUrl, []);
+        $resp     = $I->successfullyGetList($this->restUrl, []);
+        $list     = $resp['data'];
         $I->assertNotEmpty($list);
         $this->id = array_pop($list)['id'];
     }
@@ -160,21 +164,21 @@ class PostniNaslovCest
         $I->assertEquals(true, $pnaslov['privzeti']);
     }
 
-        /**
+    /**
      *  probamo kreirati PostniNaslov brez osebe in poslovnega partnerja, kar mora validator preprečiti
      *
      * @param ApiTester $I
      */
     public function createNaslovBrezPopaInOsebe(ApiTester $I)
     {
-        $data      = [
-            'popa'       => null,
-            'oseba'      => null,
-            'naziv'      => 'xx',
+        $data    = [
+            'popa'  => null,
+            'oseba' => null,
+            'naziv' => 'xx',
         ];
-        $pnaslov   = $I->failToCreate($this->restUrl, $data);
+        $pnaslov = $I->failToCreate($this->restUrl, $data);
     }
-    
+
     /**
      * zbriše PostniNaslov
      * @depends create

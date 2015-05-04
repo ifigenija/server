@@ -5,19 +5,25 @@ namespace Rest\Telefonska;
 use ApiTester;
 
 /**
- * - create
+ * Priprava ostalih entitet
+ * - create oseba
+ * 
+ *      - create
  * - list 
  * - update
- * - delete 
  * - read 
+ * - delete
+ * - validacija 
  * 
  */
 class TelefonskaCest
 {
 
-    private $restUrl = '/rest/telefonska';
-    private $id      = '00000000-0000-0000-0000-000000000000';
+    private $restUrl  = '/rest/telefonska';
+    private $osebaUrl = '/rest/oseba';
+    private $id       = '00000000-0000-0000-0000-000000000000';
     private $obj;
+    private $objOseba;
 
     public function _before(ApiTester $I)
     {
@@ -29,16 +35,39 @@ class TelefonskaCest
         
     }
 
-    // napolnimo vsaj en zapis
+    /**
+     *  napolnimo vsaj en zapis
+     * 
+     * @param ApiTester $I
+     */
+    public function createOsebo(ApiTester $I)
+    {
+        $data           = [
+            'ime'     => 'zz',
+            'priimek' => 'zz',
+        ];
+        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
+        $I->assertEquals('zz', $oseba['ime']);
+        $I->assertNotEmpty($oseba['id']);
+    }
+
+    /**
+     * kreiramo telefonsko
+     * 
+     * @depends createOsebo
+     * @param ApiTester $I
+     */
     public function create(ApiTester $I)
     {
         $data      = [
-            'vrsta'    => 'zz',
-            'stevilka' => 'zz',
-            'privzeta' => 'zz',
+            'vrsta'    => 'Mobilni', //$$ rb - popraviti opcije, kasneje M namesto mobilni
+            'stevilka' => '12-34',
+            'privzeta' => true,
+            'oseba'    => $this->objOseba['id'],
+            'popa'     => null,
         ];
         $this->obj = $tel       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('zz', $tel['privzeta']);
+        $I->assertEquals($tel['stevilka'], '12-34');
         $I->assertNotEmpty($tel['id']);
     }
 
@@ -47,7 +76,8 @@ class TelefonskaCest
      */
     public function getList(ApiTester $I)
     {
-        $list     = $I->successfullyGetList($this->restUrl, []);
+        $resp     = $I->successfullyGetList($this->restUrl, []);
+        $list     = $resp['data'];
         $I->assertNotEmpty($list);
         $this->id = array_pop($list)['id'];
     }
@@ -58,22 +88,28 @@ class TelefonskaCest
      */
     public function update(ApiTester $I)
     {
-        $tel          = $this->obj;
-        $tel['privzeta'] = 'tralala';
+        $tel             = $this->obj;
+        $tel['stevilka'] = '772-222';
 
         $tel = $I->successfullyUpdate($this->restUrl, $tel['id'], $tel);
-
-        $I->assertEquals('tralala', $tel['privzeta']);
+        $I->assertEquals($tel['stevilka'], '772-222');
     }
 
     /**
+     * prebere telefonsko in preveri vsa polja
+     * 
      * @depends create
+     * @param ApiTester $I
      */
-    public function read(ApiTester $I)
+    public function readTelefonsko(ApiTester $I)
     {
         $tel = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals('tralala', $tel['privzeta']);
+        $I->assertEquals($tel['vrsta'], 'Mobilni');
+        $I->assertEquals($tel['stevilka'], '772-222');
+        $I->assertEquals($tel['privzeta'], true);
+        $I->assertEquals($tel['oseba'], $this->objOseba['id']);
+        $I->assertEquals($tel['popa'], null);
     }
 
     /**
@@ -84,6 +120,30 @@ class TelefonskaCest
         $tel = $I->successfullyDelete($this->restUrl, $this->obj['id']);
 
         $I->failToGet($this->restUrl, $this->obj['id']);
+    }
+
+    /**
+     * kreiramo telefonsko
+     * 
+     * @depends createOsebo
+     * @param ApiTester $I
+     */
+    public function createTelefonskeBrezOsebeAliPopa(ApiTester $I)
+    {
+      
+        $data      = [
+            'vrsta'    => 'Mobilni', //$$ rb - popraviti opcije, kasneje M namesto mobilni
+            'stevilka' => '12-34',
+            'privzeta' => true,
+//            'oseba'    => "",
+//            'popa'     => "",
+        ];
+        // test validacije - obstajati mora ali oseba ali popa
+        $resp      = $I->failToCreate($this->restUrl, $data);
+        $I->assertNotEmpty($resp);
+        // testiramo na enako besedilo, kot je v validaciji
+        $I->assertContains('Pogoj: Lastnik',$resp[0]['message']);
+        
     }
 
 }

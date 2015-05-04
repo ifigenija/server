@@ -25,7 +25,7 @@ class Posta
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
      * @Max\Ui(type="id")
-     *  * @var string
+     * @var string
      */
     protected $id;
 
