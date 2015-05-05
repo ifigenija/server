@@ -20,6 +20,7 @@ return [
         'factories'  => [
             'Rest\drzava'       => 'Max\Factory\RestControllerFactory',
             'Rest\oseba'        => 'Max\Factory\RestControllerFactory',
+            'Relation\oseba'        => 'Max\Factory\ToManyControllerFactory',
             'Rest\posta'        => 'Max\Factory\RestControllerFactory',
             'Rest\postniNaslov' => 'Max\Factory\RestControllerFactory',
             'Rest\trr'          => 'Max\Factory\RestControllerFactory',

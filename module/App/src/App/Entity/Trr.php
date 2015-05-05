@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping AS ORM,
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Trrji")
  * @Max\Id(prefix="0007")
- *  */
+ * @Max\I18n(label="Transakcijski račun",plural="Transakcijski računi")
+ */
 class Trr
         extends \Max\Entity\Base
 {
@@ -17,33 +18,45 @@ class Trr
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
+     * @Max\Ui(type="id")
+     * @var string
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Max\Ui(type="sifra")
+     * @var string
      */
     private $stevilka;
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Max\Ui(type="sifra")
+     * @var string
      */
     private $swift;
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Max\Ui(type="sifra")
+     * @var string
      */
     private $bic;
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Max\Ui(type="sifra",icon="fa fa-university")
+     * @var string
      */
     private $banka;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="trrji")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
+     * @Max\I18n(label="Klient",  description="Poslovni partner, ki je lastnik transakcijskega računa")
      * @Max\Ui(type="toone")
+     * @var \App\Entity\Popa
      */
     private $popa;
 
@@ -51,87 +64,93 @@ class Trr
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="trrji")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\Ui(type="toone")
+     * @var \App\Entity\Oseba
      */
     private $oseba;
-    
-    
+
     public function validate($mode = 'update')
     {
-        $this->expect($this->popa || $this->oseba, 'Lastnik računa ni nastavljen - Poslovni partner ali oseba', 1000200);        
+        $this->expect($this->popa || $this->oseba, 'Lastnik računa ni nastavljen - Poslovni partner ali oseba', 1000200);
         $this->expect(!($this->popa && $this->oseba), "Lastnika računa je lahko samo poslovni partner ali oseba", 1000203);
         $this->expect($this->banka, "Banka je obvezen podatek na računu", 1000201);
         $this->expect($this->stevilka, "Številka računa je obvezen podatek", 1000202);
-                
     }
 
-    function getId()
+    public function getId()
     {
         return $this->id;
     }
 
-    function getStevilka()
+    public function getStevilka()
     {
         return $this->stevilka;
     }
 
-    function getSwift()
+    public function getSwift()
     {
         return $this->swift;
     }
 
-    function getBic()
+    public function getBic()
     {
         return $this->bic;
     }
 
-    function getBanka()
+    public function getBanka()
     {
         return $this->banka;
     }
 
-    function getPopa()
+    public function getPopa()
     {
         return $this->popa;
     }
 
-    function getOseba()
+    public function getOseba()
     {
         return $this->oseba;
     }
 
-    function setId($id)
+    public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
-    function setStevilka($stevilka)
+    public function setStevilka($stevilka)
     {
         $this->stevilka = $stevilka;
+        return $this;
     }
 
-    function setSwift($swift)
+    public function setSwift($swift)
     {
         $this->swift = $swift;
+        return $this;
     }
 
-    function setBic($bic)
+    public function setBic($bic)
     {
         $this->bic = $bic;
+        return $this;
     }
 
-    function setBanka($banka)
+    public function setBanka($banka)
     {
         $this->banka = $banka;
+        return $this;
     }
 
-    function setPopa($popa)
+    public function setPopa(\App\Entity\Popa $popa = null)
     {
         $this->popa = $popa;
+        return $this;
     }
 
-    function setOseba($oseba)
+    public function setOseba(\App\Entity\Oseba $oseba = null)
     {
         $this->oseba = $oseba;
+        return $this;
     }
 
 }

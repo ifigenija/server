@@ -7,6 +7,7 @@ use Max\Ann\Entity as Max;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Telefonske")
+ * @Max\I18n(label="Telefonska številka",plural="Telefonske številke")
  */
 class Telefonska
         extends \Max\Entity\Base
@@ -16,6 +17,7 @@ class Telefonska
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
+     * @Max\I18n(label="ID", description="ID telefonske številke")
      * @Max\Ui(type="id")
      * @var string
      */
@@ -27,6 +29,7 @@ class Telefonska
      * @ORM\Column(type="string", length=20, nullable=false)
      * @Max\I18n(label="Vrsta tel. številke", description="Vrsta telefonske številke")   
      * @Max\Ui(type="select", opts="telefonska.vrsta")
+     * @var string
      */
     private $vrsta;
 
@@ -63,6 +66,7 @@ class Telefonska
      * Lastnik telfonske številke, če gre za poslovnega partnerja
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="telefonske")
+     * @Max\I18n(label="Klient",  description="Poslovni partner, ki je ima to telefosnko številko")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */

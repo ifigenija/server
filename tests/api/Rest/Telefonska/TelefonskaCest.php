@@ -6,14 +6,14 @@ use ApiTester;
 
 /**
  * Priprava ostalih entitet
- * - create oseba
+ *      - create oseba
  * 
  *      - create
- * - list 
- * - update
- * - read 
- * - delete
- * - validacija 
+ *      - list 
+ *      - update
+ *      - read 
+ *      - delete
+ *      - validacija 
  * 
  */
 class TelefonskaCest
@@ -122,9 +122,8 @@ class TelefonskaCest
     }
 
     /**
-     * kreiramo telefonsko
+     * kreiramo telefonsko, test validacije
      * 
-     * @depends createOsebo
      * @param ApiTester $I
      */
     public function createTelefonskeBrezOsebeAliPopa(ApiTester $I)

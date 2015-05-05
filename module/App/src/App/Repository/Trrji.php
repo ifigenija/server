@@ -14,5 +14,9 @@ namespace App\Repository;
 class Trrji
         extends \Max\Repository\AbstractMaxRepository
 {
-    
+ protected $sortOptions = [
+        "default" => [
+            "stevilka" => ["alias" => "stevilka"]
+        ]
+    ];     
 }

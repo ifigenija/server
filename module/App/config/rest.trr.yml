@@ -5,12 +5,14 @@ entityClass: App\Entity\Trr
 forms:
     default: 
         elements:
-            - naziv
-            - nazivDva
             - stevilka
             - swift
             - bic
             - banka
-            - oseba
             - popa
+            - oseba
+lists:
+    default: 
+        hydrator:
+            - exclude: []
                 
