@@ -89,6 +89,7 @@ class AuthRpcService
             $roles[] = $role->getName();
         };
         return [
+            'id'                 => $identity->getId(),
             'name'               => $identity->getName(),
 //            'username'           => $identity->getUserName(),
             'username'           => $identity->getEmail(),
