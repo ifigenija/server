@@ -42,7 +42,7 @@ return [
                 'options' => [
                     'route'    => '/',
                     'defaults' => [
-                        'controller' => 'Tip\index',
+                        'controller' => 'App\index',
                         'action'     => 'index'
                     ]
                 ],
@@ -83,6 +83,23 @@ return [
                         'id'         => \Max\Consts::UUID
                     ]
                 ],
+                 'may_terminate' => true,
+                'child_routes' => [
+                    'relation' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/:relation[/:relid]',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Relation',
+                                'action' => null
+                            ],
+                            'constraints' => [
+                                'relation' => '[A-Za-z]+',
+                                'relid' => \Max\Consts::UUID,
+                            ],
+                        ],
+                    ]
+                ]
             ],
         ]
     ],

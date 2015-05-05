@@ -23,7 +23,7 @@ class Users
      */
     protected $sortOptions = [
         'default' => [
-            'name'     => ['alias' => 'u.name'],
+            'name'  => ['alias' => 'u.name'],
             'email' => ['alias' => 'u.email']
         ]
     ];
@@ -37,7 +37,6 @@ class Users
     public function getPaginator(array $options, $name = 'default')
     {
 
-        $srch = strtolower($options['text']);
 
         $em   = $this->getEntityManager();
         $qb   = $em->createQueryBuilder();
@@ -48,9 +47,11 @@ class Users
         $qb->from('\Aaa\Entity\User', 'u');
         $qb->orderBy($sort->order, $sort->dir);
 
-        if ($srch) {
+        if (!empty($options['text'])) {
+            $srch = strtolower($options['text']);
+
             $qb->Where(
-                            $ex->like('lower(u.name)', ':name')
+                    $ex->like('lower(u.name)', ':name')
             );
             $qb->setParameter('name', "%" . $srch . "%");
         }

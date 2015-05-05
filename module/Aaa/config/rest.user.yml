@@ -23,3 +23,7 @@ lists:
 hydrator:
     exclude: 
         - builtIn
+relation:
+    default:
+        roles:
+            enabled: true

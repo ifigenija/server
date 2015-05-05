@@ -20,7 +20,7 @@ class Roles
      *
      * @var array
      */
-    protected $sortOptions = [
+    protected $sortOptions     = [
         'default' => [
             'name'        => [ 'alias' => 'r.name',],
             'description' => [ 'alias' => 'r.description']
@@ -43,7 +43,6 @@ class Roles
      */
     public function getPaginator(array $options, $name = 'default')
     {
-        $srch = strtolower($options['text']);
 
         $em   = $this->getEntityManager();
         $qb   = $em->createQueryBuilder();
@@ -53,7 +52,8 @@ class Roles
         $sort = $this->getSort($name);
         $qb->orderBy($sort->order, $sort->dir);
 
-        if ($srch) {
+        if (!empty($options['text'])) {
+            $srch = strtolower($options['text']);
             $qb->Where($ex->like('lower(r.name)', ':name'));
             $qb->setParameter('name', "%" . $srch . "%");
         }
