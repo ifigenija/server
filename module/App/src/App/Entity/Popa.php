@@ -66,9 +66,9 @@ class Popa
     /**
      * Naziv klienta
      *
-     * @ORM\Column(length=60, nullable=false)
+     * @ORM\Column(length=60, nullable=false) 
      * @Max\I18n(label="Naziv", description="Naziv klienta")
-     * @Max\Ui(type="naziv",group="Osnovni podatki")
+     * @Max\Ui(type="naziv",group="Osnovni podatki") 
      * @var string
      */
     protected $naziv;
@@ -122,9 +122,9 @@ class Popa
      * Država klienta
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
-     * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id", nullable=false) 
      * @Max\I18n(label="Država", description="Država klienta")
-     * @Max\Ui(group="Kontaktni podatki",required=true)
+     * @Max\Ui(type="toone",group="Kontaktni podatki",required=true)
      * @var \App\Entity\Drzava
      */
     protected $drzava;
@@ -193,7 +193,7 @@ class Popa
      *
      * 
      * @ORM\Column(length=1, nullable=true)
-     * @Max\I18n(label="Zavezanec za DV", description="Je klient zavezanec za DDV")
+     * @Max\I18n(label="Zavezanec za DDV", description="Je klient zavezanec za DDV")
      * @Max\Ui(type="checkbox",group="Davčni podatki")      //$$ rb verjetno potrebne select opcije
      * @var string
      */
@@ -205,8 +205,8 @@ class Popa
      *
      *
      * @ORM\Column(length=1, nullable=true)
-     * @Max\Ui(type="checkbox",group="Davčni podatki")      //$$ rb verjetno potrebne select opcije
      * @Max\I18n(label="Iz EU", description="Je klient iz EU")
+     * @Max\Ui(type="checkbox",group="Davčni podatki")      //$$ rb verjetno potrebne select opcije
      * @var string
      */
     protected $jeeu;
@@ -276,7 +276,10 @@ class Popa
      */
     public function validate($mode = 'update')
     {
+
         $this->expect($this->sifra, "Šifra je obvezen podatek", 1000310);
+        //      če je na polju nastavljena anotacija @ORM\Column( nullable=false) , 
+        //      potem bi moral že prej biti error in do sem sploh ne bi smel priti
         $this->expect($this->naziv, "Naziv je obvezen podatek", 1000311);
         $this->expect($this->drzava, "Država je obvezen podatek", 1000312);
     }
