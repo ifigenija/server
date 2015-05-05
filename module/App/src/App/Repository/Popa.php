@@ -14,5 +14,10 @@ namespace App\Repository;
 class Popa
         extends \Max\Repository\AbstractMaxRepository
 {
+    protected $sortOptions = [
+        "default" => [
+            "sifra" => ["alias" => "sifra"]
+        ]
+    ];  
     
 }

@@ -5,12 +5,13 @@ namespace Rest\Popa;
 use ApiTester;
 
 /**
- * - create
- * - list 
- * - update
- * - delete 
- * - read 
- * 
+ * -create
+ * -getlist
+ * -update
+ * -get kontrola vseh polj te entitete
+ * -create
+ * -validate metodo za entiteto
+ * -relacije z drugimi entitetami
  */
 class PopaCest
 {
@@ -33,12 +34,12 @@ class PopaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'sifra'    => 'zz',
+            'sifra'  => 'zz',
 //            'tipkli'    => '3', 
 //            'stakli'    => 'zz', 
-            'naziv'    => 'zz',
+            'naziv'  => 'zz',
 //            'naziv1'    => 'zz',
-            'panoga'    => 'zz', 
+            'panoga' => 'zz',
 //            'email'    => 'zz', 
 //            'url'    => 'zz', 
 //            'opomba'    => 'zz', 
@@ -49,14 +50,13 @@ class PopaCest
 //            'datZav'    => 'zz',            
 //            'datnZav'    => 'zz', 
 //            'zamejstvo'    => 'zz', 
-            ];
-        $this->obj = $popa       = $I->successfullyCreate($this->restUrl, $data);
-        
+        ];
+        $this->obj = $popa      = $I->successfullyCreate($this->restUrl, $data);
+
 //        codecept_debug($popa);
         $I->assertEquals('zz', $popa['panoga']);
 //        $I->assertEquals('1', $popa['tipkli']);
         $I->assertNotEmpty($popa['id']);
-        
     }
 
     /**
@@ -75,7 +75,7 @@ class PopaCest
      */
     public function update(ApiTester $I)
     {
-        $popa          = $this->obj;
+        $popa           = $this->obj;
         $popa['panoga'] = 'tralala';
 
         $popa = $I->successfullyUpdate($this->restUrl, $popa['id'], $popa);

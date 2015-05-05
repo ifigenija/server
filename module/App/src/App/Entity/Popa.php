@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM,
  * Entiteta za poslovne partnerje
  *
  * @ORM\Entity(repositoryClass="App\Repository\Popa")
- *
  * @ORM\Table(name="popa")
  * @Max\I18n(label="Poslovni partner",plural="Poslovni partnerji")
  * @Max\Id(prefix="0008")
@@ -24,6 +23,8 @@ class Popa
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
+     * @Max\I18n(label="ID", description="ID poslovnega partnerja")
+     * @Max\Ui(type="id")
      * @var integer
      */
     protected $id;
@@ -33,7 +34,7 @@ class Popa
      *
      * @ORM\Column(unique=true, length=4, nullable=false)
      * @Max\I18n(label="Šifra", description="Unikatna šifra klienta")
-     * @Max\Ui(type="sifra",icon="fa fa-barcode",ident=true,group="Osnovni podatki")
+     * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode",ident=true,group="Osnovni podatki")
      * @var string
      */
     protected $sifra;
@@ -44,9 +45,8 @@ class Popa
      * !!!!kupca tako ali tako dodali v tabelo kupcev 
      * 
      * @ORM\Column(length=20, nullable=true)
+     * @Max\I18n(label="Tip klienta", description="Tip klienta (kupec, dobavitelj, koproducent, )")
      * @Max\Ui(type="select",opts="popa.tipkli",group="Osnovni podatki",required=true)
-     * @Max\I18n(label="Tip klienta", 
-     * description="Tip klienta (kupec, dobavitelj, koproducent, )")
      * @var string
      */
     protected $tipkli;
@@ -67,8 +67,8 @@ class Popa
      * Naziv klienta
      *
      * @ORM\Column(length=60, nullable=false)
-     * @Max\Ui(type="naziv",group="Osnovni podatki")
      * @Max\I18n(label="Naziv", description="Naziv klienta")
+     * @Max\Ui(type="naziv",group="Osnovni podatki")
      * @var string
      */
     protected $naziv;
@@ -92,8 +92,8 @@ class Popa
      * Email naslov
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\Ui(type="email",group="Kontaktni podatki")
      * @Max\I18n(label="E-pošta", description="E-poštni naslov")
+     * @Max\Ui(type="email",group="Kontaktni podatki")
      * @var string
      */
     protected $email;
@@ -102,8 +102,8 @@ class Popa
      * Url spletne strani
      *
      * @ORM\Column(length=100, nullable=true)
-     * @Max\Ui(type="naziv",icon="fa fa-globe",group="Kontaktni podatki")
      * @Max\I18n(label="Spletna stran", description="URL naslov spletne strani")
+     * @Max\Ui(type="naziv",icon="fa fa-globe",group="Kontaktni podatki")
      * @var string
      */
     protected $url = '';
@@ -123,8 +123,9 @@ class Popa
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
      * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id", nullable=false)
-     * @Max\Ui(group="Kontaktni podatki",required=true)
      * @Max\I18n(label="Država", description="Država klienta")
+     * @Max\Ui(group="Kontaktni podatki",required=true)
+     * @var \App\Entity\Drzava
      */
     protected $drzava;
 
@@ -135,6 +136,7 @@ class Popa
      *     joinColumns={@ORM\JoinColumn(name="popa_id", referencedColumnName="id", nullable=false)},
      *     inverseJoinColumns={@ORM\JoinColumn(name="oseba_id", referencedColumnName="id", nullable=false)}
      * )
+     * @var <Osebe>
      */
     private $osebe;
 
@@ -142,34 +144,36 @@ class Popa
      * Klientovi naslovi
      * 
      * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="popa", orphanRemoval=true)
+     * @var <Naslovi>
      */
     protected $naslovi;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Telefonska", mappedBy="popa", orphanRemoval=true)
+     * @var <Telefonske>
      */
     private $telefonske;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="popa")
-     * @var App\Entity\Trr
+     * @var <Trrji>
      */
     private $trrji;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="popa")
-     * @var array
+     * @var <Pogodbe>
      */
     private $pogodbe;
 
     /**
      * ID za DDV klienta
      *
-     * @var string
      *
      * @ORM\Column(length=18, nullable=true)
-     * @Max\Ui(group="Davčni podatki")
      * @Max\I18n(label="ID za DDV", description="Davčna številka klienta")
+     * @Max\Ui(group="Davčni podatki")
+     * @var string
      */
     protected $idddv;
 
@@ -177,8 +181,8 @@ class Popa
      * Matična številka klienta
      *
      * @ORM\Column(length=20, nullable=true)
-     * @Max\Ui(group="Davčni podatki")
      * @Max\I18n(label="Matična številka", description="Matična številka klienta")
+     * @Max\Ui(type="sifra",group="Davčni podatki")
      * @var string
      */
     protected $maticna;
@@ -187,11 +191,11 @@ class Popa
      * Je zavezanec za DDV
      *  checkbox - Da, Ne
      *
-     * @var string
-     *
+     * 
      * @ORM\Column(length=1, nullable=true)
-     * @Max\Ui(type="checkbox",group="Davčni podatki")
      * @Max\I18n(label="Zavezanec za DV", description="Je klient zavezanec za DDV")
+     * @Max\Ui(type="checkbox",group="Davčni podatki")      //$$ rb verjetno potrebne select opcije
+     * @var string
      */
     protected $zavezanec;
 
@@ -199,11 +203,11 @@ class Popa
      * Je klient iz EU
      *  checkbox - Da, Ne
      *
-     * @var string
      *
      * @ORM\Column(length=1, nullable=true)
-     * @Max\Ui(type="checkbox",group="Davčni podatki")
+     * @Max\Ui(type="checkbox",group="Davčni podatki")      //$$ rb verjetno potrebne select opcije
      * @Max\I18n(label="Iz EU", description="Je klient iz EU")
+     * @var string
      */
     protected $jeeu;
 
@@ -211,8 +215,8 @@ class Popa
      * Zavezanec za DDV od
      *
      * @ORM\Column(type="date", nullable=true)
-     * @Max\Ui(group="Davčni podatki")
      * @Max\I18n(label="Zavezanec za DDV od",  description="Zavezanec za DDV od dne")
+     * @Max\Ui(group="Davčni podatki")
      * @var string
      */
     protected $datZav;
@@ -223,8 +227,8 @@ class Popa
      * @todo polje je neuporabljeno
      *
      * @ORM\Column(type="date", nullable=true)
-     * @Max\Ui(group="Davčni podatki")
      * @Max\I18n(label="Zavezanec za DDV do", description="Zavezanec za DDV do dne")
+     * @Max\Ui(group="Davčni podatki")
      * @var string
      */
     protected $datnZav;
@@ -233,8 +237,8 @@ class Popa
      * A je poslovni partner iz zamejstva 
      * 
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\Ui(type="boolcheckbox")
      * @Max\I18n(label="Iz zamejstva", description="Je poslovni partner iz zamejstva")
+     * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
     private $zamejstvo = false;
@@ -266,16 +270,20 @@ class Popa
         }
     }
 
-   
+    /**
+     * 
+     * @param string $mode
+     */
+    public function validate($mode = 'update')
+    {
+        $this->expect($this->sifra, "Šifra je obvezen podatek", 1000310);
+        $this->expect($this->naziv, "Naziv je obvezen podatek", 1000311);
+        $this->expect($this->drzava, "Država je obvezen podatek", 1000312);
+    }
+
     public function getId()
     {
         return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
     }
 
     public function getSifra()
@@ -283,10 +291,9 @@ class Popa
         return $this->sifra;
     }
 
-    public function setSifra($sifra)
+    public function getTipkli()
     {
-        $this->sifra = $sifra;
-        return $this;
+        return $this->tipkli;
     }
 
     public function getStakli()
@@ -294,21 +301,9 @@ class Popa
         return $this->stakli;
     }
 
-    public function setStakli($stakli)
-    {
-        $this->stakli = $stakli;
-        return $this;
-    }
-
     public function getNaziv()
     {
         return $this->naziv;
-    }
-
-    public function setNaziv($naziv)
-    {
-        $this->naziv = $naziv;
-        return $this;
     }
 
     public function getNaziv1()
@@ -316,15 +311,9 @@ class Popa
         return $this->naziv1;
     }
 
-    public function setNaziv1($naziv1)
+    public function getPanoga()
     {
-        $this->naziv1 = $naziv1;
-        return $this;
-    }
-
-    public function getTipkli()
-    {
-        return $this->tipkli;
+        return $this->panoga;
     }
 
     public function getEmail()
@@ -407,9 +396,45 @@ class Popa
         return $this->zamejstvo;
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setSifra($sifra)
+    {
+        $this->sifra = $sifra;
+        return $this;
+    }
+
     public function setTipkli($tipkli)
     {
         $this->tipkli = $tipkli;
+        return $this;
+    }
+
+    public function setStakli($stakli)
+    {
+        $this->stakli = $stakli;
+        return $this;
+    }
+
+    public function setNaziv($naziv)
+    {
+        $this->naziv = $naziv;
+        return $this;
+    }
+
+    public function setNaziv1($naziv1)
+    {
+        $this->naziv1 = $naziv1;
+        return $this;
+    }
+
+    public function setPanoga($panoga)
+    {
+        $this->panoga = $panoga;
         return $this;
     }
 
@@ -431,7 +456,7 @@ class Popa
         return $this;
     }
 
-    public function setDrzava($drzava)
+    public function setDrzava(\App\Entity\Drzava $drzava)
     {
         $this->drzava = $drzava;
         return $this;
@@ -508,7 +533,5 @@ class Popa
         $this->zamejstvo = $zamejstvo;
         return $this;
     }
-
-
 
 }
