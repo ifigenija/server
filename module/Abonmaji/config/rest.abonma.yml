@@ -1,0 +1,17 @@
+## YAML Template.
+---
+type: rest
+entityClass: Abonmaji\Entity\Abonma
+forms:
+    default: 
+        elements:
+#            - id
+            - stPredstav
+            - stKuponov
+            - ime
+            - opis
+            - kapaciteta
+lists:
+    default: 
+        hydrator:
+            - exclude: []
