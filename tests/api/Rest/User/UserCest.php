@@ -5,14 +5,19 @@ namespace Rest\User;
 use ApiTester;
 
 /**
- *      - ustvarim userja,
- *      - preberem userja
- *      - posodobim userja 
- *      - preberem userja in podrobno preverim polja
+ * metode, ki jo podpira API
+ *      -create
+ *  -getlist
+ *      -update
+ *      -get - kontrola vseh polj te entitete
+ *      -delete
+ * 
+ *  -validate metodo za entiteto  -> ni validacije za testiranje
+ * relacije z drugimi entitetami
  *      - user grant; dodam 2 roli
  *      - preberem userja in preverim, če ima  role
  *      - user revoke; odstranim 2 roli
- *      - brišem userja 
+ * - preberem userja in preverim, če nima več rol
  */
 class UserCest
 {
@@ -55,6 +60,21 @@ class UserCest
         $I->assertEquals('test2@ifigenija.si', $user['email']);
         $I->assertNotEmpty($user['id']);
     }
+
+    /**
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+//    public function getList(ApiTester $I)   //$$ rb - zaenkrat javi napako pri getPaginator 
+//    {
+//        $resp = $I->successfullyGetList($this->restUrl, []);
+//        $list = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $this->id = array_pop($list)['id'];
+//        $I->assertNotEmpty($this->id);
+//    }
 
     /**
      * Preberem userja
@@ -197,6 +217,23 @@ class UserCest
         $I->assertTrue($res);
     }
 
+        /**
+     * Preverim, ali ima user nima več rol
+     * 
+     * @param ApiTester $I
+     * @depends userRevokeDveRoli
+     */
+    public function preberiUserjaAliNimaRol(\ApiTester $I)
+    {
+        $user = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $I->assertNotEmpty($user);
+
+        $I->assertTrue(isset($user['roles']));
+        $I->assertEquals(0, count($user['roles']));
+    }
+
+    
+    
     /**
      * @depends create
      */

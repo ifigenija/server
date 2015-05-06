@@ -6,9 +6,12 @@ use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
 
 /**
+ * Entiteta za osebe
+ * 
  * @ORM\Entity(repositoryClass="App\Repository\Osebe")
- * @Max\Id(prefix="0009")
+ * 
  * @Max\I18n(label="Kontaktna oseba",plural="Kontaktne osebe")
+ * @Max\Id(prefix="0009")
  */
 class Oseba
         extends \Max\Entity\Base
@@ -208,7 +211,6 @@ class Oseba
     private $sodelovanja;
 
     /**
-     * 
      * 
      * @param string $mode
      */

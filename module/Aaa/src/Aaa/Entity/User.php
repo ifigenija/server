@@ -16,9 +16,8 @@ use ZfcRbac\Identity\IdentityInterface;
  *
  * @ORM\Entity(repositoryClass="Aaa\Repository\Users")
  * @ORM\Table(name="uporabniki")
- * @Max\Id(prefix="0001")
  * @Max\I18n(label="Uporabnik", plural="Uporabniki")
- * @Max\Acl(delete="admin")
+ * @Max\Id(prefix="0001")
  * 
  */
 class User
@@ -32,7 +31,6 @@ class User
      * @ORM\Id
      * @ORM\Column(type="guid");
      * @ORM\GeneratedValue(strategy="NONE")
-     *
      * @Max\I18n(label="ID",  description="ID uporabnika")
      * @Max\Ui(type="id")
      */
@@ -41,6 +39,8 @@ class User
     /**
      * @ORM\Column(type="string", nullable=false)
      * @Max\I18n(label="Polno ime", description="Polno ime uporabnika. Ime in priimek oz. opis za api uporabnike")
+     * @Max\Ui(type="naziv")
+     * @var string
      */
     private $name;
 
@@ -48,10 +48,10 @@ class User
      * Geslo
      *
      * @ORM\Column(length=90, nullable=true)
-     *
      * @Max\I18n(label="Geslo",  description="Geslo")
      * @Max\Ui(group="Login", type="password")
      * @Max\Tracking(log=false)
+     * @var string
      */
     protected $password;
 
@@ -61,6 +61,7 @@ class User
      * @ORM\Column(type="boolean", nullable=true)
      * @Max\I18n(label="Aktiven",  description="Uporabnik aktiven")
      * @Max\Ui(type="boolCheckbox", group="Uporabnik")
+     * @var boolean
      */
     protected $enabled;
 
@@ -78,8 +79,6 @@ class User
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)},
      *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false)}
      * )
-     * 
-     * 
      */
     protected $roles;
 
@@ -98,6 +97,7 @@ class User
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Privzeta pot ob prijavi",  description="Privzeta pot v aplikaciji po prijavi")
      * @Max\Ui(group="Zagon")
+     * @var string
      */
     protected $defaultRoute;
 
@@ -105,13 +105,14 @@ class User
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Parametri za pot",  description="Parametri za privzeto pot v aplikaciji po prijavi")
      * @Max\Ui(group="Zagon")
+     * @var string
      */
     protected $defaultRouteParams;
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Max\Ui(type="email")
      * @Max\I18n(label="Email", description="Elektronski naslov, ki služi za prijavo uporabnika") 
+     * @Max\Ui(type="email", ident=true)
      */
     private $email;
 

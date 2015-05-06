@@ -5,17 +5,30 @@ entityClass: App\Entity\Popa
 forms:
     default: 
         elements:
-            - sifra 
+#            - id
+            - sifra
 #            - tipkli           # $$ rb ko bodo opcije porihtane
 #            - stakli           # $$ rb ko bodo opcije porihtane
-            - naziv 
+            - naziv
             - naziv1 
-            - panoga  
-            - email  
-            - url  
-            - opomba  
-            - idddv  
-            - maticna  
-            - zavezanec  
-            - jeeu  
-            - zamejstvo  
+            - panoga
+            - email
+            - url 
+            - opomba
+            - drzava
+#            - osebe
+#            - naslovi
+#            - telefonske
+#            - trrji
+#            - pogodbe
+            - idddv
+            - maticna
+#            - zavezanec        ## $$ rb ko bom checkbox preveril
+#            - jeeu             ## $$ rb ko bom checkbox preveril
+            - datZav  
+            - datnZav
+            - zamejstvo         #$$ zaradi testiranja na vrhu sicer spodaj
+lists:
+    default: 
+        hydrator:
+            - exclude: []

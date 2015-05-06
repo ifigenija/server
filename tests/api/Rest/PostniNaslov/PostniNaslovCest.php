@@ -80,8 +80,6 @@ class PostniNaslovCest
      */
     public function getListDrzava(ApiTester $I)
     {
-
-
         $resp            = $I->successfullyGetList($this->drzavaUrl, []);
         $list            = $resp['data'];
         $I->assertNotEmpty($list);

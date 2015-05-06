@@ -37,6 +37,7 @@ class OsebaCest
     private $objpostni;
     private $objtrr;
     private $objtel;
+    private $objDrzava;
     private $trr;
     private $postni;
     private $tel;
@@ -51,6 +52,7 @@ class OsebaCest
     {
         
     }
+
 
     /**
      *  napolnimo vsaj en zapis
