@@ -9,17 +9,19 @@ permPrefix: Aaa
 forms:
     default:
         elements:
-            - email
+#            - id
             - name
             - password
             - enabled
+#            - roles
             - expires
             - defaultRoute
             - defaultRouteParams
+            - email
+#            - lastLogon
 #            - passRestToken
 #            - tokenExpires
 lists:
-    default:
-hydrator:
-    exclude: 
-        - builtIn
+    default: 
+        hydrator:
+            - exclude: []

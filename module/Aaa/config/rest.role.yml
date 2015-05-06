@@ -9,8 +9,12 @@ permPrefix: Aaa
 forms:
     default:
         elements:
-            - name
-            - description
+#            - id 
+            - name 
+            - description  
+#            - builtIn       # $$ rb ne implementiramo, ker NotEmpty validator ne dovoli false
+#            - permissions 
+#            - users 
 lists:
     default:
 hydrator:

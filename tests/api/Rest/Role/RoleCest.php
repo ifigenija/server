@@ -5,13 +5,20 @@ namespace Rest\Role;
 use ApiTester;
 
 /**
- *      - ustvarim rolo,
- *      - preberem rolo
- *      - posodobim rolo 
+ * 
+ * metode, ki jo podpira API
+ *      -create
+ *  -getlist
+ *      -update
+ *      -get - kontrola vseh polj te entitete
+ *      -delete
+ *  -validate metodo za entiteto  -> ni validacije za testiranje
+ * relacije z drugimi entitetami
  *      - role grant; dodam 2 permission-a
  *      - preberem rolo in preverim, če ima 2 permission-e 
  *      - role revoke; odstranim 2 permission-a
- * - brišem rolo
+ *  - relacijo z userjem bomo testirali pri userju 
+ * 
  */
 class RoleCest
 {
@@ -44,6 +51,7 @@ class RoleCest
         $data      = [
             'name'        => 'TEST4VLOGA',
             'description' => 'Testna vloga za Cest testiranje',
+//            'builtIn'     => false,     //$$ rb NotEmpty validator ne dovoli false
         ];
         $this->obj = $role      = $I->successfullyCreate($this->restUrl, $data);
 
@@ -53,18 +61,20 @@ class RoleCest
     }
 
     /**
-     * Preberem rolo
      * 
-     * @param ApiTester $I
      * @depends create
+     * @param ApiTester $I
      */
-    public function preberiRolo(\ApiTester $I)
-    {
-        $role = $I->successfullyGet($this->restUrl, $this->obj['id']);
-        $I->assertNotEmpty($role);
-        $I->assertEquals('TEST4VLOGA', $role['name']);
-        $I->assertEquals('Testna vloga za Cest testiranje', $role['description']);
-    }
+//    public function getList(ApiTester $I)  //$$ rb - zaenkrat javi napako pri getPaginator 
+//    {
+//        $resp = $I->successfullyGetList($this->restUrl, []);
+//        $list = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $this->id = array_pop($list)['id'];
+//        $I->assertNotEmpty($this->id);
+////        codecept_debug($this);
+//    }
 
     /**
      * 
@@ -124,13 +134,18 @@ class RoleCest
      * @depends create
      * @depends roleGrantDvaPermissiona
      */
-    public function preberiRoloSteviloPermissionov(\ApiTester $I)
+    public function preberiRolo(\ApiTester $I)
     {
         $role = $I->successfullyGet($this->restUrl, $this->obj['id']);
         $I->assertNotEmpty($role);
 
-        $I->assertTrue(isset($role['permissions']), "dovoljenj ni");
+        $I->assertEquals('TEST4S', $role['name']);
+        $I->assertEquals('spremenjeno', $role['description']);
+
+        $I->assertTrue(isset($role['permissions']));
+        $I->assertTrue(isset($role['users']));
         $I->assertEquals(2, count($role['permissions']));
+        $I->assertEquals(0, count($role['users']));
     }
 
     /**
@@ -165,6 +180,21 @@ class RoleCest
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
+    }
+
+    /**
+     * Preverim, ali ima vloga odvzeti obe dovoljenji
+     * 
+     * @depends userRevokeDvaPermissiona
+     * @param ApiTester $I
+     */
+    public function preberiRoloSteviloPermissionov(\ApiTester $I)
+    {
+        $role = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $I->assertNotEmpty($role);
+
+        $I->assertTrue(isset($role['permissions']));
+        $I->assertEquals(0, count($role['permissions']));
     }
 
     /**

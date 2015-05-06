@@ -25,7 +25,7 @@ class Popa
      * @ORM\GeneratedValue(strategy="NONE")
      * @Max\I18n(label="ID", description="ID poslovnega partnerja")
      * @Max\Ui(type="id")
-     * @var integer
+     * @var string
      */
     protected $id;
 

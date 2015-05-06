@@ -11,7 +11,6 @@ use Rbac\Role\RoleInterface;
 
 /**
  * @ORM\Entity(repositoryClass="Aaa\Repository\Roles")
- * @Max\Acl(delete="admin")
  * @Max\I18n(label="Vloga",plural="Vloge",description="Uporabnik mora imeti vloge za dostop do delov aplikacije")
  * @Max\Id(prefix="0002") 
  *  */
@@ -24,32 +23,33 @@ class Role
      * @ORM\Id
      * @ORM\Column(type="guid");
      * @ORM\GeneratedValue(strategy="NONE")
-     *
      * @Max\I18n(label="ID",  description="ID vloge")
      * @Max\Ui(type="id")
+     * @var string
      */
     protected $id;
 
     /**
      * @ORM\Column(unique=true, length=150, nullable=false)
-     *
      * @Max\I18n(label="Naziv", description="Naziv vloge")
      * @Max\Ui(type="sifra", group="Vloga",ident=true)
+     * @var string
      */
     protected $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     *
      * @Max\I18n(label="Opis", description="Opis vloge")
      * @Max\Ui(type="naziv", group="Vloga")
+     * @var string
      */
     protected $description = '';
 
     /**
-     * A je vloga vgrajena v sistem, ali pa dodana na user instalaciji.
+     * Ali je vloga vgrajena v sistem ali pa dodana na user instalaciji.
      * @ORM\Column(type="boolean", nullable=true)
      * @Max\I18n(label="Vgrajena", description="Vloga, ki pride z namestitvijo sistema")
+     * @var boolean
      */
     protected $builtIn = false;
 
@@ -63,16 +63,15 @@ class Role
      *     joinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false)},
      *     inverseJoinColumns={@ORM\JoinColumn(name="permission_id", referencedColumnName="id", nullable=false)}
      * )
+     * @var <Permissions>
      */
     protected $permissions;
 
     /**
-     * 
-     *
-     * @Max\I18n(label="Uporabniki", description="Uporabniki, ki s to vlogo")
      * @ORM\ManyToMany(targetEntity="Aaa\Entity\User", mappedBy="roles")
-     * 
+     * @Max\I18n(label="Uporabniki", description="Uporabniki, ki s to vlogo")
      * @Max\Ui(type="tomany")
+     * @var <Users>
      */
     protected $users;
 
@@ -99,10 +98,9 @@ class Role
 
     public function validate($mode = 'update')
     {
-        $this->expect($this->name, "rolename je obvezen podatek", 1000346);
+        $this->expect($this->name, "rolename je obvezen podatek", 1000321);
     }
-    
-    
+
     public function assignedToUser($user)
     {
         $this->users[] = $user;
@@ -142,9 +140,7 @@ class Role
 
         return $this;
     }
-      
-    
-    
+
     public function getId()
     {
         return $this->id;
