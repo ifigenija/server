@@ -63,6 +63,7 @@ class Trr
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="trrji")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
+     * @Max\I18n(label="Oseba",  description="Oseba, ki je lastnica transakcijskega računa")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */

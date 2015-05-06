@@ -7,6 +7,9 @@
 namespace Abonmaji\Repository;
 
 /**
+ * 
+ *  Description of Abonmaji
+ * 
  * @author rado
  */
 

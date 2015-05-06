@@ -76,7 +76,7 @@ class AbonmaCest
         $abon               = $this->obj;
         $abon['kapaciteta'] = '444';
 
-        $user = $I->successfullyUpdate($this->restUrl, $abon['id'], $abon);
+        $abon = $I->successfullyUpdate($this->restUrl, $abon['id'], $abon);
 
         $I->assertEquals($abon['kapaciteta'], '444');
     }

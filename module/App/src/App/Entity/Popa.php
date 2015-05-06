@@ -34,7 +34,7 @@ class Popa
      *
      * @ORM\Column(unique=true, length=4, nullable=false)
      * @Max\I18n(label="Šifra", description="Unikatna šifra klienta")
-     * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode",ident=true,group="Osnovni podatki")
+     * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode",group="Osnovni podatki")
      * @var string
      */
     protected $sifra;

@@ -1,0 +1,22 @@
+## YAML Template.
+---
+type: rest
+entityClass: Produkcija\Entity\Pogodba
+forms:
+    default: 
+        elements:
+#            - id
+            - sifra
+            - vrednostVaje
+            - vrednostPredstave
+            - vrednostUre
+            - aktivna
+            - opis
+#            - alternacije
+            - oseba
+            - popa
+            - trr
+lists:
+    default: 
+        hydrator:
+            - exclude: []

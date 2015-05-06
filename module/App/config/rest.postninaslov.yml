@@ -1,5 +1,6 @@
 ## YAML Template.
 ---
+#       module/App/config/rest.postninaslov.yml
 type: rest
 entityClass: App\Entity\PostniNaslov
 forms:
