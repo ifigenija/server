@@ -1,0 +1,24 @@
+## YAML Template.
+---
+type: rest
+entityClass: Produkcija\Entity\Arhivalija
+forms:
+    default: 
+        elements:
+#            - id
+            - oznakaDatuma
+            - datum
+            - fizicnaOblika
+            - izvorDigitalizata
+            - povzetek
+            - opombe
+            - lokacijaOriginala
+            - objavljeno
+            - naslov
+            - avtorstvo
+            - dogodek
+            - uprizoritev
+lists:
+    default: 
+        hydrator:
+            - exclude: []

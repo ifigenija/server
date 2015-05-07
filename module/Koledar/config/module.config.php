@@ -13,25 +13,25 @@ return [
         'factories' => [
         ]
     ],
-    'controllers' => [
+    'controllers'     => [
         'invokables' => [
-            
+        ],
+        'factories'  => [
+            'Rest\dogodek' => 'Max\Factory\RestControllerFactory',
         ]
     ],
-    'router' => [
+    'router'          => [
         'routes' => [
         ],
     ],
-    'console' => [
+    'console'         => [
         'router' => [
             'routes' => [
-        
             ]
         ]
     ],
-    'form_elements' => [
+    'form_elements'   => [
         'invokables' => [
-
         ]
     ]
 ];

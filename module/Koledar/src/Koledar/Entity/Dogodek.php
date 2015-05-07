@@ -1,18 +1,22 @@
 <?php
+
 namespace Koledar\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping AS ORM,
+    Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity
+ * Dogodek uprizoritve - ali vaja ali predstava
+ * 
+ * @ORM\Entity(repositoryClass="Koledar\Repository\Dogodki")
  * @ORM\Table(indexes={@ORM\Index(name="zacetek", columns={"zacetek"}),@ORM\Index(name="konec", columns={"konec"})})
- * 
- * 
- * 
+ * @Max\I18n(label="Dogodek",plural="Dogodki")
+ * @Max\Id(prefix="0024")
  */
 class Dogodek
         extends \Max\Entity\Base
-
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
