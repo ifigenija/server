@@ -1,0 +1,15 @@
+## YAML Template.
+---
+type: rest
+entityClass: Produkcija\Entity\Rekvizit
+forms:
+    default: 
+        elements:
+#            - id
+            - ime
+            - vrsta
+#            - rekviziterstvo
+lists:
+    default: 
+        hydrator:
+            - exclude: []

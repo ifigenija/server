@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM,
  * @ORM\Entity(repositoryClass="App\Repository\PostniNaslovi")
  * @ORM\Table(name="PostniNaslovi")
  * @Max\I18n(label="Poštni naslov",plural="Poštni naslovi")
- *
  * @Max\Id(prefix="0006")
  *  */
 class PostniNaslov
@@ -24,9 +23,9 @@ class PostniNaslov
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
-     *
      * @Max\I18n(label="Id", description="ID poštnega naslova")
-     * @var integer
+     * @Max\Ui(type="id")
+     * @var string
      */
     protected $id;
 
@@ -34,6 +33,7 @@ class PostniNaslov
      * Lastnik postnega naslova če gre za klienta 
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="naslovi")
+     * @Max\I18n(label="Poslovni partner",  description="Poslovni partner, ki je lastnik naslova  ")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */
@@ -53,7 +53,6 @@ class PostniNaslov
      * Naziv
      *
      * @ORM\Column(length=50, nullable=true)
-     *
      * @Max\I18n(label="Naziv", description="Naziv naslova")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
@@ -135,10 +134,9 @@ class PostniNaslov
      *  checkbox 
      *
      * @ORM\Column(type="boolean", length=1, nullable=true)
-     * @var bool
-     *
-     * @Max\Ui(type="boolcheckbox",group="Davčni podatki")
      * @Max\I18n(label="Iz EU", description="Je klient iz EU")
+     * @Max\Ui(type="boolcheckbox",group="Davčni podatki")
+     * @var boolean
      */
     protected $jeeu = true;
 
@@ -244,7 +242,7 @@ class PostniNaslov
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa =null)
+    public function setPopa(\App\Entity\Popa $popa = null)
     {
         $this->popa = $popa;
         return $this;

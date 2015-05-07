@@ -1,11 +1,15 @@
 <?php
 namespace Produkcija\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\Mapping AS ORM,
+    Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Produkcija\Repository\Funkcije")
+ * @Max\I18n(label="Tip funkcije",plural="Tipi funkcije")
+ * @Max\Id(prefix="0015")
  */
 class TipFunkcije
+        extends \Max\Entity\Base
 {
     /**
      * @ORM\Id

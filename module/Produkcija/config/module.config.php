@@ -16,8 +16,15 @@ return [
     'controllers'     => [
         'invokables' => [
         ],
-        'factories' => [
-            'Rest\pogodba' => 'Max\Factory\RestControllerFactory',
+        'factories'  => [
+            'Rest\pogodba'          => 'Max\Factory\RestControllerFactory',
+            'Rest\alternacija'      => 'Max\Factory\RestControllerFactory',
+            'Rest\funkcija'         => 'Max\Factory\RestControllerFactory',
+            'Rest\rekvizit'         => 'Max\Factory\RestControllerFactory',
+            'Rest\rekviziterstvo'   => 'Max\Factory\RestControllerFactory',
+            'Rest\zvrstSurs'        => 'Max\Factory\RestControllerFactory',
+            'Rest\zvrstUprizoritve' => 'Max\Factory\RestControllerFactory',
+            'Rest\besedilo'         => 'Max\Factory\RestControllerFactory',
         ],
     ],
     'router'          => [

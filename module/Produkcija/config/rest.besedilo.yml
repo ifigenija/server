@@ -1,0 +1,22 @@
+## YAML Template.
+---
+type: rest
+entityClass: Produkcija\Entity\Besedilo
+forms:
+    default: 
+        elements:
+#            - id
+            - naslov
+            - avtor
+            - podnaslov
+            - jezik
+            - naslovIzvirnika
+            - datumPrejema
+            - moskeVloge
+            - zenskeVloge
+            - prevajalec
+            - povzetekVsebine
+lists:
+    default: 
+        hydrator:
+            - exclude: []

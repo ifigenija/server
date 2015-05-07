@@ -1,11 +1,16 @@
 <?php
 namespace Produkcija\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping AS ORM,
+    Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Produkcija\Repository\Alternacije")
+ * @Max\I18n(label="Zaposlitev",plural="Zaposlitve")
+ * @Max\Id(prefix="0016")
  */
 class Zaposlitev
+        extends \Max\Entity\Base
 {
     /**
      * @ORM\Id

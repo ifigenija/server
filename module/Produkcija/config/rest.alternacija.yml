@@ -1,0 +1,17 @@
+## YAML Template.
+---
+type: rest
+entityClass: Produkcija\Entity\Alternacija
+forms:
+    default: 
+        elements:
+#            - id
+            - zaposlen
+            - vloga
+            - sodelovanje
+            - oseba
+            - koprodukcija
+            - pogodba
+    default: 
+        hydrator:
+            - exclude: []

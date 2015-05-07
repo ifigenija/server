@@ -1,0 +1,14 @@
+## YAML Template.
+---
+type: rest
+entityClass: Produkcija\Entity\ZvrstUprizoritve
+forms:
+    default: 
+        elements:
+#            - id
+            - ime
+            - opis
+lists:
+    default: 
+        hydrator:
+            - exclude: []

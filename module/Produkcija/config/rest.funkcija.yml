@@ -1,0 +1,21 @@
+## YAML Template.
+---
+type: rest
+entityClass: Produkcija\Entity\Funkcija
+forms:
+    default: 
+        elements:
+#            - id
+            - podrocje
+            - naziv
+            - velikost
+            - pomembna
+            - sort
+#            - alternacije
+            - uprizoritev 
+            - privzeti
+            - tipVloge
+lists:
+    default: 
+        hydrator:
+            - exclude: []

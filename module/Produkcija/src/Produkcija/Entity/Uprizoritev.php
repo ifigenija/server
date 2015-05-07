@@ -1,16 +1,26 @@
 <?php
+
 namespace Produkcija\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping AS ORM,
+    Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Produkcija\Repository\Uprizoritve")
+ * @Max\I18n(label="Uprizoritev",plural="Uprizoritve")
+ * @Max\Id(prefix="0014")
  */
 class Uprizoritev
+        extends \Max\Entity\Base
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
+     * @Max\I18n(label="Id", description="ID poštnega naslova")
+     * @Max\Ui(type="id")
+     * @var string   
      */
     private $id;
 
@@ -78,7 +88,7 @@ class Uprizoritev
      * @ORM\Column(type="date", nullable=true)
      */
     private $datumZakljucka;
- 
+
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
@@ -146,4 +156,5 @@ class Uprizoritev
      * 
      */
     private $rekvizit;
+
 }
