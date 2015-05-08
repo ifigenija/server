@@ -52,21 +52,30 @@ class Drzave
      */
     public function getDefaultQb($options)
     {
+        
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
-
 
         if (!empty($options['q'])) {
 
             $naz    = $e->like('p.naziv', ':naz');
             $isoNaz = $e->like('p.isoNaziv', ':naz');
-            $iso    = $e->like('p.isoNum', ':sif');
-            $sif    = $e->like('p.sifra', ':sif');
+            $iso    = $e->eq('p.isoNum', ':sif');
+            $sif    = $e->eq('p.sifra', ':sif');
 
             $qb->andWhere($e->orX($naz, $sif, $iso, $isoNaz));
 
             $qb->setParameter('sif', $options['q'], "string");
             $qb->setParameter('naz', "{$options['q']}%", "string");
+        }
+
+        if (!empty($options['isoNum'])) {
+
+            $iso    = $e->eq('p.isoNum', ':isoN');
+
+            $qb->andWhere($iso);
+
+            $qb->setParameter('isoN', $options['isoNum'], "string");
         }
 
         return $qb;

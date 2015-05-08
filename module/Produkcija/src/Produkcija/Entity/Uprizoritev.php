@@ -26,6 +26,9 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
+     * @Max\I18n(label="Id", description="ID poštnega naslova")
+     * @Max\Ui(type="id")
+     * @var string
      */
     private $faza;
 

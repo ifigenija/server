@@ -25,7 +25,8 @@ return [
             'Rest\zvrstSurs'        => 'Max\Factory\RestControllerFactory',
             'Rest\zvrstUprizoritve' => 'Max\Factory\RestControllerFactory',
             'Rest\besedilo'         => 'Max\Factory\RestControllerFactory',
-            'Rest\arhivalija'         => 'Max\Factory\RestControllerFactory',
+            'Rest\arhivalija'       => 'Max\Factory\RestControllerFactory',
+            'Rest\uprizoritev'      => 'Max\Factory\RestControllerFactory',
         ],
     ],
     'router'          => [

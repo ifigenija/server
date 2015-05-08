@@ -48,6 +48,7 @@ class DrzavaCest
         $list     = $I->successfullyGetList($this->restUrl, []);
         $I->assertNotEmpty($list['data']);
         $this->id = array_pop($list['data'])['id'];
+        codecept_debug($list);
     }
 
     // tests

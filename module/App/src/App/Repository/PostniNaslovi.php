@@ -7,7 +7,9 @@
 namespace App\Repository;
 
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineModule\Paginator\Adapter\Selectable;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
 
 /**
@@ -22,6 +24,9 @@ class PostniNaslovi
     protected $sortOptions = [
         "default" => [
             "naziv" => ["alias" => "naziv"]
+        ],
+        "vse" => [
+            "naziv" => ["alias" => "naziv"]
         ]
     ];
 
@@ -29,10 +34,14 @@ class PostniNaslovi
     {
         switch ($name) {
 
+            case "vse":
+                
+             
+                $qb = $this->getVseQb($options);
+                $this->getSort($name, $qb);
+                return new DoctrinePaginator(new Paginator($qb));   
             default:
-
-
-                $this->expect(!(empty($options['popa']) && empty($options['oseba'])), "Oseba ali Partner sta obvezna", 770001);
+                $this->expect(!(empty($options['popa']) && empty($options['oseba'] )), "Oseba ali Partner ali država sta obvezna", 770001);
                 $crit = new Criteria();
                 $e    = $crit->expr();
 
@@ -49,4 +58,24 @@ class PostniNaslovi
         }
     }
 
+    
+    public function getVseQb($options) {
+        
+            $qb = $this->createQueryBuilder('p');
+        $e  = $qb->expr();
+
+
+        if (!empty($options['q'])) {
+
+            $naz    = $e->like('p.naziv', ':naz');
+          
+
+            $qb->andWhere($e->orX($naz));
+
+           
+            $qb->setParameter('naz', "{$options['q']}%", "string");
+        }
+
+        return $qb;
+    }
 }

@@ -19,6 +19,12 @@ lists:
                   options:
                     label: Oseba
                     targetEntity: App\Entity\Oseba
-                    required: true
+                    required: false
+                - name: popa
+                  type: toone
+                  options:
+                    label: Partner
+                    targetEntity: App\Entity\Popa
+                    required: false
         hydrator:
             - exclude: []

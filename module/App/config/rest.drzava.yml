@@ -17,7 +17,13 @@ forms:
         hydrator: 
             
 lists:
-    default:      
+    default:   
+        filter:
+            elements:
+                - name: isoNum
+                  type: text 
+                - name: q
+                  type: text 
 hydrator:
 #    exclude: 
 #        - opomba
