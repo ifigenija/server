@@ -27,6 +27,8 @@ return [
             'Rest\besedilo'         => 'Max\Factory\RestControllerFactory',
             'Rest\arhivalija'       => 'Max\Factory\RestControllerFactory',
             'Rest\uprizoritev'      => 'Max\Factory\RestControllerFactory',
+            'Rest\produkcijskaHisa' => 'Max\Factory\RestControllerFactory',
+            'Rest\zaposlitev' => 'Max\Factory\RestControllerFactory',
         ],
     ],
     'router'          => [
