@@ -17,6 +17,8 @@ forms:
 #            - users 
 lists:
     default:
+        filter:
+    
 hydrator:
     exclude: 
         - builtIn

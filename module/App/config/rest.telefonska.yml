@@ -12,5 +12,13 @@ forms:
             - privzeta
 lists:
     default: 
+        filter:
+            elements: 
+                - name: oseba
+                  type: toone
+                  options:
+                    label: Oseba
+                    targetEntity: App\Entity\Oseba
+                    required: true
         hydrator:
             - exclude: []
