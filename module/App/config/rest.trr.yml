@@ -24,7 +24,7 @@ lists:
                 - name: popa
                   type: toone
                   options:
-                      label: Oseba
+                      label: Partner
                       targetEntity: App\Entity\Popa
                       required: false
       

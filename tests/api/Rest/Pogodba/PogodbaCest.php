@@ -34,7 +34,7 @@ class PogodbaCest
     private $popaUrl   = '/rest/popa';
     private $drzavaUrl = '/rest/drzava';
     private $osebaUrl  = '/rest/oseba';
-    private $trrUrl  = '/rest/trr';
+    private $trrUrl    = '/rest/trr';
     private $obj;
     private $objPopa;
     private $objDrzava;
@@ -133,7 +133,7 @@ class PogodbaCest
      */
     public function createTrr(ApiTester $I)
     {
-        $data      = [
+        $data         = [
             'stevilka' => 'ZZ123',
             'swift'    => 'ZZ123',
             'bic'      => 'ZZ123',
@@ -141,13 +141,16 @@ class PogodbaCest
             'popa'     => $this->objPopa['id'],
             'oseba'    => NULL,
         ];
-        $this->objTrr = $trr       = $I->successfullyCreate($this->trrUrl, $data);
+        $this->objTrr = $trr          = $I->successfullyCreate($this->trrUrl, $data);
         $I->assertEquals('ZZ123', $trr['banka']);
         $I->assertNotEmpty($trr['id']);
     }
 
     /**
      *  kreiramo pogodbo
+     * 
+     * @depends createOsebo
+     * @depends createPopa
      * 
      * @param ApiTester $I
      */
@@ -168,6 +171,60 @@ class PogodbaCest
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['sifra'], 'ZZ123');
+
+        // kreiramo še en zapis
+        $data = [
+            'sifra'             => 'WW4',
+            'vrednostVaje'      => 33.33,
+            'vrednostPredstave' => 44.44,
+            'vrednostUre'       => 22.22,
+            'aktivna'           => false,
+            'opis'              => 'ww',
+            'oseba'             => $this->objOseba['id'],
+            'popa'              => null,
+            'trr'               => $this->objTrr['id'],
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['sifra'], 'WW4');
+    }
+
+    /**
+     * preberi vse naslove od osebe
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoOsebi(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "?oseba=" . $this->objOseba['id'];
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+        codecept_debug($resp);
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        $I->assertEquals("WW4", $list[0]['sifra']);
+    }
+
+    /**
+     * preberi vse naslove od poslovnega partnerja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoPopa(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "?popa=" . $this->objPopa['id'];
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        $I->assertEquals("ZZ123", $list[0]['sifra']);
     }
 
     /**

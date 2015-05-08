@@ -18,5 +18,31 @@ forms:
             - trr
 lists:
     default: 
+        filter:
+            elements:                 
+                - name: oseba
+                  type: toone
+                  options:
+                      label: Oseba
+                      targetEntity: App\Entity\Oseba
+                      required: false
+                - name: popa
+                  type: toone
+                  options:
+                      label: Oseba
+                      targetEntity: App\Entity\Popa
+                      required: false
+#                - name: trr        # $$ rb ali je to tudi v default formi?
+#                  type: toone
+#                  options:
+#                      label: Trr
+#                      targetEntity: App\Entity\Trr
+#                      required: false
+#                - name: alternacije  # $$ rb ali je to tudi v default formi?
+#                  type: tomany
+#                  options:
+#                      label: Alternacije
+#                      targetEntity: Produkcija\Entity\Alternacija
+#                      required: false
         hydrator:
             - exclude: []
