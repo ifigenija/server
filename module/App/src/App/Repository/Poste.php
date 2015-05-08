@@ -20,4 +20,5 @@ class Poste extends \Max\Repository\AbstractMaxRepository
         ]
     ];
 
+    
 }
