@@ -131,6 +131,20 @@ class TrrCest
         $trr  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($trr['id']);
         $I->assertEquals('WW123', $trr['banka']);
+
+
+        //kreiramo še en zapis
+        $data = [
+            'stevilka' => 'A1',
+            'swift'    => 'A1',
+            'bic'      => 'A1',
+            'banka'    => 'A1',
+            'popa'     => $this->objPopa,
+            'oseba'    => null,
+        ];
+        $trr  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($trr['id']);
+        $I->assertEquals('A1', $trr['banka']);
     }
 
     /**
@@ -167,21 +181,25 @@ class TrrCest
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
 
-        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        $I->assertEquals("WW123", $list[0]['banka']);
+        $I->assertEquals("A1", $list[0]['stevilka']);
     }
 
     /**
      * @depends create
+     * @param ApiTester $I
      */
     public function getList(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl, []);
-        $list = $resp['data'];
+        $listUrl = $this->restUrl . "/vse";
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $this->id = array_pop($list)['id'];
+        $I->assertEquals(3, $resp['state']['totalRecords']);
+        $I->assertEquals("A1", $list[0]['stevilka']);      //glede na sort
     }
 
     /**

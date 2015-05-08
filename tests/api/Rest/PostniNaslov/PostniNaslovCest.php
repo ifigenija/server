@@ -112,6 +112,8 @@ class PostniNaslovCest
     /**
      *  napolnimo vsaj en zapis
      *
+     * @depends createOseba
+     * @depends createPopa
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
@@ -157,7 +159,6 @@ class PostniNaslovCest
      * preberi vse naslove od osebe
      * 
      * @depends create
-     * @depends createOseba
      * @param ApiTester $I
      */
     public function getListPoOsebi(ApiTester $I)
@@ -178,7 +179,6 @@ class PostniNaslovCest
      * preberi vse naslove od poslovnega partnerja
      * 
      * @depends create
-     * @depends createPopa
      * @param ApiTester $I
      */
     public function getListPoPopa(ApiTester $I)
@@ -198,11 +198,16 @@ class PostniNaslovCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
+    public function getList(ApiTester $I)         
     {
-        $resp = $I->successfullyGetList($this->restUrl, []);
+        $listUrl = $this->restUrl . "/vse";
+        codecept_debug($listUrl);
+        $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
+        
         $I->assertNotEmpty($list);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals("ww", $list[0]['naziv']);      //sortirano je po nazivu
     }
 
     /**

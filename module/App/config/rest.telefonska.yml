@@ -28,3 +28,5 @@ lists:
                     required: false
         hydrator:
             - exclude: []
+    vse: 
+        filter:                          

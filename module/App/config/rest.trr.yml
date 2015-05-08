@@ -30,4 +30,6 @@ lists:
       
         hydrator:
             - exclude: []
+    vse: 
+        filter:                          
                 

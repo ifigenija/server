@@ -134,6 +134,18 @@ class TelefonskaCest
         $tel  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($tel['id']);
         $I->assertEquals($tel['stevilka'], '567');
+
+        // še en zapis
+        $data = [
+            'vrsta'    => 'Mobilni', //$$ rb - popraviti opcije, kasneje M namesto mobilni
+            'stevilka' => '012',
+            'privzeta' => true,
+            'popa'     => $this->objPopa['id'],
+//            'oseba'    => null,
+        ];
+        $tel  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($tel['id']);
+        $I->assertEquals($tel['stevilka'], '012');
     }
 
     /**
@@ -170,20 +182,25 @@ class TelefonskaCest
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
 
-        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        $I->assertEquals('567', $list[0]['stevilka']);
+        $I->assertEquals('567', $list[0]['stevilka']);  //$$ rb tu je lahko drugačen rezultat, ker sort pri Criteria še ne deluje ok
     }
 
     /**
      * @depends create
+     * @param ApiTester $I
      */
     public function getList(ApiTester $I)
     {
-        $resp     = $I->successfullyGetList($this->restUrl, []);
-        $list     = $resp['data'];
+        $listUrl = $this->restUrl . "/vse";
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
         $I->assertNotEmpty($list);
-        $this->id = array_pop($list)['id'];
+        $I->assertEquals(3, $resp['state']['totalRecords']);
+        $I->assertEquals("012", $list[0]['stevilka']);     //glede na sort
     }
 
     /**

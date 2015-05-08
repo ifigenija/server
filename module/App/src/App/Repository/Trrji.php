@@ -7,7 +7,9 @@
 namespace App\Repository;
 
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineModule\Paginator\Adapter\Selectable;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
 
 /**
@@ -18,16 +20,25 @@ use Max\Repository\AbstractMaxRepository;
 class Trrji
         extends AbstractMaxRepository
 {
- protected $sortOptions = [
+
+    protected $sortOptions = [
         "default" => [
             "stevilka" => ["alias" => "stevilka"]
+        ],
+        "vse"     => [
+            "stevilka" => ["alias" => "p.stevilka"]
         ]
     ];
- 
-     public function getPaginator(array $options, $name = "default")
+
+    public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
-          default:
+
+            case "vse":
+                $qb   = $this->getVseQb($options);
+                $this->getSort($name, $qb);
+                return new DoctrinePaginator(new Paginator($qb));
+            case "default":
                 $this->expect(!(empty($options['popa']) && empty($options['oseba'])), "Oseba ali Partner ali država sta obvezna", 770021);
                 $crit = new Criteria();
                 $e    = $crit->expr();
@@ -43,6 +54,22 @@ class Trrji
                 $crit->andWhere($exp);
                 return new Selectable($this, $crit);
         }
+    }
+
+    public function getVseQb($options)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $e  = $qb->expr();
+        if (!empty($options['q'])) {
+
+            $naz = $e->like('p.stevilka', ':ste');
+
+            $qb->andWhere($e->orX($naz));
+
+            $qb->setParameter('ste', "{$options['q']}%", "string");
+        }
+
+        return $qb;
     }
 
 }
