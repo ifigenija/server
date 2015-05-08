@@ -32,13 +32,13 @@ lists:
                       label: Oseba
                       targetEntity: App\Entity\Popa
                       required: false
-#                - name: trr        # $$ rb ali je to tudi v default formi?
+#                - name: trr        # $$ rb ali je to tudi v default view-ju ali v namenskem?
 #                  type: toone
 #                  options:
 #                      label: Trr
 #                      targetEntity: App\Entity\Trr
 #                      required: false
-#                - name: alternacije  # $$ rb ali je to tudi v default formi?
+#                - name: alternacije  # $$ rb ali je to tudi v default view-ju ali v namenskem?
 #                  type: tomany
 #                  options:
 #                      label: Alternacije
@@ -46,3 +46,6 @@ lists:
 #                      required: false
         hydrator:
             - exclude: []
+    vse: 
+        filter:
+    

@@ -188,6 +188,23 @@ class PogodbaCest
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['sifra'], 'WW4');
+
+        // kreiramo še en zapis
+        $data = [
+            'sifra'             => 'A1',
+            'vrednostVaje'      => 3.33,
+            'vrednostPredstave' => 4.44,
+            'vrednostUre'       => 2.22,
+            'aktivna'           => false,
+            'opis'              => 'aa',
+            'oseba'             => $this->objOseba['id'],
+            'popa'              => null,
+            'trr'               => $this->objTrr['id'],
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['sifra'], 'A1');
     }
 
     /**
@@ -204,7 +221,7 @@ class PogodbaCest
         $list = $resp['data'];
         codecept_debug($resp);
 
-        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
         $I->assertEquals("WW4", $list[0]['sifra']);
     }
@@ -228,18 +245,19 @@ class PogodbaCest
     }
 
     /**
-     * 
      * @depends create
      * @param ApiTester $I
      */
     public function getList(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl, []);
-        $list = $resp['data'];
+        $listUrl = $this->restUrl . "/vse";
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $this->id = array_pop($list)['id'];
-        $I->assertNotEmpty($this->id);
+        $I->assertEquals(3, $resp['state']['totalRecords']);
+        $I->assertEquals("A1", $list[0]['sifra']);      //glede na sort
     }
 
     /**
