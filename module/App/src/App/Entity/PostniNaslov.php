@@ -36,7 +36,7 @@ class PostniNaslov
      * @ORM\JoinColumn(name="klient_id", referencedColumnName="id")
      * 
      * @Max\I18n(label="Poslovni partner",  description="Poslovni partner, ki je lastnik naslova  ")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hidden")
      * @var \App\Entity\Popa
      */
     protected $popa;
@@ -47,7 +47,7 @@ class PostniNaslov
      * @var App\Entity\Oseba
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="naslovi")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hidden")
      */
     protected $oseba;
 
