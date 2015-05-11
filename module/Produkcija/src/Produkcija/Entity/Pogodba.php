@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity(repositoryClass="Produkcija\Repository\Pogodbe")
+ * @ORM\Entity
  * @Max\I18n(label="Pogodba",plural="Pogodbe")
  * @Max\Id(prefix="0011")
  */
@@ -27,7 +27,7 @@ class Pogodba
     /**
      * Šifra pogodbe
      *
-     * @ORM\Column(unique=true, length=7, nullable=false)
+     * 
      * @Max\I18n(label="Šifra", description="Unikatna šifra pogodbe")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode")
      * @var string
@@ -78,7 +78,7 @@ class Pogodba
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="pogodbe")
-     * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id", nullable=false)
      * @Max\I18n(label="Oseba",  description="Oseba, s katero je napravljena pogodba")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba

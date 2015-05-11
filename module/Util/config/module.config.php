@@ -34,6 +34,15 @@ return [
                         ]
                     ]
                 ],
+                'populateTest' => [
+                    'options' => [
+                        'route' => 'populateTest',
+                        'defaults' => [
+                            'controller' => 'Util\Install',
+                            'action' => 'populateTest'
+                        ]
+                    ]
+                ],
             ]
         ]
     ],
@@ -44,5 +53,8 @@ return [
     ],
     'fixtures' => [
         __DIR__ . '/../fixture'
+    ],
+    'test_fixtures' => [
+        __DIR__ . '/../testFixture'
     ]
 ];

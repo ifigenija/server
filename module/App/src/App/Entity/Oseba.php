@@ -64,6 +64,11 @@ class Oseba
     private $priimek;
 
     /**
+     * 
+     */
+    private $pesvdonim;
+
+    /**
      * @ORM\Column(length=40, nullable=true)
      * @Max\I18n(label="Funkcija", description="Funkcija osebe ")
      * @var string
@@ -87,7 +92,7 @@ class Oseba
     /**
      * Naslov kontaktne osebe
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="oseba", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="oseba")
      * @Max\Ui(type="tomany")
      * @var \App\Entity\PostniNaslov
      */
@@ -179,7 +184,7 @@ class Oseba
     private $telefonske;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="oseba", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="oseba")
      * @Max\I18n(label="Trr-ji", description="Transaksijski računi osebe")   
      * @Max\Ui(type="tomany")
      * @var array
@@ -209,6 +214,12 @@ class Oseba
      * @var array
      */
     private $sodelovanja;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
+     * @ORM\JoinColumn(name="naslov_id", referencedColumnName="id")
+     */
+    private $naslov;
 
     /**
      * 

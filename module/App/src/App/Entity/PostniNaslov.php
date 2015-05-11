@@ -32,7 +32,9 @@ class PostniNaslov
     /**
      * Lastnik postnega naslova če gre za klienta 
      * 
-     * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="naslovi")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Popa")
+     * @ORM\JoinColumn(name="klient_id", referencedColumnName="id")
+     * 
      * @Max\I18n(label="Poslovni partner",  description="Poslovni partner, ki je lastnik naslova  ")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa

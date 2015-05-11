@@ -110,7 +110,7 @@ class User
     protected $defaultRouteParams;
 
     /**
-     * @ORM\Column(type="string", unique=true, nullable=false)
+     * @ORM\Column(type="string", nullable=false)
      * @Max\I18n(label="Email", description="Elektronski naslov, ki služi za prijavo uporabnika") 
      * @Max\Ui(type="email", ident=true)
      */

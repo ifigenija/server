@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity(repositoryClass="Produkcija\Repository\Zaposlitve")
+ * @ORM\Entity
  * @Max\I18n(label="Zaposlitev",plural="Zaposlitve")
  * @Max\Id(prefix="0016")
  */
@@ -100,6 +100,11 @@ class Zaposlitev
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="sodelovanje")
+     */
+    private $alternacija;
+
+    /**
+     * 
      * @var <Alternacije>
      */
     private $alternacije;

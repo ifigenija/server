@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity(repositoryClass="Produkcija\Repository\Uprizoritve")
+ * @ORM\Entity
  * @Max\I18n(label="Uprizoritev",plural="Uprizoritve")
  * @Max\Id(prefix="0014")
  */
@@ -96,6 +96,11 @@ class Uprizoritev
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $sloAvtor;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $kartkiNaslov;
 
     /**
      * 
