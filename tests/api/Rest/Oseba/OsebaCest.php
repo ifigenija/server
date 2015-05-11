@@ -264,6 +264,7 @@ class OsebaCest
         $I->assertEquals('zz', $oseba['drzavaRojstva']);
         $I->assertEquals('zz', $oseba['krajRojstva']);
 
+        codecept_debug($oseba);
         $I->assertEquals(null, $oseba['user']);
         $I->assertTrue(isset($oseba['alternacije']));
         $I->assertTrue(isset($oseba['pogodbe']));

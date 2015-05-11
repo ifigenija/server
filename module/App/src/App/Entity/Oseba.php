@@ -64,6 +64,11 @@ class Oseba
     private $priimek;
 
     /**
+     * 
+     */
+    private $pesvdonim;
+
+    /**
      * @ORM\Column(length=40, nullable=true)
      * @Max\I18n(label="Funkcija", description="Funkcija osebe ")
      * @var string
@@ -87,9 +92,8 @@ class Oseba
     /**
      * Naslov kontaktne osebe
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="oseba", orphanRemoval=true)
-     * @Max\Ui(type="tomany")
-     * @var \App\Entity\PostniNaslov
+     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="oseba",orphanRemoval=true)
+     * @var <Naslovi>
      */
     protected $naslovi;
 
@@ -229,7 +233,6 @@ class Oseba
     {
         return sprintf("%s %s %s", $this->ime, $this->srednjeIme, $this->priimek);
     }
-
     public function getId()
     {
         return $this->id;
@@ -253,6 +256,11 @@ class Oseba
     public function getPriimek()
     {
         return $this->priimek;
+    }
+
+    public function getPesvdonim()
+    {
+        return $this->pesvdonim;
     }
 
     public function getFunkcija()
@@ -356,7 +364,7 @@ class Oseba
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa = null)
+    public function setPopa($popa)
     {
         $this->popa = $popa;
         return $this;
@@ -380,6 +388,12 @@ class Oseba
         return $this;
     }
 
+    public function setPesvdonim($pesvdonim)
+    {
+        $this->pesvdonim = $pesvdonim;
+        return $this;
+    }
+
     public function setFunkcija($funkcija)
     {
         $this->funkcija = $funkcija;
@@ -398,7 +412,7 @@ class Oseba
         return $this;
     }
 
-    public function setNaslovi(\App\Entity\PostniNaslov $naslovi = null)
+    public function setNaslovi($naslovi)
     {
         $this->naslovi = $naslovi;
         return $this;
@@ -458,7 +472,7 @@ class Oseba
         return $this;
     }
 
-    public function setUser(\Aaa\Entity\User $user = null)
+    public function setUser(\Aaa\Entity\User $user)
     {
         $this->user = $user;
         return $this;
@@ -493,5 +507,6 @@ class Oseba
         $this->sodelovanja = $sodelovanja;
         return $this;
     }
+
 
 }

@@ -100,6 +100,11 @@ class Zaposlitev
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="sodelovanje")
+     */
+    private $alternacija;
+
+    /**
+     * 
      * @var <Alternacije>
      */
     private $alternacije;

@@ -127,6 +127,11 @@ class Uprizoritev
     private $sloAvtor;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $kratkiNaslov;
+
+    /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\ProdukcijaDelitev", mappedBy="uprizoritev")
      * @var <Koprodukcije>
      */
@@ -153,8 +158,8 @@ class Uprizoritev
     /**
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Vaja", mappedBy="uprizoritev")
      * @var <Vaje>
-     */ 
-   private $vaje;
+     */
+    private $vaje;
 
     /**
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Predstava", mappedBy="uprizoritev")

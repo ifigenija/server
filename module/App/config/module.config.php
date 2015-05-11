@@ -20,9 +20,9 @@ return [
         'factories'  => [
             'Rest\drzava'       => 'Max\Factory\RestControllerFactory',
             'Rest\oseba'        => 'Max\Factory\RestControllerFactory',
-            'Relation\oseba'        => 'Max\Factory\ToManyControllerFactory',
+            'Relation\oseba'    => 'Max\Factory\ToManyControllerFactory',
             'Rest\posta'        => 'Max\Factory\RestControllerFactory',
-            'Rest\postniNaslov' => 'Max\Factory\RestControllerFactory',
+            'Rest\postninaslov' => 'Max\Factory\RestControllerFactory',
             'Rest\trr'          => 'Max\Factory\RestControllerFactory',
             'Rest\telefonska'   => 'Max\Factory\RestControllerFactory',
             'Rest\popa'         => 'Max\Factory\RestControllerFactory',
@@ -69,8 +69,8 @@ return [
                 ]
             ],
             'rest' => [
-                'type'    => 'Segment',
-                'options' => [
+                'type'          => 'Segment',
+                'options'       => [
                     'route'       => '/rest/:controller[/:view][/:id]',
                     'defaults'    => [
                         '__NAMESPACE__' => 'Rest',
@@ -83,19 +83,19 @@ return [
                         'id'         => \Max\Consts::UUID
                     ]
                 ],
-                 'may_terminate' => true,
-                'child_routes' => [
+                'may_terminate' => true,
+                'child_routes'  => [
                     'relation' => [
-                        'type' => 'Segment',
+                        'type'    => 'Segment',
                         'options' => [
-                            'route' => '/:relation[/:relid]',
-                            'defaults' => [
+                            'route'       => '/:relation[/:relid]',
+                            'defaults'    => [
                                 '__NAMESPACE__' => 'Relation',
-                                'action' => null
+                                'action'        => null
                             ],
                             'constraints' => [
                                 'relation' => '[A-Za-z]+',
-                                'relid' => \Max\Consts::UUID,
+                                'relid'    => \Max\Consts::UUID,
                             ],
                         ],
                     ]
@@ -122,12 +122,11 @@ return [
                 "chck-oseba" => "App\Assertion\AssertOseba",
             ],
         ],
-        "assertion_map" => [
-            "Oseba-write" => "chck-oseba" 
+        "assertion_map"     => [
+            "Oseba-write" => "chck-oseba"
         ],
-        
-        'guest_role'        => 'anonymous',
-        'role_provider'     => [
+        'guest_role'    => 'anonymous',
+        'role_provider' => [
             'ZfcRbac\Role\ObjectRepositoryRoleProvider' => [
                 'object_manager'     => 'doctrine.entitymanager.orm_default',
                 'class_name'         => 'Aaa\Entity\Role',

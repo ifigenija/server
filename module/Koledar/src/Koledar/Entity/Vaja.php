@@ -15,6 +15,16 @@ class Vaja        extends \Max\Entity\Base
     private $id;
 
     /**
+     * 
+     */
+    private $zaporedna;
+
+    /**
+     * 
+     */
+    private $porocilo;
+
+    /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="vaja")
      */
     private $dogodek;

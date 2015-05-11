@@ -27,7 +27,7 @@ class Pogodba
     /**
      * Šifra pogodbe
      *
-     * @ORM\Column(unique=true, length=7, nullable=false)
+     * 
      * @Max\I18n(label="Šifra", description="Unikatna šifra pogodbe")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode")
      * @var string

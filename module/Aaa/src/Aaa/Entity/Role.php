@@ -30,7 +30,7 @@ class Role
     protected $id;
 
     /**
-     * @ORM\Column(unique=true, length=150, nullable=false)
+     * @ORM\Column(unique=true, length=150, nullable=true)
      * @Max\I18n(label="Naziv", description="Naziv vloge")
      * @Max\Ui(type="sifra", group="Vloga",ident=true)
      * @var string

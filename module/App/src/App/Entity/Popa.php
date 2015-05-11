@@ -143,7 +143,7 @@ class Popa
     /**
      * Klientovi naslovi
      * 
-     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="popa", orphanRemoval=true)
+     * 
      * @var <Naslovi>
      */
     protected $naslovi;

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity(repositoryClass="Produkcija\Repository\Alternacije")
+ * @ORM\Entity(repositoryClass="Produkcija\Repository\ProdukcijaDelitve")
  * @Max\I18n(label="Alternacija",plural="Alternacije")
  * @Max\Id(prefix="0012")
  */
@@ -34,11 +34,19 @@ class Alternacija
     private $zaposlen;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Funkcija", inversedBy="alternacije")
-     * @ORM\JoinColumn(name="vloga_id", referencedColumnName="id", nullable=false)
+     * 
+     * 
+     */
+    private $funkcija;
+
+    /**
+     * 
+     * 
      * @Max\I18n(label="Vloga",  description="Vloga pri alternaciji")
      * @Max\Ui(type="toone")
-     * @var \Produkcija\Entity\Funkcija
+     * @var
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Funkcija", inversedBy="alternacije")
+     * @ORM\JoinColumn(name="vloga_id", referencedColumnName="id", nullable=false) \Produkcija\Entity\Funkcija
      */
     private $vloga;
 

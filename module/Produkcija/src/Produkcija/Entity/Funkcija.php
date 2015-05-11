@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity(repositoryClass="Produkcija\Repository\Funkcije")
+  * @ORM\Entity(repositoryClass="Produkcija\Repository\Funkcije")
  * @Max\I18n(label="Funkcija",plural="Funkcije")
  * @Max\Id(prefix="0013")
  */
@@ -47,9 +47,10 @@ class Funkcija
     private $velikost;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * 
      * @Max\I18n(label="pomembna", description="Ali je funkcija pomembna")
-     * @var boolean
+     * @var
+     * @ORM\Column(type="boolean", nullable=true) boolean
      */
     private $pomembna;
 

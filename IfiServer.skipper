@@ -199,7 +199,7 @@
       <field name="naziv" size="40" uuid="4cdbd64f-69b6-40e5-8adc-8b5652c141a7"/>
       <field name="ime" uuid="643d4746-8c96-4373-971a-42c0d23ac17e"/>
       <field name="priimek" uuid="d4471f4e-d5bd-411d-a705-6c57303815bb"/>
-      <field name="pesvdonim" uuid="5a2640e6-84b2-4978-bad8-3f65f1b72ca0"/>
+      <field name="psevdonim" uuid="5a2640e6-84b2-4978-bad8-3f65f1b72ca0"/>
       <field name="funkcija" size="40" uuid="35fb5dcb-b9a8-40aa-a7e2-263eb5edf43d"/>
       <field name="email" size="40" uuid="ee9e205c-7c9f-4762-8274-c4a403d44069"/>
       <field name="naslov_id" uuid="44442b08-1383-4eb8-b9a4-90fba43033be"/>
@@ -844,6 +844,7 @@
       <field name="naziv" type="string" uuid="1cc199a0-f0d8-47bd-bdf7-1bb20507e016"/>
       <orm-attributes>
         <attribute name="export-file-name">ZvrstSurs.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\ZvrstiSurs</attribute>
       </orm-attributes>
     </entity>
     <entity name="ZvrstUprizoritve" uuid="064b8109-e697-4483-a021-6290e08bd8a9">

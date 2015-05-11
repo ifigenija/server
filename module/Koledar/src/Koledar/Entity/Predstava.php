@@ -15,6 +15,11 @@ class Predstava         extends \Max\Entity\Base
     private $id;
 
     /**
+     * 
+     */
+    private $zaporedna;
+
+    /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="predstava")
      */
     private $dogodek;

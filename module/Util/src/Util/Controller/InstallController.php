@@ -46,4 +46,28 @@ class InstallController
         $executor->execute($loader->getFixtures(), true);
     }
 
+        /**
+     * Napolni podatke iz Fixtures
+     */
+    public function populateTestAction()
+    {
+        $logger = function ($message) {
+            echo $message . PHP_EOL;
+        };
+
+        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $config = new Config($this->serviceLocator->get('config'));
+
+        $loader = new Loader();
+
+        $fixtures = isset($config->test_fixtures) ? $config->test_fixtures : [];
+        foreach ($fixtures as $dir) {
+            $loader->loadFromDirectory($dir);
+        }
+
+        $executor = new ORMExecutor($em);
+        $executor->setLogger($logger);
+        $executor->execute($loader->getFixtures(), true);
+    }
+
 }

@@ -28,6 +28,8 @@ forms:
             - datZav  
             - datnZav
             - zamejstvo         #$$ zaradi testiranja na vrhu sicer spodaj
+        hydrator: 
+            byValue: [ osebe, naslovi,trrji, telefonske ]
 lists:
     default: 
         hydrator:
