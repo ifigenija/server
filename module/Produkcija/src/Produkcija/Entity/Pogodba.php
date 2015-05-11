@@ -66,7 +66,7 @@ class Pogodba
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="opis", description="Opis pogodbe")   
-     * @var double
+     * @var string
      */
     private $opis;
 

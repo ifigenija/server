@@ -1,0 +1,30 @@
+## YAML Template.
+---
+type: rest
+entityClass: Produkcija\Entity\ProdukcijaDelitev
+forms:
+    default: 
+        elements:
+#            - id
+            - odstotekFinanciranja
+            - vrstaKoproducenta
+#            - alternacije
+            - uprizoritev
+            - koproducent
+lists:
+    default: 
+        filter:
+            elements:                 
+                - name: uprizoritev
+                  type: toone
+                  options:
+                      label: Uprizoritev
+                      targetEntity: Produkcija\Entity\Uprizoritev
+                      required: true
+#                - name: alternacije       # $$ rb ali bomo naredili v namenskem view-u?
+#                - name: koproducent       # $$ rb ali bomo naredili v namenskem view-u?
+        hydrator:
+            - exclude: []
+    vse: 
+        filter:
+    
