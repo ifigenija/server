@@ -197,6 +197,7 @@ class UprizoritevCest
     public function read(\ApiTester $I)
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        codecept_debug($ent);
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['faza'], 'zz');

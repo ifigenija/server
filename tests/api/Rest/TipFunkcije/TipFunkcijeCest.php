@@ -123,6 +123,7 @@ class TipFunkcijeCest
     public function read(\ApiTester $I)
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        codecept_debug($ent);
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['ime'], 'zz');
@@ -134,7 +135,7 @@ class TipFunkcijeCest
         $I->assertEquals($ent['podrocje'], 'zz');
         $I->assertEquals($ent['pomembnost'], 'zz', "pomembnost");
         $I->assertTrue(isset($ent['funkcije']), "ali so funkcije");
-        $I->assertEquals(5, count($ent['funkcije']),"število funkcij");
+        $I->assertEquals(0, count($ent['funkcije']),"število funkcij");
     }
 
     /**

@@ -140,9 +140,9 @@ class TipFunkcije
         return $this->pomembnost;
     }
 
-    public function getVloge()
+    public function getFunkcije()
     {
-        return $this->vloge;
+        return $this->funkcije;
     }
 
     public function setId($id)
@@ -199,10 +199,11 @@ class TipFunkcije
         return $this;
     }
 
-    public function setVloge($vloge)
+    public function setFunkcije($funkcije)
     {
-        $this->vloge = $vloge;
+        $this->funkcije = $funkcije;
         return $this;
     }
+
 
 }
