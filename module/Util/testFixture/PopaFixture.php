@@ -11,12 +11,12 @@ use Doctrine\Common\Persistence\ObjectManager;
  *
  * @author boris
  */
-class PopaFixture extends AbstractFixture implements FixtureInterface {
+class PopaFixture extends AbstractFixture implements FixtureInterface, \Doctrine\Common\DataFixtures\DependentFixtureInterface {
 
     public function load(ObjectManager $manager) {
 
         foreach ($this->getData() as $value) {
-            $this->populateDrzava($manager, $value);
+            $this->populatePopa($manager, $value);
         }
 
         $manager->flush();
@@ -28,7 +28,7 @@ class PopaFixture extends AbstractFixture implements FixtureInterface {
      * @param string $object
      * @param array $vals
      */
-    public function populateDrzava($manager, $v) {
+    public function populatePopa($manager, $v) {
 
         $rep = $manager->getRepository('App\Entity\Popa');
         $repD = $manager->getRepository('App\Entity\Drzava');
@@ -57,4 +57,12 @@ class PopaFixture extends AbstractFixture implements FixtureInterface {
           ['1001', 'c', 'AK', 'Hopsasa d.o.o.' ]  
         ];
     }
+    
+    
+    public function getDependencies()
+    {
+        
+    }
+
+    
 }

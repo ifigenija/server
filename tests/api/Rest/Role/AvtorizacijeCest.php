@@ -509,7 +509,7 @@ class AvtorizacijeCest
     public function dostopiNaManyToManyView(ApiTester $I)
     {
 
-        $I->assertTrue(1 === 2); 
+        $I->assertTrue(1 === 2, " še za narediti "); 
     }
 
 }

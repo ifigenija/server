@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Abonmaji\Repository\Abonmaji")
  * @Max\Id(prefix="0010")
  * @Max\I18n(label="Abonma",plural="Abonmaji")
 

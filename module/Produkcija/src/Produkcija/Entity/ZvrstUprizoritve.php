@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping AS ORM,
 /**
  * Zvrst uprizoritve
  * 
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Produkcija\Repository\ZvrstiUprizoritve")
  * @Max\I18n(label="Zvrst",plural="Zvrst uprizoritve")
  * @Max\Id(prefix="0021")
  */

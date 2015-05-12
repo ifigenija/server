@@ -92,9 +92,8 @@ class Oseba
     /**
      * Naslov kontaktne osebe
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="oseba")
-     * @Max\Ui(type="tomany")
-     * @var \App\Entity\PostniNaslov
+     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="oseba",orphanRemoval=true)
+     * @var <Naslovi>
      */
     protected $naslovi;
 
@@ -184,7 +183,7 @@ class Oseba
     private $telefonske;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="oseba")
+     * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="oseba", orphanRemoval=true)
      * @Max\I18n(label="Trr-ji", description="Transaksijski računi osebe")   
      * @Max\Ui(type="tomany")
      * @var array
@@ -216,12 +215,6 @@ class Oseba
     private $sodelovanja;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
-     * @ORM\JoinColumn(name="naslov_id", referencedColumnName="id")
-     */
-    private $naslov;
-
-    /**
      * 
      * @param string $mode
      */
@@ -240,7 +233,6 @@ class Oseba
     {
         return sprintf("%s %s %s", $this->ime, $this->srednjeIme, $this->priimek);
     }
-
     public function getId()
     {
         return $this->id;
@@ -264,6 +256,11 @@ class Oseba
     public function getPriimek()
     {
         return $this->priimek;
+    }
+
+    public function getPesvdonim()
+    {
+        return $this->pesvdonim;
     }
 
     public function getFunkcija()
@@ -367,7 +364,7 @@ class Oseba
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa = null)
+    public function setPopa($popa)
     {
         $this->popa = $popa;
         return $this;
@@ -391,6 +388,12 @@ class Oseba
         return $this;
     }
 
+    public function setPesvdonim($pesvdonim)
+    {
+        $this->pesvdonim = $pesvdonim;
+        return $this;
+    }
+
     public function setFunkcija($funkcija)
     {
         $this->funkcija = $funkcija;
@@ -409,7 +412,7 @@ class Oseba
         return $this;
     }
 
-    public function setNaslovi(\App\Entity\PostniNaslov $naslovi = null)
+    public function setNaslovi($naslovi)
     {
         $this->naslovi = $naslovi;
         return $this;
@@ -469,7 +472,7 @@ class Oseba
         return $this;
     }
 
-    public function setUser(\Aaa\Entity\User $user = null)
+    public function setUser(\Aaa\Entity\User $user)
     {
         $this->user = $user;
         return $this;
@@ -504,5 +507,6 @@ class Oseba
         $this->sodelovanja = $sodelovanja;
         return $this;
     }
+
 
 }

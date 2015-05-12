@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping AS ORM,
 /**
  * Dogodek uprizoritve - ali vaja ali predstava
  * 
- * @ORM\Entity
+  * @ORM\Entity(repositoryClass="Koledar\Repository\Dogodki")
  * @ORM\Table(indexes={@ORM\Index(name="zacetek", columns={"zacetek"}),@ORM\Index(name="konec", columns={"konec"})})
  * @Max\I18n(label="Dogodek",plural="Dogodki")
  * @Max\Id(prefix="0024")

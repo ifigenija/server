@@ -1,0 +1,56 @@
+## YAML Template.
+---
+type: rest
+entityClass: Produkcija\Entity\Uprizoritev
+forms:
+    default: 
+        elements:
+#            - id
+            - faza
+            - naslov
+            - podnaslov
+            - delovniNaslov
+            - datumPremiere
+            - stOdmorov
+            - avtor
+            - gostujoca
+            - trajanje
+            - opis
+            - arhIdent
+            - arhOpomba
+            - datumZakljucka
+            - sloAvtor
+#            - koprodukcije
+#            - vloge
+#            - arhiv
+#            - rekviziti
+#            - vaje
+#            - predstave
+#            - gostujoce
+            - besedilo
+            - zvrstUprizoritve
+            - zvrstSurs
+lists:
+    default: 
+        filter:
+            elements:                 
+                - name: besedilo
+                  type: toone
+                  options:
+                      label: Besedilo
+                      targetEntity: Produkcija\Entity\Besedilo
+                      required: true
+#                - name:koprodukcije     # $$ rb ali v namenskem view-u?
+#                - name:vloge     # $$ rb ali v namenskem view-u?
+#                - name:arhiv     # $$ rb ali v namenskem view-u?
+#                - name:rekviziti     # $$ rb ali v namenskem view-u?
+#                - name:vaje     # $$ rb ali v namenskem view-u?
+#                - name:predstave     # $$ rb ali v namenskem view-u?
+#                - name:gostujoce     # $$ rb ali v namenskem view-u?
+#                - name:zvrstUprizoritve     # $$ rb ali v namenskem view-u?
+#                - name:zvrstSurs     # $$ rb ali v namenskem view-u?
+        hydrator:
+            - exclude: []
+    vse: 
+        filter:
+    
