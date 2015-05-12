@@ -15,3 +15,17 @@ forms:
     default: 
         hydrator:
             - exclude: []
+lists:
+    default: 
+        filter:
+            elements:                 
+                - name: funkcija
+                  type: toone
+                  options:
+                      label: Funkcija
+                      targetEntity: Produkcija\Entity\Funkcija
+                      required: true
+        hydrator:
+            - exclude: []
+    vse: 
+        filter:
