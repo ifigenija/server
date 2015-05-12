@@ -10,25 +10,32 @@ use ApiTester;
 
 /**
  * Description of RekviziterstvoCest
- *
- * metode, ki jo podpira API
- * - create
- * - getlist
- * - update
- * - get - kontrola vseh polj te entitete
- * - delete
- * validate metodo za entiteto
- * relacije z drugimi entitetami
+ * 
+ *      metode, ki jo podpira API
+ *      - create
+ *      - getlist
+ *      - update
+ *      - get - kontrola vseh polj te entitete
+ *      - delete
+ *      validate metodo za entiteto - je ni
+ *      relacije z drugimi entitetami
+ *      - rekvizit
+ *      - uprizoritev
+ *      getlist različne variante relacij - bomo na drug način reševali $$ rb
  * 
  * @author rado
  */
 class RekviziterstvoCest
 {
 
-    private $restUrl     = '/rest/rekviziterstvo';
-    private $rekvizitUrl = '/rest/rekvizit';
+    private $restUrl        = '/rest/rekviziterstvo';
+    private $rekvizitUrl    = '/rest/rekvizit';
+    private $uprizoritevUrl = '/rest/uprizoritev';
+    private $besediloUrl    = '/rest/besedilo';
     private $obj;
     private $objRekvizit;
+    private $objUprizoritev;
+    private $objBesedilo;
 
     public function _before(ApiTester $I)
     {
@@ -41,18 +48,76 @@ class RekviziterstvoCest
     }
 
     /**
+     *  kreiramo besedilo
+     * 
+     * @param ApiTester $I
+     */
+    public function createBesedilo(ApiTester $I)
+    {
+        $data              = [
+            'naslov'          => 'zz',
+            'avtor'           => 'zz',
+            'podnaslov'       => 'zz',
+            'jezik'           => 'zz',
+            'naslovIzvirnika' => 'zz',
+            'datumPrejema'    => 'zz',
+            'moskeVloge'      => 1,
+            'zenskeVloge'     => 2,
+            'prevajalec'      => 'zz',
+            'povzetekVsebine' => 'zz',
+        ];
+        $this->objBesedilo = $ent               = $I->successfullyCreate($this->besediloUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['naslov'], 'zz');
+    }
+
+    /**
      *  kreiramo rekvizit
      * 
      * @param ApiTester $I
      */
     public function createRekvizit(ApiTester $I)
     {
-        $data      = [
+        $data              = [
             'ime'   => 'zz',
             'vrsta' => 'zz',
         ];
-        $this->objRekvizit = $ent       = $I->successfullyCreate($this->rekvizitUrl, $data);
+        $this->objRekvizit = $ent               = $I->successfullyCreate($this->rekvizitUrl, $data);
         $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends createBesedilo
+     * @param ApiTester $I
+     */
+    public function createUprizoritev(ApiTester $I)
+    {
+        $data                 = [
+            'faza'             => 'zz',
+            'naslov'           => 'zz',
+            'podnaslov'        => 'zz',
+            'delovniNaslov'    => 'zz',
+            'datumPremiere'    => '2010-02-01T00:00:00+0100',
+            'stOdmorov'        => 1,
+            'avtor'            => 'zz',
+            'gostujoca'        => true,
+            'trajanje'         => 2,
+            'opis'             => 'zz',
+            'arhIdent'         => 'zz',
+            'arhOpomba'        => 'zz',
+            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
+            'sloAvtor'         => true,
+            'kratkiNaslov'     => 'zz',
+            'besedilo'         => $this->objBesedilo['id'],
+            'zvrstUprizoritve' => null,
+            'zvrstSurs'        => null,
+        ];
+        $this->objUprizoritev = $ent                  = $I->successfullyCreate($this->uprizoritevUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['opis'], 'zz');
     }
 
     /**
@@ -66,11 +131,82 @@ class RekviziterstvoCest
             'namenUporabe'   => true,
             'opisPostavitve' => 'zz',
             'rekvizit'       => $this->objRekvizit['id'],
-            'uprizoritev'    => null,
+            'uprizoritev'    => $this->objUprizoritev['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['opisPostavitve'], 'zz');
+
+        // kreiramo še en zapis
+        $data = [
+            'namenUporabe'   => true,
+            'opisPostavitve' => 'aa',
+            'rekvizit'       => $this->objRekvizit['id'],
+            'uprizoritev'    => $this->objUprizoritev['id'],
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['opisPostavitve'], 'aa');
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getList(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "/vse";
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['opisPostavitve']);      //glede na sort
+    }
+
+    /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function update(ApiTester $I)
+    {
+        $ent                   = $this->obj;
+        $ent['opisPostavitve'] = 'yy';
+
+        $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+
+        $I->assertEquals($entR['opisPostavitve'], 'yy');
+    }
+
+    /**
+     * Preberem zapis in preverim vsa polja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function read(\ApiTester $I)
+    {
+        $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
+
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['namenUporabe'], true);
+        $I->assertEquals($ent['opisPostavitve'], 'yy');
+        $I->assertEquals($ent['rekvizit'], $this->objRekvizit['id']);
+        $I->assertEquals($ent['uprizoritev'], $this->objUprizoritev['id']);
+    }
+
+    /**
+     * brisanje zapisa
+     * 
+     * @depends create
+     */
+    public function delete(ApiTester $I)
+    {
+        $I->successfullyDelete($this->restUrl, $this->obj['id']);
+        $I->failToGet($this->restUrl, $this->obj['id']);
     }
 
 }
