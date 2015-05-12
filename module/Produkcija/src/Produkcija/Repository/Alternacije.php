@@ -43,9 +43,9 @@ class Alternacije
                 $crit = new Criteria();
                 $e    = $crit->expr();
 
-                if (!empty($options[''])) {
-                    $oseba = $this->getEntityManager()->find('Produkcija\Entity\Funkcija', $options['funkcija']);
-                    $exp   = $e->eq('funkcija', $oseba);
+                if (!empty($options['funkcija'])) {
+                    $funkcija = $this->getEntityManager()->find('Produkcija\Entity\Funkcija', $options['funkcija']);
+                    $exp   = $e->eq('funkcija', $funkcija);
                 }
                 $crit->andWhere($exp);
                 return new Selectable($this, $crit);
