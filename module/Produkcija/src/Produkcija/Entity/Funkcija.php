@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 
 /**
-  * @ORM\Entity(repositoryClass="Produkcija\Repository\Funkcije")
+ * @ORM\Entity(repositoryClass="Produkcija\Repository\Funkcije")
  * @Max\I18n(label="Funkcija",plural="Funkcije")
  * @Max\Id(prefix="0013")
  */
@@ -87,13 +87,13 @@ class Funkcija
     private $privzeti;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\TipFunkcije", inversedBy="vloge", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\TipFunkcije", inversedBy="funkcije", fetch="EAGER")
      * @ORM\JoinColumn(name="tip_vloge_id", referencedColumnName="id")
      * @Max\I18n(label="TipVloge",  description="TipVloge")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\TipFunkcije
      */
-    private $tipVloge;
+    private $tipFunkcije;
 
     public function validate($mode = 'update')
     {
@@ -145,9 +145,9 @@ class Funkcija
         return $this->privzeti;
     }
 
-    public function getTipVloge()
+    public function getTipFunkcije()
     {
-        return $this->tipVloge;
+        return $this->tipFunkcije;
     }
 
     public function setId($id)
@@ -204,9 +204,9 @@ class Funkcija
         return $this;
     }
 
-    public function setTipVloge(\Produkcija\Entity\TipFunkcije $tipVloge)
+    public function setTipFunkcije(\Produkcija\Entity\TipFunkcije $tipFunkcije)
     {
-        $this->tipVloge = $tipVloge;
+        $this->tipFunkcije = $tipFunkcije;
         return $this;
     }
 

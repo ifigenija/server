@@ -13,24 +13,27 @@ return [
         'factories' => [
         ]
     ],
-    'controllers' => [
+    'controllers'     => [
         'invokables' => [
+        ],
+        'factories'  => [
+            'Rest\terminStoritve' => 'Max\Factory\RestControllerFactory',
         ]
     ],
-    'entity_map' => [
+    'entity_map'      => [
         'Prisotnost\Entity\TerminStoritve' => 'b001',
     ],
-    'router' => [
+    'router'          => [
         'routes' => [
         ],
     ],
-    'console' => [
+    'console'         => [
         'router' => [
             'routes' => [
             ]
         ]
     ],
-    'form_elements' => [
+    'form_elements'   => [
         'invokables' => [
         ]
     ]

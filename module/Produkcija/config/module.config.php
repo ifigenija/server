@@ -30,6 +30,7 @@ return [
             'Rest\produkcijskaHisa'  => 'Max\Factory\RestControllerFactory',
             'Rest\zaposlitev'        => 'Max\Factory\RestControllerFactory',
             'Rest\produkcijaDelitev' => 'Max\Factory\RestControllerFactory',
+            'Rest\tipFunkcije'       => 'Max\Factory\RestControllerFactory',
         ],
     ],
     'router'          => [

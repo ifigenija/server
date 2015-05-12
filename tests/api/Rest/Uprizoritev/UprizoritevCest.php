@@ -12,21 +12,36 @@ use ApiTester;
  * Description of UprizoritevCest
  * 
  * metode, ki jo podpira API
- * - create
- * - getlist
- * - update
- * - get - kontrola vseh polj te entitete
- * - delete
- * validate metodo za entiteto
+ *      - create
+ *      - getlist
+ *      - update
+ *      - get - kontrola vseh polj te entitete
+ *      - delete
+ *      validate metodo za entiteto - je ni
  * relacije z drugimi entitetami
+ *      - besedilo
+ * - koprodukcije     
+ * - vloge            
+ * - arhiv            
+ * - rekviziti        
+ * - vaje             
+ * - predstave        
+ * - gostujoce        
+ * - zvrstUprizoritve 
+ * - zvrstSurs        
+ * getlist različne variante relacij
+ *      - vse
+ *      - besedilo
  *
  * @author rado
  */
 class UprizoritevCest
 {
 
-    private $restUrl = '/rest/uprizoritev';
+    private $restUrl     = '/rest/uprizoritev';
+    private $besediloUrl = '/rest/besedilo';
     private $obj;
+    private $objBesedilo;
 
     public function _before(ApiTester $I)
     {
@@ -39,8 +54,33 @@ class UprizoritevCest
     }
 
     /**
+     *  kreiramo besedilo
+     * 
+     * @param ApiTester $I
+     */
+    public function createBesedilo(ApiTester $I)
+    {
+        $data              = [
+            'naslov'          => 'zz',
+            'avtor'           => 'zz',
+            'podnaslov'       => 'zz',
+            'jezik'           => 'zz',
+            'naslovIzvirnika' => 'zz',
+            'datumPrejema'    => 'zz',
+            'moskeVloge'      => 1,
+            'zenskeVloge'     => 2,
+            'prevajalec'      => 'zz',
+            'povzetekVsebine' => 'zz',
+        ];
+        $this->objBesedilo = $ent               = $I->successfullyCreate($this->besediloUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['naslov'], 'zz');
+    }
+
+    /**
      *  kreiramo zapis
      * 
+     * @depends createBesedilo
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
@@ -60,7 +100,8 @@ class UprizoritevCest
             'arhOpomba'        => 'zz',
             'datumZakljucka'   => '2019-02-01T00:00:00+0100',
             'sloAvtor'         => true,
-            'besedilo'         => null,
+            'kratkiNaslov'     => 'zz',
+            'besedilo'         => $this->objBesedilo['id'],
             'zvrstUprizoritve' => null,
             'zvrstSurs'        => null,
         ];
@@ -75,7 +116,7 @@ class UprizoritevCest
             'naslov'           => 'aa',
             'podnaslov'        => 'aa',
             'delovniNaslov'    => 'aa',
-            'datumPremiere'    => '2011-02-01T00:00:00+0100',
+            'datumPremiere'    => '2010-02-01T00:00:00+0100',
             'stOdmorov'        => 3,
             'avtor'            => 'aa',
             'gostujoca'        => true,
@@ -83,9 +124,10 @@ class UprizoritevCest
             'opis'             => 'aa',
             'arhIdent'         => 'aa',
             'arhOpomba'        => 'aa',
-            'datumZakljucka'   => '2020-02-01T00:00:00+0100',
+            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
             'sloAvtor'         => true,
-            'besedilo'         => null,
+            'kratkiNaslov'     => 'aa',
+            'besedilo'         => $this->objBesedilo['id'],
             'zvrstUprizoritve' => null,
             'zvrstSurs'        => null,
         ];
@@ -109,6 +151,25 @@ class UprizoritevCest
         $I->assertNotEmpty($list);
         $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertEquals("aa", $list[0]['naslov']);      //glede na sort
+    }
+
+    /**
+     * preberi vse zapise od osebe
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoBesedilu(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "?besedilo=" . $this->objBesedilo['id'];
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+        codecept_debug($resp);
+
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        $I->assertEquals("aa", $list[0]['opis']);      // $$ odvisno od sortiranja
     }
 
     /**
@@ -152,9 +213,26 @@ class UprizoritevCest
         $I->assertEquals($ent['arhOpomba'], 'zz');
         $I->assertEquals($ent['datumZakljucka'], '2019-02-01T00:00:00+0100');
         $I->assertEquals($ent['sloAvtor'], true);
-        $I->assertEquals($ent['besedilo'], null);
+        $I->assertEquals($ent['kratkiNaslov'], 'zz');
+        $I->assertEquals($ent['besedilo'], $this->objBesedilo['id']);
         $I->assertEquals($ent['zvrstUprizoritve'], null);
         $I->assertEquals($ent['zvrstSurs'], null);
+
+        $I->assertTrue(isset($ent['koprodukcije']));
+        $I->assertTrue(isset($ent['funkcije']));
+        $I->assertTrue(isset($ent['arhiv']));
+        $I->assertTrue(isset($ent['rekviziti']));
+        $I->assertTrue(isset($ent['vaje']));
+        $I->assertTrue(isset($ent['predstave']));
+        $I->assertTrue(isset($ent['gostujoce']));
+
+        $I->assertEquals(0, count($ent['koprodukcije']));
+        $I->assertEquals(0, count($ent['funkcije']));
+        $I->assertEquals(0, count($ent['arhiv']));
+        $I->assertEquals(0, count($ent['rekviziti']));
+        $I->assertEquals(0, count($ent['vaje']));
+        $I->assertEquals(0, count($ent['predstave']));
+        $I->assertEquals(0, count($ent['gostujoce']));
     }
 
     /**

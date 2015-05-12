@@ -14,7 +14,7 @@ forms:
 #            - alternacije
             - uprizoritev 
             - privzeti
-            - tipVloge
+            - tipFunkcije
 lists:
     default: 
         hydrator:

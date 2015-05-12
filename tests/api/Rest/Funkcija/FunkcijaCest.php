@@ -7,6 +7,7 @@ use ApiTester;
 /**
  * Description of FunkcijaCest
 
+ * 
  * metode, ki jo podpira API
  * - create
  * - getlist
@@ -15,7 +16,14 @@ use ApiTester;
  * - delete
  * validate metodo za entiteto
  * relacije z drugimi entitetami
- *
+ * - alternacije
+ * - uprizoritev 
+ * - privzeta alternacija
+ * - tipFunkcije
+ * 
+ * getlist različne variante relacij
+ * 
+ * 
  * @author rado
  */
 class FunkcijaCest
