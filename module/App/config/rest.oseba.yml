@@ -20,15 +20,17 @@ forms:
             - drzavljanstvo  
             - drzavaRojstva  
             - krajRojstva     
-            - user     
+            - user    
+        hydrator: 
+            byValue: [trrji, naslovi, telefonske]
 lists:
     full: 
         hydrator: 
-            - byValue: [trrji, naslovi, telefonske]
+            byValue: [trrji, naslovi, telefonske]
     default: 
         hydrator:
-            - byValue: [telefonske, naslovi]
-            - exclude: [trrji, datumRojstva, emso, davcna, drzavljanstvo, krajRojstva]
+            byValue: [telefonske, naslovi]
+            exclude: [trrji, datumRojstva, emso, davcna, drzavljanstvo, krajRojstva]
             
 hydrator:      
 relation:
