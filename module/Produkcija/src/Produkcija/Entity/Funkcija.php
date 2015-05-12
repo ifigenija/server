@@ -62,7 +62,7 @@ class Funkcija
     private $sort;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="vloga")
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="funkcija")
      * @var <Alternacije>
      * 
      */

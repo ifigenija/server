@@ -35,20 +35,12 @@ class Alternacija
 
     /**
      * 
-     * 
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Funkcija", inversedBy="alternacije")
+     * @Max\I18n(label="Funkcija",  description="Funkcija pri alternaciji")
+     * @Max\Ui(type="toone")
+     * @var \Produkcija\Entity\Funkcija
      */
     private $funkcija;
-
-    /**
-     * 
-     * 
-     * @Max\I18n(label="Vloga",  description="Vloga pri alternaciji")
-     * @Max\Ui(type="toone")
-     * @var
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Funkcija", inversedBy="alternacije")
-     * @ORM\JoinColumn(name="vloga_id", referencedColumnName="id", nullable=false) \Produkcija\Entity\Funkcija
-     */
-    private $vloga;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Zaposlitev", inversedBy="alternacija")
@@ -100,9 +92,9 @@ class Alternacija
         return $this->zaposlen;
     }
 
-    public function getVloga()
+    public function getFunkcija()
     {
-        return $this->vloga;
+        return $this->funkcija;
     }
 
     public function getSodelovanje()
@@ -137,9 +129,9 @@ class Alternacija
         return $this;
     }
 
-    public function setVloga(\Produkcija\Entity\Funkcija $vloga)
+    public function setFunkcija(\Produkcija\Entity\Funkcija $funkcija)
     {
-        $this->vloga = $vloga;
+        $this->funkcija = $funkcija;
         return $this;
     }
 
