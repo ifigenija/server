@@ -83,7 +83,7 @@ class PostniNaslov
      * @ORM\Column(length=50, nullable=true)
      * @var string
      *
-     * @Max\I18n(label="Ulica",  description="Dodatni podatki o ulici")
+     * @Max\I18n(label="Dodatna ulica",  description="Dodatni podatki o ulici")
      */
     protected $ulicaDva;
 
@@ -104,7 +104,7 @@ class PostniNaslov
      *
      * @ORM\Column(length=50, nullable=true)
      *
-     * @Max\I18n(label="Naziv", description="Naziv pošte")
+     * @Max\I18n(label="Naziv pošte", description="Naziv pošte")
      * @Max\Ui(group="posta")
      */
     protected $postaNaziv;
