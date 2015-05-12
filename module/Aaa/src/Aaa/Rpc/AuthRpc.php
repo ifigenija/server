@@ -64,7 +64,7 @@ class AuthRpcService
         $adapter->setCredentialValue($password);
         $authResult = $authService->authenticate();
         if ($authResult->isValid()) {
-           
+
             /* @var $identity \Aaa\Entity\User */
             $identity = $authResult->getIdentity();
             $authService->getStorage()->write($identity);
@@ -84,9 +84,14 @@ class AuthRpcService
     protected function getUserData($identity)
     {
 
-        $roles = [];
+        $roles       = [];
+        $permissions = [];
         foreach ($identity->getRoles() as $role) {
             $roles[] = $role->getName();
+
+            foreach ($role->getPermissions() as $perm) {
+                $permissions[] = $perm;
+            }
         };
         return [
             'id'                 => $identity->getId(),
@@ -95,7 +100,8 @@ class AuthRpcService
             'username'           => $identity->getEmail(),
             'defaultRoute'       => $identity->getDefaultRoute(),
             'defaultRouteParams' => $identity->getDefaultRouteParams(),
-            'roles'              => $roles
+            'roles'              => $roles,
+            'permissions'        => $permissions
         ];
     }
 
