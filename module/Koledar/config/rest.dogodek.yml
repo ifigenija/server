@@ -1,0 +1,39 @@
+## YAML Template.
+---
+type: rest
+entityClass: Koledar\Entity\Dogodek
+forms:
+    default: 
+        elements:
+#            - id
+            - planiranZacetek
+            - zacetek
+            - konec
+            - status
+            - razred
+            - termin
+            - ime
+            - predstava
+            - zasedenost
+            - vaja
+            - gostovanje
+            - dogodekIzven
+            - prostor
+#            - arhiv
+#            - terminiStoritve
+#            - prodajaPredstave
+            - sezona
+lists:
+    default: 
+        filter:
+            elements:                 
+                - name: sezona
+                  type: toone
+                  options:
+                      label: Sezona
+                      targetEntity: Koledar\Entity\Sezona
+                      required: true
+        hydrator:
+            - exclude: []
+    vse: 
+        filter:

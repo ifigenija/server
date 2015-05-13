@@ -17,7 +17,9 @@ return [
         'invokables' => [
         ],
         'factories'  => [
-            'Rest\dogodek' => 'Max\Factory\RestControllerFactory',
+            'Rest\dogodek'   => 'Max\Factory\RestControllerFactory',
+            'Rest\predstava' => 'Max\Factory\RestControllerFactory',
+            'Rest\gostovanje' => 'Max\Factory\RestControllerFactory',
         ]
     ],
     'router'          => [

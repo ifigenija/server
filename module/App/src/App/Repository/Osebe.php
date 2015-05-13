@@ -14,11 +14,10 @@ namespace App\Repository;
 class Osebe
         extends \Max\Repository\AbstractMaxRepository
 {
-
     protected $sortOptions = [
         "default" => [
-            "sifra" => ["alias" => "sifra"]
-        ]
+            "sifra" => ["alias" => "p.sifra"]
+        ],
     ];
     
 }

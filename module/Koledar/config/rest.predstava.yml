@@ -1,0 +1,26 @@
+## YAML Template.
+---
+type: rest
+entityClass: Koledar\Entity\Predstava
+forms:
+    default: 
+        elements:
+#            - id
+            - dogodek
+            - uprizoritev
+            - gostovanje
+            - gostujoca
+lists:
+    default: 
+        filter:
+            elements:                 
+                - name: dogodek
+                  type: toone
+                  options:
+                      label: Dogodek
+                      targetEntity: Koledar\Entity\Dogodek
+                      required: true
+        hydrator:
+            - exclude: []
+    vse: 
+        filter:

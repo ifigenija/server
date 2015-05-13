@@ -12,24 +12,24 @@ use DoctrineModule\Paginator\Adapter\Selectable;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
 
-
 /**
- * Description of Dogodki
+ * Description of Gostovanja
  *
  * @author rado
  */
-class Dogodki
+class Gostovanja
         extends \Max\Repository\AbstractMaxRepository
 {
 
     protected $sortOptions = [
         "default" => [
-            "ime" => ["alias" => "p.ime"]
+            "vrsta" => ["alias" => "p.vrsta"]
         ],
-        "vse" => [
-            "ime" => ["alias" => "p.ime"]
+        "vse"     => [
+            "vrsta" => ["alias" => "p.vrsta"]
         ],
     ];
+
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
@@ -38,13 +38,13 @@ class Dogodki
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
-                $this->expect(!(empty($options['sezona']) ), "Sezona je obvezna", 770101);
+                $this->expect(!(empty($options['dogodek']) ), "Dogodek je obvezen", 770121);
                 $crit = new Criteria();
                 $e    = $crit->expr();
 
-                if (!empty($options['sezona'])) {
-                    $sezona = $this->getEntityManager()->find('\Koledar\Entity\Sezona', $options['sezona']);
-                    $exp      = $e->eq('sezona', $sezona);
+                if (!empty($options['dogodek'])) {
+                    $dogodek = $this->getEntityManager()->find('\Koledar\Entity\Dogodek', $options['dogodek']);
+                    $exp    = $e->eq('dogodek', $dogodek);
                 }
                 $crit->andWhere($exp);
                 return new Selectable($this, $crit);
@@ -57,11 +57,11 @@ class Dogodki
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naslov = $e->like('p.ime', ':ime');
+            $naslov = $e->like('p.vrsta', ':vrsta');
 
             $qb->andWhere($e->orX($naslov));
 
-            $qb->setParameter('ime', "{$options['q']}%", "string");
+            $qb->setParameter('vrsta', "{$options['q']}%", "string");
         }
 
         return $qb;
