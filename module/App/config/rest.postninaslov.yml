@@ -9,7 +9,7 @@ forms:
             - naziv
             - nazivDva
             - ulica
-            - ulicaDva
+            - ulicaDva 
             - posta
             - postaNaziv
             - pokrajina
