@@ -23,10 +23,10 @@ class Arhivalije
 
     protected $sortOptions = [
         "default" => [
-            "naslov" => ["alias" => "naslov"]
+            "naslov" => ["alias" => "p.naslov"]
         ],
         "vse" => [
-            "naslov" => ["alias" => "naslov"]
+            "naslov" => ["alias" => "p.naslov"]
         ],
     ];
 

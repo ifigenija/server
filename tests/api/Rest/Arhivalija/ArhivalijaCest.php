@@ -21,9 +21,9 @@ use ApiTester;
  * relacije z drugimi entitetami
  * - dogodek 
  *      - uprizoritev 
- * getlist različne variante relacij
- * - vse
- * - uprizoritev
+ *      getlist različne variante relacij
+ *      - vse
+ *      - uprizoritev
  *
  * @author rado
  */
@@ -218,9 +218,9 @@ class ArhivalijaCest
     public function getList(ApiTester $I)
     {
         $listUrl = $this->restUrl . "/vse";
-        codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
+        codecept_debug($list);
 
         $I->assertNotEmpty($list);
         $I->assertEquals(2, $resp['state']['totalRecords']);
