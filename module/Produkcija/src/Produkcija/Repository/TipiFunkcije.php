@@ -11,24 +11,25 @@ use DoctrineModule\Paginator\Adapter\Selectable;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
 
+
 /**
- * Description of Rekviziterstva
+ * Description of TipiFunkcije
  *
  * @author rado
  */
-class Rekviziterstva
-  extends \Max\Repository\AbstractMaxRepository
-{   
+class TipiFunkcije
+        extends AbstractMaxRepository
+{
+
     protected $sortOptions = [
         "default" => [
-            "opisPostavitve" => ["alias" => "p.opisPostavitve"]
+            "ime" => ["alias" => "p.ime"]
         ],
-        "vse" => [
-            "opisPostavitve" => ["alias" => "p.opisPostavitve"]
-        ],
-    ];  
-    
-    
+        "vse"     => [
+            "ime" => ["alias" => "p.ime"]
+        ]
+    ];
+
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
@@ -46,15 +47,14 @@ class Rekviziterstva
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.opisPostavitve', ':opisPostavitve');
+            $naz = $e->like('p.ime', ':ime');
 
             $qb->andWhere($e->orX($naz));
 
-            $qb->setParameter('opisPostavitve', "{$options['q']}%", "string");
+            $qb->setParameter('ime', "{$options['q']}%", "string");
         }
 
         return $qb;
     }
 
-    
 }

@@ -100,10 +100,6 @@ class Zaposlitev
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="sodelovanje")
-     */
-    private $alternacija;
-
-    /**
      * 
      * @var <Alternacije>
      */
@@ -265,5 +261,6 @@ class Zaposlitev
         $this->oseba = $oseba;
         return $this;
     }
+
 
 }

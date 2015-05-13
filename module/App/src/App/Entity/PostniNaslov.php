@@ -81,9 +81,8 @@ class PostniNaslov
      * Dodatno polje za ulico (ulica2)
      *
      * @ORM\Column(length=50, nullable=true)
-     * @var string
-     *
      * @Max\I18n(label="Dodatna ulica",  description="Dodatni podatki o ulici")
+     * @var string
      */
     protected $ulicaDva;
 

@@ -128,6 +128,8 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Max\I18n(label="Kratki naslov", description="Kratki naslov uprizoritve")
+     * @var string
      */
     private $kratkiNaslov;
 
@@ -139,9 +141,9 @@ class Uprizoritev
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Funkcija", mappedBy="uprizoritev")
-     * @var <Vloge>
+     * @var <Funkcije>
      */
-    private $vloge;
+    private $funkcije;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Arhivalija", mappedBy="uprizoritev")
@@ -204,7 +206,6 @@ class Uprizoritev
     {
         
     }
-
     public function getId()
     {
         return $this->id;
@@ -280,14 +281,19 @@ class Uprizoritev
         return $this->sloAvtor;
     }
 
+    public function getKratkiNaslov()
+    {
+        return $this->kratkiNaslov;
+    }
+
     public function getKoprodukcije()
     {
         return $this->koprodukcije;
     }
 
-    public function getVloge()
+    public function getFunkcije()
     {
-        return $this->vloge;
+        return $this->funkcije;
     }
 
     public function getArhiv()
@@ -420,15 +426,21 @@ class Uprizoritev
         return $this;
     }
 
+    public function setKratkiNaslov($kratkiNaslov)
+    {
+        $this->kratkiNaslov = $kratkiNaslov;
+        return $this;
+    }
+
     public function setKoprodukcije($koprodukcije)
     {
         $this->koprodukcije = $koprodukcije;
         return $this;
     }
 
-    public function setVloge($vloge)
+    public function setFunkcije($funkcije)
     {
-        $this->vloge = $vloge;
+        $this->funkcije = $funkcije;
         return $this;
     }
 
@@ -479,5 +491,6 @@ class Uprizoritev
         $this->zvrstSurs = $zvrstSurs;
         return $this;
     }
+
 
 }

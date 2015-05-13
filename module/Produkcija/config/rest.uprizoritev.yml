@@ -20,8 +20,9 @@ forms:
             - arhOpomba
             - datumZakljucka
             - sloAvtor
+            - kratkiNaslov
 #            - koprodukcije
-#            - vloge
+#            - funkcije
 #            - arhiv
 #            - rekviziti
 #            - vaje

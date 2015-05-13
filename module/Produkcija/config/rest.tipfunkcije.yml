@@ -1,0 +1,31 @@
+## YAML Template.
+---
+type: rest
+entityClass: Produkcija\Entity\TipFunkcije
+forms:
+    default: 
+        elements:
+#            - id
+            - ime
+            - opis
+            - dovoliPrekrivanje
+            - maxPrekrivanj
+            - nastopajoc
+            - imeZenski
+            - podrocje
+            - pomembnost
+#            - funkcije
+lists:
+    default: 
+        filter:
+            elements:                 
+                - name: funkcije
+                  options:
+                      label: Funkcije
+                      targetEntity: Produkcija\Entity\Funkcija
+                      required: true
+        hydrator:
+            - exclude: []
+    vse: 
+        filter:
+    

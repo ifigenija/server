@@ -27,12 +27,12 @@ class Pogodba
     /**
      * Šifra pogodbe
      *
-     * 
+     * @ORM\Column(unique=true, length=7, nullable=false)
      * @Max\I18n(label="Šifra", description="Unikatna šifra pogodbe")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode")
      * @var string
      */
-    protected $sifra;
+    private $sifra;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
@@ -71,6 +71,7 @@ class Pogodba
     private $opis;
 
     /**
+     * 
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="pogodba")
      * @var <Alternacije>
      */

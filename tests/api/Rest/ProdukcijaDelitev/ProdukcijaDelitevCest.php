@@ -21,7 +21,7 @@ use ApiTester;
  * - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto - je ni
- * relacije z drugimi entitetami
+ *      relacije z drugimi entitetami
  *      getlist različne variante relacij
  *      - vse
  *      - default

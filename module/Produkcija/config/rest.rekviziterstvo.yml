@@ -12,5 +12,8 @@ forms:
             - uprizoritev
 lists:
     default: 
+        filter:
         hydrator:
             - exclude: []
+    vse: 
+        filter:
