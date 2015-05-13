@@ -110,7 +110,7 @@ class Arhivalija
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id")
      * @Max\I18n(label="Uprizoritev",  description="Uprizoritev, na katero se nanaša arhivalija")
      * @Max\Ui(type="toone")
-     * @var \Koledar\Entity\Dogodek
+     * @var \Produkcija\Entity\Uprizoritev
      */
     private $uprizoritev;
 
@@ -257,10 +257,11 @@ class Arhivalija
         return $this;
     }
 
-    public function setUprizoritev(\Koledar\Entity\Dogodek $uprizoritev)
+    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev)
     {
         $this->uprizoritev = $uprizoritev;
         return $this;
     }
+
 
 }
