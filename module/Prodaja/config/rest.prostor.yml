@@ -1,0 +1,19 @@
+## YAML Template.
+---
+type: rest
+entityClass: Prodaja\Entity\Prostor
+forms:
+    default: 
+        elements:
+#            - id
+            - ime
+            - jePrizorisce
+            - kapaciteta
+            - opis
+lists:
+    default: 
+        filter:                
+        hydrator:
+            - exclude: []
+    vse: 
+        filter:

@@ -45,6 +45,7 @@ class DogodekCest
     private $gostovanjeUrl   = '/rest/gostovanje';
     private $dogodekIzvenUrl = '/rest/dogodekIzven';
     private $prostorUrl      = '/rest/prostor';
+    private $sezonaUrl      = '/rest/sezona';
     private $obj;
     private $objPredstava;
     private $objZasedenost;
@@ -52,6 +53,7 @@ class DogodekCest
     private $objGostovanje;
     private $objDogodekIzven;
     private $objProstor;
+    private $objSezona;
 
     public function _before(ApiTester $I)
     {
@@ -63,6 +65,27 @@ class DogodekCest
         
     }
 
+        /**
+     *  kreiramo zapis
+     * 
+     * @param ApiTester $I
+     */
+    public function createSezono(ApiTester $I)
+    {
+        $data      = [
+            'imeSezone' => 'zz',
+            'zacetek'   => '2010-02-01T00:00:00+0100',
+            'konec'     => '2011-02-01T00:00:00+0100',
+            'aktivna'   => true,
+        ];
+        $this->objSezona = $ent       = $I->successfullyCreate($this->sezonaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['imeSezone'], 'zz');
+    }
+
+    
+    
     /**
      *  kreiramo zapis
      * 
@@ -84,7 +107,7 @@ class DogodekCest
             'gostovanje'      => null,
             'dogodekIzven'    => null,
             'prostor'         => null,
-            'sezona'          => null,
+            'sezona'          => $this->objSezona,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);

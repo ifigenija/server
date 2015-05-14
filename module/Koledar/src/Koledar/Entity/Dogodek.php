@@ -107,6 +107,9 @@ class Dogodek
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Gostovanje", inversedBy="dogodek")
      * @ORM\JoinColumn(name="gostovanje_id", referencedColumnName="id", unique=true)
+     * @Max\I18n(label="Gostovanje",  description="Gostovanje")
+     * @Max\Ui(type="toone")
+     * @var \Koledar\Entity\Gostovanje
      */
     private $gostovanje;
 

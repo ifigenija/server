@@ -23,6 +23,8 @@ return [
             'Rest\gostujoca'    => 'Max\Factory\RestControllerFactory',
             'Rest\dogodekIzven' => 'Max\Factory\RestControllerFactory',
             'Rest\sezona'       => 'Max\Factory\RestControllerFactory',
+            'Rest\vaja'       => 'Max\Factory\RestControllerFactory',
+            'Rest\zasedenost'       => 'Max\Factory\RestControllerFactory',
         ]
     ],
     'router'          => [

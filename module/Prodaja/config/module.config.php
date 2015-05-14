@@ -13,21 +13,24 @@ return [
         'factories' => [
         ]
     ],
-    'controllers' => [
+    'controllers'     => [
         'invokables' => [
-        ]
+        ],
+        'factories'  => [
+            'Rest\prostor' => 'Max\Factory\RestControllerFactory',
+        ],
     ],
-    'router' => [
+    'router'          => [
         'routes' => [
         ],
     ],
-    'console' => [
+    'console'         => [
         'router' => [
             'routes' => [
             ]
         ]
     ],
-    'form_elements' => [
+    'form_elements'   => [
         'invokables' => [
         ]
     ]
