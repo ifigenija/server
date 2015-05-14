@@ -28,8 +28,10 @@ class ZasedenostCest
 
     private $restUrl    = '/rest/zasedenost';
     private $dogodekUrl = '/rest/dogodek';
+    private $vajaUrl = '/rest/vaja';
     private $obj;
     private $objDogodek;
+    private $objVaja;
 
     public function _before(ApiTester $I)
     {
@@ -39,6 +41,24 @@ class ZasedenostCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function createVajo(ApiTester $I)
+    {
+        $data          = [
+            'zaporedna'   => 1,
+            'porocilo'    => 'zz',
+            'dogodek'     => null, //$$rb najprej mora biti kreirana vaja, šele potem dogodek.
+            'uprizoritev' => null,
+        ];
+        $this->objVaja = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['porocilo'], 'zz');
     }
 
     /**
@@ -57,7 +77,7 @@ class ZasedenostCest
             'ime'             => null,
             'predstava'       => null,
             'zasedenost'      => null,
-            'vaja'            => null,
+            'vaja'            => $this->objVaja['id'],
             'gostovanje'      => null,
             'dogodekIzven'    => null,
             'prostor'         => null,

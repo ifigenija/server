@@ -42,37 +42,7 @@ class VajaCest
     }
 
     /**
-     * 
-     * @param ApiTester $I
-     */
-    public function createDogodek(ApiTester $I)
-    {
-        $data             = [
-            'planiranZacetek' => '2011-02-01T00:00:00+0100',
-            'zacetek'         => '2012-02-01T00:00:00+0100',
-            'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => 1,
-            'razred'          => null,
-            'termin'          => null,
-            'ime'             => null,
-            'predstava'       => null,
-            'zasedenost'      => null,
-            'vaja'            => null,
-            'gostovanje'      => null,
-            'dogodekIzven'    => null,
-            'prostor'         => null,
-            'sezona'          => null,
-        ];
-        $this->objDogodek = $ent              = $I->successfullyCreate($this->dogodekUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['status'], 1);
-    }
-
-    /**
      *  kreiramo zapis
-     * 
-     * @depends createDogodek
      * 
      * @param ApiTester $I
      */
@@ -81,7 +51,7 @@ class VajaCest
         $data      = [
             'zaporedna'   => 1,
             'porocilo'    => 'zz',
-            'dogodek'     => $this->objDogodek['id'],
+            'dogodek'     => null,  //$$rb najprej mora biti kreirana vaja, šele potem dogodek.
             'uprizoritev' => null,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
@@ -93,7 +63,7 @@ class VajaCest
         $data = [
             'zaporedna'   => 2,
             'porocilo'    => 'aa',
-            'dogodek'     => $this->objDogodek['id'],
+            'dogodek'     => null,
             'uprizoritev' => null,
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
