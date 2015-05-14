@@ -35,7 +35,7 @@ class Arhivalija
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="Datuma", description="Datuma arhivalije")
+     * @Max\I18n(label="Datum", description="Datuma arhivalije")
      * @var string
      */
     private $datum;

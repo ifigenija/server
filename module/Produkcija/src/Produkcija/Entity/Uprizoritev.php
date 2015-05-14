@@ -187,7 +187,7 @@ class Uprizoritev
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ZvrstUprizoritve")
      * @ORM\JoinColumn(name="zvrst_uprizoritve_id", referencedColumnName="id")
-     * @Max\I18n(label="Zvrst",  description="Zvrst uprizoritve")
+     * @Max\I18n(label="Zvrst uprizoritve",  description="Zvrst uprizoritve")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\ZvrstUprizoritve
      */
