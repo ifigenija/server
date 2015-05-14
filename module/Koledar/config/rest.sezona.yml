@@ -1,0 +1,20 @@
+## YAML Template.
+---
+type: rest
+entityClass: Koledar\Entity\Sezona
+forms:
+    default: 
+        elements:
+#            - id
+            - imeSezone
+            - zacetek
+            - konec
+            - aktivna
+#            - dogodki
+lists:
+    default: 
+        filter:                
+        hydrator:
+            - exclude: []
+    vse: 
+        filter:

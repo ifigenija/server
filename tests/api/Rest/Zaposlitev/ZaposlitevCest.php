@@ -26,7 +26,6 @@ use ApiTester;
  */
 class ZaposlitevCest
 {
-
     private $restUrl  = '/rest/zaposlitev';
     private $osebaUrl = '/rest/oseba';
     private $obj;
