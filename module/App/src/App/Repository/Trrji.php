@@ -23,7 +23,7 @@ class Trrji
 
     protected $sortOptions = [
         "default" => [
-            "stevilka" => ["alias" => "stevilka"]
+            "stevilka" => ["alias" => "p.stevilka"]
         ],
         "vse"     => [
             "stevilka" => ["alias" => "p.stevilka"]

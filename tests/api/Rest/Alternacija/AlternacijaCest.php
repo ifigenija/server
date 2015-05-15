@@ -5,28 +5,24 @@ namespace Rest\Alternacija;
 use ApiTester;
 
 /**
- * Polnjenje drugih entiteg
- * - funkcija
  * Description of AlternacijaCest
- * metode, ki jo podpira API
+ * 
+ *      metode, ki jo podpira API
  *      - create
  *      - getlist
  *      - update
  *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto - je ni
- * relacije z drugimi entitetami
+ *      relacije z drugimi entitetami
  *      - funkcija
  *      - sodelovanje (zaposlitev)
  *      - oseba
  *      - koprodukcija
- * - pogodba
- * getlist različne variante relacij
+ *      - pogodba
+ *      getlist različne variante relacij
+ *      - vse
  *      - funkcija
- * - sodelovanje
- *      - oseba
- * - koprodukcija
- * - pogodba
  *
  * @author rado
  */
@@ -302,7 +298,7 @@ class AlternacijaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
+    public function getListVse(ApiTester $I)
     {
         $listUrl = $this->restUrl . "/vse";
         codecept_debug($listUrl);

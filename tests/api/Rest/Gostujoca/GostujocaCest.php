@@ -20,7 +20,7 @@ use ApiTester;
  *      validate metodo za entiteto-je ni
  * relacije z drugimi entitetami
  *      - uprizoritev
- * - predstava
+ * - predstave  $$ rb 2M
  *      getlist različne variante relacij
  *      - vse
  *      - uprizoritev

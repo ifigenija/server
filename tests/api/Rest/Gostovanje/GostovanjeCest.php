@@ -11,20 +11,20 @@ use ApiTester;
 /**
  * Description of GostovanjeCest
  *
- * metode, ki jo podpira API
- * - create
- * - getlist
- * - update
- * - get - kontrola vseh polj te entitete
- * - delete
- * validate metodo za entiteto
+ *      metode, ki jo podpira API
+ *      - create
+ *      - getlist
+ *      - update
+ *      - get - kontrola vseh polj te entitete
+ *      - delete
+ *      validate metodo za entiteto -je ni
  * relacije z drugimi entitetami
- * - dogodek
- * - predstave
- * - drzava
- * getlist različne variante relacij
- * - vse
- * - dogodek
+ *      - dogodek
+ * - predstave  $$ 2M
+ *      - drzava
+ *      getlist različne variante relacij
+ *      - vse
+ *      - drzava
  * @author rado
  */
 class GostovanjeCest
@@ -32,10 +32,12 @@ class GostovanjeCest
 
     private $restUrl    = '/rest/gostovanje';
     private $dogodekUrl = '/rest/dogodek';
-    private $drzavaUrl = '/rest/drzava';
+    private $drzavaUrl  = '/rest/drzava';
+    private $vajaUrl    = '/rest/vaja';
     private $obj;
-    private $objDogodek;
     private $objDrzava;
+    private $objDogodek;
+    private $objVaja;
 
     public function _before(ApiTester $I)
     {
@@ -83,15 +85,64 @@ class GostovanjeCest
         $I->assertEquals($ent['vrsta'], 'zz');
 
         // kreiramo še en zapis
-        $data      = [
+        $data = [
             'vrsta'   => 'aa',
             'dogodek' => null,
             'drzava'  => $this->objDrzava['id'],
         ];
-                $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['vrsta'], 'aa');
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function createVajo(ApiTester $I)
+    {
+        $data          = [
+            'zaporedna'   => 1,
+            'porocilo'    => 'zz',
+            'dogodek'     => null, //$$rb najprej mora biti kreirana vaja, šele potem dogodek.
+            'uprizoritev' => null,
+        ];
+        $this->objVaja = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['porocilo'], 'zz');
+    }
+
+    /**
+     * dogodek kreiramo, ko zapis zasedenost obstaja, ker je Dogodek lastnik relacije
+     * 
+     * @depends create
+     * @depends createVajo
+     * @param ApiTester $I
+     */
+    public function createDogodek(ApiTester $I)
+    {
+        $data             = [
+            'planiranZacetek' => '2011-02-01T00:00:00+0100',
+            'zacetek'         => '2012-02-01T00:00:00+0100',
+            'konec'           => '2013-02-01T00:00:00+0100',
+            'status'          => 1,
+            'razred'          => null,
+            'termin'          => null,
+            'ime'             => null,
+            'predstava'       => null,
+            'zasedenost'      => null,
+            'vaja'            => $this->objVaja['id'],
+            'gostovanje'      => $this->obj['id'],
+            'dogodekIzven'    => null,
+            'prostor'         => null,
+            'sezona'          => null,
+        ];
+        $this->objDogodek = $ent              = $I->successfullyCreate($this->dogodekUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['status'], 1);
     }
 
     /**
@@ -100,9 +151,9 @@ class GostovanjeCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoDogodku(ApiTester $I)
+    public function getListPoDrzavi(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?dogodek=" . $this->objDogodek['id'];
+        $listUrl = $this->restUrl . "?drzava=" . $this->objDrzava['id'];
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
@@ -110,7 +161,7 @@ class GostovanjeCest
 
         $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-//        $I->assertEquals("xx", $list[0]['status']);      // $$ odvisno od sortiranja
+        $I->assertEquals("aa", $list[0]['vrsta']);      //  odvisno od sortiranja
     }
 
     /**
@@ -157,7 +208,7 @@ class GostovanjeCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['vrsta'], 'yy');
-        $I->assertEquals($ent['dogodek'], null);
+        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
         $I->assertEquals($ent['drzava'], $this->objDrzava['id']);
 
         $I->assertTrue(isset($ent['predstave']));
@@ -165,9 +216,23 @@ class GostovanjeCest
         $I->assertEquals(0, count($ent['predstave']));
     }
 
+    
+       /**
+     * brisanje zapisa
+     * 
+     * @depends createDogodek
+     */
+    public function deleteDogodek(ApiTester $I)
+    {
+        $I->successfullyDelete($this->dogodekUrl, $this->objDogodek['id']);
+        $I->failToGet($this->dogodekUrl, $this->objDogodek['id']);
+    }
+
+    
     /**
      * brisanje zapisa
      * 
+     * @depends deleteDogodek
      * @depends create
      */
     public function delete(ApiTester $I)

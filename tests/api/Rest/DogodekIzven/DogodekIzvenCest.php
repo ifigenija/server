@@ -7,18 +7,18 @@
 /**
  * Description of DogodekIzvenCest
  *
- * metode, ki jo podpira API
- * - create
- * - getlist
- * - update
- * - get - kontrola vseh polj te entitete
- * - delete
- * validate metodo za entiteto
- * - dogodek
- * relacije z drugimi entitetami
- * getlist različne variante relacij
- * - vse
- * - dogodek
+ *      metode, ki jo podpira API
+ *      - create
+ *      - getlist
+ *      - update
+ *      - get - kontrola vseh polj te entitete
+ *      - delete
+ *      validate metodo za entiteto je ni
+ *      relacije z drugimi entitetami
+ *      - dogodek
+ *      getlist različne variante relacij
+ *      - vse
+ *      - default
  * 
  * @author rado
  */
@@ -27,8 +27,10 @@ class DogodekIzvenCest
 
     private $restUrl    = '/rest/dogodekizven';
     private $dogodekUrl = '/rest/dogodek';
+    private $vajaUrl    = '/rest/vaja';
     private $obj;
     private $objDogodek;
+    private $objVaja;
 
     public function _before(ApiTester $I)
     {
@@ -40,13 +42,57 @@ class DogodekIzvenCest
         
     }
 
-        /**
+    /**
+     *  kreiramo zapis
      * 
+     * @param ApiTester $I
+     */
+    public function create(ApiTester $I)
+    {
+        $data      = [
+            'dogodek' => null, // zaenkrat prazno, relacijo vzpostavimo pri kreiranju dogodka
+        ];
+        $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
+
+        // kreiramo še en zapis
+        $data = [
+            'dogodek' => null, // zaenkrat prazno, relacijo vzpostavimo pri kreiranju dogodka
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function createVajo(ApiTester $I)
+    {
+        $data          = [
+            'zaporedna'   => 1,
+            'porocilo'    => 'zz',
+            'dogodek'     => null, //$$rb najprej mora biti kreirana vaja, šele potem dogodek.
+            'uprizoritev' => null,
+        ];
+        $this->objVaja = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['porocilo'], 'zz');
+    }
+
+    /**
+     * @depends create
+     * @depends createVajo
      * @param ApiTester $I
      */
     public function createDogodek(ApiTester $I)
     {
-        $data      = [
+        $data             = [
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
@@ -56,44 +102,16 @@ class DogodekIzvenCest
             'ime'             => null,
             'predstava'       => null,
             'zasedenost'      => null,
-            'vaja'            => null,
+            'vaja'            => $this->objVaja['id'],
             'gostovanje'      => null,
-            'dogodekIzven'    => null,
+            'dogodekIzven'    => $this->obj['id'],
             'prostor'         => null,
             'sezona'          => null,
         ];
-        $this->objDogodek = $ent       = $I->successfullyCreate($this->dogodekUrl, $data);
+        $this->objDogodek = $ent              = $I->successfullyCreate($this->dogodekUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['status'], 1);
-    }
-
-    
-    /**
-     *  kreiramo zapis
-     * 
-     * @depends createDogodek
-     * 
-     * @param ApiTester $I
-     */
-    public function create(ApiTester $I)
-    {
-        $data      = [
-            'dogodek' => $this->objDogodek['id'],
-        ];
-        $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
-
-        // kreiramo še en zapis
-        $data = [
-            'dogodek' => $this->objDogodek['id'],
-        ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
     }
 
     /**
@@ -102,9 +120,9 @@ class DogodekIzvenCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoDogodku(ApiTester $I)
+    public function getList(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?dogodek=" . $this->objDogodek['id'];
+        $listUrl = $this->restUrl;
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
@@ -119,7 +137,7 @@ class DogodekIzvenCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
+    public function getListVse(ApiTester $I)
     {
         $listUrl = $this->restUrl . "/vse";
         codecept_debug($listUrl);
@@ -159,6 +177,18 @@ class DogodekIzvenCest
     /**
      * brisanje zapisa
      * 
+     * @depends create
+     */
+    public function deleteDogodek(ApiTester $I)
+    {
+        $I->successfullyDelete($this->dogodekUrl, $this->objDogodek['id']);
+        $I->failToGet($this->dogodekUrl, $this->objDogodek['id']);
+    }
+
+    /**
+     * brisanje zapisa
+     * 
+     * @depends deleteDogodek
      * @depends create
      */
     public function delete(ApiTester $I)

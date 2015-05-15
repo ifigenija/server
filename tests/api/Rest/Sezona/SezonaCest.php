@@ -11,15 +11,17 @@ use ApiTester;
 /**
  * Description of SezonaCest
  *
- * metode, ki jo podpira API
- * - create
- * - getlist
- * - update
- * - get - kontrola vseh polj te entitete
- * - delete
- * validate metodo za entiteto
+ *      metode, ki jo podpira API
+ *      - create
+ *      - getlist
+ *      - update
+ *      - get - kontrola vseh polj te entitete
+ *      - delete
+ *      validate metodo za entiteto - je ni
  * relacije z drugimi entitetami
- * getlist različne variante relacij
+ * - dogodki 2M     $$ rb 
+ *      getlist različne variante relacij
+ *      - vse
  * 
  * @author rado
  */

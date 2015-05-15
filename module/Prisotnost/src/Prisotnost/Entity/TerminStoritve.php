@@ -88,7 +88,9 @@ class TerminStoritve
 
     public function validate($mode = 'update')
     {
+        
     }
+
     public function getId()
     {
         return $this->id;
@@ -188,5 +190,4 @@ class TerminStoritve
         return $this;
     }
 
-    
 }

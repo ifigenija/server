@@ -14,11 +14,11 @@ lists:
     default: 
         filter:
             elements:                 
-                - name: dogodek
+                - name: drzava
                   type: toone
                   options:
-                      label: Dogodek
-                      targetEntity: Koledar\Entity\Dogodek
+                      label: Država
+                      targetEntity: App\Entity\Drzava
                       required: true
         hydrator:
             - exclude: []

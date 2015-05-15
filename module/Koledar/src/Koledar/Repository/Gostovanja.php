@@ -38,13 +38,13 @@ class Gostovanja
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
-                $this->expect(!(empty($options['dogodek']) ), "Dogodek je obvezen", 770121);
+                $this->expect(!(empty($options['drzava']) ), "Država je obvezna", 770121);
                 $crit = new Criteria();
                 $e    = $crit->expr();
 
-                if (!empty($options['dogodek'])) {
-                    $dogodek = $this->getEntityManager()->find('\Koledar\Entity\Dogodek', $options['dogodek']);
-                    $exp    = $e->eq('dogodek', $dogodek);
+                if (!empty($options['drzava'])) {
+                    $drzava = $this->getEntityManager()->find('App\Entity\Drzava', $options['drzava']);
+                    $exp    = $e->eq('drzava', $drzava);
                 }
                 $crit->andWhere($exp);
                 return new Selectable($this, $crit);

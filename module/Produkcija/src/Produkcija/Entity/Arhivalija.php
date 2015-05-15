@@ -117,7 +117,7 @@ class Arhivalija
     public function validate($mode = 'update')
     {
         $this->expect($this->uprizoritev || $this->dogodek, "Uprizoritev ali dogodek pri arhivaliji sta obvezna", 1000350);
-        $this->expect(!($this->uprizoritev && $this->dogodek), "Arhivalija ima  lahko samo ali uprizoritev ali oseba - ne oba hkrati", 1000351);
+        $this->expect(!($this->uprizoritev && $this->dogodek), "Arhivalija ima  lahko samo ali uprizoritev ali dogodek - ne oba hkrati", 1000351);
     }
 
     public function getId()

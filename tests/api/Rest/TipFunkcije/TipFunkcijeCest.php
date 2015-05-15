@@ -11,17 +11,18 @@ use ApiTester;
 /**
  * Description of TipFunkcijeCest
  * 
- * metode, ki jo podpira API
+ *      metode, ki jo podpira API
  *      - create
  *      - getlist
  *      - update
- *  - get - kontrola vseh polj te entitete
+ *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto - je ni
- * relacije z drugimi entitetami
- *  - funkcije - bomo pretestirali na drugi strani
- * getlist različne variante relacij
+ *      relacije z drugimi entitetami
+ *      - funkcije - bomo pretestirali na drugi strani
+ *      getlist različne variante relacij
  *      - vse
+ *      - default
  *      - funkcije - bomo pretestirali na strani funkcije
  *
  * @author rado
@@ -87,6 +88,21 @@ class TipFunkcijeCest
      * @param ApiTester $I
      */
     public function getList(ApiTester $I)
+    {
+        $listUrl = $this->restUrl;
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['ime']);      //glede na sort
+    }
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListVse(ApiTester $I)
     {
         $listUrl = $this->restUrl . "/vse";
         codecept_debug($listUrl);

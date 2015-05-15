@@ -18,5 +18,8 @@ forms:
             - povzetekVsebine
 lists:
     default: 
+        filter:
         hydrator:
             - exclude: []
+    vse: 
+        filter:

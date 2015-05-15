@@ -5,6 +5,7 @@ entityClass: App\Entity\Trr
 forms:
     default: 
         elements:
+#            - id
             - stevilka
             - swift
             - bic
@@ -31,5 +32,5 @@ lists:
         hydrator:
             - exclude: []
     vse: 
-        filter:                          
-                
+        filter:
+            

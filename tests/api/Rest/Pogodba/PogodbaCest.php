@@ -7,22 +7,26 @@ use ApiTester;
 /**
  * Description of PogodbaCest
  * 
- * priprava ostalih entitet
+ *      priprava ostalih entitet
  *      - create popa
- * metode, ki jo podpira API
+ *      metode, ki jo podpira API
  *      - create
  *      - getlist
  *      - update
  *      - get - kontrola vseh polj te entitete
  *      - delete
- * validate metodo za entiteto
+ *      validate metodo za entiteto
  *      - brez popa in osebe
  *      - z popa in osebo
  * relacije z drugimi entitetami
  * - alternacije    $$ ko bo api za alternacije na razpolago
  *      - oseba
  *      - popa    
- *      - trr
+ * - trr        $$ 
+ *      getlist različne variante relacij
+ *      - vse
+ *      - oseba, 
+ *      - popa
 
  * 
  * @author rado

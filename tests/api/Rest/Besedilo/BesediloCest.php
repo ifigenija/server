@@ -19,6 +19,9 @@ use ApiTester;
  *      - delete
  *      validate metodo za entiteto - je ni
  *      relacije z drugimi entitetami - jih ni
+ *      getlist različne variante relacij
+ *      - vse
+ *      - default
  * 
  * @author rado
  */
@@ -60,21 +63,55 @@ class BesediloCest
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['naslov'], 'zz');
+
+        // kreiramo še en zapis
+        $data = [
+            'naslov'          => 'aa',
+            'avtor'           => 'aa',
+            'podnaslov'       => 'aa',
+            'jezik'           => 'aa',
+            'naslovIzvirnika' => 'aa',
+            'datumPrejema'    => 'aa',
+            'moskeVloge'      => 1,
+            'zenskeVloge'     => 2,
+            'prevajalec'      => 'aa',
+            'povzetekVsebine' => 'aa',
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['naslov'], 'aa');
     }
 
     /**
-     * 
      * @depends create
      * @param ApiTester $I
      */
     public function getList(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl, []);
-        $list = $resp['data'];
+        $listUrl = $this->restUrl ;
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+        codecept_debug($list);
 
         $I->assertNotEmpty($list);
-        $this->id = array_pop($list)['id'];
-        $I->assertNotEmpty($this->id);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['naslov']);      //glede na sort
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListVse(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "/vse";
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+        codecept_debug($list);
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['naslov']);      //glede na sort
     }
 
     /**
