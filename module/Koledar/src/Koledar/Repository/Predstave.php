@@ -38,13 +38,13 @@ class Predstave
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
-                $this->expect(!empty($options['dogodek']), "Dogodek je obvezen", 770111);
+                $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 770111);
                 $crit = new Criteria();
                 $e    = $crit->expr();
 
-                if (!empty($options['dogodek'])) {
-                    $dogodek = $this->getEntityManager()->find('Koledar\Entity\Dogodek', $options['dogodek']);
-                    $exp     = $e->eq('dogodek', $dogodek);
+                if (!empty($options['uprizoritev'])) {
+                    $uprizoritev = $this->getEntityManager()->find('Produkcija\Entity\Uprizoritev', $options['uprizoritev']);
+                    $exp     = $e->eq('uprizoritev', $uprizoritev);
                 }
                 $crit->andWhere($exp);
                 return new Selectable($this, $crit);
