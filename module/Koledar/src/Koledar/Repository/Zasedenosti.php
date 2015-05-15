@@ -32,21 +32,11 @@ class Zasedenosti
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
+            case "default":
             case "vse":
                 $qb   = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
-            case "default":
-                $this->expect(!empty($options['dogodek']), "Dogodek je obvezen", 770161);
-                $crit = new Criteria();
-                $e    = $crit->expr();
-
-                if (!empty($options['dogodek'])) {
-                    $dogodek = $this->getEntityManager()->find('Koledar\Entity\Dogodek', $options['dogodek']);
-                    $exp     = $e->eq('dogodek', $dogodek);
-                }
-                $crit->andWhere($exp);
-                return new Selectable($this, $crit);
         }
     }
 

@@ -11,15 +11,17 @@ use ApiTester;
 /**
  * Description of ZasedenostCest
  *
- * metode, ki jo podpira API
- * - create
- * - getlist
- * - update
- * - get - kontrola vseh polj te entitete
- * - delete
- * validate metodo za entiteto
- * relacije z drugimi entitetami
- * getlist različne variante relacij
+ *       metode, ki jo podpira API
+ *       - create
+ *       - getlist
+ *       - update
+ *       - get - kontrola vseh polj te entitete
+ *       - delete
+ *      validate metodo za entiteto - je nie
+ *      relacije z drugimi entitetami
+ *      - dogodek
+ *      getlist različne variante relacij
+ *      - vse
  * 
  * @author rado
  */
@@ -28,7 +30,7 @@ class ZasedenostCest
 
     private $restUrl    = '/rest/zasedenost';
     private $dogodekUrl = '/rest/dogodek';
-    private $vajaUrl = '/rest/vaja';
+    private $vajaUrl    = '/rest/vaja';
     private $obj;
     private $objDogodek;
     private $objVaja;
@@ -43,7 +45,7 @@ class ZasedenostCest
         
     }
 
-     /**
+    /**
      * 
      * @param ApiTester $I
      */
@@ -62,7 +64,25 @@ class ZasedenostCest
     }
 
     /**
+     *  kreiramo zapis
      * 
+     * @param ApiTester $I
+     */
+    public function create(ApiTester $I)
+    {
+        $data      = [
+            'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
+        ];
+        $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
+    }
+
+    /**
+     * dogodek kreiramo, ko zapis zasedenost obstaja, ker je Dogodek lastnik relacije
+     * 
+     * @depends create
      * @param ApiTester $I
      */
     public function createDogodek(ApiTester $I)
@@ -76,7 +96,7 @@ class ZasedenostCest
             'termin'          => null,
             'ime'             => null,
             'predstava'       => null,
-            'zasedenost'      => null,
+            'zasedenost'      => $this->obj['id'],
             'vaja'            => $this->objVaja['id'],
             'gostovanje'      => null,
             'dogodekIzven'    => null,
@@ -87,52 +107,6 @@ class ZasedenostCest
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['status'], 1);
-    }
-
-    /**
-     *  kreiramo zapis
-     * 
-     * @depends createDogodek
-     * @param ApiTester $I
-     */
-    public function create(ApiTester $I)
-    {
-        $data      = [
-            'dogodek' => $this->objDogodek['id'],
-        ];
-        $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
-
-        // kreiramo še en zapis
-
-        $data = [
-            'dogodek' => $this->objDogodek['id'],
-        ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
-    }
-
-    /**
-     * preberi vse zapise od osebe
-     * 
-     * @depends create
-     * @param ApiTester $I
-     */
-    public function getListPoDogodku(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "?dogodek=" . $this->objDogodek['id'];
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        codecept_debug($resp);
-
-        $I->assertEquals(2, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-//        $I->assertEquals("xx", $list[0]['status']);      // $$ odvisno od sortiranja
     }
 
     /**
@@ -147,7 +121,7 @@ class ZasedenostCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
 //        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
     }
 
@@ -179,6 +153,18 @@ class ZasedenostCest
     /**
      * brisanje zapisa
      * 
+     * @depends create
+     */
+    public function deleteDogodek(ApiTester $I)
+    {
+        $I->successfullyDelete($this->dogodekUrl, $this->objDogodek['id']);
+        $I->failToGet($this->dogodekUrl, $this->objDogodek['id']);
+    }
+
+    /**
+     * brisanje zapisa
+     * 
+     * @depends deleteDogodek
      * @depends create
      */
     public function delete(ApiTester $I)
