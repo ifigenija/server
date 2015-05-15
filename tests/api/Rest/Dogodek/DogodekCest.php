@@ -22,10 +22,10 @@ use ApiTester;
  *      - predstava
  *      - zasedenost
  *      - vaja
- * - gostovanje
+ *      - gostovanje
  * - dogodekIzven
- * - prostor
- * - arhiv
+ *      - prostor
+ * - arhiv                      $$rb še ToMany relacije
  * - terminiStoritve
  * - prodajaPredstave
  *      - sezona
@@ -48,6 +48,7 @@ class DogodekCest
     private $prostorUrl      = '/rest/prostor';
     private $sezonaUrl       = '/rest/sezona';
     private $drzavaUrl       = '/rest/drzava';
+    private $arhivalijaUrl       = '/rest/arhivalija';
     private $obj;
     private $objPredstava;
     private $objZasedenost;
@@ -57,6 +58,7 @@ class DogodekCest
     private $objProstor;
     private $objSezona;
     private $objDrzava;
+    private $objArhivalija;
 
     public function _before(ApiTester $I)
     {
@@ -142,8 +144,7 @@ class DogodekCest
         $I->assertEquals($ent['dogodek'], null);
     }
 
-    
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
@@ -168,30 +169,47 @@ class DogodekCest
      */
     public function createGostovanje(ApiTester $I)
     {
-        $data      = [
+        $data                = [
             'vrsta'   => 'zz',
             'dogodek' => null,
             'drzava'  => $this->objDrzava['id'],
         ];
-        $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $this->objGostovanje = $ent                 = $I->successfullyCreate($this->gostovanjeUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['vrsta'], 'zz');
 
         // kreiramo še en zapis
-        $data      = [
+        $data = [
             'vrsta'   => 'aa',
             'dogodek' => null,
             'drzava'  => $this->objDrzava['id'],
         ];
-                $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $ent  = $I->successfullyCreate($this->gostovanjeUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['vrsta'], 'aa');
     }
 
-    
-    
+    /**
+     *  kreiramo zapis
+     * 
+     * @param ApiTester $I
+     */
+    public function createProstor(ApiTester $I)
+    {
+        $data             = [
+            'ime'          => 'zz',
+            'jePrizorisce' => true,
+            'kapaciteta'   => 1,
+            'opis'         => 'zz',
+        ];
+        $this->objProstor = $ent              = $I->successfullyCreate($this->prostorUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['ime'], 'zz');
+    }
+
     /**
      *  kreiramo zapis
      * 
@@ -213,7 +231,7 @@ class DogodekCest
             'vaja'            => $this->objVaja['id'],
             'gostovanje'      => null,
             'dogodekIzven'    => null,
-            'prostor'         => null,
+            'prostor'         => $this->objProstor['id'],
             'sezona'          => $this->objSezona['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
@@ -319,7 +337,7 @@ class DogodekCest
         $I->assertEquals($ent['vaja'], $this->objVaja['id']);
         $I->assertEquals($ent['gostovanje'], null);
         $I->assertEquals($ent['dogodekIzven'], null);
-        $I->assertEquals($ent['prostor'], null);
+        $I->assertEquals($ent['prostor'], $this->objProstor['id']);
         $I->assertEquals($ent['sezona'], $this->objSezona['id']);
 
         $I->assertTrue(isset($ent['arhiv']));
