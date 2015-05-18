@@ -181,30 +181,34 @@ class OptionCest
      */
     public function poskusiPrebratiNeobstojeco(ApiTester $I)
     {
+//               $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000403);
 
-        $odg = $I->failCallRpc($this->rpcUrl, 'getOptions', ["name" => "neobstojeca"]);
-        $I->assertNotEmpty($odg);
+        $resp = $I->failCallRpc($this->rpcUrl, 'getOptions', ["name" => "neobstojeca"]);
+        $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
+        $I->assertEquals(1000403, $resp['code'], "opcije ne obstajajo" );
     }
 
     //- setGlobalOption vrednosti ne more kreirati, ker je readonly
     public function poizkusiKreiratiOnemogocenoGlobalnoOpcijo(ApiTester $I)
     {
 
-        $odg = $I->failCallRpc($this->rpcUrl, 'setGlobalOption', ["name"  => "test3.readonly",
+        $resp = $I->failCallRpc($this->rpcUrl, 'setGlobalOption', ["name"  => "test3.readonly",
             "value" => "onemogočena globalna opcija"]);
-        $I->assertNotEmpty($odg);
+        $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
+        $I->assertEquals(1000402, $resp['code'], "opcija ni globalna" );
     }
 
 //- setUserOption vrednosti ne more kreirati, ker ni perUser
     public function poskusiKreiratiOnemogocenoUserOpcijo(ApiTester $I)
     {
 
-        $odg = $I->failCallRpc($this->rpcUrl, 'setUserOption', ["name"  => "test5.notperUser",
+        $resp= $I->failCallRpc($this->rpcUrl, 'setUserOption', ["name"  => "test5.notperUser",
             "value" => "onemogočena user opcija"]);
-        $I->assertNotEmpty($odg);
+        $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
+        $I->assertEquals(1000406, $resp['code'], "opcija ni user" );
     }
 
 }
