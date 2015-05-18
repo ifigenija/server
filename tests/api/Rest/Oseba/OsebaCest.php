@@ -49,13 +49,14 @@ use ApiTester;
 class OsebaCest
 {
 
-    private $restUrl   = '/rest/oseba';
-    private $trrUrl    = '/rest/trr';
-    private $naslUrl   = '/rest/postninaslov';
-    private $telUrl    = '/rest/telefonska';
-    private $drzavaUrl = '/rest/drzava';
-    private $popaUrl   = '/rest/popa';
-    private $userUrl   = '/rest/user';
+    private $restUrl         = '/rest/oseba';
+    private $relationPopaUrl = '/rest/user/popa/';
+    private $trrUrl          = '/rest/trr';
+    private $naslUrl         = '/rest/postninaslov';
+    private $telUrl          = '/rest/telefonska';
+    private $drzavaUrl       = '/rest/drzava';
+    private $popaUrl         = '/rest/popa';
+    private $userUrl         = '/rest/user';
     private $id;
     private $obj;
     private $objpostni;
@@ -125,14 +126,14 @@ class OsebaCest
         $I->assertEquals('ZZ12', $popa['sifra']);
     }
 
-        /**
+    /**
      *  napolnimo vsaj en zapis
      * 
      * @param ApiTester $I
      */
     public function createUserja(ApiTester $I)
     {
-        $data      = [
+        $data          = [
             'email'              => 'test2@ifigenija.si',
             'name'               => 'Testni uporabnik za Cest testiranje',
             'password'           => 'zzzzzzzzzzzzzzzzzzz',
@@ -141,13 +142,11 @@ class OsebaCest
             'defaultRoute'       => 'zz',
             'defaultRouteParams' => 'zz',
         ];
-        $this->objUser = $user      = $I->successfullyCreate($this->userUrl, $data);
+        $this->objUser = $user          = $I->successfullyCreate($this->userUrl, $data);
         $I->assertEquals('test2@ifigenija.si', $user['email']);
         $I->assertNotEmpty($user['id']);
     }
 
-    
-    
     /**
      *  napolnimo vsaj en zapis
      * 
@@ -427,6 +426,20 @@ class OsebaCest
         $I->assertNotEmpty($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);
         $I->assertEquals("aa", $list[0]['opombe']);
+    }
+
+    /**
+     * kreiramo relacijo
+     * @depends create
+     * @depends createPopa
+     * 
+     * @param ApiTester $I
+     */
+    public function UstvariRelacijoSPopa(ApiTester $I)
+    {
+        // $$ še ne deluje, v testu
+        $resp = $I->successfullyCreate($this->restUrl.$this->obj['id']."/popa/".$this->objPopa['id']);
+        codecept_debug($resp);
     }
 
     /**

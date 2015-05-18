@@ -125,8 +125,8 @@ return [
         "assertion_map"     => [
             "Oseba-write" => "chck-oseba"
         ],
-        'guest_role'    => 'anonymous',
-        'role_provider' => [
+        'guest_role'        => 'anonymous',
+        'role_provider'     => [
             'ZfcRbac\Role\ObjectRepositoryRoleProvider' => [
                 'object_manager'     => 'doctrine.entitymanager.orm_default',
                 'class_name'         => 'Aaa\Entity\Role',
