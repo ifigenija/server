@@ -11,17 +11,20 @@ use ApiTester;
 /**
  * Description of ZaposlitevCest
  *
- * metode, ki jo podpira API
- * - create
- * - getlist
- * - update
- * - get - kontrola vseh polj te entitete
- * - delete
- * validate metodo za entiteto
+ *      metode, ki jo podpira API
+ *      - create
+ *      - getlist
+ *      - update
+ *      - get - kontrola vseh polj te entitete
+ *      - delete
+ *      validate metodo za entiteto - je ni
  * relacije z drugimi entitetami
- * - oseba
- * - alternacije 
- * getlist različne variante relacij
+ *      - oseba
+ * - alternacije $$ 2M
+ *      getlist različne variante relacij
+ *      - vse
+ *      - oseba
+ * 
  * @author rado
  */
 class ZaposlitevCest
@@ -142,7 +145,7 @@ class ZaposlitevCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
+    public function getListVse(ApiTester $I)
     {
         $listUrl = $this->restUrl . "/vse";
         codecept_debug($listUrl);

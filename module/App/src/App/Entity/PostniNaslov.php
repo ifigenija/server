@@ -32,9 +32,7 @@ class PostniNaslov
     /**
      * Lastnik postnega naslova če gre za klienta 
      * 
-     * @ORM\ManyToOne(targetEntity="App\Entity\Popa")
-     * @ORM\JoinColumn(name="klient_id", referencedColumnName="id")
-     * 
+     * @ORM\ManyToOne(targetEntity="App\Entity\Popa",inversedBy="naslovi")
      * @Max\I18n(label="Poslovni partner",  description="Poslovni partner, ki je lastnik naslova  ")
      * @Max\Ui(type="hidden")
      * @var \App\Entity\Popa
@@ -44,10 +42,9 @@ class PostniNaslov
     /**
      * Lastnik poštnega naslova če gre ze osebo 
      * 
-     * @var App\Entity\Oseba
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="naslovi")
-     * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\Ui(type="hidden")
+     * @var \App\Entity\Oseba
      */
     protected $oseba;
 
@@ -64,6 +61,7 @@ class PostniNaslov
     /**
      * @ORM\Column(length=50, nullable=true)
      * @Max\I18n(label="Dodatni naziv", description="Dodatni naziv naslova")
+     * @var string
      */
     private $nazivDva;
 
@@ -71,9 +69,8 @@ class PostniNaslov
      * Ulica naslovnika
      *
      * @ORM\Column(length=50, nullable=true)
-     * @var string
-     *
      * @Max\I18n(label="Ulica",  description="Ulica naslova")
+     * @var string
      */
     protected $ulica;
 
@@ -91,9 +88,9 @@ class PostniNaslov
      *  poštna številka
      *
      * @ORM\Column(length=50, nullable=true)
-     *
      * @Max\I18n(label="Pošta", description="Poštna številka")
      * @Max\Ui(group="posta")
+     * @var string
      */
     protected $posta;
 
@@ -102,9 +99,9 @@ class PostniNaslov
      *  naziv pošte
      *
      * @ORM\Column(length=50, nullable=true)
-     *
      * @Max\I18n(label="Naziv pošte", description="Naziv pošte")
      * @Max\Ui(group="posta")
+     * @var string
      */
     protected $postaNaziv;
 
@@ -112,21 +109,19 @@ class PostniNaslov
      * Pokrajina
      *
      * @ORM\Column(length=50, nullable=true)
-     * @var string
-     *
      * @Max\I18n(label="Pokrajina",  description="Pokrajina v kateri je ta naslov")
+     * @var string
      */
     protected $pokrajina;
 
     /**
      * Država naslova
      *
-     * @var string
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
      * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id")
-     *
      * @Max\I18n(label="Država", description="Država")
+     * @var \App\Entity\Drzava
      */
     protected $drzava;
 
@@ -146,10 +141,9 @@ class PostniNaslov
      *  (npr. za poslovnega partnerja, ki lahko ima več naslovov)
      *
      * @ORM\Column(type="boolean", nullable=true)
-     * @var boolean
-     *
-     * @Max\Ui(type="boolcheckbox")
      * @Max\I18n(label="Privzeti naslov", description="A je to privzeti naslov za poslovnega partnerja")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
      */
     protected $privzeti = false;
 
@@ -225,25 +219,13 @@ class PostniNaslov
         return $this->privzeti;
     }
 
-    public function setJeeu($jeeu)
-    {
-        $this->jeeu = $jeeu;
-        return $this;
-    }
-
-    public function setPrivzeti($privzeti)
-    {
-        $this->privzeti = $privzeti;
-        return $this;
-    }
-
     public function setId($id)
     {
         $this->id = $id;
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa = null)
+    public function setPopa(\App\Entity\Popa $popa)
     {
         $this->popa = $popa;
         return $this;
@@ -297,9 +279,21 @@ class PostniNaslov
         return $this;
     }
 
-    public function setDrzava($drzava)
+    public function setDrzava(\App\Entity\Drzava $drzava)
     {
         $this->drzava = $drzava;
+        return $this;
+    }
+
+    public function setJeeu($jeeu)
+    {
+        $this->jeeu = $jeeu;
+        return $this;
+    }
+
+    public function setPrivzeti($privzeti)
+    {
+        $this->privzeti = $privzeti;
         return $this;
     }
 

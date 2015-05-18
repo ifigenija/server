@@ -6,18 +6,19 @@ entityClass: App\Entity\PostniNaslov
 forms:
     default: 
         elements:
+#            - id
+            - popa
+            - oseba
             - naziv
             - nazivDva
             - ulica
-            - ulicaDva 
+            - ulicaDva
             - posta
             - postaNaziv
             - pokrajina
-            - jeeu      
-            - privzeti   
-            - oseba    
-            - popa
             - drzava
+            - jeeu = true
+            - privzeti = false
 lists:
     default: 
         filter:

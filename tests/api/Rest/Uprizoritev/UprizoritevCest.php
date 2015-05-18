@@ -11,7 +11,7 @@ use ApiTester;
 /**
  * Description of UprizoritevCest
  * 
- * metode, ki jo podpira API
+ *      metode, ki jo podpira API
  *      - create
  *      - getlist
  *      - update
@@ -20,16 +20,16 @@ use ApiTester;
  *      validate metodo za entiteto - je ni
  * relacije z drugimi entitetami
  *      - besedilo
- * - koprodukcije     
- * - vloge            
- * - arhiv            
- * - rekviziti        
- * - vaje             
- * - predstave        
- * - gostujoce        
- * - zvrstUprizoritve 
- * - zvrstSurs        
- * getlist različne variante relacij
+ * - koprodukcije  $$ 2M     
+ * - vloge         $$ 2M   
+ * - arhiv         $$ 2M   
+ * - rekviziti     $$ 2M   
+ * - vaje          $$ 2M   
+ * - predstave     $$ 2M   
+ * - gostujoce     $$ 2M   
+ *      - zvrstUprizoritve 
+ *      - zvrstSurs        
+ *      getlist različne variante relacij
  *      - vse
  *      - besedilo
  *
@@ -38,10 +38,14 @@ use ApiTester;
 class UprizoritevCest
 {
 
-    private $restUrl     = '/rest/uprizoritev';
-    private $besediloUrl = '/rest/besedilo';
+    private $restUrl             = '/rest/uprizoritev';
+    private $besediloUrl         = '/rest/besedilo';
+    private $zvrstUprizoritveUrl = '/rest/zvrstuprizoritve';
+    private $zvrstSursUrl        = '/rest/zvrstsurs';
     private $obj;
     private $objBesedilo;
+    private $objZvrstUprizoritve;
+    private $objZvrstSurs;
 
     public function _before(ApiTester $I)
     {
@@ -78,6 +82,39 @@ class UprizoritevCest
     }
 
     /**
+     *  napolnimo vsaj en zapis
+     * 
+     * @param ApiTester $I
+     */
+    public function createZvrstUprizoritve(ApiTester $I)
+    {
+        $data                      = [
+            'ime'  => 'zz',
+            'opis' => 'zz',
+        ];
+        $this->objZvrstUprizoritve = $ent                       = $I->successfullyCreate($this->zvrstUprizoritveUrl, $data);
+        $I->assertEquals($ent['ime'], 'zz');
+        $I->assertNotEmpty($ent['id']);
+    }
+
+        /**
+     *  napolnimo vsaj en zapis
+     * 
+     * @param ApiTester $I
+     */
+    public function createZvrstSurs(ApiTester $I)
+    {
+        $data      = [
+            'ime'   => 'zz',
+            'naziv' => 'zz',
+        ];
+        $this->objZvrstSurs = $ent       = $I->successfullyCreate($this->zvrstSursUrl, $data);
+        $I->assertEquals($ent['ime'], 'zz');
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    
+    /**
      *  kreiramo zapis
      * 
      * @depends createBesedilo
@@ -102,8 +139,8 @@ class UprizoritevCest
             'sloAvtor'         => true,
             'kratkiNaslov'     => 'zz',
             'besedilo'         => $this->objBesedilo['id'],
-            'zvrstUprizoritve' => null,
-            'zvrstSurs'        => null,
+            'zvrstUprizoritve' => $this->objZvrstUprizoritve['id'],
+            'zvrstSurs'        => $this->objZvrstSurs['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -216,8 +253,8 @@ class UprizoritevCest
         $I->assertEquals($ent['sloAvtor'], true);
         $I->assertEquals($ent['kratkiNaslov'], 'zz');
         $I->assertEquals($ent['besedilo'], $this->objBesedilo['id']);
-        $I->assertEquals($ent['zvrstUprizoritve'], null);
-        $I->assertEquals($ent['zvrstSurs'], null);
+        $I->assertEquals($ent['zvrstUprizoritve'], $this->objZvrstUprizoritve['id']);
+        $I->assertEquals($ent['zvrstSurs'], $this->objZvrstSurs['id']);
 
         $I->assertTrue(isset($ent['koprodukcije']));
         $I->assertTrue(isset($ent['funkcije']));

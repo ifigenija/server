@@ -10,7 +10,8 @@ use ApiTester;
 
 /**
  * Description of ProdukcijskaHisaCest
- * metode, ki jo podpira API
+ * 
+ *      metode, ki jo podpira API
  *      - create
  *      - getlist
  *      - update
@@ -18,10 +19,11 @@ use ApiTester;
  *      - delete
  *      validate metodo za entiteto - je ni
  * relacije z drugimi entitetami
- * -koprodukcije
+ * -koprodukcije $$ 2M
  *      -popa
- *  getlist različne variante relacij
- *
+ *       getlist različne variante relacij
+ *      - popa
+ *      - vse
  * @author rado
  */
 class ProdukcijskaHisaCest
@@ -98,11 +100,12 @@ class ProdukcijskaHisaCest
     {
         $data      = [
             'status' => 'zz',
-            'popa'   => $this->objPopa,
+            'popa'   => $this->objPopa['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['status'], 'zz');
+
     }
 
     /**
@@ -136,7 +139,7 @@ class ProdukcijskaHisaCest
 
         $I->assertNotEmpty($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertEquals("zz", $list[0]['status']); 
+        $I->assertEquals("zz", $list[0]['status']);
     }
 
     /**

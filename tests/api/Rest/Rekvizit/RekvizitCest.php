@@ -11,15 +11,18 @@ use ApiTester;
 /**
  * Description of RekvizitCest
  *
- * metode, ki jo podpira API
+ *      metode, ki jo podpira API
  *      - create
  *      - getlist
  *      - update
  *      - get - kontrola vseh polj te entitete
  *      - delete
- *  validate metodo za entiteto -> je prazna
+ *      validate metodo za entiteto -> je prazna
  * relacije z drugimi entitetami
- *  - rekviziterstvo
+ *  - rekviziterstvo $$ 2M 
+ *      getlist različne variante relacij
+ *      - vse
+ *      - default
  * 
  * @author rado
  */
@@ -52,6 +55,15 @@ class RekvizitCest
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['ime'], 'zz');
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data = [
+            'ime'   => 'aa',
+            'vrsta' => 'aa',
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals($ent['ime'], 'aa');
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -98,6 +110,41 @@ class RekvizitCest
 
         $I->assertEquals($ent['ime'], 'xx');
         $I->assertEquals($ent['vrsta'], 'zz');
+    }
+
+    /**
+     * preberi vse zapise od uprizoritve
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListDefault(ApiTester $I)
+    {
+        $listUrl = $this->restUrl;
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+        codecept_debug($resp);
+
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        $I->assertEquals("aa", $list[0]['ime']);      //  odvisno od sortiranja
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListVse(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "/vse";
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['ime']);      //  odvisno od sortiranja
     }
 
     /**

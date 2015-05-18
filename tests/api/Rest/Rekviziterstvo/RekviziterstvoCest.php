@@ -22,6 +22,8 @@ use ApiTester;
  *      - rekvizit
  *      - uprizoritev
  *      getlist različne variante relacij - bomo na drug način reševali $$ rb
+ *      - vse
+ *      - uprizoritev
  * 
  * @author rado
  */
@@ -153,7 +155,7 @@ class RekviziterstvoCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
+    public function getListVse(ApiTester $I)
     {
         $listUrl = $this->restUrl . "/vse";
         codecept_debug($listUrl);
@@ -165,6 +167,26 @@ class RekviziterstvoCest
         $I->assertEquals("aa", $list[0]['opisPostavitve']);      //glede na sort
     }
 
+        /**
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoUprizoritvi(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "?uprizoritev=" . $this->objUprizoritev['id'];
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+        codecept_debug($resp);
+
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        $I->assertEquals("aa", $list[0]['opisPostavitve']);      //glede na sort
+    }
+
+    
+    
     /**
      * spremenim zapis
      * 

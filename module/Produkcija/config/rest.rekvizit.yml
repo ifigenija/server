@@ -11,5 +11,8 @@ forms:
 #            - rekviziterstvo
 lists:
     default: 
+        filter:
         hydrator:
             - exclude: []
+    vse: 
+        filter:

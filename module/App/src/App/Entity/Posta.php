@@ -50,6 +50,11 @@ class Posta
      */
     protected $naziv;
 
+    public function validate($mode = 'update')
+    {
+        
+    }
+
     public function getId()
     {
         return $this->id;

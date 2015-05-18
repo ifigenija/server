@@ -11,17 +11,18 @@ use ApiTester;
 /**
  * Description of ProdukcijaDelitevCest
  * 
- * Polnjenje drugih entitet:
+ *      Polnjenje drugih entitet:
  *      - uprizoritev  
  *      - koproducent 
- * metode, ki jo podpira API
+ *      metode, ki jo podpira API
  *      - create
  *      - getlist
- * - update
- * - get - kontrola vseh polj te entitete
+ *      - update
+ *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto - je ni
- *      relacije z drugimi entitetami
+ * relacije z drugimi entitetami
+ * - alternacije $$ 2M     
  *      getlist različne variante relacij
  *      - vse
  *      - default
@@ -107,7 +108,7 @@ class ProdukcijaDelitevCest
     {
         $data                      = [
             'status' => 'zz',
-            'popa'   => $this->objPopa,
+            'popa'   => $this->objPopa['id'],
         ];
         $this->objProdukcijskaHisa = $ent                       = $I->successfullyCreate($this->produkcijskaHisaUrl, $data);
         $I->assertNotEmpty($ent['id']);

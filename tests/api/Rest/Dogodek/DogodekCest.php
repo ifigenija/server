@@ -11,28 +11,29 @@ use ApiTester;
 /**
  * Description of DogodekCest
  *
- * metode, ki jo podpira API
+ *      metode, ki jo podpira API
  *      - create
  *      - getlist
  *      - update
  *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto
+ * 
  * relacije z drugimi entitetami
  *      - predstava
  *      - zasedenost
  *      - vaja
  *      - gostovanje
- * - dogodekIzven
+ *      - dogodekIzven : narejeno pri dogodekIzvenCest
  *      - prostor
  * - arhiv                      $$rb še ToMany relacije
- * - terminiStoritve
- * - prodajaPredstave
+ * - terminiStoritve            $$ 2M
+ *      - prodajaPredstave           $$ zaenkrat ne delamo prodaje
  *      - sezona
  * 
- * getlist različne variante relacij
- * - vse
- * - sezona
+ *      getlist različne variante relacij
+ *      - vse
+ *      - sezona
  * 
  * @author rado
  */
@@ -286,7 +287,7 @@ class DogodekCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
+    public function getListVse(ApiTester $I)
     {
         $listUrl = $this->restUrl . "/vse";
         codecept_debug($listUrl);

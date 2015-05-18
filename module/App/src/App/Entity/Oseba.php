@@ -64,11 +64,6 @@ class Oseba
     private $priimek;
 
     /**
-     * 
-     */
-    private $pesvdonim;
-
-    /**
      * @ORM\Column(length=40, nullable=true)
      * @Max\I18n(label="Funkcija", description="Funkcija osebe ")
      * @var string
@@ -106,7 +101,7 @@ class Oseba
      * @Max\Ui(type="email",icon="fa fa-afna")
      * @var string
      */
-    protected $email = '';
+    protected $email ='';
 
     /**
      * @ORM\Column(nullable=true)
@@ -157,12 +152,14 @@ class Oseba
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="Država rojstva", description="Država rojstva osebe")   
+     * @var string
      */
     private $drzavaRojstva;
 
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="Kraj rojstva", description="Kraj rojstva osebe")   
+     * @var string
      */
     private $krajRojstva;
 
@@ -178,7 +175,7 @@ class Oseba
      * @ORM\OneToMany(targetEntity="App\Entity\Telefonska", mappedBy="oseba", orphanRemoval=true)
      * @Max\I18n(label="Telefonske številke", description="Telefonske številke osebe")   
      * @Max\Ui(type="tomany")
-     * @var array
+     * @var <Telefonske>
      */
     private $telefonske;
 
@@ -186,7 +183,7 @@ class Oseba
      * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="oseba", orphanRemoval=true)
      * @Max\I18n(label="Trr-ji", description="Transaksijski računi osebe")   
      * @Max\Ui(type="tomany")
-     * @var array
+     * @var <Trrji>
      */
     private $trrji;
 
@@ -194,7 +191,7 @@ class Oseba
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="oseba")
      * @Max\I18n(label="Alternacije", description="Alternacije osebe")   
      * @Max\Ui(type="tomany")
-     * @var array
+     * @var <Alternacije>
      */
     private $alternacije;
 
@@ -202,7 +199,7 @@ class Oseba
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="oseba")
      * @Max\I18n(label="Pogodbe", description="Pogodbe osebe")   
      * @Max\Ui(type="tomany")
-     * @var array
+     * @var <Pogodbe>
      */
     private $pogodbe;
 
@@ -210,7 +207,7 @@ class Oseba
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Zaposlitev", mappedBy="oseba")
      * @Max\I18n(label="Sodelovanja", description="Sodelovanja osebe")   
      * @Max\Ui(type="tomany")
-     * @var array
+     * @var <Sodelovanja>
      */
     private $sodelovanja;
 
@@ -233,6 +230,7 @@ class Oseba
     {
         return sprintf("%s %s %s", $this->ime, $this->srednjeIme, $this->priimek);
     }
+
     public function getId()
     {
         return $this->id;
@@ -256,11 +254,6 @@ class Oseba
     public function getPriimek()
     {
         return $this->priimek;
-    }
-
-    public function getPesvdonim()
-    {
-        return $this->pesvdonim;
     }
 
     public function getFunkcija()
@@ -388,12 +381,6 @@ class Oseba
         return $this;
     }
 
-    public function setPesvdonim($pesvdonim)
-    {
-        $this->pesvdonim = $pesvdonim;
-        return $this;
-    }
-
     public function setFunkcija($funkcija)
     {
         $this->funkcija = $funkcija;
@@ -507,6 +494,5 @@ class Oseba
         $this->sodelovanja = $sodelovanja;
         return $this;
     }
-
 
 }

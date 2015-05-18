@@ -88,7 +88,6 @@ class Pogodba
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="pogodbe")
-     * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
      * @Max\I18n(label="Klient",  description="Poslovni partner, s katerim je napravljena pogodba")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa

@@ -40,10 +40,10 @@ class Drzava
     /**
      * Trimestna iso koda drzave
      * @ORM\Column(unique=true, length=3, nullable=true)
-     * @var string
      * @Max\I18n(label="Trimestna koda",description="Trimestna ISO koda države")
      * @Max\Ui(type="sifra",class="sifra",icon="fa fa-flag", required=true)
-     *      */
+     * @var string
+     */
     protected $sifraDolg;
 
     /**
@@ -81,6 +81,10 @@ class Drzava
      */
     protected $opomba;
 
+     public function validate($mode = 'update')
+    {
+    }
+    
     public function getId()
     {
         return $this->id;

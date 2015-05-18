@@ -13,6 +13,13 @@ forms:
 lists:
     default: 
         filter:
+            elements:                 
+                - name: uprizoritev
+                  type: toone
+                  options:
+                      label: Uprizoritev
+                      targetEntity: Produkcija\Entity\Uprizoritev
+                      required: true
         hydrator:
             - exclude: []
     vse: 

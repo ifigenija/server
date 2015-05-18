@@ -5,11 +5,17 @@ namespace Rest\Drzava;
 use ApiTester;
 
 /**
- * - list 
- * - create
- * - update
- * - delete 
- * - read 
+ * metode, ki jo podpira API
+ *      - create
+ *      - getlist
+ *      - update
+ *      - get - kontrola vseh polj te entitete
+ *      - delete
+ *      validate metodo za entiteto - je ni
+ *      relacije z drugimi entitetami - nih ni
+ *      getlist različne variante relacij
+ *      - vse
+ *      - default
  * 
  */
 class DrzavaCest
@@ -37,34 +43,45 @@ class DrzavaCest
     public function getMeta(\ApiTester $I)
     {
         $controller = "drzava";
-        $view = "";
-        $expected = "";
+        $view       = "";
+        $expected   = "";
         $I->testFormMeta('drzava', '');
-        
     }
 
-    public function getList(ApiTester $I)
-    {
-        $list     = $I->successfullyGetList($this->restUrl, []);
-        $I->assertNotEmpty($list['data']);
-        $this->id = array_pop($list['data'])['id'];
-        codecept_debug($list);
-    }
-
+//    public function getList(ApiTester $I)
+//    {
+//        $list     = $I->successfullyGetList($this->restUrl, []);
+//        $I->assertNotEmpty($list['data']);
+//        $this->id = array_pop($list['data'])['id'];
+//        codecept_debug($list);
+//    }
     // tests
     public function create(ApiTester $I)
     {
         $data      = [
             'sifra'     => 'XX',
-            'sifraDolg' => 'xx',
+            'sifraDolg' => 'XX',
             'isoNum'    => 'xx',
             'isoNaziv'  => 'xx',
             'naziv'     => 'xx',
+            'opomba'    => 'xx',
         ];
-        $drz       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('xx', $data['sifraDolg']);
+        $this->obj = $drz       = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals('XX', $data['sifraDolg']);
         $I->assertNotEmpty($drz['id']);
-        $this->obj = $drz;
+
+        // kreiramo še en zapis
+        $data = [
+            'sifra'     => 'AA',
+            'sifraDolg' => 'AA',
+            'isoNum'    => 'aa',
+            'isoNaziv'  => 'aa',
+            'naziv'     => 'aa',
+            'opomba'    => 'aa',
+        ];
+        $drz  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals('AA', $data['sifraDolg']);
+        $I->assertNotEmpty($drz['id']);
     }
 
     /**
@@ -90,7 +107,44 @@ class DrzavaCest
     {
         $drz = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals('tralala', $drz['naziv']);
+        $I->assertEquals($drz['sifra'], 'XX');
+        $I->assertEquals($drz['sifraDolg'], 'XX');
+        $I->assertEquals($drz['isoNum'], 'xx');
+        $I->assertEquals($drz['isoNaziv'], 'xx');
+        $I->assertEquals($drz['naziv'], 'tralala');
+        $I->assertEquals($drz['opomba'], 'xx');
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListVse(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "/vse";
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(251, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['naziv']);      //glede na sort
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListDefault(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "?q=".$this->obj['isoNum'];
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertEquals("xx", $list[0]['opomba']);    
     }
 
     /**

@@ -5,14 +5,18 @@ namespace Rest\User;
 use ApiTester;
 
 /**
- * metode, ki jo podpira API
+ *      metode, ki jo podpira API
  *      -create
  *      -getlist
  *      -update
  *      -get - kontrola vseh polj te entitete
  *      -delete
- *  validate metodo za entiteto - zaenkrat ni veljavne validacije
- *  relacije z drugimi entitetami - zaenkrat jih ni
+ *      validate metodo za entiteto - zaenkrat ni veljavne validacije
+ *      relacije z drugimi entitetami - zaenkrat jih ni
+ *      getlist različne variante relacij
+ *      - vse
+ *      - default
+ * 
  */
 class AbonmaCest
 {
@@ -47,22 +51,18 @@ class AbonmaCest
         ];
         $this->obj = $abon      = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($abon['ime'], 'zz');
+
+        // kreiramo še en zapis
+        $data = [
+            'stPredstav' => 7,
+            'stKuponov'  => 8,
+            'ime'        => 'aa',
+            'opis'       => 'aa',
+            'kapaciteta' => 9,
+        ];
+        $abon = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals($abon['ime'], 'aa');
         $I->assertNotEmpty($abon['id']);
-    }
-
-    /**
-     * 
-     * @depends create
-     * @param ApiTester $I
-     */
-    public function getList(ApiTester $I)  
-    {
-        $resp = $I->successfullyGetList($this->restUrl, []);
-        $list = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $this->id = array_pop($list)['id'];
-        $I->assertNotEmpty($this->id);
     }
 
     /**
@@ -100,6 +100,38 @@ class AbonmaCest
 
     /**
      * @depends create
+     * @param ApiTester $I
+     */
+    public function getListVse(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "/vse";
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['ime']);      //glede na sort
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListDefault(ApiTester $I)
+    {
+        $listUrl = $this->restUrl;
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['ime']);      //glede na sort
+    }
+
+    /**
+     * @depends create
      */
     public function delete(ApiTester $I)
     {
@@ -129,5 +161,4 @@ class AbonmaCest
 //        // testiramo na enako številko napake kot je v validaciji
 //        $I->assertEquals(1000330, $resp[0]['code']);
 //    }
-
 }

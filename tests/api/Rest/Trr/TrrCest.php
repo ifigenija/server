@@ -114,7 +114,7 @@ class TrrCest
             'swift'    => 'ZZ123',
             'bic'      => 'ZZ123',
             'banka'    => 'ZZ123',
-//            'popa'     => null,   // $$ začasno izključimo, ker javlja napako
+//            'popa'     => null,   // $$ začasno izključimo, ker javlja napako zaradi hidden
             'oseba'    => $this->objOseba['id'],
         ];
         $this->obj = $trr       = $I->successfullyCreate($this->restUrl, $data);
@@ -128,7 +128,7 @@ class TrrCest
             'bic'      => 'WW123',
             'banka'    => 'WW123',
             'popa'     => $this->objPopa['id'],
-//            'oseba'    => null,   // $$ začasno izključimo , ker javlja napako
+//            'oseba'    => null,   // $$ začasno izključimo , ker javlja napako zaradi hidden
         ];
         $this->objTrr2 = $trr           = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($trr['id']);
@@ -219,7 +219,7 @@ class TrrCest
     }
 
     /**
-     * @depends create
+     * @depends update
      */
     public function read(ApiTester $I)
     {

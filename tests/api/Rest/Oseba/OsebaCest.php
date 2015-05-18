@@ -23,6 +23,28 @@ use ApiTester;
  * - brišem osebo in se morajo pčistiti poštni naslov, 
  *   trrji in telefonske številke, ker je orphan removal = true
  * - validacija
+ * 
+ * metode, ki jo podpira API
+ *       - create
+ *      - getlist
+ *       - update
+ *      - get - kontrola vseh polj te entitete
+ *       - delete
+ *      validate metodo za entiteto
+ * relacije z drugimi entitetami
+ *      - user
+ * - popa           $$ 2M 
+ * - naslovi        $$ 2M 
+ * - telefonske     $$ 2M 
+ * - trrji          $$ 2M 
+ * - alternacije    $$ 2M 
+ * - pogodbe        $$ 2M 
+ * - sodelovanja    $$ 2M 
+ *      getlist različne variante relacij
+ *      - vse
+ *      - default
+ * 
+ * 
  */
 class OsebaCest
 {
@@ -32,12 +54,16 @@ class OsebaCest
     private $naslUrl   = '/rest/postninaslov';
     private $telUrl    = '/rest/telefonska';
     private $drzavaUrl = '/rest/drzava';
+    private $popaUrl   = '/rest/popa';
+    private $userUrl   = '/rest/user';
     private $id;
     private $obj;
     private $objpostni;
     private $objtrr;
     private $objtel;
     private $objDrzava;
+    private $objPopa;
+    private $objUser;
     private $trr;
     private $postni;
     private $tel;
@@ -53,7 +79,75 @@ class OsebaCest
         
     }
 
+    /**
+     * najde državo
+     * 
+     * @param ApiTester $I
+     */
+    public function getListDrzava(ApiTester $I)
+    {
+        $resp            = $I->successfullyGetList($this->drzavaUrl, []);
+        $list            = $resp['data'];
+        $I->assertNotEmpty($list);
+        $this->objDrzava = $drzava          = array_pop($list);
+        $I->assertNotEmpty($drzava);
+    }
 
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function createPopa(ApiTester $I)
+    {
+        $data          = [
+            'sifra'     => 'ZZ12',
+            'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
+            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
+            'naziv'     => 'zz',
+            'naziv1'    => 'zz',
+            'panoga'    => 'zz',
+            'email'     => 'z@zzz.zz',
+            'url'       => 'zz',
+            'opomba'    => 'zz',
+            'drzava'    => $this->objDrzava['id'],
+            'idddv'     => 'zz',
+            'maticna'   => 'ZZ123',
+            'zavezanec' => 'Da',
+            'jeeu'      => 'Da',
+            'datZav'    => '2010-02-01T00:00:00+0100',
+            'datnZav'   => '2017-02-01T00:00:00+0100',
+            'zamejstvo' => FALSE,
+        ];
+        $this->objPopa = $popa          = $I->successfullyCreate($this->popaUrl, $data);
+
+//        codecept_debug($popa);
+        $I->assertNotEmpty($popa['id']);
+        $I->assertEquals('ZZ12', $popa['sifra']);
+    }
+
+        /**
+     *  napolnimo vsaj en zapis
+     * 
+     * @param ApiTester $I
+     */
+    public function createUserja(ApiTester $I)
+    {
+        $data      = [
+            'email'              => 'test2@ifigenija.si',
+            'name'               => 'Testni uporabnik za Cest testiranje',
+            'password'           => 'zzzzzzzzzzzzzzzzzzz',
+            'enabled'            => true,
+            'expires'            => '2017-02-01T00:00:00+0100',
+            'defaultRoute'       => 'zz',
+            'defaultRouteParams' => 'zz',
+        ];
+        $this->objUser = $user      = $I->successfullyCreate($this->userUrl, $data);
+        $I->assertEquals('test2@ifigenija.si', $user['email']);
+        $I->assertNotEmpty($user['id']);
+    }
+
+    
+    
     /**
      *  napolnimo vsaj en zapis
      * 
@@ -77,34 +171,59 @@ class OsebaCest
             'drzavljanstvo' => 'zz',
             'drzavaRojstva' => 'zz',
             'krajRojstva'   => 'zz',
-            'user'          => null,
+            'user'          => $this->objUser['id'],
         ];
 
         $this->obj = $oseba     = $I->successfullyCreate($this->restUrl, $data);
 
         $I->assertEquals('zz', $oseba['ime']);
         $I->assertNotEmpty($oseba['id']);
+
+        // kreiramo še en zapis
+        $data = [
+            'naziv'         => 'aa',
+            'ime'           => 'aa',
+            'priimek'       => 'aa',
+            'funkcija'      => 'aa',
+            'srednjeIme'    => 'aa',
+            'psevdonim'     => 'aa',
+            'email'         => 'a@aaa.aa',
+            'datumRojstva'  => '1975-28-03T04:30:00',
+            'emso'          => 'AA',
+            'davcna'        => 'AA123',
+            'spol'          => 'M',
+            'opombe'        => 'aa',
+            'drzavljanstvo' => 'aa',
+            'drzavaRojstva' => 'aa',
+            'krajRojstva'   => 'aa',
+            'user'          => null,
+        ];
+
+        $oseba = $I->successfullyCreate($this->restUrl, $data);
+
+        $I->assertEquals('aa', $oseba['ime']);
+        $I->assertNotEmpty($oseba['id']);
     }
 
-    /**
-     * @depends create
-     */
-    public function getList(ApiTester $I)
-    {
-        $resp = $I->successfullyGetList($this->restUrl, []);
-        $list = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $this->id = array_pop($list)['id'];
-        $I->assertNotEmpty($this->id);
-    }
+//    /**
+//     * @depends create
+//     */
+//    public function getList(ApiTester $I)
+//    {
+//        $resp = $I->successfullyGetList($this->restUrl, []);
+//        $list = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $this->id = array_pop($list)['id'];
+//        $I->assertNotEmpty($this->id);
+//    }
 
     /**
      * 
      * @depends create
      * @param ApiTester $I
      */
-    public function updateOseba(ApiTester $I)
+    public function update(ApiTester $I)
     {
         $oseba        = $this->obj;
         $oseba['ime'] = 'tralala';
@@ -167,7 +286,7 @@ class OsebaCest
         $data = [
             "oseba"    => $this->obj['id'],
             "stevilka" => "7777-122123",
-            "vrsta"    => "Mobilni", //$$ rb - to je začasno, dokler se ne popravijo form-> setData... nastavljanje filtrov iz configa (v .yml)
+            "vrsta"    => "mobilna", //$$ rb - to je začasno, dokler se ne popravijo form-> setData... nastavljanje filtrov iz configa (v .yml)
             "privzeta" => false,
         ];
 
@@ -234,11 +353,7 @@ class OsebaCest
      * Preberem osebo in preverim, če ima vse dodane trr-je,
      * telefonske številke in poštne naslove 
      * 
-     * @depends create
-     * @depends updateOseba
-     * @depends dodajDvaTrr
-     * @depends dodajTelefonskoStevilko
-     * @depends dodajPostniNaslov
+     * @depends update
      * @param ApiTester $I
      */
     public function read(ApiTester $I)
@@ -253,8 +368,8 @@ class OsebaCest
         $I->assertEquals('zz', $oseba['priimek']);
         $I->assertEquals('zz', $oseba['funkcija']);
         $I->assertEquals('zz', $oseba['srednjeIme']);
-        $I->assertEquals('zz', $oseba['psevdonim']);
-        $I->assertEquals('x@xxx.xx', $oseba['email']);
+        $I->assertEquals('zz', $oseba['psevdonim'], "psevdonim");
+        $I->assertEquals('x@xxx.xx', $oseba['email'], "email");
         $I->assertEquals('1973-28-03T04:30:00', $oseba['datumRojstva']);
         $I->assertEquals('ZZ', $oseba['emso'], "napačen emšo");
         $I->assertEquals('ZZ123', $oseba['davcna'], 'napačna davčna');
@@ -265,7 +380,7 @@ class OsebaCest
         $I->assertEquals('zz', $oseba['krajRojstva']);
 
         codecept_debug($oseba);
-        $I->assertEquals(null, $oseba['user']);
+        $I->assertEquals($this->objUser['id'], $oseba['user']);
         $I->assertTrue(isset($oseba['alternacije']));
         $I->assertTrue(isset($oseba['pogodbe']));
         $I->assertTrue(isset($oseba['sodelovanja']));
@@ -280,6 +395,38 @@ class OsebaCest
         $I->assertEquals(0, count($oseba['pogodbe']));
         $I->assertEquals(0, count($oseba['sodelovanja']));
         $I->assertEquals(0, count($oseba['popa']));
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListVse(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "/vse";
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['opombe']);      //glede na sort
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListDefault(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "?q=a";     // na nazivu je wildcard, išče a*
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['opombe']);
     }
 
     /**
@@ -301,15 +448,55 @@ class OsebaCest
     {
 //                  $this->expect($this->ime, "Ime je obvezen podatek", 1000301);
 //                  $this->expect($this->priimek, "Priimek je obvezen podatek", 1000302);
+
         $data = [
-            'ime'     => '',
-            'priimek' => 'xx',
+            'naziv'         => 'bb',
+            'ime'           => '',
+            'priimek'       => 'bb',
+            'funkcija'      => 'bb',
+            'srednjeIme'    => 'bb',
+            'psevdonim'     => 'bb',
+            'email'         => 'b@bbb.aa',
+            'datumRojstva'  => '1976-28-03T04:30:00',
+            'emso'          => 'BB',
+            'davcna'        => 'BB123',
+            'spol'          => 'M',
+            'opombe'        => 'bb',
+            'drzavljanstvo' => 'bb',
+            'drzavaRojstva' => 'bb',
+            'krajRojstva'   => 'bb',
+            'user'          => null,
         ];
+
         // test validacije - oseba mora imeti ime
         $resp = $I->failToCreate($this->restUrl, $data);
         $I->assertNotEmpty($resp);
         // testiramo na enako številko napake kot je v validaciji
         $I->assertEquals(1000301, $resp[0]['code']);
+
+
+        $data = [
+            'naziv'         => 'cc',
+            'ime'           => 'cc',
+            'priimek'       => '',
+            'funkcija'      => 'cc',
+            'srednjeIme'    => 'cc',
+            'psevdonim'     => 'cc',
+            'email'         => 'c@bbb.aa',
+            'datumRojstva'  => '1977-28-03T04:30:00',
+            'emso'          => 'CC',
+            'davcna'        => 'CC123',
+            'spol'          => 'M',
+            'opombe'        => 'cc',
+            'drzavljanstvo' => 'cc',
+            'drzavaRojstva' => 'cc',
+            'krajRojstva'   => 'cc',
+            'user'          => null,
+        ];
+        // test validacije - oseba mora imeti priimek
+        $resp = $I->failToCreate($this->restUrl, $data);
+        $I->assertNotEmpty($resp);
+        $I->assertEquals(1000302, $resp[0]['code']);
     }
 
 }

@@ -12,6 +12,22 @@ use ApiTester;
  *      -delete
  * -validate metodo za entiteto
  * -relacije z drugimi entitetami
+ * 
+ *      metode, ki jo podpira API
+ *      - create
+ *      - getlist
+ *      - update
+ *      - get - kontrola vseh polj te entitete
+ *      - delete
+ *  validate metodo za entiteto - zaradi nullable=false do validacije sploh ne pride
+ * relacije z drugimi entitetami
+ * - drzava     
+ * - osebe      $$ 2M    
+ * - naslovi    $$ 2M    
+ * - telefonske $$ 2M     
+ * - trrji      $$ 2M     
+ * - pogodbe    $$ 2M 
+ * getlist različne variante relacij
  */
 class PopaCest
 {
@@ -76,23 +92,46 @@ class PopaCest
 //        codecept_debug($popa);
         $I->assertNotEmpty($popa['id']);
         $I->assertEquals('ZZ12', $popa['sifra']);
+
+        // kreiramo še en zapis
+        $data = [
+            'sifra'     => 'AA12',
+            'tipkli'    => '4', // $$ rb ko bodo opcije porihtane
+            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
+            'naziv'     => 'aa',
+            'naziv1'    => 'aa',
+            'panoga'    => 'aa',
+            'email'     => 'a@zzz.zz',
+            'url'       => 'aa',
+            'opomba'    => 'aa',
+            'drzava'    => $this->objDrzava['id'],
+            'idddv'     => 'aa',
+            'maticna'   => 'AA123',
+            'zavezanec' => 'Da',
+            'jeeu'      => 'Da',
+            'datZav'    => '2011-02-01T00:00:00+0100',
+            'datnZav'   => '2018-02-01T00:00:00+0100',
+            'zamejstvo' => FALSE,
+        ];
+        $popa = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($popa['id']);
+        $I->assertEquals('AA12', $popa['sifra']);
     }
 
-    /**
-     * 
-     * @depends create
-     * @param ApiTester $I
-     */
-    public function getList(ApiTester $I)
-    {
-        $resp = $I->successfullyGetList($this->restUrl, []);
-        $list = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $this->id = array_pop($list)['id'];
-        $I->assertNotEmpty($this->id);
-//        codecept_debug($this);
-    }
+//    /**
+//     * 
+//     * @depends create
+//     * @param ApiTester $I
+//     */
+//    public function getList(ApiTester $I)
+//    {
+//        $resp = $I->successfullyGetList($this->restUrl, []);
+//        $list = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $this->id = array_pop($list)['id'];
+//        $I->assertNotEmpty($this->id);
+//    }
 
     /**
      * @depends create
@@ -140,6 +179,38 @@ class PopaCest
      * @depends create
      * @param ApiTester $I
      */
+    public function getListVse(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "/vse";
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['naziv']);      //glede na sort
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListDefault(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "?q=a";     // na nazivu je wildcard, išče *a*
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['naziv']);
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
     public function delete(ApiTester $I)
     {
         $popa = $I->successfullyDelete($this->restUrl, $this->obj['id']);
@@ -158,18 +229,16 @@ class PopaCest
 ////        $this->expect($this->naziv, "Naziv je obvezen podatek", 1000311);
 ////        $this->expect($this->drzava, "Država je obvezen podatek", 1000312);
 //        $data = [
-//            'sifra'     => '',
-//            'naziv'     => 'aa',
+//            'sifra'     => 'cc',
+//            'naziv'     => '',
 //            'drzava'    => $this->objDrzava['id'],
 ////            'drzava'    => NULL,
 //        ];
+//
 //        // test validacije - oseba mora imeti ime
 //        $resp = $I->failToCreate($this->restUrl, $data);
 //        $I->assertNotEmpty($resp);
 //        // testiramo na enako številko napake kot je v validaciji
-//        $I->assertEquals(1000310, $resp[0]['code']);
+//        $I->assertEquals(1000311, $resp[0]['code']);
 //    }
-
-    
-    
 }

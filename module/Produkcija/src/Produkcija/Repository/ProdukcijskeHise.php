@@ -23,10 +23,10 @@ class ProdukcijskeHise
 
     protected $sortOptions = [
         "default" => [
-            "id" => ["alias" => "p.id"]
+            "status" => ["alias" => "p.status"]
         ],
         "vse"     => [
-            "id" => ["alias" => "p.id"]
+            "status" => ["alias" => "p.status"]
         ]
     ];
 
@@ -57,11 +57,11 @@ class ProdukcijskeHise
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.id', ':id');
+            $naz = $e->like('p.status', ':status');
 
             $qb->andWhere($e->orX($naz));
 
-            $qb->setParameter('id', "{$options['q']}%", "string");
+            $qb->setParameter('status', "{$options['q']}%", "string");
         }
 
         return $qb;

@@ -5,22 +5,31 @@ entityClass: App\Entity\Oseba
 forms:
     default: 
         elements:    
+#            - id
+#            - popa
             - naziv
             - ime
             - priimek
             - funkcija
             - srednjeIme
             - psevdonim
+#            - naslovi
             - email
             - datumRojstva
-            - emso 
+            - emso
             - davcna
 #            - spol     # $$ rb v filter validator haystack trenutno narobe zloži Moški in Ženska namesto M in Z   
+            - spol
             - opombe
-            - drzavljanstvo  
-            - drzavaRojstva  
-            - krajRojstva     
-            - user    
+            - drzavljanstvo
+            - drzavaRojstva
+            - krajRojstva
+            - user
+#            - telefonske
+#            - trrji
+#            - alternacije
+#            - pogodbe
+#            - sodelovanja
         hydrator: 
             byValue: [trrji, naslovi, telefonske]
 lists:
@@ -31,7 +40,8 @@ lists:
         hydrator:
             byValue: [telefonske, naslovi]
             exclude: [trrji, datumRojstva, emso, davcna, drzavljanstvo, krajRojstva]
-            
+    vse:
+        filter:
 hydrator:      
 relation:
     default:

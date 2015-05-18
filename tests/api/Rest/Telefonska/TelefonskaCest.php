@@ -114,7 +114,7 @@ class TelefonskaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'vrsta'    => 'Mobilni', //$$ rb - popraviti opcije, kasneje M namesto mobilni
+            'vrsta'    => 'mobilna', //$$ rb - popraviti opcije, kasneje M namesto mobilni
             'stevilka' => '12-34',
             'privzeta' => true,
             'oseba'    => $this->objOseba['id'],
@@ -125,7 +125,7 @@ class TelefonskaCest
 
         // še en zapis
         $data = [
-            'vrsta'    => 'Mobilni', //$$ rb - popraviti opcije, kasneje M namesto mobilni
+            'vrsta'    => 'domaca', //$$ rb - popraviti opcije, kasneje M namesto mobilni
             'stevilka' => '567',
             'privzeta' => true,
             'popa'     => $this->objPopa['id'],
@@ -137,7 +137,7 @@ class TelefonskaCest
 
         // še en zapis
         $data = [
-            'vrsta'    => 'Mobilni', //$$ rb - popraviti opcije, kasneje M namesto mobilni
+            'vrsta'    => 'fiksna', //$$ rb - popraviti opcije, kasneje M namesto mobilni
             'stevilka' => '012',
             'privzeta' => true,
             'popa'     => $this->objPopa['id'],
@@ -209,24 +209,27 @@ class TelefonskaCest
      */
     public function update(ApiTester $I)
     {
-        $tel             = $this->obj;
-        $tel['stevilka'] = '772-222';
+        $ent             = $this->obj;
+        $ent['stevilka'] = '772-222';
+        codecept_debug($ent);
 
-        $tel = $I->successfullyUpdate($this->restUrl, $tel['id'], $tel);
-        $I->assertEquals($tel['stevilka'], '772-222');
+        
+        // $$ ne deluje, ker je popa hidden
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals($ent['stevilka'], '772-222');
     }
 
     /**
      * prebere telefonsko in preveri vsa polja
      * 
-     * @depends create
+     * @depends update
      * @param ApiTester $I
      */
-    public function readTelefonsko(ApiTester $I)
+    public function read(ApiTester $I)
     {
         $tel = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals($tel['vrsta'], 'Mobilni');
+        $I->assertEquals($tel['vrsta'], 'mobilna');
         $I->assertEquals($tel['stevilka'], '772-222');
         $I->assertEquals($tel['privzeta'], true);
         $I->assertEquals($tel['oseba'], $this->objOseba['id']);
@@ -252,7 +255,7 @@ class TelefonskaCest
     {
 
         $data = [
-            'vrsta'    => 'Mobilni', //$$ rb - popraviti opcije, kasneje M namesto mobilni
+            'vrsta'    => 'mobilna', //$$ rb - popraviti opcije, kasneje M namesto mobilni
             'stevilka' => '12-34',
             'privzeta' => true,
         ];

@@ -12,3 +12,5 @@ lists:
     default: 
         hydrator:
             - exclude: []
+    vse:
+        filter:

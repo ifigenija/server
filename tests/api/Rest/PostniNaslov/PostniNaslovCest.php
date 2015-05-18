@@ -5,23 +5,20 @@ namespace Rest\PostniNaslov;
 use ApiTester;
 
 /**
- * Priprava ostalih relacij, ki so pogoj za kreiranje
- *      - create oseba
- * - create popa
- *      - list država
- * akcije z entiteto PostniNaslov
- *      - create naslov osebe
- * - create naslov popa
- * 
- *      - list 
- *      - update
- *      - read, preveri vsa polja
- * validacija
- * - create naslov oseba+popa 
- * - create naslov prazen naziv
- * 
- *      - delete 
- * 
+ * metode, ki jo podpira API
+ *      - create
+ *      - getlist
+ * - update
+ * - get - kontrola vseh polj te entitete
+ *      - delete
+ *      validate metodo za entiteto
+ *      relacije z drugimi entitetami
+ *      - oseba
+ *      - popa
+ *      - drzava
+ *      getlist različne variante relacij
+ *      - vse
+ *      - oseba/popa
  */
 class PostniNaslovCest
 {
@@ -119,8 +116,8 @@ class PostniNaslovCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'popa'       => null,
-            'oseba'      => $this->objOseba['id'],
+            'popa'       => null, //$$  ker je hidden, ne sme biti vključen
+            'oseba'      => $this->objOseba['id'],      //$$ zakajo to deluje, čeprav je hidden?
             'naziv'      => 'zz',
             'nazivDva'   => 'zz',
             'ulica'      => 'zz',
@@ -138,7 +135,8 @@ class PostniNaslovCest
 
         //kreiramo še enega
         $data    = [
-            'popa'       => $this->objPopa,
+            'popa'       => $this->objPopa['id'],
+//            'oseba'      => null,                 //$$ ker je hidden, mora biti izključeno
             'naziv'      => 'ww',
             'nazivDva'   => 'ww',
             'ulica'      => 'ww',
@@ -164,10 +162,10 @@ class PostniNaslovCest
     public function getListPoOsebi(ApiTester $I)
     {
         $listUrl = $this->restUrl . "?oseba=" . $this->objOseba['id'];
-        
-        $resp    = $I->successfullyGetList($listUrl, []);
+
+        $resp = $I->successfullyGetList($listUrl, []);
 //        codecept_debug($resp);
-        $list    = $resp['data'];
+        $list = $resp['data'];
 //        codecept_debug($list);
 
         $I->assertEquals(1, $resp['state']['totalRecords']);
@@ -185,10 +183,10 @@ class PostniNaslovCest
     {
         $listUrl = $this->restUrl . "?popa=" . $this->objPopa['id'];
         codecept_debug($listUrl);
-        
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-        
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
         $I->assertEquals(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
         $I->assertEquals("ww", $list[0]['ulica']);
@@ -198,13 +196,13 @@ class PostniNaslovCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)         
+    public function getListVse(ApiTester $I)
     {
         $listUrl = $this->restUrl . "/vse";
         codecept_debug($listUrl);
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
         $I->assertNotEmpty($list);
         $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertEquals("ww", $list[0]['naziv']);      //sortirano je po nazivu
@@ -216,35 +214,38 @@ class PostniNaslovCest
      */
     public function update(ApiTester $I)
     {
-        $pnaslov          = $this->obj;
-        $pnaslov['naziv'] = 'tralala';
+        $ent          = $this->obj;
+        $ent['naziv'] = 'tralala';
+        codecept_debug($ent);
+        
+        // $$ verjetno ne deluje, ker je $ent['popa'] enako null, in je hidden parameter
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $pnaslov = $I->successfullyUpdate($this->restUrl, $pnaslov['id'], $pnaslov);
-
-        $I->assertEquals('tralala', $pnaslov['naziv']);
+        $I->assertEquals('tralala', $ent['naziv']);
     }
 
     /**
      * Preberi zapis in preveri vsa polja
      * 
+     * @depends update
      * @param ApiTester $I
      */
     public function read(ApiTester $I)
     {
-        $pnaslov = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals(null, $pnaslov['popa']);
-        $I->assertEquals($this->objOseba['id'], $pnaslov['oseba']);
-        $I->assertEquals('tralala', $pnaslov['naziv']);
-        $I->assertEquals('zz', $pnaslov['nazivDva']);
-        $I->assertEquals('zz', $pnaslov['ulica']);
-        $I->assertEquals('zz', $pnaslov['ulicaDva']);
-        $I->assertEquals('zz', $pnaslov['posta']);
-        $I->assertEquals('zz', $pnaslov['postaNaziv']);
-        $I->assertEquals('zz', $pnaslov['pokrajina']);
-        $I->assertEquals($this->objDrzava['id'], $pnaslov['drzava'], "ni prava država");
-        $I->assertEquals(false, $pnaslov['jeeu']);
-        $I->assertEquals(true, $pnaslov['privzeti']);
+        $I->assertEquals($ent['popa'], null);
+        $I->assertEquals($ent['oseba'], $this->objOseba['id']);
+        $I->assertEquals($ent['naziv'], 'tralala');
+        $I->assertEquals($ent['nazivDva'], 'zz');
+        $I->assertEquals($ent['ulica'], 'zz');
+        $I->assertEquals($ent['ulicaDva'], 'zz');
+        $I->assertEquals($ent['posta'], 'zz');
+        $I->assertEquals($ent['postaNaziv'], 'zz');
+        $I->assertEquals($ent['pokrajina'], 'zz');
+        $I->assertEquals($ent['drzava'], $this->objDrzava['id']);
+        $I->assertEquals($ent['jeeu'], FALSE);
+        $I->assertEquals($ent['privzeti'], true);
     }
 
     /**

@@ -11,7 +11,7 @@ use ApiTester;
 /**
  * Description of ZvrstUprizoritveCest
  *
- * metode, ki jo podpira API
+ *      metode, ki jo podpira API
  *      - create
  *      - getlist
  *      - update
@@ -19,6 +19,9 @@ use ApiTester;
  *      - delete
  *      validate metodo za entiteto -je prazna
  *      relacije z drugimi entitetami - je ni
+ *      getlist različne variante relacij
+ *      - vse
+ *      - default
  * 
  * @author rado
  */
@@ -52,21 +55,15 @@ class ZvrstUprizoritveCest
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['ime'], 'zz');
         $I->assertNotEmpty($ent['id']);
-    }
 
-    /**
-     * 
-     * @depends create
-     * @param ApiTester $I
-     */
-    public function getList(ApiTester $I)
-    {
-        $resp = $I->successfullyGetList($this->restUrl, []);
-        $list = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $this->id = array_pop($list)['id'];
-        $I->assertNotEmpty($this->id);
+        // kreiramo še en zapis
+        $data = [
+            'ime'  => 'aa',
+            'opis' => 'aa',
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals($ent['ime'], 'aa');
+        $I->assertNotEmpty($ent['id']);
     }
 
     /**
@@ -97,6 +94,38 @@ class ZvrstUprizoritveCest
 
         $I->assertEquals($ent['ime'], 'xx');
         $I->assertEquals($ent['opis'], 'zz');
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListVse(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "/vse";
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['ime']);      //glede na sort
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListDefault(ApiTester $I)
+    {
+        $listUrl = $this->restUrl;
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['ime']);      //glede na sort
     }
 
     /**

@@ -8,24 +8,31 @@ entityClass: App\Entity\Drzava
 forms:
     default: 
         elements:
-            - sifra            
-            - sifDolg                               
+#            - id
+            - sifra
+            - sifraDolg
             - isoNum
             - isoNaziv
             - naziv
             - opomba
-        hydrator: 
-            
 lists:
-    default:   
+    default: 
+        hydrator:
+            - exclude: []
+    vse:
         filter:
-            elements:
-                - name: isoNum
-                  type: text 
-                - name: q
-                  type: text 
-hydrator:
-#    exclude: 
-#        - opomba
-#    virtual:
-#        - tralala
+#
+#
+#lists:
+#    default:   
+#        filter:
+#            elements:
+#                - name: isoNum
+#                  type: text 
+#                - name: q
+#                  type: text 
+#hydrator:
+##    exclude: 
+##        - opomba
+##    virtual:
+##        - tralala

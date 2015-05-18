@@ -23,8 +23,39 @@ class ZvrstiUprizoritve
 
     protected $sortOptions = [
         "default" => [
-            "ime" => ["alias" => "ime"]
-        ]
+            "ime" => ["alias" => "p.ime"]
+        ],
+        "vse" => [
+            "ime" => ["alias" => "p.ime"]
+        ],
     ];
 
+    public function getPaginator(array $options, $name = "default")
+    {
+        switch ($name) {
+            case "default":
+            case "vse":
+                $qb = $this->getVseQb($options);
+                $this->getSort($name, $qb);
+                return new DoctrinePaginator(new Paginator($qb));
+        }
+    }
+
+    public function getVseQb($options)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $e  = $qb->expr();
+        if (!empty($options['q'])) {
+
+            $naz = $e->like('p.ime', ':ime');
+
+            $qb->andWhere($e->orX($naz));
+
+            $qb->setParameter('ime', "{$options['q']}%", "string");
+        }
+
+        return $qb;
+    }
+
+    
 }

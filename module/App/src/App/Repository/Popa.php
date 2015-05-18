@@ -6,7 +6,9 @@
 
 namespace App\Repository;
 
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use DoctrineModule\Paginator\Adapter\Selectable;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
 
@@ -21,17 +23,19 @@ class Popa
 
     protected $sortOptions = [
         "default" => [
-            "sifra" => ["alias" => "p.sifra"]
+            "sifra" => ["alias" => "p.sifra"],
+        ],
+        "vse"     => [
+            "sifra" => ["alias" => "p.sifra"],
         ]
     ];
 
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
-
-            default:
-
-                $qb = $this->getDefaultQb($options);
+            case "default":
+            case "vse":
+                $qb = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
         }
@@ -44,7 +48,7 @@ class Popa
      * 
      * @param array $options
      */
-    public function getDefaultQb($options)
+    public function getVseQb($options)
     {
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
