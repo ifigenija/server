@@ -49,14 +49,27 @@ class PostniNaslovCest
      */
     public function createOseba(ApiTester $I)
     {
-        $data           = [
-            'naziv'       => 'zz',
-            'ime'         => 'zz',
-            'priimek'     => 'zz',
-            'email'       => 'x@xxx.xx',
-            'krajRojstva' => 'zz',
+        $data = [
+            'naziv'         => 'zz',
+            'ime'           => 'zz',
+            'priimek'       => 'zz',
+            'funkcija'      => 'zz',
+            'srednjeIme'    => 'zz',
+            'psevdonim'     => 'zz',
+            'email'         => 'x@xxx.xx',
+            'datumRojstva'  => '1973-28-03T04:30:00',
+            'emso'          => 'ZZ',
+            'davcna'        => 'ZZ123',
+            'spol'          => 'M',
+            'opombe'        => 'zz',
+            'drzavljanstvo' => 'zz',
+            'drzavaRojstva' => 'zz',
+            'krajRojstva'   => 'zz',
+            'user'          => null,
         ];
+
         $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
+
         $I->assertEquals('zz', $oseba['ime']);
         $I->assertNotEmpty($oseba['id']);
     }
@@ -116,8 +129,8 @@ class PostniNaslovCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'popa'       => null, //$$  ker je hidden, ne sme biti vključen
-            'oseba'      => $this->objOseba['id'],      //$$ zakajo to deluje, čeprav je hidden?
+//            'popa'       => null, //$$  ker je hidden, ne sme biti vključen
+            'oseba'      => $this->objOseba['id'], //$$ zakajo to deluje, čeprav je hidden?
             'naziv'      => 'zz',
             'nazivDva'   => 'zz',
             'ulica'      => 'zz',
@@ -126,7 +139,7 @@ class PostniNaslovCest
             'postaNaziv' => 'zz',
             'pokrajina'  => 'zz',
             'drzava'     => $this->objDrzava['id'],
-            'jeeu'       => FALSE,
+            'jeeu'       => false,
             'privzeti'   => true,
         ];
         $this->obj = $pnaslov   = $I->successfullyCreate($this->restUrl, $data);
@@ -217,7 +230,7 @@ class PostniNaslovCest
         $ent          = $this->obj;
         $ent['naziv'] = 'tralala';
         codecept_debug($ent);
-        
+
         // $$ verjetno ne deluje, ker je $ent['popa'] enako null, in je hidden parameter
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 

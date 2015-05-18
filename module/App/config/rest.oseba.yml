@@ -19,7 +19,6 @@ forms:
             - emso
             - davcna
 #            - spol     # $$ rb v filter validator haystack trenutno narobe zloži Moški in Ženska namesto M in Z   
-            - spol
             - opombe
             - drzavljanstvo
             - drzavaRojstva

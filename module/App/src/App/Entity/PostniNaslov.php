@@ -34,7 +34,7 @@ class PostniNaslov
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa",inversedBy="naslovi")
      * @Max\I18n(label="Poslovni partner",  description="Poslovni partner, ki je lastnik naslova  ")
-     * @Max\Ui(type="hidden")
+     * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Popa
      */
     protected $popa;
@@ -43,7 +43,7 @@ class PostniNaslov
      * Lastnik poštnega naslova če gre ze osebo 
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="naslovi")
-     * @Max\Ui(type="hidden")
+     * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Oseba
      */
     protected $oseba;

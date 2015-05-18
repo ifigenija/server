@@ -17,8 +17,8 @@ forms:
             - postaNaziv
             - pokrajina
             - drzava
-            - jeeu = true
-            - privzeti = false
+            - jeeu
+            - privzeti
 lists:
     default: 
         filter:
