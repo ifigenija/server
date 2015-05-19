@@ -132,6 +132,41 @@ class ApiHelper
     }
 
     /**
+     * Get rest metoda po ID-ju objekta in relacije po ID 
+     * pričakuje uspeh 
+     * 
+     * @param string $url
+     * @param string $id1
+     * @param string $ent
+     * @param string $id2
+     * @return array
+     */
+    public function successfullyGetRelation($url, $id1, $ent, $id2)
+    {
+        $I = $this->getModule('REST');
+        
+        // sestavimo geturl, glede na to, če sta id1 in id2 prazna
+        $geturl=$url;
+        if (!empty($id1)) {
+            $geturl=$geturl.'/' . $id1 ; 
+        }
+        $geturl=$geturl."/".$ent;
+        if (!empty($id2)) {
+            $geturl=$geturl.'/' . $id2 ; 
+        }
+        codecept_debug($geturl);
+        
+        $I->sendGET($geturl);
+        $I->seeResponseCodeIs('200');
+        // $$ začasno izključimo
+        $I->seeResponseIsJson();
+        if (!empty($id2)) {
+                $I->seeResponseContainsJson(['id' => $id2]);
+         }
+        return $I->grabDataFromResponseByJsonPath('$')[0];
+    }
+
+    /**
      * PUT rest metoda na url + id in data jot json body
      * pričakovan uspeh 
      * 

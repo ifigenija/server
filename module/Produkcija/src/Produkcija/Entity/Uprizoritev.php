@@ -86,6 +86,7 @@ class Uprizoritev
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Trajanje", description="Trajanje uprizoritve")
+     * @Max\Ui(type="integer")
      * @var integer
      */
     private $trajanje;

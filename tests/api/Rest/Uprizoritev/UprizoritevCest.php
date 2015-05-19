@@ -172,6 +172,32 @@ class UprizoritevCest
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['opis'], 'aa');
+        
+        // kreiram še en zapis brez trajanja
+        $data = [
+            'faza'             => 'bb',
+            'naslov'           => 'bb',
+            'podnaslov'        => 'bb',
+            'delovniNaslov'    => 'bb',
+            'datumPremiere'    => '2010-02-01T00:00:00+0100',
+            'stOdmorov'        => 3,
+            'avtor'            => null,
+            'gostujoca'        => true,
+            'trajanje'         => null,             //$$ rb popravi form element integer, da bo dovoljen empty
+            'opis'             => 'b',
+            'arhIdent'         => 'b',
+            'arhOpomba'        => 'b',
+            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
+            'sloAvtor'         => true,
+            'kratkiNaslov'     => 'bb',
+            'besedilo'         => $this->objBesedilo['id'],
+            'zvrstUprizoritve' => null,
+            'zvrstSurs'        => null,
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['opis'], 'b');
     }
 
     /**
