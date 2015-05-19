@@ -6,7 +6,7 @@
 /node_modules/
 autoload_classmap.php
 ***/acceptance.suite.yml
-/tests/_output/
+/tests/_output/*
 ***/api.suite.yml
 .DS_Store
 /data/

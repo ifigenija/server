@@ -121,6 +121,7 @@ class PostniNaslov
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
      * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id")
      * @Max\I18n(label="Država", description="Država")
+     * @Max\Ui(type="toone")
      * @var \App\Entity\Drzava
      */
     protected $drzava;

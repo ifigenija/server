@@ -13,7 +13,8 @@ return [
             'Zend\Session\SessionManager' => 'App\Factory\SessionFactory'
         ],
         'invokables' => [
-            'options.service' => '\App\Service\OptionsService'
+            'options.service' => '\App\Service\OptionsService',
+            'entity.decorator.filter' => '\App\Filter\DecorateEntity',
         ]
     ],
     'controllers'     => [
@@ -33,11 +34,12 @@ return [
             'Rest\options' => 'App\Controller\OptionsRestController',
             'Rpc\app'      => '\App\Controller\RpcController',
             'App\index'    => '\App\Controller\IndexController',
+            'Lookup'       => '\Max\Controller\LookupController',
         ]
     ],
     'router'          => [
         'routes' => [
-            'home' => [
+            'home'   => [
                 'type'    => 'Literal',
                 'options' => [
                     'route'    => '/',
@@ -47,7 +49,7 @@ return [
                     ]
                 ],
             ],
-            'rpc'  => [
+            'rpc'    => [
                 'type'          => 'Literal',
                 'options'       => [
                     'route'    => '/rpc',
@@ -68,7 +70,7 @@ return [
                     ]
                 ]
             ],
-            'rest' => [
+            'rest'   => [
                 'type'          => 'Segment',
                 'options'       => [
                     'route'       => '/rest/:controller[/:view][/:id]',
@@ -101,6 +103,19 @@ return [
                     ]
                 ]
             ],
+            'lookup' => [
+                'type'    => 'Segment',
+                'options' => [
+                    'route'       => '/lookup/:ent',
+                    'defaults'    => [
+                        'controller' => 'Lookup',
+                        'action'     => null
+                    ],
+                    'constraints' => [
+                        'ent' => '[A-Za-z-]+'
+                    ]
+                ],
+            ]
         ]
     ],
     'form_elements'   => [

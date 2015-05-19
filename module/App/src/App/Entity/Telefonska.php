@@ -57,7 +57,7 @@ class Telefonska
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="telefonske")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
-     * @Max\Ui(type="hidden")
+     * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Oseba
      *
      */
@@ -69,7 +69,7 @@ class Telefonska
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="telefonske")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
      * @Max\I18n(label="Klient",  description="Poslovni partner, ki je ima to telefosnko številko")
-     * @Max\Ui(type="hidden")
+     * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Popa
      */
     protected $popa;
