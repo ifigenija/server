@@ -33,7 +33,7 @@ use ApiTester;
  *      validate metodo za entiteto
  * relacije z drugimi entitetami
  *      - user
- * - popa           $$ 2M 
+ *      - popa           
  *          . update 
  *          . get (id, list)
  *          . delete   
@@ -484,9 +484,12 @@ class OsebaCest
         // GET   http://ifigenija.local:8080/rest/oseba/00090000-555b-0689-36e7-f9a8471d5932/popa?XDEBUG_SESSION_START=netbeans-xdebug
         // get list
         $resp = $I->successfullyGetRelation($this->restUrl, $this->objOseba2['id'], "popa", "");
+        $I->assertEquals(2, count($resp));
 
         // get po popa id  
         $resp = $I->successfullyGetRelation($this->restUrl, $this->objOseba2['id'], "popa", $this->objPopa1['id']);
+        $I->assertEquals(1, count($resp));
+
     }
 
     /**

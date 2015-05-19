@@ -37,3 +37,26 @@ lists:
             - exclude: []
     vse:
         filter:
+hydrator:      
+relation:
+    default:
+        osebe:
+            enabled: true
+            hydrator:
+                exclude: []
+        naslovi:
+            enabled: true
+            hydrator:
+                exclude: []
+        telefonske:
+            enabled: true
+            hydrator:
+                exclude: []
+        trrji:
+            enabled: true
+            hydrator:
+                exclude: []
+        pogodbe:
+            enabled: true
+            hydrator:
+                exclude: []

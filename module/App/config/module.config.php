@@ -13,7 +13,7 @@ return [
             'Zend\Session\SessionManager' => 'App\Factory\SessionFactory'
         ],
         'invokables' => [
-            'options.service' => '\App\Service\OptionsService',
+            'options.service'         => '\App\Service\OptionsService',
             'entity.decorator.filter' => '\App\Filter\DecorateEntity',
         ]
     ],
@@ -27,6 +27,7 @@ return [
             'Rest\trr'          => 'Max\Factory\RestControllerFactory',
             'Rest\telefonska'   => 'Max\Factory\RestControllerFactory',
             'Rest\popa'         => 'Max\Factory\RestControllerFactory',
+            'Relation\popa'     => 'Max\Factory\ToManyControllerFactory',
             'Rest\role'         => 'Max\Factory\RestControllerFactory',
             'Rest\user'         => 'Max\Factory\RestControllerFactory',
         ],

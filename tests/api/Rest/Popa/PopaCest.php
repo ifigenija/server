@@ -22,7 +22,10 @@ use ApiTester;
  *  validate metodo za entiteto - zaradi nullable=false do validacije sploh ne pride
  * relacije z drugimi entitetami
  * - drzava     
- * - osebe      $$ 2M    
+ * - osebe      $$ 2M
+ *  . update 
+ *  . get (id, list)
+ *  . delete   
  * - naslovi    $$ 2M    
  * - telefonske $$ 2M     
  * - trrji      $$ 2M     
@@ -34,9 +37,16 @@ class PopaCest
 
     private $restUrl   = '/rest/popa';
     private $drzavaUrl = '/rest/drzava';
+    private $osebaUrl  = '/rest/oseba';
+    private $pnaslovUrl  = '/rest/postninaslov';
     private $id        = '00000000-0000-0000-0000-000000000000';
     private $obj;
+    private $objPopa2;
     private $objDrzava;
+    private $objOseba1;
+    private $objOseba2;
+    private $objPnaslov1;
+    private $objPnaslov2;
 
     public function _before(ApiTester $I)
     {
@@ -60,6 +70,63 @@ class PopaCest
         $I->assertNotEmpty($list);
         $this->objDrzava = $drzava          = array_pop($list);
         $I->assertNotEmpty($drzava);
+    }
+
+    /**
+     *  napolnimo vsaj en zapis
+     * 
+     * @param ApiTester $I
+     */
+    public function createOsebo(ApiTester $I)
+    {
+        $data = [
+            'naziv'         => 'zz',
+            'ime'           => 'zz',
+            'priimek'       => 'zz',
+            'funkcija'      => 'zz',
+            'srednjeIme'    => 'zz',
+            'psevdonim'     => 'zz',
+            'email'         => 'x@xxx.xx',
+            'datumRojstva'  => '1973-28-03T04:30:00',
+            'emso'          => 'ZZ',
+            'davcna'        => 'ZZ123',
+            'spol'          => 'M',
+            'opombe'        => 'zz',
+            'drzavljanstvo' => 'zz',
+            'drzavaRojstva' => 'zz',
+            'krajRojstva'   => 'zz',
+            'user'          => null,
+        ];
+
+        $this->objOseba1 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
+
+        $I->assertEquals('zz', $oseba['ime']);
+        $I->assertNotEmpty($oseba['id']);
+
+        // kreiramo še en zapis
+        $data = [
+            'naziv'         => 'aa',
+            'ime'           => 'aa',
+            'priimek'       => 'aa',
+            'funkcija'      => 'aa',
+            'srednjeIme'    => 'aa',
+            'psevdonim'     => 'aa',
+            'email'         => 'a@aaa.aa',
+            'datumRojstva'  => '1975-28-03T04:30:00',
+            'emso'          => 'AA',
+            'davcna'        => 'AA123',
+            'spol'          => 'M',
+            'opombe'        => 'aa',
+            'drzavljanstvo' => 'aa',
+            'drzavaRojstva' => 'aa',
+            'krajRojstva'   => 'aa',
+            'user'          => null,
+        ];
+
+        $this->objOseba2 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
+
+        $I->assertEquals('aa', $oseba['ime']);
+        $I->assertNotEmpty($oseba['id']);
     }
 
     /**
@@ -118,20 +185,51 @@ class PopaCest
         $I->assertEquals('AA12', $popa['sifra']);
     }
 
-//    /**
-//     * 
-//     * @depends create
-//     * @param ApiTester $I
-//     */
-//    public function getList(ApiTester $I)
-//    {
-//        $resp = $I->successfullyGetList($this->restUrl, []);
-//        $list = $resp['data'];
-//
-//        $I->assertNotEmpty($list);
-//        $this->id = array_pop($list)['id'];
-//        $I->assertNotEmpty($this->id);
-//    }
+    /**
+     *  napolnimo vsaj en zapis
+     *
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createPostniNaslov(ApiTester $I)
+    {
+        $data    = [
+            'popa'       => $this->obj['id'],
+//            'oseba'      => null,                 //$$ ker je hidden, mora biti izključeno
+            'naziv'      => 'ww',
+            'nazivDva'   => 'ww',
+            'ulica'      => 'ww',
+            'ulicaDva'   => 'ww',
+            'posta'      => 'ww',
+            'postaNaziv' => 'ww',
+            'pokrajina'  => 'ww',
+            'drzava'     => $this->objDrzava['id'],
+            'jeeu'       => true,
+            'privzeti'   => true,
+        ];
+        $this->objPnaslov1=$pnaslov = $I->successfullyCreate($this->pnaslovUrl, $data);
+        $I->assertNotEmpty($pnaslov['id']);
+        $I->assertEquals('ww', $pnaslov['nazivDva']);
+
+        // kreiramo še en zapis
+        $data    = [
+            'popa'       => $this->obj['id'],
+//            'oseba'      => null,                 //$$ ker je hidden, mora biti izključeno
+            'naziv'      => 'bb',
+            'nazivDva'   => 'bb',
+            'ulica'      => 'bb',
+            'ulicaDva'   => 'bb',
+            'posta'      => 'bb',
+            'postaNaziv' => 'bb',
+            'pokrajina'  => 'bb',
+            'drzava'     => $this->objDrzava['id'],
+            'jeeu'       => true,
+            'privzeti'   => true,
+        ];
+        $this->objPnaslov2=$pnaslov = $I->successfullyCreate($this->pnaslovUrl, $data);
+        $I->assertNotEmpty($pnaslov['id']);
+        $I->assertEquals('bb', $pnaslov['nazivDva']);
+    }
 
     /**
      * @depends create
@@ -207,6 +305,73 @@ class PopaCest
         $I->assertEquals("aa", $list[0]['naziv']);
     }
 
+    /**
+     * kreiramo relacijo
+     * @depends create
+     * @depends createOsebo
+     * 
+     * @param ApiTester $I
+     */
+    public function ustvariRelacijoZOsebo(ApiTester $I)
+    {
+        $resp = $I->successfullyUpdate($this->restUrl, $this->obj['id'] . "/osebe/" . $this->objOseba1['id'], []);
+//        codecept_debug($resp);
+
+        // ustvarimo še eno relacijo 
+        $resp = $I->successfullyUpdate($this->restUrl, $this->obj['id'] . "/osebe/" . $this->objOseba2['id'], []);
+//        codecept_debug($resp);
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends ustvariRelacijoZOsebo
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZOsebami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj['id'], "osebe", "");
+//        codecept_debug($resp);
+        $I->assertEquals(2, count($resp));
+        
+        // get po oseba id  
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj['id'], "osebe", $this->objOseba1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * brisanje relacij
+     * @depends ustvariRelacijoZOsebo
+     * 
+     * @param ApiTester $I
+     */
+    public function deleteRelacijoZOsebo(ApiTester $I)
+    {
+        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->obj['id'], "osebe", $this->objOseba1['id']);
+
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj['id'], "osebe", $this->objOseba1['id']);
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createPostniNaslov
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZNaslovi(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj['id'], "naslovi", "");
+//        codecept_debug($resp);
+        $I->assertEquals(2, count($resp));
+        
+        // get po oseba id  
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj['id'], "naslovi", $this->objPnaslov1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    
     /**
      * @depends create
      * @param ApiTester $I
