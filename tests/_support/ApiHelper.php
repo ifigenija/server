@@ -144,25 +144,24 @@ class ApiHelper
     public function successfullyGetRelation($url, $id1, $ent, $id2)
     {
         $I = $this->getModule('REST');
-        
+
         // sestavimo geturl, glede na to, če sta id1 in id2 prazna
-        $geturl=$url;
+        $geturl = $url;
         if (!empty($id1)) {
-            $geturl=$geturl.'/' . $id1 ; 
+            $geturl = $geturl . '/' . $id1;
         }
-        $geturl=$geturl."/".$ent;
+        $geturl = $geturl . "/" . $ent;
         if (!empty($id2)) {
-            $geturl=$geturl.'/' . $id2 ; 
+            $geturl = $geturl . '/' . $id2;
         }
-        codecept_debug($geturl);
-        
+//        codecept_debug($geturl);
+
         $I->sendGET($geturl);
         $I->seeResponseCodeIs('200');
-        // $$ začasno izključimo
         $I->seeResponseIsJson();
         if (!empty($id2)) {
-                $I->seeResponseContainsJson(['id' => $id2]);
-         }
+            $I->seeResponseContainsJson(['id' => $id2]);
+        }
         return $I->grabDataFromResponseByJsonPath('$')[0];
     }
 
@@ -194,6 +193,33 @@ class ApiHelper
     {
         $I = $this->getModule('REST');
         $I->sendDELETE("$url/$id");
+        $I->seeResponseCodeIs('200');
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['success' => true]);
+    }
+
+    /**
+     * delete rest metoda relacije - pričakovan uspeh 
+     * @param string $url
+     * @param string $id1
+     * @param string $ent
+     * @param string $id2
+     */
+    public function successfullyDeleteRelation($url, $id1, $ent, $id2)
+    {
+        $I      = $this->getModule('REST');
+        // sestavimo geturl, glede na to, če sta id1 in id2 prazna
+        // v tej funkciji bi sicer oba morala biti neprazna
+        $geturl = $url;
+        if (!empty($id1)) {
+            $geturl = $geturl . '/' . $id1;
+        }
+        $geturl = $geturl . "/" . $ent;
+        if (!empty($id2)) {
+            $geturl = $geturl . '/' . $id2;
+        }
+
+        $I->sendDELETE($geturl);
         $I->seeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => true]);
@@ -248,6 +274,40 @@ class ApiHelper
         $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
+        return $I->grabDataFromResponseByJsonPath('$.errors');
+    }
+
+    /**
+     * Neuspešni get  po ID-ju objekta in relacije po ID 
+     * 
+     * @param string $url
+     * @param string $id1
+     * @param string $ent
+     * @param string $id2
+     * @return array
+     */
+    public function failToGetRelation($url, $id1, $ent, $id2)
+    {
+        codecept_debug($url);
+        $I = $this->getModule('REST');
+
+        // sestavimo geturl, glede na to, če sta id1 in id2 prazna
+        $geturl = $url;
+        if (!empty($id1)) {
+            $geturl = $geturl . '/' . $id1;
+        }
+        $geturl = $geturl . "/" . $ent;
+        if (!empty($id2)) {
+            $geturl = $geturl . '/' . $id2;
+        }
+
+        $I->sendGET($geturl);
+
+        $I->seeResponseCodeIs('200');
+        $I->seeResponseIsJson();
+        $resp = $I->grabDataFromJsonResponse();
+        codecept_debug($resp);
+        $I->assertEquals($resp, [], "Json prazen seznam");
         return $I->grabDataFromResponseByJsonPath('$.errors');
     }
 

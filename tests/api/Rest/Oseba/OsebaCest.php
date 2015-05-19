@@ -35,8 +35,8 @@ use ApiTester;
  *      - user
  * - popa           $$ 2M 
  *          . update 
- *  . get (id, list)
- *  . delete   
+ *          . get (id, list)
+ *          . delete   
  * - naslovi        $$ 2M 
  * - telefonske     $$ 2M 
  * - trrji          $$ 2M 
@@ -464,7 +464,7 @@ class OsebaCest
      */
     public function ustvariRelacijoSPopa(ApiTester $I)
     {
-// put       http://ifigenija.local:8080/rest/oseba/00090000-555a-d470-54e1-a0ac34f09cb7/popa/00080000-555a-d470-0ed7-2ef2d2de4d03?XDEBUG_SESSION_START=netbeans-xdebug
+        // put       http://ifigenija.local:8080/rest/oseba/00090000-555a-d470-54e1-a0ac34f09cb7/popa/00080000-555a-d470-0ed7-2ef2d2de4d03?XDEBUG_SESSION_START=netbeans-xdebug
         $resp = $I->successfullyUpdate($this->restUrl, $this->objOseba2['id'] . "/popa/" . $this->objPopa1['id'], []);
         codecept_debug($resp);
 
@@ -481,15 +481,27 @@ class OsebaCest
      */
     public function preberiRelacijeSPopa(ApiTester $I)
     {
-//        http://ifigenija.local:8080/rest/oseba/00090000-555b-0689-36e7-f9a8471d5932/popa?XDEBUG_SESSION_START=netbeans-xdebug
+        // GET   http://ifigenija.local:8080/rest/oseba/00090000-555b-0689-36e7-f9a8471d5932/popa?XDEBUG_SESSION_START=netbeans-xdebug
         // get list
         $resp = $I->successfullyGetRelation($this->restUrl, $this->objOseba2['id'], "popa", "");
-        codecept_debug($resp);
 
         // get po popa id  
-        // $$ rb zaenkrat še napaka
         $resp = $I->successfullyGetRelation($this->restUrl, $this->objOseba2['id'], "popa", $this->objPopa1['id']);
-        codecept_debug($resp);
+    }
+
+    /**
+     * brisanje relacij
+     * @depends ustvariRelacijoSPopa
+     * 
+     * @param ApiTester $I
+     */
+    public function deleteRelacijoSPopa(ApiTester $I)
+    {
+        // primer:
+        // DELETE   http://ifigenija.local:8080/rest/oseba/00090000-555b-31ed-d438-f3f46c26b59e/popa/00080000-555b-31ed-7683-d4cdd224d2b5?XDEBUG_SESSION_START=netbeans-xdebug
+        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->objOseba2['id'], "popa", $this->objPopa1['id']);
+
+        $resp = $I->failToGetRelation($this->restUrl, $this->objOseba2['id'], "popa", $this->objPopa1['id']);
     }
 
     /**
