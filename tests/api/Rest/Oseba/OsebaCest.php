@@ -34,6 +34,9 @@ use ApiTester;
  * relacije z drugimi entitetami
  *      - user
  * - popa           $$ 2M 
+ *          . update 
+ *  . get (id, list)
+ *  . delete   
  * - naslovi        $$ 2M 
  * - telefonske     $$ 2M 
  * - trrji          $$ 2M 
@@ -64,7 +67,8 @@ class OsebaCest
     private $objtrr;
     private $objtel;
     private $objDrzava;
-    private $objPopa;
+    private $objPopa1;
+    private $objPopa2;
     private $objUser;
     private $trr;
     private $postni;
@@ -101,7 +105,7 @@ class OsebaCest
      */
     public function createPopa(ApiTester $I)
     {
-        $data          = [
+        $data           = [
             'sifra'     => 'ZZ12',
             'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
             'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
@@ -120,11 +124,33 @@ class OsebaCest
             'datnZav'   => '2017-02-01T00:00:00+0100',
             'zamejstvo' => FALSE,
         ];
-        $this->objPopa = $popa          = $I->successfullyCreate($this->popaUrl, $data);
-
-//        codecept_debug($popa);
+        $this->objPopa1 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
         $I->assertNotEmpty($popa['id']);
         $I->assertEquals('ZZ12', $popa['sifra']);
+
+        //kreiramo še en zapis
+        $data           = [
+            'sifra'     => 'AA12',
+            'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
+            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
+            'naziv'     => 'aa',
+            'naziv1'    => 'aa',
+            'panoga'    => 'aa',
+            'email'     => 'a@zzz.zz',
+            'url'       => 'aa',
+            'opomba'    => 'aa',
+            'drzava'    => $this->objDrzava['id'],
+            'idddv'     => 'aa',
+            'maticna'   => 'AA123',
+            'zavezanec' => 'Da',
+            'jeeu'      => 'Da',
+            'datZav'    => '2011-02-01T00:00:00+0100',
+            'datnZav'   => '2012-02-01T00:00:00+0100',
+            'zamejstvo' => TRUE,
+        ];
+        $this->objPopa2 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
+        $I->assertNotEmpty($popa['id']);
+        $I->assertEquals('AA12', $popa['sifra']);
     }
 
     /**
@@ -439,7 +465,30 @@ class OsebaCest
     public function ustvariRelacijoSPopa(ApiTester $I)
     {
 // put       http://ifigenija.local:8080/rest/oseba/00090000-555a-d470-54e1-a0ac34f09cb7/popa/00080000-555a-d470-0ed7-2ef2d2de4d03?XDEBUG_SESSION_START=netbeans-xdebug
-        $resp = $I->successfullyUpdate($this->restUrl, $this->objOseba2['id'] . "/popa/" . $this->objPopa['id'], []);
+        $resp = $I->successfullyUpdate($this->restUrl, $this->objOseba2['id'] . "/popa/" . $this->objPopa1['id'], []);
+        codecept_debug($resp);
+
+        // ustvarimo še eno relacijo z 2. popa
+        $resp = $I->successfullyUpdate($this->restUrl, $this->objOseba2['id'] . "/popa/" . $this->objPopa2['id'], []);
+        codecept_debug($resp);
+    }
+
+    /**
+     * preberemo relacij
+     * @depends ustvariRelacijoSPopa
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSPopa(ApiTester $I)
+    {
+//        http://ifigenija.local:8080/rest/oseba/00090000-555b-0689-36e7-f9a8471d5932/popa?XDEBUG_SESSION_START=netbeans-xdebug
+        // get list
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objOseba2['id'], "popa", "");
+        codecept_debug($resp);
+
+        // get po popa id  
+        // $$ rb zaenkrat še napaka
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objOseba2['id'], "popa", $this->objPopa1['id']);
         codecept_debug($resp);
     }
 
