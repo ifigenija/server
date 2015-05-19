@@ -46,4 +46,6 @@ relation:
     default:
         popa:
             enabled: true
+            hydrator:
+                exclude: []
     

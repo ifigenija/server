@@ -59,6 +59,7 @@ class OsebaCest
     private $userUrl         = '/rest/user';
     private $id;
     private $obj;
+    private $objOseba2;
     private $objpostni;
     private $objtrr;
     private $objtel;
@@ -198,7 +199,7 @@ class OsebaCest
             'user'          => null,
         ];
 
-        $oseba = $I->successfullyCreate($this->restUrl, $data);
+        $this->objOseba2 = $oseba           = $I->successfullyCreate($this->restUrl, $data);
 
         $I->assertEquals('aa', $oseba['ime']);
         $I->assertNotEmpty($oseba['id']);
@@ -435,10 +436,10 @@ class OsebaCest
      * 
      * @param ApiTester $I
      */
-    public function UstvariRelacijoSPopa(ApiTester $I)
+    public function ustvariRelacijoSPopa(ApiTester $I)
     {
-        // $$ še ne deluje, v testu
-        $resp = $I->successfullyCreate($this->restUrl.$this->obj['id']."/popa/".$this->objPopa['id']);
+// put       http://ifigenija.local:8080/rest/oseba/00090000-555a-d470-54e1-a0ac34f09cb7/popa/00080000-555a-d470-0ed7-2ef2d2de4d03?XDEBUG_SESSION_START=netbeans-xdebug
+        $resp = $I->successfullyUpdate($this->restUrl, $this->objOseba2['id'] . "/popa/" . $this->objPopa['id'], []);
         codecept_debug($resp);
     }
 
