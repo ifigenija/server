@@ -5,11 +5,11 @@ namespace Rest\PostniNaslov;
 use ApiTester;
 
 /**
- * metode, ki jo podpira API
+ *      metode, ki jo podpira API
  *      - create
  *      - getlist
- * - update
- * - get - kontrola vseh polj te entitete
+ *      - update
+ *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto
  *      relacije z drugimi entitetami
@@ -129,8 +129,8 @@ class PostniNaslovCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'popa'       => null, //$$  ker je hidden, ne sme biti vključen
-            'oseba'      => $this->objOseba['id'], //$$ zakajo to deluje, čeprav je hidden?
+            'popa'       => null, 
+            'oseba'      => $this->objOseba['id'], 
             'naziv'      => 'zz',
             'nazivDva'   => 'zz',
             'ulica'      => 'zz',
@@ -149,7 +149,7 @@ class PostniNaslovCest
         //kreiramo še enega
         $data    = [
             'popa'       => $this->objPopa['id'],
-//            'oseba'      => null,                 //$$ ker je hidden, mora biti izključeno
+            'oseba'      => null,                 
             'naziv'      => 'ww',
             'nazivDva'   => 'ww',
             'ulica'      => 'ww',
@@ -231,7 +231,6 @@ class PostniNaslovCest
         $ent['naziv'] = 'tralala';
         codecept_debug($ent);
 
-        // $$ verjetno ne deluje, ker je $ent['popa'] enako null, in je hidden parameter
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
         $I->assertEquals('tralala', $ent['naziv']);
@@ -255,8 +254,9 @@ class PostniNaslovCest
         $I->assertEquals($ent['ulicaDva'], 'zz');
         $I->assertEquals($ent['posta'], 'zz');
         $I->assertEquals($ent['postaNaziv'], 'zz');
-        $I->assertEquals($ent['pokrajina'], 'zz');
-        $I->assertEquals($ent['drzava'], $this->objDrzava['id']);
+        $I->assertEquals($ent['pokrajina'], 'zz', "pokrajina");
+        codecept_debug($ent);
+        $I->assertEquals($ent['drzava']['id'], $this->objDrzava['id']);   // na državi je narejena hidracija
         $I->assertEquals($ent['jeeu'], FALSE);
         $I->assertEquals($ent['privzeti'], true);
     }

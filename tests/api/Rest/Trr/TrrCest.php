@@ -5,13 +5,13 @@ namespace Rest\Trr;
 use ApiTester;
 
 /**
- * metode, ki jo podpira API
- * - create
- * - getlist
- * - update
- * - get - kontrola vseh polj te entitete
- * - delete
- * validate metodo za entiteto
+ *      metode, ki jo podpira API
+ *      - create
+ *      - getlist
+ *      - update
+ *      - get - kontrola vseh polj te entitete
+ *      - delete
+ *      validate metodo za entiteto
  * relacije z drugimi entitetami
  * getlist različne variante relacij
  * 

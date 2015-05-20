@@ -114,7 +114,7 @@ class TelefonskaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'vrsta'    => 'mobilna', //$$ rb - popraviti opcije, kasneje M namesto mobilni
+//            'vrsta'    => 'mobilna', //$$ rb - popraviti opcije, kasneje M namesto mobilni
             'stevilka' => '12-34',
             'privzeta' => true,
             'oseba'    => $this->objOseba['id'],
@@ -125,7 +125,7 @@ class TelefonskaCest
 
         // še en zapis
         $data = [
-            'vrsta'    => 'domaca', //$$ rb - popraviti opcije, kasneje M namesto mobilni
+//            'vrsta'    => 'domaca', //$$ rb - popraviti opcije, kasneje M namesto mobilni
             'stevilka' => '567',
             'privzeta' => true,
             'popa'     => $this->objPopa['id'],
