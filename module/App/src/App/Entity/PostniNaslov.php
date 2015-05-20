@@ -34,7 +34,7 @@ class PostniNaslov
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa",inversedBy="naslovi")
      * @Max\I18n(label="Poslovni partner",  description="Poslovni partner, ki je lastnik naslova  ")
-     * @Max\Ui(type="hiddenid")
+     * @Max\Ui(type="toone")        //$$ začasno zaradi testiranja zamenjamo hiddenid s toone
      * @var \App\Entity\Popa
      */
     protected $popa;

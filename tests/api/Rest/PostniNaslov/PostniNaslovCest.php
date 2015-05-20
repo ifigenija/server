@@ -129,7 +129,7 @@ class PostniNaslovCest
     public function create(ApiTester $I)
     {
         $data      = [
-//            'popa'       => null, //$$  ker je hidden, ne sme biti vključen
+            'popa'       => null, //$$  ker je hidden, ne sme biti vključen
             'oseba'      => $this->objOseba['id'], //$$ zakajo to deluje, čeprav je hidden?
             'naziv'      => 'zz',
             'nazivDva'   => 'zz',

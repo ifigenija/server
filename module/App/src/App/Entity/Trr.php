@@ -55,7 +55,7 @@ class Trr
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="trrji")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
      * @Max\I18n(label="Klient",  description="Poslovni partner, ki je lastnik transakcijskega računa")
-     * @Max\Ui(type="hidden")
+     * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Popa
      */
     private $popa;
@@ -64,7 +64,7 @@ class Trr
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="trrji")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\I18n(label="Oseba",  description="Oseba, ki je lastnica transakcijskega računa")
-     * @Max\Ui(type="hidden")
+     * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Oseba
      */
     private $oseba;
