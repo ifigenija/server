@@ -1,0 +1,19 @@
+## YAML Template.
+---
+-
+    name: uprizoritev.faza
+    type: array
+    public: false
+    readOnly: true
+    description: Faza uprizoritve
+    defaultValue: 
+        osnutek:
+           label: Dolgoročni plan
+        plan:
+           label: Predprodukcija 
+        produkcija:
+           label: Produkcija 
+        postprodukcija:
+           label: Postprodukcija
+        arhiv:
+           label: Arhivirana

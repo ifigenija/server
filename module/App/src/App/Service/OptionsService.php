@@ -87,6 +87,18 @@ class OptionsService
     }
 
     /**
+     * Vrne opcije pripravljene za uporabo v formi 
+     * val => label
+     * 
+     * @param type $name
+     */
+    public function getOptionValues($object)
+    {
+        return array_map(function($val) {
+            return $val['label'];
+        }, $this->getOptions($object));
+    }
+    /**
      * 
      * Nastavi uporabniško opcijo v OptionValue entiteti
      * 

@@ -27,6 +27,7 @@ class Uprizoritev
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      * @Max\I18n(label="Faza", description="Faza uprizoritve")
+     * @Max\Ui(type="select", opts="uprizoritev.faza")
      * @var string
      */
     private $faza;

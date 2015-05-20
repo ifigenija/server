@@ -6,5 +6,7 @@
     public: true
     description: 'Tabela statusa dogodkov'
     defaultValue: 
-        - { key: planiran, value: Dolgoročno }
-        - { key: planiran, value: Planiran }
+        osnutek:
+           label: Dolgoročno
+        planiran: 
+           label: Planiran
