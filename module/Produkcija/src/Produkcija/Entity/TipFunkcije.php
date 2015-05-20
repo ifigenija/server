@@ -50,6 +50,7 @@ class TipFunkcije
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Maks. prekrivanj", description="Maksimalno število prekrivanj tipa funkcije")
+     * @Max\Ui(type="integer")
      * @var integer
      */
     private $maxPrekrivanj;
@@ -204,6 +205,5 @@ class TipFunkcije
         $this->funkcije = $funkcije;
         return $this;
     }
-
 
 }

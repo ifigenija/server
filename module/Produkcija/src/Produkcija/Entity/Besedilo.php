@@ -72,6 +72,7 @@ class Besedilo
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Moške vloge", description="Moške vloge")
+     * @Max\Ui(type="integer")
      * @var integer
      */
     private $moskeVloge;
@@ -79,6 +80,7 @@ class Besedilo
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Ženske vloge", description="Moške vloge")
+     * @Max\Ui(type="integer")
      * @var integer
      */
     private $zenskeVloge;

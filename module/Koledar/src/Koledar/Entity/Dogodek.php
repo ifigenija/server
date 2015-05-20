@@ -52,7 +52,8 @@ class Dogodek
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Status", description="Status dogodka")
-     * @var integer
+     * @Max\Ui(type="integer")
+     * @var integer     
      */
     private $status;
 

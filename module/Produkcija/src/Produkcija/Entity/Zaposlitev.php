@@ -48,6 +48,7 @@ class Zaposlitev
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Tip",  description="Tip zaposlitve")
+     * @Max\Ui(type="integer")
      * @var integer
      */
     private $tip;
@@ -55,6 +56,7 @@ class Zaposlitev
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Delovna obveza",  description="Delovna obveza zaposlitve")
+     * @Max\Ui(type="integer")
      * @var integer
      */
     private $delovnaObveza;
@@ -261,6 +263,5 @@ class Zaposlitev
         $this->oseba = $oseba;
         return $this;
     }
-
 
 }

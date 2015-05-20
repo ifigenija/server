@@ -29,8 +29,8 @@ class Vaja
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Zaporedna št.", description="Zaporedna številka vaje")
+     * @Max\Ui(type="integer")
      * @var integer
-     * 
      */
     private $zaporedna;
 

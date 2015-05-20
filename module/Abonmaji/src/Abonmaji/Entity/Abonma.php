@@ -28,6 +28,7 @@ class Abonma
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="št. predstav", description="število predstav abonmaja")
+     * @Max\Ui(type="integer")
      * @var integer
      */
     private $stPredstav;
@@ -35,6 +36,7 @@ class Abonma
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="št. kuponov", description="število kuponov abonmaja")
+     * @Max\Ui(type="integer")
      * @var integer
      */
     private $stKuponov;
@@ -56,6 +58,7 @@ class Abonma
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Kapaciteta", description="Kapaciteta abonmaja")
+     * @Max\Ui(type="integer")
      * @var integer
      */
     private $kapaciteta;

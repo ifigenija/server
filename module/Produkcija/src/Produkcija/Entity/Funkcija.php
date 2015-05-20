@@ -27,7 +27,8 @@ class Funkcija
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Področje", description="Področje funkcije")
-     * @var integer 
+     * @Max\Ui(type="integer")
+     * @var integer
      */
     private $podrocje;          //$$ rb - ali to rabimo oz. ali naredimo opcijo
 
@@ -57,6 +58,7 @@ class Funkcija
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Sort", description="Soort funkcije")
+     * @Max\Ui(type="integer")
      * @var integer
      */
     private $sort;
