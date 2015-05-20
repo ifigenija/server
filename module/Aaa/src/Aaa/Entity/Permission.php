@@ -81,6 +81,10 @@ class Permission
         $this->roles->removeElement($role);
     }
 
+     public function validate($mode = 'update')
+    {
+    }
+    
     function getId()
     {
         return $this->id;

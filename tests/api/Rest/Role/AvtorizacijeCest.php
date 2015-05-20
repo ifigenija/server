@@ -500,16 +500,5 @@ class AvtorizacijeCest
         $I->assertEquals($oseba['ime'], 'cirkocarko');
     }
 
-    /**
-     * Dostopi na many to many relacije
-     * 
-     * @todo    to be implemented   //$$ rb ko bodo view-i in manytomany
-     * @param ApiTester $I
-     */
-    public function dostopiNaManyToManyView(ApiTester $I)
-    {
-
-        $I->assertTrue(1 === 2, " še za narediti "); 
-    }
-
+   
 }

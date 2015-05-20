@@ -23,10 +23,17 @@ use ApiTester;
 class RoleCest
 {
 
-    private $restUrl = '/rest/role';
-    private $rpcUrl  = '/rpc/aaa/role';
+    private $restUrl       = '/rest/role';
+    private $userUrl       = '/rest/user';
+    private $permissionUrl = '/rest/permission';
+    private $rpcUrl        = '/rpc/aaa/role';
     private $id;
     private $obj;
+    private $objRole2;
+    private $objPermission1;
+    private $objPermission2;
+    private $objUser1;
+    private $objUser2;
     private $role;
     private $perm;
     private $sess;
@@ -58,24 +65,72 @@ class RoleCest
         $I->assertEquals('TEST4VLOGA', $role['name']);
         $I->assertEquals('Testna vloga za Cest testiranje', $role['description']);
         $I->assertNotEmpty($role['id']);
+
+        // kreiramo še en zapis
+        $data           = [
+            'name'        => 'TEST5VLOGA',
+            'description' => 'Testna vlogica za Cest testiranje',
+//            'builtIn'     => false,     //$$ rb NotEmpty validator ne dovoli false
+        ];
+        $this->objRole2 = $role           = $I->successfullyCreate($this->restUrl, $data);
+
+        $I->assertEquals('TEST5VLOGA', $role['name']);
+        $I->assertNotEmpty($role['id']);
     }
 
     /**
+     *  napolnimo vsaj en zapis
      * 
-     * @depends create
      * @param ApiTester $I
      */
-//    public function getList(ApiTester $I)  //$$ rb - zaenkrat javi napako pri getPaginator 
-//    {
-//        $resp = $I->successfullyGetList($this->restUrl, []);
-//        $list = $resp['data'];
-//
-//        $I->assertNotEmpty($list);
-//        $this->id = array_pop($list)['id'];
-//        $I->assertNotEmpty($this->id);
-////        codecept_debug($this);
-//    }
+    public function createUserja(ApiTester $I)
+    {
+        $data           = [
+            'email'              => 'test2@ifigenija.si',
+            'name'               => 'Testni uporabnik za Cest testiranje',
+            'password'           => 'zzzzzzzzzzzzzzzzzzz',
+            'enabled'            => true,
+            'expires'            => '2017-02-01T00:00:00+0100',
+            'defaultRoute'       => 'zz',
+            'defaultRouteParams' => 'zz',
+        ];
+        $this->objUser1 = $user           = $I->successfullyCreate($this->userUrl, $data);
+        $I->assertEquals('test2@ifigenija.si', $user['email']);
+        $I->assertNotEmpty($user['id']);
 
+        // kreiramo še en zapis
+        $data           = [
+            'email'              => 'test6@ifigenija.si',
+            'name'               => 'Testni uporabnik za Cest testiranje',
+            'password'           => 'asdfew',
+            'enabled'            => true,
+            'expires'            => '2018-02-01T00:00:00+0100',
+            'defaultRoute'       => 'aa',
+            'defaultRouteParams' => 'aa',
+        ];
+        $this->objUser2 = $user           = $I->successfullyCreate($this->userUrl, $data);
+        $I->assertEquals('test6@ifigenija.si', $user['email']);
+        $I->assertNotEmpty($user['id']);
+    }
+
+        /**
+     * @param ApiTester $I
+     */
+    public function getListPermission(ApiTester $I)
+    {
+        $resp            = $I->successfullyGetList($this->permissionUrl, []);
+        $list            = $resp['data'];
+        $I->assertNotEmpty($list);
+        
+        $this->objPermission1 = $drzava          = array_pop($list);
+        $I->assertNotEmpty($drzava);
+
+        $this->objPermission2 = $drzava          = array_pop($list);
+        $I->assertNotEmpty($drzava);
+    }
+
+    
+    
     /**
      * 
      * @depends create
@@ -204,6 +259,93 @@ class RoleCest
     {
         $role = $I->successfullyDelete($this->restUrl, $this->obj['id']);
         $I->failToGet($this->restUrl, $this->obj['id']);
+    }
+
+    /**
+     * kreiramo relacijo
+     * @depends create
+     * @depends getListPermission
+     * 
+     * @param ApiTester $I
+     */
+    public function ustvariRelacijoSPermissionom(ApiTester $I)
+    {
+        $resp = $I->successfullyUpdate($this->restUrl, $this->objRole2['id'] . "/permissions/" . $this->objPermission1['id'], []);
+
+        // ustvarimo še eno relacijo z 2. permissionom
+        $resp = $I->successfullyUpdate($this->restUrl, $this->objRole2['id'] . "/permissions/" . $this->objPermission2['id'], []);
+    }
+
+    /**
+     * preberemo relacij
+     * @depends ustvariRelacijoSPermissionom
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSPermissioni(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objRole2['id'], "permissions", "");
+        $I->assertEquals(2, count($resp));
+
+        // get po popa id  
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objRole2['id'], "permissions", $this->objPermission1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * brisanje relacij
+     * @depends ustvariRelacijoSPermissionom
+     * 
+     * @param ApiTester $I
+     */
+    public function deleteRelacijoSPermissioni(ApiTester $I)
+    {
+        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->objRole2['id'], "permissions", $this->objPermission1['id']);
+
+        $resp = $I->failToGetRelation($this->restUrl, $this->objRole2['id'], "permissions", $this->objPermission1['id']);
+    }
+    /**
+     * kreiramo relacijo
+     * @depends create
+     * @depends createUserja
+     * 
+     * @param ApiTester $I
+     */
+    public function ustvariRelacijoZUserjem(ApiTester $I)
+    {
+        $resp = $I->successfullyUpdate($this->restUrl, $this->objRole2['id'] . "/users/" . $this->objUser1['id'], []);
+
+        // ustvarimo še eno relacijo z 2. userjem
+        $resp = $I->successfullyUpdate($this->restUrl, $this->objRole2['id'] . "/users/" . $this->objUser2['id'], []);
+    }
+
+    /**
+     * preberemo relacij
+     * @depends ustvariRelacijoZUserjem
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZUserji(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objRole2['id'], "users", "");
+        $I->assertEquals(2, count($resp));
+
+        // get po popa id  
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objRole2['id'], "users", $this->objUser1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * brisanje relacij
+     * @depends ustvariRelacijoZUserjem
+     * 
+     * @param ApiTester $I
+     */
+    public function deleteRelacijoZUserjem(ApiTester $I)
+    {
+        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->objRole2['id'], "users", $this->objUser1['id']);
+
+        $resp = $I->failToGetRelation($this->restUrl, $this->objRole2['id'], "users", $this->objUser1['id']);
     }
 
 }

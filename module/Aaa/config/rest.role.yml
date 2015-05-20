@@ -22,3 +22,12 @@ lists:
 hydrator:
     exclude: 
         - builtIn
+relation:
+    default:
+        users:
+            enabled: true
+            hydrator:
+        permissions:
+            enabled: true
+            hydrator:
+                exclude: []

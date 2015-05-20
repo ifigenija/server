@@ -32,3 +32,6 @@ relation:
     default:
         roles:
             enabled: true
+            hydrator:
+                exclude: []
+

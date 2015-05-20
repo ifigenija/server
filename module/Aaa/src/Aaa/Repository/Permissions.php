@@ -15,6 +15,16 @@ use Max\Repository\AbstractMaxRepository;
 class Permissions
         extends AbstractMaxRepository
 {
+    /**
+     * default sort opcije
+     *
+     * @var array
+     */
+    protected $sortOptions = [
+        'default' => [
+            'name'  => ['alias' => 'u.name'],
+        ]
+    ];
 
 
     /**

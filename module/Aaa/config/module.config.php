@@ -9,7 +9,7 @@
 
 return [
     'service_manager' => [
-        'factories' => [
+        'factories'  => [
             'rbac_strategy'                             => '\Aaa\Factory\JsonStrategyFactory',
             'Zend\Authentication\AuthenticationService' => 'Aaa\Factory\AuthenticationServiceFactory',
             'Rbac\Rbac'                                 => 'Aaa\Factory\RbacFactory',
@@ -22,9 +22,12 @@ return [
     ],
     'controllers'     => [
         'factories'  => [
-            'Rest\User'       => 'Max\Factory\RestControllerFactory',
-            'Rest\Role'       => 'Max\Factory\RestControllerFactory',
-            'Rest\Permission' => 'Max\Factory\RestControllerFactory'
+            'Rest\User'           => 'Max\Factory\RestControllerFactory',
+            'Relation\User'       => 'Max\Factory\ToManyControllerFactory',
+            'Rest\Role'           => 'Max\Factory\RestControllerFactory',
+            'Relation\Role'       => 'Max\Factory\ToManyControllerFactory',
+            'Rest\Permission'     => 'Max\Factory\RestControllerFactory',
+            'Relation\Permission' => 'Max\Factory\ToManyControllerFactory',
         ],
         'invokables' => [
             'Rpc\aaa' => 'Aaa\Controller\RpcController',
