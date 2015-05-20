@@ -180,10 +180,10 @@ class UprizoritevCest
             'podnaslov'        => 'bb',
             'delovniNaslov'    => 'bb',
             'datumPremiere'    => '2010-02-01T00:00:00+0100',
-            'stOdmorov'        => 3,
+            'stOdmorov'        => null,     // testiramo notEmpty filter
             'avtor'            => null,
             'gostujoca'        => true,
-            'trajanje'         => null,             //$$ rb popravi form element integer, da bo dovoljen empty
+            'trajanje'         => null,     // testiramo notEmpty filter
             'opis'             => 'b',
             'arhIdent'         => 'b',
             'arhOpomba'        => 'b',

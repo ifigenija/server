@@ -63,6 +63,7 @@ class Uprizoritev
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Št. odmorov", description="Število odmorov uprizoritve")
+     * @Max\Ui(type="integer")
      * @var integer
      */
     private $stOdmorov;

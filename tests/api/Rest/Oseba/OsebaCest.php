@@ -37,7 +37,7 @@ use ApiTester;
  *          . update 
  *          . get (id, list)
  *          . delete   
- * - naslovi        $$ 2M 
+ *      - naslovi         2M 
  * - telefonske     $$ 2M 
  * - trrji          $$ 2M 
  * - alternacije    $$ 2M 
