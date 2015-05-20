@@ -87,10 +87,11 @@ class PostniNaslovCest
             'postaNaziv' => 'zz',
             'pokrajina'  => 'zz',
             'drzava'     => null,
-            'jeeu'       => false,
-            'privzeti'   => true,
+            'jeeu'       => 'GG'  ,
+            'privzeti'   => null,
         ];
         $this->obj = $pnaslov   = $I->successfullyCreate($this->restUrl, $data);
+        codecept_debug($pnaslov);
         $I->assertEquals('zz', $pnaslov['nazivDva']);
         $I->assertNotEmpty($pnaslov['id']);
     }

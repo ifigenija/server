@@ -130,7 +130,7 @@ class PostniNaslov
      * Je klient iz EU
      *  checkbox 
      *
-     * @ORM\Column(type="boolean", length=1, nullable=true)
+     * @ORM\Column(type="boolean")
      * @Max\I18n(label="Iz EU", description="Je klient iz EU")
      * @Max\Ui(type="boolcheckbox",group="Davčni podatki")
      * @var boolean

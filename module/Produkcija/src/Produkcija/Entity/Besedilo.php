@@ -20,7 +20,7 @@ class Besedilo
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
-     * @Max\I18n(label="Id", description="ID zvrsti uprizoritve")
+     * @Max\I18n(label="Id", description="")
      * @Max\Ui(type="id")
      * @var string
      */
@@ -63,7 +63,7 @@ class Besedilo
     private $naslovIzvirnika;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="Datum prejema", description="Datum prejema besedila")
      * @var string
      */
@@ -93,7 +93,7 @@ class Besedilo
     private $prevajalec;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="Povzetek vsebine", description="Povzetek vsebine besedila")
      * @var string
      */
