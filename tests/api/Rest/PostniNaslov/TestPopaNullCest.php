@@ -8,7 +8,7 @@ use ApiTester;
  * zaradi hjitrejšega testiranja
  * popa=null pri create
  */
-class PostniNaslovCest
+class TestPopaNullCest
 {
 
     private $restUrl   = '/rest/postninaslov';

@@ -18,32 +18,35 @@ use ApiTester;
  *      validate metodo za entiteto
  *      - brez popa in osebe
  *      - z popa in osebo
- * relacije z drugimi entitetami
- * - alternacije    $$ ko bo api za alternacije na razpolago
+ *      relacije z drugimi entitetami
+ *      - alternacije    O2M
  *      - oseba
  *      - popa    
- * - trr        $$ 
+ *      - trr         
  *      getlist različne variante relacij
  *      - vse
  *      - oseba, 
  *      - popa
-
  * 
  * @author rado
  */
 class PogodbaCest
 {
 
-    private $restUrl   = '/rest/pogodba';
-    private $popaUrl   = '/rest/popa';
-    private $drzavaUrl = '/rest/drzava';
-    private $osebaUrl  = '/rest/oseba';
-    private $trrUrl    = '/rest/trr';
+    private $restUrl        = '/rest/pogodba';
+    private $popaUrl        = '/rest/popa';
+    private $drzavaUrl      = '/rest/drzava';
+    private $osebaUrl       = '/rest/oseba';
+    private $trrUrl         = '/rest/trr';
+    private $alternacijaUrl = '/rest/alternacija';
     private $obj;
+    private $objPogodba2;
     private $objPopa;
     private $objDrzava;
     private $objOseba;
     private $objTrr;
+    private $objAlternacija1;
+    private $objAlternacija2;
 
     public function _before(ApiTester $I)
     {
@@ -177,7 +180,7 @@ class PogodbaCest
         $I->assertEquals($ent['sifra'], 'ZZ123');
 
         // kreiramo še en zapis
-        $data = [
+        $data              = [
             'sifra'             => 'WW4',
             'vrednostVaje'      => 33.33,
             'vrednostPredstave' => 44.44,
@@ -188,7 +191,7 @@ class PogodbaCest
             'popa'              => null,
             'trr'               => $this->objTrr['id'],
         ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $this->objPogodba2 = $ent               = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['sifra'], 'WW4');
@@ -209,6 +212,40 @@ class PogodbaCest
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['sifra'], 'A1');
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createAlternacijo(ApiTester $I)
+    {
+        $data                  = [
+            'zaposlen'     => true,
+            'funkcija'     => null,
+            'sodelovanje'  => null,
+            'oseba'        => null,
+            'koprodukcija' => null,
+            'pogodba'      => $this->objPogodba2['id'],
+        ];
+        $this->objAlternacija1 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['zaposlen'], true);
+
+        // kreiram še en zapis
+        $data                  = [
+            'zaposlen'     => true,
+            'funkcija'     => null,
+            'sodelovanje'  => null,
+            'oseba'        => null,
+            'koprodukcija' => null,
+            'pogodba'      => $this->objPogodba2['id'],
+        ];
+        $this->objAlternacija2 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['zaposlen'], true);
     }
 
     /**
@@ -360,6 +397,21 @@ class PogodbaCest
     {
         $I->successfullyDelete($this->restUrl, $this->obj['id']);
         $I->failToGet($this->restUrl, $this->obj['id']);
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZAlternacijami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objPogodba2['id'], "alternacije", "");
+        $I->assertEquals(2, count($resp));
+
+        // get po popa id  
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objPogodba2['id'], "alternacije", $this->objAlternacija1['id']);
+        $I->assertEquals(1, count($resp));
     }
 
 }
