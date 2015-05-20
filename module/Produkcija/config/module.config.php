@@ -18,6 +18,7 @@ return [
         ],
         'factories'  => [
             'Rest\pogodba'           => 'Max\Factory\RestControllerFactory',
+            'Relation\pogodba'       => 'Max\Factory\ToManyControllerFactory',
             'Rest\alternacija'       => 'Max\Factory\RestControllerFactory',
             'Rest\funkcija'          => 'Max\Factory\RestControllerFactory',
             'Rest\rekvizit'          => 'Max\Factory\RestControllerFactory',
