@@ -37,3 +37,13 @@ lists:
             - exclude: []
     vse: 
         filter:
+relation:
+    default:
+        arhiv:
+            enabled: true
+            hydrator:
+                exclude: []            
+        terminiStoritve:
+            enabled: true
+            hydrator:
+                exclude: []                            

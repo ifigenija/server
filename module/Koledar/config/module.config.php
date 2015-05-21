@@ -18,6 +18,7 @@ return [
         ],
         'factories'  => [
             'Rest\dogodek'        => 'Max\Factory\RestControllerFactory',
+            'Relation\dogodek' => 'Max\Factory\ToManyControllerFactory',
             'Rest\predstava'      => 'Max\Factory\RestControllerFactory',
             'Rest\gostovanje'     => 'Max\Factory\RestControllerFactory',
             'Relation\gostovanje' => 'Max\Factory\ToManyControllerFactory',

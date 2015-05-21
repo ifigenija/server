@@ -58,13 +58,13 @@ class ArhivalijaCest
      */
     public function createBesedilo(ApiTester $I)
     {
-        $data              = [
+        $data      = [
             'naslov'          => 'zz',
             'avtor'           => 'zz',
             'podnaslov'       => 'zz',
             'jezik'           => 'zz',
             'naslovIzvirnika' => 'zz',
-            'datumPrejema'    => 'zz',
+            'datumPrejema'    => '2010-02-01T00:00:00+0100',
             'moskeVloge'      => 1,
             'zenskeVloge'     => 2,
             'prevajalec'      => 'zz',
@@ -83,21 +83,21 @@ class ArhivalijaCest
      */
     public function createUprizoritev(ApiTester $I)
     {
-        $data                 = [
-            'faza'             => 'zz',
+        $data      = [
+            'faza'             => 'produkcija',
             'naslov'           => 'zz',
             'podnaslov'        => 'zz',
             'delovniNaslov'    => 'zz',
             'datumPremiere'    => '2010-02-01T00:00:00+0100',
             'stOdmorov'        => 1,
             'avtor'            => 'zz',
-            'gostujoca'        => true,
+            'gostujoca'        => true, // $$ bool vrača napako convertToBool
             'trajanje'         => 2,
             'opis'             => 'zz',
             'arhIdent'         => 'zz',
             'arhOpomba'        => 'zz',
             'datumZakljucka'   => '2019-02-01T00:00:00+0100',
-            'sloAvtor'         => true,
+            'sloAvtor'         => true, // $$ bool vrača napako convertToBool
             'kratkiNaslov'     => 'zz',
             'besedilo'         => $this->objBesedilo['id'],
             'zvrstUprizoritve' => null,

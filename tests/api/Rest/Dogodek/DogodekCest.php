@@ -40,26 +40,36 @@ use ApiTester;
 class DogodekCest
 {
 
-    private $restUrl         = '/rest/dogodek';
-    private $predstavaUrl    = '/rest/predstava';
-    private $zasedenostUrl   = '/rest/zasedenost';
-    private $vajaUrl         = '/rest/vaja';
-    private $gostovanjeUrl   = '/rest/gostovanje';
-    private $dogodekIzvenUrl = '/rest/dogodekIzven';
-    private $prostorUrl      = '/rest/prostor';
-    private $sezonaUrl       = '/rest/sezona';
-    private $drzavaUrl       = '/rest/drzava';
-    private $arhivalijaUrl       = '/rest/arhivalija';
+    private $restUrl           = '/rest/dogodek';
+    private $predstavaUrl      = '/rest/predstava';
+    private $zasedenostUrl     = '/rest/zasedenost';
+    private $vajaUrl           = '/rest/vaja';
+    private $gostovanjeUrl     = '/rest/gostovanje';
+    private $dogodekIzvenUrl   = '/rest/dogodekIzven';
+    private $dogodekUrl        = '/rest/dogodek';
+    private $prostorUrl        = '/rest/prostor';
+    private $sezonaUrl         = '/rest/sezona';
+    private $drzavaUrl         = '/rest/drzava';
+    private $arhivalijaUrl     = '/rest/arhivalija';
+    private $terminStoritveUrl = '/rest/terminstoritve';
+    private $osebaUrl = '/rest/oseba';
     private $obj;
     private $objPredstava;
     private $objZasedenost;
     private $objVaja;
     private $objGostovanje;
     private $objDogodekIzven;
+    private $objDogodek1;
+    private $objDogodek2;
     private $objProstor;
     private $objSezona;
     private $objDrzava;
-    private $objArhivalija;
+    private $objArhivalija1;
+    private $objArhivalija2;
+    private $objTerminStoritve1;
+    private $objTerminStoritve2;
+    private $objOseba1;
+    private $objOseba2;
 
     public function _before(ApiTester $I)
     {
@@ -71,6 +81,39 @@ class DogodekCest
         
     }
 
+       /**
+     *  napolnimo vsaj en zapis
+     * 
+     * @param ApiTester $I
+     */
+    public function createOsebo(ApiTester $I)
+    {
+        $data = [
+            'naziv'         => 'zz',
+            'ime'           => 'zz',
+            'priimek'       => 'zz',
+            'funkcija'      => 'zz',
+            'srednjeIme'    => 'zz',
+            'psevdonim'     => 'zz',
+            'email'         => 'x@xxx.xx',
+            'datumRojstva'  => '1973-28-03T04:30:00',
+            'emso'          => 'ZZ',
+            'davcna'        => 'ZZ123',
+            'spol'          => 'M',
+            'opombe'        => 'zz',
+            'drzavljanstvo' => 'zz',
+            'drzavaRojstva' => 'zz',
+            'krajRojstva'   => 'zz',
+            'user'          => null,
+        ];
+
+        $this->objOseba1 = $oseba     = $I->successfullyCreate($this->osebaUrl, $data);
+
+        $I->assertEquals('zz', $oseba['ime']);
+        $I->assertNotEmpty($oseba['id']);
+    }
+
+    
     /**
      * 
      * @param ApiTester $I
@@ -242,7 +285,7 @@ class DogodekCest
 
 
         // kreiramo še en zapis
-        $data = [
+        $data              = [
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
@@ -258,10 +301,97 @@ class DogodekCest
             'prostor'         => null,
             'sezona'          => $this->objSezona['id'],
         ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $this->objDogodek2 = $ent               = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['status'], 4);
+    }
+
+    /**
+     *  napolnimo vsaj en zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createArhivalijo(ApiTester $I)
+    {
+        $data                 = [
+            'oznakaDatuma'      => 'zz',
+            'datum'             => '2019-02-01T00:00:00+0100',
+            'fizicnaOblika'     => 'zz',
+            'izvorDigitalizata' => 'zz',
+            'povzetek'          => 'zz',
+            'opombe'            => 'zz',
+            'lokacijaOriginala' => 'zz',
+            'objavljeno'        => 'zz',
+            'naslov'            => 'zz',
+            'avtorstvo'         => 'zz',
+            'dogodek'           => $this->objDogodek2['id'],
+            'uprizoritev'       => null,
+        ];
+        $this->objArhivalija1 = $ent                  = $I->successfullyCreate($this->arhivalijaUrl, $data);
+        $I->assertEquals($ent['naslov'], 'zz');
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data                 = [
+            'oznakaDatuma'      => 'aa',
+            'datum'             => '2016-02-01T00:00:00+0100',
+            'fizicnaOblika'     => 'aa',
+            'izvorDigitalizata' => 'aa',
+            'povzetek'          => 'aa',
+            'opombe'            => 'aa',
+            'lokacijaOriginala' => 'aa',
+            'objavljeno'        => 'aa',
+            'naslov'            => 'aa',
+            'avtorstvo'         => 'aa',
+            'dogodek'           => $this->objDogodek2['id'],
+            'uprizoritev'       => null,
+        ];
+        $this->objArhivalija2 = $ent                  = $I->successfullyCreate($this->arhivalijaUrl, $data);
+        $I->assertEquals($ent['naslov'], 'aa');
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createTerminStorive(ApiTester $I)
+    {
+        $data                     = [
+            'planiranZacetek' => '2011-02-01T00:00:00+0100',
+            'planiranKonec'   => '2012-02-01T00:00:00+0100',
+            'zacetek'         => '2013-02-01T00:00:00+0100',
+            'konec'           => '2014-02-01T00:00:00+0100',
+            'planiranoTraja'  => 1.23,
+            'dogodek'         => $this->objDogodek2['id'],
+            'alternacija'     => null,
+            'oseba'           => $this->objOseba1['id'],
+        ];
+        $this->objTerminStoritve1 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['planiranoTraja'], 1.23);
+
+        // kreiramo še en zapis
+        $data = [
+            'planiranZacetek' => '2015-02-01T00:00:00+0100',
+            'planiranKonec'   => '2016-02-01T00:00:00+0100',
+            'zacetek'         => '2017-02-01T00:00:00+0100',
+            'konec'           => '2018-02-01T00:00:00+0100',
+            'planiranoTraja'  => 4.56,
+            'dogodek'         => $this->objDogodek2['id'],
+            'alternacija'     => null,
+            'oseba'           => $this->objOseba1['id'],
+        ];
+        $this->objTerminStoritve2 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['planiranoTraja'], 4.56);
     }
 
     /**
@@ -417,6 +547,39 @@ class DogodekCest
         $I->assertNotEmpty($resp);
         // testiramo na enako številko napake kot je v validaciji
         $I->assertEquals(1000362, $resp[0]['code']);
+    }
+
+    /**
+     * preberemo relacije
+     * @depends createArhivalijo
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZArhivalijami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objDogodek2['id'], "arhiv", "");
+        $I->assertEquals(2, count($resp));
+
+        // get po popa id  
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objDogodek2['id'], "arhiv", $this->objArhivalija1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createTerminStorive
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSTerminiStoritve(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objDogodek2['id'], "terminiStoritve", "");
+        $I->assertEquals(2, count($resp));
+
+        // get po popa id  
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objDogodek2['id'], "terminiStoritve", $this->objTerminStoritve1['id']);
+        $I->assertEquals(1, count($resp));
     }
 
 }
