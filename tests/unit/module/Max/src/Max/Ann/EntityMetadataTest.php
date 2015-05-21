@@ -81,10 +81,10 @@ class EntityMetadataTest
      */
     public function testGetFieldI18n()
     {
-        $i = $this->object->getFieldI18n('username');
+        $i = $this->object->getFieldI18n('email');
 
         $this->assertInstanceOf('Max\Ann\Entity\I18n', $i);
-        $this->assertEquals('Uporabniško ime', $i->label);
+        $this->assertEquals('Email', $i->label);
     }
 
     /**
@@ -93,10 +93,10 @@ class EntityMetadataTest
      */
     public function testGetFieldUi()
     {
-        $i = $this->object->getFieldUi('username');
+        $i = $this->object->getFieldUi('email');
 
         $this->assertInstanceOf('Max\Ann\Entity\Ui', $i);
-        $this->assertEquals('naziv', $i->type);
+        $this->assertEquals('email', $i->type);
     }
 
     /**

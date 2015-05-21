@@ -92,11 +92,10 @@ class EntityMetadataFactoryTest
         
         $this->assertNotEmpty($config);
         $this->assertEquals('0001', $config['User']);
-        $this->assertEquals('0002', $config['Permission']);
+        $this->assertEquals('0003', $config['Permission']);
         $this->assertEquals('0000', $config['Revizija']);
         
     }
 
 }
 
-?>
