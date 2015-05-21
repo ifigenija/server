@@ -21,8 +21,9 @@ use ApiTester;
  *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto - je ni
- * relacije z drugimi entitetami
- * - alternacije $$ 2M     
+ *      relacije z drugimi entitetami
+ *      - alternacije O2M     
+ *      - koproducent 
  *      getlist različne variante relacij
  *      - vse
  *      - default
@@ -34,13 +35,19 @@ class ProdukcijaDelitevCest
     private $restUrl             = '/rest/produkcijadelitev';
     private $produkcijskaHisaUrl = '/rest/produkcijskahisa';
     private $popaUrl             = '/rest/popa';
+    private $alternacijaUrl             = '/rest/alternacija';
     private $drzavaUrl           = '/rest/drzava';
     private $uprizoritevUrl           = '/rest/uprizoritev';
+    private $osebaUrl           = '/rest/oseba';
     private $obj;
+    private $objProdukcijaDelitev2;
     private $objUprizoritev;
     private $objDrzava;
     private $objPopa;
     private $objProdukcijskaHisa;
+    private $objAlternacija1;
+    private $objAlternacija2;
+    private $objOseba;
 
         
         
@@ -123,7 +130,7 @@ class ProdukcijaDelitevCest
     public function createUprizoritev(ApiTester $I)
     {
         $data      = [
-            'faza'             => 'zz',
+            'faza'             => 'arhiv',
             'naslov'           => 'zz',
             'podnaslov'        => 'zz',
             'delovniNaslov'    => 'zz',
@@ -161,8 +168,8 @@ class ProdukcijaDelitevCest
         $data      = [
             'odstotekFinanciranja' => 1.23,
             'vrstaKoproducenta'    => 'zz',
-            'uprizoritev'          => $this->objUprizoritev,
-            'koproducent'          => $this->objProdukcijskaHisa,
+            'uprizoritev'          => $this->objUprizoritev['id'],
+            'koproducent'          => $this->objProdukcijskaHisa['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -173,15 +180,82 @@ class ProdukcijaDelitevCest
         $data      = [
             'odstotekFinanciranja' => 7.90,
             'vrstaKoproducenta'    => 'yy',
-            'uprizoritev'          => $this->objUprizoritev,
-            'koproducent'          => $this->objProdukcijskaHisa,
+            'uprizoritev'          => $this->objUprizoritev['id'],
+            'koproducent'          => $this->objProdukcijskaHisa['id'],
         ];
-        $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $this->objProdukcijaDelitev2 = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['vrstaKoproducenta'], 'yy');
     }
 
+
+        /**
+     *  kreiramo  osebo
+     * 
+     * @param ApiTester $I
+     */
+    public function createOsebo(ApiTester $I)
+    {
+        $data = [
+            'naziv'         => 'zz',
+            'ime'           => 'zz',
+            'priimek'       => 'zz',
+            'funkcija'      => 'zz',
+            'srednjeIme'    => 'zz',
+            'psevdonim'     => 'zz',
+            'email'         => 'x@xxx.xx',
+            'datumRojstva'  => '1973-28-03T04:30:00',
+            'emso'          => 'ZZ',
+            'davcna'        => 'ZZ123',
+            'spol'          => 'M',
+            'opombe'        => 'zz',
+            'drzavljanstvo' => 'zz',
+            'drzavaRojstva' => 'zz',
+            'krajRojstva'   => 'zz',
+            'user'          => null,
+        ];
+
+        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
+
+        $I->assertEquals('zz', $oseba['ime']);
+        $I->assertNotEmpty($oseba['id']);
+    }
+
+    /**
+     * 
+     * @depends createOsebo
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecAlternacij(ApiTester $I)
+    {
+        $data                  = [
+            'zaposlen'     => true,
+            'funkcija'     => null,
+            'sodelovanje'  => NULL,
+            'oseba'        => $this->objOseba['id'],
+            'koprodukcija' => $this->objProdukcijaDelitev2['id'],
+            'pogodba'      => NULL,
+        ];
+        $this->objAlternacija1 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        $data                  = [
+            'zaposlen'     => true,
+            'funkcija'     => null,
+            'sodelovanje'  => NULL,
+            'oseba'        => $this->objOseba['id'],
+            'koprodukcija' => $this->objProdukcijaDelitev2['id'],
+            'pogodba'      => NULL,
+        ];
+        $this->objAlternacija2 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    
+    
     /**
      * preberi vse zapise od uprizoritve
      * 
@@ -260,6 +334,21 @@ class ProdukcijaDelitevCest
     {
         $I->successfullyDelete($this->restUrl, $this->obj['id']);
         $I->failToGet($this->restUrl, $this->obj['id']);
+    }
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecAlternacij
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZAlternacijami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objProdukcijaDelitev2['id'], "alternacije", "");
+        $I->assertEquals(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objProdukcijaDelitev2['id'], "alternacije", $this->objAlternacija1['id']);
+        $I->assertEquals(1, count($resp));
     }
 
 }

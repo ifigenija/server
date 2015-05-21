@@ -27,4 +27,11 @@ lists:
             - exclude: []
     vse: 
         filter:
+relation:
+    default:
+        alternacije:
+            enabled: true
+            hydrator:
+                exclude: []            
+
     
