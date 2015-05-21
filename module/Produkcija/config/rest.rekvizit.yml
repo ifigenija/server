@@ -8,7 +8,7 @@ forms:
 #            - id
             - ime
             - vrsta
-#            - rekviziterstvo
+#            - rekviziterstva
 lists:
     default: 
         filter:
@@ -16,3 +16,9 @@ lists:
             - exclude: []
     vse: 
         filter:
+relation:
+    default:
+        rekviziterstva:
+            enabled: true
+            hydrator:
+                exclude: []

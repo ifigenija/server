@@ -18,8 +18,8 @@ use ApiTester;
  *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto -> je prazna
- * relacije z drugimi entitetami
- *  - rekviziterstvo $$ 2M 
+ *      relacije z drugimi entitetami
+ *      - rekviziterstvo O2M 
  *      getlist različne variante relacij
  *      - vse
  *      - default
@@ -29,8 +29,12 @@ use ApiTester;
 class RekvizitCest
 {
 
-    private $restUrl = '/rest/rekvizit';
+    private $restUrl           = '/rest/rekvizit';
+    private $rekviziterstvoUrl = '/rest/rekviziterstvo';
     private $obj;
+    private $obj2;
+    private $objRekviziterstvo1;
+    private $objRekviziterstvo2;
 
     public function _before(ApiTester $I)
     {
@@ -62,8 +66,35 @@ class RekvizitCest
             'ime'   => 'aa',
             'vrsta' => 'aa',
         ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['ime'], 'aa');
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     *  napolnimo vsaj en zapis
+     * 
+     * @param ApiTester $I
+     */
+    public function createRekviziterstva(ApiTester $I)
+    {
+        $data                     = [
+            'namenUporabe'   => true,
+            'opisPostavitve' => 'zz',
+            'rekvizit'       => $this->obj2['id'],
+            'uprizoritev'    => null,
+        ];
+        $this->objRekviziterstvo1 = $ent                      = $I->successfullyCreate($this->rekviziterstvoUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+//        // kreiramo še en zapis
+        $data                     = [
+            'namenUporabe'   => true,
+            'opisPostavitve' => 'aa',
+            'rekvizit'       => $this->obj2['id'],
+            'uprizoritev'    => null,
+        ];
+        $this->objRekviziterstvo2 = $ent                      = $I->successfullyCreate($this->rekviziterstvoUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -155,5 +186,21 @@ class RekvizitCest
         $I->successfullyDelete($this->restUrl, $this->obj['id']);
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
+/**
+     * preberemo relacije
+     * 
+     * @depends createRekviziterstva
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZRekviziterstvi(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "rekviziterstva", "");
+        $I->assertEquals(2, count($resp));
 
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "rekviziterstva", $this->objRekviziterstvo1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    
 }

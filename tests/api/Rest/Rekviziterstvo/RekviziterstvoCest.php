@@ -62,7 +62,7 @@ class RekviziterstvoCest
             'podnaslov'       => 'zz',
             'jezik'           => 'zz',
             'naslovIzvirnika' => 'zz',
-            'datumPrejema'    => 'zz',
+            'datumPrejema'    => '2010-02-01T00:00:00+0100',
             'moskeVloge'      => 1,
             'zenskeVloge'     => 2,
             'prevajalec'      => 'zz',
@@ -97,7 +97,7 @@ class RekviziterstvoCest
     public function createUprizoritev(ApiTester $I)
     {
         $data                 = [
-            'faza'             => 'zz',
+            'faza'             => 'arhiv',
             'naslov'           => 'zz',
             'podnaslov'        => 'zz',
             'delovniNaslov'    => 'zz',

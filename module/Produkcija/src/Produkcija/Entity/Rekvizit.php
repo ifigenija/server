@@ -41,9 +41,9 @@ class Rekvizit
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Rekviziterstvo", mappedBy="rekvizit")
-     * @var <Rekviziterstvo>
+     * @var <Rekviziterstva>
      */
-    private $rekviziterstvo;
+    private $rekviziterstva;
 
     public function validate($mode = 'update')
     {
@@ -65,9 +65,9 @@ class Rekvizit
         return $this->vrsta;
     }
 
-    public function getRekviziterstvo()
+    public function getRekviziterstva()
     {
-        return $this->rekviziterstvo;
+        return $this->rekviziterstva;
     }
 
     public function setId($id)
@@ -88,10 +88,11 @@ class Rekvizit
         return $this;
     }
 
-    public function setRekviziterstvo($rekviziterstvo)
+    public function setRekviziterstva($rekviziterstva)
     {
-        $this->rekviziterstvo = $rekviziterstvo;
+        $this->rekviziterstva = $rekviziterstva;
         return $this;
     }
+
 
 }
