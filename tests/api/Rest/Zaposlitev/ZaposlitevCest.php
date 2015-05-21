@@ -18,9 +18,9 @@ use ApiTester;
  *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto - je ni
- * relacije z drugimi entitetami
+ *      relacije z drugimi entitetami
  *      - oseba
- * - alternacije $$ 2M
+ *      - alternacije O2M
  *      getlist različne variante relacij
  *      - vse
  *      - oseba
@@ -29,11 +29,18 @@ use ApiTester;
  */
 class ZaposlitevCest
 {
+
     private $restUrl  = '/rest/zaposlitev';
     private $osebaUrl = '/rest/oseba';
+    private $alternacijaUrl = '/rest/alternacija';
     private $obj;
+    private $obj2;
     private $objOseba;
+    private $objAlternacija1;
+    private $objAlternacija2;
 
+    
+    
     public function _before(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
@@ -104,7 +111,7 @@ class ZaposlitevCest
         $I->assertEquals($ent['status'], 'zz');
 
         // kreiramo še en zapis
-        $data = [
+        $data                 = [
             'status'              => 'xx',
             'zacetek'             => '2015-02-01T00:00:00+0100',
             'konec'               => '2016-02-01T00:00:00+0100',
@@ -117,9 +124,42 @@ class ZaposlitevCest
             'jeNastopajoci'       => TRUE,
             'oseba'               => $this->objOseba['id'],
         ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2= $ent                  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['status'], 'xx');
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends createOsebo
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecAlternacij(ApiTester $I)
+    {
+        $data                  = [
+            'zaposlen'     => true,
+            'funkcija'     => null,
+            'sodelovanje'  => $this->obj2['id'],
+            'oseba'        => $this->objOseba['id'],
+            'koprodukcija' => NULL,
+            'pogodba'      => NULL,
+        ];
+        $this->objAlternacija1 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        $data                  = [
+            'zaposlen'     => true,
+            'funkcija'     => null,
+            'sodelovanje'  => $this->obj2['id'],
+            'oseba'        => $this->objOseba['id'],
+            'koprodukcija' => NULL,
+            'pogodba'      => NULL,
+        ];
+        $this->objAlternacija2 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
     }
 
     /**
@@ -197,8 +237,6 @@ class ZaposlitevCest
         $I->assertEquals($ent['oseba'], $this->objOseba['id']);
     }
 
-    
-
     /**
      * brisanje zapisa
      * 
@@ -208,6 +246,21 @@ class ZaposlitevCest
     {
         $I->successfullyDelete($this->restUrl, $this->obj['id']);
         $I->failToGet($this->restUrl, $this->obj['id']);
+    }
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecAlternacij
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZAlternacijami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "alternacije", "");
+        $I->assertEquals(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "alternacije", $this->objAlternacija1['id']);
+        $I->assertEquals(1, count($resp));
     }
 
 }
