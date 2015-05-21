@@ -197,7 +197,6 @@ class PopaCest
             'popa'       => $this->obj['id'],
 //            'oseba'      => null,                 //$$ ker je hidden, mora biti izključeno
             'naziv'      => 'ww',
-            'nazivDva'   => 'ww',
             'ulica'      => 'ww',
             'ulicaDva'   => 'ww',
             'posta'      => 'ww',
@@ -209,26 +208,25 @@ class PopaCest
         ];
         $this->objPnaslov1=$pnaslov = $I->successfullyCreate($this->pnaslovUrl, $data);
         $I->assertNotEmpty($pnaslov['id']);
-        $I->assertEquals('ww', $pnaslov['nazivDva']);
+        $I->assertEquals('ww', $pnaslov['ulica']);
 
         // kreiramo še en zapis
         $data    = [
             'popa'       => $this->obj['id'],
 //            'oseba'      => null,                 //$$ ker je hidden, mora biti izključeno
             'naziv'      => 'bb',
-            'nazivDva'   => 'bb',
             'ulica'      => 'bb',
             'ulicaDva'   => 'bb',
             'posta'      => 'bb',
             'postaNaziv' => 'bb',
             'pokrajina'  => 'bb',
             'drzava'     => $this->objDrzava['id'],
-            'jeeu'       => true,
+            'jeeu'       => true,       //$$ rb tu še ne dela, ker je required
             'privzeti'   => true,
         ];
         $this->objPnaslov2=$pnaslov = $I->successfullyCreate($this->pnaslovUrl, $data);
         $I->assertNotEmpty($pnaslov['id']);
-        $I->assertEquals('bb', $pnaslov['nazivDva']);
+        $I->assertEquals('bb', $pnaslov['ulica']);
     }
 
     /**

@@ -29,4 +29,9 @@ lists:
             - exclude: []
     vse: 
         filter:
-    
+relation:
+    default:
+        koprodukcije:
+            enabled: true
+            hydrator:
+                exclude: []

@@ -35,10 +35,10 @@ class ProdukcijaDelitevCest
     private $restUrl             = '/rest/produkcijadelitev';
     private $produkcijskaHisaUrl = '/rest/produkcijskahisa';
     private $popaUrl             = '/rest/popa';
-    private $alternacijaUrl             = '/rest/alternacija';
+    private $alternacijaUrl      = '/rest/alternacija';
     private $drzavaUrl           = '/rest/drzava';
-    private $uprizoritevUrl           = '/rest/uprizoritev';
-    private $osebaUrl           = '/rest/oseba';
+    private $uprizoritevUrl      = '/rest/uprizoritev';
+    private $osebaUrl            = '/rest/oseba';
     private $obj;
     private $objProdukcijaDelitev2;
     private $objUprizoritev;
@@ -49,8 +49,6 @@ class ProdukcijaDelitevCest
     private $objAlternacija2;
     private $objOseba;
 
-        
-        
     public function _before(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
@@ -122,14 +120,14 @@ class ProdukcijaDelitevCest
         $I->assertEquals($ent['status'], 'zz');
     }
 
-        /**
+    /**
      *  kreiramo zapis uprizoritev
      * 
      * @param ApiTester $I
      */
     public function createUprizoritev(ApiTester $I)
     {
-        $data      = [
+        $data                 = [
             'faza'             => 'arhiv',
             'naslov'           => 'zz',
             'podnaslov'        => 'zz',
@@ -148,13 +146,12 @@ class ProdukcijaDelitevCest
             'zvrstUprizoritve' => null,
             'zvrstSurs'        => null,
         ];
-        $this->objUprizoritev = $ent       = $I->successfullyCreate($this->uprizoritevUrl, $data);
+        $this->objUprizoritev = $ent                  = $I->successfullyCreate($this->uprizoritevUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['opis'], 'zz');
     }
 
-    
     /**
      *  kreiramo zapis
      * 
@@ -177,20 +174,19 @@ class ProdukcijaDelitevCest
         $I->assertEquals($ent['vrstaKoproducenta'], 'zz');
 
         // kreiram še en zapis
-        $data      = [
+        $data                        = [
             'odstotekFinanciranja' => 7.90,
             'vrstaKoproducenta'    => 'yy',
             'uprizoritev'          => $this->objUprizoritev['id'],
             'koproducent'          => $this->objProdukcijskaHisa['id'],
         ];
-        $this->objProdukcijaDelitev2 = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $this->objProdukcijaDelitev2 = $ent                         = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['vrstaKoproducenta'], 'yy');
     }
 
-
-        /**
+    /**
      *  kreiramo  osebo
      * 
      * @param ApiTester $I
@@ -254,8 +250,6 @@ class ProdukcijaDelitevCest
         $I->assertNotEmpty($ent['id']);
     }
 
-    
-    
     /**
      * preberi vse zapise od uprizoritve
      * 
@@ -304,7 +298,7 @@ class ProdukcijaDelitevCest
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['odstotekFinanciranja'], 7.32);    
+        $I->assertEquals($entR['odstotekFinanciranja'], 7.32);
     }
 
     /**
@@ -335,6 +329,7 @@ class ProdukcijaDelitevCest
         $I->successfullyDelete($this->restUrl, $this->obj['id']);
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
+
     /**
      * preberemo relacije
      * 
