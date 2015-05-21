@@ -80,7 +80,7 @@ class PredstavaCest
     public function createUprizoritev(ApiTester $I)
     {
         $data                 = [
-            'faza'             => 'zz',
+            'faza'             => 'arhiv',
             'naslov'           => 'zz',
             'podnaslov'        => 'zz',
             'delovniNaslov'    => 'zz',

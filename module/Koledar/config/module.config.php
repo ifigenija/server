@@ -17,14 +17,15 @@ return [
         'invokables' => [
         ],
         'factories'  => [
-            'Rest\dogodek'      => 'Max\Factory\RestControllerFactory',
-            'Rest\predstava'    => 'Max\Factory\RestControllerFactory',
-            'Rest\gostovanje'   => 'Max\Factory\RestControllerFactory',
-            'Rest\gostujoca'    => 'Max\Factory\RestControllerFactory',
-            'Rest\dogodekIzven' => 'Max\Factory\RestControllerFactory',
-            'Rest\sezona'       => 'Max\Factory\RestControllerFactory',
-            'Rest\vaja'       => 'Max\Factory\RestControllerFactory',
-            'Rest\zasedenost'       => 'Max\Factory\RestControllerFactory',
+            'Rest\dogodek'        => 'Max\Factory\RestControllerFactory',
+            'Rest\predstava'      => 'Max\Factory\RestControllerFactory',
+            'Rest\gostovanje'     => 'Max\Factory\RestControllerFactory',
+            'Relation\gostovanje' => 'Max\Factory\ToManyControllerFactory',
+            'Rest\gostujoca'      => 'Max\Factory\RestControllerFactory',
+            'Rest\dogodekIzven'   => 'Max\Factory\RestControllerFactory',
+            'Rest\sezona'         => 'Max\Factory\RestControllerFactory',
+            'Rest\vaja'           => 'Max\Factory\RestControllerFactory',
+            'Rest\zasedenost'     => 'Max\Factory\RestControllerFactory',
         ]
     ],
     'router'          => [

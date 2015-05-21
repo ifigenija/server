@@ -18,9 +18,9 @@ use ApiTester;
  *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto -je ni
- * relacije z drugimi entitetami
+ *      relacije z drugimi entitetami
  *      - dogodek
- * - predstave  $$ 2M
+ *      - predstave  O2M
  *      - drzava
  *      getlist različne variante relacij
  *      - vse
@@ -30,14 +30,18 @@ use ApiTester;
 class GostovanjeCest
 {
 
-    private $restUrl    = '/rest/gostovanje';
-    private $dogodekUrl = '/rest/dogodek';
-    private $drzavaUrl  = '/rest/drzava';
-    private $vajaUrl    = '/rest/vaja';
+    private $restUrl      = '/rest/gostovanje';
+    private $dogodekUrl   = '/rest/dogodek';
+    private $drzavaUrl    = '/rest/drzava';
+    private $vajaUrl      = '/rest/vaja';
+    private $predstavaUrl = '/rest/predstava';
     private $obj;
+    private $objGostovanje2;
     private $objDrzava;
     private $objDogodek;
     private $objVaja;
+    private $objPredstava1;
+    private $objPredstava2;
 
     public function _before(ApiTester $I)
     {
@@ -85,15 +89,44 @@ class GostovanjeCest
         $I->assertEquals($ent['vrsta'], 'zz');
 
         // kreiramo še en zapis
-        $data = [
+        $data                 = [
             'vrsta'   => 'aa',
             'dogodek' => null,
             'drzava'  => $this->objDrzava['id'],
         ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $this->objGostovanje2 = $ent                  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['vrsta'], 'aa');
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createPredstavo(ApiTester $I)
+    {
+        $data                = [
+            'dogodek'     => NULL,
+            'uprizoritev' => null,
+            'gostovanje'  => $this->objGostovanje2['id'],
+            'gostujoca'   => null,
+        ];
+        $this->objPredstava1 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data                = [
+            'dogodek'     => NULL,
+            'uprizoritev' => null,
+            'gostovanje'  => $this->objGostovanje2['id'],
+            'gostujoca'   => null,
+        ];
+        $this->objPredstava2 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
     }
 
     /**
@@ -216,8 +249,7 @@ class GostovanjeCest
         $I->assertEquals(0, count($ent['predstave']));
     }
 
-    
-       /**
+    /**
      * brisanje zapisa
      * 
      * @depends createDogodek
@@ -228,7 +260,6 @@ class GostovanjeCest
         $I->failToGet($this->dogodekUrl, $this->objDogodek['id']);
     }
 
-    
     /**
      * brisanje zapisa
      * 
@@ -239,6 +270,23 @@ class GostovanjeCest
     {
         $I->successfullyDelete($this->restUrl, $this->obj['id']);
         $I->failToGet($this->restUrl, $this->obj['id']);
+    }
+
+        /**
+     * preberemo relacije
+     * @depends createPredstavo
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSPredstavami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objGostovanje2['id'], "predstave", "");
+        $I->assertEquals(2, count($resp));
+
+        // get po popa id  
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objGostovanje2['id'], "predstave", $this->objPredstava1['id']);
+        $I->assertEquals(1, count($resp));
+
     }
 
 }
