@@ -54,7 +54,7 @@ class BesediloCest
             'podnaslov'       => 'zz',
             'jezik'           => 'zz',
             'naslovIzvirnika' => 'zz',
-            'datumPrejema'    => 'zz',
+            'datumPrejema'    => '2010-02-01T00:00:00+0100',
             'moskeVloge'      => 1,
             'zenskeVloge'     => 2,
             'prevajalec'      => 'zz',
@@ -71,7 +71,7 @@ class BesediloCest
             'podnaslov'       => 'aa',
             'jezik'           => 'aa',
             'naslovIzvirnika' => 'aa',
-            'datumPrejema'    => 'aa',
+            'datumPrejema'    => '2011-03-01T00:00:00+0100',
             'moskeVloge'      => 1,
             'zenskeVloge'     => 2,
             'prevajalec'      => 'aa',
@@ -146,7 +146,7 @@ class BesediloCest
         $I->assertEquals($ent['podnaslov'], 'zz');
         $I->assertEquals($ent['jezik'], 'zz');
         $I->assertEquals($ent['naslovIzvirnika'], 'zz');
-        $I->assertEquals($ent['datumPrejema'], 'zz');
+        $I->assertEquals($ent['datumPrejema'], '2010-02-01T00:00:00+0100');
         $I->assertEquals($ent['moskeVloge'], 1);
         $I->assertEquals($ent['zenskeVloge'], 2);
         $I->assertEquals($ent['prevajalec'], 'zz');
