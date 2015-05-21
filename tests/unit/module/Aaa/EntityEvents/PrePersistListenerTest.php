@@ -15,7 +15,7 @@ class PrePersistListenerTest
         $list = new \App\EntityEvents\PrePersistListener($config);
         
         $this->assertEquals('00010000', substr($list->getNewID('User'),0,8));
-        $this->assertEquals('00020000', substr($list->getNewID('Permission'),0,8));
+        $this->assertEquals('00030000', substr($list->getNewID('Permission'),0,8));
         $this->assertEquals('00000000', substr($list->getNewID('Revizija'),0,8));
     }
 

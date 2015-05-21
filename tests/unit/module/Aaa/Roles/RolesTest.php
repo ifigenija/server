@@ -4,6 +4,12 @@ use \UnitTester;
 
 class RolesTest extends \AbstractTest
 {
+    
+        /**
+     * @var \UnitTester
+     */
+    protected $tester;
+    
     public function _before()
     {
         
@@ -16,7 +22,11 @@ class RolesTest extends \AbstractTest
     // tests
     public function testGetRoles()
     {
+        $this->tester->impersonate('console@ifigenija.si');
+        
         $auth = $this->sm->get('ZfcRbac\Service\AuthorizationService');
+        
+        
         $i = $auth->getIdentity()->getRoles();
         $this->assertTrue($auth->isGranted('Drzava-list'));
         

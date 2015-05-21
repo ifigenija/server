@@ -32,7 +32,7 @@ class UnitHelper
             ->get('Zend\Authentication\AuthenticationService');
         $user = $this->grabEntityManager()
             ->getRepository('Aaa\Entity\User')
-            ->findOneByUsername($userName);
+            ->findOneByEmail($userName);
 
         $authService->getStorage()->write($user);
         return $user;
