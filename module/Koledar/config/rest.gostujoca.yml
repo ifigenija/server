@@ -22,3 +22,9 @@ lists:
             - exclude: []
     vse: 
         filter:
+relation:
+    default:
+        predstave:
+            enabled: true
+            hydrator:
+                exclude: []                        
