@@ -15,8 +15,8 @@ use ApiTester;
  *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto - je ni
- * relacije z drugimi entitetami
- * - alternacije $$ 2M
+ *      relacije z drugimi entitetami
+ *      - alternacije O2M
  *      - uprizoritev 
  *      - privzeta alternacija
  *      - tipFunkcije 
@@ -30,15 +30,18 @@ use ApiTester;
 class FunkcijaCest
 {
 
-    private $restUrl           = '/rest/funkcija';
-    private $uprizoritevUrl    = '/rest/uprizoritev';
-    private $besediloUrl       = '/rest/besedilo';
-    private $osebaUrl          = '/rest/oseba';
-    private $alternacijaUrl    = '/rest/alternacija';
+    private $restUrl        = '/rest/funkcija';
+    private $uprizoritevUrl = '/rest/uprizoritev';
+    private $besediloUrl    = '/rest/besedilo';
+    private $osebaUrl       = '/rest/oseba';
+    private $alternacijaUrl = '/rest/alternacija';
     private $tipFunkcijeUrl = '/rest/tipfunkcije';
     private $obj;
+    private $objFunkcija2;
     private $objOseba;
     private $objAlternacija;
+    private $objAlternacija1;
+    private $objAlternacija2;
     private $objUprizoritev;
     private $objBesedilo;
     private $objTipFunkcije;
@@ -66,7 +69,7 @@ class FunkcijaCest
             'podnaslov'       => 'zz',
             'jezik'           => 'zz',
             'naslovIzvirnika' => 'zz',
-            'datumPrejema'    => 'zz',
+            'datumPrejema'    => '2010-02-01T00:00:00+0100',
             'moskeVloge'      => 1,
             'zenskeVloge'     => 2,
             'prevajalec'      => 'zz',
@@ -130,6 +133,30 @@ class FunkcijaCest
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['zaposlen'], true);
+
+        $data                  = [
+            'zaposlen'     => true,
+            'funkcija'     => NULL,
+            'sodelovanje'  => NULL,
+            'oseba'        => $this->objOseba['id'],
+            'koprodukcija' => NULL,
+            'pogodba'      => NULL,
+        ];
+        $this->objAlternacija1 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        $data                  = [
+            'zaposlen'     => true,
+            'funkcija'     => NULL,
+            'sodelovanje'  => NULL,
+            'oseba'        => $this->objOseba['id'],
+            'koprodukcija' => NULL,
+            'pogodba'      => NULL,
+        ];
+        $this->objAlternacija2 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['zaposlen'], true);
     }
 
     /**
@@ -142,7 +169,7 @@ class FunkcijaCest
     public function createUprizoritev(ApiTester $I)
     {
         $data                 = [
-            'faza'             => 'zz',
+            'faza'             => 'arhiv',
             'naslov'           => 'zz',
             'podnaslov'        => 'zz',
             'delovniNaslov'    => 'zz',
@@ -222,8 +249,41 @@ class FunkcijaCest
             'privzeti'    => null,
             'tipFunkcije' => $this->objTipFunkcije['id'],
         ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $this->objFunkcija2 = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['naziv'], 'aa');
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends createOsebo
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecAlternacij(ApiTester $I)
+    {
+        $data                  = [
+            'zaposlen'     => true,
+            'funkcija'     => $this->objFunkcija2['id'],
+            'sodelovanje'  => NULL,
+            'oseba'        => $this->objOseba['id'],
+            'koprodukcija' => NULL,
+            'pogodba'      => NULL,
+        ];
+        $this->objAlternacija1 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        $data                  = [
+            'zaposlen'     => true,
+            'funkcija'     => $this->objFunkcija2['id'],
+            'sodelovanje'  => NULL,
+            'oseba'        => $this->objOseba['id'],
+            'koprodukcija' => NULL,
+            'pogodba'      => NULL,
+        ];
+        $this->objAlternacija2 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -316,6 +376,22 @@ class FunkcijaCest
     {
         $I->successfullyDelete($this->restUrl, $this->obj['id']);
         $I->failToGet($this->restUrl, $this->obj['id']);
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecAlternacij
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZAlternacijami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objFunkcija2['id'], "alternacije", "");
+        $I->assertEquals(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objFunkcija2['id'], "alternacije", $this->objAlternacija1['id']);
+        $I->assertEquals(1, count($resp));
     }
 
 }

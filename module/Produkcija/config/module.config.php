@@ -21,6 +21,7 @@ return [
             'Relation\pogodba'       => 'Max\Factory\ToManyControllerFactory',
             'Rest\alternacija'       => 'Max\Factory\RestControllerFactory',
             'Rest\funkcija'          => 'Max\Factory\RestControllerFactory',
+            'Relation\funkcija'      => 'Max\Factory\ToManyControllerFactory',
             'Rest\rekvizit'          => 'Max\Factory\RestControllerFactory',
             'Rest\rekviziterstvo'    => 'Max\Factory\RestControllerFactory',
             'Rest\zvrstSurs'         => 'Max\Factory\RestControllerFactory',

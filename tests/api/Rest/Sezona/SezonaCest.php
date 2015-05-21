@@ -30,7 +30,7 @@ class SezonaCest
 
     private $restUrl    = '/rest/sezona';
     private $dogodekUrl = '/rest/dogodek';
-    private $vajaUrl = '/rest/vaja';
+    private $vajaUrl    = '/rest/vaja';
     private $obj;
     private $objSezona2;
     private $objDogodek1;
@@ -67,42 +67,42 @@ class SezonaCest
         $I->assertEquals($ent['imeSezone'], 'zz');
 
         // kreiramo še en zapis
-        $data = [
+        $data             = [
             'imeSezone' => 'aa',
             'zacetek'   => '2012-02-01T00:00:00+0100',
             'konec'     => '2013-02-01T00:00:00+0100',
             'aktivna'   => true,
         ];
-        $this->objSezona2 = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $this->objSezona2 = $ent              = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['imeSezone'], 'aa');
     }
 
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
     public function createVajo(ApiTester $I)
     {
-        $data          = [
+        $data           = [
             'zaporedna'   => 1,
             'porocilo'    => 'zz',
             'dogodek'     => null, // najprej mora biti kreirana vaja, šele potem dogodek.
             'uprizoritev' => null,
         ];
-        $this->objVaja1 = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
+        $this->objVaja1 = $ent            = $I->successfullyCreate($this->vajaUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['porocilo'], 'zz');
 
-        $data          = [
+        $data           = [
             'zaporedna'   => 1,
             'porocilo'    => 'cc',
             'dogodek'     => null, // najprej mora biti kreirana vaja, šele potem dogodek.
             'uprizoritev' => null,
         ];
-        $this->objVaja2 = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
+        $this->objVaja2 = $ent            = $I->successfullyCreate($this->vajaUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -237,7 +237,7 @@ class SezonaCest
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
 
-        /**
+    /**
      * preberemo relacije
      * 
      * @depends createDogodek
@@ -254,5 +254,4 @@ class SezonaCest
         $I->assertEquals(1, count($resp));
     }
 
-    
 }
