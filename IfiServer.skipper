@@ -15,6 +15,7 @@
       <orm-attributes>
         <attribute name="repository-class">Aaa\Repository\Permissions</attribute>
         <attribute name="export-file-name">Permission.php</attribute>
+        <attribute name="export-file-name">Permission.php</attribute>
       </orm-attributes>
     </entity>
     <entity name="Revizija" uuid="f98b7456-3f89-4382-bafd-2d2ba4ffa808">
@@ -35,6 +36,8 @@
         <attribute name="repository-class">Aaa\Repository\Revizije</attribute>
         <attribute name="table">revizije</attribute>
         <attribute name="export-file-name">Revizija.php</attribute>
+        <attribute name="table">revizije</attribute>
+        <attribute name="export-file-name">Revizija.php</attribute>
       </orm-attributes>
     </entity>
     <entity name="Role" uuid="93d17e5f-69ad-4167-bded-4ffcac55eb3d">
@@ -50,6 +53,7 @@
       <field name="builtIn" type="boolean" uuid="dbfa1078-5078-49cd-8d98-2ed2a94adae6"/>
       <orm-attributes>
         <attribute name="repository-class">Aaa\Repository\Roles</attribute>
+        <attribute name="export-file-name">Role.php</attribute>
         <attribute name="export-file-name">Role.php</attribute>
       </orm-attributes>
     </entity>
@@ -86,6 +90,8 @@
       <field name="tokenExpires" type="datetime" uuid="ce0aa21e-7696-4eba-b216-e5f5a1d6f0a6"/>
       <orm-attributes>
         <attribute name="repository-class">Aaa\Repository\Users</attribute>
+        <attribute name="table">uporabniki</attribute>
+        <attribute name="export-file-name">User.php</attribute>
         <attribute name="table">uporabniki</attribute>
         <attribute name="export-file-name">User.php</attribute>
       </orm-attributes>
@@ -125,6 +131,8 @@
       <field name="opomba" type="text" uuid="49b5657a-f441-40e3-8961-df269866edca"/>
       <orm-attributes>
         <attribute name="repository-class">App\Repository\Drzave</attribute>
+        <attribute name="table">drza</attribute>
+        <attribute name="export-file-name">Drzava.php</attribute>
         <attribute name="table">drza</attribute>
         <attribute name="export-file-name">Drzava.php</attribute>
       </orm-attributes>
@@ -172,6 +180,7 @@
       <orm-attributes>
         <attribute name="export-file-name">OptionValue.php</attribute>
         <attribute name="repository-class">App\Repository\OptionValues</attribute>
+        <attribute name="export-file-name">OptionValue.php</attribute>
       </orm-attributes>
     </entity>
     <association from="OptionValue" to="Option" owner-alias="" inverse-alias="option" many-owner="true" many-inverse="false" uuid="ede963bb-83f3-4fb8-b4f0-4e099a276d65">
@@ -179,12 +188,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="OptionValue" to="User" caption="User OptionValue" owner-alias="" inverse-alias="user" many-owner="true" many-inverse="false" uuid="82a71af7-7182-44cf-b400-d8759b3421b4">
       <association-field from="user_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -199,7 +210,7 @@
       <field name="naziv" size="40" uuid="4cdbd64f-69b6-40e5-8adc-8b5652c141a7"/>
       <field name="ime" uuid="643d4746-8c96-4373-971a-42c0d23ac17e"/>
       <field name="priimek" uuid="d4471f4e-d5bd-411d-a705-6c57303815bb"/>
-      <field name="psevdonim" uuid="5a2640e6-84b2-4978-bad8-3f65f1b72ca0"/>
+      <field name="psevdonim" uuid="d30f090a-fecf-4a9d-bdaf-a4f448580439"/>
       <field name="funkcija" size="40" uuid="35fb5dcb-b9a8-40aa-a7e2-263eb5edf43d"/>
       <field name="email" size="40" uuid="ee9e205c-7c9f-4762-8274-c4a403d44069"/>
       <field name="naslov_id" uuid="44442b08-1383-4eb8-b9a4-90fba43033be"/>
@@ -213,9 +224,9 @@
       <field name="drzavaRojstva" uuid="ee4f9ade-c657-4bd1-853b-bbb46ae14005"/>
       <field name="krajRojstva" uuid="e2397acd-8114-4f87-87a5-fe84fd94dab4"/>
       <field name="srednjeIme" uuid="875f9526-0268-4ba9-8467-786567a03099"/>
-      <field name="psevdonim" uuid="d30f090a-fecf-4a9d-bdaf-a4f448580439"/>
       <orm-attributes>
         <attribute name="repository-class">App\Repository\Osebe</attribute>
+        <attribute name="export-file-name">Oseba.php</attribute>
         <attribute name="export-file-name">Oseba.php</attribute>
       </orm-attributes>
     </entity>
@@ -232,6 +243,7 @@
       <association-field from="user_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -264,12 +276,15 @@
         <attribute name="repository-class">App\Repository\Popa</attribute>
         <attribute name="table">popa</attribute>
         <attribute name="export-file-name">Popa.php</attribute>
+        <attribute name="table">popa</attribute>
+        <attribute name="export-file-name">Popa.php</attribute>
       </orm-attributes>
     </entity>
     <association from="Popa" to="Drzava" owner-alias="" inverse-alias="drzava" many-owner="true" many-inverse="false" parent-required="true" uuid="32285cf2-efa7-42a9-8291-371e39fc5290">
       <association-field from="drzava_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -299,6 +314,7 @@
       <orm-attributes>
         <attribute name="export-file-name">Posta.php</attribute>
         <attribute name="repository-class">App\Repository\Poste</attribute>
+        <attribute name="export-file-name">Posta.php</attribute>
       </orm-attributes>
     </entity>
     <entity name="PostniNaslov" uuid="8b0b1e29-9c2c-4fe7-b5ab-517e05ead7e1">
@@ -321,8 +337,11 @@
       <field name="klient_id" uuid="9a28e1e1-1c98-4268-a1cf-b6104726677a"/>
       <field name="drzava_id" uuid="85a861d5-0b22-4135-9b73-3b0ead950a6e"/>
       <field name="oseba_id" uuid="93109b6d-93c5-447b-bb80-2dc4c65bbc5f"/>
+      <field name="popa_id" uuid="bee1f4f7-c32a-49e4-98d7-bc652308b43a"/>
       <orm-attributes>
         <attribute name="repository-class">App\Repository\PostniNaslovi</attribute>
+        <attribute name="table">PostniNaslovi</attribute>
+        <attribute name="export-file-name">PostniNaslov.php</attribute>
         <attribute name="table">PostniNaslovi</attribute>
         <attribute name="export-file-name">PostniNaslov.php</attribute>
       </orm-attributes>
@@ -341,6 +360,7 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="PostniNaslov" to="Oseba" owner-alias="naslovi" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="837cfbb2-99b8-47b3-a034-a5fa5ab2870b">
@@ -348,6 +368,18 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
+    <association from="PostniNaslov" to="Popa" owner-alias="naslovi" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="b0e2afb2-6452-438d-b17f-6749987d8859">
+      <association-field from="popa_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse">
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <entity name="Telefonska" uuid="4e0f088d-bb63-4a58-9548-d2d76829c4c2">
@@ -366,6 +398,7 @@
       <orm-attributes>
         <attribute name="repository-class">App\Repository\Telefonske</attribute>
         <attribute name="export-file-name">Telefonska.php</attribute>
+        <attribute name="export-file-name">Telefonska.php</attribute>
       </orm-attributes>
     </entity>
     <association from="Telefonska" to="Oseba" caption="Oseba Telefonske" owner-alias="telefonske" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="f25eaf99-3ef5-4ab2-9ff3-c7ec90588127">
@@ -375,6 +408,9 @@
           <attribute name="orphan-removal">true</attribute>
         </attribute>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse">
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <association from="Telefonska" to="Popa" caption="Popa Telefonske" owner-alias="telefonske" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="27667b50-2424-4f64-a6f3-d0fd9d264a2f">
@@ -384,6 +420,9 @@
           <attribute name="orphan-removal">true</attribute>
         </attribute>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse">
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <entity name="Trr" uuid="1d43e294-aeee-4624-80a9-4e648b8a02a9">
@@ -403,12 +442,14 @@
       <orm-attributes>
         <attribute name="repository-class">App\Repository\Trrji</attribute>
         <attribute name="export-file-name">Trr.php</attribute>
+        <attribute name="export-file-name">Trr.php</attribute>
       </orm-attributes>
     </entity>
     <association from="Trr" to="Popa" caption="Popa Trr" owner-alias="trrji" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="2882f490-7861-4c06-adf9-9a068a485140">
       <association-field from="popa_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -417,6 +458,9 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <orm-attributes>
@@ -439,7 +483,10 @@
       <field name="koprodukcija_delitev_id" uuid="46528ef1-f5f5-4b7b-9c24-9c8a1575b9ce"/>
       <field name="pogodba_id" type="guid" uuid="5e349566-ffe7-493c-8ff2-ea26fd154be9"/>
       <field name="zaposlen" type="boolean" uuid="5960d6a1-ef9e-4372-989e-324f4e90af68"/>
+      <field name="funkcija_id" uuid="7f700ae3-6268-4d23-ab0f-28012c7f376a"/>
       <orm-attributes>
+        <attribute name="export-file-name">Alternacija.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\Alternacije</attribute>
         <attribute name="export-file-name">Alternacija.php</attribute>
       </orm-attributes>
     </entity>
@@ -450,10 +497,11 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="Alternacija" to="Zaposlitev" caption="Sodelovanje Alternacija" owner-alias="alternacija" inverse-alias="sodelovanje" many-owner="true" many-inverse="false" uuid="182e073f-fbca-4cce-aba7-c7fedb721cdb">
+    <association from="Alternacija" to="Zaposlitev" caption="Sodelovanje Alternacija" owner-alias="alternacije" inverse-alias="sodelovanje" many-owner="true" many-inverse="false" uuid="182e073f-fbca-4cce-aba7-c7fedb721cdb">
       <association-field from="sodelovanje_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -462,6 +510,7 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Alternacija" to="ProdukcijaDelitev" owner-alias="alternacije" inverse-alias="koprodukcija" many-owner="true" many-inverse="false" uuid="8eb23c3e-27cf-40c5-82e3-b2b82448f6a8">
@@ -469,10 +518,19 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Alternacija" to="Pogodba" caption="Pogodba Alternacija" owner-alias="alternacije" inverse-alias="pogodba" many-owner="true" many-inverse="false" uuid="c012b288-5a27-45bf-b5e0-44ec1c3d18c5">
       <association-field from="pogodba_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="Alternacija" to="Funkcija" owner-alias="alternacije" inverse-alias="funkcija" many-owner="true" many-inverse="false" uuid="f8d2f5e2-967a-4ce9-81b9-7c7f00f06ede">
+      <association-field from="funkcija_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
@@ -500,6 +558,8 @@
       <field name="avtorstvo" type="string" uuid="092f5d59-6d70-4169-9ab9-afc002bd3e12"/>
       <orm-attributes>
         <attribute name="export-file-name">Arhivalija.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\Arhivalije</attribute>
+        <attribute name="export-file-name">Arhivalija.php</attribute>
       </orm-attributes>
     </entity>
     <association from="Arhivalija" to="Dogodek" caption="Dogodek Arhiv" owner-alias="arhiv" inverse-alias="dogodek" many-owner="true" many-inverse="false" uuid="d35b51f5-c9be-4e1e-9628-118e2d5a9fc6">
@@ -507,12 +567,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Arhivalija" to="Uprizoritev" caption="Uprizoritev Arhiv" owner-alias="arhiv" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" uuid="b96e9abb-286f-4fef-ba15-9fa829ac968e">
       <association-field from="uprizoritev_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -529,12 +591,14 @@
       <field name="podnaslov" type="string" uuid="8cdb4cb3-b2e9-4124-aa1a-7faab62d008f"/>
       <field name="jezik" type="string" uuid="fa019238-1656-46dd-93be-3550340a579c"/>
       <field name="naslovIzvirnika" type="string" uuid="6c490596-a1c9-40f3-8cfb-7ee5b8be116b"/>
-      <field name="datumPrejema" type="string" uuid="ea2174cb-0141-49b2-8527-f66c702453c9"/>
+      <field name="datumPrejema" type="date" uuid="ea2174cb-0141-49b2-8527-f66c702453c9"/>
       <field name="moskeVloge" type="integer" uuid="ae842bf2-1504-404f-bae8-5142d8ad9cdd"/>
       <field name="zenskeVloge" type="integer" uuid="deebf805-fb7e-4888-ba16-afe9499e3978"/>
       <field name="prevajalec" type="string" uuid="3fd6e0db-76c8-4e4f-9a41-bcd6c931cda2"/>
-      <field name="povzetekVsebine" type="string" uuid="c4875c8e-3c32-484f-88e9-55273b379c21"/>
+      <field name="povzetekVsebine" type="text" uuid="c4875c8e-3c32-484f-88e9-55273b379c21"/>
       <orm-attributes>
+        <attribute name="export-file-name">Besedilo.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\Besedila</attribute>
         <attribute name="export-file-name">Besedilo.php</attribute>
       </orm-attributes>
     </entity>
@@ -556,12 +620,15 @@
       <field name="sort" type="integer" uuid="66dfe073-e8b8-4319-9719-55169e692988"/>
       <orm-attributes>
         <attribute name="export-file-name">Funkcija.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\Funkcije</attribute>
+        <attribute name="export-file-name">Funkcija.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="Funkcija" to="Uprizoritev" owner-alias="vloge" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" parent-required="true" uuid="a303d5d9-bf84-4df5-9228-9a6abfae3a97">
+    <association from="Funkcija" to="Uprizoritev" owner-alias="funkcije" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" parent-required="true" uuid="a303d5d9-bf84-4df5-9228-9a6abfae3a97">
       <association-field from="uprizoritev_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -570,13 +637,17 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="Funkcija" to="TipFunkcije" caption="Vrsta funkcije" owner-alias="vloge" inverse-alias="tipVloge" many-owner="true" many-inverse="false" uuid="ae42540c-d529-4668-b731-741e16d6f47b">
+    <association from="Funkcija" to="TipFunkcije" caption="Vrsta funkcije" owner-alias="funkcije" inverse-alias="tipFunkcije" many-owner="true" many-inverse="false" uuid="ae42540c-d529-4668-b731-741e16d6f47b">
       <association-field from="tip_vloge_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning">
           <attribute name="fetch">EAGER</attribute>
+        </attribute>
+        <attribute name="side-inverse">
+          <attribute name="fetch">EXTRA_LAZY</attribute>
         </attribute>
         <attribute name="side-inverse">
           <attribute name="fetch">EXTRA_LAZY</attribute>
@@ -597,11 +668,13 @@
         <orm-attributes>
           <attribute name="scale">2</attribute>
           <attribute name="precision">12</attribute>
+          <attribute name="precision">12</attribute>
         </orm-attributes>
       </field>
       <field name="vrednostPredstave" type="decimal" uuid="78276031-34e7-4120-9e76-ec5cc99747a4">
         <orm-attributes>
           <attribute name="precision">12</attribute>
+          <attribute name="scale">2</attribute>
           <attribute name="scale">2</attribute>
         </orm-attributes>
       </field>
@@ -609,12 +682,16 @@
         <orm-attributes>
           <attribute name="scale">2</attribute>
           <attribute name="precision">12</attribute>
+          <attribute name="precision">12</attribute>
         </orm-attributes>
       </field>
       <field name="trr_id" type="integer" uuid="7486afaf-e9ab-4a65-85a3-5a2c3d79b4dd"/>
       <field name="aktivna" type="boolean" uuid="7302c493-a938-4438-941d-96dabcf053b8"/>
       <field name="opis" type="text" uuid="621d8322-b12f-46c1-8215-95ececda011c"/>
+      <field name="sifra" size="7" required="true" unique="true" uuid="ed765abd-a5f6-4715-80a5-f5e1d7d8cf43"/>
       <orm-attributes>
+        <attribute name="export-file-name">Pogodba.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\Pogodbe</attribute>
         <attribute name="export-file-name">Pogodba.php</attribute>
       </orm-attributes>
     </entity>
@@ -623,6 +700,7 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Pogodba" to="Popa" caption="Popa Pogodba" owner-alias="pogodbe" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="4a3cb2e9-3c1e-4a28-a85e-cae38ba91a56">
@@ -630,12 +708,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Pogodba" to="Trr" caption="Trr Pogodba" owner-alias="" inverse-alias="trr" many-owner="true" many-inverse="false" uuid="c3bf1c85-08bc-4663-93cd-7d8fd2619dee">
       <association-field from="trr_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -653,12 +733,15 @@
       <field name="vrstaKoproducenta" uuid="3938454d-4655-4aab-b3d0-55e68da69ac8"/>
       <orm-attributes>
         <attribute name="export-file-name">ProdukcijaDelitev.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\ProdukcijaDelitve</attribute>
+        <attribute name="export-file-name">ProdukcijaDelitev.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="ProdukcijaDelitev" to="Uprizoritev" owner-alias="koprodukcija" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" parent-required="true" uuid="a31e2f56-cc75-4f4c-bc23-33616f1350a3">
+    <association from="ProdukcijaDelitev" to="Uprizoritev" owner-alias="koprodukcije" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" parent-required="true" uuid="a31e2f56-cc75-4f4c-bc23-33616f1350a3">
       <association-field from="uprizoritev_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -666,6 +749,7 @@
       <association-field from="koproducent_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -681,12 +765,15 @@
       <field name="status" type="string" size="20" uuid="f1cb72c2-499c-4e20-b3c3-c86ebef80a6d"/>
       <orm-attributes>
         <attribute name="export-file-name">ProdukcijskaHisa.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\ProdukcijskeHise</attribute>
+        <attribute name="export-file-name">ProdukcijskaHisa.php</attribute>
       </orm-attributes>
     </entity>
     <association from="ProdukcijskaHisa" to="Popa" caption="Popa Koproducent" owner-alias="" inverse-alias="popa" many-owner="false" many-inverse="false" uuid="8d8d5277-f842-4fed-a4a6-886a12699abf">
       <association-field from="popa_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -701,6 +788,8 @@
       <field name="ime" type="string" uuid="4cf50e6c-0f06-4651-8b5a-656f83abfadb"/>
       <field name="vrsta" type="string" uuid="e40530ca-122b-4874-b9f7-973e4690b1be"/>
       <orm-attributes>
+        <attribute name="export-file-name">Rekvizit.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\Rekviziti</attribute>
         <attribute name="export-file-name">Rekvizit.php</attribute>
       </orm-attributes>
     </entity>
@@ -718,6 +807,8 @@
       <field name="uprizoritev_id" type="guid" uuid="c21d5ba5-d385-439b-a5ce-b8801948d04f"/>
       <orm-attributes>
         <attribute name="export-file-name">Rekviziterstvo.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\Rekviziterstva</attribute>
+        <attribute name="export-file-name">Rekviziterstvo.php</attribute>
       </orm-attributes>
     </entity>
     <association from="Rekviziterstvo" to="Rekvizit" caption="Rekvizit Rekviziterstvo" owner-alias="rekviziterstvo" inverse-alias="rekvizit" many-owner="true" many-inverse="false" uuid="8635ad22-49e0-49d2-8ccd-2d1d3f139091">
@@ -725,12 +816,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Rekviziterstvo" to="Uprizoritev" caption="Uprizoritev Rekviziterstvo" owner-alias="rekviziti" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" uuid="f284cd27-323b-4a15-8b10-2bb40c623fd1">
       <association-field from="uprizoritev_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -747,7 +840,12 @@
       <field name="dovoliPrekrivanje" type="boolean" uuid="9acd8781-b113-483e-b11f-66deecd9d809"/>
       <field name="maxPrekrivanj" type="integer" uuid="3058b61c-9f19-4757-b97a-4689484c283e"/>
       <field name="nastopajoc" type="boolean" uuid="cd639534-771b-45c6-b39c-c00dd1ce8cf9"/>
+      <field name="imeZenski" type="string" uuid="7e958075-b620-4dd5-8e9e-ad88f7642157"/>
+      <field name="podrocje" type="string" uuid="eba25bf0-2014-48c2-9c23-566bc9531552"/>
+      <field name="pomembnost" type="string" uuid="a4c6813b-4201-4ba7-a00e-96e42d3b767b"/>
       <orm-attributes>
+        <attribute name="export-file-name">TipFunkcije.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\TipiFunkcije</attribute>
         <attribute name="export-file-name">TipFunkcije.php</attribute>
       </orm-attributes>
     </entity>
@@ -776,8 +874,10 @@
       <field name="sloAvtor" type="boolean" uuid="5e17a9bb-3ae3-4838-9fc3-64838ff1fcc0"/>
       <field name="zvrst_uprizoritve_id" type="integer" uuid="916e1fb8-3e25-402a-8ccc-2143f5bb49b3"/>
       <field name="zvrst_surs_id" type="integer" uuid="b773e1ce-40ad-4df3-a344-ef39d0d47e7e"/>
-      <field name="kartkiNaslov" type="string" uuid="7f3923fd-8952-449e-835f-6afdbd3d0619"/>
+      <field name="kratkiNaslov" type="string" uuid="1ee8c31c-c884-4ee7-a7d7-01d0148030a1"/>
       <orm-attributes>
+        <attribute name="export-file-name">Uprizoritev.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\Uprizoritve</attribute>
         <attribute name="export-file-name">Uprizoritev.php</attribute>
       </orm-attributes>
     </entity>
@@ -786,6 +886,7 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Uprizoritev" to="ZvrstUprizoritve" owner-alias="" inverse-alias="zvrstUprizoritve" many-owner="true" many-inverse="false" uuid="0300f696-e490-4ffc-a4c5-fe2eac899118">
@@ -793,12 +894,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Uprizoritev" to="ZvrstSurs" owner-alias="" inverse-alias="zvrstSurs" many-owner="true" many-inverse="false" uuid="3f7a9446-4108-4cfc-821e-1ff0e166cddf">
       <association-field from="zvrst_surs_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -823,12 +926,15 @@
       <field name="jeNastopajoci" type="boolean" uuid="984f8b46-8b5d-4cb6-89df-163e4435822f"/>
       <orm-attributes>
         <attribute name="export-file-name">Zaposlitev.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\Zaposlitve</attribute>
+        <attribute name="export-file-name">Zaposlitev.php</attribute>
       </orm-attributes>
     </entity>
     <association from="Zaposlitev" to="Oseba" caption="Oseba Sodelovanje" owner-alias="sodelovanja" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="913f58ca-5980-4103-ad46-7fb28666ab3f">
       <association-field from="oseba_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -845,6 +951,7 @@
       <orm-attributes>
         <attribute name="export-file-name">ZvrstSurs.php</attribute>
         <attribute name="repository-class">Produkcija\Repository\ZvrstiSurs</attribute>
+        <attribute name="export-file-name">ZvrstSurs.php</attribute>
       </orm-attributes>
     </entity>
     <entity name="ZvrstUprizoritve" uuid="064b8109-e697-4483-a021-6290e08bd8a9">
@@ -858,6 +965,8 @@
       <field name="ime" type="string" uuid="b96d2c89-db84-40e0-a4c3-0ff5d38c127c"/>
       <field name="opis" type="string" uuid="126e83b6-146b-467c-a1e6-ef755fe8f8b1"/>
       <orm-attributes>
+        <attribute name="export-file-name">ZvrstUprizoritve.php</attribute>
+        <attribute name="repository-class">Produkcija\Repository\ZvrstiUprizoritve</attribute>
         <attribute name="export-file-name">ZvrstUprizoritve.php</attribute>
       </orm-attributes>
     </entity>
@@ -888,6 +997,7 @@
       <field name="dogodek_izven_id" type="integer" unique="true" uuid="0514fd18-cc72-4123-9387-9015ae4a885f"/>
       <field name="prostor_id" type="integer" unique="true" uuid="5e6c624d-603b-4bcc-b723-d897155fa9ce"/>
       <field name="sezona_id" type="integer" uuid="b7472670-26c6-4f44-af8e-0ad680a5b260"/>
+      <field name="planiranZacetek" type="datetime" uuid="87e657df-efa7-407e-8234-24d1cdd478e2"/>
       <index name="zacetek">
         <index-field name="zacetek"/>
       </index>
@@ -896,12 +1006,15 @@
       </index>
       <orm-attributes>
         <attribute name="export-file-name">Dogodek.php</attribute>
+        <attribute name="repository-class">Koledar\Repository\Dogodki</attribute>
+        <attribute name="export-file-name">Dogodek.php</attribute>
       </orm-attributes>
     </entity>
     <association from="Dogodek" to="Predstava" caption="Predstava Dogodek" owner-alias="dogodek" inverse-alias="predstava" many-owner="false" many-inverse="false" uuid="fbd5abd1-cae4-4d42-b645-da4655e15d85">
       <association-field from="predstava_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -910,12 +1023,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Dogodek" to="Vaja" caption="Vaja Dogodek" owner-alias="dogodek" inverse-alias="vaja" many-owner="false" many-inverse="false" uuid="a6f2906f-548f-4218-9f2b-92495116b958">
       <association-field from="vaja_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -924,12 +1039,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Dogodek" to="DogodekIzven" caption="DogodekIzven Dogodek" owner-alias="dogodek" inverse-alias="dogodekIzven" many-owner="false" many-inverse="false" uuid="eb9dfa31-61c4-47ec-ba4b-93d9e5631b3f">
       <association-field from="dogodek_izven_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -938,12 +1055,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Dogodek" to="Sezona" caption="Sezona Dogodek" owner-alias="dogodki" inverse-alias="sezona" many-owner="true" many-inverse="false" uuid="01f1c255-6b31-4f51-8ef8-8516233cd51f">
       <association-field from="sezona_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -956,6 +1075,8 @@
         </orm-attributes>
       </field>
       <orm-attributes>
+        <attribute name="export-file-name">DogodekIzven.php</attribute>
+        <attribute name="repository-class">Koledar\Repository\DogodkiIzven</attribute>
         <attribute name="export-file-name">DogodekIzven.php</attribute>
       </orm-attributes>
     </entity>
@@ -971,12 +1092,15 @@
       <field name="vrsta" type="string" uuid="179bec80-274e-4435-a5f1-3ba6276319c5"/>
       <orm-attributes>
         <attribute name="export-file-name">Gostovanje.php</attribute>
+        <attribute name="repository-class">Koledar\Repository\Gostovanja</attribute>
+        <attribute name="export-file-name">Gostovanje.php</attribute>
       </orm-attributes>
     </entity>
     <association from="Gostovanje" to="Drzava" caption="Drzava Gostovanje" owner-alias="" inverse-alias="drzava" many-owner="true" many-inverse="false" parent-required="true" uuid="5ee77396-9866-4df9-a017-7371a6935946">
       <association-field from="drzava_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -991,12 +1115,15 @@
       <field name="uprizoritev_id" uuid="3ad286bb-672b-4100-a0bb-d994717b49f0"/>
       <orm-attributes>
         <attribute name="export-file-name">Gostujoca.php</attribute>
+        <attribute name="repository-class">Koledar\Repository\Gostujoce</attribute>
+        <attribute name="export-file-name">Gostujoca.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="Gostujoca" to="Uprizoritev" caption="Gostujoc Uprizoritve " owner-alias="gostujoc" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" uuid="f068b6aa-da3c-4623-a53c-c7bca363748d">
+    <association from="Gostujoca" to="Uprizoritev" caption="Gostujoc Uprizoritve " owner-alias="gostujoce" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" uuid="f068b6aa-da3c-4623-a53c-c7bca363748d">
       <association-field from="uprizoritev_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1013,12 +1140,15 @@
       <field name="gostujoc_id" uuid="4f5acf75-fc28-4065-b09b-cba213005dfc"/>
       <orm-attributes>
         <attribute name="export-file-name">Predstava.php</attribute>
+        <attribute name="repository-class">Koledar\Repository\Predstave</attribute>
+        <attribute name="export-file-name">Predstava.php</attribute>
       </orm-attributes>
     </entity>
     <association from="Predstava" to="Uprizoritev" owner-alias="predstave" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" uuid="04a5be80-1359-4276-9cc4-2b2203c65829">
       <association-field from="uprizoritev_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1027,12 +1157,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Predstava" to="Gostujoca" caption="Gostujoca Predstava" owner-alias="predstave" inverse-alias="gostujoca" many-owner="true" many-inverse="false" uuid="8fece4d3-1187-4efe-8b3b-a2e6248d2961">
       <association-field from="gostujoc_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1050,6 +1182,8 @@
       <field name="aktivna" type="boolean" uuid="81eee70e-1cba-4640-8d75-b486f4cb65cc"/>
       <orm-attributes>
         <attribute name="export-file-name">Sezona.php</attribute>
+        <attribute name="repository-class">Koledar\Repository\Sezone</attribute>
+        <attribute name="export-file-name">Sezona.php</attribute>
       </orm-attributes>
     </entity>
     <entity name="Vaja" uuid="efd49162-c9bd-4808-b14c-9272905f9d71">
@@ -1061,7 +1195,11 @@
         </orm-attributes>
       </field>
       <field name="uprizoritev_id" type="integer" uuid="8c7da3cd-c25d-4b94-ba3b-e56c4059e0d6"/>
+      <field name="zaporedna" type="integer" uuid="c6b8b7db-fc2c-4322-bc34-28adf38105b0"/>
+      <field name="porocilo" type="text" uuid="08583138-2c09-427e-847c-b9b6f5a71109"/>
       <orm-attributes>
+        <attribute name="export-file-name">Vaja.php</attribute>
+        <attribute name="repository-class">Koledar\Repository\Vaje</attribute>
         <attribute name="export-file-name">Vaja.php</attribute>
       </orm-attributes>
     </entity>
@@ -1069,6 +1207,7 @@
       <association-field from="uprizoritev_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1081,6 +1220,8 @@
         </orm-attributes>
       </field>
       <orm-attributes>
+        <attribute name="export-file-name">Zasedenost.php</attribute>
+        <attribute name="repository-class">Koledar\Repository\Zasedenosti</attribute>
         <attribute name="export-file-name">Zasedenost.php</attribute>
       </orm-attributes>
     </entity>
@@ -1104,6 +1245,8 @@
       <field name="opis" type="text" uuid="ef5ec34e-0da0-4693-a030-c0fa48dd2930"/>
       <field name="kapaciteta" type="integer" uuid="b34a68e3-9517-4178-896f-0f7992c389fa"/>
       <orm-attributes>
+        <attribute name="export-file-name">Abonma.php</attribute>
+        <attribute name="repository-class">Abonmaji\Repository\Abonmaji</attribute>
         <attribute name="export-file-name">Abonma.php</attribute>
       </orm-attributes>
     </entity>
@@ -1131,12 +1274,15 @@
       <field name="oseba_id" type="guid" required="true" uuid="5af35d60-a550-4f68-a3c0-4011a7733ce6"/>
       <orm-attributes>
         <attribute name="export-file-name">TerminStoritve.php</attribute>
+        <attribute name="repository-class">Prisotnost\Repository\TerminiStoritve</attribute>
+        <attribute name="export-file-name">TerminStoritve.php</attribute>
       </orm-attributes>
     </entity>
     <association from="TerminStoritve" to="Dogodek" caption="Dogodek TerminStoritve" owner-alias="terminiStoritve" inverse-alias="dogodek" many-owner="true" many-inverse="false" uuid="c165a486-3e42-4676-b647-cf9bde007c92">
       <association-field from="dogodek_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1145,12 +1291,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="TerminStoritve" to="Oseba" caption="Oseba TerminStoritve" owner-alias="" inverse-alias="oseba" many-owner="true" many-inverse="false" parent-required="true" uuid="5c552318-2760-4dbc-b55e-15c195189aaf">
       <association-field from="oseba_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1177,6 +1325,7 @@
       <association-field from="popa_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1212,6 +1361,7 @@
       <association-field from="nacin_placina_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1249,6 +1399,7 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <entity name="ProdajaPredstave" uuid="916cf60e-68a0-4df5-938d-be661930dc78">
@@ -1270,12 +1421,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="ProdajaPredstave" to="Dogodek" caption="Dogodek ProdajaPredstave" owner-alias="prodajaPredstave" inverse-alias="dogodek" many-owner="true" many-inverse="false" parent-required="true" uuid="5622c428-af19-41f9-b52d-3e61c3ece72c">
       <association-field from="dogodek_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1292,6 +1445,8 @@
       <field name="kapaciteta" type="integer" uuid="039331ed-cec3-40e0-b22e-6efb99612319"/>
       <field name="opis" type="text" uuid="491a0d72-e60a-4d27-8c90-63523ac1803b"/>
       <orm-attributes>
+        <attribute name="export-file-name">Prostor.php</attribute>
+        <attribute name="repository-class">Prodaja\Repository\Prostori</attribute>
         <attribute name="export-file-name">Prostor.php</attribute>
       </orm-attributes>
     </entity>
@@ -1316,12 +1471,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Racun" to="ProdajaPredstave" caption="ProdajaPredstave Racun" owner-alias="racun" inverse-alias="prodajaPredstave" many-owner="true" many-inverse="false" uuid="25f9afc1-dd4b-4983-b323-df7912af77b7">
       <association-field from="prodaja_predstave_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1330,12 +1487,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Racun" to="PlacilniInstrument" caption="PlacilniInstrument Racun" owner-alias="racun" inverse-alias="placilniInstrument" many-owner="true" many-inverse="false" uuid="df0697ec-3f9d-41a9-9470-072bcf827a0f">
       <association-field from="placilni_instrument_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1361,12 +1520,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="RazpisanSedez" to="Sedez" caption="Sedez ProdanSedez" owner-alias="prodanSedez" inverse-alias="sedez" many-owner="true" many-inverse="false" uuid="a52dd789-7fb2-4065-8215-dcae7d377e74">
       <association-field from="sedez_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1375,12 +1536,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="RazpisanSedez" to="Rezervacija" caption="Rezervacija RazpisanSedez" owner-alias="razpisaniSedezi" inverse-alias="rezervacija" many-owner="true" many-inverse="false" uuid="07d7cc37-79a4-479e-9ad9-52dbd99e0e31">
       <association-field from="rezervacija_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1407,6 +1570,7 @@
       <association-field from="prodaja_predstave_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1442,6 +1606,7 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Sedez" to="SedezniRed" caption="SedezniRed Sedez" owner-alias="sedez" inverse-alias="sedezniRed" many-owner="true" many-inverse="false" uuid="d738d1b4-84a3-47ff-a39e-24bc982ce209">
@@ -1449,12 +1614,14 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
     <association from="Sedez" to="PodrocjeSedenja" caption="PodrocjaSedenja Sedez" owner-alias="sedez" inverse-alias="podrocjaSedenja" many-owner="true" many-inverse="false" uuid="726a1f36-e91d-406c-aee4-67ad889403b1">
       <association-field from="podrocja_sedenja_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1492,6 +1659,7 @@
       <association-field from="podrocja_sedenja_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
@@ -1594,6 +1762,7 @@
     <association uuid="ab621734-ca60-403e-9d8c-d4547622b93b" center-position-x="0" center-position-y="0" color="4281230255"/>
     <entity uuid="ac1b966a-88ac-4a3d-9486-609c45197a87" bg-color="4294967295" hdr-color="4292006610" position-x="216" position-y="412" size-x="0" size-x2="111" size-y="0" size-y2="45"/>
     <association uuid="ae42540c-d529-4668-b731-741e16d6f47b" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="b0e2afb2-6452-438d-b17f-6749987d8859" color="4289928996"/>
     <association uuid="b19f1902-f837-4071-b2d3-5637e7333e22" center-position-x="0" center-position-y="0" color="4291261615"/>
     <association uuid="b6351580-48db-498a-9d72-f3b8074bd618" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="b82efdc1-2337-44a3-bdb7-b4eb85623b14" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
@@ -1627,6 +1796,7 @@
     <association uuid="f284cd27-323b-4a15-8b10-2bb40c623fd1" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <project uuid="f455d66d-f4c9-4990-a223-945f0b64403c" size-x="17" size-x2="3004" size-y="0" size-y2="1543"/>
     <association uuid="f50f3026-dd91-40f0-af6f-1b898b657780" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="f8d2f5e2-967a-4ce9-81b9-7c7f00f06ede" color="4291261615"/>
     <entity uuid="f98b7456-3f89-4382-bafd-2d2ba4ffa808" bg-color="4294967295" hdr-color="4292006610" position-x="232" position-y="141" size-x="0" size-x2="92" size-y="0" size-y2="115"/>
     <entity uuid="f9a3365c-4694-4029-95b6-6b1c74cb63d6" bg-color="4294967295" hdr-color="4292006610" position-x="29" position-y="186" size-x="0" size-x2="129" size-y="0" size-y2="143"/>
     <entity uuid="fa27fac4-77b6-4b38-a043-78375bbc658d" bg-color="4294967295" hdr-color="4292006610" position-x="-494" position-y="-35" size-x="0" size-x2="67" size-y="0" size-y2="31"/>

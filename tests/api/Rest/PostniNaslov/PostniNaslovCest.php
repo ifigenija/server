@@ -132,7 +132,6 @@ class PostniNaslovCest
             'popa'       => null, 
             'oseba'      => $this->objOseba['id'], 
             'naziv'      => 'zz',
-            'nazivDva'   => 'zz',
             'ulica'      => 'zz',
             'ulicaDva'   => 'zz',
             'posta'      => 'zz',
@@ -143,7 +142,7 @@ class PostniNaslovCest
             'privzeti'   => true,
         ];
         $this->obj = $pnaslov   = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('zz', $pnaslov['nazivDva']);
+        $I->assertEquals('zz', $pnaslov['naziv']);
         $I->assertNotEmpty($pnaslov['id']);
 
         //kreiramo še enega
@@ -151,7 +150,6 @@ class PostniNaslovCest
             'popa'       => $this->objPopa['id'],
             'oseba'      => null,                 
             'naziv'      => 'ww',
-            'nazivDva'   => 'ww',
             'ulica'      => 'ww',
             'ulicaDva'   => 'ww',
             'posta'      => 'ww',
@@ -163,7 +161,7 @@ class PostniNaslovCest
         ];
         $pnaslov = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($pnaslov['id']);
-        $I->assertEquals('ww', $pnaslov['nazivDva']);
+        $I->assertEquals('ww', $pnaslov['naziv']);
     }
 
     /**
@@ -249,7 +247,6 @@ class PostniNaslovCest
         $I->assertEquals($ent['popa'], null);
         $I->assertEquals($ent['oseba'], $this->objOseba['id']);
         $I->assertEquals($ent['naziv'], 'tralala');
-        $I->assertEquals($ent['nazivDva'], 'zz');
         $I->assertEquals($ent['ulica'], 'zz');
         $I->assertEquals($ent['ulicaDva'], 'zz');
         $I->assertEquals($ent['posta'], 'zz');
@@ -272,6 +269,7 @@ class PostniNaslovCest
 //            'popa'  => null,
 //            'oseba' => null,
             'naziv' => 'xx',
+            'jeeu' => true
         ];
         $resp = $I->failToCreate($this->restUrl, $data);
 

@@ -87,7 +87,7 @@ class TestPopaNullCest
             'postaNaziv' => 'zz',
             'pokrajina'  => 'zz',
             'drzava'     => null,
-            'jeeu'       => 'GG'  ,
+            'jeeu'       => false  ,
             'privzeti'   => null,
         ];
         $this->obj = $pnaslov   = $I->successfullyCreate($this->restUrl, $data);
