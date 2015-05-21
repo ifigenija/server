@@ -22,7 +22,7 @@ use ApiTester;
  *  validate metodo za entiteto - zaradi nullable=false do validacije sploh ne pride
  * relacije z drugimi entitetami
  *      - drzava     
- *      - osebe      $$ 2M
+ *      - osebe       2M
  *          . update 
  *          . get (id, list)
  *          . delete   

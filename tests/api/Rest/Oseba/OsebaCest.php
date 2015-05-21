@@ -5,44 +5,25 @@ namespace Rest\Oseba;
 use ApiTester;
 
 /**
- *      - ustvarim osebo,
- *      - preberem (vse) osebo (e)
- *      - posodobim osebo 
- *      - dodam 2 trr 
- *      - preberem 1 trr
- *      - dodam telefonsko številko
- *      - preberem telefonsko številko
- *      - dodam poštni naslov  
- *      - preberem poštni naslov
- *  - popa
- *  - user
- *  - alternacije
- *  - pogodbe
- *  - sodelovanja
- *      - preberem ustvarjeno osebo in preverim, da ima trr-je ipd. z vseh relacij
- * - brišem osebo in se morajo pčistiti poštni naslov, 
- *   trrji in telefonske številke, ker je orphan removal = true
- * - validacija
- * 
- * metode, ki jo podpira API
+ *      metode, ki jo podpira API
  *       - create
  *      - getlist
  *       - update
  *      - get - kontrola vseh polj te entitete
  *       - delete
  *      validate metodo za entiteto
- * relacije z drugimi entitetami
- *      - user
+ *      relacije z drugimi entitetami
  *      - popa           
  *          . update 
  *          . get (id, list)
  *          . delete   
- *      - naslovi         2M 
- * - telefonske     $$ 2M 
- * - trrji          $$ 2M 
- * - alternacije    $$ 2M 
- * - pogodbe        $$ 2M 
- * - sodelovanja    $$ 2M 
+ * - naslovi        $$ 2M (morda začasno ne deluje zaradi boolean? 
+ *      - telefonske     O2M 
+ *      - trrji          O2M 
+ *      - pogodbe        O2M 
+ * 
+ *      - alternacije    O2M 
+ *      - sodelovanja    O2M 
  *      getlist različne variante relacij
  *      - vse
  *      - default
@@ -60,9 +41,12 @@ class OsebaCest
     private $drzavaUrl       = '/rest/drzava';
     private $popaUrl         = '/rest/popa';
     private $userUrl         = '/rest/user';
+    private $alternacijaUrl  = '/rest/alternacija';
+    private $sodelovanjeUrl  = '/rest/sodelovanje';
+    private $zaposlitevUrl  = '/rest/zaposlitev';
     private $id;
     private $obj;
-    private $objOseba2;
+    private $obj2;
     private $objpostni;
     private $objtrr;
     private $objtel;
@@ -74,6 +58,20 @@ class OsebaCest
     private $postni;
     private $tel;
     private $tel2;
+    private $telefonskaUrl   = '/rest/telefonska';
+    private $pogodbaUrl      = '/rest/pogodba';
+    private $objTelefonska1;
+    private $objTelefonska2;
+    private $objTrr1;
+    private $objTrr2;
+    private $objPogodba1;
+    private $objPogodba2;
+    private $objAlternacija1;
+    private $objAlternacija2;
+    private $objSodelovanje1;
+    private $objSodelovanje2;
+    private $objZaposlitev1;
+    private $objZaposlitev2;
 
     public function _before(ApiTester $I)
     {
@@ -189,7 +187,7 @@ class OsebaCest
             'srednjeIme'    => 'zz',
             'psevdonim'     => 'zz',
             'email'         => 'x@xxx.xx',
-            'datumRojstva'  => '1973-28-03T04:30:00',
+            'datumRojstva'  => '1973-03-28T00:00:00+0100',
             'emso'          => 'ZZ',
             'davcna'        => 'ZZ123',
             'spol'          => 'M',
@@ -214,7 +212,7 @@ class OsebaCest
             'srednjeIme'    => 'aa',
             'psevdonim'     => 'aa',
             'email'         => 'a@aaa.aa',
-            'datumRojstva'  => '1975-28-03T04:30:00',
+            'datumRojstva'  => '1975-03-28T00:00:00+0100',
             'emso'          => 'AA',
             'davcna'        => 'AA123',
             'spol'          => 'M',
@@ -225,7 +223,7 @@ class OsebaCest
             'user'          => null,
         ];
 
-        $this->objOseba2 = $oseba           = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $oseba      = $I->successfullyCreate($this->restUrl, $data);
 
         $I->assertEquals('aa', $oseba['ime']);
         $I->assertNotEmpty($oseba['id']);
@@ -396,7 +394,7 @@ class OsebaCest
         $I->assertEquals('zz', $oseba['srednjeIme']);
         $I->assertEquals('zz', $oseba['psevdonim'], "psevdonim");
         $I->assertEquals('x@xxx.xx', $oseba['email'], "email");
-        $I->assertEquals('1973-28-03T04:30:00', $oseba['datumRojstva']);
+        $I->assertEquals('1973-03-28T00:00:00+0100', $oseba['datumRojstva']);
         $I->assertEquals('ZZ', $oseba['emso'], "napačen emšo");
         $I->assertEquals('ZZ123', $oseba['davcna'], 'napačna davčna');
 //        $I->assertEquals('M', $oseba['spol'],"spol ni pravilen");   //$$ rb validator pri create-u javi napako
@@ -406,7 +404,6 @@ class OsebaCest
         $I->assertEquals('zz', $oseba['krajRojstva']);
 
         codecept_debug($oseba);
-        $I->assertEquals($this->objUser['id'], $oseba['user']);
         $I->assertTrue(isset($oseba['alternacije']));
         $I->assertTrue(isset($oseba['pogodbe']));
         $I->assertTrue(isset($oseba['sodelovanja']));
@@ -465,11 +462,11 @@ class OsebaCest
     public function ustvariRelacijoSPopa(ApiTester $I)
     {
         // put       http://ifigenija.local:8080/rest/oseba/00090000-555a-d470-54e1-a0ac34f09cb7/popa/00080000-555a-d470-0ed7-2ef2d2de4d03?XDEBUG_SESSION_START=netbeans-xdebug
-        $resp = $I->successfullyUpdate($this->restUrl, $this->objOseba2['id'] . "/popa/" . $this->objPopa1['id'], []);
+        $resp = $I->successfullyUpdate($this->restUrl, $this->obj2['id'] . "/popa/" . $this->objPopa1['id'], []);
         codecept_debug($resp);
 
         // ustvarimo še eno relacijo z 2. popa
-        $resp = $I->successfullyUpdate($this->restUrl, $this->objOseba2['id'] . "/popa/" . $this->objPopa2['id'], []);
+        $resp = $I->successfullyUpdate($this->restUrl, $this->obj2['id'] . "/popa/" . $this->objPopa2['id'], []);
         codecept_debug($resp);
     }
 
@@ -483,13 +480,12 @@ class OsebaCest
     {
         // GET   http://ifigenija.local:8080/rest/oseba/00090000-555b-0689-36e7-f9a8471d5932/popa?XDEBUG_SESSION_START=netbeans-xdebug
         // get list
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objOseba2['id'], "popa", "");
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "popa", "");
         $I->assertEquals(2, count($resp));
 
         // get po popa id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objOseba2['id'], "popa", $this->objPopa1['id']);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "popa", $this->objPopa1['id']);
         $I->assertEquals(1, count($resp));
-
     }
 
     /**
@@ -502,9 +498,9 @@ class OsebaCest
     {
         // primer:
         // DELETE   http://ifigenija.local:8080/rest/oseba/00090000-555b-31ed-d438-f3f46c26b59e/popa/00080000-555b-31ed-7683-d4cdd224d2b5?XDEBUG_SESSION_START=netbeans-xdebug
-        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->objOseba2['id'], "popa", $this->objPopa1['id']);
+        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->obj2['id'], "popa", $this->objPopa1['id']);
 
-        $resp = $I->failToGetRelation($this->restUrl, $this->objOseba2['id'], "popa", $this->objPopa1['id']);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "popa", $this->objPopa1['id']);
     }
 
     /**
@@ -535,7 +531,7 @@ class OsebaCest
             'srednjeIme'    => 'bb',
             'psevdonim'     => 'bb',
             'email'         => 'b@bbb.aa',
-            'datumRojstva'  => '1976-28-03T04:30:00',
+            'datumRojstva'  => '2010-02-01T00:00:00+0100',
             'emso'          => 'BB',
             'davcna'        => 'BB123',
             'spol'          => 'M',
@@ -543,7 +539,6 @@ class OsebaCest
             'drzavljanstvo' => 'bb',
             'drzavaRojstva' => 'bb',
             'krajRojstva'   => 'bb',
-            'user'          => null,
         ];
 
         // test validacije - oseba mora imeti ime
@@ -561,7 +556,7 @@ class OsebaCest
             'srednjeIme'    => 'cc',
             'psevdonim'     => 'cc',
             'email'         => 'c@bbb.aa',
-            'datumRojstva'  => '1977-28-03T04:30:00',
+            'datumRojstva'  => '2011-02-28T00:00:00+0100',
             'emso'          => 'CC',
             'davcna'        => 'CC123',
             'spol'          => 'M',
@@ -569,12 +564,268 @@ class OsebaCest
             'drzavljanstvo' => 'cc',
             'drzavaRojstva' => 'cc',
             'krajRojstva'   => 'cc',
-            'user'          => null,
         ];
         // test validacije - oseba mora imeti priimek
         $resp = $I->failToCreate($this->restUrl, $data);
         $I->assertNotEmpty($resp);
         $I->assertEquals(1000302, $resp[0]['code']);
+    }
+
+    /**
+     * kreiramo vsaj en zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createVecTelefonskih(ApiTester $I)
+    {
+        $data                 = [
+            'vrsta'    => 'domaca',
+            'stevilka' => '567',
+            'privzeta' => true,
+            'popa'     => null,
+            'oseba'    => $this->obj2['id'],
+        ];
+        $this->objTelefonska1 = $ent                  = $I->successfullyCreate($this->telefonskaUrl, $data);
+        $I->assertTrue(TRUE);
+        $I->assertNotEmpty($ent['id']);
+
+        // še en zapis
+        $data                 = [
+            'vrsta'    => 'fiksna',
+            'stevilka' => '012',
+            'privzeta' => true,
+            'popa'     => null,
+            'oseba'    => $this->obj2['id'],
+        ];
+        $this->objTelefonska2 = $ent                  = $I->successfullyCreate($this->telefonskaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     *  napolnimo vsaj en zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createVecTrrjev(ApiTester $I)
+    {
+        $data          = [
+            'stevilka' => 'WW123',
+            'swift'    => 'WW123',
+            'bic'      => 'WW123',
+            'banka'    => 'WW123',
+            'popa'     => null,
+            'oseba'    => $this->obj2['id'],
+        ];
+        $this->objTrr1 = $trr           = $I->successfullyCreate($this->trrUrl, $data);
+        $I->assertNotEmpty($trr['id']);
+
+
+        //kreiramo še en zapis
+        $data          = [
+            'stevilka' => 'A1',
+            'swift'    => 'A1',
+            'bic'      => 'A1',
+            'banka'    => 'A1',
+            'popa'     => null,
+            'oseba'    => $this->obj2['id'],
+        ];
+        $this->objTrr2 = $trr           = $I->successfullyCreate($this->trrUrl, $data);
+        $I->assertNotEmpty($trr['id']);
+        $I->assertEquals('A1', $trr['banka']);
+    }
+
+    /**
+     *  kreiramo pogodbo
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecPogodb(ApiTester $I)
+    {
+        $data              = [
+            'sifra'             => 'ZZ123',
+            'vrednostVaje'      => 33.33,
+            'vrednostPredstave' => 44.44,
+            'vrednostUre'       => 22.22,
+            'aktivna'           => false,
+            'opis'              => 'zz',
+            'popa'              => null,
+            'oseba'             => $this->obj2['id'],
+            'trr'               => $this->objTrr1['id'],
+        ];
+        $this->objPogodba1 = $ent               = $I->successfullyCreate($this->pogodbaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data              = [
+            'sifra'             => 'WW4',
+            'vrednostVaje'      => 33.33,
+            'vrednostPredstave' => 44.44,
+            'vrednostUre'       => 22.22,
+            'aktivna'           => false,
+            'opis'              => 'ww',
+            'popa'              => null,
+            'oseba'             => $this->obj2['id'],
+            'trr'               => $this->objTrr1['id'],
+        ];
+        $this->objPogodba2 = $ent               = $I->successfullyCreate($this->pogodbaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecAlternacij(ApiTester $I)
+    {
+        $data                  = [
+            'zaposlen'     => true,
+            'funkcija'     => null,
+            'sodelovanje'  => NULL,
+            'oseba'        => $this->obj2['id'],
+            'koprodukcija' => null,
+            'pogodba'      => NULL,
+        ];
+        $this->objAlternacija1 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        $data                  = [
+            'zaposlen'     => true,
+            'funkcija'     => null,
+            'sodelovanje'  => NULL,
+            'oseba'        => $this->obj2['id'],
+            'koprodukcija' => null,
+            'pogodba'      => NULL,
+        ];
+        $this->objAlternacija2 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecZaposlitev(ApiTester $I)
+    {
+        $data                = [
+            'status'              => 'zz',
+            'zacetek'             => '2010-02-01T00:00:00+0100',
+            'konec'               => '2010-02-01T00:00:00+0100',
+            'tip'                 => 1,
+            'delovnaObveza'       => 2,
+            'malica'              => 'zz',
+            'izmenskoDelo'        => true,
+            'individualnaPogodba' => true,
+            'jeZaposlenVdrugemJz' => TRUE,
+            'jeNastopajoci'       => TRUE,
+            'oseba'               => $this->obj2['id'],
+        ];
+        $this->objSodelovanje1 = $ent                 = $I->successfullyCreate($this->zaposlitevUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        
+        $data                = [
+            'status'              => 'aa',
+            'zacetek'             => '2012-02-01T00:00:00+0100',
+            'konec'               => '2013-02-01T00:00:00+0100',
+            'tip'                 => 3,
+            'delovnaObveza'       => 4,
+            'malica'              => 'aa',
+            'izmenskoDelo'        => true,
+            'individualnaPogodba' => true,
+            'jeZaposlenVdrugemJz' => TRUE,
+            'jeNastopajoci'       => TRUE,
+            'oseba'               => $this->obj2['id'],
+        ];
+        $this->objSodelovanje2 = $ent                 = $I->successfullyCreate($this->zaposlitevUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecTelefonskih
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSTelefonskimi(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "telefonske", "");
+        $I->assertEquals(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "telefonske", $this->objTelefonska1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecTrrjev
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSTrrji(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "trrji", "");
+        $I->assertEquals(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "trrji", $this->objTrr1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecPogodb
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSPogodbami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "pogodbe", "");
+        $I->assertEquals(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "pogodbe", $this->objPogodba1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecAlternacij
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZAlternacijami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "alternacije", "");
+        $I->assertEquals(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "alternacije", $this->objAlternacija1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecZaposlitev
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSSodelovanji(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "sodelovanja", "");
+        $I->assertEquals(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "sodelovanja", $this->objSodelovanje1['id']);
+        $I->assertEquals(1, count($resp));
     }
 
 }

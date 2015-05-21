@@ -23,8 +23,8 @@ forms:
             - drzavljanstvo
             - drzavaRojstva
             - krajRojstva
-#            - user         # 
-#            - telefonske
+#            - user         # bomo na strani userja urejali
+#            - telefonske@
 #            - trrji
 #            - alternacije
 #            - pogodbe
@@ -45,6 +45,26 @@ hydrator:
 relation:
     default:
         popa:
+            enabled: true
+            hydrator:
+                exclude: []
+        telefonske:
+            enabled: true
+            hydrator:
+                exclude: []
+        trrji:
+            enabled: true
+            hydrator:
+                exclude: []
+        alternacije:
+            enabled: true
+            hydrator:
+                exclude: []
+        pogodbe:
+            enabled: true
+            hydrator:
+                exclude: []
+        sodelovanja:
             enabled: true
             hydrator:
                 exclude: []
