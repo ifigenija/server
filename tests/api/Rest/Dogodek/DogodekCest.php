@@ -26,8 +26,8 @@ use ApiTester;
  *      - gostovanje
  *      - dogodekIzven : narejeno pri dogodekIzvenCest
  *      - prostor
- * - arhiv                      $$rb še ToMany relacije
- * - terminiStoritve            $$ 2M
+ *      - arhiv                      O2M
+ *      - terminiStoritve            O2M
  *      - prodajaPredstave           $$ zaenkrat ne delamo prodaje
  *      - sezona
  * 

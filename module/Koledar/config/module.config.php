@@ -26,6 +26,7 @@ return [
             'Relation\gostujoca' => 'Max\Factory\ToManyControllerFactory',
             'Rest\dogodekIzven'   => 'Max\Factory\RestControllerFactory',
             'Rest\sezona'         => 'Max\Factory\RestControllerFactory',
+            'Relation\sezona' => 'Max\Factory\ToManyControllerFactory',
             'Rest\vaja'           => 'Max\Factory\RestControllerFactory',
             'Rest\zasedenost'     => 'Max\Factory\RestControllerFactory',
         ]

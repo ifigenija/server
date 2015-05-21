@@ -18,8 +18,8 @@ use ApiTester;
  *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto - je ni
- * relacije z drugimi entitetami
- * - dogodki 2M     $$ rb 
+ *      relacije z drugimi entitetami
+ *      - dogodki O2M
  *      getlist različne variante relacij
  *      - vse
  * 
@@ -28,8 +28,15 @@ use ApiTester;
 class SezonaCest
 {
 
-    private $restUrl = '/rest/sezona';
+    private $restUrl    = '/rest/sezona';
+    private $dogodekUrl = '/rest/dogodek';
+    private $vajaUrl = '/rest/vaja';
     private $obj;
+    private $objSezona2;
+    private $objDogodek1;
+    private $objDogodek2;
+    private $objVaja1;
+    private $objVaja2;
 
     public function _before(ApiTester $I)
     {
@@ -66,10 +73,86 @@ class SezonaCest
             'konec'     => '2013-02-01T00:00:00+0100',
             'aktivna'   => true,
         ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $this->objSezona2 = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['imeSezone'], 'aa');
+    }
+
+        /**
+     * 
+     * @param ApiTester $I
+     */
+    public function createVajo(ApiTester $I)
+    {
+        $data          = [
+            'zaporedna'   => 1,
+            'porocilo'    => 'zz',
+            'dogodek'     => null, // najprej mora biti kreirana vaja, šele potem dogodek.
+            'uprizoritev' => null,
+        ];
+        $this->objVaja1 = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['porocilo'], 'zz');
+
+        $data          = [
+            'zaporedna'   => 1,
+            'porocilo'    => 'cc',
+            'dogodek'     => null, // najprej mora biti kreirana vaja, šele potem dogodek.
+            'uprizoritev' => null,
+        ];
+        $this->objVaja2 = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends create
+     * @depends createVajo
+     * @param ApiTester $I
+     */
+    public function createDogodek(ApiTester $I)
+    {
+        $data              = [
+            'planiranZacetek' => '2011-02-01T00:00:00+0100',
+            'zacetek'         => '2012-02-01T00:00:00+0100',
+            'konec'           => '2013-02-01T00:00:00+0100',
+            'status'          => 1,
+            'razred'          => 'zz',
+            'termin'          => 'zz',
+            'ime'             => 'zz',
+            'predstava'       => null,
+            'zasedenost'      => null,
+            'vaja'            => $this->objVaja1['id'],
+            'gostovanje'      => null,
+            'dogodekIzven'    => null,
+            'prostor'         => null,
+            'sezona'          => $this->objSezona2['id'],
+        ];
+        $this->objDogodek1 = $ent               = $I->successfullyCreate($this->dogodekUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data              = [
+            'planiranZacetek' => '2011-02-01T00:00:00+0100',
+            'zacetek'         => '2012-02-01T00:00:00+0100',
+            'konec'           => '2013-02-01T00:00:00+0100',
+            'status'          => 2,
+            'razred'          => 'aa',
+            'termin'          => 'aa',
+            'ime'             => 'aa',
+            'predstava'       => null,
+            'zasedenost'      => null,
+            'vaja'            => $this->objVaja2['id'],
+            'gostovanje'      => null,
+            'dogodekIzven'    => null,
+            'prostor'         => null,
+            'sezona'          => $this->objSezona2['id'],
+        ];
+        $this->objDogodek2 = $ent               = $I->successfullyCreate($this->dogodekUrl, $data);
+        $I->assertNotEmpty($ent['id']);
     }
 
     /**
@@ -134,9 +217,9 @@ class SezonaCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['zacetek'],'2010-02-01T00:00:00+0100' );
-        $I->assertEquals($ent['konec'  ],'2011-02-01T00:00:00+0100' );
-        $I->assertEquals($ent['aktivna'],true );
+        $I->assertEquals($ent['zacetek'], '2010-02-01T00:00:00+0100');
+        $I->assertEquals($ent['konec'], '2011-02-01T00:00:00+0100');
+        $I->assertEquals($ent['aktivna'], true);
 
         $I->assertTrue(isset($ent['dogodki']));
 
@@ -154,4 +237,22 @@ class SezonaCest
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
 
+        /**
+     * preberemo relacije
+     * 
+     * @depends createDogodek
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZDogodki(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objSezona2['id'], "dogodki", "");
+        $I->assertEquals(2, count($resp));
+
+        // get po popa id  
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objSezona2['id'], "dogodki", $this->objDogodek1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    
 }

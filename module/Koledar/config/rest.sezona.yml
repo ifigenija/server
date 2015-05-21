@@ -18,3 +18,10 @@ lists:
             - exclude: []
     vse: 
         filter:
+relation:
+    default:
+        dogodki:
+            enabled: true
+            hydrator:
+                exclude: []            
+            
