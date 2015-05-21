@@ -104,7 +104,7 @@ class Oseba
     protected $email ='';
 
     /**
-     * @ORM\Column(nullable=true)
+     * @ORM\Column(type="date",nullable=true)
      * @Max\I18n(label="Datum rojstva", description="Rojstni datum oseba")   
      * @Max\Ui(icon="fa fa-birthday-cake")
      * @var string

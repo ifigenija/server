@@ -123,20 +123,20 @@ class UprizoritevCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'faza'             => 'zz',
+            'faza'             => 'produkcija',
             'naslov'           => 'zz',
             'podnaslov'        => 'zz',
             'delovniNaslov'    => 'zz',
             'datumPremiere'    => '2010-02-01T00:00:00+0100',
             'stOdmorov'        => 1,
             'avtor'            => 'zz',
-//            'gostujoca'        => true, // $$ bool vrača napako convertToBool
+            'gostujoca'        => true, // $$ bool vrača napako convertToBool
             'trajanje'         => 2,
             'opis'             => 'zz',
             'arhIdent'         => 'zz',
             'arhOpomba'        => 'zz',
             'datumZakljucka'   => '2019-02-01T00:00:00+0100',
-//            'sloAvtor'         => true, // $$ bool vrača napako convertToBool
+            'sloAvtor'         => true, // $$ bool vrača napako convertToBool
             'kratkiNaslov'     => 'zz',
             'besedilo'         => $this->objBesedilo['id'],
             'zvrstUprizoritve' => $this->objZvrstUprizoritve['id'],
@@ -149,20 +149,20 @@ class UprizoritevCest
 
         // kreiram še en zapis
         $data = [
-            'faza'             => 'aa',
+            'faza'             => 'arhiv',
             'naslov'           => 'aa',
             'podnaslov'        => 'aa',
             'delovniNaslov'    => 'aa',
             'datumPremiere'    => '2010-02-01T00:00:00+0100',
             'stOdmorov'        => 3,
             'avtor'            => 'aa',
-//            'gostujoca'        => true, // $$ bool vrača napako convertToBool
+            'gostujoca'        => true, // $$ bool vrača napako convertToBool
             'trajanje'         => 4,
             'opis'             => 'aa',
             'arhIdent'         => 'aa',
             'arhOpomba'        => 'aa',
             'datumZakljucka'   => '2019-02-01T00:00:00+0100',
-//            'sloAvtor'         => true,// $$ bool vrača napako convertToBool
+            'sloAvtor'         => true,// $$ bool vrača napako convertToBool
             'kratkiNaslov'     => 'aa',
             'besedilo'         => $this->objBesedilo['id'],
             'zvrstUprizoritve' => null,
@@ -175,20 +175,20 @@ class UprizoritevCest
         
         // kreiram še en zapis brez trajanja
         $data = [
-            'faza'             => 'bb',
+            'faza'             => 'postprodukcija',
             'naslov'           => 'bb',
             'podnaslov'        => 'bb',
             'delovniNaslov'    => 'bb',
             'datumPremiere'    => '2010-02-01T00:00:00+0100',
             'stOdmorov'        => null,     // testiramo notEmpty filter
             'avtor'            => null,
-//            'gostujoca'        => true,    // $$ bool vrača napako convertToBool
+            'gostujoca'        => true,    // $$ bool vrača napako convertToBool
             'trajanje'         => null,     // testiramo notEmpty filter
             'opis'             => 'b',
             'arhIdent'         => 'b',
             'arhOpomba'        => 'b',
             'datumZakljucka'   => '2019-02-01T00:00:00+0100',
-//            'sloAvtor'         => true,    // $$ bool vrača napako convertToBool
+            'sloAvtor'         => true,    // $$ bool vrača napako convertToBool
             'kratkiNaslov'     => 'bb',
             'besedilo'         => $this->objBesedilo['id'],
             'zvrstUprizoritve' => null,
@@ -212,8 +212,8 @@ class UprizoritevCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(2, $resp['state']['totalRecords']);
-        $I->assertEquals("aa", $list[0]['naslov']);      //glede na sort
+        $I->assertEquals(3, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['naslov']);      //glede na sort   
     }
 
     /**
@@ -230,9 +230,9 @@ class UprizoritevCest
         $list = $resp['data'];
         codecept_debug($resp);
 
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals(3, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        $I->assertEquals("aa", $list[0]['opis']);      // $$ odvisno od sortiranja
+        $I->assertEquals("aa", $list[0]['opis']);      // $$ sortiranje ne deluje v redu? b namesto aa
     }
 
     /**
@@ -263,20 +263,20 @@ class UprizoritevCest
         codecept_debug($ent);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['faza'], 'zz');
+        $I->assertEquals($ent['faza'], 'produkcija');
         $I->assertEquals($ent['naslov'], 'zz');
         $I->assertEquals($ent['podnaslov'], 'zz');
         $I->assertEquals($ent['delovniNaslov'], 'zz');
         $I->assertEquals($ent['datumPremiere'], '2010-02-01T00:00:00+0100');
         $I->assertEquals($ent['stOdmorov'], 1);
         $I->assertEquals($ent['avtor'], 'zz');
-//        $I->assertEquals($ent['gostujoca'], true);  // $$ bool vrača napako convertToBool
+        $I->assertEquals($ent['gostujoca'], true);  
         $I->assertEquals($ent['trajanje'], 2);
         $I->assertEquals($ent['opis'], 'yy');
         $I->assertEquals($ent['arhIdent'], 'zz');
         $I->assertEquals($ent['arhOpomba'], 'zz');
         $I->assertEquals($ent['datumZakljucka'], '2019-02-01T00:00:00+0100');
-//        $I->assertEquals($ent['sloAvtor'], true);// $$ bool vrača napako convertToBool
+        $I->assertEquals($ent['sloAvtor'], true);// $$ bool vrača napako convertToBool
         $I->assertEquals($ent['kratkiNaslov'], 'zz');
         $I->assertEquals($ent['besedilo'], $this->objBesedilo['id']);
         $I->assertEquals($ent['zvrstUprizoritve'], $this->objZvrstUprizoritve['id']);

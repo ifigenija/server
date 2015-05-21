@@ -7,7 +7,7 @@
     readOnly: true
     description: Faza uprizoritve
     defaultValue: 
-        osnutek:
+        osnutek:                    # $$ rb uskladi z wiki - ali je to podfaza v predprodukciji
            label: Dolgoročni plan
         plan:
            label: Predprodukcija 

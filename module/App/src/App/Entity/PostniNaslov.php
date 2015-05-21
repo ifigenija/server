@@ -63,7 +63,7 @@ class PostniNaslov
      * @Max\I18n(label="Dodatni naziv", description="Dodatni naziv naslova")
      * @var string
      */
-    private $nazivDva;
+//    private $nazivDva;
 
     /**
      * Ulica naslovnika

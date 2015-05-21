@@ -23,7 +23,7 @@ forms:
             - drzavljanstvo
             - drzavaRojstva
             - krajRojstva
-            - user
+#            - user         # 
 #            - telefonske
 #            - trrji
 #            - alternacije
