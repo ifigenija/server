@@ -106,7 +106,11 @@ class TrrCest
         $I->assertEquals('ZZ12', $popa['sifra']);
     }
 
-    // napolnimo vsaj en zapis
+    /**
+     *  napolnimo vsaj en zapis
+     * 
+     * @param ApiTester $I
+     */
     public function create(ApiTester $I)
     {
         $data      = [
@@ -114,7 +118,7 @@ class TrrCest
             'swift'    => 'ZZ123',
             'bic'      => 'ZZ123',
             'banka'    => 'ZZ123',
-            'popa'     => null,   
+            'popa'     => null,
             'oseba'    => $this->objOseba['id'],
         ];
         $this->obj = $trr       = $I->successfullyCreate($this->restUrl, $data);
@@ -128,7 +132,7 @@ class TrrCest
             'bic'      => 'WW123',
             'banka'    => 'WW123',
             'popa'     => $this->objPopa['id'],
-            'oseba'    => null,   
+            'oseba'    => null,
         ];
         $this->objTrr2 = $trr           = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($trr['id']);
@@ -142,7 +146,7 @@ class TrrCest
             'bic'      => 'A1',
             'banka'    => 'A1',
             'popa'     => $this->objPopa['id'],
-            'oseba'    => null,       //$$ začasno izključim
+            'oseba'    => null, //$$ začasno izključim
         ];
         $trr  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($trr['id']);
