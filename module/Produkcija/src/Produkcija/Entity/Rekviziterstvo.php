@@ -49,7 +49,7 @@ class Rekviziterstvo
     private $rekvizit;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="rekviziti")
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="rekviziterstva")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id")
      * @Max\I18n(label="Uprizoritev",  description="Za katero uprizoritev je rekvizit")
      * @Max\Ui(type="toone")

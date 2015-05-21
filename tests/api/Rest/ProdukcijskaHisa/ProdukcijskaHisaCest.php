@@ -274,14 +274,14 @@ class ProdukcijskaHisaCest
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
 
-        /**
+    /**
      * preberemo relacije
      * 
      * @depends createVecKoproducentov
      * 
      * @param ApiTester $I
      */
-    public function preberiRelacijeZAlternacijami(ApiTester $I)
+    public function preberiRelacijeSKoproducenti(ApiTester $I)
     {
         $resp = $I->successfullyGetRelation($this->restUrl, $this->objProdukcijskaHisa2['id'], "koprodukcije", "");
         $I->assertEquals(2, count($resp));
@@ -290,5 +290,4 @@ class ProdukcijskaHisaCest
         $I->assertEquals(1, count($resp));
     }
 
-    
 }

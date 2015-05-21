@@ -186,7 +186,8 @@ class RekvizitCest
         $I->successfullyDelete($this->restUrl, $this->obj['id']);
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
-/**
+
+    /**
      * preberemo relacije
      * 
      * @depends createRekviziterstva

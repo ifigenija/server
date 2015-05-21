@@ -136,7 +136,7 @@ class Dogodek
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Arhivalija", mappedBy="dogodek")
      * @var <Arhiv>
      */
-    private $arhiv;
+    private $arhivi;
 
     /**
      * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="dogodek")
@@ -235,9 +235,9 @@ class Dogodek
         return $this->prostor;
     }
 
-    public function getArhiv()
+    public function getArhivi()
     {
-        return $this->arhiv;
+        return $this->arhivi;
     }
 
     public function getTerminiStoritve()
@@ -321,7 +321,7 @@ class Dogodek
         return $this;
     }
 
-    public function setGostovanje($gostovanje)
+    public function setGostovanje(\Koledar\Entity\Gostovanje $gostovanje)
     {
         $this->gostovanje = $gostovanje;
         return $this;
@@ -339,9 +339,9 @@ class Dogodek
         return $this;
     }
 
-    public function setArhiv($arhiv)
+    public function setArhivi($arhivi)
     {
-        $this->arhiv = $arhiv;
+        $this->arhivi = $arhivi;
         return $this;
     }
 
@@ -362,5 +362,6 @@ class Dogodek
         $this->sezona = $sezona;
         return $this;
     }
+
 
 }

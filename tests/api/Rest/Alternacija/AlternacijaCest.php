@@ -88,6 +88,10 @@ class AlternacijaCest
         $I->assertNotEmpty($oseba['id']);
     }
 
+    /**
+     * 
+     * @param ApiTester $I
+     */
     public function createUprizoritev(ApiTester $I)
     {
         $data                 = [

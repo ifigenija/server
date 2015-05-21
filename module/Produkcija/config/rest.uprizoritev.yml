@@ -24,7 +24,7 @@ forms:
 #            - koprodukcije
 #            - funkcije
 #            - arhiv
-#            - rekviziti
+#            - rekviziterstva
 #            - vaje
 #            - predstave
 #            - gostujoce
@@ -42,7 +42,7 @@ lists:
                       targetEntity: Produkcija\Entity\Besedilo
                       required: true
 #                - name:koprodukcije     # $$ rb ali v namenskem view-u?
-#                - name:vloge     # $$ rb ali v namenskem view-u?
+#                - name:funkcije     # $$ rb ali v namenskem view-u?
 #                - name:arhiv     # $$ rb ali v namenskem view-u?
 #                - name:rekviziti     # $$ rb ali v namenskem view-u?
 #                - name:vaje     # $$ rb ali v namenskem view-u?
@@ -54,4 +54,33 @@ lists:
             - exclude: []
     vse: 
         filter:
-    
+relation:
+    default:
+        koprodukcije:
+            enabled: true
+            hydrator:
+                exclude: []    
+        funkcije:
+            enabled: true
+            hydrator:
+                exclude: []    
+        arhivi:
+            enabled: true
+            hydrator:
+                exclude: []    
+        rekviziterstva:
+            enabled: true
+            hydrator:
+                exclude: []    
+        vaje:
+            enabled: true
+            hydrator:
+                exclude: []    
+        predstave:
+            enabled: true
+            hydrator:
+                exclude: []    
+        gostujoce:
+            enabled: true
+            hydrator:
+                exclude: []    

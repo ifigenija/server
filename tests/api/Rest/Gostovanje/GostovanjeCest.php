@@ -36,7 +36,7 @@ class GostovanjeCest
     private $vajaUrl      = '/rest/vaja';
     private $predstavaUrl = '/rest/predstava';
     private $obj;
-    private $objGostovanje2;
+    private $obj2;
     private $objDrzava;
     private $objDogodek;
     private $objVaja;
@@ -89,12 +89,12 @@ class GostovanjeCest
         $I->assertEquals($ent['vrsta'], 'zz');
 
         // kreiramo še en zapis
-        $data                 = [
+        $data       = [
             'vrsta'   => 'aa',
             'dogodek' => null,
             'drzava'  => $this->objDrzava['id'],
         ];
-        $this->objGostovanje2 = $ent                  = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['vrsta'], 'aa');
@@ -107,12 +107,12 @@ class GostovanjeCest
      * 
      * @param ApiTester $I
      */
-    public function createPredstavo(ApiTester $I)
+    public function createVecPredstav(ApiTester $I)
     {
         $data                = [
             'dogodek'     => NULL,
             'uprizoritev' => null,
-            'gostovanje'  => $this->objGostovanje2['id'],
+            'gostovanje'  => $this->obj2['id'],
             'gostujoca'   => null,
         ];
         $this->objPredstava1 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
@@ -122,7 +122,7 @@ class GostovanjeCest
         $data                = [
             'dogodek'     => NULL,
             'uprizoritev' => null,
-            'gostovanje'  => $this->objGostovanje2['id'],
+            'gostovanje'  => $this->obj2['id'],
             'gostujoca'   => null,
         ];
         $this->objPredstava2 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
@@ -272,21 +272,20 @@ class GostovanjeCest
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
 
-        /**
+    /**
      * preberemo relacije
-     * @depends createPredstavo
+     * @depends createVecPredstav
      * 
      * @param ApiTester $I
      */
     public function preberiRelacijeSPredstavami(ApiTester $I)
     {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objGostovanje2['id'], "predstave", "");
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "predstave", "");
         $I->assertEquals(2, count($resp));
 
         // get po popa id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objGostovanje2['id'], "predstave", $this->objPredstava1['id']);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "predstave", $this->objPredstava1['id']);
         $I->assertEquals(1, count($resp));
-
     }
 
 }

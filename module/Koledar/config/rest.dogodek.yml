@@ -19,7 +19,7 @@ forms:
             - gostovanje
             - dogodekIzven
             - prostor
-#            - arhiv
+#            - arhivi
 #            - terminiStoritve
 #            - prodajaPredstave
             - sezona
@@ -39,7 +39,7 @@ lists:
         filter:
 relation:
     default:
-        arhiv:
+        arhivi:
             enabled: true
             hydrator:
                 exclude: []            

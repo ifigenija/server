@@ -471,11 +471,11 @@ class DogodekCest
         $I->assertEquals($ent['prostor'], $this->objProstor['id']);
         $I->assertEquals($ent['sezona'], $this->objSezona['id']);
 
-        $I->assertTrue(isset($ent['arhiv']));
+        $I->assertTrue(isset($ent['arhivi']));
         $I->assertTrue(isset($ent['terminiStoritve']));
         $I->assertTrue(isset($ent['prodajaPredstave']));
 
-        $I->assertEquals(0, count($ent['arhiv']));
+        $I->assertEquals(0, count($ent['arhivi']));
         $I->assertEquals(0, count($ent['terminiStoritve']));
         $I->assertEquals(0, count($ent['prodajaPredstave']));
     }
@@ -557,11 +557,11 @@ class DogodekCest
      */
     public function preberiRelacijeZArhivalijami(ApiTester $I)
     {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objDogodek2['id'], "arhiv", "");
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objDogodek2['id'], "arhivi", "");
         $I->assertEquals(2, count($resp));
 
         // get po popa id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objDogodek2['id'], "arhiv", $this->objArhivalija1['id']);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objDogodek2['id'], "arhivi", $this->objArhivalija1['id']);
         $I->assertEquals(1, count($resp));
     }
 

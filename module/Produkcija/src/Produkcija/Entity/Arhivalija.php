@@ -97,7 +97,7 @@ class Arhivalija
     private $avtorstvo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Koledar\Entity\Dogodek", inversedBy="arhiv")
+     * @ORM\ManyToOne(targetEntity="Koledar\Entity\Dogodek", inversedBy="arhivi")
      * @ORM\JoinColumn(name="dogodek_id", referencedColumnName="id")
      * @Max\I18n(label="Dogodek",  description="Dogodek, na katerega se nanaša arhivalija")
      * @Max\Ui(type="toone")
@@ -106,7 +106,7 @@ class Arhivalija
     private $dogodek;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="arhiv")
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="arhivi")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id")
      * @Max\I18n(label="Uprizoritev",  description="Uprizoritev, na katero se nanaša arhivalija")
      * @Max\Ui(type="toone")

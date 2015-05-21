@@ -150,15 +150,15 @@ class Uprizoritev
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Arhivalija", mappedBy="uprizoritev")
-     * @var <Arhiv>
+     * @var <Arhivi>
      */
-    private $arhiv;
+    private $arhivi;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Rekviziterstvo", mappedBy="uprizoritev")
-     * @var <Rekviziti>
+     * @var <Rekviziterstva>
      */
-    private $rekviziti;
+    private $rekviziterstva;
 
     /**
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Vaja", mappedBy="uprizoritev")
@@ -209,6 +209,7 @@ class Uprizoritev
     {
         
     }
+
     public function getId()
     {
         return $this->id;
@@ -299,14 +300,14 @@ class Uprizoritev
         return $this->funkcije;
     }
 
-    public function getArhiv()
+    public function getArhivi()
     {
-        return $this->arhiv;
+        return $this->arhivi;
     }
 
-    public function getRekviziti()
+    public function getRekviziterstva()
     {
-        return $this->rekviziti;
+        return $this->rekviziterstva;
     }
 
     public function getVaje()
@@ -447,15 +448,15 @@ class Uprizoritev
         return $this;
     }
 
-    public function setArhiv($arhiv)
+    public function setArhivi($arhivi)
     {
-        $this->arhiv = $arhiv;
+        $this->arhivi = $arhivi;
         return $this;
     }
 
-    public function setRekviziti($rekviziti)
+    public function setRekviziterstva($rekviziterstva)
     {
-        $this->rekviziti = $rekviziti;
+        $this->rekviziterstva = $rekviziterstva;
         return $this;
     }
 
