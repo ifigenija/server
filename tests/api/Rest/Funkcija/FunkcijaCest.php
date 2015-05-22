@@ -225,9 +225,9 @@ class FunkcijaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'podrocje'    => 1,
+            'podrocje'    => 'igralec',
             'naziv'       => 'zz',
-            'velikost'    => 'zz',
+            'velikost'    => 'velika',
             'pomembna'    => true,
             'sort'        => 2,
             'uprizoritev' => $this->objUprizoritev['id'],
@@ -240,10 +240,10 @@ class FunkcijaCest
 
         // kreiramo še en zapis
         $data = [
-            'podrocje'    => 3,
+            'podrocje'    => 'tehnik',
             'naziv'       => 'aa',
-            'velikost'    => 'aa',
-            'pomembna'    => true,
+            'velikost'    => 'mala',
+            'pomembna'    => false,
             'sort'        => 4,
             'uprizoritev' => $this->objUprizoritev['id'],
             'privzeti'    => null,
@@ -334,11 +334,11 @@ class FunkcijaCest
     public function update(ApiTester $I)
     {
         $ent             = $this->obj;
-        $ent['velikost'] = 'yy';
+        $ent['velikost'] = 'mala';
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['velikost'], 'yy');
+        $I->assertEquals($entR['velikost'], 'mala');
     }
 
     /**
@@ -353,9 +353,9 @@ class FunkcijaCest
         codecept_debug($ent);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['podrocje'], 1);
+        $I->assertEquals($ent['podrocje'], 'igralec');
         $I->assertEquals($ent['naziv'], 'zz');
-        $I->assertEquals($ent['velikost'], 'yy', "velikost funkcije");
+        $I->assertEquals($ent['velikost'], 'mala', "velikost funkcije");
         $I->assertEquals($ent['pomembna'], true);
         $I->assertEquals($ent['sort'], 2);
         $I->assertEquals($ent['uprizoritev'], $this->objUprizoritev['id']);

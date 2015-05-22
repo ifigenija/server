@@ -7,13 +7,43 @@
     readOnly: true
     description: Faza uprizoritve
     defaultValue: 
-        osnutek:                    # $$ rb uskladi z wiki - ali je to podfaza v predprodukciji
-           label: Dolgoročni plan
-        plan:
-           label: Predprodukcija 
+        predprodukcija-ideja:
+           label: Dolgoročni plan 
+        predprodukcija-poziv:
+           label: Predprodukcija, v fazi poziva
+        predprodukcija-potrjen_program:
+           label: Predprodukcija, program je potrjen 
         produkcija:
            label: Produkcija 
         postprodukcija:
            label: Postprodukcija
         arhiv:
            label: Arhivirana
+-
+    name: funkcija.podrocje
+    type: array
+    public: false
+    readOnly: true
+    description: Področje funkcije
+    defaultValue: 
+        igralec:
+           label: Igralec
+        tehnik:
+           label: Tehnik
+        umetnik:
+           label: Umetnik
+-
+    name: funkcija.velikost
+    type: array
+    public: false
+    readOnly: true
+    description: Velikost funkcije
+    defaultValue: 
+        stataza:
+           label: Stataža
+        mala:
+           label: Mala vloga / funkcija
+        srednja:
+           label: Srednja vloga / funkcija
+        velika:
+           label: Velika vloga / funkcija

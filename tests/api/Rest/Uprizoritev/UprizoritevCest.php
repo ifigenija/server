@@ -182,7 +182,7 @@ class UprizoritevCest
 
         // kreiram še en zapis
         $data       = [
-            'faza'             => 'arhiv',
+            'faza'             => 'predprodukcija-potrjen_program',
             'naslov'           => 'aa',
             'podnaslov'        => 'aa',
             'delovniNaslov'    => 'aa',

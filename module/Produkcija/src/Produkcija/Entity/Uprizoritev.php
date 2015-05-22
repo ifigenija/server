@@ -25,7 +25,7 @@ class Uprizoritev
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=35, nullable=true)
      * @Max\I18n(label="Faza", description="Faza uprizoritve")
      * @Max\Ui(type="select", opts="uprizoritev.faza")
      * @var string
@@ -55,6 +55,17 @@ class Uprizoritev
     private $delovniNaslov;
 
     /**
+     * pomeni tudi začetek faze produkcija
+     * 
+     * @ORM\Column(type="date", nullable=true)
+     * @Max\I18n(label="Datum začetka študija", description="Datum začetka študija")
+     * @var string
+     */
+    private $datumZacStudija;
+
+    /**
+     * pomeni tudi konec faze produkcija
+     * 
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="Datum premiere", description="Datum premiere uprizoritve")
      * @var string

@@ -25,12 +25,12 @@ class Funkcija
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=20, nullable=true)
      * @Max\I18n(label="Področje", description="Področje funkcije")
-     * @Max\Ui(type="integer")
-     * @var integer
+     * @Max\Ui(type="select", opts="funkcija.podrocje")
+     * @var string
      */
-    private $podrocje;          //$$ rb - ali to rabimo oz. ali naredimo opcijo
+    private $podrocje;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -43,11 +43,16 @@ class Funkcija
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Velikost", description="Velikost funkcije")
+     * @Max\Ui(type="select", opts="funkcija.velikost")
      * @var string
      */
     private $velikost;
 
     /**
+     * Če je funkcija pomembna, je tudi vsebovana v osebni izkaznici 
+     * Če pomembna=false, potem se ne izpiše v osebni izkaznici, ampak le v gledališkem listu
+     * 
+     * Smiselno je, da imajo pomembne funkcije tudi večjo utež oz. sortno vrednost ($sort)
      * 
      * @ORM\Column(type="boolean", nullable=true)
      * @Max\I18n(label="pomembna", description="Ali je funkcija pomembna")
@@ -74,7 +79,7 @@ class Funkcija
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="vloge")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id", nullable=false)
      * @Max\I18n(label="Uprizoritev",  description="Uprizoritev")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hiddenid")
      * @var \Produkcija\Entity\Uprizoritev
      */
     private $uprizoritev;

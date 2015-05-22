@@ -55,13 +55,6 @@ class TipFunkcije
      */
     private $maxPrekrivanj;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="Nastopajoč", description="Ali je nastopajoč")
-     * @Max\Ui(type="boolcheckbox")
-     * @var boolean
-     */
-    private $nastopajoc;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -71,19 +64,12 @@ class TipFunkcije
     private $imeZenski;
 
     /**
+     * $$ isto kot pri Funkcija
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Področje", description="Področje")
      * @var string
      */
     private $podrocje;
-
-    /**
-     * 
-     * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Pomembnost", description="Pomembnost funkcije")
-     * @var string
-     */
-    private $pomembnost;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Funkcija", mappedBy="tipFunkcije", fetch="EXTRA_LAZY")
