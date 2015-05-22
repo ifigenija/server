@@ -2861,7 +2861,7 @@ trait ApiTesterActions
      * Post rest metoda z data v body requesta
      * 
      * @param string $url
-     * @param array $data
+     * @param \JsonSerializable $data
      * @return array
      * @see \Codeception\Module\ApiHelper::successfullyCreate()
      */

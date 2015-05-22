@@ -75,7 +75,7 @@ class ApiHelper
      * Post rest metoda z data v body requesta
      * 
      * @param string $url
-     * @param array $data
+     * @param \JsonSerializable $data
      * @return array
      */
     public function successfullyCreate($url, $data)
@@ -83,7 +83,7 @@ class ApiHelper
         $I = $this->getModule('REST');
 
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST($url, $data);
+        $I->sendPOST($url, json_encode($data));          //$$ rb ta verjetno null spremeni v ""
         $I->seeResponseCodeIs('200');
         $I->seeResponseIsJson();
         return $I->grabDataFromResponseByJsonPath('$')[0];
@@ -178,7 +178,7 @@ class ApiHelper
     {
         $I = $this->getModule('REST');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPUT("$url/$id", $data);
+        $I->sendPUT("$url/$id", json_encode($data));
         $I->seeResponseCodeIs('200');
         $I->seeResponseIsJson();
         return $I->grabDataFromResponseByJsonPath('$')[0];
@@ -236,7 +236,7 @@ class ApiHelper
         $I = $this->getModule('REST');
 
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST($url, $data);
+        $I->sendPOST($url, json_encode($data));
         $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
@@ -323,7 +323,7 @@ class ApiHelper
     {
         $I = $this->getModule('REST');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPUT($url . '/' . $id, $data);
+        $I->sendPUT($url . '/' . $id, json_encode($data));
         $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);

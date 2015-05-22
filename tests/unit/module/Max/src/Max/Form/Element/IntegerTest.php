@@ -54,6 +54,9 @@ class IntegerTest
         $this->form->setData([
             'v' => null
         ]);
+//        $form=  $this->form;
+//        codecept_debug($form);
+        
         $this->assertFalse($this->form->isValid());
         // ni valid za prazen string 
         $this->form->setData([
@@ -144,7 +147,7 @@ class IntegerTest
         $this->form->setData([
             'v' => null
         ]);
-        $this->assertTrue($this->form->isValid());
+        $this->assertTrue($this->form->isValid());  
         $v = $this->form->getData();
         $this->assertEquals(null, $v['v']);
 
