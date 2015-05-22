@@ -10,7 +10,9 @@ forms:
             - naslov
             - podnaslov
             - delovniNaslov
+            - datumZacStudija
             - datumPremiere
+            - maticniOder
             - stOdmorov
             - avtor
             - gostujoca
@@ -41,15 +43,6 @@ lists:
                       label: Besedilo
                       targetEntity: Produkcija\Entity\Besedilo
                       required: true
-#                - name:koprodukcije     # $$ rb ali v namenskem view-u?
-#                - name:funkcije     # $$ rb ali v namenskem view-u?
-#                - name:arhiv     # $$ rb ali v namenskem view-u?
-#                - name:rekviziti     # $$ rb ali v namenskem view-u?
-#                - name:vaje     # $$ rb ali v namenskem view-u?
-#                - name:predstave     # $$ rb ali v namenskem view-u?
-#                - name:gostujoce     # $$ rb ali v namenskem view-u?
-#                - name:zvrstUprizoritve     # $$ rb ali v namenskem view-u?
-#                - name:zvrstSurs     # $$ rb ali v namenskem view-u?
         hydrator:
             - exclude: []
     vse: 

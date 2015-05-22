@@ -19,6 +19,7 @@ use ApiTester;
  *      - delete
  *      validate metodo za entiteto - je ni
  * relacije z drugimi entitetami
+ * - maticniOder/prostor $$ 
  *      - besedilo
  *      - koprodukcije  2M     
  *      - funkcije O2M   
@@ -54,8 +55,10 @@ class UprizoritevCest
     private $vajaUrl              = '/rest/vaja';
     private $predstavaUrl         = '/rest/predstava';
     private $gostujocaUrl         = '/rest/gostujoca';
+    private $prostorUrl         = '/rest/prostor';
     private $obj;
     private $obj2;
+    private $objProstor;
     private $objBesedilo;
     private $objZvrstUprizoritve;
     private $objZvrstSurs;
@@ -91,6 +94,26 @@ class UprizoritevCest
         
     }
 
+        /**
+     *  kreiramo zapis
+     * 
+     * @param ApiTester $I
+     */
+    public function createProstor(ApiTester $I)
+    {
+        $data      = [
+            'ime'          => 'zz',
+            'jePrizorisce' => true,
+            'kapaciteta'   => 1,
+            'opis'         => 'zz',
+        ];
+        $this->objProstor = $ent       = $I->successfullyCreate($this->prostorUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['ime'], 'zz');
+
+    }
+   
+    
     /**
      *  kreiramo besedilo
      * 
@@ -160,16 +183,18 @@ class UprizoritevCest
             'naslov'           => 'zz',
             'podnaslov'        => 'zz',
             'delovniNaslov'    => 'zz',
+            'datumZacStudija'  => '2011-02-01T00:00:00+0100',
             'datumPremiere'    => '2010-02-01T00:00:00+0100',
+            'maticniOder'      => $this->objProstor['id'],
             'stOdmorov'        => 1,
             'avtor'            => 'avzz',
-            'gostujoca'        => true, // $$ bool vrača napako convertToBool
+            'gostujoca'        => FALSE,
             'trajanje'         => 2,
             'opis'             => 'zz',
             'arhIdent'         => 'zz',
             'arhOpomba'        => 'zz',
             'datumZakljucka'   => '2019-02-01T00:00:00+0100',
-            'sloAvtor'         => true, // $$ bool vrača napako convertToBool
+            'sloAvtor'         => FALSE,
             'kratkiNaslov'     => 'zz',
             'besedilo'         => $this->objBesedilo['id'],
             'zvrstUprizoritve' => $this->objZvrstUprizoritve['id'],
@@ -186,7 +211,9 @@ class UprizoritevCest
             'naslov'           => 'aa',
             'podnaslov'        => 'aa',
             'delovniNaslov'    => 'aa',
+            'datumZacStudija'  => '2011-02-01T00:00:00+0100',
             'datumPremiere'    => '2010-02-01T00:00:00+0100',
+            'maticniOder'      => null,
             'stOdmorov'        => 3,
             'avtor'            => 'avaa',
             'gostujoca'        => true, // $$ bool vrača napako convertToBool
@@ -515,7 +542,6 @@ class UprizoritevCest
         $I->assertNotEmpty($list);
 //        $I->assertEquals(3, $resp['state']['totalRecords']);      //$$ začasno izključimo, dokler integer =null ne stestiramo
         $I->assertEquals("aa", $list[0]['naslov']);      //glede na sort   
-        
         // iščemo naprimer tudi po vrednosti v avtor
         $listUrl = $this->restUrl . "/vse?q=avzz";
         $resp    = $I->successfullyGetList($listUrl, []);
@@ -523,7 +549,7 @@ class UprizoritevCest
 
         $I->assertNotEmpty($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);      //$$ začasno izključimo, dokler integer =null ne stestiramo
-        $I->assertEquals("avzz", $list[0]['avtor']);         
+        $I->assertEquals("avzz", $list[0]['avtor']);
     }
 
     /**
@@ -534,9 +560,9 @@ class UprizoritevCest
     public function createFunkcijo(ApiTester $I)
     {
         $data               = [
-            'podrocje'    => 1,
+            'podrocje'    => 'igralec',
             'naziv'       => 'zz',
-            'velikost'    => 'zz',
+            'velikost'    => 'mala',
             'pomembna'    => true,
             'sort'        => 2,
             'uprizoritev' => $this->obj2['id'],
@@ -548,9 +574,9 @@ class UprizoritevCest
         $I->assertNotEmpty($ent['id']);
 
         $data               = [
-            'podrocje'    => 3,
+            'podrocje'    => 'umetnik',
             'naziv'       => 'aa',
-            'velikost'    => 'aa',
+            'velikost'    => 'srednja',
             'pomembna'    => true,
             'sort'        => 4,
             'uprizoritev' => $this->obj2['id'],
@@ -612,16 +638,18 @@ class UprizoritevCest
         $I->assertEquals($ent['naslov'], 'zz');
         $I->assertEquals($ent['podnaslov'], 'zz');
         $I->assertEquals($ent['delovniNaslov'], 'zz');
+        $I->assertEquals($ent['datumZacStudija'], '2011-02-01T00:00:00+0100');
         $I->assertEquals($ent['datumPremiere'], '2010-02-01T00:00:00+0100');
+        $I->assertEquals($ent['maticniOder'], $this->objProstor['id']);
         $I->assertEquals($ent['stOdmorov'], 1);
         $I->assertEquals($ent['avtor'], 'avzz');
-        $I->assertEquals($ent['gostujoca'], true);
+        $I->assertEquals($ent['gostujoca'], FALSE);
         $I->assertEquals($ent['trajanje'], 2);
         $I->assertEquals($ent['opis'], 'yy');
         $I->assertEquals($ent['arhIdent'], 'zz');
         $I->assertEquals($ent['arhOpomba'], 'zz');
         $I->assertEquals($ent['datumZakljucka'], '2019-02-01T00:00:00+0100');
-        $I->assertEquals($ent['sloAvtor'], true); // $$ bool vrača napako convertToBool
+        $I->assertEquals($ent['sloAvtor'], FALSE); 
         $I->assertEquals($ent['kratkiNaslov'], 'zz');
         $I->assertEquals($ent['besedilo'], $this->objBesedilo['id']);
         $I->assertEquals($ent['zvrstUprizoritve'], $this->objZvrstUprizoritve['id']);

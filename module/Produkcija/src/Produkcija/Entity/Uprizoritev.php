@@ -55,7 +55,9 @@ class Uprizoritev
     private $delovniNaslov;
 
     /**
-     * pomeni tudi začetek faze produkcija
+     * pomeni začetek faze produkcija
+     * 
+     * polje uporabljamo že v fazi predprodukcije za makroplaniranje
      * 
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="Datum začetka študija", description="Datum začetka študija")
@@ -66,11 +68,24 @@ class Uprizoritev
     /**
      * pomeni tudi konec faze produkcija
      * 
+     * polje uporabljamo že v fazi predprodukcije za makroplaniranje
+     * 
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="Datum premiere", description="Datum premiere uprizoritve")
      * @var string
      */
     private $datumPremiere;
+
+    /**
+     * 
+     * polje uporabljamo že v fazi predprodukcije za makroplaniranje
+     * 
+     * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Prostor")
+     * @Max\I18n(label="Matični oder",  description="Matični oder / privzeto prizorišče uprizoritve")
+     * @Max\Ui(type="toone")
+     * @var \Prodaja\Entity\Prostor
+     */
+    private $maticniOder;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -220,7 +235,6 @@ class Uprizoritev
     {
         
     }
-
     public function getId()
     {
         return $this->id;
@@ -246,9 +260,19 @@ class Uprizoritev
         return $this->delovniNaslov;
     }
 
+    public function getDatumZacStudija()
+    {
+        return $this->datumZacStudija;
+    }
+
     public function getDatumPremiere()
     {
         return $this->datumPremiere;
+    }
+
+    public function getMaticniOder()
+    {
+        return $this->maticniOder;
     }
 
     public function getStOdmorov()
@@ -381,9 +405,21 @@ class Uprizoritev
         return $this;
     }
 
+    public function setDatumZacStudija($datumZacStudija)
+    {
+        $this->datumZacStudija = $datumZacStudija;
+        return $this;
+    }
+
     public function setDatumPremiere($datumPremiere)
     {
         $this->datumPremiere = $datumPremiere;
+        return $this;
+    }
+
+    public function setMaticniOder(\Prodaja\Entity\Prostor $maticniOder)
+    {
+        $this->maticniOder = $maticniOder;
         return $this;
     }
 
