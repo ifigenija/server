@@ -6,9 +6,14 @@ use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 
 /**
+ * 
+ * Tip funkcije / vloge, ki je standariziran v skladu s SLOGI (Slovenski gledališki inštitut)
+ * 
  * @ORM\Entity(repositoryClass="Produkcija\Repository\TipiFunkcije")
  * @Max\I18n(label="Tip funkcije",plural="Tipi funkcije")
  * @Max\Id(prefix="0015")
+ * 
+ * @todo $$ rb preveri fixturje oz. TestZaFixture, ali sploh rabimo maksimalno število prekrivanj, razvrščenost v področje ipd.
  */
 class TipFunkcije
         extends \Max\Entity\Base

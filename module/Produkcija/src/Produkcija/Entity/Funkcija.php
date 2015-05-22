@@ -25,6 +25,8 @@ class Funkcija
     private $id;
 
     /**
+     * $$ rb ali sploh rabimo to polje - saj je v tipih funkcij, ki bi jih fixturji skreirali,  že pripravljeno
+     * 
      * @ORM\Column(type="string", length=20, nullable=true)
      * @Max\I18n(label="Področje", description="Področje funkcije")
      * @Max\Ui(type="select", opts="funkcija.podrocje")
@@ -33,6 +35,9 @@ class Funkcija
     private $podrocje;
 
     /**
+     * V to polje se vpiše poljubno - bolj specifično ime funkcije za to uprizoritev,
+     * kot je tip funkcije, ki je standariziran glede na SLOGI (Slovenski gledališki inštitut) 
+     * 
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Naziv", description="Naziv funkcije")
      * @Max\Ui(type="naziv",ident=true )
@@ -94,6 +99,8 @@ class Funkcija
     private $privzeti;
 
     /**
+     * tipi funkcij, ki so standarizirani glede na SLOGI (Slovenski gledališki inštitut)
+     * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\TipFunkcije", inversedBy="funkcije", fetch="EAGER")
      * @ORM\JoinColumn(name="tip_vloge_id", referencedColumnName="id")
      * @Max\I18n(label="TipVloge",  description="TipVloge")
