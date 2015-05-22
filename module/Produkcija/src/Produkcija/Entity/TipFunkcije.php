@@ -67,6 +67,7 @@ class TipFunkcije
      * $$ isto kot pri Funkcija
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Področje", description="Področje")
+     * @Max\Ui(type="select", opts="tipfunkcije.podrocje")
      * @var string
      */
     private $podrocje;
@@ -107,11 +108,6 @@ class TipFunkcije
         return $this->maxPrekrivanj;
     }
 
-    public function getNastopajoc()
-    {
-        return $this->nastopajoc;
-    }
-
     public function getImeZenski()
     {
         return $this->imeZenski;
@@ -120,11 +116,6 @@ class TipFunkcije
     public function getPodrocje()
     {
         return $this->podrocje;
-    }
-
-    public function getPomembnost()
-    {
-        return $this->pomembnost;
     }
 
     public function getFunkcije()
@@ -162,12 +153,6 @@ class TipFunkcije
         return $this;
     }
 
-    public function setNastopajoc($nastopajoc)
-    {
-        $this->nastopajoc = $nastopajoc;
-        return $this;
-    }
-
     public function setImeZenski($imeZenski)
     {
         $this->imeZenski = $imeZenski;
@@ -180,16 +165,11 @@ class TipFunkcije
         return $this;
     }
 
-    public function setPomembnost($pomembnost)
-    {
-        $this->pomembnost = $pomembnost;
-        return $this;
-    }
-
     public function setFunkcije($funkcije)
     {
         $this->funkcije = $funkcije;
         return $this;
     }
+
 
 }

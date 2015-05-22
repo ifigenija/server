@@ -55,10 +55,8 @@ class TipFunkcijeCest
             'opis'              => 'zz',
             'dovoliPrekrivanje' => TRUE,
             'maxPrekrivanj'     => 1,
-            'nastopajoc'        => TRUE,
             'imeZenski'         => 'zz',
-            'podrocje'          => 'zz',
-            'pomembnost'        => 'zz',
+            'podrocje'          => 'umetnik',
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -73,7 +71,7 @@ class TipFunkcijeCest
             'maxPrekrivanj'     => 2,
             'nastopajoc'        => TRUE,
             'imeZenski'         => 'aa',
-            'podrocje'          => 'aa',
+            'podrocje'          => 'tehnik',
             'pomembnost'        => 'aa',
         ];
         $ent       = $I->successfullyCreate($this->restUrl, $data);
@@ -146,10 +144,8 @@ class TipFunkcijeCest
         $I->assertEquals($ent['opis'], 'yy');
         $I->assertEquals($ent['dovoliPrekrivanje'], TRUE);
         $I->assertEquals($ent['maxPrekrivanj'], 1);
-        $I->assertEquals($ent['nastopajoc'], TRUE);
         $I->assertEquals($ent['imeZenski'], 'zz');
-        $I->assertEquals($ent['podrocje'], 'zz');
-        $I->assertEquals($ent['pomembnost'], 'zz', "pomembnost");
+        $I->assertEquals($ent['podrocje'], 'umetnik');
         $I->assertTrue(isset($ent['funkcije']), "ali so funkcije");
         $I->assertEquals(0, count($ent['funkcije']),"število funkcij");
     }

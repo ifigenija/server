@@ -10,10 +10,8 @@ forms:
             - opis
             - dovoliPrekrivanje
             - maxPrekrivanj
-            - nastopajoc
             - imeZenski
             - podrocje
-            - pomembnost
 #            - funkcije
 lists:
     default: 

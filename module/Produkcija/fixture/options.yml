@@ -32,6 +32,21 @@
            label: Tehnik
         umetnik:
            label: Umetnik
+           
+#               vrednosti naj bodo enake kot pri funkcija.podrocje :
+-
+    name: tipfunkcije.podrocje
+    type: array
+    public: false
+    readOnly: true
+    description: Področje funkcije
+    defaultValue: 
+        igralec:
+           label: Igralec
+        tehnik:
+           label: Tehnik
+        umetnik:
+           label: Umetnik
 -
     name: funkcija.velikost
     type: array

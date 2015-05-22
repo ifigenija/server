@@ -206,10 +206,8 @@ class FunkcijaCest
             'opis'              => 'zz',
             'dovoliPrekrivanje' => TRUE,
             'maxPrekrivanj'     => 1,
-            'nastopajoc'        => TRUE,
             'imeZenski'         => 'zz',
-            'podrocje'          => 'zz',
-            'pomembnost'        => 'zz',
+            'podrocje'          => 'umetnik',
         ];
         $this->objTipFunkcije = $ent                  = $I->successfullyCreate($this->tipFunkcijeUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -239,7 +237,7 @@ class FunkcijaCest
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
-        $data = [
+        $data               = [
             'podrocje'    => 'tehnik',
             'naziv'       => 'aa',
             'velikost'    => 'mala',
@@ -249,7 +247,7 @@ class FunkcijaCest
             'privzeti'    => null,
             'tipFunkcije' => $this->objTipFunkcije['id'],
         ];
-        $this->objFunkcija2 = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $this->objFunkcija2 = $ent                = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['naziv'], 'aa');
         $I->assertNotEmpty($ent['id']);
     }
