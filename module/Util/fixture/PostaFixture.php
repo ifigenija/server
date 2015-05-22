@@ -18,7 +18,6 @@ class PostaFixture
 
     public function load(ObjectManager $manager)
     {
-
         foreach ($this->getData() as $value) {
             $this->populatePosta($manager, $value);
         }
