@@ -11,7 +11,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  *
  * @author boris
  */
-class PopaFixture extends AbstractFixture implements FixtureInterface, \Doctrine\Common\DataFixtures\DependentFixtureInterface {
+class PopaFixture extends AbstractFixture implements FixtureInterface {
 
     public function load(ObjectManager $manager) {
 
@@ -59,10 +59,5 @@ class PopaFixture extends AbstractFixture implements FixtureInterface, \Doctrine
     }
     
     
-    public function getDependencies()
-    {
-        
-    }
-
     
 }
