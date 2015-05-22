@@ -129,8 +129,8 @@ class PostniNaslovCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'popa'       => null, 
-            'oseba'      => $this->objOseba['id'], 
+            'popa'       => null,
+            'oseba'      => $this->objOseba['id'],
             'naziv'      => 'zz',
             'ulica'      => 'zz',
             'ulicaDva'   => 'zz',
@@ -148,7 +148,7 @@ class PostniNaslovCest
         //kreiramo še enega
         $data    = [
             'popa'       => $this->objPopa['id'],
-            'oseba'      => null,                 
+            'oseba'      => null,
             'naziv'      => 'ww',
             'ulica'      => 'ww',
             'ulicaDva'   => 'ww',
@@ -266,16 +266,49 @@ class PostniNaslovCest
     public function createNaslovBrezPopaInOsebe(ApiTester $I)
     {
         $data = [
-//            'popa'  => null,
-//            'oseba' => null,
+            'popa'  => null,
+            'oseba' => null,
             'naziv' => 'xx',
-            'jeeu' => true
+            'jeeu'  => true,
         ];
         $resp = $I->failToCreate($this->restUrl, $data);
 
         $I->assertNotEmpty($resp);
         // testiramo na enako številko napake kot je v validaciji
         $I->assertEquals(1000304, $resp[0]['code']);
+    }
+
+    /**
+     *  kreirati naslov z jeeu null
+     *
+     * @param ApiTester $I
+     */
+    public function createNaslovBrezJeeu(ApiTester $I)
+    {
+        $data = [
+            'popa'     => null,
+            'oseba'    => $this->objOseba['id'],
+            'naziv' => 'jeee',
+            'jeeu'     => FALSE,
+            'privzeti' => true,
+        ];
+        $resp = $I->successfullyCreate($this->restUrl, $data);
+   
+        $I->assertNotEmpty($resp);
+        
+        $data = [
+            'popa'     => null,
+            'oseba'    => $this->objOseba['id'],
+            'naziv' => 'jeee null',
+            'jeeu'     => null,
+            'privzeti' => true,
+        ];
+        $resp = $I->failToCreate($this->restUrl, $data);
+
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        // testiramo na enako besedilo, ki je pri errorju
+        $I->assertTrue( (strpos($resp[0]['message'], 'Value is required') !==false) );
     }
 
     /**

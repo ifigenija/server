@@ -213,7 +213,7 @@ class PopaCest
             'postaNaziv' => 'ww',
             'pokrajina'  => 'ww',
             'drzava'     => $this->objDrzava['id'],
-            'jeeu'       => true,
+            'jeeu'       => FALSE,
             'privzeti'   => true,
         ];
         $this->objPnaslov1 = $pnaslov           = $I->successfullyCreate($this->pnaslovUrl, $data);
@@ -231,7 +231,7 @@ class PopaCest
             'postaNaziv' => 'bb',
             'pokrajina'  => 'bb',
             'drzava'     => $this->objDrzava['id'],
-            'jeeu'       => true, //$$ rb tu še ne dela, ker je required
+            'jeeu'       => false, //$$ rb tu še ne dela, ker je required
             'privzeti'   => true,
         ];
         $this->objPnaslov2 = $pnaslov           = $I->successfullyCreate($this->pnaslovUrl, $data);
