@@ -288,18 +288,18 @@ class PostniNaslovCest
         $data = [
             'popa'     => null,
             'oseba'    => $this->objOseba['id'],
-            'naziv' => 'jeee',
+            'naziv'    => 'jeee',
             'jeeu'     => FALSE,
             'privzeti' => true,
         ];
         $resp = $I->successfullyCreate($this->restUrl, $data);
-   
+
         $I->assertNotEmpty($resp);
-        
+
         $data = [
             'popa'     => null,
             'oseba'    => $this->objOseba['id'],
-            'naziv' => 'jeee null',
+            'naziv'    => 'jeee null',
             'jeeu'     => null,
             'privzeti' => true,
         ];
@@ -308,7 +308,7 @@ class PostniNaslovCest
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         // testiramo na enako besedilo, ki je pri errorju
-        $I->assertTrue( (strpos($resp[0]['message'], 'Value is required') !==false) );
+        $I->assertTrue((strpos($resp[0]['message'], 'Value is required') !== false));
     }
 
     /**

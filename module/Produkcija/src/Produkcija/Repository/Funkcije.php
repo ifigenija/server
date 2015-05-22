@@ -46,6 +46,8 @@ class Funkcije
                     $uprizoritev = $this->getEntityManager()->find('Produkcija\Entity\Uprizoritev', $options['uprizoritev']);
                     $exp   = $e->eq('uprizoritev', $uprizoritev);
                 }
+                
+//$$ rb                področje opcijsko    umetnik, igralec, tehnik
                 $crit->andWhere($exp);
                 return new Selectable($this, $crit);
         }

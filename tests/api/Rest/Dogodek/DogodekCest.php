@@ -123,7 +123,7 @@ class DogodekCest
         $data          = [
             'zaporedna'   => 1,
             'porocilo'    => 'zz',
-            'dogodek'     => null, //$$rb najprej mora biti kreirana vaja, šele potem dogodek.
+            'dogodek'     => null, //najprej mora biti kreirana vaja, šele potem dogodek.
             'uprizoritev' => null,
         ];
         $this->objVaja = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
@@ -410,7 +410,7 @@ class DogodekCest
 
         $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-//        $I->assertEquals("xx", $list[0]['status']);      // $$ odvisno od sortiranja
+//        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
     }
 
     /**

@@ -49,15 +49,15 @@ class Funkcija
 
     /**
      * 
+     * @ORM\Column(type="boolean", nullable=true)
      * @Max\I18n(label="pomembna", description="Ali je funkcija pomembna")
-     * @var
-     * @ORM\Column(type="boolean", nullable=true) boolean
+     * @var boolean
      */
     private $pomembna;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="Sort", description="Soort funkcije")
+     * @Max\I18n(label="Sort", description="Sort funkcije oz. utež")
      * @Max\Ui(type="integer")
      * @var integer
      */
