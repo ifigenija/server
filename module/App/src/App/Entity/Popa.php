@@ -167,6 +167,11 @@ class Popa
     private $pogodbe;
 
     /**
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\StrosekUprizoritve", mappedBy="popa")
+     */
+    private $strosekUprizoritve;
+
+    /**
      * ID za DDV klienta
      *
      *
@@ -242,6 +247,16 @@ class Popa
      * @var boolean
      */
     private $zamejstvo = false;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Produkcija\Entity\ProdukcijskaHisa", mappedBy="popa")
+     */
+    private $producent;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Prodaja\Entity\Kupec", mappedBy="popa")
+     */
+    private $kupec;
 
     public function __construct()
     {

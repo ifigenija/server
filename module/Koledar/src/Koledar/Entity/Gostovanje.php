@@ -32,6 +32,11 @@ class Gostovanje
     private $vrsta;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $zamejstvo;
+
+    /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="gostovanje")
      * @Max\I18n(label="Dogodek",  description="Dogodek")
      * @Max\Ui(type="toone")

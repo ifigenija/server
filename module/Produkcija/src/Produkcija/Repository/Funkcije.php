@@ -44,11 +44,15 @@ class Funkcije
 
                 if (!empty($options['uprizoritev'])) {
                     $uprizoritev = $this->getEntityManager()->find('Produkcija\Entity\Uprizoritev', $options['uprizoritev']);
-                    $exp   = $e->eq('uprizoritev', $uprizoritev);
+                    $exp         = $e->eq('uprizoritev', $uprizoritev);
+                    $crit->andWhere($exp);
                 }
-                
-//$$ rb                področje opcijsko    umetnik, igralec, tehnik
-                $crit->andWhere($exp);
+
+                if (!empty($options['podrocje'])) {
+                    $exp = $e->eq('podrocje', $options['podrocje']);
+                    $crit->andWhere($exp);
+                }
+
                 return new Selectable($this, $crit);
         }
     }

@@ -66,6 +66,11 @@ class Uprizoritev
     private $datumZacStudija;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $steviloVaj;
+
+    /**
      * pomeni tudi konec faze produkcija
      * 
      * polje uporabljamo že v fazi predprodukcije za makroplaniranje
@@ -81,6 +86,7 @@ class Uprizoritev
      * polje uporabljamo že v fazi predprodukcije za makroplaniranje
      * 
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Prostor")
+     * @ORM\JoinColumn(name="maticniOder_id", referencedColumnName="id")
      * @Max\I18n(label="Matični oder",  description="Matični oder / privzeto prizorišče uprizoritve")
      * @Max\Ui(type="toone")
      * @var \Prodaja\Entity\Prostor
@@ -185,6 +191,16 @@ class Uprizoritev
      * @var <Rekviziterstva>
      */
     private $rekviziterstva;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\StrosekUprizoritve", mappedBy="uprizoritev")
+     */
+    private $stroski;
+
+    /**
+     * 
+     */
+    private $strosekUprizoritve;
 
     /**
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Vaja", mappedBy="uprizoritev")

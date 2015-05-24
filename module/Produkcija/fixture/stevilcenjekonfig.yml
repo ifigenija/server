@@ -1,0 +1,11 @@
+## YAML Template.
+---
+- dok: besedilo
+  stevilcenje: sif
+- dok: uprizoritev
+  stevilcenje: sif
+- dok: funkcija
+  stevilcenje: sif
+- dok: tipfunkcije
+  stevilcenje: sif 
+

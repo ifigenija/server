@@ -87,7 +87,7 @@ class Oseba
     /**
      * Naslov kontaktne osebe
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="oseba",orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\PostniNaslov", mappedBy="oseba", orphanRemoval=true)
      * @var <Naslovi>
      */
     protected $naslovi;
@@ -104,7 +104,7 @@ class Oseba
     protected $email ='';
 
     /**
-     * @ORM\Column(type="date",nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="Datum rojstva", description="Rojstni datum oseba")   
      * @Max\Ui(icon="fa fa-birthday-cake")
      * @var string
@@ -210,6 +210,12 @@ class Oseba
      * @var <Sodelovanja>
      */
     private $sodelovanja;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
+     * @ORM\JoinColumn(name="naslov_id", referencedColumnName="id")
+     */
+    private $naslov;
 
     /**
      * 

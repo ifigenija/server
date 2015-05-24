@@ -6,6 +6,9 @@ forms:
     default: 
         elements:
 #            - id
+            - name: stevilka
+              options: 
+                  required: false
             - naslov
             - avtor
             - podnaslov

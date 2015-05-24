@@ -1,0 +1,7 @@
+## YAML Template.
+---
+- dok: popa
+  stevilcenje: sif
+- dok: oseba
+  stevilcenje: sif 
+

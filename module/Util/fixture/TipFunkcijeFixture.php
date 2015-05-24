@@ -41,9 +41,7 @@ class TipFunkcijeFixture extends AbstractFixture implements FixtureInterface
             $manager->persist($o);
         }
 
-        $o->setOpis($v[1]);
-        $o->setDovoliPrekrivanje($v[2]);
-        $o->setMaxPrekrivanj($v[3]);
+        $o->setOpis($v[1]);       
         $o->setImeZenski($v[4]);
         $o->setPodrocje($v[5]);
     }

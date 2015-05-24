@@ -34,10 +34,52 @@ class Alternacija
     private $zaposlen;
 
     /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $zacetek;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $konec;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $opomba;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $sort;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $privzeti;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $aktivna;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="alternacija", fetch="EXTRA_LAZY")
+     */
+    private $storitve;
+
+    /**
+     * 
+     * 
+     */
+    private $vloga;
+
+    /**
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Funkcija", inversedBy="alternacije")
+     * @ORM\JoinColumn(name="funkcija_id", referencedColumnName="id")
      * @Max\I18n(label="Funkcija",  description="Funkcija pri alternaciji")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="toone", required=true);
      * @var \Produkcija\Entity\Funkcija
      */
     private $funkcija;
@@ -160,5 +202,6 @@ class Alternacija
         return $this;
     }
 
+    
 
 }

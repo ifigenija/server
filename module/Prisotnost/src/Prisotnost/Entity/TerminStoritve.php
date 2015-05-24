@@ -69,7 +69,7 @@ class TerminStoritve
     private $dogodek;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Alternacija")
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Alternacija", inversedBy="storitve")
      * @ORM\JoinColumn(name="alternacija_id", referencedColumnName="id")
      * @Max\I18n(label="Alternacija",  description="Alternacija")
      * @Max\Ui(type="toone")

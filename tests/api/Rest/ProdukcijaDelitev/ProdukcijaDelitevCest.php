@@ -164,26 +164,26 @@ class ProdukcijaDelitevCest
     {
         $data      = [
             'odstotekFinanciranja' => 1.23,
-            'vrstaKoproducenta'    => 'zz',
+            'nasStrosek'    => true,
             'uprizoritev'          => $this->objUprizoritev['id'],
             'koproducent'          => $this->objProdukcijskaHisa['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['vrstaKoproducenta'], 'zz');
+        $I->assertTrue($ent['nasStrosek']);
 
         // kreiram še en zapis
         $data                        = [
             'odstotekFinanciranja' => 7.90,
-            'vrstaKoproducenta'    => 'yy',
+            'nasStrosek'    => false,
             'uprizoritev'          => $this->objUprizoritev['id'],
             'koproducent'          => $this->objProdukcijskaHisa['id'],
         ];
         $this->objProdukcijaDelitev2 = $ent                         = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertFalse($ent['nasStrosek']);
         codecept_debug($ent);
-        $I->assertEquals($ent['vrstaKoproducenta'], 'yy');
+        
     }
 
     /**
@@ -218,37 +218,7 @@ class ProdukcijaDelitevCest
         $I->assertNotEmpty($oseba['id']);
     }
 
-    /**
-     * 
-     * @depends createOsebo
-     * @depends create
-     * 
-     * @param ApiTester $I
-     */
-    public function createVecAlternacij(ApiTester $I)
-    {
-        $data                  = [
-            'zaposlen'     => true,
-            'funkcija'     => null,
-            'sodelovanje'  => NULL,
-            'oseba'        => $this->objOseba['id'],
-            'koprodukcija' => $this->objProdukcijaDelitev2['id'],
-            'pogodba'      => NULL,
-        ];
-        $this->objAlternacija1 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
 
-        $data                  = [
-            'zaposlen'     => true,
-            'funkcija'     => null,
-            'sodelovanje'  => NULL,
-            'oseba'        => $this->objOseba['id'],
-            'koprodukcija' => $this->objProdukcijaDelitev2['id'],
-            'pogodba'      => NULL,
-        ];
-        $this->objAlternacija2 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-    }
 
     /**
      * preberi vse zapise od uprizoritve
@@ -314,7 +284,6 @@ class ProdukcijaDelitevCest
         $I->assertNotEmpty($ent['id']);
 //        $I->assertEquals($ent['odstotekFinanciranja'], 7.32);     
         $I->assertEquals($ent['odstotekFinanciranja'], 7);          //$$ rb ni še jasno,
-        $I->assertEquals($ent['vrstaKoproducenta'], 'zz');
         $I->assertEquals($ent['uprizoritev'], $this->objUprizoritev['id']);
         $I->assertEquals($ent['koproducent'], $this->objProdukcijskaHisa['id']);
     }
@@ -330,20 +299,20 @@ class ProdukcijaDelitevCest
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
 
-    /**
-     * preberemo relacije
-     * 
-     * @depends createVecAlternacij
-     * 
-     * @param ApiTester $I
-     */
-    public function preberiRelacijeZAlternacijami(ApiTester $I)
-    {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objProdukcijaDelitev2['id'], "alternacije", "");
-        $I->assertEquals(2, count($resp));
-
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objProdukcijaDelitev2['id'], "alternacije", $this->objAlternacija1['id']);
-        $I->assertEquals(1, count($resp));
-    }
+//    /**
+//     * preberemo relacije
+//     * 
+//     * @depends createVecAlternacij
+//     * 
+//     * @param ApiTester $I
+//     */
+//    public function preberiRelacijeZAlternacijami(ApiTester $I)
+//    {
+//        $resp = $I->successfullyGetRelation($this->restUrl, $this->objProdukcijaDelitev2['id'], "alternacije", "");
+//        $I->assertEquals(2, count($resp));
+//
+//        $resp = $I->successfullyGetRelation($this->restUrl, $this->objProdukcijaDelitev2['id'], "alternacije", $this->objAlternacija1['id']);
+//        $I->assertEquals(1, count($resp));
+//    }
 
 }

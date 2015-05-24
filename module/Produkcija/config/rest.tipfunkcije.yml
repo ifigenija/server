@@ -8,8 +8,6 @@ forms:
 #            - id
             - ime
             - opis
-            - dovoliPrekrivanje
-            - maxPrekrivanj
             - imeZenski
             - podrocje
 #            - funkcije

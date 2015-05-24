@@ -6,7 +6,9 @@ forms:
     default: 
         elements:
 #            - id
-            - sifra
+            - name: sifra
+              options: 
+                  required: false                  
 #            - tipkli           # $$ rb ko bodo opcije porihtane
 #            - stakli           # $$ rb ko bodo opcije porihtane
             - naziv

@@ -172,7 +172,7 @@ class PopaCest
 
         // kreiramo še en zapis
         $data       = [
-            'sifra'     => 'AA12',
+            'sifra'     => '',
             'tipkli'    => '4', // $$ rb ko bodo opcije porihtane
             'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
             'naziv'     => 'aa',
@@ -192,7 +192,7 @@ class PopaCest
         ];
         $this->obj2 = $popa       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($popa['id']);
-        $I->assertEquals('AA12', $popa['sifra']);
+        $I->assertNotEmpty($popa['sifra']);
     }
 
     /**
@@ -274,8 +274,8 @@ class PopaCest
         $I->assertEquals($popa['drzava'], $this->objDrzava['id']);
         $I->assertEquals($popa['idddv'], 'zz');
         $I->assertEquals($popa['maticna'], 'ZZ123');
-//        $I->assertEquals($popa['zavezanec'], 'Da');  // $$ rb ko jasno za checkbox
-//        $I->assertEquals($popa['jeeu'], 'Da');        // $$ rb ko jasno za checkbox
+        $I->assertEquals($popa['zavezanec'], null);  // $$ rb ko jasno za checkbox
+        $I->assertEquals($popa['jeeu'], null);        // $$ rb ko jasno za checkbox
         $I->assertEquals($popa['datZav'], '2010-02-01T00:00:00+0100');
         $I->assertEquals($popa['datnZav'], '2017-02-01T00:00:00+0100');
         $I->assertEquals($popa['zamejstvo'], FALSE);

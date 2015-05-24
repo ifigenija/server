@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping AS ORM,
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Besedila")
  * @Max\I18n(label="Besedilo",plural="Besedilo uprizoritve")
  * @Max\Id(prefix="0022")
+ * @Max\Lookup(ident="stevilka",label="naslov",search={"avtor","podnaslov"},extra={"podnaslov","avtor", "datumPrejema"})
  */
 class Besedilo
         extends \Max\Entity\Base
@@ -26,6 +27,12 @@ class Besedilo
      */
     private $id;
 
+    /**
+     * @ORM\Column(type="string", nullable=false)
+     * @Max\Ui(ident=true)
+     */
+    private $stevilka;
+    
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Naslov", description="Naslov besedila")
@@ -99,9 +106,10 @@ class Besedilo
      */
     private $povzetekVsebine;
 
+
     public function validate($mode = 'update')
     {
-        
+        $this->expect($this->getStevilka(), "Številka besedila ni določena", 1000800);
     }
 
     public function getId()
@@ -224,5 +232,17 @@ class Besedilo
         $this->povzetekVsebine = $povzetekVsebine;
         return $this;
     }
+
+    public function getStevilka()
+    {
+        return $this->stevilka;
+    }
+
+    public function setStevilka($stevilka)
+    {
+        $this->stevilka = $stevilka;
+        return $this;
+    }
+
 
 }

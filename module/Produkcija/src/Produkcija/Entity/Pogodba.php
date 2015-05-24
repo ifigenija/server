@@ -35,6 +35,21 @@ class Pogodba
     private $sifra;
 
     /**
+     * @ORM\Column(type="decimal", nullable=true)
+     */
+    private $vrednostDo;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $zacetek;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $konec;
+
+    /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="vred. vaje", description="Vrednost vaje")   
      * @var double
@@ -88,6 +103,7 @@ class Pogodba
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="pogodbe")
+     * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
      * @Max\I18n(label="Klient",  description="Poslovni partner, s katerim je napravljena pogodba")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa

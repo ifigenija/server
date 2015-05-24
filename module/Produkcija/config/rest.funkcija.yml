@@ -15,6 +15,9 @@ forms:
             - uprizoritev 
             - privzeti
             - tipFunkcije
+            - sePlanira
+            - dovoliPrekrivanje
+            - maxPrekrivanj
 lists:
     default: 
         filter:
@@ -25,8 +28,16 @@ lists:
                       label: Uprizoritev
                       targetEntity: Produkcija\Entity\Uprizoritev
                       required: true
+                - name: podrocje
+                  type: multiselect
+                  options:
+                      label: Področje
+                      multiple: false
+                      required: false
+                      value_options: @funkcija.podrocje
+                      
         hydrator:
-            - exclude: []
+            - exclude: [ ]
     vse: 
         filter:
 relation:

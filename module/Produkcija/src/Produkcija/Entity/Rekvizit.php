@@ -40,6 +40,11 @@ class Rekvizit
     private $vrsta;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $status;
+
+    /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Rekviziterstvo", mappedBy="rekvizit")
      * @var <Rekviziterstva>
      */

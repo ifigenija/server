@@ -396,7 +396,7 @@ class RevisionsListener
         $stmt = $this->conn->prepare($sql);
 
         $date = date_create("now")->format($this->platform->getDateTimeFormatString());
-        $user = $this->identity ? $this->identity->getId() : 'null';
+        $user = $this->identity ? $this->identity->getId() : null;
 
         foreach ($changes as $objectId => $change) {
             $class = get_class($change['entity']);

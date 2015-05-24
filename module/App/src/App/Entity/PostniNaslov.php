@@ -32,7 +32,9 @@ class PostniNaslov
     /**
      * Lastnik postnega naslova če gre za klienta 
      * 
-     * @ORM\ManyToOne(targetEntity="App\Entity\Popa",inversedBy="naslovi")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="naslovi")
+     * @ORM\JoinColumn(name="klient_id", referencedColumnName="id")
+     * 
      * @Max\I18n(label="Poslovni partner",  description="Poslovni partner, ki je lastnik naslova  ")
      * @Max\Ui(type="hiddenid") 
      * @var \App\Entity\Popa
@@ -43,6 +45,7 @@ class PostniNaslov
      * Lastnik poštnega naslova če gre ze osebo 
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="naslovi")
+     * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Oseba
      */
@@ -60,6 +63,11 @@ class PostniNaslov
 
     /**
      * @ORM\Column(length=50, nullable=true)
+     */
+    private $nazivDva;
+
+    /**
+     * 
      * @Max\I18n(label="Dodatni naziv", description="Dodatni naziv naslova")
      * @var string
      */
@@ -130,7 +138,7 @@ class PostniNaslov
      * Je klient iz EU
      *  checkbox 
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", length=1, nullable=true)
      * @Max\I18n(label="Iz EU", description="Je klient iz EU")
      * @Max\Ui(type="boolcheckbox",group="Davčni podatki")
      * @var boolean

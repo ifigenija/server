@@ -59,8 +59,9 @@ class Funkcija
      * 
      * Smiselno je, da imajo pomembne funkcije tudi večjo utež oz. sortno vrednost ($sort)
      * 
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=false)
      * @Max\I18n(label="pomembna", description="Ali je funkcija pomembna")
+     * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
     private $pomembna;
@@ -74,14 +75,30 @@ class Funkcija
     private $sort;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="funkcija")
-     * @var <Alternacije>
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $sePlanira;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $dovoliPrekrivanje;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $maxPrekirvanj;
+
+    /**
+     * 
+     * @var
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="funkcija") <Alternacije>
      * 
      */
     private $alternacije;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="vloge")
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="funkcije")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id", nullable=false)
      * @Max\I18n(label="Uprizoritev",  description="Uprizoritev")
      * @Max\Ui(type="hiddenid")
@@ -90,11 +107,13 @@ class Funkcija
     private $uprizoritev;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Alternacija")
-     * @ORM\JoinColumn(name="alternacija_id", referencedColumnName="id")
+     * 
+     * 
      * @Max\I18n(label="Privzeta alternacija",  description="Privzeta alternacija")
      * @Max\Ui(type="toone")
-     * @var \Produkcija\Entity\Alternacija
+     * @var
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Alternacija")
+     * @ORM\JoinColumn(name="alternacija_id", referencedColumnName="id") \Produkcija\Entity\Alternacija
      */
     private $privzeti;
 
@@ -104,10 +123,12 @@ class Funkcija
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\TipFunkcije", inversedBy="funkcije", fetch="EAGER")
      * @ORM\JoinColumn(name="tip_vloge_id", referencedColumnName="id")
      * @Max\I18n(label="TipVloge",  description="TipVloge")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="select")
      * @var \Produkcija\Entity\TipFunkcije
      */
     private $tipFunkcije;
+
+  
 
     public function validate($mode = 'update')
     {
@@ -223,5 +244,51 @@ class Funkcija
         $this->tipFunkcije = $tipFunkcije;
         return $this;
     }
+    
+    public function getSePlanira()
+    {
+        return $this->sePlanira;
+    }
+
+    public function getDovoliPrekrivanje()
+    {
+        return $this->dovoliPrekrivanje;
+    }
+
+    public function getMaxPrekirvanj()
+    {
+        return $this->maxPrekirvanj;
+    }
+
+    public function getAlternacija()
+    {
+        return $this->alternacija;
+    }
+
+    public function setSePlanira($sePlanira)
+    {
+        $this->sePlanira = $sePlanira;
+        return $this;
+    }
+
+    public function setDovoliPrekrivanje($dovoliPrekrivanje)
+    {
+        $this->dovoliPrekrivanje = $dovoliPrekrivanje;
+        return $this;
+    }
+
+    public function setMaxPrekirvanj($maxPrekirvanj)
+    {
+        $this->maxPrekirvanj = $maxPrekirvanj;
+        return $this;
+    }
+
+    public function setAlternacija($alternacija)
+    {
+        $this->alternacija = $alternacija;
+        return $this;
+    }
+
+
 
 }

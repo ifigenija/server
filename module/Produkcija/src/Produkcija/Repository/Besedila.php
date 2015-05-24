@@ -56,4 +56,16 @@ class Besedila
         return $qb;
     }
 
+    
+    public function create($object, $params = null)
+    {
+        if (!$object->getStevilka()) {
+            $num = $this->getServiceLocator()->get('stevilcenje.generator');
+            $object->setStevilka($num->generate('besedilo'));
+        }
+        parent::create($object, $params);
+        
+        
+    }
+
 }

@@ -51,12 +51,11 @@ class TipFunkcijeCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'ime'               => 'zz',
-            'opis'              => 'zz',
-            'dovoliPrekrivanje' => TRUE,
-            'maxPrekrivanj'     => 1,
-            'imeZenski'         => 'zz',
-            'podrocje'          => 'umetnik',
+            'ime'        => 'zz',
+            'opis'       => 'zz',
+            'imeZenski'  => 'zz',
+            'podrocje'   => 'umetnik',
+            'nastopajoc' => false
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -64,22 +63,19 @@ class TipFunkcijeCest
         $I->assertEquals($ent['opis'], 'zz');
 
         // kreiramo še en zapis
-        $data      = [
-            'ime'               => 'aa',
-            'opis'              => 'aa',
-            'dovoliPrekrivanje' => TRUE,
-            'maxPrekrivanj'     => 2,
-            'nastopajoc'        => TRUE,
-            'imeZenski'         => 'aa',
-            'podrocje'          => 'tehnik',
-            'pomembnost'        => 'aa',
+        $data = [
+            'ime'        => 'aa',
+            'opis'       => 'aa',
+            'nastopajoc' => TRUE,
+            'imeZenski'  => 'aa',
+            'podrocje'   => 'tehnik',
+            'pomembnost' => 'aa',
         ];
-        $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['opis'], 'aa');
     }
-
 
     /**
      * @depends create
@@ -93,9 +89,10 @@ class TipFunkcijeCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(2, $resp['state']['totalRecords']);
-        $I->assertEquals("aa", $list[0]['ime']);      //glede na sort
+        $I->assertEquals(count($list), $resp['state']['pageSize']);
+        $I->assertEquals("Avtor", $list[0]['ime']);      //glede na sort
     }
+
     /**
      * @depends create
      * @param ApiTester $I
@@ -108,8 +105,8 @@ class TipFunkcijeCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(2, $resp['state']['totalRecords']);
-        $I->assertEquals("aa", $list[0]['ime']);      //glede na sort
+        $I->assertTrue(count($list) > 0);
+        $I->assertEquals("Avtor", $list[0]['ime']);      //glede na sort
     }
 
     /**
@@ -142,12 +139,10 @@ class TipFunkcijeCest
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['ime'], 'zz');
         $I->assertEquals($ent['opis'], 'yy');
-        $I->assertEquals($ent['dovoliPrekrivanje'], TRUE);
-        $I->assertEquals($ent['maxPrekrivanj'], 1);
         $I->assertEquals($ent['imeZenski'], 'zz');
         $I->assertEquals($ent['podrocje'], 'umetnik');
         $I->assertTrue(isset($ent['funkcije']), "ali so funkcije");
-        $I->assertEquals(0, count($ent['funkcije']),"število funkcij");
+        $I->assertEquals(0, count($ent['funkcije']), "število funkcij");
     }
 
     /**

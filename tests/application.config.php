@@ -16,7 +16,8 @@ return array(
         'Abonmaji',
         'Koledar',
         'Prisotnost',
-        'Prodaja',        
+        'Prodaja',  
+        'Stevilcenje',
         'TestAssets'
     ),
     'module_listener_options' => array(

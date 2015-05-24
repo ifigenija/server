@@ -37,6 +37,7 @@ Class Module
                  'module/Produkcija/autoload_classmap.php',
                  'module/Koledar/autoload_classmap.php',
                  'module/Abonmaji/autoload_classmap.php',
+                 'module/Stevilcenje/autoload_classmap.php',
             ]
         ];
     }
@@ -57,7 +58,8 @@ Class Module
     {
         return [
             'Pomožne operacije ',
-            'populate' => 'Vnese inicialne podatke v prazno bazo. Če se požene na polni bazi poskuša dopolniti manjkajoče vnose'
+            'populate' => 'Vnese inicialne podatke v prazno bazo. Če se požene na polni bazi poskuša dopolniti manjkajoče vnose',
+            'populateTest' => 'Vnese testne podatke podatke v bazo, ki ima napolnjene inicialne podatke.'
         ];
     }
 

@@ -32,7 +32,7 @@ class Gostujoca
     private $predstave;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="gostujoc")
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="gostujoce")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id")
      * @Max\I18n(label="Uprizoritev",  description="Uprizoritev")
      * @Max\Ui(type="toone")

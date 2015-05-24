@@ -9,10 +9,12 @@ return [
         'Max',
         'App',
         'Aaa',
+        'Stevilcenje',
         'Produkcija',
         'Koledar',
         'Prisotnost',
         'Abonmaji',
+        
         'Prodaja',
     ],
     'module_listener_options' => [

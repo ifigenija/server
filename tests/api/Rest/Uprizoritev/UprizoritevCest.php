@@ -248,7 +248,7 @@ class UprizoritevCest
             'datumPremiere'    => '2010-02-01T00:00:00+0100',
             'stOdmorov'        => null, // testiramo notEmpty filter
             'avtor'            => null,
-            'gostujoca'        => false, 
+            'gostujoca'        => false,
             'trajanje'         => null, // testiramo notEmpty filter   $$ rb preveri unit test za integer!
             'opis'             => 'b',
             'arhIdent'         => 'b',
@@ -400,27 +400,28 @@ class UprizoritevCest
     {
         $data                   = [
             'odstotekFinanciranja' => 1.23,
-            'vrstaKoproducenta'    => 'zz',
+            'nasStrosek'           => false,
             'uprizoritev'          => $this->obj2['id'],
             'koproducent'          => $this->objProdukcijskaHisa1['id'],
         ];
         $I->assertTrue(true);
         $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
+        $I->assertFalse($ent['nasStrosek']);
         codecept_debug($ent);
-        $I->assertEquals($ent['vrstaKoproducenta'], 'zz');
+
 
         // kreiram še en zapis
         $data                   = [
             'odstotekFinanciranja' => 7.90,
-            'vrstaKoproducenta'    => 'yy',
+            'nasStrosek'           => true,
             'uprizoritev'          => $this->obj2['id'],
             'koproducent'          => $this->objProdukcijskaHisa2['id'],
         ];
         $this->objKoprodukcija2 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['vrstaKoproducenta'], 'yy');
+        $I->assertTrue($ent['nasStrosek']);
     }
 
     /**
@@ -557,28 +558,34 @@ class UprizoritevCest
     public function createFunkcijo(ApiTester $I)
     {
         $data               = [
-            'podrocje'    => 'igralec',
-            'naziv'       => 'zz',
-            'velikost'    => 'mala',
-            'pomembna'    => true,
-            'sort'        => 2,
-            'uprizoritev' => $this->obj2['id'],
-            'privzeti'    => null,
-            'tipFunkcije' => null,
+            'podrocje'          => 'igralec',
+            'naziv'             => 'zz',
+            'velikost'          => 'mala',
+            'pomembna'          => true,
+            'sort'              => 2,
+            'uprizoritev'       => $this->obj2['id'],
+            'privzeti'          => null,
+            'tipFunkcije'       => null,
+            'sePlanira'         => true,
+            'dovoliPrekrivanje' => false,
+            'maxPrekrivanj'     => 1
         ];
         $this->objFunkcija1 = $ent                = $I->successfullyCreate($this->funkcijaUrl, $data);
         $I->assertEquals($ent['naziv'], 'zz');
         $I->assertNotEmpty($ent['id']);
 
         $data               = [
-            'podrocje'    => 'umetnik',
-            'naziv'       => 'aa',
-            'velikost'    => 'srednja',
-            'pomembna'    => true,
-            'sort'        => 4,
-            'uprizoritev' => $this->obj2['id'],
-            'privzeti'    => null,
-            'tipFunkcije' => null,
+            'podrocje'          => 'umetnik',
+            'naziv'             => 'aa',
+            'velikost'          => 'srednja',
+            'pomembna'          => true,
+            'sort'              => 4,
+            'uprizoritev'       => $this->obj2['id'],
+            'privzeti'          => null,
+            'tipFunkcije'       => null,
+            'sePlanira'         => false,
+            'dovoliPrekrivanje' => true,
+            'maxPrekrivanj'     => 2
         ];
         $this->objFunkcija2 = $ent                = $I->successfullyCreate($this->funkcijaUrl, $data);
         $I->assertNotEmpty($ent['id']);

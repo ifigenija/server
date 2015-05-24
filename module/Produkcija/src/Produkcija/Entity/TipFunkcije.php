@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping AS ORM,
  * @ORM\Entity(repositoryClass="Produkcija\Repository\TipiFunkcije")
  * @Max\I18n(label="Tip funkcije",plural="Tipi funkcije")
  * @Max\Id(prefix="0015")
- * 
+ * @Max\Lookup(ident="",label="ime", extra={"opis","podrocje","nastopajoc"},search={"ime","opis","podrocje"})
  * @todo $$ rb preveri fixturje oz. TestZaFixture, ali sploh rabimo maksimalno število prekrivanj, razvrščenost v področje ipd.
  */
 class TipFunkcije
@@ -46,20 +46,8 @@ class TipFunkcije
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="Dovoli prekrivanje", description="Ali dovoli prekrivanje tipa funkcije")
-     * @Max\Ui(type="boolcheckbox")
-     * @var boolean
      */
-    private $dovoliPrekrivanje;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="Maks. prekrivanj", description="Maksimalno število prekrivanj tipa funkcije")
-     * @Max\Ui(type="integer")
-     * @var integer
-     */
-    private $maxPrekrivanj;
-
+    private $nastopajoc;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -88,6 +76,10 @@ class TipFunkcije
         
     }
 
+    public function __construct()
+    {
+        $this->funkcije = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     public function getId()
     {
         return $this->id;
@@ -101,16 +93,6 @@ class TipFunkcije
     public function getOpis()
     {
         return $this->opis;
-    }
-
-    public function getDovoliPrekrivanje()
-    {
-        return $this->dovoliPrekrivanje;
-    }
-
-    public function getMaxPrekrivanj()
-    {
-        return $this->maxPrekrivanj;
     }
 
     public function getImeZenski()
@@ -146,17 +128,6 @@ class TipFunkcije
         return $this;
     }
 
-    public function setDovoliPrekrivanje($dovoliPrekrivanje)
-    {
-        $this->dovoliPrekrivanje = $dovoliPrekrivanje;
-        return $this;
-    }
-
-    public function setMaxPrekrivanj($maxPrekrivanj)
-    {
-        $this->maxPrekrivanj = $maxPrekrivanj;
-        return $this;
-    }
 
     public function setImeZenski($imeZenski)
     {
@@ -176,5 +147,18 @@ class TipFunkcije
         return $this;
     }
 
+    public function getNastopajoc()
+    {
+        return $this->nastopajoc;
+    }
+
+    public function setNastopajoc($nastopajoc)
+    {
+        $this->nastopajoc = $nastopajoc;
+        return $this;
+    }
+
+
+    
 
 }

@@ -32,7 +32,7 @@ class ProdukcijskaHisa
     private $status;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Popa")
+     * @ORM\OneToOne(targetEntity="App\Entity\Popa", inversedBy="producent")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id", unique=true)
      * @Max\I18n(label="Poslovni partner",  description="Poslovni partner")
      * @Max\Ui(type="toone")

@@ -53,8 +53,8 @@ class PopaFixture extends AbstractFixture implements FixtureInterface {
 
     public function getData(){
         return [
-          ['1000', 'c', 'AK', 'Juhuhu d.o.o.' ],  
-          ['1001', 'c', 'AK', 'Hopsasa d.o.o.' ]  
+          ['0988', 'c', 'AK', 'Juhuhu d.o.o.' ],  
+          ['0989', 'c', 'AK', 'Hopsasa d.o.o.' ]  
         ];
     }
     

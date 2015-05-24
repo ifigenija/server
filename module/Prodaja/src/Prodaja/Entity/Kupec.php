@@ -22,7 +22,7 @@ class Kupec
     /**
      * 
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id", unique=true)
-     * @ORM\OneToOne(targetEntity="App\Entity\Popa")
+     * @ORM\OneToOne(targetEntity="App\Entity\Popa", inversedBy="kupec")
      */
     private $popa;
 }

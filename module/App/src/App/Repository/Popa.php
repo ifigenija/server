@@ -69,5 +69,20 @@ class Popa
 
         return $qb;
     }
+    
+    /**
+     * 
+     * 
+     * @param Popa $object
+     * @param array $params
+     */
+    public function create($object, $params = null)
+    {
+        if (empty($object->getSifra())) {
+            $num = $this->getServiceLocator()->get('stevilcenje.generator');
+            $object->setSifra($num->generate('popa'));
+        }
+        parent::create($object, $params);
+    }
 
 }
