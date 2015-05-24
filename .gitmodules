@@ -1,3 +1,6 @@
 [submodule "module/Max"]
 	path = module/Max
 	url = http://git.max.si/tip2/max
+[submodule "module/Stevilcenje"]
+	path = module/Stevilcenje
+	url = http://git.max.si/ifigenija/stevilcenje
