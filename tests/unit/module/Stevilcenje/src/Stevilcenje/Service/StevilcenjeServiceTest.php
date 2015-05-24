@@ -229,7 +229,6 @@ class StevilcenjeServicetest
 
     public function tearDownFixture()
     {
-        $this->em->createQuery("delete from Stevilcenje\Entity\StevilcenjeStanje s where s.objId like 'test.dok%'")->execute();
         $this->em->createQuery("delete from Stevilcenje\Entity\StevilcenjeKonfig s where s.dok='test.dok1'")->execute();
         $this->em->createQuery("delete from Stevilcenje\Entity\StevilcenjeKonfig s where s.dok='test.dok2'")->execute();
         $this->em->createQuery("delete from Stevilcenje\Entity\StevilcenjeKonfig s where s.dok='test.dok3'")->execute();
