@@ -9,280 +9,390 @@
     name: Oseba-vse
     description: Oseba - vse - za testiranje assert
 
-# avtomatsko pridobljeno:
+
+# polavtomatsko:
 -
     name: Abonma-read
     description: Abonma - branje
 -
     name: Abonma-write
     description: Abonma - spreminjanje
+
 -
     name: Alternacija-read
     description: Alternacija - branje
 -
     name: Alternacija-write
     description: Alternacija - spreminjanje
+
 -
     name: Arhivalija-read
     description: Arhivalija - branje
 -
     name: Arhivalija-write
     description: Arhivalija - spreminjanje
+
 -
     name: Besedilo-read
     description: Besedilo - branje
 -
     name: Besedilo-write
     description: Besedilo - spreminjanje
+
 -
     name: DogodekIzven-read
     description: DogodekIzven - branje
 -
     name: DogodekIzven-write
     description: DogodekIzven - spreminjanje
+
 -
     name: Dogodek-read
     description: Dogodek - branje
 -
     name: Dogodek-write
     description: Dogodek - spreminjanje
+
 -
     name: Drzava-read
     description: Drzava - branje
 -
     name: Drzava-write
     description: Drzava - spreminjanje
+
 -
     name: Funkcija-read
     description: Funkcija - branje
 -
     name: Funkcija-write
     description: Funkcija - spreminjanje
+
 -
     name: Gostovanje-read
     description: Gostovanje - branje
 -
     name: Gostovanje-write
     description: Gostovanje - spreminjanje
+
 -
     name: Gostujoca-read
     description: Gostujoca - branje
 -
     name: Gostujoca-write
     description: Gostujoca - spreminjanje
+
+-
+    name: KontaktnaOseba-read
+    description: KontaktnaOseba - branje
+-
+    name: KontaktnaOseba-write
+    description: KontaktnaOseba - spreminjanje
+
 -
     name: Kupec-read
     description: Kupec - branje
 -
     name: Kupec-write
     description: Kupec - spreminjanje
+
 -
     name: NacinPlacina-read
     description: NacinPlacina - branje
 -
     name: NacinPlacina-write
     description: NacinPlacina - spreminjanje
+
 -
     name: Option-read
     description: Option - branje
 -
     name: Option-write
     description: Option - spreminjanje
+
 -
     name: OptionValue-read
     description: OptionValue - branje
 -
     name: OptionValue-write
     description: OptionValue - spreminjanje
+
 -
     name: Oseba-read
     description: Oseba - branje
 -
     name: Oseba-write
     description: Oseba - spreminjanje
+
+-
+    name: Permission-read
+    description: Permission - branje
+-
+    name: Permission-write
+    description: Permission - spreminjanje
+
 -
     name: PlacilniInstrument-read
     description: PlacilniInstrument - branje
 -
     name: PlacilniInstrument-write
     description: PlacilniInstrument - spreminjanje
+
 -
     name: PodrocjeSedenja-read
     description: PodrocjeSedenja - branje
 -
     name: PodrocjeSedenja-write
     description: PodrocjeSedenja - spreminjanje
+
 -
     name: Pogodba-read
     description: Pogodba - branje
 -
     name: Pogodba-write
     description: Pogodba - spreminjanje
+
 -
     name: Popa-read
     description: Popa - branje
 -
     name: Popa-write
     description: Popa - spreminjanje
+
 -
     name: Posta-read
     description: Posta - branje
 -
     name: Posta-write
     description: Posta - spreminjanje
+
 -
     name: PostavkaRacuna-read
     description: PostavkaRacuna - branje
 -
     name: PostavkaRacuna-write
     description: PostavkaRacuna - spreminjanje
+
 -
     name: PostniNaslov-read
     description: PostniNaslov - branje
 -
     name: PostniNaslov-write
     description: PostniNaslov - spreminjanje
+
 -
     name: Predstava-read
     description: Predstava - branje
 -
     name: Predstava-write
     description: Predstava - spreminjanje
+
 -
     name: ProdajaPredstave-read
     description: ProdajaPredstave - branje
 -
     name: ProdajaPredstave-write
     description: ProdajaPredstave - spreminjanje
+
 -
     name: ProdukcijaDelitev-read
     description: ProdukcijaDelitev - branje
 -
     name: ProdukcijaDelitev-write
     description: ProdukcijaDelitev - spreminjanje
+
 -
     name: ProdukcijskaHisa-read
     description: ProdukcijskaHisa - branje
 -
     name: ProdukcijskaHisa-write
     description: ProdukcijskaHisa - spreminjanje
+
 -
     name: Prostor-read
     description: Prostor - branje
 -
     name: Prostor-write
     description: Prostor - spreminjanje
+
 -
     name: Racun-read
     description: Racun - branje
 -
     name: Racun-write
     description: Racun - spreminjanje
+
 -
     name: RazpisanSedez-read
     description: RazpisanSedez - branje
 -
     name: RazpisanSedez-write
     description: RazpisanSedez - spreminjanje
+
 -
     name: Rekviziterstvo-read
     description: Rekviziterstvo - branje
 -
     name: Rekviziterstvo-write
     description: Rekviziterstvo - spreminjanje
+
 -
     name: Rekvizit-read
     description: Rekvizit - branje
 -
     name: Rekvizit-write
     description: Rekvizit - spreminjanje
+
+-
+    name: Revizija-read
+    description: Revizija - branje
+-
+    name: Revizija-write
+    description: Revizija - spreminjanje
+
 -
     name: Rezervacija-read
     description: Rezervacija - branje
 -
     name: Rezervacija-write
     description: Rezervacija - spreminjanje
+
+-
+    name: Role-read
+    description: Role - branje
+-
+    name: Role-write
+    description: Role - spreminjanje
+
 -
     name: SedezniRed-read
     description: SedezniRed - branje
 -
     name: SedezniRed-write
     description: SedezniRed - spreminjanje
+
 -
     name: Sedez-read
     description: Sedez - branje
 -
     name: Sedez-write
     description: Sedez - spreminjanje
+
 -
     name: Sezona-read
     description: Sezona - branje
 -
     name: Sezona-write
     description: Sezona - spreminjanje
+
+-
+    name: StevilcenjeKonfig-read
+    description: StevilcenjeKonfig - branje
+-
+    name: StevilcenjeKonfig-write
+    description: StevilcenjeKonfig - spreminjanje
+
+-
+    name: Stevilcenje-read
+    description: Stevilcenje - branje
+-
+    name: Stevilcenje-write
+    description: Stevilcenje - spreminjanje
+
+-
+    name: StevilcenjeStanje-read
+    description: StevilcenjeStanje - branje
+-
+    name: StevilcenjeStanje-write
+    description: StevilcenjeStanje - spreminjanje
+
+-
+    name: StrosekUprizoritve-read
+    description: StrosekUprizoritve - branje
+-
+    name: StrosekUprizoritve-write
+    description: StrosekUprizoritve - spreminjanje
+
 -
     name: Telefonska-read
     description: Telefonska - branje
 -
     name: Telefonska-write
     description: Telefonska - spreminjanje
+
 -
     name: TerminStoritve-read
     description: TerminStoritve - branje
 -
     name: TerminStoritve-write
     description: TerminStoritve - spreminjanje
+
 -
     name: TipFunkcije-read
     description: TipFunkcije - branje
 -
     name: TipFunkcije-write
     description: TipFunkcije - spreminjanje
+
 -
     name: Trr-read
     description: Trr - branje
 -
     name: Trr-write
     description: Trr - spreminjanje
+
 -
     name: Uprizoritev-read
     description: Uprizoritev - branje
 -
     name: Uprizoritev-write
     description: Uprizoritev - spreminjanje
+
+-
+    name: User-read
+    description: User - branje
+-
+    name: User-write
+    description: User - spreminjanje
+
 -
     name: Vaja-read
     description: Vaja - branje
 -
     name: Vaja-write
     description: Vaja - spreminjanje
+
 -
     name: VrstaSedezev-read
     description: VrstaSedezev - branje
 -
     name: VrstaSedezev-write
     description: VrstaSedezev - spreminjanje
+
 -
     name: Zaposlitev-read
     description: Zaposlitev - branje
 -
     name: Zaposlitev-write
     description: Zaposlitev - spreminjanje
+
 -
     name: Zasedenost-read
     description: Zasedenost - branje
 -
     name: Zasedenost-write
     description: Zasedenost - spreminjanje
+
 -
     name: ZvrstSurs-read
     description: ZvrstSurs - branje
 -
     name: ZvrstSurs-write
     description: ZvrstSurs - spreminjanje
+
 -
     name: ZvrstUprizoritve-read
     description: ZvrstUprizoritve - branje
 -
     name: ZvrstUprizoritve-write
     description: ZvrstUprizoritve - spreminjanje
+

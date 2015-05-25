@@ -158,6 +158,7 @@ class Popa
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\KontaktnaOseba", mappedBy="popa")
+     * var <KontaktnaOseba>
      */
     private $kontaktnaOseba;
 
@@ -375,9 +376,19 @@ class Popa
         return $this->trrji;
     }
 
+    public function getKontaktnaOseba()
+    {
+        return $this->kontaktnaOseba;
+    }
+
     public function getPogodbe()
     {
         return $this->pogodbe;
+    }
+
+    public function getStrosekUprizoritve()
+    {
+        return $this->strosekUprizoritve;
     }
 
     public function getIdddv()
@@ -413,6 +424,16 @@ class Popa
     public function getZamejstvo()
     {
         return $this->zamejstvo;
+    }
+
+    public function getProducent()
+    {
+        return $this->producent;
+    }
+
+    public function getKupec()
+    {
+        return $this->kupec;
     }
 
     public function setId($id)
@@ -505,9 +526,21 @@ class Popa
         return $this;
     }
 
+    public function setKontaktnaOseba($kontaktnaOseba)
+    {
+        $this->kontaktnaOseba = $kontaktnaOseba;
+        return $this;
+    }
+
     public function setPogodbe($pogodbe)
     {
         $this->pogodbe = $pogodbe;
+        return $this;
+    }
+
+    public function setStrosekUprizoritve($strosekUprizoritve)
+    {
+        $this->strosekUprizoritve = $strosekUprizoritve;
         return $this;
     }
 
@@ -550,6 +583,18 @@ class Popa
     public function setZamejstvo($zamejstvo)
     {
         $this->zamejstvo = $zamejstvo;
+        return $this;
+    }
+
+    public function setProducent($producent)
+    {
+        $this->producent = $producent;
+        return $this;
+    }
+
+    public function setKupec($kupec)
+    {
+        $this->kupec = $kupec;
         return $this;
     }
 

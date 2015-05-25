@@ -29,7 +29,7 @@ class Prostor
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
      */
-    private $ime;
+//    private $ime;
     
     
     /**
@@ -75,7 +75,6 @@ class Prostor
     {
         
     }
-
     public function getId()
     {
         return $this->id;

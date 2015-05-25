@@ -101,7 +101,7 @@ class Oseba
      * @Max\Ui(type="email",icon="fa fa-afna")
      * @var string
      */
-    protected $email ='';
+    protected $email = '';
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -189,6 +189,7 @@ class Oseba
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\KontaktnaOseba", mappedBy="oseba")
+     * var <KontaktnaOseba>
      */
     private $kontaktnaOseba;
 
@@ -347,6 +348,11 @@ class Oseba
         return $this->trrji;
     }
 
+    public function getKontaktnaOseba()
+    {
+        return $this->kontaktnaOseba;
+    }
+
     public function getAlternacije()
     {
         return $this->alternacije;
@@ -360,6 +366,11 @@ class Oseba
     public function getSodelovanja()
     {
         return $this->sodelovanja;
+    }
+
+    public function getNaslov()
+    {
+        return $this->naslov;
     }
 
     public function setId($id)
@@ -488,6 +499,12 @@ class Oseba
         return $this;
     }
 
+    public function setKontaktnaOseba($kontaktnaOseba)
+    {
+        $this->kontaktnaOseba = $kontaktnaOseba;
+        return $this;
+    }
+
     public function setAlternacije($alternacije)
     {
         $this->alternacije = $alternacije;
@@ -505,5 +522,12 @@ class Oseba
         $this->sodelovanja = $sodelovanja;
         return $this;
     }
+
+    public function setNaslov($naslov)
+    {
+        $this->naslov = $naslov;
+        return $this;
+    }
+
 
 }

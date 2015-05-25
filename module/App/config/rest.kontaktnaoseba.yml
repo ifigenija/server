@@ -1,0 +1,34 @@
+## YAML Template.
+---
+type: rest
+entityClass: App\Entity\KontaktnaOseba
+forms:
+    default: 
+        elements:
+#            - id 
+            - status
+            - funkcija
+            - opis
+            - popa
+            - oseba
+lists:
+    default: 
+        filter:
+          elements:  
+            - name: oseba
+              type: toone
+              options:
+                label: Oseba
+                targetEntity: App\Entity\Oseba
+                required: false
+            - name: popa
+              type: toone
+              options:
+                label: Partner
+                targetEntity: App\Entity\Popa
+                required: false
+
+        hydrator:
+            - exclude: []
+    vse: 
+        filter:                          

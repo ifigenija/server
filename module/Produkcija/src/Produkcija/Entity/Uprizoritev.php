@@ -88,7 +88,7 @@ class Uprizoritev
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Prostor")
      * @ORM\JoinColumn(name="maticniOder_id", referencedColumnName="id")
      * @Max\I18n(label="Matični oder",  description="Matični oder / privzeto prizorišče uprizoritve")
-     * @Max\Ui(type="select",empty="Kjer koli")
+     * @   Max\Ui(type="select",empty="Kjer koli")    //$$ rb zakaj select?
      * @var \Prodaja\Entity\Prostor
      */
     private $maticniOder;

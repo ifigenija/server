@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\Rekvizit;
+namespace Rest\Besedilo;
 
 use ApiTester;
 

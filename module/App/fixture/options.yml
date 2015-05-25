@@ -115,3 +115,14 @@
     description: 'za test - user opcija onemogočena'
     defaultValue: 
             - privzeta štirica
+-
+    name: kontaktnaoseba.status
+    type: array
+    public: false
+    readOnly: true
+    description: 'Status kontaktne osebe'
+    defaultValue: 
+        AK: 
+            label: aktiven
+        NA:  
+            label: neaktiven

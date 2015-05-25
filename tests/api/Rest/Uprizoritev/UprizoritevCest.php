@@ -101,15 +101,23 @@ class UprizoritevCest
      */
     public function createProstor(ApiTester $I)
     {
-        $data             = [
-            'ime'          => 'zz',
+        $data = [
+            'sifra'        => '12',
+            'naziv'        => 'Z Z',
             'jePrizorisce' => true,
             'kapaciteta'   => 1,
             'opis'         => 'zz',
         ];
+//        
+//        $data             = [
+//            'ime'          => 'zz',
+//            'jePrizorisce' => true,
+//            'kapaciteta'   => 1,
+//            'opis'         => 'zz',
+//        ];
         $this->objProstor = $ent              = $I->successfullyCreate($this->prostorUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['ime'], 'zz');
+        $I->assertEquals($ent['naziv'], 'Z Z');
     }
 
     /**
