@@ -2825,17 +2825,11 @@ trait ApiTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * Lookup entitete direktno preko GuzzleHttp
-
      * 
-
-     * @param string $entity ime entitete - kartka oblika 
-
+     * @param string $entity ime entitete - kratka oblika 
      * @param string $ident ident po katerem povprašujemo
-
      * @param boolean $returnIdOnly a vrnemo samo id ali pa celi lookup objekt
-
      * @param string $route dodatek k default lookup url-ju
-
      * @return typeSkoči po ID entitete
      * @see \Codeception\Module\ApiHelper::lookupEntity()
      */

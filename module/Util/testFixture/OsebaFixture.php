@@ -52,8 +52,8 @@ class OsebaFixture
 
         $date = empty($v[8]) ? null : date_create($v[8]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setDatumRojstva($date);
-        $o->setDavcna($v[9]);
-        $o->setIme($v[10]);
+        $o->setEmso($v[9]);
+        $o->setDavcna($v[10]);
         $o->setSpol($v[11]);
         $o->setOpombe($v[12]);
         $o->setDrzavljanstvo($v[13]);

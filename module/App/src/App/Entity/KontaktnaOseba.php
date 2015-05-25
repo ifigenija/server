@@ -60,7 +60,7 @@ class KontaktnaOseba
     private $popa;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="kontaktnaOseba")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="kontaktneOsebe")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\I18n(label="Oseba",  description="Oseba")
      * @Max\Ui(type="toone")

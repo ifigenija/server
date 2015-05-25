@@ -9,7 +9,7 @@ forms:
             - name: sifra
               options: 
                   required: false                  
-#            - popa
+#            - kontaktnaOseba
             - naziv
             - ime
             - priimek
@@ -47,7 +47,7 @@ lists:
 hydrator:      
 relation:
     default:
-        popa:
+        kontaktneOsebe:
             enabled: true
             hydrator:
                 exclude: []

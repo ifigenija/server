@@ -40,14 +40,6 @@ class Oseba
     protected $sifra;
 
     /**
-     *  Poslovni partner od katerega je kontaktna oseba
-     * 
-     * 
-     * @var <Popa>
-     */
-    protected $popa;
-
-    /**
      * Naziv kontaktne osebe
      *
      * @ORM\Column(length=40, nullable=true)
@@ -199,9 +191,9 @@ class Oseba
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\KontaktnaOseba", mappedBy="oseba")
-     * var <KontaktnaOseba>
+     * var <KontaktneOsebe>
      */
-    private $kontaktnaOseba;
+    private $kontaktneOsebe;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="oseba")
@@ -262,11 +254,6 @@ class Oseba
     public function getSifra()
     {
         return $this->sifra;
-    }
-
-    public function getPopa()
-    {
-        return $this->popa;
     }
 
     public function getNaziv()
@@ -364,9 +351,9 @@ class Oseba
         return $this->trrji;
     }
 
-    public function getKontaktnaOseba()
+    public function getKontaktneOsebe()
     {
-        return $this->kontaktnaOseba;
+        return $this->kontaktneOsebe;
     }
 
     public function getAlternacije()
@@ -398,12 +385,6 @@ class Oseba
     public function setSifra($sifra)
     {
         $this->sifra = $sifra;
-        return $this;
-    }
-
-    public function setPopa($popa)
-    {
-        $this->popa = $popa;
         return $this;
     }
 
@@ -521,9 +502,9 @@ class Oseba
         return $this;
     }
 
-    public function setKontaktnaOseba($kontaktnaOseba)
+    public function setKontaktneOsebe($kontaktneOsebe)
     {
-        $this->kontaktnaOseba = $kontaktnaOseba;
+        $this->kontaktneOsebe = $kontaktneOsebe;
         return $this;
     }
 

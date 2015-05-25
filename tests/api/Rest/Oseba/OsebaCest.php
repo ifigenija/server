@@ -13,10 +13,8 @@ use ApiTester;
  *       - delete
  *      validate metodo za entiteto
  *      relacije z drugimi entitetami
- *      - popa           
- *          . update 
+ * - kontaktnaOseba           
  *          . get (id, list)
- *          . delete   
  * - naslovi        $$ 2M (morda začasno ne deluje zaradi boolean? 
  *      - telefonske     O2M 
  *      - trrji          O2M 
@@ -33,17 +31,18 @@ use ApiTester;
 class OsebaCest
 {
 
-    private $restUrl         = '/rest/oseba';
-    private $relationPopaUrl = '/rest/user/popa/';
-    private $trrUrl          = '/rest/trr';
-    private $naslUrl         = '/rest/postninaslov';
-    private $telUrl          = '/rest/telefonska';
-    private $drzavaUrl       = '/rest/drzava';
-    private $popaUrl         = '/rest/popa';
-    private $userUrl         = '/rest/user';
-    private $alternacijaUrl  = '/rest/alternacija';
-    private $sodelovanjeUrl  = '/rest/sodelovanje';
-    private $zaposlitevUrl  = '/rest/zaposlitev';
+    private $restUrl           = '/rest/oseba';
+    private $relationPopaUrl   = '/rest/user/popa/';
+    private $trrUrl            = '/rest/trr';
+    private $naslUrl           = '/rest/postninaslov';
+    private $telUrl            = '/rest/telefonska';
+    private $drzavaUrl         = '/rest/drzava';
+    private $popaUrl           = '/rest/popa';
+    private $kontaktnaOsebaUrl = '/rest/kontaktnaoseba';
+    private $userUrl           = '/rest/user';
+    private $alternacijaUrl    = '/rest/alternacija';
+    private $sodelovanjeUrl    = '/rest/sodelovanje';
+    private $zaposlitevUrl     = '/rest/zaposlitev';
     private $id;
     private $obj;
     private $obj2;
@@ -53,13 +52,17 @@ class OsebaCest
     private $objDrzava;
     private $objPopa1;
     private $objPopa2;
+    private $objKontaktna1;
+    private $objKontaktna2;
+    private $lookPopa1;
+    private $lookPopa2;
     private $objUser;
     private $trr;
     private $postni;
     private $tel;
     private $tel2;
-    private $telefonskaUrl   = '/rest/telefonska';
-    private $pogodbaUrl      = '/rest/pogodba';
+    private $telefonskaUrl     = '/rest/telefonska';
+    private $pogodbaUrl        = '/rest/pogodba';
     private $objTelefonska1;
     private $objTelefonska2;
     private $objTrr1;
@@ -84,72 +87,85 @@ class OsebaCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupPopa(ApiTester $I)
+    {
+        $this->lookPopa1 = $ent             = $I->lookupEntity("popa", "0988", false);
+        $I->assertNotEmpty($ent);
+
+        $this->lookPopa2 = $ent             = $I->lookupEntity("popa", "0988", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
      * najde državo
      * 
      * @param ApiTester $I
      */
-    public function getListDrzava(ApiTester $I)
-    {
-        $resp            = $I->successfullyGetList($this->drzavaUrl, []);
-        $list            = $resp['data'];
-        $I->assertNotEmpty($list);
-        $this->objDrzava = $drzava          = array_pop($list);
-        $I->assertNotEmpty($drzava);
-    }
+//    public function getListDrzava(ApiTester $I)
+//    {
+//        $resp            = $I->successfullyGetList($this->drzavaUrl, []);
+//        $list            = $resp['data'];
+//        $I->assertNotEmpty($list);
+//        $this->objDrzava = $drzava          = array_pop($list);
+//        $I->assertNotEmpty($drzava);
+//    }
 
     /**
      * 
      * @param ApiTester $I
      */
-    public function createPopa(ApiTester $I)
-    {
-        $data           = [
-            'sifra'     => 'ZZ12',
-            'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
-            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
-            'naziv'     => 'zz',
-            'naziv1'    => 'zz',
-            'panoga'    => 'zz',
-            'email'     => 'z@zzz.zz',
-            'url'       => 'zz',
-            'opomba'    => 'zz',
-            'drzava'    => $this->objDrzava['id'],
-            'idddv'     => 'zz',
-            'maticna'   => 'ZZ123',
-            'zavezanec' => 'Da',
-            'jeeu'      => 'Da',
-            'datZav'    => '2010-02-01T00:00:00+0100',
-            'datnZav'   => '2017-02-01T00:00:00+0100',
-            'zamejstvo' => FALSE,
-        ];
-        $this->objPopa1 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
-        $I->assertNotEmpty($popa['id']);
-        $I->assertEquals('ZZ12', $popa['sifra']);
-
-        //kreiramo še en zapis
-        $data           = [
-            'sifra'     => 'AA12',
-            'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
-            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
-            'naziv'     => 'aa',
-            'naziv1'    => 'aa',
-            'panoga'    => 'aa',
-            'email'     => 'a@zzz.zz',
-            'url'       => 'aa',
-            'opomba'    => 'aa',
-            'drzava'    => $this->objDrzava['id'],
-            'idddv'     => 'aa',
-            'maticna'   => 'AA123',
-            'zavezanec' => 'Da',
-            'jeeu'      => 'Da',
-            'datZav'    => '2011-02-01T00:00:00+0100',
-            'datnZav'   => '2012-02-01T00:00:00+0100',
-            'zamejstvo' => TRUE,
-        ];
-        $this->objPopa2 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
-        $I->assertNotEmpty($popa['id']);
-        $I->assertEquals('AA12', $popa['sifra']);
-    }
+//    public function createPopa(ApiTester $I)
+//    {
+//        $data           = [
+//            'sifra'     => 'ZZ12',
+//            'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
+//            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
+//            'naziv'     => 'zz',
+//            'naziv1'    => 'zz',
+//            'panoga'    => 'zz',
+//            'email'     => 'z@zzz.zz',
+//            'url'       => 'zz',
+//            'opomba'    => 'zz',
+//            'drzava'    => $this->objDrzava['id'],
+//            'idddv'     => 'zz',
+//            'maticna'   => 'ZZ123',
+//            'zavezanec' => 'Da',
+//            'jeeu'      => 'Da',
+//            'datZav'    => '2010-02-01T00:00:00+0100',
+//            'datnZav'   => '2017-02-01T00:00:00+0100',
+//            'zamejstvo' => FALSE,
+//        ];
+//        $this->objPopa1 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
+//        $I->assertNotEmpty($popa['id']);
+//        $I->assertEquals('ZZ12', $popa['sifra']);
+//
+//        //kreiramo še en zapis
+//        $data           = [
+//            'sifra'     => 'AA12',
+//            'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
+//            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
+//            'naziv'     => 'aa',
+//            'naziv1'    => 'aa',
+//            'panoga'    => 'aa',
+//            'email'     => 'a@zzz.zz',
+//            'url'       => 'aa',
+//            'opomba'    => 'aa',
+//            'drzava'    => $this->objDrzava['id'],
+//            'idddv'     => 'aa',
+//            'maticna'   => 'AA123',
+//            'zavezanec' => 'Da',
+//            'jeeu'      => 'Da',
+//            'datZav'    => '2011-02-01T00:00:00+0100',
+//            'datnZav'   => '2012-02-01T00:00:00+0100',
+//            'zamejstvo' => TRUE,
+//        ];
+//        $this->objPopa2 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
+//        $I->assertNotEmpty($popa['id']);
+//        $I->assertEquals('AA12', $popa['sifra']);
+//    }
 
     /**
      *  napolnimo vsaj en zapis
@@ -233,7 +249,7 @@ class OsebaCest
         $I->assertNotEmpty($oseba['sifra']);
         // kreiramo še en zapis
         $data = [
-            'sifra'         => '',      // prazno -naj sam zgenerira
+            'sifra'         => '', // prazno -naj sam zgenerira
             'naziv'         => 'bb',
             'ime'           => 'bb',
             'priimek'       => 'bb',
@@ -252,7 +268,7 @@ class OsebaCest
             'user'          => null,
         ];
 
-        $oseba      = $I->successfullyCreate($this->restUrl, $data);
+        $oseba = $I->successfullyCreate($this->restUrl, $data);
 
         $I->assertEquals('bb', $oseba['ime']);
         $I->assertNotEmpty($oseba['id']);
@@ -437,7 +453,7 @@ class OsebaCest
         $I->assertTrue(isset($oseba['alternacije']));
         $I->assertTrue(isset($oseba['pogodbe']));
         $I->assertTrue(isset($oseba['sodelovanja']));
-        $I->assertTrue(isset($oseba['popa']));
+        $I->assertTrue(isset($oseba['kontaktneOsebe']));
         $I->assertTrue(isset($oseba['trrji']));
         $I->assertTrue(isset($oseba['datumRojstva']));
         $I->assertTrue(isset($oseba['telefonske']));
@@ -447,7 +463,7 @@ class OsebaCest
         $I->assertEquals(0, count($oseba['alternacije']));
         $I->assertEquals(0, count($oseba['pogodbe']));
         $I->assertEquals(0, count($oseba['sodelovanja']));
-        $I->assertEquals(0, count($oseba['popa']));
+        $I->assertEquals(0, count($oseba['kontaktneOsebe']));
     }
 
     /**
@@ -462,7 +478,7 @@ class OsebaCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertEquals("aa", $list[0]['opombe']);      //glede na sort
     }
 
@@ -483,24 +499,6 @@ class OsebaCest
     }
 
     /**
-     * kreiramo relacijo
-     * @depends create
-     * @depends createPopa
-     * 
-     * @param ApiTester $I
-     */
-    public function ustvariRelacijoSPopa(ApiTester $I)
-    {
-        // put       http://ifigenija.local:8080/rest/oseba/00090000-555a-d470-54e1-a0ac34f09cb7/popa/00080000-555a-d470-0ed7-2ef2d2de4d03?XDEBUG_SESSION_START=netbeans-xdebug
-        $resp = $I->successfullyUpdate($this->restUrl, $this->obj2['id'] . "/popa/" . $this->objPopa1['id'], []);
-        codecept_debug($resp);
-
-        // ustvarimo še eno relacijo z 2. popa
-        $resp = $I->successfullyUpdate($this->restUrl, $this->obj2['id'] . "/popa/" . $this->objPopa2['id'], []);
-        codecept_debug($resp);
-    }
-
-    /**
      * preberemo relacij
      * @depends ustvariRelacijoSPopa
      * 
@@ -514,7 +512,7 @@ class OsebaCest
         $I->assertEquals(2, count($resp));
 
         // get po popa id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "popa", $this->objPopa1['id']);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "popa", $this->lookPopa1['id']);
         $I->assertEquals(1, count($resp));
     }
 
@@ -524,24 +522,14 @@ class OsebaCest
      * 
      * @param ApiTester $I
      */
-    public function deleteRelacijoSPopa(ApiTester $I)
-    {
-        // primer:
-        // DELETE   http://ifigenija.local:8080/rest/oseba/00090000-555b-31ed-d438-f3f46c26b59e/popa/00080000-555b-31ed-7683-d4cdd224d2b5?XDEBUG_SESSION_START=netbeans-xdebug
-        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->obj2['id'], "popa", $this->objPopa1['id']);
-
-        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "popa", $this->objPopa1['id']);
-    }
-
-    /**
-     * @depends create
-     */
-    public function delete(ApiTester $I)
-    {
-        $oseba = $I->successfullyDelete($this->restUrl, $this->obj['id']);
-
-        $I->failToGet($this->restUrl, $this->obj['id']);
-    }
+//    public function deleteRelacijoSPopa(ApiTester $I)
+//    {
+//        // primer:
+//        // DELETE   http://ifigenija.local:8080/rest/oseba/00090000-555b-31ed-d438-f3f46c26b59e/popa/00080000-555b-31ed-7683-d4cdd224d2b5?XDEBUG_SESSION_START=netbeans-xdebug
+//        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->obj2['id'], "popa", $this->lookPopa1['id']);
+//
+//        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "popa", $this->lookPopa1['id']);
+//    }
 
     /**
      * kreiramo osebo, test validacije
@@ -629,6 +617,36 @@ class OsebaCest
             'oseba'    => $this->obj2['id'],
         ];
         $this->objTelefonska2 = $ent                  = $I->successfullyCreate($this->telefonskaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createVecKontaktnihOseb(ApiTester $I)
+    {
+        $data                = [
+            'status'   => 'AK',
+            'funkcija' => 'zz',
+            'opis'     => 'zz',
+            'popa'     => $this->lookPopa1['id'],
+            'oseba'    => $this->obj2['id'],
+        ];
+        $I->assertTrue(TRUE);
+        $this->objKontaktna1 = $ent                 = $I->successfullyCreate($this->kontaktnaOsebaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // še en zapis
+        $data                = [
+            'status'   => 'AK',
+            'funkcija' => 'bb',
+            'opis'     => 'bb',
+            'popa'     => $this->lookPopa2['id'],
+            'oseba'    => $this->obj2['id'],
+        ];
+        $this->objKontaktna2 = $ent                 = $I->successfullyCreate($this->kontaktnaOsebaUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -745,7 +763,7 @@ class OsebaCest
      */
     public function createVecZaposlitev(ApiTester $I)
     {
-        $data                = [
+        $data                  = [
             'status'              => 'zz',
             'zacetek'             => '2010-02-01T00:00:00+0100',
             'konec'               => '2010-02-01T00:00:00+0100',
@@ -758,10 +776,10 @@ class OsebaCest
             'jeNastopajoci'       => TRUE,
             'oseba'               => $this->obj2['id'],
         ];
-        $this->objSodelovanje1 = $ent                 = $I->successfullyCreate($this->zaposlitevUrl, $data);
+        $this->objSodelovanje1 = $ent                   = $I->successfullyCreate($this->zaposlitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        
-        $data                = [
+
+        $data                  = [
             'status'              => 'aa',
             'zacetek'             => '2012-02-01T00:00:00+0100',
             'konec'               => '2013-02-01T00:00:00+0100',
@@ -774,7 +792,7 @@ class OsebaCest
             'jeNastopajoci'       => TRUE,
             'oseba'               => $this->obj2['id'],
         ];
-        $this->objSodelovanje2 = $ent                 = $I->successfullyCreate($this->zaposlitevUrl, $data);
+        $this->objSodelovanje2 = $ent                   = $I->successfullyCreate($this->zaposlitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -856,6 +874,32 @@ class OsebaCest
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "sodelovanja", $this->objSodelovanje1['id']);
         $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecKontaktnihOseb
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSKontaktnimiOsebami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "kontaktneOsebe", "");
+        $I->assertEquals(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "kontaktneOsebe", $this->objKontaktna1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * @depends create
+     */
+    public function delete(ApiTester $I)
+    {
+        $oseba = $I->successfullyDelete($this->restUrl, $this->obj['id']);
+
+        $I->failToGet($this->restUrl, $this->obj['id']);
     }
 
 }
