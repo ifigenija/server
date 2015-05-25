@@ -25,6 +25,11 @@ class Prostor
      * @var string     
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", unique=true, nullable=false)
+     */
+    private $ime;
     
     
     /**

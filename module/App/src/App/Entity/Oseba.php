@@ -32,7 +32,7 @@ class Oseba
     /**
      *  Poslovni partner od katerega je kontaktna oseba
      * 
-     * @ORM\ManyToMany(targetEntity="App\Entity\Popa", mappedBy="osebe")
+     * 
      * @var <Popa>
      */
     protected $popa;
@@ -186,6 +186,11 @@ class Oseba
      * @var <Trrji>
      */
     private $trrji;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\KontaktnaOseba", mappedBy="oseba")
+     */
+    private $kontaktnaOseba;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="oseba")
