@@ -53,7 +53,7 @@ class Prostor
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="Prizorišče", description="Ali je prizorišče")
+     * @Max\I18n(label="Kapaciteta", description="Število mest v prostoru")
      * @var integer
      */
     private $kapaciteta;
