@@ -205,7 +205,7 @@ class TelefonskaCest
 
         $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        $I->assertEquals('567', $list[0]['stevilka']);  //$$ rb tu je lahko drugačen rezultat, ker sort pri Criteria še ne deluje ok
+        $I->assertEquals('567', $list[0]['stevilka']);  // rb tu je lahko drugačen rezultat, ker sort pri Criteria še ne deluje ok
     }
 
     /**

@@ -90,6 +90,7 @@ class PogodbaCest
         codecept_debug($ent);
         codecept_debug($drzava);
     }
+
     /**
      * 
      * @param ApiTester $I

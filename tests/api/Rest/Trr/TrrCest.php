@@ -30,6 +30,8 @@ class TrrCest
     private $objOseba;
     private $objPopa;
     private $objDrzava;
+    private $lookOseba;
+    private $lookPopa;
 
     public function _before(ApiTester $I)
     {
@@ -42,35 +44,55 @@ class TrrCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupOsebo(ApiTester $I)
+    {
+        $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0006", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupPopa(ApiTester $I)
+    {
+        $this->lookPopa = $ent            = $I->lookupEntity("popa", "0988", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
      *  Ustvari osebo
      * 
      * @param ApiTester $I
      */
-    public function createOseba(ApiTester $I)
-    {
-        $data           = [
-            'naziv'       => 'zz',
-            'ime'         => 'zz',
-            'priimek'     => 'zz',
-            'email'       => 'x@xxx.xx',
-            'krajRojstva' => 'zz',
-        ];
-        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
-        $I->assertEquals('zz', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
-    }
+//    public function createOseba(ApiTester $I)
+//    {
+//        $data           = [
+//            'naziv'       => 'zz',
+//            'ime'         => 'zz',
+//            'priimek'     => 'zz',
+//            'email'       => 'x@xxx.xx',
+//            'krajRojstva' => 'zz',
+//        ];
+//        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
+//        $I->assertEquals('zz', $oseba['ime']);
+//        $I->assertNotEmpty($oseba['id']);
+//    }
 
     /**
      * @param ApiTester $I
      */
-    public function getListDrzava(ApiTester $I)
-    {
-        $resp            = $I->successfullyGetList($this->drzavaUrl, []);
-        $list            = $resp['data'];
-        $I->assertNotEmpty($list);
-        $this->objDrzava = $drzava          = array_pop($list);
-        $I->assertNotEmpty($drzava);
-    }
+//    public function getListDrzava(ApiTester $I)
+//    {
+//        $resp            = $I->successfullyGetList($this->drzavaUrl, []);
+//        $list            = $resp['data'];
+//        $I->assertNotEmpty($list);
+//        $this->objDrzava = $drzava          = array_pop($list);
+//        $I->assertNotEmpty($drzava);
+//    }
 
     /**
      * kreiram poslovnega partnerja
@@ -78,36 +100,39 @@ class TrrCest
      * @depends getListDrzava
      * @param ApiTester $I
      */
-    public function createPopa(ApiTester $I)
-    {
-        $data          = [
-            'sifra'     => 'ZZ12',
-            'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
-            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
-            'naziv'     => 'zz',
-            'naziv1'    => 'zz',
-            'panoga'    => 'zz',
-            'email'     => 'z@zzz.zz',
-            'url'       => 'zz',
-            'opomba'    => 'zz',
-            'drzava'    => $this->objDrzava['id'],
-            'idddv'     => 'zz',
-            'maticna'   => 'ZZ123',
-            'zavezanec' => 'Da',
-            'jeeu'      => 'Da',
-            'datZav'    => '2010-02-01T00:00:00+0100',
-            'datnZav'   => '2017-02-01T00:00:00+0100',
-            'zamejstvo' => FALSE,
-        ];
-        $this->objPopa = $popa          = $I->successfullyCreate($this->popaUrl, $data);
-
-//        codecept_debug($popa);
-        $I->assertNotEmpty($popa['id']);
-        $I->assertEquals('ZZ12', $popa['sifra']);
-    }
+//    public function createPopa(ApiTester $I)
+//    {
+//        $data          = [
+//            'sifra'     => 'ZZ12',
+//            'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
+//            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
+//            'naziv'     => 'zz',
+//            'naziv1'    => 'zz',
+//            'panoga'    => 'zz',
+//            'email'     => 'z@zzz.zz',
+//            'url'       => 'zz',
+//            'opomba'    => 'zz',
+//            'drzava'    => $this->objDrzava['id'],
+//            'idddv'     => 'zz',
+//            'maticna'   => 'ZZ123',
+//            'zavezanec' => 'Da',
+//            'jeeu'      => 'Da',
+//            'datZav'    => '2010-02-01T00:00:00+0100',
+//            'datnZav'   => '2017-02-01T00:00:00+0100',
+//            'zamejstvo' => FALSE,
+//        ];
+//        $this->objPopa = $popa          = $I->successfullyCreate($this->popaUrl, $data);
+//
+////        codecept_debug($popa);
+//        $I->assertNotEmpty($popa['id']);
+//        $I->assertEquals('ZZ12', $popa['sifra']);
+//    }
 
     /**
      *  napolnimo vsaj en zapis
+     * 
+     * @depends lookupOsebo
+     * @depends lookupPopa
      * 
      * @param ApiTester $I
      */
@@ -119,7 +144,7 @@ class TrrCest
             'bic'      => 'ZZ123',
             'banka'    => 'ZZ123',
             'popa'     => null,
-            'oseba'    => $this->objOseba['id'],
+            'oseba'    => $this->lookOseba['id'],
         ];
         $this->obj = $trr       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals('ZZ123', $trr['banka']);
@@ -131,7 +156,7 @@ class TrrCest
             'swift'    => 'WW123',
             'bic'      => 'WW123',
             'banka'    => 'WW123',
-            'popa'     => $this->objPopa['id'],
+            'popa'     => $this->lookPopa['id'],
             'oseba'    => null,
         ];
         $this->objTrr2 = $trr           = $I->successfullyCreate($this->restUrl, $data);
@@ -145,7 +170,7 @@ class TrrCest
             'swift'    => 'A1',
             'bic'      => 'A1',
             'banka'    => 'A1',
-            'popa'     => $this->objPopa['id'],
+            'popa'     => $this->lookPopa['id'],
             'oseba'    => null, //$$ začasno izključim
         ];
         $trr  = $I->successfullyCreate($this->restUrl, $data);
@@ -157,12 +182,11 @@ class TrrCest
      * preberi vse naslove od osebe
      * 
      * @depends create
-     * @depends createOseba
      * @param ApiTester $I
      */
     public function getListPoOsebi(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?oseba=" . $this->objOseba['id'];
+        $listUrl = $this->restUrl . "?oseba=" . $this->lookOseba['id'];
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
@@ -177,12 +201,11 @@ class TrrCest
      * preberi vse naslove od poslovnega partnerja
      * 
      * @depends create
-     * @depends createPopa
      * @param ApiTester $I
      */
     public function getListPoPopa(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?popa=" . $this->objPopa['id'];
+        $listUrl = $this->restUrl . "?popa=" . $this->lookPopa['id'];
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
@@ -235,7 +258,7 @@ class TrrCest
         $I->assertEquals($trr['swift'], 'ZZ123');
         $I->assertEquals($trr['bic'], 'ZZ123');
         $I->assertEquals($trr['popa'], NULL);
-        $I->assertEquals($trr['oseba'], $this->objOseba['id']);
+        $I->assertEquals($trr['oseba'], $this->lookOseba['id']);
         $I->assertEquals('TRA123', $trr['banka']);
 
         // preberemo še en zapis
@@ -245,7 +268,7 @@ class TrrCest
         $I->assertEquals($trr['swift'], 'WW123');
         $I->assertEquals($trr['bic'], 'WW123');
         $I->assertEquals($trr['banka'], 'WW123');
-        $I->assertEquals($trr['popa'], $this->objPopa['id']);
+        $I->assertEquals($trr['popa'], $this->lookPopa['id']);
         $I->assertEquals($trr['oseba'], null);
     }
 
