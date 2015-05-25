@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM,
  * @ORM\Entity(repositoryClass="App\Repository\Popa")
  * @ORM\Table(name="popa")
  * @Max\I18n(label="Poslovni partner",plural="Poslovni partnerji")
+ * @Max\Lookup
  * @Max\Id(prefix="0008")
  */
 class Popa

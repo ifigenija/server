@@ -44,6 +44,9 @@ class PogodbaCest
     private $objPopa;
     private $objDrzava;
     private $objOseba;
+    private $lookDrzava;
+    private $lookPopa;
+    private $lookOseba;
     private $objTrr;
     private $objAlternacija1;
     private $objAlternacija2;
@@ -73,68 +76,105 @@ class PogodbaCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupDrzavo(ApiTester $I)
+    {
+        $ent = $I->lookupEntity("drzava", "SI");
+        $I->assertNotEmpty($ent);
+        $ent = $I->lookupEntity("drzava", "BQ",FALSE);  
+        $I->assertNotEmpty($ent);
+        
+        $drzava= $this->objDrzava;
+        codecept_debug($ent);
+        codecept_debug($drzava);
+    }
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupOsebo(ApiTester $I)
+    {
+        $this->lookOseba=$ent = $I->lookupEntity("oseba", "0006",false);
+        $I->assertNotEmpty($ent);
+    }
+    
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupPopa(ApiTester $I)
+    {
+        $this->lookPopa=$ent = $I->lookupEntity("popa", "0988",false);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
      * kreiram popa
      *  
      * @param ApiTester $I
      */
-    public function createPopa(ApiTester $I)
-    {
-        $data          = [
-            'sifra'  => 'X12',
-            'naziv'  => 'zz',
-//            'naziv1'    => 'zz',
-//            'panoga'    => 'zz',
-//            'email'     => 'z@zzz.zz',
-//            'url'       => 'zz',
-//            'opomba'    => 'zz',
-            'drzava' => $this->objDrzava['id'],
-//            'idddv'     => 'zz',
-//            'maticna'   => 'ZZ123',
-//            'zavezanec' => 'Da',
-//            'jeeu'      => 'Da',
-//            'datZav'    => '2010-02-01T00:00:00+0100',
-//            'datnZav'   => '2017-02-01T00:00:00+0100',
-//            'zamejstvo' => FALSE,
-        ];
-        $this->objPopa = $popa          = $I->successfullyCreate($this->popaUrl, $data);
-
-        $I->assertNotEmpty($popa['id']);
-    }
+//    public function createPopa(ApiTester $I)
+//    {
+//        $data          = [
+//            'sifra'  => 'X12',
+//            'naziv'  => 'zz',
+////            'naziv1'    => 'zz',
+////            'panoga'    => 'zz',
+////            'email'     => 'z@zzz.zz',
+////            'url'       => 'zz',
+////            'opomba'    => 'zz',
+//            'drzava' => $this->lookDrzava['id'],
+////            'idddv'     => 'zz',
+////            'maticna'   => 'ZZ123',
+////            'zavezanec' => 'Da',
+////            'jeeu'      => 'Da',
+////            'datZav'    => '2010-02-01T00:00:00+0100',
+////            'datnZav'   => '2017-02-01T00:00:00+0100',
+////            'zamejstvo' => FALSE,
+//        ];
+//        $this->objPopa = $popa          = $I->successfullyCreate($this->popaUrl, $data);
+//
+//        $I->assertNotEmpty($popa['id']);
+//    }
 
     /**
      *  kreiramo  osebo
      * 
      * @param ApiTester $I
      */
-    public function createOsebo(ApiTester $I)
-    {
-        $data = [
-            'naziv'         => 'zz',
-            'ime'           => 'zz',
-            'priimek'       => 'zz',
-            'funkcija'      => 'zz',
-            'srednjeIme'    => 'zz',
-            'psevdonim'     => 'zz',
-            'email'         => 'x@xxx.xx',
-            'datumRojstva'  => '1973-28-03T04:30:00',
-            'emso'          => 'ZZ',
-            'davcna'        => 'ZZ123',
-            'spol'          => 'M',
-            'opombe'        => 'zz',
-            'drzavljanstvo' => 'zz',
-            'drzavaRojstva' => 'zz',
-            'krajRojstva'   => 'zz',
-            'user'          => null,
-        ];
-
-        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
-
-        $I->assertEquals('zz', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
-    }
+//    public function createOsebo(ApiTester $I)
+//    {
+//        $data = [
+//            'naziv'         => 'zz',
+//            'ime'           => 'zz',
+//            'priimek'       => 'zz',
+//            'funkcija'      => 'zz',
+//            'srednjeIme'    => 'zz',
+//            'psevdonim'     => 'zz',
+//            'email'         => 'x@xxx.xx',
+//            'datumRojstva'  => '1973-28-03T04:30:00',
+//            'emso'          => 'ZZ',
+//            'davcna'        => 'ZZ123',
+//            'spol'          => 'M',
+//            'opombe'        => 'zz',
+//            'drzavljanstvo' => 'zz',
+//            'drzavaRojstva' => 'zz',
+//            'krajRojstva'   => 'zz',
+//            'user'          => null,
+//        ];
+//
+//        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
+//
+//        $I->assertEquals('zz', $oseba['ime']);
+//        $I->assertNotEmpty($oseba['id']);
+//    }
 
     /**
      * kreiramo Trr od popa
+     * 
+     * @depends lookupPopa
      * 
      * @param ApiTester $I
      */
@@ -145,7 +185,7 @@ class PogodbaCest
             'swift'    => 'ZZ123',
             'bic'      => 'ZZ123',
             'banka'    => 'ZZ123',
-            'popa'     => $this->objPopa['id'],
+            'popa'     => $this->lookPopa['id'],
             'oseba'    => NULL,
         ];
         $this->objTrr = $trr          = $I->successfullyCreate($this->trrUrl, $data);
@@ -156,8 +196,8 @@ class PogodbaCest
     /**
      *  kreiramo pogodbo
      * 
-     * @depends createOsebo
-     * @depends createPopa
+     * @depends lookupOsebo
+     * @depends lookupPopa
      * 
      * @param ApiTester $I
      */
@@ -171,7 +211,7 @@ class PogodbaCest
             'aktivna'           => false,
             'opis'              => 'zz',
             'oseba'             => null,
-            'popa'              => $this->objPopa['id'],
+            'popa'              => $this->lookPopa['id'],
             'trr'               => $this->objTrr['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
@@ -187,7 +227,7 @@ class PogodbaCest
             'vrednostUre'       => 22.22,
             'aktivna'           => false,
             'opis'              => 'ww',
-            'oseba'             => $this->objOseba['id'],
+            'oseba'             => $this->lookOseba['id'],
             'popa'              => null,
             'trr'               => $this->objTrr['id'],
         ];
@@ -204,7 +244,7 @@ class PogodbaCest
             'vrednostUre'       => 2.22,
             'aktivna'           => false,
             'opis'              => 'aa',
-            'oseba'             => $this->objOseba['id'],
+            'oseba'             => $this->lookOseba['id'],
             'popa'              => null,
             'trr'               => $this->objTrr['id'],
         ];
@@ -256,7 +296,7 @@ class PogodbaCest
      */
     public function getListPoOsebi(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?oseba=" . $this->objOseba['id'];
+        $listUrl = $this->restUrl . "?oseba=" . $this->lookOseba['id'];
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
@@ -275,7 +315,7 @@ class PogodbaCest
      */
     public function getListPoPopa(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?popa=" . $this->objPopa['id'];
+        $listUrl = $this->restUrl . "?popa=" . $this->lookPopa['id'];
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
@@ -335,7 +375,7 @@ class PogodbaCest
         $I->assertEquals($ent['aktivna'], false);
         $I->assertEquals($ent['opis'], 'xx');
         $I->assertEquals($ent['oseba'], null);
-        $I->assertEquals($ent['popa'], $this->objPopa['id']);
+        $I->assertEquals($ent['popa'], $this->lookPopa['id']);
         $I->assertEquals($ent['trr'], $this->objTrr['id']);
     }
 
@@ -352,7 +392,7 @@ class PogodbaCest
 //        $this->expect($this->sifra, "sifra je obvezen podatek", 1000342);
 
         $ent          = $this->obj;
-        $ent['oseba'] = $this->objOseba;
+        $ent['oseba'] = $this->lookOseba['id'];
 
         // test validacije - oseba mora imeti ime
         $resp = $I->failToUpdate($this->restUrl, $ent['id'], $ent);

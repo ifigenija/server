@@ -6,6 +6,9 @@ forms:
     default: 
         elements:    
 #            - id
+            - name: sifra
+              options: 
+                  required: false                  
 #            - popa
             - naziv
             - ime

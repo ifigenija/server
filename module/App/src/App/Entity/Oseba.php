@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM,
  * Entiteta za osebe
  * 
  * @ORM\Entity(repositoryClass="App\Repository\Osebe")
- * 
+ * @Max\Lookup(ident="sifra",label="naziv",search={"ime","priimek","email"},extra={"ime","priimek", "email"})
  * @Max\I18n(label="Kontaktna oseba",plural="Kontaktne osebe")
  * @Max\Id(prefix="0009")
  */
@@ -28,6 +28,16 @@ class Oseba
      * @var string
      */
     protected $id;
+
+    /**
+     * Šifra osebe
+     *
+     * @ORM\Column(unique=true, length=4, nullable=false)
+     * @Max\I18n(label="Šifra", description="Unikatna šifra osebe")
+     * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode",group="Osnovni podatki")
+     * @var string
+     */
+    protected $sifra;
 
     /**
      *  Poslovni partner od katerega je kontaktna oseba
@@ -231,6 +241,7 @@ class Oseba
     {
         $this->expect($this->ime, "Ime je obvezen podatek", 1000301);
         $this->expect($this->priimek, "Priimek je obvezen podatek", 1000302);
+        $this->expect($this->sifra, "Šifra je obvezen podatek", 1000303);
     }
 
     /**
@@ -246,6 +257,11 @@ class Oseba
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getSifra()
+    {
+        return $this->sifra;
     }
 
     public function getPopa()
@@ -376,6 +392,12 @@ class Oseba
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    public function setSifra($sifra)
+    {
+        $this->sifra = $sifra;
         return $this;
     }
 
@@ -528,6 +550,5 @@ class Oseba
         $this->naslov = $naslov;
         return $this;
     }
-
 
 }
