@@ -24,13 +24,7 @@ class Prostor
      * @Max\Ui(type="id")
      * @var string     
      */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", unique=true, nullable=false)
-     */
-//    private $ime;
-    
+    private $id;   
     
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
@@ -58,7 +52,7 @@ class Prostor
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="Prizorišče", description="Ali je prizorišče")
+     * @Max\I18n(label="Kapaciteta", description="Število mest v prostoru")
      * @var integer
      */
     private $kapaciteta;

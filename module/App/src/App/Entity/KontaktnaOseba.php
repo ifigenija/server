@@ -2,7 +2,8 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\Mapping as ORM,
+    Max\Ann\Entity as Max;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\KontaktneOsebe")
