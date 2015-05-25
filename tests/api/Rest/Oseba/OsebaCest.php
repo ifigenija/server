@@ -180,6 +180,7 @@ class OsebaCest
     public function create(ApiTester $I)
     {
         $data = [
+            'sifra'         => 'ZZ12',
             'naziv'         => 'zz',
             'ime'           => 'zz',
             'priimek'       => 'zz',
@@ -202,9 +203,11 @@ class OsebaCest
 
         $I->assertEquals('zz', $oseba['ime']);
         $I->assertNotEmpty($oseba['id']);
+        $I->assertNotEmpty($oseba['sifra']);
 
         // kreiramo še en zapis
         $data = [
+            'sifra'         => 'AA12',
             'naziv'         => 'aa',
             'ime'           => 'aa',
             'priimek'       => 'aa',
@@ -227,6 +230,33 @@ class OsebaCest
 
         $I->assertEquals('aa', $oseba['ime']);
         $I->assertNotEmpty($oseba['id']);
+        $I->assertNotEmpty($oseba['sifra']);
+        // kreiramo še en zapis
+        $data = [
+            'sifra'         => '',      // prazno -naj sam zgenerira
+            'naziv'         => 'bb',
+            'ime'           => 'bb',
+            'priimek'       => 'bb',
+            'funkcija'      => 'bb',
+            'srednjeIme'    => 'bb',
+            'psevdonim'     => 'bb',
+            'email'         => 'b@aaa.aa',
+            'datumRojstva'  => '1976-03-28T00:00:00+0100',
+            'emso'          => 'BB',
+            'davcna'        => 'BB123',
+            'spol'          => 'M',
+            'opombe'        => 'bb',
+            'drzavljanstvo' => 'bb',
+            'drzavaRojstva' => 'bb',
+            'krajRojstva'   => 'bb',
+            'user'          => null,
+        ];
+
+        $oseba      = $I->successfullyCreate($this->restUrl, $data);
+
+        $I->assertEquals('bb', $oseba['ime']);
+        $I->assertNotEmpty($oseba['id']);
+        $I->assertNotEmpty($oseba['sifra']);    // ali je avtomatsko zgeneriral šifro?
     }
 
 //    /**

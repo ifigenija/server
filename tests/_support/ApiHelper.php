@@ -12,6 +12,74 @@ class ApiHelper
     const ID_RE = '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/';
 
     /**
+     * Lookup entitete direktno preko GuzzleHttp
+     * 
+     * @param string $entity ime entitete - kratka oblika 
+     * @param string $ident ident po katerem povprašujemo
+     * @param boolean $returnIdOnly a vrnemo samo id ali pa celi lookup objekt
+     * @param string $route dodatek k default lookup url-ju
+     * @return typeSkoči po ID entitete 
+     */
+    public function lookupEntity($entity, $ident, $returnIdOnly = true, $route = '')
+    {
+
+
+        $br = $this->getModule('PhpBrowser');
+
+        $client = new \GuzzleHttp\Client ();
+
+
+        /* @var $a \Codeception\Module\Asserts */
+
+        $a = $this->getModule('Asserts');
+
+
+        if ($route && substr($route, 0, 1) !== '/') {
+
+            $route = '/' . $route;
+        }
+
+
+
+        $url = $br->_getUrl() . "/lookup/$entity$route?";
+
+        if (preg_match(self::ID_RE, $ident)) {
+
+            $url .= "ids=$ident&page=1&per_page=30";
+        } else {
+
+            $url .= "ident=" . urlencode($ident) . "&page=1&per_page=30";
+        }
+
+        $res = $client->get($url, ['auth' => [\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass]]);    
+
+
+        $a->assertEquals('application/json; charset=utf-8', $res->getHeader('content-type'), "Lookup $entity z identom $ident ni vrnil pravega content type");
+
+        $json = $res->getBody();
+
+
+        $decoded = json_decode($json, true);
+
+        $a->assertEquals(JSON_ERROR_NONE, json_last_error(), "Lookup $entity z identom $ident ni vrnil pravilnega json-a");
+
+
+        $a->assertEquals("200", $res->getStatusCode(), "Lookup $entity z identom $ident ni vrnil pravega statusa ");
+
+
+        $a->assertTrue(count($decoded['data']) > 0, "Lookup $entity z identom $ident ni našel entitete.");
+
+
+        if ($returnIdOnly) {
+
+            return $decoded['data'][0]['id'];
+        } else {
+
+            return $decoded['data'][0];
+        }
+    }
+
+    /**
      * Post rest metoda z data v body requesta
      * 
      * @param string $url
