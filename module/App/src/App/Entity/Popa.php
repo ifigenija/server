@@ -130,12 +130,8 @@ class Popa
     protected $drzava;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Oseba", inversedBy="popa")
-     * @ORM\JoinTable(
-     *     name="Oseba2Popa",
-     *     joinColumns={@ORM\JoinColumn(name="popa_id", referencedColumnName="id", nullable=false)},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="oseba_id", referencedColumnName="id", nullable=false)}
-     * )
+     * 
+     * 
      * @var <Osebe>
      */
     private $osebe;
@@ -159,6 +155,11 @@ class Popa
      * @var <Trrji>
      */
     private $trrji;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\KontaktnaOseba", mappedBy="popa")
+     */
+    private $kontaktnaOseba;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="popa")
