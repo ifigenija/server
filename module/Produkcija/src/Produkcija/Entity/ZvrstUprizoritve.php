@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping AS ORM,
  * @ORM\Entity(repositoryClass="Produkcija\Repository\ZvrstiUprizoritve")
  * @Max\I18n(label="Zvrst",plural="Zvrst uprizoritve")
  * @Max\Id(prefix="0021")
+ * @Max\Lookup(ident="ime", label="opis", search={"ime","opis"})
  */
 class ZvrstUprizoritve
         extends \Max\Entity\Base

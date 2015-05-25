@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM,
  * @ORM\Entity(repositoryClass="Prodaja\Repository\Prostori")
  * @Max\I18n(label="Prostor",plural="Prostori")
  * @Max\Id(prefix="0034")
+ * @Max\Lookup(extra={"kapacitetea","jePrizorisce"})
  *  */
 class Prostor
         extends \Max\Entity\Base
@@ -24,6 +25,15 @@ class Prostor
      * @var string     
      */
     private $id;
+    
+    
+    /**
+     * @ORM\Column(type="string", unique=true, nullable=false)
+     * @Max\I18n(label="Šifra", description="Enolična Oznaka prostora")
+     * @Max\Ui(type="sifra",ident=true )
+     * @var string
+     */
+    private $sifra;
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
@@ -31,7 +41,7 @@ class Prostor
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
-    private $ime;
+    private $naziv;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -55,6 +65,7 @@ class Prostor
      */
     private $opis;
 
+    
     public function validate($mode = 'update')
     {
         
@@ -65,9 +76,14 @@ class Prostor
         return $this->id;
     }
 
-    public function getIme()
+    public function getSifra()
     {
-        return $this->ime;
+        return $this->sifra;
+    }
+
+    public function getNaziv()
+    {
+        return $this->naziv;
     }
 
     public function getJePrizorisce()
@@ -91,9 +107,15 @@ class Prostor
         return $this;
     }
 
-    public function setIme($ime)
+    public function setSifra($sifra)
     {
-        $this->ime = $ime;
+        $this->sifra = $sifra;
+        return $this;
+    }
+
+    public function setNaziv($naziv)
+    {
+        $this->naziv = $naziv;
         return $this;
     }
 
@@ -114,5 +136,6 @@ class Prostor
         $this->opis = $opis;
         return $this;
     }
+
 
 }

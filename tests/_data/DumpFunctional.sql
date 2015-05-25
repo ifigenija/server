@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.4.0
 -- Dumped by pg_dump version 9.4.0
--- Started on 2015-05-24 22:40:35 CEST
+-- Started on 2015-05-24 23:46:53 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -494,10 +494,11 @@ CREATE TABLE produkcijskahisa (
 
 CREATE TABLE prostor (
     id uuid NOT NULL,
-    ime character varying(255) NOT NULL,
+    sifra character varying(255) NOT NULL,
     jeprizorisce boolean,
     kapaciteta integer,
-    opis text
+    opis text,
+    naziv character varying(255) NOT NULL
 );
 
 
@@ -587,7 +588,7 @@ CREATE SEQUENCE revizije_id_seq
 
 
 --
--- TOC entry 2991 (class 0 OID 0)
+-- TOC entry 2992 (class 0 OID 0)
 -- Dependencies: 173
 -- Name: revizije_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -955,7 +956,7 @@ ALTER TABLE ONLY revizije ALTER COLUMN id SET DEFAULT nextval('revizije_id_seq':
 
 
 --
--- TOC entry 2933 (class 0 OID 122521)
+-- TOC entry 2934 (class 0 OID 122521)
 -- Dependencies: 179
 -- Data for Name: abonma; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -965,7 +966,7 @@ COPY abonma (id, stpredstav, stkuponov, ime, opis, kapaciteta) FROM stdin;
 
 
 --
--- TOC entry 2966 (class 0 OID 122848)
+-- TOC entry 2967 (class 0 OID 122848)
 -- Dependencies: 212
 -- Data for Name: alternacija; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -975,7 +976,7 @@ COPY alternacija (id, funkcija_id, sodelovanje_id, oseba_id, koprodukcija_delite
 
 
 --
--- TOC entry 2967 (class 0 OID 122861)
+-- TOC entry 2968 (class 0 OID 122861)
 -- Dependencies: 213
 -- Data for Name: arhivalija; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -985,17 +986,19 @@ COPY arhivalija (id, dogodek_id, uprizoritev_id, oznakadatuma, datum, fizicnaobl
 
 
 --
--- TOC entry 2968 (class 0 OID 122878)
+-- TOC entry 2969 (class 0 OID 122878)
 -- Dependencies: 214
 -- Data for Name: besedilo; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY besedilo (id, stevilka, naslov, avtor, podnaslov, jezik, naslovizvirnika, datumprejema, moskevloge, zenskevloge, prevajalec, povzetekvsebine) FROM stdin;
+00160000-5562-3b07-6478-706f9861a681	1001	rerwer	jaz 123	werwerwer354			2015-05-27	10	0		
+00160000-5562-3dc6-7c33-013824846f32	1002	ERTERT	treter	ETETRE	1	WERW	2015-05-21	0	0		
 \.
 
 
 --
--- TOC entry 2944 (class 0 OID 122665)
+-- TOC entry 2945 (class 0 OID 122665)
 -- Dependencies: 190
 -- Data for Name: dogodek; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1005,7 +1008,7 @@ COPY dogodek (id, predstava_id, zasedenost_id, vaja_id, gostovanje_id, dogodek_i
 
 
 --
--- TOC entry 2945 (class 0 OID 122688)
+-- TOC entry 2946 (class 0 OID 122688)
 -- Dependencies: 191
 -- Data for Name: dogodekizven; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1015,7 +1018,7 @@ COPY dogodekizven (id) FROM stdin;
 
 
 --
--- TOC entry 2934 (class 0 OID 122530)
+-- TOC entry 2935 (class 0 OID 122530)
 -- Dependencies: 180
 -- Data for Name: drza; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1274,7 +1277,7 @@ COPY drza (id, sifra, sifradolg, isonum, isonaziv, naziv, opomba) FROM stdin;
 
 
 --
--- TOC entry 2969 (class 0 OID 122892)
+-- TOC entry 2970 (class 0 OID 122892)
 -- Dependencies: 215
 -- Data for Name: funkcija; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1284,7 +1287,7 @@ COPY funkcija (id, uprizoritev_id, alternacija_id, tip_vloge_id, podrocje, naziv
 
 
 --
--- TOC entry 2946 (class 0 OID 122693)
+-- TOC entry 2947 (class 0 OID 122693)
 -- Dependencies: 192
 -- Data for Name: gostovanje; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1294,7 +1297,7 @@ COPY gostovanje (id, drzava_id, vrsta, zamejstvo) FROM stdin;
 
 
 --
--- TOC entry 2947 (class 0 OID 122700)
+-- TOC entry 2948 (class 0 OID 122700)
 -- Dependencies: 193
 -- Data for Name: gostujoca; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1304,7 +1307,7 @@ COPY gostujoca (id, uprizoritev_id) FROM stdin;
 
 
 --
--- TOC entry 2953 (class 0 OID 122747)
+-- TOC entry 2954 (class 0 OID 122747)
 -- Dependencies: 199
 -- Data for Name: kupec; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1314,7 +1317,7 @@ COPY kupec (id, popa_id) FROM stdin;
 
 
 --
--- TOC entry 2954 (class 0 OID 122753)
+-- TOC entry 2955 (class 0 OID 122753)
 -- Dependencies: 200
 -- Data for Name: nacinplacina; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1324,7 +1327,7 @@ COPY nacinplacina (id, ime, vrsta) FROM stdin;
 
 
 --
--- TOC entry 2935 (class 0 OID 122547)
+-- TOC entry 2936 (class 0 OID 122547)
 -- Dependencies: 181
 -- Data for Name: option; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1348,7 +1351,7 @@ COPY option (id, name, type, defaultvalue, peruser, readonly, public, role, desc
 
 
 --
--- TOC entry 2936 (class 0 OID 122559)
+-- TOC entry 2937 (class 0 OID 122559)
 -- Dependencies: 182
 -- Data for Name: optionvalue; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1361,7 +1364,7 @@ COPY optionvalue (id, option_id, user_id, value, global) FROM stdin;
 
 
 --
--- TOC entry 2937 (class 0 OID 122570)
+-- TOC entry 2938 (class 0 OID 122570)
 -- Dependencies: 183
 -- Data for Name: oseba; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1371,7 +1374,7 @@ COPY oseba (id, user_id, naslov_id, naziv, ime, priimek, funkcija, srednjeime, p
 
 
 --
--- TOC entry 2939 (class 0 OID 122613)
+-- TOC entry 2940 (class 0 OID 122613)
 -- Dependencies: 185
 -- Data for Name: oseba2popa; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1381,7 +1384,7 @@ COPY oseba2popa (popa_id, oseba_id) FROM stdin;
 
 
 --
--- TOC entry 2926 (class 0 OID 122464)
+-- TOC entry 2927 (class 0 OID 122464)
 -- Dependencies: 172
 -- Data for Name: permission; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1486,7 +1489,7 @@ COPY permission (id, name, description, builtin) FROM stdin;
 
 
 --
--- TOC entry 2930 (class 0 OID 122494)
+-- TOC entry 2931 (class 0 OID 122494)
 -- Dependencies: 176
 -- Data for Name: permission2role; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1499,7 +1502,7 @@ COPY permission2role (role_id, permission_id) FROM stdin;
 
 
 --
--- TOC entry 2955 (class 0 OID 122760)
+-- TOC entry 2956 (class 0 OID 122760)
 -- Dependencies: 201
 -- Data for Name: placilniinstrument; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1509,7 +1512,7 @@ COPY placilniinstrument (id, nacin_placina_id, ime) FROM stdin;
 
 
 --
--- TOC entry 2956 (class 0 OID 122767)
+-- TOC entry 2957 (class 0 OID 122767)
 -- Dependencies: 202
 -- Data for Name: podrocjesedenja; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1519,7 +1522,7 @@ COPY podrocjesedenja (id, ime, kapaciteta, templateplaceholder, barva) FROM stdi
 
 
 --
--- TOC entry 2970 (class 0 OID 122906)
+-- TOC entry 2971 (class 0 OID 122906)
 -- Dependencies: 216
 -- Data for Name: pogodba; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1529,7 +1532,7 @@ COPY pogodba (id, oseba_id, popa_id, trr_id, sifra, vrednostdo, zacetek, konec, 
 
 
 --
--- TOC entry 2938 (class 0 OID 122593)
+-- TOC entry 2939 (class 0 OID 122593)
 -- Dependencies: 184
 -- Data for Name: popa; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1541,7 +1544,7 @@ COPY popa (id, drzava_id, sifra, tipkli, stakli, naziv, naziv1, panoga, email, u
 
 
 --
--- TOC entry 2940 (class 0 OID 122620)
+-- TOC entry 2941 (class 0 OID 122620)
 -- Dependencies: 186
 -- Data for Name: posta; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2029,7 +2032,7 @@ COPY posta (id, sifra, naziv) FROM stdin;
 
 
 --
--- TOC entry 2957 (class 0 OID 122775)
+-- TOC entry 2958 (class 0 OID 122775)
 -- Dependencies: 203
 -- Data for Name: postavkaracuna; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2039,7 +2042,7 @@ COPY postavkaracuna (id, racun_id) FROM stdin;
 
 
 --
--- TOC entry 2941 (class 0 OID 122628)
+-- TOC entry 2942 (class 0 OID 122628)
 -- Dependencies: 187
 -- Data for Name: postninaslovi; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2049,7 +2052,7 @@ COPY postninaslovi (id, klient_id, oseba_id, drzava_id, naziv, nazivdva, ulica, 
 
 
 --
--- TOC entry 2948 (class 0 OID 122706)
+-- TOC entry 2949 (class 0 OID 122706)
 -- Dependencies: 194
 -- Data for Name: predstava; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2059,7 +2062,7 @@ COPY predstava (id, uprizoritev_id, gostovanje_id, gostujoc_id) FROM stdin;
 
 
 --
--- TOC entry 2958 (class 0 OID 122781)
+-- TOC entry 2959 (class 0 OID 122781)
 -- Dependencies: 204
 -- Data for Name: prodajapredstave; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2069,7 +2072,7 @@ COPY prodajapredstave (id, sedezni_red_id, dogodek_id) FROM stdin;
 
 
 --
--- TOC entry 2971 (class 0 OID 122922)
+-- TOC entry 2972 (class 0 OID 122922)
 -- Dependencies: 217
 -- Data for Name: produkcijadelitev; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2079,7 +2082,7 @@ COPY produkcijadelitev (id, uprizoritev_id, koproducent_id, odstotekfinanciranja
 
 
 --
--- TOC entry 2972 (class 0 OID 122937)
+-- TOC entry 2973 (class 0 OID 122937)
 -- Dependencies: 218
 -- Data for Name: produkcijskahisa; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2089,17 +2092,17 @@ COPY produkcijskahisa (id, popa_id, status) FROM stdin;
 
 
 --
--- TOC entry 2959 (class 0 OID 122788)
+-- TOC entry 2960 (class 0 OID 122788)
 -- Dependencies: 205
 -- Data for Name: prostor; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY prostor (id, ime, jeprizorisce, kapaciteta, opis) FROM stdin;
+COPY prostor (id, sifra, jeprizorisce, kapaciteta, opis, naziv) FROM stdin;
 \.
 
 
 --
--- TOC entry 2960 (class 0 OID 122797)
+-- TOC entry 2961 (class 0 OID 122797)
 -- Dependencies: 206
 -- Data for Name: racun; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2109,7 +2112,7 @@ COPY racun (id, kupec_id, prodaja_predstave_id, nacin_placina_id, placilni_instr
 
 
 --
--- TOC entry 2961 (class 0 OID 122806)
+-- TOC entry 2962 (class 0 OID 122806)
 -- Dependencies: 207
 -- Data for Name: razpisansedez; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2119,7 +2122,7 @@ COPY razpisansedez (id, postavka_racuna_id, sedez_id, prodaja_predstave_id, reze
 
 
 --
--- TOC entry 2973 (class 0 OID 122944)
+-- TOC entry 2974 (class 0 OID 122944)
 -- Dependencies: 219
 -- Data for Name: rekvizit; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2129,7 +2132,7 @@ COPY rekvizit (id, ime, vrsta, status) FROM stdin;
 
 
 --
--- TOC entry 2974 (class 0 OID 122955)
+-- TOC entry 2975 (class 0 OID 122955)
 -- Dependencies: 220
 -- Data for Name: rekviziterstvo; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2139,27 +2142,33 @@ COPY rekviziterstvo (id, rekvizit_id, uprizoritev_id, namenuporabe, opispostavit
 
 
 --
--- TOC entry 2928 (class 0 OID 122475)
+-- TOC entry 2929 (class 0 OID 122475)
 -- Dependencies: 174
 -- Data for Name: revizije; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY revizije (id, razred, objectid, upor, datum, tip, data) FROM stdin;
 1	Aaa\\Entity\\User	00010000-5562-3727-f601-fd41e052e9f2	00010000-5562-3727-8025-c688ebd4e84d	2015-05-24 22:40:26	UPD	a:1:{s:8:"password";a:2:{i:0;s:60:"$2y$05$NS4xMjkyMTcwMzExMjAxROv2lPJ5QRIqBU.q4dBOVcLwkrDCWAN5a";i:1;s:60:"$2y$05$NS4xMjkyMTcwMzExMjAxROvZ3ZK1rCz1z6kWFFbQn0D.v3kzLt6iq";}}
+2	Produkcija\\Entity\\Besedilo	00160000-5562-3b07-6478-706f9861a681	00010000-5562-3727-f601-fd41e052e9f2	2015-05-24 22:56:39	INS	a:0:{}
+3	Produkcija\\Entity\\Besedilo	00160000-5562-3b07-6478-706f9861a681	00010000-5562-3727-f601-fd41e052e9f2	2015-05-24 23:01:15	UPD	a:2:{s:12:"datumPrejema";a:2:{i:0;N;i:1;O:8:"DateTime":3:{s:4:"date";s:26:"2015-05-27 00:00:00.000000";s:13:"timezone_type";i:2;s:8:"timezone";s:1:"Z";}}s:10:"moskeVloge";a:2:{i:0;i:0;i:1;i:10;}}
+4	Produkcija\\Entity\\Besedilo	00160000-5562-3b07-6478-706f9861a681	00010000-5562-3727-f601-fd41e052e9f2	2015-05-24 23:01:17	UPD	a:1:{s:12:"datumPrejema";a:2:{i:0;O:8:"DateTime":3:{s:4:"date";s:26:"2015-05-27 00:00:00.000000";s:13:"timezone_type";i:3;s:8:"timezone";s:16:"Europe/Ljubljana";}i:1;O:8:"DateTime":3:{s:4:"date";s:26:"2015-05-27 00:00:00.000000";s:13:"timezone_type";i:2;s:8:"timezone";s:1:"Z";}}}
+5	Produkcija\\Entity\\Besedilo	00160000-5562-3b07-6478-706f9861a681	00010000-5562-3727-f601-fd41e052e9f2	2015-05-24 23:03:09	UPD	a:1:{s:12:"datumPrejema";a:2:{i:0;O:8:"DateTime":3:{s:4:"date";s:26:"2015-05-27 00:00:00.000000";s:13:"timezone_type";i:3;s:8:"timezone";s:16:"Europe/Ljubljana";}i:1;O:8:"DateTime":3:{s:4:"date";s:26:"2015-05-27 00:00:00.000000";s:13:"timezone_type";i:2;s:8:"timezone";s:1:"Z";}}}
+6	Produkcija\\Entity\\Besedilo	00160000-5562-3dc6-7c33-013824846f32	00010000-5562-3727-f601-fd41e052e9f2	2015-05-24 23:08:22	INS	a:0:{}
+7	Produkcija\\Entity\\Besedilo	00160000-5562-3dc6-7c33-013824846f32	00010000-5562-3727-f601-fd41e052e9f2	2015-05-24 23:08:42	UPD	a:2:{s:5:"jezik";a:2:{i:0;s:5:"RWERW";i:1;s:1:"1";}s:12:"datumPrejema";a:2:{i:0;N;i:1;O:8:"DateTime":3:{s:4:"date";s:26:"2015-05-21 00:00:00.000000";s:13:"timezone_type";i:2;s:8:"timezone";s:1:"Z";}}}
 \.
 
 
 --
--- TOC entry 2992 (class 0 OID 0)
+-- TOC entry 2993 (class 0 OID 0)
 -- Dependencies: 173
 -- Name: revizije_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('revizije_id_seq', 1, true);
+SELECT pg_catalog.setval('revizije_id_seq', 7, true);
 
 
 --
--- TOC entry 2962 (class 0 OID 122816)
+-- TOC entry 2963 (class 0 OID 122816)
 -- Dependencies: 208
 -- Data for Name: rezervacija; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2169,7 +2178,7 @@ COPY rezervacija (id, prodaja_predstave_id) FROM stdin;
 
 
 --
--- TOC entry 2929 (class 0 OID 122484)
+-- TOC entry 2930 (class 0 OID 122484)
 -- Dependencies: 175
 -- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2185,7 +2194,7 @@ COPY role (id, name, description, builtin) FROM stdin;
 
 
 --
--- TOC entry 2932 (class 0 OID 122514)
+-- TOC entry 2933 (class 0 OID 122514)
 -- Dependencies: 178
 -- Data for Name: role2user; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2197,7 +2206,7 @@ COPY role2user (user_id, role_id) FROM stdin;
 
 
 --
--- TOC entry 2963 (class 0 OID 122822)
+-- TOC entry 2964 (class 0 OID 122822)
 -- Dependencies: 209
 -- Data for Name: sedez; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2207,7 +2216,7 @@ COPY sedez (id, vrsta_id, sedezni_red_id, podrocja_sedenja_id, stevilka, oznaka,
 
 
 --
--- TOC entry 2964 (class 0 OID 122834)
+-- TOC entry 2965 (class 0 OID 122834)
 -- Dependencies: 210
 -- Data for Name: sedeznired; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2217,7 +2226,7 @@ COPY sedeznired (id, kapaciteta, ime) FROM stdin;
 
 
 --
--- TOC entry 2949 (class 0 OID 122714)
+-- TOC entry 2950 (class 0 OID 122714)
 -- Dependencies: 195
 -- Data for Name: sezona; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2227,7 +2236,7 @@ COPY sezona (id, imesezone, zacetek, konec, aktivna) FROM stdin;
 
 
 --
--- TOC entry 2981 (class 0 OID 123037)
+-- TOC entry 2982 (class 0 OID 123037)
 -- Dependencies: 227
 -- Data for Name: stevilcenje; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2241,7 +2250,7 @@ COPY stevilcenje (id, sifra, naziv, prefix, suffix, zacetek, dolzina, format, gl
 
 
 --
--- TOC entry 2982 (class 0 OID 123045)
+-- TOC entry 2983 (class 0 OID 123045)
 -- Dependencies: 228
 -- Data for Name: stevilcenjekonfig; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2257,17 +2266,18 @@ COPY stevilcenjekonfig (id, stevilcenje_id, dok) FROM stdin;
 
 
 --
--- TOC entry 2983 (class 0 OID 123052)
+-- TOC entry 2984 (class 0 OID 123052)
 -- Dependencies: 229
 -- Data for Name: stevilcenjestanje; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY stevilcenjestanje (id, objid, leto, stevilka) FROM stdin;
+94a38c51-42e7-468e-9eb0-63d1ec879ab3	00000000-5562-3727-baf7-d796f5b0246d	0	1002
 \.
 
 
 --
--- TOC entry 2975 (class 0 OID 122965)
+-- TOC entry 2976 (class 0 OID 122965)
 -- Dependencies: 221
 -- Data for Name: strosekuprizoritve; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2277,7 +2287,7 @@ COPY strosekuprizoritve (id, uprizoritev_id, popa_id, naziv, vrednostdo, vrednos
 
 
 --
--- TOC entry 2993 (class 0 OID 0)
+-- TOC entry 2994 (class 0 OID 0)
 -- Dependencies: 230
 -- Name: strosekuprizoritve_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -2286,7 +2296,7 @@ SELECT pg_catalog.setval('strosekuprizoritve_id_seq', 1, false);
 
 
 --
--- TOC entry 2942 (class 0 OID 122643)
+-- TOC entry 2943 (class 0 OID 122643)
 -- Dependencies: 188
 -- Data for Name: telefonska; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2296,7 +2306,7 @@ COPY telefonska (id, oseba_id, popa_id, vrsta, stevilka, privzeta) FROM stdin;
 
 
 --
--- TOC entry 2952 (class 0 OID 122734)
+-- TOC entry 2953 (class 0 OID 122734)
 -- Dependencies: 198
 -- Data for Name: terminstoritve; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2306,7 +2316,7 @@ COPY terminstoritve (id, dogodek_id, alternacija_id, oseba_id, planiranzacetek, 
 
 
 --
--- TOC entry 2976 (class 0 OID 122978)
+-- TOC entry 2977 (class 0 OID 122978)
 -- Dependencies: 222
 -- Data for Name: tipfunkcije; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2332,7 +2342,7 @@ COPY tipfunkcije (id, ime, opis, nastopajoc, imezenski, podrocje) FROM stdin;
 
 
 --
--- TOC entry 2943 (class 0 OID 122651)
+-- TOC entry 2944 (class 0 OID 122651)
 -- Dependencies: 189
 -- Data for Name: trr; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2342,7 +2352,7 @@ COPY trr (id, popa_id, oseba_id, stevilka, swift, bic, banka) FROM stdin;
 
 
 --
--- TOC entry 2931 (class 0 OID 122501)
+-- TOC entry 2932 (class 0 OID 122501)
 -- Dependencies: 177
 -- Data for Name: uporabniki; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2354,7 +2364,7 @@ COPY uporabniki (id, name, password, enabled, expires, defaultroute, defaultrout
 
 
 --
--- TOC entry 2977 (class 0 OID 122989)
+-- TOC entry 2978 (class 0 OID 122989)
 -- Dependencies: 223
 -- Data for Name: uprizoritev; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2364,7 +2374,7 @@ COPY uprizoritev (id, besedilo_id, zvrst_uprizoritve_id, zvrst_surs_id, faza, na
 
 
 --
--- TOC entry 2950 (class 0 OID 122720)
+-- TOC entry 2951 (class 0 OID 122720)
 -- Dependencies: 196
 -- Data for Name: vaja; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2374,7 +2384,7 @@ COPY vaja (id, uprizoritev_id, zaporedna, porocilo) FROM stdin;
 
 
 --
--- TOC entry 2965 (class 0 OID 122840)
+-- TOC entry 2966 (class 0 OID 122840)
 -- Dependencies: 211
 -- Data for Name: vrstasedezev; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2384,7 +2394,7 @@ COPY vrstasedezev (id, podrocja_sedenja_id, kapaciteta, poravnava, oblika) FROM 
 
 
 --
--- TOC entry 2978 (class 0 OID 123009)
+-- TOC entry 2979 (class 0 OID 123009)
 -- Dependencies: 224
 -- Data for Name: zaposlitev; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2394,7 +2404,7 @@ COPY zaposlitev (id, oseba_id, status, zacetek, konec, tip, delovnaobveza, malic
 
 
 --
--- TOC entry 2951 (class 0 OID 122729)
+-- TOC entry 2952 (class 0 OID 122729)
 -- Dependencies: 197
 -- Data for Name: zasedenost; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2404,7 +2414,7 @@ COPY zasedenost (id) FROM stdin;
 
 
 --
--- TOC entry 2979 (class 0 OID 123017)
+-- TOC entry 2980 (class 0 OID 123017)
 -- Dependencies: 225
 -- Data for Name: zvrstsurs; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2414,7 +2424,7 @@ COPY zvrstsurs (id, ime, naziv) FROM stdin;
 
 
 --
--- TOC entry 2980 (class 0 OID 123027)
+-- TOC entry 2981 (class 0 OID 123027)
 -- Dependencies: 226
 -- Data for Name: zvrstuprizoritve; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2433,7 +2443,7 @@ ALTER TABLE ONLY abonma
 
 
 --
--- TOC entry 2675 (class 2606 OID 122855)
+-- TOC entry 2676 (class 2606 OID 122855)
 -- Name: alternacija_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2442,7 +2452,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2682 (class 2606 OID 122875)
+-- TOC entry 2683 (class 2606 OID 122875)
 -- Name: arhivalija_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2451,7 +2461,7 @@ ALTER TABLE ONLY arhivalija
 
 
 --
--- TOC entry 2686 (class 2606 OID 122891)
+-- TOC entry 2687 (class 2606 OID 122891)
 -- Name: besedilo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2487,7 +2497,7 @@ ALTER TABLE ONLY drza
 
 
 --
--- TOC entry 2688 (class 2606 OID 122902)
+-- TOC entry 2689 (class 2606 OID 122902)
 -- Name: funkcija_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2604,7 +2614,7 @@ ALTER TABLE ONLY podrocjesedenja
 
 
 --
--- TOC entry 2696 (class 2606 OID 122917)
+-- TOC entry 2697 (class 2606 OID 122917)
 -- Name: pogodba_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2667,7 +2677,7 @@ ALTER TABLE ONLY prodajapredstave
 
 
 --
--- TOC entry 2701 (class 2606 OID 122934)
+-- TOC entry 2702 (class 2606 OID 122934)
 -- Name: produkcijadelitev_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2676,7 +2686,7 @@ ALTER TABLE ONLY produkcijadelitev
 
 
 --
--- TOC entry 2703 (class 2606 OID 122942)
+-- TOC entry 2704 (class 2606 OID 122942)
 -- Name: produkcijskahisa_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2694,7 +2704,7 @@ ALTER TABLE ONLY prostor
 
 
 --
--- TOC entry 2654 (class 2606 OID 122801)
+-- TOC entry 2655 (class 2606 OID 122801)
 -- Name: racun_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2703,7 +2713,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2660 (class 2606 OID 122811)
+-- TOC entry 2661 (class 2606 OID 122811)
 -- Name: razpisansedez_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2712,7 +2722,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2706 (class 2606 OID 122954)
+-- TOC entry 2707 (class 2606 OID 122954)
 -- Name: rekvizit_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2721,7 +2731,7 @@ ALTER TABLE ONLY rekvizit
 
 
 --
--- TOC entry 2710 (class 2606 OID 122962)
+-- TOC entry 2711 (class 2606 OID 122962)
 -- Name: rekviziterstvo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2739,7 +2749,7 @@ ALTER TABLE ONLY revizije
 
 
 --
--- TOC entry 2663 (class 2606 OID 122820)
+-- TOC entry 2664 (class 2606 OID 122820)
 -- Name: rezervacija_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2766,7 +2776,7 @@ ALTER TABLE ONLY role
 
 
 --
--- TOC entry 2668 (class 2606 OID 122830)
+-- TOC entry 2669 (class 2606 OID 122830)
 -- Name: sedez_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2775,7 +2785,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2670 (class 2606 OID 122839)
+-- TOC entry 2671 (class 2606 OID 122839)
 -- Name: sedeznired_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2793,7 +2803,7 @@ ALTER TABLE ONLY sezona
 
 
 --
--- TOC entry 2731 (class 2606 OID 123043)
+-- TOC entry 2732 (class 2606 OID 123043)
 -- Name: stevilcenje_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2802,7 +2812,7 @@ ALTER TABLE ONLY stevilcenje
 
 
 --
--- TOC entry 2735 (class 2606 OID 123049)
+-- TOC entry 2736 (class 2606 OID 123049)
 -- Name: stevilcenjekonfig_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2811,7 +2821,7 @@ ALTER TABLE ONLY stevilcenjekonfig
 
 
 --
--- TOC entry 2738 (class 2606 OID 123056)
+-- TOC entry 2739 (class 2606 OID 123056)
 -- Name: stevilcenjestanje_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2820,7 +2830,7 @@ ALTER TABLE ONLY stevilcenjestanje
 
 
 --
--- TOC entry 2714 (class 2606 OID 122975)
+-- TOC entry 2715 (class 2606 OID 122975)
 -- Name: strosekuprizoritve_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2847,7 +2857,7 @@ ALTER TABLE ONLY terminstoritve
 
 
 --
--- TOC entry 2716 (class 2606 OID 122988)
+-- TOC entry 2717 (class 2606 OID 122988)
 -- Name: tipfunkcije_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2874,7 +2884,7 @@ ALTER TABLE ONLY uporabniki
 
 
 --
--- TOC entry 2722 (class 2606 OID 123004)
+-- TOC entry 2723 (class 2606 OID 123004)
 -- Name: uprizoritev_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2892,7 +2902,7 @@ ALTER TABLE ONLY vaja
 
 
 --
--- TOC entry 2673 (class 2606 OID 122846)
+-- TOC entry 2674 (class 2606 OID 122846)
 -- Name: vrstasedezev_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2901,7 +2911,7 @@ ALTER TABLE ONLY vrstasedezev
 
 
 --
--- TOC entry 2725 (class 2606 OID 123015)
+-- TOC entry 2726 (class 2606 OID 123015)
 -- Name: zaposlitev_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2919,7 +2929,7 @@ ALTER TABLE ONLY zasedenost
 
 
 --
--- TOC entry 2727 (class 2606 OID 123026)
+-- TOC entry 2728 (class 2606 OID 123026)
 -- Name: zvrstsurs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2928,7 +2938,7 @@ ALTER TABLE ONLY zvrstsurs
 
 
 --
--- TOC entry 2729 (class 2606 OID 123036)
+-- TOC entry 2730 (class 2606 OID 123036)
 -- Name: zvrstuprizoritve_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2945,7 +2955,7 @@ CREATE INDEX idx_11e93b5d3a0e32e3 ON dogodek USING btree (sezona_id);
 
 
 --
--- TOC entry 2711 (class 1259 OID 122976)
+-- TOC entry 2712 (class 1259 OID 122976)
 -- Name: idx_11ffe6e062b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2953,7 +2963,7 @@ CREATE INDEX idx_11ffe6e062b4ffca ON strosekuprizoritve USING btree (uprizoritev
 
 
 --
--- TOC entry 2712 (class 1259 OID 122977)
+-- TOC entry 2713 (class 1259 OID 122977)
 -- Name: idx_11ffe6e06beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3001,7 +3011,7 @@ CREATE INDEX idx_2390fc9662b4ffca ON vaja USING btree (uprizoritev_id);
 
 
 --
--- TOC entry 2689 (class 1259 OID 122905)
+-- TOC entry 2690 (class 1259 OID 122905)
 -- Name: idx_23aeb9584dc36c21; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3009,7 +3019,7 @@ CREATE INDEX idx_23aeb9584dc36c21 ON funkcija USING btree (tip_vloge_id);
 
 
 --
--- TOC entry 2690 (class 1259 OID 122903)
+-- TOC entry 2691 (class 1259 OID 122903)
 -- Name: idx_23aeb95862b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3017,7 +3027,7 @@ CREATE INDEX idx_23aeb95862b4ffca ON funkcija USING btree (uprizoritev_id);
 
 
 --
--- TOC entry 2691 (class 1259 OID 122904)
+-- TOC entry 2692 (class 1259 OID 122904)
 -- Name: idx_23aeb958740eb038; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3025,7 +3035,7 @@ CREATE INDEX idx_23aeb958740eb038 ON funkcija USING btree (alternacija_id);
 
 
 --
--- TOC entry 2692 (class 1259 OID 122919)
+-- TOC entry 2693 (class 1259 OID 122919)
 -- Name: idx_2decfc5910389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3033,7 +3043,7 @@ CREATE INDEX idx_2decfc5910389148 ON pogodba USING btree (oseba_id);
 
 
 --
--- TOC entry 2693 (class 1259 OID 122920)
+-- TOC entry 2694 (class 1259 OID 122920)
 -- Name: idx_2decfc596beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3041,7 +3051,7 @@ CREATE INDEX idx_2decfc596beede51 ON pogodba USING btree (popa_id);
 
 
 --
--- TOC entry 2694 (class 1259 OID 122921)
+-- TOC entry 2695 (class 1259 OID 122921)
 -- Name: idx_2decfc59fa5529ee; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3049,7 +3059,7 @@ CREATE INDEX idx_2decfc59fa5529ee ON pogodba USING btree (trr_id);
 
 
 --
--- TOC entry 2717 (class 1259 OID 123008)
+-- TOC entry 2718 (class 1259 OID 123008)
 -- Name: idx_344a77a3b262815; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3057,7 +3067,7 @@ CREATE INDEX idx_344a77a3b262815 ON uprizoritev USING btree (zvrst_surs_id);
 
 
 --
--- TOC entry 2718 (class 1259 OID 123005)
+-- TOC entry 2719 (class 1259 OID 123005)
 -- Name: idx_344a77a7c3b0d59; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3065,7 +3075,7 @@ CREATE INDEX idx_344a77a7c3b0d59 ON uprizoritev USING btree (maticnioder_id);
 
 
 --
--- TOC entry 2719 (class 1259 OID 123007)
+-- TOC entry 2720 (class 1259 OID 123007)
 -- Name: idx_344a77a8e27eb8d; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3073,7 +3083,7 @@ CREATE INDEX idx_344a77a8e27eb8d ON uprizoritev USING btree (zvrst_uprizoritve_i
 
 
 --
--- TOC entry 2720 (class 1259 OID 123006)
+-- TOC entry 2721 (class 1259 OID 123006)
 -- Name: idx_344a77af35157b1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3121,7 +3131,7 @@ CREATE INDEX idx_466966d769e8d4 ON oseba USING btree (naslov_id);
 
 
 --
--- TOC entry 2661 (class 1259 OID 122821)
+-- TOC entry 2662 (class 1259 OID 122821)
 -- Name: idx_48f1f62bfe7b16e1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3153,7 +3163,7 @@ CREATE INDEX idx_4ff23396fed90cca ON permission2role USING btree (permission_id)
 
 
 --
--- TOC entry 2664 (class 1259 OID 122833)
+-- TOC entry 2665 (class 1259 OID 122833)
 -- Name: idx_52ed210b1c0dc15a; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3161,7 +3171,7 @@ CREATE INDEX idx_52ed210b1c0dc15a ON sedez USING btree (podrocja_sedenja_id);
 
 
 --
--- TOC entry 2665 (class 1259 OID 122832)
+-- TOC entry 2666 (class 1259 OID 122832)
 -- Name: idx_52ed210bb31ae31; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3169,7 +3179,7 @@ CREATE INDEX idx_52ed210bb31ae31 ON sedez USING btree (sedezni_red_id);
 
 
 --
--- TOC entry 2666 (class 1259 OID 122831)
+-- TOC entry 2667 (class 1259 OID 122831)
 -- Name: idx_52ed210bef943358; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3201,7 +3211,7 @@ CREATE INDEX idx_602f6e46ef0f30b ON predstava USING btree (gostovanje_id);
 
 
 --
--- TOC entry 2733 (class 1259 OID 123051)
+-- TOC entry 2734 (class 1259 OID 123051)
 -- Name: idx_6054e804ff55f926; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3209,7 +3219,7 @@ CREATE INDEX idx_6054e804ff55f926 ON stevilcenjekonfig USING btree (stevilcenje_
 
 
 --
--- TOC entry 2655 (class 1259 OID 122815)
+-- TOC entry 2656 (class 1259 OID 122815)
 -- Name: idx_667e35d117619010; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3217,7 +3227,7 @@ CREATE INDEX idx_667e35d117619010 ON razpisansedez USING btree (rezervacija_id);
 
 
 --
--- TOC entry 2656 (class 1259 OID 122813)
+-- TOC entry 2657 (class 1259 OID 122813)
 -- Name: idx_667e35d1c146c3f3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3225,7 +3235,7 @@ CREATE INDEX idx_667e35d1c146c3f3 ON razpisansedez USING btree (sedez_id);
 
 
 --
--- TOC entry 2657 (class 1259 OID 122812)
+-- TOC entry 2658 (class 1259 OID 122812)
 -- Name: idx_667e35d1f5e1d2d3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3233,7 +3243,7 @@ CREATE INDEX idx_667e35d1f5e1d2d3 ON razpisansedez USING btree (postavka_racuna_
 
 
 --
--- TOC entry 2658 (class 1259 OID 122814)
+-- TOC entry 2659 (class 1259 OID 122814)
 -- Name: idx_667e35d1fe7b16e1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3257,7 +3267,7 @@ CREATE INDEX idx_704d3abcd60322ac ON role2user USING btree (role_id);
 
 
 --
--- TOC entry 2671 (class 1259 OID 122847)
+-- TOC entry 2672 (class 1259 OID 122847)
 -- Name: idx_7069c3c41c0dc15a; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3273,7 +3283,7 @@ CREATE INDEX idx_80b6f3595b3d808c ON postavkaracuna USING btree (racun_id);
 
 
 --
--- TOC entry 2707 (class 1259 OID 122963)
+-- TOC entry 2708 (class 1259 OID 122963)
 -- Name: idx_8198265413e60bc0; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3281,7 +3291,7 @@ CREATE INDEX idx_8198265413e60bc0 ON rekviziterstvo USING btree (rekvizit_id);
 
 
 --
--- TOC entry 2708 (class 1259 OID 122964)
+-- TOC entry 2709 (class 1259 OID 122964)
 -- Name: idx_8198265462b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3313,7 +3323,7 @@ CREATE INDEX idx_89c1f9d2ee4b985a ON postninaslovi USING btree (drzava_id);
 
 
 --
--- TOC entry 2698 (class 1259 OID 122935)
+-- TOC entry 2699 (class 1259 OID 122935)
 -- Name: idx_97af082e62b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3321,7 +3331,7 @@ CREATE INDEX idx_97af082e62b4ffca ON produkcijadelitev USING btree (uprizoritev_
 
 
 --
--- TOC entry 2699 (class 1259 OID 122936)
+-- TOC entry 2700 (class 1259 OID 122936)
 -- Name: idx_97af082ec532925b; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3329,7 +3339,7 @@ CREATE INDEX idx_97af082ec532925b ON produkcijadelitev USING btree (koproducent_
 
 
 --
--- TOC entry 2676 (class 1259 OID 122858)
+-- TOC entry 2677 (class 1259 OID 122858)
 -- Name: idx_a4b7244f10389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3337,7 +3347,7 @@ CREATE INDEX idx_a4b7244f10389148 ON alternacija USING btree (oseba_id);
 
 
 --
--- TOC entry 2677 (class 1259 OID 122857)
+-- TOC entry 2678 (class 1259 OID 122857)
 -- Name: idx_a4b7244f1f9ae227; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3345,7 +3355,7 @@ CREATE INDEX idx_a4b7244f1f9ae227 ON alternacija USING btree (sodelovanje_id);
 
 
 --
--- TOC entry 2678 (class 1259 OID 122860)
+-- TOC entry 2679 (class 1259 OID 122860)
 -- Name: idx_a4b7244f5bc4d310; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3353,7 +3363,7 @@ CREATE INDEX idx_a4b7244f5bc4d310 ON alternacija USING btree (pogodba_id);
 
 
 --
--- TOC entry 2679 (class 1259 OID 122856)
+-- TOC entry 2680 (class 1259 OID 122856)
 -- Name: idx_a4b7244f861baed2; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3361,7 +3371,7 @@ CREATE INDEX idx_a4b7244f861baed2 ON alternacija USING btree (funkcija_id);
 
 
 --
--- TOC entry 2680 (class 1259 OID 122859)
+-- TOC entry 2681 (class 1259 OID 122859)
 -- Name: idx_a4b7244fdbdb4006; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3369,7 +3379,7 @@ CREATE INDEX idx_a4b7244fdbdb4006 ON alternacija USING btree (koprodukcija_delit
 
 
 --
--- TOC entry 2723 (class 1259 OID 123016)
+-- TOC entry 2724 (class 1259 OID 123016)
 -- Name: idx_b244904110389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3377,7 +3387,7 @@ CREATE INDEX idx_b244904110389148 ON zaposlitev USING btree (oseba_id);
 
 
 --
--- TOC entry 2649 (class 1259 OID 122805)
+-- TOC entry 2650 (class 1259 OID 122805)
 -- Name: idx_b5b84f4533341ab8; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3385,7 +3395,7 @@ CREATE INDEX idx_b5b84f4533341ab8 ON racun USING btree (placilni_instrument_id);
 
 
 --
--- TOC entry 2650 (class 1259 OID 122804)
+-- TOC entry 2651 (class 1259 OID 122804)
 -- Name: idx_b5b84f45a420584d; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3393,7 +3403,7 @@ CREATE INDEX idx_b5b84f45a420584d ON racun USING btree (nacin_placina_id);
 
 
 --
--- TOC entry 2651 (class 1259 OID 122802)
+-- TOC entry 2652 (class 1259 OID 122802)
 -- Name: idx_b5b84f45bc902d3b; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3401,7 +3411,7 @@ CREATE INDEX idx_b5b84f45bc902d3b ON racun USING btree (kupec_id);
 
 
 --
--- TOC entry 2652 (class 1259 OID 122803)
+-- TOC entry 2653 (class 1259 OID 122803)
 -- Name: idx_b5b84f45fe7b16e1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3409,7 +3419,7 @@ CREATE INDEX idx_b5b84f45fe7b16e1 ON racun USING btree (prodaja_predstave_id);
 
 
 --
--- TOC entry 2683 (class 1259 OID 122877)
+-- TOC entry 2684 (class 1259 OID 122877)
 -- Name: idx_bbff875562b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3417,7 +3427,7 @@ CREATE INDEX idx_bbff875562b4ffca ON arhivalija USING btree (uprizoritev_id);
 
 
 --
--- TOC entry 2684 (class 1259 OID 122876)
+-- TOC entry 2685 (class 1259 OID 122876)
 -- Name: idx_bbff8755a81ccef6; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3593,7 +3603,7 @@ CREATE UNIQUE INDEX uniq_2d2009bb6beede51 ON kupec USING btree (popa_id);
 
 
 --
--- TOC entry 2697 (class 1259 OID 122918)
+-- TOC entry 2698 (class 1259 OID 122918)
 -- Name: uniq_2decfc59559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3609,7 +3619,7 @@ CREATE UNIQUE INDEX uniq_466966d7a76ed395 ON oseba USING btree (user_id);
 
 
 --
--- TOC entry 2732 (class 1259 OID 123044)
+-- TOC entry 2733 (class 1259 OID 123044)
 -- Name: uniq_5a434fbc559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3625,7 +3635,7 @@ CREATE UNIQUE INDEX uniq_5d2a05865e237e06 ON option USING btree (name);
 
 
 --
--- TOC entry 2736 (class 1259 OID 123050)
+-- TOC entry 2737 (class 1259 OID 123050)
 -- Name: uniq_6054e804889a7556; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3633,11 +3643,19 @@ CREATE UNIQUE INDEX uniq_6054e804889a7556 ON stevilcenjekonfig USING btree (dok)
 
 
 --
--- TOC entry 2648 (class 1259 OID 122796)
--- Name: uniq_952dd21955cca980; Type: INDEX; Schema: public; Owner: -
+-- TOC entry 2648 (class 1259 OID 125144)
+-- Name: uniq_952dd21937854736; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX uniq_952dd21955cca980 ON prostor USING btree (ime);
+CREATE UNIQUE INDEX uniq_952dd21937854736 ON prostor USING btree (naziv);
+
+
+--
+-- TOC entry 2649 (class 1259 OID 125143)
+-- Name: uniq_952dd219559828a3; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX uniq_952dd219559828a3 ON prostor USING btree (sifra);
 
 
 --
@@ -3649,7 +3667,7 @@ CREATE UNIQUE INDEX uniq_ba25e4b6559828a3 ON posta USING btree (sifra);
 
 
 --
--- TOC entry 2704 (class 1259 OID 122943)
+-- TOC entry 2705 (class 1259 OID 122943)
 -- Name: uniq_e6fc20286beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3673,7 +3691,7 @@ CREATE INDEX zacetek ON dogodek USING btree (zacetek);
 
 
 --
--- TOC entry 2761 (class 2606 OID 123169)
+-- TOC entry 2762 (class 2606 OID 123169)
 -- Name: fk_11e93b5d10398482; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3682,7 +3700,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2758 (class 2606 OID 123154)
+-- TOC entry 2759 (class 2606 OID 123154)
 -- Name: fk_11e93b5d14a6c237; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3691,7 +3709,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2759 (class 2606 OID 123159)
+-- TOC entry 2760 (class 2606 OID 123159)
 -- Name: fk_11e93b5d18640538; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3700,7 +3718,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2763 (class 2606 OID 123179)
+-- TOC entry 2764 (class 2606 OID 123179)
 -- Name: fk_11e93b5d3a0e32e3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3709,7 +3727,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2757 (class 2606 OID 123149)
+-- TOC entry 2758 (class 2606 OID 123149)
 -- Name: fk_11e93b5d5ac894aa; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3718,7 +3736,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2762 (class 2606 OID 123174)
+-- TOC entry 2763 (class 2606 OID 123174)
 -- Name: fk_11e93b5dcc3aa562; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3727,7 +3745,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2760 (class 2606 OID 123164)
+-- TOC entry 2761 (class 2606 OID 123164)
 -- Name: fk_11e93b5def0f30b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3736,7 +3754,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2809 (class 2606 OID 123409)
+-- TOC entry 2810 (class 2606 OID 123409)
 -- Name: fk_11ffe6e062b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3745,7 +3763,7 @@ ALTER TABLE ONLY strosekuprizoritve
 
 
 --
--- TOC entry 2810 (class 2606 OID 123414)
+-- TOC entry 2811 (class 2606 OID 123414)
 -- Name: fk_11ffe6e06beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3754,7 +3772,7 @@ ALTER TABLE ONLY strosekuprizoritve
 
 
 --
--- TOC entry 2747 (class 2606 OID 123099)
+-- TOC entry 2748 (class 2606 OID 123099)
 -- Name: fk_1c7adba5ee4b985a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3763,7 +3781,7 @@ ALTER TABLE ONLY popa
 
 
 --
--- TOC entry 2774 (class 2606 OID 123234)
+-- TOC entry 2775 (class 2606 OID 123234)
 -- Name: fk_1df2e9faa420584d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3772,7 +3790,7 @@ ALTER TABLE ONLY placilniinstrument
 
 
 --
--- TOC entry 2777 (class 2606 OID 123249)
+-- TOC entry 2778 (class 2606 OID 123249)
 -- Name: fk_20d95c7fa81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3781,7 +3799,7 @@ ALTER TABLE ONLY prodajapredstave
 
 
 --
--- TOC entry 2776 (class 2606 OID 123244)
+-- TOC entry 2777 (class 2606 OID 123244)
 -- Name: fk_20d95c7fb31ae31; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3790,7 +3808,7 @@ ALTER TABLE ONLY prodajapredstave
 
 
 --
--- TOC entry 2769 (class 2606 OID 123209)
+-- TOC entry 2770 (class 2606 OID 123209)
 -- Name: fk_2390fc9662b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3799,7 +3817,7 @@ ALTER TABLE ONLY vaja
 
 
 --
--- TOC entry 2800 (class 2606 OID 123364)
+-- TOC entry 2801 (class 2606 OID 123364)
 -- Name: fk_23aeb9584dc36c21; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3808,7 +3826,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 2798 (class 2606 OID 123354)
+-- TOC entry 2799 (class 2606 OID 123354)
 -- Name: fk_23aeb95862b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3817,7 +3835,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 2799 (class 2606 OID 123359)
+-- TOC entry 2800 (class 2606 OID 123359)
 -- Name: fk_23aeb958740eb038; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3826,7 +3844,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 2773 (class 2606 OID 123229)
+-- TOC entry 2774 (class 2606 OID 123229)
 -- Name: fk_2d2009bb6beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3835,7 +3853,7 @@ ALTER TABLE ONLY kupec
 
 
 --
--- TOC entry 2801 (class 2606 OID 123369)
+-- TOC entry 2802 (class 2606 OID 123369)
 -- Name: fk_2decfc5910389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3844,7 +3862,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 2802 (class 2606 OID 123374)
+-- TOC entry 2803 (class 2606 OID 123374)
 -- Name: fk_2decfc596beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3853,7 +3871,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 2803 (class 2606 OID 123379)
+-- TOC entry 2804 (class 2606 OID 123379)
 -- Name: fk_2decfc59fa5529ee; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3862,7 +3880,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 2814 (class 2606 OID 123434)
+-- TOC entry 2815 (class 2606 OID 123434)
 -- Name: fk_344a77a3b262815; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3871,7 +3889,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2811 (class 2606 OID 123419)
+-- TOC entry 2812 (class 2606 OID 123419)
 -- Name: fk_344a77a7c3b0d59; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3880,7 +3898,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2813 (class 2606 OID 123429)
+-- TOC entry 2814 (class 2606 OID 123429)
 -- Name: fk_344a77a8e27eb8d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3889,7 +3907,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2812 (class 2606 OID 123424)
+-- TOC entry 2813 (class 2606 OID 123424)
 -- Name: fk_344a77af35157b1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3898,7 +3916,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2756 (class 2606 OID 123144)
+-- TOC entry 2757 (class 2606 OID 123144)
 -- Name: fk_37f6541a10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3907,7 +3925,7 @@ ALTER TABLE ONLY trr
 
 
 --
--- TOC entry 2755 (class 2606 OID 123139)
+-- TOC entry 2756 (class 2606 OID 123139)
 -- Name: fk_37f6541a6beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3916,7 +3934,7 @@ ALTER TABLE ONLY trr
 
 
 --
--- TOC entry 2749 (class 2606 OID 123109)
+-- TOC entry 2750 (class 2606 OID 123109)
 -- Name: fk_4472a4c610389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3925,7 +3943,7 @@ ALTER TABLE ONLY oseba2popa
 
 
 --
--- TOC entry 2748 (class 2606 OID 123104)
+-- TOC entry 2749 (class 2606 OID 123104)
 -- Name: fk_4472a4c66beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3934,7 +3952,7 @@ ALTER TABLE ONLY oseba2popa
 
 
 --
--- TOC entry 2746 (class 2606 OID 123094)
+-- TOC entry 2747 (class 2606 OID 123094)
 -- Name: fk_466966d769e8d4; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3943,7 +3961,7 @@ ALTER TABLE ONLY oseba
 
 
 --
--- TOC entry 2745 (class 2606 OID 123089)
+-- TOC entry 2746 (class 2606 OID 123089)
 -- Name: fk_466966d7a76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3952,7 +3970,7 @@ ALTER TABLE ONLY oseba
 
 
 --
--- TOC entry 2786 (class 2606 OID 123294)
+-- TOC entry 2787 (class 2606 OID 123294)
 -- Name: fk_48f1f62bfe7b16e1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3961,7 +3979,7 @@ ALTER TABLE ONLY rezervacija
 
 
 --
--- TOC entry 2765 (class 2606 OID 123189)
+-- TOC entry 2766 (class 2606 OID 123189)
 -- Name: fk_4a45d07962b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3970,7 +3988,7 @@ ALTER TABLE ONLY gostujoca
 
 
 --
--- TOC entry 2739 (class 2606 OID 123059)
+-- TOC entry 2740 (class 2606 OID 123059)
 -- Name: fk_4ff23396d60322ac; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3979,7 +3997,7 @@ ALTER TABLE ONLY permission2role
 
 
 --
--- TOC entry 2740 (class 2606 OID 123064)
+-- TOC entry 2741 (class 2606 OID 123064)
 -- Name: fk_4ff23396fed90cca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3988,7 +4006,7 @@ ALTER TABLE ONLY permission2role
 
 
 --
--- TOC entry 2789 (class 2606 OID 123309)
+-- TOC entry 2790 (class 2606 OID 123309)
 -- Name: fk_52ed210b1c0dc15a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3997,7 +4015,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2788 (class 2606 OID 123304)
+-- TOC entry 2789 (class 2606 OID 123304)
 -- Name: fk_52ed210bb31ae31; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4006,7 +4024,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2787 (class 2606 OID 123299)
+-- TOC entry 2788 (class 2606 OID 123299)
 -- Name: fk_52ed210bef943358; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4015,7 +4033,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2766 (class 2606 OID 123194)
+-- TOC entry 2767 (class 2606 OID 123194)
 -- Name: fk_602f6e4662b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4024,7 +4042,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 2768 (class 2606 OID 123204)
+-- TOC entry 2769 (class 2606 OID 123204)
 -- Name: fk_602f6e466f7e7a33; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4033,7 +4051,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 2767 (class 2606 OID 123199)
+-- TOC entry 2768 (class 2606 OID 123199)
 -- Name: fk_602f6e46ef0f30b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4042,7 +4060,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 2816 (class 2606 OID 123444)
+-- TOC entry 2817 (class 2606 OID 123444)
 -- Name: fk_6054e804ff55f926; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4051,7 +4069,7 @@ ALTER TABLE ONLY stevilcenjekonfig
 
 
 --
--- TOC entry 2785 (class 2606 OID 123289)
+-- TOC entry 2786 (class 2606 OID 123289)
 -- Name: fk_667e35d117619010; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4060,7 +4078,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2783 (class 2606 OID 123279)
+-- TOC entry 2784 (class 2606 OID 123279)
 -- Name: fk_667e35d1c146c3f3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4069,7 +4087,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2782 (class 2606 OID 123274)
+-- TOC entry 2783 (class 2606 OID 123274)
 -- Name: fk_667e35d1f5e1d2d3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4078,7 +4096,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2784 (class 2606 OID 123284)
+-- TOC entry 2785 (class 2606 OID 123284)
 -- Name: fk_667e35d1fe7b16e1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4087,7 +4105,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2741 (class 2606 OID 123069)
+-- TOC entry 2742 (class 2606 OID 123069)
 -- Name: fk_704d3abca76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4096,7 +4114,7 @@ ALTER TABLE ONLY role2user
 
 
 --
--- TOC entry 2742 (class 2606 OID 123074)
+-- TOC entry 2743 (class 2606 OID 123074)
 -- Name: fk_704d3abcd60322ac; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4105,7 +4123,7 @@ ALTER TABLE ONLY role2user
 
 
 --
--- TOC entry 2790 (class 2606 OID 123314)
+-- TOC entry 2791 (class 2606 OID 123314)
 -- Name: fk_7069c3c41c0dc15a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4114,7 +4132,7 @@ ALTER TABLE ONLY vrstasedezev
 
 
 --
--- TOC entry 2775 (class 2606 OID 123239)
+-- TOC entry 2776 (class 2606 OID 123239)
 -- Name: fk_80b6f3595b3d808c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4123,7 +4141,7 @@ ALTER TABLE ONLY postavkaracuna
 
 
 --
--- TOC entry 2807 (class 2606 OID 123399)
+-- TOC entry 2808 (class 2606 OID 123399)
 -- Name: fk_8198265413e60bc0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4132,7 +4150,7 @@ ALTER TABLE ONLY rekviziterstvo
 
 
 --
--- TOC entry 2808 (class 2606 OID 123404)
+-- TOC entry 2809 (class 2606 OID 123404)
 -- Name: fk_8198265462b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4141,7 +4159,7 @@ ALTER TABLE ONLY rekviziterstvo
 
 
 --
--- TOC entry 2751 (class 2606 OID 123119)
+-- TOC entry 2752 (class 2606 OID 123119)
 -- Name: fk_89c1f9d210389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4150,7 +4168,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2750 (class 2606 OID 123114)
+-- TOC entry 2751 (class 2606 OID 123114)
 -- Name: fk_89c1f9d2a233cb39; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4159,7 +4177,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2752 (class 2606 OID 123124)
+-- TOC entry 2753 (class 2606 OID 123124)
 -- Name: fk_89c1f9d2ee4b985a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4168,7 +4186,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2804 (class 2606 OID 123384)
+-- TOC entry 2805 (class 2606 OID 123384)
 -- Name: fk_97af082e62b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4177,7 +4195,7 @@ ALTER TABLE ONLY produkcijadelitev
 
 
 --
--- TOC entry 2805 (class 2606 OID 123389)
+-- TOC entry 2806 (class 2606 OID 123389)
 -- Name: fk_97af082ec532925b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4186,7 +4204,7 @@ ALTER TABLE ONLY produkcijadelitev
 
 
 --
--- TOC entry 2793 (class 2606 OID 123329)
+-- TOC entry 2794 (class 2606 OID 123329)
 -- Name: fk_a4b7244f10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4195,7 +4213,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2792 (class 2606 OID 123324)
+-- TOC entry 2793 (class 2606 OID 123324)
 -- Name: fk_a4b7244f1f9ae227; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4204,7 +4222,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2795 (class 2606 OID 123339)
+-- TOC entry 2796 (class 2606 OID 123339)
 -- Name: fk_a4b7244f5bc4d310; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4213,7 +4231,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2791 (class 2606 OID 123319)
+-- TOC entry 2792 (class 2606 OID 123319)
 -- Name: fk_a4b7244f861baed2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4222,7 +4240,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2794 (class 2606 OID 123334)
+-- TOC entry 2795 (class 2606 OID 123334)
 -- Name: fk_a4b7244fdbdb4006; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4231,7 +4249,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2815 (class 2606 OID 123439)
+-- TOC entry 2816 (class 2606 OID 123439)
 -- Name: fk_b244904110389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4240,7 +4258,7 @@ ALTER TABLE ONLY zaposlitev
 
 
 --
--- TOC entry 2781 (class 2606 OID 123269)
+-- TOC entry 2782 (class 2606 OID 123269)
 -- Name: fk_b5b84f4533341ab8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4249,7 +4267,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2780 (class 2606 OID 123264)
+-- TOC entry 2781 (class 2606 OID 123264)
 -- Name: fk_b5b84f45a420584d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4258,7 +4276,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2778 (class 2606 OID 123254)
+-- TOC entry 2779 (class 2606 OID 123254)
 -- Name: fk_b5b84f45bc902d3b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4267,7 +4285,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2779 (class 2606 OID 123259)
+-- TOC entry 2780 (class 2606 OID 123259)
 -- Name: fk_b5b84f45fe7b16e1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4276,7 +4294,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2797 (class 2606 OID 123349)
+-- TOC entry 2798 (class 2606 OID 123349)
 -- Name: fk_bbff875562b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4285,7 +4303,7 @@ ALTER TABLE ONLY arhivalija
 
 
 --
--- TOC entry 2796 (class 2606 OID 123344)
+-- TOC entry 2797 (class 2606 OID 123344)
 -- Name: fk_bbff8755a81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4294,7 +4312,7 @@ ALTER TABLE ONLY arhivalija
 
 
 --
--- TOC entry 2764 (class 2606 OID 123184)
+-- TOC entry 2765 (class 2606 OID 123184)
 -- Name: fk_cae790c7ee4b985a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4303,7 +4321,7 @@ ALTER TABLE ONLY gostovanje
 
 
 --
--- TOC entry 2806 (class 2606 OID 123394)
+-- TOC entry 2807 (class 2606 OID 123394)
 -- Name: fk_e6fc20286beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4312,7 +4330,7 @@ ALTER TABLE ONLY produkcijskahisa
 
 
 --
--- TOC entry 2744 (class 2606 OID 123084)
+-- TOC entry 2745 (class 2606 OID 123084)
 -- Name: fk_ef01221fa76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4321,7 +4339,7 @@ ALTER TABLE ONLY optionvalue
 
 
 --
--- TOC entry 2743 (class 2606 OID 123079)
+-- TOC entry 2744 (class 2606 OID 123079)
 -- Name: fk_ef01221fa7c41d6f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4330,7 +4348,7 @@ ALTER TABLE ONLY optionvalue
 
 
 --
--- TOC entry 2753 (class 2606 OID 123129)
+-- TOC entry 2754 (class 2606 OID 123129)
 -- Name: fk_ef76e55910389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4339,7 +4357,7 @@ ALTER TABLE ONLY telefonska
 
 
 --
--- TOC entry 2754 (class 2606 OID 123134)
+-- TOC entry 2755 (class 2606 OID 123134)
 -- Name: fk_ef76e5596beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4348,7 +4366,7 @@ ALTER TABLE ONLY telefonska
 
 
 --
--- TOC entry 2772 (class 2606 OID 123224)
+-- TOC entry 2773 (class 2606 OID 123224)
 -- Name: fk_fef7d84b10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4357,7 +4375,7 @@ ALTER TABLE ONLY terminstoritve
 
 
 --
--- TOC entry 2771 (class 2606 OID 123219)
+-- TOC entry 2772 (class 2606 OID 123219)
 -- Name: fk_fef7d84b740eb038; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4366,7 +4384,7 @@ ALTER TABLE ONLY terminstoritve
 
 
 --
--- TOC entry 2770 (class 2606 OID 123214)
+-- TOC entry 2771 (class 2606 OID 123214)
 -- Name: fk_fef7d84ba81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4374,7 +4392,7 @@ ALTER TABLE ONLY terminstoritve
     ADD CONSTRAINT fk_fef7d84ba81ccef6 FOREIGN KEY (dogodek_id) REFERENCES dogodek(id);
 
 
--- Completed on 2015-05-24 22:40:36 CEST
+-- Completed on 2015-05-24 23:46:53 CEST
 
 --
 -- PostgreSQL database dump complete

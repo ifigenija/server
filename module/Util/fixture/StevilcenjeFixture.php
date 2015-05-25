@@ -43,6 +43,21 @@ class StevilcenjeFixture
         }
         $this->addReference('privzeto-stevilcenje', $stv);
 
+        $stv = $rep->findOneBySifra('123');
+
+        if (!$stv) {
+            $stv = new Stevilcenje();
+            $stv->setSifra('123');
+            $stv->setNaziv('Privzeto številčenje kratkih šifer');
+            $stv->setFormat('%n');
+            $stv->setDolzina(3);
+            $stv->setZacetek(100);
+            $stv->setGlobalno(false);
+            $stv->setPoLetih(false);
+            $manager->persist($stv);
+        }
+        $this->addReference('123-stevilcenje', $stv);
+
 
         $obj = $rep->findOneBySifra('bcd');
         if (!$obj) {
@@ -111,11 +126,11 @@ class StevilcenjeFixture
     public function populateKonfig($em, $val)
     {
 
-        $sr = $em->getRepository('\Stevilcenje\Entity\Stevilcenje');
-        $kr = $em->getRepository('\Stevilcenje\Entity\StevilcenjeKonfig');
+        $sr   = $em->getRepository('\Stevilcenje\Entity\Stevilcenje');
+        $kr   = $em->getRepository('\Stevilcenje\Entity\StevilcenjeKonfig');
         $o    = $kr->findOneByDok($val['dok']);
         $stev = $sr->findOneBySifra($val['stevilcenje']);
-        
+
         if (!$o) {
             $o = new StevilcenjeKonfig();
             $o->setDok($val['dok']);

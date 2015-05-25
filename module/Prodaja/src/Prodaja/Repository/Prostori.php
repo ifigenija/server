@@ -3,14 +3,12 @@
 /*
  *  Licenca GPLv3
  */
+
 namespace Prodaja\Repository;
 
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use DoctrineModule\Paginator\Adapter\Selectable;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
-
 
 /**
  * Description of Prostori
@@ -23,10 +21,12 @@ class Prostori
 
     protected $sortOptions = [
         "default" => [
-            "ime" => ["alias" => "p.ime"]
+            "sifra" => ["alias" => "p.sifra"],
+            "naziv" => ["alias" => "p.naziv"]
         ],
         "vse"     => [
-            "ime" => ["alias" => "p.ime"]
+            "sifra" => ["alias" => "p.sifra"],
+            "naziv" => ["alias" => "p.naziv"]
         ]
     ];
 
@@ -35,7 +35,7 @@ class Prostori
         switch ($name) {
             case "default":
             case "vse":
-                $qb   = $this->getVseQb($options);
+                $qb = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
         }
@@ -47,13 +47,24 @@ class Prostori
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.ime', ':ime');
+            $naz = $e->like('p.sifra', ':sif');
+            $qb->orWhere($naz);
+            $naz = $e->like('p.naziv', ':naz');
+            $qb->orWhere($naz);
 
-            $qb->andWhere($e->orX($naz));
-
-            $qb->setParameter('ime', "{$options['q']}%", "string");
+            $qb->setParameter('sif', "{$options['q']}%", "string");
+            $qb->setParameter('naz', "%{$options['q']}%", "string");
         }
         return $qb;
+    }
+
+    public function create($object, $params = null)
+    {
+        if (empty($object->getSifra())) {
+            $num = $this->getServiceLocator()->get('stevilcenje.generator');
+            $object->setSifra($num->generate('prostor'));
+        }
+        parent::create($object, $params);
     }
 
 }

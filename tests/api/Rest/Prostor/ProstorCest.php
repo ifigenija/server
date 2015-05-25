@@ -47,7 +47,8 @@ class ProstorCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'ime'          => 'zz',
+            'sifra'          => '12',
+            'naziv'          => 'Z Z',
             'jePrizorisce' => true,
             'kapaciteta'   => 1,
             'opis'         => 'zz',
@@ -55,11 +56,12 @@ class ProstorCest
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['ime'], 'zz');
+        $I->assertEquals($ent['sifra'], '12');
 
         // kreiramo še en zapis
         $data = [
-            'ime'          => 'aa',
+            'sifra'          => '13',
+            'naziv'          => 'aa',
             'jePrizorisce' => true,
             'kapaciteta'   => 2,
             'opis'         => 'aa',
@@ -67,7 +69,7 @@ class ProstorCest
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['ime'], 'aa');
+        $I->assertEquals($ent['sifra'], '13');
     }
 
     /**
@@ -86,7 +88,7 @@ class ProstorCest
 
         $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        $I->assertEquals("aa", $list[0]['ime']);      // odvisno od sortiranja
+        $I->assertEquals("Z Z", $list[0]['naziv']);      // odvisno od sortiranja
     }
 
     /**
@@ -102,7 +104,7 @@ class ProstorCest
 
         $I->assertNotEmpty($list);
         $I->assertEquals(2, $resp['state']['totalRecords']);
-        $I->assertEquals("aa", $list[0]['ime']);      // odvisno od sortiranja
+        $I->assertEquals("Z Z", $list[0]['naziv']);      // odvisno od sortiranja
     }
 
     /**
@@ -114,11 +116,11 @@ class ProstorCest
     public function update(ApiTester $I)
     {
         $ent        = $this->obj;
-        $ent['ime'] = 'yy';
+        $ent['naziv'] = 'yy';
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['ime'], 'yy');
+        $I->assertEquals($entR['naziv'], 'yy');
     }
 
     /**
@@ -132,7 +134,8 @@ class ProstorCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['ime'], 'yy');
+        $I->assertEquals($ent['naziv'], 'yy');
+        $I->assertEquals($ent['sifra'], '12');
         $I->assertEquals($ent['jePrizorisce'], true);
         $I->assertEquals($ent['kapaciteta'], 1);
         $I->assertEquals($ent['opis'], 'zz');
