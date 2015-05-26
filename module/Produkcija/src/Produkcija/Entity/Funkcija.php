@@ -122,7 +122,7 @@ class Funkcija
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\TipFunkcije", inversedBy="funkcije", fetch="EAGER")
      * @ORM\JoinColumn(name="tip_vloge_id", referencedColumnName="id")
-     * @Max\I18n(label="TipVloge",  description="TipVloge")
+     * @Max\I18n(label="Tip funkcije",  description="Tip funkcije")
      * @Max\Ui(type="select")
      * @var \Produkcija\Entity\TipFunkcije
      */

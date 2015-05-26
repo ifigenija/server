@@ -51,8 +51,9 @@ class ApiHelper
             $url .= "ident=" . urlencode($ident) . "&page=1&per_page=30";
         }
 
+        codecept_debug($url); //$$ rb začasno 
         $res = $client->get($url, ['auth' => [\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass]]);    
-
+        codecept_debug($res); //$$ rb začasno
 
         $a->assertEquals('application/json; charset=utf-8', $res->getHeader('content-type'), "Lookup $entity z identom $ident ni vrnil pravega content type");
 

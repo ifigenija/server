@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM,
  * @ORM\Entity(repositoryClass="Prodaja\Repository\Prostori")
  * @Max\I18n(label="Prostor",plural="Prostori")
  * @Max\Id(prefix="0034")
- * @Max\Lookup(extra={"kapacitetea","jePrizorisce"})
+ * @Max\Lookup(extra={"kapaciteta","jePrizorisce"})
  *  */
 class Prostor
         extends \Max\Entity\Base

@@ -8,7 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  *
- * Nalaganje TipFunkcije
  * @author rado
  */
 class ProstorFixture

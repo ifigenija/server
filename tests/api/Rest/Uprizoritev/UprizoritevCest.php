@@ -59,9 +59,13 @@ class UprizoritevCest
     private $obj;
     private $obj2;
     private $objProstor;
+    private $lookProstor;
+    private $lookBesedilo;
     private $objBesedilo;
     private $objZvrstUprizoritve;
+    private $lookZvrstUprizoritve;
     private $objZvrstSurs;
+    private $lookZvrstSurs;
     private $objUprizoritev;
     private $objKoprodukcija1;
     private $objKoprodukcija2;
@@ -83,6 +87,7 @@ class UprizoritevCest
     private $objPredstava2;
     private $objGostujoca1;
     private $objGostujoca2;
+    private $lookTipFunkcije ;
 
     public function _before(ApiTester $I)
     {
@@ -95,91 +100,140 @@ class UprizoritevCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupTipFunkcije(ApiTester $I)
+    {
+        $this->lookTipFunkcije = $ent                   = $I->lookupEntity("tipfunkcije", "Režiser", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupProstor(ApiTester $I)
+    {
+        $this->lookProstor = $ent               = $I->lookupEntity("prostor", "0006", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupBesedilo(ApiTester $I)
+    {
+        $this->lookBesedilo = $ent                = $I->lookupEntity("besedilo", "0001", false);
+        $I->assertNotEmpty($ent);
+    }
+    
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupZvrstUprizoritve(ApiTester $I)
+    {
+        $this->lookZvrstUprizoritve = $ent                = $I->lookupEntity("zvrstuprizoritve", "Komedija", false);
+        $I->assertNotEmpty($ent);
+    }
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupZvrstSurs(ApiTester $I)
+    {
+        $this->lookZvrstSurs = $ent                = $I->lookupEntity("zvrstsurs", "Drama", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
      *  kreiramo zapis
      * 
      * @param ApiTester $I
      */
-    public function createProstor(ApiTester $I)
-    {
-        $data = [
-            'sifra'        => '12',
-            'naziv'        => 'Z Z',
-            'jePrizorisce' => true,
-            'kapaciteta'   => 1,
-            'opis'         => 'zz',
-        ];
-//        
+//    public function createProstor(ApiTester $I)
+//    {
 //        $data             = [
-//            'ime'          => 'zz',
+//            'sifra'        => '12',
+//            'naziv'        => 'Z Z',
 //            'jePrizorisce' => true,
 //            'kapaciteta'   => 1,
 //            'opis'         => 'zz',
 //        ];
-        $this->objProstor = $ent              = $I->successfullyCreate($this->prostorUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['naziv'], 'Z Z');
-    }
+////        
+////        $data             = [
+////            'ime'          => 'zz',
+////            'jePrizorisce' => true,
+////            'kapaciteta'   => 1,
+////            'opis'         => 'zz',
+////        ];
+//        $this->objProstor = $ent              = $I->successfullyCreate($this->prostorUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        $I->assertEquals($ent['naziv'], 'Z Z');
+//    }
 
     /**
      *  kreiramo besedilo
      * 
      * @param ApiTester $I
      */
-    public function createBesedilo(ApiTester $I)
-    {
-        $data              = [
-            'naslov'          => 'zz',
-            'avtor'           => 'zz',
-            'podnaslov'       => 'zz',
-            'jezik'           => 'zz',
-            'naslovIzvirnika' => 'zz',
-            'datumPrejema'    => '2010-02-01T00:00:00+0100',
-            'moskeVloge'      => 1,
-            'zenskeVloge'     => 2,
-            'prevajalec'      => 'zz',
-            'povzetekVsebine' => 'zz',
-        ];
-        $this->objBesedilo = $ent               = $I->successfullyCreate($this->besediloUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['naslov'], 'zz');
-    }
+//    public function createBesedilo(ApiTester $I)
+//    {
+//        $data              = [
+//            'naslov'          => 'zz',
+//            'avtor'           => 'zz',
+//            'podnaslov'       => 'zz',
+//            'jezik'           => 'zz',
+//            'naslovIzvirnika' => 'zz',
+//            'datumPrejema'    => '2010-02-01T00:00:00+0100',
+//            'moskeVloge'      => 1,
+//            'zenskeVloge'     => 2,
+//            'prevajalec'      => 'zz',
+//            'povzetekVsebine' => 'zz',
+//        ];
+//        $this->objBesedilo = $ent               = $I->successfullyCreate($this->besediloUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        $I->assertEquals($ent['naslov'], 'zz');
+//    }
 
     /**
      *  napolnimo vsaj en zapis
      * 
      * @param ApiTester $I
      */
-    public function createZvrstUprizoritve(ApiTester $I)
-    {
-        $data                      = [
-            'ime'  => 'zz',
-            'opis' => 'zz',
-        ];
-        $this->objZvrstUprizoritve = $ent                       = $I->successfullyCreate($this->zvrstUprizoritveUrl, $data);
-        $I->assertEquals($ent['ime'], 'zz');
-        $I->assertNotEmpty($ent['id']);
-    }
+//    public function createZvrstUprizoritve(ApiTester $I)
+//    {
+//        $data                      = [
+//            'ime'  => 'zz',
+//            'opis' => 'zz',
+//        ];
+//        $this->objZvrstUprizoritve = $ent                       = $I->successfullyCreate($this->zvrstUprizoritveUrl, $data);
+//        $I->assertEquals($ent['ime'], 'zz');
+//        $I->assertNotEmpty($ent['id']);
+//    }
 
     /**
      *  napolnimo vsaj en zapis
      * 
      * @param ApiTester $I
      */
-    public function createZvrstSurs(ApiTester $I)
-    {
-        $data               = [
-            'ime'   => 'zz',
-            'naziv' => 'zz',
-        ];
-        $this->objZvrstSurs = $ent                = $I->successfullyCreate($this->zvrstSursUrl, $data);
-        $I->assertEquals($ent['ime'], 'zz');
-        $I->assertNotEmpty($ent['id']);
-    }
+//    public function createZvrstSurs(ApiTester $I)
+//    {
+//        $data               = [
+//            'ime'   => 'zz',
+//            'naziv' => 'zz',
+//        ];
+//        $this->objZvrstSurs = $ent                = $I->successfullyCreate($this->zvrstSursUrl, $data);
+//        $I->assertEquals($ent['ime'], 'zz');
+//        $I->assertNotEmpty($ent['id']);
+//    }
 
     /**
      *  kreiramo zapis
      * 
-     * @depends createBesedilo
+     * @depends lookupBesedilo
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
@@ -191,7 +245,7 @@ class UprizoritevCest
             'delovniNaslov'    => 'zz',
             'datumZacStudija'  => '2011-02-01T00:00:00+0100',
             'datumPremiere'    => '2010-02-01T00:00:00+0100',
-            'maticniOder'      => $this->objProstor['id'],
+            'maticniOder'      => $this->lookProstor['id'],
             'stOdmorov'        => 1,
             'avtor'            => 'avzz',
             'gostujoca'        => FALSE,
@@ -202,9 +256,9 @@ class UprizoritevCest
             'datumZakljucka'   => '2019-02-01T00:00:00+0100',
             'sloAvtor'         => FALSE,
             'kratkiNaslov'     => 'zz',
-            'besedilo'         => $this->objBesedilo['id'],
-            'zvrstUprizoritve' => $this->objZvrstUprizoritve['id'],
-            'zvrstSurs'        => $this->objZvrstSurs['id'],
+            'besedilo'         => $this->lookBesedilo['id'],
+            'zvrstUprizoritve' => $this->lookZvrstUprizoritve['id'],
+            'zvrstSurs'        => $this->lookZvrstSurs['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -230,7 +284,7 @@ class UprizoritevCest
             'datumZakljucka'   => '2019-02-01T00:00:00+0100',
             'sloAvtor'         => true, // $$ bool vrača napako convertToBool
             'kratkiNaslov'     => 'aa',
-            'besedilo'         => $this->objBesedilo['id'],
+            'besedilo'         => $this->lookBesedilo['id'],
             'zvrstUprizoritve' => null,
             'zvrstSurs'        => null,
         ];
@@ -242,7 +296,7 @@ class UprizoritevCest
 
     /**  kreiramo zapis
      * 
-     * @depends createBesedilo
+     * @depends lookupBesedilo
      * @param ApiTester $I
      */
     public function createBrezTrajanja(ApiTester $I)
@@ -264,7 +318,7 @@ class UprizoritevCest
             'datumZakljucka'   => '2019-02-01T00:00:00+0100',
             'sloAvtor'         => true, // $$ bool vrača napako convertToBool
             'kratkiNaslov'     => 'bb',
-            'besedilo'         => $this->objBesedilo['id'],
+            'besedilo'         => $this->lookBesedilo['id'],
             'zvrstUprizoritve' => null,
             'zvrstSurs'        => null,
         ];
@@ -573,7 +627,7 @@ class UprizoritevCest
             'sort'              => 2,
             'uprizoritev'       => $this->obj2['id'],
             'privzeti'          => null,
-            'tipFunkcije'       => null,
+            'tipFunkcije'       => $this->lookTipFunkcije['id'],
             'sePlanira'         => true,
             'dovoliPrekrivanje' => false,
             'maxPrekrivanj'     => 1
@@ -590,7 +644,7 @@ class UprizoritevCest
             'sort'              => 4,
             'uprizoritev'       => $this->obj2['id'],
             'privzeti'          => null,
-            'tipFunkcije'       => null,
+            'tipFunkcije'       => $this->lookTipFunkcije['id'],
             'sePlanira'         => false,
             'dovoliPrekrivanje' => true,
             'maxPrekrivanj'     => 2
@@ -607,7 +661,7 @@ class UprizoritevCest
      */
     public function getListPoBesedilu(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?besedilo=" . $this->objBesedilo['id'];
+        $listUrl = $this->restUrl . "?besedilo=" . $this->lookBesedilo['id'];
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
@@ -652,7 +706,7 @@ class UprizoritevCest
         $I->assertEquals($ent['delovniNaslov'], 'zz');
         $I->assertEquals($ent['datumZacStudija'], '2011-02-01T00:00:00+0100');
         $I->assertEquals($ent['datumPremiere'], '2010-02-01T00:00:00+0100');
-        $I->assertEquals($ent['maticniOder'], $this->objProstor['id']);
+        $I->assertEquals($ent['maticniOder'], $this->lookProstor['id']);
         $I->assertEquals($ent['stOdmorov'], 1);
         $I->assertEquals($ent['avtor'], 'avzz');
         $I->assertEquals($ent['gostujoca'], FALSE);
@@ -663,9 +717,9 @@ class UprizoritevCest
         $I->assertEquals($ent['datumZakljucka'], '2019-02-01T00:00:00+0100');
         $I->assertEquals($ent['sloAvtor'], FALSE);
         $I->assertEquals($ent['kratkiNaslov'], 'zz');
-        $I->assertEquals($ent['besedilo'], $this->objBesedilo['id']);
-        $I->assertEquals($ent['zvrstUprizoritve'], $this->objZvrstUprizoritve['id']);
-        $I->assertEquals($ent['zvrstSurs'], $this->objZvrstSurs['id']);
+        $I->assertEquals($ent['besedilo'], $this->lookBesedilo['id']);
+        $I->assertEquals($ent['zvrstUprizoritve'], $this->lookZvrstUprizoritve['id']);
+        $I->assertEquals($ent['zvrstSurs'], $this->lookZvrstSurs['id']);
 
         $I->assertTrue(isset($ent['koprodukcije']));
         $I->assertTrue(isset($ent['funkcije']));

@@ -52,7 +52,7 @@ class DogodekCest
     private $drzavaUrl         = '/rest/drzava';
     private $arhivalijaUrl     = '/rest/arhivalija';
     private $terminStoritveUrl = '/rest/terminstoritve';
-    private $osebaUrl = '/rest/oseba';
+    private $osebaUrl          = '/rest/oseba';
     private $obj;
     private $objPredstava;
     private $objZasedenost;
@@ -62,6 +62,7 @@ class DogodekCest
     private $objDogodek1;
     private $objDogodek2;
     private $objProstor;
+    private $lookProstor;
     private $objSezona;
     private $objDrzava;
     private $objArhivalija1;
@@ -70,6 +71,8 @@ class DogodekCest
     private $objTerminStoritve2;
     private $objOseba1;
     private $objOseba2;
+    private $lookOseba1;
+    private $lookOseba2;
 
     public function _before(ApiTester $I)
     {
@@ -81,39 +84,60 @@ class DogodekCest
         
     }
 
-       /**
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupProstor(ApiTester $I)
+    {
+//        $this->lookProstor = $ent               = $I->lookupEntity("prostor", "0006", false);
+        $ent = $I->lookupEntity("prostor", "0006", false);
+        $I->assertTrue(TRUE);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupOsebo(ApiTester $I)
+    {
+        $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0006", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
      *  napolnimo vsaj en zapis
      * 
      * @param ApiTester $I
      */
-    public function createOsebo(ApiTester $I)
-    {
-        $data = [
-            'naziv'         => 'zz',
-            'ime'           => 'zz',
-            'priimek'       => 'zz',
-            'funkcija'      => 'zz',
-            'srednjeIme'    => 'zz',
-            'psevdonim'     => 'zz',
-            'email'         => 'x@xxx.xx',
-            'datumRojstva'  => '1973-28-03T04:30:00',
-            'emso'          => 'ZZ',
-            'davcna'        => 'ZZ123',
-            'spol'          => 'M',
-            'opombe'        => 'zz',
-            'drzavljanstvo' => 'zz',
-            'drzavaRojstva' => 'zz',
-            'krajRojstva'   => 'zz',
-            'user'          => null,
-        ];
+//    public function createOsebo(ApiTester $I)
+//    {
+//        $data = [
+//            'naziv'         => 'zz',
+//            'ime'           => 'zz',
+//            'priimek'       => 'zz',
+//            'funkcija'      => 'zz',
+//            'srednjeIme'    => 'zz',
+//            'psevdonim'     => 'zz',
+//            'email'         => 'x@xxx.xx',
+//            'datumRojstva'  => '1973-28-03T04:30:00',
+//            'emso'          => 'ZZ',
+//            'davcna'        => 'ZZ123',
+//            'spol'          => 'M',
+//            'opombe'        => 'zz',
+//            'drzavljanstvo' => 'zz',
+//            'drzavaRojstva' => 'zz',
+//            'krajRojstva'   => 'zz',
+//            'user'          => null,
+//        ];
+//
+//        $this->objOseba1 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
+//
+//        $I->assertEquals('zz', $oseba['ime']);
+//        $I->assertNotEmpty($oseba['id']);
+//    }
 
-        $this->objOseba1 = $oseba     = $I->successfullyCreate($this->osebaUrl, $data);
-
-        $I->assertEquals('zz', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
-    }
-
-    
     /**
      * 
      * @param ApiTester $I
@@ -240,19 +264,19 @@ class DogodekCest
      * 
      * @param ApiTester $I
      */
-    public function createProstor(ApiTester $I)
-    {
-        $data             = [
-            'ime'          => 'zz',
-            'jePrizorisce' => true,
-            'kapaciteta'   => 1,
-            'opis'         => 'zz',
-        ];
-        $this->objProstor = $ent              = $I->successfullyCreate($this->prostorUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['ime'], 'zz');
-    }
+//    public function createProstor(ApiTester $I)
+//    {
+//        $data             = [
+//            'ime'          => 'zz',
+//            'jePrizorisce' => true,
+//            'kapaciteta'   => 1,
+//            'opis'         => 'zz',
+//        ];
+//        $this->objProstor = $ent              = $I->successfullyCreate($this->prostorUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        codecept_debug($ent);
+//        $I->assertEquals($ent['ime'], 'zz');
+//    }
 
     /**
      *  kreiramo zapis
@@ -275,7 +299,7 @@ class DogodekCest
             'vaja'            => $this->objVaja['id'],
             'gostovanje'      => null,
             'dogodekIzven'    => null,
-            'prostor'         => $this->objProstor['id'],
+            'prostor'         => $this->lookProstor['id'],
             'sezona'          => $this->objSezona['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
@@ -370,7 +394,7 @@ class DogodekCest
             'planiranoTraja'  => 1.23,
             'dogodek'         => $this->objDogodek2['id'],
             'alternacija'     => null,
-            'oseba'           => $this->objOseba1['id'],
+            'oseba'           => $this->lookOseba1['id'],
         ];
         $this->objTerminStoritve1 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -378,7 +402,7 @@ class DogodekCest
         $I->assertEquals($ent['planiranoTraja'], 1.23);
 
         // kreiramo še en zapis
-        $data = [
+        $data                     = [
             'planiranZacetek' => '2015-02-01T00:00:00+0100',
             'planiranKonec'   => '2016-02-01T00:00:00+0100',
             'zacetek'         => '2017-02-01T00:00:00+0100',
@@ -386,7 +410,7 @@ class DogodekCest
             'planiranoTraja'  => 4.56,
             'dogodek'         => $this->objDogodek2['id'],
             'alternacija'     => null,
-            'oseba'           => $this->objOseba1['id'],
+            'oseba'           => $this->lookOseba1['id'],
         ];
         $this->objTerminStoritve2 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -468,7 +492,7 @@ class DogodekCest
         $I->assertEquals($ent['vaja'], $this->objVaja['id']);
         $I->assertEquals($ent['gostovanje'], null);
         $I->assertEquals($ent['dogodekIzven'], null);
-        $I->assertEquals($ent['prostor'], $this->objProstor['id']);
+        $I->assertEquals($ent['prostor'], $this->lookProstor['id']);
         $I->assertEquals($ent['sezona'], $this->objSezona['id']);
 
         $I->assertTrue(isset($ent['arhivi']));

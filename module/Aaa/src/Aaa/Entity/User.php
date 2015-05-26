@@ -16,6 +16,7 @@ use ZfcRbac\Identity\IdentityInterface;
  *
  * @ORM\Entity(repositoryClass="Aaa\Repository\Users")
  * @ORM\Table(name="uporabniki")
+ * @Max\Lookup(ident="email")
  * @Max\I18n(label="Uporabnik", plural="Uporabniki")
  * @Max\Id(prefix="0001")
  * @Max\Lookup(ident="email",label="name",search={"name","email"}, extra={"enabled", "expires"})

@@ -57,6 +57,7 @@ class OsebaCest
     private $lookPopa1;
     private $lookPopa2;
     private $objUser;
+    private $lookUser;
     private $trr;
     private $postni;
     private $tel;
@@ -96,6 +97,18 @@ class OsebaCest
         $I->assertNotEmpty($ent);
 
         $this->lookPopa2 = $ent             = $I->lookupEntity("popa", "0988", false);
+        $I->assertNotEmpty($ent);
+    }
+    
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUser(ApiTester $I)
+    {
+//        $this->lookUser = $ent             = $I->lookupEntity("user", "ana@ifigenija.si", false);   /$$
+        $this->lookUser = $ent             = $I->lookupEntity("user", "ana", false);
+        $I->assertTrue(true);
         $I->assertNotEmpty($ent);
     }
 
@@ -172,21 +185,21 @@ class OsebaCest
      * 
      * @param ApiTester $I
      */
-    public function createUserja(ApiTester $I)
-    {
-        $data          = [
-            'email'              => 'test2@ifigenija.si',
-            'name'               => 'Testni uporabnik za Cest testiranje',
-            'password'           => 'zzzzzzzzzzzzzzzzzzz',
-            'enabled'            => true,
-            'expires'            => '2017-02-01T00:00:00+0100',
-            'defaultRoute'       => 'zz',
-            'defaultRouteParams' => 'zz',
-        ];
-        $this->objUser = $user          = $I->successfullyCreate($this->userUrl, $data);
-        $I->assertEquals('test2@ifigenija.si', $user['email']);
-        $I->assertNotEmpty($user['id']);
-    }
+//    public function createUserja(ApiTester $I)
+//    {
+//        $data          = [
+//            'email'              => 'test2@ifigenija.si',
+//            'name'               => 'Testni uporabnik za Cest testiranje',
+//            'password'           => 'zzzzzzzzzzzzzzzzzzz',
+//            'enabled'            => true,
+//            'expires'            => '2017-02-01T00:00:00+0100',
+//            'defaultRoute'       => 'zz',
+//            'defaultRouteParams' => 'zz',
+//        ];
+//        $this->objUser = $user          = $I->successfullyCreate($this->userUrl, $data);
+//        $I->assertEquals('test2@ifigenija.si', $user['email']);
+//        $I->assertNotEmpty($user['id']);
+//    }
 
     /**
      *  napolnimo vsaj en zapis
@@ -212,7 +225,7 @@ class OsebaCest
             'drzavljanstvo' => 'zz',
             'drzavaRojstva' => 'zz',
             'krajRojstva'   => 'zz',
-            'user'          => $this->objUser['id'],
+            'user'          => $this->lookUser['id'],
         ];
 
         $this->obj = $oseba     = $I->successfullyCreate($this->restUrl, $data);
