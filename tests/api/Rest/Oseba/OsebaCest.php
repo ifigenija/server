@@ -99,16 +99,14 @@ class OsebaCest
         $this->lookPopa2 = $ent             = $I->lookupEntity("popa", "0988", false);
         $I->assertNotEmpty($ent);
     }
-    
+
     /**
      * 
      * @param ApiTester $I
      */
     public function lookupUser(ApiTester $I)
     {
-//        $this->lookUser = $ent             = $I->lookupEntity("user", "ana@ifigenija.si", false);   /$$
-        $this->lookUser = $ent             = $I->lookupEntity("user", "ana", false);
-        $I->assertTrue(true);
+        $this->lookUser = $ent            = $I->lookupEntity("user", "ana@ifigenija.si", false);
         $I->assertNotEmpty($ent);
     }
 

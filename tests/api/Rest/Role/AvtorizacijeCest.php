@@ -41,6 +41,9 @@ class AvtorizacijeCest
     private $objOseba1;
     private $objOseba2;
     private $objOseba3Prot;
+    private $lookOseba1;
+    private $lookOseba2;
+    private $lookOseba3Prot;
     private $oseba;
 
     public function _before(ApiTester $I)
@@ -53,7 +56,6 @@ class AvtorizacijeCest
         
     }
 
-    
     /**
      * kreiramo 3 role 
      * 
@@ -101,7 +103,6 @@ class AvtorizacijeCest
         $I->assertEquals('TEST4RWVSE', $role['name']);
         $I->assertNotEmpty($role['id']);
     }
-
 
     /**
      * Doda dovoljenja vlogam
@@ -205,7 +206,7 @@ class AvtorizacijeCest
         $user = $I->successfullyCreate($this->userUrl, $data);
         $I->assertEquals(\IfiTest\AuthPage::$test3, $user['email']);
         $I->assertNotEmpty($user['id']);
- 
+
         $data = [
             'email'    => \IfiTest\AuthPage::$test4,
             'name'     => 'Testni uporabnik za Cest testiranje',
@@ -247,7 +248,7 @@ class AvtorizacijeCest
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
-        
+
         $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
             'username' => \IfiTest\AuthPage::$test4,
             'rolename' => 'TEST4RWVSE',
@@ -257,46 +258,62 @@ class AvtorizacijeCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupOsebo(ApiTester $I)
+    {
+        $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0001", false);
+        $I->assertNotEmpty($ent);
+
+        $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0002", false);
+        $I->assertNotEmpty($ent);
+
+        $this->lookOseba3Prot = $ent                  = $I->lookupEntity("oseba", "0011", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
      * Ustvari podatke - tri osebe
      * 
      * @param ApiTester $I
      */
-    public function createOsebe(ApiTester $I)
-    {
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
-
-        $data            = [
-            'naziv'   => 'xx',
-            'ime'     => 'xx',
-            'priimek' => 'xx',
-            'email'   => 'x@xxx.xx',
-        ];
-        $this->objOseba1 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
-        $I->assertEquals('xx', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
-
-        // 2. oseba:
-        $data            = [
-            'naziv'   => 'yy',
-            'ime'     => 'yy',
-            'priimek' => 'yy',
-            'email'   => 'y@yyy.yy',
-        ];
-        $this->objOseba2 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
-        $I->assertEquals('yy', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
-
-        // 3. oseba: z assert zaščitena
-        $data                = [
-            'naziv'   => 'zz',
-            'ime'     => 'zz',
-            'priimek' => 'write protected12345',
-            'email'   => 'zz@yyy.yy',
-        ];
-        $this->objOseba3Prot = $oseba               = $I->successfullyCreate($this->osebaUrl, $data);
-        $I->assertEquals('zz', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
-    }
+//    public function createOsebe(ApiTester $I)
+//    {
+//        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+//
+//        $data            = [
+//            'naziv'   => 'xx',
+//            'ime'     => 'xx',
+//            'priimek' => 'xx',
+//            'email'   => 'x@xxx.xx',
+//        ];
+//        $this->objOseba1 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
+//        $I->assertEquals('xx', $oseba['ime']);
+//        $I->assertNotEmpty($oseba['id']);
+//
+//        // 2. oseba:
+//        $data            = [
+//            'naziv'   => 'yy',
+//            'ime'     => 'yy',
+//            'priimek' => 'yy',
+//            'email'   => 'y@yyy.yy',
+//        ];
+//        $this->objOseba2 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
+//        $I->assertEquals('yy', $oseba['ime']);
+//        $I->assertNotEmpty($oseba['id']);
+//
+//        // 3. oseba: z assert zaščitena
+//        $data                = [
+//            'naziv'   => 'zz',
+//            'ime'     => 'zz',
+//            'priimek' => 'write protected12345',
+//            'email'   => 'zz@yyy.yy',
+//        ];
+//        $this->objOseba3Prot = $oseba               = $I->successfullyCreate($this->osebaUrl, $data);
+//        $I->assertEquals('zz', $oseba['ime']);
+//        $I->assertNotEmpty($oseba['id']);
+//    }
 
     /**
      * Sproba getList dostop z Read uporabnikom
@@ -324,16 +341,16 @@ class AvtorizacijeCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$test1, \IfiTest\AuthPage::$test1Pass);
 
         //get 
-        $oseba = $I->successfullyGet($this->osebaUrl, $this->objOseba1['id']);
+        $oseba = $I->successfullyGet($this->osebaUrl, $this->lookOseba1['id']);
         $I->assertNotEmpty($oseba);
-        $I->assertEquals($this->objOseba1['priimek'], $oseba['priimek']);
+        $I->assertEquals($this->lookOseba1['priimek'], $oseba['priimek']);
 
         //update
-        $oseba        = $this->objOseba1;
+        $oseba        = $this->lookOseba1;
         $oseba['ime'] = 'tralala';
         $I->failToUpdate($this->osebaUrl, $oseba['id'], $oseba); //$$ rb ne deluje - ERROR
         //delete
-        $I->failToDelete($this->osebaUrl, $this->objOseba1['id']);        //$$ rb ERROR
+        $I->failToDelete($this->osebaUrl, $this->lookOseba1['id']);        //$$ rb ERROR
         //write
         $data         = [
             'naziv'   => 'zz',
@@ -368,10 +385,10 @@ class AvtorizacijeCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$test2, \IfiTest\AuthPage::$test2Pass);
 
         //get 
-        $I->failToGet($this->osebaUrl, $this->objOseba1['id']);
+        $I->failToGet($this->osebaUrl, $this->lookOseba1['id']);
 
         //update
-        $oseba        = $this->objOseba1;
+        $oseba        = $this->lookOseba1;
         $oseba['ime'] = 'dve tralala';
 
         $oseba = $I->successfullyUpdate($this->osebaUrl, $oseba['id'], $oseba);
@@ -416,12 +433,12 @@ class AvtorizacijeCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$test3, \IfiTest\AuthPage::$test3Pass);
 
         //get 
-        $oseba = $I->successfullyGet($this->osebaUrl, $this->objOseba1['id']);
+        $oseba = $I->successfullyGet($this->osebaUrl, $this->lookOseba1['id']);
         $I->assertNotEmpty($oseba);
-        $I->assertEquals($this->objOseba1['priimek'], $oseba['priimek']);
+        $I->assertEquals($this->lookOseba1['priimek'], $oseba['priimek']);
 
         //update
-        $oseba        = $this->objOseba1;
+        $oseba        = $this->lookOseba1;
         $oseba['ime'] = 'tri';
 
         $oseba = $I->successfullyUpdate($this->osebaUrl, $oseba['id'], $oseba);
@@ -453,18 +470,25 @@ class AvtorizacijeCest
 
 
         // oseba, ki ni z assert zašitena - brisanje bi moralo uspeti
+        $look = $this->lookOseba2;
         //delete
-        $oseba = $this->objOseba2;
-        $I->successfullyDelete($this->osebaUrl, $oseba['id']);
-        $I->failToGet($this->osebaUrl, $oseba['id']);
+        $I->successfullyDelete($this->osebaUrl, $look['id']);
+
+
+        $resp = $I->failToGet($this->osebaUrl, $look['id']);
+        codecept_debug($resp);
+        $I->assertEquals("100098", $resp[0][0]['code']);
+
         //delete neobstoječega bi moral sicer pasti, a brez napake
-        $I->failToDelete($this->osebaUrl, $oseba['id']);
+        $resp = $I->failToDelete($this->osebaUrl, $look['id']);
 
 
 
         // oseba, ki je z assert zaščitena (v AssertOseba) ne bi smel dovoliti spremeniti niti brisati niti kreirati
         //update
-        $oseba        = $this->objOseba3Prot;
+
+        $look         = $this->lookOseba3Prot;
+        $oseba        = $I->successfullyGet($this->osebaUrl, $look['id']);
         $oseba['ime'] = 'ciracara';
 
         $I->failToUpdate($this->osebaUrl, $oseba['id'], $oseba);
@@ -492,7 +516,7 @@ class AvtorizacijeCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$test4, \IfiTest\AuthPage::$test4Pass);
         // oseba, ki je z assert zaščitena 
         //update
-        $oseba        = $this->objOseba3Prot;
+        $oseba        = $this->lookOseba3Prot;
         $oseba['ime'] = 'cirkocarko';
 
         // dostop uspe zaradi posebnega dovoljenja "Oseba-vse"
@@ -500,5 +524,4 @@ class AvtorizacijeCest
         $I->assertEquals($oseba['ime'], 'cirkocarko');
     }
 
-   
 }

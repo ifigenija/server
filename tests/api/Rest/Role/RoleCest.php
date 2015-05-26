@@ -34,6 +34,8 @@ class RoleCest
     private $objPermission2;
     private $objUser1;
     private $objUser2;
+    private $lookUser1;
+    private $lookUser2;
     private $role;
     private $perm;
     private $sess;
@@ -78,40 +80,56 @@ class RoleCest
         $I->assertNotEmpty($role['id']);
     }
 
+    
+    
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUser(ApiTester $I)
+    {
+        $this->lookUser1 = $ent            = $I->lookupEntity("user", "ana@ifigenija.si", false);
+        $I->assertNotEmpty($ent);
+        
+        $this->lookUser2 = $ent            = $I->lookupEntity("user", "marko@ifigenija.si", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    
     /**
      *  napolnimo vsaj en zapis
      * 
      * @param ApiTester $I
      */
-    public function createUserja(ApiTester $I)
-    {
-        $data           = [
-            'email'              => 'test2@ifigenija.si',
-            'name'               => 'Testni uporabnik za Cest testiranje',
-            'password'           => 'zzzzzzzzzzzzzzzzzzz',
-            'enabled'            => true,
-            'expires'            => '2017-02-01T00:00:00+0100',
-            'defaultRoute'       => 'zz',
-            'defaultRouteParams' => 'zz',
-        ];
-        $this->objUser1 = $user           = $I->successfullyCreate($this->userUrl, $data);
-        $I->assertEquals('test2@ifigenija.si', $user['email']);
-        $I->assertNotEmpty($user['id']);
-
-        // kreiramo še en zapis
-        $data           = [
-            'email'              => 'test6@ifigenija.si',
-            'name'               => 'Testni uporabnik za Cest testiranje',
-            'password'           => 'asdfew',
-            'enabled'            => true,
-            'expires'            => '2018-02-01T00:00:00+0100',
-            'defaultRoute'       => 'aa',
-            'defaultRouteParams' => 'aa',
-        ];
-        $this->objUser2 = $user           = $I->successfullyCreate($this->userUrl, $data);
-        $I->assertEquals('test6@ifigenija.si', $user['email']);
-        $I->assertNotEmpty($user['id']);
-    }
+//    public function createUserja(ApiTester $I)
+//    {
+//        $data           = [
+//            'email'              => 'test2@ifigenija.si',
+//            'name'               => 'Testni uporabnik za Cest testiranje',
+//            'password'           => 'zzzzzzzzzzzzzzzzzzz',
+//            'enabled'            => true,
+//            'expires'            => '2017-02-01T00:00:00+0100',
+//            'defaultRoute'       => 'zz',
+//            'defaultRouteParams' => 'zz',
+//        ];
+//        $this->objUser1 = $user           = $I->successfullyCreate($this->userUrl, $data);
+//        $I->assertEquals('test2@ifigenija.si', $user['email']);
+//        $I->assertNotEmpty($user['id']);
+//
+//        // kreiramo še en zapis
+//        $data           = [
+//            'email'              => 'test6@ifigenija.si',
+//            'name'               => 'Testni uporabnik za Cest testiranje',
+//            'password'           => 'asdfew',
+//            'enabled'            => true,
+//            'expires'            => '2018-02-01T00:00:00+0100',
+//            'defaultRoute'       => 'aa',
+//            'defaultRouteParams' => 'aa',
+//        ];
+//        $this->objUser2 = $user           = $I->successfullyCreate($this->userUrl, $data);
+//        $I->assertEquals('test6@ifigenija.si', $user['email']);
+//        $I->assertNotEmpty($user['id']);
+//    }
 
         /**
      * @param ApiTester $I
@@ -307,16 +325,16 @@ class RoleCest
     /**
      * kreiramo relacijo
      * @depends create
-     * @depends createUserja
+     * @depends lookupUser
      * 
      * @param ApiTester $I
      */
     public function ustvariRelacijoZUserjem(ApiTester $I)
     {
-        $resp = $I->successfullyUpdate($this->restUrl, $this->objRole2['id'] . "/users/" . $this->objUser1['id'], []);
+        $resp = $I->successfullyUpdate($this->restUrl, $this->objRole2['id'] . "/users/" . $this->lookUser1['id'], []);
 
         // ustvarimo še eno relacijo z 2. userjem
-        $resp = $I->successfullyUpdate($this->restUrl, $this->objRole2['id'] . "/users/" . $this->objUser2['id'], []);
+        $resp = $I->successfullyUpdate($this->restUrl, $this->objRole2['id'] . "/users/" . $this->lookUser2['id'], []);
     }
 
     /**
@@ -331,7 +349,7 @@ class RoleCest
         $I->assertEquals(2, count($resp));
 
         // get po popa id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objRole2['id'], "users", $this->objUser1['id']);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->objRole2['id'], "users", $this->lookUser1['id']);
         $I->assertEquals(1, count($resp));
     }
 
@@ -343,9 +361,9 @@ class RoleCest
      */
     public function deleteRelacijoZUserjem(ApiTester $I)
     {
-        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->objRole2['id'], "users", $this->objUser1['id']);
+        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->objRole2['id'], "users", $this->lookUser1['id']);
 
-        $resp = $I->failToGetRelation($this->restUrl, $this->objRole2['id'], "users", $this->objUser1['id']);
+        $resp = $I->failToGetRelation($this->restUrl, $this->objRole2['id'], "users", $this->lookUser1['id']);
     }
 
 }
