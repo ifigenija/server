@@ -3,13 +3,11 @@
 entityClass: Aaa\Entity\Permission
 permPrefix: Aaa
 disabledMethods: 
-    - delete
-    - create
-    - update
 forms:
     default:
-        disabledMethods:
-            - update
+        elements:
+            - description
+            - name
     extra:
         disabledMethods:
             - create
@@ -18,10 +16,9 @@ lists:
     default:
 hydrator:
     exclude: 
-        - builtIn
 relation:
     default:
         roles:
             enabled: true
             hydrator:
-                exclude: []
+                exclude: [permissions]

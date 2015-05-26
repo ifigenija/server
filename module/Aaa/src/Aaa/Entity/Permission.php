@@ -11,6 +11,8 @@ use Max\Ann\Entity as Max;
  * @ORM\Entity(repositoryClass="Aaa\Repository\Permissions")
  * @Max\Id(prefix="0003")
  * @Max\I18n(label="Dovoljenje",plural="Dovoljenja")
+ * @Max\Lookup(ident="name", label="description", search={"name","description"})
+
  */
 class Permission
         extends \Max\Entity\Base
@@ -44,7 +46,7 @@ class Permission
      * @ORM\Column(type="text", nullable=true)
      *
      * @Max\I18n(label="Opis", description="Opis dovoljenja")
-     * @Max\Ui(type="naziv")
+     *
      */
     protected $description;
 
@@ -81,10 +83,11 @@ class Permission
         $this->roles->removeElement($role);
     }
 
-     public function validate($mode = 'update')
+    public function validate($mode = 'update')
     {
+        
     }
-    
+
     function getId()
     {
         return $this->id;

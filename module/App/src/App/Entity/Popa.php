@@ -161,7 +161,7 @@ class Popa
      * @ORM\OneToMany(targetEntity="App\Entity\KontaktnaOseba", mappedBy="popa")
      * var <KontaktnaOseba>
      */
-    private $kontaktnaOseba;
+    private $kontaktneOsebe;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="popa")

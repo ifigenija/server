@@ -13,6 +13,7 @@ use Rbac\Role\RoleInterface;
  * @ORM\Entity(repositoryClass="Aaa\Repository\Roles")
  * @Max\I18n(label="Vloga",plural="Vloge",description="Uporabnik mora imeti vloge za dostop do delov aplikacije")
  * @Max\Id(prefix="0002") 
+ * @Max\Lookup(ident="name", label="description", search={"name","description"})
  *  */
 class Role
         extends \Max\Entity\Base
@@ -40,7 +41,7 @@ class Role
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="Opis", description="Opis vloge")
-     * @Max\Ui(type="naziv", group="Vloga")
+     * @Max\Ui(group="Vloga")
      * @var string
      */
     protected $description = '';

@@ -18,6 +18,7 @@ use ZfcRbac\Identity\IdentityInterface;
  * @ORM\Table(name="uporabniki")
  * @Max\I18n(label="Uporabnik", plural="Uporabniki")
  * @Max\Id(prefix="0001")
+ * @Max\Lookup(ident="email",label="name",search={"name","email"}, extra={"enabled", "expires"})
  * 
  */
 class User
@@ -60,7 +61,7 @@ class User
      *
      * @ORM\Column(type="boolean", nullable=true)
      * @Max\I18n(label="Aktiven",  description="Uporabnik aktiven")
-     * @Max\Ui(type="boolCheckbox", group="Uporabnik")
+     * @Max\Ui(type="boolcheckbox", group="Uporabnik")
      * @var boolean
      */
     protected $enabled;
@@ -137,6 +138,7 @@ class User
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $tokenExpires;
+
 
     public function __construct()
     {
@@ -310,9 +312,5 @@ class User
         return $this;
     }
 
-    public function getPassword()  // $$ rb ali bomo sploh dovolili to metodo?
-    {
-        return $this->password;
-    }
 
 }

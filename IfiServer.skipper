@@ -427,7 +427,7 @@
       <field name="funkcija" type="string" uuid="e554063b-6954-4eb8-a8ec-703ff1ddc8b1"/>
       <field name="opis" type="text" uuid="663c4365-8b68-4725-89c6-bb741f511f51"/>
     </entity>
-    <association from="KontaktnaOseba" to="Popa" caption="Popa KontaktnaOseba" owner-alias="kontaktnaOseba" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="9407134f-5551-401a-b0fc-e7b42169eade">
+    <association from="KontaktnaOseba" to="Popa" caption="Popa KontaktnaOseba" owner-alias="kontaktneOsebe" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="9407134f-5551-401a-b0fc-e7b42169eade">
       <association-field from="popa_id" to="id"/>
     </association>
     <association from="KontaktnaOseba" to="Oseba" caption="Oseba KontaktnaOseba" owner-alias="kontaktnaOseba" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="ab6a65ef-0f08-404c-88de-23a986edb833">
