@@ -39,12 +39,14 @@ class FunkcijaCest
     private $obj;
     private $objFunkcija2;
     private $objOseba;
+    private $lookOseba;
     private $objAlternacija;
     private $objAlternacija1;
     private $objAlternacija2;
     private $objUprizoritev;
     private $objBesedilo;
     private $objTipFunkcije;
+    private $lookTipFunkcije;
 
     public function _before(ApiTester $I)
     {
@@ -85,32 +87,32 @@ class FunkcijaCest
      * 
      * @param ApiTester $I
      */
-    public function createOsebo(ApiTester $I)
-    {
-        $data = [
-            'naziv'         => 'zz',
-            'ime'           => 'zz',
-            'priimek'       => 'zz',
-            'funkcija'      => 'zz',
-            'srednjeIme'    => 'zz',
-            'psevdonim'     => 'zz',
-            'email'         => 'x@xxx.xx',
-            'datumRojstva'  => '1973-28-03T04:30:00',
-            'emso'          => 'ZZ',
-            'davcna'        => 'ZZ123',
-            'spol'          => 'M',
-            'opombe'        => 'zz',
-            'drzavljanstvo' => 'zz',
-            'drzavaRojstva' => 'zz',
-            'krajRojstva'   => 'zz',
-            'user'          => null,
-        ];
-
-        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
-
-        $I->assertEquals('zz', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
-    }
+//    public function createOsebo(ApiTester $I)
+//    {
+//        $data = [
+//            'naziv'         => 'zz',
+//            'ime'           => 'zz',
+//            'priimek'       => 'zz',
+//            'funkcija'      => 'zz',
+//            'srednjeIme'    => 'zz',
+//            'psevdonim'     => 'zz',
+//            'email'         => 'x@xxx.xx',
+//            'datumRojstva'  => '1973-28-03T04:30:00',
+//            'emso'          => 'ZZ',
+//            'davcna'        => 'ZZ123',
+//            'spol'          => 'M',
+//            'opombe'        => 'zz',
+//            'drzavljanstvo' => 'zz',
+//            'drzavaRojstva' => 'zz',
+//            'krajRojstva'   => 'zz',
+//            'user'          => null,
+//        ];
+//
+//        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
+//
+//        $I->assertEquals('zz', $oseba['ime']);
+//        $I->assertNotEmpty($oseba['id']);
+//    }
 
 //    /**
 //     *  kreiramo zapis
@@ -194,24 +196,45 @@ class FunkcijaCest
         $I->assertEquals($ent['opis'], 'zz');
     }
 
+    
+        /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupTipFunkcije(ApiTester $I)
+    {
+        $this->lookTipFunkcije = $ent             = $I->lookupEntity("tipfunkcije", "Režiser", false);
+        $I->assertNotEmpty($ent);
+    }
+        /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupOsebo(ApiTester $I)
+    {
+        $this->lookOseba= $ent             = $I->lookupEntity("oseba", "0006", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    
     /**
      *  kreiramo zapis
      * 
      * @param ApiTester $I
      */
-    public function createTipFunkcije(ApiTester $I)
-    {
-        $data                 = [
-            'ime'       => 'zz',
-            'opis'      => 'zz',
-            'imeZenski' => 'zz',
-            'podrocje'  => 'umetnik',
-        ];
-        $this->objTipFunkcije = $ent                  = $I->successfullyCreate($this->tipFunkcijeUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['opis'], 'zz');
-    }
+//    public function createTipFunkcije(ApiTester $I)
+//    {
+//        $data                 = [
+//            'ime'       => 'zz',
+//            'opis'      => 'zz',
+//            'imeZenski' => 'zz',
+//            'podrocje'  => 'umetnik',
+//        ];
+//        $this->objTipFunkcije = $ent                  = $I->successfullyCreate($this->tipFunkcijeUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        codecept_debug($ent);
+//        $I->assertEquals($ent['opis'], 'zz');
+//    }
 
     /**
      *  napolnimo vsaj en zapis
@@ -230,7 +253,7 @@ class FunkcijaCest
             'dovoliPrekrivanje' => false,
             'uprizoritev'       => $this->objUprizoritev['id'],
             'privzeti'          => $this->objAlternacija['id'],
-            'tipFunkcije'       => $this->objTipFunkcije['id'],
+            'tipFunkcije'       => $this->lookTipFunkcije['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['naziv'], 'zz');
@@ -247,7 +270,7 @@ class FunkcijaCest
             'dovoliPrekrivanje' => false,
             'uprizoritev'       => $this->objUprizoritev['id'],
             'privzeti'          => null,
-            'tipFunkcije'       => $this->objTipFunkcije['id'],
+            'tipFunkcije'       => $this->lookTipFunkcije['id'],
         ];
         $this->objFunkcija2 = $ent                = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['naziv'], 'aa');
@@ -257,7 +280,7 @@ class FunkcijaCest
     /**
      *  kreiramo zapis
      * 
-     * @depends createOsebo
+     * @depends lookupOsebo
      * @depends create
      * 
      * @param ApiTester $I
@@ -268,7 +291,7 @@ class FunkcijaCest
             'zaposlen'     => true,
             'funkcija'     => $this->objFunkcija2['id'],
             'sodelovanje'  => NULL,
-            'oseba'        => $this->objOseba['id'],
+            'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => NULL,
             'pogodba'      => NULL,
         ];
@@ -279,7 +302,7 @@ class FunkcijaCest
             'zaposlen'     => true,
             'funkcija'     => $this->objFunkcija2['id'],
             'sodelovanje'  => NULL,
-            'oseba'        => $this->objOseba['id'],
+            'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => NULL,
             'pogodba'      => NULL,
         ];
@@ -360,7 +383,7 @@ class FunkcijaCest
         $I->assertEquals($ent['sort'], 2);
         $I->assertEquals($ent['uprizoritev'], $this->objUprizoritev['id']);
         $I->assertEquals($ent['privzeti'], $this->objAlternacija['id'], "privzeti");
-        $I->assertEquals($ent['tipFunkcije'], $this->objTipFunkcije['id'], "tip funkcije");
+        $I->assertEquals($ent['tipFunkcije'], $this->lookTipFunkcije['id'], "tip funkcije");
 
         $I->assertTrue(isset($ent['alternacije']));
 
