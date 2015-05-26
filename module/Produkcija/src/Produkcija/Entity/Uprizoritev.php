@@ -24,6 +24,8 @@ class Uprizoritev
      */
     private $id;
 
+    // $$ verjetno bo potrebno dodati šifro, ker je lahko z enim nazivom več uprizoritev (npr. različni režiser)
+    
     /**
      * @ORM\Column(type="string", length=35, nullable=true)
      * @Max\I18n(label="Faza", description="Faza uprizoritve")

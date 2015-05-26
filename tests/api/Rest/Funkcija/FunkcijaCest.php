@@ -252,7 +252,7 @@ class FunkcijaCest
             'sePlanira'         => true,
             'dovoliPrekrivanje' => false,
             'uprizoritev'       => $this->objUprizoritev['id'],
-            'privzeti'          => $this->objAlternacija['id'],
+            'privzeti'          => $this->objAlternacija['id'], //$$ to ne deluje izgleda - jemlje kot null?
             'tipFunkcije'       => $this->lookTipFunkcije['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);

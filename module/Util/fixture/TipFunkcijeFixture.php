@@ -49,7 +49,6 @@ class TipFunkcijeFixture extends AbstractFixture implements FixtureInterface
     public function getData()
     {
         return [
-            ['Igralec ali animator', 'Igralci in animatorji', "TRUE", "1", 'Igralka ali animatorka', 'igralec',],
             ['Igralec ali animator', 'Igralci in animatorji', TRUE, 1, 'Igralka ali animatorka', 'igralec',],
             ['Baletnik ali plesalec', 'Baletniki in plesalci', TRUE, 1, 'Baletnica ali plesalka', 'igralec',],
             ['Avtor', 'Avtorji', TRUE, 1, 'Avtorka', 'umetnik',],

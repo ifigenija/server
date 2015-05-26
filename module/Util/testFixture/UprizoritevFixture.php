@@ -29,7 +29,7 @@ class UprizoritevFixture
 
     public function getDependencies()
     {
-        return array('IfiFixture\BesediloFixture', 'IfiFixture\ProstorFixture'); // fixture classes fixture is dependent on //$$ rb dodaj še zvrstsurs, zvrstuprizorite
+        return array('IfiFixture\BesediloFixture', 'IfiFixture\ProstorFixture'); // fixture classes fixture is dependent on 
     }
 
     /**
@@ -92,6 +92,10 @@ class UprizoritevFixture
 
         $value = $zvrSursR->findOneByIme($v[19]);
         $o->setZvrstSurs($value);
+
+        $referenca = 'Uprizoritev-' . $v[0];
+        var_dump($referenca);
+        $this->addReference($referenca, $o);
     }
 
     public function getData()
