@@ -16,7 +16,6 @@ use Doctrine\ORM\Mapping AS ORM,
 class Besedilo
         extends \Max\Entity\Base
 {
-
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
@@ -32,7 +31,7 @@ class Besedilo
      * @Max\Ui(ident=true)
      */
     private $stevilka;
-    
+
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Naslov", description="Naslov besedila")
@@ -105,7 +104,6 @@ class Besedilo
      * @var string
      */
     private $povzetekVsebine;
-
 
     public function validate($mode = 'update')
     {
@@ -243,6 +241,5 @@ class Besedilo
         $this->stevilka = $stevilka;
         return $this;
     }
-
 
 }

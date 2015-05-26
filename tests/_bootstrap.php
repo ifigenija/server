@@ -8,4 +8,4 @@ require_once __DIR__ . '/_support/AbstractTest.php';
 
 require_once __DIR__ . '/api/FormMetaTester.php';
 
-\Codeception\Util\Autoload::registerSuffix('Page', __DIR__.DIRECTORY_SEPARATOR.'_pages');
+\Codeception\Util\Autoload::registerSuffix('Page', __DIR__ . DIRECTORY_SEPARATOR . '_pages');

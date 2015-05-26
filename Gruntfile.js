@@ -26,7 +26,7 @@ module.exports = function (grunt) {
             },
             autoload_App: {
                 cwd: 'module/App',
-                cmd: classmap_generator    
+                cmd: classmap_generator
             },
             autoload_Produkcija: {
                 cwd: 'module/Produkcija',
@@ -39,24 +39,23 @@ module.exports = function (grunt) {
             autoload_Prisotnost: {
                 cwd: 'module/Prisotnost',
                 cmd: classmap_generator
-            },   
+            },
             autoload_abonmaji: {
                 cwd: 'module/Abonmaji',
                 cmd: classmap_generator
-            },               
+            },
             autoload_prodaja: {
                 cwd: 'module/Prodaja',
                 cmd: classmap_generator
-            },               
+            },
             autoload_stevilcenje: {
                 cwd: 'module/Stevilcenje',
                 cmd: classmap_generator
-            },      
+            },
             autoload_testAssets: {
                 cwd: 'tests/TestAssets',
                 cmd: classmap_generator
-            },               
-
+            },
             proxies: {
                 cmd: function () {
                     if (os.platform() === 'win32') {
@@ -89,6 +88,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-exec');
 
 // Default task(s).
-    grunt.registerTask('default', [  'exec']);
+    grunt.registerTask('default', ['exec']);
 
 };
