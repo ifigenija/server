@@ -6,7 +6,6 @@ forms:
     default: 
         elements:
 #            - id
-            - faza
             - naslov
             - podnaslov
             - delovniNaslov

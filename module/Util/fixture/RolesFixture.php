@@ -32,8 +32,6 @@ class OptionsFixture
 
     public function load(ObjectManager $manager)
     {
-
-
         echo "Nalagam - dovoljenja" . PHP_EOL;
         $res = $this->getData('permissions');
         foreach ($res as $val) {
@@ -95,11 +93,11 @@ class OptionsFixture
 
     public function getData($entity)
     {
-        
-        $pattern =  'module/*/fixture/' . $entity . '.yml';
+
+        $pattern = 'module/*/fixture/' . $entity . '.yml';
 
         $files = glob($pattern);
-        
+
         $data = [];
         foreach ($files as $f) {
             if (file_exists($f)) {
@@ -168,7 +166,7 @@ class OptionsFixture
                     echo "  user    " . $user['email'] . PHP_EOL;
 
                     // najprej preverim, če uporabniško ime že obstaja v entiteti User
-                    $u = $em->getRepository('Aaa\Entity\User')
+                    $u        = $em->getRepository('Aaa\Entity\User')
                             ->findOneByemail($user['email']);
                     $this->expect($u, "Ni tega uporabnika", 1000300); // $$ rb potrebno še implementirati trnsl 
                     // ali obstajajo  opcije userja

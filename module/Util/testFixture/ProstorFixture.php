@@ -45,6 +45,10 @@ class ProstorFixture
         $o->setJePrizorisce($v[2]);
         $o->setKapaciteta($v[3]);
         $o->setOpis($v[4]);
+
+        $referenca='Prostor-' . $v[0];
+        var_dump($referenca);
+        $this->addReference($referenca, $o);
     }
 
     public function getData()

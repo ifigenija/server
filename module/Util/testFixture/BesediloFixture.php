@@ -41,20 +41,6 @@ class BesediloFixture
             $o->setStevilka(trim($v[0]));
             $manager->persist($o);
         }
-
-//            'Naslov          => zz',
-//            'Avtor           => 'zz',
-//            'Podnaslov       => 'zz',
-//            'Jezik           => 'zz',
-//            'NaslovIzvirnika => 'zz',
-//            'DatumPrejema    => '2010-02-01T00:00:00+0100',
-//            'MoskeVloge      => 1,
-//            'ZenskeVloge     => 2,
-//            'Prevajalec      => 'zz',
-//            'PovzetekVsebine => 'zz',
-
-
-
         $o->setNaslov($v[1]);
         $o->setAvtor($v[2]);
         $o->setPodnaslov($v[3]);
@@ -67,14 +53,18 @@ class BesediloFixture
         $o->setZenskeVloge($v[8]);
         $o->setPrevajalec($v[8]);
         $o->setPovzetekVsebine($v[9]);
+
+        $referenca = 'Besedilo-' . $v[0];
+        var_dump($referenca);
+        $this->addReference($referenca, $o);
     }
 
     public function getData()
     {
         return [
-            ['0001', 'Sen kresne noči','William Shakespeare','','slovenščina',"A Midsummer Night's Dream",'2015-04-26',5,5,'Milan Jesih','Nastopajo Titanija, Hipolita, Oberon, ...',],
-            ['0002', 'Bratje Karamazovi','Fjodor Mihajlovič Dostojevski','','slovenščina',"Bratja Karamazjovji",'2015-12-04',4,1,'Vladimir Levstik','Svetovna uspešnica',],
-            ['0003', 'Smoletov Vrt','Berta Hočevar','','slovenščina',"",'2015-05-26',2,8,'','',],
+            ['0001', 'Sen kresne noči', 'William Shakespeare', '', 'slovenščina', "A Midsummer Night's Dream", '2015-04-26', 5, 5, 'Milan Jesih', 'Nastopajo Titanija, Hipolita, Oberon, ...',],
+            ['0002', 'Bratje Karamazovi', 'Fjodor Mihajlovič Dostojevski', '', 'slovenščina', "Bratja Karamazjovji", '2015-12-04', 4, 1, 'Vladimir Levstik', 'Svetovna uspešnica',],
+            ['0003', 'Smoletov Vrt', 'Berta Hočevar', '', 'slovenščina', "", '2015-05-26', 2, 8, '', '',],
         ];
     }
 

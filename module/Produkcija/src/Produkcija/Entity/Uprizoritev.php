@@ -251,6 +251,7 @@ class Uprizoritev
     {
         
     }
+
     public function getId()
     {
         return $this->id;
@@ -558,6 +559,5 @@ class Uprizoritev
         $this->zvrstSurs = $zvrstSurs;
         return $this;
     }
-
 
 }

@@ -45,6 +45,10 @@ class ZvrstSursFixture
         }
 
         $o->setNaziv($v[1]);
+        
+//        $referenca = 'ZvrstSurs-' . $v[0];
+//        var_dump($referenca);
+//        $this->addReference($referenca, $o);
     }
 
     public function getData()
