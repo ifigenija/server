@@ -3,6 +3,7 @@
 /*
  *  Licenca GPLv3
  */
+
 namespace Produkcija\Repository;
 
 use Doctrine\Common\Collections\Criteria;
@@ -10,7 +11,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineModule\Paginator\Adapter\Selectable;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
-
+use Produkcija\Entity\Alternacija;
 
 /**
  * Description of Alternacije
@@ -18,20 +19,19 @@ use Max\Repository\AbstractMaxRepository;
  * @author rado
  */
 class Alternacije
-        extends \Max\Repository\AbstractMaxRepository
+        extends AbstractMaxRepository
 {
+
     protected $sortOptions = [
         "default" => [
             "sifra" => ["alias" => "p.sifra"]
         ],
-        "vse" => [
+        "vse"     => [
             "sifra" => ["alias" => "p.sifra"]
-            
-            
         ]
-    ];  
-    
-     public function getPaginator(array $options, $name = "default")
+    ];
+
+    public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
             case "vse":
@@ -45,15 +45,15 @@ class Alternacije
 
                 if (!empty($options['funkcija'])) {
                     $funkcija = $this->getEntityManager()->find('Produkcija\Entity\Funkcija', $options['funkcija']);
-                    $exp   = $e->eq('funkcija', $funkcija);
+                    $exp      = $e->eq('funkcija', $funkcija);
+                    $crit->andWhere($exp);
                 }
-                $crit->andWhere($exp);
+
                 return new Selectable($this, $crit);
         }
     }
-    
-    
-      public function getVseQb($options)
+
+    public function getVseQb($options)
     {
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
@@ -65,11 +65,23 @@ class Alternacije
 
             $qb->setParameter('sifra', "{$options['q']}%", "string");
         }
+        $qb->join('p.funkcija','funkcija');
+        $qb->join('funkcija.uprizoritev','uprizoritev');
+        if (!empty($options['uprizoritev'])) {
+            $naz = $e->eq('uprizoritev.id', ':upriz');
+            $qb->andWhere($naz);
+            $qb->setParameter('upriz', "{$options['uprizoritev']}", "string");
+        }
+        if (!empty($options['funkcija'])) {
+            $naz = $e->eq('funkcija.id', ':fun');
+            $qb->andWhere($naz);
+            $qb->setParameter('fun', "{$options['fun']}", "string");
+        }
 
         return $qb;
     }
 
-     /**
+    /**
      * 
      * @param Alternacija $object
      * @param array $params
@@ -83,5 +95,4 @@ class Alternacije
         parent::create($object, $params);
     }
 
-    
 }

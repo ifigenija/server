@@ -27,8 +27,26 @@ lists:
                   options:
                       label: Funkcija
                       targetEntity: Produkcija\Entity\Funkcija
-                      required: true
+                      required: false
         hydrator:
             - exclude: []
     vse: 
         filter:
+            elements: 
+                - name: q
+                  type: Text
+                - name: uprizoritev
+                  type: toone
+                  options:
+                      label: Uprizoritev
+                      targetEntity: Produkcija\Entity\Uprizoritev
+                      required: false
+                - name: funkcija
+                  type: toone
+                  options:
+                      label: Funkcija
+                      targetEntity: Produkcija\Entity\Funkcija
+                      required: false
+        hydrator: 
+            lookups: [funkcija, koprodukcija, pogodba, oseba]
+                

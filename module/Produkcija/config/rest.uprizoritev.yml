@@ -40,6 +40,8 @@ forms:
             - besedilo
             - zvrstUprizoritve
             - zvrstSurs
+        hydrator: 
+            - lookups: [besedilo]
 lists:
     default: 
         filter:

@@ -86,11 +86,15 @@ class Funkcija
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+     * @Max\I18n(label="Funkcija se planira")
+     * @Max\Ui(type="boolcheckbox")
      */
     private $sePlanira;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+     * @Max\I18n(label="Dovoli prekrivanje")
+     * @Max\Ui(type="boolcheckbox")
      */
     private $dovoliPrekrivanje;
 

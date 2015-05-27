@@ -97,7 +97,7 @@ class Uprizoritev
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Prostor")
      * @ORM\JoinColumn(name="maticniOder_id", referencedColumnName="id")
      * @Max\I18n(label="Matični oder",  description="Matični oder / privzeto prizorišče uprizoritve")
-     * @   Max\Ui(type="select",empty="Kjer koli")    //$$ rb zakaj select?
+     * @Max\Ui(type="select",empty="Kjer koli")    //$$ rb zakaj select?
      * @var \Prodaja\Entity\Prostor
      */
     private $maticniOder;
@@ -158,6 +158,7 @@ class Uprizoritev
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="Datum zaključka", description="Opomba pri uprizoritvi za arhiv")
+     * @Max\Ui(icon="fa fa-calendar")
      * @var string
      */
     private $datumZakljucka;                // $$ rb - ali je sploh kdaj datum zaključka, glede na to, da se lahko ponovi?
@@ -207,11 +208,6 @@ class Uprizoritev
     private $stroski;
 
     /**
-     * 
-     */
-    private $strosekUprizoritve;
-
-    /**
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Vaja", mappedBy="uprizoritev")
      * @var <Vaje>
      */
@@ -242,7 +238,7 @@ class Uprizoritev
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ZvrstUprizoritve")
      * @ORM\JoinColumn(name="zvrst_uprizoritve_id", referencedColumnName="id")
      * @Max\I18n(label="Zvrst uprizoritve",  description="Zvrst uprizoritve")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="select",empty="Izberi zvrst")
      * @var \Produkcija\Entity\ZvrstUprizoritve
      */
     private $zvrstUprizoritve;
@@ -251,7 +247,7 @@ class Uprizoritev
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ZvrstSurs")
      * @ORM\JoinColumn(name="zvrst_surs_id", referencedColumnName="id")
      * @Max\I18n(label="Zvrst SURS",  description="Zvrst SURS")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="select", empty="Izberi klasifikacijo")
      * @var \Produkcija\Entity\ZvrstSurs
      */
     private $zvrstSurs;

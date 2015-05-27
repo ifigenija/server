@@ -14,7 +14,7 @@ forms:
             - sort
 #            - alternacije
             - uprizoritev 
-            - privzeti
+#            - privzeti
             - tipFunkcije
             - sePlanira
             - dovoliPrekrivanje
