@@ -171,8 +171,9 @@ class Popa
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\StrosekUprizoritve", mappedBy="popa")
+     * @var <Stroski>
      */
-    private $strosekUprizoritve;
+    private $stroski;
 
     /**
      * ID za DDV klienta
@@ -377,9 +378,9 @@ class Popa
         return $this->trrji;
     }
 
-    public function getKontaktnaOseba()
+    public function getKontaktneOsebe()
     {
-        return $this->kontaktnaOseba;
+        return $this->kontaktneOsebe;
     }
 
     public function getPogodbe()
@@ -387,9 +388,9 @@ class Popa
         return $this->pogodbe;
     }
 
-    public function getStrosekUprizoritve()
+    public function getStroski()
     {
-        return $this->strosekUprizoritve;
+        return $this->stroski;
     }
 
     public function getIdddv()
@@ -527,9 +528,9 @@ class Popa
         return $this;
     }
 
-    public function setKontaktnaOseba($kontaktnaOseba)
+    public function setKontaktneOsebe($kontaktneOsebe)
     {
-        $this->kontaktnaOseba = $kontaktnaOseba;
+        $this->kontaktneOsebe = $kontaktneOsebe;
         return $this;
     }
 
@@ -539,9 +540,9 @@ class Popa
         return $this;
     }
 
-    public function setStrosekUprizoritve($strosekUprizoritve)
+    public function setStroski($stroski)
     {
-        $this->strosekUprizoritve = $strosekUprizoritve;
+        $this->stroski = $stroski;
         return $this;
     }
 

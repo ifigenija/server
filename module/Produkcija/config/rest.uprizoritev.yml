@@ -86,3 +86,7 @@ relation:
             enabled: true
             hydrator:
                 exclude: []    
+        stroski:
+            enabled: true
+            hydrator:
+                exclude: []    

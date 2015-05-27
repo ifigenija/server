@@ -35,15 +35,16 @@ use ApiTester;
 class PopaCest
 {
 
-    private $restUrl       = '/rest/popa';
-    private $drzavaUrl     = '/rest/drzava';
-    private $osebaUrl      = '/rest/oseba';
-    private $pnaslovUrl    = '/rest/postninaslov';
-    private $trrUrl        = '/rest/trr';
-    private $naslovUrl     = '/rest/naslov';
-    private $telefonskaUrl = '/rest/telefonska';
-    private $pogodbaUrl    = '/rest/pogodba';
-    private $id            = '00000000-0000-0000-0000-000000000000';
+    private $restUrl               = '/rest/popa';
+    private $drzavaUrl             = '/rest/drzava';
+    private $osebaUrl              = '/rest/oseba';
+    private $pnaslovUrl            = '/rest/postninaslov';
+    private $trrUrl                = '/rest/trr';
+    private $naslovUrl             = '/rest/naslov';
+    private $telefonskaUrl         = '/rest/telefonska';
+    private $pogodbaUrl            = '/rest/pogodba';
+    private $kontaktnaOsebaUrl     = '/rest/kontaktnaoseba';
+    private $id                    = '00000000-0000-0000-0000-000000000000';
     private $obj;
     private $obj2;
     private $objDrzava;
@@ -57,6 +58,11 @@ class PopaCest
     private $objTrr2;
     private $objPogodba1;
     private $objPogodba2;
+    private $strosekUprizoritveUrl = '/rest/strosekuprizoritve';
+    private $objStrosekUprizoritve1;
+    private $objStrosekUprizoritve2;
+    private $objKontaktna1;
+    private $objKontaktna2;
 
     public function _before(ApiTester $I)
     {
@@ -292,9 +298,9 @@ class PopaCest
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
         codecept_debug($list);
-        
+
         $I->assertNotEmpty($list);
-        $I->assertTrue($resp['state']['totalRecords'] >=2,"total records");
+        $I->assertTrue($resp['state']['totalRecords'] >= 2, "total records");
 //        $I->assertEquals("aa", $list[0]['naziv']);      //glede na sort  $$
     }
 
@@ -310,7 +316,7 @@ class PopaCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertTrue( $resp['state']['totalRecords']>= 1);
+        $I->assertTrue($resp['state']['totalRecords'] >= 1);
 //        $I->assertEquals("aa", $list[0]['naziv']);  // glede na sort $$
     }
 
@@ -321,14 +327,14 @@ class PopaCest
      * 
      * @param ApiTester $I
      */
-    public function ustvariRelacijoZOsebo(ApiTester $I)
-    {
-        $resp = $I->successfullyUpdate($this->restUrl, $this->obj['id'] . "/osebe/" . $this->objOseba1['id'], []);
-//        codecept_debug($resp);
-        // ustvarimo še eno relacijo 
-        $resp = $I->successfullyUpdate($this->restUrl, $this->obj['id'] . "/osebe/" . $this->objOseba2['id'], []);
-//        codecept_debug($resp);
-    }
+//    public function ustvariRelacijoZOsebo(ApiTester $I)
+//    {
+//        $resp = $I->successfullyUpdate($this->restUrl, $this->obj['id'] . "/osebe/" . $this->objOseba1['id'], []);
+////        codecept_debug($resp);
+//        // ustvarimo še eno relacijo 
+//        $resp = $I->successfullyUpdate($this->restUrl, $this->obj['id'] . "/osebe/" . $this->objOseba2['id'], []);
+////        codecept_debug($resp);
+//    }
 
     /**
      * preberemo relacije
@@ -337,16 +343,16 @@ class PopaCest
      * 
      * @param ApiTester $I
      */
-    public function preberiRelacijeZOsebami(ApiTester $I)
-    {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj['id'], "osebe", "");
-//        codecept_debug($resp);
-        $I->assertEquals(2, count($resp));
-
-        // get po oseba id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj['id'], "osebe", $this->objOseba1['id']);
-        $I->assertEquals(1, count($resp));
-    }
+//    public function preberiRelacijeZOsebami(ApiTester $I)
+//    {
+//        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj['id'], "osebe", "");
+////        codecept_debug($resp);
+//        $I->assertEquals(2, count($resp));
+//
+//        // get po oseba id  
+//        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj['id'], "osebe", $this->objOseba1['id']);
+//        $I->assertEquals(1, count($resp));
+//    }
 
     /**
      * brisanje relacij
@@ -354,12 +360,12 @@ class PopaCest
      * 
      * @param ApiTester $I
      */
-    public function deleteRelacijoZOsebo(ApiTester $I)
-    {
-        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->obj['id'], "osebe", $this->objOseba1['id']);
-
-        $resp = $I->failToGetRelation($this->restUrl, $this->obj['id'], "osebe", $this->objOseba1['id']);
-    }
+//    public function deleteRelacijoZOsebo(ApiTester $I)
+//    {
+//        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->obj['id'], "osebe", $this->objOseba1['id']);
+//
+//        $resp = $I->failToGetRelation($this->restUrl, $this->obj['id'], "osebe", $this->objOseba1['id']);
+//    }
 
     /**
      * preberemo relacije
@@ -466,20 +472,20 @@ class PopaCest
 
 
         //kreiramo še en zapis
-        $data = [
+        $data          = [
             'stevilka' => 'A1',
             'swift'    => 'A1',
             'bic'      => 'A1',
             'banka'    => 'A1',
             'popa'     => $this->obj2['id'],
-            'oseba'    => null, 
+            'oseba'    => null,
         ];
         $this->objTrr2 = $trr           = $I->successfullyCreate($this->trrUrl, $data);
         $I->assertNotEmpty($trr['id']);
         $I->assertEquals('A1', $trr['banka']);
     }
 
-        /**
+    /**
      *  kreiramo pogodbo
      * 
      * @depends create
@@ -488,7 +494,7 @@ class PopaCest
      */
     public function createVecPogodb(ApiTester $I)
     {
-        $data      = [
+        $data              = [
             'sifra'             => 'ZZ123',
             'vrednostVaje'      => 33.33,
             'vrednostPredstave' => 44.44,
@@ -499,7 +505,7 @@ class PopaCest
             'popa'              => $this->obj2['id'],
             'trr'               => $this->objTrr1['id'],
         ];
-        $this->objPogodba1 = $ent       = $I->successfullyCreate($this->pogodbaUrl, $data);
+        $this->objPogodba1 = $ent               = $I->successfullyCreate($this->pogodbaUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
@@ -518,8 +524,6 @@ class PopaCest
         $I->assertNotEmpty($ent['id']);
     }
 
-    
-    
     /**
      * preberemo relacije
      * 
@@ -551,7 +555,7 @@ class PopaCest
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "trrji", $this->objTrr1['id']);
         $I->assertEquals(1, count($resp));
     }
-    
+
     /**
      * preberemo relacije
      * 
@@ -568,5 +572,95 @@ class PopaCest
         $I->assertEquals(1, count($resp));
     }
 
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecStroskov(ApiTester $I)
+    {
+        $data                         = [
+            'naziv'      => 'popabb',
+            'vrednostDo' => 2.34,
+            'popa'       => $this->obj2['id'],
+        ];
+        $this->objStrosekUprizoritve1 = $ent                          = $I->successfullyCreate($this->strosekUprizoritveUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data                         = [
+            'naziv'      => 'popacc',
+            'vrednostDo' => 5.67,
+            'popa'       => $this->obj2['id'],
+        ];
+        $this->objStrosekUprizoritve2 = $ent                          = $I->successfullyCreate($this->strosekUprizoritveUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     * preberemo relacije
+     * @depends createVecStroskov
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSStroski(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "stroski", "");
+        $I->assertEquals(2, count($resp));
+
+        // get po popa id  
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "stroski", $this->objStrosekUprizoritve1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+        /**
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createVecKontaktnihOseb(ApiTester $I)
+    {
+        $data                = [
+            'status'   => 'AK',
+            'funkcija' => 'zz',
+            'opis'     => 'zz',
+            'popa'     => $this->obj2['id'],
+            'oseba'    => $this->objOseba2['id'],
+        ];
+        $I->assertTrue(TRUE);
+        $this->objKontaktna1 = $ent                 = $I->successfullyCreate($this->kontaktnaOsebaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // še en zapis
+        $data                = [
+            'status'   => 'AK',
+            'funkcija' => 'bb',
+            'opis'     => 'bb',
+            'popa'     => $this->obj2['id'],
+            'oseba'    => $this->objOseba2['id'],
+        ];
+        $this->objKontaktna2 = $ent                 = $I->successfullyCreate($this->kontaktnaOsebaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    
+    
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecKontaktnihOseb
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSKontaktnimiOsebami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "kontaktneOsebe", "");
+        $I->assertEquals(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "kontaktneOsebe", $this->objKontaktna1['id']);
+        $I->assertEquals(1, count($resp));
+    }
 
 }

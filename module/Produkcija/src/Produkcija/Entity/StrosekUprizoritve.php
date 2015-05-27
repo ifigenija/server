@@ -69,7 +69,7 @@ class StrosekUprizoritve
     private $uprizoritev;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="strosekUprizoritve")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="stroski")
      * @Max\I18n(label="Poslovni partner",  description="Poslovni partner")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa

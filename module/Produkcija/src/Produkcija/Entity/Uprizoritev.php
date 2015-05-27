@@ -204,6 +204,7 @@ class Uprizoritev
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\StrosekUprizoritve", mappedBy="uprizoritev")
+     * @var <Stroski>
      */
     private $stroski;
 

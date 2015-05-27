@@ -11,19 +11,17 @@ use ApiTester;
 /**
  * Description of StrosekUprizoritveCest
  * 
- * metode, ki jo podpira API
+ *      metode, ki jo podpira API
  *      - create
  *      - getlist
  *      - update
  *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto - je ni
- * na drugi strani relacije uprizoritev, popacest $$
- * relacije z drugimi entitetami
- * - ni to many relacij
- * - popa
- * - uprizoritev
- *       pri many to many relacijah testiraj : update, get (list+id), delete
+ * na drugi strani  
+ *      - uprizoritevCest, 
+ *  -popacest $$
+ *      relacije z drugimi entitetam - ni to many relacij
  *      getlist različne variante relacij
  *      - vse
  *      - uprizoritev
