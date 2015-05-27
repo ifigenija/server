@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM,
  * @Max\Lookup(ident="sifra",label="naziv",search={"ime","priimek","email"},extra={"ime","priimek", "email"})
  * @Max\I18n(label="Kontaktna oseba",plural="Kontaktne osebe")
  * @Max\Id(prefix="0009")
+ * @Max\Lookup(ident="sifra", label="polnoIme", search={"ime","priimek","psevdonim"}, extra={"ime","srednjeIme","priimek","psevdonim"})
  */
 class Oseba
         extends \Max\Entity\Base
@@ -390,6 +391,7 @@ class Oseba
 
     public function setNaziv($naziv)
     {
+       
         $this->naziv = $naziv;
         return $this;
     }

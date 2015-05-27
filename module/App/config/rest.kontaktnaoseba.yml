@@ -32,3 +32,5 @@ lists:
             - exclude: []
     vse: 
         filter:                          
+hydrator: 
+    byBalue: [ oseba ]
