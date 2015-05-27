@@ -18,19 +18,18 @@ class AlternacijaFixture
 
     public function load(ObjectManager $manager)
     {
-        // $$ začasno izkjlučimo
-//        foreach ($this->getData() as $value) {
-//            $this->populateAlternacija($manager, $value);
-//        }
-//
-//        $manager->flush();
+        foreach ($this->getData() as $value) {
+            $this->populateAlternacija($manager, $value);
+        }
+
+        $manager->flush();
     }
 
     // $$ morda bo še potrebno implementirati funkcijo getOrder()
 
     public function getDependencies()
     {
-        return array('IfiFixture\FunkcijaFixture'); // fixture classes fixture is dependent on , 
+        return array('IfiFixture\FunkcijaFixture','IfiFixture\OsebaFixture'); // fixture classes fixture is dependent on , 
     }
 
     /**
@@ -42,13 +41,13 @@ class AlternacijaFixture
     public function populateAlternacija($manager, $v)
     {
 
-        $rep     = $manager->getRepository('Produkcija\Entity\Alternacija');
+        $rep = $manager->getRepository('Produkcija\Entity\Alternacija');
 //        $tipFunR = $manager->getRepository('Produkcija\Entity\TipFunkcije');
 
-        $o = $rep->findOneByNaziv(trim($v[0]));
+        $o = $rep->findOneBySifra(trim($v[0]));
         if (!$o) {
             $o = new \Produkcija\Entity\Alternacija();
-            $o->setNaziv(trim($v[0]));
+            $o->setSifra(trim($v[0]));
             $manager->persist($o);
         }
 //            'Zaposlen     => true,
@@ -57,23 +56,31 @@ class AlternacijaFixture
 //            'Oseba        => $this->lookOseba['id'],
 //            'Koprodukcija => $this->objKoprodukcija['id'],
 //            'Pogodba      => $this->objPogodba['id'],
-        
-        $o->set($v[]);
-//        $o->setVelikost($v[2]);
-//        $o->setPomembna($v[3]);
-//        $o->setSort($v[4]);
-//        $o->setSePlanira($v[5]);
-//        $o->setDovoliPrekrivanje($v[6]);
-//        $getref = $this->getReference($v[7]);
-//        $o->setUprizoritev($getref);
-//        if ($v[8]) {
-//            $getref = $this->getReference($v[8]); 
-//            $o->setPrivzeti($getref); 
-//        }
-//
-//        // ker ni v isti skupini fixtur-jev, ne deluje getReference
-//        $value = $tipFunR->findOneByIme($v[9]);
-//        $o->setTipFunkcije($value);
+
+        $o->setZaposlen($v[1]);
+
+        $getref = $this->getReference($v[2]);
+        $o->setFunkcija($getref);
+        if ($v[3]) {
+            // $$ še ni implementirano
+            $getref = $this->getReference($v[3]);
+            $o->setSodelovanje($getref);
+        }
+
+        $getref = $this->getReference($v[4]);
+        $o->setOseba($getref);
+
+        if ($v[5]) {
+            // $$ še ni implementirano
+            $getref = $this->getReference($v[5]);
+            $o->setKoprodukcija($getref);
+        }
+        if ($v[5]) {
+            // $$ še ni implementirano
+            $getref = $this->getReference($v[5]);
+            $o->setPogodba($getref);
+        }
+
 
         $referenca = 'Alternacija-' . $v[0];
         var_dump($referenca);
@@ -83,8 +90,8 @@ class AlternacijaFixture
     public function getData()
     {
         return [
-            ['Hipolita', 'igralec', 'velika', TRUE, 9, true, true, 'Uprizoritev-0002', null, 'Igralec ali animator',],
-            ['Tezej', 'igralec', 'velika', TRUE, 9, true, true, 'Uprizoritev-0002', null, 'Igralec ali animator',],
+            ['0001', false, 'Funkcija-Tezej', null, 'Oseba-0009', null, null,],
+            ['0002', false, 'Funkcija-Režija', null, 'Oseba-0010', null, null,],
         ];
     }
 

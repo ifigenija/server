@@ -321,7 +321,7 @@ class AlternacijaCest
         $list = $resp['data'];
         codecept_debug($resp);
 
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
 //        $I->assertEquals("xx", $list[0]['status']);      // $$ odvisno od sortiranja
     }
@@ -338,7 +338,7 @@ class AlternacijaCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
 //        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
     }
 

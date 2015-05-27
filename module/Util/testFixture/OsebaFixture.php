@@ -60,6 +60,10 @@ class OsebaFixture
         $o->setDrzavaRojstva($v[14]);
         $o->setKrajRojstva($v[15]);
 //        $o->setUser($v[15]);
+
+        $referenca = 'Oseba-' . $v[0];
+        var_dump($referenca);
+        $this->addReference($referenca, $o);
     }
 
     public function getData()
