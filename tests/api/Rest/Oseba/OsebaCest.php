@@ -76,6 +76,8 @@ class OsebaCest
     private $objSodelovanje2;
     private $objZaposlitev1;
     private $objZaposlitev2;
+    private $lookFunkcija;
+    
 
     public function _before(ApiTester $I)
     {

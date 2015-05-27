@@ -29,7 +29,7 @@ class FunkcijaFixture
 
     public function getDependencies()
     {
-        return array('IfiFixture\UprizoritevFixture'); // fixture classes fixture is dependent on 
+        return array('IfiFixture\UprizoritevFixture'); // fixture classes fixture is dependent on , $$ rb dodaj še AlternacijaFixture, ko bo
     }
 
     /**
@@ -50,16 +50,6 @@ class FunkcijaFixture
             $o->setNaziv(trim($v[0]));
             $manager->persist($o);
         }
-//            'Podrocje          => 'tehnik',
-//            'Velikost          => 'mala',
-//            'Pomembna          => false,
-//            'Sort              => 4,
-//            'SePlanira         => true,
-//            'DovoliPrekrivanje => false,
-//            'Uprizoritev       => $this->objUprizoritev['id'],
-//            'Privzeti          => null,
-//            'TipFunkcije       => $this->lookTipFunkcije['id'],
-
 
         $o->setPodrocje($v[1]);
         $o->setVelikost($v[2]);
@@ -70,7 +60,8 @@ class FunkcijaFixture
         $getref = $this->getReference($v[7]);
         $o->setUprizoritev($getref);
         if ($v[8]) {
-            $o->setPrivzeti($v[8]); 
+            $getref = $this->getReference($v[8]); 
+            $o->setPrivzeti($getref); 
         }
 
         // ker ni v isti skupini fixtur-jev, ne deluje getReference
