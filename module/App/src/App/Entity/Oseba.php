@@ -9,8 +9,7 @@ use Doctrine\ORM\Mapping as ORM,
  * Entiteta za osebe
  * 
  * @ORM\Entity(repositoryClass="App\Repository\Osebe")
- * @Max\Lookup(ident="sifra",label="naziv",search={"ime","priimek","email"},extra={"ime","priimek", "email"})
- * @Max\I18n(label="Kontaktna oseba",plural="Kontaktne osebe")
+ * @Max\I18n(label="Oseba",plural="Osebe")
  * @Max\Id(prefix="0009")
  * @Max\Lookup(ident="sifra", label="polnoIme", search={"ime","priimek","psevdonim"}, extra={"ime","srednjeIme","priimek","psevdonim"})
  */
@@ -80,6 +79,15 @@ class Oseba
      */
     private $srednjeIme;
 
+    
+    /**
+     * @ORM\Column(nullable=true)
+     * @Max\I18n(label="Srednje ime", description="Srednje ime osebe ")
+     * @var string
+     */
+    private $polnoIme;
+
+    
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="Psevdonim", description="Psevdonim osebe ")
@@ -231,15 +239,7 @@ class Oseba
         $this->expect($this->sifra, "Šifra je obvezen podatek", 1000303);
     }
 
-    /**
-     * Vrne polno ime Osebe. Uporablja se za prikaze v seznamih 
-     * 
-     * @return type
-     */
-    function getPolnoIme()
-    {
-        return sprintf("%s %s %s", $this->ime, $this->srednjeIme, $this->priimek);
-    }
+
 
     public function getId()
     {
@@ -516,5 +516,18 @@ class Oseba
         $this->sodelovanja = $sodelovanja;
         return $this;
     }
+    
+    public function getPolnoIme()
+    {
+        return $this->polnoIme;
+    }
+
+    public function setPolnoIme($polnoIme)
+    {
+        $this->polnoIme = $polnoIme;
+        return $this;
+    }
+
+
 
 }

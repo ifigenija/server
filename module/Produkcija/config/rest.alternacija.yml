@@ -14,10 +14,10 @@ forms:
             - sodelovanje
             - oseba
             - koprodukcija
-            - pogodba
-    default: 
+            - pogodba 
         hydrator:
-            - exclude: []
+            lookups: [oseba]
+            
 lists:
     default: 
         filter:
@@ -29,7 +29,7 @@ lists:
                       targetEntity: Produkcija\Entity\Funkcija
                       required: false
         hydrator:
-            - exclude: []
+            lookups: [oseba]
     vse: 
         filter:
             elements: 

@@ -47,6 +47,7 @@ class OsebaFixture
         $o->setPriimek($v[3]);
         $o->setFunkcija($v[4]);
         $o->setSrednjeIme($v[5]);
+        $o->setPolnoIme(sprintf('%s %s %s', $v[2], $v[5], $v[3]));
         $o->setPsevdonim($v[6]);
         $o->setEmail($v[7]);
 

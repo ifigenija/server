@@ -27,7 +27,9 @@ class DecorateEntity
         $dl      = strlen($entity);
 
         foreach ($classes as $class) {
-            if (strtolower(substr($class, -$dl)) === strtolower($entity)) {
+            $parts = explode('\\', $class);
+            $name = array_pop($parts);
+            if (strtolower($name) === strtolower($entity)) {
                 return $class;
             }
         }
