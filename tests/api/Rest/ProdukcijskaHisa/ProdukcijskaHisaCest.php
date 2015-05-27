@@ -174,28 +174,22 @@ class ProdukcijskaHisaCest
     public function createVecKoproducentov(ApiTester $I)
     {
         $data                   = [
-            'odstotekFinanciranja' => 1.23,
-            'vrstaKoproducenta'    => 'zz',
+            'odstotekFinanciranja' => 30,
             'uprizoritev'          => $this->objUprizoritev['id'],
             'koproducent'          => $this->objProdukcijskaHisa2['id'],
         ];
         $I->assertTrue(true);
         $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['vrstaKoproducenta'], 'zz');
 
         // kreiram še en zapis
         $data                   = [
             'odstotekFinanciranja' => 7.90,
-            'vrstaKoproducenta'    => 'yy',
             'uprizoritev'          => $this->objUprizoritev['id'],
             'koproducent'          => $this->objProdukcijskaHisa2['id'],
         ];
         $this->objKoprodukcija2 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['vrstaKoproducenta'], 'yy');
     }
 
     /**
