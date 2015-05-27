@@ -13,9 +13,9 @@ use ApiTester;
  *       - delete
  *      validate metodo za entiteto
  *      relacije z drugimi entitetami
- * - kontaktnaOseba           
+ *      - kontaktnaOseba     O2M      
  *          . get (id, list)
- * - naslovi        $$ 2M (morda začasno ne deluje zaradi boolean? 
+ *      - naslovi        O2M (morda začasno ne deluje zaradi boolean? 
  *      - telefonske     O2M 
  *      - trrji          O2M 
  *      - pogodbe        O2M 
@@ -77,7 +77,6 @@ class OsebaCest
     private $objZaposlitev1;
     private $objZaposlitev2;
     private $lookFunkcija;
-    
 
     public function _before(ApiTester $I)
     {
@@ -110,6 +109,15 @@ class OsebaCest
     {
         $this->lookUser = $ent            = $I->lookupEntity("user", "ana@ifigenija.si", false);
         $I->assertNotEmpty($ent);
+    }
+
+    /**
+     * @param ApiTester $I
+     */
+    public function lookupFunkcijo(ApiTester $I)
+    {
+        $this->lookFunkcija = $look               = $I->lookupEntity("funkcija", "Tezej", false);
+        $I->assertNotEmpty($look);
     }
 
     /**
@@ -393,7 +401,7 @@ class OsebaCest
 
     /**
      * Dodam poštni naslov na osebo 
-     * @depends create
+     * @depends create 
      * 
      * @param ApiTester $I
      */
@@ -512,39 +520,6 @@ class OsebaCest
     }
 
     /**
-     * preberemo relacij
-     * @depends ustvariRelacijoSPopa
-     * 
-     * @param ApiTester $I
-     */
-    public function preberiRelacijeSPopa(ApiTester $I)
-    {
-        // GET   http://ifigenija.local:8080/rest/oseba/00090000-555b-0689-36e7-f9a8471d5932/popa?XDEBUG_SESSION_START=netbeans-xdebug
-        // get list
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "popa", "");
-        $I->assertEquals(2, count($resp));
-
-        // get po popa id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "popa", $this->lookPopa1['id']);
-        $I->assertEquals(1, count($resp));
-    }
-
-    /**
-     * brisanje relacij
-     * @depends ustvariRelacijoSPopa
-     * 
-     * @param ApiTester $I
-     */
-//    public function deleteRelacijoSPopa(ApiTester $I)
-//    {
-//        // primer:
-//        // DELETE   http://ifigenija.local:8080/rest/oseba/00090000-555b-31ed-d438-f3f46c26b59e/popa/00080000-555b-31ed-7683-d4cdd224d2b5?XDEBUG_SESSION_START=netbeans-xdebug
-//        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->obj2['id'], "popa", $this->lookPopa1['id']);
-//
-//        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "popa", $this->lookPopa1['id']);
-//    }
-
-    /**
      * kreiramo osebo, test validacije
      * 
      * @param ApiTester $I
@@ -618,7 +593,6 @@ class OsebaCest
             'oseba'    => $this->obj2['id'],
         ];
         $this->objTelefonska1 = $ent                  = $I->successfullyCreate($this->telefonskaUrl, $data);
-        $I->assertTrue(TRUE);
         $I->assertNotEmpty($ent['id']);
 
         // še en zapis
@@ -739,6 +713,7 @@ class OsebaCest
     /**
      * 
      * @depends create
+     * @depends lookupFunkcijo
      * 
      * @param ApiTester $I
      */
@@ -746,7 +721,7 @@ class OsebaCest
     {
         $data                  = [
             'zaposlen'     => true,
-            'funkcija'     => null,
+            'funkcija'     => $this->lookFunkcija['id'],
             'sodelovanje'  => NULL,
             'oseba'        => $this->obj2['id'],
             'koprodukcija' => null,
@@ -757,7 +732,7 @@ class OsebaCest
 
         $data                  = [
             'zaposlen'     => true,
-            'funkcija'     => null,
+            'funkcija'     => $this->lookFunkcija['id'],
             'sodelovanje'  => NULL,
             'oseba'        => $this->obj2['id'],
             'koprodukcija' => null,
@@ -908,7 +883,7 @@ class OsebaCest
     /**
      * @depends create
      */
-    public function delete(ApiTester $I)
+    public function delete(ApiTester $I)  // $$ začasno ne brišemo, da vidimo orphan
     {
         $oseba = $I->successfullyDelete($this->restUrl, $this->obj['id']);
 

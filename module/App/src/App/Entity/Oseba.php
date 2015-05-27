@@ -220,12 +220,6 @@ class Oseba
     private $sodelovanja;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
-     * @ORM\JoinColumn(name="naslov_id", referencedColumnName="id")
-     */
-    private $naslov;
-
-    /**
      * 
      * @param string $mode
      */
