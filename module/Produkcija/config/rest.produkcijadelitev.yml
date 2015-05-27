@@ -7,9 +7,6 @@ forms:
         elements:
 #            - id
             - odstotekFinanciranja
-#            - alternacije
-            - uprizoritev
-            - koproducent
             - nasStrosek
             - lastnaSredstva
             - zaproseno
@@ -18,6 +15,9 @@ forms:
             - tantiemi
             - skupniStrosek
             - zaprosenProcent
+#            - alternacije
+            - uprizoritev
+            - koproducent
 lists:
     default: 
         filter:

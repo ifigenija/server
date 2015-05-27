@@ -221,12 +221,6 @@ class Oseba
     private $sodelovanja;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
-     * @ORM\JoinColumn(name="naslov_id", referencedColumnName="id")
-     */
-    private $naslov;
-
-    /**
      * 
      * @param string $mode
      */
@@ -370,11 +364,6 @@ class Oseba
     public function getSodelovanja()
     {
         return $this->sodelovanja;
-    }
-
-    public function getNaslov()
-    {
-        return $this->naslov;
     }
 
     public function setId($id)
@@ -525,12 +514,6 @@ class Oseba
     public function setSodelovanja($sodelovanja)
     {
         $this->sodelovanja = $sodelovanja;
-        return $this;
-    }
-
-    public function setNaslov($naslov)
-    {
-        $this->naslov = $naslov;
         return $this;
     }
 

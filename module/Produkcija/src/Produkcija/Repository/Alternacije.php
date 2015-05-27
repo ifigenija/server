@@ -22,10 +22,10 @@ class Alternacije
 {
     protected $sortOptions = [
         "default" => [
-            "id" => ["alias" => "p.id"]
+            "sifra" => ["alias" => "p.sifra"]
         ],
         "vse" => [
-            "id" => ["alias" => "p.id"]
+            "sifra" => ["alias" => "p.sifra"]
             
             
         ]
@@ -59,14 +59,28 @@ class Alternacije
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.id', ':id');
+            $naz = $e->like('p.sifra', ':sifra');
 
             $qb->andWhere($e->orX($naz));
 
-            $qb->setParameter('id', "{$options['q']}%", "string");
+            $qb->setParameter('sifra', "{$options['q']}%", "string");
         }
 
         return $qb;
+    }
+
+     /**
+     * 
+     * @param Alternacija $object
+     * @param array $params
+     */
+    public function create($object, $params = null)
+    {
+        if (empty($object->getSifra())) {
+            $num = $this->getServiceLocator()->get('stevilcenje.generator');
+            $object->setSifra($num->generate('alternacija'));
+        }
+        parent::create($object, $params);
     }
 
     

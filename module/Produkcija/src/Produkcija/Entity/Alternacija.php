@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping AS ORM,
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Alternacije")
+ * @Max\Lookup
  * @Max\I18n(label="Alternacija",plural="Alternacije")
  * @Max\Id(prefix="0012")
  */
@@ -21,9 +22,16 @@ class Alternacija
      * @Max\I18n(label="ID", description="ID alternacije")
      * @Max\Ui(type="id")
      * @var string
-
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", unique=true, nullable=false)
+     * @Max\I18n(label="Šifra", description="Šifra alternacije")
+     * @Max\Ui(type="sifra",ident=true )
+     * @var string
+     */
+    private $sifra;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -67,12 +75,6 @@ class Alternacija
      * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="alternacija", fetch="EXTRA_LAZY")
      */
     private $storitve;
-
-    /**
-     * 
-     * 
-     */
-    private $vloga;
 
     /**
      * 
@@ -124,15 +126,54 @@ class Alternacija
     {
         
     }
-
     public function getId()
     {
         return $this->id;
     }
 
+    public function getSifra()
+    {
+        return $this->sifra;
+    }
+
     public function getZaposlen()
     {
         return $this->zaposlen;
+    }
+
+    public function getZacetek()
+    {
+        return $this->zacetek;
+    }
+
+    public function getKonec()
+    {
+        return $this->konec;
+    }
+
+    public function getOpomba()
+    {
+        return $this->opomba;
+    }
+
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    public function getPrivzeti()
+    {
+        return $this->privzeti;
+    }
+
+    public function getAktivna()
+    {
+        return $this->aktivna;
+    }
+
+    public function getStoritve()
+    {
+        return $this->storitve;
     }
 
     public function getFunkcija()
@@ -166,9 +207,57 @@ class Alternacija
         return $this;
     }
 
+    public function setSifra($sifra)
+    {
+        $this->sifra = $sifra;
+        return $this;
+    }
+
     public function setZaposlen($zaposlen)
     {
         $this->zaposlen = $zaposlen;
+        return $this;
+    }
+
+    public function setZacetek($zacetek)
+    {
+        $this->zacetek = $zacetek;
+        return $this;
+    }
+
+    public function setKonec($konec)
+    {
+        $this->konec = $konec;
+        return $this;
+    }
+
+    public function setOpomba($opomba)
+    {
+        $this->opomba = $opomba;
+        return $this;
+    }
+
+    public function setSort($sort)
+    {
+        $this->sort = $sort;
+        return $this;
+    }
+
+    public function setPrivzeti($privzeti)
+    {
+        $this->privzeti = $privzeti;
+        return $this;
+    }
+
+    public function setAktivna($aktivna)
+    {
+        $this->aktivna = $aktivna;
+        return $this;
+    }
+
+    public function setStoritve($storitve)
+    {
+        $this->storitve = $storitve;
         return $this;
     }
 
@@ -202,6 +291,5 @@ class Alternacija
         return $this;
     }
 
-    
 
 }

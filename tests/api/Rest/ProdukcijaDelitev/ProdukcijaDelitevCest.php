@@ -163,8 +163,15 @@ class ProdukcijaDelitevCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'odstotekFinanciranja' => 1.23,
-            'nasStrosek'    => true,
+            'odstotekFinanciranja' => 40,
+            'nasStrosek'           => TRUE,
+            'lastnaSredstva'       => 6.78,
+            'zaproseno'            => 15.12,
+            'drugiJavni'           => 16.78,
+            'avtorskih'            => 2.34,
+            'tantiemi'             => 5.67,
+            'skupniStrosek'        => 34.56,
+            'zaprosenProcent'      => 55.5,
             'uprizoritev'          => $this->objUprizoritev['id'],
             'koproducent'          => $this->objProdukcijskaHisa['id'],
         ];
@@ -176,14 +183,13 @@ class ProdukcijaDelitevCest
         // kreiram še en zapis
         $data                        = [
             'odstotekFinanciranja' => 7.90,
-            'nasStrosek'    => false,
+            'nasStrosek'           => false,
             'uprizoritev'          => $this->objUprizoritev['id'],
             'koproducent'          => $this->objProdukcijskaHisa['id'],
         ];
         $this->objProdukcijaDelitev2 = $ent                         = $I->successfullyCreate($this->restUrl, $data);
         $I->assertFalse($ent['nasStrosek']);
         codecept_debug($ent);
-        
     }
 
     /**
@@ -217,8 +223,6 @@ class ProdukcijaDelitevCest
         $I->assertEquals('zz', $oseba['ime']);
         $I->assertNotEmpty($oseba['id']);
     }
-
-
 
     /**
      * preberi vse zapise od uprizoritve
@@ -264,11 +268,11 @@ class ProdukcijaDelitevCest
     public function update(ApiTester $I)
     {
         $ent                         = $this->obj;
-        $ent['odstotekFinanciranja'] = 7.32;
+        $ent['odstotekFinanciranja'] = 70;
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['odstotekFinanciranja'], 7.32);
+        $I->assertEquals($entR['odstotekFinanciranja'], 70);
     }
 
     /**
@@ -282,8 +286,15 @@ class ProdukcijaDelitevCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertNotEmpty($ent['id']);
-//        $I->assertEquals($ent['odstotekFinanciranja'], 7.32);     
-        $I->assertEquals($ent['odstotekFinanciranja'], 7);          //$$ rb ni še jasno,
+        $I->assertEquals($ent['odstotekFinanciranja'], 70);  
+        $I->assertEquals($ent['nasStrosek'], TRUE);
+        $I->assertEquals($ent['lastnaSredstva'], 6.78);
+        $I->assertEquals($ent['zaproseno'], 15.12);
+        $I->assertEquals($ent['drugiJavni'], 16.78);
+        $I->assertEquals($ent['avtorskih'], 2.34);
+        $I->assertEquals($ent['tantiemi'], 5.67);
+        $I->assertEquals($ent['skupniStrosek'], 34.56);
+        $I->assertEquals($ent['zaprosenProcent'], 55.5);
         $I->assertEquals($ent['uprizoritev'], $this->objUprizoritev['id']);
         $I->assertEquals($ent['koproducent'], $this->objProdukcijskaHisa['id']);
     }
@@ -314,5 +325,4 @@ class ProdukcijaDelitevCest
 //        $resp = $I->successfullyGetRelation($this->restUrl, $this->objProdukcijaDelitev2['id'], "alternacije", $this->objAlternacija1['id']);
 //        $I->assertEquals(1, count($resp));
 //    }
-
 }

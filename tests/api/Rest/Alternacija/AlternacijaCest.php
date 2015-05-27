@@ -39,8 +39,11 @@ class AlternacijaCest
     private $pogodbaUrl          = '/rest/pogodba';
     private $obj;
     private $objOseba;
+    private $lookOseba;
     private $objFunkcija;
+    private $lookFunkcija;
     private $objUprizoritev;
+    private $lookUprizoritev;
     private $objZaposlitev;
     private $objProdukcijskaHisa;
     private $objKoprodukcija;
@@ -57,98 +60,127 @@ class AlternacijaCest
     }
 
     /**
-     *  kreiramo  osebo
-     * 
      * @param ApiTester $I
      */
-    public function createOsebo(ApiTester $I)
+    public function lookupFunkcijo(ApiTester $I)
     {
-        $data = [
-            'naziv'         => 'zz',
-            'ime'           => 'zz',
-            'priimek'       => 'zz',
-            'funkcija'      => 'zz',
-            'srednjeIme'    => 'zz',
-            'psevdonim'     => 'zz',
-            'email'         => 'x@xxx.xx',
-            'datumRojstva'  => '1973-28-03T04:30:00',
-            'emso'          => 'ZZ',
-            'davcna'        => 'ZZ123',
-            'spol'          => 'M',
-            'opombe'        => 'zz',
-            'drzavljanstvo' => 'zz',
-            'drzavaRojstva' => 'zz',
-            'krajRojstva'   => 'zz',
-            'user'          => null,
-        ];
-
-        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
-
-        $I->assertEquals('zz', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
+        $this->lookFunkcija = $look               = $I->lookupEntity("funkcija", "Tezej", false);
+        $I->assertNotEmpty($look);
     }
 
     /**
      * 
      * @param ApiTester $I
      */
-    public function createUprizoritev(ApiTester $I)
+    public function lookupOsebo(ApiTester $I)
     {
-        $data                 = [
-            'faza'             => 'predprodukcija-ideja',
-            'naslov'           => 'zz',
-            'podnaslov'        => 'zz',
-            'delovniNaslov'    => 'zz',
-            'datumPremiere'    => '2010-02-01T00:00:00+0100',
-            'stOdmorov'        => 1,
-            'avtor'            => 'zz',
-            'gostujoca'        => true,
-            'trajanje'         => 2,
-            'opis'             => 'zz',
-            'arhIdent'         => 'zz',
-            'arhOpomba'        => 'zz',
-            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
-            'sloAvtor'         => true,
-            'kratkiNaslov'     => 'zz',
-//            'besedilo'         => $this->objBesedilo['id'],
-            'besedilo'         => NULL,
-            'zvrstUprizoritve' => null,
-            'zvrstSurs'        => null,
-        ];
-        $this->objUprizoritev = $ent                  = $I->successfullyCreate($this->uprizoritevUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['opis'], 'zz');
+        $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0006", false);
+        $I->assertNotEmpty($ent);
     }
+    
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev = $look             = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
+    }
+
+    /**
+     *  kreiramo  osebo
+     * 
+     * @param ApiTester $I
+     */
+//    public function createOsebo(ApiTester $I)
+//    {
+//        $data = [
+//            'naziv'         => 'zz',
+//            'ime'           => 'zz',
+//            'priimek'       => 'zz',
+//            'funkcija'      => 'zz',
+//            'srednjeIme'    => 'zz',
+//            'psevdonim'     => 'zz',
+//            'email'         => 'x@xxx.xx',
+//            'datumRojstva'  => '1973-28-03T04:30:00',
+//            'emso'          => 'ZZ',
+//            'davcna'        => 'ZZ123',
+//            'spol'          => 'M',
+//            'opombe'        => 'zz',
+//            'drzavljanstvo' => 'zz',
+//            'drzavaRojstva' => 'zz',
+//            'krajRojstva'   => 'zz',
+//            'user'          => null,
+//        ];
+//
+//        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
+//
+//        $I->assertEquals('zz', $oseba['ime']);
+//        $I->assertNotEmpty($oseba['id']);
+//    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+//    public function createUprizoritev(ApiTester $I)
+//    {
+//        $data                 = [
+//            'faza'             => 'predprodukcija-ideja',
+//            'naslov'           => 'zz',
+//            'podnaslov'        => 'zz',
+//            'delovniNaslov'    => 'zz',
+//            'datumPremiere'    => '2010-02-01T00:00:00+0100',
+//            'stOdmorov'        => 1,
+//            'avtor'            => 'zz',
+//            'gostujoca'        => true,
+//            'trajanje'         => 2,
+//            'opis'             => 'zz',
+//            'arhIdent'         => 'zz',
+//            'arhOpomba'        => 'zz',
+//            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
+//            'sloAvtor'         => true,
+//            'kratkiNaslov'     => 'zz',
+////            'besedilo'         => $this->objBesedilo['id'],
+//            'besedilo'         => NULL,
+//            'zvrstUprizoritve' => null,
+//            'zvrstSurs'        => null,
+//        ];
+//        $this->objUprizoritev = $ent                  = $I->successfullyCreate($this->uprizoritevUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        codecept_debug($ent);
+//        $I->assertEquals($ent['opis'], 'zz');
+//    }
 
     /**
      *  napolnimo vsaj en zapis
      * 
      * @param ApiTester $I
      */
-    public function createFunkcijo(ApiTester $I)
-    {
-        $data              = [
-            'podrocje'    => 'igralec',
-            'naziv'       => 'zz',
-            'velikost'    => 'mala',
-            'pomembna'    => true,
-            'sort'        => 2,
-            'sePlanira' => true,
-            'dovoliPrekrivanje' => false,
-            'uprizoritev' => $this->objUprizoritev['id'],
-            'privzeti'    => null,
-            'tipFunkcije' => null,
-        ];
-        $this->objFunkcija = $ent               = $I->successfullyCreate($this->funkcijaUrl, $data);
-        $I->assertEquals($ent['naziv'], 'zz');
-        $I->assertNotEmpty($ent['id']);
-    }
+//    public function createFunkcijo(ApiTester $I)
+//    {
+//        $data              = [
+//            'podrocje'    => 'igralec',
+//            'naziv'       => 'zz',
+//            'velikost'    => 'mala',
+//            'pomembna'    => true,
+//            'sort'        => 2,
+//            'sePlanira' => true,
+//            'dovoliPrekrivanje' => false,
+//            'uprizoritev' => $this->objUprizoritev['id'],
+//            'privzeti'    => null,
+//            'tipFunkcije' => null,
+//        ];
+//        $this->objFunkcija = $ent               = $I->successfullyCreate($this->funkcijaUrl, $data);
+//        $I->assertEquals($ent['naziv'], 'zz');
+//        $I->assertNotEmpty($ent['id']);
+//    }
 
     /**
      *  kreiramo zapis
      * 
-     * @depends createOsebo
+     * @depends lookupOsebo
      * 
      * @param ApiTester $I
      */
@@ -193,7 +225,7 @@ class AlternacijaCest
      *  kreiramo zapis
      * 
      * @depends createProdukcijskaHisa
-     * @depends createUprizoritev
+     * @depends lookupUprizoritev
      * 
      * @param ApiTester $I
      */
@@ -202,8 +234,8 @@ class AlternacijaCest
         $data                  = [
             'odstotekFinanciranja' => 1.23,
             'nasStrosek'           => true,
-            'uprizoritev'          => $this->objUprizoritev,
-            'koproducent'          => $this->objProdukcijskaHisa,
+            'uprizoritev'          => $this->lookUprizoritev['id'],
+            'koproducent'          => $this->objProdukcijskaHisa['id'],
         ];
         $this->objKoprodukcija = $ent                   = $I->successfullyCreate($this->koprodukcijaUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -224,7 +256,7 @@ class AlternacijaCest
             'vrednostUre'       => 22.22,
             'aktivna'           => false,
             'opis'              => 'zz',
-            'oseba'             => $this->objOseba['id'],
+            'oseba'             => $this->lookOseba['id'],
             'popa'              => null,
             'trr'               => null,
         ];
@@ -237,8 +269,8 @@ class AlternacijaCest
     /**
      *  kreiramo zapis
      * 
-     * @depends createOsebo
-     * @depends createFunkcijo
+     * @depends lookupOsebo
+     * @depends lookupFunkcijo
      * @depends createZaposlitev
      * @depends createKoprodukcijo
      * @depends createPogodbo
@@ -249,9 +281,9 @@ class AlternacijaCest
     {
         $data      = [
             'zaposlen'     => true,
-            'funkcija'     => $this->objFunkcija['id'],
+            'funkcija'     => $this->lookFunkcija['id'],
             'sodelovanje'  => $this->objZaposlitev['id'],
-            'oseba'        => $this->objOseba['id'],
+            'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => $this->objKoprodukcija['id'],
             'pogodba'      => $this->objPogodba['id'],
         ];
@@ -263,9 +295,9 @@ class AlternacijaCest
         // kreiram še en zapis
         $data = [
             'zaposlen'     => true,
-            'funkcija'     => $this->objFunkcija['id'],
+            'funkcija'     => $this->lookFunkcija['id'],
             'sodelovanje'  => null,
-            'oseba'        => $this->objOseba['id'],
+            'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => $this->objKoprodukcija['id'],
             'pogodba'      => null,
         ];
@@ -283,13 +315,13 @@ class AlternacijaCest
      */
     public function getListPoFunkciji(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?funkcija=" . $this->objFunkcija['id'];
+        $listUrl = $this->restUrl . "?funkcija=" . $this->lookFunkcija['id'];
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
         codecept_debug($resp);
 
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
 //        $I->assertEquals("xx", $list[0]['status']);      // $$ odvisno od sortiranja
     }
@@ -306,7 +338,7 @@ class AlternacijaCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
 //        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
     }
 
@@ -338,9 +370,9 @@ class AlternacijaCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['zaposlen'], false);
-        $I->assertEquals($ent['funkcija'], $this->objFunkcija['id']);
+        $I->assertEquals($ent['funkcija'], $this->lookFunkcija['id']);
         $I->assertEquals($ent['sodelovanje'], $this->objZaposlitev['id']);
-        $I->assertEquals($ent['oseba'], $this->objOseba['id']);
+        $I->assertEquals($ent['oseba'], $this->lookOseba['id']);
         $I->assertEquals($ent['koprodukcija'], $this->objKoprodukcija['id'], "napačna koprodukcija");
         $I->assertEquals($ent['pogodba'], $this->objPogodba['id']);
     }

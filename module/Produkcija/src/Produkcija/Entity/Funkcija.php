@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping AS ORM,
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Funkcije")
+ * @Max\Lookup(ident="naziv",search={"naziv"},)
  * @Max\I18n(label="Funkcija",plural="Funkcije")
  * @Max\Id(prefix="0013")
  */
@@ -35,15 +36,24 @@ class Funkcija
     private $podrocje;
 
     /**
-     * V to polje se vpiše poljubno - bolj specifično ime funkcije za to uprizoritev,
-     * kot je tip funkcije, ki je standariziran glede na SLOGI (Slovenski gledališki inštitut) 
+     * V to polje se vpiše ime funkcije kot npr. Romeo, Julija,Tezej ipd.
      * 
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      * @Max\I18n(label="Naziv", description="Naziv funkcije")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
     private $naziv;
+
+    /**
+     * V to polje se vpiše poljubno - bolj specifično ime funkcije za to uprizoritev,
+     * kot je tip funkcije, ki je standariziran glede na SLOGI (Slovenski gledališki inštitut) 
+     * 
+     * @ORM\Column(type="string", nullable=true)
+     * @Max\I18n(label="Komentar", description="Komentar funkcije")
+     * @var string
+     */
+    private $komentar;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -128,8 +138,6 @@ class Funkcija
      */
     private $tipFunkcije;
 
-  
-
     public function validate($mode = 'update')
     {
         
@@ -150,6 +158,11 @@ class Funkcija
         return $this->naziv;
     }
 
+    public function getKomentar()
+    {
+        return $this->komentar;
+    }
+
     public function getVelikost()
     {
         return $this->velikost;
@@ -163,6 +176,21 @@ class Funkcija
     public function getSort()
     {
         return $this->sort;
+    }
+
+    public function getSePlanira()
+    {
+        return $this->sePlanira;
+    }
+
+    public function getDovoliPrekrivanje()
+    {
+        return $this->dovoliPrekrivanje;
+    }
+
+    public function getMaxPrekirvanj()
+    {
+        return $this->maxPrekirvanj;
     }
 
     public function getAlternacije()
@@ -203,6 +231,12 @@ class Funkcija
         return $this;
     }
 
+    public function setKomentar($komentar)
+    {
+        $this->komentar = $komentar;
+        return $this;
+    }
+
     public function setVelikost($velikost)
     {
         $this->velikost = $velikost;
@@ -219,50 +253,6 @@ class Funkcija
     {
         $this->sort = $sort;
         return $this;
-    }
-
-    public function setAlternacije($alternacije)
-    {
-        $this->alternacije = $alternacije;
-        return $this;
-    }
-
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev)
-    {
-        $this->uprizoritev = $uprizoritev;
-        return $this;
-    }
-
-    public function setPrivzeti(\Produkcija\Entity\Alternacija $privzeti)
-    {
-        $this->privzeti = $privzeti;
-        return $this;
-    }
-
-    public function setTipFunkcije(\Produkcija\Entity\TipFunkcije $tipFunkcije)
-    {
-        $this->tipFunkcije = $tipFunkcije;
-        return $this;
-    }
-    
-    public function getSePlanira()
-    {
-        return $this->sePlanira;
-    }
-
-    public function getDovoliPrekrivanje()
-    {
-        return $this->dovoliPrekrivanje;
-    }
-
-    public function getMaxPrekirvanj()
-    {
-        return $this->maxPrekirvanj;
-    }
-
-    public function getAlternacija()
-    {
-        return $this->alternacija;
     }
 
     public function setSePlanira($sePlanira)
@@ -283,12 +273,28 @@ class Funkcija
         return $this;
     }
 
-    public function setAlternacija($alternacija)
+    public function setAlternacije($alternacije)
     {
-        $this->alternacija = $alternacija;
+        $this->alternacije = $alternacije;
         return $this;
     }
 
+    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev)
+    {
+        $this->uprizoritev = $uprizoritev;
+        return $this;
+    }
 
+    public function setPrivzeti($privzeti)
+    {
+        $this->privzeti = $privzeti;
+        return $this;
+    }
+
+    public function setTipFunkcije(\Produkcija\Entity\TipFunkcije $tipFunkcije)
+    {
+        $this->tipFunkcije = $tipFunkcije;
+        return $this;
+    }
 
 }

@@ -8,6 +8,7 @@ forms:
 #            - id
             - podrocje
             - naziv
+            - komentar
             - velikost
             - pomembna
             - sort

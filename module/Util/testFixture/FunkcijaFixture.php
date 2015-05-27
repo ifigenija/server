@@ -51,21 +51,22 @@ class FunkcijaFixture
             $manager->persist($o);
         }
 
-        $o->setPodrocje($v[1]);
-        $o->setVelikost($v[2]);
-        $o->setPomembna($v[3]);
-        $o->setSort($v[4]);
-        $o->setSePlanira($v[5]);
-        $o->setDovoliPrekrivanje($v[6]);
-        $getref = $this->getReference($v[7]);
+        $o->setKomentar($v[1]);
+        $o->setPodrocje($v[2]);
+        $o->setVelikost($v[3]);
+        $o->setPomembna($v[4]);
+        $o->setSort($v[5]);
+        $o->setSePlanira($v[6]);
+        $o->setDovoliPrekrivanje($v[7]);
+        $getref = $this->getReference($v[8]);
         $o->setUprizoritev($getref);
-        if ($v[8]) {
-            $getref = $this->getReference($v[8]); 
-            $o->setPrivzeti($getref); 
+        if ($v[9]) {
+            $getref = $this->getReference($v[9]);
+            $o->setPrivzeti($getref);
         }
 
         // ker ni v isti skupini fixtur-jev, ne deluje getReference
-        $value = $tipFunR->findOneByIme($v[9]);
+        $value = $tipFunR->findOneByIme($v[10]);
         $o->setTipFunkcije($value);
 
         $referenca = 'Funkcija-' . $v[0];
@@ -76,8 +77,9 @@ class FunkcijaFixture
     public function getData()
     {
         return [
-            ['Hipolita', 'igralec', 'velika', TRUE, 9, true, true, 'Uprizoritev-Sen kresne noči', null, 'Igralec ali animator',],
-            ['Tezej', 'igralec', 'velika', TRUE, 9, true, true, 'Uprizoritev-Sen kresne noči', null, 'Igralec ali animator',],
+            ['Hipolita', 'glavna vloga', 'igralec', 'velika', TRUE, 6, true, true, 'Uprizoritev-0002', null, 'Igralec ali animator',],
+            ['Tezej', 'glavna vloga', 'igralec', 'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null, 'Igralec ali animator',],
+            ['Režija', '', 'umetnik', 'velika', TRUE, 8, true, true, 'Uprizoritev-0002', null, 'Režiser',],
         ];
     }
 
