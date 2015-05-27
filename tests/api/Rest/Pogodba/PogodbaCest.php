@@ -81,14 +81,8 @@ class PogodbaCest
      */
     public function lookupDrzavo(ApiTester $I)
     {
-        $ent = $I->lookupEntity("drzava", "SI");
-        $I->assertNotEmpty($ent);
-        $ent = $I->lookupEntity("drzava", "BQ",FALSE);  
-        $I->assertNotEmpty($ent);
-        
-        $drzava= $this->objDrzava;
-        codecept_debug($ent);
-        codecept_debug($drzava);
+        $this->objDrzava=$look = $I->lookupEntity("drzava", "SI");
+        $I->assertNotEmpty($look);
     }
 
     /**

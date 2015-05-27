@@ -29,17 +29,17 @@ use ApiTester;
 class ProdukcijskaHisaCest
 {
 
-    private $restUrl              = '/rest/produkcijskahisa';
-    private $popaUrl              = '/rest/popa';
-    private $drzavaUrl            = '/rest/drzava';
-    private $produkcijaDelitevUrl = '/rest/produkcijadelitev';
-    private $uprizoritevUrl       = '/rest/uprizoritev';
+    private $restUrl                = '/rest/produkcijskahisa';
+    private $popaUrl                = '/rest/popa';
+    private $drzavaUrl              = '/rest/drzava';
+    private $produkcijaDelitevUrl   = '/rest/produkcijadelitev';
+    private $uprizoritevUrl         = '/rest/uprizoritev';
+    private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
     private $objUprizoritev;
     private $obj;
-    private $objProdukcijskaHisa2;
-    private $objPopa1;
-    private $objPopa2;
-    private $objDrzava;
+    private $obj2;
+    private $lookPopa1;
+    private $lookPopa2;
     private $objKoprodukcija1;
     private $objKoprodukcija2;
 
@@ -54,61 +54,73 @@ class ProdukcijskaHisaCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupPopa(ApiTester $I)
+    {
+        $this->lookPopa1 = $ent             = $I->lookupEntity("popa", "0988", false);
+        $I->assertNotEmpty($ent);
+
+        $this->lookPopa2 = $ent             = $I->lookupEntity("popa", "0989", false);
+    }
+
+    /**
      * najde državo
      * 
      * @param ApiTester $I
      */
-    public function getListDrzava(ApiTester $I)
-    {
-        $resp            = $I->successfullyGetList($this->drzavaUrl, []);
-        $list            = $resp['data'];
-        $I->assertNotEmpty($list);
-        $this->objDrzava = $drzava          = array_pop($list);
-        $I->assertNotEmpty($drzava);
-    }
+//    public function getListDrzava(ApiTester $I)
+//    {
+//        $resp            = $I->successfullyGetList($this->drzavaUrl, []);
+//        $list            = $resp['data'];
+//        $I->assertNotEmpty($list);
+//        $this->objDrzava = $drzava          = array_pop($list);
+//        $I->assertNotEmpty($drzava);
+//    }
 
     /**
      * kreiram popa
      *  
      * @param ApiTester $I
      */
-    public function createPopa(ApiTester $I)
-    {
-        $data           = [
-            'sifra'  => 'X12',
-            'naziv'  => 'zz',
-//            'naziv1'    => 'zz',
-//            'panoga'    => 'zz',
-//            'email'     => 'z@zzz.zz',
-//            'url'       => 'zz',
-//            'opomba'    => 'zz',
-            'drzava' => $this->objDrzava['id'],
-//            'idddv'     => 'zz',
-//            'maticna'   => 'ZZ123',
-//            'zavezanec' => 'Da',
-//            'jeeu'      => 'Da',
-//            'datZav'    => '2010-02-01T00:00:00+0100',
-//            'datnZav'   => '2017-02-01T00:00:00+0100',
-//            'zamejstvo' => FALSE,
-        ];
-        $this->objPopa1 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
-
-        $I->assertNotEmpty($popa['id']);
-
-        $data           = [
-            'sifra'  => 'A12',
-            'naziv'  => 'aa',
-            'drzava' => $this->objDrzava['id'],
-        ];
-        $this->objPopa2 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
-
-        $I->assertNotEmpty($popa['id']);
-    }
+//    public function createPopa(ApiTester $I)
+//    {
+//        $data           = [
+//            'sifra'  => 'X12',
+//            'naziv'  => 'zz',
+////            'naziv1'    => 'zz',
+////            'panoga'    => 'zz',
+////            'email'     => 'z@zzz.zz',
+////            'url'       => 'zz',
+////            'opomba'    => 'zz',
+//            'drzava' => $this->objDrzava['id'],
+////            'idddv'     => 'zz',
+////            'maticna'   => 'ZZ123',
+////            'zavezanec' => 'Da',
+////            'jeeu'      => 'Da',
+////            'datZav'    => '2010-02-01T00:00:00+0100',
+////            'datnZav'   => '2017-02-01T00:00:00+0100',
+////            'zamejstvo' => FALSE,
+//        ];
+//        $this->objPopa1 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
+//
+//        $I->assertNotEmpty($popa['id']);
+//
+//        $data           = [
+//            'sifra'  => 'A12',
+//            'naziv'  => 'aa',
+//            'drzava' => $this->objDrzava['id'],
+//        ];
+//        $this->objPopa2 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
+//
+//        $I->assertNotEmpty($popa['id']);
+//    }
 
     /**
      *  kreiramo zapis
      * 
-     * @depends createPopa
+     * @depends lookupPopa
      * 
      * @param ApiTester $I
      */
@@ -116,18 +128,18 @@ class ProdukcijskaHisaCest
     {
         $data      = [
             'status' => 'zz',
-            'popa'   => $this->objPopa1['id'],
+            'popa'   => $this->lookPopa1['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['status'], 'zz');
 
 
-        $data                       = [
+        $data       = [
             'status' => 'bb',
-            'popa'   => $this->objPopa2['id'],
+            'popa'   => $this->lookPopa2['id'],
         ];
-        $this->objProdukcijskaHisa2 = $ent                        = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -176,7 +188,7 @@ class ProdukcijskaHisaCest
         $data                   = [
             'odstotekFinanciranja' => 30,
             'uprizoritev'          => $this->objUprizoritev['id'],
-            'koproducent'          => $this->objProdukcijskaHisa2['id'],
+            'koproducent'          => $this->obj2['id'],
         ];
         $I->assertTrue(true);
         $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
@@ -186,7 +198,7 @@ class ProdukcijskaHisaCest
         $data                   = [
             'odstotekFinanciranja' => 7.90,
             'uprizoritev'          => $this->objUprizoritev['id'],
-            'koproducent'          => $this->objProdukcijskaHisa2['id'],
+            'koproducent'          => $this->obj2['id'],
         ];
         $this->objKoprodukcija2 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -200,7 +212,7 @@ class ProdukcijskaHisaCest
      */
     public function getListPoPopa(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?popa=" . $this->objPopa1['id'];
+        $listUrl = $this->restUrl . "?popa=" . $this->lookPopa1['id'];
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
@@ -254,7 +266,38 @@ class ProdukcijskaHisaCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['status'], 'yy');
-        $I->assertEquals($ent['popa'], $this->objPopa1['id']);
+        $I->assertEquals($ent['popa'], $this->lookPopa1['id']);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupProdukcijskaHisa(ApiTester $I)
+    {
+
+        $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "total records");
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupProdukcijskaHisaSifra(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa . '?ident=' . $this->lookPopa2['ident'], []); //$$ to še ne deluje -unrecognized field??
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEqual(1, $resp['state']['totalRecords'], "total records");
     }
 
     /**
@@ -277,10 +320,10 @@ class ProdukcijskaHisaCest
      */
     public function preberiRelacijeSKoproducenti(ApiTester $I)
     {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objProdukcijskaHisa2['id'], "koprodukcije", "");
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", "");
         $I->assertEquals(2, count($resp));
 
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objProdukcijskaHisa2['id'], "koprodukcije", $this->objKoprodukcija1['id']);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", $this->objKoprodukcija1['id']);
         $I->assertEquals(1, count($resp));
     }
 
