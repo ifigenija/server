@@ -33,44 +33,62 @@ class ProdukcijaDelitev
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="Naš strošek", description="Ali je naš strošek")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
      */
     private $nasStrosek;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
+     * @Max\I18n(label="Lastna sredstva", description="Lastna sredstva")
+     * @var double
      */
     private $lastnaSredstva;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
+     * @Max\I18n(label="Zaprošeno", description="Zaprošeno")
+     * @var double
      */
     private $zaproseno;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
+     * @Max\I18n(label="Drugi javni", description="Drugi javni")
+     * @var double
      */
     private $drugiJavni;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
+     * @Max\I18n(label="Avtorskih", description="Strošek avtorskih honorarjev")
+     * @var double
      */
     private $avtorskih;
 
     /**
+     *  $$ rb ali ni to isto kot avtorski honorar?
+     * 
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
+     * @Max\I18n(label="Tantiemi", description="Strošek tantiemov")
+     * @var double
      */
     private $tantiemi;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
+     * @Max\I18n(label="Skupni strošek", description="Skupni strošek")
+     * @var double
      */
     private $skupniStrosek;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=6, scale=2)
+     * @Max\I18n(label="Zaprošen procent", description="Zaprošen procent")
+     * @var double
      */
     private $zaprosenProcent;
-
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="koprodukcija")
@@ -96,9 +114,10 @@ class ProdukcijaDelitev
      * @var \Produkcija\Entity\ProdukcijskaHisa
      */
     private $koproducent;
-    
-     public function validate($mode = 'update')
+
+    public function validate($mode = 'update')
     {
+        
     }
     public function getId()
     {
@@ -110,62 +129,6 @@ class ProdukcijaDelitev
         return $this->odstotekFinanciranja;
     }
 
-    public function getVrstaKoproducenta()
-    {
-        return $this->vrstaKoproducenta;
-    }
-
-    public function getAlternacije()
-    {
-        return $this->alternacije;
-    }
-
-    public function getUprizoritev()
-    {
-        return $this->uprizoritev;
-    }
-
-    public function getKoproducent()
-    {
-        return $this->koproducent;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    public function setOdstotekFinanciranja($odstotekFinanciranja)
-    {
-        $this->odstotekFinanciranja = $odstotekFinanciranja;
-        return $this;
-    }
-
-    public function setVrstaKoproducenta($vrstaKoproducenta)
-    {
-        $this->vrstaKoproducenta = $vrstaKoproducenta;
-        return $this;
-    }
-
-    public function setAlternacije($alternacije)
-    {
-        $this->alternacije = $alternacije;
-        return $this;
-    }
-
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev)
-    {
-        $this->uprizoritev = $uprizoritev;
-        return $this;
-    }
-
-    public function setKoproducent(\Produkcija\Entity\ProdukcijskaHisa $koproducent)
-    {
-        $this->koproducent = $koproducent;
-        return $this;
-    }
-    
     public function getNasStrosek()
     {
         return $this->nasStrosek;
@@ -204,6 +167,33 @@ class ProdukcijaDelitev
     public function getZaprosenProcent()
     {
         return $this->zaprosenProcent;
+    }
+
+    public function getAlternacije()
+    {
+        return $this->alternacije;
+    }
+
+    public function getUprizoritev()
+    {
+        return $this->uprizoritev;
+    }
+
+    public function getKoproducent()
+    {
+        return $this->koproducent;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setOdstotekFinanciranja($odstotekFinanciranja)
+    {
+        $this->odstotekFinanciranja = $odstotekFinanciranja;
+        return $this;
     }
 
     public function setNasStrosek($nasStrosek)
@@ -254,7 +244,23 @@ class ProdukcijaDelitev
         return $this;
     }
 
+    public function setAlternacije($alternacije)
+    {
+        $this->alternacije = $alternacije;
+        return $this;
+    }
 
+    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev)
+    {
+        $this->uprizoritev = $uprizoritev;
+        return $this;
+    }
+
+    public function setKoproducent(\Produkcija\Entity\ProdukcijskaHisa $koproducent)
+    {
+        $this->koproducent = $koproducent;
+        return $this;
+    }
 
 
 }

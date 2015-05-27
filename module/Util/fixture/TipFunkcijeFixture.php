@@ -11,7 +11,9 @@ use Doctrine\Common\Persistence\ObjectManager;
  *
  * @author rado
  */
-class TipFunkcijeFixture extends AbstractFixture implements FixtureInterface
+class TipFunkcijeFixture
+        extends AbstractFixture
+        implements FixtureInterface
 {
 
     public function load(ObjectManager $manager)
@@ -41,9 +43,11 @@ class TipFunkcijeFixture extends AbstractFixture implements FixtureInterface
             $manager->persist($o);
         }
 
-        $o->setOpis($v[1]);       
+        $o->setOpis($v[1]);
         $o->setImeZenski($v[4]);
-        $o->setPodrocje($v[5]);
+        if ($v[5]) {
+            $o->setPodrocje($v[5]);
+        }
     }
 
     public function getData()
@@ -64,6 +68,7 @@ class TipFunkcijeFixture extends AbstractFixture implements FixtureInterface
             ['Prevajalec', 'Prevajalci', TRUE, 1, 'Prevajalka', 'umetnik',],
             ['Oblikovalec videa', 'Oblikovalci videa', TRUE, 1, 'Oblikovalka videa', 'umetnik',],
             ['Intermedijski ustvarjalec', 'Intermedijski ustvarjalci', TRUE, 1, 'Intermedijska ustvarjalka', 'umetnik',],
+            ['Nerazvrščeno', 'Nerazvrščeno', TRUE, 1, 'Nerazvrščeno', null,],
         ];
     }
 
