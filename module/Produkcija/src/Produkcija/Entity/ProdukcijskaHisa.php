@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping AS ORM,
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\ProdukcijskeHise")
- * @Max\Lookup(ident="popa.sifra",label="popa.naziv",search={"popa.naziv","popa.sifra"},)    $$ v delu
+ * @Max\Lookup(ident="popa.sifra",label="popa.naziv",search={"popa.naziv","popa.sifra"},)   
  * @Max\I18n(label="Produkcijska hiša",plural="Produkcijske hiše")
  * @Max\Id(prefix="0025")
  */

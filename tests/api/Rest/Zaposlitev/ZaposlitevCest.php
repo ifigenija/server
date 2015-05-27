@@ -37,6 +37,7 @@ class ZaposlitevCest
     private $obj2;
     private $objOseba;
     private $lookOseba;
+    private $lookFunkcija;
     private $objAlternacija1;
     private $objAlternacija2;
 
@@ -50,6 +51,15 @@ class ZaposlitevCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     * @param ApiTester $I
+     */
+    public function lookupFunkcijo(ApiTester $I)
+    {
+        $this->lookFunkcija = $look               = $I->lookupEntity("funkcija", "Tezej", false);
+        $I->assertNotEmpty($look);
     }
 
         /**
@@ -153,7 +163,7 @@ class ZaposlitevCest
     {
         $data                  = [
             'zaposlen'     => true,
-            'funkcija'     => null,
+            'funkcija'     => $this->lookFunkcija['id'],
             'sodelovanje'  => $this->obj2['id'],
             'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => NULL,
@@ -164,7 +174,7 @@ class ZaposlitevCest
 
         $data                  = [
             'zaposlen'     => true,
-            'funkcija'     => null,
+            'funkcija'     => $this->lookFunkcija['id'],
             'sodelovanje'  => $this->obj2['id'],
             'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => NULL,

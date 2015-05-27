@@ -1,0 +1,29 @@
+## YAML Template.
+---
+type: rest
+entityClass: Produkcija\Entity\StrosekUprizoritve
+forms:
+    default: 
+        elements:
+#            - id
+            - naziv
+            - vrednostDo
+            - vrednostNa
+            - opis
+            - sort
+            - uprizoritev
+            - popa
+lists:
+    default: 
+        filter:
+            elements:                 
+                - name: uprizoritev
+                  type: toone
+                  options:
+                      label: Uprizoritev
+                      targetEntity: Produkcija\Entity\Uprizoritev
+                      required: true
+        hydrator:
+            - exclude: []
+    vse: 
+        filter:
