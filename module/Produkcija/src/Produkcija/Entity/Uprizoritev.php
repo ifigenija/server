@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping AS ORM,
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Uprizoritve")
+ * @Max\Lookup(ident="sifra",label="naslov",search={"naslov"},)
  * @Max\I18n(label="Uprizoritev",plural="Uprizoritve")
  * @Max\Id(prefix="0014")
  */
@@ -24,8 +25,14 @@ class Uprizoritev
      */
     private $id;
 
-    // $$ verjetno bo potrebno dodati šifro, ker je lahko z enim nazivom več uprizoritev (npr. različni režiser)
-    
+    /**
+     * @ORM\Column(type="string", unique=true, nullable=false)
+     * @Max\I18n(label="Šifra", description="Šifra uprizoritve")
+     * @Max\Ui(type="sifra",ident=true )
+     * @var string
+     */
+    private $sifra;
+
     /**
      * @ORM\Column(type="string", length=35, nullable=true)
      * @Max\I18n(label="Faza", description="Faza uprizoritve")
@@ -259,6 +266,11 @@ class Uprizoritev
         return $this->id;
     }
 
+    public function getSifra()
+    {
+        return $this->sifra;
+    }
+
     public function getFaza()
     {
         return $this->faza;
@@ -282,6 +294,11 @@ class Uprizoritev
     public function getDatumZacStudija()
     {
         return $this->datumZacStudija;
+    }
+
+    public function getSteviloVaj()
+    {
+        return $this->steviloVaj;
     }
 
     public function getDatumPremiere()
@@ -364,6 +381,16 @@ class Uprizoritev
         return $this->rekviziterstva;
     }
 
+    public function getStroski()
+    {
+        return $this->stroski;
+    }
+
+    public function getStrosekUprizoritve()
+    {
+        return $this->strosekUprizoritve;
+    }
+
     public function getVaje()
     {
         return $this->vaje;
@@ -400,6 +427,12 @@ class Uprizoritev
         return $this;
     }
 
+    public function setSifra($sifra)
+    {
+        $this->sifra = $sifra;
+        return $this;
+    }
+
     public function setFaza($faza)
     {
         $this->faza = $faza;
@@ -427,6 +460,12 @@ class Uprizoritev
     public function setDatumZacStudija($datumZacStudija)
     {
         $this->datumZacStudija = $datumZacStudija;
+        return $this;
+    }
+
+    public function setSteviloVaj($steviloVaj)
+    {
+        $this->steviloVaj = $steviloVaj;
         return $this;
     }
 
@@ -523,6 +562,18 @@ class Uprizoritev
     public function setRekviziterstva($rekviziterstva)
     {
         $this->rekviziterstva = $rekviziterstva;
+        return $this;
+    }
+
+    public function setStroski($stroski)
+    {
+        $this->stroski = $stroski;
+        return $this;
+    }
+
+    public function setStrosekUprizoritve($strosekUprizoritve)
+    {
+        $this->strosekUprizoritve = $strosekUprizoritve;
         return $this;
     }
 

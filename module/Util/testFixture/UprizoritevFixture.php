@@ -45,52 +45,52 @@ class UprizoritevFixture
         $zvrUpriR = $manager->getRepository('Produkcija\Entity\ZvrstUprizoritve');
         $zvrSursR = $manager->getRepository('Produkcija\Entity\ZvrstSurs');
 
-        $o = $rep->findOneByNaslov(trim($v[0]));
+        $o = $rep->findOneBySifra(trim($v[0]));
         if (!$o) {
             $o = new \Produkcija\Entity\Uprizoritev();
-            $o->setNaslov(trim($v[0]));
+            $o->setSifra(trim($v[0]));
             $manager->persist($o);
         }
 
-        $o->setFaza($v[1]);
-        $o->setPodnaslov($v[2]);
-        $o->setDelovniNaslov($v[3]);
-
-        $date = empty($v[4]) ? null : date_create($v[4]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
-        $o->setdatumZacStudija($date);
+        $o->setNaslov($v[1]);
+        $o->setFaza($v[2]);
+        $o->setPodnaslov($v[3]);
+        $o->setDelovniNaslov($v[4]);
 
         $date = empty($v[5]) ? null : date_create($v[5]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
+        $o->setdatumZacStudija($date);
+
+        $date = empty($v[6]) ? null : date_create($v[6]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setDatumPremiere($date);
 
-        $getref = $this->getReference("Prostor-0001");
-        $getref = $this->getReference($v[6]);
+//        $getref = $this->getReference("Prostor-0001");
+        $getref = $this->getReference($v[7]);
         $o->setMaticniOder(
-//                $this->getReference($v[6])
                 $getref
         );
-        $o->setStOdmorov($v[7]);
-        $o->setAvtor($v[8]);
-        $o->setGostujoca($v[9]);
-        $o->setTrajanje($v[10]);
-        $o->setOpis($v[11]);
-        $o->setArhIdent($v[12]);
-        $o->setArhOpomba($v[13]);
+        $o->setStOdmorov($v[8]);
+        $o->setAvtor($v[9]);
+        $o->setGostujoca($v[10]);
+        $o->setTrajanje($v[11]);
+        $o->setOpis($v[12]);
+        $o->setArhIdent($v[13]);
+        $o->setArhOpomba($v[14]);
 
-        $date = empty($v[14]) ? null : date_create($v[14]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
+        $date = empty($v[15]) ? null : date_create($v[15]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setDatumZakljucka($date);
-        $o->setSloAvtor($v[15]);
-        $o->setKratkiNaslov($v[16]);
+        $o->setSloAvtor($v[16]);
+        $o->setKratkiNaslov($v[17]);
 
-        $getref = $this->getReference($v[17]);
+        $getref = $this->getReference($v[18]);
         $o->setBesedilo(
                 $getref
         );
 
         // ker ni v isti skupini fixtur-jev, ne deluje getReference
-        $value = $zvrUpriR->findOneByIme($v[18]);
+        $value = $zvrUpriR->findOneByIme($v[19]);
         $o->setZvrstUprizoritve($value);
 
-        $value = $zvrSursR->findOneByIme($v[19]);
+        $value = $zvrSursR->findOneByIme($v[20]);
         $o->setZvrstSurs($value);
 
         $referenca = 'Uprizoritev-' . $v[0];
@@ -101,8 +101,8 @@ class UprizoritevFixture
     public function getData()
     {
         return [
-            ['Sen kresne noči', 'produkcija', '', 'Sanje', '2016-02-01', '2016-06-01', 'Prostor-0005', 1, 'William Shakespeare', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0001', 'Komedija', 'Drama'],
-            ['Smoletov vrt', 'predprodukcija-ideja', '', '', '2017-01-01', '2016-04-20', 'Prostor-0006', 2, 'B. Hočevar', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0003', 'Kriminalka', 'Raziskovalno gledališče'],
+            ['0001', 'Sen kresne noči', 'produkcija', '', 'Sanje', '2016-02-01', '2016-06-01', 'Prostor-0005', 1, 'William Shakespeare', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0001', 'Komedija', 'Drama'],
+            ['0002', 'Smoletov vrt', 'predprodukcija-ideja', '', '', '2017-01-01', '2016-04-20', 'Prostor-0006', 2, 'B. Hočevar', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0003', 'Kriminalka', 'Raziskovalno gledališče'],
         ];
     }
 

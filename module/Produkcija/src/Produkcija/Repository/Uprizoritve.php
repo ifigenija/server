@@ -23,9 +23,11 @@ class Uprizoritve
 
     protected $sortOptions = [
         "default" => [
+            "sifra" => ["alias" => "p.sifra"],
             "naslov" => ["alias" => "p.naslov"]
         ],
         "vse"     => [
+            "sifra" => ["alias" => "p.sifra"],
             "naslov" => ["alias" => "p.naslov"]
         ]
     ];
@@ -66,6 +68,15 @@ class Uprizoritve
         }
 
         return $qb;
+    }
+
+     public function create($object, $params = null)
+    {
+        if (empty($object->getSifra())) {
+            $num = $this->getServiceLocator()->get('stevilcenje.generator');
+            $object->setSifra($num->generate('uprizoritev'));
+        }
+        parent::create($object, $params);
     }
 
 }

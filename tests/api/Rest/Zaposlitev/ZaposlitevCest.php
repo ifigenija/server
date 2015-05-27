@@ -36,6 +36,7 @@ class ZaposlitevCest
     private $obj;
     private $obj2;
     private $objOseba;
+    private $lookOseba;
     private $objAlternacija1;
     private $objAlternacija2;
 
@@ -51,42 +52,53 @@ class ZaposlitevCest
         
     }
 
+        /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupOsebo(ApiTester $I)
+    {
+        $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0006", false);
+        $I->assertNotEmpty($ent);
+    }
+
+
     /**
      *  kreiramo  osebo
      * 
      * @param ApiTester $I
      */
-    public function createOsebo(ApiTester $I)
-    {
-        $data = [
-            'naziv'         => 'zz',
-            'ime'           => 'zz',
-            'priimek'       => 'zz',
-            'funkcija'      => 'zz',
-            'srednjeIme'    => 'zz',
-            'psevdonim'     => 'zz',
-            'email'         => 'x@xxx.xx',
-            'datumRojstva'  => '1973-28-03T04:30:00',
-            'emso'          => 'ZZ',
-            'davcna'        => 'ZZ123',
-            'spol'          => 'M',
-            'opombe'        => 'zz',
-            'drzavljanstvo' => 'zz',
-            'drzavaRojstva' => 'zz',
-            'krajRojstva'   => 'zz',
-            'user'          => null,
-        ];
-
-        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
-
-        $I->assertEquals('zz', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
-    }
+//    public function createOsebo(ApiTester $I)
+//    {
+//        $data = [
+//            'naziv'         => 'zz',
+//            'ime'           => 'zz',
+//            'priimek'       => 'zz',
+//            'funkcija'      => 'zz',
+//            'srednjeIme'    => 'zz',
+//            'psevdonim'     => 'zz',
+//            'email'         => 'x@xxx.xx',
+//            'datumRojstva'  => '1973-28-03T04:30:00',
+//            'emso'          => 'ZZ',
+//            'davcna'        => 'ZZ123',
+//            'spol'          => 'M',
+//            'opombe'        => 'zz',
+//            'drzavljanstvo' => 'zz',
+//            'drzavaRojstva' => 'zz',
+//            'krajRojstva'   => 'zz',
+//            'user'          => null,
+//        ];
+//
+//        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
+//
+//        $I->assertEquals('zz', $oseba['ime']);
+//        $I->assertNotEmpty($oseba['id']);
+//    }
 
     /**
      *  kreiramo zapis
      * 
-     * @depends createOsebo
+     * @depends lookupOsebo
      * 
      * @param ApiTester $I
      */
@@ -103,7 +115,7 @@ class ZaposlitevCest
             'individualnaPogodba' => true,
             'jeZaposlenVdrugemJz' => TRUE,
             'jeNastopajoci'       => TRUE,
-            'oseba'               => $this->objOseba['id'],
+            'oseba'               => $this->lookOseba['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -122,7 +134,7 @@ class ZaposlitevCest
             'individualnaPogodba' => true,
             'jeZaposlenVdrugemJz' => TRUE,
             'jeNastopajoci'       => TRUE,
-            'oseba'               => $this->objOseba['id'],
+            'oseba'               => $this->lookOseba['id'],
         ];
         $this->obj2= $ent                  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -132,7 +144,7 @@ class ZaposlitevCest
     /**
      *  kreiramo zapis
      * 
-     * @depends createOsebo
+     * @depends lookupOsebo
      * @depends create
      * 
      * @param ApiTester $I
@@ -143,7 +155,7 @@ class ZaposlitevCest
             'zaposlen'     => true,
             'funkcija'     => null,
             'sodelovanje'  => $this->obj2['id'],
-            'oseba'        => $this->objOseba['id'],
+            'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => NULL,
             'pogodba'      => NULL,
         ];
@@ -154,7 +166,7 @@ class ZaposlitevCest
             'zaposlen'     => true,
             'funkcija'     => null,
             'sodelovanje'  => $this->obj2['id'],
-            'oseba'        => $this->objOseba['id'],
+            'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => NULL,
             'pogodba'      => NULL,
         ];
@@ -170,7 +182,7 @@ class ZaposlitevCest
      */
     public function getListPoOsebi(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?oseba=" . $this->objOseba['id'];
+        $listUrl = $this->restUrl . "?oseba=" . $this->lookOseba['id'];
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
@@ -234,7 +246,7 @@ class ZaposlitevCest
         $I->assertEquals($ent['individualnaPogodba'], true);
         $I->assertEquals($ent['jeZaposlenVdrugemJz'], TRUE);
         $I->assertEquals($ent['jeNastopajoci'], TRUE);
-        $I->assertEquals($ent['oseba'], $this->objOseba['id']);
+        $I->assertEquals($ent['oseba'], $this->lookOseba['id']);
     }
 
     /**

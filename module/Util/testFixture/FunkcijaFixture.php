@@ -76,8 +76,8 @@ class FunkcijaFixture
     public function getData()
     {
         return [
-            ['Hipolita', 'igralec', 'velika', TRUE, 9, true, true, 'Uprizoritev-Sen kresne noči', null, 'Igralec ali animator',],
-            ['Tezej', 'igralec', 'velika', TRUE, 9, true, true, 'Uprizoritev-Sen kresne noči', null, 'Igralec ali animator',],
+            ['Hipolita', 'igralec', 'velika', TRUE, 9, true, true, 'Uprizoritev-0002', null, 'Igralec ali animator',],
+            ['Tezej', 'igralec', 'velika', TRUE, 9, true, true, 'Uprizoritev-0002', null, 'Igralec ali animator',],
         ];
     }
 

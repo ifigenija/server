@@ -365,11 +365,6 @@ class Oseba
         return $this->sodelovanja;
     }
 
-    public function getNaslov()
-    {
-        return $this->naslov;
-    }
-
     public function setId($id)
     {
         $this->id = $id;
@@ -517,12 +512,6 @@ class Oseba
     public function setSodelovanja($sodelovanja)
     {
         $this->sodelovanja = $sodelovanja;
-        return $this;
-    }
-
-    public function setNaslov($naslov)
-    {
-        $this->naslov = $naslov;
         return $this;
     }
 
