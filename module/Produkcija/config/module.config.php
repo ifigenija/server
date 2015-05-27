@@ -38,6 +38,7 @@ return [
             'Rest\produkcijaDelitev'     => 'Max\Factory\RestControllerFactory',
             'Relation\produkcijaDelitev' => 'Max\Factory\ToManyControllerFactory',
             'Rest\tipFunkcije'           => 'Max\Factory\RestControllerFactory',
+            'Rest\strosekUprizoritve'    => 'Max\Factory\RestControllerFactory',
         ],
     ],
     'router'          => [
