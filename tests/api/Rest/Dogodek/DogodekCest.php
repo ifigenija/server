@@ -57,6 +57,7 @@ class DogodekCest
     private $objPredstava;
     private $objZasedenost;
     private $objVaja;
+    private $objVaja;
     private $objGostovanje;
     private $objDogodekIzven;
     private $objDogodek1;

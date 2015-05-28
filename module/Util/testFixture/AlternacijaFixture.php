@@ -92,6 +92,8 @@ class AlternacijaFixture
         return [
             ['0001', false, 'Funkcija-Tezej', null, 'Oseba-0009', null, null,],
             ['0002', false, 'Funkcija-Režija', null, 'Oseba-0010', null, null,],
+            ['0003', false, 'Funkcija-Inšpicient', null, 'Oseba-0003', null, null,],
+            ['0004', false, 'Funkcija-Tehnični vodja', null, 'Oseba-0002', null, null,],
         ];
     }
 

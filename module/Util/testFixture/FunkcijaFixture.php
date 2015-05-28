@@ -80,6 +80,8 @@ class FunkcijaFixture
             ['Hipolita', 'glavna vloga', 'igralec', 'velika', TRUE, 6, true, true, 'Uprizoritev-0002', null, 'Igralec ali animator',],
             ['Tezej', 'glavna vloga', 'igralec', 'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null, 'Igralec ali animator',],
             ['Režija', '', 'umetnik', 'velika', TRUE, 8, true, true, 'Uprizoritev-0002', null, 'Režiser',],
+            ['Inšpicient', '', '', '', TRUE, 8, true, true, 'Uprizoritev-0002', null, 'Inšpicient',],
+            ['Tehnični vodja', '', '', '', TRUE, 8, true, true, 'Uprizoritev-0002', null, 'Tehnični vodja',],
         ];
     }
 
