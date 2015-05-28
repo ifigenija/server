@@ -5,6 +5,7 @@ namespace IfiFixture;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
  *
@@ -13,7 +14,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class OsebaFixture
         extends AbstractFixture
-        implements FixtureInterface
+        implements FixtureInterface, DependentFixtureInterface
 {
 
     public function load(ObjectManager $manager)
@@ -23,6 +24,11 @@ class OsebaFixture
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return array('IfiFixture\UserFixture'); // fixture classes fixture is dependent on , 
     }
 
     /**
@@ -59,7 +65,12 @@ class OsebaFixture
         $o->setDrzavljanstvo($v[13]);
         $o->setDrzavaRojstva($v[14]);
         $o->setKrajRojstva($v[15]);
-//        $o->setUser($v[15]);
+        if ($v[16]) {
+            // $$ še ni implementirano
+            $getref = $this->getReference($v[16]);
+            $o->setUser($getref);
+        }
+
 
         $referenca = 'Oseba-' . $v[0];
         var_dump($referenca);
@@ -70,8 +81,8 @@ class OsebaFixture
     {
         return [
             ['0001', 'g.', 'Janez', 'Novak', 'a', 'Peter', 'Jani', 'jani.novak@xxx.xx', '1958-01-06', '0601958000000', '123456789', 'M', 'Jani Janez', 'Slovenija', 'Slovenija', 'Ljubljana', null,],
-            ['0002', 'dr.', 'Anton', 'Horvat', 'b', '', '', 'anton.horvat@xxx.xx', '1968-02-12', '1202968111111', '234567890', 'M', '', 'Slovenija', 'Slovenija', 'Maribor', null,],
-            ['0003', '', 'Ivan', 'Kovačič', 'c', '', '', 'ivan.kovacic@xxx.xx', '1975-03-26', '2603976222222', '345678901', 'M', '', 'Slovenija', 'Slovenija', 'Celje', null,],
+            ['0002', 'dr.', 'Anton', 'Horvat', 'b', '', 'Tona', 'anton.horvat@xxx.xx', '1968-02-12', '1202968111111', '234567890', 'M', '', 'Slovenija', 'Slovenija', 'Maribor', 'User-02',],
+            ['0003', '', 'Ivan', 'Kovačič', 'c', '', 'Ivo', 'ivan.kovacic@xxx.xx', '1975-03-26', '2603976222222', '345678901', 'M', '', 'Slovenija', 'Slovenija', 'Celje', 'User-01',],
             ['0004', 'prof.', 'Jožef', 'Krajnc', 'd', '', 'Joža', 'jozef.krajnc@xxx.xx', '1971-04-30', '3004971333333', '456789012', 'M', '', 'Slovenija', 'Slovenija', 'Kranj', null,],
             ['0005', '', 'Marko', 'Zupančič', 'e', '', '', 'marko.zupancic@xxx.xx', '1984-05-07', '0705984444444', '567890123', 'M', '', 'Slovenija', 'Slovenija', 'Koper', null,],
             ['0006', 'ga.', 'Marija', 'Kovač', 'f', '', '', 'marija.kovac@xxx.xx', '1962-06-19', '1906962444444', '678901234', 'Z', '', 'Slovenija', 'Slovenija', 'Murska Sobota', null,],

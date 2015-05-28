@@ -8,53 +8,53 @@
     email: console@ifigenija.si
     enabled: true
     roles: [ifi-all]
--
-    name: Jani
-    email: jani@ifigenija.si
-    enabled: true
-    roles: []
--
-    name: Tona
-    email: tona@ifigenija.si
-    enabled: true
-    roles: []
--
-    name: Ivo
-    email: ivo@ifigenija.si
-    enabled: true
-    roles: []
--
-    name: Jože
-    email: joze@ifigenija.si
-    enabled: true
-    roles: []
--
-    name: Marko
-    email: marko@ifigenija.si
-    enabled: true
-    roles: []
--
-    name: Marija
-    email: marija@ifigenija.si
-    enabled: true
-    roles: []
--
-    name: Ana
-    email: ana@ifigenija.si
-    enabled: true
-    roles: []
--
-    name: Maja
-    email: maja@ifigenija.si
-    enabled: true
-    roles: []
--
-    name: Irena
-    email: irena@ifigenija.si
-    enabled: true
-    roles: []
--
-    name: Mojca
-    email: mojca@ifigenija.si
-    enabled: true
-    roles: []
+#-
+#    name: Jani
+#    email: jani@ifigenija.si
+#    enabled: true
+#    roles: []
+#-
+#    name: Tona
+#    email: tona@ifigenija.si
+#    enabled: true
+#    roles: []
+#-
+#    name: Ivo
+#    email: ivo@ifigenija.si
+#    enabled: true
+#    roles: []
+#-
+#    name: Jože
+#    email: joze@ifigenija.si
+#    enabled: true
+#    roles: []
+#-
+#    name: Marko
+#    email: marko@ifigenija.si
+#    enabled: true
+#    roles: []
+#-
+#    name: Marija
+#    email: marija@ifigenija.si
+#    enabled: true
+#    roles: []
+#-
+#    name: Ana
+#    email: ana@ifigenija.si
+#    enabled: true
+#    roles: []
+#-
+#    name: Maja
+#    email: maja@ifigenija.si
+#    enabled: true
+#    roles: []
+#-
+#    name: Irena
+#    email: irena@ifigenija.si
+#    enabled: true
+#    roles: []
+#-
+#    name: Mojca
+#    email: mojca@ifigenija.si
+#    enabled: true
+#    roles: []
