@@ -47,6 +47,9 @@ class FunkcijaCest
     private $objBesedilo;
     private $objTipFunkcije;
     private $lookTipFunkcije;
+    
+    private $lookUprizoritev;
+
 
     public function _before(ApiTester $I)
     {
@@ -58,6 +61,16 @@ class FunkcijaCest
         
     }
 
+        /**
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
+    }
+
+    
     /**
      *  kreiramo besedilo
      * 
@@ -168,33 +181,33 @@ class FunkcijaCest
 
      * @param ApiTester $I
      */
-    public function createUprizoritev(ApiTester $I)
-    {
-        $data                 = [
-            'faza'             => 'arhiv',
-            'naslov'           => 'zz',
-            'podnaslov'        => 'zz',
-            'delovniNaslov'    => 'zz',
-            'datumPremiere'    => '2010-02-01T00:00:00+0100',
-            'stOdmorov'        => 1,
-            'avtor'            => 'zz',
-            'gostujoca'        => true,
-            'trajanje'         => 2,
-            'opis'             => 'zz',
-            'arhIdent'         => 'zz',
-            'arhOpomba'        => 'zz',
-            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
-            'sloAvtor'         => true,
-            'kratkiNaslov'     => 'zz',
-            'besedilo'         => $this->objBesedilo['id'],
-            'zvrstUprizoritve' => null,
-            'zvrstSurs'        => null,
-        ];
-        $this->objUprizoritev = $ent                  = $I->successfullyCreate($this->uprizoritevUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['opis'], 'zz');
-    }
+//    public function createUprizoritev(ApiTester $I)
+//    {
+//        $data                 = [
+//            'faza'             => 'arhiv',
+//            'naslov'           => 'zz',
+//            'podnaslov'        => 'zz',
+//            'delovniNaslov'    => 'zz',
+//            'datumPremiere'    => '2010-02-01T00:00:00+0100',
+//            'stOdmorov'        => 1,
+//            'avtor'            => 'zz',
+//            'gostujoca'        => true,
+//            'trajanje'         => 2,
+//            'opis'             => 'zz',
+//            'arhIdent'         => 'zz',
+//            'arhOpomba'        => 'zz',
+//            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
+//            'sloAvtor'         => true,
+//            'kratkiNaslov'     => 'zz',
+//            'besedilo'         => $this->objBesedilo['id'],
+//            'zvrstUprizoritve' => null,
+//            'zvrstSurs'        => null,
+//        ];
+//        $this->objUprizoritev = $ent                  = $I->successfullyCreate($this->uprizoritevUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        codecept_debug($ent);
+//        $I->assertEquals($ent['opis'], 'zz');
+//    }
 
     
         /**
@@ -245,6 +258,7 @@ class FunkcijaCest
     {
         $data      = [
             'podrocje'          => 'igralec',
+            'vodjaPodrocja'     => FALSE,
             'naziv'             => 'zz',
             'komentar'             => 'zz',
             'velikost'          => 'velika',
@@ -252,7 +266,7 @@ class FunkcijaCest
             'sort'              => 2,
             'sePlanira'         => true,
             'dovoliPrekrivanje' => false,
-            'uprizoritev'       => $this->objUprizoritev['id'],
+            'uprizoritev'       => $this->lookUprizoritev['id'],
             'privzeti'          => $this->objAlternacija['id'], //$$ to ne deluje izgleda - jemlje kot null?
             'tipFunkcije'       => $this->lookTipFunkcije['id'],
         ];
@@ -263,6 +277,7 @@ class FunkcijaCest
         // kreiramo še en zapis
         $data               = [
             'podrocje'          => 'tehnik',
+            'vodjaPodrocja'     => FALSE,
             'naziv'             => 'aa',
             'komentar'             => 'aa',
             'velikost'          => 'mala',
@@ -270,7 +285,7 @@ class FunkcijaCest
             'sort'              => 4,
             'sePlanira'         => true,
             'dovoliPrekrivanje' => false,
-            'uprizoritev'       => $this->objUprizoritev['id'],
+            'uprizoritev'       => $this->lookUprizoritev['id'],
             'privzeti'          => null,
             'tipFunkcije'       => $this->lookTipFunkcije['id'],
         ];
@@ -339,7 +354,7 @@ class FunkcijaCest
      */
     public function getListPoUprizoritvi(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?uprizoritev=" . $this->objUprizoritev['id'];
+        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev['id'];
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
@@ -380,12 +395,13 @@ class FunkcijaCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['podrocje'], 'igralec');
+        $I->assertEquals($ent['vodjaPodrocja'], FALSE);
         $I->assertEquals($ent['naziv'], 'zz');
         $I->assertEquals($ent['komentar'], 'zz');
         $I->assertEquals($ent['velikost'], 'mala', "velikost funkcije");
         $I->assertEquals($ent['pomembna'], true);
         $I->assertEquals($ent['sort'], 2);
-        $I->assertEquals($ent['uprizoritev'], $this->objUprizoritev['id']);
+        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);
         $I->assertEquals($ent['privzeti'], $this->objAlternacija['id'], "privzeti");
         $I->assertEquals($ent['tipFunkcije'], $this->lookTipFunkcije['id'], "tip funkcije");
 
