@@ -51,21 +51,21 @@ class Pogodba
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="vred. vaje", description="Vrednost vaje")   
+     * @Max\I18n(label="Vrednost vaje", description="Vrednost vaje")   
      * @var double
      */
     private $vrednostVaje;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=12, scale=2)
-     * @Max\I18n(label="vred. predstave", description="Vrednost predstave")   
+     * @Max\I18n(label="Vrednost predstave", description="Vrednost predstave")   
      * @var double
      */
     private $vrednostPredstave;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="vred. ure", description="Vrednost ure")   
+     * @Max\I18n(label="Vrednost ure", description="Vrednost ure")   
      * @var double
      */
     private $vrednostUre;

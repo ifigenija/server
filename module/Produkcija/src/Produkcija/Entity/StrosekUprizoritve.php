@@ -34,21 +34,21 @@ class StrosekUprizoritve
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="Vrednost do", description="Vrednost do")
+     * @Max\I18n(label="Vrednost do premiere", description="Vrednost do premiere")
      * @var double
      */
     private $vrednostDo;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="Vrednost na", description="Vrednost na")
+     * @Max\I18n(label="Vrednost na ponovitev", description="Vrednost na ponovitev")
      * @var double
      */
     private $vrednostNa;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="Opis", description="Opis stroška ")
+     * @Max\I18n(label="Opis", description="Opis stroška")
      * @var string
      */
     private $opis;

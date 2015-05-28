@@ -55,14 +55,14 @@ class ProdukcijaDelitev
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="Drugi javni", description="Drugi javni")
+     * @Max\I18n(label="Drugi javni viri financiranja", description="Drugi javni viri financiranja")
      * @var double
      */
     private $drugiJavni;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="Avtorskih", description="Strošek avtorskih honorarjev")
+     * @Max\I18n(label="Strošek avtorskih honorarjev", description="Strošek avtorskih honorarjev")
      * @var double
      */
     private $avtorskih;
@@ -71,7 +71,7 @@ class ProdukcijaDelitev
      *  $$ rb ali ni to isto kot avtorski honorar?
      * 
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="Tantiemi", description="Strošek tantiemov")
+     * @Max\I18n(label="Tantieme", description="Strošek tantiemov")
      * @var double
      */
     private $tantiemi;
