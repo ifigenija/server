@@ -17,13 +17,27 @@ forms:
             - srednjeIme
             - psevdonim
             - polnoIme
+#            - spol     # $$ rb v filter validator haystack trenutno narobe zloži Moški in Ženska namesto M in Z               
+            - opombe
 #            - naslovi
             - email
+#            - user         # bomo na strani userja urejali
+#            - telefonske@
+#            - trrji
+#            - alternacije
+#            - pogodbe
+#            - sodelovanja
+        hydrator: 
+            byValue: [naslovi, telefonske]
+            exclude: [alternacije, pogodbe, sodelovanja]
+    osebni: 
+        elements:    
+#            - id              
             - datumRojstva
             - emso
             - davcna
 #            - spol     # $$ rb v filter validator haystack trenutno narobe zloži Moški in Ženska namesto M in Z   
-            - opombe
+
             - drzavljanstvo
             - drzavaRojstva
             - krajRojstva
@@ -34,7 +48,9 @@ forms:
 #            - pogodbe
 #            - sodelovanja
         hydrator: 
-            byValue: [trrji, naslovi, telefonske]
+            byValue: [trrji]
+            exckude: [naslovi,telefonske,alternacije,pogodbe,sodelovanja]
+            
 lists:
     full: 
         hydrator: 
@@ -42,7 +58,7 @@ lists:
     default: 
         hydrator:
             byValue: [telefonske, naslovi]
-            exclude: [trrji, datumRojstva, emso, davcna, drzavljanstvo, krajRojstva]
+            exclude: [trrji, datumRojstva, emso, davcna, drzavljanstvo, krajRojstva, alternacije, pogodbe, sodelovanja]
     vse:
         filter:
 hydrator:      
