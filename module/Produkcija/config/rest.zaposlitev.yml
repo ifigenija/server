@@ -27,7 +27,7 @@ lists:
                   options:
                       label: Oseba
                       targetEntity: App\Entity\Oseba
-                      required: true
+                      required: false
 #                - name: alternacije    # $$ rb ali v namenskem view-u?
 #                  type: toone
 #                  options:
@@ -35,9 +35,13 @@ lists:
 #                      targetEntity: Produkcija\Entity\Alternacija
 #                      required: false
         hydrator:
-            - exclude: []
+            exclude: []
+            lookups: [ oseba ]
     vse: 
         filter:
+        hydrator:
+            exclude: []
+            lookups: [ oseba ]        
 relation:
     default:
         alternacije:
