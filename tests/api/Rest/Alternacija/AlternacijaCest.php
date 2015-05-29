@@ -20,6 +20,7 @@ use ApiTester;
  *      - oseba
  *      - koprodukcija
  *      - pogodba
+ * - storitve O2M $$
  *      getlist različne variante relacij
  *      - vse
  *      - funkcija
@@ -37,7 +38,10 @@ class AlternacijaCest
     private $produkcijskaHisaUrl = '/rest/produkcijskahisa';
     private $koprodukcijaUrl     = '/rest/produkcijadelitev';
     private $pogodbaUrl          = '/rest/pogodba';
+    private $dogodekUrl          = '/rest/dogodek';
+    private $terminStoritveUrl   = '/rest/terminstoritve';
     private $obj;
+    private $obj2;
     private $objOseba;
     private $lookOseba;
     private $objFunkcija;
@@ -48,6 +52,9 @@ class AlternacijaCest
     private $objProdukcijskaHisa;
     private $objKoprodukcija;
     private $objPogodba;
+    private $objTerminStoritve1;
+    private $objTerminStoritve2;
+    private $objDogodek;
 
     public function _before(ApiTester $I)
     {
@@ -57,6 +64,20 @@ class AlternacijaCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     * najde nek dogodek
+     * 
+     * @param ApiTester $I
+     */
+    public function getListDogodkov(ApiTester $I)
+    {
+        $resp             = $I->successfullyGetList($this->dogodekUrl . "/vse", []);
+        $list             = $resp['data'];
+        $I->assertNotEmpty($list);
+        $this->objDogodek = $drzava           = array_pop($list);
+        $I->assertNotEmpty($drzava);
     }
 
     /**
@@ -77,14 +98,14 @@ class AlternacijaCest
         $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0006", false);
         $I->assertNotEmpty($ent);
     }
-    
+
     /**
      * 
      * @param ApiTester $I
      */
     public function lookupUprizoritev(ApiTester $I)
     {
-        $this->lookUprizoritev = $look             = $I->lookupEntity("uprizoritev", "0001", false);
+        $this->lookUprizoritev = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
         $I->assertNotEmpty($look);
     }
 
@@ -281,6 +302,12 @@ class AlternacijaCest
     {
         $data      = [
             'zaposlen'     => true,
+            'zacetek'      => '2010-02-01T00:00:00+0100',
+            'konec'        => '2020-02-01T00:00:00+0100',
+            'opomba'       => 'zz',
+            'sort'         => 1,
+            'privzeti'     => true,
+            'aktivna'      => true,
             'funkcija'     => $this->lookFunkcija['id'],
             'sodelovanje'  => $this->objZaposlitev['id'],
             'oseba'        => $this->lookOseba['id'],
@@ -293,15 +320,21 @@ class AlternacijaCest
         $I->assertEquals($ent['zaposlen'], true);
 
         // kreiram še en zapis
-        $data = [
+        $data       = [
             'zaposlen'     => true,
+            'zacetek'      => '2011-02-01T00:00:00+0100',
+            'konec'        => '2021-02-01T00:00:00+0100',
+            'opomba'       => 'aa',
+            'sort'         => 2,
+            'privzeti'     => true,
+            'aktivna'      => true,
             'funkcija'     => $this->lookFunkcija['id'],
             'sodelovanje'  => null,
             'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => $this->objKoprodukcija['id'],
             'pogodba'      => null,
         ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['zaposlen'], true);
@@ -332,7 +365,7 @@ class AlternacijaCest
      */
     public function getListVse(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "/vse";
+        $listUrl = $this->restUrl . "/vse";             // $$ rb to je nehalo delovati - ne vem zakaj
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
@@ -370,9 +403,15 @@ class AlternacijaCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['zaposlen'], false);
+        $I->assertEquals($ent['zacetek'], '2010-02-01T00:00:00+0100');
+        $I->assertEquals($ent['konec'], '2020-02-01T00:00:00+0100');
+        $I->assertEquals($ent['opomba'], 'zz');
+        $I->assertEquals($ent['sort'], 1);
+        $I->assertEquals($ent['privzeti'], true);
+        $I->assertEquals($ent['aktivna'], true);
         $I->assertEquals($ent['funkcija'], $this->lookFunkcija['id']);
-        $I->assertEquals($ent['sodelovanje'], $this->objZaposlitev['id']);
-        $I->assertEquals($ent['oseba'], $this->lookOseba['id']);
+        $I->assertEquals($ent['sodelovanje'], $this->objZaposlitev['id'], "zaposlitev");
+        $I->assertEquals($ent['oseba']['id'], $this->lookOseba['id'], "oseba");
         $I->assertEquals($ent['koprodukcija'], $this->objKoprodukcija['id'], "napačna koprodukcija");
         $I->assertEquals($ent['pogodba'], $this->objPogodba['id']);
     }
@@ -388,4 +427,64 @@ class AlternacijaCest
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
 
+    /**
+     * kreiramo vsaj en zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createVecTerminovStoritev(ApiTester $I)
+    {
+        $data                     = [
+            'planiranZacetek' => '2011-02-01T00:00:00+0100',
+            'planiranKonec'   => '2012-02-01T00:00:00+0100',
+            'zacetek'         => '2013-02-01T00:00:00+0100',
+            'konec'           => '2014-02-01T00:00:00+0100',
+            'planiranoTraja'  => 1.23,
+            'dogodek'         => $this->objDogodek['id'], //$$ ga še ni
+            'alternacija'     => $this->obj2['id'],
+            'oseba'           => $this->lookOseba['id'],
+        ];
+        $this->objTerminStoritve1 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['planiranoTraja'], 1.23);
+
+        
+// še en zapis
+        $data                     = [
+            'planiranZacetek' => '2013-02-01T00:00:00+0100',
+            'planiranKonec'   => '2014-02-01T00:00:00+0100',
+            'zacetek'         => NULL,
+            'konec'           => NULL,
+            'planiranoTraja'  => 6.32,
+            'dogodek'         => $this->objDogodek['id'], 
+            'alternacija'     => $this->obj2['id'],
+            'oseba'           => $this->lookOseba['id'],
+        ];
+        $this->objTerminStoritve1 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+        /**
+     * preberemo relacije
+     * 
+     * @depends createVecTerminovStoritev
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSTerminiStoritev(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "storitve", "");
+//        codecept_debug($resp);
+        $I->assertEquals(2, count($resp));
+
+        // get po oseba id  
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "storitve", $this->objTerminStoritve1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    
+    
+    //$$ še relacije vec t.s.
 }

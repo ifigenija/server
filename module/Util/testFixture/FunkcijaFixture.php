@@ -53,20 +53,23 @@ class FunkcijaFixture
 
         $o->setKomentar($v[1]);
         $o->setPodrocje($v[2]);
-        $o->setVelikost($v[3]);
-        $o->setPomembna($v[4]);
-        $o->setSort($v[5]);
-        $o->setSePlanira($v[6]);
-        $o->setDovoliPrekrivanje($v[7]);
-        $getref = $this->getReference($v[8]);
+        if ($v[3]) {
+            $o->setVodjaEkipe($v[3]);
+        }
+        $o->setVelikost($v[4]);
+        $o->setPomembna($v[5]);
+        $o->setSort($v[6]);
+        $o->setSePlanira($v[7]);
+        $o->setDovoliPrekrivanje($v[8]);
+        $getref = $this->getReference($v[9]);
         $o->setUprizoritev($getref);
-        if ($v[9]) {
-            $getref = $this->getReference($v[9]);
+        if ($v[10]) {
+            $getref = $this->getReference($v[10]);
             $o->setPrivzeti($getref);
         }
 
         // ker ni v isti skupini fixtur-jev, ne deluje getReference
-        $value = $tipFunR->findOneByIme($v[10]);
+        $value = $tipFunR->findOneByIme($v[11]);
         $o->setTipFunkcije($value);
 
         $referenca = 'Funkcija-' . $v[0];
@@ -77,11 +80,12 @@ class FunkcijaFixture
     public function getData()
     {
         return [
-            ['Hipolita', 'glavna vloga', 'igralec', 'velika', TRUE, 6, true, true, 'Uprizoritev-0002', null, 'Igralec ali animator',],
-            ['Tezej', 'glavna vloga', 'igralec', 'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null, 'Igralec ali animator',],
-            ['Režija', '', 'umetnik', 'velika', TRUE, 8, true, true, 'Uprizoritev-0002', null, 'Režiser',],
-            ['Inšpicient', '', '', '', TRUE, 8, true, true, 'Uprizoritev-0002', null, 'Inšpicient',],
-            ['Tehnični vodja', '', '', '', TRUE, 8, true, true, 'Uprizoritev-0002', null, 'Tehnični vodja',],
+            ['Hipolita', 'glavna vloga', 'igralec', false,'velika', TRUE, 6, true, true, 'Uprizoritev-0002', null, 'Igralec ali animator',],
+            ['Tezej', 'glavna vloga', 'igralec', false,'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null, 'Igralec ali animator',],
+            ['Režija', '', 'umetnik',false, 'velika', TRUE, 8, true, true, 'Uprizoritev-0002', null, 'Režiser',],
+            ['Inšpicient', '', 'umetnik', true,'', TRUE, 8, true, true, 'Uprizoritev-0002', null, 'Nerazvrščeno',],
+            ['Tehnični vodja', '', 'tehnik', true,'', TRUE, 8, true, true, 'Uprizoritev-0002', null, 'Nerazvrščeno',],
+            ['Lučni mojster', '', 'tehnik', false,'', TRUE, 3, true, true, 'Uprizoritev-0002', null,'Nerazvrščeno' ,],
         ];
     }
 

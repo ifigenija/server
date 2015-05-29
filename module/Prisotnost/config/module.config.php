@@ -36,5 +36,15 @@ return [
     'form_elements'   => [
         'invokables' => [
         ]
-    ]
+    ],
+    'zfc_rbac'        => [
+        'assertion_manager' => [
+            "invokables" => [
+                "chck-terminstoritve" => "Prisotnost\Assertion\AssertTerminStoritve",
+            ],
+        ],
+        "assertion_map"     => [
+            "TerminStoritve-write" => "chck-terminstoritve"
+        ],
+    ],
 ];

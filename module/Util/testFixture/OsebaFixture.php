@@ -89,9 +89,10 @@ class OsebaFixture
             ['0006', 'ga.', 'Marija', 'Kovač', 'f', '', '', 'marija.kovac@xxx.xx', '1962-06-19', '1906962444444', '678901234', 'Z', '', 'Slovenija', 'Slovenija', 'Murska Sobota', null,],
             ['0007', 'ga.', 'Ana', 'Potočnik', 'g', '', '', 'ana.potocnik@xxx.xx', '1975-07-24', '2407975555555', '789012345', 'Z', '', 'Slovenija', 'Slovenija', 'Novo Mesto', null,],
             ['0008', 'ga.', 'Maja', 'Mlakar', 'h', '', '', 'maja.mlakar@xxx.xx', '1986-08-02', '0208986666666', '890123456', 'Z', '', 'Slovenija', 'Slovenija', 'Nova Gorica', null,],
-            ['0009', '', 'Irena', 'Kos', 'i', '', '', 'irena.kos@xxx.xx', '1967-09-14', '1409967777777', '901234567', 'Z', '', 'Slovenija', 'Slovenija', 'Ptuj', null,],
+            ['0009', '', 'Irena', 'Kos', 'i', '', '', 'irena.kos@xxx.xx', '1967-09-14', '1409967777777', '901234567', 'Z', '', 'Slovenija', 'Slovenija', 'Ptuj', 'User-03',],
             ['0010', '', 'Mojca', 'Vidmar', 'J', '', '', 'mojca.vidmar@xxx.xx', '1967-09-14', '1409967777777', '901234567', 'Z', '', 'Slovenija', 'Slovenija', 'Idrija', null,],
             ['0011', '', 'xx', 'write protected12345', NULL, '', '', 'xx@xxx.xx', null, null, null, 'Z', '', null, NULL, NULL, null,],
+            ['0012', '', 'Luka', 'Golob', 'luč', '', '', 'luka.golob@xxx.xx', null, null, null, 'M', '', null, NULL, NULL, null,],
         ];
     }
 

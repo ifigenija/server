@@ -41,6 +41,8 @@ class TerminStoritveCest
     private $objVaja;
     private $objDogodek;
     private $objAlternacija;
+    private $funkcijaUrl    = '/rest/funkcija';
+    private $lookFunkcija;
 
     public function _before(ApiTester $I)
     {
@@ -52,6 +54,17 @@ class TerminStoritveCest
         
     }
 
+    /**
+     * @param ApiTester $I
+     */
+    public function lookupFunkcijo(ApiTester $I)
+    {
+        $this->lookFunkcija = $look               = $I->lookupEntity("funkcija", "Tezej", false);
+        codecept_debug($look);
+        $I->assertNotEmpty($look);
+    }
+
+    
     /**
      * 
      * @param ApiTester $I
@@ -142,7 +155,7 @@ class TerminStoritveCest
     {
         $data                 = [
             'zaposlen'     => true,
-            'funkcija'     => NULL,
+            'funkcija'     => $this->lookFunkcija['id'],
             'sodelovanje'  => NULL,
             'oseba'        => $this->objOseba['id'],
             'koprodukcija' => NULL,
@@ -170,7 +183,7 @@ class TerminStoritveCest
             'zacetek'         => '2013-02-01T00:00:00+0100',
             'konec'           => '2014-02-01T00:00:00+0100',
             'planiranoTraja'  => 1.23,
-            'dogodek'         => null,
+            'dogodek'         => $this->objDogodek['id'],
             'alternacija'     => $this->objAlternacija['id'],
             'oseba'           => $this->objOseba['id'],
         ];
@@ -186,7 +199,7 @@ class TerminStoritveCest
             'zacetek'         => '2017-02-01T00:00:00+0100',
             'konec'           => '2018-02-01T00:00:00+0100',
             'planiranoTraja'  => 4.56,
-            'dogodek'         => null,
+            'dogodek'         => $this->objDogodek['id'],
             'alternacija'     => $this->objAlternacija['id'],
             'oseba'           => $this->objOseba['id'],
         ];
@@ -218,7 +231,7 @@ class TerminStoritveCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
+    public function getListVse(ApiTester $I)
     {
         $listUrl = $this->restUrl . "/vse";
         codecept_debug($listUrl);
@@ -226,7 +239,7 @@ class TerminStoritveCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
     }
 
     /**
@@ -262,9 +275,26 @@ class TerminStoritveCest
         $I->assertEquals($ent['konec'], '2014-02-01T00:00:00+0100');
 //        $I->assertEquals($ent['planiranoTraja' ], 7.89);    // $$ rb zakaj zaokrožuje ?
         $I->assertEquals($ent['planiranoTraja'], 8);       // $$ rb zakaj zaokrožuje ?
-        $I->assertEquals($ent['dogodek'], null);
+        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
         $I->assertEquals($ent['alternacija'], $this->objAlternacija['id']);
         $I->assertEquals($ent['oseba'], $this->objOseba['id']);
+    }
+
+    /**
+     * Seznam, ki ga rabi inšpecient oz. vodja tehnike, ko vnaša ure za nek dogodek
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListUre(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "/ure?dogodek=".$this->objDogodek['id'];
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
     }
 
     /**

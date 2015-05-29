@@ -36,6 +36,18 @@ class Funkcija
     private $podrocje;
 
     /**
+     * inšpecient in Vodja tehnične ekipe sta vodja ekipe  za $področje oz. tipfunkcije.podrocje  
+     * $$ če se bo uporabljalo polje $področje v tej entiteti, je potrebno poskrbeti, da so možne le določene vrednosti, npr.  tehnik, umetnik, igralec
+     * inšpecient je vodja ekipe za vsa področja, tehnični vodja le za podrocje=tehnik
+     * 
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     * @Max\I18n(label="Vodja področja", description="Ali je vodja področja")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    private $vodjaEkipe;
+
+    /**
      * V to polje se vpiše ime funkcije kot npr. Romeo, Julija,Tezej ipd.
      * 
      * @ORM\Column(type="string")
@@ -104,10 +116,8 @@ class Funkcija
     private $maxPrekirvanj;
 
     /**
-     * 
-     * @var
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="funkcija") <Alternacije>
-     * 
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="funkcija")
+     * @var <Alternacije>
      */
     private $alternacije;
 
@@ -135,7 +145,6 @@ class Funkcija
      * tipi funkcij, ki so standarizirani glede na SLOGI (Slovenski gledališki inštitut)
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\TipFunkcije", inversedBy="funkcije", fetch="EAGER")
-     * @ORM\JoinColumn(name="tip_vloge_id", referencedColumnName="id")
      * @Max\I18n(label="Tip funkcije",  description="Tip funkcije")
      * @Max\Ui(type="select")
      * @var \Produkcija\Entity\TipFunkcije
@@ -155,6 +164,11 @@ class Funkcija
     public function getPodrocje()
     {
         return $this->podrocje;
+    }
+
+    public function getVodjaEkipe()
+    {
+        return $this->vodjaEkipe;
     }
 
     public function getNaziv()
@@ -226,6 +240,12 @@ class Funkcija
     public function setPodrocje($podrocje)
     {
         $this->podrocje = $podrocje;
+        return $this;
+    }
+
+    public function setVodjaEkipe($vodjaEkipe)
+    {
+        $this->vodjaEkipe = $vodjaEkipe;
         return $this;
     }
 
