@@ -49,7 +49,7 @@ forms:
 #            - sodelovanja
         hydrator: 
             byValue: [trrji]
-            exckude: [naslovi,telefonske,alternacije,pogodbe,sodelovanja]
+            exclude: [naslovi,telefonske,alternacije,pogodbe,sodelovanja]
             
 lists:
     full: 
