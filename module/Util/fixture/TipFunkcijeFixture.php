@@ -54,9 +54,9 @@ class TipFunkcijeFixture
     public function getData()
     {
         return [
-             // najprej specialna tipa funkcije
-            ['Inšpicient', 'Inšpicienti', FALSE,  'Inšpicientka', null,],
-            ['Tehnični vodja', 'Tehnične vodje', false,  'Tehnični vodja', null,],
+             // najprej specialna tipa funkcije - se ne bo uporabljalo
+//            ['Inšpicient', 'Inšpicienti', FALSE,  'Inšpicientka', null,],
+//            ['Tehnični vodja', 'Tehnične vodje', false,  'Tehnični vodja', null,],
             // tipi funkcije iz SLOGI:
             ['Igralec ali animator', 'Igralci in animatorji', TRUE,  'Igralka ali animatorka', 'igralec',],
             ['Baletnik ali plesalec', 'Baletniki in plesalci', TRUE, 'Baletnica ali plesalka', 'igralec',],

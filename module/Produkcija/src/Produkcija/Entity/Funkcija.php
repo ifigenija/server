@@ -116,10 +116,8 @@ class Funkcija
     private $maxPrekirvanj;
 
     /**
-     * 
-     * @var
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="funkcija") <Alternacije>
-     * 
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="funkcija")
+     * @var <Alternacije>
      */
     private $alternacije;
 
@@ -147,7 +145,6 @@ class Funkcija
      * tipi funkcij, ki so standarizirani glede na SLOGI (Slovenski gledališki inštitut)
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\TipFunkcije", inversedBy="funkcije", fetch="EAGER")
-     * @ORM\JoinColumn(name="tip_vloge_id", referencedColumnName="id")
      * @Max\I18n(label="Tip funkcije",  description="Tip funkcije")
      * @Max\Ui(type="select")
      * @var \Produkcija\Entity\TipFunkcije

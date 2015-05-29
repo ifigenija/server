@@ -87,9 +87,10 @@ class TipFunkcijeCest
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
-
+//        codecept_debug($resp);
+        
         $I->assertNotEmpty($list);
-        $I->assertEquals(count($list), $resp['state']['pageSize']);
+        $I->assertGreaterThanOrEqual(16, count($list));     // odvisno od testnih fixturjev
 //        $I->assertEquals("Avtor", $list[0]['ime']);      //glede na sort $$
     }
 

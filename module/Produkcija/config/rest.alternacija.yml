@@ -10,6 +10,13 @@ forms:
               options: 
                   required: false
             - zaposlen
+            - zacetek
+            - konec
+            - opomba
+            - sort
+            - privzeti
+            - aktivna
+#            - storitve
             - funkcija
             - sodelovanje
             - oseba
@@ -48,5 +55,12 @@ lists:
                       targetEntity: Produkcija\Entity\Funkcija
                       required: false
         hydrator: 
-            lookups: [funkcija, koprodukcija, pogodba, oseba]
+#            lookups: [funkcija, koprodukcija, pogodba, oseba]
+            lookups: [oseba]
+relation:
+    default:
+        storitve:
+            enabled: true
+            hydrator:
+                exclude: []
                 

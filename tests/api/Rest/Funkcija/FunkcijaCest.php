@@ -258,7 +258,7 @@ class FunkcijaCest
     {
         $data      = [
             'podrocje'          => 'igralec',
-            'vodjaPodrocja'     => FALSE,
+            'vodjaEkipe'     => FALSE,
             'naziv'             => 'zz',
             'komentar'             => 'zz',
             'velikost'          => 'velika',
@@ -277,7 +277,7 @@ class FunkcijaCest
         // kreiramo še en zapis
         $data               = [
             'podrocje'          => 'tehnik',
-            'vodjaPodrocja'     => FALSE,
+            'vodjaEkipe'     => FALSE,
             'naziv'             => 'aa',
             'komentar'             => 'aa',
             'velikost'          => 'mala',
@@ -395,7 +395,7 @@ class FunkcijaCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['podrocje'], 'igralec');
-        $I->assertEquals($ent['vodjaPodrocja'], FALSE);
+        $I->assertEquals($ent['vodjaEkipe'], FALSE);
         $I->assertEquals($ent['naziv'], 'zz');
         $I->assertEquals($ent['komentar'], 'zz');
         $I->assertEquals($ent['velikost'], 'mala', "velikost funkcije");

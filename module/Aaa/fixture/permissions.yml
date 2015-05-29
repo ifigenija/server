@@ -6,6 +6,9 @@
     name: Aaa-write
     description: Aaa (User,Role,Permission)- spreminjanje
 -
+    name: TerminStoritve-vse
+    description: TerminStoritve - spreminjanje vseh zapisov
+-
     name: Oseba-vse
     description: Oseba - vse - za testiranje assert
 

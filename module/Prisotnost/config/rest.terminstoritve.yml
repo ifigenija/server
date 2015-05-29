@@ -28,3 +28,12 @@ lists:
             - exclude: []
     vse: 
         filter:
+    ure: 
+        filter:
+            elements:                 
+                - name: dogodek
+                  type: toone
+                  options:
+                      label: Dogodek
+                      targetEntity: Koledar\Entity\Dogodek
+                      required: true

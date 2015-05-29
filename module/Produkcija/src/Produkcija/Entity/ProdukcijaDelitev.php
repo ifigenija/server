@@ -101,7 +101,7 @@ class ProdukcijaDelitev
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="koprodukcije")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id", nullable=false)
      * @Max\I18n(label="Uprizoritev",  description="Uprizoritev")
-     * @Max\Ui(type="toone",required=true)
+     * @Max\Ui(type="hiddenid",required=true)
      * @var \Produkcija\Entity\Uprizoritev
      */
     private $uprizoritev;

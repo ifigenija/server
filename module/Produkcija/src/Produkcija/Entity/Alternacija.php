@@ -43,36 +43,52 @@ class Alternacija
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Max\I18n(label="Začetek", description="Začetni datum")
+     * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Max\I18n(label="Konec", description="Končni datum")
+     * @var string
      */
     private $konec;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Max\I18n(label="Opomba", description="Opomba")
+     * @var string
      */
     private $opomba;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="Sort", description="Sort")
+     * @Max\Ui(type="integer")
+     * @var integer
      */
     private $sort;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="Privzeti", description="Privzeti")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
      */
     private $privzeti;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="Aktivna", description="Aktivna")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
      */
     private $aktivna;
 
     /**
      * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="alternacija", fetch="EXTRA_LAZY")
+     * @var <Storitve>
      */
     private $storitve;
 
@@ -106,7 +122,6 @@ class Alternacija
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ProdukcijaDelitev", inversedBy="alternacije")
-     * @ORM\JoinColumn(name="koprodukcija_delitev_id", referencedColumnName="id")
      * @Max\I18n(label="Koprodukcija",  description="Koprodukcija pri alternaciji")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\ProdukcijaDelitev
@@ -126,6 +141,7 @@ class Alternacija
     {
         
     }
+
     public function getId()
     {
         return $this->id;
@@ -290,6 +306,5 @@ class Alternacija
         $this->pogodba = $pogodba;
         return $this;
     }
-
 
 }
