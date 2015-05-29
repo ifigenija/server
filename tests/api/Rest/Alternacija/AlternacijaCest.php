@@ -369,6 +369,8 @@ class AlternacijaCest
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
+        codecept_debug($list);
+        
 
         $I->assertNotEmpty($list);
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
