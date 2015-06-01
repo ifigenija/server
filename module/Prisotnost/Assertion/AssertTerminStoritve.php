@@ -52,46 +52,66 @@ class AssertTerminStoritve
         }
 
         $ret  = false;     // init
+        $em   = $this->getServiceLocator()->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         // najprej najdemo uprizoritev od termina storitve, če le-ta obstaja
 //        $uprizoritevId=""; //$$
 //        termin storitve -> alternacija -> funkcija-> uprizoritev
         // $$ še manager definirati - ali naj se pošlje kot parameter funkciji?
-//        $altR = $manager->getRepository('Produkcija\Entity\Alternacija');
-//        $funR = $manager->getRepository('Produkcija\Entity\Funkcija');
-//        $uprR = $manager->getRepository('Produkcija\Entity\Uprizoritev');
-//        $oseR = $manager->getRepository('App\Entity\Oseba');
-//        if (!empty($terminStoritve->getAlternacija())) {
-//            $alt = $altR->findOneById($terminStoritve->getAlternacija());
-//            if (!empty($alt->getFunkcija())) {
-//                $fun = $funR->findOneById($alt->getFunkcija());
-//                if (!empty($fun->getUprizoritev())) {
-//                    $upr = $funR->findOneById($fun->getUprizoritev());
-//                }
-//            }
-//        }
+        $altR = $em->getRepository('Produkcija\Entity\Alternacija');
+        $funR = $em->getRepository('Produkcija\Entity\Funkcija');
+        $uprR = $em->getRepository('Produkcija\Entity\Uprizoritev');
+        $oseR = $em->getRepository('App\Entity\Oseba');
+        if (!empty($terminStoritve->getAlternacija())) {
+            $alt = $altR->findOneById($terminStoritve->getAlternacija());
+            if (!empty($alt->getFunkcija())) {
+                $fun      = $funR->findOneById($alt->getFunkcija());
+                $fpodrocje = $fun->getPodrocje();                      // ali je tehnik ali netehnik
+                if (!empty($fun->getUprizoritev())) {
+                    $upr = $uprR->findOneById($fun->getUprizoritev());
+                }
+            }
+        }
 
         // če smo našli uprizoritev, pogledamo še, če je vodja ekipe
-        // ident -> oseba -> alternacije ->funkcija -> uprizoritev
+        // ident -> oseba -> alternacije ->funkcija -> uprizoritev  (ista kot tista iz terminastoritve)
         if (!empty($upr)) {
-//            $qb = $manager->createQueryBuilder();
-//
-//            $qb->select('count(*)')
-//            ->from('Alternacija', 'a')
-//            ->join('a.Funkcija', 'f', WITH, 'a.Funkcija =f.id')
-//            ->join('a.Oseba', 'o', WITH, 'o.id= a.oseba')
-//            ->andWhere('f.uprizoritev = :upriz')
-//            ->andWhere('f.vodjaekipe=TRUE')
-//            ->expr()->in('f.podrocje',array('tehnik')) 
-//            ->andWhere('o.user=:user')
-//            ->setParameter('user', $iden->getId(), "string");
-//            ->setParameter('upriz', $upr->getId(), "string");
-//        $query=qb->getQuery();
-        
+
+            $qb = $em->createQueryBuilder();
+            $e  = $qb->expr();
+            $qb->select('count(a) c');
+            $qb->from('Produkcija\Entity\Alternacija', 'a');
+            $qb->join('a.funkcija', 'f');
+            $qb->join('a.oseba', 'o');
+            $qb->where($e->eq('f.uprizoritev', ':upriz'));
+            $qb->setParameter('upriz', $upr->getId(), "string");
+            $qb->andWhere($e->eq('f.vodjaEkipe', 'TRUE'));
+            $qb->andWhere('o.user=:user');
+            $qb->setParameter('user', $iden->getId(), "string");
+
+            // ali vodja ekipe umetnik ali igralec
+            $qbUI    = clone $qb;
+            $qbUI->andWhere('f.podrocje = :igralec OR f.podrocje = :umetnik');
+            $qbUI->setParameter('igralec', 'igralec', "string");
+            $qbUI->setParameter('umetnik', 'umetnik', "string");
+            $queryUI = $qbUI->getQuery();
+            $cntUI   = $queryUI->getSingleScalarResult();
+            if ($cntUI >= 1) {             //vodja celotne ekipe 
+                return true;
+            }
+
+            // ali vodja ekipe tehnik
+            $qbT = clone $qb;
+            $qbT->andWhere($e->eq('f.podrocje', ':tehnik'));
+            $qbT->setParameter('tehnik', 'tehnik', "string");
+
+            $queryT = $qbT->getQuery();
+            $cntT   = $queryT->getSingleScalarResult();
+            if ($cntT >= 1) {             //vodja tehnične ekipe
+                if ($fpodrocje == 'tehnik') {     //lahko le za svojo ekipo
+                    $ret = true;
+                }
+            }
         }
-        
-
-
-
         return $ret;
     }
 

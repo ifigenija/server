@@ -17,12 +17,12 @@ use ApiTester;
  *   . navaden user 
  *   . user, ki ima le TerminStoritve-write  dostop  
  *   . user, ki je tehnični vodja, pa bi rad popravljal ostale zapise
- *   .  user, ki je sicer vodja ekipe (inšpecient), vendar termin storitve ni vezan na neko uprizoritev
+ *   .  user, ki je sicer vodja ekipe (inšpecient), vendar termin storitve ni vezan na neko uprizoritev $$
  * - omogočanje dostopa
  *   . tehničnemu vodji dostop do ur tehničnega osebja dotične uprizoritve
  *   . inšpicientu dostop do ur vsega osebja v dotični uprizoritvi
  *   . uporabniku s posebnim dovoljenem "TerminStoritve-vse" do vsega
- *      . tudi do tistih , kjer ni uprizoritve   $$ 
+ *      . tudi do tistih , kjer ni uprizoritve   
  *      . do vseh ki so v uprizoritvi
  * 
  * @author rado
@@ -140,6 +140,14 @@ class AvtorizacijeTerminStoritveCest
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
 
+        // ima vlogo, vendar nima zapisov v terminstoritve
+        $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
+            'username' => \IfiTest\AuthPage::$joze,
+            'rolename' => 'TERMINSTORITVE',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+
     }
 
     /**
@@ -148,7 +156,7 @@ class AvtorizacijeTerminStoritveCest
      */
     public function lookupAlternacije(ApiTester $I)
     {
-
+        // igralec
         $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0001', []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
@@ -158,8 +166,9 @@ class AvtorizacijeTerminStoritveCest
         $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
         $this->lookAlternacija1 = $resp['data'][0];
 
+        // tehnik
         // še en zapis alternacije, katerega funkcija.podrocje=tehnik  (glede na fixturje)
-        $resp                      = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0002', []);
+        $resp                      = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0005', []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
@@ -182,23 +191,23 @@ class AvtorizacijeTerminStoritveCest
         $list       = $resp['data'];
 //        codecept_debug($list);
         $I->assertNotEmpty($list);
-        $this->obj1 = $ent        = array_pop($list);
+//        $this->obj1 = $ent        = array_pop($list);
 //        codecept_debug($ent);
-        $I->assertNotEmpty($ent);
+//        $I->assertNotEmpty($ent);
 
         // poiščemo termina storitve - najprej za ne-tehnika:
         $key        = array_search($this->lookAlternacija1['id'], array_column($list, 'alternacija'));
-        $this->obj1 = $ent        = $list[$key]; //$$ ZAČASNO
+        $this->obj1 = $ent        = $list[$key]; 
         codecept_debug($ent);
 
         // poiščemo termina za tehnika
         $key           = array_search($this->lookAlternacija2Teh['id'], array_column($list, 'alternacija'));
-        $this->obj2Teh = $ent           = $list[$key]; //$$ ZAČASNO
+        $this->obj2Teh = $ent           = $list[$key]; 
         codecept_debug($ent);
 
         // poiščemo termina brez alternacije
         $key        = array_search(null, array_column($list, 'alternacija'));
-        $this->obj3 = $ent        = $list[$key]; //$$ ZAČASNO
+        $this->obj3 = $ent        = $list[$key];
         codecept_debug($ent);
     }
 
@@ -305,7 +314,7 @@ class AvtorizacijeTerminStoritveCest
         $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($resp);
 
-        //drug zapis 
+        //drug zapis  tehnik
         $ent                   = $this->obj2Teh;
         $ent['planiranoTraja'] = 3;
         $resp                  = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
@@ -313,6 +322,28 @@ class AvtorizacijeTerminStoritveCest
 
         $ent                   = $this->obj3;
         $ent['planiranoTraja'] = 3;
+        $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+    }
+
+    /**
+     * @param ApiTester $I
+     */
+    public function updateZInspicientomBrezZapisov(ApiTester $I)
+    {
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$joze, \IfiTest\AuthPage::$jozePass);
+
+        $ent                   = $this->obj1;
+        $ent['planiranoTraja'] = 7;
+        $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertNotEmpty($resp);
+
+        //drug zapis 
+        $ent                   = $this->obj2Teh;
+        $ent['planiranoTraja'] = 7;
+        $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+
+        $ent                   = $this->obj3;
+        $ent['planiranoTraja'] = 7;
         $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
     }
 

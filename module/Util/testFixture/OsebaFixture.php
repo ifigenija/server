@@ -84,7 +84,7 @@ class OsebaFixture
             ['0001', 'g.', 'Janez', 'Novak', 'a', 'Peter', 'Jani', 'jani.novak@xxx.xx', '1958-01-06', '0601958000000', '123456789', 'M', 'Jani Janez', 'Slovenija', 'Slovenija', 'Ljubljana', null,],
             ['0002', 'dr.', 'Anton', 'Horvat', 'b', '', 'Tona', 'anton.horvat@xxx.xx', '1968-02-12', '1202968111111', '234567890', 'M', '', 'Slovenija', 'Slovenija', 'Maribor', 'User-02',],
             ['0003', '', 'Ivan', 'Kovačič', 'c', '', 'Ivo', 'ivan.kovacic@xxx.xx', '1975-03-26', '2603976222222', '345678901', 'M', '', 'Slovenija', 'Slovenija', 'Celje', 'User-01',],
-            ['0004', 'prof.', 'Jožef', 'Krajnc', 'd', '', 'Joža', 'jozef.krajnc@xxx.xx', '1971-04-30', '3004971333333', '456789012', 'M', '', 'Slovenija', 'Slovenija', 'Kranj', null,],
+            ['0004', 'prof.', 'Jožef', 'Krajnc', 'd', '', 'Joža', 'jozef.krajnc@xxx.xx', '1971-04-30', '3004971333333', '456789012', 'M', '', 'Slovenija', 'Slovenija', 'Kranj', 'User-05',],
             ['0005', '', 'Marko', 'Zupančič', 'e', '', '', 'marko.zupancic@xxx.xx', '1984-05-07', '0705984444444', '567890123', 'M', '', 'Slovenija', 'Slovenija', 'Koper', null,],
             ['0006', 'ga.', 'Marija', 'Kovač', 'f', '', '', 'marija.kovac@xxx.xx', '1962-06-19', '1906962444444', '678901234', 'Z', '', 'Slovenija', 'Slovenija', 'Murska Sobota', null,],
             ['0007', 'ga.', 'Ana', 'Potočnik', 'g', '', '', 'ana.potocnik@xxx.xx', '1975-07-24', '2407975555555', '789012345', 'Z', '', 'Slovenija', 'Slovenija', 'Novo Mesto', null,],
