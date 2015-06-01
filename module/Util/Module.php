@@ -37,6 +37,8 @@ Class Module
                 'module/Koledar/autoload_classmap.php',
                 'module/Abonmaji/autoload_classmap.php',
                 'module/Stevilcenje/autoload_classmap.php',
+                'module/ProgramDela/autoload_classmap.php',
+
             ]
         ];
     }
