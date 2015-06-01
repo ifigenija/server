@@ -52,6 +52,10 @@ module.exports = function (grunt) {
                 cwd: 'module/Stevilcenje',
                 cmd: classmap_generator
             },
+            autoload_programdela: {
+                cwd: 'module/ProgramDela',
+                cmd: classmap_generator
+            },            
             autoload_testAssets: {
                 cwd: 'tests/TestAssets',
                 cmd: classmap_generator
