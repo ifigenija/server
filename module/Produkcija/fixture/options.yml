@@ -62,3 +62,14 @@
            label: Srednja vloga / funkcija
         velika:
            label: Velika vloga / funkcija
+-
+    name: zaposlitev.status
+    type: array
+    public: false
+    readOnly: true
+    description: Status zaposlitve
+    defaultValue: 
+        A:
+           label: Aktivna
+        N: 
+           label: Neaktivna

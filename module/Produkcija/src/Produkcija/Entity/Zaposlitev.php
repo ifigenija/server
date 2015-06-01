@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping AS ORM,
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Zaposlitve")
  * @Max\I18n(label="Zaposlitev",plural="Zaposlitve")
+ * @Max\Lookup(ident="sifra", label="oseba.polnoIme", search={"oseba.sifra", "oseba.polnoIme"}, extra={"zacetek", "konec","status"})
  * @Max\Id(prefix="0016")
  */
 class Zaposlitev
@@ -25,8 +26,17 @@ class Zaposlitev
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\Column(type="string", length=10)
+     * @Max\I18n(label="Šifra",  description="Šifra osebe")
+     * @Max\Ui(ident=true)
+     * @var string
+     */
+    private $sifra;
+
+    /**
+     * @ORM\Column(type="string", length=10)
      * @Max\I18n(label="Status",  description="Status zaposlitve")
+     * @Max\Ui(type="select",opts="zaposlitev.status")
      * @var string
      */
     private $status;
@@ -118,7 +128,8 @@ class Zaposlitev
 
     public function validate($mode = 'update')
     {
-        
+        $this->expect($this->oseba, "Oseba je obvezna", 1000333);        
+        $this->setSifra($this->oseba->getSifra());
     }
 
     public function getId()
@@ -263,5 +274,16 @@ class Zaposlitev
         $this->oseba = $oseba;
         return $this;
     }
+    public function getSifra()
+    {
+        return $this->sifra;
+    }
+
+    public function setSifra($sifra)
+    {
+        $this->sifra = $sifra;
+        return $this;
+    }
+
 
 }

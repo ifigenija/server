@@ -133,6 +133,7 @@ class ProdukcijskaHisaCest
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['status'], 'zz');
+        $I->assertEquals($ent['sifra'], '0988');
 
 
         $data       = [
@@ -141,6 +142,7 @@ class ProdukcijskaHisaCest
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['sifra'], '0989');
     }
 
     /**
@@ -150,29 +152,11 @@ class ProdukcijskaHisaCest
      */
     public function createUprizoritev(ApiTester $I)
     {
-        $data                 = [
-            'faza'             => 'arhiv',
-            'naslov'           => 'zz',
-            'podnaslov'        => 'zz',
-            'delovniNaslov'    => 'zz',
-            'datumPremiere'    => '2010-02-01T00:00:00+0100',
-            'stOdmorov'        => 1,
-            'avtor'            => 'zz',
-            'gostujoca'        => true,
-            'trajanje'         => 2,
-            'opis'             => 'zz',
-            'arhIdent'         => 'zz',
-            'arhOpomba'        => 'zz',
-            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
-            'sloAvtor'         => true,
-            'besedilo'         => null,
-            'zvrstUprizoritve' => null,
-            'zvrstSurs'        => null,
-        ];
-        $this->objUprizoritev = $ent                  = $I->successfullyCreate($this->uprizoritevUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        
+        $ent                  = $I->lookupEntity('uprizoritev', '0001', false);
         codecept_debug($ent);
-        $I->assertEquals($ent['opis'], 'zz');
+        $this->objUprizoritev = $ent;
+        $I->assertNotEmpty($this->objUprizoritev);
     }
 
     /**
@@ -297,7 +281,7 @@ class ProdukcijskaHisaCest
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
         $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
         $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
-        $I->assertEqual(1, $resp['state']['totalRecords'], "total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
     }
 
     /**

@@ -30,8 +30,8 @@ use ApiTester;
 class ZaposlitevCest
 {
 
-    private $restUrl  = '/rest/zaposlitev';
-    private $osebaUrl = '/rest/oseba';
+    private $restUrl        = '/rest/zaposlitev';
+    private $osebaUrl       = '/rest/oseba';
     private $alternacijaUrl = '/rest/alternacija';
     private $obj;
     private $obj2;
@@ -41,8 +41,6 @@ class ZaposlitevCest
     private $objAlternacija1;
     private $objAlternacija2;
 
-    
-    
     public function _before(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
@@ -62,7 +60,7 @@ class ZaposlitevCest
         $I->assertNotEmpty($look);
     }
 
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
@@ -71,7 +69,6 @@ class ZaposlitevCest
         $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0006", false);
         $I->assertNotEmpty($ent);
     }
-
 
     /**
      *  kreiramo  osebo
@@ -115,7 +112,7 @@ class ZaposlitevCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'status'              => 'zz',
+            'status'              => 'A',
             'zacetek'             => '2010-02-01T00:00:00+0100',
             'konec'               => '2010-02-01T00:00:00+0100',
             'tip'                 => 1,
@@ -130,11 +127,11 @@ class ZaposlitevCest
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['status'], 'zz');
+        $I->assertEquals($ent['status'], 'A');
 
         // kreiramo še en zapis
-        $data                 = [
-            'status'              => 'xx',
+        $data       = [
+            'status'              => 'N',
             'zacetek'             => '2015-02-01T00:00:00+0100',
             'konec'               => '2016-02-01T00:00:00+0100',
             'tip'                 => 4,
@@ -146,9 +143,9 @@ class ZaposlitevCest
             'jeNastopajoci'       => TRUE,
             'oseba'               => $this->lookOseba['id'],
         ];
-        $this->obj2= $ent                  = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['status'], 'xx');
+        $I->assertEquals($ent['status'], 'N');
     }
 
     /**
@@ -228,11 +225,11 @@ class ZaposlitevCest
     public function update(ApiTester $I)
     {
         $ent           = $this->obj;
-        $ent['status'] = 'yy';
+        $ent['status'] = 'A';
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['status'], 'yy');
+        $I->assertEquals($entR['status'], 'A');
     }
 
     /**
@@ -246,7 +243,7 @@ class ZaposlitevCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['status'], 'yy');
+        $I->assertEquals($ent['status'], 'A');
         $I->assertEquals($ent['zacetek'], '2010-02-01T00:00:00+0100');
         $I->assertEquals($ent['konec'], '2010-02-01T00:00:00+0100');
         $I->assertEquals($ent['tip'], 1);

@@ -69,4 +69,6 @@ class ProdukcijaDelitve
         return $qb;
     }
 
+    
+    
 }

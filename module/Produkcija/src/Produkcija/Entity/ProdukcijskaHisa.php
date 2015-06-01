@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping AS ORM,
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\ProdukcijskeHise")
- * @Max\Lookup(ident="popa.sifra",label="popa.naziv",search={"popa.naziv","popa.sifra"},)   
+ * @Max\Lookup(ident="sifra",label="popa.naziv",search={"popa.naziv","popa.sifra"},)   
  * @Max\I18n(label="Produkcijska hiša",plural="Produkcijske hiše")
  * @Max\Id(prefix="0025")
  */
@@ -25,6 +25,17 @@ class ProdukcijskaHisa
      */
     private $id;
 
+    /**
+     * Šifra klienta
+     *
+     * @ORM\Column(unique=true, length=4, nullable=false)
+     * @Max\I18n(label="Šifra", description="Unikatna šifra klienta")
+     * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode",group="Osnovni podatki")
+     * @var string
+     */
+    protected $sifra;
+    
+    
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      * @Max\I18n(label="Status", description="Status produkcijske hiše")
@@ -49,6 +60,9 @@ class ProdukcijskaHisa
 
     public function validate($mode = 'update')
     {
+        $this->expect($this->popa, "Poslovni partner je obvezen", 1000334);
+        
+        $this->setSifra($this->getPopa()->getSifra());
         
     }
 
@@ -95,5 +109,17 @@ class ProdukcijskaHisa
         $this->koprodukcije = $koprodukcije;
         return $this;
     }
+
+    public function getSifra()
+    {
+        return $this->sifra;
+    }
+
+    public function setSifra($sifra)
+    {
+        $this->sifra = $sifra;
+        return $this;
+    }
+
 
 }

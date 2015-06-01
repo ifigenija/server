@@ -65,8 +65,8 @@ class Alternacije
 
             $qb->setParameter('sifra', "{$options['q']}%", "string");
         }
-        $qb->join('p.funkcija','funkcija');
-        $qb->join('funkcija.uprizoritev','uprizoritev');
+        $qb->join('p.funkcija', 'funkcija');
+        $qb->join('funkcija.uprizoritev', 'uprizoritev');
         if (!empty($options['uprizoritev'])) {
             $naz = $e->eq('uprizoritev.id', ':upriz');
             $qb->andWhere($naz);
@@ -82,7 +82,7 @@ class Alternacije
     }
 
     /**
-     * 
+     * Preverim, če ima šifro in če je oseba zaposlena 
      * @param Alternacija $object
      * @param array $params
      */
@@ -92,7 +92,45 @@ class Alternacije
             $num = $this->getServiceLocator()->get('stevilcenje.generator');
             $object->setSifra($num->generate('alternacija'));
         }
+        $this->preveriZaposlitev($object);
         parent::create($object, $params);
+    }
+    
+    
+    /**
+     * 
+     * Preverim če je oseba zaposlena, potem alternacijo nastavim kot zaposlitev 
+     * 
+     */
+    public function update($object, $params = null) {
+        $this->preveriZaposlitev($object);
+        parent::update($object, $params);
+    }
+
+    /**
+     * Preverim če ima oseba veljavno zaposlitev,
+     * potem jo samodejno povežem z zaposlitvnijo
+     * @param Alternacija $alternacija
+     */
+    public function preveriZaposlitev(Alternacija $alternacija)
+    {
+
+        $zr = $this->getEntityManager()->getRepository('Produkcija\Entity\Zaposlitev');
+        
+        $zap = $zr->findOneBy([
+            'oseba'  => $alternacija->getOseba()->getId(),
+            'status' => 'A'
+        ]);
+
+        if ($zap) {            
+            if ($zap->getKonec() === null || ($zap->getKonec() < new DateTime())) {
+                $alternacija->setZaposlen(true);
+                $alternacija->setSodelovanje($zap);
+                return ;
+            }
+        }
+        $alternacija->setZaposlen(false);        
+                
     }
 
 }
