@@ -35,6 +35,7 @@ class ProdukcijskaHisaCest
     private $produkcijaDelitevUrl   = '/rest/produkcijadelitev';
     private $uprizoritevUrl         = '/rest/uprizoritev';
     private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
+    private $lookProdukcijskaHisa;
     private $objUprizoritev;
     private $obj;
     private $obj2;
@@ -152,7 +153,7 @@ class ProdukcijskaHisaCest
      */
     public function createUprizoritev(ApiTester $I)
     {
-        
+
         $ent                  = $I->lookupEntity('uprizoritev', '0001', false);
         codecept_debug($ent);
         $this->objUprizoritev = $ent;
@@ -260,7 +261,7 @@ class ProdukcijskaHisaCest
     public function lookupProdukcijskaHisa(ApiTester $I)
     {
 
-        $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
+       $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");

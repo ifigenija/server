@@ -48,10 +48,10 @@ class ProdukcijaDelitevCest
     private $objAlternacija1;
     private $objAlternacija2;
     private $objOseba;
- private $koprodukcijaUrl     = '/rest/produkcijadelitev';
- private $objKoprodukcija;
- private $lookUprizoritev;
-         
+    private $koprodukcijaUrl     = '/rest/produkcijadelitev';
+    private $objKoprodukcija;
+    private $lookUprizoritev;
+
     public function _before(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
@@ -123,7 +123,7 @@ class ProdukcijaDelitevCest
         $I->assertEquals($ent['status'], 'zz');
     }
 
-     /**
+    /**
      * 
      * @param ApiTester $I
      */
@@ -133,7 +133,6 @@ class ProdukcijaDelitevCest
         $I->assertNotEmpty($look);
     }
 
-    
     /**
      *  kreiramo zapis uprizoritev
      * 
@@ -300,7 +299,7 @@ class ProdukcijaDelitevCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['odstotekFinanciranja'], 70);  
+        $I->assertEquals($ent['odstotekFinanciranja'], 70);
         $I->assertEquals($ent['nasStrosek'], TRUE);
         $I->assertEquals($ent['lastnaSredstva'], 6.78);
         $I->assertEquals($ent['zaproseno'], 15.12);

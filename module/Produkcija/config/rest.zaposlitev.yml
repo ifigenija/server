@@ -7,6 +7,9 @@ forms:
         elements:
 #            - id
             - status
+            - name: sifra
+              options: 
+                  required: false
             - zacetek
             - konec
             - tip
