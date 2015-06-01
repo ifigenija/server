@@ -93,6 +93,7 @@ class OsebaFixture
             ['0010', '', 'Mojca', 'Vidmar', 'J', '', '', 'mojca.vidmar@xxx.xx', '1967-09-14', '1409967777777', '901234567', 'Z', '', 'Slovenija', 'Slovenija', 'Idrija', null,],
             ['0011', '', 'xx', 'write protected12345', NULL, '', '', 'xx@xxx.xx', null, null, null, 'Z', '', null, NULL, NULL, null,],
             ['0012', '', 'Luka', 'Golob', 'luč', '', '', 'luka.golob@xxx.xx', null, null, null, 'M', '', null, NULL, NULL, null,],
+            ['0013', '', 'Tatjana', 'Božič', 'tajnica', '', '', 'tatjana.bozic@xxx.xx', null, null, null, 'Z', '', null, NULL, NULL, 'User-04',],
         ];
     }
 

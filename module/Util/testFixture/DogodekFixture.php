@@ -96,8 +96,10 @@ class DogodekFixture
     public function getData()
     {
         return [
-            ['01', "2015-06-26 10:00","2015-06-26 10:00", "2015-06-26 12:00",4,"","","", NULL,NULL, 'Vaja-01',NULL,NULL,NULL,NULL,],
-            ['02', "2015-06-27 10:00","2015-06-27 10:00", "2015-06-27 12:00",4,"","","", NULL,NULL, 'Vaja-02',NULL,NULL,NULL,NULL,],
+            ['01', "2015-06-26 10:00", "2015-06-26 10:00", "2015-06-26 12:00", 4, "", "", "", NULL, NULL, 'Vaja-01', NULL, NULL, NULL, NULL,],
+            ['02', "2015-06-27 10:00", "2015-06-27 10:00", "2015-06-27 12:00", 4, "", "", "", NULL, NULL, 'Vaja-02', NULL, NULL, NULL, NULL,],
+            // oddaja prostora, ni vezano na uprizoritev
+            ['03', "2015-08-01 20:00", "2015-08-01 20:00", "2015-08-01 23:00", 5, "", "", "", NULL, NULL, null, NULL, NULL, NULL, NULL,],
         ];
     }
 

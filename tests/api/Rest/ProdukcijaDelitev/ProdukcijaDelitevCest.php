@@ -48,7 +48,10 @@ class ProdukcijaDelitevCest
     private $objAlternacija1;
     private $objAlternacija2;
     private $objOseba;
-
+ private $koprodukcijaUrl     = '/rest/produkcijadelitev';
+ private $objKoprodukcija;
+ private $lookUprizoritev;
+         
     public function _before(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
@@ -120,43 +123,54 @@ class ProdukcijaDelitevCest
         $I->assertEquals($ent['status'], 'zz');
     }
 
+     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
+    }
+
+    
     /**
      *  kreiramo zapis uprizoritev
      * 
      * @param ApiTester $I
      */
-    public function createUprizoritev(ApiTester $I)
-    {
-        $data                 = [
-            'faza'             => 'arhiv',
-            'naslov'           => 'zz',
-            'podnaslov'        => 'zz',
-            'delovniNaslov'    => 'zz',
-            'datumPremiere'    => '2010-02-01T00:00:00+0100',
-            'stOdmorov'        => 1,
-            'avtor'            => 'zz',
-            'gostujoca'        => true,
-            'trajanje'         => 2,
-            'opis'             => 'zz',
-            'arhIdent'         => 'zz',
-            'arhOpomba'        => 'zz',
-            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
-            'sloAvtor'         => true,
-            'besedilo'         => null,
-            'zvrstUprizoritve' => null,
-            'zvrstSurs'        => null,
-        ];
-        $this->objUprizoritev = $ent                  = $I->successfullyCreate($this->uprizoritevUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['opis'], 'zz');
-    }
+//    public function createUprizoritev(ApiTester $I)
+//    {
+//        $data                 = [
+//            'faza'             => 'arhiv',
+//            'naslov'           => 'zz',
+//            'podnaslov'        => 'zz',
+//            'delovniNaslov'    => 'zz',
+//            'datumPremiere'    => '2010-02-01T00:00:00+0100',
+//            'stOdmorov'        => 1,
+//            'avtor'            => 'zz',
+//            'gostujoca'        => true,
+//            'trajanje'         => 2,
+//            'opis'             => 'zz',
+//            'arhIdent'         => 'zz',
+//            'arhOpomba'        => 'zz',
+//            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
+//            'sloAvtor'         => true,
+//            'besedilo'         => null,
+//            'zvrstUprizoritve' => null,
+//            'zvrstSurs'        => null,
+//        ];
+//        $this->objUprizoritev = $ent                  = $I->successfullyCreate($this->uprizoritevUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        codecept_debug($ent);
+//        $I->assertEquals($ent['opis'], 'zz');
+//    }
 
     /**
      *  kreiramo zapis
      * 
      * @depends createProdukcijskaHisa
-     * @depends createUprizoritev
+     * @depends lookupUprizoritev
      * 
      * @param ApiTester $I
      */
@@ -172,7 +186,7 @@ class ProdukcijaDelitevCest
             'tantiemi'             => 5.67,
             'skupniStrosek'        => 34.56,
             'zaprosenProcent'      => 55.5,
-            'uprizoritev'          => $this->objUprizoritev['id'],
+            'uprizoritev'          => $this->lookUprizoritev['id'],
             'koproducent'          => $this->objProdukcijskaHisa['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
@@ -184,7 +198,7 @@ class ProdukcijaDelitevCest
         $data                        = [
             'odstotekFinanciranja' => 7.90,
             'nasStrosek'           => false,
-            'uprizoritev'          => $this->objUprizoritev['id'],
+            'uprizoritev'          => $this->lookUprizoritev['id'],
             'koproducent'          => $this->objProdukcijskaHisa['id'],
         ];
         $this->objProdukcijaDelitev2 = $ent                         = $I->successfullyCreate($this->restUrl, $data);
@@ -232,7 +246,7 @@ class ProdukcijaDelitevCest
      */
     public function getListPoUprizoritvi(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?uprizoritev=" . $this->objUprizoritev['id'];
+        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev['id'];
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
@@ -295,7 +309,7 @@ class ProdukcijaDelitevCest
         $I->assertEquals($ent['tantiemi'], 5.67);
         $I->assertEquals($ent['skupniStrosek'], 34.56);
         $I->assertEquals($ent['zaprosenProcent'], 55.5);
-        $I->assertEquals($ent['uprizoritev'], $this->objUprizoritev['id']);
+        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);
         $I->assertEquals($ent['koproducent'], $this->objProdukcijskaHisa['id']);
     }
 
