@@ -19,7 +19,7 @@ class LookupCest
 {
 
     private $lookupDrzavaUrl        = '/lookup/drzava';
-    private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
+    private $lookupAlternacijaUrl      = '/lookup/alternacija';
 
     public function _before(ApiTester $I)
     {
@@ -85,4 +85,31 @@ class LookupCest
         $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
     }
 
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupAlternacija(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->lookupAlternacijaUrl, []);
+        $I->assertNotEmpty($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupAlternacijaSifra(ApiTester $I)
+    {
+
+        $resp = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0001', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+    }
 }

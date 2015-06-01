@@ -32,8 +32,11 @@ class AvtorizacijeTerminStoritveCest
 
     private $restUrl        = '/rest/terminstoritve';
     private $alternacijaUrl = '/rest/alternacija';
+    private $lookupAlternacijaUrl      = '/lookup/alternacija';
     private $obj1;
-    private $lookAlternacija;
+    private $obj2Teh;
+    private $lookAlternacija1;
+    private $lookAlternacija2Teh;
 
     public function _before(ApiTester $I)
     {
@@ -45,17 +48,33 @@ class AvtorizacijeTerminStoritveCest
         
     }
 
-    /**
+        /**
+     * 
      * @param ApiTester $I
      */
     public function lookupAlternacije(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
 
-        $this->lookAlternacija = $look                  = $I->lookupEntity("alternacija", "0001", false);
-        codecept_debug($look);
-        $I->assertNotEmpty($look);
+        $resp = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0001', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija1=$resp['data'][0];
+
+        // še en zapis alternacije, katerega funkcija.podrocje=tehnik  (glede na fixturje)
+        $resp = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0002', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija2Teh=$resp['data'][0];
     }
+
 
     /**
      * najde nek dogodek
@@ -68,10 +87,23 @@ class AvtorizacijeTerminStoritveCest
 
         $resp       = $I->successfullyGetList($this->restUrl . "/vse", []);
         $list       = $resp['data'];
+        codecept_debug($list);
         $I->assertNotEmpty($list);
         $this->obj1 = $ent        = array_pop($list);
         codecept_debug($ent);
         $I->assertNotEmpty($ent);
+        
+        // poiščemo termina storitve:
+        $key = array_search($this->lookAlternacija1['id'], array_column($list, 'id'));
+        $this->obj1=$list[$key];
+        codecept_debug($list);
+        
+        // poiščemo še en termina storitve, kjer je funkcija.podrocje=tehnik  
+        $key = array_search($this->lookAlternacija2Teh['id'], array_column($list, 'id'));
+        $this->obj2Teh=$list[$key];
+        codecept_debug($list);
+        
+        
     }
 
     /**
