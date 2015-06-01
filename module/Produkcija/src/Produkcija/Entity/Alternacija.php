@@ -139,7 +139,39 @@ class Alternacija
 
     public function validate($mode = 'update')
     {
-        
+        if ($this->getSodelovanje()) {
+            $this->expect($this->getOseba() === $this->getSodelovanje()->getOseba());
+            $this->setZaposlen(true);
+        } else {
+            $this->setZaposlen(false);
+        }
+
+        /**
+         * Pri pogodbi preverim, če je nosilec pogodbe oseba na alternaciji
+         * Če je nosilec pogodbe poslovni partner grem čez kontaktne osebe 
+         * in preverim ,da je oseba kontakt na poslovnem partnerju
+         */
+        if ($this->getPogodba()) {
+            if ($this->getPogodba()->getOseba()) {
+                $this->expect($this->getOseba() === $this->getPogodba()->getOseba()
+                        , 'Oseba na pogodbi ni enaka kot oseba na alternaciji'
+                        , 1000335);
+            }
+
+            $popa = $this->getPogodba()->getPopa();
+            if ($popa) {
+                $found = FALSE;
+                foreach ($popa->getKontaktne() as $kon) {
+                    if ($kon->getOseba() === $this->getOseba()) {
+                        $found = true;
+                        break;
+                    }
+                }
+                $this->expect($found
+                        , 'Oseba na alternaciji ni kontakt na poslovnem partnerju, ki je nosilec pogodbe'
+                        , 1000336);
+            }
+        }
     }
 
     public function getId()

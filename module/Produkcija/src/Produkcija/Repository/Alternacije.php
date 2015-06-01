@@ -96,14 +96,14 @@ class Alternacije
         $this->preveriZaposlitev($object);
         parent::create($object, $params);
     }
-    
-    
+
     /**
      * 
      * Preverim če je oseba zaposlena, potem alternacijo nastavim kot zaposlitev 
      * 
      */
-    public function update($object, $params = null) {
+    public function update($object, $params = null)
+    {
         $this->preveriZaposlitev($object);
         parent::update($object, $params);
     }
@@ -116,22 +116,22 @@ class Alternacije
     public function preveriZaposlitev(Alternacija $alternacija)
     {
 
-        $zr = $this->getEntityManager()->getRepository('Produkcija\Entity\Zaposlitev');
-        
-        $zap = $zr->findOneBy([
-            'oseba'  => $alternacija->getOseba()->getId(),
-            'status' => 'A'
-        ]);
+        if (!$alternacija->getSodelovanje()) {
+            $zr = $this->getEntityManager()->getRepository('Produkcija\Entity\Zaposlitev');
 
-        if ($zap) {            
-            if ($zap->getKonec() === null || ($zap->getKonec() < new DateTime())) {
-                $alternacija->setZaposlen(true);
-                $alternacija->setSodelovanje($zap);
-                return ;
+            $zap = $zr->findOneBy([
+                'oseba'  => $alternacija->getOseba()->getId(),
+                'status' => 'A'
+            ]);
+
+            if ($zap) {
+                if ($zap->getKonec() === null || ($zap->getKonec() < new DateTime())) {
+                    $alternacija->setZaposlen(true);
+                    $alternacija->setSodelovanje($zap);
+                    return;
+                }
             }
+            $alternacija->setZaposlen(false);
         }
-        $alternacija->setZaposlen(false);        
-                
     }
-
 }

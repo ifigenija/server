@@ -38,11 +38,10 @@ lists:
                       multiple: false
                       required: false
                       value_options: @funkcija.podrocje
-                      
-        hydrator:
-            virtual: [imena]
     vse: 
         filter:
+hydrator:
+   virtual: [imena]            
 relation:
     default:
         alternacije:
