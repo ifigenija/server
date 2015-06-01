@@ -50,7 +50,7 @@ class Funkcija
     /**
      * V to polje se vpiše ime funkcije kot npr. Romeo, Julija,Tezej ipd.
      * 
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Naziv", description="Naziv funkcije")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
@@ -153,14 +153,34 @@ class Funkcija
 
     public function validate($mode = 'update')
     {
-        
+       $this->setPodrocje($this->getTipFunkcije()->getPodrocje());
     }
 
+    /**
+     * Vrne imena ljudi, ki so na alternacijah
+     */
+    public function getImena() {
+       $imena = "";
+       foreach ($this->getAlternacije() as $alter) {
+           /* @var $alter \Produkcija\Entity\Alternacija */ 
+           if ($alter->getOseba()) {
+               if ($alter->getPrivzeti()){
+                   $ime = "<strong>". $alter->getOseba()->getPolnoIme() . "</strong>";
+               } else {
+                   $ime = $alter->getOseba()->getPolnoIme();
+               }
+               $imena .= ($imena? ", ":"") . $ime;
+           }
+       }
+       return $imena;
+    }
+    
     public function getId()
     {
         return $this->id;
     }
 
+    
     public function getPodrocje()
     {
         return $this->podrocje;
@@ -317,7 +337,9 @@ class Funkcija
 
     public function setTipFunkcije(\Produkcija\Entity\TipFunkcije $tipFunkcije)
     {
+       
         $this->tipFunkcije = $tipFunkcije;
+      
         return $this;
     }
 

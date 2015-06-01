@@ -39,7 +39,7 @@ lists:
                       value_options: @funkcija.podrocje
                       
         hydrator:
-            - exclude: [ ]
+            virtual: [imena]
     vse: 
         filter:
 relation:

@@ -62,6 +62,7 @@ class StrosekUprizoritve
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="stroski")
+     * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id")
      * @Max\I18n(label="Uprizoritev",  description="Uprizoritev oz. projekt, za katerega je strošek")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Uprizoritev
@@ -70,6 +71,7 @@ class StrosekUprizoritve
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="stroski")
+     * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
      * @Max\I18n(label="Poslovni partner",  description="Poslovni partner")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa

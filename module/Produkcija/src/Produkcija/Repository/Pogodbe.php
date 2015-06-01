@@ -34,24 +34,37 @@ class Pogodbe
     {
         switch ($name) {
             case "vse":
-                $qb   = $this->getVseQb($options);
+                $qb = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
-                $this->expect(!(empty($options['popa']) && empty($options['oseba'])), "Oseba ali Partner ali država sta obvezna", 770031);
-                $crit = new Criteria();
-                $e    = $crit->expr();
+                $this->expect(!(empty($options['popa']) && empty($options['oseba']) && empty($options['uprizoritev']) && empty($options['alternacija']) && empty($options['oseba'])), "Oseba ali Partner ali država sta obvezna", 770031);
+
+
+                $qb = $this->createQueryBuilder('p');
+                $e  = $qb->expr();
+                $qb->join('p.alternacija', 'alternacija');
+                $qb->join('alternacija.funkcija', 'funkcija');
+                if (!empty($options['uprizoritev'])) {
+                    $qb->join('funkcija.uprizoritev', 'uprizoritev');
+                    $qb->andWhere($e->eq('uprizoritev.id', ':upr'));
+                    $qb->setParameter('upr', $options['uprizoritev'], 'string');
+                }
 
                 if (!empty($options['popa'])) {
-                    $popa = $this->getEntityManager()->find('App\Entity\Popa', $options['popa']);
-                    $exp  = $e->eq('popa', $popa);
-                } else {
-                    $oseba = $this->getEntityManager()->find('App\Entity\Oseba', $options['oseba']);
-
-                    $exp = $e->eq('oseba', $oseba);
+                    $qb->andWhere($e->eq('p.popa', ':popa'));
+                    $qb->setParameter('popa', $options['popa'], 'string');
                 }
-                $crit->andWhere($exp);
-                return new Selectable($this, $crit);
+
+                if (!empty($options['alternacija'])) {
+                    $qb->andWhere($e->eq('p.alternacija', ':alternacija'));
+                    $qb->setParameter('alternacija', $options['alternacija'], 'string');
+                }
+                if (!empty($options['oseba'])) {
+                    $qb->andWhere($e->eq('p.oseba', ':oseba'));
+                    $qb->setParameter('oseba', $options['oseba'], 'string');
+                }
+                return new DoctrinePaginator(new Paginator($qb));
         }
     }
 

@@ -23,10 +23,10 @@ class Funkcije
 
     protected $sortOptions = [
         "default" => [
-            "naziv" => ["alias" => "p.naziv"]
+            "sort" => ["alias" => "p.sort"]
         ],
         "vse"     => [
-            "naziv" => ["alias" => "p.naziv"]
+            "sort" => ["alias" => "p.naziv"]
         ]
     ];
 
@@ -52,7 +52,7 @@ class Funkcije
                     $exp = $e->eq('podrocje', $options['podrocje']);
                     $crit->andWhere($exp);
                 }
-
+                $crit->orderBy(['sort' => 'ASC']);
                 return new Selectable($this, $crit);
         }
     }

@@ -255,7 +255,7 @@ class Uprizoritev
 
     public function validate($mode = 'update')
     {
-        
+       $this->expect(!empty($this->sifra), 'Šifra ne sme biti prazna', 1000877);
     }
 
     public function getId()

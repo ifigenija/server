@@ -52,7 +52,8 @@ class KontaktnaOseba
     private $opis;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="kontaktnaOseba")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="kontaktneOsebe")
+     * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
      * @Max\I18n(label="Poslovni partner",  description="Poslovni partner")
      * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Popa
@@ -66,7 +67,7 @@ class KontaktnaOseba
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */
-    private $oseba;
+    protected $oseba;
 
     public function validate($mode = 'update')
     {

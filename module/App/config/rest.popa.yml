@@ -33,10 +33,11 @@ forms:
         hydrator: 
             byValue: [ naslovi,trrji, telefonske ]
             lookups: [ naslovi.drzava ]
+            exclude: [ pogodbe, stroski]
 lists:
     default: 
         hydrator:
-            - exclude: []
+            exclude: [pogodbe, stroski]
     vse:
         filter:
 hydrator:      

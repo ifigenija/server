@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping AS ORM,
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Pogodbe")
  * @Max\I18n(label="Pogodba",plural="Pogodbe")
  * @Max\Id(prefix="0011")
+ * @Max\Lookup(ident="sifra",label="oseba.polnoIme", search={"sifra","oseba.polnoIme", "popa.naziv"}, extra={"oseba.polnoIme", "popa.naziv","zacetek" })
  */
 class Pogodba
         extends \Max\Entity\Base
@@ -28,7 +29,7 @@ class Pogodba
      * Šifra pogodbe
      *
      * @ORM\Column(unique=true, length=7, nullable=false)
-     * @Max\I18n(label="Šifra", description="Unikatna šifra pogodbe")
+     * @Max\I18n(label="Številka pogodbe", description="Unikatna šifra pogodbe")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode")
      * @var string
      */

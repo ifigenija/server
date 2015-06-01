@@ -28,9 +28,7 @@ lists:
                 targetEntity: App\Entity\Popa
                 required: false
 
-        hydrator:
-            - exclude: []
     vse: 
         filter:                          
 hydrator: 
-    byBalue: [ oseba ]
+    byValue: [ oseba ]
