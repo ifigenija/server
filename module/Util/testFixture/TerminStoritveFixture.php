@@ -94,6 +94,8 @@ class TerminStoritveFixture
             ['03',"2015-06-26 10:00", "2015-06-26 10:00",null,null,2,"Dogodek-01","Alternacija-0003","Oseba-0003",],
             ['04',"2015-06-26 10:00", "2015-06-26 10:00",null,null,2,"Dogodek-01","Alternacija-0004","Oseba-0002",],
             ['05',"2015-06-26 10:00", "2015-06-26 10:00",null,null,2,"Dogodek-01","Alternacija-0005","Oseba-0012",],
+            // dogodek brez uprizoritve:
+            ['06',"2015-08-01 20:00", "2015-08-01 23:00",null,null,2,"Dogodek-03",null,"Oseba-0012",],
         ];
     }
 

@@ -64,6 +64,7 @@ class UserFixture
                     ['01','ivo@ifigenija.si',"testni uporabnik za inšpecienta","Ivo1234",true,null, "","",],
                     ['02','tona@ifigenija.si',"testni uporabnik za Tehničnega vodjo","Tona1234",true,null, "","",],
                     ['03','irena@ifigenija.si',"testni uporabnik za igralca","Irena1234",true,null, "","",],
+                    ['04','tatjana@ifigenija.si',"testni uporabnik vnašalca termina storitev (TerminStoritve-vse)","Tatjana1234",true,null, "","",],
         ];
     }
 
