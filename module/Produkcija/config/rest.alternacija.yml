@@ -55,8 +55,8 @@ lists:
                       targetEntity: Produkcija\Entity\Funkcija
                       required: false
         hydrator: 
-#            lookups: [funkcija, koprodukcija, pogodba, oseba]
-            lookups: [oseba]
+            lookups: [funkcija, koprodukcija, pogodba, oseba]
+#            lookups: [oseba]
 relation:
     default:
         storitve:

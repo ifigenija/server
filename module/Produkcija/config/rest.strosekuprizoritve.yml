@@ -24,6 +24,8 @@ lists:
                       targetEntity: Produkcija\Entity\Uprizoritev
                       required: true
         hydrator:
-            - exclude: []
+            lookups: [ popa ]
     vse: 
         filter:
+        hydrator:
+            lookups: [ popa ]
