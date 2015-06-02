@@ -10,6 +10,7 @@ forms:
               options: 
                   required: false
             - zaposlen
+            - pogodba    #$$ začasno damo pogodbo gor
             - zacetek
             - konec
             - opomba
@@ -21,7 +22,7 @@ forms:
             - sodelovanje
             - oseba
             - koprodukcija
-            - pogodba 
+#            - pogodba    #$$ začasno damo pogodbo gor
         hydrator:
             lookups: [oseba]
             
