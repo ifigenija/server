@@ -6,7 +6,8 @@ forms:
     default: 
         elements:
 #            - id
-            - podrocje
+#                           podrocje se avtomatsko prenese iz tipafunkcije
+#            - podrocje
             - vodjaEkipe
             - naziv
             - komentar

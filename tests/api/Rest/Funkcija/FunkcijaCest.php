@@ -257,7 +257,7 @@ class FunkcijaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'podrocje'          => 'igralec',
+//            'podrocje'          => 'igralec',     //$$ se avtomatsko v validate prenese iz tipa funkcije
             'vodjaEkipe'     => FALSE,
             'naziv'             => 'zz',
             'komentar'             => 'zz',
@@ -276,7 +276,7 @@ class FunkcijaCest
 
         // kreiramo še en zapis
         $data               = [
-            'podrocje'          => 'tehnik',
+//            'podrocje'          => 'tehnik',//$$ se avtomatsko v validate prenese iz tipa funkcije
             'vodjaEkipe'     => FALSE,
             'naziv'             => 'aa',
             'komentar'             => 'aa',
@@ -394,7 +394,7 @@ class FunkcijaCest
         codecept_debug($ent);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['podrocje'], 'igralec',"$$ napačno vrača umetnik");
+        $I->assertEquals($ent['podrocje'], $this->lookTipFunkcije['podrocje'],"področje iz tipa funkcije");
         $I->assertEquals($ent['vodjaEkipe'], FALSE);
         $I->assertEquals($ent['naziv'], 'zz');
         $I->assertEquals($ent['komentar'], 'zz');

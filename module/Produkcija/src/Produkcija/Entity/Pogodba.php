@@ -37,6 +37,7 @@ class Pogodba
 
     /**
      * @ORM\Column(type="decimal", nullable=true)
+     * $$ novo polje
      */
     private $vrednostDo;
 
