@@ -31,7 +31,7 @@ class TipFunkcije
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Ime", description="Ime tipa funkcije")
+     * @Max\I18n(label="entiteta.ime", description="Ime tipa funkcije")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -39,19 +39,20 @@ class TipFunkcije
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="Opis", description="Opis tipa funkcije")
+     * @Max\I18n(label="entiteta.opis", description="Opis tipa funkcije")
      * @var string
      */
     private $opis;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="tipFunkcije.nastopajoc", description="Nastopajoč")
      */
     private $nastopajoc;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Žensko ime", description="Žensko ime funkcije")
+     * @Max\I18n(label="tipFunkcije.zenskoIme", description="Žensko ime funkcije")
      * @var string
      */
     private $imeZenski;
@@ -59,7 +60,7 @@ class TipFunkcije
     /**
      * $$ isto kot pri Funkcija
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Področje", description="Področje")
+     * @Max\I18n(label="entiteta.podrocje", description="Področje")
      * @Max\Ui(type="select", opts="tipfunkcije.podrocje")
      * @var string
      */

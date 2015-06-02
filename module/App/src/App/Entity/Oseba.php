@@ -116,7 +116,7 @@ class Oseba
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="oseba.datumRosjtva", description="Rojstni datum oseba")   
+     * @Max\I18n(label="oseba.datumRojstva", description="Rojstni datum oseba")   
      * @Max\Ui(icon="fa fa-birthday-cake")
      * @var string
      */

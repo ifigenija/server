@@ -26,14 +26,14 @@ class ProdukcijaDelitev
 
     /**
      * @ORM\Column(type="decimal", nullable=true)
-     * @Max\I18n(label="Odstotek financiranja", description="Odstotek financiranja")
+     * @Max\I18n(label="prodel.odstotekFinanciranja", description="Odstotek financiranja")
      * @var double
      */
     private $odstotekFinanciranja;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="Naš strošek", description="Ali je naš strošek")
+     * @Max\I18n(label="prodel.nasStrosek", description="Ali je naš strošek")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -41,28 +41,28 @@ class ProdukcijaDelitev
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="Lastna sredstva", description="Lastna sredstva")
+     * @Max\I18n(label="prodel.lastnaSredstva", description="Lastna sredstva")
      * @var double
      */
     private $lastnaSredstva;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="Zaprošeno", description="Zaprošeno")
+     * @Max\I18n(label="prodel.zaproseno", description="Zaprošeno")
      * @var double
      */
     private $zaproseno;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="Drugi javni viri financiranja", description="Drugi javni viri financiranja")
+     * @Max\I18n(label="prodel.drugiJavni", description="Drugi javni viri financiranja")
      * @var double
      */
     private $drugiJavni;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="Strošek avtorskih honorarjev", description="Strošek avtorskih honorarjev")
+     * @Max\I18n(label="prodel.avtorskih", description="Strošek avtorskih honorarjev")
      * @var double
      */
     private $avtorskih;
@@ -71,21 +71,21 @@ class ProdukcijaDelitev
      *  $$ rb ali ni to isto kot avtorski honorar?
      * 
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="Tantieme", description="Strošek tantiemov")
+     * @Max\I18n(label="prodel.tantiemi", description="Strošek tantiemov")
      * @var double
      */
     private $tantiemi;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="Skupni strošek", description="Skupni strošek")
+     * @Max\I18n(label="prodel.skupniStrosek", description="Skupni strošek")
      * @var double
      */
     private $skupniStrosek;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=6, scale=2)
-     * @Max\I18n(label="Zaprošen procent", description="Zaprošen procent")
+     * @Max\I18n(label="prodel.zaprosenProcent", description="Zaprošen procent")
      * @var double
      */
     private $zaprosenProcent;
@@ -100,7 +100,7 @@ class ProdukcijaDelitev
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="koprodukcije")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id", nullable=false)
-     * @Max\I18n(label="Uprizoritev",  description="Uprizoritev")
+     * @Max\I18n(label="entiteta.uprizoritev",  description="Uprizoritev")
      * @Max\Ui(type="hiddenid",required=true)
      * @var \Produkcija\Entity\Uprizoritev
      */
@@ -109,7 +109,7 @@ class ProdukcijaDelitev
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ProdukcijskaHisa", inversedBy="koprodukcije")
      * @ORM\JoinColumn(name="koproducent_id", referencedColumnName="id", nullable=false)
-     * @Max\I18n(label="Koproducent",  description="Koproducent")
+     * @Max\I18n(label="prodel.koproducent",  description="Koproducent")
      * @Max\Ui(type="toone", required=true)
      * @var \Produkcija\Entity\ProdukcijskaHisa
      */

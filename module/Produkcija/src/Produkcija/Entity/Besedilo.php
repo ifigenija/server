@@ -35,7 +35,7 @@ class Besedilo
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="besedilo.naslov", description="Naslov besedila")
+     * @Max\I18n(label="entiteta.naslov", description="Naslov besedila")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -43,14 +43,14 @@ class Besedilo
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="besedilo.avtor", description="Avtor besedila")
+     * @Max\I18n(label="entiteta.avtor", description="Avtor besedila")
      * @var string
      */
     private $avtor;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="besedilo.podnaslov", description="Podnaslov besedila")
+     * @Max\I18n(label="entiteta.podnaslov", description="Podnaslov besedila")
      * @var string
      */
     private $podnaslov;

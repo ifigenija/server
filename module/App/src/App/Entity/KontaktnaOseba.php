@@ -30,7 +30,7 @@ class KontaktnaOseba
      *  NA-neaktiven
      *
      * @ORM\Column(type="string", length=20, nullable=true)
-     * @Max\I18n(label="Status kontaktne osebe", description="AK-aktiven, NA-neaktiven")
+     * @Max\I18n(label="kontaktnaOseba.status", description="AK-aktiven, NA-neaktiven")
      * @Max\Ui(type="select",opts="kontaktnaoseba.status", required=true)
      * @var string
 
@@ -39,14 +39,14 @@ class KontaktnaOseba
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Funkcija", description="Funkcija kontaktne osebe -npr. direktor")
+     * @Max\I18n(label="kontaktnaOseba.funkcija", description="Funkcija kontaktne osebe -npr. direktor")
      * @var string
      */
     private $funkcija;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="Opis", description="Opis naslova")
+     * @Max\I18n(label="entiteta.opis", description="Opis naslova")
      * @var string     
      */
     private $opis;
@@ -54,7 +54,7 @@ class KontaktnaOseba
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="kontaktneOsebe")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
-     * @Max\I18n(label="Poslovni partner",  description="Poslovni partner")
+     * @Max\I18n(label="kontaktnaOseba.popa",  description="Poslovni partner")
      * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Popa
      */
@@ -63,7 +63,7 @@ class KontaktnaOseba
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="kontaktneOsebe")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
-     * @Max\I18n(label="Oseba",  description="Oseba")
+     * @Max\I18n(label="kontaktnaOseba.oseba",  description="Oseba")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */

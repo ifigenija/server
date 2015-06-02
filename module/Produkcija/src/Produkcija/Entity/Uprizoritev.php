@@ -27,7 +27,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Max\I18n(label="Šifra", description="Šifra uprizoritve")
+     * @Max\I18n(label="entiteta.sifra", description="Šifra uprizoritve")
      * @Max\Ui(type="sifra",ident=true )
      * @var string
      */
@@ -35,7 +35,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="string", length=35, nullable=true)
-     * @Max\I18n(label="Faza", description="Faza uprizoritve")
+     * @Max\I18n(label="uprizoritev.faza", description="Faza uprizoritve")
      * @Max\Ui(type="select", opts="uprizoritev.faza")
      * @var string
      */
@@ -43,7 +43,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Naslov", description="Naslov uprizoritve")
+     * @Max\I18n(label="entiteta.naslov", description="Naslov uprizoritve")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -51,14 +51,14 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Podnaslov", description="Podnaslov uprizoritve")
+     * @Max\I18n(label="entiteta.podnaslov", description="Podnaslov uprizoritve")
      * @var string
      */
     private $podnaslov;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Delovni naslov", description="Delovni naslov uprizoritve")
+     * @Max\I18n(label="uprizoritev.delovniNaslov", description="Delovni naslov uprizoritve")
      * @var string
      */
     private $delovniNaslov;
@@ -69,13 +69,14 @@ class Uprizoritev
      * polje uporabljamo že v fazi predprodukcije za makroplaniranje
      * 
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="Datum začetka študija", description="Datum začetka študija")
+     * @Max\I18n(label="uprizoritev.datumZacStudija", description="Datum začetka študija")
      * @var string
      */
     private $datumZacStudija;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="uprizoritev.steviloVaj", description="Število vaj")
      */
     private $steviloVaj;
 
@@ -85,7 +86,7 @@ class Uprizoritev
      * polje uporabljamo že v fazi predprodukcije za makroplaniranje
      * 
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="Datum premiere", description="Datum premiere uprizoritve")
+     * @Max\I18n(label="uprizoritev.datumPremiere", description="Datum premiere uprizoritve")
      * @var string
      */
     private $datumPremiere;
@@ -96,7 +97,7 @@ class Uprizoritev
      * 
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Prostor")
      * @ORM\JoinColumn(name="maticniOder_id", referencedColumnName="id")
-     * @Max\I18n(label="Matični oder",  description="Matični oder / privzeto prizorišče uprizoritve")
+     * @Max\I18n(label="uprizoritev.maticniOder",  description="Matični oder / privzeto prizorišče uprizoritve")
      * @Max\Ui(type="select",empty="Kjer koli")    //$$ rb zakaj select?
      * @var \Prodaja\Entity\Prostor
      */
@@ -104,7 +105,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="Št. odmorov", description="Število odmorov uprizoritve")
+     * @Max\I18n(label="uprizoritev.stOdmorov", description="Število odmorov uprizoritve")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -112,7 +113,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Avtor", description="Avtor uprizoritve")
+     * @Max\I18n(label="entiteta.avtor", description="Avtor uprizoritve")
      * @Max\Ui(type="naziv")
      * @var string
      */
@@ -120,7 +121,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="Gostujoča", description="Ali je uprizoritev gostujoča")
+     * @Max\I18n(label="uprizoritev.gostujoca", description="Ali je uprizoritev gostujoča")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -128,7 +129,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="Trajanje", description="Trajanje uprizoritve")
+     * @Max\I18n(label="uprizoritev.trajanje", description="Trajanje uprizoritve")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -136,28 +137,28 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="Opis", description="Opis uprizoritve")
+     * @Max\I18n(label="entiteta.opis", description="Opis uprizoritve")
      * @var string
      */
     private $opis;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Id za arhiv", description="Id uprizoritve za arhiv")
+     * @Max\I18n(label="uprizoritev.arhIdent", description="Id uprizoritve za arhiv")
      * @var string
      */
     private $arhIdent;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Opomba za arhiv", description="Opomba pri uprizoritvi za arhiv")
+     * @Max\I18n(label="uprizoritev.arhOpomba", description="Opomba pri uprizoritvi za arhiv")
      * @var string
      */
     private $arhOpomba;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="Datum zaključka", description="Opomba pri uprizoritvi za arhiv")
+     * @Max\I18n(label="uprizoritev.datumZakljucka", description="Opomba pri uprizoritvi za arhiv")
      * @Max\Ui(icon="fa fa-calendar")
      * @var string
      */
@@ -165,7 +166,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="Slovenski avtor", description="Ali je slovenski avtor uprizoritve")
+     * @Max\I18n(label="uprizoritev.sloAvtor", description="Ali je slovenski avtor uprizoritve")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -173,7 +174,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Kratki naslov", description="Kratki naslov uprizoritve")
+     * @Max\I18n(label="uprizoritev.kratkiNaslov", description="Kratki naslov uprizoritve")
      * @var string
      */
     private $kratkiNaslov;
@@ -229,7 +230,7 @@ class Uprizoritev
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Besedilo")
      * @ORM\JoinColumn(name="besedilo_id", referencedColumnName="id")
-     * @Max\I18n(label="Besedilo",  description="Besedilo uprizoritve")
+     * @Max\I18n(label="uprizoritev.besedilo",  description="Besedilo uprizoritve")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Besedilo
      */
@@ -238,7 +239,7 @@ class Uprizoritev
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ZvrstUprizoritve")
      * @ORM\JoinColumn(name="zvrst_uprizoritve_id", referencedColumnName="id")
-     * @Max\I18n(label="Zvrst uprizoritve",  description="Zvrst uprizoritve")
+     * @Max\I18n(label="uprizoritev.zvrstUprizoritve",  description="Zvrst uprizoritve")
      * @Max\Ui(type="select",empty="Izberi zvrst")
      * @var \Produkcija\Entity\ZvrstUprizoritve
      */
@@ -247,7 +248,7 @@ class Uprizoritev
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ZvrstSurs")
      * @ORM\JoinColumn(name="zvrst_surs_id", referencedColumnName="id")
-     * @Max\I18n(label="Zvrst SURS",  description="Zvrst SURS")
+     * @Max\I18n(label="uprizoritev.zvrstSurs",  description="Zvrst SURS")
      * @Max\Ui(type="select", empty="Izberi klasifikacijo")
      * @var \Produkcija\Entity\ZvrstSurs
      */

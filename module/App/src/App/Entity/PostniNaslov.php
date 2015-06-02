@@ -123,7 +123,7 @@ class PostniNaslov
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
      * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id")
-     * @Max\I18n(label="postniNaslov.drzava", description="Država")
+     * @Max\I18n(label="entiteta.drzava", description="Država")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Drzava
      */
@@ -134,7 +134,7 @@ class PostniNaslov
      *  checkbox 
      *
      * @ORM\Column(type="boolean", length=1, nullable=true)
-     * @Max\I18n(label="postniNaslov.jeeu", description="Je klient iz EU")
+     * @Max\I18n(label="entiteta.jeeu", description="Je klient iz EU")
      * @Max\Ui(type="boolcheckbox",group="Davčni podatki")
      * @var boolean
      */

@@ -34,7 +34,7 @@ class Popa
      * Šifra klienta
      *
      * @ORM\Column(unique=true, length=4, nullable=false)
-     * @Max\I18n(label="Šifra", description="Unikatna šifra klienta")
+     * @Max\I18n(label="entiteta.sifra", description="Unikatna šifra klienta")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode",group="Osnovni podatki")
      * @var string
      */
@@ -46,7 +46,7 @@ class Popa
      * !!!!kupca tako ali tako dodali v tabelo kupcev 
      * 
      * @ORM\Column(length=20, nullable=true)
-     * @Max\I18n(label="Tip klienta", description="Tip klienta (kupec, dobavitelj, koproducent, )")
+     * @Max\I18n(label="popa.tipkli", description="Tip klienta (kupec, dobavitelj, koproducent, )")
      * @Max\Ui(type="select",opts="popa.tipkli",group="Osnovni podatki",required=true)
      * @var string
      */
@@ -59,7 +59,7 @@ class Popa
      *
      * @ORM\Column(length=2, nullable=true)
      * @Max\Ui(type="select",opts="popa.stakli",group="Osnovni podatki", required=true)
-     * @Max\I18n(label="Status klienta", description="AK-aktiven, NA-neaktiven")
+     * @Max\I18n(label="popa.stakli", description="AK-aktiven, NA-neaktiven")
      * @var string
      */
     protected $stakli;
@@ -68,7 +68,7 @@ class Popa
      * Naziv klienta
      *
      * @ORM\Column(length=60, nullable=false) 
-     * @Max\I18n(label="Naziv", description="Naziv klienta")
+     * @Max\I18n(label="entiteta.naziv", description="Naziv klienta")
      * @Max\Ui(type="naziv",group="Osnovni podatki") 
      * @var string
      */
@@ -79,13 +79,14 @@ class Popa
      *
      * @ORM\Column(length=60, nullable=true)
      * @Max\Ui(type="naziv",group="Osnovni podatki")
-     * @Max\I18n(label="Dodatni naziv", description="Dodatni naziv za klienta")
+     * @Max\I18n(label="popa.naziv1", description="Dodatni naziv za klienta")
      * @var string
      */
     protected $naziv1 = '';
 
     /**
      * @ORM\Column(length=60, nullable=true)
+     * @Max\I18n(label="popa.panoga", description="Panoga")
      */
     private $panoga;
 
@@ -93,7 +94,7 @@ class Popa
      * Email naslov
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="E-pošta", description="E-poštni naslov")
+     * @Max\I18n(label="entiteta.email", description="E-poštni naslov")
      * @Max\Ui(type="email",group="Kontaktni podatki")
      * @var string
      */
@@ -103,7 +104,7 @@ class Popa
      * Url spletne strani
      *
      * @ORM\Column(length=100, nullable=true)
-     * @Max\I18n(label="Spletna stran", description="URL naslov spletne strani")
+     * @Max\I18n(label="popa.url", description="URL naslov spletne strani")
      * @Max\Ui(type="naziv",icon="fa fa-globe",group="Kontaktni podatki")
      * @var string
      */
@@ -114,7 +115,7 @@ class Popa
      *  tekstovno polje za dodatne podatke o klientu
      *
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="Opomba", description="Opomba")
+     * @Max\I18n(label="entiteta.opomba", description="Opomba")
      * @var string
      */
     protected $opomba;
@@ -124,7 +125,7 @@ class Popa
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
      * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id", nullable=false) 
-     * @Max\I18n(label="Država", description="Država klienta")
+     * @Max\I18n(label="entiteta.drzava", description="Država klienta")
      * @Max\Ui(type="toone",group="Kontaktni podatki",required=true)
      * @var \App\Entity\Drzava
      */
@@ -180,7 +181,7 @@ class Popa
      *
      *
      * @ORM\Column(length=18, nullable=true)
-     * @Max\I18n(label="ID za DDV", description="Davčna številka klienta")
+     * @Max\I18n(label="popa.idddv", description="Davčna številka klienta")
      * @Max\Ui(group="Davčni podatki")
      * @var string
      */
@@ -190,7 +191,7 @@ class Popa
      * Matična številka klienta
      *
      * @ORM\Column(length=20, nullable=true)
-     * @Max\I18n(label="Matična številka", description="Matična številka klienta")
+     * @Max\I18n(label="popa.maticna", description="Matična številka klienta")
      * @Max\Ui(type="sifra",group="Davčni podatki")
      * @var string
      */
@@ -202,7 +203,7 @@ class Popa
      *
      * 
      * @ORM\Column(length=1, nullable=true)
-     * @Max\I18n(label="Zavezanec za DDV", description="Je klient zavezanec za DDV")
+     * @Max\I18n(label="popa.zavezanec", description="Je klient zavezanec za DDV")
      * @Max\Ui(type="checkbox",group="Davčni podatki")      //$$ rb verjetno potrebne select opcije
      * @var string
      */
@@ -214,7 +215,7 @@ class Popa
      *
      *
      * @ORM\Column(length=1, nullable=true)
-     * @Max\I18n(label="Iz EU", description="Je klient iz EU")
+     * @Max\I18n(label="popa.jeeu", description="Je klient iz EU")
      * @Max\Ui(type="checkbox",group="Davčni podatki")      //$$ rb verjetno potrebne select opcije
      * @var string
      */
@@ -224,7 +225,7 @@ class Popa
      * Zavezanec za DDV od
      *
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="Zavezanec za DDV od",  description="Zavezanec za DDV od dne")
+     * @Max\I18n(label="popa.datZav",  description="Zavezanec za DDV od dne")
      * @Max\Ui(group="Davčni podatki")
      * @var string
      */
@@ -236,7 +237,7 @@ class Popa
      * @todo polje je neuporabljeno
      *
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="Zavezanec za DDV do", description="Zavezanec za DDV do dne")
+     * @Max\I18n(label="popa.datnZav", description="Zavezanec za DDV do dne")
      * @Max\Ui(group="Davčni podatki")
      * @var string
      */
@@ -246,7 +247,7 @@ class Popa
      * A je poslovni partner iz zamejstva 
      * 
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="Iz zamejstva", description="Je poslovni partner iz zamejstva")
+     * @Max\I18n(label="popa.zamejstvo", description="Je poslovni partner iz zamejstva")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
