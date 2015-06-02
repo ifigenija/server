@@ -21,6 +21,8 @@ use ApiTester;
  *      - delete
  *  validate metodo za entiteto - zaradi nullable=false do validacije sploh ne pride
  * relacije z drugimi entitetami
+ * - dogodek $$ O2O
+ * - kupec $$ O2O
  *      - drzava     
  *      - osebe       2M
  *          . update 

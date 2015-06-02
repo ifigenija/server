@@ -113,10 +113,11 @@ class Funkcija
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="funkcija.maxPrekrivanje")
-     * $$ novo polje, IRvanj
+     * @Max\I18n(label="funkcija.maxPrekrivanj")
+     * @Max\Ui(type="integer")
+     * @var integer     
      */
-    private $maxPrekirvanj;
+    private $maxPrekrivanj;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="funkcija")
@@ -134,13 +135,11 @@ class Funkcija
     private $uprizoritev;
 
     /**
-     * 
-     * 
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Alternacija")
+     * @ORM\JoinColumn(name="alternacija_id", referencedColumnName="id") \Produkcija\Entity\Alternacija
      * @Max\I18n(label="funkcija.privzeti",  description="Privzeta alternacija")
      * @Max\Ui(type="toone")
      * @var
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Alternacija")
-     * @ORM\JoinColumn(name="alternacija_id", referencedColumnName="id") \Produkcija\Entity\Alternacija
      */
     private $privzeti;
 
@@ -156,34 +155,34 @@ class Funkcija
 
     public function validate($mode = 'update')
     {
-       $this->setPodrocje($this->getTipFunkcije()->getPodrocje());
+        $this->setPodrocje($this->getTipFunkcije()->getPodrocje());
     }
 
     /**
      * Vrne imena ljudi, ki so na alternacijah
      */
-    public function getImena() {
-       $imena = "";
-       foreach ($this->getAlternacije() as $alter) {
-           /* @var $alter \Produkcija\Entity\Alternacija */ 
-           if ($alter->getOseba()) {
-               if ($alter->getPrivzeti()){
-                   $ime = "<strong>". $alter->getOseba()->getPolnoIme() . "</strong>";
-               } else {
-                   $ime = $alter->getOseba()->getPolnoIme();
-               }
-               $imena .= ($imena? ", ":"") . $ime;
-           }
-       }
-       return $imena;
+    public function getImena()
+    {
+        $imena = "";
+        foreach ($this->getAlternacije() as $alter) {
+            /* @var $alter \Produkcija\Entity\Alternacija */
+            if ($alter->getOseba()) {
+                if ($alter->getPrivzeti()) {
+                    $ime = "<strong>" . $alter->getOseba()->getPolnoIme() . "</strong>";
+                } else {
+                    $ime = $alter->getOseba()->getPolnoIme();
+                }
+                $imena .= ($imena ? ", " : "") . $ime;
+            }
+        }
+        return $imena;
     }
-    
+
     public function getId()
     {
         return $this->id;
     }
 
-    
     public function getPodrocje()
     {
         return $this->podrocje;
@@ -229,9 +228,9 @@ class Funkcija
         return $this->dovoliPrekrivanje;
     }
 
-    public function getMaxPrekirvanj()
+    public function getMaxPrekrivanj()
     {
-        return $this->maxPrekirvanj;
+        return $this->maxPrekrivanj;
     }
 
     public function getAlternacije()
@@ -314,9 +313,9 @@ class Funkcija
         return $this;
     }
 
-    public function setMaxPrekirvanj($maxPrekirvanj)
+    public function setMaxPrekrivanj($maxPrekrivanj)
     {
-        $this->maxPrekirvanj = $maxPrekirvanj;
+        $this->maxPrekrivanj = $maxPrekrivanj;
         return $this;
     }
 
@@ -340,9 +339,7 @@ class Funkcija
 
     public function setTipFunkcije(\Produkcija\Entity\TipFunkcije $tipFunkcije)
     {
-       
         $this->tipFunkcije = $tipFunkcije;
-      
         return $this;
     }
 

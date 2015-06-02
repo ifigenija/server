@@ -18,6 +18,7 @@ return [
         ],
         'factories'  => [
             'Rest\prostor' => 'Max\Factory\RestControllerFactory',
+            'Rest\kupec' => 'Max\Factory\RestControllerFactory',
         ],
     ],
     'router'          => [

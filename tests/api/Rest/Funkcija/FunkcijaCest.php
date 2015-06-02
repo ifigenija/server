@@ -269,6 +269,7 @@ class FunkcijaCest
             'uprizoritev'       => $this->lookUprizoritev['id'],
             'privzeti'          => $this->objAlternacija['id'], //$$ to ne deluje izgleda - jemlje kot null?
             'tipFunkcije'       => $this->lookTipFunkcije['id'],
+            'maxPrekrivanj'              => 3,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['naziv'], 'zz');
@@ -288,6 +289,7 @@ class FunkcijaCest
             'uprizoritev'       => $this->lookUprizoritev['id'],
             'privzeti'          => null,
             'tipFunkcije'       => $this->lookTipFunkcije['id'],
+            'maxPrekrivanj'              => 4,
         ];
         $this->obj2 = $ent                = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['naziv'], 'aa');
@@ -404,6 +406,7 @@ class FunkcijaCest
         $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);
         $I->assertEquals($ent['privzeti'], $this->objAlternacija['id'], "privzeti");
         $I->assertEquals($ent['tipFunkcije'], $this->lookTipFunkcije['id'], "tip funkcije");
+        $I->assertEquals($ent['maxPrekrivanj'], 3, "maks prekrivanj");
 
         $I->assertTrue(isset($ent['alternacije']));
 

@@ -87,7 +87,7 @@ class Popa
     /**
      * @ORM\Column(length=60, nullable=true)
      * @Max\I18n(label="popa.panoga", description="Panoga")
-     * $$ novo polje
+     * @var string
      */
     private $panoga;
 
@@ -256,11 +256,17 @@ class Popa
 
     /**
      * @ORM\OneToOne(targetEntity="Produkcija\Entity\ProdukcijskaHisa", mappedBy="popa")
+     * @Max\I18n(label="popa.producent",  description="Producent")
+     * @Max\Ui(type="toone")
+     * @var \Produkcija\Entity\ProdukcijskaHisa
      */
     private $producent;
 
     /**
      * @ORM\OneToOne(targetEntity="Prodaja\Entity\Kupec", mappedBy="popa")
+     * @Max\I18n(label="popa.kupec",  description="Kupec")
+     * @Max\Ui(type="toone")
+     * @var \Prodaja\Entity\Kupec
      */
     private $kupec;
 
@@ -590,16 +596,17 @@ class Popa
         return $this;
     }
 
-    public function setProducent($producent)
+    public function setProducent(\Produkcija\Entity\ProdukcijskaHisa $producent)
     {
         $this->producent = $producent;
         return $this;
     }
 
-    public function setKupec($kupec)
+    public function setKupec(\Prodaja\Entity\Kupec $kupec)
     {
         $this->kupec = $kupec;
         return $this;
     }
+
 
 }

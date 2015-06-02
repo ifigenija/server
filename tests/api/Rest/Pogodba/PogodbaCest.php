@@ -208,6 +208,9 @@ class PogodbaCest
             'oseba'             => null,
             'popa'              => $this->lookPopa['id'],
             'trr'               => $this->objTrr['id'],
+            'vrednostDo'        => 55.5,
+            'zacetek'           => '2012-02-01T00:00:00+0100',
+            'konec'             => '2014-02-01T00:00:00+0100',
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -225,6 +228,9 @@ class PogodbaCest
             'oseba'             => $this->lookOseba['id'],
             'popa'              => null,
             'trr'               => $this->objTrr['id'],
+            'vrednostDo'        => 66.5,
+            'zacetek'           => '2017-02-01T00:00:00+0100',
+            'konec'             => '2017-03-01T00:00:00+0100',
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -242,6 +248,9 @@ class PogodbaCest
             'oseba'             => $this->lookOseba['id'],
             'popa'              => null,
             'trr'               => $this->objTrr['id'],
+            'vrednostDo'        => 77.7,
+            'zacetek'           => '2012-03-01T00:00:00+0100',
+            'konec'             => '2014-04-01T00:00:00+0100',
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -273,14 +282,14 @@ class PogodbaCest
     {
         $data                  = $this->objAlternacija1;
         $I->assertNotEmpty($data);
-        $data['pogodba'] = $this->obj2['id'];
+        $data['pogodba']       = $this->obj2['id'];
         $I->assertNotEmpty($data);
         $this->objAlternacija1 = $ent                   = $I->successfullyUpdate($this->alternacijaUrl, $data['id'], $data);
         $I->assertNotEmpty($ent['id']);
 
         // kreiram še en zapis
         $data                  = $this->objAlternacija2;
-        $data['pogodba'] = $this->obj2['id'];
+        $data['pogodba']       = $this->obj2['id'];
         $this->objAlternacija2 = $ent                   = $I->successfullyUpdate($this->alternacijaUrl, $data['id'], $data);
         $I->assertNotEmpty($ent['id']);
     }
@@ -299,7 +308,7 @@ class PogodbaCest
         $list = $resp['data'];
         codecept_debug($resp);
 
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords'],"neznano zakaj vrne 1 in ne 2 $$ - glej pogodbe");
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords'], "neznano zakaj vrne 1 in ne 2 $$ - glej pogodbe");
         $I->assertNotEmpty($list);
 //        $I->assertEquals("WW4", $list[0]['sifra']);
     }
@@ -375,6 +384,9 @@ class PogodbaCest
         $I->assertEquals($ent['oseba'], null);
         $I->assertEquals($ent['popa'], $this->lookPopa['id']);
         $I->assertEquals($ent['trr'], $this->objTrr['id']);
+        $I->assertEquals($ent['vrednostDo'], 55.5);
+        $I->assertEquals($ent['zacetek'], '2012-02-01T00:00:00+0100');
+        $I->assertEquals($ent['konec'], '2014-02-01T00:00:00+0100');
     }
 
     /**

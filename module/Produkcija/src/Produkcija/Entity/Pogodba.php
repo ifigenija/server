@@ -36,21 +36,23 @@ class Pogodba
     private $sifra;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="entiteta.vrednostDo", description="vrednost do")
-     * $$ novo polje
+     * @var double
      */
     private $vrednostDo;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="entiteta.zacetek", description="začetek pogodbe")
+     * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="entiteta.konec", description="konec pogodbe")
+     * @var string
      */
     private $konec;
 
@@ -249,6 +251,39 @@ class Pogodba
     public function setTrr(\App\Entity\Trr $trr)
     {
         $this->trr = $trr;
+        return $this;
+    }
+
+    public function getVrednostDo()
+    {
+        return $this->vrednostDo;
+    }
+
+    public function getZacetek()
+    {
+        return $this->zacetek;
+    }
+
+    public function getKonec()
+    {
+        return $this->konec;
+    }
+
+    public function setVrednostDo($vrednostDo)
+    {
+        $this->vrednostDo = $vrednostDo;
+        return $this;
+    }
+
+    public function setZacetek($zacetek)
+    {
+        $this->zacetek = $zacetek;
+        return $this;
+    }
+
+    public function setKonec($konec)
+    {
+        $this->konec = $konec;
         return $this;
     }
 

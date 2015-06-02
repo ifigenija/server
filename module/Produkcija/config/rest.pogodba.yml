@@ -16,6 +16,9 @@ forms:
             - oseba
             - popa
             - trr
+            - vrednostDo
+            - zacetek
+            - konec
 lists:
     default: 
         filter:

@@ -29,7 +29,10 @@ forms:
 #            - jeeu             ## $$ rb ko bom checkbox preveril
             - datZav  
             - datnZav
-            - zamejstvo        
+            - zamejstvo    
+            - panoga
+            - producent
+            - kupec
         hydrator: 
             byValue: [ naslovi,trrji, telefonske ]
             lookups: [ naslovi.drzava ]
