@@ -28,13 +28,14 @@ class Besedilo
 
     /**
      * @ORM\Column(type="string", nullable=false)
+     * @Max\I18n(label="entiteta.stevilka", description="Številka besedila")
      * @Max\Ui(ident=true)
      */
     private $stevilka;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Naslov", description="Naslov besedila")
+     * @Max\I18n(label="besedilo.naslov", description="Naslov besedila")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -42,42 +43,42 @@ class Besedilo
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Avtor", description="Avtor besedila")
+     * @Max\I18n(label="besedilo.avtor", description="Avtor besedila")
      * @var string
      */
     private $avtor;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Podnaslov", description="Podnaslov besedila")
+     * @Max\I18n(label="besedilo.podnaslov", description="Podnaslov besedila")
      * @var string
      */
     private $podnaslov;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Jezik", description="Jezik besedila")
+     * @Max\I18n(label="besedilo.jezik", description="Jezik besedila")
      * @var string
      */
     private $jezik;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Naslov izvirnika", description="Naslov izvirnika besedila")
+     * @Max\I18n(label="besedilo.naslovIzvirnika", description="Naslov izvirnika besedila")
      * @var string
      */
     private $naslovIzvirnika;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="Datum prejema", description="Datum prejema besedila")
+     * @Max\I18n(label="besedilo.datumPrejema", description="Datum prejema besedila")
      * @var string
      */
     private $datumPrejema;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="Moške vloge", description="Moške vloge")
+     * @Max\I18n(label="besedilo.moskeVloge", description="Moške vloge")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -85,7 +86,7 @@ class Besedilo
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="Ženske vloge", description="Moške vloge")
+     * @Max\I18n(label="besedilo.zenskeVloge", description="Moške vloge")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -93,14 +94,14 @@ class Besedilo
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Prevajalec", description="Prevajalec besedila")
+     * @Max\I18n(label="besedilo.prevajalec", description="Prevajalec besedila")
      * @var string
      */
     private $prevajalec;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="Povzetek vsebine", description="Povzetek vsebine besedila")
+     * @Max\I18n(label="besedilo.povzetekVsebine", description="Povzetek vsebine besedila")
      * @var string
      */
     private $povzetekVsebine;

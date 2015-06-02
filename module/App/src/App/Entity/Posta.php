@@ -35,7 +35,7 @@ class Posta
      * @ORM\Column(unique=true, length=20, nullable=true)
      * @var string
      * @Max\Ui(type="sifra")
-     * @Max\I18n(label="Poštna številka", description="Poštna številka")
+     * @Max\I18n(label="posta.sifra", description="Poštna številka")
      */
     protected $sifra;
 
@@ -45,7 +45,7 @@ class Posta
      * @ORM\Column(length=40, nullable=true)
      * @var string
      *
-     * @Max\I18n(label="Naziv",description="Naziv")
+     * @Max\I18n(label="entiteta.naziv",description="Naziv")
      * @Max\Ui(type="naziv")
      */
     protected $naziv;

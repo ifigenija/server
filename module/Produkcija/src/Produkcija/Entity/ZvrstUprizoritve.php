@@ -29,7 +29,7 @@ class ZvrstUprizoritve
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Ime", description="Ime zvrsti SURS")
+     * @Max\I18n(label="entiteta.ime", description="Ime zvrsti SURS")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -37,7 +37,7 @@ class ZvrstUprizoritve
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Opis", description="Opis zvrsti uprizoritve")
+     * @Max\I18n(label="entiteta.opis", description="Opis zvrsti uprizoritve")
      * @var string
      */
     private $opis;

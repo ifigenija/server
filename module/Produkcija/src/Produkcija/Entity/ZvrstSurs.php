@@ -29,7 +29,7 @@ class ZvrstSurs
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Ime", description="Ime zvrsti SURS")
+     * @Max\I18n(label="entiteta.ime", description="Ime zvrsti SURS")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -37,7 +37,7 @@ class ZvrstSurs
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Naziv", description="Naziv zvrsti SURS")
+     * @Max\I18n(label="entiteta.naziv", description="Naziv zvrsti SURS")
      * @Max\Ui(type="naziv" )
      * @var string
      */

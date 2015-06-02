@@ -27,7 +27,7 @@ class Telefonska
      * Vrsta telefonske številke - domača 
      * 
      * @ORM\Column(type="string", length=20, nullable=false)
-     * @Max\I18n(label="Vrsta tel. številke", description="Vrsta telefonske številke")   
+     * @Max\I18n(label="tel.vrsta", description="Vrsta telefonske številke")   
      * @Max\Ui(type="select", opts="telefonska.vrsta")
      * @var string
      */
@@ -37,7 +37,7 @@ class Telefonska
      * Številka 
      * 
      * @ORM\Column(type="string", length=30, nullable=true)
-     * @Max\I18n(label="Številka", description="Telefonska številka")
+     * @Max\I18n(label="entiteta.stevilka", description="Telefonska številka")
      * @Max\Ui(type="sifra")
      * @var string
      */
@@ -47,7 +47,7 @@ class Telefonska
      * A je to privzeta telefonska številka 
      * 
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="Privzeta", description="Ali je privzeta telefonska številka")   
+     * @Max\I18n(label="tel.privzeta", description="Ali je privzeta telefonska številka")   
      * @Max\Ui(type="boolcheckbox",required=false)
      */
     private $privzeta = false;

@@ -55,7 +55,7 @@ class PostniNaslov
      * Naziv
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="Naziv", description="Naziv naslova")
+     * @Max\I18n(label="entiteta.naziv", description="Naziv naslova")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -63,21 +63,16 @@ class PostniNaslov
 
     /**
      * @ORM\Column(length=50, nullable=true)
-     */
-    private $nazivDva;
-
-    /**
-     * 
-     * @Max\I18n(label="Dodatni naziv", description="Dodatni naziv naslova")
+     * @Max\I18n(label="postniNaslov.nazivDva", description="Dodatni naziv naslova")
      * @var string
      */
-//    private $nazivDva;
+    private $nazivDva;
 
     /**
      * Ulica naslovnika
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="Ulica",  description="Ulica naslova")
+     * @Max\I18n(label="postniNaslov.ulica",  description="Ulica naslova")
      * @var string
      */
     protected $ulica;
@@ -86,7 +81,7 @@ class PostniNaslov
      * Dodatno polje za ulico (ulica2)
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="Dodatna ulica",  description="Dodatni podatki o ulici")
+     * @Max\I18n(label="postniNaslov.ulicaDva",  description="Dodatni podatki o ulici")
      * @var string
      */
     protected $ulicaDva;
@@ -96,7 +91,7 @@ class PostniNaslov
      *  poštna številka
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="Pošta", description="Poštna številka")
+     * @Max\I18n(label="postniNaslov.posta", description="Poštna številka")
      * @Max\Ui(group="posta")
      * @var string
      */
@@ -107,7 +102,7 @@ class PostniNaslov
      *  naziv pošte
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="Naziv pošte", description="Naziv pošte")
+     * @Max\I18n(label="postniNaslov.postaNaziv", description="Naziv pošte")
      * @Max\Ui(group="posta")
      * @var string
      */
@@ -117,7 +112,7 @@ class PostniNaslov
      * Pokrajina
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="Pokrajina",  description="Pokrajina v kateri je ta naslov")
+     * @Max\I18n(label="postniNaslov.pokrajina",  description="Pokrajina v kateri je ta naslov")
      * @var string
      */
     protected $pokrajina;
@@ -128,7 +123,7 @@ class PostniNaslov
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
      * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id")
-     * @Max\I18n(label="Država", description="Država")
+     * @Max\I18n(label="postniNaslov.drzava", description="Država")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Drzava
      */
@@ -139,7 +134,7 @@ class PostniNaslov
      *  checkbox 
      *
      * @ORM\Column(type="boolean", length=1, nullable=true)
-     * @Max\I18n(label="Iz EU", description="Je klient iz EU")
+     * @Max\I18n(label="postniNaslov.jeeu", description="Je klient iz EU")
      * @Max\Ui(type="boolcheckbox",group="Davčni podatki")
      * @var boolean
      */
@@ -150,7 +145,7 @@ class PostniNaslov
      *  (npr. za poslovnega partnerja, ki lahko ima več naslovov)
      *
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="Privzeti naslov", description="A je to privzeti naslov za poslovnega partnerja")
+     * @Max\I18n(label="postniNaslov.privzeti", description="A je to privzeti naslov za poslovnega partnerja")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
