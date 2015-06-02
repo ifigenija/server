@@ -107,7 +107,7 @@ class OsebaCest
      */
     public function lookupUser(ApiTester $I)
     {
-        $this->lookUser = $ent            = $I->lookupEntity("user", "ana@ifigenija.si", false);
+        $this->lookUser = $ent            = $I->lookupEntity("user", "tatjana@ifigenija.si", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -468,7 +468,7 @@ class OsebaCest
         $I->assertEquals('zz', $oseba['opombe']);
         $I->assertEquals('zz', $oseba['drzavljanstvo']);
         $I->assertEquals('zz', $oseba['drzavaRojstva']);
-        $I->assertEquals('zz', $oseba['krajRojstva']);
+        $I->assertEquals('zz', $oseba['krajRojstva'],"kraj rojstva");
 
         codecept_debug($oseba);
         $I->assertTrue(isset($oseba['alternacije']));

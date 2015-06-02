@@ -37,7 +37,7 @@ class FunkcijaCest
     private $alternacijaUrl = '/rest/alternacija';
     private $tipFunkcijeUrl = '/rest/tipfunkcije';
     private $obj;
-    private $objFunkcija2;
+    private $obj2;
     private $objOseba;
     private $lookOseba;
     private $objAlternacija;
@@ -289,7 +289,7 @@ class FunkcijaCest
             'privzeti'          => null,
             'tipFunkcije'       => $this->lookTipFunkcije['id'],
         ];
-        $this->objFunkcija2 = $ent                = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent                = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['naziv'], 'aa');
         $I->assertNotEmpty($ent['id']);
     }
@@ -306,7 +306,7 @@ class FunkcijaCest
     {
         $data                  = [
             'zaposlen'     => true,
-            'funkcija'     => $this->objFunkcija2['id'],
+            'funkcija'     => $this->obj2['id'],
             'sodelovanje'  => NULL,
             'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => NULL,
@@ -317,7 +317,7 @@ class FunkcijaCest
 
         $data                  = [
             'zaposlen'     => true,
-            'funkcija'     => $this->objFunkcija2['id'],
+            'funkcija'     => $this->obj2['id'],
             'sodelovanje'  => NULL,
             'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => NULL,
@@ -394,7 +394,7 @@ class FunkcijaCest
         codecept_debug($ent);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['podrocje'], 'igralec');
+        $I->assertEquals($ent['podrocje'], 'igralec',"$$ napačno vrača umetnik");
         $I->assertEquals($ent['vodjaEkipe'], FALSE);
         $I->assertEquals($ent['naziv'], 'zz');
         $I->assertEquals($ent['komentar'], 'zz');
@@ -430,10 +430,10 @@ class FunkcijaCest
      */
     public function preberiRelacijeZAlternacijami(ApiTester $I)
     {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objFunkcija2['id'], "alternacije", "");
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "alternacije", "");
         $I->assertEquals(2, count($resp));
 
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objFunkcija2['id'], "alternacije", $this->objAlternacija1['id']);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "alternacije", $this->objAlternacija1['id']);
         $I->assertEquals(1, count($resp));
     }
 

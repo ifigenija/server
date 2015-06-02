@@ -73,6 +73,8 @@ class UprizoritevCest
     private $objKoprodukcija2;
     private $objProdukcijskaHisa1;
     private $objProdukcijskaHisa2;
+    private $lookProdukcijskaHisa1;
+    private $lookProdukcijskaHisa2;
     private $objPopa1;
     private $objPopa2;
     private $objDrzava;
@@ -92,6 +94,7 @@ class UprizoritevCest
     private $lookTipFunkcije;
     private $objStrosekUprizoritve1;
     private $objStrosekUprizoritve2;
+    private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
 
     public function _before(ApiTester $I)
     {
@@ -278,7 +281,7 @@ class UprizoritevCest
             'delovniNaslov'    => 'aa',
             'datumZacStudija'  => '2011-02-01T00:00:00+0100',
             'datumPremiere'    => '2010-02-01T00:00:00+0100',
-            'maticniOder'      => null,
+            'maticniOder'      => $this->lookProstor['id'],
             'stOdmorov'        => 3,
             'avtor'            => 'avaa',
             'gostujoca'        => true, // $$ bool vrača napako convertToBool
@@ -290,8 +293,8 @@ class UprizoritevCest
             'sloAvtor'         => true, // $$ bool vrača napako convertToBool
             'kratkiNaslov'     => 'aa',
             'besedilo'         => $this->lookBesedilo['id'],
-            'zvrstUprizoritve' => null,
-            'zvrstSurs'        => null,
+            'zvrstUprizoritve' => $this->lookZvrstUprizoritve['id'],
+            'zvrstSurs'        => $this->lookZvrstSurs['id'],
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -323,9 +326,10 @@ class UprizoritevCest
             'datumZakljucka'   => '2019-02-01T00:00:00+0100',
             'sloAvtor'         => true, // $$ bool vrača napako convertToBool
             'kratkiNaslov'     => 'bb',
+            'maticniOder'      => $this->lookProstor['id'],
             'besedilo'         => $this->lookBesedilo['id'],
-            'zvrstUprizoritve' => null,
-            'zvrstSurs'        => null,
+            'zvrstUprizoritve' => $this->lookZvrstUprizoritve['id'],
+            'zvrstSurs'        => $this->lookZvrstSurs['id'],
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -392,44 +396,72 @@ class UprizoritevCest
         $I->assertNotEmpty($drzava);
     }
 
+        /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupPopa(ApiTester $I)
+    {
+        $this->lookPopa = $ent            = $I->lookupEntity("popa", "0988", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    
     /**
      * kreiram popa
      *  
      * @param ApiTester $I
      */
-    public function createPopa(ApiTester $I)
+//    public function createPopa(ApiTester $I)
+//    {
+//        $data           = [
+//            'sifra'  => 'X12',
+//            'naziv'  => 'zz',
+////            'naziv1'    => 'zz',
+////            'panoga'    => 'zz',
+////            'email'     => 'z@zzz.zz',
+////            'url'       => 'zz',
+////            'opomba'    => 'zz',
+//            'drzava' => $this->objDrzava['id'],
+////            'idddv'     => 'zz',
+////            'maticna'   => 'ZZ123',
+////            'zavezanec' => 'Da',
+////            'jeeu'      => 'Da',
+////            'datZav'    => '2010-02-01T00:00:00+0100',
+////            'datnZav'   => '2017-02-01T00:00:00+0100',
+////            'zamejstvo' => FALSE,
+//        ];
+//        $this->objPopa1 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
+//
+//        $I->assertNotEmpty($popa['id']);
+//
+//        $data           = [
+//            'sifra'  => 'A12',
+//            'naziv'  => 'aa',
+//            'drzava' => $this->objDrzava['id'],
+//        ];
+//        $this->objPopa2 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
+//
+//        $I->assertNotEmpty($popa['id']);
+//    }
+
+        /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupProdukcijskaHisa(ApiTester $I)
     {
-        $data           = [
-            'sifra'  => 'X12',
-            'naziv'  => 'zz',
-//            'naziv1'    => 'zz',
-//            'panoga'    => 'zz',
-//            'email'     => 'z@zzz.zz',
-//            'url'       => 'zz',
-//            'opomba'    => 'zz',
-            'drzava' => $this->objDrzava['id'],
-//            'idddv'     => 'zz',
-//            'maticna'   => 'ZZ123',
-//            'zavezanec' => 'Da',
-//            'jeeu'      => 'Da',
-//            'datZav'    => '2010-02-01T00:00:00+0100',
-//            'datnZav'   => '2017-02-01T00:00:00+0100',
-//            'zamejstvo' => FALSE,
-        ];
-        $this->objPopa1 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
 
-        $I->assertNotEmpty($popa['id']);
-
-        $data           = [
-            'sifra'  => 'A12',
-            'naziv'  => 'aa',
-            'drzava' => $this->objDrzava['id'],
-        ];
-        $this->objPopa2 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
-
-        $I->assertNotEmpty($popa['id']);
+        $resp                       = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords'], "total records");
+        $this->lookProdukcijskaHisa1 = $resp['data'][0];
+        $this->lookProdukcijskaHisa2 = $resp['data'][1];
     }
 
+    
     /**
      *  kreiramo zapis
      * 
@@ -437,29 +469,30 @@ class UprizoritevCest
      * 
      * @param ApiTester $I
      */
-    public function createProdukcijskaHisa(ApiTester $I)
-    {
-        $data                       = [
-            'status' => 'zz',
-            'popa'   => $this->objPopa1['id'],
-        ];
-        $this->objProdukcijskaHisa1 = $ent                        = $I->successfullyCreate($this->produkcijskaHisaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['status'], 'zz');
-
-
-        $data                       = [
-            'status' => 'bb',
-            'popa'   => $this->objPopa2['id'],
-        ];
-        $this->objProdukcijskaHisa2 = $ent                        = $I->successfullyCreate($this->produkcijskaHisaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-    }
+//    public function createProdukcijskaHisa(ApiTester $I)
+//    {
+//        $data                       = [
+//            'status' => 'zz',
+//            'popa'   => $this->objPopa1['id'],
+//        ];
+//        $this->objProdukcijskaHisa1 = $ent                        = $I->successfullyCreate($this->produkcijskaHisaUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        $I->assertEquals($ent['status'], 'zz');
+//
+//
+//        $data                       = [
+//            'status' => 'bb',
+//            'popa'   => $this->objPopa2['id'],
+//        ];
+//        $this->objProdukcijskaHisa2 = $ent                        = $I->successfullyCreate($this->produkcijskaHisaUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//    }
 
     /**
      *  kreiramo zapis
      * 
      * @depends create
+     * @depends lookupProdukcijskaHisa
      * 
      * @param ApiTester $I
      */
@@ -469,7 +502,7 @@ class UprizoritevCest
             'odstotekFinanciranja' => 1.23,
             'nasStrosek'           => false,
             'uprizoritev'          => $this->obj2['id'],
-            'koproducent'          => $this->objProdukcijskaHisa1['id'],
+            'koproducent'          => $this->lookProdukcijskaHisa1['id'],
         ];
         $I->assertTrue(true);
         $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
@@ -483,7 +516,7 @@ class UprizoritevCest
             'odstotekFinanciranja' => 7.90,
             'nasStrosek'           => true,
             'uprizoritev'          => $this->obj2['id'],
-            'koproducent'          => $this->objProdukcijskaHisa2['id'],
+            'koproducent'          => $this->lookProdukcijskaHisa2['id'],
         ];
         $this->objKoprodukcija2 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($ent['id']);

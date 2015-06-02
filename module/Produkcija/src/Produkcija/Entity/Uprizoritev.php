@@ -77,6 +77,7 @@ class Uprizoritev
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="uprizoritev.steviloVaj", description="Število vaj")
+     * $$ dopolni
      */
     private $steviloVaj;
 

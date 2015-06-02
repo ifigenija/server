@@ -113,6 +113,7 @@ class Funkcija
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="funkcija.maxPrekrivanje")
+     * $$ novo polje, IRvanj
      */
     private $maxPrekirvanj;
 

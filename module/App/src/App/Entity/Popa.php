@@ -87,6 +87,7 @@ class Popa
     /**
      * @ORM\Column(length=60, nullable=true)
      * @Max\I18n(label="popa.panoga", description="Panoga")
+     * $$ novo polje
      */
     private $panoga;
 

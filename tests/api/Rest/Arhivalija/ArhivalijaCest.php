@@ -40,6 +40,7 @@ class ArhivalijaCest
     private $objVaja;
     private $objBesedilo;
     private $objUprizoritev;
+    private $lookUprizoritev;
 
     public function _before(ApiTester $I)
     {
@@ -56,110 +57,136 @@ class ArhivalijaCest
      * 
      * @param ApiTester $I
      */
-    public function createBesedilo(ApiTester $I)
+//    public function createBesedilo(ApiTester $I)
+//    {
+//        $data      = [
+//            'naslov'          => 'zz',
+//            'avtor'           => 'zz',
+//            'podnaslov'       => 'zz',
+//            'jezik'           => 'zz',
+//            'naslovIzvirnika' => 'zz',
+//            'datumPrejema'    => '2010-02-01T00:00:00+0100',
+//            'moskeVloge'      => 1,
+//            'zenskeVloge'     => 2,
+//            'prevajalec'      => 'zz',
+//            'povzetekVsebine' => 'zz',
+//        ];
+//        $this->objBesedilo = $ent               = $I->successfullyCreate($this->besediloUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        $I->assertEquals($ent['naslov'], 'zz');
+//    }
+
+    
+    
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
     {
-        $data      = [
-            'naslov'          => 'zz',
-            'avtor'           => 'zz',
-            'podnaslov'       => 'zz',
-            'jezik'           => 'zz',
-            'naslovIzvirnika' => 'zz',
-            'datumPrejema'    => '2010-02-01T00:00:00+0100',
-            'moskeVloge'      => 1,
-            'zenskeVloge'     => 2,
-            'prevajalec'      => 'zz',
-            'povzetekVsebine' => 'zz',
-        ];
-        $this->objBesedilo = $ent               = $I->successfullyCreate($this->besediloUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['naslov'], 'zz');
+        $this->lookUprizoritev = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
     }
 
+    
     /**
      *  kreiramo zapis
      * 
      * @depends createBesedilo
      * @param ApiTester $I
      */
-    public function createUprizoritev(ApiTester $I)
-    {
-        $data      = [
-            'faza'             => 'produkcija',
-            'naslov'           => 'zz',
-            'podnaslov'        => 'zz',
-            'delovniNaslov'    => 'zz',
-            'datumPremiere'    => '2010-02-01T00:00:00+0100',
-            'stOdmorov'        => 1,
-            'avtor'            => 'zz',
-            'gostujoca'        => true, // $$ bool vrača napako convertToBool
-            'trajanje'         => 2,
-            'opis'             => 'zz',
-            'arhIdent'         => 'zz',
-            'arhOpomba'        => 'zz',
-            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
-            'sloAvtor'         => true, // $$ bool vrača napako convertToBool
-            'kratkiNaslov'     => 'zz',
-            'besedilo'         => $this->objBesedilo['id'],
-            'zvrstUprizoritve' => null,
-            'zvrstSurs'        => null,
-        ];
-        $this->objUprizoritev = $ent                  = $I->successfullyCreate($this->uprizoritevUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['opis'], 'zz');
-    }
+//    public function createUprizoritev(ApiTester $I)
+//    {
+//        $data      = [
+//            'faza'             => 'produkcija',
+//            'naslov'           => 'zz',
+//            'podnaslov'        => 'zz',
+//            'delovniNaslov'    => 'zz',
+//            'datumPremiere'    => '2010-02-01T00:00:00+0100',
+//            'stOdmorov'        => 1,
+//            'avtor'            => 'zz',
+//            'gostujoca'        => true, // $$ bool vrača napako convertToBool
+//            'trajanje'         => 2,
+//            'opis'             => 'zz',
+//            'arhIdent'         => 'zz',
+//            'arhOpomba'        => 'zz',
+//            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
+//            'sloAvtor'         => true, // $$ bool vrača napako convertToBool
+//            'kratkiNaslov'     => 'zz',
+//            'besedilo'         => $this->objBesedilo['id'],
+//            'zvrstUprizoritve' => null,
+//            'zvrstSurs'        => null,
+//        ];
+//        $this->objUprizoritev = $ent                  = $I->successfullyCreate($this->uprizoritevUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        codecept_debug($ent);
+//        $I->assertEquals($ent['opis'], 'zz');
+//    }
 
     /**
      * 
      * @param ApiTester $I
      */
-    public function createVajo(ApiTester $I)
-    {
-        $data          = [
-            'zaporedna'   => 1,
-            'porocilo'    => 'zz',
-            'dogodek'     => null, //$$rb najprej mora biti kreirana vaja, šele potem dogodek.
-            'uprizoritev' => null,
-        ];
-        $this->objVaja = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['porocilo'], 'zz');
-    }
+//    public function createVajo(ApiTester $I)
+//    {
+//        $data          = [
+//            'zaporedna'   => 1,
+//            'porocilo'    => 'zz',
+//            'dogodek'     => null, //$$rb najprej mora biti kreirana vaja, šele potem dogodek.
+//            'uprizoritev' => null,
+//        ];
+//        $this->objVaja = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        codecept_debug($ent);
+//        $I->assertEquals($ent['porocilo'], 'zz');
+//    }
 
+    /**
+     * @param ApiTester $I
+     */
+    public function getListDogodek(ApiTester $I)
+    {
+        $resp            = $I->successfullyGetList($this->dogodekUrl."/vse", []);
+        $list            = $resp['data'];
+        $I->assertNotEmpty($list);
+        $this->objDogodek = $ent          = array_pop($list);
+        $I->assertNotEmpty($ent);
+    }
+    
+    
     /**
      * @depends createVajo
      * @param ApiTester $I
      */
-    public function createDogodek(ApiTester $I)
-    {
-        $data             = [
-            'planiranZacetek' => '2011-02-01T00:00:00+0100',
-            'zacetek'         => '2012-02-01T00:00:00+0100',
-            'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => 1,
-            'razred'          => null,
-            'termin'          => null,
-            'ime'             => null,
-            'predstava'       => null,
-            'zasedenost'      => null,
-            'vaja'            => $this->objVaja['id'],
-            'gostovanje'      => null,
-            'dogodekIzven'    => null,
-            'prostor'         => null,
-            'sezona'          => null,
-        ];
-        $this->objDogodek = $ent              = $I->successfullyCreate($this->dogodekUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['status'], 1);
-    }
+//    public function createDogodek(ApiTester $I)
+//    {
+//        $data             = [
+//            'planiranZacetek' => '2011-02-01T00:00:00+0100',
+//            'zacetek'         => '2012-02-01T00:00:00+0100',
+//            'konec'           => '2013-02-01T00:00:00+0100',
+//            'status'          => 1,
+//            'razred'          => null,
+//            'termin'          => null,
+//            'ime'             => null,
+//            'predstava'       => null,
+//            'zasedenost'      => null,
+//            'vaja'            => $this->objVaja['id'],
+//            'gostovanje'      => null,
+//            'dogodekIzven'    => null,
+//            'prostor'         => null,
+//            'sezona'          => null,
+//        ];
+//        $this->objDogodek = $ent              = $I->successfullyCreate($this->dogodekUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        codecept_debug($ent);
+//        $I->assertEquals($ent['status'], 1);
+//    }
 
     /**
      *  napolnimo vsaj en zapis
      * 
-     * @depends createUprizoritev
-     * @depends createDogodek
+     * @depends lookupUprizoritev
+     * @depends getListDogodek
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
@@ -176,7 +203,7 @@ class ArhivalijaCest
             'naslov'            => 'zz',
             'avtorstvo'         => 'zz',
             'dogodek'           => NULL,
-            'uprizoritev'       => $this->objUprizoritev['id'],
+            'uprizoritev'       => $this->lookUprizoritev['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['naslov'], 'zz');
@@ -195,7 +222,7 @@ class ArhivalijaCest
             'naslov'            => 'aa',
             'avtorstvo'         => 'aa',
             'dogodek'           => null,
-            'uprizoritev'       => $this->objUprizoritev['id'],
+            'uprizoritev'       => $this->lookUprizoritev['id'],
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['naslov'], 'aa');
@@ -243,7 +270,7 @@ class ArhivalijaCest
      * @param ApiTester $I
      * @depends create
      */
-    public function read(\ApiTester $I)
+    public function read(ApiTester $I)
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
@@ -258,7 +285,7 @@ class ArhivalijaCest
         $I->assertEquals($ent['naslov'], 'xx');
         $I->assertEquals($ent['avtorstvo'], 'zz');
         $I->assertEquals($ent['dogodek'],NULL);
-        $I->assertEquals($ent['uprizoritev'], $this->objUprizoritev['id']);
+        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);
 
         // preberemo še en zapis
         $ent = $I->successfullyGet($this->restUrl, $this->objArhivalija2['id']);
@@ -285,7 +312,7 @@ class ArhivalijaCest
      */
     public function getListPoUprizoritvi(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?uprizoritev=" . $this->objUprizoritev['id'];
+        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev['id'];
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];

@@ -47,6 +47,7 @@ class TipFunkcije
     /**
      * @ORM\Column(type="boolean", nullable=true)
      * @Max\I18n(label="tipFunkcije.nastopajoc", description="Nastopajoč")
+     * $$ novo polje
      */
     private $nastopajoc;
 

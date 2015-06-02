@@ -21,6 +21,12 @@ forms:
             - opombe
 #            - naslovi
             - email
+            - datumRojstva
+            - emso
+            - davcna
+            - drzavljanstvo
+            - drzavaRojstva
+            - krajRojstva
 #            - user         # bomo na strani userja urejali
 #            - telefonske@
 #            - trrji

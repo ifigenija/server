@@ -266,7 +266,7 @@ class AvtorizacijeCest
         $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0001", false);
         $I->assertNotEmpty($ent);
 
-        $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0002", false);
+        $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0005", false);
         $I->assertNotEmpty($ent);
 
         $this->lookOseba3Prot = $ent                  = $I->lookupEntity("oseba", "0011", false);

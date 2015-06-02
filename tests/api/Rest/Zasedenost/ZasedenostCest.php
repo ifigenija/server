@@ -82,7 +82,7 @@ class ZasedenostCest
     /**
      * dogodek kreiramo, ko zapis zasedenost obstaja, ker je Dogodek lastnik relacije
      * 
-     * @depends createVaja
+     * @depends createVajo
      * @depends create
      * @param ApiTester $I
      */

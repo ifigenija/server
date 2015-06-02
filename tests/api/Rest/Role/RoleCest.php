@@ -88,10 +88,10 @@ class RoleCest
      */
     public function lookupUser(ApiTester $I)
     {
-        $this->lookUser1 = $ent            = $I->lookupEntity("user", "ana@ifigenija.si", false);
+        $this->lookUser1 = $ent            = $I->lookupEntity("user", "tatjana@ifigenija.si", false);
         $I->assertNotEmpty($ent);
         
-        $this->lookUser2 = $ent            = $I->lookupEntity("user", "marko@ifigenija.si", false);
+        $this->lookUser2 = $ent            = $I->lookupEntity("user", "joze@ifigenija.si", false);
         $I->assertNotEmpty($ent);
     }
 

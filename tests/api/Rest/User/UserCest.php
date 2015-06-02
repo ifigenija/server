@@ -166,7 +166,7 @@ class UserCest
         $I->assertNotEmpty($user);
         $I->assertTrue(isset($user['email']), "email-a ni");
         $I->assertTrue(isset($user['name']));
-        $I->assertTrue(isset($user['password']));
+//        $I->assertTrue(isset($user['password']));     //password ne dovolimo prebrati
         $I->assertTrue(isset($user['enabled']), "enabled polja ni");
         $I->assertTrue(isset($user['expires']));
         $I->assertTrue(isset($user['defaultRoute']));
