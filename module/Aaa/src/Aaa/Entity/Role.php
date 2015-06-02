@@ -32,7 +32,7 @@ class Role
 
     /**
      * @ORM\Column(unique=true, length=150, nullable=true)
-     * @Max\I18n(label="Naziv", description="Naziv vloge")
+     * @Max\I18n(label="entiteta.name", description="Naziv vloge")
      * @Max\Ui(type="sifra", group="Vloga",ident=true)
      * @var string
      */
@@ -40,7 +40,7 @@ class Role
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="Opis", description="Opis vloge")
+     * @Max\I18n(label="entiteta.description", description="Opis vloge")
      * @Max\Ui(group="Vloga")
      * @var string
      */
@@ -49,7 +49,7 @@ class Role
     /**
      * Ali je vloga vgrajena v sistem ali pa dodana na user instalaciji.
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="Vgrajena", description="Vloga, ki pride z namestitvijo sistema")
+     * @Max\I18n(label="entiteta.builtIn", description="Vloga, ki pride z namestitvijo sistema")
      * @var boolean
      */
     protected $builtIn = false;

@@ -40,7 +40,7 @@ class User
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="Polno ime", description="Polno ime uporabnika. Ime in priimek oz. opis za api uporabnike")
+     * @Max\I18n(label="user.name", description="Polno ime uporabnika. Ime in priimek oz. opis za api uporabnike")
      * @Max\Ui(type="naziv")
      * @var string
      */
@@ -50,7 +50,7 @@ class User
      * Geslo
      *
      * @ORM\Column(length=90, nullable=true)
-     * @Max\I18n(label="Geslo",  description="Geslo")
+     * @Max\I18n(label="user.password",  description="Geslo")
      * @Max\Ui(group="Login", type="password")
      * @Max\Tracking(log=false)
      * @var string
@@ -61,7 +61,7 @@ class User
      * Uporabnik omogočen/onemogočen
      *
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="Aktiven",  description="Uporabnik aktiven")
+     * @Max\I18n(label="user.enabled",  description="Uporabnik aktiven")
      * @Max\Ui(type="boolcheckbox", group="Uporabnik")
      * @var boolean
      */
@@ -88,7 +88,7 @@ class User
      * Veljavnost - po tem datumu se uporabnik ne more prijaviti
      *
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="Veljavnost",  description="Po tem datumu se uporabnik ne more prijaviti")
+     * @Max\I18n(label="user.expires",  description="Po tem datumu se uporabnik ne more prijaviti")
      * @Max\Ui(group="Uporabnik")
      */
     protected $expires;
@@ -97,7 +97,7 @@ class User
      * Začetna pot za uporabnika
      *
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Privzeta pot ob prijavi",  description="Privzeta pot v aplikaciji po prijavi")
+     * @Max\I18n(label="user.defaultRoute",  description="Privzeta pot v aplikaciji po prijavi")
      * @Max\Ui(group="Zagon")
      * @var string
      */
@@ -105,7 +105,7 @@ class User
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Parametri za pot",  description="Parametri za privzeto pot v aplikaciji po prijavi")
+     * @Max\I18n(label="user.defaultRouteParams",  description="Parametri za privzeto pot v aplikaciji po prijavi")
      * @Max\Ui(group="Zagon")
      * @var string
      */
@@ -113,7 +113,7 @@ class User
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="Email", description="Elektronski naslov, ki služi za prijavo uporabnika") 
+     * @Max\I18n(label="entiteta.email", description="Elektronski naslov, ki služi za prijavo uporabnika") 
      * @Max\Ui(type="email", ident=true)
      */
     private $email;

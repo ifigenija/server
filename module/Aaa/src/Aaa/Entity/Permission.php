@@ -35,7 +35,7 @@ class Permission
      * @ORM\Column(length=150, nullable=true)
      * @var string
      *
-     * @Max\I18n(label="Naziv", description="Naziv dovoljenja")
+     * @Max\I18n(label="entiteta.name", description="Naziv dovoljenja")
      * @Max\Ui(type="sifra",ident=true )
      */
     protected $name;
@@ -45,7 +45,7 @@ class Permission
      *
      * @ORM\Column(type="text", nullable=true)
      *
-     * @Max\I18n(label="Opis", description="Opis dovoljenja")
+     * @Max\I18n(label="entiteta.description", description="Opis dovoljenja")
      *
      */
     protected $description;
@@ -54,7 +54,7 @@ class Permission
      * A je dovoljene vgrajeno v sistem, ali pa dodano kasneje.
      * @ORM\Column(type="boolean", nullable=true)
      *
-     * @Max\I18n(label="Vgrajeno", description="Dovoljene, ki pride z namestitvijo sistema")
+     * @Max\I18n(label="entiteta.builtIn", description="Dovoljene, ki pride z namestitvijo sistema")
      */
     protected $builtIn = false;
 

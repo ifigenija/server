@@ -30,7 +30,7 @@ class KontaktnaOseba
      *  NA-neaktiven
      *
      * @ORM\Column(type="string", length=20, nullable=true)
-     * @Max\I18n(label="kontaktnaOseba.status", description="AK-aktiven, NA-neaktiven")
+     * @Max\I18n(label="entiteta.status", description="AK-aktiven, NA-neaktiven")
      * @Max\Ui(type="select",opts="kontaktnaoseba.status", required=true)
      * @var string
 
@@ -63,7 +63,7 @@ class KontaktnaOseba
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="kontaktneOsebe")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
-     * @Max\I18n(label="kontaktnaOseba.oseba",  description="Oseba")
+     * @Max\I18n(label="entiteta.oseba",  description="Oseba")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */

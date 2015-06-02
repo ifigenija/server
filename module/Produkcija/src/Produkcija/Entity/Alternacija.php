@@ -43,14 +43,14 @@ class Alternacija
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="alternacija.zacetek", description="Začetni datum")
+     * @Max\I18n(label="entiteta.zacetek", description="Začetni datum")
      * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="alternacija.konec", description="Končni datum")
+     * @Max\I18n(label="entiteta.konec", description="Končni datum")
      * @var string
      */
     private $konec;
@@ -114,7 +114,7 @@ class Alternacija
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="alternacije")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
-     * @Max\I18n(label="alternacija.oseba",  description="Oseba pri alternaciji")
+     * @Max\I18n(label="entiteta.oseba",  description="Oseba pri alternaciji")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */
