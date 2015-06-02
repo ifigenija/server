@@ -60,7 +60,7 @@ class DogodekCest
     private $objGostovanje;
     private $objDogodekIzven;
     private $objDogodek1;
-    private $objDogodek2;
+    private $obj2;
     private $objProstor;
     private $lookProstor;
     private $objSezona;
@@ -102,7 +102,10 @@ class DogodekCest
      */
     public function lookupOsebo(ApiTester $I)
     {
-        $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0006", false);
+        $this->lookOseba1 = $ent             = $I->lookupEntity("oseba", "0006", false);
+        $I->assertNotEmpty($ent);
+
+        $this->lookOseba2 = $ent             = $I->lookupEntity("oseba", "0007", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -325,7 +328,7 @@ class DogodekCest
             'prostor'         => null,
             'sezona'          => $this->objSezona['id'],
         ];
-        $this->objDogodek2 = $ent               = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent               = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['status'], 4);
@@ -337,7 +340,7 @@ class DogodekCest
      * @depends create
      * @param ApiTester $I
      */
-    public function createArhivalijo(ApiTester $I)
+    public function createVecArhivalij(ApiTester $I)
     {
         $data                 = [
             'oznakaDatuma'      => 'zz',
@@ -350,7 +353,7 @@ class DogodekCest
             'objavljeno'        => 'zz',
             'naslov'            => 'zz',
             'avtorstvo'         => 'zz',
-            'dogodek'           => $this->objDogodek2['id'],
+            'dogodek'           => $this->obj2['id'],
             'uprizoritev'       => null,
         ];
         $this->objArhivalija1 = $ent                  = $I->successfullyCreate($this->arhivalijaUrl, $data);
@@ -369,7 +372,7 @@ class DogodekCest
             'objavljeno'        => 'aa',
             'naslov'            => 'aa',
             'avtorstvo'         => 'aa',
-            'dogodek'           => $this->objDogodek2['id'],
+            'dogodek'           => $this->obj2['id'],
             'uprizoritev'       => null,
         ];
         $this->objArhivalija2 = $ent                  = $I->successfullyCreate($this->arhivalijaUrl, $data);
@@ -384,7 +387,7 @@ class DogodekCest
      * 
      * @param ApiTester $I
      */
-    public function createTerminStorive(ApiTester $I)
+    public function createVecTerminovStorive(ApiTester $I)
     {
         $data                     = [
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
@@ -392,7 +395,7 @@ class DogodekCest
             'zacetek'         => '2013-02-01T00:00:00+0100',
             'konec'           => '2014-02-01T00:00:00+0100',
             'planiranoTraja'  => 1.23,
-            'dogodek'         => $this->objDogodek2['id'],
+            'dogodek'         => $this->obj2['id'],
             'alternacija'     => null,
             'oseba'           => $this->lookOseba1['id'],
         ];
@@ -408,9 +411,9 @@ class DogodekCest
             'zacetek'         => '2017-02-01T00:00:00+0100',
             'konec'           => '2018-02-01T00:00:00+0100',
             'planiranoTraja'  => 4.56,
-            'dogodek'         => $this->objDogodek2['id'],
+            'dogodek'         => $this->obj2['id'],
             'alternacija'     => null,
-            'oseba'           => $this->lookOseba1['id'],
+            'oseba'           => $this->lookOseba2['id'],
         ];
         $this->objTerminStoritve2 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -449,7 +452,7 @@ class DogodekCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
 //        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
     }
 
@@ -575,34 +578,34 @@ class DogodekCest
 
     /**
      * preberemo relacije
-     * @depends createArhivalijo
+     * @depends createVecArhivalij
      * 
      * @param ApiTester $I
      */
     public function preberiRelacijeZArhivalijami(ApiTester $I)
     {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objDogodek2['id'], "arhivi", "");
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "arhivi", "");
         $I->assertEquals(2, count($resp));
 
         // get po popa id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objDogodek2['id'], "arhivi", $this->objArhivalija1['id']);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "arhivi", $this->objArhivalija1['id']);
         $I->assertEquals(1, count($resp));
     }
 
     /**
      * preberemo relacije
      * 
-     * @depends createTerminStorive
+     * @depends createVecTerminovStorive
      * 
      * @param ApiTester $I
      */
     public function preberiRelacijeSTerminiStoritve(ApiTester $I)
     {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objDogodek2['id'], "terminiStoritve", "");
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "terminiStoritve", "");
         $I->assertEquals(2, count($resp));
 
         // get po popa id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objDogodek2['id'], "terminiStoritve", $this->objTerminStoritve1['id']);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "terminiStoritve", $this->objTerminStoritve1['id']);
         $I->assertEquals(1, count($resp));
     }
 

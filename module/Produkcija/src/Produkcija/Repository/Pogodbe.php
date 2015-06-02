@@ -38,8 +38,8 @@ class Pogodbe
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
-                $this->expect(!(empty($options['popa']) && empty($options['oseba']) && empty($options['uprizoritev']) && empty($options['alternacije']) && empty($options['oseba'])), "Oseba ali Partner ali država sta obvezna", 770031);
-
+                $this->expect(!(empty($options['popa']) && empty($options['oseba']) && empty($options['uprizoritev']) && empty($options['alternacije']) )
+                        , "Oseba ali Partner ali uprizoritev ali alternacije so obvezni", 770031);
 
                 $qb = $this->createQueryBuilder('p');
                 $e  = $qb->expr();

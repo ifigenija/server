@@ -27,6 +27,7 @@ class Funkcija
 
     /**
      * $$ rb ali sploh rabimo to polje - saj je v tipih funkcij, ki bi jih fixturji skreirali,  že pripravljeno
+     * $$ v validate  se polje povozi, tako, da UI za to verjetno več ne velja
      * 
      * @ORM\Column(type="string", length=20, nullable=true)
      * @Max\I18n(label="entiteta.podrocje", description="Področje funkcije")

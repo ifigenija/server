@@ -38,6 +38,7 @@ class Pogodba
     /**
      * @ORM\Column(type="decimal", nullable=true)
      * @Max\I18n(label="entiteta.vrednostDo", description="vrednost do")
+     * $$ novo polje
      */
     private $vrednostDo;
 
