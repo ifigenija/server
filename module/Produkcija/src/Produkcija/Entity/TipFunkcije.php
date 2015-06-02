@@ -46,6 +46,7 @@ class TipFunkcije
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * $$ novo polje
      */
     private $nastopajoc;
 

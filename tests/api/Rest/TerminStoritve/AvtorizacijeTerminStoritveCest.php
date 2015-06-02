@@ -179,7 +179,6 @@ class AvtorizacijeTerminStoritveCest
     }
 
     /**
-     * najde nek dogodek
      * 
      * @param ApiTester $I
      */

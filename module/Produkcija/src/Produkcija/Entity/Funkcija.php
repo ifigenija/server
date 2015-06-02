@@ -112,6 +112,7 @@ class Funkcija
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * $$ novo polje, IRvanj
      */
     private $maxPrekirvanj;
 

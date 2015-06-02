@@ -76,6 +76,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * $$ dopolni
      */
     private $steviloVaj;
 

@@ -32,7 +32,7 @@ class SezonaCest
     private $dogodekUrl = '/rest/dogodek';
     private $vajaUrl    = '/rest/vaja';
     private $obj;
-    private $objSezona2;
+    private $obj2;
     private $objDogodek1;
     private $objDogodek2;
     private $objVaja1;
@@ -67,17 +67,31 @@ class SezonaCest
         $I->assertEquals($ent['imeSezone'], 'zz');
 
         // kreiramo še en zapis
-        $data             = [
+        $data       = [
             'imeSezone' => 'aa',
             'zacetek'   => '2012-02-01T00:00:00+0100',
             'konec'     => '2013-02-01T00:00:00+0100',
             'aktivna'   => true,
         ];
-        $this->objSezona2 = $ent              = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['imeSezone'], 'aa');
     }
+
+    /**
+     * @param ApiTester $I
+     */
+//    public function getListVaja(ApiTester $I)         // v tem primeru ne uporabimo tega, ker so fixture vaje že vezane na nek Dogodek
+//    {
+//        $resp             = $I->successfullyGetList($this->vajaUrl. "/vse", []);
+//        $list             = $resp['data'];
+//        $I->assertNotEmpty($list);
+//        $this->objVaja1 = $ent              = array_pop($list);
+//        $I->assertNotEmpty($ent);
+//        $this->objVaja2 = $ent              = array_pop($list);
+//        $I->assertNotEmpty($ent);
+//    }
 
     /**
      * 
@@ -113,7 +127,7 @@ class SezonaCest
      * @depends createVajo
      * @param ApiTester $I
      */
-    public function createDogodek(ApiTester $I)
+    public function createDogodekSezone(ApiTester $I)
     {
         $data              = [
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
@@ -129,7 +143,7 @@ class SezonaCest
             'gostovanje'      => null,
             'dogodekIzven'    => null,
             'prostor'         => null,
-            'sezona'          => $this->objSezona2['id'],
+            'sezona'          => $this->obj2['id'],
         ];
         $this->objDogodek1 = $ent               = $I->successfullyCreate($this->dogodekUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -149,7 +163,7 @@ class SezonaCest
             'gostovanje'      => null,
             'dogodekIzven'    => null,
             'prostor'         => null,
-            'sezona'          => $this->objSezona2['id'],
+            'sezona'          => $this->obj2['id'],
         ];
         $this->objDogodek2 = $ent               = $I->successfullyCreate($this->dogodekUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -240,17 +254,17 @@ class SezonaCest
     /**
      * preberemo relacije
      * 
-     * @depends createDogodek
+     * @depends createDogodekSezone
      * 
      * @param ApiTester $I
      */
     public function preberiRelacijeZDogodki(ApiTester $I)
     {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objSezona2['id'], "dogodki", "");
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "dogodki", "");
         $I->assertEquals(2, count($resp));
 
         // get po popa id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->objSezona2['id'], "dogodki", $this->objDogodek1['id']);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "dogodki", $this->objDogodek1['id']);
         $I->assertEquals(1, count($resp));
     }
 

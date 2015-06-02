@@ -41,6 +41,7 @@ class PredstavaCest
     private $obj;
     private $objDogodek;
     private $objUprizoritev;
+    private $lookUprizoritev;
     private $objGostovanje;
     private $objGostujoca;
     private $objDrzava;
@@ -73,37 +74,47 @@ class PredstavaCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
+    }
+
+    /**
      *  kreiramo zapis
      * 
      * @param ApiTester $I
      */
-    public function createUprizoritev(ApiTester $I)
-    {
-        $data                 = [
-            'faza'             => 'arhiv',
-            'naslov'           => 'zz',
-            'podnaslov'        => 'zz',
-            'delovniNaslov'    => 'zz',
-            'datumPremiere'    => '2010-02-01T00:00:00+0100',
-            'stOdmorov'        => 1,
-            'avtor'            => 'zz',
-            'gostujoca'        => true,
-            'trajanje'         => 2,
-            'opis'             => 'zz',
-            'arhIdent'         => 'zz',
-            'arhOpomba'        => 'zz',
-            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
-            'sloAvtor'         => true,
-            'kratkiNaslov'     => 'zz',
-            'besedilo'         => null,
-            'zvrstUprizoritve' => null,
-            'zvrstSurs'        => null,
-        ];
-        $this->objUprizoritev = $ent                  = $I->successfullyCreate($this->uprizoritevUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['opis'], 'zz');
-    }
+//    public function createUprizoritev(ApiTester $I)
+//    {
+//        $data                 = [
+//            'faza'             => 'arhiv',
+//            'naslov'           => 'zz',
+//            'podnaslov'        => 'zz',
+//            'delovniNaslov'    => 'zz',
+//            'datumPremiere'    => '2010-02-01T00:00:00+0100',
+//            'stOdmorov'        => 1,
+//            'avtor'            => 'zz',
+//            'gostujoca'        => true,
+//            'trajanje'         => 2,
+//            'opis'             => 'zz',
+//            'arhIdent'         => 'zz',
+//            'arhOpomba'        => 'zz',
+//            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
+//            'sloAvtor'         => true,
+//            'kratkiNaslov'     => 'zz',
+//            'besedilo'         => null,
+//            'zvrstUprizoritve' => null,
+//            'zvrstSurs'        => null,
+//        ];
+//        $this->objUprizoritev = $ent                  = $I->successfullyCreate($this->uprizoritevUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        codecept_debug($ent);
+//        $I->assertEquals($ent['opis'], 'zz');
+//    }
 
     /**
      * 
@@ -125,7 +136,7 @@ class PredstavaCest
     /**
      *  kreiramo zapis
      * 
-     * @depends createUprizoritev
+     * @depends lookupUprizoritev
      * 
      * @param ApiTester $I
      */
@@ -137,39 +148,39 @@ class PredstavaCest
         $this->objGostujoca = $ent                = $I->successfullyCreate($this->gostujocaUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-//        $I->assertEquals($ent['uprizoritev'], $this->objUprizoritev['id']);
+//        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);
     }
 
     /**
      *  kreiramo zapis
      * 
-     * @depends createUprizoritev
+     * @depends lookupUprizoritev
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
     {
         $data      = [
             'dogodek'     => NULL,
-            'uprizoritev' => $this->objUprizoritev['id'],
+            'uprizoritev' => $this->lookUprizoritev['id'],
             'gostovanje'  => $this->objGostovanje['id'],
             'gostujoca'   => $this->objGostujoca['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['uprizoritev'], $this->objUprizoritev['id']);
+        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);
 
         // kreiramo še en zapis
         $data = [
             'dogodek'     => NULL,
-            'uprizoritev' => $this->objUprizoritev['id'],
+            'uprizoritev' => $this->lookUprizoritev['id'],
             'gostovanje'  => NULL,
             'gostujoca'   => NULL,
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['uprizoritev'], $this->objUprizoritev['id']);
+        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);
     }
 
     /**
@@ -212,7 +223,7 @@ class PredstavaCest
      */
     public function getListPoUprizoritvi(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?uprizoritev=" . $this->objUprizoritev['id'];
+        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev['id'];
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
@@ -262,7 +273,7 @@ class PredstavaCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
-        $I->assertEquals($ent['uprizoritev'], $this->objUprizoritev['id']);
+        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);
         $I->assertEquals($ent['gostovanje'], $this->objGostovanje['id']);
         $I->assertEquals($ent['gostujoca'], $this->objGostujoca['id']);
     }

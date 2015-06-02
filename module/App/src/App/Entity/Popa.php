@@ -86,6 +86,7 @@ class Popa
 
     /**
      * @ORM\Column(length=60, nullable=true)
+     * $$ novo polje
      */
     private $panoga;
 

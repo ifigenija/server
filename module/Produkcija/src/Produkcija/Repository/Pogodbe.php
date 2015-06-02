@@ -38,12 +38,12 @@ class Pogodbe
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
-                $this->expect(!(empty($options['popa']) && empty($options['oseba']) && empty($options['uprizoritev']) && empty($options['alternacija']) && empty($options['oseba'])), "Oseba ali Partner ali država sta obvezna", 770031);
+                $this->expect(!(empty($options['popa']) && empty($options['oseba']) && empty($options['uprizoritev']) && empty($options['alternacije']) && empty($options['oseba'])), "Oseba ali Partner ali država sta obvezna", 770031);
 
 
                 $qb = $this->createQueryBuilder('p');
                 $e  = $qb->expr();
-                $qb->join('p.alternacija', 'alternacija');
+                $qb->join('p.alternacije', 'alternacija');
                 $qb->join('alternacija.funkcija', 'funkcija');
                 if (!empty($options['uprizoritev'])) {
                     $qb->join('funkcija.uprizoritev', 'uprizoritev');
@@ -56,9 +56,9 @@ class Pogodbe
                     $qb->setParameter('popa', $options['popa'], 'string');
                 }
 
-                if (!empty($options['alternacija'])) {
-                    $qb->andWhere($e->eq('p.alternacija', ':alternacija'));
-                    $qb->setParameter('alternacija', $options['alternacija'], 'string');
+                if (!empty($options['alternacije'])) {
+                    $qb->andWhere($e->eq('p.alternacije', ':alternacije'));
+                    $qb->setParameter('alternacije', $options['alternacije'], 'string');
                 }
                 if (!empty($options['oseba'])) {
                     $qb->andWhere($e->eq('p.oseba', ':oseba'));
