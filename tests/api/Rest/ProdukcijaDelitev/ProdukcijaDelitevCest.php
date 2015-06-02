@@ -45,12 +45,14 @@ class ProdukcijaDelitevCest
     private $objDrzava;
     private $objPopa;
     private $objProdukcijskaHisa;
+    private $lookProdukcijskaHisa;
     private $objAlternacija1;
     private $objAlternacija2;
     private $objOseba;
     private $koprodukcijaUrl     = '/rest/produkcijadelitev';
     private $objKoprodukcija;
     private $lookUprizoritev;
+    private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
 
     public function _before(ApiTester $I)
     {
@@ -81,30 +83,47 @@ class ProdukcijaDelitevCest
      *  
      * @param ApiTester $I
      */
-    public function createPopa(ApiTester $I)
-    {
-        $data          = [
-            'sifra'  => 'X12',
-            'naziv'  => 'zz',
-//            'naziv1'    => 'zz',
-//            'panoga'    => 'zz',
-//            'email'     => 'z@zzz.zz',
-//            'url'       => 'zz',
-//            'opomba'    => 'zz',
-            'drzava' => $this->objDrzava['id'],
-//            'idddv'     => 'zz',
-//            'maticna'   => 'ZZ123',
-//            'zavezanec' => 'Da',
-//            'jeeu'      => 'Da',
-//            'datZav'    => '2010-02-01T00:00:00+0100',
-//            'datnZav'   => '2017-02-01T00:00:00+0100',
-//            'zamejstvo' => FALSE,
-        ];
-        $this->objPopa = $popa          = $I->successfullyCreate($this->popaUrl, $data);
+//    public function createPopa(ApiTester $I)
+//    {
+//        $data          = [
+//            'sifra'  => 'X12',
+//            'naziv'  => 'zz',
+////            'naziv1'    => 'zz',
+////            'panoga'    => 'zz',
+////            'email'     => 'z@zzz.zz',
+////            'url'       => 'zz',
+////            'opomba'    => 'zz',
+//            'drzava' => $this->objDrzava['id'],
+////            'idddv'     => 'zz',
+////            'maticna'   => 'ZZ123',
+////            'zavezanec' => 'Da',
+////            'jeeu'      => 'Da',
+////            'datZav'    => '2010-02-01T00:00:00+0100',
+////            'datnZav'   => '2017-02-01T00:00:00+0100',
+////            'zamejstvo' => FALSE,
+//        ];
+//        $this->objPopa = $popa          = $I->successfullyCreate($this->popaUrl, $data);
+//
+//        $I->assertNotEmpty($popa['id']);
+//    }
 
-        $I->assertNotEmpty($popa['id']);
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupProdukcijskaHisa(ApiTester $I)
+    {
+
+        $resp                       = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "total records");
+        $this->lookProdukcijskaHisa = $resp['data'][0];
     }
 
+    
+    
     /**
      *  kreiramo zapis
      * 
@@ -112,16 +131,16 @@ class ProdukcijaDelitevCest
      * 
      * @param ApiTester $I
      */
-    public function createProdukcijskaHisa(ApiTester $I)
-    {
-        $data                      = [
-            'status' => 'zz',
-            'popa'   => $this->objPopa['id'],
-        ];
-        $this->objProdukcijskaHisa = $ent                       = $I->successfullyCreate($this->produkcijskaHisaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['status'], 'zz');
-    }
+//    public function createProdukcijskaHisa(ApiTester $I)
+//    {
+//        $data                      = [
+//            'status' => 'zz',
+//            'popa'   => $this->objPopa['id'],
+//        ];
+//        $this->objProdukcijskaHisa = $ent                       = $I->successfullyCreate($this->produkcijskaHisaUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        $I->assertEquals($ent['status'], 'zz');
+//    }
 
     /**
      * 
@@ -168,7 +187,7 @@ class ProdukcijaDelitevCest
     /**
      *  kreiramo zapis
      * 
-     * @depends createProdukcijskaHisa
+     * @depends lookupProdukcijskaHisa
      * @depends lookupUprizoritev
      * 
      * @param ApiTester $I
@@ -186,7 +205,7 @@ class ProdukcijaDelitevCest
             'skupniStrosek'        => 34.56,
             'zaprosenProcent'      => 55.5,
             'uprizoritev'          => $this->lookUprizoritev['id'],
-            'koproducent'          => $this->objProdukcijskaHisa['id'],
+            'koproducent'          => $this->lookProdukcijskaHisa['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -198,7 +217,7 @@ class ProdukcijaDelitevCest
             'odstotekFinanciranja' => 7.90,
             'nasStrosek'           => false,
             'uprizoritev'          => $this->lookUprizoritev['id'],
-            'koproducent'          => $this->objProdukcijskaHisa['id'],
+            'koproducent'          => $this->lookProdukcijskaHisa['id'],
         ];
         $this->objProdukcijaDelitev2 = $ent                         = $I->successfullyCreate($this->restUrl, $data);
         $I->assertFalse($ent['nasStrosek']);
@@ -210,32 +229,32 @@ class ProdukcijaDelitevCest
      * 
      * @param ApiTester $I
      */
-    public function createOsebo(ApiTester $I)
-    {
-        $data = [
-            'naziv'         => 'zz',
-            'ime'           => 'zz',
-            'priimek'       => 'zz',
-            'funkcija'      => 'zz',
-            'srednjeIme'    => 'zz',
-            'psevdonim'     => 'zz',
-            'email'         => 'x@xxx.xx',
-            'datumRojstva'  => '1973-28-03T04:30:00',
-            'emso'          => 'ZZ',
-            'davcna'        => 'ZZ123',
-            'spol'          => 'M',
-            'opombe'        => 'zz',
-            'drzavljanstvo' => 'zz',
-            'drzavaRojstva' => 'zz',
-            'krajRojstva'   => 'zz',
-            'user'          => null,
-        ];
-
-        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
-
-        $I->assertEquals('zz', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
-    }
+//    public function createOsebo(ApiTester $I)
+//    {
+//        $data = [
+//            'naziv'         => 'zz',
+//            'ime'           => 'zz',
+//            'priimek'       => 'zz',
+//            'funkcija'      => 'zz',
+//            'srednjeIme'    => 'zz',
+//            'psevdonim'     => 'zz',
+//            'email'         => 'x@xxx.xx',
+//            'datumRojstva'  => '1973-28-03T04:30:00',
+//            'emso'          => 'ZZ',
+//            'davcna'        => 'ZZ123',
+//            'spol'          => 'M',
+//            'opombe'        => 'zz',
+//            'drzavljanstvo' => 'zz',
+//            'drzavaRojstva' => 'zz',
+//            'krajRojstva'   => 'zz',
+//            'user'          => null,
+//        ];
+//
+//        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
+//
+//        $I->assertEquals('zz', $oseba['ime']);
+//        $I->assertNotEmpty($oseba['id']);
+//    }
 
     /**
      * preberi vse zapise od uprizoritve
@@ -309,7 +328,7 @@ class ProdukcijaDelitevCest
         $I->assertEquals($ent['skupniStrosek'], 34.56);
         $I->assertEquals($ent['zaprosenProcent'], 55.5);
         $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);
-        $I->assertEquals($ent['koproducent'], $this->objProdukcijskaHisa['id']);
+        $I->assertEquals($ent['koproducent'], $this->lookProdukcijskaHisa['id']);
     }
 
     /**

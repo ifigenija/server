@@ -235,11 +235,11 @@ class AlternacijaCest
     public function lookupProdukcijskaHisa(ApiTester $I)
     {
 
-  $resp                       = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
+        $resp                       = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
-        $this->lookProdukcijskaHisa =$resp['data'][0];
+        $this->lookProdukcijskaHisa = $resp['data'][0];
 //        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
 //        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "total records");
@@ -271,14 +271,14 @@ class AlternacijaCest
      */
     public function createKoprodukcijo(ApiTester $I)
     {
-        $I->assertTrue(true,"test 1");
+        $I->assertTrue(true, "test 1");
         $data                  = [
             'odstotekFinanciranja' => 1.23,
             'nasStrosek'           => true,
             'uprizoritev'          => $this->lookUprizoritev['id'],
             'koproducent'          => $this->lookProdukcijskaHisa['id'],
         ];
-        $I->assertTrue(true,"test 2");
+        $I->assertTrue(true, "test 2");
         $this->objKoprodukcija = $ent                   = $I->successfullyCreate($this->koprodukcijaUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
@@ -322,7 +322,7 @@ class AlternacijaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'zaposlen'     => false,  // $$ true zaenkrat ne deluje           
+            'zaposlen'     => false, // $$ true zaenkrat ne deluje           
             'zacetek'      => '2010-02-01T00:00:00+0100',
             'konec'        => '2020-02-01T00:00:00+0100',
             'opomba'       => 'zz',
@@ -406,7 +406,7 @@ class AlternacijaCest
      */
     public function update(ApiTester $I)
     {
-        $ent             = $this->obj;
+        $ent           = $this->obj;
         $ent['opomba'] = 'uu';
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);

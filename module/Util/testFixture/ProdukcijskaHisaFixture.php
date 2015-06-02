@@ -66,6 +66,7 @@ class ProdukcijskaHisaFixture
     {
         return [
             ['0987', 'A', 'Popa-0987',],
+            ['0989', 'A', 'Popa-0989',],
         ];
     }
 

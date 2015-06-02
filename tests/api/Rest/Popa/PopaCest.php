@@ -93,57 +93,57 @@ class PopaCest
      * 
      * @param ApiTester $I
      */
-    public function createOsebo(ApiTester $I)
-    {
-        $data = [
-            'naziv'         => 'zz',
-            'ime'           => 'zz',
-            'priimek'       => 'zz',
-            'funkcija'      => 'zz',
-            'srednjeIme'    => 'zz',
-            'psevdonim'     => 'zz',
-            'email'         => 'x@xxx.xx',
-            'datumRojstva'  => '1973-28-03T04:30:00',
-            'emso'          => 'ZZ',
-            'davcna'        => 'ZZ123',
-            'spol'          => 'M',
-            'opombe'        => 'zz',
-            'drzavljanstvo' => 'zz',
-            'drzavaRojstva' => 'zz',
-            'krajRojstva'   => 'zz',
-            'user'          => null,
-        ];
-
-        $this->objOseba1 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
-
-        $I->assertEquals('zz', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
-
-        // kreiramo še en zapis
-        $data = [
-            'naziv'         => 'aa',
-            'ime'           => 'aa',
-            'priimek'       => 'aa',
-            'funkcija'      => 'aa',
-            'srednjeIme'    => 'aa',
-            'psevdonim'     => 'aa',
-            'email'         => 'a@aaa.aa',
-            'datumRojstva'  => '1975-28-03T04:30:00',
-            'emso'          => 'AA',
-            'davcna'        => 'AA123',
-            'spol'          => 'M',
-            'opombe'        => 'aa',
-            'drzavljanstvo' => 'aa',
-            'drzavaRojstva' => 'aa',
-            'krajRojstva'   => 'aa',
-            'user'          => null,
-        ];
-
-        $this->objOseba2 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
-
-        $I->assertEquals('aa', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
-    }
+//    public function createOsebo(ApiTester $I)
+//    {
+//        $data = [
+//            'naziv'         => 'zz',
+//            'ime'           => 'zz',
+//            'priimek'       => 'zz',
+//            'funkcija'      => 'zz',
+//            'srednjeIme'    => 'zz',
+//            'psevdonim'     => 'zz',
+//            'email'         => 'x@xxx.xx',
+//            'datumRojstva'  => '1973-28-03T04:30:00',
+//            'emso'          => 'ZZ',
+//            'davcna'        => 'ZZ123',
+//            'spol'          => 'M',
+//            'opombe'        => 'zz',
+//            'drzavljanstvo' => 'zz',
+//            'drzavaRojstva' => 'zz',
+//            'krajRojstva'   => 'zz',
+//            'user'          => null,
+//        ];
+//
+//        $this->objOseba1 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
+//
+//        $I->assertEquals('zz', $oseba['ime']);
+//        $I->assertNotEmpty($oseba['id']);
+//
+//        // kreiramo še en zapis
+//        $data = [
+//            'naziv'         => 'aa',
+//            'ime'           => 'aa',
+//            'priimek'       => 'aa',
+//            'funkcija'      => 'aa',
+//            'srednjeIme'    => 'aa',
+//            'psevdonim'     => 'aa',
+//            'email'         => 'a@aaa.aa',
+//            'datumRojstva'  => '1975-28-03T04:30:00',
+//            'emso'          => 'AA',
+//            'davcna'        => 'AA123',
+//            'spol'          => 'M',
+//            'opombe'        => 'aa',
+//            'drzavljanstvo' => 'aa',
+//            'drzavaRojstva' => 'aa',
+//            'krajRojstva'   => 'aa',
+//            'user'          => null,
+//        ];
+//
+//        $this->objOseba2 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
+//
+//        $I->assertEquals('aa', $oseba['ime']);
+//        $I->assertNotEmpty($oseba['id']);
+//    }
 
     /**
      * 

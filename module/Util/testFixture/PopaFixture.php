@@ -64,7 +64,8 @@ class PopaFixture
         return [
             ['0988', 'c', 'AK', 'Juhuhu d.o.o.'],
             ['0989', 'c', 'AK', 'Hopsasa d.o.o.'],
-            ['0987', 'c', 'AK', 'Gledališče Šrum d.o.o.']
+            ['0987', 'c', 'AK', 'Gledališče Šrum d.o.o.'],
+            ['0986', 'c', 'AK', 'Lutkovni Direndaj d.o.o.'],
         ];
     }
 
