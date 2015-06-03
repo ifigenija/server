@@ -47,7 +47,8 @@ class TipFunkcije
     /**
      * @ORM\Column(type="boolean", nullable=true)
      * @Max\I18n(label="tipFunkcije.nastopajoc", description="Nastopajoč")
-     * $$ novo polje
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
      */
     private $nastopajoc;
 
@@ -82,6 +83,7 @@ class TipFunkcije
     {
         $this->funkcije = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
     public function getId()
     {
         return $this->id;
@@ -130,7 +132,6 @@ class TipFunkcije
         return $this;
     }
 
-
     public function setImeZenski($imeZenski)
     {
         $this->imeZenski = $imeZenski;
@@ -159,8 +160,5 @@ class TipFunkcije
         $this->nastopajoc = $nastopajoc;
         return $this;
     }
-
-
-    
 
 }
