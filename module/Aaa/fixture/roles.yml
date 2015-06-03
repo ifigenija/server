@@ -1,7 +1,8 @@
--
-    name: beri-vse
-    description: 'Polni dostop do vsega v aplikaciji.'
-    permissions: {  }
+# $$ rb - ali je admin vloga za izbrisati , ker obstajata že ifi-*?
+#-
+#    name: beri-vse
+#    description: 'Polni dostop do vsega v aplikaciji.'
+#    permissions: {  }
 -
     name: administrator-dostopov
     description: 'Uporavljanje uporabnikov, skupin, vlog in dovoljenj.'
@@ -21,7 +22,174 @@
     name: ifi-readall
     description: 'Dostop do vseh -read in -list dovoljenj.'
     permissions: {  }
--
-    name: admin
-    description: 'Polni dostop do vsega v aplikaciji.'
-    permissions: [Drzava-write, Drzava-read]
+# $$ rb - ali je admin vloga za izbrisati , ker obstajata že ifi-*?
+#-
+#    name: admin
+#    description: 'Polni dostop do vsega v aplikaciji.'
+#    permissions: [Drzava-write, Drzava-read]
+- 
+    name: planer
+    description: 'Planer dogodkov v koledarju'
+    permissions: 
+        - Abonma-read
+        - Abonma-write
+        - Alternacija-read
+        - Alternacija-write
+        - Arhivalija-read
+        - Dogodek-read
+        - Dogodek-readVse 
+        - Dogodek-write
+        - Drzava-read
+        - Drzava-write
+        - Funkcija-read
+        - Funkcija-write
+        - Gostovanje-read
+        - Gostovanje-write
+        - Gostujoca-read
+        - Gostujoca-write
+        - KontaktnaOseba-read
+        - KontaktnaOseba-write
+        - Option-read
+        - OptionValue-read
+        - Oseba-read
+        - Oseba-write
+        - Popa-read
+        - Popa-write
+        - Posta-read
+        - Posta-write
+        - PostniNaslov-read
+        - PostniNaslov-write
+        - Predstava-read
+        - Predstava-write
+        - ProdukcijskaHisa-read
+        - ProdukcijskaHisa-write
+        - Prostor-read
+        - Prostor-write
+        - Rekviziterstvo-read
+        - Rekviziterstvo-write
+        - Rekvizit-read
+        - Rekvizit-write
+        - Sezona-read
+        - Sezona-write
+        - TipFunkcije-read
+        - Uprizoritev-read
+        - Uprizoritev-write
+        - Vaja-read
+        - Vaja-write
+        - Zasedenost-read
+        - Zasedenost-write
+        - ZvrstSurs-read
+        - ZvrstUprizoritve-read
+- 
+    name: kadrovska
+    description: 'Kadrovska služba'
+    permissions: 
+        - Abonma-read
+        - Arhivalija-read
+        - Dogodek-read
+        - Drzava-read
+        - Gostovanje-read
+        - Gostujoca-read
+        - KontaktnaOseba-read
+        - KontaktnaOseba-write
+        - Option-read
+        - OptionValue-read
+        - Oseba-read
+        - Oseba-write
+        - Popa-read
+        - Posta-read
+        - PostniNaslov-read
+        - PostniNaslov-write
+        - Predstava-read
+        - Prostor-read
+        - Rekviziterstvo-read
+        - Rekvizit-read
+        - Sezona-read
+        - Telefonska-read
+        - Telefonska-write
+        - Trr-read
+        - Trr-write
+        - Zaposlitev-read
+        - Zaposlitev-write
+        - ZvrstSurs-read
+        - ZvrstUprizoritve-read
+- 
+    name: arhivar
+    description: 'Ažuriranje arhivalij'
+    permissions: 
+        - Abonma-read
+        - Alternacija-read
+        - Arhivalija-read
+        - Arhivalija-write
+        - Besedilo-read
+        - DogodekIzven-read
+        - Dogodek-read
+        - Drzava-read
+        - Funkcija-read
+        - Gostovanje-read
+        - Gostujoca-read
+        - KontaktnaOseba-read
+        - Option-read
+        - OptionValue-read
+        - Oseba-read
+        - Popa-read
+        - Posta-read
+        - Predstava-read
+        - ProdukcijskaHisa-read
+        - Prostor-read
+        - Rekviziterstvo-read
+        - Rekvizit-read
+        - Sezona-read
+        - TipFunkcije-read
+        - Vaja-read
+        - Zasedenost-read
+        - ZvrstSurs-read
+        - ZvrstUprizoritve-read
+- 
+    name: igralec
+    description: 'Igralec'
+    permissions: 
+        - Abonma-read
+        - Abonma-write
+        - Alternacija-write
+        - Arhivalija-read
+        - Dogodek-read
+        - Drzava-read
+        - Gostovanje-read
+        - Gostujoca-read
+        - Option-read
+        - OptionValue-read
+        - Popa-read
+        - Posta-read
+        - Predstava-read
+        - Prostor-read
+        - Rekviziterstvo-read
+        - Rekvizit-read
+        - Sezona-read
+        - TipFunkcije-read
+        - ZvrstSurs-read
+        - ZvrstUprizoritve-read
+- 
+    name: prisotnost
+    description: 'Vnašalec prisotnosti, tudi za tiste izven uprizoritev'
+    permissions: 
+        - Abonma-read
+        - Arhivalija-read
+        - Dogodek-read
+        - Drzava-read
+        - Gostovanje-read
+        - Gostujoca-read
+        - Option-read
+        - OptionValue-read
+        - Popa-read
+        - Posta-read
+        - Predstava-read
+        - Prostor-read
+        - Rekviziterstvo-read
+        - Rekvizit-read
+        - Sezona-read
+        - TerminStoritve-read
+        - TerminStoritve-vse
+        - TipFunkcije-read
+        - ZvrstSurs-read
+        - ZvrstUprizoritve-read
