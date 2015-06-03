@@ -52,12 +52,12 @@ lists:
                   options:
                       label: Uprizoritev
                       targetEntity: Produkcija\Entity\Uprizoritev
-                      required: false                      
-                      
-        hydrator:
-            - exclude: []
+                      required: false                                            
+
     vse: 
         filter:
+hydrator:
+    lookups: [oseba, popa]
 relation:
     default:
         alternacije:
