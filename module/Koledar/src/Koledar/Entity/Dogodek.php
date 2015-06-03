@@ -50,6 +50,7 @@ class Dogodek
     private $konec;
 
     /**
+     * $$ za podefinirati vrednosti -morda v opcijah? 
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Status", description="Status dogodka")
      * @Max\Ui(type="integer")

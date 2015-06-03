@@ -9,9 +9,11 @@
     name: TerminStoritve-vse
     description: TerminStoritve - spreminjanje vseh zapisov
 -
+    name: Dogodek-readVse
+    description: Dogodek - branje vseh, ne glede na status dogodka
+-
     name: Oseba-vse
     description: Oseba - vse - za testiranje assert
-
 
 # polavtomatsko:
 -

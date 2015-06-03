@@ -44,5 +44,16 @@ return [
     'form_elements'   => [
         'invokables' => [
         ]
-    ]
+    ],
+   'zfc_rbac'        => [
+        'assertion_manager' => [
+            "invokables" => [
+                "chck-dogodek" => "Koledar\Assertion\AssertDogodek",
+            ],
+        ],
+        "assertion_map"     => [
+            "Dogodek-read" => "chck-dogodek"
+        ],
+    ],
+
 ];
