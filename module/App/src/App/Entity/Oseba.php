@@ -67,7 +67,7 @@ class Oseba
 
     /**
      * @ORM\Column(length=40, nullable=true)
-     * @Max\I18n(label="oseba.funkcija", description="Funkcija osebe ")
+     * @Max\I18n(label="entiteta.funkcija", description="Funkcija osebe ")
      * @var string
      */
     private $funkcija;

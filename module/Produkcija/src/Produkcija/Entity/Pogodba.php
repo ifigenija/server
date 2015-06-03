@@ -79,7 +79,7 @@ class Pogodba
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="pogodba.aktivna", description="Ali je pogodba aktivna")   
+     * @Max\I18n(label="entiteta.aktivna", description="Ali je pogodba aktivna")   
      * @Max\Ui(type="boolcheckbox")                       
      * @var boolean
      */

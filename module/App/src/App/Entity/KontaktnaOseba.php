@@ -39,7 +39,7 @@ class KontaktnaOseba
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="kontaktnaOseba.funkcija", description="Funkcija kontaktne osebe -npr. direktor")
+     * @Max\I18n(label="entiteta.funkcija", description="Funkcija kontaktne osebe -npr. direktor")
      * @var string
      */
     private $funkcija;

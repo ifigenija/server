@@ -80,7 +80,7 @@ class Alternacija
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="alternacija.aktivna", description="Aktivna")
+     * @Max\I18n(label="entiteta.aktivna", description="Aktivna")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -96,7 +96,7 @@ class Alternacija
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Funkcija", inversedBy="alternacije")
      * @ORM\JoinColumn(name="funkcija_id", referencedColumnName="id")
-     * @Max\I18n(label="alternacija.funkcija",  description="Funkcija pri alternaciji")
+     * @Max\I18n(label="entiteta.funkcija",  description="Funkcija pri alternaciji")
      * @Max\Ui(type="toone", required=true);
      * @var \Produkcija\Entity\Funkcija
      */
