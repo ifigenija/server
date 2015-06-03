@@ -71,7 +71,7 @@ class ProdukcijaDelitev
      *  $$ rb ali ni to isto kot avtorski honorar?
      * 
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="prodel.tantiemi", description="Strošek tantiemov")
+     * @Max\I18n(label="prodel.tantiemi", description="Strošek tantiem")
      * @var double
      */
     private $tantiemi;
