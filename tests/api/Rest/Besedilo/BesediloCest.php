@@ -49,16 +49,20 @@ class BesediloCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'naslov'          => 'zz',
-            'avtor'           => 'zz',
-            'podnaslov'       => 'zz',
-            'jezik'           => 'zz',
-            'naslovIzvirnika' => 'zz',
-            'datumPrejema'    => '2010-02-01T00:00:00+0100',
-            'moskeVloge'      => 1,
-            'zenskeVloge'     => 2,
-            'prevajalec'      => 'zz',
-            'povzetekVsebine' => 'zz',
+            'naslov'                => 'zz',
+            'avtor'                 => 'zz',
+            'podnaslov'             => 'zz',
+            'jezik'                 => 'zz',
+            'naslovIzvirnika'       => 'zz',
+            'datumPrejema'          => '2010-02-01T00:00:00+0100',
+            'moskeVloge'            => 1,
+            'zenskeVloge'           => 2,
+            'prevajalec'            => 'zz',
+            'povzetekVsebine'       => 'zz',
+            'letoIzida'             => '1995',
+            'krajIzida'             => 'zz',
+            'zaloznik'              => 'zz',
+            'internacionalniNaslov' => 'zz',
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -66,16 +70,20 @@ class BesediloCest
 
         // kreiramo še en zapis
         $data = [
-            'naslov'          => 'aa',
-            'avtor'           => 'aa',
-            'podnaslov'       => 'aa',
-            'jezik'           => 'aa',
-            'naslovIzvirnika' => 'aa',
-            'datumPrejema'    => '2011-03-01T00:00:00+0100',
-            'moskeVloge'      => 1,
-            'zenskeVloge'     => 2,
-            'prevajalec'      => 'aa',
-            'povzetekVsebine' => 'aa',
+            'naslov'                => 'aa',
+            'avtor'                 => 'aa',
+            'podnaslov'             => 'aa',
+            'jezik'                 => 'aa',
+            'naslovIzvirnika'       => 'aa',
+            'datumPrejema'          => '2011-03-01T00:00:00+0100',
+            'moskeVloge'            => 1,
+            'zenskeVloge'           => 2,
+            'prevajalec'            => 'aa',
+            'povzetekVsebine'       => 'aa',
+            'letoIzida'             => '1996',
+            'krajIzida'             => 'aa',
+            'zaloznik'              => 'aa',
+            'internacionalniNaslov' => 'aa',
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -88,13 +96,13 @@ class BesediloCest
      */
     public function getList(ApiTester $I)
     {
-        $listUrl = $this->restUrl ;
+        $listUrl = $this->restUrl;
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
         codecept_debug($list);
 
         $I->assertNotEmpty($list);
-        $I->assertTrue( $resp['state']['totalRecords'] >= 2);
+        $I->assertTrue($resp['state']['totalRecords'] >= 2);
         $I->assertEquals("aa", $list[0]['naslov']);      //glede na sort
     }
 
@@ -151,6 +159,11 @@ class BesediloCest
         $I->assertEquals($ent['zenskeVloge'], 2);
         $I->assertEquals($ent['prevajalec'], 'zz');
         $I->assertEquals($ent['povzetekVsebine'], 'zz');
+
+        $I->assertEquals($ent['letoIzida'], '1995');
+        $I->assertEquals($ent['krajIzida'], 'zz');
+        $I->assertEquals($ent['zaloznik'], 'zz');
+        $I->assertEquals($ent['internacionalniNaslov'], 'zz');
     }
 
     /**

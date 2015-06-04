@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping AS ORM,
  * @ORM\Entity(repositoryClass="Produkcija\Repository\ZvrstiUprizoritve")
  * @Max\I18n(label="Zvrst",plural="Zvrst uprizoritve")
  * @Max\Id(prefix="0021")
- * @Max\Lookup(ident="ime", label="opis", search={"ime","opis"})
+ * @Max\Lookup(ident="sifra", label="naziv", search={"sifra","naziv","opis"})
  */
 class ZvrstUprizoritve
         extends \Max\Entity\Base
@@ -21,40 +21,53 @@ class ZvrstUprizoritve
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
-     * @Max\I18n(label="Id", description="ID zvrsti uprizoritve")
+     * @Max\I18n(label="Id", description="ID vrste uprizoritve")
      * @Max\Ui(type="id")
      * @var string
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.ime", description="Ime zvrsti SURS")
-     * @Max\Ui(type="naziv",ident=true )
+     * @ORM\Column(type="string", unique=true, nullable=false)
+     * @Max\I18n(label="zvrstUprizoritve.sifra", description="Šifra vrste uprizoritve")
+     * @Max\Ui(type="sifra",ident=true )
      * @var string
      */
-    private $ime;
+    private $sifra;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.opis", description="Opis zvrsti uprizoritve")
+     * @Max\I18n(label="zvrstUprizoritve.naziv", description="Naziv vrste uprizoritve")
+     * @Max\Ui(type="naziv" )
      * @var string
      */
-    private $opis;
+    private $naziv;
+
+    /**
+     * ...
+     * @ORM\Column(type="text", nullable=true)
+     * @Max\I18n(label="zvrstUprizoritve.opis", description="Opis vrste uprizoritve")
+     * @var string
+     */
+    protected $opis;
 
     public function validate($mode = 'update')
     {
         
     }
-
     public function getId()
     {
         return $this->id;
     }
 
-    public function getIme()
+    public function getSifra()
     {
-        return $this->ime;
+        return $this->sifra;
+    }
+
+    public function getNaziv()
+    {
+        return $this->naziv;
     }
 
     public function getOpis()
@@ -68,9 +81,15 @@ class ZvrstUprizoritve
         return $this;
     }
 
-    public function setIme($ime)
+    public function setSifra($sifra)
     {
-        $this->ime = $ime;
+        $this->sifra = $sifra;
+        return $this;
+    }
+
+    public function setNaziv($naziv)
+    {
+        $this->naziv = $naziv;
         return $this;
     }
 

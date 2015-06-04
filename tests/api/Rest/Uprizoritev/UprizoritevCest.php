@@ -40,24 +40,24 @@ use ApiTester;
 class UprizoritevCest
 {
 
-    private $restUrl               = '/rest/uprizoritev';
-    private $besediloUrl           = '/rest/besedilo';
-    private $zvrstUprizoritveUrl   = '/rest/zvrstuprizoritve';
-    private $zvrstSursUrl          = '/rest/zvrstsurs';
-    private $produkcijaDelitevUrl  = '/rest/produkcijadelitev';
-    private $uprizoritevUrl        = '/rest/uprizoritev';
-    private $produkcijskaHisaUrl   = '/rest/produkcijskahisa';
-    private $popaUrl               = '/rest/popa';
-    private $drzavaUrl             = '/rest/drzava';
-    private $funkcijaUrl           = '/rest/funkcija';
-    private $arhivalijaUrl         = '/rest/arhivalija';
-    private $rekviziterstvoUrl     = '/rest/rekviziterstvo';
-    private $rekvizitUrl           = '/rest/rekvizit';
-    private $vajaUrl               = '/rest/vaja';
-    private $predstavaUrl          = '/rest/predstava';
-    private $gostujocaUrl          = '/rest/gostujoca';
-    private $prostorUrl            = '/rest/prostor';
-    private $strosekUprizoritveUrl = '/rest/strosekuprizoritve';
+    private $restUrl                = '/rest/uprizoritev';
+    private $besediloUrl            = '/rest/besedilo';
+    private $zvrstUprizoritveUrl    = '/rest/zvrstuprizoritve';
+    private $zvrstSursUrl           = '/rest/zvrstsurs';
+    private $produkcijaDelitevUrl   = '/rest/produkcijadelitev';
+    private $uprizoritevUrl         = '/rest/uprizoritev';
+    private $produkcijskaHisaUrl    = '/rest/produkcijskahisa';
+    private $popaUrl                = '/rest/popa';
+    private $drzavaUrl              = '/rest/drzava';
+    private $funkcijaUrl            = '/rest/funkcija';
+    private $arhivalijaUrl          = '/rest/arhivalija';
+    private $rekviziterstvoUrl      = '/rest/rekviziterstvo';
+    private $rekvizitUrl            = '/rest/rekvizit';
+    private $vajaUrl                = '/rest/vaja';
+    private $predstavaUrl           = '/rest/predstava';
+    private $gostujocaUrl           = '/rest/gostujoca';
+    private $prostorUrl             = '/rest/prostor';
+    private $strosekUprizoritveUrl  = '/rest/strosekuprizoritve';
     private $obj;
     private $obj2;
     private $objProstor;
@@ -142,7 +142,7 @@ class UprizoritevCest
      */
     public function lookupZvrstUprizoritve(ApiTester $I)
     {
-        $this->lookZvrstUprizoritve = $ent                        = $I->lookupEntity("zvrstuprizoritve", "Komedija", false);
+        $this->lookZvrstUprizoritve = $ent                        = $I->lookupEntity("zvrstuprizoritve", "08", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -152,7 +152,7 @@ class UprizoritevCest
      */
     public function lookupZvrstSurs(ApiTester $I)
     {
-        $this->lookZvrstSurs = $ent                 = $I->lookupEntity("zvrstsurs", "Drama", false);
+        $this->lookZvrstSurs = $ent                 = $I->lookupEntity("zvrstsurs", "01", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -247,26 +247,29 @@ class UprizoritevCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'faza'             => 'produkcija',
-            'naslov'           => 'zz',
-            'podnaslov'        => 'zz',
-            'delovniNaslov'    => 'zz',
-            'datumZacStudija'  => '2011-02-01T00:00:00+0100',
-            'datumPremiere'    => '2010-02-01T00:00:00+0100',
-            'maticniOder'      => $this->lookProstor['id'],
-            'stOdmorov'        => 1,
-            'avtor'            => 'avzz',
-            'gostujoca'        => FALSE,
-            'trajanje'         => 2,
-            'opis'             => 'zz',
-            'arhIdent'         => 'zz',
-            'arhOpomba'        => 'zz',
-            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
-            'sloAvtor'         => FALSE,
-            'kratkiNaslov'     => 'zz',
-            'besedilo'         => $this->lookBesedilo['id'],
-            'zvrstUprizoritve' => $this->lookZvrstUprizoritve['id'],
-            'zvrstSurs'        => $this->lookZvrstSurs['id'],
+            'faza'                  => 'produkcija',
+            'naslov'                => 'zz',
+            'podnaslov'             => 'zz',
+            'delovniNaslov'         => 'zz',
+            'datumZacStudija'       => '2011-02-01T00:00:00+0100',
+            'datumPremiere'         => '2010-02-01T00:00:00+0100',
+            'maticniOder'           => $this->lookProstor['id'],
+            'stOdmorov'             => 1,
+            'avtor'                 => 'avzz',
+            'gostujoca'             => FALSE,
+            'trajanje'              => 2,
+            'opis'                  => 'zz',
+            'arhIdent'              => 'zz',
+            'arhOpomba'             => 'zz',
+            'datumZakljucka'        => '2019-02-01T00:00:00+0100',
+            'sloAvtor'              => FALSE,
+            'kratkiNaslov'          => 'zz',
+            'besedilo'              => $this->lookBesedilo['id'],
+            'zvrstUprizoritve'      => $this->lookZvrstUprizoritve['id'],
+            'zvrstSurs'             => $this->lookZvrstSurs['id'],
+            'internacionalniNaslov' => 'zz',
+            'steviloVaj'            => 4,
+            'planiranoSteviloVaj'   => 5,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -275,26 +278,29 @@ class UprizoritevCest
 
         // kreiram še en zapis
         $data       = [
-            'faza'             => 'predprodukcija-potrjen_program',
-            'naslov'           => 'aa',
-            'podnaslov'        => 'aa',
-            'delovniNaslov'    => 'aa',
-            'datumZacStudija'  => '2011-02-01T00:00:00+0100',
-            'datumPremiere'    => '2010-02-01T00:00:00+0100',
-            'maticniOder'      => $this->lookProstor['id'],
-            'stOdmorov'        => 3,
-            'avtor'            => 'avaa',
-            'gostujoca'        => true, // $$ bool vrača napako convertToBool
-            'trajanje'         => 4,
-            'opis'             => 'aa',
-            'arhIdent'         => 'aa',
-            'arhOpomba'        => 'aa',
-            'datumZakljucka'   => '2019-02-01T00:00:00+0100',
-            'sloAvtor'         => true, // $$ bool vrača napako convertToBool
-            'kratkiNaslov'     => 'aa',
-            'besedilo'         => $this->lookBesedilo['id'],
-            'zvrstUprizoritve' => $this->lookZvrstUprizoritve['id'],
-            'zvrstSurs'        => $this->lookZvrstSurs['id'],
+            'faza'                  => 'predprodukcija-potrjen_program',
+            'naslov'                => 'aa',
+            'podnaslov'             => 'aa',
+            'delovniNaslov'         => 'aa',
+            'datumZacStudija'       => '2011-02-01T00:00:00+0100',
+            'datumPremiere'         => '2010-02-01T00:00:00+0100',
+            'maticniOder'           => $this->lookProstor['id'],
+            'stOdmorov'             => 3,
+            'avtor'                 => 'avaa',
+            'gostujoca'             => true, // $$ bool vrača napako convertToBool
+            'trajanje'              => 4,
+            'opis'                  => 'aa',
+            'arhIdent'              => 'aa',
+            'arhOpomba'             => 'aa',
+            'datumZakljucka'        => '2019-02-01T00:00:00+0100',
+            'sloAvtor'              => true, // $$ bool vrača napako convertToBool
+            'kratkiNaslov'          => 'aa',
+            'besedilo'              => $this->lookBesedilo['id'],
+            'zvrstUprizoritve'      => $this->lookZvrstUprizoritve['id'],
+            'zvrstSurs'             => $this->lookZvrstSurs['id'],
+            'internacionalniNaslov' => 'aa',
+            'steviloVaj'            => 6,
+            'planiranoSteviloVaj'   => 7,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -396,7 +402,7 @@ class UprizoritevCest
         $I->assertNotEmpty($drzava);
     }
 
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
@@ -406,7 +412,6 @@ class UprizoritevCest
         $I->assertNotEmpty($ent);
     }
 
-    
     /**
      * kreiram popa
      *  
@@ -445,14 +450,14 @@ class UprizoritevCest
 //        $I->assertNotEmpty($popa['id']);
 //    }
 
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
     public function lookupProdukcijskaHisa(ApiTester $I)
     {
 
-        $resp                       = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
+        $resp                        = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
@@ -461,7 +466,6 @@ class UprizoritevCest
         $this->lookProdukcijskaHisa2 = $resp['data'][1];
     }
 
-    
     /**
      *  kreiramo zapis
      * 
@@ -758,6 +762,9 @@ class UprizoritevCest
         $I->assertEquals($ent['besedilo'], $this->lookBesedilo['id']);
         $I->assertEquals($ent['zvrstUprizoritve'], $this->lookZvrstUprizoritve['id']);
         $I->assertEquals($ent['zvrstSurs'], $this->lookZvrstSurs['id']);
+        $I->assertEquals($ent['internacionalniNaslov'], 'zz');
+        $I->assertEquals($ent['steviloVaj'], 4);
+        $I->assertEquals($ent['planiranoSteviloVaj'], 5);
 
         $I->assertTrue(isset($ent['koprodukcije']));
         $I->assertTrue(isset($ent['funkcije']));
@@ -948,6 +955,7 @@ class UprizoritevCest
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "gostujoce", $this->objGostujoca1['id']);
         $I->assertEquals(1, count($resp));
     }
+
     /**
      * preberemo relacije
      * @depends createVecStroskov

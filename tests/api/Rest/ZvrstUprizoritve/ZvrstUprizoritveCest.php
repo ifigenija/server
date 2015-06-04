@@ -49,20 +49,22 @@ class ZvrstUprizoritveCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'ime'  => 'zz',
-            'opis' => 'zz',
+            'sifra' => 'ZZ',
+            'naziv' => 'zz',
+            'opis'  => 'zz',
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals($ent['ime'], 'zz');
+        $I->assertEquals($ent['naziv'], 'zz');
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
         $data = [
-            'ime'  => 'aa',
-            'opis' => 'aa',
+            'sifra' => 'AA',
+            'naziv' => 'aa',
+            'opis'  => 'aa',
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals($ent['ime'], 'aa');
+        $I->assertEquals($ent['naziv'], 'aa');
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -74,12 +76,12 @@ class ZvrstUprizoritveCest
      */
     public function update(ApiTester $I)
     {
-        $ent        = $this->obj;
-        $ent['ime'] = 'xx';
+        $ent          = $this->obj;
+        $ent['naziv'] = 'xx';
 
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($ent['ime'], 'xx');
+        $I->assertEquals($ent['naziv'], 'xx');
     }
 
     /**
@@ -92,7 +94,8 @@ class ZvrstUprizoritveCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals($ent['ime'], 'xx');
+        $I->assertEquals($ent['sifra'], 'ZZ');
+        $I->assertEquals($ent['naziv'], 'xx');
         $I->assertEquals($ent['opis'], 'zz');
     }
 
@@ -109,7 +112,7 @@ class ZvrstUprizoritveCest
 
         $I->assertNotEmpty($list);
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals("aa", $list[0]['ime']);      //glede na sort
+//        $I->assertEquals("aa", $list[0]['naziv']);      //glede na sort
     }
 
     /**
@@ -125,7 +128,7 @@ class ZvrstUprizoritveCest
 
         $I->assertNotEmpty($list);
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals("aa", $list[0]['ime']);      //glede na sort
+//        $I->assertEquals("aa", $list[0]['naziv']);      //glede na sort
     }
 
     /**

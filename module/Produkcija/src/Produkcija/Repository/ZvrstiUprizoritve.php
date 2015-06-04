@@ -23,10 +23,10 @@ class ZvrstiUprizoritve
 
     protected $sortOptions = [
         "default" => [
-            "ime" => ["alias" => "p.ime"]
+            "sifra" => ["alias" => "p.sifra"]
         ],
         "vse" => [
-            "ime" => ["alias" => "p.ime"]
+            "sifra" => ["alias" => "p.sifra"]
         ],
     ];
 
@@ -47,11 +47,11 @@ class ZvrstiUprizoritve
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.ime', ':ime');
+            $naz = $e->like('p.sifra', ':sifra');
 
             $qb->andWhere($e->orX($naz));
 
-            $qb->setParameter('ime', "{$options['q']}%", "string");
+            $qb->setParameter('sifra', "{$options['q']}%", "string");
         }
 
         return $qb;

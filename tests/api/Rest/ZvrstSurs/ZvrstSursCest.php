@@ -46,20 +46,22 @@ class ZvrstSursCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'ime'   => 'zz',
+            'sifra' => 'ZZ',
             'naziv' => 'zz',
+            'opis'  => 'zz',
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals($ent['ime'], 'zz');
+        $I->assertEquals($ent['naziv'], 'zz');
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
         $data = [
-            'ime'   => 'aa',
+            'sifra' => 'AA',
             'naziv' => 'aa',
+            'opis'  => 'aa',
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals($ent['ime'], 'aa');
+        $I->assertEquals($ent['naziv'], 'aa');
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -71,12 +73,12 @@ class ZvrstSursCest
      */
     public function update(ApiTester $I)
     {
-        $ent        = $this->obj;
-        $ent['ime'] = 'xx';
+        $ent          = $this->obj;
+        $ent['naziv'] = 'xx';
 
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($ent['ime'], 'xx');
+        $I->assertEquals($ent['naziv'], 'xx');
     }
 
     /**
@@ -89,8 +91,9 @@ class ZvrstSursCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals($ent['ime'], 'xx');
-        $I->assertEquals($ent['naziv'], 'zz');
+        $I->assertEquals($ent['sifra'], 'ZZ');
+        $I->assertEquals($ent['naziv'], 'xx');
+        $I->assertEquals($ent['opis'], 'zz');
     }
 
     /**

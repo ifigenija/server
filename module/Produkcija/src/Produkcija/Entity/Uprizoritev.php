@@ -64,6 +64,15 @@ class Uprizoritev
     private $delovniNaslov;
 
     /**
+     * Predvidoma v angleščini
+     * 
+     * @ORM\Column(type="string", nullable=true)
+     * @Max\I18n(label="uprizoritev.internacionalniNaslov", description="Internacionalni naslov uprizoritve")
+     * @var string
+     */
+    private $internacionalniNaslov;
+
+    /**
      * pomeni začetek faze produkcija
      * 
      * polje uporabljamo že v fazi predprodukcije za makroplaniranje
@@ -75,11 +84,22 @@ class Uprizoritev
     private $datumZacStudija;
 
     /**
+     * $$ rb verjetno je to odvečno polje, sedaj, ko imamo polje za planirano število vaj
+     * 
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="uprizoritev.steviloVaj", description="Število vaj")
-     * $$ dopolni
+     * @Max\Ui(type="integer")
+     * @var integer     
      */
     private $steviloVaj;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="uprizoritev.planiranoSteviloVaj", description="Planirano število vaj")
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    private $planiranoSteviloVaj;
 
     /**
      * pomeni tudi konec faze produkcija
@@ -257,7 +277,7 @@ class Uprizoritev
 
     public function validate($mode = 'update')
     {
-       $this->expect(!empty($this->sifra), 'Šifra ne sme biti prazna', 1000877);
+        $this->expect(!empty($this->sifra), 'Šifra ne sme biti prazna', 1000877);
     }
 
     public function getId()
@@ -290,6 +310,11 @@ class Uprizoritev
         return $this->delovniNaslov;
     }
 
+    public function getInternacionalniNaslov()
+    {
+        return $this->internacionalniNaslov;
+    }
+
     public function getDatumZacStudija()
     {
         return $this->datumZacStudija;
@@ -298,6 +323,11 @@ class Uprizoritev
     public function getSteviloVaj()
     {
         return $this->steviloVaj;
+    }
+
+    public function getPlaniranoSteviloVaj()
+    {
+        return $this->planiranoSteviloVaj;
     }
 
     public function getDatumPremiere()
@@ -385,11 +415,6 @@ class Uprizoritev
         return $this->stroski;
     }
 
-    public function getStrosekUprizoritve()
-    {
-        return $this->strosekUprizoritve;
-    }
-
     public function getVaje()
     {
         return $this->vaje;
@@ -456,6 +481,12 @@ class Uprizoritev
         return $this;
     }
 
+    public function setInternacionalniNaslov($internacionalniNaslov)
+    {
+        $this->internacionalniNaslov = $internacionalniNaslov;
+        return $this;
+    }
+
     public function setDatumZacStudija($datumZacStudija)
     {
         $this->datumZacStudija = $datumZacStudija;
@@ -465,6 +496,12 @@ class Uprizoritev
     public function setSteviloVaj($steviloVaj)
     {
         $this->steviloVaj = $steviloVaj;
+        return $this;
+    }
+
+    public function setPlaniranoSteviloVaj($planiranoSteviloVaj)
+    {
+        $this->planiranoSteviloVaj = $planiranoSteviloVaj;
         return $this;
     }
 
@@ -567,12 +604,6 @@ class Uprizoritev
     public function setStroski($stroski)
     {
         $this->stroski = $stroski;
-        return $this;
-    }
-
-    public function setStrosekUprizoritve($strosekUprizoritve)
-    {
-        $this->strosekUprizoritve = $strosekUprizoritve;
         return $this;
     }
 

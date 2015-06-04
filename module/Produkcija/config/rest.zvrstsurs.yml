@@ -6,8 +6,11 @@ forms:
     default: 
         elements:
 #            - id
-            - ime
+            - name: sifra
+              options: 
+                  required: false
             - naziv
+            - opis
 lists:
     default: 
         hydrator:

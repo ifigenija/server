@@ -37,14 +37,15 @@ class ZvrstSursFixture
 
         $rep = $manager->getRepository('Produkcija\Entity\ZvrstSurs');
 
-        $o = $rep->findOneByIme(trim($v[0]));
+        $o = $rep->findOneBySifra(trim($v[0]));
         if (!$o) {
             $o = new \Produkcija\Entity\ZvrstSurs();
-            $o->setIme(trim($v[0]));
+            $o->setSifra(trim($v[0]));
             $manager->persist($o);
         }
 
         $o->setNaziv($v[1]);
+        $o->setOpis($v[2]);
         
 //        $referenca = 'ZvrstSurs-' . $v[0];
 //        var_dump($referenca);
@@ -54,13 +55,13 @@ class ZvrstSursFixture
     public function getData()
     {
         return [
-            ['Drama', 'drama (SURS 01)'],
-            ['Opera', 'opera (SURS 02)'],
-            ['Balet', 'balet (SURS 03)'],
-            ['Plesne prireditve', 'plesne prireditve (SURS 04)'],
-            ['Lutkovno gledališče', 'lutkovno gledališče (SURS 05)'],
-            ['Raziskovalno gledališče', 'raziskovalno gledališče (SURS 06)'],
-            ['Drugo', 'drugo (SURS 07)'],
+            ['01','Drama', 'drama (SURS 01)'],
+            ['02','Opera', 'opera (SURS 02)'],
+            ['03','Balet', 'balet (SURS 03)'],
+            ['04','Plesne prireditve', 'plesne prireditve (SURS 04)'],
+            ['05','Lutkovno gledališče', 'lutkovno gledališče (SURS 05)'],
+            ['06','Raziskovalno gledališče', 'raziskovalno gledališče (SURS 06)'],
+            ['07','Drugo', 'drugo (SURS 07)'],
         ];
     }
 

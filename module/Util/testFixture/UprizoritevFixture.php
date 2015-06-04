@@ -87,10 +87,10 @@ class UprizoritevFixture
         );
 
         // ker ni v isti skupini fixtur-jev, ne deluje getReference
-        $value = $zvrUpriR->findOneByIme($v[19]);
+        $value = $zvrUpriR->findOneBySifra($v[19]);
         $o->setZvrstUprizoritve($value);
 
-        $value = $zvrSursR->findOneByIme($v[20]);
+        $value = $zvrSursR->findOneBySifra($v[20]);
         $o->setZvrstSurs($value);
 
         $referenca = 'Uprizoritev-' . $v[0];
@@ -101,8 +101,8 @@ class UprizoritevFixture
     public function getData()
     {
         return [
-            ['0001', 'Sen kresne noči', 'produkcija', '', 'Sanje', '2016-02-01', '2016-06-01', 'Prostor-0005', 1, 'William Shakespeare', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0001', 'Komedija', 'Drama'],
-            ['0002', 'Smoletov vrt', 'predprodukcija-ideja', '', '', '2017-01-01', '2016-04-20', 'Prostor-0006', 2, 'B. Hočevar', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0003', 'Kriminalka', 'Raziskovalno gledališče'],
+            ['0001', 'Sen kresne noči', 'produkcija', '', 'Sanje', '2016-02-01', '2016-06-01', 'Prostor-0005', 1, 'William Shakespeare', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0001', '08', '01'],
+            ['0002', 'Smoletov vrt', 'predprodukcija-ideja', '', '', '2017-01-01', '2016-04-20', 'Prostor-0006', 2, 'B. Hočevar', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0003', '11', '06'],
         ];
     }
 

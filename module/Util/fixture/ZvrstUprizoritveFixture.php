@@ -7,7 +7,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Nalaganje privzetih zvrsti SURS
+ * Nalaganje privzetih zvrsti uprizoritve
  *
  * @author lovro
  */
@@ -37,31 +37,32 @@ class ZvrstUprizoritveFixture
 
         $rep = $manager->getRepository('Produkcija\Entity\ZvrstUprizoritve');
 
-        $o = $rep->findOneByIme(trim($v[0]));
+        $o = $rep->findOneBySifra(trim($v[0]));
         if (!$o) {
             $o = new \Produkcija\Entity\ZvrstUprizoritve();
-            $o->setIme(trim($v[0]));
+            $o->setSifra(trim($v[0]));
             $manager->persist($o);
         }
 
-        $o->setOpis($v[1]);
+        $o->setNaziv($v[1]);
+        $o->setOpis($v[2]);
     }
 
     public function getData()
     {
         return [
-            ['Opera', 'opera'],
-            ['Opereta', 'opereta'],
-            ['Balet', 'balet'],
-            ['Plesne prireditve', 'plesne prireditve'],
-            ['Lutkovno gledališče', 'lutkovno gledališče'],
-            ['Raziskovalno gledališče', 'raziskovalno gledališče'],
-            ['Biografska drama', 'biografska drama'],
-            ['Komedija', 'komedija'],
-            ['Črna komedija', 'črna komedija'],
-            ['E-igra', 'E-igra'],
-            ['Kriminalka', 'kriminalka'],
-            ['Musical', 'musical'],
+            ['01', 'Opera', 'opera'],
+            ['02', 'Opereta', 'opereta'],
+            ['03', 'Balet', 'balet'],
+            ['04', 'Plesne prireditve', 'plesne prireditve'],
+            ['05', 'Lutkovno gledališče', 'lutkovno gledališče'],
+            ['06', 'Raziskovalno gledališče', 'raziskovalno gledališče'],
+            ['07', 'Biografska drama', 'biografska drama'],
+            ['08', 'Komedija', 'komedija'],
+            ['09', 'Črna komedija', 'črna komedija'],
+            ['10', 'E-igra', 'E-igra'],
+            ['11', 'Kriminalka', 'kriminalka'],
+            ['12', 'Musical', 'musical'],
         ];
     }
 

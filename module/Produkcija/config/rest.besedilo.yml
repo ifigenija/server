@@ -16,6 +16,10 @@ forms:
             - zenskeVloge
             - prevajalec
             - povzetekVsebine
+            - letoIzida
+            - krajIzida
+            - zaloznik
+            - internacionalniNaslov
 lists:
     default: 
         filter:

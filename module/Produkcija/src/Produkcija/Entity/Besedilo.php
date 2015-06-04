@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping AS ORM,
 class Besedilo
         extends \Max\Entity\Base
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
@@ -70,6 +71,15 @@ class Besedilo
     private $naslovIzvirnika;
 
     /**
+     * Predvidoma v angleščini
+     * 
+     * @ORM\Column(type="string", nullable=true)
+     * @Max\I18n(label="besedilo.internacionalniNaslov", description="Internacionalni naslov besedila")
+     * @var string
+     */
+    private $internacionalniNaslov;
+
+    /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="besedilo.datumPrejema", description="Datum prejema besedila")
      * @var string
@@ -106,14 +116,42 @@ class Besedilo
      */
     private $povzetekVsebine;
 
+    /**
+     * 
+     * @ORM\Column(type="string", length=4, nullable=true)
+     * @Max\I18n(label="besedilo.letoIzida", description="Leto izida")
+     * @var string
+     */
+    private $letoIzida;
+
+    /**
+     * 
+     * @ORM\Column(type="string",  nullable=true)
+     * @Max\I18n(label="besedilo.krajIzida", description="Kraj izida")
+     * @var string
+     */
+    private $krajIzida;
+
+    /**
+     * 
+     * @ORM\Column(type="string",  nullable=true)
+     * @Max\I18n(label="besedilo.zaloznik", description="Založnik besedila")
+     * @var string
+     */
+    private $zaloznik;
+
     public function validate($mode = 'update')
     {
         $this->expect($this->getStevilka(), "Številka besedila ni določena", 1000800);
     }
-
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getStevilka()
+    {
+        return $this->stevilka;
     }
 
     public function getNaslov()
@@ -141,6 +179,11 @@ class Besedilo
         return $this->naslovIzvirnika;
     }
 
+    public function getInternacionalniNaslov()
+    {
+        return $this->internacionalniNaslov;
+    }
+
     public function getDatumPrejema()
     {
         return $this->datumPrejema;
@@ -166,9 +209,30 @@ class Besedilo
         return $this->povzetekVsebine;
     }
 
+    public function getLetoIzida()
+    {
+        return $this->letoIzida;
+    }
+
+    public function getKrajIzida()
+    {
+        return $this->krajIzida;
+    }
+
+    public function getZaloznik()
+    {
+        return $this->zaloznik;
+    }
+
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    public function setStevilka($stevilka)
+    {
+        $this->stevilka = $stevilka;
         return $this;
     }
 
@@ -202,6 +266,12 @@ class Besedilo
         return $this;
     }
 
+    public function setInternacionalniNaslov($internacionalniNaslov)
+    {
+        $this->internacionalniNaslov = $internacionalniNaslov;
+        return $this;
+    }
+
     public function setDatumPrejema($datumPrejema)
     {
         $this->datumPrejema = $datumPrejema;
@@ -232,15 +302,23 @@ class Besedilo
         return $this;
     }
 
-    public function getStevilka()
+    public function setLetoIzida($letoIzida)
     {
-        return $this->stevilka;
-    }
-
-    public function setStevilka($stevilka)
-    {
-        $this->stevilka = $stevilka;
+        $this->letoIzida = $letoIzida;
         return $this;
     }
+
+    public function setKrajIzida($krajIzida)
+    {
+        $this->krajIzida = $krajIzida;
+        return $this;
+    }
+
+    public function setZaloznik($zaloznik)
+    {
+        $this->zaloznik = $zaloznik;
+        return $this;
+    }
+
 
 }
