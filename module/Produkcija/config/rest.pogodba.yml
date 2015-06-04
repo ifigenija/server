@@ -19,6 +19,8 @@ forms:
             - vrednostDo
             - zacetek
             - konec
+            - vrednostDoPremiere
+            - zaposlenVDrJz
 lists:
     default: 
         filter:

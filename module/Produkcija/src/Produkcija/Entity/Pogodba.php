@@ -78,12 +78,29 @@ class Pogodba
     private $vrednostUre;
 
     /**
+     * polje se lahko vpisuje ali pa izračuna iz cene na vajo in planiranega števila vaj
+     * 
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="pogodba.vrednostDoPremiere", description="Vrednost pogodbe do premiere")   
+     * @var double
+     */
+    private $vrednostDoPremiere;
+
+    /**
      * @ORM\Column(type="boolean", nullable=true)
      * @Max\I18n(label="entiteta.aktivna", description="Ali je pogodba aktivna")   
      * @Max\Ui(type="boolcheckbox")                       
      * @var boolean
      */
     private $aktivna;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="pogodba.zaposlenVDrJz", description="Ali je oseba zaposlena v drugem javnem zavodu")   
+     * @Max\Ui(type="boolcheckbox")                       
+     * @var boolean
+     */
+    private $zaposlenVDrJz;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -109,6 +126,8 @@ class Pogodba
     private $oseba;
 
     /**
+     * pogodba ima lahko poslovnega partnerja, (če oseba izstavlja račune namesto avtorskih pogodb)
+     * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="pogodbe")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
      * @Max\I18n(label="pogodba.popa",  description="Poslovni partner, s katerim je napravljena pogodba")
@@ -128,9 +147,10 @@ class Pogodba
 
     public function validate($mode = 'update')
     {
-        $this->expect($this->oseba || $this->popa, "Pogodba nima subjekta. Oseba ali poslovni partner sta obvezna", 1000340);
-        $this->expect(!($this->popa && $this->oseba), "Pogodba nima subjekta. Subjekt je lahko samo ali poslovni partner ali oseba -ne oba hkrati", 1000341);
+//        $this->expect($this->oseba || $this->popa, "Pogodba nima subjekta. Oseba ali poslovni partner sta obvezna", 1000340);
+//        $this->expect(!($this->popa && $this->oseba), "Pogodba nima subjekta. Subjekt je lahko samo ali poslovni partner ali oseba -ne oba hkrati", 1000341);
         $this->expect($this->sifra, "sifra je obvezen podatek", 1000342);
+        $this->expect($this->oseba, "Pogodba nima subjekta. Oseba je obvezna", 1000343);
     }
 
     public function getId()
@@ -141,6 +161,21 @@ class Pogodba
     public function getSifra()
     {
         return $this->sifra;
+    }
+
+    public function getVrednostDo()
+    {
+        return $this->vrednostDo;
+    }
+
+    public function getZacetek()
+    {
+        return $this->zacetek;
+    }
+
+    public function getKonec()
+    {
+        return $this->konec;
     }
 
     public function getVrednostVaje()
@@ -158,9 +193,19 @@ class Pogodba
         return $this->vrednostUre;
     }
 
+    public function getVrednostDoPremiere()
+    {
+        return $this->vrednostDoPremiere;
+    }
+
     public function getAktivna()
     {
         return $this->aktivna;
+    }
+
+    public function getZaposlenVDrJz()
+    {
+        return $this->zaposlenVDrJz;
     }
 
     public function getOpis()
@@ -200,6 +245,24 @@ class Pogodba
         return $this;
     }
 
+    public function setVrednostDo($vrednostDo)
+    {
+        $this->vrednostDo = $vrednostDo;
+        return $this;
+    }
+
+    public function setZacetek($zacetek)
+    {
+        $this->zacetek = $zacetek;
+        return $this;
+    }
+
+    public function setKonec($konec)
+    {
+        $this->konec = $konec;
+        return $this;
+    }
+
     public function setVrednostVaje($vrednostVaje)
     {
         $this->vrednostVaje = $vrednostVaje;
@@ -218,9 +281,21 @@ class Pogodba
         return $this;
     }
 
+    public function setVrednostDoPremiere($vrednostDoPremiere)
+    {
+        $this->vrednostDoPremiere = $vrednostDoPremiere;
+        return $this;
+    }
+
     public function setAktivna($aktivna)
     {
         $this->aktivna = $aktivna;
+        return $this;
+    }
+
+    public function setZaposlenVDrJz($zaposlenVDrJz)
+    {
+        $this->zaposlenVDrJz = $zaposlenVDrJz;
         return $this;
     }
 
@@ -251,39 +326,6 @@ class Pogodba
     public function setTrr(\App\Entity\Trr $trr)
     {
         $this->trr = $trr;
-        return $this;
-    }
-
-    public function getVrednostDo()
-    {
-        return $this->vrednostDo;
-    }
-
-    public function getZacetek()
-    {
-        return $this->zacetek;
-    }
-
-    public function getKonec()
-    {
-        return $this->konec;
-    }
-
-    public function setVrednostDo($vrednostDo)
-    {
-        $this->vrednostDo = $vrednostDo;
-        return $this;
-    }
-
-    public function setZacetek($zacetek)
-    {
-        $this->zacetek = $zacetek;
-        return $this;
-    }
-
-    public function setKonec($konec)
-    {
-        $this->konec = $konec;
         return $this;
     }
 

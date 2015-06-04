@@ -96,7 +96,7 @@ class Alternacija
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Funkcija", inversedBy="alternacije")
      * @ORM\JoinColumn(name="funkcija_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.funkcija",  description="Funkcija pri alternaciji")
+     * @Max\I18n(label="alternacija.funkcija",  description="Funkcija pri alternaciji")
      * @Max\Ui(type="toone", required=true);
      * @var \Produkcija\Entity\Funkcija
      */
@@ -161,7 +161,7 @@ class Alternacija
             $popa = $this->getPogodba()->getPopa();
             if ($popa) {
                 $found = FALSE;
-                foreach ($popa->getKontaktne() as $kon) {
+                foreach ($popa->getKontaktneOsebe() as $kon) {
                     if ($kon->getOseba() === $this->getOseba()) {
                         $found = true;
                         break;

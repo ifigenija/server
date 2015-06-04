@@ -52,10 +52,10 @@ class KontaktnaOsebaCest
      */
     public function lookupOsebo(ApiTester $I)
     {
-        $this->lookOseba1 = $ent             = $I->lookupEntity("oseba", "0001", false);
+        $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0001", false);
         $I->assertNotEmpty($ent);
-        
-        $this->lookOseba2 = $ent             = $I->lookupEntity("oseba", "0002", false);
+
+        $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0002", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -94,18 +94,17 @@ class KontaktnaOsebaCest
         $I->assertEquals($ent['opis'], 'zz');
 
         // kreiramo še en zapis
-        $data      = [
+        $data       = [
             'status'   => 'AK',
             'funkcija' => 'aa',
             'opis'     => 'aa',
             'popa'     => $this->lookPopa['id'],
             'oseba'    => $this->lookOseba2['id'],
         ];
-        $this->obj2 = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['opis'], 'aa');
-
     }
 
     /**
@@ -126,7 +125,7 @@ class KontaktnaOsebaCest
         $I->assertNotEmpty($list);
 //        $I->assertEquals("xx", $list[0]['status']);      // $$ odvisno od sortiranja
     }
-    
+
     /**
      * preberi vse zapise od popa
      * 
@@ -170,10 +169,10 @@ class KontaktnaOsebaCest
      */
     public function update(ApiTester $I)
     {
-        $ent           = $this->obj;
+        $ent         = $this->obj;
         $ent['opis'] = 'yy';
 
-        $this->obj = $ent      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $this->obj = $ent       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
         $I->assertEquals($ent['opis'], 'yy');
     }
@@ -189,11 +188,11 @@ class KontaktnaOsebaCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['status'   ], 'AK');
-        $I->assertEquals($ent['funkcija' ], 'zz');
-        $I->assertEquals($ent['opis'     ], 'yy');
-        $I->assertEquals($ent['popa'     ], $this->lookPopa['id']);
-        $I->assertEquals($ent['oseba'    ], $this->lookOseba1['id']);
+        $I->assertEquals($ent['status'], 'AK');
+        $I->assertEquals($ent['funkcija'], 'zz');
+        $I->assertEquals($ent['opis'], 'yy');
+        $I->assertEquals($ent['popa'], $this->lookPopa['id']);
+        $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
     }
 
     /**
