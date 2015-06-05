@@ -136,15 +136,14 @@ class Alternacija
      * @var \Produkcija\Entity\Pogodba
      */
     private $pogodba;
-    
-     /**
+
+    /**
      * @ORM\Column(type="boolean", length=1, nullable=true)
      * @Max\I18n(label="postniNaslov.jeeu", description="Je klient iz EU")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
     protected $imaPogodbo;
-
 
     public function validate($mode = 'update')
     {
@@ -181,7 +180,15 @@ class Alternacija
                         , 1000336);
             }
         }
+
+        /**
+         * Išče se koproducenta v koprodukcijskih delitvah, če je vnesen koproducent na alternaciji. Če ga ne najde javi napako / exception
+         */
+        if ($this->getKoprodukcija()) {
+            $this->expect($this->getKoprodukcija()->getKoproducent(), 'Koproducent v koprodukcijskih delitvah ni vnešen', 1000336);
+        }
     }
+
     public function getId()
     {
         return $this->id;
@@ -357,6 +364,5 @@ class Alternacija
         $this->imaPogodbo = $imaPogodbo;
         return $this;
     }
-
 
 }
