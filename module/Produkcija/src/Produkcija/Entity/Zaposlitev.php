@@ -111,14 +111,14 @@ class Zaposlitev
     private $jeNastopajoci;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="sodelovanje")
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="zaposlitev")
      * 
      * @var <Alternacije>
      */
     private $alternacije;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="sodelovanja")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="zaposlitve")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\I18n(label="entiteta.oseba",  description="Oseba, ki je zaposlena")
      * @Max\Ui(type="toone")
@@ -131,10 +131,14 @@ class Zaposlitev
         $this->expect($this->oseba, "Oseba je obvezna", 1000333);        
         $this->setSifra($this->oseba->getSifra());
     }
-
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getSifra()
+    {
+        return $this->sifra;
     }
 
     public function getStatus()
@@ -200,6 +204,12 @@ class Zaposlitev
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    public function setSifra($sifra)
+    {
+        $this->sifra = $sifra;
         return $this;
     }
 
@@ -272,16 +282,6 @@ class Zaposlitev
     public function setOseba(\App\Entity\Oseba $oseba)
     {
         $this->oseba = $oseba;
-        return $this;
-    }
-    public function getSifra()
-    {
-        return $this->sifra;
-    }
-
-    public function setSifra($sifra)
-    {
-        $this->sifra = $sifra;
         return $this;
     }
 

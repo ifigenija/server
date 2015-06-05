@@ -79,7 +79,6 @@ class Oseba
      */
     private $srednjeIme;
 
-    
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="oseba.polnoIme", description="Srednje ime osebe ")
@@ -87,7 +86,6 @@ class Oseba
      */
     private $polnoIme;
 
-    
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="oseba.psevdonim", description="Psevdonim osebe ")
@@ -222,11 +220,11 @@ class Oseba
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Zaposlitev", mappedBy="oseba")
-     * @Max\I18n(label="Sodelovanja", description="Sodelovanja osebe")   
+     * @Max\I18n(label="Zaposlitve", description="Zaposlitve osebe")   
      * @Max\Ui(type="tomany")
-     * @var <Sodelovanja>
+     * @var <Zaposlitve>
      */
-    private $sodelovanja;
+    private $zaposlitve;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
@@ -244,8 +242,6 @@ class Oseba
         $this->expect($this->priimek, "Priimek je obvezen podatek", 1000302);
         $this->expect($this->sifra, "Šifra je obvezen podatek", 1000303);
     }
-
-
 
     public function getId()
     {
@@ -280,6 +276,11 @@ class Oseba
     public function getSrednjeIme()
     {
         return $this->srednjeIme;
+    }
+
+    public function getPolnoIme()
+    {
+        return $this->polnoIme;
     }
 
     public function getPsevdonim()
@@ -367,9 +368,14 @@ class Oseba
         return $this->pogodbe;
     }
 
-    public function getSodelovanja()
+    public function getZaposlitve()
     {
-        return $this->sodelovanja;
+        return $this->zaposlitve;
+    }
+
+    public function getNaslov()
+    {
+        return $this->naslov;
     }
 
     public function setId($id)
@@ -386,7 +392,6 @@ class Oseba
 
     public function setNaziv($naziv)
     {
-       
         $this->naziv = $naziv;
         return $this;
     }
@@ -412,6 +417,12 @@ class Oseba
     public function setSrednjeIme($srednjeIme)
     {
         $this->srednjeIme = $srednjeIme;
+        return $this;
+    }
+
+    public function setPolnoIme($polnoIme)
+    {
+        $this->polnoIme = $polnoIme;
         return $this;
     }
 
@@ -517,23 +528,16 @@ class Oseba
         return $this;
     }
 
-    public function setSodelovanja($sodelovanja)
+    public function setZaposlitve($zaposlitve)
     {
-        $this->sodelovanja = $sodelovanja;
-        return $this;
-    }
-    
-    public function getPolnoIme()
-    {
-        return $this->polnoIme;
-    }
-
-    public function setPolnoIme($polnoIme)
-    {
-        $this->polnoIme = $polnoIme;
+        $this->zaposlitve = $zaposlitve;
         return $this;
     }
 
-
+    public function setNaslov($naslov)
+    {
+        $this->naslov = $naslov;
+        return $this;
+    }
 
 }

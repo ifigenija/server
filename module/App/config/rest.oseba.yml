@@ -90,7 +90,7 @@ relation:
             enabled: true
             hydrator:
                 exclude: []
-        sodelovanja:
+        zaposlitve:
             enabled: true
             hydrator:
                 exclude: []

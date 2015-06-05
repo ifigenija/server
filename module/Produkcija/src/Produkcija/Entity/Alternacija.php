@@ -104,12 +104,12 @@ class Alternacija
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Zaposlitev", inversedBy="alternacije")
-     * @ORM\JoinColumn(name="sodelovanje_id", referencedColumnName="id")
-     * @Max\I18n(label="alternacija.sodelovanje",  description="Sodelovanje oz. zaposlitev")
+     * @ORM\JoinColumn(name="zaposlitev_id", referencedColumnName="id")
+     * @Max\I18n(label="alternacija.zaposlitev",  description="Zaposlitev")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Zaposlitev
      */
-    private $sodelovanje;
+    private $zaposlitev;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="alternacije")
@@ -136,11 +136,20 @@ class Alternacija
      * @var \Produkcija\Entity\Pogodba
      */
     private $pogodba;
+    
+     /**
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     * @Max\I18n(label="postniNaslov.jeeu", description="Je klient iz EU")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $imaPogodbo;
+
 
     public function validate($mode = 'update')
     {
-        if ($this->getSodelovanje()) {
-            $this->expect($this->getOseba() === $this->getSodelovanje()->getOseba());
+        if ($this->getZaposlitev()) {
+            $this->expect($this->getOseba() === $this->getZaposlitev()->getOseba());
             $this->setZaposlen(true);
         } else {
             $this->setZaposlen(false);
@@ -173,7 +182,6 @@ class Alternacija
             }
         }
     }
-
     public function getId()
     {
         return $this->id;
@@ -229,9 +237,9 @@ class Alternacija
         return $this->funkcija;
     }
 
-    public function getSodelovanje()
+    public function getZaposlitev()
     {
-        return $this->sodelovanje;
+        return $this->zaposlitev;
     }
 
     public function getOseba()
@@ -247,6 +255,11 @@ class Alternacija
     public function getPogodba()
     {
         return $this->pogodba;
+    }
+
+    public function getImaPogodbo()
+    {
+        return $this->imaPogodbo;
     }
 
     public function setId($id)
@@ -315,9 +328,9 @@ class Alternacija
         return $this;
     }
 
-    public function setSodelovanje(\Produkcija\Entity\Zaposlitev $sodelovanje)
+    public function setZaposlitev(\Produkcija\Entity\Zaposlitev $zaposlitev)
     {
-        $this->sodelovanje = $sodelovanje;
+        $this->zaposlitev = $zaposlitev;
         return $this;
     }
 
@@ -338,5 +351,12 @@ class Alternacija
         $this->pogodba = $pogodba;
         return $this;
     }
+
+    public function setImaPogodbo($imaPogodbo)
+    {
+        $this->imaPogodbo = $imaPogodbo;
+        return $this;
+    }
+
 
 }

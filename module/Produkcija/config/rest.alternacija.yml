@@ -19,7 +19,8 @@ forms:
             - aktivna
 #            - storitve
             - funkcija
-            - sodelovanje
+            - zaposlitev
+            - imaPogodbo
             - oseba
             - koprodukcija
 #            - pogodba    #$$ začasno damo pogodbo gor

@@ -21,7 +21,7 @@ use ApiTester;
  *      - pogodbe        O2M 
  * 
  *      - alternacije    O2M 
- *      - sodelovanja    O2M 
+ *      - zaposlitve    O2M 
  *      getlist različne variante relacij
  *      - vse
  *      - default
@@ -72,8 +72,6 @@ class OsebaCest
     private $objPogodba2;
     private $objAlternacija1;
     private $objAlternacija2;
-    private $objSodelovanje1;
-    private $objSodelovanje2;
     private $objZaposlitev1;
     private $objZaposlitev2;
     private $lookFunkcija;
@@ -475,7 +473,7 @@ class OsebaCest
         codecept_debug($oseba);
 //        $I->assertTrue(isset($oseba['alternacije']));     //$$ verjetno potrebno konstruktorje za tomany relacije
 //        $I->assertTrue(isset($oseba['pogodbe']));    //$$ verjetno potrebno konstruktorje za tomany relacije
-//        $I->assertTrue(isset($oseba['sodelovanja']));   //$$ verjetno potrebno konstruktorje za tomany relacije
+//        $I->assertTrue(isset($oseba['zaposlitve']));   //$$ verjetno potrebno konstruktorje za tomany relacije
         $I->assertTrue(isset($oseba['kontaktneOsebe']));
         $I->assertTrue(isset($oseba['trrji']));
         $I->assertTrue(isset($oseba['telefonske']));
@@ -485,7 +483,7 @@ class OsebaCest
         $I->assertEquals(1, count($oseba['naslovi']));
 //        $I->assertEquals(0, count($oseba['alternacije']));
 //        $I->assertEquals(0, count($oseba['pogodbe']));
-//        $I->assertEquals(0, count($oseba['sodelovanja']));
+//        $I->assertEquals(0, count($oseba['zaposlitve']));
         $I->assertEquals(0, count($oseba['kontaktneOsebe']));
     }
 
@@ -766,7 +764,7 @@ class OsebaCest
             'jeNastopajoci'       => TRUE,
             'oseba'               => $this->obj2['id'],
         ];
-        $this->objSodelovanje1 = $ent                   = $I->successfullyCreate($this->zaposlitevUrl, $data);
+        $this->objZaposlitev1 = $ent                   = $I->successfullyCreate($this->zaposlitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
         $data = [
@@ -782,7 +780,7 @@ class OsebaCest
             'jeNastopajoci'       => TRUE,
             'oseba'               => $this->obj2['id'],
         ];
-        $this->objSodelovanje2 = $ent                   = $I->successfullyCreate($this->zaposlitevUrl, $data);
+        $this->objZaposlitev2 = $ent                   = $I->successfullyCreate($this->zaposlitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -857,12 +855,12 @@ class OsebaCest
      * 
      * @param ApiTester $I
      */
-    public function preberiRelacijeSSodelovanji(ApiTester $I)
+    public function preberiRelacijeZZaposlitvami(ApiTester $I)
     {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "sodelovanja", "");
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "zaposlitve", "");
         $I->assertEquals(2, count($resp));
 
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "sodelovanja", $this->objSodelovanje1['id']);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "zaposlitve", $this->objZaposlitev1['id']);
         $I->assertEquals(1, count($resp));
     }
 
