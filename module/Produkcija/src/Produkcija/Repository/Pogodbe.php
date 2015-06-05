@@ -84,4 +84,19 @@ class Pogodbe
         return $qb;
     }
 
+    /**
+     * Preverim, če ima šifro
+     * @param Pogodba $object
+     * @param array $params
+     */
+    public function create($object, $params = null)
+    {
+        if (empty($object->getSifra())) {
+            $num   = $this->getServiceLocator()->get('stevilcenje.generator');
+
+            $object->setSifra($num->generate('pogodba', new \DateTime()));
+        }
+        parent::create($object, $params);
+    }
+
 }

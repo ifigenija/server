@@ -42,21 +42,26 @@ class AlternacijaRpcService
         }
 
         $pogodba = new \Produkcija\Entity\Pogodba();
-        $pogodba->setVrednostDo(0);
-        $em->persist($pogodba);
-        //$$ rb ali bo sam kreiral šifro?
 
+
+        // vse vrednosti na 0
+        $pogodba->setVrednostDo(0);
         $pogodba->setVrednostDo(0);
         $pogodba->setVrednostVaje(0);
         $pogodba->setVrednostPredstave(0);
         $pogodba->setVrednostUre(0);
         $pogodba->setVrednostDoPremiere(0);
+        $pogodba->setOseba($alternacija->getOseba());
+        
+        $pogodbaR=$em->getRepository("Produkcija\Entity\Pogodba")
+                        ->setServiceLocator($this->getServiceLocator());
+        $pogodbaR->create($pogodba);           //da kreira tudi šifro
 
         $alternacija->setPogodba($pogodba);
 
         $em->flush();
 
-        return $this->getPogodbaData($pogodba); //$$
+        return $this->getPogodbaData($pogodba); //$$ ali to v redu?
     }
 
     /**

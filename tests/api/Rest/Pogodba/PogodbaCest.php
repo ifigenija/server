@@ -33,16 +33,17 @@ use ApiTester;
 class PogodbaCest
 {
 
-    private $restUrl        = '/rest/pogodba';
-    private $popaUrl        = '/rest/popa';
-    private $drzavaUrl      = '/rest/drzava';
-    private $osebaUrl       = '/rest/oseba';
-    private $trrUrl         = '/rest/trr';
-    private $alternacijaUrl = '/rest/alternacija';
+    private $restUrl              = '/rest/pogodba';
+    private $popaUrl              = '/rest/popa';
+    private $drzavaUrl            = '/rest/drzava';
+    private $osebaUrl             = '/rest/oseba';
+    private $trrUrl               = '/rest/trr';
+    private $alternacijaUrl       = '/rest/alternacija';
     private $obj;
     private $obj2;
     private $obj3;
     private $obj4;
+    private $obj5;
     private $objPopa;
     private $objDrzava;
     private $objOseba;
@@ -100,13 +101,13 @@ class PogodbaCest
     public function lookupOsebo(ApiTester $I)
     {
         // poiščemo iste osebe, kot so že v alternacijah
-        $this->lookOseba1 = $ent             = $I->lookupEntity("oseba", "0009", false);
-        $I->assertNotEmpty($ent);
-        
-        $this->lookOseba2 = $ent             = $I->lookupEntity("oseba", "0010", false);
+        $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0009", false);
         $I->assertNotEmpty($ent);
 
-        $this->lookOseba3 = $ent             = $I->lookupEntity("oseba", "0008", false);
+        $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0010", false);
+        $I->assertNotEmpty($ent);
+
+        $this->lookOseba3 = $ent              = $I->lookupEntity("oseba", "0008", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -238,8 +239,8 @@ class PogodbaCest
         $data       = [
             'sifra'              => 'WW4',
             'vrednostVaje'       => 33.33,
-            'vrednostPredstave'  => 44.44,
-            'vrednostUre'        => 22.22,
+            'vrednostPredstave'  => 44.22,
+            'vrednostUre'        => 11.11,
             'aktivna'            => false,
             'opis'               => 'ww',
             'oseba'              => $this->lookOseba2['id'],
@@ -257,7 +258,7 @@ class PogodbaCest
         $I->assertEquals($ent['sifra'], 'WW4');
 
         // kreiramo še en zapis
-        $data = [
+        $data       = [
             'sifra'              => 'A1',
             'vrednostVaje'       => 3.33,
             'vrednostPredstave'  => 4.44,
@@ -273,14 +274,14 @@ class PogodbaCest
             'vrednostDoPremiere' => 67.72,
             'zaposlenVDrJz'      => true,
         ];
-        $this->obj3= $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['sifra'], 'A1');
-        
+
 // kreiramo še en zapis, da ga potem lahko izbrišemo
         // kreiramo še en zapis
-        $data = [
+        $data       = [
             'sifra'              => 'BB',
             'vrednostVaje'       => 3.11,
             'vrednostPredstave'  => 4.11,
@@ -296,10 +297,32 @@ class PogodbaCest
             'vrednostDoPremiere' => 67.11,
             'zaposlenVDrJz'      => true,
         ];
-        $this->obj4 =$ent  = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['sifra'], 'BB');
+
+        // kreiramo še en zapis brez šifre, da vidimo, če jo kreira
+        $data       = [
+//            'sifra'              => 'BB',
+            'vrednostVaje'       => 3.11,
+            'vrednostPredstave'  => 4.11,
+            'vrednostUre'        => 2.11,
+            'aktivna'            => false,
+            'opis'               => 'cc',
+            'oseba'              => $this->lookOseba1['id'],
+            'popa'               => null,
+            'trr'                => null,
+            'vrednostDo'         => 77.1,
+            'zacetek'            => '2012-03-01T00:00:00+0100',
+            'konec'              => '2013-04-01T00:00:00+0100',
+            'vrednostDoPremiere' => 67.11,
+            'zaposlenVDrJz'      => true,
+        ];
+        $this->obj5 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['opis'], 'cc');
     }
 
     /**
@@ -322,7 +345,7 @@ class PogodbaCest
      */
     public function lookupAlternacija(ApiTester $I)
     {
-        $resp                  = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0001', []);
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0001', []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
@@ -331,7 +354,7 @@ class PogodbaCest
         $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
         $this->lookAlternacija1 = $resp['data'][0];
 
-        $resp                  = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0002', []);
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0002', []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
@@ -339,8 +362,8 @@ class PogodbaCest
         $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
         $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
         $this->lookAlternacija2 = $resp['data'][0];
-       
-        $resp                  = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0006', []);
+
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0006', []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
@@ -350,8 +373,6 @@ class PogodbaCest
         $this->lookAlternacija3 = $resp['data'][0];
     }
 
-    
-    
     /**
      *  kreiramo zapis
      * 
@@ -360,22 +381,22 @@ class PogodbaCest
      */
     public function updateAlternacijoSPogodbo(ApiTester $I)
     {
-        $ent=$I->successfullyGet($this->alternacijaUrl, $this->lookAlternacija1['id']);
+        $ent                    = $I->successfullyGet($this->alternacijaUrl, $this->lookAlternacija1['id']);
         $I->assertNotEmpty($ent);
-        $ent['pogodba']       = $this->obj['id'];  
-        $this->lookAlternacija1 = $ent                   = $I->successfullyUpdate($this->alternacijaUrl, $ent['id'], $ent);
+        $ent['pogodba']         = $this->obj['id'];
+        $this->lookAlternacija1 = $ent                    = $I->successfullyUpdate($this->alternacijaUrl, $ent['id'], $ent);
         $I->assertNotEmpty($ent['id']);
 
-        $ent=$I->successfullyGet($this->alternacijaUrl, $this->lookAlternacija2['id']);
+        $ent                    = $I->successfullyGet($this->alternacijaUrl, $this->lookAlternacija2['id']);
         $I->assertNotEmpty($ent);
-        $ent['pogodba']       = $this->obj2['id'];
-        $this->lookAlternacija2 = $ent                   = $I->successfullyUpdate($this->alternacijaUrl, $ent['id'], $ent);
+        $ent['pogodba']         = $this->obj2['id'];
+        $this->lookAlternacija2 = $ent                    = $I->successfullyUpdate($this->alternacijaUrl, $ent['id'], $ent);
         $I->assertNotEmpty($ent['id']);
 
-        $ent=$I->successfullyGet($this->alternacijaUrl, $this->lookAlternacija3['id']);
+        $ent                    = $I->successfullyGet($this->alternacijaUrl, $this->lookAlternacija3['id']);
         $I->assertNotEmpty($ent);
-        $ent['pogodba']       = $this->obj2['id'];
-        $this->lookAlternacija3 = $ent                   = $I->successfullyUpdate($this->alternacijaUrl, $ent['id'], $ent);
+        $ent['pogodba']         = $this->obj2['id'];
+        $this->lookAlternacija3 = $ent                    = $I->successfullyUpdate($this->alternacijaUrl, $ent['id'], $ent);
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -534,7 +555,7 @@ class PogodbaCest
     {
         // brišemo 3. zapis, ker prvega ne moremo zaradi referenčne integritete
         $I->successfullyDelete($this->restUrl, $this->obj4['id']);
-        $I->failToGet($this->restUrl, $this->obj4['id']);
+        $I->failToGet($this->restUrl, $this->obj3['id']);
     }
 
     /**
