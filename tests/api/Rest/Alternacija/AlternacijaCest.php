@@ -16,7 +16,7 @@ use ApiTester;
  *      validate metodo za entiteto - je ni
  *      relacije z drugimi entitetami
  *      - funkcija
- *      - sodelovanje (zaposlitev)
+ *      - zaposlitev (zaposlitev)
  *      - oseba
  *      - koprodukcija
  *      - pogodba
@@ -322,7 +322,7 @@ class AlternacijaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'zaposlen'     => false, // $$ true zaenkrat ne deluje           
+            'zaposlen'     => false,     // v validaciji postavimo na true, če je zaposlitev
             'zacetek'      => '2010-02-01T00:00:00+0100',
             'konec'        => '2020-02-01T00:00:00+0100',
             'opomba'       => 'zz',
@@ -330,19 +330,20 @@ class AlternacijaCest
             'privzeti'     => true,
             'aktivna'      => true,
             'funkcija'     => $this->lookFunkcija['id'],
-            'sodelovanje'  => $this->objZaposlitev['id'],
+            'zaposlitev'   => $this->objZaposlitev['id'],
             'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => $this->objKoprodukcija['id'],
             'pogodba'      => $this->objPogodba['id'],
+            'imaPogodbo'   => TRUE,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['zaposlen'], false);
+        $I->assertEquals($ent['opomba'], 'zz');
 
         // kreiram še en zapis
         $data       = [
-            'zaposlen'     => false,
+            'zaposlen'     => false,  // $$ true zaenkrat ne deluje       
             'zacetek'      => '2011-02-01T00:00:00+0100',
             'konec'        => '2021-02-01T00:00:00+0100',
             'opomba'       => 'aa',
@@ -350,15 +351,16 @@ class AlternacijaCest
             'privzeti'     => true,
             'aktivna'      => true,
             'funkcija'     => $this->lookFunkcija['id'],
-            'sodelovanje'  => null,
+            'zaposlitev'   => null,
             'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => $this->objKoprodukcija['id'],
             'pogodba'      => null,
+            'imaPogodbo'   => TRUE,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['zaposlen'], false);
+        $I->assertEquals($ent['opomba'], 'aa');
     }
 
     /**
@@ -425,7 +427,6 @@ class AlternacijaCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['zaposlen'], false);
         $I->assertEquals($ent['zacetek'], '2010-02-01T00:00:00+0100');
         $I->assertEquals($ent['konec'], '2020-02-01T00:00:00+0100');
         $I->assertEquals($ent['opomba'], 'uu');
@@ -433,10 +434,12 @@ class AlternacijaCest
         $I->assertEquals($ent['privzeti'], true);
         $I->assertEquals($ent['aktivna'], true);
         $I->assertEquals($ent['funkcija'], $this->lookFunkcija['id']);
-        $I->assertEquals($ent['sodelovanje'], $this->objZaposlitev['id'], "zaposlitev");
+        $I->assertEquals($ent['zaposlitev'], $this->objZaposlitev['id'], "zaposlitev");
+        $I->assertEquals($ent['zaposlen'], true);               // v validaciji se bi moralo postaviti na true, če je zaposlitev
         $I->assertEquals($ent['oseba']['id'], $this->lookOseba['id'], "oseba");
         $I->assertEquals($ent['koprodukcija'], $this->objKoprodukcija['id'], "napačna koprodukcija");
         $I->assertEquals($ent['pogodba'], $this->objPogodba['id']);
+        $I->assertEquals($ent['imaPogodbo'], true);
     }
 
     /**

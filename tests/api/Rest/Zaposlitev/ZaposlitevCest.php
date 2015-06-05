@@ -161,7 +161,7 @@ class ZaposlitevCest
         $data                  = [
             'zaposlen'     => true,
             'funkcija'     => $this->lookFunkcija['id'],
-            'sodelovanje'  => $this->obj2['id'],
+            'zaposlitev'  => $this->obj2['id'],
             'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => NULL,
             'pogodba'      => NULL,
@@ -172,7 +172,7 @@ class ZaposlitevCest
         $data                  = [
             'zaposlen'     => true,
             'funkcija'     => $this->lookFunkcija['id'],
-            'sodelovanje'  => $this->obj2['id'],
+            'zaposlitev'  => $this->obj2['id'],
             'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => NULL,
             'pogodba'      => NULL,

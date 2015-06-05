@@ -110,13 +110,13 @@ class Alternacije
 
     /**
      * Preverim če ima oseba veljavno zaposlitev,
-     * potem jo samodejno povežem z zaposlitvnijo
+     * potem jo samodejno povežem z zaposlitvijo
      * @param Alternacija $alternacija
      */
     public function preveriZaposlitev(Alternacija $alternacija)
     {
 
-        if (!$alternacija->getSodelovanje()) {
+        if (!$alternacija->getZaposlitev()) {
             $zr = $this->getEntityManager()->getRepository('Produkcija\Entity\Zaposlitev');
 
             $zap = $zr->findOneBy([
@@ -127,7 +127,7 @@ class Alternacije
             if ($zap) {
                 if ($zap->getKonec() === null || ($zap->getKonec() < new DateTime())) {
                     $alternacija->setZaposlen(true);
-                    $alternacija->setSodelovanje($zap);
+                    $alternacija->setZaposlitev($zap);
                     return;
                 }
             }
