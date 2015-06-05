@@ -32,7 +32,7 @@ return [
         'invokables' => [
             'Rpc\aaa' => 'Aaa\Controller\RpcController',
             'Aaa\Cli' => 'Aaa\Controller\CliController',
-        ]
+        ],
     ],
     'console'         => [
         'router' => [

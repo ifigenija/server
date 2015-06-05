@@ -10,11 +10,15 @@
 return [
 
     'service_manager' => [
-        'factories' => [
-        ]
+        'factories'  => [
+        ],
+        'invokables' => [
+            'alternacija.rpc.service' => 'Produkcija\Rpc\AlternacijaRpcService',
+        ],
     ],
     'controllers'     => [
         'invokables' => [
+            'Rpc\produkcija' => 'Produkcija\Controller\RpcController',
         ],
         'factories'  => [
             'Rest\pogodba'               => 'Max\Factory\RestControllerFactory',

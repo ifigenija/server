@@ -387,7 +387,7 @@ class AlternacijaCest
             'oseba'        => $this->lookOseba['id'],
             'koprodukcija' => $this->objKoprodukcija2['id'],
             'pogodba'      => null,
-            'imaPogodbo'   => TRUE,
+            'imaPogodbo'   => false,
         ];
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -542,5 +542,22 @@ class AlternacijaCest
     }
 
     //$$ še relacije vec t.s.
+
+    /**
+     * spremenim zapis - dodam pogodbo
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateZDodajPogodbo(ApiTester $I)
+    {
+        $ent  = $this->obj3;
+        codecept_debug($ent);
+        $ent['pogodba'] = $this->objPogodba['id'];
+        $entR = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+
+        $I->assertEquals($entR['pogodba'], $this->objPogodba['id']);
+        $I->assertEquals($entR['imaPogodbo'], true);   // nastavi  v validaciji
+    }
 
 }

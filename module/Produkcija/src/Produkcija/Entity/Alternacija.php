@@ -160,6 +160,7 @@ class Alternacija
          * in preverim ,da je oseba kontakt na poslovnem partnerju
          */
         if ($this->getPogodba()) {
+            $this->setImaPogodbo(true); 
             if ($this->getPogodba()->getOseba()) {
                 $this->expect($this->getOseba() === $this->getPogodba()->getOseba()
                         , 'Oseba na pogodbi ni enaka kot oseba na alternaciji'
