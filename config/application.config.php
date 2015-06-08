@@ -15,6 +15,7 @@ return [
         'Prisotnost',
         'Abonmaji',
         'Prodaja',
+        'ProgramDela',
     ],
     'module_listener_options' => [
         'config_glob_paths'    => [

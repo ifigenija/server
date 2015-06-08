@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping AS ORM,
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiDela")
  * @Max\I18n(label="Program dela",plural="")
- * @Max\Id(prefix="001a")
+ * @Max\Id(prefix="0041")
  */
 class ProgramDela
         extends \Max\Entity\Base

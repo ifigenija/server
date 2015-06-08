@@ -13,25 +13,41 @@ return [
         'factories' => [
         ]
     ],
-    'controllers' => [
+    'controllers'     => [
         'invokables' => [
-            
-        ]
+        ],
+        'factories'  => [
+            'Rest\EnotaPrograma'      => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramDela'        => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramFestival'    => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramGostovanje'  => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramGostujoca'   => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramIzjemni'     => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramPonovitev'   => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramPremiera'    => 'Max\Factory\RestControllerFactory',
+            'Rest\TipProgramskeEnote' => 'Max\Factory\RestControllerFactory',
+            'Rest\EnotaPrograma'      => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramDela'        => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramFestival'    => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramGostovanje'  => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramGostujoca'   => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramIzjemni'     => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramPonovitev'   => 'Max\Factory\RestControllerFactory',
+            'Rest\ProgramPremiera'    => 'Max\Factory\RestControllerFactory',
+        ],
     ],
-    'router' => [
+    'router'          => [
         'routes' => [
         ],
     ],
-    'console' => [
+    'console'         => [
         'router' => [
             'routes' => [
-        
             ]
         ]
     ],
-    'form_elements' => [
+    'form_elements'   => [
         'invokables' => [
-
         ]
     ]
 ];

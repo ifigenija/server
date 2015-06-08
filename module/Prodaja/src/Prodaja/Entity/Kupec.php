@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM,
  *
  * @ORM\Entity(repositoryClass="Prodaja\Repository\Kupci")
  * @Max\I18n(label="Kupec",plural="Kupci")
- * @Max\Id(prefix="000f")
+ * @Max\Id(prefix="0040")
  */
 class Kupec
         extends \Max\Entity\Base

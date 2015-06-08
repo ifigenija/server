@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM,
 /**
  * @ORM\Entity(repositoryClass="App\Repository\KontaktneOsebe")
  * @Max\I18n(label="Kontaktna oseba",plural="Kontaktne osebe")
- * @Max\Id(prefix="000d")
+ * @Max\Id(prefix="0038")
  */
 class KontaktnaOseba
         extends \Max\Entity\Base

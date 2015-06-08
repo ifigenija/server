@@ -66,6 +66,13 @@
     description: Drzava - spreminjanje
 
 -
+    name: EnotaPrograma-read
+    description: EnotaPrograma - branje
+-
+    name: EnotaPrograma-write
+    description: EnotaPrograma - spreminjanje
+
+-
     name: Funkcija-read
     description: Funkcija - branje
 -
@@ -213,6 +220,55 @@
     description: ProdukcijskaHisa - spreminjanje
 
 -
+    name: ProgramDela-read
+    description: ProgramDela - branje
+-
+    name: ProgramDela-write
+    description: ProgramDela - spreminjanje
+
+-
+    name: ProgramFestival-read
+    description: ProgramFestival - branje
+-
+    name: ProgramFestival-write
+    description: ProgramFestival - spreminjanje
+
+-
+    name: ProgramGostovanje-read
+    description: ProgramGostovanje - branje
+-
+    name: ProgramGostovanje-write
+    description: ProgramGostovanje - spreminjanje
+
+-
+    name: ProgramGostujoca-read
+    description: ProgramGostujoca - branje
+-
+    name: ProgramGostujoca-write
+    description: ProgramGostujoca - spreminjanje
+
+-
+    name: ProgramIzjemni-read
+    description: ProgramIzjemni - branje
+-
+    name: ProgramIzjemni-write
+    description: ProgramIzjemni - spreminjanje
+
+-
+    name: ProgramPonovitev-read
+    description: ProgramPonovitev - branje
+-
+    name: ProgramPonovitev-write
+    description: ProgramPonovitev - spreminjanje
+
+-
+    name: ProgramPremiera-read
+    description: ProgramPremiera - branje
+-
+    name: ProgramPremiera-write
+    description: ProgramPremiera - spreminjanje
+
+-
     name: Prostor-read
     description: Prostor - branje
 -
@@ -232,6 +288,13 @@
 -
     name: RazpisanSedez-write
     description: RazpisanSedez - spreminjanje
+
+-
+    name: Readme-read
+    description: Readme - branje
+-
+    name: Readme-write
+    description: Readme - spreminjanje
 
 -
     name: Rekviziterstvo-read
@@ -337,6 +400,13 @@
 -
     name: TipFunkcije-write
     description: TipFunkcije - spreminjanje
+
+-
+    name: TipProgramskeEnote-read
+    description: TipProgramskeEnote - branje
+-
+    name: TipProgramskeEnote-write
+    description: TipProgramskeEnote - spreminjanje
 
 -
     name: Trr-read

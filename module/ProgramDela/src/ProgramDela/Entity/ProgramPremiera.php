@@ -1,15 +1,37 @@
 <?php
+
 namespace ProgramDela\Entity;
-use Doctrine\ORM\Mapping AS ORM;
+
+use Doctrine\ORM\Mapping as ORM,
+    Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiPremiere")
+ * @Max\I18n(label="Program premiera",plural="Programi premiere")
+ * @Max\Id(prefix="0044") 
  */
-class ProgramPremiera extends \ProgramDela\Entity\EnotaPrograma
+class ProgramPremiera
+        extends \ProgramDela\Entity\EnotaPrograma
 {
+
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="premiere")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
+     * @Max\I18n(label="ProgramPremiera.dokument",  description="Dokument")
+     * @Max\Ui(type="toone")
+     * @var \ProgramDela\Entity\ProgramDela
      */
     private $dokument;
+
+    public function getDokument()
+    {
+        return $this->dokument;
+    }
+
+    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument)
+    {
+        $this->dokument = $dokument;
+        return $this;
+    }
+
 }
