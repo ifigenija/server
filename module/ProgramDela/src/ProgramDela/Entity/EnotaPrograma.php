@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping AS ORM,
  *     "premiera"="ProgramDela\Entity\ProgramPremiera",
  *     "ponovitev"="ProgramDela\Entity\ProgramPonovitev",
  *     "izjemni"="ProgramDela\Entity\ProgramIzjemni",
- *     "gotujoci"="ProgramDela\Entity\ProgramGostujoca"
+ *     "gostujoci"="ProgramDela\Entity\ProgramGostujoca"
  * }
  * )
  * 

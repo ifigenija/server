@@ -7,11 +7,11 @@
 namespace ProgramDela\Repository;
 
 /**
- * Description of TipiProgramskeEnote
+ * Description of ProgramiGostovanje
  *
  * @author rado
  */
-class TipiProgramskeEnote
+class ProgramiGostovanje
         extends \Max\Repository\AbstractMaxRepository
 {
 
