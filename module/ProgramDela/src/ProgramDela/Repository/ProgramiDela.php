@@ -9,7 +9,7 @@ namespace ProgramDela\Repository;
  *
  * @author boris
  */
-class ProgramDelai extends \Max\Repository\AbstractMaxRepository
+class ProgramiDela extends \Max\Repository\AbstractMaxRepository
 {
     
 }
