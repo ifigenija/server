@@ -1,0 +1,24 @@
+## YAML Template.
+---
+type: rest
+entityClass: ProgramDela\Entity\ProgramDela
+forms:
+    default: 
+        elements:
+#            - id
+            - sifra
+            - naziv
+            - zacetek
+            - konec
+            - potrjenProgram
+#            - premiere
+#            - ponovitve
+#            - izjemni
+#            - programFestival
+#            - gostujoci
+#            - gostovanje
+            - sezona
+lists:
+    default: 
+        hydrator:
+            - exclude: []

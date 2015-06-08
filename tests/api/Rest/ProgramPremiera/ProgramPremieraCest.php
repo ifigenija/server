@@ -4,12 +4,13 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\EnotaPrograma;
+namespace Rest\ProgramPremiera;
 
 use ApiTester;
 
 /**
- * Description of EnotaProgramaCest
+ * Description of ProgramPremieraCest
+ * 
  * 
  * metode, ki jo podpira API
  * - create
@@ -25,10 +26,10 @@ use ApiTester;
  *
  * @author rado
  */
-class EnotaProgramaCest
+class ProgramPremieraCest
 {
 
-    private $restUrl = '/rest/enotaprograma';
+    private $restUrl = '/rest/programpremiera';
     private $obj1;
     private $obj2;
 
@@ -69,7 +70,8 @@ class EnotaProgramaCest
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
             'tipProgramskeEnote' => NULL,
-            'tip'              => 'premiera',    //$$ ali to polje potrebujemo?
+            'tip'                => 'premiera', //$$ ali to polje potrebujemo?
+            'dokument'           => null, 
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);

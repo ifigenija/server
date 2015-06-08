@@ -1,0 +1,18 @@
+## YAML Template.
+---
+type: rest
+entityClass: ProgramDela\Entity\TipProgramskeEnote
+forms:
+    default: 
+        elements:
+#            - id
+            - sifra
+            - naziv
+            - koprodukcija
+            - maxFaktor
+            - maxVsi
+#            - enotaPrograma
+lists:
+    default: 
+        hydrator:
+            - exclude: []

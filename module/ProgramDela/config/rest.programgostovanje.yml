@@ -1,0 +1,16 @@
+## YAML Template.
+---
+type: rest
+entityClass: ProgramDela\Entity\ProgramGostovanje
+forms:
+    default: 
+        elements:
+#            - id
+            - transportniStroski
+            - odkup
+            - dokument
+            - gostitelj
+lists:
+    default: 
+        hydrator:
+            - exclude: []

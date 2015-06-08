@@ -1,0 +1,13 @@
+## YAML Template.
+---
+type: rest
+entityClass: ProgramDela\Entity\ProgramFestival
+forms:
+    default: 
+        elements:
+#            - id
+            - programDela
+lists:
+    default: 
+        hydrator:
+            - exclude: []

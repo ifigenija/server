@@ -1,0 +1,32 @@
+## YAML Template.
+---
+type: rest
+entityClass: ProgramDela\Entity\ProgramIzjemni
+forms:
+    default: 
+        elements:
+#            - id
+            - celotnaVrednost
+            - zaproseno
+            - lastnaSredstva
+            - avtorskiHonorarji
+            - tantieme
+            - drugiViri
+            - drugiJavni
+            - obiskDoma
+            - obiskGost
+            - obiskZamejo
+            - obiskInt
+            - ponoviDoma
+            - ponoviZamejo
+            - ponoviGost
+            - ponoviInt
+            - utemeljitev
+            - uprizoritev
+            - tipProgramskeEnote
+            - tip
+            - dokument
+lists:
+    default: 
+        hydrator:
+            - exclude: []
