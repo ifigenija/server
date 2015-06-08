@@ -19,7 +19,8 @@ use Doctrine\ORM\Mapping AS ORM,
  * )
  * 
  * @Max\I18n(label="Enota programa",plural="Enote programa")
- * @Max\Id(prefix="0042")
+ * 
+ * prefiksi so definirani v podentitetah
  */
 class EnotaPrograma
         extends \Max\Entity\Base

@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM,
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiPonovitev")
+ * @Max\Id(prefix="0048")
  */
 class ProgramPonovitev
         extends \ProgramDela\Entity\EnotaPrograma
@@ -15,7 +16,7 @@ class ProgramPonovitev
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="ponovitve")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
-     * @Max\I18n(label="ProgramPonovitev.dokument",  description="Dokument")
+     * @Max\I18n(label="programPonovitev.dokument",  description="Dokument")
      * @Max\Ui(type="toone")
      * @var \ProgramDela\Entity\ProgramDela
      */
