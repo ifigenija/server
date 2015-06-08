@@ -1,8 +1,7 @@
 ## YAML Template.
 ---
-#       module/App/config/rest.postninaslov.yml
 type: rest
-entityClass: ProgramDela\Entity\EnotaPrograma
+entityClass: ProgramDela\Entity\ProgramIzjemni
 forms:
     default: 
         elements:
@@ -26,6 +25,7 @@ forms:
             - uprizoritev
             - tipProgramskeEnote
             - tip
+            - dokument
 lists:
     default: 
         hydrator:

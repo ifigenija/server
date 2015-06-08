@@ -15,6 +15,15 @@
     name: Oseba-vse
     description: Oseba - vse - za testiranje assert
 
+# za superklase ni dovoljenj
+#-
+#    name: EnotaPrograma-read
+#    description: EnotaPrograma - branje
+#-
+#    name: EnotaPrograma-write
+#    description: EnotaPrograma - spreminjanje
+
+
 # polavtomatsko:
 -
     name: Abonma-read
@@ -64,13 +73,6 @@
 -
     name: Drzava-write
     description: Drzava - spreminjanje
-
--
-    name: EnotaPrograma-read
-    description: EnotaPrograma - branje
--
-    name: EnotaPrograma-write
-    description: EnotaPrograma - spreminjanje
 
 -
     name: Funkcija-read

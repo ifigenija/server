@@ -4,14 +4,13 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\EnotaPrograma;
+namespace Rest\ProgramPonovitev;
 
 use ApiTester;
 
 /**
- * Description of EnotaProgramaCest
+ * Description of ProgramPonovitevCest
  * 
- * $$ ali sploh kreiramo test za enotaprograma, ali se ta entiteta uporablja le kot superklasa
  * 
  * metode, ki jo podpira API
  * - create
@@ -27,10 +26,10 @@ use ApiTester;
  *
  * @author rado
  */
-class EnotaProgramaCest
+class ProgramPonovitevCest
 {
 
-    private $restUrl = '/rest/enotaprograma';
+    private $restUrl = '/rest/programponovitev';
     private $obj1;
     private $obj2;
 
@@ -71,7 +70,8 @@ class EnotaProgramaCest
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
             'tipProgramskeEnote' => NULL,
-            'tip'              => 'premiera',    //$$ ali to polje potrebujemo?
+            'tip'                => 'ponovitev', 
+            'dokument'           => null, 
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);

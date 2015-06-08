@@ -7,8 +7,6 @@ use Doctrine\ORM\Mapping as ORM,
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiPremiere")
- * @Max\I18n(label="Program premiera",plural="Programi premiere")
- * @Max\Id(prefix="0044") 
  */
 class ProgramPremiera
         extends \ProgramDela\Entity\EnotaPrograma
@@ -23,6 +21,11 @@ class ProgramPremiera
      */
     private $dokument;
 
+    public function validate($mode = 'update')
+    {
+        parent::validate();     
+    }
+    
     public function getDokument()
     {
         return $this->dokument;

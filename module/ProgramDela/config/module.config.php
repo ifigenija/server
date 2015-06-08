@@ -17,7 +17,7 @@ return [
         'invokables' => [
         ],
         'factories'  => [
-            'Rest\EnotaPrograma'      => 'Max\Factory\RestControllerFactory',
+//            'Rest\EnotaPrograma'      => 'Max\Factory\RestControllerFactory',         //$$ rb verjetno ne potrebujemo, ker je superklasa
             'Rest\ProgramDela'        => 'Max\Factory\RestControllerFactory',
             'Rest\ProgramFestival'    => 'Max\Factory\RestControllerFactory',
             'Rest\ProgramGostovanje'  => 'Max\Factory\RestControllerFactory',
