@@ -63,9 +63,9 @@ class TipProgramskeEnote
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\EnotaPrograma", mappedBy="tipProgramskeEnote")
-     * @var <EnotaPrograma>
+     * @var <EnotePrograma>
      */
-    private $enotaPrograma;
+    private $enotePrograma;
 
     public function validate($mode = 'update')
     {
@@ -102,9 +102,9 @@ class TipProgramskeEnote
         return $this->maxVsi;
     }
 
-    public function getEnotaPrograma()
+    public function getEnotePrograma()
     {
-        return $this->enotaPrograma;
+        return $this->enotePrograma;
     }
 
     public function setId($id)
@@ -143,10 +143,11 @@ class TipProgramskeEnote
         return $this;
     }
 
-    public function setEnotaPrograma($enotaPrograma)
+    public function setEnotePrograma($enotePrograma)
     {
-        $this->enotaPrograma = $enotaPrograma;
+        $this->enotePrograma = $enotePrograma;
         return $this;
     }
+
 
 }

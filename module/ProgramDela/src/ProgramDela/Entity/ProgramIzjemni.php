@@ -26,7 +26,6 @@ class ProgramIzjemni
     {
         parent::validate();
     }
-
     public function getDokument()
     {
         return $this->dokument;
@@ -37,5 +36,6 @@ class ProgramIzjemni
         $this->dokument = $dokument;
         return $this;
     }
+
 
 }

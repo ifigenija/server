@@ -39,7 +39,7 @@ class ProgramGostovanje
     private $odkup;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="gostovanje")
+     * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="gostovanja")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
      * @Max\I18n(label="programGostovanje.programDela", description="Program dela")
      * @Max\Ui(type="toone")
@@ -60,7 +60,6 @@ class ProgramGostovanje
     {
         
     }
-
     public function getId()
     {
         return $this->id;
@@ -115,5 +114,6 @@ class ProgramGostovanje
         $this->gostitelj = $gostitelj;
         return $this;
     }
+
 
 }

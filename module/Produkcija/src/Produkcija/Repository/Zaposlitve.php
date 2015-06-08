@@ -66,10 +66,7 @@ class Zaposlitve
 
         return $qb;
     }
-
    
-
-    
     /**
      * Prenesem šifro osebe na zaposlitev.
      * Uporabim kar šifro osebe, za šifro zaposlitve 

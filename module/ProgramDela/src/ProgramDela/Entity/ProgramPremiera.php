@@ -24,9 +24,9 @@ class ProgramPremiera
 
     public function validate($mode = 'update')
     {
-        parent::validate();     
+        parent::validate();
     }
-    
+
     public function getDokument()
     {
         return $this->dokument;

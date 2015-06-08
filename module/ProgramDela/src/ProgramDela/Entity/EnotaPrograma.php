@@ -38,6 +38,8 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="enotaPrograma.celotnaVrednost", description="Celotna vrednost")   
+     * @var double
      */
     private $celotnaVrednost;
 
@@ -56,7 +58,7 @@ class EnotaPrograma
     private $lastnaSredstva;
 
     /**
-     * @ORM\Column(type="decimal", nullable=false, options={"default":0})
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2,options={"default":0})
      * @Max\I18n(label="enotaPrograma.avtorskiHonorarji", description="Avtorski honorarji")   
      * @var double
      */
@@ -70,14 +72,14 @@ class EnotaPrograma
     private $tantieme;
 
     /**
-     * @ORM\Column(type="decimal", nullable=false, options={"default":0})
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="enotaPrograma.drugiViri", description="Drugi viri")   
      * @var double
      */
     private $drugiViri;
 
     /**
-     * @ORM\Column(type="decimal", nullable=false, options={"default":0})
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="enotaPrograma.drugiJavni", description="Drugi javni")   
      * @var double
      */
@@ -163,7 +165,7 @@ class EnotaPrograma
     private $uprizoritev;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\TipProgramskeEnote", inversedBy="enotaPrograma")
+     * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\TipProgramskeEnote", inversedBy="enotePrograma")
      * @Max\I18n(label="enotaPrograma.tipProgramskeEnote", description="Tip programske enote")   
      * @Max\Ui(type="toone")
      * @var \ProgramDela\Entity\TipProgramskeEnote
@@ -383,5 +385,6 @@ class EnotaPrograma
         $this->tipProgramskeEnote = $tipProgramskeEnote;
         return $this;
     }
+
 
 }

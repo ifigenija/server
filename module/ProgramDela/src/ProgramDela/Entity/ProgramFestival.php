@@ -25,7 +25,7 @@ class ProgramFestival
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="programFestival")
+     * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="programiFestival")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
      * @Max\I18n(label="programFestival.programDela", description="Program dela")
      * @Max\Ui(type="toone")
@@ -37,7 +37,6 @@ class ProgramFestival
     {
         
     }
-
     public function getId()
     {
         return $this->id;
@@ -54,10 +53,11 @@ class ProgramFestival
         return $this;
     }
 
-    public function setProgramDela(\Koledar\Entity\Sezona $programDela)
+    public function setProgramDela(\ProgramDela\Entity\ProgramDela $programDela)
     {
         $this->programDela = $programDela;
         return $this;
     }
+
 
 }

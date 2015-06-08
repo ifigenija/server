@@ -82,9 +82,9 @@ class ProgramDela
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramFestival", mappedBy="programDela")
-     * @var <ProgramFestival>
+     * @var <ProgramiFestival>
      */
-    private $programFestival;
+    private $programiFestival;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramGostujoca", mappedBy="dokument")
@@ -94,9 +94,9 @@ class ProgramDela
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramGostovanje", mappedBy="dokument")
-     * @var <Gostovanje>
+     * @var <Gostovanja>
      */
-    private $gostovanje;
+    private $gostovanja;
 
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona")
@@ -157,9 +157,9 @@ class ProgramDela
         return $this->izjemni;
     }
 
-    public function getProgramFestival()
+    public function getProgramiFestival()
     {
-        return $this->programFestival;
+        return $this->programiFestival;
     }
 
     public function getGostujoci()
@@ -167,9 +167,9 @@ class ProgramDela
         return $this->gostujoci;
     }
 
-    public function getGostovanje()
+    public function getGostovanja()
     {
-        return $this->gostovanje;
+        return $this->gostovanja;
     }
 
     public function getSezona()
@@ -231,9 +231,9 @@ class ProgramDela
         return $this;
     }
 
-    public function setProgramFestival($programFestival)
+    public function setProgramiFestival($programiFestival)
     {
-        $this->programFestival = $programFestival;
+        $this->programiFestival = $programiFestival;
         return $this;
     }
 
@@ -243,9 +243,9 @@ class ProgramDela
         return $this;
     }
 
-    public function setGostovanje($gostovanje)
+    public function setGostovanja($gostovanja)
     {
-        $this->gostovanje = $gostovanje;
+        $this->gostovanja = $gostovanja;
         return $this;
     }
 
@@ -254,5 +254,6 @@ class ProgramDela
         $this->sezona = $sezona;
         return $this;
     }
+
 
 }

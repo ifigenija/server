@@ -26,7 +26,6 @@ class ProgramGostujoca
     {
         parent::validate();     
     }
-    
     public function getDokument()
     {
         return $this->dokument;
@@ -37,5 +36,6 @@ class ProgramGostujoca
         $this->dokument = $dokument;
         return $this;
     }
+
 
 }
