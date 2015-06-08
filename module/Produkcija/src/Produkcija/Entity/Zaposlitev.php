@@ -28,7 +28,7 @@ class Zaposlitev
     /**
      * @ORM\Column(type="string", length=10)
      * @Max\I18n(label="entiteta.sifra",  description="Šifra osebe")
-     * @Max\Ui(ident=true)
+     * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode")
      * @var string
      */
     private $sifra;

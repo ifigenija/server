@@ -107,7 +107,7 @@ class Oseba
      *
      * @ORM\Column(length=40, nullable=true)
      * @Max\I18n(label="entiteta.email", description="Naslov elektronske pošte")   
-     * @Max\Ui(type="email",icon="fa fa-afna")
+     * @Max\Ui(type="email",icon="fa fa-at")
      * @var string
      */
     protected $email = '';

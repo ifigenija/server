@@ -28,7 +28,7 @@ class Alternacija
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
      * @Max\I18n(label="entiteta.sifra", description="Šifra alternacije")
-     * @Max\Ui(type="sifra",ident=true )
+     * @Max\Ui(type="sifra",ident=true,icon="fa fa-barcode" )
      * @var string
      */
     private $sifra;
@@ -65,7 +65,7 @@ class Alternacija
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="entiteta.sort", description="Sort")
-     * @Max\Ui(type="integer")
+     * @Max\Ui(type="integer",icon="fa fa-sort")
      * @var integer
      */
     private $sort;

@@ -29,7 +29,7 @@ class Prostor
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
      * @Max\I18n(label="entiteta.sifra", description="Enolična Oznaka prostora")
-     * @Max\Ui(type="sifra",ident=true )
+     * @Max\Ui(type="sifra",ident=true, icon="fa fa-barcode")
      * @var string
      */
     private $sifra;

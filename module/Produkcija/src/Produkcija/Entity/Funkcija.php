@@ -92,7 +92,7 @@ class Funkcija
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="entiteta.sort", description="Sort funkcije oz. utež")
-     * @Max\Ui(type="integer")
+     * @Max\Ui(type="integer", icon="fa fa-sort")
      * @var integer
      */
     private $sort;

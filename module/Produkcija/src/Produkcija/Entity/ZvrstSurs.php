@@ -30,7 +30,7 @@ class ZvrstSurs
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
      * @Max\I18n(label="entiteta.sifra", description="Šifra zvrsti po SURS-u")
-     * @Max\Ui(type="sifra",ident=true )
+     * @Max\Ui(type="sifra",ident=true, icon="fa fa-barcode")
      * @var string
      */
     private $sifra;

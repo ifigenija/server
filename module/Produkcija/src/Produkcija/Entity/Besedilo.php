@@ -118,7 +118,7 @@ class Besedilo
 
     /**
      * 
-     * @ORM\Column(type="string", length=4, nullable=true)
+     * @ORM\Column(type="date", length=4, nullable=true)
      * @Max\I18n(label="besedilo.letoIzida", description="Leto izida")
      * @var string
      */
@@ -126,7 +126,7 @@ class Besedilo
 
     /**
      * 
-     * @ORM\Column(type="string",  nullable=true)
+     * @ORM\Column(type="date",  nullable=true)
      * @Max\I18n(label="besedilo.krajIzida", description="Kraj izida")
      * @var string
      */
