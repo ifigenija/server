@@ -67,7 +67,7 @@ class Uprizoritev
      * Predvidoma v angleščini
      * 
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="uprizoritev.internacionalniNaslov", description="Internacionalni naslov uprizoritve")
+     * @Max\I18n(label="entiteta.internacionalniNaslov", description="Internacionalni naslov uprizoritve")
      * @var string
      */
     private $internacionalniNaslov;

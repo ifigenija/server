@@ -74,7 +74,7 @@ class Besedilo
      * Predvidoma v angleščini
      * 
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="besedilo.internacionalniNaslov", description="Internacionalni naslov besedila")
+     * @Max\I18n(label="entiteta.internacionalniNaslov", description="Internacionalni naslov besedila")
      * @var string
      */
     private $internacionalniNaslov;
