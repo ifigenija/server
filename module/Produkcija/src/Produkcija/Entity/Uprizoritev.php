@@ -115,6 +115,7 @@ class Uprizoritev
     /**
      * 
      * polje uporabljamo že v fazi predprodukcije za makroplaniranje
+     * v programu dela kot prizorišče
      * 
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Prostor")
      * @ORM\JoinColumn(name="maticniOder_id", referencedColumnName="id")
