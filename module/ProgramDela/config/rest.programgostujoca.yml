@@ -30,3 +30,6 @@ lists:
     default: 
         hydrator:
             - exclude: []
+    vse: 
+        hydrator:
+            - exclude: []            

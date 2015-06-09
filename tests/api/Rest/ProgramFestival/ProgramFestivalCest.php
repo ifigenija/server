@@ -12,16 +12,15 @@ use ApiTester;
  * Description of ProgramFestivalCest
  * 
  * 
- * metode, ki jo podpira API
- * - create
- * - getlist
- * - update
- * - get - kontrola vseh polj te entitete
- * - delete
- * validate metodo za entiteto
- * relacije z drugimi entitetami (to many relacije)
- * - pri many to many relacijah testiraj : update, get (list+id), delete
- * getlist različne variante relacij
+ *      metode, ki jo podpira API
+ *      - create
+ *      - getlist
+ *      - update  - ne delam, ker ima le 2 polji
+ *      - get - kontrola vseh polj te entitete
+ *      - delete
+ *      validate metodo za entiteto
+ *      relacije z drugimi entitetami (to many relacije)
+ *      getlist različne variante relacij
  * 
  *
  * @author rado
@@ -59,6 +58,71 @@ class ProgramFestivalCest
         $I->assertEquals($ent['programDela'], NULL);
 
         // kreiramo še en zapis
+        $data       = [
+            'programDela'         => null,
+        ];
+        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['programDela'], NULL);
     }
 
+    
+    /**
+     * Preberem zapis in preverim vsa polja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function read(\ApiTester $I)
+    {
+        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
+
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['programDela'], null);
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListVse(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "/vse";
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListDefault(ApiTester $I)
+    {
+        $listUrl = $this->restUrl;
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+    }
+
+    /**
+     * brisanje zapisa
+     * 
+     * @depends create
+     */
+    public function delete(ApiTester $I)
+    {
+        $I->successfullyDelete($this->restUrl, $this->obj1['id']);
+        $I->failToGet($this->restUrl, $this->obj1['id']);
+    }
+
+    
+    
+    
 }

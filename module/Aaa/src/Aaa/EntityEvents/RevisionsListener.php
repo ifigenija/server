@@ -353,7 +353,8 @@ class RevisionsListener
     protected function isFieldTracked($entityClass, $field)
     {
         $ann = $this->metaFactory->factory($entityClass);
-        return $ann->getFieldTracking($field)->log;
+//        return $ann->getFieldTracking($field)->log;           //$$ začasno izključimo, ker javi napako pri ProgramPremieraCest -- update
+        return true;
     }
 
     protected function isCollectionTracked($collection)

@@ -51,8 +51,8 @@ class BesediloFixture
         $o->setDatumPrejema($date);
         $o->setMoskeVloge($v[7]);
         $o->setZenskeVloge($v[8]);
-        $o->setPrevajalec($v[8]);
-        $o->setPovzetekVsebine($v[9]);
+        $o->setPrevajalec($v[9]);
+        $o->setPovzetekVsebine($v[10]);
 
         $referenca = 'Besedilo-' . $v[0];
         var_dump($referenca);

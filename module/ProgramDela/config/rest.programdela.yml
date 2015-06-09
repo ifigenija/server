@@ -14,11 +14,41 @@ forms:
 #            - premiere
 #            - ponovitve
 #            - izjemni
-#            - programFestival
+#            - programiFestival
 #            - gostujoci
-#            - gostovanje
+#            - gostovanja
             - sezona
 lists:
     default: 
         hydrator:
             - exclude: []
+    vse: 
+        hydrator:
+            - exclude: []
+relation:
+    default:
+        premiere:
+            enabled: true
+            hydrator:
+                exclude: []    
+        ponovitve:
+            enabled: true
+            hydrator:
+                exclude: []    
+        izjemni:
+            enabled: true
+            hydrator:
+                exclude: []    
+        programiFestival:
+            enabled: true
+            hydrator:
+                exclude: []    
+        gostujoci:
+            enabled: true
+            hydrator:
+                exclude: []    
+        gostovanja:
+            enabled: true
+            hydrator:
+                exclude: []    
+            

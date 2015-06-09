@@ -19,8 +19,9 @@ use ApiTester;
  *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto - je ni
- * relacije z drugimi entitetami (to many relacije)
- * - pri many to many relacijah testiraj : update, get (list+id), delete
+ *      relacije z drugimi entitetami (to many relacije)
+ *       ne - pri many to many relacijah testiraj : update, get (list+id), delete
+ *      -enoteprograma
  *      getlist različne variante relacij
  *      - vse
  *      - default
@@ -184,7 +185,7 @@ class TipProgramskeEnoteCest
             'ponoviInt'          => 1,
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => $this->obj2, 
+            'tipProgramskeEnote' => $this->obj2['id'],
             'tip'                => 'premiera',
             'dokument'           => null,
         ];
@@ -193,7 +194,7 @@ class TipProgramskeEnoteCest
         $I->assertEquals($ent['utemeljitev'], 'zz');
 
         //ponovitev 
-        $data                      = [
+        $data                       = [
             'celotnaVrednost'    => 1.23,
             'zaproseno'          => 1.23,
             'lastnaSredstva'     => 1.23,
@@ -211,16 +212,16 @@ class TipProgramskeEnoteCest
             'ponoviInt'          => 1,
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => $this->obj2, 
+            'tipProgramskeEnote' => $this->obj2['id'],
             'tip'                => 'ponovitev',
             'dokument'           => null,
         ];
-        $this->objProgramPonovitev1 = $ent                       = $I->successfullyCreate($this->programPonovitevUrl, $data);
+        $this->objProgramPonovitev1 = $ent                        = $I->successfullyCreate($this->programPonovitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['utemeljitev'], 'zz');
     }
 
-        /**
+    /**
      * preberemo relacije
      * 
      * @depends createVecEnotPrograma
@@ -236,5 +237,4 @@ class TipProgramskeEnoteCest
         $I->assertGreaterThanOrEqual(1, count($resp));
     }
 
-    
 }

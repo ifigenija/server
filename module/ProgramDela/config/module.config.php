@@ -19,6 +19,7 @@ return [
         'factories'  => [
 //            'Rest\EnotaPrograma'      => 'Max\Factory\RestControllerFactory',         //$$ rb verjetno ne potrebujemo, ker je superklasa
             'Rest\ProgramDela'            => 'Max\Factory\RestControllerFactory',
+            'Relation\ProgramDela'        => 'Max\Factory\ToManyControllerFactory',
             'Rest\ProgramFestival'        => 'Max\Factory\RestControllerFactory',
             'Rest\ProgramGostovanje'      => 'Max\Factory\RestControllerFactory',
             'Rest\ProgramGostujoca'       => 'Max\Factory\RestControllerFactory',
