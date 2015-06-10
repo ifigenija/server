@@ -28,7 +28,7 @@ class ProgramiDela
             "sifra" => ["alias" => "p.sifra"]
         ],
         "seznam"     => [
-            "id" => ["alias" => "p.id"]
+            "zacetek" => ["alias" => "p.zacetek"]
         ],
     ];
 
@@ -40,6 +40,10 @@ class ProgramiDela
                 $qb = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
+            case "seznam":
+                $qb = $this->getSeznamQb($options);
+                $this->getSort($name, $qb);
+                return new DoctrinePaginator(new Paginator($qb));
         }
     }
 
@@ -49,15 +53,29 @@ class ProgramiDela
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.sifra', ':sifra');
+            $sifra = $e->like('p.sifra', ':sifra');
 
-            $qb->andWhere($e->orX($naz));
+            $qb->andWhere($e->orX($sifra));
 
             $qb->setParameter('sifra', "{$options['q']}%", "string");
         }
 
         return $qb;
     }
+    public function getSeznamQb($options)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $e  = $qb->expr();
+        if (!empty($options['q'])) {
 
-    
+            $znaziv = $e->like('p.naziv', ':naziv');
+
+            $qb->andWhere($e->orX($naziv));
+
+            $qb->setParameter('naziv', "{$options['q']}%", "string");
+        }
+
+        return $qb;
+    }
+
 }
