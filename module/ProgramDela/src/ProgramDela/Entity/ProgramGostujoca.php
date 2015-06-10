@@ -24,9 +24,20 @@ class ProgramGostujoca
 
     public function validate($mode = 'update')
     {
-        $this->expect(!($this->getTipProgramskeEnote()),"Tip programske enote obstaja, a ne sme obstajati za gostujočo", 1000431);
-        parent::validate();     
+        // neaktualna polja, ki tudi v formi niso:
+        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostujočo", 1000431);
+        $this->setAvtorskiHonorarji(0);
+        $this->setTantieme(0);
+        $this->setObiskGost(0);
+        $this->setObiskZamejo(0);
+        $this->setObiskInt(0);
+        $this->setPonoviZamejo(0);
+        $this->setPonoviGost(0);
+        $this->setPonoviInt(0);
+
+        parent::validate();
     }
+
     public function getDokument()
     {
         return $this->dokument;
@@ -37,6 +48,5 @@ class ProgramGostujoca
         $this->dokument = $dokument;
         return $this;
     }
-
 
 }

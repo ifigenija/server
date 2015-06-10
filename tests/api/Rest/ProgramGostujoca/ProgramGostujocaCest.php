@@ -54,18 +54,18 @@ class ProgramGostujocaCest
             'celotnaVrednost'    => 1.23,
             'zaproseno'          => 1.23,
             'lastnaSredstva'     => 1.23,
-            'avtorskiHonorarji'  => 1.23,
-            'tantieme'           => 1.23,
+//            'avtorskiHonorarji'  => 1.23,
+//            'tantieme'           => 1.23,
             'drugiViri'          => 1.23,
             'drugiJavni'         => 1.23,
             'obiskDoma'          => 1,
-            'obiskGost'          => 1,
-            'obiskZamejo'        => 1,
-            'obiskInt'           => 1,
+//            'obiskGost'          => 1,
+//            'obiskZamejo'        => 1,
+//            'obiskInt'           => 1,
             'ponoviDoma'         => 1,
-            'ponoviZamejo'       => 1,
-            'ponoviGost'         => 1,
-            'ponoviInt'          => 1,
+//            'ponoviZamejo'       => 1,
+//            'ponoviGost'         => 1,
+//            'ponoviInt'          => 1,
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
 //            'tipProgramskeEnote' => NULL,
@@ -81,18 +81,18 @@ class ProgramGostujocaCest
             'celotnaVrednost'    => 4.56,
             'zaproseno'          => 4.56,
             'lastnaSredstva'     => 4.56,
-            'avtorskiHonorarji'  => 4.56,
-            'tantieme'           => 4.56,
+//            'avtorskiHonorarji'  => 4.56,
+//            'tantieme'           => 4.56,
             'drugiViri'          => 4.56,
             'drugiJavni'         => 4.56,
             'obiskDoma'          => 4,
-            'obiskGost'          => 4,
-            'obiskZamejo'        => 4,
-            'obiskInt'           => 4,
+//            'obiskGost'          => 4,
+//            'obiskZamejo'        => 4,
+//            'obiskInt'           => 4,
             'ponoviDoma'         => 4,
-            'ponoviZamejo'       => 4,
-            'ponoviGost'         => 4,
-            'ponoviInt'          => 4,
+//            'ponoviZamejo'       => 4,
+//            'ponoviGost'         => 4,
+//            'ponoviInt'          => 4,
             'utemeljitev'        => 'aa',
             'uprizoritev'        => NULL,
 //            'tipProgramskeEnote' => NULL,
@@ -133,18 +133,18 @@ class ProgramGostujocaCest
         $I->assertEquals($ent['celotnaVrednost'], 1.23);
         $I->assertEquals($ent['zaproseno'], 2.34);
         $I->assertEquals($ent['lastnaSredstva'], 1.23);
-        $I->assertEquals($ent['avtorskiHonorarji'], 1.23);
-        $I->assertEquals($ent['tantieme'], 1.23);
+//        $I->assertEquals($ent['avtorskiHonorarji'], 1.23);
+//        $I->assertEquals($ent['tantieme'], 1.23);
         $I->assertEquals($ent['drugiViri'], 1.23);
         $I->assertEquals($ent['drugiJavni'], 1.23);
         $I->assertEquals($ent['obiskDoma'], 1);
-        $I->assertEquals($ent['obiskGost'], 1);
-        $I->assertEquals($ent['obiskZamejo'], 1);
-        $I->assertEquals($ent['obiskInt'], 1);
+//        $I->assertEquals($ent['obiskGost'], 1);
+//        $I->assertEquals($ent['obiskZamejo'], 1);
+//        $I->assertEquals($ent['obiskInt'], 1);
         $I->assertEquals($ent['ponoviDoma'], 1);
-        $I->assertEquals($ent['ponoviZamejo'], 1);
-        $I->assertEquals($ent['ponoviGost'], 1);
-        $I->assertEquals($ent['ponoviInt'], 1);
+//        $I->assertEquals($ent['ponoviZamejo'], 1);
+//        $I->assertEquals($ent['ponoviGost'], 1);
+//        $I->assertEquals($ent['ponoviInt'], 1);
         $I->assertEquals($ent['utemeljitev'], 'zz');
         $I->assertEquals($ent['uprizoritev'], NULL);
 //        $I->assertEquals($ent['tipProgramskeEnote'], NULL);

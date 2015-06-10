@@ -9,18 +9,18 @@ forms:
             - celotnaVrednost
             - zaproseno
             - lastnaSredstva
-            - avtorskiHonorarji
-            - tantieme
+#            - avtorskiHonorarji
+#            - tantieme
             - drugiViri
             - drugiJavni
             - obiskDoma
-            - obiskGost
-            - obiskZamejo
-            - obiskInt
+#            - obiskGost
+#            - obiskZamejo
+#            - obiskInt
             - ponoviDoma
-            - ponoviZamejo
-            - ponoviGost
-            - ponoviInt
+#            - ponoviZamejo
+#            - ponoviGost
+#            - ponoviInt
             - utemeljitev
             - uprizoritev
 #            - tipProgramskeEnote
