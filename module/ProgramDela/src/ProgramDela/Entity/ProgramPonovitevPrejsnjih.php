@@ -6,17 +6,17 @@ use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
 
 /**
- * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiPonovitev")
+ * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiPonovitevPrejsnjih")
  * @Max\Id(prefix="0048")
  */
-class ProgramPonovitev
+class ProgramPonovitevPrejsnjih
         extends \ProgramDela\Entity\EnotaPrograma
 {
 
     /**
-     * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="ponovitve")
+     * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="ponovitvePrejsnjih")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
-     * @Max\I18n(label="programPonovitev.dokument",  description="Dokument")
+     * @Max\I18n(label="programPonovitevPrejsnjih.dokument",  description="Dokument")
      * @Max\Ui(type="toone")
      * @var \ProgramDela\Entity\ProgramDela
      */
@@ -37,5 +37,6 @@ class ProgramPonovitev
         $this->dokument = $dokument;
         return $this;
     }
+
 
 }

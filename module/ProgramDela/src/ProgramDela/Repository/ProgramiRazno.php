@@ -13,11 +13,11 @@ use Max\Repository\AbstractMaxRepository;
 
 
 /**
- * Description of ProgramiPonovitev
+ * Description of ProgramiRazno
  *
  * @author rado
  */
-class ProgramiPonovitev
+class ProgramiRazno
         extends \Max\Repository\AbstractMaxRepository
 {
 

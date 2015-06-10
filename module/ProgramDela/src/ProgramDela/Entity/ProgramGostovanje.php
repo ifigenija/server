@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 
 /**
+ * Mednarodno gostovanje
+ * 
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiGostovanje")
  * @Max\I18n(label="Program gostovanje",plural="Programi gostovanje")
  * @Max\Id(prefix="0045")

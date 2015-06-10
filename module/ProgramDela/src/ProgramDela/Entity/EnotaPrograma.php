@@ -8,11 +8,12 @@ use Doctrine\ORM\Mapping AS ORM,
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\EnotePrograma")
  * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="tip", length=15, type="string")
+ * @ORM\DiscriminatorColumn(name="tip", length=20, type="string")
  * @ORM\DiscriminatorMap(
  *     {
  *     "premiera"="ProgramDela\Entity\ProgramPremiera",
- *     "ponovitev"="ProgramDela\Entity\ProgramPonovitev",
+ *     "ponovitevpremiere"="ProgramDela\Entity\ProgramPonovitevPremiere",
+ *     "ponovitevprejsnjih"="ProgramDela\Entity\ProgramPonovitevPrejsnjih",
  *     "izjemni"="ProgramDela\Entity\ProgramIzjemni",
  *     "gostujoci"="ProgramDela\Entity\ProgramGostujoca"
  * }

@@ -69,10 +69,16 @@ class ProgramDela
     private $premiere;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPonovitev", mappedBy="dokument")
-     * @var <Ponovitve>
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPonovitevPremiere", mappedBy="dokument")
+     * @var <PonovitvePremiere>
      */
-    private $ponovitve;
+    private $ponovitvePremiere;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPonovitevPrejsnjih", mappedBy="dokument")
+     * @var <PonovitvePrejsnjih>
+     */
+    private $ponovitvePrejsnjih;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramIzjemni", mappedBy="dokument")
@@ -97,6 +103,12 @@ class ProgramDela
      * @var <Gostovanja>
      */
     private $gostovanja;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramRazno", mappedBy="dokument")
+     * @var <ProgramiRazno>
+     */
+    private $programiRazno;
 
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona")
@@ -147,9 +159,14 @@ class ProgramDela
         return $this->premiere;
     }
 
-    public function getPonovitve()
+    public function getPonovitvePremiere()
     {
-        return $this->ponovitve;
+        return $this->ponovitvePremiere;
+    }
+
+    public function getPonovitvePrejsnjih()
+    {
+        return $this->ponovitvePrejsnjih;
     }
 
     public function getIzjemni()
@@ -170,6 +187,11 @@ class ProgramDela
     public function getGostovanja()
     {
         return $this->gostovanja;
+    }
+
+    public function getProgramiRazno()
+    {
+        return $this->programiRazno;
     }
 
     public function getSezona()
@@ -219,9 +241,15 @@ class ProgramDela
         return $this;
     }
 
-    public function setPonovitve($ponovitve)
+    public function setPonovitvePremiere($ponovitvePremiere)
     {
-        $this->ponovitve = $ponovitve;
+        $this->ponovitvePremiere = $ponovitvePremiere;
+        return $this;
+    }
+
+    public function setPonovitvePrejsnjih($ponovitvePrejsnjih)
+    {
+        $this->ponovitvePrejsnjih = $ponovitvePrejsnjih;
         return $this;
     }
 
@@ -249,11 +277,16 @@ class ProgramDela
         return $this;
     }
 
+    public function setProgramiRazno($programiRazno)
+    {
+        $this->programiRazno = $programiRazno;
+        return $this;
+    }
+
     public function setSezona(\Koledar\Entity\Sezona $sezona)
     {
         $this->sezona = $sezona;
         return $this;
     }
-
 
 }

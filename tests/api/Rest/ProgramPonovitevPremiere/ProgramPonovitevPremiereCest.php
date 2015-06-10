@@ -4,12 +4,12 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\ProgramPonovitev;
+namespace Rest\ProgramPonovitevPremiere;
 
 use ApiTester;
 
 /**
- * Description of ProgramPonovitevCest
+ * Description of ProgramPonovitevPremiereCest
  * 
  * 
  *           metode, ki jo podpira API
@@ -26,10 +26,10 @@ use ApiTester;
  *
  * @author rado
  */
-class ProgramPonovitevCest
+class ProgramPonovitevPremiereCest
 {
 
-    private $restUrl = '/rest/programponovitev';
+    private $restUrl = '/rest/programponovitevpremiere';
     private $obj1;
     private $obj2;
 

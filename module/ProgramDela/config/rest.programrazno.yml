@@ -1,0 +1,32 @@
+## YAML Template.
+---
+type: rest
+entityClass: ProgramDela\Entity\ProgramRazno
+forms:
+    default: 
+        elements:
+#            - id
+            - dokument
+            - nazivSklopa
+            - naslovPE
+            - avtorPE
+            - obsegPE
+            - mesecPE
+            - vrednostPE
+            - stPE
+            - soorganizator
+            - stObiskovalcev
+            - stZaposlenih
+            - stHonoranih
+            - zaproseno
+            - celotnaVrednost
+            - lastnaSredstva
+            - drugiViri
+            - viriDMinLok
+lists:
+    default: 
+        hydrator:
+            - exclude: []
+    vse: 
+        hydrator:
+            - exclude: []

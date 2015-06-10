@@ -36,6 +36,11 @@ class Pogodba
     private $sifra;
 
     /**
+     * pogodbena vrednost do premiere, ki se vnese kot 1 znesek in se ne 
+     * računa iz števila vaj
+     * 
+     * to bi se prepisalo v vrednost vrednostDoPremiere
+     * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="entiteta.vrednostDo", description="vrednost do")
      * @var double
@@ -57,6 +62,8 @@ class Pogodba
     private $konec;
 
     /**
+     * 
+     * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="pogodba.vrednostVaje", description="Vrednost vaje")   
      * @var double
@@ -78,7 +85,7 @@ class Pogodba
     private $vrednostUre;
 
     /**
-     * polje se lahko vpisuje ali pa izračuna iz cene na vajo in planiranega števila vaj
+     * polje se lahko vpisuje (vrednostDo) ali pa izračuna iz cene na vajo in planiranega števila vaj
      * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="pogodba.vrednostDoPremiere", description="Vrednost pogodbe do premiere")   

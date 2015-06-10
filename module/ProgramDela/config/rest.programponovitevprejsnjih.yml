@@ -1,7 +1,7 @@
 ## YAML Template.
 ---
 type: rest
-entityClass: ProgramDela\Entity\ProgramPonovitev
+entityClass: ProgramDela\Entity\ProgramPonovitevPrejsnjih
 forms:
     default: 
         elements:
