@@ -68,7 +68,7 @@ class ProgramGostujocaCest
             'ponoviInt'          => 1,
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => NULL,
+//            'tipProgramskeEnote' => NULL,
 //            'tip'                => 'gostujoci', 
             'dokument'           => null,
         ];
@@ -95,7 +95,7 @@ class ProgramGostujocaCest
             'ponoviInt'          => 4,
             'utemeljitev'        => 'aa',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => NULL,
+//            'tipProgramskeEnote' => NULL,
             'dokument'           => null,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -147,7 +147,7 @@ class ProgramGostujocaCest
         $I->assertEquals($ent['ponoviInt'], 1);
         $I->assertEquals($ent['utemeljitev'], 'zz');
         $I->assertEquals($ent['uprizoritev'], NULL);
-        $I->assertEquals($ent['tipProgramskeEnote'], NULL);
+//        $I->assertEquals($ent['tipProgramskeEnote'], NULL);
         $I->assertEquals($ent['dokument'], null);
     }
 

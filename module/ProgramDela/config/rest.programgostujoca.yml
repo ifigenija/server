@@ -23,7 +23,7 @@ forms:
             - ponoviInt
             - utemeljitev
             - uprizoritev
-            - tipProgramskeEnote
+#            - tipProgramskeEnote
             - tip
             - dokument
 lists:
