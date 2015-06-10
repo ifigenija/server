@@ -11,17 +11,17 @@ use ApiTester;
 /**
  * Description of ProgramFestivalCest
  * 
- * 
  *      metode, ki jo podpira API
  *      - create
  *      - getlist
- *      - update  - ne delam, ker ima le 2 polji
+ *      - update  
  *      - get - kontrola vseh polj te entitete
  *      - delete
  *      validate metodo za entiteto
  *      relacije z drugimi entitetami (to many relacije)
  *      getlist različne variante relacij
- * 
+ *      - vse
+ *      - default
  *
  * @author rado
  */
@@ -51,22 +51,89 @@ class ProgramFestivalCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'programDela'         => null,
+            'programDela'             => null,
+            'naziv'                   => 'zz',
+            'zvrst'                   => 'zz',
+            'stPredstav'              => 1,
+            'stPredavanj'             => 1,
+            'stPredstavitev'          => 1,
+            'stDelavnic'              => 1,
+            'stDrugiDogodki'          => 1,
+            'opredelitevDrugiDogodki' => 'zz',
+            'stProdukcij'             => 1,
+            'stObisk'                 => 1,
+            'casPriprave'             => 'zz',
+            'casIzvedbe'              => 'zz',
+            'prizorisca'              => 'zz',
+            'umetVodja'               => 'zz',
+            'programskoTelo'          => 'zz',
+            'soorganizatorji'         => 'zz',
+            'stTujihSelektorjev'      => 1,
+            'stZaposlenih'            => 1,
+            'stHonorarnih'            => 1,
+            'zaproseno'               => 1.23,
+            'celotnaVrednost'         => 1.23,
+            'lastnaSredstva'          => 1.23,
+            'drugiViri'               => 1.23,
+            'opredelitevDrugiViri'    => 'zz',
+            'vlozekKoproducenta'      => 1.23,
+            'drugiJavni'              => 1.23,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['programDela'], NULL);
+        $I->assertEquals($ent['naziv'], 'zz');
 
         // kreiramo še en zapis
         $data       = [
-            'programDela'         => null,
+            'programDela'             => null,
+            'naziv'                   => 'aa',
+            'zvrst'                   => 'aa',
+            'stPredstav'              => 2,
+            'stPredavanj'             => 2,
+            'stPredstavitev'          => 2,
+            'stDelavnic'              => 2,
+            'stDrugiDogodki'          => 2,
+            'opredelitevDrugiDogodki' => 'aa',
+            'stProdukcij'             => 2,
+            'stObisk'                 => 2,
+            'casPriprave'             => 'aa',
+            'casIzvedbe'              => 'aa',
+            'prizorisca'              => 'aa',
+            'umetVodja'               => 'aa',
+            'programskoTelo'          => 'aa',
+            'soorganizatorji'         => 'aa',
+            'stTujihSelektorjev'      => 2,
+            'stZaposlenih'            => 2,
+            'stHonorarnih'            => 2,
+            'zaproseno'               => 2.23,
+            'celotnaVrednost'         => 2.23,
+            'lastnaSredstva'          => 2.23,
+            'drugiViri'               => 2.23,
+            'opredelitevDrugiViri'    => 'aa',
+            'vlozekKoproducenta'      => 2.23,
+            'drugiJavni'              => 2.23,
         ];
-        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['programDela'], NULL);
+        $I->assertEquals($ent['naziv'], 'aa');
     }
 
-    
+    /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function update(ApiTester $I)
+    {
+        $ent              = $this->obj1;
+        $ent['zaproseno'] = 2.34;
+
+        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+
+        $I->assertEquals($entR['zaproseno'], 2.34);
+    }
+
     /**
      * Preberem zapis in preverim vsa polja
      * 
@@ -79,6 +146,32 @@ class ProgramFestivalCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['programDela'], null);
+        $I->assertEquals($ent['naziv'], 'zz');
+        $I->assertEquals($ent['zvrst'], 'zz');
+        $I->assertEquals($ent['stPredstav'], 1);
+        $I->assertEquals($ent['stPredavanj'], 1);
+        $I->assertEquals($ent['stPredstavitev'], 1);
+        $I->assertEquals($ent['stDelavnic'], 1);
+        $I->assertEquals($ent['stDrugiDogodki'], 1);
+        $I->assertEquals($ent['opredelitevDrugiDogodki'], 'zz');
+        $I->assertEquals($ent['stProdukcij'], 1);
+        $I->assertEquals($ent['stObisk'], 1);
+        $I->assertEquals($ent['casPriprave'], 'zz');
+        $I->assertEquals($ent['casIzvedbe'], 'zz');
+        $I->assertEquals($ent['prizorisca'], 'zz');
+        $I->assertEquals($ent['umetVodja'], 'zz');
+        $I->assertEquals($ent['programskoTelo'], 'zz');
+        $I->assertEquals($ent['soorganizatorji'], 'zz');
+        $I->assertEquals($ent['stTujihSelektorjev'], 1);
+        $I->assertEquals($ent['stZaposlenih'], 1);
+        $I->assertEquals($ent['stHonorarnih'], 1);
+        $I->assertEquals($ent['zaproseno'], 2.34);
+        $I->assertEquals($ent['celotnaVrednost'], 1.23);
+        $I->assertEquals($ent['lastnaSredstva'], 1.23);
+        $I->assertEquals($ent['drugiViri'], 1.23);
+        $I->assertEquals($ent['opredelitevDrugiViri'], 'zz');
+        $I->assertEquals($ent['vlozekKoproducenta'], 1.23);
+        $I->assertEquals($ent['drugiJavni'], 1.23);
     }
 
     /**
@@ -122,7 +215,4 @@ class ProgramFestivalCest
         $I->failToGet($this->restUrl, $this->obj1['id']);
     }
 
-    
-    
-    
 }

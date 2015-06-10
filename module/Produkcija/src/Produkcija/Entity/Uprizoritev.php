@@ -150,6 +150,8 @@ class Uprizoritev
     private $gostujoca;
 
     /**
+     * $$ ali se to polje uporablja v programu dela kot trajanje študija?
+     * 
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="uprizoritev.trajanje", description="Trajanje uprizoritve")
      * @Max\Ui(type="integer")

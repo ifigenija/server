@@ -24,6 +24,16 @@ class ProgramPremiera
 
     public function validate($mode = 'update')
     {
+        // neaktualna polja, ki jih tudi v formi ni:
+        $this->setObiskDoma(0);
+        $this->setObiskGost(0);
+        $this->setObiskZamejo(0);
+        $this->setObiskInt(0);
+        $this->setPonoviDoma(0);
+        $this->setPonoviZamejo(0);
+        $this->setPonoviGost(0);
+        $this->setPonoviInt(0);
+        
         parent::validate();
     }
 

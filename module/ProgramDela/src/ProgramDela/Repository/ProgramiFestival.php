@@ -23,10 +23,10 @@ class ProgramiFestival
 
     protected $sortOptions = [
         "default" => [
-            "id" => ["alias" => "p.id"]
+            "naziv" => ["alias" => "p.naziv"]
         ],
         "vse"     => [
-            "id" => ["alias" => "p.id"]
+            "naziv" => ["alias" => "p.naziv"]
         ],
     ];
 
@@ -47,11 +47,11 @@ class ProgramiFestival
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.id', ':id');
+            $naz = $e->like('p.naziv', ':naziv');
 
             $qb->andWhere($e->orX($naz));
 
-            $qb->setParameter('id', "{$options['q']}%", "string");
+            $qb->setParameter('naziv', "{$options['q']}%", "string");
         }
 
         return $qb;

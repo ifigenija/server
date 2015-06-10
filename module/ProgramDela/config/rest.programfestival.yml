@@ -7,6 +7,32 @@ forms:
         elements:
 #            - id
             - programDela
+            - naziv
+            - zvrst
+            - stPredstav
+            - stPredavanj
+            - stPredstavitev
+            - stDelavnic
+            - stDrugiDogodki
+            - opredelitevDrugiDogodki
+            - stProdukcij
+            - stObisk
+            - casPriprave
+            - casIzvedbe
+            - prizorisca
+            - umetVodja
+            - programskoTelo
+            - soorganizatorji
+            - stTujihSelektorjev
+            - stZaposlenih
+            - stHonorarnih
+            - zaproseno
+            - celotnaVrednost
+            - lastnaSredstva
+            - drugiViri
+            - opredelitevDrugiViri
+            - vlozekKoproducenta
+            - drugiJavni
 lists:
     default: 
         hydrator:

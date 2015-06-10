@@ -12,9 +12,11 @@ forms:
             - konec
             - potrjenProgram
 #            - premiere
-#            - ponovitve
+#            - ponovitvePremiere
+#            - ponovitvePrejsnjih
 #            - izjemni
 #            - programiFestival
+#            - programiRazno
 #            - gostujoci
 #            - gostovanja
             - sezona
@@ -38,7 +40,7 @@ lists:
     seznam:
         hydrator:
             byValue: []
-            exclude: [ sifra, premiere, ponovitve, izjemni, programiFestival, gostujoci, gostovanja, avgZasedDvoran, avgCenaVstopnice, stProdVstopnic, stZaposlenih, stZaposIgralcev, avgStNastopovIgr, stHonorarnih, stHonorarnihIgr, stHonorarnihIgrTujJZ, sredstvaInt]
+            exclude: [ sifra, premiere, ponovitvePremiere, ponovitvePrejsnjih, izjemni, programiFestival, programiRazno, gostujoci, gostovanja, avgZasedDvoran, avgCenaVstopnice, stProdVstopnic, stZaposlenih, stZaposIgralcev, avgStNastopovIgr, stHonorarnih, stHonorarnihIgr, stHonorarnihIgrTujJZ, sredstvaInt]
 relation:
     default:
         premiere:
