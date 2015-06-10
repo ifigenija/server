@@ -27,6 +27,9 @@ class ProgramiDela
         "vse"     => [
             "sifra" => ["alias" => "p.sifra"]
         ],
+        "seznam"     => [
+            "id" => ["alias" => "p.id"]
+        ],
     ];
 
     public function getPaginator(array $options, $name = "default")

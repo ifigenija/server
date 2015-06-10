@@ -35,6 +35,10 @@ lists:
     vse: 
         hydrator:
             - exclude: []
+    seznam:
+        hydrator:
+            byValue: []
+            exclude: [ sifra, premiere, ponovitve, izjemni, programiFestival, gostujoci, gostovanja, avgZasedDvoran, avgCenaVstopnice, stProdVstopnic, stZaposlenih, stZaposIgralcev, avgStNastopovIgr, stHonorarnih, stHonorarnihIgr, stHonorarnihIgrTujJZ, sredstvaInt]
 relation:
     default:
         premiere:
