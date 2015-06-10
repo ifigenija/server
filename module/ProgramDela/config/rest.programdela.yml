@@ -18,6 +18,16 @@ forms:
 #            - gostujoci
 #            - gostovanja
             - sezona
+            - avgZasedDvoran
+            - avgCenaVstopnice
+            - stProdVstopnic
+            - stZaposlenih
+            - stZaposIgralcev
+            - avgStNastopovIgr
+            - stHonorarnih
+            - stHonorarnihIgr
+            - stHonorarnihIgrTujJZ
+            - sredstvaInt
 lists:
     default: 
         hydrator:
@@ -31,7 +41,11 @@ relation:
             enabled: true
             hydrator:
                 exclude: []    
-        ponovitve:
+        ponovitvePremiere:
+            enabled: true
+            hydrator:
+                exclude: []    
+        ponovitvePrejsnjih:
             enabled: true
             hydrator:
                 exclude: []    
@@ -48,6 +62,10 @@ relation:
             hydrator:
                 exclude: []    
         gostovanja:
+            enabled: true
+            hydrator:
+                exclude: []    
+        programiRazno:
             enabled: true
             hydrator:
                 exclude: []    

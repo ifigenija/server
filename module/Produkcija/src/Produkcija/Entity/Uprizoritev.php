@@ -278,6 +278,7 @@ class Uprizoritev
 
     /**
      * Producent bo predvidoma večinoma domača hiša 
+     * $$ rb narediti default matična hiša
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ProdukcijskaHisa", inversedBy="uprizoritve")
      * @Max\I18n(label="uprizoritev.producent",  description="Producent uprizoritve")

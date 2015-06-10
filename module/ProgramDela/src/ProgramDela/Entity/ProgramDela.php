@@ -119,6 +119,84 @@ class ProgramDela
      */
     private $sezona;
 
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.avgZasedDvoran", description="Povprečna zasedenost lastnih dvoran")   
+     * @var double
+     */
+    private $avgZasedDvoran;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.avgCenaVstopnice", description="Povprečna cena vstopnice")   
+     * @var double
+     */
+    private $avgCenaVstopnice;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stProdVstopnic", description="Število prodanih vstopnic")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stProdVstopnic;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stZaposlenih", description="Število vseh zaposlenih v javnem zavodu")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stZaposlenih;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stZaposIgralcev", description="Število zaposlenih igralcev")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stZaposIgralcev;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.avgStNastopovIgr", description="Povprečna zasedenost zaposlenih igralcev (popvprečno št. nastopov v letu)")   
+     * @var double
+     */
+    private $avgStNastopovIgr;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stHonorarnih", description="Načrtovano število honorarnih zunanjih sodelavcev")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stHonorarnih;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stHonorarnihIgr", description="Načrtovano število honorarnih zunanjih sodelavcev - od tega igralcev")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stHonorarnihIgr;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stHonorarnihIgrTujJZ", description="Načrtovano število honorarnih zunanjih sodelavcev - od tega igralcev - od tega igralcev, zaposlenih v drugih JZ")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stHonorarnihIgrTujJZ;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaInt", description="Višina sredstev iz mednarodnih virov")   
+     * @var double
+     */
+    private $sredstvaInt;
+
+    //$$ rb morda še bodo kakšna polja za dodati oz. odvzeti - odvisno glede na to, ali jih lahko pridobimo iz drugih entitet ali ne
+
     public function validate($mode = 'update')
     {
         
@@ -197,6 +275,56 @@ class ProgramDela
     public function getSezona()
     {
         return $this->sezona;
+    }
+
+    public function getAvgZasedDvoran()
+    {
+        return $this->avgZasedDvoran;
+    }
+
+    public function getAvgCenaVstopnice()
+    {
+        return $this->avgCenaVstopnice;
+    }
+
+    public function getStProdVstopnic()
+    {
+        return $this->stProdVstopnic;
+    }
+
+    public function getStZaposlenih()
+    {
+        return $this->stZaposlenih;
+    }
+
+    public function getStZaposIgralcev()
+    {
+        return $this->stZaposIgralcev;
+    }
+
+    public function getAvgStNastopovIgr()
+    {
+        return $this->avgStNastopovIgr;
+    }
+
+    public function getStHonorarnih()
+    {
+        return $this->stHonorarnih;
+    }
+
+    public function getStHonorarnihIgr()
+    {
+        return $this->stHonorarnihIgr;
+    }
+
+    public function getStHonorarnihIgrTujJZ()
+    {
+        return $this->stHonorarnihIgrTujJZ;
+    }
+
+    public function getSredstvaInt()
+    {
+        return $this->sredstvaInt;
     }
 
     public function setId($id)
@@ -286,6 +414,66 @@ class ProgramDela
     public function setSezona(\Koledar\Entity\Sezona $sezona)
     {
         $this->sezona = $sezona;
+        return $this;
+    }
+
+    public function setAvgZasedDvoran($avgZasedDvoran)
+    {
+        $this->avgZasedDvoran = $avgZasedDvoran;
+        return $this;
+    }
+
+    public function setAvgCenaVstopnice($avgCenaVstopnice)
+    {
+        $this->avgCenaVstopnice = $avgCenaVstopnice;
+        return $this;
+    }
+
+    public function setStProdVstopnic($stProdVstopnic)
+    {
+        $this->stProdVstopnic = $stProdVstopnic;
+        return $this;
+    }
+
+    public function setStZaposlenih($stZaposlenih)
+    {
+        $this->stZaposlenih = $stZaposlenih;
+        return $this;
+    }
+
+    public function setStZaposIgralcev($stZaposIgralcev)
+    {
+        $this->stZaposIgralcev = $stZaposIgralcev;
+        return $this;
+    }
+
+    public function setAvgStNastopovIgr($avgStNastopovIgr)
+    {
+        $this->avgStNastopovIgr = $avgStNastopovIgr;
+        return $this;
+    }
+
+    public function setStHonorarnih($stHonorarnih)
+    {
+        $this->stHonorarnih = $stHonorarnih;
+        return $this;
+    }
+
+    public function setStHonorarnihIgr($stHonorarnihIgr)
+    {
+        $this->stHonorarnihIgr = $stHonorarnihIgr;
+        return $this;
+    }
+
+    public function setStHonorarnihIgrTujJZ($stHonorarnihIgrTujJZ)
+    {
+        $this->stHonorarnihIgrTujJZ = $stHonorarnihIgrTujJZ;
+        return $this;
+    }
+
+    public function setSredstvaInt($sredstvaInt)
+    {
+        $this->sredstvaInt = $sredstvaInt;
         return $this;
     }
 
