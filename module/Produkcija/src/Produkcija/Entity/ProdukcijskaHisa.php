@@ -34,8 +34,7 @@ class ProdukcijskaHisa
      * @var string
      */
     protected $sifra;
-    
-    
+
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      * @Max\I18n(label="Status", description="Status produkcijske hiše")
@@ -58,17 +57,27 @@ class ProdukcijskaHisa
      */
     private $koprodukcije;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Uprizoritev", mappedBy="producent")
+     * @var <Uprizoritve>
+     */
+    private $uprizoritve;
+
     public function validate($mode = 'update')
     {
         $this->expect($this->popa, "Poslovni partner je obvezen", 1000334);
-        
+
         $this->setSifra($this->getPopa()->getSifra());
-        
     }
 
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getSifra()
+    {
+        return $this->sifra;
     }
 
     public function getStatus()
@@ -86,9 +95,20 @@ class ProdukcijskaHisa
         return $this->koprodukcije;
     }
 
+    public function getUprizoritve()
+    {
+        return $this->uprizoritve;
+    }
+
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    public function setSifra($sifra)
+    {
+        $this->sifra = $sifra;
         return $this;
     }
 
@@ -110,16 +130,10 @@ class ProdukcijskaHisa
         return $this;
     }
 
-    public function getSifra()
+    public function setUprizoritve($uprizoritve)
     {
-        return $this->sifra;
-    }
-
-    public function setSifra($sifra)
-    {
-        $this->sifra = $sifra;
+        $this->uprizoritve = $uprizoritve;
         return $this;
     }
-
 
 }

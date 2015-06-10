@@ -20,6 +20,7 @@ use ApiTester;
  *      validate metodo za entiteto - je ni
  *      relacije z drugimi entitetami
  *      -koprodukcije O2M
+ *      -uprizoritve O2M
  *      -popa
  *       getlist različne variante relacij
  *      - popa
@@ -36,7 +37,8 @@ class ProdukcijskaHisaCest
     private $uprizoritevUrl         = '/rest/uprizoritev';
     private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
     private $lookProdukcijskaHisa;
-    private $objUprizoritev;
+    private $objUprizoritev1;
+    private $objUprizoritev2;
     private $lookUprizoritev;
     private $obj;
     private $obj2;
@@ -201,7 +203,7 @@ class ProdukcijskaHisaCest
         $this->objKoprodukcija2 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
-
+  
     /**
      * preberi vse naslove od poslovnega partnerja
      * 
@@ -323,6 +325,26 @@ class ProdukcijskaHisaCest
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", $this->objKoprodukcija1['id']);
         $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeUprizoritve(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa . '?ident=' . "0987", []);
+        $pHisaId=$resp['data'][0]['id'];
+        
+        $resp = $I->successfullyGetRelation($this->restUrl, $pHisaId, "uprizoritve", "");
+        $I->assertGreaterThanOrEqual(2, count($resp));
+//        codecept_debug($resp);
+        $uprizoritevId=$resp[0]['id'];
+        
+        $resp = $I->successfullyGetRelation($this->restUrl, $pHisaId, "uprizoritve", $uprizoritevId);
+        $I->assertGreaterThanOrEqual(1, count($resp));
+//        codecept_debug($resp);
     }
 
 }

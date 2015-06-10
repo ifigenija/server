@@ -43,6 +43,7 @@ forms:
             - besedilo
             - zvrstUprizoritve
             - zvrstSurs
+            - producent
         hydrator: 
             - lookups: [besedilo]
 lists:

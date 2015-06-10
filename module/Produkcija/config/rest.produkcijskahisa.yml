@@ -12,6 +12,7 @@ forms:
                   required: false
             - popa
 #            - koprodukcije
+#            - uprizoritve
 lists:
     default: 
         filter:
@@ -35,6 +36,10 @@ lists:
 relation:
     default:
         koprodukcije:
+            enabled: true
+            hydrator:
+                exclude: []
+        uprizoritve:
             enabled: true
             hydrator:
                 exclude: []

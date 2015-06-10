@@ -29,7 +29,7 @@ class UprizoritevFixture
 
     public function getDependencies()
     {
-        return array('IfiFixture\BesediloFixture', 'IfiFixture\ProstorFixture'); // fixture classes fixture is dependent on 
+        return array('IfiFixture\BesediloFixture', 'IfiFixture\ProstorFixture', 'IfiFixture\ProdukcijskaHisaFixture'); // fixture classes fixture is dependent on 
     }
 
     /**
@@ -80,11 +80,10 @@ class UprizoritevFixture
         $o->setDatumZakljucka($date);
         $o->setSloAvtor($v[16]);
         $o->setKratkiNaslov($v[17]);
-
-        $getref = $this->getReference($v[18]);
-        $o->setBesedilo(
-                $getref
-        );
+        if ($v[18]) {
+            $getref = $this->getReference($v[18]);
+            $o->setBesedilo($getref);
+        }
 
         // ker ni v isti skupini fixtur-jev, ne deluje getReference
         $value = $zvrUpriR->findOneBySifra($v[19]);
@@ -92,6 +91,11 @@ class UprizoritevFixture
 
         $value = $zvrSursR->findOneBySifra($v[20]);
         $o->setZvrstSurs($value);
+
+        if ($v[21]) {
+            $getref = $this->getReference($v[21]);
+            $o->setProducent($getref);
+        }
 
         $referenca = 'Uprizoritev-' . $v[0];
         var_dump($referenca);
@@ -101,8 +105,10 @@ class UprizoritevFixture
     public function getData()
     {
         return [
-            ['0001', 'Sen kresne noči', 'produkcija', '', 'Sanje', '2016-02-01', '2016-06-01', 'Prostor-0005', 1, 'William Shakespeare', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0001', '08', '01'],
-            ['0002', 'Smoletov vrt', 'predprodukcija-ideja', '', '', '2017-01-01', '2016-04-20', 'Prostor-0006', 2, 'B. Hočevar', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0003', '11', '06'],
+            ['0001', 'Sen kresne noči', 'produkcija', '', 'Sanje', '2016-02-01', '2016-06-01', 'Prostor-0005', 1, 'William Shakespeare', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0001', '08', '01', NULL],
+            ['0002', 'Smoletov vrt', 'predprodukcija-ideja', '', '', '2017-01-01', '2016-04-20', 'Prostor-0006', 2, 'B. Hočevar', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0003', '11', '06', NULL],
+            ['0003', 'Kisli maček', 'postprodukcija', '', '', '2017-02-01', '2016-04-20', 'Prostor-0005', 2, 'Caryl Churchill', TRUE, 2, '', '', '', null, FALSE, '', null, '11', '06', 'ProdukcijskaHisa-0987'],
+            ['0004', 'Vladimir', 'postprodukcija', '', '', '2017-03-01', '2016-04-20', 'Prostor-0005', 2, 'Matjaž Zupančič', TRUE, 2, '', '', '', null, FALSE, '', null, '11', '06', 'ProdukcijskaHisa-0987'],
         ];
     }
 

@@ -276,6 +276,16 @@ class Uprizoritev
      */
     private $zvrstSurs;
 
+    /**
+     * Producent bo predvidoma večinoma domača hiša 
+     * 
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ProdukcijskaHisa", inversedBy="uprizoritve")
+     * @Max\I18n(label="uprizoritev.producent",  description="Producent uprizoritve")
+     * @Max\Ui(type="toone")
+     * @var \Produkcija\Entity\ProdukcijskaHisa
+     */
+    private $producent;
+
     public function validate($mode = 'update')
     {
         $this->expect(!empty($this->sifra), 'Šifra ne sme biti prazna', 1000877);
@@ -444,6 +454,11 @@ class Uprizoritev
     public function getZvrstSurs()
     {
         return $this->zvrstSurs;
+    }
+
+    public function getProducent()
+    {
+        return $this->producent;
     }
 
     public function setId($id)
@@ -643,5 +658,12 @@ class Uprizoritev
         $this->zvrstSurs = $zvrstSurs;
         return $this;
     }
+
+    public function setProducent(\Produkcija\Entity\ProdukcijskaHisa $producent)
+    {
+        $this->producent = $producent;
+        return $this;
+    }
+
 
 }

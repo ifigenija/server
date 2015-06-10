@@ -30,6 +30,7 @@ use ApiTester;
  *      - gostujoce  O2M   
  *      - zvrstUprizoritve 
  *      - zvrstSurs        
+ *      - producent M2O
  * -stroski O2M $$
  *      getlist različne variante relacij
  *      - vse
@@ -238,10 +239,32 @@ class UprizoritevCest
 //        $I->assertNotEmpty($ent['id']);
 //    }
 
+    
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupProdukcijskaHisa(ApiTester $I)
+    {
+
+        $resp                        = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords'], "total records");
+        $this->lookProdukcijskaHisa1 = $resp['data'][0];
+        $this->lookProdukcijskaHisa2 = $resp['data'][1];
+        $I->assertNotEmpty($this->lookProdukcijskaHisa1);
+        $I->assertNotEmpty($this->lookProdukcijskaHisa2);
+    }
+
+    
+    
     /**
      *  kreiramo zapis
      * 
      * @depends lookupBesedilo
+     * @depends lookupProdukcijskaHisa
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
@@ -270,6 +293,7 @@ class UprizoritevCest
             'internacionalniNaslov' => 'zz',
             'steviloVaj'            => 4,
             'planiranoSteviloVaj'   => 5,
+            'producent'             => null,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -301,11 +325,44 @@ class UprizoritevCest
             'internacionalniNaslov' => 'aa',
             'steviloVaj'            => 6,
             'planiranoSteviloVaj'   => 7,
+            'producent'             => null,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['opis'], 'aa');
+
+        // kreiram še en zapis z drugim producentom
+        $data = [
+            'faza'                  => 'predprodukcija-potrjen_program',
+            'naslov'                => 'bb',
+            'podnaslov'             => 'bb',
+            'delovniNaslov'         => 'bb',
+            'datumZacStudija'       => '2012-02-01T00:00:00+0100',
+            'datumPremiere'         => '2013-02-01T00:00:00+0100',
+            'maticniOder'           => $this->lookProstor['id'],
+            'stOdmorov'             => 5,
+            'avtor'                 => 'avbb',
+            'gostujoca'             => true, // $$ bool vrača napako convertToBool
+            'trajanje'              => 5,
+            'opis'                  => 'bb',
+            'arhIdent'              => 'bb',
+            'arhOpomba'             => 'bb',
+            'datumZakljucka'        => '2014-02-01T00:00:00+0100',
+            'sloAvtor'              => true, // $$ bool vrača napako convertToBool
+            'kratkiNaslov'          => 'bb',
+            'besedilo'              => $this->lookBesedilo['id'],
+            'zvrstUprizoritve'      => $this->lookZvrstUprizoritve['id'],
+            'zvrstSurs'             => $this->lookZvrstSurs['id'],
+            'internacionalniNaslov' => 'bb',
+            'steviloVaj'            => 5,
+            'planiranoSteviloVaj'   => 5,
+            'producent'             => $this->lookProdukcijskaHisa1['id'],
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['opis'], 'bb');
+        $I->assertEquals($ent['producent'], $this->lookProdukcijskaHisa1['id']);
     }
 
     /**  kreiramo zapis
@@ -449,22 +506,6 @@ class UprizoritevCest
 //
 //        $I->assertNotEmpty($popa['id']);
 //    }
-
-    /**
-     * 
-     * @param ApiTester $I
-     */
-    public function lookupProdukcijskaHisa(ApiTester $I)
-    {
-
-        $resp                        = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
-        $I->assertNotEmpty($resp);
-        codecept_debug($resp);
-        $I->assertTrue(array_key_exists('data', $resp), "ima data");
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords'], "total records");
-        $this->lookProdukcijskaHisa1 = $resp['data'][0];
-        $this->lookProdukcijskaHisa2 = $resp['data'][1];
-    }
 
     /**
      *  kreiramo zapis
