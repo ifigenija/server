@@ -23,6 +23,8 @@ forms:
             - lastnaSredstva
             - drugiViri
             - viriDMinLok
+        hydrator:
+            byValue: [ soorganizator ]
 lists:
     default: 
         hydrator:

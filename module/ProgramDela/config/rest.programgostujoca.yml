@@ -25,6 +25,8 @@ forms:
             - uprizoritev
 #            - tipProgramskeEnote
             - dokument
+        hydrator:
+            byValue: [ uprizoritev ]
 lists:
     default: 
         hydrator:

@@ -150,7 +150,7 @@ class ProgramGostovanjeCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);
+        $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev['id']);
         $I->assertEquals($ent['krajGostovanja'], 'zz');
         $I->assertEquals($ent['ustanova'], 'zz');
         $I->assertEquals($ent['datumGostovanja'], '2011-02-01T00:00:00+0100');
@@ -165,7 +165,7 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['drugiViri'], 9.12);
         $I->assertEquals($ent['viriDMinLok'], 9.12);
         $I->assertEquals($ent['dokument'], NULL);
-        $I->assertEquals($ent['gostitelj'], $this->lookPopa1['id']);
+        $I->assertEquals($ent['gostitelj']['id'], $this->lookPopa1['id']);
     }
 
     /**

@@ -22,6 +22,9 @@ forms:
             - viriDMinLok
             - dokument
             - gostitelj
+        hydrator:
+            byValue: [ uprizoritev, gostitelj ]
+            
 lists:
     default: 
         hydrator:

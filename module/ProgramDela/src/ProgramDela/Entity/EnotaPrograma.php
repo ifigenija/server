@@ -168,7 +168,7 @@ class EnotaPrograma
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\TipProgramskeEnote", inversedBy="enotePrograma")
      * @Max\I18n(label="enotaPrograma.tipProgramskeEnote", description="Tip programske enote")   
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="select")
      * @var \ProgramDela\Entity\TipProgramskeEnote
      */
     private $tipProgramskeEnote;

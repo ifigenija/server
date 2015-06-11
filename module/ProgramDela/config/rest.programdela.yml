@@ -31,7 +31,14 @@ forms:
             - stHonorarnihIgrTujJZ
             - sredstvaInt
         hydrator:
-            lookups: [ premiere.uprizoritev, premiere.tipProgramskeEnote ]
+            lookups: 
+                - premiere.uprizoritev
+                - ponovitvePremiere.uprizoritev
+                - ponovitvePrejsnjih.uprizoritev
+                - izjemni.uprizoritev
+                - gostujoci.uprizoritev
+                - gostovanja.gostitelj
+                - programiRazno.soorganizator
             byValue: 
                 - premiere
                 - ponovitvePremiere
