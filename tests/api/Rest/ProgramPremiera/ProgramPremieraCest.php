@@ -30,10 +30,10 @@ use ApiTester;
 class ProgramPremieraCest
 {
 
-    private $restUrl = '/rest/programpremiera';
+    private $restUrl               = '/rest/programpremiera';
     private $obj1;
     private $obj2;
-    private $uprizoritevUrl = '/rest/uprizoritev';
+    private $uprizoritevUrl        = '/rest/uprizoritev';
     private $lookUprizoritev;
     private $tipProgramskeEnoteUrl = '/rest/tipprogramskeenote';
     private $lookTipProgramskeEnote;
@@ -48,7 +48,7 @@ class ProgramPremieraCest
         
     }
 
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
@@ -58,18 +58,16 @@ class ProgramPremieraCest
         $I->assertNotEmpty($look);
     }
 
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
     public function lookuptipProgramskeEnote(ApiTester $I)
     {
-        $this->lookTipProgramskeEnote= $look                  = $I->lookupEntity("tipProgramskeEnote", "01", false);
+        $this->lookTipProgramskeEnote = $look                         = $I->lookupEntity("tipProgramskeEnote", "01", false);
         $I->assertNotEmpty($look);
     }
 
-
-    
     /**
      *  kreiramo zapis
      * 
@@ -98,7 +96,7 @@ class ProgramPremieraCest
             'uprizoritev'        => $this->lookUprizoritev['id'],
             'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
-            'dokument'           => null, 
+            'dokument'           => null,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -124,14 +122,13 @@ class ProgramPremieraCest
             'utemeljitev'        => 'aa',
             'uprizoritev'        => NULL,
             'tipProgramskeEnote' => NULL,
-            'dokument'           => null, 
+            'dokument'           => null,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['utemeljitev'], 'aa');
     }
 
-    
     /**
      * spremenim zapis
      * 
@@ -140,7 +137,7 @@ class ProgramPremieraCest
      */
     public function update(ApiTester $I)
     {
-        $ent          = $this->obj1;  
+        $ent              = $this->obj1;
         $ent['zaproseno'] = 2.34;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
@@ -159,13 +156,13 @@ class ProgramPremieraCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['celotnaVrednost'    ],1.23 );
-        $I->assertEquals($ent['zaproseno'          ],2.34 );
-        $I->assertEquals($ent['lastnaSredstva'     ],1.23 );
-        $I->assertEquals($ent['avtorskiHonorarji'  ],1.23 );
-        $I->assertEquals($ent['tantieme'           ],1.23 );
-        $I->assertEquals($ent['drugiViri'          ],1.23 );
-        $I->assertEquals($ent['drugiJavni'         ],1.23 );
+        $I->assertEquals($ent['celotnaVrednost'], 1.23);
+        $I->assertEquals($ent['zaproseno'], 2.34);
+        $I->assertEquals($ent['lastnaSredstva'], 1.23);
+        $I->assertEquals($ent['avtorskiHonorarji'], 1.23);
+        $I->assertEquals($ent['tantieme'], 1.23);
+        $I->assertEquals($ent['drugiViri'], 1.23);
+        $I->assertEquals($ent['drugiJavni'], 1.23);
 //        $I->assertEquals($ent['obiskDoma'          ],1 );
 //        $I->assertEquals($ent['obiskGost'          ],1 );
 //        $I->assertEquals($ent['obiskZamejo'        ],1 );
@@ -174,10 +171,10 @@ class ProgramPremieraCest
 //        $I->assertEquals($ent['ponoviZamejo'       ],1 );
 //        $I->assertEquals($ent['ponoviGost'         ],1 );
 //        $I->assertEquals($ent['ponoviInt'          ],1 );
-        $I->assertEquals($ent['utemeljitev'        ],'zz' );
-        $I->assertEquals($ent['uprizoritev'        ],$this->lookUprizoritev['id'] );
-        $I->assertEquals($ent['tipProgramskeEnote' ], $this->lookTipProgramskeEnote['id']);
-        $I->assertEquals($ent['dokument'           ],null  );
+        $I->assertEquals($ent['utemeljitev'], 'zz');
+        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);
+        $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
+        $I->assertEquals($ent['dokument'], null);
     }
 
     /**
@@ -221,5 +218,4 @@ class ProgramPremieraCest
         $I->failToGet($this->restUrl, $this->obj1['id']);
     }
 
-    
 }
