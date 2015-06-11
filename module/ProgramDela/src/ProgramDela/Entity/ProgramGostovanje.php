@@ -136,7 +136,7 @@ class ProgramGostovanje
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="gostovanja")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
      * @Max\I18n(label="programGostovanje.programDela", description="Program dela")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hidden")
      * @var \ProgramDela\Entity\ProgramDela
      */
     private $dokument;

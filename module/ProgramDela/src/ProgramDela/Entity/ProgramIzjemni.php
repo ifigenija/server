@@ -17,7 +17,7 @@ class ProgramIzjemni
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="izjemni")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
      * @Max\I18n(label="programIzjemni.dokument",  description="Dokument")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hidden")
      * @var \ProgramDela\Entity\ProgramDela
      */
     private $dokument;

@@ -17,7 +17,7 @@ class ProgramPonovitevPremiere
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="ponovitvePremiere")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
      * @Max\I18n(label="programPonovitevPremiere.dokument",  description="Dokument")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hidden")
      * @var \ProgramDela\Entity\ProgramDela
      */
     private $dokument;
