@@ -84,11 +84,11 @@ class ProgramRazno
     private $stPE;
 
     /**
-     * $$ ali rajši entiteta popa oz. prod. hisa?
-     * 
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Popa")
+     * @ORM\JoinColumn(name="gostitelj_id", referencedColumnName="id")
      * @Max\I18n(label="programRazno.soorganizator", description="Soorganizator oz. koproducent")
-     * @var string
+     * @Max\Ui(type="toone")
+     * @var \App\Entity\Popa
      */
     private $soorganizator;
 
@@ -304,7 +304,7 @@ class ProgramRazno
         return $this;
     }
 
-    public function setSoorganizator($soorganizator)
+    public function setSoorganizator(\App\Entity\Popa $soorganizator)
     {
         $this->soorganizator = $soorganizator;
         return $this;
