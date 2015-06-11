@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<skipper version="3.2.1.1226" name="IfiServer" mvc="Zend Framework" orm="Doctrine2" uuid="f455d66d-f4c9-4990-a223-945f0b64403c">
-  <module name="\module/Aaa/src/Aaa/Entity" local-name="module/Aaa/src/Aaa/Entity" namespace="\Aaa\Entity" local-namespace="Aaa\Entity" export-format="Doctrine2Php" export-path="module/Aaa/src/Aaa/Entity" uuid="c600450e-ac8c-4363-b93d-c96985d15d26">
+<skipper version="3.2.2.1232" name="IfiServer" mvc="Zend Framework" orm="Doctrine2" uuid="f455d66d-f4c9-4990-a223-945f0b64403c">
+  <module name="\module/Aaa/src/Aaa/Entity" local-name="module/Aaa/src/Aaa/Entity" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" export-format="Doctrine2Php" export-path="module/Aaa/src/Aaa/Entity" uuid="51a5dde3-6aea-4fcf-b356-2b1157ec4e6b">
     <entity name="\Aaa\Entity\Permission" local-name="Permission" namespace="\Aaa\Entity" uuid="cc254018-2bf3-458c-b25a-946543dcb3be">
       <field name="id" type="guid" required="true" unique="true" primary="true" uuid="2ee9c32b-512e-40b3-bfa6-9ec51fafecaf">
         <orm-attributes>
@@ -107,7 +107,7 @@
       <attribute name="filename-format">entity-name-only</attribute>
     </orm-attributes>
   </module>
-  <module name="\module/App/src/App/Entity" local-name="module/App/src/App/Entity" namespace="\App\Entity" local-namespace="App\Entity" export-format="Doctrine2Php" export-path="module/App/src/App/Entity" uuid="d4b2f7b7-9b65-4678-989a-03d79520bc9c">
+  <module name="\module/App/src/App/Entity" local-name="module/App/src/App/Entity" namespace="\App\Entity" local-namespace="\App\Entity" export-format="Doctrine2Php" export-path="module/App/src/App/Entity" uuid="f7baf5eb-ca6d-43d2-b9e1-870f87db783d">
     <entity name="\App\Entity\Drzava" local-name="Drzava" namespace="\App\Entity" uuid="a457fa98-63a2-461f-b8bc-fe4e80ba4681">
       <field name="id" type="guid" required="true" primary="true" uuid="898cde1d-d2cd-4a93-a10c-fc3522233ac5">
         <orm-attributes>
@@ -456,7 +456,7 @@
       <attribute name="filename-format">entity-name-only</attribute>
     </orm-attributes>
   </module>
-  <module name="\module/Produkcija/src/Produkcija/Entity" local-name="module/Produkcija/src/Produkcija/Entity" namespace="\Produkcija\Entity" local-namespace="Produkcija\Entity" export-format="Doctrine2Php" export-path="module/Produkcija/src/Produkcija/Entity" uuid="5a3860bf-fced-4c01-909d-0f0c94622f55">
+  <module name="\module/Produkcija/src/Produkcija/Entity" local-name="module/Produkcija/src/Produkcija/Entity" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" export-format="Doctrine2Php" export-path="module/Produkcija/src/Produkcija/Entity" uuid="d40efc0e-ae0f-43a0-9658-dca1bfe20219">
     <entity name="\Produkcija\Entity\Alternacija" local-name="Alternacija" namespace="\Produkcija\Entity" uuid="fb1b38f3-d0ef-4a6a-acbb-5f30f5c0c384">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="6727898b-dbd1-4166-8a06-a87fc5b5e1a2">
         <orm-attributes>
@@ -465,7 +465,6 @@
           </attribute>
         </orm-attributes>
       </field>
-      <field name="sodelovanje_id" uuid="94dbee7a-fbe8-49b5-afe2-2f25174fdd7c"/>
       <field name="oseba_id" uuid="6db019ec-f3d0-4219-8e45-c3e26cfb331b"/>
       <field name="koprodukcija_delitev_id" uuid="46528ef1-f5f5-4b7b-9c24-9c8a1575b9ce"/>
       <field name="pogodba_id" type="guid" uuid="5e349566-ffe7-493c-8ff2-ea26fd154be9"/>
@@ -479,18 +478,13 @@
       <field name="aktivna" type="boolean" uuid="94a79d20-cee4-4998-8677-a3be69f032b2"/>
       <field name="sifra" type="string" required="true" unique="true" uuid="c418309d-c278-448e-857d-30000fc87cfe"/>
       <field name="koprodukcija_id" uuid="e3416db6-9c40-404c-a988-361145d0220c"/>
+      <field name="imaPogodbo" type="boolean" size="1" uuid="a4053bd5-b67a-45d6-9498-86db87935345"/>
+      <field name="zaposlitev_id" type="guid" uuid="44081a9e-4d83-464b-b30e-6edd86f73aaf"/>
       <orm-attributes>
         <attribute name="export-file-name">Alternacija.php</attribute>
         <attribute name="repository-class">Produkcija\Repository\Alternacije</attribute>
       </orm-attributes>
     </entity>
-    <association from="\Produkcija\Entity\Alternacija" to="\Produkcija\Entity\Zaposlitev" caption="Sodelovanje Alternacija" owner-alias="alternacije" inverse-alias="sodelovanje" many-owner="true" many-inverse="false" uuid="182e073f-fbca-4cce-aba7-c7fedb721cdb">
-      <association-field from="sodelovanje_id" to="id"/>
-      <orm-attributes>
-        <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
-      </orm-attributes>
-    </association>
     <association from="\Produkcija\Entity\Alternacija" to="\App\Entity\Oseba" caption="Oseba Alternacija" owner-alias="alternacije" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="c3be1a92-b961-45d5-9bd5-ae1847ff41a1">
       <association-field from="oseba_id" to="id"/>
       <orm-attributes>
@@ -525,6 +519,9 @@
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
+    </association>
+    <association from="\Produkcija\Entity\Alternacija" to="\Produkcija\Entity\Zaposlitev" caption="Zaposlitev Alternacija" owner-alias="alternacija" inverse-alias="zaposlitev" many-owner="true" many-inverse="false" uuid="dd7458a7-7a20-4378-821d-7ae521b88113">
+      <association-field from="zaposlitev_id" to="id"/>
     </association>
     <entity name="\Produkcija\Entity\Arhivalija" local-name="Arhivalija" namespace="\Produkcija\Entity" uuid="a04c0db3-b7d2-4a9a-bf5a-da3120744ced">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="c85ab7c1-8877-41f3-842b-6bb16332950a">
@@ -584,6 +581,10 @@
       <field name="prevajalec" type="string" uuid="3fd6e0db-76c8-4e4f-9a41-bcd6c931cda2"/>
       <field name="povzetekVsebine" type="text" uuid="c4875c8e-3c32-484f-88e9-55273b379c21"/>
       <field name="stevilka" type="string" required="true" uuid="834c5d5c-09a3-4cff-82df-d39ac850577e"/>
+      <field name="internacionalniNaslov" type="string" uuid="0a975680-e2f6-4115-9cd0-5cf5ef18d571"/>
+      <field name="letoIzida" type="string" size="4" uuid="a5c6a128-0e6a-4b78-ae52-7c4e8ee86ddb"/>
+      <field name="krajIzida" type="string" uuid="8d74c0d4-b8e8-4875-9352-a41e3dc6c898"/>
+      <field name="zaloznik" type="string" uuid="4661105d-3207-44b8-91bd-b17730d68641"/>
       <orm-attributes>
         <attribute name="export-file-name">Besedilo.php</attribute>
         <attribute name="repository-class">Produkcija\Repository\Besedila</attribute>
@@ -611,6 +612,7 @@
       <field name="komentar" type="string" uuid="855aba21-10cb-46fd-b366-88b5f20bc675"/>
       <field name="vodjaEkipe" type="boolean" size="1" uuid="a4182afe-47ee-4e72-bdc8-27cd50146b7d"/>
       <field name="tipFunkcije_id" uuid="fd578d07-aa46-4e69-b831-bd57447899d1"/>
+      <field name="maxPrekrivanj" type="integer" uuid="5d1cf0bc-00e5-4ad7-b086-63fbd1a60e3d"/>
       <orm-attributes>
         <attribute name="export-file-name">Funkcija.php</attribute>
         <attribute name="repository-class">Produkcija\Repository\Funkcije</attribute>
@@ -684,9 +686,21 @@
       <field name="aktivna" type="boolean" uuid="7302c493-a938-4438-941d-96dabcf053b8"/>
       <field name="opis" type="text" uuid="621d8322-b12f-46c1-8215-95ececda011c"/>
       <field name="sifra" size="7" required="true" unique="true" uuid="ed765abd-a5f6-4715-80a5-f5e1d7d8cf43"/>
-      <field name="vrednostDo" type="decimal" uuid="2b582100-d44f-4c40-b2f3-3e3e4edf70bd"/>
+      <field name="vrednostDo" type="decimal" uuid="2b582100-d44f-4c40-b2f3-3e3e4edf70bd">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
       <field name="zacetek" type="date" uuid="7a544ed3-5e3f-487a-ba1e-2024fb7a6f0e"/>
       <field name="konec" type="date" uuid="6ed6797b-3ab1-48e0-9382-79176c56c27b"/>
+      <field name="vrednostDoPremiere" type="decimal" uuid="cd328490-f0a5-42b0-a7c7-82993ac6a075">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="zaposlenVDrJz" type="boolean" uuid="204ce5b2-2b28-4a62-a32b-9a59b0341e4e"/>
       <orm-attributes>
         <attribute name="export-file-name">Pogodba.php</attribute>
         <attribute name="repository-class">Produkcija\Repository\Pogodbe</attribute>
@@ -948,6 +962,8 @@
       <field name="maticniOder_id" uuid="83beee42-9c0a-4456-a5c2-6db92ce87e43"/>
       <field name="steviloVaj" type="integer" uuid="37a4c2f9-3f0f-454f-a9aa-37423f06ffcc"/>
       <field name="sifra" type="string" required="true" unique="true" uuid="ce53e1d8-53a6-4b34-a2df-e9cd15a61f46"/>
+      <field name="internacionalniNaslov" type="string" uuid="4ce99042-9d9c-4d9d-a465-a38589d1174e"/>
+      <field name="planiranoSteviloVaj" type="integer" uuid="395b7a05-216b-40ce-8432-6e0cc8bb0caa"/>
       <orm-attributes>
         <attribute name="export-file-name">Uprizoritev.php</attribute>
         <attribute name="repository-class">Produkcija\Repository\Uprizoritve</attribute>
@@ -1006,7 +1022,7 @@
         <attribute name="repository-class">Produkcija\Repository\Zaposlitve</attribute>
       </orm-attributes>
     </entity>
-    <association from="\Produkcija\Entity\Zaposlitev" to="\App\Entity\Oseba" caption="Oseba Sodelovanje" owner-alias="sodelovanja" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="913f58ca-5980-4103-ad46-7fb28666ab3f">
+    <association from="\Produkcija\Entity\Zaposlitev" to="\App\Entity\Oseba" caption="Oseba Sodelovanje" owner-alias="zaposlitve" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="913f58ca-5980-4103-ad46-7fb28666ab3f">
       <association-field from="oseba_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
@@ -1023,6 +1039,8 @@
       </field>
       <field name="ime" type="string" uuid="f3207710-0e0b-46e1-915b-1b07b748b135"/>
       <field name="naziv" type="string" uuid="1cc199a0-f0d8-47bd-bdf7-1bb20507e016"/>
+      <field name="sifra" type="string" required="true" unique="true" uuid="a7a4cf63-6717-4a82-9a1a-ddadb427916e"/>
+      <field name="opis" type="text" uuid="dd43567a-38e5-41dd-96ff-e5b24d70147e"/>
       <orm-attributes>
         <attribute name="export-file-name">ZvrstSurs.php</attribute>
         <attribute name="repository-class">Produkcija\Repository\ZvrstiSurs</attribute>
@@ -1037,7 +1055,9 @@
         </orm-attributes>
       </field>
       <field name="ime" type="string" uuid="b96d2c89-db84-40e0-a4c3-0ff5d38c127c"/>
-      <field name="opis" type="string" uuid="126e83b6-146b-467c-a1e6-ef755fe8f8b1"/>
+      <field name="opis" type="text" uuid="126e83b6-146b-467c-a1e6-ef755fe8f8b1"/>
+      <field name="sifra" type="string" required="true" unique="true" uuid="d42621b5-38d0-4864-9389-e0ba8132608f"/>
+      <field name="naziv" type="string" uuid="6e7779ef-1d31-4c5a-879a-8ae9cfbf3609"/>
       <orm-attributes>
         <attribute name="export-file-name">ZvrstUprizoritve.php</attribute>
         <attribute name="repository-class">Produkcija\Repository\ZvrstiUprizoritve</attribute>
@@ -1047,7 +1067,19 @@
       <attribute name="filename-format">entity-name-only</attribute>
     </orm-attributes>
   </module>
-  <module name="\module/Koledar/src/Koledar/Entity" local-name="module/Koledar/src/Koledar/Entity" namespace="\Koledar\Entity" local-namespace="Koledar\Entity" export-format="Doctrine2Php" export-path="module/Koledar/src/Koledar/Entity" uuid="8717f907-ed7b-4cef-a29b-74566e9f5d1f">
+  <module name="\module/Koledar/src/Koledar/Entity" local-name="module/Koledar/src/Koledar/Entity" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" export-format="Doctrine2Php" export-path="module/Koledar/src/Koledar/Entity" uuid="64a82991-f949-4867-88f4-8ea6ddb518ea">
+    <entity name="\Koledar\Entity\AbonmaPredstava" local-name="AbonmaPredstava" namespace="\Koledar\Entity" uuid="03695a40-23b8-4763-8a21-8965e6bb7f67">
+      <field name="abonma_id" type="guid" required="true" primary="true" uuid="ff6db08d-d849-4d66-8210-c1eaf79dc195"/>
+      <field name="predstava_id" type="guid" required="true" primary="true" uuid="5b46ab8e-8aae-41a3-8dfb-c56ddc569e23"/>
+    </entity>
+    <many-to-many mn-entity="\Koledar\Entity\AbonmaPredstava" uuid="b2d56fd0-7a8d-43f9-bb99-478813223d73">
+      <many-to-many-entity name="\Koledar\Entity\Predstava" owning-side="true" alias="predstava" uuid="fc19f6d7-06e2-438b-b00e-d83b990eab49">
+        <many-to-many-field from="predstava_id" to="id"/>
+      </many-to-many-entity>
+      <many-to-many-entity name="\Abonmaji\Entity\Abonma" owning-side="false" alias="abonma" uuid="7e6dafe9-00ad-43ed-82c5-4a169ce355e5">
+        <many-to-many-field from="abonma_id" to="id"/>
+      </many-to-many-entity>
+    </many-to-many>
     <entity name="\Koledar\Entity\Dogodek" local-name="Dogodek" namespace="\Koledar\Entity" uuid="7713dae5-f407-4aa8-979c-d9337cd5333a">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="68f796e5-9bb4-45f5-9026-90658b611455">
         <orm-attributes>
@@ -1199,6 +1231,9 @@
       <field name="uprizoritev_id" uuid="6444e7e9-ddba-4219-a19a-283cc7796d33"/>
       <field name="gostovanje_id" uuid="65114a41-a14c-430f-89e3-92afa7cacf32"/>
       <field name="gostujoc_id" uuid="4f5acf75-fc28-4065-b09b-cba213005dfc"/>
+      <field name="zaporedna" type="integer" uuid="62ae8002-b926-454e-85c5-208f86a1876b"/>
+      <field name="obiskovalcev" type="integer" uuid="746fcb68-6c1f-477c-bda4-f9fc0f0ca2d1"/>
+      <field name="faza" type="string" uuid="c3571bfc-0741-43bd-b230-7d894f3e96da"/>
       <orm-attributes>
         <attribute name="export-file-name">Predstava.php</attribute>
         <attribute name="repository-class">Koledar\Repository\Predstave</attribute>
@@ -1282,7 +1317,7 @@
       <attribute name="filename-format">entity-name-only</attribute>
     </orm-attributes>
   </module>
-  <module name="\module/Abonmaji/src/Abonmaji/Entity" local-name="module/Abonmaji/src/Abonmaji/Entity" namespace="\Abonmaji\Entity" local-namespace="Abonmaji\Entity" export-format="Doctrine2Php" export-path="module/Abonmaji/src/Abonmaji/Entity" uuid="1c11ba6b-dc14-4ab2-bb77-f92c53686ca3">
+  <module name="\module/Abonmaji/src/Abonmaji/Entity" local-name="module/Abonmaji/src/Abonmaji/Entity" namespace="\Abonmaji\Entity" local-namespace="\Abonmaji\Entity" export-format="Doctrine2Php" export-path="module/Abonmaji/src/Abonmaji/Entity" uuid="d8c0bab8-934f-404c-9dd1-9778552f3672">
     <entity name="\Abonmaji\Entity\Abonma" local-name="Abonma" namespace="\Abonmaji\Entity" uuid="4122e19e-43dc-4743-b178-5a4ded27a837">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="e1484ee9-4da7-41d3-b28c-c2f6d61bed41">
         <orm-attributes>
@@ -1305,7 +1340,7 @@
       <attribute name="filename-format">entity-name-only</attribute>
     </orm-attributes>
   </module>
-  <module name="\module/Prisotnost/src/Prisotnost/Entity" local-name="module/Prisotnost/src/Prisotnost/Entity" namespace="\Prisotnost\Entity" local-namespace="Prisotnost\Entity" export-format="Doctrine2Php" export-path="module/Prisotnost/src/Prisotnost/Entity" uuid="7f39557d-626b-4091-868b-01d09d6f1b96">
+  <module name="\module/Prisotnost/src/Prisotnost/Entity" local-name="module/Prisotnost/src/Prisotnost/Entity" namespace="\Prisotnost\Entity" local-namespace="\Prisotnost\Entity" export-format="Doctrine2Php" export-path="module/Prisotnost/src/Prisotnost/Entity" uuid="b208d425-eed2-4566-aace-8cac3f9795a2">
     <entity name="\Prisotnost\Entity\TerminStoritve" local-name="TerminStoritve" namespace="\Prisotnost\Entity" uuid="fd572a6a-d40c-4db3-80a0-7607c2b3ecc2">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="0d53afef-9837-4fdd-a652-5810005d306d">
         <orm-attributes>
@@ -1354,7 +1389,7 @@
       <attribute name="filename-format">entity-name-only</attribute>
     </orm-attributes>
   </module>
-  <module name="\module/Prodaja/src/Prodaja/Entity" local-name="module/Prodaja/src/Prodaja/Entity" namespace="\Prodaja\Entity" local-namespace="Prodaja\Entity" export-format="Doctrine2Php" export-path="module/Prodaja/src/Prodaja/Entity" uuid="26a39b04-dc43-4ef3-9963-490198aeae62">
+  <module name="\module/Prodaja/src/Prodaja/Entity" local-name="module/Prodaja/src/Prodaja/Entity" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" export-format="Doctrine2Php" export-path="module/Prodaja/src/Prodaja/Entity" uuid="2a4c8241-bc3f-4a25-9c42-db9f08ee1853">
     <entity name="\Prodaja\Entity\Kupec" local-name="Kupec" namespace="\Prodaja\Entity" uuid="b9334951-8846-4588-8929-61da3a964a3f">
       <field name="id" type="guid" required="true" unique="true" primary="true" auto-increment="true" uuid="c84b93d6-b20d-43fe-92b1-6126639e5ea1">
         <orm-attributes>
@@ -1366,6 +1401,7 @@
       <field name="popa_id" type="guid" unique="true" uuid="f1bc6b66-d90a-4732-a463-2fb1dc622bfb"/>
       <orm-attributes>
         <attribute name="export-file-name">Kupec.php</attribute>
+        <attribute name="repository-class">Prodaja\Repository\Kupci</attribute>
       </orm-attributes>
     </entity>
     <association from="\Prodaja\Entity\Kupec" to="\App\Entity\Popa" caption="Popa Kupec" owner-alias="kupec" inverse-alias="popa" many-owner="false" many-inverse="false" uuid="549b0800-61e6-47c2-9244-2abca7f26629">
@@ -1641,14 +1677,14 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Prodaja\Entity\Sedez" to="\Prodaja\Entity\SedezniRed" caption="SedezniRed Sedez" owner-alias="sedez" inverse-alias="sedezniRed" many-owner="true" many-inverse="false" uuid="d738d1b4-84a3-47ff-a39e-24bc982ce209">
+    <association from="\Prodaja\Entity\Sedez" to="\Prodaja\Entity\SedezniRed" owner-alias="sedez" inverse-alias="sedezniRed" many-owner="true" many-inverse="false" uuid="d738d1b4-84a3-47ff-a39e-24bc982ce209">
       <association-field from="sedezni_red_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Prodaja\Entity\Sedez" to="\Prodaja\Entity\PodrocjeSedenja" caption="PodrocjaSedenja Sedez" owner-alias="sedez" inverse-alias="podrocjaSedenja" many-owner="true" many-inverse="false" uuid="726a1f36-e91d-406c-aee4-67ad889403b1">
+    <association from="\Prodaja\Entity\Sedez" to="\Prodaja\Entity\PodrocjeSedenja" owner-alias="sedez" inverse-alias="podrocjaSedenja" many-owner="true" many-inverse="false" uuid="726a1f36-e91d-406c-aee4-67ad889403b1">
       <association-field from="podrocja_sedenja_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
@@ -1696,7 +1732,7 @@
       <attribute name="filename-format">entity-name-only</attribute>
     </orm-attributes>
   </module>
-  <module name="\module/Stevilcenje/src/Stevilcenje/Entity" local-name="module/Stevilcenje/src/Stevilcenje/Entity" namespace="\Stevilcenje\Entity" local-namespace="Stevilcenje\Entity" export-format="Doctrine2Php" export-path="module/Stevilcenje/src/Stevilcenje/Entity" uuid="c31d42e3-ced4-4f6b-8d6f-4b68ce2f665a">
+  <module name="\module/Stevilcenje/src/Stevilcenje/Entity" local-name="module/Stevilcenje/src/Stevilcenje/Entity" namespace="\Stevilcenje\Entity" local-namespace="\Stevilcenje\Entity" export-format="Doctrine2Php" export-path="module/Stevilcenje/src/Stevilcenje/Entity" uuid="2134a829-2167-4587-b175-fca1f6fd66f2">
     <entity name="\Stevilcenje\Entity\Stevilcenje" local-name="Stevilcenje" namespace="\Stevilcenje\Entity" uuid="a602a178-8005-4214-b74a-eb5857eb88b6">
       <field name="id" type="guid" required="true" primary="true" uuid="7ba60ed9-e9af-422a-a79c-ba4e799b9977"/>
       <field name="sifra" size="8" unique="true" uuid="c6788749-3fc9-4342-b652-9927821de006"/>
@@ -1739,7 +1775,7 @@
       </orm-attributes>
     </entity>
   </module>
-  <module name="\module/ProgramDela/src/ProgramDela/Entity" local-name="module/ProgramDela/src/ProgramDela/Entity" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" export-format="Doctrine2Php" export-path="module/ProgramDela/src/ProgramDela/Entity" uuid="102ed0c4-dae7-4249-ba74-ee33a62ff56f">
+  <module name="\module/ProgramDela/src/ProgramDela/Entity" local-name="module/ProgramDela/src/ProgramDela/Entity" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" export-format="Doctrine2Php" export-path="module/ProgramDela/src/ProgramDela/Entity" uuid="30e8ea7a-bc97-46a6-8f45-0dd8c0be5ebc">
     <entity name="\ProgramDela\Entity\EnotaPrograma" local-name="EnotaPrograma" namespace="\ProgramDela\Entity" uuid="b408a791-92ad-4b44-b817-2fd6028dc8c5">
       <field name="id" type="guid" required="true" primary="true" uuid="668949c9-6a40-4fad-8f00-91a1058fafe3">
         <orm-attributes>
@@ -1923,6 +1959,7 @@
       </field>
       <field name="program_dela_id" uuid="44db64d0-c30f-4a12-8ca5-4ebafa7e11e1"/>
       <field name="gostitelj_id" uuid="c998011d-bb6a-4c49-b906-0911b3403c09"/>
+      <inheritance-child derived-from="\ProgramDela\Entity\EnotaPrograma" discriminator-value="gostovanje" uuid="41348f32-e884-4d31-9ced-86f480d9c0af"/>
       <orm-attributes>
         <attribute name="export-file-name">ProgramGostovanje.php</attribute>
       </orm-attributes>
@@ -2033,7 +2070,8 @@
     <association uuid="02326f77-3608-4fa5-9e68-f8e2f4fa649a" center-position-x="0" center-position-y="0" color="#CDC32B"/>
     <association uuid="028f3b57-750f-49ab-bd0c-d386238dc984" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <association uuid="0300f696-e490-4ffc-a4c5-fe2eac899118" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <association uuid="04a5be80-1359-4276-9cc4-2b2203c65829" caption1-position-x="77" caption1-position-y="83" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <entity uuid="03695a40-23b8-4763-8a21-8965e6bb7f67" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="-495" position-y="359" size-x="0" size-x2="120" size-y="0" size-y2="60"/>
+    <association uuid="04a5be80-1359-4276-9cc4-2b2203c65829" caption1-position-x="77" caption1-position-y="83" center-position-x="6" center-position-y="0" color="4288059030"/>
     <entity uuid="0590ef21-6b77-4fb7-a82b-16bf5d3b3180" bg-color="4294967295" hdr-color="4292006610" position-x="92" position-y="164" size-x="0" size-x2="75" size-y="0" size-y2="59"/>
     <entity uuid="064b8109-e697-4483-a021-6290e08bd8a9" bg-color="4294967295" hdr-color="4292006610" position-x="513" position-y="318" size-x="0" size-x2="77" size-y="0" size-y2="59"/>
     <association uuid="07d7cc37-79a4-479e-9ad9-52dbd99e0e31" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
@@ -2045,28 +2083,27 @@
     <association uuid="0db717f7-1bb0-4e9e-8615-60fccb88d492" color="#C774AF"/>
     <association uuid="0df862dc-cd7d-44a7-98a1-be0dfbbb2580" color="#61D351"/>
     <association uuid="0fc4d8d7-d475-4df6-8a13-81f2db028b8a" caption1-position-x="-14" caption1-position-y="-3" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <module uuid="102ed0c4-dae7-4249-ba74-ee33a62ff56f" bg-color="#FEFCE8" position-x="1798" position-y="623" size-x="0" size-x2="667" size-y="5" size-y2="620"/>
     <many-to-many-association uuid="11624642-ff2f-46bb-914b-003e564a9f77" color="4288059030"/>
     <association uuid="15529497-5301-4989-bb9d-964f874eceee" color="4288059030"/>
-    <association uuid="182e073f-fbca-4cce-aba7-c7fedb721cdb" caption1-position-x="-55" caption1-position-y="5" center-position-x="0" center-position-y="11" color="4288059030"/>
     <entity uuid="1a680a0e-762a-4ec8-9558-1c4739f2c972" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="291" position-y="64" size-x="0" size-x2="92" size-y="0" size-y2="31"/>
-    <module uuid="1c11ba6b-dc14-4ab2-bb77-f92c53686ca3" bg-color="#FEEFE3" position-x="321" position-y="351" size-x="-75" size-x2="430" size-y="-28" size-y2="245"/>
     <association uuid="1c2cd4c7-fe50-45cb-8811-8aafe798fc43" color="#B31F24"/>
     <entity uuid="1d43e294-aeee-4624-80a9-4e648b8a02a9" bg-color="4294967295" hdr-color="4292006610" position-x="33" position-y="607" size-x="0" size-x2="86" size-y="0" size-y2="115"/>
     <entity uuid="1f68be83-ac13-4ab5-ba28-a5352fc33f3b" bg-color="4294967295" hdr-color="4292006610" position-x="690" position-y="413" size-x="0" size-x2="92" size-y="0" size-y2="59"/>
+    <module uuid="2134a829-2167-4587-b175-fca1f6fd66f2" bg-color="#FEFCE8" position-x="2477" position-y="-85" size-x="0" size-x2="305" size-y="0" size-y2="217"/>
     <entity uuid="250fcf52-3173-45dc-a1fa-0aab3e9916c2" bg-color="4294967295" hdr-color="4292006610" position-x="-389" position-y="25" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
     <entity uuid="2525a53d-338c-4ceb-873a-e1b68c728f29" bg-color="4294967295" hdr-color="4292006610" position-x="374" position-y="-85" size-x="0" size-x2="101" size-y="0" size-y2="143"/>
     <association uuid="25f9afc1-dd4b-4983-b323-df7912af77b7" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="2644e9ed-4490-41ec-aab8-3505e88e84b6" bg-color="4294967295" hdr-color="4292006610" position-x="405" position-y="22" size-x="0" size-x2="101" size-y="0" size-y2="59"/>
-    <module uuid="26a39b04-dc43-4ef3-9963-490198aeae62" bg-color="#EAE4F1" position-x="1616" position-y="36" size-x="-179" size-x2="1012" size-y="-3" size-y2="565"/>
     <association uuid="27667b50-2424-4f64-a6f3-d0fd9d264a2f" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="2882f490-7861-4c06-adf9-9a068a485140" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="2924dd49-c2a1-470f-80b0-b8ee5649d736" bg-color="4294967295" hdr-color="4292006610" position-x="-320" position-y="110" size-x="0" size-x2="78" size-y="0" size-y2="45"/>
+    <entity uuid="2924dd49-c2a1-470f-80b0-b8ee5649d736" bg-color="4294967295" hdr-color="4292006610" position-x="-222" position-y="122" size-x="0" size-x2="78" size-y="0" size-y2="45"/>
+    <module uuid="2a4c8241-bc3f-4a25-9c42-db9f08ee1853" bg-color="#EAE4F1" position-x="3639" position-y="8" size-x="-150" size-x2="1162" size-y="-4" size-y2="545"/>
     <inheritance-child uuid="2b3dac10-23ff-4086-b27a-09ca7933aed9" center-position-x="0" center-position-y="-1" color="#8A54A2"/>
     <entity uuid="2e881e9c-8460-48b3-b6b4-bbaf371fcbc3" bg-color="4294967295" hdr-color="4292006610" position-x="112" position-y="548" size-x="0" size-x2="133" size-y="0" size-y2="199"/>
     <entity uuid="2ed4c60f-977f-4c00-8af4-a48cf0cfb44a" bg-color="4294967295" hdr-color="4292006610" position-x="379" position-y="320" size-x="0" size-x2="111" size-y="0" size-y2="87"/>
+    <module uuid="30e8ea7a-bc97-46a6-8f45-0dd8c0be5ebc" bg-color="#E7F3E7" position-x="3773" position-y="914" size-x="0" size-x2="659" size-y="0" size-y2="523"/>
     <association uuid="32285cf2-efa7-42a9-8291-371e39fc5290" center-position-x="0" center-position-y="0" color="4287255714"/>
-    <association uuid="3290e250-80a6-414c-85bf-d26744c117e4" center-position-x="0" center-position-y="0" color="4291674923"/>
+    <association uuid="3290e250-80a6-414c-85bf-d26744c117e4" center-position-x="78" center-position-y="0" color="4291674923"/>
     <entity uuid="335ea302-e1a8-496a-bc0e-7e38adb5baec" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="547" position-y="383" size-x="0" size-x2="92" size-y="0" size-y2="45"/>
     <entity uuid="33c37275-c415-483d-9d90-a9f42a021142" bg-color="4294967295" hdr-color="4292006610" position-x="251" position-y="220" size-x="0" size-x2="137" size-y="0" size-y2="339"/>
     <entity uuid="35ea88cd-3631-4796-b245-36a8156d6576" bg-color="4294967295" hdr-color="4292006610" position-x="176" position-y="-64" size-x="0" size-x2="88" size-y="0" size-y2="87"/>
@@ -2075,40 +2112,40 @@
     <association uuid="3f7a9446-4108-4cfc-821e-1ff0e166cddf" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="3fc26a3c-10f5-4365-8d57-ca32bda35ff2" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="4122e19e-43dc-4743-b178-5a4ded27a837" bg-color="4294967295" hdr-color="4292006610" position-x="170" position-y="98" size-x="0" size-x2="102" size-y="0" size-y2="101"/>
+    <inheritance-child uuid="41348f32-e884-4d31-9ced-86f480d9c0af" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="43847b52-3acc-4cf4-bb55-3a3cbf9c70b6" center-position-x="0" center-position-y="0" color="#B31F24"/>
     <entity uuid="43a8effd-4e4c-4ecb-9b2d-bae7bb9c76df" bg-color="4294967295" hdr-color="4292006610" position-x="266" position-y="355" size-x="0" size-x2="94" size-y="0" size-y2="101"/>
     <entity uuid="45431970-6465-4151-9717-219e9ffc664f" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="79" position-y="393" size-x="0" size-x2="115" size-y="0" size-y2="101"/>
     <association uuid="4a3cb2e9-3c1e-4a28-a85e-cae38ba91a56" caption1-position-x="8" caption1-position-y="-6" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="4b4bded0-aec2-461d-82ea-4fb1dbac103e" bg-color="4294967295" hdr-color="4292006610" position-x="331" position-y="311" size-x="0" size-x2="99" size-y="0" size-y2="87"/>
     <entity uuid="4e0f088d-bb63-4a58-9548-d2d76829c4c2" bg-color="4294967295" hdr-color="4292006610" position-x="152" position-y="501" size-x="0" size-x2="100" size-y="0" size-y2="101"/>
+    <module uuid="51a5dde3-6aea-4fcf-b356-2b1157ec4e6b" bg-color="#E7F5FD" position-x="2075" position-y="-76" size-x="0" size-x2="388" size-y="8" size-y2="478"/>
     <association uuid="52d1b1c6-8370-45bc-8220-bc683ed0a77f" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="52f7b214-82a7-49bd-a5c0-6a939dfb92bb" bg-color="4294967295" hdr-color="4292006610" position-x="881" position-y="332" size-x="0" size-x2="111" size-y="0" size-y2="101"/>
     <many-to-many-association uuid="5328c522-610e-420c-959e-7866d64873fc" color="4288059030"/>
     <association uuid="54077895-b617-4198-b631-3bc8e4a0906c" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="549b0800-61e6-47c2-9244-2abca7f26629" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <association uuid="5622c428-af19-41f9-b52d-3e61c3ece72c" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <module uuid="5a3860bf-fced-4c01-909d-0f0c94622f55" bg-color="#E7F5FD" position-x="916" position-y="468" size-x="148" size-x2="869" size-y="-145" size-y2="1051"/>
     <association uuid="5c552318-2760-4dbc-b55e-15c195189aaf" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <association uuid="5c5a3be4-5efe-490a-9550-6e82a5df2064" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="5ee77396-9866-4df9-a017-7371a6935946" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
-    <entity uuid="5fb1263c-ed9f-4a50-9df7-f10c603b109a" bg-color="4294967295" hdr-color="4292006610" position-x="-95" position-y="205" size-x="0" size-x2="138" size-y="0" size-y2="199"/>
+    <entity uuid="5fb1263c-ed9f-4a50-9df7-f10c603b109a" bg-color="4294967295" hdr-color="4292006610" position-x="-87" position-y="169" size-x="0" size-x2="138" size-y="0" size-y2="199"/>
     <entity uuid="60790305-3e58-478c-ad9a-cb5c96bb09e4" bg-color="4294967295" hdr-color="4292006610" position-x="202" position-y="133" size-x="0" size-x2="83" size-y="0" size-y2="59"/>
     <entity uuid="62dd4bde-fda1-4e2b-bd4b-7f850d3ea140" bg-color="4294967295" hdr-color="4292006610" position-x="220" position-y="111" size-x="0" size-x2="111" size-y="0" size-y2="101"/>
+    <module uuid="64a82991-f949-4867-88f4-8ea6ddb518ea" bg-color="#FEEFE3" position-x="3316" position-y="-17" size-x="515" size-x2="450" size-y="82" size-y2="439"/>
     <association uuid="64ecf746-b184-4c08-926a-04c21e5bb259" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="6b22e983-4096-494d-86a8-ddaa098a48d9" color="#8A54A2"/>
-    <association uuid="726a1f36-e91d-406c-aee4-67ad889403b1" caption1-position-x="0" caption1-position-y="-15" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="737a41cb-0b4c-4a1d-91dc-a715db661610" bg-color="4294967295" hdr-color="4292006610" position-x="-129" position-y="256" size-x="0" size-x2="80" size-y="0" size-y2="73"/>
+    <association uuid="726a1f36-e91d-406c-aee4-67ad889403b1" caption1-position-x="0" caption1-position-y="-15" center-position-x="0" center-position-y="0" color="#969696"/>
+    <entity uuid="737a41cb-0b4c-4a1d-91dc-a715db661610" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="33" position-y="280" size-x="0" size-x2="111" size-y="0" size-y2="115"/>
     <entity uuid="747ea290-7bc2-4d52-abcb-528dea5e8d11" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="383" position-y="388" size-x="0" size-x2="126" size-y="0" size-y2="115"/>
     <entity uuid="7713dae5-f407-4aa8-979c-d9337cd5333a" bg-color="4294967295" hdr-color="4292006610" position-x="-62" position-y="-66" size-x="0" size-x2="132" size-y="0" size-y2="227"/>
     <entity uuid="772b7b64-6546-43a8-908c-5400c169be85" bg-color="4294967295" hdr-color="4292006610" position-x="77" position-y="312" size-x="0" size-x2="108" size-y="0" size-y2="101"/>
     <association uuid="7db13ed2-63e6-4dea-9c17-18aa9d4bb720" center-position-x="0" center-position-y="0" color="#A8A8A8"/>
-    <module uuid="7f39557d-626b-4091-868b-01d09d6f1b96" bg-color="#FDEBEF" position-x="1378" position-y="1142" size-x="-434" size-x2="721" size-y="-120" size-y2="368"/>
     <association uuid="82a71af7-7182-44cf-b400-d8759b3421b4" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="837cfbb2-99b8-47b3-a034-a5fa5ab2870b" color="4287255714"/>
     <entity uuid="839a6864-c7e1-4f7f-94c5-39c430703662" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="223" position-y="134" size-x="0" size-x2="105" size-y="0" size-y2="87"/>
     <entity uuid="85fc6aa4-1cde-4b7c-a4e3-48af305373de" bg-color="4294967295" hdr-color="4292006610" position-x="466" position-y="739" size-x="0" size-x2="146" size-y="0" size-y2="185"/>
     <association uuid="8635ad22-49e0-49d2-8ccd-2d1d3f139091" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <module uuid="8717f907-ed7b-4cef-a29b-74566e9f5d1f" bg-color="#E7F3E7" position-x="1290" position-y="125" size-x="523" size-x2="493" size-y="86" size-y2="474"/>
     <entity uuid="87619b62-5c71-4547-a101-0e2116458bc7" bg-color="4294967295" hdr-color="4292006610" position-x="597" position-y="87" size-x="0" size-x2="152" size-y="0" size-y2="87"/>
     <entity uuid="8781fe92-c7af-4afb-a188-053cd524c529" bg-color="4294967295" hdr-color="4292006610" position-x="27" position-y="22" size-x="0" size-x2="84" size-y="0" size-y2="74"/>
     <entity uuid="8b0b1e29-9c2c-4fe7-b5ab-517e05ead7e1" bg-color="4294967295" hdr-color="4292006610" position-x="389" position-y="98" size-x="0" size-x2="93" size-y="0" size-y2="213"/>
@@ -2120,7 +2157,7 @@
     <association uuid="913f58ca-5980-4103-ad46-7fb28666ab3f" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="916cf60e-68a0-4df5-938d-be661930dc78" bg-color="4294967295" hdr-color="4292006610" position-x="482" position-y="151" size-x="0" size-x2="86" size-y="0" size-y2="59"/>
     <entity uuid="92695dba-a7f2-4afd-b930-6da76a3ec22d" bg-color="4294967295" hdr-color="4292006610" position-x="562" position-y="440" size-x="0" size-x2="115" size-y="0" size-y2="185"/>
-    <entity uuid="93c567ba-43dc-49fd-a680-7799524cab0c" bg-color="4294967295" hdr-color="4292006610" position-x="-98" position-y="434" size-x="0" size-x2="154" size-y="0" size-y2="185"/>
+    <entity uuid="93c567ba-43dc-49fd-a680-7799524cab0c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="-91" position-y="440" size-x="0" size-x2="154" size-y="0" size-y2="199"/>
     <entity uuid="93d17e5f-69ad-4167-bded-4ffcac55eb3d" bg-color="4294967295" hdr-color="4292006610" position-x="185" position-y="157" size-x="0" size-x2="90" size-y="0" size-y2="73"/>
     <association uuid="9407134f-5551-401a-b0fc-e7b42169eade" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="98a35a5d-1042-4ad9-a764-5318bad6a652" color="4291261615"/>
@@ -2144,6 +2181,8 @@
     <association uuid="ae42540c-d529-4668-b731-741e16d6f47b" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="b0e2afb2-6452-438d-b17f-6749987d8859" color="4289928996"/>
     <association uuid="b19f1902-f837-4071-b2d3-5637e7333e22" center-position-x="0" center-position-y="0" color="4291261615"/>
+    <module uuid="b208d425-eed2-4566-aace-8cac3f9795a2" bg-color="#FDEBEF" position-x="3790" position-y="606" size-x="0" size-x2="310" size-y="0" size-y2="242"/>
+    <many-to-many-association uuid="b2d56fd0-7a8d-43f9-bb99-478813223d73" color="#969696"/>
     <entity uuid="b408a791-92ad-4b44-b817-2fd6028dc8c5" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="72" position-y="50" size-x="0" size-x2="131" size-y="0" size-y2="297"/>
     <association uuid="b6351580-48db-498a-9d72-f3b8074bd618" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="b82efdc1-2337-44a3-bdb7-b4eb85623b14" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
@@ -2153,12 +2192,10 @@
     <entity uuid="ba185002-2a7a-43f9-b269-7eb203e6e29c" bg-color="4294967295" hdr-color="4292006610" position-x="25" position-y="148" size-x="0" size-x2="105" size-y="0" size-y2="269"/>
     <association uuid="c012b288-5a27-45bf-b5e0-44ec1c3d18c5" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="c165a486-3e42-4676-b647-cf9bde007c92" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
-    <module uuid="c31d42e3-ced4-4f6b-8d6f-4b68ce2f665a" bg-color="#EAE4F1" position-x="390" position-y="47" size-x="0" size-x2="361" size-y="0" size-y2="317"/>
     <inheritance-child uuid="c382e3a3-b4eb-40ca-9540-4630d053edc0" color="#00B4D0"/>
     <association uuid="c3be1a92-b961-45d5-9bd5-ae1847ff41a1" caption1-position-x="-2" caption1-position-y="44" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="c3bf1c85-08bc-4663-93cd-7d8fd2619dee" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
-    <entity uuid="c438c6fa-7b39-41dd-b53e-4b164a97734e" bg-color="4294967295" hdr-color="4292006610" position-x="450" position-y="481" size-x="0" size-x2="90" size-y="0" size-y2="59"/>
-    <module uuid="c600450e-ac8c-4363-b93d-c96985d15d26" bg-color="#E7F3E7" position-x="6" position-y="64" size-x="-16" size-x2="373" size-y="17" size-y2="539"/>
+    <entity uuid="c438c6fa-7b39-41dd-b53e-4b164a97734e" bg-color="4294967295" hdr-color="4292006610" position-x="488" position-y="466" size-x="0" size-x2="90" size-y="0" size-y2="59"/>
     <inheritance-child uuid="c6a5838d-e0bc-4ea1-bdd8-45c500f18764" color="#2E63AF"/>
     <entity uuid="c966f43d-ea94-4ff6-bf91-dc47ab5f399a" bg-color="4294967295" hdr-color="4292006610" position-x="642" position-y="162" size-x="0" size-x2="78" size-y="0" size-y2="73"/>
     <association uuid="ca5be931-6132-44f3-81b5-d47bee30d204" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
@@ -2169,10 +2206,12 @@
     <entity uuid="cdfc51b0-b6c4-4af5-8780-217a46067f1b" bg-color="4294967295" hdr-color="4292006610" position-x="726" position-y="800" size-x="0" size-x2="94" size-y="0" size-y2="59"/>
     <association uuid="d35b51f5-c9be-4e1e-9628-118e2d5a9fc6" caption1-position-x="-2" caption1-position-y="4" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="d3cf6e9b-a6a9-47be-a707-1c0c22ce160a" bg-color="4294967295" hdr-color="4292006610" position-x="332" position-y="622" size-x="0" size-x2="109" size-y="0" size-y2="129"/>
-    <module uuid="d4b2f7b7-9b65-4678-989a-03d79520bc9c" bg-color="#FEEFE3" position-x="22" position-y="746" size-x="0" size-x2="735" size-y="131" size-y2="772"/>
+    <module uuid="d40efc0e-ae0f-43a0-9658-dca1bfe20219" bg-color="#E7F5FD" position-x="2924" position-y="323" size-x="115" size-x2="824" size-y="-136" size-y2="1127"/>
     <entity uuid="d620642a-e03d-46b4-8ce4-6590730cc510" bg-color="4294967295" hdr-color="4292006610" position-x="370" position-y="653" size-x="0" size-x2="69" size-y="0" size-y2="59"/>
-    <association uuid="d738d1b4-84a3-47ff-a39e-24bc982ce209" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="d738d1b4-84a3-47ff-a39e-24bc982ce209" caption1-position-x="-41" caption1-position-y="140" center-position-x="0" center-position-y="0" color="#969696"/>
+    <module uuid="d8c0bab8-934f-404c-9dd1-9778552f3672" bg-color="#E7F3E7" position-x="2478" position-y="177" size-x="0" size-x2="292" size-y="0" size-y2="219"/>
     <association uuid="daeba5a7-0bd7-40f0-8b5a-eac0a57a990e" color="4289928996"/>
+    <association uuid="dd7458a7-7a20-4378-821d-7ae521b88113" center-position-x="0" center-position-y="0" color="#969696"/>
     <entity uuid="de899858-7f5d-4832-87aa-dc8d452393b2" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="218" position-y="413" size-x="0" size-x2="133" size-y="0" size-y2="87"/>
     <association uuid="df0697ec-3f9d-41a9-9470-072bcf827a0f" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="e001ffb1-6f55-4da8-a05d-7a0c69ad8be4" bg-color="4294967295" hdr-color="4292006610" position-x="829" position-y="22" size-x="0" size-x2="108" size-y="0" size-y2="157"/>
@@ -2182,19 +2221,20 @@
     <association uuid="eb9dfa31-61c4-47ec-ba4b-93d9e5631b3f" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="ede963bb-83f3-4fb8-b4f0-4e099a276d65" color="4288059030"/>
     <association uuid="ee3197e7-0174-49e0-9968-3373ba6e252d" color="#2E63AF"/>
-    <entity uuid="efd49162-c9bd-4808-b14c-9272905f9d71" bg-color="4294967295" hdr-color="4292006610" position-x="-268" position-y="246" size-x="0" size-x2="113" size-y="0" size-y2="73"/>
+    <entity uuid="efd49162-c9bd-4808-b14c-9272905f9d71" bg-color="4294967295" hdr-color="4292006610" position-x="-371" position-y="185" size-x="0" size-x2="113" size-y="0" size-y2="73"/>
     <association uuid="f068b6aa-da3c-4623-a53c-c7bca363748d" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="f25eaf99-3ef5-4ab2-9ff3-c7ec90588127" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="f284cd27-323b-4a15-8b10-2bb40c623fd1" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <project uuid="f455d66d-f4c9-4990-a223-945f0b64403c" size-x="17" size-x2="2674" size-y="0" size-y2="1567"/>
+    <project uuid="f455d66d-f4c9-4990-a223-945f0b64403c" size-x="-2003" size-x2="4890" size-y="170" size-y2="1533"/>
     <association uuid="f50f3026-dd91-40f0-af6f-1b898b657780" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <association uuid="f8d2f5e2-967a-4ce9-81b9-7c7f00f06ede" color="4291261615"/>
+    <module uuid="f7baf5eb-ca6d-43d2-b9e1-870f87db783d" bg-color="#FEFCE8" position-x="2076" position-y="563" size-x="0" size-x2="672" size-y="130" size-y2="760"/>
+    <association uuid="f8d2f5e2-967a-4ce9-81b9-7c7f00f06ede" center-position-x="0" center-position-y="0" color="4291261615"/>
     <entity uuid="f98b7456-3f89-4382-bafd-2d2ba4ffa808" bg-color="4294967295" hdr-color="4292006610" position-x="191" position-y="343" size-x="0" size-x2="92" size-y="0" size-y2="115"/>
     <entity uuid="f9a3365c-4694-4029-95b6-6b1c74cb63d6" bg-color="4294967295" hdr-color="4292006610" position-x="29" position-y="186" size-x="0" size-x2="136" size-y="0" size-y2="171"/>
     <entity uuid="fa27fac4-77b6-4b38-a043-78375bbc658d" bg-color="4294967295" hdr-color="4292006610" position-x="-494" position-y="-35" size-x="0" size-x2="58" size-y="0" size-y2="31"/>
-    <entity uuid="fb1b38f3-d0ef-4a6a-acbb-5f30f5c0c384" bg-color="4294967295" hdr-color="4292006610" position-x="-21" position-y="789" size-x="0" size-x2="118" size-y="0" size-y2="213"/>
+    <entity uuid="fb1b38f3-d0ef-4a6a-acbb-5f30f5c0c384" bg-color="4294967295" hdr-color="4292006610" position-x="-93" position-y="771" size-x="0" size-x2="118" size-y="0" size-y2="227"/>
     <association uuid="fbd5abd1-cae4-4d42-b645-da4655e15d85" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
-    <entity uuid="fd572a6a-d40c-4db3-80a0-7607c2b3ecc2" bg-color="4294967295" hdr-color="4292006610" position-x="573" position-y="199" size-x="0" size-x2="131" size-y="0" size-y2="143"/>
+    <entity uuid="fd572a6a-d40c-4db3-80a0-7607c2b3ecc2" bg-color="4294967295" hdr-color="4292006610" position-x="135" position-y="60" size-x="0" size-x2="131" size-y="0" size-y2="143"/>
     <association uuid="fe930113-7281-475a-af86-510131b6d051" center-position-x="1" center-position-y="3" color="#F4931F"/>
     <association uuid="ffab0b04-a348-4248-8a52-04797776a798" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
   </visual-data>
