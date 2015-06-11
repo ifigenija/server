@@ -36,9 +36,11 @@ class TipProgramskeEnoteCest
     private $obj1;
     private $obj2;
     private $programPremieraUrl  = '/rest/programpremiera';
-    private $programPonovitevUrl = '/rest/programponovitev';
+    private $programPonovitevPrejsnjihUrl = '/rest/programponovitevprejsnjih';
+    private $programPonovitevPremiereUrl = '/rest/programponovitevpremiere';
     private $objProgramPremiera1;
-    private $objProgramPonovitev1;
+    private $objProgramPonovitevPrejsnjih1;
+    private $objProgramPonovitevPremiere1;
 
     public function _before(ApiTester $I)
     {
@@ -186,14 +188,13 @@ class TipProgramskeEnoteCest
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
             'tipProgramskeEnote' => $this->obj2['id'],
-            'tip'                => 'premiera',
             'dokument'           => null,
         ];
         $this->objProgramPremiera1 = $ent                       = $I->successfullyCreate($this->programPremieraUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['utemeljitev'], 'zz');
 
-        //ponovitev 
+        //ponovitev prejšnjih sezon
         $data                       = [
             'celotnaVrednost'    => 1.23,
             'zaproseno'          => 1.23,
@@ -213,10 +214,35 @@ class TipProgramskeEnoteCest
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
             'tipProgramskeEnote' => $this->obj2['id'],
-            'tip'                => 'ponovitev',
             'dokument'           => null,
         ];
-        $this->objProgramPonovitev1 = $ent                        = $I->successfullyCreate($this->programPonovitevUrl, $data);
+        $this->objProgramPonovitevPrejsnjih11 = $ent                        = $I->successfullyCreate($this->programPonovitevPrejsnjihUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['utemeljitev'], 'zz');
+
+        //ponovitev premiere
+        $data                       = [
+            'celotnaVrednost'    => 1.23,
+            'zaproseno'          => 1.23,
+            'lastnaSredstva'     => 1.23,
+            'avtorskiHonorarji'  => 1.23,
+            'tantieme'           => 1.23,
+            'drugiViri'          => 1.23,
+            'drugiJavni'         => 1.23,
+            'obiskDoma'          => 1,
+            'obiskGost'          => 1,
+            'obiskZamejo'        => 1,
+            'obiskInt'           => 1,
+            'ponoviDoma'         => 1,
+            'ponoviZamejo'       => 1,
+            'ponoviGost'         => 1,
+            'ponoviInt'          => 1,
+            'utemeljitev'        => 'zz',
+            'uprizoritev'        => NULL,
+            'tipProgramskeEnote' => $this->obj2['id'],
+            'dokument'           => null,
+        ];
+        $this->objProgramPonovitevPremiere1 = $ent                        = $I->successfullyCreate($this->programPonovitevPremiereUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['utemeljitev'], 'zz');
     }
@@ -231,9 +257,15 @@ class TipProgramskeEnoteCest
     public function preberiRelacijeZEnotamiPrograma(ApiTester $I)
     {
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "enotePrograma", "");
-        $I->assertGreaterThanOrEqual(2, count($resp));
+        $I->assertGreaterThanOrEqual(3, count($resp));
 
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "enotePrograma", $this->objProgramPonovitev1['id']);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "enotePrograma", $this->objProgramPremiera1['id']);
+        $I->assertGreaterThanOrEqual(1, count($resp));
+ 
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "enotePrograma", $this->objProgramPonovitevPremiere1['id']);
+        $I->assertGreaterThanOrEqual(1, count($resp));
+ 
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "enotePrograma", $this->objProgramPonovitevPrejsnjih1['id']);
         $I->assertGreaterThanOrEqual(1, count($resp));
     }
 

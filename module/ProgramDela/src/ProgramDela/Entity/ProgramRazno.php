@@ -84,6 +84,8 @@ class ProgramRazno
     private $stPE;
 
     /**
+     * $$ ali rajši entiteta popa oz. prod. hisa?
+     * 
      * @ORM\Column(type="string")
      * @Max\I18n(label="programRazno.soorganizator", description="Soorganizator oz. koproducent")
      * @var string
@@ -116,21 +118,21 @@ class ProgramRazno
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.zaproseno", description="Zaprošena sredstva Ministrstva za kulturo")   
+     * @Max\I18n(label="programRazno.zaproseno", description="Zaprošena sredstva Ministrstva za kulturo")   
      * @var double
      */
     private $zaproseno;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.celotnaVrednost", description="Celotna vrednost sklopa")   
+     * @Max\I18n(label="programRazno.celotnaVrednost", description="Celotna vrednost sklopa")   
      * @var double
      */
     private $celotnaVrednost;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.lastnaSredstva", description="Lastna sredstva")   
+     * @Max\I18n(label="programRazno.lastnaSredstva", description="Lastna sredstva")   
      * @var double
      */
     private $lastnaSredstva;
@@ -139,7 +141,7 @@ class ProgramRazno
      * $$ manjka opredelitev. Ali je potrebno specificirati druge vire (npr. pari string, double)? 
      * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.drugiViri", description="Drugi viri")   
+     * @Max\I18n(label="programRazno.drugiViri", description="Drugi viri")   
      * @var double
      */
     private $drugiViri;
@@ -148,7 +150,7 @@ class ProgramRazno
      * $$ Ali dovolj le ena vrednos  ali je potrebno specificirati vire (npr. pari string, double)? 
      * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.viriDMinLok", description="Viri druga ministrstva in lokalna skupnost")   
+     * @Max\I18n(label="programRazno.viriDMinLok", description="Viri druga ministrstva in lokalna skupnost")   
      * @var double
      */
     private $viriDMinLok;
