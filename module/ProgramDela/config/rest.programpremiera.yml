@@ -25,10 +25,12 @@ forms:
             - uprizoritev
             - tipProgramskeEnote
             - dokument
+        hydrator:
+            byValue: [ uprizoritev, tipProgramskeEnote ]
 lists:
     default: 
         hydrator:
-            - exclude: []
+            exclude: []
     vse: 
         hydrator:
-            - exclude: []
+            exclude: []

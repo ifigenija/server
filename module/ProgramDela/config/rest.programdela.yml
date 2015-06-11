@@ -30,13 +30,16 @@ forms:
             - stHonorarnihIgr
             - stHonorarnihIgrTujJZ
             - sredstvaInt
+        hydrator:
+            lookups: [ premiere.uprizoritev, premiere.tipProgramskeEnote ]
+            byValue: [ premiere, ponovitvePremiere, ponovitvePrejsnjih, izjemni, programiFestival, programiRazno, gostujoci, gostovanja ]
 lists:
     default: 
         hydrator:
-            - exclude: []
+            exclude: []
     vse: 
         hydrator:
-            - exclude: []
+            exclude: []
     seznam:
         hydrator:
             byValue: []
