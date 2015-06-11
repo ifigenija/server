@@ -22,16 +22,21 @@ use ApiTester;
  *      relacije z drugimi entitetami (to many relacije)
  *      - pri many to many relacijah testiraj : update, get (list+id), delete
  *      getlist različne variante relacij
- * 
+ *      - vse
+ *      - default
  *
  * @author rado
  */
 class ProgramGostovanjeCest
 {
 
-    private $restUrl = '/rest/programgostovanje';
+    private $restUrl        = '/rest/programgostovanje';
     private $obj1;
     private $obj2;
+    private $uprizoritevUrl = '/rest/uprizoritev';
+    private $lookUprizoritev;
+    private $popaUrl        = '/rest/popa';
+    private $lookPopa1;
 
     public function _before(ApiTester $I)
     {
@@ -44,33 +49,78 @@ class ProgramGostovanjeCest
     }
 
     /**
-     *  kreiramo zapis
      * 
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupPopa(ApiTester $I)
+    {
+        $this->lookPopa1 = $ent             = $I->lookupEntity("popa", "0988", false);
+        $I->assertNotEmpty($ent);
+
+        $this->lookPopa2 = $ent             = $I->lookupEntity("popa", "0986", false);
+    }
+
+    /**
+     * @depends lookupUprizoritev
      * 
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
     {
         $data       = [
-            'transportniStroski' => 1.23,
-            'odkup'              => 1.23,
-            'dokument'           => null,
-            'gostitelj'          => null,
+            'dokument'           => NULL,
+            'uprizoritev'        => $this->lookUprizoritev['id'],
+            'krajGostovanja'     => 'zz',
+            'ustanova'           => 'zz',
+            'datumGostovanja'    => '2011-02-01T00:00:00+0100',
+            'stPonovitev'        => 9,
+            'stGledalcev'        => 9,
+            'zaproseno'          => 9.12,
+            'celotnaVrednost'    => 9.12,
+            'transportniStroski' => 9.12,
+            'stroskiAvtorZun'    => 9.12,
+            'odkup'              => 9.12,
+            'lastnaSredstva'     => 9.12,
+            'drugiViri'          => 9.12,
+            'viriDMinLok'        => 9.12,
+            'gostitelj'          => $this->lookPopa1['id'],
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['transportniStroski'], 1.23);
+        $I->assertEquals($ent['krajGostovanja'], 'zz');
 
         // kreiramo še en zapis
         $data       = [
-            'transportniStroski' => 6.78,
-            'odkup'              => 6.78,
-            'dokument'           => null,
+            'dokument'           => NULL,
+            'uprizoritev'        => NULL,
+            'krajGostovanja'     => 'aa',
+            'ustanova'           => 'aa',
+            'datumGostovanja'    => '2011-02-01T00:00:00+0100',
+            'stPonovitev'        => 3,
+            'stGledalcev'        => 3,
+            'zaproseno'          => 3.12,
+            'celotnaVrednost'    => 3.12,
+            'transportniStroski' => 3.12,
+            'stroskiAvtorZun'    => 3.12,
+            'odkup'              => 3.12,
+            'lastnaSredstva'     => 3.12,
+            'drugiViri'          => 3.12,
+            'viriDMinLok'        => 3.12,
             'gostitelj'          => null,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['transportniStroski'], 6.78);
+        $I->assertEquals($ent['krajGostovanja'], 'aa');
     }
 
     /**
@@ -100,10 +150,22 @@ class ProgramGostovanjeCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['transportniStroski'], 1.23);
+        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);
+        $I->assertEquals($ent['krajGostovanja'], 'zz');
+        $I->assertEquals($ent['ustanova'], 'zz');
+        $I->assertEquals($ent['datumGostovanja'], '2011-02-01T00:00:00+0100');
+        $I->assertEquals($ent['stPonovitev'], 9);
+        $I->assertEquals($ent['stGledalcev'], 9);
+        $I->assertEquals($ent['zaproseno'], 9.12);
+        $I->assertEquals($ent['celotnaVrednost'], 9.12);
+        $I->assertEquals($ent['transportniStroski'], 9.12);
+        $I->assertEquals($ent['stroskiAvtorZun'], 9.12);
         $I->assertEquals($ent['odkup'], 2.34);
-        $I->assertEquals($ent['dokument'], null);
-        $I->assertEquals($ent['gostitelj'], null);
+        $I->assertEquals($ent['lastnaSredstva'], 9.12);
+        $I->assertEquals($ent['drugiViri'], 9.12);
+        $I->assertEquals($ent['viriDMinLok'], 9.12);
+        $I->assertEquals($ent['dokument'], NULL);
+        $I->assertEquals($ent['gostitelj'], $this->lookPopa1['id']);
     }
 
     /**

@@ -31,6 +31,8 @@ class ProgramRaznoCest
     private $restUrl = '/rest/programrazno';
     private $obj1;
     private $obj2;
+    private $popaUrl        = '/rest/popa';
+    private $lookPopa1;
 
     public function _before(ApiTester $I)
     {
@@ -42,6 +44,19 @@ class ProgramRaznoCest
         
     }
 
+        /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupPopa(ApiTester $I)
+    {
+        $this->lookPopa1 = $ent             = $I->lookupEntity("popa", "0988", false);
+        $I->assertNotEmpty($ent);
+
+        $this->lookPopa2 = $ent             = $I->lookupEntity("popa", "0986", false);
+    }
+
+    
     /**
      *  kreiramo zapis
      * 
@@ -59,7 +74,7 @@ class ProgramRaznoCest
             'mesecPE'         => 'zz',
             'vrednostPE'      => 1.23,
             'stPE'            => 1,
-            'soorganizator'   => 'zz',
+            'soorganizator'   => $this->lookPopa1['id'],
             'stObiskovalcev'  => 1,
             'stZaposlenih'    => 1,
             'stHonoranih'     => 1,
@@ -71,7 +86,7 @@ class ProgramRaznoCest
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['soorganizator'], 'zz');
+        $I->assertEquals($ent['avtorPE'], 'zz');
 
         // kreiramo še en zapis
         $data       = [
@@ -83,7 +98,7 @@ class ProgramRaznoCest
             'mesecPE'         => 'aa',
             'vrednostPE'      => 2.23,
             'stPE'            => 2,
-            'soorganizator'   => 'aa',
+            'soorganizator'   => null,
             'stObiskovalcev'  => 2,
             'stZaposlenih'    => 2,
             'stHonoranih'     => 2,
@@ -95,7 +110,7 @@ class ProgramRaznoCest
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['soorganizator'], 'aa');
+        $I->assertEquals($ent['avtorPE'], 'aa');
     }
 
         /**
@@ -135,7 +150,7 @@ class ProgramRaznoCest
         $I->assertEquals($ent['mesecPE'        ], 'zz');
         $I->assertEquals($ent['vrednostPE'     ], 1.23);
         $I->assertEquals($ent['stPE'           ], 1);
-        $I->assertEquals($ent['soorganizator'  ], 'zz');
+        $I->assertEquals($ent['soorganizator'  ], $this->lookPopa1['id']);
         $I->assertEquals($ent['stObiskovalcev' ], 1);
         $I->assertEquals($ent['stZaposlenih'   ], 1);
         $I->assertEquals($ent['stHonoranih'    ], 1);

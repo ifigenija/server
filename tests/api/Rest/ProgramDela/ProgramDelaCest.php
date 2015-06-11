@@ -370,7 +370,33 @@ class ProgramDelaCest
     public function createVecProgramovFestivala(ApiTester $I)
     {
         $data                      = [
-            'programDela' => $this->obj2['id'],
+            'programDela'             => $this->obj2['id'],
+            'naziv'                   => 'zz',
+            'zvrst'                   => 'zz',
+            'stPredstav'              => 1,
+            'stPredavanj'             => 1,
+            'stPredstavitev'          => 1,
+            'stDelavnic'              => 1,
+            'stDrugiDogodki'          => 1,
+            'opredelitevDrugiDogodki' => 'zz',
+            'stProdukcij'             => 1,
+            'stObisk'                 => 1,
+            'casPriprave'             => 'zz',
+            'casIzvedbe'              => 'zz',
+            'prizorisca'              => 'zz',
+            'umetVodja'               => 'zz',
+            'programskoTelo'          => 'zz',
+            'soorganizatorji'         => 'zz',
+            'stTujihSelektorjev'      => 1,
+            'stZaposlenih'            => 1,
+            'stHonorarnih'            => 1,
+            'zaproseno'               => 1.23,
+            'celotnaVrednost'         => 1.23,
+            'lastnaSredstva'          => 1.23,
+            'drugiViri'               => 1.23,
+            'opredelitevDrugiViri'    => 'zz',
+            'vlozekKoproducenta'      => 1.23,
+            'drugiJavni'              => 1.23,
         ];
         $this->objProgramFestival1 = $ent                       = $I->successfullyCreate($this->programFestivalUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -378,6 +404,32 @@ class ProgramDelaCest
         // kreiramo še en zapis
         $data                      = [
             'programDela' => $this->obj2['id'],
+            'naziv'                   => 'aa',
+            'zvrst'                   => 'aa',
+            'stPredstav'              => 2,
+            'stPredavanj'             => 2,
+            'stPredstavitev'          => 2,
+            'stDelavnic'              => 2,
+            'stDrugiDogodki'          => 2,
+            'opredelitevDrugiDogodki' => 'aa',
+            'stProdukcij'             => 2,
+            'stObisk'                 => 2,
+            'casPriprave'             => 'aa',
+            'casIzvedbe'              => 'aa',
+            'prizorisca'              => 'aa',
+            'umetVodja'               => 'aa',
+            'programskoTelo'          => 'aa',
+            'soorganizatorji'         => 'aa',
+            'stTujihSelektorjev'      => 2,
+            'stZaposlenih'            => 2,
+            'stHonorarnih'            => 2,
+            'zaproseno'               => 2.23,
+            'celotnaVrednost'         => 2.23,
+            'lastnaSredstva'          => 2.23,
+            'drugiViri'               => 2.23,
+            'opredelitevDrugiViri'    => 'aa',
+            'vlozekKoproducenta'      => 2.23,
+            'drugiJavni'              => 2.23,
         ];
         $this->objProgramFestival2 = $ent                       = $I->successfullyCreate($this->programFestivalUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -393,21 +445,45 @@ class ProgramDelaCest
     public function createVecProgramovGostovanj(ApiTester $I)
     {
         $data                       = [
-            'transportniStroski' => 1.23,
-            'odkup'              => 1.23,
             'dokument'           => $this->obj2['id'],
-            'gostitelj'          => null,
-        ];
+             'uprizoritev'        => null,
+            'krajGostovanja'     => 'zz',
+            'ustanova'           => 'zz',
+            'datumGostovanja'    => '2011-02-01T00:00:00+0100',
+            'stPonovitev'        => 9,
+            'stGledalcev'        => 9,
+            'zaproseno'          => 9.12,
+            'celotnaVrednost'    => 9.12,
+            'transportniStroski' => 9.12,
+            'stroskiAvtorZun'    => 9.12,
+            'odkup'              => 9.12,
+            'lastnaSredstva'     => 9.12,
+            'drugiViri'          => 9.12,
+            'viriDMinLok'        => 9.12,
+            'gostitelj'          => NULL,
+       ];
         $this->objProgramGostovanj1 = $ent                        = $I->successfullyCreate($this->programGostovanjaUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
         $data                       = [
-            'transportniStroski' => 6.78,
-            'odkup'              => 6.78,
             'dokument'           => $this->obj2['id'],
+             'uprizoritev'        => NULL,
+            'krajGostovanja'     => 'aa',
+            'ustanova'           => 'aa',
+            'datumGostovanja'    => '2011-02-01T00:00:00+0100',
+            'stPonovitev'        => 3,
+            'stGledalcev'        => 3,
+            'zaproseno'          => 3.12,
+            'celotnaVrednost'    => 3.12,
+            'transportniStroski' => 3.12,
+            'stroskiAvtorZun'    => 3.12,
+            'odkup'              => 3.12,
+            'lastnaSredstva'     => 3.12,
+            'drugiViri'          => 3.12,
+            'viriDMinLok'        => 3.12,
             'gostitelj'          => null,
-        ];
+       ];
         $this->objProgramGostovanj2 = $ent                        = $I->successfullyCreate($this->programGostovanjaUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
@@ -430,7 +506,7 @@ class ProgramDelaCest
             'mesecPE'         => 'zz',
             'vrednostPE'      => 1.23,
             'stPE'            => 1,
-            'soorganizator'   => 'zz',
+            'soorganizator'   => null,
             'stObiskovalcev'  => 1,
             'stZaposlenih'    => 1,
             'stHonoranih'     => 1,
@@ -453,7 +529,7 @@ class ProgramDelaCest
             'mesecPE'         => 'cc',
             'vrednostPE'      => 2.23,
             'stPE'            => 2,
-            'soorganizator'   => 'zz',
+            'soorganizator'   => null,
             'stObiskovalcev'  => 2,
             'stZaposlenih'    => 2,
             'stHonoranih'     => 2,

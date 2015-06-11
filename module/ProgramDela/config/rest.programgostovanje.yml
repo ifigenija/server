@@ -6,8 +6,20 @@ forms:
     default: 
         elements:
 #            - id
+            - uprizoritev
+            - krajGostovanja
+            - ustanova
+            - datumGostovanja
+            - stPonovitev
+            - stGledalcev
+            - zaproseno
+            - celotnaVrednost
             - transportniStroski
+            - stroskiAvtorZun
             - odkup
+            - lastnaSredstva
+            - drugiViri
+            - viriDMinLok
             - dokument
             - gostitelj
 lists:

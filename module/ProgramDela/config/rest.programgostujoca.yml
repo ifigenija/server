@@ -24,7 +24,6 @@ forms:
             - utemeljitev
             - uprizoritev
 #            - tipProgramskeEnote
-            - tip
             - dokument
 lists:
     default: 

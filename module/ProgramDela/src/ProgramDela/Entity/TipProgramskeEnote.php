@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM,
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\TipiProgramskeEnote")
+ * @Max\Lookup
  * @Max\I18n(label="Tip programske enote",plural="Tipi programske enote")
  * @Max\Id(prefix="0043") 
  */
