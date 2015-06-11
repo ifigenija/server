@@ -23,8 +23,6 @@
 #    name: EnotaPrograma-write
 #    description: EnotaPrograma - spreminjanje
 
-
-# polavtomatsko:
 -
     name: Abonma-read
     description: Abonma - branje
@@ -257,11 +255,18 @@
     description: ProgramIzjemni - spreminjanje
 
 -
-    name: ProgramPonovitev-read
-    description: ProgramPonovitev - branje
+    name: ProgramPonovitevPrejsnjih-read
+    description: ProgramPonovitevPrejsnjih - branje
 -
-    name: ProgramPonovitev-write
-    description: ProgramPonovitev - spreminjanje
+    name: ProgramPonovitevPrejsnjih-write
+    description: ProgramPonovitevPrejsnjih - spreminjanje
+
+-
+    name: ProgramPonovitevPremiere-read
+    description: ProgramPonovitevPremiere - branje
+-
+    name: ProgramPonovitevPremiere-write
+    description: ProgramPonovitevPremiere - spreminjanje
 
 -
     name: ProgramPremiera-read
@@ -269,6 +274,13 @@
 -
     name: ProgramPremiera-write
     description: ProgramPremiera - spreminjanje
+
+-
+    name: ProgramRazno-read
+    description: ProgramRazno - branje
+-
+    name: ProgramRazno-write
+    description: ProgramRazno - spreminjanje
 
 -
     name: Prostor-read
@@ -290,13 +302,6 @@
 -
     name: RazpisanSedez-write
     description: RazpisanSedez - spreminjanje
-
--
-    name: Readme-read
-    description: Readme - branje
--
-    name: Readme-write
-    description: Readme - spreminjanje
 
 -
     name: Rekviziterstvo-read
