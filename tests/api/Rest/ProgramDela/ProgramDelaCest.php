@@ -59,6 +59,11 @@ class ProgramDelaCest
     private $objProgramFestival2;
     private $objProgramRazno1;
     private $objProgramRazno2;
+        private $uprizoritevUrl        = '/rest/uprizoritev';
+    private $lookUprizoritev;
+    private $tipProgramskeEnoteUrl = '/rest/tipprogramskeenote';
+    private $lookTipProgramskeEnote;
+
 
     public function _before(ApiTester $I)
     {
@@ -68,6 +73,25 @@ class ProgramDelaCest
     public function _after(ApiTester $I)
     {
         
+    }
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookuptipProgramskeEnote(ApiTester $I)
+    {
+        $this->lookTipProgramskeEnote = $look                         = $I->lookupEntity("tipProgramskeEnote", "01", false);
+        $I->assertNotEmpty($look);
     }
 
     /**
@@ -224,6 +248,7 @@ class ProgramDelaCest
      */
     public function createVecEnotPrograma(ApiTester $I)
     {
+        codecept_debug($this->obj2);
         //premiera
         $data                      = [
             'celotnaVrednost'    => 1.23,
@@ -231,8 +256,8 @@ class ProgramDelaCest
             'lastnaSredstva'     => 1.23,
             'avtorskiHonorarji'  => 1.23,
             'tantieme'           => 1.23,
-            'drugiViri'          => 1.23,
-            'drugiJavni'         => 1.23,
+            'drugiViri'          => 1.23, 
+           'drugiJavni'         => 1.23,
             'obiskDoma'          => 1,
             'obiskGost'          => 1,
             'obiskZamejo'        => 1,
@@ -243,7 +268,7 @@ class ProgramDelaCest
             'ponoviInt'          => 1,
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => $this->obj2['id'],
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
             'tip'                => 'premiera',
             'dokument'           => $this->obj2['id'],
         ];
@@ -270,7 +295,7 @@ class ProgramDelaCest
             'ponoviInt'          => 1,
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => $this->obj2['id'],
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
             'tip'                => 'ponovitev',
             'dokument'           => $this->obj2['id'],
         ];
@@ -297,7 +322,7 @@ class ProgramDelaCest
             'ponoviInt'          => 1,
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => $this->obj2['id'],
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
             'tip'                => 'ponovitev',
             'dokument'           => $this->obj2['id'],
         ];
@@ -324,7 +349,7 @@ class ProgramDelaCest
             'ponoviInt'          => 1,
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => $this->obj2['id'],
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
             'tip'                => 'izjemni',
             'dokument'           => $this->obj2['id'],
         ];
@@ -351,7 +376,7 @@ class ProgramDelaCest
             'ponoviInt'          => 1,
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => $this->obj2['id'],
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
             'tip'                => 'gostujoca',
             'dokument'           => $this->obj2['id'],
         ];

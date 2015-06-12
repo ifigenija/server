@@ -32,6 +32,11 @@ class ProgramIzjemniCest
     private $restUrl = '/rest/programizjemni';
     private $obj1;
     private $obj2;
+        private $uprizoritevUrl        = '/rest/uprizoritev';
+    private $lookUprizoritev;
+    private $tipProgramskeEnoteUrl = '/rest/tipprogramskeenote';
+    private $lookTipProgramskeEnote;
+
 
     public function _before(ApiTester $I)
     {
@@ -43,6 +48,27 @@ class ProgramIzjemniCest
         
     }
 
+        /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookuptipProgramskeEnote(ApiTester $I)
+    {
+        $this->lookTipProgramskeEnote = $look                         = $I->lookupEntity("tipProgramskeEnote", "01", false);
+        $I->assertNotEmpty($look);
+    }
+
+    
     /**
      *  kreiramo zapis
      * 
@@ -69,8 +95,8 @@ class ProgramIzjemniCest
             'ponoviInt'          => 1,
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => NULL,
-            'dokument'           => null,
+                'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
+        'dokument'           => null,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -95,8 +121,8 @@ class ProgramIzjemniCest
             'ponoviInt'          => 4,
             'utemeljitev'        => 'aa',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => NULL,
-            'dokument'           => null,
+                'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
+        'dokument'           => null,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -147,7 +173,8 @@ class ProgramIzjemniCest
         $I->assertEquals($ent['ponoviInt'], 1);
         $I->assertEquals($ent['utemeljitev'], 'zz');
         $I->assertEquals($ent['uprizoritev'], NULL);
-        $I->assertEquals($ent['tipProgramskeEnote'], NULL);
+        $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
+
         $I->assertEquals($ent['dokument'], null);
     }
 

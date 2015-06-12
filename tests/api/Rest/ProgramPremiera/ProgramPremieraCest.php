@@ -121,7 +121,7 @@ class ProgramPremieraCest
 //            'ponoviInt'          => 4,
             'utemeljitev'        => 'aa',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => NULL,
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
             'dokument'           => null,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -173,7 +173,7 @@ class ProgramPremieraCest
 //        $I->assertEquals($ent['ponoviInt'          ],1 );
         $I->assertEquals($ent['utemeljitev'], 'zz');
         $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev['id']);
-        $I->assertEquals($ent['tipProgramskeEnote']['id'], $this->lookTipProgramskeEnote['id']);
+        $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
         $I->assertEquals($ent['dokument'], null);
     }
 

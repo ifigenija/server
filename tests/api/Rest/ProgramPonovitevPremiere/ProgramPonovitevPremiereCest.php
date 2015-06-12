@@ -29,9 +29,13 @@ use ApiTester;
 class ProgramPonovitevPremiereCest
 {
 
-    private $restUrl = '/rest/programponovitevpremiere';
+    private $restUrl               = '/rest/programponovitevpremiere';
     private $obj1;
     private $obj2;
+    private $uprizoritevUrl        = '/rest/uprizoritev';
+    private $lookUprizoritev;
+    private $tipProgramskeEnoteUrl = '/rest/tipprogramskeenote';
+    private $lookTipProgramskeEnote;
 
     public function _before(ApiTester $I)
     {
@@ -41,6 +45,26 @@ class ProgramPonovitevPremiereCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookuptipProgramskeEnote(ApiTester $I)
+    {
+        $this->lookTipProgramskeEnote = $look                         = $I->lookupEntity("tipProgramskeEnote", "01", false);
+        $I->assertNotEmpty($look);
     }
 
     /**
@@ -69,7 +93,7 @@ class ProgramPonovitevPremiereCest
             'ponoviInt'          => 1,
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => NULL,
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
             'dokument'           => null,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -95,7 +119,7 @@ class ProgramPonovitevPremiereCest
             'ponoviInt'          => 4,
             'utemeljitev'        => 'aa',
             'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => NULL,
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
             'dokument'           => null,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -111,8 +135,8 @@ class ProgramPonovitevPremiereCest
      */
     public function update(ApiTester $I)
     {
-        $ent              = $this->obj1;
-        $ent['zaproseno'] = 2.34;
+        $ent                       = $this->obj1;
+        $ent['zaproseno']          = 2.34;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
@@ -147,7 +171,7 @@ class ProgramPonovitevPremiereCest
         $I->assertEquals($ent['ponoviInt'], 1);
         $I->assertEquals($ent['utemeljitev'], 'zz');
         $I->assertEquals($ent['uprizoritev'], NULL);
-        $I->assertEquals($ent['tipProgramskeEnote'], NULL);
+        $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
         $I->assertEquals($ent['dokument'], null);
     }
 
