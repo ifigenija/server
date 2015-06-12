@@ -59,11 +59,11 @@ class ProgramDelaCest
     private $objProgramFestival2;
     private $objProgramRazno1;
     private $objProgramRazno2;
-        private $uprizoritevUrl        = '/rest/uprizoritev';
-    private $lookUprizoritev;
-    private $tipProgramskeEnoteUrl = '/rest/tipprogramskeenote';
+    private $uprizoritevUrl               = '/rest/uprizoritev';
+    private $lookUprizoritev1;
+    private $lookUprizoritev2;
+    private $tipProgramskeEnoteUrl        = '/rest/tipprogramskeenote';
     private $lookTipProgramskeEnote;
-
 
     public function _before(ApiTester $I)
     {
@@ -74,13 +74,17 @@ class ProgramDelaCest
     {
         
     }
+
     /**
      * 
      * @param ApiTester $I
      */
     public function lookupUprizoritev(ApiTester $I)
     {
-        $this->lookUprizoritev = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
+        $this->lookUprizoritev1 = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
+
+        $this->lookUprizoritev2 = $look                  = $I->lookupEntity("uprizoritev", "0002", false);
         $I->assertNotEmpty($look);
     }
 
@@ -212,14 +216,14 @@ class ProgramDelaCest
         $I->assertNotEmpty($list);
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
     }
-    
+
     /**
      * @depends create
      * @param ApiTester $I
      */
     public function getListSeznam(ApiTester $I)
     {
-        $listUrl = $this->restUrl. "/seznam";
+        $listUrl = $this->restUrl . "/seznam";
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
@@ -256,8 +260,8 @@ class ProgramDelaCest
             'lastnaSredstva'     => 1.23,
             'avtorskiHonorarji'  => 1.23,
             'tantieme'           => 1.23,
-            'drugiViri'          => 1.23, 
-           'drugiJavni'         => 1.23,
+            'drugiViri'          => 1.23,
+            'drugiJavni'         => 1.23,
             'obiskDoma'          => 1,
             'obiskGost'          => 1,
             'obiskZamejo'        => 1,
@@ -269,7 +273,6 @@ class ProgramDelaCest
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
             'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
-            'tip'                => 'premiera',
             'dokument'           => $this->obj2['id'],
         ];
         $this->objProgramPremiera1 = $ent                       = $I->successfullyCreate($this->programPremieraUrl, $data);
@@ -296,7 +299,6 @@ class ProgramDelaCest
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
             'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
-            'tip'                => 'ponovitev',
             'dokument'           => $this->obj2['id'],
         ];
         $this->objProgramPonovitevPremiere1 = $ent                                = $I->successfullyCreate($this->programPonovitevPremiereUrl, $data);
@@ -323,7 +325,6 @@ class ProgramDelaCest
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
             'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
-            'tip'                => 'ponovitev',
             'dokument'           => $this->obj2['id'],
         ];
         $this->objProgramPonovitevPrejsnjih1 = $ent                                 = $I->successfullyCreate($this->programPonovitevPrejsnjihUrl, $data);
@@ -350,7 +351,6 @@ class ProgramDelaCest
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
             'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
-            'tip'                => 'izjemni',
             'dokument'           => $this->obj2['id'],
         ];
         $this->objProgramIzjemni1 = $ent                      = $I->successfullyCreate($this->programIzjemniUrl, $data);
@@ -377,7 +377,6 @@ class ProgramDelaCest
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
             'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
-            'tip'                => 'gostujoca',
             'dokument'           => $this->obj2['id'],
         ];
         $this->objProgramGostujoca1 = $ent                        = $I->successfullyCreate($this->programGostujocaUrl, $data);
@@ -428,7 +427,7 @@ class ProgramDelaCest
 
         // kreiramo še en zapis
         $data                      = [
-            'programDela' => $this->obj2['id'],
+            'programDela'             => $this->obj2['id'],
             'naziv'                   => 'aa',
             'zvrst'                   => 'aa',
             'stPredstav'              => 2,
@@ -471,7 +470,7 @@ class ProgramDelaCest
     {
         $data                       = [
             'dokument'           => $this->obj2['id'],
-             'uprizoritev'        => null,
+            'uprizoritev'        => null,
             'krajGostovanja'     => 'zz',
             'ustanova'           => 'zz',
             'datumGostovanja'    => '2011-02-01T00:00:00+0100',
@@ -486,14 +485,14 @@ class ProgramDelaCest
             'drugiViri'          => 9.12,
             'viriDMinLok'        => 9.12,
             'gostitelj'          => NULL,
-       ];
+        ];
         $this->objProgramGostovanj1 = $ent                        = $I->successfullyCreate($this->programGostovanjaUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
         $data                       = [
             'dokument'           => $this->obj2['id'],
-             'uprizoritev'        => NULL,
+            'uprizoritev'        => NULL,
             'krajGostovanja'     => 'aa',
             'ustanova'           => 'aa',
             'datumGostovanja'    => '2011-02-01T00:00:00+0100',
@@ -508,7 +507,7 @@ class ProgramDelaCest
             'drugiViri'          => 3.12,
             'viriDMinLok'        => 3.12,
             'gostitelj'          => null,
-       ];
+        ];
         $this->objProgramGostovanj2 = $ent                        = $I->successfullyCreate($this->programGostovanjaUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
@@ -655,6 +654,92 @@ class ProgramDelaCest
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "programiRazno", $this->objProgramRazno1['id']);
         $I->assertGreaterThanOrEqual(1, count($resp));
+    }
+
+    /**
+     *  Testiramo ali dovoli le 1 programpremiere z isto uprizoritvijo
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecProgramovPremierZIstoUprizoritvijo(ApiTester $I)
+    {
+        codecept_debug( $this->lookUprizoritev1);
+        //premiera
+        $data = [
+            'celotnaVrednost'    => 22.23,
+            'zaproseno'          => 22.23,
+            'lastnaSredstva'     => 22.23,
+            'avtorskiHonorarji'  => 22.23,
+            'tantieme'           => 22.23,
+            'drugiViri'          => 22.23,
+            'drugiJavni'         => 22.23,
+            'obiskDoma'          => 22,
+            'obiskGost'          => 22,
+            'obiskZamejo'        => 22,
+            'obiskInt'           => 22,
+            'ponoviDoma'         => 22,
+            'ponoviZamejo'       => 22,
+            'ponoviGost'         => 22,
+            'ponoviInt'          => 22,
+            'utemeljitev'        => 'dd',
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
+            'dokument'           => $this->obj2['id'],
+            'uprizoritev'        => $this->lookUprizoritev1['id'],       // ista uprizoritev
+        ];
+        $ent  = $I->successfullyCreate($this->programPremieraUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // poizkusimo kreirati še en zapis z isto uprizoritvijo
+        $data = [
+            'celotnaVrednost'    => 33.23,
+            'zaproseno'          => 33.23,
+            'lastnaSredstva'     => 33.23,
+            'avtorskiHonorarji'  => 33.23,
+            'tantieme'           => 33.23,
+            'drugiViri'          => 33.23,
+            'drugiJavni'         => 33.23,
+            'obiskDoma'          => 33,
+            'obiskGost'          => 33,
+            'obiskZamejo'        => 33,
+            'obiskInt'           => 33,
+            'ponoviDoma'         => 33,
+            'ponoviZamejo'       => 33,
+            'ponoviGost'         => 33,
+            'ponoviInt'          => 33,
+            'utemeljitev'        => 'ee',
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
+            'dokument'           => $this->obj2['id'],
+            'uprizoritev'        => $this->lookUprizoritev1['id'],       // ista uprizoritev
+        ];
+        $resp=$I->failToCreate($this->programPremieraUrl, $data);
+        $I->assertEquals(1000440, $resp[0]['code']);
+
+        // kreiranje zapisa z drugo uprizoritvijo mora uspeti:
+        $data = [
+            'celotnaVrednost'    => 33.23,
+            'zaproseno'          => 33.23,
+            'lastnaSredstva'     => 33.23,
+            'avtorskiHonorarji'  => 33.23,
+            'tantieme'           => 33.23,
+            'drugiViri'          => 33.23,
+            'drugiJavni'         => 33.23,
+            'obiskDoma'          => 33,
+            'obiskGost'          => 33,
+            'obiskZamejo'        => 33,
+            'obiskInt'           => 33,
+            'ponoviDoma'         => 33,
+            'ponoviZamejo'       => 33,
+            'ponoviGost'         => 33,
+            'ponoviInt'          => 33,
+            'utemeljitev'        => 'ee',
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
+            'dokument'           => $this->obj2['id'],
+            'uprizoritev'        => $this->lookUprizoritev2['id'],       // ista uprizoritev
+        ];
+        $ent  = $I->successfullyCreate($this->programPremieraUrl, $data);
+        $I->assertNotEmpty($ent['id']);
     }
 
 }

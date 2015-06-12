@@ -4,6 +4,7 @@ namespace ProgramDela\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiPremiere")
@@ -25,6 +26,19 @@ class ProgramPremiera
 
     public function validate($mode = 'update')
     {
+        if ($this->getDokument()) {
+            // preveriti, ali že obstaja programpremiere z isto uprizoritvijo
+            $obstaja = true;  //init
+            if ($this->getDokument()->getPremiere()) {
+                $obstaja = $this->getDokument()
+                        ->getPremiere()
+                        ->exists(function($key, $progPremiere) {
+                    return $progPremiere->getUprizoritev() == $this->getUprizoritev();     //vrne true, če obstaja programpremiere z isto uprizoritvijo
+                });
+                $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000440);
+            }
+        }
+
         // neaktualna polja, ki jih tudi v formi ni:
         $this->setObiskDoma(0);
         $this->setObiskGost(0);
@@ -34,7 +48,7 @@ class ProgramPremiera
         $this->setPonoviZamejo(0);
         $this->setPonoviGost(0);
         $this->setPonoviInt(0);
-        
+
         parent::validate();
     }
 
