@@ -23,6 +23,7 @@ forms:
             - lastnaSredstva
             - drugiViri
             - viriDMinLok
+            - sort
         hydrator:
             byValue: [ soorganizator ]
 lists:

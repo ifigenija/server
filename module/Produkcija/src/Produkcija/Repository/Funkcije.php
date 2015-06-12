@@ -26,7 +26,7 @@ class Funkcije
             "sort" => ["alias" => "p.sort"]
         ],
         "vse"     => [
-            "sort" => ["alias" => "p.naziv"]
+            "sort" => ["alias" => "p.sort"]
         ]
     ];
 

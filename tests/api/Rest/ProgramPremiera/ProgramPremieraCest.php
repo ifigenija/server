@@ -97,6 +97,7 @@ class ProgramPremieraCest
             'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
             'dokument'           => null,
+            'sort'           => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -123,6 +124,7 @@ class ProgramPremieraCest
             'uprizoritev'        => NULL,
             'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
             'dokument'           => null,
+            'sort'           => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -175,6 +177,7 @@ class ProgramPremieraCest
         $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev['id']);
         $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
         $I->assertEquals($ent['dokument'], null);
+        $I->assertEquals($ent['sort'], 1,"sort");
     }
 
     /**

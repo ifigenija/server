@@ -23,11 +23,11 @@ class ProgramiRazno
 
     protected $sortOptions = [
         "default" => [
-            "id" => ["alias" => "p.id"]
+            "sort" => ["alias" => "p.sort"]
         ],
         "vse"     => [
-            "id" => ["alias" => "p.id"]
-        ],
+            "sort" => ["alias" => "p.sort"]
+        ]
     ];
 
     public function getPaginator(array $options, $name = "default")

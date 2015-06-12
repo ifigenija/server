@@ -29,14 +29,13 @@ use ApiTester;
 class ProgramIzjemniCest
 {
 
-    private $restUrl = '/rest/programizjemni';
+    private $restUrl               = '/rest/programizjemni';
     private $obj1;
     private $obj2;
-        private $uprizoritevUrl        = '/rest/uprizoritev';
+    private $uprizoritevUrl        = '/rest/uprizoritev';
     private $lookUprizoritev;
     private $tipProgramskeEnoteUrl = '/rest/tipprogramskeenote';
     private $lookTipProgramskeEnote;
-
 
     public function _before(ApiTester $I)
     {
@@ -48,7 +47,7 @@ class ProgramIzjemniCest
         
     }
 
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
@@ -68,7 +67,6 @@ class ProgramIzjemniCest
         $I->assertNotEmpty($look);
     }
 
-    
     /**
      *  kreiramo zapis
      * 
@@ -95,8 +93,9 @@ class ProgramIzjemniCest
             'ponoviInt'          => 1,
             'utemeljitev'        => 'zz',
             'uprizoritev'        => NULL,
-                'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
-        'dokument'           => null,
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
+            'dokument'           => null,
+            'sort'           => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -121,8 +120,9 @@ class ProgramIzjemniCest
             'ponoviInt'          => 4,
             'utemeljitev'        => 'aa',
             'uprizoritev'        => NULL,
-                'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
-        'dokument'           => null,
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
+            'dokument'           => null,
+            'sort'           => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -176,6 +176,7 @@ class ProgramIzjemniCest
         $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
 
         $I->assertEquals($ent['dokument'], null);
+        $I->assertEquals($ent['sort'], 1,"sort");
     }
 
     /**

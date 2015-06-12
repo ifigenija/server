@@ -78,6 +78,7 @@ class ProgramFestivalCest
             'opredelitevDrugiViri'    => 'zz',
             'vlozekKoproducenta'      => 1.23,
             'drugiJavni'              => 1.23,
+            'sort'              => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -112,6 +113,7 @@ class ProgramFestivalCest
             'opredelitevDrugiViri'    => 'aa',
             'vlozekKoproducenta'      => 2.23,
             'drugiJavni'              => 2.23,
+            'sort'              => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -172,6 +174,7 @@ class ProgramFestivalCest
         $I->assertEquals($ent['opredelitevDrugiViri'], 'zz');
         $I->assertEquals($ent['vlozekKoproducenta'], 1.23);
         $I->assertEquals($ent['drugiJavni'], 1.23);
+        $I->assertEquals($ent['sort'], 1);
     }
 
     /**

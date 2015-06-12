@@ -94,6 +94,7 @@ class ProgramGostovanjeCest
             'drugiViri'          => 9.12,
             'viriDMinLok'        => 9.12,
             'gostitelj'          => $this->lookPopa1['id'],
+            'sort'          => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -117,6 +118,7 @@ class ProgramGostovanjeCest
             'drugiViri'          => 3.12,
             'viriDMinLok'        => 3.12,
             'gostitelj'          => null,
+            'sort'          => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -166,6 +168,7 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['viriDMinLok'], 9.12);
         $I->assertEquals($ent['dokument'], NULL);
         $I->assertEquals($ent['gostitelj']['id'], $this->lookPopa1['id']);
+        $I->assertEquals($ent['sort'], 1);
     }
 
     /**

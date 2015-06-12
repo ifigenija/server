@@ -230,6 +230,14 @@ class ProgramFestival
      */
     private $drugiJavni;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="entiteta.sort", description="ep.d.sort")
+     * @Max\Ui(type="integer", icon="fa fa-sort")
+     * @var integer
+     */
+    private $sort;
+
     public function validate($mode = 'update')
     {
         
@@ -542,5 +550,16 @@ class ProgramFestival
         $this->drugiJavni = $drugiJavni;
         return $this;
     }
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    public function setSort($sort)
+    {
+        $this->sort = $sort;
+        return $this;
+    }
+
 
 }

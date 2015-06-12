@@ -39,56 +39,56 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.celotnaVrednost", description="Celotna vrednost")   
+     * @Max\I18n(label="ep.celotnaVrednost", description="Celotna vrednost")   
      * @var double
      */
     private $celotnaVrednost;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.zaproseno", description="Zaprošeno")   
+     * @Max\I18n(label="ep.zaproseno", description="Zaprošeno")   
      * @var double
      */
     private $zaproseno;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.lastnaSredstva", description="Lastna sredstva")   
+     * @Max\I18n(label="ep.lastnaSredstva", description="Lastna sredstva")   
      * @var double
      */
     private $lastnaSredstva;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2,options={"default":0})
-     * @Max\I18n(label="enotaPrograma.avtorskiHonorarji", description="Avtorski honorarji")   
+     * @Max\I18n(label="ep.avtorskiHonorarji", description="Avtorski honorarji")   
      * @var double
      */
     private $avtorskiHonorarji;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.tantieme", description="Tantieme")   
+     * @Max\I18n(label="ep.tantieme", description="Tantieme")   
      * @var double
      */
     private $tantieme;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.drugiViri", description="Drugi viri")   
+     * @Max\I18n(label="ep.drugiViri", description="Drugi viri")   
      * @var double
      */
     private $drugiViri;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.drugiJavni", description="Drugi javni")   
+     * @Max\I18n(label="ep.drugiJavni", description="Drugi javni")   
      * @var double
      */
     private $drugiJavni;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.obiskDoma", description="Obisk doma")   
+     * @Max\I18n(label="ep.obiskDoma", description="Obisk doma")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -96,7 +96,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.obiskGost", description="Obisk gost")   
+     * @Max\I18n(label="ep.obiskGost", description="Obisk gost")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -104,7 +104,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.obiskZamejo", description="Obisk za mejo")   
+     * @Max\I18n(label="ep.obiskZamejo", description="Obisk za mejo")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -112,7 +112,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.obiskInt", description="Obisk internacionalni")   
+     * @Max\I18n(label="ep.obiskInt", description="Obisk internacionalni")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -120,7 +120,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":" 0"})
-     * @Max\I18n(label="enotaPrograma.ponoviDoma", description="Ponovi doma")   
+     * @Max\I18n(label="ep.ponoviDoma", description="Ponovi doma")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -128,7 +128,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.ponoviZamejo", description="Ponovi za mejo")   
+     * @Max\I18n(label="ep.ponoviZamejo", description="Ponovi za mejo")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -136,7 +136,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.ponoviGost", description="Ponovi gost")   
+     * @Max\I18n(label="ep.ponoviGost", description="Ponovi gost")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -144,7 +144,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="enotaPrograma.ponoviInt", description="Ponovi internacionalno")   
+     * @Max\I18n(label="ep.ponoviInt", description="Ponovi internacionalno")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -152,14 +152,14 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="text", nullable=false)
-     * @Max\I18n(label="enotaPrograma.utemeljitev", description="Utemeljitev")   
+     * @Max\I18n(label="ep.utemeljitev", description="Utemeljitev")   
      * @var string     
      */
     private $utemeljitev;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev")
-     * @Max\I18n(label="enotaPrograma.uprizoritev", description="Uprizoritev")   
+     * @Max\I18n(label="ep.uprizoritev", description="Uprizoritev")   
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Uprizoritev
      */
@@ -167,12 +167,22 @@ class EnotaPrograma
 
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\TipProgramskeEnote", inversedBy="enotePrograma")
-     * @Max\I18n(label="enotaPrograma.tipProgramskeEnote", description="Tip programske enote")   
+     * @Max\I18n(label="ep.tipProgramskeEnote", description="Tip programske enote")   
      * @Max\Ui(type="select")
      * @var \ProgramDela\Entity\TipProgramskeEnote
      */
     private $tipProgramskeEnote;
 
+    
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="entiteta.sort", description="ep.d.sort")
+     * @Max\Ui(type="integer", icon="fa fa-sort")
+     * @var integer
+     */
+    private $sort;
+    
+    
     public function validate($mode = 'update')
     {
         
@@ -386,5 +396,17 @@ class EnotaPrograma
         $this->tipProgramskeEnote = $tipProgramskeEnote;
         return $this;
     }
+
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    public function setSort($sort)
+    {
+        $this->sort = $sort;
+        return $this;
+    }
+
 
 }

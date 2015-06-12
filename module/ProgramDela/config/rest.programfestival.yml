@@ -33,6 +33,7 @@ forms:
             - opredelitevDrugiViri
             - vlozekKoproducenta
             - drugiJavni
+            - sort
 lists:
     default: 
         hydrator:

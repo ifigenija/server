@@ -25,7 +25,8 @@ forms:
             - uprizoritev
             - tipProgramskeEnote
             - dokument
-        hydrator:
+            - sort
+    hydrator:
             lookups: 
                 - uprizoritev
 lists:

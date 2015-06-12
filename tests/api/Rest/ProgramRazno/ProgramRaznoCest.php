@@ -82,6 +82,7 @@ class ProgramRaznoCest
             'lastnaSredstva'  => 1.23,
             'drugiViri'       => 1.23,
             'viriDMinLok'     => 1.23,
+            'sort'  => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -106,6 +107,7 @@ class ProgramRaznoCest
             'lastnaSredstva'  => 2.23,
             'drugiViri'       => 2.23,
             'viriDMinLok'     => 2.23,
+            'sort'  => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -156,6 +158,7 @@ class ProgramRaznoCest
         $I->assertEquals($ent['lastnaSredstva'], 1.23);
         $I->assertEquals($ent['drugiViri'], 1.23);
         $I->assertEquals($ent['viriDMinLok'], 1.23);
+        $I->assertEquals($ent['sort'], 1,'sort');
     }
 
     /**

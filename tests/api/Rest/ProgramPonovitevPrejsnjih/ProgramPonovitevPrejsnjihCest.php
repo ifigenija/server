@@ -96,6 +96,7 @@ class ProgramPonovitevPrejsnjihCest
             'uprizoritev'        => NULL,
              'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
             'dokument'           => null,
+            'sort'           => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -122,6 +123,7 @@ class ProgramPonovitevPrejsnjihCest
             'uprizoritev'        => NULL,
              'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
             'dokument'           => null,
+            'sort'           => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -173,6 +175,7 @@ class ProgramPonovitevPrejsnjihCest
         $I->assertEquals($ent['utemeljitev'], 'zz');
         $I->assertEquals($ent['uprizoritev'], NULL);
         $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
+        $I->assertEquals($ent['sort'], 1,'sort');
 
         $I->assertEquals($ent['dokument'], null);
     }

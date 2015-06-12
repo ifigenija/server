@@ -150,6 +150,14 @@ class ProgramGostovanje
      */
     private $gostitelj;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="entiteta.sort", description="ep.d.sort")
+     * @Max\Ui(type="integer", icon="fa fa-sort")
+     * @var integer
+     */
+    private $sort;
+
     public function validate($mode = 'update')
     {
         
@@ -339,6 +347,17 @@ class ProgramGostovanje
     public function setGostitelj(\App\Entity\Popa $gostitelj)
     {
         $this->gostitelj = $gostitelj;
+        return $this;
+    }
+
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    public function setSort($sort)
+    {
+        $this->sort = $sort;
         return $this;
     }
 

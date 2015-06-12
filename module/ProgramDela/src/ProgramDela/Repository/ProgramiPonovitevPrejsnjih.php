@@ -23,10 +23,10 @@ class ProgramiPonovitevPrejsnjih
 
     protected $sortOptions = [
         "default" => [
-            "id" => ["alias" => "p.id"]
+            "sort" => ["alias" => "p.sort"]
         ],
         "vse"     => [
-            "id" => ["alias" => "p.id"]
+            "sort" => ["alias" => "p.sort"]
         ],
     ];
 

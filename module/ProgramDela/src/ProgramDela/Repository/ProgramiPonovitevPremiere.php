@@ -5,12 +5,12 @@
  */
 
 namespace ProgramDela\Repository;
+
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineModule\Paginator\Adapter\Selectable;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
-
 
 /**
  * Description of ProgramiPonovitevPremiere
@@ -23,10 +23,10 @@ class ProgramiPonovitevPremiere
 
     protected $sortOptions = [
         "default" => [
-            "id" => ["alias" => "p.id"]
+            "sort" => ["alias" => "p.sort"]
         ],
         "vse"     => [
-            "id" => ["alias" => "p.id"]
+            "sort" => ["alias" => "p.sort"]
         ],
     ];
 
