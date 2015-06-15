@@ -28,7 +28,7 @@ class Alternacija
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Max\I18n(label="entiteta.sifra", description="Šifra alternacije")
+     * @Max\I18n(label="entiteta.sifra", description="entiteta.sifra")
      * @Max\Ui(type="sifra",ident=true,icon="fa fa-barcode" )
      * @var string
      */
@@ -44,28 +44,28 @@ class Alternacija
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.zacetek", description="Začetni datum")
+     * @Max\I18n(label="entiteta.zacetek", description="entiteta.d.zacetek")
      * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.konec", description="Končni datum")
+     * @Max\I18n(label="entiteta.konec", description="entiteta.d.konec")
      * @var string
      */
     private $konec;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opomba", description="Opomba")
+     * @Max\I18n(label="entiteta.opomba", description="entiteta.opomba")
      * @var string
      */
     private $opomba;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.sort", description="Sort")
+     * @Max\I18n(label="entiteta.sort", description="entiteta.sort")
      * @Max\Ui(type="integer",icon="fa fa-sort")
      * @var integer
      */
@@ -73,7 +73,7 @@ class Alternacija
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="alternacija.privzeti", description="Privzeti")
+     * @Max\I18n(label="alternacija.privzeti", description="alternacija.d.privzeti")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -81,7 +81,7 @@ class Alternacija
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="entiteta.aktivna", description="Aktivna")
+     * @Max\I18n(label="entiteta.aktivna", description="entiteta.d.aktivna")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -97,7 +97,7 @@ class Alternacija
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Funkcija", inversedBy="alternacije")
      * @ORM\JoinColumn(name="funkcija_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.funkcija",  description="Funkcija pri alternaciji")
+     * @Max\I18n(label="entiteta.funkcija",  description="entiteta.funkcija")
      * @Max\Ui(type="toone", required=true);
      * @var \Produkcija\Entity\Funkcija
      */
@@ -106,7 +106,7 @@ class Alternacija
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Zaposlitev", inversedBy="alternacije")
      * @ORM\JoinColumn(name="zaposlitev_id", referencedColumnName="id")
-     * @Max\I18n(label="alternacija.zaposlitev",  description="Zaposlitev")
+     * @Max\I18n(label="alternacija.zaposlitev",  description="alternacija.zaposlitev")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Zaposlitev
      */
@@ -115,7 +115,7 @@ class Alternacija
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="alternacije")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.oseba",  description="Oseba pri alternaciji")
+     * @Max\I18n(label="entiteta.oseba",  description="entiteta.oseba")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */
@@ -123,7 +123,7 @@ class Alternacija
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ProdukcijaDelitev", inversedBy="alternacije")
-     * @Max\I18n(label="alternacija.koprodukcija",  description="Koprodukcija pri alternaciji")
+     * @Max\I18n(label="alternacija.koprodukcija",  description="alternacija.koprodukcija")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\ProdukcijaDelitev
      */
@@ -132,7 +132,7 @@ class Alternacija
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Pogodba", inversedBy="alternacije")
      * @ORM\JoinColumn(name="pogodba_id", referencedColumnName="id")
-     * @Max\I18n(label="alternacija.pogodba",  description="Pogodba pri alternaciji")
+     * @Max\I18n(label="alternacija.pogodba",  description="alternacija.pogodba")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Pogodba
      */
@@ -140,7 +140,7 @@ class Alternacija
 
     /**
      * @ORM\Column(type="boolean", length=1, nullable=true)
-     * @Max\I18n(label="postniNaslov.jeeu", description="Je klient iz EU")
+     * @Max\I18n(label="entiteta.jeeu", description="entiteta.d.jeeu")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */

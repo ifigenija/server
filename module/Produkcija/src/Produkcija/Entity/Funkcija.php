@@ -31,7 +31,7 @@ class Funkcija
      * $$ v validate  se polje povozi, tako, da UI za to verjetno več ne velja
      * 
      * @ORM\Column(type="string", length=20, nullable=true)
-     * @Max\I18n(label="entiteta.podrocje", description="Področje funkcije")
+     * @Max\I18n(label="entiteta.podrocje", description="entiteta.podrocje")
      * @Max\Ui(type="select", opts="funkcija.podrocje")
      * @var string
      */
@@ -43,7 +43,7 @@ class Funkcija
      * inšpecient je vodja ekipe za vsa področja, tehnični vodja le za podrocje=tehnik
      * 
      * @ORM\Column(type="boolean", length=1, nullable=true)
-     * @Max\I18n(label="funkcija.vodjaEkipe", description="Ali je vodja področja")
+     * @Max\I18n(label="funkcija.vodjaEkipe", description="funkcija.d.vodjaEkipe")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -53,7 +53,7 @@ class Funkcija
      * V to polje se vpiše ime funkcije kot npr. Romeo, Julija,Tezej ipd.
      * 
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.naziv", description="Naziv funkcije")
+     * @Max\I18n(label="entiteta.naziv", description="entiteta.naziv")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -64,14 +64,14 @@ class Funkcija
      * kot je tip funkcije, ki je standariziran glede na SLOGI (Slovenski gledališki inštitut) 
      * 
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="funkcija.komentar", description="Komentar funkcije")
+     * @Max\I18n(label="funkcija.komentar", description="funkcija.komentar")
      * @var string
      */
     private $komentar;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="funkcija.velikost", description="Velikost funkcije")
+     * @Max\I18n(label="funkcija.velikost", description="funkcija.velikost")
      * @Max\Ui(type="select", opts="funkcija.velikost")
      * @var string
      */
@@ -84,7 +84,7 @@ class Funkcija
      * Smiselno je, da imajo pomembne funkcije tudi večjo utež oz. sortno vrednost ($sort)
      * 
      * @ORM\Column(type="boolean", nullable=false)
-     * @Max\I18n(label="funkcija.pomembna", description="Ali je funkcija pomembna")
+     * @Max\I18n(label="funkcija.pomembna", description="funkcija.d.pomembna")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -92,7 +92,7 @@ class Funkcija
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.sort", description="Sort funkcije oz. utež")
+     * @Max\I18n(label="entiteta.sort", description="entiteta.sort")
      * @Max\Ui(type="integer", icon="fa fa-sort")
      * @var integer
      */
@@ -129,7 +129,7 @@ class Funkcija
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="funkcije")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id", nullable=false)
-     * @Max\I18n(label="entiteta.uprizoritev",  description="Uprizoritev")
+     * @Max\I18n(label="entiteta.uprizoritev",  description="entiteta.uprizoritev")
      * @Max\Ui(type="hiddenid")
      * @var \Produkcija\Entity\Uprizoritev
      */
@@ -138,7 +138,7 @@ class Funkcija
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Alternacija")
      * @ORM\JoinColumn(name="alternacija_id", referencedColumnName="id") \Produkcija\Entity\Alternacija
-     * @Max\I18n(label="funkcija.privzeti",  description="Privzeta alternacija")
+     * @Max\I18n(label="funkcija.privzeti",  description="funkcija.privzeti")
      * @Max\Ui(type="toone")
      * @var
      */
@@ -153,7 +153,7 @@ class Funkcija
      * tipi funkcij, ki so standarizirani glede na SLOGI (Slovenski gledališki inštitut)
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\TipFunkcije", inversedBy="funkcije", fetch="EAGER")
-     * @Max\I18n(label="funkcija.tipFunkcije",  description="Tip funkcije")
+     * @Max\I18n(label="funkcija.tipFunkcije",  description="funkcija.tipFunkcije")
      * @Max\Ui(type="select")
      * @var \Produkcija\Entity\TipFunkcije
      */

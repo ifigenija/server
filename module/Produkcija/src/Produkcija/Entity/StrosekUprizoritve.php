@@ -26,7 +26,7 @@ class StrosekUprizoritve
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.naziv", description="Naziv stroška")
+     * @Max\I18n(label="entiteta.naziv", description="entiteta.naziv")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -34,28 +34,28 @@ class StrosekUprizoritve
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="strupr.vrednostDo", description="Vrednost do premiere")
+     * @Max\I18n(label="strupr.vrednostDo", description="strupr.vrednostDo")
      * @var double
      */
     private $vrednostDo;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="strupr.vrednostNa", description="Vrednost na ponovitev")
+     * @Max\I18n(label="strupr.vrednostNa", description="strupr.vrednostNa")
      * @var double
      */
     private $vrednostNa;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opis", description="Opis stroška")
+     * @Max\I18n(label="entiteta.opis", description="entiteta.opis")
      * @var string
      */
     private $opis;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.sort", description="Sort")
+     * @Max\I18n(label="entiteta.sort", description="entiteta.sort")
      * @Max\Ui(type="integer",icon="fa fa-sort")
      * @var integer
      */
@@ -64,7 +64,7 @@ class StrosekUprizoritve
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="stroski")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.uprizoritev",  description="Uprizoritev oz. projekt, za katerega je strošek")
+     * @Max\I18n(label="entiteta.uprizoritev",  description="prodel.d.uprizoritev")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Uprizoritev
      */
@@ -73,7 +73,7 @@ class StrosekUprizoritve
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="stroski")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
-     * @Max\I18n(label="strupr.popa",  description="Poslovni partner")
+     * @Max\I18n(label="strupr.popa",  description="strupr.popa")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */

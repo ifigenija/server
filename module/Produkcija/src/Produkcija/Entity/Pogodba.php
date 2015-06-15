@@ -30,7 +30,7 @@ class Pogodba
      * Šifra pogodbe
      *
      * @ORM\Column(unique=true, length=7, nullable=false)
-     * @Max\I18n(label="entiteta.sifra", description="Unikatna šifra pogodbe")
+     * @Max\I18n(label="entiteta.sifra", description="entiteta.d.sifra")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode")
      * @var string
      */
@@ -43,21 +43,21 @@ class Pogodba
      * to bi se prepisalo v vrednost vrednostDoPremiere
      * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="entiteta.vrednostDo", description="vrednost do")
+     * @Max\I18n(label="entiteta.vrednostDo", description="entiteta.vrednostDo")
      * @var double
      */
     private $vrednostDo;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.zacetek", description="začetek pogodbe")
+     * @Max\I18n(label="entiteta.zacetek", description="entiteta.d.zacetek")
      * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.konec", description="konec pogodbe")
+     * @Max\I18n(label="entiteta.konec", description="entiteta.d.konec")
      * @var string
      */
     private $konec;
@@ -66,21 +66,21 @@ class Pogodba
      * 
      * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="pogodba.vrednostVaje", description="Vrednost vaje")   
+     * @Max\I18n(label="pogodba.vrednostVaje", description="pogodba.vrednostVaje")   
      * @var double
      */
     private $vrednostVaje;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=12, scale=2)
-     * @Max\I18n(label="pogodba.vrednostPredstave", description="Vrednost predstave")   
+     * @Max\I18n(label="pogodba.vrednostPredstave", description="pogodba.vrednostPredstave")   
      * @var double
      */
     private $vrednostPredstave;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="pogodba.vrednostUre", description="Vrednost ure")   
+     * @Max\I18n(label="pogodba.vrednostUre", description="pogodba.vrednostUre")   
      * @var double
      */
     private $vrednostUre;
@@ -89,14 +89,14 @@ class Pogodba
      * polje se lahko vpisuje (vrednostDo) ali pa izračuna iz cene na vajo in planiranega števila vaj
      * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="pogodba.vrednostDoPremiere", description="Vrednost pogodbe do premiere")   
+     * @Max\I18n(label="pogodba.vrednostDoPremiere", description="pogodba.vrednostDoPremiere")   
      * @var double
      */
     private $vrednostDoPremiere;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="entiteta.aktivna", description="Ali je pogodba aktivna")   
+     * @Max\I18n(label="entiteta.aktivna", description="entiteta.d.aktivna")   
      * @Max\Ui(type="boolcheckbox")                       
      * @var boolean
      */
@@ -104,7 +104,7 @@ class Pogodba
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="pogodba.zaposlenVDrJz", description="Ali je oseba zaposlena v drugem javnem zavodu")   
+     * @Max\I18n(label="pogodba.zaposlenVDrJz", description="pogodba.d.zaposlenVDrJz")   
      * @Max\Ui(type="boolcheckbox")                       
      * @var boolean
      */
@@ -112,7 +112,7 @@ class Pogodba
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opis", description="Opis pogodbe")   
+     * @Max\I18n(label="entiteta.opis", description="entiteta.opis")   
      * @var string
      */
     private $opis;
@@ -127,7 +127,7 @@ class Pogodba
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="pogodbe")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.oseba",  description="Oseba, s katero je napravljena pogodba")
+     * @Max\I18n(label="entiteta.oseba",  description="entiteta.oseba")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */
@@ -138,7 +138,7 @@ class Pogodba
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="pogodbe")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
-     * @Max\I18n(label="pogodba.popa",  description="Poslovni partner, s katerim je napravljena pogodba")
+     * @Max\I18n(label="pogodba.popa",  description="pogodba.popa")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */
@@ -147,7 +147,7 @@ class Pogodba
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trr")
      * @ORM\JoinColumn(name="trr_id", referencedColumnName="id")
-     * @Max\I18n(label="pogodba.trr",  description="Trr na pogodbi")
+     * @Max\I18n(label="pogodba.trr",  description="pogodba.trr")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Trr
      */
