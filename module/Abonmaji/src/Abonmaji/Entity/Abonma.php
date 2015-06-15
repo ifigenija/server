@@ -27,7 +27,7 @@ class Abonma
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="abonma.stPredstav", description="število predstav abonmaja")
+     * @Max\I18n(label="abonma.stPredstav", description="abonma.stPredstav")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -35,7 +35,7 @@ class Abonma
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="abonma.stKuponov", description="število kuponov abonmaja")
+     * @Max\I18n(label="abonma.stKuponov", description="abonma.stKuponov")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -43,7 +43,7 @@ class Abonma
 
     /**
      * @ORM\Column(type="string", length=40, nullable=true)
-     * @Max\I18n(label="entiteta.ime", description="Ime/naziv abonmaja")
+     * @Max\I18n(label="entiteta.ime", description="entiteta.ime")
      * @Max\Ui(ident=true,type="naziv")
      * @var string
      */
@@ -51,13 +51,13 @@ class Abonma
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opis", description="Opis abonmaja")
+     * @Max\I18n(label="entiteta.opis", description="entiteta.opis")
      */
     private $opis;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.kapaciteta", description="Kapaciteta abonmaja")
+     * @Max\I18n(label="entiteta.kapaciteta", description="entiteta.kapaciteta")
      * @Max\Ui(type="integer")
      * @var integer
      */

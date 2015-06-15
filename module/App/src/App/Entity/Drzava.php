@@ -31,7 +31,7 @@ class Drzava
     /**
      * Šifra države
      * @ORM\Column(unique=true, length=2, nullable=true)
-     * @Max\I18n(label="drzava.sifra",description="ISO koda države")
+     * @Max\I18n(label="drzava.sifra",description="drzava.d.sifra")
      * @Max\Ui(type="sifra",class="sifra",icon="fa fa-flag",ident=true)
      * @var string
      */
@@ -40,7 +40,7 @@ class Drzava
     /**
      * Trimestna iso koda drzave
      * @ORM\Column(unique=true, length=3, nullable=true)
-     * @Max\I18n(label="drzava.sifraDolg",description="Trimestna ISO koda države")
+     * @Max\I18n(label="drzava.sifraDolg",description="drzava.d.sifraDolg")
      * @Max\Ui(type="sifra",class="sifra",icon="fa fa-flag", required=true)
      * @var string
      */
@@ -50,7 +50,7 @@ class Drzava
      * Številčna iso koda drzave
      * @ORM\Column(unique=true, length=3, nullable=true)
      * @var string
-     * @Max\I18n(label="drzava.isoNum",description="Trimestna ISO številčna koda države")
+     * @Max\I18n(label="drzava.isoNum",description="drzava.d.isoNum")
      * @Max\Ui(class="sifra",icon="fa fa-flag", required=true)
      * @var string
      *  */
@@ -59,7 +59,7 @@ class Drzava
     /**
      * Iso Naziv države
      * @ORM\Column(unique=true, length=50, nullable=true)
-     * @Max\I18n(label="drzava.isoNaziv",description="ISO Naziv države")
+     * @Max\I18n(label="drzava.isoNaziv",description="drzava.d.isoNaziv")
      * @var string
      */
     protected $isoNaziv;
@@ -67,7 +67,7 @@ class Drzava
     /**
      * Naziv države
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="entiteta.naziv",description="Naziv države")
+     * @Max\I18n(label="entiteta.naziv",description="entiteta.naziv")
      * @Max\Ui(class="naziv", required=true)
      * @var string
      */
@@ -76,7 +76,7 @@ class Drzava
     /**
      * Naziv države
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opomba",description="Opis")
+     * @Max\I18n(label="entiteta.opomba",description="entiteta.opomba")
      * @var string
      */
     protected $opomba;

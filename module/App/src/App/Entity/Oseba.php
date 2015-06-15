@@ -33,7 +33,7 @@ class Oseba
      * Šifra osebe
      *
      * @ORM\Column(unique=true, length=4, nullable=false)
-     * @Max\I18n(label="entiteta.sifra", description="Unikatna šifra osebe")
+     * @Max\I18n(label="entiteta.sifra", description="entiteta.d.sifra")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode",group="Osnovni podatki")
      * @var string
      */
@@ -43,7 +43,7 @@ class Oseba
      * Naziv kontaktne osebe
      *
      * @ORM\Column(length=40, nullable=true)
-     * @Max\I18n(label="entiteta.naziv", description="Naziv osebe  (g., dr., ga, prof.dr.) ")
+     * @Max\I18n(label="entiteta.naziv", description="oseba.d.naziv")
      * @Max\Ui(type="naziv")  
      * @var string
      */
@@ -51,7 +51,7 @@ class Oseba
 
     /**
      * @ORM\Column(nullable=true)
-     * @Max\I18n(label="entiteta.ime", description="Ime osebe ")
+     * @Max\I18n(label="entiteta.ime", description="entiteta.ime")
      * @Max\Ui(type="naziv")  
      * @var string
      */
@@ -59,7 +59,7 @@ class Oseba
 
     /**
      * @ORM\Column(nullable=true)
-     * @Max\I18n(label="oseba.priimek", description="Priimek osebe ")
+     * @Max\I18n(label="oseba.priimek", description="oseba.priimek")
      * @Max\Ui(type="naziv")  
      * @var string
      */
@@ -67,28 +67,28 @@ class Oseba
 
     /**
      * @ORM\Column(length=40, nullable=true)
-     * @Max\I18n(label="entiteta.funkcija", description="Funkcija osebe ")
+     * @Max\I18n(label="entiteta.funkcija", description="entiteta.d.funkcija")
      * @var string
      */
     private $funkcija;
 
     /**
      * @ORM\Column(nullable=true)
-     * @Max\I18n(label="oseba.srednjeIme", description="Srednje ime osebe ")
+     * @Max\I18n(label="oseba.srednjeIme", description="oseba.srednjeIme")
      * @var string
      */
     private $srednjeIme;
 
     /**
      * @ORM\Column(nullable=true)
-     * @Max\I18n(label="oseba.polnoIme", description="Srednje ime osebe ")
+     * @Max\I18n(label="oseba.polnoIme", description="oseba.d.polnoIme")
      * @var string
      */
     private $polnoIme;
 
     /**
      * @ORM\Column(nullable=true)
-     * @Max\I18n(label="oseba.psevdonim", description="Psevdonim osebe ")
+     * @Max\I18n(label="oseba.psevdonim", description="oseba.psevdonim")
      * @var string
      */
     private $psevdonim;
@@ -122,7 +122,7 @@ class Oseba
 
     /**
      * @ORM\Column(nullable=true)
-     * @Max\I18n(label="oseba.emso", description="Enotna matična številka občana")   
+     * @Max\I18n(label="oseba.emso", description="oseba.d.emso")   
      * @Max\Ui(type="sifra")
      * @var string
      */
@@ -130,7 +130,7 @@ class Oseba
 
     /**
      * @ORM\Column(nullable=true)
-     * @Max\I18n(label="oseba.davcna", description="Davčna številka osebe")   
+     * @Max\I18n(label="oseba.davcna", description="oseba.davcna")   
      * @Max\Ui(type="sifra")
      * @var string
      */
@@ -138,7 +138,7 @@ class Oseba
 
     /**
      * @ORM\Column(type="string", length=1, nullable=true)
-     * @Max\I18n(label="oseba.spol", description="Spol osebe")   
+     * @Max\I18n(label="oseba.spol", description="oseba.spol")   
      * @Max\Ui(type="select",opts="oseba.spol",group="Osnovni podatki",required=true)
      * @var string
      */
@@ -146,28 +146,28 @@ class Oseba
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="oseba.opombe", description="Opombe za osebo")   
+     * @Max\I18n(label="oseba.opombe", description="oseba.opombe")   
      * @var string
      */
     private $opombe;
 
     /**
      * @ORM\Column(nullable=true)
-     * @Max\I18n(label="oseba.drzavljanstvo", description="Državljanstvo osebe")   
+     * @Max\I18n(label="oseba.drzavljanstvo", description="oseba.drzavljanstvo")   
      * @var string
      */
     private $drzavljanstvo;
 
     /**
      * @ORM\Column(nullable=true)
-     * @Max\I18n(label="oseba.drzavaRojstva", description="Država rojstva osebe")   
+     * @Max\I18n(label="oseba.drzavaRojstva", description="oseba.drzavaRojstva")   
      * @var string
      */
     private $drzavaRojstva;
 
     /**
      * @ORM\Column(nullable=true)
-     * @Max\I18n(label="oseba.krajRojstva", description="Kraj rojstva osebe")   
+     * @Max\I18n(label="oseba.krajRojstva", description="oseba.krajRojstva")   
      * @var string
      */
     private $krajRojstva;

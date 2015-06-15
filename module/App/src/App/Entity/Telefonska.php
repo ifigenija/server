@@ -27,7 +27,7 @@ class Telefonska
      * Vrsta telefonske številke - domača 
      * 
      * @ORM\Column(type="string", length=20, nullable=false)
-     * @Max\I18n(label="tel.vrsta", description="Vrsta telefonske številke")   
+     * @Max\I18n(label="tel.vrsta", description="tel.vrsta")   
      * @Max\Ui(type="select", opts="telefonska.vrsta")
      * @var string
      */
@@ -37,7 +37,7 @@ class Telefonska
      * Številka 
      * 
      * @ORM\Column(type="string", length=30, nullable=true)
-     * @Max\I18n(label="entiteta.stevilka", description="Telefonska številka")
+     * @Max\I18n(label="entiteta.stevilka", description="tel.d.stevilka")
      * @Max\Ui(type="sifra")
      * @var string
      */
@@ -47,7 +47,7 @@ class Telefonska
      * A je to privzeta telefonska številka 
      * 
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="tel.privzeta", description="Ali je privzeta telefonska številka")   
+     * @Max\I18n(label="tel.privzeta", description="tel.d.privzeta")   
      * @Max\Ui(type="boolcheckbox",required=false)
      */
     private $privzeta = false;
@@ -57,6 +57,7 @@ class Telefonska
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="telefonske")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
+     * @Max\I18n(label="tel.oseba",  description="tel.d.oseba")
      * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Oseba
      *
@@ -68,7 +69,7 @@ class Telefonska
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="telefonske")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
-     * @Max\I18n(label="Klient",  description="Poslovni partner, ki je ima to telefosnko številko")
+     * @Max\I18n(label="tel.popa",  description="tel.d.popa")
      * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Popa
      */

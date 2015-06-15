@@ -29,7 +29,7 @@ class ZvrstSurs
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Max\I18n(label="entiteta.sifra", description="Šifra zvrsti po SURS-u")
+     * @Max\I18n(label="entiteta.sifra", description="zvrstSurs.d.sifra")
      * @Max\Ui(type="sifra",ident=true, icon="fa fa-barcode")
      * @var string
      */
@@ -37,7 +37,7 @@ class ZvrstSurs
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.naziv", description="Naziv zvrsti po SURS-u")
+     * @Max\I18n(label="entiteta.naziv", description="zvrstSurs.d.naziv")
      * @Max\Ui(type="naziv" )
      * @var string
      */
@@ -46,7 +46,7 @@ class ZvrstSurs
     /**
      * ...
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opis", description="Opis zvrsti")
+     * @Max\I18n(label="entiteta.opis", description="entiteta.opis")
      * @var string
      */
     protected $opis;

@@ -25,7 +25,7 @@ class Trr
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.stevilka", description="Številka bančnega računa")
+     * @Max\I18n(label="entiteta.stevilka", description="trr.d.stevilka")
      * @Max\Ui(type="sifra")
      * @var string
      */
@@ -33,7 +33,7 @@ class Trr
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="trr.swift", description="Swift številka računa")
+     * @Max\I18n(label="trr.swift", description="trr.d.swift")
      * @Max\Ui(type="sifra")
      * @var string
      */
@@ -41,7 +41,7 @@ class Trr
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="trr.bic", description="bic številka računa")
+     * @Max\I18n(label="trr.bic", description="trr.d.bic")
      * @Max\Ui(type="sifra")
      * @var string
      */
@@ -49,7 +49,7 @@ class Trr
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="trr.banka", description="Naziv banke")
+     * @Max\I18n(label="trr.banka", description="trr.d.banka")
      * @Max\Ui(type="sifra",icon="fa fa-university")
      * @var string
      */

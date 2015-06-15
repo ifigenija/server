@@ -28,7 +28,7 @@ class Prostor
     
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Max\I18n(label="entiteta.sifra", description="Enolična Oznaka prostora")
+     * @Max\I18n(label="entiteta.sifra", description="prostor.d.sifra")
      * @Max\Ui(type="sifra",ident=true, icon="fa fa-barcode")
      * @var string
      */
@@ -36,7 +36,7 @@ class Prostor
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Max\I18n(label="entiteta.ime", description="Ime prostora")
+     * @Max\I18n(label="entiteta.naziv", description="entiteta.d.naziv")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -44,7 +44,7 @@ class Prostor
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="prostor.jePrizorisce", description="Ali je prizorišče")
+     * @Max\I18n(label="prostor.jePrizorisce", description="prostor.d.jePrizorisce")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -52,14 +52,14 @@ class Prostor
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.kapaciteta", description="Število mest v prostoru")
+     * @Max\I18n(label="entiteta.kapaciteta", description="prostor.d.kapaciteta")
      * @var integer
      */
     private $kapaciteta;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opis", description="Opis prostora")
+     * @Max\I18n(label="entiteta.opis", description="entiteta.opis")
      * @var string
      */
     private $opis;
