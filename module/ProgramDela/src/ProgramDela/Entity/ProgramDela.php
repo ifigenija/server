@@ -27,7 +27,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="programDela.sifra", description="Šifra programa dela")
+     * @Max\I18n(label="programDela.sifra", description="programDela.sifra")
      * @Max\Ui(type="sifra",ident=true )
      * @var string     
      */
@@ -35,7 +35,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="programDela.naziv", description="Naziv programa dela")
+     * @Max\I18n(label="programDela.naziv", description="programDela.naziv")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -43,21 +43,21 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="date", nullable=false)
-     * @Max\I18n(label="programDela.zacetek", description="Začetek")
+     * @Max\I18n(label="programDela.zacetek", description="programDela.zacetek")
      * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=false)
-     * @Max\I18n(label="programDela.konec", description="Konec")
+     * @Max\I18n(label="programDela.konec", description="programDela.konec")
      * @var string
      */
     private $konec;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
-     * @Max\I18n(label="programDela.potrjenProgram", description="Potrjen program")
+     * @Max\I18n(label="programDela.potrjenProgram", description="programDela.potrjenProgram")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -114,7 +114,7 @@ class ProgramDela
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona")
      * @ORM\JoinColumn(name="sezona_id", referencedColumnName="id")
-     * @Max\I18n(label="programDela.sezona", description="Sezona")
+     * @Max\I18n(label="programDela.sezona", description="programDela.sezona")
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Sezona
      */
@@ -122,21 +122,21 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="programDela.avgZasedDvoran", description="Povprečna zasedenost lastnih dvoran")   
+     * @Max\I18n(label="programDela.avgZasedDvoran", description="programDela.avgZasedDvoran")   
      * @var double
      */
     private $avgZasedDvoran;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="programDela.avgCenaVstopnice", description="Povprečna cena vstopnice")   
+     * @Max\I18n(label="programDela.avgCenaVstopnice", description="programDela.avgCenaVstopnice")   
      * @var double
      */
     private $avgCenaVstopnice;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stProdVstopnic", description="Število prodanih vstopnic")
+     * @Max\I18n(label="programDela.stProdVstopnic", description="programDela.stProdVstopnic")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -144,7 +144,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stZaposlenih", description="Število vseh zaposlenih v javnem zavodu")
+     * @Max\I18n(label="programDela.stZaposlenih", description="programDela.stZaposlenih")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -152,7 +152,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stZaposIgralcev", description="Število zaposlenih igralcev")
+     * @Max\I18n(label="programDela.stZaposIgralcev", description="programDela.stZaposIgralcev")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -160,14 +160,14 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="programDela.avgStNastopovIgr", description="Povprečna zasedenost zaposlenih igralcev (popvprečno št. nastopov v letu)")   
+     * @Max\I18n(label="programDela.avgStNastopovIgr", description="programDela.d.avgStNastopovIgr")   
      * @var double
      */
     private $avgStNastopovIgr;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stHonorarnih", description="Načrtovano število honorarnih zunanjih sodelavcev")
+     * @Max\I18n(label="programDela.stHonorarnih", description="programDela.d.stHonorarnih")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -175,7 +175,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stHonorarnihIgr", description="Načrtovano število honorarnih zunanjih sodelavcev - od tega igralcev")
+     * @Max\I18n(label="programDela.stHonorarnihIgr", description="programDela.d.stHonorarnihIgr")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -183,7 +183,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stHonorarnihIgrTujJZ", description="Načrtovano število honorarnih zunanjih sodelavcev - od tega igralcev - od tega igralcev, zaposlenih v drugih JZ")
+     * @Max\I18n(label="programDela.stHonorarnihIgrTujJZ", description="programDela.d.stHonorarnihIgrTujJZ")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -191,7 +191,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="programDela.sredstvaInt", description="Višina sredstev iz mednarodnih virov")   
+     * @Max\I18n(label="programDela.sredstvaInt", description="programDela.sredstvaInt")   
      * @var double
      */
     private $sredstvaInt;

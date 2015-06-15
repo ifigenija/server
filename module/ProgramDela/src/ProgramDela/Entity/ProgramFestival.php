@@ -27,7 +27,7 @@ class ProgramFestival
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="programiFestival")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
-     * @Max\I18n(label="programFestival.programDela", description="Program dela")
+     * @Max\I18n(label="festival.programDela", description="festival.programDela")
      * @Max\Ui(type="hidden")
      * @var \ProgramDela\Entity\ProgramDela
      */
@@ -35,7 +35,7 @@ class ProgramFestival
 
     /**
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="programFestival.naziv", description="Naziv festivala")
+     * @Max\I18n(label="entiteta.naziv", description="entiteta.naziv")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -43,14 +43,14 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="string")
-     * @Max\I18n(label="programFestival.zvrst", description="Zvrst festivala")
+     * @Max\I18n(label="entiteta.zvrst", description="entiteta.zvrst")
      * @var string
      */
     private $zvrst;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programFestival.stPredstav", description="Število predstav")
+     * @Max\I18n(label="festival.stPredstav", description="festival.stPredstav")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -58,7 +58,7 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programFestival.stPredavanj", description="Število predavanj")
+     * @Max\I18n(label="festival.stPredavanj", description="festival.stPredavanj")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -66,7 +66,7 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programFestival.stPredstavitev", description="Število predstavitev")
+     * @Max\I18n(label="festival.stPredstavitev", description="festival.stPredstavitev")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -74,7 +74,7 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programFestival.stDelavnic", description="Število delavnic")
+     * @Max\I18n(label="festival.stDelavnic", description="festival.stDelavnic")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -82,7 +82,7 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programFestival.stDrugiDogodki", description="Število drugih dogodkov")
+     * @Max\I18n(label="festival.stDrugiDogodki", description="festival.stDrugiDogodki")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -90,14 +90,14 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="programFestival.opredelitevDrugiDogodki", description="Opredelitev drugih dogodkov")
+     * @Max\I18n(label="festival.opredelitevDrugiDogodki", description="festival.opredelitevDrugiDogodki")
      * @var string
      */
     private $opredelitevDrugiDogodki;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programFestival.stProdukcij", description="Skupno število festivalskih produkcij")
+     * @Max\I18n(label="festival.stProdukcij", description="festival.d.stProdukcij")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -105,7 +105,7 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programFestival.stObisk", description="Pričakovano število obiskovalcev")
+     * @Max\I18n(label="festival.stObisk", description="festival.stObisk")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -115,7 +115,7 @@ class ProgramFestival
      * $$ preveri mersko enoto; ali v mesecih, dnevih , človek dnevih?
      * 
      * @ORM\Column(type="string")
-     * @Max\I18n(label="programFestival.casPriprave", description="Čas priprave festivala")
+     * @Max\I18n(label="festival.casPriprave", description="festival.casPriprave")
      * @var string
      */
     private $casPriprave;
@@ -124,42 +124,42 @@ class ProgramFestival
      * $$ preveri mersko enoto; ali v mesecih, dnevih , človek dnevih?
      * 
      * @ORM\Column(type="string")
-     * @Max\I18n(label="programFestival.casIzvedbe", description="Čas izvedbe festivala")
+     * @Max\I18n(label="festival.casIzvedbe", description="festival.casIzvedbe")
      * @var string
      */
     private $casIzvedbe;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="programFestival.prizorisca", description="Prizorišča")
+     * @Max\I18n(label="festival.prizorisca", description="festival.prizorisca")
      * @var string
      */
     private $prizorisca;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="programFestival.umetVodja", description="Umetniški vodja festivala")
+     * @Max\I18n(label="festival.umetVodja", description="festival.umetVodja")
      * @var string
      */
     private $umetVodja;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="programFestival.programskoTelo", description="Programsko telo festivala")
+     * @Max\I18n(label="festival.programskoTelo", description="festival.programskoTelo")
      * @var string
      */
     private $programskoTelo;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="programFestival.soorganizatorji", description="Soorganizatorji")
+     * @Max\I18n(label="festival.soorganizatorji", description="festival.soorganizatorji")
      * @var string
      */
     private $soorganizatorji;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programFestival.stTujihSelektorjev", description="Predvideno število tujih selektorjev-gostov")
+     * @Max\I18n(label="festival.stTujihSelektorjev", description="festival.d.stTujihSelektorjev")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -167,7 +167,7 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programFestival.stZaposlenih", description="Število zaposlenih, ki sodelujejo pri izvedbi festivala")
+     * @Max\I18n(label="festival.stZaposlenih", description="festival.d.stZaposlenih")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -175,7 +175,7 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programFestival.stHonorarnih", description="Število vseh, ki sodelujejo honorarno pri izvedbi festivala in jim honorar izplačuje JZ")
+     * @Max\I18n(label="festival.stHonorarnih", description="festival.d.stHonorarnih")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -183,49 +183,49 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programFestival.zaproseno", description="Zaprošena sredstva Ministrstva za kulturo")   
+     * @Max\I18n(label="ep.zaproseno", description="ep.d.zaproseno")   
      * @var double
      */
     private $zaproseno;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programFestival.celotnaVrednost", description="Celotna vrednost")   
+     * @Max\I18n(label="ep.celotnaVrednost", description="ep.celotnaVrednost")   
      * @var double
      */
     private $celotnaVrednost;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programFestival.lastnaSredstva", description="Lastna sredstva")   
+     * @Max\I18n(label="ep.lastnaSredstva", description="ep.lastnaSredstva")   
      * @var double
      */
     private $lastnaSredstva;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programFestival.drugiViri", description="Drugi viri")   
+     * @Max\I18n(label="ep.drugiViri", description="ep.drugiViri")   
      * @var double
      */
     private $drugiViri;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="programFestival.opredelitevDrugiViri", description="Opredelitev drugih virov")
+     * @Max\I18n(label="festival.opredelitevDrugiViri", description="festival.opredelitevDrugiViri")
      * @var string
      */
     private $opredelitevDrugiViri;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programFestival.vlozekKoproducenta", description="Vložek koproducenta")   
+     * @Max\I18n(label="festival.vlozekKoproducenta", description="v")   
      * @var double
      */
     private $vlozekKoproducenta;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programFestival.drugiJavni", description="Vir druga ministrstva in lokalna skupnost")   
+     * @Max\I18n(label="ep.drugiJavni", description="ep.d.drugiJavni")   
      * @var double
      */
     private $drugiJavni;

@@ -28,7 +28,7 @@ class Zaposlitev
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Max\I18n(label="entiteta.sifra",  description="Šifra osebe")
+     * @Max\I18n(label="entiteta.sifra",  description="entiteta.sifra")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode")
      * @var string
      */
@@ -36,7 +36,7 @@ class Zaposlitev
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Max\I18n(label="entiteta.status",  description="Status zaposlitve")
+     * @Max\I18n(label="entiteta.status",  description="entiteta.status")
      * @Max\Ui(type="select",opts="zaposlitev.status")
      * @var string
      */
@@ -44,21 +44,21 @@ class Zaposlitev
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.zacetek",  description="Datum začetka zaposlitve")
+     * @Max\I18n(label="entiteta.zacetek",  description="entiteta.zacetek")
      * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.konec",  description="Datum konca zaposlitve")
+     * @Max\I18n(label="entiteta.konec",  description="entiteta.konec")
      * @var string
      */
     private $konec;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="zaposlitev.tip",  description="Tip zaposlitve")
+     * @Max\I18n(label="zaposlitev.tip",  description="zaposlitev.tip")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -66,7 +66,7 @@ class Zaposlitev
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="zaposlitev.delovnaObveza",  description="Delovna obveza zaposlitve")
+     * @Max\I18n(label="zaposlitev.delovnaObveza",  description="zaposlitev.delovnaObveza")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -74,14 +74,14 @@ class Zaposlitev
 
     /**
      * @ORM\Column(nullable=true)
-     * @Max\I18n(label="zaposlitev.malica",  description="Malica")
+     * @Max\I18n(label="zaposlitev.malica",  description="zaposlitev.malica")
      * @var string
      */
     private $malica;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="zaposlitev.izmenskoDelo", description="Izmensko delo")
+     * @Max\I18n(label="zaposlitev.izmenskoDelo", description="zaposlitev.izmenskoDelo")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -89,7 +89,7 @@ class Zaposlitev
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="zaposlitev.individualnaPogodba", description="Zaposlitev z individualno pogodbo")
+     * @Max\I18n(label="zaposlitev.individualnaPogodba", description="zaposlitev.d.individualnaPogodb")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -97,7 +97,7 @@ class Zaposlitev
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="zaposlitev.jeZaposlenVdrugemjz", description="Ali je zaposlen v drugem javnem zavodu")
+     * @Max\I18n(label="zaposlitev.jeZaposlenVdrugemJZ", description="zaposlitev.d.jeZaposlenVdrugemJZ")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -105,7 +105,7 @@ class Zaposlitev
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="zaposlitev.jeNastopajoci", description="Ali je nastopajoči")
+     * @Max\I18n(label="zaposlitev.jeNastopajoci", description="zaposlitev.d.jeNastopajoci")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */

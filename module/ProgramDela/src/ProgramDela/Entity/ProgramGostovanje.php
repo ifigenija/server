@@ -28,7 +28,7 @@ class ProgramGostovanje
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev")
-     * @Max\I18n(label="programGostovanje.uprizoritev", description="Uprizoritev")   
+     * @Max\I18n(label="entiteta.uprizoritev", description="entiteta.uprizoritev")   
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Uprizoritev
      */
@@ -36,14 +36,14 @@ class ProgramGostovanje
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="programGostovanje.krajGostovanja", description="Kraj gostovanja")
+     * @Max\I18n(label="gostovanje.krajGostovanja", description="gostovanje.krajGostovanja")
      * @var string
      */
     private $krajGostovanja;
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="programGostovanje.ustanova", description="Ustanova, v kateri se gostuje (nazv ustanove, festival ...)")
+     * @Max\I18n(label="gostovanje.ustanova", description="gostovanje.d.ustanova")
      * @var string
      */
     private $ustanova;
@@ -51,14 +51,14 @@ class ProgramGostovanje
     /**
      * 
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="programGostovanje.datumGostovanja", description="Datum gostovanja")
+     * @Max\I18n(label="gostovanje.datumGostovanja", description="gostovanje.datumGostovanja")
      * @var string
      */
     private $datumGostovanja;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":" 0"})
-     * @Max\I18n(label="programGostovanje.stPonovitev", description="Število ponovitev v okviru gostovanja")   
+     * @Max\I18n(label="gostovanje.stPonovitev", description="ostovanje.d.stPonovitev")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -66,7 +66,7 @@ class ProgramGostovanje
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="programGostovanje.stGledalcev", description="Načrtovano število  gledalcev")
+     * @Max\I18n(label="gostovanje.stGledalcev", description="gostovanje.d.stGledalcev")
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -74,42 +74,42 @@ class ProgramGostovanje
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programGostovanje.zaproseno", description="Zaprošena sredstva Ministrstva za kulturo")   
+     * @Max\I18n(label="ep.zaproseno", description="ep.d.zaproseno")   
      * @var double
      */
     private $zaproseno;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programGostovanje.celotnaVrednost", description="Celotni stroški gostovanja")   
+     * @Max\I18n(label="ep.celotnaVrednost", description="ep.d.celotnaVrednost")   
      * @var double
      */
     private $celotnaVrednost;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2)
-     * @Max\I18n(label="programGostovanje.transportniStroski", description="Transportni stroški opreme ter stroški prevozov ansambla in tehnike")   
+     * @Max\I18n(label="gostovanje.transportniStroski", description="gostovanje.d.transportniStroski")   
      * @var double     
      */
     private $transportniStroski;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2)
-     * @Max\I18n(label="programGostovanje.stroskiAvtorZun", description="Stroški avtorskih honorarjev zunanjih sodelavcev")   
+     * @Max\I18n(label="gostovanje.stroskiAvtorZun", description="gostovanje.stroskiAvtorZun")   
      * @var double     
      */
     private $stroskiAvtorZun;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="programGostovanje.odkup", description="Odkup (vložek gostitelja)")   
+     * @Max\I18n(label="gostovanje.odkup", description="gostovanje.d.odkup")   
      * @var double     
      */
     private $odkup;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programGostovanje.lastnaSredstva", description="Lastna sredstva")   
+     * @Max\I18n(label="ep.lastnaSredstva", description="ep.lastnaSredstva")   
      * @var double
      */
     private $lastnaSredstva;
@@ -118,7 +118,7 @@ class ProgramGostovanje
      * $$ manjka opredelitev. Ali je potrebno specificirati druge vire (npr. pari string, double)? 
      * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programGostovanje.drugiViri", description="Drugi viri")   
+     * @Max\I18n(label="ep.drugiViri", description="ep.drugiViri")   
      * @var double
      */
     private $drugiViri;
@@ -127,7 +127,7 @@ class ProgramGostovanje
      * $$ Ali dovolj le ena vrednos  ali je potrebno specificirati vire (npr. pari string, double)? 
      * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programGostovanje.viriDMinLok", description="Viri druga ministrstva in lokalna skupnost")   
+     * @Max\I18n(label="gostovanje.viriDMinLok", description="gostovanje.d.viriDMinLok")   
      * @var double
      */
     private $viriDMinLok;
@@ -135,7 +135,7 @@ class ProgramGostovanje
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="gostovanja")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
-     * @Max\I18n(label="programGostovanje.programDela", description="Program dela")
+     * @Max\I18n(label="gostovanje.programDela", description="gostovanje.programDela")
      * @Max\Ui(type="hidden")
      * @var \ProgramDela\Entity\ProgramDela
      */
@@ -144,7 +144,7 @@ class ProgramGostovanje
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa")
      * @ORM\JoinColumn(name="gostitelj_id", referencedColumnName="id")
-     * @Max\I18n(label="programGostovanje.gostitelj", description="Organizator (gostitelj)")
+     * @Max\I18n(label="gostovanje.gostitelj", description="gostovanje.d.gostitelj")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */
