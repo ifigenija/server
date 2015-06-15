@@ -43,14 +43,14 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="date", nullable=false)
-     * @Max\I18n(label="programDela.zacetek", description="programDela.zacetek")
+     * @Max\I18n(label="entiteta.zacetek", description="entiteta.zacetek")
      * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=false)
-     * @Max\I18n(label="programDela.konec", description="programDela.konec")
+     * @Max\I18n(label="entiteta.konec", description="entiteta.konec")
      * @var string
      */
     private $konec;
