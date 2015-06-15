@@ -148,6 +148,14 @@ class AvtorizacijeTerminStoritveCest
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
 
+        // ima ifi-all vlogo
+        $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
+            'username' => \IfiTest\AuthPage::$ali,
+            'rolename' => 'ifi-all',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+
     }
 
     /**
@@ -234,6 +242,31 @@ class AvtorizacijeTerminStoritveCest
     public function updateZAdmin(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+
+        $ent                   = $this->obj1;
+        $ent['planiranoTraja'] = 3;
+        $resp                  = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertNotEmpty($resp);
+
+        //drug zapis 
+        $ent                   = $this->obj2Teh;
+        $ent['planiranoTraja'] = 3;
+        $resp                  = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertNotEmpty($resp);
+
+        // zapis brez alternacije / uprizoritve
+        $ent                   = $this->obj3;
+        $ent['planiranoTraja'] = 1;
+        $resp                  = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertNotEmpty($resp);
+    }
+
+    /**
+     * @param ApiTester $I
+     */
+    public function updateZIfiAll(ApiTester $I)
+    {
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$ali, \IfiTest\AuthPage::$aliPass);
 
         $ent                   = $this->obj1;
         $ent['planiranoTraja'] = 3;
