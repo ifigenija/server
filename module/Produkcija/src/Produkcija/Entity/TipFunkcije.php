@@ -4,7 +4,7 @@ namespace Produkcija\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * 
  * Tip funkcije / vloge, ki je standariziran v skladu s SLOGI (Slovenski gledališki inštitut)

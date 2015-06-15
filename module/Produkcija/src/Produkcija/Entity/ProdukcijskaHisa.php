@@ -4,6 +4,7 @@ namespace Produkcija\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\ProdukcijskeHise")
@@ -62,6 +63,12 @@ class ProdukcijskaHisa
      * @var <Uprizoritve>
      */
     private $uprizoritve;
+
+    public function __construct()
+    {
+        $this->koprodukcije = new ArrayCollection();
+        $this->uprizoritve  = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * Entiteta za osebe
@@ -231,6 +233,17 @@ class Oseba
      * @ORM\JoinColumn(name="naslov_id", referencedColumnName="id")
      */
     private $naslov;
+
+    public function __construct($name = '')
+    {
+        $this->naslovi        = new ArrayCollection();
+        $this->telefonske     = new ArrayCollection();
+        $this->trrji          = new ArrayCollection();
+        $this->kontaktneOsebe = new ArrayCollection();
+        $this->alternacije    = new ArrayCollection();
+        $this->pogodbe        = new ArrayCollection();
+        $this->zaposlitve     = new ArrayCollection();
+    }
 
     /**
      * 

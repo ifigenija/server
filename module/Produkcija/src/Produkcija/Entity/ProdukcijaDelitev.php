@@ -4,6 +4,7 @@ namespace Produkcija\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\ProdukcijaDelitve")
@@ -115,10 +116,16 @@ class ProdukcijaDelitev
      */
     private $koproducent;
 
+    public function __construct()
+    {
+        $this->alternacije = new ArrayCollection();
+    }
+
     public function validate($mode = 'update')
     {
         
     }
+
     public function getId()
     {
         return $this->id;
@@ -261,6 +268,5 @@ class ProdukcijaDelitev
         $this->koproducent = $koproducent;
         return $this;
     }
-
 
 }

@@ -4,6 +4,7 @@ namespace Produkcija\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Uprizoritve")
@@ -288,6 +289,18 @@ class Uprizoritev
      * @var \Produkcija\Entity\ProdukcijskaHisa
      */
     private $producent;
+
+    public function __construct()
+    {
+        $this->koprodukcije   = new ArrayCollection();
+        $this->funkcije       = new ArrayCollection();
+        $this->arhivi         = new ArrayCollection();
+        $this->rekviziterstva = new ArrayCollection();
+        $this->stroski        = new ArrayCollection();
+        $this->vaje           = new ArrayCollection();
+        $this->predstave      = new ArrayCollection();
+        $this->gostujoce      = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {
@@ -667,6 +680,5 @@ class Uprizoritev
         $this->producent = $producent;
         return $this;
     }
-
 
 }

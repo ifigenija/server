@@ -4,6 +4,7 @@ namespace Koledar\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Dogodek uprizoritve - ali vaja ali predstava
@@ -159,6 +160,13 @@ class Dogodek
      * @var \Koledar\Entity\Sezona
      */
     private $sezona;
+
+    public function __construct()
+    {
+        $this->arhivi           = new ArrayCollection();
+        $this->terminiStoritve  = new ArrayCollection();
+        $this->prodajaPredstave = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {
@@ -363,6 +371,5 @@ class Dogodek
         $this->sezona = $sezona;
         return $this;
     }
-
 
 }

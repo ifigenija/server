@@ -4,6 +4,7 @@ namespace Koledar\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Entiteta za naslove
@@ -39,6 +40,11 @@ class Gostujoca
      * @var \Produkcija\Entity\Uprizoritev
      */
     private $uprizoritev;
+
+    public function __construct()
+    {
+        $this->predstave = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {

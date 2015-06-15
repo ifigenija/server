@@ -24,6 +24,19 @@ class ProgramPonovitevPremiere
 
     public function validate($mode = 'update')
     {
+        if ($this->getDokument()) {
+            // preveriti, ali že obstaja program pon. prem. z isto uprizoritvijo
+            $obstaja = true;  //init
+            if ($this->getDokument()->getPonovitvePremiere()) {
+                $obstaja = $this->getDokument()
+                        ->getPonovitvePremiere()
+                        ->exists(function($key, $ponovitvePremiere) {
+                    return $ponovitvePremiere->getUprizoritev() == $this->getUprizoritev();     //vrne true, če obstaja program pon. prem. z isto uprizoritvijo
+                });
+                $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000450);
+            }
+        }
+
         parent::validate();
     }
 
@@ -37,6 +50,5 @@ class ProgramPonovitevPremiere
         $this->dokument = $dokument;
         return $this;
     }
-
 
 }

@@ -1,12 +1,16 @@
 <?php
+
 namespace Prodaja\Entity;
+
 use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
  */
 class Rezervacija
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
@@ -24,4 +28,43 @@ class Rezervacija
      * @ORM\JoinColumn(name="prodaja_predstave_id", referencedColumnName="id")
      */
     private $prodajaPredstave;
+
+    public function __construct()
+    {
+        $this->razpisaniSedezi = new ArrayCollection();
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getRazpisaniSedezi()
+    {
+        return $this->razpisaniSedezi;
+    }
+
+    public function getProdajaPredstave()
+    {
+        return $this->prodajaPredstave;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setRazpisaniSedezi($razpisaniSedezi)
+    {
+        $this->razpisaniSedezi = $razpisaniSedezi;
+        return $this;
+    }
+
+    public function setProdajaPredstave($prodajaPredstave)
+    {
+        $this->prodajaPredstave = $prodajaPredstave;
+        return $this;
+    }
+
 }

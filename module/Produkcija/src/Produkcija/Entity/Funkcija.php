@@ -4,6 +4,7 @@ namespace Produkcija\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Funkcije")
@@ -142,6 +143,11 @@ class Funkcija
      * @var
      */
     private $privzeti;
+
+    public function __construct()
+    {
+        $this->alternacije = new ArrayCollection();
+    }
 
     /**
      * tipi funkcij, ki so standarizirani glede na SLOGI (Slovenski gledališki inštitut)
