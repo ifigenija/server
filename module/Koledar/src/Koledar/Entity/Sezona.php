@@ -4,6 +4,7 @@ namespace Koledar\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Koledar\Repository\Sezone")
@@ -58,6 +59,11 @@ class Sezona
      * @var <Dogodki>
      */
     private $dogodki;
+
+    public function __construct()
+    {
+        $this->dogodki = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {

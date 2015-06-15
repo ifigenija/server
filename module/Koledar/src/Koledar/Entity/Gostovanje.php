@@ -4,6 +4,7 @@ namespace Koledar\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Koledar\Repository\Gostovanja")
@@ -64,10 +65,16 @@ class Gostovanje
      */
     private $drzava;
 
+    public function __construct()
+    {
+        $this->predstave = new ArrayCollection();
+    }
+
     public function validate($mode = 'update')
     {
         
     }
+
     public function getId()
     {
         return $this->id;
@@ -122,6 +129,5 @@ class Gostovanje
         $this->drzava = $drzava;
         return $this;
     }
-
 
 }

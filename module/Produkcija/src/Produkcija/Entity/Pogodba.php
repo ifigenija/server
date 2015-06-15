@@ -4,6 +4,7 @@ namespace Produkcija\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Pogodbe")
@@ -151,6 +152,11 @@ class Pogodba
      * @var \App\Entity\Trr
      */
     private $trr;
+
+    public function __construct()
+    {
+        $this->alternacije = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {

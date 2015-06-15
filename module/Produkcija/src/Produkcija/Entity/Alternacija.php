@@ -4,6 +4,7 @@ namespace Produkcija\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Alternacije")
@@ -145,6 +146,11 @@ class Alternacija
      */
     protected $imaPogodbo;
 
+    public function __construct()
+    {
+        $this->storitve = new ArrayCollection();
+    }
+
     public function validate($mode = 'update')
     {
         if ($this->getZaposlitev()) {
@@ -160,7 +166,7 @@ class Alternacija
          * in preverim ,da je oseba kontakt na poslovnem partnerju
          */
         if ($this->getPogodba()) {
-            $this->setImaPogodbo(true); 
+            $this->setImaPogodbo(true);
             if ($this->getPogodba()->getOseba()) {
                 $this->expect($this->getOseba() === $this->getPogodba()->getOseba()
                         , 'Oseba na pogodbi ni enaka kot oseba na alternaciji'

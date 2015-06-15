@@ -4,6 +4,7 @@ namespace Produkcija\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Rekviziti")
@@ -49,6 +50,11 @@ class Rekvizit
      * @var <Rekviziterstva>
      */
     private $rekviziterstva;
+
+    public function __construct()
+    {
+        $this->rekviziterstva = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {
@@ -98,6 +104,5 @@ class Rekvizit
         $this->rekviziterstva = $rekviziterstva;
         return $this;
     }
-
 
 }

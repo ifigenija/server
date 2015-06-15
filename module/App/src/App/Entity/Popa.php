@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Entiteta za poslovne partnerje
@@ -272,10 +273,12 @@ class Popa
 
     public function __construct()
     {
-        $this->osebe   = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->trrji   = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->naslovi = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->pogodbe = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->naslovi        = new ArrayCollection();
+        $this->telefonske     = new ArrayCollection();
+        $this->trrji          = new ArrayCollection();
+        $this->kontaktneOsebe = new ArrayCollection();
+        $this->pogodbe        = new ArrayCollection();
+        $this->stroski        = new ArrayCollection();
     }
 
     public function __toString()
@@ -607,6 +610,5 @@ class Popa
         $this->kupec = $kupec;
         return $this;
     }
-
 
 }

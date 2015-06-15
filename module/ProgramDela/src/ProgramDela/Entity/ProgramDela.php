@@ -4,6 +4,7 @@ namespace ProgramDela\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiDela")
@@ -196,6 +197,17 @@ class ProgramDela
     private $sredstvaInt;
 
     //$$ rb morda še bodo kakšna polja za dodati oz. odvzeti - odvisno glede na to, ali jih lahko pridobimo iz drugih entitet ali ne
+    public function __construct()
+    {
+        $this->premiere           = new ArrayCollection();
+        $this->ponovitvePremiere  = new ArrayCollection();
+        $this->ponovitvePrejsnjih = new ArrayCollection();
+        $this->izjemni            = new ArrayCollection();
+        $this->programiFestival   = new ArrayCollection();
+        $this->gostujoci          = new ArrayCollection();
+        $this->gostovanja         = new ArrayCollection();
+        $this->programiRazno      = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {

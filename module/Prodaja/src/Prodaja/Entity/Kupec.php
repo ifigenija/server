@@ -4,7 +4,7 @@ namespace Prodaja\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Entiteta za naslove
  *
@@ -41,6 +41,10 @@ class Kupec
      * @var \App\Entity\Popa
      */
     private $popa;
+    public function __construct()
+    {
+        $this->racun  = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {

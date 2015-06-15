@@ -4,6 +4,7 @@ namespace Produkcija\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Zaposlitve")
@@ -126,11 +127,17 @@ class Zaposlitev
      */
     private $oseba;
 
+    public function __construct()
+    {
+        $this->alternacije = new ArrayCollection();
+    }
+
     public function validate($mode = 'update')
     {
-        $this->expect($this->oseba, "Oseba je obvezna", 1000333);        
+        $this->expect($this->oseba, "Oseba je obvezna", 1000333);
         $this->setSifra($this->oseba->getSifra());
     }
+
     public function getId()
     {
         return $this->id;
@@ -284,6 +291,5 @@ class Zaposlitev
         $this->oseba = $oseba;
         return $this;
     }
-
 
 }

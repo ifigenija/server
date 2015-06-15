@@ -4,6 +4,7 @@ namespace ProgramDela\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\TipiProgramskeEnote")
@@ -67,6 +68,11 @@ class TipProgramskeEnote
      * @var <EnotePrograma>
      */
     private $enotePrograma;
+
+    public function __construct()
+    {
+        $this->enotePrograma = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {
@@ -149,6 +155,5 @@ class TipProgramskeEnote
         $this->enotePrograma = $enotePrograma;
         return $this;
     }
-
 
 }
