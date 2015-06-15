@@ -67,6 +67,7 @@ class UserFixture
                     ['04','tatjana@ifigenija.si',"testni uporabnik vnašalca termina storitev (TerminStoritve-vse)","Tatjana1234",true,null, "","",],
                     ['05','joze@ifigenija.si',"testni uporabnik, ki je inšpicient brez zapisov v TerminStoritve","Joze1234",true,null, "","",],
                     ['06','petra@ifigenija.si',"testna uporabnica, ki je planerka","Petra1234",true,null, "","",],
+                    ['07','ali@ifigenija.si',"testni uporabnik, ki dobi ifi-all vlogo","Ali1234",true,null, "","",],
         ];
     }
 

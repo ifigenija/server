@@ -29,10 +29,26 @@ class AssertTerminStoritve
             return true;
         }
 
+
+
         $iden = $authorizationService->getIdentity();
         $user = $iden->getEmail();
-        if ($user == "admin@ifigenija.si") {          // $$ rb začasno, dokler shortCircuit ne preskoči tega assert-a
-            return true;
+//        if ($user == "admin@ifigenija.si") {          // $$ rb začasno, dokler shortCircuit ne preskoči tega assert-a
+//            return true;
+//        }
+        // če ima vlogo ifi-all dovolimo dostop
+//        $roles = $authorizationService->roleService->getIdentityRoles(); //$$ rb zaenkrat javi napako:  Fatal error: Cannot access protected property 
+//                                                                       // ZfcRbac\Service\AuthorizationService::$roleService
+//                                                                       // morda bi extendali AuthorizationService in popravili v RestControllerFactory
+//                                                                       // potem bi lahko kontrolirali tudi vloge
+        // ponovimo kontrolo na ifi-all in ifi-readall
+
+        $rbac  = $this->getServiceLocator()->getServiceLocator()->get('rbacrbac');
+        $rs    = $this->getServiceLocator()->getServiceLocator()->get('zfcrbacserviceroleservice');
+        $roles = $rs->getIdentityRoles();
+
+        if ($rbac->isGranted($roles,null)) {
+            return TRUE;            //ifi-all
         }
 
         /* $$ plan:
@@ -64,7 +80,7 @@ class AssertTerminStoritve
         if (!empty($terminStoritve->getAlternacija())) {
             $alt = $altR->findOneById($terminStoritve->getAlternacija());
             if (!empty($alt->getFunkcija())) {
-                $fun      = $funR->findOneById($alt->getFunkcija());
+                $fun       = $funR->findOneById($alt->getFunkcija());
                 $fpodrocje = $fun->getPodrocje();                      // ali je tehnik ali netehnik
                 if (!empty($fun->getUprizoritev())) {
                     $upr = $uprR->findOneById($fun->getUprizoritev());
