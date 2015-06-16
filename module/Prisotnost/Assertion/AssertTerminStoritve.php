@@ -17,43 +17,24 @@ namespace Prisotnost\Assertion;
  * @return bool
  */
 class AssertTerminStoritve
+        extends \Max\Assertion\AssertBase
         implements \ZfcRbac\Assertion\AssertionInterface, \Zend\ServiceManager\ServiceLocatorAwareInterface
 {
 
-    use \Zend\ServiceManager\ServiceLocatorAwareTrait;
 
     public function assert(\ZfcRbac\Service\AuthorizationService $authorizationService, $terminStoritve = null)
     {
-        if (!$terminStoritve) {
-            //če je null vrne ok
+        if (parent::assert($authorizationService, $terminStoritve)){
             return true;
         }
 
-
-
         $iden = $authorizationService->getIdentity();
         $user = $iden->getEmail();
-//        if ($user == "admin@ifigenija.si") {          // $$ rb začasno, dokler shortCircuit ne preskoči tega assert-a
-//            return true;
-//        }
-        // če ima vlogo ifi-all dovolimo dostop
-//        $roles = $authorizationService->roleService->getIdentityRoles(); //$$ rb zaenkrat javi napako:  Fatal error: Cannot access protected property 
-//                                                                       // ZfcRbac\Service\AuthorizationService::$roleService
-//                                                                       // morda bi extendali AuthorizationService in popravili v RestControllerFactory
-//                                                                       // potem bi lahko kontrolirali tudi vloge
-        // ponovimo kontrolo na ifi-all in ifi-readall
-
-        $rbac  = $this->getServiceLocator()->getServiceLocator()->get('rbacrbac');
-        $rs    = $this->getServiceLocator()->getServiceLocator()->get('zfcrbacserviceroleservice');
-        $roles = $rs->getIdentityRoles();
-
-        if ($rbac->isGranted($roles,null)) {
-            return TRUE;            //ifi-all
-        }
 
         /* $$ plan:
          * - izjema za tiste dogodke, ki nimajo uprizoritve (npr. oddaja prostora, knjženje ur za hostese, ki pomagajo 
-         *   => tisti, ki ima dovoljenje TerminStoritve-vse, lahko vse zapise popravlja
+         *   => tisti, ki ima dovoljenje 
+         * TerminStoritve-vse, lahko vse zapise popravlja
          *  $$ razčisti, ali bo asociacija na alternacijo, ali le na osebe - verjetno najboljše oboje, redundantno
          * - kontrola za tehničnega vodjo select joini
          * - kontrola za inšpicienta 

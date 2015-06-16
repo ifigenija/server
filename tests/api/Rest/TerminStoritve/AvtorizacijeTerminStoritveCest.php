@@ -39,7 +39,7 @@ class AvtorizacijeTerminStoritveCest
     private $lookAlternacija2Teh;
     private $roleUrl              = '/rest/role';
     private $rpcRoleUrl           = '/rpc/aaa/role';
-    private $rpcUserUrl = '/rpc/aaa/user';
+    private $rpcUserUrl           = '/rpc/aaa/user';
 
     public function _before(ApiTester $I)
     {
@@ -132,7 +132,7 @@ class AvtorizacijeTerminStoritveCest
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
-        
+
         $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
             'username' => \IfiTest\AuthPage::$tatjana,
             'rolename' => 'TERMINVSE',
@@ -156,6 +156,13 @@ class AvtorizacijeTerminStoritveCest
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
 
+        //še ifi-readall
+        $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
+            'username' => \IfiTest\AuthPage::$berta,
+            'rolename' => 'ifi-readall',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
     }
 
     /**
@@ -201,15 +208,14 @@ class AvtorizacijeTerminStoritveCest
 //        $this->obj1 = $ent        = array_pop($list);
 //        codecept_debug($ent);
 //        $I->assertNotEmpty($ent);
-
         // poiščemo termina storitve - najprej za ne-tehnika:
         $key        = array_search($this->lookAlternacija1['id'], array_column($list, 'alternacija'));
-        $this->obj1 = $ent        = $list[$key]; 
+        $this->obj1 = $ent        = $list[$key];
         codecept_debug($ent);
 
         // poiščemo termina za tehnika
         $key           = array_search($this->lookAlternacija2Teh['id'], array_column($list, 'alternacija'));
-        $this->obj2Teh = $ent           = $list[$key]; 
+        $this->obj2Teh = $ent           = $list[$key];
         codecept_debug($ent);
 
         // poiščemo termina brez alternacije
@@ -284,6 +290,28 @@ class AvtorizacijeTerminStoritveCest
         $ent['planiranoTraja'] = 1;
         $resp                  = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($resp);
+    }
+
+    /**
+     * @param ApiTester $I
+     */
+    public function updateZIfiReadall(ApiTester $I)
+    {
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$berta, \IfiTest\AuthPage::$bertaPass);
+
+        $ent                   = $this->obj1;
+        $ent['planiranoTraja'] = 3;
+        $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+
+        //drug zapis 
+        $ent                   = $this->obj2Teh;
+        $ent['planiranoTraja'] = 3;
+        $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+
+        // zapis brez alternacije / uprizoritve
+        $ent                   = $this->obj3;
+        $ent['planiranoTraja'] = 1;
+        $I->failToUpdate($this->restUrl, $ent['id'], $ent);
     }
 
     /**
