@@ -14,17 +14,22 @@ namespace Prisotnost\Assertion;
  * 
  * @param  AuthorizationService $authorization
  * @param  Prisotnost\Entity\TerminStoritve     $terminStoritve
- * @return bool
+ * @return boolean
  */
 class AssertTerminStoritve
         extends \Max\Assertion\AssertBase
         implements \ZfcRbac\Assertion\AssertionInterface, \Zend\ServiceManager\ServiceLocatorAwareInterface
 {
 
-
+    /**
+     * 
+     * @param \ZfcRbac\Service\AuthorizationService $authorizationService
+     * @param Prisotnost\Entity\TerminStoritve      $terminStoritve
+     * @return boolean
+     */
     public function assert(\ZfcRbac\Service\AuthorizationService $authorizationService, $terminStoritve = null)
     {
-        if (parent::assert($authorizationService, $terminStoritve)){
+        if (parent::assert($authorizationService, $terminStoritve)) {
             return true;
         }
 

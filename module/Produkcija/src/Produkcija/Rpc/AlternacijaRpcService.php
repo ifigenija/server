@@ -28,6 +28,10 @@ class AlternacijaRpcService
      */
     public function novaPogodba($alternacijaId)
     {
+        // preverjanje avtorizacije
+        $this->expectPermission("Pogodba-write");
+        $this->expectPermission("Alternacija-write");
+
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $tr = $this->getServiceLocator()->get('translator');
 
@@ -52,16 +56,20 @@ class AlternacijaRpcService
         $pogodba->setVrednostUre(0);
         $pogodba->setVrednostDoPremiere(0);
         $pogodba->setOseba($alternacija->getOseba());
-        
-        $pogodbaR=$em->getRepository("Produkcija\Entity\Pogodba")
-                        ->setServiceLocator($this->getServiceLocator());
+
+        $pogodbaR = $em->getRepository("Produkcija\Entity\Pogodba")
+                ->setServiceLocator($this->getServiceLocator());
         $pogodbaR->create($pogodba);           //da kreira tudi šifro
 
         $alternacija->setPogodba($pogodba);
 
+        // sedaj, ko imamo entiteti ponovimo preverjanje avtorizacije zaradi morebitnega assert preverjanja!
+        $this->expectPermission("Pogodba-write",$pogodba);  
+        $this->expectPermission("Alternacija-write",$alternacija);
+
         $em->flush();
 
-        return $this->getPogodbaData($pogodba); //$$ ali to v redu?
+        return $this->getPogodbaData($pogodba);
     }
 
     /**
@@ -71,7 +79,6 @@ class AlternacijaRpcService
      */
     protected function getPogodbaData($pogodba)
     {
-
         return [
             'id'                 => $pogodba->getId(),
             'sifra'              => $pogodba->getSifra(),
@@ -88,7 +95,7 @@ class AlternacijaRpcService
             'alternacije'        => $pogodba->getAlternacije(),
             'oseba'              => $pogodba->getOseba(),
             'popa'               => $pogodba->getPopa(),
-            'id'                 => $pogodba->getTrr(),
+            'trr'                 => $pogodba->getTrr(),
         ];
     }
 
