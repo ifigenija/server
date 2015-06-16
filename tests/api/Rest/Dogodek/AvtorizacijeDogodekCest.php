@@ -125,6 +125,14 @@ class AvtorizacijeDogodekCest
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
+
+        //še ifi-readall
+        $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
+            'username' => \IfiTest\AuthPage::$berta,
+            'rolename' => 'ifi-readall',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
     }
 
     /**
@@ -166,6 +174,23 @@ class AvtorizacijeDogodekCest
     public function getZAdmin(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+
+        $ent  = $this->obj1;
+        $resp = $I->successfullyGet($this->restUrl, $ent['id']);
+        $I->assertNotEmpty($resp);
+
+        //drug zapis 
+        $ent  = $this->obj2odobren;
+        $resp = $I->successfullyGet($this->restUrl, $ent['id']);
+        $I->assertNotEmpty($resp);
+    }
+
+    /**
+     * @param ApiTester $I
+     */
+    public function getZIfiReadall(ApiTester $I)
+    {
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$berta, \IfiTest\AuthPage::$bertaPass);
 
         $ent  = $this->obj1;
         $resp = $I->successfullyGet($this->restUrl, $ent['id']);
