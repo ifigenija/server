@@ -34,7 +34,14 @@ class ProgramGostujoca
         $this->setPonoviZamejo(0);
         $this->setPonoviGost(0);
         $this->setPonoviInt(0);
-
+        $this->setVlozekGostitelja(0);
+        $this->setVlozekKoproducenta(0);
+        $this->setStZaposlenih(0);
+        $this->setStDrugih(0);
+        $this->setStHonorarnih(0);
+        $this->setStHonorarnihIgr(0);
+        $this->setStHonorarnihIgrTujJZ(0);
+        
         parent::validate();
     }
 

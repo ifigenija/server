@@ -12,6 +12,9 @@ forms:
             - avtorskiHonorarji
             - tantieme
             - drugiViri
+            - opredelitevDrugiViri
+            - vlozekGostitelja      # tega polja sicer ni na obrazcu
+            - vlozekKoproducenta
             - drugiJavni
 #            - obiskDoma
 #            - obiskGost
@@ -26,6 +29,11 @@ forms:
             - tipProgramskeEnote
             - dokument
             - sort
+            - stZaposlenih
+            - stDrugih
+            - stHonorarnih
+            - stHonorarnihIgr
+            - stHonorarnihIgrTujJZ
         hydrator:
             lookups: 
                 - uprizoritev

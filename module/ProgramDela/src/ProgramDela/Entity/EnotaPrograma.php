@@ -80,11 +80,92 @@ class EnotaPrograma
     private $drugiViri;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     * @Max\I18n(label="ep.opredelitevDrugiViri", description="ep.opredelitevDrugiViri")
+     * @var string
+     */
+    private $opredelitevDrugiViri;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="ep.vlozekGostitelja", description="ep.d.vlozekGostitelja")   
+     * @var double
+     */
+    private $vlozekGostitelja;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="ep.vlozekKoproducenta", description="ep.d.vlozekKoproducenta")   
+     * @var double
+     */
+    private $vlozekKoproducenta;
+
+    /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.drugiJavni", description="ep.drugiJavni")   
      * @var double
      */
     private $drugiJavni;
+
+    /**
+     * Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri uprizoritvi:
+     * 
+     * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij $$ 
+     * 
+     * @ORM\Column(type="integer", nullable=false, options={"default":0})
+     * @Max\I18n(label="ep.stZaposlenih", description="Število zaposlenih, ki sodelujejo pri izvedbi projekta")
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    private $stZaposlenih;
+
+    /**
+     * Št. drugih zaposlenih, ki sodelujejo pri uprizoritvi (brez upravno-administrativnih delavcev):
+     * 
+     * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
+     * 
+     * @ORM\Column(type="integer", nullable=false, options={"default":0})
+     * @Max\I18n(label="ep.stDrugih", description="ep.d.stDrugih")
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    private $stDrugih;
+
+    /**
+     * Št. vseh, ki sodelujejo honorarno
+     * 
+     * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="ep.stHonorarnih", description="ep.d.stHonorarnih")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stHonorarnih;
+
+    /**
+     *  št. honorarnih igralcev
+     * 
+     * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="ep.stHonorarnihIgr", description="ep.d.stHonorarnihIgr")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stHonorarnihIgr;
+
+    /**
+     *  št. honorarnih igralcev, zaposlenih v drugih javnih zavodih
+     * 
+     * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="ep.stHonorarnihIgrTujJZ", description="ep.d.stHonorarnihIgrTujJZ")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stHonorarnihIgrTujJZ;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -173,7 +254,6 @@ class EnotaPrograma
      */
     private $tipProgramskeEnote;
 
-    
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="entiteta.sort", description="ep.d.sort")
@@ -181,8 +261,7 @@ class EnotaPrograma
      * @var integer
      */
     private $sort;
-    
-    
+
     public function validate($mode = 'update')
     {
         
@@ -408,5 +487,92 @@ class EnotaPrograma
         return $this;
     }
 
+    public function getStZaposlenih()
+    {
+        return $this->stZaposlenih;
+    }
+
+    public function getStDrugih()
+    {
+        return $this->stDrugih;
+    }
+
+    public function getStHonorarnih()
+    {
+        return $this->stHonorarnih;
+    }
+
+    public function getStHonorarnihIgr()
+    {
+        return $this->stHonorarnihIgr;
+    }
+
+    public function getStHonorarnihIgrTujJZ()
+    {
+        return $this->stHonorarnihIgrTujJZ;
+    }
+
+    public function setStZaposlenih($stZaposlenih)
+    {
+        $this->stZaposlenih = $stZaposlenih;
+        return $this;
+    }
+
+    public function setStDrugih($stDrugih)
+    {
+        $this->stDrugih = $stDrugih;
+        return $this;
+    }
+
+    public function setStHonorarnih($stHonorarnih)
+    {
+        $this->stHonorarnih = $stHonorarnih;
+        return $this;
+    }
+
+    public function setStHonorarnihIgr($stHonorarnihIgr)
+    {
+        $this->stHonorarnihIgr = $stHonorarnihIgr;
+        return $this;
+    }
+
+    public function setStHonorarnihIgrTujJZ($stHonorarnihIgrTujJZ)
+    {
+        $this->stHonorarnihIgrTujJZ = $stHonorarnihIgrTujJZ;
+        return $this;
+    }
+
+    public function getOpredelitevDrugiViri()
+    {
+        return $this->opredelitevDrugiViri;
+    }
+
+    public function getVlozekGostitelja()
+    {
+        return $this->vlozekGostitelja;
+    }
+
+    public function getVlozekKoproducenta()
+    {
+        return $this->vlozekKoproducenta;
+    }
+
+    public function setOpredelitevDrugiViri($opredelitevDrugiViri)
+    {
+        $this->opredelitevDrugiViri = $opredelitevDrugiViri;
+        return $this;
+    }
+
+    public function setVlozekGostitelja($vlozekGostitelja)
+    {
+        $this->vlozekGostitelja = $vlozekGostitelja;
+        return $this;
+    }
+
+    public function setVlozekKoproducenta($vlozekKoproducenta)
+    {
+        $this->vlozekKoproducenta = $vlozekKoproducenta;
+        return $this;
+    }
 
 }
