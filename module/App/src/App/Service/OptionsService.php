@@ -29,17 +29,17 @@ class OptionsService
      * @param bool $global
      * retuns array errors
      */
-    public function setValue($name, $value, $global = false)
-    {
-        $em   = $this->getEm();
-        $orep = $em->getRepository('App\Entity\Option');
-
-        $opt = $orep->find($name);
-
-        $user = $this->getIdentity();
-
-        $this->expectPermission('options-');
-    }
+//    public function setValue($name, $value, $global = false)
+//    {
+//        $em   = $this->getEm();
+//        $orep = $em->getRepository('App\Entity\Option');
+//
+//        $opt = $orep->find($name);
+//
+//        $user = $this->getIdentity();
+//
+//        $this->expectPermission('options-');
+//    }
 
     /**
      * Vrne vrednost opcij po logiki per user -> globalno -> default 
@@ -51,6 +51,10 @@ class OptionsService
      */
     public function getOptions($name)
     {
+        // preverjanje avtorizacije
+        $this->expectPermission("Option-read");
+        $this->expectPermission("OptionValue-read");
+
         $em = $this->getEm();
 
         $rep    = $em->getRepository('App\Entity\Option');
@@ -58,6 +62,10 @@ class OptionsService
 
         /* @var $opt \App\Entity\Option */
         $opt = $rep->findOneByName($name);
+
+        // preverjanje avtorizacije s kontekstom
+        $this->expectPermission("Option-read", $opt);
+
 
         $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000403);
 
@@ -68,6 +76,10 @@ class OptionsService
 
             $optValueR = $em->getRepository('App\Entity\OptionValue');
             $optValue  = $optValueR->getOptionValuesUserValue($opt, $user);
+
+            // preverjanje avtorizacije s kontekstom
+            $this->expectPermission("OptionValue-read", $optValue);
+
             if (!empty($optValue)) {
                 return $optValue;
             }
@@ -77,6 +89,10 @@ class OptionsService
         if (!$opt->getReadOnly()) {
             $optValue = $em->getRepository('App\Entity\OptionValue')
                     ->getOptionValuesGlobalValue($opt);
+
+            // preverjanje avtorizacije s kontekstom
+            $this->expectPermission("OptionValue-read", $optValue);
+
             if (!empty($optValue)) {
                 return $optValue;
             }
@@ -98,6 +114,7 @@ class OptionsService
             return $val['label'];
         }, $this->getOptions($object));
     }
+
     /**
      * 
      * Nastavi uporabniško opcijo v OptionValue entiteti
@@ -108,12 +125,20 @@ class OptionsService
      */
     public function setUserOption($name, $value)
     {
+        // preverjanje avtorizacije
+        $this->expectPermission("Option-read");
+        $this->expectPermission("OptionValue-write");
+
         $em  = $this->getEm();
         $rep = $em->getRepository('App\Entity\Option');
 
         /* @var $opt \App\Entity\Option */
         $opt = $rep->findOneByName($name);
 
+        // preverjanje avtorizacije s kontekstom
+        $this->expectPermission("Option-read",$opt);
+
+        
         $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000404);
 
         // preveri, če ima globalno opcijo
@@ -140,6 +165,10 @@ class OptionsService
             $optVal->setValue($value);
         }
         $em->persist($optVal);
+
+        // preverjanje avtorizacije s kontekstom
+        $this->expectPermission("OptionValue-write",$optVal);
+
         $em->flush();
 
         return true;
@@ -157,6 +186,10 @@ class OptionsService
      */
     public function setGlobalOption($name, $value)
     {
+        // preverjanje avtorizacije
+        $this->expectPermission("Option-write");
+        $this->expectPermission("OptionValue-write");
+        
         $em  = $this->getEm();
         $rep = $em->getRepository('App\Entity\Option');
 
@@ -181,7 +214,13 @@ class OptionsService
             $optVal = $optValR->findOneById($globalValueId);
             $optVal->setValue($value);
         }
-        $em->persist($optVal);  // $$ ali je lahko več persistov pred flush-em?
+        $em->persist($optVal); 
+        
+        
+        // preverjanje avtorizacije s kontekstom
+        $this->expectPermission("Option-write",$opt);
+        $this->expectPermission("OptionValue-write",$opt);
+
         $em->flush();
 
         return true;
