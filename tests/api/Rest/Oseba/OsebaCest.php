@@ -119,95 +119,6 @@ class OsebaCest
     }
 
     /**
-     * najde državo
-     * 
-     * @param ApiTester $I
-     */
-//    public function getListDrzava(ApiTester $I)
-//    {
-//        $resp            = $I->successfullyGetList($this->drzavaUrl, []);
-//        $list            = $resp['data'];
-//        $I->assertNotEmpty($list);
-//        $this->objDrzava = $drzava          = array_pop($list);
-//        $I->assertNotEmpty($drzava);
-//    }
-
-    /**
-     * 
-     * @param ApiTester $I
-     */
-//    public function createPopa(ApiTester $I)
-//    {
-//        $data           = [
-//            'sifra'     => 'ZZ12',
-//            'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
-//            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
-//            'naziv'     => 'zz',
-//            'naziv1'    => 'zz',
-//            'panoga'    => 'zz',
-//            'email'     => 'z@zzz.zz',
-//            'url'       => 'zz',
-//            'opomba'    => 'zz',
-//            'drzava'    => $this->objDrzava['id'],
-//            'idddv'     => 'zz',
-//            'maticna'   => 'ZZ123',
-//            'zavezanec' => 'Da',
-//            'jeeu'      => 'Da',
-//            'datZav'    => '2010-02-01T00:00:00+0100',
-//            'datnZav'   => '2017-02-01T00:00:00+0100',
-//            'zamejstvo' => FALSE,
-//        ];
-//        $this->objPopa1 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
-//        $I->assertNotEmpty($popa['id']);
-//        $I->assertEquals('ZZ12', $popa['sifra']);
-//
-//        //kreiramo še en zapis
-//        $data           = [
-//            'sifra'     => 'AA12',
-//            'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
-//            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
-//            'naziv'     => 'aa',
-//            'naziv1'    => 'aa',
-//            'panoga'    => 'aa',
-//            'email'     => 'a@zzz.zz',
-//            'url'       => 'aa',
-//            'opomba'    => 'aa',
-//            'drzava'    => $this->objDrzava['id'],
-//            'idddv'     => 'aa',
-//            'maticna'   => 'AA123',
-//            'zavezanec' => 'Da',
-//            'jeeu'      => 'Da',
-//            'datZav'    => '2011-02-01T00:00:00+0100',
-//            'datnZav'   => '2012-02-01T00:00:00+0100',
-//            'zamejstvo' => TRUE,
-//        ];
-//        $this->objPopa2 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
-//        $I->assertNotEmpty($popa['id']);
-//        $I->assertEquals('AA12', $popa['sifra']);
-//    }
-
-    /**
-     *  napolnimo vsaj en zapis
-     * 
-     * @param ApiTester $I
-     */
-//    public function createUserja(ApiTester $I)
-//    {
-//        $data          = [
-//            'email'              => 'test2@ifigenija.si',
-//            'name'               => 'Testni uporabnik za Cest testiranje',
-//            'password'           => 'zzzzzzzzzzzzzzzzzzz',
-//            'enabled'            => true,
-//            'expires'            => '2017-02-01T00:00:00+0100',
-//            'defaultRoute'       => 'zz',
-//            'defaultRouteParams' => 'zz',
-//        ];
-//        $this->objUser = $user          = $I->successfullyCreate($this->userUrl, $data);
-//        $I->assertEquals('test2@ifigenija.si', $user['email']);
-//        $I->assertNotEmpty($user['id']);
-//    }
-
-    /**
      *  napolnimo vsaj en zapis
      * 
      * @param ApiTester $I
@@ -254,7 +165,7 @@ class OsebaCest
             'datumRojstva'  => '1975-03-28T00:00:00+0100',
             'emso'          => 'AA',
             'davcna'        => 'AA123',
-            'spol'          => 'M',
+            'spol'          => 'Z',
             'opombe'        => 'aa',
             'drzavljanstvo' => 'aa',
             'drzavaRojstva' => 'aa',
@@ -376,7 +287,7 @@ class OsebaCest
         $data = [
             "oseba"    => $this->obj['id'],
             "stevilka" => "7777-122123",
-            "vrsta"    => "mobilna", //$$ rb - to je začasno, dokler se ne popravijo form-> setData... nastavljanje filtrov iz configa (v .yml)
+            "vrsta"    => "mobilna",
             "privzeta" => false,
         ];
 
@@ -421,7 +332,7 @@ class OsebaCest
         $drz             = array_pop($list);
         $data["drzava"]  = $drz['id'];
         $this->objpostni = $postni          = $I->successfullyCreate($this->naslUrl, $data);
-        $I->assertNotEmpty($postni, "naslov ni vpisan");   // $$ rb naslova ne doda pri ($form->isValid())
+        $I->assertNotEmpty($postni, "naslov ni vpisan");   
         $I->assertEquals('privzeti naslov', $postni['naziv'], "naziv naslova ni isti");
     }
 
@@ -431,7 +342,7 @@ class OsebaCest
      * 
      * @param ApiTester $I
      */
-    public function preberiPostniNaslov(\ApiTester $I)                  //$$ rb ne deluje, nedokončano
+    public function preberiPostniNaslov(\ApiTester $I)               
     {
         $postni = $I->successfullyGet($this->naslUrl, $this->objpostni['id']);
         $I->assertNotEmpty($postni);
@@ -463,7 +374,7 @@ class OsebaCest
         $I->assertEquals('1973-03-28T00:00:00+0100', $oseba['datumRojstva']);
         $I->assertEquals('ZZ', $oseba['emso'], "napačen emšo");
         $I->assertEquals('ZZ123', $oseba['davcna'], 'napačna davčna');
-//        $I->assertEquals('M', $oseba['spol'],"spol ni pravilen");   //$$ rb validator pri create-u javi napako
+        $I->assertEquals('M', $oseba['spol'],"spol ni pravilen");  
         $I->assertEquals('zz', $oseba['opombe']);
         $I->assertEquals('zz', $oseba['drzavljanstvo']);
         $I->assertEquals('zz', $oseba['drzavaRojstva']);
@@ -471,9 +382,6 @@ class OsebaCest
         $I->assertEquals(null, $oseba['user'], "user");
 
         codecept_debug($oseba);
-//        $I->assertTrue(isset($oseba['alternacije']));     //$$ verjetno potrebno konstruktorje za tomany relacije
-//        $I->assertTrue(isset($oseba['pogodbe']));    //$$ verjetno potrebno konstruktorje za tomany relacije
-//        $I->assertTrue(isset($oseba['zaposlitve']));   //$$ verjetno potrebno konstruktorje za tomany relacije
         $I->assertTrue(isset($oseba['kontaktneOsebe']));
         $I->assertTrue(isset($oseba['trrji']));
         $I->assertTrue(isset($oseba['telefonske']));
@@ -481,9 +389,6 @@ class OsebaCest
         $I->assertEquals(2, count($oseba['trrji']));
         $I->assertEquals(1, count($oseba['telefonske']));
         $I->assertEquals(1, count($oseba['naslovi']));
-//        $I->assertEquals(0, count($oseba['alternacije']));
-//        $I->assertEquals(0, count($oseba['pogodbe']));
-//        $I->assertEquals(0, count($oseba['zaposlitve']));
         $I->assertEquals(0, count($oseba['kontaktneOsebe']));
     }
 

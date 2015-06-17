@@ -2,9 +2,6 @@
 
 namespace AaaFixture;
 
-use Aaa\Entity\Permission;
-use Aaa\Entity\Role;
-use Aaa\Entity\User;
 use App\Entity\Option;
 use App\Entity\OptionValue;
 use Doctrine\Common\DataFixtures\AbstractFixture;
@@ -15,13 +12,10 @@ use Zend\Config\Config;
 use Max\Expect\ExpectTrait;
 
 /**
- * Nalaganje privzetih opcij dovoljenj in uporabnikov 
- * V load metodi je potrebno vključiti modul,
- * če želiš da se loadajo podatki iz modula 
  *
- * @author boris
+ * @author rado
  */
-class RolesFixture
+class OptionsFixture
         extends AbstractFixture
         implements FixtureInterface
 {
@@ -32,30 +26,7 @@ class RolesFixture
 
     public function load(ObjectManager $manager)
     {
-        echo "Nalagam - dovoljenja" . PHP_EOL;
-        $res = $this->getData('permissions');
-        foreach ($res as $val) {
-            $this->populatePermissions($manager, $val);
-        }
-        $manager->flush();
-        $manager->clear();
-        echo "Nalagam - vloge" . PHP_EOL;
-        $res = $this->getData('roles');
-        foreach ($res as $val) {
-            $this->populateRole($manager, $val);
-        }
-        $manager->flush();
-        $manager->clear();
-
-        echo "Nalagam - uporabnike" . PHP_EOL;
-        $res = $this->getData('users');
-        foreach ($res as $val) {
-            $this->populateUser($manager, $val);
-        }
-        $manager->flush();
-        $manager->clear();
-
-        // opcije je potrebno naložiti za uporabniki
+         // opcije je potrebno naložiti za uporabniki
         echo "Nalagam - opcije" . PHP_EOL;
         $res = $this->getData('options');
         foreach ($res as $val) {
@@ -65,36 +36,10 @@ class RolesFixture
         $manager->clear();
     }
 
-    /**
-     * Dodajanje skupin
-     * @param EntityManager $em 
-     * @param array $valarray
-     */
-    public function populateUser($em, $val)
-    {
-
-        $ur = $em->getRepository('\Aaa\Entity\User');
-        $rr = $em->getRepository('\Aaa\Entity\Role');
-        $o  = $ur->findOneByEmail($val['email']);
-        if (!$o) {
-            $o        = new User();
-            $o->setEmail($val['email']);
-            $password = uniqid() . uniqid();
-            $o->setPassword($password);
-            echo "User {$val['name']} geslo $password\n";
-            $o->setName($val['name']);
-            $o->setEnabled($val['enabled']);
-            $rr->resolveNames($o, $val['roles']);
-            $em->persist($o);
-
-            $this->addReference('user-' . $val['email'], $o);
-        }
-    }
-
     public function getData($entity)
     {
 
-        $pattern = 'module/*/fixture/' . $entity . '.yml';
+        $pattern = 'module/*/testFixture/' . $entity . '.yml';
 
         $files = glob($pattern);
 
@@ -187,41 +132,5 @@ class RolesFixture
         }
     }
 
-    public function populateRole($manager, $val)
-    {
-        $this->repo = $manager->getRepository('\Aaa\Entity\Role');
-        $this->pr   = $manager->getRepository('\Aaa\Entity\Permission');
-
-        $o = $this->repo->findOneByName($val['name']);
-        if (!$o) {
-            $o = new Role;
-            $o->setName($val['name']);
-            $o->setDescription($val['description']);
-            $o->setBuiltIn(true);
-            if ($val['permissions']) {
-                $this->pr->resolveNames($o, $val['permissions']);
-            }
-            $o->setBuiltIn(true);
-            $manager->persist($o);
-        }
-
-        return false;
-    }
-
-    public function populatePermissions($manager, $valarray)
-    {
-        $this->pr = $manager->getRepository('\Aaa\Entity\Permission');
-
-        $val = new Config($valarray);
-
-        $o = $this->pr->findOneByName($val->name);
-        if (!$o) {
-            $o = new Permission();
-            $o->setName($val->name);
-            $o->setDescription($val->description);
-        }
-        $manager->persist($o);
-        return false;
-    }
 
 }

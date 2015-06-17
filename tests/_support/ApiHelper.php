@@ -150,7 +150,7 @@ class ApiHelper
         $I = $this->getModule('REST');
 
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST($url, json_encode($data));          //$$ rb ta verjetno null spremeni v ""
+        $I->sendPOST($url, json_encode($data));     
         $I->seeResponseCodeIs('200');
         $I->seeResponseIsJson();
         return $I->grabDataFromResponseByJsonPath('$')[0];

@@ -102,7 +102,7 @@ class VajaCest
         $data      = [
             'zaporedna'   => 1,
             'porocilo'    => 'zz',
-            'dogodek'     => null, //$$rb najprej mora biti kreirana vaja, šele potem dogodek.
+            'dogodek'     => null, // najprej mora biti kreirana vaja, šele potem dogodek.
             'uprizoritev' => $this->lookUprizoritev['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
@@ -114,7 +114,7 @@ class VajaCest
         $data           = [
             'zaporedna'   => 2,
             'porocilo'    => 'aa',
-            'dogodek'     => null, //$$rb najprej mora biti kreirana vaja, šele potem dogodek.
+            'dogodek'     => null, //najprej mora biti kreirana vaja, šele potem dogodek.
             'uprizoritev' => $this->lookUprizoritev['id'],
         ];
         $this->objVaja2 = $ent            = $I->successfullyCreate($this->restUrl, $data);

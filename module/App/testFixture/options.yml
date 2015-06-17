@@ -1,0 +1,74 @@
+#-
+#    name: application.tenant.maticnopodjetje
+#    type: string
+#    public: false
+#    readOnly: true
+#    description: 'Šifra matičnega podjetja v Popa in ProdukcijskaHisa'
+#    defaultValue: "0987"
+
+#       za test; ima vse 3 vrednosti : defaultno, globalno in uporabniško
+-
+    name: test1.barva.ozadja
+    type: array
+    public: false
+    readOnly: false
+    perUser: true
+    description: 'barva ozadja'
+    defaultValue: 
+        - { key: b, value: bela }
+    optionValue:
+        global:
+            value: 
+                - { key: m, value: modra }
+        user:            
+            - 
+                email: admin@ifigenija.si
+                value: [{ key: r, value: rumena }]
+                
+#           za teste- globalna vrednost, nima user opcije 
+#           ne spreminjaj vrednosti
+-
+    name: test2.glob
+    type: array
+    public: false
+    readOnly: false
+    perUser: false
+    description: 'test2 le globalna vrednost'
+    defaultValue: [{ key: d, value: defaultna  }]
+    optionValue:
+        global:
+            value: 
+                - { key: g, value: globalna }
+            
+#            za test -glej description
+-
+    name: test3.readonly
+    type: array
+    public: false
+    readOnly: true
+    perUser: false
+    description: 'za test- le privzeta vrednost, onemogočeni globalna in user opcija'
+    defaultValue: 
+            - privzeta trojka
+            
+#            za test -glej description
+-
+    name: test4
+    type: array
+    public: false
+    readOnly: false
+    perUser: true
+    description: 'za test globalna in user vrednost se lahko kreirata'
+    defaultValue: 
+            - privzeta štirica
+            
+#            za test -glej description
+-
+    name: test5.notperUser
+    type: array
+    public: false
+    readOnly: false
+    perUser: false
+    description: 'za test - user opcija onemogočena'
+    defaultValue: 
+            - privzeta štirica

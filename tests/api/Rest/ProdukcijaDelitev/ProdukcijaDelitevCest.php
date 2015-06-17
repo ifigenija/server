@@ -272,7 +272,7 @@ class ProdukcijaDelitevCest
 
         $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-//        $I->assertEquals("xx", $list[0]['status']);      // $$ odvisno od sortiranja
+//        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
     }
 
     /**

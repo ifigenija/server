@@ -88,10 +88,10 @@ class TipFunkcijeCest
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
 //        codecept_debug($resp);
-        
+
         $I->assertNotEmpty($list);
         $I->assertGreaterThanOrEqual(16, count($list));     // odvisno od testnih fixturjev
-//        $I->assertEquals("Avtor", $list[0]['ime']);      //glede na sort $$
+//        $I->assertEquals("Avtor", $list[0]['ime']);      //glede na sort
     }
 
     /**
@@ -107,7 +107,7 @@ class TipFunkcijeCest
 
         $I->assertNotEmpty($list);
         $I->assertTrue(count($list) > 0);
-//        $I->assertEquals("Avtor", $list[0]['ime']);      //glede na sort $$
+//        $I->assertEquals("Avtor", $list[0]['ime']);      //glede na sort
     }
 
     /**

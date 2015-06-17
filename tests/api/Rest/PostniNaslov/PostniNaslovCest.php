@@ -109,39 +109,6 @@ class PostniNaslovCest
     }
 
     /**
-     * kreiram poslovnega partnerja
-     * 
-     * @param ApiTester $I
-     */
-//    public function createPopa(ApiTester $I)
-//    {
-//        $data          = [
-//            'sifra'     => 'ZZ12',
-//            'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
-//            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
-//            'naziv'     => 'zz',
-//            'naziv1'    => 'zz',
-//            'panoga'    => 'zz',
-//            'email'     => 'z@zzz.zz',
-//            'url'       => 'zz',
-//            'opomba'    => 'zz',
-//            'drzava'    => $this->objDrzava['id'],
-//            'idddv'     => 'zz',
-//            'maticna'   => 'ZZ123',
-//            'zavezanec' => 'Da',
-//            'jeeu'      => 'Da',
-//            'datZav'    => '2010-02-01T00:00:00+0100',
-//            'datnZav'   => '2017-02-01T00:00:00+0100',
-//            'zamejstvo' => FALSE,
-//        ];
-//        $this->objPopa = $popa          = $I->successfullyCreate($this->popaUrl, $data);
-//
-////        codecept_debug($popa);
-//        $I->assertNotEmpty($popa['id']);
-//        $I->assertEquals('ZZ12', $popa['sifra']);
-//    }
-
-    /**
      *  napolnimo vsaj en zapis
      *
      * @depends lookupOsebo

@@ -54,7 +54,7 @@ class ZasedenostCest
         $data          = [
             'zaporedna'   => 1,
             'porocilo'    => 'zz',
-            'dogodek'     => null, //$$rb najprej mora biti kreirana vaja, šele potem dogodek.
+            'dogodek'     => null, // najprej mora biti kreirana vaja, šele potem dogodek.
             'uprizoritev' => null,
         ];
         $this->objVaja = $ent           = $I->successfullyCreate($this->vajaUrl, $data);

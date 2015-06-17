@@ -410,7 +410,7 @@ class AlternacijaCest
 
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-//        $I->assertEquals("xx", $list[0]['status']);      // $$ odvisno od sortiranja
+//        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
     }
 
     /**
@@ -498,7 +498,7 @@ class AlternacijaCest
             'zacetek'         => '2013-02-01T00:00:00+0100',
             'konec'           => '2014-02-01T00:00:00+0100',
             'planiranoTraja'  => 1.23,
-            'dogodek'         => $this->objDogodek['id'], //$$ ga še ni
+            'dogodek'         => $this->objDogodek['id'], 
             'alternacija'     => $this->obj2['id'],
             'oseba'           => $this->lookOseba['id'],
         ];

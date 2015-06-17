@@ -155,8 +155,8 @@ class PopaCest
     {
         $data      = [
             'sifra'     => 'ZZ12',
-            'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
-            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
+            'tipkli'    => 'dobavitelj', 
+            'stakli'    => 'AK',
             'naziv'     => 'zz',
             'naziv1'    => 'zz',
             'panoga'    => 'zz',
@@ -181,8 +181,8 @@ class PopaCest
         // kreiramo še en zapis
         $data       = [
             'sifra'     => '',
-            'tipkli'    => '4', // $$ rb ko bodo opcije porihtane
-            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
+            'tipkli'    => 'kupec', 
+            'stakli'    => 'AK', 
             'naziv'     => 'aa',
             'naziv1'    => 'aa',
             'panoga'    => 'aa',
@@ -271,8 +271,8 @@ class PopaCest
         $popa = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertEquals($popa['sifra'], 'ZZ12');
-//        $I->assertEquals($popa['tipkli'], '3'); // $$ rb ko bodo opcije porihtane
-//        $I->assertEquals($popa['stakli'], 'AK'); // $$ rb ko bodo opcije porihtane
+        $I->assertEquals($popa['tipkli'], 'dobavitelj'); 
+        $I->assertEquals($popa['stakli'], 'AK'); 
         $I->assertEquals($popa['naziv'], 'zz');
         $I->assertEquals($popa['naziv1'], 'zz');
         $I->assertEquals($popa['panoga'], 'tralala');
@@ -303,7 +303,7 @@ class PopaCest
 
         $I->assertNotEmpty($list);
         $I->assertTrue($resp['state']['totalRecords'] >= 2, "total records");
-//        $I->assertEquals("aa", $list[0]['naziv']);      //glede na sort  $$
+//        $I->assertEquals("aa", $list[0]['naziv']);      //glede na sort  
     }
 
     /**
@@ -319,7 +319,7 @@ class PopaCest
 
         $I->assertNotEmpty($list);
         $I->assertTrue($resp['state']['totalRecords'] >= 1);
-//        $I->assertEquals("aa", $list[0]['naziv']);  // glede na sort $$
+//        $I->assertEquals("aa", $list[0]['naziv']);  // glede na sort 
     }
 
     /**

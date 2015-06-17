@@ -94,40 +94,6 @@ class TelefonskaCest
     }
 
     /**
-     * kreiram poslovnega partnerja
-     * 
-     * @depends getListDrzava
-     * @param ApiTester $I
-     */
-//    public function createPopa(ApiTester $I)
-//    {
-//        $data          = [
-//            'sifra'     => 'ZZ12',
-//            'tipkli'    => '3', // $$ rb ko bodo opcije porihtane
-//            'stakli'    => 'AK', // $$ rb ko bodo opcije porihtane
-//            'naziv'     => 'zz',
-//            'naziv1'    => 'zz',
-//            'panoga'    => 'zz',
-//            'email'     => 'z@zzz.zz',
-//            'url'       => 'zz',
-//            'opomba'    => 'zz',
-//            'drzava'    => $this->objDrzava['id'],
-//            'idddv'     => 'zz',
-//            'maticna'   => 'ZZ123',
-//            'zavezanec' => 'Da',
-//            'jeeu'      => 'Da',
-//            'datZav'    => '2010-02-01T00:00:00+0100',
-//            'datnZav'   => '2017-02-01T00:00:00+0100',
-//            'zamejstvo' => FALSE,
-//        ];
-//        $this->objPopa = $popa          = $I->successfullyCreate($this->popaUrl, $data);
-//
-////        codecept_debug($popa);
-//        $I->assertNotEmpty($popa['id']);
-//        $I->assertEquals('ZZ12', $popa['sifra']);
-//    }
-
-    /**
      * kreiramo vsaj en zapis
      * 
      * @depends lookupOsebo
@@ -137,7 +103,7 @@ class TelefonskaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'vrsta'    => 'mobilna', //$$ rb - popraviti opcije, kasneje M namesto mobilni
+            'vrsta'    => 'mobilna', 
             'stevilka' => '12-34',
             'privzeta' => true,
             'oseba'    => $this->lookOseba['id'],
@@ -148,7 +114,7 @@ class TelefonskaCest
 
         // še en zapis
         $data = [
-            'vrsta'    => 'domaca', //$$ rb - popraviti opcije, kasneje M namesto mobilni
+            'vrsta'    => 'domaca', 
             'stevilka' => '567',
             'privzeta' => true,
             'popa'     => $this->lookPopa['id'],
@@ -160,7 +126,7 @@ class TelefonskaCest
 
         // še en zapis
         $data = [
-            'vrsta'    => 'fiksna', //$$ rb - popraviti opcije, kasneje M namesto mobilni
+            'vrsta'    => 'fiksna',
             'stevilka' => '012',
             'privzeta' => true,
             'popa'     => $this->lookPopa['id'],
@@ -276,7 +242,7 @@ class TelefonskaCest
     {
 
         $data = [
-            'vrsta'    => 'mobilna', //$$ rb - popraviti opcije, kasneje M namesto mobilni
+            'vrsta'    => 'mobilna',
             'stevilka' => '12-34',
             'privzeta' => true,
         ];

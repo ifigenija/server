@@ -17,7 +17,7 @@ forms:
             - srednjeIme
             - psevdonim
             - polnoIme
-#            - spol     # $$ rb v filter validator haystack trenutno narobe zloži Moški in Ženska namesto M in Z               
+            - spol     
             - opombe
 #            - naslovi
             - email
