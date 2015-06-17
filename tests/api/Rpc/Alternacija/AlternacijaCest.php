@@ -52,9 +52,9 @@ class AlternacijaCest
         // pričakujemo kreiranje nove pogodbe
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'novaPogodba', ["alternacijaId" => $this->lookAlternacija1['id']]);
         $I->assertNotEmpty($resp);
-        //$$ še dodatna preverjanja -npr. ali so vrednosti na 0 ipd.
         $I->seeResponseIsJson();
-//        $I->assertEquals(1000403, $resp['code'], "opcije ne obstajajo" );   
+        $I->assertEquals(36, strlen($resp), "dolžina guid");
+        $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
     }
 
 }

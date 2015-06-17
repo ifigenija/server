@@ -176,8 +176,8 @@ class AvtorizacijaAlternacijaCest
 
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'novaPogodba', ["alternacijaId" => $this->lookAlternacija1['id']]);
         $I->assertNotEmpty($resp);
-        codecept_debug($resp);
-        $I->assertEquals(0, $resp['vrednostVaje'], "inicializirana vrednost vrednost Vaje");
+        $I->assertEquals(36,strlen($resp),"dolžina guid");
+        $I->assertEquals(8,stripos($resp,"-"),"prvi '-' v  guid");
     }
 
     /**
@@ -192,7 +192,8 @@ class AvtorizacijaAlternacijaCest
 
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'novaPogodba', ["alternacijaId" => $this->lookAlternacija2['id']]);
         $I->assertNotEmpty($resp);
-        $I->assertEquals(0, $resp['vrednostVaje'], "inicializirana vrednost vrednost Vaje");
+        $I->assertEquals(36,strlen($resp),"dolžina guid");
+        $I->assertEquals(8,stripos($resp,"-"),"prvi '-' v  guid");
     }
 
 }

@@ -5,7 +5,7 @@
  */
 
 namespace Produkcija\Rpc;
-
+use Zend\View\Model\JsonModel;
 /**
  * Description of AlternacijaRpcService
  *
@@ -69,34 +69,7 @@ class AlternacijaRpcService
 
         $em->flush();
 
-        return $this->getPogodbaData($pogodba);
-    }
-
-    /**
-     * Vrne podatke o pogodbi pripravljene za pošiljanje na klienta
-     * 
-     * @param \Produkcija\Entity\Pogodba $pogodba
-     */
-    protected function getPogodbaData($pogodba)
-    {
-        return [
-            'id'                 => $pogodba->getId(),
-            'sifra'              => $pogodba->getSifra(),
-            'vrednostDo'         => $pogodba->getVrednostDo(),
-            'zacetek'            => $pogodba->getZacetek(),
-            'konec'              => $pogodba->getKonec(),
-            'vrednostVaje'       => $pogodba->getVrednostVaje(),
-            'vrednostPredstave'  => $pogodba->getVrednostPredstave(),
-            'vrednostUre'        => $pogodba->getVrednostUre(),
-            'vrednostDoPremiere' => $pogodba->getVrednostDoPremiere(),
-            'aktivna'            => $pogodba->getAktivna(),
-            'zaposlenVDrJz'      => $pogodba->getZaposlenVDrJz(),
-            'opis'               => $pogodba->getOpis(),
-            'alternacije'        => $pogodba->getAlternacije(),
-            'oseba'              => $pogodba->getOseba(),
-            'popa'               => $pogodba->getPopa(),
-            'trr'                 => $pogodba->getTrr(),
-        ];
+        return $pogodba->getId();
     }
 
 }
