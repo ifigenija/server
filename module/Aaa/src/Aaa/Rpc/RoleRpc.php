@@ -27,6 +27,9 @@ class RoleRpcService
      */
     public function grant($rolename, $permname)
     {
+        // preverjanje avtorizacije
+        $this->expectPermission("Aaa-write");
+        
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $tr = $this->getServiceLocator()->get('translator');
 
@@ -61,6 +64,9 @@ class RoleRpcService
      */
     public function revoke($rolename, $permname)
     {
+        // preverjanje avtorizacije
+        $this->expectPermission("Aaa-write");
+
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $tr = $this->getServiceLocator()->get('translator');
 

@@ -6,14 +6,13 @@
 -
     name: administrator-dostopov
     description: 'Uporavljanje uporabnikov, skupin, vlog in dovoljenj.'
-    permissions: {  }
+    permissions:
+        - Aaa-write
 -
     name: anonymous
     description: 'Vloga za javne - neavtenticirane uporabnike'
     permissions: 
         - Drzava-read
-        - Permission-list
-#    permissions: [ Permission-list]
 -
     name: ifi-all
     description: 'Polni dostop do vsega v aplikaciji.'
@@ -22,11 +21,6 @@
     name: ifi-readall
     description: 'Dostop do vseh -read in -list dovoljenj.'
     permissions: {  }
-# $$ rb - ali je admin vloga za izbrisati , ker obstajata že ifi-*?
-#-
-#    name: admin
-#    description: 'Polni dostop do vsega v aplikaciji.'
-#    permissions: [Drzava-write, Drzava-read]
 - 
     name: planer
     description: 'Planer dogodkov v koledarju'

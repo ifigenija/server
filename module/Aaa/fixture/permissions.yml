@@ -15,6 +15,26 @@
     name: Oseba-vse
     description: Oseba - vse - za testiranje assert
 
+# perm prefix za je Aaa
+#-
+#    name: User-read
+#    description: User - branje
+#-
+#    name: User-write
+#    description: User - spreminjanje
+#-
+#    name: Role-read
+#    description: Role - branje
+#-
+#    name: Role-write
+#    description: Role - spreminjanje
+#-
+#    name: Permission-read
+#    description: Permission - branje
+#-
+#    name: Permission-write
+#    description: Permission - spreminjanje
+#
 # za superklase ni dovoljenj
 #-
 #    name: EnotaPrograma-read
@@ -23,6 +43,7 @@
 #    name: EnotaPrograma-write
 #    description: EnotaPrograma - spreminjanje
 
+# polavtomatsko vzdrževano:
 -
     name: Abonma-read
     description: Abonma - branje
@@ -134,13 +155,6 @@
 -
     name: Oseba-write
     description: Oseba - spreminjanje
-
--
-    name: Permission-read
-    description: Permission - branje
--
-    name: Permission-write
-    description: Permission - spreminjanje
 
 -
     name: PlacilniInstrument-read
@@ -332,13 +346,6 @@
     description: Rezervacija - spreminjanje
 
 -
-    name: Role-read
-    description: Role - branje
--
-    name: Role-write
-    description: Role - spreminjanje
-
--
     name: SedezniRed-read
     description: SedezniRed - branje
 -
@@ -428,13 +435,6 @@
 -
     name: Uprizoritev-write
     description: Uprizoritev - spreminjanje
-
--
-    name: User-read
-    description: User - branje
--
-    name: User-write
-    description: User - spreminjanje
 
 -
     name: Vaja-read

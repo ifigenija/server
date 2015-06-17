@@ -69,6 +69,7 @@ class UserFixture
                     ['06','petra@ifigenija.si',"testna uporabnica, ki je planerka","Petra1234",true,null, "","",],
                     ['07','ali@ifigenija.si',"testni uporabnik, ki dobi ifi-all vlogo","Ali1234",true,null, "","",],
                     ['08','berta@ifigenija.si',"testni uporabnik, ki dobi ifi-readall vlogo","Berta1234",true,null, "","",],
+                    ['09','aaron@ifigenija.si',"testni uporabnik, ki dobi aaa-write dovoljenje","Aaron1234",true,null, "","",],
         ];
     }
 
