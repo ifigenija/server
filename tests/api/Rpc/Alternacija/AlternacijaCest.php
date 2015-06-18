@@ -6,12 +6,12 @@ use ApiTester;
 
 /**
  * Testiranje metod AlternacijaService-a
- * - setPogodba
- * negativni testi
- * - neveljaven id alternacije
+ *      - novaPogodba
+ *      negativni testi
+ *      - neveljaven id alternacije
+ *      - pogodba že obstaja
  * - itd
- * idempotentnost
- * - ...
+ *      idempotentnost -je ni
  */
 class AlternacijaCest
 {
@@ -55,6 +55,32 @@ class AlternacijaCest
         $I->seeResponseIsJson();
         $I->assertEquals(36, strlen($resp), "dolžina guid");
         $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function ponovnoNovaPogodba(ApiTester $I)
+    {
+
+        // pričakujemo napako, ker pogodba že obstaja
+        $resp = $I->failCallRpc($this->rpcUrl, 'novaPogodba', ["alternacijaId" => $this->lookAlternacija1['id']]);
+        $I->assertNotEmpty($resp);
+        $I->assertEquals(1000922, $resp['code'], "pogodba že obstaja");
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function novaPogodbaCudenIdAlternacije(ApiTester $I)
+    {
+
+        // pričakujemo napako, ker pogodba že obstaja
+        $resp = $I->failCallRpc($this->rpcUrl, 'novaPogodba', ["alternacijaId" => "neobstoječe"]);
+        $I->assertNotEmpty($resp);
+//        $I->assertEquals(1000922, $resp['code'], "pogodba že obstaja");
     }
 
 }

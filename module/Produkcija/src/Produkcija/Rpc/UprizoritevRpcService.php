@@ -25,13 +25,14 @@ class UprizoritevRpcService
      * 
      * @returns pogodba id (ali celi objekt od pogodbe)  ali ?false  , če ne uspe $$
      */
-    public function novaPogodba($uprizoritevId)
+    public function novaMaticnaKoprodukcija($uprizoritevId)
     {
         // preverjanje avtorizacije
         $this->expectPermission("Uprizoritev-read");
         $this->expectPermission("StrosekUprizoritve-read");
         $this->expectPermission("Option-read");
         $this->expectPermission("ProdukcijaDelitev-write");
+        $this->expectPermission("ProdukcijskaHisa-read");
 
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $tr = $this->getServiceLocator()->get('translator');
@@ -54,40 +55,51 @@ class UprizoritevRpcService
 //                   nas strosek   izracunamo kot vsoto stroskovuprizoritve.vrednostdo za to UprizoritevRpcService
 //                   koproducent id je maticna produkcijska hisa
 //                
-                
-                
-        
-        
-        if ($uprizoritev->get()) {
-            throw new \Max\Exception\UnauthException($tr->translate('Uprizoritev že ima produkcijsko delitev za lastno gledališče'), 1000932);
+
+        $optionR      = $em->getRepository('App\Entity\Option');
+        $option       = $optionR->findOneByName("application.tenant.maticnopodjetje");
+        $sifra        = $option->getDefaultValue();
+   
+        $koprodukcije = $uprizoritev->getKoprodukcije();
+        if ($koprodukcije) {
+            if ($koprodukcije->exists(function($key, $ent) use (&$sifra){
+                        return $ent->getKoproducent()->getSifra() === $sifra;     //vrne true, če obstaja koprodukcija lastnega gledališča
+                    })
+            ) {
+                throw new \Max\Exception\UnauthException($tr->translate('Uprizoritev že ima produkcijsko delitev za lastno gledališče'), 1000932);
+            }
         }
+        $phisaR = $em->getRepository('Produkcija\Entity\ProdukcijskaHisa');
+        $phisa  = $phisaR->findOneBySifra($sifra);       // lastno gledališče
 
-        $koprodukcija = new \Produkcija\Entity\Pogodba();
+        $kopr = new \Produkcija\Entity\ProdukcijaDelitev();
 
+        // $$ polja bomo še izračunali, ko bomo vedli kako, npr. nas strosek je vsota vseh stroškov uprizoritve ad  #837
+        $kopr->setOdstotekFinanciranja(0);
+        $kopr->setNasStrosek(TRUE);
+        $kopr->setLastnaSredstva(0);        //$$ seštej vse stroške uprizoritve
+        $kopr->setZaproseno(0);
+        $kopr->setDrugiJavni(0);
+        $kopr->setAvtorskih(0);
+        $kopr->setTantiemi(0);
+        $kopr->setSkupniStrosek(0); //$$ še za spremeniti
+        $kopr->setZaprosenProcent(0);//$$ še za spremeniti
+        $kopr->setKoproducent($phisa);
+        $kopr->setUprizoritev($uprizoritev);
 
-        // vse vrednosti na 0
-        $koprodukcija->setVrednostDo(0);
-        $koprodukcija->setVrednostDo(0);
-        $koprodukcija->setVrednostVaje(0);
-        $koprodukcija->setVrednostPredstave(0);
-        $koprodukcija->setVrednostUre(0);
-        $koprodukcija->setVrednostDoPremiere(0);
-        $koprodukcija->setOseba($uprizoritev->getOseba());
+        $em->persist($kopr);
 
-        $koprodukcijaR = $em->getRepository("Produkcija\Entity\Pogodba")
-                ->setServiceLocator($this->getServiceLocator());
-        $koprodukcijaR->create($koprodukcija);           //da kreira tudi šifro
- // create vključuje tudi persist
-
-        $uprizoritev->setPogodba($koprodukcija);
 
         // sedaj, ko imamo entiteti ponovimo preverjanje avtorizacije zaradi morebitnega assert preverjanja!
-        $this->expectPermission("Pogodba-write", $koprodukcija);
-        $this->expectPermission("Uprizoritev-write", $uprizoritev);
+        $this->expectPermission("Uprizoritev-read", $uprizoritev);
+//        $this->expectPermission("StrosekUprizoritve-read");       // $$ še implementirati
+        $this->expectPermission("Option-read",$option);
+        $this->expectPermission("ProdukcijaDelitev-write",$kopr);
+        $this->expectPermission("ProdukcijskaHisa-read",$phisa);
 
         $em->flush();
 
-        return $koprodukcija->getId();
+        return $kopr->getId();
     }
 
 }

@@ -7,6 +7,10 @@ use ApiTester;
 /**
  * Testiranje metod UprizoritevService-a
  * - novaMaticnaKoprodukcija
+ * negativni testi
+ * - neveljaven id uprizoritve
+ * - koprodukcija že obstaja
+ * - itd.
  */
 class UprizoritevCest
 {
@@ -38,7 +42,6 @@ class UprizoritevCest
     }
 
     /**
-     *  -  getUprizoritevs  defaultValue 
      * 
      * @param ApiTester $I 
      */
@@ -50,6 +53,24 @@ class UprizoritevCest
         $I->seeResponseIsJson();
         $I->assertEquals(36, strlen($resp), "dolžina guid");
         $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
+    }
+
+    public function ponovnoNovaMaticnaKoprodukcija(ApiTester $I)
+    {
+
+        // pričakujemo napako, ker delitev že obstaja
+        $resp = $I->failCallRpc($this->rpcUrl, 'novaMaticnaKoprodukcija', ["uprizoritevId" => $this->lookUprizoritev1['id']]);
+        $I->assertNotEmpty($resp);
+        $I->assertEquals(1000932, $resp['code'], "produkcijska delitev že obstaja");
+    }
+
+    public function novaMaticnaKoprodukcijaBrezUprizoritve(ApiTester $I)
+    {
+
+        // pričakujemo napako, ker delitev že obstaja
+        $resp = $I->failCallRpc($this->rpcUrl, 'novaMaticnaKoprodukcija', ["uprizoritevId" => "neobstojeca"]);
+        $I->assertNotEmpty($resp);
+//        $I->assertEquals(1000932, $resp['code'], "produkcijska delitev že obstaja");
     }
 
 }
