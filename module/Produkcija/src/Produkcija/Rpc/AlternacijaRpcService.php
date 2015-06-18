@@ -5,7 +5,9 @@
  */
 
 namespace Produkcija\Rpc;
+
 use Zend\View\Model\JsonModel;
+
 /**
  * Description of AlternacijaRpcService
  *
@@ -22,7 +24,7 @@ class AlternacijaRpcService
      *  POST /rest/pogodba      vrednostPredstave=0,...
      *  PUT  /rest/alternacija   pogodba= idPogodbe 
      * 
-     * @param string $alternacija_id
+     * @param string $alternacijaId
      * 
      * @returns pogodba id (ali celi objekt od pogodbe)  ali ?false  , če ne uspe $$
      */
@@ -38,15 +40,14 @@ class AlternacijaRpcService
         $alternacija = $em->getRepository("Produkcija\Entity\Alternacija")
                 ->findOneById($alternacijaId);
         if (!$alternacija) {
-            throw new \Max\Exception\UnauthException($tr->translate('Ni alternacije'), 1000911);
+            throw new \Max\Exception\UnauthException($tr->translate('Ni alternacije'), 1000921);
         }
 
         if ($alternacija->getPogodba()) {
-            throw new \Max\Exception\UnauthException($tr->translate('Alternacija že ima pogodbo'), 1000912);
+            throw new \Max\Exception\UnauthException($tr->translate('Alternacija že ima pogodbo'), 1000922);
         }
 
         $pogodba = new \Produkcija\Entity\Pogodba();
-
 
         // vse vrednosti na 0
         $pogodba->setVrednostDo(0);
@@ -60,12 +61,13 @@ class AlternacijaRpcService
         $pogodbaR = $em->getRepository("Produkcija\Entity\Pogodba")
                 ->setServiceLocator($this->getServiceLocator());
         $pogodbaR->create($pogodba);           //da kreira tudi šifro
+        // create vključuje tudi persist
 
         $alternacija->setPogodba($pogodba);
 
         // sedaj, ko imamo entiteti ponovimo preverjanje avtorizacije zaradi morebitnega assert preverjanja!
-        $this->expectPermission("Pogodba-write",$pogodba);  
-        $this->expectPermission("Alternacija-write",$alternacija);
+        $this->expectPermission("Pogodba-write", $pogodba);
+        $this->expectPermission("Alternacija-write", $alternacija);
 
         $em->flush();
 

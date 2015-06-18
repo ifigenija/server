@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Uprizoritve")
- * @Max\Lookup(ident="sifra",label="naslov",search={"naslov"},)
+ * @Max\Lookup(ident="sifra",label="naslov",search={"naslov","sifra"},)
  * @Max\I18n(label="Uprizoritev",plural="Uprizoritve")
  * @Max\Id(prefix="0014")
  */

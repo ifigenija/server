@@ -26,4 +26,11 @@ class RpcController
         
         return $this->handleJsonRpcCall($srv);
     }
+
+    public function uprizoritevAction() {
+        
+        $srv = $this->getServiceLocator()->get('uprizoritev.rpc.service');
+        
+        return $this->handleJsonRpcCall($srv);
+    }
 }

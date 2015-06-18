@@ -78,7 +78,7 @@ class RoleRpcService
         $perm = $em->getRepository("Aaa\Entity\Permission")
                 ->findOneByName($permname);
         if (!$perm) {
-            throw new \Max\Exception\UnauthException($tr->translate('Ni permission-a'), 1000914);
+            throw new \Max\Exception\UnauthException($tr->translate('Ni permission-a'), 1000915);
         }
         
         $perms = $role->getPermissions();   //$$ rb za implementirati
