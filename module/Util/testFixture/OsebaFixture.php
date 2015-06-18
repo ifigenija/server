@@ -1,6 +1,6 @@
 <?php
 
-namespace IfiFixture;
+namespace TestFixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -28,7 +28,7 @@ class OsebaFixture
 
     public function getDependencies()
     {
-        return array('IfiFixture\UserFixture'); // fixture classes fixture is dependent on , 
+        return array('TestFixture\UserFixture'); // fixture classes fixture is dependent on , 
     }
 
     /**

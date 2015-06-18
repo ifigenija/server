@@ -73,3 +73,14 @@
            label: Aktivna
         N: 
            label: Neaktivna
+-
+    name: produkcijskahisa.status
+    type: array
+    public: false
+    readOnly: true
+    description: 'Status produkcijske hiše'
+    defaultValue: 
+        AK: 
+            label: aktivna
+        NA:  
+            label: neaktivna

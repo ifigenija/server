@@ -1,6 +1,6 @@
 <?php
 
-namespace IfiFixture;
+namespace TestFixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;

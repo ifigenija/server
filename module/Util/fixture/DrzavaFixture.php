@@ -11,9 +11,13 @@ use Doctrine\Common\Persistence\ObjectManager;
  *
  * @author boris
  */
-class DrzavaFixture extends AbstractFixture implements FixtureInterface {
+class DrzavaFixture
+        extends AbstractFixture
+        implements FixtureInterface
+{
 
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
 
         foreach ($this->getData() as $value) {
             $this->populateDrzava($manager, $value);
@@ -28,7 +32,8 @@ class DrzavaFixture extends AbstractFixture implements FixtureInterface {
      * @param string $object
      * @param array $vals
      */
-    public function populateDrzava($manager, $v) {
+    public function populateDrzava($manager, $v)
+    {
 
         $rep = $manager->getRepository('App\Entity\Drzava');
 
@@ -46,7 +51,8 @@ class DrzavaFixture extends AbstractFixture implements FixtureInterface {
         $o->setOpomba(isset($v[5]) ? $v[5] : null);
     }
 
-    public function getData() {
+    public function getData()
+    {
         return [['AF ', 'AFG', '004', 'Afghanistan ', 'Afganistan'],
             ['AX ', 'ALA', '248', 'Ålland Islands ', 'Alandski otoki', 'Otočje v Baltiku.'],
             ['AL ', 'ALB', '008', 'Albania ', 'Albanija'],

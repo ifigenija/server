@@ -1,6 +1,6 @@
 <?php
 
-namespace IfiFixture;
+namespace TestFixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -29,7 +29,7 @@ class TerminStoritveFixture
 
     public function getDependencies()
     {
-        return array('IfiFixture\DogodekFixture','IfiFixture\AlternacijaFixture','IfiFixture\OsebaFixture'); // fixture classes fixture is dependent on , 
+        return array('TestFixture\DogodekFixture','TestFixture\AlternacijaFixture','TestFixture\OsebaFixture'); // fixture classes fixture is dependent on , 
     }
 
     /**

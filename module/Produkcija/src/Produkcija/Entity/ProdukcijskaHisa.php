@@ -39,6 +39,7 @@ class ProdukcijskaHisa
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      * @Max\I18n(label="Status", description="Status produkcijske hiše")
+     * @Max\Ui(type="select",opts="produkcijskahisa.status", required=true)
      * @var string     
      */
     private $status;

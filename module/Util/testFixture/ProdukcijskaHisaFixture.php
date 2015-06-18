@@ -1,6 +1,6 @@
 <?php
 
-namespace IfiFixture;
+namespace TestFixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -27,7 +27,7 @@ class ProdukcijskaHisaFixture
 
     public function getDependencies()
     {
-        return array('IfiFixture\PopaFixture');
+        return array('TestFixture\PopaFixture','TestFixture\PopaMaticnoTestFixture');
     }
 
     /**
@@ -65,6 +65,7 @@ class ProdukcijskaHisaFixture
     public function getData()
     {
         return [
+            // 987 napolni že pri fixture-ju PopaMaticnoTest
             ['0987', 'A', 'Popa-0987',],
             ['0989', 'A', 'Popa-0989',],
         ];

@@ -4,7 +4,7 @@
 #    public: false
 #    readOnly: true
 #    description: 'Šifra matičnega podjetja v Popa in ProdukcijskaHisa'
-#    defaultValue: "0000"        #pri inštalaciji potrebno popraviti na konkretno vrednost        
+#    defaultValue: "0100"        #pri inštalaciji potrebno popraviti na konkretno vrednost        
 -
     name: popa.tipkli
     type: array

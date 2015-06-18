@@ -1,6 +1,6 @@
 <?php
 
-namespace IfiFixture;
+namespace TestFixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -29,7 +29,7 @@ class DogodekFixture
 
     public function getDependencies()
     {
-        return array('IfiFixture\VajaFixture'); // fixture classes fixture is dependent on , 
+        return array('TestFixture\VajaFixture'); // fixture classes fixture is dependent on , 
     }
 
     /**

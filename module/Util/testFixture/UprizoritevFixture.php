@@ -1,6 +1,6 @@
 <?php
 
-namespace IfiFixture;
+namespace TestFixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -29,7 +29,7 @@ class UprizoritevFixture
 
     public function getDependencies()
     {
-        return array('IfiFixture\BesediloFixture', 'IfiFixture\ProstorFixture', 'IfiFixture\ProdukcijskaHisaFixture'); // fixture classes fixture is dependent on 
+        return array('TestFixture\BesediloFixture', 'TestFixture\ProstorFixture', 'TestFixture\ProdukcijskaHisaFixture'); // fixture classes fixture is dependent on 
     }
 
     /**

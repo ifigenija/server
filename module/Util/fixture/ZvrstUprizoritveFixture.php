@@ -25,7 +25,7 @@ class ZvrstUprizoritveFixture
 
         $manager->flush();
     }
-
+   
     /**
      *
      * @param \Tip\Repository\IzbirneOpcije $rep

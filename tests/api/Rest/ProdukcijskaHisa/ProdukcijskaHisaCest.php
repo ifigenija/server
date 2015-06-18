@@ -131,17 +131,17 @@ class ProdukcijskaHisaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'status' => 'zz',
+            'status' => 'NA',
             'popa'   => $this->lookPopa1['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['status'], 'zz');
+        $I->assertEquals($ent['status'], 'NA');
         $I->assertEquals($ent['sifra'], '0988');
 
 
         $data       = [
-            'status' => 'bb',
+            'status' => 'AK',
             'popa'   => $this->lookPopa2['id'],
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -219,7 +219,7 @@ class ProdukcijskaHisaCest
 
         $I->assertEquals(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        $I->assertEquals("zz", $list[0]['status']);
+        $I->assertEquals("NA", $list[0]['status']);
     }
 
     /**
@@ -247,11 +247,11 @@ class ProdukcijskaHisaCest
     public function update(ApiTester $I)
     {
         $ent           = $this->obj;
-        $ent['status'] = 'yy';
+        $ent['status'] = 'AK';
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['status'], 'yy');
+        $I->assertEquals($entR['status'], 'AK');
     }
 
     /**
@@ -265,7 +265,7 @@ class ProdukcijskaHisaCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['status'], 'yy');
+        $I->assertEquals($ent['status'], 'AK');
         $I->assertEquals($ent['popa'], $this->lookPopa1['id']);
     }
 

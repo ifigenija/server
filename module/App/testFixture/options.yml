@@ -1,10 +1,10 @@
-#-
-#    name: application.tenant.maticnopodjetje
-#    type: string
-#    public: false
-#    readOnly: true
-#    description: 'Šifra matičnega podjetja v Popa in ProdukcijskaHisa'
-#    defaultValue: "0987"
+-
+    name: application.tenant.maticnopodjetje
+    type: string
+    public: false
+    readOnly: true
+    description: 'Šifra matičnega podjetja v Popa in ProdukcijskaHisa'
+    defaultValue: "0900"
 
 #       za test; ima vse 3 vrednosti : defaultno, globalno in uporabniško
 -

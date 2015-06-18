@@ -1,6 +1,6 @@
 <?php
 
-namespace AaaFixture;
+namespace TestFixture;
 
 use App\Entity\Option;
 use App\Entity\OptionValue;

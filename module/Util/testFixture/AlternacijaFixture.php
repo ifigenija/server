@@ -1,6 +1,6 @@
 <?php
 
-namespace IfiFixture;
+namespace TestFixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -25,11 +25,9 @@ class AlternacijaFixture
         $manager->flush();
     }
 
-    // $$ morda bo še potrebno implementirati funkcijo getOrder()
-
     public function getDependencies()
     {
-        return array('IfiFixture\FunkcijaFixture','IfiFixture\OsebaFixture'); // fixture classes fixture is dependent on , 
+        return array('TestFixture\FunkcijaFixture', 'TestFixture\OsebaFixture'); // fixture classes fixture is dependent on , 
     }
 
     /**

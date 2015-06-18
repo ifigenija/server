@@ -1,6 +1,6 @@
 <?php
 
-namespace AaaFixture;
+namespace IfiFixture;
 
 use Aaa\Entity\Permission;
 use Aaa\Entity\Role;
