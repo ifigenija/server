@@ -62,7 +62,7 @@ class PopaFixture
     public function getData()
     {
         return [
-            ['0988', 'koproducent', 'AK', 'Juhuhu d.o.o.'],
+            ['0988', 'dobavitelj', 'AK', 'Juhuhu d.o.o.'],
             ['0989', 'koproducent', 'AK', 'Hopsasa d.o.o.'],
             ['0987', 'koproducent', 'AK', 'Gledališče Šrum d.o.o.'],
             ['0986', 'koproducent', 'AK', 'Lutkovni Direndaj d.o.o.'],

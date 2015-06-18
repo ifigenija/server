@@ -71,6 +71,10 @@ class UprizoritevRpcService
         }
         $phisaR = $em->getRepository('Produkcija\Entity\ProdukcijskaHisa');
         $phisa  = $phisaR->findOneBySifra($sifra);       // lastno gledališče
+//        $strosekUprR = $em->getRepository('Produkcija\Entity\StrosekUprizoritve');
+        $stroski= $uprizoritev->getStroski();
+        
+        
 
         $kopr = new \Produkcija\Entity\ProdukcijaDelitev();
 
