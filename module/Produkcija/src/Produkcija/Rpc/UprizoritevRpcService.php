@@ -61,7 +61,7 @@ class UprizoritevRpcService
         $sifra        = $option->getDefaultValue();
    
         $koprodukcije = $uprizoritev->getKoprodukcije();
-        if ($koprodukcije) {
+        if (!$koprodukcije->isEmpty()) {
             if ($koprodukcije->exists(function($key, $ent) use (&$sifra){
                         return $ent->getKoproducent()->getSifra() === $sifra;     //vrne true, če obstaja koprodukcija lastnega gledališča
                     })
@@ -71,17 +71,21 @@ class UprizoritevRpcService
         }
         $phisaR = $em->getRepository('Produkcija\Entity\ProdukcijskaHisa');
         $phisa  = $phisaR->findOneBySifra($sifra);       // lastno gledališče
+
 //        $strosekUprR = $em->getRepository('Produkcija\Entity\StrosekUprizoritve');
         $stroski= $uprizoritev->getStroski();
-        
-        
+        $lastnaSredstva=0; //init
+        if (!$stroski->isEmpty()) {
+            $values=$stroski->getValues();
+            $ari=$stroski->toArray();
+        }
 
         $kopr = new \Produkcija\Entity\ProdukcijaDelitev();
 
         // $$ polja bomo še izračunali, ko bomo vedli kako, npr. nas strosek je vsota vseh stroškov uprizoritve ad  #837
         $kopr->setOdstotekFinanciranja(0);
         $kopr->setNasStrosek(TRUE);
-        $kopr->setLastnaSredstva(0);        //$$ seštej vse stroške uprizoritve
+        $kopr->setLastnaSredstva($lastnaSredstva);        //$$ seštej vse stroške uprizoritve
         $kopr->setZaproseno(0);
         $kopr->setDrugiJavni(0);
         $kopr->setAvtorskih(0);

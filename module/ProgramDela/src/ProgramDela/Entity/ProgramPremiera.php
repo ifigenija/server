@@ -29,7 +29,7 @@ class ProgramPremiera
         if ($this->getDokument()) {
             // preveriti, ali že obstaja programpremiere z isto uprizoritvijo
             $obstaja = true;  //init
-            if ($this->getDokument()->getPremiere()) {
+            if (!$this->getDokument()->getPremiere()->isEmpty()) {
                 $obstaja = $this->getDokument()
                         ->getPremiere()
                         ->exists(function($key, $progPremiere) {
