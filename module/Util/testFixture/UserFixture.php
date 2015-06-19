@@ -18,11 +18,11 @@ class UserFixture
 
     public function load(ObjectManager $manager)
     {
-        foreach ($this->getData() as $value) {
-            $this->populateUser($manager, $value);
-        }
-
-        $manager->flush();
+//        foreach ($this->getData() as $value) {
+//            $this->populateUser($manager, $value);
+//        }
+//
+//        $manager->flush();
     }
 
     /**

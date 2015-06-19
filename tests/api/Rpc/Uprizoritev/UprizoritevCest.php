@@ -21,7 +21,8 @@ class UprizoritevCest
 
     public function _before(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+        // da testiramo vsa posamezna dovoljenja brez shortCurcuit
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vesna, \IfiTest\AuthPage::$vesnaPass);
     }
 
     /**

@@ -44,25 +44,13 @@ class UprizoritevRpcService
             throw new \Max\Exception\UnauthException($tr->translate('Ni uprizoritve'), 1000931);
         }
 
-        //$$ rb psevdo koda:
-//        sifra=opcija get maticno podjetje
-//        preveri, če koprodukcija za sifro ze obstaja
-//                - za vse uprizoritev.koprodukcije
-//                    - ali obstaja taka s sifro?
-//        ce ne obstaja
-//           kreiraj koprodukcijo
-//                inicializacija polj
-//                   nas strosek   izracunamo kot vsoto stroskovuprizoritve.vrednostdo za to UprizoritevRpcService
-//                   koproducent id je maticna produkcijska hisa
-//                
+        $optionR = $em->getRepository('App\Entity\Option');
+        $option  = $optionR->findOneByName("application.tenant.maticnopodjetje");
+        $sifra   = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
 
-        $optionR      = $em->getRepository('App\Entity\Option');
-        $option       = $optionR->findOneByName("application.tenant.maticnopodjetje");
-        $sifra        = $option->getDefaultValue();
-   
         $koprodukcije = $uprizoritev->getKoprodukcije();
         if (!$koprodukcije->isEmpty()) {
-            if ($koprodukcije->exists(function($key, $ent) use (&$sifra){
+            if ($koprodukcije->exists(function($key, $ent) use (&$sifra) {
                         return $ent->getKoproducent()->getSifra() === $sifra;     //vrne true, če obstaja koprodukcija lastnega gledališča
                     })
             ) {
@@ -72,12 +60,16 @@ class UprizoritevRpcService
         $phisaR = $em->getRepository('Produkcija\Entity\ProdukcijskaHisa');
         $phisa  = $phisaR->findOneBySifra($sifra);       // lastno gledališče
 
-//        $strosekUprR = $em->getRepository('Produkcija\Entity\StrosekUprizoritve');
-        $stroski= $uprizoritev->getStroski();
-        $lastnaSredstva=0; //init
+        $stroski        = $uprizoritev->getStroski();
+        $lastnaSredstva = 0; //init
         if (!$stroski->isEmpty()) {
-            $values=$stroski->getValues();
-            $ari=$stroski->toArray();
+            $strval = $stroski->getValues();
+            foreach ($strval as $su) {
+                // preverjanje avtorizacije s kontekstom
+                $this->expectPermission("StrosekUprizoritve-read", $su);
+                
+                $lastnaSredstva += $su->getVrednostDo();
+            }
         }
 
         $kopr = new \Produkcija\Entity\ProdukcijaDelitev();
@@ -91,7 +83,7 @@ class UprizoritevRpcService
         $kopr->setAvtorskih(0);
         $kopr->setTantiemi(0);
         $kopr->setSkupniStrosek(0); //$$ še za spremeniti
-        $kopr->setZaprosenProcent(0);//$$ še za spremeniti
+        $kopr->setZaprosenProcent(0); //$$ še za spremeniti
         $kopr->setKoproducent($phisa);
         $kopr->setUprizoritev($uprizoritev);
 
@@ -100,10 +92,9 @@ class UprizoritevRpcService
 
         // sedaj, ko imamo entiteti ponovimo preverjanje avtorizacije zaradi morebitnega assert preverjanja!
         $this->expectPermission("Uprizoritev-read", $uprizoritev);
-//        $this->expectPermission("StrosekUprizoritve-read");       // $$ še implementirati
-        $this->expectPermission("Option-read",$option);
-        $this->expectPermission("ProdukcijaDelitev-write",$kopr);
-        $this->expectPermission("ProdukcijskaHisa-read",$phisa);
+        $this->expectPermission("Option-read", $option);
+        $this->expectPermission("ProdukcijaDelitev-write", $kopr);
+        $this->expectPermission("ProdukcijskaHisa-read", $phisa);
 
         $em->flush();
 

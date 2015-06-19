@@ -43,5 +43,7 @@ class AuthPage
     public static $bertaPass = "Berta1234";
     public static $aaron     = "aaron@ifigenija.si";
     public static $aaronPass = "Aaron1234";
+    public static $vesna     = "vesna@ifigenija.si";
+    public static $vesnaPass = "Vesna1234";
 
 }
