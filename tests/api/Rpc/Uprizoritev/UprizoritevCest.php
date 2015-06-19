@@ -6,11 +6,12 @@ use ApiTester;
 
 /**
  * Testiranje metod UprizoritevService-a
- * - novaMaticnaKoprodukcija
+ * - preracunajMaticnaKoprodukcija
  * negativni testi
  * - neveljaven id uprizoritve
  * - koprodukcija že obstaja
  * - itd.
+ * idempotentnost
  */
 class UprizoritevCest
 {
@@ -49,27 +50,30 @@ class UprizoritevCest
     public function novaMaticnaKoprodukcija(ApiTester $I)
     {
         // pričakujemo kreiranje nove produkcijske delitve za lastno gledališče
-        $resp = $I->successfullyCallRpc($this->rpcUrl, 'novaMaticnaKoprodukcija', ["uprizoritevId" => $this->lookUprizoritev1['id']]);
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'preracunajMaticnaKoprodukcija', ["uprizoritevId" => $this->lookUprizoritev1['id']]);
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
         $I->assertEquals(36, strlen($resp), "dolžina guid");
         $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
     }
 
-    public function ponovnoNovaMaticnaKoprodukcija(ApiTester $I)
+    public function ponovnoPreracunajMaticnaKoprodukcija(ApiTester $I)
     {
+        //$$ tu bi lahko v stroške dodali nekaj in potem ponovno preračunali
 
-        // pričakujemo napako, ker delitev že obstaja
-        $resp = $I->failCallRpc($this->rpcUrl, 'novaMaticnaKoprodukcija', ["uprizoritevId" => $this->lookUprizoritev1['id']]);
+        // pričakujemo uspeh, osvežitev polj DelitviKoprodukcije
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'preracunajMaticnaKoprodukcija', ["uprizoritevId" => $this->lookUprizoritev1['id']]);
         $I->assertNotEmpty($resp);
-        $I->assertEquals(1000932, $resp['code'], "produkcijska delitev že obstaja");
+        $I->seeResponseIsJson();
+        $I->assertEquals(36, strlen($resp), "dolžina guid");
+        $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
     }
 
     public function novaMaticnaKoprodukcijaBrezUprizoritve(ApiTester $I)
     {
 
         // pričakujemo napako, ker delitev že obstaja
-        $resp = $I->failCallRpc($this->rpcUrl, 'novaMaticnaKoprodukcija', ["uprizoritevId" => "neobstojeca"]);
+        $resp = $I->failCallRpc($this->rpcUrl, 'preracunajMaticnaKoprodukcija', ["uprizoritevId" => "neobstojeca"]);
         $I->assertNotEmpty($resp);
 //        $I->assertEquals(1000932, $resp['code'], "produkcijska delitev že obstaja");
     }

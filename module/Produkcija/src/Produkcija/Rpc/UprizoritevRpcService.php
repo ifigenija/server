@@ -25,7 +25,7 @@ class UprizoritevRpcService
      * 
      * @returns pogodba id (ali celi objekt od pogodbe)  ali ?false  , če ne uspe $$
      */
-    public function novaMaticnaKoprodukcija($uprizoritevId)
+    public function preracunajMaticnaKoprodukcija($uprizoritevId)
     {
         // preverjanje avtorizacije
         $this->expectPermission("Uprizoritev-read");
@@ -48,15 +48,6 @@ class UprizoritevRpcService
         $option  = $optionR->findOneByName("application.tenant.maticnopodjetje");
         $sifra   = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
 
-        $koprodukcije = $uprizoritev->getKoprodukcije();
-        if (!$koprodukcije->isEmpty()) {
-            if ($koprodukcije->exists(function($key, $ent) use (&$sifra) {
-                        return $ent->getKoproducent()->getSifra() === $sifra;     //vrne true, če obstaja koprodukcija lastnega gledališča
-                    })
-            ) {
-                throw new \Max\Exception\UnauthException($tr->translate('Uprizoritev že ima produkcijsko delitev za lastno gledališče'), 1000932);
-            }
-        }
         $phisaR = $em->getRepository('Produkcija\Entity\ProdukcijskaHisa');
         $phisa  = $phisaR->findOneBySifra($sifra);       // lastno gledališče
 
@@ -67,12 +58,27 @@ class UprizoritevRpcService
             foreach ($strval as $su) {
                 // preverjanje avtorizacije s kontekstom
                 $this->expectPermission("StrosekUprizoritve-read", $su);
-                
+
                 $lastnaSredstva += $su->getVrednostDo();
             }
         }
 
-        $kopr = new \Produkcija\Entity\ProdukcijaDelitev();
+        $matkoprColl = $uprizoritev->getKoprodukcije()
+                ->filter(function($ent) use (&$sifra) {
+            return $ent->getKoproducent()->getSifra() === $sifra;     //vrne  koprodukcijo lastnega gledališča
+        });
+        
+        if ($matkoprColl->count()>1){
+            throw new \Max\Exception\UnauthException($tr->translate('Obstaja več koprodukcij ('.$matkoprColl->count().') lastega gledališča '), 1000932);
+        }
+        
+        
+        if ($matkoprColl->isEmpty()) {
+            $kopr = new \Produkcija\Entity\ProdukcijaDelitev();
+            $em->persist($kopr);
+        } else{
+            $kopr=$matkoprColl->get(0);
+        }
 
         // $$ polja bomo še izračunali, ko bomo vedli kako, npr. nas strosek je vsota vseh stroškov uprizoritve ad  #837
         $kopr->setOdstotekFinanciranja(0);
@@ -87,10 +93,7 @@ class UprizoritevRpcService
         $kopr->setKoproducent($phisa);
         $kopr->setUprizoritev($uprizoritev);
 
-        $em->persist($kopr);
-
-
-        // sedaj, ko imamo entiteti ponovimo preverjanje avtorizacije zaradi morebitnega assert preverjanja!
+        // sedaj, ko imamo entitete ponovimo preverjanje avtorizacije zaradi morebitnega assert preverjanja!
         $this->expectPermission("Uprizoritev-read", $uprizoritev);
         $this->expectPermission("Option-read", $option);
         $this->expectPermission("ProdukcijaDelitev-write", $kopr);
