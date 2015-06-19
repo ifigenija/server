@@ -33,7 +33,7 @@ class UprizoritevCest
     public function lookupUprizoritev(ApiTester $I)
     {
         // uprizoritev brez koprodukcije
-        $resp                   = $I->successfullyGetList($this->lookupUprizoritevUrl . '?ident=0001', []);
+        $resp                   = $I->successfullyGetList($this->lookupUprizoritevUrl . '?ident=0002', []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
@@ -55,11 +55,13 @@ class UprizoritevCest
         $I->seeResponseIsJson();
         $I->assertEquals(36, strlen($resp), "dolžina guid");
         $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
+        
+        //$$ tu bi lahko se preverili, ce so zapisane prave vrednosti
     }
 
     public function ponovnoPreracunajMaticnaKoprodukcija(ApiTester $I)
     {
-        //$$ tu bi lahko v stroške dodali nekaj in potem ponovno preračunali
+        //$$ tu bi lahko v stroške ali avtorske pogodbe dodali nekaj in potem ponovno preračunali
 
         // pričakujemo uspeh, osvežitev polj DelitviKoprodukcije
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'preracunajMaticnaKoprodukcija', ["uprizoritevId" => $this->lookUprizoritev1['id']]);

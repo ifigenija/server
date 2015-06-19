@@ -72,10 +72,10 @@ class ProdukcijaDelitev
      *  $$ rb ali ni to isto kot avtorski honorar?
      * 
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="prodel.tantiemi", description="prodel.tantiemi")
+     * @Max\I18n(label="prodel.tantieme", description="prodel.tantieme")
      * @var double
      */
-    private $tantiemi;
+    private $tantieme;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
@@ -161,9 +161,9 @@ class ProdukcijaDelitev
         return $this->avtorskih;
     }
 
-    public function getTantiemi()
+    public function getTantieme()
     {
-        return $this->tantiemi;
+        return $this->tantieme;
     }
 
     public function getSkupniStrosek()
@@ -233,9 +233,9 @@ class ProdukcijaDelitev
         return $this;
     }
 
-    public function setTantiemi($tantiemi)
+    public function setTantieme($tantieme)
     {
-        $this->tantiemi = $tantiemi;
+        $this->tantieme = $tantieme;
         return $this;
     }
 

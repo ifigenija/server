@@ -83,6 +83,7 @@ class StrosekUprizoritveCest
             'vrednostDo'  => 1.23,
             'vrednostNa'  => 4.56,
             'opis'        => 'zz',
+            'tipstroska'        => 'materialni',
             'sort'        => 1,
             'uprizoritev' => $this->lookUprizoritev['id'],
             'popa'        => $this->lookPopa['id'],
@@ -98,6 +99,7 @@ class StrosekUprizoritveCest
             'vrednostDo'  => 2.34,
             'vrednostNa'  => 5.67,
             'opis'        => 'aa',
+            'tipstroska'        => 'tantiema',
             'sort'        => 2,
             'uprizoritev' => $this->lookUprizoritev['id'],
             'popa'        => $this->lookPopa['id'],
@@ -175,6 +177,8 @@ class StrosekUprizoritveCest
         $I->assertEquals($ent['vrednostDo'  ], 1.23);
         $I->assertEquals($ent['vrednostNa'  ], 4.56);
         $I->assertEquals($ent['sort'        ], 1);
+        $I->assertEquals($ent['tipstroska'], 'materialni', "tip stroška");
+
         $I->assertEquals($ent['uprizoritev' ], $this->lookUprizoritev['id']);
         $I->assertEquals($ent['popa'        ], $this->lookPopa['id']);
     }

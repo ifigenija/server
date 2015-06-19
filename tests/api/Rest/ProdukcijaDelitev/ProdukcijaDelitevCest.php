@@ -201,7 +201,7 @@ class ProdukcijaDelitevCest
             'zaproseno'            => 15.12,
             'drugiJavni'           => 16.78,
             'avtorskih'            => 2.34,
-            'tantiemi'             => 5.67,
+            'tantieme'             => 5.67,
             'skupniStrosek'        => 34.56,
             'zaprosenProcent'      => 55.5,
             'uprizoritev'          => $this->lookUprizoritev['id'],
@@ -324,7 +324,7 @@ class ProdukcijaDelitevCest
         $I->assertEquals($ent['zaproseno'], 15.12);
         $I->assertEquals($ent['drugiJavni'], 16.78);
         $I->assertEquals($ent['avtorskih'], 2.34);
-        $I->assertEquals($ent['tantiemi'], 5.67);
+        $I->assertEquals($ent['tantieme'], 5.67);
         $I->assertEquals($ent['skupniStrosek'], 34.56);
         $I->assertEquals($ent['zaprosenProcent'], 55.5);
         $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);

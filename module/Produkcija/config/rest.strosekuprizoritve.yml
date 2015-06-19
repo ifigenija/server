@@ -10,6 +10,7 @@ forms:
             - vrednostDo
             - vrednostNa
             - opis
+            - tipstroska
             - sort
             - uprizoritev
             - popa

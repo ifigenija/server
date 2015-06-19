@@ -54,6 +54,14 @@ class StrosekUprizoritve
     private $opis;
 
     /**
+     * @ORM\Column(type="string", length=10)
+     * @Max\I18n(label="strosekuprizoritve.tipstroska",  description="strosekuprizoritve.d.tipstroska")
+     * @Max\Ui(type="select",opts="strosekuprizoritve.tipstroska")
+     * @var string
+     */
+    private $tipstroska;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="entiteta.sort", description="entiteta.sort")
      * @Max\Ui(type="integer",icon="fa fa-sort")
@@ -169,6 +177,17 @@ class StrosekUprizoritve
     public function setPopa(\App\Entity\Popa $popa)
     {
         $this->popa = $popa;
+        return $this;
+    }
+
+    public function getTipstroska()
+    {
+        return $this->tipstroska;
+    }
+
+    public function setTipstroska($tipstroska)
+    {
+        $this->tipstroska = $tipstroska;
         return $this;
     }
 

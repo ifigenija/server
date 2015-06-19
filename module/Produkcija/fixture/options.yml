@@ -84,3 +84,14 @@
             label: aktivna
         NA:  
             label: neaktivna
+-
+    name: strosekuprizoritve.tipstroska
+    type: array
+    public: false
+    readOnly: true
+    description: Tip stroška
+    defaultValue: 
+        materialni:
+           label: Materialni strošek
+        tantiema:
+           label: Strošek tantieme

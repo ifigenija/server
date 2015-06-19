@@ -55,6 +55,7 @@ class StrosekUprizoritveFixture
         $o->setUprizoritev($getref);
         $getref = $this->getReference($v[6]);
         $o->setPopa($getref);
+        $o->setTipstroska(trim($v[7]));
 
         $manager->persist($o);
 
@@ -66,8 +67,9 @@ class StrosekUprizoritveFixture
     public function getData()
     {
         return [
-            ['Nabava kostumov', 600.50, 20, "Krila in maske", 1, "Uprizoritev-0001", "Popa-0988"],
-            ['Zavese', 125.70, 3.1, "Modra in zelena zavesa", 2, "Uprizoritev-0001", "Popa-0988"],
+            ['Nabava kostumov', 600.50, 20, "Krila in maske", 1, "Uprizoritev-0002", "Popa-0988","materialni"],
+            ['Zavese', 125.70, 3.1, "Modra in zelena zavesa", 2, "Uprizoritev-0002", "Popa-0988","materialni"],
+            ['Tantiema', 200, 10, "Tantiema za besedilo", 3, "Uprizoritev-0002", "Popa-0985","tantiema"],
         ];
     }
 
