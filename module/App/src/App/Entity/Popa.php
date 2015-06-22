@@ -256,6 +256,16 @@ class Popa
     private $zamejstvo = false;
 
     /**
+     * A je poslovni partner NVO - nevladna organizacija
+     * 
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="popa.nvo", description="popa.d.nvo")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    private $nvo = false;
+
+    /**
      * @ORM\OneToOne(targetEntity="Produkcija\Entity\ProdukcijskaHisa", mappedBy="popa")
      * @Max\I18n(label="popa.producent",  description="popa.d.producent")
      * @Max\Ui(type="toone")
@@ -608,6 +618,17 @@ class Popa
     public function setKupec(\Prodaja\Entity\Kupec $kupec)
     {
         $this->kupec = $kupec;
+        return $this;
+    }
+
+    public function getNvo()
+    {
+        return $this->nvo;
+    }
+
+    public function setNvo($nvo)
+    {
+        $this->nvo = $nvo;
         return $this;
     }
 

@@ -171,6 +171,7 @@ class PopaCest
             'datZav'    => '2010-02-01T00:00:00+0100',
             'datnZav'   => '2017-02-01T00:00:00+0100',
             'zamejstvo' => FALSE,
+            'nvo' => FALSE,
         ];
         $this->obj = $popa      = $I->successfullyCreate($this->restUrl, $data);
 
@@ -197,6 +198,7 @@ class PopaCest
             'datZav'    => '2011-02-01T00:00:00+0100',
             'datnZav'   => '2018-02-01T00:00:00+0100',
             'zamejstvo' => FALSE,
+            'nvo' => FALSE,
         ];
         $this->obj2 = $popa       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($popa['id']);
@@ -287,6 +289,7 @@ class PopaCest
         $I->assertEquals($popa['datZav'], '2010-02-01T00:00:00+0100');
         $I->assertEquals($popa['datnZav'], '2017-02-01T00:00:00+0100');
         $I->assertEquals($popa['zamejstvo'], FALSE);
+        $I->assertEquals($popa['nvo'], FALSE);
     }
 
     /**

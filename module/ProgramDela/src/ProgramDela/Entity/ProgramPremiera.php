@@ -23,6 +23,12 @@ class ProgramPremiera
      * @var \ProgramDela\Entity\ProgramDela
      */
     private $dokument;
+    
+     /**
+     * @ORM\Column(length=50, nullable=true)
+     * @var string
+     */
+    protected $stringpolje;
 
     public function validate($mode = 'update')
     {

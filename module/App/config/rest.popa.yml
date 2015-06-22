@@ -30,6 +30,7 @@ forms:
             - datZav  
             - datnZav
             - zamejstvo    
+            - nvo
             - panoga
             - producent
             - kupec
