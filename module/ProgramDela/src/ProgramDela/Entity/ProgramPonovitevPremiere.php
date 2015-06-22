@@ -42,6 +42,7 @@ class ProgramPonovitevPremiere
         $this->setStHonorarnih(0);
         $this->setStHonorarnihIgr(0);
         $this->setStHonorarnihIgrTujJZ(0);
+        $this->setNaziv("");        // dobimo iz uprizoritve
 
         parent::validate();
     }

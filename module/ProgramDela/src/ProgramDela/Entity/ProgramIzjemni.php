@@ -24,8 +24,12 @@ class ProgramIzjemni
 
     public function validate($mode = 'update')
     {
+        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program festival", 1000461);
+        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program festival", 1000462);
+
         parent::validate();
     }
+
     public function getDokument()
     {
         return $this->dokument;
@@ -36,6 +40,5 @@ class ProgramIzjemni
         $this->dokument = $dokument;
         return $this;
     }
-
 
 }

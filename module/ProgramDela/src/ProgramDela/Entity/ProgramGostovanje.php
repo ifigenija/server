@@ -90,6 +90,7 @@ class ProgramGostovanje
         $this->setUtemeljitev("");
         $this->setVlozekGostitelja(0);
         $this->setVlozekKoproducenta(0);
+        $this->setNaziv("");        // dobimo iz uprizoritve
 
         parent::validate();
     }

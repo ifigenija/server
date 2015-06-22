@@ -11,18 +11,8 @@ use Doctrine\ORM\Mapping AS ORM,
  * @Max\Id(prefix="0044")
  */
 class ProgramFestival
-        extends \Max\Entity\Base
+        extends \ProgramDela\Entity\EnotaPrograma
 {
-
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="guid")
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @Max\I18n(label="Id", description="ID programa festivala")
-     * @Max\Ui(type="id")
-     * @var string    
-     */
-    private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="programiFestival")
@@ -32,14 +22,6 @@ class ProgramFestival
      * @var \ProgramDela\Entity\ProgramDela
      */
     private $programDela;
-
-    /**
-     * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="entiteta.naziv", description="entiteta.naziv")
-     * @Max\Ui(type="naziv",ident=true )
-     * @var string
-     */
-    private $naziv;
 
     /**
      * @ORM\Column(type="string")
@@ -104,14 +86,6 @@ class ProgramFestival
     private $stProdukcij;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="festival.stObisk", description="festival.stObisk")
-     * @Max\Ui(type="integer")
-     * @var integer
-     */
-    private $stObisk;
-
-    /**
      * $$ preveri mersko enoto; ali v mesecih, dnevih , človek dnevih?
      * 
      * @ORM\Column(type="string")
@@ -130,7 +104,7 @@ class ProgramFestival
     private $casIzvedbe;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="festival.prizorisca", description="festival.prizorisca")
      * @var string
      */
@@ -151,7 +125,7 @@ class ProgramFestival
     private $programskoTelo;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="festival.soorganizatorji", description="festival.soorganizatorji")
      * @var string
      */
@@ -165,97 +139,33 @@ class ProgramFestival
      */
     private $stTujihSelektorjev;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="festival.stZaposlenih", description="festival.d.stZaposlenih")
-     * @Max\Ui(type="integer")
-     * @var integer
-     */
-    private $stZaposlenih;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="festival.stHonorarnih", description="festival.d.stHonorarnih")
-     * @Max\Ui(type="integer")
-     * @var integer
-     */
-    private $stHonorarnih;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.zaproseno", description="ep.d.zaproseno")   
-     * @var double
-     */
-    private $zaproseno;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.celotnaVrednost", description="ep.celotnaVrednost")   
-     * @var double
-     */
-    private $celotnaVrednost;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.lastnaSredstva", description="ep.lastnaSredstva")   
-     * @var double
-     */
-    private $lastnaSredstva;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.drugiViri", description="ep.drugiViri")   
-     * @var double
-     */
-    private $drugiViri;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="festival.opredelitevDrugiViri", description="festival.opredelitevDrugiViri")
-     * @var string
-     */
-    private $opredelitevDrugiViri;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="festival.vlozekKoproducenta", description="v")   
-     * @var double
-     */
-    private $vlozekKoproducenta;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.drugiJavni", description="ep.d.drugiJavni")   
-     * @var double
-     */
-    private $drugiJavni;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.sort", description="ep.d.sort")
-     * @Max\Ui(type="integer", icon="fa fa-sort")
-     * @var integer
-     */
-    private $sort;
-
     public function validate($mode = 'update')
     {
-        
-    }
+        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program festival", 1000461);
+        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program festival", 1000462);
 
-    public function getId()
-    {
-        return $this->id;
+        // neaktualna polja, ki jih tudi v formi ni:
+        $this->setAvtorskiHonorarji(0);
+        $this->setObiskGost(0);
+        $this->setObiskInt(0);
+        $this->setObiskZamejo(0);
+        $this->setPonoviDoma(0);
+        $this->setPonoviGost(0);
+        $this->setPonoviInt(0);
+        $this->setPonoviZamejo(0);
+        $this->setStDrugih(0);
+        $this->setStHonorarnihIgr(0);
+        $this->setStHonorarnihIgrTujJZ(0);
+        $this->setTantieme(0);
+        $this->setUtemeljitev("");
+        $this->setVlozekGostitelja(0);
+
+        parent::validate();
     }
 
     public function getProgramDela()
     {
         return $this->programDela;
-    }
-
-    public function getNaziv()
-    {
-        return $this->naziv;
     }
 
     public function getZvrst()
@@ -298,11 +208,6 @@ class ProgramFestival
         return $this->stProdukcij;
     }
 
-    public function getStObisk()
-    {
-        return $this->stObisk;
-    }
-
     public function getCasPriprave()
     {
         return $this->casPriprave;
@@ -338,66 +243,9 @@ class ProgramFestival
         return $this->stTujihSelektorjev;
     }
 
-    public function getStZaposlenih()
-    {
-        return $this->stZaposlenih;
-    }
-
-    public function getStHonorarnih()
-    {
-        return $this->stHonorarnih;
-    }
-
-    public function getZaproseno()
-    {
-        return $this->zaproseno;
-    }
-
-    public function getCelotnaVrednost()
-    {
-        return $this->celotnaVrednost;
-    }
-
-    public function getLastnaSredstva()
-    {
-        return $this->lastnaSredstva;
-    }
-
-    public function getDrugiViri()
-    {
-        return $this->drugiViri;
-    }
-
-    public function getOpredelitevDrugiViri()
-    {
-        return $this->opredelitevDrugiViri;
-    }
-
-    public function getVlozekKoproducenta()
-    {
-        return $this->vlozekKoproducenta;
-    }
-
-    public function getDrugiJavni()
-    {
-        return $this->drugiJavni;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-
     public function setProgramDela(\ProgramDela\Entity\ProgramDela $programDela)
     {
         $this->programDela = $programDela;
-        return $this;
-    }
-
-    public function setNaziv($naziv)
-    {
-        $this->naziv = $naziv;
         return $this;
     }
 
@@ -449,12 +297,6 @@ class ProgramFestival
         return $this;
     }
 
-    public function setStObisk($stObisk)
-    {
-        $this->stObisk = $stObisk;
-        return $this;
-    }
-
     public function setCasPriprave($casPriprave)
     {
         $this->casPriprave = $casPriprave;
@@ -496,70 +338,5 @@ class ProgramFestival
         $this->stTujihSelektorjev = $stTujihSelektorjev;
         return $this;
     }
-
-    public function setStZaposlenih($stZaposlenih)
-    {
-        $this->stZaposlenih = $stZaposlenih;
-        return $this;
-    }
-
-    public function setStHonorarnih($stHonorarnih)
-    {
-        $this->stHonorarnih = $stHonorarnih;
-        return $this;
-    }
-
-    public function setZaproseno($zaproseno)
-    {
-        $this->zaproseno = $zaproseno;
-        return $this;
-    }
-
-    public function setCelotnaVrednost($celotnaVrednost)
-    {
-        $this->celotnaVrednost = $celotnaVrednost;
-        return $this;
-    }
-
-    public function setLastnaSredstva($lastnaSredstva)
-    {
-        $this->lastnaSredstva = $lastnaSredstva;
-        return $this;
-    }
-
-    public function setDrugiViri($drugiViri)
-    {
-        $this->drugiViri = $drugiViri;
-        return $this;
-    }
-
-    public function setOpredelitevDrugiViri($opredelitevDrugiViri)
-    {
-        $this->opredelitevDrugiViri = $opredelitevDrugiViri;
-        return $this;
-    }
-
-    public function setVlozekKoproducenta($vlozekKoproducenta)
-    {
-        $this->vlozekKoproducenta = $vlozekKoproducenta;
-        return $this;
-    }
-
-    public function setDrugiJavni($drugiJavni)
-    {
-        $this->drugiJavni = $drugiJavni;
-        return $this;
-    }
-    public function getSort()
-    {
-        return $this->sort;
-    }
-
-    public function setSort($sort)
-    {
-        $this->sort = $sort;
-        return $this;
-    }
-
 
 }

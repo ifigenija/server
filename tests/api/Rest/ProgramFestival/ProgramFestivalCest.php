@@ -61,7 +61,7 @@ class ProgramFestivalCest
             'stDrugiDogodki'          => 1,
             'opredelitevDrugiDogodki' => 'zz',
             'stProdukcij'             => 1,
-            'stObisk'                 => 1,
+            'obiskDoma'                 => 1,
             'casPriprave'             => 'zz',
             'casIzvedbe'              => 'zz',
             'prizorisca'              => 'zz',
@@ -96,7 +96,7 @@ class ProgramFestivalCest
             'stDrugiDogodki'          => 2,
             'opredelitevDrugiDogodki' => 'aa',
             'stProdukcij'             => 2,
-            'stObisk'                 => 2,
+            'obiskDoma'                 => 2,
             'casPriprave'             => 'aa',
             'casIzvedbe'              => 'aa',
             'prizorisca'              => 'aa',
@@ -157,7 +157,7 @@ class ProgramFestivalCest
         $I->assertEquals($ent['stDrugiDogodki'], 1);
         $I->assertEquals($ent['opredelitevDrugiDogodki'], 'zz');
         $I->assertEquals($ent['stProdukcij'], 1);
-        $I->assertEquals($ent['stObisk'], 1);
+        $I->assertEquals($ent['obiskDoma'], 1);
         $I->assertEquals($ent['casPriprave'], 'zz');
         $I->assertEquals($ent['casIzvedbe'], 'zz');
         $I->assertEquals($ent['prizorisca'], 'zz');

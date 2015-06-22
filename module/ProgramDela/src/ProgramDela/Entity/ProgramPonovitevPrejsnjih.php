@@ -36,6 +36,7 @@ class ProgramPonovitevPrejsnjih
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000460);
             }
         }
+        $this->setNaziv("");        // dobimo iz uprizoritve
 
         parent::validate();
     }

@@ -76,6 +76,7 @@ class ProgramIzjemniCest
     public function create(ApiTester $I)
     {
         $data       = [
+            'naziv' => "zz",
             'celotnaVrednost'      => 1.23,
             'zaproseno'            => 1.23,
             'lastnaSredstva'       => 1.23,
@@ -96,7 +97,7 @@ class ProgramIzjemniCest
             'ponoviInt'            => 1,
             'utemeljitev'          => 'zz',
             'uprizoritev'          => NULL,
-            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
+//            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
             'dokument'             => null,
             'sort'                 => 1,
             'stZaposlenih'         => 1,
@@ -111,6 +112,7 @@ class ProgramIzjemniCest
 
         // kreiramo še en zapis
         $data       = [
+            'naziv' => "zz",
             'celotnaVrednost'      => 4.56,
             'zaproseno'            => 4.56,
             'lastnaSredstva'       => 4.56,
@@ -131,7 +133,7 @@ class ProgramIzjemniCest
             'ponoviInt'            => 4,
             'utemeljitev'          => 'aa',
             'uprizoritev'          => NULL,
-            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
+//            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
             'dokument'             => null,
             'sort'                 => 2,
             'stZaposlenih'         => 2,
@@ -172,6 +174,7 @@ class ProgramIzjemniCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['naziv'], 'zz');
         $I->assertEquals($ent['celotnaVrednost'], 1.23);
         $I->assertEquals($ent['zaproseno'], 2.34);
         $I->assertEquals($ent['lastnaSredstva'], 1.23);
@@ -191,8 +194,8 @@ class ProgramIzjemniCest
         $I->assertEquals($ent['ponoviGost'], 1);
         $I->assertEquals($ent['ponoviInt'], 1);
         $I->assertEquals($ent['utemeljitev'], 'zz');
-        $I->assertEquals($ent['uprizoritev'], NULL);
-        $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
+//        $I->assertEquals($ent['uprizoritev'], NULL);
+//        $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
 
         $I->assertEquals($ent['dokument'], null);
         $I->assertEquals($ent['sort'], 1, "sort");

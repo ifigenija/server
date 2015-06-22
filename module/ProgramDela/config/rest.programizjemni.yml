@@ -6,6 +6,7 @@ forms:
     default: 
         elements:
 #            - id
+            - naziv
             - celotnaVrednost
             - zaproseno
             - lastnaSredstva
@@ -25,8 +26,8 @@ forms:
             - ponoviGost
             - ponoviInt
             - utemeljitev
-            - uprizoritev
-            - tipProgramskeEnote
+#            - uprizoritev
+#            - tipProgramskeEnote
             - dokument
             - sort
             - stZaposlenih
@@ -35,7 +36,8 @@ forms:
             - stHonorarnihIgr
             - stHonorarnihIgrTujJZ
         hydrator:
-            byValue: [ uprizoritev ]
+#            byValue: [ uprizoritev ]
+            byValue: [ ]
 lists:
     default: 
         hydrator:

@@ -248,6 +248,19 @@ class EnotaPrograma
      * @var \Produkcija\Entity\Uprizoritev
      */
     private $uprizoritev;
+    
+      /**
+       * Naziv dogodka za tiste programe, ki nimajo uprizoritve
+       * Naziv festivala za festival,
+       * Naziv sklopa za razno,
+       * Naziv dogodka za izjemnidogodek.
+     *
+     * @ORM\Column(length=50, nullable=true)
+     * @Max\I18n(label="ep.naziv", description="ep.d.naziv")
+     * @var string
+     */
+    protected $naziv;
+    
 
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\TipProgramskeEnote", inversedBy="enotePrograma")
@@ -577,5 +590,16 @@ class EnotaPrograma
         $this->vlozekKoproducenta = $vlozekKoproducenta;
         return $this;
     }
+    public function getNaziv()
+    {
+        return $this->naziv;
+    }
+
+    public function setNaziv($naziv)
+    {
+        $this->naziv = $naziv;
+        return $this;
+    }
+
 
 }

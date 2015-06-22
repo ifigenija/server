@@ -23,13 +23,6 @@ class ProgramRazno
     private $dokument;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="programRazno.nazivSklopa", description="Naziv sklopa")
-     * @var string
-     */
-    private $nazivSklopa;
-
-    /**
      * @ORM\Column(type="string")
      * @Max\I18n(label="programRazno.naslovPE", description="Naslov programske enote")
      * @var string
@@ -84,7 +77,7 @@ class ProgramRazno
     public function validate($mode = 'update')
     {
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program razno", 1000451);
-        $this->expect(!($this->getUprizoritev()), "Uprizoriztev obstaja, a ne sme obstajati za program razno", 1000452);
+        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program razno", 1000452);
         $this->setAvtorskiHonorarji(0);
         $this->setObiskGost(0);
         $this->setObiskInt(0);

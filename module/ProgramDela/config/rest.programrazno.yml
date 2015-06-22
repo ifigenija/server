@@ -7,7 +7,7 @@ forms:
         elements:
 #            - id
             - dokument
-            - nazivSklopa
+            - naziv
             - naslovPE
             - avtorPE
             - obsegPE

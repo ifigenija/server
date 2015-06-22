@@ -66,7 +66,7 @@ class ProgramRaznoCest
     {
         $data       = [
             'dokument'        => NULL,
-            'nazivSklopa'     => 'zz',
+            'naziv'     => 'zz',
             'naslovPE'        => 'zz',
             'avtorPE'         => 'zz',
             'obsegPE'         => 'zz',
@@ -91,7 +91,7 @@ class ProgramRaznoCest
         // kreiramo še en zapis
         $data       = [
             'dokument'        => NULL,
-            'nazivSklopa'     => 'aa',
+            'naziv'     => 'aa',
             'naslovPE'        => 'aa',
             'avtorPE'         => 'aa',
             'obsegPE'         => 'aa',
@@ -142,7 +142,7 @@ class ProgramRaznoCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['dokument'], NULL);
-        $I->assertEquals($ent['nazivSklopa'], 'zz');
+        $I->assertEquals($ent['naziv'], 'zz');
         $I->assertEquals($ent['naslovPE'], 'zz');
         $I->assertEquals($ent['avtorPE'], 'zz');
         $I->assertEquals($ent['obsegPE'], 'zz');
