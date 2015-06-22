@@ -74,14 +74,14 @@ class ProgramRaznoCest
             'vrednostPE'      => 1.23,
             'stPE'            => 1,
             'soorganizator'   => $this->lookPopa1['id'],
-            'stObiskovalcev'  => 1,
+            'obiskDoma'  => 1,
             'stZaposlenih'    => 1,
-            'stHonoranih'     => 1,
+            'stHonorarnih'     => 1,
             'zaproseno'       => 1.23,
             'celotnaVrednost' => 1.23,
             'lastnaSredstva'  => 1.23,
             'drugiViri'       => 1.23,
-            'viriDMinLok'     => 1.23,
+            'drugiJavni'     => 1.23,
             'sort'  => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -99,14 +99,14 @@ class ProgramRaznoCest
             'vrednostPE'      => 2.23,
             'stPE'            => 2,
             'soorganizator'   => null,
-            'stObiskovalcev'  => 2,
+            'obiskDoma'  => 2,
             'stZaposlenih'    => 2,
-            'stHonoranih'     => 2,
+            'stHonorarnih'     => 2,
             'zaproseno'       => 2.23,
             'celotnaVrednost' => 2.23,
             'lastnaSredstva'  => 2.23,
             'drugiViri'       => 2.23,
-            'viriDMinLok'     => 2.23,
+            'drugiJavni'     => 2.23,
             'sort'  => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -150,14 +150,14 @@ class ProgramRaznoCest
         $I->assertEquals($ent['vrednostPE'], 1.23);
         $I->assertEquals($ent['stPE'], 1);
         $I->assertEquals($ent['soorganizator']['id'], $this->lookPopa1['id']);
-        $I->assertEquals($ent['stObiskovalcev'], 1);
+        $I->assertEquals($ent['obiskDoma'], 1);
         $I->assertEquals($ent['stZaposlenih'], 1);
-        $I->assertEquals($ent['stHonoranih'], 1);
+        $I->assertEquals($ent['stHonorarnih'], 1);
         $I->assertEquals($ent['zaproseno'], 2.34);
         $I->assertEquals($ent['celotnaVrednost'], 1.23);
         $I->assertEquals($ent['lastnaSredstva'], 1.23);
         $I->assertEquals($ent['drugiViri'], 1.23);
-        $I->assertEquals($ent['viriDMinLok'], 1.23);
+        $I->assertEquals($ent['drugiJavni'], 1.23);
         $I->assertEquals($ent['sort'], 1,'sort');
     }
 

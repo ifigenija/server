@@ -7,22 +7,11 @@ use Doctrine\ORM\Mapping AS ORM,
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiRazno")
- * @Max\I18n(label="Program festival",plural="Programi festival")
  * @Max\Id(prefix="0049")
  */
 class ProgramRazno
-        extends \Max\Entity\Base
+        extends \ProgramDela\Entity\EnotaPrograma
 {
-
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="guid")
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @Max\I18n(label="Id", description="ID programa festivala")
-     * @Max\Ui(type="id")
-     * @var string    
-     */
-    private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="programiRazno")
@@ -92,85 +81,27 @@ class ProgramRazno
      */
     private $soorganizator;
 
-    /**
-     * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="programRazno.stObiskovalcev", description="Število obiskovalcev")
-     * @Max\Ui(type="integer")
-     * @var integer     
-     */
-    private $stObiskovalcev;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="programRazno.stZaposlenih", description="Število zaposlenih, ki sodelujejo pri izvedbi projekta")
-     * @Max\Ui(type="integer")
-     * @var integer     
-     */
-    private $stZaposlenih;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="programRazno.stHonoranih", description="Število vseh, ki sodelujejo honorarno pri izvjedbi projekta in jim honorar izplačuje javni zavod")
-     * @Max\Ui(type="integer")
-     * @var integer     
-     */
-    private $stHonoranih;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programRazno.zaproseno", description="Zaprošena sredstva Ministrstva za kulturo")   
-     * @var double
-     */
-    private $zaproseno;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programRazno.celotnaVrednost", description="Celotna vrednost sklopa")   
-     * @var double
-     */
-    private $celotnaVrednost;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programRazno.lastnaSredstva", description="Lastna sredstva")   
-     * @var double
-     */
-    private $lastnaSredstva;
-
-    /**
-     * $$ manjka opredelitev. Ali je potrebno specificirati druge vire (npr. pari string, double)? 
-     * 
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programRazno.drugiViri", description="Drugi viri")   
-     * @var double
-     */
-    private $drugiViri;
-
-    /**
-     * $$ Ali dovolj le ena vrednos  ali je potrebno specificirati vire (npr. pari string, double)? 
-     * 
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programRazno.viriDMinLok", description="Viri druga ministrstva in lokalna skupnost")   
-     * @var double
-     */
-    private $viriDMinLok;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.sort", description="ep.d.sort")
-     * @Max\Ui(type="integer", icon="fa fa-sort")
-     * @var integer
-     */
-    private $sort;
-
     public function validate($mode = 'update')
     {
-        
-    }
+        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program razno", 1000451);
+        $this->expect(!($this->getUprizoritev()), "Uprizoriztev obstaja, a ne sme obstajati za program razno", 1000452);
+        $this->setAvtorskiHonorarji(0);
+        $this->setObiskGost(0);
+        $this->setObiskInt(0);
+        $this->setObiskZamejo(0);
+        $this->setPonoviDoma(0);
+        $this->setPonoviGost(0);
+        $this->setPonoviInt(0);
+        $this->setPonoviZamejo(0);
+        $this->setStDrugih(0);
+        $this->setStHonorarnihIgr(0);
+        $this->setStHonorarnihIgrTujJZ(0);
+        $this->setTantieme(0);
+        $this->setUtemeljitev("");
+        $this->setVlozekGostitelja(0);
+        $this->setVlozekKoproducenta(0);
 
-    public function getId()
-    {
-        return $this->id;
+        parent::validate();
     }
 
     public function getDokument()
@@ -216,52 +147,6 @@ class ProgramRazno
     public function getSoorganizator()
     {
         return $this->soorganizator;
-    }
-
-    public function getStObiskovalcev()
-    {
-        return $this->stObiskovalcev;
-    }
-
-    public function getStZaposlenih()
-    {
-        return $this->stZaposlenih;
-    }
-
-    public function getStHonoranih()
-    {
-        return $this->stHonoranih;
-    }
-
-    public function getZaproseno()
-    {
-        return $this->zaproseno;
-    }
-
-    public function getCelotnaVrednost()
-    {
-        return $this->celotnaVrednost;
-    }
-
-    public function getLastnaSredstva()
-    {
-        return $this->lastnaSredstva;
-    }
-
-    public function getDrugiViri()
-    {
-        return $this->drugiViri;
-    }
-
-    public function getViriDMinLok()
-    {
-        return $this->viriDMinLok;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
     }
 
     public function setDokument(\ProgramDela\Entity\ProgramDela $dokument)
@@ -315,65 +200,6 @@ class ProgramRazno
     public function setSoorganizator(\App\Entity\Popa $soorganizator)
     {
         $this->soorganizator = $soorganizator;
-        return $this;
-    }
-
-    public function setStObiskovalcev($stObiskovalcev)
-    {
-        $this->stObiskovalcev = $stObiskovalcev;
-        return $this;
-    }
-
-    public function setStZaposlenih($stZaposlenih)
-    {
-        $this->stZaposlenih = $stZaposlenih;
-        return $this;
-    }
-
-    public function setStHonoranih($stHonoranih)
-    {
-        $this->stHonoranih = $stHonoranih;
-        return $this;
-    }
-
-    public function setZaproseno($zaproseno)
-    {
-        $this->zaproseno = $zaproseno;
-        return $this;
-    }
-
-    public function setCelotnaVrednost($celotnaVrednost)
-    {
-        $this->celotnaVrednost = $celotnaVrednost;
-        return $this;
-    }
-
-    public function setLastnaSredstva($lastnaSredstva)
-    {
-        $this->lastnaSredstva = $lastnaSredstva;
-        return $this;
-    }
-
-    public function setDrugiViri($drugiViri)
-    {
-        $this->drugiViri = $drugiViri;
-        return $this;
-    }
-
-    public function setViriDMinLok($viriDMinLok)
-    {
-        $this->viriDMinLok = $viriDMinLok;
-        return $this;
-    }
-
-    public function getSort()
-    {
-        return $this->sort;
-    }
-
-    public function setSort($sort)
-    {
-        $this->sort = $sort;
         return $this;
     }
 

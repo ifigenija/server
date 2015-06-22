@@ -15,14 +15,14 @@ forms:
             - vrednostPE
             - stPE
             - soorganizator
-            - stObiskovalcev
+            - obiskDoma
             - stZaposlenih
-            - stHonoranih
+            - stHonorarnih
             - zaproseno
             - celotnaVrednost
             - lastnaSredstva
             - drugiViri
-            - viriDMinLok
+            - drugiJavni
             - sort
         hydrator:
             byValue: [ soorganizator ]
