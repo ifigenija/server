@@ -10,16 +10,16 @@ forms:
             - krajGostovanja
             - ustanova
             - datumGostovanja
-            - stPonovitev
-            - stGledalcev
+            - ponoviInt
+            - obiskInt
             - zaproseno
             - celotnaVrednost
             - transportniStroski
-            - stroskiAvtorZun
+            - avtorskiHonorarji
             - odkup
             - lastnaSredstva
             - drugiViri
-            - viriDMinLok
+            - drugiJavni
             - dokument
             - gostitelj
             - sort

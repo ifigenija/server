@@ -83,16 +83,16 @@ class ProgramGostovanjeCest
             'krajGostovanja'     => 'zz',
             'ustanova'           => 'zz',
             'datumGostovanja'    => '2011-02-01T00:00:00+0100',
-            'stPonovitev'        => 9,
-            'stGledalcev'        => 9,
+            'ponoviInt'        => 9,
+            'obiskInt'        => 9,
             'zaproseno'          => 9.12,
             'celotnaVrednost'    => 9.12,
             'transportniStroski' => 9.12,
-            'stroskiAvtorZun'    => 9.12,
+            'avtorskiHonorarji'    => 9.12,
             'odkup'              => 9.12,
             'lastnaSredstva'     => 9.12,
             'drugiViri'          => 9.12,
-            'viriDMinLok'        => 9.12,
+            'drugiJavni'        => 9.12,
             'gostitelj'          => $this->lookPopa1['id'],
             'sort'          => 1,
         ];
@@ -107,16 +107,16 @@ class ProgramGostovanjeCest
             'krajGostovanja'     => 'aa',
             'ustanova'           => 'aa',
             'datumGostovanja'    => '2011-02-01T00:00:00+0100',
-            'stPonovitev'        => 3,
-            'stGledalcev'        => 3,
+            'ponoviInt'        => 3,
+            'obiskInt'        => 3,
             'zaproseno'          => 3.12,
             'celotnaVrednost'    => 3.12,
             'transportniStroski' => 3.12,
-            'stroskiAvtorZun'    => 3.12,
+            'avtorskiHonorarji'    => 3.12,
             'odkup'              => 3.12,
             'lastnaSredstva'     => 3.12,
             'drugiViri'          => 3.12,
-            'viriDMinLok'        => 3.12,
+            'drugiJavni'        => 3.12,
             'gostitelj'          => null,
             'sort'          => 2,
         ];
@@ -156,16 +156,16 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['krajGostovanja'], 'zz');
         $I->assertEquals($ent['ustanova'], 'zz');
         $I->assertEquals($ent['datumGostovanja'], '2011-02-01T00:00:00+0100');
-        $I->assertEquals($ent['stPonovitev'], 9);
-        $I->assertEquals($ent['stGledalcev'], 9);
+        $I->assertEquals($ent['ponoviInt'], 9);
+        $I->assertEquals($ent['obiskInt'], 9);
         $I->assertEquals($ent['zaproseno'], 9.12);
         $I->assertEquals($ent['celotnaVrednost'], 9.12);
         $I->assertEquals($ent['transportniStroski'], 9.12);
-        $I->assertEquals($ent['stroskiAvtorZun'], 9.12);
+        $I->assertEquals($ent['avtorskiHonorarji'], 9.12);
         $I->assertEquals($ent['odkup'], 2.34);
         $I->assertEquals($ent['lastnaSredstva'], 9.12);
         $I->assertEquals($ent['drugiViri'], 9.12);
-        $I->assertEquals($ent['viriDMinLok'], 9.12);
+        $I->assertEquals($ent['drugiJavni'], 9.12);
         $I->assertEquals($ent['dokument'], NULL);
         $I->assertEquals($ent['gostitelj']['id'], $this->lookPopa1['id']);
         $I->assertEquals($ent['sort'], 1);

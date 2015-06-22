@@ -9,30 +9,11 @@ use Doctrine\ORM\Mapping AS ORM,
  * Mednarodno gostovanje
  * 
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiGostovanje")
- * @Max\I18n(label="Program gostovanje",plural="Programi gostovanje")
  * @Max\Id(prefix="0045")
  */
 class ProgramGostovanje
-        extends \Max\Entity\Base
+        extends \ProgramDela\Entity\EnotaPrograma
 {
-
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="guid")
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @Max\I18n(label="Id", description="ID programa gostovanja")
-     * @Max\Ui(type="id")
-     * @var string    
-     */
-    private $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev")
-     * @Max\I18n(label="entiteta.uprizoritev", description="entiteta.uprizoritev")   
-     * @Max\Ui(type="toone")
-     * @var \Produkcija\Entity\Uprizoritev
-     */
-    private $uprizoritev;
 
     /**
      * @ORM\Column(type="string", nullable=false)
@@ -57,36 +38,6 @@ class ProgramGostovanje
     private $datumGostovanja;
 
     /**
-     * @ORM\Column(type="integer", nullable=false, options={"default":" 0"})
-     * @Max\I18n(label="gostovanje.stPonovitev", description="ostovanje.d.stPonovitev")   
-     * @Max\Ui(type="integer")
-     * @var integer     
-     */
-    private $stPonovitev;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="gostovanje.stGledalcev", description="gostovanje.d.stGledalcev")
-     * @Max\Ui(type="integer")
-     * @var integer     
-     */
-    private $stGledalcev;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.zaproseno", description="ep.d.zaproseno")   
-     * @var double
-     */
-    private $zaproseno;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.celotnaVrednost", description="ep.d.celotnaVrednost")   
-     * @var double
-     */
-    private $celotnaVrednost;
-
-    /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2)
      * @Max\I18n(label="gostovanje.transportniStroski", description="gostovanje.d.transportniStroski")   
      * @var double     
@@ -94,43 +45,11 @@ class ProgramGostovanje
     private $transportniStroski;
 
     /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2)
-     * @Max\I18n(label="gostovanje.stroskiAvtorZun", description="gostovanje.stroskiAvtorZun")   
-     * @var double     
-     */
-    private $stroskiAvtorZun;
-
-    /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
      * @Max\I18n(label="gostovanje.odkup", description="gostovanje.d.odkup")   
      * @var double     
      */
     private $odkup;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.lastnaSredstva", description="ep.lastnaSredstva")   
-     * @var double
-     */
-    private $lastnaSredstva;
-
-    /**
-     * $$ manjka opredelitev. Ali je potrebno specificirati druge vire (npr. pari string, double)? 
-     * 
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.drugiViri", description="ep.drugiViri")   
-     * @var double
-     */
-    private $drugiViri;
-
-    /**
-     * $$ Ali dovolj le ena vrednos  ali je potrebno specificirati vire (npr. pari string, double)? 
-     * 
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="gostovanje.viriDMinLok", description="gostovanje.d.viriDMinLok")   
-     * @var double
-     */
-    private $viriDMinLok;
 
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="gostovanja")
@@ -150,27 +69,29 @@ class ProgramGostovanje
      */
     private $gostitelj;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.sort", description="ep.d.sort")
-     * @Max\Ui(type="integer", icon="fa fa-sort")
-     * @var integer
-     */
-    private $sort;
-
     public function validate($mode = 'update')
     {
-        
-    }
+        // neaktualna polja, ki jih tudi v formi ni:
+        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostovanje", 1000441);
+        $this->setObiskDoma(0);
+        $this->setObiskGost(0);
+        $this->setObiskZamejo(0);
+        $this->setPonoviDoma(0);
+        $this->setPonoviZamejo(0);
+        $this->setPonoviGost(0);
+        $this->setObiskDoma(0);
+        $this->setObiskGost(0);
+        $this->setStHonorarnih(0);
+        $this->setStHonorarnihIgr(0);
+        $this->setStHonorarnihIgrTujJZ(0);
+        $this->setStDrugih(0);
+        $this->setStZaposlenih(0);
+        $this->setTantieme(0);
+        $this->setUtemeljitev("");
+        $this->setVlozekGostitelja(0);
+        $this->setVlozekKoproducenta(0);
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function getUprizoritev()
-    {
-        return $this->uprizoritev;
+        parent::validate();
     }
 
     public function getKrajGostovanja()
@@ -188,54 +109,14 @@ class ProgramGostovanje
         return $this->datumGostovanja;
     }
 
-    public function getStPonovitev()
-    {
-        return $this->stPonovitev;
-    }
-
-    public function getStGledalcev()
-    {
-        return $this->stGledalcev;
-    }
-
-    public function getZaproseno()
-    {
-        return $this->zaproseno;
-    }
-
-    public function getCelotnaVrednost()
-    {
-        return $this->celotnaVrednost;
-    }
-
     public function getTransportniStroski()
     {
         return $this->transportniStroski;
     }
 
-    public function getStroskiAvtorZun()
-    {
-        return $this->stroskiAvtorZun;
-    }
-
     public function getOdkup()
     {
         return $this->odkup;
-    }
-
-    public function getLastnaSredstva()
-    {
-        return $this->lastnaSredstva;
-    }
-
-    public function getDrugiViri()
-    {
-        return $this->drugiViri;
-    }
-
-    public function getViriDMinLok()
-    {
-        return $this->viriDMinLok;
     }
 
     public function getDokument()
@@ -246,18 +127,6 @@ class ProgramGostovanje
     public function getGostitelj()
     {
         return $this->gostitelj;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev)
-    {
-        $this->uprizoritev = $uprizoritev;
-        return $this;
     }
 
     public function setKrajGostovanja($krajGostovanja)
@@ -278,63 +147,15 @@ class ProgramGostovanje
         return $this;
     }
 
-    public function setStPonovitev($stPonovitev)
-    {
-        $this->stPonovitev = $stPonovitev;
-        return $this;
-    }
-
-    public function setStGledalcev($stGledalcev)
-    {
-        $this->stGledalcev = $stGledalcev;
-        return $this;
-    }
-
-    public function setZaproseno($zaproseno)
-    {
-        $this->zaproseno = $zaproseno;
-        return $this;
-    }
-
-    public function setCelotnaVrednost($celotnaVrednost)
-    {
-        $this->celotnaVrednost = $celotnaVrednost;
-        return $this;
-    }
-
     public function setTransportniStroski($transportniStroski)
     {
         $this->transportniStroski = $transportniStroski;
         return $this;
     }
 
-    public function setStroskiAvtorZun($stroskiAvtorZun)
-    {
-        $this->stroskiAvtorZun = $stroskiAvtorZun;
-        return $this;
-    }
-
     public function setOdkup($odkup)
     {
         $this->odkup = $odkup;
-        return $this;
-    }
-
-    public function setLastnaSredstva($lastnaSredstva)
-    {
-        $this->lastnaSredstva = $lastnaSredstva;
-        return $this;
-    }
-
-    public function setDrugiViri($drugiViri)
-    {
-        $this->drugiViri = $drugiViri;
-        return $this;
-    }
-
-    public function setViriDMinLok($viriDMinLok)
-    {
-        $this->viriDMinLok = $viriDMinLok;
         return $this;
     }
 
@@ -347,17 +168,6 @@ class ProgramGostovanje
     public function setGostitelj(\App\Entity\Popa $gostitelj)
     {
         $this->gostitelj = $gostitelj;
-        return $this;
-    }
-
-    public function getSort()
-    {
-        return $this->sort;
-    }
-
-    public function setSort($sort)
-    {
-        $this->sort = $sort;
         return $this;
     }
 

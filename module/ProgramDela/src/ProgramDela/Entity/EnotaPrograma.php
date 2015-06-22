@@ -15,7 +15,10 @@ use Doctrine\ORM\Mapping AS ORM,
  *     "ponovitevpremiere"="ProgramDela\Entity\ProgramPonovitevPremiere",
  *     "ponovitevprejsnjih"="ProgramDela\Entity\ProgramPonovitevPrejsnjih",
  *     "izjemni"="ProgramDela\Entity\ProgramIzjemni",
- *     "gostujoci"="ProgramDela\Entity\ProgramGostujoca"
+ *     "gostujoci"="ProgramDela\Entity\ProgramGostujoca",
+ *     "gostovanje"="ProgramDela\Entity\ProgramGostovanje",
+ *     "razno"="ProgramDela\Entity\ProgramRazno",
+ *     "festival"="ProgramDela\Entity\ProgramFestival"
  * }
  * )
  * 
