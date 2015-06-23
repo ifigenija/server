@@ -13,7 +13,7 @@ forms:
             - tantieme
             - drugiViri
             - opredelitevDrugiViri
-            - vlozekGostitelja      # tega polja sicer ni na obrazcu
+#            - vlozekGostitelja      
             - vlozekKoproducenta
             - drugiJavni
 #            - obiskDoma

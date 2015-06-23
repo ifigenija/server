@@ -84,7 +84,7 @@ class ProgramPremieraCest
             'tantieme'             => 1.23,
             'drugiViri'            => 1.23,
             'opredelitevDrugiViri' => "zz",
-            'vlozekGostitelja'     => 1.23,
+//            'vlozekGostitelja'     => 1.23,
             'vlozekKoproducenta'   => 1.23,
             'drugiJavni'           => 1.23,
 //            'obiskDoma'          => 1,
@@ -120,7 +120,7 @@ class ProgramPremieraCest
             'tantieme'             => 4.56,
             'drugiViri'            => 4.56,
             'opredelitevDrugiViri' => 'aa',
-            'vlozekGostitelja'     => 4.56,
+//            'vlozekGostitelja'     => 4.56,
             'vlozekKoproducenta'   => 4.56,
             'drugiJavni'           => 4.56,
 //            'obiskDoma'          => 4,
@@ -181,7 +181,7 @@ class ProgramPremieraCest
         $I->assertEquals($ent['tantieme'], 1.23);
         $I->assertEquals($ent['drugiViri'], 1.23);
         $I->assertEquals($ent['opredelitevDrugiViri'], 'zz');
-        $I->assertEquals($ent['vlozekGostitelja'], 1.23);
+//        $I->assertEquals($ent['vlozekGostitelja'], 1.23);
         $I->assertEquals($ent['vlozekKoproducenta'], 1.23);
         $I->assertEquals($ent['drugiJavni'], 1.23);
 //        $I->assertEquals($ent['obiskDoma'          ],1 );

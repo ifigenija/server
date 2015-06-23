@@ -84,8 +84,8 @@ class ProgramIzjemniCest
             'tantieme'             => 1.23,
             'drugiViri'            => 1.23,
             'opredelitevDrugiViri' => "zz",
-            'vlozekGostitelja'     => 1.23,
-            'vlozekKoproducenta'   => 1.23,
+//            'vlozekGostitelja'     => 1.23,
+//            'vlozekKoproducenta'   => 1.23,
             'drugiJavni'           => 1.23,
             'obiskDoma'            => 1,
 //            'obiskGost'            => 1,
@@ -94,7 +94,7 @@ class ProgramIzjemniCest
             'ponoviDoma'           => 1,
             'ponoviZamejo'         => 1,
             'ponoviGost'           => 1,
-            'ponoviInt'            => 1,
+//            'ponoviInt'            => 1,
             'utemeljitev'          => 'zz',
 //            'uprizoritev'          => NULL,
 //            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
@@ -120,8 +120,8 @@ class ProgramIzjemniCest
             'tantieme'             => 4.56,
             'drugiViri'            => 4.56,
             'opredelitevDrugiViri' => "zz",
-            'vlozekGostitelja'     => 1.23,
-            'vlozekKoproducenta'   => 1.23,
+//            'vlozekGostitelja'     => 1.23,
+//            'vlozekKoproducenta'   => 1.23,
             'drugiJavni'           => 4.56,
             'obiskDoma'            => 4,
 //            'obiskGost'            => 4,
@@ -130,7 +130,7 @@ class ProgramIzjemniCest
             'ponoviDoma'           => 4,
             'ponoviZamejo'         => 4,
             'ponoviGost'           => 4,
-            'ponoviInt'            => 4,
+//            'ponoviInt'            => 4,
             'utemeljitev'          => 'aa',
 //            'uprizoritev'          => NULL,
 //            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
@@ -182,8 +182,8 @@ class ProgramIzjemniCest
 //        $I->assertEquals($ent['tantieme'], 1.23);
         $I->assertEquals($ent['drugiViri'], 1.23);
         $I->assertEquals($ent['opredelitevDrugiViri'], 'zz');
-        $I->assertEquals($ent['vlozekGostitelja'], 1.23);
-        $I->assertEquals($ent['vlozekKoproducenta'], 1.23);
+//        $I->assertEquals($ent['vlozekGostitelja'], 1.23);
+//        $I->assertEquals($ent['vlozekKoproducenta'], 1.23);
         $I->assertEquals($ent['drugiJavni'], 1.23);
         $I->assertEquals($ent['obiskDoma'], 1);
 //        $I->assertEquals($ent['obiskGost'], 1);

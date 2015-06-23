@@ -23,7 +23,7 @@ forms:
             - ponoviDoma
             - ponoviZamejo
             - ponoviGost
-            - ponoviInt
+#            - ponoviInt
             - utemeljitev
             - uprizoritev
             - tipProgramskeEnote

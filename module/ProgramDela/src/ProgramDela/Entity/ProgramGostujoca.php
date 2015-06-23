@@ -24,6 +24,20 @@ class ProgramGostujoca
 
     public function validate($mode = 'update')
     {
+        if ($this->getDokument()) {
+            // preveriti, ali že obstaja programgostujoča z isto uprizoritvijo
+            $obstaja = true;  //init
+            if (!$this->getDokument()->getGostujoci()->isEmpty()) {
+                $obstaja = $this->getDokument()
+                        ->getGostujoci()
+                        ->exists(function($key, $progPremiere) {
+                    return $progPremiere->getUprizoritev() == $this->getUprizoritev();     //vrne true, če obstaja programpremiere z isto uprizoritvijo
+                });
+                $this->expect(!$obstaja, "Program gostujoča z isto uprizoritvijo že obstaja v programu dela", 1000430);
+            }
+        }
+
+
         // neaktualna polja, ki tudi v formi niso:
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostujočo", 1000431);
         $this->setAvtorskiHonorarji(0);
