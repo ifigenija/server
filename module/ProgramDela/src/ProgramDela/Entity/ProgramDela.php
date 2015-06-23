@@ -27,7 +27,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="programDela.sifra", description="programDela.sifra")
+     * @Max\I18n(label="entiteta.sifra", description="entiteta.sifra")
      * @Max\Ui(type="sifra",ident=true )
      * @var string     
      */
@@ -35,7 +35,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="programDela.naziv", description="programDela.naziv")
+     * @Max\I18n(label="entiteta.naziv", description="entiteta.naziv")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
