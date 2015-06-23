@@ -243,7 +243,7 @@ class EnotaPrograma
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev")
-     * @Max\I18n(label="ep.uprizoritev", description="ep.uprizoritev")   
+     * @Max\I18n(label="entiteta.uprizoritev", description="entiteta.uprizoritev")   
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Uprizoritev
      */
@@ -256,7 +256,7 @@ class EnotaPrograma
        * Naziv dogodka za izjemnidogodek.
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="ep.naziv", description="ep.d.naziv")
+     * @Max\I18n(label="entiteta.naziv", description="ep.d.naziv")
      * @var string
      */
     protected $naziv;

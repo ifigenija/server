@@ -24,42 +24,42 @@ class ProgramRazno
 
     /**
      * @ORM\Column(type="string")
-     * @Max\I18n(label="programRazno.naslovPE", description="Naslov programske enote")
+     * @Max\I18n(label="programRazno.naslovPE", description="programRazno.d.naslovPE")
      * @var string
      */
     private $naslovPE;
 
     /**
      * @ORM\Column(type="string")
-     * @Max\I18n(label="programRazno.avtorPE", description="Avtor programske enote")
+     * @Max\I18n(label="programRazno.avtorPE", description="programRazno.d.avtorPE")
      * @var string
      */
     private $avtorPE;
 
     /**
      * @ORM\Column(type="string")
-     * @Max\I18n(label="programRazno.obsegPE", description="Obseg programske enote")
+     * @Max\I18n(label="programRazno.obsegPE", description="programRazno.d.obsegPE")
      * @var string
      */
     private $obsegPE;
 
     /**
      * @ORM\Column(type="string")
-     * @Max\I18n(label="programRazno.mesecPE", description="Mesec programske enote")
+     * @Max\I18n(label="programRazno.mesecPE", description="programRazno.d.mesecPE")
      * @var string
      */
     private $mesecPE;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programRazno.vrednostPE", description="Vrednost programske enote")
+     * @Max\I18n(label="programRazno.vrednostPE", description="programRazno.d.vrednostPE")
      * @var double
      */
     private $vrednostPE;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="programRazno.stPE", description="Število programskih enot")
+     * @Max\I18n(label="programRazno.stPE", description="programRazno.d.stPE")
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -68,7 +68,7 @@ class ProgramRazno
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa")
      * @ORM\JoinColumn(name="gostitelj_id", referencedColumnName="id")
-     * @Max\I18n(label="programRazno.soorganizator", description="Soorganizator oz. koproducent")
+     * @Max\I18n(label="programRazno.soorganizator", description="programRazno.d.soorganizator")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */
