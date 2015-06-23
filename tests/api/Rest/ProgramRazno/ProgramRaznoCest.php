@@ -12,15 +12,18 @@ use ApiTester;
  * Description of ProgramRazno
  * 
  * 
- * metode, ki jo podpira API
- * - create
- * - getlist
- * - update  - ne delam, ker ima le 2 polji
- * - get - kontrola vseh polj te entitete
- * - delete
- * validate metodo za entiteto
- * relacije z drugimi entitetami (to many relacije)
- * getlist različne variante relacij
+ *      metode, ki jo podpira API
+ *      - create
+ *      - getlist
+ *      - update  - ne delam, ker ima le 2 polji
+ *      - get - kontrola vseh polj te entitete
+ *      - delete
+ *      validate metodo za entiteto
+ *      relacije z drugimi entitetami (to many relacije)
+ *           -(ni) pri many to many relacijah testiraj : update, get (list+id), delete
+ *      - pri one to many relacijah testiraj : get (list+id)
+ *       . drugiViri
+ *      getlist različne variante relacij
  * 
  *
  * @author rado
@@ -28,11 +31,14 @@ use ApiTester;
 class ProgramRaznoCest
 {
 
-    private $restUrl = '/rest/programrazno';
+    private $restUrl     = '/rest/programrazno';
     private $obj1;
     private $obj2;
-    private $popaUrl = '/rest/popa';
+    private $popaUrl     = '/rest/popa';
     private $lookPopa1;
+    private $drugiVirUrl = '/rest/drugivir';
+    private $objDrugiVir1;
+    private $objDrugiVir2;
 
     public function _before(ApiTester $I)
     {
@@ -66,7 +72,7 @@ class ProgramRaznoCest
     {
         $data       = [
             'dokument'        => NULL,
-            'naziv'     => 'zz',
+            'naziv'           => 'zz',
             'naslovPE'        => 'zz',
             'avtorPE'         => 'zz',
             'obsegPE'         => 'zz',
@@ -74,15 +80,15 @@ class ProgramRaznoCest
             'vrednostPE'      => 1.23,
             'stPE'            => 1,
             'soorganizator'   => $this->lookPopa1['id'],
-            'obiskDoma'  => 1,
+            'obiskDoma'       => 1,
             'stZaposlenih'    => 1,
-            'stHonorarnih'     => 1,
+            'stHonorarnih'    => 1,
             'zaproseno'       => 1.23,
             'celotnaVrednost' => 1.23,
             'lastnaSredstva'  => 1.23,
-            'drugiViri'       => 1.23,
-            'drugiJavni'     => 1.23,
-            'sort'  => 1,
+//            'drugiViri'       => 1.23,
+            'drugiJavni'      => 1.23,
+            'sort'            => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -91,7 +97,7 @@ class ProgramRaznoCest
         // kreiramo še en zapis
         $data       = [
             'dokument'        => NULL,
-            'naziv'     => 'aa',
+            'naziv'           => 'aa',
             'naslovPE'        => 'aa',
             'avtorPE'         => 'aa',
             'obsegPE'         => 'aa',
@@ -99,15 +105,15 @@ class ProgramRaznoCest
             'vrednostPE'      => 2.23,
             'stPE'            => 2,
             'soorganizator'   => null,
-            'obiskDoma'  => 2,
+            'obiskDoma'       => 2,
             'stZaposlenih'    => 2,
-            'stHonorarnih'     => 2,
+            'stHonorarnih'    => 2,
             'zaproseno'       => 2.23,
             'celotnaVrednost' => 2.23,
             'lastnaSredstva'  => 2.23,
-            'drugiViri'       => 2.23,
-            'drugiJavni'     => 2.23,
-            'sort'  => 2,
+//            'drugiViri'       => 2.23,
+            'drugiJavni'      => 2.23,
+            'sort'            => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -156,9 +162,9 @@ class ProgramRaznoCest
         $I->assertEquals($ent['zaproseno'], 2.34);
         $I->assertEquals($ent['celotnaVrednost'], 1.23);
         $I->assertEquals($ent['lastnaSredstva'], 1.23);
-        $I->assertEquals($ent['drugiViri'], 1.23);
+//        $I->assertEquals($ent['drugiViri'], 1.23);
         $I->assertEquals($ent['drugiJavni'], 1.23);
-        $I->assertEquals($ent['sort'], 1,'sort');
+        $I->assertEquals($ent['sort'], 1, 'sort');
     }
 
     /**
@@ -200,6 +206,51 @@ class ProgramRaznoCest
     {
         $I->successfullyDelete($this->restUrl, $this->obj1['id']);
         $I->failToGet($this->restUrl, $this->obj1['id']);
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecDrugihVirov(ApiTester $I)
+    {
+        $data               = [
+            'znesek'        => 1.23,
+            'opis'          => "zz",
+            'enotaPrograma' => $this->obj2['id'],
+            'mednarodni'    => FALSE,
+        ];
+        $this->objDrugiVir1 = $ent                = $I->successfullyCreate($this->drugiVirUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data               = [
+            'znesek'        => 1.23,
+            'opis'          => "dd",
+            'enotaPrograma' => $this->obj2['id'],
+            'mednarodni'    => true,
+        ];
+        $this->objDrugiVir2 = $ent                = $I->successfullyCreate($this->drugiVirUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecDrugihVirov
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZDrugimiViri(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "drugiViri", "");
+        $I->assertGreaterThanOrEqual(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "drugiViri", $this->objDrugiVir1['id']);
+        $I->assertGreaterThanOrEqual(1, count($resp));
     }
 
 }

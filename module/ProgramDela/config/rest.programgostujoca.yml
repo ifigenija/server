@@ -11,8 +11,7 @@ forms:
             - lastnaSredstva
 #            - avtorskiHonorarji
 #            - tantieme
-            - drugiViri
-            - opredelitevDrugiViri
+#            - drugiViri
 #            - vlozekGostitelja      
 #            - vlozekKoproducenta
             - drugiJavni
@@ -43,3 +42,10 @@ lists:
     vse: 
         hydrator:
             - exclude: []            
+relation:
+    default:
+        drugiViri:
+            enabled: true
+            hydrator:
+                exclude: [] 
+            

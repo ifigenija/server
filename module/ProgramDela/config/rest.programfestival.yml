@@ -29,7 +29,7 @@ forms:
             - zaproseno
             - celotnaVrednost
             - lastnaSredstva
-            - drugiViri
+#            - drugiViri
             - opredelitevDrugiViri
             - vlozekKoproducenta
             - drugiJavni
@@ -41,3 +41,10 @@ lists:
     vse: 
         hydrator:
             - exclude: []
+relation:
+    default:
+        drugiViri:
+            enabled: true
+            hydrator:
+                exclude: [] 
+            

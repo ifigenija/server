@@ -20,7 +20,9 @@ use ApiTester;
  *           - delete
  *           validate metodo za entiteto
  *           relacije z drugimi entitetami (to many relacije)
- *           - pri many to many relacijah testiraj : update, get (list+id), delete
+ *                -(ni) pri many to many relacijah testiraj : update, get (list+id), delete
+ *           - pri one to many relacijah testiraj : get (list+id)
+ *            . drugiViri
  *           getlist različne variante relacij
  * 
  *
@@ -36,6 +38,9 @@ class ProgramIzjemniCest
     private $lookUprizoritev;
     private $tipProgramskeEnoteUrl = '/rest/tipprogramskeenote';
     private $lookTipProgramskeEnote;
+    private $drugiVirUrl           = '/rest/drugivir';
+    private $objDrugiVir1;
+    private $objDrugiVir2;
 
     public function _before(ApiTester $I)
     {
@@ -76,31 +81,30 @@ class ProgramIzjemniCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'naziv' => "zz",
-            'celotnaVrednost'      => 1.23,
-            'zaproseno'            => 1.23,
-            'lastnaSredstva'       => 1.23,
-            'avtorskiHonorarji'    => 1.23,
-            'tantieme'             => 1.23,
-            'drugiViri'            => 1.23,
-            'opredelitevDrugiViri' => "zz",
+            'naziv'             => "zz",
+            'celotnaVrednost'   => 1.23,
+            'zaproseno'         => 1.23,
+            'lastnaSredstva'    => 1.23,
+            'avtorskiHonorarji' => 1.23,
+            'tantieme'          => 1.23,
+//            'drugiViri'            => 1.23,
 //            'vlozekGostitelja'     => 1.23,
 //            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 1.23,
-            'obiskDoma'            => 1,
+            'drugiJavni'        => 1.23,
+            'obiskDoma'         => 1,
 //            'obiskGost'            => 1,
 //            'obiskZamejo'          => 1,
 //            'obiskInt'             => 1,
-            'ponoviDoma'           => 1,
-            'ponoviZamejo'         => 1,
-            'ponoviGost'           => 1,
+            'ponoviDoma'        => 1,
+            'ponoviZamejo'      => 1,
+            'ponoviGost'        => 1,
 //            'ponoviInt'            => 1,
-            'utemeljitev'          => 'zz',
+            'utemeljitev'       => 'zz',
 //            'uprizoritev'          => NULL,
 //            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
-            'dokument'             => null,
-            'sort'                 => 1,
-            'stZaposlenih'         => 1,
+            'dokument'          => null,
+            'sort'              => 1,
+            'stZaposlenih'      => 1,
 //            'stDrugih'             => 1,
 //            'stHonorarnih'         => 1,
 //            'stHonorarnihIgr'      => 1,
@@ -112,31 +116,30 @@ class ProgramIzjemniCest
 
         // kreiramo še en zapis
         $data       = [
-            'naziv' => "zz",
-            'celotnaVrednost'      => 4.56,
-            'zaproseno'            => 4.56,
-            'lastnaSredstva'       => 4.56,
-            'avtorskiHonorarji'    => 4.56,
-            'tantieme'             => 4.56,
-            'drugiViri'            => 4.56,
-            'opredelitevDrugiViri' => "zz",
+            'naziv'             => "zz",
+            'celotnaVrednost'   => 4.56,
+            'zaproseno'         => 4.56,
+            'lastnaSredstva'    => 4.56,
+            'avtorskiHonorarji' => 4.56,
+            'tantieme'          => 4.56,
+//            'drugiViri'            => 4.56,
 //            'vlozekGostitelja'     => 1.23,
 //            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 4.56,
-            'obiskDoma'            => 4,
+            'drugiJavni'        => 4.56,
+            'obiskDoma'         => 4,
 //            'obiskGost'            => 4,
 //            'obiskZamejo'          => 4,
 //            'obiskInt'             => 4,
-            'ponoviDoma'           => 4,
-            'ponoviZamejo'         => 4,
-            'ponoviGost'           => 4,
+            'ponoviDoma'        => 4,
+            'ponoviZamejo'      => 4,
+            'ponoviGost'        => 4,
 //            'ponoviInt'            => 4,
-            'utemeljitev'          => 'aa',
+            'utemeljitev'       => 'aa',
 //            'uprizoritev'          => NULL,
 //            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
-            'dokument'             => null,
-            'sort'                 => 2,
-            'stZaposlenih'         => 2,
+            'dokument'          => null,
+            'sort'              => 2,
+            'stZaposlenih'      => 2,
 //            'stDrugih'             => 2,
 //            'stHonorarnih'         => 2,
 //            'stHonorarnihIgr'      => 2,
@@ -180,8 +183,7 @@ class ProgramIzjemniCest
         $I->assertEquals($ent['lastnaSredstva'], 1.23);
 //        $I->assertEquals($ent['avtorskiHonorarji'], 1.23);
 //        $I->assertEquals($ent['tantieme'], 1.23);
-        $I->assertEquals($ent['drugiViri'], 1.23);
-        $I->assertEquals($ent['opredelitevDrugiViri'], 'zz');
+//        $I->assertEquals($ent['drugiViri'], 1.23);
 //        $I->assertEquals($ent['vlozekGostitelja'], 1.23);
 //        $I->assertEquals($ent['vlozekKoproducenta'], 1.23);
         $I->assertEquals($ent['drugiJavni'], 1.23);
@@ -245,6 +247,51 @@ class ProgramIzjemniCest
     {
         $I->successfullyDelete($this->restUrl, $this->obj1['id']);
         $I->failToGet($this->restUrl, $this->obj1['id']);
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecDrugihVirov(ApiTester $I)
+    {
+        $data               = [
+            'znesek'        => 1.23,
+            'opis'          => "zz",
+            'enotaPrograma' => $this->obj2['id'],
+            'mednarodni'    => FALSE,
+        ];
+        $this->objDrugiVir1 = $ent                = $I->successfullyCreate($this->drugiVirUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data               = [
+            'znesek'        => 1.23,
+            'opis'          => "dd",
+            'enotaPrograma' => $this->obj2['id'],
+            'mednarodni'    => true,
+        ];
+        $this->objDrugiVir2 = $ent                = $I->successfullyCreate($this->drugiVirUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecDrugihVirov
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZDrugimiViri(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "drugiViri", "");
+        $I->assertGreaterThanOrEqual(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "drugiViri", $this->objDrugiVir1['id']);
+        $I->assertGreaterThanOrEqual(1, count($resp));
     }
 
 }

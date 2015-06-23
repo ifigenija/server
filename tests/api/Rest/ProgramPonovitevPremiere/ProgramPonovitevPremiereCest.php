@@ -19,8 +19,10 @@ use ApiTester;
  *           - get - kontrola vseh polj te entitete
  *           - delete
  *           validate metodo za entiteto
- *           relacije z drugimi entitetami (to many relacije)
- *           - pri many to many relacijah testiraj : update, get (list+id), delete
+ *          relacije z drugimi entitetami (to many relacije)
+ *            -(ni) pri many to many relacijah testiraj : update, get (list+id), delete
+ *          - pri one to many relacijah testiraj : get (list+id)
+ *          . drugiViri
  *           getlist različne variante relacij
  * 
  *
@@ -36,6 +38,9 @@ class ProgramPonovitevPremiereCest
     private $lookUprizoritev;
     private $tipProgramskeEnoteUrl = '/rest/tipprogramskeenote';
     private $lookTipProgramskeEnote;
+    private $drugiVirUrl           = '/rest/drugivir';
+    private $objDrugiVir1;
+    private $objDrugiVir2;
 
     public function _before(ApiTester $I)
     {
@@ -82,10 +87,9 @@ class ProgramPonovitevPremiereCest
             'avtorskiHonorarji'    => 1.23,
             'tantieme'             => 1.23,
             'drugiViri'            => 1.23,
-               'opredelitevDrugiViri' => "zz",
             'vlozekGostitelja'     => 1.23,
             'vlozekKoproducenta'   => 1.23,
-         'drugiJavni'           => 1.23,
+            'drugiJavni'           => 1.23,
             'obiskDoma'            => 1,
             'obiskGost'            => 1,
             'obiskZamejo'          => 1,
@@ -112,7 +116,6 @@ class ProgramPonovitevPremiereCest
             'avtorskiHonorarji'    => 4.56,
             'tantieme'             => 4.56,
             'drugiViri'            => 4.56,
-            'opredelitevDrugiViri' => "aa",
             'vlozekGostitelja'     => 4.23,
             'vlozekKoproducenta'   => 4.23,
             'drugiJavni'           => 4.56,
@@ -167,11 +170,10 @@ class ProgramPonovitevPremiereCest
         $I->assertEquals($ent['lastnaSredstva'], 1.23);
         $I->assertEquals($ent['avtorskiHonorarji'], 1.23);
         $I->assertEquals($ent['tantieme'], 1.23);
-        $I->assertEquals($ent['drugiViri'], 1.23);
-           $I->assertEquals($ent['opredelitevDrugiViri'], 'zz');
+//        $I->assertEquals($ent['drugiViri'], 1.23);
         $I->assertEquals($ent['vlozekGostitelja'], 1.23);
         $I->assertEquals($ent['vlozekKoproducenta'], 1.23);
-     $I->assertEquals($ent['drugiJavni'], 1.23);
+        $I->assertEquals($ent['drugiJavni'], 1.23);
         $I->assertEquals($ent['obiskDoma'], 1);
         $I->assertEquals($ent['obiskGost'], 1);
         $I->assertEquals($ent['obiskZamejo'], 1);
@@ -226,6 +228,51 @@ class ProgramPonovitevPremiereCest
     {
         $I->successfullyDelete($this->restUrl, $this->obj1['id']);
         $I->failToGet($this->restUrl, $this->obj1['id']);
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecDrugihVirov(ApiTester $I)
+    {
+        $data               = [
+            'znesek'        => 1.23,
+            'opis'          => "zz",
+            'enotaPrograma' => $this->obj2['id'],
+            'mednarodni'    => FALSE,
+        ];
+        $this->objDrugiVir1 = $ent                = $I->successfullyCreate($this->drugiVirUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data               = [
+            'znesek'        => 1.23,
+            'opis'          => "dd",
+            'enotaPrograma' => $this->obj2['id'],
+            'mednarodni'    => true,
+        ];
+        $this->objDrugiVir2 = $ent                = $I->successfullyCreate($this->drugiVirUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecDrugihVirov
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZDrugimiViri(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "drugiViri", "");
+        $I->assertGreaterThanOrEqual(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "drugiViri", $this->objDrugiVir1['id']);
+        $I->assertGreaterThanOrEqual(1, count($resp));
     }
 
 }

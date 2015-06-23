@@ -37,15 +37,14 @@ class DrugiVir
      * @var double
      */
     private $opis;
-    
-     /**
+
+    /**
      * @ORM\Column(type="boolean", length=1, nullable=true)
      * @Max\I18n(label="drugivir.mednarodni", description="drugivir.d.mednarodni")   
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
     protected $mednarodni;
-
 
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\EnotaPrograma", inversedBy="drugiViri")
@@ -57,7 +56,7 @@ class DrugiVir
 
     public function validate($mode = 'update')
     {
-        $this->expect($this->znesek>0, "Znesek mora biti pozitivno število", 1000480);
+        $this->expect($this->znesek > 0, "Znesek mora biti pozitivno število", 1000480);
     }
 
     public function getId()
@@ -103,6 +102,7 @@ class DrugiVir
         $this->enotaPrograma = $enotaPrograma;
         return $this;
     }
+
     public function getMednarodni()
     {
         return $this->mednarodni;
@@ -113,6 +113,5 @@ class DrugiVir
         $this->mednarodni = $mednarodni;
         return $this;
     }
-
 
 }
