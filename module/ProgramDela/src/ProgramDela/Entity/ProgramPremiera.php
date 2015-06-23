@@ -48,6 +48,7 @@ class ProgramPremiera
         $this->setPonoviZamejo(0);
         $this->setPonoviGost(0);
         $this->setPonoviInt(0);
+        $this->setVlozekGostitelja(0);
         $this->setNaziv("");        // dobimo iz uprizoritve
 
         parent::validate();

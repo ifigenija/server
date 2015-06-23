@@ -37,7 +37,8 @@ class ProgramPonovitevPrejsnjih
             }
         }
         $this->setNaziv("");        // dobimo iz uprizoritve
-
+        $this->setPonoviInt(0);
+        
         parent::validate();
     }
 

@@ -39,6 +39,8 @@ class ProgramIzjemni
         $this->setStHonorarnihIgr(0);
         $this->setStHonorarnihIgrTujJZ(0);
         $this->setTantieme(0);
+        $this->setVlozekGostitelja(0);
+        $this->setVlozekKoproducenta(0);
 
         parent::validate();
     }

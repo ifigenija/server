@@ -179,7 +179,7 @@ class ProgramPonovitevPremiereCest
         $I->assertEquals($ent['ponoviDoma'], 1);
         $I->assertEquals($ent['ponoviZamejo'], 1);
         $I->assertEquals($ent['ponoviGost'], 1);
-        $I->assertEquals($ent['ponoviInt'], 1);
+//        $I->assertEquals($ent['ponoviInt'], 1);
         $I->assertEquals($ent['utemeljitev'], 'zz');
         $I->assertEquals($ent['uprizoritev'], NULL);
         $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);

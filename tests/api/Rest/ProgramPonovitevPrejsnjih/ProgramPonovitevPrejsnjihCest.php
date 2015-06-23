@@ -93,7 +93,7 @@ class ProgramPonovitevPrejsnjihCest
             'ponoviDoma'           => 1,
             'ponoviZamejo'         => 1,
             'ponoviGost'           => 1,
-            'ponoviInt'            => 1,
+//            'ponoviInt'            => 1,
             'utemeljitev'          => 'zz',
             'uprizoritev'          => NULL,
             'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
@@ -128,7 +128,7 @@ class ProgramPonovitevPrejsnjihCest
             'ponoviDoma'           => 4,
             'ponoviZamejo'         => 4,
             'ponoviGost'           => 4,
-            'ponoviInt'            => 4,
+//            'ponoviInt'            => 4,
             'utemeljitev'          => 'aa',
             'uprizoritev'          => NULL,
             'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
@@ -189,7 +189,7 @@ class ProgramPonovitevPrejsnjihCest
         $I->assertEquals($ent['ponoviDoma'], 1);
         $I->assertEquals($ent['ponoviZamejo'], 1);
         $I->assertEquals($ent['ponoviGost'], 1);
-        $I->assertEquals($ent['ponoviInt'], 1);
+//        $I->assertEquals($ent['ponoviInt'], 1);
         $I->assertEquals($ent['utemeljitev'], 'zz');
         $I->assertEquals($ent['uprizoritev'], NULL);
         $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
