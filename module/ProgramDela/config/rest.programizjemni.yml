@@ -10,31 +10,31 @@ forms:
             - celotnaVrednost
             - zaproseno
             - lastnaSredstva
-            - avtorskiHonorarji
-            - tantieme
+#            - avtorskiHonorarji
+#            - tantieme
             - drugiViri
             - opredelitevDrugiViri
             - vlozekGostitelja      
             - vlozekKoproducenta
             - drugiJavni
-            - obiskDoma
-            - obiskGost
-            - obiskZamejo
-            - obiskInt
-            - ponoviDoma
-            - ponoviZamejo
-            - ponoviGost
-            - ponoviInt
+            - obiskDoma          # $$ morda tudi to damo ven iz forme, ker ni vezano na uprizoritev
+#            - obiskGost
+#            - obiskZamejo
+#            - obiskInt
+            - ponoviDoma        # $$ morda tudi to damo ven iz forme, ker ni vezano na uprizoritev
+#            - ponoviZamejo
+#            - ponoviGost
+#            - ponoviInt
             - utemeljitev
 #            - uprizoritev
 #            - tipProgramskeEnote
             - dokument
             - sort
             - stZaposlenih
-            - stDrugih
-            - stHonorarnih
-            - stHonorarnihIgr
-            - stHonorarnihIgrTujJZ
+#            - stDrugih
+#            - stHonorarnih
+#            - stHonorarnihIgr
+#            - stHonorarnihIgrTujJZ
         hydrator:
 #            byValue: [ uprizoritev ]
             byValue: [ ]

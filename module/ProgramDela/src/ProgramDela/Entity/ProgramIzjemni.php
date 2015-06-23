@@ -24,8 +24,21 @@ class ProgramIzjemni
 
     public function validate($mode = 'update')
     {
+        // neaktualna polja, ki jih tudi v formi ni:
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program festival", 1000461);
         $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program festival", 1000462);
+        $this->setAvtorskiHonorarji(0);
+        $this->setObiskGost(0);
+        $this->setObiskInt(0);
+        $this->setObiskZamejo(0);
+        $this->setPonoviGost(0);
+        $this->setPonoviInt(0);
+        $this->setPonoviZamejo(0);
+        $this->setStDrugih(0);
+        $this->setStHonorarnih(0);
+        $this->setStHonorarnihIgr(0);
+        $this->setStHonorarnihIgrTujJZ(0);
+        $this->setTantieme(0);
 
         parent::validate();
     }
