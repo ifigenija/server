@@ -87,6 +87,12 @@
     description: Dogodek - spreminjanje
 
 -
+    name: DrugiVir-read
+    description: DrugiVir - branje
+-
+    name: DrugiVir-write
+    description: DrugiVir - spreminjanje
+-
     name: Drzava-read
     description: Drzava - branje
 -

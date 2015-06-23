@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM,
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiPonovitevPrejsnjih")
- * @Max\Id(prefix="0048")
+ * @Max\Id(prefix="0050")
  */
 class ProgramPonovitevPrejsnjih
         extends \ProgramDela\Entity\EnotaPrograma

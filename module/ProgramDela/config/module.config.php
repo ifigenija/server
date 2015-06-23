@@ -38,6 +38,7 @@ return [
             'Rest\ProgramPonovitev'          => 'Max\Factory\RestControllerFactory',
             'Rest\ProgramPremiera'           => 'Max\Factory\RestControllerFactory',
             'Rest\ProgramRazno'              => 'Max\Factory\RestControllerFactory',
+            'Rest\DrugiVir'                  => 'Max\Factory\RestControllerFactory',
         ],
     ],
     'router'          => [

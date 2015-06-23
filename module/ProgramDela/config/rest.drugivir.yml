@@ -1,0 +1,19 @@
+## YAML Template.
+---
+type: rest
+entityClass: ProgramDela\Entity\DrugiVir
+forms:
+    default: 
+        elements:
+#            - id
+            - znesek
+            - opis
+            - enotaPrograma
+            - mednarodni
+lists:
+    default: 
+        hydrator:
+            exclude: []
+    vse: 
+        hydrator:
+            exclude: []

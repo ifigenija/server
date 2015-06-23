@@ -4,6 +4,7 @@ namespace ProgramDela\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\EnotePrograma")
@@ -76,18 +77,10 @@ class EnotaPrograma
     private $tantieme;
 
     /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.drugiViri", description="ep.drugiViri")   
-     * @var double
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\DrugiVir", mappedBy="enotaPrograma")
+     * @var <drugiViri>
      */
     private $drugiViri;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="ep.opredelitevDrugiViri", description="ep.opredelitevDrugiViri")
-     * @var string
-     */
-    private $opredelitevDrugiViri;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
@@ -248,19 +241,18 @@ class EnotaPrograma
      * @var \Produkcija\Entity\Uprizoritev
      */
     private $uprizoritev;
-    
-      /**
-       * Naziv dogodka za tiste programe, ki nimajo uprizoritve
-       * Naziv festivala za festival,
-       * Naziv sklopa za razno,
-       * Naziv dogodka za izjemnidogodek.
+
+    /**
+     * Naziv dogodka za tiste programe, ki nimajo uprizoritve
+     * Naziv festivala za festival,
+     * Naziv sklopa za razno,
+     * Naziv dogodka za izjemnidogodek.
      *
      * @ORM\Column(length=50, nullable=true)
      * @Max\I18n(label="entiteta.naziv", description="ep.d.naziv")
      * @var string
      */
     protected $naziv;
-    
 
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\TipProgramskeEnote", inversedBy="enotePrograma")
@@ -277,6 +269,11 @@ class EnotaPrograma
      * @var integer
      */
     private $sort;
+
+    public function __construct()
+    {
+        $this->drugiViri = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {
@@ -318,9 +315,44 @@ class EnotaPrograma
         return $this->drugiViri;
     }
 
+    public function getVlozekGostitelja()
+    {
+        return $this->vlozekGostitelja;
+    }
+
+    public function getVlozekKoproducenta()
+    {
+        return $this->vlozekKoproducenta;
+    }
+
     public function getDrugiJavni()
     {
         return $this->drugiJavni;
+    }
+
+    public function getStZaposlenih()
+    {
+        return $this->stZaposlenih;
+    }
+
+    public function getStDrugih()
+    {
+        return $this->stDrugih;
+    }
+
+    public function getStHonorarnih()
+    {
+        return $this->stHonorarnih;
+    }
+
+    public function getStHonorarnihIgr()
+    {
+        return $this->stHonorarnihIgr;
+    }
+
+    public function getStHonorarnihIgrTujJZ()
+    {
+        return $this->stHonorarnihIgrTujJZ;
     }
 
     public function getObiskDoma()
@@ -373,9 +405,19 @@ class EnotaPrograma
         return $this->uprizoritev;
     }
 
+    public function getNaziv()
+    {
+        return $this->naziv;
+    }
+
     public function getTipProgramskeEnote()
     {
         return $this->tipProgramskeEnote;
+    }
+
+    public function getSort()
+    {
+        return $this->sort;
     }
 
     public function setId($id)
@@ -420,9 +462,51 @@ class EnotaPrograma
         return $this;
     }
 
+    public function setVlozekGostitelja($vlozekGostitelja)
+    {
+        $this->vlozekGostitelja = $vlozekGostitelja;
+        return $this;
+    }
+
+    public function setVlozekKoproducenta($vlozekKoproducenta)
+    {
+        $this->vlozekKoproducenta = $vlozekKoproducenta;
+        return $this;
+    }
+
     public function setDrugiJavni($drugiJavni)
     {
         $this->drugiJavni = $drugiJavni;
+        return $this;
+    }
+
+    public function setStZaposlenih($stZaposlenih)
+    {
+        $this->stZaposlenih = $stZaposlenih;
+        return $this;
+    }
+
+    public function setStDrugih($stDrugih)
+    {
+        $this->stDrugih = $stDrugih;
+        return $this;
+    }
+
+    public function setStHonorarnih($stHonorarnih)
+    {
+        $this->stHonorarnih = $stHonorarnih;
+        return $this;
+    }
+
+    public function setStHonorarnihIgr($stHonorarnihIgr)
+    {
+        $this->stHonorarnihIgr = $stHonorarnihIgr;
+        return $this;
+    }
+
+    public function setStHonorarnihIgrTujJZ($stHonorarnihIgrTujJZ)
+    {
+        $this->stHonorarnihIgrTujJZ = $stHonorarnihIgrTujJZ;
         return $this;
     }
 
@@ -486,15 +570,16 @@ class EnotaPrograma
         return $this;
     }
 
+    public function setNaziv($naziv)
+    {
+        $this->naziv = $naziv;
+        return $this;
+    }
+
     public function setTipProgramskeEnote(\ProgramDela\Entity\TipProgramskeEnote $tipProgramskeEnote)
     {
         $this->tipProgramskeEnote = $tipProgramskeEnote;
         return $this;
-    }
-
-    public function getSort()
-    {
-        return $this->sort;
     }
 
     public function setSort($sort)
@@ -502,104 +587,5 @@ class EnotaPrograma
         $this->sort = $sort;
         return $this;
     }
-
-    public function getStZaposlenih()
-    {
-        return $this->stZaposlenih;
-    }
-
-    public function getStDrugih()
-    {
-        return $this->stDrugih;
-    }
-
-    public function getStHonorarnih()
-    {
-        return $this->stHonorarnih;
-    }
-
-    public function getStHonorarnihIgr()
-    {
-        return $this->stHonorarnihIgr;
-    }
-
-    public function getStHonorarnihIgrTujJZ()
-    {
-        return $this->stHonorarnihIgrTujJZ;
-    }
-
-    public function setStZaposlenih($stZaposlenih)
-    {
-        $this->stZaposlenih = $stZaposlenih;
-        return $this;
-    }
-
-    public function setStDrugih($stDrugih)
-    {
-        $this->stDrugih = $stDrugih;
-        return $this;
-    }
-
-    public function setStHonorarnih($stHonorarnih)
-    {
-        $this->stHonorarnih = $stHonorarnih;
-        return $this;
-    }
-
-    public function setStHonorarnihIgr($stHonorarnihIgr)
-    {
-        $this->stHonorarnihIgr = $stHonorarnihIgr;
-        return $this;
-    }
-
-    public function setStHonorarnihIgrTujJZ($stHonorarnihIgrTujJZ)
-    {
-        $this->stHonorarnihIgrTujJZ = $stHonorarnihIgrTujJZ;
-        return $this;
-    }
-
-    public function getOpredelitevDrugiViri()
-    {
-        return $this->opredelitevDrugiViri;
-    }
-
-    public function getVlozekGostitelja()
-    {
-        return $this->vlozekGostitelja;
-    }
-
-    public function getVlozekKoproducenta()
-    {
-        return $this->vlozekKoproducenta;
-    }
-
-    public function setOpredelitevDrugiViri($opredelitevDrugiViri)
-    {
-        $this->opredelitevDrugiViri = $opredelitevDrugiViri;
-        return $this;
-    }
-
-    public function setVlozekGostitelja($vlozekGostitelja)
-    {
-        $this->vlozekGostitelja = $vlozekGostitelja;
-        return $this;
-    }
-
-    public function setVlozekKoproducenta($vlozekKoproducenta)
-    {
-        $this->vlozekKoproducenta = $vlozekKoproducenta;
-        return $this;
-    }
-    public function getNaziv()
-    {
-        return $this->naziv;
-    }
-
-    public function setNaziv($naziv)
-    {
-        $this->naziv = $naziv;
-        return $this;
-    }
-
 
 }
