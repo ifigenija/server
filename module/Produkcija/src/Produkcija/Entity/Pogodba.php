@@ -63,13 +63,14 @@ class Pogodba
     private $konec;
 
     /**
-     * 
+     * Pavšalna vrednost za vse vaje. V praksi dobijo honorarni igralci ali pavšalni znesek 
+     * za vse vaje ali pa nič (le za predstave). Za posamezno vajo se ne plačuje.
      * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="pogodba.vrednostVaje", description="pogodba.vrednostVaje")   
+     * @Max\I18n(label="pogodba.vrednostVaj", description="pogodba.d.vrednostVaj")   
      * @var double
      */
-    private $vrednostVaje;
+    private $vrednostVaj;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=12, scale=2)
@@ -191,9 +192,9 @@ class Pogodba
         return $this->konec;
     }
 
-    public function getVrednostVaje()
+    public function getVrednostVaj()
     {
-        return $this->vrednostVaje;
+        return $this->vrednostVaj;
     }
 
     public function getVrednostPredstave()
@@ -276,9 +277,9 @@ class Pogodba
         return $this;
     }
 
-    public function setVrednostVaje($vrednostVaje)
+    public function setVrednostVaj($vrednostVaj)
     {
-        $this->vrednostVaje = $vrednostVaje;
+        $this->vrednostVaj = $vrednostVaj;
         return $this;
     }
 

@@ -52,7 +52,7 @@ class AlternacijaRpcService
         // vse vrednosti na 0
         $pogodba->setVrednostDo(0);
         $pogodba->setVrednostDo(0);
-        $pogodba->setVrednostVaje(0);
+        $pogodba->setVrednostVaj(0);
         $pogodba->setVrednostPredstave(0);
         $pogodba->setVrednostUre(0);
         $pogodba->setVrednostDoPremiere(0);

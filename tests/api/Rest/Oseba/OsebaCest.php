@@ -587,7 +587,7 @@ class OsebaCest
     {
         $data              = [
             'sifra'             => 'ZZ123',
-            'vrednostVaje'      => 33.33,
+            'vrednostVaj'      => 33.33,
             'vrednostPredstave' => 44.44,
             'vrednostUre'       => 22.22,
             'aktivna'           => false,
@@ -602,7 +602,7 @@ class OsebaCest
         // kreiramo še en zapis
         $data              = [
             'sifra'             => 'WW4',
-            'vrednostVaje'      => 33.33,
+            'vrednostVaj'      => 33.33,
             'vrednostPredstave' => 44.44,
             'vrednostUre'       => 22.22,
             'aktivna'           => false,

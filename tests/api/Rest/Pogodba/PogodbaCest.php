@@ -216,7 +216,7 @@ class PogodbaCest
     {
         $data      = [
             'sifra'              => 'ZZ123',
-            'vrednostVaje'       => 33.33,
+            'vrednostVaj'       => 33.33,
             'vrednostPredstave'  => 44.44,
             'vrednostUre'        => 22.22,
             'aktivna'            => false,
@@ -238,7 +238,7 @@ class PogodbaCest
         // kreiramo še en zapis
         $data       = [
             'sifra'              => 'WW4',
-            'vrednostVaje'       => 33.33,
+            'vrednostVaj'       => 33.33,
             'vrednostPredstave'  => 44.22,
             'vrednostUre'        => 11.11,
             'aktivna'            => false,
@@ -260,7 +260,7 @@ class PogodbaCest
         // kreiramo še en zapis
         $data       = [
             'sifra'              => 'A1',
-            'vrednostVaje'       => 3.33,
+            'vrednostVaj'       => 3.33,
             'vrednostPredstave'  => 4.44,
             'vrednostUre'        => 2.22,
             'aktivna'            => false,
@@ -283,7 +283,7 @@ class PogodbaCest
         // kreiramo še en zapis
         $data       = [
             'sifra'              => 'BB',
-            'vrednostVaje'       => 3.11,
+            'vrednostVaj'       => 3.11,
             'vrednostPredstave'  => 4.11,
             'vrednostUre'        => 2.11,
             'aktivna'            => false,
@@ -305,7 +305,7 @@ class PogodbaCest
         // kreiramo še en zapis brez šifre, da vidimo, če jo kreira
         $data       = [
 //            'sifra'              => 'BB',
-            'vrednostVaje'       => 3.11,
+            'vrednostVaj'       => 3.11,
             'vrednostPredstave'  => 4.11,
             'vrednostUre'        => 2.11,
             'aktivna'            => false,
@@ -482,7 +482,7 @@ class PogodbaCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['sifra'], 'ZZ123');
-        $I->assertEquals($ent['vrednostVaje'], 33.33);
+        $I->assertEquals($ent['vrednostVaj'], 33.33);
         $I->assertEquals($ent['vrednostPredstave'], 44.44);
         $I->assertEquals($ent['vrednostUre'], 22.22);
         $I->assertEquals($ent['aktivna'], false);
@@ -530,7 +530,7 @@ class PogodbaCest
 //        $this->expect($this->oseba, "Pogodba nima subjekta. Oseba je obvezna", 1000343);
         $data = [
             'sifra'             => 'yy123',
-            'vrednostVaje'      => 33.33,
+            'vrednostVaj'      => 33.33,
             'vrednostPredstave' => 44.44,
             'vrednostUre'       => 22.22,
             'aktivna'           => false,
@@ -555,7 +555,7 @@ class PogodbaCest
     {
         // brišemo 3. zapis, ker prvega ne moremo zaradi referenčne integritete
         $I->successfullyDelete($this->restUrl, $this->obj4['id']);
-        $I->failToGet($this->restUrl, $this->obj3['id']);
+        $I->failToGet($this->restUrl, $this->obj4['id']);
     }
 
     /**

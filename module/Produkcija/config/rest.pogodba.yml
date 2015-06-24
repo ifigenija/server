@@ -9,7 +9,7 @@ forms:
             - name: sifra
               options:
                   required: false
-            - vrednostVaje
+            - vrednostVaj
             - vrednostPredstave
             - vrednostUre
             - aktivna

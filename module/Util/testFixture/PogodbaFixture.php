@@ -49,7 +49,7 @@ class PogodbaFixture
             $manager->persist($o);
         }
 
-        $o->setVrednostVaje($v[1]);
+        $o->setVrednostVaj($v[1]);
         $o->setVrednostPredstave($v[2]);
         $o->setVrednostUre($v[3]);
         $o->setAktivna($v[4]);
