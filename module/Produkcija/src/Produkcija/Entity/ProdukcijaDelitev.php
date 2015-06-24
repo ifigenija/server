@@ -77,12 +77,13 @@ class ProdukcijaDelitev
      */
     private $tantieme;
 
-    /**
-     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="prodel.skupniStrosek", description="prodel.skupniStrosek")
-     * @var double
-     */
-    private $skupniStrosek;
+//   polje premaknjeno v Uprizoritev
+//    /**
+//     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
+//     * @Max\I18n(label="prodel.skupniStrosek", description="prodel.skupniStrosek")
+//     * @var double
+//     */
+//    private $skupniStrosek;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=6, scale=2)
@@ -166,11 +167,6 @@ class ProdukcijaDelitev
         return $this->tantieme;
     }
 
-    public function getSkupniStrosek()
-    {
-        return $this->skupniStrosek;
-    }
-
     public function getZaprosenProcent()
     {
         return $this->zaprosenProcent;
@@ -236,12 +232,6 @@ class ProdukcijaDelitev
     public function setTantieme($tantieme)
     {
         $this->tantieme = $tantieme;
-        return $this;
-    }
-
-    public function setSkupniStrosek($skupniStrosek)
-    {
-        $this->skupniStrosek = $skupniStrosek;
         return $this;
     }
 

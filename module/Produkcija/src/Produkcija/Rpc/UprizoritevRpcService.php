@@ -117,7 +117,6 @@ class UprizoritevRpcService
         $kopr->setDrugiJavni(0);
         $kopr->setAvtorskih($avtorskih);
         $kopr->setTantieme($tantieme);
-        $kopr->setSkupniStrosek(0); //$$ še za spremeniti verjetno lastna sredstva + zaprošeno - kaj pa 
         $kopr->setZaprosenProcent(0); //$$ še za spremeniti
         $kopr->setKoproducent($phisa);
         $kopr->setUprizoritev($uprizoritev);

@@ -239,7 +239,6 @@ class UprizoritevCest
 //        $I->assertNotEmpty($ent['id']);
 //    }
 
-    
     /**
      * 
      * @param ApiTester $I
@@ -258,8 +257,6 @@ class UprizoritevCest
         $I->assertNotEmpty($this->lookProdukcijskaHisa2);
     }
 
-    
-    
     /**
      *  kreiramo zapis
      * 
@@ -294,6 +291,7 @@ class UprizoritevCest
             'steviloVaj'            => 4,
             'planiranoSteviloVaj'   => 5,
             'producent'             => null,
+            'skupniStrosek'         => 1.23,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -326,6 +324,7 @@ class UprizoritevCest
             'steviloVaj'            => 6,
             'planiranoSteviloVaj'   => 7,
             'producent'             => null,
+            'skupniStrosek'         => 1.23,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -358,6 +357,7 @@ class UprizoritevCest
             'steviloVaj'            => 5,
             'planiranoSteviloVaj'   => 5,
             'producent'             => $this->lookProdukcijskaHisa1['id'],
+            'skupniStrosek'         => 1.23,
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -806,8 +806,10 @@ class UprizoritevCest
         $I->assertEquals($ent['internacionalniNaslov'], 'zz');
         $I->assertEquals($ent['steviloVaj'], 4);
         $I->assertEquals($ent['planiranoSteviloVaj'], 5);
+        $I->assertEquals($ent['skupniStrosek'], 1.23, "skupni strošek");
 
         $I->assertTrue(isset($ent['koprodukcije']));
+        $I->assertFalse(isset($ent['producent']), "producent");
         $I->assertTrue(isset($ent['funkcije']));
         $I->assertTrue(isset($ent['arhivi']));
         $I->assertTrue(isset($ent['rekviziterstva']));
@@ -867,19 +869,28 @@ class UprizoritevCest
      */
     public function createVecStroskov(ApiTester $I)
     {
+
         $data                         = [
+            'uprizoritev' => $this->obj2['id'],
             'naziv'       => 'bb',
             'vrednostDo'  => 2.34,
-            'uprizoritev' => $this->obj2['id'],
+            'vrednostNa'  => 4.56,
+            'tipstroska'  => 'materialni',
+            'opis'        => 'bb',
+            'sort'        => 1,
         ];
         $this->objStrosekUprizoritve1 = $ent                          = $I->successfullyCreate($this->strosekUprizoritveUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
         $data                         = [
-            'naziv'       => 'cc',
-            'vrednostDo'  => 5.67,
             'uprizoritev' => $this->obj2['id'],
+            'naziv'       => 'cc',
+            'vrednostDo'  => 8.9,
+            'vrednostNa'  => 9.1,
+            'tipstroska'  => 'materialni',
+            'opis'        => 'cc',
+            'sort'        => 2,
         ];
         $this->objStrosekUprizoritve2 = $ent                          = $I->successfullyCreate($this->strosekUprizoritveUrl, $data);
         $I->assertNotEmpty($ent['id']);

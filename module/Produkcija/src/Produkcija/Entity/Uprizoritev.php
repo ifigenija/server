@@ -290,6 +290,17 @@ class Uprizoritev
      */
     private $producent;
 
+    /**
+     * Planiran skupni strošek projekta. 
+     * 
+     * Podrobneje se znesek deli glede na % vložkov koproducentov v ProdukcijaDelitev
+     * 
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
+     * @Max\I18n(label="uprizoritev.skupniStrosek", description="uprizoritev.skupniStrosek")
+     * @var double
+     */
+    private $skupniStrosek;
+
     public function __construct()
     {
         $this->koprodukcije   = new ArrayCollection();
@@ -678,6 +689,17 @@ class Uprizoritev
     public function setProducent(\Produkcija\Entity\ProdukcijskaHisa $producent)
     {
         $this->producent = $producent;
+        return $this;
+    }
+
+    public function getSkupniStrosek()
+    {
+        return $this->skupniStrosek;
+    }
+
+    public function setSkupniStrosek($skupniStrosek)
+    {
+        $this->skupniStrosek = $skupniStrosek;
         return $this;
     }
 

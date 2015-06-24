@@ -44,6 +44,7 @@ forms:
             - zvrstUprizoritve
             - zvrstSurs
             - producent
+            - skupniStrosek
         hydrator: 
             - lookups: [besedilo]
 lists:

@@ -13,7 +13,7 @@ forms:
             - drugiJavni
             - avtorskih
             - tantieme
-            - skupniStrosek
+#            - skupniStrosek            # polje premaknjeno v uprizoritev
             - zaprosenProcent
 #            - alternacije
             - uprizoritev
