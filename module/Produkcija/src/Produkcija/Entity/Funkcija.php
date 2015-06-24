@@ -78,10 +78,10 @@ class Funkcija
     private $velikost;
 
     /**
-     * Če je funkcija pomembna, je tudi vsebovana v osebni izkaznici 
+     * Če je funkcija izpostavljena (pomembna), je tudi vsebovana v osebni izkaznici 
      * Če pomembna=false, potem se ne izpiše v osebni izkaznici, ampak le v gledališkem listu
      * 
-     * Smiselno je, da imajo pomembne funkcije tudi večjo utež oz. sortno vrednost ($sort)
+     * Smiselno je, da imajo izpostavljene funkcije tudi večjo utež oz. sortno vrednost ($sort)
      * 
      * @ORM\Column(type="boolean", nullable=false)
      * @Max\I18n(label="funkcija.pomembna", description="funkcija.d.pomembna")

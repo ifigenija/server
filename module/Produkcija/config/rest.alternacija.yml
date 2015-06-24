@@ -24,6 +24,7 @@ forms:
             - oseba
             - koprodukcija
 #            - pogodba    #$$ začasno damo pogodbo gor
+            - pomembna
         hydrator:
             lookups: [oseba]
             

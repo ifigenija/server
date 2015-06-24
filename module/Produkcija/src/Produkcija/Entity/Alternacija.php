@@ -146,6 +146,18 @@ class Alternacija
      */
     protected $imaPogodbo;
 
+    /**
+     * Če je alternacija pomembna, jo prikaže v programu dela,
+     * 
+     * $$ za doreči -katero sortno polje se po uporabljalo za program dela, ali od alternacije, ali od funkcije?
+     * 
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     * @Max\I18n(label="alternacija.pomembna", description="alternacija.d.pomembna")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $pomembna;
+
     public function __construct()
     {
         $this->storitve = new ArrayCollection();
@@ -369,6 +381,17 @@ class Alternacija
     public function setImaPogodbo($imaPogodbo)
     {
         $this->imaPogodbo = $imaPogodbo;
+        return $this;
+    }
+
+    public function getPomembna()
+    {
+        return $this->pomembna;
+    }
+
+    public function setPomembna($pomembna)
+    {
+        $this->pomembna = $pomembna;
         return $this;
     }
 

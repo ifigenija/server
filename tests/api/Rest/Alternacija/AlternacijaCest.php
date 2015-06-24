@@ -346,6 +346,7 @@ class AlternacijaCest
             'koprodukcija' => $this->objKoprodukcija1['id'],
             'pogodba'      => $this->objPogodba['id'],
             'imaPogodbo'   => TRUE,
+            'pomembna'   => TRUE,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -367,6 +368,7 @@ class AlternacijaCest
             'koprodukcija' => $this->objKoprodukcija1['id'],
             'pogodba'      => null,
             'imaPogodbo'   => TRUE,
+            'pomembna'   => FALSE,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -388,6 +390,7 @@ class AlternacijaCest
             'koprodukcija' => $this->objKoprodukcija2['id'],
             'pogodba'      => null,
             'imaPogodbo'   => false,
+            'pomembna'   => FALSE,
         ];
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -471,6 +474,7 @@ class AlternacijaCest
         $I->assertEquals($ent['koprodukcija'], $this->objKoprodukcija1['id'], "napačna koprodukcija");
         $I->assertEquals($ent['pogodba'], $this->objPogodba['id']);
         $I->assertEquals($ent['imaPogodbo'], true);
+        $I->assertEquals($ent['pomembna'], true,"pomembna");
     }
 
     /**
