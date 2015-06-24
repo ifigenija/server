@@ -111,13 +111,13 @@ class UprizoritevRpcService
 
         // $$ polja bomo še izračunali, ko bomo vedli kako, npr. nas strosek je vsota vseh stroškov uprizoritve ad  #837
         $kopr->setOdstotekFinanciranja(0);
-        $kopr->setNasStrosek(TRUE);
-        $kopr->setLastnaSredstva($lastnaSredstva);        //$$ seštej vse stroške uprizoritve
         $kopr->setZaproseno(0);
         $kopr->setDrugiJavni(0);
+        $kopr->setZaprosenProcent(0); //$$ še za spremeniti
+        $kopr->setNasStrosek(TRUE);
+        $kopr->setLastnaSredstva($lastnaSredstva);        //$$ seštej vse stroške uprizoritve
         $kopr->setAvtorskih($avtorskih);
         $kopr->setTantieme($tantieme);
-        $kopr->setZaprosenProcent(0); //$$ še za spremeniti
         $kopr->setKoproducent($phisa);
         $kopr->setUprizoritev($uprizoritev);
 
