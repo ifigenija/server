@@ -30,9 +30,12 @@ use ApiTester;
 class DrugiVirCest
 {
 
-    private $restUrl = '/rest/drugivir';
+    private $restUrl            = '/rest/drugivir';
     private $obj1;
     private $obj2;
+    private $programPremieraUrl = '/rest/programpremiera';
+    private $objProgramPremiera1;
+    private $objProgramPremiera2;
 
     public function _before(ApiTester $I)
     {
@@ -42,6 +45,22 @@ class DrugiVirCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     * najde enoto programa
+     * 
+     * @param ApiTester $I
+     */
+    public function getListProgramPremiera(ApiTester $I)
+    {
+        $resp                      = $I->successfullyGetList($this->programPremieraUrl, []);
+        $list                      = $resp['data'];
+        $I->assertNotEmpty($list);
+        $this->objProgramPremiera1 = $drzava                    = array_pop($list);
+        $I->assertNotEmpty($drzava);
+        $this->objProgramPremiera2 = $drzava                    = array_pop($list);
+        $I->assertNotEmpty($drzava);
     }
 
     /**
@@ -55,8 +74,8 @@ class DrugiVirCest
         $data       = [
             'znesek'        => 1.23,
             'opis'          => "zz",
-            'enotaPrograma' => null,
-            'mednarodni' => FALSE,
+            'enotaPrograma' => $this->objProgramPremiera1['id'],
+            'mednarodni'    => FALSE,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -66,8 +85,8 @@ class DrugiVirCest
         $data       = [
             'znesek'        => 2.34,
             'opis'          => "aa",
-            'enotaPrograma' => null,
-            'mednarodni' => true,
+            'enotaPrograma' => $this->objProgramPremiera1['id'],
+            'mednarodni'    => true,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -103,7 +122,7 @@ class DrugiVirCest
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['znesek'], 3.33);
         $I->assertEquals($ent['opis'], "zz");
-        $I->assertEquals($ent['enotaPrograma'], null);
+        $I->assertEquals($ent['enotaPrograma'], $this->objProgramPremiera1['id']);
         $I->assertEquals($ent['mednarodni'], FALSE);
     }
 
@@ -163,8 +182,7 @@ class DrugiVirCest
         $resp = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($resp);
         // testiramo na enako številko napake kot je v validaciji
-        $I->assertEquals(1000480, $resp[0]['code'],"negativni znesek");
-
+        $I->assertEquals(1000480, $resp[0]['code'], "negativni znesek");
     }
 
 }

@@ -87,7 +87,33 @@ class ProdukcijaDelitev
     public function validate($mode = 'update')
     {
         //$$ tu bi še naredili kontrole, preračunavanja za ostale prodDelitve iste enote programa ipd.
-        
+        // preracunaj odstotkeF
+        //    - vsota vseh iste enote programa =100%
+        //    - pri matičnem podjetju spremenimo, da je vsota potem 100% 
+        //      
+        // // delez= enotaprograma.celotnavrednost * odst.Fin
+        // zaproseno= zaprosenProcent * delez
+        /**
+         * Pri pogodbi preverim, če je nosilec pogodbe oseba na alternaciji
+         * Če je nosilec pogodbe poslovni partner grem čez kontaktne osebe 
+         * in preverim ,da je oseba kontakt na poslovnem partnerju
+         */
+        $this->expect($this->getEnotaPrograma(), 'Ni enote programa za to koprodukcijo', 1000410);
+
+
+        // preračunaj procente oz. odstotek financiranja matičnega podjetja:
+        $skupniOdstFin = 0;
+        foreach ($this->getEnotaPrograma()->getKoprodukcije() as $kopr) {
+            $skupniOdstFin += $kopr->getOdstotekFinanciranja(); //$$ uporabi bcmath
+            
+        }      
+
+        // izračunaj delež
+        $delez = $this->getEnotaPrograma()->getCelotnaVrednost() * $this->getOdstotekFinanciranja() / 100; //$$ uporabi bcmath
+        $this->setDelez($delez);
+
+        // izračunaj zaprošen znesek
+        $zaproseno = $delez * $this->getZaprosenProcent() / 100;           //$$ uporabi bcmath
     }
 
     public function getId()

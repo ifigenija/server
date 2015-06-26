@@ -7,9 +7,9 @@ forms:
         elements:
 #            - id
             - odstotekFinanciranja
-            - delez
+#            - delez        # se izračuna glede na odst.Fin
             - zaprosenProcent
-            - zaproseno
+#            - zaproseno    # se izračuna glede na zapr.%
             - enotaPrograma
             - koproducent
 lists:
