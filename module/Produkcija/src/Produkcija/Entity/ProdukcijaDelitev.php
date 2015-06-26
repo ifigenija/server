@@ -26,6 +26,8 @@ class ProdukcijaDelitev
     private $id;
 
     /**
+     * Odstotek financiranja posameznega koproducenta
+     * 
      * @ORM\Column(type="decimal", nullable=true)
      * @Max\I18n(label="prodel.odstotekFinanciranja", description="prodel.odstotekFinanciranja")
      * @var double
@@ -33,59 +35,21 @@ class ProdukcijaDelitev
     private $odstotekFinanciranja;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="prodel.nasStrosek", description="prodel.d.nasStrosek")
-     * @Max\Ui(type="boolcheckbox")
-     * @var boolean
-     */
-    private $nasStrosek;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="prodel.lastnaSredstva", description="prodel.lastnaSredstva")
-     * @var double
-     */
-    private $lastnaSredstva;
-
-    /**
+     * delež posameznega koproducenta
+     * 
+     * = celotna vrednost projekta * %financiranja
+     * 
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
      * @Max\I18n(label="prodel.zaproseno", description="prodel.zaproseno")
      * @var double
      */
-    private $zaproseno;
+    private $delez;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="prodel.drugiJavni", description="prodel.drugiJavni")
-     * @var double
-     */
-    private $drugiJavni;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="prodel.avtorskih", description="prodel.d.avtorskih")
-     * @var double
-     */
-    private $avtorskih;
-
-    /**
-     *  $$ rb ali ni to isto kot avtorski honorar?
+     * % deleza
      * 
-     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="prodel.tantieme", description="prodel.tantieme")
-     * @var double
-     */
-    private $tantieme;
-
-//   polje premaknjeno v Uprizoritev
-//    /**
-//     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-//     * @Max\I18n(label="prodel.skupniStrosek", description="prodel.skupniStrosek")
-//     * @var double
-//     */
-//    private $skupniStrosek;
-
-    /**
+     * je <= maksfaktor
+     * 
      * @ORM\Column(type="decimal", nullable=true, precision=6, scale=2)
      * @Max\I18n(label="prodel.zaprosenProcent", description="prodel.zaprosenProcent")
      * @var double
@@ -93,20 +57,23 @@ class ProdukcijaDelitev
     private $zaprosenProcent;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="koprodukcija")
-     * @var <Alternacije>
+     * zaprošen znesek pri MK
      * 
+     * = delez * zaprosen%
+     * 
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
+     * @Max\I18n(label="prodel.zaproseno", description="prodel.zaproseno")
+     * @var double
      */
-    private $alternacije;
+    private $zaproseno;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="koprodukcije")
-     * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id", nullable=false)
-     * @Max\I18n(label="entiteta.uprizoritev",  description="entiteta.uprizoritev")
-     * @Max\Ui(type="hiddenid",required=true)
-     * @var \Produkcija\Entity\Uprizoritev
+     * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\EnotaPrograma", inversedBy="koprodukcije")
+     * @Max\I18n(label="prodel.enotaPrograma", description="prodel.d.enotaPrograma")   
+     * @Max\Ui(type="toone")
+     * @var \ProgramDela\Entity\EnotaPrograma
      */
-    private $uprizoritev;
+    protected $enotaPrograma;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ProdukcijskaHisa", inversedBy="koprodukcije")
@@ -117,13 +84,9 @@ class ProdukcijaDelitev
      */
     private $koproducent;
 
-    public function __construct()
-    {
-        $this->alternacije = new ArrayCollection();
-    }
-
     public function validate($mode = 'update')
     {
+        //$$ tu bi še naredili kontrole, preračunavanja za ostale prodDelitve iste enote programa ipd.
         
     }
 
@@ -137,34 +100,9 @@ class ProdukcijaDelitev
         return $this->odstotekFinanciranja;
     }
 
-    public function getNasStrosek()
+    public function getDelez()
     {
-        return $this->nasStrosek;
-    }
-
-    public function getLastnaSredstva()
-    {
-        return $this->lastnaSredstva;
-    }
-
-    public function getZaproseno()
-    {
-        return $this->zaproseno;
-    }
-
-    public function getDrugiJavni()
-    {
-        return $this->drugiJavni;
-    }
-
-    public function getAvtorskih()
-    {
-        return $this->avtorskih;
-    }
-
-    public function getTantieme()
-    {
-        return $this->tantieme;
+        return $this->delez;
     }
 
     public function getZaprosenProcent()
@@ -172,14 +110,14 @@ class ProdukcijaDelitev
         return $this->zaprosenProcent;
     }
 
-    public function getAlternacije()
+    public function getZaproseno()
     {
-        return $this->alternacije;
+        return $this->zaproseno;
     }
 
-    public function getUprizoritev()
+    public function getEnotaPrograma()
     {
-        return $this->uprizoritev;
+        return $this->enotaPrograma;
     }
 
     public function getKoproducent()
@@ -199,39 +137,9 @@ class ProdukcijaDelitev
         return $this;
     }
 
-    public function setNasStrosek($nasStrosek)
+    public function setDelez($delez)
     {
-        $this->nasStrosek = $nasStrosek;
-        return $this;
-    }
-
-    public function setLastnaSredstva($lastnaSredstva)
-    {
-        $this->lastnaSredstva = $lastnaSredstva;
-        return $this;
-    }
-
-    public function setZaproseno($zaproseno)
-    {
-        $this->zaproseno = $zaproseno;
-        return $this;
-    }
-
-    public function setDrugiJavni($drugiJavni)
-    {
-        $this->drugiJavni = $drugiJavni;
-        return $this;
-    }
-
-    public function setAvtorskih($avtorskih)
-    {
-        $this->avtorskih = $avtorskih;
-        return $this;
-    }
-
-    public function setTantieme($tantieme)
-    {
-        $this->tantieme = $tantieme;
+        $this->delez = $delez;
         return $this;
     }
 
@@ -241,15 +149,15 @@ class ProdukcijaDelitev
         return $this;
     }
 
-    public function setAlternacije($alternacije)
+    public function setZaproseno($zaproseno)
     {
-        $this->alternacije = $alternacije;
+        $this->zaproseno = $zaproseno;
         return $this;
     }
 
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev)
+    public function setEnotaPrograma(\ProgramDela\Entity\EnotaPrograma $enotaPrograma)
     {
-        $this->uprizoritev = $uprizoritev;
+        $this->enotaPrograma = $enotaPrograma;
         return $this;
     }
 

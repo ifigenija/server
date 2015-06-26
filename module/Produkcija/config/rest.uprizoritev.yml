@@ -44,7 +44,6 @@ forms:
             - zvrstUprizoritve
             - zvrstSurs
             - producent
-            - skupniStrosek
         hydrator: 
             - lookups: [besedilo]
 lists:
@@ -63,10 +62,6 @@ lists:
         filter:
 relation:
     default:
-        koprodukcije:
-            enabled: true
-            hydrator:
-                exclude: []    
         funkcije:
             enabled: true
             hydrator:

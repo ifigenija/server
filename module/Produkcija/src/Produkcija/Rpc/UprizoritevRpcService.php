@@ -24,9 +24,12 @@ class UprizoritevRpcService
      * @param string $uprizoritevId
      * 
      * @returns pogodba id (ali celi objekt od pogodbe)  ali ?false  , če ne uspe $$
+     * @todo za premakniti iz uprizoritve -> enotaprograma
      */
     public function preracunajMaticnaKoprodukcija($uprizoritevId)
     {
+        throw new \Max\Exception\UnauthException($tr->translate('Metoda ni več podprta'), 1000933);
+        
         // preverjanje avtorizacije
         $this->expectPermission("Uprizoritev-read");
         $this->expectPermission("StrosekUprizoritve-read");

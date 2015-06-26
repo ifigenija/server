@@ -22,7 +22,6 @@ forms:
             - zaposlitev
             - imaPogodbo
             - oseba
-            - koprodukcija
 #            - pogodba    #$$ začasno damo pogodbo gor
             - pomembna
         hydrator:
@@ -58,7 +57,7 @@ lists:
                       targetEntity: Produkcija\Entity\Funkcija
                       required: false
         hydrator: 
-            lookups: [funkcija, koprodukcija, pogodba, oseba]
+            lookups: [funkcija, pogodba, oseba]
 #            lookups: [oseba]
 relation:
     default:

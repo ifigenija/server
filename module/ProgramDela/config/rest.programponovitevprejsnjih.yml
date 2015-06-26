@@ -33,6 +33,7 @@ forms:
             - stHonorarnih
             - stHonorarnihIgr
             - stHonorarnihIgrTujJZ
+#            - koprodukcije
     hydrator:
             lookups: 
                 - uprizoritev
@@ -46,6 +47,10 @@ lists:
 relation:
     default:
         drugiViri:
+            enabled: true
+            hydrator:
+                exclude: [] 
+        koprodukcije:
             enabled: true
             hydrator:
                 exclude: [] 

@@ -7,29 +7,21 @@ forms:
         elements:
 #            - id
             - odstotekFinanciranja
-            - nasStrosek
-            - lastnaSredstva
-            - zaproseno
-            - drugiJavni
-            - avtorskih
-            - tantieme
-#            - skupniStrosek            # polje premaknjeno v uprizoritev
+            - delez
             - zaprosenProcent
-#            - alternacije
-            - uprizoritev
+            - zaproseno
+            - enotaPrograma
             - koproducent
 lists:
     default: 
         filter:
             elements:                 
-                - name: uprizoritev
+                - name: enotaPrograma
                   type: toone
                   options:
-                      label: Uprizoritev
-                      targetEntity: Produkcija\Entity\Uprizoritev
+                      label: Enota programa
+                      targetEntity: ProgramDela\Entity\EnotaPrograma
                       required: true
-#                - name: alternacije       # $$ rb ali bomo naredili v namenskem view-u?
-#                - name: koproducent       # $$ rb ali bomo naredili v namenskem view-u?
         hydrator:
             lookups: [ koproducent ]
     vse: 

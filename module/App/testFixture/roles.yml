@@ -13,8 +13,6 @@
         - Role-write
         - Permission-read
         - Permission-write
-        - EnotaPrograma-read
-        - EnotaPrograma-write
         - Abonma-read
         - Abonma-write
         - Alternacija-read
@@ -29,6 +27,8 @@
         - Dogodek-write
         - Drzava-read
         - Drzava-write
+        - EnotaPrograma-read
+        - EnotaPrograma-write
         - Funkcija-read
         - Funkcija-write
         - Gostovanje-read

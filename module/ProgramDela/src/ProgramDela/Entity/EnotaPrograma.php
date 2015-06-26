@@ -83,6 +83,12 @@ class EnotaPrograma
     private $drugiViri;
 
     /**
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\ProdukcijaDelitev", mappedBy="enotaPrograma")
+     * @var <Koprodukcije>
+     */
+    private $koprodukcije;
+
+    /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.vlozekGostitelja", description="ep.d.vlozekGostitelja")   
      * @var double
@@ -585,6 +591,17 @@ class EnotaPrograma
     public function setSort($sort)
     {
         $this->sort = $sort;
+        return $this;
+    }
+
+    public function getKoprodukcije()
+    {
+        return $this->koprodukcije;
+    }
+
+    public function setKoprodukcije($koprodukcije)
+    {
+        $this->koprodukcije = $koprodukcije;
         return $this;
     }
 

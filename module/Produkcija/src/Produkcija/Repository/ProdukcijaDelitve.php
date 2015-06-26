@@ -39,13 +39,13 @@ class ProdukcijaDelitve
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
-                $this->expect(!(empty($options['uprizoritev']) ), "Uprizoritev je obvezna", 770061);
+                $this->expect(!(empty($options['enotaPrograma']) ), "Enota programa je obvezna", 770061);
                 $crit = new Criteria();
                 $e    = $crit->expr();
 
-                if (!empty($options['uprizoritev'])) {
-                    $uprizoritev = $this->getEntityManager()->find('Produkcija\Entity\Uprizoritev', $options['uprizoritev']);
-                    $exp         = $e->eq('uprizoritev', $uprizoritev);
+                if (!empty($options['enotaPrograma'])) {
+                    $enotaPrograma = $this->getEntityManager()->find('ProgramDela\Entity\EnotaPrograma', $options['enotaPrograma']);
+                    $exp         = $e->eq('enotaPrograma', $enotaPrograma);
                 }
 
                 $crit->andWhere($exp);

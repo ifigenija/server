@@ -205,12 +205,6 @@ class Uprizoritev
     private $kratkiNaslov;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\ProdukcijaDelitev", mappedBy="uprizoritev")
-     * @var <Koprodukcije>
-     */
-    private $koprodukcije;
-
-    /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Funkcija", mappedBy="uprizoritev")
      * @var <Funkcije>
      */
@@ -289,17 +283,6 @@ class Uprizoritev
      * @var \Produkcija\Entity\ProdukcijskaHisa
      */
     private $producent;
-
-    /**
-     * Planiran skupni strošek projekta. 
-     * 
-     * Podrobneje se znesek deli glede na % vložkov koproducentov v ProdukcijaDelitev
-     * 
-     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="uprizoritev.skupniStrosek", description="uprizoritev.skupniStrosek")
-     * @var double
-     */
-    private $skupniStrosek;
 
     public function __construct()
     {
@@ -426,11 +409,6 @@ class Uprizoritev
     public function getKratkiNaslov()
     {
         return $this->kratkiNaslov;
-    }
-
-    public function getKoprodukcije()
-    {
-        return $this->koprodukcije;
     }
 
     public function getFunkcije()
@@ -620,12 +598,6 @@ class Uprizoritev
         return $this;
     }
 
-    public function setKoprodukcije($koprodukcije)
-    {
-        $this->koprodukcije = $koprodukcije;
-        return $this;
-    }
-
     public function setFunkcije($funkcije)
     {
         $this->funkcije = $funkcije;
@@ -689,17 +661,6 @@ class Uprizoritev
     public function setProducent(\Produkcija\Entity\ProdukcijskaHisa $producent)
     {
         $this->producent = $producent;
-        return $this;
-    }
-
-    public function getSkupniStrosek()
-    {
-        return $this->skupniStrosek;
-    }
-
-    public function setSkupniStrosek($skupniStrosek)
-    {
-        $this->skupniStrosek = $skupniStrosek;
         return $this;
     }
 

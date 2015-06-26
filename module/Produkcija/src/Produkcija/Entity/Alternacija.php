@@ -121,13 +121,6 @@ class Alternacija
      */
     private $oseba;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ProdukcijaDelitev", inversedBy="alternacije")
-     * @Max\I18n(label="alternacija.koprodukcija",  description="alternacija.koprodukcija")
-     * @Max\Ui(type="toone")
-     * @var \Produkcija\Entity\ProdukcijaDelitev
-     */
-    private $koprodukcija;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Pogodba", inversedBy="alternacije")
@@ -199,13 +192,6 @@ class Alternacija
                         , 1000336);
             }
         }
-
-        /**
-         * Išče se koproducenta v koprodukcijskih delitvah, če je vnesen koproducent na alternaciji. Če ga ne najde javi napako / exception
-         */
-        if ($this->getKoprodukcija()) {
-            $this->expect($this->getKoprodukcija()->getKoproducent(), 'Koproducent v koprodukcijskih delitvah ni vnešen', 1000336);
-        }
     }
 
     public function getId()
@@ -273,11 +259,6 @@ class Alternacija
         return $this->oseba;
     }
 
-    public function getKoprodukcija()
-    {
-        return $this->koprodukcija;
-    }
-
     public function getPogodba()
     {
         return $this->pogodba;
@@ -286,6 +267,11 @@ class Alternacija
     public function getImaPogodbo()
     {
         return $this->imaPogodbo;
+    }
+
+    public function getPomembna()
+    {
+        return $this->pomembna;
     }
 
     public function setId($id)
@@ -366,12 +352,6 @@ class Alternacija
         return $this;
     }
 
-    public function setKoprodukcija(\Produkcija\Entity\ProdukcijaDelitev $koprodukcija)
-    {
-        $this->koprodukcija = $koprodukcija;
-        return $this;
-    }
-
     public function setPogodba(\Produkcija\Entity\Pogodba $pogodba)
     {
         $this->pogodba = $pogodba;
@@ -384,15 +364,11 @@ class Alternacija
         return $this;
     }
 
-    public function getPomembna()
-    {
-        return $this->pomembna;
-    }
-
     public function setPomembna($pomembna)
     {
         $this->pomembna = $pomembna;
         return $this;
     }
+
 
 }

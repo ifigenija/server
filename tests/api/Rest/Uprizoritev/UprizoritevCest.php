@@ -21,7 +21,6 @@ use ApiTester;
  * relacije z drugimi entitetami
  * - maticniOder/prostor $$ 
  *      - besedilo
- *      - koprodukcije  2M     
  *      - funkcije O2M   
  *      - arhivi         O2M   
  *      - rekviziterstva     O2M   
@@ -291,7 +290,6 @@ class UprizoritevCest
             'steviloVaj'            => 4,
             'planiranoSteviloVaj'   => 5,
             'producent'             => null,
-            'skupniStrosek'         => 1.23,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -324,7 +322,6 @@ class UprizoritevCest
             'steviloVaj'            => 6,
             'planiranoSteviloVaj'   => 7,
             'producent'             => null,
-            'skupniStrosek'         => 1.23,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -357,7 +354,6 @@ class UprizoritevCest
             'steviloVaj'            => 5,
             'planiranoSteviloVaj'   => 5,
             'producent'             => $this->lookProdukcijskaHisa1['id'],
-            'skupniStrosek'         => 1.23,
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -541,33 +537,33 @@ class UprizoritevCest
      * 
      * @param ApiTester $I
      */
-    public function createVecKoproducentov(ApiTester $I)
-    {
-        $data                   = [
-            'odstotekFinanciranja' => 1.23,
-            'nasStrosek'           => false,
-            'uprizoritev'          => $this->obj2['id'],
-            'koproducent'          => $this->lookProdukcijskaHisa1['id'],
-        ];
-        $I->assertTrue(true);
-        $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        $I->assertFalse($ent['nasStrosek']);
-        codecept_debug($ent);
-
-
-        // kreiram še en zapis
-        $data                   = [
-            'odstotekFinanciranja' => 7.90,
-            'nasStrosek'           => true,
-            'uprizoritev'          => $this->obj2['id'],
-            'koproducent'          => $this->lookProdukcijskaHisa2['id'],
-        ];
-        $this->objKoprodukcija2 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertTrue($ent['nasStrosek']);
-    }
+//    public function createVecKoproducentov(ApiTester $I)
+//    {
+//        $data                   = [
+//            'odstotekFinanciranja' => 1.23,
+//            'nasStrosek'           => false,
+//            'uprizoritev'          => $this->obj2['id'],
+//            'koproducent'          => $this->lookProdukcijskaHisa1['id'],
+//        ];
+//        $I->assertTrue(true);
+//        $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        $I->assertFalse($ent['nasStrosek']);
+//        codecept_debug($ent);
+//
+//
+//        // kreiram še en zapis
+//        $data                   = [
+//            'odstotekFinanciranja' => 7.90,
+//            'nasStrosek'           => true,
+//            'uprizoritev'          => $this->obj2['id'],
+//            'koproducent'          => $this->lookProdukcijskaHisa2['id'],
+//        ];
+//        $this->objKoprodukcija2 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        codecept_debug($ent);
+//        $I->assertTrue($ent['nasStrosek']);
+//    }
 
     /**
      *  napolnimo vsaj en zapis
@@ -806,9 +802,7 @@ class UprizoritevCest
         $I->assertEquals($ent['internacionalniNaslov'], 'zz');
         $I->assertEquals($ent['steviloVaj'], 4);
         $I->assertEquals($ent['planiranoSteviloVaj'], 5);
-        $I->assertEquals($ent['skupniStrosek'], 1.23, "skupni strošek");
 
-        $I->assertTrue(isset($ent['koprodukcije']));
         $I->assertFalse(isset($ent['producent']), "producent");
         $I->assertTrue(isset($ent['funkcije']));
         $I->assertTrue(isset($ent['arhivi']));
@@ -817,7 +811,6 @@ class UprizoritevCest
         $I->assertTrue(isset($ent['predstave']));
         $I->assertTrue(isset($ent['gostujoce']));
 
-        $I->assertEquals(0, count($ent['koprodukcije']));
         $I->assertEquals(0, count($ent['funkcije']));
         $I->assertEquals(0, count($ent['arhivi']));
         $I->assertEquals(0, count($ent['rekviziterstva']));
@@ -903,14 +896,14 @@ class UprizoritevCest
      * 
      * @param ApiTester $I
      */
-    public function preberiRelacijeSKoproducenti(ApiTester $I)
-    {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", "");
-        $I->assertEquals(2, count($resp));
-
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", $this->objKoprodukcija1['id']);
-        $I->assertEquals(1, count($resp));
-    }
+//    public function preberiRelacijeSKoproducenti(ApiTester $I)
+//    {
+//        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", "");
+//        $I->assertEquals(2, count($resp));
+//
+//        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", $this->objKoprodukcija1['id']);
+//        $I->assertEquals(1, count($resp));
+//    }
 
     /**
      * preberemo relacije

@@ -23,6 +23,7 @@ use ApiTester;
  *      -(ni) pri many to many relacijah testiraj : update, get (list+id), delete
  *      - pri one to many relacijah testiraj : get (list+id)
  *         . drugiViri
+ *         . koprodukcije
  *      getlist različne variante relacij
  *      - vse
  *      - default
@@ -32,16 +33,23 @@ use ApiTester;
 class ProgramPremieraCest
 {
 
-    private $restUrl               = '/rest/programpremiera';
+    private $restUrl                = '/rest/programpremiera';
     private $obj1;
     private $obj2;
-    private $uprizoritevUrl        = '/rest/uprizoritev';
+    private $uprizoritevUrl         = '/rest/uprizoritev';
     private $lookUprizoritev;
-    private $tipProgramskeEnoteUrl = '/rest/tipprogramskeenote';
+    private $tipProgramskeEnoteUrl  = '/rest/tipprogramskeenote';
     private $lookTipProgramskeEnote;
-    private $drugiVirUrl           = '/rest/drugivir';
+    private $drugiVirUrl            = '/rest/drugivir';
     private $objDrugiVir1;
     private $objDrugiVir2;
+    private $produkcijaDelitevUrl   = '/rest/produkcijadelitev';
+    private $objProdukcijaDelitev1;
+    private $objProdukcijaDelitev2;
+    private $produkcijskaHisaUrl    = '/rest/produkcijskahisa';
+    private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
+    private $lookProdukcijskaHisa1;
+    private $lookProdukcijskaHisa2;
 
     public function _before(ApiTester $I)
     {
@@ -51,6 +59,22 @@ class ProgramPremieraCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupProdukcijskaHisa(ApiTester $I)
+    {
+
+        $resp                        = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "total records");
+        $this->lookProdukcijskaHisa1 = $resp['data'][0];
+        $this->lookProdukcijskaHisa2 = $resp['data'][1];
     }
 
     /**
@@ -289,6 +313,56 @@ class ProgramPremieraCest
         $I->assertGreaterThanOrEqual(2, count($resp));
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "drugiViri", $this->objDrugiVir1['id']);
+        $I->assertGreaterThanOrEqual(1, count($resp));
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends create
+     * @depends lookupProdukcijskaHisa
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecKoprodukcij(ApiTester $I)
+    {
+        $data                        = [
+            'odstotekFinanciranja' => 40,
+            'delez'                => 100,
+            'zaprosenProcent'      => 50,
+            'zaproseno'            => 50,
+            'enotaPrograma'        => $this->obj2['id'],
+            'koproducent'          => $this->lookProdukcijskaHisa1['id'],
+        ];
+        $this->objProdukcijaDelitev1 = $ent                         = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data                        = [
+            'odstotekFinanciranja' => 20,
+            'delez'                => 400,
+            'zaprosenProcent'      => 10,
+            'zaproseno'            => 20,
+            'enotaPrograma'        => $this->obj2['id'],
+            'koproducent'          => $this->lookProdukcijskaHisa2['id'],
+        ];
+        $this->objProdukcijaDelitev2 = $ent                         = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecKoprodukcij
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSKoprodukcijami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", "");
+        $I->assertGreaterThanOrEqual(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", $this->objProdukcijaDelitev1['id']);
         $I->assertGreaterThanOrEqual(1, count($resp));
     }
 

@@ -18,7 +18,6 @@ use ApiTester;
  *      - funkcija
  *      - zaposlitev (zaposlitev)
  *      - oseba
- *      - koprodukcija
  *      - pogodba
  * - storitve O2M $$
  *      getlist različne variante relacij
@@ -271,29 +270,29 @@ class AlternacijaCest
      * 
      * @param ApiTester $I
      */
-    public function createKoprodukcijo(ApiTester $I)
-    {
-        $data                   = [
-            'odstotekFinanciranja' => 1.23,
-            'nasStrosek'           => true,
-            'uprizoritev'          => $this->lookUprizoritev['id'],
-            'koproducent'          => $this->lookProdukcijskaHisa['id'],
-        ];
-        $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->koprodukcijaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-
-        // kreiram še en zapis brez koproducenta  - ne moremo, ker ne dovoli - Value is required
+//    public function createKoprodukcijo(ApiTester $I)
+//    {
 //        $data                   = [
-//            'odstotekFinanciranja' => 4.56,
+//            'odstotekFinanciranja' => 1.23,
 //            'nasStrosek'           => true,
 //            'uprizoritev'          => $this->lookUprizoritev['id'],
-//            'koproducent'          => null, // da lahko potem validacijo testiramo
+//            'koproducent'          => $this->lookProdukcijskaHisa['id'],
 //        ];
-//        $this->objKoprodukcija2 = $ent                    = $I->successfullyCreate($this->koprodukcijaUrl, $data);
+//        $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->koprodukcijaUrl, $data);
 //        $I->assertNotEmpty($ent['id']);
 //        codecept_debug($ent);
-    }
+//
+//        // kreiram še en zapis brez koproducenta  - ne moremo, ker ne dovoli - Value is required
+////        $data                   = [
+////            'odstotekFinanciranja' => 4.56,
+////            'nasStrosek'           => true,
+////            'uprizoritev'          => $this->lookUprizoritev['id'],
+////            'koproducent'          => null, // da lahko potem validacijo testiramo
+////        ];
+////        $this->objKoprodukcija2 = $ent                    = $I->successfullyCreate($this->koprodukcijaUrl, $data);
+////        $I->assertNotEmpty($ent['id']);
+////        codecept_debug($ent);
+//    }
 
     /**
      *  kreiramo pogodbo
@@ -325,7 +324,6 @@ class AlternacijaCest
      * @depends lookupOsebo
      * @depends lookupFunkcijo
      * @depends createZaposlitev
-     * @depends createKoprodukcijo
      * @depends createPogodbo
      * 
      * @param ApiTester $I
@@ -343,7 +341,6 @@ class AlternacijaCest
             'funkcija'     => $this->lookFunkcija['id'],
             'zaposlitev'   => $this->objZaposlitev['id'],
             'oseba'        => $this->lookOseba['id'],
-            'koprodukcija' => $this->objKoprodukcija1['id'],
             'pogodba'      => $this->objPogodba['id'],
             'imaPogodbo'   => TRUE,
             'pomembna'   => TRUE,
@@ -365,7 +362,6 @@ class AlternacijaCest
             'funkcija'     => $this->lookFunkcija['id'],
             'zaposlitev'   => null,
             'oseba'        => $this->lookOseba['id'],
-            'koprodukcija' => $this->objKoprodukcija1['id'],
             'pogodba'      => null,
             'imaPogodbo'   => TRUE,
             'pomembna'   => FALSE,
@@ -375,7 +371,7 @@ class AlternacijaCest
         codecept_debug($ent);
         $I->assertEquals($ent['opomba'], 'aa');
 
-        // kreiram še en zapis za test validacije koproducenta
+        // kreiram še en zapis
         $data       = [
             'zaposlen'     => false,
             'zacetek'      => '2013-02-01T00:00:00+0100',
@@ -387,7 +383,6 @@ class AlternacijaCest
             'funkcija'     => $this->lookFunkcija['id'],
             'zaposlitev'   => null,
             'oseba'        => $this->lookOseba['id'],
-            'koprodukcija' => $this->objKoprodukcija2['id'],
             'pogodba'      => null,
             'imaPogodbo'   => false,
             'pomembna'   => FALSE,
@@ -471,7 +466,6 @@ class AlternacijaCest
         $I->assertEquals($ent['zaposlitev'], $this->objZaposlitev['id'], "zaposlitev");
         $I->assertEquals($ent['zaposlen'], true);               // v validaciji se bi moralo postaviti na true, če je zaposlitev
         $I->assertEquals($ent['oseba']['id'], $this->lookOseba['id'], "oseba");
-        $I->assertEquals($ent['koprodukcija'], $this->objKoprodukcija1['id'], "napačna koprodukcija");
         $I->assertEquals($ent['pogodba'], $this->objPogodba['id']);
         $I->assertEquals($ent['imaPogodbo'], true);
         $I->assertEquals($ent['pomembna'], true,"pomembna");

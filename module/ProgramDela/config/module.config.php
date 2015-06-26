@@ -10,11 +10,15 @@
 return [
 
     'service_manager' => [
-        'factories' => [
-        ]
+        'factories'  => [
+        ],
+        'invokables' => [
+            'enotaprograma.rpc.service' => 'ProgramDela\Rpc\EnotaProgramaRpcService',
+        ],
     ],
     'controllers'     => [
         'invokables' => [
+            'Rpc\programdela' => 'ProgramDela\Controller\RpcController',
         ],
         'factories'  => [
 //            'Rest\EnotaPrograma'      => 'Max\Factory\RestControllerFactory',         //rb - ne potrebujemo, ker je superklasa

@@ -32,7 +32,7 @@ class AlternacijaCest
     public function lookupAlternacija(ApiTester $I)
     {
         // alternacija brez pogodbe
-        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0001', []);
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0003', []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");

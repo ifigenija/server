@@ -23,6 +23,7 @@ use ApiTester;
  *            -(ni) pri many to many relacijah testiraj : update, get (list+id), delete
  *          - pri one to many relacijah testiraj : get (list+id)
  *          . drugiViri
+ *          . koprodukcije
  *           getlist različne variante relacij
  * 
  *
@@ -31,16 +32,23 @@ use ApiTester;
 class ProgramPonovitevPremiereCest
 {
 
-    private $restUrl               = '/rest/programponovitevpremiere';
+    private $restUrl                = '/rest/programponovitevpremiere';
     private $obj1;
     private $obj2;
-    private $uprizoritevUrl        = '/rest/uprizoritev';
+    private $uprizoritevUrl         = '/rest/uprizoritev';
     private $lookUprizoritev;
-    private $tipProgramskeEnoteUrl = '/rest/tipprogramskeenote';
+    private $tipProgramskeEnoteUrl  = '/rest/tipprogramskeenote';
     private $lookTipProgramskeEnote;
-    private $drugiVirUrl           = '/rest/drugivir';
+    private $drugiVirUrl            = '/rest/drugivir';
     private $objDrugiVir1;
     private $objDrugiVir2;
+    private $produkcijaDelitevUrl   = '/rest/produkcijadelitev';
+    private $objProdukcijaDelitev1;
+    private $objProdukcijaDelitev2;
+    private $produkcijskaHisaUrl    = '/rest/produkcijskahisa';
+    private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
+    private $lookProdukcijskaHisa1;
+    private $lookProdukcijskaHisa2;
 
     public function _before(ApiTester $I)
     {
@@ -50,6 +58,22 @@ class ProgramPonovitevPremiereCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupProdukcijskaHisa(ApiTester $I)
+    {
+
+        $resp                        = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "total records");
+        $this->lookProdukcijskaHisa1 = $resp['data'][0];
+        $this->lookProdukcijskaHisa2 = $resp['data'][1];
     }
 
     /**
@@ -81,28 +105,28 @@ class ProgramPonovitevPremiereCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'celotnaVrednost'      => 1.23,
-            'zaproseno'            => 1.23,
-            'lastnaSredstva'       => 1.23,
-            'avtorskiHonorarji'    => 1.23,
-            'tantieme'             => 1.23,
-            'drugiViri'            => 1.23,
-            'vlozekGostitelja'     => 1.23,
-            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 1.23,
-            'obiskDoma'            => 1,
-            'obiskGost'            => 1,
-            'obiskZamejo'          => 1,
-            'obiskInt'             => 1,
-            'ponoviDoma'           => 1,
-            'ponoviZamejo'         => 1,
-            'ponoviGost'           => 1,
-            'ponoviInt'            => 1,
-            'utemeljitev'          => 'zz',
-            'uprizoritev'          => NULL,
-            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
-            'dokument'             => null,
-            'sort'                 => 1,
+            'celotnaVrednost'    => 1.23,
+            'zaproseno'          => 1.23,
+            'lastnaSredstva'     => 1.23,
+            'avtorskiHonorarji'  => 1.23,
+            'tantieme'           => 1.23,
+            'drugiViri'          => 1.23,
+            'vlozekGostitelja'   => 1.23,
+            'vlozekKoproducenta' => 1.23,
+            'drugiJavni'         => 1.23,
+            'obiskDoma'          => 1,
+            'obiskGost'          => 1,
+            'obiskZamejo'        => 1,
+            'obiskInt'           => 1,
+            'ponoviDoma'         => 1,
+            'ponoviZamejo'       => 1,
+            'ponoviGost'         => 1,
+            'ponoviInt'          => 1,
+            'utemeljitev'        => 'zz',
+            'uprizoritev'        => NULL,
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
+            'dokument'           => null,
+            'sort'               => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -110,28 +134,28 @@ class ProgramPonovitevPremiereCest
 
         // kreiramo še en zapis
         $data       = [
-            'celotnaVrednost'      => 4.56,
-            'zaproseno'            => 4.56,
-            'lastnaSredstva'       => 4.56,
-            'avtorskiHonorarji'    => 4.56,
-            'tantieme'             => 4.56,
-            'drugiViri'            => 4.56,
-            'vlozekGostitelja'     => 4.23,
-            'vlozekKoproducenta'   => 4.23,
-            'drugiJavni'           => 4.56,
-            'obiskDoma'            => 4,
-            'obiskGost'            => 4,
-            'obiskZamejo'          => 4,
-            'obiskInt'             => 4,
-            'ponoviDoma'           => 4,
-            'ponoviZamejo'         => 4,
-            'ponoviGost'           => 4,
-            'ponoviInt'            => 4,
-            'utemeljitev'          => 'aa',
-            'uprizoritev'          => NULL,
-            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
-            'dokument'             => null,
-            'sort'                 => 2,
+            'celotnaVrednost'    => 4.56,
+            'zaproseno'          => 4.56,
+            'lastnaSredstva'     => 4.56,
+            'avtorskiHonorarji'  => 4.56,
+            'tantieme'           => 4.56,
+            'drugiViri'          => 4.56,
+            'vlozekGostitelja'   => 4.23,
+            'vlozekKoproducenta' => 4.23,
+            'drugiJavni'         => 4.56,
+            'obiskDoma'          => 4,
+            'obiskGost'          => 4,
+            'obiskZamejo'        => 4,
+            'obiskInt'           => 4,
+            'ponoviDoma'         => 4,
+            'ponoviZamejo'       => 4,
+            'ponoviGost'         => 4,
+            'ponoviInt'          => 4,
+            'utemeljitev'        => 'aa',
+            'uprizoritev'        => NULL,
+            'tipProgramskeEnote' => $this->lookTipProgramskeEnote['id'],
+            'dokument'           => null,
+            'sort'               => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -272,6 +296,56 @@ class ProgramPonovitevPremiereCest
         $I->assertGreaterThanOrEqual(2, count($resp));
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "drugiViri", $this->objDrugiVir1['id']);
+        $I->assertGreaterThanOrEqual(1, count($resp));
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends create
+     * @depends lookupProdukcijskaHisa
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecKoprodukcij(ApiTester $I)
+    {
+        $data                        = [
+            'odstotekFinanciranja' => 40,
+            'delez'                => 100,
+            'zaprosenProcent'      => 50,
+            'zaproseno'            => 50,
+            'enotaPrograma'        => $this->obj2['id'],
+            'koproducent'          => $this->lookProdukcijskaHisa1['id'],
+        ];
+        $this->objProdukcijaDelitev1 = $ent                         = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data                        = [
+            'odstotekFinanciranja' => 20,
+            'delez'                => 400,
+            'zaprosenProcent'      => 10,
+            'zaproseno'            => 20,
+            'enotaPrograma'        => $this->obj2['id'],
+            'koproducent'          => $this->lookProdukcijskaHisa2['id'],
+        ];
+        $this->objProdukcijaDelitev2 = $ent                         = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecKoprodukcij
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSKoprodukcijami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", "");
+        $I->assertGreaterThanOrEqual(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", $this->objProdukcijaDelitev1['id']);
         $I->assertGreaterThanOrEqual(1, count($resp));
     }
 
