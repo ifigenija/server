@@ -84,6 +84,14 @@ class ProdukcijaDelitev
      */
     private $koproducent;
 
+    /**
+     * @ORM\Column(type="boolean", length=1, nullable=false)
+     * @Max\I18n(label="prodel.maticniKop",  description="prodel.d.maticniKop")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    private $maticniKop = false;
+
     public function validate($mode = 'update')
     {
         //$$ tu bi še naredili kontrole, preračunavanja za ostale prodDelitve iste enote programa ipd.
@@ -99,15 +107,24 @@ class ProdukcijaDelitev
          * in preverim ,da je oseba kontakt na poslovnem partnerju
          */
         $this->expect($this->getEnotaPrograma(), 'Ni enote programa za to koprodukcijo', 1000410);
-
+        $this->expect(($this->getOdstotekFinanciranja() >= 0) && ($this->getOdstotekFinanciranja() <= 100), 'Odstotek financiranja mora biti med 0 in 100', 1000412); //$$ uporabi bcmath
 
         // preračunaj procente oz. odstotek financiranja matičnega podjetja:
-        $skupniOdstFin = 0;
+        $odstotekFinNematicnih = 0; //init
+       
+        // $$ problem - če je create samega sebe še ne vidi v array collection
         foreach ($this->getEnotaPrograma()->getKoprodukcije() as $kopr) {
-            $skupniOdstFin += $kopr->getOdstotekFinanciranja(); //$$ uporabi bcmath
-            
-        }      
-
+            if ($kopr->getMaticniKop()) {
+                $matkopr = clone $kopr();       // matična koprodukcija
+            } else {
+                $odstotekFinNematicnih+= $kopr->getOdstotekFinanciranja(); //$$ uporabi bcmath
+            }
+        }
+        $this->expect($odstotekFinNematicnih <= 100, 'Prevelik odstotek financiranja, vsota vseh mora biti 100%, je pa', 1000411); //$$ uporabi bcmath
+        // pri matičnem koproducentu popravi odstotek financiranja, da bo vsota vseh 100
+        
+       
+        $matkopr->setOdstotekFinanciranja(100 - $odstotekFinNematicnih);      //$$ uporabi bcmath
         // izračunaj delež
         $delez = $this->getEnotaPrograma()->getCelotnaVrednost() * $this->getOdstotekFinanciranja() / 100; //$$ uporabi bcmath
         $this->setDelez($delez);
@@ -190,6 +207,17 @@ class ProdukcijaDelitev
     public function setKoproducent(\Produkcija\Entity\ProdukcijskaHisa $koproducent)
     {
         $this->koproducent = $koproducent;
+        return $this;
+    }
+
+    public function getMaticniKop()
+    {
+        return $this->maticniKop;
+    }
+
+    public function setMaticniKop($maticniKop)
+    {
+        $this->maticniKop = $maticniKop;
         return $this;
     }
 

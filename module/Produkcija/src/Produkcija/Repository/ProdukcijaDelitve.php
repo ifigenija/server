@@ -45,7 +45,7 @@ class ProdukcijaDelitve
 
                 if (!empty($options['enotaPrograma'])) {
                     $enotaPrograma = $this->getEntityManager()->find('ProgramDela\Entity\EnotaPrograma', $options['enotaPrograma']);
-                    $exp         = $e->eq('enotaPrograma', $enotaPrograma);
+                    $exp           = $e->eq('enotaPrograma', $enotaPrograma);
                 }
 
                 $crit->andWhere($exp);
@@ -69,6 +69,31 @@ class ProdukcijaDelitve
         return $qb;
     }
 
-    
-    
+    public function create($object, $params = null)
+    {
+        $this->nastaviFlagMaticna($object);
+
+        parent::create($object, $params);
+    }
+
+    public function update($object)
+    {
+        $this->nastaviFlagMaticna();
+
+        parent::update($object);
+    }
+
+    private function nastaviFlagMaticna(\Produkcija\Entity\ProdukcijaDelitev $object)
+    {
+        $em      = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $optionR = $em->getRepository('App\Entity\Option');
+        $option  = $optionR->findOneByName("application.tenant.maticnopodjetje");
+        $sifra   = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
+        if ($object->getKoproducent()->getSifra() == $sifra) {
+            $object->setMaticniKop(TRUE);
+        } else {
+            $object->setMaticniKop(false);
+        };
+    }
+
 }

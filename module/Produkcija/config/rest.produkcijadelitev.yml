@@ -12,6 +12,7 @@ forms:
 #            - zaproseno    # se izračuna glede na zapr.%
             - enotaPrograma
             - koproducent
+#            - maticniKop   # se nastavi glede na koproducenta
 lists:
     default: 
         filter:
