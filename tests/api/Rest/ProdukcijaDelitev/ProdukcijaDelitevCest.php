@@ -38,7 +38,7 @@ class ProdukcijaDelitevCest
     private $uprizoritevUrl         = '/rest/uprizoritev';
     private $osebaUrl               = '/rest/oseba';
     private $obj;
-    private $objProdukcijaDelitev2;
+    private $obj2;
     private $objUprizoritev;
     private $objDrzava;
     private $objPopa;
@@ -50,7 +50,7 @@ class ProdukcijaDelitevCest
     private $objKoprodukcija;
     private $lookUprizoritev;
     private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
-    private $programPremieraUrl               = '/rest/programpremiera';
+    private $programPremieraUrl     = '/rest/programpremiera';
     private $objProgramPremiera1;
     private $objProgramPremiera2;
 
@@ -85,12 +85,12 @@ class ProdukcijaDelitevCest
      */
     public function getListProgramPremiera(ApiTester $I)
     {
-        $resp            = $I->successfullyGetList($this->programPremieraUrl, []);
-        $list            = $resp['data'];
+        $resp                      = $I->successfullyGetList($this->programPremieraUrl, []);
+        $list                      = $resp['data'];
         $I->assertNotEmpty($list);
-        $this->objProgramPremiera1 = $drzava          = array_pop($list);
+        $this->objProgramPremiera1 = $drzava                    = array_pop($list);
         $I->assertNotEmpty($drzava);
-        $this->objProgramPremiera2 = $drzava          = array_pop($list);
+        $this->objProgramPremiera2 = $drzava                    = array_pop($list);
         $I->assertNotEmpty($drzava);
     }
 
@@ -109,7 +109,6 @@ class ProdukcijaDelitevCest
         $this->lookProdukcijskaHisa = $resp['data'][0];
     }
 
-    
     /**
      *  kreiramo zapis
      * 
@@ -134,7 +133,7 @@ class ProdukcijaDelitevCest
         $I->assertEquals($ent['odstotekFinanciranja'], 40);
 
         // kreiram še en zapis
-        $data                        = [
+        $data       = [
             'odstotekFinanciranja' => 20,
             'delez'                => 200,
             'zaprosenProcent'      => 50,
@@ -143,7 +142,7 @@ class ProdukcijaDelitevCest
             'enotaPrograma'        => $this->objProgramPremiera2['id'],
             'koproducent'          => $this->lookProdukcijskaHisa['id'],
         ];
-        $this->objProdukcijaDelitev2 = $ent                         = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
 //        codecept_debug($ent);
         $I->assertEquals($ent['odstotekFinanciranja'], 20);
@@ -201,7 +200,7 @@ class ProdukcijaDelitevCest
         $I->assertEquals($ent['delez'], 3500.00);           //$$ odvisno od  celotne vrednosti
         $I->assertEquals($ent['zaprosenProcent'], 50);
         $I->assertEquals($ent['zaproseno'], 1750.00);    //$$ odvisno od  celotne vrednosti
-        $I->assertEquals($ent['enotaPrograma'],  $this->objProgramPremiera1['id']);
+        $I->assertEquals($ent['enotaPrograma'], $this->objProgramPremiera1['id']);
         $I->assertEquals($ent['koproducent'], $this->lookProdukcijskaHisa['id']);
     }
 
@@ -226,7 +225,7 @@ class ProdukcijaDelitevCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?enotaPrograma=". $this->objProgramPremiera1['id'];    
+        $listUrl = $this->restUrl . "?enotaPrograma=" . $this->objProgramPremiera1['id'];
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
@@ -244,6 +243,31 @@ class ProdukcijaDelitevCest
     {
         $I->successfullyDelete($this->restUrl, $this->obj['id']);
         $I->failToGet($this->restUrl, $this->obj['id']);
+    }
+
+    /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateZNapacnimiOdstotki(ApiTester $I)
+    {
+        $data                         = $this->obj2;
+        $data['odstotekFinanciranja'] = 100.01;
+        $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        $I->assertEquals(1000412, $resp[0]['code']);
+
+        $data['odstotekFinanciranja'] = -0.01;
+        $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        $I->assertEquals(1000412, $resp[0]['code']);
+
+        // naslednji odstotki so ok, ker se prej zaokrožijo:
+        $data['odstotekFinanciranja'] = -0.0009;
+        $resp = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+
+        $data['odstotekFinanciranja'] = 100.0001;
+        $resp = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
     }
 
 }

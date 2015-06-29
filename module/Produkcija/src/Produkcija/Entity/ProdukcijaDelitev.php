@@ -5,6 +5,7 @@ namespace Produkcija\Entity;
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 use Doctrine\Common\Collections\ArrayCollection;
+use Max\Functions;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\ProdukcijaDelitve")
@@ -108,16 +109,19 @@ class ProdukcijaDelitev
          * in preverim ,da je oseba kontakt na poslovnem partnerju
          */
         $this->expect($this->getEnotaPrograma(), 'Ni enote programa za to koprodukcijo', 1000410);
-        $this->expect(($this->getOdstotekFinanciranja() >= 0) && ($this->getOdstotekFinanciranja() <= 100), 'Odstotek financiranja mora biti med 0 in 100', 1000412); //$$ uporabi bcmath
+        $odstFin = \Max\Functions::procRoundS($this->getOdstotekFinanciranja());
+        $this->expect(($odstFin >= 0) && ($odstFin <= 100), 'Odstotek financiranja mora biti med 0 in 100', 1000412);
 
         //$$ kontrole za vsoto procentov
-        
         // izračunaj delež
-        $delez = $this->getEnotaPrograma()->getCelotnaVrednost() * $this->getOdstotekFinanciranja() / 100; //$$ uporabi bcmath
+        $delez = $this->getEnotaPrograma()->getCelotnaVrednost() * $this->getOdstotekFinanciranja() / 100;
+        $delez = \Max\Functions::euroRound($delez);   //Zaokrožimo na 2 decimalki predno shranimo
         $this->setDelez($delez);
 
         // izračunaj zaprošen znesek
-        $zaproseno = $delez * $this->getZaprosenProcent() / 100;           //$$ uporabi bcmath
+        $zaproseno = $delez * $this->getZaprosenProcent() / 100;
+
+        $zaproseno = \Max\Functions::euroRound($zaproseno);   //Zaokrožimo na 2 decimalki predno shranimo
         $this->setZaproseno($zaproseno);
     }
 
