@@ -98,6 +98,7 @@ class ProdukcijaDelitev
         // preracunaj odstotkeF
         //    - vsota vseh iste enote programa =100%
         //    - pri matičnem podjetju spremenimo, da je vsota potem 100% 
+        //    - pazi! pri delete se validate ne izvede
         //      
         // // delez= enotaprograma.celotnavrednost * odst.Fin
         // zaproseno= zaprosenProcent * delez
@@ -109,28 +110,15 @@ class ProdukcijaDelitev
         $this->expect($this->getEnotaPrograma(), 'Ni enote programa za to koprodukcijo', 1000410);
         $this->expect(($this->getOdstotekFinanciranja() >= 0) && ($this->getOdstotekFinanciranja() <= 100), 'Odstotek financiranja mora biti med 0 in 100', 1000412); //$$ uporabi bcmath
 
-        // preračunaj procente oz. odstotek financiranja matičnega podjetja:
-        $odstotekFinNematicnih = 0; //init
-       
-        // $$ problem - če je create samega sebe še ne vidi v array collection
-        foreach ($this->getEnotaPrograma()->getKoprodukcije() as $kopr) {
-            if ($kopr->getMaticniKop()) {
-                $matkopr = clone $kopr();       // matična koprodukcija
-            } else {
-                $odstotekFinNematicnih+= $kopr->getOdstotekFinanciranja(); //$$ uporabi bcmath
-            }
-        }
-        $this->expect($odstotekFinNematicnih <= 100, 'Prevelik odstotek financiranja, vsota vseh mora biti 100%, je pa', 1000411); //$$ uporabi bcmath
-        // pri matičnem koproducentu popravi odstotek financiranja, da bo vsota vseh 100
+        //$$ kontrole za vsoto procentov
         
-       
-        $matkopr->setOdstotekFinanciranja(100 - $odstotekFinNematicnih);      //$$ uporabi bcmath
         // izračunaj delež
         $delez = $this->getEnotaPrograma()->getCelotnaVrednost() * $this->getOdstotekFinanciranja() / 100; //$$ uporabi bcmath
         $this->setDelez($delez);
 
         // izračunaj zaprošen znesek
         $zaproseno = $delez * $this->getZaprosenProcent() / 100;           //$$ uporabi bcmath
+        $this->setZaproseno($zaproseno);
     }
 
     public function getId()

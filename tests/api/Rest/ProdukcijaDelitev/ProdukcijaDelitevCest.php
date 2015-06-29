@@ -198,9 +198,9 @@ class ProdukcijaDelitevCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['odstotekFinanciranja'], 70);
-        $I->assertEquals($ent['delez'], 100);
+        $I->assertEquals($ent['delez'], 3500.00);           //$$ odvisno od  celotne vrednosti
         $I->assertEquals($ent['zaprosenProcent'], 50);
-        $I->assertEquals($ent['zaproseno'], 50);
+        $I->assertEquals($ent['zaproseno'], 1750.00);    //$$ odvisno od  celotne vrednosti
         $I->assertEquals($ent['enotaPrograma'],  $this->objProgramPremiera1['id']);
         $I->assertEquals($ent['koproducent'], $this->lookProdukcijskaHisa['id']);
     }

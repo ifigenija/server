@@ -78,7 +78,7 @@ class ProdukcijaDelitve
 
     public function update($object)
     {
-        $this->nastaviFlagMaticna();
+        $this->nastaviFlagMaticna($object);
 
         parent::update($object);
     }
