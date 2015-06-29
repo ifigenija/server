@@ -43,7 +43,7 @@ class ProdukcijaDelitevCest
     private $objDrzava;
     private $objPopa;
     private $objProdukcijskaHisa;
-    private $lookProdukcijskaHisa;
+    private $lookProdukcijskaHisa1;
     private $objAlternacija1;
     private $objAlternacija2;
     private $objOseba;
@@ -106,7 +106,8 @@ class ProdukcijaDelitevCest
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "total records");
-        $this->lookProdukcijskaHisa = $resp['data'][0];
+        $this->lookProdukcijskaHisa1 = $resp['data'][0];
+        $this->lookProdukcijskaHisa2 = $resp['data'][1];
     }
 
     /**
@@ -125,7 +126,7 @@ class ProdukcijaDelitevCest
             'zaprosenProcent'      => 50,
             'zaproseno'            => 50,
             'enotaPrograma'        => $this->objProgramPremiera1['id'],
-            'koproducent'          => $this->lookProdukcijskaHisa['id'],
+            'koproducent'          => $this->lookProdukcijskaHisa1['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -138,9 +139,8 @@ class ProdukcijaDelitevCest
             'delez'                => 200,
             'zaprosenProcent'      => 50,
             'zaproseno'            => 100,
-            'enotaPrograma'        => null,
             'enotaPrograma'        => $this->objProgramPremiera2['id'],
-            'koproducent'          => $this->lookProdukcijskaHisa['id'],
+            'koproducent'          => $this->lookProdukcijskaHisa1['id'],
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -201,7 +201,7 @@ class ProdukcijaDelitevCest
         $I->assertEquals($ent['zaprosenProcent'], 50);
         $I->assertEquals($ent['zaproseno'], 1750.00);    //$$ odvisno od  celotne vrednosti
         $I->assertEquals($ent['enotaPrograma'], $this->objProgramPremiera1['id']);
-        $I->assertEquals($ent['koproducent'], $this->lookProdukcijskaHisa['id']);
+        $I->assertEquals($ent['koproducent'], $this->lookProdukcijskaHisa1['id']);
     }
 
     /**
@@ -270,4 +270,22 @@ class ProdukcijaDelitevCest
         $resp = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
     }
 
+        /**
+     *  test validate - možen le 1 delitev iste enote programa za istim koproducentom
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createIstiKoproducent(ApiTester $I)
+    {
+
+        $data=$this->obj2;
+        
+        $resp        = $I->failToCreate($this->restUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals($resp[0]['code'], 1000411);
+    }
+
+    
 }

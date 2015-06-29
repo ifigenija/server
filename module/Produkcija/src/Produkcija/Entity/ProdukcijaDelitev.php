@@ -100,19 +100,31 @@ class ProdukcijaDelitev
         //    - vsota vseh iste enote programa =100%
         //    - pri matičnem podjetju spremenimo, da je vsota potem 100% 
         //    - pazi! pri delete se validate ne izvede
-        //      
+        // 
+        // ta isto enoto programa je lahko le 1 delitev z isto produkcijsko hišo     
+        //                
         // // delez= enotaprograma.celotnavrednost * odst.Fin
         // zaproseno= zaprosenProcent * delez
-        /**
-         * Pri pogodbi preverim, če je nosilec pogodbe oseba na alternaciji
-         * Če je nosilec pogodbe poslovni partner grem čez kontaktne osebe 
-         * in preverim ,da je oseba kontakt na poslovnem partnerju
-         */
+        // 
         $this->expect($this->getEnotaPrograma(), 'Ni enote programa za to koprodukcijo', 1000410);
         $odstFin = \Max\Functions::procRoundS($this->getOdstotekFinanciranja());
         $this->expect(($odstFin >= 0) && ($odstFin <= 100), 'Odstotek financiranja mora biti med 0 in 100', 1000412);
 
         //$$ kontrole za vsoto procentov
+        // za isto enoto programa je lahko le 1 delitev z isto produkcijsko hišo     
+        if ($this->getEnotaPrograma()) {
+            if (!$this->getEnotaPrograma()->getKoprodukcije()->isEmpty()) {
+                $id      = $this->getId();
+                $obstaja = $this->getEnotaPrograma()->getKoprodukcije()
+                        ->exists(function($key, $kopr) use(&$id) {
+                    return ($kopr->getKoproducent() == $this->getKoproducent()) && ($kopr->getId() !== $id); //vrne true, če obstaja drug koprodukcija z istim koproducentom
+                });
+                $this->expect(!$obstaja, "Koprodukcija z istim koproducentom že obstaja v enoti programa", 1000411);
+            }
+        }
+
+
+
         // izračunaj delež
         $delez = $this->getEnotaPrograma()->getCelotnaVrednost() * $this->getOdstotekFinanciranja() / 100;
         $delez = \Max\Functions::euroRound($delez);   //Zaokrožimo na 2 decimalki predno shranimo

@@ -17,7 +17,8 @@ class EnotaProgramaCest
 {
 
     private $rpcUrl               = '/rpc/programdela/enotaprograma';
-    private $programPremieraUrl               = '/rest/programpremiera';
+    private $programPremieraUrl   = '/rest/programpremiera';
+    private $produkcijaDelitevUrl = '/rest/produkcijadelitev';
     private $objProgramPremiera1;
     private $objProgramPremiera2;
 
@@ -27,23 +28,22 @@ class EnotaProgramaCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vesna, \IfiTest\AuthPage::$vesnaPass);
     }
 
-        /**
+    /**
      * najde enoto programa
      * 
      * @param ApiTester $I
      */
     public function getListProgramPremiera(ApiTester $I)
     {
-        $resp            = $I->successfullyGetList($this->programPremieraUrl, []);
-        $list            = $resp['data'];
+        $resp                      = $I->successfullyGetList($this->programPremieraUrl, []);
+        $list                      = $resp['data'];
         $I->assertNotEmpty($list);
-        $this->objProgramPremiera1 = $drzava          = array_pop($list);
+        $this->objProgramPremiera1 = $drzava                    = array_pop($list);
         $I->assertNotEmpty($drzava);
-        $this->objProgramPremiera2 = $drzava          = array_pop($list);
+        $this->objProgramPremiera2 = $drzava                    = array_pop($list);
         $I->assertNotEmpty($drzava);
     }
-   
-    
+
     /**
      * 
      * @param ApiTester $I 
@@ -56,7 +56,7 @@ class EnotaProgramaCest
         $I->seeResponseIsJson();
         $I->assertEquals(36, strlen($resp), "dolžina guid");
         $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
-        
+
         //$$ tu bi lahko se preverili, ce so zapisane prave vrednosti
     }
 
@@ -71,6 +71,10 @@ class EnotaProgramaCest
         $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
     }
 
+    /**
+     * 
+     * @param ApiTester $I
+     */
     public function novaMaticnaKoprodukcijaBrezEnotePrograma(ApiTester $I)
     {
 
