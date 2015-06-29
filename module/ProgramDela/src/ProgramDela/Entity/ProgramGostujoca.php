@@ -28,10 +28,12 @@ class ProgramGostujoca
             // preveriti, ali že obstaja programgostujoča z isto uprizoritvijo
             $obstaja = true;  //init
             if (!$this->getDokument()->getGostujoci()->isEmpty()) {
+                 $id      = $this->getId();
                 $obstaja = $this->getDokument()
                         ->getGostujoci()
-                        ->exists(function($key, $progPremiere) {
-                    return $progPremiere->getUprizoritev() == $this->getUprizoritev();     //vrne true, če obstaja programpremiere z isto uprizoritvijo
+                        ->exists(function($key, $progGostujoca)  use(&$id)  {
+                    return ($progGostujoca->getUprizoritev() == $this->getUprizoritev())
+                            && ($progGostujoca->getId()!== $id);     //vrne true, če obstaja drug programGostujoča z isto uprizoritvijo
                 });
                 $this->expect(!$obstaja, "Program gostujoča z isto uprizoritvijo že obstaja v programu dela", 1000430);
             }

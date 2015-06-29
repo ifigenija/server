@@ -1082,11 +1082,11 @@ class ProgramDelaCest
             'dokument'             => $this->obj2['id'],
             'uprizoritev'          => $this->lookUprizoritev1['id'], // ista uprizoritev
         ];
-        $resp  = $I->failToCreate($this->programGostujocaUrl, $data);
+        $resp = $I->failToCreate($this->programGostujocaUrl, $data);
         $I->assertEquals(1000430, $resp[0]['code']);
 
         // kreiranje zapisa z drugo uprizoritvijo mora uspeti:
-              $data       = [
+        $data = [
             'celotnaVrednost'      => 1.23,
             'zaproseno'            => 1.23,
             'lastnaSredstva'       => 1.23,
@@ -1109,11 +1109,79 @@ class ProgramDelaCest
 //            'tipProgramskeEnote' => NULL,
 //            'tip'                => 'gostujoci', 
             'sort'                 => 1,
-            'dokument'           => $this->obj2['id'],
-            'uprizoritev'        => $this->lookUprizoritev2['id'], // druga uprizoritev
+            'dokument'             => $this->obj2['id'],
+            'uprizoritev'          => $this->lookUprizoritev2['id'], // druga uprizoritev
         ];
-        $ent = $I->successfullyCreate($this->programGostujocaUrl, $data);
+        $ent  = $I->successfullyCreate($this->programGostujocaUrl, $data);
         $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     * test validacije programa premiere - update mora uspeti
+     *  
+     * @param ApiTester $I
+     */
+    public function updateProgramPremiera(ApiTester $I)
+    {
+        //pri validaciji ne bi smel najti samega sebe
+        $data         = $this->objProgramPremiera1;
+        $data['sort'] = 3;
+
+        $ent = $I->successfullyUpdate($this->programPremieraUrl, $data['id'], $data);
+        codecept_debug($ent);
+
+        $I->assertEquals($ent['sort'], 3);
+    }
+
+    /**
+     * test validacije programa premiere - update mora uspeti
+     *  
+     * @param ApiTester $I
+     */
+    public function updateProgramPonovitevPremiere(ApiTester $I)
+    {
+        //pri validaciji ne bi smel najti samega sebe
+        $data         = $this->objProgramPonovitevPremiere1;
+        $data['sort'] = 3;
+
+        $ent = $I->successfullyUpdate($this->programPonovitevPremiereUrl, $data['id'], $data);
+        codecept_debug($ent);
+
+        $I->assertEquals($ent['sort'], 3);
+    }
+
+    /**
+     * test validacije programa premiere - update mora uspeti
+     *  
+     * @param ApiTester $I
+     */
+    public function updateProgramPonovitevPrejsnjih(ApiTester $I)
+    {
+        //pri validaciji ne bi smel najti samega sebe
+        $data         = $this->objProgramPonovitevPrejsnjih1;
+        $data['sort'] = 3;
+
+        $ent = $I->successfullyUpdate($this->programPonovitevPrejsnjihUrl, $data['id'], $data);
+        codecept_debug($ent);
+
+        $I->assertEquals($ent['sort'], 3);
+    }
+
+    /**
+     * test validacije programa premiere - update mora uspeti
+     *  
+     * @param ApiTester $I
+     */
+    public function updateProgramGostujoca(ApiTester $I)
+    {
+        //pri validaciji ne bi smel najti samega sebe
+        $data         = $this->objProgramGostujoca1;
+        $data['sort'] = 3;
+
+        $ent = $I->successfullyUpdate($this->programGostujocaUrl, $data['id'], $data);
+        codecept_debug($ent);
+
+        $I->assertEquals($ent['sort'], 3);
     }
 
 }

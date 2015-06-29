@@ -30,10 +30,12 @@ class ProgramPremiera
             // preveriti, ali že obstaja programpremiere z isto uprizoritvijo
             $obstaja = true;  //init
             if (!$this->getDokument()->getPremiere()->isEmpty()) {
+                $id=$this->getId();
                 $obstaja = $this->getDokument()
                         ->getPremiere()
-                        ->exists(function($key, $progPremiere) {
-                    return $progPremiere->getUprizoritev() == $this->getUprizoritev();     //vrne true, če obstaja programpremiere z isto uprizoritvijo
+                        ->exists(function($key, $progPremiere) use(&$id) {
+                    return ($progPremiere->getUprizoritev() == $this->getUprizoritev())
+                            && ($progPremiere->getId()!== $id);     //vrne true, če obstaja drug programpremiere z isto uprizoritvijo
                 });
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000440);
             }

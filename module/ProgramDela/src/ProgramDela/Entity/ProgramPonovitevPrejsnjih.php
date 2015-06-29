@@ -28,10 +28,12 @@ class ProgramPonovitevPrejsnjih
             // preveriti, ali že obstaja program pon. prejšnjih z isto uprizoritvijo
             $obstaja = true;  //init
             if ($this->getDokument()->getPonovitvePrejsnjih()) {
+                $id      = $this->getId();
                 $obstaja = $this->getDokument()
                         ->getPonovitvePrejsnjih()
-                        ->exists(function($key, $ponovitvePrejsnjih) {
-                    return $ponovitvePrejsnjih->getUprizoritev() == $this->getUprizoritev();     //vrne true, če obstaja program pon. pr. z isto uprizoritvijo
+                        ->exists(function($key, $ponovitvePrejsnjih) use(&$id)  {
+                    return ($ponovitvePrejsnjih->getUprizoritev() == $this->getUprizoritev())
+                                      && ($ponovitvePrejsnjih->getId()!== $id);     //vrne true, če obstaja drug program pon. pr. z isto uprizoritvijo
                 });
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000460);
             }

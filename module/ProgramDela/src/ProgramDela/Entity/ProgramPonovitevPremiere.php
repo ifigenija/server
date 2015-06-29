@@ -28,10 +28,12 @@ class ProgramPonovitevPremiere
             // preveriti, ali že obstaja program pon. prem. z isto uprizoritvijo
             $obstaja = true;  //init
             if ($this->getDokument()->getPonovitvePremiere()) {
+                $id      = $this->getId();
                 $obstaja = $this->getDokument()
                         ->getPonovitvePremiere()
-                        ->exists(function($key, $ponovitvePremiere) {
-                    return $ponovitvePremiere->getUprizoritev() == $this->getUprizoritev();     //vrne true, če obstaja program pon. prem. z isto uprizoritvijo
+                        ->exists(function($key, $ponovitvePremiere) use(&$id) {
+                    return ($ponovitvePremiere->getUprizoritev() == $this->getUprizoritev())
+                            && ($ponovitvePremiere->getId()!== $id);     //vrne true, če obstaja drug program pon. prem. z isto uprizoritvijo
                 });
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000450);
             }
