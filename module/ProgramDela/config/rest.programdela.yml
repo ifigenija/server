@@ -55,10 +55,10 @@ forms:
             - stZaposlenih      # $$ ali izpustimo, ker že v 2. delu?
             - stZaposIgralcev   # $$ ali izpustimo, ker že v 2. delu?
             - avgStNastopovIgr  # $$ ali izpustimo, ker že v 2. delu?
-            - stHonorarnih
-            - stHonorarnihIgr
-            - stHonorarnihIgrTujJZ
-            - sredstvaInt
+#            - stHonorarnih
+#            - stHonorarnihIgr
+#            - stHonorarnihIgrTujJZ
+#            - sredstvaInt
 #            - sredstvaAvt
         hydrator:
             lookups: 

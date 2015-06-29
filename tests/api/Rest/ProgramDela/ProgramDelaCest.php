@@ -119,10 +119,10 @@ class ProgramDelaCest
             'stZaposlenih'         => 7,
             'stZaposIgralcev'      => 7,
             'avgStNastopovIgr'     => 7.89,
-            'stHonorarnih'         => 7,
-            'stHonorarnihIgr'      => 7,
-            'stHonorarnihIgrTujJZ' => 7,
-            'sredstvaInt'          => 7.89,
+//            'stHonorarnih'         => 7,
+//            'stHonorarnihIgr'      => 7,
+//            'stHonorarnihIgrTujJZ' => 7,
+//            'sredstvaInt'          => 7.89,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -181,10 +181,10 @@ class ProgramDelaCest
         $I->assertEquals($ent['stZaposlenih'], 7);
         $I->assertEquals($ent['stZaposIgralcev'], 7);
         $I->assertEquals($ent['avgStNastopovIgr'], 7.89);
-        $I->assertEquals($ent['stHonorarnih'], 7);
-        $I->assertEquals($ent['stHonorarnihIgr'], 7);
-        $I->assertEquals($ent['stHonorarnihIgrTujJZ'], 7);
-        $I->assertEquals($ent['sredstvaInt'], 7.89);
+//        $I->assertEquals($ent['stHonorarnih'], 7);
+//        $I->assertEquals($ent['stHonorarnihIgr'], 7);
+//        $I->assertEquals($ent['stHonorarnihIgrTujJZ'], 7);
+//        $I->assertEquals($ent['sredstvaInt'], 7.89);
     }
 
     /**
@@ -374,9 +374,9 @@ class ProgramDelaCest
             'sort'                 => 1,
             'stZaposlenih'         => 1,
 //            'stDrugih'             => 1,
-//            'stHonorarnih'         => 1,
-//            'stHonorarnihIgr'      => 1,
-//            'stHonorarnihIgrTujJZ' => 1,
+            'stHonorarnih'         => 1,
+            'stHonorarnihIgr'      => 1,
+            'stHonorarnihIgrTujJZ' => 1,
             'dokument'             => $this->obj2['id'],
         ];
         $this->objProgramIzjemni1 = $ent                      = $I->successfullyCreate($this->programIzjemniUrl, $data);
