@@ -121,6 +121,201 @@ class ProgramDela
     private $sezona;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPremier", description="programDela.d.stPremier")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stPremier;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPonPrej", description="programDela.d.stPonPrej")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stPonPrej;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPonPrejVelikih", description="programDela.d.stPonPrejVelikih")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stPonPrejVelikih;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPonPrejMalih", description="programDela.d.stPonPrejMalih")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stPonPrejMalih;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPonPrejMalihKopr", description="programDela.d.stPonPrejMalihKopr")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stPonPrejMalihKopr;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPonPrejSredKopr", description="programDela.d.stPonPrejSredKopr")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stPonPrejSredKopr;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPonPrejVelikihKopr", description="programDela.d.stPonPrejVelikihKopr")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stPonPrejVelikihKopr;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.vrPS1", description="programDela.vrPS1")   
+     * @var double
+     */
+    private $vrPS1;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.vrPS1Do", description="programDela.vrPS1Do")   
+     * @var double
+     */
+    private $vrPS1Do;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.vrPS1Mat", description="programDela.vrPS1Mat")   
+     * @var double
+     */
+    private $vrPS1Mat;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.vrPS1GostovSZ", description="programDela.vrPS1GostovSZ")   
+     * @var double
+     */
+    private $vrPS1GostovSZ;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stNekomerc", description="programDela.d.stNekomerc")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stNekomerc;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPonPrem", description="programDela.d.stPonPrem")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stPonPrem;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPrej", description="programDela.d.stPrej")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stPrej;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stGostuj", description="programDela.d.stGostuj")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stGostuj;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stOstalihNek", description="programDela.d.stOstalihNek")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stOstalihNek;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stGostovanjSlo", description="programDela.d.stGostovanjSlo")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stGostovanjSlo;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stGostovanjZam", description="programDela.d.stGostovanjZam")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stGostovanjZam;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stGostovanjInt", description="programDela.d.stGostovanjInt")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stGostovanjInt;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskNekom", description="programDela.d.stObiskNekom")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stObiskNekom;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskNekomMat", description="programDela.d.stObiskNekomMat")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stObiskNekomMat;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskNekomGostSlo", description="programDela.d.stObiskNekomGostSlo")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stObiskNekomGostSlo;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskNekomGostZam", description="programDela.d.stObiskNekomGostZam")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stObiskNekomGostZam;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskNekomGostInt", description="programDela.d.stObiskNekomGostInt")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stObiskNekomGostInt;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.avgObiskPrired", description="programDela.avgObiskPrired")   
+     * @var double
+     */
+    private $avgObiskPrired;
+
+    /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.avgZasedDvoran", description="programDela.avgZasedDvoran")   
      * @var double
@@ -141,6 +336,28 @@ class ProgramDela
      * @var integer
      */
     private $stProdVstopnic;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stKoprodukcij", description="programDela.stKoprodukcij")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stKoprodukcij;
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stKoprodukcijInt", description="programDela.stKoprodukcijInt")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stKoprodukcijInt;
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stKoprodukcijNVO", description="programDela.stKoprodukcijNVO")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    private $stKoprodukcijNVO;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -195,6 +412,12 @@ class ProgramDela
      * @var double
      */
     private $sredstvaInt;
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaAvt", description="programDela.sredstvaAvt")   
+     * @var double
+     */
+    private $sredstvaAvt;
 
     //$$ rb morda še bodo kakšna polja za dodati oz. odvzeti - odvisno glede na to, ali jih lahko pridobimo iz drugih entitet ali ne
     public function __construct()

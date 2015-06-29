@@ -20,16 +20,46 @@ forms:
 #            - gostujoci
 #            - gostovanja
             - sezona
+#            - stPremier
+#            - stPonPrej
+#            - stPonPrejVelikih
+#            - stPonPrejMalih
+#            - stPonPrejMalihKopr
+#            - stPonPrejSredKopr
+#            - stPonPrejVelikihKopr
+#            - vrPS1
+#            - vrPS1Do
+#            - vrPS1Mat
+#            - vrPS1GostovSZ
+#            - stNekomerc
+#            - st
+#            - stPonPrem
+#            - stPrej
+#            - stGostuj
+#            - stOstalihNek
+#            - stGostovanjSlo
+#            - stGostovanjZam
+#            - stGostovanjInt
+#            - stObiskNekom
+#            - stObiskNekomMat
+#            - stObiskNekomGostSlo
+#            - stObiskNekomGostZam
+#            - stObiskNekomGostInt
+#            - avgObiskPrired
             - avgZasedDvoran
             - avgCenaVstopnice
             - stProdVstopnic
-            - stZaposlenih
-            - stZaposIgralcev
-            - avgStNastopovIgr
+#            - stKoprodukcij
+#            - stKoprodukcijInt
+#            - stKoprodukcijNVO
+            - stZaposlenih      # $$ ali izpustimo, ker že v 2. delu?
+            - stZaposIgralcev   # $$ ali izpustimo, ker že v 2. delu?
+            - avgStNastopovIgr  # $$ ali izpustimo, ker že v 2. delu?
             - stHonorarnih
             - stHonorarnihIgr
             - stHonorarnihIgrTujJZ
             - sredstvaInt
+#            - sredstvaAvt
         hydrator:
             lookups: 
                 - premiere.uprizoritev
