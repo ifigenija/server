@@ -79,8 +79,6 @@ class ProgramGostovanje
         $this->setPonoviDoma(0);
         $this->setPonoviZamejo(0);
         $this->setPonoviGost(0);
-        $this->setObiskDoma(0);
-        $this->setObiskGost(0);
         $this->setStHonorarnih(0);
         $this->setStHonorarnihIgr(0);
         $this->setStHonorarnihIgrTujJZ(0);

@@ -113,15 +113,15 @@ class ProgramDelaCest
      */
     public function lookuptipProgramskeEnote(ApiTester $I)
     {
-        $this->lookTipProgramskeEnote1 = $look                         = $I->lookupEntity("tipProgramskeEnote", "01", false);
+        $this->lookTipProgramskeEnote1 = $look                          = $I->lookupEntity("tipProgramskeEnote", "01", false);
         $I->assertNotEmpty($look);
-        $this->lookTipProgramskeEnote2 = $look                         = $I->lookupEntity("tipProgramskeEnote", "02", false);
+        $this->lookTipProgramskeEnote2 = $look                          = $I->lookupEntity("tipProgramskeEnote", "02", false);
         $I->assertNotEmpty($look);
-        $this->lookTipProgramskeEnote3 = $look                         = $I->lookupEntity("tipProgramskeEnote", "03", false);
+        $this->lookTipProgramskeEnote3 = $look                          = $I->lookupEntity("tipProgramskeEnote", "03", false);
         $I->assertNotEmpty($look);
-        $this->lookTipProgramskeEnote4 = $look                         = $I->lookupEntity("tipProgramskeEnote", "04", false);
+        $this->lookTipProgramskeEnote4 = $look                          = $I->lookupEntity("tipProgramskeEnote", "04", false);
         $I->assertNotEmpty($look);
-        $this->lookTipProgramskeEnote5 = $look                         = $I->lookupEntity("tipProgramskeEnote", "05", false);
+        $this->lookTipProgramskeEnote5 = $look                          = $I->lookupEntity("tipProgramskeEnote", "05", false);
         $I->assertNotEmpty($look);
     }
 
@@ -361,10 +361,10 @@ class ProgramDelaCest
             'tantieme'           => 1.23,
             'drugiViri'          => 1.23,
             'drugiJavni'         => 1.23,
-            'obiskDoma'          => 1,
-            'obiskGost'          => 1,
-            'obiskZamejo'        => 1,
-            'obiskInt'           => 1,
+            'obiskDoma'          => 21,
+            'obiskGost'          => 31,
+            'obiskZamejo'        => 7,
+            'obiskInt'           => 3,
             'ponoviDoma'         => 2,
             'ponoviZamejo'       => 3,
             'ponoviGost'         => 4,
@@ -423,7 +423,7 @@ class ProgramDelaCest
 //            'vlozekGostitelja'     => 1.23,
 //            'vlozekKoproducenta'   => 1.23,
             'drugiJavni'           => 1.23,
-            'obiskDoma'            => 1,
+            'obiskDoma'            => 14,
 //            'obiskGost'            => 1,
 //            'obiskZamejo'          => 1,
 //            'obiskInt'             => 1,
@@ -492,7 +492,7 @@ class ProgramDelaCest
             'stDrugiDogodki'          => 1,
             'opredelitevDrugiDogodki' => 'zz',
             'stProdukcij'             => 1,
-            'obiskDoma'               => 1,
+            'obiskDoma'               => 133,
             'casPriprave'             => 'zz',
             'casIzvedbe'              => 'zz',
             'prizorisca'              => 'zz',
@@ -526,7 +526,7 @@ class ProgramDelaCest
             'stDrugiDogodki'          => 1,
             'opredelitevDrugiDogodki' => 'zz',
             'stProdukcij'             => 1,
-            'obiskDoma'               => 1,
+            'obiskDoma'               => 92,
             'casPriprave'             => 'zz',
             'casIzvedbe'              => 'zz',
             'prizorisca'              => 'zz',
@@ -625,7 +625,7 @@ class ProgramDelaCest
             'vrednostPE'      => 1.23,
             'stPE'            => 1,
             'soorganizator'   => null,
-            'obiskDoma'       => 1,
+            'obiskDoma'       => 6,
             'stZaposlenih'    => 1,
             'stHonorarnih'    => 1,
             'zaproseno'       => 1.23,
@@ -649,7 +649,7 @@ class ProgramDelaCest
             'vrednostPE'      => 1.23,
             'stPE'            => 1,
             'soorganizator'   => null,
-            'obiskDoma'       => 1,
+            'obiskDoma'       => 22,
             'stZaposlenih'    => 1,
             'stHonorarnih'    => 1,
             'zaproseno'       => 1.23,
@@ -1262,19 +1262,28 @@ class ProgramDelaCest
         // pri update preračuna kazalnike
         $entR = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($entR['id']);
-        $I->assertGreaterThanOrEqual(4,$entR['stPremier'], "št. premier");
-        $I->assertGreaterThanOrEqual(3,$entR['stPonPrej'], "št. ponovitev prejšnjih sezon");
-        $I->assertGreaterThanOrEqual(0,$entR['stPonPrejVelikih']);
-        $I->assertGreaterThanOrEqual(2,$entR['stPonPrejMalih']);
-        $I->assertGreaterThanOrEqual(0,$entR['stPonPrejMalihKopr']);
-        $I->assertGreaterThanOrEqual(0,$entR['stPonPrejSredKopr']);
-        $I->assertGreaterThanOrEqual(1,$entR['stPonPrejVelikihKopr']);
-        $I->assertGreaterThanOrEqual(13.29,$entR['vrPS1']);
-        $I->assertGreaterThanOrEqual(108,$entR['stNekomerc'],"št nekomerc");
-        $I->assertGreaterThanOrEqual(48,$entR['stIzvPonPrem'],"št. izvedb pon premier");
-        $I->assertGreaterThanOrEqual(47,$entR['stIzvPrej'],"št. izvedb prejšnjih");
-        $I->assertGreaterThanOrEqual(4,$entR['stIzvGostuj'],"št. izvedb gostujočih");
-        $I->assertGreaterThanOrEqual(9,$entR['stIzvOstalihNek'],"št. izvedb ostalih nekom");
+        $I->assertGreaterThanOrEqual(4, $entR['stPremier'], "št. premier");
+        $I->assertGreaterThanOrEqual(3, $entR['stPonPrej'], "št. ponovitev prejšnjih sezon");
+        $I->assertGreaterThanOrEqual(0, $entR['stPonPrejVelikih']);
+        $I->assertGreaterThanOrEqual(2, $entR['stPonPrejMalih']);
+        $I->assertGreaterThanOrEqual(0, $entR['stPonPrejMalihKopr']);
+        $I->assertGreaterThanOrEqual(0, $entR['stPonPrejSredKopr']);
+        $I->assertGreaterThanOrEqual(1, $entR['stPonPrejVelikihKopr']);
+        $I->assertGreaterThanOrEqual(13.29, $entR['vrPS1']);
+        $I->assertGreaterThanOrEqual(108, $entR['stNekomerc'], "št nekomerc");
+        $I->assertGreaterThanOrEqual(48, $entR['stIzvPonPrem'], "št. izvedb pon premier");
+        $I->assertGreaterThanOrEqual(47, $entR['stIzvPrej'], "št. izvedb prejšnjih");
+        $I->assertGreaterThanOrEqual(4, $entR['stIzvGostuj'], "št. izvedb gostujočih");
+        $I->assertGreaterThanOrEqual(9, $entR['stIzvOstalihNek'], "št. izvedb ostalih nekom");
+        $I->assertGreaterThanOrEqual(27, $entR['stGostovanjSlo'], "");
+        $I->assertGreaterThanOrEqual(25, $entR['stGostovanjZam'], "");
+        $I->assertGreaterThanOrEqual(20, $entR['stGostovanjInt'], "");
+        $I->assertGreaterThanOrEqual(378, $entR['stObiskNekom'], "Obisk vseh nekom.");
+        $I->assertGreaterThanOrEqual(300, $entR['stObiskNekomMat'], "");
+        $I->assertGreaterThanOrEqual(38, $entR['stObiskNekomGostSlo'], "");
+        $I->assertGreaterThanOrEqual(22, $entR['stObiskNekomGostZam'], "");
+        $I->assertGreaterThanOrEqual(18, $entR['stObiskNekomGostInt'], "");
+        $I->assertEquals(3.5, $entR['avgObiskPrired'], "povprečno št. obiskovalcev");     //kvocient drugih dveh števil
     }
 
 }
