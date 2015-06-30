@@ -78,6 +78,10 @@ forms:
                 - programiRazno
                 - gostujoci
                 - gostovanja
+                - premiere.drugiViri
+                - premiere.koprodukcije
+            virtual:
+                - premiere.koprodukcije.naziv
 lists:
     default: 
         hydrator:

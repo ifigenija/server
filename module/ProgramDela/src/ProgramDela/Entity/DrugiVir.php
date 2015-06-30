@@ -49,7 +49,7 @@ class DrugiVir
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\EnotaPrograma", inversedBy="drugiViri")
      * @Max\I18n(label="drugivir.enotaPrograma", description="drugivir.d.enotaPrograma")   
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hiddenid")
      * @var \ProgramDela\Entity\EnotaPrograma
      */
     protected $enotaPrograma;

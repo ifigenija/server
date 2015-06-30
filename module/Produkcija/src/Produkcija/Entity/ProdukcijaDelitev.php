@@ -71,7 +71,7 @@ class ProdukcijaDelitev
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\EnotaPrograma", inversedBy="koprodukcije")
      * @Max\I18n(label="prodel.enotaPrograma", description="prodel.d.enotaPrograma")   
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hiddenid")
      * @var \ProgramDela\Entity\EnotaPrograma
      */
     protected $enotaPrograma;
@@ -137,6 +137,10 @@ class ProdukcijaDelitev
         $this->setZaproseno($zaproseno);
     }
 
+    public function getNaziv() {
+        return $this->getKoproducent()->getPopa()->getNaziv();
+    }
+    
     public function getId()
     {
         return $this->id;
