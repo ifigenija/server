@@ -5,6 +5,7 @@
  */
 
 namespace ProgramDela\Repository;
+
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineModule\Paginator\Adapter\Selectable;
@@ -55,5 +56,28 @@ class ProgramiPremiere
 
         return $qb;
     }
+
+//    public function create($object, $params = null)
+//    {
+//        $this->validateProgramDela($object);
+//
+//        parent::create($object, $params);
+//    }
+//
+//    public function update($object)
+//    {
+//        $this->validateProgramDela($object);
+//        parent::update($object);
+//    }
+//
+//    private function validateProgramDela(\ProgramDela\Entity\ProgramPremiera $object)
+//    {
+//        if ($object->getDokument()) {
+//            $programdela = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default')
+//                    ->getRepository('ProgramDela\Entity\ProgramDela')
+//                    ->findOneById($object->getDokument()->getId());
+//            $programdela->validate();
+//        }
+//    }
 
 }
