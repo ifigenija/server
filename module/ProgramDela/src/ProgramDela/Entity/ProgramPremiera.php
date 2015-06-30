@@ -34,8 +34,10 @@ class ProgramPremiera
                 $obstaja = $this->getDokument()
                         ->getPremiere()
                         ->exists(function($key, $progPremiere) use(&$id) {
-                    return ($progPremiere->getUprizoritev() == $this->getUprizoritev())
-                            && ($progPremiere->getId()!== $id);     //vrne true, če obstaja drug programpremiere z isto uprizoritvijo
+                    return (!empty($this->getUprizoritev()))
+                            && ($progPremiere->getUprizoritev() == $this->getUprizoritev())
+                            && ($progPremiere->getId()!== $id
+                            );     //vrne true, če obstaja drug programpremiere z isto uprizoritvijo
                 });
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000440);
             }

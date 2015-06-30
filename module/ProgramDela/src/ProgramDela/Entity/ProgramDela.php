@@ -214,35 +214,35 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stPonPrem", description="programDela.d.stPonPrem")
+     * @Max\I18n(label="programDela.stIzvPonPrem", description="programDela.d.stIzvPonPrem")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stPonPrem;
+    private $stIzvPonPrem;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stPrej", description="programDela.d.stPrej")
+     * @Max\I18n(label="programDela.stIzvPrej", description="programDela.d.stIzvPrej")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stPrej;
+    private $stIzvPrej;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stGostuj", description="programDela.d.stGostuj")
+     * @Max\I18n(label="programDela.stIzvGostuj", description="programDela.d.stIzvGostuj")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stGostuj;
+    private $stIzvGostuj;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stOstalihNek", description="programDela.d.stOstalihNek")
+     * @Max\I18n(label="programDela.stIzvOstalihNek", description="programDela.d.stIzvOstalihNek")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stOstalihNek;
+    private $stIzvOstalihNek;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -344,6 +344,7 @@ class ProgramDela
      * @var integer
      */
     private $stKoprodukcij;
+
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="programDela.stKoprodukcijInt", description="programDela.stKoprodukcijInt")
@@ -351,6 +352,7 @@ class ProgramDela
      * @var integer
      */
     private $stKoprodukcijInt;
+
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="programDela.stKoprodukcijNVO", description="programDela.stKoprodukcijNVO")
@@ -412,6 +414,7 @@ class ProgramDela
      * @var double
      */
     private $sredstvaInt;
+
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaAvt", description="programDela.sredstvaAvt")   
@@ -434,7 +437,138 @@ class ProgramDela
 
     public function validate($mode = 'update')
     {
-        
+        // preračun kazalnikov:
+//              - stPremier
+//              - stPonPrej
+//              - stPonPrejVelikih
+//              - stPonPrejMalih
+//              - stPonPrejMalihKopr
+//              - stPonPrejSredKopr
+//              - stPonPrejVelikihKopr
+//              - vrPS1
+//            - vrPS1Do     $$ ni vrednosti v enoti programa
+//            - vrPS1Mat    $$ ni vrednosti v enoti programa
+//            - vrPS1GostovSZ       $$ ni vrednosti v enoti programa
+//              - stNekomerc
+//              - stIzvPonPrem
+//              - stIzvPrej
+//              - stIzvGostuj
+//              - stIzvOstalihNek
+//            - stGostovanjSlo
+//            - stGostovanjZam
+//            - stGostovanjInt
+//            - stObiskNekom
+//            - stObiskNekomMat
+//            - stObiskNekomGostSlo
+//            - stObiskNekomGostZam
+//            - stObiskNekomGostInt
+//            - avgObiskPrired
+//            - stKoprodukcij
+//            - stKoprodukcijInt
+//            - stKoprodukcijNVO
+//            - stHonorarnih
+//            - stHonorarnihIgr
+//            - stHonorarnihIgrTujJZ
+//            - sredstvaInt
+//            - sredstvaAvt
+        $this->stPremier            = $this->getPremiere()->count();
+        $stPonPrej                  = $this->getPonovitvePrejsnjih()->count();        //$$ začasno
+        $this->stPonPrej            = $this->getPonovitvePrejsnjih()->count();
+        $this->stPonPrejVelikih     = 0;  //init
+        $this->stPonPrejMalih       = 0;  //init
+        $this->stPonPrejMalihKopr   = 0;  //init
+        $this->stPonPrejSredKopr    = 0;  //init
+        $this->stPonPrejVelikihKopr = 0;  //init
+        $this->vrPS1                = 0;  //init
+        $this->vrPS1Do              = 0;  //init
+        $this->vrPS1Mat             = 0;  //init
+        $this->vrPS1GostovSZ        = 0;  //init
+        $this->stNekomerc           = 0;  //init
+        $this->stIzvPonPrem         = 0;  //init
+        $this->stIzvPrej            = 0;  //init
+        $this->stIzvGostuj          = 0;  //init
+        $this->stIzvOstalihNek      = 0;  //init
+//    private $object->getPonoviDoma()
+//    private $object->getPonoviZamejo()
+//    private $object->getPonoviGost()
+//    private $object->getPonoviInt()
+        // premiere
+        foreach ($this->getPremiere() as $numObject => $object) {
+            $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
+        }
+        // ponovitve premier
+        foreach ($this->getPonovitvePremiere() as $numObject => $object) {
+            $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
+            $this->stNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
+            $this->stIzvPonPrem+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
+        }
+
+        // ponovitve prejšnjih sezon
+        foreach ($this->getPonovitvePrejsnjih() as $numObject => $object) {
+            $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
+            $this->stNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
+            $this->stIzvPrej+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
+            switch ($object->getTipProgramskeEnote()->getSifra()) {
+                case "01":
+                    $this->stPonPrejVelikih+=1;         // Velike predstave
+                    break;
+                case "02":
+                    $this->stPonPrejMalih +=1;
+                    break;
+                case "03":
+                    $this->stPonPrejMalihKopr +=1;
+                    break;
+                case "04":
+                    $this->stPonPrejSredKopr +=1;
+                    break;
+                case "05":
+                    $this->stPonPrejVelikihKopr +=1;
+                    break;
+                default:
+                    $this->expect(FALSE, "Ponovitev prejšnjih ima napačen tip programske enote:" . $object->getTipProgramskeEnote()->getSifra(), 1000490);
+            }
+        }
+
+        // gostujoče predstave
+        foreach ($this->getGostujoci() as $numObject => $object) {
+            $this->stNekomerc+=$object->getPonoviDoma();
+            $this->stIzvGostuj+=$object->getPonoviDoma();
+        }
+        // mednarodna gostovanja
+        foreach ($this->getGostovanja() as $numObject => $object) {
+            $this->stNekomerc+=$object->getPonoviInt();
+            // $$ glede na to, ali je mednarodno gostovanje za premiero, ki bo letos, ali iz prejšnjih sezon
+            $idUpr          = $object->getUprizoritev();
+            $obstajaPonPrem = false;  //init
+            if (!empty($idUpr)) {
+                $obstajaPonPrem = $this->getPonovitvePremiere()
+                        ->exists(function($key, $ponovitvePrem) use(&$idUpr) {
+                    return ($ponovitvePrem->getUprizoritev() == $idUpr);
+                    //vrne true, če obstaja ponovitev premiere z isto uprizoritvijo
+                });
+            }
+            if ($obstajaPonPrem) {
+                $this->stIzvPonPrem+=$object->getPonoviInt();
+            } else {
+                // če ni uprizoritev iz ponovitve (letošnje) premiere je najverjetneje  iz ponovitve premiere prejšnjih sezon
+                $this->stIzvPrej+=$object->getPonoviInt();
+            }
+        }
+        // festivali
+        foreach ($this->getProgramiFestival() as $numObject => $object) {
+            $this->stNekomerc+=1;      // 1 festival ena prireditev
+            $this->stIzvOstalihNek+=1;      // 1 festival ena prireditev
+        }
+        // razno
+        foreach ($this->getProgramiRazno() as $numObject => $object) {
+            $this->stNekomerc+=$object->getStPE();     //$$ prištevamo število programskih enot
+            $this->stIzvOstalihNek+=$object->getStPE();     //$$ prištevamo število programskih enot
+        }
+        // izjemni dogodki
+        foreach ($this->getIzjemni() as $numObject => $object) {
+            $this->stNekomerc+=$object->getPonoviDoma();
+            $this->stIzvOstalihNek+=$object->getPonoviDoma();
+        }
     }
 
     public function getId()
@@ -512,6 +646,131 @@ class ProgramDela
         return $this->sezona;
     }
 
+    public function getStPremier()
+    {
+        return $this->stPremier;
+    }
+
+    public function getStPonPrej()
+    {
+        return $this->stPonPrej;
+    }
+
+    public function getStPonPrejVelikih()
+    {
+        return $this->stPonPrejVelikih;
+    }
+
+    public function getStPonPrejMalih()
+    {
+        return $this->stPonPrejMalih;
+    }
+
+    public function getStPonPrejMalihKopr()
+    {
+        return $this->stPonPrejMalihKopr;
+    }
+
+    public function getStPonPrejSredKopr()
+    {
+        return $this->stPonPrejSredKopr;
+    }
+
+    public function getStPonPrejVelikihKopr()
+    {
+        return $this->stPonPrejVelikihKopr;
+    }
+
+    public function getVrPS1()
+    {
+        return $this->vrPS1;
+    }
+
+    public function getVrPS1Do()
+    {
+        return $this->vrPS1Do;
+    }
+
+    public function getVrPS1Mat()
+    {
+        return $this->vrPS1Mat;
+    }
+
+    public function getVrPS1GostovSZ()
+    {
+        return $this->vrPS1GostovSZ;
+    }
+
+    public function getStNekomerc()
+    {
+        return $this->stNekomerc;
+    }
+
+    public function getStIzvPonPrem()
+    {
+        return $this->stIzvPonPrem;
+    }
+
+    public function getStIzvPrej()
+    {
+        return $this->stIzvPrej;
+    }
+
+    public function getStIzvGostuj()
+    {
+        return $this->stIzvGostuj;
+    }
+
+    public function getStIzvOstalihNek()
+    {
+        return $this->stIzvOstalihNek;
+    }
+
+    public function getStGostovanjSlo()
+    {
+        return $this->stGostovanjSlo;
+    }
+
+    public function getStGostovanjZam()
+    {
+        return $this->stGostovanjZam;
+    }
+
+    public function getStGostovanjInt()
+    {
+        return $this->stGostovanjInt;
+    }
+
+    public function getStObiskNekom()
+    {
+        return $this->stObiskNekom;
+    }
+
+    public function getStObiskNekomMat()
+    {
+        return $this->stObiskNekomMat;
+    }
+
+    public function getStObiskNekomGostSlo()
+    {
+        return $this->stObiskNekomGostSlo;
+    }
+
+    public function getStObiskNekomGostZam()
+    {
+        return $this->stObiskNekomGostZam;
+    }
+
+    public function getStObiskNekomGostInt()
+    {
+        return $this->stObiskNekomGostInt;
+    }
+
+    public function getAvgObiskPrired()
+    {
+        return $this->avgObiskPrired;
+    }
+
     public function getAvgZasedDvoran()
     {
         return $this->avgZasedDvoran;
@@ -525,6 +784,21 @@ class ProgramDela
     public function getStProdVstopnic()
     {
         return $this->stProdVstopnic;
+    }
+
+    public function getStKoprodukcij()
+    {
+        return $this->stKoprodukcij;
+    }
+
+    public function getStKoprodukcijInt()
+    {
+        return $this->stKoprodukcijInt;
+    }
+
+    public function getStKoprodukcijNVO()
+    {
+        return $this->stKoprodukcijNVO;
     }
 
     public function getStZaposlenih()
@@ -560,6 +834,11 @@ class ProgramDela
     public function getSredstvaInt()
     {
         return $this->sredstvaInt;
+    }
+
+    public function getSredstvaAvt()
+    {
+        return $this->sredstvaAvt;
     }
 
     public function setId($id)
@@ -652,6 +931,156 @@ class ProgramDela
         return $this;
     }
 
+    public function setStPremier($stPremier)
+    {
+        $this->stPremier = $stPremier;
+        return $this;
+    }
+
+    public function setStPonPrej($stPonPrej)
+    {
+        $this->stPonPrej = $stPonPrej;
+        return $this;
+    }
+
+    public function setStPonPrejVelikih($stPonPrejVelikih)
+    {
+        $this->stPonPrejVelikih = $stPonPrejVelikih;
+        return $this;
+    }
+
+    public function setStPonPrejMalih($stPonPrejMalih)
+    {
+        $this->stPonPrejMalih = $stPonPrejMalih;
+        return $this;
+    }
+
+    public function setStPonPrejMalihKopr($stPonPrejMalihKopr)
+    {
+        $this->stPonPrejMalihKopr = $stPonPrejMalihKopr;
+        return $this;
+    }
+
+    public function setStPonPrejSredKopr($stPonPrejSredKopr)
+    {
+        $this->stPonPrejSredKopr = $stPonPrejSredKopr;
+        return $this;
+    }
+
+    public function setStPonPrejVelikihKopr($stPonPrejVelikihKopr)
+    {
+        $this->stPonPrejVelikihKopr = $stPonPrejVelikihKopr;
+        return $this;
+    }
+
+    public function setVrPS1($vrPS1)
+    {
+        $this->vrPS1 = $vrPS1;
+        return $this;
+    }
+
+    public function setVrPS1Do($vrPS1Do)
+    {
+        $this->vrPS1Do = $vrPS1Do;
+        return $this;
+    }
+
+    public function setVrPS1Mat($vrPS1Mat)
+    {
+        $this->vrPS1Mat = $vrPS1Mat;
+        return $this;
+    }
+
+    public function setVrPS1GostovSZ($vrPS1GostovSZ)
+    {
+        $this->vrPS1GostovSZ = $vrPS1GostovSZ;
+        return $this;
+    }
+
+    public function setStNekomerc($stNekomerc)
+    {
+        $this->stNekomerc = $stNekomerc;
+        return $this;
+    }
+
+    public function setStIzvPonPrem($stIzvPonPrem)
+    {
+        $this->stIzvPonPrem = $stIzvPonPrem;
+        return $this;
+    }
+
+    public function setStIzvPrej($stIzvPrej)
+    {
+        $this->stIzvPrej = $stIzvPrej;
+        return $this;
+    }
+
+    public function setStIzvGostuj($stIzvGostuj)
+    {
+        $this->stIzvGostuj = $stIzvGostuj;
+        return $this;
+    }
+
+    public function setStIzvOstalihNek($stIzvOstalihNek)
+    {
+        $this->stIzvOstalihNek = $stIzvOstalihNek;
+        return $this;
+    }
+
+    public function setStGostovanjSlo($stGostovanjSlo)
+    {
+        $this->stGostovanjSlo = $stGostovanjSlo;
+        return $this;
+    }
+
+    public function setStGostovanjZam($stGostovanjZam)
+    {
+        $this->stGostovanjZam = $stGostovanjZam;
+        return $this;
+    }
+
+    public function setStGostovanjInt($stGostovanjInt)
+    {
+        $this->stGostovanjInt = $stGostovanjInt;
+        return $this;
+    }
+
+    public function setStObiskNekom($stObiskNekom)
+    {
+        $this->stObiskNekom = $stObiskNekom;
+        return $this;
+    }
+
+    public function setStObiskNekomMat($stObiskNekomMat)
+    {
+        $this->stObiskNekomMat = $stObiskNekomMat;
+        return $this;
+    }
+
+    public function setStObiskNekomGostSlo($stObiskNekomGostSlo)
+    {
+        $this->stObiskNekomGostSlo = $stObiskNekomGostSlo;
+        return $this;
+    }
+
+    public function setStObiskNekomGostZam($stObiskNekomGostZam)
+    {
+        $this->stObiskNekomGostZam = $stObiskNekomGostZam;
+        return $this;
+    }
+
+    public function setStObiskNekomGostInt($stObiskNekomGostInt)
+    {
+        $this->stObiskNekomGostInt = $stObiskNekomGostInt;
+        return $this;
+    }
+
+    public function setAvgObiskPrired($avgObiskPrired)
+    {
+        $this->avgObiskPrired = $avgObiskPrired;
+        return $this;
+    }
+
     public function setAvgZasedDvoran($avgZasedDvoran)
     {
         $this->avgZasedDvoran = $avgZasedDvoran;
@@ -667,6 +1096,24 @@ class ProgramDela
     public function setStProdVstopnic($stProdVstopnic)
     {
         $this->stProdVstopnic = $stProdVstopnic;
+        return $this;
+    }
+
+    public function setStKoprodukcij($stKoprodukcij)
+    {
+        $this->stKoprodukcij = $stKoprodukcij;
+        return $this;
+    }
+
+    public function setStKoprodukcijInt($stKoprodukcijInt)
+    {
+        $this->stKoprodukcijInt = $stKoprodukcijInt;
+        return $this;
+    }
+
+    public function setStKoprodukcijNVO($stKoprodukcijNVO)
+    {
+        $this->stKoprodukcijNVO = $stKoprodukcijNVO;
         return $this;
     }
 
@@ -709,6 +1156,12 @@ class ProgramDela
     public function setSredstvaInt($sredstvaInt)
     {
         $this->sredstvaInt = $sredstvaInt;
+        return $this;
+    }
+
+    public function setSredstvaAvt($sredstvaAvt)
+    {
+        $this->sredstvaAvt = $sredstvaAvt;
         return $this;
     }
 

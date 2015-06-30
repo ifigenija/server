@@ -32,11 +32,10 @@ forms:
 #            - vrPS1Mat
 #            - vrPS1GostovSZ
 #            - stNekomerc
-#            - st
-#            - stPonPrem
-#            - stPrej
-#            - stGostuj
-#            - stOstalihNek
+#            - stIzvPonPrem
+#            - stIzvPrej
+#            - stIzvGostuj
+#            - stIzvOstalihNek
 #            - stGostovanjSlo
 #            - stGostovanjZam
 #            - stGostovanjInt
