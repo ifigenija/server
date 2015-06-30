@@ -31,16 +31,16 @@ class ProgramPonovitevPrejsnjih
                 $id      = $this->getId();
                 $obstaja = $this->getDokument()
                         ->getPonovitvePrejsnjih()
-                        ->exists(function($key, $ponovitvePrejsnjih) use(&$id)  {
-                    return ($ponovitvePrejsnjih->getUprizoritev() == $this->getUprizoritev())
-                                      && ($ponovitvePrejsnjih->getId()!== $id);     //vrne true, če obstaja drug program pon. pr. z isto uprizoritvijo
+                        ->exists(function($key, $ponovitvePrejsnjih) use(&$id) {
+                    return ($ponovitvePrejsnjih->getUprizoritev() == $this->getUprizoritev()) && ($ponovitvePrejsnjih->getId() !== $id);     //vrne true, če obstaja drug program pon. pr. z isto uprizoritvijo
                 });
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000460);
             }
         }
         $this->setNaziv("");        // dobimo iz uprizoritve
         $this->setPonoviInt(0);
-        
+        $this->setObiskInt(0);
+
         parent::validate();
     }
 

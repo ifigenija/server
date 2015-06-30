@@ -218,6 +218,8 @@ class EnotaPrograma
     private $ponoviZamejo;
 
     /**
+     * število gostovanj po Sloveniji
+     * 
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
      * @Max\I18n(label="ep.ponoviGost", description="ep.ponoviGost")   
      * @Max\Ui(type="integer")
@@ -227,7 +229,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="ep.ponoviInt", description="ep.ponoviInt")   
+     * @Max\I18n(label="ep.ponoviInt", description="ep.d.ponoviInt")   
      * @Max\Ui(type="integer")
      * @var integer     
      */

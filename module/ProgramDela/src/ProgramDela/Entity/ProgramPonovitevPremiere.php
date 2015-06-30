@@ -45,6 +45,7 @@ class ProgramPonovitevPremiere
         $this->setStHonorarnihIgr(0);
         $this->setStHonorarnihIgrTujJZ(0);
         $this->setPonoviInt(0);
+        $this->setObiskInt(0);
         $this->setNaziv("");        // dobimo iz uprizoritve
 
         parent::validate();
