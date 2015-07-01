@@ -38,33 +38,35 @@ class Pogodbe
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
-                $this->expect(!(empty($options['popa']) && empty($options['oseba']) && empty($options['uprizoritev']) && empty($options['alternacije']) )
-                        , "Oseba ali Partner ali uprizoritev ali alternacije so obvezni", 770031);
-
-                $qb = $this->createQueryBuilder('p');
-                $e  = $qb->expr();
-                $qb->join('p.alternacije', 'alternacija');
-                $qb->join('alternacija.funkcija', 'funkcija');
-                if (!empty($options['uprizoritev'])) {
-                    $qb->join('funkcija.uprizoritev', 'uprizoritev');
-                    $qb->andWhere($e->eq('uprizoritev.id', ':upr'));
-                    $qb->setParameter('upr', $options['uprizoritev'], 'string');
-                }
-
-                if (!empty($options['popa'])) {
-                    $qb->andWhere($e->eq('p.popa', ':popa'));
-                    $qb->setParameter('popa', $options['popa'], 'string');
-                }
-
-                if (!empty($options['alternacije'])) {
-                    $qb->andWhere($e->eq('p.alternacije', ':alternacije'));
-                    $qb->setParameter('alternacije', $options['alternacije'], 'string');
-                }
-                if (!empty($options['oseba'])) {
-                    $qb->andWhere($e->eq('p.oseba', ':oseba'));
-                    $qb->setParameter('oseba', $options['oseba'], 'string');
-                }
+                $this->expect(!(empty($options['popa']) && empty($options['oseba']) && empty($options['uprizoritev']) && empty($options['alternacija']) )
+                        , "Oseba ali Partner ali uprizoritev ali alternacija so obvezni", 770031);
+                $qb = $this->getDefaultQb($options);
                 return new DoctrinePaginator(new Paginator($qb));
+
+//                $qb = $this->createQueryBuilder('p');
+//                $e  = $qb->expr();
+//                $qb->join('p.alternacije', 'alternacija');
+//                $qb->join('alternacija.funkcija', 'funkcija');
+//                if (!empty($options['uprizoritev'])) {
+//                    $qb->join('funkcija.uprizoritev', 'uprizoritev');
+//                    $qb->andWhere($e->eq('uprizoritev.id', ':upr'));
+//                    $qb->setParameter('upr', $options['uprizoritev'], 'string');
+//                }
+//
+//                if (!empty($options['popa'])) {
+//                    $qb->andWhere($e->eq('p.popa', ':popa'));
+//                    $qb->setParameter('popa', $options['popa'], 'string');
+//                }
+//
+//                if (!empty($options['alternacije'])) {
+//                    $qb->andWhere($e->eq('p.alternacije', ':alternacije'));
+//                    $qb->setParameter('alternacije', $options['alternacije'], 'string');
+//                }
+//                if (!empty($options['oseba'])) {
+//                    $qb->andWhere($e->eq('p.oseba', ':oseba'));
+//                    $qb->setParameter('oseba', $options['oseba'], 'string');
+//                }
+//                return new DoctrinePaginator(new Paginator($qb));
         }
     }
 
@@ -84,6 +86,56 @@ class Pogodbe
         return $qb;
     }
 
+    public function getDefaultQb($options)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $e  = $qb->expr();
+        if (!empty($options['q'])) {
+
+            $naz = $e->like('p.sifra', ':sifra');
+
+            $qb->andWhere($e->orX($naz));
+
+            $qb->setParameter('sifra', "{$options['q']}%", "string");
+        }
+
+        if (!empty($options['uprizoritev'])) {
+            $qb->join('p.alternacije', 'alternacija');
+            $qb->join('alternacija.funkcija', 'funkcija');
+            $qb->join('funkcija.uprizoritev', 'uprizoritev');
+
+            if (!empty($options['uprizoritev'])) {
+                $naz = $e->eq('uprizoritev.id', ':upriz');
+                $qb->andWhere($naz);
+                $qb->setParameter('upriz', "{$options['uprizoritev']}", "string");
+            }
+            if (!empty($options['alternacija'])) {
+                $naz = $e->eq('alternacija.id', ':alternacija');
+                $qb->andWhere($naz);
+                $qb->setParameter('alternacija', "{$options['alternacija']}", "string");
+            }
+        }
+        if (!empty($options['alternacija'])) {
+            $qb->join('p.alternacije', 'alternacija');
+            $naz = $e->eq('alternacija.id', ':alternacija');
+            $qb->andWhere($naz);
+            $qb->setParameter('alternacija', "{$options['alternacija']}", "string");
+        }
+
+        if (!empty($options['popa'])) {
+            $naz = $e->eq('p.popa', ':popa');
+            $qb->andWhere($naz);
+            $qb->setParameter('popa', "{$options['popa']}", "string");
+        }
+        if (!empty($options['oseba'])) {
+            $naz = $e->eq('p.oseba', ':oseba');
+            $qb->andWhere($naz);
+            $qb->setParameter('oseba', "{$options['oseba']}", "string");
+        }
+
+        return $qb;
+    }
+
     /**
      * Preverim, če ima šifro
      * @param Pogodba $object
@@ -92,7 +144,7 @@ class Pogodbe
     public function create($object, $params = null)
     {
         if (empty($object->getSifra())) {
-            $num   = $this->getServiceLocator()->get('stevilcenje.generator');
+            $num = $this->getServiceLocator()->get('stevilcenje.generator');
 
             $object->setSifra($num->generate('pogodba', new \DateTime()));
         }

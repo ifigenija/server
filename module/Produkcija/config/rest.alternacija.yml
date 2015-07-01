@@ -37,6 +37,12 @@ lists:
                       label: Funkcija
                       targetEntity: Produkcija\Entity\Funkcija
                       required: false
+                - name: uprizoritev
+                  type: toone
+                  options:
+                      label: Uprizoritev
+                      targetEntity: Produkcija\Entity\Uprizoritev
+                      required: false
         hydrator:
             lookups: [oseba]
     vse: 

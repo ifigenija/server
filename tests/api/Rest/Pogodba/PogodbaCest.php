@@ -27,6 +27,8 @@ use ApiTester;
  *      - vse
  *      - oseba, 
  *      - popa
+ *      - uprizoritev
+ *      - alternacija
  * 
  * @author rado
  */
@@ -48,17 +50,22 @@ class PogodbaCest
     private $objDrzava;
     private $objOseba;
     private $lookDrzava;
-    private $lookPopa;
+    private $lookPopa1;
+    private $lookPopa2;
     private $lookOseba1;
     private $lookOseba2;
     private $lookOseba3;
+    private $lookOseba4;
     private $objTrr;
     private $objAlternacija1;
     private $objAlternacija2;
     private $lookAlternacija1;
     private $lookAlternacija2;
     private $lookAlternacija3;
+    private $lookAlternacija4;
     private $lookupAlternacijaUrl = '/lookup/alternacija';
+    private $lookUprizoritev1;
+    private $lookUprizoritev2;
 
     public function _before(ApiTester $I)
     {
@@ -109,6 +116,9 @@ class PogodbaCest
 
         $this->lookOseba3 = $ent              = $I->lookupEntity("oseba", "0008", false);
         $I->assertNotEmpty($ent);
+        
+        $this->lookOseba4 = $ent              = $I->lookupEntity("oseba", "0012", false);
+        $I->assertNotEmpty($ent);
     }
 
     /**
@@ -117,70 +127,25 @@ class PogodbaCest
      */
     public function lookupPopa(ApiTester $I)
     {
-        $this->lookPopa = $ent            = $I->lookupEntity("popa", "0988", false);
+        $this->lookPopa1 = $ent             = $I->lookupEntity("popa", "0988", false);
+        $I->assertNotEmpty($ent);
+
+        $this->lookPopa2 = $ent             = $I->lookupEntity("popa", "0989", false);
         $I->assertNotEmpty($ent);
     }
 
     /**
-     * kreiram popa
-     *  
-     * @param ApiTester $I
-     */
-//    public function createPopa(ApiTester $I)
-//    {
-//        $data          = [
-//            'sifra'  => 'X12',
-//            'naziv'  => 'zz',
-////            'naziv1'    => 'zz',
-////            'panoga'    => 'zz',
-////            'email'     => 'z@zzz.zz',
-////            'url'       => 'zz',
-////            'opomba'    => 'zz',
-//            'drzava' => $this->lookDrzava['id'],
-////            'idddv'     => 'zz',
-////            'maticna'   => 'ZZ123',
-////            'zavezanec' => 'Da',
-////            'jeeu'      => 'Da',
-////            'datZav'    => '2010-02-01T00:00:00+0100',
-////            'datnZav'   => '2017-02-01T00:00:00+0100',
-////            'zamejstvo' => FALSE,
-//        ];
-//        $this->objPopa = $popa          = $I->successfullyCreate($this->popaUrl, $data);
-//
-//        $I->assertNotEmpty($popa['id']);
-//    }
-
-    /**
-     *  kreiramo  osebo
      * 
      * @param ApiTester $I
      */
-//    public function createOsebo(ApiTester $I)
-//    {
-//        $data = [
-//            'naziv'         => 'zz',
-//            'ime'           => 'zz',
-//            'priimek'       => 'zz',
-//            'funkcija'      => 'zz',
-//            'srednjeIme'    => 'zz',
-//            'psevdonim'     => 'zz',
-//            'email'         => 'x@xxx.xx',
-//            'datumRojstva'  => '1973-28-03T04:30:00',
-//            'emso'          => 'ZZ',
-//            'davcna'        => 'ZZ123',
-//            'spol'          => 'M',
-//            'opombe'        => 'zz',
-//            'drzavljanstvo' => 'zz',
-//            'drzavaRojstva' => 'zz',
-//            'krajRojstva'   => 'zz',
-//            'user'          => null,
-//        ];
-//
-//        $this->objOseba = $oseba          = $I->successfullyCreate($this->osebaUrl, $data);
-//
-//        $I->assertEquals('zz', $oseba['ime']);
-//        $I->assertNotEmpty($oseba['id']);
-//    }
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev1 = $look                   = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
+
+        $this->lookUprizoritev2 = $look                   = $I->lookupEntity("uprizoritev", "0002", false);
+        $I->assertNotEmpty($look);
+    }
 
     /**
      * kreiramo Trr od popa
@@ -196,7 +161,7 @@ class PogodbaCest
             'swift'    => 'ZZ123',
             'bic'      => 'ZZ123',
             'banka'    => 'ZZ123',
-            'popa'     => $this->lookPopa['id'],
+            'popa'     => $this->lookPopa1['id'],
             'oseba'    => NULL,
         ];
         $this->objTrr = $trr          = $I->successfullyCreate($this->trrUrl, $data);
@@ -216,13 +181,13 @@ class PogodbaCest
     {
         $data      = [
             'sifra'              => 'ZZ123',
-            'vrednostVaj'       => 33.33,
+            'vrednostVaj'        => 33.33,
             'vrednostPredstave'  => 44.44,
             'vrednostUre'        => 22.22,
             'aktivna'            => false,
             'opis'               => 'zz',
             'oseba'              => $this->lookOseba1['id'],
-            'popa'               => $this->lookPopa['id'],
+            'popa'               => $this->lookPopa1['id'],
             'trr'                => $this->objTrr['id'],
             'vrednostDo'         => 55.5,
             'zacetek'            => '2012-02-01T00:00:00+0100',
@@ -238,7 +203,7 @@ class PogodbaCest
         // kreiramo še en zapis
         $data       = [
             'sifra'              => 'WW4',
-            'vrednostVaj'       => 33.33,
+            'vrednostVaj'        => 33.33,
             'vrednostPredstave'  => 44.22,
             'vrednostUre'        => 11.11,
             'aktivna'            => false,
@@ -260,7 +225,7 @@ class PogodbaCest
         // kreiramo še en zapis
         $data       = [
             'sifra'              => 'A1',
-            'vrednostVaj'       => 3.33,
+            'vrednostVaj'        => 3.33,
             'vrednostPredstave'  => 4.44,
             'vrednostUre'        => 2.22,
             'aktivna'            => false,
@@ -283,7 +248,7 @@ class PogodbaCest
         // kreiramo še en zapis
         $data       = [
             'sifra'              => 'BB',
-            'vrednostVaj'       => 3.11,
+            'vrednostVaj'        => 3.11,
             'vrednostPredstave'  => 4.11,
             'vrednostUre'        => 2.11,
             'aktivna'            => false,
@@ -305,7 +270,7 @@ class PogodbaCest
         // kreiramo še en zapis brez šifre, da vidimo, če jo kreira
         $data       = [
 //            'sifra'              => 'BB',
-            'vrednostVaj'       => 3.11,
+            'vrednostVaj'        => 3.11,
             'vrednostPredstave'  => 4.11,
             'vrednostUre'        => 2.11,
             'aktivna'            => false,
@@ -371,6 +336,15 @@ class PogodbaCest
         $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
         $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
         $this->lookAlternacija3 = $resp['data'][0];
+
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0003', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija4 = $resp['data'][0];
     }
 
     /**
@@ -409,14 +383,12 @@ class PogodbaCest
     public function getListPoOsebi(ApiTester $I)
     {
         $listUrl = $this->restUrl . "?oseba=" . $this->lookOseba1['id'];
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);
 
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        codecept_debug($resp);
-
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords'], "neznano zakaj vrne 1 in ne 2 $$ - glej pogodbe");
-        $I->assertNotEmpty($list);
-//        $I->assertEquals("WW4", $list[0]['sifra']);
+        $listUrl = $this->restUrl . "?oseba=" . $this->lookOseba4['id'];
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $I->assertEquals(0, $resp['state']['totalRecords']);
     }
 
     /**
@@ -427,14 +399,54 @@ class PogodbaCest
      */
     public function getListPoPopa(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?popa=" . $this->lookPopa['id'];
+        $listUrl = $this->restUrl . "?popa=" . $this->lookPopa1['id'];
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
 
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
+        $listUrl = $this->restUrl . "?popa=" . $this->lookPopa2['id'];
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $I->assertEquals(0, $resp['state']['totalRecords']);
+    }
 
-        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "$$ vrne 0 (glej pogodbe)");
+    /**
+     * preberi vse zapise od uprizoritve 
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoUprizoritvi(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev2['id'];
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
 //        $I->assertEquals("ZZ123", $list[0]['sifra']);
+
+        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev1['id'];
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+
+        $I->assertEquals(0, $resp['state']['totalRecords']);
+//        $I->assertNotEmpty($list);
+//        $I->assertEquals("ZZ123", $list[0]['sifra']);
+    }
+    /**
+     * preberi vse zapise od alternacije
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoAlternaciji(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "?alternacija=" . $this->lookAlternacija1['id'];
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+
+        $listUrl = $this->restUrl . "?alternacija=" . $this->lookAlternacija4['id'];
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $I->assertEquals(0, $resp['state']['totalRecords']);
     }
 
     /**
@@ -488,7 +500,7 @@ class PogodbaCest
         $I->assertEquals($ent['aktivna'], false);
         $I->assertEquals($ent['opis'], 'xx');
         $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
-        $I->assertEquals($ent['popa']['id'], $this->lookPopa['id']);
+        $I->assertEquals($ent['popa']['id'], $this->lookPopa1['id']);
         $I->assertEquals($ent['trr'], $this->objTrr['id']);
         $I->assertEquals($ent['vrednostDo'], 55.5);
         $I->assertEquals($ent['zacetek'], '2012-02-01T00:00:00+0100');
@@ -530,7 +542,7 @@ class PogodbaCest
 //        $this->expect($this->oseba, "Pogodba nima subjekta. Oseba je obvezna", 1000343);
         $data = [
             'sifra'             => 'yy123',
-            'vrednostVaj'      => 33.33,
+            'vrednostVaj'       => 33.33,
             'vrednostPredstave' => 44.44,
             'vrednostUre'       => 22.22,
             'aktivna'           => false,

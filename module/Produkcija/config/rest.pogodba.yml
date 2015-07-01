@@ -45,18 +45,18 @@ lists:
 #                      label: Trr
 #                      targetEntity: App\Entity\Trr
 #                      required: false
-                - name: alternacije  # $$ rb ali je to tudi v default view-ju ali v namenskem?
+                - name: alternacija
                   type: toone
                   options:
-                      label: Alternacije
+                      label: Alternacija
                       targetEntity: Produkcija\Entity\Alternacija
                       required: false
-                - name: uprizoritev  # $$ rb ali je to tudi v default view-ju ali v namenskem?
+                - name: uprizoritev
                   type: toone
                   options:
                       label: Uprizoritev
                       targetEntity: Produkcija\Entity\Uprizoritev
-                      required: false                                            
+                      required: false
 
     vse: 
         filter:

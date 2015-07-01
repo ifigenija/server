@@ -36,21 +36,29 @@ class Alternacije
     {
         switch ($name) {
             case "vse":
-                $qb   = $this->getVseQb($options);
+                $qb = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
-                $this->expect(!empty($options['funkcija']), "Funkcija je obvezna", 770081);
-                $crit = new Criteria();
-                $e    = $crit->expr();
-
-                if (!empty($options['funkcija'])) {
-                    $funkcija = $this->getEntityManager()->find('Produkcija\Entity\Funkcija', $options['funkcija']);
-                    $exp      = $e->eq('funkcija', $funkcija);
-                    $crit->andWhere($exp);
-                }
-
-                return new Selectable($this, $crit);
+                $this->expect(!(empty($options['funkcija']) && empty($options['uprizoritev']) ), "Ali funkcija  ali uprizoritev je obvezna", 770081);
+                $this->expect(!(!empty($options['funkcija']) && !empty($options['uprizoritev']) ), "Le funkcija ali uprizoritev ne oba hkrati", 770082);
+                $qb = $this->getDefaultQb($options);
+                return new DoctrinePaginator(new Paginator($qb));
+//                $crit = new Criteria();
+//                $e    = $crit->expr();
+//
+//                if (!empty($options['funkcija'])) {
+//                    $funkcija = $this->getEntityManager()->find('Produkcija\Entity\Funkcija', $options['funkcija']);
+//                    $exp      = $e->eq('funkcija', $funkcija);
+//                    $crit->andWhere($exp);
+//                }
+//                if (!empty($options['uprizoritev'])) {
+//                    $uprizoritev = $this->getEntityManager()->find('Produkcija\Entity\Uprizoritev', $options['uprizoritev']);
+//                    $exp      = $e->eq('uprizoritev', $uprizoritev);  //$$ še za dopolniti
+//                    $crit->andWhere($exp);
+//                }
+//
+//                return new Selectable($this, $crit);
         }
     }
 
@@ -76,7 +84,35 @@ class Alternacije
         if (!empty($options['funkcija'])) {
             $naz = $e->eq('funkcija.id', ':fun');
             $qb->andWhere($naz);
-            $qb->setParameter('fun', "{$options['fun']}", "string");
+            $qb->setParameter('fun', "{$options['funkcija']}", "string");
+        }
+
+        return $qb;
+    }
+
+    public function getDefaultQb($options)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $e  = $qb->expr();
+        if (!empty($options['q'])) {
+
+            $naz = $e->like('p.sifra', ':sifra');
+
+            $qb->andWhere($e->orX($naz));
+
+            $qb->setParameter('sifra', "{$options['q']}%", "string");
+        }
+        $qb->join('p.funkcija', 'funkcija');
+        $qb->join('funkcija.uprizoritev', 'uprizoritev');
+        if (!empty($options['uprizoritev'])) {
+            $naz = $e->eq('uprizoritev.id', ':upriz');
+            $qb->andWhere($naz);
+            $qb->setParameter('upriz', "{$options['uprizoritev']}", "string");
+        }
+        if (!empty($options['funkcija'])) {
+            $naz = $e->eq('funkcija.id', ':fun');
+            $qb->andWhere($naz);
+            $qb->setParameter('fun', "{$options['funkcija']}", "string");
         }
 
         return $qb;
@@ -134,4 +170,5 @@ class Alternacije
             $alternacija->setZaposlen(false);
         }
     }
+
 }
