@@ -45,7 +45,12 @@ forms:
             - zvrstSurs
             - producent
         hydrator: 
-            - lookups: [besedilo]
+           lookups: [ besedilo ]
+           byValue:
+               - funkcije
+               - funkcije.alternacije
+               - stroski
+               - stroski.popa
 lists:
     default: 
         filter:

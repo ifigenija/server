@@ -73,7 +73,7 @@ class StrosekUprizoritve
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="stroski")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id")
      * @Max\I18n(label="entiteta.uprizoritev",  description="prodel.d.uprizoritev")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hiddenid")
      * @var \Produkcija\Entity\Uprizoritev
      */
     private $uprizoritev;
