@@ -500,6 +500,7 @@ class ProgramDela
         $this->stHonorarnihIgr      = 0;  //init
         $this->stHonorarnihIgrTujJZ = 0;  //init
         $this->sredstvaAvt          = 0;  //init
+        $this->sredstvaInt          = 0;  //init
         // premiere
         foreach ($this->getPremiere() as $numObject => $object) {
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
@@ -507,7 +508,13 @@ class ProgramDela
             $this->stHonorarnihIgr +=$object->getStHonorarnihIgr();
             $this->stHonorarnihIgrTujJZ +=$object->getStHonorarnihIgrTujJZ();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
+            foreach ($object->getDrugiViri() as $numobjDV => $objDV) {
+                if ($objDV->getMednarodni()) {
+                    $this->sredstvaInt +=$objDV->getZnesek();
+                }
+            }
         }
+
 
         // ponovitve premier
         foreach ($this->getPonovitvePremiere() as $numObject => $object) {
@@ -521,6 +528,11 @@ class ProgramDela
             $this->stObiskNekomGostSlo +=$object->getObiskGost();
             $this->stObiskNekomGostZam +=$object->getObiskZamejo();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
+            foreach ($object->getDrugiViri() as $numobjDV => $objDV) {
+                if ($objDV->getMednarodni()) {
+                    $this->sredstvaInt +=$objDV->getZnesek();
+                }
+            }
         }
 
         // ponovitve prejšnjih sezon
@@ -558,6 +570,11 @@ class ProgramDela
                 default:
                     $this->expect(FALSE, "Ponovitev prejšnjih ima napačen tip programske enote:" . $object->getTipProgramskeEnote()->getSifra(), 1000490);
             }
+            foreach ($object->getDrugiViri() as $numobjDV => $objDV) {
+                if ($objDV->getMednarodni()) {
+                    $this->sredstvaInt +=$objDV->getZnesek();
+                }
+            }
         }
 
         // gostujoče predstave
@@ -566,6 +583,11 @@ class ProgramDela
             $this->stIzvGostuj+=$object->getPonoviDoma();
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
+            foreach ($object->getDrugiViri() as $numobjDV => $objDV) {
+                if ($objDV->getMednarodni()) {
+                    $this->sredstvaInt +=$objDV->getZnesek();
+                }
+            }
         }
 
         // mednarodna gostovanja
@@ -592,6 +614,11 @@ class ProgramDela
                 // če ni uprizoritev iz ponovitve (letošnje) premiere je najverjetneje  iz ponovitve premiere prejšnjih sezon
                 $this->stIzvPrej+=$object->getPonoviInt();
             }
+            foreach ($object->getDrugiViri() as $numobjDV => $objDV) {
+                if ($objDV->getMednarodni()) {
+                    $this->sredstvaInt +=$objDV->getZnesek();
+                }
+            }
         }
 
         // festivali
@@ -601,6 +628,11 @@ class ProgramDela
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stHonorarnih +=$object->getStHonorarnih();
+            foreach ($object->getDrugiViri() as $numobjDV => $objDV) {
+                if ($objDV->getMednarodni()) {
+                    $this->sredstvaInt +=$objDV->getZnesek();
+                }
+            }
         }
 
         // razno
@@ -610,6 +642,11 @@ class ProgramDela
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stHonorarnih +=$object->getStHonorarnih();
+            foreach ($object->getDrugiViri() as $numobjDV => $objDV) {
+                if ($objDV->getMednarodni()) {
+                    $this->sredstvaInt +=$objDV->getZnesek();
+                }
+            }
         }
 
         // izjemni dogodki
@@ -618,6 +655,11 @@ class ProgramDela
             $this->stIzvOstalihNek+=$object->getPonoviDoma();
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
+            foreach ($object->getDrugiViri() as $numobjDV => $objDV) {
+                if ($objDV->getMednarodni()) {
+                    $this->sredstvaInt +=$objDV->getZnesek();
+                }
+            }
         }
 
         $this->avgObiskPrired = \Max\Functions::numberRound($this->stObiskNekom / $this->stNekomerc);

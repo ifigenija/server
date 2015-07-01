@@ -74,6 +74,7 @@ class ProgramDelaCest
     private $lookTipProgramskeEnote3;
     private $lookTipProgramskeEnote4;
     private $lookTipProgramskeEnote5;
+    private $drugiVirUrl                  = '/rest/drugivir';
 
     public function _before(ApiTester $I)
     {
@@ -1248,6 +1249,73 @@ class ProgramDelaCest
     }
 
     /**
+     *  kreiramo druge vire za več enot programa
+     * 
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecDrugihVirov(ApiTester $I)
+    {
+        $data = [
+            'znesek'        => 1.23,
+            'opis'          => "zz",
+            'enotaPrograma' => $this->objProgramPremiera1['id'],
+            'mednarodni'    => FALSE,
+        ];
+        $ent  = $I->successfullyCreate($this->drugiVirUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data = [
+            'znesek'        => 2.34,
+            'opis'          => "aa",
+            'enotaPrograma' => $this->objProgramPremiera1['id'],
+            'mednarodni'    => true,
+        ];
+        $ent  = $I->successfullyCreate($this->drugiVirUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        $data = [
+            'znesek'        => 5.67,
+            'opis'          => "pp2",
+            'enotaPrograma' => $this->objProgramPonovitevPrejsnjih1['id'],
+            'mednarodni'    => FALSE,
+        ];
+        $ent  = $I->successfullyCreate($this->drugiVirUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data = [
+            'znesek'        => 92.34,
+            'opis'          => "pp2b",
+            'enotaPrograma' => $this->objProgramPonovitevPrejsnjih1['id'],
+            'mednarodni'    => true,
+        ];
+        $ent  = $I->successfullyCreate($this->drugiVirUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    
+        // kreiramo še en zapis
+        $data = [
+            'znesek'        => 15.3,
+            'opis'          => "f1",
+            'enotaPrograma' => $this->objProgramFestival1['id'],
+            'mednarodni'    => true,
+        ];
+        $ent  = $I->successfullyCreate($this->drugiVirUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data = [
+            'znesek'        => 50.2,
+            'opis'          => "f2",
+            'enotaPrograma' => $this->objProgramGostovanj1['id'],
+            'mednarodni'    => FALSE,
+        ];
+        $ent  = $I->successfullyCreate($this->drugiVirUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
      * pri update-u se kliče validate metoda, kjer je preračun kazalnikov
      * 
      * @depends createVecEnotPrograma
@@ -1288,6 +1356,7 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(28, $entR['stHonorarnihIgr'], "");
         $I->assertGreaterThanOrEqual(20, $entR['stHonorarnihIgrTujJZ'], "");
         $I->assertGreaterThanOrEqual(420.88, $entR['sredstvaAvt'], "");
+        $I->assertGreaterThanOrEqual(109.98, $entR['sredstvaInt'], "");
     }
 
 }
