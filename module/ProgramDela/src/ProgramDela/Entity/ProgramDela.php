@@ -466,11 +466,11 @@ class ProgramDela
 //            - stKoprodukcij
 //            - stKoprodukcijInt
 //            - stKoprodukcijNVO
-//            - stHonorarnih
-//            - stHonorarnihIgr
-//            - stHonorarnihIgrTujJZ
+//                   - stHonorarnih
+//                   - stHonorarnihIgr
+//                   - stHonorarnihIgrTujJZ
 //            - sredstvaInt
-//            - sredstvaAvt
+//                   - sredstvaAvt
         $this->stPremier            = $this->getPremiere()->count();
         $stPonPrej                  = $this->getPonovitvePrejsnjih()->count();        //$$ začasno
         $this->stPonPrej            = $this->getPonovitvePrejsnjih()->count();
@@ -496,9 +496,17 @@ class ProgramDela
         $this->stObiskNekomGostSlo  = 0;  //init
         $this->stObiskNekomGostZam  = 0;  //init
         $this->stObiskNekomGostInt  = 0;  //init
+        $this->stHonorarnih         = 0;  //init
+        $this->stHonorarnihIgr      = 0;  //init
+        $this->stHonorarnihIgrTujJZ = 0;  //init
+        $this->sredstvaAvt          = 0;  //init
         // premiere
         foreach ($this->getPremiere() as $numObject => $object) {
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
+            $this->stHonorarnih +=$object->getStHonorarnih();
+            $this->stHonorarnihIgr +=$object->getStHonorarnihIgr();
+            $this->stHonorarnihIgrTujJZ +=$object->getStHonorarnihIgrTujJZ();
+            $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
         }
 
         // ponovitve premier
@@ -512,6 +520,7 @@ class ProgramDela
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stObiskNekomGostSlo +=$object->getObiskGost();
             $this->stObiskNekomGostZam +=$object->getObiskZamejo();
+            $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
         }
 
         // ponovitve prejšnjih sezon
@@ -525,6 +534,10 @@ class ProgramDela
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stObiskNekomGostSlo +=$object->getObiskGost();
             $this->stObiskNekomGostZam +=$object->getObiskZamejo();
+            $this->stHonorarnih +=$object->getStHonorarnih();
+            $this->stHonorarnihIgr +=$object->getStHonorarnihIgr();
+            $this->stHonorarnihIgrTujJZ +=$object->getStHonorarnihIgrTujJZ();
+            $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
 
             switch ($object->getTipProgramskeEnote()->getSifra()) {
                 case "01":
@@ -561,6 +574,7 @@ class ProgramDela
             $this->stGostovanjInt += $object->getPonoviInt();
             $this->stObiskNekom +=$object->getObiskInt();
             $this->stObiskNekomGostInt +=$object->getObiskInt();
+            $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
 
             // $$ glede na to, ali je mednarodno gostovanje za premiero, ki bo letos, ali iz prejšnjih sezon
             $idUpr          = $object->getUprizoritev();
@@ -586,6 +600,7 @@ class ProgramDela
             $this->stIzvOstalihNek+=1;      // 1 festival ena prireditev
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
+            $this->stHonorarnih +=$object->getStHonorarnih();
         }
 
         // razno
@@ -594,6 +609,7 @@ class ProgramDela
             $this->stIzvOstalihNek+=$object->getStPE();     //$$ prištevamo število programskih enot
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
+            $this->stHonorarnih +=$object->getStHonorarnih();
         }
 
         // izjemni dogodki
@@ -604,7 +620,7 @@ class ProgramDela
             $this->stObiskNekomMat +=$object->getObiskDoma();
         }
 
-        $this->avgObiskPrired = \Max\Functions::euroRound($this->stObiskNekom / $this->stNekomerc);
+        $this->avgObiskPrired = \Max\Functions::numberRound($this->stObiskNekom / $this->stNekomerc);
     }
 
     public function getId()
