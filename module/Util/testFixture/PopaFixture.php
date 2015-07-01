@@ -28,19 +28,17 @@ class PopaFixture
 
     /**
      *
-     * @param \Tip\Repository\IzbirneOpcije $rep
      * @param string $object
      * @param array $vals
      */
     public function populatePopa($manager, $v)
     {
 
-        $rep  = $manager->getRepository('App\Entity\Popa');
-        $repD = $manager->getRepository('App\Entity\Drzava');
+        $popaR  = $manager->getRepository('App\Entity\Popa');
+        $drzavaR = $manager->getRepository('App\Entity\Drzava');
 
-        $drzava = $repD->findAll()[0];
 
-        $o = $rep->findOneBySifra(trim($v[0]));
+        $o = $popaR->findOneBySifra(trim($v[0]));
         if (!$o) {
             $o = new \App\Entity\Popa();
             $o->setSifra(trim($v[0]));
@@ -51,7 +49,10 @@ class PopaFixture
         $o->setTipKli($v[1]);
         $o->setStaKli($v[2]);
         $o->setNaziv($v[3]);
+
+        $drzava = $drzavaR->findOneBySifra(trim($v[4]));
         $o->setDrzava($drzava);
+        $o->setNvo($v[5]);
 
 
         $referenca = 'Popa-' . $v[0];
@@ -62,11 +63,14 @@ class PopaFixture
     public function getData()
     {
         return [
-            ['0988', 'dobavitelj', 'AK', 'Juhuhu d.o.o.'],
-            ['0989', 'koproducent', 'AK', 'Hopsasa d.o.o.'],
-            ['0987', 'koproducent', 'AK', 'Gledališče Šrum d.o.o.'],
-            ['0986', 'koproducent', 'AK', 'Lutkovni Direndaj d.o.o.'],
-            ['0985', 'dobavitelj', 'AK', 'Tatjana Stanič, Lektoriranje, s.p.'],
+            ['0988', 'dobavitelj', 'AK', 'Juhuhu d.o.o.', 'SI',false, ],
+            ['0989', 'koproducent', 'AK', 'Hopsasa d.o.o.', 'SI', true,],
+            ['0987', 'koproducent', 'AK', 'Gledališče Šrum d.o.o.', 'SI',false,],
+            ['0986', 'koproducent', 'AK', 'Lutkovni Direndaj d.o.o.', 'SI',false,],
+            ['0985', 'dobavitelj', 'AK', 'Tatjana Stanič, Lektoriranje, s.p.', 'SI',false,],
+            ['0984', 'koproducent', 'AK', 'Gledališče Lepote tvoje', 'AR',false,],
+            ['0983', 'koproducent', 'AK', 'Sunce naše', 'HR',false,],
+            ['0982', 'koproducent', 'AK', 'Theater Amadeus', 'AT',false,],
         ];
     }
 

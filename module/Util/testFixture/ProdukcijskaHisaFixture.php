@@ -27,7 +27,7 @@ class ProdukcijskaHisaFixture
 
     public function getDependencies()
     {
-        return array('TestFixture\PopaFixture','TestFixture\PopaMaticnoTestFixture');
+        return array('TestFixture\PopaFixture', 'TestFixture\PopaMaticnoTestFixture');
     }
 
     /**
@@ -68,6 +68,10 @@ class ProdukcijskaHisaFixture
             // 987 napolni že pri fixture-ju PopaMaticnoTest
             ['0987', 'A', 'Popa-0987',],
             ['0989', 'A', 'Popa-0989',],
+            ['0986', 'A', 'Popa-0986',],
+            ['0984', 'A', 'Popa-0984',],
+            ['0983', 'A', 'Popa-0983',],
+            ['0982', 'A', 'Popa-0982',],
         ];
     }
 
