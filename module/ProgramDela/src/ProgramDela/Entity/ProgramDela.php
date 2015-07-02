@@ -620,7 +620,11 @@ class ProgramDela
             $this->stObiskNekomMat +=$object->getObiskDoma();
         }
 
-        $this->avgObiskPrired = \Max\Functions::numberRound($this->stObiskNekom / $this->stNekomerc);
+        if ($this->stNekomerc > 0) {
+            $this->avgObiskPrired = \Max\Functions::numberRound($this->stObiskNekom / $this->stNekomerc);
+        }else{
+            $this->avgObiskPrired = 0;
+        }
     }
 
     public function getId()

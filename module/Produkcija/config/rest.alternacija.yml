@@ -24,8 +24,6 @@ forms:
             - oseba
 #            - pogodba    #$$ začasno damo pogodbo gor
             - pomembna
-        hydrator:
-            lookups: [oseba]
             
 lists:
     default: 
@@ -44,7 +42,10 @@ lists:
                       targetEntity: Produkcija\Entity\Uprizoritev
                       required: false
         hydrator:
-            lookups: [oseba]
+            lookups:
+                - oseba
+                - funkcija
+                - pogodba
     vse: 
         filter:
             elements: 
