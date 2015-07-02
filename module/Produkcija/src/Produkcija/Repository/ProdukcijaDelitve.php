@@ -69,18 +69,37 @@ class ProdukcijaDelitve
         return $qb;
     }
 
+    /**
+     * 
+     * @param type $object  entiteta
+     * @param type $params
+     */
     public function create($object, $params = null)
     {
         $this->nastaviFlagMaticna($object);
+        if ($object->getEnotaPrograma()) {
+            $object->getEnotaPrograma()->getKoprodukcije()->add($object);
+        }
+
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
 
         parent::create($object, $params);
     }
 
-    public function update($object)
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function update($object, $params = null)
     {
         $this->nastaviFlagMaticna($object);
 
-        parent::update($object);
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
+
+        parent::update($object, $params);
     }
 
     private function nastaviFlagMaticna(\Produkcija\Entity\ProdukcijaDelitev $object)

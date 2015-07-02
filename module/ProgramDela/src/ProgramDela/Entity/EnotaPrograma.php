@@ -283,7 +283,7 @@ class EnotaPrograma
         $this->drugiViri = new ArrayCollection();
     }
 
-    public function preracunaj($deep = false)
+    public function preracunaj($smer = false)
     {
     }
 
