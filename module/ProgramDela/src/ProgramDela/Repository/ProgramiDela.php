@@ -5,12 +5,12 @@
  */
 
 namespace ProgramDela\Repository;
+
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineModule\Paginator\Adapter\Selectable;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
-
 
 /**
  * Description of ProgramDelai
@@ -20,14 +20,15 @@ use Max\Repository\AbstractMaxRepository;
 class ProgramiDela
         extends \Max\Repository\AbstractMaxRepository
 {
-        protected $sortOptions = [
+
+    protected $sortOptions = [
         "default" => [
             "sifra" => ["alias" => "p.sifra"]
         ],
         "vse"     => [
             "sifra" => ["alias" => "p.sifra"]
         ],
-        "seznam"     => [
+        "seznam"  => [
             "zacetek" => ["alias" => "p.zacetek"]
         ],
     ];
@@ -62,6 +63,7 @@ class ProgramiDela
 
         return $qb;
     }
+
     public function getSeznamQb($options)
     {
         $qb = $this->createQueryBuilder('p');
@@ -76,6 +78,32 @@ class ProgramiDela
         }
 
         return $qb;
+    }
+
+    /**
+     * 
+     * @param type $object  entiteta
+     * @param type $params
+     */
+    public function create($object, $params = null)
+    {
+        // preračunamo vrednosti, ne v globino
+        $object->preracunaj();
+
+        parent::create($object, $params);
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function update($object, $params = null)
+    {
+        // preračunamo vrednosti, ne v globino
+        $object->preracunaj();
+
+        parent::update($object, $params);
     }
 
 }
