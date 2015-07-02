@@ -482,8 +482,10 @@ class ProgramDela
         $this->programiRazno      = new ArrayCollection();
     }
 
-    public function validate($mode = 'update')
+    public function preracunaj($deep = false)
     {
+
+
 // preračun kazalnikov:
 //                   - stPremier
 //                   - stPonPrej
@@ -518,10 +520,6 @@ class ProgramDela
 //                   - stHonorarnihIgrTujJZ
 //                   - sredstvaInt
 //                   - sredstvaAvt
-        $this->stPremier            = $this->getPremiere()->count();
-        $stPonPrej                  = $this->getPonovitvePrejsnjih()->count();        //$$ začasno
-        $this->stPonPrej            = $this->getPonovitvePrejsnjih()->count();
-        $this->stPonPrejVelikih     = 0;  //init
         $this->stPonPrejMalih       = 0;  //init
         $this->stPonPrejMalihKopr   = 0;  //init
         $this->stPonPrejSredKopr    = 0;  //init
@@ -551,8 +549,17 @@ class ProgramDela
         $this->stKoprodukcij        = 0;  //init
         $this->stKoprodukcijInt     = 0;  //init
         $this->stKoprodukcijNVO     = 0;  //init
+        $this->stPonPrejVelikih     = 0;  //init
+
+
+        $this->stPremier = $this->getPremiere()->count();
+        $stPonPrej       = $this->getPonovitvePrejsnjih()->count();        //$$ začasno
+        $this->stPonPrej = $this->getPonovitvePrejsnjih()->count();
         // premiere
         foreach ($this->getPremiere() as $numObject => $object) {
+            if ($deep) {
+                $object->preracunaj(!$deep);
+            }
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->vrPS1Do += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->stHonorarnih +=$object->getStHonorarnih();
@@ -566,6 +573,9 @@ class ProgramDela
 
 // ponovitve premier
         foreach ($this->getPonovitvePremiere() as $numObject => $object) {
+            if ($deep) {
+                $object->preracunaj(!$deep);
+            }
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->stNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
             $this->stIzvPonPrem+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
@@ -582,6 +592,9 @@ class ProgramDela
 
 // ponovitve prejšnjih sezon
         foreach ($this->getPonovitvePrejsnjih() as $numObject => $object) {
+            if ($deep) {
+                $object->preracunaj(!$deep);
+            }
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->stNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
             $this->stIzvPrej+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
@@ -621,6 +634,9 @@ class ProgramDela
 
 // gostujoče predstave
         foreach ($this->getGostujoci() as $numObject => $object) {
+            if ($deep) {
+                $object->preracunaj(!$deep);
+            }
             $this->stNekomerc+=$object->getPonoviDoma();
             $this->stIzvGostuj+=$object->getPonoviDoma();
             $this->stObiskNekom +=$object->getObiskDoma();
@@ -631,6 +647,9 @@ class ProgramDela
 
 // mednarodna gostovanja
         foreach ($this->getGostovanja() as $numObject => $object) {
+            if ($deep) {
+                $object->preracunaj(!$deep);
+            }
             $this->stNekomerc+=$object->getPonoviInt();
             $this->stGostovanjInt += $object->getPonoviInt();
             $this->stObiskNekom +=$object->getObiskInt();
@@ -659,6 +678,9 @@ class ProgramDela
 
 // festivali
         foreach ($this->getProgramiFestival() as $numObject => $object) {
+            if ($deep) {
+                $object->preracunaj(!$deep);
+            }
             $this->stNekomerc+=1;      // 1 festival ena prireditev
             $this->stIzvOstalihNek+=1;      // 1 festival ena prireditev
             $this->stObiskNekom +=$object->getObiskDoma();
@@ -670,6 +692,9 @@ class ProgramDela
 
 // razno
         foreach ($this->getProgramiRazno() as $numObject => $object) {
+            if ($deep) {
+                $object->preracunaj(!$deep);
+            }
             $this->stNekomerc+=$object->getStPE();     //$$ prištevamo število programskih enot
             $this->stIzvOstalihNek+=$object->getStPE();     //$$ prištevamo število programskih enot
             $this->stObiskNekom +=$object->getObiskDoma();
@@ -681,6 +706,9 @@ class ProgramDela
 
 // izjemni dogodki
         foreach ($this->getIzjemni() as $numObject => $object) {
+            if ($deep) {
+                $object->preracunaj(!$deep);
+            }
             $this->stNekomerc+=$object->getPonoviDoma();
             $this->stIzvOstalihNek+=$object->getPonoviDoma();
             $this->stObiskNekom +=$object->getObiskDoma();
@@ -691,9 +719,14 @@ class ProgramDela
 
         if ($this->stNekomerc > 0) {
             $this->avgObiskPrired = \Max\Functions::numberRound($this->stObiskNekom / $this->stNekomerc);
-        }else{
+        } else {
             $this->avgObiskPrired = 0;
         }
+    }
+
+    public function validate($mode = 'update')
+    {
+        
     }
 
     public function getId()

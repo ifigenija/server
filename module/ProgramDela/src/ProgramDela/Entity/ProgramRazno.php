@@ -74,6 +74,16 @@ class ProgramRazno
      */
     private $soorganizator;
 
+    public function preracunaj($deep = false)
+    {
+        parent::preracunaj($deep);
+        if ($deep) {
+            if ($this->getDokument()) {
+                $this->getDokument()->preracunaj(!$deep);
+            }
+        }
+    }
+
     public function validate($mode = 'update')
     {
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program razno", 1000451);

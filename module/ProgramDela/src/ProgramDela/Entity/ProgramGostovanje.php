@@ -69,6 +69,16 @@ class ProgramGostovanje
      */
     private $gostitelj;
 
+    public function preracunaj($deep = false)
+    {
+        parent::preracunaj($deep);
+        if ($deep) {
+            if ($this->getDokument()) {
+                $this->getDokument()->preracunaj(!$deep);
+            }
+        }
+    }
+
     public function validate($mode = 'update')
     {
         // neaktualna polja, ki jih tudi v formi ni:

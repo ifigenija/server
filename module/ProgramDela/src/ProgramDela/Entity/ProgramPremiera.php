@@ -23,27 +23,35 @@ class ProgramPremiera
      * @var \ProgramDela\Entity\ProgramDela
      */
     private $dokument;
-    
+
+    public function preracunaj($deep = false)
+    {
+        parent::preracunaj($deep);
+        if ($deep) {
+            if ($this->getDokument()) {
+                $this->getDokument()->preracunaj(!$deep);
+            }
+        }
+    }
+
     public function validate($mode = 'update')
     {
         if ($this->getDokument()) {
-            // preveriti, ali že obstaja programpremiere z isto uprizoritvijo
+// preveriti, ali že obstaja programpremiere z isto uprizoritvijo
             $obstaja = true;  //init
             if (!$this->getDokument()->getPremiere()->isEmpty()) {
-                $id=$this->getId();
+                $id      = $this->getId();
                 $obstaja = $this->getDokument()
                         ->getPremiere()
                         ->exists(function($key, $progPremiere) use(&$id) {
-                    return (!empty($this->getUprizoritev()))
-                            && ($progPremiere->getUprizoritev() == $this->getUprizoritev())
-                            && ($progPremiere->getId()!== $id
+                    return (!empty($this->getUprizoritev())) && ($progPremiere->getUprizoritev() == $this->getUprizoritev()) && ($progPremiere->getId() !== $id
                             );     //vrne true, če obstaja drug programpremiere z isto uprizoritvijo
                 });
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000440);
             }
         }
 
-        // neaktualna polja, ki jih tudi v formi ni:
+// neaktualna polja, ki jih tudi v formi ni:
         $this->setObiskDoma(0);
         $this->setObiskGost(0);
         $this->setObiskZamejo(0);
