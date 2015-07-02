@@ -22,36 +22,9 @@ class ProgramGostujoca
      */
     private $dokument;
 
-    public function preracunaj($deep = false)
+    public function preracunaj($smer = false)
     {
-        parent::preracunaj($deep);
-        if ($deep) {
-            if ($this->getDokument()) {
-                $this->getDokument()->preracunaj(!$deep);
-            }
-        }
-    }
-
-    public function validate($mode = 'update')
-    {
-        if ($this->getDokument()) {
-            // preveriti, ali že obstaja programgostujoča z isto uprizoritvijo
-            $obstaja = true;  //init
-            if (!$this->getDokument()->getGostujoci()->isEmpty()) {
-                 $id      = $this->getId();
-                $obstaja = $this->getDokument()
-                        ->getGostujoci()
-                        ->exists(function($key, $progGostujoca)  use(&$id)  {
-                    return ($progGostujoca->getUprizoritev() == $this->getUprizoritev())
-                            && ($progGostujoca->getId()!== $id);     //vrne true, če obstaja drug programGostujoča z isto uprizoritvijo
-                });
-                $this->expect(!$obstaja, "Program gostujoča z isto uprizoritvijo že obstaja v programu dela", 1000430);
-            }
-        }
-
-
         // neaktualna polja, ki tudi v formi niso:
-        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostujočo", 1000431);
         $this->setAvtorskiHonorarji(0);
         $this->setTantieme(0);
         $this->setObiskGost(0);
@@ -68,6 +41,32 @@ class ProgramGostujoca
         $this->setStHonorarnihIgr(0);
         $this->setStHonorarnihIgrTujJZ(0);
         $this->setNaziv("");        // dobimo iz uprizoritve
+
+        parent::preracunaj($smer);
+        if ($smer == \Max\Consts::UP) {
+            if ($this->getDokument()) {
+                $this->getDokument()->preracunaj(\Max\Consts::UP);
+            }
+        }
+    }
+
+    public function validate($mode = 'update')
+    {
+        if ($this->getDokument()) {
+            // preveriti, ali že obstaja programgostujoča z isto uprizoritvijo
+            $obstaja = true;  //init
+            if (!$this->getDokument()->getGostujoci()->isEmpty()) {
+                $id      = $this->getId();
+                $obstaja = $this->getDokument()
+                        ->getGostujoci()
+                        ->exists(function($key, $progGostujoca) use(&$id) {
+                    return ($progGostujoca->getUprizoritev() == $this->getUprizoritev()) && ($progGostujoca->getId() !== $id);     //vrne true, če obstaja drug programGostujoča z isto uprizoritvijo
+                });
+                $this->expect(!$obstaja, "Program gostujoča z isto uprizoritvijo že obstaja v programu dela", 1000430);
+            }
+        }
+        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostujočo", 1000431);
+
 
         parent::validate();
     }

@@ -69,8 +69,8 @@ class ProgramiRazno
             $object->getDokument()->getProgramiRazno()->add($object);
         }
 
-        // preračunamo vrednosti, v globino
-        $object->preracunaj(TRUE);
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
 
         parent::create($object, $params);
     }
@@ -82,8 +82,8 @@ class ProgramiRazno
      */
     public function update($object, $params = null)
     {
-        // preračunamo vrednosti, v globino
-        $object->preracunaj(TRUE);
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
 
         parent::update($object, $params);
     }

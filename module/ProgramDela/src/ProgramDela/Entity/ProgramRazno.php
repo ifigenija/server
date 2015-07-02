@@ -74,20 +74,8 @@ class ProgramRazno
      */
     private $soorganizator;
 
-    public function preracunaj($deep = false)
+    public function preracunaj($smer = false)
     {
-        parent::preracunaj($deep);
-        if ($deep) {
-            if ($this->getDokument()) {
-                $this->getDokument()->preracunaj(!$deep);
-            }
-        }
-    }
-
-    public function validate($mode = 'update')
-    {
-        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program razno", 1000451);
-        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program razno", 1000452);
         $this->setAvtorskiHonorarji(0);
         $this->setObiskGost(0);
         $this->setObiskInt(0);
@@ -103,6 +91,19 @@ class ProgramRazno
         $this->setUtemeljitev("");
         $this->setVlozekGostitelja(0);
         $this->setVlozekKoproducenta(0);
+
+        parent::preracunaj($smer);
+        if ($smer == \Max\Consts::UP) {
+            if ($this->getDokument()) {
+                $this->getDokument()->preracunaj(\Max\Consts::UP);
+            }
+        }
+    }
+
+    public function validate($mode = 'update')
+    {
+        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program razno", 1000451);
+        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program razno", 1000452);
 
         parent::validate();
     }

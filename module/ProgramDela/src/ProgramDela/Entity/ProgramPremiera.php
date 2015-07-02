@@ -24,12 +24,24 @@ class ProgramPremiera
      */
     private $dokument;
 
-    public function preracunaj($deep = false)
+    public function preracunaj($smer = false)
     {
-        parent::preracunaj($deep);
-        if ($deep) {
+        // neaktualna polja, ki jih tudi v formi ni:
+        $this->setObiskDoma(0);
+        $this->setObiskGost(0);
+        $this->setObiskZamejo(0);
+        $this->setObiskInt(0);
+        $this->setPonoviDoma(0);
+        $this->setPonoviZamejo(0);
+        $this->setPonoviGost(0);
+        $this->setPonoviInt(0);
+        $this->setVlozekGostitelja(0);
+        $this->setNaziv("");        // dobimo iz uprizoritve
+
+        parent::preracunaj($smer);
+        if ($smer == \Max\Consts::UP) {
             if ($this->getDokument()) {
-                $this->getDokument()->preracunaj(!$deep);
+                $this->getDokument()->preracunaj(\Max\Consts::UP);
             }
         }
     }
@@ -50,18 +62,6 @@ class ProgramPremiera
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000440);
             }
         }
-
-// neaktualna polja, ki jih tudi v formi ni:
-        $this->setObiskDoma(0);
-        $this->setObiskGost(0);
-        $this->setObiskZamejo(0);
-        $this->setObiskInt(0);
-        $this->setPonoviDoma(0);
-        $this->setPonoviZamejo(0);
-        $this->setPonoviGost(0);
-        $this->setPonoviInt(0);
-        $this->setVlozekGostitelja(0);
-        $this->setNaziv("");        // dobimo iz uprizoritve
 
         parent::validate();
     }

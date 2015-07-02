@@ -93,6 +93,26 @@ class ProdukcijaDelitev
      */
     private $maticniKop = false;
 
+    public function preracunaj($smer = false)
+    {
+        // izračunaj delež
+        $delez = $this->getEnotaPrograma()->getCelotnaVrednost() * $this->getOdstotekFinanciranja() / 100;
+        $delez = \Max\Functions::euroRound($delez);   //Zaokrožimo na 2 decimalki predno shranimo
+        $this->setDelez($delez);
+
+        // izračunaj zaprošen znesek
+        $zaproseno = $delez * $this->getZaprosenProcent() / 100;
+
+        $zaproseno = \Max\Functions::euroRound($zaproseno);   //Zaokrožimo na 2 decimalki predno shranimo
+        $this->setZaproseno($zaproseno);
+
+        if ($smer == \Max\Consts::UP) {
+            if ($this->getEnotaPrograma()) {
+                $this->getEnotaPrograma()->preracunaj(\Max\Consts::UP);
+            }
+        }
+    }
+
     public function validate($mode = 'update')
     {
         //$$ tu bi še naredili kontrole, preračunavanja za ostale prodDelitve iste enote programa ipd.
@@ -122,25 +142,13 @@ class ProdukcijaDelitev
                 $this->expect(!$obstaja, "Koprodukcija z istim koproducentom že obstaja v enoti programa", 1000411);
             }
         }
-
-
-
-        // izračunaj delež
-        $delez = $this->getEnotaPrograma()->getCelotnaVrednost() * $this->getOdstotekFinanciranja() / 100;
-        $delez = \Max\Functions::euroRound($delez);   //Zaokrožimo na 2 decimalki predno shranimo
-        $this->setDelez($delez);
-
-        // izračunaj zaprošen znesek
-        $zaproseno = $delez * $this->getZaprosenProcent() / 100;
-
-        $zaproseno = \Max\Functions::euroRound($zaproseno);   //Zaokrožimo na 2 decimalki predno shranimo
-        $this->setZaproseno($zaproseno);
     }
 
-    public function getNaziv() {
+    public function getNaziv()
+    {
         return $this->getKoproducent()->getPopa()->getNaziv();
     }
-    
+
     public function getId()
     {
         return $this->id;

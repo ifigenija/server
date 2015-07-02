@@ -87,7 +87,7 @@ class ProgramiDela
      */
     public function create($object, $params = null)
     {
-        // preračunamo vrednosti, ne v globino
+        // zaenkrat ne računamo v globino (DOWN), ampak vedno le v smeri UP
         $object->preracunaj();
 
         parent::create($object, $params);
@@ -100,7 +100,7 @@ class ProgramiDela
      */
     public function update($object, $params = null)
     {
-        // preračunamo vrednosti, ne v globino
+        // zaenkrat ne računamo v globino (DOWN), ampak vedno le v smeri UP
         $object->preracunaj();
 
         parent::update($object, $params);

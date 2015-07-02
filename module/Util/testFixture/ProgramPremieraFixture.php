@@ -75,6 +75,7 @@ class ProgramPremieraFixture
 //        $o->setPonoviZamejo($v[20]);
 //        $o->setPonoviGost($v[21]);
         
+        $o->preracunaj();
         $o->validate();
         $referenca = 'ProgramPremiera-' . $v[0];
         var_dump($referenca);

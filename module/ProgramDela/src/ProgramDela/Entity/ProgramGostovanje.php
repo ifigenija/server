@@ -69,20 +69,9 @@ class ProgramGostovanje
      */
     private $gostitelj;
 
-    public function preracunaj($deep = false)
-    {
-        parent::preracunaj($deep);
-        if ($deep) {
-            if ($this->getDokument()) {
-                $this->getDokument()->preracunaj(!$deep);
-            }
-        }
-    }
-
-    public function validate($mode = 'update')
+    public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
-        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostovanje", 1000441);
         $this->setObiskDoma(0);
         $this->setObiskGost(0);
         $this->setObiskZamejo(0);
@@ -99,6 +88,18 @@ class ProgramGostovanje
         $this->setVlozekGostitelja(0);
         $this->setVlozekKoproducenta(0);
         $this->setNaziv("");        // dobimo iz uprizoritve
+
+        parent::preracunaj($smer);
+        if ($smer == \Max\Consts::UP) {
+            if ($this->getDokument()) {
+                $this->getDokument()->preracunaj(\Max\Consts::UP);
+            }
+        }
+    }
+
+    public function validate($mode = 'update')
+    {
+        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostovanje", 1000441);
 
         parent::validate();
     }

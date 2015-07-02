@@ -22,16 +22,20 @@ class ProgramPonovitevPrejsnjih
      */
     private $dokument;
 
-    public function preracunaj($deep = false)
+    public function preracunaj($smer = false)
     {
-        parent::preracunaj($deep);
-        if ($deep) {
+        $this->setNaziv("");        // dobimo iz uprizoritve
+        $this->setPonoviInt(0);
+        $this->setObiskInt(0);
+
+        parent::preracunaj($smer);
+        if ($smer == \Max\Consts::UP) {
             if ($this->getDokument()) {
-                $this->getDokument()->preracunaj(!$deep);
+                $this->getDokument()->preracunaj(\Max\Consts::UP);
             }
         }
     }
-    
+
     public function validate($mode = 'update')
     {
         if ($this->getDokument()) {
@@ -47,9 +51,6 @@ class ProgramPonovitevPrejsnjih
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000460);
             }
         }
-        $this->setNaziv("");        // dobimo iz uprizoritve
-        $this->setPonoviInt(0);
-        $this->setObiskInt(0);
 
         parent::validate();
     }

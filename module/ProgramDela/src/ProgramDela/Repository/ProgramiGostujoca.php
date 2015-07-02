@@ -70,8 +70,8 @@ class ProgramiGostujoca
             $object->getDokument()->getGostujoci()->add($object);
         }
 
-        // preračunamo vrednosti, v globino
-        $object->preracunaj(TRUE);
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
 
         parent::create($object, $params);
     }
@@ -83,8 +83,8 @@ class ProgramiGostujoca
      */
     public function update($object, $params = null)
     {
-        // preračunamo vrednosti, v globino
-        $object->preracunaj(TRUE);
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
 
         parent::update($object, $params);
     }

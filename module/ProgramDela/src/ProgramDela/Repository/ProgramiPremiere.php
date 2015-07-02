@@ -65,13 +65,12 @@ class ProgramiPremiere
     public function create($object, $params = null)
     {
 
-        //$$ verjetno potrebna še kontrola, če dokument obstaja
         if ($object->getDokument()) {
             $object->getDokument()->getPremiere()->add($object);
         }
 
-        // preračunamo vrednosti, v globino
-        $object->preracunaj(TRUE);
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
 
         parent::create($object, $params);
     }
@@ -83,19 +82,9 @@ class ProgramiPremiere
      */
     public function update($object, $params = null)
     {
-        // preračunamo vrednosti, v globino
-        $object->preracunaj(TRUE);
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
 
         parent::update($object, $params);
     }
-
-//    private function validateProgramDela(\ProgramDela\Entity\ProgramPremiera $object)
-//    {
-//        if ($object->getDokument()) {
-//            $programdela = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default')
-//                    ->getRepository('ProgramDela\Entity\ProgramDela')
-//                    ->findOneById($object->getDokument()->getId());
-//            $programdela->validate();
-//        }
-//    }
 }

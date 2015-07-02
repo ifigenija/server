@@ -482,7 +482,7 @@ class ProgramDela
         $this->programiRazno      = new ArrayCollection();
     }
 
-    public function preracunaj($deep = false)
+    public function preracunaj($smer = false)
     {
 
 
@@ -555,10 +555,11 @@ class ProgramDela
         $this->stPremier = $this->getPremiere()->count();
         $stPonPrej       = $this->getPonovitvePrejsnjih()->count();        //$$ začasno
         $this->stPonPrej = $this->getPonovitvePrejsnjih()->count();
+
         // premiere
         foreach ($this->getPremiere() as $numObject => $object) {
-            if ($deep) {
-                $object->preracunaj(!$deep);
+            if ($smer == \Max\Consts::DOWN) {
+                $object->preracunaj(\Max\Consts::DOWN);
             }
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->vrPS1Do += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
@@ -570,11 +571,10 @@ class ProgramDela
             $this->prerStKopr($object);
         }
 
-
-// ponovitve premier
+        // ponovitve premier
         foreach ($this->getPonovitvePremiere() as $numObject => $object) {
-            if ($deep) {
-                $object->preracunaj(!$deep);
+            if ($smer == \Max\Consts::DOWN) {
+                $object->preracunaj(\Max\Consts::DOWN);
             }
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->stNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
@@ -592,8 +592,8 @@ class ProgramDela
 
 // ponovitve prejšnjih sezon
         foreach ($this->getPonovitvePrejsnjih() as $numObject => $object) {
-            if ($deep) {
-                $object->preracunaj(!$deep);
+            if ($smer == \Max\Consts::DOWN) {
+                $object->preracunaj(\Max\Consts::DOWN);
             }
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->stNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
@@ -634,8 +634,8 @@ class ProgramDela
 
 // gostujoče predstave
         foreach ($this->getGostujoci() as $numObject => $object) {
-            if ($deep) {
-                $object->preracunaj(!$deep);
+            if ($smer == \Max\Consts::DOWN) {
+                $object->preracunaj(\Max\Consts::DOWN);
             }
             $this->stNekomerc+=$object->getPonoviDoma();
             $this->stIzvGostuj+=$object->getPonoviDoma();
@@ -647,8 +647,8 @@ class ProgramDela
 
 // mednarodna gostovanja
         foreach ($this->getGostovanja() as $numObject => $object) {
-            if ($deep) {
-                $object->preracunaj(!$deep);
+            if ($smer == \Max\Consts::DOWN) {
+                $object->preracunaj(\Max\Consts::DOWN);
             }
             $this->stNekomerc+=$object->getPonoviInt();
             $this->stGostovanjInt += $object->getPonoviInt();
@@ -656,30 +656,29 @@ class ProgramDela
             $this->stObiskNekomGostInt +=$object->getObiskInt();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
 
-// $$ glede na to, ali je mednarodno gostovanje za premiero, ki bo letos, ali iz prejšnjih sezon
+            // $$ glede na to, ali je mednarodno gostovanje za premiero, ki bo letos, ali iz prejšnjih sezon
             $idUpr          = $object->getUprizoritev();
             $obstajaPonPrem = false;  //init
             if (!empty($idUpr)) {
                 $obstajaPonPrem = $this->getPonovitvePremiere()
                         ->exists(function($key, $ponovitvePrem) use(&$idUpr) {
-                    return ($ponovitvePrem->getUprizoritev() == $idUpr);
-//vrne true, če obstaja ponovitev premiere z isto uprizoritvijo
+                    return ($ponovitvePrem->getUprizoritev() == $idUpr); //vrne true, če obstaja ponovitev premiere z isto uprizoritvijo
                 });
             }
             if ($obstajaPonPrem) {
                 $this->stIzvPonPrem+=$object->getPonoviInt();
             } else {
-// če ni uprizoritev iz ponovitve (letošnje) premiere je najverjetneje  iz ponovitve premiere prejšnjih sezon
+                // če ni uprizoritev iz ponovitve (letošnje) premiere je najverjetneje  iz ponovitve premiere prejšnjih sezon
                 $this->stIzvPrej+=$object->getPonoviInt();
             }
             $this->prerSredstva($object);
             $this->prerStKopr($object);
         }
 
-// festivali
+        // festivali
         foreach ($this->getProgramiFestival() as $numObject => $object) {
-            if ($deep) {
-                $object->preracunaj(!$deep);
+            if ($smer == \Max\Consts::DOWN) {
+                $object->preracunaj(\Max\Consts::DOWN);
             }
             $this->stNekomerc+=1;      // 1 festival ena prireditev
             $this->stIzvOstalihNek+=1;      // 1 festival ena prireditev
@@ -690,10 +689,10 @@ class ProgramDela
             $this->prerStKopr($object);
         }
 
-// razno
+        // razno
         foreach ($this->getProgramiRazno() as $numObject => $object) {
-            if ($deep) {
-                $object->preracunaj(!$deep);
+            if ($smer == \Max\Consts::DOWN) {
+                $object->preracunaj(\Max\Consts::DOWN);
             }
             $this->stNekomerc+=$object->getStPE();     //$$ prištevamo število programskih enot
             $this->stIzvOstalihNek+=$object->getStPE();     //$$ prištevamo število programskih enot
@@ -706,8 +705,8 @@ class ProgramDela
 
 // izjemni dogodki
         foreach ($this->getIzjemni() as $numObject => $object) {
-            if ($deep) {
-                $object->preracunaj(!$deep);
+            if ($smer == \Max\Consts::DOWN) {
+                $object->preracunaj(\Max\Consts::DOWN);
             }
             $this->stNekomerc+=$object->getPonoviDoma();
             $this->stIzvOstalihNek+=$object->getPonoviDoma();
