@@ -22,6 +22,16 @@ class ProgramPonovitevPremiere
      */
     private $dokument;
 
+    public function preracunaj($deep = false)
+    {
+        parent::preracunaj($deep);
+        if ($deep) {
+            if ($this->getDokument()) {
+                $this->getDokument()->preracunaj(!$deep);
+            }
+        }
+    }
+
     public function validate($mode = 'update')
     {
         if ($this->getDokument()) {
@@ -32,8 +42,7 @@ class ProgramPonovitevPremiere
                 $obstaja = $this->getDokument()
                         ->getPonovitvePremiere()
                         ->exists(function($key, $ponovitvePremiere) use(&$id) {
-                    return ($ponovitvePremiere->getUprizoritev() == $this->getUprizoritev())
-                            && ($ponovitvePremiere->getId()!== $id);     //vrne true, če obstaja drug program pon. prem. z isto uprizoritvijo
+                    return ($ponovitvePremiere->getUprizoritev() == $this->getUprizoritev()) && ($ponovitvePremiere->getId() !== $id);     //vrne true, če obstaja drug program pon. prem. z isto uprizoritvijo
                 });
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000450);
             }

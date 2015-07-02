@@ -57,4 +57,36 @@ class ProgramiGostovanje
         return $qb;
     }
 
+        /**
+     * 
+     * @param type $object  entiteta
+     * @param type $params
+     */
+    public function create($object, $params = null)
+    {
+
+        //$$ verjetno potrebna še kontrola, če dokument obstaja
+        if ($object->getDokument()) {
+            $object->getDokument()->getGostovanja()->add($object);
+        }
+
+        // preračunamo vrednosti, v globino
+        $object->preracunaj(TRUE);
+
+        parent::create($object, $params);
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function update($object, $params = null)
+    {
+        // preračunamo vrednosti, v globino
+        $object->preracunaj(TRUE);
+
+        parent::update($object, $params);
+    }
+
 }

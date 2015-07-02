@@ -139,6 +139,16 @@ class ProgramFestival
      */
     private $stTujihSelektorjev;
 
+    public function preracunaj($deep = false)
+    {
+        parent::preracunaj($deep);
+        if ($deep) {
+            if ($this->getProgramDela()) {
+                $this->getProgramDela()->preracunaj(!$deep);
+            }
+        }
+    }
+
     public function validate($mode = 'update')
     {
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program festival", 1000461);
