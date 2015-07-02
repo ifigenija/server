@@ -27,7 +27,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="entiteta.sifra", description="entiteta.sifra")
+     * @Max\I18n(label="entiteta.sifra", description="entiteta.d.sifra")
      * @Max\Ui(type="sifra",ident=true )
      * @var string     
      */
@@ -43,21 +43,21 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="date", nullable=false)
-     * @Max\I18n(label="entiteta.zacetek", description="entiteta.zacetek")
+     * @Max\I18n(label="entiteta.zacetek", description="entiteta.d.zacetek")
      * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=false)
-     * @Max\I18n(label="entiteta.konec", description="entiteta.konec")
+     * @Max\I18n(label="entiteta.konec", description="entiteta.d.konec")
      * @var string
      */
     private $konec;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
-     * @Max\I18n(label="programDela.potrjenProgram", description="programDela.potrjenProgram")
+     * @Max\I18n(label="programDela.potrjenProgram", description="programDela.d.potrjenProgram")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -178,28 +178,28 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="programDela.vrPS1", description="programDela.vrPS1")   
+     * @Max\I18n(label="programDela.vrPS1", description="programDela.d.vrPS1")   
      * @var double
      */
     private $vrPS1;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="programDela.vrPS1Do", description="programDela.vrPS1Do")   
+     * @Max\I18n(label="programDela.vrPS1Do", description="programDela.d.vrPS1Do")   
      * @var double
      */
     private $vrPS1Do;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="programDela.vrPS1Mat", description="programDela.vrPS1Mat")   
+     * @Max\I18n(label="programDela.vrPS1Mat", description="programDela.d.vrPS1Mat")   
      * @var double
      */
     private $vrPS1Mat;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="programDela.vrPS1GostovSZ", description="programDela.vrPS1GostovSZ")   
+     * @Max\I18n(label="programDela.vrPS1GostovSZ", description="programDela.d.vrPS1GostovSZ")   
      * @var double
      */
     private $vrPS1GostovSZ;
@@ -310,28 +310,28 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="programDela.avgObiskPrired", description="programDela.avgObiskPrired")   
+     * @Max\I18n(label="programDela.avgObiskPrired", description="programDela.d.avgObiskPrired")   
      * @var double
      */
     private $avgObiskPrired;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="programDela.avgZasedDvoran", description="programDela.avgZasedDvoran")   
+     * @Max\I18n(label="programDela.avgZasedDvoran", description="programDela.d.avgZasedDvoran")   
      * @var double
      */
     private $avgZasedDvoran;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="programDela.avgCenaVstopnice", description="programDela.avgCenaVstopnice")   
+     * @Max\I18n(label="programDela.avgCenaVstopnice", description="programDela.d.avgCenaVstopnice")   
      * @var double
      */
     private $avgCenaVstopnice;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stProdVstopnic", description="programDela.stProdVstopnic")
+     * @Max\I18n(label="programDela.stProdVstopnic", description="programDela.d.stProdVstopnic")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -339,7 +339,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stKoprodukcij", description="programDela.stKoprodukcij")
+     * @Max\I18n(label="programDela.stKoprodukcij", description="programDela.d.stKoprodukcij")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -347,7 +347,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stKoprodukcijInt", description="programDela.stKoprodukcijInt")
+     * @Max\I18n(label="programDela.stKoprodukcijInt", description="programDela.d.stKoprodukcijInt")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -355,7 +355,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stKoprodukcijNVO", description="programDela.stKoprodukcijNVO")
+     * @Max\I18n(label="programDela.stKoprodukcijNVO", description="programDela.d.stKoprodukcijNVO")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -363,7 +363,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stZaposlenih", description="programDela.stZaposlenih")
+     * @Max\I18n(label="programDela.stZaposlenih", description="programDela.d.stZaposlenih")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -371,7 +371,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stZaposIgralcev", description="programDela.stZaposIgralcev")
+     * @Max\I18n(label="programDela.stZaposIgralcev", description="programDela.d.stZaposIgralcev")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -410,14 +410,14 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="programDela.sredstvaInt", description="programDela.sredstvaInt")   
+     * @Max\I18n(label="programDela.sredstvaInt", description="programDela.d.sredstvaInt")   
      * @var double
      */
     private $sredstvaInt;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="programDela.sredstvaAvt", description="programDela.sredstvaAvt")   
+     * @Max\I18n(label="programDela.sredstvaAvt", description="programDela.d.sredstvaAvt")   
      * @var double
      */
     private $sredstvaAvt;
