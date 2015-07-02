@@ -141,20 +141,7 @@ class ProgramFestival
 
     public function preracunaj($smer = false)
     {
-        parent::preracunaj($smer);
-        if ($smer == \Max\Consts::UP) {
-            if ($this->getProgramDela()) {
-                $this->getProgramDela()->preracunaj(\Max\Consts::UP);
-            }
-        }
-    }
-
-    public function validate($mode = 'update')
-    {
-        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program festival", 1000461);
-        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program festival", 1000462);
-
-        // neaktualna polja, ki jih tudi v formi ni:
+                // neaktualna polja, ki jih tudi v formi ni:
         $this->setAvtorskiHonorarji(0);
         $this->setObiskGost(0);
         $this->setObiskInt(0);
@@ -169,6 +156,19 @@ class ProgramFestival
         $this->setTantieme(0);
         $this->setUtemeljitev("");
         $this->setVlozekGostitelja(0);
+
+        parent::preracunaj($smer);
+        if ($smer == \Max\Consts::UP) {
+            if ($this->getProgramDela()) {
+                $this->getProgramDela()->preracunaj(\Max\Consts::UP);
+            }
+        }
+    }
+
+    public function validate($mode = 'update')
+    {
+        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program festival", 1000461);
+        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program festival", 1000462);
 
         parent::validate();
     }

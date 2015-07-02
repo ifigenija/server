@@ -24,6 +24,9 @@ class ProgramPonovitevPrejsnjih
 
     public function preracunaj($smer = false)
     {
+        $this->setNaziv("");        // dobimo iz uprizoritve
+        $this->setPonoviInt(0);
+        $this->setObiskInt(0);
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
@@ -48,9 +51,6 @@ class ProgramPonovitevPrejsnjih
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000460);
             }
         }
-        $this->setNaziv("");        // dobimo iz uprizoritve
-        $this->setPonoviInt(0);
-        $this->setObiskInt(0);
 
         parent::validate();
     }

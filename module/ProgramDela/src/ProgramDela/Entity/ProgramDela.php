@@ -656,27 +656,26 @@ class ProgramDela
             $this->stObiskNekomGostInt +=$object->getObiskInt();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
 
-// $$ glede na to, ali je mednarodno gostovanje za premiero, ki bo letos, ali iz prejšnjih sezon
+            // $$ glede na to, ali je mednarodno gostovanje za premiero, ki bo letos, ali iz prejšnjih sezon
             $idUpr          = $object->getUprizoritev();
             $obstajaPonPrem = false;  //init
             if (!empty($idUpr)) {
                 $obstajaPonPrem = $this->getPonovitvePremiere()
                         ->exists(function($key, $ponovitvePrem) use(&$idUpr) {
-                    return ($ponovitvePrem->getUprizoritev() == $idUpr);
-//vrne true, če obstaja ponovitev premiere z isto uprizoritvijo
+                    return ($ponovitvePrem->getUprizoritev() == $idUpr); //vrne true, če obstaja ponovitev premiere z isto uprizoritvijo
                 });
             }
             if ($obstajaPonPrem) {
                 $this->stIzvPonPrem+=$object->getPonoviInt();
             } else {
-// če ni uprizoritev iz ponovitve (letošnje) premiere je najverjetneje  iz ponovitve premiere prejšnjih sezon
+                // če ni uprizoritev iz ponovitve (letošnje) premiere je najverjetneje  iz ponovitve premiere prejšnjih sezon
                 $this->stIzvPrej+=$object->getPonoviInt();
             }
             $this->prerSredstva($object);
             $this->prerStKopr($object);
         }
 
-// festivali
+        // festivali
         foreach ($this->getProgramiFestival() as $numObject => $object) {
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
@@ -690,7 +689,7 @@ class ProgramDela
             $this->prerStKopr($object);
         }
 
-// razno
+        // razno
         foreach ($this->getProgramiRazno() as $numObject => $object) {
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);

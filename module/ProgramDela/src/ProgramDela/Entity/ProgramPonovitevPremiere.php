@@ -24,6 +24,16 @@ class ProgramPonovitevPremiere
 
     public function preracunaj($smer = false)
     {
+        // neaktualna polja, ki jih tudi v formi ni:
+        $this->setStZaposlenih(0);
+        $this->setStDrugih(0);
+        $this->setStHonorarnih(0);
+        $this->setStHonorarnihIgr(0);
+        $this->setStHonorarnihIgrTujJZ(0);
+        $this->setPonoviInt(0);
+        $this->setObiskInt(0);
+        $this->setNaziv("");        // dobimo iz uprizoritve
+
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
             if ($this->getDokument()) {
@@ -47,15 +57,6 @@ class ProgramPonovitevPremiere
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000450);
             }
         }
-        // neaktualna polja, ki jih tudi v formi ni:
-        $this->setStZaposlenih(0);
-        $this->setStDrugih(0);
-        $this->setStHonorarnih(0);
-        $this->setStHonorarnihIgr(0);
-        $this->setStHonorarnihIgrTujJZ(0);
-        $this->setPonoviInt(0);
-        $this->setObiskInt(0);
-        $this->setNaziv("");        // dobimo iz uprizoritve
 
         parent::validate();
     }
