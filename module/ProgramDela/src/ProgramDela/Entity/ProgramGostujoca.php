@@ -22,6 +22,16 @@ class ProgramGostujoca
      */
     private $dokument;
 
+    public function preracunaj($deep = false)
+    {
+        parent::preracunaj($deep);
+        if ($deep) {
+            if ($this->getDokument()) {
+                $this->getDokument()->preracunaj(!$deep);
+            }
+        }
+    }
+
     public function validate($mode = 'update')
     {
         if ($this->getDokument()) {

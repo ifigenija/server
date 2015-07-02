@@ -57,19 +57,38 @@ class ProgramiPremiere
         return $qb;
     }
 
-//    public function create($object, $params = null)
-//    {
-//        $this->validateProgramDela($object);
-//
-//        parent::create($object, $params);
-//    }
-//
-//    public function update($object)
-//    {
-//        $this->validateProgramDela($object);
-//        parent::update($object);
-//    }
-//
+    /**
+     * 
+     * @param type $object  entiteta
+     * @param type $params
+     */
+    public function create($object, $params = null)
+    {
+
+        //$$ verjetno potrebna še kontrola, če dokument obstaja
+        if ($object->getDokument()) {
+            $object->getDokument()->getPremiere()->add($object);
+        }
+
+        // preračunamo vrednosti, v globino
+        $object->preracunaj(TRUE);
+
+        parent::create($object, $params);
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function update($object, $params = null)
+    {
+        // preračunamo vrednosti, v globino
+        $object->preracunaj(TRUE);
+
+        parent::update($object, $params);
+    }
+
 //    private function validateProgramDela(\ProgramDela\Entity\ProgramPremiera $object)
 //    {
 //        if ($object->getDokument()) {
@@ -79,5 +98,4 @@ class ProgramiPremiere
 //            $programdela->validate();
 //        }
 //    }
-
 }
