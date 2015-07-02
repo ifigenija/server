@@ -139,12 +139,12 @@ class ProgramFestival
      */
     private $stTujihSelektorjev;
 
-    public function preracunaj($deep = false)
+    public function preracunaj($smer = false)
     {
-        parent::preracunaj($deep);
-        if ($deep) {
+        parent::preracunaj($smer);
+        if ($smer == \Max\Consts::UP) {
             if ($this->getProgramDela()) {
-                $this->getProgramDela()->preracunaj(!$deep);
+                $this->getProgramDela()->preracunaj(\Max\Consts::UP);
             }
         }
     }

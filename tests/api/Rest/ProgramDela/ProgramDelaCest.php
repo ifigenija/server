@@ -441,7 +441,7 @@ class ProgramDelaCest
             'ponoviInt'          => 9,
             'stZaposlenih'       => 1,
             'stDrugih'           => 1,
-            'utemeljitev'        => 'zz',
+            'utemeljitev'        => 'pon prej 1',
             'vlozekKoproducenta' => 1.23,
             'vlozekGostitelja'   => 1.23,
             'uprizoritev'        => $this->lookUprizoritev4['id'],
@@ -450,7 +450,7 @@ class ProgramDelaCest
         ];
         $this->objProgramPonovitevPrejsnjih1 = $ent                                 = $I->successfullyCreate($this->programPonovitevPrejsnjihUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['utemeljitev'], 'zz');
+        $I->assertEquals($ent['utemeljitev'], 'pon prej 1');
 
         //izjemni 
         $data                     = [
@@ -1480,9 +1480,9 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(28, $entR['stHonorarnihIgr'], "");
         $I->assertGreaterThanOrEqual(20, $entR['stHonorarnihIgrTujJZ'], "");
         $I->assertGreaterThanOrEqual(420.88, $entR['sredstvaAvt'], "");
-        $I->assertGreaterThanOrEqual(109.98, $entR['sredstvaInt'], "");
+        $I->assertGreaterThanOrEqual(109.98, $entR['sredstvaInt'], "mednarodni viri");
         $I->assertEquals(3, $entR['stKoprodukcij'], "");
-        $I->assertEquals(2, $entR['stKoprodukcijInt'], "");
+        $I->assertEquals(2, $entR['stKoprodukcijInt'], "število mednarodnih koprodukcij");
         $I->assertEquals(1, $entR['stKoprodukcijNVO'], "");
     }
 
@@ -1501,7 +1501,7 @@ class ProgramDelaCest
             'lastnaSredstva'       => 11,
             'avtorskiHonorarji'    => 4.23,
             'tantieme'             => 5.23,
-        'drugiViri'            => 1.23,
+            'drugiViri'            => 1.23,
             'opredelitevDrugiViri' => "zz",
 //            'vlozekGostitelja'     => 1.23,
             'vlozekKoproducenta'   => 1.23,
@@ -1535,7 +1535,7 @@ class ProgramDelaCest
 
 
         //ponovitev prejšnjih sezon 
-        $data                                = [
+        $data = [
             'celotnaVrednost'    => 1.23,
             'zaproseno'          => 1.23,
             'lastnaSredstva'     => 1.23,
@@ -1561,16 +1561,62 @@ class ProgramDelaCest
             'dokument'           => $this->obj2['id'],
         ];
         // pri create bi moral preračunati kazalnike tudi v programu dela
-        $ent                                 = $I->successfullyCreate($this->programPonovitevPrejsnjihUrl, $data);
+        $ent  = $I->successfullyCreate($this->programPonovitevPrejsnjihUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
         // ali so kazalniki pravilno preračunani?
         $entR = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         codecept_debug($ent);
-
         $I->assertNotEmpty($entR['id']);
         $I->assertGreaterThanOrEqual(5, $entR['stPremier'], "št. premier");     // ena premiera bi morala biti sedaj več
         $I->assertGreaterThanOrEqual(4, $entR['stPonPrej'], "št. ponovitev prejšnjih sezon"); // ena ponovitev prejšnjih več
+    }
+
+    /**
+     *  kreiramo druge vire za več enot programa
+     * 
+     * 
+     * @param ApiTester $I
+     */
+    public function createDrugeVireZaPreracunKazalnikov(ApiTester $I)
+    {
+        $data = [
+            'znesek'        => 20.0,
+            'opis'          => "dv 20",
+            'enotaPrograma' => $this->objProgramPremiera1['id'],
+            'mednarodni'    => TRUE,
+        ];
+        $ent  = $I->successfullyCreate($this->drugiVirUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // ali so kazalniki pravilno preračunani?
+        $entR = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $I->assertNotEmpty($entR['id']);
+        $I->assertGreaterThanOrEqual(129.98, $entR['sredstvaInt'], "mednarodni viri");     // za 20 € več
+    }
+
+    /**
+     *  kreiramo Koprodukcije za več enot programa
+     * 
+     * 
+     * @param ApiTester $I
+     */
+    public function createKoprodukcijeZaPreracunKazalnikov(ApiTester $I)
+    {
+        $data = [
+            'odstotekFinanciranja' => 5,
+            'zaprosenProcent'      => 5,
+            'enotaPrograma'        => $this->objProgramPonovitevPrejsnjih1['id'],
+            'koproducent'          => $this->lookProdukcijskaHisa4['id'],
+        ];
+
+        $ent = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // ali so kazalniki pravilno preračunani?
+        $entR = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $I->assertNotEmpty($entR['id']);
+        $I->assertEquals(3, $entR['stKoprodukcijInt'], "število mednarodnih koprodukcij");      // se poveča za 1
     }
 
 }

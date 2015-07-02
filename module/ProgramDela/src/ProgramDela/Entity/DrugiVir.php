@@ -54,6 +54,15 @@ class DrugiVir
      */
     protected $enotaPrograma;
 
+    public function preracunaj($smer = false)
+    {
+        if ($smer == \Max\Consts::UP) {
+            if ($this->getEnotaPrograma()) {
+                $this->getEnotaPrograma()->preracunaj(\Max\Consts::UP);
+            }
+        }
+    }
+
     public function validate($mode = 'update')
     {
         $this->expect($this->getEnotaPrograma(), 'Ni enote programa za ta vir', 1000481);
