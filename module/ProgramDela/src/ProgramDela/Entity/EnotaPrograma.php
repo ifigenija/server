@@ -281,6 +281,7 @@ class EnotaPrograma
     public function __construct()
     {
         $this->drugiViri = new ArrayCollection();
+        $this->koprodukcije = new ArrayCollection();
     }
 
     public function preracunaj($smer = false)
