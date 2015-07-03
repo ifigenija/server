@@ -54,7 +54,7 @@ class UprizoritevRpcService
         $option  = $optionR->findOneByName("application.tenant.maticnopodjetje");
         $sifra   = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
 
-        $phisaR         = $em->getRepository('Produkcija\Entity\ProdukcijskaHisa');
+        $phisaR         = $em->getRepository('ProgramDela\Entity\ProdukcijskaHisa');
         $phisa          = $phisaR->findOneBySifra($sifra);       // lastno gledališče
         // seštejemo vrednosti iz stroškom uprizoritve
         $stroski        = $uprizoritev->getStroski();
@@ -106,7 +106,7 @@ class UprizoritevRpcService
 
         // če koprodukcija še ne obstaja, jo kreiramo
         if ($matkoprColl->isEmpty()) {
-            $kopr = new \Produkcija\Entity\ProdukcijaDelitev();
+            $kopr = new \ProgramDela\Entity\ProdukcijaDelitev();
             $em->persist($kopr);
         } else {
             $kopr = $matkoprColl->get(0);

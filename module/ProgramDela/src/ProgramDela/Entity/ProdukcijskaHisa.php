@@ -1,13 +1,13 @@
 <?php
 
-namespace Produkcija\Entity;
+namespace ProgramDela\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity(repositoryClass="Produkcija\Repository\ProdukcijskeHise")
+ * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProdukcijskeHise")
  * @Max\Lookup(ident="sifra",label="popa.naziv",search={"popa.naziv","popa.sifra"},)   
  * @Max\I18n(label="Produkcijska hiša",plural="Produkcijske hiše")
  * @Max\Id(prefix="0025")
@@ -54,7 +54,7 @@ class ProdukcijskaHisa
     private $popa;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\ProdukcijaDelitev", mappedBy="koproducent")
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProdukcijaDelitev", mappedBy="koproducent")
      * @var <Koprodukcije>
      */
     private $koprodukcije;

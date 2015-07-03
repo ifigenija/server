@@ -83,7 +83,7 @@ class EnotaPrograma
     private $drugiViri;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\ProdukcijaDelitev", mappedBy="enotaPrograma", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProdukcijaDelitev", mappedBy="enotaPrograma", orphanRemoval=true)
      * @var <Koprodukcije>
      */
     private $koprodukcije;

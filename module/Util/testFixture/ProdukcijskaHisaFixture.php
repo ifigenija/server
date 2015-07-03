@@ -39,7 +39,7 @@ class ProdukcijskaHisaFixture
     public function populateProdukcijskaHisa($manager, $v)
     {
 
-        $rep = $manager->getRepository('Produkcija\Entity\ProdukcijskaHisa');
+        $rep = $manager->getRepository('ProgramDela\Entity\ProdukcijskaHisa');
 //            'status' => 'zz',
 //            'popa'   => $this->lookPopa1['id'],
 //        
@@ -47,7 +47,7 @@ class ProdukcijskaHisaFixture
 
         $o = $rep->findOneBySifra(trim($v[0]));
         if (!$o) {
-            $o = new \Produkcija\Entity\ProdukcijskaHisa();
+            $o = new \ProgramDela\Entity\ProdukcijskaHisa();
             $o->setSifra(trim($v[0]));
             $manager->persist($o);
         }

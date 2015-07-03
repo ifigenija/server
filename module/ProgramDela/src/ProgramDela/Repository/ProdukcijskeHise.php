@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace Produkcija\Repository;
+namespace ProgramDela\Repository;
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Tools\Pagination\Paginator;

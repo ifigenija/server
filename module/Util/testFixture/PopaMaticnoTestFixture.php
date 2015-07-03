@@ -34,7 +34,7 @@ class PopaMaticnoTestFixture
     {
 
         $rep    = $manager->getRepository('App\Entity\Popa');
-        $phisaR = $manager->getRepository('Produkcija\Entity\ProdukcijskaHisa');
+        $phisaR = $manager->getRepository('ProgramDela\Entity\ProdukcijskaHisa');
 
         $drzavaR = $manager->getRepository('App\Entity\Drzava');
         $drzava  = $drzavaR->findOneBySifra('SI');
@@ -62,7 +62,7 @@ class PopaMaticnoTestFixture
             // zapišemo matično podjetje v ProdukcijskaHisa, če še ne obstaja
             $phisa = $phisaR->findOneByPopa($popa);
             if (!$phisa) {
-                $phisa = new \Produkcija\Entity\ProdukcijskaHisa();
+                $phisa = new \ProgramDela\Entity\ProdukcijskaHisa();
                 $phisa->setPopa($popa);
                 $manager->persist($phisa);
 

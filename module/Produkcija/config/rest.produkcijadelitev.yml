@@ -1,7 +1,7 @@
 ## YAML Template.
 ---
 type: rest
-entityClass: Produkcija\Entity\ProdukcijaDelitev
+entityClass: ProgramDela\Entity\ProdukcijaDelitev
 forms:
     default: 
         elements:

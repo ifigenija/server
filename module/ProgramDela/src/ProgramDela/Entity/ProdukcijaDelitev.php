@@ -1,6 +1,6 @@
 <?php
 
-namespace Produkcija\Entity;
+namespace ProgramDela\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Max\Functions;
 
 /**
- * @ORM\Entity(repositoryClass="Produkcija\Repository\ProdukcijaDelitve")
+ * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProdukcijaDelitve")
  * @Max\I18n(label="Delitev produkcije",plural="Delitev produkcij")
  * @Max\Id(prefix="0017")
  */
@@ -77,11 +77,11 @@ class ProdukcijaDelitev
     protected $enotaPrograma;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ProdukcijskaHisa", inversedBy="koprodukcije")
+     * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProdukcijskaHisa", inversedBy="koprodukcije")
      * @ORM\JoinColumn(name="koproducent_id", referencedColumnName="id", nullable=false)
      * @Max\I18n(label="prodel.koproducent",  description="prodel.koproducent")
      * @Max\Ui(type="toone", required=true)
-     * @var \Produkcija\Entity\ProdukcijskaHisa
+     * @var \ProgramDela\Entity\ProdukcijskaHisa
      */
     private $koproducent;
 
@@ -220,7 +220,7 @@ class ProdukcijaDelitev
         return $this;
     }
 
-    public function setKoproducent(\Produkcija\Entity\ProdukcijskaHisa $koproducent)
+    public function setKoproducent(\ProgramDela\Entity\ProdukcijskaHisa $koproducent)
     {
         $this->koproducent = $koproducent;
         return $this;

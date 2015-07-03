@@ -266,10 +266,10 @@ class Popa
     private $nvo = false;
 
     /**
-     * @ORM\OneToOne(targetEntity="Produkcija\Entity\ProdukcijskaHisa", mappedBy="popa")
+     * @ORM\OneToOne(targetEntity="ProgramDela\Entity\ProdukcijskaHisa", mappedBy="popa")
      * @Max\I18n(label="popa.producent",  description="popa.d.producent")
      * @Max\Ui(type="toone")
-     * @var \Produkcija\Entity\ProdukcijskaHisa
+     * @var \ProgramDela\Entity\ProdukcijskaHisa
      */
     private $producent;
 
@@ -609,7 +609,7 @@ class Popa
         return $this;
     }
 
-    public function setProducent(\Produkcija\Entity\ProdukcijskaHisa $producent)
+    public function setProducent(\ProgramDela\Entity\ProdukcijskaHisa $producent)
     {
         $this->producent = $producent;
         return $this;

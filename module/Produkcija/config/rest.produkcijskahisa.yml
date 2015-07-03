@@ -1,7 +1,7 @@
 ## YAML Template.
 ---
 type: rest
-entityClass: Produkcija\Entity\ProdukcijskaHisa
+entityClass: ProgramDela\Entity\ProdukcijskaHisa
 forms:
     default: 
         elements:
@@ -27,7 +27,7 @@ lists:
 #                  type: tomany
 #                  options:
 #                      label: Koprodukcije
-#                      targetEntity: Produkcija\Entity\ProdukcijaDelitev
+#                      targetEntity: ProgramDela\Entity\ProdukcijaDelitev
 #                      required: false
         hydrator:
             - exclude: []

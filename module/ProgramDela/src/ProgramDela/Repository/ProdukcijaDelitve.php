@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace Produkcija\Repository;
+namespace ProgramDela\Repository;
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -102,7 +102,7 @@ class ProdukcijaDelitve
         parent::update($object, $params);
     }
 
-    private function nastaviFlagMaticna(\Produkcija\Entity\ProdukcijaDelitev $object)
+    private function nastaviFlagMaticna(\ProgramDela\Entity\ProdukcijaDelitev $object)
     {
         $em      = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         $optionR = $em->getRepository('App\Entity\Option');
