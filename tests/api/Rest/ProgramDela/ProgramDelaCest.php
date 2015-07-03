@@ -188,6 +188,8 @@ class ProgramDelaCest
             'stZaposlenih'     => 7,
             'stZaposIgralcev'  => 7,
             'avgStNastopovIgr' => 7.89,
+            'vrPS1Mat'         => 7.89,
+            'vrPS1GostovSZ' => 7.89,
 //            'stHonorarnih'         => 7,
 //            'stHonorarnihIgr'      => 7,
 //            'stHonorarnihIgrTujJZ' => 7,
@@ -205,6 +207,8 @@ class ProgramDelaCest
             'konec'          => '2017-02-01T00:00:00+0100',
             'potrjenProgram' => TRUE,
             'sezona'         => null,
+            'vrPS1Mat'         => 7.89,
+            'vrPS1GostovSZ' => 7.89,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -250,6 +254,8 @@ class ProgramDelaCest
         $I->assertEquals($ent['stZaposlenih'], 7);
         $I->assertEquals($ent['stZaposIgralcev'], 7);
         $I->assertEquals($ent['avgStNastopovIgr'], 7.89);
+        $I->assertEquals($ent['vrPS1Mat'], 7.89);
+        $I->assertEquals($ent['vrPS1GostovSZ'], 7.89);
 //        $I->assertEquals($ent['stHonorarnih'], 7);
 //        $I->assertEquals($ent['stHonorarnihIgr'], 7);
 //        $I->assertEquals($ent['stHonorarnihIgrTujJZ'], 7);

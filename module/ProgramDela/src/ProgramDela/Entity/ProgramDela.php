@@ -496,8 +496,8 @@ class ProgramDela
 //                   - stPonPrejVelikihKopr
 //                   - vrPS1
 //                   - vrPS1Do  
-//            - vrPS1Mat    $$ ni vrednosti v enoti programa
-//            - vrPS1GostovSZ       $$ ni vrednosti v enoti programa
+//            - vrPS1Mat    $$ ni vrednosti v enoti programa  -> dam zaenkrat v formo
+//            - vrPS1GostovSZ       $$ ni vrednosti v enoti programa -> dam zaenkrat v formo
 //                   - stNekomerc
 //                   - stIzvPonPrem
 //                   - stIzvPrej
@@ -526,8 +526,8 @@ class ProgramDela
         $this->stPonPrejVelikihKopr = 0;  //init
         $this->vrPS1                = 0;  //init
         $this->vrPS1Do              = 0;  //init
-        $this->vrPS1Mat             = 0;  //init
-        $this->vrPS1GostovSZ        = 0;  //init
+//        $this->vrPS1Mat             = 0;  //init
+//        $this->vrPS1GostovSZ        = 0;  //init
         $this->stNekomerc           = 0;  //init
         $this->stIzvPonPrem         = 0;  //init
         $this->stIzvPrej            = 0;  //init

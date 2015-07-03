@@ -29,8 +29,8 @@ forms:
 #            - stPonPrejVelikihKopr
 #            - vrPS1
 #            - vrPS1Do
-#            - vrPS1Mat
-#            - vrPS1GostovSZ
+            - vrPS1Mat
+            - vrPS1GostovSZ
 #            - stNekomerc
 #            - stIzvPonPrem
 #            - stIzvPrej
