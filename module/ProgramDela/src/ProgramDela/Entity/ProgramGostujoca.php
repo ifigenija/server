@@ -25,6 +25,8 @@ class ProgramGostujoca
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki tudi v formi niso:
+        $this->setCelotnaVrednostMat(0);
+        $this->setCelotnaVrednostGostovSZ(0);
         $this->setAvtorskiHonorarji(0);
         $this->setTantieme(0);
         $this->setObiskGost(0);
