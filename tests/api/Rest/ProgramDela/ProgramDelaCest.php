@@ -189,7 +189,7 @@ class ProgramDelaCest
             'stZaposIgralcev'  => 7,
             'avgStNastopovIgr' => 7.89,
             'vrPS1Mat'         => 7.89,
-            'vrPS1GostovSZ' => 7.89,
+            'vrPS1GostovSZ'    => 7.89,
 //            'stHonorarnih'         => 7,
 //            'stHonorarnihIgr'      => 7,
 //            'stHonorarnihIgrTujJZ' => 7,
@@ -207,8 +207,8 @@ class ProgramDelaCest
             'konec'          => '2017-02-01T00:00:00+0100',
             'potrjenProgram' => TRUE,
             'sezona'         => null,
-            'vrPS1Mat'         => 7.89,
-            'vrPS1GostovSZ' => 7.89,
+            'vrPS1Mat'       => 7.89,
+            'vrPS1GostovSZ'  => 7.89,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -1454,8 +1454,7 @@ class ProgramDelaCest
     {
 
         $ent = $I->successfullyGet($this->restUrl, $this->obj2['id']);
-        codecept_debug($ent);
-
+//        codecept_debug($ent);
         // pri update preračuna kazalnike
         $entR = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($entR['id']);
@@ -1623,6 +1622,22 @@ class ProgramDelaCest
         $entR = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         $I->assertNotEmpty($entR['id']);
         $I->assertEquals(3, $entR['stKoprodukcijInt'], "število mednarodnih koprodukcij");      // se poveča za 1
+    }
+
+    /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateSKoncomPredZacetkom(ApiTester $I)
+    {
+        $ent                  = $this->obj2;
+        $ent['zacetek'] = '2015-02-01T00:00:00+0100';
+        $ent['konec']         = '2010-02-01T00:00:00+0100';             // prej kot začetek
+
+        $resp = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000500, $resp[0]['code']);
     }
 
 }

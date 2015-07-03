@@ -725,7 +725,7 @@ class ProgramDela
 
     public function validate($mode = 'update')
     {
-        
+        $this->expect($this->zacetek < $this->konec, "Datum konca mora biti za datumom začetka", 1000500);
     }
 
     public function getId()
