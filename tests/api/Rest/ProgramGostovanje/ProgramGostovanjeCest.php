@@ -92,6 +92,7 @@ class ProgramGostovanjeCest
             'obiskInt'           => 9,
             'zaproseno'          => 9.12,
             'celotnaVrednost'    => 9.12,
+            'nasDelez'    => 9.12,
             'transportniStroski' => 9.12,
             'avtorskiHonorarji'  => 9.12,
             'odkup'              => 9.12,
@@ -116,6 +117,7 @@ class ProgramGostovanjeCest
             'obiskInt'           => 3,
             'zaproseno'          => 3.12,
             'celotnaVrednost'    => 3.12,
+            'nasDelez'    => 3.12,
             'transportniStroski' => 3.12,
             'avtorskiHonorarji'  => 3.12,
             'odkup'              => 3.12,
@@ -165,6 +167,7 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['obiskInt'], 9);
         $I->assertEquals($ent['zaproseno'], 9.12);
         $I->assertEquals($ent['celotnaVrednost'], 9.12);
+        $I->assertEquals($ent['nasDelez'], 9.12);
         $I->assertEquals($ent['transportniStroski'], 9.12);
         $I->assertEquals($ent['avtorskiHonorarji'], 9.12);
         $I->assertEquals($ent['odkup'], 2.34);

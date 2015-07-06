@@ -106,6 +106,7 @@ class ProgramPonovitevPremiereCest
     {
         $data       = [
             'celotnaVrednost'         => 1.23,
+            'nasDelez'         => 1.23,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
             'zaproseno'               => 1.23,
@@ -137,6 +138,7 @@ class ProgramPonovitevPremiereCest
         // kreiramo še en zapis
         $data       = [
             'celotnaVrednost'         => 4.56,
+            'nasDelez'         => 4.56,
             'celotnaVrednostMat'      => 2.23,
             'celotnaVrednostGostovSZ' => 1.11,
             'zaproseno'               => 4.56,
@@ -194,6 +196,7 @@ class ProgramPonovitevPremiereCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['celotnaVrednost'], 1.23);
+        $I->assertEquals($ent['nasDelez'], 1.23);
         $I->assertEquals($ent['celotnaVrednostMat'], 1.02);
         $I->assertEquals($ent['celotnaVrednostGostovSZ'], 0.11);
         $I->assertEquals($ent['zaproseno'], 2.34);

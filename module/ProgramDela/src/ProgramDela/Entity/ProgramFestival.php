@@ -141,7 +141,7 @@ class ProgramFestival
 
     public function preracunaj($smer = false)
     {
-                // neaktualna polja, ki jih tudi v formi ni:
+        // neaktualna polja, ki jih tudi v formi ni:
         $this->setCelotnaVrednostMat(0);
         $this->setCelotnaVrednostGostovSZ(0);
         $this->setAvtorskiHonorarji(0);
@@ -152,7 +152,8 @@ class ProgramFestival
         $this->setPonoviGost(0);
         $this->setPonoviInt(0);
         $this->setPonoviZamejo(0);
-        $this->setStDrugih(0);
+        $this->setStZaposUmet(0);
+        $this->setStZaposDrug(0);
         $this->setStHonorarnihIgr(0);
         $this->setStHonorarnihIgrTujJZ(0);
         $this->setTantieme(0);

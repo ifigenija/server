@@ -132,7 +132,7 @@ class ProdukcijaDelitev
         $odstFin = \Max\Functions::procRoundS($this->getOdstotekFinanciranja());
         $this->expect(($odstFin >= 0) && ($odstFin <= 100), 'Odstotek financiranja mora biti med 0 in 100', 1000412);
         $zaprosenProc = \Max\Functions::procRoundS($this->getZaprosenProcent());
-        $this->expect(($zaprosenProc >= 0) && ($zaprosenProc <= 100), 'Zaprošen odstotek mora biti med 0 in 100', 1000413);
+        $this->expect(($zaprosenProc >= 0) && ($zaprosenProc <= 100), 'Zaprošen odstotek mora biti med 0 in 100, je pa'.$zaprosenProc, 1000413);
 
         //$$ kontrole za vsoto procentov
         // za isto enoto programa je lahko le 1 delitev z isto produkcijsko hišo     

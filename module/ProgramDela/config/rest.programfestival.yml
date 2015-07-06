@@ -28,6 +28,7 @@ forms:
             - stHonorarnih
             - zaproseno
             - celotnaVrednost
+            - nasDelez
             - lastnaSredstva
 #            - drugiViri
             - opredelitevDrugiViri

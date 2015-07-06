@@ -91,6 +91,8 @@ class PogodbaFixture
         return [
 
             ['0001', 10, 30, 10, true, "Pogodba o sodelovanju", 'Oseba-0001', null, null, 400, null, null, 400, true],
+            ['0002', 11, 31, 11, true, "Pogodba za vlogo Helena", 'Oseba-0006', null, null, 401, null, null, 401, false],
+            ['0003', 12, 32, 12, true, "Pogodba za lektoriranje", 'Oseba-0013', null, null, 402, null, null, 402, false],
         ];
     }
 

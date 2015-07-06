@@ -32,12 +32,12 @@ use ApiTester;
 class TipProgramskeEnoteCest
 {
 
-    private $restUrl             = '/rest/tipprogramskeenote';
+    private $restUrl                      = '/rest/tipprogramskeenote';
     private $obj1;
     private $obj2;
-    private $programPremieraUrl  = '/rest/programpremiera';
+    private $programPremieraUrl           = '/rest/programpremiera';
     private $programPonovitevPrejsnjihUrl = '/rest/programponovitevprejsnjih';
-    private $programPonovitevPremiereUrl = '/rest/programponovitevpremiere';
+    private $programPonovitevPremiereUrl  = '/rest/programponovitevpremiere';
     private $objProgramPremiera1;
     private $objProgramPonovitevPrejsnjih1;
     private $objProgramPonovitevPremiere1;
@@ -170,79 +170,102 @@ class TipProgramskeEnoteCest
     {
         //premiera
         $data                      = [
-            'celotnaVrednost'    => 1.23,
-            'zaproseno'          => 1.23,
-            'lastnaSredstva'     => 1.23,
-            'avtorskiHonorarji'  => 1.23,
-            'tantieme'           => 1.23,
-            'drugiViri'          => 1.23,
-            'drugiJavni'         => 1.23,
-            'obiskDoma'          => 1,
-            'obiskGost'          => 1,
-            'obiskZamejo'        => 1,
-            'obiskInt'           => 1,
-            'ponoviDoma'         => 1,
-            'ponoviZamejo'       => 1,
-            'ponoviGost'         => 1,
-            'ponoviInt'          => 1,
-            'utemeljitev'        => 'zz',
-            'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => $this->obj2['id'],
-            'dokument'           => null,
+            'celotnaVrednost'         => 1.23,
+            'nasDelez'                => 1.23,
+            'zaproseno'               => 1.23,
+            'celotnaVrednostGostovSZ' => 0.2,
+            'lastnaSredstva'          => 1.23,
+            'avtorskiHonorarji'       => 1.23,
+            'tantieme'                => 1.23,
+            'drugiViri'               => 1.23,
+            'drugiJavni'              => 1.23,
+            'vlozekKoproducenta'      => 1.23,
+            'obiskDoma'               => 1,
+            'obiskGost'               => 1,
+            'obiskZamejo'             => 1,
+            'obiskInt'                => 1,
+            'ponoviDoma'              => 1,
+            'ponoviZamejo'            => 1,
+            'ponoviGost'              => 1,
+            'ponoviInt'               => 1,
+            'stZaposUmet'             => 1,
+            'stZaposDrug'             => 1,
+            'utemeljitev'             => 'zz',
+            'uprizoritev'             => NULL,
+            'tipProgramskeEnote'      => $this->obj2['id'],
+            'dokument'                => null,
         ];
         $this->objProgramPremiera1 = $ent                       = $I->successfullyCreate($this->programPremieraUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['utemeljitev'], 'zz');
 
         //ponovitev prejšnjih sezon
-        $data                       = [
-            'celotnaVrednost'    => 1.23,
-            'zaproseno'          => 1.23,
-            'lastnaSredstva'     => 1.23,
-            'avtorskiHonorarji'  => 1.23,
-            'tantieme'           => 1.23,
-            'drugiViri'          => 1.23,
-            'drugiJavni'         => 1.23,
-            'obiskDoma'          => 1,
-            'obiskGost'          => 1,
-            'obiskZamejo'        => 1,
-            'obiskInt'           => 1,
-            'ponoviDoma'         => 1,
-            'ponoviZamejo'       => 1,
-            'ponoviGost'         => 1,
-            'ponoviInt'          => 1,
-            'utemeljitev'        => 'zz',
-            'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => $this->obj2['id'],
-            'dokument'           => null,
+        $data                                 = [
+            'celotnaVrednost'         => 1.23,
+            'nasDelez'                => 1.23,
+            'celotnaVrednostMat'      => 1.02,
+            'celotnaVrednostGostovSZ' => 0.11,
+            'zaproseno'               => 1.23,
+            'lastnaSredstva'          => 1.23,
+            'avtorskiHonorarji'       => 1.23,
+            'tantieme'                => 1.23,
+//            'drugiViri'            => 1.23,
+            'vlozekGostitelja'        => 1.23,
+            'vlozekKoproducenta'      => 1.23,
+            'drugiJavni'              => 1.23,
+            'obiskDoma'               => 1,
+            'obiskGost'               => 1,
+            'obiskZamejo'             => 1,
+            'obiskInt'                => 1,
+            'ponoviDoma'              => 1,
+            'ponoviZamejo'            => 1,
+            'ponoviGost'              => 1,
+//            'ponoviInt'            => 1,
+            'utemeljitev'             => 'zz',
+            'uprizoritev'             => NULL,
+            'tipProgramskeEnote'      => $this->obj2['id'],
+            'dokument'                => null,
+            'sort'                    => 1,
+            'stZaposUmet'             => 1,
+            'stZaposDrug'             => 1,
+            'stHonorarnih'            => 1,
+            'stHonorarnihIgr'         => 1,
+            'stHonorarnihIgrTujJZ'    => 1,
         ];
-        $this->objProgramPonovitevPrejsnjih11 = $ent                        = $I->successfullyCreate($this->programPonovitevPrejsnjihUrl, $data);
+        $this->objProgramPonovitevPrejsnjih11 = $ent                                  = $I->successfullyCreate($this->programPonovitevPrejsnjihUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['utemeljitev'], 'zz');
 
         //ponovitev premiere
-        $data                       = [
-            'celotnaVrednost'    => 1.23,
-            'zaproseno'          => 1.23,
-            'lastnaSredstva'     => 1.23,
-            'avtorskiHonorarji'  => 1.23,
-            'tantieme'           => 1.23,
-            'drugiViri'          => 1.23,
-            'drugiJavni'         => 1.23,
-            'obiskDoma'          => 1,
-            'obiskGost'          => 1,
-            'obiskZamejo'        => 1,
-            'obiskInt'           => 1,
-            'ponoviDoma'         => 1,
-            'ponoviZamejo'       => 1,
-            'ponoviGost'         => 1,
-            'ponoviInt'          => 1,
-            'utemeljitev'        => 'zz',
-            'uprizoritev'        => NULL,
-            'tipProgramskeEnote' => $this->obj2['id'],
-            'dokument'           => null,
+        $data = [
+            'celotnaVrednost'         => 1.23,
+            'nasDelez'                => 1.23,
+            'celotnaVrednostMat'      => 1.02,
+            'celotnaVrednostGostovSZ' => 0.11,
+            'zaproseno'               => 1.23,
+            'lastnaSredstva'          => 1.23,
+            'avtorskiHonorarji'       => 1.23,
+            'tantieme'                => 1.23,
+            'drugiViri'               => 1.23,
+            'vlozekGostitelja'        => 1.23,
+            'vlozekKoproducenta'      => 1.23,
+            'drugiJavni'              => 1.23,
+            'obiskDoma'               => 1,
+            'obiskGost'               => 1,
+            'obiskZamejo'             => 1,
+            'obiskInt'                => 1,
+            'ponoviDoma'              => 1,
+            'ponoviZamejo'            => 1,
+            'ponoviGost'              => 1,
+            'ponoviInt'               => 1,
+            'utemeljitev'             => 'zz',
+            'uprizoritev'             => NULL,
+            'tipProgramskeEnote'      => $this->obj2['id'],
+            'dokument'                => null,
+            'sort'                    => 1,
         ];
-        $this->objProgramPonovitevPremiere1 = $ent                        = $I->successfullyCreate($this->programPonovitevPremiereUrl, $data);
+
+        $this->objProgramPonovitevPremiere1 = $ent                                = $I->successfullyCreate($this->programPonovitevPremiereUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['utemeljitev'], 'zz');
     }
@@ -261,10 +284,10 @@ class TipProgramskeEnoteCest
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "enotePrograma", $this->objProgramPremiera1['id']);
         $I->assertGreaterThanOrEqual(1, count($resp));
- 
+
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "enotePrograma", $this->objProgramPonovitevPremiere1['id']);
         $I->assertGreaterThanOrEqual(1, count($resp));
- 
+
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "enotePrograma", $this->objProgramPonovitevPrejsnjih1['id']);
         $I->assertGreaterThanOrEqual(1, count($resp));
     }

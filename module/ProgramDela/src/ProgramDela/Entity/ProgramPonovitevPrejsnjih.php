@@ -24,7 +24,8 @@ class ProgramPonovitevPrejsnjih
 
     public function preracunaj($smer = false)
     {
-        $this->setNaziv("");        // dobimo iz uprizoritve
+        $this->setNaziv("");        // dobimo iz uprizoritve ?
+        $this->setStZaposlenih(0);
         $this->setPonoviInt(0);
         $this->setObiskInt(0);
 

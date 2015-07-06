@@ -27,6 +27,7 @@ class ProgramPremiera
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
+        $this->setStZaposlenih(0);
         $this->setCelotnaVrednostMat(0);
         $this->setCelotnaVrednostGostovSZ(0);
         $this->setObiskDoma(0);

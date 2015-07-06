@@ -107,6 +107,7 @@ class ProgramPremieraCest
     {
         $data       = [
             'celotnaVrednost'      => 1.23,
+            'nasDelez'      => 1.23,
             'zaproseno'            => 1.23,
             'lastnaSredstva'       => 1.23,
             'avtorskiHonorarji'    => 1.23,
@@ -129,8 +130,8 @@ class ProgramPremieraCest
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
             'dokument'             => null,
             'sort'                 => 1,
-            'stZaposlenih'         => 1,
-            'stDrugih'             => 1,
+            'stZaposUmet'         => 1,
+            'stZaposDrug'             => 1,
             'stHonorarnih'         => 1,
             'stHonorarnihIgr'      => 1,
             'stHonorarnihIgrTujJZ' => 1,
@@ -142,6 +143,7 @@ class ProgramPremieraCest
         // kreiramo še en zapis
         $data       = [
             'celotnaVrednost'      => 4.56,
+            'nasDelez'      => 4.56,
             'zaproseno'            => 4.56,
             'lastnaSredstva'       => 4.56,
             'avtorskiHonorarji'    => 4.56,
@@ -163,8 +165,8 @@ class ProgramPremieraCest
             'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
             'dokument'             => null,
             'sort'                 => 2,
-            'stZaposlenih'         => 2,
-            'stDrugih'             => 2,
+            'stZaposUmet'         => 2,
+            'stZaposDrug'             => 2,
             'stHonorarnih'         => 2,
             'stHonorarnihIgr'      => 2,
             'stHonorarnihIgrTujJZ' => 2,
@@ -202,6 +204,7 @@ class ProgramPremieraCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['celotnaVrednost'], 1.23);
+        $I->assertEquals($ent['nasDelez'], 1.23);
         $I->assertEquals($ent['zaproseno'], 2.34);
         $I->assertEquals($ent['lastnaSredstva'], 1.23);
         $I->assertEquals($ent['avtorskiHonorarji'], 1.23);
@@ -223,8 +226,8 @@ class ProgramPremieraCest
         $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
         $I->assertEquals($ent['dokument'], null);
         $I->assertEquals($ent['sort'], 1, "sort");
-        $I->assertEquals($ent['stZaposlenih'], 1);
-        $I->assertEquals($ent['stDrugih'], 1);
+        $I->assertEquals($ent['stZaposUmet'], 1);
+        $I->assertEquals($ent['stZaposDrug'], 1);
         $I->assertEquals($ent['stHonorarnih'], 1);
         $I->assertEquals($ent['stHonorarnihIgr'], 1);
         $I->assertEquals($ent['stHonorarnihIgrTujJZ'], 1);
@@ -328,7 +331,7 @@ class ProgramPremieraCest
     {
         $data                        = [
             'odstotekFinanciranja' => 40,
-            'delez'                => 100,
+            'delez'                => 2.6,
             'zaprosenProcent'      => 50,
             'zaproseno'            => 50,
             'enotaPrograma'        => $this->obj2['id'],
@@ -340,7 +343,7 @@ class ProgramPremieraCest
         // kreiramo še en zapis
         $data                        = [
             'odstotekFinanciranja' => 20,
-            'delez'                => 400,
+            'delez'                => 1.1,
             'zaprosenProcent'      => 10,
             'zaproseno'            => 20,
             'enotaPrograma'        => $this->obj2['id'],
