@@ -496,8 +496,8 @@ class ProgramDela
 //                   - stPonPrejVelikihKopr
 //                   - vrPS1
 //                   - vrPS1Do  
-//            - vrPS1Mat    $$ ni vrednosti v enoti programa
-//            - vrPS1GostovSZ       $$ ni vrednosti v enoti programa
+//            - vrPS1Mat    $$ ni vrednosti v enoti programa  -> dam zaenkrat v formo
+//            - vrPS1GostovSZ       $$ ni vrednosti v enoti programa -> dam zaenkrat v formo
 //                   - stNekomerc
 //                   - stIzvPonPrem
 //                   - stIzvPrej
@@ -556,7 +556,9 @@ class ProgramDela
         $stPonPrej       = $this->getPonovitvePrejsnjih()->count();        //$$ začasno
         $this->stPonPrej = $this->getPonovitvePrejsnjih()->count();
 
-        // premiere
+        /**
+         * premiere
+         */
         foreach ($this->getPremiere() as $numObject => $object) {
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
@@ -571,12 +573,16 @@ class ProgramDela
             $this->prerStKopr($object);
         }
 
-        // ponovitve premier
+        /**
+         * ponovitve premier
+         */
         foreach ($this->getPonovitvePremiere() as $numObject => $object) {
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
             }
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
+            $this->vrPS1Mat+= $object->getCelotnaVrednostMat();
+            $this->vrPS1GostovSZ+= $object->getCelotnaVrednostGostovSZ();
             $this->stNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
             $this->stIzvPonPrem+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
             $this->stGostovanjSlo +=$object->getPonoviGost();
@@ -590,12 +596,17 @@ class ProgramDela
             $this->prerStKopr($object);
         }
 
-// ponovitve prejšnjih sezon
+
+        /**
+         * ponovitve prejšnjih sezon
+         */
         foreach ($this->getPonovitvePrejsnjih() as $numObject => $object) {
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
             }
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
+            $this->vrPS1Mat+= $object->getCelotnaVrednostMat();
+            $this->vrPS1GostovSZ+= $object->getCelotnaVrednostGostovSZ();
             $this->stNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
             $this->stIzvPrej+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
             $this->stGostovanjSlo +=$object->getPonoviGost();
@@ -632,7 +643,9 @@ class ProgramDela
             $this->prerStKopr($object);
         }
 
-// gostujoče predstave
+        /**
+         * gostujoče predstave
+         */
         foreach ($this->getGostujoci() as $numObject => $object) {
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
@@ -645,7 +658,9 @@ class ProgramDela
             $this->prerStKopr($object);
         }
 
-// mednarodna gostovanja
+        /**
+         * mednarodna gostovanja
+         */
         foreach ($this->getGostovanja() as $numObject => $object) {
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
@@ -675,7 +690,9 @@ class ProgramDela
             $this->prerStKopr($object);
         }
 
-        // festivali
+        /**
+         * festivali
+         */
         foreach ($this->getProgramiFestival() as $numObject => $object) {
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
@@ -689,7 +706,9 @@ class ProgramDela
             $this->prerStKopr($object);
         }
 
-        // razno
+        /**
+         * razno
+         */
         foreach ($this->getProgramiRazno() as $numObject => $object) {
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
@@ -703,7 +722,9 @@ class ProgramDela
             $this->prerStKopr($object);
         }
 
-// izjemni dogodki
+        /**
+         * izjemni dogodki
+         */
         foreach ($this->getIzjemni() as $numObject => $object) {
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
@@ -725,7 +746,7 @@ class ProgramDela
 
     public function validate($mode = 'update')
     {
-        
+        $this->expect($this->zacetek <= $this->konec, "Datum konca mora biti za datumom začetka", 1000500);
     }
 
     public function getId()

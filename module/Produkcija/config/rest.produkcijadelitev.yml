@@ -1,13 +1,13 @@
 ## YAML Template.
 ---
 type: rest
-entityClass: Produkcija\Entity\ProdukcijaDelitev
+entityClass: ProgramDela\Entity\ProdukcijaDelitev
 forms:
     default: 
         elements:
 #            - id
-            - odstotekFinanciranja
-#            - delez        # se izračuna glede na odst.Fin
+#            - odstotekFinanciranja     # se izračuna glede na delez
+            - delez        
             - zaprosenProcent
 #            - zaproseno    # se izračuna glede na zapr.%
             - enotaPrograma

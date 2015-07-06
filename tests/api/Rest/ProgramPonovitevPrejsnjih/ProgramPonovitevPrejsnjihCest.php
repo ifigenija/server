@@ -105,7 +105,9 @@ class ProgramPonovitevPrejsnjihCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'celotnaVrednost'      => 1.23,
+            'celotnaVrednost'         => 1.23,
+            'celotnaVrednostMat'      => 1.02,
+            'celotnaVrednostGostovSZ' => 0.11,
             'zaproseno'            => 1.23,
             'lastnaSredstva'       => 1.23,
             'avtorskiHonorarji'    => 1.23,
@@ -139,7 +141,9 @@ class ProgramPonovitevPrejsnjihCest
 
         // kreiramo še en zapis
         $data       = [
-            'celotnaVrednost'      => 4.56,
+            'celotnaVrednost'         => 4.56,
+            'celotnaVrednostMat'      => 2.23,
+            'celotnaVrednostGostovSZ' => 1.11,
             'zaproseno'            => 4.56,
             'lastnaSredstva'       => 4.56,
             'avtorskiHonorarji'    => 4.56,
@@ -200,7 +204,9 @@ class ProgramPonovitevPrejsnjihCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['celotnaVrednost'], 1.23);
-        $I->assertEquals($ent['zaproseno'], 2.34);
+       $I->assertEquals($ent['celotnaVrednostMat'], 1.02);
+        $I->assertEquals($ent['celotnaVrednostGostovSZ'], 0.11);
+         $I->assertEquals($ent['zaproseno'], 2.34);
         $I->assertEquals($ent['lastnaSredstva'], 1.23);
         $I->assertEquals($ent['avtorskiHonorarji'], 1.23);
         $I->assertEquals($ent['tantieme'], 1.23);
@@ -211,11 +217,11 @@ class ProgramPonovitevPrejsnjihCest
         $I->assertEquals($ent['obiskDoma'], 1);
         $I->assertEquals($ent['obiskGost'], 1);
         $I->assertEquals($ent['obiskZamejo'], 1);
-        $I->assertEquals($ent['obiskInt'], 1);
+        $I->assertEquals($ent['obiskInt'], 0, "obisk Int");
         $I->assertEquals($ent['ponoviDoma'], 1);
         $I->assertEquals($ent['ponoviZamejo'], 1);
         $I->assertEquals($ent['ponoviGost'], 1);
-//        $I->assertEquals($ent['ponoviInt'], 1);
+        $I->assertEquals($ent['ponoviInt'], 0, "ponovi Int");
         $I->assertEquals($ent['utemeljitev'], 'zz');
         $I->assertEquals($ent['uprizoritev'], NULL);
         $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
@@ -326,9 +332,8 @@ class ProgramPonovitevPrejsnjihCest
     public function createVecKoprodukcij(ApiTester $I)
     {
         $data                        = [
-            'odstotekFinanciranja' => 40,
-            'delez'                => 100,
-            'zaprosenProcent'      => 50,
+           'delez'                => 1.12,
+             'zaprosenProcent'      => 50,
             'zaproseno'            => 50,
             'enotaPrograma'        => $this->obj2['id'],
             'koproducent'          => $this->lookProdukcijskaHisa1['id'],
@@ -338,9 +343,8 @@ class ProgramPonovitevPrejsnjihCest
 
         // kreiramo še en zapis
         $data                        = [
-            'odstotekFinanciranja' => 20,
-            'delez'                => 400,
-            'zaprosenProcent'      => 10,
+           'delez'                => 1.02,
+             'zaprosenProcent'      => 10,
             'zaproseno'            => 20,
             'enotaPrograma'        => $this->obj2['id'],
             'koproducent'          => $this->lookProdukcijskaHisa2['id'],

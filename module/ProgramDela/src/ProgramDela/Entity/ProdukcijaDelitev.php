@@ -1,6 +1,6 @@
 <?php
 
-namespace Produkcija\Entity;
+namespace ProgramDela\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Max\Functions;
 
 /**
- * @ORM\Entity(repositoryClass="Produkcija\Repository\ProdukcijaDelitve")
+ * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProdukcijaDelitve")
  * @Max\I18n(label="Delitev produkcije",plural="Delitev produkcij")
  * @Max\Id(prefix="0017")
  */
@@ -77,11 +77,11 @@ class ProdukcijaDelitev
     protected $enotaPrograma;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ProdukcijskaHisa", inversedBy="koprodukcije")
+     * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProdukcijskaHisa", inversedBy="koprodukcije")
      * @ORM\JoinColumn(name="koproducent_id", referencedColumnName="id", nullable=false)
      * @Max\I18n(label="prodel.koproducent",  description="prodel.koproducent")
      * @Max\Ui(type="toone", required=true)
-     * @var \Produkcija\Entity\ProdukcijskaHisa
+     * @var \ProgramDela\Entity\ProdukcijskaHisa
      */
     private $koproducent;
 
@@ -96,9 +96,11 @@ class ProdukcijaDelitev
     public function preracunaj($smer = false)
     {
         // izračunaj delež
-        $delez = $this->getEnotaPrograma()->getCelotnaVrednost() * $this->getOdstotekFinanciranja() / 100;
-        $delez = \Max\Functions::euroRound($delez);   //Zaokrožimo na 2 decimalki predno shranimo
-        $this->setDelez($delez);
+        $delez=$this->getDelez();
+        $celotnaVr=$this->getEnotaPrograma()->getCelotnaVrednost(); //$$ začasno
+        $odstFin=($delez!==0 ? 100 * $delez/ $this->getEnotaPrograma()->getCelotnaVrednost() : 0);
+        $odstFin= \Max\Functions::procRoundS($odstFin);   //Zaokrožimo na 2 decimalki predno shranimo
+        $this->setOdstotekFinanciranja($odstFin);
 
         // izračunaj zaprošen znesek
         $zaproseno = $delez * $this->getZaprosenProcent() / 100;
@@ -129,6 +131,8 @@ class ProdukcijaDelitev
         $this->expect($this->getEnotaPrograma(), 'Ni enote programa za to koprodukcijo', 1000410);
         $odstFin = \Max\Functions::procRoundS($this->getOdstotekFinanciranja());
         $this->expect(($odstFin >= 0) && ($odstFin <= 100), 'Odstotek financiranja mora biti med 0 in 100', 1000412);
+        $zaprosenProc = \Max\Functions::procRoundS($this->getZaprosenProcent());
+        $this->expect(($zaprosenProc >= 0) && ($zaprosenProc <= 100), 'Zaprošen odstotek mora biti med 0 in 100', 1000413);
 
         //$$ kontrole za vsoto procentov
         // za isto enoto programa je lahko le 1 delitev z isto produkcijsko hišo     
@@ -220,7 +224,7 @@ class ProdukcijaDelitev
         return $this;
     }
 
-    public function setKoproducent(\Produkcija\Entity\ProdukcijskaHisa $koproducent)
+    public function setKoproducent(\ProgramDela\Entity\ProdukcijskaHisa $koproducent)
     {
         $this->koproducent = $koproducent;
         return $this;

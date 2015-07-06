@@ -43,10 +43,23 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.celotnaVrednost", description="Celotna vrednost")   
+     * @Max\I18n(label="ep.celotnaVrednost", description="ep.d.celotnaVrednost")   
      * @var double
      */
     private $celotnaVrednost;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="ep.celotnaVrednostMat", description="ep.d.celotnaVrednostMat")   
+     * @var double
+     */
+    private $celotnaVrednostMat;
+    /**
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="ep.celotnaVrednostGostovSZ", description="ep.d.celotnaVrednostGostovSZ")   
+     * @var double
+     */
+    private $celotnaVrednostGostovSZ;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
@@ -83,7 +96,7 @@ class EnotaPrograma
     private $drugiViri;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\ProdukcijaDelitev", mappedBy="enotaPrograma", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProdukcijaDelitev", mappedBy="enotaPrograma", orphanRemoval=true)
      * @var <Koprodukcije>
      */
     private $koprodukcije;
@@ -281,6 +294,7 @@ class EnotaPrograma
     public function __construct()
     {
         $this->drugiViri = new ArrayCollection();
+        $this->koprodukcije = new ArrayCollection();
     }
 
     public function preracunaj($smer = false)
@@ -611,5 +625,27 @@ class EnotaPrograma
         $this->koprodukcije = $koprodukcije;
         return $this;
     }
+    public function getCelotnaVrednostMat()
+    {
+        return $this->celotnaVrednostMat;
+    }
+
+    public function getCelotnaVrednostGostovSZ()
+    {
+        return $this->celotnaVrednostGostovSZ;
+    }
+
+    public function setCelotnaVrednostMat($celotnaVrednostMat)
+    {
+        $this->celotnaVrednostMat = $celotnaVrednostMat;
+        return $this;
+    }
+
+    public function setCelotnaVrednostGostovSZ($celotnaVrednostGostovSZ)
+    {
+        $this->celotnaVrednostGostovSZ = $celotnaVrednostGostovSZ;
+        return $this;
+    }
+
 
 }

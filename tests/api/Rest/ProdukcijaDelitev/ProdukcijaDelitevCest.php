@@ -121,8 +121,8 @@ class ProdukcijaDelitevCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'odstotekFinanciranja' => 40,
-            'delez'                => 100,
+//            'odstotekFinanciranja' => 40,
+            'delez'                => 3500,
             'zaprosenProcent'      => 50,
             'zaproseno'            => 50,
             'enotaPrograma'        => $this->objProgramPremiera1['id'],
@@ -131,12 +131,12 @@ class ProdukcijaDelitevCest
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
 //        codecept_debug($ent);
-        $I->assertEquals($ent['odstotekFinanciranja'], 40);
+        $I->assertEquals($ent['delez'], 3500);
 
         // kreiram še en zapis
         $data       = [
-            'odstotekFinanciranja' => 20,
-            'delez'                => 200,
+//            'odstotekFinanciranja' => 20,
+            'delez'                => 3500,
             'zaprosenProcent'      => 50,
             'zaproseno'            => 100,
             'enotaPrograma'        => $this->objProgramPremiera2['id'],
@@ -145,7 +145,7 @@ class ProdukcijaDelitevCest
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
 //        codecept_debug($ent);
-        $I->assertEquals($ent['odstotekFinanciranja'], 20);
+        $I->assertEquals($ent['delez'], 3500);
     }
 
     /**
@@ -196,8 +196,8 @@ class ProdukcijaDelitevCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['odstotekFinanciranja'], 70);
-        $I->assertEquals($ent['delez'], 3500.00);           //$$ odvisno od  celotne vrednosti
+        $I->assertEquals($ent['delez'], 3500.00);           
+        $I->assertEquals($ent['odstotekFinanciranja'], 70); //$$ odvisno od  celotne vrednosti
         $I->assertEquals($ent['zaprosenProcent'], 50);
         $I->assertEquals($ent['zaproseno'], 1750.00);    //$$ odvisno od  celotne vrednosti
         $I->assertEquals($ent['enotaPrograma'], $this->objProgramPremiera1['id']);
@@ -254,19 +254,19 @@ class ProdukcijaDelitevCest
     public function updateZNapacnimiOdstotki(ApiTester $I)
     {
         $data                         = $this->obj2;
-        $data['odstotekFinanciranja'] = 100.01;
+        $data['zaprosenProcent'] = 100.01;
         $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
-        $I->assertEquals(1000412, $resp[0]['code']);
+        $I->assertEquals(1000413, $resp[0]['code']);
 
-        $data['odstotekFinanciranja'] = -0.01;
+        $data['zaprosenProcent'] = -0.01;
         $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
-        $I->assertEquals(1000412, $resp[0]['code']);
+        $I->assertEquals(1000413, $resp[0]['code']);
 
         // naslednji odstotki so ok, ker se prej zaokrožijo:
-        $data['odstotekFinanciranja'] = -0.0009;
+        $data['zaprosenProcent'] = -0.0009;
         $resp = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
 
-        $data['odstotekFinanciranja'] = 100.0001;
+        $data['zaprosenProcent'] = 100.0001;
         $resp = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
     }
 

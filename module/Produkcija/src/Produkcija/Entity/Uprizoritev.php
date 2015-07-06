@@ -277,10 +277,10 @@ class Uprizoritev
      * Producent bo predvidoma večinoma domača hiša 
      * $$ rb narediti default matična hiša
      * 
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ProdukcijskaHisa", inversedBy="uprizoritve")
+     * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProdukcijskaHisa", inversedBy="uprizoritve")
      * @Max\I18n(label="uprizoritev.producent",  description="uprizoritev.producent")
      * @Max\Ui(type="toone")
-     * @var \Produkcija\Entity\ProdukcijskaHisa
+     * @var \ProgramDela\Entity\ProdukcijskaHisa
      */
     private $producent;
 
@@ -658,7 +658,7 @@ class Uprizoritev
         return $this;
     }
 
-    public function setProducent(\Produkcija\Entity\ProdukcijskaHisa $producent)
+    public function setProducent(\ProgramDela\Entity\ProdukcijskaHisa $producent)
     {
         $this->producent = $producent;
         return $this;
