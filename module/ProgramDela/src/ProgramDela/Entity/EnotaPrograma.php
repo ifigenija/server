@@ -257,7 +257,7 @@ class EnotaPrograma
      * Naziv dogodka za izjemnidogodek.
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="entiteta.naziv", description="ep.d.naziv")
+     * @Max\I18n(label="entiteta.naziv", description="entiteta.d.naziv")
      * @var string
      */
     protected $naziv;

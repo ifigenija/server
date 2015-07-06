@@ -24,6 +24,11 @@ forms:
             - oseba
 #            - pogodba    #$$ začasno damo pogodbo gor
             - pomembna
+        hydrator:
+            lookups:
+                - oseba
+                - funkcija
+                - pogodba
             
 lists:
     default: 

@@ -18,7 +18,7 @@ class ProgramFestival
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="programiFestival")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
      * @Max\I18n(label="festival.programDela", description="festival.programDela")
-     * @Max\Ui(type="hidden")
+     * @Max\Ui(type="hiddenid")
      * @var \ProgramDela\Entity\ProgramDela
      */
     private $programDela;

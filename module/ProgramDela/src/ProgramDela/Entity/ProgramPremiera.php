@@ -19,7 +19,7 @@ class ProgramPremiera
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
      * @Max\I18n(label="programPremiera.dokument",  description="Dokument")
      * @Max\I18n(label="programPremiera.dokument",  description="programPremiera.d.dokument")
-     * @Max\Ui(type="hidden")
+     * @Max\Ui(type="hiddenid")
      * @var \ProgramDela\Entity\ProgramDela
      */
     private $dokument;
