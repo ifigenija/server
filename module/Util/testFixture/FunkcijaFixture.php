@@ -87,6 +87,7 @@ class FunkcijaFixture
             ['Tehnični vodja', '', 'tehnik', true,'', TRUE, 8, true, true, 'Uprizoritev-0002', null, 'Nerazvrščeno',],
             ['Lučni mojster', '', 'tehnik', false,'', TRUE, 3, true, true, 'Uprizoritev-0002', null,'Nerazvrščeno' ,],
             ['Helena', 'glavna vloga', 'igralec', false,'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null, 'Igralec ali animator',],
+            ['Lektoriranje', '', 'umetnik', false,'', TRUE, 22, true, true, 'Uprizoritev-0002', null, 'Lektor',],
         ];
     }
 

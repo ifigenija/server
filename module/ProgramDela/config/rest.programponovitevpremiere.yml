@@ -7,6 +7,7 @@ forms:
         elements:
 #            - id
             - celotnaVrednost
+            - nasDelez
             - celotnaVrednostMat
             - celotnaVrednostGostovSZ
             - zaproseno
@@ -31,8 +32,9 @@ forms:
             - dokument
             - sort
 #            - stZaposlenih
-#            - stDrugih
-#            - stHonorarnih
+#            - stZaposUmet
+#            - stZaposDrug
+            - stHonorarnih
 #            - stHonorarnihIgr
 #            - stHonorarnihIgrTujJZ
 #            - koprodukcije

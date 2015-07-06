@@ -50,10 +50,18 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="ep.nasDelez", description="ep.d.nasDelez")   
+     * @var double
+     */
+    private $nasDelez;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.celotnaVrednostMat", description="ep.d.celotnaVrednostMat")   
      * @var double
      */
     private $celotnaVrednostMat;
+
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.celotnaVrednostGostovSZ", description="ep.d.celotnaVrednostGostovSZ")   
@@ -132,7 +140,19 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $stZaposlenih;
+    private $stZaposlenih=0;
+
+    /**
+     * Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri uprizoritvi:
+     * 
+     * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij $$ 
+     * 
+     * @ORM\Column(type="integer", nullable=false, options={"default":0})
+     * @Max\I18n(label="ep.stZaposUmet", description="Število zaposlenih, ki sodelujejo pri izvedbi projekta")
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    private $stZaposUmet=0;
 
     /**
      * Št. drugih zaposlenih, ki sodelujejo pri uprizoritvi (brez upravno-administrativnih delavcev):
@@ -140,11 +160,11 @@ class EnotaPrograma
      * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
      * 
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="ep.stDrugih", description="ep.d.stDrugih")
+     * @Max\I18n(label="ep.stZaposDrug", description="ep.d.stZaposDrug")
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $stDrugih;
+    private $stZaposDrug=0;
 
     /**
      * Št. vseh, ki sodelujejo honorarno
@@ -156,7 +176,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stHonorarnih;
+    private $stHonorarnih=0;
 
     /**
      *  št. honorarnih igralcev
@@ -168,7 +188,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stHonorarnihIgr;
+    private $stHonorarnihIgr=0;
 
     /**
      *  št. honorarnih igralcev, zaposlenih v drugih javnih zavodih
@@ -180,7 +200,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stHonorarnihIgrTujJZ;
+    private $stHonorarnihIgrTujJZ=0;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -188,7 +208,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $obiskDoma;
+    private $obiskDoma=0;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -196,7 +216,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $obiskGost;
+    private $obiskGost=0;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -204,7 +224,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $obiskZamejo;
+    private $obiskZamejo=0;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -212,7 +232,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $obiskInt;
+    private $obiskInt=0;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":" 0"})
@@ -220,7 +240,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $ponoviDoma;
+    private $ponoviDoma=0;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -228,7 +248,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $ponoviZamejo;
+    private $ponoviZamejo=0;
 
     /**
      * število gostovanj po Sloveniji
@@ -293,15 +313,15 @@ class EnotaPrograma
 
     public function __construct()
     {
-        $this->drugiViri = new ArrayCollection();
+        $this->drugiViri    = new ArrayCollection();
         $this->koprodukcije = new ArrayCollection();
     }
 
     public function preracunaj($smer = false)
     {
+        
     }
 
-    
     public function validate($mode = 'update')
     {
         
@@ -315,6 +335,21 @@ class EnotaPrograma
     public function getCelotnaVrednost()
     {
         return $this->celotnaVrednost;
+    }
+
+    public function getNasDelez()
+    {
+        return $this->nasDelez;
+    }
+
+    public function getCelotnaVrednostMat()
+    {
+        return $this->celotnaVrednostMat;
+    }
+
+    public function getCelotnaVrednostGostovSZ()
+    {
+        return $this->celotnaVrednostGostovSZ;
     }
 
     public function getZaproseno()
@@ -342,6 +377,11 @@ class EnotaPrograma
         return $this->drugiViri;
     }
 
+    public function getKoprodukcije()
+    {
+        return $this->koprodukcije;
+    }
+
     public function getVlozekGostitelja()
     {
         return $this->vlozekGostitelja;
@@ -362,9 +402,14 @@ class EnotaPrograma
         return $this->stZaposlenih;
     }
 
-    public function getStDrugih()
+    public function getStZaposUmet()
     {
-        return $this->stDrugih;
+        return $this->stZaposUmet;
+    }
+
+    public function getStZaposDrug()
+    {
+        return $this->stZaposDrug;
     }
 
     public function getStHonorarnih()
@@ -459,6 +504,24 @@ class EnotaPrograma
         return $this;
     }
 
+    public function setNasDelez($nasDelez)
+    {
+        $this->nasDelez = $nasDelez;
+        return $this;
+    }
+
+    public function setCelotnaVrednostMat($celotnaVrednostMat)
+    {
+        $this->celotnaVrednostMat = $celotnaVrednostMat;
+        return $this;
+    }
+
+    public function setCelotnaVrednostGostovSZ($celotnaVrednostGostovSZ)
+    {
+        $this->celotnaVrednostGostovSZ = $celotnaVrednostGostovSZ;
+        return $this;
+    }
+
     public function setZaproseno($zaproseno)
     {
         $this->zaproseno = $zaproseno;
@@ -489,6 +552,12 @@ class EnotaPrograma
         return $this;
     }
 
+    public function setKoprodukcije($koprodukcije)
+    {
+        $this->koprodukcije = $koprodukcije;
+        return $this;
+    }
+
     public function setVlozekGostitelja($vlozekGostitelja)
     {
         $this->vlozekGostitelja = $vlozekGostitelja;
@@ -513,9 +582,15 @@ class EnotaPrograma
         return $this;
     }
 
-    public function setStDrugih($stDrugih)
+    public function setStZaposUmet($stZaposUmet)
     {
-        $this->stDrugih = $stDrugih;
+        $this->stZaposUmet = $stZaposUmet;
+        return $this;
+    }
+
+    public function setStZaposDrug($stZaposDrug)
+    {
+        $this->stZaposDrug = $stZaposDrug;
         return $this;
     }
 
@@ -614,38 +689,5 @@ class EnotaPrograma
         $this->sort = $sort;
         return $this;
     }
-
-    public function getKoprodukcije()
-    {
-        return $this->koprodukcije;
-    }
-
-    public function setKoprodukcije($koprodukcije)
-    {
-        $this->koprodukcije = $koprodukcije;
-        return $this;
-    }
-    public function getCelotnaVrednostMat()
-    {
-        return $this->celotnaVrednostMat;
-    }
-
-    public function getCelotnaVrednostGostovSZ()
-    {
-        return $this->celotnaVrednostGostovSZ;
-    }
-
-    public function setCelotnaVrednostMat($celotnaVrednostMat)
-    {
-        $this->celotnaVrednostMat = $celotnaVrednostMat;
-        return $this;
-    }
-
-    public function setCelotnaVrednostGostovSZ($celotnaVrednostGostovSZ)
-    {
-        $this->celotnaVrednostGostovSZ = $celotnaVrednostGostovSZ;
-        return $this;
-    }
-
 
 }

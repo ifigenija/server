@@ -69,7 +69,7 @@ class TipFunkcijeFixture
             ['Oblikovalec svetlobe', 'Oblikovalci svetlobe', TRUE,  'Oblikovalka svetlobe', 'tehnik',],
             ['Koreograf', 'Koreografi', TRUE,  'Koreografinja', 'umetnik',],
             ['Dramaturg', 'Dramaturgi', TRUE,  'Dramaturginja', 'umetnik',],
-            ['Lektorj', 'Lektorji', TRUE,  'Lektorica', 'umetnik',],
+            ['Lektor', 'Lektorji', TRUE,  'Lektorica', 'umetnik',],
             ['Prevajalec', 'Prevajalci', TRUE,  'Prevajalka', 'umetnik',],
             ['Oblikovalec videa', 'Oblikovalci videa', TRUE,  'Oblikovalka videa', 'umetnik',],
             ['Intermedijski ustvarjalec', 'Intermedijski ustvarjalci', TRUE,  'Intermedijska ustvarjalka', 'umetnik',],

@@ -57,6 +57,7 @@ class ProgramGostujocaCest
     {
         $data       = [
             'celotnaVrednost' => 1.23,
+            'nasDelez' => 1.23,
             'zaproseno'       => 1.23,
             'lastnaSredstva'  => 1.23,
 //            'avtorskiHonorarji'  => 1.23,
@@ -87,6 +88,7 @@ class ProgramGostujocaCest
         // kreiramo še en zapis
         $data       = [
             'celotnaVrednost' => 4.56,
+            'nasDelez' => 4.56,
             'zaproseno'       => 4.56,
             'lastnaSredstva'  => 4.56,
 //            'avtorskiHonorarji'  => 4.56,
@@ -142,6 +144,7 @@ class ProgramGostujocaCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['celotnaVrednost'], 1.23);
+        $I->assertEquals($ent['nasDelez'], 1.23);
         $I->assertEquals($ent['zaproseno'], 2.34);
         $I->assertEquals($ent['lastnaSredstva'], 1.23);
 //        $I->assertEquals($ent['avtorskiHonorarji'], 1.23);

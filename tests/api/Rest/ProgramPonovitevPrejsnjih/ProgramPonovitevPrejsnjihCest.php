@@ -106,6 +106,7 @@ class ProgramPonovitevPrejsnjihCest
     {
         $data       = [
             'celotnaVrednost'         => 1.23,
+            'nasDelez'         => 1.23,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
             'zaproseno'            => 1.23,
@@ -129,8 +130,8 @@ class ProgramPonovitevPrejsnjihCest
             'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
             'dokument'             => null,
             'sort'                 => 1,
-            'stZaposlenih'         => 1,
-            'stDrugih'             => 1,
+            'stZaposUmet'         => 1,
+            'stZaposDrug'             => 1,
             'stHonorarnih'         => 1,
             'stHonorarnihIgr'      => 1,
             'stHonorarnihIgrTujJZ' => 1,
@@ -142,6 +143,7 @@ class ProgramPonovitevPrejsnjihCest
         // kreiramo še en zapis
         $data       = [
             'celotnaVrednost'         => 4.56,
+            'nasDelez'         => 4.56,
             'celotnaVrednostMat'      => 2.23,
             'celotnaVrednostGostovSZ' => 1.11,
             'zaproseno'            => 4.56,
@@ -165,8 +167,8 @@ class ProgramPonovitevPrejsnjihCest
             'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
             'dokument'             => null,
             'sort'                 => 2,
-            'stZaposlenih'         => 2,
-            'stDrugih'             => 2,
+            'stZaposUmet'         => 2,
+            'stZaposDrug'             => 2,
             'stHonorarnih'         => 2,
             'stHonorarnihIgr'      => 2,
             'stHonorarnihIgrTujJZ' => 2,
@@ -204,6 +206,7 @@ class ProgramPonovitevPrejsnjihCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['celotnaVrednost'], 1.23);
+        $I->assertEquals($ent['nasDelez'], 1.23);
        $I->assertEquals($ent['celotnaVrednostMat'], 1.02);
         $I->assertEquals($ent['celotnaVrednostGostovSZ'], 0.11);
          $I->assertEquals($ent['zaproseno'], 2.34);
@@ -228,8 +231,8 @@ class ProgramPonovitevPrejsnjihCest
         $I->assertEquals($ent['sort'], 1, 'sort');
 
         $I->assertEquals($ent['dokument'], null);
-        $I->assertEquals($ent['stZaposlenih'], 1);
-        $I->assertEquals($ent['stDrugih'], 1);
+        $I->assertEquals($ent['stZaposUmet'], 1);
+        $I->assertEquals($ent['stZaposDrug'], 1);
         $I->assertEquals($ent['stHonorarnih'], 1);
         $I->assertEquals($ent['stHonorarnihIgr'], 1);
         $I->assertEquals($ent['stHonorarnihIgrTujJZ'], 1);

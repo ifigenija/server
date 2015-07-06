@@ -77,6 +77,9 @@ class AlternacijaFixture
             $getref = $this->getReference($v[6]);
             $o->setPogodba($getref);
         }
+        $o->setImaPogodbo($v[7]);
+        $o->setPomembna($v[8]);
+        $o->setSort($v[9]);
 
 
         $referenca = 'Alternacija-' . $v[0];
@@ -87,12 +90,14 @@ class AlternacijaFixture
     public function getData()
     {
         return [
-            ['0001', false, 'Funkcija-Tezej', null, 'Oseba-0009', null, "Pogodba-0001",],
-            ['0002', false, 'Funkcija-Režija', null, 'Oseba-0010', null, null,],
-            ['0003', false, 'Funkcija-Inšpicient', null, 'Oseba-0003', null, null,],
-            ['0004', false, 'Funkcija-Tehnični vodja', null, 'Oseba-0002', null, null,],
-            ['0005', false, 'Funkcija-Lučni mojster', null, 'Oseba-0012', null, null,],
-            ['0006', false, 'Funkcija-Helena', null, 'Oseba-0010', null, null,],
+            ['0001', false, 'Funkcija-Tezej', null, 'Oseba-0009', null, "Pogodba-0001",TRUE,True,3,],
+            ['0002', true, 'Funkcija-Režija', null, 'Oseba-0010', null, null,false,false,8,],
+            ['0003', TRUE, 'Funkcija-Inšpicient', null, 'Oseba-0003', null, null,false,false,2,],
+            ['0004', TRUE, 'Funkcija-Tehnični vodja', null, 'Oseba-0002', null, null,false,false,26,],
+            ['0005', TRUE, 'Funkcija-Lučni mojster', null, 'Oseba-0012', null, null,false,false,7,],
+            ['0006', false, 'Funkcija-Helena', null, 'Oseba-0006', null, "Pogodba-0002",true,true,1,],
+            ['0007', true, 'Funkcija-Hipolita', null, 'Oseba-0008', null, NULL,false,true,14,],
+            ['0008', false, 'Funkcija-Lektoriranje', null, 'Oseba-0013', null, "Pogodba-0003",true,true,12,],
         ];
     }
 

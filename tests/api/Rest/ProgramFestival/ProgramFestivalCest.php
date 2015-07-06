@@ -79,6 +79,7 @@ class ProgramFestivalCest
             'stHonorarnih'            => 1,
             'zaproseno'               => 1.23,
             'celotnaVrednost'         => 1.23,
+            'nasDelez'         => 1.23,
             'lastnaSredstva'          => 1.23,
 //            'drugiViri'               => 1.23,
             'vlozekKoproducenta'      => 1.23,
@@ -113,6 +114,7 @@ class ProgramFestivalCest
             'stHonorarnih'            => 2,
             'zaproseno'               => 2.23,
             'celotnaVrednost'         => 2.23,
+            'nasDelez'         => 2.23,
             'lastnaSredstva'          => 2.23,
 //            'drugiViri'               => 2.23,
             'vlozekKoproducenta'      => 2.23,
@@ -173,6 +175,7 @@ class ProgramFestivalCest
         $I->assertEquals($ent['stHonorarnih'], 1);
         $I->assertEquals($ent['zaproseno'], 2.34);
         $I->assertEquals($ent['celotnaVrednost'], 1.23);
+        $I->assertEquals($ent['nasDelez'], 1.23);
         $I->assertEquals($ent['lastnaSredstva'], 1.23);
 //        $I->assertEquals($ent['drugiViri'], 1.23);
         $I->assertEquals($ent['vlozekKoproducenta'], 1.23);

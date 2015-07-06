@@ -7,6 +7,7 @@ forms:
         elements:
 #            - id
             - celotnaVrednost
+            - nasDelez
             - zaproseno
             - lastnaSredstva
 #            - avtorskiHonorarji
@@ -29,7 +30,8 @@ forms:
             - dokument
             - sort
 #            - stZaposlenih
-#            - stDrugih
+#            - stZaposUmet
+#            - stZaposDrug
 #            - stHonorarnih
 #            - stHonorarnihIgr
 #            - stHonorarnihIgrTujJZ
