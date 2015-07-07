@@ -25,11 +25,9 @@ class FunkcijaFixture
         $manager->flush();
     }
 
-    // $$ morda bo še potrebno implementirati funkcijo getOrder()
-
     public function getDependencies()
     {
-        return array('TestFixture\UprizoritevFixture'); // fixture classes fixture is dependent on , $$ rb dodaj še AlternacijaFixture, ko bo
+        return array('TestFixture\UprizoritevFixture'); // fixture classes fixture is dependent on , 
     }
 
     /**

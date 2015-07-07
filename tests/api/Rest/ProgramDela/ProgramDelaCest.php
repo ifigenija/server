@@ -176,7 +176,7 @@ class ProgramDelaCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'sifra'            => 'ZZ',
+//            'sifra'            => 'ZZ',
             'naziv'            => 'zz',
             'zacetek'          => '2015-02-01T00:00:00+0100',
             'konec'            => '2016-02-01T00:00:00+0100',
@@ -197,11 +197,11 @@ class ProgramDelaCest
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['sifra'], 'ZZ');
+        $I->assertEquals($ent['naziv'], 'zz');
 
 // kreiramo še en zapis
         $data       = [
-            'sifra'          => 'BB',
+//            'sifra'          => 'BB',
             'naziv'          => 'bb',
             'zacetek'        => '2016-02-01T00:00:00+0100',
             'konec'          => '2017-02-01T00:00:00+0100',
@@ -212,7 +212,7 @@ class ProgramDelaCest
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['sifra'], 'BB');
+        $I->assertEquals($ent['naziv'], 'bb');
     }
 
     /**
@@ -242,7 +242,9 @@ class ProgramDelaCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['sifra'], 'ZZ');
+        codecept_debug($ent['sifra']);
+        $I->assertEquals(substr($ent['sifra'],0,2), '20', "šifra 0-1");
+        $I->assertEquals(substr($ent['sifra'],4,1), '-', "šifra 0-1");
         $I->assertEquals($ent['naziv'], 'yy');
         $I->assertEquals($ent['zacetek'], '2015-02-01T00:00:00+0100');
         $I->assertEquals($ent['konec'], '2016-02-01T00:00:00+0100');

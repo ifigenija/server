@@ -18,8 +18,10 @@ class UprizoritevRpcService
 {
 
     /**
-     * Kreiranje nove koprodukcije za lastno gledališče za določeno uprizoritev
      * 
+     * Procedura ni več aktualna (obsolete)
+     * 
+     * Kreiranje nove koprodukcije za lastno gledališče za določeno uprizoritev
      * 
      * @param string $uprizoritevId
      * 

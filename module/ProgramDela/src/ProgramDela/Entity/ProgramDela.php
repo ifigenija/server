@@ -482,44 +482,13 @@ class ProgramDela
         $this->programiRazno      = new ArrayCollection();
     }
 
+    /**
+     * preračun kazalnikov
+     * 
+     * @param type $smer
+     */
     public function preracunaj($smer = false)
     {
-
-
-// preračun kazalnikov:
-//                   - stPremier
-//                   - stPonPrej
-//                   - stPonPrejVelikih
-//                   - stPonPrejMalih
-//                   - stPonPrejMalihKopr
-//                   - stPonPrejSredKopr
-//                   - stPonPrejVelikihKopr
-//                   - vrPS1
-//                   - vrPS1Do  
-//            - vrPS1Mat    $$ ni vrednosti v enoti programa  -> dam zaenkrat v formo
-//            - vrPS1GostovSZ       $$ ni vrednosti v enoti programa -> dam zaenkrat v formo
-//                   - stNekomerc
-//                   - stIzvPonPrem
-//                   - stIzvPrej
-//                   - stIzvGostuj
-//                   - stIzvOstalihNek
-//                   - stGostovanjSlo
-//                   - stGostovanjZam
-//                   - stGostovanjInt
-//                   - stObiskNekom
-//                   - stObiskNekomMat
-//                   - stObiskNekomGostSlo
-//                   - stObiskNekomGostZam
-//                   - stObiskNekomGostInt
-//                   - avgObiskPrired
-//                   - stKoprodukcij
-//                   - stKoprodukcijInt
-//                   - stKoprodukcijNVO
-//                   - stHonorarnih
-//                   - stHonorarnihIgr
-//                   - stHonorarnihIgrTujJZ
-//                   - sredstvaInt
-//                   - sredstvaAvt
         $this->stPonPrejMalih       = 0;  //init
         $this->stPonPrejMalihKopr   = 0;  //init
         $this->stPonPrejSredKopr    = 0;  //init

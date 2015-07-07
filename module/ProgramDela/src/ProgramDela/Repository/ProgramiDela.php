@@ -90,6 +90,12 @@ class ProgramiDela
         // zaenkrat ne računamo v globino (DOWN), ampak vedno le v smeri UP
         $object->preracunaj();
 
+        if (empty($object->getSifra())) {
+            $num = $this->getServiceLocator()->get('stevilcenje.generator');
+
+            $object->setSifra($num->generate('programdela', new \DateTime()));
+        }
+
         parent::create($object, $params);
     }
 

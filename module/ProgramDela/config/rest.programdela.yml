@@ -6,7 +6,9 @@ forms:
     default: 
         elements:
 #            - id
-            - sifra
+            - name: sifra
+              options:
+                  required: false
             - naziv
             - zacetek
             - konec

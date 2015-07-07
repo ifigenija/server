@@ -133,26 +133,22 @@ class EnotaPrograma
     /**
      * Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri uprizoritvi:
      * 
-     * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij $$ 
-     * 
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
      * @Max\I18n(label="ep.stZaposlenih", description="Število zaposlenih, ki sodelujejo pri izvedbi projekta")
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $stZaposlenih=0;
+    private $stZaposlenih;
 
     /**
      * Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri uprizoritvi:
-     * 
-     * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij $$ 
      * 
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
      * @Max\I18n(label="ep.stZaposUmet", description="Število zaposlenih, ki sodelujejo pri izvedbi projekta")
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $stZaposUmet=0;
+    private $stZaposUmet;
 
     /**
      * Št. drugih zaposlenih, ki sodelujejo pri uprizoritvi (brez upravno-administrativnih delavcev):
@@ -164,7 +160,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $stZaposDrug=0;
+    private $stZaposDrug;
 
     /**
      * Št. vseh, ki sodelujejo honorarno
@@ -176,7 +172,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stHonorarnih=0;
+    private $stHonorarnih;
 
     /**
      *  št. honorarnih igralcev
@@ -188,7 +184,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stHonorarnihIgr=0;
+    private $stHonorarnihIgr;
 
     /**
      *  št. honorarnih igralcev, zaposlenih v drugih javnih zavodih
@@ -200,7 +196,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stHonorarnihIgrTujJZ=0;
+    private $stHonorarnihIgrTujJZ;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -208,7 +204,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $obiskDoma=0;
+    private $obiskDoma;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -216,7 +212,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $obiskGost=0;
+    private $obiskGost;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -224,7 +220,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $obiskZamejo=0;
+    private $obiskZamejo;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -232,7 +228,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $obiskInt=0;
+    private $obiskInt;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":" 0"})
@@ -240,7 +236,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $ponoviDoma=0;
+    private $ponoviDoma;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -248,7 +244,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $ponoviZamejo=0;
+    private $ponoviZamejo;
 
     /**
      * število gostovanj po Sloveniji

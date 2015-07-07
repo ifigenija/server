@@ -142,7 +142,7 @@ class Alternacija
     /**
      * Če je alternacija pomembna, jo prikaže v programu dela,
      * 
-     * $$ za doreči -katero sortno polje se po uporabljalo za program dela, ali od alternacije, ali od funkcije?
+     * $$ za doreči -katero sortno polje se po uporabljalo za program dela, ali od alternacije, ali od funkcije? - zaenkrat smo vzeli od alternacije
      * 
      * @ORM\Column(type="boolean", length=1, nullable=true)
      * @Max\I18n(label="alternacija.pomembna", description="alternacija.d.pomembna")
