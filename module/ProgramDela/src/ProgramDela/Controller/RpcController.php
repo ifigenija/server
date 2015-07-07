@@ -20,10 +20,16 @@ class RpcController
      * Akcije ki streže nastavitve preko JsonRpc
      * 
      */
-
     public function enotaprogramaAction() {
         
         $srv = $this->getServiceLocator()->get('enotaprograma.rpc.service');
+        
+        return $this->handleJsonRpcCall($srv);
+    }
+
+    public function programdelaAction() {
+        
+        $srv = $this->getServiceLocator()->get('programdela.rpc.service');
         
         return $this->handleJsonRpcCall($srv);
     }

@@ -64,6 +64,7 @@ class ProgramiPremiere
      */
     public function create($object, $params = null)
     {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000520);
 
         if ($object->getDokument()) {
             $object->getDokument()->getPremiere()->add($object);
@@ -82,9 +83,42 @@ class ProgramiPremiere
      */
     public function update($object, $params = null)
     {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000521);
+
         // preračunamo vrednosti v smeri navzgor
         $object->preracunaj(\Max\Consts::UP);
 
         parent::update($object, $params);
     }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function delete($object)
+    {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000522);
+
+        parent::delete($object);
+    }
+
+    /**
+     * vrne true, če je pripadajoči program dela zaklenjen
+     * 
+     * @param entiteta $obj
+     * @return boolean
+     */
+    private function zaklenjenProgramDela($obj)
+    {
+        if ($obj) {
+            if ($obj->getDokument()) {
+                if ($obj->getDokument()->getZakljuceno()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

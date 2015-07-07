@@ -30,16 +30,16 @@ class EnotaProgramaRpcService
         // preverjanje avtorizacije
         $this->expectPermission("ProdukcijaDelitev-write");
         $this->expectPermission("EnotaPrograma-read");
+        $this->expectPermission("ProdukcijskaHisa-read");
         $this->expectPermission("Option-read");
-        $this->expectPermission("Alternacija-read");
-
+        
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $tr = $this->getServiceLocator()->get('translator');
 
-        $enotaProgramaId = $em->getRepository("ProgramDela\Entity\EnotaPrograma")
+        $enotaPrograma = $em->getRepository("ProgramDela\Entity\EnotaPrograma")
                 ->findOneById($enotaProgramaId);
 
-        if (!$enotaProgramaId) {
+        if (!$enotaPrograma) {
             throw new \Max\Exception\UnauthException($tr->translate('Ni enote programa'), 1000941);
         }
 
@@ -51,20 +51,20 @@ class EnotaProgramaRpcService
         $phisa  = $phisaR->findOneBySifra($sifra);       // lastno gledališče
         // seštejemo vrednosti iz stroškom uprizoritve
 
-        $matkoprColl = $enotaProgramaId->getKoprodukcije()
+        $matkoprColl = $enotaPrograma->getKoprodukcije()
                 ->filter(function($ent) use (&$sifra) {
             return $ent->getKoproducent()->getSifra() === $sifra;     //vrne  koprodukcijo lastnega gledališča
         });
 
         if ($matkoprColl->count() > 1) {
-            throw new \Max\Exception\UnauthException($tr->translate('Obstaja več koprodukcij (' . $matkoprColl->count() . ') lastega gledališča '), 1000942);
+            throw new \Max\Exception\UnauthException($tr->translate('Obstaja več koprodukcij (' . $matkoprColl->count() . ') lastnega gledališča '), 1000942);
         }
 
         // če koprodukcija še ne obstaja, jo kreiramo
         if ($matkoprColl->isEmpty()) {
             $kopr = new \ProgramDela\Entity\ProdukcijaDelitev();
             $kopr->setKoproducent($phisa);
-            $kopr->setEnotaPrograma($enotaProgramaId);
+            $kopr->setEnotaPrograma($enotaPrograma);
             $em->persist($kopr);
         } else {
             $kopr = $matkoprColl->get(0);
@@ -75,9 +75,9 @@ class EnotaProgramaRpcService
 
         // sedaj, ko imamo entitete ponovimo preverjanje avtorizacije zaradi morebitnega assert preverjanja!
         $this->expectPermission("ProdukcijaDelitev-write", $kopr);
-        $this->expectPermission("EnotaPrograma-read", $enotaProgramaId);
-        $this->expectPermission("Funkcija-read", $funkcija);
+        $this->expectPermission("EnotaPrograma-read", $enotaPrograma);
         $this->expectPermission("ProdukcijskaHisa-read", $phisa);
+        $this->expectPermission("Option-read",$option);
 
         $em->flush();
 

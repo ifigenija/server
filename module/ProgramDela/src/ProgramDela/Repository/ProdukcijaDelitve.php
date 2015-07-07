@@ -76,6 +76,8 @@ class ProdukcijaDelitve
      */
     public function create($object, $params = null)
     {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000610);
+
         $this->nastaviFlagMaticna($object);
         if ($object->getEnotaPrograma()) {
             $object->getEnotaPrograma()->getKoprodukcije()->add($object);
@@ -94,6 +96,8 @@ class ProdukcijaDelitve
      */
     public function update($object, $params = null)
     {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000611);
+
         $this->nastaviFlagMaticna($object);
 
         // preračunamo vrednosti v smeri navzgor
@@ -113,6 +117,47 @@ class ProdukcijaDelitve
         } else {
             $object->setMaticniKop(false);
         };
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function delete($object)
+    {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000612);
+
+        parent::delete($object);
+    }
+
+    /**
+     * vrne true, če je pripadajoči program dela zaklenjen
+     * 
+     * @param entiteta $obj
+     * @return boolean
+     */
+    private function zaklenjenProgramDela($obj)
+    {
+        if ($obj) {
+            if ($obj->getEnotaPrograma()) {
+                // najdemo programDela:
+                if (method_exists($obj->getEnotaPrograma(), 'getDokument')) {
+                    $programDela = $obj->getEnotaPrograma()->getDokument();
+                } elseif (method_exists($obj->getEnotaPrograma(), 'getProgramDela')) {
+                    $programDela = $obj->getEnotaPrograma()->getProgramDela();      //za festival
+                } else {
+                    $this->expect(false, "Enota programa nima niti metode getDocument niti getProgramDela", 1000603);
+                }
+
+                if ($programDela) {
+                    if ($programDela->getZakljuceno()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 }

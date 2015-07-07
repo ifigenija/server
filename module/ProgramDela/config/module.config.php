@@ -14,6 +14,7 @@ return [
         ],
         'invokables' => [
             'enotaprograma.rpc.service' => 'ProgramDela\Rpc\EnotaProgramaRpcService',
+            'programdela.rpc.service' => 'ProgramDela\Rpc\ProgramDelaRpcService',
         ],
     ],
     'controllers'     => [

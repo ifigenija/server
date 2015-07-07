@@ -63,6 +63,7 @@ class ProgramiFestival
      */
     public function create($object, $params = null)
     {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000570);
 
         //$$ verjetno potrebna še kontrola, če dokument obstaja
         if ($object->getProgramDela()) {
@@ -82,10 +83,41 @@ class ProgramiFestival
      */
     public function update($object, $params = null)
     {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000571);
+
         // preračunamo vrednosti v smeri navzgor
         $object->preracunaj(\Max\Consts::UP);
 
         parent::update($object, $params);
+    }
+/**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function delete($object)
+    {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000572);
+
+        parent::delete($object);
+    }
+
+    /**
+     * vrne true, če je pripadajoči program dela zaklenjen
+     * 
+     * @param entiteta $obj
+     * @return boolean
+     */
+    private function zaklenjenProgramDela($obj)
+    {
+        if ($obj) {
+            if ($obj->getProgramDela()) {
+                if ($obj->getProgramDela()->getZakljuceno()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

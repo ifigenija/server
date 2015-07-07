@@ -12,6 +12,7 @@ forms:
             - naziv
             - zacetek
             - konec
+#            - zakljuceno        # polje ne sme biti v formi! nastavlja se le z RPC klicem!
             - potrjenProgram
 #            - premiere
 #            - ponovitvePremiere

@@ -87,6 +87,8 @@ class ProgramiDela
      */
     public function create($object, $params = null)
     {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000510);
+
         // zaenkrat ne računamo v globino (DOWN), ampak vedno le v smeri UP
         $object->preracunaj();
 
@@ -106,10 +108,39 @@ class ProgramiDela
      */
     public function update($object, $params = null)
     {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000511);
+
         // zaenkrat ne računamo v globino (DOWN), ampak vedno le v smeri UP
         $object->preracunaj();
 
         parent::update($object, $params);
     }
 
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function delete($object)
+    {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000512);
+
+        parent::delete($object);
+    }
+
+    /**
+     * vrne true, če je pripadajoči program dela zaklenjen
+     * 
+     * @param entiteta $programDela
+     * @return boolean
+     */
+    private function zaklenjenProgramDela($programDela)
+    {
+        if ($programDela) {
+            if ($programDela->getZakljuceno()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

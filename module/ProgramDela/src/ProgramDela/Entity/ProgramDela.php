@@ -56,6 +56,16 @@ class ProgramDela
     private $konec;
 
     /**
+     * polje se nastavi na true potem, ko se pošlje na MK, da se PD pomotoma   ne bi spreminjal
+     * 
+     * @ORM\Column(type="boolean", nullable=false)
+     * @Max\I18n(label="programDela.zakljuceno", description="programDela.d.zakljuceno")
+     * @Max\Ui(type="boolcheckbox")         //$$ verjetno mora biti na nek način hidden, ker ni v formi
+     * @var boolean
+     */
+    private $zakljuceno = false;
+
+    /**
      * @ORM\Column(type="boolean", nullable=false)
      * @Max\I18n(label="programDela.potrjenProgram", description="programDela.d.potrjenProgram")
      * @Max\Ui(type="boolcheckbox")
@@ -1309,6 +1319,17 @@ class ProgramDela
     public function setSredstvaAvt($sredstvaAvt)
     {
         $this->sredstvaAvt = $sredstvaAvt;
+        return $this;
+    }
+
+    public function getZakljuceno()
+    {
+        return $this->zakljuceno;
+    }
+
+    public function setZakljuceno($zakljuceno)
+    {
+        $this->zakljuceno = $zakljuceno;
         return $this;
     }
 

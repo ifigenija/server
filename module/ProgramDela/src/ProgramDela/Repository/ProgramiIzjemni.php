@@ -5,12 +5,12 @@
  */
 
 namespace ProgramDela\Repository;
+
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineModule\Paginator\Adapter\Selectable;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
-
 
 /**
  * Description of ProgramiIzjemni
@@ -56,6 +56,7 @@ class ProgramiIzjemni
 
         return $qb;
     }
+
     /**
      * 
      * @param type $object  entiteta
@@ -63,6 +64,7 @@ class ProgramiIzjemni
      */
     public function create($object, $params = null)
     {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000580);
 
         //$$ verjetno potrebna še kontrola, če dokument obstaja
         if ($object->getDokument()) {
@@ -82,10 +84,42 @@ class ProgramiIzjemni
      */
     public function update($object, $params = null)
     {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000581);
+
         // preračunamo vrednosti v smeri navzgor
         $object->preracunaj(\Max\Consts::UP);
 
         parent::update($object, $params);
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function delete($object)
+    {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000582);
+
+        parent::delete($object);
+    }
+
+    /**
+     * vrne true, če je pripadajoči program dela zaklenjen
+     * 
+     * @param entiteta $obj
+     * @return boolean
+     */
+    private function zaklenjenProgramDela($obj)
+    {
+        if ($obj) {
+            if ($obj->getDokument()) {
+                if ($obj->getDokument()->getZakljuceno()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
