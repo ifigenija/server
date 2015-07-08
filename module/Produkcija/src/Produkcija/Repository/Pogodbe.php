@@ -100,7 +100,7 @@ class Pogodbe
         }
 
         if (!empty($options['uprizoritev'])) {
-            $qb->join('p.alternacije', 'alternacija');
+            $qb->join('p.alternacija', 'alternacija');
             $qb->join('alternacija.funkcija', 'funkcija');
             $qb->join('funkcija.uprizoritev', 'uprizoritev');
 
@@ -116,7 +116,7 @@ class Pogodbe
             }
         }
         if (!empty($options['alternacija'])) {
-            $qb->join('p.alternacije', 'alternacija');
+            $qb->join('p.alternacija', 'alternacija');
             $naz = $e->eq('alternacija.id', ':alternacija');
             $qb->andWhere($naz);
             $qb->setParameter('alternacija', "{$options['alternacija']}", "string");
@@ -148,7 +148,52 @@ class Pogodbe
 
             $object->setSifra($num->generate('pogodba', new \DateTime()));
         }
+
+        if ($object->getAlternacija()) {
+            $object->getAlternacija()->setPogodba($object);
+        }
+
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
+
         parent::create($object, $params);
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function update($object, $params = null)
+    {
+        // pri update-u ne dovolimo spremembe alternacije
+        $uow            = $this->getEntityManager()->getUnitOfWork();
+        $originalObject = $uow->getOriginalEntityData($object);
+        $object->setAlternacija($originalObject['alternacija']);    
+
+        if ($object->getAlternacija()) {
+            $object->getAlternacija()->setPogodba($object);
+        }
+
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
+
+        parent::update($object, $params);
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function delete($object)
+    {
+        if ($object->getAlternacija()) {
+            $object->getAlternacija()->setPogodba(NULL);
+        }
+        $object->preracunaj(\Max\Consts::UP);        // preračuna tudi alternacijo!
+
+        parent::delete($object);
     }
 
 }

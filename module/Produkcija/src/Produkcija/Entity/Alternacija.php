@@ -121,13 +121,12 @@ class Alternacija
      */
     private $oseba;
 
-
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Pogodba", inversedBy="alternacije")
+     * @ORM\OneToOne(targetEntity="Produkcija\Entity\Pogodba", inversedBy="alternacija")
      * @ORM\JoinColumn(name="pogodba_id", referencedColumnName="id")
      * @Max\I18n(label="alternacija.pogodba",  description="alternacija.pogodba")
      * @Max\Ui(type="toone")
-     * @var \Produkcija\Entity\Pogodba
+     * var \Produkcija\Entity\Pogodba       - izpustimo tip, da ga lahko s set metodo postavimo na null v primeru izbrisa pogodbe
      */
     private $pogodba;
 
@@ -154,6 +153,12 @@ class Alternacija
     public function __construct()
     {
         $this->storitve = new ArrayCollection();
+    }
+
+    public function preracunaj($smer = false)
+    {
+        $this->imaPogodbo = ($this->getPogodba()) ? true : false;
+//        $this->zaposlen   se nastavi že v repozitoriju
     }
 
     public function validate($mode = 'update')
@@ -352,7 +357,7 @@ class Alternacija
         return $this;
     }
 
-    public function setPogodba(\Produkcija\Entity\Pogodba $pogodba)
+    public function setPogodba($pogodba)
     {
         $this->pogodba = $pogodba;
         return $this;
@@ -369,6 +374,5 @@ class Alternacija
         $this->pomembna = $pomembna;
         return $this;
     }
-
 
 }

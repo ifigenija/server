@@ -183,24 +183,24 @@ class AlternacijaCest
      * 
      * @param ApiTester $I
      */
-    public function createPogodbo(ApiTester $I)
-    {
-        $data             = [
-            'sifra'             => 'ZZ123',
-            'vrednostVaj'       => 33.33,
-            'vrednostPredstave' => 44.44,
-            'vrednostUre'       => 22.22,
-            'aktivna'           => false,
-            'opis'              => 'zz',
-            'oseba'             => $this->lookOseba['id'],
-            'popa'              => null,
-            'trr'               => null,
-        ];
-        $this->objPogodba = $ent              = $I->successfullyCreate($this->pogodbaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['sifra'], 'ZZ123');
-    }
+//    public function createPogodbo(ApiTester $I)
+//    {
+//        $data             = [
+//            'sifra'             => 'ZZ123',
+//            'vrednostVaj'       => 33.33,
+//            'vrednostPredstave' => 44.44,
+//            'vrednostUre'       => 22.22,
+//            'aktivna'           => false,
+//            'opis'              => 'zz',
+//            'oseba'             => $this->lookOseba['id'],
+//            'popa'              => null,
+//            'trr'               => null,
+//        ];
+//        $this->objPogodba = $ent              = $I->successfullyCreate($this->pogodbaUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//        codecept_debug($ent);
+//        $I->assertEquals($ent['sifra'], 'ZZ123');
+//    }
 
     /**
      *  kreiramo zapis
@@ -208,7 +208,6 @@ class AlternacijaCest
      * @depends lookupOsebo
      * @depends lookupFunkcijo
      * @depends createZaposlitev
-     * @depends createPogodbo
      * 
      * @param ApiTester $I
      */
@@ -225,8 +224,7 @@ class AlternacijaCest
             'funkcija'   => $this->lookFunkcija['id'],
             'zaposlitev' => $this->objZaposlitev['id'],
             'oseba'      => $this->lookOseba['id'],
-            'pogodba'    => $this->objPogodba['id'],
-            'imaPogodbo' => TRUE,
+            'pogodba'    => null,
             'pomembna'   => TRUE,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
@@ -247,7 +245,6 @@ class AlternacijaCest
             'zaposlitev' => null,
             'oseba'      => $this->lookOseba['id'],
             'pogodba'    => null,
-            'imaPogodbo' => TRUE,
             'pomembna'   => FALSE,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -373,13 +370,13 @@ class AlternacijaCest
         $I->assertEquals($ent['opomba'], 'uu');
         $I->assertEquals($ent['sort'], 1);
         $I->assertEquals($ent['privzeti'], true);
-        $I->assertEquals($ent['aktivna'], true);
-        $I->assertEquals($ent['funkcija'], $this->lookFunkcija['id']);
+        $I->assertEquals($ent['aktivna'], true,"aktivna");
+        $I->assertEquals($ent['funkcija']['id'], $this->lookFunkcija['id']);
         $I->assertEquals($ent['zaposlitev'], $this->objZaposlitev['id'], "zaposlitev");
         $I->assertEquals($ent['zaposlen'], true);               // v validaciji se bi moralo postaviti na true, če je zaposlitev
         $I->assertEquals($ent['oseba']['id'], $this->lookOseba['id'], "oseba");
         $I->assertEquals($ent['pogodba'], $this->objPogodba['id']);
-        $I->assertEquals($ent['imaPogodbo'], true);
+        $I->assertEquals($ent['imaPogodbo'], false);
         $I->assertEquals($ent['pomembna'], true, "pomembna");
     }
 
@@ -453,21 +450,21 @@ class AlternacijaCest
 
     //$$ še relacije vec t.s.
 
-    /**
-     * spremenim zapis - dodam pogodbo
-     * 
-     * @depends create
-     * @param ApiTester $I
-     */
-    public function updateZDodajPogodbo(ApiTester $I)
-    {
-        $ent            = $this->obj3;
-        codecept_debug($ent);
-        $ent['pogodba'] = $this->objPogodba['id'];
-        $entR           = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
-
-        $I->assertEquals($entR['pogodba'], $this->objPogodba['id']);
-        $I->assertEquals($entR['imaPogodbo'], true);   // nastavi  v validaciji
-    }
+//    /**
+//     * spremenim zapis - dodam pogodbo
+//     * 
+//     * @depends create
+//     * @param ApiTester $I
+//     */
+//    public function updateZDodajPogodbo(ApiTester $I)
+//    {
+//        $ent            = $this->obj3;
+//        codecept_debug($ent);
+//        $ent['pogodba'] = $this->objPogodba['id'];
+//        $entR           = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+//
+//        $I->assertEquals($entR['pogodba'], $this->objPogodba['id']);
+//        $I->assertEquals($entR['imaPogodbo'], true);   // nastavi  v validaciji
+//    }
 
 }

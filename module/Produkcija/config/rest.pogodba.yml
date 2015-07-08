@@ -9,19 +9,20 @@ forms:
             - name: sifra
               options:
                   required: false
+            - vrednostVaje
             - vrednostVaj
+            - placiloNaVajo
             - vrednostPredstave
-            - vrednostUre
+            - planiranoSteviloVaj
             - aktivna
             - opis
-#            - alternacije
+            - alternacija
             - oseba
             - popa
             - trr
-            - vrednostDo
             - zacetek
             - konec
-            - vrednostDoPremiere
+#            - vrednostDoPremiere
             - zaposlenVDrJz
 lists:
     default: 
@@ -61,12 +62,4 @@ lists:
     vse: 
         filter:
 hydrator:
-    lookups: [oseba, popa]
-relation:
-    default:
-        alternacije:
-            enabled: true
-            hydrator:
-                exclude: []
-            
-    
+    lookups: [oseba, popa]    

@@ -37,18 +37,6 @@ class Pogodba
     private $sifra;
 
     /**
-     * pogodbena vrednost do premiere, ki se vnese kot 1 znesek in se ne 
-     * računa iz števila vaj
-     * 
-     * to bi se prepisalo v vrednost vrednostDoPremiere
-     * 
-     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="entiteta.vrednostDo", description="entiteta.vrednostDo")
-     * @var double
-     */
-    private $vrednostDo;
-
-    /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="entiteta.zacetek", description="entiteta.d.zacetek")
      * @var string
@@ -63,8 +51,41 @@ class Pogodba
     private $konec;
 
     /**
-     * Pavšalna vrednost za vse vaje. V praksi dobijo honorarni igralci ali pavšalni znesek 
-     * za vse vaje ali pa nič (le za predstave). Za posamezno vajo se ne plačuje.
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="pogodba.placiloNaVajo", description="pogodba.placiloNaVajo")   
+     * @Max\Ui(type="boolcheckbox")                       
+     * @var boolean
+     */
+    private $placiloNaVajo;
+
+    /**
+     * Vrednost za eno vajo. 
+     * 
+     * Polje je aktualno, če je placiloNaVajo=true
+     * 
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="pogodba.vrednostVaje", description="pogodba.d.vrednostVaje")   
+     * @var double
+     */
+    private $vrednostVaje;
+
+    /**
+     * Polje je aktualno, če je placiloNaVajo=true
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="pogodba.planiranoSteviloVaj", description="pogodba.planiranoSteviloVaj")
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    private $planiranoSteviloVaj;
+
+    /**
+     * Pavšalna vrednost za vse vaje. 
+     * 
+     * Polje je aktualno, če je placiloNaVajo=false
+     * 
+     * V praksi dobijo honorarni igralci ali pavšalni znesek 
+     * za vse vaje ali pa nič (le za predstave). Za posamezno vajo se v principu ne plačuje.
      * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="pogodba.vrednostVaj", description="pogodba.d.vrednostVaj")   
@@ -78,15 +99,6 @@ class Pogodba
      * @var double
      */
     private $vrednostPredstave;
-
-    /**
-     * $$ zaenkrat še ne uporabljamo
-     * 
-     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
-     * @Max\I18n(label="pogodba.vrednostUre", description="pogodba.vrednostUre")   
-     * @var double
-     */
-    private $vrednostUre;
 
     /**
      * polje se lahko vpisuje (vrednostDo) ali pa izračuna iz cene na vajo in planiranega števila vaj
@@ -122,10 +134,12 @@ class Pogodba
 
     /**
      * 
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="pogodba")
-     * @var <Alternacije>
+     * @ORM\OneToOne(targetEntity="Produkcija\Entity\Alternacija", mappedBy="pogodba")
+     * @Max\I18n(label="pogodba.alternacija",  description="pogodba.alternacija")
+     * @Max\Ui(type="toone")
+     * @var \Produkcija\Entity\Alternacija
      */
-    private $alternacije;
+    private $alternacija;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="pogodbe")
@@ -156,9 +170,19 @@ class Pogodba
      */
     private $trr;
 
-    public function __construct()
+    public function preracunaj($smer = false)
     {
-        $this->alternacije = new ArrayCollection();
+        if ($this->placiloNaVajo) {
+            $this->vrednostDoPremiere = $this->vrednostVaje * $this->planiranoSteviloVaj;
+        } else {
+            $this->vrednostDoPremiere = $this->vrednostVaj;
+        }
+        $this->vrednostDoPremiere = \Max\Functions::euroRound($this->vrednostDoPremiere);   //Zaokrožimo na 2 decimalki predno shranimo
+        if ($smer == \Max\Consts::UP) {
+            if ($this->getAlternacija()) {
+                $this->getAlternacija()->preracunaj(\Max\Consts::UP);
+            }
+        }
     }
 
     public function validate($mode = 'update')
@@ -167,6 +191,7 @@ class Pogodba
 //        $this->expect(!($this->popa && $this->oseba), "Pogodba nima subjekta. Subjekt je lahko samo ali poslovni partner ali oseba -ne oba hkrati", 1000341);
         $this->expect($this->sifra, "sifra je obvezen podatek", 1000342);
         $this->expect($this->oseba, "Pogodba nima subjekta. Oseba je obvezna", 1000343);
+        $this->expect($this->alternacija, "Alternacija je obvezen podatek", 1000344);
     }
 
     public function getId()
@@ -179,11 +204,6 @@ class Pogodba
         return $this->sifra;
     }
 
-    public function getVrednostDo()
-    {
-        return $this->vrednostDo;
-    }
-
     public function getZacetek()
     {
         return $this->zacetek;
@@ -194,6 +214,21 @@ class Pogodba
         return $this->konec;
     }
 
+    public function getPlaciloNaVajo()
+    {
+        return $this->placiloNaVajo;
+    }
+
+    public function getVrednostVaje()
+    {
+        return $this->vrednostVaje;
+    }
+
+    public function getPlaniranoSteviloVaj()
+    {
+        return $this->planiranoSteviloVaj;
+    }
+
     public function getVrednostVaj()
     {
         return $this->vrednostVaj;
@@ -202,11 +237,6 @@ class Pogodba
     public function getVrednostPredstave()
     {
         return $this->vrednostPredstave;
-    }
-
-    public function getVrednostUre()
-    {
-        return $this->vrednostUre;
     }
 
     public function getVrednostDoPremiere()
@@ -229,9 +259,9 @@ class Pogodba
         return $this->opis;
     }
 
-    public function getAlternacije()
+    public function getAlternacija()
     {
-        return $this->alternacije;
+        return $this->alternacija;
     }
 
     public function getOseba()
@@ -261,12 +291,6 @@ class Pogodba
         return $this;
     }
 
-    public function setVrednostDo($vrednostDo)
-    {
-        $this->vrednostDo = $vrednostDo;
-        return $this;
-    }
-
     public function setZacetek($zacetek)
     {
         $this->zacetek = $zacetek;
@@ -279,6 +303,24 @@ class Pogodba
         return $this;
     }
 
+    public function setPlaciloNaVajo($placiloNaVajo)
+    {
+        $this->placiloNaVajo = $placiloNaVajo;
+        return $this;
+    }
+
+    public function setVrednostVaje($vrednostVaje)
+    {
+        $this->vrednostVaje = $vrednostVaje;
+        return $this;
+    }
+
+    public function setPlaniranoSteviloVaj($planiranoSteviloVaj)
+    {
+        $this->planiranoSteviloVaj = $planiranoSteviloVaj;
+        return $this;
+    }
+
     public function setVrednostVaj($vrednostVaj)
     {
         $this->vrednostVaj = $vrednostVaj;
@@ -288,12 +330,6 @@ class Pogodba
     public function setVrednostPredstave($vrednostPredstave)
     {
         $this->vrednostPredstave = $vrednostPredstave;
-        return $this;
-    }
-
-    public function setVrednostUre($vrednostUre)
-    {
-        $this->vrednostUre = $vrednostUre;
         return $this;
     }
 
@@ -321,9 +357,9 @@ class Pogodba
         return $this;
     }
 
-    public function setAlternacije($alternacije)
+    public function setAlternacija(\Produkcija\Entity\Alternacija $alternacija)
     {
-        $this->alternacije = $alternacije;
+        $this->alternacija = $alternacija;
         return $this;
     }
 
