@@ -129,7 +129,7 @@ class Pogodba
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="pogodbe")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\I18n(label="entiteta.oseba",  description="entiteta.oseba")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Oseba
      */
     private $oseba;
