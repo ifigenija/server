@@ -129,6 +129,9 @@ class Alternacije
             $num = $this->getServiceLocator()->get('stevilcenje.generator');
             $object->setSifra($num->generate('alternacija'));
         }
+
+        $object->preracunaj();
+
         $this->preveriZaposlitev($object);
         parent::create($object, $params);
     }
@@ -141,6 +144,9 @@ class Alternacije
     public function update($object, $params = null)
     {
         $this->preveriZaposlitev($object);
+        
+        $object->preracunaj();
+
         parent::update($object, $params);
     }
 

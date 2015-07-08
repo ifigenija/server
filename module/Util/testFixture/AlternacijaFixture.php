@@ -27,7 +27,7 @@ class AlternacijaFixture
 
     public function getDependencies()
     {
-        return array('TestFixture\FunkcijaFixture', 'TestFixture\OsebaFixture', 'TestFixture\PogodbaFixture'); // fixture classes fixture is dependent on , 
+        return array('TestFixture\FunkcijaFixture', 'TestFixture\OsebaFixture'); // fixture classes fixture is dependent on , 
     }
 
     /**
@@ -73,13 +73,12 @@ class AlternacijaFixture
             $o->setKoprodukcija($getref);
         }
 
-        if ($v[6]) {
-            $getref = $this->getReference($v[6]);
-            $o->setPogodba($getref);
-        }
+        $o->setSort($v[6]);
         $o->setImaPogodbo($v[7]);
         $o->setPomembna($v[8]);
-        $o->setSort($v[9]);
+
+        $o->preracunaj();
+        $o->validate();
 
 
         $referenca = 'Alternacija-' . $v[0];
@@ -90,14 +89,14 @@ class AlternacijaFixture
     public function getData()
     {
         return [
-            ['0001', false, 'Funkcija-Tezej', null, 'Oseba-0009', null, "Pogodba-0001",TRUE,True,3,],
-            ['0002', true, 'Funkcija-Režija', null, 'Oseba-0010', null, null,false,false,8,],
-            ['0003', TRUE, 'Funkcija-Inšpicient', null, 'Oseba-0003', null, null,false,false,2,],
-            ['0004', TRUE, 'Funkcija-Tehnični vodja', null, 'Oseba-0002', null, null,false,false,26,],
-            ['0005', TRUE, 'Funkcija-Lučni mojster', null, 'Oseba-0012', null, null,false,false,7,],
-            ['0006', false, 'Funkcija-Helena', null, 'Oseba-0006', null, "Pogodba-0002",true,true,1,],
-            ['0007', true, 'Funkcija-Hipolita', null, 'Oseba-0008', null, NULL,false,true,14,],
-            ['0008', false, 'Funkcija-Lektoriranje', null, 'Oseba-0013', null, "Pogodba-0003",true,true,12,],
+            ['0001', false, 'Funkcija-Tezej', null, 'Oseba-0009', null,3, TRUE,True,],
+            ['0002', true, 'Funkcija-Režija', null, 'Oseba-0010', null, 8,false,false,],
+            ['0003', TRUE, 'Funkcija-Inšpicient', null, 'Oseba-0003', null, 2,false,false,],
+            ['0004', TRUE, 'Funkcija-Tehnični vodja', null, 'Oseba-0002', null, 26,false,false,],
+            ['0005', TRUE, 'Funkcija-Lučni mojster', null, 'Oseba-0012', null, 7,false,false,],
+            ['0006', false, 'Funkcija-Helena', null, 'Oseba-0006', null, 1,true,true,],
+            ['0007', true, 'Funkcija-Hipolita', null, 'Oseba-0008', null, 14,false,true,],
+            ['0008', false, 'Funkcija-Lektoriranje', null, 'Oseba-0013', null, 12,true,true,],
         ];
     }
 

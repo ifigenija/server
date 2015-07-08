@@ -9,8 +9,8 @@ forms:
             - name: sifra
               options: 
                   required: false
-            - zaposlen
-            - pogodba    #$$ začasno damo pogodbo gor
+#            - zaposlen
+#            - pogodba    # uporabniki bi vnašali pogodbo in tam izbrali alternacijo
             - zacetek
             - konec
             - opomba
@@ -20,7 +20,7 @@ forms:
 #            - storitve
             - funkcija
             - zaposlitev
-            - imaPogodbo
+#            - imaPogodbo
             - oseba
 #            - pogodba    #$$ začasno damo pogodbo gor
             - pomembna

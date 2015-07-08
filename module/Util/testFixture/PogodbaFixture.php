@@ -27,7 +27,7 @@ class PogodbaFixture
 
     public function getDependencies()
     {
-        return array( 'TestFixture\PopaFixture', 'TestFixture\OsebaFixture'); // fixture classes fixture is dependent on , 
+        return array('TestFixture\PopaFixture', 'TestFixture\OsebaFixture', 'TestFixture\AlternacijaFixture'); // fixture classes fixture is dependent on , 
     }
 
     /**
@@ -51,7 +51,7 @@ class PogodbaFixture
 
         $o->setVrednostVaj($v[1]);
         $o->setVrednostPredstave($v[2]);
-        $o->setVrednostUre($v[3]);
+        $o->setVrednostVaje($v[3]);
         $o->setAktivna($v[4]);
         $o->setOpis($v[5]);
 
@@ -69,17 +69,22 @@ class PogodbaFixture
             $getref = $this->getReference($v[8]);
             $o->setTrr($getref);
         }
-
-        $o->setVrednostDo($v[9]);
+        $o->setZaposlenVDrJz($v[9]);
 
         $date = empty($v[10]) ? null : date_create($v[10]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setZacetek($date);
         $date = empty($v[11]) ? null : date_create($v[11]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setKonec($date);
 
-        $o->setVrednostDoPremiere($v[12]);
-        $o->setZaposlenVDrJz($v[13]);
-
+        $o->setPlaciloNaVajo($v[12]);
+        $o->setPlaniranoSteviloVaj($v[13]);
+        if ($v[14]) {
+            $getref = $this->getReference($v[14]);
+            $o->setAlternacija($getref);
+        }
+        
+        $o->preracunaj();
+        $o->validate();
 
         $referenca = 'Pogodba-' . $v[0];
         var_dump($referenca);
@@ -89,10 +94,9 @@ class PogodbaFixture
     public function getData()
     {
         return [
-
-            ['0001', 10, 30, 10, true, "Pogodba o sodelovanju", 'Oseba-0001', null, null, 400, null, null, 400, true],
-            ['0002', 11, 31, 11, true, "Pogodba za vlogo Helena", 'Oseba-0006', null, null, 401, null, null, 401, false],
-            ['0003', 12, 32, 12, true, "Pogodba za lektoriranje", 'Oseba-0013', null, null, 402, null, null, 402, false],
+            ['0001', 10, 30, 10, true, "Pogodba o sodelovanju", 'Oseba-0001', null, null, true, null, null, false, 3, 'Alternacija-0001',],
+            ['0002', 11, 31, 11, true, "Pogodba za vlogo Helena", 'Oseba-0006', null, null, false, null, null, true, 10, 'Alternacija-0006',],
+            ['0003', 12, 32, 12, true, "Pogodba za lektoriranje", 'Oseba-0013', null, null, false, null, null, FALSE, 4,'Alternacija-0008',],
         ];
     }
 
