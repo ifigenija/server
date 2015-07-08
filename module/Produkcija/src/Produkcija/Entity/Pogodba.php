@@ -80,6 +80,8 @@ class Pogodba
     private $vrednostPredstave;
 
     /**
+     * $$ zaenkrat še ne uporabljamo
+     * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="pogodba.vrednostUre", description="pogodba.vrednostUre")   
      * @var double

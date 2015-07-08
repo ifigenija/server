@@ -50,31 +50,31 @@ class PodatkiUprizoritveCest
         codecept_debug($resp);
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
-        $I->assertGreaterThanOrEqual(1203,$resp['Do']['avtorskiHonorarji'], "avtorski do"); 
-        $I->assertGreaterThanOrEqual(2129.2,$resp['Do']['nasDelez'], "naš delež do");
-        $I->assertGreaterThanOrEqual(200,$resp['Do']['tantieme'], "tantieme do"); 
-        $I->assertGreaterThanOrEqual(93,$resp['Na']['avtorskiHonorarji'], "avtorski do"); 
-        $I->assertGreaterThanOrEqual(126.1,$resp['Na']['nasDelez'], "naš delež");
-        $I->assertGreaterThanOrEqual(10,$resp['Na']['tantieme'], "tantieme"); 
-        $I->assertGreaterThanOrEqual(2,$resp['stZaposUmet']); 
-        $I->assertGreaterThanOrEqual(3,$resp['stZaposDrug']); 
-        $I->assertGreaterThanOrEqual(3,$resp['stHonorarnih']); 
-        $I->assertGreaterThanOrEqual(2,$resp['stHonorarnihIgr']); 
-        $I->assertGreaterThanOrEqual(1,$resp['stHonorarnihIgrTujJZ']); 
+        $I->assertGreaterThanOrEqual(1203, $resp['Do']['avtorskiHonorarji'], "avtorski do");
+        $I->assertGreaterThanOrEqual(2129.2, $resp['Do']['nasDelez'], "naš delež do");
+        $I->assertGreaterThanOrEqual(200, $resp['Do']['tantieme'], "tantieme do");
+        $I->assertGreaterThanOrEqual(93, $resp['Na']['avtorskiHonorarji'], "avtorski do");
+        $I->assertGreaterThanOrEqual(126.1, $resp['Na']['nasDelez'], "naš delež");
+        $I->assertGreaterThanOrEqual(10, $resp['Na']['tantieme'], "tantieme");
+        $I->assertGreaterThanOrEqual(2, $resp['stZaposUmet']);
+        $I->assertGreaterThanOrEqual(3, $resp['stZaposDrug']);
+        $I->assertGreaterThanOrEqual(3, $resp['stHonorarnih']);
+        $I->assertGreaterThanOrEqual(2, $resp['stHonorarnihIgr']);
+        $I->assertGreaterThanOrEqual(1, $resp['stHonorarnihIgrTujJZ']);
     }
 
-    
     /**
      * 
      * @param ApiTester $I 
      */
-    public function podatkiUprizoritveZNeobstojecimId(ApiTester $I)
+    public function podatkiUprizoritveZNapacenFormatId(ApiTester $I)
     {
         // pričakujemo kreiranje nove produkcijske delitve za lastno gledališče
-        $resp = $I->failCallRpc($this->rpcUrl, 'podatkiUprizoritve', ["uprizoritevId" => 'neobstojec id']);
+        $resp = $I->failCallRpc($this->rpcUrl, 'podatkiUprizoritve', ["uprizoritevId" => 'napačen format id']);
         codecept_debug($resp);
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
+        $I->assertEquals(1000971, $resp['code']);
     }
 
 }
