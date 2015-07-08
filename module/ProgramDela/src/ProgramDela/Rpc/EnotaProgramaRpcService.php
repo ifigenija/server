@@ -32,7 +32,7 @@ class EnotaProgramaRpcService
         $this->expectPermission("EnotaPrograma-read");
         $this->expectPermission("ProdukcijskaHisa-read");
         $this->expectPermission("Option-read");
-        
+
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $tr = $this->getServiceLocator()->get('translator');
 
@@ -77,7 +77,7 @@ class EnotaProgramaRpcService
         $this->expectPermission("ProdukcijaDelitev-write", $kopr);
         $this->expectPermission("EnotaPrograma-read", $enotaPrograma);
         $this->expectPermission("ProdukcijskaHisa-read", $phisa);
-        $this->expectPermission("Option-read",$option);
+        $this->expectPermission("Option-read", $option);
 
         $em->flush();
 
@@ -96,6 +96,7 @@ class EnotaProgramaRpcService
      */
     public function podatkiUprizoritve($uprizoritevId)
     {
+
         // preverjanje avtorizacije
         $this->expectPermission("Uprizoritev-read");
         $this->expectPermission("StrosekUprizoritve-read");
@@ -105,124 +106,27 @@ class EnotaProgramaRpcService
         $this->expectPermission("Oseba-read");
         $this->expectPermission("Pogodba-read");
 
-        $data = $this->initData();
-
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $tr = $this->getServiceLocator()->get('translator');
-
+        
+        $this->expectUUID($uprizoritevId, $this->translate('Pričakujem ID uprizoritve'), 1000971);
+              
         $uprizoritev = $em->getRepository("Produkcija\Entity\Uprizoritev")
                 ->findOneById($uprizoritevId);
         $this->expectPermission("Uprizoritev-read", $uprizoritev);
 
         if (!$uprizoritev) {
-            throw new \Max\Exception\UnauthException($tr->translate('Ni uprizoritve'), 1000950);
-        }
-        $data['naziv'] = $uprizoritev->getNaslov();
-
-
-        /**
-         * seštejem stroške iz Stroškov uprizoritve
-         */
-        $vrMatDoSum = $vrMatNaSum = 0; //init
-        foreach ($uprizoritev->getStroski() as $numObject => $strosekU) {
-            $this->expectPermission("StrosekUprizoritve-read", $strosekU);
-            switch ($strosekU->getTipstroska()) {
-                case 'materialni':
-                    $vrMatDoSum+=$strosekU->getVrednostDo();
-                    $vrMatNaSum+=$strosekU->getVrednostNa();
-                    break;
-                case 'tantiema':
-                    $data['Do']['tantieme']+=$strosekU->getVrednostDo();
-                    $data['Na']['tantieme']+=$strosekU->getVrednostNa();
-                    break;
-                default:
-                    $this->expect(false
-                            , "Tip stroška uprizoritve je lahko le materialni ali tantiema, je pa:" . $strosekU->getTipstroska(), 1000951);
-            }
+            throw new \Max\Exception\UnauthException($tr->translate('Ni uprizoritve'), 1000970);
         }
 
         /**
-         * seštejem stroške iz pogodb 
+         * preračun imamo v posebnem servisu, tako, da ga lahko kličemo direktno iz PHP-ja na strežniški strani
          */
-        foreach ($uprizoritev->getFunkcije() as $numFun => $funkcija) {
-            $this->expectPermission("Funkcija-read", $funkcija);
-            $tipfunkcije = $funkcija->getTipFunkcije();
-            if ($tipfunkcije) {
-                $this->expectPermission("TipFunkcije-read", $tipfunkcije);
-                $podrocje = $tipfunkcije->getPodrocje();
-            };
-            foreach ($funkcija->getAlternacije() as $numAlt => $alternacija) {
-                $this->expectPermission("Alternacija-read", $alternacija);
-                if ($alternacija->getZaposlen()) {
-                    if (in_array($podrocje, ["igralec", "umetnik"])) {
-                        $data['stZaposUmet'] += 1;
-                    } else {
-                        $data['stZaposDrug'] += 1;
-                    }
-                }
-                if ($alternacija->getPomembna()) {
-                    $oseba = $alternacija->getOseba();
-                    $this->expect($oseba, "Ni osebe pri alternaciji " . $alternacija->getSifra(), 1000952);
-                    array_push($data['Funkcije'], ["funkcija" => $funkcija->getNaziv(),
-                        "ime"      => $oseba->getIme(), "priimek"  => $oseba->getPriimek(),
-                        "sort" => $alternacija->getSort()]);
-                }
-                if ($alternacija->getImaPogodbo()) {
-                    $data['stHonorarnih'] += 1;
-                    if ($podrocje == "igralec") {
-                        $data['stHonorarnihIgr'] += 1;
-                    }
-                    $pogodba = $alternacija->getPogodba();
-                    if ($pogodba) {
-                        $this->expectPermission("Pogodba-read", $pogodba);
-                        if ($pogodba->getAktivna()) {
-                                    //$$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
-                            $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
-                            $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
-                            if ($pogodba->getZaposlenVDrJz()) {
-                                $data['stHonorarnihIgrTujJZ'] += 1;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        $data['Do']['nasDelez'] = $data['Do']['avtorskiHonorarji'] + $data['Do']['tantieme'] + $vrMatDoSum;
-        $data['Na']['nasDelez'] = $data['Na']['avtorskiHonorarji'] + $data['Na']['tantieme'] + $vrMatNaSum;
-//$$ še naziv , izpostavljene funkcije ...
-//        upr.naslov naziv Naslov upr. 
-//        
-//        funkcija: (naziv fje, oseba)  funkcija.naziv, alternacija.oseba.  ime, priimek
-//        alternacija.pomembna: 
-//        
-//        
+        $service = $this->serviceLocator->get('enotaprograma.service');
+        $data    = $service->podatkiUprizoritve($uprizoritev);
 
         $em->flush();
 
-        return $data;
-    }
-
-    /**
-     * inicializira podatke
-     * 
-     * @param array $data
-     */
-    private function initData()
-    {
-        $polje                        = [
-            'avtorskiHonorarji' => 0,
-            'nasDelez'          => 0,
-            'tantieme'          => 0,
-        ];
-        $data['naziv']                = $polje;
-        $data['Funkcije']             = [];
-        $data['Do']                   = $polje;
-        $data['Na']                   = $polje;
-        $data['stZaposDrug']             = 0;
-        $data['stHonorarnih']         = 0;
-        $data['stHonorarnihIgr']      = 0;
-        $data['stHonorarnihIgrTujJZ'] = 0;
-        $data['stZaposUmet']         = 0;
         return $data;
     }
 

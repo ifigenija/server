@@ -88,10 +88,10 @@ class ProdukcijaDelitevCest
         $resp                      = $I->successfullyGetList($this->programPremieraUrl, []);
         $list                      = $resp['data'];
         $I->assertNotEmpty($list);
-        $this->objProgramPremiera1 = $drzava                    = array_pop($list);
-        $I->assertNotEmpty($drzava);
-        $this->objProgramPremiera2 = $drzava                    = array_pop($list);
-        $I->assertNotEmpty($drzava);
+        $this->objProgramPremiera1 = $ent                    = array_pop($list);
+        $I->assertNotEmpty($ent);
+        $this->objProgramPremiera2 = $ent                    = array_pop($list);
+        $I->assertNotEmpty($ent);
     }
 
     /**

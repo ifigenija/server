@@ -117,6 +117,13 @@ class ProdukcijaDelitev
 
     public function validate($mode = 'update')
     {
+        /**
+         * validacije za implementirati: $$
+         *   . le 1 maticniKop
+         *   . vsota odstotkov Fin <= 100
+         *   . zaprošen procent (glede na koeficient)
+         */
+        
         //$$ tu bi še naredili kontrole, preračunavanja za ostale prodDelitve iste enote programa ipd.
         // preracunaj odstotkeF
         //    - vsota vseh iste enote programa =100%
