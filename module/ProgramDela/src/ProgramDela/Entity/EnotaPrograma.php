@@ -318,6 +318,19 @@ class EnotaPrograma
         
     }
 
+    /**
+     * preračuna celotno vrednost kot seštevek deležev koprodukcij
+     *  
+     * @param type $mode
+     */
+    public function preracunajCelotnoVrednost()
+    {
+        $this->celotnaVrednost = 0; //init
+        foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
+            $this->celotnaVrednost += $koprodukcija->getDelez();
+        }
+    }
+
     public function validate($mode = 'update')
     {
         

@@ -95,22 +95,23 @@ class ProdukcijaDelitev
 
     public function preracunaj($smer = false)
     {
+        $this->getEnotaPrograma()->preracunajCelotnoVrednost();     // seštevek vseh deležev
+
         // izračunaj delež
-        $delez=$this->getDelez();
-        $celotnaVr=$this->getEnotaPrograma()->getCelotnaVrednost(); //$$ začasno
-        $odstFin=($delez!==0 ? 100 * $delez/ $this->getEnotaPrograma()->getCelotnaVrednost() : 0);
-        $odstFin= \Max\Functions::procRoundS($odstFin);   //Zaokrožimo na 2 decimalki predno shranimo
-        $this->setOdstotekFinanciranja($odstFin);
+        $delez                      = $this->getDelez();
+        $odstFin                    = ($this->getEnotaPrograma()->getCelotnaVrednost() !== 0 ? 100 * $delez / $this->getEnotaPrograma()->getCelotnaVrednost() : 0);
+        $odstFin                    = \Max\Functions::procRound($odstFin);   //Zaokrožimo na 2 decimalki predno shranimo
+        $this->odstotekFinanciranja = $odstFin;
 
         // izračunaj zaprošen znesek
         $zaproseno = $delez * $this->getZaprosenProcent() / 100;
 
-        $zaproseno = \Max\Functions::euroRound($zaproseno);   //Zaokrožimo na 2 decimalki predno shranimo
-        $this->setZaproseno($zaproseno);
+        $zaproseno       = \Max\Functions::euroRound($zaproseno);   //Zaokrožimo na 2 decimalki predno shranimo
+        $this->zaproseno = $zaproseno;
 
         if ($smer == \Max\Consts::UP) {
             if ($this->getEnotaPrograma()) {
-                $this->getEnotaPrograma()->preracunaj(\Max\Consts::UP);
+                $this->getEnotaPrograma()->preracunaj(\Max\Consts::UP);     
             }
         }
     }
@@ -119,11 +120,12 @@ class ProdukcijaDelitev
     {
         /**
          * validacije za implementirati: $$
-         *   . le 1 maticniKop
+         *   . le 1 maticniKop  (tudi pri delete koprodukcije!)
+         *   . enotaprograma obvezen podatek  
+         *      .. podobno pri drugi viri
          *   . vsota odstotkov Fin <= 100
          *   . zaprošen procent (glede na koeficient)
          */
-        
         //$$ tu bi še naredili kontrole, preračunavanja za ostale prodDelitve iste enote programa ipd.
         // preracunaj odstotkeF
         //    - vsota vseh iste enote programa =100%
@@ -136,10 +138,10 @@ class ProdukcijaDelitev
         // zaproseno= zaprosenProcent * delez
         // 
         $this->expect($this->getEnotaPrograma(), 'Ni enote programa za to koprodukcijo', 1000410);
-        $odstFin = \Max\Functions::procRoundS($this->getOdstotekFinanciranja());
+        $odstFin      = \Max\Functions::procRoundS($this->getOdstotekFinanciranja());
         $this->expect(($odstFin >= 0) && ($odstFin <= 100), 'Odstotek financiranja mora biti med 0 in 100', 1000412);
         $zaprosenProc = \Max\Functions::procRoundS($this->getZaprosenProcent());
-        $this->expect(($zaprosenProc >= 0) && ($zaprosenProc <= 100), 'Zaprošen odstotek mora biti med 0 in 100, je pa'.$zaprosenProc, 1000413);
+        $this->expect(($zaprosenProc >= 0) && ($zaprosenProc <= 100), 'Zaprošen odstotek mora biti med 0 in 100, je pa' . $zaprosenProc, 1000413);
 
         //$$ kontrole za vsoto procentov
         // za isto enoto programa je lahko le 1 delitev z isto produkcijsko hišo     
@@ -151,6 +153,14 @@ class ProdukcijaDelitev
                     return ($kopr->getKoproducent() == $this->getKoproducent()) && ($kopr->getId() !== $id); //vrne true, če obstaja drug koprodukcija z istim koproducentom
                 });
                 $this->expect(!$obstaja, "Koprodukcija z istim koproducentom že obstaja v enoti programa", 1000411);
+
+                $maticniCollection = $this->getEnotaPrograma()->getKoprodukcije()
+                        ->filter(function($key, $kopr) {
+                    return ($kopr->getMaticniKop());     //vrne vse zapise matičnih koproducentov
+                });
+                $stMaticnihKoproducentov=$maticniCollection->count();
+                $this->expect($stMaticnihKoproducentov==1, "Dovoljen natanko 1 matični koproducent, jih je pa ".$stMaticnihKoproducentov, 1000414);
+                // preveri število matičnih koprodukcij?
             }
         }
     }

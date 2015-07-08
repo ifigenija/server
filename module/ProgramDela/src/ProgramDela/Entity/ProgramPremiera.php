@@ -48,7 +48,7 @@ class ProgramPremiera
             }
         }
     }
-
+    
     public function validate($mode = 'update')
     {
         if ($this->getDokument()) {
