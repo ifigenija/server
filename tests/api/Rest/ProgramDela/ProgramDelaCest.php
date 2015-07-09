@@ -87,6 +87,7 @@ class ProgramDelaCest
     private $objDrugiVir2;
     private $objKoprodukcija1;
     private $objKoprodukcija2;
+    private $objKoprodukcija3;
 
     public function _before(ApiTester $I)
     {
@@ -337,17 +338,18 @@ class ProgramDelaCest
         codecept_debug($this->obj2);
         //premiera
         $data                      = [
-            'celotnaVrednost'      => 1.23,
-            'nasDelez'             => 1.23,
-            'zaproseno'            => 1.23,
-            'lastnaSredstva'       => 1.23,
-            'avtorskiHonorarji'    => 1.23,
-            'tantieme'             => 1.23,
-            'drugiViri'            => 1.23,
+            'celotnaVrednost'      => 1.24,
+            'nasDelez'             => 100.24,
+            'zaprosenProcent'      => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'       => 1.24,
+            'avtorskiHonorarji'    => 1.24,
+            'tantieme'             => 1.24,
+            'drugiViri'            => 1.24,
             'opredelitevDrugiViri' => "zz",
-//            'vlozekGostitelja'     => 1.23,
-            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 1.23,
+//            'vlozekGostitelja'     => 1.24,
+            'vlozekKoproducenta'   => 1.24,
+            'drugiJavni'           => 1.24,
 //            'obiskDoma'          => 1,
 //            'obiskGost'          => 1,
 //            'obiskZamejo'        => 1,
@@ -375,8 +377,9 @@ class ProgramDelaCest
         // še ena premiera
         $data                      = [
             'celotnaVrednost'      => 2.22,
-            'nasDelez'             => 2.22,
-            'zaproseno'            => 2.22,
+            'nasDelez'             => 200.22,
+            'zaprosenProcent'      => 30,
+//            'zaproseno'            =>1.24,
             'lastnaSredstva'       => 2.22,
             'avtorskiHonorarji'    => 2.22,
             'tantieme'             => 2.22,
@@ -411,16 +414,17 @@ class ProgramDelaCest
 
         //ponovitev premiere
         $data                               = [
-            'celotnaVrednost'         => 1.23,
+            'celotnaVrednost'         => 1.24,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
-            'nasDelez'                => 1.23,
-            'zaproseno'               => 1.23,
-            'lastnaSredstva'          => 1.23,
+            'nasDelez'                => 100.24,
+            'zaprosenProcent'         => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'          => 1.24,
             'avtorskiHonorarji'       => 33.22,
-            'tantieme'                => 1.23,
-            'drugiViri'               => 1.23,
-            'drugiJavni'              => 1.23,
+            'tantieme'                => 1.24,
+            'drugiViri'               => 1.24,
+            'drugiJavni'              => 1.24,
             'obiskDoma'               => 21,
             'obiskGost'               => 31,
             'obiskZamejo'             => 7,
@@ -431,8 +435,8 @@ class ProgramDelaCest
             'ponoviInt'               => 5,
             'utemeljitev'             => 'zz',
             'uprizoritev'             => $this->lookUprizoritev2['id'],
-            'vlozekGostitelja'        => 1.23,
-            'vlozekKoproducenta'      => 1.23,
+            'vlozekGostitelja'        => 1.24,
+            'vlozekKoproducenta'      => 1.24,
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote1['id'],
             'dokument'                => $this->obj2['id'],
         ];
@@ -442,16 +446,17 @@ class ProgramDelaCest
 
         //ponovitev prejšnjih sezon 
         $data                                = [
-            'celotnaVrednost'         => 1.23,
+            'celotnaVrednost'         => 1.24,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
-            'nasDelez'                => 1.23,
-            'zaproseno'               => 1.23,
-            'lastnaSredstva'          => 1.23,
+            'nasDelez'                => 100.24,
+            'zaprosenProcent'         => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'          => 1.24,
             'avtorskiHonorarji'       => 63.21,
-            'tantieme'                => 1.23,
-            'drugiViri'               => 1.23,
-            'drugiJavni'              => 1.23,
+            'tantieme'                => 1.24,
+            'drugiViri'               => 1.24,
+            'drugiJavni'              => 1.24,
             'obiskDoma'               => 2,
             'obiskGost'               => 3,
             'obiskZamejo'             => 11,
@@ -463,8 +468,8 @@ class ProgramDelaCest
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
             'utemeljitev'             => 'pon prej 1',
-            'vlozekKoproducenta'      => 1.23,
-            'vlozekGostitelja'        => 1.23,
+            'vlozekKoproducenta'      => 1.24,
+            'vlozekGostitelja'        => 1.24,
             'uprizoritev'             => $this->lookUprizoritev4['id'],
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote2['id'],
             'dokument'                => $this->obj2['id'],
@@ -476,17 +481,18 @@ class ProgramDelaCest
         //izjemni 
         $data                     = [
             'naziv'                => "zz",
-            'celotnaVrednost'      => 1.23,
-            'nasDelez'             => 1.23,
-            'zaproseno'            => 1.23,
-            'lastnaSredstva'       => 1.23,
+            'celotnaVrednost'      => 1.24,
+            'nasDelez'             => 100.24,
+            'zaprosenProcent'      => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'       => 1.24,
             'avtorskiHonorarji'    => 127.22,
-            'tantieme'             => 1.23,
-            'drugiViri'            => 1.23,
+            'tantieme'             => 1.24,
+            'drugiViri'            => 1.24,
             'opredelitevDrugiViri' => "zz",
-//            'vlozekGostitelja'     => 1.23,
-//            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 1.23,
+//            'vlozekGostitelja'     => 1.24,
+//            'vlozekKoproducenta'   => 1.24,
+            'drugiJavni'           => 1.24,
             'obiskDoma'            => 14,
 //            'obiskGost'            => 1,
 //            'obiskZamejo'          => 1,
@@ -512,14 +518,15 @@ class ProgramDelaCest
 
         //gostujoca 
         $data                       = [
-            'celotnaVrednost'    => 1.23,
-            'nasDelez'           => 1.23,
-            'zaproseno'          => 1.23,
-            'lastnaSredstva'     => 1.23,
+            'celotnaVrednost'    => 1.24,
+            'nasDelez'           => 100.24,
+            'zaprosenProcent'    => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'     => 1.24,
             'avtorskiHonorarji'  => 26.12,
-            'tantieme'           => 1.23,
-            'drugiViri'          => 1.23,
-            'drugiJavni'         => 1.23,
+            'tantieme'           => 1.24,
+            'drugiViri'          => 1.24,
+            'drugiJavni'         => 1.24,
             'obiskDoma'          => 4,
             'obiskGost'          => 1,
             'obiskZamejo'        => 1,
@@ -567,14 +574,15 @@ class ProgramDelaCest
             'stTujihSelektorjev'      => 1,
             'stZaposlenih'            => 1,
             'stHonorarnih'            => 22,
-            'zaproseno'               => 1.23,
-            'celotnaVrednost'         => 1.23,
-            'nasDelez'                => 1.23,
-            'lastnaSredstva'          => 1.23,
-            'drugiViri'               => 1.23,
+            'zaprosenProcent'         => 30,
+//            'zaproseno'            =>1.24,
+            'celotnaVrednost'         => 1.24,
+            'nasDelez'                => 100.24,
+            'lastnaSredstva'          => 1.24,
+            'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => 'zz',
-            'vlozekKoproducenta'      => 1.23,
-            'drugiJavni'              => 1.23,
+            'vlozekKoproducenta'      => 1.24,
+            'drugiJavni'              => 1.24,
             'sort'                    => 1,
             'programDela'             => $this->obj2['id'],
         ];
@@ -602,14 +610,15 @@ class ProgramDelaCest
             'stTujihSelektorjev'      => 1,
             'stZaposlenih'            => 1,
             'stHonorarnih'            => 30,
-            'zaproseno'               => 1.23,
-            'celotnaVrednost'         => 1.23,
-            'nasDelez'                => 1.23,
-            'lastnaSredstva'          => 1.23,
-            'drugiViri'               => 1.23,
+            'zaprosenProcent'         => 30,
+//            'zaproseno'            =>1.24,
+            'celotnaVrednost'         => 1.24,
+            'nasDelez'                => 100.24,
+            'lastnaSredstva'          => 1.24,
+            'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => 'zz',
-            'vlozekKoproducenta'      => 1.23,
-            'drugiJavni'              => 1.23,
+            'vlozekKoproducenta'      => 1.24,
+            'drugiJavni'              => 1.24,
             'sort'                    => 1,
             'programDela'             => $this->obj2['id'],
         ];
@@ -635,9 +644,9 @@ class ProgramDelaCest
             'datumGostovanja'    => '2011-02-01T00:00:00+0100',
             'ponoviInt'          => 9,
             'obiskInt'           => 9,
-            'zaproseno'          => 9.12,
-            'celotnaVrednost'    => 9.12,
-            'nasDelez'           => 9.12,
+            'zaprosenProcent'    => 30,
+//            'zaproseno'            =>1.24,
+            'nasDelez'           => 90.12,
             'transportniStroski' => 9.12,
             'avtorskiHonorarji'  => 9.12,
             'odkup'              => 9.12,
@@ -659,9 +668,9 @@ class ProgramDelaCest
             'datumGostovanja'    => '2011-02-01T00:00:00+0100',
             'ponoviInt'          => 11,
             'obiskInt'           => 9,
-            'zaproseno'          => 9.12,
-            'celotnaVrednost'    => 9.12,
-            'nasDelez'           => 9.12,
+            'zaprosenProcent'    => 30,
+//            'zaproseno'            =>1.24,
+            'nasDelez'           => 90.12,
             'transportniStroski' => 9.12,
             'avtorskiHonorarji'  => 48.33,
             'odkup'              => 9.12,
@@ -691,18 +700,18 @@ class ProgramDelaCest
             'avtorPE'         => 'zz',
             'obsegPE'         => 'zz',
             'mesecPE'         => 'zz',
-            'vrednostPE'      => 1.23,
+            'vrednostPE'      => 1.24,
             'stPE'            => 1,
             'soorganizator'   => null,
             'obiskDoma'       => 6,
             'stZaposlenih'    => 1,
             'stHonorarnih'    => 18,
-            'zaproseno'       => 1.23,
-            'celotnaVrednost' => 1.23,
-            'nasDelez'        => 1.23,
-            'lastnaSredstva'  => 1.23,
-            'drugiViri'       => 1.23,
-            'drugiJavni'      => 1.23,
+            'zaprosenProcent' => 30,
+//            'zaproseno'            =>1.24,
+            'nasDelez'        => 100.24,
+            'lastnaSredstva'  => 1.24,
+            'drugiViri'       => 1.24,
+            'drugiJavni'      => 1.24,
             'sort'            => 1,
         ];
         $this->objProgramRazno1 = $ent                    = $I->successfullyCreate($this->programRaznoUrl, $data);
@@ -716,18 +725,18 @@ class ProgramDelaCest
             'avtorPE'         => 'zz',
             'obsegPE'         => 'zz',
             'mesecPE'         => 'zz',
-            'vrednostPE'      => 1.23,
+            'vrednostPE'      => 1.24,
             'stPE'            => 1,
             'soorganizator'   => null,
             'obiskDoma'       => 22,
             'stZaposlenih'    => 1,
             'stHonorarnih'    => 14,
-            'zaproseno'       => 1.23,
-            'celotnaVrednost' => 1.23,
-            'nasDelez'        => 1.23,
-            'lastnaSredstva'  => 1.23,
-            'drugiViri'       => 1.23,
-            'drugiJavni'      => 1.23,
+            'zaprosenProcent' => 30,
+//            'zaproseno'            =>1.24,
+            'nasDelez'        => 100.24,
+            'lastnaSredstva'  => 1.24,
+            'drugiViri'       => 1.24,
+            'drugiJavni'      => 1.24,
             'sort'            => 1,
         ];
         $this->objProgramRazno2 = $ent                    = $I->successfullyCreate($this->programRaznoUrl, $data);
@@ -835,17 +844,18 @@ class ProgramDelaCest
         codecept_debug($this->lookUprizoritev1);
         //premiera
         $data = [
-            'celotnaVrednost'      => 1.23,
-            'nasDelez'             => 1.23,
-            'zaproseno'            => 1.23,
-            'lastnaSredstva'       => 1.23,
-            'avtorskiHonorarji'    => 41.23,
-            'tantieme'             => 1.23,
-            'drugiViri'            => 1.23,
+            'celotnaVrednost'      => 1.24,
+            'nasDelez'             => 100.24,
+            'zaprosenProcent'      => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'       => 1.24,
+            'avtorskiHonorarji'    => 41.24,
+            'tantieme'             => 1.24,
+            'drugiViri'            => 1.24,
             'opredelitevDrugiViri' => "zz",
-//            'vlozekGostitelja'     => 1.23,
-            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 1.23,
+//            'vlozekGostitelja'     => 1.24,
+            'vlozekKoproducenta'   => 1.24,
+            'drugiJavni'           => 1.24,
 //            'obiskDoma'          => 1,
 //            'obiskGost'          => 1,
 //            'obiskZamejo'        => 1,
@@ -871,17 +881,18 @@ class ProgramDelaCest
 
         // poizkusimo kreirati še en zapis z isto uprizoritvijo
         $data = [
-            'celotnaVrednost'      => 1.23,
-            'nasDelez'             => 1.23,
-            'zaproseno'            => 1.23,
-            'lastnaSredstva'       => 1.23,
-            'avtorskiHonorarji'    => 1.23,
-            'tantieme'             => 1.23,
-            'drugiViri'            => 1.23,
+            'celotnaVrednost'      => 1.24,
+            'nasDelez'             => 100.24,
+            'zaprosenProcent'      => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'       => 1.24,
+            'avtorskiHonorarji'    => 1.24,
+            'tantieme'             => 1.24,
+            'drugiViri'            => 1.24,
             'opredelitevDrugiViri' => "zz",
-//            'vlozekGostitelja'     => 1.23,
-            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 1.23,
+//            'vlozekGostitelja'     => 1.24,
+            'vlozekKoproducenta'   => 1.24,
+            'drugiJavni'           => 1.24,
 //            'obiskDoma'          => 1,
 //            'obiskGost'          => 1,
 //            'obiskZamejo'        => 1,
@@ -907,17 +918,18 @@ class ProgramDelaCest
 
         // kreiranje zapisa z drugo uprizoritvijo mora uspeti:
         $data = [
-            'celotnaVrednost'      => 1.23,
-            'nasDelez'             => 1.23,
-            'zaproseno'            => 1.23,
-            'lastnaSredstva'       => 1.23,
+            'celotnaVrednost'      => 1.24,
+            'nasDelez'             => 100.24,
+            'zaprosenProcent'      => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'       => 1.24,
             'avtorskiHonorarji'    => 55.25,
-            'tantieme'             => 1.23,
-            'drugiViri'            => 1.23,
+            'tantieme'             => 1.24,
+            'drugiViri'            => 1.24,
             'opredelitevDrugiViri' => "zz",
-//            'vlozekGostitelja'     => 1.23,
-            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 1.23,
+//            'vlozekGostitelja'     => 1.24,
+            'vlozekKoproducenta'   => 1.24,
+            'drugiJavni'           => 1.24,
 //            'obiskDoma'          => 1,
 //            'obiskGost'          => 1,
 //            'obiskZamejo'        => 1,
@@ -953,19 +965,20 @@ class ProgramDelaCest
     {
         codecept_debug($this->lookUprizoritev1);
         $data = [
-            'celotnaVrednost'         => 1.23,
+            'celotnaVrednost'         => 1.24,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
-            'nasDelez'                => 1.23,
-            'zaproseno'               => 1.23,
-            'lastnaSredstva'          => 1.23,
+            'nasDelez'                => 100.24,
+            'zaprosenProcent'         => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'          => 1.24,
             'avtorskiHonorarji'       => 74.22,
-            'tantieme'                => 1.23,
-            'drugiViri'               => 1.23,
+            'tantieme'                => 1.24,
+            'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => "zz",
-            'vlozekGostitelja'        => 1.23,
-            'vlozekKoproducenta'      => 1.23,
-            'drugiJavni'              => 1.23,
+            'vlozekGostitelja'        => 1.24,
+            'vlozekKoproducenta'      => 1.24,
+            'drugiJavni'              => 1.24,
             'obiskDoma'               => 1,
             'obiskGost'               => 1,
             'obiskZamejo'             => 1,
@@ -985,19 +998,20 @@ class ProgramDelaCest
 
         // poizkusimo kreirati še en zapis z isto uprizoritvijo
         $data = [
-            'celotnaVrednost'         => 1.23,
+            'celotnaVrednost'         => 1.24,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
-            'nasDelez'                => 1.23,
-            'zaproseno'               => 1.23,
-            'lastnaSredstva'          => 1.23,
-            'avtorskiHonorarji'       => 1.23,
-            'tantieme'                => 1.23,
-            'drugiViri'               => 1.23,
+            'nasDelez'                => 100.24,
+            'zaprosenProcent'         => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'          => 1.24,
+            'avtorskiHonorarji'       => 1.24,
+            'tantieme'                => 1.24,
+            'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => "zz",
-            'vlozekGostitelja'        => 1.23,
-            'vlozekKoproducenta'      => 1.23,
-            'drugiJavni'              => 1.23,
+            'vlozekGostitelja'        => 1.24,
+            'vlozekKoproducenta'      => 1.24,
+            'drugiJavni'              => 1.24,
             'obiskDoma'               => 1,
             'obiskGost'               => 1,
             'obiskZamejo'             => 1,
@@ -1017,19 +1031,20 @@ class ProgramDelaCest
 
         // kreiranje zapisa z drugo uprizoritvijo mora uspeti:
         $data = [
-            'celotnaVrednost'         => 1.23,
+            'celotnaVrednost'         => 1.24,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
-            'nasDelez'                => 1.23,
-            'zaproseno'               => 1.23,
-            'lastnaSredstva'          => 1.23,
+            'nasDelez'                => 100.24,
+            'zaprosenProcent'         => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'          => 1.24,
             'avtorskiHonorarji'       => 4.3,
-            'tantieme'                => 1.23,
-            'drugiViri'               => 1.23,
+            'tantieme'                => 1.24,
+            'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => "zz",
-            'vlozekGostitelja'        => 1.23,
-            'vlozekKoproducenta'      => 1.23,
-            'drugiJavni'              => 1.23,
+            'vlozekGostitelja'        => 1.24,
+            'vlozekKoproducenta'      => 1.24,
+            'drugiJavni'              => 1.24,
             'obiskDoma'               => 1,
             'obiskGost'               => 1,
             'obiskZamejo'             => 1,
@@ -1059,19 +1074,20 @@ class ProgramDelaCest
     {
         codecept_debug($this->lookUprizoritev1);
         $data = [
-            'celotnaVrednost'         => 1.23,
+            'celotnaVrednost'         => 1.24,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
-            'nasDelez'                => 1.23,
-            'zaproseno'               => 1.23,
-            'lastnaSredstva'          => 1.23,
+            'nasDelez'                => 100.24,
+            'zaprosenProcent'         => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'          => 1.24,
             'avtorskiHonorarji'       => 83.33,
-            'tantieme'                => 1.23,
-            'drugiViri'               => 1.23,
+            'tantieme'                => 1.24,
+            'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => "zz",
-            'vlozekGostitelja'        => 1.23,
-            'vlozekKoproducenta'      => 1.23,
-            'drugiJavni'              => 1.23,
+            'vlozekGostitelja'        => 1.24,
+            'vlozekKoproducenta'      => 1.24,
+            'drugiJavni'              => 1.24,
             'obiskDoma'               => 1,
             'obiskGost'               => 1,
             'obiskZamejo'             => 1,
@@ -1096,19 +1112,20 @@ class ProgramDelaCest
 
         // poizkusimo kreirati še en zapis z isto uprizoritvijo
         $data = [
-            'celotnaVrednost'         => 1.23,
+            'celotnaVrednost'         => 1.24,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
-            'nasDelez'                => 1.23,
-            'zaproseno'               => 1.23,
-            'lastnaSredstva'          => 1.23,
-            'avtorskiHonorarji'       => 1.23,
-            'tantieme'                => 1.23,
-            'drugiViri'               => 1.23,
+            'nasDelez'                => 100.24,
+            'zaprosenProcent'         => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'          => 1.24,
+            'avtorskiHonorarji'       => 1.24,
+            'tantieme'                => 1.24,
+            'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => "zz",
-            'vlozekGostitelja'        => 1.23,
-            'vlozekKoproducenta'      => 1.23,
-            'drugiJavni'              => 1.23,
+            'vlozekGostitelja'        => 1.24,
+            'vlozekKoproducenta'      => 1.24,
+            'drugiJavni'              => 1.24,
             'obiskDoma'               => 1,
             'obiskGost'               => 1,
             'obiskZamejo'             => 1,
@@ -1133,19 +1150,20 @@ class ProgramDelaCest
 
         // kreiranje zapisa z drugo uprizoritvijo mora uspeti:
         $data = [
-            'celotnaVrednost'         => 1.23,
+            'celotnaVrednost'         => 1.24,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
-            'nasDelez'                => 1.23,
-            'zaproseno'               => 1.23,
-            'lastnaSredstva'          => 1.23,
+            'nasDelez'                => 100.24,
+            'zaprosenProcent'         => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'          => 1.24,
             'avtorskiHonorarji'       => 5.22,
-            'tantieme'                => 1.23,
-            'drugiViri'               => 1.23,
+            'tantieme'                => 1.24,
+            'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => "zz",
-            'vlozekGostitelja'        => 1.23,
-            'vlozekKoproducenta'      => 1.23,
-            'drugiJavni'              => 1.23,
+            'vlozekGostitelja'        => 1.24,
+            'vlozekKoproducenta'      => 1.24,
+            'drugiJavni'              => 1.24,
             'obiskDoma'               => 1,
             'obiskGost'               => 1,
             'obiskZamejo'             => 1,
@@ -1181,17 +1199,18 @@ class ProgramDelaCest
         codecept_debug($this->lookUprizoritev1);
         //gostujoca 
         $data = [
-            'celotnaVrednost'      => 1.23,
-            'nasDelez'             => 1.23,
-            'zaproseno'            => 1.23,
-            'lastnaSredstva'       => 1.23,
-//            'avtorskiHonorarji'  => 1.23,
-//            'tantieme'           => 1.23,
-            'drugiViri'            => 1.23,
+            'celotnaVrednost'      => 1.24,
+            'nasDelez'             => 100.24,
+            'zaprosenProcent'      => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'       => 1.24,
+//            'avtorskiHonorarji'  => 1.24,
+//            'tantieme'           => 1.24,
+            'drugiViri'            => 1.24,
             'opredelitevDrugiViri' => "zz",
-//            'vlozekGostitelja'     => 1.23,
-//            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 1.23,
+//            'vlozekGostitelja'     => 1.24,
+//            'vlozekKoproducenta'   => 1.24,
+            'drugiJavni'           => 1.24,
             'obiskDoma'            => 1,
 //            'obiskGost'          => 1,
 //            'obiskZamejo'        => 1,
@@ -1213,17 +1232,18 @@ class ProgramDelaCest
 
         // poizkusimo kreirati še en zapis z isto uprizoritvijo
         $data = [
-            'celotnaVrednost'      => 1.23,
-            'nasDelez'             => 1.23,
-            'zaproseno'            => 1.23,
-            'lastnaSredstva'       => 1.23,
-//            'avtorskiHonorarji'  => 1.23,
-//            'tantieme'           => 1.23,
-            'drugiViri'            => 1.23,
+            'celotnaVrednost'      => 1.24,
+            'nasDelez'             => 100.24,
+            'zaprosenProcent'      => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'       => 1.24,
+//            'avtorskiHonorarji'  => 1.24,
+//            'tantieme'           => 1.24,
+            'drugiViri'            => 1.24,
             'opredelitevDrugiViri' => "zz",
-//            'vlozekGostitelja'     => 1.23,
-//            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 1.23,
+//            'vlozekGostitelja'     => 1.24,
+//            'vlozekKoproducenta'   => 1.24,
+            'drugiJavni'           => 1.24,
             'obiskDoma'            => 1,
 //            'obiskGost'          => 1,
 //            'obiskZamejo'        => 1,
@@ -1244,17 +1264,18 @@ class ProgramDelaCest
 
         // kreiranje zapisa z drugo uprizoritvijo mora uspeti:
         $data = [
-            'celotnaVrednost'      => 1.23,
-            'nasDelez'             => 1.23,
-            'zaproseno'            => 1.23,
-            'lastnaSredstva'       => 1.23,
-//            'avtorskiHonorarji'  => 1.23,
-//            'tantieme'           => 1.23,
-            'drugiViri'            => 1.23,
+            'celotnaVrednost'      => 1.24,
+            'nasDelez'             => 100.24,
+            'zaprosenProcent'      => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'       => 1.24,
+//            'avtorskiHonorarji'  => 1.24,
+//            'tantieme'           => 1.24,
+            'drugiViri'            => 1.24,
             'opredelitevDrugiViri' => "zz",
-//            'vlozekGostitelja'     => 1.23,
-//            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 1.23,
+//            'vlozekGostitelja'     => 1.24,
+//            'vlozekKoproducenta'   => 1.24,
+            'drugiJavni'           => 1.24,
             'obiskDoma'            => 1,
 //            'obiskGost'          => 1,
 //            'obiskZamejo'        => 1,
@@ -1360,21 +1381,21 @@ class ProgramDelaCest
         $I->assertNotEmpty($ent['id']);
 
         $data = [
-            'delez'           => 0.37,
-            'zaprosenProcent' => 50,
+            'delez'           => 37.1,
+            'zaprosenProcent' => 40,
             'enotaPrograma'   => $this->objProgramPremiera1['id'],
             'koproducent'     => $this->lookProdukcijskaHisa2['id'],
         ];
         $ent  = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
-        $data = [
-            'delez'           => 0.11,
-            'zaprosenProcent' => 50,
+        $data                   = [
+            'delez'           => 11.2,
+            'zaprosenProcent' => 20,
             'enotaPrograma'   => $this->objProgramPremiera1['id'],
             'koproducent'     => $this->lookProdukcijskaHisa4['id'],
         ];
-        $ent  = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+        $this->objKoprodukcija3 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
         $data = [
@@ -1387,7 +1408,7 @@ class ProgramDelaCest
         $I->assertNotEmpty($ent['id']);
 
         $data = [
-            'delez'           => 0.49,
+            'delez'           => 20.22,
             'zaprosenProcent' => 40,
             'enotaPrograma'   => $this->objProgramPonovitevPrejsnjih1['id'],
             'koproducent'     => $this->lookProdukcijskaHisa3['id'],
@@ -1396,7 +1417,7 @@ class ProgramDelaCest
         $I->assertNotEmpty($ent['id']);
 
         $data = [
-            'delez'           => 0.20,
+            'delez'           => 112,
             'zaprosenProcent' => 16.3,
             'enotaPrograma'   => $this->objProgramIzjemni1['id'],
             'koproducent'     => $this->lookProdukcijskaHisa1['id'],
@@ -1405,7 +1426,7 @@ class ProgramDelaCest
 
         $I->assertNotEmpty($ent['id']);
         $data = [
-            'delez'           => 0.69,
+            'delez'           => 30,
             'zaprosenProcent' => 56.2,
             'enotaPrograma'   => $this->objProgramIzjemni1['id'],
             'koproducent'     => $this->lookProdukcijskaHisa4['id'],
@@ -1435,13 +1456,12 @@ class ProgramDelaCest
     /**
      *  kreiramo druge vire za več enot programa
      * 
-     * 
      * @param ApiTester $I
      */
     public function createVecDrugihVirov(ApiTester $I)
     {
         $data               = [
-            'znesek'        => 1.23,
+            'znesek'        => 1.24,
             'opis'          => "zz",
             'enotaPrograma' => $this->objProgramPremiera1['id'],
             'mednarodni'    => FALSE,
@@ -1506,7 +1526,7 @@ class ProgramDelaCest
      * @depends createVecProgramovPonovitevPrejšnjihZIstoUprizoritvijo
      * @param ApiTester $I
      */
-    public function updateZaPreracunKazalnikov(ApiTester $I)     //$$ začasno
+    public function updateZaPreracunKazalnikov(ApiTester $I)
     {
 
         $ent  = $I->successfullyGet($this->restUrl, $this->obj2['id']);
@@ -1521,10 +1541,10 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(0, $entR['stPonPrejMalihKopr']);
         $I->assertGreaterThanOrEqual(0, $entR['stPonPrejSredKopr']);
         $I->assertGreaterThanOrEqual(1, $entR['stPonPrejVelikihKopr']);
-        $I->assertGreaterThanOrEqual(13.29, $entR['vrPS1']);
+        $I->assertGreaterThanOrEqual(1170.90, $entR['vrPS1'], "vrednost PS1");
         $I->assertGreaterThanOrEqual(6.12, $entR['vrPS1Mat'], "vr PS1 mat");
         $I->assertGreaterThanOrEqual(0.66, $entR['vrPS1GostovSZ'], "vr ps1 gostov slo zam");
-        $I->assertGreaterThanOrEqual(5.91, $entR['vrPS1Do']);
+        $I->assertGreaterThanOrEqual(549.24, $entR['vrPS1Do']);
         $I->assertGreaterThanOrEqual(108, $entR['stNekomerc'], "št nekomerc");
         $I->assertGreaterThanOrEqual(48, $entR['stIzvPonPrem'], "št. izvedb pon premier");
         $I->assertGreaterThanOrEqual(47, $entR['stIzvPrej'], "št. izvedb prejšnjih");
@@ -1555,24 +1575,25 @@ class ProgramDelaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function createEnoteProgramaZaPreracunKazalnikov(ApiTester $I)     //$$ začasno
+    public function createEnoteProgramaZaPreracunKazalnikov(ApiTester $I)
     {
         //premiera
         $data = [
             'celotnaVrednost'      => 26.2,
             'nasDelez'             => 26.2,
-            'zaproseno'            => 13.2,
+            'zaprosenProcent'      => 30,
+//            'zaproseno'            =>1.24,
             'lastnaSredstva'       => 11,
             'avtorskiHonorarji'    => 4.23,
             'tantieme'             => 5.23,
-            'drugiViri'            => 1.23,
+            'drugiViri'            => 1.24,
             'opredelitevDrugiViri' => "zz",
-//            'vlozekGostitelja'     => 1.23,
-            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 1.23,
+//            'vlozekGostitelja'     => 1.24,
+            'vlozekKoproducenta'   => 1.24,
+            'drugiJavni'           => 1.24,
 //  
-//            'vlozekKoproducenta'   => 1.23,
-//            'drugiJavni'           => 1.23,
+//            'vlozekKoproducenta'   => 1.24,
+//            'drugiJavni'           => 1.24,
 //            'obiskDoma'          => 1,
 //            'obiskGost'          => 1,
 //            'obiskZamejo'        => 1,
@@ -1600,16 +1621,17 @@ class ProgramDelaCest
 
         //ponovitev prejšnjih sezon 
         $data = [
-            'celotnaVrednost'         => 1.23,
+            'celotnaVrednost'         => 1.24,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
-            'nasDelez'                => 1.23,
-            'zaproseno'               => 1.23,
-            'lastnaSredstva'          => 1.23,
+            'nasDelez'                => 100.24,
+            'zaprosenProcent'         => 30,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'          => 1.24,
             'avtorskiHonorarji'       => 63.21,
-            'tantieme'                => 1.23,
-            'drugiViri'               => 1.23,
-            'drugiJavni'              => 1.23,
+            'tantieme'                => 1.24,
+            'drugiViri'               => 1.24,
+            'drugiJavni'              => 1.24,
             'obiskDoma'               => 2,
             'obiskGost'               => 3,
             'obiskZamejo'             => 11,
@@ -1621,8 +1643,8 @@ class ProgramDelaCest
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
             'utemeljitev'             => 'ppj8',
-            'vlozekKoproducenta'      => 1.23,
-            'vlozekGostitelja'        => 1.23,
+            'vlozekKoproducenta'      => 1.24,
+            'vlozekGostitelja'        => 1.24,
             'uprizoritev'             => NULL,
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote2['id'],
             'dokument'                => $this->obj2['id'],
@@ -1692,7 +1714,7 @@ class ProgramDelaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function updateSKoncomPredZacetkom(ApiTester $I)
+    public function updateSKoncemPredZacetkom(ApiTester $I)
     {
         $ent            = $this->obj2;
         $ent['zacetek'] = '2015-02-01T00:00:00+0100';
@@ -1708,6 +1730,40 @@ class ProgramDelaCest
 
         $entR = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($entR['id']);
+    }
+
+    /**
+     * test validacij  
+     *  
+     * @param ApiTester $I
+     */
+    public function updateProgramPremieraValidacije(ApiTester $I)
+    {
+        //pri validaciji ne bi smel najti samega sebe
+        $data                       = $this->objProgramPremiera1;
+        $data['tipProgramskeEnote'] = $this->lookTipProgramskeEnote3['id']; // mala  koprodukcija
+        $data['zaprosenProcent']    = 40;
+        $ent                        = $I->successfullyUpdate($this->programPremieraUrl, $data['id'], $data);
+        $I->assertNotEmpty($ent['id']);
+
+        $data['zaprosenProcent'] = 100.01;
+        $resp                    = $I->failToUpdate($this->programPremieraUrl, $data['id'], $data);
+        $I->assertNotEmpty($resp);
+        $I->assertEquals(1000622, $resp[0]['code']);
+
+        // več kot koeficient PE
+        $data['zaprosenProcent'] = 40.01;
+        $resp                    = $I->failToUpdate($this->programPremieraUrl, $data['id'], $data);
+        $I->assertNotEmpty($resp);
+        $I->assertEquals(1000623, $resp[0]['code']);
+
+        $dataKop = $this->objKoprodukcija3;
+        $dataKop['zaprosenProcent']=20.01; //spremenimo za toliko, da bo več kot skupni koeficient 1.0
+       
+        codecept_debug($dataKop);
+        $resp    = $I->failToUpdate($this->produkcijaDelitevUrl, $dataKop['id'], $dataKop);
+        $I->assertNotEmpty($resp);
+        $I->assertEquals(1000624, $resp[0]['code']);
     }
 
     /**

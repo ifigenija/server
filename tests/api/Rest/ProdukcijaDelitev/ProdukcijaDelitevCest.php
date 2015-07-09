@@ -44,6 +44,10 @@ class ProdukcijaDelitevCest
     private $objPopa;
     private $objProdukcijskaHisa;
     private $lookProdukcijskaHisa1;
+    private $lookProdukcijskaHisa2;
+    private $lookProdukcijskaHisa3;
+    private $lookProdukcijskaHisa4;
+    private $lookProdukcijskaHisa5;
     private $objAlternacija1;
     private $objAlternacija2;
     private $objOseba;
@@ -101,13 +105,31 @@ class ProdukcijaDelitevCest
     public function lookupProdukcijskaHisa(ApiTester $I)
     {
 
-        $resp                        = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
+        $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "total records");
-        $this->lookProdukcijskaHisa1 = $resp['data'][0];
-        $this->lookProdukcijskaHisa2 = $resp['data'][1];
+
+        $ind                         = array_search("0900", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa1 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
+
+        $ind                         = array_search("0989", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa2 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
+
+        $ind                         = array_search("0986", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa3 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
+
+        $ind                         = array_search("0982", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa4 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
+
+        $ind                         = array_search("0984", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa5 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
     }
 
     /**
@@ -124,7 +146,7 @@ class ProdukcijaDelitevCest
 //            'odstotekFinanciranja' => 40,
             'delez'           => 3500,
             'zaprosenProcent' => 50,
-            'zaproseno'       => 50,
+//            'zaproseno'       => 50,
             'enotaPrograma'   => $this->objProgramPremiera1['id'],
             'koproducent'     => $this->lookProdukcijskaHisa1['id'],
         ];
@@ -178,11 +200,11 @@ class ProdukcijaDelitevCest
     public function update(ApiTester $I)
     {
         $ent                         = $this->obj;
-        $ent['odstotekFinanciranja'] = 70;
+        $ent['zaprosenProcent'] = 22;
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['odstotekFinanciranja'], 70);
+        $I->assertEquals($entR['zaprosenProcent'], 22);
     }
 
     /**
@@ -197,9 +219,9 @@ class ProdukcijaDelitevCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['delez'], 3500.00);
-        $I->assertEquals($ent['odstotekFinanciranja'], 70); //$$ odvisno od  celotne vrednosti
-        $I->assertEquals($ent['zaprosenProcent'], 50);
-        $I->assertEquals($ent['zaproseno'], 1750.00);    //$$ odvisno od  celotne vrednosti
+        $I->assertEquals($ent['odstotekFinanciranja'], 100); //$$ odvisno od  celotne vrednosti
+        $I->assertEquals($ent['zaprosenProcent'], 22);
+        $I->assertEquals($ent['zaproseno'], 770.00);    //$$ odvisno od  celotne vrednosti
         $I->assertEquals($ent['enotaPrograma'], $this->objProgramPremiera1['id']);
         $I->assertEquals($ent['koproducent'], $this->lookProdukcijskaHisa1['id']);
     }

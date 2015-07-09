@@ -7,9 +7,10 @@ forms:
         elements:
 #            - id
             - naziv
-            - celotnaVrednost
+#            - celotnaVrednost
             - nasDelez
-            - zaproseno
+            - zaprosenProcent 
+#            - zaproseno
             - lastnaSredstva
 #            - avtorskiHonorarji
 #            - tantieme

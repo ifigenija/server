@@ -95,8 +95,8 @@ class EnotaProgramaService
                 }
             }
         }
-        $data['Do']['nasDelez'] = $data['Do']['avtorskiHonorarji'] + $data['Do']['tantieme'] + $vrMatDoSum;
-        $data['Na']['nasDelez'] = $data['Na']['avtorskiHonorarji'] + $data['Na']['tantieme'] + $vrMatNaSum;
+        $data['Do']['lastnaSredstva'] = $data['Do']['avtorskiHonorarji'] + $data['Do']['tantieme'] + $vrMatDoSum;
+        $data['Na']['lastnaSredstva'] = $data['Na']['avtorskiHonorarji'] + $data['Na']['tantieme'] + $vrMatNaSum;
 //$$ še naziv , izpostavljene funkcije ...
 //        upr.naslov naziv Naslov upr. 
 //        
@@ -116,7 +116,7 @@ class EnotaProgramaService
     {
         $polje                        = [
             'avtorskiHonorarji' => 0,
-            'nasDelez'          => 0,
+            'lastnaSredstva'          => 0,
             'tantieme'          => 0,
         ];
         $data['naziv']                = $polje;

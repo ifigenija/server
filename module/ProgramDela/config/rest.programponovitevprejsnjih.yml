@@ -6,11 +6,12 @@ forms:
     default: 
         elements:
 #            - id
-            - celotnaVrednost
+#            - celotnaVrednost
             - nasDelez
             - celotnaVrednostMat
             - celotnaVrednostGostovSZ
-            - zaproseno
+            - zaprosenProcent 
+#            - zaproseno
             - lastnaSredstva
             - avtorskiHonorarji
             - tantieme
