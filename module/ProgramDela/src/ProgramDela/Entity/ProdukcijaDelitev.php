@@ -29,7 +29,7 @@ class ProdukcijaDelitev
     /**
      * Odstotek financiranja posameznega koproducenta
      * 
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
      * @Max\I18n(label="prodel.odstotekFinanciranja", description="prodel.odstotekFinanciranja")
      * @var double
      */
@@ -93,25 +93,44 @@ class ProdukcijaDelitev
      */
     private $maticniKop = false;
 
-    public function preracunaj($smer = false)
+    /**
+     * Izračuna odstotekFinanciranja
+     * 
+     * potrebno na novo izračunati vedno, ko se celotna vrednost spremeni
+     */
+    public function preracunajOdstotekFinanciranja()
     {
-        $this->getEnotaPrograma()->preracunajCelotnoVrednost();     // seštevek vseh deležev
+        /**
+         * izračunaj % financiranja
+         */
+        $celVrednost = $this->getEnotaPrograma()->getCelotnaVrednost();
 
-        // izračunaj delež
-        $delez                      = $this->getDelez();
-        $odstFin                    = ($this->getEnotaPrograma()->getCelotnaVrednost() !== 0 ? 100 * $delez / $this->getEnotaPrograma()->getCelotnaVrednost() : 0);
+        $odstFin                    = ($celVrednost !== 0 ? 100 * $this->getDelez() / $celVrednost : 0);
         $odstFin                    = \Max\Functions::procRound($odstFin);   //Zaokrožimo na 2 decimalki predno shranimo
         $this->odstotekFinanciranja = $odstFin;
+    }
 
-        // izračunaj zaprošen znesek
-        $zaproseno = $delez * $this->getZaprosenProcent() / 100;
+    public function preracunaj($smer = false)
+    {
+        if ($this->getMaticniKop()) {
+            $this->zaprosenProcent = $this->getEnotaPrograma()->getZaprosenProcent();
+            $this->zaproseno       = $this->getEnotaPrograma()->getZaproseno();
+            $this->delez           = $this->getEnotaPrograma()->getNasDelez();
+        }
 
-        $zaproseno       = \Max\Functions::euroRound($zaproseno);   //Zaokrožimo na 2 decimalki predno shranimo
-        $this->zaproseno = $zaproseno;
+        $this->getEnotaPrograma()->preracunajCelotnoVrednost();     // seštevek vseh deležev
+//        $this->preracunajOdstotekFinanciranja();    //$$ verjetno ne bi rabili, ker se kliče že v preracunajCelotnoVrednost
+
+        if (!$this->getMaticniKop()) {
+            // izračunaj zaprošen znesek
+            $zaproseno       = $this->getDelez() * $this->getZaprosenProcent() / 100;
+            $zaproseno       = \Max\Functions::euroRound($zaproseno);   //Zaokrožimo na 2 decimalki predno shranimo
+            $this->zaproseno = $zaproseno;
+        }
 
         if ($smer == \Max\Consts::UP) {
             if ($this->getEnotaPrograma()) {
-                $this->getEnotaPrograma()->preracunaj(\Max\Consts::UP);     
+                $this->getEnotaPrograma()->preracunaj(\Max\Consts::UP);
             }
         }
     }
@@ -155,11 +174,11 @@ class ProdukcijaDelitev
                 $this->expect(!$obstaja, "Koprodukcija z istim koproducentom že obstaja v enoti programa", 1000411);
 
                 $maticniCollection = $this->getEnotaPrograma()->getKoprodukcije()
-                        ->filter(function($key, $kopr) {
+                        ->filter(function($kopr) {
                     return ($kopr->getMaticniKop());     //vrne vse zapise matičnih koproducentov
                 });
-                $stMaticnihKoproducentov=$maticniCollection->count();
-                $this->expect($stMaticnihKoproducentov==1, "Dovoljen natanko 1 matični koproducent, jih je pa ".$stMaticnihKoproducentov, 1000414);
+                $stMaticnihKoproducentov = $maticniCollection->count();
+                $this->expect($stMaticnihKoproducentov == 1, "Dovoljen natanko 1 matični koproducent, jih je pa " . $stMaticnihKoproducentov, 1000414);
                 // preveri število matičnih koprodukcij?
             }
         }

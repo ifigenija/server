@@ -90,7 +90,8 @@ class ProgramGostovanjeCest
             'datumGostovanja'    => '2011-02-01T00:00:00+0100',
             'ponoviInt'          => 9,
             'obiskInt'           => 9,
-            'zaproseno'          => 9.12,
+            'zaprosenProcent' => 100,
+//            'zaproseno'            =>9.12,
             'celotnaVrednost'    => 9.12,
             'nasDelez'    => 9.12,
             'transportniStroski' => 9.12,
@@ -115,7 +116,8 @@ class ProgramGostovanjeCest
             'datumGostovanja'    => '2011-02-01T00:00:00+0100',
             'ponoviInt'          => 3,
             'obiskInt'           => 3,
-            'zaproseno'          => 3.12,
+            'zaprosenProcent' => 100,
+//            'zaproseno'            =>3.12,
             'celotnaVrednost'    => 3.12,
             'nasDelez'    => 3.12,
             'transportniStroski' => 3.12,
@@ -165,7 +167,8 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['datumGostovanja'], '2011-02-01T00:00:00+0100');
         $I->assertEquals($ent['ponoviInt'], 9);
         $I->assertEquals($ent['obiskInt'], 9);
-        $I->assertEquals($ent['zaproseno'], 9.12);
+        $I->assertEquals($ent['zaprosenProcent'], 100.00);
+        $I->assertEquals($ent['zaproseno'], 9.12,"izračunano zaprošeno");
         $I->assertEquals($ent['celotnaVrednost'], 9.12);
         $I->assertEquals($ent['nasDelez'], 9.12);
         $I->assertEquals($ent['transportniStroski'], 9.12);

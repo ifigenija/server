@@ -49,6 +49,9 @@ class ProgramPonovitevPrejsnjihCest
     private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
     private $lookProdukcijskaHisa1;
     private $lookProdukcijskaHisa2;
+    private $lookProdukcijskaHisa3;
+    private $lookProdukcijskaHisa4;
+    private $lookProdukcijskaHisa5;
 
     public function _before(ApiTester $I)
     {
@@ -67,13 +70,31 @@ class ProgramPonovitevPrejsnjihCest
     public function lookupProdukcijskaHisa(ApiTester $I)
     {
 
-        $resp                        = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
+        $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "total records");
-        $this->lookProdukcijskaHisa1 = $resp['data'][0];
-        $this->lookProdukcijskaHisa2 = $resp['data'][1];
+
+        $ind                         = array_search("0900", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa1 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
+
+        $ind                         = array_search("0989", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa2 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
+
+        $ind                         = array_search("0986", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa3 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
+
+        $ind                         = array_search("0982", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa4 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
+
+        $ind                         = array_search("0984", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa5 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
     }
 
     /**
@@ -105,36 +126,37 @@ class ProgramPonovitevPrejsnjihCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'celotnaVrednost'         => 1.23,
-            'nasDelez'         => 1.23,
+            'celotnaVrednost'         => 1.24,
+            'nasDelez'                => 1.24,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
-            'zaproseno'            => 1.23,
-            'lastnaSredstva'       => 1.23,
-            'avtorskiHonorarji'    => 1.23,
-            'tantieme'             => 1.23,
-//            'drugiViri'            => 1.23,
-            'vlozekGostitelja'     => 1.23,
-            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 1.23,
-            'obiskDoma'            => 1,
-            'obiskGost'            => 1,
-            'obiskZamejo'          => 1,
-            'obiskInt'             => 1,
-            'ponoviDoma'           => 1,
-            'ponoviZamejo'         => 1,
-            'ponoviGost'           => 1,
+            'zaprosenProcent'         => 100,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'          => 1.24,
+            'avtorskiHonorarji'       => 1.24,
+            'tantieme'                => 1.24,
+//            'drugiViri'            => 1.24,
+            'vlozekGostitelja'        => 1.24,
+            'vlozekKoproducenta'      => 1.24,
+            'drugiJavni'              => 1.24,
+            'obiskDoma'               => 1,
+            'obiskGost'               => 1,
+            'obiskZamejo'             => 1,
+            'obiskInt'                => 1,
+            'ponoviDoma'              => 1,
+            'ponoviZamejo'            => 1,
+            'ponoviGost'              => 1,
 //            'ponoviInt'            => 1,
-            'utemeljitev'          => 'zz',
-            'uprizoritev'          => NULL,
-            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
-            'dokument'             => null,
-            'sort'                 => 1,
-            'stZaposUmet'         => 1,
+            'utemeljitev'             => 'zz',
+            'uprizoritev'             => NULL,
+            'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
+            'dokument'                => null,
+            'sort'                    => 1,
+            'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
-            'stHonorarnih'         => 1,
-            'stHonorarnihIgr'      => 1,
-            'stHonorarnihIgrTujJZ' => 1,
+            'stHonorarnih'            => 1,
+            'stHonorarnihIgr'         => 1,
+            'stHonorarnihIgrTujJZ'    => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -143,35 +165,36 @@ class ProgramPonovitevPrejsnjihCest
         // kreiramo še en zapis
         $data       = [
             'celotnaVrednost'         => 4.56,
-            'nasDelez'         => 4.56,
+            'nasDelez'                => 4.56,
             'celotnaVrednostMat'      => 2.23,
             'celotnaVrednostGostovSZ' => 1.11,
-            'zaproseno'            => 4.56,
-            'lastnaSredstva'       => 4.56,
-            'avtorskiHonorarji'    => 4.56,
-            'tantieme'             => 4.56,
+            'zaprosenProcent'         => 100,
+//            'zaproseno'            =>1.24,
+            'lastnaSredstva'          => 4.56,
+            'avtorskiHonorarji'       => 4.56,
+            'tantieme'                => 4.56,
 //            'drugiViri'            => 4.56,
-            'vlozekGostitelja'     => 1.23,
-            'vlozekKoproducenta'   => 1.23,
-            'drugiJavni'           => 4.56,
-            'obiskDoma'            => 4,
-            'obiskGost'            => 4,
-            'obiskZamejo'          => 4,
-            'obiskInt'             => 4,
-            'ponoviDoma'           => 4,
-            'ponoviZamejo'         => 4,
-            'ponoviGost'           => 4,
+            'vlozekGostitelja'        => 1.24,
+            'vlozekKoproducenta'      => 1.24,
+            'drugiJavni'              => 4.56,
+            'obiskDoma'               => 4,
+            'obiskGost'               => 4,
+            'obiskZamejo'             => 4,
+            'obiskInt'                => 4,
+            'ponoviDoma'              => 4,
+            'ponoviZamejo'            => 4,
+            'ponoviGost'              => 4,
 //            'ponoviInt'            => 4,
-            'utemeljitev'          => 'aa',
-            'uprizoritev'          => NULL,
-            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
-            'dokument'             => null,
-            'sort'                 => 2,
-            'stZaposUmet'         => 2,
+            'utemeljitev'             => 'aa',
+            'uprizoritev'             => NULL,
+            'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
+            'dokument'                => null,
+            'sort'                    => 2,
+            'stZaposUmet'             => 2,
             'stZaposDrug'             => 2,
-            'stHonorarnih'         => 2,
-            'stHonorarnihIgr'      => 2,
-            'stHonorarnihIgrTujJZ' => 2,
+            'stHonorarnih'            => 2,
+            'stHonorarnihIgr'         => 2,
+            'stHonorarnihIgrTujJZ'    => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -186,12 +209,12 @@ class ProgramPonovitevPrejsnjihCest
      */
     public function update(ApiTester $I)
     {
-        $ent              = $this->obj1;
-        $ent['zaproseno'] = 2.34;
+        $ent                    = $this->obj1;
+        $ent['zaprosenProcent'] = 50;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['zaproseno'], 2.34);
+        $I->assertEquals($entR['zaprosenProcent'], 50.00);
     }
 
     /**
@@ -205,18 +228,19 @@ class ProgramPonovitevPrejsnjihCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['celotnaVrednost'], 1.23);
-        $I->assertEquals($ent['nasDelez'], 1.23);
-       $I->assertEquals($ent['celotnaVrednostMat'], 1.02);
+        $I->assertEquals($ent['celotnaVrednost'], 1.24);
+        $I->assertEquals($ent['nasDelez'], 1.24);
+        $I->assertEquals($ent['celotnaVrednostMat'], 1.02);
         $I->assertEquals($ent['celotnaVrednostGostovSZ'], 0.11);
-         $I->assertEquals($ent['zaproseno'], 2.34);
-        $I->assertEquals($ent['lastnaSredstva'], 1.23);
-        $I->assertEquals($ent['avtorskiHonorarji'], 1.23);
-        $I->assertEquals($ent['tantieme'], 1.23);
-//        $I->assertEquals($ent['drugiViri'], 1.23);
-        $I->assertEquals($ent['vlozekGostitelja'], 1.23);
-        $I->assertEquals($ent['vlozekKoproducenta'], 1.23);
-        $I->assertEquals($ent['drugiJavni'], 1.23);
+        $I->assertEquals($ent['zaprosenProcent'], 50.00);
+        $I->assertEquals($ent['zaproseno'], 0.62, "izračunano zaprošeno");
+        $I->assertEquals($ent['lastnaSredstva'], 1.24);
+        $I->assertEquals($ent['avtorskiHonorarji'], 1.24);
+        $I->assertEquals($ent['tantieme'], 1.24);
+//        $I->assertEquals($ent['drugiViri'], 1.24);
+        $I->assertEquals($ent['vlozekGostitelja'], 1.24);
+        $I->assertEquals($ent['vlozekKoproducenta'], 1.24);
+        $I->assertEquals($ent['drugiJavni'], 1.24);
         $I->assertEquals($ent['obiskDoma'], 1);
         $I->assertEquals($ent['obiskGost'], 1);
         $I->assertEquals($ent['obiskZamejo'], 1);
@@ -289,7 +313,7 @@ class ProgramPonovitevPrejsnjihCest
     public function createVecDrugihVirov(ApiTester $I)
     {
         $data               = [
-            'znesek'        => 1.23,
+            'znesek'        => 1.24,
             'opis'          => "zz",
             'enotaPrograma' => $this->obj2['id'],
             'mednarodni'    => FALSE,
@@ -299,7 +323,7 @@ class ProgramPonovitevPrejsnjihCest
 
         // kreiramo še en zapis
         $data               = [
-            'znesek'        => 1.23,
+            'znesek'        => 1.24,
             'opis'          => "dd",
             'enotaPrograma' => $this->obj2['id'],
             'mednarodni'    => true,
@@ -335,22 +359,22 @@ class ProgramPonovitevPrejsnjihCest
     public function createVecKoprodukcij(ApiTester $I)
     {
         $data                        = [
-           'delez'                => 1.12,
-             'zaprosenProcent'      => 50,
-            'zaproseno'            => 50,
-            'enotaPrograma'        => $this->obj2['id'],
-            'koproducent'          => $this->lookProdukcijskaHisa1['id'],
+            'delez'           => 1.12,
+            'zaprosenProcent' => 50,
+            'zaproseno'       => 50,
+            'enotaPrograma'   => $this->obj2['id'],
+            'koproducent'     => $this->lookProdukcijskaHisa1['id'],
         ];
         $this->objProdukcijaDelitev1 = $ent                         = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
         $data                        = [
-           'delez'                => 1.02,
-             'zaprosenProcent'      => 10,
-            'zaproseno'            => 20,
-            'enotaPrograma'        => $this->obj2['id'],
-            'koproducent'          => $this->lookProdukcijskaHisa2['id'],
+            'delez'           => 1.02,
+            'zaprosenProcent' => 10,
+            'zaproseno'       => 20,
+            'enotaPrograma'   => $this->obj2['id'],
+            'koproducent'     => $this->lookProdukcijskaHisa2['id'],
         ];
         $this->objProdukcijaDelitev2 = $ent                         = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($ent['id']);

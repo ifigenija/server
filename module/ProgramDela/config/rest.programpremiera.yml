@@ -6,9 +6,10 @@ forms:
     default: 
         elements:
 #            - id
-            - celotnaVrednost
+#            - celotnaVrednost
             - nasDelez
-            - zaproseno
+            - zaprosenProcent 
+#            - zaproseno
             - lastnaSredstva
             - avtorskiHonorarji
             - tantieme

@@ -70,6 +70,17 @@ class EnotaPrograma
     private $celotnaVrednostGostovSZ;
 
     /**
+     * % nasega deleža
+     * 
+     * je <= maksfaktor
+     * 
+     * @ORM\Column(type="decimal", nullable=true, precision=6, scale=2)
+     * @Max\I18n(label="ep.zaprosenProcent", description="ep.zaprosenProcent")
+     * @var double
+     */
+    private $zaprosenProcent;
+
+    /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.zaproseno", description="ep.zaproseno")   
      * @var double
@@ -315,7 +326,14 @@ class EnotaPrograma
 
     public function preracunaj($smer = false)
     {
-        
+        $this->preracunajCelotnoVrednost();     //$$ verjetno malo redundantno
+
+        /**
+         * izračunaj zaprošen znesek
+         */
+        $zaproseno       = $this->getNasDelez() * $this->getZaprosenProcent() / 100;
+        $zaproseno       = \Max\Functions::euroRound($zaproseno);   //Zaokrožimo na 2 decimalki predno shranimo
+        $this->zaproseno = $zaproseno;
     }
 
     /**
@@ -325,15 +343,50 @@ class EnotaPrograma
      */
     public function preracunajCelotnoVrednost()
     {
-        $this->celotnaVrednost = 0; //init
-        foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
-            $this->celotnaVrednost += $koprodukcija->getDelez();
+        if ($this->getKoprodukcije()->isEmpty()) {
+            $this->celotnaVrednost = $this->getNasDelez();
+        } else {
+            $this->celotnaVrednost = 0; //init
+            foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
+                $this->celotnaVrednost += $koprodukcija->getDelez();
+            }
+            // najprej moramo imeti sešteto celotno vrednost, da lahko preračunamo odstotke
+            foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
+                $koprodukcija->preracunajOdstotekFinanciranja();
+            }
         }
     }
 
     public function validate($mode = 'update')
     {
-        
+        /**
+         * pred primerjanjem damo števila s plavajočo vejico v string
+         */
+        $ls = \Max\Functions::euroRoundS($this->getLastnaSredstva());
+        $nd = \Max\Functions::euroRoundS($this->getNasDelez());
+        $cv = \Max\Functions::euroRoundS($this->getCelotnaVrednost());
+        $this->expect($ls <= $nd, "Lastna sredstva ne smejo biti večja od našega deleža", 1000620);
+        $this->expect($nd <= $cv, "Naš delež ne sme biti večji od celotne vrednosti", 1000621);
+
+        $zaprosenProc   = \Max\Functions::procRoundS($this->getZaprosenProcent());
+        $this->expect(($zaprosenProc >= 0) && ($zaprosenProc <= 100), 'Zaprošen odstotek mora biti med 0 in 100, je pa ' . $zaprosenProc, 1000622);
+        if ($this->tipProgramskeEnote) {
+            $maxFaktor = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxFaktor());
+            $maxFaktor00 = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxFaktor()*100);
+            $maxVsi    = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxVsi());
+            $maxVsi00    = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxVsi()*100);
+            $this->expect($zaprosenProc <= $maxFaktor00, 'Zaprošen odstotek ne sme biti večji kot koeficient programske enote ' . $maxFaktor, 1000623);
+
+            // še kontrola na skupni koeficient
+            if (!$this->getKoprodukcije()->isEmpty()) {
+                $vsiZaprProc = 0; //init
+                foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
+                    $vsiZaprProc+= $koprodukcija->getZaprosenProcent();
+                }
+                $vsiZaprProc00 = \Max\Functions::procRoundS($vsiZaprProc / 100);
+                $this->expect(($vsiZaprProc <= $maxVsi00), 'Vsota zaprošenih odstotkov koproducentov ne sme biti večji kot skupni koeficient ' . $maxFaktor, 1000624);
+            }
+        }
     }
 
     public function getId()
@@ -696,6 +749,17 @@ class EnotaPrograma
     public function setSort($sort)
     {
         $this->sort = $sort;
+        return $this;
+    }
+
+    public function getZaprosenProcent()
+    {
+        return $this->zaprosenProcent;
+    }
+
+    public function setZaprosenProcent($zaprosenProcent)
+    {
+        $this->zaprosenProcent = $zaprosenProcent;
         return $this;
     }
 
