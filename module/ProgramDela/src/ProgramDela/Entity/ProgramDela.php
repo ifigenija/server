@@ -35,7 +35,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="entiteta.naziv", description="entiteta.naziv")
+     * @Max\I18n(label="entiteta.naziv", description="entiteta.d.naziv")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -124,7 +124,7 @@ class ProgramDela
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona")
      * @ORM\JoinColumn(name="sezona_id", referencedColumnName="id")
-     * @Max\I18n(label="programDela.sezona", description="programDela.sezona")
+     * @Max\I18n(label="programDela.sezona", description="programDela.d.sezona")
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Sezona
      */
