@@ -62,4 +62,4 @@ lists:
     vse: 
         filter:
 hydrator:
-    lookups: [oseba, popa]    
+    lookups: [oseba, popa, alternacija]
