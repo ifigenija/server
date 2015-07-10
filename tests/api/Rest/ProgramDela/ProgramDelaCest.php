@@ -1579,7 +1579,7 @@ class ProgramDelaCest
     public function createEnoteProgramaZaPreracunKazalnikov(ApiTester $I)
     {
         //premiera
-        $data = [
+        $data                      = [
             'celotnaVrednost'      => 26.2,
             'nasDelez'             => 26.2,
             'zaprosenProcent'      => 30,
@@ -1616,7 +1616,7 @@ class ProgramDelaCest
             'dokument'             => $this->obj2['id'],
         ];
         // pri create bi moral preračunati kazalnike tudi v programu dela
-        $this->objProgramPremiera3=$ent  = $I->successfullyCreate($this->programPremieraUrl, $data);
+        $this->objProgramPremiera3 = $ent                       = $I->successfullyCreate($this->programPremieraUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
 
@@ -1817,14 +1817,14 @@ class ProgramDelaCest
         $kopr = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($kopr['id']);
         // ali se je vrednost popravila v EP?
-        $ep       = $I->successfullyGet($this->programPremieraUrl, $this->objProgramPremiera1['id']);
-        $ep       = $I->successfullyGet($this->programPremieraUrl, $this->objProgramPremiera1['id']);
+        $ep   = $I->successfullyGet($this->programPremieraUrl, $this->objProgramPremiera1['id']);
+        $ep   = $I->successfullyGet($this->programPremieraUrl, $this->objProgramPremiera1['id']);
         $I->assertEquals($newCelVr, $ep['celotnaVrednost'], "nova celotna vrednost v enoti programa");
 
         // zbrišemo koprodukcijo
         $ent = $I->successfullyDelete($this->produkcijaDelitevUrl, $kopr['id']);
         // ali se je vrednost popravila nazaj v EP?
-        $ep       = $I->successfullyGet($this->programPremieraUrl, $this->objProgramPremiera1['id']);
+        $ep  = $I->successfullyGet($this->programPremieraUrl, $this->objProgramPremiera1['id']);
         $I->assertEquals($oldCelVr, $ep['celotnaVrednost'], "stara celotna vrednost v enoti programa");
     }
 
@@ -1835,7 +1835,7 @@ class ProgramDelaCest
      */
     public function deleteEnotaProgramaAliSpremenjenProgramDela(ApiTester $I)
     {
-        $pd       = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $pd           = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         $oldStPremier = $pd['stPremier'];
         $oldStPremier = $pd['stPremier'];
         codecept_debug($oldStPremier);
@@ -1843,9 +1843,9 @@ class ProgramDelaCest
         // zbrišemo premiero
         $ent = $I->successfullyDelete($this->programPremieraUrl, $this->objProgramPremiera3['id']);
         // ali se je vrednost popravila nazaj v EP?
-        $pd       = $I->successfullyGet($this->restUrl, $this->obj2['id']);
-        $I->assertEquals($oldStPremier-1, $pd['stPremier']);
-        
+        $pd  = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $I->assertEquals($oldStPremier - 1, $pd['stPremier']);
+
 //        Še zbrišemo en festival $$
     }
 
@@ -1949,6 +1949,66 @@ class ProgramDelaCest
         //$$ še 
         //  . koprodukcija premiere
         // . koprodukcija festivala
+    }
+
+    /**
+     * pri update-u se kliče preracun metoda, kjer je preračun kazalnikov
+     * 
+     * @depends createVecEnotPrograma
+     * @depends createVecProgramovPonovitevPrejšnjihZIstoUprizoritvijo
+     * @param ApiTester $I
+     */
+    public function kloniraj(ApiTester $I)
+    {
+        // preberemo star program dela
+        $oldPD = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $I->assertNotEmpty($oldPD);
+//   
+        // kloniramo program dela
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'kloniraj', ["programDelaId" => $this->obj2['id']]);
+        $I->assertNotEmpty($resp);
+        codecept_data($resp);
+        $I->seeResponseIsJson();
+        $I->assertTrue($resp, "ali uspešno");       //$$ id 
+
+        $ent  = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+//        codecept_debug($ent);
+        // pri update preračuna kazalnike
+        $entR = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertNotEmpty($entR['id']);
+        $I->assertGreaterThanOrEqual(4, $entR['stPremier'], "št. premier");
+        $I->assertGreaterThanOrEqual(3, $entR['stPonPrej'], "št. ponovitev prejšnjih sezon");
+        $I->assertGreaterThanOrEqual(0, $entR['stPonPrejVelikih']);
+        $I->assertGreaterThanOrEqual(1, $entR['stPonPrejMalih']);
+        $I->assertGreaterThanOrEqual(1, $entR['stPonPrejMalihKopr']);
+        $I->assertGreaterThanOrEqual(0, $entR['stPonPrejSredKopr']);
+        $I->assertGreaterThanOrEqual(1, $entR['stPonPrejVelikihKopr']);
+        $I->assertGreaterThanOrEqual(1170.90, $entR['vrPS1'], "vrednost PS1");
+        $I->assertGreaterThanOrEqual(6.12, $entR['vrPS1Mat'], "vr PS1 mat");
+        $I->assertGreaterThanOrEqual(0.66, $entR['vrPS1GostovSZ'], "vr ps1 gostov slo zam");
+        $I->assertGreaterThanOrEqual(549.24, $entR['vrPS1Do']);
+        $I->assertGreaterThanOrEqual(108, $entR['stNekomerc'], "št nekomerc");
+        $I->assertGreaterThanOrEqual(48, $entR['stIzvPonPrem'], "št. izvedb pon premier");
+        $I->assertGreaterThanOrEqual(47, $entR['stIzvPrej'], "št. izvedb prejšnjih");
+        $I->assertGreaterThanOrEqual(4, $entR['stIzvGostuj'], "št. izvedb gostujočih");
+        $I->assertGreaterThanOrEqual(9, $entR['stIzvOstalihNek'], "št. izvedb ostalih nekom");
+        $I->assertGreaterThanOrEqual(27, $entR['stGostovanjSlo'], "");
+        $I->assertGreaterThanOrEqual(25, $entR['stGostovanjZam'], "");
+        $I->assertGreaterThanOrEqual(20, $entR['stGostovanjInt'], "");
+        $I->assertGreaterThanOrEqual(378, $entR['stObiskNekom'], "Obisk vseh nekom.");
+        $I->assertGreaterThanOrEqual(300, $entR['stObiskNekomMat'], "");
+        $I->assertGreaterThanOrEqual(38, $entR['stObiskNekomGostSlo'], "");
+        $I->assertGreaterThanOrEqual(22, $entR['stObiskNekomGostZam'], "");
+        $I->assertGreaterThanOrEqual(18, $entR['stObiskNekomGostInt'], "");
+        $I->assertEquals(3.5, $entR['avgObiskPrired'], "povprečno št. obiskovalcev");     //kvocient drugih dveh števil
+        $I->assertGreaterThanOrEqual(141, $entR['stHonorarnih'], "");
+        $I->assertGreaterThanOrEqual(28, $entR['stHonorarnihIgr'], "");
+        $I->assertGreaterThanOrEqual(20, $entR['stHonorarnihIgrTujJZ'], "");
+        $I->assertGreaterThanOrEqual(420.88, $entR['sredstvaAvt'], "");
+        $I->assertGreaterThanOrEqual(109.98, $entR['sredstvaInt'], "mednarodni viri");
+        $I->assertEquals(3, $entR['stKoprodukcij'], "");
+        $I->assertEquals(2, $entR['stKoprodukcijInt'], "število mednarodnih koprodukcij");
+        $I->assertEquals(1, $entR['stKoprodukcijNVO'], "");
     }
 
 }
