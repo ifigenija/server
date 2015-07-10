@@ -334,6 +334,11 @@ class EnotaPrograma
         $zaproseno       = $this->getNasDelez() * $this->getZaprosenProcent() / 100;
         $zaproseno       = \Max\Functions::euroRound($zaproseno);   //Zaokrožimo na 2 decimalki predno shranimo
         $this->zaproseno = $zaproseno;
+
+        // preračunamo navzdol
+        foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
+            $koprodukcija->preracunaj();        // se ne zacikla, ker ni smer=up
+        }
     }
 
     /**
@@ -367,14 +372,18 @@ class EnotaPrograma
         $cv = \Max\Functions::euroRoundS($this->getCelotnaVrednost());
         $this->expect($ls <= $nd, "Lastna sredstva ne smejo biti večja od našega deleža", 1000620);
         $this->expect($nd <= $cv, "Naš delež ne sme biti večji od celotne vrednosti", 1000621);
-
-        $zaprosenProc   = \Max\Functions::procRoundS($this->getZaprosenProcent());
+        /**
+         * $$ morda še validacija   nd = ls + drugi viri  + zapr mk + ...??
+         */
+        
+        
+        $zaprosenProc = \Max\Functions::procRoundS($this->getZaprosenProcent());
         $this->expect(($zaprosenProc >= 0) && ($zaprosenProc <= 100), 'Zaprošen odstotek mora biti med 0 in 100, je pa ' . $zaprosenProc, 1000622);
         if ($this->tipProgramskeEnote) {
-            $maxFaktor = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxFaktor());
-            $maxFaktor00 = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxFaktor()*100);
-            $maxVsi    = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxVsi());
-            $maxVsi00    = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxVsi()*100);
+            $maxFaktor   = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxFaktor());
+            $maxFaktor00 = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxFaktor() * 100);
+            $maxVsi      = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxVsi());
+            $maxVsi00    = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxVsi() * 100);
             $this->expect($zaprosenProc <= $maxFaktor00, 'Zaprošen odstotek ne sme biti večji kot koeficient programske enote ' . $maxFaktor, 1000623);
 
             // še kontrola na skupni koeficient
@@ -383,9 +392,14 @@ class EnotaPrograma
                 foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
                     $vsiZaprProc+= $koprodukcija->getZaprosenProcent();
                 }
-                $vsiZaprProc00 = \Max\Functions::procRoundS($vsiZaprProc / 100);
+                $vsiZaprProc = \Max\Functions::procRoundS($vsiZaprProc);
                 $this->expect(($vsiZaprProc <= $maxVsi00), 'Vsota zaprošenih odstotkov koproducentov ne sme biti večji kot skupni koeficient ' . $maxFaktor, 1000624);
             }
+
+            /**
+             * $$ tu bi lahko še validirali tip programske enote, npr:
+             *   - če obstajajo koprodukcije, je tip programske enote lahko le med 3-5
+             */
         }
     }
 

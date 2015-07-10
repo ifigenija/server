@@ -46,6 +46,19 @@ class EnotaProgramaCest
 
     /**
      * 
+     * @param ApiTester $I
+     */
+    public function novaMaticnaKoprodukcijaBrezEnotePrograma(ApiTester $I)
+    {
+
+        // pričakujemo napako, ker delitev že obstaja
+        $resp = $I->failCallRpc($this->rpcUrl, 'novaMaticnaKoprodukcija', ["enotaProgramaId" => "neobstojeca"]);
+        $I->assertNotEmpty($resp);
+//        $I->assertEquals(1000941, $resp['code'], "ni enote programa");  // javi napako code: -32000
+    }
+
+    /**
+     * 
      * @param ApiTester $I 
      */
     public function novaMaticnaKoprodukcija(ApiTester $I)
@@ -64,24 +77,10 @@ class EnotaProgramaCest
     {
 
         // pričakujemo napako
-        $resp = $I->successfullyCallRpc($this->rpcUrl, 'novaMaticnaKoprodukcija', ["enotaProgramaId" => $this->objProgramPremiera1['id']]);
+        $resp = $I->failCallRpc($this->rpcUrl, 'novaMaticnaKoprodukcija', ["enotaProgramaId" => $this->objProgramPremiera1['id']]);
         $I->assertNotEmpty($resp);
-        $I->seeResponseIsJson();
-        $I->assertEquals(36, strlen($resp), "dolžina guid");
-        $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
+        $I->assertEquals(1000414, $resp['code'], "dovoljen le 1 mat. koproducent"); 
     }
 
-    /**
-     * 
-     * @param ApiTester $I
-     */
-    public function novaMaticnaKoprodukcijaBrezEnotePrograma(ApiTester $I)
-    {
-
-        // pričakujemo napako, ker delitev že obstaja
-        $resp = $I->failCallRpc($this->rpcUrl, 'novaMaticnaKoprodukcija', ["enotaProgramaId" => "neobstojeca"]);
-        $I->assertNotEmpty($resp);
-//        $I->assertEquals(1000941, $resp['code'], "ni enote programa");  // javi napako code: -32000
-    }
 
 }
