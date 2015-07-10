@@ -45,7 +45,7 @@ class PodatkiUprizoritveCest
      */
     public function podatkiUprizoritve(ApiTester $I)
     {
-        // pričakujemo kreiranje nove produkcijske delitve za lastno gledališče
+        //
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'podatkiUprizoritve', ["uprizoritevId" => $this->lookUprizoritev['id']]);
         codecept_debug($resp);
         $I->assertNotEmpty($resp);

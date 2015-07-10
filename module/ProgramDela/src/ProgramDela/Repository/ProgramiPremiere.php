@@ -18,45 +18,8 @@ use Max\Repository\AbstractMaxRepository;
  * @author rado
  */
 class ProgramiPremiere
-        extends \Max\Repository\AbstractMaxRepository
+        extends EnotePrograma
 {
-
-    protected $sortOptions = [
-        "default" => [
-            "sort" => ["alias" => "p.sort"]
-        ],
-        "vse"     => [
-            "sort" => ["alias" => "p.sort"]
-        ]
-    ];
-
-    public function getPaginator(array $options, $name = "default")
-    {
-        switch ($name) {
-            case "default":
-            case "vse":
-                $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
-                return new DoctrinePaginator(new Paginator($qb));
-        }
-    }
-
-    public function getVseQb($options)
-    {
-        $qb = $this->createQueryBuilder('p');
-        $e  = $qb->expr();
-        if (!empty($options['q'])) {
-
-            $naz = $e->like('p.id', ':id');
-
-            $qb->andWhere($e->orX($naz));
-
-            $qb->setParameter('id', "{$options['q']}%", "string");
-        }
-
-        return $qb;
-    }
-
     /**
      * 
      * @param type $object  entiteta
@@ -64,14 +27,9 @@ class ProgramiPremiere
      */
     public function create($object, $params = null)
     {
-        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000520);
-
         if ($object->getDokument()) {
             $object->getDokument()->getPremiere()->add($object);
         }
-
-        // preračunamo vrednosti v smeri navzgor
-        $object->preracunaj(\Max\Consts::UP);
 
         parent::create($object, $params);
     }
@@ -81,44 +39,15 @@ class ProgramiPremiere
      * @param type $object entiteta
      * @param type $params
      */
-    public function update($object, $params = null)
-    {
-        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000521);
-
-        // preračunamo vrednosti v smeri navzgor
-        $object->preracunaj(\Max\Consts::UP);
-
-        parent::update($object, $params);
-    }
-
-    /**
-     * 
-     * @param type $object entiteta
-     * @param type $params
-     */
     public function delete($object)
     {
-        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000522);
-
-        parent::delete($object);
-    }
-
-    /**
-     * vrne true, če je pripadajoči program dela zaklenjen
-     * 
-     * @param entiteta $obj
-     * @return boolean
-     */
-    private function zaklenjenProgramDela($obj)
-    {
-        if ($obj) {
-            if ($obj->getDokument()) {
-                if ($obj->getDokument()->getZakljuceno()) {
-                    return true;
-                }
-            }
+        // $$ morda nastane težava, če uporabnik najprej spremeni programdela in sproži brisanje v istem koraku
+        if ($object->getDokument()) {
+            $object->getDokument()->getPremiere()->removeElement($object);
+            $object->getDokument()->preracunaj(\Max\Consts::UP);
         }
-        return false;
+        
+        parent::delete($object);
     }
 
 }

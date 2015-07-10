@@ -56,6 +56,7 @@ class ProdukcijskaHisaFixture
         $getref = $this->getReference($v[2]);
         $o->setPopa($getref);
 
+        $o->validate();
 
         $referenca = 'ProdukcijskaHisa-' . $v[0];
         var_dump($referenca);
@@ -66,12 +67,12 @@ class ProdukcijskaHisaFixture
     {
         return [
             // 987 napolni že pri fixture-ju PopaMaticnoTest
-            ['0987', 'A', 'Popa-0987',],
-            ['0989', 'A', 'Popa-0989',],
-            ['0986', 'A', 'Popa-0986',],
-            ['0984', 'A', 'Popa-0984',],
-            ['0983', 'A', 'Popa-0983',],
-            ['0982', 'A', 'Popa-0982',],
+            ['0987', 'AK', 'Popa-0987',],
+            ['0989', 'AK', 'Popa-0989',],
+            ['0986', 'AK', 'Popa-0986',],
+            ['0984', 'AK', 'Popa-0984',],
+            ['0983', 'AK', 'Popa-0983',],
+            ['0982', 'AK', 'Popa-0982',],
         ];
     }
 

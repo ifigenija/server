@@ -100,6 +100,12 @@ class DrugiViri
     {
         $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000602);
 
+        // $$ morda nastane težava, če uporabnik najprej spremeni enoto programa in sproži brisanje v istem koraku
+        if ($object->getEnotaPrograma()) {
+            $object->getEnotaPrograma()->getDrugiViri()->removeElement($object);
+            $object->getEnotaPrograma()->preracunaj(\Max\Consts::UP);
+        }
+
         parent::delete($object);
     }
 

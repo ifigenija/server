@@ -45,6 +45,7 @@ class ProgramDelaCest
     private $programPonovitevPrejsnjihUrl = '/rest/programponovitevprejsnjih';
     private $objProgramPremiera1;
     private $objProgramPremiera2;
+    private $objProgramPremiera3;
     private $objProgramPonovitevPremiere1;
     private $objProgramPonovitevPremiere2;
     private $objProgramPonovitevPrejsnjih1;
@@ -471,7 +472,7 @@ class ProgramDelaCest
             'vlozekKoproducenta'      => 1.24,
             'vlozekGostitelja'        => 1.24,
             'uprizoritev'             => $this->lookUprizoritev4['id'],
-            'tipProgramskeEnote'      => $this->lookTipProgramskeEnote2['id'],
+            'tipProgramskeEnote'      => $this->lookTipProgramskeEnote3['id'],
             'dokument'                => $this->obj2['id'],
         ];
         $this->objProgramPonovitevPrejsnjih1 = $ent                                 = $I->successfullyCreate($this->programPonovitevPrejsnjihUrl, $data);
@@ -1537,8 +1538,8 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(4, $entR['stPremier'], "št. premier");
         $I->assertGreaterThanOrEqual(3, $entR['stPonPrej'], "št. ponovitev prejšnjih sezon");
         $I->assertGreaterThanOrEqual(0, $entR['stPonPrejVelikih']);
-        $I->assertGreaterThanOrEqual(2, $entR['stPonPrejMalih']);
-        $I->assertGreaterThanOrEqual(0, $entR['stPonPrejMalihKopr']);
+        $I->assertGreaterThanOrEqual(1, $entR['stPonPrejMalih']);
+        $I->assertGreaterThanOrEqual(1, $entR['stPonPrejMalihKopr']);
         $I->assertGreaterThanOrEqual(0, $entR['stPonPrejSredKopr']);
         $I->assertGreaterThanOrEqual(1, $entR['stPonPrejVelikihKopr']);
         $I->assertGreaterThanOrEqual(1170.90, $entR['vrPS1'], "vrednost PS1");
@@ -1615,7 +1616,7 @@ class ProgramDelaCest
             'dokument'             => $this->obj2['id'],
         ];
         // pri create bi moral preračunati kazalnike tudi v programu dela
-        $ent  = $I->successfullyCreate($this->programPremieraUrl, $data);
+        $this->objProgramPremiera3=$ent  = $I->successfullyCreate($this->programPremieraUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
 
@@ -1757,13 +1758,95 @@ class ProgramDelaCest
         $I->assertNotEmpty($resp);
         $I->assertEquals(1000623, $resp[0]['code']);
 
-        $dataKop = $this->objKoprodukcija3;
-        $dataKop['zaprosenProcent']=20.01; //spremenimo za toliko, da bo več kot skupni koeficient 1.0
-       
+        $dataKop                    = $this->objKoprodukcija3;
+        $dataKop['zaprosenProcent'] = 20.01; //spremenimo za toliko, da bo več kot skupni koeficient 1.0
         codecept_debug($dataKop);
-        $resp    = $I->failToUpdate($this->produkcijaDelitevUrl, $dataKop['id'], $dataKop);
+        $resp                       = $I->failToUpdate($this->produkcijaDelitevUrl, $dataKop['id'], $dataKop);
         $I->assertNotEmpty($resp);
         $I->assertEquals(1000624, $resp[0]['code']);
+
+        $data['lastnaSredstva'] = 32.1;
+        $data['nasDelez']       = 32.0;
+        $resp                   = $I->failToUpdate($this->programPremieraUrl, $data['id'], $data);
+        $I->assertNotEmpty($resp);
+        $I->assertEquals(1000620, $resp[0]['code']);
+    }
+
+    /**
+     * test validacij  
+     *  
+     * @param ApiTester $I
+     */
+    public function updateProgramPremieraAliPropagacijaProcenta(ApiTester $I)
+    {
+        $noviProcent             = 11.22;
+        $novDelez                = 98.7;
+        //pri validaciji ne bi smel najti samega sebe
+        $data                    = $this->objProgramPremiera1;
+        $data['zaprosenProcent'] = $noviProcent;
+        $data['nasDelez']        = $novDelez;
+        $ent                     = $I->successfullyUpdate($this->programPremieraUrl, $data['id'], $data);
+        $I->assertNotEmpty($ent['id']);
+
+        $dataKop = $this->objKoprodukcija1;
+        $ent     = $I->successfullyGet($this->produkcijaDelitevUrl, $this->objKoprodukcija1['id']);
+        $I->assertNotEmpty($ent);
+        $I->assertEquals($noviProcent, $ent['zaprosenProcent'], "zaprošen procent pri matični koprodukciji");
+        $I->assertEquals($novDelez, $ent['delez'], "delež pri matični koprodukciji");
+    }
+
+    /**
+     * test preračunov
+     *  
+     * @param ApiTester $I
+     */
+    public function deleteKoprodukcijaAliManjšaCelotnaVrednost(ApiTester $I)
+    {
+        $ep       = $I->successfullyGet($this->programPremieraUrl, $this->objProgramPremiera1['id']);
+        $oldCelVr = $ep['celotnaVrednost'];
+        $delezKop = 100;
+        $newCelVr = $oldCelVr + $delezKop;
+
+        // najprej dodano koprodukcijo
+        $data = [
+            'delez'           => $delezKop,
+            'zaprosenProcent' => 5,
+            'enotaPrograma'   => $this->objProgramPremiera1['id'],
+            'koproducent'     => $this->lookProdukcijskaHisa5['id'],
+        ];
+        $kopr = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+        $I->assertNotEmpty($kopr['id']);
+        // ali se je vrednost popravila v EP?
+        $ep       = $I->successfullyGet($this->programPremieraUrl, $this->objProgramPremiera1['id']);
+        $ep       = $I->successfullyGet($this->programPremieraUrl, $this->objProgramPremiera1['id']);
+        $I->assertEquals($newCelVr, $ep['celotnaVrednost'], "nova celotna vrednost v enoti programa");
+
+        // zbrišemo koprodukcijo
+        $ent = $I->successfullyDelete($this->produkcijaDelitevUrl, $kopr['id']);
+        // ali se je vrednost popravila nazaj v EP?
+        $ep       = $I->successfullyGet($this->programPremieraUrl, $this->objProgramPremiera1['id']);
+        $I->assertEquals($oldCelVr, $ep['celotnaVrednost'], "stara celotna vrednost v enoti programa");
+    }
+
+    /**
+     * test preračunov
+     *  
+     * @param ApiTester $I
+     */
+    public function deleteEnotaProgramaAliSpremenjenProgramDela(ApiTester $I)
+    {
+        $pd       = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $oldStPremier = $pd['stPremier'];
+        $oldStPremier = $pd['stPremier'];
+        codecept_debug($oldStPremier);
+
+        // zbrišemo premiero
+        $ent = $I->successfullyDelete($this->programPremieraUrl, $this->objProgramPremiera3['id']);
+        // ali se je vrednost popravila nazaj v EP?
+        $pd       = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $I->assertEquals($oldStPremier-1, $pd['stPremier']);
+        
+//        Še zbrišemo en festival $$
     }
 
     /**
@@ -1801,43 +1884,43 @@ class ProgramDelaCest
         $ent  = $I->successfullyGet($this->programPonovitevPremiereUrl, $this->objProgramPonovitevPremiere1['id']);
         $I->assertNotEmpty($ent['id']);
         $resp = $I->failToUpdate($this->programPonovitevPremiereUrl, $ent['id'], $ent);
-        $I->assertEquals(1000531, $resp[0]['code']);
+        $I->assertEquals(1000521, $resp[0]['code']);
 
         // probamo spremeniti program ponovitve prejšnjih
         $ent  = $I->successfullyGet($this->programPonovitevPrejsnjihUrl, $this->objProgramPonovitevPrejsnjih1['id']);
         $I->assertNotEmpty($ent['id']);
         $resp = $I->failToUpdate($this->programPonovitevPrejsnjihUrl, $ent['id'], $ent);
-        $I->assertEquals(1000541, $resp[0]['code']);
+        $I->assertEquals(1000521, $resp[0]['code']);
 
         // probamo spremeniti program gostujočih
         $ent  = $I->successfullyGet($this->programGostujocaUrl, $this->objProgramGostujoca1['id']);
         $I->assertNotEmpty($ent['id']);
         $resp = $I->failToUpdate($this->programGostujocaUrl, $ent['id'], $ent);
-        $I->assertEquals(1000551, $resp[0]['code']);
+        $I->assertEquals(1000521, $resp[0]['code']);
 
         // probamo spremeniti program gostovanj
         $ent  = $I->successfullyGet($this->programGostovanjaUrl, $this->objProgramGostovanj1['id']);
         $I->assertNotEmpty($ent['id']);
         $resp = $I->failToUpdate($this->programGostovanjaUrl, $ent['id'], $ent);
-        $I->assertEquals(1000561, $resp[0]['code']);
+        $I->assertEquals(1000521, $resp[0]['code']);
 
         // probamo spremeniti program festival
         $ent  = $I->successfullyGet($this->programFestivalUrl, $this->objProgramFestival1['id']);
         $I->assertNotEmpty($ent['id']);
         $resp = $I->failToUpdate($this->programFestivalUrl, $ent['id'], $ent);
-        $I->assertEquals(1000571, $resp[0]['code']);
+        $I->assertEquals(1000521, $resp[0]['code']);
 
         // probamo spremeniti program izjemni
         $ent  = $I->successfullyGet($this->programIzjemniUrl, $this->objProgramIzjemni1['id']);
         $I->assertNotEmpty($ent['id']);
         $resp = $I->failToUpdate($this->programIzjemniUrl, $ent['id'], $ent);
-        $I->assertEquals(1000581, $resp[0]['code']);
+        $I->assertEquals(1000521, $resp[0]['code']);
 
         // probamo spremeniti program razno
         $ent  = $I->successfullyGet($this->programRaznoUrl, $this->objProgramRazno1['id']);
         $I->assertNotEmpty($ent['id']);
         $resp = $I->failToUpdate($this->programRaznoUrl, $ent['id'], $ent);
-        $I->assertEquals(1000591, $resp[0]['code']);
+        $I->assertEquals(1000521, $resp[0]['code']);
 
         // probamo spremeniti drugi vir od premiere
         $ent  = $I->successfullyGet($this->drugiVirUrl, $this->objDrugiVir1['id']);
