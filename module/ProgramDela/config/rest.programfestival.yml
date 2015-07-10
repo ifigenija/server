@@ -26,8 +26,9 @@ forms:
             - stTujihSelektorjev
             - stZaposlenih
             - stHonorarnih
-            - zaproseno
-            - celotnaVrednost
+            - zaprosenProcent 
+#            - zaproseno
+#            - celotnaVrednost
             - nasDelez
             - lastnaSredstva
 #            - drugiViri
