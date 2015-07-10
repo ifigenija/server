@@ -314,8 +314,7 @@ class TerminStoritveCest
         $I->assertEquals($ent['planiranKonec'], '2012-02-01T00:00:00+0100');
         $I->assertEquals($ent['zacetek'], '2013-02-01T00:00:00+0100');
         $I->assertEquals($ent['konec'], '2014-02-01T00:00:00+0100');
-//        $I->assertEquals($ent['planiranoTraja' ], 7.89);    // $$ rb zakaj zaokrožuje ?
-        $I->assertEquals($ent['planiranoTraja'], 8);       // $$ rb zakaj zaokrožuje ?
+        $I->assertEquals($ent['planiranoTraja'], 7.89); 
         $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
         $I->assertEquals($ent['alternacija'], $this->lookAlternacija['id']);
         $I->assertEquals($ent['oseba'], $this->lookOseba['id']);

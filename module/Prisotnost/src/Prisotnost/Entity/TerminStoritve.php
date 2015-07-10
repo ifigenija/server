@@ -53,7 +53,7 @@ class TerminStoritve
     private $konec;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true,scale=2, precision=15)
      * @Max\I18n(label="Planirano traja", description="Planirano traja")
      * @var double
      */
