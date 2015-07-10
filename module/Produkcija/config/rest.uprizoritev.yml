@@ -15,7 +15,7 @@ forms:
             - internacionalniNaslov
             - delovniNaslov
             - datumZacStudija
-            - steviloVaj
+#            - steviloVaj
             - planiranoSteviloVaj
             - datumPremiere
             - maticniOder

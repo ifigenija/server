@@ -28,7 +28,7 @@ class Alternacija
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Max\I18n(label="entiteta.sifra", description="entiteta.sifra")
+     * @Max\I18n(label="entiteta.sifra", description="entiteta.d.sifra")
      * @Max\Ui(type="sifra",ident=true,icon="fa fa-barcode" )
      * @var string
      */
@@ -36,7 +36,7 @@ class Alternacija
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="alternacija.zaposlen", description="Ali je zaposlen")
+     * @Max\I18n(label="alternacija.zaposlen", description="alternacija.d.zaposlen")
      * @Max\Ui(type="boolcheckbox")     
      * @var boolean
      */
@@ -44,28 +44,28 @@ class Alternacija
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.zacetek", description="entiteta.d.zacetek")
+     * @Max\I18n(label="entiteta.zacetek", description="alternacija.d.zacetek")
      * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.konec", description="entiteta.d.konec")
+     * @Max\I18n(label="entiteta.konec", description="alternacija.d.konec")
      * @var string
      */
     private $konec;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opomba", description="entiteta.opomba")
+     * @Max\I18n(label="entiteta.opomba", description="alternacija.d.opomba")
      * @var string
      */
     private $opomba;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.sort", description="entiteta.sort")
+     * @Max\I18n(label="entiteta.sort", description="alternacija.d.sort")
      * @Max\Ui(type="integer",icon="fa fa-sort")
      * @var integer
      */
@@ -81,7 +81,7 @@ class Alternacija
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="entiteta.aktivna", description="entiteta.d.aktivna")
+     * @Max\I18n(label="entiteta.aktivna", description="alternacija.d.aktivna")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -97,7 +97,7 @@ class Alternacija
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Funkcija", inversedBy="alternacije")
      * @ORM\JoinColumn(name="funkcija_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.funkcija",  description="entiteta.funkcija")
+     * @Max\I18n(label="entiteta.funkcija",  description="alternacija.d.funkcija")
      * @Max\Ui(type="toone", required=true);
      * @var \Produkcija\Entity\Funkcija
      */
@@ -106,7 +106,7 @@ class Alternacija
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Zaposlitev", inversedBy="alternacije")
      * @ORM\JoinColumn(name="zaposlitev_id", referencedColumnName="id")
-     * @Max\I18n(label="alternacija.zaposlitev",  description="alternacija.zaposlitev")
+     * @Max\I18n(label="alternacija.zaposlitev",  description="alternacija.d.zaposlitev")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Zaposlitev
      */
@@ -115,7 +115,7 @@ class Alternacija
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="alternacije")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.oseba",  description="entiteta.oseba")
+     * @Max\I18n(label="entiteta.oseba",  description="alternacija.d.oseba")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */
@@ -124,7 +124,7 @@ class Alternacija
     /**
      * @ORM\OneToOne(targetEntity="Produkcija\Entity\Pogodba", inversedBy="alternacija")
      * @ORM\JoinColumn(name="pogodba_id", referencedColumnName="id")
-     * @Max\I18n(label="alternacija.pogodba",  description="alternacija.pogodba")
+     * @Max\I18n(label="alternacija.pogodba",  description="alternacija.d.pogodba")
      * @Max\Ui(type="toone")
      * var \Produkcija\Entity\Pogodba       - izpustimo tip, da ga lahko s set metodo postavimo na null v primeru izbrisa pogodbe
      */
@@ -132,7 +132,7 @@ class Alternacija
 
     /**
      * @ORM\Column(type="boolean", length=1, nullable=true)
-     * @Max\I18n(label="entiteta.jeeu", description="entiteta.d.jeeu")
+     * @Max\I18n(label="entiteta.jeeu", description="alternacija.d.jeeu")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */

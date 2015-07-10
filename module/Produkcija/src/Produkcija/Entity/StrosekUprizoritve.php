@@ -26,7 +26,7 @@ class StrosekUprizoritve
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.naziv", description="entiteta.naziv")
+     * @Max\I18n(label="strupr.naziv", description="strupr.d.naziv")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -34,28 +34,28 @@ class StrosekUprizoritve
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="strupr.vrednostDo", description="strupr.vrednostDo")
+     * @Max\I18n(label="strupr.vrednostDo", description="strupr.d.vrednostDo")
      * @var double
      */
     private $vrednostDo;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="strupr.vrednostNa", description="strupr.vrednostNa")
+     * @Max\I18n(label="strupr.vrednostNa", description="strupr.d.vrednostNa")
      * @var double
      */
     private $vrednostNa;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opis", description="entiteta.opis")
+     * @Max\I18n(label="strupr.opis", description="strupr.d.opis")
      * @var string
      */
     private $opis;
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Max\I18n(label="strosekuprizoritve.tipstroska",  description="strosekuprizoritve.d.tipstroska")
+     * @Max\I18n(label="strupr.tipstroska",  description="strupr.d.tipstroska")
      * @Max\Ui(type="select",opts="strosekuprizoritve.tipstroska")
      * @var string
      */
@@ -63,7 +63,7 @@ class StrosekUprizoritve
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.sort", description="entiteta.sort")
+     * @Max\I18n(label="strupr.sort", description="strupr.d.sort")
      * @Max\Ui(type="integer",icon="fa fa-sort")
      * @var integer
      */
@@ -72,7 +72,7 @@ class StrosekUprizoritve
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="stroski")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.uprizoritev",  description="prodel.d.uprizoritev")
+     * @Max\I18n(label="strupr.uprizoritev",  description="prodel.d.uprizoritev")
      * @Max\Ui(type="hiddenid")
      * @var \Produkcija\Entity\Uprizoritev
      */
@@ -81,7 +81,7 @@ class StrosekUprizoritve
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="stroski")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
-     * @Max\I18n(label="strupr.popa",  description="strupr.popa")
+     * @Max\I18n(label="strupr.popa",  description="strupr.d.popa")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */

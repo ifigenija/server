@@ -26,7 +26,7 @@ class Sezona
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.ime", description="entiteta.ime")
+     * @Max\I18n(label="sezona.ime", description="sezona.d.ime")
      * @Max\Ui(type="naziv",ident=true )
      * @var string     
      */
@@ -34,21 +34,21 @@ class Sezona
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.zacetek", description="entiteta.zacetek")
+     * @Max\I18n(label="sezona.zacetek", description="sezona.d.zacetek")
      * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.konec", description="entiteta.zacetek")
+     * @Max\I18n(label="sezona.konec", description="sezona.d.konec")
      * @var string
      */
     private $konec;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="entiteta.aktivna", description="sezona.d.aktivna")
+     * @Max\I18n(label="sezona.aktivna", description="sezona.d.aktivna")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */

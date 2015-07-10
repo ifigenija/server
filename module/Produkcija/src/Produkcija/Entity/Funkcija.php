@@ -53,7 +53,7 @@ class Funkcija
      * V to polje se vpiše ime funkcije kot npr. Romeo, Julija,Tezej ipd.
      * 
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.naziv", description="entiteta.naziv")
+     * @Max\I18n(label="entiteta.naziv", description="entiteta.d.naziv")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -64,14 +64,14 @@ class Funkcija
      * kot je tip funkcije, ki je standariziran glede na SLOGI (Slovenski gledališki inštitut) 
      * 
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="funkcija.komentar", description="funkcija.komentar")
+     * @Max\I18n(label="funkcija.komentar", description="funkcija.d.komentar")
      * @var string
      */
     private $komentar;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="funkcija.velikost", description="funkcija.velikost")
+     * @Max\I18n(label="funkcija.velikost", description="funkcija.d.velikost")
      * @Max\Ui(type="select", opts="funkcija.velikost")
      * @var string
      */
@@ -92,7 +92,7 @@ class Funkcija
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.sort", description="entiteta.sort")
+     * @Max\I18n(label="entiteta.sort", description="entiteta.d.sort")
      * @Max\Ui(type="integer", icon="fa fa-sort")
      * @var integer
      */
@@ -129,7 +129,7 @@ class Funkcija
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="funkcije")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id", nullable=false)
-     * @Max\I18n(label="entiteta.uprizoritev",  description="entiteta.uprizoritev")
+     * @Max\I18n(label="entiteta.uprizoritev",  description="entiteta.d.uprizoritev")
      * @Max\Ui(type="hiddenid")
      * @var \Produkcija\Entity\Uprizoritev
      */
@@ -138,7 +138,7 @@ class Funkcija
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Alternacija")
      * @ORM\JoinColumn(name="alternacija_id", referencedColumnName="id") \Produkcija\Entity\Alternacija
-     * @Max\I18n(label="funkcija.privzeti",  description="funkcija.privzeti")
+     * @Max\I18n(label="funkcija.privzeti",  description="funkcija.d.privzeti")
      * @Max\Ui(type="toone")
      * @var
      */
@@ -153,7 +153,7 @@ class Funkcija
      * tipi funkcij, ki so standarizirani glede na SLOGI (Slovenski gledališki inštitut)
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\TipFunkcije", inversedBy="funkcije", fetch="EAGER")
-     * @Max\I18n(label="funkcija.tipFunkcije",  description="funkcija.tipFunkcije")
+     * @Max\I18n(label="funkcija.tipFunkcije",  description="funkcija.d.tipFunkcije")
      * @Max\Ui(type="select")
      * @var \Produkcija\Entity\TipFunkcije
      */

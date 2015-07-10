@@ -28,7 +28,7 @@ class Zaposlitev
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Max\I18n(label="entiteta.sifra",  description="entiteta.sifra")
+     * @Max\I18n(label="zaposlitev.sifra",  description="zaposlitev.d.sifra")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode")
      * @var string
      */
@@ -36,7 +36,7 @@ class Zaposlitev
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Max\I18n(label="entiteta.status",  description="entiteta.status")
+     * @Max\I18n(label="zaposlitev.status",  description="zaposlitev.d.status")
      * @Max\Ui(type="select",opts="zaposlitev.status")
      * @var string
      */
@@ -44,21 +44,21 @@ class Zaposlitev
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.zacetek",  description="entiteta.zacetek")
+     * @Max\I18n(label="zaposlitev.zacetek",  description="zaposlitev.d.zacetek")
      * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.konec",  description="entiteta.konec")
+     * @Max\I18n(label="zaposlitev.konec",  description="zaposlitev.d.konec")
      * @var string
      */
     private $konec;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="zaposlitev.tip",  description="zaposlitev.tip")
+     * @Max\I18n(label="zaposlitev.tip",  description="zaposlitev.d.tip")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -66,7 +66,7 @@ class Zaposlitev
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="zaposlitev.delovnaObveza",  description="zaposlitev.delovnaObveza")
+     * @Max\I18n(label="zaposlitev.delovnaObveza",  description="zaposlitev.d.delovnaObveza")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -74,14 +74,14 @@ class Zaposlitev
 
     /**
      * @ORM\Column(nullable=true)
-     * @Max\I18n(label="zaposlitev.malica",  description="zaposlitev.malica")
+     * @Max\I18n(label="zaposlitev.malica",  description="zaposlitev.d.malica")
      * @var string
      */
     private $malica;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="zaposlitev.izmenskoDelo", description="zaposlitev.izmenskoDelo")
+     * @Max\I18n(label="zaposlitev.izmenskoDelo", description="zaposlitev.d.izmenskoDelo")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
