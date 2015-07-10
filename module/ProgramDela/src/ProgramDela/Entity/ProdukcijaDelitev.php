@@ -30,7 +30,7 @@ class ProdukcijaDelitev
      * Odstotek financiranja posameznega koproducenta
      * 
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="prodel.odstotekFinanciranja", description="prodel.odstotekFinanciranja")
+     * @Max\I18n(label="prodel.odstotekFinanciranja", description="prodel.d.odstotekFinanciranja")
      * @var double
      */
     private $odstotekFinanciranja;
@@ -41,7 +41,7 @@ class ProdukcijaDelitev
      * = celotna vrednost projekta * %financiranja
      * 
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="prodel.zaproseno", description="prodel.zaproseno")
+     * @Max\I18n(label="prodel.zaproseno", description="prodel.d.zaproseno")
      * @var double
      */
     private $delez;
@@ -52,7 +52,7 @@ class ProdukcijaDelitev
      * je <= maksfaktor
      * 
      * @ORM\Column(type="decimal", nullable=true, precision=6, scale=2)
-     * @Max\I18n(label="prodel.zaprosenProcent", description="prodel.zaprosenProcent")
+     * @Max\I18n(label="prodel.zaprosenProcent", description="prodel.d.zaprosenProcent")
      * @var double
      */
     private $zaprosenProcent;
@@ -79,7 +79,7 @@ class ProdukcijaDelitev
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProdukcijskaHisa", inversedBy="koprodukcije")
      * @ORM\JoinColumn(name="koproducent_id", referencedColumnName="id", nullable=false)
-     * @Max\I18n(label="prodel.koproducent",  description="prodel.koproducent")
+     * @Max\I18n(label="prodel.koproducent",  description="prodel.d.koproducent")
      * @Max\Ui(type="toone", required=true)
      * @var \ProgramDela\Entity\ProdukcijskaHisa
      */

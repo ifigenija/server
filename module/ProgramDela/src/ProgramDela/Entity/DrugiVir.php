@@ -26,21 +26,21 @@ class DrugiVir
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="drugivir.znesek", description="drugivir.d.znesek")   
+     * @Max\I18n(label="drugiVir.znesek", description="drugiVir.d.znesek")   
      * @var double
      */
     private $znesek;
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="drugivir.opis", description="drugivir.d.opis")   
+     * @Max\I18n(label="drugiVir.opis", description="drugiVir.d.opis")   
      * @var double
      */
     private $opis;
 
     /**
      * @ORM\Column(type="boolean", length=1, nullable=true)
-     * @Max\I18n(label="drugivir.mednarodni", description="drugivir.d.mednarodni")   
+     * @Max\I18n(label="drugiVir.mednarodni", description="drugiVir.d.mednarodni")   
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -48,7 +48,7 @@ class DrugiVir
 
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\EnotaPrograma", inversedBy="drugiViri")
-     * @Max\I18n(label="drugivir.enotaPrograma", description="drugivir.d.enotaPrograma")   
+     * @Max\I18n(label="drugiVir.enotaPrograma", description="drugiVir.d.enotaPrograma")   
      * @Max\Ui(type="hiddenid")
      * @var \ProgramDela\Entity\EnotaPrograma
      */
