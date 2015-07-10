@@ -136,7 +136,7 @@ class Pogodba
      * 
      * @ORM\OneToOne(targetEntity="Produkcija\Entity\Alternacija", mappedBy="pogodba")
      * @Max\I18n(label="pogodba.alternacija",  description="pogodba.alternacija")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hiddenid")
      * @var \Produkcija\Entity\Alternacija
      */
     private $alternacija;

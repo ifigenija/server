@@ -70,7 +70,6 @@ class ProgramGostujoca
         }
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostujočo", 1000431);
 
-
         parent::validate();
     }
 

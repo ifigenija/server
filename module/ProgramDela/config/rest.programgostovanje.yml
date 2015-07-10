@@ -12,8 +12,9 @@ forms:
             - datumGostovanja
             - ponoviInt
             - obiskInt
-            - zaproseno
-            - celotnaVrednost
+            - zaprosenProcent 
+#            - zaproseno
+#            - celotnaVrednost
             - nasDelez
             - transportniStroski
             - avtorskiHonorarji

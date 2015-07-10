@@ -70,29 +70,40 @@ class EnotaPrograma
     private $celotnaVrednostGostovSZ;
 
     /**
+     * % nasega deleža
+     * 
+     * je <= maksfaktor
+     * 
+     * @ORM\Column(type="decimal", nullable=true, precision=6, scale=2)
+     * @Max\I18n(label="ep.zaprosenProcent", description="ep.zaprosenProcent")
+     * @var double
+     */
+    private $zaprosenProcent;
+
+    /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.zaproseno", description="ep.zaproseno")   
+     * @Max\I18n(label="ep.zaproseno", description="ep.d.zaproseno")   
      * @var double
      */
     private $zaproseno;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.lastnaSredstva", description="ep.lastnaSredstva")   
+     * @Max\I18n(label="ep.lastnaSredstva", description="ep.d.lastnaSredstva")   
      * @var double
      */
     private $lastnaSredstva;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2,options={"default":0})
-     * @Max\I18n(label="ep.avtorskiHonorarji", description="ep.avtorskiHonorarji")   
+     * @Max\I18n(label="ep.avtorskiHonorarji", description="ep.d.avtorskiHonorarji")   
      * @var double
      */
     private $avtorskiHonorarji;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.tantieme", description="ep.tantieme")   
+     * @Max\I18n(label="ep.tantieme", description="ep.d.tantieme")   
      * @var double
      */
     private $tantieme;
@@ -125,7 +136,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.drugiJavni", description="ep.drugiJavni")   
+     * @Max\I18n(label="ep.drugiJavni", description="ep.d.drugiJavni")   
      * @var double
      */
     private $drugiJavni;
@@ -134,7 +145,7 @@ class EnotaPrograma
      * Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri uprizoritvi:
      * 
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="ep.stZaposlenih", description="Število zaposlenih, ki sodelujejo pri izvedbi projekta")
+     * @Max\I18n(label="ep.stZaposlenih", description="ep.d.stZaposlenih")
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -144,7 +155,7 @@ class EnotaPrograma
      * Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri uprizoritvi:
      * 
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="ep.stZaposUmet", description="Število zaposlenih, ki sodelujejo pri izvedbi projekta")
+     * @Max\I18n(label="ep.stZaposUmet", description="ep.d.stZaposUmet")
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -200,7 +211,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="ep.obiskDoma", description="ep.obiskDoma")   
+     * @Max\I18n(label="ep.obiskDoma", description="ep.d.obiskDoma")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -208,7 +219,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="ep.obiskGost", description="ep.obiskGost")   
+     * @Max\I18n(label="ep.obiskGost", description="ep.d.obiskGost")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -216,7 +227,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="ep.obiskZamejo", description="ep.obiskZamejo")   
+     * @Max\I18n(label="ep.obiskZamejo", description="ep.d.obiskZamejo")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -224,7 +235,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="ep.obiskInt", description="ep.obiskInt")   
+     * @Max\I18n(label="ep.obiskInt", description="ep.d.obiskInt")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -232,7 +243,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":" 0"})
-     * @Max\I18n(label="ep.ponoviDoma", description="ep.ponoviDoma")   
+     * @Max\I18n(label="ep.ponoviDoma", description="ep.d.ponoviDoma")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -240,7 +251,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="ep.ponoviZamejo", description="ep.ponoviZamejo")   
+     * @Max\I18n(label="ep.ponoviZamejo", description="ep.d.ponoviZamejo")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -250,7 +261,7 @@ class EnotaPrograma
      * število gostovanj po Sloveniji
      * 
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="ep.ponoviGost", description="ep.ponoviGost")   
+     * @Max\I18n(label="ep.ponoviGost", description="ep.d.ponoviGost")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
@@ -266,14 +277,14 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="text", nullable=false)
-     * @Max\I18n(label="ep.utemeljitev", description="ep.utemeljitev")   
+     * @Max\I18n(label="ep.utemeljitev", description="ep.d.utemeljitev")   
      * @var string     
      */
     private $utemeljitev;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev")
-     * @Max\I18n(label="entiteta.uprizoritev", description="entiteta.uprizoritev")   
+     * @Max\I18n(label="entiteta.uprizoritev", description="entiteta.d.uprizoritev")   
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Uprizoritev
      */
@@ -293,7 +304,7 @@ class EnotaPrograma
 
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\TipProgramskeEnote", inversedBy="enotePrograma")
-     * @Max\I18n(label="ep.tipProgramskeEnote", description="ep.tipProgramskeEnote")   
+     * @Max\I18n(label="ep.tipProgramskeEnote", description="ep.d.tipProgramskeEnote")   
      * @Max\Ui(type="select")
      * @var \ProgramDela\Entity\TipProgramskeEnote
      */
@@ -315,7 +326,14 @@ class EnotaPrograma
 
     public function preracunaj($smer = false)
     {
-        
+        $this->preracunajCelotnoVrednost();     //$$ verjetno malo redundantno
+
+        /**
+         * izračunaj zaprošen znesek
+         */
+        $zaproseno       = $this->getNasDelez() * $this->getZaprosenProcent() / 100;
+        $zaproseno       = \Max\Functions::euroRound($zaproseno);   //Zaokrožimo na 2 decimalki predno shranimo
+        $this->zaproseno = $zaproseno;
     }
 
     /**
@@ -325,15 +343,50 @@ class EnotaPrograma
      */
     public function preracunajCelotnoVrednost()
     {
-        $this->celotnaVrednost = 0; //init
-        foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
-            $this->celotnaVrednost += $koprodukcija->getDelez();
+        if ($this->getKoprodukcije()->isEmpty()) {
+            $this->celotnaVrednost = $this->getNasDelez();
+        } else {
+            $this->celotnaVrednost = 0; //init
+            foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
+                $this->celotnaVrednost += $koprodukcija->getDelez();
+            }
+            // najprej moramo imeti sešteto celotno vrednost, da lahko preračunamo odstotke
+            foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
+                $koprodukcija->preracunajOdstotekFinanciranja();
+            }
         }
     }
 
     public function validate($mode = 'update')
     {
-        
+        /**
+         * pred primerjanjem damo števila s plavajočo vejico v string
+         */
+        $ls = \Max\Functions::euroRoundS($this->getLastnaSredstva());
+        $nd = \Max\Functions::euroRoundS($this->getNasDelez());
+        $cv = \Max\Functions::euroRoundS($this->getCelotnaVrednost());
+        $this->expect($ls <= $nd, "Lastna sredstva ne smejo biti večja od našega deleža", 1000620);
+        $this->expect($nd <= $cv, "Naš delež ne sme biti večji od celotne vrednosti", 1000621);
+
+        $zaprosenProc   = \Max\Functions::procRoundS($this->getZaprosenProcent());
+        $this->expect(($zaprosenProc >= 0) && ($zaprosenProc <= 100), 'Zaprošen odstotek mora biti med 0 in 100, je pa ' . $zaprosenProc, 1000622);
+        if ($this->tipProgramskeEnote) {
+            $maxFaktor = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxFaktor());
+            $maxFaktor00 = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxFaktor()*100);
+            $maxVsi    = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxVsi());
+            $maxVsi00    = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxVsi()*100);
+            $this->expect($zaprosenProc <= $maxFaktor00, 'Zaprošen odstotek ne sme biti večji kot koeficient programske enote ' . $maxFaktor, 1000623);
+
+            // še kontrola na skupni koeficient
+            if (!$this->getKoprodukcije()->isEmpty()) {
+                $vsiZaprProc = 0; //init
+                foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
+                    $vsiZaprProc+= $koprodukcija->getZaprosenProcent();
+                }
+                $vsiZaprProc00 = \Max\Functions::procRoundS($vsiZaprProc / 100);
+                $this->expect(($vsiZaprProc <= $maxVsi00), 'Vsota zaprošenih odstotkov koproducentov ne sme biti večji kot skupni koeficient ' . $maxFaktor, 1000624);
+            }
+        }
     }
 
     public function getId()
@@ -696,6 +749,17 @@ class EnotaPrograma
     public function setSort($sort)
     {
         $this->sort = $sort;
+        return $this;
+    }
+
+    public function getZaprosenProcent()
+    {
+        return $this->zaprosenProcent;
+    }
+
+    public function setZaprosenProcent($zaprosenProcent)
+    {
+        $this->zaprosenProcent = $zaprosenProcent;
         return $this;
     }
 

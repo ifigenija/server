@@ -77,13 +77,14 @@ class ProgramFestivalCest
             'stTujihSelektorjev'      => 1,
             'stZaposlenih'            => 1,
             'stHonorarnih'            => 1,
-            'zaproseno'               => 1.23,
-            'celotnaVrednost'         => 1.23,
-            'nasDelez'         => 1.23,
-            'lastnaSredstva'          => 1.23,
-//            'drugiViri'               => 1.23,
-            'vlozekKoproducenta'      => 1.23,
-            'drugiJavni'              => 1.23,
+            'zaprosenProcent'         => 100,
+//            'zaproseno'            =>1.24,
+            'celotnaVrednost'         => 1.24,
+            'nasDelez'                => 1.24,
+            'lastnaSredstva'          => 1.24,
+//            'drugiViri'               => 1.24,
+            'vlozekKoproducenta'      => 1.24,
+            'drugiJavni'              => 1.24,
             'sort'                    => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -112,13 +113,14 @@ class ProgramFestivalCest
             'stTujihSelektorjev'      => 2,
             'stZaposlenih'            => 2,
             'stHonorarnih'            => 2,
-            'zaproseno'               => 2.23,
-            'celotnaVrednost'         => 2.23,
-            'nasDelez'         => 2.23,
-            'lastnaSredstva'          => 2.23,
-//            'drugiViri'               => 2.23,
-            'vlozekKoproducenta'      => 2.23,
-            'drugiJavni'              => 2.23,
+            'zaproseno'               => 2.24,
+            'zaprosenProcent'         => 100,
+//            'zaproseno'            =>1.23,
+            'nasDelez'                => 2.24,
+            'lastnaSredstva'          => 2.24,
+//            'drugiViri'               => 2.24,
+            'vlozekKoproducenta'      => 2.24,
+            'drugiJavni'              => 2.24,
             'sort'                    => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -134,12 +136,12 @@ class ProgramFestivalCest
      */
     public function update(ApiTester $I)
     {
-        $ent              = $this->obj1;
-        $ent['zaproseno'] = 2.34;
+        $ent                    = $this->obj1;
+        $ent['zaprosenProcent'] = 50;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['zaproseno'], 2.34);
+        $I->assertEquals($entR['zaprosenProcent'], 50.00);
     }
 
     /**
@@ -173,13 +175,14 @@ class ProgramFestivalCest
         $I->assertEquals($ent['stTujihSelektorjev'], 1);
         $I->assertEquals($ent['stZaposlenih'], 1);
         $I->assertEquals($ent['stHonorarnih'], 1);
-        $I->assertEquals($ent['zaproseno'], 2.34);
-        $I->assertEquals($ent['celotnaVrednost'], 1.23);
-        $I->assertEquals($ent['nasDelez'], 1.23);
-        $I->assertEquals($ent['lastnaSredstva'], 1.23);
-//        $I->assertEquals($ent['drugiViri'], 1.23);
-        $I->assertEquals($ent['vlozekKoproducenta'], 1.23);
-        $I->assertEquals($ent['drugiJavni'], 1.23);
+        $I->assertEquals($ent['zaprosenProcent'], 50.00);
+        $I->assertEquals($ent['zaproseno'], 0.62, "izračunano zaprošeno");
+        $I->assertEquals($ent['celotnaVrednost'], 1.24);
+        $I->assertEquals($ent['nasDelez'], 1.24);
+        $I->assertEquals($ent['lastnaSredstva'], 1.24);
+//        $I->assertEquals($ent['drugiViri'], 1.24);
+        $I->assertEquals($ent['vlozekKoproducenta'], 1.24);
+        $I->assertEquals($ent['drugiJavni'], 1.24);
         $I->assertEquals($ent['sort'], 1);
     }
 
@@ -234,7 +237,7 @@ class ProgramFestivalCest
     public function createVecDrugihVirov(ApiTester $I)
     {
         $data               = [
-            'znesek'        => 1.23,
+            'znesek'        => 1.24,
             'opis'          => "zz",
             'enotaPrograma' => $this->obj2['id'],
             'mednarodni'    => FALSE,
@@ -244,7 +247,7 @@ class ProgramFestivalCest
 
         // kreiramo še en zapis
         $data               = [
-            'znesek'        => 1.23,
+            'znesek'        => 1.24,
             'opis'          => "dd",
             'enotaPrograma' => $this->obj2['id'],
             'mednarodni'    => true,
