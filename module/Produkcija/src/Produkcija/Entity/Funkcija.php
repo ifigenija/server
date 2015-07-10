@@ -31,7 +31,7 @@ class Funkcija
      * $$ v validate  se polje povozi, tako, da UI za to verjetno več ne velja
      * 
      * @ORM\Column(type="string", length=20, nullable=true)
-     * @Max\I18n(label="entiteta.podrocje", description="entiteta.podrocje")
+     * @Max\I18n(label="funkcija.podrocje", description="funkcija.podrocje")
      * @Max\Ui(type="select", opts="funkcija.podrocje")
      * @var string
      */
@@ -53,7 +53,7 @@ class Funkcija
      * V to polje se vpiše ime funkcije kot npr. Romeo, Julija,Tezej ipd.
      * 
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.naziv", description="entiteta.d.naziv")
+     * @Max\I18n(label="funkcija.naziv", description="funkcija.d.naziv")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -92,7 +92,7 @@ class Funkcija
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.sort", description="entiteta.d.sort")
+     * @Max\I18n(label="funkcija.sort", description="funkcija.d.sort")
      * @Max\Ui(type="integer", icon="fa fa-sort")
      * @var integer
      */
@@ -129,7 +129,7 @@ class Funkcija
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="funkcije")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id", nullable=false)
-     * @Max\I18n(label="entiteta.uprizoritev",  description="entiteta.d.uprizoritev")
+     * @Max\I18n(label="funkcija.uprizoritev",  description="funkcija.d.uprizoritev")
      * @Max\Ui(type="hiddenid")
      * @var \Produkcija\Entity\Uprizoritev
      */

@@ -121,7 +121,7 @@ class Zaposlitev
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="zaposlitve")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.oseba",  description="Oseba, ki je zaposlena")
+     * @Max\I18n(label="zaposlitev.oseba",  description="zaposlitev.d.oseba")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */

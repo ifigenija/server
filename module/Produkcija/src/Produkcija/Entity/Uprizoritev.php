@@ -28,7 +28,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Max\I18n(label="entiteta.sifra", description="entiteta.d.sifra")
+     * @Max\I18n(label="uprizoritev.sifra", description="uprizoritev.d.sifra")
      * @Max\Ui(type="sifra",ident=true,icon="fa fa-barcode")
      * @var string
      */
@@ -44,7 +44,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.naslov", description="entiteta.d.naslov")
+     * @Max\I18n(label="uprizoritev.naslov", description="uprizoritev.d.naslov")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -52,7 +52,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.podnaslov", description="entiteta.d.podnaslov")
+     * @Max\I18n(label="uprizoritev.podnaslov", description="uprizoritev.d.podnaslov")
      * @var string
      */
     private $podnaslov;
@@ -68,7 +68,7 @@ class Uprizoritev
      * Predvidoma v angleščini
      * 
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.interNaslov", description="entiteta.d.interNaslov")
+     * @Max\I18n(label="uprizoritev.interNaslov", description="uprizoritev.d.interNaslov")
      * @var string
      */
     private $internacionalniNaslov;
@@ -136,7 +136,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.avtor", description="entiteta.d.avtor")
+     * @Max\I18n(label="uprizoritev.avtor", description="uprizoritev.d.avtor")
      * @Max\Ui(type="naziv")
      * @var string
      */

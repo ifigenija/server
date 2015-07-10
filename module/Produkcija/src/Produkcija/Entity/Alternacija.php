@@ -28,7 +28,7 @@ class Alternacija
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Max\I18n(label="entiteta.sifra", description="entiteta.d.sifra")
+     * @Max\I18n(label="alternacija.sifra", description="alternacija.d.sifra")
      * @Max\Ui(type="sifra",ident=true,icon="fa fa-barcode" )
      * @var string
      */
@@ -44,28 +44,28 @@ class Alternacija
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.zacetek", description="alternacija.d.zacetek")
+     * @Max\I18n(label="alternacija.zacetek", description="alternacija.d.zacetek")
      * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="entiteta.konec", description="alternacija.d.konec")
+     * @Max\I18n(label="alternacija.konec", description="alternacija.d.konec")
      * @var string
      */
     private $konec;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opomba", description="alternacija.d.opomba")
+     * @Max\I18n(label="alternacija.opomba", description="alternacija.d.opomba")
      * @var string
      */
     private $opomba;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.sort", description="alternacija.d.sort")
+     * @Max\I18n(label="alternacija.sort", description="alternacija.d.sort")
      * @Max\Ui(type="integer",icon="fa fa-sort")
      * @var integer
      */
@@ -81,7 +81,7 @@ class Alternacija
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="entiteta.aktivna", description="alternacija.d.aktivna")
+     * @Max\I18n(label="alternacija.aktivna", description="alternacija.d.aktivna")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -97,7 +97,7 @@ class Alternacija
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Funkcija", inversedBy="alternacije")
      * @ORM\JoinColumn(name="funkcija_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.funkcija",  description="alternacija.d.funkcija")
+     * @Max\I18n(label="alternacija.funkcija",  description="alternacija.d.funkcija")
      * @Max\Ui(type="toone", required=true);
      * @var \Produkcija\Entity\Funkcija
      */
@@ -115,7 +115,7 @@ class Alternacija
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="alternacije")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.oseba",  description="alternacija.d.oseba")
+     * @Max\I18n(label="alternacija.oseba",  description="alternacija.d.oseba")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */
@@ -132,7 +132,7 @@ class Alternacija
 
     /**
      * @ORM\Column(type="boolean", length=1, nullable=true)
-     * @Max\I18n(label="entiteta.jeeu", description="alternacija.d.jeeu")
+     * @Max\I18n(label="alternacija.jeeu", description="alternacija.d.jeeu")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
