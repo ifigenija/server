@@ -29,7 +29,7 @@ class ZvrstUprizoritve
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Max\I18n(label="entiteta.sifra", description="entiteta.sifra")
+     * @Max\I18n(label="zvrstUprizoritve.sifra", description="zvrstUprizoritve.d.sifra")
      * @Max\Ui(type="sifra",ident=true,icon="fa fa-barcode" )
      * @var string
      */
@@ -37,7 +37,7 @@ class ZvrstUprizoritve
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.naziv", description="entiteta.naziv")
+     * @Max\I18n(label="zvrstUprizoritve.naziv", description="zvrstUprizoritve.d.naziv")
      * @Max\Ui(type="naziv" )
      * @var string
      */
@@ -46,7 +46,7 @@ class ZvrstUprizoritve
     /**
      * ...
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opis", description="entiteta.opis")
+     * @Max\I18n(label="zvrstUprizoritve.opis", description="zvrstUprizoritve.d.opis")
      * @var string
      */
     protected $opis;

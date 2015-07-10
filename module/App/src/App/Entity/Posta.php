@@ -45,7 +45,7 @@ class Posta
      * @ORM\Column(length=40, nullable=true)
      * @var string
      *
-     * @Max\I18n(label="entiteta.naziv",description="entiteta.naziv")
+     * @Max\I18n(label="posta.naziv",description="posta.d.naziv")
      * @Max\Ui(type="naziv")
      */
     protected $naziv;

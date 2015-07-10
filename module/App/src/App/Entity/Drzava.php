@@ -67,7 +67,7 @@ class Drzava
     /**
      * Naziv države
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="entiteta.naziv",description="entiteta.naziv")
+     * @Max\I18n(label="drzava.naziv",description="drzava.d.naziv")
      * @Max\Ui(class="naziv", required=true)
      * @var string
      */
@@ -76,7 +76,7 @@ class Drzava
     /**
      * Naziv države
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opomba",description="entiteta.opomba")
+     * @Max\I18n(label="drzava.opomba",description="drzava.d.opomba")
      * @var string
      */
     protected $opomba;

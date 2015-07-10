@@ -28,7 +28,7 @@ class Prostor
     
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Max\I18n(label="entiteta.sifra", description="prostor.d.sifra")
+     * @Max\I18n(label="prostor.sifra", description="prostor.d.sifra")
      * @Max\Ui(type="sifra",ident=true, icon="fa fa-barcode")
      * @var string
      */
@@ -36,7 +36,7 @@ class Prostor
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
-     * @Max\I18n(label="entiteta.naziv", description="entiteta.d.naziv")
+     * @Max\I18n(label="prostor.naziv", description="prostor.d.naziv")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -52,14 +52,14 @@ class Prostor
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.kapaciteta", description="prostor.d.kapaciteta")
+     * @Max\I18n(label="prostor.kapaciteta", description="prostor.d.kapaciteta")
      * @var integer
      */
     private $kapaciteta;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opis", description="entiteta.opis")
+     * @Max\I18n(label="prostor.opis", description="prostor.d.opis")
      * @var string
      */
     private $opis;

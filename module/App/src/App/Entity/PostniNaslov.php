@@ -46,7 +46,7 @@ class PostniNaslov
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="naslovi")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.oseba",  description="postniNaslov.d.oseba")
+     * @Max\I18n(label="postniNaslov.oseba",  description="postniNaslov.d.oseba")
      * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Oseba
      */
@@ -56,7 +56,7 @@ class PostniNaslov
      * Naziv
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="entiteta.naziv", description="entiteta.naziv")
+     * @Max\I18n(label="postniNaslov.naziv", description="postniNaslov.d.naziv")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -64,7 +64,7 @@ class PostniNaslov
 
     /**
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="postniNaslov.nazivDva", description="postniNaslov.nazivDva")
+     * @Max\I18n(label="postniNaslov.nazivDva", description="postniNaslov.d.nazivDva")
      * @var string
      */
     private $nazivDva;
@@ -73,7 +73,7 @@ class PostniNaslov
      * Ulica naslovnika
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="postniNaslov.ulica",  description="postniNaslov.ulica")
+     * @Max\I18n(label="postniNaslov.ulica",  description="postniNaslov.d.ulica")
      * @var string
      */
     protected $ulica;
@@ -82,7 +82,7 @@ class PostniNaslov
      * Dodatno polje za ulico (ulica2)
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="postniNaslov.ulicaDva",  description="postniNaslov.ulicaDva")
+     * @Max\I18n(label="postniNaslov.ulicaDva",  description="postniNaslov.d.ulicaDva")
      * @var string
      */
     protected $ulicaDva;
@@ -92,7 +92,7 @@ class PostniNaslov
      *  poštna številka
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="postniNaslov.posta", description="postniNaslov.posta")
+     * @Max\I18n(label="postniNaslov.posta", description="postniNaslov.d.posta")
      * @Max\Ui(group="posta")
      * @var string
      */
@@ -103,7 +103,7 @@ class PostniNaslov
      *  naziv pošte
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="postniNaslov.postaNaziv", description="postniNaslov.postaNaziv")
+     * @Max\I18n(label="postniNaslov.postaNaziv", description="postniNaslov.d.postaNaziv")
      * @Max\Ui(group="posta")
      * @var string
      */
@@ -124,7 +124,7 @@ class PostniNaslov
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
      * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.drzava", description="entiteta.drzava")
+     * @Max\I18n(label="postniNaslov.drzava", description="postniNaslov.d.drzava")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Drzava
      */
@@ -135,7 +135,7 @@ class PostniNaslov
      *  checkbox 
      *
      * @ORM\Column(type="boolean", length=1, nullable=true)
-     * @Max\I18n(label="entiteta.jeeu", description="entiteta.d.jeeu")
+     * @Max\I18n(label="postniNaslov.jeeu", description="postniNaslov.d.jeeu")
      * @Max\Ui(type="boolcheckbox",group="Davčni podatki")
      * @var boolean
      */

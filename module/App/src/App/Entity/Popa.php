@@ -35,7 +35,7 @@ class Popa
      * Šifra klienta
      *
      * @ORM\Column(unique=true, length=4, nullable=false)
-     * @Max\I18n(label="entiteta.sifra", description="entiteta.sifra")
+     * @Max\I18n(label="popa.sifra", description="popa.d.sifra")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode",group="Osnovni podatki")
      * @var string
      */
@@ -69,7 +69,7 @@ class Popa
      * Naziv klienta
      *
      * @ORM\Column(length=60, nullable=false) 
-     * @Max\I18n(label="entiteta.naziv", description="entiteta.naziv")
+     * @Max\I18n(label="popa.naziv", description="popa.d.naziv")
      * @Max\Ui(type="naziv",group="Osnovni podatki") 
      * @var string
      */
@@ -87,7 +87,7 @@ class Popa
 
     /**
      * @ORM\Column(length=60, nullable=true)
-     * @Max\I18n(label="popa.panoga", description="popa.panoga")
+     * @Max\I18n(label="popa.panoga", description="popa.d.panoga")
      * @var string
      */
     private $panoga;
@@ -96,7 +96,7 @@ class Popa
      * Email naslov
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="entiteta.email", description="entiteta.email")
+     * @Max\I18n(label="popa.email", description="popa.d.email")
      * @Max\Ui(type="email",group="Kontaktni podatki")
      * @var string
      */
@@ -117,7 +117,7 @@ class Popa
      *  tekstovno polje za dodatne podatke o klientu
      *
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opomba", description="entiteta.opomba")
+     * @Max\I18n(label="popa.opomba", description="popa.d.opomba")
      * @var string
      */
     protected $opomba;
@@ -127,7 +127,7 @@ class Popa
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
      * @ORM\JoinColumn(name="drzava_id", referencedColumnName="id", nullable=false) 
-     * @Max\I18n(label="entiteta.drzava", description="entiteta.drzava")
+     * @Max\I18n(label="popa.drzava", description="popa.d.drzava")
      * @Max\Ui(type="toone",group="Kontaktni podatki",required=true)
      * @var \App\Entity\Drzava
      */

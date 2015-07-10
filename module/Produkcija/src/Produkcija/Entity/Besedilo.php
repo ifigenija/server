@@ -29,14 +29,14 @@ class Besedilo
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="entiteta.stevilka", description="entiteta.stevilka")
+     * @Max\I18n(label="besedilo.stevilka", description="besedilo.d.stevilka")
      * @Max\Ui(ident=true)
      */
     private $stevilka;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.naslov", description="entiteta.naslov")
+     * @Max\I18n(label="besedilo.naslov", description="besedilo.d.naslov")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -44,21 +44,21 @@ class Besedilo
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.avtor", description="entiteta.avtor")
+     * @Max\I18n(label="besedilo.avtor", description="besedilo.d.avtor")
      * @var string
      */
     private $avtor;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.podnaslov", description="entiteta.podnaslov")
+     * @Max\I18n(label="besedilo.podnaslov", description="besedilo.d.podnaslov")
      * @var string
      */
     private $podnaslov;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="besedilo.jezik", description="besedilo.jezik")
+     * @Max\I18n(label="besedilo.jezik", description="besedilo.d.jezik")
      * @var string
      */
     private $jezik;
@@ -74,21 +74,21 @@ class Besedilo
      * Predvidoma v angleščini
      * 
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.interNaslov", description="entiteta.interNaslov")
+     * @Max\I18n(label="besedilo.interNaslov", description="besedilo.d.interNaslov")
      * @var string
      */
     private $internacionalniNaslov;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="besedilo.datumPrejema", description="besedilo.datumPrejema")
+     * @Max\I18n(label="besedilo.datumPrejema", description="besedilo.d.datumPrejema")
      * @var string
      */
     private $datumPrejema;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="besedilo.moskeVloge", description="besedilo.moskeVloge")
+     * @Max\I18n(label="besedilo.moskeVloge", description="besedilo.d.moskeVloge")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -96,7 +96,7 @@ class Besedilo
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="besedilo.zenskeVloge", description="besedilo.zenskeVloge")
+     * @Max\I18n(label="besedilo.zenskeVloge", description="besedilo.d.zenskeVloge")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -104,14 +104,14 @@ class Besedilo
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="besedilo.prevajalec", description="besedilo.prevajalec")
+     * @Max\I18n(label="besedilo.prevajalec", description="besedilo.d.prevajalec")
      * @var string
      */
     private $prevajalec;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="besedilo.povzetekVsebine", description="besedilo.povzetekVsebine")
+     * @Max\I18n(label="besedilo.povzetekVsebine", description="besedilo.d.povzetekVsebine")
      * @var string
      */
     private $povzetekVsebine;
@@ -119,7 +119,7 @@ class Besedilo
     /**
      * 
      * @ORM\Column(type="date", length=4, nullable=true)
-     * @Max\I18n(label="besedilo.letoIzida", description="besedilo.letoIzida")
+     * @Max\I18n(label="besedilo.letoIzida", description="besedilo.d.letoIzida")
      * @var string
      */
     private $letoIzida;
@@ -127,7 +127,7 @@ class Besedilo
     /**
      * 
      * @ORM\Column(type="date",  nullable=true)
-     * @Max\I18n(label="besedilo.krajIzida", description="besedilo.krajIzida")
+     * @Max\I18n(label="besedilo.krajIzida", description="besedilo.d.krajIzida")
      * @var string
      */
     private $krajIzida;
@@ -135,7 +135,7 @@ class Besedilo
     /**
      * 
      * @ORM\Column(type="string",  nullable=true)
-     * @Max\I18n(label="besedilo.zaloznik", description="besedilo.zaloznik")
+     * @Max\I18n(label="besedilo.zaloznik", description="besedilo.d.zaloznik")
      * @var string
      */
     private $zaloznik;

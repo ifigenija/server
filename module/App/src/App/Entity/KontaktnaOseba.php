@@ -31,7 +31,7 @@ class KontaktnaOseba
      *  NA-neaktiven
      *
      * @ORM\Column(type="string", length=20, nullable=true)
-     * @Max\I18n(label="entiteta.status", description="kontaktna.d.status")
+     * @Max\I18n(label="kontaktna.status", description="kontaktna.d.status")
      * @Max\Ui(type="select",opts="kontaktnaoseba.status", required=true)
      * @var string
 
@@ -40,14 +40,14 @@ class KontaktnaOseba
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.funkcija", description="entiteta.funkcija")
+     * @Max\I18n(label="kontaktna.funkcija", description="kontaktna.d.funkcija")
      * @var string
      */
     private $funkcija;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opis", description="entiteta.opis")
+     * @Max\I18n(label="kontaktna.opis", description="kontaktna.d.opis")
      * @var string     
      */
     private $opis;
@@ -55,7 +55,7 @@ class KontaktnaOseba
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="kontaktneOsebe")
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
-     * @Max\I18n(label="kontaktna.popa",  description="kontaktna.popa")
+     * @Max\I18n(label="kontaktna.popa",  description="kontaktna.d.popa")
      * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Popa
      */
@@ -64,7 +64,7 @@ class KontaktnaOseba
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="kontaktneOsebe")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
-     * @Max\I18n(label="entiteta.oseba",  description="entiteta.oseba")
+     * @Max\I18n(label="kontaktna.oseba",  description="kontaktna.d.oseba")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */

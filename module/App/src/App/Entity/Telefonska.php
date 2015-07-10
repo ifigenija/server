@@ -27,7 +27,7 @@ class Telefonska
      * Vrsta telefonske številke - domača 
      * 
      * @ORM\Column(type="string", length=20, nullable=false)
-     * @Max\I18n(label="tel.vrsta", description="tel.vrsta")   
+     * @Max\I18n(label="tel.vrsta", description="tel.d.vrsta")   
      * @Max\Ui(type="select", opts="telefonska.vrsta")
      * @var string
      */
@@ -37,7 +37,7 @@ class Telefonska
      * Številka 
      * 
      * @ORM\Column(type="string", length=30, nullable=true)
-     * @Max\I18n(label="entiteta.stevilka", description="tel.d.stevilka")
+     * @Max\I18n(label="tel.stevilka", description="tel.d.stevilka")
      * @Max\Ui(type="sifra")
      * @var string
      */

@@ -25,7 +25,7 @@ class Trr
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.stevilka", description="trr.d.stevilka")
+     * @Max\I18n(label="trr.stevilka", description="trr.d.stevilka")
      * @Max\Ui(type="sifra")
      * @var string
      */

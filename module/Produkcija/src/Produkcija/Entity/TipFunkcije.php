@@ -31,7 +31,7 @@ class TipFunkcije
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.ime", description="entiteta.ime")
+     * @Max\I18n(label="tipFunkcije.ime", description="tipFunkcije.d.ime")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -39,7 +39,7 @@ class TipFunkcije
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opis", description="entiteta.opis")
+     * @Max\I18n(label="tipFunkcije.opis", description="tipFunkcije.d.opis")
      * @var string
      */
     private $opis;
@@ -62,7 +62,7 @@ class TipFunkcije
     /**
      * $$ isto kot pri Funkcija
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="entiteta.podrocje", description="entiteta.podrocje")
+     * @Max\I18n(label="tipFunkcije.podrocje", description="tipFunkcije.d.podrocje")
      * @Max\Ui(type="select", opts="tipfunkcije.podrocje")
      * @var string
      */
