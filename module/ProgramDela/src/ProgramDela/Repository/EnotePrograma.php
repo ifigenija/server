@@ -5,6 +5,11 @@
  */
 
 namespace ProgramDela\Repository;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use DoctrineModule\Paginator\Adapter\Selectable;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
+use Max\Repository\AbstractMaxRepository;
 
 /**
  * Description of ProgramDela
@@ -14,21 +19,22 @@ namespace ProgramDela\Repository;
 class EnotePrograma
         extends \Max\Repository\AbstractMaxRepository
 {
-     protected $sortOptions = [
+
+    protected $sortOptions = [
         "default" => [
-            "id" => ["alias" => "p.id"]
+            "sort" => ["alias" => "p.sort"]
         ],
-        "vse" => [
-            "id" => ["alias" => "p.id"]
+        "vse"     => [
+            "sort" => ["alias" => "p.sort"]
         ],
-    ];  
-     
-         public function getPaginator(array $options, $name = "default")
+    ];
+
+    public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
             case "default":
             case "vse":
-                $qb   = $this->getVseQb($options);
+                $qb = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
         }
@@ -50,5 +56,69 @@ class EnotePrograma
         return $qb;
     }
 
-     
+    /**
+     * vrne true, če je pripadajoči program dela zaklenjen
+     * 
+     * @param entiteta $obj
+     * @return boolean
+     */
+    private function zaklenjenProgramDela($obj)
+    {
+        if ($obj) {
+            // najdemo programDela:
+            if (method_exists($obj, 'getDokument')) {
+                return ($obj->getDokument() && $obj->getDokument()->getZakljuceno() ? true : false);
+            } elseif (method_exists($obj, 'getProgramDela')) {
+                //za festival
+                return ($obj->getProgramDela() && $obj->getProgramDela()->getZakljuceno() ? true : false);
+            } else {
+                $this->expect(false, "Enota programa nima niti metode getDocument niti getProgramDela", 1000523);
+            }
+        }
+        return false;       // za vsak slučaj
+    }
+
+    /**
+     * 
+     * @param type $object  entiteta
+     * @param type $params
+     */
+    public function create($object, $params = null)
+    {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000520);
+
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
+
+        parent::create($object, $params);
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function update($object, $params = null)
+    {
+        $zaklenjen = $this->zaklenjenProgramDela($object);  //$$ začasno
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000521);
+
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
+
+        parent::update($object, $params);
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function delete($object)
+    {
+        $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000522);
+
+        parent::delete($object);
+    }
+
 }

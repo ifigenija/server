@@ -131,6 +131,7 @@ class ProdukcijaDelitev
         if ($smer == \Max\Consts::UP) {
             if ($this->getEnotaPrograma()) {
                 $this->getEnotaPrograma()->preracunaj(\Max\Consts::UP);
+                $this->getEnotaPrograma()->validate();
             }
         }
     }
