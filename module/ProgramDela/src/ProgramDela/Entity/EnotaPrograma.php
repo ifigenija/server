@@ -75,7 +75,7 @@ class EnotaPrograma
      * je <= maksfaktor
      * 
      * @ORM\Column(type="decimal", nullable=true, precision=6, scale=2)
-     * @Max\I18n(label="ep.zaprosenProcent", description="ep.zaprosenProcent")
+     * @Max\I18n(label="ep.zaprosenProcent", description="ep.d.zaprosenProcent")
      * @var double
      */
     private $zaprosenProcent;
@@ -284,7 +284,7 @@ class EnotaPrograma
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev")
-     * @Max\I18n(label="entiteta.uprizoritev", description="entiteta.d.uprizoritev")   
+     * @Max\I18n(label="ep.uprizoritev", description="ep.d.uprizoritev")   
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Uprizoritev
      */
@@ -297,7 +297,7 @@ class EnotaPrograma
      * Naziv dogodka za izjemnidogodek.
      *
      * @ORM\Column(length=50, nullable=true)
-     * @Max\I18n(label="entiteta.naziv", description="entiteta.d.naziv")
+     * @Max\I18n(label="ep.naziv", description="ep.d.naziv")
      * @var string
      */
     protected $naziv;
@@ -312,7 +312,7 @@ class EnotaPrograma
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="entiteta.sort", description="ep.d.sort")
+     * @Max\I18n(label="ep.sort", description="ep.d.sort")
      * @Max\Ui(type="integer", icon="fa fa-sort")
      * @var integer
      */

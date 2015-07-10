@@ -27,7 +27,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="entiteta.sifra", description="entiteta.d.sifra")
+     * @Max\I18n(label="programDela.sifra", description="programDela.d.sifra")
      * @Max\Ui(type="sifra",ident=true )
      * @var string     
      */
@@ -35,7 +35,7 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="entiteta.naziv", description="entiteta.d.naziv")
+     * @Max\I18n(label="programDela.naziv", description="programDela.d.naziv")
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
@@ -43,14 +43,14 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="date", nullable=false)
-     * @Max\I18n(label="entiteta.zacetek", description="entiteta.d.zacetek")
+     * @Max\I18n(label="programDela.zacetek", description="programDela.d.zacetek")
      * @var string
      */
     private $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=false)
-     * @Max\I18n(label="entiteta.konec", description="entiteta.d.konec")
+     * @Max\I18n(label="programDela.konec", description="programDela.d.konec")
      * @var string
      */
     private $konec;
