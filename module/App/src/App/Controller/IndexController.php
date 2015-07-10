@@ -18,7 +18,7 @@ class IndexController extends \Zend\Mvc\Controller\AbstractActionController
     */  
    public function indexAction() {
        
-       return $this->redirect()->toUrl('/client/index.html');       
+       return $this->redirect()->toUrl('/client/index.php');       
    }
    
    
