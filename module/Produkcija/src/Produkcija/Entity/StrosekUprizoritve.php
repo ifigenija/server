@@ -22,7 +22,7 @@ class StrosekUprizoritve
      * @Max\Ui(type="id")
      * @var string    
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -30,28 +30,28 @@ class StrosekUprizoritve
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
-    private $naziv;
+    protected $naziv;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
      * @Max\I18n(label="strupr.vrednostDo", description="strupr.d.vrednostDo")
      * @var double
      */
-    private $vrednostDo;
+    protected $vrednostDo;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
      * @Max\I18n(label="strupr.vrednostNa", description="strupr.d.vrednostNa")
      * @var double
      */
-    private $vrednostNa;
+    protected $vrednostNa;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="strupr.opis", description="strupr.d.opis")
      * @var string
      */
-    private $opis;
+    protected $opis;
 
     /**
      * @ORM\Column(type="string", length=10)
@@ -59,7 +59,7 @@ class StrosekUprizoritve
      * @Max\Ui(type="select",opts="strosekuprizoritve.tipstroska")
      * @var string
      */
-    private $tipstroska;
+    protected $tipstroska;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -67,7 +67,7 @@ class StrosekUprizoritve
      * @Max\Ui(type="integer",icon="fa fa-sort")
      * @var integer
      */
-    private $sort;
+    protected $sort;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="stroski")
@@ -76,7 +76,7 @@ class StrosekUprizoritve
      * @Max\Ui(type="hiddenid")
      * @var \Produkcija\Entity\Uprizoritev
      */
-    private $uprizoritev;
+    protected $uprizoritev;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="stroski")
@@ -85,7 +85,7 @@ class StrosekUprizoritve
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */
-    private $popa;
+    protected $popa;
 
     public function validate($mode = 'update')
     {

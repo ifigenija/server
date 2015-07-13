@@ -26,14 +26,14 @@ class Dogodek
      * @Max\Ui(type="id")
      * @var string     
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Planiran začetek", description="Planiran začetek dogodka")
      * @var string
      */
-    private $planiranZacetek;
+    protected $planiranZacetek;
 
     /**
      * 
@@ -41,14 +41,14 @@ class Dogodek
      * @Max\I18n(label="Začetek", description="Začetek dogodka")
      * @var string
      */
-    private $zacetek;
+    protected $zacetek;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Konec", description="Konec dogodka")
      * @var string
      */
-    private $konec;
+    protected $konec;
 
     /**
      * $$ za podefinirati vrednosti -morda v opcijah? 
@@ -57,28 +57,28 @@ class Dogodek
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $status;
+    protected $status;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
      * @Max\I18n(label="Razred", description="Razred dogodka")
      * @var string
      */
-    private $razred;
+    protected $razred;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Termin", description="Termin dogodka")
      * @var string
      */
-    private $termin;
+    protected $termin;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Ime", description="Ime dogodka")
      * @var string
      */
-    private $ime;
+    protected $ime;
 
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Predstava", inversedBy="dogodek")
@@ -87,7 +87,7 @@ class Dogodek
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Predstava
      */
-    private $predstava;
+    protected $predstava;
 
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Zasedenost", inversedBy="dogodek")
@@ -96,7 +96,7 @@ class Dogodek
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Zasedenost
      */
-    private $zasedenost;
+    protected $zasedenost;
 
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Vaja", inversedBy="dogodek")
@@ -105,7 +105,7 @@ class Dogodek
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Vaja
      */
-    private $vaja;
+    protected $vaja;
 
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Gostovanje", inversedBy="dogodek")
@@ -114,7 +114,7 @@ class Dogodek
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Gostovanje
      */
-    private $gostovanje;
+    protected $gostovanje;
 
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\DogodekIzven", inversedBy="dogodek")
@@ -123,7 +123,7 @@ class Dogodek
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\DogodekIzven
      */
-    private $dogodekIzven;
+    protected $dogodekIzven;
 
     /**
      * @ORM\OneToOne(targetEntity="Prodaja\Entity\Prostor")
@@ -132,25 +132,25 @@ class Dogodek
      * @Max\Ui(type="toone")
      * @var \Prodaja\Entity\Prostor
      */
-    private $prostor;
+    protected $prostor;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Arhivalija", mappedBy="dogodek")
      * @var <Arhiv>
      */
-    private $arhivi;
+    protected $arhivi;
 
     /**
      * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="dogodek")
      * @var <TerminiStoritve>
      */
-    private $terminiStoritve;
+    protected $terminiStoritve;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\ProdajaPredstave", mappedBy="dogodek")
      * @var <ProdajaPredstave>
      */
-    private $prodajaPredstave;
+    protected $prodajaPredstave;
 
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona", inversedBy="dogodki")
@@ -159,7 +159,7 @@ class Dogodek
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Sezona
      */
-    private $sezona;
+    protected $sezona;
 
     public function __construct()
     {

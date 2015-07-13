@@ -24,7 +24,7 @@ class Predstava
      * @Max\Ui(type="id")
      * @var string     
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="predstava")
@@ -32,7 +32,7 @@ class Predstava
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Dogodek
      */
-    private $dogodek;
+    protected $dogodek;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="predstave")
@@ -41,7 +41,7 @@ class Predstava
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Uprizoritev
      */
-    private $uprizoritev;
+    protected $uprizoritev;
 
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Gostovanje", inversedBy="predstave")
@@ -50,7 +50,7 @@ class Predstava
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Gostovanje
      */
-    private $gostovanje;
+    protected $gostovanje;
 
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Gostujoca", inversedBy="predstave")
@@ -59,7 +59,7 @@ class Predstava
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Gostujoca
      */
-    private $gostujoca;
+    protected $gostujoca;
 
     public function validate($mode = 'update')
     {

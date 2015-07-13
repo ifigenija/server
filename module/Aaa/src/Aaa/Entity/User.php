@@ -44,7 +44,7 @@ class User
      * @Max\Ui(type="naziv")
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * Geslo
@@ -116,13 +116,13 @@ class User
      * @Max\I18n(label="entiteta.email", description="user.d.email") 
      * @Max\Ui(type="email", ident=true)
      */
-    private $email;
+    protected $email;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="user.lastLogon")
      */
-    private $lastLogon;
+    protected $lastLogon;
 
     /**
      * Token, ki ga pošljemo po mailu uporabniku, ki je pozabil geslo
@@ -130,7 +130,7 @@ class User
      * @ORM\Column(type="string", nullable=true)
      * 
      */
-    private $passRestToken;
+    protected $passRestToken;
 
     /**
      * Veljavnost žetona, za reset gesla
@@ -138,7 +138,7 @@ class User
      * zaenkrat se to polje ne uporablja. Tudi datetime funkcionalnost še ne deluje (npr. ne sprejme formata: '1973-28-03T04:30:00'     
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $tokenExpires;
+    protected $tokenExpires;
 
 
     public function __construct()

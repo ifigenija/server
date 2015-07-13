@@ -16,60 +16,60 @@ class Sedez
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=3, nullable=true)
      */
-    private $stevilka;
+    protected $stevilka;
 
     /**
      * @ORM\Column(type="string", length=60, nullable=true)
      */
-    private $oznaka;
+    protected $oznaka;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */
-    private $kakovost;
+    protected $kakovost;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $koordinataX;
+    protected $koordinataX;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $koordinataY;
+    protected $koordinataY;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
      */
-    private $barva;
+    protected $barva;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\RazpisanSedez", mappedBy="sedez")
      */
-    private $prodanSedez;
+    protected $prodanSedez;
 
     /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\VrstaSedezev", inversedBy="sedezi")
      * @ORM\JoinColumn(name="vrsta_id", referencedColumnName="id", nullable=false)
      */
-    private $vrsta;
+    protected $vrsta;
 
     /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\SedezniRed", inversedBy="sedez")
      * @ORM\JoinColumn(name="sedezni_red_id", referencedColumnName="id")
      */
-    private $sedezniRed;
+    protected $sedezniRed;
 
     /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\PodrocjeSedenja", inversedBy="sedez")
      * @ORM\JoinColumn(name="podrocja_sedenja_id", referencedColumnName="id")
      */
-    private $podrocjaSedenja;
+    protected $podrocjaSedenja;
 
     public function __construct()
     {

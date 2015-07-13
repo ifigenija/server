@@ -22,7 +22,7 @@ class Sezona
      * @Max\I18n(label="Id", description="ID sezone")
      * @Max\Ui(type="id")
      * @var string     */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -30,21 +30,21 @@ class Sezona
      * @Max\Ui(type="naziv",ident=true )
      * @var string     
      */
-    private $imeSezone;
+    protected $imeSezone;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="sezona.zacetek", description="sezona.d.zacetek")
      * @var string
      */
-    private $zacetek;
+    protected $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="sezona.konec", description="sezona.d.konec")
      * @var string
      */
-    private $konec;
+    protected $konec;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -52,13 +52,13 @@ class Sezona
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $aktivna;
+    protected $aktivna;
 
     /**
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Dogodek", mappedBy="sezona")
      * @var <Dogodki>
      */
-    private $dogodki;
+    protected $dogodki;
 
     public function __construct()
     {

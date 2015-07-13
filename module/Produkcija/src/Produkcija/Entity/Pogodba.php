@@ -24,7 +24,7 @@ class Pogodba
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * Šifra pogodbe
@@ -34,21 +34,21 @@ class Pogodba
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode")
      * @var string
      */
-    private $sifra;
+    protected $sifra;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="pogodba.zacetek", description="pogodba.d.zacetek")
      * @var string
      */
-    private $zacetek;
+    protected $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="pogodba.konec", description="pogodba.d.konec")
      * @var string
      */
-    private $konec;
+    protected $konec;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -56,7 +56,7 @@ class Pogodba
      * @Max\Ui(type="boolcheckbox")                       
      * @var boolean
      */
-    private $placiloNaVajo;
+    protected $placiloNaVajo;
 
     /**
      * Vrednost za eno vajo. 
@@ -67,7 +67,7 @@ class Pogodba
      * @Max\I18n(label="pogodba.vrednostVaje", description="pogodba.d.vrednostVaje")   
      * @var double
      */
-    private $vrednostVaje;
+    protected $vrednostVaje;
 
     /**
      * Polje je aktualno, če je placiloNaVajo=true
@@ -77,7 +77,7 @@ class Pogodba
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $planiranoSteviloVaj;
+    protected $planiranoSteviloVaj;
 
     /**
      * Pavšalna vrednost za vse vaje. 
@@ -91,14 +91,14 @@ class Pogodba
      * @Max\I18n(label="pogodba.vrednostVaj", description="pogodba.d.vrednostVaj")   
      * @var double
      */
-    private $vrednostVaj;
+    protected $vrednostVaj;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=12, scale=2)
      * @Max\I18n(label="pogodba.vrednostPredstave", description="pogodba.d.vrednostPredstave")   
      * @var double
      */
-    private $vrednostPredstave;
+    protected $vrednostPredstave;
 
     /**
      * polje se lahko vpisuje (vrednostDo) ali pa izračuna iz cene na vajo in planiranega števila vaj
@@ -107,7 +107,7 @@ class Pogodba
      * @Max\I18n(label="pogodba.vrednostDoPremiere", description="pogodba.d.vrednostDoPremiere")   
      * @var double
      */
-    private $vrednostDoPremiere;
+    protected $vrednostDoPremiere;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -115,7 +115,7 @@ class Pogodba
      * @Max\Ui(type="boolcheckbox")                       
      * @var boolean
      */
-    private $aktivna;
+    protected $aktivna;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -123,14 +123,14 @@ class Pogodba
      * @Max\Ui(type="boolcheckbox")                       
      * @var boolean
      */
-    private $zaposlenVDrJz;
+    protected $zaposlenVDrJz;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="pogodba.opis", description="pogodba.d.opis")   
      * @var string
      */
-    private $opis;
+    protected $opis;
 
     /**
      * 
@@ -139,7 +139,7 @@ class Pogodba
      * @Max\Ui(type="hiddenid")
      * @var \Produkcija\Entity\Alternacija
      */
-    private $alternacija;
+    protected $alternacija;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="pogodbe")
@@ -148,7 +148,7 @@ class Pogodba
      * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Oseba
      */
-    private $oseba;
+    protected $oseba;
 
     /**
      * pogodba ima lahko poslovnega partnerja, (če oseba izstavlja račune namesto avtorskih pogodb)
@@ -159,7 +159,7 @@ class Pogodba
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */
-    private $popa;
+    protected $popa;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trr")
@@ -168,7 +168,7 @@ class Pogodba
      * @Max\Ui(type="toone")
      * @var \App\Entity\Trr
      */
-    private $trr;
+    protected $trr;
 
     public function preracunaj($smer = false)
     {

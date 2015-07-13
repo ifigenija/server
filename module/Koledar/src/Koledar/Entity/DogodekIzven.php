@@ -24,7 +24,7 @@ class DogodekIzven
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="dogodekIzven")
@@ -32,7 +32,7 @@ class DogodekIzven
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Dogodek
      */
-    private $dogodek;
+    protected $dogodek;
 
     public function validate($mode = 'update')
     {

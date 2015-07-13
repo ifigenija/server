@@ -90,7 +90,7 @@ class Popa
      * @Max\I18n(label="popa.panoga", description="popa.d.panoga")
      * @var string
      */
-    private $panoga;
+    protected $panoga;
 
     /**
      * Email naslov
@@ -138,7 +138,7 @@ class Popa
      * 
      * @var <Osebe>
      */
-    private $osebe;
+    protected $osebe;
 
     /**
      * Klientovi naslovi
@@ -152,31 +152,31 @@ class Popa
      * @ORM\OneToMany(targetEntity="App\Entity\Telefonska", mappedBy="popa", orphanRemoval=true)
      * @var <Telefonske>
      */
-    private $telefonske;
+    protected $telefonske;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="popa")
      * @var <Trrji>
      */
-    private $trrji;
+    protected $trrji;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\KontaktnaOseba", mappedBy="popa")
      * var <KontaktnaOseba>
      */
-    private $kontaktneOsebe;
+    protected $kontaktneOsebe;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="popa")
      * @var <Pogodbe>
      */
-    private $pogodbe;
+    protected $pogodbe;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\StrosekUprizoritve", mappedBy="popa")
      * @var <Stroski>
      */
-    private $stroski;
+    protected $stroski;
 
     /**
      * ID za DDV klienta
@@ -253,7 +253,7 @@ class Popa
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $zamejstvo = false;
+    protected $zamejstvo = false;
 
     /**
      * A je poslovni partner NVO - nevladna organizacija
@@ -263,7 +263,7 @@ class Popa
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $nvo = false;
+    protected $nvo = false;
 
     /**
      * @ORM\OneToOne(targetEntity="ProgramDela\Entity\ProdukcijskaHisa", mappedBy="popa")
@@ -271,7 +271,7 @@ class Popa
      * @Max\Ui(type="toone")
      * @var \ProgramDela\Entity\ProdukcijskaHisa
      */
-    private $producent;
+    protected $producent;
 
     /**
      * @ORM\OneToOne(targetEntity="Prodaja\Entity\Kupec", mappedBy="popa")
@@ -279,7 +279,7 @@ class Popa
      * @Max\Ui(type="toone")
      * @var \Prodaja\Entity\Kupec
      */
-    private $kupec;
+    protected $kupec;
 
     public function __construct()
     {

@@ -24,7 +24,7 @@ class ProdukcijskaHisa
      * @Max\Ui(type="id")
      * @var string     
      */
-    private $id;
+    protected $id;
 
     /**
      * Šifra klienta
@@ -42,7 +42,7 @@ class ProdukcijskaHisa
      * @Max\Ui(type="select",opts="produkcijskahisa.status", required=true)
      * @var string     
      */
-    private $status;
+    protected $status;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Popa", inversedBy="producent")
@@ -51,19 +51,19 @@ class ProdukcijskaHisa
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */
-    private $popa;
+    protected $popa;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProdukcijaDelitev", mappedBy="koproducent")
      * @var <Koprodukcije>
      */
-    private $koprodukcije;
+    protected $koprodukcije;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Uprizoritev", mappedBy="producent")
      * @var <Uprizoritve>
      */
-    private $uprizoritve;
+    protected $uprizoritve;
 
     public function __construct()
     {

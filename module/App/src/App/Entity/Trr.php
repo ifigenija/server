@@ -21,7 +21,7 @@ class Trr
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -29,7 +29,7 @@ class Trr
      * @Max\Ui(type="sifra")
      * @var string
      */
-    private $stevilka;
+    protected $stevilka;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -37,7 +37,7 @@ class Trr
      * @Max\Ui(type="sifra")
      * @var string
      */
-    private $swift;
+    protected $swift;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -45,7 +45,7 @@ class Trr
      * @Max\Ui(type="sifra")
      * @var string
      */
-    private $bic;
+    protected $bic;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -53,7 +53,7 @@ class Trr
      * @Max\Ui(type="sifra",icon="fa fa-university")
      * @var string
      */
-    private $banka;
+    protected $banka;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="trrji")
@@ -62,7 +62,7 @@ class Trr
      * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Popa
      */
-    private $popa;
+    protected $popa;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="trrji")
@@ -71,7 +71,7 @@ class Trr
      * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Oseba
      */
-    private $oseba;
+    protected $oseba;
 
     public function validate($mode = 'update')
     {

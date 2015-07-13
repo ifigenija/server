@@ -16,37 +16,37 @@ class PodrocjeSedenja
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $ime;
+    protected $ime;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $kapaciteta;
+    protected $kapaciteta;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */
-    private $templatePlaceholder;
+    protected $templatePlaceholder;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
      */
-    private $barva;
+    protected $barva;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\VrstaSedezev", mappedBy="podrocjaSedenja")
      */
-    private $vrsta;
+    protected $vrsta;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\Sedez", mappedBy="podrocjaSedenja")
      */
-    private $sedez;
+    protected $sedez;
 
     public function __construct()
     {

@@ -23,7 +23,7 @@ class Rekvizit
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -31,25 +31,25 @@ class Rekvizit
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
-    private $ime;
+    protected $ime;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Vrsta", description="Vrsta rekvizita")
      * @var string
      */
-    private $vrsta;
+    protected $vrsta;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $status;
+    protected $status;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Rekviziterstvo", mappedBy="rekvizit")
      * @var <Rekviziterstva>
      */
-    private $rekviziterstva;
+    protected $rekviziterstva;
 
     public function __construct()
     {

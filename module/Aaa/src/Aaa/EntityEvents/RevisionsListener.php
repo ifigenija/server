@@ -13,42 +13,42 @@ class RevisionsListener
         ServiceLocatorAwareInterface
 {
 
-    private $tableName = 'revizije';
+    protected $tableName = 'revizije';
 
     /**
      * @var Doctrine\DBAL\Connection
      */
-    private $conn;
+    protected $conn;
 
     /**
      * @var Doctrine\DBAL\Platforms\AbstractPlatform
      */
-    private $platform;
+    protected $platform;
 
     /**
      * @var Doctrine\ORM\EntityManager
      */
-    private $em;
+    protected $em;
 
     /**
      * @var Doctrine\ORM\UnitOfWork
      */
-    private $uow;
+    protected $uow;
 
     /**
      * @var ServiceLocatorInterface
      */
-    private $serviceLocator;
+    protected $serviceLocator;
 
     /**
      * @var \Aaa\Entity\User
      */
-    private $identity;
+    protected $identity;
 
     /**
      * @var \Max\Ann\EntityMetadataFactory
      */
-    private $metaFactory;
+    protected $metaFactory;
 
     /**
      * @var array<Entity>

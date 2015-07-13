@@ -23,24 +23,24 @@ class Gostovanje
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Vrsta", description="Vrsta gostovanja")
      * @var string
      */
-    private $vrsta;
+    protected $vrsta;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $zamejstvo;
+    protected $zamejstvo;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $kraj;
+    protected $kraj;
 
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="gostovanje")
@@ -48,13 +48,13 @@ class Gostovanje
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Dogodek
      */
-    private $dogodek;
+    protected $dogodek;
 
     /**
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Predstava", mappedBy="gostovanje")
      * @var <Predstave>
      */
-    private $predstave;
+    protected $predstave;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
@@ -63,7 +63,7 @@ class Gostovanje
      * @Max\Ui(type="toone")
      * @var \App\Entity\Drzava
      */
-    private $drzava;
+    protected $drzava;
 
     public function __construct()
     {

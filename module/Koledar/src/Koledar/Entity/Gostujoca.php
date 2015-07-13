@@ -24,13 +24,13 @@ class Gostujoca
      * @Max\I18n(label="Id", description="ID gostujoče predstave")
      * @Max\Ui(type="id")
      * @var string */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Predstava", mappedBy="gostujoca")
      * @var <Predstave>
      */
-    private $predstave;
+    protected $predstave;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="gostujoce")
@@ -39,7 +39,7 @@ class Gostujoca
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Uprizoritev
      */
-    private $uprizoritev;
+    protected $uprizoritev;
 
     public function __construct()
     {

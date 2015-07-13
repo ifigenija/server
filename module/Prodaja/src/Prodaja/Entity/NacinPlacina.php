@@ -12,22 +12,22 @@ class NacinPlacina
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $ime;
+    protected $ime;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
      */
-    private $vrsta;
+    protected $vrsta;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\PlacilniInstrument", mappedBy="nacinPlacina")
      */
-    private $placilniInstrument;
+    protected $placilniInstrument;
     
         public function __construct()
     {

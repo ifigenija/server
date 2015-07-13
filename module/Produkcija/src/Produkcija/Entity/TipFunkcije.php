@@ -27,7 +27,7 @@ class TipFunkcije
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -35,14 +35,14 @@ class TipFunkcije
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
-    private $ime;
+    protected $ime;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="tipFunkcije.opis", description="tipFunkcije.d.opis")
      * @var string
      */
-    private $opis;
+    protected $opis;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -50,14 +50,14 @@ class TipFunkcije
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $nastopajoc;
+    protected $nastopajoc;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="tipFunkcije.zenskoIme", description="tipFunkcije.d.zenskoIme")
      * @var string
      */
-    private $imeZenski;
+    protected $imeZenski;
 
     /**
      * $$ isto kot pri Funkcija
@@ -66,13 +66,13 @@ class TipFunkcije
      * @Max\Ui(type="select", opts="tipfunkcije.podrocje")
      * @var string
      */
-    private $podrocje;
+    protected $podrocje;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Funkcija", mappedBy="tipFunkcije", fetch="EXTRA_LAZY")
      * @var <Funkcije>
      */
-    private $funkcije;
+    protected $funkcije;
 
     public function validate($mode = 'update')
     {

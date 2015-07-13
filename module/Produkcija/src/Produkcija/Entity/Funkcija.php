@@ -24,7 +24,7 @@ class Funkcija
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * $$ rb ali sploh rabimo to polje - saj je v tipih funkcij, ki bi jih fixturji skreirali,  že pripravljeno
@@ -35,7 +35,7 @@ class Funkcija
      * @Max\Ui(type="select", opts="funkcija.podrocje")
      * @var string
      */
-    private $podrocje;
+    protected $podrocje;
 
     /**
      * inšpecient in Vodja tehnične ekipe sta vodja ekipe  za $področje oz. tipfunkcije.podrocje  
@@ -47,7 +47,7 @@ class Funkcija
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $vodjaEkipe;
+    protected $vodjaEkipe;
 
     /**
      * V to polje se vpiše ime funkcije kot npr. Romeo, Julija,Tezej ipd.
@@ -57,7 +57,7 @@ class Funkcija
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
-    private $naziv;
+    protected $naziv;
 
     /**
      * V to polje se vpiše poljubno - bolj specifično ime funkcije za to uprizoritev,
@@ -67,7 +67,7 @@ class Funkcija
      * @Max\I18n(label="funkcija.komentar", description="funkcija.d.komentar")
      * @var string
      */
-    private $komentar;
+    protected $komentar;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -75,7 +75,7 @@ class Funkcija
      * @Max\Ui(type="select", opts="funkcija.velikost")
      * @var string
      */
-    private $velikost;
+    protected $velikost;
 
     /**
      * Če je funkcija izpostavljena (pomembna), je tudi vsebovana v osebni izkaznici 
@@ -88,7 +88,7 @@ class Funkcija
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $pomembna;
+    protected $pomembna;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -96,21 +96,21 @@ class Funkcija
      * @Max\Ui(type="integer", icon="fa fa-sort")
      * @var integer
      */
-    private $sort;
+    protected $sort;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
      * @Max\I18n(label="funkcija.sePlanira")
      * @Max\Ui(type="boolcheckbox")
      */
-    private $sePlanira;
+    protected $sePlanira;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
      * @Max\I18n(label="funkcija.dovoliPrekrivanje")
      * @Max\Ui(type="boolcheckbox")
      */
-    private $dovoliPrekrivanje;
+    protected $dovoliPrekrivanje;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -118,13 +118,13 @@ class Funkcija
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $maxPrekrivanj;
+    protected $maxPrekrivanj;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="funkcija")
      * @var <Alternacije>
      */
-    private $alternacije;
+    protected $alternacije;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="funkcije")
@@ -133,7 +133,7 @@ class Funkcija
      * @Max\Ui(type="hiddenid")
      * @var \Produkcija\Entity\Uprizoritev
      */
-    private $uprizoritev;
+    protected $uprizoritev;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Alternacija")
@@ -142,7 +142,7 @@ class Funkcija
      * @Max\Ui(type="toone")
      * @var
      */
-    private $privzeti;
+    protected $privzeti;
 
     public function __construct()
     {
@@ -157,7 +157,7 @@ class Funkcija
      * @Max\Ui(type="select")
      * @var \Produkcija\Entity\TipFunkcije
      */
-    private $tipFunkcije;
+    protected $tipFunkcije;
 
     public function validate($mode = 'update')
     {

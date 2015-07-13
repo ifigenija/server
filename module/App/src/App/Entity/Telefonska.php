@@ -21,7 +21,7 @@ class Telefonska
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * Vrsta telefonske številke - domača 
@@ -31,7 +31,7 @@ class Telefonska
      * @Max\Ui(type="select", opts="telefonska.vrsta")
      * @var string
      */
-    private $vrsta;
+    protected $vrsta;
 
     /**
      * Številka 
@@ -41,7 +41,7 @@ class Telefonska
      * @Max\Ui(type="sifra")
      * @var string
      */
-    private $stevilka;
+    protected $stevilka;
 
     /**
      * A je to privzeta telefonska številka 
@@ -50,7 +50,7 @@ class Telefonska
      * @Max\I18n(label="tel.privzeta", description="tel.d.privzeta")   
      * @Max\Ui(type="boolcheckbox",required=false)
      */
-    private $privzeta = false;
+    protected $privzeta = false;
 
     /**
      * Lastnike telefonske številke - če gre za osebo
@@ -62,7 +62,7 @@ class Telefonska
      * @var \App\Entity\Oseba
      *
      */
-    private $oseba;
+    protected $oseba;
 
     /**
      * Lastnik telfonske številke, če gre za poslovnega partnerja

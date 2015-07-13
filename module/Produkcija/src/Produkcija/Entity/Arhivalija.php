@@ -24,77 +24,77 @@ class Arhivalija
      * @Max\Ui(type="id")
      * @var string     
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Oznaka datuma", description="Oznaka datuma arhivalije")
      * @var string
      *      */
-    private $oznakaDatuma;
+    protected $oznakaDatuma;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="Datum", description="Datuma arhivalije")
      * @var string
      */
-    private $datum;
+    protected $datum;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Fizična oblika", description="Fizična oblika arhivalije")
      * @var string
      */
-    private $fizicnaOblika;
+    protected $fizicnaOblika;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Izvor digitalizata", description="Izvor digitalizata arhivalije")
      * @var string
      */
-    private $izvorDigitalizata;
+    protected $izvorDigitalizata;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="Povzetek", description="Povzetek arhivalije")
      * @var string
      */
-    private $povzetek;
+    protected $povzetek;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="Opombe", description="Opombe pri arhivaliji")
      * @var string
      */
-    private $opombe;
+    protected $opombe;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Lokacija originala", description="Lokacija originala arhivalije")
      * @var string
      */
-    private $lokacijaOriginala;
+    protected $lokacijaOriginala;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Objavljeno", description="Objavljeno")
      * @var string
      */
-    private $objavljeno;
+    protected $objavljeno;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Naslov", description="Naslov arhivalije")
      * @var string
      */
-    private $naslov;
+    protected $naslov;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Avtorstvo", description="Avtorstvo arhivalije")
      * @var string
      */
-    private $avtorstvo;
+    protected $avtorstvo;
 
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Dogodek", inversedBy="arhivi")
@@ -103,7 +103,7 @@ class Arhivalija
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Dogodek
      */
-    private $dogodek;
+    protected $dogodek;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="arhivi")
@@ -112,7 +112,7 @@ class Arhivalija
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Uprizoritev
      */
-    private $uprizoritev;
+    protected $uprizoritev;
 
     public function validate($mode = 'update')
     {

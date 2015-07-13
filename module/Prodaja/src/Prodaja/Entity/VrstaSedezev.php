@@ -16,33 +16,33 @@ class VrstaSedezev
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $kapaciteta;
+    protected $kapaciteta;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $poravnava;
+    protected $poravnava;
 
     /**
      * @ORM\Column(type="string", length=2, nullable=true)
      */
-    private $oblika;
+    protected $oblika;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\Sedez", mappedBy="vrsta")
      */
-    private $sedezi;
+    protected $sedezi;
 
     /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\PodrocjeSedenja", inversedBy="vrsta")
      * @ORM\JoinColumn(name="podrocja_sedenja_id", referencedColumnName="id", nullable=false)
      */
-    private $podrocjaSedenja;
+    protected $podrocjaSedenja;
 
     public function __construct()
     {

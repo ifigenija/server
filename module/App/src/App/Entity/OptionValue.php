@@ -30,23 +30,23 @@ class OptionValue
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $value;
+    protected $value;
 
     /**
      * @ORM\Column(type="boolean", nullable=true, options={"default":false})
      */
-    private $global = false;
+    protected $global = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Option")
      * @ORM\JoinColumn(name="option_id", referencedColumnName="id")
      */
-    private $option;
+    protected $option;
 
     /**
      * 
@@ -54,7 +54,7 @@ class OptionValue
      * @ORM\ManyToOne(targetEntity="Aaa\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $user;
+    protected $user;
 
     //put your code here
 

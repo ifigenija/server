@@ -67,7 +67,7 @@ class PostniNaslov
      * @Max\I18n(label="postniNaslov.nazivDva", description="postniNaslov.d.nazivDva")
      * @var string
      */
-    private $nazivDva;
+    protected $nazivDva;
 
     /**
      * Ulica naslovnika

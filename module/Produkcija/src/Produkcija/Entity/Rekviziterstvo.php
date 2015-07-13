@@ -22,7 +22,7 @@ class Rekviziterstvo
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -30,14 +30,14 @@ class Rekviziterstvo
      * @Max\Ui(type="boolcheckbox",group="Davčni podatki")
      * @var boolean    
      */
-    private $namenUporabe;
+    protected $namenUporabe;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="Opis postavitve", description="Opis postavitve rekvizita")
      * @var string
      */
-    private $opisPostavitve;
+    protected $opisPostavitve;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Rekvizit", inversedBy="rekviziterstva")
@@ -46,7 +46,7 @@ class Rekviziterstvo
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Rekvizit
      */
-    private $rekvizit;
+    protected $rekvizit;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="rekviziterstva")
@@ -55,7 +55,7 @@ class Rekviziterstvo
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Uprizoritev
      */
-    private $uprizoritev;
+    protected $uprizoritev;
 
     public function validate($mode = 'update')
     {

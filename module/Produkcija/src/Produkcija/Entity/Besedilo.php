@@ -25,14 +25,14 @@ class Besedilo
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", nullable=false)
      * @Max\I18n(label="besedilo.stevilka", description="besedilo.d.stevilka")
      * @Max\Ui(ident=true)
      */
-    private $stevilka;
+    protected $stevilka;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -40,35 +40,35 @@ class Besedilo
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
-    private $naslov;
+    protected $naslov;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="besedilo.avtor", description="besedilo.d.avtor")
      * @var string
      */
-    private $avtor;
+    protected $avtor;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="besedilo.podnaslov", description="besedilo.d.podnaslov")
      * @var string
      */
-    private $podnaslov;
+    protected $podnaslov;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="besedilo.jezik", description="besedilo.d.jezik")
      * @var string
      */
-    private $jezik;
+    protected $jezik;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="besedilo.naslovIzvirnika", description="besedilo.d.naslovIzvirnika")
      * @var string
      */
-    private $naslovIzvirnika;
+    protected $naslovIzvirnika;
 
     /**
      * Predvidoma v angleščini
@@ -77,14 +77,14 @@ class Besedilo
      * @Max\I18n(label="besedilo.interNaslov", description="besedilo.d.interNaslov")
      * @var string
      */
-    private $internacionalniNaslov;
+    protected $internacionalniNaslov;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="besedilo.datumPrejema", description="besedilo.d.datumPrejema")
      * @var string
      */
-    private $datumPrejema;
+    protected $datumPrejema;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -92,7 +92,7 @@ class Besedilo
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $moskeVloge;
+    protected $moskeVloge;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -100,21 +100,21 @@ class Besedilo
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $zenskeVloge;
+    protected $zenskeVloge;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="besedilo.prevajalec", description="besedilo.d.prevajalec")
      * @var string
      */
-    private $prevajalec;
+    protected $prevajalec;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="besedilo.povzetekVsebine", description="besedilo.d.povzetekVsebine")
      * @var string
      */
-    private $povzetekVsebine;
+    protected $povzetekVsebine;
 
     /**
      * 
@@ -122,7 +122,7 @@ class Besedilo
      * @Max\I18n(label="besedilo.letoIzida", description="besedilo.d.letoIzida")
      * @var string
      */
-    private $letoIzida;
+    protected $letoIzida;
 
     /**
      * 
@@ -130,7 +130,7 @@ class Besedilo
      * @Max\I18n(label="besedilo.krajIzida", description="besedilo.d.krajIzida")
      * @var string
      */
-    private $krajIzida;
+    protected $krajIzida;
 
     /**
      * 
@@ -138,7 +138,7 @@ class Besedilo
      * @Max\I18n(label="besedilo.zaloznik", description="besedilo.d.zaloznik")
      * @var string
      */
-    private $zaloznik;
+    protected $zaloznik;
 
     public function validate($mode = 'update')
     {

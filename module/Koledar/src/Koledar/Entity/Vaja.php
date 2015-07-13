@@ -24,7 +24,7 @@ class Vaja
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -32,7 +32,7 @@ class Vaja
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $zaporedna;
+    protected $zaporedna;
 
     /**
      * 
@@ -40,7 +40,7 @@ class Vaja
      * @Max\I18n(label="Poročilo", description="Poročilo")
      * @var string
      */
-    private $porocilo;
+    protected $porocilo;
 
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="vaja")
@@ -48,7 +48,7 @@ class Vaja
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Dogodek
      */
-    private $dogodek;
+    protected $dogodek;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="vaje")
@@ -57,7 +57,7 @@ class Vaja
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Uprizoritev
      */
-    private $uprizoritev;
+    protected $uprizoritev;
 
     public function validate($mode = 'update')
     {

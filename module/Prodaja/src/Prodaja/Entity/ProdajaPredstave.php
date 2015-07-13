@@ -16,34 +16,34 @@ class ProdajaPredstave
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\Racun", mappedBy="prodajaPredstave")
      */
-    private $racun;
+    protected $racun;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\RazpisanSedez", mappedBy="prodajaPredstave")
      */
-    private $razpisanSedez;
+    protected $razpisanSedez;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\Rezervacija", mappedBy="prodajaPredstave")
      */
-    private $rezervacija;
+    protected $rezervacija;
 
     /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\SedezniRed", inversedBy="prodajePredstave")
      * @ORM\JoinColumn(name="sedezni_red_id", referencedColumnName="id")
      */
-    private $sedezniRed;
+    protected $sedezniRed;
 
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Dogodek", inversedBy="prodajaPredstave")
      * @ORM\JoinColumn(name="dogodek_id", referencedColumnName="id", nullable=false)
      */
-    private $dogodek;
+    protected $dogodek;
 
     public function __construct()
     {

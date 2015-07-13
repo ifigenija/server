@@ -22,42 +22,42 @@ class TerminStoritve
      * @Max\Ui(type="id")
      * @var string   
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Planiran začetek", description="Planiran začetek termina")
      * @var string
      */
-    private $planiranZacetek;
+    protected $planiranZacetek;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Planiran konec", description="Planiran konec termina")
      * @var string
      */
-    private $planiranKonec;
+    protected $planiranKonec;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Začetek", description="Začetek termina")
      * @var string
      */
-    private $zacetek;
+    protected $zacetek;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Konec", description="Konec termina")
      * @var string
      */
-    private $konec;
+    protected $konec;
 
     /**
      * @ORM\Column(type="decimal", nullable=true,scale=2, precision=15)
      * @Max\I18n(label="Planirano traja", description="Planirano traja")
      * @var double
      */
-    private $planiranoTraja;
+    protected $planiranoTraja;
 
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Dogodek", inversedBy="terminiStoritve")
@@ -66,7 +66,7 @@ class TerminStoritve
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Dogodek
      */
-    private $dogodek;
+    protected $dogodek;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Alternacija", inversedBy="storitve")
@@ -75,7 +75,7 @@ class TerminStoritve
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Alternacija
      */
-    private $alternacija;
+    protected $alternacija;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba")
@@ -84,7 +84,7 @@ class TerminStoritve
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */
-    private $oseba;
+    protected $oseba;
 
     public function validate($mode = 'update')
     {

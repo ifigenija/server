@@ -23,7 +23,7 @@ class Abonma
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -31,7 +31,7 @@ class Abonma
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stPredstav;
+    protected $stPredstav;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -39,7 +39,7 @@ class Abonma
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stKuponov;
+    protected $stKuponov;
 
     /**
      * @ORM\Column(type="string", length=40, nullable=true)
@@ -47,13 +47,13 @@ class Abonma
      * @Max\Ui(ident=true,type="naziv")
      * @var string
      */
-    private $ime;
+    protected $ime;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="abonma.opis", description="abonma.d.opis")
      */
-    private $opis;
+    protected $opis;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -61,7 +61,7 @@ class Abonma
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $kapaciteta;
+    protected $kapaciteta;
 
     public function validate($mode = 'update')
     {

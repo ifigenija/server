@@ -16,18 +16,18 @@ class PostavkaRacuna
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\RazpisanSedez", mappedBy="postavkaRacuna")
      */
-    private $prodanSedez;
+    protected $prodanSedez;
 
     /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Racun", inversedBy="postavke")
      * @ORM\JoinColumn(name="racun_id", referencedColumnName="id")
      */
-    private $dokument;
+    protected $dokument;
 
     public function __construct()
     {

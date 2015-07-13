@@ -24,7 +24,7 @@ class Zaposlitev
      * @Max\Ui(type="id")
      * @var string     
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=10)
@@ -32,7 +32,7 @@ class Zaposlitev
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode")
      * @var string
      */
-    private $sifra;
+    protected $sifra;
 
     /**
      * @ORM\Column(type="string", length=10)
@@ -40,21 +40,21 @@ class Zaposlitev
      * @Max\Ui(type="select",opts="zaposlitev.status")
      * @var string
      */
-    private $status;
+    protected $status;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="zaposlitev.zacetek",  description="zaposlitev.d.zacetek")
      * @var string
      */
-    private $zacetek;
+    protected $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="zaposlitev.konec",  description="zaposlitev.d.konec")
      * @var string
      */
-    private $konec;
+    protected $konec;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -62,7 +62,7 @@ class Zaposlitev
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $tip;
+    protected $tip;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -70,14 +70,14 @@ class Zaposlitev
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $delovnaObveza;
+    protected $delovnaObveza;
 
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="zaposlitev.malica",  description="zaposlitev.d.malica")
      * @var string
      */
-    private $malica;
+    protected $malica;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -85,7 +85,7 @@ class Zaposlitev
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $izmenskoDelo;
+    protected $izmenskoDelo;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -93,7 +93,7 @@ class Zaposlitev
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $individualnaPogodba;
+    protected $individualnaPogodba;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -101,7 +101,7 @@ class Zaposlitev
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $jeZaposlenVdrugemJz;
+    protected $jeZaposlenVdrugemJz;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -109,14 +109,14 @@ class Zaposlitev
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $jeNastopajoci;
+    protected $jeNastopajoci;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="zaposlitev")
      * 
      * @var <Alternacije>
      */
-    private $alternacije;
+    protected $alternacije;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="zaposlitve")
@@ -125,7 +125,7 @@ class Zaposlitev
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */
-    private $oseba;
+    protected $oseba;
 
     public function __construct()
     {

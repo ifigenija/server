@@ -25,7 +25,7 @@ class ZvrstSurs
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
@@ -33,7 +33,7 @@ class ZvrstSurs
      * @Max\Ui(type="sifra",ident=true, icon="fa fa-barcode")
      * @var string
      */
-    private $sifra;
+    protected $sifra;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -41,7 +41,7 @@ class ZvrstSurs
      * @Max\Ui(type="naziv" )
      * @var string
      */
-    private $naziv;
+    protected $naziv;
 
     /**
      * ...

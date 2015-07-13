@@ -16,32 +16,32 @@ class SedezniRed
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $kapaciteta;
+    protected $kapaciteta;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $ime;
+    protected $ime;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\ProdajaPredstave", mappedBy="sedezniRed")
      */
-    private $prodajePredstave;
+    protected $prodajePredstave;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\Sedez", mappedBy="sedezniRed")
      */
-    private $sedez;
+    protected $sedez;
 
     /**
      * 
      */
-    private $vrste;
+    protected $vrste;
 
     public function __construct()
     {

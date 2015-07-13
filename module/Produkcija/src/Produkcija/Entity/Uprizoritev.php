@@ -24,7 +24,7 @@ class Uprizoritev
      * @Max\Ui(type="id")
      * @var string   
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
@@ -32,7 +32,7 @@ class Uprizoritev
      * @Max\Ui(type="sifra",ident=true,icon="fa fa-barcode")
      * @var string
      */
-    private $sifra;
+    protected $sifra;
 
     /**
      * @ORM\Column(type="string", length=35, nullable=true)
@@ -40,7 +40,7 @@ class Uprizoritev
      * @Max\Ui(type="select", opts="uprizoritev.faza")
      * @var string
      */
-    private $faza;
+    protected $faza;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -48,21 +48,21 @@ class Uprizoritev
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
-    private $naslov;
+    protected $naslov;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="uprizoritev.podnaslov", description="uprizoritev.d.podnaslov")
      * @var string
      */
-    private $podnaslov;
+    protected $podnaslov;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="uprizoritev.delovniNaslov", description="uprizoritev.d.delovniNaslov")
      * @var string
      */
-    private $delovniNaslov;
+    protected $delovniNaslov;
 
     /**
      * Predvidoma v angleščini
@@ -71,7 +71,7 @@ class Uprizoritev
      * @Max\I18n(label="uprizoritev.interNaslov", description="uprizoritev.d.interNaslov")
      * @var string
      */
-    private $internacionalniNaslov;
+    protected $internacionalniNaslov;
 
     /**
      * pomeni začetek faze produkcija
@@ -82,7 +82,7 @@ class Uprizoritev
      * @Max\I18n(label="uprizoritev.datumZacStudija", description="uprizoritev.d.datumZacStudija")
      * @var string
      */
-    private $datumZacStudija;
+    protected $datumZacStudija;
 
     /**
      * $$ rb verjetno je to odvečno polje, sedaj, ko imamo polje za planirano število vaj
@@ -92,7 +92,7 @@ class Uprizoritev
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $steviloVaj;
+    protected $steviloVaj;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -100,7 +100,7 @@ class Uprizoritev
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $planiranoSteviloVaj;
+    protected $planiranoSteviloVaj;
 
     /**
      * pomeni tudi konec faze produkcija
@@ -111,7 +111,7 @@ class Uprizoritev
      * @Max\I18n(label="uprizoritev.datumPremiere", description="uprizoritev.d.datumPremiere")
      * @var string
      */
-    private $datumPremiere;
+    protected $datumPremiere;
 
     /**
      * 
@@ -124,7 +124,7 @@ class Uprizoritev
      * @Max\Ui(type="select",empty="Kjer koli")    //$$ rb zakaj select?
      * @var \Prodaja\Entity\Prostor
      */
-    private $maticniOder;
+    protected $maticniOder;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -132,7 +132,7 @@ class Uprizoritev
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stOdmorov;
+    protected $stOdmorov;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -140,7 +140,7 @@ class Uprizoritev
      * @Max\Ui(type="naziv")
      * @var string
      */
-    private $avtor;
+    protected $avtor;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -148,7 +148,7 @@ class Uprizoritev
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $gostujoca;
+    protected $gostujoca;
 
     /**
      * $$ ali se to polje uporablja v programu dela kot trajanje študija?
@@ -158,28 +158,28 @@ class Uprizoritev
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $trajanje;
+    protected $trajanje;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="entiteta.opis", description="entiteta.d.opis")
      * @var string
      */
-    private $opis;
+    protected $opis;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="uprizoritev.arhIdent", description="Id uprizoritve za arhiv")
      * @var string
      */
-    private $arhIdent;
+    protected $arhIdent;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="uprizoritev.arhOpomba", description="Opomba pri uprizoritvi za arhiv")
      * @var string
      */
-    private $arhOpomba;
+    protected $arhOpomba;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -187,7 +187,7 @@ class Uprizoritev
      * @Max\Ui(icon="fa fa-calendar")
      * @var string
      */
-    private $datumZakljucka;                // $$ rb - ali je sploh kdaj datum zaključka, glede na to, da se lahko ponovi?
+    protected $datumZakljucka;                // $$ rb - ali je sploh kdaj datum zaključka, glede na to, da se lahko ponovi?
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -195,56 +195,56 @@ class Uprizoritev
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $sloAvtor;
+    protected $sloAvtor;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="uprizoritev.kratkiNaslov", description="uprizoritev.d.kratkiNaslov")
      * @var string
      */
-    private $kratkiNaslov;
+    protected $kratkiNaslov;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Funkcija", mappedBy="uprizoritev")
      * @var <Funkcije>
      */
-    private $funkcije;
+    protected $funkcije;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Arhivalija", mappedBy="uprizoritev")
      * @var <Arhivi>
      */
-    private $arhivi;
+    protected $arhivi;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Rekviziterstvo", mappedBy="uprizoritev")
      * @var <Rekviziterstva>
      */
-    private $rekviziterstva;
+    protected $rekviziterstva;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\StrosekUprizoritve", mappedBy="uprizoritev")
      * @var <Stroski>
      */
-    private $stroski;
+    protected $stroski;
 
     /**
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Vaja", mappedBy="uprizoritev")
      * @var <Vaje>
      */
-    private $vaje;
+    protected $vaje;
 
     /**
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Predstava", mappedBy="uprizoritev")
      * @var <Predstave>
      */
-    private $predstave;
+    protected $predstave;
 
     /**
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Gostujoca", mappedBy="uprizoritev")
      * @var <Gostujoce>
      */
-    private $gostujoce;
+    protected $gostujoce;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Besedilo")
@@ -253,7 +253,7 @@ class Uprizoritev
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Besedilo
      */
-    private $besedilo;
+    protected $besedilo;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ZvrstUprizoritve")
@@ -262,7 +262,7 @@ class Uprizoritev
      * @Max\Ui(type="select",empty="Izberi zvrst")
      * @var \Produkcija\Entity\ZvrstUprizoritve
      */
-    private $zvrstUprizoritve;
+    protected $zvrstUprizoritve;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ZvrstSurs")
@@ -271,7 +271,7 @@ class Uprizoritev
      * @Max\Ui(type="select", empty="Izberi klasifikacijo")
      * @var \Produkcija\Entity\ZvrstSurs
      */
-    private $zvrstSurs;
+    protected $zvrstSurs;
 
     /**
      * Producent bo predvidoma večinoma domača hiša 
@@ -282,7 +282,7 @@ class Uprizoritev
      * @Max\Ui(type="toone")
      * @var \ProgramDela\Entity\ProdukcijskaHisa
      */
-    private $producent;
+    protected $producent;
 
     public function __construct()
     {

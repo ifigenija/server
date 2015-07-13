@@ -30,47 +30,47 @@ class Option
      * @var string
      * 
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", unique=true, length=100, nullable=false)
      */
-    private $name;
+    protected $name;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */
-    private $type;
+    protected $type;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $defaultValue;
+    protected $defaultValue;
 
     /**
      * @ORM\Column(type="boolean", nullable=true, options={"default":true})
      */
-    private $perUser = false;
+    protected $perUser = false;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $readOnly = false;
+    protected $readOnly = false;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $public = false;
+    protected $public = false;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $role = "";
+    protected $role = "";
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     function getId()
     {

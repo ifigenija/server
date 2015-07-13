@@ -57,7 +57,7 @@ class Oseba
      * @Max\Ui(type="naziv")  
      * @var string
      */
-    private $ime;
+    protected $ime;
 
     /**
      * @ORM\Column(nullable=true)
@@ -65,35 +65,35 @@ class Oseba
      * @Max\Ui(type="naziv")  
      * @var string
      */
-    private $priimek;
+    protected $priimek;
 
     /**
      * @ORM\Column(length=40, nullable=true)
      * @Max\I18n(label="oseba.funkcija", description="oseba.d.funkcija")
      * @var string
      */
-    private $funkcija;
+    protected $funkcija;
 
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="oseba.srednjeIme", description="oseba.d.srednjeIme")
      * @var string
      */
-    private $srednjeIme;
+    protected $srednjeIme;
 
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="oseba.polnoIme", description="oseba.d.polnoIme")
      * @var string
      */
-    private $polnoIme;
+    protected $polnoIme;
 
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="oseba.psevdonim", description="oseba.d.psevdonim")
      * @var string
      */
-    private $psevdonim;
+    protected $psevdonim;
 
     /**
      * Naslov kontaktne osebe
@@ -120,7 +120,7 @@ class Oseba
      * @Max\Ui(icon="fa fa-birthday-cake")
      * @var string
      */
-    private $datumRojstva;
+    protected $datumRojstva;
 
     /**
      * @ORM\Column(nullable=true)
@@ -128,7 +128,7 @@ class Oseba
      * @Max\Ui(type="sifra")
      * @var string
      */
-    private $emso;
+    protected $emso;
 
     /**
      * @ORM\Column(nullable=true)
@@ -136,7 +136,7 @@ class Oseba
      * @Max\Ui(type="sifra")
      * @var string
      */
-    private $davcna;
+    protected $davcna;
 
     /**
      * @ORM\Column(type="string", length=1, nullable=true)
@@ -144,35 +144,35 @@ class Oseba
      * @Max\Ui(type="select",opts="oseba.spol",group="Osnovni podatki",required=true)
      * @var string
      */
-    private $spol;
+    protected $spol;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="oseba.opombe", description="oseba.d.opombe")   
      * @var string
      */
-    private $opombe;
+    protected $opombe;
 
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="oseba.drzavljanstvo", description="oseba.d.drzavljanstvo")   
      * @var string
      */
-    private $drzavljanstvo;
+    protected $drzavljanstvo;
 
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="oseba.drzavaRojstva", description="oseba.d.drzavaRojstva")   
      * @var string
      */
-    private $drzavaRojstva;
+    protected $drzavaRojstva;
 
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="oseba.krajRojstva", description="oseba.d.krajRojstva")   
      * @var string
      */
-    private $krajRojstva;
+    protected $krajRojstva;
 
     /**
      * @ORM\OneToOne(targetEntity="Aaa\Entity\User")
@@ -180,7 +180,7 @@ class Oseba
      * @Max\Ui(type="toone")
      * @var \Aaa\Entity\User
      */
-    private $user;
+    protected $user;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Telefonska", mappedBy="oseba", orphanRemoval=true)
@@ -188,7 +188,7 @@ class Oseba
      * @Max\Ui(type="tomany")
      * @var <Telefonske>
      */
-    private $telefonske;
+    protected $telefonske;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Trr", mappedBy="oseba", orphanRemoval=true)
@@ -196,13 +196,13 @@ class Oseba
      * @Max\Ui(type="tomany")
      * @var <Trrji>
      */
-    private $trrji;
+    protected $trrji;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\KontaktnaOseba", mappedBy="oseba")
      * var <KontaktneOsebe>
      */
-    private $kontaktneOsebe;
+    protected $kontaktneOsebe;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="oseba")
@@ -210,7 +210,7 @@ class Oseba
      * @Max\Ui(type="tomany")
      * @var <Alternacije>
      */
-    private $alternacije;
+    protected $alternacije;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="oseba")
@@ -218,7 +218,7 @@ class Oseba
      * @Max\Ui(type="tomany")
      * @var <Pogodbe>
      */
-    private $pogodbe;
+    protected $pogodbe;
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Zaposlitev", mappedBy="oseba")
@@ -226,13 +226,13 @@ class Oseba
      * @Max\Ui(type="tomany")
      * @var <Zaposlitve>
      */
-    private $zaposlitve;
+    protected $zaposlitve;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
      * @ORM\JoinColumn(name="naslov_id", referencedColumnName="id")
      */
-    private $naslov;
+    protected $naslov;
 
     public function __construct($name = '')
     {

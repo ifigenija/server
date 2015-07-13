@@ -24,13 +24,13 @@ class Kupec
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\Racun", mappedBy="kupec")
      * @var <Racun>
      */
-    private $racun;
+    protected $racun;
 
     /**
      * 
@@ -40,7 +40,7 @@ class Kupec
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */
-    private $popa;
+    protected $popa;
     public function __construct()
     {
         $this->racun  = new ArrayCollection();

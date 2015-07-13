@@ -24,7 +24,7 @@ class Alternacija
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
@@ -32,7 +32,7 @@ class Alternacija
      * @Max\Ui(type="sifra",ident=true,icon="fa fa-barcode" )
      * @var string
      */
-    private $sifra;
+    protected $sifra;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -40,28 +40,28 @@ class Alternacija
      * @Max\Ui(type="boolcheckbox")     
      * @var boolean
      */
-    private $zaposlen;
+    protected $zaposlen;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="alternacija.zacetek", description="alternacija.d.zacetek")
      * @var string
      */
-    private $zacetek;
+    protected $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="alternacija.konec", description="alternacija.d.konec")
      * @var string
      */
-    private $konec;
+    protected $konec;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="alternacija.opomba", description="alternacija.d.opomba")
      * @var string
      */
-    private $opomba;
+    protected $opomba;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -69,7 +69,7 @@ class Alternacija
      * @Max\Ui(type="integer",icon="fa fa-sort")
      * @var integer
      */
-    private $sort;
+    protected $sort;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -77,7 +77,7 @@ class Alternacija
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $privzeti;
+    protected $privzeti;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -85,13 +85,13 @@ class Alternacija
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $aktivna;
+    protected $aktivna;
 
     /**
      * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="alternacija", fetch="EXTRA_LAZY")
      * @var <Storitve>
      */
-    private $storitve;
+    protected $storitve;
 
     /**
      * 
@@ -101,7 +101,7 @@ class Alternacija
      * @Max\Ui(type="toone", required=true);
      * @var \Produkcija\Entity\Funkcija
      */
-    private $funkcija;
+    protected $funkcija;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Zaposlitev", inversedBy="alternacije")
@@ -110,7 +110,7 @@ class Alternacija
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Zaposlitev
      */
-    private $zaposlitev;
+    protected $zaposlitev;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="alternacije")
@@ -119,7 +119,7 @@ class Alternacija
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */
-    private $oseba;
+    protected $oseba;
 
     /**
      * @ORM\OneToOne(targetEntity="Produkcija\Entity\Pogodba", inversedBy="alternacija")
@@ -128,7 +128,7 @@ class Alternacija
      * @Max\Ui(type="toone")
      * var \Produkcija\Entity\Pogodba       - izpustimo tip, da ga lahko s set metodo postavimo na null v primeru izbrisa pogodbe
      */
-    private $pogodba;
+    protected $pogodba;
 
     /**
      * @ORM\Column(type="boolean", length=1, nullable=true)

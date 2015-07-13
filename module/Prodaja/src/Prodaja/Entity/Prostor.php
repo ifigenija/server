@@ -24,7 +24,7 @@ class Prostor
      * @Max\Ui(type="id")
      * @var string     
      */
-    private $id;   
+    protected $id;   
     
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
@@ -32,7 +32,7 @@ class Prostor
      * @Max\Ui(type="sifra",ident=true, icon="fa fa-barcode")
      * @var string
      */
-    private $sifra;
+    protected $sifra;
 
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
@@ -40,7 +40,7 @@ class Prostor
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
-    private $naziv;
+    protected $naziv;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -48,21 +48,21 @@ class Prostor
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $jePrizorisce;
+    protected $jePrizorisce;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="prostor.kapaciteta", description="prostor.d.kapaciteta")
      * @var integer
      */
-    private $kapaciteta;
+    protected $kapaciteta;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="prostor.opis", description="prostor.d.opis")
      * @var string
      */
-    private $opis;
+    protected $opis;
 
     
     public function validate($mode = 'update')

@@ -22,7 +22,7 @@ class KontaktnaOseba
      * @Max\Ui(type="id")
      * @var string    
      */
-    private $id;
+    protected $id;
 
     /**
      * Status kontaktne osebe
@@ -36,21 +36,21 @@ class KontaktnaOseba
      * @var string
 
      */
-    private $status;
+    protected $status;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="kontaktna.funkcija", description="kontaktna.d.funkcija")
      * @var string
      */
-    private $funkcija;
+    protected $funkcija;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="kontaktna.opis", description="kontaktna.d.opis")
      * @var string     
      */
-    private $opis;
+    protected $opis;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="kontaktneOsebe")
@@ -59,7 +59,7 @@ class KontaktnaOseba
      * @Max\Ui(type="hiddenid")
      * @var \App\Entity\Popa
      */
-    private $popa;
+    protected $popa;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="kontaktneOsebe")

@@ -16,23 +16,23 @@ class PlacilniInstrument
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $ime;
+    protected $ime;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\Racun", mappedBy="placilniInstrument")
      */
-    private $racun;
+    protected $racun;
 
     /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\NacinPlacina", inversedBy="placilniInstrument")
      * @ORM\JoinColumn(name="nacin_placina_id", referencedColumnName="id")
      */
-    private $nacinPlacina;
+    protected $nacinPlacina;
 
     public function __construct()
     {

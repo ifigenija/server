@@ -16,18 +16,18 @@ class Rezervacija
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\RazpisanSedez", mappedBy="rezervacija")
      */
-    private $razpisaniSedezi;
+    protected $razpisaniSedezi;
 
     /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\ProdajaPredstave", inversedBy="rezervacija")
      * @ORM\JoinColumn(name="prodaja_predstave_id", referencedColumnName="id")
      */
-    private $prodajaPredstave;
+    protected $prodajaPredstave;
 
     public function __construct()
     {
