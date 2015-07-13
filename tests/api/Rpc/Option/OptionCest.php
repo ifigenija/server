@@ -35,6 +35,19 @@ class OptionCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
     }
 
+    
+    /**
+     * inicializira bazo  glede na DumpFunctional.sql
+     * 
+     * 
+     * @param ApiTester $I
+     */
+    public function initBaze(ApiTester $I)
+    {
+        $I->initDB();
+    }
+
+    
     /**
      *  -  getOptions  defaultValue 
      * 

@@ -51,7 +51,7 @@ class ApiHelper
             $url .= "ident=" . urlencode($ident) . "&page=1&per_page=30";
         }
 
-        $res = $client->get($url, ['auth' => [\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass]]);    
+        $res = $client->get($url, ['auth' => [\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass]]);
 
         $a->assertEquals('application/json; charset=utf-8', $res->getHeader('content-type'), "Lookup $entity z identom $ident ni vrnil pravega content type");
 
@@ -150,7 +150,7 @@ class ApiHelper
         $I = $this->getModule('REST');
 
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPOST($url, json_encode($data));     
+        $I->sendPOST($url, json_encode($data));
         $I->seeResponseCodeIs('200');
         $I->seeResponseIsJson();
         return $I->grabDataFromResponseByJsonPath('$')[0];
@@ -479,6 +479,16 @@ class ApiHelper
         }
 
         $I->assertEmpty($expected);
+    }
+
+    /**
+     * HELPER METODA, KI PREKO DB MODULA skreira inicialno bazo glede na dump functional 
+     * 
+     */
+    public function initDB()
+    {
+        $db = $this->getModule('Db');
+        $db->_initialize();
     }
 
 }

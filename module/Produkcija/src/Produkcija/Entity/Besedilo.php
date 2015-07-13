@@ -118,15 +118,15 @@ class Besedilo
 
     /**
      * 
-     * @ORM\Column(type="date", length=4, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="besedilo.letoIzida", description="besedilo.d.letoIzida")
-     * @var string
+     * @var integer
      */
     protected $letoIzida;
 
     /**
      * 
-     * @ORM\Column(type="date",  nullable=true)
+     * @ORM\Column(type="string",  nullable=true)
      * @Max\I18n(label="besedilo.krajIzida", description="besedilo.d.krajIzida")
      * @var string
      */

@@ -39,6 +39,7 @@ class ProdukcijaDelitevCest
     private $osebaUrl               = '/rest/oseba';
     private $obj;
     private $obj2;
+    private $obj3;
     private $objUprizoritev;
     private $objDrzava;
     private $objPopa;
@@ -142,7 +143,7 @@ class ProdukcijaDelitevCest
      */
     public function create(ApiTester $I)
     {
-        $data      = [
+        $data       = [
 //            'odstotekFinanciranja' => 40,
             'delez'           => 3500,
             'zaprosenProcent' => 50,
@@ -150,11 +151,10 @@ class ProdukcijaDelitevCest
             'enotaPrograma'   => $this->objProgramPremiera1['id'],
             'koproducent'     => $this->lookProdukcijskaHisa1['id'],
         ];
-        $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj  = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
 //        codecept_debug($ent);
-        $I->assertEquals($ent['delez'], 3500);
-
+//        $I->assertEquals($ent['zaprosenProcent'], 50);
         // kreiram še en zapis
         $data       = [
 //            'odstotekFinanciranja' => 20,
@@ -167,7 +167,21 @@ class ProdukcijaDelitevCest
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
 //        codecept_debug($ent);
-        $I->assertEquals($ent['delez'], 3500);
+//        $I->assertEquals($ent['zaprosenProcent'], 50);
+//        
+        // kreiram še en zapis za nematično podjetje
+        $data       = [
+//            'odstotekFinanciranja' => 20,
+            'delez'           => 1700,
+            'zaprosenProcent' => 20,
+            'zaproseno'       => 100,
+            'enotaPrograma'   => $this->objProgramPremiera2['id'],
+            'koproducent'     => $this->lookProdukcijskaHisa2['id'],
+        ];
+        $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+//        codecept_debug($ent);
+        $I->assertEquals($ent['zaprosenProcent'], 20);
     }
 
     /**
@@ -199,7 +213,7 @@ class ProdukcijaDelitevCest
      */
     public function update(ApiTester $I)
     {
-        $ent                         = $this->obj;
+        $ent                    = $this->obj3;
         $ent['zaprosenProcent'] = 22;
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
@@ -215,15 +229,15 @@ class ProdukcijaDelitevCest
      */
     public function read(\ApiTester $I)
     {
-        $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj3['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['delez'], 3500.00);
-        $I->assertEquals($ent['odstotekFinanciranja'], 100); //$$ odvisno od  celotne vrednosti
+        $I->assertEquals($ent['delez'], 1700.00);
+        $I->assertEquals($ent['odstotekFinanciranja'], 15.89); //$$ odvisno od  celotne vrednosti
         $I->assertEquals($ent['zaprosenProcent'], 22);
-        $I->assertEquals($ent['zaproseno'], 770.00);    //$$ odvisno od  celotne vrednosti
-        $I->assertEquals($ent['enotaPrograma'], $this->objProgramPremiera1['id']);
-        $I->assertEquals($ent['koproducent'], $this->lookProdukcijskaHisa1['id']);
+        $I->assertEquals($ent['zaproseno'], 374.00);    //$$ odvisno od  celotne vrednosti
+        $I->assertEquals($ent['enotaPrograma'], $this->objProgramPremiera2['id']);
+        $I->assertEquals($ent['koproducent'], $this->lookProdukcijskaHisa2['id']);
     }
 
     /**
@@ -257,17 +271,6 @@ class ProdukcijaDelitevCest
     }
 
     /**
-     * brisanje zapisa
-     * 
-     * @depends create
-     */
-    public function delete(ApiTester $I)
-    {
-        $I->successfullyDelete($this->restUrl, $this->obj['id']);
-        $I->failToGet($this->restUrl, $this->obj['id']);
-    }
-
-    /**
      * spremenim zapis
      * 
      * @depends create
@@ -275,7 +278,8 @@ class ProdukcijaDelitevCest
      */
     public function updateZNapacnimiOdstotki(ApiTester $I)
     {
-        $data                    = $this->obj2;
+        $data                    = $I->successfullyGet($this->restUrl, $this->obj3['id']);
+        codecept_debug($data);
         $data['zaprosenProcent'] = 100.01;
         $resp                    = $I->failToUpdate($this->restUrl, $data['id'], $data);
         $I->assertEquals(1000413, $resp[0]['code']);
@@ -302,11 +306,22 @@ class ProdukcijaDelitevCest
     public function createIstiKoproducent(ApiTester $I)
     {
 
-        $data = $this->obj2;
+        $data = $this->obj3;
 
         $resp = $I->failToCreate($this->restUrl, $data);
         codecept_debug($resp);
         $I->assertEquals($resp[0]['code'], 1000411);
+    }
+
+    /**
+     * brisanje zapisa
+     * 
+     * @depends create
+     */
+    public function delete(ApiTester $I)
+    {
+        $I->successfullyDelete($this->restUrl, $this->obj['id']);
+        $I->failToGet($this->restUrl, $this->obj['id']);
     }
 
 }

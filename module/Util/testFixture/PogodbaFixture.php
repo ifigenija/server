@@ -27,7 +27,7 @@ class PogodbaFixture
 
     public function getDependencies()
     {
-        return array('TestFixture\PopaFixture', 'TestFixture\OsebaFixture', 'TestFixture\AlternacijaFixture'); // fixture classes fixture is dependent on , 
+        return array('TestFixture\PopaFixture', 'TestFixture\OsebaFixture'); // fixture classes fixture is dependent on , 
     }
 
     /**
@@ -78,13 +78,16 @@ class PogodbaFixture
 
         $o->setPlaciloNaVajo($v[12]);
         $o->setPlaniranoSteviloVaj($v[13]);
-        if ($v[14]) {
-            $getref = $this->getReference($v[14]);
-            $o->setAlternacija($getref);
-        }
+//        if ($v[14]) {
+//            $getref = $this->getReference($v[14]);
+//            $o->setAlternacija($getref);
+//        }
         
         $o->preracunaj();
-        $o->validate();
+        /**
+         * validate javi napako, ker alternacije še ni
+         */
+//        $o->validate();
 
         $referenca = 'Pogodba-' . $v[0];
         var_dump($referenca);
@@ -94,9 +97,9 @@ class PogodbaFixture
     public function getData()
     {
         return [
-            ['0001', 10, 30, 10, true, "Pogodba o sodelovanju", 'Oseba-0001', null, null, true, null, null, false, 3, 'Alternacija-0001',],
-            ['0002', 11, 31, 11, true, "Pogodba za vlogo Helena", 'Oseba-0006', null, null, false, null, null, true, 10, 'Alternacija-0006',],
-            ['0003', 12, 32, 12, true, "Pogodba za lektoriranje", 'Oseba-0013', null, null, false, null, null, FALSE, 4,'Alternacija-0008',],
+            ['0001', 10, 30, 10, true, "Pogodba o sodelovanju", 'Oseba-0001', null, null, true, null, null, false, 3, ],
+            ['0002', 11, 31, 11, true, "Pogodba za vlogo Helena", 'Oseba-0006', null, null, false, null, null, true, 10,],
+            ['0003', 12, 32, 12, true, "Pogodba za lektoriranje", 'Oseba-0013', null, null, false, null, null, FALSE, 4,],
         ];
     }
 

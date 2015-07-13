@@ -36,6 +36,17 @@ class DrzavaCest
     }
 
     /**
+     * inicializira bazo  glede na DumpFunctional.sql
+     * 
+     * 
+     * @param ApiTester $I
+     */
+    public function initBaze(ApiTester $I)
+    {
+        $I->initDB();
+    }
+
+    /**
      * get meta
      * 
      * @param ApiTester $I
@@ -137,14 +148,14 @@ class DrzavaCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?q=".$this->obj['isoNum'];
+        $listUrl = $this->restUrl . "?q=" . $this->obj['isoNum'];
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertEquals("xx", $list[0]['opomba']);    
+        $I->assertEquals("xx", $list[0]['opomba']);
     }
 
     /**

@@ -111,7 +111,7 @@ class PermissionCest
     public function preberiRelacijeZRolami(ApiTester $I)
     {
         $resp = $I->successfullyGetRelation($this->restUrl, $this->objPermission2['id'], "roles", "");
-        $I->assertEquals(2, count($resp));
+        $I->assertGreaterThanOrEqual(2, count($resp));
 
         // get po popa id  
         $resp = $I->successfullyGetRelation($this->restUrl, $this->objPermission2['id'], "roles", $this->objRole1['id']);

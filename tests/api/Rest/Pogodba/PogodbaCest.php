@@ -88,6 +88,17 @@ class PogodbaCest
     }
 
     /**
+     * inicializira bazo  glede na DumpFunctional.sql
+     * 
+     * 
+     * @param ApiTester $I
+     */
+    public function initBaze(ApiTester $I)
+    {
+        $I->initDB();
+    }
+
+    /**
      * najde državo
      * 
      * @param ApiTester $I
@@ -414,7 +425,7 @@ class PogodbaCest
         $I->assertEquals($ent['vrednostVaje'], 22.22);
         $I->assertEquals($ent['placiloNaVajo'], false);
         $I->assertEquals($ent['planiranoSteviloVaj'], 10);
-        $I->assertEquals($ent['alternacija'], $this->lookAlternacija1['id']);
+        $I->assertEquals($ent['alternacija']['id'], $this->lookAlternacija1['id']);
         $I->assertEquals($ent['aktivna'], false);
         $I->assertEquals($ent['opis'], 'xx');
         $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
@@ -491,7 +502,7 @@ class PogodbaCest
         $ent                = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($ent['id']);
         // ali je sam popravil nazaj na staro alternacijo?
-        $I->assertEquals($this->lookAlternacija3['id'], $ent['alternacija']);
+        $I->assertEquals($this->lookAlternacija3['id'], $ent['alternacija']['id']);
     }
 
     /**
@@ -597,7 +608,7 @@ class PogodbaCest
         $I->successfullyDelete($this->restUrl, $ent['id']);
         $I->failToGet($this->restUrl, $this->obj1['id']);
         // ali je zbrisal pogodbo v alternaciji?
-        $alt = $I->successfullyGet($this->alternacijaUrl, $ent['alternacija']);
+        $alt = $I->successfullyGet($this->alternacijaUrl, $ent['alternacija']['id']);
         $I->assertEquals(NULL, $alt['pogodba'], "pogodba alternacije");
     }
 
@@ -628,13 +639,13 @@ class PogodbaCest
             'vrednostDoPremiere'  => 66.33,
             'zaposlenVDrJz'       => true,
         ];
-        $resp  = $I->failToCreate($this->restUrl, $data);
+        $resp = $I->failToCreate($this->restUrl, $data);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertEquals(1000344, $resp[0]['code']);
     }
 
-       /**
+    /**
      * spremenim pogodbo in preverim preračun
      * 
      * @depends create
@@ -643,28 +654,27 @@ class PogodbaCest
     public function updatePogodbaPreračunaj(ApiTester $I)
     {
         // plačilo na vajo
-        $ent = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $ent                        = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         $I->assertNotEmpty($ent);
-        $ent['placiloNaVajo'      ] = true;
-        $ent['vrednostVaje'       ] = 13.45;
+        $ent['placiloNaVajo'] = true;
+        $ent['vrednostVaje'] = 13.45;
         $ent['planiranoSteviloVaj'] = 10;
-        $ent['vrednostVaj'        ] = 0;
-        $ent       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
-        $entR = $I->successfullyGet($this->restUrl, $this->obj2['id']);
-        $I->assertEquals(134.50,$entR['vrednostDoPremiere'],"vrednost do premiere (st.vaj x vrVaje)");
+        $ent['vrednostVaj'] = 0;
+        $ent                        = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $entR                       = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $I->assertEquals(134.50, $entR['vrednostDoPremiere'], "vrednost do premiere (st.vaj x vrVaje)");
 
-        
+
         // plačilo za vse vaje
-        $ent = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $ent                        = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         $I->assertNotEmpty($ent);
-        $ent['placiloNaVajo'      ] = false;
-        $ent['vrednostVaje'       ] = 13.45;
+        $ent['placiloNaVajo'] = false;
+        $ent['vrednostVaje'] = 13.45;
         $ent['planiranoSteviloVaj'] = 10;
-        $ent['vrednostVaj'        ] = 200.14;
-        $ent       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
-        $entR = $I->successfullyGet($this->restUrl, $this->obj2['id']);
-        $I->assertEquals(200.14,$entR['vrednostDoPremiere'],"vrednost do premiere (vrednost vseh vaj)");
+        $ent['vrednostVaj'] = 200.14;
+        $ent                        = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $entR                       = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $I->assertEquals(200.14, $entR['vrednostDoPremiere'], "vrednost do premiere (vrednost vseh vaj)");
     }
 
-    
 }

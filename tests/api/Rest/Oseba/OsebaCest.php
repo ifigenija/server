@@ -31,18 +31,18 @@ use ApiTester;
 class OsebaCest
 {
 
-    private $restUrl           = '/rest/oseba';
-    private $relationPopaUrl   = '/rest/user/popa/';
-    private $trrUrl            = '/rest/trr';
-    private $naslUrl           = '/rest/postninaslov';
-    private $telUrl            = '/rest/telefonska';
-    private $drzavaUrl         = '/rest/drzava';
-    private $popaUrl           = '/rest/popa';
-    private $kontaktnaOsebaUrl = '/rest/kontaktnaoseba';
-    private $userUrl           = '/rest/user';
-    private $alternacijaUrl    = '/rest/alternacija';
-    private $sodelovanjeUrl    = '/rest/sodelovanje';
-    private $zaposlitevUrl     = '/rest/zaposlitev';
+    private $restUrl              = '/rest/oseba';
+    private $relationPopaUrl      = '/rest/user/popa/';
+    private $trrUrl               = '/rest/trr';
+    private $naslUrl              = '/rest/postninaslov';
+    private $telUrl               = '/rest/telefonska';
+    private $drzavaUrl            = '/rest/drzava';
+    private $popaUrl              = '/rest/popa';
+    private $kontaktnaOsebaUrl    = '/rest/kontaktnaoseba';
+    private $userUrl              = '/rest/user';
+    private $alternacijaUrl       = '/rest/alternacija';
+    private $sodelovanjeUrl       = '/rest/sodelovanje';
+    private $zaposlitevUrl        = '/rest/zaposlitev';
     private $id;
     private $obj;
     private $obj2;
@@ -62,8 +62,8 @@ class OsebaCest
     private $postni;
     private $tel;
     private $tel2;
-    private $telefonskaUrl     = '/rest/telefonska';
-    private $pogodbaUrl        = '/rest/pogodba';
+    private $telefonskaUrl        = '/rest/telefonska';
+    private $pogodbaUrl           = '/rest/pogodba';
     private $objTelefonska1;
     private $objTelefonska2;
     private $objTrr1;
@@ -75,6 +75,13 @@ class OsebaCest
     private $objZaposlitev1;
     private $objZaposlitev2;
     private $lookFunkcija;
+    private $lookAlternacija1;
+    private $lookAlternacija2;
+    private $lookAlternacija3;
+    private $lookAlternacija4;
+    private $lookAlternacija5;
+    private $lookAlternacija6;
+    private $lookupAlternacijaUrl = '/lookup/alternacija';
 
     public function _before(ApiTester $I)
     {
@@ -116,6 +123,67 @@ class OsebaCest
     {
         $this->lookFunkcija = $look               = $I->lookupEntity("funkcija", "Tezej", false);
         $I->assertNotEmpty($look);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupAlternacija(ApiTester $I)
+    {
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0001', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija1 = $resp['data'][0];
+
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0002', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija2 = $resp['data'][0];
+
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0006', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija3 = $resp['data'][0];
+
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0003', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija4 = $resp['data'][0];
+
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0005', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija5 = $resp['data'][0];
+
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0007', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija6 = $resp['data'][0];
     }
 
     /**
@@ -332,7 +400,7 @@ class OsebaCest
         $drz             = array_pop($list);
         $data["drzava"]  = $drz['id'];
         $this->objpostni = $postni          = $I->successfullyCreate($this->naslUrl, $data);
-        $I->assertNotEmpty($postni, "naslov ni vpisan");   
+        $I->assertNotEmpty($postni, "naslov ni vpisan");
         $I->assertEquals('privzeti naslov', $postni['naziv'], "naziv naslova ni isti");
     }
 
@@ -342,7 +410,7 @@ class OsebaCest
      * 
      * @param ApiTester $I
      */
-    public function preberiPostniNaslov(\ApiTester $I)               
+    public function preberiPostniNaslov(\ApiTester $I)
     {
         $postni = $I->successfullyGet($this->naslUrl, $this->objpostni['id']);
         $I->assertNotEmpty($postni);
@@ -374,7 +442,7 @@ class OsebaCest
         $I->assertEquals('1973-03-28T00:00:00+0100', $oseba['datumRojstva']);
         $I->assertEquals('ZZ', $oseba['emso'], "napačen emšo");
         $I->assertEquals('ZZ123', $oseba['davcna'], 'napačna davčna');
-        $I->assertEquals('M', $oseba['spol'],"spol ni pravilen");  
+        $I->assertEquals('M', $oseba['spol'], "spol ni pravilen");
         $I->assertEquals('zz', $oseba['opombe']);
         $I->assertEquals('zz', $oseba['drzavljanstvo']);
         $I->assertEquals('zz', $oseba['drzavaRojstva']);
@@ -587,7 +655,8 @@ class OsebaCest
     {
         $data              = [
             'sifra'             => 'ZZ123',
-            'vrednostVaj'      => 33.33,
+            'alternacija'       => $this->lookAlternacija1['id'],
+            'vrednostVaj'       => 33.33,
             'vrednostPredstave' => 44.44,
             'vrednostUre'       => 22.22,
             'aktivna'           => false,
@@ -602,7 +671,8 @@ class OsebaCest
         // kreiramo še en zapis
         $data              = [
             'sifra'             => 'WW4',
-            'vrednostVaj'      => 33.33,
+            'alternacija'       => $this->lookAlternacija1['id'],
+            'vrednostVaj'       => 33.33,
             'vrednostPredstave' => 44.44,
             'vrednostUre'       => 22.22,
             'aktivna'           => false,
@@ -656,7 +726,7 @@ class OsebaCest
      */
     public function createVecZaposlitev(ApiTester $I)
     {
-        $data = [
+        $data                 = [
             'status'              => 'A',
             'zacetek'             => '2010-02-01T00:00:00+0100',
             'konec'               => '2010-02-01T00:00:00+0100',
@@ -669,10 +739,10 @@ class OsebaCest
             'jeNastopajoci'       => TRUE,
             'oseba'               => $this->obj2['id'],
         ];
-        $this->objZaposlitev1 = $ent                   = $I->successfullyCreate($this->zaposlitevUrl, $data);
+        $this->objZaposlitev1 = $ent                  = $I->successfullyCreate($this->zaposlitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
-        $data = [
+        $data                 = [
             'status'              => 'A',
             'zacetek'             => '2012-02-01T00:00:00+0100',
             'konec'               => '2012-02-01T00:00:00+0100',
@@ -685,7 +755,7 @@ class OsebaCest
             'jeNastopajoci'       => TRUE,
             'oseba'               => $this->obj2['id'],
         ];
-        $this->objZaposlitev2 = $ent                   = $I->successfullyCreate($this->zaposlitevUrl, $data);
+        $this->objZaposlitev2 = $ent                  = $I->successfullyCreate($this->zaposlitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -788,7 +858,7 @@ class OsebaCest
     /**
      * @depends dodajPostniNaslov
      */
-    public function deletePostniNaslov(ApiTester $I)  
+    public function deletePostniNaslov(ApiTester $I)
     {
         $I->successfullyDelete($this->naslUrl, $this->objpostni['id']);
         $I->failToDelete($this->naslUrl, $this->objpostni['id']);
@@ -798,7 +868,7 @@ class OsebaCest
      * @depends create
      * @depends deletePostniNaslov
      */
-    public function delete(ApiTester $I) 
+    public function delete(ApiTester $I)
     {
         $oseba = $I->successfullyDelete($this->restUrl, $this->obj['id']);
 

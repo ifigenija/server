@@ -47,37 +47,37 @@ class UprizoritevCest
      * 
      * @param ApiTester $I 
      */
-    public function novaMaticnaKoprodukcija(ApiTester $I)
-    {
-        // pričakujemo kreiranje nove produkcijske delitve za lastno gledališče
-        $resp = $I->successfullyCallRpc($this->rpcUrl, 'preracunajMaticnaKoprodukcija', ["uprizoritevId" => $this->lookUprizoritev1['id']]);
-        $I->assertNotEmpty($resp);
-        $I->seeResponseIsJson();
-        $I->assertEquals(36, strlen($resp), "dolžina guid");
-        $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
-        
-        //$$ tu bi lahko se preverili, ce so zapisane prave vrednosti
-    }
+//    public function novaMaticnaKoprodukcija(ApiTester $I)
+//    {
+//        // pričakujemo kreiranje nove produkcijske delitve za lastno gledališče
+//        $resp = $I->successfullyCallRpc($this->rpcUrl, 'preracunajMaticnaKoprodukcija', ["uprizoritevId" => $this->lookUprizoritev1['id']]);
+//        $I->assertNotEmpty($resp);
+//        $I->seeResponseIsJson();
+//        $I->assertEquals(36, strlen($resp), "dolžina guid");
+//        $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
+//        
+//        //$$ tu bi lahko se preverili, ce so zapisane prave vrednosti
+//    }
 
-    public function ponovnoPreracunajMaticnaKoprodukcija(ApiTester $I)
-    {
-        //$$ tu bi lahko v stroške ali avtorske pogodbe dodali nekaj in potem ponovno preračunali
-
-        // pričakujemo uspeh, osvežitev polj DelitviKoprodukcije
-        $resp = $I->successfullyCallRpc($this->rpcUrl, 'preracunajMaticnaKoprodukcija', ["uprizoritevId" => $this->lookUprizoritev1['id']]);
-        $I->assertNotEmpty($resp);
-        $I->seeResponseIsJson();
-        $I->assertEquals(36, strlen($resp), "dolžina guid");
-        $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
-    }
-
-    public function novaMaticnaKoprodukcijaBrezUprizoritve(ApiTester $I)
-    {
-
-        // pričakujemo napako, ker delitev že obstaja
-        $resp = $I->failCallRpc($this->rpcUrl, 'preracunajMaticnaKoprodukcija', ["uprizoritevId" => "neobstojeca"]);
-        $I->assertNotEmpty($resp);
-//        $I->assertEquals(1000932, $resp['code'], "produkcijska delitev že obstaja");
-    }
+//    public function ponovnoPreracunajMaticnaKoprodukcija(ApiTester $I)
+//    {
+//        //$$ tu bi lahko v stroške ali avtorske pogodbe dodali nekaj in potem ponovno preračunali
+//
+//        // pričakujemo uspeh, osvežitev polj DelitviKoprodukcije
+//        $resp = $I->successfullyCallRpc($this->rpcUrl, 'preracunajMaticnaKoprodukcija', ["uprizoritevId" => $this->lookUprizoritev1['id']]);
+//        $I->assertNotEmpty($resp);
+//        $I->seeResponseIsJson();
+//        $I->assertEquals(36, strlen($resp), "dolžina guid");
+//        $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
+//    }
+//
+//    public function novaMaticnaKoprodukcijaBrezUprizoritve(ApiTester $I)
+//    {
+//
+//        // pričakujemo napako, ker delitev že obstaja
+//        $resp = $I->failCallRpc($this->rpcUrl, 'preracunajMaticnaKoprodukcija', ["uprizoritevId" => "neobstojeca"]);
+//        $I->assertNotEmpty($resp);
+////        $I->assertEquals(1000932, $resp['code'], "produkcijska delitev že obstaja");
+//    }
 
 }

@@ -22,9 +22,21 @@ class AlternacijaCest
 
     public function _before(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vesna, \IfiTest\AuthPage::$vesnaPass);
     }
 
+    /**
+     * inicializira bazo  glede na DumpFunctional.sql
+     * 
+     * 
+     * @param ApiTester $I
+     */
+    public function initBaze(ApiTester $I)
+    {
+        $I->initDB();
+    }
+    
+    
     /**
      * 
      * @param ApiTester $I

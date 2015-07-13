@@ -19,6 +19,17 @@ class AvtorizacijaAlternacijaCest
     private $rpcUserUrl           = '/rpc/aaa/user';
 
     /**
+     * inicializira bazo  glede na DumpFunctional.sql
+     * 
+     * 
+     * @param ApiTester $I
+     */
+    public function initBaze(ApiTester $I)
+    {
+        $I->initDB();
+    }
+
+    /**
      * @param ApiTester $I
      */
     public function createVloge(ApiTester $I)
@@ -176,8 +187,8 @@ class AvtorizacijaAlternacijaCest
 
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'novaPogodba', ["alternacijaId" => $this->lookAlternacija1['id']]);
         $I->assertNotEmpty($resp);
-        $I->assertEquals(36,strlen($resp),"dolžina guid");
-        $I->assertEquals(8,stripos($resp,"-"),"prvi '-' v  guid");
+        $I->assertEquals(36, strlen($resp), "dolžina guid");
+        $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
     }
 
     /**
@@ -192,8 +203,8 @@ class AvtorizacijaAlternacijaCest
 
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'novaPogodba', ["alternacijaId" => $this->lookAlternacija2['id']]);
         $I->assertNotEmpty($resp);
-        $I->assertEquals(36,strlen($resp),"dolžina guid");
-        $I->assertEquals(8,stripos($resp,"-"),"prvi '-' v  guid");
+        $I->assertEquals(36, strlen($resp), "dolžina guid");
+        $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
     }
 
 }

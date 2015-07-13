@@ -65,6 +65,15 @@ class PopaCest
     private $objStrosekUprizoritve2;
     private $objKontaktna1;
     private $objKontaktna2;
+    private $lookOseba1;
+    private $lookOseba2;
+    private $lookAlternacija1;
+    private $lookAlternacija2;
+    private $lookAlternacija3;
+    private $lookAlternacija4;
+    private $lookAlternacija5;
+    private $lookAlternacija6;
+    private $lookupAlternacijaUrl  = '/lookup/alternacija';
 
     public function _before(ApiTester $I)
     {
@@ -74,6 +83,16 @@ class PopaCest
     public function _after(ApiTester $I)
     {
         
+    }
+    /**
+     * inicializira bazo  glede na DumpFunctional.sql
+     * 
+     * 
+     * @param ApiTester $I
+     */
+    public function initBaze(ApiTester $I)
+    {
+        $I->initDB();
     }
 
     /**
@@ -88,6 +107,80 @@ class PopaCest
         $I->assertNotEmpty($list);
         $this->objDrzava = $drzava          = array_pop($list);
         $I->assertNotEmpty($drzava);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupOsebo(ApiTester $I)
+    {
+        $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0001", false);
+        $I->assertNotEmpty($ent);
+
+        $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0002", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupAlternacija(ApiTester $I)
+    {
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0001', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija1 = $resp['data'][0];
+
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0002', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija2 = $resp['data'][0];
+
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0006', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija3 = $resp['data'][0];
+
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0003', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija4 = $resp['data'][0];
+
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0005', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija5 = $resp['data'][0];
+
+        $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0007', []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
+        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+        $this->lookAlternacija6 = $resp['data'][0];
     }
 
     /**
@@ -155,7 +248,7 @@ class PopaCest
     {
         $data      = [
             'sifra'     => 'ZZ12',
-            'tipkli'    => 'dobavitelj', 
+            'tipkli'    => 'dobavitelj',
             'stakli'    => 'AK',
             'naziv'     => 'zz',
             'naziv1'    => 'zz',
@@ -171,7 +264,7 @@ class PopaCest
             'datZav'    => '2010-02-01T00:00:00+0100',
             'datnZav'   => '2017-02-01T00:00:00+0100',
             'zamejstvo' => FALSE,
-            'nvo' => FALSE,
+            'nvo'       => FALSE,
         ];
         $this->obj = $popa      = $I->successfullyCreate($this->restUrl, $data);
 
@@ -182,8 +275,8 @@ class PopaCest
         // kreiramo še en zapis
         $data       = [
             'sifra'     => '',
-            'tipkli'    => 'kupec', 
-            'stakli'    => 'AK', 
+            'tipkli'    => 'kupec',
+            'stakli'    => 'AK',
             'naziv'     => 'aa',
             'naziv1'    => 'aa',
             'panoga'    => 'aa',
@@ -198,7 +291,7 @@ class PopaCest
             'datZav'    => '2011-02-01T00:00:00+0100',
             'datnZav'   => '2018-02-01T00:00:00+0100',
             'zamejstvo' => FALSE,
-            'nvo' => FALSE,
+            'nvo'       => FALSE,
         ];
         $this->obj2 = $popa       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($popa['id']);
@@ -273,8 +366,8 @@ class PopaCest
         $popa = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertEquals($popa['sifra'], 'ZZ12');
-        $I->assertEquals($popa['tipkli'], 'dobavitelj'); 
-        $I->assertEquals($popa['stakli'], 'AK'); 
+        $I->assertEquals($popa['tipkli'], 'dobavitelj');
+        $I->assertEquals($popa['stakli'], 'AK');
         $I->assertEquals($popa['naziv'], 'zz');
         $I->assertEquals($popa['naziv1'], 'zz');
         $I->assertEquals($popa['panoga'], 'tralala');
@@ -499,30 +592,35 @@ class PopaCest
      */
     public function createVecPogodb(ApiTester $I)
     {
+        $I->assertTrue(true, "začasno za test");
         $data              = [
             'sifra'             => 'ZZ123',
-            'vrednostVaj'      => 33.33,
+            'alternacija'       => $this->lookAlternacija1['id'],
+            'vrednostVaj'       => 33.33,
             'vrednostPredstave' => 44.44,
             'vrednostUre'       => 22.22,
             'aktivna'           => false,
             'opis'              => 'zz',
-            'oseba'             => null,
             'popa'              => $this->obj2['id'],
+            'oseba'             => $this->lookOseba1['id'],
             'trr'               => $this->objTrr1['id'],
         ];
+        $I->assertTrue(true, "začasno za test 2");
+        $I->assertNotEmpty($data);
         $this->objPogodba1 = $ent               = $I->successfullyCreate($this->pogodbaUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
         $data              = [
             'sifra'             => 'WW4',
-            'vrednostVaj'      => 33.33,
+            'vrednostVaj'       => 33.33,
+            'alternacija'       => $this->lookAlternacija2['id'],
             'vrednostPredstave' => 44.44,
             'vrednostUre'       => 22.22,
             'aktivna'           => false,
             'opis'              => 'ww',
-            'oseba'             => null,
             'popa'              => $this->obj2['id'],
+            'oseba'             => $this->lookOseba2['id'],
             'trr'               => $this->objTrr1['id'],
         ];
         $this->objPogodba2 = $ent               = $I->successfullyCreate($this->pogodbaUrl, $data);
@@ -586,19 +684,32 @@ class PopaCest
      */
     public function createVecStroskov(ApiTester $I)
     {
-        $data                         = [
-            'naziv'      => 'popabb',
-            'vrednostDo' => 2.34,
-            'popa'       => $this->obj2['id'],
+        $data = [
+            'naziv'       => 'zz',
+            'vrednostDo'  => 1.23,
+            'vrednostNa'  => 4.56,
+            'opis'        => 'zz',
+            'tipstroska'  => 'materialni',
+            'sort'        => 1,
+//            'uprizoritev' => $this->lookUprizoritev,
+            'uprizoritev' => null,
+            'popa'        => $this->obj2['id'],
         ];
+
         $this->objStrosekUprizoritve1 = $ent                          = $I->successfullyCreate($this->strosekUprizoritveUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
-        $data                         = [
+        $data = [
             'naziv'      => 'popacc',
-            'vrednostDo' => 5.67,
-            'popa'       => $this->obj2['id'],
+            'vrednostDo'  => 1.23,
+            'vrednostNa'  => 4.56,
+            'opis'        => 'zz',
+            'tipstroska'  => 'materialni',
+            'sort'        => 1,
+//            'uprizoritev' => $this->lookUprizoritev,
+            'uprizoritev' => null,
+            'popa'        => $this->obj2['id'],
         ];
         $this->objStrosekUprizoritve2 = $ent                          = $I->successfullyCreate($this->strosekUprizoritveUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -620,7 +731,7 @@ class PopaCest
         $I->assertEquals(1, count($resp));
     }
 
-        /**
+    /**
      * 
      * @depends create
      * @param ApiTester $I
@@ -650,8 +761,6 @@ class PopaCest
         $I->assertNotEmpty($ent['id']);
     }
 
-    
-    
     /**
      * preberemo relacije
      * 

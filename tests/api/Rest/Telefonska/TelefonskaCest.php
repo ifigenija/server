@@ -40,6 +40,17 @@ class TelefonskaCest
     {
         
     }
+    /**
+     * inicializira bazo  glede na DumpFunctional.sql
+     * 
+     * 
+     * @param ApiTester $I
+     */
+    public function initBaze(ApiTester $I)
+    {
+        $I->initDB();
+    }
+
 
         /**
      * 

@@ -292,12 +292,10 @@ class PostniNaslovCest
             'jeeu'     => null,
             'privzeti' => true,
         ];
-        $resp = $I->failToCreate($this->restUrl, $data);        //$$ zakaj tega ne bi pustil kreirati?
+        $resp = $I->successfullyCreate($this->restUrl, $data); 
 
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
-        // testiramo na enako besedilo, ki je pri errorju
-        $I->assertTrue((strpos($resp[0]['message'], 'Value is required') !== false));
     }
 
     /**

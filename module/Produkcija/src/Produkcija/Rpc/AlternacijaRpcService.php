@@ -50,13 +50,17 @@ class AlternacijaRpcService
         $pogodba = new \Produkcija\Entity\Pogodba();
 
         // vse vrednosti na 0
-        $pogodba->setVrednostDo(0);
-        $pogodba->setVrednostDo(0);
+//        $pogodba->setVrednostDo(0);
+//        $pogodba->setVrednostDo(0);
         $pogodba->setVrednostVaj(0);
+        $pogodba->setVrednostVaje(0);
+        $pogodba->setPlaniranoSteviloVaj(0);
         $pogodba->setVrednostPredstave(0);
-        $pogodba->setVrednostUre(0);
+//        $pogodba->setVrednostUre(0);
         $pogodba->setVrednostDoPremiere(0);
+        $pogodba->setPlaciloNaVajo(FALSE);
         $pogodba->setOseba($alternacija->getOseba());
+        $pogodba->setAlternacija($alternacija);
 
         $pogodbaR = $em->getRepository("Produkcija\Entity\Pogodba")
                 ->setServiceLocator($this->getServiceLocator());
