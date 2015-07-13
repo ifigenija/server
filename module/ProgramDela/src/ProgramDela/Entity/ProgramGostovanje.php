@@ -20,14 +20,14 @@ class ProgramGostovanje
      * @Max\I18n(label="gostovanje.krajGostovanja", description="gostovanje.krajGostovanja")
      * @var string
      */
-    private $krajGostovanja;
+    protected $krajGostovanja;
 
     /**
      * @ORM\Column(type="string", nullable=false)
      * @Max\I18n(label="gostovanje.ustanova", description="gostovanje.d.ustanova")
      * @var string
      */
-    private $ustanova;
+    protected $ustanova;
 
     /**
      * 
@@ -35,21 +35,21 @@ class ProgramGostovanje
      * @Max\I18n(label="gostovanje.datumGostovanja", description="gostovanje.datumGostovanja")
      * @var string
      */
-    private $datumGostovanja;
+    protected $datumGostovanja;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2)
      * @Max\I18n(label="gostovanje.transportniStroski", description="gostovanje.d.transportniStroski")   
      * @var double     
      */
-    private $transportniStroski;
+    protected $transportniStroski;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
      * @Max\I18n(label="gostovanje.odkup", description="gostovanje.d.odkup")   
      * @var double     
      */
-    private $odkup;
+    protected $odkup;
 
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="gostovanja")
@@ -58,7 +58,7 @@ class ProgramGostovanje
      * @Max\Ui(type="hiddenid")
      * @var \ProgramDela\Entity\ProgramDela
      */
-    private $dokument;
+    protected $dokument;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa")
@@ -67,7 +67,7 @@ class ProgramGostovanje
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */
-    private $gostitelj;
+    protected $gostitelj;
 
     public function preracunaj($smer = false)
     {

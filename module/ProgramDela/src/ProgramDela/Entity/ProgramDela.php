@@ -23,7 +23,7 @@ class ProgramDela
      * @Max\Ui(type="id")
      * @var string   
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", nullable=false)
@@ -31,7 +31,7 @@ class ProgramDela
      * @Max\Ui(type="sifra",ident=true )
      * @var string     
      */
-    private $sifra;
+    protected $sifra;
 
     /**
      * @ORM\Column(type="string", nullable=false)
@@ -39,21 +39,21 @@ class ProgramDela
      * @Max\Ui(type="naziv",ident=true )
      * @var string
      */
-    private $naziv;
+    protected $naziv;
 
     /**
      * @ORM\Column(type="date", nullable=false)
      * @Max\I18n(label="programDela.zacetek", description="programDela.d.zacetek")
      * @var string
      */
-    private $zacetek;
+    protected $zacetek;
 
     /**
      * @ORM\Column(type="date", nullable=false)
      * @Max\I18n(label="programDela.konec", description="programDela.d.konec")
      * @var string
      */
-    private $konec;
+    protected $konec;
 
     /**
      * polje se nastavi na true potem, ko se pošlje na MK, da se PD pomotoma   ne bi spreminjal
@@ -63,7 +63,7 @@ class ProgramDela
      * @Max\Ui(type="boolcheckbox")         //$$ verjetno mora biti na nek način hidden, ker ni v formi
      * @var boolean
      */
-    private $zakljuceno = false;
+    protected $zakljuceno = false;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
@@ -71,55 +71,55 @@ class ProgramDela
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $potrjenProgram;
+    protected $potrjenProgram;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPremiera", mappedBy="dokument")
      * @var <Premiere>
      */
-    private $premiere;
+    protected $premiere;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPonovitevPremiere", mappedBy="dokument")
      * @var <PonovitvePremiere>
      */
-    private $ponovitvePremiere;
+    protected $ponovitvePremiere;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPonovitevPrejsnjih", mappedBy="dokument")
      * @var <PonovitvePrejsnjih>
      */
-    private $ponovitvePrejsnjih;
+    protected $ponovitvePrejsnjih;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramIzjemni", mappedBy="dokument")
      * @var <Izjemni>
      */
-    private $izjemni;
+    protected $izjemni;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramFestival", mappedBy="programDela")
      * @var <ProgramiFestival>
-     */
-    private $programiFestival;
+     */ 
+   protected $programiFestival;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramGostujoca", mappedBy="dokument")
      * @var <Gostujoci>
      */
-    private $gostujoci;
+    protected $gostujoci;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramGostovanje", mappedBy="dokument")
      * @var <Gostovanja>
      */
-    private $gostovanja;
+    protected $gostovanja;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramRazno", mappedBy="dokument")
      * @var <ProgramiRazno>
      */
-    private $programiRazno;
+    protected $programiRazno;
 
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona")
@@ -128,7 +128,7 @@ class ProgramDela
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Sezona
      */
-    private $sezona;
+    protected $sezona;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -136,7 +136,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stPremier;
+    protected $stPremier;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -144,7 +144,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stPonPrej;
+    protected $stPonPrej;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -152,7 +152,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stPonPrejVelikih;
+    protected $stPonPrejVelikih;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -160,7 +160,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stPonPrejMalih;
+    protected $stPonPrejMalih;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -168,7 +168,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stPonPrejMalihKopr;
+    protected $stPonPrejMalihKopr;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -176,7 +176,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stPonPrejSredKopr;
+    protected $stPonPrejSredKopr;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -184,35 +184,35 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stPonPrejVelikihKopr;
+    protected $stPonPrejVelikihKopr;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.vrPS1", description="programDela.d.vrPS1")   
      * @var double
      */
-    private $vrPS1;
+    protected $vrPS1;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.vrPS1Do", description="programDela.d.vrPS1Do")   
      * @var double
      */
-    private $vrPS1Do;
+    protected $vrPS1Do;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.vrPS1Mat", description="programDela.d.vrPS1Mat")   
      * @var double
      */
-    private $vrPS1Mat;
+    protected $vrPS1Mat;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.vrPS1GostovSZ", description="programDela.d.vrPS1GostovSZ")   
      * @var double
      */
-    private $vrPS1GostovSZ;
+    protected $vrPS1GostovSZ;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -220,7 +220,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stNekomerc;
+    protected $stNekomerc;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -228,7 +228,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stIzvPonPrem;
+    protected $stIzvPonPrem;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -236,7 +236,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stIzvPrej;
+    protected $stIzvPrej;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -244,7 +244,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stIzvGostuj;
+    protected $stIzvGostuj;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -252,7 +252,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stIzvOstalihNek;
+    protected $stIzvOstalihNek;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -260,7 +260,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stGostovanjSlo;
+    protected $stGostovanjSlo;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -268,7 +268,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stGostovanjZam;
+    protected $stGostovanjZam;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -276,7 +276,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stGostovanjInt;
+    protected $stGostovanjInt;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -284,7 +284,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stObiskNekom;
+    protected $stObiskNekom;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -292,7 +292,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stObiskNekomMat;
+    protected $stObiskNekomMat;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -300,7 +300,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stObiskNekomGostSlo;
+    protected $stObiskNekomGostSlo;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -308,7 +308,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stObiskNekomGostZam;
+    protected $stObiskNekomGostZam;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -316,28 +316,28 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stObiskNekomGostInt;
+    protected $stObiskNekomGostInt;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.avgObiskPrired", description="programDela.d.avgObiskPrired")   
      * @var double
      */
-    private $avgObiskPrired;
+    protected $avgObiskPrired;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.avgZasedDvoran", description="programDela.d.avgZasedDvoran")   
      * @var double
      */
-    private $avgZasedDvoran;
+    protected $avgZasedDvoran;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.avgCenaVstopnice", description="programDela.d.avgCenaVstopnice")   
      * @var double
      */
-    private $avgCenaVstopnice;
+    protected $avgCenaVstopnice;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -345,7 +345,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stProdVstopnic;
+    protected $stProdVstopnic;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -353,7 +353,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stKoprodukcij;
+    protected $stKoprodukcij;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -361,7 +361,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stKoprodukcijInt;
+    protected $stKoprodukcijInt;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -369,7 +369,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stKoprodukcijNVO;
+    protected $stKoprodukcijNVO;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -377,7 +377,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stZaposlenih;
+    protected $stZaposlenih;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -385,14 +385,14 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stZaposIgralcev;
+    protected $stZaposIgralcev;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.avgStNastopovIgr", description="programDela.d.avgStNastopovIgr")   
      * @var double
      */
-    private $avgStNastopovIgr;
+    protected $avgStNastopovIgr;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -400,7 +400,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stHonorarnih;
+    protected $stHonorarnih;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -408,7 +408,7 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stHonorarnihIgr;
+    protected $stHonorarnihIgr;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -416,28 +416,28 @@ class ProgramDela
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stHonorarnihIgrTujJZ;
+    protected $stHonorarnihIgrTujJZ;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaInt", description="programDela.d.sredstvaInt")   
      * @var double
      */
-    private $sredstvaInt;
+    protected $sredstvaInt;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaAvt", description="programDela.d.sredstvaAvt")   
      * @var double
      */
-    private $sredstvaAvt;
+    protected $sredstvaAvt;
 
     /**
      * 
      * 
      * @param enotaPrograma $object
      */
-    private function prerSredstva($object)
+    protected function prerSredstva($object)
     {
         foreach ($object->getDrugiViri() as $numobjDV => $objDV) {
             if ($objDV->getMednarodni()) {
@@ -451,7 +451,7 @@ class ProgramDela
      * 
      * @param enotaPrograma $object
      */
-    private function prerStKopr($object)
+    protected function prerStKopr($object)
     {
         $kopr    = $koprInt = $koprNvo = false;   //init
         foreach ($object->getKoprodukcije() as $numobjPD => $objPD) {

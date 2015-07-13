@@ -24,7 +24,7 @@ class ProdukcijaDelitev
      * @Max\Ui(type="id")
      * @var string
      */
-    private $id;
+    protected $id;
 
     /**
      * Odstotek financiranja posameznega koproducenta
@@ -33,7 +33,7 @@ class ProdukcijaDelitev
      * @Max\I18n(label="prodel.odstotekFinanciranja", description="prodel.d.odstotekFinanciranja")
      * @var double
      */
-    private $odstotekFinanciranja;
+    protected $odstotekFinanciranja;
 
     /**
      * delež posameznega koproducenta
@@ -44,7 +44,7 @@ class ProdukcijaDelitev
      * @Max\I18n(label="prodel.zaproseno", description="prodel.d.zaproseno")
      * @var double
      */
-    private $delez;
+    protected $delez;
 
     /**
      * % deleza
@@ -55,7 +55,7 @@ class ProdukcijaDelitev
      * @Max\I18n(label="prodel.zaprosenProcent", description="prodel.d.zaprosenProcent")
      * @var double
      */
-    private $zaprosenProcent;
+    protected $zaprosenProcent;
 
     /**
      * zaprošen znesek pri MK
@@ -66,7 +66,7 @@ class ProdukcijaDelitev
      * @Max\I18n(label="prodel.zaproseno", description="prodel.zaproseno")
      * @var double
      */
-    private $zaproseno;
+    protected $zaproseno;
 
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\EnotaPrograma", inversedBy="koprodukcije")
@@ -83,7 +83,7 @@ class ProdukcijaDelitev
      * @Max\Ui(type="toone", required=true)
      * @var \ProgramDela\Entity\ProdukcijskaHisa
      */
-    private $koproducent;
+    protected $koproducent;
 
     /**
      * @ORM\Column(type="boolean", length=1, nullable=false)
@@ -91,7 +91,7 @@ class ProdukcijaDelitev
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $maticniKop = false;
+    protected $maticniKop = false;
 
     /**
      * Izračuna odstotekFinanciranja

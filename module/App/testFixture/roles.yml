@@ -28,6 +28,8 @@
         - Dogodek-write
         - Drzava-read
         - Drzava-write
+        - DrugiVir-read
+        - DrugiVir-write
         - EnotaPrograma-read
         - EnotaPrograma-write
         - Funkcija-read

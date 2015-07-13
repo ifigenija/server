@@ -39,35 +39,35 @@ class EnotaPrograma
      * @Max\Ui(type="id")
      * @var string   
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.celotnaVrednost", description="ep.d.celotnaVrednost")   
      * @var double
      */
-    private $celotnaVrednost;
+    protected $celotnaVrednost;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.nasDelez", description="ep.d.nasDelez")   
      * @var double
      */
-    private $nasDelez;
+    protected $nasDelez;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.celotnaVrednostMat", description="ep.d.celotnaVrednostMat")   
      * @var double
      */
-    private $celotnaVrednostMat;
+    protected $celotnaVrednostMat;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.celotnaVrednostGostovSZ", description="ep.d.celotnaVrednostGostovSZ")   
      * @var double
      */
-    private $celotnaVrednostGostovSZ;
+    protected $celotnaVrednostGostovSZ;
 
     /**
      * % nasega deleža
@@ -78,68 +78,68 @@ class EnotaPrograma
      * @Max\I18n(label="ep.zaprosenProcent", description="ep.d.zaprosenProcent")
      * @var double
      */
-    private $zaprosenProcent;
+    protected $zaprosenProcent;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.zaproseno", description="ep.d.zaproseno")   
      * @var double
      */
-    private $zaproseno;
+    protected $zaproseno;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.lastnaSredstva", description="ep.d.lastnaSredstva")   
      * @var double
      */
-    private $lastnaSredstva;
+    protected $lastnaSredstva;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2,options={"default":0})
      * @Max\I18n(label="ep.avtorskiHonorarji", description="ep.d.avtorskiHonorarji")   
      * @var double
      */
-    private $avtorskiHonorarji;
+    protected $avtorskiHonorarji;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.tantieme", description="ep.d.tantieme")   
      * @var double
      */
-    private $tantieme;
+    protected $tantieme;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\DrugiVir", mappedBy="enotaPrograma", orphanRemoval=true)
      * @var <drugiViri>
      */
-    private $drugiViri;
+    protected $drugiViri;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProdukcijaDelitev", mappedBy="enotaPrograma", orphanRemoval=true)
      * @var <Koprodukcije>
      */
-    private $koprodukcije;
+    protected $koprodukcije;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.vlozekGostitelja", description="ep.d.vlozekGostitelja")   
      * @var double
      */
-    private $vlozekGostitelja;
+    protected $vlozekGostitelja;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.vlozekKoproducenta", description="ep.d.vlozekKoproducenta")   
      * @var double
      */
-    private $vlozekKoproducenta;
+    protected $vlozekKoproducenta;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.drugiJavni", description="ep.d.drugiJavni")   
      * @var double
      */
-    private $drugiJavni;
+    protected $drugiJavni;
 
     /**
      * Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri uprizoritvi:
@@ -149,7 +149,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $stZaposlenih;
+    protected $stZaposlenih;
 
     /**
      * Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri uprizoritvi:
@@ -159,7 +159,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $stZaposUmet;
+    protected $stZaposUmet;
 
     /**
      * Št. drugih zaposlenih, ki sodelujejo pri uprizoritvi (brez upravno-administrativnih delavcev):
@@ -171,7 +171,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $stZaposDrug;
+    protected $stZaposDrug;
 
     /**
      * Št. vseh, ki sodelujejo honorarno
@@ -183,7 +183,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stHonorarnih;
+    protected $stHonorarnih;
 
     /**
      *  št. honorarnih igralcev
@@ -195,7 +195,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stHonorarnihIgr;
+    protected $stHonorarnihIgr;
 
     /**
      *  št. honorarnih igralcev, zaposlenih v drugih javnih zavodih
@@ -207,7 +207,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stHonorarnihIgrTujJZ;
+    protected $stHonorarnihIgrTujJZ;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -215,7 +215,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $obiskDoma;
+    protected $obiskDoma;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -223,7 +223,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $obiskGost;
+    protected $obiskGost;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -231,7 +231,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $obiskZamejo;
+    protected $obiskZamejo;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -239,7 +239,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $obiskInt;
+    protected $obiskInt;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":" 0"})
@@ -247,7 +247,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $ponoviDoma;
+    protected $ponoviDoma;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -255,7 +255,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $ponoviZamejo;
+    protected $ponoviZamejo;
 
     /**
      * število gostovanj po Sloveniji
@@ -265,7 +265,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $ponoviGost;
+    protected $ponoviGost;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -273,14 +273,14 @@ class EnotaPrograma
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $ponoviInt;
+    protected $ponoviInt;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Max\I18n(label="ep.utemeljitev", description="ep.d.utemeljitev")   
      * @var string     
      */
-    private $utemeljitev;
+    protected $utemeljitev;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev")
@@ -288,7 +288,7 @@ class EnotaPrograma
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Uprizoritev
      */
-    private $uprizoritev;
+    protected $uprizoritev;
 
     /**
      * Naziv dogodka za tiste programe, ki nimajo uprizoritve
@@ -308,7 +308,7 @@ class EnotaPrograma
      * @Max\Ui(type="select")
      * @var \ProgramDela\Entity\TipProgramskeEnote
      */
-    private $tipProgramskeEnote;
+    protected $tipProgramskeEnote;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -316,7 +316,7 @@ class EnotaPrograma
      * @Max\Ui(type="integer", icon="fa fa-sort")
      * @var integer
      */
-    private $sort;
+    protected $sort;
 
     public function __construct()
     {

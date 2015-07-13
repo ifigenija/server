@@ -20,7 +20,7 @@ class ProgramPonovitevPremiere
      * @Max\Ui(type="hiddenid")
      * @var \ProgramDela\Entity\ProgramDela
      */
-    private $dokument;
+    protected $dokument;
 
     public function preracunaj($smer = false)
     {

@@ -20,42 +20,42 @@ class ProgramRazno
      * @Max\Ui(type="hiddenid")
      * @var \ProgramDela\Entity\ProgramDela
      */
-    private $dokument;
+    protected $dokument;
 
     /**
      * @ORM\Column(type="string")
      * @Max\I18n(label="programRazno.naslovPE", description="programRazno.d.naslovPE")
      * @var string
      */
-    private $naslovPE;
+    protected $naslovPE;
 
     /**
      * @ORM\Column(type="string")
      * @Max\I18n(label="programRazno.avtorPE", description="programRazno.d.avtorPE")
      * @var string
      */
-    private $avtorPE;
+    protected $avtorPE;
 
     /**
      * @ORM\Column(type="string")
      * @Max\I18n(label="programRazno.obsegPE", description="programRazno.d.obsegPE")
      * @var string
      */
-    private $obsegPE;
+    protected $obsegPE;
 
     /**
      * @ORM\Column(type="string")
      * @Max\I18n(label="programRazno.mesecPE", description="programRazno.d.mesecPE")
      * @var string
      */
-    private $mesecPE;
+    protected $mesecPE;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="programRazno.vrednostPE", description="programRazno.d.vrednostPE")
      * @var double
      */
-    private $vrednostPE;
+    protected $vrednostPE;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -63,7 +63,7 @@ class ProgramRazno
      * @Max\Ui(type="integer")
      * @var integer     
      */
-    private $stPE;
+    protected $stPE;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa")
@@ -72,7 +72,7 @@ class ProgramRazno
      * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */
-    private $soorganizator;
+    protected $soorganizator;
 
     public function preracunaj($smer = false)
     {

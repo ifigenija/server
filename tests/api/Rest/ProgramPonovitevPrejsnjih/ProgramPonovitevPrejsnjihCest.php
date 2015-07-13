@@ -32,26 +32,26 @@ use ApiTester;
 class ProgramPonovitevPrejsnjihCest
 {
 
-    private $restUrl                = '/rest/programponovitevprejsnjih';
-    private $obj1;
-    private $obj2;
-    private $uprizoritevUrl         = '/rest/uprizoritev';
-    private $lookUprizoritev;
-    private $tipProgramskeEnoteUrl  = '/rest/tipprogramskeenote';
-    private $lookTipProgramskeEnote;
-    private $drugiVirUrl            = '/rest/drugivir';
-    private $objDrugiVir1;
-    private $objDrugiVir2;
-    private $produkcijaDelitevUrl   = '/rest/produkcijadelitev';
-    private $objProdukcijaDelitev1;
-    private $objProdukcijaDelitev2;
-    private $produkcijskaHisaUrl    = '/rest/produkcijskahisa';
-    private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
-    private $lookProdukcijskaHisa1;
-    private $lookProdukcijskaHisa2;
-    private $lookProdukcijskaHisa3;
-    private $lookProdukcijskaHisa4;
-    private $lookProdukcijskaHisa5;
+    protected $restUrl                = '/rest/programponovitevprejsnjih';
+    protected $obj1;
+    protected $obj2;
+    protected $uprizoritevUrl         = '/rest/uprizoritev';
+    protected $lookUprizoritev;
+    protected $tipProgramskeEnoteUrl  = '/rest/tipprogramskeenote';
+    protected $lookTipProgramskeEnote;
+    protected $drugiVirUrl            = '/rest/drugivir';
+    protected $objDrugiVir1;
+    protected $objDrugiVir2;
+    protected $produkcijaDelitevUrl   = '/rest/produkcijadelitev';
+    protected $objProdukcijaDelitev1;
+    protected $objProdukcijaDelitev2;
+    protected $produkcijskaHisaUrl    = '/rest/produkcijskahisa';
+    protected $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
+    protected $lookProdukcijskaHisa1;
+    protected $lookProdukcijskaHisa2;
+    protected $lookProdukcijskaHisa3;
+    protected $lookProdukcijskaHisa4;
+    protected $lookProdukcijskaHisa5;
 
     public function _before(ApiTester $I)
     {

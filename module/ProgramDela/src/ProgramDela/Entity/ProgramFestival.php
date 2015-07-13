@@ -21,14 +21,14 @@ class ProgramFestival
      * @Max\Ui(type="hiddenid")
      * @var \ProgramDela\Entity\ProgramDela
      */
-    private $programDela;
+    protected $programDela;
 
     /**
      * @ORM\Column(type="string")
      * @Max\I18n(label="entiteta.zvrst", description="entiteta.zvrst")
      * @var string
      */
-    private $zvrst;
+    protected $zvrst;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -36,7 +36,7 @@ class ProgramFestival
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stPredstav;
+    protected $stPredstav;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -44,7 +44,7 @@ class ProgramFestival
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stPredavanj;
+    protected $stPredavanj;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -52,7 +52,7 @@ class ProgramFestival
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stPredstavitev;
+    protected $stPredstavitev;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -60,7 +60,7 @@ class ProgramFestival
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stDelavnic;
+    protected $stDelavnic;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -68,14 +68,14 @@ class ProgramFestival
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stDrugiDogodki;
+    protected $stDrugiDogodki;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="festival.opredelitevDrugiDogodki", description="festival.opredelitevDrugiDogodki")
      * @var string
      */
-    private $opredelitevDrugiDogodki;
+    protected $opredelitevDrugiDogodki;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -83,7 +83,7 @@ class ProgramFestival
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stProdukcij;
+    protected $stProdukcij;
 
     /**
      * $$ preveri mersko enoto; ali v mesecih, dnevih , človek dnevih?
@@ -92,7 +92,7 @@ class ProgramFestival
      * @Max\I18n(label="festival.casPriprave", description="festival.casPriprave")
      * @var string
      */
-    private $casPriprave;
+    protected $casPriprave;
 
     /**
      * $$ preveri mersko enoto; ali v mesecih, dnevih , človek dnevih?
@@ -101,35 +101,35 @@ class ProgramFestival
      * @Max\I18n(label="festival.casIzvedbe", description="festival.casIzvedbe")
      * @var string
      */
-    private $casIzvedbe;
+    protected $casIzvedbe;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="festival.prizorisca", description="festival.prizorisca")
      * @var string
      */
-    private $prizorisca;
+    protected $prizorisca;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="festival.umetVodja", description="festival.umetVodja")
      * @var string
      */
-    private $umetVodja;
+    protected $umetVodja;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="festival.programskoTelo", description="festival.programskoTelo")
      * @var string
      */
-    private $programskoTelo;
+    protected $programskoTelo;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="festival.soorganizatorji", description="festival.soorganizatorji")
      * @var string
      */
-    private $soorganizatorji;
+    protected $soorganizatorji;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -137,7 +137,7 @@ class ProgramFestival
      * @Max\Ui(type="integer")
      * @var integer
      */
-    private $stTujihSelektorjev;
+    protected $stTujihSelektorjev;
 
     public function preracunaj($smer = false)
     {

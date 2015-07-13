@@ -24,7 +24,7 @@ class TipProgramskeEnote
      * @Max\Ui(type="id")
      * @var string     
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", nullable=false)
@@ -32,14 +32,14 @@ class TipProgramskeEnote
      * @Max\Ui(type="sifra",ident=true )
      * @var string    
      */
-    private $sifra;
+    protected $sifra;
 
     /**
      * @ORM\Column(type="string", nullable=false)
      * @Max\I18n(label="tipProgramskeEnote.naziv", description="Naziv tipa programske enote")
      * @Max\Ui(type="naziv")
      * @var string */
-    private $naziv;
+    protected $naziv;
 
     /**
      * @ORM\Column(type="boolean", nullable=false, options={"default":false})
@@ -47,27 +47,27 @@ class TipProgramskeEnote
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    private $koprodukcija;
+    protected $koprodukcija;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, options={"default":1}, precision=15, scale=2)
      * @Max\I18n(label="tipProgramskeEnote.maxFaktor", description="Maksimalni faktor")
      * @var double
      */
-    private $maxFaktor;
+    protected $maxFaktor;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, options={"default":0}, precision=15, scale=2)
      * @Max\I18n(label="tipProgramskeEnote.maxVsi", description="Maksimalno vsi")
      * @var double
      */
-    private $maxVsi;
+    protected $maxVsi;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\EnotaPrograma", mappedBy="tipProgramskeEnote")
      * @var <EnotePrograma>
      */
-    private $enotePrograma;
+    protected $enotePrograma;
 
     public function __construct()
     {

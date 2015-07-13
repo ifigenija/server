@@ -22,21 +22,21 @@ class DrugiVir
      * @Max\Ui(type="id")
      * @var string   
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="drugiVir.znesek", description="drugiVir.d.znesek")   
      * @var double
      */
-    private $znesek;
+    protected $znesek;
 
     /**
      * @ORM\Column(type="string", nullable=false)
      * @Max\I18n(label="drugiVir.opis", description="drugiVir.d.opis")   
      * @var double
      */
-    private $opis;
+    protected $opis;
 
     /**
      * @ORM\Column(type="boolean", length=1, nullable=true)

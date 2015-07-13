@@ -92,7 +92,7 @@ class SkrajsanCest
 
     public function _before(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vesna, \IfiTest\AuthPage::$vesnaPass);
     }
 
     public function _after(ApiTester $I)
@@ -236,48 +236,51 @@ class SkrajsanCest
         // kloniramo program dela
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'kloniraj', ["programDelaId" => $this->obj2['id']]);
         $I->assertNotEmpty($resp);
-        codecept_data($resp);
+        codecept_debug($resp);
         $I->seeResponseIsJson();
-        $I->assertTrue($resp, "ali uspešno");       //$$ id 
+        $I->assertEquals(36, strlen($resp), "dolžina guid");
+        $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
 
-        $ent  = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $ent  = $I->successfullyGet($this->restUrl, $resp);
 //        codecept_debug($ent);
         // pri update preračuna kazalnike
         $entR = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($entR['id']);
-        $I->assertGreaterThanOrEqual(4, $entR['stPremier'], "št. premier");
-        $I->assertGreaterThanOrEqual(3, $entR['stPonPrej'], "št. ponovitev prejšnjih sezon");
-        $I->assertGreaterThanOrEqual(0, $entR['stPonPrejVelikih']);
-        $I->assertGreaterThanOrEqual(1, $entR['stPonPrejMalih']);
-        $I->assertGreaterThanOrEqual(1, $entR['stPonPrejMalihKopr']);
-        $I->assertGreaterThanOrEqual(0, $entR['stPonPrejSredKopr']);
-        $I->assertGreaterThanOrEqual(1, $entR['stPonPrejVelikihKopr']);
-        $I->assertGreaterThanOrEqual(1170.90, $entR['vrPS1'], "vrednost PS1");
-        $I->assertGreaterThanOrEqual(6.12, $entR['vrPS1Mat'], "vr PS1 mat");
-        $I->assertGreaterThanOrEqual(0.66, $entR['vrPS1GostovSZ'], "vr ps1 gostov slo zam");
-        $I->assertGreaterThanOrEqual(549.24, $entR['vrPS1Do']);
-        $I->assertGreaterThanOrEqual(108, $entR['stNekomerc'], "št nekomerc");
-        $I->assertGreaterThanOrEqual(48, $entR['stIzvPonPrem'], "št. izvedb pon premier");
-        $I->assertGreaterThanOrEqual(47, $entR['stIzvPrej'], "št. izvedb prejšnjih");
-        $I->assertGreaterThanOrEqual(4, $entR['stIzvGostuj'], "št. izvedb gostujočih");
-        $I->assertGreaterThanOrEqual(9, $entR['stIzvOstalihNek'], "št. izvedb ostalih nekom");
-        $I->assertGreaterThanOrEqual(27, $entR['stGostovanjSlo'], "");
-        $I->assertGreaterThanOrEqual(25, $entR['stGostovanjZam'], "");
-        $I->assertGreaterThanOrEqual(20, $entR['stGostovanjInt'], "");
-        $I->assertGreaterThanOrEqual(378, $entR['stObiskNekom'], "Obisk vseh nekom.");
-        $I->assertGreaterThanOrEqual(300, $entR['stObiskNekomMat'], "");
-        $I->assertGreaterThanOrEqual(38, $entR['stObiskNekomGostSlo'], "");
-        $I->assertGreaterThanOrEqual(22, $entR['stObiskNekomGostZam'], "");
-        $I->assertGreaterThanOrEqual(18, $entR['stObiskNekomGostInt'], "");
-        $I->assertEquals(3.5, $entR['avgObiskPrired'], "povprečno št. obiskovalcev");     //kvocient drugih dveh števil
-        $I->assertGreaterThanOrEqual(141, $entR['stHonorarnih'], "");
-        $I->assertGreaterThanOrEqual(28, $entR['stHonorarnihIgr'], "");
-        $I->assertGreaterThanOrEqual(20, $entR['stHonorarnihIgrTujJZ'], "");
-        $I->assertGreaterThanOrEqual(420.88, $entR['sredstvaAvt'], "");
-        $I->assertGreaterThanOrEqual(109.98, $entR['sredstvaInt'], "mednarodni viri");
-        $I->assertEquals(3, $entR['stKoprodukcij'], "");
-        $I->assertEquals(2, $entR['stKoprodukcijInt'], "število mednarodnih koprodukcij");
-        $I->assertEquals(1, $entR['stKoprodukcijNVO'], "");
+        $I->assertNotEquals($oldPD['id'], $entR['id']," id");
+        $I->assertNotEquals($oldPD['sifra'], $entR['sifra']," id");
+        $I->assertEquals($oldPD['stPremier'], $entR['stPremier'], "št. premier");
+        $I->assertEquals($oldPD['stPonPrej'], $entR['stPonPrej'], "št. ponovitev prejšnjih sezon");
+        $I->assertEquals($oldPD['stPonPrejVelikih'], $entR['stPonPrejVelikih']);
+        $I->assertEquals($oldPD['stPonPrejMalih'], $entR['stPonPrejMalih']);
+        $I->assertEquals($oldPD['stPonPrejMalihKopr'], $entR['stPonPrejMalihKopr']);
+        $I->assertEquals($oldPD['stPonPrejSredKopr'], $entR['stPonPrejSredKopr']);
+        $I->assertEquals($oldPD['stPonPrejVelikihKopr'], $entR['stPonPrejVelikihKopr']);
+        $I->assertEquals($oldPD['vrPS1'], $entR['vrPS1'], "vrednost PS1");
+        $I->assertEquals($oldPD['vrPS1Mat'], $entR['vrPS1Mat'], "vr PS1 mat");
+        $I->assertEquals($oldPD['vrPS1GostovSZ'], $entR['vrPS1GostovSZ'], "vr ps1 gostov slo zam");
+        $I->assertEquals($oldPD['vrPS1Do'], $entR['vrPS1Do']);
+        $I->assertEquals($oldPD['stNekomerc'], $entR['stNekomerc'], "št nekomerc");
+        $I->assertEquals($oldPD['stIzvPonPrem'], $entR['stIzvPonPrem'], "št. izvedb pon premier");
+        $I->assertEquals($oldPD['stIzvPrej'], $entR['stIzvPrej'], "št. izvedb prejšnjih");
+        $I->assertEquals($oldPD['stIzvGostuj'], $entR['stIzvGostuj'], "št. izvedb gostujočih");
+        $I->assertEquals($oldPD['stIzvOstalihNek'], $entR['stIzvOstalihNek'], "št. izvedb ostalih nekom");
+        $I->assertEquals($oldPD['stGostovanjSlo'], $entR['stGostovanjSlo'], "");
+        $I->assertEquals($oldPD['stGostovanjZam'], $entR['stGostovanjZam'], "");
+        $I->assertEquals($oldPD['stGostovanjInt'], $entR['stGostovanjInt'], "");
+        $I->assertEquals($oldPD['stObiskNekom'], $entR['stObiskNekom'], "Obisk vseh nekom.");
+        $I->assertEquals($oldPD['stObiskNekomMat'], $entR['stObiskNekomMat'], "");
+        $I->assertEquals($oldPD['stObiskNekomGostSlo'], $entR['stObiskNekomGostSlo'], "");
+        $I->assertEquals($oldPD['stObiskNekomGostZam'], $entR['stObiskNekomGostZam'], "");
+        $I->assertEquals($oldPD['stObiskNekomGostInt'], $entR['stObiskNekomGostInt'], "");
+        $I->assertEquals($oldPD['avgObiskPrired']   , $entR['avgObiskPrired'], "povprečno št. obiskovalcev");     //kvocient drugih dveh števil
+        $I->assertEquals($oldPD['stHonorarnih'], $entR['stHonorarnih'], "");
+        $I->assertEquals($oldPD['stHonorarnihIgr'], $entR['stHonorarnihIgr'], "");
+        $I->assertEquals($oldPD['stHonorarnihIgrTujJZ'], $entR['stHonorarnihIgrTujJZ'], "");
+        $I->assertEquals($oldPD['sredstvaAvt'], $entR['sredstvaAvt'], "");
+        $I->assertEquals($oldPD['sredstvaInt'], $entR['sredstvaInt'], "mednarodni viri");
+        $I->assertEquals($oldPD['stKoprodukcij'], $entR['stKoprodukcij'], "");
+        $I->assertEquals($oldPD['stKoprodukcijInt'], $entR['stKoprodukcijInt'], "število mednarodnih koprodukcij");
+        $I->assertEquals($oldPD['stKoprodukcijNVO'], $entR['stKoprodukcijNVO'], "");
     }
 
 }
