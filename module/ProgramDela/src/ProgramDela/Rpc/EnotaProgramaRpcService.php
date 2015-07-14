@@ -71,6 +71,9 @@ class EnotaProgramaRpcService
         }
 
         $kopr->setOdstotekFinanciranja(100);
+        $kopr->setMaticniKop(true);
+        
+        $kopr->preracunaj();
         $kopr->validate();
 
         // sedaj, ko imamo entitete ponovimo preverjanje avtorizacije zaradi morebitnega assert preverjanja!

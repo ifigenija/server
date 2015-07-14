@@ -130,6 +130,22 @@ class AvtorizacijeCest
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
 
+        // 2. vlogi Option-read
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "TEST2W",
+            'permname' => 'Option-read',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+
+        // 2. vlogi OptionValue-read
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "TEST2W",
+            'permname' => 'OptionValue-read',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+
         // 3. vlogi read + write
         $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
             'rolename' => "TEST3RW",
@@ -144,6 +160,23 @@ class AvtorizacijeCest
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
+
+        // 3. vlogi Option-read
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "TEST3RW",
+            'permname' => 'Option-read',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+
+        // 3. vlogi OptionValue-read
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "TEST3RW",
+            'permname' => 'OptionValue-read',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+
 
         // 4. vlogi read + write
         $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
@@ -163,6 +196,22 @@ class AvtorizacijeCest
         $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
             'rolename' => "TEST4RWVSE",
             'permname' => 'Oseba-vse',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+
+        // 4. vlogi Option-read
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "TEST4RWVSE",
+            'permname' => 'Option-read',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+
+        // 4. vlogi OptionValue-read
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "TEST4RWVSE",
+            'permname' => 'OptionValue-read',
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
@@ -382,13 +431,14 @@ class AvtorizacijeCest
      */
     public function dostopiZWriteUserjem(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$test2, \IfiTest\AuthPage::$test2Pass);
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+        $oseba = $I->successfullyGet($this->osebaUrl, $this->lookOseba1['id']);
 
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$test2, \IfiTest\AuthPage::$test2Pass);
         //get 
-        $I->failToGet($this->osebaUrl, $this->lookOseba1['id']);
+        $I->failToGet($this->osebaUrl, $oseba['id']);
 
         //update
-        $oseba        = $this->lookOseba1;
         $oseba['ime'] = 'dve tralala';
 
         $oseba = $I->successfullyUpdate($this->osebaUrl, $oseba['id'], $oseba);
@@ -400,6 +450,7 @@ class AvtorizacijeCest
             'ime'     => 'dve',
             'priimek' => 'dve',
             'email'   => 'dve@zzz.zz',
+            'spol'    => 'M',
         ];
         $oseba = $I->successfullyCreate($this->osebaUrl, $data);
 
@@ -438,7 +489,6 @@ class AvtorizacijeCest
         $I->assertEquals($this->lookOseba1['priimek'], $oseba['priimek']);
 
         //update
-        $oseba        = $this->lookOseba1;
         $oseba['ime'] = 'tri';
 
         $oseba = $I->successfullyUpdate($this->osebaUrl, $oseba['id'], $oseba);
@@ -450,6 +500,7 @@ class AvtorizacijeCest
             'ime'     => 'tri',
             'priimek' => 'tri',
             'email'   => 'tri@zzz.zz',
+            'spol'    => 'M',
         ];
         $oseba = $I->successfullyCreate($this->osebaUrl, $data);
 
@@ -513,10 +564,12 @@ class AvtorizacijeCest
      */
     public function assertPoVsebiniNaUserja(ApiTester $I)
     {
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+        $oseba = $I->successfullyGet($this->osebaUrl, $this->lookOseba3Prot['id']);
+        
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$test4, \IfiTest\AuthPage::$test4Pass);
         // oseba, ki je z assert zaščitena 
         //update
-        $oseba        = $this->lookOseba3Prot;
         $oseba['ime'] = 'cirkocarko';
 
         // dostop uspe zaradi posebnega dovoljenja "Oseba-vse"

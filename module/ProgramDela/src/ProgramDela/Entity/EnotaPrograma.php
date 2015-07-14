@@ -371,7 +371,7 @@ class EnotaPrograma
         $nd = \Max\Functions::euroRoundS($this->getNasDelez());
         $cv = \Max\Functions::euroRoundS($this->getCelotnaVrednost());
         $this->expect($ls <= $nd, "Lastna sredstva ne smejo biti večja od našega deleža", 1000620);
-        $this->expect($nd <= $cv, "Naš delež ne sme biti večji od celotne vrednosti", 1000621);
+        $this->expect($nd <= $cv, "Naš delež (". $nd . ") ne sme biti večji od celotne vrednosti (".$cv.")", 1000621);
         /**
          * $$ morda še validacija   nd = ls + drugi viri  + zapr mk + ...??
          */

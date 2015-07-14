@@ -174,7 +174,7 @@ class RekviziterstvoCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertEquals("aa", $list[0]['opisPostavitve']);      //glede na sort
     }
 
@@ -191,7 +191,7 @@ class RekviziterstvoCest
         $list = $resp['data'];
         codecept_debug($resp);
 
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
         $I->assertEquals("aa", $list[0]['opisPostavitve']);      //glede na sort
     }

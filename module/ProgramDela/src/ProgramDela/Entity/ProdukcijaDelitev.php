@@ -165,23 +165,21 @@ class ProdukcijaDelitev
 
         //$$ kontrole za vsoto procentov
         // za isto enoto programa je lahko le 1 delitev z isto produkcijsko hišo     
-        if ($this->getEnotaPrograma()) {
-            if (!$this->getEnotaPrograma()->getKoprodukcije()->isEmpty()) {
-                $id      = $this->getId();
-                $obstaja = $this->getEnotaPrograma()->getKoprodukcije()
-                        ->exists(function($key, $kopr) use(&$id) {
-                    return ($kopr->getKoproducent() == $this->getKoproducent()) && ($kopr->getId() !== $id); //vrne true, če obstaja drug koprodukcija z istim koproducentom
-                });
-                $this->expect(!$obstaja, "Koprodukcija z istim koproducentom že obstaja v enoti programa", 1000411);
+        if (!$this->getEnotaPrograma()->getKoprodukcije()->isEmpty()) {
+            $id      = $this->getId();
+            $obstaja = $this->getEnotaPrograma()->getKoprodukcije()
+                    ->exists(function($key, $kopr) use(&$id) {
+                return ($kopr->getKoproducent() == $this->getKoproducent()) && ($kopr->getId() !== $id); //vrne true, če obstaja drug koprodukcija z istim koproducentom
+            });
+            $this->expect(!$obstaja, "Koprodukcija z istim koproducentom že obstaja v enoti programa", 1000411);
 
-                $maticniCollection = $this->getEnotaPrograma()->getKoprodukcije()
-                        ->filter(function($kopr) {
-                    return ($kopr->getMaticniKop());     //vrne vse zapise matičnih koproducentov
-                });
-                $stMaticnihKoproducentov = $maticniCollection->count();
-                $this->expect($stMaticnihKoproducentov == 1, "Dovoljen natanko 1 matični koproducent, jih je pa " . $stMaticnihKoproducentov, 1000414);
-                // preveri število matičnih koprodukcij?
-            }
+            $maticniCollection = $this->getEnotaPrograma()->getKoprodukcije()
+                    ->filter(function($kopr) {
+                return ($kopr->getMaticniKop());     //vrne vse zapise matičnih koproducentov
+            });
+            $stMaticnihKoproducentov = $maticniCollection->count();
+            $this->expect($stMaticnihKoproducentov == 1, "Dovoljen natanko 1 matični koproducent, jih je pa " . $stMaticnihKoproducentov, 1000414);
+            // preveri število matičnih koprodukcij?
         }
     }
 

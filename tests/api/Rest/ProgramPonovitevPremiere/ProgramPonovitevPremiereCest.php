@@ -163,7 +163,7 @@ class ProgramPonovitevPremiereCest
             'nasDelez'                => 4.56,
             'celotnaVrednostMat'      => 2.23,
             'celotnaVrednostGostovSZ' => 1.11,
-            'zaprosenProcent'         => 100,
+            'zaprosenProcent'         => 20,
 //            'zaproseno'            =>1.24,
             'lastnaSredstva'          => 4.56,
             'avtorskiHonorarji'       => 4.56,

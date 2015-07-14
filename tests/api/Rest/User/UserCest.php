@@ -200,7 +200,7 @@ class UserCest
         // dodamo še 2. rolo
         $res = $I->successfullyCallRpc($this->rpcUrl, 'grant', [
             'username' => $user['email'],
-            'rolename' => 'beri-vse',
+            'rolename' => 'ifi-readall',
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
@@ -208,7 +208,7 @@ class UserCest
         // še enkrat probamo dodati isto rolo 
         $res = $I->successfullyCallRpc($this->rpcUrl, 'grant', [
             'username' => $user['email'],
-            'rolename' => 'beri-vse',
+            'rolename' => 'ifi-readall',
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
@@ -250,7 +250,7 @@ class UserCest
         // še 2. rolo
         $res = $I->successfullyCallRpc($this->rpcUrl, 'revoke', [
             'username' => $user['email'],
-            'rolename' => 'beri-vse',
+            'rolename' => 'ifi-readall',
         ]);
 
         $I->assertNotEmpty($res);
@@ -259,7 +259,7 @@ class UserCest
         // probamo ponovno revoke-ati rolo
         $res = $I->successfullyCallRpc($this->rpcUrl, 'revoke', [
             'username' => $user['email'],
-            'rolename' => 'beri-vse',
+            'rolename' => 'ifi-readall',
         ]);
 
         $I->assertNotEmpty($res);

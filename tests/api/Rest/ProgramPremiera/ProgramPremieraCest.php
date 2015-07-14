@@ -166,7 +166,7 @@ class ProgramPremieraCest
         $data       = [
             'celotnaVrednost'      => 4.56,
             'nasDelez'             => 4.56,
-            'zaprosenProcent'      => 100,
+            'zaprosenProcent'      => 20,
 //            'zaproseno'            =>1.24,
             'lastnaSredstva'       => 4.56,
             'avtorskiHonorarji'    => 4.56,

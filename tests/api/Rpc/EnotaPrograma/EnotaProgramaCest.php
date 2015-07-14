@@ -66,9 +66,7 @@ class EnotaProgramaCest
         // pričakujemo kreiranje nove produkcijske delitve za lastno gledališče
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'novaMaticnaKoprodukcija', ["enotaProgramaId" => $this->objProgramPremiera1['id']]);
         $I->assertNotEmpty($resp);
-        $I->seeResponseIsJson();
-        $I->assertEquals(36, strlen($resp), "dolžina guid");
-        $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
+        $I->assertGuid($resp);
 
         //$$ tu bi lahko se preverili, ce so zapisane prave vrednosti
     }
@@ -76,10 +74,10 @@ class EnotaProgramaCest
     public function ponovnoNovaMaticnaKoprodukcija(ApiTester $I)
     {
 
-        // pričakujemo napako
-        $resp = $I->failCallRpc($this->rpcUrl, 'novaMaticnaKoprodukcija', ["enotaProgramaId" => $this->objProgramPremiera1['id']]);
+        // pričakujemo uspeh
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'novaMaticnaKoprodukcija', ["enotaProgramaId" => $this->objProgramPremiera1['id']]);
         $I->assertNotEmpty($resp);
-        $I->assertEquals(1000414, $resp['code'], "dovoljen le 1 mat. koproducent"); 
+        $I->assertGuid($resp);
     }
 
 

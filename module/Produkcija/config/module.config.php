@@ -14,7 +14,6 @@ return [
         ],
         'invokables' => [
             'alternacija.rpc.service' => 'Produkcija\Rpc\AlternacijaRpcService',
-            'uprizoritev.rpc.service' => 'Produkcija\Rpc\UprizoritevRpcService',
         ],
     ],
     'controllers'     => [

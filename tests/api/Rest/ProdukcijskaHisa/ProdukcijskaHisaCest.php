@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\Pogodba;
+namespace Rest\ProdukcijskaHisa;
 
 use ApiTester;
 
@@ -36,7 +36,6 @@ class ProdukcijskaHisaCest
     private $produkcijaDelitevUrl   = '/rest/produkcijadelitev';
     private $uprizoritevUrl         = '/rest/uprizoritev';
     private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
-    private $lookProdukcijskaHisa;
     private $objUprizoritev1;
     private $objUprizoritev2;
     private $lookUprizoritev;
@@ -46,6 +45,15 @@ class ProdukcijskaHisaCest
     private $lookPopa2;
     private $objKoprodukcija1;
     private $objKoprodukcija2;
+    private $programPremieraUrl     = '/rest/programpremiera';
+    private $objProgramPremiera1;
+    private $objProgramPremiera2;
+    private $lookProdukcijskaHisa1;
+    private $lookProdukcijskaHisa2;
+    private $lookProdukcijskaHisa3;
+    private $lookProdukcijskaHisa4;
+    private $lookProdukcijskaHisa5;
+    private $enotaProgramaRpcUrl    = '/rpc/programdela/enotaprograma';
 
     public function _before(ApiTester $I)
     {
@@ -58,6 +66,22 @@ class ProdukcijskaHisaCest
     }
 
     /**
+     * najde enoto programa
+     * 
+     * @param ApiTester $I
+     */
+    public function getListProgramPremiera(ApiTester $I)
+    {
+        $resp                      = $I->successfullyGetList($this->programPremieraUrl, []);
+        $list                      = $resp['data'];
+        $I->assertNotEmpty($list);
+        $this->objProgramPremiera1 = $ent                       = array_pop($list);
+        $I->assertNotEmpty($ent);
+        $this->objProgramPremiera2 = $ent                       = array_pop($list);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
      * 
      * @param ApiTester $I
      */
@@ -66,7 +90,7 @@ class ProdukcijskaHisaCest
         $this->lookPopa1 = $ent             = $I->lookupEntity("popa", "0988", false);
         $I->assertNotEmpty($ent);
 
-        $this->lookPopa2 = $ent             = $I->lookupEntity("popa", "0986", false);
+        $this->lookPopa2 = $ent             = $I->lookupEntity("popa", "0985", false);
     }
 
     /**
@@ -122,6 +146,40 @@ class ProdukcijskaHisaCest
 //    }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupProdukcijskeHise(ApiTester $I)
+    {
+
+        $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "total records");
+
+        $ind                         = array_search("0900", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa1 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
+
+        $ind                         = array_search("0989", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa2 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
+
+        $ind                         = array_search("0986", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa3 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
+
+        $ind                         = array_search("0982", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa4 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
+
+        $ind                         = array_search("0984", array_column($resp['data'], 'ident'));
+        $this->lookProdukcijskaHisa5 = $lookPH                      = $resp['data'][$ind];
+        codecept_debug($lookPH);
+    }
+
+    /**
      *  kreiramo zapis
      * 
      * @depends lookupPopa
@@ -146,11 +204,10 @@ class ProdukcijskaHisaCest
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['sifra'], '0986');
+        $I->assertEquals($ent['sifra'], '0985');
     }
 
-    
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
@@ -160,7 +217,6 @@ class ProdukcijskaHisaCest
         $I->assertNotEmpty($look);
     }
 
-    
     /**
      *  kreiramo zapis uprizoritev
      * 
@@ -185,25 +241,39 @@ class ProdukcijskaHisaCest
      */
     public function createVecKoproducentov(ApiTester $I)
     {
+        // najprej matični koproducent
+        // pričakujemo kreiranje nove produkcijske delitve za lastno gledališče
+        $resp = $I->successfullyCallRpc($this->enotaProgramaRpcUrl, 'novaMaticnaKoprodukcija', ["enotaProgramaId" => $this->objProgramPremiera1['id']]);
+        $I->assertNotEmpty($resp);
+        $I->assertGuid($resp);
+
         $data                   = [
-            'odstotekFinanciranja' => 30,
-            'uprizoritev'          => $this->lookUprizoritev['id'],
-            'koproducent'          => $this->obj2['id'],
+//            'odstotekFinanciranja' => 30,
+            'delez'         => 4000,
+            'koproducent'   => $this->obj2['id'],
+            'enotaPrograma' => $this->objProgramPremiera1['id'],
         ];
         $I->assertTrue(true);
         $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
+        //  matični koproducent še za 2. premiero
+        // pričakujemo kreiranje nove produkcijske delitve za lastno gledališče
+        $resp                   = $I->successfullyCallRpc($this->enotaProgramaRpcUrl, 'novaMaticnaKoprodukcija', ["enotaProgramaId" => $this->objProgramPremiera2['id']]);
+        $I->assertNotEmpty($resp);
+        $I->assertGuid($resp);
+
         // kreiram še en zapis
         $data                   = [
-            'odstotekFinanciranja' => 7.90,
-            'uprizoritev'          => $this->lookUprizoritev['id'],
-            'koproducent'          => $this->obj2['id'],
+//            'odstotekFinanciranja' => 7.90,
+            'delez'         => 44000,
+            'koproducent'   => $this->obj2['id'],
+            'enotaPrograma' => $this->objProgramPremiera2['id'],
         ];
         $this->objKoprodukcija2 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
-  
+
     /**
      * preberi vse naslove od poslovnega partnerja
      * 
@@ -276,7 +346,7 @@ class ProdukcijskaHisaCest
     public function lookupProdukcijskaHisa(ApiTester $I)
     {
 
-       $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
+        $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa, []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
@@ -291,7 +361,7 @@ class ProdukcijskaHisaCest
      */
     public function lookupProdukcijskaHisaSifra(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa . '?ident=' . $this->lookPopa2['ident'], []); //$$ to še ne deluje -unrecognized field??
+        $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa . '?ident=' . $this->lookPopa2['ident'], []); 
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
@@ -334,14 +404,14 @@ class ProdukcijskaHisaCest
      */
     public function preberiRelacijeUprizoritve(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa . '?ident=' . "0987", []);
-        $pHisaId=$resp['data'][0]['id'];
-        
-        $resp = $I->successfullyGetRelation($this->restUrl, $pHisaId, "uprizoritve", "");
+        $resp    = $I->successfullyGetList($this->lookupProdukcijskaHisa . '?ident=' . "0987", []);
+        $pHisaId = $resp['data'][0]['id'];
+
+        $resp          = $I->successfullyGetRelation($this->restUrl, $pHisaId, "uprizoritve", "");
         $I->assertGreaterThanOrEqual(2, count($resp));
 //        codecept_debug($resp);
-        $uprizoritevId=$resp[0]['id'];
-        
+        $uprizoritevId = $resp[0]['id'];
+
         $resp = $I->successfullyGetRelation($this->restUrl, $pHisaId, "uprizoritve", $uprizoritevId);
         $I->assertGreaterThanOrEqual(1, count($resp));
 //        codecept_debug($resp);

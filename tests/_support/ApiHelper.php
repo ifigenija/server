@@ -491,4 +491,30 @@ class ApiHelper
         $db->_initialize();
     }
 
+    /**
+     * metoda preveri ali je parameter v Guid obliki
+     * 
+     * @param string $ident
+     */
+    public function assertGuid($ident)
+    {
+        $a = $this->getModule('Asserts');
+
+        $match_re = preg_match(self::ID_RE, $ident) ? true : false;
+        $a->assertTrue($match_re);
+    }
+
+    /**
+     * metoda preveri ali parameter ni v Guid obliki
+     * 
+     * @param string $ident
+     */
+    public function assertNotGuid($ident)
+    {
+        $a = $this->getModule('Asserts');
+
+        $match_re = preg_match(self::ID_RE, $ident) ? true : false;
+        $a->assertFalse($match_re);
+    }
+
 }

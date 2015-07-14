@@ -168,7 +168,7 @@ class ProgramPonovitevPrejsnjihCest
             'nasDelez'                => 4.56,
             'celotnaVrednostMat'      => 2.23,
             'celotnaVrednostGostovSZ' => 1.11,
-            'zaprosenProcent'         => 100,
+            'zaprosenProcent'         => 20,
 //            'zaproseno'            =>1.24,
             'lastnaSredstva'          => 4.56,
             'avtorskiHonorarji'       => 4.56,
@@ -360,7 +360,7 @@ class ProgramPonovitevPrejsnjihCest
     {
         $data                        = [
             'delez'           => 1.12,
-            'zaprosenProcent' => 50,
+            'zaprosenProcent' => 10,
             'zaproseno'       => 50,
             'enotaPrograma'   => $this->obj2['id'],
             'koproducent'     => $this->lookProdukcijskaHisa1['id'],
@@ -371,7 +371,7 @@ class ProgramPonovitevPrejsnjihCest
         // kreiramo še en zapis
         $data                        = [
             'delez'           => 1.02,
-            'zaprosenProcent' => 10,
+            'zaprosenProcent' => 11,
             'zaproseno'       => 20,
             'enotaPrograma'   => $this->obj2['id'],
             'koproducent'     => $this->lookProdukcijskaHisa2['id'],

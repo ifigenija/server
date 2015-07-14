@@ -237,9 +237,7 @@ class SkrajsanCest
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'kloniraj', ["programDelaId" => $this->obj2['id']]);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
-        $I->seeResponseIsJson();
-        $I->assertEquals(36, strlen($resp), "dolžina guid");
-        $I->assertEquals(8, stripos($resp, "-"), "prvi '-' v  guid");
+        $I->assertGuid($resp);
 
         $ent  = $I->successfullyGet($this->restUrl, $resp);
 //        codecept_debug($ent);
