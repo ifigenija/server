@@ -12,20 +12,19 @@ forms:
             - zaprosenProcent 
 #            - zaproseno
             - lastnaSredstva
-#            - avtorskiHonorarji
-#            - tantieme
+            - avtorskiHonorarji
+            - tantieme
 #            - drugiViri
 #            - vlozekGostitelja      
-#            - vlozekKoproducenta
             - drugiJavni
             - obiskDoma          # $$ morda tudi to damo ven iz forme, ker ni vezano na uprizoritev
-#            - obiskGost
-#            - obiskZamejo
-#            - obiskInt
+            - obiskGost
+            - obiskZamejo
+            - obiskInt
             - ponoviDoma        # $$ morda tudi to damo ven iz forme, ker ni vezano na uprizoritev
-#            - ponoviZamejo
-#            - ponoviGost
-#            - ponoviInt
+            - ponoviZamejo
+            - ponoviGost
+            - ponoviInt
             - utemeljitev
 #            - uprizoritev
 #            - tipProgramskeEnote
@@ -33,9 +32,9 @@ forms:
             - sort
             - stZaposlenih
 #            - stDrugih
-#            - stHonorarnih
-#            - stHonorarnihIgr
-#            - stHonorarnihIgrTujJZ
+            - stHonorarnih
+            - stHonorarnihIgr
+            - stHonorarnihIgrTujJZ
         hydrator:
 #            byValue: [ uprizoritev ]
             byValue: [ ]

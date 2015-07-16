@@ -39,6 +39,8 @@ class DrugiVir
     protected $opis;
 
     /**
+     * Pojasnilo MK: z razpisi pridobljena sredstva
+     * 
      * @ORM\Column(type="boolean", length=1, nullable=true)
      * @Max\I18n(label="drugiVir.mednarodni", description="drugiVir.d.mednarodni")   
      * @Max\Ui(type="boolcheckbox")

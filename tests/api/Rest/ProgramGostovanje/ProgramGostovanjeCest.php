@@ -96,7 +96,7 @@ class ProgramGostovanjeCest
             'nasDelez'    => 9.12,
             'transportniStroski' => 9.12,
             'avtorskiHonorarji'  => 9.12,
-            'odkup'              => 9.12,
+            'vlozekGostitelja'              => 9.12,
             'lastnaSredstva'     => 9.12,
 //            'drugiViri'          => 9.12,
             'drugiJavni'         => 9.12,
@@ -122,7 +122,7 @@ class ProgramGostovanjeCest
             'nasDelez'    => 3.12,
             'transportniStroski' => 3.12,
             'avtorskiHonorarji'  => 3.12,
-            'odkup'              => 3.12,
+            'vlozekGostitelja'              => 3.12,
             'lastnaSredstva'     => 3.12,
 //            'drugiViri'          => 3.12,
             'drugiJavni'         => 3.12,
@@ -143,11 +143,11 @@ class ProgramGostovanjeCest
     public function update(ApiTester $I)
     {
         $ent          = $this->obj1;
-        $ent['odkup'] = 2.34;
+        $ent['vlozekGostitelja'] = 2.34;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['odkup'], 2.34);
+        $I->assertEquals($entR['vlozekGostitelja'], 2.34);
     }
 
     /**
@@ -173,7 +173,7 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['nasDelez'], 9.12);
         $I->assertEquals($ent['transportniStroski'], 9.12);
         $I->assertEquals($ent['avtorskiHonorarji'], 9.12);
-        $I->assertEquals($ent['odkup'], 2.34);
+        $I->assertEquals($ent['vlozekGostitelja'], 2.34);
         $I->assertEquals($ent['lastnaSredstva'], 9.12);
 //        $I->assertEquals($ent['drugiViri'], 9.12);
         $I->assertEquals($ent['drugiJavni'], 9.12);

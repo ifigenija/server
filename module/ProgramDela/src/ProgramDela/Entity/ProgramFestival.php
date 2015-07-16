@@ -40,11 +40,11 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="festival.stPredavanj", description="festival.stPredavanj")
+     * @Max\I18n(label="festival.stOkroglihMiz", description="festival.stOkroglihMiz")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    protected $stPredavanj;
+    protected $stOkroglihMiz;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -191,9 +191,9 @@ class ProgramFestival
         return $this->stPredstav;
     }
 
-    public function getStPredavanj()
+    public function getStOkroglihMiz()
     {
-        return $this->stPredavanj;
+        return $this->stOkroglihMiz;
     }
 
     public function getStPredstavitev()
@@ -274,9 +274,9 @@ class ProgramFestival
         return $this;
     }
 
-    public function setStPredavanj($stPredavanj)
+    public function setStOkroglihMiz($stOkroglihMiz)
     {
-        $this->stPredavanj = $stPredavanj;
+        $this->stOkroglihMiz = $stOkroglihMiz;
         return $this;
     }
 
@@ -351,5 +351,6 @@ class ProgramFestival
         $this->stTujihSelektorjev = $stTujihSelektorjev;
         return $this;
     }
+
 
 }

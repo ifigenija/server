@@ -16,9 +16,9 @@ forms:
 #            - zaproseno
 #            - celotnaVrednost
             - nasDelez
+            - vlozekGostitelja
             - transportniStroski
             - avtorskiHonorarji
-            - odkup
             - lastnaSredstva
 #            - drugiViri
             - drugiJavni

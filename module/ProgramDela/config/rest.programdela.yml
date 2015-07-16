@@ -54,9 +54,9 @@ forms:
 #            - stKoprodukcij
 #            - stKoprodukcijInt
 #            - stKoprodukcijNVO
-            - stZaposlenih      # $$ ali izpustimo, ker že v 2. delu?
-            - stZaposIgralcev   # $$ ali izpustimo, ker že v 2. delu?
-            - avgStNastopovIgr  # $$ ali izpustimo, ker že v 2. delu?
+            - stZaposlenih     
+            - stZaposIgralcev  
+            - avgStNastopovIgr 
 #            - stHonorarnih
 #            - stHonorarnihIgr
 #            - stHonorarnihIgrTujJZ

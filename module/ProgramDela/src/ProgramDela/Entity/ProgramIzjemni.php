@@ -27,21 +27,9 @@ class ProgramIzjemni
         // neaktualna polja, ki jih tudi v formi ni:
         $this->setCelotnaVrednostMat(0);
         $this->setCelotnaVrednostGostovSZ(0);
-        $this->setAvtorskiHonorarji(0);
-        $this->setObiskGost(0);
-        $this->setObiskInt(0);
-        $this->setObiskZamejo(0);
-        $this->setPonoviGost(0);
-        $this->setPonoviInt(0);
-        $this->setPonoviZamejo(0);
         $this->setStZaposUmet(0);
         $this->setStZaposDrug(0);
-         $this->setStHonorarnih(0);
-        $this->setStHonorarnihIgr(0);
-        $this->setStHonorarnihIgrTujJZ(0);
-        $this->setTantieme(0);
         $this->setVlozekGostitelja(0);
-        $this->setVlozekKoproducenta(0);
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {

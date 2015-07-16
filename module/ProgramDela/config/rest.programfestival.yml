@@ -10,7 +10,7 @@ forms:
             - naziv
             - zvrst
             - stPredstav
-            - stPredavanj
+            - stOkroglihMiz
             - stPredstavitev
             - stDelavnic
             - stDrugiDogodki
@@ -33,7 +33,6 @@ forms:
             - lastnaSredstva
 #            - drugiViri
 #            - opredelitevDrugiViri
-            - vlozekKoproducenta
             - drugiJavni
             - sort
 lists:

@@ -65,7 +65,6 @@ class ProgramGostujocaCest
 //            'tantieme'           => 1.24,
 //            'drugiViri'       => 1.24,
 //            'vlozekGostitelja'     => 1.24,
-//            'vlozekKoproducenta'   => 1.24,
             'drugiJavni'      => 1.24,
             'obiskDoma'       => 1,
 //            'obiskGost'          => 1,
@@ -97,7 +96,6 @@ class ProgramGostujocaCest
 //            'tantieme'           => 4.56,
 //            'drugiViri'       => 4.56,
 //            'vlozekGostitelja'     => 1.24,
-//            'vlozekKoproducenta'   => 1.24,
             'drugiJavni'      => 4.56,
             'obiskDoma'       => 4,
 //            'obiskGost'          => 4,
@@ -154,7 +152,6 @@ class ProgramGostujocaCest
 //        $I->assertEquals($ent['tantieme'], 1.24);
 //        $I->assertEquals($ent['drugiViri'], 1.24);
 //        $I->assertEquals($ent['vlozekGostitelja'], 1.24);
-//        $I->assertEquals($ent['vlozekKoproducenta'], 1.24);
         $I->assertEquals($ent['drugiJavni'], 1.24);
         $I->assertEquals($ent['obiskDoma'], 1);
 //        $I->assertEquals($ent['obiskGost'], 1);

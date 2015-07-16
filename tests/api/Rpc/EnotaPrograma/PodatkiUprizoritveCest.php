@@ -52,15 +52,17 @@ class PodatkiUprizoritveCest
         $I->seeResponseIsJson();
         $I->assertGreaterThanOrEqual(132, $resp['Do']['avtorskiHonorarji'], "avtorski do");
         $I->assertGreaterThanOrEqual(200, $resp['Do']['tantieme'], "tantieme do");
-        $I->assertGreaterThanOrEqual(1058.2, $resp['Do']['lastnaSredstva'], "lastna sredstva do");
+        $I->assertGreaterThanOrEqual(1058.2, $resp['Do']['nasDelez'], "naš delež do");
         $I->assertGreaterThanOrEqual(93, $resp['Na']['avtorskiHonorarji'], "avtorski na");
         $I->assertGreaterThanOrEqual(10, $resp['Na']['tantieme'], "tantieme na");
-        $I->assertGreaterThanOrEqual(126.1, $resp['Na']['lastnaSredstva'], "lastna sredstva na");
+        $I->assertGreaterThanOrEqual(126.1, $resp['Na']['nasDelez'], "naš delž na");
         $I->assertGreaterThanOrEqual(2, $resp['stZaposUmet'], "št. zaposlenih umetnikov"); //$$ prej 2
         $I->assertGreaterThanOrEqual(1, $resp['stZaposDrug'], "št. zaposl. drugih");  //$$ PREJ 3
         $I->assertGreaterThanOrEqual(3, $resp['stHonorarnih']);
         $I->assertGreaterThanOrEqual(2, $resp['stHonorarnihIgr']);
         $I->assertGreaterThanOrEqual(1, $resp['stHonorarnihIgrTujJZ']);
+        $I->assertEquals("2016-01-01T00:00:00+01:00", $resp['datumZacStudija']);
+        $I->assertEquals("2016-04-20T00:00:00+02:00", $resp['datumPremiere']);
     }
 
     /**

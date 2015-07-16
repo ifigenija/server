@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\Funkcija;
+namespace Rest\Uprizoritev;
 
 use ApiTester;
 
@@ -271,7 +271,7 @@ class UprizoritevCest
             'podnaslov'             => 'zz',
             'delovniNaslov'         => 'zz',
             'datumZacStudija'       => '2011-02-01T00:00:00+0100',
-            'datumPremiere'         => '2010-02-01T00:00:00+0100',
+            'datumPremiere'         => '2012-02-01T00:00:00+0100',
             'maticniOder'           => $this->lookProstor['id'],
             'stOdmorov'             => 1,
             'avtor'                 => 'avzz',
@@ -303,7 +303,7 @@ class UprizoritevCest
             'podnaslov'             => 'aa',
             'delovniNaslov'         => 'aa',
             'datumZacStudija'       => '2011-02-01T00:00:00+0100',
-            'datumPremiere'         => '2010-02-01T00:00:00+0100',
+            'datumPremiere'         => '2012-02-01T00:00:00+0100',
             'maticniOder'           => $this->lookProstor['id'],
             'stOdmorov'             => 3,
             'avtor'                 => 'avaa',
@@ -784,7 +784,7 @@ class UprizoritevCest
         $I->assertEquals($ent['podnaslov'], 'zz');
         $I->assertEquals($ent['delovniNaslov'], 'zz');
         $I->assertEquals($ent['datumZacStudija'], '2011-02-01T00:00:00+0100');
-        $I->assertEquals($ent['datumPremiere'], '2010-02-01T00:00:00+0100');
+        $I->assertEquals($ent['datumPremiere'], '2012-02-01T00:00:00+0100');
         $I->assertEquals($ent['maticniOder'], $this->lookProstor['id']);
         $I->assertEquals($ent['stOdmorov'], 1);
         $I->assertEquals($ent['avtor'], 'avzz');

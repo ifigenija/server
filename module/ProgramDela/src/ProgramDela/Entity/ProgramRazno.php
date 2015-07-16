@@ -93,7 +93,6 @@ class ProgramRazno
         $this->setTantieme(0);
         $this->setUtemeljitev("");
         $this->setVlozekGostitelja(0);
-        $this->setVlozekKoproducenta(0);
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {

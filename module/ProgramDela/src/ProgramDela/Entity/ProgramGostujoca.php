@@ -36,7 +36,6 @@ class ProgramGostujoca
         $this->setPonoviGost(0);
         $this->setPonoviInt(0);
         $this->setVlozekGostitelja(0);
-        $this->setVlozekKoproducenta(0);
         $this->setStZaposlenih(0);
         $this->setStZaposUmet(0);
         $this->setStZaposDrug(0);

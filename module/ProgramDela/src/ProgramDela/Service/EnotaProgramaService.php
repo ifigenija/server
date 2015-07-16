@@ -16,6 +16,7 @@ use Zend\View\Model\JsonModel;
 class EnotaProgramaService
         extends \Max\Service\AbstractMaxService
 {
+
     /**
      * pridobitev podatkov o uprizoritvi, ki se uporabljajo v programu dela
      * 
@@ -74,7 +75,7 @@ class EnotaProgramaService
                     $this->expect($oseba, "Ni osebe pri alternaciji " . $alternacija->getSifra(), 1000952);
                     array_push($data['Funkcije'], ["funkcija" => $funkcija->getNaziv(),
                         "ime"      => $oseba->getIme(), "priimek"  => $oseba->getPriimek(),
-                        "sort" => $alternacija->getSort()]);
+                        "sort"     => $alternacija->getSort()]);
                 }
                 if ($alternacija->getImaPogodbo()) {
                     $data['stHonorarnih'] += 1;
@@ -84,7 +85,7 @@ class EnotaProgramaService
                     $pogodba = $alternacija->getPogodba();
                     if ($pogodba) {
                         if ($pogodba->getAktivna()) {
-                                    //$$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
+                            //$$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
                             $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
                             $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
                             if ($pogodba->getZaposlenVDrJz()) {
@@ -95,8 +96,10 @@ class EnotaProgramaService
                 }
             }
         }
-        $data['Do']['lastnaSredstva'] = $data['Do']['avtorskiHonorarji'] + $data['Do']['tantieme'] + $vrMatDoSum;
-        $data['Na']['lastnaSredstva'] = $data['Na']['avtorskiHonorarji'] + $data['Na']['tantieme'] + $vrMatNaSum;
+        $data['Do']['nasDelez']  = $data['Do']['avtorskiHonorarji'] + $data['Do']['tantieme'] + $vrMatDoSum;
+        $data['Na']['nasDelez']  = $data['Na']['avtorskiHonorarji'] + $data['Na']['tantieme'] + $vrMatNaSum;
+        $data['datumZacStudija'] = $uprizoritev->getDatumZacStudija()->format('c');       // datum v ISO8601 obliki 
+        $data['datumPremiere']   = $uprizoritev->getDatumPremiere()->format('c');       // datum v ISO8601 obliki 
 //$$ še naziv , izpostavljene funkcije ...
 //        upr.naslov naziv Naslov upr. 
 //        
@@ -116,18 +119,18 @@ class EnotaProgramaService
     {
         $polje                        = [
             'avtorskiHonorarji' => 0,
-            'lastnaSredstva'          => 0,
+            'nasDelez'          => 0,
             'tantieme'          => 0,
         ];
         $data['naziv']                = $polje;
         $data['Funkcije']             = [];
         $data['Do']                   = $polje;
         $data['Na']                   = $polje;
-        $data['stZaposDrug']             = 0;
+        $data['stZaposDrug']          = 0;
         $data['stHonorarnih']         = 0;
         $data['stHonorarnihIgr']      = 0;
         $data['stHonorarnihIgrTujJZ'] = 0;
-        $data['stZaposUmet']         = 0;
+        $data['stZaposUmet']          = 0;
         return $data;
     }
 

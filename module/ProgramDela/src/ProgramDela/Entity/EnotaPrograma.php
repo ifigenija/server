@@ -121,18 +121,16 @@ class EnotaPrograma
     protected $koprodukcije;
 
     /**
+     * Pojasnilo MK: : Prihodek od odkupa predstave v primeru gostovanja po Sloveniji in zamejstvu
+     * 
+     * če poenostavimo, je tudi:
+     *  Odkup (vložek gostitelja)   pri mednarodnih gostovanjih
+     * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.vlozekGostitelja", description="ep.d.vlozekGostitelja")   
      * @var double
      */
     protected $vlozekGostitelja;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.vlozekKoproducenta", description="ep.d.vlozekKoproducenta")   
-     * @var double
-     */
-    protected $vlozekKoproducenta;
 
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
@@ -371,12 +369,10 @@ class EnotaPrograma
         $nd = \Max\Functions::euroRoundS($this->getNasDelez());
         $cv = \Max\Functions::euroRoundS($this->getCelotnaVrednost());
         $this->expect($ls <= $nd, "Lastna sredstva ne smejo biti večja od našega deleža", 1000620);
-        $this->expect($nd <= $cv, "Naš delež (". $nd . ") ne sme biti večji od celotne vrednosti (".$cv.")", 1000621);
+        $this->expect($nd <= $cv, "Naš delež (" . $nd . ") ne sme biti večji od celotne vrednosti (" . $cv . ")", 1000621);
         /**
          * $$ morda še validacija   nd = ls + drugi viri  + zapr mk + ...??
          */
-        
-        
         $zaprosenProc = \Max\Functions::procRoundS($this->getZaprosenProcent());
         $this->expect(($zaprosenProc >= 0) && ($zaprosenProc <= 100), 'Zaprošen odstotek mora biti med 0 in 100, je pa ' . $zaprosenProc, 1000622);
         if ($this->tipProgramskeEnote) {
@@ -428,6 +424,11 @@ class EnotaPrograma
         return $this->celotnaVrednostGostovSZ;
     }
 
+    public function getZaprosenProcent()
+    {
+        return $this->zaprosenProcent;
+    }
+
     public function getZaproseno()
     {
         return $this->zaproseno;
@@ -461,11 +462,6 @@ class EnotaPrograma
     public function getVlozekGostitelja()
     {
         return $this->vlozekGostitelja;
-    }
-
-    public function getVlozekKoproducenta()
-    {
-        return $this->vlozekKoproducenta;
     }
 
     public function getDrugiJavni()
@@ -598,6 +594,12 @@ class EnotaPrograma
         return $this;
     }
 
+    public function setZaprosenProcent($zaprosenProcent)
+    {
+        $this->zaprosenProcent = $zaprosenProcent;
+        return $this;
+    }
+
     public function setZaproseno($zaproseno)
     {
         $this->zaproseno = $zaproseno;
@@ -637,12 +639,6 @@ class EnotaPrograma
     public function setVlozekGostitelja($vlozekGostitelja)
     {
         $this->vlozekGostitelja = $vlozekGostitelja;
-        return $this;
-    }
-
-    public function setVlozekKoproducenta($vlozekKoproducenta)
-    {
-        $this->vlozekKoproducenta = $vlozekKoproducenta;
         return $this;
     }
 
@@ -763,17 +759,6 @@ class EnotaPrograma
     public function setSort($sort)
     {
         $this->sort = $sort;
-        return $this;
-    }
-
-    public function getZaprosenProcent()
-    {
-        return $this->zaprosenProcent;
-    }
-
-    public function setZaprosenProcent($zaprosenProcent)
-    {
-        $this->zaprosenProcent = $zaprosenProcent;
         return $this;
     }
 

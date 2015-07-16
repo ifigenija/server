@@ -61,7 +61,7 @@ class ProgramFestivalCest
             'naziv'                   => 'zz',
             'zvrst'                   => 'zz',
             'stPredstav'              => 1,
-            'stPredavanj'             => 1,
+            'stOkroglihMiz'             => 1,
             'stPredstavitev'          => 1,
             'stDelavnic'              => 1,
             'stDrugiDogodki'          => 1,
@@ -83,7 +83,6 @@ class ProgramFestivalCest
             'nasDelez'                => 1.24,
             'lastnaSredstva'          => 1.24,
 //            'drugiViri'               => 1.24,
-            'vlozekKoproducenta'      => 1.24,
             'drugiJavni'              => 1.24,
             'sort'                    => 1,
         ];
@@ -97,7 +96,7 @@ class ProgramFestivalCest
             'naziv'                   => 'aa',
             'zvrst'                   => 'aa',
             'stPredstav'              => 2,
-            'stPredavanj'             => 2,
+            'stOkroglihMiz'             => 2,
             'stPredstavitev'          => 2,
             'stDelavnic'              => 2,
             'stDrugiDogodki'          => 2,
@@ -119,7 +118,6 @@ class ProgramFestivalCest
             'nasDelez'                => 2.24,
             'lastnaSredstva'          => 2.24,
 //            'drugiViri'               => 2.24,
-            'vlozekKoproducenta'      => 2.24,
             'drugiJavni'              => 2.24,
             'sort'                    => 2,
         ];
@@ -159,7 +157,7 @@ class ProgramFestivalCest
         $I->assertEquals($ent['naziv'], 'zz');
         $I->assertEquals($ent['zvrst'], 'zz');
         $I->assertEquals($ent['stPredstav'], 1);
-        $I->assertEquals($ent['stPredavanj'], 1);
+        $I->assertEquals($ent['stOkroglihMiz'], 1);
         $I->assertEquals($ent['stPredstavitev'], 1);
         $I->assertEquals($ent['stDelavnic'], 1);
         $I->assertEquals($ent['stDrugiDogodki'], 1);
@@ -181,7 +179,6 @@ class ProgramFestivalCest
         $I->assertEquals($ent['nasDelez'], 1.24);
         $I->assertEquals($ent['lastnaSredstva'], 1.24);
 //        $I->assertEquals($ent['drugiViri'], 1.24);
-        $I->assertEquals($ent['vlozekKoproducenta'], 1.24);
         $I->assertEquals($ent['drugiJavni'], 1.24);
         $I->assertEquals($ent['sort'], 1);
     }

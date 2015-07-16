@@ -77,6 +77,7 @@ class Uprizoritev
      * pomeni začetek faze produkcija
      * 
      * polje uporabljamo že v fazi predprodukcije za makroplaniranje
+     * predpostavljamo da študij traja do $datumPremiere
      * 
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="uprizoritev.datumZacStudija", description="uprizoritev.d.datumZacStudija")
@@ -299,6 +300,9 @@ class Uprizoritev
     public function validate($mode = 'update')
     {
         $this->expect(!empty($this->sifra), 'Šifra ne sme biti prazna', 1000877);
+        if (!empty($this->datumZacStudija) && !empty($this->datumPremiere)) {
+            $this->expect($this->datumZacStudija <=$this->datumPremiere, 'Začetek študija ne sme biti kasneje kot datum premiere', 1000878);
+        }
     }
 
     public function getId()

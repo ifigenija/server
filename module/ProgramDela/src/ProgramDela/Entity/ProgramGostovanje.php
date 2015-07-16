@@ -45,13 +45,6 @@ class ProgramGostovanje
     protected $transportniStroski;
 
     /**
-     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="gostovanje.odkup", description="gostovanje.d.odkup")   
-     * @var double     
-     */
-    protected $odkup;
-
-    /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="gostovanja")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
      * @Max\I18n(label="gostovanje.programDela", description="gostovanje.programDela")
@@ -88,8 +81,6 @@ class ProgramGostovanje
         $this->setStZaposDrug(0);
         $this->setTantieme(0);
         $this->setUtemeljitev("");
-        $this->setVlozekGostitelja(0);
-        $this->setVlozekKoproducenta(0);
         $this->setNaziv("");        // dobimo iz uprizoritve
 
         parent::preracunaj($smer);
@@ -127,11 +118,6 @@ class ProgramGostovanje
         return $this->transportniStroski;
     }
 
-    public function getOdkup()
-    {
-        return $this->odkup;
-    }
-
     public function getDokument()
     {
         return $this->dokument;
@@ -163,12 +149,6 @@ class ProgramGostovanje
     public function setTransportniStroski($transportniStroski)
     {
         $this->transportniStroski = $transportniStroski;
-        return $this;
-    }
-
-    public function setOdkup($odkup)
-    {
-        $this->odkup = $odkup;
         return $this;
     }
 
