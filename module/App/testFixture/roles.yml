@@ -90,6 +90,8 @@
         - ProgramPremiera-write
         - ProgramRazno-read
         - ProgramRazno-write
+        - ProgramskaEnotaSklopa-read
+        - ProgramskaEnotaSklopa-write
         - Prostor-read
         - Prostor-write
         - Racun-read

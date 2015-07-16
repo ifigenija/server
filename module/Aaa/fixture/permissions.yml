@@ -313,6 +313,13 @@
     description: ProgramRazno - spreminjanje
 
 -
+    name: ProgramskaEnotaSklopa-read
+    description: ProgramskaEnotaSklopa - branje
+-
+    name: ProgramskaEnotaSklopa-write
+    description: ProgramskaEnotaSklopa - spreminjanje
+
+-
     name: Prostor-read
     description: Prostor - branje
 -

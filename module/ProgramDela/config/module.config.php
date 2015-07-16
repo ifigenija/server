@@ -14,8 +14,8 @@ return [
         ],
         'invokables' => [
             'enotaprograma.rpc.service' => 'ProgramDela\Rpc\EnotaProgramaRpcService',
-            'enotaprograma.service' => 'ProgramDela\Service\EnotaProgramaService',
-            'programdela.rpc.service' => 'ProgramDela\Rpc\ProgramDelaRpcService',
+            'enotaprograma.service'     => 'ProgramDela\Service\EnotaProgramaService',
+            'programdela.rpc.service'   => 'ProgramDela\Rpc\ProgramDelaRpcService',
         ],
     ],
     'controllers'     => [
@@ -49,6 +49,7 @@ return [
             'Relation\ProgramRazno'              => 'Max\Factory\ToManyControllerFactory',
             'Rest\TipProgramskeEnote'            => 'Max\Factory\RestControllerFactory',
             'Relation\TipProgramskeEnote'        => 'Max\Factory\ToManyControllerFactory',
+            'Rest\ProgramskaEnotaSklopa'         => 'Max\Factory\RestControllerFactory',
         ],
     ],
     'router'          => [

@@ -23,39 +23,10 @@ class ProgramRazno
     protected $dokument;
 
     /**
-     * @ORM\Column(type="string")
-     * @Max\I18n(label="programRazno.naslovPE", description="programRazno.d.naslovPE")
-     * @var string
+     * @ORM\OneToMany(targetEntity="ProgramskaEnotaSklopa", mappedBy="programRazno", orphanRemoval=true)
+     * @var <programskeEnoteSklopa>
      */
-    protected $naslovPE;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Max\I18n(label="programRazno.avtorPE", description="programRazno.d.avtorPE")
-     * @var string
-     */
-    protected $avtorPE;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Max\I18n(label="programRazno.obsegPE", description="programRazno.d.obsegPE")
-     * @var string
-     */
-    protected $obsegPE;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Max\I18n(label="programRazno.mesecPE", description="programRazno.d.mesecPE")
-     * @var string
-     */
-    protected $mesecPE;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="programRazno.vrednostPE", description="programRazno.d.vrednostPE")
-     * @var double
-     */
-    protected $vrednostPE;
+    protected $programskeEnoteSklopa;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -74,6 +45,11 @@ class ProgramRazno
      */
     protected $soorganizator;
 
+    public function __construct()
+    {
+        $this->programskeEnoteSklopa = new ArrayCollection();
+    }
+
     public function preracunaj($smer = false)
     {
         $this->setCelotnaVrednostMat(0);
@@ -88,12 +64,16 @@ class ProgramRazno
         $this->setPonoviZamejo(0);
         $this->setStZaposUmet(0);
         $this->setStZaposDrug(0);
-         $this->setStHonorarnihIgr(0);
+        $this->setStHonorarnihIgr(0);
         $this->setStHonorarnihIgrTujJZ(0);
         $this->setTantieme(0);
         $this->setUtemeljitev("");
         $this->setVlozekGostitelja(0);
 
+        $this->stPE = 0;
+        foreach ($this->getProgramskeEnoteSklopa() as $numObject => $object) {
+            $this->stPE += 1;
+        }
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
             if ($this->getDokument()) {
@@ -106,6 +86,7 @@ class ProgramRazno
     {
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program razno", 1000451);
         $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program razno", 1000452);
+        $this->expect($this->naziv, "Nima naziva. Naziv je obvezen podatek", 1000453);
 
         parent::validate();
     }
@@ -115,34 +96,9 @@ class ProgramRazno
         return $this->dokument;
     }
 
-    public function getNazivSklopa()
+    public function getProgramskeEnoteSklopa()
     {
-        return $this->nazivSklopa;
-    }
-
-    public function getNaslovPE()
-    {
-        return $this->naslovPE;
-    }
-
-    public function getAvtorPE()
-    {
-        return $this->avtorPE;
-    }
-
-    public function getObsegPE()
-    {
-        return $this->obsegPE;
-    }
-
-    public function getMesecPE()
-    {
-        return $this->mesecPE;
-    }
-
-    public function getVrednostPE()
-    {
-        return $this->vrednostPE;
+        return $this->programskeEnoteSklopa;
     }
 
     public function getStPE()
@@ -161,39 +117,9 @@ class ProgramRazno
         return $this;
     }
 
-    public function setNazivSklopa($nazivSklopa)
+    public function setProgramskeEnoteSklopa($programskeEnoteSklopa)
     {
-        $this->nazivSklopa = $nazivSklopa;
-        return $this;
-    }
-
-    public function setNaslovPE($naslovPE)
-    {
-        $this->naslovPE = $naslovPE;
-        return $this;
-    }
-
-    public function setAvtorPE($avtorPE)
-    {
-        $this->avtorPE = $avtorPE;
-        return $this;
-    }
-
-    public function setObsegPE($obsegPE)
-    {
-        $this->obsegPE = $obsegPE;
-        return $this;
-    }
-
-    public function setMesecPE($mesecPE)
-    {
-        $this->mesecPE = $mesecPE;
-        return $this;
-    }
-
-    public function setVrednostPE($vrednostPE)
-    {
-        $this->vrednostPE = $vrednostPE;
+        $this->programskeEnoteSklopa = $programskeEnoteSklopa;
         return $this;
     }
 

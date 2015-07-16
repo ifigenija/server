@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 
 /**
+ * Se uporablja za nejavne vire
+ * 
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\DrugiViri")
  * @Max\I18n(label="Drugi vir",plural="Drugi viri")
  * @Max\Id(prefix="0051")

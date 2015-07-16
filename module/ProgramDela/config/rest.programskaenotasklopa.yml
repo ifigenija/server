@@ -1,0 +1,21 @@
+## YAML Template.
+---
+type: rest
+entityClass: ProgramDela\Entity\ProgramskaEnotaSklopa
+forms:
+    default: 
+        elements:
+#            - id
+            - naslovPE
+            - avtorPE
+            - obsegPE
+            - mesecPE
+            - vrednostPE
+            - programRazno
+lists:
+    default: 
+        hydrator:
+            exclude: []
+    vse: 
+        hydrator:
+            exclude: []
