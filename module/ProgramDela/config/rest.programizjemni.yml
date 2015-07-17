@@ -14,6 +14,7 @@ forms:
             - lastnaSredstva
             - avtorskiHonorarji
             - tantieme
+            - avtorskePravice
 #            - drugiViri
 #            - vlozekGostitelja      
             - drugiJavni

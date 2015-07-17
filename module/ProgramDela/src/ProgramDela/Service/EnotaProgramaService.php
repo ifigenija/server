@@ -48,9 +48,13 @@ class EnotaProgramaService
                     $data['Do']['tantieme']+=$strosekU->getVrednostDo();
                     $data['Na']['tantieme']+=$strosekU->getVrednostNa();
                     break;
+                case 'avtorprav':
+                    $data['Do']['avtorskePravice']+=$strosekU->getVrednostDo();
+                    $data['Na']['avtorskePravice']+=$strosekU->getVrednostNa();
+                    break;
                 default:
                     $this->expect(false
-                            , "Tip stroška uprizoritve je lahko le materialni ali tantiema, je pa:" . $strosekU->getTipstroska(), 1000951);
+                            , "Tip stroška uprizoritve je lahko le materialni ali tantiema ali avtorprav, je pa:" . $strosekU->getTipstroska(), 1000951);
             }
         }
 
@@ -124,6 +128,7 @@ class EnotaProgramaService
             'avtorskiHonorarji' => 0,
             'nasDelez'          => 0,
             'tantieme'          => 0,
+            'avtorskePravice'   => 0,
         ];
         $data['naziv']                = $polje;
         $data['Funkcije']             = [];

@@ -113,6 +113,8 @@ class ProgramGostovanjeCest
             'celotnaVrednost'    => 9.12,
             'nasDelez'           => 9.12,
             'transportniStroski' => 9.12,
+            'tantieme'           => 9.12,
+            'avtorskePravice'    => 9.12,
             'avtorskiHonorarji'  => 9.12,
             'vlozekGostitelja'   => 9.12,
             'lastnaSredstva'     => 9.12,
@@ -140,6 +142,8 @@ class ProgramGostovanjeCest
             'celotnaVrednost'    => 3.12,
             'nasDelez'           => 3.12,
             'transportniStroski' => 3.12,
+            'tantieme'           => 3.12,
+            'avtorskePravice'    => 3.12,
             'avtorskiHonorarji'  => 3.12,
             'vlozekGostitelja'   => 3.12,
             'lastnaSredstva'     => 3.12,
@@ -192,6 +196,8 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['celotnaVrednost'], 9.12);
         $I->assertEquals($ent['nasDelez'], 9.12);
         $I->assertEquals($ent['transportniStroski'], 9.12);
+        $I->assertEquals($ent['tantieme'], 9.12);
+        $I->assertEquals($ent['avtorskePravice'], 9.12);
         $I->assertEquals($ent['avtorskiHonorarji'], 9.12);
         $I->assertEquals($ent['vlozekGostitelja'], 2.34);
         $I->assertEquals($ent['lastnaSredstva'], 9.12);

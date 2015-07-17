@@ -134,6 +134,7 @@ class ProgramPremieraCest
             'lastnaSredstva'       =>1.24,
             'avtorskiHonorarji'    =>1.24,
             'tantieme'             =>1.24,
+            'avtorskePravice'             =>1.24,
             'drugiViri'            =>1.24,
 //            'vlozekGostitelja'     =>1.24,
             'drugiJavni'           =>1.24,
@@ -171,6 +172,7 @@ class ProgramPremieraCest
             'lastnaSredstva'       => 4.56,
             'avtorskiHonorarji'    => 4.56,
             'tantieme'             => 4.56,
+            'avtorskePravice'             => 4.56,
             'drugiViri'            => 4.56,
 //            'vlozekGostitelja'     => 4.56,
             'drugiJavni'           => 4.56,
@@ -234,6 +236,7 @@ class ProgramPremieraCest
         $I->assertEquals($ent['lastnaSredstva'],1.24);
         $I->assertEquals($ent['avtorskiHonorarji'],1.24);
         $I->assertEquals($ent['tantieme'],1.24);
+        $I->assertEquals($ent['avtorskePravice'],1.24);
 //        $I->assertEquals($ent['drugiViri'],1.24);
 //        $I->assertEquals($ent['vlozekGostitelja'],1.24);
         $I->assertEquals($ent['drugiJavni'],1.24);

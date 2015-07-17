@@ -19,6 +19,8 @@ forms:
             - nasDelez
             - vlozekGostitelja
             - transportniStroski
+            - tantieme
+            - avtorskePravice
             - avtorskiHonorarji
             - lastnaSredstva
 #            - drugiViri

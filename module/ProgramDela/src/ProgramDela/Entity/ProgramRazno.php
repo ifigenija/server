@@ -69,6 +69,7 @@ class ProgramRazno
         $this->setStHonorarnihIgr(0);
         $this->setStHonorarnihIgrTujJZ(0);
         $this->setTantieme(0);
+        $this->setAvtorskePravice(0);
         $this->setUtemeljitev("");
         $this->setVlozekGostitelja(0);
 

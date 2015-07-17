@@ -792,4 +792,15 @@ class EnotaPrograma
         return $this;
     }
 
+    public function getAvtorskePravice()
+    {
+        return $this->avtorskePravice;
+    }
+
+    public function setAvtorskePravice($avtorskePravice)
+    {
+        $this->avtorskePravice = $avtorskePravice;
+        return $this;
+    }
+
 }
