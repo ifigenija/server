@@ -42,6 +42,9 @@ class ProgramGostovanjeCest
     private $drugiVirUrl    = '/rest/drugivir';
     private $objDrugiVir1;
     private $objDrugiVir2;
+    private $drzavaUrl      = '/rest/drzava';
+    private $objDrzava1;
+    private $objDrzava2;
 
     public function _before(ApiTester $I)
     {
@@ -76,6 +79,20 @@ class ProgramGostovanjeCest
     }
 
     /**
+     * najde državo
+     * 
+     * @param ApiTester $I
+     */
+    public function getListDrzava(ApiTester $I)
+    {
+        $resp             = $I->successfullyGetList($this->drzavaUrl, []);
+        $list             = $resp['data'];
+        $I->assertNotEmpty($list);
+        $this->objDrzava1 = $drzava           = array_pop($list);
+        $I->assertNotEmpty($drzava);
+    }
+
+    /**
      * @depends lookupUprizoritev
      * 
      * @param ApiTester $I
@@ -86,17 +103,18 @@ class ProgramGostovanjeCest
             'dokument'           => NULL,
             'uprizoritev'        => $this->lookUprizoritev['id'],
             'krajGostovanja'     => 'zz',
+            'drzavaGostovanja'   => $this->objDrzava1['id'],
             'ustanova'           => 'zz',
             'datumGostovanja'    => '2011-02-01T00:00:00+0100',
             'ponoviInt'          => 9,
             'obiskInt'           => 9,
-            'zaprosenProcent' => 100,
+            'zaprosenProcent'    => 100,
 //            'zaproseno'            =>9.12,
             'celotnaVrednost'    => 9.12,
-            'nasDelez'    => 9.12,
+            'nasDelez'           => 9.12,
             'transportniStroski' => 9.12,
             'avtorskiHonorarji'  => 9.12,
-            'vlozekGostitelja'              => 9.12,
+            'vlozekGostitelja'   => 9.12,
             'lastnaSredstva'     => 9.12,
 //            'drugiViri'          => 9.12,
             'drugiJavni'         => 9.12,
@@ -112,17 +130,18 @@ class ProgramGostovanjeCest
             'dokument'           => NULL,
             'uprizoritev'        => NULL,
             'krajGostovanja'     => 'aa',
+            'drzavaGostovanja'   => $this->objDrzava1['id'],
             'ustanova'           => 'aa',
             'datumGostovanja'    => '2011-02-01T00:00:00+0100',
             'ponoviInt'          => 3,
             'obiskInt'           => 3,
-            'zaprosenProcent' => 100,
+            'zaprosenProcent'    => 100,
 //            'zaproseno'            =>3.12,
             'celotnaVrednost'    => 3.12,
-            'nasDelez'    => 3.12,
+            'nasDelez'           => 3.12,
             'transportniStroski' => 3.12,
             'avtorskiHonorarji'  => 3.12,
-            'vlozekGostitelja'              => 3.12,
+            'vlozekGostitelja'   => 3.12,
             'lastnaSredstva'     => 3.12,
 //            'drugiViri'          => 3.12,
             'drugiJavni'         => 3.12,
@@ -142,7 +161,7 @@ class ProgramGostovanjeCest
      */
     public function update(ApiTester $I)
     {
-        $ent          = $this->obj1;
+        $ent                     = $this->obj1;
         $ent['vlozekGostitelja'] = 2.34;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
@@ -163,12 +182,13 @@ class ProgramGostovanjeCest
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev['id']);
         $I->assertEquals($ent['krajGostovanja'], 'zz');
+        $I->assertEquals($ent['drzavaGostovanja'], $this->objDrzava1['id']);
         $I->assertEquals($ent['ustanova'], 'zz');
         $I->assertEquals($ent['datumGostovanja'], '2011-02-01T00:00:00+0100');
         $I->assertEquals($ent['ponoviInt'], 9);
         $I->assertEquals($ent['obiskInt'], 9);
         $I->assertEquals($ent['zaprosenProcent'], 100.00);
-        $I->assertEquals($ent['zaproseno'], 9.12,"izračunano zaprošeno");
+        $I->assertEquals($ent['zaproseno'], 9.12, "izračunano zaprošeno");
         $I->assertEquals($ent['celotnaVrednost'], 9.12);
         $I->assertEquals($ent['nasDelez'], 9.12);
         $I->assertEquals($ent['transportniStroski'], 9.12);

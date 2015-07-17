@@ -24,6 +24,8 @@ forms:
             - konec
 #            - vrednostDoPremiere
             - zaposlenVDrJz
+            - samozaposlen
+            - igralec
 lists:
     default: 
         filter:

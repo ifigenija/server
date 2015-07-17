@@ -37,6 +37,7 @@ forms:
             - stHonorarnih
             - stHonorarnihIgr
             - stHonorarnihIgrTujJZ
+            - stHonorarnihIgrSamoz
 #            - koprodukcije
     hydrator:
             lookups: 

@@ -69,20 +69,18 @@ class PogodbaFixture
             $getref = $this->getReference($v[8]);
             $o->setTrr($getref);
         }
-        $o->setZaposlenVDrJz($v[9]);
 
-        $date = empty($v[10]) ? null : date_create($v[10]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
+        $date = empty($v[9]) ? null : date_create($v[9]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setZacetek($date);
-        $date = empty($v[11]) ? null : date_create($v[11]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
+        $date = empty($v[10]) ? null : date_create($v[10]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setKonec($date);
 
-        $o->setPlaciloNaVajo($v[12]);
-        $o->setPlaniranoSteviloVaj($v[13]);
-//        if ($v[14]) {
-//            $getref = $this->getReference($v[14]);
-//            $o->setAlternacija($getref);
-//        }
-        
+        $o->setPlaciloNaVajo($v[11]);
+        $o->setPlaniranoSteviloVaj($v[12]);
+        $o->setZaposlenVDrJz($v[13]);
+        $o->setSamozaposlen($v[14]);
+        $o->setIgralec($v[15]);
+
         $o->preracunaj();
         /**
          * validate javi napako, ker alternacije še ni
@@ -97,9 +95,9 @@ class PogodbaFixture
     public function getData()
     {
         return [
-            ['0001', 10, 30, 10, true, "Pogodba o sodelovanju", 'Oseba-0001', null, null, true, null, null, false, 3, ],
-            ['0002', 11, 31, 11, true, "Pogodba za vlogo Helena", 'Oseba-0006', null, null, false, null, null, true, 10,],
-            ['0003', 12, 32, 12, true, "Pogodba za lektoriranje", 'Oseba-0013', null, null, false, null, null, FALSE, 4,],
+            ['0001', 10, 30, 10, true, "Pogodba o sodelovanju", 'Oseba-0001', null, null, null, null, false, 3, true, false, true,],
+            ['0002', 11, 31, 11, true, "Pogodba za vlogo Helena", 'Oseba-0006', null, null, null, null, true, 10, false, true, true,],
+            ['0003', 12, 32, 12, true, "Pogodba za lektoriranje", 'Oseba-0013', null, null, null, null, FALSE, 4, false, true, false,],
         ];
     }
 

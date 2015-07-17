@@ -113,6 +113,7 @@ lists:
                 - stHonorarnih
                 - stHonorarnihIgr
                 - stHonorarnihIgrTujJZ
+                - stHonorarnihIgrSamoz
                 - sredstvaInt
 relation:
     default:

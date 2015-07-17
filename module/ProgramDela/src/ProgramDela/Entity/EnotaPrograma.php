@@ -208,6 +208,18 @@ class EnotaPrograma
     protected $stHonorarnihIgrTujJZ;
 
     /**
+     *  št. honorarnih igralcev,samozaposlenih v drugih javnih zavodih
+     * 
+     * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="ep.stHonorarnihIgrSamoz", description="ep.d.stHonorarnihIgrSamoz")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stHonorarnihIgrSamoz;
+
+    /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
      * @Max\I18n(label="ep.obiskDoma", description="ep.d.obiskDoma")   
      * @Max\Ui(type="integer")
@@ -365,9 +377,9 @@ class EnotaPrograma
         /**
          * pred primerjanjem damo števila s plavajočo vejico v string
          */
-        $ls = \Max\Functions::euroRoundS($this->getLastnaSredstva());
-        $nd = \Max\Functions::euroRoundS($this->getNasDelez());
-        $cv = \Max\Functions::euroRoundS($this->getCelotnaVrednost());
+        $ls           = \Max\Functions::euroRoundS($this->getLastnaSredstva());
+        $nd           = \Max\Functions::euroRoundS($this->getNasDelez());
+        $cv           = \Max\Functions::euroRoundS($this->getCelotnaVrednost());
         $this->expect($ls <= $nd, "Lastna sredstva ne smejo biti večja od našega deleža", 1000620);
         $this->expect($nd <= $cv, "Naš delež (" . $nd . ") ne sme biti večji od celotne vrednosti (" . $cv . ")", 1000621);
         /**
@@ -759,6 +771,17 @@ class EnotaPrograma
     public function setSort($sort)
     {
         $this->sort = $sort;
+        return $this;
+    }
+
+    public function getStHonorarnihIgrSamoz()
+    {
+        return $this->stHonorarnihIgrSamoz;
+    }
+
+    public function setStHonorarnihIgrSamoz($stHonorarnihIgrSamoz)
+    {
+        $this->stHonorarnihIgrSamoz = $stHonorarnihIgrSamoz;
         return $this;
     }
 

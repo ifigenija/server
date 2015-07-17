@@ -8,6 +8,7 @@ forms:
 #            - id
             - uprizoritev
             - krajGostovanja
+            - drzavaGostovanja
             - ustanova
             - datumGostovanja
             - ponoviInt

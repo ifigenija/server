@@ -4,6 +4,7 @@ namespace ProgramDela\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiRazno")
@@ -48,6 +49,7 @@ class ProgramRazno
     public function __construct()
     {
         $this->programskeEnoteSklopa = new ArrayCollection();
+        parent::__construct();
     }
 
     public function preracunaj($smer = false)

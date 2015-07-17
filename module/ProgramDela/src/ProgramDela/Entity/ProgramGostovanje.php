@@ -23,6 +23,14 @@ class ProgramGostovanje
     protected $krajGostovanja;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
+     * @Max\I18n(label="Država",  description="Država")
+     * @Max\Ui(type="toone")
+     * @var \App\Entity\Drzava
+     */
+    protected $drzavaGostovanja;
+
+    /**
      * @ORM\Column(type="string", nullable=false)
      * @Max\I18n(label="gostovanje.ustanova", description="gostovanje.d.ustanova")
      * @var string
@@ -163,5 +171,16 @@ class ProgramGostovanje
         $this->gostitelj = $gostitelj;
         return $this;
     }
+    public function getDrzavaGostovanja()
+    {
+        return $this->drzavaGostovanja;
+    }
+
+    public function setDrzavaGostovanja(\App\Entity\Drzava $drzavaGostovanja)
+    {
+        $this->drzavaGostovanja = $drzavaGostovanja;
+        return $this;
+    }
+
 
 }

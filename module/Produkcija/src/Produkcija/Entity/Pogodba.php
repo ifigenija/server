@@ -126,6 +126,26 @@ class Pogodba
     protected $zaposlenVDrJz;
 
     /**
+     * Samozaposlen v kulturi
+     * 
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="pogodba.samozaposlen", description="pogodba.d.samozaposlen")   
+     * @Max\Ui(type="boolcheckbox")                       
+     * @var boolean
+     */
+    protected $samozaposlen;
+
+    /**
+     * MK:  DiplomiranI igralec ali študent AGRFT
+     * 
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="pogodba.igralec", description="pogodba.d.igralec")   
+     * @Max\Ui(type="boolcheckbox")                       
+     * @var boolean
+     */
+    protected $igralec;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="pogodba.opis", description="pogodba.d.opis")   
      * @var string
@@ -192,6 +212,7 @@ class Pogodba
         $this->expect($this->sifra, "sifra je obvezen podatek", 1000342);
         $this->expect($this->oseba, "Pogodba nima subjekta. Oseba je obvezna", 1000343);
         $this->expect($this->alternacija, "Alternacija je obvezen podatek", 1000344);
+        $this->expect(!($this->zaposlenVDrJz && $this->samozaposlen), "Oseba ne more biti hkrati zaposlena v drugem jz in samozaposlena", 1000345);
     }
 
     public function getId()
@@ -378,6 +399,28 @@ class Pogodba
     public function setTrr(\App\Entity\Trr $trr)
     {
         $this->trr = $trr;
+        return $this;
+    }
+
+    public function getSamozaposlen()
+    {
+        return $this->samozaposlen;
+    }
+
+    public function getIgralec()
+    {
+        return $this->igralec;
+    }
+
+    public function setSamozaposlen($samozaposlen)
+    {
+        $this->samozaposlen = $samozaposlen;
+        return $this;
+    }
+
+    public function setIgralec($igralec)
+    {
+        $this->igralec = $igralec;
         return $this;
     }
 

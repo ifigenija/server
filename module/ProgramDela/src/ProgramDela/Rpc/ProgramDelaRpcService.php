@@ -109,6 +109,8 @@ class ProgramDelaRpcService
         $this->expectPermission("ProdukcijaDelitev-read");
         $this->expectPermission("DrugiVir-write");
         $this->expectPermission("DrugiVir-read");
+        $this->expectPermission("ProgramskaEnotaSklopa-write");
+        $this->expectPermission("ProgramskaEnotaSklopa-read");
 
         $programDela = $this->getProgramDelaRep()->findOneById($programDelaId);
 
@@ -258,6 +260,7 @@ class ProgramDelaRpcService
             $newPD->getProgramiRazno()->add($newEP);
             $this->klonirajDrugeVire($ep, $newEP);
             $this->klonirajKoprodukcije($ep, $newEP);
+            $this->klonirajPESklopa($ep, $newEP);       // posebnost pri programi razno
 
             $this->getEm()->persist($newEP);
             $newEP->preracunaj();
@@ -287,6 +290,26 @@ class ProgramDelaRpcService
 
             $this->getEm()->persist($newDV);
             $newDV->preracunaj();
+        }
+    }
+    
+    /**
+     * Klonira programske enote sklopa pod program razno
+     * 
+     * @param type $ep      stara enota programa razno
+     * @param type $newEP   nova enota programa razno
+     */
+    private function klonirajPESklopa($ep, $newEP)
+    {
+        $newEP->setProgramskeEnoteSklopa(new \Doctrine\Common\Collections\ArrayCollection());
+        $collPES = $ep->getProgramskeEnoteSklopa();
+        foreach ($collPES as $pes) {
+            $newPES = $pes->copy();
+            $newPES->setProgramRazno($newEP);
+            $newEP->getProgramskeEnoteSklopa()->add($newPES);
+
+            $this->getEm()->persist($newPES);
+            $newPES->preracunaj();
         }
     }
 

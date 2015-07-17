@@ -79,17 +79,20 @@ class EnotaProgramaService
                 }
                 if ($alternacija->getImaPogodbo()) {
                     $data['stHonorarnih'] += 1;
-                    if ($podrocje == "igralec") {
-                        $data['stHonorarnihIgr'] += 1;
-                    }
                     $pogodba = $alternacija->getPogodba();
                     if ($pogodba) {
                         if ($pogodba->getAktivna()) {
                             //$$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
                             $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
                             $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
-                            if ($pogodba->getZaposlenVDrJz()) {
-                                $data['stHonorarnihIgrTujJZ'] += 1;
+                            if ($pogodba->getIgralec()) {
+                                $data['stHonorarnihIgr'] += 1;      //$$
+                                if ($pogodba->getZaposlenVDrJz()) {
+                                    $data['stHonorarnihIgrTujJZ'] += 1;
+                                }
+                                if ($pogodba->getSamozaposlen()) {
+                                    $data['stHonorarnihIgrSamoz'] += 1;
+                                }
                             }
                         }
                     }
@@ -130,6 +133,7 @@ class EnotaProgramaService
         $data['stHonorarnih']         = 0;
         $data['stHonorarnihIgr']      = 0;
         $data['stHonorarnihIgrTujJZ'] = 0;
+        $data['stHonorarnihIgrSamoz'] = 0;
         $data['stZaposUmet']          = 0;
         return $data;
     }

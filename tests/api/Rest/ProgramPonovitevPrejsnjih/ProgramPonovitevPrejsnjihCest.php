@@ -156,6 +156,8 @@ class ProgramPonovitevPrejsnjihCest
             'stHonorarnih'            => 1,
             'stHonorarnihIgr'         => 1,
             'stHonorarnihIgrTujJZ'    => 1,
+            'stHonorarnihIgrTujJZ'    => 1,
+            'stHonorarnihIgrSamoz'    => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -193,7 +195,8 @@ class ProgramPonovitevPrejsnjihCest
             'stHonorarnih'            => 2,
             'stHonorarnihIgr'         => 2,
             'stHonorarnihIgrTujJZ'    => 2,
-        ];
+                   'stHonorarnihIgrSamoz' => 2,
+ ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['utemeljitev'], 'aa');
@@ -257,6 +260,8 @@ class ProgramPonovitevPrejsnjihCest
         $I->assertEquals($ent['stHonorarnih'], 1);
         $I->assertEquals($ent['stHonorarnihIgr'], 1);
         $I->assertEquals($ent['stHonorarnihIgrTujJZ'], 1);
+        $I->assertEquals($ent['stHonorarnihIgrSamoz'], 1);
+
     }
 
     /**

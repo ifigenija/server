@@ -31,6 +31,8 @@ use ApiTester;
  *      getlist različne variante relacij
  *      - vse
  *      - default
+ *      zaklepanje
+ *      kloniranje
  *
  * @author rado
  */
@@ -89,6 +91,9 @@ class ProgramDelaCest
     private $objKoprodukcija1;
     private $objKoprodukcija2;
     private $objKoprodukcija3;
+    private $programskaEnotaSklopaUrl     = '/rest/programskaenotasklopa';
+    private $objPESklopa1;
+    private $objPESklopa2;
 
     public function _before(ApiTester $I)
     {
@@ -367,6 +372,7 @@ class ProgramDelaCest
             'stHonorarnih'         => 10,
             'stHonorarnihIgr'      => 7,
             'stHonorarnihIgrTujJZ' => 5,
+            'stHonorarnihIgrSamoz' => 5,
             'uprizoritev'          => NULL,
             'dokument'             => $this->obj2['id'],
         ];
@@ -404,6 +410,7 @@ class ProgramDelaCest
             'stHonorarnih'         => 9,
             'stHonorarnihIgr'      => 6,
             'stHonorarnihIgrTujJZ' => 2,
+            'stHonorarnihIgrSamoz' => 2,
             'uprizoritev'          => NULL,
             'dokument'             => $this->obj2['id'],
         ];
@@ -506,6 +513,7 @@ class ProgramDelaCest
             'stHonorarnih'         => 5,
             'stHonorarnihIgr'      => 3,
             'stHonorarnihIgrTujJZ' => 1,
+            'stHonorarnihIgrSamoz' => 1,
             'dokument'             => $this->obj2['id'],
         ];
         $this->objProgramIzjemni1 = $ent                      = $I->successfullyCreate($this->programIzjemniUrl, $data);
@@ -554,7 +562,7 @@ class ProgramDelaCest
             'naziv'                   => 'zz',
             'zvrst'                   => 'zz',
             'stPredstav'              => 1,
-            'stOkroglihMiz'             => 1,
+            'stOkroglihMiz'           => 1,
             'stPredstavitev'          => 1,
             'stDelavnic'              => 1,
             'stDrugiDogodki'          => 1,
@@ -589,7 +597,7 @@ class ProgramDelaCest
             'naziv'                   => 'zz',
             'zvrst'                   => 'zz',
             'stPredstav'              => 1,
-            'stOkroglihMiz'             => 1,
+            'stOkroglihMiz'           => 1,
             'stPredstavitev'          => 1,
             'stDelavnic'              => 1,
             'stDrugiDogodki'          => 1,
@@ -643,7 +651,7 @@ class ProgramDelaCest
             'nasDelez'           => 90.12,
             'transportniStroski' => 9.12,
             'avtorskiHonorarji'  => 9.12,
-            'vlozekGostitelja'              => 9.12,
+            'vlozekGostitelja'   => 9.12,
             'lastnaSredstva'     => 9.12,
             'drugiViri'          => 9.12,
             'drugiJavni'         => 9.12,
@@ -667,7 +675,7 @@ class ProgramDelaCest
             'nasDelez'           => 90.12,
             'transportniStroski' => 9.12,
             'avtorskiHonorarji'  => 48.33,
-            'vlozekGostitelja'              => 9.12,
+            'vlozekGostitelja'   => 9.12,
             'lastnaSredstva'     => 9.12,
             'drugiViri'          => 9.12,
             'drugiJavni'         => 9.12,
@@ -690,12 +698,7 @@ class ProgramDelaCest
         $data                   = [
             'dokument'        => $this->obj2['id'],
             'naziv'           => 'zz',
-            'naslovPE'        => 'zz',
-            'avtorPE'         => 'zz',
-            'obsegPE'         => 'zz',
-            'mesecPE'         => 'zz',
-            'vrednostPE'      => 1.24,
-            'stPE'            => 1,
+//            'stPE'            => 1,
             'soorganizator'   => null,
             'obiskDoma'       => 6,
             'stZaposlenih'    => 1,
@@ -715,12 +718,7 @@ class ProgramDelaCest
         $data                   = [
             'dokument'        => $this->obj2['id'],
             'naziv'           => 'zz',
-            'naslovPE'        => 'zz',
-            'avtorPE'         => 'zz',
-            'obsegPE'         => 'zz',
-            'mesecPE'         => 'zz',
-            'vrednostPE'      => 1.24,
-            'stPE'            => 1,
+//            'stPE'            => 1,
             'soorganizator'   => null,
             'obiskDoma'       => 22,
             'stZaposlenih'    => 1,
@@ -865,6 +863,7 @@ class ProgramDelaCest
             'stHonorarnih'         => 1,
             'stHonorarnihIgr'      => 1,
             'stHonorarnihIgrTujJZ' => 1,
+            'stHonorarnihIgrSamoz' => 1,
             'tipProgramskeEnote'   => $this->lookTipProgramskeEnote1['id'],
             'dokument'             => $this->obj2['id'],
             'uprizoritev'          => $this->lookUprizoritev1['id'], // ista uprizoritev
@@ -901,6 +900,7 @@ class ProgramDelaCest
             'stHonorarnih'         => 1,
             'stHonorarnihIgr'      => 1,
             'stHonorarnihIgrTujJZ' => 1,
+            'stHonorarnihIgrSamoz' => 1,
             'tipProgramskeEnote'   => $this->lookTipProgramskeEnote1['id'],
             'dokument'             => $this->obj2['id'],
             'uprizoritev'          => $this->lookUprizoritev1['id'], // ista uprizoritev
@@ -937,6 +937,7 @@ class ProgramDelaCest
             'stHonorarnih'         => 1,
             'stHonorarnihIgr'      => 1,
             'stHonorarnihIgrTujJZ' => 1,
+            'stHonorarnihIgrSamoz' => 1,
             'tipProgramskeEnote'   => $this->lookTipProgramskeEnote1['id'],
             'dokument'             => $this->obj2['id'],
             'uprizoritev'          => $this->lookUprizoritev2['id'], // druga uprizoritev
@@ -1090,6 +1091,7 @@ class ProgramDelaCest
             'stHonorarnih'            => 11,
             'stHonorarnihIgr'         => 5,
             'stHonorarnihIgrTujJZ'    => 3,
+            'stHonorarnihIgrSamoz'    => 3,
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote2['id'],
             'dokument'                => $this->obj2['id'],
             'uprizoritev'             => $this->lookUprizoritev5['id'], // ista uprizoritev
@@ -1127,6 +1129,7 @@ class ProgramDelaCest
             'stHonorarnih'            => 1,
             'stHonorarnihIgr'         => 1,
             'stHonorarnihIgrTujJZ'    => 1,
+            'stHonorarnihIgrSamoz'    => 1,
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote2['id'],
             'dokument'                => $this->obj2['id'],
             'uprizoritev'             => $this->lookUprizoritev5['id'], // ista uprizoritev
@@ -1164,6 +1167,7 @@ class ProgramDelaCest
             'stHonorarnih'            => 25,
             'stHonorarnihIgr'         => 8,
             'stHonorarnihIgrTujJZ'    => 8,
+            'stHonorarnihIgrSamoz'    => 8,
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote5['id'],
             'dokument'                => $this->obj2['id'],
             'uprizoritev'             => $this->lookUprizoritev2['id'], // ista uprizoritev
@@ -1502,6 +1506,37 @@ class ProgramDelaCest
     }
 
     /**
+     * @depends createVecProgramovRazno
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecProgramskihEnotSklopa(ApiTester $I)
+    {
+        $data               = [
+            'naslovPE'     => 'zz',
+            'avtorPE'      => 'zz',
+            'obsegPE'      => 'zz',
+            'mesecPE'      => 'zz',
+            'vrednostPE'   => 100.11,
+            'programRazno' => $this->objProgramRazno1['id']
+        ];
+        $this->objPESklopa1 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
+        $I->assertGuid($ent['id']);
+
+        // kreiramo še en zapis
+        $data               = [
+            'naslovPE'     => 'aa',
+            'avtorPE'      => 'aa',
+            'obsegPE'      => 'aa',
+            'mesecPE'      => 'aa',
+            'vrednostPE'   => 200.22,
+            'programRazno' => $this->objProgramRazno1['id']
+        ];
+        $this->objPESklopa2 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
+        $I->assertGuid($ent['id']);
+    }
+
+    /**
      * pri update-u se kliče preracun metoda, kjer je preračun kazalnikov
      * 
      * @depends createVecEnotPrograma
@@ -1544,6 +1579,7 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(141, $entR['stHonorarnih'], "");
         $I->assertGreaterThanOrEqual(28, $entR['stHonorarnihIgr'], "");
         $I->assertGreaterThanOrEqual(20, $entR['stHonorarnihIgrTujJZ'], "");
+        $I->assertGreaterThanOrEqual(20, $entR['stHonorarnihIgrSamoz'], "");
         $I->assertGreaterThanOrEqual(420.88, $entR['sredstvaAvt'], "");
         $I->assertGreaterThanOrEqual(109.98, $entR['sredstvaInt'], "mednarodni viri");
         $I->assertEquals(3, $entR['stKoprodukcij'], "");
@@ -1591,6 +1627,7 @@ class ProgramDelaCest
             'stHonorarnih'         => 11,
             'stHonorarnihIgr'      => 3,
             'stHonorarnihIgrTujJZ' => 2,
+            'stHonorarnihIgrSamoz' => 2,
             'uprizoritev'          => NULL,
             'dokument'             => $this->obj2['id'],
         ];
@@ -1923,6 +1960,12 @@ class ProgramDelaCest
         $I->assertNotEmpty($ent['id']);
         $resp = $I->failToUpdate($this->produkcijaDelitevUrl, $ent['id'], $ent);
         $I->assertEquals(1000611, $resp[0]['code']);
+
+        // probamo spremeniti programsko enoto sklopa programa razno
+        $ent  = $I->successfullyGet($this->programskaEnotaSklopaUrl, $this->objPESklopa1['id']);
+        $I->assertGuid($ent['id']);
+        $resp = $I->failToUpdate($this->programskaEnotaSklopaUrl, $ent['id'], $ent);
+        $I->assertEquals(1000661, $resp[0]['code']);
     }
 
     /**
@@ -1947,7 +1990,7 @@ class ProgramDelaCest
 //        codecept_debug($ent);
         // pri update preračuna kazalnike
         $entR = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
-        $I->assertNotEmpty($entR['id']);
+        $I->assertGuid($entR['id']);
         $I->assertNotEquals($oldPD['id'], $entR['id'], " id");
         $I->assertNotEquals($oldPD['sifra'], $entR['sifra'], " id");
         $I->assertEquals($oldPD['stPremier'], $entR['stPremier'], "št. premier");
@@ -1978,6 +2021,7 @@ class ProgramDelaCest
         $I->assertEquals($oldPD['stHonorarnih'], $entR['stHonorarnih'], "");
         $I->assertEquals($oldPD['stHonorarnihIgr'], $entR['stHonorarnihIgr'], "");
         $I->assertEquals($oldPD['stHonorarnihIgrTujJZ'], $entR['stHonorarnihIgrTujJZ'], "");
+        $I->assertEquals($oldPD['stHonorarnihIgrSamoz'], $entR['stHonorarnihIgrSamoz'], "");
         $I->assertEquals($oldPD['sredstvaAvt'], $entR['sredstvaAvt'], "");
         $I->assertEquals($oldPD['sredstvaInt'], $entR['sredstvaInt'], "mednarodni viri");
         $I->assertEquals($oldPD['stKoprodukcij'], $entR['stKoprodukcij'], "");

@@ -279,6 +279,8 @@ class PogodbaCest
             'konec'               => '2014-02-01T00:00:00+0100',
             'vrednostDoPremiere'  => 66.33,
             'zaposlenVDrJz'       => true,
+            'samozaposlen'        => FALSE,
+            'igralec'             => true,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -304,6 +306,8 @@ class PogodbaCest
             'konec'               => '2017-03-01T00:00:00+0100',
             'vrednostDoPremiere'  => 62.13,
             'zaposlenVDrJz'       => FALSE,
+            'samozaposlen'        => true,
+            'igralec'             => true,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -329,6 +333,8 @@ class PogodbaCest
             'konec'               => '2014-04-01T00:00:00+0100',
             'vrednostDoPremiere'  => 67.72,
             'zaposlenVDrJz'       => true,
+            'samozaposlen'        => FALSE,
+            'igralec'             => true,
         ];
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -355,6 +361,8 @@ class PogodbaCest
             'konec'               => '2013-04-01T00:00:00+0100',
             'vrednostDoPremiere'  => 67.11,
             'zaposlenVDrJz'       => true,
+            'samozaposlen'        => FALSE,
+            'igralec'             => true,
         ];
         $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -380,6 +388,8 @@ class PogodbaCest
             'konec'               => '2013-04-01T00:00:00+0100',
             'vrednostDoPremiere'  => 67.11,
             'zaposlenVDrJz'       => true,
+            'samozaposlen'        => FALSE,
+            'igralec'             => true,
         ];
         $this->obj5 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -433,7 +443,9 @@ class PogodbaCest
         $I->assertEquals($ent['trr'], $this->objTrr['id']);
         $I->assertEquals($ent['zacetek'], '2012-02-01T00:00:00+0100');
         $I->assertEquals($ent['konec'], '2014-02-01T00:00:00+0100');
-        $I->assertEquals($ent['zaposlenVDrJz'], true);
+        $I->assertEquals($ent['zaposlenVDrJz'], true, "zaposlen v drugem JZ");
+        $I->assertEquals($ent['samozaposlen'], FALSE, "samozaposlen");
+        $I->assertEquals($ent['igralec'], true, "igralec");
     }
 
     /**
@@ -646,6 +658,26 @@ class PogodbaCest
     }
 
     /**
+     * test validacije - ne more biti samozaposlen in 
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updatePogodbaSamozaposlenInZaposlenVDrugemJz(ApiTester $I)
+    {
+//       $this->expect(!($this->zaposlenVDrJz && $this->samozaposlen), "Oseba ne more biti hkrati zaposlena v drugem jz in samozaposlena", 1000345);
+
+        $ent                  = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $I->assertNotEmpty($ent);
+        $ent['samozaposlen']  = true;
+        $ent['zaposlenVDrJz'] = true;
+        $resp                 = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertNotEmpty($resp);
+        // testiramo na enako številko napake kot je v validaciji
+        $I->assertEquals(1000345, $resp[0]['code']);
+    }
+
+    /**
      * spremenim pogodbo in preverim preračun
      * 
      * @depends create
@@ -656,10 +688,10 @@ class PogodbaCest
         // plačilo na vajo
         $ent                        = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         $I->assertNotEmpty($ent);
-        $ent['placiloNaVajo'] = true;
-        $ent['vrednostVaje'] = 13.45;
+        $ent['placiloNaVajo']       = true;
+        $ent['vrednostVaje']        = 13.45;
         $ent['planiranoSteviloVaj'] = 10;
-        $ent['vrednostVaj'] = 0;
+        $ent['vrednostVaj']         = 0;
         $ent                        = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $entR                       = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         $I->assertEquals(134.50, $entR['vrednostDoPremiere'], "vrednost do premiere (st.vaj x vrVaje)");
@@ -668,10 +700,10 @@ class PogodbaCest
         // plačilo za vse vaje
         $ent                        = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         $I->assertNotEmpty($ent);
-        $ent['placiloNaVajo'] = false;
-        $ent['vrednostVaje'] = 13.45;
+        $ent['placiloNaVajo']       = false;
+        $ent['vrednostVaje']        = 13.45;
         $ent['planiranoSteviloVaj'] = 10;
-        $ent['vrednostVaj'] = 200.14;
+        $ent['vrednostVaj']         = 200.14;
         $ent                        = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $entR                       = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         $I->assertEquals(200.14, $entR['vrednostDoPremiere'], "vrednost do premiere (vrednost vseh vaj)");

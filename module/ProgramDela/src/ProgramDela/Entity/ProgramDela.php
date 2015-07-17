@@ -100,8 +100,8 @@ class ProgramDela
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramFestival", mappedBy="programDela")
      * @var <ProgramiFestival>
-     */ 
-   protected $programiFestival;
+     */
+    protected $programiFestival;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramGostujoca", mappedBy="dokument")
@@ -419,6 +419,15 @@ class ProgramDela
     protected $stHonorarnihIgrTujJZ;
 
     /**
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stHonorarnihIgrSamoz", description="programDela.d.stHonorarnihIgrSamoz")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stHonorarnihIgrSamoz;
+
+    /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaInt", description="programDela.d.sredstvaInt")   
      * @var double
@@ -523,6 +532,7 @@ class ProgramDela
         $this->stHonorarnih         = 0;  //init
         $this->stHonorarnihIgr      = 0;  //init
         $this->stHonorarnihIgrTujJZ = 0;  //init
+        $this->stHonorarnihIgrSamoz = 0;  //init
         $this->sredstvaAvt          = 0;  //init
         $this->sredstvaInt          = 0;  //init
         $this->stKoprodukcij        = 0;  //init
@@ -547,6 +557,7 @@ class ProgramDela
             $this->stHonorarnih +=$object->getStHonorarnih();
             $this->stHonorarnihIgr +=$object->getStHonorarnihIgr();
             $this->stHonorarnihIgrTujJZ +=$object->getStHonorarnihIgrTujJZ();
+            $this->stHonorarnihIgrSamoz +=$object->getStHonorarnihIgrSamoz();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
             $this->prerSredstva($object);
             $this->prerStKopr($object);
@@ -597,6 +608,7 @@ class ProgramDela
             $this->stHonorarnih +=$object->getStHonorarnih();
             $this->stHonorarnihIgr +=$object->getStHonorarnihIgr();
             $this->stHonorarnihIgrTujJZ +=$object->getStHonorarnihIgrTujJZ();
+            $this->stHonorarnihIgrSamoz +=$object->getStHonorarnihIgrSamoz();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
 
             switch ($object->getTipProgramskeEnote()->getSifra()) {
@@ -1330,6 +1342,17 @@ class ProgramDela
     public function setZakljuceno($zakljuceno)
     {
         $this->zakljuceno = $zakljuceno;
+        return $this;
+    }
+
+    public function getStHonorarnihIgrSamoz()
+    {
+        return $this->stHonorarnihIgrSamoz;
+    }
+
+    public function setStHonorarnihIgrSamoz($stHonorarnihIgrSamoz)
+    {
+        $this->stHonorarnihIgrSamoz = $stHonorarnihIgrSamoz;
         return $this;
     }
 

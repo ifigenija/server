@@ -59,8 +59,9 @@ class PodatkiUprizoritveCest
         $I->assertGreaterThanOrEqual(2, $resp['stZaposUmet'], "št. zaposlenih umetnikov"); //$$ prej 2
         $I->assertGreaterThanOrEqual(1, $resp['stZaposDrug'], "št. zaposl. drugih");  //$$ PREJ 3
         $I->assertGreaterThanOrEqual(3, $resp['stHonorarnih']);
-        $I->assertGreaterThanOrEqual(2, $resp['stHonorarnihIgr']);
+        $I->assertGreaterThanOrEqual(2, $resp['stHonorarnihIgr'],"honorarnih igralcev");
         $I->assertGreaterThanOrEqual(1, $resp['stHonorarnihIgrTujJZ']);
+        $I->assertGreaterThanOrEqual(1, $resp['stHonorarnihIgrSamoz']);
         $I->assertEquals("2016-01-01T00:00:00+01:00", $resp['datumZacStudija']);
         $I->assertEquals("2016-04-20T00:00:00+02:00", $resp['datumPremiere']);
     }
