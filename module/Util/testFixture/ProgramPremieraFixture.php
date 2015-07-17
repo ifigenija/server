@@ -62,13 +62,14 @@ class ProgramPremieraFixture
         $o->setAvtorskePravice($v[7]);
         $o->setDrugiJavni($v[8]);
         $o->setUtemeljitev($v[9]);
-        $o->setStZaposUmet         ($v[10]);
-        $o->setStZaposDrug             ($v[11]);
-        $o->setStHonorarnih         ($v[12]);
-        $o->setStHonorarnihIgr      ($v[13]);
-        $o->setStHonorarnihIgrTujJZ ($v[14]);
-        $o->setNasDelez ($v[15]);
-        
+        $o->setStZaposUmet($v[10]);
+        $o->setStZaposDrug($v[11]);
+        $o->setStHonorarnih($v[12]);
+        $o->setStHonorarnihIgr($v[13]);
+        $o->setStHonorarnihIgrTujJZ($v[14]);
+        $o->setNasDelez($v[15]);
+        $o->setObiskDoma($v[16]);
+
         $o->preracunaj();
         $o->validate();
         $referenca = 'ProgramPremiera-' . $v[0];
@@ -79,8 +80,8 @@ class ProgramPremieraFixture
     public function getData()
     {
         return [
-            ['Uprizoritev-0001', 10000.80, '04', 40, 2222.3, 4000.4,200.2,200.3, 100.2, "Raznovrstni dogodek", 2,2,2,2,2,9000.3, ],
-            ['Uprizoritev-0002', 5000, '05', 40 , 1000.2,600.7,200.2,200.2, 100.2, "Širjenje kulture med mladimi", 3,3,3,3,3, 4900.2, ],
+            ['Uprizoritev-0001', 10000.80, '04', 40, 2222.3, 4000.4, 200.2, 200.3, 100.2, "Raznovrstni dogodek", 2, 2, 2, 2, 2, 9000.3,40,],
+            ['Uprizoritev-0002', 5000, '05', 40, 1000.2, 600.7, 200.2, 200.2, 100.2, "Širjenje kulture med mladimi", 3, 3, 3, 3, 3, 4900.2,60,],
         ];
     }
 

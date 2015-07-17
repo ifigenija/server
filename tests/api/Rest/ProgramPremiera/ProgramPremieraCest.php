@@ -63,6 +63,7 @@ class ProgramPremieraCest
     {
         
     }
+
     /**
      * 
      * @param ApiTester $I
@@ -97,7 +98,6 @@ class ProgramPremieraCest
         codecept_debug($lookPH);
     }
 
-
     /**
      * 
      * @param ApiTester $I
@@ -127,18 +127,18 @@ class ProgramPremieraCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'celotnaVrednost'      =>1.24,
-            'nasDelez'             =>1.24,
+            'celotnaVrednost'      => 1.24,
+            'nasDelez'             => 1.24,
             'zaprosenProcent'      => 100,
 //            'zaproseno'            =>1.24,
-            'lastnaSredstva'       =>1.24,
-            'avtorskiHonorarji'    =>1.24,
-            'tantieme'             =>1.24,
-            'avtorskePravice'             =>1.24,
-            'drugiViri'            =>1.24,
+            'lastnaSredstva'       => 1.24,
+            'avtorskiHonorarji'    => 1.24,
+            'tantieme'             => 1.24,
+            'avtorskePravice'      => 1.24,
+            'drugiViri'            => 1.24,
 //            'vlozekGostitelja'     =>1.24,
-            'drugiJavni'           =>1.24,
-//            'obiskDoma'          => 1,
+            'drugiJavni'           => 1.24,
+            'obiskDoma'            => 1,
 //            'obiskGost'          => 1,
 //            'obiskZamejo'        => 1,
 //            'obiskInt'           => 1,
@@ -172,11 +172,11 @@ class ProgramPremieraCest
             'lastnaSredstva'       => 4.56,
             'avtorskiHonorarji'    => 4.56,
             'tantieme'             => 4.56,
-            'avtorskePravice'             => 4.56,
+            'avtorskePravice'      => 4.56,
             'drugiViri'            => 4.56,
 //            'vlozekGostitelja'     => 4.56,
             'drugiJavni'           => 4.56,
-//            'obiskDoma'          => 4,
+            'obiskDoma'            => 4,
 //            'obiskGost'          => 4,
 //            'obiskZamejo'        => 4,
 //            'obiskInt'           => 4,
@@ -209,7 +209,7 @@ class ProgramPremieraCest
      */
     public function update(ApiTester $I)
     {
-        $ent              = $this->obj1;
+        $ent                    = $this->obj1;
         $ent['zaprosenProcent'] = 50;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
@@ -227,20 +227,20 @@ class ProgramPremieraCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
         codecept_debug($ent);
-        
+
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['celotnaVrednost'],1.24);
-        $I->assertEquals($ent['nasDelez'],1.24);
+        $I->assertEquals($ent['celotnaVrednost'], 1.24);
+        $I->assertEquals($ent['nasDelez'], 1.24);
         $I->assertEquals($ent['zaprosenProcent'], 50.00);
         $I->assertEquals($ent['zaproseno'], 0.62, "izračunano zaprošeno");
-        $I->assertEquals($ent['lastnaSredstva'],1.24);
-        $I->assertEquals($ent['avtorskiHonorarji'],1.24);
-        $I->assertEquals($ent['tantieme'],1.24);
-        $I->assertEquals($ent['avtorskePravice'],1.24);
+        $I->assertEquals($ent['lastnaSredstva'], 1.24);
+        $I->assertEquals($ent['avtorskiHonorarji'], 1.24);
+        $I->assertEquals($ent['tantieme'], 1.24);
+        $I->assertEquals($ent['avtorskePravice'], 1.24);
 //        $I->assertEquals($ent['drugiViri'],1.24);
 //        $I->assertEquals($ent['vlozekGostitelja'],1.24);
-        $I->assertEquals($ent['drugiJavni'],1.24);
-//        $I->assertEquals($ent['obiskDoma'          ],1 );
+        $I->assertEquals($ent['drugiJavni'], 1.24);
+        $I->assertEquals($ent['obiskDoma'], 1);
 //        $I->assertEquals($ent['obiskGost'          ],1 );
 //        $I->assertEquals($ent['obiskZamejo'        ],1 );
 //        $I->assertEquals($ent['obiskInt'           ],1 );
@@ -312,7 +312,7 @@ class ProgramPremieraCest
     public function createVecDrugihVirov(ApiTester $I)
     {
         $data               = [
-            'znesek'        =>1.24,
+            'znesek'        => 1.24,
             'opis'          => "zz",
             'enotaPrograma' => $this->obj2['id'],
             'mednarodni'    => FALSE,
@@ -322,7 +322,7 @@ class ProgramPremieraCest
 
         // kreiramo še en zapis
         $data               = [
-            'znesek'        =>1.24,
+            'znesek'        => 1.24,
             'opis'          => "dd",
             'enotaPrograma' => $this->obj2['id'],
             'mednarodni'    => true,

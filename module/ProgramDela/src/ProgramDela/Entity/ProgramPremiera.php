@@ -30,16 +30,16 @@ class ProgramPremiera
         $this->setStZaposlenih(0);
         $this->setCelotnaVrednostMat(0);
         $this->setCelotnaVrednostGostovSZ(0);
-        $this->setObiskDoma(0);
         $this->setObiskGost(0);
         $this->setObiskZamejo(0);
         $this->setObiskInt(0);
-        $this->setPonoviDoma(0);
         $this->setPonoviZamejo(0);
         $this->setPonoviGost(0);
         $this->setPonoviInt(0);
         $this->setVlozekGostitelja(0);
         $this->setNaziv("");        // dobimo iz uprizoritve
+
+        $this->setPonoviDoma(1);        // le premiera
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {

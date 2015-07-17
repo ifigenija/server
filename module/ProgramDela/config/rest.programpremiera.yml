@@ -17,7 +17,7 @@ forms:
 #            - drugiViri
 #            - vlozekGostitelja      
             - drugiJavni
-#            - obiskDoma
+            - obiskDoma
 #            - obiskGost
 #            - obiskZamejo
 #            - obiskInt
