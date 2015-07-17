@@ -38,7 +38,7 @@ class Funkcije
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
-                $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 770051);
+                $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1000670);
                 $crit = new Criteria();
                 $e    = $crit->expr();
 
@@ -47,7 +47,7 @@ class Funkcije
                     $exp         = $e->eq('uprizoritev', $uprizoritev);
                     $crit->andWhere($exp);
                 }
-
+                $podrocje = $options['podrocje']; // $$ začasno
                 if (!empty($options['podrocje'])) {
                     $exp = $e->eq('podrocje', $options['podrocje']);
                     $crit->andWhere($exp);

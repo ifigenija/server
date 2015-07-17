@@ -8,7 +8,6 @@ forms:
 #            - id
             - ime
             - opis
-            - nastopajoc
             - imeZenski
             - podrocje
 #            - funkcije

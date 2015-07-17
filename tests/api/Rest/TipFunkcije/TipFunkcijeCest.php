@@ -55,7 +55,6 @@ class TipFunkcijeCest
             'opis'       => 'zz',
             'imeZenski'  => 'zz',
             'podrocje'   => 'umetnik',
-            'nastopajoc' => false,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -66,7 +65,6 @@ class TipFunkcijeCest
         $data = [
             'ime'        => 'aa',
             'opis'       => 'aa',
-            'nastopajoc' => TRUE,
             'imeZenski'  => 'aa',
             'podrocje'   => 'tehnik',
             'pomembnost' => 'aa',
@@ -140,7 +138,6 @@ class TipFunkcijeCest
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['ime'], 'zz');
         $I->assertEquals($ent['opis'], 'yy');
-        $I->assertEquals($ent['nastopajoc'], FALSE);
         $I->assertEquals($ent['imeZenski'], 'zz');
         $I->assertEquals($ent['podrocje'], 'umetnik');
         $I->assertTrue(isset($ent['funkcije']), "ali so funkcije");

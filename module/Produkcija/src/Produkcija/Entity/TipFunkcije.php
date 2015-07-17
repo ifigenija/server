@@ -5,6 +5,7 @@ namespace Produkcija\Entity;
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * 
  * Tip funkcije / vloge, ki je standariziran v skladu s SLOGI (Slovenski gledališki inštitut)
@@ -12,7 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="Produkcija\Repository\TipiFunkcije")
  * @Max\I18n(label="Tip funkcije",plural="Tipi funkcije")
  * @Max\Id(prefix="0015")
- * @Max\Lookup(ident="",label="ime", extra={"opis","podrocje","nastopajoc"},search={"ime","opis","podrocje"})
+ * @Max\Lookup(ident="",label="ime", extra={"opis","podrocje"},search={"ime","opis","podrocje"})
  * @todo $$ rb preveri fixturje oz. TestZaFixture, ali sploh rabimo maksimalno število prekrivanj, razvrščenost v področje ipd.
  */
 class TipFunkcije
@@ -43,14 +44,6 @@ class TipFunkcije
      * @var string
      */
     protected $opis;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="tipFunkcije.nastopajoc", description="tipFunkcije.d.nastopajoc")
-     * @Max\Ui(type="boolcheckbox")
-     * @var boolean
-     */
-    protected $nastopajoc;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -147,17 +140,6 @@ class TipFunkcije
     public function setFunkcije($funkcije)
     {
         $this->funkcije = $funkcije;
-        return $this;
-    }
-
-    public function getNastopajoc()
-    {
-        return $this->nastopajoc;
-    }
-
-    public function setNastopajoc($nastopajoc)
-    {
-        $this->nastopajoc = $nastopajoc;
         return $this;
     }
 

@@ -36,15 +36,14 @@ class TipFunkcijeFixture
 
         $rep = $manager->getRepository('Produkcija\Entity\TipFunkcije');
 
-        $o = $rep->findOneByIme(trim($v[0]));
+        $o = $rep->findOneByIme(trim($v[1]));
         if (!$o) {
             $o = new \Produkcija\Entity\TipFunkcije();
-            $o->setIme(trim($v[0]));
+            $o->setIme(trim($v[1]));
             $manager->persist($o);
         }
 
-        $o->setOpis($v[1]);
-        $o->setNastopajoc($v[2]);
+        $o->setOpis($v[2]);
         $o->setImeZenski($v[3]);
         if ($v[4]) {
             $o->setPodrocje($v[4]);
@@ -58,22 +57,25 @@ class TipFunkcijeFixture
 //            ['Inšpicient', 'Inšpicienti', FALSE,  'Inšpicientka', null,],
 //            ['Tehnični vodja', 'Tehnične vodje', false,  'Tehnični vodja', null,],
             // tipi funkcije iz SLOGI:
-            ['Igralec ali animator', 'Igralci in animatorji', TRUE,  'Igralka ali animatorka', 'igralec',],
-            ['Baletnik ali plesalec', 'Baletniki in plesalci', TRUE, 'Baletnica ali plesalka', 'igralec',],
-            ['Avtor', 'Avtorji', TRUE, 'Avtorka', 'umetnik',],
-            ['Režiser', 'Režiserji', TRUE, 'Režiserka', 'umetnik',],
-            ['Scenograf', 'Scenografi', TRUE, 'Scenografka', 'tehnik',],
-            ['Kostumograf', 'Kostumografi', TRUE, 'Kostumografinja', 'tehnik',],
-            ['Oblikovalec maske', 'Oblikovalci maske', TRUE,  'Oblikovalka maske', 'tehnik',],
-            ['Avtor glasbe', 'Avtorji glasbe', TRUE,  'Avtorica glasbe', 'umetnik',],
-            ['Oblikovalec svetlobe', 'Oblikovalci svetlobe', TRUE,  'Oblikovalka svetlobe', 'tehnik',],
-            ['Koreograf', 'Koreografi', TRUE,  'Koreografinja', 'umetnik',],
-            ['Dramaturg', 'Dramaturgi', TRUE,  'Dramaturginja', 'umetnik',],
-            ['Lektor', 'Lektorji', TRUE,  'Lektorica', 'umetnik',],
-            ['Prevajalec', 'Prevajalci', TRUE,  'Prevajalka', 'umetnik',],
-            ['Oblikovalec videa', 'Oblikovalci videa', TRUE,  'Oblikovalka videa', 'umetnik',],
-            ['Intermedijski ustvarjalec', 'Intermedijski ustvarjalci', TRUE,  'Intermedijska ustvarjalka', 'umetnik',],
-            ['Nerazvrščeno', 'Nerazvrščeno', TRUE,  'Nerazvrščeno', null,],
+            ['01','Igralec ali animator', 'Igralci in animatorji',   'Igralka ali animatorka', 'igralec',],
+            ['02','Baletnik ali plesalec', 'Baletniki in plesalci','Baletnica ali plesalka', 'igralec',],
+            ['03','Avtor', 'Avtorji',  'Avtorka', 'umetnik',],
+            ['04','Režiser', 'Režiserji',  'Režiserka', 'umetnik',],
+            ['05','Scenograf', 'Scenografi', 'Scenografka', 'tehnik',],
+            ['06','Kostumograf', 'Kostumografi',  'Kostumografinja', 'tehnik',],
+            ['07','Oblikovalec maske', 'Oblikovalci maske',   'Oblikovalka maske', 'tehnik',],
+            ['08','Avtor glasbe', 'Avtorji glasbe',   'Avtorica glasbe', 'umetnik',],
+            ['09','Oblikovalec svetlobe', 'Oblikovalci svetlobe',   'Oblikovalka svetlobe', 'tehnik',],
+            ['10','Koreograf', 'Koreografi',   'Koreografinja', 'umetnik',],
+            ['11','Dramaturg', 'Dramaturgi',   'Dramaturginja', 'umetnik',],
+            ['12','Lektor', 'Lektorji',   'Lektorica', 'umetnik',],
+            ['13','Prevajalec', 'Prevajalci',   'Prevajalka', 'umetnik',],
+            ['14','Oblikovalec videa', 'Oblikovalci videa',   'Oblikovalka videa', 'umetnik',],
+            ['15','Intermedijski ustvarjalec', 'Intermedijski ustvarjalci',   'Intermedijska ustvarjalka', 'umetnik',],
+            ['16','Nerazvrščeno', 'Nerazvrščeno',   'Nerazvrščeno', null,],
+            ['17','Inšpicient', 'Inšpicienti',   'Inšpicientka', 'inspicient',],
+            ['18','Šepetalec', 'Šepetalci',   'Šepetalka', 'sepetalec',],
+            ['19','Tehnični vodja', 'Tehnične vodje',   'Tehnični vodja', 'tehnik',],
         ];
     }
 
