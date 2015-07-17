@@ -95,3 +95,5 @@
            label: Materialni strošek
         tantiema:
            label: Strošek tantieme
+        avtorprav:
+           label: Strošek odkupa avtorskih pravic

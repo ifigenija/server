@@ -109,6 +109,13 @@ class EnotaPrograma
     protected $tantieme;
 
     /**
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="ep.avtorskePravice", description="ep.d.avtorskePravice")   
+     * @var double
+     */
+    protected $avtorskePravice;
+
+    /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\DrugiVir", mappedBy="enotaPrograma", orphanRemoval=true)
      * @var <drugiViri>
      */

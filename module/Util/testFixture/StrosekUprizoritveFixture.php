@@ -45,6 +45,8 @@ class StrosekUprizoritveFixture
 
 
         $o = new \Produkcija\Entity\StrosekUprizoritve();
+        $manager->persist($o);
+
         $o->setNaziv(trim($v[0]));
         $o->setVrednostDo(trim($v[1]));
         $o->setVrednostNa(trim($v[2]));
@@ -57,7 +59,6 @@ class StrosekUprizoritveFixture
         $o->setPopa($getref);
         $o->setTipstroska(trim($v[7]));
 
-        $manager->persist($o);
 
         $referenca = 'StrosekUprizoritve-' . $v[0];
         var_dump($referenca);
@@ -70,6 +71,7 @@ class StrosekUprizoritveFixture
             ['Nabava kostumov', 600.50, 20, "Krila in maske", 1, "Uprizoritev-0002", "Popa-0988","materialni"],
             ['Zavese', 125.70, 3.1, "Modra in zelena zavesa", 2, "Uprizoritev-0002", "Popa-0988","materialni"],
             ['Tantiema', 200, 10, "Tantiema za besedilo", 3, "Uprizoritev-0002", "Popa-0985","tantiema"],
+            ['Avtorske pravice', 300, 30, "Odkup avtorskih pravic", 4, "Uprizoritev-0002", "Popa-0985","avtorprav"],
         ];
     }
 
