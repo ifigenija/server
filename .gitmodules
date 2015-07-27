@@ -4,3 +4,6 @@
 [submodule "module/Stevilcenje"]
 	path = module/Stevilcenje
 	url = http://git.max.si/ifigenija/stevilcenje
+[submodule "module/Zapisi"]
+	path = module/Zapisi
+	url = http://git.max.si/tip2/zapisi
