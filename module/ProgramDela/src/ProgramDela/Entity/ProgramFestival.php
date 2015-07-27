@@ -17,7 +17,7 @@ class ProgramFestival
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="programiFestival")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
-     * @Max\I18n(label="festival.programDela", description="festival.programDela")
+     * @Max\I18n(label="festival.programDela", description="festival.d.programDela")
      * @Max\Ui(type="hiddenid")
      * @var \ProgramDela\Entity\ProgramDela
      */
@@ -25,14 +25,14 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="string")
-     * @Max\I18n(label="entiteta.zvrst", description="entiteta.zvrst")
+     * @Max\I18n(label="festival.zvrst", description="festival.d.zvrst")
      * @var string
      */
     protected $zvrst;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="festival.stPredstav", description="festival.stPredstav")
+     * @Max\I18n(label="festival.stPredstav", description="festival.d.stPredstav")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -40,7 +40,7 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="festival.stOkroglihMiz", description="festival.stOkroglihMiz")
+     * @Max\I18n(label="festival.stOkroglihMiz", description="festival.d.stOkroglihMiz")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -48,7 +48,7 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="festival.stPredstavitev", description="festival.stPredstavitev")
+     * @Max\I18n(label="festival.stPredstavitev", description="festival.d.stPredstavitev")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -56,7 +56,7 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="festival.stDelavnic", description="festival.stDelavnic")
+     * @Max\I18n(label="festival.stDelavnic", description="festival.d.stDelavnic")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -64,7 +64,7 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="festival.stDrugiDogodki", description="festival.stDrugiDogodki")
+     * @Max\I18n(label="festival.stDrugiDogodki", description="festival.d.stDrugiDogodki")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -72,7 +72,7 @@ class ProgramFestival
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="festival.opredelitevDrugiDogodki", description="festival.opredelitevDrugiDogodki")
+     * @Max\I18n(label="festival.opredelitevDrugiDogodki", description="festival.d.opredelitevDrugiDogodki")
      * @var string
      */
     protected $opredelitevDrugiDogodki;
@@ -89,7 +89,7 @@ class ProgramFestival
      * $$ preveri mersko enoto; ali v mesecih, dnevih , človek dnevih?
      * 
      * @ORM\Column(type="string")
-     * @Max\I18n(label="festival.casPriprave", description="festival.casPriprave")
+     * @Max\I18n(label="festival.casPriprave", description="festival.d.casPriprave")
      * @var string
      */
     protected $casPriprave;
@@ -98,35 +98,35 @@ class ProgramFestival
      * $$ preveri mersko enoto; ali v mesecih, dnevih , človek dnevih?
      * 
      * @ORM\Column(type="string")
-     * @Max\I18n(label="festival.casIzvedbe", description="festival.casIzvedbe")
+     * @Max\I18n(label="festival.casIzvedbe", description="festival.d.casIzvedbe")
      * @var string
      */
     protected $casIzvedbe;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="festival.prizorisca", description="festival.prizorisca")
+     * @Max\I18n(label="festival.prizorisca", description="festival.d.prizorisca")
      * @var string
      */
     protected $prizorisca;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="festival.umetVodja", description="festival.umetVodja")
+     * @Max\I18n(label="festival.umetVodja", description="festival.d.umetVodja")
      * @var string
      */
     protected $umetVodja;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="festival.programskoTelo", description="festival.programskoTelo")
+     * @Max\I18n(label="festival.programskoTelo", description="festival.d.programskoTelo")
      * @var string
      */
     protected $programskoTelo;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="festival.soorganizatorji", description="festival.soorganizatorji")
+     * @Max\I18n(label="festival.soorganizatorji", description="festival.d.soorganizatorji")
      * @var string
      */
     protected $soorganizatorji;

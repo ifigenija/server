@@ -35,7 +35,7 @@ class Permission
      * @ORM\Column(length=150, nullable=true)
      * @var string
      *
-     * @Max\I18n(label="entiteta.naziv", description="entiteta.naziv")
+     * @Max\I18n(label="permission.naziv", description="permission.d.naziv")
      * @Max\Ui(type="sifra",ident=true )
      */
     protected $name;
@@ -45,7 +45,7 @@ class Permission
      *
      * @ORM\Column(type="text", nullable=true)
      *
-     * @Max\I18n(label="entiteta.opis", description="entiteta.opis")
+     * @Max\I18n(label="permission.opis", description="permission.d.opis")
      *
      */
     protected $description;
@@ -53,7 +53,7 @@ class Permission
     /**
      * A je dovoljene vgrajeno v sistem, ali pa dodano kasneje.
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="entiteta.builtIn", description="permission.d.builtIn")
+     * @Max\I18n(label="permission.builtIn", description="permission.d.builtIn")
      */
     protected $builtIn = false;
 

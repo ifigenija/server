@@ -113,7 +113,7 @@ class User
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="entiteta.email", description="user.d.email") 
+     * @Max\I18n(label="user.email", description="user.d.email") 
      * @Max\Ui(type="email", ident=true)
      */
     protected $email;

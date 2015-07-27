@@ -163,7 +163,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="entiteta.opis", description="entiteta.d.opis")
+     * @Max\I18n(label="uprizoritev.opis", description="uprizoritev.d.opis")
      * @var string
      */
     protected $opis;
