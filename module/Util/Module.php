@@ -38,6 +38,7 @@ Class Module
                 'module/Abonmaji/autoload_classmap.php',
                 'module/Stevilcenje/autoload_classmap.php',
                 'module/ProgramDela/autoload_classmap.php',
+                'module/Zapisi/autoload_classmap.php',
 
             ]
         ];

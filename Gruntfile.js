@@ -60,6 +60,10 @@ module.exports = function (grunt) {
                 cwd: 'tests/TestAssets',
                 cmd: classmap_generator
             },
+            autoload_zapisi: {
+                cwd: 'module/Zapisi',
+                cmd: classmap_generator
+            },
             proxies: {
                 cmd: function () {
                     if (os.platform() === 'win32') {
