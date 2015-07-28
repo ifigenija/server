@@ -70,6 +70,7 @@ forms:
                 - izjemni.uprizoritev
                 - gostujoci.uprizoritev
                 - gostovanja.gostitelj
+                - gostovanja.uprizoritev
                 - programiRazno.soorganizator
             byValue: 
                 - premiere
