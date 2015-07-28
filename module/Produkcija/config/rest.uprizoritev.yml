@@ -29,10 +29,10 @@ forms:
             - datumZakljucka
             - sloAvtor
             - kratkiNaslov
-            - name: maticniProstor
-              type: multiselect
-              options: 
-                  multiple: false
+#            - name: maticniProstor
+#              type: multiselect
+#              options: 
+#                  multiple: false
 #            - koprodukcije
 #            - funkcije
 #            - arhiv
