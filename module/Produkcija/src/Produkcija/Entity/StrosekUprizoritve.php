@@ -59,7 +59,7 @@ class StrosekUprizoritve
      * @Max\Ui(type="select",opts="strosekuprizoritve.tipstroska")
      * @var string
      */
-    protected $tipStroska;
+    protected $tipstroska;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
