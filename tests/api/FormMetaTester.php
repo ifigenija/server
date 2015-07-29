@@ -31,7 +31,7 @@ class FormMetaTester
         $formMeta = $I->grabDataFromJsonResponse();
 
         $I->assertNotEmpty($formMeta, 'Prazni metapodatki za ' . $entity);
-        foreach ($formMeta as $field) {
+       foreach ($formMeta['schema'] as $field) {
             $I->assertTrue(array_key_exists('name', $field), "Ima name");
             $I->assertTrue(array_key_exists('type', $field), "Ima type");
                         $I->assertNotEmpty($field['type']);
