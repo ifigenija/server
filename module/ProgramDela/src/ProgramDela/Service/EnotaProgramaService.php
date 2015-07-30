@@ -24,8 +24,12 @@ class EnotaProgramaService
      * npr. v program premiera, program ponovitve premiere ipd.
      * 
      * @param entity  $uprizoritev
+     * @param string $zacetek       začetek programa dela v ISO8601 obliki, npr. "1970-01-01T01:00:00+01:00"
+     * @param string $konec         konec programa dela v ISO8601 obliki, npr. "2999-01-01T01:00:00+01:00"
+     * 
+     * @returns data                strukturirani podatki uprizoritve 
      */
-    public function podatkiUprizoritve($uprizoritev)
+    public function podatkiUprizoritve($uprizoritev, $zacetek = \Max\Consts::MINISODATE, $konec = \Max\Consts::MAXISODATE)
     {
 
         $data = $this->initData();
@@ -67,35 +71,50 @@ class EnotaProgramaService
                 $podrocje = $tipfunkcije->getPodrocje();
             };
             foreach ($funkcija->getAlternacije() as $numAlt => $alternacija) {
-                if ($alternacija->getZaposlen()) {
-                    if (in_array($podrocje, ["igralec", "umetnik"])) {
-                        $data['stZaposUmet'] += 1;
-                    } else {
-                        $data['stZaposDrug'] += 1;
+                /**
+                 * upoštevamo le tiste alternacije, ki se vsaj delno prekrivajo z intervalom začetka in konca programa dela 
+                 */
+                $az       = is_null($alternacija->getZacetek())? null: $alternacija->getZacetek()->format('c');
+                $ak       = is_null($alternacija->getKonec())? null: $alternacija->getKonec()->format('c');
+                
+                /**
+                 * $začasno:
+                 */
+                $sifra=$alternacija->getSifra();
+                $baz=  $az <= $konec;
+                $bak= $ak >= $zacetek;
+
+                if ((!is_null($az) ? $az <= $konec : true ) && (!is_null($ak) ? $ak >= $zacetek : true )) {
+                    if ($alternacija->getZaposlen()) {
+                        if (in_array($podrocje, ["igralec", "umetnik"])) {
+                            $data['stZaposUmet'] += 1;
+                        } else {
+                            $data['stZaposDrug'] += 1;
+                        }
                     }
-                }
-                if ($alternacija->getPomembna()) {
-                    $oseba = $alternacija->getOseba();
-                    $this->expect($oseba, "Ni osebe pri alternaciji " . $alternacija->getSifra(), 1000952);
-                    array_push($data['Funkcije'], ["funkcija" => $funkcija->getNaziv(),
-                        "ime"      => $oseba->getIme(), "priimek"  => $oseba->getPriimek(),
-                        "sort"     => $alternacija->getSort()]);
-                }
-                if ($alternacija->getImaPogodbo()) {
-                    $data['stHonorarnih'] += 1;
-                    $pogodba = $alternacija->getPogodba();
-                    if ($pogodba) {
-                        if ($pogodba->getAktivna()) {
-                            //$$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
-                            $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
-                            $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
-                            if ($pogodba->getIgralec()) {
-                                $data['stHonorarnihIgr'] += 1;      //$$
-                                if ($pogodba->getZaposlenVDrJz()) {
-                                    $data['stHonorarnihIgrTujJZ'] += 1;
-                                }
-                                if ($pogodba->getSamozaposlen()) {
-                                    $data['stHonorarnihIgrSamoz'] += 1;
+                    if ($alternacija->getPomembna()) {
+                        $oseba = $alternacija->getOseba();
+                        $this->expect($oseba, "Ni osebe pri alternaciji " . $alternacija->getSifra(), 1000952);
+                        array_push($data['Funkcije'], ["funkcija" => $funkcija->getNaziv(),
+                            "ime"      => $oseba->getIme(), "priimek"  => $oseba->getPriimek(),
+                            "sort"     => $alternacija->getSort()]);
+                    }
+                    if ($alternacija->getImaPogodbo()) {
+                        $data['stHonorarnih'] += 1;
+                        $pogodba = $alternacija->getPogodba();
+                        if ($pogodba) {
+                            if ($pogodba->getAktivna()) {
+                                //$$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
+                                $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
+                                $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
+                                if ($pogodba->getIgralec()) {
+                                    $data['stHonorarnihIgr'] += 1;      //$$
+                                    if ($pogodba->getZaposlenVDrJz()) {
+                                        $data['stHonorarnihIgrTujJZ'] += 1;
+                                    }
+                                    if ($pogodba->getSamozaposlen()) {
+                                        $data['stHonorarnihIgrSamoz'] += 1;
+                                    }
                                 }
                             }
                         }
