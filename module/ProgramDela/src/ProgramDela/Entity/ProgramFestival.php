@@ -158,7 +158,6 @@ class ProgramFestival
         $this->setStHonorarnihIgrTujJZ(0);
         $this->setTantieme(0);
         $this->setAvtorskePravice(0);
-        $this->setUtemeljitev("");
         $this->setVlozekGostitelja(0);
 
         parent::preracunaj($smer);

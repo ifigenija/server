@@ -146,7 +146,6 @@ class ProgramPremieraCest
 //            'ponoviZamejo'       => 1,
 //            'ponoviGost'         => 1,
 //            'ponoviInt'          => 1,
-            'utemeljitev'          => 'zz',
             'uprizoritev'          => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
@@ -161,7 +160,6 @@ class ProgramPremieraCest
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['utemeljitev'], 'zz');
 
         // kreiramo še en zapis
         $data       = [
@@ -184,7 +182,6 @@ class ProgramPremieraCest
 //            'ponoviZamejo'       => 4,
 //            'ponoviGost'         => 4,
 //            'ponoviInt'          => 4,
-            'utemeljitev'          => 'aa',
             'uprizoritev'          => NULL,
             'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
             'dokument'             => null,
@@ -198,7 +195,6 @@ class ProgramPremieraCest
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['utemeljitev'], 'aa');
     }
 
     /**
@@ -248,7 +244,6 @@ class ProgramPremieraCest
 //        $I->assertEquals($ent['ponoviZamejo'       ],1 );
 //        $I->assertEquals($ent['ponoviGost'         ],1 );
 //        $I->assertEquals($ent['ponoviInt'          ],1 );
-        $I->assertEquals($ent['utemeljitev'], 'zz');
         $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev['id']);
         $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
         $I->assertEquals($ent['dokument'], null);

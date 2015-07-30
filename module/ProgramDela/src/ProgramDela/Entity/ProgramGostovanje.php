@@ -87,7 +87,6 @@ class ProgramGostovanje
         $this->setStZaposlenih(0);
         $this->setStZaposUmet(0);
         $this->setStZaposDrug(0);
-        $this->setUtemeljitev("");
         $this->setNaziv("");        // dobimo iz uprizoritve
 
         parent::preracunaj($smer);

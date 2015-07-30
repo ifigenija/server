@@ -293,13 +293,6 @@ class EnotaPrograma
     protected $ponoviInt;
 
     /**
-     * @ORM\Column(type="text", nullable=false)
-     * @Max\I18n(label="ep.utemeljitev", description="ep.d.utemeljitev")   
-     * @var string     
-     */
-    protected $utemeljitev;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev")
      * @Max\I18n(label="ep.uprizoritev", description="ep.d.uprizoritev")   
      * @Max\Ui(type="toone")
@@ -558,11 +551,6 @@ class EnotaPrograma
         return $this->ponoviInt;
     }
 
-    public function getUtemeljitev()
-    {
-        return $this->utemeljitev;
-    }
-
     public function getUprizoritev()
     {
         return $this->uprizoritev;
@@ -748,12 +736,6 @@ class EnotaPrograma
     public function setPonoviInt($ponoviInt)
     {
         $this->ponoviInt = $ponoviInt;
-        return $this;
-    }
-
-    public function setUtemeljitev($utemeljitev)
-    {
-        $this->utemeljitev = $utemeljitev;
         return $this;
     }
 

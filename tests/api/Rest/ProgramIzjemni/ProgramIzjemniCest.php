@@ -101,7 +101,6 @@ class ProgramIzjemniCest
             'ponoviZamejo'      => 1,
             'ponoviGost'        => 1,
             'ponoviInt'            => 1,
-            'utemeljitev'       => 'zz',
 //            'uprizoritev'          => NULL,
 //            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
             'dokument'          => null,
@@ -115,7 +114,6 @@ class ProgramIzjemniCest
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['utemeljitev'], 'zz');
 
         // kreiramo še en zapis
         $data       = [
@@ -139,7 +137,6 @@ class ProgramIzjemniCest
             'ponoviZamejo'      => 4,
             'ponoviGost'        => 4,
             'ponoviInt'            => 4,
-            'utemeljitev'       => 'aa',
 //            'uprizoritev'          => NULL,
 //            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
             'dokument'          => null,
@@ -153,7 +150,6 @@ class ProgramIzjemniCest
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['utemeljitev'], 'aa');
     }
 
     /**
@@ -202,7 +198,6 @@ class ProgramIzjemniCest
         $I->assertEquals($ent['ponoviZamejo'], 1);
         $I->assertEquals($ent['ponoviGost'], 1);
         $I->assertEquals($ent['ponoviInt'], 1);
-        $I->assertEquals($ent['utemeljitev'], 'zz');
 //        $I->assertEquals($ent['uprizoritev'], NULL);
 //        $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
 

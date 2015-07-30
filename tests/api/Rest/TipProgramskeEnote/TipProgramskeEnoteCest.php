@@ -190,14 +190,12 @@ class TipProgramskeEnoteCest
             'ponoviInt'               => 1,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
-            'utemeljitev'             => 'zz',
             'uprizoritev'             => NULL,
             'tipProgramskeEnote'      => $this->obj2['id'],
             'dokument'                => null,
         ];
         $this->objProgramPremiera1 = $ent                       = $I->successfullyCreate($this->programPremieraUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['utemeljitev'], 'zz');
 
         //ponovitev prejšnjih sezon
         $data                                 = [
@@ -220,7 +218,6 @@ class TipProgramskeEnoteCest
             'ponoviZamejo'            => 1,
             'ponoviGost'              => 1,
 //            'ponoviInt'            => 1,
-            'utemeljitev'             => 'zz',
             'uprizoritev'             => NULL,
             'tipProgramskeEnote'      => $this->obj2['id'],
             'dokument'                => null,
@@ -233,7 +230,6 @@ class TipProgramskeEnoteCest
         ];
         $this->objProgramPonovitevPrejsnjih11 = $ent                                  = $I->successfullyCreate($this->programPonovitevPrejsnjihUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['utemeljitev'], 'zz');
 
         //ponovitev premiere
         $data = [
@@ -257,7 +253,6 @@ class TipProgramskeEnoteCest
             'ponoviZamejo'            => 1,
             'ponoviGost'              => 1,
             'ponoviInt'               => 1,
-            'utemeljitev'             => 'zz',
             'uprizoritev'             => NULL,
             'tipProgramskeEnote'      => $this->obj2['id'],
             'dokument'                => null,
@@ -266,7 +261,6 @@ class TipProgramskeEnoteCest
 
         $this->objProgramPonovitevPremiere1 = $ent                                = $I->successfullyCreate($this->programPonovitevPremiereUrl, $data);
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['utemeljitev'], 'zz');
     }
 
     /**
