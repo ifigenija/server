@@ -38,35 +38,10 @@ class Pogodbe
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
-                $this->expect(!(empty($options['popa']) && empty($options['oseba']) && empty($options['uprizoritev']) && empty($options['alternacija']) )
-                        , "Oseba ali Partner ali uprizoritev ali alternacija so obvezni", 770031);
+                $this->expect(!( empty($options['popa']) && empty($options['oseba']) && empty($options['uprizoritev']) )
+                        , "Oseba ali partner ali uprizoritev so obvezni", 770031);
                 $qb = $this->getDefaultQb($options);
                 return new DoctrinePaginator(new Paginator($qb));
-
-//                $qb = $this->createQueryBuilder('p');
-//                $e  = $qb->expr();
-//                $qb->join('p.alternacije', 'alternacija');
-//                $qb->join('alternacija.funkcija', 'funkcija');
-//                if (!empty($options['uprizoritev'])) {
-//                    $qb->join('funkcija.uprizoritev', 'uprizoritev');
-//                    $qb->andWhere($e->eq('uprizoritev.id', ':upr'));
-//                    $qb->setParameter('upr', $options['uprizoritev'], 'string');
-//                }
-//
-//                if (!empty($options['popa'])) {
-//                    $qb->andWhere($e->eq('p.popa', ':popa'));
-//                    $qb->setParameter('popa', $options['popa'], 'string');
-//                }
-//
-//                if (!empty($options['alternacije'])) {
-//                    $qb->andWhere($e->eq('p.alternacije', ':alternacije'));
-//                    $qb->setParameter('alternacije', $options['alternacije'], 'string');
-//                }
-//                if (!empty($options['oseba'])) {
-//                    $qb->andWhere($e->eq('p.oseba', ':oseba'));
-//                    $qb->setParameter('oseba', $options['oseba'], 'string');
-//                }
-//                return new DoctrinePaginator(new Paginator($qb));
         }
     }
 
@@ -100,7 +75,7 @@ class Pogodbe
         }
 
         if (!empty($options['uprizoritev'])) {
-            $qb->join('p.alternacija', 'alternacija');
+            $qb->join('p.alternacije', 'alternacija');
             $qb->join('alternacija.funkcija', 'funkcija');
             $qb->join('funkcija.uprizoritev', 'uprizoritev');
 
@@ -115,13 +90,6 @@ class Pogodbe
                 $qb->setParameter('alternacija', "{$options['alternacija']}", "string");
             }
         }
-        if (!empty($options['alternacija'])) {
-            $qb->join('p.alternacija', 'alternacija');
-            $naz = $e->eq('alternacija.id', ':alternacija');
-            $qb->andWhere($naz);
-            $qb->setParameter('alternacija', "{$options['alternacija']}", "string");
-        }
-
         if (!empty($options['popa'])) {
             $naz = $e->eq('p.popa', ':popa');
             $qb->andWhere($naz);
@@ -132,7 +100,6 @@ class Pogodbe
             $qb->andWhere($naz);
             $qb->setParameter('oseba', "{$options['oseba']}", "string");
         }
-
         return $qb;
     }
 
@@ -149,12 +116,7 @@ class Pogodbe
             $object->setSifra($num->generate('pogodba', new \DateTime()));
         }
 
-        if ($object->getAlternacija()) {
-            $object->getAlternacija()->setPogodba($object);
-        }
-
-        // preračunamo vrednosti v smeri navzgor
-        $object->preracunaj(\Max\Consts::UP);
+        $object->preracunaj();
 
         parent::create($object, $params);
     }
@@ -166,34 +128,9 @@ class Pogodbe
      */
     public function update($object, $params = null)
     {
-        // pri update-u ne dovolimo spremembe alternacije
-        $uow            = $this->getEntityManager()->getUnitOfWork();
-        $originalObject = $uow->getOriginalEntityData($object);
-        $object->setAlternacija($originalObject['alternacija']);    
-
-        if ($object->getAlternacija()) {
-            $object->getAlternacija()->setPogodba($object);
-        }
-
-        // preračunamo vrednosti v smeri navzgor
-        $object->preracunaj(\Max\Consts::UP);
+        $object->preracunaj();
 
         parent::update($object, $params);
-    }
-
-    /**
-     * 
-     * @param type $object entiteta
-     * @param type $params
-     */
-    public function delete($object)
-    {
-        if ($object->getAlternacija()) {
-            $object->getAlternacija()->setPogodba(NULL);
-        }
-        $object->preracunaj(\Max\Consts::UP);        // preračuna tudi alternacijo!
-
-        parent::delete($object);
     }
 
 }

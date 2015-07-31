@@ -153,13 +153,10 @@ class Pogodba
     protected $opis;
 
     /**
-     * 
-     * @ORM\OneToOne(targetEntity="Produkcija\Entity\Alternacija", mappedBy="pogodba")
-     * @Max\I18n(label="pogodba.alternacija",  description="pogodba.d.alternacija")
-     * @Max\Ui(type="hiddenid")
-     * @var \Produkcija\Entity\Alternacija
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="pogodba")
+     * @var <Alternacije>
      */
-    protected $alternacija;
+    protected $alternacije;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="pogodbe")
@@ -190,6 +187,11 @@ class Pogodba
      */
     protected $trr;
 
+    public function __construct()
+    {
+        $this->alternacije = new ArrayCollection();
+    }
+
     public function preracunaj($smer = false)
     {
         if ($this->placiloNaVajo) {
@@ -198,11 +200,6 @@ class Pogodba
             $this->vrednostDoPremiere = $this->vrednostVaj;
         }
         $this->vrednostDoPremiere = \Max\Functions::euroRound($this->vrednostDoPremiere);   //Zaokrožimo na 2 decimalki predno shranimo
-        if ($smer == \Max\Consts::UP) {
-            if ($this->getAlternacija()) {
-                $this->getAlternacija()->preracunaj(\Max\Consts::UP);
-            }
-        }
     }
 
     public function validate($mode = 'update')
@@ -211,217 +208,197 @@ class Pogodba
 //        $this->expect(!($this->popa && $this->oseba), "Pogodba nima subjekta. Subjekt je lahko samo ali poslovni partner ali oseba -ne oba hkrati", 1000341);
         $this->expect($this->sifra, "sifra je obvezen podatek", 1000342);
         $this->expect($this->oseba, "Pogodba nima subjekta. Oseba je obvezna", 1000343);
-        $this->expect($this->alternacija, "Alternacija je obvezen podatek", 1000344);
         $this->expect(!($this->zaposlenVDrJz && $this->samozaposlen), "Oseba ne more biti hkrati zaposlena v drugem jz in samozaposlena", 1000345);
     }
 
-    public function getId()
+    function getId()
     {
         return $this->id;
     }
 
-    public function getSifra()
+    function getSifra()
     {
         return $this->sifra;
     }
 
-    public function getZacetek()
+    function getZacetek()
     {
         return $this->zacetek;
     }
 
-    public function getKonec()
+    function getKonec()
     {
         return $this->konec;
     }
 
-    public function getPlaciloNaVajo()
+    function getPlaciloNaVajo()
     {
         return $this->placiloNaVajo;
     }
 
-    public function getVrednostVaje()
+    function getVrednostVaje()
     {
         return $this->vrednostVaje;
     }
 
-    public function getPlaniranoSteviloVaj()
+    function getPlaniranoSteviloVaj()
     {
         return $this->planiranoSteviloVaj;
     }
 
-    public function getVrednostVaj()
+    function getVrednostVaj()
     {
         return $this->vrednostVaj;
     }
 
-    public function getVrednostPredstave()
+    function getVrednostPredstave()
     {
         return $this->vrednostPredstave;
     }
 
-    public function getVrednostDoPremiere()
+    function getVrednostDoPremiere()
     {
         return $this->vrednostDoPremiere;
     }
 
-    public function getAktivna()
+    function getAktivna()
     {
         return $this->aktivna;
     }
 
-    public function getZaposlenVDrJz()
+    function getZaposlenVDrJz()
     {
         return $this->zaposlenVDrJz;
     }
 
-    public function getOpis()
-    {
-        return $this->opis;
-    }
-
-    public function getAlternacija()
-    {
-        return $this->alternacija;
-    }
-
-    public function getOseba()
-    {
-        return $this->oseba;
-    }
-
-    public function getPopa()
-    {
-        return $this->popa;
-    }
-
-    public function getTrr()
-    {
-        return $this->trr;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    public function setSifra($sifra)
-    {
-        $this->sifra = $sifra;
-        return $this;
-    }
-
-    public function setZacetek($zacetek)
-    {
-        $this->zacetek = $zacetek;
-        return $this;
-    }
-
-    public function setKonec($konec)
-    {
-        $this->konec = $konec;
-        return $this;
-    }
-
-    public function setPlaciloNaVajo($placiloNaVajo)
-    {
-        $this->placiloNaVajo = $placiloNaVajo;
-        return $this;
-    }
-
-    public function setVrednostVaje($vrednostVaje)
-    {
-        $this->vrednostVaje = $vrednostVaje;
-        return $this;
-    }
-
-    public function setPlaniranoSteviloVaj($planiranoSteviloVaj)
-    {
-        $this->planiranoSteviloVaj = $planiranoSteviloVaj;
-        return $this;
-    }
-
-    public function setVrednostVaj($vrednostVaj)
-    {
-        $this->vrednostVaj = $vrednostVaj;
-        return $this;
-    }
-
-    public function setVrednostPredstave($vrednostPredstave)
-    {
-        $this->vrednostPredstave = $vrednostPredstave;
-        return $this;
-    }
-
-    public function setVrednostDoPremiere($vrednostDoPremiere)
-    {
-        $this->vrednostDoPremiere = $vrednostDoPremiere;
-        return $this;
-    }
-
-    public function setAktivna($aktivna)
-    {
-        $this->aktivna = $aktivna;
-        return $this;
-    }
-
-    public function setZaposlenVDrJz($zaposlenVDrJz)
-    {
-        $this->zaposlenVDrJz = $zaposlenVDrJz;
-        return $this;
-    }
-
-    public function setOpis($opis)
-    {
-        $this->opis = $opis;
-        return $this;
-    }
-
-    public function setAlternacija(\Produkcija\Entity\Alternacija $alternacija)
-    {
-        $this->alternacija = $alternacija;
-        return $this;
-    }
-
-    public function setOseba(\App\Entity\Oseba $oseba)
-    {
-        $this->oseba = $oseba;
-        return $this;
-    }
-
-    public function setPopa(\App\Entity\Popa $popa)
-    {
-        $this->popa = $popa;
-        return $this;
-    }
-
-    public function setTrr(\App\Entity\Trr $trr)
-    {
-        $this->trr = $trr;
-        return $this;
-    }
-
-    public function getSamozaposlen()
+    function getSamozaposlen()
     {
         return $this->samozaposlen;
     }
 
-    public function getIgralec()
+    function getIgralec()
     {
         return $this->igralec;
     }
 
-    public function setSamozaposlen($samozaposlen)
+    function getOpis()
     {
-        $this->samozaposlen = $samozaposlen;
-        return $this;
+        return $this->opis;
     }
 
-    public function setIgralec($igralec)
+    function getAlternacije()
+    {
+        return $this->alternacije;
+    }
+
+    function getOseba()
+    {
+        return $this->oseba;
+    }
+
+    function getPopa()
+    {
+        return $this->popa;
+    }
+
+    function getTrr()
+    {
+        return $this->trr;
+    }
+
+    function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    function setSifra($sifra)
+    {
+        $this->sifra = $sifra;
+    }
+
+    function setZacetek($zacetek)
+    {
+        $this->zacetek = $zacetek;
+    }
+
+    function setKonec($konec)
+    {
+        $this->konec = $konec;
+    }
+
+    function setPlaciloNaVajo($placiloNaVajo)
+    {
+        $this->placiloNaVajo = $placiloNaVajo;
+    }
+
+    function setVrednostVaje($vrednostVaje)
+    {
+        $this->vrednostVaje = $vrednostVaje;
+    }
+
+    function setPlaniranoSteviloVaj($planiranoSteviloVaj)
+    {
+        $this->planiranoSteviloVaj = $planiranoSteviloVaj;
+    }
+
+    function setVrednostVaj($vrednostVaj)
+    {
+        $this->vrednostVaj = $vrednostVaj;
+    }
+
+    function setVrednostPredstave($vrednostPredstave)
+    {
+        $this->vrednostPredstave = $vrednostPredstave;
+    }
+
+    function setVrednostDoPremiere($vrednostDoPremiere)
+    {
+        $this->vrednostDoPremiere = $vrednostDoPremiere;
+    }
+
+    function setAktivna($aktivna)
+    {
+        $this->aktivna = $aktivna;
+    }
+
+    function setZaposlenVDrJz($zaposlenVDrJz)
+    {
+        $this->zaposlenVDrJz = $zaposlenVDrJz;
+    }
+
+    function setSamozaposlen($samozaposlen)
+    {
+        $this->samozaposlen = $samozaposlen;
+    }
+
+    function setIgralec($igralec)
     {
         $this->igralec = $igralec;
-        return $this;
+    }
+
+    function setOpis($opis)
+    {
+        $this->opis = $opis;
+    }
+
+    function setAlternacije($alternacije)
+    {
+        $this->alternacije = $alternacije;
+    }
+
+    function setOseba(\App\Entity\Oseba $oseba)
+    {
+        $this->oseba = $oseba;
+    }
+
+    function setPopa(\App\Entity\Popa $popa)
+    {
+        $this->popa = $popa;
+    }
+
+    function setTrr(\App\Entity\Trr $trr)
+    {
+        $this->trr = $trr;
     }
 
 }

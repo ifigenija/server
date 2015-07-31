@@ -165,46 +165,6 @@ class AlternacijaCest
     /**
      *  kreiramo zapis
      * 
-     * @param ApiTester $I
-     */
-//    public function createProdukcijskaHisa(ApiTester $I)
-//    {
-//        $data                      = [
-//            'status' => 'zz',
-//            'popa'   => null,
-//        ];
-//        $this->objProdukcijskaHisa = $ent                       = $I->successfullyCreate($this->produkcijskaHisaUrl, $data);
-//        $I->assertNotEmpty($ent['id']);
-//        $I->assertEquals($ent['status'], 'zz');
-//    }
-
-    /**
-     *  kreiramo pogodbo
-     * 
-     * @param ApiTester $I
-     */
-//    public function createPogodbo(ApiTester $I)
-//    {
-//        $data             = [
-//            'sifra'             => 'ZZ123',
-//            'vrednostVaj'       => 33.33,
-//            'vrednostPredstave' => 44.44,
-//            'vrednostUre'       => 22.22,
-//            'aktivna'           => false,
-//            'opis'              => 'zz',
-//            'oseba'             => $this->lookOseba['id'],
-//            'popa'              => null,
-//            'trr'               => null,
-//        ];
-//        $this->objPogodba = $ent              = $I->successfullyCreate($this->pogodbaUrl, $data);
-//        $I->assertNotEmpty($ent['id']);
-//        codecept_debug($ent);
-//        $I->assertEquals($ent['sifra'], 'ZZ123');
-//    }
-
-    /**
-     *  kreiramo zapis
-     * 
      * @depends lookupOsebo
      * @depends lookupFunkcijo
      * @depends createZaposlitev

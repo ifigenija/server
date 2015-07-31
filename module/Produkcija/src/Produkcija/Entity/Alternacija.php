@@ -122,11 +122,11 @@ class Alternacija
     protected $oseba;
 
     /**
-     * @ORM\OneToOne(targetEntity="Produkcija\Entity\Pogodba", inversedBy="alternacija")
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Pogodba", inversedBy="alternacije")
      * @ORM\JoinColumn(name="pogodba_id", referencedColumnName="id")
      * @Max\I18n(label="alternacija.pogodba",  description="alternacija.d.pogodba")
      * @Max\Ui(type="toone")
-     * var \Produkcija\Entity\Pogodba       - izpustimo tip, da ga lahko s set metodo postavimo na null v primeru izbrisa pogodbe
+     * @var \Produkcija\Entity\Pogodba      
      */
     protected $pogodba;
 
@@ -199,180 +199,164 @@ class Alternacija
         }
     }
 
-    public function getId()
+    function getId()
     {
         return $this->id;
     }
 
-    public function getSifra()
+    function getSifra()
     {
         return $this->sifra;
     }
 
-    public function getZaposlen()
+    function getZaposlen()
     {
         return $this->zaposlen;
     }
 
-    public function getZacetek()
+    function getZacetek()
     {
         return $this->zacetek;
     }
 
-    public function getKonec()
+    function getKonec()
     {
         return $this->konec;
     }
 
-    public function getOpomba()
+    function getOpomba()
     {
         return $this->opomba;
     }
 
-    public function getSort()
+    function getSort()
     {
         return $this->sort;
     }
 
-    public function getPrivzeti()
+    function getPrivzeti()
     {
         return $this->privzeti;
     }
 
-    public function getAktivna()
+    function getAktivna()
     {
         return $this->aktivna;
     }
 
-    public function getStoritve()
+    function getStoritve()
     {
         return $this->storitve;
     }
 
-    public function getFunkcija()
+    function getFunkcija()
     {
         return $this->funkcija;
     }
 
-    public function getZaposlitev()
+    function getZaposlitev()
     {
         return $this->zaposlitev;
     }
 
-    public function getOseba()
+    function getOseba()
     {
         return $this->oseba;
     }
 
-    public function getPogodba()
+    function getPogodba()
     {
         return $this->pogodba;
     }
 
-    public function getImaPogodbo()
+    function getImaPogodbo()
     {
         return $this->imaPogodbo;
     }
 
-    public function getPomembna()
+    function getPomembna()
     {
         return $this->pomembna;
     }
 
-    public function setId($id)
+    function setId($id)
     {
         $this->id = $id;
-        return $this;
     }
 
-    public function setSifra($sifra)
+    function setSifra($sifra)
     {
         $this->sifra = $sifra;
-        return $this;
     }
 
-    public function setZaposlen($zaposlen)
+    function setZaposlen($zaposlen)
     {
         $this->zaposlen = $zaposlen;
-        return $this;
     }
 
-    public function setZacetek($zacetek)
+    function setZacetek($zacetek)
     {
         $this->zacetek = $zacetek;
-        return $this;
     }
 
-    public function setKonec($konec)
+    function setKonec($konec)
     {
         $this->konec = $konec;
-        return $this;
     }
 
-    public function setOpomba($opomba)
+    function setOpomba($opomba)
     {
         $this->opomba = $opomba;
-        return $this;
     }
 
-    public function setSort($sort)
+    function setSort($sort)
     {
         $this->sort = $sort;
-        return $this;
     }
 
-    public function setPrivzeti($privzeti)
+    function setPrivzeti($privzeti)
     {
         $this->privzeti = $privzeti;
-        return $this;
     }
 
-    public function setAktivna($aktivna)
+    function setAktivna($aktivna)
     {
         $this->aktivna = $aktivna;
-        return $this;
     }
 
-    public function setStoritve($storitve)
+    function setStoritve($storitve)
     {
         $this->storitve = $storitve;
-        return $this;
     }
 
-    public function setFunkcija(\Produkcija\Entity\Funkcija $funkcija)
+    function setFunkcija(\Produkcija\Entity\Funkcija $funkcija)
     {
         $this->funkcija = $funkcija;
-        return $this;
     }
 
-    public function setZaposlitev(\Produkcija\Entity\Zaposlitev $zaposlitev)
+    function setZaposlitev(\Produkcija\Entity\Zaposlitev $zaposlitev)
     {
         $this->zaposlitev = $zaposlitev;
-        return $this;
     }
 
-    public function setOseba(\App\Entity\Oseba $oseba)
+    function setOseba(\App\Entity\Oseba $oseba)
     {
         $this->oseba = $oseba;
-        return $this;
     }
 
-    public function setPogodba($pogodba)
+    function setPogodba(\Produkcija\Entity\Pogodba $pogodba)
     {
         $this->pogodba = $pogodba;
-        return $this;
     }
 
-    public function setImaPogodbo($imaPogodbo)
+    function setImaPogodbo($imaPogodbo)
     {
         $this->imaPogodbo = $imaPogodbo;
-        return $this;
     }
 
-    public function setPomembna($pomembna)
+    function setPomembna($pomembna)
     {
         $this->pomembna = $pomembna;
-        return $this;
     }
 
 }

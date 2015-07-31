@@ -16,7 +16,7 @@ forms:
             - planiranoSteviloVaj
             - aktivna
             - opis
-            - alternacija
+            - alternacije
             - oseba
             - popa
             - trr
@@ -42,26 +42,19 @@ lists:
                       label: Partner
                       targetEntity: App\Entity\Popa
                       required: false
-#                - name: trr        # $$ rb ali je to tudi v default view-ju ali v namenskem?
-#                  type: toone
-#                  options:
-#                      label: Trr
-#                      targetEntity: App\Entity\Trr
-#                      required: false
-                - name: alternacija
-                  type: toone
-                  options:
-                      label: Alternacija
-                      targetEntity: Produkcija\Entity\Alternacija
-                      required: false
                 - name: uprizoritev
                   type: toone
                   options:
                       label: Uprizoritev
                       targetEntity: Produkcija\Entity\Uprizoritev
                       required: false
-
     vse: 
         filter:
 hydrator:
-    lookups: [oseba, popa, alternacija]
+    lookups: [oseba, popa]
+relation:
+    default:
+        alternacije:
+            enabled: true
+            hydrator:
+                exclude: []

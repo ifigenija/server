@@ -22,7 +22,7 @@ forms:
             - zaposlitev
 #            - imaPogodbo
             - oseba
-#            - pogodba    #$$ začasno damo pogodbo gor
+            - pogodba    
             - pomembna
         hydrator:
             lookups:

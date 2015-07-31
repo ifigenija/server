@@ -60,7 +60,6 @@ class AlternacijaRpcService
         $pogodba->setVrednostDoPremiere(0);
         $pogodba->setPlaciloNaVajo(FALSE);
         $pogodba->setOseba($alternacija->getOseba());
-        $pogodba->setAlternacija($alternacija);
 
         $pogodbaR = $em->getRepository("Produkcija\Entity\Pogodba")
                 ->setServiceLocator($this->getServiceLocator());
@@ -69,6 +68,11 @@ class AlternacijaRpcService
 
         $alternacija->setPogodba($pogodba);
 
+        $pogodba->preracunaj();
+        $pogodba->validate();
+        $alternacija->preracunaj();
+        $alternacija->validate();
+        
         // sedaj, ko imamo entiteti ponovimo preverjanje avtorizacije zaradi morebitnega assert preverjanja!
         $this->expectPermission("Pogodba-write", $pogodba);
         $this->expectPermission("Alternacija-write", $alternacija);
