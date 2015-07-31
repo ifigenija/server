@@ -74,15 +74,15 @@ class EnotaProgramaService
                 /**
                  * upoštevamo le tiste alternacije, ki se vsaj delno prekrivajo z intervalom začetka in konca programa dela 
                  */
-                $az       = is_null($alternacija->getZacetek())? null: $alternacija->getZacetek()->format('c');
-                $ak       = is_null($alternacija->getKonec())? null: $alternacija->getKonec()->format('c');
-                
+                $az = is_null($alternacija->getZacetek()) ? null : $alternacija->getZacetek()->format('c');
+                $ak = is_null($alternacija->getKonec()) ? null : $alternacija->getKonec()->format('c');
+
                 /**
                  * $začasno:
                  */
-                $sifra=$alternacija->getSifra();
-                $baz=  $az <= $konec;
-                $bak= $ak >= $zacetek;
+                $sifra = $alternacija->getSifra();
+                $baz   = $az <= $konec;
+                $bak   = $ak >= $zacetek;
 
                 if ((!is_null($az) ? $az <= $konec : true ) && (!is_null($ak) ? $ak >= $zacetek : true )) {
                     if ($alternacija->getZaposlen()) {
@@ -122,8 +122,8 @@ class EnotaProgramaService
                 }
             }
         }
-        $data['Do']['nasDelez']  = $data['Do']['avtorskiHonorarji'] + $data['Do']['tantieme'] + $vrMatDoSum;
-        $data['Na']['nasDelez']  = $data['Na']['avtorskiHonorarji'] + $data['Na']['tantieme'] + $vrMatNaSum;
+        $data['Do']['nasDelez']  = $data['Do']['avtorskiHonorarji'] + $data['Do']['tantieme'] + $data['Do']['avtorskePravice'] + $vrMatDoSum;
+        $data['Na']['nasDelez']  = $data['Na']['avtorskiHonorarji'] + $data['Na']['tantieme'] + $data['Na']['avtorskePravice'] + $vrMatNaSum;
         $data['datumZacStudija'] = $uprizoritev->getDatumZacStudija()->format('c');       // datum v ISO8601 obliki 
         $data['datumPremiere']   = $uprizoritev->getDatumPremiere()->format('c');       // datum v ISO8601 obliki 
 //$$ še naziv , izpostavljene funkcije ...
@@ -144,12 +144,12 @@ class EnotaProgramaService
     private function initData()
     {
         $polje                        = [
-            'avtorskiHonorarji' => 0,
             'nasDelez'          => 0,
+            'avtorskiHonorarji' => 0,
             'tantieme'          => 0,
             'avtorskePravice'   => 0,
         ];
-        $data['naziv']                = $polje;
+        $data['naziv']                = '';
         $data['Funkcije']             = [];
         $data['Do']                   = $polje;
         $data['Na']                   = $polje;
