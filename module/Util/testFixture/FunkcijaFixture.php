@@ -80,14 +80,14 @@ class FunkcijaFixture
     public function getData()
     {
         return [
-            ['Hipolita', 'glavna vloga', 'Igralec ali animator', false, 'velika', TRUE, 6, true, true, 'Uprizoritev-0002', null,],
-            ['Tezej', 'glavna vloga', 'Igralec ali animator', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null,],
-            ['Režija', '', 'Režiser', false, 'velika', TRUE, 8, true, true, 'Uprizoritev-0002', null,],
+            ['Hipolita', 'glavna vloga', 'Vloga', false, 'velika', TRUE, 6, true, true, 'Uprizoritev-0002', null,],
+            ['Tezej', 'glavna vloga', 'Vloga', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null,],
+            ['Režija', '', 'Režija', false, 'velika', TRUE, 8, true, true, 'Uprizoritev-0002', null,],
             ['Inšpicient', '', 'Inšpicient', true, '', TRUE, 8, true, true, 'Uprizoritev-0002', null,],
-            ['Tehnični vodja', '', 'Tehnični vodja', true, '', TRUE, 8, true, true, 'Uprizoritev-0002', null,],
-            ['Lučni mojster', '', 'Oblikovalec svetlobe', false, '', TRUE, 3, true, true, 'Uprizoritev-0002', null,],
-            ['Helena', 'glavna vloga', 'Igralec ali animator', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null,],
-            ['Lektoriranje', '', 'Lektor', false, '', TRUE, 22, true, true, 'Uprizoritev-0002', null,],
+            ['Tehnični vodja', '', 'Tehnična podpora', true, '', TRUE, 8, true, true, 'Uprizoritev-0002', null,],
+            ['Lučni mojster', '', 'Oblikovanje svetlobe in zvoka', false, '', TRUE, 3, true, true, 'Uprizoritev-0002', null,],
+            ['Helena', 'glavna vloga', 'Vloga', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null,],
+            ['Lektoriranje', '', 'Lektorstvo', false, '', TRUE, 22, true, true, 'Uprizoritev-0002', null,],
         ];
     }
 

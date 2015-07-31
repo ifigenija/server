@@ -112,7 +112,7 @@ class UprizoritevCest
      */
     public function lookupTipFunkcije(ApiTester $I)
     {
-        $this->lookTipFunkcije = $ent                   = $I->lookupEntity("tipfunkcije", "Režiser", false);
+        $this->lookTipFunkcije = $ent                   = $I->lookupEntity("tipfunkcije", "Režija", false);
         $I->assertNotEmpty($ent);
     }
 

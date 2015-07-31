@@ -53,29 +53,26 @@ class TipFunkcijeFixture
     public function getData()
     {
         return [
-             // najprej specialna tipa funkcije - se ne bo uporabljalo
-//            ['Inšpicient', 'Inšpicienti', FALSE,  'Inšpicientka', null,],
-//            ['Tehnični vodja', 'Tehnične vodje', false,  'Tehnični vodja', null,],
             // tipi funkcije iz SLOGI:
-            ['01','Igralec ali animator', 'Igralci in animatorji',   'Igralka ali animatorka', 'igralec',],
-            ['02','Baletnik ali plesalec', 'Baletniki in plesalci','Baletnica ali plesalka', 'igralec',],
-            ['03','Avtor', 'Avtorji',  'Avtorka', 'umetnik',],
-            ['04','Režiser', 'Režiserji',  'Režiserka', 'umetnik',],
-            ['05','Scenograf', 'Scenografi', 'Scenografka', 'tehnik',],
-            ['06','Kostumograf', 'Kostumografi',  'Kostumografinja', 'tehnik',],
-            ['07','Oblikovalec maske', 'Oblikovalci maske',   'Oblikovalka maske', 'tehnik',],
-            ['08','Avtor glasbe', 'Avtorji glasbe',   'Avtorica glasbe', 'umetnik',],
-            ['09','Oblikovalec svetlobe', 'Oblikovalci svetlobe',   'Oblikovalka svetlobe', 'tehnik',],
-            ['10','Koreograf', 'Koreografi',   'Koreografinja', 'umetnik',],
-            ['11','Dramaturg', 'Dramaturgi',   'Dramaturginja', 'umetnik',],
-            ['12','Lektor', 'Lektorji',   'Lektorica', 'umetnik',],
-            ['13','Prevajalec', 'Prevajalci',   'Prevajalka', 'umetnik',],
-            ['14','Oblikovalec videa', 'Oblikovalci videa',   'Oblikovalka videa', 'umetnik',],
-            ['15','Intermedijski ustvarjalec', 'Intermedijski ustvarjalci',   'Intermedijska ustvarjalka', 'umetnik',],
-            ['16','Nerazvrščeno', 'Nerazvrščeno',   'Nerazvrščeno', null,],
-            ['17','Inšpicient', 'Inšpicienti',   'Inšpicientka', 'inspicient',],
-            ['18','Šepetalec', 'Šepetalci',   'Šepetalka', 'sepetalec',],
-            ['19','Tehnični vodja', 'Tehnične vodje',   'Tehnični vodja', 'tehnik',],
+            ['01', 'Avtor', 'Avtorji', 'Avtorka', 'umetnik',],
+            ['02', 'Priredba', 'Priredba', 'Priredba', 'umetnik',],
+            ['03', 'Prevod', 'Prevod', 'Prevod', 'umetnik',],
+            ['04', 'Režija', 'Režija', 'Režija', 'umetnik',],
+            ['05', 'Dramaturgija', 'Dramaturgija', 'Dramaturgija', 'umetnik',],
+            ['06', 'Scenografija', 'Scenografija', 'Scenografija', 'tehnik',],
+            ['07', 'Kostumografija', 'Kostumografija', 'Kostumografija', 'tehnik',],
+            ['08', 'Koreografija', 'Koreografija', 'Koreografija', 'umetnik',],
+            ['09', 'Oblikovanje svetlobe in zvoka', 'Oblikovanje svetlobe in zvoka', 'Oblikovanje svetlobe in zvoka', 'tehnik',],
+            ['10', 'Oblikovanje maske', 'Oblikovanje maske', 'Oblikovanje maske', 'tehnik',],
+            ['11', 'Lektorstvo', 'Lektorstvo', 'Lektorstvo', 'umetnik',],
+            ['12', 'Glasbeni soustvarjalec', 'Glasbeni soustvarjalci', 'Glasbena soustvarjalka', 'umetnik',],
+            ['13', 'Intermedijski ustvarjalec', 'Intermedijski ustvarjalci', 'Intermedijski ustvarjalka', 'tehnik',],
+            ['14', 'Posebni efekti -izvedba in svetovanje', 'Posebni efekti -izvedba in svetovanje', 'Posebni efekti -izvedba in svetovanje', 'tehnik',],
+            ['15', 'Vloga', 'Intermedijski ustvarjalci', 'Intermedijska ustvarjalka', 'igralec',],
+            ['16', 'Produkcija, mentorstvo', 'Produkcija, mentorstvo', 'Produkcija, mentorstvo', 'umetnik',],
+            ['17', 'Tehnična podpora', 'Tehnična podpora', 'Tehnična podpora', 'tehnik',],
+            // specifika Ifigenije:
+            ['18', 'Inšpicient', 'Inšpicienti', 'Inšpicientka', 'inspicient',],
         ];
     }
 
