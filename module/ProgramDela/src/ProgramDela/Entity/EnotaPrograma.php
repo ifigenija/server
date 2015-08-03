@@ -70,17 +70,6 @@ class EnotaPrograma
     protected $celotnaVrednostGostovSZ;
 
     /**
-     * % nasega deleža
-     * 
-     * je <= maksfaktor
-     * 
-     * @ORM\Column(type="decimal", nullable=true, precision=6, scale=2)
-     * @Max\I18n(label="ep.zaprosenProcent", description="ep.d.zaprosenProcent")
-     * @var double
-     */
-    protected $zaprosenProcent;
-
-    /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.zaproseno", description="ep.d.zaproseno")   
      * @var double
@@ -334,17 +323,21 @@ class EnotaPrograma
         $this->koprodukcije = new ArrayCollection();
     }
 
+    /**
+     * sešteje vse druge vire
+     */
+    public function vsotaDrugihVirov()
+    {
+        $sumDNV = 0;    //init
+        foreach ($this->getDrugiViri() as $numObject => $drugiVir) {
+            $sumDNV += $drugiVir->getZnesek();
+        }
+        return $sumDNV;
+    }
+
     public function preracunaj($smer = false)
     {
         $this->preracunajCelotnoVrednost();     //$$ verjetno malo redundantno
-
-        /**
-         * izračunaj zaprošen znesek
-         */
-        $zaproseno       = $this->getNasDelez() * $this->getZaprosenProcent() / 100;
-        $zaproseno       = \Max\Functions::euroRound($zaproseno);   //Zaokrožimo na 2 decimalki predno shranimo
-        $this->zaproseno = $zaproseno;
-
         // preračunamo navzdol
         foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
             $koprodukcija->preracunaj();        // se ne zacikla, ker ni smer=up
@@ -377,38 +370,11 @@ class EnotaPrograma
         /**
          * pred primerjanjem damo števila s plavajočo vejico v string
          */
-        $ls           = \Max\Functions::euroRoundS($this->getLastnaSredstva());
-        $nd           = \Max\Functions::euroRoundS($this->getNasDelez());
-        $cv           = \Max\Functions::euroRoundS($this->getCelotnaVrednost());
+        $ls = \Max\Functions::euroRoundS($this->getLastnaSredstva());
+        $nd = \Max\Functions::euroRoundS($this->getNasDelez());
+        $cv = \Max\Functions::euroRoundS($this->getCelotnaVrednost());
         $this->expect($ls <= $nd, "Lastna sredstva ne smejo biti večja od našega deleža", 1000620);
         $this->expect($nd <= $cv, "Naš delež (" . $nd . ") ne sme biti večji od celotne vrednosti (" . $cv . ")", 1000621);
-        /**
-         * $$ morda še validacija   nd = ls + drugi viri  + zapr mk + ...??
-         */
-        $zaprosenProc = \Max\Functions::procRoundS($this->getZaprosenProcent());
-        $this->expect(($zaprosenProc >= 0) && ($zaprosenProc <= 100), 'Zaprošen odstotek mora biti med 0 in 100, je pa ' . $zaprosenProc, 1000622);
-        if ($this->tipProgramskeEnote) {
-            $maxFaktor   = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxFaktor());
-            $maxFaktor00 = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxFaktor() * 100);
-            $maxVsi      = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxVsi());
-            $maxVsi00    = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxVsi() * 100);
-            $this->expect($zaprosenProc <= $maxFaktor00, 'Zaprošen odstotek ne sme biti večji kot koeficient programske enote ' . $maxFaktor, 1000623);
-
-            // še kontrola na skupni koeficient
-            if (!$this->getKoprodukcije()->isEmpty()) {
-                $vsiZaprProc = 0; //init
-                foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
-                    $vsiZaprProc+= $koprodukcija->getZaprosenProcent();
-                }
-                $vsiZaprProc = \Max\Functions::procRoundS($vsiZaprProc);
-                $this->expect(($vsiZaprProc <= $maxVsi00), 'Vsota zaprošenih odstotkov koproducentov ne sme biti večji kot skupni koeficient ' . $maxFaktor, 1000624);
-            }
-
-            /**
-             * $$ tu bi lahko še validirali tip programske enote, npr:
-             *   - če obstajajo koprodukcije, je tip programske enote lahko le med 3-5
-             */
-        }
     }
 
     public function getId()
@@ -434,11 +400,6 @@ class EnotaPrograma
     public function getCelotnaVrednostGostovSZ()
     {
         return $this->celotnaVrednostGostovSZ;
-    }
-
-    public function getZaprosenProcent()
-    {
-        return $this->zaprosenProcent;
     }
 
     public function getZaproseno()
@@ -598,12 +559,6 @@ class EnotaPrograma
     public function setCelotnaVrednostGostovSZ($celotnaVrednostGostovSZ)
     {
         $this->celotnaVrednostGostovSZ = $celotnaVrednostGostovSZ;
-        return $this;
-    }
-
-    public function setZaprosenProcent($zaprosenProcent)
-    {
-        $this->zaprosenProcent = $zaprosenProcent;
         return $this;
     }
 

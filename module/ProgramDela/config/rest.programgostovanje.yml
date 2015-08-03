@@ -13,8 +13,7 @@ forms:
             - datumGostovanja
             - ponoviInt
             - obiskInt
-            - zaprosenProcent 
-#            - zaproseno
+            - zaproseno
 #            - celotnaVrednost
             - nasDelez
             - vlozekGostitelja

@@ -10,8 +10,7 @@ forms:
             - nasDelez
             - celotnaVrednostMat
             - celotnaVrednostGostovSZ
-            - zaprosenProcent 
-#            - zaproseno
+            - zaproseno
             - lastnaSredstva
             - avtorskiHonorarji
             - tantieme

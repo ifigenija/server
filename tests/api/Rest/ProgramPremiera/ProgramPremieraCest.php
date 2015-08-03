@@ -127,11 +127,10 @@ class ProgramPremieraCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'celotnaVrednost'      => 1.24,
-            'nasDelez'             => 1.24,
-            'zaprosenProcent'      => 100,
-//            'zaproseno'            =>1.24,
-            'lastnaSredstva'       => 1.24,
+//            'celotnaVrednost'      => 1.24,
+            'nasDelez'             => 4,
+            'zaproseno'            => 0.66,
+//            'lastnaSredstva'       => 1.24,
             'avtorskiHonorarji'    => 1.24,
             'tantieme'             => 1.24,
             'avtorskePravice'      => 1.24,
@@ -163,15 +162,13 @@ class ProgramPremieraCest
 
         // kreiramo še en zapis
         $data       = [
-            'celotnaVrednost'      => 4.56,
-            'nasDelez'             => 4.56,
-            'zaprosenProcent'      => 20,
-//            'zaproseno'            =>1.24,
-            'lastnaSredstva'       => 4.56,
+//            'celotnaVrednost'      => 4.56,
+            'nasDelez'             => 15,
+            'zaproseno'            => 0.66,
+//            'lastnaSredstva'       => 4.56,
             'avtorskiHonorarji'    => 4.56,
             'tantieme'             => 4.56,
             'avtorskePravice'      => 4.56,
-            'drugiViri'            => 4.56,
 //            'vlozekGostitelja'     => 4.56,
             'drugiJavni'           => 4.56,
             'obiskDoma'            => 4,
@@ -206,11 +203,11 @@ class ProgramPremieraCest
     public function update(ApiTester $I)
     {
         $ent                    = $this->obj1;
-        $ent['zaprosenProcent'] = 50;
+        $ent['tantieme'] = 1.22;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['zaprosenProcent'], 50.00);
+        $I->assertEquals($entR['tantieme'], 1.22);
     }
 
     /**
@@ -224,18 +221,16 @@ class ProgramPremieraCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
         codecept_debug($ent);
 
-        $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['celotnaVrednost'], 1.24);
-        $I->assertEquals($ent['nasDelez'], 1.24);
-        $I->assertEquals($ent['zaprosenProcent'], 50.00);
-        $I->assertEquals($ent['zaproseno'], 0.62, "izračunano zaprošeno");
-        $I->assertEquals($ent['lastnaSredstva'], 1.24);
+        $I->assertGuid($ent['id']);
+        $I->assertEquals($ent['celotnaVrednost'], 4, "celotna vrednost");
+        $I->assertEquals($ent['nasDelez'], 4.00,"naš delež");
+        $I->assertEquals($ent['zaproseno'], 0.66, "zaprošeno");
         $I->assertEquals($ent['avtorskiHonorarji'], 1.24);
-        $I->assertEquals($ent['tantieme'], 1.24);
+        $I->assertEquals($ent['tantieme'], 1.22, "tantieme");
         $I->assertEquals($ent['avtorskePravice'], 1.24);
-//        $I->assertEquals($ent['drugiViri'],1.24);
-//        $I->assertEquals($ent['vlozekGostitelja'],1.24);
         $I->assertEquals($ent['drugiJavni'], 1.24);
+        $I->assertEquals($ent['lastnaSredstva'],  $ent['nasDelez']-$ent['zaproseno']-$ent['drugiJavni']," lastna sredstva (ni nejavnih virov)");
+//        $I->assertEquals($ent['vlozekGostitelja'],1.24);
         $I->assertEquals($ent['obiskDoma'], 1);
 //        $I->assertEquals($ent['obiskGost'          ],1 );
 //        $I->assertEquals($ent['obiskZamejo'        ],1 );
@@ -355,8 +350,7 @@ class ProgramPremieraCest
         $data                        = [
             'odstotekFinanciranja' => 40,
             'delez'                => 2.6,
-            'zaprosenProcent'      => 50,
-            'zaproseno'            => 50,
+            'zaproseno'            => 2.1,
             'enotaPrograma'        => $this->obj2['id'],
             'koproducent'          => $this->lookProdukcijskaHisa1['id'],
         ];
@@ -367,8 +361,7 @@ class ProgramPremieraCest
         $data                        = [
             'odstotekFinanciranja' => 20,
             'delez'                => 1.1,
-            'zaprosenProcent'      => 10,
-            'zaproseno'            => 20,
+            'zaproseno'            => 1.02,
             'enotaPrograma'        => $this->obj2['id'],
             'koproducent'          => $this->lookProdukcijskaHisa2['id'],
         ];

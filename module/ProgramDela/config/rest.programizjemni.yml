@@ -9,7 +9,6 @@ forms:
             - naziv
 #            - celotnaVrednost
             - nasDelez
-            - zaprosenProcent 
 #            - zaproseno
             - lastnaSredstva
             - avtorskiHonorarji

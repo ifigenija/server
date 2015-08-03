@@ -8,7 +8,6 @@ forms:
 #            - id
 #            - celotnaVrednost
             - nasDelez
-            - zaprosenProcent 
 #            - zaproseno
             - lastnaSredstva
 #            - avtorskiHonorarji

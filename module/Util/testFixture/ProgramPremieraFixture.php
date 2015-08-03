@@ -55,7 +55,7 @@ class ProgramPremieraFixture
         $value = $tipPrEnR->findOneBySifra($v[2]);
         $o->setTipProgramskeEnote($value);
 
-        $o->setZaprosenProcent($v[3]);
+        $o->setZaproseno($v[3]);
         $o->setLastnaSredstva($v[4]);
         $o->setAvtorskiHonorarji($v[5]);
         $o->setTantieme($v[6]);
@@ -79,8 +79,8 @@ class ProgramPremieraFixture
     public function getData()
     {
         return [
-            ['Uprizoritev-0001', 10000.80, '04', 40, 2222.3, 4000.4, 200.2, 200.3, 100.2, 40, 2, 2, 2, 2, 2, 9000.3,],
-            ['Uprizoritev-0002', 5000, '05', 40, 1000.2, 600.7, 200.2, 200.2, 100.2, 60, 3, 3, 3, 3, 3, 4900.2,],
+            ['Uprizoritev-0001', 10000.80, '04', 3600.12, 2222.3, 4000.4, 200.2, 200.3, 100.2, 40, 2, 2, 2, 2, 2, 9000.3,],
+            ['Uprizoritev-0002', 5000, '05', 1960.08, 1000.2, 600.7, 200.2, 200.2, 100.2, 60, 3, 3, 3, 3, 3, 4900.2,],
         ];
     }
 

@@ -13,8 +13,7 @@ forms:
             - obiskDoma
             - stZaposlenih
             - stHonorarnih
-            - zaprosenProcent 
-#            - zaproseno
+            - zaproseno
 #            - celotnaVrednost
             - nasDelez
             - lastnaSredstva

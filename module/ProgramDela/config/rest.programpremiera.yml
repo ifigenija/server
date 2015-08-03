@@ -7,15 +7,14 @@ forms:
         elements:
 #            - id
 #            - celotnaVrednost
-            - nasDelez
-            - zaprosenProcent 
-#            - zaproseno
-            - lastnaSredstva
             - avtorskiHonorarji
             - tantieme
             - avtorskePravice
-#            - drugiViri
+            - nasDelez
+            - zaproseno
 #            - vlozekGostitelja      
+#            - lastnaSredstva
+#            - drugiViri
             - drugiJavni
             - obiskDoma
 #            - obiskGost
