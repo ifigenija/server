@@ -22,10 +22,18 @@ class ProgramGostujoca
      */
     protected $dokument;
 
+    /**
+     * Strošek odkupa predstave 
+     * 
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="ep.strosekOdkPred", description="ep.d.strosekOdkPred")   
+     * @var double
+     */
+    protected $strosekOdkPred;
+
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki tudi v formi niso:
-        $this->setCelotnaVrednostMat(0);
         $this->setCelotnaVrednostGostovSZ(0);
         $this->setAvtorskiHonorarji(0);
         $this->setTantieme(0);
@@ -36,7 +44,7 @@ class ProgramGostujoca
         $this->setPonoviZamejo(0);
         $this->setPonoviGost(0);
         $this->setPonoviInt(0);
-        $this->setVlozekGostitelja(0);
+        $this->setVlozekGostitelja(0);  // kot vir
         $this->setStZaposlenih(0);
         $this->setStZaposUmet(0);
         $this->setStZaposDrug(0);
@@ -70,6 +78,11 @@ class ProgramGostujoca
         }
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostujočo", 1000431);
 
+        $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
+        $maxZaproseno = \Max\Functions::euroRoundS(0.50 * $this->strosekOdkPred);
+        // glede na procent upravičenih stroškov
+        $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 50% stroška odkupa predstave (" . $maxZaproseno . ")", 1000432);
+
         parent::validate();
     }
 
@@ -82,6 +95,16 @@ class ProgramGostujoca
     {
         $this->dokument = $dokument;
         return $this;
+    }
+
+    function getStrosekOdkPred()
+    {
+        return $this->strosekOdkPred;
+    }
+
+    function setStrosekOdkPred($strosekOdkPred)
+    {
+        $this->strosekOdkPred = $strosekOdkPred;
     }
 
 }

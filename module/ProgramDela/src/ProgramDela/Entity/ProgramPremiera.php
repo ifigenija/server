@@ -28,7 +28,6 @@ class ProgramPremiera
     {
         // neaktualna polja, ki jih tudi v formi ni:
         $this->setStZaposlenih(0);
-        $this->setCelotnaVrednostMat(0);
         $this->setCelotnaVrednostGostovSZ(0);
         $this->setObiskGost(0);
         $this->setObiskZamejo(0);

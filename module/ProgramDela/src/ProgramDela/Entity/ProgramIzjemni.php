@@ -25,7 +25,6 @@ class ProgramIzjemni
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
-        $this->setCelotnaVrednostMat(0);
         $this->setCelotnaVrednostGostovSZ(0);
         $this->setStZaposUmet(0);
         $this->setStZaposDrug(0);

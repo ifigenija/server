@@ -73,7 +73,6 @@ class ProgramGostovanje
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
-        $this->setCelotnaVrednostMat(0);
         $this->setCelotnaVrednostGostovSZ(0);
         $this->setObiskDoma(0);
         $this->setObiskGost(0);

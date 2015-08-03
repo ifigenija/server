@@ -54,7 +54,6 @@ class ProgramRazno
 
     public function preracunaj($smer = false)
     {
-        $this->setCelotnaVrednostMat(0);
         $this->setCelotnaVrednostGostovSZ(0);
         $this->setAvtorskiHonorarji(0);
         $this->setObiskGost(0);

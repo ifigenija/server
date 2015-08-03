@@ -57,10 +57,10 @@ class ProgramGostujocaCest
     {
         $data       = [
             'celotnaVrednost' => 1.24,
-            'nasDelez'        => 1.24,
-            'zaprosenProcent' => 100,
-//            'zaproseno'            =>1.24,
-            'lastnaSredstva'  => 1.24,
+            'nasDelez'        => 4,
+            'strosekOdkPred'        => 3.11,
+            'zaproseno'            =>1.24,
+//            'lastnaSredstva'  => 1.24,
 //            'avtorskiHonorarji'  => 1.24,
 //            'tantieme'           => 1.24,
 //            'drugiViri'       => 1.24,
@@ -87,9 +87,9 @@ class ProgramGostujocaCest
         $data       = [
             'celotnaVrednost' => 4.56,
             'nasDelez'        => 4.56,
-                        'zaprosenProcent'         => 100,
-//            'zaproseno'            =>1.24,
-'lastnaSredstva'  => 4.56,
+            'strosekOdkPred'        => 3.11,
+            'zaproseno'            =>1.24,
+//'lastnaSredstva'  => 4.56,
 //            'avtorskiHonorarji'  => 4.56,
 //            'tantieme'           => 4.56,
 //            'drugiViri'       => 4.56,
@@ -120,11 +120,11 @@ class ProgramGostujocaCest
     public function update(ApiTester $I)
     {
         $ent              = $this->obj1;
-        $ent['zaprosenProcent'] = 50;
+        $ent['zaproseno'] = 1.22;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['zaprosenProcent'], 50.00);
+        $I->assertEquals($entR['zaproseno'], 1.22);
     }
 
     /**
@@ -138,11 +138,11 @@ class ProgramGostujocaCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['celotnaVrednost'], 1.24);
-        $I->assertEquals($ent['nasDelez'], 1.24);
-        $I->assertEquals($ent['zaprosenProcent'], 50.00);
-        $I->assertEquals($ent['zaproseno'], 0.62, "izračunano zaprošeno");
-        $I->assertEquals($ent['lastnaSredstva'], 1.24);
+        $I->assertEquals($ent['celotnaVrednost'], 4);
+        $I->assertEquals($ent['nasDelez'], 4);
+        $I->assertEquals($ent['strosekOdkPred'], 3.11);
+        $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");
+         $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
 //        $I->assertEquals($ent['avtorskiHonorarji'], 1.24);
 //        $I->assertEquals($ent['tantieme'], 1.24);
 //        $I->assertEquals($ent['drugiViri'], 1.24);
