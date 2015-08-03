@@ -170,11 +170,11 @@ class TipProgramskeEnoteCest
     {
         //premiera
         $data                      = [
-            'celotnaVrednost'         => 1.23,
-            'nasDelez'                => 1.23,
+//            'celotnaVrednost'         => 1.23,
+            'nasDelez'                => 4,
             'zaproseno'               => 1.23,
             'celotnaVrednostGostovSZ' => 0.2,
-            'lastnaSredstva'          => 1.23,
+//            'lastnaSredstva'          => 1.23,
             'avtorskiHonorarji'       => 1.23,
             'tantieme'                => 1.23,
             'avtorskePravice'         => 1.23,
@@ -199,12 +199,12 @@ class TipProgramskeEnoteCest
 
         //ponovitev prejšnjih sezon
         $data                                 = [
-            'celotnaVrednost'         => 1.23,
-            'nasDelez'                => 1.23,
+//            'celotnaVrednost'         => 1.23,
+            'nasDelez'                => 4,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
             'zaproseno'               => 1.23,
-            'lastnaSredstva'          => 1.23,
+//            'lastnaSredstva'          => 1.23,
             'avtorskiHonorarji'       => 1.23,
             'tantieme'                => 1.23,
             'avtorskePravice'         => 1.23,
@@ -233,8 +233,8 @@ class TipProgramskeEnoteCest
 
         //ponovitev premiere
         $data = [
-            'celotnaVrednost'         => 1.23,
-            'nasDelez'                => 1.23,
+//            'celotnaVrednost'         => 1.23,
+            'nasDelez'                => 4,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
             'zaproseno'               => 1.23,

@@ -53,6 +53,15 @@ class ProgramGostovanje
     protected $transportniStroski;
 
     /**
+     * dnevnice za prvi in zadnji dan
+     * 
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2)
+     * @Max\I18n(label="gostovanje.dnevPrvZad", description="gostovanje.d.dnevPrvZad")   
+     * @var double     
+     */
+    protected $dnevPrvZad;
+
+    /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="gostovanja")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
      * @Max\I18n(label="gostovanje.programDela", description="gostovanje.programDela")
@@ -94,11 +103,21 @@ class ProgramGostovanje
                 $this->getDokument()->preracunaj(\Max\Consts::UP);
             }
         }
+        $this->celotnaVrednostMat = 0;    // izjema pri gostovanju - ponovno damo na 0 po tem, ko je preracunaj za enoto programa izveden
     }
 
     public function validate($mode = 'update')
     {
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostovanje", 1000441);
+
+        $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
+        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->transportniStroski + $this->dnevPrvZad);
+        $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor, tantiem, avt.pravic, transp. str. in dnevnic za 1. in zadnji dan (" . $sumStr . ")", 1000441);
+
+        $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
+        $maxZaproseno = \Max\Functions::euroRoundS(0.60 * $this->avtorskiHonorarji + 0.60 * $this->tantieme+ 0.70 * $this->avtorskePravice+ 1.00 * $this->transportniStroski + 1.00 * $this->dnevPrvZad);
+        // glede na procent upravičenih stroškov
+        $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 60% avtorskih in tantiem in 70% odkupa avtorskih pravic in transportnih stroskov in dnevnic za 1. in zadnji dan (" . $maxZaproseno . ")", 1000442);
 
         parent::validate();
     }
@@ -168,6 +187,7 @@ class ProgramGostovanje
         $this->gostitelj = $gostitelj;
         return $this;
     }
+
     public function getDrzavaGostovanja()
     {
         return $this->drzavaGostovanja;
@@ -179,5 +199,14 @@ class ProgramGostovanje
         return $this;
     }
 
+    function getDnevPrvZad()
+    {
+        return $this->dnevPrvZad;
+    }
+
+    function setDnevPrvZad($dnevPrvZad)
+    {
+        $this->dnevPrvZad = $dnevPrvZad;
+    }
 
 }

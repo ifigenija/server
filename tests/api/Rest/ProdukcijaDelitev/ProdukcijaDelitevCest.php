@@ -165,7 +165,6 @@ class ProdukcijaDelitevCest
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
 //        codecept_debug($ent);
-//        $I->assertEquals($ent['zaprosenProcent'], 50);
 //        
         // kreiram še en zapis za nematično podjetje
         $data       = [

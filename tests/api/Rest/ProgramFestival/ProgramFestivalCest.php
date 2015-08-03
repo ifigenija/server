@@ -77,7 +77,6 @@ class ProgramFestivalCest
             'stTujihSelektorjev'      => 1,
             'stZaposlenih'            => 1,
             'stHonorarnih'            => 1,
-            'zaprosenProcent'         => 100,
 //            'celotnaVrednost'         => 1.24,
             'nasDelez'                => 4,
             'zaproseno'            =>1.24,

@@ -108,16 +108,16 @@ class ProgramGostovanjeCest
             'datumGostovanja'    => '2011-02-01T00:00:00+0100',
             'ponoviInt'          => 9,
             'obiskInt'           => 9,
-            'zaprosenProcent'    => 100,
-//            'zaproseno'            =>9.12,
-            'celotnaVrednost'    => 9.12,
-            'nasDelez'           => 9.12,
+            'zaproseno'          => 9.12,
+//            'celotnaVrednost'    => 9.12,
+            'nasDelez'           => 79.12,
             'transportniStroski' => 9.12,
+            'dnevPrvZad'         => 9.12,
             'tantieme'           => 9.12,
             'avtorskePravice'    => 9.12,
             'avtorskiHonorarji'  => 9.12,
-            'vlozekGostitelja'   => 9.12,
-            'lastnaSredstva'     => 9.12,
+            'vlozekGostitelja'  => 9.12,
+//            'lastnaSredstva'     => 9.12,
 //            'drugiViri'          => 9.12,
             'drugiJavni'         => 9.12,
             'gostitelj'          => $this->lookPopa1['id'],
@@ -137,16 +137,16 @@ class ProgramGostovanjeCest
             'datumGostovanja'    => '2011-02-01T00:00:00+0100',
             'ponoviInt'          => 3,
             'obiskInt'           => 3,
-            'zaprosenProcent'    => 100,
-//            'zaproseno'            =>3.12,
-            'celotnaVrednost'    => 3.12,
-            'nasDelez'           => 3.12,
+            'zaproseno'          => 3.12,
+//            'celotnaVrednost'    => 3.12,
+            'nasDelez'           => 16,
             'transportniStroski' => 3.12,
+            'dnevPrvZad'         => 3.12,
             'tantieme'           => 3.12,
             'avtorskePravice'    => 3.12,
             'avtorskiHonorarji'  => 3.12,
             'vlozekGostitelja'   => 3.12,
-            'lastnaSredstva'     => 3.12,
+//            'lastnaSredstva'     => 3.12,
 //            'drugiViri'          => 3.12,
             'drugiJavni'         => 3.12,
             'gostitelj'          => null,
@@ -191,16 +191,18 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['datumGostovanja'], '2011-02-01T00:00:00+0100');
         $I->assertEquals($ent['ponoviInt'], 9);
         $I->assertEquals($ent['obiskInt'], 9);
-        $I->assertEquals($ent['zaprosenProcent'], 100.00);
         $I->assertEquals($ent['zaproseno'], 9.12, "izračunano zaprošeno");
-        $I->assertEquals($ent['celotnaVrednost'], 9.12);
-        $I->assertEquals($ent['nasDelez'], 9.12);
+        $I->assertEquals($ent['celotnaVrednost'], 79.12);
+        $I->assertEquals($ent['nasDelez'], 79.12);
         $I->assertEquals($ent['transportniStroski'], 9.12);
+        $I->assertEquals($ent['dnevPrvZad'], 9.12);
         $I->assertEquals($ent['tantieme'], 9.12);
         $I->assertEquals($ent['avtorskePravice'], 9.12);
         $I->assertEquals($ent['avtorskiHonorarji'], 9.12);
         $I->assertEquals($ent['vlozekGostitelja'], 2.34);
-        $I->assertEquals($ent['lastnaSredstva'], 9.12);
+         $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
+        $I->assertEquals($ent['celotnaVrednostMat'], 0);
+
 //        $I->assertEquals($ent['drugiViri'], 9.12);
         $I->assertEquals($ent['drugiJavni'], 9.12);
         $I->assertEquals($ent['dokument'], NULL);
