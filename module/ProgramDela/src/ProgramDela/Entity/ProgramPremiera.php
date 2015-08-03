@@ -73,7 +73,7 @@ class ProgramPremiera
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
         $maxZaproseno = \Max\Functions::euroRoundS(0.70 * $this->nasDelez);
         // glede na procent upravičenih stroškov
-        $this->expect($nd >= $sumStr, "Zaprošeno (" . $zaproseno . ") je lahko največ 70% deleža mat. JZ(" . $maxZaproseno . ")", 1000442);
+        $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 70% deleža mat. JZ(" . $maxZaproseno . ")", 1000442);
 
         parent::validate();
     }

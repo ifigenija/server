@@ -26,12 +26,11 @@ forms:
             - stTujihSelektorjev
             - stZaposlenih
             - stHonorarnih
-#            - zaproseno
+            - zaproseno
 #            - celotnaVrednost
             - nasDelez
-            - lastnaSredstva
+#            - lastnaSredstva
 #            - drugiViri
-#            - opredelitevDrugiViri
             - drugiJavni
             - sort
 lists:

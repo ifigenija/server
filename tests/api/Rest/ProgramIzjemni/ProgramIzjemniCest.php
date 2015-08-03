@@ -81,31 +81,30 @@ class ProgramIzjemniCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'naziv'             => "zz",
-            'celotnaVrednost'   => 1.24,
-            'nasDelez'          => 1.24,
-            'zaprosenProcent'   => 100,
-//            'zaproseno'            =>1.24,
-            'lastnaSredstva'    => 1.24,
-            'avtorskiHonorarji' => 1.24,
-            'tantieme'          => 1.24,
-            'avtorskePravice'          => 1.24,
+            'naziv'                => "zz",
+//            'celotnaVrednost'   => 1.24,
+            'nasDelez'             => 4,
+            'zaproseno'            => 1.24,
+//            'lastnaSredstva'    => 1.24,
+            'avtorskiHonorarji'    => 1.24,
+            'tantieme'             => 1.24,
+            'avtorskePravice'      => 1.24,
 //            'drugiViri'            => 1.24,
 //            'vlozekGostitelja'     => 1.24,
-            'drugiJavni'        => 1.24,
-            'obiskDoma'         => 1,
+            'drugiJavni'           => 1.24,
+            'obiskDoma'            => 1,
             'obiskGost'            => 1,
             'obiskZamejo'          => 1,
             'obiskInt'             => 1,
-            'ponoviDoma'        => 1,
-            'ponoviZamejo'      => 1,
-            'ponoviGost'        => 1,
+            'ponoviDoma'           => 1,
+            'ponoviZamejo'         => 1,
+            'ponoviGost'           => 1,
             'ponoviInt'            => 1,
 //            'uprizoritev'          => NULL,
 //            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
-            'dokument'          => null,
-            'sort'              => 1,
-            'stZaposlenih'      => 1,
+            'dokument'             => null,
+            'sort'                 => 1,
+            'stZaposlenih'         => 1,
 //            'stDrugih'             => 1,
             'stHonorarnih'         => 1,
             'stHonorarnihIgr'      => 1,
@@ -117,31 +116,30 @@ class ProgramIzjemniCest
 
         // kreiramo še en zapis
         $data       = [
-            'naziv'             => "zz",
-            'celotnaVrednost'   => 4.56,
-            'nasDelez'          => 4.56,
-            'zaprosenProcent'   => 100,
-//            'zaproseno'            =>4.56,
-            'lastnaSredstva'    => 4.56,
-            'avtorskiHonorarji' => 4.56,
-            'tantieme'          => 4.56,
-            'avtorskePravice'          => 4.56,
+            'naziv'                => "zz",
+//            'celotnaVrednost'   => 4.56,
+            'nasDelez'             => 16,
+            'zaproseno'            => 4.56,
+//            'lastnaSredstva'    => 4.56,
+            'avtorskiHonorarji'    => 4.56,
+            'tantieme'             => 4.56,
+            'avtorskePravice'      => 4.56,
 //            'drugiViri'            => 4.56,
 //            'vlozekGostitelja'     => 1.24,
-            'drugiJavni'        => 4.56,
-            'obiskDoma'         => 4,
+            'drugiJavni'           => 4.56,
+            'obiskDoma'            => 4,
             'obiskGost'            => 4,
             'obiskZamejo'          => 4,
             'obiskInt'             => 4,
-            'ponoviDoma'        => 4,
-            'ponoviZamejo'      => 4,
-            'ponoviGost'        => 4,
+            'ponoviDoma'           => 4,
+            'ponoviZamejo'         => 4,
+            'ponoviGost'           => 4,
             'ponoviInt'            => 4,
 //            'uprizoritev'          => NULL,
 //            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
-            'dokument'          => null,
-            'sort'              => 2,
-            'stZaposlenih'      => 2,
+            'dokument'             => null,
+            'sort'                 => 2,
+            'stZaposlenih'         => 2,
 //            'stDrugih'             => 2,
             'stHonorarnih'         => 2,
             'stHonorarnihIgr'      => 2,
@@ -160,12 +158,12 @@ class ProgramIzjemniCest
      */
     public function update(ApiTester $I)
     {
-        $ent                    = $this->obj1;
-        $ent['zaprosenProcent'] = 50;
+        $ent              = $this->obj1;
+        $ent['zaproseno'] = 1.22;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['zaprosenProcent'], 50.00);
+        $I->assertEquals($entR['zaproseno'], 1.22);
     }
 
     /**
@@ -178,13 +176,13 @@ class ProgramIzjemniCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         $I->assertEquals($ent['naziv'], 'zz');
-        $I->assertEquals($ent['celotnaVrednost'], 1.24);
-        $I->assertEquals($ent['nasDelez'], 1.24);
-        $I->assertEquals($ent['zaprosenProcent'], 50.00);
-        $I->assertEquals($ent['zaproseno'], 0.62, "izračunano zaprošeno");
-        $I->assertEquals($ent['lastnaSredstva'], 1.24);
+        $I->assertEquals($ent['celotnaVrednost'], 4);
+        $I->assertEquals($ent['nasDelez'], 4);
+        $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");
+        $I->assertEquals($ent['vlozekGostitelja'], 0);
+        $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
         $I->assertEquals($ent['avtorskiHonorarji'], 1.24);
         $I->assertEquals($ent['tantieme'], 1.24);
         $I->assertEquals($ent['avtorskePravice'], 1.24);

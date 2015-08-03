@@ -170,8 +170,14 @@ class ProgramFestival
 
     public function validate($mode = 'update')
     {
-        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program festival", 1000461);
-        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program festival", 1000462);
+        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program festival", 1000531);
+        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program festival", 1000532);
+
+        $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
+        $maxZaproseno = \Max\Functions::euroRoundS(0.70 * $this->nasDelez);
+        // glede na procent upravičenih stroškov
+        $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 70% deleža mat. JZ(" . $maxZaproseno . ")", 1000533);
+
 
         parent::validate();
     }
@@ -351,6 +357,5 @@ class ProgramFestival
         $this->stTujihSelektorjev = $stTujihSelektorjev;
         return $this;
     }
-
 
 }

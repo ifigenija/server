@@ -9,8 +9,8 @@ forms:
             - naziv
 #            - celotnaVrednost
             - nasDelez
-#            - zaproseno
-            - lastnaSredstva
+            - zaproseno
+#            - lastnaSredstva
             - avtorskiHonorarji
             - tantieme
             - avtorskePravice

@@ -86,9 +86,14 @@ class ProgramRazno
 
     public function validate($mode = 'update')
     {
-        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program razno", 1000451);
-        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program razno", 1000452);
-        $this->expect($this->naziv, "Nima naziva. Naziv je obvezen podatek", 1000453);
+        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program razno", 1000551);
+        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program razno", 1000552);
+        $this->expect($this->naziv, "Nima naziva. Naziv je obvezen podatek", 1000553);
+
+        $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
+        $maxZaproseno = \Max\Functions::euroRoundS(0.70 * $this->nasDelez);
+        // glede na procent upravičenih stroškov
+        $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 70% deleža mat. JZ(" . $maxZaproseno . ")", 1000554);
 
         parent::validate();
     }

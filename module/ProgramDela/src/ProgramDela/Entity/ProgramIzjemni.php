@@ -41,8 +41,17 @@ class ProgramIzjemni
 
     public function validate($mode = 'update')
     {
-        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program festival", 1000461);
-        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program festival", 1000462);
+        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program festival", 1000541);
+        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program festival", 1000542);
+
+        $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
+        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice);
+        $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor, tantiem in avt.pravic (" . $sumStr . ")", 1000543);
+
+        $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
+        $maxZaproseno = \Max\Functions::euroRoundS(1.0 * $this->nasDelez);
+        // glede na procent upravičenih stroškov
+        $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 100% deleža mat. JZ(" . $maxZaproseno . ")", 1000544);
 
         parent::validate();
     }

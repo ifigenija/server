@@ -16,7 +16,7 @@ forms:
             - zaproseno
 #            - celotnaVrednost
             - nasDelez
-            - lastnaSredstva
+#            - lastnaSredstva
 #            - drugiViri
             - drugiJavni
             - sort

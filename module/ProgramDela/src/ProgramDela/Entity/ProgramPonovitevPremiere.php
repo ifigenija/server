@@ -66,7 +66,7 @@ class ProgramPonovitevPremiere
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
         $maxZaproseno = \Max\Functions::euroRoundS(0.70 * ($this->avtorskiHonorarji+$this->tantieme));
         // glede na procent upravičenih stroškov
-        $this->expect($nd >= $sumStr, "Zaprošeno (" . $zaproseno . ") je lahko največ 70% vsote avt.honor in tantiem (" . $maxZaproseno . ")", 1000452);
+        $this->expect($zaproseno>= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 70% vsote avt.honor in tantiem (" . $maxZaproseno . ")", 1000452);
 
         parent::validate();
     }
