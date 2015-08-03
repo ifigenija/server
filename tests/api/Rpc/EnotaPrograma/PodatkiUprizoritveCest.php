@@ -75,7 +75,7 @@ class PodatkiUprizoritveCest
     {
 //
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'podatkiUprizoritve', ["uprizoritevId" => $this->lookUprizoritev['id']
-            , "zacetek"       => "1970-01-01T01:00:00+01:00", "konec"         => "2999-01-01T01:00:00+01:00"
+            , "zacetek"       => "1970-01-01T01:00:00+0100", "konec"         => "2999-01-01T01:00:00+0100"
         ]);
         codecept_debug($resp);
         $I->assertNotEmpty($resp);
@@ -105,7 +105,7 @@ class PodatkiUprizoritveCest
     {
 //
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'podatkiUprizoritve', ["uprizoritevId" => $this->lookUprizoritev['id']
-            , "zacetek"       => "2016-01-01T00:00:00+01:00", "konec"         => "2016-04-20T00:00:00+02:00"
+            , "zacetek"       => "2016-01-01T00:00:00+0100", "konec"         => "2016-04-20T00:00:00+0200"
         ]);
         codecept_debug($resp);
         $I->assertNotEmpty($resp);
