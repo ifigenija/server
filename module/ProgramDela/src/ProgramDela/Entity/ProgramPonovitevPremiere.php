@@ -58,6 +58,15 @@ class ProgramPonovitevPremiere
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000450);
             }
         }
+        
+        $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
+        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice);
+        $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor, tantiem in avt.pravic (" . $sumStr . ")", 1000451);
+
+        $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
+        $maxZaproseno = \Max\Functions::euroRoundS(0.70 * ($this->avtorskiHonorarji+$this->tantieme));
+        // glede na procent upravičenih stroškov
+        $this->expect($nd >= $sumStr, "Zaprošeno (" . $zaproseno . ") je lahko največ 70% vsote avt.honor in tantiem (" . $maxZaproseno . ")", 1000452);
 
         parent::validate();
     }

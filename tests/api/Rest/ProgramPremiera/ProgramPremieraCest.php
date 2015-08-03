@@ -229,7 +229,8 @@ class ProgramPremieraCest
         $I->assertEquals($ent['tantieme'], 1.22, "tantieme");
         $I->assertEquals($ent['avtorskePravice'], 1.24);
         $I->assertEquals($ent['drugiJavni'], 1.24);
-        $I->assertEquals($ent['lastnaSredstva'],  $ent['nasDelez']-$ent['zaproseno']-$ent['drugiJavni']," lastna sredstva (ni nejavnih virov)");
+        $I->assertEquals($ent['vlozekGostitelja'], 0);
+        $I->assertEquals($ent['lastnaSredstva'],  $ent['nasDelez']-$ent['zaproseno']-$ent['drugiJavni']-  $ent['vlozekGostitelja']," lastna sredstva (ni nejavnih virov)");
 //        $I->assertEquals($ent['vlozekGostitelja'],1.24);
         $I->assertEquals($ent['obiskDoma'], 1);
 //        $I->assertEquals($ent['obiskGost'          ],1 );

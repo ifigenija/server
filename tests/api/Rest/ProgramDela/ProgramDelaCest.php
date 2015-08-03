@@ -190,7 +190,7 @@ class ProgramDelaCest
         $data       = [
 //            'sifra'            => 'ZZ',
             'naziv'            => 'zz',
-            'zacetek'          => '2015-02-01T00:00:00+0100',
+            'zacetek'          => '2015-02-01T00:00:00+01:00',
             'konec'            => '2016-02-01T00:00:00+0100',
             'potrjenProgram'   => false,
             'sezona'           => null,

@@ -41,12 +41,6 @@ class ProgramPremiera
 
         $this->setPonoviDoma(1);        // le premiera
 
-        /**
-         * izračunaj zaprošen znesek
-         */
-        $ls                   = $this->nasDelez - $this->zaproseno - $this->drugiJavni - $this->vsotaDrugihVirov();
-        $this->lastnaSredstva = \Max\Functions::euroRound($ls);   //Zaokrožimo na 2 decimalki predno shranimo
-
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
             if ($this->getDokument()) {
@@ -79,7 +73,7 @@ class ProgramPremiera
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
         $maxZaproseno = \Max\Functions::euroRoundS(0.70 * $this->nasDelez);
         // glede na procent upravičenih stroškov
-        $this->expect($nd >= $sumStr, "Zaprošeno (" . $zaproseno . ") je lahko največ 70% deleža mat. JZ(" . $nd . ")", 1000441);
+        $this->expect($nd >= $sumStr, "Zaprošeno (" . $zaproseno . ") je lahko največ 70% deleža mat. JZ(" . $maxZaproseno . ")", 1000442);
 
         parent::validate();
     }

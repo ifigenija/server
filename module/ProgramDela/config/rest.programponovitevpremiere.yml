@@ -8,15 +8,14 @@ forms:
 #            - id
 #            - celotnaVrednost
             - nasDelez
-            - celotnaVrednostMat
-            - celotnaVrednostGostovSZ
-            - zaproseno
-            - lastnaSredstva
+#            - lastnaSredstva
             - avtorskiHonorarji
             - tantieme
             - avtorskePravice
-#            - drugiViri
+            - zaproseno
             - vlozekGostitelja      
+#            - celotnaVrednostMat
+            - celotnaVrednostGostovSZ
             - drugiJavni
             - obiskDoma
             - obiskGost

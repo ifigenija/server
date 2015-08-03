@@ -53,6 +53,15 @@ class ProgramPonovitevPrejsnjih
             }
         }
 
+        $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
+        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice);
+        $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor, tantiem in avt.pravic (" . $sumStr . ")", 1000461);
+
+        $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
+        $maxZaproseno = \Max\Functions::euroRoundS(0.60 * ($this->avtorskiHonorarji+$this->tantieme));
+        // glede na procent upravičenih stroškov
+        $this->expect($nd >= $sumStr, "Zaprošeno (" . $zaproseno . ") je lahko največ 60% vsote avt.honor in tantiem (" . $maxZaproseno . ")", 1000462);
+        
         parent::validate();
     }
 

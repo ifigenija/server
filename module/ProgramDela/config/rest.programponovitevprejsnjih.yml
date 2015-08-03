@@ -7,17 +7,17 @@ forms:
         elements:
 #            - id
 #            - celotnaVrednost
-            - nasDelez
-            - celotnaVrednostMat
+#            - celotnaVrednostMat
             - celotnaVrednostGostovSZ
-            - zaproseno
-            - lastnaSredstva
+            - nasDelez
             - avtorskiHonorarji
             - tantieme
             - avtorskePravice
+            - zaproseno
 #            - drugiViri
             - vlozekGostitelja      
             - drugiJavni
+#            - lastnaSredstva
             - obiskDoma
             - obiskGost
             - obiskZamejo
