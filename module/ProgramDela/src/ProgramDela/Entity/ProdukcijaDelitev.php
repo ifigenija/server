@@ -50,7 +50,7 @@ class ProdukcijaDelitev
      * zaprošen znesek pri MK
      * 
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="prodel.zaproseno", description="prodel.zaproseno")
+     * @Max\I18n(label="prodel.delez", description="prodel.delez")
      * @var double
      */
     protected $zaproseno;
