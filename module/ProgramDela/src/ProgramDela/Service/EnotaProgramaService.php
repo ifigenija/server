@@ -114,6 +114,8 @@ class EnotaProgramaService
                                     }
                                     if ($pogodba->getSamozaposlen()) {
                                         $data['stHonorarnihIgrSamoz'] += 1;
+                                        $data['Do']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostDoPremiere();
+                                        $data['Na']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostPredstave();
                                     }
                                 }
                             }
@@ -144,10 +146,11 @@ class EnotaProgramaService
     private function initData()
     {
         $polje                        = [
-            'nasDelez'          => 0,
-            'avtorskiHonorarji' => 0,
-            'tantieme'          => 0,
-            'avtorskePravice'   => 0,
+            'nasDelez'               => 0,
+            'avtorskiHonorarji'      => 0,
+            'avtorskiHonorarjiSamoz' => 0,
+            'tantieme'               => 0,
+            'avtorskePravice'        => 0,
         ];
         $data['naziv']                = '';
         $data['Funkcije']             = [];

@@ -8,6 +8,7 @@ forms:
 #            - id
 #            - celotnaVrednost
             - avtorskiHonorarji
+            - avtorskiHonorarjiSamoz
             - tantieme
             - avtorskePravice
             - nasDelez

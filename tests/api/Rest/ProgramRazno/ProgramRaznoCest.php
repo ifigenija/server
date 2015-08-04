@@ -75,20 +75,20 @@ class ProgramRaznoCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'dokument'        => NULL,
-            'naziv'           => 'zz',
+            'dokument'      => NULL,
+            'naziv'         => 'zz',
 //            'stPE'            => 1,
-            'soorganizator'   => $this->lookPopa1['id'],
-            'obiskDoma'       => 1,
-            'stZaposlenih'    => 1,
-            'stHonorarnih'    => 1,
-            'zaproseno'            =>1.24,
+            'soorganizator' => $this->lookPopa1['id'],
+            'obiskDoma'     => 1,
+            'stZaposlenih'  => 1,
+            'stHonorarnih'  => 1,
+            'zaproseno'     => 1.24,
 //            'celotnaVrednost' => 1.24,
-            'nasDelez'        => 4,
+            'nasDelez'      => 4,
 //            'lastnaSredstva'  => 1.24,
 //            'drugiViri'       => 1.24,
-            'drugiJavni'      => 1.24,
-            'sort'            => 1,
+            'drugiJavni'    => 1.24,
+            'sort'          => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -96,25 +96,25 @@ class ProgramRaznoCest
 
         // kreiramo še en zapis
         $data       = [
-            'dokument'        => NULL,
-            'naziv'           => 'aa',
+            'dokument'      => NULL,
+            'naziv'         => 'aa',
 //            'naslovPE'        => 'aa',
 //            'avtorPE'         => 'aa',
 //            'obsegPE'         => 'aa',
 //            'mesecPE'         => 'aa',
 //            'vrednostPE'      => 2.23,
 //            'stPE'            => 2,
-            'soorganizator'   => null,
-            'obiskDoma'       => 2,
-            'stZaposlenih'    => 2,
-            'stHonorarnih'    => 2,
-            'zaproseno'            =>1.24,
+            'soorganizator' => null,
+            'obiskDoma'     => 2,
+            'stZaposlenih'  => 2,
+            'stHonorarnih'  => 2,
+            'zaproseno'     => 1.24,
 //            'celotnaVrednost' => 2.23,
-            'nasDelez'        => 2.23,
+            'nasDelez'      => 2.23,
 //            'lastnaSredstva'  => 2.23,
 //            'drugiViri'       => 2.23,
-            'drugiJavni'      => 2.23,
-            'sort'            => 2,
+            'drugiJavni'    => 2.23,
+            'sort'          => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -129,7 +129,7 @@ class ProgramRaznoCest
      */
     public function update(ApiTester $I)
     {
-        $ent                    = $this->obj1;
+        $ent              = $this->obj1;
         $ent['zaproseno'] = 1.22;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
@@ -160,13 +160,15 @@ class ProgramRaznoCest
         $I->assertEquals($ent['obiskDoma'], 1);
         $I->assertEquals($ent['stZaposlenih'], 1);
         $I->assertEquals($ent['stHonorarnih'], 1);
-       $I->assertEquals($ent['celotnaVrednost'], 4);
+        $I->assertEquals($ent['celotnaVrednost'], 4);
         $I->assertEquals($ent['nasDelez'], 4);
         $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
         $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");
 //        $I->assertEquals($ent['drugiViri'], 1.24);
         $I->assertEquals($ent['drugiJavni'], 1.24);
         $I->assertEquals($ent['sort'], 1, 'sort');
+        $I->assertEquals($ent['avtorskiHonorarji'], 0);
+        $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 0);
     }
 
     /**

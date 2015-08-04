@@ -143,7 +143,6 @@ class ProgramGostujocaCest
         $I->assertEquals($ent['strosekOdkPred'], 3.11);
         $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");
          $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
-//        $I->assertEquals($ent['avtorskiHonorarji'], 1.24);
 //        $I->assertEquals($ent['tantieme'], 1.24);
 //        $I->assertEquals($ent['drugiViri'], 1.24);
 //        $I->assertEquals($ent['vlozekGostitelja'], 1.24);
@@ -160,6 +159,8 @@ class ProgramGostujocaCest
 //        $I->assertEquals($ent['tipProgramskeEnote'], NULL);
         $I->assertEquals($ent['dokument'], null);
         $I->assertEquals($ent['sort'], 1);
+        $I->assertEquals($ent['avtorskiHonorarji'], 0);
+        $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 0);
     }
 
     /**

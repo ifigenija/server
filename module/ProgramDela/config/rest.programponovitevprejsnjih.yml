@@ -11,6 +11,7 @@ forms:
             - celotnaVrednostGostovSZ
             - nasDelez
             - avtorskiHonorarji
+            - avtorskiHonorarjiSamoz
             - tantieme
             - avtorskePravice
             - zaproseno

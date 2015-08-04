@@ -167,7 +167,7 @@ class DogodekCest
     public function createSezono(ApiTester $I)
     {
         $data            = [
-            'imeSezone' => 'zz',
+            'ime' => 'zz',
             'zacetek'   => '2010-02-01T00:00:00+0100',
             'konec'     => '2011-02-01T00:00:00+0100',
             'aktivna'   => true,
@@ -175,7 +175,7 @@ class DogodekCest
         $this->objSezona = $ent             = $I->successfullyCreate($this->sezonaUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['imeSezone'], 'zz');
+        $I->assertEquals($ent['ime'], 'zz');
     }
 
     /**

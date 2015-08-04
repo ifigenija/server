@@ -142,22 +142,23 @@ class ProgramFestival
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
-        $this->setCelotnaVrednostGostovSZ(0);
-        $this->setAvtorskiHonorarji(0);
-        $this->setObiskGost(0);
-        $this->setObiskInt(0);
-        $this->setObiskZamejo(0);
-        $this->setPonoviDoma(0);
-        $this->setPonoviGost(0);
-        $this->setPonoviInt(0);
-        $this->setPonoviZamejo(0);
-        $this->setStZaposUmet(0);
-        $this->setStZaposDrug(0);
-        $this->setStHonorarnihIgr(0);
-        $this->setStHonorarnihIgrTujJZ(0);
-        $this->setTantieme(0);
-        $this->setAvtorskePravice(0);
-        $this->setVlozekGostitelja(0);
+        $this->celotnaVrednostGostovSZ=0;
+        $this->avtorskiHonorarji=0;
+        $this->avtorskiHonorarjiSamoz = 0;
+        $this->obiskGost=0;
+        $this->obiskInt=0;
+        $this->obiskZamejo=0;
+        $this->ponoviDoma=0;
+        $this->ponoviGost=0;
+        $this->ponoviInt=0;
+        $this->ponoviZamejo=0;
+        $this->stZaposUmet=0;
+        $this->stZaposDrug=0;
+        $this->stHonorarnihIgr=0;
+        $this->stHonorarnihIgrTujJZ=0;
+        $this->tantieme=0;
+        $this->avtorskePravice=0;
+        $this->vlozekGostitelja=0;
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {

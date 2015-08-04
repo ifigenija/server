@@ -116,6 +116,7 @@ class ProgramGostovanjeCest
             'tantieme'           => 9.12,
             'avtorskePravice'    => 9.12,
             'avtorskiHonorarji'  => 9.12,
+            'avtorskiHonorarjiSamoz'  => 9.12,
             'vlozekGostitelja'  => 9.12,
 //            'lastnaSredstva'     => 9.12,
 //            'drugiViri'          => 9.12,
@@ -145,6 +146,7 @@ class ProgramGostovanjeCest
             'tantieme'           => 3.12,
             'avtorskePravice'    => 3.12,
             'avtorskiHonorarji'  => 3.12,
+            'avtorskiHonorarjiSamoz'  => 3.12,
             'vlozekGostitelja'   => 3.12,
 //            'lastnaSredstva'     => 3.12,
 //            'drugiViri'          => 3.12,
@@ -199,6 +201,7 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['tantieme'], 9.12);
         $I->assertEquals($ent['avtorskePravice'], 9.12);
         $I->assertEquals($ent['avtorskiHonorarji'], 9.12);
+        $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 9.12);
         $I->assertEquals($ent['vlozekGostitelja'], 2.34);
          $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
         $I->assertEquals($ent['celotnaVrednostMat'], 0);

@@ -12,6 +12,7 @@ forms:
             - zaproseno
 #            - lastnaSredstva
             - avtorskiHonorarji
+            - avtorskiHonorarjiSamoz
             - tantieme
             - avtorskePravice
 #            - drugiViri

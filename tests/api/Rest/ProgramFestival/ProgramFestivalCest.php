@@ -61,7 +61,7 @@ class ProgramFestivalCest
             'naziv'                   => 'zz',
             'zvrst'                   => 'zz',
             'stPredstav'              => 1,
-            'stOkroglihMiz'             => 1,
+            'stOkroglihMiz'           => 1,
             'stPredstavitev'          => 1,
             'stDelavnic'              => 1,
             'stDrugiDogodki'          => 1,
@@ -79,7 +79,7 @@ class ProgramFestivalCest
             'stHonorarnih'            => 1,
 //            'celotnaVrednost'         => 1.24,
             'nasDelez'                => 4,
-            'zaproseno'            =>1.24,
+            'zaproseno'               => 1.24,
 //            'lastnaSredstva'          => 1.24,
 //            'drugiViri'               => 1.24,
             'drugiJavni'              => 1.24,
@@ -95,7 +95,7 @@ class ProgramFestivalCest
             'naziv'                   => 'aa',
             'zvrst'                   => 'aa',
             'stPredstav'              => 2,
-            'stOkroglihMiz'             => 2,
+            'stOkroglihMiz'           => 2,
             'stPredstavitev'          => 2,
             'stDelavnic'              => 2,
             'stDrugiDogodki'          => 2,
@@ -132,7 +132,7 @@ class ProgramFestivalCest
      */
     public function update(ApiTester $I)
     {
-        $ent                    = $this->obj1;
+        $ent              = $this->obj1;
         $ent['zaproseno'] = 1.22;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
@@ -174,10 +174,12 @@ class ProgramFestivalCest
         $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");
         $I->assertEquals($ent['celotnaVrednost'], 4);
         $I->assertEquals($ent['nasDelez'], 4);
-         $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
+        $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
 //        $I->assertEquals($ent['drugiViri'], 1.24);
         $I->assertEquals($ent['drugiJavni'], 1.24);
         $I->assertEquals($ent['sort'], 1);
+        $I->assertEquals($ent['avtorskiHonorarji'], 0);
+        $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 0);
     }
 
     /**

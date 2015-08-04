@@ -19,6 +19,7 @@ forms:
             - tantieme
             - avtorskePravice
             - avtorskiHonorarji
+            - avtorskiHonorarjiSamoz
             - zaproseno
             - transportniStroski
             - dnevPrvZad

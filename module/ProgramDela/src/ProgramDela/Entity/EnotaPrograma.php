@@ -91,6 +91,13 @@ class EnotaPrograma
     protected $avtorskiHonorarji;
 
     /**
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2,options={"default":0})
+     * @Max\I18n(label="ep.avtorskiHonorarjiSamoz", description="ep.d.avtorskiHonorarjiSamoz")   
+     * @var double
+     */
+    protected $avtorskiHonorarjiSamoz;
+
+    /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.tantieme", description="ep.d.tantieme")   
      * @var double
@@ -337,7 +344,7 @@ class EnotaPrograma
 
     public function preracunaj($smer = false)
     {
-        $ls                   = $this->nasDelez - $this->zaproseno - $this->drugiJavni - $this->vsotaDrugihVirov() -$this->vlozekGostitelja;
+        $ls                   = $this->nasDelez - $this->zaproseno - $this->drugiJavni - $this->vsotaDrugihVirov() - $this->vlozekGostitelja;
         $this->lastnaSredstva = \Max\Functions::euroRound($ls);   //Zaokrožimo na 2 decimalki predno shranimo
 
         $this->preracunajCelotnoVrednost();     //$$ verjetno malo redundantno
@@ -345,8 +352,8 @@ class EnotaPrograma
         foreach ($this->getKoprodukcije() as $numObject => $koprodukcija) {
             $koprodukcija->preracunaj();        // se ne zacikla, ker ni smer=up
         }
-        
-        $this->celotnaVrednostMat=$this->celotnaVrednost-$this->celotnaVrednostGostovSZ;
+
+        $this->celotnaVrednostMat = $this->celotnaVrednost - $this->celotnaVrednostGostovSZ;
     }
 
     /**
@@ -375,9 +382,9 @@ class EnotaPrograma
         /**
          * pred primerjanjem damo števila s plavajočo vejico v string
          */
-        $ls = \Max\Functions::euroRoundS($this->getLastnaSredstva());
-        $nd = \Max\Functions::euroRoundS($this->getNasDelez());
-        $cv = \Max\Functions::euroRoundS($this->getCelotnaVrednost());
+        $ls   = \Max\Functions::euroRoundS($this->getLastnaSredstva());
+        $nd   = \Max\Functions::euroRoundS($this->getNasDelez());
+        $cv   = \Max\Functions::euroRoundS($this->getCelotnaVrednost());
         $cvSZ = \Max\Functions::euroRoundS($this->celotnaVrednostGostovSZ);
         $this->expect($ls <= $nd, "Lastna sredstva ne smejo biti večja od našega deleža", 1000620);
         $this->expect($nd <= $cv, "Naš delež (" . $nd . ") ne sme biti večji od celotne vrednosti (" . $cv . ")", 1000621);
@@ -744,6 +751,17 @@ class EnotaPrograma
     public function setAvtorskePravice($avtorskePravice)
     {
         $this->avtorskePravice = $avtorskePravice;
+        return $this;
+    }
+
+    public function getAvtorskiHonorarjiSamoz()
+    {
+        return $this->avtorskiHonorarjiSamoz;
+    }
+
+    public function setAvtorskiHonorarjiSamoz($avtorskiHonorarjiSamoz)
+    {
+        $this->avtorskiHonorarjiSamoz = $avtorskiHonorarjiSamoz;
         return $this;
     }
 

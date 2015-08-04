@@ -34,13 +34,13 @@ forms:
 #            - vrPS1Do
 #            - vrPS1Mat
 #            - vrPS1GostovSZ
-#            - stNekomerc
+#            - stIzvNekomerc
 #            - stIzvPonPrem
-#            - stIzvPrej
+#            - stIzvPonPrej
 #            - stIzvGostuj
 #            - stIzvOstalihNek
-#            - stGostovanjSlo
-#            - stGostovanjZam
+#            - stIzvGostovanjSlo
+#            - stIzvGostovanjZam
 #            - stGostovanjInt
 #            - stObiskNekom
 #            - stObiskNekomMat

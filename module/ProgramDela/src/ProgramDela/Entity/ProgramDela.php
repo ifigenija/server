@@ -216,11 +216,19 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stNekomerc", description="programDela.d.stNekomerc")
+     * @Max\I18n(label="programDela.stIzvNekomerc", description="programDela.d.stIzvNekomerc")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    protected $stNekomerc;
+    protected $stIzvNekomerc;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPrem", description="programDela.d.stIzvPrem")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPrem;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -232,11 +240,11 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stIzvPrej", description="programDela.d.stIzvPrej")
+     * @Max\I18n(label="programDela.stIzvPonPrej", description="programDela.d.stIzvPonPrej")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    protected $stIzvPrej;
+    protected $stIzvPonPrej;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -256,27 +264,27 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stGostovanjSlo", description="programDela.d.stGostovanjSlo")
+     * @Max\I18n(label="programDela.stIzvGostovanjSlo", description="programDela.d.stIzvGostovanjSlo")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    protected $stGostovanjSlo;
+    protected $stIzvGostovanjSlo;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stGostovanjZam", description="programDela.d.stGostovanjZam")
+     * @Max\I18n(label="programDela.stIzvGostovanjZam", description="programDela.d.stIzvGostovanjZam")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    protected $stGostovanjZam;
+    protected $stIzvGostovanjZam;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stGostovanjInt", description="programDela.d.stGostovanjInt")
+     * @Max\I18n(label="programDela.stIzvGostovanjInt", description="programDela.d.stIzvGostovanjInt")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    protected $stGostovanjInt;
+    protected $stIzvGostovanjInt;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -442,6 +450,13 @@ class ProgramDela
     protected $sredstvaAvt;
 
     /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaAvtSamoz", description="programDela.d.sredstvaAvtSamoz")   
+     * @var double
+     */
+    protected $sredstvaAvtSamoz;
+
+    /**
      * 
      * 
      * @param enotaPrograma $object
@@ -516,14 +531,15 @@ class ProgramDela
         $this->vrPS1Do              = 0;  //init
         $this->vrPS1Mat             = 0;  //init
         $this->vrPS1GostovSZ        = 0;  //init
-        $this->stNekomerc           = 0;  //init
+        $this->stIzvNekomerc        = 0;  //init
+        $this->stIzvPrem            = 0;  //init
         $this->stIzvPonPrem         = 0;  //init
-        $this->stIzvPrej            = 0;  //init
+        $this->stIzvPonPrej         = 0;  //init
         $this->stIzvGostuj          = 0;  //init
         $this->stIzvOstalihNek      = 0;  //init
-        $this->stGostovanjSlo       = 0;  //init
-        $this->stGostovanjZam       = 0;  //init
-        $this->stGostovanjInt       = 0;  //init
+        $this->stIzvGostovanjSlo    = 0;  //init
+        $this->stIzvGostovanjZam    = 0;  //init
+        $this->stIzvGostovanjInt    = 0;  //init
         $this->stObiskNekom         = 0;  //init
         $this->stObiskNekomMat      = 0;  //init
         $this->stObiskNekomGostSlo  = 0;  //init
@@ -534,6 +550,7 @@ class ProgramDela
         $this->stHonorarnihIgrTujJZ = 0;  //init
         $this->stHonorarnihIgrSamoz = 0;  //init
         $this->sredstvaAvt          = 0;  //init
+        $this->sredstvaAvtSamoz     = 0;  //init
         $this->sredstvaInt          = 0;  //init
         $this->stKoprodukcij        = 0;  //init
         $this->stKoprodukcijInt     = 0;  //init
@@ -542,7 +559,6 @@ class ProgramDela
 
 
         $this->stPremier = $this->getPremiere()->count();
-        $stPonPrej       = $this->getPonovitvePrejsnjih()->count();        //$$ začasno
         $this->stPonPrej = $this->getPonovitvePrejsnjih()->count();
 
         /**
@@ -554,11 +570,16 @@ class ProgramDela
             }
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->vrPS1Do += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
+            $this->stIzvNekomerc+=$object->getPonoviDoma();
+            $this->stIzvPrem+=$object->getPonoviDoma();
+            $this->stObiskNekom +=$object->getObiskDoma();
+            $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stHonorarnih +=$object->getStHonorarnih();
             $this->stHonorarnihIgr +=$object->getStHonorarnihIgr();
             $this->stHonorarnihIgrTujJZ +=$object->getStHonorarnihIgrTujJZ();
             $this->stHonorarnihIgrSamoz +=$object->getStHonorarnihIgrSamoz();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
+            $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
             $this->prerSredstva($object);
             $this->prerStKopr($object);
         }
@@ -573,15 +594,16 @@ class ProgramDela
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->vrPS1Mat+= $object->getCelotnaVrednostMat();
             $this->vrPS1GostovSZ+= $object->getCelotnaVrednostGostovSZ();
-            $this->stNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
+            $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
             $this->stIzvPonPrem+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
-            $this->stGostovanjSlo +=$object->getPonoviGost();
-            $this->stGostovanjZam +=$object->getPonoviZamejo();
+            $this->stIzvGostovanjSlo +=$object->getPonoviGost();
+            $this->stIzvGostovanjZam +=$object->getPonoviZamejo();
             $this->stObiskNekom +=$object->getObiskDoma() + $object->getObiskGost() + $object->getObiskZamejo();
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stObiskNekomGostSlo +=$object->getObiskGost();
             $this->stObiskNekomGostZam +=$object->getObiskZamejo();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
+            $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
             $this->prerSredstva($object);
             $this->prerStKopr($object);
         }
@@ -597,10 +619,10 @@ class ProgramDela
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->vrPS1Mat+= $object->getCelotnaVrednostMat();
             $this->vrPS1GostovSZ+= $object->getCelotnaVrednostGostovSZ();
-            $this->stNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
-            $this->stIzvPrej+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
-            $this->stGostovanjSlo +=$object->getPonoviGost();
-            $this->stGostovanjZam +=$object->getPonoviZamejo();
+            $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
+            $this->stIzvPonPrej+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
+            $this->stIzvGostovanjSlo +=$object->getPonoviGost();
+            $this->stIzvGostovanjZam +=$object->getPonoviZamejo();
             $this->stObiskNekom +=$object->getObiskDoma() + $object->getObiskGost() + $object->getObiskZamejo();
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stObiskNekomGostSlo +=$object->getObiskGost();
@@ -610,6 +632,7 @@ class ProgramDela
             $this->stHonorarnihIgrTujJZ +=$object->getStHonorarnihIgrTujJZ();
             $this->stHonorarnihIgrSamoz +=$object->getStHonorarnihIgrSamoz();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
+            $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
 
             switch ($object->getTipProgramskeEnote()->getSifra()) {
                 case "01":
@@ -641,7 +664,7 @@ class ProgramDela
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
             }
-            $this->stNekomerc+=$object->getPonoviDoma();
+            $this->stIzvNekomerc+=$object->getPonoviDoma();
             $this->stIzvGostuj+=$object->getPonoviDoma();
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
@@ -656,11 +679,12 @@ class ProgramDela
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
             }
-            $this->stNekomerc+=$object->getPonoviInt();
-            $this->stGostovanjInt += $object->getPonoviInt();
+            $this->stIzvNekomerc+=$object->getPonoviInt();
+            $this->stIzvGostovanjInt += $object->getPonoviInt();
             $this->stObiskNekom +=$object->getObiskInt();
             $this->stObiskNekomGostInt +=$object->getObiskInt();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
+            $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
 
             // $$ glede na to, ali je mednarodno gostovanje za premiero, ki bo letos, ali iz prejšnjih sezon
             $idUpr          = $object->getUprizoritev();
@@ -675,7 +699,7 @@ class ProgramDela
                 $this->stIzvPonPrem+=$object->getPonoviInt();
             } else {
                 // če ni uprizoritev iz ponovitve (letošnje) premiere je najverjetneje  iz ponovitve premiere prejšnjih sezon
-                $this->stIzvPrej+=$object->getPonoviInt();
+                $this->stIzvPonPrej+=$object->getPonoviInt();
             }
             $this->prerSredstva($object);
             $this->prerStKopr($object);
@@ -688,7 +712,7 @@ class ProgramDela
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
             }
-            $this->stNekomerc+=1;      // 1 festival ena prireditev
+            $this->stIzvNekomerc+=1;      // 1 festival ena prireditev
             $this->stIzvOstalihNek+=1;      // 1 festival ena prireditev
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
@@ -704,7 +728,7 @@ class ProgramDela
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
             }
-            $this->stNekomerc+=$object->getStPE();     //$$ prištevamo število programskih enot
+            $this->stIzvNekomerc+=$object->getStPE();     //$$ prištevamo število programskih enot
             $this->stIzvOstalihNek+=$object->getStPE();     //$$ prištevamo število programskih enot
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
@@ -720,16 +744,18 @@ class ProgramDela
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
             }
-            $this->stNekomerc+=$object->getPonoviDoma();
+            $this->stIzvNekomerc+=$object->getPonoviDoma();
             $this->stIzvOstalihNek+=$object->getPonoviDoma();
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
+            $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
+            $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
             $this->prerSredstva($object);
             $this->prerStKopr($object);
         }
 
-        if ($this->stNekomerc > 0) {
-            $this->avgObiskPrired = \Max\Functions::numberRound($this->stObiskNekom / $this->stNekomerc);
+        if ($this->stIzvNekomerc > 0) {
+            $this->avgObiskPrired = \Max\Functions::numberRound($this->stObiskNekom / $this->stIzvNekomerc);
         } else {
             $this->avgObiskPrired = 0;
         }
@@ -763,6 +789,11 @@ class ProgramDela
     public function getKonec()
     {
         return $this->konec;
+    }
+
+    public function getZakljuceno()
+    {
+        return $this->zakljuceno;
     }
 
     public function getPotrjenProgram()
@@ -870,9 +901,14 @@ class ProgramDela
         return $this->vrPS1GostovSZ;
     }
 
-    public function getStNekomerc()
+    public function getStIzvNekomerc()
     {
-        return $this->stNekomerc;
+        return $this->stIzvNekomerc;
+    }
+
+    public function getStIzvPrem()
+    {
+        return $this->stIzvPrem;
     }
 
     public function getStIzvPonPrem()
@@ -880,9 +916,9 @@ class ProgramDela
         return $this->stIzvPonPrem;
     }
 
-    public function getStIzvPrej()
+    public function getStIzvPonPrej()
     {
-        return $this->stIzvPrej;
+        return $this->stIzvPonPrej;
     }
 
     public function getStIzvGostuj()
@@ -895,19 +931,19 @@ class ProgramDela
         return $this->stIzvOstalihNek;
     }
 
-    public function getStGostovanjSlo()
+    public function getStIzvGostovanjSlo()
     {
-        return $this->stGostovanjSlo;
+        return $this->stIzvGostovanjSlo;
     }
 
-    public function getStGostovanjZam()
+    public function getStIzvGostovanjZam()
     {
-        return $this->stGostovanjZam;
+        return $this->stIzvGostovanjZam;
     }
 
-    public function getStGostovanjInt()
+    public function getStIzvGostovanjInt()
     {
-        return $this->stGostovanjInt;
+        return $this->stIzvGostovanjInt;
     }
 
     public function getStObiskNekom()
@@ -1000,6 +1036,11 @@ class ProgramDela
         return $this->stHonorarnihIgrTujJZ;
     }
 
+    public function getStHonorarnihIgrSamoz()
+    {
+        return $this->stHonorarnihIgrSamoz;
+    }
+
     public function getSredstvaInt()
     {
         return $this->sredstvaInt;
@@ -1037,6 +1078,12 @@ class ProgramDela
     public function setKonec($konec)
     {
         $this->konec = $konec;
+        return $this;
+    }
+
+    public function setZakljuceno($zakljuceno)
+    {
+        $this->zakljuceno = $zakljuceno;
         return $this;
     }
 
@@ -1166,9 +1213,15 @@ class ProgramDela
         return $this;
     }
 
-    public function setStNekomerc($stNekomerc)
+    public function setStIzvNekomerc($stIzvNekomerc)
     {
-        $this->stNekomerc = $stNekomerc;
+        $this->stIzvNekomerc = $stIzvNekomerc;
+        return $this;
+    }
+
+    public function setStIzvPrem($stIzvPrem)
+    {
+        $this->stIzvPrem = $stIzvPrem;
         return $this;
     }
 
@@ -1178,9 +1231,9 @@ class ProgramDela
         return $this;
     }
 
-    public function setStIzvPrej($stIzvPrej)
+    public function setStIzvPonPrej($stIzvPonPrej)
     {
-        $this->stIzvPrej = $stIzvPrej;
+        $this->stIzvPonPrej = $stIzvPonPrej;
         return $this;
     }
 
@@ -1196,21 +1249,21 @@ class ProgramDela
         return $this;
     }
 
-    public function setStGostovanjSlo($stGostovanjSlo)
+    public function setStIzvGostovanjSlo($stIzvGostovanjSlo)
     {
-        $this->stGostovanjSlo = $stGostovanjSlo;
+        $this->stIzvGostovanjSlo = $stIzvGostovanjSlo;
         return $this;
     }
 
-    public function setStGostovanjZam($stGostovanjZam)
+    public function setStIzvGostovanjZam($stIzvGostovanjZam)
     {
-        $this->stGostovanjZam = $stGostovanjZam;
+        $this->stIzvGostovanjZam = $stIzvGostovanjZam;
         return $this;
     }
 
-    public function setStGostovanjInt($stGostovanjInt)
+    public function setStIzvGostovanjInt($stIzvGostovanjInt)
     {
-        $this->stGostovanjInt = $stGostovanjInt;
+        $this->stIzvGostovanjInt = $stIzvGostovanjInt;
         return $this;
     }
 
@@ -1322,6 +1375,12 @@ class ProgramDela
         return $this;
     }
 
+    public function setStHonorarnihIgrSamoz($stHonorarnihIgrSamoz)
+    {
+        $this->stHonorarnihIgrSamoz = $stHonorarnihIgrSamoz;
+        return $this;
+    }
+
     public function setSredstvaInt($sredstvaInt)
     {
         $this->sredstvaInt = $sredstvaInt;
@@ -1334,25 +1393,14 @@ class ProgramDela
         return $this;
     }
 
-    public function getZakljuceno()
+    public function getSredstvaAvtSamoz()
     {
-        return $this->zakljuceno;
+        return $this->sredstvaAvtSamoz;
     }
 
-    public function setZakljuceno($zakljuceno)
+    public function setSredstvaAvtSamoz($sredstvaAvtSamoz)
     {
-        $this->zakljuceno = $zakljuceno;
-        return $this;
-    }
-
-    public function getStHonorarnihIgrSamoz()
-    {
-        return $this->stHonorarnihIgrSamoz;
-    }
-
-    public function setStHonorarnihIgrSamoz($stHonorarnihIgrSamoz)
-    {
-        $this->stHonorarnihIgrSamoz = $stHonorarnihIgrSamoz;
+        $this->sredstvaAvtSamoz = $sredstvaAvtSamoz;
         return $this;
     }
 
