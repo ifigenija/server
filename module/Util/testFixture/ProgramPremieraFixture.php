@@ -50,7 +50,7 @@ class ProgramPremieraFixture
         $getref = $this->getReference($v[0]);
         $o->setUprizoritev($getref);
 
-        $o->setCelotnaVrednost($v[1]);
+//        $o->setCelotnaVrednost($v[1]);
 
         $value = $tipPrEnR->findOneBySifra($v[2]);
         $o->setTipProgramskeEnote($value);
@@ -81,6 +81,7 @@ class ProgramPremieraFixture
         return [
             ['Uprizoritev-0001', 10000.80, '04', 3600.12, 2222.3, 4000.4, 200.2, 200.3, 100.2, 40, 2, 2, 2, 2, 2, 9000.3,],
             ['Uprizoritev-0002', 5000, '05', 1960.08, 1000.2, 600.7, 200.2, 200.2, 100.2, 60, 3, 3, 3, 3, 3, 4900.2,],
+            ['Uprizoritev-0003', 5000, '04', 1960.08, 1000.2, 600.7, 200.2, 200.2, 100.2, 60, 3, 3, 3, 3, 3, 4900.2,],
         ];
     }
 
