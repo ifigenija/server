@@ -140,6 +140,46 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stInt", description="programDela.d.stInt")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stInt;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stFest", description="programDela.d.stFest")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stFest;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stRazno", description="programDela.d.stRazno")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stRazno;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzjem", description="programDela.d.stIzjem")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzjem;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPonPrem", description="programDela.d.stPonPrem")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stPonPrem;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="programDela.stPonPrej", description="programDela.d.stPonPrej")
      * @Max\Ui(type="integer")
      * @var integer
@@ -185,6 +225,14 @@ class ProgramDela
      * @var integer
      */
     protected $stPonPrejVelikihKopr;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stGostujo", description="programDela.d.stGostujo")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stGostujo;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
@@ -451,6 +499,174 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaZaprosenoPrem", description="programDela.d.sredstvaZaprosenoPrem")   
+     * @var double
+     */
+    protected $sredstvaZaprosenoPrem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaZaprosenoPonPrem", description="programDela.d.sredstvaZaprosenoPonPrem")   
+     * @var double
+     */
+    protected $sredstvaZaprosenoPonPrem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaZaprosenoPonPrej", description="programDela.d.sredstvaZaprosenoPonPrej")   
+     * @var double
+     */
+    protected $sredstvaZaprosenoPonPrej;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaZaprosenoGostujo", description="programDela.d.sredstvaZaprosenoGostujo")   
+     * @var double
+     */
+    protected $sredstvaZaprosenoGostujo;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaZaprosenoInt", description="programDela.d.sredstvaZaprosenoInt")   
+     * @var double
+     */
+    protected $sredstvaZaprosenoInt;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaZaprosenoFest", description="programDela.d.sredstvaZaprosenoFest")   
+     * @var double
+     */
+    protected $sredstvaZaprosenoFest;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaZaprosenoRazno", description="programDela.d.sredstvaZaprosenoRazno")   
+     * @var double
+     */
+    protected $sredstvaZaprosenoRazno;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaZaprosenoIzjem", description="programDela.d.sredstvaZaprosenoIzjem")   
+     * @var double
+     */
+    protected $sredstvaZaprosenoIzjem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiJavniPrem", description="programDela.d.sredstvaDrugiJavniPrem")   
+     * @var double
+     */
+    protected $sredstvaDrugiJavniPrem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiJavniPonPrem", description="programDela.d.sredstvaDrugiJavniPonPrem")   
+     * @var double
+     */
+    protected $sredstvaDrugiJavniPonPrem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiJavniPonPrej", description="programDela.d.sredstvaDrugiJavniPonPrej")   
+     * @var double
+     */
+    protected $sredstvaDrugiJavniPonPrej;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiJavniGostujo", description="programDela.d.sredstvaDrugiJavniGostujo")   
+     * @var double
+     */
+    protected $sredstvaDrugiJavniGostujo;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiJavniInt", description="programDela.d.sredstvaDrugiJavniInt")   
+     * @var double
+     */
+    protected $sredstvaDrugiJavniInt;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiJavniFest", description="programDela.d.sredstvaDrugiJavniFest")   
+     * @var double
+     */
+    protected $sredstvaDrugiJavniFest;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiJavniRazno", description="programDela.d.sredstvaDrugiJavniRazno")   
+     * @var double
+     */
+    protected $sredstvaDrugiJavniRazno;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiJavniIzjem", description="programDela.d.sredstvaDrugiJavniIzjem")   
+     * @var double
+     */
+    protected $sredstvaDrugiJavniIzjem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiViriPrem", description="programDela.d.sredstvaDrugiViriPrem")   
+     * @var double
+     */
+    protected $sredstvaDrugiViriPrem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiViriPonPrem", description="programDela.d.sredstvaDrugiViriPonPrem")   
+     * @var double
+     */
+    protected $sredstvaDrugiViriPonPrem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiViriPonPrej", description="programDela.d.sredstvaDrugiViriPonPrej")   
+     * @var double
+     */
+    protected $sredstvaDrugiViriPonPrej;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiViriGostujo", description="programDela.d.sredstvaDrugiViriGostujo")   
+     * @var double
+     */
+    protected $sredstvaDrugiViriGostujo;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiViriInt", description="programDela.d.sredstvaDrugiViriInt")   
+     * @var double
+     */
+    protected $sredstvaDrugiViriInt;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiViriFest", description="programDela.d.sredstvaDrugiViriFest")   
+     * @var double
+     */
+    protected $sredstvaDrugiViriFest;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiViriRazno", description="programDela.d.sredstvaDrugiViriRazno")   
+     * @var double
+     */
+    protected $sredstvaDrugiViriRazno;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaDrugiViriIzjem", description="programDela.d.sredstvaDrugiViriIzjem")   
+     * @var double
+     */
+    protected $sredstvaDrugiViriIzjem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaAvtSamoz", description="programDela.d.sredstvaAvtSamoz")   
      * @var double
      */
@@ -461,13 +677,16 @@ class ProgramDela
      * 
      * @param enotaPrograma $object
      */
-    protected function prerSredstva($object)
+    protected function sestejDrugeVire($object)
     {
+        $znesekVseh = 0;  //init
         foreach ($object->getDrugiViri() as $numobjDV => $objDV) {
+            $znesekVseh+=$objDV->getZnesek();
             if ($objDV->getMednarodni()) {
                 $this->sredstvaInt +=$objDV->getZnesek();
             }
         }
+        return $znesekVseh;
     }
 
     /**
@@ -523,43 +742,72 @@ class ProgramDela
      */
     public function preracunaj($smer = false)
     {
-        $this->stPonPrejMalih       = 0;  //init
-        $this->stPonPrejMalihKopr   = 0;  //init
-        $this->stPonPrejSredKopr    = 0;  //init
-        $this->stPonPrejVelikihKopr = 0;  //init
-        $this->vrPS1                = 0;  //init
-        $this->vrPS1Do              = 0;  //init
-        $this->vrPS1Mat             = 0;  //init
-        $this->vrPS1GostovSZ        = 0;  //init
-        $this->stIzvNekomerc        = 0;  //init
-        $this->stIzvPrem            = 0;  //init
-        $this->stIzvPonPrem         = 0;  //init
-        $this->stIzvPonPrej         = 0;  //init
-        $this->stIzvGostuj          = 0;  //init
-        $this->stIzvOstalihNek      = 0;  //init
-        $this->stIzvGostovanjSlo    = 0;  //init
-        $this->stIzvGostovanjZam    = 0;  //init
-        $this->stIzvGostovanjInt    = 0;  //init
-        $this->stObiskNekom         = 0;  //init
-        $this->stObiskNekomMat      = 0;  //init
-        $this->stObiskNekomGostSlo  = 0;  //init
-        $this->stObiskNekomGostZam  = 0;  //init
-        $this->stObiskNekomGostInt  = 0;  //init
-        $this->stHonorarnih         = 0;  //init
-        $this->stHonorarnihIgr      = 0;  //init
-        $this->stHonorarnihIgrTujJZ = 0;  //init
-        $this->stHonorarnihIgrSamoz = 0;  //init
-        $this->sredstvaAvt          = 0;  //init
-        $this->sredstvaAvtSamoz     = 0;  //init
-        $this->sredstvaInt          = 0;  //init
-        $this->stKoprodukcij        = 0;  //init
-        $this->stKoprodukcijInt     = 0;  //init
-        $this->stKoprodukcijNVO     = 0;  //init
-        $this->stPonPrejVelikih     = 0;  //init
-
+        $this->stPonPrejMalih            = 0;  //init
+        $this->stPonPrejMalihKopr        = 0;  //init
+        $this->stPonPrejSredKopr         = 0;  //init
+        $this->stPonPrejVelikihKopr      = 0;  //init
+        $this->vrPS1                     = 0;  //init
+        $this->vrPS1Do                   = 0;  //init
+        $this->vrPS1Mat                  = 0;  //init
+        $this->vrPS1GostovSZ             = 0;  //init
+        $this->stIzvNekomerc             = 0;  //init
+        $this->stIzvPrem                 = 0;  //init
+        $this->stIzvPonPrem              = 0;  //init
+        $this->stIzvPonPrej              = 0;  //init
+        $this->stIzvGostuj               = 0;  //init
+        $this->stIzvOstalihNek           = 0;  //init
+        $this->stIzvGostovanjSlo         = 0;  //init
+        $this->stIzvGostovanjZam         = 0;  //init
+        $this->stIzvGostovanjInt         = 0;  //init
+        $this->stObiskNekom              = 0;  //init
+        $this->stObiskNekomMat           = 0;  //init
+        $this->stObiskNekomGostSlo       = 0;  //init
+        $this->stObiskNekomGostZam       = 0;  //init
+        $this->stObiskNekomGostInt       = 0;  //init
+        $this->stHonorarnih              = 0;  //init
+        $this->stHonorarnihIgr           = 0;  //init
+        $this->stHonorarnihIgrTujJZ      = 0;  //init
+        $this->stHonorarnihIgrSamoz      = 0;  //init
+        $this->sredstvaAvt               = 0;  //init
+        $this->sredstvaAvtSamoz          = 0;  //init
+        $this->sredstvaInt               = 0;  //init
+        $this->stKoprodukcij             = 0;  //init
+        $this->stKoprodukcijInt          = 0;  //init
+        $this->stKoprodukcijNVO          = 0;  //init
+        $this->stPonPrejVelikih          = 0;  //init
+        $this->sredstvaZaprosenoPrem     = 0;  //init
+        $this->sredstvaZaprosenoPonPrem  = 0;  //init
+        $this->sredstvaZaprosenoPonPrej  = 0;  //init
+        $this->sredstvaZaprosenoGostujo  = 0;  //init
+        $this->sredstvaZaprosenoInt      = 0;  //init
+        $this->sredstvaZaprosenoFest     = 0;  //init
+        $this->sredstvaZaprosenoRazno    = 0;  //init
+        $this->sredstvaZaprosenoIzjem    = 0;  //init
+        $this->sredstvaDrugiJavniPrem    = 0;  //init
+        $this->sredstvaDrugiJavniPonPrem = 0;  //init
+        $this->sredstvaDrugiJavniPonPrej = 0;  //init
+        $this->sredstvaDrugiJavniGostujo = 0;  //init
+        $this->sredstvaDrugiJavniInt     = 0;  //init
+        $this->sredstvaDrugiJavniFest    = 0;  //init
+        $this->sredstvaDrugiJavniRazno   = 0;  //init
+        $this->sredstvaDrugiJavniIzjem   = 0;  //init
+        $this->sredstvaDrugiViriPrem     = 0;  //init
+        $this->sredstvaDrugiViriPonPrem  = 0;  //init
+        $this->sredstvaDrugiViriPonPrej  = 0;  //init
+        $this->sredstvaDrugiViriGostujo  = 0;  //init
+        $this->sredstvaDrugiViriInt      = 0;  //init
+        $this->sredstvaDrugiViriFest     = 0;  //init
+        $this->sredstvaDrugiViriRazno    = 0;  //init
+        $this->sredstvaDrugiViriIzjem    = 0;  //init
 
         $this->stPremier = $this->getPremiere()->count();
+        $this->stPonPrem = $this->getPonovitvePremiere()->count();
         $this->stPonPrej = $this->getPonovitvePrejsnjih()->count();
+        $this->stGostujo = $this->getGostujoci()->count();
+        $this->stInt = $this->getGostovanja()->count();
+        $this->stFest = $this->getProgramiFestival()->count();
+        $this->stRazno = $this->getProgramiRazno()->count();
+        $this->stIzjem = $this->getIzjemni()->count();
 
         /**
          * premiere
@@ -578,9 +826,11 @@ class ProgramDela
             $this->stHonorarnihIgr +=$object->getStHonorarnihIgr();
             $this->stHonorarnihIgrTujJZ +=$object->getStHonorarnihIgrTujJZ();
             $this->stHonorarnihIgrSamoz +=$object->getStHonorarnihIgrSamoz();
+            $this->sredstvaZaprosenoPrem+=$object->getZaproseno();
+            $this->sredstvaDrugiJavniPrem+=$object->getDrugiJavni();
+            $this->sredstvaDrugiViriPrem+=$this->sestejDrugeVire($object);
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
             $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
-            $this->prerSredstva($object);
             $this->prerStKopr($object);
         }
 
@@ -604,7 +854,9 @@ class ProgramDela
             $this->stObiskNekomGostZam +=$object->getObiskZamejo();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
             $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
-            $this->prerSredstva($object);
+            $this->sredstvaZaprosenoPonPrem+=$object->getZaproseno();
+            $this->sredstvaDrugiJavniPonPrem+=$object->getDrugiJavni();
+            $this->sredstvaDrugiViriPonPrem+=$this->sestejDrugeVire($object);
             $this->prerStKopr($object);
         }
 
@@ -653,7 +905,9 @@ class ProgramDela
                 default:
                     $this->expect(FALSE, "Ponovitev prejšnjih ima napačen tip programske enote:" . $object->getTipProgramskeEnote()->getSifra(), 1000490);
             }
-            $this->prerSredstva($object);
+            $this->sredstvaZaprosenoPonPrej+=$object->getZaproseno();
+            $this->sredstvaDrugiJavniPonPrej+=$object->getDrugiJavni();
+            $this->sredstvaDrugiViriPonPrej+=$this->sestejDrugeVire($object);
             $this->prerStKopr($object);
         }
 
@@ -668,7 +922,9 @@ class ProgramDela
             $this->stIzvGostuj+=$object->getPonoviDoma();
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
-            $this->prerSredstva($object);
+            $this->sredstvaZaprosenoGostujo+=$object->getZaproseno();
+            $this->sredstvaDrugiJavniGostujo+=$object->getDrugiJavni();
+            $this->sredstvaDrugiViriGostujo+=$this->sestejDrugeVire($object);
             $this->prerStKopr($object);
         }
 
@@ -701,7 +957,9 @@ class ProgramDela
                 // če ni uprizoritev iz ponovitve (letošnje) premiere je najverjetneje  iz ponovitve premiere prejšnjih sezon
                 $this->stIzvPonPrej+=$object->getPonoviInt();
             }
-            $this->prerSredstva($object);
+            $this->sredstvaZaprosenoInt+=$object->getZaproseno();
+            $this->sredstvaDrugiJavniInt+=$object->getDrugiJavni();
+            $this->sredstvaDrugiViriInt+=$this->sestejDrugeVire($object);
             $this->prerStKopr($object);
         }
 
@@ -717,7 +975,9 @@ class ProgramDela
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stHonorarnih +=$object->getStHonorarnih();
-            $this->prerSredstva($object);
+            $this->sredstvaZaprosenoFest+=$object->getZaproseno();
+            $this->sredstvaDrugiJavniFest+=$object->getDrugiJavni();
+            $this->sredstvaDrugiViriFest+=$this->sestejDrugeVire($object);
             $this->prerStKopr($object);
         }
 
@@ -733,7 +993,9 @@ class ProgramDela
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stHonorarnih +=$object->getStHonorarnih();
-            $this->prerSredstva($object);
+            $this->sredstvaZaprosenoRazno+=$object->getZaproseno();
+            $this->sredstvaDrugiJavniRazno+=$object->getDrugiJavni();
+            $this->sredstvaDrugiViriRazno+=$this->sestejDrugeVire($object);
             $this->prerStKopr($object);
         }
 
@@ -750,7 +1012,9 @@ class ProgramDela
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
             $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
-            $this->prerSredstva($object);
+            $this->sredstvaZaprosenoIzjem+=$object->getZaproseno();
+            $this->sredstvaDrugiJavniIzjem+=$object->getDrugiJavni();
+            $this->sredstvaDrugiViriIzjem+=$this->sestejDrugeVire($object);
             $this->prerStKopr($object);
         }
 
@@ -851,6 +1115,11 @@ class ProgramDela
         return $this->stPremier;
     }
 
+    public function getStPonPrem()
+    {
+        return $this->stPonPrem;
+    }
+
     public function getStPonPrej()
     {
         return $this->stPonPrej;
@@ -879,6 +1148,11 @@ class ProgramDela
     public function getStPonPrejVelikihKopr()
     {
         return $this->stPonPrejVelikihKopr;
+    }
+
+    public function getStGostujo()
+    {
+        return $this->stGostujo;
     }
 
     public function getVrPS1()
@@ -1051,6 +1325,131 @@ class ProgramDela
         return $this->sredstvaAvt;
     }
 
+    public function getSredstvaZaprosenoPrem()
+    {
+        return $this->sredstvaZaprosenoPrem;
+    }
+
+    public function getSredstvaZaprosenoPonPrem()
+    {
+        return $this->sredstvaZaprosenoPonPrem;
+    }
+
+    public function getSredstvaZaprosenoPonPrej()
+    {
+        return $this->sredstvaZaprosenoPonPrej;
+    }
+
+    public function getSredstvaZaprosenoGostujo()
+    {
+        return $this->sredstvaZaprosenoGostujo;
+    }
+
+    public function getSredstvaZaprosenoInt()
+    {
+        return $this->sredstvaZaprosenoInt;
+    }
+
+    public function getSredstvaZaprosenoFest()
+    {
+        return $this->sredstvaZaprosenoFest;
+    }
+
+    public function getSredstvaZaprosenoRazno()
+    {
+        return $this->sredstvaZaprosenoRazno;
+    }
+
+    public function getSredstvaZaprosenoIzjem()
+    {
+        return $this->sredstvaZaprosenoIzjem;
+    }
+
+    public function getSredstvaDrugiJavniPrem()
+    {
+        return $this->sredstvaDrugiJavniPrem;
+    }
+
+    public function getSredstvaDrugiJavniPonPrem()
+    {
+        return $this->sredstvaDrugiJavniPonPrem;
+    }
+
+    public function getSredstvaDrugiJavniPonPrej()
+    {
+        return $this->sredstvaDrugiJavniPonPrej;
+    }
+
+    public function getSredstvaDrugiJavniGostujo()
+    {
+        return $this->sredstvaDrugiJavniGostujo;
+    }
+
+    public function getSredstvaDrugiJavniInt()
+    {
+        return $this->sredstvaDrugiJavniInt;
+    }
+
+    public function getSredstvaDrugiJavniFest()
+    {
+        return $this->sredstvaDrugiJavniFest;
+    }
+
+    public function getSredstvaDrugiJavniRazno()
+    {
+        return $this->sredstvaDrugiJavniRazno;
+    }
+
+    public function getSredstvaDrugiJavniIzjem()
+    {
+        return $this->sredstvaDrugiJavniIzjem;
+    }
+
+    public function getSredstvaDrugiViriPrem()
+    {
+        return $this->sredstvaDrugiViriPrem;
+    }
+
+    public function getSredstvaDrugiViriPonPrem()
+    {
+        return $this->sredstvaDrugiViriPonPrem;
+    }
+
+    public function getSredstvaDrugiViriPonPrej()
+    {
+        return $this->sredstvaDrugiViriPonPrej;
+    }
+
+    public function getSredstvaDrugiViriGostujo()
+    {
+        return $this->sredstvaDrugiViriGostujo;
+    }
+
+    public function getSredstvaDrugiViriInt()
+    {
+        return $this->sredstvaDrugiViriInt;
+    }
+
+    public function getSredstvaDrugiViriFest()
+    {
+        return $this->sredstvaDrugiViriFest;
+    }
+
+    public function getSredstvaDrugiViriRazno()
+    {
+        return $this->sredstvaDrugiViriRazno;
+    }
+
+    public function getSredstvaDrugiViriIzjem()
+    {
+        return $this->sredstvaDrugiViriIzjem;
+    }
+
+    public function getSredstvaAvtSamoz()
+    {
+        return $this->sredstvaAvtSamoz;
+    }
+
     public function setId($id)
     {
         $this->id = $id;
@@ -1153,6 +1552,12 @@ class ProgramDela
         return $this;
     }
 
+    public function setStPonPrem($stPonPrem)
+    {
+        $this->stPonPrem = $stPonPrem;
+        return $this;
+    }
+
     public function setStPonPrej($stPonPrej)
     {
         $this->stPonPrej = $stPonPrej;
@@ -1186,6 +1591,12 @@ class ProgramDela
     public function setStPonPrejVelikihKopr($stPonPrejVelikihKopr)
     {
         $this->stPonPrejVelikihKopr = $stPonPrejVelikihKopr;
+        return $this;
+    }
+
+    public function setStGostujo($stGostujo)
+    {
+        $this->stGostujo = $stGostujo;
         return $this;
     }
 
@@ -1393,14 +1804,197 @@ class ProgramDela
         return $this;
     }
 
-    public function getSredstvaAvtSamoz()
+    public function setSredstvaZaprosenoPrem($sredstvaZaprosenoPrem)
     {
-        return $this->sredstvaAvtSamoz;
+        $this->sredstvaZaprosenoPrem = $sredstvaZaprosenoPrem;
+        return $this;
+    }
+
+    public function setSredstvaZaprosenoPonPrem($sredstvaZaprosenoPonPrem)
+    {
+        $this->sredstvaZaprosenoPonPrem = $sredstvaZaprosenoPonPrem;
+        return $this;
+    }
+
+    public function setSredstvaZaprosenoPonPrej($sredstvaZaprosenoPonPrej)
+    {
+        $this->sredstvaZaprosenoPonPrej = $sredstvaZaprosenoPonPrej;
+        return $this;
+    }
+
+    public function setSredstvaZaprosenoGostujo($sredstvaZaprosenoGostujo)
+    {
+        $this->sredstvaZaprosenoGostujo = $sredstvaZaprosenoGostujo;
+        return $this;
+    }
+
+    public function setSredstvaZaprosenoInt($sredstvaZaprosenoInt)
+    {
+        $this->sredstvaZaprosenoInt = $sredstvaZaprosenoInt;
+        return $this;
+    }
+
+    public function setSredstvaZaprosenoFest($sredstvaZaprosenoFest)
+    {
+        $this->sredstvaZaprosenoFest = $sredstvaZaprosenoFest;
+        return $this;
+    }
+
+    public function setSredstvaZaprosenoRazno($sredstvaZaprosenoRazno)
+    {
+        $this->sredstvaZaprosenoRazno = $sredstvaZaprosenoRazno;
+        return $this;
+    }
+
+    public function setSredstvaZaprosenoIzjem($sredstvaZaprosenoIzjem)
+    {
+        $this->sredstvaZaprosenoIzjem = $sredstvaZaprosenoIzjem;
+        return $this;
+    }
+
+    public function setSredstvaDrugiJavniPrem($sredstvaDrugiJavniPrem)
+    {
+        $this->sredstvaDrugiJavniPrem = $sredstvaDrugiJavniPrem;
+        return $this;
+    }
+
+    public function setSredstvaDrugiJavniPonPrem($sredstvaDrugiJavniPonPrem)
+    {
+        $this->sredstvaDrugiJavniPonPrem = $sredstvaDrugiJavniPonPrem;
+        return $this;
+    }
+
+    public function setSredstvaDrugiJavniPonPrej($sredstvaDrugiJavniPonPrej)
+    {
+        $this->sredstvaDrugiJavniPonPrej = $sredstvaDrugiJavniPonPrej;
+        return $this;
+    }
+
+    public function setSredstvaDrugiJavniGostujo($sredstvaDrugiJavniGostujo)
+    {
+        $this->sredstvaDrugiJavniGostujo = $sredstvaDrugiJavniGostujo;
+        return $this;
+    }
+
+    public function setSredstvaDrugiJavniInt($sredstvaDrugiJavniInt)
+    {
+        $this->sredstvaDrugiJavniInt = $sredstvaDrugiJavniInt;
+        return $this;
+    }
+
+    public function setSredstvaDrugiJavniFest($sredstvaDrugiJavniFest)
+    {
+        $this->sredstvaDrugiJavniFest = $sredstvaDrugiJavniFest;
+        return $this;
+    }
+
+    public function setSredstvaDrugiJavniRazno($sredstvaDrugiJavniRazno)
+    {
+        $this->sredstvaDrugiJavniRazno = $sredstvaDrugiJavniRazno;
+        return $this;
+    }
+
+    public function setSredstvaDrugiJavniIzjem($sredstvaDrugiJavniIzjem)
+    {
+        $this->sredstvaDrugiJavniIzjem = $sredstvaDrugiJavniIzjem;
+        return $this;
+    }
+
+    public function setSredstvaDrugiViriPrem($sredstvaDrugiViriPrem)
+    {
+        $this->sredstvaDrugiViriPrem = $sredstvaDrugiViriPrem;
+        return $this;
+    }
+
+    public function setSredstvaDrugiViriPonPrem($sredstvaDrugiViriPonPrem)
+    {
+        $this->sredstvaDrugiViriPonPrem = $sredstvaDrugiViriPonPrem;
+        return $this;
+    }
+
+    public function setSredstvaDrugiViriPonPrej($sredstvaDrugiViriPonPrej)
+    {
+        $this->sredstvaDrugiViriPonPrej = $sredstvaDrugiViriPonPrej;
+        return $this;
+    }
+
+    public function setSredstvaDrugiViriGostujo($sredstvaDrugiViriGostujo)
+    {
+        $this->sredstvaDrugiViriGostujo = $sredstvaDrugiViriGostujo;
+        return $this;
+    }
+
+    public function setSredstvaDrugiViriInt($sredstvaDrugiViriInt)
+    {
+        $this->sredstvaDrugiViriInt = $sredstvaDrugiViriInt;
+        return $this;
+    }
+
+    public function setSredstvaDrugiViriFest($sredstvaDrugiViriFest)
+    {
+        $this->sredstvaDrugiViriFest = $sredstvaDrugiViriFest;
+        return $this;
+    }
+
+    public function setSredstvaDrugiViriRazno($sredstvaDrugiViriRazno)
+    {
+        $this->sredstvaDrugiViriRazno = $sredstvaDrugiViriRazno;
+        return $this;
+    }
+
+    public function setSredstvaDrugiViriIzjem($sredstvaDrugiViriIzjem)
+    {
+        $this->sredstvaDrugiViriIzjem = $sredstvaDrugiViriIzjem;
+        return $this;
     }
 
     public function setSredstvaAvtSamoz($sredstvaAvtSamoz)
     {
         $this->sredstvaAvtSamoz = $sredstvaAvtSamoz;
+        return $this;
+    }
+
+    public function getStInt()
+    {
+        return $this->stInt;
+    }
+
+    public function getStFest()
+    {
+        return $this->stFest;
+    }
+
+    public function getStRazno()
+    {
+        return $this->stRazno;
+    }
+
+    public function getStIzjem()
+    {
+        return $this->stIzjem;
+    }
+
+    public function setStInt($stInt)
+    {
+        $this->stInt = $stInt;
+        return $this;
+    }
+
+    public function setStFest($stFest)
+    {
+        $this->stFest = $stFest;
+        return $this;
+    }
+
+    public function setStRazno($stRazno)
+    {
+        $this->stRazno = $stRazno;
+        return $this;
+    }
+
+    public function setStIzjem($stIzjem)
+    {
+        $this->stIzjem = $stIzjem;
         return $this;
     }
 
