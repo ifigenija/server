@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Koledar\Repository\Sezone")
+ * @Max\Lookup(ident="sifra",label="ime",search={"ime","sifra"},)
  * @Max\I18n(label="Sezona",plural="Sezone")
  * @Max\Id(prefix="0031")
  */
@@ -24,13 +25,22 @@ class Sezona
      * @var string     */
     protected $id;
 
+     /**
+     * @ORM\Column(type="string", unique=true, nullable=false)
+     * @Max\I18n(label="sezona.sifra", description="sezona.d.sifra")
+     * @Max\Ui(type="sifra",ident=true,icon="fa fa-barcode")
+     * @var string
+     */
+    protected $sifra;
+
+    
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="sezona.ime", description="sezona.d.ime")
      * @Max\Ui(type="naziv",ident=true )
      * @var string     
      */
-    protected $imeSezone;
+    protected $ime;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -69,71 +79,75 @@ class Sezona
     {
         
     }
-
-    public function getId()
+    function getId()
     {
         return $this->id;
     }
 
-    public function getImeSezone()
+    function getSifra()
     {
-        return $this->imeSezone;
+        return $this->sifra;
     }
 
-    public function getZacetek()
+    function getIme()
+    {
+        return $this->ime;
+    }
+
+    function getZacetek()
     {
         return $this->zacetek;
     }
 
-    public function getKonec()
+    function getKonec()
     {
         return $this->konec;
     }
 
-    public function getAktivna()
+    function getAktivna()
     {
         return $this->aktivna;
     }
 
-    public function getDogodki()
+    function getDogodki()
     {
         return $this->dogodki;
     }
 
-    public function setId($id)
+    function setId($id)
     {
         $this->id = $id;
-        return $this;
     }
 
-    public function setImeSezone($imeSezone)
+    function setSifra($sifra)
     {
-        $this->imeSezone = $imeSezone;
-        return $this;
+        $this->sifra = $sifra;
     }
 
-    public function setZacetek($zacetek)
+    function setIme($ime)
+    {
+        $this->ime = $ime;
+    }
+
+    function setZacetek($zacetek)
     {
         $this->zacetek = $zacetek;
-        return $this;
     }
 
-    public function setKonec($konec)
+    function setKonec($konec)
     {
         $this->konec = $konec;
-        return $this;
     }
 
-    public function setAktivna($aktivna)
+    function setAktivna($aktivna)
     {
         $this->aktivna = $aktivna;
-        return $this;
     }
 
-    public function setDogodki($dogodki)
+    function setDogodki($dogodki)
     {
         $this->dogodki = $dogodki;
-        return $this;
     }
+
 
 }

@@ -3,6 +3,7 @@
 /*
  *  Licenca GPLv3
  */
+
 namespace Koledar\Repository;
 
 use Doctrine\Common\Collections\Criteria;
@@ -10,7 +11,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineModule\Paginator\Adapter\Selectable;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
-
 
 /**
  * Description of Sezone
@@ -23,10 +23,12 @@ class Sezone
 
     protected $sortOptions = [
         "default" => [
-            "imeSezone" => ["alias" => "p.imeSezone"]
+            "sifra" => ["alias" => "p.sifra"],
+            "ime"   => ["alias" => "p.ime"]
         ],
         "vse"     => [
-            "imeSezone" => ["alias" => "p.imeSezone"]
+            "sifra" => ["alias" => "p.sifra"],
+            "ime"   => ["alias" => "p.ime"]
         ]
     ];
 
@@ -35,7 +37,7 @@ class Sezone
         switch ($name) {
             case "default":
             case "vse":
-                $qb   = $this->getVseQb($options);
+                $qb = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
         }
@@ -47,13 +49,22 @@ class Sezone
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.imeSezone', ':imeSezone');
+            $naz = $e->like('p.ime', ':ime');
 
             $qb->andWhere($e->orX($naz));
 
-            $qb->setParameter('imeSezone', "{$options['q']}%", "string");
+            $qb->setParameter('ime', "{$options['q']}%", "string");
         }
         return $qb;
+    }
+
+    public function create($object, $params = null)
+    {
+        if (empty($object->getSifra())) {
+            $num = $this->getServiceLocator()->get('stevilcenje.generator');
+            $object->setSifra($num->generate('sezona'));
+        }
+        parent::create($object, $params);
     }
 
 }

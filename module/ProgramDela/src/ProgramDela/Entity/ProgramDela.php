@@ -125,7 +125,7 @@ class ProgramDela
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona")
      * @ORM\JoinColumn(name="sezona_id", referencedColumnName="id")
      * @Max\I18n(label="programDela.sezona", description="programDela.d.sezona")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="toone", required=true)
      * @var \Koledar\Entity\Sezona
      */
     protected $sezona;

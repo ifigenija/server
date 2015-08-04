@@ -6,7 +6,7 @@ forms:
     default: 
         elements:
 #            - id
-            - imeSezone
+            - ime
             - zacetek
             - konec
             - aktivna

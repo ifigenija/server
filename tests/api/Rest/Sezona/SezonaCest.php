@@ -28,15 +28,16 @@ use ApiTester;
 class SezonaCest
 {
 
-    private $restUrl    = '/rest/sezona';
-    private $dogodekUrl = '/rest/dogodek';
-    private $vajaUrl    = '/rest/vaja';
+    private $restUrl         = '/rest/sezona';
+    private $dogodekUrl      = '/rest/dogodek';
+    private $vajaUrl         = '/rest/vaja';
     private $obj;
     private $obj2;
     private $objDogodek1;
     private $objDogodek2;
     private $objVaja1;
     private $objVaja2;
+    private $lookupSezonaUrl = '/lookup/sezona';
 
     public function _before(ApiTester $I)
     {
@@ -56,27 +57,27 @@ class SezonaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'imeSezone' => 'zz',
-            'zacetek'   => '2010-02-01T00:00:00+0100',
-            'konec'     => '2011-02-01T00:00:00+0100',
-            'aktivna'   => true,
+            'ime'     => 'zz',
+            'zacetek' => '2010-02-01T00:00:00+0100',
+            'konec'   => '2011-02-01T00:00:00+0100',
+            'aktivna' => true,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['imeSezone'], 'zz');
+        $I->assertEquals($ent['ime'], 'zz');
 
         // kreiramo še en zapis
         $data       = [
-            'imeSezone' => 'aa',
-            'zacetek'   => '2012-02-01T00:00:00+0100',
-            'konec'     => '2013-02-01T00:00:00+0100',
-            'aktivna'   => true,
+            'ime'     => 'aa',
+            'zacetek' => '2012-02-01T00:00:00+0100',
+            'konec'   => '2013-02-01T00:00:00+0100',
+            'aktivna' => true,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['imeSezone'], 'aa');
+        $I->assertEquals($ent['ime'], 'aa');
     }
 
     /**
@@ -185,7 +186,7 @@ class SezonaCest
 
         $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        $I->assertEquals("aa", $list[0]['imeSezone']);      // odvisno od sortiranja
+        $I->assertEquals("zz", $list[0]['ime']);      // odvisno od sortiranja
     }
 
     /**
@@ -201,7 +202,7 @@ class SezonaCest
 
         $I->assertNotEmpty($list);
         $I->assertEquals(2, $resp['state']['totalRecords']);
-        $I->assertEquals("aa", $list[0]['imeSezone']);      // odvisno od sortiranja
+        $I->assertEquals("zz", $list[0]['ime']);      // odvisno od sortiranja
     }
 
     /**
@@ -212,12 +213,12 @@ class SezonaCest
      */
     public function update(ApiTester $I)
     {
-        $ent              = $this->obj;
-        $ent['imeSezone'] = 'yy';
+        $ent        = $this->obj;
+        $ent['ime'] = 'yy';
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['imeSezone'], 'yy');
+        $I->assertEquals($entR['ime'], 'yy');
     }
 
     /**
@@ -230,14 +231,32 @@ class SezonaCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         $I->assertEquals($ent['zacetek'], '2010-02-01T00:00:00+0100');
         $I->assertEquals($ent['konec'], '2011-02-01T00:00:00+0100');
         $I->assertEquals($ent['aktivna'], true);
+        $I->assertNotEmpty($ent['sifra'], "šifra");
 
         $I->assertTrue(isset($ent['dogodki']));
 
         $I->assertEquals(0, count($ent['dogodki']));
+    }
+
+    /**
+     * test delovanja lookup-a
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupSezona(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->lookupSezonaUrl, []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords'], "total records");
     }
 
     /**
@@ -267,5 +286,6 @@ class SezonaCest
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "dogodki", $this->objDogodek1['id']);
         $I->assertEquals(1, count($resp));
     }
+
 
 }
