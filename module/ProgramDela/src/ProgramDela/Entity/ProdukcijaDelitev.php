@@ -41,7 +41,7 @@ class ProdukcijaDelitev
      * = celotna vrednost projekta * %financiranja
      * 
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="prodel.zaproseno", description="prodel.d.zaproseno")
+     * @Max\I18n(label="prodel.delez", description="prodel.d.delez")
      * @var double
      */
     protected $delez;
@@ -50,7 +50,7 @@ class ProdukcijaDelitev
      * zaprošen znesek pri MK
      * 
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="prodel.delez", description="prodel.delez")
+     * @Max\I18n(label="prodel.zaproseno", description="prodel.zaproseno")
      * @var double
      */
     protected $zaproseno;
