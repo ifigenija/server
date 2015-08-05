@@ -108,6 +108,9 @@ class ProgramGostovanje
 
     public function validate($mode = 'update')
     {
+        $this->validateEuroGE0($this->transportniStroski, "Transportni stroški", 1000443);
+        $this->validateEuroGE0($this->dnevPrvZad, "Dnevnice za prvi in zadnji dan", 1000443);
+
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostovanje", 1000441);
 
         $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
@@ -115,7 +118,7 @@ class ProgramGostovanje
         $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor, tantiem, avt.pravic, transp. str. in dnevnic za 1. in zadnji dan (" . $sumStr . ")", 1000441);
 
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
-        $maxZaproseno = \Max\Functions::euroRoundS(0.60 * $this->avtorskiHonorarji + 0.60 * $this->tantieme+ 0.70 * $this->avtorskePravice+ 1.00 * $this->transportniStroski + 1.00 * $this->dnevPrvZad);
+        $maxZaproseno = \Max\Functions::euroRoundS(0.60 * $this->avtorskiHonorarji + 0.60 * $this->tantieme + 0.70 * $this->avtorskePravice + 1.00 * $this->transportniStroski + 1.00 * $this->dnevPrvZad);
         // glede na procent upravičenih stroškov
         $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 60% avtorskih in tantiem in 70% odkupa avtorskih pravic in transportnih stroskov in dnevnic za 1. in zadnji dan (" . $maxZaproseno . ")", 1000442);
 

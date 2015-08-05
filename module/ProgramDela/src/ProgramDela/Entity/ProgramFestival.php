@@ -142,23 +142,23 @@ class ProgramFestival
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
-        $this->celotnaVrednostGostovSZ=0;
-        $this->avtorskiHonorarji=0;
-        $this->avtorskiHonorarjiSamoz = 0;
-        $this->obiskGost=0;
-        $this->obiskInt=0;
-        $this->obiskZamejo=0;
-        $this->ponoviDoma=0;
-        $this->ponoviGost=0;
-        $this->ponoviInt=0;
-        $this->ponoviZamejo=0;
-        $this->stZaposUmet=0;
-        $this->stZaposDrug=0;
-        $this->stHonorarnihIgr=0;
-        $this->stHonorarnihIgrTujJZ=0;
-        $this->tantieme=0;
-        $this->avtorskePravice=0;
-        $this->vlozekGostitelja=0;
+        $this->celotnaVrednostGostovSZ = 0;
+        $this->avtorskiHonorarji       = 0;
+        $this->avtorskiHonorarjiSamoz  = 0;
+        $this->obiskGost               = 0;
+        $this->obiskInt                = 0;
+        $this->obiskZamejo             = 0;
+        $this->ponoviDoma              = 0;
+        $this->ponoviGost              = 0;
+        $this->ponoviInt               = 0;
+        $this->ponoviZamejo            = 0;
+        $this->stZaposUmet             = 0;
+        $this->stZaposDrug             = 0;
+        $this->stHonorarnihIgr         = 0;
+        $this->stHonorarnihIgrTujJZ    = 0;
+        $this->tantieme                = 0;
+        $this->avtorskePravice         = 0;
+        $this->vlozekGostitelja        = 0;
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
@@ -170,6 +170,14 @@ class ProgramFestival
 
     public function validate($mode = 'update')
     {
+        $this->validateIntGE0($this->stPredstav, "Št. predstav", 1000534);
+        $this->validateIntGE0($this->stOkroglihMiz, "Št. okroglih miz", 1000535);
+        $this->validateIntGE0($this->stPredstavitev, "Št. predstavitev", 1000536);
+        $this->validateIntGE0($this->stDelavnic, "Št. delavnic", 1000537);
+        $this->validateIntGE0($this->stDrugiDogodki, "Št. drugih dogodkov", 1000538);
+        $this->validateIntGE0($this->stProdukcij, "Št. produkcij", 1000539);
+        $this->validateIntGE0($this->stTujihSelektorjev, "Št. tujih selektorev", 1000700);
+
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program festival", 1000531);
         $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program festival", 1000532);
 

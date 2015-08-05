@@ -78,7 +78,7 @@ class ProgramskaEnotaSklopa
     public function validate($mode = 'update')
     {
         $this->expect($this->naslovPE, "Nima naslova PE. Naslov programske enote je obvezen podatek", 1000650);
-        $this->expect($this->vrednostPE > 0, "Vrednost mora biti pozitivno število", 1000651);
+        $this->validateEuroGE0($this->vrednostPE, "Vrednost PE", 1000651);
     }
 
     public function getId()

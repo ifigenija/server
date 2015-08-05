@@ -204,4 +204,21 @@ class ProgramskaEnotaSklopaCest
 //        $I->assertEquals(1000650, $resp[0]['code'], "prazen naslovPE");   // ker že doctrine prej najde da je value required
     }
 
+    /**
+     * test zaokroževanja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateZaZaokrozevanje(ApiTester $I)
+    {
+        $data               = $this->obj2;
+        $data['vrednostPE'] = 0.98765;
+
+        $ent = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        $I->assertGuid($ent['id']);
+        // testiramo, ali je zaokrožil na 2 decimalki
+        $I->assertEquals(0.99, $ent['vrednostPE'], "zaokrožena vrednost");
+    }
+
 }

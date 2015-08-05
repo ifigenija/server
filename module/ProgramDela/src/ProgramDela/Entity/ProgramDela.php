@@ -1028,6 +1028,81 @@ class ProgramDela
     public function validate($mode = 'update')
     {
         $this->expect($this->zacetek <= $this->konec, "Datum konca mora biti za datumom začetka", 1000500);
+        
+        $this->validateIntGE0($this->stFest, "Št. festivalov", 1000710);
+        $this->validateIntGE0($this->stGostujo, "Št. gostujočih", 1000711);
+        $this->validateIntGE0($this->stHonorarnih, "Št. honorarnih", 1000712);
+        $this->validateIntGE0($this->stHonorarnihIgr, "Št. honorarnih igralcev", 1000713);
+        $this->validateIntGE0($this->stHonorarnihIgrSamoz, "Št. honorarnih igralcev samozaposenih", 1000714);
+        $this->validateIntGE0($this->stHonorarnihIgrTujJZ, "Št. honorarnig igralcev tuj JZ", 1000715);
+        $this->validateIntGE0($this->stInt, "Št. dogodkov mednarodnih gostovanj", 1000716);
+        $this->validateIntGE0($this->stIzjem, "Št. izjemnih dogodkov", 1000717);
+        $this->validateIntGE0($this->stIzvGostovanjInt, "Št. izvedb mednaronih gostovanj", 1000718);
+        $this->validateIntGE0($this->stIzvGostovanjSlo, "Št. izvedb gostovanj v Sloveniji", 1000719);
+        $this->validateIntGE0($this->stIzvGostovanjZam, "Št. izvedb gostovanj v zamejstvu", 1000720);
+        $this->validateIntGE0($this->stIzvGostuj, "Št izvedb gostujočih", 1000721);
+        $this->validateIntGE0($this->stIzvNekomerc, "Št. izvedb nekomercialnih", 1000722);
+        $this->validateIntGE0($this->stIzvOstalihNek, "Št. izvedb ostalih nekomercialnih", 1000723);
+        $this->validateIntGE0($this->stIzvPonPrej, "Št. izvedb ponov. prejšnjih", 1000724);
+        $this->validateIntGE0($this->stIzvPonPrem, "Št. izvedb ponov. premiernih upr.", 1000725);
+        $this->validateIntGE0($this->stIzvPrem, "Št. izvedb premiere", 1000726);
+        $this->validateIntGE0($this->stKoprodukcij, "Št. koprodukcij", 1000727);
+        $this->validateIntGE0($this->stKoprodukcijInt, "Št. medn. koprodukcij", 1000728);
+        $this->validateIntGE0($this->stKoprodukcijNVO, "Št. koprodukcij z NVO", 1000729);
+        $this->validateIntGE0($this->stObiskNekom, "Št. obiskovalcev v nekom.", 1000730);
+        $this->validateIntGE0($this->stObiskNekomGostInt, "Št. obiskovalcev v nekom. -mednarodna gostovanja", 1000731);
+        $this->validateIntGE0($this->stObiskNekomGostSlo, "Št. obiskovalcev v nekom.- gostovanja v Slo", 1000732);
+        $this->validateIntGE0($this->stObiskNekomGostZam, "Št. obiskovalcev v nekom. - gostovanja v zamejstvu", 1000733);
+        $this->validateIntGE0($this->stObiskNekomMat, "Št. obiskovalcev nekom na matičnem odru", 1000734);
+        $this->validateIntGE0($this->stPonPrej, "Št. ponovitev prejšnjih", 1000735);
+        $this->validateIntGE0($this->stPonPrejMalih, "Št. ponovitev prejšnjih - malih", 1000736);
+        $this->validateIntGE0($this->stPonPrejMalihKopr, "Št. ponovitev prejšnjih - malih koprodukcij", 1000737);
+        $this->validateIntGE0($this->stPonPrejSredKopr, "Št. ponovitev prejšnjih - srednje kopr.", 1000738);
+        $this->validateIntGE0($this->stPonPrejVelikih, "Št. ponovitev prejšnjih - velike", 1000739);
+        $this->validateIntGE0($this->stPonPrejVelikihKopr, "Št. ponovitev prejšnjih - velike kopr.", 1000740);
+        $this->validateIntGE0($this->stPonPrem, "Št. ponovitev premiere", 1000741);
+        $this->validateIntGE0($this->stPremier, "Št. premier", 1000742);
+        $this->validateIntGE0($this->stProdVstopnic, "Št. prodanih vstopnic", 1000743);
+        $this->validateIntGE0($this->stRazno, "Št. razno", 1000744);
+        $this->validateIntGE0($this->stZaposIgralcev, "Št. zaposlenih igralcev", 1000745);
+        $this->validateIntGE0($this->stZaposlenih, "Št. zaposlenih", 1000746);
+
+        
+        $this->validateEuroGE0($this->avgCenaVstopnice, "avgCenaVstopnice", 1000750);
+        $this->validateEuroGE0($this->avgObiskPrired, "avgObiskPrired", 1000751);
+        $this->validateEuroGE0($this->avgStNastopovIgr, "avgStNastopovIgr", 1000752);
+        $this->validateEuroGE0($this->avgZasedDvoran, "avgZasedDvoran", 1000753);
+        $this->validateEuroGE0($this->sredstvaAvt, "sredstvaAvt", 1000754);
+        $this->validateEuroGE0($this->sredstvaAvtSamoz, "sredstvaAvtSamoz", 1000755);
+        $this->validateEuroGE0($this->sredstvaDrugiJavniFest, "sredstvaDrugiJavniFest", 1000756);
+        $this->validateEuroGE0($this->sredstvaDrugiJavniGostujo, "sredstvaDrugiJavniGostujo", 1000757);
+        $this->validateEuroGE0($this->sredstvaDrugiJavniInt, "sredstvaDrugiJavniInt", 1000758);
+        $this->validateEuroGE0($this->sredstvaDrugiJavniIzjem, "sredstvaDrugiJavniIzjem", 1000759);
+        $this->validateEuroGE0($this->sredstvaDrugiJavniPonPrej, "sredstvaDrugiJavniPonPrej", 1000760);
+        $this->validateEuroGE0($this->sredstvaDrugiJavniPonPrem, "sredstvaDrugiJavniPonPrem", 1000761);
+        $this->validateEuroGE0($this->sredstvaDrugiJavniPrem, "sredstvaDrugiJavniPrem", 1000762);
+        $this->validateEuroGE0($this->sredstvaDrugiJavniRazno, "sredstvaDrugiJavniRazno", 1000763);
+        $this->validateEuroGE0($this->sredstvaDrugiViriFest, "sredstvaDrugiViriFest", 1000764);
+        $this->validateEuroGE0($this->sredstvaDrugiViriGostujo, "sredstvaDrugiViriGostujo", 1000765);
+        $this->validateEuroGE0($this->sredstvaDrugiViriInt, "sredstvaDrugiViriInt", 1000766);
+        $this->validateEuroGE0($this->sredstvaDrugiViriIzjem, "sredstvaDrugiViriIzjem", 1000767);
+        $this->validateEuroGE0($this->sredstvaDrugiViriPonPrej, "sredstvaDrugiViriPonPrej", 1000768);
+        $this->validateEuroGE0($this->sredstvaDrugiViriPonPrem, "sredstvaDrugiViriPonPrem", 1000769);
+        $this->validateEuroGE0($this->sredstvaDrugiViriPrem, "sredstvaDrugiViriPrem", 1000770);
+        $this->validateEuroGE0($this->sredstvaDrugiViriRazno, "sredstvaDrugiViriRazno", 1000771);
+        $this->validateEuroGE0($this->sredstvaInt, "sredstvaInt", 1000772);
+        $this->validateEuroGE0($this->sredstvaZaprosenoFest, "sredstvaZaprosenoFest", 1000773);
+        $this->validateEuroGE0($this->sredstvaZaprosenoGostujo, "sredstvaZaprosenoGostujo", 1000774);
+        $this->validateEuroGE0($this->sredstvaZaprosenoInt, "sredstvaZaprosenoInt", 1000775);
+        $this->validateEuroGE0($this->sredstvaZaprosenoIzjem, "sredstvaZaprosenoIzjem", 1000776);
+        $this->validateEuroGE0($this->sredstvaZaprosenoPonPrej, "sredstvaZaprosenoPonPrej", 1000777);
+        $this->validateEuroGE0($this->sredstvaZaprosenoPonPrem, "sredstvaZaprosenoPonPrem", 1000778);
+        $this->validateEuroGE0($this->sredstvaZaprosenoPrem, "sredstvaZaprosenoPrem", 1000779);
+        $this->validateEuroGE0($this->sredstvaZaprosenoRazno, "sredstvaZaprosenoRazno", 1000780);
+        $this->validateEuroGE0($this->vrPS1, "vrPS1", 1000781);
+        $this->validateEuroGE0($this->vrPS1Do, "vrPS1Do", 1000782);
+        $this->validateEuroGE0($this->vrPS1GostovSZ, "vrPS1GostovSZ", 1000783);
+        $this->validateEuroGE0($this->vrPS1Mat, "vrPS1Mat", 1000784);
     }
 
     public function getId()

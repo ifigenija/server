@@ -70,7 +70,7 @@ class DrugiVir
     public function validate($mode = 'update')
     {
         $this->expect($this->getEnotaPrograma(), 'Ni enote programa za ta vir', 1000481);
-        $this->expect($this->znesek > 0, "Znesek mora biti pozitivno število", 1000480);
+        $this->validateEuroGE0($this->znesek, "Znesek", 1000480);
     }
 
     public function getId()

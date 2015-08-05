@@ -379,6 +379,35 @@ class EnotaPrograma
 
     public function validate($mode = 'update')
     {
+        $this->validateEuroGE0($this->celotnaVrednost, "Celotna vrednost", 1000622);
+        $this->validateEuroGE0($this->nasDelez, "Naš delež", 1000623);
+        $this->validateEuroGE0($this->celotnaVrednostMat, "Celotna vrednost na matičnem odru", 1000624);
+        $this->validateEuroGE0($this->celotnaVrednostGostovSZ, "Celotna vrednost gostovanj v Slo in zamejstvu", 1000625);
+        $this->validateEuroGE0($this->zaproseno, "Zaprošeno", 1000626);
+//        $this->validateEuroGE0($this->lastnaSredstva, "Lastna sredstva", 1000627);
+        $this->validateEuroGE0($this->avtorskiHonorarji, "Avtorski honorarji", 1000628);
+        $this->validateEuroGE0($this->avtorskiHonorarjiSamoz, "Avtorski honorarji samozaposlenih", 1000629);
+        $this->validateEuroGE0($this->tantieme, "Tantieme", 1000680);
+        $this->validateEuroGE0($this->avtorskePravice, "Avtorske pravice", 1000681);
+        $this->validateEuroGE0($this->vlozekGostitelja, "Vložek gostitelja", 1000682);
+        $this->validateEuroGE0($this->drugiJavni, "Drugi javni", 1000683);
+        $this->validateIntGE0($this->stZaposlenih, "", 1000684);
+        $this->validateIntGE0($this->stZaposUmet, "", 1000685);
+        $this->validateIntGE0($this->stZaposDrug, "", 1000686);
+        $this->validateIntGE0($this->stHonorarnih, "", 1000687);
+        $this->validateIntGE0($this->stHonorarnihIgr, "", 1000688);
+        $this->validateIntGE0($this->stHonorarnihIgrTujJZ, "", 1000689);
+        $this->validateIntGE0($this->stHonorarnihIgrSamoz, "", 1000690);
+        $this->validateIntGE0($this->obiskDoma, "", 1000691);
+        $this->validateIntGE0($this->obiskGost, "", 1000692);
+        $this->validateIntGE0($this->obiskZamejo, "", 1000693);
+        $this->validateIntGE0($this->obiskInt, "", 1000694);
+        $this->validateIntGE0($this->ponoviDoma, "", 1000695);
+        $this->validateIntGE0($this->ponoviZamejo, "", 1000696);
+        $this->validateIntGE0($this->ponoviGost, "", 1000697);
+        $this->validateIntGE0($this->ponoviInt, "", 1000698);
+        $this->validateIntGE0($this->sort, "", 1000699);
+
         /**
          * pred primerjanjem damo števila s plavajočo vejico v string
          */

@@ -64,6 +64,8 @@ class ProgramGostujoca
 
     public function validate($mode = 'update')
     {
+        $this->validateEuroGE0($this->strosekOdkPred, "Strošek odkupa predstave", 1000433);
+
         if ($this->getDokument()) {
             // preveriti, ali že obstaja programgostujoča z isto uprizoritvijo
             $obstaja = true;  //init

@@ -100,8 +100,8 @@ class ProdukcijaDelitev
     public function preracunaj($smer = false)
     {
         if ($this->getMaticniKop()) {
-            $this->zaproseno       = $this->getEnotaPrograma()->getZaproseno();
-            $this->delez           = $this->getEnotaPrograma()->getNasDelez();
+            $this->zaproseno = $this->getEnotaPrograma()->getZaproseno();
+            $this->delez     = $this->getEnotaPrograma()->getNasDelez();
         }
 
         $this->getEnotaPrograma()->preracunajCelotnoVrednost();     // seštevek vseh deležev
@@ -136,14 +136,15 @@ class ProdukcijaDelitev
         //                
         // // delez= enotaprograma.celotnavrednost * odst.Fin
         // 
-        
+
         $this->expect($this->getEnotaPrograma(), 'Ni enote programa za to koprodukcijo', 1000410);
-        $odstFin      = \Max\Functions::procRoundS($this->getOdstotekFinanciranja());
-        $this->expect(($odstFin >= 0) && ($odstFin <= 100), 'Odstotek financiranja mora biti med 0 in 100', 1000412);
-        $zaproseno = \Max\Functions::procRoundS($this->zaproseno);
-        $delez = \Max\Functions::procRoundS($this->delez);
-        $this->expect(($zaproseno <= $delez), "Zaprošeno (".$zaproseno.") ne sme biti večje od deleža (".$delez.") ", 1000413);
-        $this->expect($zaproseno>=0, 'Zaprošeno ne sme biti negativno število', 1000415);
+
+        $this->validateProcGE0LE100($this->odstotekFinanciranja, "Odstotek financiranja", 1000412);
+        $this->validateEuroGE0($this->zaproseno, "Zaprošeno", 1000415);
+        $this->validateEuroGE0($this->delez, "Delež", 1000416);
+        $zaproseno       = \Max\Functions::procRoundS($this->zaproseno);
+        $delez           = \Max\Functions::procRoundS($this->delez);
+        $this->expect(($zaproseno <= $delez), "Zaprošeno (" . $zaproseno . ") ne sme biti večje od deleža (" . $delez . ") ", 1000413);
 
         //$$ kontrole za vsoto procentov
         // za isto enoto programa je lahko le 1 delitev z isto produkcijsko hišo     

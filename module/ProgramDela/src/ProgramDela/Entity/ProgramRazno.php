@@ -54,23 +54,23 @@ class ProgramRazno
 
     public function preracunaj($smer = false)
     {
-        $this->celotnaVrednostGostovSZ=0;
-        $this->avtorskiHonorarji=0;
-        $this->avtorskiHonorarjiSamoz=0;
-        $this->obiskGost=0;
-        $this->obiskInt=0;
-        $this->obiskZamejo=0;
-        $this->ponoviDoma=0;
-        $this->ponoviGost=0;
-        $this->ponoviInt=0;
-        $this->ponoviZamejo=0;
-        $this->stZaposUmet=0;
-        $this->stZaposDrug=0;
-        $this->stHonorarnihIgr=0;
-        $this->stHonorarnihIgrTujJZ=0;
-        $this->tantieme=0;
-        $this->avtorskePravice=0;
-        $this->vlozekGostitelja=0;
+        $this->celotnaVrednostGostovSZ = 0;
+        $this->avtorskiHonorarji       = 0;
+        $this->avtorskiHonorarjiSamoz  = 0;
+        $this->obiskGost               = 0;
+        $this->obiskInt                = 0;
+        $this->obiskZamejo             = 0;
+        $this->ponoviDoma              = 0;
+        $this->ponoviGost              = 0;
+        $this->ponoviInt               = 0;
+        $this->ponoviZamejo            = 0;
+        $this->stZaposUmet             = 0;
+        $this->stZaposDrug             = 0;
+        $this->stHonorarnihIgr         = 0;
+        $this->stHonorarnihIgrTujJZ    = 0;
+        $this->tantieme                = 0;
+        $this->avtorskePravice         = 0;
+        $this->vlozekGostitelja        = 0;
 
         $this->stPE = 0;
         foreach ($this->getProgramskeEnoteSklopa() as $numObject => $object) {
@@ -86,6 +86,8 @@ class ProgramRazno
 
     public function validate($mode = 'update')
     {
+        $this->validateIntGE0($this->stPE, "Št. PE", 1000555);
+
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program razno", 1000551);
         $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program razno", 1000552);
         $this->expect($this->naziv, "Nima naziva. Naziv je obvezen podatek", 1000553);
