@@ -44,21 +44,6 @@ class Alternacije
                 $this->expect(!(!empty($options['funkcija']) && !empty($options['uprizoritev']) ), "Le funkcija ali uprizoritev ne oba hkrati", 770082);
                 $qb = $this->getDefaultQb($options);
                 return new DoctrinePaginator(new Paginator($qb));
-//                $crit = new Criteria();
-//                $e    = $crit->expr();
-//
-//                if (!empty($options['funkcija'])) {
-//                    $funkcija = $this->getEntityManager()->find('Produkcija\Entity\Funkcija', $options['funkcija']);
-//                    $exp      = $e->eq('funkcija', $funkcija);
-//                    $crit->andWhere($exp);
-//                }
-//                if (!empty($options['uprizoritev'])) {
-//                    $uprizoritev = $this->getEntityManager()->find('Produkcija\Entity\Uprizoritev', $options['uprizoritev']);
-//                    $exp      = $e->eq('uprizoritev', $uprizoritev);  //$$ še za dopolniti
-//                    $crit->andWhere($exp);
-//                }
-//
-//                return new Selectable($this, $crit);
         }
     }
 

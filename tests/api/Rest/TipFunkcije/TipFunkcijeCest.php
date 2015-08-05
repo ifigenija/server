@@ -51,16 +51,15 @@ class TipFunkcijeCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'ime'        => 'zz',
-            'opis'       => 'zz',
-            'imeZenski'  => 'zz',
-            'podrocje'   => 'umetnik',
+            'ime'       => 'zz',
+            'opis'      => 'zz',
+            'imeZenski' => 'zz',
+            'podrocje'  => 'umetnik',
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
 //        $I->assertEquals($ent['opis'], 'zz');
-
         // kreiramo še en zapis
         $data = [
             'ime'        => 'aa',

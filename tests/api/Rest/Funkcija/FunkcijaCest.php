@@ -51,7 +51,6 @@ class FunkcijaCest
     private $lookUprizoritev1;
     private $lookUprizoritev2;
 
-
     public function _before(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
@@ -62,18 +61,17 @@ class FunkcijaCest
         
     }
 
-        /**
+    /**
      * @param ApiTester $I
      */
     public function lookupUprizoritev(ApiTester $I)
     {
-        $this->lookUprizoritev1 = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
+        $this->lookUprizoritev1 = $look                   = $I->lookupEntity("uprizoritev", "0001", false);
         $I->assertNotEmpty($look);
-        $this->lookUprizoritev2 = $look                  = $I->lookupEntity("uprizoritev", "0002", false);
+        $this->lookUprizoritev2 = $look                   = $I->lookupEntity("uprizoritev", "0002", false);
         $I->assertNotEmpty($look);
     }
 
-    
     /**
      *  kreiramo besedilo
      * 
@@ -129,7 +127,6 @@ class FunkcijaCest
 //        $I->assertEquals('zz', $oseba['ime']);
 //        $I->assertNotEmpty($oseba['id']);
 //    }
-
 //    /**
 //     *  kreiramo zapis
 //     * 
@@ -212,27 +209,26 @@ class FunkcijaCest
 //        $I->assertEquals($ent['opis'], 'zz');
 //    }
 
-    
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
     public function lookupTipFunkcije(ApiTester $I)
     {
-        $this->lookTipFunkcije = $ent             = $I->lookupEntity("tipfunkcije", "Režija", false);
+        $this->lookTipFunkcije = $ent                   = $I->lookupEntity("tipfunkcije", "Režija", false);
         $I->assertNotEmpty($ent);
     }
-        /**
+
+    /**
      * 
      * @param ApiTester $I
      */
     public function lookupOsebo(ApiTester $I)
     {
-        $this->lookOseba= $ent             = $I->lookupEntity("oseba", "0006", false);
+        $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0006", false);
         $I->assertNotEmpty($ent);
     }
 
-    
     /**
      *  kreiramo zapis
      * 
@@ -261,9 +257,9 @@ class FunkcijaCest
     {
         $data      = [
 //            'podrocje'          => 'igralec',     //$$ se avtomatsko v validate prenese iz tipa funkcije
-            'vodjaEkipe'     => FALSE,
+            'vodjaEkipe'        => FALSE,
             'naziv'             => 'zz',
-            'komentar'             => 'zz',
+            'komentar'          => 'zz',
             'velikost'          => 'velika',
             'pomembna'          => true,
             'sort'              => 2,
@@ -272,18 +268,18 @@ class FunkcijaCest
             'uprizoritev'       => $this->lookUprizoritev1['id'],
             'privzeti'          => $this->objAlternacija['id'], //$$ to ne deluje izgleda - jemlje kot null?
             'tipFunkcije'       => $this->lookTipFunkcije['id'],
-            'maxPrekrivanj'              => 3,
+            'maxPrekrivanj'     => 3,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['naziv'], 'zz');
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
-        $data               = [
+        $data       = [
 //            'podrocje'          => 'tehnik',//$$ se avtomatsko v validate prenese iz tipa funkcije
-            'vodjaEkipe'     => FALSE,
+            'vodjaEkipe'        => FALSE,
             'naziv'             => 'aa',
-            'komentar'             => 'aa',
+            'komentar'          => 'aa',
             'velikost'          => 'mala',
             'pomembna'          => false,
             'sort'              => 4,
@@ -292,9 +288,9 @@ class FunkcijaCest
             'uprizoritev'       => $this->lookUprizoritev1['id'],
             'privzeti'          => null,
             'tipFunkcije'       => $this->lookTipFunkcije['id'],
-            'maxPrekrivanj'              => 4,
+            'maxPrekrivanj'     => 4,
         ];
-        $this->obj2 = $ent                = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['naziv'], 'aa');
         $I->assertNotEmpty($ent['id']);
     }
@@ -369,16 +365,15 @@ class FunkcijaCest
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
 //        $I->assertEquals("zz", $list[0]['naziv']);      // odvisno od sortiranja
-   
-        
         // še po 2. uprizoritvi
         $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev2['id'];
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
         $I->assertNotEmpty($list);
         codecept_debug($resp);
         $I->assertGreaterThanOrEqual(8, $resp['state']['totalRecords']);
     }
+
     /**
      * preberi vse zapise od uprizoritve
      * 
@@ -387,39 +382,25 @@ class FunkcijaCest
      */
     public function getListPoUprizoritviInPodrocjih(ApiTester $I)
     {
-        $listUrl = $this->restUrl."?uprizoritev=" . $this->lookUprizoritev2['id'] . "&podrocje=igralec"  ;
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
+        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev2['id'] . "&podrocje[]=igralec";
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
         codecept_debug($resp);
-
-//        $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-        
-        
-        // $$ to še moram izvesti - unija večih področij
-//        // še po večih področjih
-//        $listUrl = $this->restUrl."?uprizoritev=" . $this->lookUprizoritev2['id'] . "&podrocje=igralec&podrocje=umetnik"  ;
-//
-//        $resp = $I->successfullyGetList($listUrl, []);
-//        $list = $resp['data'];
-//        codecept_debug($resp);
-//
-//        $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);
-//        $I->assertNotEmpty($list);
-//        
-//        // še po večih področjih
-//        $listUrl = $this->restUrl."?uprizoritev=" . $this->lookUprizoritev2['id'] . "&podrocje=igralec,inspicient"  ;
-//
-//        $resp = $I->successfullyGetList($listUrl, []);
-//        $list = $resp['data'];
-//        codecept_debug($resp);
-//
-//        $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);
-//        $I->assertNotEmpty($list);
-//        
-//        //$$ še po večih področjih - unija
+
+        // test validiranja, če področje ni array
+//                            $this->expect(is_array($options['podrocje']), "Parameter področje mora biti array", 1000671);
+        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev2['id'] . "&podrocje=igralec";
+        $resp    = $I->failToGetList($listUrl, []);
+        $I->assertEquals(1000671, $resp[0]['code']);
+
+//        $$ to še moram izvesti - unija večih področij
+        // še po večih področjih
+        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev2['id'] . "&podrocje[]=igralec&podrocje[]=umetnik";
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+        codecept_debug($resp);
+        $I->assertGreaterThanOrEqual(5, $resp['state']['totalRecords']);
     }
 
     /**
@@ -450,7 +431,7 @@ class FunkcijaCest
         codecept_debug($ent);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['podrocje'], $this->lookTipFunkcije['podrocje'],"področje iz tipa funkcije");
+        $I->assertEquals($ent['podrocje'], $this->lookTipFunkcije['podrocje'], "področje iz tipa funkcije");
         $I->assertEquals($ent['vodjaEkipe'], FALSE);
         $I->assertEquals($ent['naziv'], 'zz');
         $I->assertEquals($ent['komentar'], 'zz');
