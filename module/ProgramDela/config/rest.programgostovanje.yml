@@ -17,6 +17,7 @@ forms:
             - nasDelez
             - vlozekGostitelja
             - tantieme
+            - materialni
             - avtorskePravice
             - avtorskiHonorarji
             - avtorskiHonorarjiSamoz

@@ -15,6 +15,7 @@ forms:
             - avtorskiHonorarjiSamoz
             - tantieme
             - avtorskePravice
+            - materialni
 #            - drugiViri
 #            - vlozekGostitelja      
             - drugiJavni

@@ -128,12 +128,13 @@ class ProgramPremieraCest
     {
         $data       = [
 //            'celotnaVrednost'      => 1.24,
-            'nasDelez'             => 4,
+            'nasDelez'             => 5,
             'zaproseno'            => 0.66,
 //            'lastnaSredstva'       => 1.24,
             'avtorskiHonorarji'    => 1.24,
             'avtorskiHonorarjiSamoz'    => 1.24,
             'tantieme'             => 1.24,
+            'materialni'             => 1.24,
             'avtorskePravice'      => 1.24,
             'drugiViri'            => 1.24,
 //            'vlozekGostitelja'     =>1.24,
@@ -164,12 +165,13 @@ class ProgramPremieraCest
         // kreiramo še en zapis
         $data       = [
 //            'celotnaVrednost'      => 4.56,
-            'nasDelez'             => 15,
+            'nasDelez'             => 19,
             'zaproseno'            => 0.66,
 //            'lastnaSredstva'       => 4.56,
             'avtorskiHonorarji'    => 4.56,
             'avtorskiHonorarjiSamoz'    => 4.56,
             'tantieme'             => 4.56,
+            'materialni'             => 4.56,
             'avtorskePravice'      => 4.56,
 //            'vlozekGostitelja'     => 4.56,
             'drugiJavni'           => 4.56,
@@ -224,12 +226,13 @@ class ProgramPremieraCest
         codecept_debug($ent);
 
         $I->assertGuid($ent['id']);
-        $I->assertEquals($ent['celotnaVrednost'], 4, "celotna vrednost");
-        $I->assertEquals($ent['nasDelez'], 4.00,"naš delež");
+        $I->assertEquals($ent['celotnaVrednost'], 5, "celotna vrednost");
+        $I->assertEquals($ent['nasDelez'], 5.00,"naš delež");
         $I->assertEquals($ent['zaproseno'], 0.66, "zaprošeno");
         $I->assertEquals($ent['avtorskiHonorarji'], 1.24);
         $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 1.24);
         $I->assertEquals($ent['tantieme'], 1.22, "tantieme");
+        $I->assertEquals($ent['materialni'], 1.24, "materialni");
         $I->assertEquals($ent['avtorskePravice'], 1.24);
         $I->assertEquals($ent['drugiJavni'], 1.24);
         $I->assertEquals($ent['vlozekGostitelja'], 0);

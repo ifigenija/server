@@ -39,6 +39,7 @@ class ProgramGostujoca
         $this->avtorskiHonorarjiSamoz=0;
         $this->tantieme=0;
         $this->avtorskePravice=0;
+        $this->materialni=0;
         $this->obiskGost=0;
         $this->obiskZamejo=0;
         $this->obiskInt=0;

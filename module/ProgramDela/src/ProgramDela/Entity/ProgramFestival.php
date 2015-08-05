@@ -157,6 +157,7 @@ class ProgramFestival
         $this->stHonorarnihIgr         = 0;
         $this->stHonorarnihIgrTujJZ    = 0;
         $this->tantieme                = 0;
+        $this->materialni              = 0;
         $this->avtorskePravice         = 0;
         $this->vlozekGostitelja        = 0;
 

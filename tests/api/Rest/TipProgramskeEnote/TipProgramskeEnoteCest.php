@@ -171,13 +171,14 @@ class TipProgramskeEnoteCest
         //premiera
         $data                      = [
 //            'celotnaVrednost'         => 1.23,
-            'nasDelez'                => 4,
+            'nasDelez'                => 5,
             'zaproseno'               => 1.23,
             'celotnaVrednostGostovSZ' => 0.2,
 //            'lastnaSredstva'          => 1.23,
             'avtorskiHonorarji'       => 1.23,
             'avtorskiHonorarjiSamoz'  => 1.23,
             'tantieme'                => 1.23,
+            'materialni'                => 1.23,
             'avtorskePravice'         => 1.23,
             'drugiViri'               => 1.23,
             'drugiJavni'              => 1.23,
@@ -201,7 +202,7 @@ class TipProgramskeEnoteCest
         //ponovitev prejšnjih sezon
         $data                                 = [
 //            'celotnaVrednost'         => 1.23,
-            'nasDelez'                => 4,
+            'nasDelez'                => 5,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
             'zaproseno'               => 1.23,
@@ -209,6 +210,7 @@ class TipProgramskeEnoteCest
             'avtorskiHonorarji'       => 1.23,
             'avtorskiHonorarjiSamoz'  => 1.23,
             'tantieme'                => 1.23,
+            'materialni'                => 1.23,
             'avtorskePravice'         => 1.23,
             'vlozekGostitelja'        => 1.23,
             'drugiJavni'              => 1.23,
@@ -236,7 +238,7 @@ class TipProgramskeEnoteCest
         //ponovitev premiere
         $data = [
 //            'celotnaVrednost'         => 1.23,
-            'nasDelez'                => 4,
+            'nasDelez'                => 5,
             'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 0.11,
             'zaproseno'               => 1.23,
@@ -244,6 +246,7 @@ class TipProgramskeEnoteCest
             'avtorskiHonorarji'       => 1.23,
             'avtorskiHonorarjiSamoz'  => 1.23,
             'tantieme'                => 1.23,
+            'materialni'                => 1.23,
             'avtorskePravice'         => 1.23,
             'drugiViri'               => 1.23,
             'vlozekGostitelja'        => 1.23,

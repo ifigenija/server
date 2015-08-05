@@ -127,13 +127,14 @@ class ProgramPonovitevPremiereCest
     {
         $data       = [
 //            'celotnaVrednost'         => 1.24,
-            'nasDelez'                => 4,
+            'nasDelez'                => 5,
             'celotnaVrednostGostovSZ' => 3.11,
             'zaproseno'               => 1.24,
             'lastnaSredstva'          => 1.24,
             'avtorskiHonorarji'       => 1.24,
             'avtorskiHonorarjiSamoz'       => 1.24,
             'tantieme'                => 1.24,
+            'materialni'                => 1.24,
             'avtorskePravice'         => 1.24,
             'drugiViri'               => 1.24,
             'vlozekGostitelja'        => 1.24,
@@ -157,7 +158,7 @@ class ProgramPonovitevPremiereCest
         // kreiramo še en zapis
         $data       = [
 //            'celotnaVrednost'         => 4.56,
-            'nasDelez'                => 14,
+            'nasDelez'                => 19,
 //            'celotnaVrednostMat'      => 2.23,
             'celotnaVrednostGostovSZ' => 1.11,
             'zaproseno'               => 1.24,
@@ -165,6 +166,7 @@ class ProgramPonovitevPremiereCest
             'avtorskiHonorarji'       => 4.56,
             'avtorskiHonorarjiSamoz'       => 4.56,
             'tantieme'                => 4.56,
+            'materialni'                => 4.56,
             'avtorskePravice'         => 4.56,
             'drugiViri'               => 4.56,
             'vlozekGostitelja'        => 4.23,
@@ -213,8 +215,8 @@ class ProgramPonovitevPremiereCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['celotnaVrednost'], 4.00);
-        $I->assertEquals($ent['nasDelez'], 4);
+        $I->assertEquals($ent['celotnaVrednost'], 5.00);
+        $I->assertEquals($ent['nasDelez'], 5);
         $I->assertEquals($ent['celotnaVrednostGostovSZ'], 3.11);
         $I->assertEquals($ent['celotnaVrednostMat'], $ent['celotnaVrednost'] - $ent['celotnaVrednostGostovSZ'], "cel. vr. matič.");
         $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");
@@ -222,6 +224,7 @@ class ProgramPonovitevPremiereCest
         $I->assertEquals($ent['avtorskiHonorarji'], 1.24);
         $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 1.24);
         $I->assertEquals($ent['tantieme'], 1.24);
+        $I->assertEquals($ent['materialni'], 1.24);
         $I->assertEquals($ent['avtorskePravice'], 1.24);
 //        $I->assertEquals($ent['drugiViri'], 1.24);
         $I->assertEquals($ent['vlozekGostitelja'], 1.24);

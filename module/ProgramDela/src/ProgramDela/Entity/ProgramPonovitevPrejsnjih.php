@@ -54,8 +54,8 @@ class ProgramPonovitevPrejsnjih
         }
 
         $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
-        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice);
-        $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor, tantiem in avt.pravic (" . $sumStr . ")", 1000461);
+        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice +$this->materialni);
+        $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor., tantiem, avt.pravic in mat. stroškov (" . $sumStr . ")", 1000461);   //$$ morda lahko pride do te napake zaradi napake v izračunih in zaokrožitvah če v UI vnašajo več kot na 2 decimalki?
 
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
         $maxZaproseno = \Max\Functions::euroRoundS(0.60 * ($this->avtorskiHonorarji+$this->tantieme));

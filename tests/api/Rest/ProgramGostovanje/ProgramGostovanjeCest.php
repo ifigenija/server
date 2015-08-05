@@ -114,6 +114,7 @@ class ProgramGostovanjeCest
             'transportniStroski' => 9.12,
             'dnevPrvZad'         => 9.12,
             'tantieme'           => 9.12,
+            'materialni'           => 9.12,
             'avtorskePravice'    => 9.12,
             'avtorskiHonorarji'  => 9.12,
             'avtorskiHonorarjiSamoz'  => 9.12,
@@ -140,10 +141,11 @@ class ProgramGostovanjeCest
             'obiskInt'           => 3,
             'zaproseno'          => 3.12,
 //            'celotnaVrednost'    => 3.12,
-            'nasDelez'           => 16,
+            'nasDelez'           => 19,
             'transportniStroski' => 3.12,
             'dnevPrvZad'         => 3.12,
             'tantieme'           => 3.12,
+            'materialni'           => 3.12,
             'avtorskePravice'    => 3.12,
             'avtorskiHonorarji'  => 3.12,
             'avtorskiHonorarjiSamoz'  => 3.12,
@@ -199,6 +201,7 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['transportniStroski'], 9.12);
         $I->assertEquals($ent['dnevPrvZad'], 9.12);
         $I->assertEquals($ent['tantieme'], 9.12);
+        $I->assertEquals($ent['materialni'], 9.12);
         $I->assertEquals($ent['avtorskePravice'], 9.12);
         $I->assertEquals($ent['avtorskiHonorarji'], 9.12);
         $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 9.12);

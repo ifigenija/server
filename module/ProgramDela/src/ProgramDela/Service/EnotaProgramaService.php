@@ -41,12 +41,12 @@ class EnotaProgramaService
         /**
          * seštejem stroške iz Stroškov uprizoritve
          */
-        $vrMatDoSum = $vrMatNaSum = 0; //init
+        $data['Do']['materialni'] = $data['Na']['materialni'] = 0; //init
         foreach ($uprizoritev->getStroski() as $numObject => $strosekU) {
             switch ($strosekU->getTipstroska()) {
                 case 'materialni':
-                    $vrMatDoSum+=$strosekU->getVrednostDo();
-                    $vrMatNaSum+=$strosekU->getVrednostNa();
+                    $data['Do']['materialni']+=$strosekU->getVrednostDo();
+                    $data['Na']['materialni']+=$strosekU->getVrednostNa();
                     break;
                 case 'tantiema':
                     $data['Do']['tantieme']+=$strosekU->getVrednostDo();
@@ -58,7 +58,7 @@ class EnotaProgramaService
                     break;
                 default:
                     $this->expect(false
-                            , "Tip stroška uprizoritve je lahko le materialni ali tantiema ali avtorprav, je pa:" . $strosekU->getTipstroska(), 1000951);
+                            , "Tip stroška uprizoritve je lahko le materialni ali tantiema ali avtorske pravice, je pa:" . $strosekU->getTipstroska(), 1000951);
             }
         }
 
@@ -124,10 +124,10 @@ class EnotaProgramaService
                 }
             }
         }
-        $data['Do']['nasDelez']  = $data['Do']['avtorskiHonorarji'] + $data['Do']['tantieme'] + $data['Do']['avtorskePravice'] + $vrMatDoSum;
-        $data['Na']['nasDelez']  = $data['Na']['avtorskiHonorarji'] + $data['Na']['tantieme'] + $data['Na']['avtorskePravice'] + $vrMatNaSum;
-        $data['datumZacStudija'] = $uprizoritev->getDatumZacStudija()->format('c');       // datum v ISO8601 obliki 
-        $data['datumPremiere']   = $uprizoritev->getDatumPremiere()->format('c');       // datum v ISO8601 obliki 
+        $data['Do']['nasDelez']  = $data['Do']['avtorskiHonorarji'] + $data['Do']['tantieme'] + $data['Do']['avtorskePravice']+ $data['Do']['materialni'];
+
+        $data['datumZacStudija'] = date(\DateTime::ISO8601, strtotime($uprizoritev->getDatumZacStudija()->format('c')));       // datum v ISO8601 obliki 
+        $data['datumPremiere']   = date(\DateTime::ISO8601, strtotime($uprizoritev->getDatumPremiere()->format('c')));       // datum v ISO8601 obliki 
 //$$ še naziv , izpostavljene funkcije ...
 //        upr.naslov naziv Naslov upr. 
 //        
@@ -146,16 +146,17 @@ class EnotaProgramaService
     private function initData()
     {
         $polje                        = [
-            'nasDelez'               => 0,
             'avtorskiHonorarji'      => 0,
             'avtorskiHonorarjiSamoz' => 0,
             'tantieme'               => 0,
             'avtorskePravice'        => 0,
+            'materialni'        => 0,
         ];
         $data['naziv']                = '';
         $data['Funkcije']             = [];
-        $data['Do']                   = $polje;
         $data['Na']                   = $polje;
+        $data['Do']                   = $polje;
+        $data['Do']['nasDelez']  = 0;           // nasDelez na predstavo se izracunava na klientu
         $data['stZaposDrug']          = 0;
         $data['stHonorarnih']         = 0;
         $data['stHonorarnihIgr']      = 0;

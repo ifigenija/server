@@ -112,6 +112,13 @@ class EnotaPrograma
     protected $avtorskePravice;
 
     /**
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="ep.materialni", description="ep.d.materialni")   
+     * @var double
+     */
+    protected $materialni;
+
+    /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\DrugiVir", mappedBy="enotaPrograma", orphanRemoval=true)
      * @var <drugiViri>
      */
@@ -407,6 +414,7 @@ class EnotaPrograma
         $this->validateIntGE0($this->ponoviGost, "", 1000697);
         $this->validateIntGE0($this->ponoviInt, "", 1000698);
         $this->validateIntGE0($this->sort, "", 1000699);
+        $this->validateEuroGE0($this->materialni, "Materialni", 1001200);
 
         /**
          * pred primerjanjem damo števila s plavajočo vejico v string
@@ -791,6 +799,17 @@ class EnotaPrograma
     public function setAvtorskiHonorarjiSamoz($avtorskiHonorarjiSamoz)
     {
         $this->avtorskiHonorarjiSamoz = $avtorskiHonorarjiSamoz;
+        return $this;
+    }
+
+    public function getMaterialni()
+    {
+        return $this->materialni;
+    }
+
+    public function setMaterialni($materialni)
+    {
+        $this->materialni = $materialni;
         return $this;
     }
 

@@ -114,8 +114,8 @@ class ProgramGostovanje
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostovanje", 1000441);
 
         $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
-        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->transportniStroski + $this->dnevPrvZad);
-        $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor, tantiem, avt.pravic, transp. str. in dnevnic za 1. in zadnji dan (" . $sumStr . ")", 1000441);
+        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni + $this->transportniStroski + $this->dnevPrvZad);
+        $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor, tantiem, avt.pravic, materialnih, transp. str. in dnevnic za 1. in zadnji dan (" . $sumStr . ")", 1000441);
 
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
         $maxZaproseno = \Max\Functions::euroRoundS(0.60 * $this->avtorskiHonorarji + 0.60 * $this->tantieme + 0.70 * $this->avtorskePravice + 1.00 * $this->transportniStroski + 1.00 * $this->dnevPrvZad);
