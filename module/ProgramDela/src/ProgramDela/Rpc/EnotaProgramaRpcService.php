@@ -43,48 +43,15 @@ class EnotaProgramaRpcService
             throw new \Max\Exception\UnauthException($tr->translate('Ni enote programa'), 1000941);
         }
 
-        $optionR = $em->getRepository('App\Entity\Option');
-        $option  = $optionR->findOneByName("application.tenant.maticnopodjetje");
-        $sifra   = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
-
-        $phisaR = $em->getRepository('ProgramDela\Entity\ProdukcijskaHisa');
-        $phisa  = $phisaR->findOneBySifra($sifra);       // lastno gledališče
-        // seštejemo vrednosti iz stroškom uprizoritve
-
-        $matkoprColl = $enotaPrograma->getKoprodukcije()
-                ->filter(function($ent) use (&$sifra) {
-            return $ent->getKoproducent()->getSifra() === $sifra;     //vrne  koprodukcijo lastnega gledališča
-        });
-
-        if ($matkoprColl->count() > 1) {
-            throw new \Max\Exception\UnauthException($tr->translate('Obstaja več koprodukcij (' . $matkoprColl->count() . ') lastnega gledališča '), 1000942);
-        }
-
-        // če koprodukcija še ne obstaja, jo kreiramo
-        if ($matkoprColl->isEmpty()) {
-            $kopr = new \ProgramDela\Entity\ProdukcijaDelitev();
-            $kopr->setKoproducent($phisa);
-            $kopr->setEnotaPrograma($enotaPrograma);
-            $em->persist($kopr);
-        } else {
-            $kopr = $matkoprColl->get(0);
-        }
-
-        $kopr->setOdstotekFinanciranja(100);
-        $kopr->setMaticniKop(true);
-
-        $kopr->preracunaj();
-        $kopr->validate();
-
-        // sedaj, ko imamo entitete ponovimo preverjanje avtorizacije zaradi morebitnega assert preverjanja!
-        $this->expectPermission("ProdukcijaDelitev-write", $kopr);
-        $this->expectPermission("EnotaPrograma-read", $enotaPrograma);
-        $this->expectPermission("ProdukcijskaHisa-read", $phisa);
-        $this->expectPermission("Option-read", $option);
+        /**
+         * kreiranje imamo v posebnem servisu, tako, da ga lahko kličemo direktno iz PHP-ja na strežniški strani
+         */
+        $service = $this->serviceLocator->get('enotaprograma.service');
+        $koprId    = $service->novaMaticnaKoprodukcija($enotaPrograma);
 
         $em->flush();
 
-        return $kopr->getId();
+        return $koprId;
     }
 
     /**

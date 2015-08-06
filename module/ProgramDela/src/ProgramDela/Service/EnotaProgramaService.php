@@ -18,6 +18,50 @@ class EnotaProgramaService
 {
 
     /**
+     * Kreiranje nove koprodukcije za lastno gledališče za določeno enoto programa
+     * 
+     * 
+     * @param entity $enotaPrograma
+     * 
+     * @returns koprodukcija id 
+     */
+    public function novaMaticnaKoprodukcija($enotaPrograma)
+    {
+        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+
+        $optionR = $em->getRepository('App\Entity\Option');
+        $option  = $optionR->findOneByName("application.tenant.maticnopodjetje");
+        $sifra   = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
+
+        $phisaR = $em->getRepository('ProgramDela\Entity\ProdukcijskaHisa');
+        $phisa  = $phisaR->findOneBySifra($sifra);       // lastno gledališče
+        // seštejemo vrednosti iz stroškom uprizoritve
+
+        $matkoprColl = $enotaPrograma->getKoprodukcije()
+                ->filter(function($ent) use (&$sifra) {
+            return $ent->getKoproducent()->getSifra() === $sifra;     //vrne  koprodukcijo lastnega gledališča
+        });
+
+        // če koprodukcija še ne obstaja, jo kreiramo
+        if ($matkoprColl->isEmpty()) {
+            $kopr = new \ProgramDela\Entity\ProdukcijaDelitev();
+            $em->persist($kopr);
+            $kopr->setKoproducent($phisa);
+            $kopr->setEnotaPrograma($enotaPrograma);
+            $kopr->setOdstotekFinanciranja(100);
+            $kopr->setMaticniKop(true);
+        } else {
+            // če matična koprodukcija že obstaja, jo le preberemo
+            $kopr = $matkoprColl->get(0);
+        }
+
+        $kopr->preracunaj();
+        $kopr->validate();
+
+        return $kopr->getId();
+    }
+
+    /**
      * pridobitev podatkov o uprizoritvi, ki se uporabljajo v programu dela
      * 
      * Podatke, ki jih pridobi ta procedura lahko uporabnik po želji prenese v enoto programa - 
@@ -124,7 +168,7 @@ class EnotaProgramaService
                 }
             }
         }
-        $data['Do']['nasDelez']  = $data['Do']['avtorskiHonorarji'] + $data['Do']['tantieme'] + $data['Do']['avtorskePravice']+ $data['Do']['materialni'];
+        $data['Do']['nasDelez'] = $data['Do']['avtorskiHonorarji'] + $data['Do']['tantieme'] + $data['Do']['avtorskePravice'] + $data['Do']['materialni'];
 
         $data['datumZacStudija'] = date(\DateTime::ISO8601, strtotime($uprizoritev->getDatumZacStudija()->format('c')));       // datum v ISO8601 obliki 
         $data['datumPremiere']   = date(\DateTime::ISO8601, strtotime($uprizoritev->getDatumPremiere()->format('c')));       // datum v ISO8601 obliki 
@@ -150,13 +194,13 @@ class EnotaProgramaService
             'avtorskiHonorarjiSamoz' => 0,
             'tantieme'               => 0,
             'avtorskePravice'        => 0,
-            'materialni'        => 0,
+            'materialni'             => 0,
         ];
         $data['naziv']                = '';
         $data['Funkcije']             = [];
         $data['Na']                   = $polje;
         $data['Do']                   = $polje;
-        $data['Do']['nasDelez']  = 0;           // nasDelez na predstavo se izracunava na klientu
+        $data['Do']['nasDelez']       = 0;           // nasDelez na predstavo se izracunava na klientu
         $data['stZaposDrug']          = 0;
         $data['stHonorarnih']         = 0;
         $data['stHonorarnihIgr']      = 0;
