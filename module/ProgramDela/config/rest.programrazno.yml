@@ -36,6 +36,10 @@ relation:
             enabled: true
             hydrator:
                 exclude: [] 
+        koprodukcije:
+            enabled: true
+            hydrator:
+                exclude: [] 
         programskeEnoteSklopa:
             enabled: true
             hydrator:

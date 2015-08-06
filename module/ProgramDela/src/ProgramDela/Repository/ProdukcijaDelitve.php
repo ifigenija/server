@@ -130,6 +130,12 @@ class ProdukcijaDelitve
 
         // $$ morda nastane težava, če uporabnik najprej spremeni enoto programa in sproži brisanje v istem koraku
         if ($object->getEnotaPrograma()) {
+            /**
+             * brisanje matične koprodukcije mogoče le, ko enota programa nima flaga za koprodukcije
+             */
+            $this->expect(!($object->getMaticniKop() && $object->getEnotaPrograma()->getImaKoprodukcije())
+                    , "Enota programa ima nastavljen flag ima koprodukcije. Brisanje matične koprodukcije ni mogoče"
+                    , 1000613);
             $object->getEnotaPrograma()->getKoprodukcije()->removeElement($object);
             $object->getEnotaPrograma()->preracunaj(\Max\Consts::UP);
         }

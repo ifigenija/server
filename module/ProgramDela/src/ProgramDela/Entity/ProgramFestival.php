@@ -125,13 +125,6 @@ class ProgramFestival
     protected $programskoTelo;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="festival.soorganizatorji", description="festival.d.soorganizatorji")
-     * @var string
-     */
-    protected $soorganizatorji;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="festival.stTujihSelektorjev", description="festival.d.stTujihSelektorjev")
      * @Max\Ui(type="integer")
@@ -261,10 +254,6 @@ class ProgramFestival
         return $this->programskoTelo;
     }
 
-    public function getSoorganizatorji()
-    {
-        return $this->soorganizatorji;
-    }
 
     public function getStTujihSelektorjev()
     {
@@ -352,12 +341,6 @@ class ProgramFestival
     public function setProgramskoTelo($programskoTelo)
     {
         $this->programskoTelo = $programskoTelo;
-        return $this;
-    }
-
-    public function setSoorganizatorji($soorganizatorji)
-    {
-        $this->soorganizatorji = $soorganizatorji;
         return $this;
     }
 

@@ -22,7 +22,6 @@ forms:
             - prizorisca
             - umetVodja
             - programskoTelo
-            - soorganizatorji
             - stTujihSelektorjev
             - stZaposlenih
             - stHonorarnih
@@ -44,6 +43,10 @@ lists:
 relation:
     default:
         drugiViri:
+            enabled: true
+            hydrator:
+                exclude: [] 
+        koprodukcije:
             enabled: true
             hydrator:
                 exclude: [] 

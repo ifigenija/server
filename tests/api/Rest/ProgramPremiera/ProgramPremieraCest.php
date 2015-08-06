@@ -36,10 +36,16 @@ class ProgramPremieraCest
     private $restUrl                = '/rest/programpremiera';
     private $obj1;
     private $obj2;
+    private $obj3;
+    private $obj4;
     private $uprizoritevUrl         = '/rest/uprizoritev';
     private $lookUprizoritev;
     private $tipProgramskeEnoteUrl  = '/rest/tipprogramskeenote';
-    private $lookTipProgramskeEnote;
+    private $lookTipProgramskeEnote1;
+    private $lookTipProgramskeEnote2;
+    private $lookTipProgramskeEnote3;
+    private $lookTipProgramskeEnote4;
+    private $lookTipProgramskeEnote5;
     private $drugiVirUrl            = '/rest/drugivir';
     private $objDrugiVir1;
     private $objDrugiVir2;
@@ -114,7 +120,19 @@ class ProgramPremieraCest
      */
     public function lookuptipProgramskeEnote(ApiTester $I)
     {
-        $this->lookTipProgramskeEnote = $look                         = $I->lookupEntity("tipProgramskeEnote", "01", false);
+        $this->lookTipProgramskeEnote1 = $look                          = $I->lookupEntity("tipProgramskeEnote", "01", false);
+        $I->assertNotEmpty($look);
+
+        $this->lookTipProgramskeEnote2 = $look                          = $I->lookupEntity("tipProgramskeEnote", "02", false);
+        $I->assertNotEmpty($look);
+
+        $this->lookTipProgramskeEnote3 = $look                          = $I->lookupEntity("tipProgramskeEnote", "03", false);
+        $I->assertNotEmpty($look);
+
+        $this->lookTipProgramskeEnote4 = $look                          = $I->lookupEntity("tipProgramskeEnote", "04", false);
+        $I->assertNotEmpty($look);
+
+        $this->lookTipProgramskeEnote5 = $look                          = $I->lookupEntity("tipProgramskeEnote", "05", false);
         $I->assertNotEmpty($look);
     }
 
@@ -148,7 +166,7 @@ class ProgramPremieraCest
 //            'ponoviGost'         => 1,
 //            'ponoviInt'          => 1,
             'uprizoritev'            => $this->lookUprizoritev['id'],
-            'tipProgramskeEnote'     => $this->lookTipProgramskeEnote['id'],
+            'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
             'dokument'               => null,
             'sort'                   => 1,
@@ -160,7 +178,7 @@ class ProgramPremieraCest
             'stHonorarnihIgrSamoz'   => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
 
         // kreiramo še en zapis
         $data       = [
@@ -184,7 +202,7 @@ class ProgramPremieraCest
 //            'ponoviGost'         => 4,
 //            'ponoviInt'          => 4,
             'uprizoritev'            => NULL,
-            'tipProgramskeEnote'     => $this->lookTipProgramskeEnote['id'],
+            'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
             'dokument'               => null,
             'sort'                   => 2,
             'stZaposUmet'            => 2,
@@ -195,7 +213,7 @@ class ProgramPremieraCest
             'stHonorarnihIgrSamoz'   => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -247,7 +265,7 @@ class ProgramPremieraCest
 //        $I->assertEquals($ent['ponoviGost'         ],1 );
 //        $I->assertEquals($ent['ponoviInt'          ],1 );
         $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev['id']);
-        $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
+        $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote1['id']);
         $I->assertEquals($ent['dokument'], null);
         $I->assertEquals($ent['sort'], 1, "sort");
         $I->assertEquals($ent['stZaposUmet'], 1);
@@ -315,7 +333,7 @@ class ProgramPremieraCest
             'mednarodni'    => FALSE,
         ];
         $this->objDrugiVir1 = $ent                = $I->successfullyCreate($this->drugiVirUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
 
         // kreiramo še en zapis
         $data               = [
@@ -325,7 +343,7 @@ class ProgramPremieraCest
             'mednarodni'    => true,
         ];
         $this->objDrugiVir2 = $ent                = $I->successfullyCreate($this->drugiVirUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -362,7 +380,7 @@ class ProgramPremieraCest
             'koproducent'          => $this->lookProdukcijskaHisa1['id'],
         ];
         $this->objProdukcijaDelitev1 = $ent                         = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
 
         // kreiramo še en zapis
         $data                        = [
@@ -373,7 +391,7 @@ class ProgramPremieraCest
             'koproducent'          => $this->lookProdukcijskaHisa2['id'],
         ];
         $this->objProdukcijaDelitev2 = $ent                         = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -408,6 +426,99 @@ class ProgramPremieraCest
 //        $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertContains("required", $resp[0]['message']);
+    }
+
+    /**
+     *  kreiramo zapis s tipom koprodukcije
+     * 
+     * pričakujemo, da bo kreiral matično koprodukcijo avtomatsko
+     * 
+     * @depends delete
+     * 
+     * @param ApiTester $I
+     */
+    public function createZImaKoprodukcijo(ApiTester $I)
+    {
+        $data                       = $this->obj1;
+        $data['tipProgramskeEnote'] = $this->lookTipProgramskeEnote3['id']; //tip PE s koprodukcijo
+        codecept_debug($data);
+        $this->obj3                 = $ent                        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
+
+        $resp       = $I->successfullyGetRelation($this->restUrl, $this->obj3['id'], "koprodukcije", "");
+        codecept_debug($resp);
+        $I->assertEquals(1, count($resp));      // mora biti le 1 - t.j. matični
+        // vse skupaj ponovimo z update-om:
+        $this->obj3 = $ent        = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj3['id'], "koprodukcije", "");
+        codecept_debug($resp);
+        $I->assertEquals(1, count($resp));      // mora biti le 1 - t.j. matični
+    }
+
+    /**
+     *  probamo izbrisati koprodukcijo, katerega enota programa je označena z ima koprodukcijo
+     * 
+     * pričakujemo, da ne uspe
+     * 
+     * @depends createZImaKoprodukcijo
+     * 
+     * @param ApiTester $I
+     */
+    public function deleteKoprodukcijeZImaKopr(ApiTester $I)
+    {
+        $kopId = $this->obj3['koprodukcije'][0]['id'];   //predvidevamo, da je matični v 1. polju 
+        $resp  = $I->failToDelete($this->produkcijaDelitevUrl, $kopId);
+        codecept_debug($resp);
+        $I->assertEquals(1000613, $resp[0]['code']);
+    }
+
+    /**
+     *  osvežimo zapis s tipom  brez koprodukcije
+     * 
+     * pričakujemo, da bo izbrisal vse koprodukcije matično koprodukcijo avtomatsko
+     * 
+     * @depends createZImaKoprodukcijo
+     * 
+     * @param ApiTester $I
+     */
+    public function updateZNimaKoprodukcije(ApiTester $I)
+    {
+        $data                       = $this->obj3;
+        $data['tipProgramskeEnote'] = $this->lookTipProgramskeEnote1['id']; //tip PE brez! koprodukcije
+        $this->obj3                 = $ent                        = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        codecept_debug($data);
+        $I->assertGuid($ent['id']);
+        // pričakujemo izbris vseh koproducentov
+        $resp                       = $I->successfullyGetRelation($this->restUrl, $this->obj3['id'], "koprodukcije", "");
+        codecept_debug($resp);
+        $I->assertEquals(0, count($resp));      // mora biti brez koproducentov
+    }
+
+    /**
+     *  osvežimo zapis s tipom  brez koprodukcije
+     * 
+     * pričakujemo, da bo izbrisal vse koprodukcije matično koprodukcijo avtomatsko
+     * @depends createVecKoprodukcij
+     * 
+     * @param ApiTester $I
+     */
+    public function updateZNimaKoprodukcijePrejVečKoprodukcij(ApiTester $I)
+    {
+        // najprej preverimo, če je več koprodukcij
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", "");
+        codecept_debug($resp);
+        $I->assertGreaterThanOrEqual(2, count($resp));
+
+        $data                       = $this->obj2;
+        $data['tipProgramskeEnote'] = $this->lookTipProgramskeEnote1['id']; //tip PE brez! koprodukcije
+        $ent                        = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        $I->assertGuid($ent['id']);
+        // pričakujemo izbris vseh koproducentov
+        $resp                       = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", "");
+        codecept_debug($resp);
+        $I->assertEquals(0, count($resp));      // mora biti brez koproducentov
     }
 
 }

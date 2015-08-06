@@ -104,7 +104,6 @@ class EnotePrograma
      */
     public function update($object, $params = null)
     {
-        $zaklenjen = $this->zaklenjenProgramDela($object);  //$$ začasno
         $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000521);
 
         $this->nastaviFlagImaKoprodukcijo($object);
@@ -145,11 +144,16 @@ class EnotePrograma
     protected function azurirajKoprodukcije($object)
     {
         if ($object->getImaKoprodukcije()) {
+            /**
+             * nova matična koprodukcija
+             */
             $service = $this->serviceLocator->get('enotaprograma.service');
             $service->novaMaticnaKoprodukcija($object);
-//            $$  #1038 kliči novaMatičnaKoprodukcija
         } else {
-//            $$ briši vse koprodukcije
+            /**
+             * briši vse koprodukcije
+             */
+            $object->getKoprodukcije()->clear();
         }
     }
 

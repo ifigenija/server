@@ -351,7 +351,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'      => 1.24,
             'avtorskiHonorarjiSamoz' => 1.24,
             'tantieme'               => 1.24,
-            'materialni'               => 1.24,
+            'materialni'             => 1.24,
             'avtorskePravice'        => 1.24,
             'drugiViri'              => 1.24,
             'opredelitevDrugiViri'   => "zz",
@@ -365,7 +365,7 @@ class ProgramDelaCest
 //            'ponoviZamejo'       => 1,
 //            'ponoviGost'         => 1,
 //            'ponoviInt'          => 1,
-            'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
+            'tipProgramskeEnote'     => $this->lookTipProgramskeEnote5['id'],
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
             'sort'                   => 1,
             'stZaposUmet'            => 1,
@@ -389,7 +389,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'      => 2.22,
             'avtorskiHonorarjiSamoz' => 2.22,
             'tantieme'               => 2.22,
-            'materialni'               => 2.22,
+            'materialni'             => 2.22,
             'avtorskePravice'        => 2.22,
             'drugiViri'              => 2.22,
             'opredelitevDrugiViri'   => "zz",
@@ -429,7 +429,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'       => 33.22,
             'avtorskiHonorarjiSamoz'  => 33.22,
             'tantieme'                => 1.24,
-            'materialni'                => 1.24,
+            'materialni'              => 1.24,
             'avtorskePravice'         => 1.24,
             'drugiViri'               => 1.24,
             'drugiJavni'              => 1.24,
@@ -460,7 +460,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'       => 63.21,
             'avtorskiHonorarjiSamoz'  => 63.21,
             'tantieme'                => 1.24,
-            'materialni'                => 1.24,
+            'materialni'              => 1.24,
             'avtorskePravice'         => 1.24,
             'drugiViri'               => 1.24,
             'drugiJavni'              => 1.24,
@@ -492,7 +492,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'      => 127.22,
             'avtorskiHonorarjiSamoz' => 127.22,
             'tantieme'               => 1.24,
-            'materialni'               => 1.24,
+            'materialni'             => 1.24,
             'avtorskePravice'        => 1.24,
             'drugiViri'              => 1.24,
             'opredelitevDrugiViri'   => "zz",
@@ -530,7 +530,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'      => 26.12,
             'avtorskiHonorarjiSamoz' => 26.12,
             'tantieme'               => 1.24,
-            'materialni'               => 1.24,
+            'materialni'             => 1.24,
             'avtorskePravice'        => 1.24,
             'drugiViri'              => 1.24,
             'drugiJavni'             => 1.24,
@@ -575,7 +575,6 @@ class ProgramDelaCest
             'prizorisca'              => 'zz',
             'umetVodja'               => 'zz',
             'programskoTelo'          => 'zz',
-            'soorganizatorji'         => 'zz',
             'stTujihSelektorjev'      => 1,
             'stZaposlenih'            => 1,
             'stHonorarnih'            => 22,
@@ -609,7 +608,6 @@ class ProgramDelaCest
             'prizorisca'              => 'zz',
             'umetVodja'               => 'zz',
             'programskoTelo'          => 'zz',
-            'soorganizatorji'         => 'zz',
             'stTujihSelektorjev'      => 1,
             'stZaposlenih'            => 1,
             'stHonorarnih'            => 30,
@@ -650,7 +648,7 @@ class ProgramDelaCest
             'transportniStroski'     => 9.12,
             'dnevPrvZad'             => 9.12,
             'tantieme'               => 9.12,
-            'materialni'               => 9.12,
+            'materialni'             => 9.12,
             'avtorskePravice'        => 9.12,
             'avtorskiHonorarji'      => 9.12,
             'avtorskiHonorarjiSamoz' => 9.12,
@@ -678,7 +676,7 @@ class ProgramDelaCest
             'transportniStroski'     => 9.12,
             'dnevPrvZad'             => 9.12,
             'tantieme'               => 9.12,
-            'materialni'               => 9.12,
+            'materialni'             => 9.12,
             'avtorskePravice'        => 9.12,
             'avtorskiHonorarji'      => 48.33,
             'avtorskiHonorarjiSamoz' => 48.33,
@@ -848,7 +846,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'      => 41.24,
             'avtorskiHonorarjiSamoz' => 41.24,
             'tantieme'               => 1.24,
-            'materialni'               => 1.24,
+            'materialni'             => 1.24,
             'avtorskePravice'        => 1.24,
             'drugiViri'              => 1.24,
             'opredelitevDrugiViri'   => "zz",
@@ -886,7 +884,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'      => 1.24,
             'avtorskiHonorarjiSamoz' => 1.24,
             'tantieme'               => 1.24,
-            'materialni'               => 1.24,
+            'materialni'             => 1.24,
             'avtorskePravice'        => 1.24,
             'drugiViri'              => 1.24,
             'opredelitevDrugiViri'   => "zz",
@@ -924,7 +922,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'      => 55.25,
             'avtorskiHonorarjiSamoz' => 55.25,
             'tantieme'               => 1.24,
-            'materialni'               => 1.24,
+            'materialni'             => 1.24,
             'avtorskePravice'        => 1.24,
             'drugiViri'              => 1.24,
             'opredelitevDrugiViri'   => "zz",
@@ -974,7 +972,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'       => 74.22,
             'avtorskiHonorarjiSamoz'  => 74.22,
             'tantieme'                => 1.24,
-            'materialni'                => 1.24,
+            'materialni'              => 1.24,
             'avtorskePravice'         => 1.24,
             'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => "zz",
@@ -1007,7 +1005,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'       => 1.24,
             'avtorskiHonorarjiSamoz'  => 1.24,
             'tantieme'                => 1.24,
-            'materialni'                => 1.24,
+            'materialni'              => 1.24,
             'avtorskePravice'         => 1.24,
             'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => "zz",
@@ -1040,7 +1038,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'       => 4.3,
             'avtorskiHonorarjiSamoz'  => 4.3,
             'tantieme'                => 1.24,
-            'materialni'                => 1.24,
+            'materialni'              => 1.24,
             'avtorskePravice'         => 1.24,
             'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => "zz",
@@ -1083,7 +1081,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'       => 83.33,
             'avtorskiHonorarjiSamoz'  => 83.33,
             'tantieme'                => 1.24,
-            'materialni'                => 1.24,
+            'materialni'              => 1.24,
             'avtorskePravice'         => 1.24,
             'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => "zz",
@@ -1122,7 +1120,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'       => 1.24,
             'avtorskiHonorarjiSamoz'  => 1.24,
             'tantieme'                => 1.24,
-            'materialni'                => 1.24,
+            'materialni'              => 1.24,
             'avtorskePravice'         => 1.24,
             'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => "zz",
@@ -1161,7 +1159,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'       => 5.22,
             'avtorskiHonorarjiSamoz'  => 5.22,
             'tantieme'                => 1.24,
-            'materialni'                => 1.24,
+            'materialni'              => 1.24,
             'avtorskePravice'         => 1.24,
             'drugiViri'               => 1.24,
             'opredelitevDrugiViri'    => "zz",
@@ -1373,14 +1371,14 @@ class ProgramDelaCest
      */
     public function createVecKoprodukcij(ApiTester $I)
     {
-        $data                   = [
-            'delez'         => 0.49,
-            'zaproseno'     => 0.25,
-            'enotaPrograma' => $this->objProgramPremiera1['id'],
-            'koproducent'   => $this->lookProdukcijskaHisa1['id'],
-        ];
-        $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
-        $I->assertGuid($ent['id']);
+//        $data                   = [
+//            'delez'         => 0.49,
+//            'zaproseno'     => 0.25,
+//            'enotaPrograma' => $this->objProgramPremiera1['id'],
+//            'koproducent'   => $this->lookProdukcijskaHisa1['id'],
+//        ];
+//        $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+//        $I->assertGuid($ent['id']);
 
         $data = [
             'delez'         => 37.1,
@@ -1400,14 +1398,14 @@ class ProgramDelaCest
         $this->objKoprodukcija3 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
         $I->assertGuid($ent['id']);
 
-        $data = [
-            'delez'         => 0.12,
-            'zaproseno'     => 0.012,
-            'enotaPrograma' => $this->objProgramPonovitevPrejsnjih1['id'],
-            'koproducent'   => $this->lookProdukcijskaHisa1['id'],
-        ];
-        $ent  = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
-        $I->assertGuid($ent['id']);
+//        $data = [
+//            'delez'         => 0.12,
+//            'zaproseno'     => 0.012,
+//            'enotaPrograma' => $this->objProgramPonovitevPrejsnjih1['id'],
+//            'koproducent'   => $this->lookProdukcijskaHisa1['id'],
+//        ];
+//        $ent  = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+//        $I->assertGuid($ent['id']);
 
         $data = [
             'delez'         => 20.22,
@@ -1576,8 +1574,8 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(0, $entR['stPonPrejSredKopr']);
         $I->assertGreaterThanOrEqual(1, $entR['stPonPrejVelikihKopr']);
         $I->assertGreaterThanOrEqual(3, $entR['stGostujo'], "št. gostujočih");
-        $I->assertGreaterThanOrEqual(2, $entR['stInt'],   "štev. Mednarodna gostovanja:");
-        $I->assertGreaterThanOrEqual(2, $entR['stFest'],  "štev. Festivali:");
+        $I->assertGreaterThanOrEqual(2, $entR['stInt'], "štev. Mednarodna gostovanja:");
+        $I->assertGreaterThanOrEqual(2, $entR['stFest'], "štev. Festivali:");
         $I->assertGreaterThanOrEqual(2, $entR['stRazno'], "štev. Razno: ");
         $I->assertGreaterThanOrEqual(1, $entR['stIzjem'], "štev. Izjemni dogodki:");
         $I->assertGreaterThanOrEqual(1170.90, $entR['vrPS1'], "vrednost PS1");
@@ -1652,7 +1650,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'      => 4.23,
             'avtorskiHonorarjiSamoz' => 4.23,
             'tantieme'               => 5.23,
-            'materialni'               => 5.23,
+            'materialni'             => 5.23,
             'avtorskePravice'        => 5.23,
             'drugiViri'              => 1.24,
             'opredelitevDrugiViri'   => "zz",
@@ -1696,7 +1694,7 @@ class ProgramDelaCest
             'avtorskiHonorarji'       => 63.21,
             'avtorskiHonorarjiSamoz'  => 63.21,
             'tantieme'                => 1.24,
-            'materialni'                => 1.24,
+            'materialni'              => 1.24,
             'avtorskePravice'         => 1.24,
             'drugiViri'               => 1.24,
             'drugiJavni'              => 1.24,
@@ -1836,16 +1834,17 @@ class ProgramDelaCest
         $noviZaprosen      = 11.22;
         $novDelez          = 98.7;
         //pri validaciji ne bi smel najti samega sebe
-        $data              = $this->objProgramPremiera1;
+        $data              = $I->successfullyGet($this->programPremieraUrl, $this->objProgramPremiera1['id']);
         $data['zaproseno'] = $noviZaprosen;
         $data['nasDelez']  = $novDelez;
         $ent               = $I->successfullyUpdate($this->programPremieraUrl, $data['id'], $data);
         $I->assertGuid($ent['id']);
-
-        $dataKop = $this->objKoprodukcija1;
-        $ent     = $I->successfullyGet($this->produkcijaDelitevUrl, $this->objKoprodukcija1['id']);
+        codecept_debug($ent);
+        
+        $kopId=$ent['koprodukcije'][0]['id'];   //predvidevamo, da je matični v 1. polju 
+        $this->objKoprodukcija1=$ent     = $I->successfullyGet($this->produkcijaDelitevUrl, $kopId);
         $I->assertNotEmpty($ent);
-        $I->assertEquals($noviZaprosen, $ent['zaproseno'], "zaprošen procent pri matični koprodukciji");
+        $I->assertEquals($noviZaprosen, $ent['zaproseno']);
         $I->assertEquals($novDelez, $ent['delez'], "delež pri matični koprodukciji");
     }
 
