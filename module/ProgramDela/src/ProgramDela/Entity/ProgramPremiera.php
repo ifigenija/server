@@ -39,7 +39,7 @@ class ProgramPremiera
         $this->setNaziv("");        // dobimo iz uprizoritve
 
         $this->setPonoviDoma(1);        // le premiera
-
+        
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
             if ($this->getDokument()) {
@@ -50,6 +50,8 @@ class ProgramPremiera
 
     public function validate($mode = 'update')
     {
+        $this->expect(($this->getTipProgramskeEnote()), "Tip programske enote ne obstaja", 1000443);
+
         if ($this->getDokument()) {
 // preveriti, ali že obstaja programpremiere z isto uprizoritvijo
             $obstaja = true;  //init

@@ -84,6 +84,7 @@ class ProgramFestivalCest
 //            'drugiViri'               => 1.24,
             'drugiJavni'              => 1.24,
             'sort'                    => 1,
+            'imaKoprodukcije'                    => TRUE,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -118,6 +119,7 @@ class ProgramFestivalCest
 //            'drugiViri'               => 2.24,
             'drugiJavni'              => 2.24,
             'sort'                    => 2,
+            'imaKoprodukcije'                    => FALSE,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -178,6 +180,7 @@ class ProgramFestivalCest
 //        $I->assertEquals($ent['drugiViri'], 1.24);
         $I->assertEquals($ent['drugiJavni'], 1.24);
         $I->assertEquals($ent['sort'], 1);
+        $I->assertEquals($ent['imaKoprodukcije'], TRUE);
         $I->assertEquals($ent['avtorskiHonorarji'], 0);
         $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 0);
     }

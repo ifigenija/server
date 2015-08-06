@@ -27,6 +27,7 @@ forms:
 #            - lastnaSredstva
 #            - drugiViri
             - drugiJavni
+            - imaKoprodukcije
             - dokument
             - gostitelj
             - sort

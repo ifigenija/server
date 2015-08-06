@@ -20,6 +20,7 @@ forms:
 #            - drugiViri
             - drugiJavni
             - sort
+            - imaKoprodukcije
         hydrator:
             byValue: [ soorganizator ]
 lists:

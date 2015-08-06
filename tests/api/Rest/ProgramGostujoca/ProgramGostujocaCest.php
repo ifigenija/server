@@ -36,6 +36,7 @@ class ProgramGostujocaCest
     private $drugiVirUrl = '/rest/drugivir';
     private $objDrugiVir1;
     private $objDrugiVir2;
+    private $lookTipProgramskeEnote;
 
     public function _before(ApiTester $I)
     {
@@ -58,8 +59,8 @@ class ProgramGostujocaCest
         $data       = [
             'celotnaVrednost' => 1.24,
             'nasDelez'        => 4,
-            'strosekOdkPred'        => 3.11,
-            'zaproseno'            =>1.24,
+            'strosekOdkPred'  => 3.11,
+            'zaproseno'       => 1.24,
 //            'lastnaSredstva'  => 1.24,
 //            'avtorskiHonorarji'  => 1.24,
 //            'tantieme'           => 1.24,
@@ -80,16 +81,17 @@ class ProgramGostujocaCest
 //            'tip'                => 'gostujoci', 
             'dokument'        => null,
             'sort'            => 1,
+            'imaKoprodukcije'            => TRUE,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
-        // kreiramo še en zapis
+// kreiramo še en zapis
         $data       = [
             'celotnaVrednost' => 4.56,
             'nasDelez'        => 4.56,
-            'strosekOdkPred'        => 3.11,
-            'zaproseno'            =>1.24,
+            'strosekOdkPred'  => 3.11,
+            'zaproseno'       => 1.24,
 //'lastnaSredstva'  => 4.56,
 //            'avtorskiHonorarji'  => 4.56,
 //            'tantieme'           => 4.56,
@@ -108,6 +110,7 @@ class ProgramGostujocaCest
 //            'tipProgramskeEnote' => NULL,
             'dokument'        => null,
             'sort'            => 2,
+            'imaKoprodukcije'            => FALSE,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -144,7 +147,7 @@ class ProgramGostujocaCest
         $I->assertEquals($ent['nasDelez'], 4);
         $I->assertEquals($ent['strosekOdkPred'], 3.11);
         $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");
-         $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
+        $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
 //        $I->assertEquals($ent['tantieme'], 1.24);
 //        $I->assertEquals($ent['materialni'], 1.24);
 //        $I->assertEquals($ent['drugiViri'], 1.24);
@@ -162,6 +165,7 @@ class ProgramGostujocaCest
 //        $I->assertEquals($ent['tipProgramskeEnote'], NULL);
         $I->assertEquals($ent['dokument'], null);
         $I->assertEquals($ent['sort'], 1);
+        $I->assertEquals($ent['imaKoprodukcije'], TRUE);
         $I->assertEquals($ent['avtorskiHonorarji'], 0);
         $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 0);
     }
@@ -225,7 +229,7 @@ class ProgramGostujocaCest
         $this->objDrugiVir1 = $ent                = $I->successfullyCreate($this->drugiVirUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
-        // kreiramo še en zapis
+// kreiramo še en zapis
         $data               = [
             'znesek'        => 1.24,
             'opis'          => "dd",
@@ -251,5 +255,34 @@ class ProgramGostujocaCest
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "drugiViri", $this->objDrugiVir1['id']);
         $I->assertGreaterThanOrEqual(1, count($resp));
     }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookuptipProgramskeEnote(ApiTester $I)
+    {
+        $this->lookTipProgramskeEnote = $look                         = $I->lookupEntity("tipProgramskeEnote", "01", false);
+        $I->assertNotEmpty($look);
+    }
+
+    /**
+     *  kreiramo zapis s tipom programske enote
+     * 
+     * @depends delete
+     * @depends lookuptipProgramskeEnote
+     * 
+     * @param ApiTester $I
+     */
+//    public function createSTipomProgramskeEnote(ApiTester $I)
+//    {
+////               $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostujočo", 1000431);
+//        $data                        = $this->obj1;
+//        $data ['tipProgramskeEnote'] = $this->lookTipProgramskeEnote['id'];
+//        $resp                        = $I->failToCreate($this->restUrl, $data);
+//        codecept_debug($resp);
+//        $I->assertContains("required", $resp[0]['message']);
+//        $I->assertEquals(1000431, $resp[0]['code']);
+//    }
 
 }

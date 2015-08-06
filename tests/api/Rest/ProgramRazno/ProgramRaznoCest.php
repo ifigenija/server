@@ -89,6 +89,7 @@ class ProgramRaznoCest
 //            'drugiViri'       => 1.24,
             'drugiJavni'    => 1.24,
             'sort'          => 1,
+            'imaKoprodukcije'          => true,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -115,6 +116,7 @@ class ProgramRaznoCest
 //            'drugiViri'       => 2.23,
             'drugiJavni'    => 2.23,
             'sort'          => 2,
+            'imaKoprodukcije'          => false,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -169,6 +171,7 @@ class ProgramRaznoCest
         $I->assertEquals($ent['sort'], 1, 'sort');
         $I->assertEquals($ent['avtorskiHonorarji'], 0);
         $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 0);
+        $I->assertEquals($ent['imaKoprodukcije'], TRUE);
     }
 
     /**

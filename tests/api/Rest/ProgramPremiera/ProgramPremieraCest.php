@@ -128,18 +128,18 @@ class ProgramPremieraCest
     {
         $data       = [
 //            'celotnaVrednost'      => 1.24,
-            'nasDelez'             => 5,
-            'zaproseno'            => 0.66,
+            'nasDelez'               => 5,
+            'zaproseno'              => 0.66,
 //            'lastnaSredstva'       => 1.24,
-            'avtorskiHonorarji'    => 1.24,
-            'avtorskiHonorarjiSamoz'    => 1.24,
-            'tantieme'             => 1.24,
+            'avtorskiHonorarji'      => 1.24,
+            'avtorskiHonorarjiSamoz' => 1.24,
+            'tantieme'               => 1.24,
             'materialni'             => 1.24,
-            'avtorskePravice'      => 1.24,
-            'drugiViri'            => 1.24,
+            'avtorskePravice'        => 1.24,
+            'drugiViri'              => 1.24,
 //            'vlozekGostitelja'     =>1.24,
-            'drugiJavni'           => 1.24,
-            'obiskDoma'            => 1,
+            'drugiJavni'             => 1.24,
+            'obiskDoma'              => 1,
 //            'obiskGost'          => 1,
 //            'obiskZamejo'        => 1,
 //            'obiskInt'           => 1,
@@ -147,17 +147,17 @@ class ProgramPremieraCest
 //            'ponoviZamejo'       => 1,
 //            'ponoviGost'         => 1,
 //            'ponoviInt'          => 1,
-            'uprizoritev'          => $this->lookUprizoritev['id'],
-            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
+            'uprizoritev'            => $this->lookUprizoritev['id'],
+            'tipProgramskeEnote'     => $this->lookTipProgramskeEnote['id'],
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
-            'dokument'             => null,
-            'sort'                 => 1,
-            'stZaposUmet'          => 1,
-            'stZaposDrug'          => 1,
-            'stHonorarnih'         => 1,
-            'stHonorarnihIgr'      => 1,
-            'stHonorarnihIgrTujJZ' => 1,
-            'stHonorarnihIgrSamoz' => 1,
+            'dokument'               => null,
+            'sort'                   => 1,
+            'stZaposUmet'            => 1,
+            'stZaposDrug'            => 1,
+            'stHonorarnih'           => 1,
+            'stHonorarnihIgr'        => 1,
+            'stHonorarnihIgrTujJZ'   => 1,
+            'stHonorarnihIgrSamoz'   => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -165,17 +165,17 @@ class ProgramPremieraCest
         // kreiramo še en zapis
         $data       = [
 //            'celotnaVrednost'      => 4.56,
-            'nasDelez'             => 19,
-            'zaproseno'            => 0.66,
+            'nasDelez'               => 19,
+            'zaproseno'              => 0.66,
 //            'lastnaSredstva'       => 4.56,
-            'avtorskiHonorarji'    => 4.56,
-            'avtorskiHonorarjiSamoz'    => 4.56,
-            'tantieme'             => 4.56,
+            'avtorskiHonorarji'      => 4.56,
+            'avtorskiHonorarjiSamoz' => 4.56,
+            'tantieme'               => 4.56,
             'materialni'             => 4.56,
-            'avtorskePravice'      => 4.56,
+            'avtorskePravice'        => 4.56,
 //            'vlozekGostitelja'     => 4.56,
-            'drugiJavni'           => 4.56,
-            'obiskDoma'            => 4,
+            'drugiJavni'             => 4.56,
+            'obiskDoma'              => 4,
 //            'obiskGost'          => 4,
 //            'obiskZamejo'        => 4,
 //            'obiskInt'           => 4,
@@ -183,16 +183,16 @@ class ProgramPremieraCest
 //            'ponoviZamejo'       => 4,
 //            'ponoviGost'         => 4,
 //            'ponoviInt'          => 4,
-            'uprizoritev'          => NULL,
-            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
-            'dokument'             => null,
-            'sort'                 => 2,
-            'stZaposUmet'          => 2,
-            'stZaposDrug'          => 2,
-            'stHonorarnih'         => 2,
-            'stHonorarnihIgr'      => 2,
-            'stHonorarnihIgrTujJZ' => 2,
-            'stHonorarnihIgrSamoz' => 2,
+            'uprizoritev'            => NULL,
+            'tipProgramskeEnote'     => $this->lookTipProgramskeEnote['id'],
+            'dokument'               => null,
+            'sort'                   => 2,
+            'stZaposUmet'            => 2,
+            'stZaposDrug'            => 2,
+            'stHonorarnih'           => 2,
+            'stHonorarnihIgr'        => 2,
+            'stHonorarnihIgrTujJZ'   => 2,
+            'stHonorarnihIgrSamoz'   => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -206,7 +206,7 @@ class ProgramPremieraCest
      */
     public function update(ApiTester $I)
     {
-        $ent                    = $this->obj1;
+        $ent             = $this->obj1;
         $ent['tantieme'] = 1.22;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
@@ -227,7 +227,7 @@ class ProgramPremieraCest
 
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['celotnaVrednost'], 5, "celotna vrednost");
-        $I->assertEquals($ent['nasDelez'], 5.00,"naš delež");
+        $I->assertEquals($ent['nasDelez'], 5.00, "naš delež");
         $I->assertEquals($ent['zaproseno'], 0.66, "zaprošeno");
         $I->assertEquals($ent['avtorskiHonorarji'], 1.24);
         $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 1.24);
@@ -236,7 +236,7 @@ class ProgramPremieraCest
         $I->assertEquals($ent['avtorskePravice'], 1.24);
         $I->assertEquals($ent['drugiJavni'], 1.24);
         $I->assertEquals($ent['vlozekGostitelja'], 0);
-        $I->assertEquals($ent['lastnaSredstva'],  $ent['nasDelez']-$ent['zaproseno']-$ent['drugiJavni']-  $ent['vlozekGostitelja']," lastna sredstva (ni nejavnih virov)");
+        $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], " lastna sredstva (ni nejavnih virov)");
 //        $I->assertEquals($ent['vlozekGostitelja'],1.24);
         $I->assertEquals($ent['obiskDoma'], 1);
 //        $I->assertEquals($ent['obiskGost'          ],1 );
@@ -390,6 +390,24 @@ class ProgramPremieraCest
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", $this->objProdukcijaDelitev1['id']);
         $I->assertGreaterThanOrEqual(1, count($resp));
+    }
+
+    /**
+     *  kreiramo zapis brez tipa programske enote
+     * 
+     * @depends delete
+     * 
+     * @param ApiTester $I
+     */
+    public function createBrezTipaProgramskeEnote(ApiTester $I)
+    {
+//                $this->expect(($this->getTipProgramskeEnote()), "Tip programske enote ne obstaja", 1000443);
+        $data                        = $this->obj1;
+        $data ['tipProgramskeEnote'] = NULL;
+        $resp                        = $I->failToCreate($this->restUrl, $data);
+//        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertContains("required", $resp[0]['message']);
     }
 
 }

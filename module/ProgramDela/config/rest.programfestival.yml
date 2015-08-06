@@ -33,6 +33,7 @@ forms:
 #            - drugiViri
             - drugiJavni
             - sort
+            - imaKoprodukcije
 lists:
     default: 
         hydrator:

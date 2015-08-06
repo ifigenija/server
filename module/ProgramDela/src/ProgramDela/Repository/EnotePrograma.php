@@ -5,6 +5,7 @@
  */
 
 namespace ProgramDela\Repository;
+
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineModule\Paginator\Adapter\Selectable;
@@ -87,6 +88,9 @@ class EnotePrograma
     {
         $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000520);
 
+        $this->nastaviFlagImaKoprodukcijo($object);
+        $this->azurirajKoprodukcije($object);
+
         // preračunamo vrednosti v smeri navzgor
         $object->preracunaj(\Max\Consts::UP);
 
@@ -102,6 +106,9 @@ class EnotePrograma
     {
         $zaklenjen = $this->zaklenjenProgramDela($object);  //$$ začasno
         $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000521);
+
+        $this->nastaviFlagImaKoprodukcijo($object);
+        $this->azurirajKoprodukcije($object);
 
         // preračunamo vrednosti v smeri navzgor
         $object->preracunaj(\Max\Consts::UP);
@@ -119,6 +126,31 @@ class EnotePrograma
         $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000522);
 
         parent::delete($object);
+    }
+
+    protected function nastaviFlagImaKoprodukcijo($object)
+    {
+        if ($object->getTipProgramskeEnote()) {
+            $object->setImaKoprodukcije($object->getTipProgramskeEnote()->getKoprodukcija());
+        }
+    }
+
+    /**
+     * ažurira koprodukcije - če je flag ima koprodukcijo:
+     *  true   => kreira novo matično koprodukcijo
+     *  false  => briše vse koprodukcije
+     * 
+     * @param type $object
+     */
+    protected function azurirajKoprodukcije($object)
+    {
+        if ($object->getImaKoprodukcije()) {
+            $service = $this->serviceLocator->get('enotaprograma.service');
+            $service->novaMaticnaKoprodukcija($object);
+//            $$  #1038 kliči novaMatičnaKoprodukcija
+        } else {
+//            $$ briši vse koprodukcije
+        }
     }
 
 }

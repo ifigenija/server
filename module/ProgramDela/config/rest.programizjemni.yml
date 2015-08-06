@@ -37,6 +37,7 @@ forms:
             - stHonorarnihIgr
             - stHonorarnihIgrTujJZ
             - stHonorarnihIgrSamoz
+            - imaKoprodukcije
         hydrator:
 #            byValue: [ uprizoritev ]
             byValue: [ ]

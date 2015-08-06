@@ -27,6 +27,7 @@ forms:
 #            - ponoviInt
             - uprizoritev
 #            - tipProgramskeEnote
+            - imaKoprodukcije
             - dokument
             - sort
 #            - stZaposlenih

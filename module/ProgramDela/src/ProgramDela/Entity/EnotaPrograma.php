@@ -125,6 +125,16 @@ class EnotaPrograma
     protected $drugiViri;
 
     /**
+     * ali ima enota programa koprodukcije oz. koproducente
+     * 
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     * @Max\I18n(label="postniNaslov.jeeu", description="Je klient iz EU")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $imaKoprodukcije;
+
+    /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProdukcijaDelitev", mappedBy="enotaPrograma", orphanRemoval=true)
      * @var <Koprodukcije>
      */
@@ -351,6 +361,7 @@ class EnotaPrograma
 
     public function preracunaj($smer = false)
     {
+        
         $ls                   = $this->nasDelez - $this->zaproseno - $this->drugiJavni - $this->vsotaDrugihVirov() - $this->vlozekGostitelja;
         $this->lastnaSredstva = \Max\Functions::euroRound($ls);   //Zaokrožimo na 2 decimalki predno shranimo
 
@@ -810,6 +821,17 @@ class EnotaPrograma
     public function setMaterialni($materialni)
     {
         $this->materialni = $materialni;
+        return $this;
+    }
+
+    public function getImaKoprodukcije()
+    {
+        return $this->imaKoprodukcije;
+    }
+
+    public function setImaKoprodukcije($imaKoprodukcije)
+    {
+        $this->imaKoprodukcije = $imaKoprodukcije;
         return $this;
     }
 

@@ -40,8 +40,8 @@ class ProgramIzjemni
 
     public function validate($mode = 'update')
     {
-        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program festival", 1000541);
-        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program festival", 1000542);
+        $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program izjemni", 1000541);
+        $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program izjemni", 1000542);
 
         $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
         $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice+$this->materialni);

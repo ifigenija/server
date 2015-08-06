@@ -124,6 +124,7 @@ class ProgramGostovanjeCest
             'drugiJavni'         => 9.12,
             'gostitelj'          => $this->lookPopa1['id'],
             'sort'               => 1,
+            'imaKoprodukcije'               => true,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -155,6 +156,7 @@ class ProgramGostovanjeCest
             'drugiJavni'         => 3.12,
             'gostitelj'          => null,
             'sort'               => 2,
+            'imaKoprodukcije'               => FALSE,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -214,6 +216,7 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['dokument'], NULL);
         $I->assertEquals($ent['gostitelj']['id'], $this->lookPopa1['id']);
         $I->assertEquals($ent['sort'], 1);
+        $I->assertEquals($ent['imaKoprodukcije'], TRUE);
     }
 
     /**
