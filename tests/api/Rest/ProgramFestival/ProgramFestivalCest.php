@@ -31,10 +31,10 @@ use ApiTester;
 class ProgramFestivalCest
 {
 
-    private $restUrl     = '/rest/programfestival';
+    private $restUrl                = '/rest/programfestival';
     private $obj1;
     private $obj2;
-    private $drugiVirUrl = '/rest/drugivir';
+    private $drugiVirUrl            = '/rest/drugivir';
     private $objDrugiVir1;
     private $objDrugiVir2;
     private $lookProdukcijskaHisa1;
@@ -57,6 +57,7 @@ class ProgramFestivalCest
     {
         
     }
+
     /**
      * 
      * @param ApiTester $I
@@ -370,13 +371,13 @@ class ProgramFestivalCest
      */
     public function createZImaKoprodukcijo(ApiTester $I)
     {
-        $data                       = $this->obj1;
-        $data['imaKoprodukcije'] = true; 
+        $data                    = $this->obj1;
+        $data['imaKoprodukcije'] = true;
         codecept_debug($data);
-        $this->obj3                 = $ent                        = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj3              = $ent                     = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
 
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj3['id'], "koprodukcije", "");
+        $resp       = $I->successfullyGetRelation($this->restUrl, $this->obj3['id'], "koprodukcije", "");
         codecept_debug($resp);
         $I->assertEquals(1, count($resp));      // mora biti le 1 - t.j. matični
         // vse skupaj ponovimo z update-om:
@@ -403,14 +404,40 @@ class ProgramFestivalCest
         codecept_debug($resp);
         $I->assertGreaterThanOrEqual(2, count($resp));
 
-        $data                       = $this->obj2;
+        $data                    = $this->obj2;
         $data['imaKoprodukcije'] = false;
-        $ent                        = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        $ent                     = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
         $I->assertGuid($ent['id']);
         // pričakujemo izbris vseh koproducentov
-        $resp                       = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", "");
+        $resp                    = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", "");
         codecept_debug($resp);
         $I->assertEquals(0, count($resp));      // mora biti brez koproducentov
+    }
+
+    /**
+     * spremenim zapis za kontrolo zaokroževanja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateKontrolaValidacijeZaokrozevanj(ApiTester $I)
+    {
+        $ent              = $this->obj2;
+        $ent['nasDelez']  = 18.01;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['zaproseno'] = 12.61;
+
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        // ali sedaj napaka pri zaprošeno?
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        $ent['zaproseno'] = 12.62;
+        $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000533, $resp[0]['code']);
     }
 
 }

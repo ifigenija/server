@@ -400,4 +400,33 @@ class ProgramPonovitevPrejsnjihCest
         $I->assertGreaterThanOrEqual(1, count($resp));
     }
 
+    /**
+     * spremenim zapis za kontrolo zaokroževanja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateKontrolaValidacijeZaokrozevanj(ApiTester $I)
+    {
+        $ent                      = $this->obj2;
+        $ent['avtorskiHonorarji'] = 1.01;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['tantieme']          = 2.02;
+        $ent['avtorskePravice']   = 0;
+        $ent['materialni']        = 0;
+        $ent['zaproseno']         = 1.82;
+
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        // ali sedaj napaka pri zaprošeno?
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        $ent['zaproseno']         = 1.83;
+        $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000561, $resp[0]['code']);
+    }
+
 }

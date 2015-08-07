@@ -22,13 +22,25 @@ class ProgramIzjemni
      */
     protected $dokument;
 
+    /**
+     * preračuna polja, ki se uporabljajo v matični koprodukciji
+     * 
+     * naš delež in ostala polja kot zaprošeno morajo biti nastavljena še predno se prenesejo v matično koprodukcijo
+     */
+    public function preracunajPoljaZaMatKoprodukcijo()
+    {
+        $this->nasDelez = $this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni;
+    }
+
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
-        $this->celotnaVrednostGostovSZ=0;
-        $this->stZaposUmet=0;
-        $this->stZaposDrug=0;
-        $this->vlozekGostitelja=0;
+        $this->celotnaVrednostGostovSZ = 0;
+        $this->stZaposUmet             = 0;
+        $this->stZaposDrug             = 0;
+        $this->vlozekGostitelja        = 0;
+
+        $this->preracunajPoljaZaMatKoprodukcijo();
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
@@ -44,11 +56,11 @@ class ProgramIzjemni
         $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program izjemni", 1000542);
 
         $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
-        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice+$this->materialni);
+        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni);
         $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor, tantiem, avt.pravic in mat. str. (" . $sumStr . ")", 1000543);
 
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
-        $maxZaproseno = \Max\Functions::euroRoundS(1.0 * $this->nasDelez);
+        $maxZaproseno = \Max\Functions::euroRoundS(1.00 * $this->nasDelez);
         // glede na procent upravičenih stroškov
         $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 100% deleža mat. JZ(" . $maxZaproseno . ")", 1000544);
 

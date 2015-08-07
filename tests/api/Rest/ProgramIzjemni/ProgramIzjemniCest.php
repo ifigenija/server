@@ -83,7 +83,7 @@ class ProgramIzjemniCest
         $data       = [
             'naziv'                  => "zz",
 //            'celotnaVrednost'   => 1.24,
-            'nasDelez'               => 5,
+//            'nasDelez'               => 5,
             'zaproseno'              => 1.24,
 //            'lastnaSredstva'    => 1.24,
             'avtorskiHonorarji'      => 1.24,
@@ -121,7 +121,7 @@ class ProgramIzjemniCest
         $data       = [
             'naziv'                  => "zz",
 //            'celotnaVrednost'   => 4.56,
-            'nasDelez'               => 19,
+//            'nasDelez'               => 19,
             'zaproseno'              => 4.56,
 //            'lastnaSredstva'    => 4.56,
             'avtorskiHonorarji'      => 4.56,
@@ -144,7 +144,7 @@ class ProgramIzjemniCest
 //            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
             'dokument'               => null,
             'sort'                   => 2,
-            'imaKoprodukcije'                   => false,
+            'imaKoprodukcije'        => false,
             'stZaposlenih'           => 2,
 //            'stDrugih'             => 2,
             'stHonorarnih'           => 2,
@@ -184,8 +184,8 @@ class ProgramIzjemniCest
 
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['naziv'], 'zz');
-        $I->assertEquals($ent['celotnaVrednost'], 5);
-        $I->assertEquals($ent['nasDelez'], 5);
+        $I->assertEquals($ent['celotnaVrednost'], 4.96);
+        $I->assertEquals($ent['nasDelez'], 4.96);
         $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");
         $I->assertEquals($ent['vlozekGostitelja'], 0);
         $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
@@ -302,6 +302,35 @@ class ProgramIzjemniCest
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "drugiViri", $this->objDrugiVir1['id']);
         $I->assertGreaterThanOrEqual(1, count($resp));
+    }
+
+    /**
+     * spremenim zapis za kontrolo zaokroževanja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateKontrolaValidacijeZaokrozevanj(ApiTester $I)
+    {
+        $ent                      = $this->obj2;
+        $ent['avtorskiHonorarji'] = 10;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['tantieme']          = 8.01;
+        $ent['avtorskePravice']   = 0;
+        $ent['materialni']        = 0;
+        $ent['zaproseno']         = 18.01;
+
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        // ali sedaj napaka pri zaprošeno?
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+        
+        $ent['zaproseno']         = 18.02;
+        $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000544, $resp[0]['code']);
     }
 
 }

@@ -219,6 +219,13 @@ class ProgramskaEnotaSklopaCest
         $I->assertGuid($ent['id']);
         // testiramo, ali je zaokrožil na 2 decimalki
         $I->assertEquals(0.99, $ent['vrednostPE'], "zaokrožena vrednost");
+
+        // test string zaokroževanja
+        $data               = $this->obj2;
+        $data['vrednostPE'] = -0.009;
+
+        $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        $I->assertEquals(1000651, $resp[0]['code']);
     }
 
 }

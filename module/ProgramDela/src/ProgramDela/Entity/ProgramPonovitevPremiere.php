@@ -29,6 +29,7 @@ class ProgramPonovitevPremiere
      */
     public function preracunajPoljaZaMatKoprodukcijo()
     {
+        // že sam klient zagotavlja, da so vsi zneski na 2 decimalki
         $this->nasDelez = $this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni;
     }
 
