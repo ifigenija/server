@@ -22,7 +22,7 @@ forms:
             - obiskDoma
             - obiskGost
             - obiskZamejo
-            - obiskInt
+#            - obiskInt
             - ponoviDoma
             - ponoviZamejo
             - ponoviGost

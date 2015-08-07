@@ -25,10 +25,10 @@ class ProgramIzjemni
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
-        $this->setCelotnaVrednostGostovSZ(0);
-        $this->setStZaposUmet(0);
-        $this->setStZaposDrug(0);
-        $this->setVlozekGostitelja(0);
+        $this->celotnaVrednostGostovSZ=0;
+        $this->stZaposUmet=0;
+        $this->stZaposDrug=0;
+        $this->vlozekGostitelja=0;
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {

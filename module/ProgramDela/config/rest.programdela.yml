@@ -72,7 +72,6 @@ forms:
                 - gostujoci.uprizoritev
                 - gostovanja.gostitelj
                 - gostovanja.uprizoritev
-                - programiRazno.soorganizator
             byValue: 
                 - premiere
                 - ponovitvePremiere

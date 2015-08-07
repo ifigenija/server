@@ -78,7 +78,6 @@ class ProgramRaznoCest
             'dokument'      => NULL,
             'naziv'         => 'zz',
 //            'stPE'            => 1,
-            'soorganizator' => $this->lookPopa1['id'],
             'obiskDoma'     => 1,
             'stZaposlenih'  => 1,
             'stHonorarnih'  => 1,
@@ -105,7 +104,6 @@ class ProgramRaznoCest
 //            'mesecPE'         => 'aa',
 //            'vrednostPE'      => 2.23,
 //            'stPE'            => 2,
-            'soorganizator' => null,
             'obiskDoma'     => 2,
             'stZaposlenih'  => 2,
             'stHonorarnih'  => 2,
@@ -158,7 +156,6 @@ class ProgramRaznoCest
 //        $I->assertEquals($ent['mesecPE'], 'zz');
 //        $I->assertEquals($ent['vrednostPE'], 1.24);
         $I->assertEquals($ent['stPE'], 0);
-        $I->assertEquals($ent['soorganizator']['id'], $this->lookPopa1['id']);
         $I->assertEquals($ent['obiskDoma'], 1);
         $I->assertEquals($ent['stZaposlenih'], 1);
         $I->assertEquals($ent['stHonorarnih'], 1);

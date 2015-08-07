@@ -89,6 +89,7 @@ class EnotePrograma
         $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000520);
 
         $this->nastaviFlagImaKoprodukcijo($object);
+        $object->preracunaj();      //$ da se naš delež za koprodukcije ustrezno postavi
         $this->azurirajKoprodukcije($object);
 
         // preračunamo vrednosti v smeri navzgor
@@ -106,6 +107,7 @@ class EnotePrograma
     {
         $this->expect(!$this->zaklenjenProgramDela($object), "Program dela je že zaklenjen/zaključen. Spremembe niso več mogoče", 1000521);
 
+        $object->preracunajPoljaZaMatKoprodukcijo();
         $this->nastaviFlagImaKoprodukcijo($object);
         $this->azurirajKoprodukcije($object);
 

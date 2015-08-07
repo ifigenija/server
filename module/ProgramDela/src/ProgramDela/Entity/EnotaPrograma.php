@@ -359,6 +359,15 @@ class EnotaPrograma
         return $sumDNV;
     }
 
+    /**
+     * preračuna polja, ki se uporabljajo v matični koprodukciji
+     * 
+     * naš delež mora biti prej preračunan, predno se prenese v matično koprodukcijo
+     */
+    public function preracunajPoljaZaMatKoprodukcijo()
+    {
+    }
+    
     public function preracunaj($smer = false)
     {
         

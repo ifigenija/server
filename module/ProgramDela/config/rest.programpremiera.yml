@@ -12,7 +12,7 @@ forms:
             - tantieme
             - avtorskePravice
             - materialni
-            - nasDelez
+#            - nasDelez
             - zaproseno
 #            - vlozekGostitelja      
 #            - lastnaSredstva

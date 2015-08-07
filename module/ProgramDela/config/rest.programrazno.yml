@@ -9,7 +9,6 @@ forms:
             - dokument
             - naziv
 #            - stPE
-            - soorganizator
             - obiskDoma
             - stZaposlenih
             - stHonorarnih
@@ -21,8 +20,6 @@ forms:
             - drugiJavni
             - sort
             - imaKoprodukcije
-        hydrator:
-            byValue: [ soorganizator ]
 lists:
     default: 
         hydrator:

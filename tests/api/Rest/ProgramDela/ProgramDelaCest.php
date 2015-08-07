@@ -704,7 +704,6 @@ class ProgramDelaCest
             'dokument'      => $this->obj2['id'],
             'naziv'         => 'zz',
 //            'stPE'            => 1,
-            'soorganizator' => null,
             'obiskDoma'     => 6,
             'stZaposlenih'  => 1,
             'stHonorarnih'  => 18,
@@ -723,7 +722,6 @@ class ProgramDelaCest
             'dokument'      => $this->obj2['id'],
             'naziv'         => 'zz',
 //            'stPE'            => 1,
-            'soorganizator' => null,
             'obiskDoma'     => 22,
             'stZaposlenih'  => 1,
             'stHonorarnih'  => 14,
@@ -1578,10 +1576,10 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(2, $entR['stFest'], "štev. Festivali:");
         $I->assertGreaterThanOrEqual(2, $entR['stRazno'], "štev. Razno: ");
         $I->assertGreaterThanOrEqual(1, $entR['stIzjem'], "štev. Izjemni dogodki:");
-        $I->assertGreaterThanOrEqual(1170.90, $entR['vrPS1'], "vrednost PS1");
+        $I->assertGreaterThanOrEqual(787.73, $entR['vrPS1'], "vrednost PS1");
         $I->assertGreaterThanOrEqual(6.12, $entR['vrPS1Mat'], "vr PS1 mat");
         $I->assertGreaterThanOrEqual(0.66, $entR['vrPS1GostovSZ'], "vr ps1 gostov slo zam");
-        $I->assertGreaterThanOrEqual(549.24, $entR['vrPS1Do']);
+        $I->assertGreaterThanOrEqual(166.07, $entR['vrPS1Do']);
         $I->assertGreaterThanOrEqual(112, $entR['stIzvNekomerc'], "št nekomerc");
         $I->assertGreaterThanOrEqual(4, $entR['stIzvPrem'], "št. izvedb premier");
         $I->assertGreaterThanOrEqual(48, $entR['stIzvPonPrem'], "št. izvedb pon premier");
@@ -1805,23 +1803,27 @@ class ProgramDelaCest
      */
     public function updateProgramPremieraValidacije(ApiTester $I)
     {
+//        $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 70% deleža mat. JZ(" . $maxZaproseno . ")", 1000442);
+// koprodukcije:
+//                $this->expect(($zaproseno <= $delez), "Zaprošeno (" . $zaproseno . ") ne sme biti večje od deleža (" . $delez . ") ", 1000413);
+        
         //pri validaciji ne bi smel najti samega sebe
         $data              = $this->objProgramPremiera1;
-        $data['zaproseno'] = 70.16;
+        $data['zaproseno'] = 3.47;
         $ent               = $I->successfullyUpdate($this->programPremieraUrl, $data['id'], $data);
         $I->assertGuid($ent['id']);
 
         $data              = $this->objProgramPremiera1;
-        $data['zaproseno'] = 70.17;
+        $data['zaproseno'] = 3.48;
         $resp              = $I->failToUpdate($this->programPremieraUrl, $data['id'], $data);
         $I->assertNotEmpty($resp);
         $I->assertEquals(1000442, $resp[0]['code']);
 
         $data             = $this->objProgramPremiera1;
-        $data['tantieme'] = 100;
+        $data['zaproseno'] = 5;
         $resp             = $I->failToUpdate($this->programPremieraUrl, $data['id'], $data);
         $I->assertNotEmpty($resp);
-        $I->assertEquals(1000441, $resp[0]['code']);
+        $I->assertEquals(1000413, $resp[0]['code']);
     }
 
     /**
@@ -1831,12 +1833,10 @@ class ProgramDelaCest
      */
     public function updateProgramPremieraAliPropagacijaProcenta(ApiTester $I)
     {
-        $noviZaprosen      = 11.22;
-        $novDelez          = 98.7;
+        $noviZaprosen      = 3;
         //pri validaciji ne bi smel najti samega sebe
         $data              = $I->successfullyGet($this->programPremieraUrl, $this->objProgramPremiera1['id']);
         $data['zaproseno'] = $noviZaprosen;
-        $data['nasDelez']  = $novDelez;
         $ent               = $I->successfullyUpdate($this->programPremieraUrl, $data['id'], $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
@@ -1845,7 +1845,6 @@ class ProgramDelaCest
         $this->objKoprodukcija1=$ent     = $I->successfullyGet($this->produkcijaDelitevUrl, $kopId);
         $I->assertNotEmpty($ent);
         $I->assertEquals($noviZaprosen, $ent['zaproseno']);
-        $I->assertEquals($novDelez, $ent['delez'], "delež pri matični koprodukciji");
     }
 
     /**

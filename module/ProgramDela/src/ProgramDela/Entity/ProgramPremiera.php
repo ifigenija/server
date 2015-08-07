@@ -24,6 +24,16 @@ class ProgramPremiera
      */
     protected $dokument;
 
+    /**
+     * preračuna polja, ki se uporabljajo v matični koprodukciji
+     * 
+     * naš delež in ostala polja kot zaprošeno morajo biti nastavljena še predno se prenesejo v matično koprodukcijo
+     */
+    public function preracunajPoljaZaMatKoprodukcijo()
+    {
+        $this->nasDelez = $this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni;
+    }
+
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
@@ -39,7 +49,8 @@ class ProgramPremiera
         $this->setNaziv("");        // dobimo iz uprizoritve
 
         $this->setPonoviDoma(1);        // le premiera
-        
+        $this->preracunajPoljaZaMatKoprodukcijo();
+
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
             if ($this->getDokument()) {

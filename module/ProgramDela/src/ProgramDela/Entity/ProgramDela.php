@@ -1006,10 +1006,12 @@ class ProgramDela
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
             }
-            $this->stIzvNekomerc+=$object->getPonoviDoma();
-            $this->stIzvOstalihNek+=$object->getPonoviDoma();
-            $this->stObiskNekom +=$object->getObiskDoma();
+            $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost()+ $object->getPonoviInt();
+            $this->stIzvOstalihNek+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost()+ $object->getPonoviInt();
+            $this->stObiskNekom +=$object->getObiskDoma() + $object->getObiskGost() + $object->getObiskZamejo()+ $object->getObiskInt();
             $this->stObiskNekomMat +=$object->getObiskDoma();
+            $this->stObiskNekomGostSlo +=$object->getObiskGost();
+            $this->stObiskNekomGostZam +=$object->getObiskZamejo();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
             $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
             $this->sredstvaZaprosenoIzjem+=$object->getZaproseno();

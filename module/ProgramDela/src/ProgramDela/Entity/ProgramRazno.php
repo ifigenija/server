@@ -37,15 +37,6 @@ class ProgramRazno
      */
     protected $stPE;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Popa")
-     * @ORM\JoinColumn(name="gostitelj_id", referencedColumnName="id")
-     * @Max\I18n(label="programRazno.soorganizator", description="programRazno.d.soorganizator")
-     * @Max\Ui(type="toone")
-     * @var \App\Entity\Popa
-     */
-    protected $soorganizator;
-
     public function __construct()
     {
         $this->programskeEnoteSklopa = new ArrayCollection();
@@ -115,11 +106,6 @@ class ProgramRazno
         return $this->stPE;
     }
 
-    public function getSoorganizator()
-    {
-        return $this->soorganizator;
-    }
-
     public function setDokument(\ProgramDela\Entity\ProgramDela $dokument)
     {
         $this->dokument = $dokument;
@@ -135,12 +121,6 @@ class ProgramRazno
     public function setStPE($stPE)
     {
         $this->stPE = $stPE;
-        return $this;
-    }
-
-    public function setSoorganizator(\App\Entity\Popa $soorganizator)
-    {
-        $this->soorganizator = $soorganizator;
         return $this;
     }
 
