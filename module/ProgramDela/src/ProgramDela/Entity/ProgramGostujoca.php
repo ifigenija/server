@@ -34,26 +34,26 @@ class ProgramGostujoca
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki tudi v formi niso:
-        $this->celotnaVrednostGostovSZ=0;
-        $this->avtorskiHonorarji=0;
-        $this->avtorskiHonorarjiSamoz=0;
-        $this->tantieme=0;
-        $this->avtorskePravice=0;
-        $this->materialni=0;
-        $this->obiskGost=0;
-        $this->obiskZamejo=0;
-        $this->obiskInt=0;
-        $this->ponoviZamejo=0;
-        $this->ponoviGost=0;
-        $this->ponoviInt=0;
-        $this->vlozekGostitelja=0;  // kot vir
-        $this->stZaposlenih=0;
-        $this->stZaposUmet=0;
-        $this->stZaposDrug=0;
-        $this->stHonorarnih=0;
-        $this->stHonorarnihIgr=0;
-        $this->stHonorarnihIgrTujJZ=0;
-        $this->naziv="";        // dobimo iz uprizoritve
+        $this->celotnaVrednostGostovSZ = 0;
+        $this->avtorskiHonorarji       = 0;
+        $this->avtorskiHonorarjiSamoz  = 0;
+        $this->tantieme                = 0;
+        $this->avtorskePravice         = 0;
+        $this->materialni              = 0;
+        $this->obiskGost               = 0;
+        $this->obiskZamejo             = 0;
+        $this->obiskInt                = 0;
+        $this->ponoviZamejo            = 0;
+        $this->ponoviGost              = 0;
+        $this->ponoviInt               = 0;
+        $this->vlozekGostitelja        = 0;  // kot vir
+        $this->stZaposlenih            = 0;
+        $this->stZaposUmet             = 0;
+        $this->stZaposDrug             = 0;
+        $this->stHonorarnih            = 0;
+        $this->stHonorarnihIgr         = 0;
+        $this->stHonorarnihIgrTujJZ    = 0;
+        $this->naziv                   = "";        // dobimo iz uprizoritve
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
@@ -86,6 +86,10 @@ class ProgramGostujoca
         $maxZaproseno = \Max\Functions::euroRoundS(0.50 * $this->strosekOdkPred);
         // glede na procent upravičenih stroškov
         $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 50% stroška odkupa predstave (" . $maxZaproseno . ")", 1000432);
+
+        $strOdkPred = \Max\Functions::euroRoundS($this->strosekOdkPred);
+        $nd         = \Max\Functions::euroRoundS($this->nasDelez);
+        $this->expect($strOdkPred <= $nd, "Strošek odkupa predstave (" . $strOdkPred . ") ne sme biti večji od našega deleža (" . $nd. ")", 1000433);
 
         parent::validate();
     }

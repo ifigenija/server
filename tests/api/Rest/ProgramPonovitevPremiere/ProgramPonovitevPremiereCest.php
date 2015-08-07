@@ -132,9 +132,9 @@ class ProgramPonovitevPremiereCest
             'zaproseno'               => 1.24,
             'lastnaSredstva'          => 1.24,
             'avtorskiHonorarji'       => 1.24,
-            'avtorskiHonorarjiSamoz'       => 1.24,
+            'avtorskiHonorarjiSamoz'  => 1.24,
             'tantieme'                => 1.24,
-            'materialni'                => 1.24,
+            'materialni'              => 1.24,
             'avtorskePravice'         => 1.24,
             'drugiViri'               => 1.24,
             'vlozekGostitelja'        => 1.24,
@@ -164,9 +164,9 @@ class ProgramPonovitevPremiereCest
             'zaproseno'               => 1.24,
             'lastnaSredstva'          => 4.56,
             'avtorskiHonorarji'       => 4.56,
-            'avtorskiHonorarjiSamoz'       => 4.56,
+            'avtorskiHonorarjiSamoz'  => 4.56,
             'tantieme'                => 4.56,
-            'materialni'                => 4.56,
+            'materialni'              => 4.56,
             'avtorskePravice'         => 4.56,
             'drugiViri'               => 4.56,
             'vlozekGostitelja'        => 4.23,
@@ -375,6 +375,32 @@ class ProgramPonovitevPremiereCest
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "koprodukcije", $this->objProdukcijaDelitev1['id']);
         $I->assertGreaterThanOrEqual(1, count($resp));
+    }
+
+    /**
+     * spremenim zapis za kontrolo zaokroževanja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateKontrolaValidacijeZaokrozevanj(ApiTester $I)
+    {
+        $ent                      = $this->obj2;
+        $ent['avtorskiHonorarji'] = 1.004;
+        $ent['tantieme']          = 2.004;
+        $ent['avtorskePravice']   = 0;
+        $ent['materialni']        = 0;
+        $ent['zaproseno']         = 2.106;
+
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        // ali sedaj napaka pri zaprošeno?
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
     }
 
 }

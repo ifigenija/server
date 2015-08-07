@@ -81,7 +81,7 @@ class ProgramGostujocaCest
 //            'tip'                => 'gostujoci', 
             'dokument'        => null,
             'sort'            => 1,
-            'imaKoprodukcije'            => TRUE,
+            'imaKoprodukcije' => TRUE,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -110,7 +110,7 @@ class ProgramGostujocaCest
 //            'tipProgramskeEnote' => NULL,
             'dokument'        => null,
             'sort'            => 2,
-            'imaKoprodukcije'            => FALSE,
+            'imaKoprodukcije' => FALSE,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -284,5 +284,22 @@ class ProgramGostujocaCest
 //        $I->assertContains("required", $resp[0]['message']);
 //        $I->assertEquals(1000431, $resp[0]['code']);
 //    }
+
+    /**
+     * spremenim zapis za kontrolo validacije
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateSPrevelikimStroskomOdkupaPredstave(ApiTester $I)
+    {
+        $ent                   = $this->obj2;
+        $ent['nasDelez']       = 7;
+        $ent['strosekOdkPred'] = 7.01;    // preveliko     
+
+        $resp = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        codecept_debug($resp);
+        $I->assertEquals(1000433, $resp[0]['code']);
+    }
 
 }

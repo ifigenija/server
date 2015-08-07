@@ -29,6 +29,12 @@ class ProgramPonovitevPremiere
      */
     public function preracunajPoljaZaMatKoprodukcijo()
     {
+        // zaokrožimo polja, ki jih uporabimo v preračunih
+        $this->avtorskiHonorarji = \Max\Functions::euroRound($this->avtorskiHonorarji);
+        $this->tantieme          = \Max\Functions::euroRound($this->tantieme);
+        $this->avtorskePravice   = \Max\Functions::euroRound($this->avtorskePravice);
+        $this->materialni        = \Max\Functions::euroRound($this->materialni);
+
         $this->nasDelez = $this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni;
     }
 
