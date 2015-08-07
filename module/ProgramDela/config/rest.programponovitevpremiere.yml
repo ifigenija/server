@@ -7,7 +7,7 @@ forms:
         elements:
 #            - id
 #            - celotnaVrednost
-            - nasDelez
+#            - nasDelez
 #            - lastnaSredstva
             - avtorskiHonorarji
             - avtorskiHonorarjiSamoz

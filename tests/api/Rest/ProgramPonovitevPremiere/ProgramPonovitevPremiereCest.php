@@ -127,7 +127,7 @@ class ProgramPonovitevPremiereCest
     {
         $data       = [
 //            'celotnaVrednost'         => 1.24,
-            'nasDelez'                => 5,
+//            'nasDelez'                => 5,
             'celotnaVrednostGostovSZ' => 3.11,
             'zaproseno'               => 1.24,
             'lastnaSredstva'          => 1.24,
@@ -158,7 +158,7 @@ class ProgramPonovitevPremiereCest
         // kreiramo še en zapis
         $data       = [
 //            'celotnaVrednost'         => 4.56,
-            'nasDelez'                => 19,
+//            'nasDelez'                => 19,
 //            'celotnaVrednostMat'      => 2.23,
             'celotnaVrednostGostovSZ' => 1.11,
             'zaproseno'               => 1.24,
@@ -215,8 +215,8 @@ class ProgramPonovitevPremiereCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['celotnaVrednost'], 5.00);
-        $I->assertEquals($ent['nasDelez'], 5);
+        $I->assertEquals($ent['celotnaVrednost'], 4.96);
+        $I->assertEquals($ent['nasDelez'], 4.96);
         $I->assertEquals($ent['celotnaVrednostGostovSZ'], 3.11);
         $I->assertEquals($ent['celotnaVrednostMat'], $ent['celotnaVrednost'] - $ent['celotnaVrednostGostovSZ'], "cel. vr. matič.");
         $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");

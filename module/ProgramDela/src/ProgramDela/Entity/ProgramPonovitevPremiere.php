@@ -22,6 +22,16 @@ class ProgramPonovitevPremiere
      */
     protected $dokument;
 
+    /**
+     * preračuna polja, ki se uporabljajo v matični koprodukciji
+     * 
+     * naš delež in ostala polja kot zaprošeno morajo biti nastavljena še predno se prenesejo v matično koprodukcijo
+     */
+    public function preracunajPoljaZaMatKoprodukcijo()
+    {
+        $this->nasDelez = $this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni;
+    }
+
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
@@ -34,6 +44,8 @@ class ProgramPonovitevPremiere
         $this->setPonoviInt(0);
         $this->setObiskInt(0);
         $this->setNaziv("");        // dobimo iz uprizoritve
+
+        $this->preracunajPoljaZaMatKoprodukcijo();
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
@@ -58,13 +70,9 @@ class ProgramPonovitevPremiere
                 $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000450);
             }
         }
-        
-        $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
-        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice+$this->materialni);
-        $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor, tantiem, avt.pravic in mat. str. (" . $sumStr . ")", 1000451);
 
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
-        $maxZaproseno = \Max\Functions::euroRoundS(0.70 * ($this->avtorskiHonorarji+$this->tantieme));
+        $maxZaproseno = \Max\Functions::euroRoundS(0.70 * ($this->avtorskiHonorarji + $this->tantieme));
         // glede na procent upravičenih stroškov
         $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 70% vsote avt.honor in tantiem (" . $maxZaproseno . ")", 1000452);
 

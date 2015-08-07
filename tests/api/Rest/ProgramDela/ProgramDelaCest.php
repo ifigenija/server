@@ -1576,7 +1576,7 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(2, $entR['stFest'], "štev. Festivali:");
         $I->assertGreaterThanOrEqual(2, $entR['stRazno'], "štev. Razno: ");
         $I->assertGreaterThanOrEqual(1, $entR['stIzjem'], "štev. Izjemni dogodki:");
-        $I->assertGreaterThanOrEqual(787.73, $entR['vrPS1'], "vrednost PS1");
+        $I->assertGreaterThanOrEqual(472.11, $entR['vrPS1'], "vrednost PS1");
         $I->assertGreaterThanOrEqual(6.12, $entR['vrPS1Mat'], "vr PS1 mat");
         $I->assertGreaterThanOrEqual(0.66, $entR['vrPS1GostovSZ'], "vr ps1 gostov slo zam");
         $I->assertGreaterThanOrEqual(166.07, $entR['vrPS1Do']);

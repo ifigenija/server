@@ -22,12 +22,24 @@ class ProgramPonovitevPrejsnjih
      */
     protected $dokument;
 
+    /**
+     * preračuna polja, ki se uporabljajo v matični koprodukciji
+     * 
+     * naš delež in ostala polja kot zaprošeno morajo biti nastavljena še predno se prenesejo v matično koprodukcijo
+     */
+    public function preracunajPoljaZaMatKoprodukcijo()
+    {
+        $this->nasDelez = $this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni;
+    }
+
     public function preracunaj($smer = false)
     {
         $this->setNaziv("");        // dobimo iz uprizoritve ?
         $this->setStZaposlenih(0);
         $this->setPonoviInt(0);
         $this->setObiskInt(0);
+
+        $this->preracunajPoljaZaMatKoprodukcijo();
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
@@ -53,15 +65,11 @@ class ProgramPonovitevPrejsnjih
             }
         }
 
-        $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
-        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice +$this->materialni);
-        $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor., tantiem, avt.pravic in mat. stroškov (" . $sumStr . ")", 1000461);   //$$ morda lahko pride do te napake zaradi napake v izračunih in zaokrožitvah če v UI vnašajo več kot na 2 decimalki?
-
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
-        $maxZaproseno = \Max\Functions::euroRoundS(0.60 * ($this->avtorskiHonorarji+$this->tantieme));
+        $maxZaproseno = \Max\Functions::euroRoundS(0.60 * ($this->avtorskiHonorarji + $this->tantieme));
         // glede na procent upravičenih stroškov
         $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 60% vsote avt.honor in tantiem (" . $maxZaproseno . ")", 1000462);
-        
+
         parent::validate();
     }
 

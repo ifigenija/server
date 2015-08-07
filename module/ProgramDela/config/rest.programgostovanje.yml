@@ -14,7 +14,7 @@ forms:
             - ponoviInt
             - obiskInt
 #            - celotnaVrednost
-            - nasDelez
+#            - nasDelez
             - vlozekGostitelja
             - tantieme
             - materialni

@@ -198,8 +198,8 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['ponoviInt'], 9);
         $I->assertEquals($ent['obiskInt'], 9);
         $I->assertEquals($ent['zaproseno'], 9.12, "izračunano zaprošeno");
-        $I->assertEquals($ent['celotnaVrednost'], 79.12);
-        $I->assertEquals($ent['nasDelez'], 79.12);
+        $I->assertEquals($ent['celotnaVrednost'], 54.72);
+        $I->assertEquals($ent['nasDelez'], 54.72);
         $I->assertEquals($ent['transportniStroski'], 9.12);
         $I->assertEquals($ent['dnevPrvZad'], 9.12);
         $I->assertEquals($ent['tantieme'], 9.12);

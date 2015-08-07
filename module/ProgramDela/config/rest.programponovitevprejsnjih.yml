@@ -9,7 +9,7 @@ forms:
 #            - celotnaVrednost
 #            - celotnaVrednostMat
             - celotnaVrednostGostovSZ
-            - nasDelez
+#            - nasDelez
             - avtorskiHonorarji
             - avtorskiHonorarjiSamoz
             - tantieme

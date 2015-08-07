@@ -78,10 +78,6 @@ class ProgramPremiera
             }
         }
 
-        $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
-        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni);
-        $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor, tantiem ,avt.pravic in mat. str. (" . $sumStr . ")", 1000441);
-
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
         $maxZaproseno = \Max\Functions::euroRoundS(0.70 * $this->nasDelez);
         // glede na procent upravičenih stroškov

@@ -79,6 +79,16 @@ class ProgramGostovanje
      */
     protected $gostitelj;
 
+    /**
+     * preračuna polja, ki se uporabljajo v matični koprodukciji
+     * 
+     * naš delež in ostala polja kot zaprošeno morajo biti nastavljena še predno se prenesejo v matično koprodukcijo
+     */
+    public function preracunajPoljaZaMatKoprodukcijo()
+    {
+        $this->nasDelez = $this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni + $this->transportniStroski + $this->dnevPrvZad;
+    }
+
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
@@ -97,6 +107,8 @@ class ProgramGostovanje
         $this->setStZaposDrug(0);
         $this->setNaziv("");        // dobimo iz uprizoritve
 
+        $this->preracunajPoljaZaMatKoprodukcijo();
+
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
             if ($this->getDokument()) {
@@ -112,10 +124,6 @@ class ProgramGostovanje
         $this->validateEuroGE0($this->dnevPrvZad, "Dnevnice za prvi in zadnji dan", 1001301);
 
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostovanje", 1001302);
-
-        $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
-        $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni + $this->transportniStroski + $this->dnevPrvZad);
-        $this->expect($nd >= $sumStr, "Našega delež (" . $nd . ") mora biti večji ali enak vsoti avtorskih honor, tantiem, avt.pravic, materialnih, transp. str. in dnevnic za 1. in zadnji dan (" . $sumStr . ")", 1001303);
 
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
         $maxZaproseno = \Max\Functions::euroRoundS(0.60 * $this->avtorskiHonorarji + 0.60 * $this->tantieme + 0.70 * $this->avtorskePravice + 1.00 * $this->transportniStroski + 1.00 * $this->dnevPrvZad);
