@@ -128,7 +128,7 @@ class EnotaPrograma
      * ali ima enota programa koprodukcije oz. koproducente
      * 
      * @ORM\Column(type="boolean", length=1, nullable=true)
-     * @Max\I18n(label="postniNaslov.jeeu", description="Je klient iz EU")
+     * @Max\I18n(label="ep.imaKoprodukcije", description="ep.d.imaKoprodukcije")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
