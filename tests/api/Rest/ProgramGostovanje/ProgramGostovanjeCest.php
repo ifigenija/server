@@ -100,31 +100,31 @@ class ProgramGostovanjeCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'dokument'           => NULL,
-            'uprizoritev'        => $this->lookUprizoritev['id'],
-            'krajGostovanja'     => 'zz',
-            'drzavaGostovanja'   => $this->objDrzava1['id'],
-            'ustanova'           => 'zz',
-            'datumGostovanja'    => '2011-02-01T00:00:00+0100',
-            'ponoviInt'          => 9,
-            'obiskInt'           => 9,
-            'zaproseno'          => 9.12,
+            'dokument'               => NULL,
+            'uprizoritev'            => $this->lookUprizoritev['id'],
+            'krajGostovanja'         => 'zz',
+            'drzavaGostovanja'       => $this->objDrzava1['id'],
+            'ustanova'               => 'zz',
+            'datumGostovanja'        => '2011-02-01T00:00:00+0100',
+            'ponoviInt'              => 9,
+            'obiskInt'               => 9,
+            'zaproseno'              => 9.12,
 //            'celotnaVrednost'    => 9.12,
-            'nasDelez'           => 79.12,
-            'transportniStroski' => 9.12,
-            'dnevPrvZad'         => 9.12,
-            'tantieme'           => 9.12,
-            'materialni'           => 9.12,
-            'avtorskePravice'    => 9.12,
-            'avtorskiHonorarji'  => 9.12,
-            'avtorskiHonorarjiSamoz'  => 9.12,
-            'vlozekGostitelja'  => 9.12,
+            'nasDelez'               => 79.12,
+            'transportniStroski'     => 9.12,
+            'dnevPrvZad'             => 9.12,
+            'tantieme'               => 9.12,
+            'materialni'             => 9.12,
+            'avtorskePravice'        => 9.12,
+            'avtorskiHonorarji'      => 9.12,
+            'avtorskiHonorarjiSamoz' => 9.12,
+            'vlozekGostitelja'       => 9.12,
 //            'lastnaSredstva'     => 9.12,
 //            'drugiViri'          => 9.12,
-            'drugiJavni'         => 9.12,
-            'gostitelj'          => $this->lookPopa1['id'],
-            'sort'               => 1,
-            'imaKoprodukcije'               => true,
+            'drugiJavni'             => 9.12,
+            'gostitelj'              => $this->lookPopa1['id'],
+            'sort'                   => 1,
+            'imaKoprodukcije'        => true,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -132,31 +132,31 @@ class ProgramGostovanjeCest
 
         // kreiramo še en zapis
         $data       = [
-            'dokument'           => NULL,
-            'uprizoritev'        => NULL,
-            'krajGostovanja'     => 'aa',
-            'drzavaGostovanja'   => $this->objDrzava1['id'],
-            'ustanova'           => 'aa',
-            'datumGostovanja'    => '2011-02-01T00:00:00+0100',
-            'ponoviInt'          => 3,
-            'obiskInt'           => 3,
-            'zaproseno'          => 3.12,
+            'dokument'               => NULL,
+            'uprizoritev'            => NULL,
+            'krajGostovanja'         => 'aa',
+            'drzavaGostovanja'       => $this->objDrzava1['id'],
+            'ustanova'               => 'aa',
+            'datumGostovanja'        => '2011-02-01T00:00:00+0100',
+            'ponoviInt'              => 3,
+            'obiskInt'               => 3,
+            'zaproseno'              => 3.12,
 //            'celotnaVrednost'    => 3.12,
-            'nasDelez'           => 19,
-            'transportniStroski' => 3.12,
-            'dnevPrvZad'         => 3.12,
-            'tantieme'           => 3.12,
-            'materialni'           => 3.12,
-            'avtorskePravice'    => 3.12,
-            'avtorskiHonorarji'  => 3.12,
-            'avtorskiHonorarjiSamoz'  => 3.12,
-            'vlozekGostitelja'   => 3.12,
+            'nasDelez'               => 19,
+            'transportniStroski'     => 3.12,
+            'dnevPrvZad'             => 3.12,
+            'tantieme'               => 3.12,
+            'materialni'             => 3.12,
+            'avtorskePravice'        => 3.12,
+            'avtorskiHonorarji'      => 3.12,
+            'avtorskiHonorarjiSamoz' => 3.12,
+            'vlozekGostitelja'       => 3.12,
 //            'lastnaSredstva'     => 3.12,
 //            'drugiViri'          => 3.12,
-            'drugiJavni'         => 3.12,
-            'gostitelj'          => null,
-            'sort'               => 2,
-            'imaKoprodukcije'               => FALSE,
+            'drugiJavni'             => 3.12,
+            'gostitelj'              => null,
+            'sort'                   => 2,
+            'imaKoprodukcije'        => FALSE,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -208,7 +208,7 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['avtorskiHonorarji'], 9.12);
         $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 9.12);
         $I->assertEquals($ent['vlozekGostitelja'], 2.34);
-         $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
+        $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
         $I->assertEquals($ent['celotnaVrednostMat'], 0);
 
 //        $I->assertEquals($ent['drugiViri'], 9.12);
@@ -303,6 +303,36 @@ class ProgramGostovanjeCest
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "drugiViri", $this->objDrugiVir1['id']);
         $I->assertGreaterThanOrEqual(1, count($resp));
+    }
+
+    /**
+     * spremenim zapis za kontrolo zaokroževanja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateKontrolaValidacijeZaokrozevanj(ApiTester $I)
+    {
+        $ent                       = $this->obj2;
+        $ent['avtorskiHonorarji']  = 1;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['tantieme']           = 1;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['avtorskePravice']    = 2.01;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['transportniStroski'] = 0;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['dnevPrvZad']         = 0;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['zaproseno']          = 2.61;
+
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        // ali sedaj napaka pri zaprošeno?
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        $ent['zaproseno'] = 2.62;
+        $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1001304, $resp[0]['code']);
     }
 
 }

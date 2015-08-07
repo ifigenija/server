@@ -61,14 +61,14 @@ class ProgramPonovitevPrejsnjih
                         ->exists(function($key, $ponovitvePrejsnjih) use(&$id) {
                     return ($ponovitvePrejsnjih->getUprizoritev() == $this->getUprizoritev()) && ($ponovitvePrejsnjih->getId() !== $id);     //vrne true, če obstaja drug program pon. pr. z isto uprizoritvijo
                 });
-                $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000460);
+                $this->expect(!$obstaja, "Program premiere z isto uprizoritvijo že obstaja v programu dela", 1000560);
             }
         }
 
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
         $maxZaproseno = \Max\Functions::euroRoundS(0.60 * ($this->avtorskiHonorarji + $this->tantieme));
         // glede na procent upravičenih stroškov
-        $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 60% vsote avt.honor in tantiem (" . $maxZaproseno . ")", 1000462);
+        $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 60% vsote avt.honor in tantiem (" . $maxZaproseno . ")", 1000561);
 
         parent::validate();
     }

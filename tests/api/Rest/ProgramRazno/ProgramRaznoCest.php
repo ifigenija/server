@@ -75,20 +75,20 @@ class ProgramRaznoCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'dokument'      => NULL,
-            'naziv'         => 'zz',
+            'dokument'        => NULL,
+            'naziv'           => 'zz',
 //            'stPE'            => 1,
-            'obiskDoma'     => 1,
-            'stZaposlenih'  => 1,
-            'stHonorarnih'  => 1,
-            'zaproseno'     => 1.24,
+            'obiskDoma'       => 1,
+            'stZaposlenih'    => 1,
+            'stHonorarnih'    => 1,
+            'zaproseno'       => 1.24,
 //            'celotnaVrednost' => 1.24,
-            'nasDelez'      => 4,
+            'nasDelez'        => 4,
 //            'lastnaSredstva'  => 1.24,
 //            'drugiViri'       => 1.24,
-            'drugiJavni'    => 1.24,
-            'sort'          => 1,
-            'imaKoprodukcije'          => true,
+            'drugiJavni'      => 1.24,
+            'sort'            => 1,
+            'imaKoprodukcije' => true,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -96,25 +96,25 @@ class ProgramRaznoCest
 
         // kreiramo še en zapis
         $data       = [
-            'dokument'      => NULL,
-            'naziv'         => 'aa',
+            'dokument'        => NULL,
+            'naziv'           => 'aa',
 //            'naslovPE'        => 'aa',
 //            'avtorPE'         => 'aa',
 //            'obsegPE'         => 'aa',
 //            'mesecPE'         => 'aa',
 //            'vrednostPE'      => 2.23,
 //            'stPE'            => 2,
-            'obiskDoma'     => 2,
-            'stZaposlenih'  => 2,
-            'stHonorarnih'  => 2,
-            'zaproseno'     => 1.24,
+            'obiskDoma'       => 2,
+            'stZaposlenih'    => 2,
+            'stHonorarnih'    => 2,
+            'zaproseno'       => 1.24,
 //            'celotnaVrednost' => 2.23,
-            'nasDelez'      => 2.23,
+            'nasDelez'        => 2.23,
 //            'lastnaSredstva'  => 2.23,
 //            'drugiViri'       => 2.23,
-            'drugiJavni'    => 2.23,
-            'sort'          => 2,
-            'imaKoprodukcije'          => false,
+            'drugiJavni'      => 2.23,
+            'sort'            => 2,
+            'imaKoprodukcije' => false,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -302,6 +302,32 @@ class ProgramRaznoCest
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "programskeEnoteSklopa", $this->objPESklopa1['id']);
         $I->assertGreaterThanOrEqual(1, count($resp));
+    }
+
+    /**
+     * spremenim zapis za kontrolo zaokroževanja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateKontrolaValidacijeZaokrozevanj(ApiTester $I)
+    {
+        $ent              = $this->obj2;
+        $ent['nasDelez']  = 18.01;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['zaproseno'] = 12.61;
+
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        // ali sedaj napaka pri zaprošeno?
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        $ent['zaproseno'] = 12.62;
+        $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000554, $resp[0]['code']);
     }
 
 }

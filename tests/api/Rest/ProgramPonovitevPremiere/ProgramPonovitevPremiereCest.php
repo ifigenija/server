@@ -386,11 +386,11 @@ class ProgramPonovitevPremiereCest
     public function updateKontrolaValidacijeZaokrozevanj(ApiTester $I)
     {
         $ent                      = $this->obj2;
-        $ent['avtorskiHonorarji'] = 1.004;
-        $ent['tantieme']          = 2.004;
+        $ent['avtorskiHonorarji'] = 10;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['tantieme']          = 8.01;
         $ent['avtorskePravice']   = 0;
         $ent['materialni']        = 0;
-        $ent['zaproseno']         = 2.106;
+        $ent['zaproseno']         = 12.61;
 
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertGuid($ent['id']);
@@ -400,7 +400,11 @@ class ProgramPonovitevPremiereCest
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
-
+       
+        $ent['zaproseno']         = 12.62;
+        $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000452, $resp[0]['code']);
+ 
     }
 
 }

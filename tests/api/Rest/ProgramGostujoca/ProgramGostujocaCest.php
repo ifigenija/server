@@ -88,8 +88,8 @@ class ProgramGostujocaCest
 
 // kreiramo še en zapis
         $data       = [
-            'celotnaVrednost' => 4.56,
-            'nasDelez'        => 4.56,
+//            'celotnaVrednost' => 4.56,
+            'nasDelez'        => 22,
             'strosekOdkPred'  => 3.11,
             'zaproseno'       => 1.24,
 //'lastnaSredstva'  => 4.56,
@@ -300,6 +300,32 @@ class ProgramGostujocaCest
         $resp = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         codecept_debug($resp);
         $I->assertEquals(1000433, $resp[0]['code']);
+    }
+
+    /**
+     * spremenim zapis za kontrolo zaokroževanja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateKontrolaValidacijeZaokrozevanj(ApiTester $I)
+    {
+        $ent                   = $this->obj2;
+        $ent['strosekOdkPred'] = 15.01;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['zaproseno']      = 7.51;
+
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        // ali sedaj napaka pri zaprošeno?
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        $ent['zaproseno'] = 7.52;
+        $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000432, $resp[0]['code']);
     }
 
 }

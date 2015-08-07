@@ -521,4 +521,35 @@ class ProgramPremieraCest
         $I->assertEquals(0, count($resp));      // mora biti brez koproducentov
     }
 
+    /**
+     * spremenim zapis za kontrolo zaokroževanja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateKontrolaValidacijeZaokrozevanj(ApiTester $I)
+    {
+        $ent                      = $this->obj2;
+        $ent['avtorskiHonorarji'] = 10;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['tantieme']          = 8.01;
+        $ent['avtorskePravice']   = 0;
+        $ent['materialni']        = 0;
+        $ent['zaproseno']         = 12.61;
+
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        // ali sedaj napaka pri zaprošeno?
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+        
+        $ent['zaproseno'] = 12.62;
+        $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000442, $resp[0]['code']);
+
+        
+    }
+
 }

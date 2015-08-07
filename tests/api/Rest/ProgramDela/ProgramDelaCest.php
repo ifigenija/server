@@ -1144,7 +1144,7 @@ class ProgramDelaCest
             'uprizoritev'             => $this->lookUprizoritev5['id'], // ista uprizoritev
         ];
         $resp = $I->failToCreate($this->programPonovitevPrejsnjihUrl, $data);
-        $I->assertEquals(1000460, $resp[0]['code']);
+        $I->assertEquals(1000560, $resp[0]['code']);
 
         // kreiranje zapisa z drugo uprizoritvijo mora uspeti:
         $data = [

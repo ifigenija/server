@@ -8,7 +8,7 @@ forms:
 #            - id
             - naziv
 #            - celotnaVrednost
-            - nasDelez
+#            - nasDelez
             - zaproseno
 #            - lastnaSredstva
             - avtorskiHonorarji
