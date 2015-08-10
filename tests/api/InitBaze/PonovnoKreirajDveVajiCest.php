@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\InitBaze;
+namespace InitBaze;
 
 use ApiTester;
 use Codeception\Module;
