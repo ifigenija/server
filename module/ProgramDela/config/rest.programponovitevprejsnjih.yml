@@ -40,9 +40,14 @@ forms:
             - stHonorarnihIgrTujJZ
             - stHonorarnihIgrSamoz
 #            - koprodukcije
-    hydrator:
+        hydrator:
             lookups: 
                 - uprizoritev
+            byValue:
+                - drugiViri
+                - koprodukcije
+            virtual:
+                - koprodukcije.naziv
 lists:
     default: 
         hydrator:

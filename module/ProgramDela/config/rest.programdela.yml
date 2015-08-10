@@ -83,8 +83,11 @@ forms:
                 - gostovanja
                 - premiere.drugiViri
                 - premiere.koprodukcije
+                - ponovitvePrejsnjih.drugiViri
+                - ponovitvePrejsnjih.koprodukcije
             virtual:
                 - premiere.koprodukcije.naziv
+                - ponovitvePrejsnjih.koprodukcije.naziv
 lists:
     default: 
         hydrator:
