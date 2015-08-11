@@ -40,27 +40,8 @@ class Funkcije
             case "default":
                 $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1000670);
                 $qb = $this->getDefaultQb($options);
+                $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
-
-//                $crit = new Criteria();
-//                $e    = $crit->expr();
-//
-//                if (!empty($options['uprizoritev'])) {
-//                    $uprizoritev = $this->getEntityManager()->find('Produkcija\Entity\Uprizoritev', $options['uprizoritev']);
-//                    $exp         = $e->eq('uprizoritev', $uprizoritev);
-//                    $crit->andWhere($exp);
-//                }
-//
-//                if (!empty($options['podrocje'])) {
-//                    $this->expect(is_array($options['podrocje']), "Parameter področje mora biti array", 1000671);
-//                    $exp = $e->eq('podrocje', $options['podrocje']);
-//                    foreach ($options['podrocje'] as $podrocje){
-//                        
-//                    }
-//                    $crit->andWhere($exp);
-//                }
-//                $crit->orderBy(['sort' => 'ASC']);
-//                return new Selectable($this, $crit);
         }
     }
 

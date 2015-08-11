@@ -1,6 +1,6 @@
 <?php
 
-namespace Rest\User;
+namespace Rest\Abonma;
 
 use ApiTester;
 
