@@ -71,13 +71,6 @@ class ProgramFestival
     protected $stDrugiDogodki;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="festival.opredelitevDrugiDogodki", description="festival.d.opredelitevDrugiDogodki")
-     * @var string
-     */
-    protected $opredelitevDrugiDogodki;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="festival.stProdukcij", description="festival.d.stProdukcij")
      * @Max\Ui(type="integer")
@@ -219,11 +212,6 @@ class ProgramFestival
         return $this->stDrugiDogodki;
     }
 
-    public function getOpredelitevDrugiDogodki()
-    {
-        return $this->opredelitevDrugiDogodki;
-    }
-
     public function getStProdukcij()
     {
         return $this->stProdukcij;
@@ -299,12 +287,6 @@ class ProgramFestival
     public function setStDrugiDogodki($stDrugiDogodki)
     {
         $this->stDrugiDogodki = $stDrugiDogodki;
-        return $this;
-    }
-
-    public function setOpredelitevDrugiDogodki($opredelitevDrugiDogodki)
-    {
-        $this->opredelitevDrugiDogodki = $opredelitevDrugiDogodki;
         return $this;
     }
 
