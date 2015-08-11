@@ -39,8 +39,13 @@ forms:
             - stHonorarnihIgrSamoz
             - imaKoprodukcije
         hydrator:
-#            byValue: [ uprizoritev ]
-            byValue: [ ]
+            lookups: 
+                - uprizoritev
+            byValue:
+                - drugiViri
+                - koprodukcije
+            virtual:
+                - koprodukcije.naziv
 lists:
     default: 
         hydrator:

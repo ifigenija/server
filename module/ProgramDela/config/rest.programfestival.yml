@@ -33,6 +33,14 @@ forms:
             - drugiJavni
             - sort
             - imaKoprodukcije
+        hydrator:
+            lookups: 
+                - uprizoritev
+            byValue:
+                - drugiViri
+                - koprodukcije
+            virtual:
+                - koprodukcije.naziv
 lists:
     default: 
         hydrator:
