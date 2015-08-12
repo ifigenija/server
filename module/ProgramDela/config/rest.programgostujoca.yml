@@ -37,7 +37,13 @@ forms:
 #            - stHonorarnihIgr
 #            - stHonorarnihIgrTujJZ
         hydrator:
-            byValue: [ uprizoritev ]
+            lookups: 
+                - uprizoritev
+            byValue:
+                - drugiViri
+                - koprodukcije
+            virtual:
+                - koprodukcije.naziv
 lists:
     default: 
         hydrator:
