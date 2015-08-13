@@ -50,7 +50,7 @@ class ProgramRaznoFixture
         $o->setStZaposlenih($v[4]);
         $o->setStHonorarnih($v[5]);
         $o->setZaproseno($v[6]);
-        $o->setNasDelez($v[7]);
+//        $o->setNasDelez($v[7]);
         $o->setLastnaSredstva($v[8]);
         $o->setDrugiJavni($v[9]);
 
@@ -64,8 +64,8 @@ class ProgramRaznoFixture
     public function getData()
     {
         return [
-            ['01', 'Urejanje portala', 10, 22, 5, 3, 60.00, 300.00, 200.11, 54.20,],
-            ['02', 'Delavnice otroci', 8, 202, 5, 3, 60.90, 203.00, 100.22, 31.20,],
+            ['01', 'Urejanje portala', 10, 22, 5, 3, 0, 300.00, 200.11, 54.20,],
+            ['02', 'Delavnice otroci', 8, 202, 5, 3, 0, 203.00, 100.22, 31.20,],
         ];
     }
 
