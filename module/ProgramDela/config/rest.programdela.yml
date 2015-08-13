@@ -95,6 +95,7 @@ forms:
                 - programiFestival.koprodukcije
                 - programiRazno.drugiViri
                 - programiRazno.koprodukcije
+                - programiRazno.programskeEnoteSklopa
                 - izjemni.drugiViri
                 - izjemni.koprodukcije
             virtual:

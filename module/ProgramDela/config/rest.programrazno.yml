@@ -26,6 +26,7 @@ forms:
             byValue:
                 - drugiViri
                 - koprodukcije
+                - programskeEnoteSklopa
             virtual:
                 - koprodukcije.naziv
 lists:
