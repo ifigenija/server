@@ -43,6 +43,19 @@ class ProgramRazno
         parent::__construct();
     }
 
+    /**
+     * preračuna polja, ki se uporabljajo v matični koprodukciji
+     * 
+     * naš delež in ostala polja kot zaprošeno morajo biti nastavljena še predno se prenesejo v matično koprodukcijo
+     */
+    public function preracunajPoljaZaMatKoprodukcijo()
+    {
+        $this->nasDelez = 0;    //init
+        foreach ($this->getProgramskeEnoteSklopa() as $numObject => $pes) {
+            $this->nasDelez += $pes->getVrednostPE();
+        }
+    }
+
     public function preracunaj($smer = false)
     {
         $this->celotnaVrednostGostovSZ = 0;
@@ -62,6 +75,8 @@ class ProgramRazno
         $this->tantieme                = 0;
         $this->avtorskePravice         = 0;
         $this->vlozekGostitelja        = 0;
+
+        $this->preracunajPoljaZaMatKoprodukcijo();
 
         $this->stPE = 0;
         foreach ($this->getProgramskeEnoteSklopa() as $numObject => $object) {

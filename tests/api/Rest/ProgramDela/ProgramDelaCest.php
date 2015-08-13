@@ -705,8 +705,8 @@ class ProgramDelaCest
             'obiskDoma'     => 6,
             'stZaposlenih'  => 1,
             'stHonorarnih'  => 18,
-            'zaproseno'     => 1.24,
-            'nasDelez'      => 100.24,
+            'zaproseno'     => 0,
+//            'nasDelez'      => 100.24,
 //            'lastnaSredstva'  => 1.24,
             'drugiViri'     => 1.24,
             'drugiJavni'    => 1.24,
@@ -723,8 +723,8 @@ class ProgramDelaCest
             'obiskDoma'     => 22,
             'stZaposlenih'  => 1,
             'stHonorarnih'  => 14,
-            'zaproseno'     => 1.24,
-            'nasDelez'      => 100.24,
+            'zaproseno'     => 0,
+//            'nasDelez'      => 100.24,
 //            'lastnaSredstva'  => 1.24,
             'drugiViri'     => 1.24,
             'drugiJavni'    => 1.24,
@@ -1605,7 +1605,7 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(42.48, $entR['sredstvaZaprosenoGostujo'], "sredstvaZaprosenoGostujo");
         $I->assertGreaterThanOrEqual(2.48, $entR['sredstvaZaprosenoInt'], "sredstvaZaprosenoInt");
         $I->assertGreaterThanOrEqual(2.48, $entR['sredstvaZaprosenoFest'], "sredstvaZaprosenoFest");
-        $I->assertGreaterThanOrEqual(2.48, $entR['sredstvaZaprosenoRazno'], "sredstvaZaprosenoRazno");
+        $I->assertGreaterThanOrEqual(0, $entR['sredstvaZaprosenoRazno'], "sredstvaZaprosenoRazno");
         $I->assertGreaterThanOrEqual(1.24, $entR['sredstvaZaprosenoIzjem'], "sredstvaZaprosenoIzjem");
         $I->assertGreaterThanOrEqual(5.94, $entR['sredstvaDrugiJavniPrem'], "sredstvaDrugiJavniPrem");
         $I->assertGreaterThanOrEqual(3.72, $entR['sredstvaDrugiJavniPonPrem'], "sredstvaDrugiJavniPonPrem");

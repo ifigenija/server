@@ -43,6 +43,8 @@ class ProgramRaznoCest
     private $programskaEnotaSklopaUrl = '/rest/programskaenotasklopa';
     private $objPESklopa1;
     private $objPESklopa2;
+    private $objPESklopa3;
+    private $objPESklopa4;
 
     public function _before(ApiTester $I)
     {
@@ -81,9 +83,9 @@ class ProgramRaznoCest
             'obiskDoma'       => 1,
             'stZaposlenih'    => 1,
             'stHonorarnih'    => 1,
-            'zaproseno'       => 1.24,
+            'zaproseno'       => 0,
 //            'celotnaVrednost' => 1.24,
-            'nasDelez'        => 4,
+//            'nasDelez'        => 4,
 //            'lastnaSredstva'  => 1.24,
 //            'drugiViri'       => 1.24,
             'drugiJavni'      => 1.24,
@@ -107,9 +109,9 @@ class ProgramRaznoCest
             'obiskDoma'       => 2,
             'stZaposlenih'    => 2,
             'stHonorarnih'    => 2,
-            'zaproseno'       => 1.24,
+            'zaproseno'       => 0,
 //            'celotnaVrednost' => 2.23,
-            'nasDelez'        => 2.23,
+//            'nasDelez'        => 2.23,
 //            'lastnaSredstva'  => 2.23,
 //            'drugiViri'       => 2.23,
             'drugiJavni'      => 2.23,
@@ -122,6 +124,58 @@ class ProgramRaznoCest
     }
 
     /**
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecProgramskihEnotSklopa(ApiTester $I)
+    {
+        $data               = [
+            'naslovPE'     => 'zz',
+            'avtorPE'      => 'zz',
+            'obsegPE'      => 'zz',
+            'mesecPE'      => 'zz',
+            'vrednostPE'   => 1,
+            'programRazno' => $this->obj1['id']
+        ];
+        $this->objPESklopa3 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
+        $I->assertGuid($ent['id']);
+
+        // kreiramo še en zapis
+        $data               = [
+            'naslovPE'     => 'aa',
+            'avtorPE'      => 'aa',
+            'obsegPE'      => 'aa',
+            'mesecPE'      => 'aa',
+            'vrednostPE'   => 3,
+            'programRazno' => $this->obj1['id']
+        ];
+        $this->objPESklopa4 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
+        $I->assertGuid($ent['id']);
+        $data               = [
+            'naslovPE'     => 'zz',
+            'avtorPE'      => 'zz',
+            'obsegPE'      => 'zz',
+            'mesecPE'      => 'zz',
+            'vrednostPE'   => 1,
+            'programRazno' => $this->obj2['id']
+        ];
+        $this->objPESklopa1 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
+        $I->assertGuid($ent['id']);
+
+        $data               = [
+            'naslovPE'     => 'aa',
+            'avtorPE'      => 'aa',
+            'obsegPE'      => 'aa',
+            'mesecPE'      => 'aa',
+            'vrednostPE'   => 3,
+            'programRazno' => $this->obj2['id']
+        ];
+        $this->objPESklopa2 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
+        $I->assertGuid($ent['id']);
+    }
+
+    /**
      * spremenim zapis
      * 
      * @depends create
@@ -130,10 +184,12 @@ class ProgramRaznoCest
     public function update(ApiTester $I)
     {
         $ent              = $this->obj1;
+        $ent['obiskDoma'] = 33;
         $ent['zaproseno'] = 1.22;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
+        $I->assertEquals($entR['obiskDoma'], 33);
         $I->assertEquals($entR['zaproseno'], 1.22);
     }
 
@@ -155,12 +211,12 @@ class ProgramRaznoCest
 //        $I->assertEquals($ent['obsegPE'], 'zz');
 //        $I->assertEquals($ent['mesecPE'], 'zz');
 //        $I->assertEquals($ent['vrednostPE'], 1.24);
-        $I->assertEquals($ent['stPE'], 0);
-        $I->assertEquals($ent['obiskDoma'], 1);
+        $I->assertEquals($ent['stPE'], 2);
+        $I->assertEquals($ent['obiskDoma'], 33);
         $I->assertEquals($ent['stZaposlenih'], 1);
         $I->assertEquals($ent['stHonorarnih'], 1);
         $I->assertEquals($ent['celotnaVrednost'], 4);
-        $I->assertEquals($ent['nasDelez'], 4);
+        $I->assertEquals($ent['nasDelez'], 4, "naš delež kot setštevek vrednostiPE");
         $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
         $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");
 //        $I->assertEquals($ent['drugiViri'], 1.24);
@@ -258,37 +314,6 @@ class ProgramRaznoCest
     }
 
     /**
-     * @depends create
-     * 
-     * @param ApiTester $I
-     */
-    public function createVecProgramskihEnotSklopa(ApiTester $I)
-    {
-        $data               = [
-            'naslovPE'     => 'zz',
-            'avtorPE'      => 'zz',
-            'obsegPE'      => 'zz',
-            'mesecPE'      => 'zz',
-            'vrednostPE'   => 100.11,
-            'programRazno' => $this->obj2['id']
-        ];
-        $this->objPESklopa1 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
-        $I->assertGuid($ent['id']);
-
-        // kreiramo še en zapis
-        $data               = [
-            'naslovPE'     => 'aa',
-            'avtorPE'      => 'aa',
-            'obsegPE'      => 'aa',
-            'mesecPE'      => 'aa',
-            'vrednostPE'   => 200.22,
-            'programRazno' => $this->obj2['id']
-        ];
-        $this->objPESklopa2 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
-        $I->assertGuid($ent['id']);
-    }
-
-    /**
      * preberemo relacije
      * 
      * @depends createVecDrugihVirov
@@ -312,10 +337,24 @@ class ProgramRaznoCest
      */
     public function updateKontrolaValidacijeZaokrozevanj(ApiTester $I)
     {
-        $ent              = $this->obj2;
-        $ent['nasDelez']  = 18.01;      // v praksi bo že klient zaokrožil na 2 mesti
-        $ent['zaproseno'] = 12.61;
 
+        // najprej povečamo nasDelez:
+        $data               = [
+            'naslovPE'     => 'uk',
+            'avtorPE'      => 'uk',
+            'obsegPE'      => 'uk',
+            'mesecPE'      => 'uk',
+            'vrednostPE'   => 14.01,
+            'programRazno' => $this->obj2['id']
+        ];
+        $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
+        $I->assertGuid($ent['id']);
+        $ent                = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $I->assertEquals(18.01, $ent['nasDelez']);
+//        $ent['nasDelez']  = 18.01;      // v praksi bo že klient zaokrožil na 2 mesti
+
+        // probamo, če bo zaprošeno dovolj malo:
+        $ent['zaproseno'] = 12.61;
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
