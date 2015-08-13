@@ -92,7 +92,7 @@ class ProdukcijaDelitev
          */
         $celVrednost = $this->getEnotaPrograma()->getCelotnaVrednost();
 
-        $odstFin                    = ($celVrednost !== 0 ? 100 * $this->getDelez() / $celVrednost : 0);
+        $odstFin                    = (!($celVrednost == 0) ? 100 * $this->getDelez() / $celVrednost : 0);
         $odstFin                    = \Max\Functions::procRound($odstFin);   //Zaokrožimo na 2 decimalki predno shranimo
         $this->odstotekFinanciranja = $odstFin;
     }

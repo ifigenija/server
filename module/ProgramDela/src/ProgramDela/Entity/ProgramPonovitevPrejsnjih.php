@@ -51,6 +51,7 @@ class ProgramPonovitevPrejsnjih
 
     public function validate($mode = 'update')
     {
+        $this->expect($this->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000562);
         if ($this->getDokument()) {
             // preveriti, ali že obstaja program pon. prejšnjih z isto uprizoritvijo
             $obstaja = true;  //init

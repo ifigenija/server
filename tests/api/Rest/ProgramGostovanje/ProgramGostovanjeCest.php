@@ -133,7 +133,7 @@ class ProgramGostovanjeCest
         // kreiramo še en zapis
         $data       = [
             'dokument'               => NULL,
-            'uprizoritev'            => NULL,
+            'uprizoritev'            => $this->lookUprizoritev['id'],
             'krajGostovanja'         => 'aa',
             'drzavaGostovanja'       => $this->objDrzava1['id'],
             'ustanova'               => 'aa',
@@ -154,7 +154,7 @@ class ProgramGostovanjeCest
 //            'lastnaSredstva'     => 3.12,
 //            'drugiViri'          => 3.12,
             'drugiJavni'             => 3.12,
-            'gostitelj'              => null,
+            'gostitelj'              => $this->lookPopa1['id'],
             'sort'                   => 2,
             'imaKoprodukcije'        => FALSE,
         ];
@@ -333,6 +333,133 @@ class ProgramGostovanjeCest
         $ent['zaproseno'] = 2.62;
         $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals(1001304, $resp[0]['code']);
+    }
+
+    /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createBrezUprizoritve(ApiTester $I)
+    {
+//                $this->expect($this->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000562);
+        // brez uprizoritve
+        $data = [
+            'uprizoritev'            => NULL,
+            'dokument'               => NULL,
+            'krajGostovanja'         => 'zz',
+            'drzavaGostovanja'       => $this->objDrzava1['id'],
+            'ustanova'               => 'zz',
+            'datumGostovanja'        => '2011-02-01T00:00:00+0100',
+            'ponoviInt'              => 9,
+            'obiskInt'               => 9,
+            'zaproseno'              => 9.12,
+//            'celotnaVrednost'    => 9.12,
+            'nasDelez'               => 79.12,
+            'transportniStroski'     => 9.12,
+            'dnevPrvZad'             => 9.12,
+            'tantieme'               => 9.12,
+            'materialni'             => 9.12,
+            'avtorskePravice'        => 9.12,
+            'avtorskiHonorarji'      => 9.12,
+            'avtorskiHonorarjiSamoz' => 9.12,
+            'vlozekGostitelja'       => 9.12,
+//            'lastnaSredstva'     => 9.12,
+//            'drugiViri'          => 9.12,
+            'drugiJavni'             => 9.12,
+            'gostitelj'              => $this->lookPopa1['id'],
+            'sort'                   => 1,
+            'imaKoprodukcije'        => true,
+        ];
+        $resp = $I->failToCreate($this->restUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001303, $resp[0]['code']);
+    }
+
+    /**
+     * test validate
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createBrezGostitelja(ApiTester $I)
+    {
+//        $this->expect($this->getGostitelj(), "Gostitelj je obvezen podatek", 1001304);
+        // brez gostitelja
+        $data = [
+            'gostitelj'              => NULL,
+            'uprizoritev'            => $this->lookUprizoritev['id'],
+            'dokument'               => NULL,
+            'krajGostovanja'         => 'zz',
+            'drzavaGostovanja'       => $this->objDrzava1['id'],
+            'ustanova'               => 'zz',
+            'datumGostovanja'        => '2011-02-01T00:00:00+0100',
+            'ponoviInt'              => 9,
+            'obiskInt'               => 9,
+            'zaproseno'              => 9.12,
+//            'celotnaVrednost'    => 9.12,
+            'nasDelez'               => 79.12,
+            'transportniStroski'     => 9.12,
+            'dnevPrvZad'             => 9.12,
+            'tantieme'               => 9.12,
+            'materialni'             => 9.12,
+            'avtorskePravice'        => 9.12,
+            'avtorskiHonorarji'      => 9.12,
+            'avtorskiHonorarjiSamoz' => 9.12,
+            'vlozekGostitelja'       => 9.12,
+//            'lastnaSredstva'     => 9.12,
+//            'drugiViri'          => 9.12,
+            'drugiJavni'             => 9.12,
+            'sort'                   => 1,
+            'imaKoprodukcije'        => true,
+        ];
+        $resp = $I->failToCreate($this->restUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001304, $resp[0]['code']);
+    }
+
+    /**
+     * test validate
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createBrezDrzaveGostovanja(ApiTester $I)
+    {
+//        $this->expect($this->getDrzavaGostovanja(), "Država gostovanjaje obvezen podatek", 1001305);
+        
+// brez države gostovanja
+        $data = [
+            'drzavaGostovanja'       => NULL,
+            'gostitelj'              => $this->lookPopa1['id'],
+            'uprizoritev'            => $this->lookUprizoritev['id'],
+            'dokument'               => NULL,
+            'krajGostovanja'         => 'zz',
+            'ustanova'               => 'zz',
+            'datumGostovanja'        => '2011-02-01T00:00:00+0100',
+            'ponoviInt'              => 9,
+            'obiskInt'               => 9,
+            'zaproseno'              => 9.12,
+//            'celotnaVrednost'    => 9.12,
+            'nasDelez'               => 79.12,
+            'transportniStroski'     => 9.12,
+            'dnevPrvZad'             => 9.12,
+            'tantieme'               => 9.12,
+            'materialni'             => 9.12,
+            'avtorskePravice'        => 9.12,
+            'avtorskiHonorarji'      => 9.12,
+            'avtorskiHonorarjiSamoz' => 9.12,
+            'vlozekGostitelja'       => 9.12,
+//            'lastnaSredstva'     => 9.12,
+//            'drugiViri'          => 9.12,
+            'drugiJavni'             => 9.12,
+            'sort'                   => 1,
+            'imaKoprodukcije'        => true,
+        ];
+        $resp = $I->failToCreate($this->restUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001305, $resp[0]['code']);
     }
 
 }

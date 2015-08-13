@@ -437,4 +437,20 @@ class ProgramFestivalCest
         $I->assertEquals(1000533, $resp[0]['code']);
     }
 
+        /**
+     * test validate
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateBrezNaziva(ApiTester $I)
+    {
+        $ent              = $this->obj2;
+        $ent['naziv'] = '';
+
+        $resp   = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        codecept_debug($resp);
+        $I->assertEquals(1000570, $resp[0]['code']);
+    }
+
 }

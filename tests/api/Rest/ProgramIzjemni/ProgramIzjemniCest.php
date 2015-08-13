@@ -332,5 +332,20 @@ class ProgramIzjemniCest
         $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals(1000544, $resp[0]['code']);
     }
+        /**
+     * test validate
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateBrezNaziva(ApiTester $I)
+    {
+        $ent              = $this->obj2;
+        $ent['naziv'] = '';
+
+        $resp   = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        codecept_debug($resp);
+        $I->assertEquals(1000545, $resp[0]['code']);
+    }
 
 }

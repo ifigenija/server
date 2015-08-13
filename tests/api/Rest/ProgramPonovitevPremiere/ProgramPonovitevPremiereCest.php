@@ -147,7 +147,7 @@ class ProgramPonovitevPremiereCest
             'ponoviZamejo'            => 1,
             'ponoviGost'              => 1,
             'ponoviInt'               => 1,
-            'uprizoritev'             => NULL,
+            'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
             'dokument'                => null,
             'sort'                    => 1,
@@ -179,7 +179,7 @@ class ProgramPonovitevPremiereCest
             'ponoviZamejo'            => 4,
             'ponoviGost'              => 4,
             'ponoviInt'               => 4,
-            'uprizoritev'             => NULL,
+            'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
             'dokument'                => null,
             'sort'                    => 2,
@@ -237,7 +237,7 @@ class ProgramPonovitevPremiereCest
         $I->assertEquals($ent['ponoviZamejo'], 1);
         $I->assertEquals($ent['ponoviGost'], 1);
         $I->assertEquals($ent['ponoviInt'], 0);
-        $I->assertEquals($ent['uprizoritev'], NULL);
+        $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev['id']);
         $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
         $I->assertEquals($ent['dokument'], null);
         $I->assertEquals($ent['sort'], 1, 'sort');
@@ -400,11 +400,61 @@ class ProgramPonovitevPremiereCest
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
-       
-        $ent['zaproseno']         = 12.62;
+
+        $ent['zaproseno'] = 12.62;
         $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals(1000452, $resp[0]['code']);
- 
+    }
+
+    /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createBrezUprizoritve(ApiTester $I)
+    {
+//                $this->expect($this->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000562);
+        // brez uprizoritve
+        $data = [
+            'uprizoritev'             => null,
+//            'celotnaVrednost'         => 1.24,
+//            'nasDelez'                => 5,
+//            'celotnaVrednostMat'      => 1.02,
+            'celotnaVrednostGostovSZ' => 3.11,
+            'zaproseno'               => 1.24,
+//            'lastnaSredstva'          => 1.24,
+            'avtorskiHonorarji'       => 1.24,
+            'avtorskiHonorarjiSamoz'  => 1.24,
+            'tantieme'                => 1.24,
+            'materialni'              => 1.24,
+            'avtorskePravice'         => 1.24,
+//            'drugiViri'            => 1.24,
+            'vlozekGostitelja'        => 1.24,
+            'drugiJavni'              => 1.24,
+            'obiskDoma'               => 1,
+            'obiskGost'               => 1,
+            'obiskZamejo'             => 1,
+            'obiskInt'                => 1,
+            'ponoviDoma'              => 1,
+            'ponoviZamejo'            => 1,
+            'ponoviGost'              => 1,
+//            'ponoviInt'            => 1,
+            'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
+            'dokument'                => null,
+            'sort'                    => 1,
+            'stZaposUmet'             => 1,
+            'stZaposDrug'             => 1,
+            'stHonorarnih'            => 1,
+            'stHonorarnihIgr'         => 1,
+            'stHonorarnihIgrTujJZ'    => 1,
+            'stHonorarnihIgrTujJZ'    => 1,
+            'stHonorarnihIgrSamoz'    => 1,
+        ];
+        codecept_debug($data);
+        $resp = $I->failToCreate($this->restUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1000452, $resp[0]['code']);
     }
 
 }

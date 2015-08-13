@@ -62,6 +62,7 @@ class ProgramPremiera
     public function validate($mode = 'update')
     {
         $this->expect(($this->getTipProgramskeEnote()), "Tip programske enote ne obstaja", 1000443);
+        $this->expect($this->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000444);
 
         if ($this->getDokument()) {
 // preveriti, ali že obstaja programpremiere z isto uprizoritvijo

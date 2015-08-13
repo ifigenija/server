@@ -201,7 +201,7 @@ class ProgramPremieraCest
 //            'ponoviZamejo'       => 4,
 //            'ponoviGost'         => 4,
 //            'ponoviInt'          => 4,
-            'uprizoritev'            => NULL,
+            'uprizoritev'            => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
             'dokument'               => null,
             'sort'                   => 2,
@@ -544,12 +544,58 @@ class ProgramPremieraCest
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
-        
+
         $ent['zaproseno'] = 12.62;
         $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals(1000442, $resp[0]['code']);
+    }
 
-        
+    /**
+     * test validacije
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createBrezUprizoritve(ApiTester $I)
+    {
+        // brez uprizoritve
+        $data = [
+            'uprizoritev'            => null,
+//            'celotnaVrednost'      => 1.24,
+//            'nasDelez'               => 5,
+            'zaproseno'              => 0.66,
+//            'lastnaSredstva'       => 1.24,
+            'avtorskiHonorarji'      => 1.24,
+            'avtorskiHonorarjiSamoz' => 1.24,
+            'tantieme'               => 1.24,
+            'materialni'             => 1.24,
+            'avtorskePravice'        => 1.24,
+            'drugiViri'              => 1.24,
+//            'vlozekGostitelja'     =>1.24,
+            'drugiJavni'             => 1.24,
+            'obiskDoma'              => 1,
+//            'obiskGost'          => 1,
+//            'obiskZamejo'        => 1,
+//            'obiskInt'           => 1,
+//            'ponoviDoma'         => 1,
+//            'ponoviZamejo'       => 1,
+//            'ponoviGost'         => 1,
+//            'ponoviInt'          => 1,
+            'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
+//            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
+            'dokument'               => null,
+            'sort'                   => 1,
+            'stZaposUmet'            => 1,
+            'stZaposDrug'            => 1,
+            'stHonorarnih'           => 1,
+            'stHonorarnihIgr'        => 1,
+            'stHonorarnihIgrTujJZ'   => 1,
+            'stHonorarnihIgrSamoz'   => 1,
+        ];
+
+        $resp = $I->failToCreate($this->restUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1000444, $resp[0]['code']);
     }
 
 }

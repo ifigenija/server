@@ -130,13 +130,13 @@ class ProgramPonovitevPrejsnjihCest
 //            'nasDelez'                => 5,
 //            'celotnaVrednostMat'      => 1.02,
             'celotnaVrednostGostovSZ' => 3.11,
-            'zaproseno'            =>1.24,
+            'zaproseno'               => 1.24,
 //            'lastnaSredstva'          => 1.24,
             'avtorskiHonorarji'       => 1.24,
-            'avtorskiHonorarjiSamoz'       => 1.24,
+            'avtorskiHonorarjiSamoz'  => 1.24,
             'tantieme'                => 1.24,
-            'materialni'                => 1.24,
-            'avtorskePravice'                => 1.24,
+            'materialni'              => 1.24,
+            'avtorskePravice'         => 1.24,
 //            'drugiViri'            => 1.24,
             'vlozekGostitelja'        => 1.24,
             'drugiJavni'              => 1.24,
@@ -148,7 +148,7 @@ class ProgramPonovitevPrejsnjihCest
             'ponoviZamejo'            => 1,
             'ponoviGost'              => 1,
 //            'ponoviInt'            => 1,
-            'uprizoritev'             => NULL,
+            'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
             'dokument'                => null,
             'sort'                    => 1,
@@ -169,13 +169,13 @@ class ProgramPonovitevPrejsnjihCest
 //            'nasDelez'                => 19,
 //            'celotnaVrednostMat'      => 2.23,
             'celotnaVrednostGostovSZ' => 1.11,
-            'zaproseno'            =>1.24,
+            'zaproseno'               => 1.24,
             'lastnaSredstva'          => 4.56,
             'avtorskiHonorarji'       => 4.56,
-            'avtorskiHonorarjiSamoz'       => 4.56,
+            'avtorskiHonorarjiSamoz'  => 4.56,
             'tantieme'                => 4.56,
-            'materialni'                => 4.56,
-            'avtorskePravice'                => 4.56,
+            'materialni'              => 4.56,
+            'avtorskePravice'         => 4.56,
 //            'drugiViri'            => 4.56,
             'vlozekGostitelja'        => 1.24,
             'drugiJavni'              => 4.56,
@@ -187,7 +187,7 @@ class ProgramPonovitevPrejsnjihCest
             'ponoviZamejo'            => 4,
             'ponoviGost'              => 4,
 //            'ponoviInt'            => 4,
-            'uprizoritev'             => NULL,
+            'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
             'dokument'                => null,
             'sort'                    => 2,
@@ -196,8 +196,8 @@ class ProgramPonovitevPrejsnjihCest
             'stHonorarnih'            => 2,
             'stHonorarnihIgr'         => 2,
             'stHonorarnihIgrTujJZ'    => 2,
-                   'stHonorarnihIgrSamoz' => 2,
- ];
+            'stHonorarnihIgrSamoz'    => 2,
+        ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
@@ -210,7 +210,7 @@ class ProgramPonovitevPrejsnjihCest
      */
     public function update(ApiTester $I)
     {
-        $ent                    = $this->obj1;
+        $ent              = $this->obj1;
         $ent['zaproseno'] = 1.22;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
@@ -232,10 +232,10 @@ class ProgramPonovitevPrejsnjihCest
         $I->assertEquals($ent['celotnaVrednost'], 4.96);
         $I->assertEquals($ent['nasDelez'], 4.96);
         $I->assertEquals($ent['celotnaVrednostGostovSZ'], 3.11);
-        $dif=$ent['celotnaVrednost'] - $ent['celotnaVrednostGostovSZ'];
-         $I->assertEquals($ent['celotnaVrednostMat'], $ent['celotnaVrednost'] - $ent['celotnaVrednostGostovSZ'], "cel. vr. matič.");
+        $dif = $ent['celotnaVrednost'] - $ent['celotnaVrednostGostovSZ'];
+        $I->assertEquals($ent['celotnaVrednostMat'], $ent['celotnaVrednost'] - $ent['celotnaVrednostGostovSZ'], "cel. vr. matič.");
         $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");
-         $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
+        $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
         $I->assertEquals($ent['avtorskiHonorarji'], 1.24);
         $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 1.24);
         $I->assertEquals($ent['tantieme'], 1.24);
@@ -252,7 +252,8 @@ class ProgramPonovitevPrejsnjihCest
         $I->assertEquals($ent['ponoviZamejo'], 1);
         $I->assertEquals($ent['ponoviGost'], 1);
         $I->assertEquals($ent['ponoviInt'], 0, "ponovi Int");
-        $I->assertEquals($ent['uprizoritev'], NULL);
+        $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev['id']);
+
         $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
         $I->assertEquals($ent['sort'], 1, 'sort');
 
@@ -263,7 +264,6 @@ class ProgramPonovitevPrejsnjihCest
         $I->assertEquals($ent['stHonorarnihIgr'], 1);
         $I->assertEquals($ent['stHonorarnihIgrTujJZ'], 1);
         $I->assertEquals($ent['stHonorarnihIgrSamoz'], 1);
-
     }
 
     /**
@@ -424,9 +424,60 @@ class ProgramPonovitevPrejsnjihCest
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
 
-        $ent['zaproseno']         = 1.83;
+        $ent['zaproseno'] = 1.83;
         $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals(1000561, $resp[0]['code']);
+    }
+
+    /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createBrezUprizoritve(ApiTester $I)
+    {
+//                $this->expect($this->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000562);
+        // brez uprizoritve
+        $data = [
+            'uprizoritev'             => null,
+//            'celotnaVrednost'         => 1.24,
+//            'nasDelez'                => 5,
+//            'celotnaVrednostMat'      => 1.02,
+            'celotnaVrednostGostovSZ' => 3.11,
+            'zaproseno'               => 1.24,
+//            'lastnaSredstva'          => 1.24,
+            'avtorskiHonorarji'       => 1.24,
+            'avtorskiHonorarjiSamoz'  => 1.24,
+            'tantieme'                => 1.24,
+            'materialni'              => 1.24,
+            'avtorskePravice'         => 1.24,
+//            'drugiViri'            => 1.24,
+            'vlozekGostitelja'        => 1.24,
+            'drugiJavni'              => 1.24,
+            'obiskDoma'               => 1,
+            'obiskGost'               => 1,
+            'obiskZamejo'             => 1,
+            'obiskInt'                => 1,
+            'ponoviDoma'              => 1,
+            'ponoviZamejo'            => 1,
+            'ponoviGost'              => 1,
+//            'ponoviInt'            => 1,
+            'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
+            'dokument'                => null,
+            'sort'                    => 1,
+            'stZaposUmet'             => 1,
+            'stZaposDrug'             => 1,
+            'stHonorarnih'            => 1,
+            'stHonorarnihIgr'         => 1,
+            'stHonorarnihIgrTujJZ'    => 1,
+            'stHonorarnihIgrTujJZ'    => 1,
+            'stHonorarnihIgrSamoz'    => 1,
+        ];
+        codecept_debug($data);
+        $resp = $I->failToCreate($this->restUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1000562, $resp[0]['code']);
     }
 
 }

@@ -65,6 +65,8 @@ class ProgramGostujoca
 
     public function validate($mode = 'update')
     {
+        $this->expect($this->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000434);
+
         $this->validateEuroGE0($this->strosekOdkPred, "Strošek odkupa predstave", 1000433);
 
         if ($this->getDokument()) {
@@ -89,7 +91,7 @@ class ProgramGostujoca
 
         $strOdkPred = \Max\Functions::euroRoundS($this->strosekOdkPred);
         $nd         = \Max\Functions::euroRoundS($this->nasDelez);
-        $this->expect($strOdkPred <= $nd, "Strošek odkupa predstave (" . $strOdkPred . ") ne sme biti večji od našega deleža (" . $nd. ")", 1000433);
+        $this->expect($strOdkPred <= $nd, "Strošek odkupa predstave (" . $strOdkPred . ") ne sme biti večji od našega deleža (" . $nd . ")", 1000433);
 
         parent::validate();
     }

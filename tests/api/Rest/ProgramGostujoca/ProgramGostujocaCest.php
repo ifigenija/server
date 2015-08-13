@@ -37,6 +37,7 @@ class ProgramGostujocaCest
     private $objDrugiVir1;
     private $objDrugiVir2;
     private $lookTipProgramskeEnote;
+    private $lookUprizoritev;
 
     public function _before(ApiTester $I)
     {
@@ -46,6 +47,16 @@ class ProgramGostujocaCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
     }
 
     /**
@@ -76,7 +87,7 @@ class ProgramGostujocaCest
 //            'ponoviZamejo'       => 1,
 //            'ponoviGost'         => 1,
 //            'ponoviInt'          => 1,
-            'uprizoritev'     => NULL,
+            'uprizoritev'     => $this->lookUprizoritev['id'],
 //            'tipProgramskeEnote' => NULL,
 //            'tip'                => 'gostujoci', 
             'dokument'        => null,
@@ -98,6 +109,7 @@ class ProgramGostujocaCest
 //            'materialni'           => 4.56,
 //            'drugiViri'       => 4.56,
 //            'vlozekGostitelja'     => 1.24,
+            'uprizoritev'     => $this->lookUprizoritev['id'],
             'drugiJavni'      => 4.56,
             'obiskDoma'       => 4,
 //            'obiskGost'          => 4,
@@ -161,7 +173,7 @@ class ProgramGostujocaCest
 //        $I->assertEquals($ent['ponoviZamejo'], 1);
 //        $I->assertEquals($ent['ponoviGost'], 1);
 //        $I->assertEquals($ent['ponoviInt'], 1);
-        $I->assertEquals($ent['uprizoritev'], NULL);
+        $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev['id']);
 //        $I->assertEquals($ent['tipProgramskeEnote'], NULL);
         $I->assertEquals($ent['dokument'], null);
         $I->assertEquals($ent['sort'], 1);
@@ -326,6 +338,48 @@ class ProgramGostujocaCest
         $ent['zaproseno'] = 7.52;
         $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals(1000432, $resp[0]['code']);
+    }
+
+    /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function createBrezUprizoritve(ApiTester $I)
+    {
+//                $this->expect($this->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000562);
+        // brez uprizoritve
+        $data       = [
+            'uprizoritev'     => NULL,
+            'celotnaVrednost' => 1.24,
+            'nasDelez'        => 4,
+            'strosekOdkPred'  => 3.11,
+            'zaproseno'       => 1.24,
+//            'lastnaSredstva'  => 1.24,
+//            'avtorskiHonorarji'  => 1.24,
+//            'tantieme'           => 1.24,
+//            'materialni'           => 1.24,
+//            'drugiViri'       => 1.24,
+//            'vlozekGostitelja'     => 1.24,
+            'drugiJavni'      => 1.24,
+            'obiskDoma'       => 1,
+//            'obiskGost'          => 1,
+//            'obiskZamejo'        => 1,
+//            'obiskInt'           => 1,
+            'ponoviDoma'      => 1,
+//            'ponoviZamejo'       => 1,
+//            'ponoviGost'         => 1,
+//            'ponoviInt'          => 1,
+//            'tipProgramskeEnote' => NULL,
+//            'tip'                => 'gostujoci', 
+            'dokument'        => null,
+            'sort'            => 1,
+            'imaKoprodukcije' => TRUE,
+        ];
+        $resp = $I->failToCreate($this->restUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1000434, $resp[0]['code']);
     }
 
 }

@@ -167,6 +167,7 @@ class ProgramFestival
 
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program festival", 1000531);
         $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program festival", 1000532);
+        $this->expect($this->getNaziv(), "Naziv ne sme biti prazen", 1000570);
 
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
         $maxZaproseno = \Max\Functions::euroRoundS(0.70 * $this->nasDelez);

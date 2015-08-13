@@ -54,6 +54,7 @@ class ProgramIzjemni
     {
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program izjemni", 1000541);
         $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program izjemni", 1000542);
+        $this->expect($this->getNaziv(), "Naziv ne sme biti prazen", 1000545);
 
         $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
         $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni);

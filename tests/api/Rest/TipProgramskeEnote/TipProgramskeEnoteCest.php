@@ -41,6 +41,7 @@ class TipProgramskeEnoteCest
     private $objProgramPremiera1;
     private $objProgramPonovitevPrejsnjih1;
     private $objProgramPonovitevPremiere1;
+    private $lookUprizoritev;
 
     public function _before(ApiTester $I)
     {
@@ -50,6 +51,16 @@ class TipProgramskeEnoteCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
     }
 
     /**
@@ -178,7 +189,7 @@ class TipProgramskeEnoteCest
             'avtorskiHonorarji'       => 1.23,
             'avtorskiHonorarjiSamoz'  => 1.23,
             'tantieme'                => 1.23,
-            'materialni'                => 1.23,
+            'materialni'              => 1.23,
             'avtorskePravice'         => 1.23,
             'drugiViri'               => 1.23,
             'drugiJavni'              => 1.23,
@@ -192,7 +203,7 @@ class TipProgramskeEnoteCest
             'ponoviInt'               => 1,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
-            'uprizoritev'             => NULL,
+            'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->obj2['id'],
             'dokument'                => null,
         ];
@@ -210,7 +221,7 @@ class TipProgramskeEnoteCest
             'avtorskiHonorarji'       => 1.23,
             'avtorskiHonorarjiSamoz'  => 1.23,
             'tantieme'                => 1.23,
-            'materialni'                => 1.23,
+            'materialni'              => 1.23,
             'avtorskePravice'         => 1.23,
             'vlozekGostitelja'        => 1.23,
             'drugiJavni'              => 1.23,
@@ -222,7 +233,7 @@ class TipProgramskeEnoteCest
             'ponoviZamejo'            => 1,
             'ponoviGost'              => 1,
 //            'ponoviInt'            => 1,
-            'uprizoritev'             => NULL,
+            'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->obj2['id'],
             'dokument'                => null,
             'sort'                    => 1,
@@ -246,7 +257,7 @@ class TipProgramskeEnoteCest
             'avtorskiHonorarji'       => 1.23,
             'avtorskiHonorarjiSamoz'  => 1.23,
             'tantieme'                => 1.23,
-            'materialni'                => 1.23,
+            'materialni'              => 1.23,
             'avtorskePravice'         => 1.23,
             'drugiViri'               => 1.23,
             'vlozekGostitelja'        => 1.23,
@@ -259,7 +270,7 @@ class TipProgramskeEnoteCest
             'ponoviZamejo'            => 1,
             'ponoviGost'              => 1,
             'ponoviInt'               => 1,
-            'uprizoritev'             => NULL,
+            'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->obj2['id'],
             'dokument'                => null,
             'sort'                    => 1,

@@ -120,6 +120,10 @@ class ProgramGostovanje
 
     public function validate($mode = 'update')
     {
+        $this->expect($this->getUprizoritev(), "Uprizoritev je obvezen podatek", 1001303);
+        $this->expect($this->getGostitelj(), "Gostitelj je obvezen podatek", 1001304);
+        $this->expect($this->getDrzavaGostovanja(), "Država gostovanjaje obvezen podatek", 1001305);
+
         $this->validateEuroGE0($this->transportniStroski, "Transportni stroški", 1001300);
         $this->validateEuroGE0($this->dnevPrvZad, "Dnevnice za prvi in zadnji dan", 1001301);
 
