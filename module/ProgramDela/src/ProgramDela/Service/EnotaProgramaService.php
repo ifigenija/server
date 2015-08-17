@@ -170,8 +170,8 @@ class EnotaProgramaService
         }
         $data['Do']['nasDelez'] = $data['Do']['avtorskiHonorarji'] + $data['Do']['tantieme'] + $data['Do']['avtorskePravice'] + $data['Do']['materialni'];
 
-        $data['datumZacStudija'] = date(\DateTime::ISO8601, strtotime($uprizoritev->getDatumZacStudija()->format('c')));       // datum v ISO8601 obliki 
-        $data['datumPremiere']   = date(\DateTime::ISO8601, strtotime($uprizoritev->getDatumPremiere()->format('c')));       // datum v ISO8601 obliki 
+        $data['datumZacStudija'] = $uprizoritev->getDatumZacStudija() ? date(\DateTime::ISO8601, strtotime($uprizoritev->getDatumZacStudija()->format('c'))) : null;       // datum v ISO8601 obliki 
+        $data['datumPremiere']   = $uprizoritev->getDatumPremiere() ? date(\DateTime::ISO8601, strtotime($uprizoritev->getDatumPremiere()->format('c'))) : null;       // datum v ISO8601 obliki 
 //$$ še naziv , izpostavljene funkcije ...
 //        upr.naslov naziv Naslov upr. 
 //        

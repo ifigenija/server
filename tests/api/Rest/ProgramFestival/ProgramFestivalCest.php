@@ -101,32 +101,32 @@ class ProgramFestivalCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'programDela'             => null,
-            'naziv'                   => 'zz',
-            'zvrst'                   => 'zz',
-            'stPredstav'              => 1,
-            'stOkroglihMiz'           => 1,
-            'stPredstavitev'          => 1,
-            'stDelavnic'              => 1,
-            'stDrugiDogodki'          => 1,
-            'stProdukcij'             => 1,
-            'obiskDoma'               => 1,
-            'casPriprave'             => 'zz',
-            'casIzvedbe'              => 'zz',
-            'prizorisca'              => 'zz',
-            'umetVodja'               => 'zz',
-            'programskoTelo'          => 'zz',
-            'stTujihSelektorjev'      => 1,
-            'stZaposlenih'            => 1,
-            'stHonorarnih'            => 1,
+            'programDela'        => null,
+            'naziv'              => 'zz',
+            'zvrst'              => 'zz',
+            'stPredstav'         => 1,
+            'stOkroglihMiz'      => 1,
+            'stPredstavitev'     => 1,
+            'stDelavnic'         => 1,
+            'stDrugiDogodki'     => 1,
+            'stProdukcij'        => 1,
+            'obiskDoma'          => 1,
+            'casPriprave'        => 'zz',
+            'casIzvedbe'         => 'zz',
+            'prizorisca'         => 'zz',
+            'umetVodja'          => 'zz',
+            'programskoTelo'     => 'zz',
+            'stTujihSelektorjev' => 1,
+            'stZaposlenih'       => 1,
+            'stHonorarnih'       => 1,
 //            'celotnaVrednost'         => 1.24,
-            'nasDelez'                => 4,
-            'zaproseno'               => 1.24,
+            'nasDelez'           => 4,
+            'zaproseno'          => 1.24,
 //            'lastnaSredstva'          => 1.24,
 //            'drugiViri'               => 1.24,
-            'drugiJavni'              => 1.24,
-            'sort'                    => 1,
-            'imaKoprodukcije'         => TRUE,
+            'drugiJavni'         => 1.24,
+            'sort'               => 1,
+            'imaKoprodukcije'    => TRUE,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -134,32 +134,32 @@ class ProgramFestivalCest
 
         // kreiramo še en zapis
         $data       = [
-            'programDela'             => null,
-            'naziv'                   => 'aa',
-            'zvrst'                   => 'aa',
-            'stPredstav'              => 2,
-            'stOkroglihMiz'           => 2,
-            'stPredstavitev'          => 2,
-            'stDelavnic'              => 2,
-            'stDrugiDogodki'          => 2,
-            'stProdukcij'             => 2,
-            'obiskDoma'               => 2,
-            'casPriprave'             => 'aa',
-            'casIzvedbe'              => 'aa',
-            'prizorisca'              => 'aa',
-            'umetVodja'               => 'aa',
-            'programskoTelo'          => 'aa',
-            'stTujihSelektorjev'      => 2,
-            'stZaposlenih'            => 2,
-            'stHonorarnih'            => 2,
+            'programDela'        => null,
+            'naziv'              => 'aa',
+            'zvrst'              => 'aa',
+            'stPredstav'         => 2,
+            'stOkroglihMiz'      => 2,
+            'stPredstavitev'     => 2,
+            'stDelavnic'         => 2,
+            'stDrugiDogodki'     => 2,
+            'stProdukcij'        => 2,
+            'obiskDoma'          => 2,
+            'casPriprave'        => 'aa',
+            'casIzvedbe'         => 'aa',
+            'prizorisca'         => 'aa',
+            'umetVodja'          => 'aa',
+            'programskoTelo'     => 'aa',
+            'stTujihSelektorjev' => 2,
+            'stZaposlenih'       => 2,
+            'stHonorarnih'       => 2,
 //            'zaproseno'            =>1.23,
-            'nasDelez'                => 2.24,
-            'zaproseno'               => 1.11,
+            'nasDelez'           => 2.24,
+            'zaproseno'          => 1.11,
 //            'lastnaSredstva'          => 2.24,
 //            'drugiViri'               => 2.24,
-            'drugiJavni'              => 2.24,
-            'sort'                    => 2,
-            'imaKoprodukcije'         => FALSE,
+            'drugiJavni'         => 2.24,
+            'sort'               => 2,
+            'imaKoprodukcije'    => FALSE,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -437,7 +437,7 @@ class ProgramFestivalCest
         $I->assertEquals(1000533, $resp[0]['code']);
     }
 
-        /**
+    /**
      * test validate
      * 
      * @depends create
@@ -445,10 +445,10 @@ class ProgramFestivalCest
      */
     public function updateBrezNaziva(ApiTester $I)
     {
-        $ent              = $this->obj2;
+        $ent          = $this->obj2;
         $ent['naziv'] = '';
 
-        $resp   = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $resp = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         codecept_debug($resp);
         $I->assertEquals(1000570, $resp[0]['code']);
     }

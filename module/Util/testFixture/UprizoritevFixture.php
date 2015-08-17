@@ -98,7 +98,7 @@ class UprizoritevFixture
         }
 
         $o->validate();
-        
+
         $referenca = 'Uprizoritev-' . $v[0];
         var_dump($referenca);
         $this->addReference($referenca, $o);
@@ -112,6 +112,10 @@ class UprizoritevFixture
             ['0003', 'Kisli maček', 'postprodukcija', '', '', '2016-02-01', '2016-04-20', 'Prostor-0005', 2, 'Caryl Churchill', TRUE, 2, '', '', '', null, FALSE, '', null, '11', '06', 'ProdukcijskaHisa-0987'],
             ['0004', 'Vladimir', 'postprodukcija', '', '', '2017-03-01', '2017-04-20', 'Prostor-0005', 2, 'Matjaž Zupančič', TRUE, 2, '', '', '', null, FALSE, '', null, '11', '06', 'ProdukcijskaHisa-0987'],
             ['0005', 'Španska princesa', 'postprodukcija', '', '', '2017-04-01', '2017-05-20', 'Prostor-0001', 1, 'Nina Kokelj', false, 1, '', '', '', null, FALSE, '', null, '11', '06', 'ProdukcijskaHisa-0987'],
+            /**
+             * ena brez datumov
+             */
+            ['0006', 'Ne vemo datumov', 'postprodukcija', '', '', NULL, NULL, 'Prostor-0001', 1, 'Nandi Frafar', false, 1, '', '', '', null, FALSE, '', null, '11', '06', 'ProdukcijskaHisa-0987'],
         ];
     }
 
