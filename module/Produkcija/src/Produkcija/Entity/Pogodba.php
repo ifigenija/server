@@ -139,7 +139,7 @@ class Pogodba
      * MK:  DiplomiranI igralec ali študent AGRFT
      * 
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="pogodba.igralec", description="pogodba.d.igralec")   
+     * @Max\I18n(label="pogodba.igralec", description="pogodba.d.igralec")
      * @Max\Ui(type="boolcheckbox")                       
      * @var boolean
      */
@@ -154,6 +154,7 @@ class Pogodba
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="pogodba")
+     * @Max\Ui(type="hiddenid")
      * @var <Alternacije>
      */
     protected $alternacije;
