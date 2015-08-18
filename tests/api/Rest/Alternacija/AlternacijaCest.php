@@ -222,7 +222,7 @@ class AlternacijaCest
             'privzeti'   => true,
             'aktivna'    => true,
             'funkcija'   => $this->lookFunkcija['id'],
-            'zaposlitev' => null,
+            'zaposlitev' => $this->objZaposlitev['id'],
             'oseba'      => $this->lookOseba['id'],
             'pogodba'    => null,
             'imaPogodbo' => false,
@@ -261,18 +261,17 @@ class AlternacijaCest
     public function getListPoUprizoritvi(ApiTester $I)
     {
         $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev2['id'];
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
         codecept_debug($resp);
 
-        $I->assertGreaterThanOrEqual(9, $resp['state']['totalRecords'],"po uprizoritvi");
+        $I->assertGreaterThanOrEqual(9, $resp['state']['totalRecords'], "po uprizoritvi");
 //        $I->assertNotEmpty($list);
 //        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
-
         // še po uprizoritvi, ki nima alternacij
         $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev1['id'];
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
         codecept_debug($resp);
 
         $I->assertEquals(0, $resp['state']['totalRecords']);
@@ -330,7 +329,7 @@ class AlternacijaCest
         $I->assertEquals($ent['opomba'], 'uu');
         $I->assertEquals($ent['sort'], 1);
         $I->assertEquals($ent['privzeti'], true);
-        $I->assertEquals($ent['aktivna'], true,"aktivna");
+        $I->assertEquals($ent['aktivna'], true, "aktivna");
         $I->assertEquals($ent['funkcija']['id'], $this->lookFunkcija['id']);
         $I->assertEquals($ent['zaposlitev'], $this->objZaposlitev['id'], "zaposlitev");
         $I->assertEquals($ent['zaposlen'], true);               // v validaciji se bi moralo postaviti na true, če je zaposlitev
@@ -409,7 +408,6 @@ class AlternacijaCest
     }
 
     //$$ še relacije vec t.s.
-
 //    /**
 //     * spremenim zapis - dodam pogodbo
 //     * 
@@ -426,5 +424,28 @@ class AlternacijaCest
 //        $I->assertEquals($entR['pogodba'], $this->objPogodba['id']);
 //        $I->assertEquals($entR['imaPogodbo'], true);   // nastavi  v validaciji
 //    }
+
+    /**
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function odstranimZaposlitev(\ApiTester $I)
+    {
+        $ent = $I->successfullyGet($this->restUrl, $this->obj3['id']);
+        $I->assertEquals($ent['zaposlitev'], $this->objZaposlitev['id'], "zaposlitev");
+        $I->assertEquals($ent['zaposlen'], true);               // v validaciji se bi moralo postaviti na true, če je zaposlitev
+    
+        // odstranimo zaposlitev
+        $ent['zaposlitev'] = null;
+        $ent               = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals($ent['zaposlitev'], null, "zaposlitev");
+        $I->assertEquals($ent['zaposlen'], false);
+
+        // preverimo zaposlitev po Get
+        $ent = $I->successfullyGet($this->restUrl, $ent['id']);
+        $I->assertEquals($ent['zaposlitev'], null, "zaposlitev");
+        $I->assertEquals($ent['zaposlen'], false);
+    }
 
 }
