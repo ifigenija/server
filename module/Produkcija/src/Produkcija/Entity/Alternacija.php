@@ -199,164 +199,178 @@ class Alternacija
         }
     }
 
-    function getId()
-    {
-        return $this->id;
-    }
-
-    function getSifra()
-    {
-        return $this->sifra;
-    }
-
-    function getZaposlen()
-    {
-        return $this->zaposlen;
-    }
-
-    function getZacetek()
-    {
-        return $this->zacetek;
-    }
-
-    function getKonec()
-    {
-        return $this->konec;
-    }
-
-    function getOpomba()
-    {
-        return $this->opomba;
-    }
-
-    function getSort()
-    {
-        return $this->sort;
-    }
-
-    function getPrivzeti()
-    {
-        return $this->privzeti;
-    }
-
-    function getAktivna()
-    {
-        return $this->aktivna;
-    }
-
-    function getStoritve()
-    {
-        return $this->storitve;
-    }
-
-    function getFunkcija()
-    {
-        return $this->funkcija;
-    }
-
-    function getZaposlitev()
-    {
-        return $this->zaposlitev;
-    }
-
-    function getOseba()
-    {
-        return $this->oseba;
-    }
-
-    function getPogodba()
-    {
-        return $this->pogodba;
-    }
-
-    function getImaPogodbo()
-    {
-        return $this->imaPogodbo;
-    }
-
-    function getPomembna()
-    {
-        return $this->pomembna;
-    }
-
-    function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    function setSifra($sifra)
-    {
-        $this->sifra = $sifra;
-    }
-
-    function setZaposlen($zaposlen)
-    {
-        $this->zaposlen = $zaposlen;
-    }
-
-    function setZacetek($zacetek)
-    {
-        $this->zacetek = $zacetek;
-    }
-
-    function setKonec($konec)
-    {
-        $this->konec = $konec;
-    }
-
-    function setOpomba($opomba)
-    {
-        $this->opomba = $opomba;
-    }
-
-    function setSort($sort)
-    {
-        $this->sort = $sort;
-    }
-
-    function setPrivzeti($privzeti)
-    {
-        $this->privzeti = $privzeti;
-    }
-
-    function setAktivna($aktivna)
-    {
-        $this->aktivna = $aktivna;
-    }
-
-    function setStoritve($storitve)
-    {
-        $this->storitve = $storitve;
-    }
-
-    function setFunkcija(\Produkcija\Entity\Funkcija $funkcija)
-    {
-        $this->funkcija = $funkcija;
-    }
-
-    function setZaposlitev(\Produkcija\Entity\Zaposlitev $zaposlitev)
-    {
-        $this->zaposlitev = $zaposlitev;
-    }
-
-    function setOseba(\App\Entity\Oseba $oseba)
-    {
-        $this->oseba = $oseba;
-    }
-
-    function setPogodba(\Produkcija\Entity\Pogodba $pogodba)
+    /**
+     * $$ brez tipa, da deluje tudi z null
+     * 
+     * @param type $zaposlitev
+     */
+    public function setPogodba($pogodba)
     {
         $this->pogodba = $pogodba;
     }
 
-    function setImaPogodbo($imaPogodbo)
+    /**
+     * $$ brez tipa, da deluje tudi z null
+     * 
+     * @param type $zaposlitev
+     */
+    public function setZaposlitev($zaposlitev)
     {
-        $this->imaPogodbo = $imaPogodbo;
+        $this->zaposlitev = $zaposlitev;
     }
 
-    function setPomembna($pomembna)
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getSifra()
+    {
+        return $this->sifra;
+    }
+
+    public function getZaposlen()
+    {
+        return $this->zaposlen;
+    }
+
+    public function getZacetek()
+    {
+        return $this->zacetek;
+    }
+
+    public function getKonec()
+    {
+        return $this->konec;
+    }
+
+    public function getOpomba()
+    {
+        return $this->opomba;
+    }
+
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    public function getPrivzeti()
+    {
+        return $this->privzeti;
+    }
+
+    public function getAktivna()
+    {
+        return $this->aktivna;
+    }
+
+    public function getStoritve()
+    {
+        return $this->storitve;
+    }
+
+    public function getFunkcija()
+    {
+        return $this->funkcija;
+    }
+
+    public function getOseba()
+    {
+        return $this->oseba;
+    }
+
+    public function getImaPogodbo()
+    {
+        return $this->imaPogodbo;
+    }
+
+    public function getPomembna()
+    {
+        return $this->pomembna;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setSifra($sifra)
+    {
+        $this->sifra = $sifra;
+        return $this;
+    }
+
+    public function setZaposlen($zaposlen)
+    {
+        $this->zaposlen = $zaposlen;
+        return $this;
+    }
+
+    public function setZacetek($zacetek)
+    {
+        $this->zacetek = $zacetek;
+        return $this;
+    }
+
+    public function setKonec($konec)
+    {
+        $this->konec = $konec;
+        return $this;
+    }
+
+    public function setOpomba($opomba)
+    {
+        $this->opomba = $opomba;
+        return $this;
+    }
+
+    public function setSort($sort)
+    {
+        $this->sort = $sort;
+        return $this;
+    }
+
+    public function setPrivzeti($privzeti)
+    {
+        $this->privzeti = $privzeti;
+        return $this;
+    }
+
+    public function setAktivna($aktivna)
+    {
+        $this->aktivna = $aktivna;
+        return $this;
+    }
+
+    public function setStoritve($storitve)
+    {
+        $this->storitve = $storitve;
+        return $this;
+    }
+
+    public function setFunkcija(\Produkcija\Entity\Funkcija $funkcija)
+    {
+        $this->funkcija = $funkcija;
+        return $this;
+    }
+
+    public function setOseba(\App\Entity\Oseba $oseba)
+    {
+        $this->oseba = $oseba;
+        return $this;
+    }
+
+    public function setImaPogodbo($imaPogodbo)
+    {
+        $this->imaPogodbo = $imaPogodbo;
+        return $this;
+    }
+
+    public function setPomembna($pomembna)
     {
         $this->pomembna = $pomembna;
+        return $this;
     }
 
 }
