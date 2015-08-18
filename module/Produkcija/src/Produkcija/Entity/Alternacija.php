@@ -373,4 +373,14 @@ class Alternacija
         return $this;
     }
 
+    public function getZaposlitev()
+    {
+        return $this->zaposlitev;
+    }
+
+    public function getPogodba()
+    {
+        return $this->pogodba;
+    }
+
 }

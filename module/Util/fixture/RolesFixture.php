@@ -150,7 +150,7 @@ class RolesFixture
                     $optVal->setValue($val['optionValue']['global']['value']);
                     $optVal->setGlobal(true);
                     $optVal->addOption($o);
-                    $em->persist($optVal);  // $$ ali je lahko več persistov pred flush-em?
+                    $em->persist($optVal);  
                 }
                 echo "     opt val: " .
                 $val['optionValue']['global']['value'][0]['key'] . "  " .
