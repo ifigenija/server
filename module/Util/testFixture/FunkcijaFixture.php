@@ -85,7 +85,7 @@ class FunkcijaFixture
             ['Režija', '', 'Režija', false, 'velika', TRUE, 8, true, true, 'Uprizoritev-0002', null,],
             ['Inšpicient', '', 'Inšpicient', true, '', TRUE, 8, true, true, 'Uprizoritev-0002', null,],
             ['Tehnični vodja', '', 'Tehnična podpora', true, '', TRUE, 8, true, true, 'Uprizoritev-0002', null,],
-            ['Lučni mojster', '', 'Oblikovanje svetlobe in zvoka', false, '', TRUE, 3, true, true, 'Uprizoritev-0002', null,],
+            ['Razsvetljava', '', 'Tehnična podpora', false, '', TRUE, 3, true, true, 'Uprizoritev-0002', null,],
             ['Helena', 'glavna vloga', 'Vloga', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null,],
             ['Lektoriranje', '', 'Lektorstvo', false, '', TRUE, 22, true, true, 'Uprizoritev-0002', null,],
         ];

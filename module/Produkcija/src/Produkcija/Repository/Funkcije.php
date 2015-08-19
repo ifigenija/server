@@ -78,9 +78,6 @@ class Funkcije
         }
         if (!empty($options['podrocje'])) {
             $this->expect(is_array($options['podrocje']), "Parameter področje mora biti array", 1000671);
-            /**
-             * $$#978 tu potrebna še implementacija za array od področja (foreach...) z OR logiko
-             */
             $naz = $e->in('p.podrocje', ':podrocja');
             $qb->andWhere($naz);
             $qb->setParameter('podrocja', $options['podrocje']);

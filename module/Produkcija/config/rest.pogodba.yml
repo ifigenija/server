@@ -16,7 +16,7 @@ forms:
             - planiranoSteviloVaj
             - aktivna
             - opis
-            - alternacije
+#            - alternacije
             - oseba
             - popa
             - trr

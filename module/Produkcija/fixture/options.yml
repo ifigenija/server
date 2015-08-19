@@ -32,7 +32,8 @@
            label: Tehnik
         umetnik:
            label: Umetnik
-          
+        inspicient:
+           label: Inšpicient
 #               vrednosti naj bodo enake kot pri funkcija.podrocje :
 -
     name: tipfunkcije.podrocje
