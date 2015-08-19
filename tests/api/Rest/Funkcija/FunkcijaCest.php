@@ -401,6 +401,13 @@ class FunkcijaCest
         $list    = $resp['data'];
         codecept_debug($resp);
         $I->assertGreaterThanOrEqual(5, $resp['state']['totalRecords']);
+
+        // še podobno po inšpicientu in tehnikuj
+        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev2['id'] . "&podrocje[]=tehnik&podrocje[]=inspicient";
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+        codecept_debug($resp);
+        $I->assertGreaterThanOrEqual(5, $resp['state']['totalRecords']);
     }
 
     /**

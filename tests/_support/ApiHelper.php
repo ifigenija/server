@@ -406,16 +406,8 @@ class ApiHelper
      */
     public function failToDelete($url, $id)
     {
-//        $I = $this->getModule('REST');
-//        $I->sendDELETE("$url/$id");
         $I = $this->getModule('REST');
         $I->sendDELETE("$url/$id");
-//        $I->dontSeeResponseCodeIs('200');
-//        $I->seeResponseIsJson();
-//        $I->seeResponseContainsJson(['success' => false]);
-//        return $I->grabDataFromResponseByJsonPath('$.errors')[0];
-// 
-
         $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
         $I->seeResponseContainsJson(['success' => false]);
