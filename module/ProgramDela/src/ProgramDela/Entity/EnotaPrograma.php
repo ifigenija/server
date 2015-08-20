@@ -308,7 +308,7 @@ class EnotaPrograma
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev")
      * @Max\I18n(label="ep.uprizoritev", description="ep.d.uprizoritev")   
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="toone", required=true)
      * @var \Produkcija\Entity\Uprizoritev
      */
     protected $uprizoritev;
@@ -328,7 +328,7 @@ class EnotaPrograma
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\TipProgramskeEnote", inversedBy="enotePrograma")
      * @Max\I18n(label="ep.tipProgramskeEnote", description="ep.d.tipProgramskeEnote")   
-     * @Max\Ui(type="select",empty="Izberi tip programske enote")
+     * @Max\Ui(type="select",empty="Izberi tip programske enote", required=true)
      * @var \ProgramDela\Entity\TipProgramskeEnote
      */
     protected $tipProgramskeEnote;

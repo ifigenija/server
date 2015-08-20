@@ -45,6 +45,7 @@ class Zaposlitev
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="zaposlitev.zacetek",  description="zaposlitev.d.zacetek")
+     * @Max\Ui(required=true)
      * @var string
      */
     protected $zacetek;
@@ -52,6 +53,7 @@ class Zaposlitev
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="zaposlitev.konec",  description="zaposlitev.d.konec")
+     * @Max\Ui(required=true)
      * @var string
      */
     protected $konec;
@@ -122,7 +124,7 @@ class Zaposlitev
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="zaposlitve")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\I18n(label="zaposlitev.oseba",  description="zaposlitev.d.oseba")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="toone", required=true)
      * @var \App\Entity\Oseba
      */
     protected $oseba;

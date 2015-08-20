@@ -27,7 +27,7 @@ class StrosekUprizoritve
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="strupr.naziv", description="strupr.d.naziv")
-     * @Max\Ui(type="naziv",ident=true )
+     * @Max\Ui(type="naziv",ident=true, required=true)
      * @var string
      */
     protected $naziv;
@@ -35,6 +35,7 @@ class StrosekUprizoritve
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
      * @Max\I18n(label="strupr.vrednostDo", description="strupr.d.vrednostDo")
+     * @Max\Ui(required=true)
      * @var double
      */
     protected $vrednostDo;
@@ -42,6 +43,7 @@ class StrosekUprizoritve
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
      * @Max\I18n(label="strupr.vrednostNa", description="strupr.d.vrednostNa")
+     * @Max\Ui(required=true)
      * @var double
      */
     protected $vrednostNa;
@@ -56,7 +58,7 @@ class StrosekUprizoritve
     /**
      * @ORM\Column(type="string", length=10)
      * @Max\I18n(label="strupr.tipstroska",  description="strupr.d.tipstroska")
-     * @Max\Ui(type="select",opts="strosekuprizoritve.tipstroska")
+     * @Max\Ui(type="select",opts="strosekuprizoritve.tipstroska", required=true)
      * @var string
      */
     protected $tipstroska;

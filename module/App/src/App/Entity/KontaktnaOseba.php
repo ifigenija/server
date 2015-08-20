@@ -41,6 +41,7 @@ class KontaktnaOseba
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="kontaktna.funkcija", description="kontaktna.d.funkcija")
+     * @Max\Ui(required=true)
      * @var string
      */
     protected $funkcija;
@@ -65,7 +66,7 @@ class KontaktnaOseba
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="kontaktneOsebe")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\I18n(label="kontaktna.oseba",  description="kontaktna.d.oseba")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="toone", required=true)
      * @var \App\Entity\Oseba
      */
     protected $oseba;

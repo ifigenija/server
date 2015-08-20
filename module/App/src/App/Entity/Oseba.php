@@ -54,7 +54,7 @@ class Oseba
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="oseba.ime", description="oseba.d.ime")
-     * @Max\Ui(type="naziv")  
+     * @Max\Ui(type="naziv", required=true)  
      * @var string
      */
     protected $ime;
@@ -62,7 +62,7 @@ class Oseba
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="oseba.priimek", description="oseba.d.priimek")
-     * @Max\Ui(type="naziv")  
+     * @Max\Ui(type="naziv", required=true)  
      * @var string
      */
     protected $priimek;
@@ -70,6 +70,7 @@ class Oseba
     /**
      * @ORM\Column(length=40, nullable=true)
      * @Max\I18n(label="oseba.funkcija", description="oseba.d.funkcija")
+     * @Max\Ui(required=true)
      * @var string
      */
     protected $funkcija;

@@ -33,7 +33,7 @@ class Role
     /**
      * @ORM\Column(unique=true, length=150, nullable=true)
      * @Max\I18n(label="role.naziv", description="role.d.naziv")
-     * @Max\Ui(type="sifra", group="Vloga",ident=true)
+     * @Max\Ui(type="sifra", group="Vloga",ident=true, required=true)
      * @var string
      */
     protected $name;

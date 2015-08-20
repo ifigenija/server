@@ -57,7 +57,7 @@ class PostniNaslov
      *
      * @ORM\Column(length=50, nullable=true)
      * @Max\I18n(label="postniNaslov.naziv", description="postniNaslov.d.naziv")
-     * @Max\Ui(type="naziv",ident=true )
+     * @Max\Ui(type="naziv",ident=true, required=true )
      * @var string
      */
     protected $naziv;
@@ -74,6 +74,7 @@ class PostniNaslov
      *
      * @ORM\Column(length=50, nullable=true)
      * @Max\I18n(label="postniNaslov.ulica",  description="postniNaslov.d.ulica")
+     * @Max\Ui(required=true)
      * @var string
      */
     protected $ulica;
@@ -93,7 +94,7 @@ class PostniNaslov
      *
      * @ORM\Column(length=50, nullable=true)
      * @Max\I18n(label="postniNaslov.posta", description="postniNaslov.d.posta")
-     * @Max\Ui(group="posta")
+     * @Max\Ui(group="posta", required=true)
      * @var string
      */
     protected $posta;
@@ -104,7 +105,7 @@ class PostniNaslov
      *
      * @ORM\Column(length=50, nullable=true)
      * @Max\I18n(label="postniNaslov.postaNaziv", description="postniNaslov.d.postaNaziv")
-     * @Max\Ui(group="posta")
+     * @Max\Ui(group="posta", required=true)
      * @var string
      */
     protected $postaNaziv;

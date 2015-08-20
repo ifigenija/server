@@ -36,7 +36,7 @@ class Permission
      * @var string
      *
      * @Max\I18n(label="permission.naziv", description="permission.d.naziv")
-     * @Max\Ui(type="sifra",ident=true )
+     * @Max\Ui(type="sifra",ident=true, required=true )
      */
     protected $name;
 

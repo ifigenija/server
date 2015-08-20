@@ -44,7 +44,7 @@ class Abonma
     /**
      * @ORM\Column(type="string", length=40, nullable=true)
      * @Max\I18n(label="abonma.ime", description="abonma.d.ime")
-     * @Max\Ui(ident=true,type="naziv")
+     * @Max\Ui(ident=true,type="naziv", required=true)
      * @var string
      */
     protected $ime;

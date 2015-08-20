@@ -45,7 +45,7 @@ class Uprizoritev
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="uprizoritev.naslov", description="uprizoritev.d.naslov")
-     * @Max\Ui(type="naziv",ident=true )
+     * @Max\Ui(type="naziv",ident=true, required=true )
      * @var string
      */
     protected $naslov;
@@ -122,7 +122,7 @@ class Uprizoritev
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Prostor")
      * @ORM\JoinColumn(name="maticniOder_id", referencedColumnName="id")
      * @Max\I18n(label="uprizoritev.maticniOder",  description="uprizoritev.d.maticniOder")
-     * @Max\Ui(type="select",empty="Kjer koli")    //$$ rb zakaj select?
+     * @Max\Ui(type="select",empty="Kjer koli", required=true)    //$$ rb zakaj select?
      * @var \Prodaja\Entity\Prostor
      */
     protected $maticniOder;
@@ -260,7 +260,7 @@ class Uprizoritev
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ZvrstUprizoritve")
      * @ORM\JoinColumn(name="zvrst_uprizoritve_id", referencedColumnName="id")
      * @Max\I18n(label="uprizoritev.zvrstUprizoritve",  description="uprizoritev.d.zvrstUprizoritve")
-     * @Max\Ui(type="select",empty="Izberi zvrst")
+     * @Max\Ui(type="select",empty="Izberi zvrst", required=true)
      * @var \Produkcija\Entity\ZvrstUprizoritve
      */
     protected $zvrstUprizoritve;
@@ -269,7 +269,7 @@ class Uprizoritev
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\ZvrstSurs")
      * @ORM\JoinColumn(name="zvrst_surs_id", referencedColumnName="id")
      * @Max\I18n(label="uprizoritev.zvrstSurs",  description="uprizoritev.d.zvrstSurs")
-     * @Max\Ui(type="select", empty="Izberi klasifikacijo")
+     * @Max\Ui(type="select", empty="Izberi klasifikacijo", required=true)
      * @var \Produkcija\Entity\ZvrstSurs
      */
     protected $zvrstSurs;

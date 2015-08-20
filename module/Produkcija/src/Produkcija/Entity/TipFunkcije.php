@@ -33,7 +33,7 @@ class TipFunkcije
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="tipFunkcije.ime", description="tipFunkcije.d.ime")
-     * @Max\Ui(type="naziv",ident=true )
+     * @Max\Ui(type="naziv",ident=true, required=true)
      * @var string
      */
     protected $ime;
@@ -48,6 +48,7 @@ class TipFunkcije
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="tipFunkcije.zenskoIme", description="tipFunkcije.d.zenskoIme")
+     * @Max\Ui(required=true)
      * @var string
      */
     protected $imeZenski;

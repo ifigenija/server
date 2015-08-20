@@ -26,7 +26,7 @@ class Trr
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="trr.stevilka", description="trr.d.stevilka")
-     * @Max\Ui(type="sifra")
+     * @Max\Ui(type="sifra", required=true)
      * @var string
      */
     protected $stevilka;
@@ -50,7 +50,7 @@ class Trr
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="trr.banka", description="trr.d.banka")
-     * @Max\Ui(type="sifra",icon="fa fa-university")
+     * @Max\Ui(type="sifra",icon="fa fa-university",required=true)
      * @var string
      */
     protected $banka;
