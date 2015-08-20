@@ -17,14 +17,14 @@ class ProgramGostovanje
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Max\I18n(label="gostovanje.krajGostovanja", description="gostovanje.krajGostovanja")
+     * @Max\I18n(label="gostovanje.krajGostovanja", description="gostovanje.d.krajGostovanja")
      * @var string
      */
     protected $krajGostovanja;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
-     * @Max\I18n(label="Država",  description="Država")
+     * @Max\I18n(label="gostovanje.drzava",  description="gostovanje.d.drzava")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Drzava
      */
@@ -40,7 +40,7 @@ class ProgramGostovanje
     /**
      * 
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="gostovanje.datumGostovanja", description="gostovanje.datumGostovanja")
+     * @Max\I18n(label="gostovanje.datumGostovanja", description="gostovanje.d.datumGostovanja")
      * @var string
      */
     protected $datumGostovanja;
@@ -64,7 +64,7 @@ class ProgramGostovanje
     /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="gostovanja")
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
-     * @Max\I18n(label="gostovanje.programDela", description="gostovanje.programDela")
+     * @Max\I18n(label="gostovanje.programDela", description="gostovanje.d.programDela")
      * @Max\Ui(type="hiddenid")
      * @var \ProgramDela\Entity\ProgramDela
      */
