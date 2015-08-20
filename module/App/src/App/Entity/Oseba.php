@@ -108,7 +108,7 @@ class Oseba
      * Uporablja se tudi kot uporabniško ime pri prijavi v aplikacijo.
      *
      * @ORM\Column(length=40, nullable=true)
-     * @Max\I18n(label="oseba.email", description="Naslov elektronske pošte")   
+     * @Max\I18n(label="oseba.email", description="oseba.d.email")   
      * @Max\Ui(type="email",icon="fa fa-at")
      * @var string
      */
@@ -231,6 +231,7 @@ class Oseba
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
      * @ORM\JoinColumn(name="naslov_id", referencedColumnName="id")
+     * @Max\I18n(label="oseba.naslov", description="oseba.d.naslov")
      */
     protected $naslov;
 
