@@ -317,9 +317,9 @@ class ProgramGostovanjeCest
         $ent['avtorskiHonorarji']  = 1;      // v praksi bo že klient zaokrožil na 2 mesti
         $ent['tantieme']           = 1;      // v praksi bo že klient zaokrožil na 2 mesti
         $ent['avtorskePravice']    = 2.01;      // v praksi bo že klient zaokrožil na 2 mesti
-        $ent['transportniStroski'] = 0;      // v praksi bo že klient zaokrožil na 2 mesti
-        $ent['dnevPrvZad']         = 0;      // v praksi bo že klient zaokrožil na 2 mesti
-        $ent['zaproseno']          = 2.61;
+        $ent['transportniStroski'] = 2;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['dnevPrvZad']         = 3;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['zaproseno']          = 5.60;   // 60% avt hon + transp. str. +dnevnice za prvi in zadnji dan
 
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertGuid($ent['id']);
@@ -330,7 +330,7 @@ class ProgramGostovanjeCest
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
 
-        $ent['zaproseno'] = 2.62;
+        $ent['zaproseno'] = 5.61;
         $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals(1001304, $resp[0]['code']);
     }

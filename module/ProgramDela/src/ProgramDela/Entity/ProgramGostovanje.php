@@ -122,7 +122,7 @@ class ProgramGostovanje
     {
         $this->expect($this->getUprizoritev(), "Uprizoritev je obvezen podatek", 1001303);
         $this->expect($this->getGostitelj(), "Gostitelj je obvezen podatek", 1001304);
-        $this->expect($this->getDrzavaGostovanja(), "Država gostovanjaje obvezen podatek", 1001305);
+        $this->expect($this->getDrzavaGostovanja(), "Država gostovanja je obvezen podatek", 1001305);
 
         $this->validateEuroGE0($this->transportniStroski, "Transportni stroški", 1001300);
         $this->validateEuroGE0($this->dnevPrvZad, "Dnevnice za prvi in zadnji dan", 1001301);
@@ -130,7 +130,7 @@ class ProgramGostovanje
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za gostovanje", 1001302);
 
         $zaproseno    = \Max\Functions::euroRoundS($this->zaproseno);
-        $maxZaproseno = \Max\Functions::euroRoundS(0.60 * $this->avtorskiHonorarji + 0.60 * $this->tantieme + 0.70 * $this->avtorskePravice + 1.00 * $this->transportniStroski + 1.00 * $this->dnevPrvZad);
+        $maxZaproseno = \Max\Functions::euroRoundS(0.60 * $this->avtorskiHonorarji + 1.00 * $this->transportniStroski + 1.00 * $this->dnevPrvZad);
         // glede na procent upravičenih stroškov
         $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 60% avtorskih in tantiem in 70% odkupa avtorskih pravic in transportnih stroskov in dnevnic za 1. in zadnji dan (" . $maxZaproseno . ")", 1001304);
 
