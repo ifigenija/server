@@ -7,8 +7,9 @@ forms:
         elements:
 #            - id
 #            - celotnaVrednost
-            - nasDelez
+#            - nasDelez
             - strosekOdkPred
+            - stroskiOstali
             - zaproseno
 #            - lastnaSredstva
 #            - avtorskiHonorarji

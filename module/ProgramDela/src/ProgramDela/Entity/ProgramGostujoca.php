@@ -26,10 +26,29 @@ class ProgramGostujoca
      * Strošek odkupa predstave 
      * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
-     * @Max\I18n(label="ep.strosekOdkPred", description="ep.d.strosekOdkPred")   
+     * @Max\I18n(label="gostujoca.strosekOdkPred", description="gostujoca.d.strosekOdkPred")   
      * @var double
      */
     protected $strosekOdkPred;
+
+    /**
+     * Strošek odkupa predstave 
+     * 
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="gostujoca.stroskiOstali", description="gostujoca.d.stroskiOstali")   
+     * @var double
+     */
+    protected $stroskiOstali;
+
+    /**
+     * preračuna polja, ki se uporabljajo v matični koprodukciji
+     * 
+     * naš delež in ostala polja kot zaprošeno morajo biti nastavljena še predno se prenesejo v matično koprodukcijo
+     */
+    public function preracunajPoljaZaMatKoprodukcijo()
+    {
+        $this->nasDelez = $this->strosekOdkPred + $this->stroskiOstali;
+    }
 
     public function preracunaj($smer = false)
     {
@@ -54,6 +73,7 @@ class ProgramGostujoca
         $this->stHonorarnihIgr         = 0;
         $this->stHonorarnihIgrTujJZ    = 0;
         $this->naziv                   = "";        // dobimo iz uprizoritve
+        $this->preracunajPoljaZaMatKoprodukcijo();
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
@@ -115,6 +135,17 @@ class ProgramGostujoca
     function setStrosekOdkPred($strosekOdkPred)
     {
         $this->strosekOdkPred = $strosekOdkPred;
+    }
+
+    public function getStroskiOstali()
+    {
+        return $this->stroskiOstali;
+    }
+
+    public function setStroskiOstali($stroskiOstali)
+    {
+        $this->stroskiOstali = $stroskiOstali;
+        return $this;
     }
 
 }

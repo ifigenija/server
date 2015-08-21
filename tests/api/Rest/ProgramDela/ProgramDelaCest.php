@@ -552,8 +552,9 @@ class ProgramDelaCest
         //gostujoca 
         $data                       = [
 //            'celotnaVrednost'    => 1.24,
-            'nasDelez'               => 131,
+//            'nasDelez'               => 131,
             'strosekOdkPred'         => 95,
+            'stroskiOstali'         => 36,
             'zaproseno'              => 40,
 //            'lastnaSredstva'     => 1.24,
             'avtorskiHonorarji'      => 26.12,
@@ -1227,8 +1228,9 @@ class ProgramDelaCest
         //gostujoca 
         $data = [
 //            'celotnaVrednost'      => 1.24,
-            'nasDelez'             => 100.24,
+//            'nasDelez'             => 100.24,
             'strosekOdkPred'       => 100.24,
+            'stroskiOstali'       => 0,
             'zaproseno'            => 1.24,
 //            'lastnaSredstva'       => 1.24,
 //            'avtorskiHonorarji'  => 1.24,
@@ -1259,8 +1261,9 @@ class ProgramDelaCest
         // poizkusimo kreirati še en zapis z isto uprizoritvijo
         $data = [
 //            'celotnaVrednost'      => 1.24,
-            'nasDelez'             => 100.24,
+//            'nasDelez'             => 100.24,
             'strosekOdkPred'       => 100.24,
+            'stroskiOstali'       => 0,
             'zaproseno'            => 1.24,
 //            'lastnaSredstva'       => 1.24,
 //            'avtorskiHonorarji'  => 1.24,
@@ -1291,8 +1294,9 @@ class ProgramDelaCest
         // kreiranje zapisa z drugo uprizoritvijo mora uspeti:
         $data = [
 //            'celotnaVrednost'      => 1.24,
-            'nasDelez'             => 100.24,
+//            'nasDelez'             => 100.24,
             'strosekOdkPred'       => 100.24,
+            'stroskiOstali'       => 0,
             'zaproseno'            => 1.24,
 //            'lastnaSredstva'       => 1.24,
 //            'avtorskiHonorarji'  => 1.24,

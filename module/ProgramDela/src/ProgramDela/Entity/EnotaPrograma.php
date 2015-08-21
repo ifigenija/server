@@ -442,7 +442,7 @@ class EnotaPrograma
         $nd   = \Max\Functions::euroRoundS($this->getNasDelez());
         $cv   = \Max\Functions::euroRoundS($this->getCelotnaVrednost());
         $cvSZ = \Max\Functions::euroRoundS($this->celotnaVrednostGostovSZ);
-        $this->expect($nd <= $cv, "Naš delež (" . $nd . ") ne sme biti večji od celotne vrednosti (" . $cv . ")", 1000621);
+        $this->expect($nd <= $cv, "Delež matičnega JZ (" . $nd . ") ne sme biti večji od celotne vrednosti (" . $cv . ")", 1000621);
         $this->expect($cvSZ <= $cv, "Celotna vrednost gostovanj v Slo in zam. (" . $cvSZ . ") ne sme biti večja od celotne vrednosti (" . $cv . ")", 1000622);
     }
 

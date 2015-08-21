@@ -69,8 +69,9 @@ class ProgramGostujocaCest
     {
         $data       = [
             'celotnaVrednost' => 1.24,
-            'nasDelez'        => 4,
+//            'nasDelez'        => 4,
             'strosekOdkPred'  => 3.11,
+            'stroskiOstali'  => 0.89,
             'zaproseno'       => 1.24,
 //            'lastnaSredstva'  => 1.24,
 //            'avtorskiHonorarji'  => 1.24,
@@ -100,8 +101,9 @@ class ProgramGostujocaCest
 // kreiramo še en zapis
         $data       = [
 //            'celotnaVrednost' => 4.56,
-            'nasDelez'        => 22,
+//            'nasDelez'        => 22,
             'strosekOdkPred'  => 3.11,
+            'stroskiOstali'  => 18.89,
             'zaproseno'       => 1.24,
 //'lastnaSredstva'  => 4.56,
 //            'avtorskiHonorarji'  => 4.56,
@@ -158,6 +160,7 @@ class ProgramGostujocaCest
         $I->assertEquals($ent['celotnaVrednost'], 4);
         $I->assertEquals($ent['nasDelez'], 4);
         $I->assertEquals($ent['strosekOdkPred'], 3.11);
+        $I->assertEquals($ent['stroskiOstali'], 0.89);
         $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");
         $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
 //        $I->assertEquals($ent['tantieme'], 1.24);
@@ -303,16 +306,16 @@ class ProgramGostujocaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function updateSPrevelikimStroskomOdkupaPredstave(ApiTester $I)
-    {
-        $ent                   = $this->obj2;
-        $ent['nasDelez']       = 7;
-        $ent['strosekOdkPred'] = 7.01;    // preveliko     
-
-        $resp = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
-        codecept_debug($resp);
-        $I->assertEquals(1000433, $resp[0]['code']);
-    }
+//    public function updateSPrevelikimStroskomOdkupaPredstave(ApiTester $I)
+//    {
+//        $ent                   = $this->obj2;
+//        $ent['nasDelez']       = 7;
+//        $ent['strosekOdkPred'] = 7.01;    // preveliko     
+//
+//        $resp = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+//        codecept_debug($resp);
+//        $I->assertEquals(1000433, $resp[0]['code']);
+//    }
 
     /**
      * spremenim zapis za kontrolo zaokroževanja
@@ -353,8 +356,9 @@ class ProgramGostujocaCest
         $data       = [
             'uprizoritev'     => NULL,
             'celotnaVrednost' => 1.24,
-            'nasDelez'        => 4,
+//            'nasDelez'        => 4,
             'strosekOdkPred'  => 3.11,
+            'stroskiOstali'  => 0.89,
             'zaproseno'       => 1.24,
 //            'lastnaSredstva'  => 1.24,
 //            'avtorskiHonorarji'  => 1.24,
