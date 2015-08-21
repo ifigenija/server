@@ -86,26 +86,27 @@ class ProgramGostovanje
      */
     public function preracunajPoljaZaMatKoprodukcijo()
     {
-        $this->nasDelez = $this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni + $this->transportniStroski + $this->dnevPrvZad;
+        $this->nasDelez = $this->avtorskiHonorarji + $this->tantieme + $this->materialni + $this->transportniStroski + $this->dnevPrvZad;
     }
 
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
-        $this->setCelotnaVrednostGostovSZ(0);
-        $this->setObiskDoma(0);
-        $this->setObiskGost(0);
-        $this->setObiskZamejo(0);
-        $this->setPonoviDoma(0);
-        $this->setPonoviZamejo(0);
-        $this->setPonoviGost(0);
-        $this->setStHonorarnih(0);
-        $this->setStHonorarnihIgr(0);
-        $this->setStHonorarnihIgrTujJZ(0);
-        $this->setStZaposlenih(0);
-        $this->setStZaposUmet(0);
-        $this->setStZaposDrug(0);
-        $this->setNaziv("");        // dobimo iz uprizoritve
+        $this->celotnaVrednostGostovSZ = 0;
+        $this->avtorskePravice         = 0;
+        $this->obiskDoma               = 0;
+        $this->obiskGost               = 0;
+        $this->obiskZamejo             = 0;
+        $this->ponoviDoma              = 0;
+        $this->ponoviZamejo            = 0;
+        $this->ponoviGost              = 0;
+        $this->stHonorarnih            = 0;
+        $this->stHonorarnihIgr         = 0;
+        $this->stHonorarnihIgrTujJZ    = 0;
+        $this->stZaposlenih            = 0;
+        $this->stZaposUmet             = 0;
+        $this->stZaposDrug             = 0;
+        $this->naziv="";        // dobimo iz uprizoritve
 
         $this->preracunajPoljaZaMatKoprodukcijo();
 

@@ -70,7 +70,6 @@ class StrosekUprizoritveFixture
         return [
             ['Nabava kostumov', 600.50, 20, "Krila in maske", 1, "Uprizoritev-0002", "Popa-0988","materialni"],
             ['Zavese', 125.70, 3.1, "Modra in zelena zavesa", 2, "Uprizoritev-0002", "Popa-0988","materialni"],
-            ['Tantiema', 200, 10, "Tantiema za besedilo", 3, "Uprizoritev-0002", "Popa-0985","tantiema"],
             ['Avtorske pravice', 300, 30, "Odkup avtorskih pravic", 4, "Uprizoritev-0002", "Popa-0985","avtorprav"],
         ];
     }

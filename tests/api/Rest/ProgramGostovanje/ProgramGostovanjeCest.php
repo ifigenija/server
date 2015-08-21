@@ -115,7 +115,7 @@ class ProgramGostovanjeCest
             'dnevPrvZad'             => 9.12,
             'tantieme'               => 9.12,
             'materialni'             => 9.12,
-            'avtorskePravice'        => 9.12,
+//            'avtorskePravice'        => 9.12,
             'avtorskiHonorarji'      => 9.12,
             'avtorskiHonorarjiSamoz' => 9.12,
             'vlozekGostitelja'       => 9.12,
@@ -147,7 +147,7 @@ class ProgramGostovanjeCest
             'dnevPrvZad'             => 3.12,
             'tantieme'               => 3.12,
             'materialni'             => 3.12,
-            'avtorskePravice'        => 3.12,
+//            'avtorskePravice'        => 3.12,
             'avtorskiHonorarji'      => 3.12,
             'avtorskiHonorarjiSamoz' => 3.12,
             'vlozekGostitelja'       => 3.12,
@@ -198,13 +198,13 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['ponoviInt'], 9);
         $I->assertEquals($ent['obiskInt'], 9);
         $I->assertEquals($ent['zaproseno'], 9.12, "izračunano zaprošeno");
-        $I->assertEquals($ent['celotnaVrednost'], 54.72);
-        $I->assertEquals($ent['nasDelez'], 54.72);
+        $I->assertEquals($ent['celotnaVrednost'], 45.6);
+        $I->assertEquals($ent['nasDelez'], 45.6);
         $I->assertEquals($ent['transportniStroski'], 9.12);
         $I->assertEquals($ent['dnevPrvZad'], 9.12);
         $I->assertEquals($ent['tantieme'], 9.12);
         $I->assertEquals($ent['materialni'], 9.12);
-        $I->assertEquals($ent['avtorskePravice'], 9.12);
+        $I->assertEquals($ent['avtorskePravice'], 0);
         $I->assertEquals($ent['avtorskiHonorarji'], 9.12);
         $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 9.12);
         $I->assertEquals($ent['vlozekGostitelja'], 2.34);
@@ -316,7 +316,7 @@ class ProgramGostovanjeCest
         $ent                       = $this->obj2;
         $ent['avtorskiHonorarji']  = 1;      // v praksi bo že klient zaokrožil na 2 mesti
         $ent['tantieme']           = 1;      // v praksi bo že klient zaokrožil na 2 mesti
-        $ent['avtorskePravice']    = 2.01;      // v praksi bo že klient zaokrožil na 2 mesti
+//        $ent['avtorskePravice']    = 2.01;      // v praksi bo že klient zaokrožil na 2 mesti
         $ent['transportniStroski'] = 2;      // v praksi bo že klient zaokrožil na 2 mesti
         $ent['dnevPrvZad']         = 3;      // v praksi bo že klient zaokrožil na 2 mesti
         $ent['zaproseno']          = 5.60;   // 60% avt hon + transp. str. +dnevnice za prvi in zadnji dan
@@ -361,7 +361,7 @@ class ProgramGostovanjeCest
             'dnevPrvZad'             => 9.12,
             'tantieme'               => 9.12,
             'materialni'             => 9.12,
-            'avtorskePravice'        => 9.12,
+//            'avtorskePravice'        => 9.12,
             'avtorskiHonorarji'      => 9.12,
             'avtorskiHonorarjiSamoz' => 9.12,
             'vlozekGostitelja'       => 9.12,
@@ -404,7 +404,7 @@ class ProgramGostovanjeCest
             'dnevPrvZad'             => 9.12,
             'tantieme'               => 9.12,
             'materialni'             => 9.12,
-            'avtorskePravice'        => 9.12,
+//            'avtorskePravice'        => 9.12,
             'avtorskiHonorarji'      => 9.12,
             'avtorskiHonorarjiSamoz' => 9.12,
             'vlozekGostitelja'       => 9.12,
@@ -447,7 +447,7 @@ class ProgramGostovanjeCest
             'dnevPrvZad'             => 9.12,
             'tantieme'               => 9.12,
             'materialni'             => 9.12,
-            'avtorskePravice'        => 9.12,
+//            'avtorskePravice'        => 9.12,
             'avtorskiHonorarji'      => 9.12,
             'avtorskiHonorarjiSamoz' => 9.12,
             'vlozekGostitelja'       => 9.12,

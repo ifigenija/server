@@ -21,6 +21,8 @@ class PodatkiUprizoritveCest
     private $objProgramPremiera1;
     private $objProgramPremiera2;
     private $lookUprizoritev1;
+    private $lookUprizoritev2;
+    private $lookUprizoritev3;
     private $uprizoritevUrl       = '/rest/uprizoritev';
 
     public function _before(ApiTester $I)
@@ -41,6 +43,10 @@ class PodatkiUprizoritveCest
         // uprizoritev s praznimi datumi:
         $this->lookUprizoritev2 = $look                   = $I->lookupEntity("uprizoritev", "0006", false);
         $I->assertNotEmpty($look);
+        
+        // uprizoritev za analizo #1100 - število igralcev
+        $this->lookUprizoritev3 = $look                   = $I->lookupEntity("uprizoritev", "0001", false);
+        $I->assertNotEmpty($look);
     }
 
     /**
@@ -56,12 +62,10 @@ class PodatkiUprizoritveCest
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
         $I->assertGreaterThanOrEqual(132, $resp['Do']['avtorskiHonorarji'], "avtorski do");
-        $I->assertGreaterThanOrEqual(200, $resp['Do']['tantieme'], "tantieme do");
         $I->assertGreaterThanOrEqual(300, $resp['Do']['avtorskePravice'], "avtorskePravice");
         $I->assertGreaterThanOrEqual(726.2, $resp['Do']['materialni'], "materialni");
         $I->assertGreaterThanOrEqual(1058.2, $resp['Do']['nasDelez'], "naš delež do");
         $I->assertGreaterThanOrEqual(93, $resp['Na']['avtorskiHonorarji'], "avtorski na");
-        $I->assertGreaterThanOrEqual(10, $resp['Na']['tantieme'], "tantieme na");
         $I->assertGreaterThanOrEqual(30, $resp['Na']['avtorskePravice'], "avtorskePravice");
         $I->assertGreaterThanOrEqual(23.1, $resp['Na']['materialni'], "materialni");
         $I->assertGreaterThanOrEqual(5, $resp['stZaposUmet'], "št. zaposlenih umetnikov");
@@ -88,10 +92,8 @@ class PodatkiUprizoritveCest
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
         $I->assertGreaterThanOrEqual(132, $resp['Do']['avtorskiHonorarji'], "avtorski do");
-        $I->assertGreaterThanOrEqual(200, $resp['Do']['tantieme'], "tantieme do");
         $I->assertGreaterThanOrEqual(1058.2, $resp['Do']['nasDelez'], "naš delež do");
         $I->assertGreaterThanOrEqual(93, $resp['Na']['avtorskiHonorarji'], "avtorski na");
-        $I->assertGreaterThanOrEqual(10, $resp['Na']['tantieme'], "tantieme na");
         $I->assertGreaterThanOrEqual(5, $resp['stZaposUmet'], "št. zaposlenih umetnikov"); //$$ prej 2
         $I->assertGreaterThanOrEqual(1, $resp['stZaposDrug'], "št. zaposl. drugih");  //$$ PREJ 3
         $I->assertGreaterThanOrEqual(3, $resp['stHonorarnih']);
@@ -186,5 +188,5 @@ class PodatkiUprizoritveCest
         $I->seeResponseIsJson();
 //        $I->assertEquals(1000972, $resp['code']);
     }
-
+    
 }

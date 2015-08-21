@@ -18,7 +18,7 @@ forms:
             - vlozekGostitelja
             - tantieme
             - materialni
-            - avtorskePravice
+#            - avtorskePravice
             - avtorskiHonorarji
             - avtorskiHonorarjiSamoz
             - zaproseno

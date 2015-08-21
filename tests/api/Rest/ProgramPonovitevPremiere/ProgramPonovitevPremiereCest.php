@@ -135,7 +135,7 @@ class ProgramPonovitevPremiereCest
             'avtorskiHonorarjiSamoz'  => 1.24,
             'tantieme'                => 1.24,
             'materialni'              => 1.24,
-            'avtorskePravice'         => 1.24,
+//            'avtorskePravice'         => 1.24,
             'drugiViri'               => 1.24,
             'vlozekGostitelja'        => 1.24,
             'drugiJavni'              => 1.24,
@@ -167,7 +167,7 @@ class ProgramPonovitevPremiereCest
             'avtorskiHonorarjiSamoz'  => 4.56,
             'tantieme'                => 4.56,
             'materialni'              => 4.56,
-            'avtorskePravice'         => 4.56,
+//            'avtorskePravice'         => 4.56,
             'drugiViri'               => 4.56,
             'vlozekGostitelja'        => 4.23,
             'drugiJavni'              => 4.56,
@@ -215,8 +215,8 @@ class ProgramPonovitevPremiereCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['celotnaVrednost'], 4.96);
-        $I->assertEquals($ent['nasDelez'], 4.96);
+        $I->assertEquals($ent['celotnaVrednost'], 3.72);
+        $I->assertEquals($ent['nasDelez'], 3.72);
         $I->assertEquals($ent['celotnaVrednostGostovSZ'], 3.11);
         $I->assertEquals($ent['celotnaVrednostMat'], $ent['celotnaVrednost'] - $ent['celotnaVrednostGostovSZ'], "cel. vr. matič.");
         $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");
@@ -225,7 +225,7 @@ class ProgramPonovitevPremiereCest
         $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 1.24);
         $I->assertEquals($ent['tantieme'], 1.24);
         $I->assertEquals($ent['materialni'], 1.24);
-        $I->assertEquals($ent['avtorskePravice'], 1.24);
+        $I->assertEquals($ent['avtorskePravice'], 0);
 //        $I->assertEquals($ent['drugiViri'], 1.24);
         $I->assertEquals($ent['vlozekGostitelja'], 1.24);
         $I->assertEquals($ent['drugiJavni'], 1.24);
@@ -388,7 +388,7 @@ class ProgramPonovitevPremiereCest
         $ent                      = $this->obj2;
         $ent['avtorskiHonorarji'] = 10;      // v praksi bo že klient zaokrožil na 2 mesti
         $ent['tantieme']          = 8.01;
-        $ent['avtorskePravice']   = 0;
+//        $ent['avtorskePravice']   = 0;
         $ent['materialni']        = 0;
         $ent['zaproseno']         = 12.61;
 
@@ -428,7 +428,7 @@ class ProgramPonovitevPremiereCest
             'avtorskiHonorarjiSamoz'  => 1.24,
             'tantieme'                => 1.24,
             'materialni'              => 1.24,
-            'avtorskePravice'         => 1.24,
+//            'avtorskePravice'         => 1.24,
 //            'drugiViri'            => 1.24,
             'vlozekGostitelja'        => 1.24,
             'drugiJavni'              => 1.24,

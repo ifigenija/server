@@ -30,21 +30,22 @@ class ProgramPonovitevPremiere
     public function preracunajPoljaZaMatKoprodukcijo()
     {
         // že sam klient zagotavlja, da so vsi zneski na 2 decimalki
-        $this->nasDelez = $this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni;
+        $this->nasDelez = $this->avtorskiHonorarji + $this->tantieme + $this->materialni;
     }
 
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
-        $this->setStZaposlenih(0);
-        $this->setStZaposUmet(0);
-        $this->setStZaposDrug(0);
-        $this->setStHonorarnih(0);
-        $this->setStHonorarnihIgr(0);
-        $this->setStHonorarnihIgrTujJZ(0);
-        $this->setPonoviInt(0);
-        $this->setObiskInt(0);
-        $this->setNaziv("");        // dobimo iz uprizoritve
+        $this->avtorskePravice      = 0;
+        $this->stZaposlenih         = 0;
+        $this->stZaposUmet          = 0;
+        $this->stZaposDrug          = 0;
+        $this->stHonorarnih         = 0;
+        $this->stHonorarnihIgr      = 0;
+        $this->stHonorarnihIgrTujJZ = 0;
+        $this->ponoviInt            = 0;
+        $this->obiskInt             = 0;
+        $this->naziv                = "";        // dobimo iz uprizoritve
 
         $this->preracunajPoljaZaMatKoprodukcijo();
 

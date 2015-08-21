@@ -29,15 +29,17 @@ class ProgramPonovitevPrejsnjih
      */
     public function preracunajPoljaZaMatKoprodukcijo()
     {
-        $this->nasDelez = $this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni;
+        $this->nasDelez = $this->avtorskiHonorarji + $this->tantieme + $this->materialni;
     }
 
     public function preracunaj($smer = false)
     {
-        $this->setNaziv("");        // dobimo iz uprizoritve ?
-        $this->setStZaposlenih(0);
-        $this->setPonoviInt(0);
-        $this->setObiskInt(0);
+        // neaktualna polja, ki jih tudi v formi ni:
+        $this->avtorskePravice = 0;
+        $this->stZaposlenih    = 0;
+        $this->ponoviInt       = 0;
+        $this->obiskInt        = 0;
+        $this->naziv           = "";        // dobimo iz uprizoritve ?
 
         $this->preracunajPoljaZaMatKoprodukcijo();
 

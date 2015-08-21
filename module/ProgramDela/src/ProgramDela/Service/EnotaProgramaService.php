@@ -92,17 +92,13 @@ class EnotaProgramaService
                     $data['Do']['materialni']+=$strosekU->getVrednostDo();
                     $data['Na']['materialni']+=$strosekU->getVrednostNa();
                     break;
-                case 'tantiema':
-                    $data['Do']['tantieme']+=$strosekU->getVrednostDo();
-                    $data['Na']['tantieme']+=$strosekU->getVrednostNa();
-                    break;
                 case 'avtorprav':
                     $data['Do']['avtorskePravice']+=$strosekU->getVrednostDo();
-                    $data['Na']['avtorskePravice']+=$strosekU->getVrednostNa();
+                    $data['Na']['avtorskePravice']+=$strosekU->getVrednostNa();  // to so tantieme
                     break;
                 default:
                     $this->expect(false
-                            , "Tip stroška uprizoritve je lahko le materialni ali tantiema ali avtorske pravice, je pa:" . $strosekU->getTipstroska(), 1000951);
+                            , "Tip stroška uprizoritve je lahko le materialni ali avtorske pravice, je pa:" . $strosekU->getTipstroska(), 1000951);
             }
         }
 
@@ -168,7 +164,7 @@ class EnotaProgramaService
                 }
             }
         }
-        $data['Do']['nasDelez'] = $data['Do']['avtorskiHonorarji'] + $data['Do']['tantieme'] + $data['Do']['avtorskePravice'] + $data['Do']['materialni'];
+        $data['Do']['nasDelez'] = $data['Do']['avtorskiHonorarji'] + $data['Do']['avtorskePravice'] + $data['Do']['materialni'];
 
         $data['datumZacStudija'] = $uprizoritev->getDatumZacStudija() ? date(\DateTime::ISO8601, strtotime($uprizoritev->getDatumZacStudija()->format('c'))) : null;       // datum v ISO8601 obliki 
         $data['datumPremiere']   = $uprizoritev->getDatumPremiere() ? date(\DateTime::ISO8601, strtotime($uprizoritev->getDatumPremiere()->format('c'))) : null;       // datum v ISO8601 obliki 
@@ -192,7 +188,6 @@ class EnotaProgramaService
         $polje                        = [
             'avtorskiHonorarji'      => 0,
             'avtorskiHonorarjiSamoz' => 0,
-            'tantieme'               => 0,
             'avtorskePravice'        => 0,
             'materialni'             => 0,
         ];
