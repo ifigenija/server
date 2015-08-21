@@ -12,7 +12,9 @@ forms:
             - ustanova
             - datumGostovanja
             - ponoviInt
+            - obiskKoprInt
             - obiskInt
+            - ponoviKoprInt
 #            - celotnaVrednost
 #            - nasDelez
             - vlozekGostitelja

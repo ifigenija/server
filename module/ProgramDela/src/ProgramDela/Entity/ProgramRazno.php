@@ -75,6 +75,10 @@ class ProgramRazno
         $this->tantieme                = 0;
         $this->avtorskePravice         = 0;
         $this->vlozekGostitelja        = 0;
+        $this->obiskKopr               = 0;
+        $this->ponoviKopr              = 0;
+        $this->obiskKoprInt            = 0;
+        $this->ponoviKoprInt           = 0;
 
         $this->preracunajPoljaZaMatKoprodukcijo();
 

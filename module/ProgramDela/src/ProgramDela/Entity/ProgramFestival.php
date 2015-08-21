@@ -138,14 +138,18 @@ class ProgramFestival
         $this->ponoviGost              = 0;
         $this->ponoviInt               = 0;
         $this->ponoviZamejo            = 0;
-        $this->stZaposUmet             = 0;
-        $this->stZaposDrug             = 0;
-        $this->stHonorarnihIgr         = 0;
-        $this->stHonorarnihIgrTujJZ    = 0;
-        $this->tantieme                = 0;
-        $this->materialni              = 0;
-        $this->avtorskePravice         = 0;
-        $this->vlozekGostitelja        = 0;
+        $this->obiskKopr               = 0;
+        $this->ponoviKopr              = 0;
+        $this->obiskKoprInt            = 0;
+        $this->ponoviKoprInt           = 0;
+        $this->stZaposUmet          = 0;
+        $this->stZaposDrug          = 0;
+        $this->stHonorarnihIgr      = 0;
+        $this->stHonorarnihIgrTujJZ = 0;
+        $this->tantieme             = 0;
+        $this->materialni           = 0;
+        $this->avtorskePravice      = 0;
+        $this->vlozekGostitelja     = 0;
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
@@ -242,7 +246,6 @@ class ProgramFestival
     {
         return $this->programskoTelo;
     }
-
 
     public function getStTujihSelektorjev()
     {

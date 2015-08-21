@@ -43,7 +43,9 @@ class ProgramPonovitevPremiere
         $this->stHonorarnih         = 0;
         $this->stHonorarnihIgr      = 0;
         $this->stHonorarnihIgrTujJZ = 0;
+        $this->ponoviKoprInt        = 0;
         $this->ponoviInt            = 0;
+        $this->obiskKoprInt         = 0;
         $this->obiskInt             = 0;
         $this->naziv                = "";        // dobimo iz uprizoritve
 

@@ -99,7 +99,7 @@ class StrosekUprizoritveCest
             'vrednostDo'  => 2.34,
             'vrednostNa'  => 5.67,
             'opis'        => 'aa',
-            'tipstroska'        => 'tantiema',
+            'tipstroska'        => 'avtorprav',
             'sort'        => 2,
             'uprizoritev' => $this->lookUprizoritev['id'],
             'popa'        => $this->lookPopa['id'],

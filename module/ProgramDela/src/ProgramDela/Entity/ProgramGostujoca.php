@@ -65,6 +65,10 @@ class ProgramGostujoca
         $this->ponoviZamejo            = 0;
         $this->ponoviGost              = 0;
         $this->ponoviInt               = 0;
+        $this->obiskKopr               = 0;
+        $this->ponoviKopr              = 0;
+        $this->obiskKoprInt            = 0;
+        $this->ponoviKoprInt           = 0;
         $this->vlozekGostitelja        = 0;  // kot vir
         $this->stZaposlenih            = 0;
         $this->stZaposUmet             = 0;

@@ -402,10 +402,11 @@ class AvtorizacijeCest
         $I->failToDelete($this->osebaUrl, $this->lookOseba1['id']);        //$$ rb ERROR
         //write
         $data         = [
-            'naziv'   => 'zz',
-            'ime'     => 'zz',
-            'priimek' => 'zz',
-            'email'   => 'z@zzz.zz',
+            'naziv'    => 'zz',
+            'ime'      => 'zz',
+            'priimek'  => 'zz',
+            'email'    => 'z@zzz.zz',
+            'funkcija' => 'aa',
         ];
         $I->failToCreate($this->osebaUrl, $data); //$$ rb ne deluje
     }
@@ -446,11 +447,12 @@ class AvtorizacijeCest
 
         //write
         $data  = [
-            'naziv'   => 'dve',
-            'ime'     => 'dve',
-            'priimek' => 'dve',
-            'email'   => 'dve@zzz.zz',
-            'spol'    => 'M',
+            'naziv'    => 'dve',
+            'ime'      => 'dve',
+            'priimek'  => 'dve',
+            'email'    => 'dve@zzz.zz',
+            'spol'     => 'M',
+            'funkcija' => 'aa',
         ];
         $oseba = $I->successfullyCreate($this->osebaUrl, $data);
 
@@ -496,11 +498,12 @@ class AvtorizacijeCest
 
         //write
         $data  = [
-            'naziv'   => 'tri',
-            'ime'     => 'tri',
-            'priimek' => 'tri',
-            'email'   => 'tri@zzz.zz',
-            'spol'    => 'M',
+            'naziv'    => 'tri',
+            'ime'      => 'tri',
+            'priimek'  => 'tri',
+            'email'    => 'tri@zzz.zz',
+            'spol'     => 'M',
+            'funkcija' => 'aa',
         ];
         $oseba = $I->successfullyCreate($this->osebaUrl, $data);
 
@@ -549,10 +552,11 @@ class AvtorizacijeCest
 
         // write
         $data = [
-            'naziv'   => 'stiri',
-            'ime'     => 'stiri',
-            'priimek' => 'write protected12345', //to assert ne dovoli!
-            'email'   => 'stiri@zzz.zz',
+            'naziv'    => 'stiri',
+            'ime'      => 'stiri',
+            'priimek'  => 'write protected12345', //to assert ne dovoli!
+            'email'    => 'stiri@zzz.zz',
+            'funkcija' => 'aa',
         ];
         $I->failToCreate($this->osebaUrl, $data);  //$$ rb verjetno bo potrebno spremeniti v restcontrollerju, ker konteksta še ni ?
     }
@@ -565,16 +569,17 @@ class AvtorizacijeCest
     public function assertPoVsebiniNaUserja(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
-        $oseba = $I->successfullyGet($this->osebaUrl, $this->lookOseba3Prot['id']);
-        
+        $data = $I->successfullyGet($this->osebaUrl, $this->lookOseba3Prot['id']);
+
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$test4, \IfiTest\AuthPage::$test4Pass);
         // oseba, ki je z assert zaščitena 
         //update
-        $oseba['ime'] = 'cirkocarko';
+        codecept_debug($data);
+        $data['ime'] = 'cirkocarko';
 
         // dostop uspe zaradi posebnega dovoljenja "Oseba-vse"
-        $I->successfullyUpdate($this->osebaUrl, $oseba['id'], $oseba);
-        $I->assertEquals($oseba['ime'], 'cirkocarko');
+        $I->successfullyUpdate($this->osebaUrl, $data['id'], $data);
+        $I->assertEquals($data['ime'], 'cirkocarko');
     }
 
 }

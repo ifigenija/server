@@ -107,7 +107,9 @@ class ProgramGostovanjeCest
             'ustanova'               => 'zz',
             'datumGostovanja'        => '2011-02-01T00:00:00+0100',
             'ponoviInt'              => 9,
+            'ponoviKoprInt'          => 9,
             'obiskInt'               => 9,
+            'obiskKoprInt'           => 9,
             'zaproseno'              => 9.12,
 //            'celotnaVrednost'    => 9.12,
             'nasDelez'               => 79.12,
@@ -139,7 +141,9 @@ class ProgramGostovanjeCest
             'ustanova'               => 'aa',
             'datumGostovanja'        => '2011-02-01T00:00:00+0100',
             'ponoviInt'              => 3,
+            'ponoviKoprInt'          => 3,
             'obiskInt'               => 3,
+            'obiskKoprInt'           => 3,
             'zaproseno'              => 3.12,
 //            'celotnaVrednost'    => 3.12,
             'nasDelez'               => 19,
@@ -196,7 +200,9 @@ class ProgramGostovanjeCest
         $I->assertEquals($ent['ustanova'], 'zz');
         $I->assertEquals($ent['datumGostovanja'], '2011-02-01T00:00:00+0100');
         $I->assertEquals($ent['ponoviInt'], 9);
+        $I->assertEquals($ent['ponoviKoprInt'], 9);
         $I->assertEquals($ent['obiskInt'], 9);
+        $I->assertEquals($ent['obiskKoprInt'], 9);
         $I->assertEquals($ent['zaproseno'], 9.12, "izračunano zaprošeno");
         $I->assertEquals($ent['celotnaVrednost'], 45.6);
         $I->assertEquals($ent['nasDelez'], 45.6);
@@ -353,7 +359,9 @@ class ProgramGostovanjeCest
             'ustanova'               => 'zz',
             'datumGostovanja'        => '2011-02-01T00:00:00+0100',
             'ponoviInt'              => 9,
+            'ponoviKoprInt'          => 9,
             'obiskInt'               => 9,
+            'obiskKoprInt'           => 9,
             'zaproseno'              => 9.12,
 //            'celotnaVrednost'    => 9.12,
             'nasDelez'               => 79.12,
@@ -396,7 +404,9 @@ class ProgramGostovanjeCest
             'ustanova'               => 'zz',
             'datumGostovanja'        => '2011-02-01T00:00:00+0100',
             'ponoviInt'              => 9,
+            'ponoviKoprInt'          => 9,
             'obiskInt'               => 9,
+            'obiskKoprInt'           => 9,
             'zaproseno'              => 9.12,
 //            'celotnaVrednost'    => 9.12,
             'nasDelez'               => 79.12,
@@ -428,7 +438,6 @@ class ProgramGostovanjeCest
     public function createBrezDrzaveGostovanja(ApiTester $I)
     {
 //        $this->expect($this->getDrzavaGostovanja(), "Država gostovanjaje obvezen podatek", 1001305);
-        
 // brez države gostovanja
         $data = [
             'drzavaGostovanja'       => NULL,
@@ -439,7 +448,9 @@ class ProgramGostovanjeCest
             'ustanova'               => 'zz',
             'datumGostovanja'        => '2011-02-01T00:00:00+0100',
             'ponoviInt'              => 9,
+            'ponoviKoprInt'          => 9,
             'obiskInt'               => 9,
+            'obiskKoprInt'           => 9,
             'zaproseno'              => 9.12,
 //            'celotnaVrednost'    => 9.12,
             'nasDelez'               => 79.12,

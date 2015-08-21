@@ -56,6 +56,9 @@ class EnotaPrograma
     protected $nasDelez;
 
     /**
+     * V primeru programov ponovititev velja:
+     * celotnavrednostMat + celotnaVrednostGostovSZ =nasDelez
+     * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.celotnaVrednostMat", description="ep.d.celotnaVrednostMat")   
      * @var double
@@ -63,6 +66,9 @@ class EnotaPrograma
     protected $celotnaVrednostMat;
 
     /**
+     * V primeru programov ponovititev velja:
+     * celotnavrednostMat + celotnaVrednostGostovSZ =nasDelez
+     * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.celotnaVrednostGostovSZ", description="ep.d.celotnaVrednostGostovSZ")   
      * @var double
@@ -240,12 +246,23 @@ class EnotaPrograma
     protected $stHonorarnihIgrSamoz;
 
     /**
+     * 
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
      * @Max\I18n(label="ep.obiskDoma", description="ep.d.obiskDoma")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
     protected $obiskDoma;
+
+    /**
+     *  na odru slovenskega ali zamejskega koproducenta
+     * 
+     * @ORM\Column(type="integer", nullable=false, options={"default":0})
+     * @Max\I18n(label="ep.obiskKopr", description="ep.d.obiskKopr")   
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    protected $obiskKopr;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -272,12 +289,32 @@ class EnotaPrograma
     protected $obiskInt;
 
     /**
+     * Načrtovano število gledalcev  odru koproducenta v tujini:
+     * 
+     * @ORM\Column(type="integer", nullable=false, options={"default":0})
+     * @Max\I18n(label="ep.obiskKoprInt", description="ep.d.obiskKoprInt")   
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    protected $obiskKoprInt;
+
+    /**
      * @ORM\Column(type="integer", nullable=false, options={"default":" 0"})
      * @Max\I18n(label="ep.ponoviDoma", description="ep.d.ponoviDoma")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
     protected $ponoviDoma;
+
+    /**
+     * na odru slovenskega ali zamejskega koproducenta
+     * 
+     * @ORM\Column(type="integer", nullable=false, options={"default":" 0"})
+     * @Max\I18n(label="ep.ponoviKopr", description="ep.d.ponoviKopr")   
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    protected $ponoviKopr;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -296,6 +333,16 @@ class EnotaPrograma
      * @var integer     
      */
     protected $ponoviGost;
+
+    /**
+     * Število ponovitev na odru koproducenta v tujini:
+     * 
+     * @ORM\Column(type="integer", nullable=false, options={"default":0})
+     * @Max\I18n(label="ep.ponoviKoprInt", description="ep.d.ponoviKoprInt")   
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    protected $ponoviKoprInt;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -366,11 +413,12 @@ class EnotaPrograma
      */
     public function preracunajPoljaZaMatKoprodukcijo()
     {
+        
     }
-    
+
     public function preracunaj($smer = false)
     {
-        
+
         $ls                   = $this->nasDelez - $this->zaproseno - $this->drugiJavni - $this->vsotaDrugihVirov() - $this->vlozekGostitelja;
         $this->lastnaSredstva = \Max\Functions::euroRound($ls);   //Zaokrožimo na 2 decimalki predno shranimo
 
@@ -839,6 +887,50 @@ class EnotaPrograma
     public function setImaKoprodukcije($imaKoprodukcije)
     {
         $this->imaKoprodukcije = $imaKoprodukcije;
+        return $this;
+    }
+
+    public function getObiskKopr()
+    {
+        return $this->obiskKopr;
+    }
+
+    public function getObiskKoprInt()
+    {
+        return $this->obiskKoprInt;
+    }
+
+    public function getPonoviKopr()
+    {
+        return $this->ponoviKopr;
+    }
+
+    public function getPonoviKoprInt()
+    {
+        return $this->ponoviKoprInt;
+    }
+
+    public function setObiskKopr($obiskKopr)
+    {
+        $this->obiskKopr = $obiskKopr;
+        return $this;
+    }
+
+    public function setObiskKoprInt($obiskKoprInt)
+    {
+        $this->obiskKoprInt = $obiskKoprInt;
+        return $this;
+    }
+
+    public function setPonoviKopr($ponoviKopr)
+    {
+        $this->ponoviKopr = $ponoviKopr;
+        return $this;
+    }
+
+    public function setPonoviKoprInt($ponoviKoprInt)
+    {
+        $this->ponoviKoprInt = $ponoviKoprInt;
         return $this;
     }
 

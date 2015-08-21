@@ -21,10 +21,12 @@ forms:
             - drugiJavni
 #            - lastnaSredstva
             - obiskDoma
+            - obiskKopr
             - obiskGost
             - obiskZamejo
 #            - obiskInt
             - ponoviDoma
+            - ponoviKopr
             - ponoviZamejo
             - ponoviGost
 #            - ponoviInt

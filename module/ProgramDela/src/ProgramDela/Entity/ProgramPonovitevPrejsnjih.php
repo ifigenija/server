@@ -39,6 +39,8 @@ class ProgramPonovitevPrejsnjih
         $this->stZaposlenih    = 0;
         $this->ponoviInt       = 0;
         $this->obiskInt        = 0;
+        $this->ponoviKoprInt   = 0;
+        $this->obiskKoprInt    = 0;
         $this->naziv           = "";        // dobimo iz uprizoritve ?
 
         $this->preracunajPoljaZaMatKoprodukcijo();

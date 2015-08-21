@@ -37,17 +37,21 @@ class ProgramPremiera
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
-        $this->setStZaposlenih(0);
-        $this->setCelotnaVrednostGostovSZ(0);
-        $this->setObiskGost(0);
-        $this->setObiskZamejo(0);
-        $this->setObiskInt(0);
-        $this->setPonoviZamejo(0);
-        $this->setPonoviGost(0);
-        $this->setPonoviInt(0);
-        $this->setVlozekGostitelja(0);
-        $this->setNaziv("");        // dobimo iz uprizoritve
-
+        $this->stZaposlenih=0;
+        $this->celotnaVrednostGostovSZ=0;
+        $this->obiskKopr=0;
+        $this->obiskGost=0;
+        $this->obiskZamejo=0;
+        $this->obiskKoprInt=0;
+        $this->obiskInt=0;
+        $this->ponoviKopr=0;
+        $this->ponoviZamejo=0;
+        $this->ponoviGost=0;
+        $this->ponoviKoprInt=0;
+        $this->ponoviInt=0;
+        $this->vlozekGostitelja=0;
+        $this->naziv="";        // dobimo iz uprizoritve
+        
         $this->setPonoviDoma(1);        // le premiera
         $this->preracunajPoljaZaMatKoprodukcijo();
 

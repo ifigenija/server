@@ -140,10 +140,12 @@ class ProgramPonovitevPremiereCest
             'vlozekGostitelja'        => 1.24,
             'drugiJavni'              => 1.24,
             'obiskDoma'               => 1,
+            'obiskKopr'               => 1,
             'obiskGost'               => 1,
             'obiskZamejo'             => 1,
             'obiskInt'                => 1,
             'ponoviDoma'              => 1,
+            'ponoviKopr'              => 1,
             'ponoviZamejo'            => 1,
             'ponoviGost'              => 1,
             'ponoviInt'               => 1,
@@ -172,10 +174,12 @@ class ProgramPonovitevPremiereCest
             'vlozekGostitelja'        => 4.23,
             'drugiJavni'              => 4.56,
             'obiskDoma'               => 4,
+            'obiskKopr'               => 4,
             'obiskGost'               => 4,
             'obiskZamejo'             => 4,
             'obiskInt'                => 4,
             'ponoviDoma'              => 4,
+            'ponoviKopr'              => 4,
             'ponoviZamejo'            => 4,
             'ponoviGost'              => 4,
             'ponoviInt'               => 4,
@@ -230,10 +234,12 @@ class ProgramPonovitevPremiereCest
         $I->assertEquals($ent['vlozekGostitelja'], 1.24);
         $I->assertEquals($ent['drugiJavni'], 1.24);
         $I->assertEquals($ent['obiskDoma'], 1);
+        $I->assertEquals($ent['obiskKopr'], 1);
         $I->assertEquals($ent['obiskGost'], 1);
         $I->assertEquals($ent['obiskZamejo'], 1, "obisk za mejo");
         $I->assertEquals($ent['obiskInt'], 0, "obisk Int");
         $I->assertEquals($ent['ponoviDoma'], 1);
+        $I->assertEquals($ent['ponoviKopr'], 1);
         $I->assertEquals($ent['ponoviZamejo'], 1);
         $I->assertEquals($ent['ponoviGost'], 1);
         $I->assertEquals($ent['ponoviInt'], 0);
@@ -433,10 +439,12 @@ class ProgramPonovitevPremiereCest
             'vlozekGostitelja'        => 1.24,
             'drugiJavni'              => 1.24,
             'obiskDoma'               => 1,
+            'obiskKopr'               => 1,
             'obiskGost'               => 1,
             'obiskZamejo'             => 1,
             'obiskInt'                => 1,
             'ponoviDoma'              => 1,
+            'ponoviKopr'              => 1,
             'ponoviZamejo'            => 1,
             'ponoviGost'              => 1,
 //            'ponoviInt'            => 1,

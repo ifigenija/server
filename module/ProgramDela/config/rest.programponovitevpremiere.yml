@@ -20,10 +20,12 @@ forms:
             - celotnaVrednostGostovSZ
             - drugiJavni
             - obiskDoma
+            - obiskKopr
             - obiskGost
             - obiskZamejo
 #            - obiskInt
             - ponoviDoma
+            - ponoviKopr
             - ponoviZamejo
             - ponoviGost
 #            - ponoviInt
