@@ -19,7 +19,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  *     "gostujoci"="ProgramDela\Entity\ProgramGostujoca",
  *     "gostovanje"="ProgramDela\Entity\ProgramGostovanje",
  *     "razno"="ProgramDela\Entity\ProgramRazno",
- *     "festival"="ProgramDela\Entity\ProgramFestival"
+ *     "festival"="ProgramDela\Entity\ProgramFestival",
+ *     "enota"="ProgramDela\Entity\EnotaPrograma"
  * }
  * )
  * 
