@@ -1,17 +1,9 @@
 <?php
 
-/**
- * Local Configuration Override
- *
- * This configuration override file is for overriding environment-specific and
- * security-sensitive configuration information. Copy this file without the
- * .dist extension at the end and populate values as needed.
- *
- */
+
 return array(
-    'tip' => array(
-        'useOptimizedJs' => true,
-        'firma' => '7777'
+    'ifigenija' => array(
+        'local_dir' => ''
     ),
     'doctrine' => array(
         'connection' => array(
@@ -26,14 +18,6 @@ return array(
                 )
             )
         ),
-        'configuration' => array(
-            'orm_default' => array(
-                'metadata_cache' => 'apc',
-                'query_cache' => 'apc',
-                'result_cache' => 'apc',
-                'driver' => 'orm_default',
-                'generate_proxies' => false,
-            )
-        ),
+
     )
 );

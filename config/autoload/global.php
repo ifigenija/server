@@ -42,6 +42,27 @@ return [
             ],
         ]
     ],
+        'doctrine'        => [
+        'configuration'            => [
+            'orm_default' => [
+                'metadata_cache'   => 'apc',
+                'query_cache'      => 'apc',
+                'result_cache'     => 'apc',
+                'hydration_cache'  => 'apc',
+                'driver'           => 'orm_default',
+                'generate_proxies' => false,
+            ]
+        ],
+        // migrations configuration
+        'migrations_configuration' => array(
+            'orm_default' => array(
+                'directory' => 'migrations',
+                'name'      => 'Doctrine Database Migrations',
+                'namespace' => 'DoctrineORMModule\Migrations',
+                'table'     => 'migrations',
+            ),
+        ),
+    ],
     'view_manager'    => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
