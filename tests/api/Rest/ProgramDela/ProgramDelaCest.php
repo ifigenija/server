@@ -98,6 +98,8 @@ class ProgramDelaCest
     private $drzavaUrl                    = '/rest/drzava';
     private $objDrzava1;
     private $objDrzava2;
+    private $rpcOptionsUrl                = '/rpc/app/options';
+    private $maticnoGledalisce;
 
     public function _before(ApiTester $I)
     {
@@ -107,6 +109,18 @@ class ProgramDelaCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     * - getOptions  globalna vrednost
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiOpcijoMaticno(ApiTester $I)
+    {
+        $opt                     = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
+        $I->assertNotEmpty($opt);
+        $this->maticnoGledalisce = $opt;
     }
 
     /**
@@ -188,7 +202,7 @@ class ProgramDelaCest
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "total records");
 
-        $ind                         = array_search("0900", array_column($resp['data'], 'ident'));
+        $ind                         = array_search($this->maticnoGledalisce, array_column($resp['data'], 'ident'));
         $this->lookProdukcijskaHisa1 = $lookPH                      = $resp['data'][$ind];
         codecept_debug($lookPH);
 
@@ -1654,7 +1668,7 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(0.66, $entR['vrPS1GostovSZ'], "vr ps1 gostov slo zam");
         $I->assertGreaterThanOrEqual(166.07, $entR['vrPS1Do']);
         $I->assertGreaterThanOrEqual(112, $entR['stIzvNekomerc'], "št nekomerc");
-        $I->assertEquals($entR['stIzvPrem']+$entR['stIzvPonPrem']+$entR['stIzvPonPrej']+$entR['stIzvGostuj']+$entR['stIzvOstalihNek'], $entR['stIzvNekomerc'], "št nekomerc kot vsota a+b+c+d");
+        $I->assertEquals($entR['stIzvPrem'] + $entR['stIzvPonPrem'] + $entR['stIzvPonPrej'] + $entR['stIzvGostuj'] + $entR['stIzvOstalihNek'], $entR['stIzvNekomerc'], "št nekomerc kot vsota a+b+c+d");
         $I->assertGreaterThanOrEqual(4, $entR['stIzvPrem'], "št. izvedb premier");
         $I->assertGreaterThanOrEqual(48, $entR['stIzvPonPrem'], "št. izvedb pon premier");
         $I->assertGreaterThanOrEqual(12, $entR['stIzvPonPremDoma'], "stIzvPonPremDoma  ");

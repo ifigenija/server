@@ -32,6 +32,7 @@ return [
         'invokables' => [
             'Rpc\aaa' => 'Aaa\Controller\RpcController',
             'Aaa\Cli' => 'Aaa\Controller\CliController',
+            'App\Cli' => 'App\Controller\CliController',
         ],
     ],
     'console'         => [
@@ -94,7 +95,16 @@ return [
                             'action'     => 'list'
                         ]
                     ]
-                ]
+                ],
+                'matica-create'     => [
+                    'options' => [
+                        'route'    => 'matica [--naziv=]',
+                        'defaults' => [
+                            'controller' => 'App\Cli',
+                            'action'     => 'createMatico'
+                        ]
+                    ]
+                ],
             ]
         ]
     ],

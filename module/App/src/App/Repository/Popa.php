@@ -18,7 +18,6 @@ use Max\Repository\AbstractMaxRepository;
 class Popa
         extends AbstractMaxRepository
 {
-
     protected $sortOptions = [
         "default" => [
             "sifra" => ["alias" => "p.sifra"],

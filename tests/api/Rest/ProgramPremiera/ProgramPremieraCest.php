@@ -41,6 +41,8 @@ class ProgramPremieraCest
     private $uprizoritevUrl         = '/rest/uprizoritev';
     private $lookUprizoritev;
     private $tipProgramskeEnoteUrl  = '/rest/tipprogramskeenote';
+    private $rpcOptionsUrl          = '/rpc/app/options';
+    private $maticnoGledalisce;
     private $lookTipProgramskeEnote1;
     private $lookTipProgramskeEnote2;
     private $lookTipProgramskeEnote3;
@@ -71,6 +73,18 @@ class ProgramPremieraCest
     }
 
     /**
+     * - getOptions  globalna vrednost
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiOpcijoMaticno(ApiTester $I)
+    {
+        $opt                     = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
+        $I->assertNotEmpty($opt);
+        $this->maticnoGledalisce = $opt;
+    }
+
+    /**
      * 
      * @param ApiTester $I
      */
@@ -83,7 +97,7 @@ class ProgramPremieraCest
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "total records");
 
-        $ind                         = array_search("0900", array_column($resp['data'], 'ident'));
+        $ind                         = array_search($this->maticnoGledalisce, array_column($resp['data'], 'ident'));
         $this->lookProdukcijskaHisa1 = $lookPH                      = $resp['data'][$ind];
         codecept_debug($lookPH);
 

@@ -52,6 +52,8 @@ class ProgramPonovitevPrejsnjihCest
     protected $lookProdukcijskaHisa3;
     protected $lookProdukcijskaHisa4;
     protected $lookProdukcijskaHisa5;
+    private $rpcOptionsUrl            = '/rpc/app/options';
+    private $maticnoGledalisce;
 
     public function _before(ApiTester $I)
     {
@@ -61,6 +63,18 @@ class ProgramPonovitevPrejsnjihCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     * - getOptions  globalna vrednost
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiOpcijoMaticno(ApiTester $I)
+    {
+        $opt                     = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
+        $I->assertNotEmpty($opt);
+        $this->maticnoGledalisce = $opt;
     }
 
     /**
@@ -76,7 +90,7 @@ class ProgramPonovitevPrejsnjihCest
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "total records");
 
-        $ind                         = array_search("0900", array_column($resp['data'], 'ident'));
+        $ind                         = array_search($this->maticnoGledalisce, array_column($resp['data'], 'ident'));
         $this->lookProdukcijskaHisa1 = $lookPH                      = $resp['data'][$ind];
         codecept_debug($lookPH);
 

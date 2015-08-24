@@ -27,7 +27,7 @@ class ProdukcijskaHisaFixture
 
     public function getDependencies()
     {
-        return array('TestFixture\PopaFixture', 'TestFixture\PopaMaticnoTestFixture');
+        return array('TestFixture\PopaFixture');
     }
 
     /**
