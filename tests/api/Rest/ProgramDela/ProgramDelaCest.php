@@ -1654,9 +1654,22 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(0.66, $entR['vrPS1GostovSZ'], "vr ps1 gostov slo zam");
         $I->assertGreaterThanOrEqual(166.07, $entR['vrPS1Do']);
         $I->assertGreaterThanOrEqual(112, $entR['stIzvNekomerc'], "št nekomerc");
+        $I->assertEquals($entR['stIzvPrem']+$entR['stIzvPonPrem']+$entR['stIzvPonPrej']+$entR['stIzvGostuj']+$entR['stIzvOstalihNek'], $entR['stIzvNekomerc'], "št nekomerc kot vsota a+b+c+d");
         $I->assertGreaterThanOrEqual(4, $entR['stIzvPrem'], "št. izvedb premier");
         $I->assertGreaterThanOrEqual(48, $entR['stIzvPonPrem'], "št. izvedb pon premier");
+        $I->assertGreaterThanOrEqual(12, $entR['stIzvPonPremDoma'], "stIzvPonPremDoma  ");
+        $I->assertGreaterThanOrEqual(13, $entR['stIzvPonPremZamejo'], "stIzvPonPremZamejo");
+        $I->assertGreaterThanOrEqual(14, $entR['stIzvPonPremGost'], "stIzvPonPremGost");
+        $I->assertGreaterThanOrEqual(9, $entR['stIzvPonPremInt'], "stIzvPonPremInt");
+        $I->assertGreaterThanOrEqual(4, $entR['stIzvPonPremKopr'], "stIzvPonPremKopr");
+        $I->assertGreaterThanOrEqual(0, $entR['stIzvPonPremKoprInt'], "stIzvPonPremKoprInt");
         $I->assertGreaterThanOrEqual(47, $entR['stIzvPonPrej'], "št. izvedb prejšnjih");
+        $I->assertGreaterThanOrEqual(11, $entR['stIzvPonPrejDoma'], "stIzvPonPrejDoma  ");
+        $I->assertGreaterThanOrEqual(12, $entR['stIzvPonPrejZamejo'], "stIzvPonPrejZamejo");
+        $I->assertGreaterThanOrEqual(13, $entR['stIzvPonPrejGost'], "stIzvPonPrejGost");
+        $I->assertGreaterThanOrEqual(8, $entR['stIzvPonPrejKopr'], "stIzvPonPrejKopr");
+        $I->assertGreaterThanOrEqual(11, $entR['stIzvPonPrejInt'], "stIzvPonPremInt");
+        $I->assertGreaterThanOrEqual(11, $entR['stIzvPonPrejKoprInt'], "stIzvPonPremKoprInt");
         $I->assertGreaterThanOrEqual(4, $entR['stIzvGostuj'], "št. izvedb gostujočih");
         $I->assertGreaterThanOrEqual(9, $entR['stIzvOstalihNek'], "št. izvedb ostalih nekom");
         $I->assertGreaterThanOrEqual(27, $entR['stIzvGostovanjSlo'], "");
@@ -1667,6 +1680,11 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(38, $entR['stObiskNekomGostSlo'], "");
         $I->assertGreaterThanOrEqual(22, $entR['stObiskNekomGostZam'], "");
         $I->assertGreaterThanOrEqual(18, $entR['stObiskNekomGostInt'], "");
+        $I->assertGreaterThanOrEqual(25, $entR['stObiskPrem'], "stObiskPrem");
+        $I->assertGreaterThanOrEqual(65, $entR['stObiskPonPrem'], "stObiskPonPrem");
+        $I->assertGreaterThanOrEqual(23, $entR['stObiskPonPremDoma'], "stObiskPonPremDoma");
+        $I->assertGreaterThanOrEqual(33, $entR['stObiskPonPremKopr'], "stObiskPonPremKopr");
+        $I->assertGreaterThanOrEqual(9, $entR['stObiskPonPremKoprInt'], "stObiskPonPremKoprInt");
         $I->assertEquals($entR['avgObiskPrired'], round($entR['stObiskNekom'] / $entR['stIzvNekomerc'], 2), "povprečno št. obiskovalcev");     //kvocient drugih dveh števil
         $I->assertGreaterThanOrEqual(141, $entR['stHonorarnih'], "");
         $I->assertGreaterThanOrEqual(28, $entR['stHonorarnihIgr'], "");
@@ -2122,7 +2140,19 @@ class ProgramDelaCest
         $I->assertEquals($oldPD['stIzvNekomerc'], $entR['stIzvNekomerc'], "št nekomerc");
         $I->assertEquals($oldPD['stIzvPrem'], $entR['stIzvPrem'], "št. izvedb premier");
         $I->assertEquals($oldPD['stIzvPonPrem'], $entR['stIzvPonPrem'], "št. izvedb pon premier");
+        $I->assertEquals($oldPD['stIzvPonPremDoma'], $entR['stIzvPonPremDoma'], "stIzvPonPremDoma");
+        $I->assertEquals($oldPD['stIzvPonPremZamejo'], $entR['stIzvPonPremZamejo'], "stIzvPonPremZamejo");
+        $I->assertEquals($oldPD['stIzvPonPremGost'], $entR['stIzvPonPremGost'], "stIzvPonPremGost");
+        $I->assertEquals($oldPD['stIzvPonPremKopr'], $entR['stIzvPonPremKopr'], "stIzvPonPremKopr");
+        $I->assertEquals($oldPD['stIzvPonPremKoprInt'], $entR['stIzvPonPremKoprInt'], "stIzvPonPremKoprInt");
+        $I->assertEquals($oldPD['stIzvPonPremInt'], $entR['stIzvPonPremInt'], "stIzvPonPremInt");
         $I->assertEquals($oldPD['stIzvPonPrej'], $entR['stIzvPonPrej'], "št. izvedb prejšnjih");
+        $I->assertEquals($oldPD['stIzvPonPrejDoma'], $entR['stIzvPonPrejDoma'], "stIzvPonPrejDoma");
+        $I->assertEquals($oldPD['stIzvPonPrejZamejo'], $entR['stIzvPonPrejZamejo'], "stIzvPonPrejZamejo");
+        $I->assertEquals($oldPD['stIzvPonPrejGost'], $entR['stIzvPonPrejGost'], "stIzvPonPrejGost");
+        $I->assertEquals($oldPD['stIzvPonPrejKopr'], $entR['stIzvPonPrejKopr'], "stIzvPonPrejKopr");
+        $I->assertEquals($oldPD['stIzvPonPrejKoprInt'], $entR['stIzvPonPrejKoprInt'], "stIzvPonPrejKoprInt");
+        $I->assertEquals($oldPD['stIzvPonPrejInt'], $entR['stIzvPonPrejInt'], "stIzvPonPrejInt");
         $I->assertEquals($oldPD['stIzvGostuj'], $entR['stIzvGostuj'], "št. izvedb gostujočih");
         $I->assertEquals($oldPD['stIzvOstalihNek'], $entR['stIzvOstalihNek'], "št. izvedb ostalih nekom");
         $I->assertEquals($oldPD['stIzvGostovanjSlo'], $entR['stIzvGostovanjSlo'], "");
@@ -2133,6 +2163,11 @@ class ProgramDelaCest
         $I->assertEquals($oldPD['stObiskNekomGostSlo'], $entR['stObiskNekomGostSlo'], "");
         $I->assertEquals($oldPD['stObiskNekomGostZam'], $entR['stObiskNekomGostZam'], "");
         $I->assertEquals($oldPD['stObiskNekomGostInt'], $entR['stObiskNekomGostInt'], "");
+        $I->assertEquals($oldPD['stObiskPrem'], $entR['stObiskPrem'], "stObiskPrem");
+        $I->assertEquals($oldPD['stObiskPonPrem'], $entR['stObiskPonPrem'], "stObiskPonPrem");
+        $I->assertEquals($oldPD['stObiskPonPremDoma'], $entR['stObiskPonPremDoma'], "stObiskPonPremDoma");
+        $I->assertEquals($oldPD['stObiskPonPremKopr'], $entR['stObiskPonPremKopr'], "stObiskPonPremKopr");
+        $I->assertEquals($oldPD['stObiskPonPremKoprInt'], $entR['stObiskPonPremKoprInt'], "stObiskPonPremKoprInt");
         $I->assertEquals($oldPD['avgObiskPrired'], $entR['avgObiskPrired'], "povprečno št. obiskovalcev");     //kvocient drugih dveh števil
         $I->assertEquals($oldPD['stHonorarnih'], $entR['stHonorarnih'], "");
         $I->assertEquals($oldPD['stHonorarnihIgr'], $entR['stHonorarnihIgr'], "");
