@@ -288,11 +288,107 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPonPremDoma", description="programDela.d.stIzvPonPremDoma")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPonPremDoma;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPonPremZamejo", description="programDela.d.stIzvPonPremZamejo")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPonPremZamejo;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPonPremGost", description="programDela.d.stIzvPonPremGost")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPonPremGost;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPonPremKopr", description="programDela.d.stIzvPonPremKopr")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPonPremKopr;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPonPremInt", description="programDela.d.stIzvPonPremInt")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPonPremInt;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPonPremKoprInt", description="programDela.d.stIzvPonPremKoprInt")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPonPremKoprInt;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="programDela.stIzvPonPrej", description="programDela.d.stIzvPonPrej")
      * @Max\Ui(type="integer")
      * @var integer
      */
     protected $stIzvPonPrej;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPonPrejDoma", description="programDela.d.stIzvPonPrejDoma")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPonPrejDoma;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPonPrejZamejo", description="programDela.d.stIzvPonPrejZamejo")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPonPrejZamejo;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPonPrejGost", description="programDela.d.stIzvPonPrejGost")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPonPrejGost;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPonPrejKopr", description="programDela.d.stIzvPonPrejKopr")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPonPrejKopr;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPonPrejInt", description="programDela.d.stIzvPonPrejInt")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPonPrejInt;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPonPrejKoprInt", description="programDela.d.stIzvPonPrejKoprInt")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPonPrejKoprInt;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -373,6 +469,46 @@ class ProgramDela
      * @var integer
      */
     protected $stObiskNekomGostInt;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskPrem", description="programDela.d.stObiskPrem")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stObiskPrem;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskPonPrem", description="programDela.d.stObiskPonPrem")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stObiskPonPrem;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskPonPremDoma", description="programDela.d.stObiskPonPremDoma")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stObiskPonPremDoma;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskPonPremKopr", description="programDela.d.stObiskPonPremKopr")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stObiskPonPremKopr;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskPonPremKoprInt", description="programDela.d.stObiskPonPremKoprInt")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stObiskPonPremKoprInt;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
@@ -742,72 +878,93 @@ class ProgramDela
      */
     public function preracunaj($smer = false)
     {
-        $this->stPonPrejMalih            = 0;  //init
-        $this->stPonPrejMalihKopr        = 0;  //init
-        $this->stPonPrejSredKopr         = 0;  //init
-        $this->stPonPrejVelikihKopr      = 0;  //init
-        $this->vrPS1                     = 0;  //init
-        $this->vrPS1Do                   = 0;  //init
-        $this->vrPS1Mat                  = 0;  //init
-        $this->vrPS1GostovSZ             = 0;  //init
-        $this->stIzvNekomerc             = 0;  //init
-        $this->stIzvPrem                 = 0;  //init
-        $this->stIzvPonPrem              = 0;  //init
-        $this->stIzvPonPrej              = 0;  //init
-        $this->stIzvGostuj               = 0;  //init
-        $this->stIzvOstalihNek           = 0;  //init
-        $this->stIzvGostovanjSlo         = 0;  //init
-        $this->stIzvGostovanjZam         = 0;  //init
-        $this->stIzvGostovanjInt         = 0;  //init
-        $this->stObiskNekom              = 0;  //init
-        $this->stObiskNekomMat           = 0;  //init
-        $this->stObiskNekomGostSlo       = 0;  //init
-        $this->stObiskNekomGostZam       = 0;  //init
-        $this->stObiskNekomGostInt       = 0;  //init
-        $this->stHonorarnih              = 0;  //init
-        $this->stHonorarnihIgr           = 0;  //init
-        $this->stHonorarnihIgrTujJZ      = 0;  //init
-        $this->stHonorarnihIgrSamoz      = 0;  //init
-        $this->sredstvaAvt               = 0;  //init
-        $this->sredstvaAvtSamoz          = 0;  //init
-        $this->sredstvaInt               = 0;  //init
-        $this->stKoprodukcij             = 0;  //init
-        $this->stKoprodukcijInt          = 0;  //init
-        $this->stKoprodukcijNVO          = 0;  //init
-        $this->stPonPrejVelikih          = 0;  //init
-        $this->sredstvaZaprosenoPrem     = 0;  //init
-        $this->sredstvaZaprosenoPonPrem  = 0;  //init
-        $this->sredstvaZaprosenoPonPrej  = 0;  //init
-        $this->sredstvaZaprosenoGostujo  = 0;  //init
-        $this->sredstvaZaprosenoInt      = 0;  //init
-        $this->sredstvaZaprosenoFest     = 0;  //init
-        $this->sredstvaZaprosenoRazno    = 0;  //init
-        $this->sredstvaZaprosenoIzjem    = 0;  //init
-        $this->sredstvaDrugiJavniPrem    = 0;  //init
-        $this->sredstvaDrugiJavniPonPrem = 0;  //init
-        $this->sredstvaDrugiJavniPonPrej = 0;  //init
-        $this->sredstvaDrugiJavniGostujo = 0;  //init
-        $this->sredstvaDrugiJavniInt     = 0;  //init
-        $this->sredstvaDrugiJavniFest    = 0;  //init
-        $this->sredstvaDrugiJavniRazno   = 0;  //init
-        $this->sredstvaDrugiJavniIzjem   = 0;  //init
-        $this->sredstvaDrugiViriPrem     = 0;  //init
-        $this->sredstvaDrugiViriPonPrem  = 0;  //init
-        $this->sredstvaDrugiViriPonPrej  = 0;  //init
-        $this->sredstvaDrugiViriGostujo  = 0;  //init
-        $this->sredstvaDrugiViriInt      = 0;  //init
-        $this->sredstvaDrugiViriFest     = 0;  //init
-        $this->sredstvaDrugiViriRazno    = 0;  //init
-        $this->sredstvaDrugiViriIzjem    = 0;  //init
+        /**
+         * init
+         */
+        $this->stPonPrejMalih            = 0;
+        $this->stPonPrejMalihKopr        = 0;
+        $this->stPonPrejSredKopr         = 0;
+        $this->stPonPrejVelikihKopr      = 0;
+        $this->vrPS1                     = 0;
+        $this->vrPS1Do                   = 0;
+        $this->vrPS1Mat                  = 0;
+        $this->vrPS1GostovSZ             = 0;
+        $this->stIzvNekomerc             = 0;
+        $this->stIzvPrem                 = 0;
+        $this->stIzvPonPrem              = 0;
+        $this->stIzvPonPremDoma          = 0;
+        $this->stIzvPonPremZamejo        = 0;
+        $this->stIzvPonPremGost          = 0;
+        $this->stIzvPonPremKopr          = 0;
+        $this->stIzvPonPremInt           = 0;
+        $this->stIzvPonPremKoprInt       = 0;
+        $this->stIzvPonPrej              = 0;
+        $this->stIzvPonPrejDoma          = 0;
+        $this->stIzvPonPrejZamejo        = 0;
+        $this->stIzvPonPrejGost          = 0;
+        $this->stIzvPonPrejKopr          = 0;
+        $this->stIzvPonPrejInt           = 0;
+        $this->stIzvPonPrejKoprInt       = 0;
+        $this->stIzvGostuj               = 0;
+        $this->stIzvOstalihNek           = 0;
+        $this->stIzvGostovanjSlo         = 0;
+        $this->stIzvGostovanjZam         = 0;
+        $this->stIzvGostovanjInt         = 0;
+        $this->stObiskNekom              = 0;
+        $this->stObiskNekomMat           = 0;
+        $this->stObiskNekomGostSlo       = 0;
+        $this->stObiskNekomGostZam       = 0;
+        $this->stObiskNekomGostInt       = 0;
+        $this->stObiskPrem               = 0;
+        $this->stObiskPonPrem            = 0;
+        $this->stObiskPonPremDoma        = 0;
+        $this->stObiskPonPremKopr        = 0;
+        $this->stObiskPonPremKoprInt     = 0;
+        $this->stHonorarnih              = 0;
+        $this->stHonorarnihIgr           = 0;
+        $this->stHonorarnihIgrTujJZ      = 0;
+        $this->stHonorarnihIgrSamoz      = 0;
+        $this->sredstvaAvt               = 0;
+        $this->sredstvaAvtSamoz          = 0;
+        $this->sredstvaInt               = 0;
+        $this->stKoprodukcij             = 0;
+        $this->stKoprodukcijInt          = 0;
+        $this->stKoprodukcijNVO          = 0;
+        $this->stPonPrejVelikih          = 0;
+        $this->sredstvaZaprosenoPrem     = 0;
+        $this->sredstvaZaprosenoPonPrem  = 0;
+        $this->sredstvaZaprosenoPonPrej  = 0;
+        $this->sredstvaZaprosenoGostujo  = 0;
+        $this->sredstvaZaprosenoInt      = 0;
+        $this->sredstvaZaprosenoFest     = 0;
+        $this->sredstvaZaprosenoRazno    = 0;
+        $this->sredstvaZaprosenoIzjem    = 0;
+        $this->sredstvaDrugiJavniPrem    = 0;
+        $this->sredstvaDrugiJavniPonPrem = 0;
+        $this->sredstvaDrugiJavniPonPrej = 0;
+        $this->sredstvaDrugiJavniGostujo = 0;
+        $this->sredstvaDrugiJavniInt     = 0;
+        $this->sredstvaDrugiJavniFest    = 0;
+        $this->sredstvaDrugiJavniRazno   = 0;
+        $this->sredstvaDrugiJavniIzjem   = 0;
+        $this->sredstvaDrugiViriPrem     = 0;
+        $this->sredstvaDrugiViriPonPrem  = 0;
+        $this->sredstvaDrugiViriPonPrej  = 0;
+        $this->sredstvaDrugiViriGostujo  = 0;
+        $this->sredstvaDrugiViriInt      = 0;
+        $this->sredstvaDrugiViriFest     = 0;
+        $this->sredstvaDrugiViriRazno    = 0;
+        $this->sredstvaDrugiViriIzjem    = 0;
+
 
         $this->stPremier = $this->getPremiere()->count();
         $this->stPonPrem = $this->getPonovitvePremiere()->count();
         $this->stPonPrej = $this->getPonovitvePrejsnjih()->count();
         $this->stGostujo = $this->getGostujoci()->count();
-        $this->stInt = $this->getGostovanja()->count();
-        $this->stFest = $this->getProgramiFestival()->count();
-        $this->stRazno = $this->getProgramiRazno()->count();
-        $this->stIzjem = $this->getIzjemni()->count();
+        $this->stInt     = $this->getGostovanja()->count();
+        $this->stFest    = $this->getProgramiFestival()->count();
+        $this->stRazno   = $this->getProgramiRazno()->count();
+        $this->stIzjem   = $this->getIzjemni()->count();
 
         /**
          * premiere
@@ -822,6 +979,8 @@ class ProgramDela
             $this->stIzvPrem+=$object->getPonoviDoma();
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
+            $this->stObiskPrem +=$object->getObiskDoma();
+
             $this->stHonorarnih +=$object->getStHonorarnih();
             $this->stHonorarnihIgr +=$object->getStHonorarnihIgr();
             $this->stHonorarnihIgrTujJZ +=$object->getStHonorarnihIgrTujJZ();
@@ -846,12 +1005,20 @@ class ProgramDela
             $this->vrPS1GostovSZ+= $object->getCelotnaVrednostGostovSZ();
             $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
             $this->stIzvPonPrem+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
+            $this->stIzvPonPremDoma+=$object->getPonoviDoma();
+            $this->stIzvPonPremZamejo+=$object->getPonoviZamejo();
+            $this->stIzvPonPremGost+=$object->getPonoviGost();
+            $this->stIzvPonPremKopr = $object->getPonoviKopr();
             $this->stIzvGostovanjSlo +=$object->getPonoviGost();
             $this->stIzvGostovanjZam +=$object->getPonoviZamejo();
             $this->stObiskNekom +=$object->getObiskDoma() + $object->getObiskGost() + $object->getObiskZamejo();
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stObiskNekomGostSlo +=$object->getObiskGost();
             $this->stObiskNekomGostZam +=$object->getObiskZamejo();
+            $this->stObiskPonPrem +=$object->getObiskDoma() + $object->getObiskGost() + $object->getObiskZamejo();
+            $this->stObiskPonPremDoma +=$object->getObiskDoma();
+            $this->stObiskPonPremKopr +=$object->getObiskKopr();
+
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
             $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
             $this->sredstvaZaprosenoPonPrem+=$object->getZaproseno();
@@ -873,6 +1040,10 @@ class ProgramDela
             $this->vrPS1GostovSZ+= $object->getCelotnaVrednostGostovSZ();
             $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
             $this->stIzvPonPrej+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
+            $this->stIzvPonPrejDoma+=$object->getPonoviDoma();
+            $this->stIzvPonPrejZamejo+=$object->getPonoviZamejo();
+            $this->stIzvPonPrejGost+=$object->getPonoviGost();
+            $this->stIzvPonPrejKopr = $object->getPonoviKopr();
             $this->stIzvGostovanjSlo +=$object->getPonoviGost();
             $this->stIzvGostovanjZam +=$object->getPonoviZamejo();
             $this->stObiskNekom +=$object->getObiskDoma() + $object->getObiskGost() + $object->getObiskZamejo();
@@ -953,9 +1124,14 @@ class ProgramDela
             }
             if ($obstajaPonPrem) {
                 $this->stIzvPonPrem+=$object->getPonoviInt();
+                $this->stIzvPonPremInt+=$object->getPonoviInt();
+                $this->stIzvPonPremKoprInt+=$object->getPonoviKoprInt();
+                $this->stObiskPonPremKoprInt+=$object->getObiskKoprInt();
             } else {
                 // če ni uprizoritev iz ponovitve (letošnje) premiere je najverjetneje  iz ponovitve premiere prejšnjih sezon
                 $this->stIzvPonPrej+=$object->getPonoviInt();
+                $this->stIzvPonPrejInt+=$object->getPonoviInt();
+                $this->stIzvPonPrejKoprInt+=$object->getPonoviKoprInt();
             }
             $this->sredstvaZaprosenoInt+=$object->getZaproseno();
             $this->sredstvaDrugiJavniInt+=$object->getDrugiJavni();
@@ -1006,9 +1182,9 @@ class ProgramDela
             if ($smer == \Max\Consts::DOWN) {
                 $object->preracunaj(\Max\Consts::DOWN);
             }
-            $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost()+ $object->getPonoviInt();
-            $this->stIzvOstalihNek+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost()+ $object->getPonoviInt();
-            $this->stObiskNekom +=$object->getObiskDoma() + $object->getObiskGost() + $object->getObiskZamejo()+ $object->getObiskInt();
+            $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost() + $object->getPonoviInt();
+            $this->stIzvOstalihNek+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost() + $object->getPonoviInt();
+            $this->stObiskNekom +=$object->getObiskDoma() + $object->getObiskGost() + $object->getObiskZamejo() + $object->getObiskInt();
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stObiskNekomGostSlo +=$object->getObiskGost();
             $this->stObiskNekomGostZam +=$object->getObiskZamejo();
@@ -1030,7 +1206,7 @@ class ProgramDela
     public function validate($mode = 'update')
     {
         $this->expect($this->zacetek <= $this->konec, "Datum konca mora biti za datumom začetka", 1000500);
-        
+
         $this->validateIntGE0($this->stFest, "Št. festivalov", 1000710);
         $this->validateIntGE0($this->stGostujo, "Št. gostujočih", 1000711);
         $this->validateIntGE0($this->stHonorarnih, "Št. honorarnih", 1000712);
@@ -1069,7 +1245,6 @@ class ProgramDela
         $this->validateIntGE0($this->stZaposIgralcev, "Št. zaposlenih igralcev", 1000745);
         $this->validateIntGE0($this->stZaposlenih, "Št. zaposlenih", 1000746);
 
-        
         $this->validateEuroGE0($this->avgCenaVstopnice, "avgCenaVstopnice", 1000750);
         $this->validateEuroGE0($this->avgObiskPrired, "avgObiskPrired", 1000751);
         $this->validateEuroGE0($this->avgStNastopovIgr, "avgStNastopovIgr", 1000752);
@@ -1192,6 +1367,26 @@ class ProgramDela
         return $this->stPremier;
     }
 
+    public function getStInt()
+    {
+        return $this->stInt;
+    }
+
+    public function getStFest()
+    {
+        return $this->stFest;
+    }
+
+    public function getStRazno()
+    {
+        return $this->stRazno;
+    }
+
+    public function getStIzjem()
+    {
+        return $this->stIzjem;
+    }
+
     public function getStPonPrem()
     {
         return $this->stPonPrem;
@@ -1267,9 +1462,69 @@ class ProgramDela
         return $this->stIzvPonPrem;
     }
 
+    public function getStIzvPonPremDoma()
+    {
+        return $this->stIzvPonPremDoma;
+    }
+
+    public function getStIzvPonPremZamejo()
+    {
+        return $this->stIzvPonPremZamejo;
+    }
+
+    public function getStIzvPonPremGost()
+    {
+        return $this->stIzvPonPremGost;
+    }
+
+    public function getStIzvPonPremKopr()
+    {
+        return $this->stIzvPonPremKopr;
+    }
+
+    public function getStIzvPonPremInt()
+    {
+        return $this->stIzvPonPremInt;
+    }
+
+    public function getStIzvPonPremKoprInt()
+    {
+        return $this->stIzvPonPremKoprInt;
+    }
+
     public function getStIzvPonPrej()
     {
         return $this->stIzvPonPrej;
+    }
+
+    public function getStIzvPonPrejDoma()
+    {
+        return $this->stIzvPonPrejDoma;
+    }
+
+    public function getStIzvPonPrejZamejo()
+    {
+        return $this->stIzvPonPrejZamejo;
+    }
+
+    public function getStIzvPonPrejGost()
+    {
+        return $this->stIzvPonPrejGost;
+    }
+
+    public function getStIzvPonPrejKopr()
+    {
+        return $this->stIzvPonPrejKopr;
+    }
+
+    public function getStIzvPonPrejInt()
+    {
+        return $this->stIzvPonPrejInt;
+    }
+
+    public function getStIzvPonPrejKoprInt()
+    {
+        return $this->stIzvPonPrejKoprInt;
     }
 
     public function getStIzvGostuj()
@@ -1320,6 +1575,26 @@ class ProgramDela
     public function getStObiskNekomGostInt()
     {
         return $this->stObiskNekomGostInt;
+    }
+
+    public function getStObiskPrem()
+    {
+        return $this->stObiskPrem;
+    }
+
+    public function getStObiskPonPremDoma()
+    {
+        return $this->stObiskPonPremDoma;
+    }
+
+    public function getStObiskPonPremKopr()
+    {
+        return $this->stObiskPonPremKopr;
+    }
+
+    public function getStObiskPonPremKoprInt()
+    {
+        return $this->stObiskPonPremKoprInt;
     }
 
     public function getAvgObiskPrired()
@@ -1629,6 +1904,30 @@ class ProgramDela
         return $this;
     }
 
+    public function setStInt($stInt)
+    {
+        $this->stInt = $stInt;
+        return $this;
+    }
+
+    public function setStFest($stFest)
+    {
+        $this->stFest = $stFest;
+        return $this;
+    }
+
+    public function setStRazno($stRazno)
+    {
+        $this->stRazno = $stRazno;
+        return $this;
+    }
+
+    public function setStIzjem($stIzjem)
+    {
+        $this->stIzjem = $stIzjem;
+        return $this;
+    }
+
     public function setStPonPrem($stPonPrem)
     {
         $this->stPonPrem = $stPonPrem;
@@ -1719,9 +2018,81 @@ class ProgramDela
         return $this;
     }
 
+    public function setStIzvPonPremDoma($stIzvPonPremDoma)
+    {
+        $this->stIzvPonPremDoma = $stIzvPonPremDoma;
+        return $this;
+    }
+
+    public function setStIzvPonPremZamejo($stIzvPonPremZamejo)
+    {
+        $this->stIzvPonPremZamejo = $stIzvPonPremZamejo;
+        return $this;
+    }
+
+    public function setStIzvPonPremGost($stIzvPonPremGost)
+    {
+        $this->stIzvPonPremGost = $stIzvPonPremGost;
+        return $this;
+    }
+
+    public function setStIzvPonPremKopr($stIzvPonPremKopr)
+    {
+        $this->stIzvPonPremKopr = $stIzvPonPremKopr;
+        return $this;
+    }
+
+    public function setStIzvPonPremInt($stIzvPonPremInt)
+    {
+        $this->stIzvPonPremInt = $stIzvPonPremInt;
+        return $this;
+    }
+
+    public function setStIzvPonPremKoprInt($stIzvPonPremKoprInt)
+    {
+        $this->stIzvPonPremKoprInt = $stIzvPonPremKoprInt;
+        return $this;
+    }
+
     public function setStIzvPonPrej($stIzvPonPrej)
     {
         $this->stIzvPonPrej = $stIzvPonPrej;
+        return $this;
+    }
+
+    public function setStIzvPonPrejDoma($stIzvPonPrejDoma)
+    {
+        $this->stIzvPonPrejDoma = $stIzvPonPrejDoma;
+        return $this;
+    }
+
+    public function setStIzvPonPrejZamejo($stIzvPonPrejZamejo)
+    {
+        $this->stIzvPonPrejZamejo = $stIzvPonPrejZamejo;
+        return $this;
+    }
+
+    public function setStIzvPonPrejGost($stIzvPonPrejGost)
+    {
+        $this->stIzvPonPrejGost = $stIzvPonPrejGost;
+        return $this;
+    }
+
+    public function setStIzvPonPrejKopr($stIzvPonPrejKopr)
+    {
+        $this->stIzvPonPrejKopr = $stIzvPonPrejKopr;
+        return $this;
+    }
+
+    public function setStIzvPonPrejInt($stIzvPonPrejInt)
+    {
+        $this->stIzvPonPrejInt = $stIzvPonPrejInt;
+        return $this;
+    }
+
+    public function setStIzvPonPrejKoprInt($stIzvPonPrejKoprInt)
+    {
+        $this->stIzvPonPrejKoprInt = $stIzvPonPrejKoprInt;
         return $this;
     }
 
@@ -1782,6 +2153,30 @@ class ProgramDela
     public function setStObiskNekomGostInt($stObiskNekomGostInt)
     {
         $this->stObiskNekomGostInt = $stObiskNekomGostInt;
+        return $this;
+    }
+
+    public function setStObiskPrem($stObiskPrem)
+    {
+        $this->stObiskPrem = $stObiskPrem;
+        return $this;
+    }
+
+    public function setStObiskPonPremDoma($stObiskPonPremDoma)
+    {
+        $this->stObiskPonPremDoma = $stObiskPonPremDoma;
+        return $this;
+    }
+
+    public function setStObiskPonPremKopr($stObiskPonPremKopr)
+    {
+        $this->stObiskPonPremKopr = $stObiskPonPremKopr;
+        return $this;
+    }
+
+    public function setStObiskPonPremKoprInt($stObiskPonPremKoprInt)
+    {
+        $this->stObiskPonPremKoprInt = $stObiskPonPremKoprInt;
         return $this;
     }
 
@@ -2031,47 +2426,14 @@ class ProgramDela
         return $this;
     }
 
-    public function getStInt()
+    public function getStObiskPonPrem()
     {
-        return $this->stInt;
+        return $this->stObiskPonPrem;
     }
 
-    public function getStFest()
+    public function setStObiskPonPrem($stObiskPonPrem)
     {
-        return $this->stFest;
-    }
-
-    public function getStRazno()
-    {
-        return $this->stRazno;
-    }
-
-    public function getStIzjem()
-    {
-        return $this->stIzjem;
-    }
-
-    public function setStInt($stInt)
-    {
-        $this->stInt = $stInt;
-        return $this;
-    }
-
-    public function setStFest($stFest)
-    {
-        $this->stFest = $stFest;
-        return $this;
-    }
-
-    public function setStRazno($stRazno)
-    {
-        $this->stRazno = $stRazno;
-        return $this;
-    }
-
-    public function setStIzjem($stIzjem)
-    {
-        $this->stIzjem = $stIzjem;
+        $this->stObiskPonPrem = $stObiskPonPrem;
         return $this;
     }
 
