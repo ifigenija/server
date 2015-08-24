@@ -191,21 +191,5 @@ class Users
         $query = $this->getEntityManager()->createQuery($dql);
         return $query->getArrayResult();
     }
-    
-     /* Preverim, če ima šifro in če je user vpisal geslo 
-     * @param User $object
-     * @param array $params
-     */
-    public function create($object, $params = null)
-    {
-        //omogoči userja, če je ta vpisal geslo
-        if($object->password !== '' && $object->password !== null){
-            $object->setEnabled(true);
-        }else{
-            $object->setEnabled(false);
-        }
-        
-        parent::create($object, $params);
-    }
 
 }
