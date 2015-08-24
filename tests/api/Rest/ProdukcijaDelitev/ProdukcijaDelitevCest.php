@@ -164,37 +164,33 @@ class ProdukcijaDelitevCest
         $data      = [
 //            'odstotekFinanciranja' => 40,
             'delez'         => 3500,
-            'zaproseno'     => 50,
             'enotaPrograma' => $this->objProgramPremiera1['id'],
             'koproducent'   => $this->lookProdukcijskaHisa1['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
 //        codecept_debug($ent);
         // kreiram še en zapis
         $data       = [
 //            'odstotekFinanciranja' => 20,
             'delez'         => 3500,
-            'zaproseno'     => 100,
             'enotaPrograma' => $this->objProgramPremiera2['id'],
             'koproducent'   => $this->lookProdukcijskaHisa1['id'],
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
 //        codecept_debug($ent);
 //        
         // kreiram še en zapis za nematično podjetje
         $data       = [
 //            'odstotekFinanciranja' => 20,
-            'delez'         => 1700,
-            'zaproseno'     => 100,
+            'delez'         => 1800,
             'enotaPrograma' => $this->objProgramPremiera2['id'],
             'koproducent'   => $this->lookProdukcijskaHisa2['id'],
         ];
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
 //        codecept_debug($ent);
-        $I->assertEquals($ent['zaproseno'], 100);
     }
 
     /**
@@ -227,11 +223,11 @@ class ProdukcijaDelitevCest
     public function update(ApiTester $I)
     {
         $ent              = $this->obj3;
-        $ent['zaproseno'] = 22;
+        $ent['delez'] = 1700;
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['zaproseno'], 22);
+        $I->assertEquals($entR['delez'], 1700);
     }
 
     /**
@@ -244,10 +240,9 @@ class ProdukcijaDelitevCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj3['id']);
 
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         $I->assertEquals($ent['delez'], 1700.00);
         $I->assertEquals($ent['odstotekFinanciranja'], 15.89); //$$ odvisno od  celotne vrednosti
-        $I->assertEquals($ent['zaproseno'], 22);
         $I->assertEquals($ent['enotaPrograma'], $this->objProgramPremiera2['id']);
         $I->assertEquals($ent['koproducent'], $this->lookProdukcijskaHisa2['id']);
     }
@@ -288,18 +283,18 @@ class ProdukcijaDelitevCest
      * @depends create
      * @param ApiTester $I
      */
-    public function updateZNapacnimiZaproseno(ApiTester $I)
-    {
-        $data              = $I->successfullyGet($this->restUrl, $this->obj3['id']);
-        codecept_debug($data);
-        $data['zaproseno'] = 1700.01;
-        $resp              = $I->failToUpdate($this->restUrl, $data['id'], $data);
-        $I->assertEquals(1000413, $resp[0]['code']);
-
-        $data['zaproseno'] = -0.01;
-        $resp              = $I->failToUpdate($this->restUrl, $data['id'], $data);
-        $I->assertEquals(1000415, $resp[0]['code']);
-    }
+//    public function updateZNapacnimiZaproseno(ApiTester $I)
+//    {
+//        $data              = $I->successfullyGet($this->restUrl, $this->obj3['id']);
+//        codecept_debug($data);
+//        $data['zaproseno'] = 1700.01;
+//        $resp              = $I->failToUpdate($this->restUrl, $data['id'], $data);
+//        $I->assertEquals(1000413, $resp[0]['code']);
+//
+//        $data['zaproseno'] = -0.01;
+//        $resp              = $I->failToUpdate($this->restUrl, $data['id'], $data);
+//        $I->assertEquals(1000415, $resp[0]['code']);
+//    }
 
     /**
      *  test validate - možen le 1 delitev iste enote programa za istim koproducentom
@@ -343,7 +338,6 @@ class ProdukcijaDelitevCest
         $data = [
 //            'odstotekFinanciranja' => 40,
             'delez'         => 5000,
-            'zaproseno'     => 50,
             'enotaPrograma' => $this->objProgramPremiera3['id'],
             'koproducent'   => $this->lookProdukcijskaHisa5['id'], // ni matični JZ
         ];

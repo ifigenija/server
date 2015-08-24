@@ -1456,18 +1456,16 @@ class ProgramDelaCest
      */
     public function createVecKoprodukcij(ApiTester $I)
     {
-//        $data                   = [
-//            'delez'         => 0.49,
-//            'zaproseno'     => 0.25,
-//            'enotaPrograma' => $this->objProgramPremiera1['id'],
-//            'koproducent'   => $this->lookProdukcijskaHisa1['id'],
-//        ];
-//        $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
-//        $I->assertGuid($ent['id']);
+        $data                   = [
+            'delez'         => 0.49,
+            'enotaPrograma' => $this->objProgramPremiera1['id'],
+            'koproducent'   => $this->lookProdukcijskaHisa3['id'],
+        ];
+        $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+        $I->assertGuid($ent['id']);
 
         $data = [
             'delez'         => 37.1,
-            'zaproseno'     => 18,
             'enotaPrograma' => $this->objProgramPremiera1['id'],
             'koproducent'   => $this->lookProdukcijskaHisa2['id'],
         ];
@@ -1476,7 +1474,6 @@ class ProgramDelaCest
 
         $data                   = [
             'delez'         => 11.2,
-            'zaproseno'     => 2.2,
             'enotaPrograma' => $this->objProgramPremiera1['id'],
             'koproducent'   => $this->lookProdukcijskaHisa4['id'],
         ];
@@ -1913,9 +1910,6 @@ class ProgramDelaCest
     public function updateProgramPremieraValidacije(ApiTester $I)
     {
 //        $this->expect($zaproseno <= $maxZaproseno, "Zaprošeno (" . $zaproseno . ") je lahko največ 70% deleža mat. JZ(" . $maxZaproseno . ")", 1000442);
-// koprodukcije:
-//                $this->expect(($zaproseno <= $delez), "Zaprošeno (" . $zaproseno . ") ne sme biti večje od deleža (" . $delez . ") ", 1000413);
-        //pri validaciji ne bi smel najti samega sebe
         $data              = $this->objProgramPremiera1;
         $data['zaproseno'] = 3.47;
         $ent               = $I->successfullyUpdate($this->programPremieraUrl, $data['id'], $data);
@@ -1927,32 +1921,6 @@ class ProgramDelaCest
         $I->assertNotEmpty($resp);
         $I->assertEquals(1000442, $resp[0]['code']);
 
-        $data              = $this->objProgramPremiera1;
-        $data['zaproseno'] = 5;
-        $resp              = $I->failToUpdate($this->programPremieraUrl, $data['id'], $data);
-        $I->assertNotEmpty($resp);
-        $I->assertEquals(1000413, $resp[0]['code']);
-    }
-
-    /**
-     * test validacij  
-     *  
-     * @param ApiTester $I
-     */
-    public function updateProgramPremieraAliPropagacijaProcenta(ApiTester $I)
-    {
-        $noviZaprosen      = 3;
-        //pri validaciji ne bi smel najti samega sebe
-        $data              = $I->successfullyGet($this->programPremieraUrl, $this->objProgramPremiera1['id']);
-        $data['zaproseno'] = $noviZaprosen;
-        $ent               = $I->successfullyUpdate($this->programPremieraUrl, $data['id'], $data);
-        $I->assertGuid($ent['id']);
-        codecept_debug($ent);
-
-        $kopId                  = $ent['koprodukcije'][0]['id'];   //predvidevamo, da je matični v 1. polju 
-        $this->objKoprodukcija1 = $ent                    = $I->successfullyGet($this->produkcijaDelitevUrl, $kopId);
-        $I->assertNotEmpty($ent);
-        $I->assertEquals($noviZaprosen, $ent['zaproseno']);
     }
 
     /**

@@ -47,15 +47,6 @@ class ProdukcijaDelitev
     protected $delez;
 
     /**
-     * zaprošen znesek pri MK
-     * 
-     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
-     * @Max\I18n(label="prodel.zaproseno", description="prodel.zaproseno")
-     * @var double
-     */
-    protected $zaproseno;
-
-    /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\EnotaPrograma", inversedBy="koprodukcije")
      * @Max\I18n(label="prodel.enotaPrograma", description="prodel.d.enotaPrograma")   
      * @Max\Ui(type="hiddenid")
@@ -100,7 +91,6 @@ class ProdukcijaDelitev
     public function preracunaj($smer = false)
     {
         if ($this->getMaticniKop()) {
-            $this->zaproseno = $this->getEnotaPrograma()->getZaproseno();
             $this->delez     = $this->getEnotaPrograma()->getNasDelez();
         }
 
@@ -140,11 +130,8 @@ class ProdukcijaDelitev
         $this->expect($this->getEnotaPrograma(), 'Ni enote programa za to koprodukcijo', 1000410);
 
         $this->validateProcGE0LE100($this->odstotekFinanciranja, "Odstotek financiranja", 1000412);
-        $this->validateEuroGE0($this->zaproseno, "Zaprošeno", 1000415);
         $this->validateEuroGE0($this->delez, "Delež", 1000416);
-        $zaproseno       = \Max\Functions::procRoundS($this->zaproseno);
-        $delez           = \Max\Functions::procRoundS($this->delez);
-        $this->expect(($zaproseno <= $delez), "Zaprošeno (" . $zaproseno . ") ne sme biti večje od deleža (" . $delez . ") ", 1000413);
+        $delez     = \Max\Functions::procRoundS($this->delez);
 
         //$$ kontrole za vsoto procentov
         // za isto enoto programa je lahko le 1 delitev z isto produkcijsko hišo     
@@ -171,74 +158,70 @@ class ProdukcijaDelitev
         return $this->getKoproducent()->getPopa()->getNaziv();
     }
 
-    function getId()
+    public function getId()
     {
         return $this->id;
     }
 
-    function getOdstotekFinanciranja()
+    public function getOdstotekFinanciranja()
     {
         return $this->odstotekFinanciranja;
     }
 
-    function getDelez()
+    public function getDelez()
     {
         return $this->delez;
     }
 
-    function getZaproseno()
-    {
-        return $this->zaproseno;
-    }
-
-    function getEnotaPrograma()
+    public function getEnotaPrograma()
     {
         return $this->enotaPrograma;
     }
 
-    function getKoproducent()
+    public function getKoproducent()
     {
         return $this->koproducent;
     }
 
-    function getMaticniKop()
+    public function getMaticniKop()
     {
         return $this->maticniKop;
     }
 
-    function setId($id)
+    public function setId($id)
     {
         $this->id = $id;
+        return $this;
     }
 
-    function setOdstotekFinanciranja($odstotekFinanciranja)
+    public function setOdstotekFinanciranja($odstotekFinanciranja)
     {
         $this->odstotekFinanciranja = $odstotekFinanciranja;
+        return $this;
     }
 
-    function setDelez($delez)
+    public function setDelez($delez)
     {
         $this->delez = $delez;
+        return $this;
     }
 
-    function setZaproseno($zaproseno)
-    {
-        $this->zaproseno = $zaproseno;
-    }
-
-    function setEnotaPrograma(\ProgramDela\Entity\EnotaPrograma $enotaPrograma)
+    public function setEnotaPrograma(\ProgramDela\Entity\EnotaPrograma $enotaPrograma)
     {
         $this->enotaPrograma = $enotaPrograma;
+        return $this;
     }
 
-    function setKoproducent(\ProgramDela\Entity\ProdukcijskaHisa $koproducent)
+    public function setKoproducent(\ProgramDela\Entity\ProdukcijskaHisa $koproducent)
     {
         $this->koproducent = $koproducent;
+        return $this;
     }
 
-    function setMaticniKop($maticniKop)
+    public function setMaticniKop($maticniKop)
     {
         $this->maticniKop = $maticniKop;
+        return $this;
     }
 
 }

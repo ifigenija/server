@@ -8,7 +8,6 @@ forms:
 #            - id
 #            - odstotekFinanciranja     # se izračuna glede na delez
             - delez        
-            - zaproseno   
             - enotaPrograma
             - koproducent
 #            - maticniKop   # se nastavi glede na koproducenta

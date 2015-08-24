@@ -26,24 +26,24 @@ class AuthPage
     public static $test4     = "test4@ifigenija.si";
     public static $test4Pass = "Test4abc";
     public static $ivo     = "ivo@ifigenija.si";
-    public static $ivoPass = "Ivo1234";
+    public static $ivoPass = "Ivo1234567";
     public static $tona     = "tona@ifigenija.si";
-    public static $tonaPass = "Tona1234";
+    public static $tonaPass = "Tona1234567";
     public static $irena     = "irena@ifigenija.si";
-    public static $irenaPass = "Irena1234";
+    public static $irenaPass = "Irena1234567";
     public static $tatjana     = "tatjana@ifigenija.si";
-    public static $tatjanaPass = "Tatjana1234";
+    public static $tatjanaPass = "Tatjana1234567";
     public static $joze     = "joze@ifigenija.si";
-    public static $jozePass = "Joze1234";
+    public static $jozePass = "Joze1234567";
     public static $petra     = "petra@ifigenija.si";
-    public static $petraPass = "Petra1234";
+    public static $petraPass = "Petra1234567";
     public static $ali     = "ali@ifigenija.si";
-    public static $aliPass = "Ali1234";
+    public static $aliPass = "Ali1234567";
     public static $berta     = "berta@ifigenija.si";
-    public static $bertaPass = "Berta1234";
+    public static $bertaPass = "Berta1234567";
     public static $aaron     = "aaron@ifigenija.si";
-    public static $aaronPass = "Aaron1234";
+    public static $aaronPass = "Aaron1234567";
     public static $vesna     = "vesna@ifigenija.si";
-    public static $vesnaPass = "Vesna1234";         //
+    public static $vesnaPass = "Vesna1234567";         //
 
 }

@@ -40,7 +40,7 @@ class UserPwdCest
         $data      = [
             'email'    => 'test3@ifigenija.si',
             'name'     => 'Testni uporabnik za testiranje gesla',
-            'password' => 'abc123',
+            'password' => 'abc123ABCasdf',
             'enabled' => true,
         ];
         $this->obj = $user      = $I->successfullyCreate($this->restUrl, $data);
@@ -60,7 +60,7 @@ class UserPwdCest
     {
         $res = $I->successfullyCallRpc($this->rpcUrl, 'login', [
             'username' => 'test3@ifigenija.si',
-            'password' =>  'abc123',
+            'password' =>  'abc123ABCasdf',
         ]);
 
         $I->assertEquals('test3@ifigenija.si', $res['username'], 'preveri vrnjeno uporabniško ime');

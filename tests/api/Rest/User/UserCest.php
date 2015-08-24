@@ -85,7 +85,7 @@ class UserCest
         $data      = [
             'email'              => 'test2@ifigenija.si',
             'name'               => 'Testni uporabnik za Cest testiranje',
-            'password'           => 'zzzzzzzzzzzzzzzzzzz',
+            'password'           => 'abc123ASDF',
             'enabled'            => true,
             'expires'            => '2017-02-01T00:00:00+0100',
             'defaultRoute'       => 'zz',
@@ -99,7 +99,7 @@ class UserCest
         $data      = [
             'email'              => 'test6@ifigenija.si',
             'name'               => 'Testni uporabnik za Cest testiranje',
-            'password'           => 'asdfew',
+            'password'           => 'weiiw3948593845ASDFASEDF',
             'enabled'            => true,
             'expires'            => '2018-02-01T00:00:00+0100',
             'defaultRoute'       => 'aa',
