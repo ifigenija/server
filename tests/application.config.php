@@ -18,7 +18,8 @@ return array(
         'Prisotnost',
         'Prodaja',
         'Stevilcenje',
-        'TestAssets'
+        'ProgramDela',
+        'TestAssets',
     ),
     'module_listener_options' => array(
         'config_glob_paths' => array(

@@ -1,61 +1,61 @@
 -
     name: testni uporabnik za inšpicienta
     email: ivo@ifigenija.si
-    password: Ivo1234
+    password: Ivo1234567
     enabled: true
     roles: []
 -
     name: testni uporabnik za Tehničnega vodjo
     email: tona@ifigenija.si
-    password: Tona1234
+    password: Tona1234567
     enabled: true
     roles: []
 -
     name: testni uporabnik za igralca
     email: irena@ifigenija.si
-    password: Irena1234
+    password: Irena1234567
     enabled: true
     roles: []
 -
     name: testni uporabnik vnašalca termina storitev (TerminStoritve-vse)
     email: tatjana@ifigenija.si
-    password: Tatjana1234
+    password: Tatjana1234567
     enabled: true
     roles: []
 -
     name: testni uporabnik, ki je inšpicient brez zapisov v TerminStoritve
     email: joze@ifigenija.si
-    password: Joze1234
+    password: Joze1234567
     enabled: true
     roles: []
 -
     name: testna uporabnica, ki je planerka
     email: petra@ifigenija.si
-    password: Petra1234
+    password: Petra1234567
     enabled: true
     roles: []
 -
     name: testni uporabnik, ki dobi ifi-all vlogo
     email: ali@ifigenija.si
-    password: Ali1234
+    password: Ali1234567
     enabled: true
     roles: []
 -
     name: testni uporabnik, ki dobi ifi-readall vlogo
     email: berta@ifigenija.si
-    password: Berta1234
+    password: Berta1234567
     enabled: true
     roles: []
 -
     name: testni uporabnik, ki dobi aaa-write dovoljenje
     email: aaron@ifigenija.si
-    password: Aaron1234
+    password: Aaron1234567
     enabled: true
     roles: []
 -
     name: testni uporabnik ki dobi vsa posamezna dovoljenja
     email: vesna@ifigenija.si
-    password: Vesna1234
+    password: Vesna1234567
     enabled: true
     roles: 
         - vsadovoljenja

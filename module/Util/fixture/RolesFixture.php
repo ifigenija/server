@@ -79,7 +79,7 @@ class RolesFixture
         if (!$o) {
             $o        = new User();
             $o->setEmail($val['email']);
-            $password = uniqid() . uniqid();
+            $password = 'AaBbCc1' . uniqid() . uniqid();
             $o->setPassword($password);
             echo "User {$val['name']} geslo $password\n";
             $o->setName($val['name']);
