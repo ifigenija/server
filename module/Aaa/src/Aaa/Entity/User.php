@@ -140,7 +140,6 @@ class User
      */
     protected $tokenExpires;
 
-
     public function __construct()
     {
         $this->roles = new ArrayCollection();
@@ -173,7 +172,7 @@ class User
 
     public function setPassword($password)
     {
-        if ($password !== '') {
+        if ($password !== '' || $password !== null) {
             $bcrypt         = new Bcrypt();
             $bcrypt->setSalt(51292170311201451452855644564);  //$$ rb potrebno še dopolniti, da se bo salt generiral dinamično
             $bcrypt->setCost(5);
@@ -312,6 +311,5 @@ class User
         $this->enabled = $enabled;
         return $this;
     }
-
 
 }
