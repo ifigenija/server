@@ -16,9 +16,13 @@ use Exception;
 use Max\Exception\UnauthException;
 use Zend\Authentication\Adapter\Http;
 use Zend\Authentication\AuthenticationService;
+use Zend\Console\Adapter\AdapterInterface;
 use Zend\Console\Request;
 use Zend\EventManager\EventInterface;
+use Zend\Http\Header\Authorization;
+use Zend\Http\Request as Request2;
 use Zend\Http\Response;
+use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Paginator\Paginator;
@@ -29,6 +33,7 @@ use Zend\Paginator\Paginator;
  * @author boris
  */
 class Module
+        implements ConsoleUsageProviderInterface
 {
 
     //put your code here
@@ -68,11 +73,11 @@ class Module
             // handling autorizacij preko konzole
             $this->setIdentity('console@ifigenija.si', $auth, $em);
         } else {
-            /* @var $request \Zend\Http\Request */
+            /* @var $request Request2 */
             $request = $e->getRequest();
             $header  = $request->getHeader('Authorization');
 
-            if ($header instanceof \Zend\Http\Header\Authorization && strlen($header->getFieldValue()) > 10) {
+            if ($header instanceof Authorization && strlen($header->getFieldValue()) > 10) {
                 $this->tryHttpAuth($auth, $em, $e);
             }
         }
@@ -143,6 +148,14 @@ class Module
             $identity = null;
         }
         return $identity;
+    }
+
+    public function getConsoleUsage(AdapterInterface $console)
+    {
+        return [
+            'Nastavitve',
+            'matica [--force] <naziv>' => 'Kreiranje matičnega gledališča',
+        ];
     }
 
 }

@@ -95,16 +95,7 @@ return [
                             'action'     => 'list'
                         ]
                     ]
-                ],
-                'matica-create'     => [
-                    'options' => [
-                        'route'    => 'matica [--naziv=]',
-                        'defaults' => [
-                            'controller' => 'App\Cli',
-                            'action'     => 'createMatico'
-                        ]
-                    ]
-                ],
+                ]               
             ]
         ]
     ],

@@ -48,8 +48,6 @@ Class Module
             'user (enable|disable) <username>'                             => 'Omogoči/onemogoči uporabnika',
             'user (grant|revoke) <username> <rolename>'                    => 'Dodaj/odstrani uporabnika v/iz skupino(e)',
             '(user|role) list [--username=username] [--rolename=rolename]' => 'Seznam uporavnikov / vlog',
-            'Poslovni partnerji',
-            'matica [--naziv=naziv]'                                       => 'Kreiranje matičnega gledališča',
         ];
     }
 

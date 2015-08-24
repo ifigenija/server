@@ -22,11 +22,11 @@ class CliController
     {
         $naziv = $this->params('naziv');
         if (!$naziv) {
-            echo "Naziv ne sme biti prazen". PHP_EOL;
+            echo "Naziv ne sme biti prazen" . PHP_EOL;
             echo "Kreiranje matičnega gledališča ni mogoče" . PHP_EOL;
             throw new \Exception();
         }
-        
+
 
         $em      = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $popaR   = $em->getRepository('App\Entity\Popa');
@@ -42,9 +42,11 @@ class CliController
         $option        = $optionR->findOneByName($optionMaticno);
         if ($option) {
             $sifra = $option->getDefaultValue();
-            echo "Opcija " . $optionMaticno . " že obstaja z vrednostjo (šifro):" . $sifra . PHP_EOL;
-            echo "Kreiranje matičnega gledališča ni mogoče" . PHP_EOL;
-            throw new \Exception();
+            if (!$this->params('force')) {
+                echo "Opcija " . $optionMaticno . " že obstaja z vrednostjo (šifro):" . $sifra . PHP_EOL;
+                echo "Kreiranje matičnega gledališča ni mogoče" . PHP_EOL;
+                throw new \Exception();
+            }
         }
 
         /**
@@ -53,9 +55,9 @@ class CliController
         $popa = new \App\Entity\Popa();
         $em->persist($popa);
         if (empty($popa->getSifra())) {
-            $num = $this->getServiceLocator()->get('stevilcenje.generator');
+            $num   = $this->getServiceLocator()->get('stevilcenje.generator');
             $popa->setSifra($num->generate('popa'));
-            $sifra=$popa->getSifra($popa);
+            $sifra = $popa->getSifra($popa);
         }
         $popa->setNaziv($naziv);
         $popa->setTipKli('maticno');
@@ -65,8 +67,10 @@ class CliController
         /**
          * ustvarimo opcijo za matično gledališče
          */
-        $option = new \App\Entity\Option();
-        $em->persist($option);
+        if (!$this->params('force')) {
+            $option = new \App\Entity\Option();
+            $em->persist($option);
+        }
         $option->setName($optionMaticno);
         $option->setDefaultValue($sifra);
         $option->setType('string');

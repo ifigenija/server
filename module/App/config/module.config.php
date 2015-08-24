@@ -120,6 +120,23 @@ return [
             ]
         ]
     ],
+    
+    'console'         => [
+        'router' => [
+            'routes' => [
+               
+                'matica-create'     => [
+                    'options' => [
+                        'route'    => 'matica [--force] <naziv>',
+                        'defaults' => [
+                            'controller' => 'App\Cli',
+                            'action'     => 'createMatico'
+                        ]
+                    ]
+                ],
+            ]
+        ]
+    ],
     'form_elements'   => [
         'invokables' => [
         ]
