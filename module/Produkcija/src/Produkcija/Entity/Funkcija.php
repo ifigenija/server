@@ -154,7 +154,7 @@ class Funkcija
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\TipFunkcije", inversedBy="funkcije", fetch="EAGER")
      * @Max\I18n(label="funkcija.tipFunkcije",  description="funkcija.d.tipFunkcije")
-     * @Max\Ui(type="select")
+     * @Max\Ui(type="select", empty="Izberite funkcije")
      * @var \Produkcija\Entity\TipFunkcije
      */
     protected $tipFunkcije;

@@ -67,7 +67,7 @@ class CliController
         /**
          * ustvarimo opcijo za matično gledališče
          */
-        if (!$this->params('force')) {
+        if (!$option) {
             $option = new \App\Entity\Option();
             $em->persist($option);
         }
