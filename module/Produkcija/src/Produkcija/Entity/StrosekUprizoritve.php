@@ -35,7 +35,7 @@ class StrosekUprizoritve
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
      * @Max\I18n(label="strupr.vrednostDo", description="strupr.d.vrednostDo")
-     * @Max\Ui(required=true)
+     * @Max\Ui(required=true, icon="fa fa-euro")
      * @var double
      */
     protected $vrednostDo;
@@ -43,7 +43,7 @@ class StrosekUprizoritve
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
      * @Max\I18n(label="strupr.vrednostNa", description="strupr.d.vrednostNa")
-     * @Max\Ui(required=true)
+     * @Max\Ui(required=true,icon="fa fa-euro")
      * @var double
      */
     protected $vrednostNa;

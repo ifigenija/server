@@ -48,6 +48,7 @@ class ProgramGostovanje
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2)
      * @Max\I18n(label="gostovanje.transportniStroski", description="gostovanje.d.transportniStroski")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double     
      */
     protected $transportniStroski;
@@ -57,6 +58,7 @@ class ProgramGostovanje
      * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2)
      * @Max\I18n(label="gostovanje.dnevPrvZad", description="gostovanje.d.dnevPrvZad")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double     
      */
     protected $dnevPrvZad;

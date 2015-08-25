@@ -42,6 +42,7 @@ class ProdukcijaDelitev
      * 
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2)
      * @Max\I18n(label="prodel.delez", description="prodel.d.delez")
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $delez;

@@ -237,6 +237,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.vrPS1", description="programDela.d.vrPS1")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $vrPS1;
@@ -244,13 +245,15 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.vrPS1Do", description="programDela.d.vrPS1Do")   
-     * @var double
+      * @Max\Ui(icon="fa fa-euro")
+    * @var double
      */
     protected $vrPS1Do;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.vrPS1Mat", description="programDela.d.vrPS1Mat")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $vrPS1Mat;
@@ -258,6 +261,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.vrPS1GostovSZ", description="programDela.d.vrPS1GostovSZ")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $vrPS1GostovSZ;
@@ -527,6 +531,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.avgCenaVstopnice", description="programDela.d.avgCenaVstopnice")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $avgCenaVstopnice;
@@ -622,6 +627,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaInt", description="programDela.d.sredstvaInt")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaInt;
@@ -629,6 +635,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaAvt", description="programDela.d.sredstvaAvt")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaAvt;
@@ -636,6 +643,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaZaprosenoPrem", description="programDela.d.sredstvaZaprosenoPrem")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaZaprosenoPrem;
@@ -643,6 +651,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaZaprosenoPonPrem", description="programDela.d.sredstvaZaprosenoPonPrem")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaZaprosenoPonPrem;
@@ -650,6 +659,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaZaprosenoPonPrej", description="programDela.d.sredstvaZaprosenoPonPrej")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaZaprosenoPonPrej;
@@ -657,6 +667,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaZaprosenoGostujo", description="programDela.d.sredstvaZaprosenoGostujo")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaZaprosenoGostujo;
@@ -664,6 +675,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaZaprosenoInt", description="programDela.d.sredstvaZaprosenoInt")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaZaprosenoInt;
@@ -671,6 +683,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaZaprosenoFest", description="programDela.d.sredstvaZaprosenoFest")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaZaprosenoFest;
@@ -678,6 +691,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaZaprosenoRazno", description="programDela.d.sredstvaZaprosenoRazno")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaZaprosenoRazno;
@@ -685,6 +699,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaZaprosenoIzjem", description="programDela.d.sredstvaZaprosenoIzjem")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaZaprosenoIzjem;
@@ -692,6 +707,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiJavniPrem", description="programDela.d.sredstvaDrugiJavniPrem")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiJavniPrem;
@@ -699,6 +715,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiJavniPonPrem", description="programDela.d.sredstvaDrugiJavniPonPrem")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiJavniPonPrem;
@@ -706,6 +723,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiJavniPonPrej", description="programDela.d.sredstvaDrugiJavniPonPrej")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiJavniPonPrej;
@@ -713,6 +731,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiJavniGostujo", description="programDela.d.sredstvaDrugiJavniGostujo")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiJavniGostujo;
@@ -720,6 +739,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiJavniInt", description="programDela.d.sredstvaDrugiJavniInt")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiJavniInt;
@@ -727,6 +747,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiJavniFest", description="programDela.d.sredstvaDrugiJavniFest")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiJavniFest;
@@ -734,6 +755,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiJavniRazno", description="programDela.d.sredstvaDrugiJavniRazno")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiJavniRazno;
@@ -741,6 +763,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiJavniIzjem", description="programDela.d.sredstvaDrugiJavniIzjem")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiJavniIzjem;
@@ -748,6 +771,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiViriPrem", description="programDela.d.sredstvaDrugiViriPrem")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiViriPrem;
@@ -755,6 +779,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiViriPonPrem", description="programDela.d.sredstvaDrugiViriPonPrem")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiViriPonPrem;
@@ -762,6 +787,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiViriPonPrej", description="programDela.d.sredstvaDrugiViriPonPrej")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiViriPonPrej;
@@ -769,6 +795,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiViriGostujo", description="programDela.d.sredstvaDrugiViriGostujo")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiViriGostujo;
@@ -776,6 +803,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiViriInt", description="programDela.d.sredstvaDrugiViriInt")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiViriInt;
@@ -783,6 +811,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiViriFest", description="programDela.d.sredstvaDrugiViriFest")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiViriFest;
@@ -790,6 +819,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiViriRazno", description="programDela.d.sredstvaDrugiViriRazno")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiViriRazno;
@@ -797,6 +827,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaDrugiViriIzjem", description="programDela.d.sredstvaDrugiViriIzjem")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaDrugiViriIzjem;
@@ -804,6 +835,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaAvtSamoz", description="programDela.d.sredstvaAvtSamoz")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $sredstvaAvtSamoz;

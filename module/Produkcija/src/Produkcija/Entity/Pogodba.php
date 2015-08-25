@@ -65,6 +65,7 @@ class Pogodba
      * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="pogodba.vrednostVaje", description="pogodba.d.vrednostVaje")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $vrednostVaje;
@@ -89,6 +90,7 @@ class Pogodba
      * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="pogodba.vrednostVaj", description="pogodba.d.vrednostVaj")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $vrednostVaj;
@@ -96,6 +98,7 @@ class Pogodba
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=12, scale=2)
      * @Max\I18n(label="pogodba.vrednostPredstave", description="pogodba.d.vrednostPredstave")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $vrednostPredstave;
@@ -105,6 +108,7 @@ class Pogodba
      * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="pogodba.vrednostDoPremiere", description="pogodba.d.vrednostDoPremiere")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $vrednostDoPremiere;

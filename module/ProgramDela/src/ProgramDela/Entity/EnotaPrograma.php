@@ -45,6 +45,7 @@ class EnotaPrograma
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.celotnaVrednost", description="ep.d.celotnaVrednost")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $celotnaVrednost;
@@ -52,6 +53,7 @@ class EnotaPrograma
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.nasDelez", description="ep.d.nasDelez")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $nasDelez;
@@ -62,6 +64,7 @@ class EnotaPrograma
      * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.celotnaVrednostMat", description="ep.d.celotnaVrednostMat")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $celotnaVrednostMat;
@@ -72,6 +75,7 @@ class EnotaPrograma
      * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.celotnaVrednostGostovSZ", description="ep.d.celotnaVrednostGostovSZ")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $celotnaVrednostGostovSZ;
@@ -79,6 +83,7 @@ class EnotaPrograma
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.zaproseno", description="ep.d.zaproseno")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $zaproseno;
@@ -86,6 +91,7 @@ class EnotaPrograma
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.lastnaSredstva", description="ep.d.lastnaSredstva")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $lastnaSredstva;
@@ -93,6 +99,7 @@ class EnotaPrograma
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2,options={"default":0})
      * @Max\I18n(label="ep.avtorskiHonorarji", description="ep.d.avtorskiHonorarji")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $avtorskiHonorarji;
@@ -100,6 +107,7 @@ class EnotaPrograma
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2,options={"default":0})
      * @Max\I18n(label="ep.avtorskiHonorarjiSamoz", description="ep.d.avtorskiHonorarjiSamoz")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $avtorskiHonorarjiSamoz;
@@ -107,6 +115,7 @@ class EnotaPrograma
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.tantieme", description="ep.d.tantieme")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $tantieme;
@@ -114,6 +123,7 @@ class EnotaPrograma
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.avtorskePravice", description="ep.d.avtorskePravice")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $avtorskePravice;
@@ -121,6 +131,7 @@ class EnotaPrograma
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.materialni", description="ep.d.materialni")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $materialni;
@@ -155,6 +166,7 @@ class EnotaPrograma
      * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.vlozekGostitelja", description="ep.d.vlozekGostitelja")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $vlozekGostitelja;
@@ -162,6 +174,7 @@ class EnotaPrograma
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.drugiJavni", description="ep.d.drugiJavni")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $drugiJavni;
@@ -943,6 +956,7 @@ class EnotaPrograma
         $this->ponoviKoprInt = $ponoviKoprInt;
         return $this;
     }
+
     public function getKpe()
     {
         return $this->kpe;
@@ -953,6 +967,5 @@ class EnotaPrograma
         $this->kpe = $kpe;
         return $this;
     }
-
 
 }

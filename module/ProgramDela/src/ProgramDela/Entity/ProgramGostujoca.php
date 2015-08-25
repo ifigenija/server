@@ -27,6 +27,7 @@ class ProgramGostujoca
      * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="gostujoca.strosekOdkPred", description="gostujoca.d.strosekOdkPred")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $strosekOdkPred;
@@ -36,7 +37,8 @@ class ProgramGostujoca
      * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="gostujoca.stroskiOstali", description="gostujoca.d.stroskiOstali")   
-     * @var double
+      * @Max\Ui(icon="fa fa-euro")
+    * @var double
      */
     protected $stroskiOstali;
 

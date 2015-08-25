@@ -29,6 +29,7 @@ class DrugiVir
     /**
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="drugiVir.znesek", description="drugiVir.d.znesek")   
+     * @Max\Ui(icon="fa fa-euro")
      * @var double
      */
     protected $znesek;
