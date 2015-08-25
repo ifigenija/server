@@ -12,9 +12,9 @@ forms:
                   required: false
             - zacetek
             - konec
-            - tip
+#            - tip
             - delovnaObveza
-            - malica
+#            - malica
             - izmenskoDelo
             - individualnaPogodba
             - jeZaposlenVdrugemJz

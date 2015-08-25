@@ -53,7 +53,7 @@ class Zaposlitev
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="zaposlitev.konec",  description="zaposlitev.d.konec")
-     * @Max\Ui(required=true)
+     * @Max\Ui(required=false)
      * @var string
      */
     protected $konec;

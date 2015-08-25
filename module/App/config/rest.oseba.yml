@@ -16,7 +16,7 @@ forms:
             - funkcija
             - srednjeIme
             - psevdonim
-#            - polnoIme
+            - polnoIme
             - spol     
             - opombe
 #            - naslovi
