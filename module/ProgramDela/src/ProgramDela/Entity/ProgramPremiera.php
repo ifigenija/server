@@ -37,21 +37,21 @@ class ProgramPremiera
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
-        $this->stZaposlenih=0;
-        $this->celotnaVrednostGostovSZ=0;
-        $this->obiskKopr=0;
-        $this->obiskGost=0;
-        $this->obiskZamejo=0;
-        $this->obiskKoprInt=0;
-        $this->obiskInt=0;
-        $this->ponoviKopr=0;
-        $this->ponoviZamejo=0;
-        $this->ponoviGost=0;
-        $this->ponoviKoprInt=0;
-        $this->ponoviInt=0;
-        $this->vlozekGostitelja=0;
-        $this->naziv="";        // dobimo iz uprizoritve
-        
+        $this->stZaposlenih            = 0;
+        $this->celotnaVrednostGostovSZ = 0;
+        $this->obiskKopr               = 0;
+        $this->obiskGost               = 0;
+        $this->obiskZamejo             = 0;
+        $this->obiskKoprInt            = 0;
+        $this->obiskInt                = 0;
+        $this->ponoviKopr              = 0;
+        $this->ponoviZamejo            = 0;
+        $this->ponoviGost              = 0;
+        $this->ponoviKoprInt           = 0;
+        $this->ponoviInt               = 0;
+        $this->vlozekGostitelja        = 0;
+        $this->naziv                   = "";        // dobimo iz uprizoritve
+
         $this->setPonoviDoma(1);        // le premiera
         $this->preracunajPoljaZaMatKoprodukcijo();
 
@@ -68,8 +68,21 @@ class ProgramPremiera
         $this->expect(($this->getTipProgramskeEnote()), "Tip programske enote ne obstaja", 1000443);
         $this->expect($this->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000444);
 
+
+        /**
+         * preveri vrednost za tip programske enote
+         * - glede na vrednost matičnega
+         * - glede na vsoto koproducentov  (v entiteti prod. delitev)
+         */
+        $this->validateNumberGE0($this->kpe, "Koeficient programske enote", 1000445);
+        $kpe       = \Max\Functions::numberRoundS($this->kpe);
+        $maxfaktor = \Max\Functions::numberRoundS($this->getTipProgramskeEnote()->getMaxFaktor());
+        $this->expect($kpe <= $maxfaktor, "Koeficient programske enote (" . $kpe . ") ne sme biti večji kot maks. koeficient (" . $maxfaktor . ")", 1000446);
+
         if ($this->getDokument()) {
-// preveriti, ali že obstaja programpremiere z isto uprizoritvijo
+            /**
+             *  preveriti, ali že obstaja programpremiere z isto uprizoritvijo
+             */
             $obstaja = true;  //init
             if (!$this->getDokument()->getPremiere()->isEmpty()) {
                 $id      = $this->getId();

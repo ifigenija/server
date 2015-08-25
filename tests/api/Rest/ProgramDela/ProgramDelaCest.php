@@ -409,6 +409,7 @@ class ProgramDelaCest
 //            'ponoviGost'         => 1,
 //            'ponoviInt'          => 1,
             'tipProgramskeEnote'     => $this->lookTipProgramskeEnote5['id'],
+            'kpe'                    => 0.1,
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
             'sort'                   => 1,
             'stZaposUmet'            => 1,
@@ -447,6 +448,7 @@ class ProgramDelaCest
 //            'ponoviGost'         => 1,
 //            'ponoviInt'          => 1,
             'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
+            'kpe'                    => 0.1,
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
             'sort'                   => 2,
             'stZaposUmet'            => 2,
@@ -931,6 +933,7 @@ class ProgramDelaCest
             'stHonorarnihIgrTujJZ'   => 1,
             'stHonorarnihIgrSamoz'   => 1,
             'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
+            'kpe'                    => 0.1,
             'dokument'               => $this->obj2['id'],
             'uprizoritev'            => $this->lookUprizoritev3['id'], // ista uprizoritev
         ];
@@ -970,6 +973,7 @@ class ProgramDelaCest
             'stHonorarnihIgrTujJZ'   => 1,
             'stHonorarnihIgrSamoz'   => 1,
             'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
+            'kpe'                    => 0.1,
             'dokument'               => $this->obj2['id'],
         ];
         $resp = $I->failToCreate($this->programPremieraUrl, $data);
@@ -1008,6 +1012,7 @@ class ProgramDelaCest
             'stHonorarnihIgrTujJZ'   => 1,
             'stHonorarnihIgrSamoz'   => 1,
             'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
+            'kpe'                    => 0.1,
             'dokument'               => $this->obj2['id'],
         ];
         $ent  = $I->successfullyCreate($this->programPremieraUrl, $data);
@@ -1767,6 +1772,7 @@ class ProgramDelaCest
 //            'ponoviGost'         => 1,
 //            'ponoviInt'          => 1,
             'tipProgramskeEnote'     => $this->lookTipProgramskeEnote5['id'],
+            'kpe'                    => 0.1,
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
             'sort'                   => 8,
             'stZaposUmet'            => 9,
@@ -1920,7 +1926,6 @@ class ProgramDelaCest
         $resp              = $I->failToUpdate($this->programPremieraUrl, $data['id'], $data);
         $I->assertNotEmpty($resp);
         $I->assertEquals(1000442, $resp[0]['code']);
-
     }
 
     /**

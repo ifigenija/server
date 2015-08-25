@@ -76,6 +76,7 @@ class ProgramGostujoca
         $this->stHonorarnih            = 0;
         $this->stHonorarnihIgr         = 0;
         $this->stHonorarnihIgrTujJZ    = 0;
+        $this->kpe                     = 0;
         $this->naziv                   = "";        // dobimo iz uprizoritve
         $this->preracunajPoljaZaMatKoprodukcijo();
 

@@ -41,6 +41,7 @@ class ProgramPonovitevPrejsnjih
         $this->obiskInt        = 0;
         $this->ponoviKoprInt   = 0;
         $this->obiskKoprInt    = 0;
+        $this->kpe             = 0;
         $this->naziv           = "";        // dobimo iz uprizoritve ?
 
         $this->preracunajPoljaZaMatKoprodukcijo();

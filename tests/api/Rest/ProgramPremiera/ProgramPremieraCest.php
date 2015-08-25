@@ -33,29 +33,30 @@ use ApiTester;
 class ProgramPremieraCest
 {
 
-    private $restUrl                = '/rest/programpremiera';
+    private $restUrl                      = '/rest/programpremiera';
     private $obj1;
     private $obj2;
     private $obj3;
     private $obj4;
-    private $uprizoritevUrl         = '/rest/uprizoritev';
+    private $uprizoritevUrl               = '/rest/uprizoritev';
     private $lookUprizoritev;
-    private $tipProgramskeEnoteUrl  = '/rest/tipprogramskeenote';
-    private $rpcOptionsUrl          = '/rpc/app/options';
+    private $tipProgramskeEnoteUrl        = '/rest/tipprogramskeenote';
+    private $rpcOptionsUrl                = '/rpc/app/options';
     private $maticnoGledalisce;
     private $lookTipProgramskeEnote1;
     private $lookTipProgramskeEnote2;
     private $lookTipProgramskeEnote3;
     private $lookTipProgramskeEnote4;
     private $lookTipProgramskeEnote5;
-    private $drugiVirUrl            = '/rest/drugivir';
+    private $drugiVirUrl                  = '/rest/drugivir';
     private $objDrugiVir1;
     private $objDrugiVir2;
-    private $produkcijaDelitevUrl   = '/rest/produkcijadelitev';
+    private $produkcijaDelitevUrl         = '/rest/produkcijadelitev';
+    private $produkcijaDelitevUrlPremiera = '/rest/produkcijadelitev/premiera';
     private $objProdukcijaDelitev1;
     private $objProdukcijaDelitev2;
-    private $produkcijskaHisaUrl    = '/rest/produkcijskahisa';
-    private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
+    private $produkcijskaHisaUrl          = '/rest/produkcijskahisa';
+    private $lookupProdukcijskaHisa       = '/lookup/produkcijskahisa';
     private $lookProdukcijskaHisa1;
     private $lookProdukcijskaHisa2;
     private $lookProdukcijskaHisa3;
@@ -181,6 +182,7 @@ class ProgramPremieraCest
 //            'ponoviInt'          => 1,
             'uprizoritev'            => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
+            'kpe'                    => 0.4,
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
             'dokument'               => null,
             'sort'                   => 1,
@@ -217,6 +219,7 @@ class ProgramPremieraCest
 //            'ponoviInt'          => 4,
             'uprizoritev'            => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
+            'kpe'                    => 0.4,
             'dokument'               => null,
             'sort'                   => 2,
             'stZaposUmet'            => 2,
@@ -280,6 +283,7 @@ class ProgramPremieraCest
 //        $I->assertEquals($ent['ponoviInt'          ],1 );
         $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev['id']);
         $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote1['id']);
+        $I->assertEquals($ent['kpe'], 0.4);
         $I->assertEquals($ent['dokument'], null);
         $I->assertEquals($ent['sort'], 1, "sort");
         $I->assertEquals($ent['stZaposUmet'], 1);
@@ -390,21 +394,23 @@ class ProgramPremieraCest
             'odstotekFinanciranja' => 40,
             'delez'                => 2.6,
             'zaproseno'            => 2.1,
+            'kpe'                  => 0.1,
             'enotaPrograma'        => $this->obj2['id'],
             'koproducent'          => $this->lookProdukcijskaHisa1['id'],
         ];
-        $this->objProdukcijaDelitev1 = $ent                         = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+        $this->objProdukcijaDelitev1 = $ent                         = $I->successfullyCreate($this->produkcijaDelitevUrlPremiera, $data);
         $I->assertGuid($ent['id']);
 
         // kreiramo še en zapis
         $data                        = [
             'odstotekFinanciranja' => 20,
             'delez'                => 1.1,
+            'kpe'                  => 0.1,
             'zaproseno'            => 1.02,
             'enotaPrograma'        => $this->obj2['id'],
             'koproducent'          => $this->lookProdukcijskaHisa2['id'],
         ];
-        $this->objProdukcijaDelitev2 = $ent                         = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
+        $this->objProdukcijaDelitev2 = $ent                         = $I->successfullyCreate($this->produkcijaDelitevUrlPremiera, $data);
         $I->assertGuid($ent['id']);
     }
 
@@ -565,6 +571,58 @@ class ProgramPremieraCest
     }
 
     /**
+     * spremenim zapis za kontrolo zaokroževanja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateKontrolaValidacijeKpe(ApiTester $I)
+    {
+        $ent                       = $this->obj2;
+        $ent['tipProgramskeEnote'] = $this->lookTipProgramskeEnote3['id'];
+        $ent['kpe']                = 0.4;   // v praksi bo že klient zaokrožil na 2 mesti
+
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        /**
+         * $$ še:
+         *  <= maxfaktor, 
+         *  <= maxvsi faktor
+         */
+        $ent['kpe'] = 0.41;   // v praksi bo že klient zaokrožil na 2 mesti
+        $resp       = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000446, $resp[0]['code']);
+
+        $ent['kpe'] = -0.01;   // v praksi bo že klient zaokrožil na 2 mesti
+        $resp       = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000445, $resp[0]['code']);
+
+        /**
+         * kontrola vsot kpe koprodukcij
+         */
+        $kopr = [
+            'kpe'                  => 0.6,
+            'odstotekFinanciranja' => 20,
+            'delez'                => 1.1,
+            'enotaPrograma'        => $this->obj2['id'],
+            'koproducent'          => $this->lookProdukcijskaHisa2['id'],
+        ];
+        codecept_debug($kopr);
+        $kopr = $I->successfullyCreate($this->produkcijaDelitevUrlPremiera, $kopr);
+
+
+        $kopr['kpe'] = 0.61;
+        $resp        = $I->failToUpdate($this->produkcijaDelitevUrlPremiera, $kopr['id'], $kopr);
+        $I->assertEquals(1000415, $resp[0]['code']);
+
+        $kopr['kpe'] = -0.01;
+        $resp        = $I->failToUpdate($this->produkcijaDelitevUrlPremiera, $kopr['id'], $kopr);
+        $I->assertEquals(1000417, $resp[0]['code']);
+    }
+
+    /**
      * test validacije
      * 
      * @depends create
@@ -596,6 +654,7 @@ class ProgramPremieraCest
 //            'ponoviGost'         => 1,
 //            'ponoviInt'          => 1,
             'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
+            'kpe'                    => 0.4,
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
             'dokument'               => null,
             'sort'                   => 1,

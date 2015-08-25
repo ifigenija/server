@@ -11,6 +11,15 @@ forms:
             - enotaPrograma
             - koproducent
 #            - maticniKop   # se nastavi glede na koproducenta
+#            - kpe
+    
+#    če enota programa premiera, je polje KPE aktualno
+    premiera: 
+        elements:
+            - delez        
+            - enotaPrograma
+            - koproducent
+            - kpe
 lists:
     default: 
         filter:

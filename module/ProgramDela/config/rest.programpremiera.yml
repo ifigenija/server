@@ -28,6 +28,7 @@ forms:
 #            - ponoviInt
             - uprizoritev
             - tipProgramskeEnote
+            - kpe
             - dokument
             - sort
 #            - stZaposlenih

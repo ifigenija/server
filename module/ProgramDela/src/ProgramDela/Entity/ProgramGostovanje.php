@@ -109,6 +109,7 @@ class ProgramGostovanje
         $this->stZaposlenih            = 0;
         $this->stZaposUmet             = 0;
         $this->stZaposDrug             = 0;
+        $this->kpe                     = 0;
         $this->naziv                   = "";        // dobimo iz uprizoritve
 
         $this->preracunajPoljaZaMatKoprodukcijo();

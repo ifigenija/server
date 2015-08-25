@@ -31,6 +31,7 @@ class ProdukcijaDelitevCest
 {
 
     private $restUrl                = '/rest/produkcijadelitev';
+    private $restUrlPremiera                = '/rest/produkcijadelitev/premiera';
     private $produkcijskaHisaUrl    = '/rest/produkcijskahisa';
     private $popaUrl                = '/rest/popa';
     private $alternacijaUrl         = '/rest/alternacija';
@@ -59,7 +60,7 @@ class ProdukcijaDelitevCest
     private $objProgramPremiera1;
     private $objProgramPremiera2;
     private $objProgramPremiera3;
-    private $rpcOptionsUrl                = '/rpc/app/options';
+    private $rpcOptionsUrl          = '/rpc/app/options';
     private $maticnoGledalisce;
 
     public function _before(ApiTester $I)
@@ -72,8 +73,7 @@ class ProdukcijaDelitevCest
         
     }
 
-
-        /**
+    /**
      * - getOptions  globalna vrednost
      * 
      * @param ApiTester $I
@@ -161,13 +161,14 @@ class ProdukcijaDelitevCest
      */
     public function create(ApiTester $I)
     {
-        $data      = [
+        $data       = [
 //            'odstotekFinanciranja' => 40,
             'delez'         => 3500,
             'enotaPrograma' => $this->objProgramPremiera1['id'],
             'koproducent'   => $this->lookProdukcijskaHisa1['id'],
+            'kpe'           => 0.1,
         ];
-        $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj  = $ent        = $I->successfullyCreate($this->restUrlPremiera, $data);
         $I->assertGuid($ent['id']);
 //        codecept_debug($ent);
         // kreiram še en zapis
@@ -176,8 +177,9 @@ class ProdukcijaDelitevCest
             'delez'         => 3500,
             'enotaPrograma' => $this->objProgramPremiera2['id'],
             'koproducent'   => $this->lookProdukcijskaHisa1['id'],
+            'kpe'           => 0.1,
         ];
-        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrlPremiera, $data);
         $I->assertGuid($ent['id']);
 //        codecept_debug($ent);
 //        
@@ -187,8 +189,9 @@ class ProdukcijaDelitevCest
             'delez'         => 1800,
             'enotaPrograma' => $this->objProgramPremiera2['id'],
             'koproducent'   => $this->lookProdukcijskaHisa2['id'],
+            'kpe'           => 0.1,
         ];
-        $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj3 = $ent        = $I->successfullyCreate($this->restUrlPremiera, $data);
         $I->assertGuid($ent['id']);
 //        codecept_debug($ent);
     }
@@ -222,10 +225,10 @@ class ProdukcijaDelitevCest
      */
     public function update(ApiTester $I)
     {
-        $ent              = $this->obj3;
+        $ent          = $this->obj3;
         $ent['delez'] = 1700;
 
-        $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $this->obj = $entR      = $I->successfullyUpdate($this->restUrlPremiera, $ent['id'], $ent);
 
         $I->assertEquals($entR['delez'], 1700);
     }
@@ -245,6 +248,7 @@ class ProdukcijaDelitevCest
         $I->assertEquals($ent['odstotekFinanciranja'], 15.89); //$$ odvisno od  celotne vrednosti
         $I->assertEquals($ent['enotaPrograma'], $this->objProgramPremiera2['id']);
         $I->assertEquals($ent['koproducent'], $this->lookProdukcijskaHisa2['id']);
+        $I->assertEquals($ent['kpe'], 0.1);
     }
 
     /**
@@ -308,7 +312,7 @@ class ProdukcijaDelitevCest
 
         $data = $this->obj3;
 
-        $resp = $I->failToCreate($this->restUrl, $data);
+        $resp = $I->failToCreate($this->restUrlPremiera, $data);
         codecept_debug($resp);
         $I->assertEquals($resp[0]['code'], 1000411);
     }
@@ -320,7 +324,7 @@ class ProdukcijaDelitevCest
      */
     public function delete(ApiTester $I)
     {
-        $I->successfullyDelete($this->restUrl, $this->obj['id']);
+        $I->successfullyDelete($this->restUrlPremiera, $this->obj['id']);
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
 
@@ -339,9 +343,10 @@ class ProdukcijaDelitevCest
 //            'odstotekFinanciranja' => 40,
             'delez'         => 5000,
             'enotaPrograma' => $this->objProgramPremiera3['id'],
+            'kpe'           => 0.1,
             'koproducent'   => $this->lookProdukcijskaHisa5['id'], // ni matični JZ
         ];
-        $resp = $I->failToCreate($this->restUrl, $data);
+        $resp = $I->failToCreate($this->restUrlPremiera, $data);
         codecept_debug($resp);
         $I->assertEquals($resp[0]['code'], 1000414);
     }

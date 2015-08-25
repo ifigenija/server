@@ -150,6 +150,7 @@ class ProgramFestival
         $this->materialni           = 0;
         $this->avtorskePravice      = 0;
         $this->vlozekGostitelja     = 0;
+        $this->kpe                  = 0;
 
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
