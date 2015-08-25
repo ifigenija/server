@@ -9,7 +9,6 @@ forms:
             - name: sifra
               options: 
                   required: false                  
-            - tipkli           
             - stakli           
             - naziv
             - naziv1 

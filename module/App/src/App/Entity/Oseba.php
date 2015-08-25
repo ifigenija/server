@@ -70,7 +70,7 @@ class Oseba
     /**
      * @ORM\Column(length=40, nullable=true)
      * @Max\I18n(label="oseba.funkcija", description="oseba.d.funkcija")
-     * @Max\Ui(required=true)
+     * @Max\Ui(required=false)
      * @var string
      */
     protected $funkcija;

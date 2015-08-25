@@ -42,18 +42,6 @@ class Popa
     protected $sifra;
 
     /**
-     * Tip klienta - označuje vrsto poslovnega partnerja. 
-     * !!!!Sicer nima pravega pomena - mogoče za odstraniti, ker bomo 
-     * !!!!kupca tako ali tako dodali v tabelo kupcev 
-     * 
-     * @ORM\Column(length=20, nullable=true)
-     * @Max\I18n(label="popa.tipkli", description="popa.d.tipkli")
-     * @Max\Ui(type="select",opts="popa.tipkli",group="Osnovni podatki",required=true)
-     * @var string
-     */
-    protected $tipkli;
-
-    /**
      * Status klienta
      *  AK-aktiven
      *  NA-neaktiven
@@ -334,11 +322,6 @@ class Popa
         return $this->sifra;
     }
 
-    public function getTipkli()
-    {
-        return $this->tipkli;
-    }
-
     public function getStakli()
     {
         return $this->stakli;
@@ -468,12 +451,6 @@ class Popa
     public function setSifra($sifra)
     {
         $this->sifra = $sifra;
-        return $this;
-    }
-
-    public function setTipkli($tipkli)
-    {
-        $this->tipkli = $tipkli;
         return $this;
     }
 
