@@ -44,6 +44,7 @@ return [
             'Relation\produkcijaDelitev' => 'Max\Factory\ToManyControllerFactory',
             'Rest\tipFunkcije'           => 'Max\Factory\RestControllerFactory',
             'Rest\strosekUprizoritve'    => 'Max\Factory\RestControllerFactory',
+            'Rest\VrstaStroska'          => 'Max\Factory\RestControllerFactory',
         ],
     ],
     'router'          => [

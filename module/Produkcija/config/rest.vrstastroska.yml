@@ -1,0 +1,17 @@
+## YAML Template.
+---
+type: rest
+entityClass: Produkcija\Entity\VrstaStroska
+forms:
+    default: 
+        elements:
+#            - id
+            - skupina
+            - podskupina
+            - naziv
+            - opis
+lists:
+    default: 
+        hydrator:
+            exclude: []    
+      

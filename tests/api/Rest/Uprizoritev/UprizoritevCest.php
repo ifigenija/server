@@ -868,7 +868,7 @@ class UprizoritevCest
             'naziv'       => 'bb',
             'vrednostDo'  => 2.34,
             'vrednostNa'  => 4.56,
-            'tipstroska'  => 'materialni',
+            'tipstroska'  => 'avtorprav',
             'opis'        => 'bb',
             'sort'        => 1,
         ];
@@ -881,7 +881,7 @@ class UprizoritevCest
             'naziv'       => 'cc',
             'vrednostDo'  => 8.9,
             'vrednostNa'  => 9.1,
-            'tipstroska'  => 'materialni',
+            'tipstroska'  => 'avtorprav',
             'opis'        => 'cc',
             'sort'        => 2,
         ];
