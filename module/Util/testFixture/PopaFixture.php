@@ -46,13 +46,12 @@ class PopaFixture
         }
 
 
-        $o->setTipKli($v[1]);
-        $o->setStaKli($v[2]);
-        $o->setNaziv($v[3]);
+        $o->setStaKli($v[1]);
+        $o->setNaziv($v[2]);
 
-        $drzava = $drzavaR->findOneBySifra(trim($v[4]));
+        $drzava = $drzavaR->findOneBySifra(trim($v[3]));
         $o->setDrzava($drzava);
-        $o->setNvo($v[5]);
+        $o->setNvo($v[4]);
 
 
         $referenca = 'Popa-' . $v[0];
@@ -63,14 +62,14 @@ class PopaFixture
     public function getData()
     {
         return [
-            ['0988', 'dobavitelj', 'AK', 'Juhuhu d.o.o.', 'SI',false, ],
-            ['0989', 'koproducent', 'AK', 'Hopsasa d.o.o.', 'SI', true,],
-            ['0987', 'koproducent', 'AK', 'Gledališče Šrum d.o.o.', 'SI',false,],
-            ['0986', 'koproducent', 'AK', 'Lutkovni Direndaj d.o.o.', 'SI',false,],
-            ['0985', 'dobavitelj', 'AK', 'Tatjana Stanič, Lektoriranje, s.p.', 'SI',false,],
-            ['0984', 'koproducent', 'AK', 'Gledališče Lepote tvoje', 'AR',false,],
-            ['0983', 'koproducent', 'AK', 'Sunce naše', 'HR',false,],
-            ['0982', 'koproducent', 'AK', 'Theater Amadeus', 'AT',false,],
+            ['0988', 'AK', 'Juhuhu d.o.o.', 'SI',false, ],
+            ['0989',  'AK', 'Hopsasa d.o.o.', 'SI', true,],
+            ['0987',  'AK', 'Gledališče Šrum d.o.o.', 'SI',false,],
+            ['0986',  'AK', 'Lutkovni Direndaj d.o.o.', 'SI',false,],
+            ['0985', 'AK', 'Tatjana Stanič, Lektoriranje, s.p.', 'SI',false,],
+            ['0984',  'AK', 'Gledališče Lepote tvoje', 'AR',false,],
+            ['0983',  'AK', 'Sunce naše', 'HR',false,],
+            ['0982',  'AK', 'Theater Amadeus', 'AT',false,],
         ];
     }
 

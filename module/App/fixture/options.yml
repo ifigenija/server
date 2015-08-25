@@ -1,27 +1,3 @@
-#-
-#    name: application.tenant.maticnopodjetje
-#    type: string
-#    public: false
-#    readOnly: true
-#    description: 'Šifra matičnega podjetja v Popa in ProdukcijskaHisa'
-#    defaultValue: "0100"        #pri inštalaciji potrebno popraviti na konkretno vrednost        
--
-    name: popa.tipkli
-    type: array
-    public: false
-    readOnly: true
-    description: 'Tip poslovnega partnerja'
-    defaultValue: 
-        dobavitelj:
-           label: Dobavitelj
-        kupec:
-           label: Kupec 
-        koproducent:
-           label: Koproducent 
-        multi:
-           label: Več vlog
-        maticno:
-           label: Matično podjetje
 -
     name: popa.stakli
     type: array

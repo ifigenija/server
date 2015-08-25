@@ -60,7 +60,6 @@ class CliController
             $sifra = $popa->getSifra($popa);
         }
         $popa->setNaziv($naziv);
-        $popa->setTipKli('maticno');
         $popa->setStaKli('AK');
         $popa->setDrzava($drzava);
 

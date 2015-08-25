@@ -248,7 +248,6 @@ class PopaCest
     {
         $data      = [
             'sifra'     => 'ZZ12',
-            'tipkli'    => 'dobavitelj',
             'stakli'    => 'AK',
             'naziv'     => 'zz',
             'naziv1'    => 'zz',
@@ -275,7 +274,6 @@ class PopaCest
         // kreiramo še en zapis
         $data       = [
             'sifra'     => '',
-            'tipkli'    => 'kupec',
             'stakli'    => 'AK',
             'naziv'     => 'aa',
             'naziv1'    => 'aa',
@@ -366,7 +364,6 @@ class PopaCest
         $popa = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertEquals($popa['sifra'], 'ZZ12');
-        $I->assertEquals($popa['tipkli'], 'dobavitelj');
         $I->assertEquals($popa['stakli'], 'AK');
         $I->assertEquals($popa['naziv'], 'zz');
         $I->assertEquals($popa['naziv1'], 'zz');
