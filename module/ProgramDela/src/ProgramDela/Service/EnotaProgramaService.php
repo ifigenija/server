@@ -50,6 +50,7 @@ class EnotaProgramaService
             $kopr->setEnotaPrograma($enotaPrograma);
             $kopr->setOdstotekFinanciranja(100);
             $kopr->setMaticniKop(true);
+            $kopr->setKpe($enotaPrograma->getKpe());  // velja le za premiere
         } else {
             // če matična koprodukcija že obstaja, jo le preberemo
             $kopr = $matkoprColl->get(0);

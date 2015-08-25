@@ -79,6 +79,7 @@ class ProgramRazno
         $this->ponoviKopr              = 0;
         $this->obiskKoprInt            = 0;
         $this->ponoviKoprInt           = 0;
+        $this->kpe                     = 0;
 
         $this->preracunajPoljaZaMatKoprodukcijo();
 

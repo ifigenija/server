@@ -209,6 +209,7 @@ class TipProgramskeEnoteCest
             'stZaposDrug'             => 1,
             'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->obj2['id'],
+            'kpe'      => 0.1,
             'dokument'                => null,
         ];
         $this->objProgramPremiera1 = $ent                       = $I->successfullyCreate($this->programPremieraUrl, $data);
@@ -242,6 +243,7 @@ class TipProgramskeEnoteCest
 //            'ponoviInt'            => 1,
             'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->obj2['id'],
+            'kpe'      => 0.1,
             'dokument'                => null,
             'sort'                    => 1,
             'stZaposUmet'             => 1,

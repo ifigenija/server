@@ -382,6 +382,15 @@ class EnotaPrograma
     protected $tipProgramskeEnote;
 
     /**
+     * koeficient programske enote
+     * 
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="ep.kpe", description="ep.d.kpe")   
+     * @var double
+     */
+    protected $kpe;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="ep.sort", description="ep.d.sort")
      * @Max\Ui(type="integer", icon="fa fa-sort")
@@ -934,5 +943,16 @@ class EnotaPrograma
         $this->ponoviKoprInt = $ponoviKoprInt;
         return $this;
     }
+    public function getKpe()
+    {
+        return $this->kpe;
+    }
+
+    public function setKpe($kpe)
+    {
+        $this->kpe = $kpe;
+        return $this;
+    }
+
 
 }

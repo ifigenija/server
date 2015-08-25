@@ -72,6 +72,15 @@ class ProdukcijaDelitev
     protected $maticniKop = false;
 
     /**
+     * koeficient programske enote - le pri premierah
+     * 
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="prodel.kpe", description="prodel.d.kpe")   
+     * @var double
+     */
+    protected $kpe = 0;
+
+    /**
      * Izračuna odstotekFinanciranja
      * 
      * potrebno na novo izračunati vedno, ko se celotna vrednost spremeni
@@ -91,7 +100,7 @@ class ProdukcijaDelitev
     public function preracunaj($smer = false)
     {
         if ($this->getMaticniKop()) {
-            $this->delez     = $this->getEnotaPrograma()->getNasDelez();
+            $this->delez = $this->getEnotaPrograma()->getNasDelez();
         }
 
         $this->getEnotaPrograma()->preracunajCelotnoVrednost();     // seštevek vseh deležev
@@ -108,30 +117,13 @@ class ProdukcijaDelitev
 
     public function validate($mode = 'update')
     {
-        /**
-         * validacije za implementirati: $$
-         *   . le 1 maticniKop  (tudi pri delete koprodukcije!)
-         *   . enotaprograma obvezen podatek  
-         *      .. podobno pri drugi viri
-         *   . vsota odstotkov Fin <= 100
-         *   . zaprošen procent (glede na koeficient)
-         */
-        //$$ tu bi še naredili kontrole, preračunavanja za ostale prodDelitve iste enote programa ipd.
-        // preracunaj odstotkeF
-        //    - vsota vseh iste enote programa =100%
-        //    - pri matičnem podjetju spremenimo, da je vsota potem 100% 
-        //    - pazi! pri delete se validate ne izvede
-        // 
-        // ta isto enoto programa je lahko le 1 delitev z isto produkcijsko hišo     
-        //                
-        // // delez= enotaprograma.celotnavrednost * odst.Fin
-        // 
-
         $this->expect($this->getEnotaPrograma(), 'Ni enote programa za to koprodukcijo', 1000410);
+
+                $this->validateNumberGE0($this->kpe, "Koeficient programske enote", 1000417);
 
         $this->validateProcGE0LE100($this->odstotekFinanciranja, "Odstotek financiranja", 1000412);
         $this->validateEuroGE0($this->delez, "Delež", 1000416);
-        $delez     = \Max\Functions::procRoundS($this->delez);
+        $delez = \Max\Functions::procRoundS($this->delez);
 
         //$$ kontrole za vsoto procentov
         // za isto enoto programa je lahko le 1 delitev z isto produkcijsko hišo     
@@ -143,14 +135,32 @@ class ProdukcijaDelitev
             });
             $this->expect(!$obstaja, "Koprodukcija z istim koproducentom že obstaja v enoti programa", 1000411);
 
+            /**
+             *  preveri število matičnih koprodukcij?
+             */
             $maticniCollection = $this->getEnotaPrograma()->getKoprodukcije()
                     ->filter(function($kopr) {
                 return ($kopr->getMaticniKop());     //vrne vse zapise matičnih koproducentov
             });
             $stMaticnihKoproducentov = $maticniCollection->count();
             $this->expect($stMaticnihKoproducentov == 1, "Dovoljen natanko 1 matični koproducent, jih je pa " . $stMaticnihKoproducentov, 1000414);
-            // preveri število matičnih koprodukcij?
         }
+
+        /**
+         * pri premieri mora biti vsota kpe vseh koproducentov <= maksimalnemu koeficientu iz tabele
+         */
+        $sumkpe = 0;  //init
+        /**
+         * $$ if program premiera 
+         *  pri drugih ne bi smel biti problem, ker so KPE-ji =0  $$?
+         */
+        foreach ($this->getEnotaPrograma()->getKoprodukcije() as $numObject => $kopr) {
+            $sumkpe += $kopr->getKpe();
+        }
+        $sumkpe       = \Max\Functions::numberRoundS($sumkpe);
+        $maxvsifaktor= ($this->getEnotaPrograma()->getTipProgramskeEnote()) ? $this->getEnotaPrograma()->getTipProgramskeEnote()->getMaxVsi() :0;
+        $maxvsifaktor = \Max\Functions::numberRoundS($maxvsifaktor);
+        $this->expect($sumkpe <= $maxvsifaktor, "Vsota kpe vseh koproducentov (" . $sumkpe . ") ne sme biti večji kot maks. koeficient (" . $maxvsifaktor . ")", 1000415);
     }
 
     public function getNaziv()
@@ -221,6 +231,17 @@ class ProdukcijaDelitev
     public function setMaticniKop($maticniKop)
     {
         $this->maticniKop = $maticniKop;
+        return $this;
+    }
+
+    public function getKpe()
+    {
+        return $this->kpe;
+    }
+
+    public function setKpe($kpe)
+    {
+        $this->kpe = $kpe;
         return $this;
     }
 
