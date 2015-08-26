@@ -8,6 +8,7 @@
         - Dogodek-readVse
         - Oseba-vse
         - ProgramDela-lock 
+        - ProgramDela-unlock 
         - User-read
         - User-write
         - Role-read

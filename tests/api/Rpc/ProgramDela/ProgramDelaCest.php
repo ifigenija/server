@@ -90,5 +90,22 @@ class ProgramDelaCest
         $resp = $I->failCallRpc($this->rpcUrl, 'zakleni', ["programDelaId" => "neobstojeca"]);
         $I->assertNotEmpty($resp);
     }
+    /**
+     * @depends ponovnoZakleni
+     * @param ApiTester $I
+     */
+    public function odkleni(ApiTester $I)
+    {
+
+        // pričakujemo, da bo polje  zakljuceno nastavil na false
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'odkleni', ["programDelaId" => $this->objProgramDela1['id']]);
+        $I->assertNotEmpty($resp);
+        $I->seeResponseIsJson();
+        $I->assertTrue($resp, "ali uspešno");
+
+        // preverimo, če so v bazi prave vrednosti
+        $ent = $I->successfullyGet($this->restUrl, $this->objProgramDela1['id']);
+        $I->assertFalse($ent['zakljuceno'], "ali odklenjeno");
+    }
 
 }

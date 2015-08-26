@@ -31,9 +31,6 @@ class ProgramDelaRpcService
     }
 
     /**
-     * Kreiranje nove koprodukcije za lastno gledališče za določeno enoto programa
-     * 
-     * 
      * @param string $programDelaId
      * 
      * @returns boolean     uspeh 
@@ -64,6 +61,42 @@ class ProgramDelaRpcService
         // sedaj, ko imamo entitete ponovimo preverjanje avtorizacije zaradi morebitnega assert preverjanja!
         $this->expectPermission("ProgramDela-write", $programDela);
         $this->expectPermission("ProgramDela-lock", $programDela);
+
+        $this->getEm()->flush();
+
+        return true;
+    }
+    /**
+     * @param string $programDelaId
+     * 
+     * @returns boolean     uspeh 
+     */
+    public function odkleni($programDelaId)
+    {
+        $this->expectUUID($programDelaId
+                , $this->translate('Pričakujem ID programa dela')
+                , 1000964);
+
+        // preverjanje avtorizacije
+        $this->expectPermission("ProgramDela-write");
+        $this->expectPermission("ProgramDela-unlock");
+
+//        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $tr = $this->getServiceLocator()->get('translator');
+
+        $programDela = $this->getProgramDelaRep()->findOneById($programDelaId);
+
+        if (!$programDela) {
+            throw new \Max\Exception\UnauthException($tr->translate('Ni enote programa'), 1000965);
+        }
+
+        $programDela->setZakljuceno(FALSE);           // tu nastavimo novo vrednost
+
+        $programDela->validate();
+
+        // sedaj, ko imamo entitete ponovimo preverjanje avtorizacije zaradi morebitnega assert preverjanja!
+        $this->expectPermission("ProgramDela-write", $programDela);
+        $this->expectPermission("ProgramDela-unlock", $programDela);
 
         $this->getEm()->flush();
 
