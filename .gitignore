@@ -1,5 +1,6 @@
 /vendor/
 ***/dumpStage.sh
+/config/application.config.php
 /config/autoload/local.php
 /config/autoload/local.*.php
 /nbproject/private/
