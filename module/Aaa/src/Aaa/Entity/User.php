@@ -173,51 +173,43 @@ class User
     public function preveriGeslo($password)
     {
         $dolzinagesla = strlen($password);
-        
-        if ($dolzinagesla >= 8) {
-            $vsota = 0;
-            $uc    = 0;
-            $lc    = 0;
-            $num   = 0;
-            $other = 0;
-            for ($i = 0, $j = $dolzinagesla; $i < $j; $i++) {
-                $c = substr($password, $i, 1);
-                if (preg_match('/^[[:upper:]]$/', $c)) {
-                    $uc++;
-                } elseif (preg_match('/^[[:lower:]]$/', $c)) {
-                    $lc++;
-                } elseif (preg_match('/^[[:digit:]]$/', $c)) {
-                    $num++;
-                } else {
-                    $other++;
-                }
-            }
-            
-            if($uc > 0){
-                $vsota++;
-            }
-            if($lc > 0){
-                $vsota++;
-            }
-            if($num > 0){
-                $vsota++;
-            }
-            if($other > 0){
-                $vsota++;
-            }
+        $this->expect($dolzinagesla >= 8, "Geslo ni dovolj dolgo", 1000473);
 
-            if ($vsota < 3) {
-                $this->expect($vsota >= 3, "Geslo ni dovolj močno", 1000472);
-                return false;
+        $vsota = 0;
+        $uc    = 0;
+        $lc    = 0;
+        $num   = 0;
+        $other = 0;
+        for ($i = 0, $j = $dolzinagesla; $i < $j; $i++) {
+            $c = substr($password, $i, 1);
+            if (preg_match('/^[[:upper:]]$/', $c)) {
+                $uc++;
+            } elseif (preg_match('/^[[:lower:]]$/', $c)) {
+                $lc++;
+            } elseif (preg_match('/^[[:digit:]]$/', $c)) {
+                $num++;
             } else {
-                return true;
+                $other++;
             }
-        } else if($dolzinagesla > 0 && $dolzinagesla < 8){
-            $this->expect($dolzinagesla > 0 && $dolzinagesla > 8, "Geslo ni dovolj dolgo", 1000473);
-            return false;
-        }else{
-            return true;
         }
+        if ($uc > 0) {
+            $vsota++;
+        }
+        if ($lc > 0) {
+            $vsota++;
+        }
+        if ($num > 0) {
+            $vsota++;
+        }
+        if ($other > 0) {
+            $vsota++;
+        }
+
+        if ($vsota < 3) {
+            $this->expect($vsota >= 3, "Geslo ni dovolj močno", 1000472);
+            return false;
+        }
+        return true;
     }
 
     public function setPassword($password)
