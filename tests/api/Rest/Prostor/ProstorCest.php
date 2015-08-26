@@ -27,7 +27,14 @@ class ProstorCest
 {
 
     private $restUrl = '/rest/prostor';
-    private $obj;
+    private $popaUrl = '/rest/popa';
+    private $obj1;
+    private $obj2;
+    private $obj3;
+    private $lookPopa2;
+    private $lookPopa1;
+    private $objPopa2;
+    private $objPopa1;
 
     public function _before(ApiTester $I)
     {
@@ -40,36 +47,81 @@ class ProstorCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupPopa(ApiTester $I)
+    {
+        $this->lookPopa1 = $ent             = $I->lookupEntity("popa", "0988", false);
+        $I->assertNotEmpty($ent);
+        $this->lookPopa2 = $ent             = $I->lookupEntity("popa", "0989", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
+     * @depends lookupPopa 
+     * @param ApiTester $I
+     */
+    public function getPopaInNaslov(\ApiTester $I)
+    {
+        $this->objPopa1 = $popa1          = $I->successfullyGet($this->popaUrl, $this->lookPopa1['id']);
+        $this->objPopa2 = $popa2          = $I->successfullyGet($this->popaUrl, $this->lookPopa2['id']);
+
+        codecept_debug($popa1);
+        codecept_debug($popa2);
+    }
+
+    /**
      *  kreiramo zapis
      * 
+     * @depends getPopaInNaslov
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
     {
-        $data      = [
-            'sifra'          => '12',
-            'naziv'          => 'Z Z',
+        $data       = [
+            'sifra'        => '12',
+            'naziv'        => 'aa',
             'jePrizorisce' => true,
             'kapaciteta'   => 1,
-            'opis'         => 'zz',
+            'opis'         => 'aa',
+            'popa'         => $this->objPopa1['id'],
+            'naslov'       => $this->objPopa1['naslovi'][0]['id'],
         ];
-        $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['sifra'], '12');
 
         // kreiramo še en zapis
-        $data = [
-            'sifra'          => '13',
-            'naziv'          => 'aa',
+        $data       = [
+            'sifra'        => '13',
+            'naziv'        => 'bb',
             'jePrizorisce' => true,
             'kapaciteta'   => 2,
-            'opis'         => 'aa',
+            'opis'         => 'bb',
+            'popa'         => NULL,
+            'naslov'       => null,
         ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['sifra'], '13');
+        
+        // kreiramo še en zapis
+        $data       = [
+            'sifra'        => '14',
+            'naziv'        => 'cc',
+            'jePrizorisce' => true,
+            'kapaciteta'   => 3,
+            'opis'         => 'cc',
+            'popa'         => $this->objPopa2['id'],
+            'naslov'       => $this->objPopa2['naslovi'][0]['id'],
+        ];
+        $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['sifra'], '14');
     }
 
     /**
@@ -115,10 +167,10 @@ class ProstorCest
      */
     public function update(ApiTester $I)
     {
-        $ent        = $this->obj;
+        $ent          = $this->obj1;
         $ent['naziv'] = 'yy';
 
-        $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
         $I->assertEquals($entR['naziv'], 'yy');
     }
@@ -131,14 +183,16 @@ class ProstorCest
      */
     public function read(\ApiTester $I)
     {
-        $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['naziv'], 'yy');
         $I->assertEquals($ent['sifra'], '12');
         $I->assertEquals($ent['jePrizorisce'], true);
         $I->assertEquals($ent['kapaciteta'], 1);
-        $I->assertEquals($ent['opis'], 'zz');
+        $I->assertEquals($ent['opis'], 'aa');
+        $I->assertEquals($ent['popa'], $this->objPopa1['id']);
+        $I->assertEquals($ent['naslov'], $this->objPopa1['naslovi'][0]['id']);
     }
 
     /**
@@ -148,8 +202,40 @@ class ProstorCest
      */
     public function delete(ApiTester $I)
     {
-        $I->successfullyDelete($this->restUrl, $this->obj['id']);
-        $I->failToGet($this->restUrl, $this->obj['id']);
+        $I->successfullyDelete($this->restUrl, $this->obj1['id']);
+        $I->failToGet($this->restUrl, $this->obj1['id']);
     }
 
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateZaValidacijo(ApiTester $I)
+    {
+        $data           = $this->obj2;
+        $data['popa']  = $this->objPopa1['id'];
+//        $data['naslov'] = $this->objPopa1['naslovi'][0]['id'];
+        $data['naslov'] = NULL;
+
+        $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        $I->assertNotEmpty($resp);
+        $I->assertEquals(1000380, $resp[0]['code']);
+
+        $data['naslov'] = $this->objPopa2['naslovi'][0]['id'];   // naslov od drugega popa
+        $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        $I->assertNotEmpty($resp);
+        $I->assertEquals(1000381, $resp[0]['code']);
+    }
+    /**
+     * brisanje zapisa za test orphan removal
+     * 
+     * @depends create
+     */
+    public function deletePopa(ApiTester $I)
+    {
+       $resp= $I->failToDelete($this->popaUrl, $this->objPopa2['id']);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertEquals(23503, $resp[1]['code']," Foreign key violation - brisanje naslova ni mogoček, ker se uporablja v prostoru"); 
+    }
 }

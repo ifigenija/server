@@ -12,9 +12,9 @@ forms:
                   required: false
             - zacetek
             - konec
-#            - tip
+#            - tip      # zaenkrat izven forme, ker nimamo definiranih vrednosti
             - delovnaObveza
-#            - malica
+#            - malica   # zaenkrat izven forme, ker nimamo definiranih vrednosti
             - izmenskoDelo
             - individualnaPogodba
             - jeZaposlenVdrugemJz

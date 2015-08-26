@@ -24,8 +24,8 @@ class Prostor
      * @Max\Ui(type="id")
      * @var string     
      */
-    protected $id;   
-    
+    protected $id;
+
     /**
      * @ORM\Column(type="string", unique=true, nullable=false)
      * @Max\I18n(label="prostor.sifra", description="prostor.d.sifra")
@@ -64,11 +64,38 @@ class Prostor
      */
     protected $opis;
 
-    
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="prostori")
+     * @Max\I18n(label="prostor.popa",  description="prostor.d.popa")
+     * @Max\Ui(type="hiddenid")
+     * @var \App\Entity\Popa
+     */
+    protected $popa;
+
+    /**
+     * naslov je lahko le eden od naslovov poslovnega partnerja
+     * 
+     * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
+     * @Max\I18n(label="prostor.naslov", description="prostor.d.naslov")
+     * @var \App\Entity\PostniNaslov
+     */
+    protected $naslov;
+
     public function validate($mode = 'update')
     {
-        
+        if ($this->popa) {
+            $this->expect($this->naslov, "Naslov prostora je obvezen podatek, če imamo na prostoru vnešenega poslovnega partnerja", 1000380);
+            $naslov      = $this->naslov;
+            $obstaja = false; //init
+            $obstaja = $this->popa
+                    ->getNaslovi()
+                    ->exists(function($key, $popaNaslov) use(&$naslov) {
+                return ($popaNaslov === $naslov );     //vrne true, če je obstaja isti naslov pri popa
+            });
+            $this->expect($obstaja, "Naslov prostora je lahko le eden od naslovov poslovnega partnerja", 1000381);
+        }
     }
+
     public function getId()
     {
         return $this->id;
@@ -97,6 +124,16 @@ class Prostor
     public function getOpis()
     {
         return $this->opis;
+    }
+
+    public function getPopa()
+    {
+        return $this->popa;
+    }
+
+    public function getNaslov()
+    {
+        return $this->naslov;
     }
 
     public function setId($id)
@@ -135,5 +172,16 @@ class Prostor
         return $this;
     }
 
+    public function setPopa(\App\Entity\Popa $popa)
+    {
+        $this->popa = $popa;
+        return $this;
+    }
+
+    public function setNaslov(\App\Entity\PostniNaslov $naslov)
+    {
+        $this->naslov = $naslov;
+        return $this;
+    }
 
 }
