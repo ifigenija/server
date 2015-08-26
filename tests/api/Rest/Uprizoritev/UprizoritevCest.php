@@ -140,11 +140,11 @@ class UprizoritevCest
      * 
      * @param ApiTester $I
      */
-    public function lookupZvrstUprizoritve(ApiTester $I)
-    {
-        $this->lookZvrstUprizoritve = $ent                        = $I->lookupEntity("zvrstuprizoritve", "08", false);
-        $I->assertNotEmpty($ent);
-    }
+//    public function lookupZvrstUprizoritve(ApiTester $I)
+//    {
+//        $this->lookZvrstUprizoritve = $ent                        = $I->lookupEntity("zvrstuprizoritve", "08", false);
+//        $I->assertNotEmpty($ent);
+//    }
 
     /**
      * 
@@ -284,7 +284,7 @@ class UprizoritevCest
             'sloAvtor'              => FALSE,
             'kratkiNaslov'          => 'zz',
             'besedilo'              => $this->lookBesedilo['id'],
-            'zvrstUprizoritve'      => $this->lookZvrstUprizoritve['id'],
+            'zvrstUprizoritve'      =>null,
             'zvrstSurs'             => $this->lookZvrstSurs['id'],
             'internacionalniNaslov' => 'zz',
             'steviloVaj'            => 4,
@@ -316,7 +316,7 @@ class UprizoritevCest
             'sloAvtor'              => true, // $$ bool vrača napako convertToBool
             'kratkiNaslov'          => 'aa',
             'besedilo'              => $this->lookBesedilo['id'],
-            'zvrstUprizoritve'      => $this->lookZvrstUprizoritve['id'],
+            'zvrstUprizoritve'      =>null,
             'zvrstSurs'             => $this->lookZvrstSurs['id'],
             'internacionalniNaslov' => 'aa',
             'steviloVaj'            => 6,
@@ -348,7 +348,7 @@ class UprizoritevCest
             'sloAvtor'              => true, // $$ bool vrača napako convertToBool
             'kratkiNaslov'          => 'bb',
             'besedilo'              => $this->lookBesedilo['id'],
-            'zvrstUprizoritve'      => $this->lookZvrstUprizoritve['id'],
+            'zvrstUprizoritve'      =>null,
             'zvrstSurs'             => $this->lookZvrstSurs['id'],
             'internacionalniNaslov' => 'bb',
             'steviloVaj'            => 5,
@@ -387,7 +387,7 @@ class UprizoritevCest
             'kratkiNaslov'     => 'bb',
             'maticniOder'      => $this->lookProstor['id'],
             'besedilo'         => $this->lookBesedilo['id'],
-            'zvrstUprizoritve' => $this->lookZvrstUprizoritve['id'],
+            'zvrstUprizoritve' =>null,
             'zvrstSurs'        => $this->lookZvrstSurs['id'],
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
@@ -797,7 +797,7 @@ class UprizoritevCest
         $I->assertEquals($ent['sloAvtor'], FALSE);
         $I->assertEquals($ent['kratkiNaslov'], 'zz');
         $I->assertEquals($ent['besedilo']['id'], $this->lookBesedilo['id'],"Besedilo");
-        $I->assertEquals($ent['zvrstUprizoritve'], $this->lookZvrstUprizoritve['id']);
+        $I->assertEquals($ent['zvrstUprizoritve'],null);
         $I->assertEquals($ent['zvrstSurs'], $this->lookZvrstSurs['id']);
         $I->assertEquals($ent['internacionalniNaslov'], 'zz');
 //        $I->assertEquals($ent['steviloVaj'], 4,"Število vaj");

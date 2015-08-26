@@ -25,7 +25,7 @@ class ZvrstUprizoritveFixture
 
         $manager->flush();
     }
-   
+
     /**
      *
      * @param \Tip\Repository\IzbirneOpcije $rep
@@ -51,18 +51,19 @@ class ZvrstUprizoritveFixture
     public function getData()
     {
         return [
-            ['01', 'Opera', 'opera'],
-            ['02', 'Opereta', 'opereta'],
-            ['03', 'Balet', 'balet'],
-            ['04', 'Plesne prireditve', 'plesne prireditve'],
-            ['05', 'Lutkovno gledališče', 'lutkovno gledališče'],
-            ['06', 'Raziskovalno gledališče', 'raziskovalno gledališče'],
-            ['07', 'Biografska drama', 'biografska drama'],
-            ['08', 'Komedija', 'komedija'],
-            ['09', 'Črna komedija', 'črna komedija'],
-            ['10', 'E-igra', 'E-igra'],
-            ['11', 'Kriminalka', 'kriminalka'],
-            ['12', 'Musical', 'musical'],
+                // #1169 - naj bo prazno
+//            ['01', 'Opera', 'opera'],
+//            ['02', 'Opereta', 'opereta'],
+//            ['03', 'Balet', 'balet'],
+//            ['04', 'Plesne prireditve', 'plesne prireditve'],
+//            ['05', 'Lutkovno gledališče', 'lutkovno gledališče'],
+//            ['06', 'Raziskovalno gledališče', 'raziskovalno gledališče'],
+//            ['07', 'Biografska drama', 'biografska drama'],
+//            ['08', 'Komedija', 'komedija'],
+//            ['09', 'Črna komedija', 'črna komedija'],
+//            ['10', 'E-igra', 'E-igra'],
+//            ['11', 'Kriminalka', 'kriminalka'],
+//            ['12', 'Musical', 'musical'],
         ];
     }
 

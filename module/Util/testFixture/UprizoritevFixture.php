@@ -86,8 +86,10 @@ class UprizoritevFixture
         }
 
         // ker ni v isti skupini fixtur-jev, ne deluje getReference
-        $value = $zvrUpriR->findOneBySifra($v[19]);
-        $o->setZvrstUprizoritve($value);
+        if ($v[19]) {
+            $value = $zvrUpriR->findOneBySifra($v[19]);
+            $o->setZvrstUprizoritve($value);
+        }
 
         $value = $zvrSursR->findOneBySifra($v[20]);
         $o->setZvrstSurs($value);
@@ -107,15 +109,15 @@ class UprizoritevFixture
     public function getData()
     {
         return [
-            ['0001', 'Sen kresne noči', 'produkcija', '', 'Sanje', '2016-02-01', '2016-06-01', 'Prostor-0005', 1, 'William Shakespeare', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0001', '08', '01', NULL],
-            ['0002', 'Smoletov vrt', 'predprodukcija-ideja', '', '', '2016-01-01', '2016-04-20', 'Prostor-0006', 2, 'B. Hočevar', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0003', '11', '06', NULL],
-            ['0003', 'Kisli maček', 'postprodukcija', '', '', '2016-02-01', '2016-04-20', 'Prostor-0005', 2, 'Caryl Churchill', TRUE, 2, '', '', '', null, FALSE, '', null, '11', '06', 'ProdukcijskaHisa-0987'],
-            ['0004', 'Vladimir', 'postprodukcija', '', '', '2017-03-01', '2017-04-20', 'Prostor-0005', 2, 'Matjaž Zupančič', TRUE, 2, '', '', '', null, FALSE, '', null, '11', '06', 'ProdukcijskaHisa-0987'],
-            ['0005', 'Španska princesa', 'postprodukcija', '', '', '2017-04-01', '2017-05-20', 'Prostor-0001', 1, 'Nina Kokelj', false, 1, '', '', '', null, FALSE, '', null, '11', '06', 'ProdukcijskaHisa-0987'],
+            ['0001', 'Sen kresne noči', 'produkcija', '', 'Sanje', '2016-02-01', '2016-06-01', 'Prostor-0005', 1, 'William Shakespeare', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0001', null, '01', NULL],
+            ['0002', 'Smoletov vrt', 'predprodukcija-ideja', '', '', '2016-01-01', '2016-04-20', 'Prostor-0006', 2, 'B. Hočevar', FALSE, 2, '', '', '', null, FALSE, '', 'Besedilo-0003', null, '06', NULL],
+            ['0003', 'Kisli maček', 'postprodukcija', '', '', '2016-02-01', '2016-04-20', 'Prostor-0005', 2, 'Caryl Churchill', TRUE, 2, '', '', '', null, FALSE, '', null, null, '06', 'ProdukcijskaHisa-0987'],
+            ['0004', 'Vladimir', 'postprodukcija', '', '', '2017-03-01', '2017-04-20', 'Prostor-0005', 2, 'Matjaž Zupančič', TRUE, 2, '', '', '', null, FALSE, '', null, null, '06', 'ProdukcijskaHisa-0987'],
+            ['0005', 'Španska princesa', 'postprodukcija', '', '', '2017-04-01', '2017-05-20', 'Prostor-0001', 1, 'Nina Kokelj', false, 1, '', '', '', null, FALSE, '', null, null, '06', 'ProdukcijskaHisa-0987'],
             /**
              * ena brez datumov
              */
-            ['0006', 'Ne vemo datumov', 'postprodukcija', '', '', NULL, NULL, 'Prostor-0001', 1, 'Nandi Frafar', false, 1, '', '', '', null, FALSE, '', null, '11', '06', 'ProdukcijskaHisa-0987'],
+            ['0006', 'Ne vemo datumov', 'postprodukcija', '', '', NULL, NULL, 'Prostor-0001', 1, 'Nandi Frafar', false, 1, '', '', '', null, FALSE, '', null, null, '06', 'ProdukcijskaHisa-0987'],
         ];
     }
 
