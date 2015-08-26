@@ -85,12 +85,12 @@ class Prostor
     {
         if ($this->popa) {
             $this->expect($this->naslov, "Naslov prostora je obvezen podatek, če imamo na prostoru vnešenega poslovnega partnerja", 1000380);
-            $id      = $this->naslov;
+            $naslov      = $this->naslov;
             $obstaja = false; //init
             $obstaja = $this->popa
                     ->getNaslovi()
-                    ->exists(function($key, $naslov) use(&$id) {
-                return ($naslov->getId() !== $id );     //vrne true, če je obstaja isti naslov pri popa
+                    ->exists(function($key, $popaNaslov) use(&$naslov) {
+                return ($popaNaslov === $naslov );     //vrne true, če je obstaja isti naslov pri popa
             });
             $this->expect($obstaja, "Naslov prostora je lahko le eden od naslovov poslovnega partnerja", 1000381);
         }

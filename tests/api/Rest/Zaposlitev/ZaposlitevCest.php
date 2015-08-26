@@ -241,14 +241,15 @@ class ZaposlitevCest
     public function read(\ApiTester $I)
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
-
+        codecept_debug($ent);
+        
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['status'], 'A');
         $I->assertEquals($ent['zacetek'], '2010-02-01T00:00:00+0100');
         $I->assertEquals($ent['konec'], '2010-02-01T00:00:00+0100');
-        $I->assertEquals($ent['tip'], 1);
+//        $I->assertEquals($ent['tip'], 1);     // $$zaenkrat nimamo definiranih vrednosti
         $I->assertEquals($ent['delovnaObveza'], 2);
-        $I->assertEquals($ent['malica'], 'zz');
+//        $I->assertEquals($ent['malica'], 'zz');  //$$zaenkrat nimamo definiranih vrednosti
         $I->assertEquals($ent['izmenskoDelo'], true);
         $I->assertEquals($ent['individualnaPogodba'], true);
         $I->assertEquals($ent['jeZaposlenVdrugemJz'], TRUE);
