@@ -27,7 +27,13 @@ class ProstorCest
 {
 
     private $restUrl = '/rest/prostor';
-    private $obj;
+    private $popaUrl = '/rest/popa';
+    private $obj1;
+    private $obj2;
+    private $lookPopa2;
+    private $lookPopa1;
+    private $objPopa2;
+    private $objPopa1;
 
     public function _before(ApiTester $I)
     {
@@ -40,33 +46,65 @@ class ProstorCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupPopa(ApiTester $I)
+    {
+        $this->lookPopa1 = $ent             = $I->lookupEntity("popa", "0988", false);
+        $I->assertNotEmpty($ent);
+        $this->lookPopa2 = $ent             = $I->lookupEntity("popa", "0989", false);
+        $I->assertNotEmpty($ent);
+    }
+
+    /**
+     * @depends lookupPopa 
+     * @param ApiTester $I
+     */
+    public function getPopaInNaslov(\ApiTester $I)
+    {
+        $popa1 = $I->successfullyGet($this->popaUrl, $this->lookPopa1['id']);
+        $popa2 = $I->successfullyGet($this->popaUrl, $this->lookPopa2['id']);
+
+        codecept_debug($popa1);
+        codecept_debug($popa2);
+        
+        
+    }
+
+    /**
      *  kreiramo zapis
      * 
+     * @depends getPopaInNaslov
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
     {
-        $data      = [
-            'sifra'          => '12',
-            'naziv'          => 'Z Z',
+        $data       = [
+            'sifra'        => '12',
+            'naziv'        => 'Z Z',
             'jePrizorisce' => true,
             'kapaciteta'   => 1,
             'opis'         => 'zz',
+            'popa'         => $this->lookPopa1['id'],
+            'naslov'       => null,
         ];
-        $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['sifra'], '12');
 
         // kreiramo še en zapis
-        $data = [
-            'sifra'          => '13',
-            'naziv'          => 'aa',
+        $data       = [
+            'sifra'        => '13',
+            'naziv'        => 'aa',
             'jePrizorisce' => true,
             'kapaciteta'   => 2,
             'opis'         => 'aa',
+            'popa'         => null,
+            'naslov'       => null,
         ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['sifra'], '13');
@@ -115,10 +153,10 @@ class ProstorCest
      */
     public function update(ApiTester $I)
     {
-        $ent        = $this->obj;
+        $ent          = $this->obj1;
         $ent['naziv'] = 'yy';
 
-        $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
         $I->assertEquals($entR['naziv'], 'yy');
     }
@@ -131,7 +169,7 @@ class ProstorCest
      */
     public function read(\ApiTester $I)
     {
-        $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['naziv'], 'yy');
@@ -139,6 +177,8 @@ class ProstorCest
         $I->assertEquals($ent['jePrizorisce'], true);
         $I->assertEquals($ent['kapaciteta'], 1);
         $I->assertEquals($ent['opis'], 'zz');
+        $I->assertEquals($ent['popa'], null, "popa");
+        $I->assertEquals($ent['naslov'], null, "naslov");
     }
 
     /**
@@ -148,8 +188,8 @@ class ProstorCest
      */
     public function delete(ApiTester $I)
     {
-        $I->successfullyDelete($this->restUrl, $this->obj['id']);
-        $I->failToGet($this->restUrl, $this->obj['id']);
+        $I->successfullyDelete($this->restUrl, $this->obj1['id']);
+        $I->failToGet($this->restUrl, $this->obj1['id']);
     }
 
 }

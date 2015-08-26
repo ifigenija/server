@@ -155,6 +155,12 @@ class Popa
     protected $kontaktneOsebe;
 
     /**
+     * @ORM\OneToMany(targetEntity="Prodaja\Entity\prostor", mappedBy="popa")
+     * var <Prostori>
+     */
+    protected $prostori;
+
+    /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="popa")
      * @var <Pogodbe>
      */
@@ -277,6 +283,7 @@ class Popa
         $this->kontaktneOsebe = new ArrayCollection();
         $this->pogodbe        = new ArrayCollection();
         $this->stroski        = new ArrayCollection();
+        $this->prostori       = new ArrayCollection();
     }
 
     public function __toString()
@@ -606,6 +613,17 @@ class Popa
     public function setNvo($nvo)
     {
         $this->nvo = $nvo;
+        return $this;
+    }
+
+    public function getProstori()
+    {
+        return $this->prostori;
+    }
+
+    public function setProstori($prostori)
+    {
+        $this->prostori = $prostori;
         return $this;
     }
 

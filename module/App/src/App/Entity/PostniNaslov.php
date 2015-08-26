@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Entiteta za naslove
@@ -152,6 +153,19 @@ class PostniNaslov
      * @var boolean
      */
     protected $privzeti = false;
+
+    /**
+     * Prostori s tem naslovom
+     * 
+     * @ORM\OneToMany(targetEntity="Prodaja\Entity\Prostor", mappedBy="naslov")
+     * @var <Prostori>
+     */
+    protected $prostori;
+
+    public function __construct()
+    {
+        $this->prostori = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {

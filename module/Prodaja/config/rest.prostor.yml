@@ -13,6 +13,8 @@ forms:
             - jePrizorisce
             - kapaciteta
             - opis
+            - popa
+            - naslov
 lists:
     default: 
         filter:                
