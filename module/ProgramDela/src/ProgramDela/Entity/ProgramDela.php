@@ -245,8 +245,8 @@ class ProgramDela
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.vrPS1Do", description="programDela.d.vrPS1Do")   
-      * @Max\Ui(icon="fa fa-euro")
-    * @var double
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
      */
     protected $vrPS1Do;
 
@@ -539,7 +539,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="programDela.stProdVstopnic", description="programDela.d.stProdVstopnic")
-     * @Max\Ui(type="integer")
+     * @Max\Ui(type="integer", icon="fa fa-ticket")
      * @var integer
      */
     protected $stProdVstopnic;
@@ -571,7 +571,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="programDela.stZaposlenih", description="programDela.d.stZaposlenih")
-     * @Max\Ui(type="integer")
+     * @Max\Ui(type="integer", icon="fa fa-users")
      * @var integer
      */
     protected $stZaposlenih;
@@ -579,7 +579,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="programDela.stZaposIgralcev", description="programDela.d.stZaposIgralcev")
-     * @Max\Ui(type="integer")
+     * @Max\Ui(type="integer", icon="fa fa-users")
      * @var integer
      */
     protected $stZaposIgralcev;

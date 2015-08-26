@@ -42,8 +42,7 @@ forms:
             - datumRojstva
             - emso
             - davcna
-#            - spol     # $$ rb v filter validator haystack trenutno narobe zloži Moški in Ženska namesto M in Z   
-
+#            - spol     # $$ rb v filter validator haystack trenutno narobe zloži Moški in Ženska namesto M in Z
             - drzavljanstvo
             - drzavaRojstva
             - krajRojstva
