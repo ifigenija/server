@@ -64,6 +64,17 @@ class StrosekUprizoritve
     protected $tipstroska;
 
     /**
+     * polje je aktualno le pri materialnih stroških
+     * 
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\VrstaStroska")
+     * @Max\I18n(label="strupr.vrstaStroska",  description="strupr.d.vrstaStroska")
+     * $$ začasno izključimo ,ker javlja napako 1010001:
+     * Max\Ui(type="optionalselect",empty="brez vrste stroška",required=false)
+     * @var \Produkcija\Entity\VrstaStroska
+     */
+    protected $vrstaStroska;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="strupr.sort", description="strupr.d.sort")
      * @Max\Ui(type="integer",icon="fa fa-sort")
@@ -91,7 +102,12 @@ class StrosekUprizoritve
 
     public function validate($mode = 'update')
     {
-        
+        if ($this->tipstroska == 'materialni') {
+            $this->expect($this->vrstaStroska, "Pri materialnih stroških vrsta stroška obvezen podatek", 1000370);
+            $this->expect($this->vrstaStroska->getPodskupina() !== 0, "Vrsta stroška ne sme biti naslov skupine", 1000371);
+        } else {
+            $this->vrstaStroska = NULL;
+        }
     }
 
     public function getId()
@@ -190,6 +206,17 @@ class StrosekUprizoritve
     public function setTipstroska($tipstroska)
     {
         $this->tipstroska = $tipstroska;
+        return $this;
+    }
+
+    public function getVrstaStroska()
+    {
+        return $this->vrstaStroska;
+    }
+
+    public function setVrstaStroska(\Produkcija\Entity\VrstaStroska $vrstaStroska)
+    {
+        $this->vrstaStroska = $vrstaStroska;
         return $this;
     }
 

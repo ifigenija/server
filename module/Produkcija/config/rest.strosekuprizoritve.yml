@@ -11,6 +11,7 @@ forms:
             - vrednostNa
             - opis
             - tipstroska
+            - vrstaStroska
             - sort
             - uprizoritev
             - popa

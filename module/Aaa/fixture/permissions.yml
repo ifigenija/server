@@ -472,7 +472,12 @@
 -
     name: VrstaSedezev-write
     description: VrstaSedezev - spreminjanje
-
+-
+    name: VrstaStroska-read
+    description: VrstaStroska - branje
+-
+    name: VrstaStroska-write
+    description: VrstaStroska - spreminjanje
 -
     name: Zaposlitev-read
     description: Zaposlitev - branje

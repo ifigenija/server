@@ -41,7 +41,8 @@ class StrosekUprizoritveFixture
     public function populateStrosekUprizoritve($manager, $v)
     {
 
-        $rep = $manager->getRepository('Produkcija\Entity\StrosekUprizoritve');
+        $rep           = $manager->getRepository('Produkcija\Entity\StrosekUprizoritve');
+        $vrstaStroskaR = $manager->getRepository('Produkcija\Entity\VrstaStroska');
 
 
         $o = new \Produkcija\Entity\StrosekUprizoritve();
@@ -59,6 +60,22 @@ class StrosekUprizoritveFixture
         $o->setPopa($getref);
         $o->setTipstroska(trim($v[7]));
 
+        /**
+         * $$ še vrsto stroška določi
+         */
+        if ($v[8]) {
+            $sk    = (integer) strtok($v[8], ".");
+            $podsk = (integer) strtok(".");
+            echo " .............    sk=" . $sk . PHP_EOL;
+            echo " ............. podsk=" . $podsk . PHP_EOL;
+            print_r($podsk);
+            $value = $vrstaStroskaR->findOneBy(["skupina" => $sk, "podskupina" => $podsk]);
+            var_dump($value);
+            $o->setVrstaStroska($value);
+        }
+
+        $o->validate();
+
 
         $referenca = 'StrosekUprizoritve-' . $v[0];
         var_dump($referenca);
@@ -68,9 +85,9 @@ class StrosekUprizoritveFixture
     public function getData()
     {
         return [
-            ['Nabava kostumov', 600.50, 20, "Krila in maske", 1, "Uprizoritev-0002", "Popa-0988","materialni"],
-            ['Zavese', 125.70, 3.1, "Modra in zelena zavesa", 2, "Uprizoritev-0002", "Popa-0988","materialni"],
-            ['Avtorske pravice', 300, 30, "Odkup avtorskih pravic", 4, "Uprizoritev-0002", "Popa-0985","avtorprav"],
+            ['Nabava kostumov', 600.50, 20, "Krila in maske", 1, "Uprizoritev-0002", "Popa-0988", "materialni", "2.1",],
+            ['Zavese', 125.70, 3.1, "Modra in zelena zavesa", 2, "Uprizoritev-0002", "Popa-0988", "materialni", "2.1"],
+            ['Avtorske pravice', 300, 30, "Odkup avtorskih pravic", 4, "Uprizoritev-0002", "Popa-0985", "avtorprav", null],
         ];
     }
 
