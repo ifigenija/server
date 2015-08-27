@@ -15,6 +15,7 @@
         "ext-pdo_pgsql": "*",
         "zendframework/zendframework": "2.3.1",
         "doctrine/doctrine-orm-module": "*",
+        "doctrine/doctrine-module": "0.8",
         "doctrine/orm": "2.5",
         "doctrine/migrations": "*",
         "zf-commons/zfc-rbac": "~2.4",

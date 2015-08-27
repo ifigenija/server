@@ -13,7 +13,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class PostniNaslovFixture
         extends AbstractFixture
-        implements FixtureInterface
+        implements FixtureInterface, \Doctrine\Common\DataFixtures\DependentFixtureInterface
 {
 
     public function load(ObjectManager $manager)
