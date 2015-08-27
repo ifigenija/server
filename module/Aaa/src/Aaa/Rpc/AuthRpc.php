@@ -90,7 +90,7 @@ class AuthRpcService
             $roles[] = $role->getName();
 
             foreach ($role->getPermissions() as $perm) {
-                $permissions[] = $perm;
+                $permissions[] = $perm->getName();
             }
         };
         return [
