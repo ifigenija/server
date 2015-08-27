@@ -129,7 +129,7 @@ class Revizija
         return $this->datum;
     }
 
-    public function setDatum(\DateTime $datum)
+    public function setDatum(\DateTime $datum=null)
     {
         $this->datum = $datum;
     }

@@ -186,13 +186,13 @@ class StrosekUprizoritve
         return $this;
     }
 
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev)
+    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev=null)
     {
         $this->uprizoritev = $uprizoritev;
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa)
+    public function setPopa(\App\Entity\Popa $popa=null)
     {
         $this->popa = $popa;
         return $this;
@@ -214,7 +214,7 @@ class StrosekUprizoritve
         return $this->vrstaStroska;
     }
 
-    public function setVrstaStroska(\Produkcija\Entity\VrstaStroska $vrstaStroska)
+    public function setVrstaStroska(\Produkcija\Entity\VrstaStroska $vrstaStroska=null)
     {
         $this->vrstaStroska = $vrstaStroska;
         return $this;

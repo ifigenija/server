@@ -146,13 +146,13 @@ class Trr
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa)
+    public function setPopa(\App\Entity\Popa $popa=null)
     {
         $this->popa = $popa;
         return $this;
     }
 
-    public function setOseba(\App\Entity\Oseba $oseba)
+    public function setOseba(\App\Entity\Oseba $oseba=null)
     {
         $this->oseba = $oseba;
         return $this;

@@ -78,7 +78,7 @@ class Kupec
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa)
+    public function setPopa(\App\Entity\Popa $popa=null)
     {
         $this->popa = $popa;
         return $this;

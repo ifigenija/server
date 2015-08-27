@@ -391,17 +391,17 @@ class Pogodba
         $this->alternacije = $alternacije;
     }
 
-    function setOseba(\App\Entity\Oseba $oseba)
+    function setOseba(\App\Entity\Oseba $oseba=null)
     {
         $this->oseba = $oseba;
     }
 
-    function setPopa(\App\Entity\Popa $popa)
+    function setPopa(\App\Entity\Popa $popa=null)
     {
         $this->popa = $popa;
     }
 
-    function setTrr(\App\Entity\Trr $trr)
+    function setTrr(\App\Entity\Trr $trr=null)
     {
         $this->trr = $trr;
     }

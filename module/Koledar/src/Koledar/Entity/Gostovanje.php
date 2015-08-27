@@ -112,7 +112,7 @@ class Gostovanje
         return $this;
     }
 
-    public function setDogodek(\Koledar\Entity\Dogodek $dogodek)
+    public function setDogodek(\Koledar\Entity\Dogodek $dogodek=null)
     {
         $this->dogodek = $dogodek;
         return $this;
@@ -124,7 +124,7 @@ class Gostovanje
         return $this;
     }
 
-    public function setDrzava(\App\Entity\Drzava $drzava)
+    public function setDrzava(\App\Entity\Drzava $drzava=null)
     {
         $this->drzava = $drzava;
         return $this;

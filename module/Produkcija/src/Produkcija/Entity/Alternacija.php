@@ -104,13 +104,20 @@ class Alternacija
     protected $funkcija;
 
     /**
+     * $$ začasno
+     */
+    /* @var $variable Alternacija */
+    private $tmp1;
+
+
+    /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Zaposlitev", inversedBy="alternacije")
      * @ORM\JoinColumn(name="zaposlitev_id", referencedColumnName="id")
      * @Max\I18n(label="alternacija.zaposlitev",  description="alternacija.d.zaposlitev")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Zaposlitev
      */
-    protected $zaposlitev;
+    protected $zaposlitev=null;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="alternacije")
@@ -199,26 +206,6 @@ class Alternacija
         }
     }
 
-    /**
-     * $$ brez tipa, da deluje tudi z null
-     * 
-     * @param type $zaposlitev
-     */
-    public function setPogodba($pogodba)
-    {
-        $this->pogodba = $pogodba;
-    }
-
-    /**
-     * $$ brez tipa, da deluje tudi z null
-     * 
-     * @param type $zaposlitev
-     */
-    public function setZaposlitev($zaposlitev)
-    {
-        $this->zaposlitev = $zaposlitev;
-    }
-
     public function getId()
     {
         return $this->id;
@@ -274,9 +261,24 @@ class Alternacija
         return $this->funkcija;
     }
 
+    public function getTmp1()
+    {
+        return $this->tmp1;
+    }
+
+    public function getZaposlitev()
+    {
+        return $this->zaposlitev;
+    }
+
     public function getOseba()
     {
         return $this->oseba;
+    }
+
+    public function getPogodba()
+    {
+        return $this->pogodba;
     }
 
     public function getImaPogodbo()
@@ -349,15 +351,33 @@ class Alternacija
         return $this;
     }
 
-    public function setFunkcija(\Produkcija\Entity\Funkcija $funkcija)
+    public function setFunkcija(\Produkcija\Entity\Funkcija $funkcija=null)
     {
         $this->funkcija = $funkcija;
         return $this;
     }
 
-    public function setOseba(\App\Entity\Oseba $oseba)
+    public function setTmp1($tmp1)
+    {
+        $this->tmp1 = $tmp1;
+        return $this;
+    }
+
+    public function setZaposlitev(\Produkcija\Entity\Zaposlitev $zaposlitev=null)
+    {
+        $this->zaposlitev = $zaposlitev;
+        return $this;
+    }
+
+    public function setOseba(\App\Entity\Oseba $oseba=null)
     {
         $this->oseba = $oseba;
+        return $this;
+    }
+
+    public function setPogodba(\Produkcija\Entity\Pogodba $pogodba=null)
+    {
+        $this->pogodba = $pogodba;
         return $this;
     }
 
@@ -373,14 +393,5 @@ class Alternacija
         return $this;
     }
 
-    public function getZaposlitev()
-    {
-        return $this->zaposlitev;
-    }
-
-    public function getPogodba()
-    {
-        return $this->pogodba;
-    }
 
 }

@@ -570,7 +570,7 @@ class Uprizoritev
         return $this;
     }
 
-    public function setMaticniOder(\Prodaja\Entity\Prostor $maticniOder)
+    public function setMaticniOder(\Prodaja\Entity\Prostor $maticniOder=null)
     {
         $this->maticniOder = $maticniOder;
         return $this;
@@ -678,25 +678,25 @@ class Uprizoritev
         return $this;
     }
 
-    public function setBesedilo(\Produkcija\Entity\Besedilo $besedilo)
+    public function setBesedilo(\Produkcija\Entity\Besedilo $besedilo=null)
     {
         $this->besedilo = $besedilo;
         return $this;
     }
 
-    public function setZvrstUprizoritve(\Produkcija\Entity\ZvrstUprizoritve $zvrstUprizoritve)
+    public function setZvrstUprizoritve(\Produkcija\Entity\ZvrstUprizoritve $zvrstUprizoritve=null)
     {
         $this->zvrstUprizoritve = $zvrstUprizoritve;
         return $this;
     }
 
-    public function setZvrstSurs(\Produkcija\Entity\ZvrstSurs $zvrstSurs)
+    public function setZvrstSurs(\Produkcija\Entity\ZvrstSurs $zvrstSurs=null)
     {
         $this->zvrstSurs = $zvrstSurs;
         return $this;
     }
 
-    public function setProducent(\ProgramDela\Entity\ProdukcijskaHisa $producent)
+    public function setProducent(\ProgramDela\Entity\ProdukcijskaHisa $producent=null)
     {
         $this->producent = $producent;
         return $this;

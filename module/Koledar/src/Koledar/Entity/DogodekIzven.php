@@ -54,7 +54,7 @@ class DogodekIzven
         return $this;
     }
 
-    public function setDogodek(\Koledar\Entity\Dogodek $dogodek)
+    public function setDogodek(\Koledar\Entity\Dogodek $dogodek=null)
     {
         $this->dogodek = $dogodek;
         return $this;

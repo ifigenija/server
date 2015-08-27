@@ -253,7 +253,7 @@ class ProgramFestival
         return $this->stTujihSelektorjev;
     }
 
-    public function setProgramDela(\ProgramDela\Entity\ProgramDela $programDela)
+    public function setProgramDela(\ProgramDela\Entity\ProgramDela $programDela=null)
     {
         $this->programDela = $programDela;
         return $this;

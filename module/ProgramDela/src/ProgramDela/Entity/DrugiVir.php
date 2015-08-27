@@ -112,7 +112,7 @@ class DrugiVir
         return $this;
     }
 
-    public function setEnotaPrograma(\ProgramDela\Entity\EnotaPrograma $enotaPrograma)
+    public function setEnotaPrograma(\ProgramDela\Entity\EnotaPrograma $enotaPrograma=null)
     {
         $this->enotaPrograma = $enotaPrograma;
         return $this;

@@ -507,7 +507,7 @@ class Oseba
         return $this;
     }
 
-    public function setUser(\Aaa\Entity\User $user)
+    public function setUser(\Aaa\Entity\User $user=null)
     {
         $this->user = $user;
         return $this;

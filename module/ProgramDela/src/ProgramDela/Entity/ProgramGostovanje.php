@@ -198,13 +198,13 @@ class ProgramGostovanje
         return $this;
     }
 
-    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument)
+    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument=null)
     {
         $this->dokument = $dokument;
         return $this;
     }
 
-    public function setGostitelj(\App\Entity\Popa $gostitelj)
+    public function setGostitelj(\App\Entity\Popa $gostitelj=null)
     {
         $this->gostitelj = $gostitelj;
         return $this;
@@ -215,7 +215,7 @@ class ProgramGostovanje
         return $this->drzavaGostovanja;
     }
 
-    public function setDrzavaGostovanja(\App\Entity\Drzava $drzavaGostovanja)
+    public function setDrzavaGostovanja(\App\Entity\Drzava $drzavaGostovanja=null)
     {
         $this->drzavaGostovanja = $drzavaGostovanja;
         return $this;

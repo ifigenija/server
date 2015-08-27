@@ -834,7 +834,7 @@ class EnotaPrograma
         return $this;
     }
 
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev)
+    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev=null)
     {
         $this->uprizoritev = $uprizoritev;
         return $this;
@@ -846,7 +846,7 @@ class EnotaPrograma
         return $this;
     }
 
-    public function setTipProgramskeEnote(\ProgramDela\Entity\TipProgramskeEnote $tipProgramskeEnote)
+    public function setTipProgramskeEnote(\ProgramDela\Entity\TipProgramskeEnote $tipProgramskeEnote=null)
     {
         $this->tipProgramskeEnote = $tipProgramskeEnote;
         return $this;

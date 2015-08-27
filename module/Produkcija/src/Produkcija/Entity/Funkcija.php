@@ -331,7 +331,7 @@ class Funkcija
         return $this;
     }
 
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev)
+    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev=null)
     {
         $this->uprizoritev = $uprizoritev;
         return $this;
@@ -343,7 +343,7 @@ class Funkcija
         return $this;
     }
 
-    public function setTipFunkcije(\Produkcija\Entity\TipFunkcije $tipFunkcije)
+    public function setTipFunkcije(\Produkcija\Entity\TipFunkcije $tipFunkcije=null)
     {
         $this->tipFunkcije = $tipFunkcije;
         return $this;

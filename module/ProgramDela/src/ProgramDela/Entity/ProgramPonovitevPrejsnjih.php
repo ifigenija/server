@@ -84,7 +84,7 @@ class ProgramPonovitevPrejsnjih
         return $this->dokument;
     }
 
-    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument)
+    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument=null)
     {
         $this->dokument = $dokument;
         return $this;

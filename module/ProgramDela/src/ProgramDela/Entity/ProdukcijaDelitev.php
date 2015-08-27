@@ -217,13 +217,13 @@ class ProdukcijaDelitev
         return $this;
     }
 
-    public function setEnotaPrograma(\ProgramDela\Entity\EnotaPrograma $enotaPrograma)
+    public function setEnotaPrograma(\ProgramDela\Entity\EnotaPrograma $enotaPrograma=null)
     {
         $this->enotaPrograma = $enotaPrograma;
         return $this;
     }
 
-    public function setKoproducent(\ProgramDela\Entity\ProdukcijskaHisa $koproducent)
+    public function setKoproducent(\ProgramDela\Entity\ProdukcijskaHisa $koproducent=null)
     {
         $this->koproducent = $koproducent;
         return $this;

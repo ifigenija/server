@@ -109,7 +109,7 @@ class ProgramPremiera
         return $this->dokument;
     }
 
-    function setDokument(\ProgramDela\Entity\ProgramDela $dokument)
+    function setDokument(\ProgramDela\Entity\ProgramDela $dokument=null)
     {
         $this->dokument = $dokument;
     }

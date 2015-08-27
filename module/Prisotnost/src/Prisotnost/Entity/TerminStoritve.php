@@ -172,19 +172,19 @@ class TerminStoritve
         return $this;
     }
 
-    public function setDogodek(\Koledar\Entity\Dogodek $dogodek)
+    public function setDogodek(\Koledar\Entity\Dogodek $dogodek=null)
     {
         $this->dogodek = $dogodek;
         return $this;
     }
 
-    public function setAlternacija(\Produkcija\Entity\Alternacija $alternacija)
+    public function setAlternacija(\Produkcija\Entity\Alternacija $alternacija=null)
     {
         $this->alternacija = $alternacija;
         return $this;
     }
 
-    public function setOseba(\App\Entity\Oseba $oseba)
+    public function setOseba(\App\Entity\Oseba $oseba=null)
     {
         $this->oseba = $oseba;
         return $this;

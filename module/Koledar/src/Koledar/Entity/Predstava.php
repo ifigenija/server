@@ -95,25 +95,25 @@ class Predstava
         return $this;
     }
 
-    public function setDogodek(\Koledar\Entity\Dogodek $dogodek)
+    public function setDogodek(\Koledar\Entity\Dogodek $dogodek=null)
     {
         $this->dogodek = $dogodek;
         return $this;
     }
 
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev)
+    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev=null)
     {
         $this->uprizoritev = $uprizoritev;
         return $this;
     }
 
-    public function setGostovanje(\Koledar\Entity\Gostovanje $gostovanje)
+    public function setGostovanje(\Koledar\Entity\Gostovanje $gostovanje=null)
     {
         $this->gostovanje = $gostovanje;
         return $this;
     }
 
-    public function setGostujoca(\Koledar\Entity\Gostujoca $gostujoca)
+    public function setGostujoca(\Koledar\Entity\Gostujoca $gostujoca=null)
     {
         $this->gostujoca = $gostujoca;
         return $this;

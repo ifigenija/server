@@ -104,13 +104,13 @@ class Rekviziterstvo
         return $this;
     }
 
-    public function setRekvizit(\Produkcija\Entity\Rekvizit $rekvizit)
+    public function setRekvizit(\Produkcija\Entity\Rekvizit $rekvizit=null)
     {
         $this->rekvizit = $rekvizit;
         return $this;
     }
 
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev)
+    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev=null)
     {
         $this->uprizoritev = $uprizoritev;
         return $this;

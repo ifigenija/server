@@ -172,13 +172,13 @@ class Prostor
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa)
+    public function setPopa(\App\Entity\Popa $popa=null)
     {
         $this->popa = $popa;
         return $this;
     }
 
-    public function setNaslov(\App\Entity\PostniNaslov $naslov)
+    public function setNaslov(\App\Entity\PostniNaslov $naslov=null)
     {
         $this->naslov = $naslov;
         return $this;

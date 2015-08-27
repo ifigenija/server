@@ -288,7 +288,7 @@ class Zaposlitev
         return $this;
     }
 
-    public function setOseba(\App\Entity\Oseba $oseba)
+    public function setOseba(\App\Entity\Oseba $oseba=null)
     {
         $this->oseba = $oseba;
         return $this;

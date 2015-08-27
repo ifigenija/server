@@ -153,7 +153,7 @@ class ProgramskaEnotaSklopa
         return $this;
     }
 
-    public function setProgramRazno(\ProgramDela\Entity\ProgramRazno $programRazno)
+    public function setProgramRazno(\ProgramDela\Entity\ProgramRazno $programRazno=null)
     {
         $this->programRazno = $programRazno;
         return $this;

@@ -1924,7 +1924,7 @@ class ProgramDela
         return $this;
     }
 
-    public function setSezona(\Koledar\Entity\Sezona $sezona)
+    public function setSezona(\Koledar\Entity\Sezona $sezona=null)
     {
         $this->sezona = $sezona;
         return $this;

@@ -503,7 +503,7 @@ class Popa
         return $this;
     }
 
-    public function setDrzava(\App\Entity\Drzava $drzava)
+    public function setDrzava(\App\Entity\Drzava $drzava=null)
     {
         $this->drzava = $drzava;
         return $this;
@@ -593,13 +593,13 @@ class Popa
         return $this;
     }
 
-    public function setProducent(\ProgramDela\Entity\ProdukcijskaHisa $producent)
+    public function setProducent(\ProgramDela\Entity\ProdukcijskaHisa $producent=null)
     {
         $this->producent = $producent;
         return $this;
     }
 
-    public function setKupec(\Prodaja\Entity\Kupec $kupec)
+    public function setKupec(\Prodaja\Entity\Kupec $kupec=null)
     {
         $this->kupec = $kupec;
         return $this;

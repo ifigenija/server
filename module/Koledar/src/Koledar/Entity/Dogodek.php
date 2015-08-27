@@ -312,37 +312,37 @@ class Dogodek
         return $this;
     }
 
-    public function setPredstava(\Koledar\Entity\Predstava $predstava)
+    public function setPredstava(\Koledar\Entity\Predstava $predstava=null)
     {
         $this->predstava = $predstava;
         return $this;
     }
 
-    public function setZasedenost(\Koledar\Entity\Zasedenost $zasedenost)
+    public function setZasedenost(\Koledar\Entity\Zasedenost $zasedenost=null)
     {
         $this->zasedenost = $zasedenost;
         return $this;
     }
 
-    public function setVaja(\Koledar\Entity\Vaja $vaja)
+    public function setVaja(\Koledar\Entity\Vaja $vaja=null)
     {
         $this->vaja = $vaja;
         return $this;
     }
 
-    public function setGostovanje(\Koledar\Entity\Gostovanje $gostovanje)
+    public function setGostovanje(\Koledar\Entity\Gostovanje $gostovanje=null)
     {
         $this->gostovanje = $gostovanje;
         return $this;
     }
 
-    public function setDogodekIzven(\Koledar\Entity\DogodekIzven $dogodekIzven)
+    public function setDogodekIzven(\Koledar\Entity\DogodekIzven $dogodekIzven=null)
     {
         $this->dogodekIzven = $dogodekIzven;
         return $this;
     }
 
-    public function setProstor(\Prodaja\Entity\Prostor $prostor)
+    public function setProstor(\Prodaja\Entity\Prostor $prostor=null)
     {
         $this->prostor = $prostor;
         return $this;
@@ -366,7 +366,7 @@ class Dogodek
         return $this;
     }
 
-    public function setSezona(\Koledar\Entity\Sezona $sezona)
+    public function setSezona(\Koledar\Entity\Sezona $sezona=null)
     {
         $this->sezona = $sezona;
         return $this;
