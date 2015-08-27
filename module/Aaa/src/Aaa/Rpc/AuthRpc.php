@@ -152,7 +152,8 @@ class AuthRpcService
 
     /**
      * zamenja geslo uporabniku
-     * 
+     * @params string $oldPassword
+     * @params string $newPassword
      * @returns   true          če geslo uspešno menjano,
      */
     public function changePassword($oldPassword, $newPassword)
@@ -163,7 +164,6 @@ class AuthRpcService
         $ident = $this->getIdentity();
         if (!$ident) {
             throw new \Max\Exception\MaxException('Uporabnik ni prijavljen', 1000995);
-            return false;       // za vsak slučaj
         }
 
         /**
@@ -171,7 +171,6 @@ class AuthRpcService
          */
         if ($newPassword ==$oldPassword) {
             throw new \Max\Exception\MaxException('Novo geslo enako staremu', 1000993);
-            return false;       // za vsak slučaj
         }
 
         /**
@@ -180,9 +179,7 @@ class AuthRpcService
         $staroGesloOk = \Aaa\Service\AaaService::checkPassword($ident, $oldPassword);
         if (!$staroGesloOk) {
             throw new \Max\Exception\MaxException('Napačno staro geslo', 1000994);
-            return false;       // za vsak slučaj
         }
-
 
         /**
          * zamenjamo geslo
