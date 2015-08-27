@@ -21,6 +21,8 @@ forms:
             - jeNastopajoci
 #            - alternacije
             - oseba
+    vse:
+        link: default
 lists:
     default: 
         filter:
