@@ -284,12 +284,16 @@ class UprizoritevCest
             'sloAvtor'              => FALSE,
             'kratkiNaslov'          => 'zz',
             'besedilo'              => $this->lookBesedilo['id'],
-            'zvrstUprizoritve'      =>null,
+            'zvrstUprizoritve'      => null,
             'zvrstSurs'             => $this->lookZvrstSurs['id'],
             'internacionalniNaslov' => 'zz',
             'steviloVaj'            => 4,
             'planiranoSteviloVaj'   => 5,
             'producent'             => null,
+            'krstna'                => true,
+            'prvaSlovenska'         => true,
+            'naslovIzvirnika'       => 'zz',
+            'podnaslovIzvirnika'    => 'zz',
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -316,7 +320,7 @@ class UprizoritevCest
             'sloAvtor'              => true, // $$ bool vrača napako convertToBool
             'kratkiNaslov'          => 'aa',
             'besedilo'              => $this->lookBesedilo['id'],
-            'zvrstUprizoritve'      =>null,
+            'zvrstUprizoritve'      => null,
             'zvrstSurs'             => $this->lookZvrstSurs['id'],
             'internacionalniNaslov' => 'aa',
             'steviloVaj'            => 6,
@@ -348,7 +352,7 @@ class UprizoritevCest
             'sloAvtor'              => true, // $$ bool vrača napako convertToBool
             'kratkiNaslov'          => 'bb',
             'besedilo'              => $this->lookBesedilo['id'],
-            'zvrstUprizoritve'      =>null,
+            'zvrstUprizoritve'      => null,
             'zvrstSurs'             => $this->lookZvrstSurs['id'],
             'internacionalniNaslov' => 'bb',
             'steviloVaj'            => 5,
@@ -387,7 +391,7 @@ class UprizoritevCest
             'kratkiNaslov'     => 'bb',
             'maticniOder'      => $this->lookProstor['id'],
             'besedilo'         => $this->lookBesedilo['id'],
-            'zvrstUprizoritve' =>null,
+            'zvrstUprizoritve' => null,
             'zvrstSurs'        => $this->lookZvrstSurs['id'],
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
@@ -796,12 +800,16 @@ class UprizoritevCest
         $I->assertEquals($ent['datumZakljucka'], '2019-02-01T00:00:00+0100');
         $I->assertEquals($ent['sloAvtor'], FALSE);
         $I->assertEquals($ent['kratkiNaslov'], 'zz');
-        $I->assertEquals($ent['besedilo']['id'], $this->lookBesedilo['id'],"Besedilo");
-        $I->assertEquals($ent['zvrstUprizoritve'],null);
+        $I->assertEquals($ent['besedilo']['id'], $this->lookBesedilo['id'], "Besedilo");
+        $I->assertEquals($ent['zvrstUprizoritve'], null);
         $I->assertEquals($ent['zvrstSurs'], $this->lookZvrstSurs['id']);
         $I->assertEquals($ent['internacionalniNaslov'], 'zz');
 //        $I->assertEquals($ent['steviloVaj'], 4,"Število vaj");
         $I->assertEquals($ent['planiranoSteviloVaj'], 5);
+        $I->assertEquals($ent['krstna'                ], true,"krstna");
+        $I->assertEquals($ent['prvaSlovenska'         ], true);
+        $I->assertEquals($ent['naslovIzvirnika'       ], 'zz');
+        $I->assertEquals($ent['podnaslovIzvirnika'    ], 'zz');
 
         $I->assertFalse(isset($ent['producent']), "producent");
         $I->assertTrue(isset($ent['funkcije']));

@@ -14,6 +14,8 @@ forms:
             - podnaslov
             - internacionalniNaslov
             - delovniNaslov
+            - naslovIzvirnika
+            - podnaslovIzvirnika
             - datumZacStudija
 #            - steviloVaj
             - planiranoSteviloVaj
@@ -28,6 +30,8 @@ forms:
             - arhOpomba
             - datumZakljucka
             - sloAvtor
+            - krstna
+            - prvaSlovenska
             - kratkiNaslov
 #            - name: maticniProstor
 #              type: multiselect

@@ -74,6 +74,20 @@ class Uprizoritev
     protected $internacionalniNaslov;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Max\I18n(label="uprizoritev.naslovIzvirnika", description="uprizoritev.d.naslovIzvirnika")
+     * @var string
+     */
+    protected $naslovIzvirnika;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Max\I18n(label="uprizoritev.podnaslovIzvirnika", description="uprizoritev.d.podnaslovIzvirnika")
+     * @var string
+     */
+    protected $podnaslovIzvirnika;
+
+    /**
      * pomeni začetek faze produkcija
      * 
      * polje uporabljamo že v fazi predprodukcije za makroplaniranje
@@ -199,6 +213,26 @@ class Uprizoritev
     protected $sloAvtor;
 
     /**
+     * ali je čisto prva uprizoritev
+     * 
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="uprizoritev.krstna", description="uprizoritev.d.krstna")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $krstna;
+
+    /**
+     * ali je to prva uprizorizev v Sloveniji
+     * 
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="uprizoritev.prvaSlovenska", description="uprizoritev.d.prvaSlovenska")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $prvaSlovenska;
+
+    /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="uprizoritev.kratkiNaslov", description="uprizoritev.d.kratkiNaslov")
      * @var string
@@ -301,7 +335,7 @@ class Uprizoritev
     {
         $this->expect(!empty($this->sifra), 'Šifra ne sme biti prazna', 1000877);
         if (!empty($this->datumZacStudija) && !empty($this->datumPremiere)) {
-            $this->expect($this->datumZacStudija <=$this->datumPremiere, 'Začetek študija ne sme biti kasneje kot datum premiere', 1000878);
+            $this->expect($this->datumZacStudija <= $this->datumPremiere, 'Začetek študija ne sme biti kasneje kot datum premiere', 1000878);
         }
     }
 
@@ -665,6 +699,50 @@ class Uprizoritev
     public function setProducent(\ProgramDela\Entity\ProdukcijskaHisa $producent)
     {
         $this->producent = $producent;
+        return $this;
+    }
+
+    public function getNaslovIzvirnika()
+    {
+        return $this->naslovIzvirnika;
+    }
+
+    public function getPodnaslovIzvirnika()
+    {
+        return $this->podnaslovIzvirnika;
+    }
+
+    public function getKrstna()
+    {
+        return $this->krstna;
+    }
+
+    public function getPrvaSlovenska()
+    {
+        return $this->prvaSlovenska;
+    }
+
+    public function setNaslovIzvirnika($naslovIzvirnika)
+    {
+        $this->naslovIzvirnika = $naslovIzvirnika;
+        return $this;
+    }
+
+    public function setPodnaslovIzvirnika($podnaslovIzvirnika)
+    {
+        $this->podnaslovIzvirnika = $podnaslovIzvirnika;
+        return $this;
+    }
+
+    public function setKrstna($krstna)
+    {
+        $this->krstna = $krstna;
+        return $this;
+    }
+
+    public function setPrvaSlovenska($prvaSlovenska)
+    {
+        $this->prvaSlovenska = $prvaSlovenska;
         return $this;
     }
 
