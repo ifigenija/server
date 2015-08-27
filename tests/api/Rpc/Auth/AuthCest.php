@@ -37,14 +37,33 @@ class AuthCest
     public function login(ApiTester $I)
     {
         $res = $I->successfullyCallRpc($this->rpcUrl, 'login', [
-            'username' => \IfiTest\AuthPage::$admin,
-            'password' => \IfiTest\AuthPage::$adminPass,
+            'username' => \IfiTest\AuthPage::$vesna,
+            'password' => \IfiTest\AuthPage::$vesnaPass,
         ]);
 
-        $I->assertEquals(\IfiTest\AuthPage::$admin, $res['username'], 'preveri vrnjeno uporabniško ime');
+        $I->assertEquals(\IfiTest\AuthPage::$vesna, $res['username'], 'preveri vrnjeno uporabniško ime');
         $sess = $I->grabCookie('PHPSESSID');
         $I->assertNotEmpty($sess, 'session cookie sprejet');
     }
 
-   
+    /**
+     */
+    public function loginZNapacnimGeslom(ApiTester $I)
+    {
+        $resp = $I->failCallRpc($this->rpcUrl, 'login', [
+            'username' => \IfiTest\AuthPage::$vesna,
+            'password' => "neobstojeceGeslo1234.",
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1000998, $resp['code'], 'Vpis ni uspel');
+       
+        
+        $resp = $I->failCallRpc($this->rpcUrl, 'login', [
+            'username' => 'neobstojec',
+            'password' => "neobstojeceGeslo1234.",
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1000998, $resp['code'], 'Vpis ni uspel');
+    }
+
 }
