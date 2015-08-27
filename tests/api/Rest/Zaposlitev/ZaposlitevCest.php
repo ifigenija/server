@@ -284,4 +284,35 @@ class ZaposlitevCest
         $I->assertEquals(1, count($resp));
     }
 
+        /**
+     *  testiram #1172 - zakaj zapis une uspe?
+     * 
+     * @depends lookupOsebo
+     * 
+     * @param ApiTester $I
+     */
+//    public function createNaVse(ApiTester $I)
+//    {
+//        $data      = [
+//            'status'              => 'vv',
+//            'zacetek'             => '2010-02-01T00:00:00+0100',
+//            'konec'               => '2010-02-01T00:00:00+0100',
+//            'tip'                 => 1,
+//            'delovnaObveza'       => 2,
+//            'malica'              => 'vv',
+//            'izmenskoDelo'        => true,
+//            'individualnaPogodba' => true,
+//            'jeZaposlenVdrugemJz' => TRUE,
+//            'jeNastopajoci'       => TRUE,
+//            'oseba'               => $this->lookOseba['id'],
+//        ];
+//        $ent       = $I->successfullyCreate($this->restUrl."/vse", $data);
+//        $I->assertNotEmpty($ent['id']);
+//        codecept_debug($ent);
+//        $I->assertEquals($ent['status'], 'A');
+//        
+//    }
+
+    
+    
 }
