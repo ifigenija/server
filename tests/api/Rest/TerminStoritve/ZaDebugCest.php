@@ -28,7 +28,7 @@ class ZaDebugCest
     private $lookAlternacija2Teh;
     private $roleUrl              = '/rest/role';
     private $rpcRoleUrl           = '/rpc/aaa/role';
-    private $rpcUserUrl = '/rpc/aaa/user';
+    private $rpcUserUrl           = '/rpc/aaa/user';
 
     public function _before(ApiTester $I)
     {
@@ -48,12 +48,11 @@ class ZaDebugCest
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
 
-        $resp       = $I->successfullyGetList($this->restUrl . "/vse", []);
+        $resp       = $I->successfullyGetList($this->restUrl, []);
         $list       = $resp['data'];
         // poiščemo termina storitve - najprej za ne-tehnika:
         $key        = array_search($this->lookAlternacija1['id'], array_column($list, 'alternacija'));
-        $this->obj1 = $ent        = $list[$key]; 
-
+        $this->obj1 = $ent        = $list[$key];
     }
 
     /**
@@ -81,7 +80,6 @@ class ZaDebugCest
         $ent['planiranoTraja'] = 3;
         $resp                  = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($resp);
-
     }
 
 }

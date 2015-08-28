@@ -201,7 +201,7 @@ class AvtorizacijeTerminStoritveCest
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
 
-        $resp       = $I->successfullyGetList($this->restUrl . "/vse", []);
+        $resp       = $I->successfullyGetList($this->restUrl, []);
         $list       = $resp['data'];
 //        codecept_debug($list);
         $I->assertNotEmpty($list);

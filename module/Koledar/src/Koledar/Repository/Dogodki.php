@@ -33,21 +33,22 @@ class Dogodki
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
+            case "default":
             case "vse":
                 $qb   = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
-            case "default":
-                $this->expect(!(empty($options['sezona']) ), "Sezona je obvezna", 770101);
-                $crit = new Criteria();
-                $e    = $crit->expr();
-
-                if (!empty($options['sezona'])) {
-                    $sezona = $this->getEntityManager()->find('\Koledar\Entity\Sezona', $options['sezona']);
-                    $exp      = $e->eq('sezona', $sezona);
-                }
-                $crit->andWhere($exp);
-                return new Selectable($this, $crit);
+//            case "default":
+//                $this->expect(!(empty($options['sezona']) ), "Sezona je obvezna", 770101);
+//                $crit = new Criteria();
+//                $e    = $crit->expr();
+//
+//                if (!empty($options['sezona'])) {
+//                    $sezona = $this->getEntityManager()->find('\Koledar\Entity\Sezona', $options['sezona']);
+//                    $exp      = $e->eq('sezona', $sezona);
+//                }
+//                $crit->andWhere($exp);
+//                return new Selectable($this, $crit);
         }
     }
 

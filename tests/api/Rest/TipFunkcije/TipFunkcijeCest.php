@@ -78,7 +78,7 @@ class TipFunkcijeCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
+    public function getListDefault(ApiTester $I)
     {
         $listUrl = $this->restUrl;
         codecept_debug($listUrl);
@@ -95,17 +95,17 @@ class TipFunkcijeCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertTrue(count($list) > 0);
-//        $I->assertEquals("Avtor", $list[0]['ime']);      //glede na sort
-    }
+//    public function getListVse(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/vse";
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertTrue(count($list) > 0);
+////        $I->assertEquals("Avtor", $list[0]['ime']);      //glede na sort
+//    }
 
     /**
      * spremenim zapis

@@ -22,18 +22,18 @@ forms:
             - kpe
 lists:
     default: 
-        filter:
-            elements:                 
-                - name: enotaPrograma
-                  type: toone
-                  options:
-                      label: Enota programa
-                      targetEntity: ProgramDela\Entity\EnotaPrograma
-                      required: true
+#        filter:
+#            elements:                 
+#                - name: enotaPrograma
+#                  type: toone
+#                  options:
+#                      label: Enota programa
+#                      targetEntity: ProgramDela\Entity\EnotaPrograma
+#                      required: true
         hydrator:
             lookups: [ koproducent ]
-    vse: 
-        filter:
+#    vse: 
+#        filter:
           
 
     

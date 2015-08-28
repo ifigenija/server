@@ -44,9 +44,9 @@ lists:
     default: 
         hydrator:
             - exclude: []
-    vse: 
-        hydrator:
-            - exclude: []
+#    vse: 
+#        hydrator:
+#            - exclude: []
 relation:
     default:
         drugiViri:

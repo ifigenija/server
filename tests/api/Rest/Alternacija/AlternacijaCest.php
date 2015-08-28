@@ -78,7 +78,7 @@ class AlternacijaCest
      */
     public function getListDogodkov(ApiTester $I)
     {
-        $resp             = $I->successfullyGetList($this->dogodekUrl . "/vse", []);
+        $resp             = $I->successfullyGetList($this->dogodekUrl, []);
         $list             = $resp['data'];
         $I->assertNotEmpty($list);
         $this->objDogodek = $drzava           = array_pop($list);
@@ -239,18 +239,18 @@ class AlternacijaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoFunkciji(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "?funkcija=" . $this->lookFunkcija['id'];
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        codecept_debug($resp);
-
-        $I->assertGreaterThanOrEqual(4, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-//        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
-    }
+//    public function getListPoFunkciji(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "?funkcija=" . $this->lookFunkcija['id'];
+//
+//        $resp = $I->successfullyGetList($listUrl, []);
+//        $list = $resp['data'];
+//        codecept_debug($resp);
+//
+//        $I->assertGreaterThanOrEqual(4, $resp['state']['totalRecords']);
+//        $I->assertNotEmpty($list);
+////        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
+//    }
 
     /**
      * preberi vse zapise po določeni uprizoritvi
@@ -283,19 +283,19 @@ class AlternacijaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";             // $$ rb to je nehalo delovati - ne vem zakaj
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-        codecept_debug($list);
-
-
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
-    }
+//    public function getListVse(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/vse";             // $$ rb to je nehalo delovati - ne vem zakaj
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//        codecept_debug($list);
+//
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+////        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
+//    }
 
     /**
      * spremenim zapis

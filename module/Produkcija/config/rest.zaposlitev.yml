@@ -33,12 +33,6 @@ lists:
                       label: Oseba
                       targetEntity: App\Entity\Oseba
                       required: false
-#                - name: alternacije    # $$ rb ali v namenskem view-u?
-#                  type: toone
-#                  options:
-#                      label: Alternacije
-#                      targetEntity: Produkcija\Entity\Alternacija
-#                      required: false
         hydrator:
             exclude: []
             lookups: [ oseba ]

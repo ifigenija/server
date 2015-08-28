@@ -17,13 +17,13 @@ lists:
     default: 
         filter:
             elements:                 
-                - name: popa
-                  type: toone
-                  options:
-                      label: Partner
-                      targetEntity: App\Entity\Popa
-                      required: true
-#                - name: koprodukcije       # $$ rb ali bomo naredili v namenskem view-u?
+#                - name: popa
+#                  type: toone
+#                  options:
+#                      label: Partner
+#                      targetEntity: App\Entity\Popa
+#                      required: true
+##                - name: koprodukcije       # $$ rb ali bomo naredili v namenskem view-u?
 #                  type: tomany
 #                  options:
 #                      label: Koprodukcije
@@ -31,8 +31,8 @@ lists:
 #                      required: false
         hydrator:
             - exclude: []
-    vse: 
-        filter:
+#    vse: 
+#        filter:
 relation:
     default:
         koprodukcije:

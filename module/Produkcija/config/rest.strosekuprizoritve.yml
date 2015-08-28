@@ -27,7 +27,7 @@ lists:
                       required: true
         hydrator:
             lookups: [ popa ]
-    vse: 
-        filter:
-        hydrator:
-            lookups: [ popa ]
+#    vse: 
+#        filter:
+#        hydrator:
+#            lookups: [ popa ]

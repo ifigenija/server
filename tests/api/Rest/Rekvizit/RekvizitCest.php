@@ -166,17 +166,17 @@ class RekvizitCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-        $I->assertEquals("aa", $list[0]['ime']);      //  odvisno od sortiranja
-    }
+//    public function getListVse(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/vse";
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+//        $I->assertEquals("aa", $list[0]['ime']);      //  odvisno od sortiranja
+//    }
 
     /**
      * @depends create

@@ -38,8 +38,8 @@ lists:
                       multiple: true
                       required: false
                       value_options: @funkcija.podrocje
-    vse: 
-        filter:
+#    vse: 
+#        filter:
 hydrator:
    virtual: [imena]            
 relation:

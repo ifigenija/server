@@ -19,8 +19,8 @@ lists:
         filter:                
         hydrator:
             - exclude: []
-    vse: 
-        filter:
+#    vse: 
+#        filter:
 relation:
     default:
         dogodki:

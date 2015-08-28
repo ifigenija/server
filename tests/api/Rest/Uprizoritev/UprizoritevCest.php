@@ -676,24 +676,24 @@ class UprizoritevCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);      //$$ začasno izključimo, dokler integer =null ne stestiramo
-//        $I->assertEquals("aa", $list[0]['naslov']);      //glede na sort   
-        // iščemo naprimer tudi po vrednosti v avtor
-        $listUrl = $this->restUrl . "/vse?q=avzz";
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertEquals(1, $resp['state']['totalRecords']);      //$$ začasno izključimo, dokler integer =null ne stestiramo
-//        $I->assertEquals("avzz", $list[0]['avtor']);
-    }
+//    public function getListVse(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/vse";
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);      //$$ začasno izključimo, dokler integer =null ne stestiramo
+////        $I->assertEquals("aa", $list[0]['naslov']);      //glede na sort   
+//        // iščemo naprimer tudi po vrednosti v avtor
+//        $listUrl = $this->restUrl . "/vse?q=avzz";
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertEquals(1, $resp['state']['totalRecords']);      //$$ začasno izključimo, dokler integer =null ne stestiramo
+////        $I->assertEquals("avzz", $list[0]['avtor']);
+//    }
 
     /**
      *  napolnimo vsaj en zapis
@@ -742,18 +742,18 @@ class UprizoritevCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoBesedilu(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "?besedilo=" . $this->lookBesedilo['id'];
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        codecept_debug($resp);
-
-        $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-//        $I->assertEquals("aa", $list[0]['opis']);      // $$ sortiranje ne deluje v redu? b namesto aa
-    }
+//    public function getListPoBesedilu(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "?besedilo=" . $this->lookBesedilo['id'];
+//
+//        $resp = $I->successfullyGetList($listUrl, []);
+//        $list = $resp['data'];
+//        codecept_debug($resp);
+//
+//        $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);
+//        $I->assertNotEmpty($list);
+////        $I->assertEquals("aa", $list[0]['opis']);      // $$ sortiranje ne deluje v redu? b namesto aa
+//    }
 
     /**
      * spremenim zapis

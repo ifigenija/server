@@ -166,9 +166,9 @@ class RekviziterstvoCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
+    public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "/vse";
+        $listUrl = $this->restUrl ;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
@@ -183,18 +183,18 @@ class RekviziterstvoCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoUprizoritvi(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev['id'];
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        codecept_debug($resp);
-
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-        $I->assertEquals("aa", $list[0]['opisPostavitve']);      //glede na sort
-    }
+//    public function getListPoUprizoritvi(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev['id'];
+//
+//        $resp = $I->successfullyGetList($listUrl, []);
+//        $list = $resp['data'];
+//        codecept_debug($resp);
+//
+//        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+//        $I->assertNotEmpty($list);
+//        $I->assertEquals("aa", $list[0]['opisPostavitve']);      //glede na sort
+//    }
 
     /**
      * spremenim zapis

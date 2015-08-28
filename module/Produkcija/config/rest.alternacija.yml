@@ -34,12 +34,12 @@ lists:
     default: 
         filter:
             elements:                 
-                - name: funkcija
-                  type: toone
-                  options:
-                      label: Funkcija
-                      targetEntity: Produkcija\Entity\Funkcija
-                      required: false
+#                - name: funkcija
+#                  type: toone
+#                  options:
+#                      label: Funkcija
+#                      targetEntity: Produkcija\Entity\Funkcija
+#                      required: false
                 - name: uprizoritev
                   type: toone
                   options:
@@ -51,26 +51,25 @@ lists:
                 - oseba
                 - funkcija
                 - pogodba
-    vse: 
-        filter:
-            elements: 
-                - name: q
-                  type: Text
-                - name: uprizoritev
-                  type: toone
-                  options:
-                      label: Uprizoritev
-                      targetEntity: Produkcija\Entity\Uprizoritev
-                      required: false
-                - name: funkcija
-                  type: toone
-                  options:
-                      label: Funkcija
-                      targetEntity: Produkcija\Entity\Funkcija
-                      required: false
-        hydrator: 
-            lookups: [funkcija, pogodba, oseba]
-#            lookups: [oseba]
+#    vse: 
+#        filter:
+#            elements: 
+#                - name: q
+#                  type: Text
+#                - name: uprizoritev
+#                  type: toone
+#                  options:
+#                      label: Uprizoritev
+#                      targetEntity: Produkcija\Entity\Uprizoritev
+#                      required: false
+#                - name: funkcija
+#                  type: toone
+#                  options:
+#                      label: Funkcija
+#                      targetEntity: Produkcija\Entity\Funkcija
+#                      required: false
+#        hydrator: 
+#            lookups: [funkcija, pogodba, oseba]
 relation:
     default:
         storitve:

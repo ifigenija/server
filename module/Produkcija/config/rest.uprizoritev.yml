@@ -56,17 +56,17 @@ forms:
                - stroski
                - stroski.popa
 lists:
-    default: 
-        filter:
-            elements:                 
-                - name: besedilo
-                  type: toone
-                  options:
-                      label: Besedilo
-                      targetEntity: Produkcija\Entity\Besedilo
-                      required: true
-        hydrator:
-            - exclude: []
+#    default: 
+#        filter:
+#            elements:                 
+#                - name: besedilo
+#                  type: toone
+#                  options:
+#                      label: Besedilo
+#                      targetEntity: Produkcija\Entity\Besedilo
+#                      required: true
+#        hydrator:
+#            - exclude: []
     vse: 
         filter:
 relation:

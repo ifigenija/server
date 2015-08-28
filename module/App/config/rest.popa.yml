@@ -41,8 +41,8 @@ lists:
     default: 
         hydrator:
             exclude: [pogodbe, stroski]
-    vse:
-        filter:
+#    vse:
+#        filter:
 hydrator:      
 relation:
     default:

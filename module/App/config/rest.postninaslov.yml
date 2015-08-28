@@ -35,8 +35,8 @@ lists:
                 label: Partner
                 targetEntity: App\Entity\Popa
                 required: false
-    vse: 
-        filter:                
+#    vse: 
+#        filter:                
             
 hydrator:
     lookups: [drzava]

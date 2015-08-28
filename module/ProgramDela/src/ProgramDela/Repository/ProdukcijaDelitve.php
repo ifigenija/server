@@ -33,23 +33,11 @@ class ProdukcijaDelitve
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
-
+            case "default":
             case "vse":
                 $qb   = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
-            case "default":
-                $this->expect(!(empty($options['enotaPrograma']) ), "Enota programa je obvezna", 770061);
-                $crit = new Criteria();
-                $e    = $crit->expr();
-
-                if (!empty($options['enotaPrograma'])) {
-                    $enotaPrograma = $this->getEntityManager()->find('ProgramDela\Entity\EnotaPrograma', $options['enotaPrograma']);
-                    $exp           = $e->eq('enotaPrograma', $enotaPrograma);
-                }
-
-                $crit->andWhere($exp);
-                return new Selectable($this, $crit);
         }
     }
 

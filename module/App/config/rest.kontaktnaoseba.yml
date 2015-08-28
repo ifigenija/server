@@ -15,12 +15,12 @@ lists:
     default: 
         filter:
           elements:  
-            - name: oseba
-              type: toone
-              options:
-                label: Oseba
-                targetEntity: App\Entity\Oseba
-                required: false
+#            - name: oseba
+#              type: toone
+#              options:
+#                label: Oseba
+#                targetEntity: App\Entity\Oseba
+#                required: false
             - name: popa
               type: toone
               options:
@@ -28,7 +28,7 @@ lists:
                 targetEntity: App\Entity\Popa
                 required: false
 
-    vse: 
-        filter:                          
+#    vse: 
+#        filter:                          
 hydrator: 
     byValue: [ oseba ]

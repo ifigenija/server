@@ -184,26 +184,26 @@ class GostovanjeCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoDrzavi(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "?drzava=" . $this->objDrzava['id'];
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        codecept_debug($resp);
-
-        $I->assertEquals(2, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-        $I->assertEquals("aa", $list[0]['vrsta']);      //  odvisno od sortiranja
-    }
+//    public function getListPoDrzavi(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "?drzava=" . $this->objDrzava['id'];
+//
+//        $resp = $I->successfullyGetList($listUrl, []);
+//        $list = $resp['data'];
+//        codecept_debug($resp);
+//
+//        $I->assertEquals(2, $resp['state']['totalRecords']);
+//        $I->assertNotEmpty($list);
+//        $I->assertEquals("aa", $list[0]['vrsta']);      //  odvisno od sortiranja
+//    }
 
     /**
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
+    public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "/vse";
+        $listUrl = $this->restUrl;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
