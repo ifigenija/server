@@ -515,6 +515,10 @@ class EnotaPrograma
         $cvSZ = \Max\Functions::euroRoundS($this->celotnaVrednostGostovSZ);
         $this->expect($nd <= $cv, "Delež matičnega JZ (" . $nd . ") ne sme biti večji od celotne vrednosti (" . $cv . ")", 1000621);
         $this->expect($cvSZ <= $cv, "Celotna vrednost gostovanj v Slo in zam. (" . $cvSZ . ") ne sme biti večja od celotne vrednosti (" . $cv . ")", 1000622);
+
+        $ah  = \Max\Functions::euroRoundS($this->getAvtorskiHonorarji());
+        $ahs = \Max\Functions::euroRoundS($this->getAvtorskiHonorarjiSamoz());
+        $this->expect($ahs <= $ah, "Avtorski honorarji samozaposlenih (" . $ahs . ") ne smejo biti večji od avtorskih honorarjev (" . $ah . ")", 10001201);
     }
 
     public function getId()
@@ -834,7 +838,7 @@ class EnotaPrograma
         return $this;
     }
 
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev=null)
+    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev = null)
     {
         $this->uprizoritev = $uprizoritev;
         return $this;
@@ -846,7 +850,7 @@ class EnotaPrograma
         return $this;
     }
 
-    public function setTipProgramskeEnote(\ProgramDela\Entity\TipProgramskeEnote $tipProgramskeEnote=null)
+    public function setTipProgramskeEnote(\ProgramDela\Entity\TipProgramskeEnote $tipProgramskeEnote = null)
     {
         $this->tipProgramskeEnote = $tipProgramskeEnote;
         return $this;

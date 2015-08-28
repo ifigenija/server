@@ -428,12 +428,13 @@ class ProgramPonovitevPrejsnjihCest
      */
     public function updateKontrolaValidacijeZaokrozevanj(ApiTester $I)
     {
-        $ent                      = $this->obj2;
-        $ent['avtorskiHonorarji'] = 1.01;      // v praksi bo že klient zaokrožil na 2 mesti
-        $ent['tantieme']          = 2.02;
+        $ent                           = $this->obj2;
+        $ent['avtorskiHonorarji']      = $ent['avtorskiHonorarjiSamoz'] = 1.01;      // v praksi bo že klient zaokrožil na 2 mesti
+
+        $ent['tantieme']   = 2.02;
 //        $ent['avtorskePravice']   = 0;
-        $ent['materialni']        = 0;
-        $ent['zaproseno']         = 1.82;
+        $ent['materialni'] = 0;
+        $ent['zaproseno']  = 1.82;
 
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertGuid($ent['id']);

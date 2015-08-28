@@ -319,13 +319,13 @@ class ProgramGostovanjeCest
      */
     public function updateKontrolaValidacijeZaokrozevanj(ApiTester $I)
     {
-        $ent                       = $this->obj2;
-        $ent['avtorskiHonorarji']  = 1;      // v praksi bo že klient zaokrožil na 2 mesti
-        $ent['tantieme']           = 1;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent                           = $this->obj2;
+        $ent['avtorskiHonorarji']      = $ent['avtorskiHonorarjiSamoz'] = 1;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['tantieme']               = 1;      // v praksi bo že klient zaokrožil na 2 mesti
 //        $ent['avtorskePravice']    = 2.01;      // v praksi bo že klient zaokrožil na 2 mesti
-        $ent['transportniStroski'] = 2;      // v praksi bo že klient zaokrožil na 2 mesti
-        $ent['dnevPrvZad']         = 3;      // v praksi bo že klient zaokrožil na 2 mesti
-        $ent['zaproseno']          = 5.60;   // 60% avt hon + transp. str. +dnevnice za prvi in zadnji dan
+        $ent['transportniStroski']     = 2;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['dnevPrvZad']             = 3;      // v praksi bo že klient zaokrožil na 2 mesti
+        $ent['zaproseno']              = 5.60;   // 60% avt hon + transp. str. +dnevnice za prvi in zadnji dan
 
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertGuid($ent['id']);
