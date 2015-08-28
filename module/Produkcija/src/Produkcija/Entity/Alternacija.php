@@ -114,7 +114,7 @@ class Alternacija
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Zaposlitev", inversedBy="alternacije")
      * @ORM\JoinColumn(name="zaposlitev_id", referencedColumnName="id")
      * @Max\I18n(label="alternacija.zaposlitev",  description="alternacija.d.zaposlitev")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="lookupselect", empty="Izberi zaposlitev", required=false, filters={"oseba":{"element":"oseba"}})
      * @var \Produkcija\Entity\Zaposlitev
      */
     protected $zaposlitev=null;
@@ -132,7 +132,7 @@ class Alternacija
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Pogodba", inversedBy="alternacije")
      * @ORM\JoinColumn(name="pogodba_id", referencedColumnName="id")
      * @Max\I18n(label="alternacija.pogodba",  description="alternacija.d.pogodba")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="lookupselect", empty="Izberi pogodbo", required=false, filters={"oseba" : {"element":"oseba"}})
      * @var \Produkcija\Entity\Pogodba      
      */
     protected $pogodba;
