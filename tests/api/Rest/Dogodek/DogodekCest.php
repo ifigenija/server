@@ -102,10 +102,10 @@ class DogodekCest
      */
     public function lookupOsebo(ApiTester $I)
     {
-        $this->lookOseba1 = $ent             = $I->lookupEntity("oseba", "0006", false);
+        $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0006", false);
         $I->assertNotEmpty($ent);
 
-        $this->lookOseba2 = $ent             = $I->lookupEntity("oseba", "0007", false);
+        $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0007", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -167,10 +167,10 @@ class DogodekCest
     public function createSezono(ApiTester $I)
     {
         $data            = [
-            'ime' => 'zz',
-            'zacetek'   => '2010-02-01T00:00:00+0100',
-            'konec'     => '2011-02-01T00:00:00+0100',
-            'aktivna'   => true,
+            'ime'     => 'zz',
+            'zacetek' => '2010-02-01T00:00:00+0100',
+            'konec'   => '2011-02-01T00:00:00+0100',
+            'aktivna' => true,
         ];
         $this->objSezona = $ent             = $I->successfullyCreate($this->sezonaUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -312,7 +312,7 @@ class DogodekCest
 
 
         // kreiramo še en zapis
-        $data              = [
+        $data       = [
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
@@ -328,7 +328,7 @@ class DogodekCest
             'prostor'         => null,
             'sezona'          => $this->objSezona['id'],
         ];
-        $this->obj2 = $ent               = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['status'], 4);
@@ -427,26 +427,26 @@ class DogodekCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoSezoni(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "?sezona=" . $this->objSezona['id'];
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        codecept_debug($resp);
-
-        $I->assertEquals(2, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-//        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
-    }
+//    public function getListPoSezoni(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "?sezona=" . $this->objSezona['id'];
+//
+//        $resp = $I->successfullyGetList($listUrl, []);
+//        $list = $resp['data'];
+//        codecept_debug($resp);
+//
+//        $I->assertEquals(2, $resp['state']['totalRecords']);
+//        $I->assertNotEmpty($list);
+////        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
+//    }
 
     /**
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
+    public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "/vse";
+        $listUrl = $this->restUrl;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];

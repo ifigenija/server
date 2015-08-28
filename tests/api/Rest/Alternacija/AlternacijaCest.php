@@ -78,7 +78,7 @@ class AlternacijaCest
      */
     public function getListDogodkov(ApiTester $I)
     {
-        $resp             = $I->successfullyGetList($this->dogodekUrl . "/vse", []);
+        $resp             = $I->successfullyGetList($this->dogodekUrl, []);
         $list             = $resp['data'];
         $I->assertNotEmpty($list);
         $this->objDogodek = $drzava           = array_pop($list);

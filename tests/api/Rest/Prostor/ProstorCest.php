@@ -125,31 +125,12 @@ class ProstorCest
     }
 
     /**
-     * preberi vse zapise od osebe
-     * 
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoDefaultu(ApiTester $I)
+    public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl;
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        codecept_debug($resp);
-
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-//        $I->assertEquals("Z Z", $list[0]['naziv']);      // odvisno od sortiranja
-    }
-
-    /**
-     * @depends create
-     * @param ApiTester $I
-     */
-    public function getList(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";
+        $listUrl = $this->restUrl ;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];

@@ -176,7 +176,7 @@ class SezonaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoDefaultu(ApiTester $I)
+    public function getListDefault(ApiTester $I)
     {
         $listUrl = $this->restUrl;
 
@@ -193,17 +193,17 @@ class SezonaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertEquals(2, $resp['state']['totalRecords']);
-        $I->assertEquals("zz", $list[0]['ime']);      // odvisno od sortiranja
-    }
+//    public function getListVse(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/vse";
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertEquals(2, $resp['state']['totalRecords']);
+//        $I->assertEquals("zz", $list[0]['ime']);      // odvisno od sortiranja
+//    }
 
     /**
      * spremenim zapis

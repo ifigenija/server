@@ -13,17 +13,17 @@ forms:
 lists:
     default: 
         filter:
-            elements:                 
-                - name: drzava
-                  type: toone
-                  options:
-                      label: Država
-                      targetEntity: App\Entity\Drzava
-                      required: true
+#            elements:                 
+#                - name: drzava
+#                  type: toone
+#                  options:
+#                      label: Država
+#                      targetEntity: App\Entity\Drzava
+#                      required: true
         hydrator:
             - exclude: []
-    vse: 
-        filter:
+#    vse: 
+#        filter:
 relation:
     default:
         predstave:

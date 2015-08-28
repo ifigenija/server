@@ -146,7 +146,7 @@ class ArhivalijaCest
      */
     public function getListDogodek(ApiTester $I)
     {
-        $resp            = $I->successfullyGetList($this->dogodekUrl."/vse", []);
+        $resp            = $I->successfullyGetList($this->dogodekUrl, []);
         $list            = $resp['data'];
         $I->assertNotEmpty($list);
         $this->objDogodek = $ent          = array_pop($list);
@@ -310,26 +310,26 @@ class ArhivalijaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoUprizoritvi(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev['id'];
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        codecept_debug($resp);
-
-        $I->assertEquals(2, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-        $I->assertEquals("aa", $list[0]['naslov']);      //  odvisno od sortiranja
-    }
+//    public function getListPoUprizoritvi(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev['id'];
+//
+//        $resp = $I->successfullyGetList($listUrl, []);
+//        $list = $resp['data'];
+//        codecept_debug($resp);
+//
+//        $I->assertGreater(2, $resp['state']['totalRecords']);
+//        $I->assertNotEmpty($list);
+//        $I->assertEquals("aa", $list[0]['naslov']);      //  odvisno od sortiranja
+//    }
 
     /**
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
+    public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "/vse";
+        $listUrl = $this->restUrl ;
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
         codecept_debug($list);

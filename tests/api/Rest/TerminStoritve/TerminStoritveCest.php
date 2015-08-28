@@ -90,7 +90,7 @@ class TerminStoritveCest
      */
     public function getListDogodek(ApiTester $I)
     {
-        $resp             = $I->successfullyGetList($this->dogodekUrl . "/vse", []);
+        $resp             = $I->successfullyGetList($this->dogodekUrl , []);
         $list             = $resp['data'];
         $I->assertNotEmpty($list);
         $this->objDogodek = $ent              = array_pop($list);
@@ -272,16 +272,16 @@ class TerminStoritveCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-    }
+//    public function getListVse(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/vse";
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+//    }
 
     /**
      * spremenim zapis
@@ -326,16 +326,16 @@ class TerminStoritveCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListUre(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/ure?dogodek=" . $this->objDogodek['id'];
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-    }
+//    public function getListUre(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/ure?dogodek=" . $this->objDogodek['id'];
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+//    }
 
     /**
      * brisanje zapisa

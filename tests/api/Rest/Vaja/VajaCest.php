@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\Zaposlitev;
+namespace Rest\Vaja;
 
 use ApiTester;
 
@@ -183,26 +183,26 @@ class VajaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoUprizoritvi(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev['id'];
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        codecept_debug($resp);
-
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-//        $I->assertEquals(1, $list[0]['zaporedna']);      //  odvisno od sortiranja
-    }
+//    public function getListPoUprizoritvi(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev['id'];
+//
+//        $resp = $I->successfullyGetList($listUrl, []);
+//        $list = $resp['data'];
+//        codecept_debug($resp);
+//
+//        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+//        $I->assertNotEmpty($list);
+////        $I->assertEquals(1, $list[0]['zaporedna']);      //  odvisno od sortiranja
+//    }
 
     /**
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
+    public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "/vse";
+        $listUrl = $this->restUrl ;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];

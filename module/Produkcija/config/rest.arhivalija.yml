@@ -21,14 +21,14 @@ forms:
 lists:
     default: 
         filter:
-            elements:                 
-                - name: uprizoritev
-                  type: toone
-                  options:
-                      label: Uprizoritev
-                      targetEntity: Produkcija\Entity\Uprizoritev
-                      required: true
+#            elements:                 
+#                - name: uprizoritev
+#                  type: toone
+#                  options:
+#                      label: Uprizoritev
+#                      targetEntity: Produkcija\Entity\Uprizoritev
+#                      required: true
         hydrator:
             - exclude: []
-    vse: 
-        filter:
+#    vse: 
+#        filter:

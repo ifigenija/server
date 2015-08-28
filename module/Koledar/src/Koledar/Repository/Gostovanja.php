@@ -33,21 +33,22 @@ class Gostovanja
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
+            case "default":
             case "vse":
                 $qb   = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
-            case "default":
-                $this->expect(!(empty($options['drzava']) ), "Država je obvezna", 770121);
-                $crit = new Criteria();
-                $e    = $crit->expr();
-
-                if (!empty($options['drzava'])) {
-                    $drzava = $this->getEntityManager()->find('App\Entity\Drzava', $options['drzava']);
-                    $exp    = $e->eq('drzava', $drzava);
-                }
-                $crit->andWhere($exp);
-                return new Selectable($this, $crit);
+//            case "default":
+//                $this->expect(!(empty($options['drzava']) ), "Država je obvezna", 770121);
+//                $crit = new Criteria();
+//                $e    = $crit->expr();
+//
+//                if (!empty($options['drzava'])) {
+//                    $drzava = $this->getEntityManager()->find('App\Entity\Drzava', $options['drzava']);
+//                    $exp    = $e->eq('drzava', $drzava);
+//                }
+//                $crit->andWhere($exp);
+//                return new Selectable($this, $crit);
         }
     }
 

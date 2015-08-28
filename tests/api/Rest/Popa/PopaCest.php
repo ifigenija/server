@@ -386,18 +386,18 @@ class PopaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-        codecept_debug($list);
-
-        $I->assertNotEmpty($list);
-        $I->assertTrue($resp['state']['totalRecords'] >= 2, "total records");
-//        $I->assertEquals("aa", $list[0]['naziv']);      //glede na sort  
-    }
+//    public function getListVse(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/vse";
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//        codecept_debug($list);
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertTrue($resp['state']['totalRecords'] >= 2, "total records");
+////        $I->assertEquals("aa", $list[0]['naziv']);      //glede na sort  
+//    }
 
     /**
      * @depends create

@@ -36,21 +36,22 @@ class TerminiStoritve
      public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
+            case "default":
             case "vse":
                 $qb   = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
-            case "default":
-                $this->expect(!empty($options['alternacija']), "Alternacija je obvezna", 770081);
-                $crit = new Criteria();
-                $e    = $crit->expr();
-
-                if (!empty($options['alternacija'])) {
-                    $alternacija = $this->getEntityManager()->find('Produkcija\Entity\Alternacija', $options['alternacija']);
-                    $exp   = $e->eq('alternacija', $alternacija);
-                }
-                $crit->andWhere($exp);
-                return new Selectable($this, $crit);
+//            case "default":
+//                $this->expect(!empty($options['alternacija']), "Alternacija je obvezna", 770081);
+//                $crit = new Criteria();
+//                $e    = $crit->expr();
+//
+//                if (!empty($options['alternacija'])) {
+//                    $alternacija = $this->getEntityManager()->find('Produkcija\Entity\Alternacija', $options['alternacija']);
+//                    $exp   = $e->eq('alternacija', $alternacija);
+//                }
+//                $crit->andWhere($exp);
+//                return new Selectable($this, $crit);
             case "ure":
                 $this->expect(!empty($options['dogodek']), "Dogodek je obvezen", 770082);
                 $crit = new Criteria();

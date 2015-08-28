@@ -111,33 +111,33 @@ lists:
     default: 
         hydrator:
             exclude: []
-    vse: 
-        hydrator:
-            exclude: []
-    seznam:
-        hydrator:
-            byValue: []
-            exclude: 
-                - sifra
-                - premiere
-                - ponovitvePremiere
-                - ponovitvePrejsnjih
-                - izjemni
-                - programiFestival
-                - programiRazno
-                - gostujoci
-                - gostovanja
-                - avgZasedDvoran
-                - avgCenaVstopnice
-                - stProdVstopnic
-                - stZaposlenih
-                - stZaposIgralcev
-                - avgStNastopovIgr
-                - stHonorarnih
-                - stHonorarnihIgr
-                - stHonorarnihIgrTujJZ
-                - stHonorarnihIgrSamoz
-                - sredstvaInt
+#    vse: 
+#        hydrator:
+#            exclude: []
+#    seznam:
+#        hydrator:
+#            byValue: []
+#            exclude: 
+#                - sifra
+#                - premiere
+#                - ponovitvePremiere
+#                - ponovitvePrejsnjih
+#                - izjemni
+#                - programiFestival
+#                - programiRazno
+#                - gostujoci
+#                - gostovanja
+#                - avgZasedDvoran
+#                - avgCenaVstopnice
+#                - stProdVstopnic
+#                - stZaposlenih
+#                - stZaposIgralcev
+#                - avgStNastopovIgr
+#                - stHonorarnih
+#                - stHonorarnihIgr
+#                - stHonorarnihIgrTujJZ
+#                - stHonorarnihIgrSamoz
+#                - sredstvaInt
 relation:
     default:
         premiere:

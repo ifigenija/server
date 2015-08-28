@@ -39,7 +39,7 @@ class ProdukcijskaHisaCest
     private $objUprizoritev1;
     private $objUprizoritev2;
     private $lookUprizoritev;
-    private $rpcOptionsUrl = '/rpc/app/options';
+    private $rpcOptionsUrl          = '/rpc/app/options';
     private $maticnoGledalisce;
     private $obj;
     private $obj2;
@@ -67,18 +67,18 @@ class ProdukcijskaHisaCest
         
     }
 
-        /**
+    /**
      * - getOptions  globalna vrednost
      * 
      * @param ApiTester $I
      */
     public function preberiOpcijoMaticno(ApiTester $I)
     {
-        $opt = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
+        $opt                     = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
         $I->assertNotEmpty($opt);
-        $this->maticnoGledalisce=$opt;
+        $this->maticnoGledalisce = $opt;
     }
-    
+
     /**
      * najde enoto programa
      * 
@@ -273,7 +273,7 @@ class ProdukcijskaHisaCest
 
         //  matični koproducent še za 2. premiero
         // pričakujemo kreiranje nove produkcijske delitve za lastno gledališče
-        $resp                   = $I->successfullyCallRpc($this->enotaProgramaRpcUrl, 'novaMaticnaKoprodukcija', ["enotaProgramaId" => $this->objProgramPremiera2['id']]);
+        $resp = $I->successfullyCallRpc($this->enotaProgramaRpcUrl, 'novaMaticnaKoprodukcija', ["enotaProgramaId" => $this->objProgramPremiera2['id']]);
         $I->assertNotEmpty($resp);
         $I->assertGuid($resp);
 
@@ -294,25 +294,25 @@ class ProdukcijskaHisaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoPopa(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "?popa=" . $this->lookPopa1['id'];
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-
-        $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-        $I->assertEquals("NA", $list[0]['status']);
-    }
+//    public function getListPoPopa(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "?popa=" . $this->lookPopa1['id'];
+//
+//        $resp = $I->successfullyGetList($listUrl, []);
+//        $list = $resp['data'];
+//
+//        $I->assertEquals(1, $resp['state']['totalRecords']);
+//        $I->assertNotEmpty($list);
+//        $I->assertEquals("NA", $list[0]['status']);
+//    }
 
     /**
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
+    public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "/vse";
+        $listUrl = $this->restUrl;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
@@ -375,7 +375,7 @@ class ProdukcijskaHisaCest
      */
     public function lookupProdukcijskaHisaSifra(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa . '?ident=' . $this->lookPopa2['ident'], []); 
+        $resp = $I->successfullyGetList($this->lookupProdukcijskaHisa . '?ident=' . $this->lookPopa2['ident'], []);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");

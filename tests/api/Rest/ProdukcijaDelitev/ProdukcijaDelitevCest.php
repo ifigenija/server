@@ -255,30 +255,45 @@ class ProdukcijaDelitevCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
+//    public function getListVse(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/vse";
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+//    }
 
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-    }
-
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+//    public function getListPoEnotiPrograma(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "?enotaPrograma=" . $this->objProgramPremiera1['id'];
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+//    }
+    
     /**
      * @depends create
      * @param ApiTester $I
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?enotaPrograma=" . $this->objProgramPremiera1['id'];
+        $listUrl = $this->restUrl ;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
     }
 
     /**

@@ -14,14 +14,14 @@ forms:
 lists:
     default: 
         filter:
-            elements:                 
-                - name: funkcije
-                  options:
-                      label: Funkcije
-                      targetEntity: Produkcija\Entity\Funkcija
-                      required: true
+#            elements:                 
+#                - name: funkcije
+#                  options:
+#                      label: Funkcije
+#                      targetEntity: Produkcija\Entity\Funkcija
+#                      required: true
         hydrator:
             - exclude: []
-    vse: 
-        filter:
+#    vse: 
+#        filter:
     

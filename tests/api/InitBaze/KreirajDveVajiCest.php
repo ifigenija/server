@@ -84,7 +84,8 @@ class KreirajDveVajiCest
      */
     public function getList(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "/vse";
+//        $listUrl = $this->restUrl . "/vse";
+        $listUrl = $this->restUrl;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];

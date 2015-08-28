@@ -91,17 +91,17 @@ class PostaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertEquals(480, $resp['state']['totalRecords']);
-        $I->assertEquals("1000", $list[0]['sifra']);      //glede na sort
-    }
+//    public function getListVse(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/vse";
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertEquals(480, $resp['state']['totalRecords']);
+//        $I->assertEquals("1000", $list[0]['sifra']);      //glede na sort
+//    }
 
     /**
      * @depends create

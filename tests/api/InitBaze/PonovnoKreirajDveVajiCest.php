@@ -99,13 +99,13 @@ class PonovnoKreirajDveVajiCest
      */
     public function getList(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "/vse";
+        $listUrl = $this->restUrl;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(4, $resp['state']['totalRecords'], "mora isti število kot pri prejšnjem testu KreirajDveVajiCest");    
+        $I->assertEquals(4, $resp['state']['totalRecords'], "mora isti število kot pri prejšnjem testu KreirajDveVajiCest");
     }
 
 }
