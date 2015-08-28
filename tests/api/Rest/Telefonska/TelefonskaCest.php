@@ -189,17 +189,17 @@ class TelefonskaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertEquals(3, $resp['state']['totalRecords']);
-        $I->assertEquals("012", $list[0]['stevilka']);     //glede na sort
-    }
+//    public function getListVse(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/vse";
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertEquals(3, $resp['state']['totalRecords']);
+//        $I->assertEquals("012", $list[0]['stevilka']);     //glede na sort
+//    }
 
     /**
      * @depends create

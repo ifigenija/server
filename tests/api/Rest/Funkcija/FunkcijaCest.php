@@ -333,19 +333,19 @@ class FunkcijaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $this->id = array_pop($list)['id'];
-        $I->assertNotEmpty($this->id);
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals("aa", $list[0]['naziv']);      //glede na sort
-    }
+//    public function getListVse(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/vse";
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $this->id = array_pop($list)['id'];
+//        $I->assertNotEmpty($this->id);
+//        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+////        $I->assertEquals("aa", $list[0]['naziv']);      //glede na sort
+//    }
 
     /**
      * preberi vse zapise od uprizoritve

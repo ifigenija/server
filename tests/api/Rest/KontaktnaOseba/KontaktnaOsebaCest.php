@@ -113,18 +113,18 @@ class KontaktnaOsebaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoOsebi(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "?oseba=" . $this->lookOseba1['id'];
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        codecept_debug($resp);
-
-        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-//        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
-    }
+//    public function getListPoOsebi(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "?oseba=" . $this->lookOseba1['id'];
+//
+//        $resp = $I->successfullyGetList($listUrl, []);
+//        $list = $resp['data'];
+//        codecept_debug($resp);
+//
+//        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+//        $I->assertNotEmpty($list);
+////        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
+//    }
 
     /**
      * preberi vse zapise od popa
@@ -149,17 +149,17 @@ class KontaktnaOsebaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
-    }
+//    public function getListVse(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/vse";
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+////        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
+//    }
 
     /**
      * spremenim zapis

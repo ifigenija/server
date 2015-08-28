@@ -444,18 +444,18 @@ class PogodbaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "/vse";
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-        codecept_debug($list);
-
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(4, $resp['state']['totalRecords']);
-//        $I->assertEquals("A1", $list[0]['sifra']);      //glede na sort
-    }
+//    public function getListVse(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "/vse";
+//        codecept_debug($listUrl);
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//        codecept_debug($list);
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertGreaterThanOrEqual(4, $resp['state']['totalRecords']);
+////        $I->assertEquals("A1", $list[0]['sifra']);      //glede na sort
+//    }
 
     /**
      * preberi vse naslove od osebe
@@ -463,16 +463,16 @@ class PogodbaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoOsebi(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "?oseba=" . $this->lookOseba1['id'];
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);
-
-        $listUrl = $this->restUrl . "?oseba=" . $this->lookOseba4['id'];
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $I->assertEquals(0, $resp['state']['totalRecords']);
-    }
+//    public function getListPoOsebi(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "?oseba=" . $this->lookOseba1['id'];
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);
+//
+//        $listUrl = $this->restUrl . "?oseba=" . $this->lookOseba4['id'];
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $I->assertEquals(0, $resp['state']['totalRecords']);
+//    }
 
     /**
      * preberi vse naslove od poslovnega partnerja
@@ -480,16 +480,16 @@ class PogodbaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoPopa(ApiTester $I)
-    {
-        $listUrl = $this->restUrl . "?popa=" . $this->lookPopa1['id'];
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-
-        $listUrl = $this->restUrl . "?popa=" . $this->lookPopa2['id'];
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $I->assertEquals(0, $resp['state']['totalRecords']);
-    }
+//    public function getListPoPopa(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "?popa=" . $this->lookPopa1['id'];
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+//
+//        $listUrl = $this->restUrl . "?popa=" . $this->lookPopa2['id'];
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $I->assertEquals(0, $resp['state']['totalRecords']);
+//    }
 
     /**
      * preberi vse zapise od uprizoritve 

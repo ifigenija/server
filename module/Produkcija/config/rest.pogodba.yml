@@ -30,26 +30,26 @@ lists:
     default: 
         filter:
             elements:                 
-                - name: oseba
-                  type: toone
-                  options:
-                      label: Oseba
-                      targetEntity: App\Entity\Oseba
-                      required: false
-                - name: popa
-                  type: toone
-                  options:
-                      label: Partner
-                      targetEntity: App\Entity\Popa
-                      required: false
+#                - name: oseba
+#                  type: toone
+#                  options:
+#                      label: Oseba
+#                      targetEntity: App\Entity\Oseba
+#                      required: false
+#                - name: popa
+#                  type: toone
+#                  options:
+#                      label: Partner
+#                      targetEntity: App\Entity\Popa
+#                      required: false
                 - name: uprizoritev
                   type: toone
                   options:
                       label: Uprizoritev
                       targetEntity: Produkcija\Entity\Uprizoritev
                       required: false
-    vse: 
-        filter:
+#    vse: 
+#        filter:
 hydrator:
     lookups: [oseba, popa]
 relation:
