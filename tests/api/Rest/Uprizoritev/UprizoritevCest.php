@@ -806,10 +806,10 @@ class UprizoritevCest
         $I->assertEquals($ent['internacionalniNaslov'], 'zz');
 //        $I->assertEquals($ent['steviloVaj'], 4,"Število vaj");
         $I->assertEquals($ent['planiranoSteviloVaj'], 5);
-        $I->assertEquals($ent['krstna'                ], true,"krstna");
-        $I->assertEquals($ent['prvaSlovenska'         ], true);
-        $I->assertEquals($ent['naslovIzvirnika'       ], 'zz');
-        $I->assertEquals($ent['podnaslovIzvirnika'    ], 'zz');
+        $I->assertEquals($ent['krstna'], true, "krstna");
+        $I->assertEquals($ent['prvaSlovenska'], true);
+        $I->assertEquals($ent['naslovIzvirnika'], 'zz');
+        $I->assertEquals($ent['podnaslovIzvirnika'], 'zz');
 
         $I->assertFalse(isset($ent['producent']), "producent");
         $I->assertTrue(isset($ent['funkcije']));
