@@ -671,4 +671,28 @@ class ProgramPremieraCest
         $I->assertEquals(1000444, $resp[0]['code']);
     }
 
+    /**
+     * spremenim zapis za kontrolo avtorskih honorarjev samozaposlenih
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateKontrolaValidacijeAHSamoz(ApiTester $I)
+    {
+        $ent                           = $this->obj2;
+        $ent['avtorskiHonorarji'] = 4.56;
+        $ent['avtorskiHonorarjiSamoz'] = 4.56;
+        $ent                           = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+
+        $ent['avtorskiHonorarjiSamoz'] = 4.57;   // v praksi bo že klient zaokrožil na 2 mesti
+        $resp                          = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(10001201, $resp[0]['code']);
+
+        $ent['avtorskiHonorarjiSamoz'] = -0.01;   // v praksi bo že klient zaokrožil na 2 mesti
+        $resp                          = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000629, $resp[0]['code']);
+    }
+
 }

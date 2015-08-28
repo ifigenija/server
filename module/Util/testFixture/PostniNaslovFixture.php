@@ -5,6 +5,8 @@ namespace TestFixture;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+
 
 /**
  * Nalaganje privzetih Drzav
@@ -13,7 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class PostniNaslovFixture
         extends AbstractFixture
-        implements FixtureInterface, \Doctrine\Common\DataFixtures\DependentFixtureInterface
+        implements FixtureInterface, DependentFixtureInterface
 {
 
     public function load(ObjectManager $manager)
