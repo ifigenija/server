@@ -239,18 +239,18 @@ class AlternacijaCest
      * @depends create
      * @param ApiTester $I
      */
-//    public function getListPoFunkciji(ApiTester $I)
-//    {
-//        $listUrl = $this->restUrl . "?funkcija=" . $this->lookFunkcija['id'];
-//
-//        $resp = $I->successfullyGetList($listUrl, []);
-//        $list = $resp['data'];
-//        codecept_debug($resp);
-//
-//        $I->assertGreaterThanOrEqual(4, $resp['state']['totalRecords']);
-//        $I->assertNotEmpty($list);
-////        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
-//    }
+    public function getListPoFunkciji(ApiTester $I)
+    {
+        $listUrl = $this->restUrl . "?funkcija=" . $this->lookFunkcija['id'];
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+        codecept_debug($resp);
+
+        $I->assertGreaterThanOrEqual(4, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+//        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
+    }
 
     /**
      * preberi vse zapise po določeni uprizoritvi

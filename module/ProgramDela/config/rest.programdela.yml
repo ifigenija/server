@@ -114,30 +114,30 @@ lists:
 #    vse: 
 #        hydrator:
 #            exclude: []
-#    seznam:
-#        hydrator:
-#            byValue: []
-#            exclude: 
-#                - sifra
-#                - premiere
-#                - ponovitvePremiere
-#                - ponovitvePrejsnjih
-#                - izjemni
-#                - programiFestival
-#                - programiRazno
-#                - gostujoci
-#                - gostovanja
-#                - avgZasedDvoran
-#                - avgCenaVstopnice
-#                - stProdVstopnic
-#                - stZaposlenih
-#                - stZaposIgralcev
-#                - avgStNastopovIgr
-#                - stHonorarnih
-#                - stHonorarnihIgr
-#                - stHonorarnihIgrTujJZ
-#                - stHonorarnihIgrSamoz
-#                - sredstvaInt
+    seznam:
+        hydrator:
+            byValue: []
+            exclude: 
+                - sifra
+                - premiere
+                - ponovitvePremiere
+                - ponovitvePrejsnjih
+                - izjemni
+                - programiFestival
+                - programiRazno
+                - gostujoci
+                - gostovanja
+                - avgZasedDvoran
+                - avgCenaVstopnice
+                - stProdVstopnic
+                - stZaposlenih
+                - stZaposIgralcev
+                - avgStNastopovIgr
+                - stHonorarnih
+                - stHonorarnihIgr
+                - stHonorarnihIgrTujJZ
+                - stHonorarnihIgrSamoz
+                - sredstvaInt
 relation:
     default:
         premiere:

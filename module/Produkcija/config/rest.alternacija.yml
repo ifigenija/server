@@ -34,12 +34,12 @@ lists:
     default: 
         filter:
             elements:                 
-#                - name: funkcija
-#                  type: toone
-#                  options:
-#                      label: Funkcija
-#                      targetEntity: Produkcija\Entity\Funkcija
-#                      required: false
+                - name: funkcija
+                  type: toone
+                  options:
+                      label: Funkcija
+                      targetEntity: Produkcija\Entity\Funkcija
+                      required: false
                 - name: uprizoritev
                   type: toone
                   options:
