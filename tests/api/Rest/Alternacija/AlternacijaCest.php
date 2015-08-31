@@ -432,10 +432,9 @@ class AlternacijaCest
      */
     public function odstranimZaposlitev(\ApiTester $I)
     {
-        $ent = $I->successfullyGet($this->restUrl, $this->obj3['id']);
+        $ent               = $I->successfullyGet($this->restUrl, $this->obj3['id']);
         $I->assertEquals($ent['zaposlitev'], $this->objZaposlitev['id'], "zaposlitev");
         $I->assertEquals($ent['zaposlen'], true);               // v validaciji se bi moralo postaviti na true, če je zaposlitev
-    
         // odstranimo zaposlitev
         $ent['zaposlitev'] = null;
         $ent               = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
@@ -446,6 +445,39 @@ class AlternacijaCest
         $ent = $I->successfullyGet($this->restUrl, $ent['id']);
         $I->assertEquals($ent['zaposlitev'], null, "zaposlitev");
         $I->assertEquals($ent['zaposlen'], false);
+    }
+
+    /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateZaValidacijoDatumov(ApiTester $I)
+    {
+        $ent            = $I->successfullyGet($this->restUrl, $this->obj3['id']);
+        
+        // enaka datuma
+        $ent['zacetek'] = '2016-02-01T00:00:00+0100';
+        $ent['konec']   = '2016-02-01T00:00:00+0100';
+        $ent            = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+       
+        // prazen konec
+        $ent['konec']   = '';
+        $ent            = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+
+        //  konec pred začetkom
+        $ent['konec'] = '2016-01-31T00:00:00+0100';
+        $resp         = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000337, $resp[0]['code']);
+       
+        // prazen začetek
+        $ent['zacetek'] = '';
+        $ent['konec']   = '2016-02-01T00:00:00+0100';
+        $ent            = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+       
+        
+        
     }
 
 }

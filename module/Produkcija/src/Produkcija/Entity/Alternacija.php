@@ -109,7 +109,6 @@ class Alternacija
     /* @var $variable Alternacija */
     private $tmp1;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Zaposlitev", inversedBy="alternacije")
      * @ORM\JoinColumn(name="zaposlitev_id", referencedColumnName="id")
@@ -117,7 +116,7 @@ class Alternacija
      * @Max\Ui(type="lookupselect", empty="Izberi zaposlitev", required=false, filters={"oseba":{"element":"oseba"}})
      * @var \Produkcija\Entity\Zaposlitev
      */
-    protected $zaposlitev=null;
+    protected $zaposlitev = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="alternacije")
@@ -202,6 +201,16 @@ class Alternacija
                 $this->expect($found
                         , 'Oseba na alternaciji ni kontakt na poslovnem partnerju, ki je nosilec pogodbe'
                         , 1000336);
+            }
+        }
+
+        $zacetek = empty($this->zacetek) ? "" : $this->zacetek->format('c');
+        $konec   = empty($this->konec) ? "" : $this->konec->format('c');
+        if (!empty($zacetek)) {
+            if (!empty($konec)) {
+                $this->expect($konec >= $zacetek
+                        , 'Konec ne sme biti pred začetkom'
+                        , 1000337);
             }
         }
     }
@@ -351,7 +360,7 @@ class Alternacija
         return $this;
     }
 
-    public function setFunkcija(\Produkcija\Entity\Funkcija $funkcija=null)
+    public function setFunkcija(\Produkcija\Entity\Funkcija $funkcija = null)
     {
         $this->funkcija = $funkcija;
         return $this;
@@ -363,19 +372,19 @@ class Alternacija
         return $this;
     }
 
-    public function setZaposlitev(\Produkcija\Entity\Zaposlitev $zaposlitev=null)
+    public function setZaposlitev(\Produkcija\Entity\Zaposlitev $zaposlitev = null)
     {
         $this->zaposlitev = $zaposlitev;
         return $this;
     }
 
-    public function setOseba(\App\Entity\Oseba $oseba=null)
+    public function setOseba(\App\Entity\Oseba $oseba = null)
     {
         $this->oseba = $oseba;
         return $this;
     }
 
-    public function setPogodba(\Produkcija\Entity\Pogodba $pogodba=null)
+    public function setPogodba(\Produkcija\Entity\Pogodba $pogodba = null)
     {
         $this->pogodba = $pogodba;
         return $this;
@@ -392,6 +401,5 @@ class Alternacija
         $this->pomembna = $pomembna;
         return $this;
     }
-
 
 }
