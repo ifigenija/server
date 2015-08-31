@@ -23,11 +23,11 @@ class Uprizoritve
 
     protected $sortOptions = [
         "default" => [
-            "sifra" => ["alias" => "p.sifra"],
+            "sifra"  => ["alias" => "p.sifra"],
             "naslov" => ["alias" => "p.naslov"]
         ],
         "vse"     => [
-            "sifra" => ["alias" => "p.sifra"],
+            "sifra"  => ["alias" => "p.sifra"],
             "naslov" => ["alias" => "p.naslov"]
         ]
     ];
@@ -36,20 +36,24 @@ class Uprizoritve
     {
         switch ($name) {
             case "vse":
-                $qb   = $this->getVseQb($options);
+                $qb = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $this->expect(!(empty($options['besedilo']) ), "Besedilo je obvezno", 770071);
-                $crit = new Criteria();
-                $e    = $crit->expr();
-
-                if (!empty($options['besedilo'])) {
-                    $besedilo = $this->getEntityManager()->find('Produkcija\Entity\Besedilo', $options['besedilo']);
-                    $exp      = $e->eq('besedilo', $besedilo);
-                }
-                $crit->andWhere($exp);
-                return new Selectable($this, $crit);
+                $qb = $this->getVseQb($options);
+                $this->getSort($name, $qb);
+                return new DoctrinePaginator(new Paginator($qb));
+//                $this->expect(!(empty($options['besedilo']) ), "Besedilo je obvezno", 770071);
+//                $crit = new Criteria();
+//                $e    = $crit->expr();
+//
+//                if (!empty($options['besedilo'])) {
+//                    $besedilo = $this->getEntityManager()->find('Produkcija\Entity\Besedilo', $options['besedilo']);
+//                    $exp      = $e->eq('besedilo', $besedilo);
+//                }
+//                $crit->andWhere($exp);
+//                return new Selectable($this, $crit);
         }
     }
 
@@ -61,16 +65,33 @@ class Uprizoritve
             $naslov    = $e->like('p.naslov', ':naz');
             $podnaslov = $e->like('p.podnaslov', ':naz');
             $avtor     = $e->like('p.avtor', ':naz');
-
             $qb->andWhere($e->orX($naslov, $podnaslov, $avtor));
-
             $qb->setParameter('naz', "{$options['q']}%", "string");
         }
-
         return $qb;
     }
 
-     public function create($object, $params = null)
+    public function getDefaultQb($options)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $e  = $qb->expr();
+        if (!empty($options['q'])) {
+            $naslov    = $e->like('p.naslov', ':naz');
+            $podnaslov = $e->like('p.podnaslov', ':naz');
+            $avtor     = $e->like('p.avtor', ':naz');
+            $qb->andWhere($e->orX($naslov, $podnaslov, $avtor));
+            $qb->setParameter('naz', "{$options['q']}%", "string");
+        }
+        if (!empty($options['besedilo'])) {
+            $qb->join('p.besedilo', 'besedilo');
+            $naz = $e->eq('besedilo.id', ':besedilo');
+            $qb->andWhere($naz);
+            $qb->setParameter('besedilo', "{$options['besedilo']}", "string");
+        }
+        return $qb;
+    }
+
+    public function create($object, $params = null)
     {
         if (empty($object->getSifra())) {
             $num = $this->getServiceLocator()->get('stevilcenje.generator');

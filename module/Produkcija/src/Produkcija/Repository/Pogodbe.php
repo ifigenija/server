@@ -41,6 +41,7 @@ class Pogodbe
                 $this->expect(!( empty($options['popa']) && empty($options['oseba']) && empty($options['uprizoritev']) )
                         , "Oseba ali partner ali uprizoritev so obvezni", 770031);
                 $qb = $this->getDefaultQb($options);
+                $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }

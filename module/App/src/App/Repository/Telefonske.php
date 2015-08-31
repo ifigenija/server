@@ -23,7 +23,7 @@ class Telefonske
 
     protected $sortOptions = [
         "default" => [
-            "stevilka" => ["alias" => "stevilka"]
+            "stevilka" => ["alias" => "p.stevilka"]
         ],
         "vse"     => [
             "stevilka" => ["alias" => "p.stevilka"]
@@ -34,24 +34,28 @@ class Telefonske
     {
         switch ($name) {
             case"vse":
-                $qb   = $this->getVseQb($options);
+                $qb = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case"default":
                 $this->expect(!(empty($options['popa']) && empty($options['oseba'])), "Oseba ali Partner ali država sta obvezna", 770011);
-                $crit = new Criteria();
-                $e    = $crit->expr();
-
-                if (!empty($options['popa'])) {
-                    $popa = $this->getEntityManager()->find('App\Entity\Popa', $options['popa']);
-                    $exp  = $e->eq('popa', $popa);
-                } else {
-                    $oseba = $this->getEntityManager()->find('App\Entity\Oseba', $options['oseba']);
-
-                    $exp = $e->eq('oseba', $oseba);
-                }
-                $crit->andWhere($exp);
-                return new Selectable($this, $crit);
+                $qb = $this->getDefaultQb($options);
+                $this->getSort($name, $qb);
+                return new DoctrinePaginator(new Paginator($qb));
+//                $this->expect(!(empty($options['popa']) && empty($options['oseba'])), "Oseba ali Partner ali država sta obvezna", 770011);
+//                $crit = new Criteria();
+//                $e    = $crit->expr();
+//
+//                if (!empty($options['popa'])) {
+//                    $popa = $this->getEntityManager()->find('App\Entity\Popa', $options['popa']);
+//                    $exp  = $e->eq('popa', $popa);
+//                } else {
+//                    $oseba = $this->getEntityManager()->find('App\Entity\Oseba', $options['oseba']);
+//
+//                    $exp = $e->eq('oseba', $oseba);
+//                }
+//                $crit->andWhere($exp);
+//                return new Selectable($this, $crit);
         }
     }
 
@@ -60,14 +64,34 @@ class Telefonske
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
-
             $naz = $e->like('p.stevilka', ':ste');
-
             $qb->andWhere($e->orX($naz));
-
             $qb->setParameter('ste', "{$options['q']}%", "string");
         }
+        return $qb;
+    }
 
+    public function getDefaultQb($options)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $e  = $qb->expr();
+        if (!empty($options['q'])) {
+            $naz = $e->like('p.stevilka', ':ste');
+            $qb->andWhere($e->orX($naz));
+            $qb->setParameter('ste', "{$options['q']}%", "string");
+        }
+        if (!empty($options['popa'])) {
+            $qb->join('p.popa', 'popa');
+            $naz = $e->eq('popa.id', ':popa');
+            $qb->andWhere($naz);
+            $qb->setParameter('popa', "{$options['popa']}", "string");
+        }
+        if (!empty($options['oseba'])) {
+            $qb->join('p.oseba', 'oseba');
+            $naz = $e->eq('oseba.id', ':oseba');
+            $qb->andWhere($naz);
+            $qb->setParameter('oseba', "{$options['oseba']}", "string");
+        }
         return $qb;
     }
 

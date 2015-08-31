@@ -43,6 +43,7 @@ class Alternacije
                 $this->expect(!(empty($options['funkcija']) && empty($options['uprizoritev']) ), "Ali funkcija  ali uprizoritev je obvezna", 770081);
                 $this->expect(!(!empty($options['funkcija']) && !empty($options['uprizoritev']) ), "Le funkcija ali uprizoritev ne oba hkrati", 770082);
                 $qb = $this->getDefaultQb($options);
+                $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }

@@ -18,7 +18,7 @@ use Max\Repository\AbstractMaxRepository;
  * @author rado
  */
 class StroskiUprizoritve
-    extends AbstractMaxRepository
+        extends AbstractMaxRepository
 {
 
     protected $sortOptions = [
@@ -34,20 +34,24 @@ class StroskiUprizoritve
     {
         switch ($name) {
             case "vse":
-                $qb   = $this->getVseQb($options);
+                $qb = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 770171);
-                $crit = new Criteria();
-                $e    = $crit->expr();
-
-                if (!empty($options['uprizoritev'])) {
-                    $uprizoritev = $this->getEntityManager()->find('Produkcija\Entity\Uprizoritev', $options['uprizoritev']);
-                    $exp   = $e->eq('uprizoritev', $uprizoritev);
-                }
-                $crit->andWhere($exp);
-                return new Selectable($this, $crit);
+                $qb = $this->getDefaultQb($options);
+                $this->getSort($name, $qb);
+                return new DoctrinePaginator(new Paginator($qb));
+//                $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 770171);
+//                $crit = new Criteria();
+//                $e    = $crit->expr();
+//
+//                if (!empty($options['uprizoritev'])) {
+//                    $uprizoritev = $this->getEntityManager()->find('Produkcija\Entity\Uprizoritev', $options['uprizoritev']);
+//                    $exp   = $e->eq('uprizoritev', $uprizoritev);
+//                }
+//                $crit->andWhere($exp);
+//                return new Selectable($this, $crit);
         }
     }
 
@@ -56,12 +60,27 @@ class StroskiUprizoritve
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
-
             $naz = $e->like('p.naziv', ':naziv');
-
             $qb->andWhere($e->orX($naz));
-
             $qb->setParameter('naziv', "{$options['q']}%", "string");
+        }
+        return $qb;
+    }
+
+    public function getDefaultQb($options)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $e  = $qb->expr();
+        if (!empty($options['q'])) {
+            $naz = $e->like('p.naziv', ':naziv');
+            $qb->andWhere($e->orX($naz));
+            $qb->setParameter('naziv', "{$options['q']}%", "string");
+        }
+        if (!empty($options['uprizoritev'])) {
+            $qb->join('p.uprizoritev', 'uprizoritev');
+            $naz = $e->eq('uprizoritev.id', ':upriz');
+            $qb->andWhere($naz);
+            $qb->setParameter('upriz', "{$options['uprizoritev']}", "string");
         }
 
         return $qb;
