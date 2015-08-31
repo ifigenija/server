@@ -55,7 +55,7 @@ class DogodekFixture
         $o->setStatus($v[4]);
         $o->setRazred($v[5]);
         $o->setTermin($v[6]);
-        $o->setIme($v[7]);
+        $o->setTitle($v[7]);
 
         if ($v[8]) {
             $getref = $this->getReference($v[8]);

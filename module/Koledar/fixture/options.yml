@@ -3,10 +3,44 @@
 -
     name: dogodek.status
     type: array
-    public: true
+    public: true,
+    readOnly: true,
     description: 'Tabela statusa dogodkov'
     defaultValue: 
-        osnutek:
-           label: Dolgoročno
-        planiran: 
-           label: Planiran
+        100:
+            label: Dolgoročno
+        200:  
+           label: Planirano
+        300: 
+            label: Fiksiran                 
+        400:
+            label: Potrjen - interno
+        500: 
+            label: Potrjen - javno
+        600: 
+            label: Zaključen
+        700: 
+            label: Obdelan
+            
+-
+    name: dogodek.razred
+    type: array
+    public: true,
+    readOnly: true,
+    description: 'Tabela razredov dogodkov, ki jih aplikacija podpira'
+    defaultValue: 
+        100:
+            label: Predstava
+            type: predstava
+        200: 
+           label: Vaja           
+           type: vaja
+        300: 
+           label: Gostovanje           
+           type: gostovanje 
+        400: 
+           label: Zasedenost           
+           type: zasedenost
+        400: 
+           label: Splošni dogodek           
+           type: splošni   

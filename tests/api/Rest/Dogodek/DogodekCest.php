@@ -296,7 +296,7 @@ class DogodekCest
             'status'          => 1,
             'razred'          => 'zz',
             'termin'          => 'zz',
-            'ime'             => 'zz',
+            'title'             => 'zz',
             'predstava'       => null,
             'zasedenost'      => $this->objZasedenost['id'],
             'vaja'            => $this->objVaja['id'],
@@ -319,7 +319,7 @@ class DogodekCest
             'status'          => 4,
             'razred'          => 'aa',
             'termin'          => 'aa',
-            'ime'             => 'aa',
+            'title'             => 'aa',
             'predstava'       => $this->objPredstava['id'],
             'zasedenost'      => null,
             'vaja'            => null,
@@ -334,52 +334,7 @@ class DogodekCest
         $I->assertEquals($ent['status'], 4);
     }
 
-    /**
-     *  napolnimo vsaj en zapis
-     * 
-     * @depends create
-     * @param ApiTester $I
-     */
-    public function createVecArhivalij(ApiTester $I)
-    {
-        $data                 = [
-            'oznakaDatuma'      => 'zz',
-            'datum'             => '2019-02-01T00:00:00+0100',
-            'fizicnaOblika'     => 'zz',
-            'izvorDigitalizata' => 'zz',
-            'povzetek'          => 'zz',
-            'opombe'            => 'zz',
-            'lokacijaOriginala' => 'zz',
-            'objavljeno'        => 'zz',
-            'naslov'            => 'zz',
-            'avtorstvo'         => 'zz',
-            'dogodek'           => $this->obj2['id'],
-            'uprizoritev'       => null,
-        ];
-        $this->objArhivalija1 = $ent                  = $I->successfullyCreate($this->arhivalijaUrl, $data);
-        $I->assertEquals($ent['naslov'], 'zz');
-        $I->assertNotEmpty($ent['id']);
-
-        // kreiramo še en zapis
-        $data                 = [
-            'oznakaDatuma'      => 'aa',
-            'datum'             => '2016-02-01T00:00:00+0100',
-            'fizicnaOblika'     => 'aa',
-            'izvorDigitalizata' => 'aa',
-            'povzetek'          => 'aa',
-            'opombe'            => 'aa',
-            'lokacijaOriginala' => 'aa',
-            'objavljeno'        => 'aa',
-            'naslov'            => 'aa',
-            'avtorstvo'         => 'aa',
-            'dogodek'           => $this->obj2['id'],
-            'uprizoritev'       => null,
-        ];
-        $this->objArhivalija2 = $ent                  = $I->successfullyCreate($this->arhivalijaUrl, $data);
-        $I->assertEquals($ent['naslov'], 'aa');
-        $I->assertNotEmpty($ent['id']);
-    }
-
+  
     /**
      *  kreiramo zapis
      * 
@@ -489,7 +444,7 @@ class DogodekCest
         $I->assertEquals($ent['status'], 3);
         $I->assertEquals($ent['razred'], 'zz');
         $I->assertEquals($ent['termin'], 'zz');
-        $I->assertEquals($ent['ime'], 'zz');
+        $I->assertEquals($ent['title'], 'zz');
         $I->assertEquals($ent['predstava'], null);
         $I->assertEquals($ent['zasedenost'], $this->objZasedenost['id']);
         $I->assertEquals($ent['vaja'], $this->objVaja['id']);
@@ -498,11 +453,9 @@ class DogodekCest
         $I->assertEquals($ent['prostor'], $this->lookProstor['id']);
         $I->assertEquals($ent['sezona'], $this->objSezona['id']);
 
-        $I->assertTrue(isset($ent['arhivi']));
         $I->assertTrue(isset($ent['terminiStoritve']));
         $I->assertTrue(isset($ent['prodajaPredstave']));
 
-        $I->assertEquals(0, count($ent['arhivi']));
         $I->assertEquals(0, count($ent['terminiStoritve']));
         $I->assertEquals(0, count($ent['prodajaPredstave']));
     }
@@ -535,7 +488,7 @@ class DogodekCest
             'status'          => 6,
             'razred'          => 'cc',
             'termin'          => 'cc',
-            'ime'             => 'cc',
+            'title'             => 'cc',
             'predstava'       => null,
             'zasedenost'      => null,
             'vaja'            => null,
@@ -559,7 +512,7 @@ class DogodekCest
             'status'          => 7,
             'razred'          => 'dd',
             'termin'          => 'dd',
-            'ime'             => 'dd',
+            'title'             => 'dd',
             'predstava'       => $this->objPredstava['id'],
             'zasedenost'      => null,
             'vaja'            => $this->objVaja['id'],

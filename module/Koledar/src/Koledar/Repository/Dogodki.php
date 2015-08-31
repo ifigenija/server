@@ -6,12 +6,10 @@
 
 namespace Koledar\Repository;
 
-use Doctrine\Common\Collections\Criteria;
+use DateTime;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use DoctrineModule\Paginator\Adapter\Selectable;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
-
 
 /**
  * Description of Dogodki
@@ -19,23 +17,24 @@ use Max\Repository\AbstractMaxRepository;
  * @author rado
  */
 class Dogodki
-        extends \Max\Repository\AbstractMaxRepository
+        extends AbstractMaxRepository
 {
 
     protected $sortOptions = [
         "default" => [
-            "ime" => ["alias" => "p.ime"]
+            "title" => ["alias" => "p.title"]
         ],
-        "vse" => [
-            "ime" => ["alias" => "p.ime"]
+        "vse"     => [
+            "title" => ["alias" => "p.title"]
         ],
     ];
+
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
             case "default":
             case "vse":
-                $qb   = $this->getVseQb($options);
+                $qb = $this->getVseQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
 //            case "default":
@@ -58,11 +57,30 @@ class Dogodki
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naslov = $e->like('p.ime', ':ime');
+            $naslov = $e->like('p.title', ':title');
 
             $qb->andWhere($e->orX($naslov));
 
-            $qb->setParameter('ime', "{$options['q']}%", "string");
+            $qb->setParameter('title', "{$options['q']}%", "string");
+        }
+
+        /* Če ni postavljenega začetka, smatramo, da gledamo od danes naprej */
+        if (empty($options['zacetek'])) {
+            $options['zacetek'] = new DateTime();
+        }
+        /*
+         * Če ni postavljenega konca smatramo, da nas zanima 1 mesec 
+         */
+        if (empty($options['konec'])) {
+        $options['konec'] = clone $options['zacetek'];
+            $options['konec']->modify('+1 month');
+        }
+        
+        /**
+         * Če ni zahtevan status potem prikažemo samo tiste s statusom 500 - potrjen - javno
+         */
+        if (!$this->getAuth()->isGranted('Dogodek-nepotrjeni') || empty($options['status'])) {
+            $options['status'] = ['500'];
         }
 
         return $qb;

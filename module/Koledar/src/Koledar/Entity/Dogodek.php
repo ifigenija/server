@@ -10,7 +10,10 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Dogodek uprizoritve - ali vaja ali predstava
  * 
  * @ORM\Entity(repositoryClass="Koledar\Repository\Dogodki")
- * @ORM\Table(indexes={@ORM\Index(name="zacetek", columns={"zacetek"}),@ORM\Index(name="konec", columns={"konec"})})
+ * @ORM\Table(indexes={
+ *    @ORM\Index(name="dogodki_zacetek", columns={"zacetek"}),
+ *    @ORM\Index(name="dogodki_konec", columns={"konec"})
+ * })
  * @Max\I18n(label="Dogodek",plural="Dogodki")
  * @Max\Id(prefix="0024")
  */
@@ -31,30 +34,38 @@ class Dogodek
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Planiran začetek", description="Planiran začetek dogodka")
-     * @var string
+     * @var \DateTime
      */
     protected $planiranZacetek;
 
     /**
      * 
+     * @ORM\Column(type="boolean", options = {"default" =false})
+     * @Max\I18n(label="Celodnevni", description="Dogodek se razteza skozi cel dan")
+     * @var boolean
+     */
+    protected $allDay = false;
+
+    /**
+     * 
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Začetek", description="Začetek dogodka")
-     * @var string
+     * @var \DateTime
      */
     protected $zacetek;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true, options={ "quoted"=true })
      * @Max\I18n(label="Konec", description="Konec dogodka")
-     * @var string
+     * @var \DateTime
      */
     protected $konec;
 
     /**
      * $$ za podefinirati vrednosti -morda v opcijah? 
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(length=20, nullable=true)
      * @Max\I18n(label="Status", description="Status dogodka")
-     * @Max\Ui(type="integer")
+     * @Max\Ui(type="select", opts="dogodek.status")
      * @var integer     
      */
     protected $status;
@@ -62,6 +73,7 @@ class Dogodek
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
      * @Max\I18n(label="Razred", description="Razred dogodka")
+     * @Max\Ui(type="select", opts="dogodek.razred")
      * @var string
      */
     protected $razred;
@@ -78,7 +90,7 @@ class Dogodek
      * @Max\I18n(label="Ime", description="Ime dogodka")
      * @var string
      */
-    protected $ime;
+    protected $title;
 
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Predstava", inversedBy="dogodek")
@@ -135,12 +147,6 @@ class Dogodek
     protected $prostor;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Arhivalija", mappedBy="dogodek")
-     * @var <Arhiv>
-     */
-    protected $arhivi;
-
-    /**
      * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="dogodek")
      * @var <TerminiStoritve>
      */
@@ -163,7 +169,6 @@ class Dogodek
 
     public function __construct()
     {
-        $this->arhivi           = new ArrayCollection();
         $this->terminiStoritve  = new ArrayCollection();
         $this->prodajaPredstave = new ArrayCollection();
     }
@@ -179,21 +184,6 @@ class Dogodek
         return $this->id;
     }
 
-    public function getPlaniranZacetek()
-    {
-        return $this->planiranZacetek;
-    }
-
-    public function getZacetek()
-    {
-        return $this->zacetek;
-    }
-
-    public function getKonec()
-    {
-        return $this->konec;
-    }
-
     public function getStatus()
     {
         return $this->status;
@@ -207,11 +197,6 @@ class Dogodek
     public function getTermin()
     {
         return $this->termin;
-    }
-
-    public function getIme()
-    {
-        return $this->ime;
     }
 
     public function getPredstava()
@@ -244,11 +229,6 @@ class Dogodek
         return $this->prostor;
     }
 
-    public function getArhivi()
-    {
-        return $this->arhivi;
-    }
-
     public function getTerminiStoritve()
     {
         return $this->terminiStoritve;
@@ -270,24 +250,6 @@ class Dogodek
         return $this;
     }
 
-    public function setPlaniranZacetek($planiranZacetek)
-    {
-        $this->planiranZacetek = $planiranZacetek;
-        return $this;
-    }
-
-    public function setZacetek($zacetek)
-    {
-        $this->zacetek = $zacetek;
-        return $this;
-    }
-
-    public function setKonec($konec)
-    {
-        $this->konec = $konec;
-        return $this;
-    }
-
     public function setStatus($status)
     {
         $this->status = $status;
@@ -306,51 +268,39 @@ class Dogodek
         return $this;
     }
 
-    public function setIme($ime)
-    {
-        $this->ime = $ime;
-        return $this;
-    }
-
-    public function setPredstava(\Koledar\Entity\Predstava $predstava=null)
+    public function setPredstava(\Koledar\Entity\Predstava $predstava = null)
     {
         $this->predstava = $predstava;
         return $this;
     }
 
-    public function setZasedenost(\Koledar\Entity\Zasedenost $zasedenost=null)
+    public function setZasedenost(\Koledar\Entity\Zasedenost $zasedenost = null)
     {
         $this->zasedenost = $zasedenost;
         return $this;
     }
 
-    public function setVaja(\Koledar\Entity\Vaja $vaja=null)
+    public function setVaja(\Koledar\Entity\Vaja $vaja = null)
     {
         $this->vaja = $vaja;
         return $this;
     }
 
-    public function setGostovanje(\Koledar\Entity\Gostovanje $gostovanje=null)
+    public function setGostovanje(\Koledar\Entity\Gostovanje $gostovanje = null)
     {
         $this->gostovanje = $gostovanje;
         return $this;
     }
 
-    public function setDogodekIzven(\Koledar\Entity\DogodekIzven $dogodekIzven=null)
+    public function setDogodekIzven(\Koledar\Entity\DogodekIzven $dogodekIzven = null)
     {
         $this->dogodekIzven = $dogodekIzven;
         return $this;
     }
 
-    public function setProstor(\Prodaja\Entity\Prostor $prostor=null)
+    public function setProstor(\Prodaja\Entity\Prostor $prostor = null)
     {
         $this->prostor = $prostor;
-        return $this;
-    }
-
-    public function setArhivi($arhivi)
-    {
-        $this->arhivi = $arhivi;
         return $this;
     }
 
@@ -366,9 +316,64 @@ class Dogodek
         return $this;
     }
 
-    public function setSezona(\Koledar\Entity\Sezona $sezona=null)
+    public function setSezona(\Koledar\Entity\Sezona $sezona = null)
     {
         $this->sezona = $sezona;
+        return $this;
+    }
+
+    public function getPlaniranZacetek()
+    {
+        return $this->planiranZacetek;
+    }
+
+    public function getAllDay()
+    {
+        return $this->allDay;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function setPlaniranZacetek(\DateTime $planiranZacetek = null)
+    {
+        $this->planiranZacetek = $planiranZacetek;
+        return $this;
+    }
+
+    public function setAllDay($allDay)
+    {
+        $this->allDay = $allDay;
+        return $this;
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    public function getZacetek()
+    {
+        return $this->zacetek;
+    }
+
+    public function getKonec()
+    {
+        return $this->konec;
+    }
+
+    public function setZacetek(\DateTime $zacetek)
+    {
+        $this->zacetek = $zacetek;
+        return $this;
+    }
+
+    public function setKonec(\DateTime $konec)
+    {
+        $this->konec = $konec;
         return $this;
     }
 
