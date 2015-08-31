@@ -337,6 +337,12 @@ class Uprizoritev
         if (!empty($this->datumZacStudija) && !empty($this->datumPremiere)) {
             $this->expect($this->datumZacStudija <= $this->datumPremiere, 'Začetek študija ne sme biti kasneje kot datum premiere', 1000878);
         }
+        if (!empty($this->datumZakljucka) && !empty($this->datumZacStudija)) {
+            $this->expect($this->datumZakljucka >= $this->datumZacStudija, 'Zaključek ne sme biti prej kot datum začetka', 1000880);
+        }
+        if (!empty($this->datumZakljucka) && !empty($this->datumPremiere)) {
+            $this->expect($this->datumZakljucka >= $this->datumPremiere, 'Zaključek ne sme biti prej kot datum premiere', 1000879);
+        }
     }
 
     public function getId()

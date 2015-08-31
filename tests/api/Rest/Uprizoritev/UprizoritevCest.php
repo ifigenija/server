@@ -1025,4 +1025,47 @@ class UprizoritevCest
         $I->assertEquals(1, count($resp));
     }
 
+    /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateZaValidacijoDatumov(ApiTester $I)
+    {
+        $ent = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+
+        // enaka datuma
+        $ent['datumZacStudija'] = '2016-02-01T00:00:00+0100';
+        $ent['datumPremiere']   = '2016-02-20T00:00:00+0100';
+        $ent['datumZakljucka']  = '2016-02-27T00:00:00+0200';
+        $ent                    = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+
+        // prazen konec
+        $ent['datumZakljucka'] = '';
+        $ent                   = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+
+        //  konec pred začetkom
+        $ent['datumZakljucka'] = '2016-01-31T00:00:00+0100';
+        $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000880, $resp[0]['code']);
+
+        //  konec pred premiero
+        $ent['datumZakljucka'] = '2016-02-15T00:00:00+0100';
+        $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000879, $resp[0]['code']);
+
+        // prazen začetek
+        $ent['datumZacStudija'] = '';
+        $ent['datumPremiere']   = '2016-01-30T00:00:00+0100';
+        $ent['datumZakljucka']  = '2016-02-27T00:00:00+0200';
+        $ent                    = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+
+        // premiera pred začetkom
+        $ent['datumZacStudija'] = '2016-02-01T00:00:00+0100';
+        $ent['datumPremiere']   = '2016-01-30T00:00:00+0100';
+        $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000878, $resp[0]['code']);
+    }
+
 }
