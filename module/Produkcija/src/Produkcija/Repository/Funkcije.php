@@ -70,8 +70,8 @@ class Funkcije
             $qb->andWhere($e->orX($id));
             $qb->setParameter('id', "{$options['q']}%", "string");
         }
-        $qb->join('p.uprizoritev', 'uprizoritev');
         if (!empty($options['uprizoritev'])) {
+            $qb->join('p.uprizoritev', 'uprizoritev');
             $naz = $e->eq('uprizoritev.id', ':upriz');
             $qb->andWhere($naz);
             $qb->setParameter('upriz', "{$options['uprizoritev']}", "string");

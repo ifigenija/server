@@ -12,7 +12,6 @@ use DoctrineModule\Paginator\Adapter\Selectable;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
 
-
 /**
  * Description of TerminIStoritve
  *
@@ -21,19 +20,20 @@ use Max\Repository\AbstractMaxRepository;
 class TerminiStoritve
         extends \Max\Repository\AbstractMaxRepository
 {
+
     protected $sortOptions = [
         "default" => [
             "id" => ["alias" => "p.id"]
         ],
-        "vse" => [
+        "vse"     => [
             "id" => ["alias" => "p.id"]
         ],
-        "ure" => [
+        "ure"     => [
             "id" => ["alias" => "p.id"]
         ],
-    ];  
-    
-     public function getPaginator(array $options, $name = "default")
+    ];
+
+    public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
             case "default":
@@ -54,35 +54,50 @@ class TerminiStoritve
 //                return new Selectable($this, $crit);
             case "ure":
                 $this->expect(!empty($options['dogodek']), "Dogodek je obvezen", 770082);
-                $crit = new Criteria();
-                $e    = $crit->expr();
-
-                if (!empty($options['dogodek'])) {
-                    $dogodek = $this->getEntityManager()->find('Koledar\Entity\Dogodek', $options['dogodek']);
-                    $exp   = $e->eq('dogodek', $dogodek);
-                }
-                $crit->andWhere($exp);
-                // $$ rb tu nekje bi še preverili, če je api enable-an za posamezen zapis
-                return new Selectable($this, $crit);
+                $qb   = $this->getUreQb($options);
+                $this->getSort($name, $qb);
+                return new DoctrinePaginator(new Paginator($qb));
+//                $this->expect(!empty($options['dogodek']), "Dogodek je obvezen", 770082);
+//                $crit = new Criteria();
+//                $e    = $crit->expr();
+//
+//                if (!empty($options['dogodek'])) {
+//                    $dogodek = $this->getEntityManager()->find('Koledar\Entity\Dogodek', $options['dogodek']);
+//                    $exp     = $e->eq('dogodek', $dogodek);
+//                }
+//                $crit->andWhere($exp);
+//                // $$ rb tu nekje bi še preverili, če je api enable-an za posamezen zapis
+//                return new Selectable($this, $crit);
         }
     }
-    
-    
-      public function getVseQb($options)
+
+    public function getVseQb($options)
     {
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
-
             $naz = $e->like('p.id', ':id');
-
             $qb->andWhere($e->orX($naz));
-
             $qb->setParameter('id', "{$options['q']}%", "string");
         }
-
+        return $qb;
+    }
+    public function getUreQb($options)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $e  = $qb->expr();
+        if (!empty($options['q'])) {
+            $naz = $e->like('p.id', ':id');
+            $qb->andWhere($e->orX($naz));
+            $qb->setParameter('id', "{$options['q']}%", "string");
+        }
+                if (!empty($options['dogodek'])) {
+            $qb->join('p.dogodek', 'dogodek');
+            $naz = $e->eq('dogodek.id', ':dogodek');
+            $qb->andWhere($naz);
+            $qb->setParameter('dogodek', "{$options['dogodek']}", "string");
+        }
         return $qb;
     }
 
-    
 }
