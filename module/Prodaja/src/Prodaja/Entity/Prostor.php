@@ -67,7 +67,7 @@ class Prostor
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="prostori")
      * @Max\I18n(label="prostor.popa",  description="prostor.d.popa")
-     * @Max\Ui(type="hiddenid")
+     * @Max\Ui(type="toone")
      * @var \App\Entity\Popa
      */
     protected $popa;
@@ -77,6 +77,7 @@ class Prostor
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
      * @Max\I18n(label="prostor.naslov", description="prostor.d.naslov")
+     * @Max\Ui(type="toone", empty="Izberi naslov", filters={"popa" : {"element":"popa"}})
      * @var \App\Entity\PostniNaslov
      */
     protected $naslov;

@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="App\Repository\PostniNaslovi")
  * @ORM\Table(name="PostniNaslovi")
  * @Max\I18n(label="Poštni naslov",plural="Poštni naslovi")
+ * @Max\Lookup(ident="naziv", label="ulica", search={"naziv", "ulica", "posta", "postaNaziv"})
  * @Max\Id(prefix="0006")
  *  */
 class PostniNaslov
