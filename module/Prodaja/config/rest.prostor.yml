@@ -19,6 +19,6 @@ lists:
     default: 
         filter:                
         hydrator:
-            - exclude: []
+            - lookups: [popa]
 #    vse: 
 #        filter:

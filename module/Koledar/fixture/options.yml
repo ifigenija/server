@@ -3,8 +3,8 @@
 -
     name: dogodek.status
     type: array
-    public: true,
-    readOnly: true,
+    public: true
+    readOnly: true
     description: 'Tabela statusa dogodkov'
     defaultValue: 
         100:
@@ -25,8 +25,8 @@
 -
     name: dogodek.razred
     type: array
-    public: true,
-    readOnly: true,
+    public: true
+    readOnly: true
     description: 'Tabela razredov dogodkov, ki jih aplikacija podpira'
     defaultValue: 
         100:

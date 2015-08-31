@@ -1244,7 +1244,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Produkcija\Entity\Funkcija" to="\Produkcija\Entity\Alternacija" owner-alias="" inverse-alias="privzeti" many-owner="true" many-inverse="false" uuid="14a6cf15-a17a-46b5-b0d9-62f5c92e6882">
+    <association from="\Produkcija\Entity\Funkcija" to="\Produkcija\Entity\Alternacija" owner-alias="privzeti" many-owner="true" many-inverse="false" uuid="14a6cf15-a17a-46b5-b0d9-62f5c92e6882">
       <association-field from="alternacija_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>

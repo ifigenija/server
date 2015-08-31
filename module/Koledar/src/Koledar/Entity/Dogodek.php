@@ -40,7 +40,7 @@ class Dogodek
 
     /**
      * 
-     * @ORM\Column(type="boolean", options = {"default" =false})
+     * @ORM\Column(type="boolean", options = {"default"=false})
      * @Max\I18n(label="Celodnevni", description="Dogodek se razteza skozi cel dan")
      * @var boolean
      */
@@ -55,7 +55,7 @@ class Dogodek
     protected $zacetek;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true, options={ "quoted"=true })
+     * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Konec", description="Konec dogodka")
      * @var \DateTime
      */

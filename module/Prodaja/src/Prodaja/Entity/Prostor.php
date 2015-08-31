@@ -50,6 +50,16 @@ class Prostor
      */
     protected $jePrizorisce;
 
+    
+    /**
+     * @ORM\Column(type="boolean", nullable=false, options={"default"=false})
+     * @Max\I18n(label="prostor.jePrizorisce", description="prostor.d.jePrizorisce")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $sePlanira = false;
+
+    
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="prostor.kapaciteta", description="prostor.d.kapaciteta")
@@ -184,5 +194,18 @@ class Prostor
         $this->naslov = $naslov;
         return $this;
     }
+    
+    public function getSePlanira()
+    {
+        return $this->sePlanira;
+    }
+
+    public function setSePlanira($sePlanira)
+    {
+        $this->sePlanira = $sePlanira;
+        return $this;
+    }
+
+
 
 }
