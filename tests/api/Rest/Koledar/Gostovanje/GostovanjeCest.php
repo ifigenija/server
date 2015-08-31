@@ -45,6 +45,7 @@ class GostovanjeCest
 
     public function _before(ApiTester $I)
     {
+        $I->assertTrue(false, "popraviti ko se bolje doreče logika");
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
     }
 
@@ -127,31 +128,15 @@ class GostovanjeCest
         ];
         $this->objPredstava2 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
         $I->assertNotEmpty($ent['id']);
-    }
-
-    /**
-     * 
-     * @param ApiTester $I
-     */
-    public function createVajo(ApiTester $I)
-    {
-        $data          = [
-            'zaporedna'   => 1,
-            'porocilo'    => 'zz',
-            'dogodek'     => null, // najprej mora biti kreirana vaja, šele potem dogodek.
-            'uprizoritev' => null,
-        ];
-        $this->objVaja = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['porocilo'], 'zz');
+        
+        
+        $I->assertTrue(false, "predstave brez uprizoritve ne sme bit možno kreirat");
     }
 
     /**
      * dogodek kreiramo, ko zapis zasedenost obstaja, ker je Dogodek lastnik relacije
      * 
      * @depends create
-     * @depends createVajo
      * @param ApiTester $I
      */
     public function createDogodek(ApiTester $I)
@@ -160,22 +145,18 @@ class GostovanjeCest
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => 1,
-            'razred'          => null,
+            'status'          => "100",
+            'razred'          => "300",
             'termin'          => null,
-            'ime'             => null,
-            'predstava'       => null,
-            'zasedenost'      => null,
-            'vaja'            => $this->objVaja['id'],
+            'title'             => "nekaj",
             'gostovanje'      => $this->obj['id'],
-            'dogodekIzven'    => null,
             'prostor'         => null,
             'sezona'          => null,
         ];
         $this->objDogodek = $ent              = $I->successfullyCreate($this->dogodekUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['status'], 1);
+        $I->assertEquals($ent['status'], "100");
     }
 
     /**

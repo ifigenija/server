@@ -24,7 +24,6 @@ use ApiTester;
  *      - zasedenost
  *      - vaja
  *      - gostovanje
- *      - dogodekIzven : narejeno pri dogodekIzvenCest
  *      - prostor
  *      - arhiv                      O2M
  *      - terminiStoritve            O2M
@@ -45,7 +44,6 @@ class DogodekCest
     private $zasedenostUrl     = '/rest/zasedenost';
     private $vajaUrl           = '/rest/vaja';
     private $gostovanjeUrl     = '/rest/gostovanje';
-    private $dogodekIzvenUrl   = '/rest/dogodekIzven';
     private $dogodekUrl        = '/rest/dogodek';
     private $prostorUrl        = '/rest/prostor';
     private $sezonaUrl         = '/rest/sezona';
@@ -151,7 +149,7 @@ class DogodekCest
             'zaporedna'   => 1,
             'porocilo'    => 'zz',
             'dogodek'     => null, //najprej mora biti kreirana vaja, šele potem dogodek.
-            'uprizoritev' => null,
+            'uprizoritev' => $I->lookupEntity('uprizoritev', '0001'),
         ];
         $this->objVaja = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -187,14 +185,12 @@ class DogodekCest
     {
         $data               = [
             'dogodek'     => NULL,
-            'uprizoritev' => NULL,
+            'uprizoritev' => $I->lookupEntity('uprizoritev', "0002"),
             'gostovanje'  => NULL,
-            'gostujoca'   => NULL,
         ];
         $this->objPredstava = $ent                = $I->successfullyCreate($this->predstavaUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['gostujoca'], null);
 
         // kreiramo še en zapis
     }
@@ -293,22 +289,18 @@ class DogodekCest
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => 1,
-            'razred'          => 'zz',
+            'status'          => '100',
+            'razred'          => '500',
             'termin'          => 'zz',
             'title'             => 'zz',
-            'predstava'       => null,
             'zasedenost'      => $this->objZasedenost['id'],
-            'vaja'            => $this->objVaja['id'],
-            'gostovanje'      => null,
-            'dogodekIzven'    => null,
             'prostor'         => $this->lookProstor['id'],
             'sezona'          => $this->objSezona['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['status'], 1);
+        $I->assertEquals('100', $ent['status']);
 
 
         // kreiramo še en zapis
@@ -316,22 +308,22 @@ class DogodekCest
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => 4,
-            'razred'          => 'aa',
+            'status'          => '200',
+            'razred'          => '100',
             'termin'          => 'aa',
             'title'             => 'aa',
             'predstava'       => $this->objPredstava['id'],
             'zasedenost'      => null,
             'vaja'            => null,
             'gostovanje'      => null,
-            'dogodekIzven'    => null,
+            'splosni'    => null,
             'prostor'         => null,
             'sezona'          => $this->objSezona['id'],
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['status'], 4);
+        $I->assertEquals("200", $ent['status']);
     }
 
   
@@ -420,11 +412,11 @@ class DogodekCest
     public function update(ApiTester $I)
     {
         $ent           = $this->obj;
-        $ent['status'] = 3;
+        $ent['status'] = "600";
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['status'], 3);
+        $I->assertEquals("600", $entR['status']);
     }
 
     /**
@@ -441,15 +433,14 @@ class DogodekCest
         $I->assertEquals($ent['planiranZacetek'], '2011-02-01T00:00:00+0100');
         $I->assertEquals($ent['zacetek'], '2012-02-01T00:00:00+0100');
         $I->assertEquals($ent['konec'], '2013-02-01T00:00:00+0100');
-        $I->assertEquals($ent['status'], 3);
-        $I->assertEquals($ent['razred'], 'zz');
+        $I->assertEquals($ent['status'], "600");
+        $I->assertEquals($ent['razred'], '500');
         $I->assertEquals($ent['termin'], 'zz');
         $I->assertEquals($ent['title'], 'zz');
         $I->assertEquals($ent['predstava'], null);
         $I->assertEquals($ent['zasedenost'], $this->objZasedenost['id']);
-        $I->assertEquals($ent['vaja'], $this->objVaja['id']);
         $I->assertEquals($ent['gostovanje'], null);
-        $I->assertEquals($ent['dogodekIzven'], null);
+        $I->assertEquals($ent['splosni'], null);
         $I->assertEquals($ent['prostor'], $this->lookProstor['id']);
         $I->assertEquals($ent['sezona'], $this->objSezona['id']);
 
@@ -485,15 +476,40 @@ class DogodekCest
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => 6,
-            'razred'          => 'cc',
+            'status'          => '100',
+            'razred'          => '100',
             'termin'          => 'cc',
             'title'             => 'cc',
             'predstava'       => null,
             'zasedenost'      => null,
             'vaja'            => null,
             'gostovanje'      => null,
-            'dogodekIzven'    => null,
+            'splosni'    => null,
+            'prostor'         => null,
+            'sezona'          => $this->objSezona['id'],
+        ];
+
+        // test validacije - obstajati mora ali uprizoritev ali dogodek
+        $resp = $I->failToCreate($this->restUrl, $data);
+        $I->assertNotEmpty($resp);
+        // testiramo na enako številko napake kot je v validaciji
+        $I->assertEquals(1000465, $resp[0]['code']);
+
+        // validacija 
+        $data = [
+            'planiranZacetek' => '2011-02-01T00:00:00+0100',
+            'zacetek'         => '2012-02-01T00:00:00+0100',
+            'konec'           => '2013-02-01T00:00:00+0100',
+            'status'          => '200',
+            'razred'          => '200',
+            'termin'          => 'dd',
+            'title'             => 'dd',
+            'predstava'       => null,
+            'zasedenost'      => null,
+            'vaja'            => $this->objVaja['id'],
+            'predstava'        => $this->objPredstava['id'],
+            'gostovanje'      => null,
+            'splosni'    => null,
             'prostor'         => null,
             'sezona'          => $this->objSezona['id'],
         ];
@@ -503,47 +519,8 @@ class DogodekCest
         $I->assertNotEmpty($resp);
         // testiramo na enako številko napake kot je v validaciji
         $I->assertEquals(1000361, $resp[0]['code']);
-
-        // validacija 
-        $data = [
-            'planiranZacetek' => '2011-02-01T00:00:00+0100',
-            'zacetek'         => '2012-02-01T00:00:00+0100',
-            'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => 7,
-            'razred'          => 'dd',
-            'termin'          => 'dd',
-            'title'             => 'dd',
-            'predstava'       => $this->objPredstava['id'],
-            'zasedenost'      => null,
-            'vaja'            => $this->objVaja['id'],
-            'gostovanje'      => null,
-            'dogodekIzven'    => null,
-            'prostor'         => null,
-            'sezona'          => $this->objSezona['id'],
-        ];
-
-        // test validacije - obstajati mora ali uprizoritev ali dogodek
-        $resp = $I->failToCreate($this->restUrl, $data);
-        $I->assertNotEmpty($resp);
-        // testiramo na enako številko napake kot je v validaciji
-        $I->assertEquals(1000362, $resp[0]['code']);
     }
 
-    /**
-     * preberemo relacije
-     * @depends createVecArhivalij
-     * 
-     * @param ApiTester $I
-     */
-    public function preberiRelacijeZArhivalijami(ApiTester $I)
-    {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "arhivi", "");
-        $I->assertEquals(2, count($resp));
-
-        // get po popa id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "arhivi", $this->objArhivalija1['id']);
-        $I->assertEquals(1, count($resp));
-    }
 
     /**
      * preberemo relacije

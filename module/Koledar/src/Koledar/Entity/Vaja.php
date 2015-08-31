@@ -27,6 +27,15 @@ class Vaja
     protected $id;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Max\I18n(label="Vrsta vaje", description="Vrsta vaje")
+     * @Max\Ui(type="optionalselect", opts="koledar.vrstaVaje", empty="Izberi vrsto vaje")
+     * @var string
+     */
+    protected $vrsta;
+    
+    
+    /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Zaporedna št.", description="Zaporedna številka vaje")
      * @Max\Ui(type="integer")
@@ -54,13 +63,14 @@ class Vaja
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="vaje")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id")
      * @Max\I18n(label="Uprizoritev",  description="Uprizoritve")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="toone", required=true)
      * @var \Produkcija\Entity\Uprizoritev
      */
     protected $uprizoritev;
 
     public function validate($mode = 'update')
     {
+        $this->expect($this->uprizoritev, "Vaja mora biti vezana na uprizoritev", 1000471);
         
     }
 

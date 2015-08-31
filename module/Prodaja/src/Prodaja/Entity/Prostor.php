@@ -53,7 +53,7 @@ class Prostor
     
     /**
      * @ORM\Column(type="boolean", nullable=false, options={"default"=false})
-     * @Max\I18n(label="prostor.jePrizorisce", description="prostor.d.jePrizorisce")
+     * @Max\I18n(label="prostor.sePlanira", description="prostor.d.sePlanira")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */

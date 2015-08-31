@@ -12,7 +12,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="Koledar\Repository\Dogodki")
  * @ORM\Table(indexes={
  *    @ORM\Index(name="dogodki_zacetek", columns={"zacetek"}),
- *    @ORM\Index(name="dogodki_konec", columns={"konec"})
+ *    @ORM\Index(name="dogodki_konec", columns={"konec"}),
+ *    @ORM\Index(name="dogodki_razred", columns={"razred"})})
  * })
  * @Max\I18n(label="Dogodek",plural="Dogodki")
  * @Max\Id(prefix="0024")
@@ -20,6 +21,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Dogodek
         extends \Max\Entity\Base
 {
+
+    const PREDSTAVA  = "100";
+    const VAJA       = "200";
+    const GOSTOVANJE = "300";
+    const SPLOSNO    = "400";
+    const ZASEDENOST = "500";
+
+
+    private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::ZASEDENOST, self::SPLOSNO];
 
     /**
      * @ORM\Id
@@ -129,13 +139,13 @@ class Dogodek
     protected $gostovanje;
 
     /**
-     * @ORM\OneToOne(targetEntity="Koledar\Entity\DogodekIzven", inversedBy="dogodek")
-     * @ORM\JoinColumn(name="dogodek_izven_id", referencedColumnName="id", unique=true)
-     * @Max\I18n(label="Dogodek za izven",  description="Dogodek za izven")
+     * @ORM\OneToOne(targetEntity="Koledar\Entity\DogodekSplosni", inversedBy="dogodek")
+     * @ORM\JoinColumn(name="dogodek_splosni_id", referencedColumnName="id", unique=true)
+     * @Max\I18n(label="Splošni dogodek",  description="Dogodek, ki ni ne vaja, ne predstava, ne gostovanje, zaseda pa prostor")
      * @Max\Ui(type="toone")
-     * @var \Koledar\Entity\DogodekIzven
+     * @var \Koledar\Entity\DogodekSplosni
      */
-    protected $dogodekIzven;
+    protected $splosni;
 
     /**
      * @ORM\OneToOne(targetEntity="Prodaja\Entity\Prostor")
@@ -175,10 +185,68 @@ class Dogodek
 
     public function validate($mode = 'update')
     {
-        $this->expect($this->vaja || $this->predstava, "Vaja ali predstava sta obvezna", 1000361);
-        $this->expect(!($this->vaja && $this->predstava), "Dogodek je lahko le samo vaja ali samo predstava", 1000362);
+
+        $this->expect($this->razred, "Razred dogodka ne sme biti prazen", 1000464);
+        $this->expect(array_search($this->razred, $this->razredi)> -1, "Razred dogodka ni pravilen", 1000462);
+
+        if ($this->razred === self::VAJA) {
+            $this->expect($this->vaja, "Dogodek razreda vaja zahteva referenco na vajo", 1000463);
+        }
+        if ($this->razred === self::PREDSTAVA) {
+            $this->expect($this->predstava, "Dogodek razreda predstva zahteva referenco na predstavo", 1000465);
+        }
+        if ($this->razred === self::GOSTOVANJE) {
+            $this->expect($this->gostovanje, "Dogodek razreda gostovanje zahteva referenco na gostovanje", 1000466);
+        }
+        if ($this->razred === self::SPLOSNO) {
+            $this->expect($this->splosni, "Dogodek razreda vaja zahteva referenco dogodekSplosni", 1000467);
+        }
+        if ($this->razred === self::ZASEDENOST) {
+            $this->expect($this->zasedenost, "Dogodek razreda zasedenost zahteva referenco zasedenost", 1000468);
+        }
+
+
+        $i = 0;
+        if ($this->vaja) {
+            $i++;
+        }
+        if ($this->predstava) {
+            $i++;
+        }
+        if ($this->zasedenost) {
+            $i++;
+        }
+        if ($this->gostovanje) {
+            $i++;
+        }
+        if ($this->splosni) {
+            $i++;
+        }
+
+
+        $this->expect($i === 1, "Napaka - napačno število referenc na podrobnosti dogodka $i", 1000361);
+        
+        
     }
 
+    public function getPodrobno() {
+        switch ($this->razred) {
+            case self::PREDSTAVA: 
+                return $this->predstava;
+            case self::VAJA:
+                return $this->vaja;
+            case self::GOSTOVANJE:
+                return $this->gostovanje;
+            case self::ZASEDENOST:
+                return $this->zasedenost;
+            case self::SPLOSNO:
+                return $this->splosni;
+                
+        }
+            
+        
+    }
+    
     public function getId()
     {
         return $this->id;
@@ -219,11 +287,6 @@ class Dogodek
         return $this->gostovanje;
     }
 
-    public function getDogodekIzven()
-    {
-        return $this->dogodekIzven;
-    }
-
     public function getProstor()
     {
         return $this->prostor;
@@ -259,6 +322,7 @@ class Dogodek
     public function setRazred($razred)
     {
         $this->razred = $razred;
+
         return $this;
     }
 
@@ -289,12 +353,6 @@ class Dogodek
     public function setGostovanje(\Koledar\Entity\Gostovanje $gostovanje = null)
     {
         $this->gostovanje = $gostovanje;
-        return $this;
-    }
-
-    public function setDogodekIzven(\Koledar\Entity\DogodekIzven $dogodekIzven = null)
-    {
-        $this->dogodekIzven = $dogodekIzven;
         return $this;
     }
 
@@ -374,6 +432,28 @@ class Dogodek
     public function setKonec(\DateTime $konec)
     {
         $this->konec = $konec;
+        return $this;
+    }
+
+    public function getStatusi()
+    {
+        return $this->statusi;
+    }
+
+    public function getSplosni()
+    {
+        return $this->splosni;
+    }
+
+    public function setStatusi($statusi)
+    {
+        $this->statusi = $statusi;
+        return $this;
+    }
+
+    public function setSplosni(\Koledar\Entity\DogodekSplosni $splosni = null)
+    {
+        $this->splosni = $splosni;
         return $this;
     }
 

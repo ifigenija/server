@@ -41,6 +41,6 @@
         400: 
            label: Zasedenost           
            type: zasedenost
-        400: 
+        500: 
            label: Splošni dogodek           
            type: splošni   

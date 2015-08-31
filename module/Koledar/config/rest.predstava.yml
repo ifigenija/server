@@ -8,8 +8,7 @@ forms:
 #            - id
             - dogodek
             - uprizoritev
-            - gostovanje
-            - gostujoca
+            - gostovanje           
 lists:
     default: 
         filter:

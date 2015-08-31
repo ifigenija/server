@@ -275,11 +275,6 @@ class Uprizoritev
      */
     protected $predstave;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Koledar\Entity\Gostujoca", mappedBy="uprizoritev")
-     * @var <Gostujoce>
-     */
-    protected $gostujoce;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Besedilo")
@@ -328,7 +323,7 @@ class Uprizoritev
         $this->stroski        = new ArrayCollection();
         $this->vaje           = new ArrayCollection();
         $this->predstave      = new ArrayCollection();
-        $this->gostujoce      = new ArrayCollection();
+
     }
 
     public function validate($mode = 'update')
@@ -485,10 +480,7 @@ class Uprizoritev
         return $this->predstave;
     }
 
-    public function getGostujoce()
-    {
-        return $this->gostujoce;
-    }
+
 
     public function getBesedilo()
     {
@@ -675,12 +667,6 @@ class Uprizoritev
     public function setPredstave($predstave)
     {
         $this->predstave = $predstave;
-        return $this;
-    }
-
-    public function setGostujoce($gostujoce)
-    {
-        $this->gostujoce = $gostujoce;
         return $this;
     }
 

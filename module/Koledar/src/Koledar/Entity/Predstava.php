@@ -52,18 +52,11 @@ class Predstava
      */
     protected $gostovanje;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Koledar\Entity\Gostujoca", inversedBy="predstave")
-     * @ORM\JoinColumn(name="gostujoc_id", referencedColumnName="id")
-     * @Max\I18n(label="Gostujoča",  description="Gostujoča")
-     * @Max\Ui(type="toone")
-     * @var \Koledar\Entity\Gostujoca
-     */
-    protected $gostujoca;
-
     public function validate($mode = 'update')
     {
+        $this->expect($this->uprizoritev, "Predstava mora biti vezana na uprizoritev", 1000472);
     }
+
     public function getId()
     {
         return $this->id;
@@ -84,10 +77,7 @@ class Predstava
         return $this->gostovanje;
     }
 
-    public function getGostujoca()
-    {
-        return $this->gostujoca;
-    }
+
 
     public function setId($id)
     {
@@ -95,30 +85,24 @@ class Predstava
         return $this;
     }
 
-    public function setDogodek(\Koledar\Entity\Dogodek $dogodek=null)
+    public function setDogodek(\Koledar\Entity\Dogodek $dogodek = null)
     {
         $this->dogodek = $dogodek;
         return $this;
     }
 
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev=null)
+    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev = null)
     {
         $this->uprizoritev = $uprizoritev;
         return $this;
     }
 
-    public function setGostovanje(\Koledar\Entity\Gostovanje $gostovanje=null)
+    public function setGostovanje(\Koledar\Entity\Gostovanje $gostovanje = null)
     {
         $this->gostovanje = $gostovanje;
         return $this;
     }
 
-    public function setGostujoca(\Koledar\Entity\Gostujoca $gostujoca=null)
-    {
-        $this->gostujoca = $gostujoca;
-        return $this;
-    }
 
-    
-    
+
 }

@@ -16,7 +16,7 @@ use Max\Repository\AbstractMaxRepository;
  *
  * @author rado
  */
-class DogodkiIzven
+class DogodkiSplosni
         extends AbstractMaxRepository
 {
 

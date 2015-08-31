@@ -11,6 +11,7 @@ forms:
                   required: false
             - naziv
             - jePrizorisce
+            - sePlanira
             - kapaciteta
             - opis
             - popa

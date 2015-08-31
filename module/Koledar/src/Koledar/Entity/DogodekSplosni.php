@@ -8,11 +8,11 @@ use Doctrine\ORM\Mapping as ORM,
 /**
  * Entiteta za naslove
  *
- * @ORM\Entity(repositoryClass="Koledar\Repository\DogodkiIzven")
+ * @ORM\Entity(repositoryClass="Koledar\Repository\DogodkiSplosni")
  * @Max\I18n(label="Dogodek za izven",plural="Dogodki za izven")
  * @Max\Id(prefix="0030")
  *  */
-class DogodekIzven
+class DogodekSplosni
         extends \Max\Entity\Base
 {
 
@@ -27,7 +27,7 @@ class DogodekIzven
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="dogodekIzven")
+     * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="splosni")
      * @Max\I18n(label="Dogodek", description="Dogodek")
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Dogodek

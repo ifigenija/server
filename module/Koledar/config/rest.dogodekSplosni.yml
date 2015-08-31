@@ -1,12 +1,13 @@
 ## YAML Template.
 ---
 type: rest
-entityClass: Koledar\Entity\DogodekIzven
+entityClass: Koledar\Entity\DogodekSplosni
 forms:
     default: 
         elements:
 #            - id
             - dogodek
+        
 lists:
     default: 
         filter:
@@ -14,3 +15,6 @@ lists:
             - exclude: []
 #    vse: 
 #        filter:
+    
+hydrator: 
+    byValue: [dogodek]

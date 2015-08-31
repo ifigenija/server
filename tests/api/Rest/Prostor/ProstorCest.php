@@ -83,6 +83,7 @@ class ProstorCest
             'sifra'        => '12',
             'naziv'        => 'aa',
             'jePrizorisce' => true,
+            'sePlanira' => true,
             'kapaciteta'   => 1,
             'opis'         => 'aa',
             'popa'         => $this->objPopa1['id'],
@@ -98,6 +99,7 @@ class ProstorCest
             'sifra'        => '13',
             'naziv'        => 'bb',
             'jePrizorisce' => true,
+            'sePlanira' => false,
             'kapaciteta'   => 2,
             'opis'         => 'bb',
             'popa'         => NULL,
@@ -113,6 +115,7 @@ class ProstorCest
             'sifra'        => '14',
             'naziv'        => 'cc',
             'jePrizorisce' => true,
+            'sePlanira' => false,
             'kapaciteta'   => 3,
             'opis'         => 'cc',
             'popa'         => $this->objPopa2['id'],
@@ -170,6 +173,7 @@ class ProstorCest
         $I->assertEquals($ent['naziv'], 'yy');
         $I->assertEquals($ent['sifra'], '12');
         $I->assertEquals($ent['jePrizorisce'], true);
+        $I->assertTrue($ent['sePlanira']);
         $I->assertEquals($ent['kapaciteta'], 1);
         $I->assertEquals($ent['opis'], 'aa');
         $I->assertEquals($ent['popa'], $this->objPopa1['id']);
