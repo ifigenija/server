@@ -184,21 +184,21 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="uprizoritev.arhIdent", description="Id uprizoritve za arhiv")
+     * @Max\I18n(label="uprizoritev.arhIdent", description="uprizoritev.d.arhIdent")
      * @var string
      */
     protected $arhIdent;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="uprizoritev.arhOpomba", description="Opomba pri uprizoritvi za arhiv")
+     * @Max\I18n(label="uprizoritev.arhOpomba", description="uprizoritev.d.arhOpomba")
      * @var string
      */
     protected $arhOpomba;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="uprizoritev.datumZakljucka", description="Opomba pri uprizoritvi za arhiv")
+     * @Max\I18n(label="uprizoritev.datumZakljucka", description="uprizoritev.d.datumZakljuck")
      * @Max\Ui(icon="fa fa-calendar")
      * @var string
      */
