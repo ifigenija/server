@@ -72,7 +72,7 @@ class Funkcija
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="funkcija.velikost", description="funkcija.d.velikost")
-     * @Max\Ui(type="select", opts="funkcija.velikost")
+     * @Max\Ui(type="select", opts="funkcija.velikost", empty="Izberite velikost vloge")
      * @var string
      */
     protected $velikost;
@@ -154,7 +154,7 @@ class Funkcija
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\TipFunkcije", inversedBy="funkcije", fetch="EAGER")
      * @Max\I18n(label="funkcija.tipFunkcije",  description="funkcija.d.tipFunkcije")
-     * @Max\Ui(type="select", empty="Izberite funkcije")
+     * @Max\Ui(type="select", empty="Izberite funkcijo")
      * @var \Produkcija\Entity\TipFunkcije
      */
     protected $tipFunkcije;

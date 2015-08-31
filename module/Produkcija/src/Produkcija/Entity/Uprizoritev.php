@@ -198,7 +198,7 @@ class Uprizoritev
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="uprizoritev.datumZakljucka", description="uprizoritev.d.datumZakljuck")
+     * @Max\I18n(label="uprizoritev.datumZakljucka", description="uprizoritev.d.datumZakljucka")
      * @Max\Ui(icon="fa fa-calendar")
      * @var string
      */
