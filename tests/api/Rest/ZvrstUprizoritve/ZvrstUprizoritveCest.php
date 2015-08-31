@@ -140,4 +140,21 @@ class ZvrstUprizoritveCest
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
 
+    /**
+     * ali sam generira šifro?
+     * 
+     * @param ApiTester $I
+     */
+    public function createBrezSifre(ApiTester $I)
+    {
+        $data = [
+            'sifra' => '',
+            'naziv' => 'ss',
+            'opis'  => 'ss',
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
+        $I->assertNotEmpty($ent['sifra']);
+    }
+
 }

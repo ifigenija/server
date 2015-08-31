@@ -56,6 +56,24 @@ class ZvrstiUprizoritve
 
         return $qb;
     }
+    
+        /**
+     * @param Alternacija $object
+     * @param array $params
+     */
+    public function create($object, $params = null)
+    {
+        /** 
+         * preverim, če ima šifro
+         */
+        if (empty($object->getSifra())) {
+            $num = $this->getServiceLocator()->get('stevilcenje.generator');
+            $object->setSifra($num->generate('alternacija'));
+        }
+
+        parent::create($object, $params);
+    }
+
 
     
 }
