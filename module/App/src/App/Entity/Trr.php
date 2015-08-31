@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping AS ORM,
  * @ORM\Entity(repositoryClass="App\Repository\Trrji")
  * @Max\Id(prefix="0007")
  * @Max\I18n(label="Transakcijski račun",plural="Transakcijski računi")
+ * @Max\Lookup(ident="stevilka", label="stevilka", search={"stevilka"})
  */
 class Trr
         extends \Max\Entity\Base

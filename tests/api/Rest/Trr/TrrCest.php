@@ -26,7 +26,7 @@ class TrrCest
     private $drzavaUrl = '/rest/drzava';
     private $id        = '00000000-0000-0000-0000-000000000000';
     private $obj;
-    private $objTrr2;
+    private $obj2;
     private $objOseba;
     private $objPopa;
     private $objDrzava;
@@ -94,7 +94,7 @@ class TrrCest
             'popa'     => $this->lookPopa['id'],
             'oseba'    => null,
         ];
-        $this->objTrr2 = $trr           = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj2 = $trr           = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($trr['id']);
         $I->assertEquals('WW123', $trr['banka']);
 
@@ -197,7 +197,7 @@ class TrrCest
         $I->assertEquals('TRA123', $trr['banka']);
 
         // preberemo še en zapis
-        $trr = $I->successfullyGet($this->restUrl, $this->objTrr2['id']);
+        $trr = $I->successfullyGet($this->restUrl, $this->obj2['id']);
 
         $I->assertEquals($trr['stevilka'], 'WW123');
         $I->assertEquals($trr['swift'], 'WW123');
@@ -239,5 +239,21 @@ class TrrCest
         // testiramo na enako številko napake kot je v validaciji
         $I->assertEquals(1000200, $resp[0]['code']);
     }
+    
+       /**
+     * test ali deluje lookup
+        * 
+     * @param ApiTester $I
+     */
+    public function lookup(ApiTester $I)
+    {
+        $ent = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        
+        $look1             = $I->lookupEntity("trr", $ent['stevilka'], false);
+        codecept_debug($look1);
+        $I->assertNotEmpty($look1);
+    }
+
+    
 
 }
