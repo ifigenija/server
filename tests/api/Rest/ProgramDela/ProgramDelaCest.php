@@ -613,6 +613,21 @@ class ProgramDelaCest
     }
 
     /**
+     * @depends create
+     * @param ApiTester $I
+     */
+//    public function podatkiPrilogaC2Zacasno(ApiTester $I)
+//    {
+//        $resp = $I->successfullyCallRpc($this->rpcUrl, 'podatkiPrilogaC2', ["programDelaId" => $this->obj2['id']]);
+//        codecept_debug($resp);
+//        $I->assertNotEmpty($resp);
+//        $I->seeResponseIsJson();
+////        $I->assertGreaterThanOrEqual(9999, $resp['Do']['avtorskiHonorarji'], "avtorski do");
+//
+//        $I->assertTrue(false, "začasno");
+//    }
+
+    /**
      *  kreiramo zapis
      * 
      * @depends create
@@ -2193,6 +2208,21 @@ class ProgramDelaCest
         $I->assertEquals($oldPD['stKoprodukcij'], $entR['stKoprodukcij'], "");
         $I->assertEquals($oldPD['stKoprodukcijInt'], $entR['stKoprodukcijInt'], "število mednarodnih koprodukcij");
         $I->assertEquals($oldPD['stKoprodukcijNVO'], $entR['stKoprodukcijNVO'], "");
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function podatkiPrilogaC2(ApiTester $I)
+    {
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'podatkiPrilogaC2', ["programDelaId" => $this->obj2['id']]);
+        codecept_debug($resp);
+        $I->assertNotEmpty($resp);
+        $I->seeResponseIsJson();
+//        $I->assertGreaterThanOrEqual(9999, $resp['Do']['avtorskiHonorarji'], "avtorski do");
+
+        $I->assertTrue(false, "začasno");
     }
 
 }

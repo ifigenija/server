@@ -90,6 +90,7 @@ class ProgramDelaCest
         $resp = $I->failCallRpc($this->rpcUrl, 'zakleni', ["programDelaId" => "neobstojeca"]);
         $I->assertNotEmpty($resp);
     }
+
     /**
      * @depends ponovnoZakleni
      * @param ApiTester $I
@@ -106,6 +107,21 @@ class ProgramDelaCest
         // preverimo, če so v bazi prave vrednosti
         $ent = $I->successfullyGet($this->restUrl, $this->objProgramDela1['id']);
         $I->assertFalse($ent['zakljuceno'], "ali odklenjeno");
+    }
+
+    /**
+     * @depends getListProgramDela
+     * @param ApiTester $I
+     */
+    public function podatkiPrilogaC2(ApiTester $I)
+    {
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'podatkiPrilogaC2', ["programDelaId" => $this->objProgramDela1['id']]);
+        codecept_debug($resp);
+        $I->assertNotEmpty($resp);
+        $I->seeResponseIsJson();
+//        $I->assertGreaterThanOrEqual(9999, $resp['Do']['avtorskiHonorarji'], "avtorski do");
+
+        $I->assertTrue(false, "začasno");
     }
 
 }

@@ -16,6 +16,7 @@ return [
             'enotaprograma.rpc.service' => 'ProgramDela\Rpc\EnotaProgramaRpcService',
             'enotaprograma.service'     => 'ProgramDela\Service\EnotaProgramaService',
             'programdela.rpc.service'   => 'ProgramDela\Rpc\ProgramDelaRpcService',
+            'programdela.service'     => 'ProgramDela\Service\ProgramDelaService',
         ],
     ],
     'controllers'     => [

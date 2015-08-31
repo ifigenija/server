@@ -137,6 +137,8 @@
         - Vaja-write
         - VrstaSedezev-read
         - VrstaSedezev-write
+        - VrstaStroska-read
+        - VrstaStroska-write
         - Zaposlitev-read
         - Zaposlitev-write
         - Zasedenost-read

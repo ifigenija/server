@@ -66,6 +66,7 @@ class ProgramDelaRpcService
 
         return true;
     }
+
     /**
      * @param string $programDelaId
      * 
@@ -325,7 +326,7 @@ class ProgramDelaRpcService
             $newDV->preracunaj();
         }
     }
-    
+
     /**
      * Klonira programske enote sklopa pod program razno
      * 
@@ -364,6 +365,54 @@ class ProgramDelaRpcService
             $this->getEm()->persist($newKop);
             $newKop->preracunaj();
         }
+    }
+
+    /**
+     * priprava podatkov za finančno prilogo C2 na osnovi programa dela, enot program in pripadajočih 
+     * uprizoritev 
+     * 
+     * @param string   $programDelaId
+     * 
+     * @returns        $data                strukturirani podatki priloge C2
+     */
+    public function podatkiPrilogaC2($programDelaId)
+    {
+        // preverjanje avtorizacije
+        $this->expectPermission("ProgramDela-read");
+        $this->expectPermission("ProgramPremiera-read");
+        $this->expectPermission("ProgramPonovitevPrejsnjih-read");
+        $this->expectPermission("ProgramPonovitevPremiere-read");
+        $this->expectPermission("ProgramGostovanje-read");
+        $this->expectPermission("ProgramFestival-read");
+
+        $this->expectPermission("Uprizoritev-read");
+        $this->expectPermission("VrstaStroska-read");
+        $this->expectPermission("StrosekUprizoritve-read");
+        $this->expectPermission("Funkcija-read");
+        $this->expectPermission("Alternacija-read");
+        $this->expectPermission("Oseba-read");
+        $this->expectPermission("Pogodba-read");
+
+        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $tr = $this->getServiceLocator()->get('translator');
+
+        $this->expectUUID($programDelaId, $this->translate('Pričakujem ID programa dela'), 1000980);
+
+        $programdela= $em->getRepository("ProgramDela\Entity\ProgramDela")
+                ->findOneById($programDelaId);
+        $this->expectPermission("ProgramDela-read", $programdela);
+
+        if (!$programdela) {
+            throw new \Max\Exception\UnauthException($tr->translate('Ni programa dela'), 1000981);
+        }
+
+        /**
+         * preračun imamo v posebnem servisu, tako, da ga lahko kličemo direktno iz PHP-ja na strežniški strani
+         */
+        $service = $this->serviceLocator->get('programdela.service');
+        $data    = $service->podatkiPrilogaC2($programdela);
+
+        return $data;
     }
 
 }
