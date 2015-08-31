@@ -1701,6 +1701,9 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(23, $entR['stObiskPonPremDoma'], "stObiskPonPremDoma");
         $I->assertGreaterThanOrEqual(33, $entR['stObiskPonPremKopr'], "stObiskPonPremKopr");
         $I->assertGreaterThanOrEqual(9, $entR['stObiskPonPremKoprInt'], "stObiskPonPremKoprInt");
+        $I->assertGreaterThanOrEqual(1262, $entR['stObiskPonPremGost'], 'stObiskPonPremGost');
+        $I->assertGreaterThanOrEqual(326, $entR['stObiskPonPremZamejo'], 'stObiskPonPremZamejo');
+        $I->assertGreaterThanOrEqual(243, $entR['stObiskPonPremInt'], 'stObiskPonPremInt');
         $I->assertEquals($entR['avgObiskPrired'], round($entR['stObiskNekom'] / $entR['stIzvNekomerc'], 2), "povprečno št. obiskovalcev");     //kvocient drugih dveh števil
         $I->assertGreaterThanOrEqual(141, $entR['stHonorarnih'], "");
         $I->assertGreaterThanOrEqual(28, $entR['stHonorarnihIgr'], "");

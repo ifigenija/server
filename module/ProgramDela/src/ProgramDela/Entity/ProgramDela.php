@@ -515,6 +515,30 @@ class ProgramDela
     protected $stObiskPonPremKoprInt;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskPonPremGost", description="programDela.d.stObiskPonPremGost")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stObiskPonPremGost;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskPonPremZamejo", description="programDela.d.stObiskPonPremZamejo")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stObiskPonPremZamejo;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskPonPremInt", description="programDela.d.stObiskPonPremInt")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stObiskPonPremInt;
+
+    /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.avgObiskPrired", description="programDela.d.avgObiskPrired")   
      * @var double
@@ -1050,6 +1074,8 @@ class ProgramDela
             $this->stObiskPonPrem +=$object->getObiskDoma() + $object->getObiskGost() + $object->getObiskZamejo();
             $this->stObiskPonPremDoma +=$object->getObiskDoma();
             $this->stObiskPonPremKopr +=$object->getObiskKopr();
+            $this->stObiskPonPremGost +=$object->getObiskGost();
+            $this->stObiskPonPremZamejo +=$object->getObiskZamejo();
 
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
             $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
@@ -1159,6 +1185,7 @@ class ProgramDela
                 $this->stIzvPonPremInt+=$object->getPonoviInt();
                 $this->stIzvPonPremKoprInt+=$object->getPonoviKoprInt();
                 $this->stObiskPonPremKoprInt+=$object->getObiskKoprInt();
+                $this->stObiskPonPremInt +=$object->getObiskInt();
             } else {
                 // če ni uprizoritev iz ponovitve (letošnje) premiere je najverjetneje  iz ponovitve premiere prejšnjih sezon
                 $this->stIzvPonPrej+=$object->getPonoviInt();
@@ -1924,7 +1951,7 @@ class ProgramDela
         return $this;
     }
 
-    public function setSezona(\Koledar\Entity\Sezona $sezona=null)
+    public function setSezona(\Koledar\Entity\Sezona $sezona = null)
     {
         $this->sezona = $sezona;
         return $this;
@@ -2466,6 +2493,39 @@ class ProgramDela
     public function setStObiskPonPrem($stObiskPonPrem)
     {
         $this->stObiskPonPrem = $stObiskPonPrem;
+        return $this;
+    }
+
+    public function getStObiskPonPremGost()
+    {
+        return $this->stObiskPonPremGost;
+    }
+
+    public function getStObiskPonPremZamejo()
+    {
+        return $this->stObiskPonPremZamejo;
+    }
+
+    public function getStObiskPonPremInt()
+    {
+        return $this->stObiskPonPremInt;
+    }
+
+    public function setStObiskPonPremGost($stObiskPonPremGost)
+    {
+        $this->stObiskPonPremGost = $stObiskPonPremGost;
+        return $this;
+    }
+
+    public function setStObiskPonPremZamejo($stObiskPonPremZamejo)
+    {
+        $this->stObiskPonPremZamejo = $stObiskPonPremZamejo;
+        return $this;
+    }
+
+    public function setStObiskPonPremInt($stObiskPonPremInt)
+    {
+        $this->stObiskPonPremInt = $stObiskPonPremInt;
         return $this;
     }
 
