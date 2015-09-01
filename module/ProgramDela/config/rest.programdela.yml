@@ -72,7 +72,8 @@ forms:
                 - gostujoci.uprizoritev
                 - gostovanja.gostitelj
                 - gostovanja.uprizoritev
-            byValue: 
+            byValue:
+                - zakljuceno
                 - premiere
                 - ponovitvePremiere
                 - ponovitvePrejsnjih
