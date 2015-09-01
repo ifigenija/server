@@ -155,7 +155,7 @@ class Popa
     protected $kontaktneOsebe;
 
     /**
-     * @ORM\OneToMany(targetEntity="Prodaja\Entity\prostor", mappedBy="popa")
+     * @ORM\OneToMany(targetEntity="Prodaja\Entity\Prostor", mappedBy="popa")
      * var <Prostori>
      */
     protected $prostori;
