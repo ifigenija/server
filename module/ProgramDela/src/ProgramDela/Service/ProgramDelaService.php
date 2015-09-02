@@ -36,12 +36,13 @@ class ProgramDelaService
          */
         foreach ($programdela->getPremiere() as $ep) {
             $uprizoritev = $ep->getUprizoritev();
+            $stPonovitev = 1;
             foreach ($uprizoritev->getStroski() as $strosek) {
                 switch ($strosek->getTipstroska()) {
                     case 'materialni':
                         $skupina    = (string) $strosek->getVrstaStroska()->getSkupina();
                         $podskupina = (string) $strosek->getVrstaStroska()->getPodskupina();
-                        $vrednost   = $strosek->getVrednostDo();
+                        $vrednost   = $strosek->getVrednostDo() + $stPonovitev * $strosek->getVrednostNa();
                         $data['premiere'][$skupina . ".0"]['vrednost']+=$vrednost;      //glava
                         $data['premiere'][$skupina . "." . $podskupina]['vrednost']+=$vrednost;
                         $data['premiere']["Skupaj"]['vrednost'] +=$vrednost;
@@ -57,7 +58,7 @@ class ProgramDelaService
                         /**
                          * tantieme
                          */
-                        $vrednost   = $strosek->getVrednostNa();
+                        $vrednost   = $stPonovitev * $strosek->getVrednostNa();
                         $data['premiere']["T.0"]['vrednost']+=$vrednost;      //glava
                         $data['premiere']["T.2"]['vrednost']+=$vrednost;
                         $data['premiere']["Skupaj"]['vrednost'] +=$vrednost;
@@ -65,7 +66,7 @@ class ProgramDelaService
                 }
             }
             $honorarji = $this->sestejHonorarje($uprizoritev, $programdela);
-            $vrednost  = $honorarji['Do'] + 1 * $honorarji['Na'];
+            $vrednost  = $honorarji['Do'] + $stPonovitev * $honorarji['Na'];
             $data['premiere']["H.0"]['vrednost']+=$vrednost;      //glava
             $data['premiere']["H.1"]['vrednost']+=$vrednost;
             $data['premiere']["Skupaj"]['vrednost'] +=$vrednost;
@@ -76,33 +77,56 @@ class ProgramDelaService
          */
         foreach ($programdela->getPonovitvePremiere() as $ep) {
             $uprizoritev = $ep->getUprizoritev();
-            $stPonovitev = $ep->getPonoviDoma() + $ep->getPonoviKopr() + $ep->getPonoviZamejo() + $ep->getPonoviGost();
+            $stPonovitev = $ep->getPonoviDoma() + $ep->getPonoviKopr() + $ep->getPonoviGost();
             foreach ($uprizoritev->getStroski() as $strosek) {
                 switch ($strosek->getTipstroska()) {
                     case 'materialni':
                         $skupina    = (string) $strosek->getVrstaStroska()->getSkupina();
                         $podskupina = (string) $strosek->getVrstaStroska()->getPodskupina();
-                        $vrednost   = $strosek->getVrednostNa() * $stPonovitev;
+
+                        // ponovitve premier
+                        $vrednost = $strosek->getVrednostNa() * $stPonovitev;
                         $data['ponovitvePremier'][$skupina . ".0"]['vrednost']+=$vrednost;          //glava
                         $data['ponovitvePremier'][$skupina . "." . $podskupina]['vrednost']+=$vrednost;
                         $data['ponovitvePremier']["Skupaj"]['vrednost'] +=$vrednost;
+
+                        // zamejstvo
+                        $vrednost = $strosek->getVrednostNa() * $ep->getPonoviZamejo();
+                        $data['gostovanjaZamejstvo'][$skupina . ".0"]['vrednost']+=$vrednost;          //glava
+                        $data['gostovanjaZamejstvo'][$skupina . "." . $podskupina]['vrednost']+=$vrednost;
+                        $data['gostovanjaZamejstvo']["Skupaj"]['vrednost'] +=$vrednost;
                         break;
                     case 'avtorprav':
                         /**
                          * tantieme
                          */
-                        $vrednost   = $strosek->getVrednostNa() * $stPonovitev;
+                        // ponovitve premier
+                        $vrednost = $strosek->getVrednostNa() * $stPonovitev;
                         $data['ponovitvePremier']["T.0"]['vrednost']+=$vrednost;      //glava
                         $data['ponovitvePremier']["T.2"]['vrednost']+=$vrednost;
                         $data['ponovitvePremier']["Skupaj"]['vrednost'] +=$vrednost;
+
+                        // zamejstvo
+                        $vrednost = $strosek->getVrednostNa() * $ep->getPonoviZamejo();
+                        $data['gostovanjaZamejstvo']["T.0"]['vrednost']+=$vrednost;      //glava
+                        $data['gostovanjaZamejstvo']["T.2"]['vrednost']+=$vrednost;
+                        $data['gostovanjaZamejstvo']["Skupaj"]['vrednost'] +=$vrednost;
                         break;
                 }
             }
             $honorarji = $this->sestejHonorarje($uprizoritev, $programdela);
-            $vrednost  = $honorarji['Na'] * $stPonovitev;
+
+            // ponovitve premier
+            $vrednost = $honorarji['Na'] * $stPonovitev;
             $data['ponovitvePremier']["H.0"]['vrednost']+=$vrednost;      //glava
             $data['ponovitvePremier']["H.1"]['vrednost']+=$vrednost;
             $data['ponovitvePremier']["Skupaj"]['vrednost'] +=$vrednost;
+
+            // zamejstvo
+            $vrednost = $honorarji['Na'] * $ep->getPonoviZamejo();
+            $data['gostovanjaZamejstvo']["H.0"]['vrednost']+=$vrednost;      //glava
+            $data['gostovanjaZamejstvo']["H.1"]['vrednost']+=$vrednost;
+            $data['gostovanjaZamejstvo']["Skupaj"]['vrednost'] +=$vrednost;
         }
 
         /**
@@ -110,33 +134,56 @@ class ProgramDelaService
          */
         foreach ($programdela->getPonovitvePrejsnjih() as $ep) {
             $uprizoritev = $ep->getUprizoritev();
-            $stPonovitev = $ep->getPonoviDoma() + $ep->getPonoviKopr() + $ep->getPonoviZamejo() + $ep->getPonoviGost();
+            $stPonovitev = $ep->getPonoviDoma() + $ep->getPonoviKopr() + $ep->getPonoviGost();
             foreach ($uprizoritev->getStroski() as $strosek) {
                 switch ($strosek->getTipstroska()) {
                     case 'materialni':
                         $skupina    = (string) $strosek->getVrstaStroska()->getSkupina();
                         $podskupina = (string) $strosek->getVrstaStroska()->getPodskupina();
-                        $vrednost   = $strosek->getVrednostNa() * $stPonovitev;
+
+                        // ponovitve prejšnjih
+                        $vrednost = $strosek->getVrednostNa() * $stPonovitev;
                         $data['ponovitvePrejsnjih'][$skupina . ".0"]['vrednost']+=$vrednost;          //glava
                         $data['ponovitvePrejsnjih'][$skupina . "." . $podskupina]['vrednost']+=$vrednost;
                         $data['ponovitvePrejsnjih']["Skupaj"]['vrednost'] +=$vrednost;
+
+                        // zamejstvo
+                        $vrednost = $strosek->getVrednostNa() * $ep->getPonoviZamejo();
+                        $data['gostovanjaZamejstvo'][$skupina . ".0"]['vrednost']+=$vrednost;          //glava
+                        $data['gostovanjaZamejstvo'][$skupina . "." . $podskupina]['vrednost']+=$vrednost;
+                        $data['gostovanjaZamejstvo']["Skupaj"]['vrednost'] +=$vrednost;
                         break;
                     case 'avtorprav':
                         /**
                          * tantieme
                          */
-                        $vrednost   = $strosek->getVrednostNa() * $stPonovitev;
+                        // ponovitve prejšnjih
+                        $vrednost = $strosek->getVrednostNa() * $stPonovitev;
                         $data['ponovitvePrejsnjih']["T.0"]['vrednost']+=$vrednost;      //glava
                         $data['ponovitvePrejsnjih']["T.2"]['vrednost']+=$vrednost;
                         $data['ponovitvePrejsnjih']["Skupaj"]['vrednost'] +=$vrednost;
+
+                        // zamejstvo
+                        $vrednost = $strosek->getVrednostNa() * $ep->getPonoviZamejo();
+                        $data['gostovanjaZamejstvo']["T.0"]['vrednost']+=$vrednost;      //glava
+                        $data['gostovanjaZamejstvo']["T.2"]['vrednost']+=$vrednost;
+                        $data['gostovanjaZamejstvo']["Skupaj"]['vrednost'] +=$vrednost;
                         break;
                 }
             }
             $honorarji = $this->sestejHonorarje($uprizoritev, $programdela);
-            $vrednost  = $honorarji['Na'] * $stPonovitev;
+
+            // ponovitve prejšnjih
+            $vrednost = $honorarji['Na'] * $stPonovitev;
             $data['ponovitvePrejsnjih']["H.0"]['vrednost']+=$vrednost;      //glava
             $data['ponovitvePrejsnjih']["H.1"]['vrednost']+=$vrednost;
             $data['ponovitvePrejsnjih']["Skupaj"]['vrednost'] +=$vrednost;
+
+            // zamejstvo
+            $vrednost = $honorarji['Na'] * $ep->getPonoviZamejo();
+            $data['gostovanjaZamejstvo']["H.0"]['vrednost']+=$vrednost;      //glava
+            $data['gostovanjaZamejstvo']["H.1"]['vrednost']+=$vrednost;          
+            $data['gostovanjaZamejstvo']["Skupaj"]['vrednost'] +=$vrednost;
         }
         return $data;
     }
@@ -152,11 +199,11 @@ class ProgramDelaService
             'premiere',
             'ponovitvePremier',
             'ponovitvePrejsnjih',
+            'gostovanjaZamejstvo',
                 /**
-                 * nimajo uprizoritve ali ustreznih podatkov v njej
+                 * nimajo uprizoritve ali ustreznih podatkov v njej:
                  */
 //            'mednarodnaGostovanja',
-//            'gostovanjaZamejstvo',
 //            'festivali',
 //            'skupaj',
         ];
@@ -198,8 +245,8 @@ class ProgramDelaService
         $honorarji['Do'] = 0; //init
         $honorarji['Na'] = 0; //init
 
-        $pdz= $programDela->getZacetek();
-        $pdk   = $programDela->getKonec();
+        $pdz = $programDela->getZacetek();
+        $pdk = $programDela->getKonec();
 
         foreach ($uprizoritev->getFunkcije() as $numFun => $funkcija) {
             foreach ($funkcija->getAlternacije() as $numAlt => $alternacija) {
@@ -208,8 +255,8 @@ class ProgramDelaService
                  */
                 $az = is_null($alternacija->getZacetek()) ? null : $alternacija->getZacetek();
                 $ak = is_null($alternacija->getKonec()) ? null : $alternacija->getKonec();
-                
-                if ((!is_null($az) ? $az <= $pdk: true ) && (!is_null($ak) ? $ak >= $pdz : true )) {
+
+                if ((!is_null($az) ? $az <= $pdk : true ) && (!is_null($ak) ? $ak >= $pdz : true )) {
                     if ($alternacija->getImaPogodbo()) {
                         $pogodba = $alternacija->getPogodba();
                         if ($pogodba) {
