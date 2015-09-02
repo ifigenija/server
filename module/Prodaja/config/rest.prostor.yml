@@ -16,10 +16,16 @@ forms:
             - opis
             - popa
             - naslov
+        hydrator:
+            lookups:
+                - popa
+                - naslov
 lists:
     default: 
         filter:                
         hydrator:
-            - lookups: [popa]
+            lookups: 
+                - popa
+                - naslov
 #    vse: 
 #        filter:

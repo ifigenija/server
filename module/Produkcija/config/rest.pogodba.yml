@@ -26,6 +26,11 @@ forms:
             - zaposlenVDrJz
             - samozaposlen
             - igralec
+        hydrator:
+            lookups:
+                - popa
+                - oseba
+                - alternacije
 lists:
     default: 
         filter:
@@ -48,10 +53,15 @@ lists:
                       label: Uprizoritev
                       targetEntity: Produkcija\Entity\Uprizoritev
                       required: false
+        hydrator:
+            lookups:
+                - oseba
+                - popa
+                - alternacije
 #    vse: 
 #        filter:
-hydrator:
-    lookups: [oseba, popa]
+#hydrator:
+#    lookups: [oseba, popa, alternacije]
 relation:
     default:
         alternacije:
