@@ -817,14 +817,14 @@ class UprizoritevCest
         $I->assertTrue(isset($ent['rekviziterstva']));
         $I->assertTrue(isset($ent['vaje']));
         $I->assertTrue(isset($ent['predstave']));
-        $I->assertTrue(isset($ent['gostujoce']));
+//        $I->assertTrue(isset($ent['gostujoce']));
 
         $I->assertEquals(0, count($ent['funkcije']));
         $I->assertEquals(0, count($ent['arhivi']));
         $I->assertEquals(0, count($ent['rekviziterstva']));
         $I->assertEquals(0, count($ent['vaje']));
         $I->assertEquals(0, count($ent['predstave']));
-        $I->assertEquals(0, count($ent['gostujoce']));
+//        $I->assertEquals(0, count($ent['gostujoce']));
     }
 
     /**
@@ -845,21 +845,21 @@ class UprizoritevCest
      * 
      * @param ApiTester $I
      */
-    public function createVecGostujocih(ApiTester $I)
-    {
-        $data                = [
-            'uprizoritev' => $this->obj2['id'],
-        ];
-        $this->objGostujoca1 = $ent                 = $I->successfullyCreate($this->gostujocaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-
-        // kreiramo še en zapis
-        $data                = [
-            'uprizoritev' => $this->obj2['id'],
-        ];
-        $this->objGostujoca2 = $ent                 = $I->successfullyCreate($this->gostujocaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-    }
+//    public function createVecGostujocih(ApiTester $I)
+//    {
+//        $data                = [
+//            'uprizoritev' => $this->obj2['id'],
+//        ];
+//        $this->objGostujoca1 = $ent                 = $I->successfullyCreate($this->gostujocaUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//
+//        // kreiramo še en zapis
+//        $data                = [
+//            'uprizoritev' => $this->obj2['id'],
+//        ];
+//        $this->objGostujoca2 = $ent                 = $I->successfullyCreate($this->gostujocaUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//    }
 
     /**
      *  kreiramo zapis
@@ -999,15 +999,15 @@ class UprizoritevCest
      * 
      * @param ApiTester $I
      */
-    public function preberiRelacijeZGostujocimi(ApiTester $I)
-    {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "gostujoce", "");
-        $I->assertEquals(2, count($resp));
-
-        // get po popa id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "gostujoce", $this->objGostujoca1['id']);
-        $I->assertEquals(1, count($resp));
-    }
+//    public function preberiRelacijeZGostujocimi(ApiTester $I)
+//    {
+//        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "gostujoce", "");
+//        $I->assertEquals(2, count($resp));
+//
+//        // get po popa id  
+//        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "gostujoce", $this->objGostujoca1['id']);
+//        $I->assertEquals(1, count($resp));
+//    }
 
     /**
      * preberemo relacije

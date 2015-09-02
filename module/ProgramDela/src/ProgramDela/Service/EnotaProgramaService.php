@@ -118,13 +118,6 @@ class EnotaProgramaService
                 $az = is_null($alternacija->getZacetek()) ? null : $alternacija->getZacetek()->format('c');
                 $ak = is_null($alternacija->getKonec()) ? null : $alternacija->getKonec()->format('c');
 
-                /**
-                 * $začasno:
-                 */
-                $sifra = $alternacija->getSifra();
-                $baz   = $az <= $konec;
-                $bak   = $ak >= $zacetek;
-
                 if ((!is_null($az) ? $az <= $konec : true ) && (!is_null($ak) ? $ak >= $zacetek : true )) {
                     if ($alternacija->getZaposlen()) {
                         if (in_array($podrocje, ["igralec", "umetnik"])) {

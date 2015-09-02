@@ -4,12 +4,12 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\DogodekIzven;
+namespace Rest\DogodekSplosni;
 
 use ApiTester;
 
 /**
- * Description of DogodekIzvenCest
+ * Description of DogodekSplosniCest
  *
  *      metode, ki jo podpira API
  *      - create
@@ -26,7 +26,7 @@ use ApiTester;
  * 
  * @author rado
  */
-class DogodekIzvenCest
+class DogodekSplosniCest
 {
 
     private $restUrl    = '/rest/dogodekSplosni';
