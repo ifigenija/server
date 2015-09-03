@@ -140,7 +140,7 @@ class AlternacijaCest
             'oseba'               => $this->lookOseba['id'],
         ];
         $this->objZaposlitev = $ent                 = $I->successfullyCreate($this->zaposlitevUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['status'], 'A');
     }
@@ -188,7 +188,7 @@ class AlternacijaCest
             'pomembna'   => TRUE,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['opomba'], 'zz');
 
@@ -208,7 +208,7 @@ class AlternacijaCest
             'pomembna'   => FALSE,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['opomba'], 'aa');
 
@@ -229,7 +229,7 @@ class AlternacijaCest
             'pomembna'   => FALSE,
         ];
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         $I->assertEquals($ent['opomba'], 'bb');
     }
 
@@ -323,7 +323,7 @@ class AlternacijaCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         $I->assertEquals($ent['zacetek'], '2010-02-01T00:00:00+0100');
         $I->assertEquals($ent['konec'], '2020-02-01T00:00:00+0100');
         $I->assertEquals($ent['opomba'], 'uu');
@@ -369,7 +369,7 @@ class AlternacijaCest
             'oseba'           => $this->lookOseba['id'],
         ];
         $this->objTerminStoritve1 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['planiranoTraja'], 1.23);
 
@@ -386,7 +386,7 @@ class AlternacijaCest
             'oseba'           => $this->lookOseba['id'],
         ];
         $this->objTerminStoritve1 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -455,26 +455,85 @@ class AlternacijaCest
      */
     public function updateZaValidacijoDatumov(ApiTester $I)
     {
-        $ent            = $I->successfullyGet($this->restUrl, $this->obj3['id']);
-        
+        $ent = $I->successfullyGet($this->restUrl, $this->obj3['id']);
+
         // enaka datuma
         $ent['zacetek'] = '2016-02-01T00:00:00+0100';
         $ent['konec']   = '2016-02-01T00:00:00+0100';
         $ent            = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
-       
+
         // prazen konec
-        $ent['konec']   = '';
-        $ent            = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $ent['konec'] = '';
+        $ent          = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
         //  konec pred začetkom
         $ent['konec'] = '2016-01-31T00:00:00+0100';
         $resp         = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals(1000337, $resp[0]['code']);
-       
+
         // prazen začetek
         $ent['zacetek'] = '';
         $ent['konec']   = '2016-02-01T00:00:00+0100';
         $ent            = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends lookupOsebo
+     * @depends lookupFunkcijo
+     * @depends createZaposlitev
+     * 
+     * @param ApiTester $I
+     */
+    public function createNastaviPomembna(ApiTester $I)
+    {
+        // kreiramo enega brez polja 'pomembna'
+        $data = [
+//            'pomembna'   => TRUE,     // nalašč brez parametra pomembna
+            'zaposlen'   => false, // v validaciji postavimo na true, če je zaposlitev
+            'zacetek'    => '2010-02-01T00:00:00+0100',
+            'konec'      => '2020-02-01T00:00:00+0100',
+            'opomba'     => 'pomembna?',
+            'sort'       => 1,
+            'privzeti'   => true,
+            'aktivna'    => true,
+            'funkcija'   => $this->lookFunkcija['id'],
+            'zaposlitev' => $this->objZaposlitev['id'],
+            'oseba'      => $this->lookOseba['id'],
+            'pogodba'    => null,
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
+        $I->assertTrue($ent['pomembna'], 'default za pomembna');
+
+        // še enkrat preverimo z get za vsak slučaj
+        $ent = $I->successfullyGet($this->restUrl, $ent['id']);
+        $I->assertTrue($ent['pomembna'], 'po read:default za pomembna');
+
+
+        // kreiramo enega z nastavljenim poljem 'pomembna'
+        $data = [
+            'pomembna'   => FALSE,     // nalašč brez parametra pomembna
+            'zaposlen'   => false, // v validaciji postavimo na true, če je zaposlitev
+            'zacetek'    => '2010-02-01T00:00:00+0100',
+            'konec'      => '2020-02-01T00:00:00+0100',
+            'opomba'     => 'pomembna je false?',
+            'sort'       => 1,
+            'privzeti'   => true,
+            'aktivna'    => true,
+            'funkcija'   => $this->lookFunkcija['id'],
+            'zaposlitev' => $this->objZaposlitev['id'],
+            'oseba'      => $this->lookOseba['id'],
+            'pogodba'    => null,
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
+        $I->assertFalse($ent['pomembna'], 'default za pomembna');
+
+        // še enkrat preverimo z get za vsak slučaj
+        $ent = $I->successfullyGet($this->restUrl, $ent['id']);
+        $I->assertFalse($ent['pomembna'], 'po read:default za pomembna');
     }
 
 }
