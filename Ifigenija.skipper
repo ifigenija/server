@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <skipper version="3.2.3.1247" mvc="Zend Framework" orm="Doctrine2" name="Ifigenija" uuid="8a007160-ad58-4154-8595-ad0aa70b4d27">
   <module name="\Aaa/src/Aaa/Entity" local-name="Aaa/src/Aaa/Entity" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" export-format="Doctrine2Php" export-path="module/Aaa/src/Aaa/Entity" uuid="3824a8e0-7d80-4d0c-a5ca-debd633c5932">
-    <entity name="\Aaa\Entity\Permission" local-name="Permission" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" uuid="8365f846-b650-414f-b2dc-4e901c464a8a">
+    <entity name="\Aaa\Entity\Permission" local-name="Permission" namespace="\Aaa\Entity" uuid="8365f846-b650-414f-b2dc-4e901c464a8a">
       <field name="id" type="guid" required="true" primary="true" uuid="11edaeba-5e0d-4db8-80ad-607a29c63a8d">
         <orm-attributes>
           <attribute name="generator">
@@ -17,7 +17,7 @@
         <attribute name="export-file-name">Permission.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Aaa\Entity\Revizija" local-name="Revizija" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" uuid="2b7772ed-9d36-462a-a27a-7045e6f4562e">
+    <entity name="\Aaa\Entity\Revizija" local-name="Revizija" namespace="\Aaa\Entity" uuid="2b7772ed-9d36-462a-a27a-7045e6f4562e">
       <field name="id" type="integer" required="true" primary="true" uuid="98c80800-08b2-4e42-9a85-f3bdc970cf23">
         <orm-attributes>
           <attribute name="generator">
@@ -37,7 +37,7 @@
         <attribute name="export-file-name">Revizija.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Aaa\Entity\Role" local-name="Role" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" uuid="4d81d01e-1118-4c16-bff8-5a2686b293c1">
+    <entity name="\Aaa\Entity\Role" local-name="Role" namespace="\Aaa\Entity" uuid="4d81d01e-1118-4c16-bff8-5a2686b293c1">
       <field name="id" type="guid" required="true" primary="true" uuid="f545df04-c57d-4c14-b716-d475b5da700a">
         <orm-attributes>
           <attribute name="generator">
@@ -53,7 +53,7 @@
         <attribute name="export-file-name">Role.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Aaa\Entity\Permission2Role" local-name="Permission2Role" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" uuid="ff81ef00-8867-4050-9407-11ee271e4548">
+    <entity name="\Aaa\Entity\Permission2Role" local-name="Permission2Role" namespace="\Aaa\Entity" uuid="ff81ef00-8867-4050-9407-11ee271e4548">
       <field name="id" type="integer" required="true" unique="true" primary="true" uuid="a089f6dc-e790-4c9e-ad76-597b7bd230ca"/>
       <field name="role_id" required="true" uuid="c07ad4c4-3df0-407f-89c1-2c1986b30813"/>
       <field name="permission_id" required="true" uuid="db8b5b08-5d96-47bd-94de-5e0a8339850c"/>
@@ -66,7 +66,7 @@
         <many-to-many-field from="permission_id" to="id"/>
       </many-to-many-entity>
     </many-to-many>
-    <entity name="\Aaa\Entity\User" local-name="User" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" uuid="dff31078-2db5-40db-b57a-9a1d91327b55">
+    <entity name="\Aaa\Entity\User" local-name="User" namespace="\Aaa\Entity" uuid="dff31078-2db5-40db-b57a-9a1d91327b55">
       <field name="id" type="guid" required="true" primary="true" uuid="e556d344-c828-48c7-baba-b2164513281a">
         <orm-attributes>
           <attribute name="generator">
@@ -90,7 +90,7 @@
         <attribute name="export-file-name">User.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Aaa\Entity\Role2User" local-name="Role2User" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" uuid="ae11b2b4-a48c-45f6-ad6b-7989c8effcc5">
+    <entity name="\Aaa\Entity\Role2User" local-name="Role2User" namespace="\Aaa\Entity" uuid="ae11b2b4-a48c-45f6-ad6b-7989c8effcc5">
       <field name="id" type="integer" required="true" unique="true" primary="true" uuid="6a3012fb-db1a-4ac9-b86f-5ca7f99e5dc6"/>
       <field name="user_id" required="true" uuid="6ebd81e6-643c-4a47-b4d9-8bc91a24f9a1"/>
       <field name="role_id" required="true" uuid="16c2d8c6-91b0-44ff-8e73-f2128daaff87"/>
@@ -105,7 +105,7 @@
     </many-to-many>
   </module>
   <module name="\Abonmaji/src/Abonmaji/Entity" local-name="Abonmaji/src/Abonmaji/Entity" namespace="\Abonmaji\Entity" local-namespace="\Abonmaji\Entity" export-format="Doctrine2Php" export-path="module/Abonmaji/src/Abonmaji/Entity" uuid="1060d1d6-0fcc-45a5-8709-b5151ef61cbd">
-    <entity name="\Abonmaji\Entity\Abonma" local-name="Abonma" namespace="\Abonmaji\Entity" local-namespace="\Abonmaji\Entity" uuid="2b7b7047-448d-47a0-8e8b-6d984b8ffbfd">
+    <entity name="\Abonmaji\Entity\Abonma" local-name="Abonma" namespace="\Abonmaji\Entity" uuid="2b7b7047-448d-47a0-8e8b-6d984b8ffbfd">
       <field name="id" type="guid" required="true" primary="true" uuid="74d81150-c94f-4d61-aeac-acf02775327c">
         <orm-attributes>
           <attribute name="generator">
@@ -125,7 +125,7 @@
     </entity>
   </module>
   <module name="\App/src/App/Entity" local-name="App/src/App/Entity" namespace="\App\Entity" local-namespace="\App\Entity" export-format="Doctrine2Php" export-path="module/App/src/App/Entity" uuid="6b6667c5-b52e-4a56-8877-89fba08a10bb">
-    <entity name="\App\Entity\Drzava" local-name="Drzava" namespace="\App\Entity" local-namespace="\App\Entity" uuid="e963c6b8-a93f-471b-8fa6-17c38995fe44">
+    <entity name="\App\Entity\Drzava" local-name="Drzava" namespace="\App\Entity" uuid="e963c6b8-a93f-471b-8fa6-17c38995fe44">
       <field name="id" type="guid" required="true" primary="true" uuid="681ee787-91c6-46eb-b169-4647366ae457">
         <orm-attributes>
           <attribute name="generator">
@@ -145,7 +145,7 @@
         <attribute name="export-file-name">Drzava.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\App\Entity\KontaktnaOseba" local-name="KontaktnaOseba" namespace="\App\Entity" local-namespace="\App\Entity" uuid="a6bf6383-7bee-42b4-82c6-c822e05cc6c2">
+    <entity name="\App\Entity\KontaktnaOseba" local-name="KontaktnaOseba" namespace="\App\Entity" uuid="a6bf6383-7bee-42b4-82c6-c822e05cc6c2">
       <field name="id" type="guid" required="true" primary="true" uuid="9d9bb061-7b4e-4816-8027-51802188911d">
         <orm-attributes>
           <attribute name="generator">
@@ -177,7 +177,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\App\Entity\Option" local-name="Option" namespace="\App\Entity" local-namespace="\App\Entity" uuid="16e6e6a4-39e9-4f9b-abea-ebf0428763e2">
+    <entity name="\App\Entity\Option" local-name="Option" namespace="\App\Entity" uuid="16e6e6a4-39e9-4f9b-abea-ebf0428763e2">
       <field name="id" type="guid" required="true" primary="true" uuid="c6aee81e-b6d6-4edd-be78-7ac61893ab3e">
         <orm-attributes>
           <attribute name="generator">
@@ -201,7 +201,7 @@
         <attribute name="export-file-name">Option.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\App\Entity\OptionValue" local-name="OptionValue" namespace="\App\Entity" local-namespace="\App\Entity" uuid="25127ba0-e7c8-4fb1-a1d5-b3e38f097f72">
+    <entity name="\App\Entity\OptionValue" local-name="OptionValue" namespace="\App\Entity" uuid="25127ba0-e7c8-4fb1-a1d5-b3e38f097f72">
       <field name="id" type="guid" required="true" primary="true" uuid="4b0a325e-3523-46e2-a55a-40dea2b076c9">
         <orm-attributes>
           <attribute name="generator">
@@ -236,7 +236,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\App\Entity\Oseba" local-name="Oseba" namespace="\App\Entity" local-namespace="\App\Entity" uuid="d2f63d49-4722-45c9-80ed-be8010f3190f">
+    <entity name="\App\Entity\Oseba" local-name="Oseba" namespace="\App\Entity" uuid="d2f63d49-4722-45c9-80ed-be8010f3190f">
       <field name="id" type="guid" required="true" primary="true" uuid="3ef541cb-425a-4238-9544-4848cb95ec44">
         <orm-attributes>
           <attribute name="generator">
@@ -282,7 +282,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\App\Entity\Popa" local-name="Popa" namespace="\App\Entity" local-namespace="\App\Entity" uuid="cb14e3bf-c469-485c-8fbd-ce71b22c76c5">
+    <entity name="\App\Entity\Popa" local-name="Popa" namespace="\App\Entity" uuid="cb14e3bf-c469-485c-8fbd-ce71b22c76c5">
       <field name="id" type="guid" required="true" primary="true" uuid="f0104864-d60b-4cea-97f6-3aa095f41eba">
         <orm-attributes>
           <attribute name="generator">
@@ -321,7 +321,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\App\Entity\Posta" local-name="Posta" namespace="\App\Entity" local-namespace="\App\Entity" uuid="75b3e057-7d6a-47df-8efb-ad52d65faf35">
+    <entity name="\App\Entity\Posta" local-name="Posta" namespace="\App\Entity" uuid="75b3e057-7d6a-47df-8efb-ad52d65faf35">
       <field name="id" type="guid" required="true" primary="true" uuid="4ca52e32-e9a0-4439-9bcf-017fdd229c22">
         <orm-attributes>
           <attribute name="generator">
@@ -336,7 +336,7 @@
         <attribute name="export-file-name">Posta.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\App\Entity\PostniNaslov" local-name="PostniNaslov" namespace="\App\Entity" local-namespace="\App\Entity" uuid="897df77a-f03c-4360-96b2-3863dc5c029e">
+    <entity name="\App\Entity\PostniNaslov" local-name="PostniNaslov" namespace="\App\Entity" uuid="897df77a-f03c-4360-96b2-3863dc5c029e">
       <field name="id" type="guid" required="true" primary="true" uuid="e02f4a5e-9211-4753-973b-6e9ab0e21621">
         <orm-attributes>
           <attribute name="generator">
@@ -387,7 +387,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\App\Entity\Telefonska" local-name="Telefonska" namespace="\App\Entity" local-namespace="\App\Entity" uuid="9bd99cdd-a50f-44fe-bd91-2ca9ece1fb52">
+    <entity name="\App\Entity\Telefonska" local-name="Telefonska" namespace="\App\Entity" uuid="9bd99cdd-a50f-44fe-bd91-2ca9ece1fb52">
       <field name="id" type="guid" required="true" primary="true" uuid="64541c77-ecca-4fc4-b89d-398828007971">
         <orm-attributes>
           <attribute name="generator">
@@ -423,7 +423,7 @@
         </attribute>
       </orm-attributes>
     </association>
-    <entity name="\App\Entity\Trr" local-name="Trr" namespace="\App\Entity" local-namespace="\App\Entity" uuid="2feaa061-21cf-45b7-a650-ccf18b698b94">
+    <entity name="\App\Entity\Trr" local-name="Trr" namespace="\App\Entity" uuid="2feaa061-21cf-45b7-a650-ccf18b698b94">
       <field name="id" type="guid" required="true" primary="true" uuid="1f185bf0-597d-42c3-9527-8601ec214e15">
         <orm-attributes>
           <attribute name="generator">
@@ -460,7 +460,41 @@
     </association>
   </module>
   <module name="\Koledar/src/Koledar/Entity" local-name="Koledar/src/Koledar/Entity" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" export-format="Doctrine2Php" export-path="module/Koledar/src/Koledar/Entity" uuid="fc3d8164-87bc-4341-88a1-15d59570d9f6">
-    <entity name="\Koledar\Entity\Dogodek" local-name="Dogodek" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="88d29855-b6f1-45bb-ac5d-7490fb88000f">
+    <entity name="\Koledar\Entity\DogodekIzven" local-name="DogodekIzven" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="46e3fbbf-63e4-4d39-9e02-3056f511a0de">
+      <field name="id" type="guid" required="true" primary="true" uuid="643b8c0a-7e3c-44e2-bddc-ae1fb4a4d1b5">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\DogodkiIzven</attribute>
+        <attribute name="export-file-name">DogodekIzven.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Koledar\Entity\Gostujoca" local-name="Gostujoca" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="68f55ad4-393f-4c42-9d35-cda1f19bf6eb">
+      <field name="id" type="guid" required="true" primary="true" uuid="70900721-d23b-45bb-922c-a685932d9fb1">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="uprizoritev_id" uuid="581bf82b-b7e9-48da-a647-18e57a9cb5aa"/>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\Gostujoce</attribute>
+        <attribute name="export-file-name">Gostujoca.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Koledar\Entity\Gostujoca" to="\Produkcija\Entity\Uprizoritev" owner-alias="gostujoce" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" uuid="87d42448-4769-4ba2-92bf-ac85a0fd347c">
+      <association-field from="uprizoritev_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\Koledar\Entity\Dogodek" local-name="Dogodek" namespace="\Koledar\Entity" uuid="88d29855-b6f1-45bb-ac5d-7490fb88000f">
       <field name="id" type="guid" required="true" primary="true" uuid="799ef441-f849-451b-8fe3-cd07e9e7ce1b">
         <orm-attributes>
           <attribute name="generator">
@@ -471,7 +505,7 @@
       <field name="planiranZacetek" type="datetime" uuid="953d3cc9-dded-41ed-94a9-5f1efd71644e"/>
       <field name="zacetek" type="datetime" uuid="905078ea-8c6c-464b-9961-4e1eeb2c6559"/>
       <field name="konec" type="datetime" uuid="b99e50eb-7202-48bb-b7ac-b9b223cf0f04"/>
-      <field name="status" type="integer" uuid="beea0477-bb5d-42ea-9a68-12f7cf0195c4"/>
+      <field name="status" type="integer" size="20" uuid="beea0477-bb5d-42ea-9a68-12f7cf0195c4"/>
       <field name="razred" type="string" size="10" uuid="eb4c6d0a-7b76-4c33-8796-1cb13a7be842"/>
       <field name="termin" type="string" uuid="6ae58696-7499-4671-be0f-23bd56227712"/>
       <field name="ime" type="string" uuid="fd3bc18e-336f-4bea-a50b-5e0366027421"/>
@@ -482,11 +516,27 @@
       <field name="dogodek_izven_id" unique="true" uuid="aa1ddb0a-7c90-4795-ad78-ac35f4896439"/>
       <field name="prostor_id" unique="true" uuid="7f5192ef-c112-48a3-bf88-c62a28f15b00"/>
       <field name="sezona_id" uuid="ff6f341e-dc88-44f9-a16c-01599b0651c7"/>
+      <field name="allDay" type="boolean" default="false" uuid="0a8515e4-548a-4374-9a0b-09f170e570b2">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="title" type="string" uuid="6cc3a25f-5c54-4d8c-a93c-42b2f9d08f1a"/>
+      <field name="dogodek_splosni_id" unique="true" uuid="27e9cf14-9559-4d4d-a4d2-e55451a73c42"/>
       <index name="zacetek">
         <index-field name="zacetek"/>
       </index>
       <index name="konec">
         <index-field name="konec"/>
+      </index>
+      <index name="dogodki_zacetek">
+        <index-field name="zacetek"/>
+      </index>
+      <index name="dogodki_konec">
+        <index-field name="konec"/>
+      </index>
+      <index name="dogodki_razred">
+        <index-field name="razred"/>
       </index>
       <orm-attributes>
         <attribute name="repository-class">Koledar\Repository\Dogodki</attribute>
@@ -542,20 +592,14 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Koledar\Entity\DogodekIzven" local-name="DogodekIzven" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="46e3fbbf-63e4-4d39-9e02-3056f511a0de">
-      <field name="id" type="guid" required="true" primary="true" uuid="643b8c0a-7e3c-44e2-bddc-ae1fb4a4d1b5">
-        <orm-attributes>
-          <attribute name="generator">
-            <attribute name="strategy">NONE</attribute>
-          </attribute>
-        </orm-attributes>
-      </field>
+    <association from="\Koledar\Entity\Dogodek" to="\DogodekSplosni" owner-alias="dogodek" inverse-alias="splosni" many-owner="false" many-inverse="false" uuid="bcf85701-7434-495b-b451-055d7f877f26">
+      <association-field from="dogodek_splosni_id" to="id"/>
       <orm-attributes>
-        <attribute name="repository-class">Koledar\Repository\DogodkiIzven</attribute>
-        <attribute name="export-file-name">DogodekIzven.php</attribute>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
       </orm-attributes>
-    </entity>
-    <entity name="\Koledar\Entity\Gostovanje" local-name="Gostovanje" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="14a2a9d5-151d-4a89-8a8d-314ffb7c4b71">
+    </association>
+    <entity name="\Koledar\Entity\Gostovanje" local-name="Gostovanje" namespace="\Koledar\Entity" uuid="14a2a9d5-151d-4a89-8a8d-314ffb7c4b71">
       <field name="id" type="guid" required="true" primary="true" uuid="d55d7dc0-3ffa-457c-b7b7-dc1556e662e9">
         <orm-attributes>
           <attribute name="generator">
@@ -579,28 +623,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Koledar\Entity\Gostujoca" local-name="Gostujoca" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="68f55ad4-393f-4c42-9d35-cda1f19bf6eb">
-      <field name="id" type="guid" required="true" primary="true" uuid="70900721-d23b-45bb-922c-a685932d9fb1">
-        <orm-attributes>
-          <attribute name="generator">
-            <attribute name="strategy">NONE</attribute>
-          </attribute>
-        </orm-attributes>
-      </field>
-      <field name="uprizoritev_id" uuid="581bf82b-b7e9-48da-a647-18e57a9cb5aa"/>
-      <orm-attributes>
-        <attribute name="repository-class">Koledar\Repository\Gostujoce</attribute>
-        <attribute name="export-file-name">Gostujoca.php</attribute>
-      </orm-attributes>
-    </entity>
-    <association from="\Koledar\Entity\Gostujoca" to="\Produkcija\Entity\Uprizoritev" owner-alias="gostujoce" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" uuid="87d42448-4769-4ba2-92bf-ac85a0fd347c">
-      <association-field from="uprizoritev_id" to="id"/>
-      <orm-attributes>
-        <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
-      </orm-attributes>
-    </association>
-    <entity name="\Koledar\Entity\Predstava" local-name="Predstava" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="5b7f499c-37a3-49d8-9803-6bc7470b4601">
+    <entity name="\Koledar\Entity\Predstava" local-name="Predstava" namespace="\Koledar\Entity" uuid="5b7f499c-37a3-49d8-9803-6bc7470b4601">
       <field name="id" type="guid" required="true" primary="true" uuid="e971ad42-8802-4361-b262-28b79c8f4ddf">
         <orm-attributes>
           <attribute name="generator">
@@ -637,7 +660,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Koledar\Entity\Sezona" local-name="Sezona" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="8855280e-2c8f-48e3-937e-4846bf13c1d7">
+    <entity name="\Koledar\Entity\Sezona" local-name="Sezona" namespace="\Koledar\Entity" uuid="8855280e-2c8f-48e3-937e-4846bf13c1d7">
       <field name="id" type="guid" required="true" primary="true" uuid="5bd364d6-78e3-48f7-9f49-3237d3f45b1b">
         <orm-attributes>
           <attribute name="generator">
@@ -656,7 +679,7 @@
         <attribute name="export-file-name">Sezona.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Koledar\Entity\Vaja" local-name="Vaja" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="2ddca9df-8b16-4233-af59-aa50f92706fd">
+    <entity name="\Koledar\Entity\Vaja" local-name="Vaja" namespace="\Koledar\Entity" uuid="2ddca9df-8b16-4233-af59-aa50f92706fd">
       <field name="id" type="guid" required="true" primary="true" uuid="a7d37f56-a6a0-4784-8046-9a066cad2761">
         <orm-attributes>
           <attribute name="generator">
@@ -667,6 +690,7 @@
       <field name="zaporedna" type="integer" uuid="821802c1-ba87-4547-98a5-cb962716fbb6"/>
       <field name="porocilo" type="text" uuid="7a93cbcd-6402-4ba0-ac22-f8c065b00c7e"/>
       <field name="uprizoritev_id" uuid="6ede0f73-07de-4b52-ac03-530bf8dbf7bf"/>
+      <field name="vrsta" type="string" uuid="98ec544b-1f1d-4929-bcf5-8a166569ae62"/>
       <orm-attributes>
         <attribute name="repository-class">Koledar\Repository\Vaje</attribute>
         <attribute name="export-file-name">Vaja.php</attribute>
@@ -679,7 +703,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Koledar\Entity\Zasedenost" local-name="Zasedenost" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="4b044038-030d-41a7-bee9-095834fcfda1">
+    <entity name="\Koledar\Entity\Zasedenost" local-name="Zasedenost" namespace="\Koledar\Entity" uuid="4b044038-030d-41a7-bee9-095834fcfda1">
       <field name="id" type="guid" required="true" primary="true" uuid="13e654fb-02cc-4225-8c70-682920239db8">
         <orm-attributes>
           <attribute name="generator">
@@ -694,7 +718,7 @@
     </entity>
   </module>
   <module name="\Prisotnost/src/Prisotnost/Entity" local-name="Prisotnost/src/Prisotnost/Entity" namespace="\Prisotnost\Entity" local-namespace="\Prisotnost\Entity" export-format="Doctrine2Php" export-path="module/Prisotnost/src/Prisotnost/Entity" uuid="014b3d03-7303-40f7-bef2-10e70c884791">
-    <entity name="\Prisotnost\Entity\TerminStoritve" local-name="TerminStoritve" namespace="\Prisotnost\Entity" local-namespace="\Prisotnost\Entity" uuid="df09ee8d-8cd1-4c4d-aa94-33b20237a936">
+    <entity name="\Prisotnost\Entity\TerminStoritve" local-name="TerminStoritve" namespace="\Prisotnost\Entity" uuid="df09ee8d-8cd1-4c4d-aa94-33b20237a936">
       <field name="id" type="guid" required="true" primary="true" uuid="b4ec695c-76d9-4b3f-ae2e-a6c9f2a0d207">
         <orm-attributes>
           <attribute name="generator">
@@ -745,7 +769,7 @@
     </association>
   </module>
   <module name="\Prodaja/src/Prodaja/Entity" local-name="Prodaja/src/Prodaja/Entity" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" export-format="Doctrine2Php" export-path="module/Prodaja/src/Prodaja/Entity" uuid="6abd186b-e07d-400d-91c1-8c31254e38ae">
-    <entity name="\Prodaja\Entity\Kupec" local-name="Kupec" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" uuid="166776cc-9d01-441d-9d17-0fe9ea672409">
+    <entity name="\Prodaja\Entity\Kupec" local-name="Kupec" namespace="\Prodaja\Entity" uuid="166776cc-9d01-441d-9d17-0fe9ea672409">
       <field name="id" type="guid" required="true" primary="true" uuid="f54adb76-71f9-4e06-864c-0e383d053d75">
         <orm-attributes>
           <attribute name="generator">
@@ -766,7 +790,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Prodaja\Entity\NacinPlacina" local-name="NacinPlacina" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" uuid="97b9237f-8a10-44a8-8e08-fb28996969bd">
+    <entity name="\Prodaja\Entity\NacinPlacina" local-name="NacinPlacina" namespace="\Prodaja\Entity" uuid="97b9237f-8a10-44a8-8e08-fb28996969bd">
       <field name="id" type="guid" required="true" primary="true" uuid="38b728f1-691b-4343-a9f3-84a268f3f6c1">
         <orm-attributes>
           <attribute name="generator">
@@ -780,7 +804,7 @@
         <attribute name="export-file-name">NacinPlacina.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Prodaja\Entity\PlacilniInstrument" local-name="PlacilniInstrument" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" uuid="cb83bcce-d3e3-4596-81a0-fa153d9982c3">
+    <entity name="\Prodaja\Entity\PlacilniInstrument" local-name="PlacilniInstrument" namespace="\Prodaja\Entity" uuid="cb83bcce-d3e3-4596-81a0-fa153d9982c3">
       <field name="id" type="guid" required="true" primary="true" uuid="b6db94db-ad2d-41ed-8f1c-4e01adf6b6bd">
         <orm-attributes>
           <attribute name="generator">
@@ -801,7 +825,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Prodaja\Entity\PodrocjeSedenja" local-name="PodrocjeSedenja" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" uuid="e040b4fe-ac28-4b82-ad10-8e2c98b9202f">
+    <entity name="\Prodaja\Entity\PodrocjeSedenja" local-name="PodrocjeSedenja" namespace="\Prodaja\Entity" uuid="e040b4fe-ac28-4b82-ad10-8e2c98b9202f">
       <field name="id" type="guid" required="true" primary="true" uuid="c0c77129-cdec-4eee-b976-d1957b64d1d7">
         <orm-attributes>
           <attribute name="generator">
@@ -817,7 +841,7 @@
         <attribute name="export-file-name">PodrocjeSedenja.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Prodaja\Entity\PostavkaRacuna" local-name="PostavkaRacuna" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" uuid="d2f17580-bbcd-4fb4-8fa6-360a2d4a2b71">
+    <entity name="\Prodaja\Entity\PostavkaRacuna" local-name="PostavkaRacuna" namespace="\Prodaja\Entity" uuid="d2f17580-bbcd-4fb4-8fa6-360a2d4a2b71">
       <field name="id" type="guid" required="true" primary="true" uuid="24074f94-67ce-4d75-8ece-fbae4ca843d7">
         <orm-attributes>
           <attribute name="generator">
@@ -837,7 +861,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Prodaja\Entity\ProdajaPredstave" local-name="ProdajaPredstave" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" uuid="5ec21453-9b6c-4cbd-9bf0-a09a5cdf80c0">
+    <entity name="\Prodaja\Entity\ProdajaPredstave" local-name="ProdajaPredstave" namespace="\Prodaja\Entity" uuid="5ec21453-9b6c-4cbd-9bf0-a09a5cdf80c0">
       <field name="id" type="guid" required="true" primary="true" uuid="3dfaaaeb-6c55-403f-a767-48c7c94bde35">
         <orm-attributes>
           <attribute name="generator">
@@ -865,7 +889,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Prodaja\Entity\Prostor" local-name="Prostor" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" uuid="a5f93e6a-a8a8-4908-adb9-72a72d914180">
+    <entity name="\Prodaja\Entity\Prostor" local-name="Prostor" namespace="\Prodaja\Entity" uuid="a5f93e6a-a8a8-4908-adb9-72a72d914180">
       <field name="id" type="guid" required="true" primary="true" uuid="dfcf8d4c-4b33-4549-975e-5f5f87d09cae">
         <orm-attributes>
           <attribute name="generator">
@@ -880,12 +904,17 @@
       <field name="opis" type="text" uuid="78058946-d215-4139-9d69-0ce51c99398e"/>
       <field name="popa_id" uuid="a67949e5-1264-4637-91e4-abf2eb0b24ff"/>
       <field name="naslov_id" uuid="5f8e1ba8-cb40-4f1a-a30b-4c901685f233"/>
+      <field name="sePlanira" type="boolean" default="false" required="true" uuid="c94b2cdd-e848-4dfe-8b25-d7d9268a13d0">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
       <orm-attributes>
         <attribute name="repository-class">Prodaja\Repository\Prostori</attribute>
         <attribute name="export-file-name">Prostor.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="\Prodaja\Entity\Prostor" to="\App\Entity\Popa" owner-alias="" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="f7298fbc-94da-47c3-a9eb-0616c3e7d0dd">
+    <association from="\Prodaja\Entity\Prostor" to="\App\Entity\Popa" owner-alias="prostori" inverse-alias="popa" many-owner="true" many-inverse="false" uuid="f7298fbc-94da-47c3-a9eb-0616c3e7d0dd">
       <association-field from="popa_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
@@ -899,7 +928,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Prodaja\Entity\Racun" local-name="Racun" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" uuid="ce89004e-ea4c-45c8-9a5d-2dca8fad2233">
+    <entity name="\Prodaja\Entity\Racun" local-name="Racun" namespace="\Prodaja\Entity" uuid="ce89004e-ea4c-45c8-9a5d-2dca8fad2233">
       <field name="id" type="guid" required="true" primary="true" uuid="86b56677-af4c-453c-9d43-975bfac9cf3b">
         <orm-attributes>
           <attribute name="generator">
@@ -943,7 +972,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Prodaja\Entity\RazpisanSedez" local-name="RazpisanSedez" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" uuid="fab11b2f-4506-4b8b-b8b4-4a32f3674c1d">
+    <entity name="\Prodaja\Entity\RazpisanSedez" local-name="RazpisanSedez" namespace="\Prodaja\Entity" uuid="fab11b2f-4506-4b8b-b8b4-4a32f3674c1d">
       <field name="id" type="guid" required="true" primary="true" uuid="dfe03373-59b6-46ea-b3f5-99617bf4b501">
         <orm-attributes>
           <attribute name="generator">
@@ -988,7 +1017,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Prodaja\Entity\Rezervacija" local-name="Rezervacija" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" uuid="c14a09b9-385b-4d02-a692-5422c2255083">
+    <entity name="\Prodaja\Entity\Rezervacija" local-name="Rezervacija" namespace="\Prodaja\Entity" uuid="c14a09b9-385b-4d02-a692-5422c2255083">
       <field name="id" type="guid" required="true" primary="true" uuid="3c58aad2-12c5-4b38-913a-35a91e59292a">
         <orm-attributes>
           <attribute name="generator">
@@ -1008,7 +1037,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Prodaja\Entity\Sedez" local-name="Sedez" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" uuid="2d7cb729-43e3-4f4e-8a4b-792d4ae976f9">
+    <entity name="\Prodaja\Entity\Sedez" local-name="Sedez" namespace="\Prodaja\Entity" uuid="2d7cb729-43e3-4f4e-8a4b-792d4ae976f9">
       <field name="id" type="guid" required="true" primary="true" uuid="75705a47-b9e7-421a-a1de-f9fff7e9c66d">
         <orm-attributes>
           <attribute name="generator">
@@ -1050,7 +1079,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Prodaja\Entity\SedezniRed" local-name="SedezniRed" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" uuid="2898d5fc-7215-480a-ad57-6af3db63533a">
+    <entity name="\Prodaja\Entity\SedezniRed" local-name="SedezniRed" namespace="\Prodaja\Entity" uuid="2898d5fc-7215-480a-ad57-6af3db63533a">
       <field name="id" type="guid" required="true" primary="true" uuid="5c194666-76d5-4f53-af0c-7c6f16d18479">
         <orm-attributes>
           <attribute name="generator">
@@ -1064,7 +1093,7 @@
         <attribute name="export-file-name">SedezniRed.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Prodaja\Entity\VrstaSedezev" local-name="VrstaSedezev" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" uuid="5ab5125d-5d21-454e-b4e5-0229fa61e9e6">
+    <entity name="\Prodaja\Entity\VrstaSedezev" local-name="VrstaSedezev" namespace="\Prodaja\Entity" uuid="5ab5125d-5d21-454e-b4e5-0229fa61e9e6">
       <field name="id" type="guid" required="true" primary="true" uuid="913d5279-3cc0-4586-ac55-002552bedbf5">
         <orm-attributes>
           <attribute name="generator">
@@ -1089,7 +1118,7 @@
     </association>
   </module>
   <module name="\Produkcija/src/Produkcija/Entity" local-name="Produkcija/src/Produkcija/Entity" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" export-format="Doctrine2Php" export-path="module/Produkcija/src/Produkcija/Entity" uuid="3e4bd11d-e8a2-481e-bb8a-3418db81b6ef">
-    <entity name="\Produkcija\Entity\Alternacija" local-name="Alternacija" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="ac2e44ec-7a4c-4e9f-9322-13b939006c9a">
+    <entity name="\Produkcija\Entity\Alternacija" local-name="Alternacija" namespace="\Produkcija\Entity" uuid="ac2e44ec-7a4c-4e9f-9322-13b939006c9a">
       <field name="id" type="guid" required="true" primary="true" uuid="df7fb33b-6c42-4bba-af0f-248ecd6bc5b9">
         <orm-attributes>
           <attribute name="generator">
@@ -1144,7 +1173,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Produkcija\Entity\Arhivalija" local-name="Arhivalija" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="81cc830c-ce4c-41b7-b6e9-c4831d060256">
+    <entity name="\Produkcija\Entity\Arhivalija" local-name="Arhivalija" namespace="\Produkcija\Entity" uuid="81cc830c-ce4c-41b7-b6e9-c4831d060256">
       <field name="id" type="guid" required="true" primary="true" uuid="3daeb528-e37a-4add-b762-efe729ee6455">
         <orm-attributes>
           <attribute name="generator">
@@ -1169,7 +1198,7 @@
         <attribute name="export-file-name">Arhivalija.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="\Produkcija\Entity\Arhivalija" to="\Koledar\Entity\Dogodek" caption="Dogodek-Arhivalija" owner-alias="arhivi" inverse-alias="dogodek" many-owner="true" many-inverse="false" uuid="e3b3acbb-bd5b-431f-8410-88194eb96f7f">
+    <association from="\Produkcija\Entity\Arhivalija" to="\Koledar\Entity\Dogodek" caption="Dogodek-Arhivalija" owner-alias="" inverse-alias="dogodek" many-owner="true" many-inverse="false" uuid="e3b3acbb-bd5b-431f-8410-88194eb96f7f">
       <association-field from="dogodek_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
@@ -1183,7 +1212,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Produkcija\Entity\Besedilo" local-name="Besedilo" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="c23625f8-90ec-4509-b8d0-9568c4327c32">
+    <entity name="\Produkcija\Entity\Besedilo" local-name="Besedilo" namespace="\Produkcija\Entity" uuid="c23625f8-90ec-4509-b8d0-9568c4327c32">
       <field name="id" type="guid" required="true" primary="true" uuid="a9b781e6-af32-4ecd-a7fb-2f5f0641829b">
         <orm-attributes>
           <attribute name="generator">
@@ -1211,7 +1240,7 @@
         <attribute name="export-file-name">Besedilo.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Produkcija\Entity\Funkcija" local-name="Funkcija" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="26d55013-7f0d-4c02-a8e6-202812eaa854">
+    <entity name="\Produkcija\Entity\Funkcija" local-name="Funkcija" namespace="\Produkcija\Entity" uuid="26d55013-7f0d-4c02-a8e6-202812eaa854">
       <field name="id" type="guid" required="true" primary="true" uuid="7c647823-4ac0-4068-ac76-c80b0db44987">
         <orm-attributes>
           <attribute name="generator">
@@ -1244,7 +1273,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Produkcija\Entity\Funkcija" to="\Produkcija\Entity\Alternacija" owner-alias="privzeti" many-owner="true" many-inverse="false" uuid="14a6cf15-a17a-46b5-b0d9-62f5c92e6882">
+    <association from="\Produkcija\Entity\Funkcija" to="\Produkcija\Entity\Alternacija" owner-alias="" inverse-alias="privzeti" many-owner="true" many-inverse="false" uuid="14a6cf15-a17a-46b5-b0d9-62f5c92e6882">
       <association-field from="alternacija_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
@@ -1262,7 +1291,7 @@
         </attribute>
       </orm-attributes>
     </association>
-    <entity name="\Produkcija\Entity\Pogodba" local-name="Pogodba" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="4e52efba-352a-4494-bc2e-726ca01795f3">
+    <entity name="\Produkcija\Entity\Pogodba" local-name="Pogodba" namespace="\Produkcija\Entity" uuid="4e52efba-352a-4494-bc2e-726ca01795f3">
       <field name="id" type="guid" required="true" primary="true" uuid="936ba3ae-738e-4525-9fc0-085163134be7">
         <orm-attributes>
           <attribute name="generator">
@@ -1345,7 +1374,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Produkcija\Entity\Rekvizit" local-name="Rekvizit" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="b5e001e4-77e6-41a7-ae02-455f26af00b9">
+    <entity name="\Produkcija\Entity\Rekvizit" local-name="Rekvizit" namespace="\Produkcija\Entity" uuid="b5e001e4-77e6-41a7-ae02-455f26af00b9">
       <field name="id" type="guid" required="true" primary="true" uuid="62f3f6e1-940a-4071-b936-198b0915aa71">
         <orm-attributes>
           <attribute name="generator">
@@ -1361,7 +1390,7 @@
         <attribute name="export-file-name">Rekvizit.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Produkcija\Entity\Rekviziterstvo" local-name="Rekviziterstvo" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="19435671-7660-4e1f-95dd-8379a12281a0">
+    <entity name="\Produkcija\Entity\Rekviziterstvo" local-name="Rekviziterstvo" namespace="\Produkcija\Entity" uuid="19435671-7660-4e1f-95dd-8379a12281a0">
       <field name="id" type="guid" required="true" primary="true" uuid="26f5c2b7-1454-46e7-ac18-1a471aa52c26">
         <orm-attributes>
           <attribute name="generator">
@@ -1392,7 +1421,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Produkcija\Entity\StrosekUprizoritve" local-name="StrosekUprizoritve" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="6d7e14c2-fda7-47c9-8d61-7b9b113807d1">
+    <entity name="\Produkcija\Entity\StrosekUprizoritve" local-name="StrosekUprizoritve" namespace="\Produkcija\Entity" uuid="6d7e14c2-fda7-47c9-8d61-7b9b113807d1">
       <field name="id" type="guid" required="true" primary="true" uuid="eefe23b3-ab10-404e-818c-103e9d46fd2f">
         <orm-attributes>
           <attribute name="generator">
@@ -1438,7 +1467,14 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Produkcija\Entity\TipFunkcije" local-name="TipFunkcije" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="57d3062d-616b-4311-a32b-18fa159655e9">
+    <association from="\Produkcija\Entity\StrosekUprizoritve" to="\Produkcija\Entity\VrstaStroska" owner-alias="" inverse-alias="vrstaStroska" many-owner="true" many-inverse="false" uuid="cc7f4610-1f60-4522-aa8e-f56757c6a225">
+      <association-field from="vrstaStroska_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\Produkcija\Entity\TipFunkcije" local-name="TipFunkcije" namespace="\Produkcija\Entity" uuid="57d3062d-616b-4311-a32b-18fa159655e9">
       <field name="id" type="guid" required="true" primary="true" uuid="85d15675-1058-4ec1-a53c-08a857e44e50">
         <orm-attributes>
           <attribute name="generator">
@@ -1456,7 +1492,7 @@
         <attribute name="export-file-name">TipFunkcije.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Produkcija\Entity\Uprizoritev" local-name="Uprizoritev" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="91a4e243-563b-443f-85ff-3c2aa754c36b">
+    <entity name="\Produkcija\Entity\Uprizoritev" local-name="Uprizoritev" namespace="\Produkcija\Entity" uuid="91a4e243-563b-443f-85ff-3c2aa754c36b">
       <field name="id" type="guid" required="true" primary="true" uuid="578e533a-1a19-4f03-bc68-122d1c7b68b5">
         <orm-attributes>
           <attribute name="generator">
@@ -1533,7 +1569,24 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Produkcija\Entity\Zaposlitev" local-name="Zaposlitev" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="d2bd7d6f-8c3a-460d-91b0-db4b3c83922b">
+    <entity name="\Produkcija\Entity\VrstaStroska" local-name="VrstaStroska" namespace="\Produkcija\Entity" uuid="d951e113-9fcc-4278-8c57-7b7bd5857f6c">
+      <field name="id" type="guid" required="true" primary="true" uuid="081afd61-bfb3-49da-9828-9bd244ffc7e2">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="skupina" type="integer" uuid="bf139047-cbd6-4f40-8fce-9fe3b128ae0a"/>
+      <field name="podskupina" type="integer" uuid="67765c0b-983f-488d-948b-b06e3d7739d4"/>
+      <field name="naziv" type="string" uuid="bdc0f045-537f-4d55-856a-1b637bad3e5f"/>
+      <field name="opis" type="text" uuid="fa4d7401-a3b8-4b35-b53e-359edea27843"/>
+      <orm-attributes>
+        <attribute name="repository-class">Produkcija\Repository\VrsteStroska</attribute>
+        <attribute name="export-file-name">VrstaStroska.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Produkcija\Entity\Zaposlitev" local-name="Zaposlitev" namespace="\Produkcija\Entity" uuid="d2bd7d6f-8c3a-460d-91b0-db4b3c83922b">
       <field name="id" type="guid" required="true" primary="true" uuid="b9f1bfdc-c527-45ee-a932-5497a6f97367">
         <orm-attributes>
           <attribute name="generator">
@@ -1565,7 +1618,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Produkcija\Entity\ZvrstSurs" local-name="ZvrstSurs" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="e978cf61-8663-4eb8-b2d4-940acf87594e">
+    <entity name="\Produkcija\Entity\ZvrstSurs" local-name="ZvrstSurs" namespace="\Produkcija\Entity" uuid="e978cf61-8663-4eb8-b2d4-940acf87594e">
       <field name="id" type="guid" required="true" primary="true" uuid="9ec737c2-41ed-4c2d-91ba-ed391a564969">
         <orm-attributes>
           <attribute name="generator">
@@ -1581,7 +1634,7 @@
         <attribute name="export-file-name">ZvrstSurs.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Produkcija\Entity\ZvrstUprizoritve" local-name="ZvrstUprizoritve" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="1e413b63-05ec-452a-9c12-7db02b68311d">
+    <entity name="\Produkcija\Entity\ZvrstUprizoritve" local-name="ZvrstUprizoritve" namespace="\Produkcija\Entity" uuid="1e413b63-05ec-452a-9c12-7db02b68311d">
       <field name="id" type="guid" required="true" primary="true" uuid="2ee78ced-3569-49a5-a1ae-6621a6475d54">
         <orm-attributes>
           <attribute name="generator">
@@ -1597,26 +1650,9 @@
         <attribute name="export-file-name">ZvrstUprizoritve.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Produkcija\Entity\VrstaStroska" local-name="VrstaStroska" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" uuid="d951e113-9fcc-4278-8c57-7b7bd5857f6c">
-      <field name="id" type="guid" required="true" primary="true" uuid="081afd61-bfb3-49da-9828-9bd244ffc7e2">
-        <orm-attributes>
-          <attribute name="generator">
-            <attribute name="strategy">NONE</attribute>
-          </attribute>
-        </orm-attributes>
-      </field>
-      <field name="skupina" type="integer" uuid="bf139047-cbd6-4f40-8fce-9fe3b128ae0a"/>
-      <field name="podskupina" type="integer" uuid="67765c0b-983f-488d-948b-b06e3d7739d4"/>
-      <field name="naziv" type="string" uuid="bdc0f045-537f-4d55-856a-1b637bad3e5f"/>
-      <field name="opis" type="text" uuid="fa4d7401-a3b8-4b35-b53e-359edea27843"/>
-      <orm-attributes>
-        <attribute name="repository-class">Produkcija\Repository\VrsteStroska</attribute>
-        <attribute name="export-file-name">VrstaStroska.php</attribute>
-      </orm-attributes>
-    </entity>
   </module>
   <module name="\ProgramDela/src/ProgramDela/Entity" local-name="ProgramDela/src/ProgramDela/Entity" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" export-format="Doctrine2Php" export-path="module/ProgramDela/src/ProgramDela/Entity" uuid="647b3aa3-fe25-4f40-bbae-c6174d4c6448">
-    <entity name="\ProgramDela\Entity\DrugiVir" local-name="DrugiVir" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="46ff9387-5f95-4759-b45a-fd56eb895dba">
+    <entity name="\ProgramDela\Entity\DrugiVir" local-name="DrugiVir" namespace="\ProgramDela\Entity" uuid="46ff9387-5f95-4759-b45a-fd56eb895dba">
       <field name="id" type="guid" required="true" primary="true" uuid="403d8341-5eb4-4877-a093-c1425d5e5890">
         <orm-attributes>
           <attribute name="generator">
@@ -1648,7 +1684,7 @@
         </attribute>
       </orm-attributes>
     </association>
-    <entity name="\ProgramDela\Entity\EnotaPrograma" local-name="EnotaPrograma" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="0b011d6c-5fd2-4576-948e-819e646ce232">
+    <entity name="\ProgramDela\Entity\EnotaPrograma" local-name="EnotaPrograma" namespace="\ProgramDela\Entity" uuid="0b011d6c-5fd2-4576-948e-819e646ce232">
       <field name="id" type="guid" required="true" primary="true" uuid="5ebed2ef-5804-46ba-b1fa-f3b1a350168d">
         <orm-attributes>
           <attribute name="generator">
@@ -1872,7 +1908,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\ProgramDela\Entity\ProdukcijaDelitev" local-name="ProdukcijaDelitev" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="d5a7c04a-c687-4566-b52e-7b340dfdbed1">
+    <entity name="\ProgramDela\Entity\ProdukcijaDelitev" local-name="ProdukcijaDelitev" namespace="\ProgramDela\Entity" uuid="d5a7c04a-c687-4566-b52e-7b340dfdbed1">
       <field name="id" type="guid" required="true" primary="true" uuid="b7f1d796-fbf8-4179-af3b-a9a93a387a49">
         <orm-attributes>
           <attribute name="generator">
@@ -1935,7 +1971,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\ProgramDela\Entity\ProdukcijskaHisa" local-name="ProdukcijskaHisa" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="562297b9-0d57-47b5-a5e7-79d26f56a51a">
+    <entity name="\ProgramDela\Entity\ProdukcijskaHisa" local-name="ProdukcijskaHisa" namespace="\ProgramDela\Entity" uuid="562297b9-0d57-47b5-a5e7-79d26f56a51a">
       <field name="id" type="guid" required="true" primary="true" uuid="d9914081-c7f0-4ddd-bf0d-1ca823e7e193">
         <orm-attributes>
           <attribute name="generator">
@@ -1958,7 +1994,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\ProgramDela\Entity\ProgramDela" local-name="ProgramDela" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="4c1a3e82-745c-4281-bf8b-139f0d721898">
+    <entity name="\ProgramDela\Entity\ProgramDela" local-name="ProgramDela" namespace="\ProgramDela\Entity" uuid="4c1a3e82-745c-4281-bf8b-139f0d721898">
       <field name="id" type="guid" required="true" primary="true" uuid="3618f1ac-3d54-4c6a-92b2-9eff277f6119">
         <orm-attributes>
           <attribute name="generator">
@@ -2242,6 +2278,9 @@
           <attribute name="precision">12</attribute>
         </orm-attributes>
       </field>
+      <field name="stObiskPonPremGost" type="integer" uuid="fcdb4e42-0f16-4cab-8df4-1c3869a166d0"/>
+      <field name="stObiskPonPremZamejo" type="integer" uuid="ffe6ccd6-741b-4834-9b5a-d5be4f18ce2b"/>
+      <field name="stObiskPonPremInt" type="integer" uuid="8edc049e-ab08-4d8c-8494-2f8aeb93e0ff"/>
       <orm-attributes>
         <attribute name="repository-class">ProgramDela\Repository\ProgramiDela</attribute>
         <attribute name="export-file-name">ProgramDela.php</attribute>
@@ -2254,7 +2293,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\ProgramDela\Entity\ProgramFestival" local-name="ProgramFestival" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="c12ee1c0-f575-4e3f-b4aa-1f176b3d415a">
+    <entity name="\ProgramDela\Entity\ProgramFestival" local-name="ProgramFestival" namespace="\ProgramDela\Entity" uuid="c12ee1c0-f575-4e3f-b4aa-1f176b3d415a">
       <field name="zvrst" type="string" uuid="8e6a04e4-d62b-444c-9ee1-fa5967c00c06"/>
       <field name="stPredstav" type="integer" uuid="0d234e72-d244-48d1-ad95-705dc80a6690"/>
       <field name="stPredavanj" type="integer" uuid="ce401aed-4d54-41ea-a26c-1dd68eccafb0"/>
@@ -2285,7 +2324,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\ProgramDela\Entity\ProgramGostovanje" local-name="ProgramGostovanje" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="727da840-0c27-4e4f-8174-0d22395c3cdd">
+    <entity name="\ProgramDela\Entity\ProgramGostovanje" local-name="ProgramGostovanje" namespace="\ProgramDela\Entity" uuid="727da840-0c27-4e4f-8174-0d22395c3cdd">
       <field name="krajGostovanja" type="string" required="true" uuid="d1f281e8-81f4-4d5b-a913-e373decb2dc8"/>
       <field name="ustanova" type="string" required="true" uuid="a8ef8aa8-0525-4237-8b14-6bc092bc5d8f"/>
       <field name="datumGostovanja" type="date" uuid="c0da111a-86b4-4ec5-a735-b962d98f42e7"/>
@@ -2337,7 +2376,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\ProgramDela\Entity\ProgramGostujoca" local-name="ProgramGostujoca" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="900f6704-8825-4b0f-917b-c28e8002c127">
+    <entity name="\ProgramDela\Entity\ProgramGostujoca" local-name="ProgramGostujoca" namespace="\ProgramDela\Entity" uuid="900f6704-8825-4b0f-917b-c28e8002c127">
       <field name="program_dela_id" uuid="d2a5967e-22eb-44f8-bbca-f861a3c21dd5"/>
       <field name="strosekOdkPred" type="decimal" default="0" required="true" uuid="5483852b-10f8-4b22-b430-792e85a45005">
         <orm-attributes>
@@ -2366,7 +2405,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\ProgramDela\Entity\ProgramIzjemni" local-name="ProgramIzjemni" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="be3d278e-7e2e-4d34-b3c1-a575a3a69d84">
+    <entity name="\ProgramDela\Entity\ProgramIzjemni" local-name="ProgramIzjemni" namespace="\ProgramDela\Entity" uuid="be3d278e-7e2e-4d34-b3c1-a575a3a69d84">
       <field name="program_dela_id" uuid="c392874e-b31d-4600-a4c5-b34d2ead952e"/>
       <inheritance-child derived-from="\ProgramDela\Entity\EnotaPrograma" discriminator-value="izjemni" uuid="0e30654c-d2f6-4065-82f8-57d961e11ea4"/>
       <orm-attributes>
@@ -2381,7 +2420,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\ProgramDela\Entity\ProgramPonovitevPrejsnjih" local-name="ProgramPonovitevPrejsnjih" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="f2a27014-a51d-41b1-9d24-97cc447053af">
+    <entity name="\ProgramDela\Entity\ProgramPonovitevPrejsnjih" local-name="ProgramPonovitevPrejsnjih" namespace="\ProgramDela\Entity" uuid="f2a27014-a51d-41b1-9d24-97cc447053af">
       <field name="program_dela_id" uuid="5748c309-d70e-4843-8353-e7543be7a934"/>
       <inheritance-child derived-from="\ProgramDela\Entity\EnotaPrograma" discriminator-value="ponovitevprejsnjih" uuid="4de7817b-0dd4-4dd5-a63e-083a15f7e192"/>
       <orm-attributes>
@@ -2396,7 +2435,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\ProgramDela\Entity\ProgramPonovitevPremiere" local-name="ProgramPonovitevPremiere" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="abe3065d-aef9-4f7f-bcc2-355e574ede6a">
+    <entity name="\ProgramDela\Entity\ProgramPonovitevPremiere" local-name="ProgramPonovitevPremiere" namespace="\ProgramDela\Entity" uuid="abe3065d-aef9-4f7f-bcc2-355e574ede6a">
       <field name="program_dela_id" uuid="87c98ea8-9643-4360-80f3-293628e6a8bb"/>
       <inheritance-child derived-from="\ProgramDela\Entity\EnotaPrograma" discriminator-value="ponovitevpremiere" uuid="6c7b04e2-32d5-42ea-ac02-0acf095e0b4e"/>
       <orm-attributes>
@@ -2411,7 +2450,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\ProgramDela\Entity\ProgramPremiera" local-name="ProgramPremiera" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="ba4dd087-2f4e-4148-99c5-d0ddf280fb2a">
+    <entity name="\ProgramDela\Entity\ProgramPremiera" local-name="ProgramPremiera" namespace="\ProgramDela\Entity" uuid="ba4dd087-2f4e-4148-99c5-d0ddf280fb2a">
       <field name="program_dela_id" uuid="171c99cd-505e-4e3e-8c37-2517ffe8794f"/>
       <inheritance-child derived-from="\ProgramDela\Entity\EnotaPrograma" discriminator-value="premiera" uuid="e2f225dd-44ef-49fd-9fce-85879f5b2cea"/>
       <orm-attributes>
@@ -2426,7 +2465,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\ProgramDela\Entity\ProgramRazno" local-name="ProgramRazno" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="83b96999-fcb4-4a66-a2b0-0a065663eef6">
+    <entity name="\ProgramDela\Entity\ProgramRazno" local-name="ProgramRazno" namespace="\ProgramDela\Entity" uuid="83b96999-fcb4-4a66-a2b0-0a065663eef6">
       <field name="naslovPE" type="string" uuid="5c220421-37a3-4a6a-9de1-d44a65419835"/>
       <field name="avtorPE" type="string" uuid="3be24088-c857-4556-ab77-556928f7849f"/>
       <field name="obsegPE" type="string" uuid="caddb9db-80e8-4a2c-959a-4c18ab0facda"/>
@@ -2466,41 +2505,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\ProgramDela\Entity\TipProgramskeEnote" local-name="TipProgramskeEnote" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="2f5b53cb-f1f3-47f8-80e8-6363a309adab">
-      <field name="id" type="guid" required="true" primary="true" uuid="9fe9f27a-9a66-44b3-89ec-181c6a726acc">
-        <orm-attributes>
-          <attribute name="generator">
-            <attribute name="strategy">NONE</attribute>
-          </attribute>
-        </orm-attributes>
-      </field>
-      <field name="sifra" type="string" required="true" uuid="572791c4-bf0a-4d5f-9599-d089ef443c01"/>
-      <field name="naziv" type="string" required="true" uuid="5076b199-3721-45f0-a1bd-68dd510d5ff4"/>
-      <field name="koprodukcija" type="boolean" default="false" required="true" uuid="eecc00fa-6142-4940-9146-3780af5ac8d3">
-        <orm-attributes>
-          <attribute name="options"/>
-        </orm-attributes>
-      </field>
-      <field name="maxFaktor" type="decimal" default="1" required="true" uuid="bf6dc54f-1549-4cde-8f80-c98ed9a8a533">
-        <orm-attributes>
-          <attribute name="precision">15</attribute>
-          <attribute name="scale">2</attribute>
-          <attribute name="options"/>
-        </orm-attributes>
-      </field>
-      <field name="maxVsi" type="decimal" default="0" required="true" uuid="77fe8cf8-57c9-4823-8d87-bb568b6c22b6">
-        <orm-attributes>
-          <attribute name="precision">15</attribute>
-          <attribute name="scale">2</attribute>
-          <attribute name="options"/>
-        </orm-attributes>
-      </field>
-      <orm-attributes>
-        <attribute name="repository-class">ProgramDela\Repository\TipiProgramskeEnote</attribute>
-        <attribute name="export-file-name">TipProgramskeEnote.php</attribute>
-      </orm-attributes>
-    </entity>
-    <entity name="\ProgramDela\Entity\ProgramskaEnotaSklopa" local-name="ProgramskaEnotaSklopa" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" uuid="ab80c235-1331-401a-bc4b-e0313cb2c633">
+    <entity name="\ProgramDela\Entity\ProgramskaEnotaSklopa" local-name="ProgramskaEnotaSklopa" namespace="\ProgramDela\Entity" uuid="ab80c235-1331-401a-bc4b-e0313cb2c633">
       <field name="id" type="guid" required="true" primary="true" uuid="d0a21ee2-dfa9-439c-9085-c01822e5ec07">
         <orm-attributes>
           <attribute name="generator">
@@ -2534,9 +2539,43 @@
         </attribute>
       </orm-attributes>
     </association>
+    <entity name="\ProgramDela\Entity\TipProgramskeEnote" local-name="TipProgramskeEnote" namespace="\ProgramDela\Entity" uuid="2f5b53cb-f1f3-47f8-80e8-6363a309adab">
+      <field name="id" type="guid" required="true" primary="true" uuid="9fe9f27a-9a66-44b3-89ec-181c6a726acc">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="sifra" type="string" required="true" uuid="572791c4-bf0a-4d5f-9599-d089ef443c01"/>
+      <field name="naziv" type="string" required="true" uuid="5076b199-3721-45f0-a1bd-68dd510d5ff4"/>
+      <field name="koprodukcija" type="boolean" default="false" required="true" uuid="eecc00fa-6142-4940-9146-3780af5ac8d3">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="maxFaktor" type="decimal" default="1" required="true" uuid="bf6dc54f-1549-4cde-8f80-c98ed9a8a533">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="maxVsi" type="decimal" default="0" required="true" uuid="77fe8cf8-57c9-4823-8d87-bb568b6c22b6">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="repository-class">ProgramDela\Repository\TipiProgramskeEnote</attribute>
+        <attribute name="export-file-name">TipProgramskeEnote.php</attribute>
+      </orm-attributes>
+    </entity>
   </module>
   <module name="\Stevilcenje/src/Stevilcenje/Entity" local-name="Stevilcenje/src/Stevilcenje/Entity" namespace="\Stevilcenje\Entity" local-namespace="\Stevilcenje\Entity" export-format="Doctrine2Php" export-path="module/Stevilcenje/src/Stevilcenje/Entity" uuid="1b9aa36d-f802-4696-a2e2-8f9e5a9f0a59">
-    <entity name="\Stevilcenje\Entity\Stevilcenje" local-name="Stevilcenje" namespace="\Stevilcenje\Entity" local-namespace="\Stevilcenje\Entity" uuid="43957a3e-1d12-4d56-8935-0f528883a34c">
+    <entity name="\Stevilcenje\Entity\Stevilcenje" local-name="Stevilcenje" namespace="\Stevilcenje\Entity" uuid="43957a3e-1d12-4d56-8935-0f528883a34c">
       <field name="id" type="guid" required="true" primary="true" uuid="74b0c564-9cc8-4c9b-a2b8-4b5bad98f167"/>
       <field name="sifra" size="8" unique="true" uuid="b4ea9a40-8d1d-4e7a-8053-70747e471a7d"/>
       <field name="naziv" size="100" uuid="f9d54fef-a535-424a-a0ab-c1dedfd6395e"/>
@@ -2552,7 +2591,7 @@
         <attribute name="export-file-name">Stevilcenje.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Stevilcenje\Entity\StevilcenjeKonfig" local-name="StevilcenjeKonfig" namespace="\Stevilcenje\Entity" local-namespace="\Stevilcenje\Entity" uuid="2f45ed64-4451-4d98-aeba-0e105601908a">
+    <entity name="\Stevilcenje\Entity\StevilcenjeKonfig" local-name="StevilcenjeKonfig" namespace="\Stevilcenje\Entity" uuid="2f45ed64-4451-4d98-aeba-0e105601908a">
       <field name="id" type="guid" required="true" primary="true" uuid="7e35d42e-877a-4ddf-b206-409fa211ab0b"/>
       <field name="dok" size="100" unique="true" uuid="df5bee6a-a50b-48d4-b75a-dc109e243c19"/>
       <field name="stevilcenje_id" uuid="1ee495da-5875-4d3e-9993-4dd65a2a2247"/>
@@ -2568,7 +2607,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Stevilcenje\Entity\StevilcenjeStanje" local-name="StevilcenjeStanje" namespace="\Stevilcenje\Entity" local-namespace="\Stevilcenje\Entity" uuid="7462f2ef-0184-4d19-9393-5d121c7aa6c7">
+    <entity name="\Stevilcenje\Entity\StevilcenjeStanje" local-name="StevilcenjeStanje" namespace="\Stevilcenje\Entity" uuid="7462f2ef-0184-4d19-9393-5d121c7aa6c7">
       <field name="id" type="guid" required="true" primary="true" uuid="0836ab3c-413b-43ac-ba1d-759efc315285"/>
       <field name="objId" type="guid" required="true" uuid="1ac934a0-7e6d-492b-9db1-ff11f3e77bcd"/>
       <field name="leto" type="integer" required="true" uuid="c1c5ecaa-e707-401c-9dc4-45b13857303e"/>
@@ -2584,14 +2623,16 @@
       <field name="Zapis_id" type="guid" uuid="dfdd2857-5243-4355-90a3-feabf79ce747"/>
     </entity>
     <many-to-many mn-entity="\MapaZapis" uuid="bccc79b8-0960-4ce8-a92f-9bc8005ea459">
-      <many-to-many-entity name="\Zapisi\Entity\Mapa" owning-side="true" alias="vsebujoceMape" uuid="55f7a248-d9c1-4c28-8a0a-f161bf1eec6e">
+      <many-to-many-entity name="\Mapa" owning-side="true" alias="vsebujoceMape" uuid="55f7a248-d9c1-4c28-8a0a-f161bf1eec6e">
         <many-to-many-field from="Mapa_id" to="id"/>
       </many-to-many-entity>
-      <many-to-many-entity name="\Zapisi\Entity\Zapis" owning-side="false" alias="zapisi" uuid="5d654fc6-23f1-46d4-a408-de695cc4157c">
+      <many-to-many-entity name="\Zapis" owning-side="false" alias="zapisi" uuid="5d654fc6-23f1-46d4-a408-de695cc4157c">
         <many-to-many-field from="Zapis_id" to="id"/>
       </many-to-many-entity>
+      <many-to-many-entity name="\Mapa" owning-side="true" alias="vsebujoceMape" uuid="62715813-ffd1-46e5-a759-9d56767c5efc"/>
+      <many-to-many-entity name="\Zapis" owning-side="false" alias="zapisi" uuid="5783706f-8b68-45e4-abe4-a77178406ab5"/>
     </many-to-many>
-    <entity name="\Zapisi\Entity\Datoteka" local-name="Datoteka" namespace="\Zapisi\Entity" local-namespace="\Zapisi\Entity" uuid="93d2e1c6-3c09-4fe6-9088-0c87720fbd13">
+    <entity name="\Datoteka" local-name="Datoteka" namespace="\" uuid="93d2e1c6-3c09-4fe6-9088-0c87720fbd13">
       <field name="id" type="guid" required="true" primary="true" uuid="60940769-82ec-45a0-96fd-24dd87529707">
         <orm-attributes>
           <attribute name="generator">
@@ -2614,14 +2655,14 @@
         <attribute name="export-file-name">Datoteka.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="\Zapisi\Entity\Datoteka" to="\Aaa\Entity\User" owner-alias="" inverse-alias="owner" many-owner="true" many-inverse="false" uuid="e838e969-455c-417c-9dbf-55c2902d9319">
+    <association from="\Datoteka" to="\Aaa\Entity\User" owner-alias="" inverse-alias="owner" many-owner="true" many-inverse="false" uuid="e838e969-455c-417c-9dbf-55c2902d9319">
       <association-field from="owner_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Zapisi\Entity\Mapa" local-name="Mapa" namespace="\Zapisi\Entity" local-namespace="\Zapisi\Entity" uuid="18f95dd5-c94a-4664-a3df-a965e7e499a2">
+    <entity name="\Mapa" local-name="Mapa" namespace="\" uuid="18f95dd5-c94a-4664-a3df-a965e7e499a2">
       <field name="id" type="guid" required="true" primary="true" uuid="b8fc9946-b9d5-4f8b-b6f6-41610b780b58">
         <orm-attributes>
           <attribute name="generator">
@@ -2643,21 +2684,21 @@
         <attribute name="export-file-name">Mapa.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="\Zapisi\Entity\Mapa" to="\Aaa\Entity\User" owner-alias="" inverse-alias="lastnik" many-owner="true" many-inverse="false" uuid="fab5e6ba-ebae-4ccb-94eb-552b9cfd4c58">
+    <association from="\Mapa" to="\Aaa\Entity\User" owner-alias="" inverse-alias="lastnik" many-owner="true" many-inverse="false" uuid="fab5e6ba-ebae-4ccb-94eb-552b9cfd4c58">
       <association-field from="lastnik_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Zapisi\Entity\Mapa" to="\Zapisi\Entity\Mapa" owner-alias="podMape" inverse-alias="parent" many-owner="true" many-inverse="false" uuid="c0543791-63e8-4eba-b4ac-5902651b0250">
+    <association from="\Mapa" to="\Mapa" owner-alias="podMape" inverse-alias="parent" many-owner="true" many-inverse="false" uuid="c0543791-63e8-4eba-b4ac-5902651b0250">
       <association-field from="parent_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Zapisi\Entity\MapaAcl" local-name="MapaAcl" namespace="\Zapisi\Entity" local-namespace="\Zapisi\Entity" uuid="214ca9ce-333d-4337-9823-4128d9548b78">
+    <entity name="\MapaAcl" local-name="MapaAcl" namespace="\" uuid="214ca9ce-333d-4337-9823-4128d9548b78">
       <field name="id" type="guid" required="true" primary="true" uuid="6222e37e-9554-4589-a1c9-26ccf5153175">
         <orm-attributes>
           <attribute name="generator">
@@ -2675,7 +2716,7 @@
         <attribute name="export-file-name">MapaAcl.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="\Zapisi\Entity\MapaAcl" to="\Zapisi\Entity\Mapa" owner-alias="acl" inverse-alias="mapa" many-owner="true" many-inverse="false" uuid="eaa64f75-3e02-4396-aa20-6515a56b4cf3">
+    <association from="\MapaAcl" to="\Mapa" owner-alias="acl" inverse-alias="mapa" many-owner="true" many-inverse="false" uuid="eaa64f75-3e02-4396-aa20-6515a56b4cf3">
       <association-field from="mapa_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
@@ -2688,14 +2729,14 @@
         </attribute>
       </orm-attributes>
     </association>
-    <association from="\Zapisi\Entity\MapaAcl" to="\Aaa\Entity\Permission" owner-alias="" inverse-alias="perm" many-owner="true" many-inverse="false" uuid="ece70ae3-4037-4881-b21a-335aa126f221">
+    <association from="\MapaAcl" to="\Aaa\Entity\Permission" owner-alias="" inverse-alias="perm" many-owner="true" many-inverse="false" uuid="ece70ae3-4037-4881-b21a-335aa126f221">
       <association-field from="perm_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Zapisi\Entity\VrstaZapisa" local-name="VrstaZapisa" namespace="\Zapisi\Entity" local-namespace="\Zapisi\Entity" uuid="14b97b25-c8dd-4d60-8b83-3a404d425fcf">
+    <entity name="\VrstaZapisa" local-name="VrstaZapisa" namespace="\" uuid="14b97b25-c8dd-4d60-8b83-3a404d425fcf">
       <field name="id" type="guid" required="true" primary="true" uuid="77387408-b549-45dd-af0b-a55676a7a38d">
         <orm-attributes>
           <attribute name="generator">
@@ -2715,7 +2756,7 @@
         <attribute name="export-file-name">VrstaZapisa.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Zapisi\Entity\Zapis" local-name="Zapis" namespace="\Zapisi\Entity" local-namespace="\Zapisi\Entity" uuid="5a2aaa6c-1ae0-4178-ba18-a0cbd298bca2">
+    <entity name="\Zapis" local-name="Zapis" namespace="\" uuid="5a2aaa6c-1ae0-4178-ba18-a0cbd298bca2">
       <field name="id" type="guid" required="true" primary="true" uuid="617ab703-ec01-469e-b17d-99838e001ecb">
         <orm-attributes>
           <attribute name="generator">
@@ -2752,35 +2793,35 @@
         <attribute name="export-file-name">Zapis.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="\Zapisi\Entity\Zapis" to="\Zapisi\Entity\VrstaZapisa" owner-alias="" inverse-alias="vrsta" many-owner="true" many-inverse="false" uuid="b2ead267-beaa-40ba-aa57-9c057acc54c8">
+    <association from="\Zapis" to="\VrstaZapisa" owner-alias="" inverse-alias="vrsta" many-owner="true" many-inverse="false" uuid="b2ead267-beaa-40ba-aa57-9c057acc54c8">
       <association-field from="vrsta_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Zapisi\Entity\Zapis" to="\Zapisi\Entity\Datoteka" owner-alias="" inverse-alias="datoteka" many-owner="true" many-inverse="false" uuid="016a32b5-1c11-443d-b2f1-4536352bad58">
+    <association from="\Zapis" to="\Datoteka" owner-alias="" inverse-alias="datoteka" many-owner="true" many-inverse="false" uuid="016a32b5-1c11-443d-b2f1-4536352bad58">
       <association-field from="datoteka_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Zapisi\Entity\Zapis" to="\Zapisi\Entity\Mapa" owner-alias="vsebujociZapisi" inverse-alias="mapa" many-owner="true" many-inverse="false" uuid="6529b4d0-6ece-42dd-8d22-5cc0698fcbbf">
+    <association from="\Zapis" to="\Mapa" owner-alias="vsebujociZapisi" inverse-alias="mapa" many-owner="true" many-inverse="false" uuid="6529b4d0-6ece-42dd-8d22-5cc0698fcbbf">
       <association-field from="mapa_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Zapisi\Entity\Zapis" to="\Aaa\Entity\User" owner-alias="" inverse-alias="avtor" many-owner="true" many-inverse="false" uuid="46d87b18-9511-463d-9825-57b13dcef99b">
+    <association from="\Zapis" to="\Aaa\Entity\User" owner-alias="" inverse-alias="avtor" many-owner="true" many-inverse="false" uuid="46d87b18-9511-463d-9825-57b13dcef99b">
       <association-field from="avtor_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Zapisi\Entity\Zapis" to="\Aaa\Entity\User" owner-alias="" inverse-alias="zaklenil" many-owner="true" many-inverse="false" uuid="659dc617-8741-4d63-9e18-e1c7da2ece1b">
+    <association from="\Zapis" to="\Aaa\Entity\User" owner-alias="" inverse-alias="zaklenil" many-owner="true" many-inverse="false" uuid="659dc617-8741-4d63-9e18-e1c7da2ece1b">
       <association-field from="zaklenil_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
@@ -2788,6 +2829,39 @@
       </orm-attributes>
     </association>
   </module>
+  <module name="\module/Aaa/src/Aaa/Entity" local-name="module/Aaa/src/Aaa/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Aaa/src/Aaa/Entity" uuid="747044f0-2cd6-4158-9202-bdff2c3ff26f"/>
+  <module name="\module/Abonmaji/src/Abonmaji/Entity" local-name="module/Abonmaji/src/Abonmaji/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Abonmaji/src/Abonmaji/Entity" uuid="2f1267c0-d385-42ca-9a78-d3e515ed5e87"/>
+  <module name="\module/App/src/App/Entity" local-name="module/App/src/App/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/App/src/App/Entity" uuid="fa4e5962-ab59-42c1-a1b3-75c348f38ead"/>
+  <module name="\module/Koledar/src/Koledar/Entity" local-name="module/Koledar/src/Koledar/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Koledar/src/Koledar/Entity" uuid="236c4712-5984-4a5e-ab98-0be35f62aa5c">
+    <entity name="\DogodekSplosni" local-name="DogodekSplosni" namespace="\" uuid="bd6ec087-87e4-422c-bc7a-ff7fd24dc618">
+      <field name="id" type="guid" required="true" primary="true" uuid="7568ce4e-04b9-46d0-80c8-1dcc30058785">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\DogodkiSplosni</attribute>
+        <attribute name="export-file-name">DogodekSplosni.php</attribute>
+      </orm-attributes>
+    </entity>
+  </module>
+  <module name="\module/Prisotnost/src/Prisotnost/Entity" local-name="module/Prisotnost/src/Prisotnost/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Prisotnost/src/Prisotnost/Entity" uuid="9524ad4b-5de3-4444-9709-5e62cc41be0f"/>
+  <module name="\module/Prodaja/src/Prodaja/Entity" local-name="module/Prodaja/src/Prodaja/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Prodaja/src/Prodaja/Entity" uuid="ced46fdd-f36d-4ad2-82bf-b932bdaba41f"/>
+  <module name="\module/Produkcija/src/Produkcija/Entity" local-name="module/Produkcija/src/Produkcija/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Produkcija/src/Produkcija/Entity" uuid="30f33e41-07a2-4e64-8ab6-fa9cdd99095a"/>
+  <module name="\module/ProgramDela/src/ProgramDela/Entity" local-name="module/ProgramDela/src/ProgramDela/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/ProgramDela/src/ProgramDela/Entity" uuid="59e9d283-c65e-45df-81a5-1048b7d764cf"/>
+  <module name="\module/Stevilcenje/src/Stevilcenje/Entity" local-name="module/Stevilcenje/src/Stevilcenje/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Stevilcenje/src/Stevilcenje/Entity" uuid="81dbb49c-ba7b-47fa-8394-7f5af838d718"/>
+  <module name="\module/Aaa/src/Aaa/Entity" local-name="module/Aaa/src/Aaa/Entity" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" export-format="Doctrine2Php" export-path="module/Aaa/src/Aaa/Entity" uuid="611d1643-7e8a-4580-9885-9c3c758807af"/>
+  <module name="\module/Abonmaji/src/Abonmaji/Entity" local-name="module/Abonmaji/src/Abonmaji/Entity" namespace="\Abonmaji\Entity" local-namespace="\Abonmaji\Entity" export-format="Doctrine2Php" export-path="module/Abonmaji/src/Abonmaji/Entity" uuid="1878c2ac-2ce6-4e10-b87d-74f68884be06"/>
+  <module name="\module/App/src/App/Entity" local-name="module/App/src/App/Entity" namespace="\App\Entity" local-namespace="\App\Entity" export-format="Doctrine2Php" export-path="module/App/src/App/Entity" uuid="bf62f4e9-ce48-45e3-a1ba-b1ed5c4ebe04"/>
+  <module name="\module/Koledar/src/Koledar/Entity" local-name="module/Koledar/src/Koledar/Entity" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" export-format="Doctrine2Php" export-path="module/Koledar/src/Koledar/Entity" uuid="4f943079-c29e-46db-904b-a81b5bf66637"/>
+  <module name="\module/Prisotnost/src/Prisotnost/Entity" local-name="module/Prisotnost/src/Prisotnost/Entity" namespace="\Prisotnost\Entity" local-namespace="\Prisotnost\Entity" export-format="Doctrine2Php" export-path="module/Prisotnost/src/Prisotnost/Entity" uuid="cda07b1f-8a75-4430-8e27-d96fa426d90f"/>
+  <module name="\module/Prodaja/src/Prodaja/Entity" local-name="module/Prodaja/src/Prodaja/Entity" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" export-format="Doctrine2Php" export-path="module/Prodaja/src/Prodaja/Entity" uuid="4d4c99fb-d4c6-4421-a451-24811bd5ade3"/>
+  <module name="\module/Produkcija/src/Produkcija/Entity" local-name="module/Produkcija/src/Produkcija/Entity" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" export-format="Doctrine2Php" export-path="module/Produkcija/src/Produkcija/Entity" uuid="686d32d7-2005-4ac8-b478-245ce3ae5e0c"/>
+  <module name="\module/ProgramDela/src/ProgramDela/Entity" local-name="module/ProgramDela/src/ProgramDela/Entity" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" export-format="Doctrine2Php" export-path="module/ProgramDela/src/ProgramDela/Entity" uuid="1cea2743-049f-422c-988e-566ab30cd5d5"/>
+  <module name="\module/Stevilcenje/src/Stevilcenje/Entity" local-name="module/Stevilcenje/src/Stevilcenje/Entity" namespace="\Stevilcenje\Entity" local-namespace="\Stevilcenje\Entity" export-format="Doctrine2Php" export-path="module/Stevilcenje/src/Stevilcenje/Entity" uuid="b8dea434-6a52-4be5-b490-d632cea00fcf"/>
+  <module name="\module/Zapisi/src/Zapisi/Entity" local-name="module/Zapisi/src/Zapisi/Entity" namespace="\Zapisi\Entity" local-namespace="\Zapisi\Entity" export-format="Doctrine2Php" export-path="module/Zapisi/src/Zapisi/Entity" uuid="013762e3-1d8e-4655-9b8b-76b1c3cd1ff1"/>
   <visual-data>
     <association uuid="016a32b5-1c11-443d-b2f1-4536352bad58" color="#00B4D0"/>
     <association uuid="0893669c-7923-4287-a9f9-81a71d62fe70" center-position-x="0" center-position-y="0" color="#C774AF"/>
@@ -2864,11 +2938,13 @@
     <association uuid="b2ead267-beaa-40ba-aa57-9c057acc54c8" color="#2E63AF"/>
     <association uuid="b330e60f-56a0-4160-9214-a93a5f6ba024" center-position-x="0" center-position-y="0" color="#F4931F"/>
     <association uuid="b6541dd0-8d8d-497f-823f-d28ca69f6363" color="#F4931F" split="1"/>
+    <association uuid="bcf85701-7434-495b-b451-055d7f877f26" color="#A8A8A8"/>
     <association uuid="c03277a0-6df1-44f4-bca7-59bce8a71c57" color="#2E63AF"/>
-    <association uuid="c0543791-63e8-4eba-b4ac-5902651b0250" color="#B31F24"/>
+    <association uuid="c0543791-63e8-4eba-b4ac-5902651b0250" center-position-x="0" center-position-y="-20" color="#B31F24"/>
     <association uuid="c237ca76-907a-4223-b00b-213749a2fba9" color="#CDC32B"/>
     <association uuid="cac4a1bc-2edc-43f0-b5f6-afd60a8b1f1f" color="#CDC32B"/>
     <association uuid="cb983c2e-9c4a-45c9-a789-b29d0195d17c" color="#61D351"/>
+    <association uuid="cc7f4610-1f60-4522-aa8e-f56757c6a225" color="#0A783D"/>
     <association uuid="cee62248-cb01-4e41-9daa-d64cea2c5cf5" color="#A8A8A8" split="1"/>
     <association uuid="d44cc5d4-e61f-4d7e-87ea-af592fbb404e" color="#2E63AF"/>
     <association uuid="d52910ed-e9de-4631-a0d2-3631b31b3043" center-position-x="0" center-position-y="10" color="#F4931F"/>
@@ -2948,6 +3024,7 @@
     <entity uuid="ae11b2b4-a48c-45f6-ad6b-7989c8effcc5" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="406" position-y="251" size-x="0" size-x2="67" size-y="0" size-y2="59"/>
     <entity uuid="b5e001e4-77e6-41a7-ae02-455f26af00b9" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="830" position-y="39" size-x="0" size-x2="78" size-y="0" size-y2="73"/>
     <entity uuid="ba4dd087-2f4e-4148-99c5-d0ddf280fb2a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="496" position-y="244" size-x="0" size-x2="92" size-y="0" size-y2="31"/>
+    <entity uuid="bd6ec087-87e4-422c-bc7a-ff7fd24dc618" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="40" size-x="0" size-x2="145" size-y="0" size-y2="31"/>
     <entity uuid="be3d278e-7e2e-4d34-b3c1-a575a3a69d84" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="477" position-y="179" size-x="0" size-x2="92" size-y="0" size-y2="31"/>
     <entity uuid="c12ee1c0-f575-4e3f-b4aa-1f176b3d415a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="402" position-y="444" size-x="0" size-x2="145" size-y="0" size-y2="241"/>
     <entity uuid="c14a09b9-385b-4d02-a692-5422c2255083" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="349" position-y="390" size-x="0" size-x2="111" size-y="0" size-y2="45"/>
@@ -2979,16 +3056,35 @@
     <many-to-many-association uuid="6ef15f19-bc23-411d-9185-ed67927cf246" color="#2E63AF"/>
     <many-to-many-association uuid="9354722a-39ec-4747-ac8c-1b8e4329c4a5" color="#00B4D0"/>
     <many-to-many-association uuid="bccc79b8-0960-4ce8-a92f-9bc8005ea459" color="#CDC32B"/>
+    <module uuid="013762e3-1d8e-4655-9b8b-76b1c3cd1ff1" bg-color="#FDEBEF" position-x="5051" position-y="908" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
     <module uuid="014b3d03-7303-40f7-bef2-10e70c884791" bg-color="#E7F5FD" position-x="1026" position-y="705" size-x="0" size-x2="282" size-y="-33" size-y2="298"/>
     <module uuid="1060d1d6-0fcc-45a5-8709-b5151ef61cbd" bg-color="#FEEFE3" position-x="2596" position-y="1630" size-x="0" size-x2="412" size-y="-8" size-y2="183"/>
+    <module uuid="1878c2ac-2ce6-4e10-b87d-74f68884be06" bg-color="#FEFCE8" position-x="4651" position-y="908" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
     <module uuid="1b9aa36d-f802-4696-a2e2-8f9e5a9f0a59" bg-color="#FDEBEF" position-x="2529" position-y="1924" size-x="0" size-x2="369" size-y="33" size-y2="345"/>
+    <module uuid="1cea2743-049f-422c-988e-566ab30cd5d5" bg-color="#FEFCE8" position-x="5251" position-y="1108" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="236c4712-5984-4a5e-ab98-0be35f62aa5c" bg-color="#E7F3E7" position-x="3851" position-y="708" size-x="0" size-x2="185" size-y="0" size-y2="100"/>
+    <module uuid="2f1267c0-d385-42ca-9a78-d3e515ed5e87" bg-color="#EAE4F1" position-x="4051" position-y="908" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="30f33e41-07a2-4e64-8ab6-fa9cdd99095a" bg-color="#FDEBEF" position-x="4451" position-y="1308" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
     <module uuid="3824a8e0-7d80-4d0c-a5ca-debd633c5932" bg-color="#FEFCE8" position-x="3088" position-y="1540" size-x="0" size-x2="528" size-y="0" size-y2="442"/>
     <module uuid="3e4bd11d-e8a2-481e-bb8a-3418db81b6ef" bg-color="#FEFCE8" position-x="1285" position-y="1424" size-x="17" size-x2="1011" size-y="0" size-y2="825"/>
-    <module uuid="647b3aa3-fe25-4f40-bbae-c6174d4c6448" bg-color="#FEEFE3" position-x="258" position-y="1507" size-x="0" size-x2="1000" size-y="81" size-y2="1537"/>
+    <module uuid="4d4c99fb-d4c6-4421-a451-24811bd5ade3" bg-color="#E7F5FD" position-x="5051" position-y="1308" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="4f943079-c29e-46db-904b-a81b5bf66637" bg-color="#FDEBEF" position-x="4851" position-y="1108" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="59e9d283-c65e-45df-81a5-1048b7d764cf" bg-color="#EAE4F1" position-x="4451" position-y="1108" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="611d1643-7e8a-4580-9885-9c3c758807af" bg-color="#E7F3E7" position-x="4651" position-y="708" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="647b3aa3-fe25-4f40-bbae-c6174d4c6448" bg-color="#FEEFE3" position-x="258" position-y="1507" size-x="0" size-x2="1000" size-y="81" size-y2="1579"/>
+    <module uuid="686d32d7-2005-4ac8-b478-245ce3ae5e0c" bg-color="#E7F3E7" position-x="5251" position-y="1308" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
     <module uuid="6abd186b-e07d-400d-91c1-8c31254e38ae" bg-color="#E7F3E7" position-x="2974" position-y="718" size-x="0" size-x2="777" size-y="-2" size-y2="649"/>
     <module uuid="6b6667c5-b52e-4a56-8877-89fba08a10bb" bg-color="#FDEBEF" position-x="259" position-y="735" size-x="0" size-x2="751" size-y="-2" size-y2="676"/>
-    <module uuid="a9308c3a-c148-44c7-8a88-d4705324e9b3" bg-color="#FEFCE8" position-x="2368" position-y="759" size-x="0" size-x2="528" size-y="0" size-y2="834"/>
+    <module uuid="747044f0-2cd6-4158-9202-bdff2c3ff26f" bg-color="#FDEBEF" position-x="3851" position-y="908" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="81dbb49c-ba7b-47fa-8394-7f5af838d718" bg-color="#E7F5FD" position-x="4051" position-y="1308" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="9524ad4b-5de3-4444-9709-5e62cc41be0f" bg-color="#FEFCE8" position-x="4251" position-y="1108" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="a9308c3a-c148-44c7-8a88-d4705324e9b3" bg-color="#FEFCE8" position-x="2368" position-y="759" size-x="0" size-x2="596" size-y="0" size-y2="834"/>
+    <module uuid="b8dea434-6a52-4be5-b490-d632cea00fcf" bg-color="#FEEFE3" position-x="4851" position-y="1308" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="bf62f4e9-ce48-45e3-a1ba-b1ed5c4ebe04" bg-color="#FEEFE3" position-x="4851" position-y="908" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="cda07b1f-8a75-4430-8e27-d96fa426d90f" bg-color="#EAE4F1" position-x="5051" position-y="1108" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="ced46fdd-f36d-4ad2-82bf-b932bdaba41f" bg-color="#FEEFE3" position-x="4251" position-y="1308" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <module uuid="fa4e5962-ab59-42c1-a1b3-75c348f38ead" bg-color="#E7F5FD" position-x="4051" position-y="1108" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
     <module uuid="fc3d8164-87bc-4341-88a1-15d59570d9f6" bg-color="#EAE4F1" position-x="1359" position-y="816" size-x="35" size-x2="732" size-y="108" size-y2="536"/>
-    <project uuid="8a007160-ad58-4154-8595-ad0aa70b4d27" size-x="-183" size-x2="4494" size-y="-658" size-y2="3094"/>
+    <project uuid="8a007160-ad58-4154-8595-ad0aa70b4d27" size-x="-183" size-x2="5584" size-y="-658" size-y2="3794"/>
   </visual-data>
 </skipper>

@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<skipper version="3.2.3.1247" mvc="Zend Framework" orm="Doctrine2">
+  <module name="\../NetBeansProjects/ifiServer/module/Koledar/src/Koledar/Entity" local-name="../NetBeansProjects/ifiServer/module/Koledar/src/Koledar/Entity" namespace="\" export-format="Doctrine2Php" export-path="." uuid="a98fc9d6-b4c5-410b-b7a2-82e591e301b6">
+    <entity name="\Koledar\Entity\Dogodek" local-name="Dogodek" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="8e1b53bc-ffff-4e5f-9fd2-ada9c6b1028f">
+      <field name="id" type="guid" required="true" primary="true" uuid="06874fe1-130a-40df-984e-71fbf6ff8254">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="planiranZacetek" type="datetime" uuid="8e0e115d-f99a-4f2e-990a-f5fc45024561"/>
+      <field name="allDay" type="boolean" default="false" uuid="76eca513-4ef5-48f0-833c-1dc1b37d32c7">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="zacetek" type="datetime" uuid="fdce109f-2374-4509-9182-5ebff7d9eed3"/>
+      <field name="konec" type="datetime" uuid="a13ef0b2-28ce-4f2a-8217-c69ee5964656"/>
+      <field name="status" size="20" uuid="7c1725c3-87f6-4b88-8a8a-6c8c01b5db7b"/>
+      <field name="razred" type="string" size="10" uuid="fae0ac4b-3a4d-4090-a4ee-5a738c7ee718"/>
+      <field name="termin" type="string" uuid="51fac637-c4f6-40be-b032-343b0e8c6e30"/>
+      <field name="title" type="string" uuid="2dc1b7e9-f5a7-4cd2-a9df-db5033de443a"/>
+      <field name="predstava_id" unique="true" uuid="6cdfae02-6fc8-48af-b70d-ea5c18954752"/>
+      <field name="zasedenost_id" unique="true" uuid="853d7194-5339-4e12-a324-41c9ffcd0b9d"/>
+      <field name="vaja_id" unique="true" uuid="ccc0fe25-343f-4a1f-a390-6016cba46dbe"/>
+      <field name="gostovanje_id" unique="true" uuid="44529536-02b5-43be-bf1f-b2838dd76d92"/>
+      <field name="dogodek_splosni_id" unique="true" uuid="66efa588-4f68-4252-9433-08c215348fd5"/>
+      <field name="prostor_id" unique="true" uuid="9145d3ba-0ddf-440c-9221-20dbf0011214"/>
+      <field name="sezona_id" uuid="f8d46641-492c-4c6d-a69a-090d46018bc1"/>
+      <index name="dogodki_zacetek">
+        <index-field name="zacetek"/>
+      </index>
+      <index name="dogodki_konec">
+        <index-field name="konec"/>
+      </index>
+      <index name="dogodki_razred">
+        <index-field name="razred"/>
+      </index>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\Dogodki</attribute>
+        <attribute name="export-file-name">Dogodek.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Koledar\Entity\Dogodek" to="\Koledar\Entity\Predstava" owner-alias="dogodek" inverse-alias="predstava" many-owner="false" many-inverse="false" uuid="3d2a769e-0363-4843-9df0-9699d56befc3">
+      <association-field from="predstava_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\Koledar\Entity\Dogodek" to="\Koledar\Entity\Zasedenost" owner-alias="dogodek" inverse-alias="zasedenost" many-owner="false" many-inverse="false" uuid="ba86b03d-462b-4ad4-a3c5-9f2b6d6bf5c2">
+      <association-field from="zasedenost_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\Koledar\Entity\Dogodek" to="\Koledar\Entity\Vaja" owner-alias="dogodek" inverse-alias="vaja" many-owner="false" many-inverse="false" uuid="79a187e1-b991-463b-94ae-5e7880dbdd41">
+      <association-field from="vaja_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\Koledar\Entity\Dogodek" to="\Koledar\Entity\Gostovanje" owner-alias="dogodek" inverse-alias="gostovanje" many-owner="false" many-inverse="false" uuid="c9c067d2-c0e3-44c3-b944-1f7c6ac25fe8">
+      <association-field from="gostovanje_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\Koledar\Entity\Dogodek" to="\Koledar\Entity\DogodekSplosni" owner-alias="dogodek" inverse-alias="splosni" many-owner="false" many-inverse="false" uuid="63c9ea48-42dc-4a29-a943-00f0da240729">
+      <association-field from="dogodek_splosni_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\Koledar\Entity\Dogodek" to="\Prodaja\Entity\Prostor" owner-alias="" inverse-alias="prostor" many-owner="false" many-inverse="false" uuid="ef0c1218-75fa-4ce4-916d-bd8aadbde0fc">
+      <association-field from="prostor_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\Koledar\Entity\Dogodek" to="\Koledar\Entity\Sezona" owner-alias="dogodki" inverse-alias="sezona" many-owner="true" many-inverse="false" uuid="77555b3d-ec61-41e5-9184-f9dada431ec6">
+      <association-field from="sezona_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\Koledar\Entity\DogodekSplosni" local-name="DogodekSplosni" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="28204dd1-6170-4029-8314-db3c596dacd2">
+      <field name="id" type="guid" required="true" primary="true" uuid="a222efea-697d-4c73-bdad-d640d8263d7b">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\DogodkiSplosni</attribute>
+        <attribute name="export-file-name">DogodekSplosni.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Koledar\Entity\Gostovanje" local-name="Gostovanje" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="f1a9b2d9-bcb6-41f2-97d9-53a404a3c484">
+      <field name="id" type="guid" required="true" primary="true" uuid="399a53ee-10d3-4372-8194-9b0c041b66c3">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="vrsta" type="string" uuid="d1d49147-e7a7-4f5f-8cba-df624c9f1a0e"/>
+      <field name="zamejstvo" type="boolean" uuid="b891efaf-e958-431e-82d2-f25a99b4314a"/>
+      <field name="kraj" type="string" uuid="16f2aafc-4e20-468e-9b65-3337da3d09c5"/>
+      <field name="drzava_id" required="true" uuid="d2b3db86-ff93-4449-ab7c-518a09cda2ed"/>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\Gostovanja</attribute>
+        <attribute name="export-file-name">Gostovanje.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Koledar\Entity\Gostovanje" to="\App\Entity\Drzava" owner-alias="" inverse-alias="drzava" many-owner="true" many-inverse="false" parent-required="true" uuid="1678b952-8a42-4861-bfe1-ae84552a77d1">
+      <association-field from="drzava_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\Koledar\Entity\Predstava" local-name="Predstava" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="9a842339-af43-4e43-9450-b6fcfdbb5a21">
+      <field name="id" type="guid" required="true" primary="true" uuid="0264eef5-66d1-4c1c-b5df-7818c2e2bee0">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="uprizoritev_id" uuid="adad7ee0-b165-4240-8af1-372222e8ff6d"/>
+      <field name="gostovanje_id" uuid="a275cadc-b2b0-4458-a73c-702a892c6054"/>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\Predstave</attribute>
+        <attribute name="export-file-name">Predstava.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Koledar\Entity\Predstava" to="\Produkcija\Entity\Uprizoritev" owner-alias="predstave" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" uuid="a0c6fe03-c72a-4455-bd3e-99c46646aa14">
+      <association-field from="uprizoritev_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\Koledar\Entity\Predstava" to="\Koledar\Entity\Gostovanje" owner-alias="predstave" inverse-alias="gostovanje" many-owner="true" many-inverse="false" uuid="7fa0b951-e502-4d1a-b5d8-7d9c1d364912">
+      <association-field from="gostovanje_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\Koledar\Entity\Sezona" local-name="Sezona" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="54a9c3a7-a392-4541-a046-95d1ff41e74f">
+      <field name="id" type="guid" required="true" primary="true" uuid="9ca0aa9b-6108-4d32-ac68-8b7f57490a5d">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="sifra" type="string" required="true" unique="true" uuid="52d57460-70af-41a7-bf01-c0172016970d"/>
+      <field name="ime" type="string" uuid="22937ce6-0d69-4acf-a360-148bfd7e6942"/>
+      <field name="zacetek" type="date" uuid="31f1d983-fbab-468f-806d-90a61a096572"/>
+      <field name="konec" type="date" uuid="5219efc3-716a-48aa-af5a-f0c52a390fa9"/>
+      <field name="aktivna" type="boolean" uuid="6aca5411-974c-47a4-8dad-5a1fc8fcf074"/>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\Sezone</attribute>
+        <attribute name="export-file-name">Sezona.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Koledar\Entity\Vaja" local-name="Vaja" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="e96fb6a2-f01b-4dc1-aeea-cadf6587c5e6">
+      <field name="id" type="guid" required="true" primary="true" uuid="10dc7ae7-6662-4604-ab78-f1623ea99317">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="vrsta" type="string" uuid="0d34fed6-0b7b-4ab3-b4bf-fb92cbe2e60e"/>
+      <field name="zaporedna" type="integer" uuid="ab864471-4c7b-4a07-be59-3383f6ab481e"/>
+      <field name="porocilo" type="text" uuid="e2572e5a-267f-4662-83f1-8845318c4cd3"/>
+      <field name="uprizoritev_id" uuid="106e9b84-c509-4f0f-afcd-b0203eeb02a4"/>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\Vaje</attribute>
+        <attribute name="export-file-name">Vaja.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Koledar\Entity\Vaja" to="\Produkcija\Entity\Uprizoritev" owner-alias="vaje" inverse-alias="uprizoritev" many-owner="true" many-inverse="false" uuid="8d281d50-03d9-4235-9b55-167c360ded1d">
+      <association-field from="uprizoritev_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\Koledar\Entity\Zasedenost" local-name="Zasedenost" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="39d63a5f-6c5b-4234-960d-75bc24749044">
+      <field name="id" type="guid" required="true" primary="true" uuid="4812a657-b510-453e-b096-218728765ebf">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\Zasedenosti</attribute>
+        <attribute name="export-file-name">Zasedenost.php</attribute>
+      </orm-attributes>
+    </entity>
+  </module>
+  <visual-data>
+    <entity uuid="28204dd1-6170-4029-8314-db3c596dacd2" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="205" position-y="40" size-x="0" size-x2="145" size-y="0" size-y2="31"/>
+    <entity uuid="39d63a5f-6c5b-4234-960d-75bc24749044" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="400" position-y="321" size-x="0" size-x2="124" size-y="0" size-y2="31"/>
+    <entity uuid="54a9c3a7-a392-4541-a046-95d1ff41e74f" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="40" position-y="321" size-x="0" size-x2="105" size-y="0" size-y2="101"/>
+    <entity uuid="8e1b53bc-ffff-4e5f-9fd2-ada9c6b1028f" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="27" position-y="40" size-x="0" size-x2="131" size-y="0" size-y2="241"/>
+    <entity uuid="9a842339-af43-4e43-9450-b6fcfdbb5a21" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="589" position-y="40" size-x="0" size-x2="117" size-y="0" size-y2="59"/>
+    <entity uuid="e96fb6a2-f01b-4dc1-aeea-cadf6587c5e6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="226" position-y="321" size-x="0" size-x2="102" size-y="0" size-y2="87"/>
+    <entity uuid="f1a9b2d9-bcb6-41f2-97d9-53a404a3c484" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="401" position-y="40" size-x="0" size-x2="123" size-y="0" size-y2="87"/>
+    <module uuid="a98fc9d6-b4c5-410b-b7a2-82e591e301b6" bg-color="#FEEFE3" size-x="0" size-x2="740" size-y="0" size-y2="582"/>
+  </visual-data>
+</skipper>
