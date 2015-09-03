@@ -305,11 +305,11 @@ class AlternacijaCest
      */
     public function update(ApiTester $I)
     {
-        $ent           = $this->obj;
+        $ent           = $I->successfullyGet($this->restUrl, $this->obj['id']);
         $ent['opomba'] = 'uu';
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
-
+        codecept_debug($entR);
         $I->assertEquals($entR['opomba'], 'uu');
     }
 
@@ -324,11 +324,12 @@ class AlternacijaCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertGuid($ent['id']);
+        $I->assertNotEmpty($ent['sifra']);
         $I->assertEquals($ent['zacetek'], '2010-02-01T00:00:00+0100');
         $I->assertEquals($ent['konec'], '2020-02-01T00:00:00+0100');
         $I->assertEquals($ent['opomba'], 'uu');
         $I->assertEquals($ent['sort'], 1);
-        $I->assertEquals($ent['privzeti'], true);
+        $I->assertEquals($ent['privzeti'], FALSE, "privzeti");      //vmes se je spremenilo
         $I->assertEquals($ent['aktivna'], true, "aktivna");
         $I->assertEquals($ent['funkcija']['id'], $this->lookFunkcija['id']);
         $I->assertEquals($ent['zaposlitev'], $this->objZaposlitev['id'], "zaposlitev");
@@ -514,7 +515,7 @@ class AlternacijaCest
 
         // kreiramo enega z nastavljenim poljem 'pomembna'
         $data = [
-            'pomembna'   => FALSE,     // nalašč brez parametra pomembna
+            'pomembna'   => FALSE, // nalašč brez parametra pomembna
             'zaposlen'   => false, // v validaciji postavimo na true, če je zaposlitev
             'zacetek'    => '2010-02-01T00:00:00+0100',
             'konec'      => '2020-02-01T00:00:00+0100',
@@ -534,6 +535,51 @@ class AlternacijaCest
         // še enkrat preverimo z get za vsak slučaj
         $ent = $I->successfullyGet($this->restUrl, $ent['id']);
         $I->assertFalse($ent['pomembna'], 'po read:default za pomembna');
+    }
+
+    /**
+     * Preverja validacijo.
+     * Če je pri eni alternaciji Privzeto nastavljeno na true, 
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateAzurirajPrivzeto(ApiTester $I)
+    {
+        // nastavimo enega na true
+        $ent             = $this->obj2;
+        $ent['privzeti'] = TRUE;
+        $this->obj2      = $ent             = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        codecept_debug($ent);
+        $I->assertTrue($ent['privzeti']);
+
+
+        // nastavimo drugega na true -> prejšnji bi se moral postaviti na false
+        $ent             = $this->obj3;
+        $ent['privzeti'] = TRUE;
+        $ent             = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $ent             = $I->successfullyGet($this->restUrl, $this->obj3['id']);
+        $I->assertTrue($ent['privzeti']);
+
+
+        // ali se je prejšnji postavil na false?
+        $ent = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        codecept_debug($ent);
+        $I->assertFalse($ent['privzeti'], 'privzeti prestavljen na false?');
+    }
+
+    /**
+     * brisanje zapisa , ki ima nastavljeno privzeti
+     * 
+     * @depends updateAzurirajPrivzeto
+     */
+    public function deletePrivzetega(ApiTester $I)
+    {
+        $ent = $I->successfullyGet($this->restUrl, $this->obj3['id']);
+        $I->assertTrue($ent['privzeti']);
+
+        $I->successfullyDelete($this->restUrl, $ent['id']);
+        $I->failToGet($this->restUrl, $ent['id']);
     }
 
 }

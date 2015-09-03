@@ -154,7 +154,7 @@ class Alternacija
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    protected $pomembna=true;
+    protected $pomembna = true;
 
     public function __construct()
     {
@@ -211,6 +211,23 @@ class Alternacija
                 $this->expect($konec >= $zacetek
                         , 'Konec ne sme biti pred začetkom'
                         , 1000337);
+            }
+        }
+
+        if ($this->privzeti) {
+            // le ena alternacija je lahko privzeta
+            // postavi privzeto ostalih alternacij iste funkcije na false:
+            $idAlt = $this->id;
+            if ($this->getFunkcija()) {
+                $this->getFunkcija()->getAlternacije()
+                        ->map(function($alt) use(&$idAlt) {
+                            return $alt->setPrivzeti($alt->getId()===$idAlt ? true : false);
+                        });
+
+                /**
+                 * $$ še implementiraj
+                 */
+                $this->getFunkcija()->setPrivzeti($this);
             }
         }
     }
