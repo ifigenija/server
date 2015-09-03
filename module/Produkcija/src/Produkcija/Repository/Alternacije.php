@@ -111,6 +111,10 @@ class Alternacije
      */
     public function create($object, $params = null)
     {
+        if ($object->getFunkcija()) {
+            $object->getFunkcija()->getAlternacije()->add($object);
+        }
+
         if (empty($object->getSifra())) {
             $num = $this->getServiceLocator()->get('stevilcenje.generator');
             $object->setSifra($num->generate('alternacija'));
@@ -119,6 +123,8 @@ class Alternacije
         $object->preracunaj();
 
         $this->preveriZaposlitev($object);
+        $this->nastaviEnPrivzeti($object->getFunkcija());
+
         parent::create($object, $params);
     }
 
@@ -130,8 +136,9 @@ class Alternacije
     public function update($object, $params = null)
     {
         $this->preveriZaposlitev($object);
-        
+
         $object->preracunaj();
+        $this->nastaviEnPrivzeti($object->getFunkcija());
 
         parent::update($object, $params);
     }
@@ -139,7 +146,7 @@ class Alternacije
     /**
      * Preverim če ima oseba veljavno zaposlitev,
      * potem jo samodejno povežem z zaposlitvijo
-     * @param Alternacija $alternacija
+     * @param entity $alternacija
      */
     public function preveriZaposlitev(Alternacija $alternacija)
     {
@@ -160,6 +167,38 @@ class Alternacije
                 }
             }
             $alternacija->setZaposlen(false);
+        }
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function delete($object)
+    {
+        if ($object->getFunkcija()) {
+            $object->getFunkcija()->getAlternacije()->removeElement($object);
+        }
+        $this->nastaviEnPrivzeti($object->getFunkcija());
+        parent::delete($object);
+    }
+
+    /**
+     * če nima nobena funkcija alternacije nastavljenega privzeti na true 
+     * in če collection ni prazen
+     * potem nastavi prvega v collection-u
+     * 
+     * @param entity $funkcija
+     */
+    public function nastaviEnPrivzeti(\Produkcija\Entity\Funkcija $funkcija)
+    {
+        if ($funkcija && $funkcija->getAlternacije()->count() >= 1 && !($funkcija->getAlternacije()->exists(function($key, $alt) use(&$id) {
+                    return $alt->getPrivzeti(); //vrne true, če obstaja vsaj ena alternacija s privzeti
+                }))) {
+            $altPr = $funkcija->getAlternacije()->first();
+            $altPr->setPrivzeti(true);
+            $funkcija->setPrivzeti($altPr);
         }
     }
 

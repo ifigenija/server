@@ -68,7 +68,7 @@ class ZvrstiUprizoritve
          */
         if (empty($object->getSifra())) {
             $num = $this->getServiceLocator()->get('stevilcenje.generator');
-            $object->setSifra($num->generate('alternacija'));
+            $object->setSifra($num->generate('zvrstuprizoritve'));
         }
 
         parent::create($object, $params);
