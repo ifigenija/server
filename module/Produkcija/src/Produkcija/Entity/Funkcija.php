@@ -72,7 +72,7 @@ class Funkcija
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="funkcija.velikost", description="funkcija.d.velikost")
-     * @Max\Ui(type="select", opts="funkcija.velikost", empty="Izberite velikost vloge")
+     * @Max\Ui(type="optionalselect", opts="funkcija.velikost", empty="Izberite velikost vloge", required=false)
      * @var string
      */
     protected $velikost;
