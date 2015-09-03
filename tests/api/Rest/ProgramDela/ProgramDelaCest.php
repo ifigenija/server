@@ -271,6 +271,7 @@ class ProgramDelaCest
         $I->assertEquals($ent['naziv'], 'bb');
     }
 
+    
     /**
      * spremenim zapis
      * 
@@ -611,7 +612,6 @@ class ProgramDelaCest
         $this->objProgramGostujoca1 = $ent                        = $I->successfullyCreate($this->programGostujocaUrl, $data);
         $I->assertGuid($ent['id']);
     }
-
     /**
      * @depends create
      * @param ApiTester $I
@@ -623,19 +623,18 @@ class ProgramDelaCest
 //        $I->assertNotEmpty($resp);
 //        $I->seeResponseIsJson();
 ////        $I->assertGreaterThanOrEqual(9999, $resp['Do']['avtorskiHonorarji'], "avtorski do");
-//        $I->assertGreaterThanOrEqual(0, $resp['premiere']['H.1']['vrednost'],"['premiere']['H.1']");
-//        $I->assertGreaterThanOrEqual(0, $resp['premiere']['2.0']['vrednost'],"['premiere']['2.0']");
-//        $I->assertGreaterThanOrEqual(0, $resp['premiere']['2.1']['vrednost'],"['premiere']['2.1']");
-//        $I->assertGreaterThanOrEqual(0, $resp['premiere']['T.0']['vrednost'],"['premiere']['T.0']");
-//        $I->assertGreaterThanOrEqual(0, $resp['premiere']['T.1']['vrednost'],"['premiere']['T.1']");
-//        $I->assertGreaterThanOrEqual(0, $resp['premiere']['T.2']['vrednost'],"['premiere']['T.2']");
-//        $I->assertGreaterThanOrEqual(0, $resp['premiere']['Skupaj']['vrednost'],"['premiere']['Skupaj']");
-//        $I->assertGreaterThanOrEqual(0, $resp['ponovitvePremier']['Skupaj']['vrednost'],"['ponovitvePremier']['Skupaj']");
-//        $I->assertGreaterThanOrEqual(0, $resp['ponovitvePrejsnjih']['Skupaj']['vrednost'],"['ponovitvePremier']['Skupaj']");
+//        $I->assertGreaterThanOrEqual(0, $resp['H.1']['vrednost']['premiere'],"['premiere']['H.1']");
+//        $I->assertGreaterThanOrEqual(0, $resp['2.0']['vrednost']['premiere'],"['premiere']['2.0']");
+//        $I->assertGreaterThanOrEqual(0, $resp['2.1']['vrednost']['premiere'],"['premiere']['2.1']");
+//        $I->assertGreaterThanOrEqual(0, $resp['T.0']['vrednost']['premiere'],"['premiere']['T.0']");
+//        $I->assertGreaterThanOrEqual(0, $resp['T.1']['vrednost']['premiere'],"['premiere']['T.1']");
+//        $I->assertGreaterThanOrEqual(0, $resp['T.2']['vrednost']['premiere'],"['premiere']['T.2']");
+//        $I->assertGreaterThanOrEqual(0, $resp['Skupaj']['vrednost']['premiere'],"['premiere']['Skupaj']");
+//        $I->assertGreaterThanOrEqual(0, $resp['Skupaj']['vrednost']['ponovitvePremier'],"['ponovitvePremier']['Skupaj']");
+//        $I->assertGreaterThanOrEqual(0, $resp['Skupaj']['vrednost']['ponovitvePrejsnjih'],"['ponovitvePrejsnjih']['Skupaj']");
 //
 //        $I->assertTrue(false, "začasno");
 //    }
-
     /**
      *  kreiramo zapis
      * 
@@ -2237,21 +2236,21 @@ class ProgramDelaCest
         codecept_debug($resp);
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
-        $I->assertGreaterThanOrEqual(726.2, $resp['premiere']['2.0']['vrednost'], "['premiere']['2.0']");
-        $I->assertGreaterThanOrEqual(726.2, $resp['premiere']['2.1']['vrednost'], "['premiere']['2.1']");
-        $I->assertGreaterThanOrEqual(40, $resp['premiere']['H.1']['vrednost'], "['premiere']['H.1']");
-        $I->assertGreaterThanOrEqual(330, $resp['premiere']['T.0']['vrednost'], "['premiere']['T.0']");
-        $I->assertGreaterThanOrEqual(300, $resp['premiere']['T.1']['vrednost'], "['premiere']['T.1']");
-        $I->assertGreaterThanOrEqual(30, $resp['premiere']['T.2']['vrednost'], "['premiere']['T.2']");
-        $I->assertGreaterThanOrEqual(1096.2, $resp['premiere']['Skupaj']['vrednost'], "['premiere']['Skupaj']");
+        $I->assertGreaterThanOrEqual(726.2, $resp['2.0']['vrednost']['premiere'], "['premiere']['2.0']");
+        $I->assertGreaterThanOrEqual(726.2, $resp['2.1']['vrednost']['premiere'], "['premiere']['2.1']");
+        $I->assertGreaterThanOrEqual(40, $resp['H.1']['vrednost']['premiere'], "['premiere']['H.1']");
+        $I->assertGreaterThanOrEqual(330, $resp['T.0']['vrednost']['premiere'], "['premiere']['T.0']");
+        $I->assertGreaterThanOrEqual(300, $resp['T.1']['vrednost']['premiere'], "['premiere']['T.1']");
+        $I->assertGreaterThanOrEqual(30, $resp['T.2']['vrednost']['premiere'], "['premiere']['T.2']");
+        $I->assertGreaterThanOrEqual(1096.2, $resp['Skupaj']['vrednost']['premiere'], "['premiere']['Skupaj']");
 //        $I->assertGreaterThanOrEqual(1080, $resp['ponovitvePremier']['Skupaj']['vrednost'],"['ponovitvePremier']['Skupaj']");
 //        $I->assertGreaterThanOrEqual(747.9, $resp['ponovitvePrejsnjih']['Skupaj']['vrednost'],"['ponovitvePremier']['Skupaj']");
-        $I->assertGreaterThanOrEqual(1461  , $resp['ponovitvePremier']['Skupaj']['vrednost'], "['ponovitvePremier']['Skupaj']");
-        $I->assertGreaterThanOrEqual(930   , $resp['ponovitvePremier']['H.1']['vrednost'], "['ponovitvePremier']['H.1']");
-        $I->assertGreaterThanOrEqual(876.6 , $resp['ponovitvePrejsnjih']['Skupaj']['vrednost'], "['ponovitvePrejsnjih']['Skupaj']");
-        $I->assertGreaterThanOrEqual(558   , $resp['ponovitvePrejsnjih']['H.1']['vrednost'], "['ponovitvePrejsnjih']['H.1']");
-        $I->assertGreaterThanOrEqual(1022.7, $resp['gostovanjaZamejstvo']['Skupaj']['vrednost'], "['gostovanjaZamejstvo']['Skupaj']");
-        $I->assertGreaterThanOrEqual(651   , $resp['gostovanjaZamejstvo']['H.1']['vrednost'], "['gostovanjaZamejstvo']['H.1']");
+        $I->assertGreaterThanOrEqual(1461  , $resp['Skupaj']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['Skupaj']");
+        $I->assertGreaterThanOrEqual(930   , $resp['H.1']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['H.1']");
+        $I->assertGreaterThanOrEqual(876.6 , $resp['Skupaj']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['Skupaj']");
+        $I->assertGreaterThanOrEqual(558   , $resp['H.1']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['H.1']");
+        $I->assertGreaterThanOrEqual(1022.7, $resp['Skupaj']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['Skupaj']");
+        $I->assertGreaterThanOrEqual(651   , $resp['H.1']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['H.1']");
     }
 
 }
