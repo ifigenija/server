@@ -237,7 +237,6 @@ class ProgramDelaCest
             'zacetek'          => '2015-02-01T00:00:00+01:00',
             'konec'            => '2016-02-01T00:00:00+0100',
             'potrjenProgram'   => false,
-            'sezona'           => null,
             'avgZasedDvoran'   => 7.89,
             'avgCenaVstopnice' => 7.89,
             'stProdVstopnic'   => 7,
@@ -262,7 +261,6 @@ class ProgramDelaCest
             'zacetek'        => '2016-01-01T00:00:00+0100',
             'konec'          => '2017-02-01T00:00:00+0100',
             'potrjenProgram' => TRUE,
-            'sezona'         => null,
 //            'vrPS1Mat'       => 7.89,
 //            'vrPS1GostovSZ'  => 7.89,
         ];
@@ -306,7 +304,6 @@ class ProgramDelaCest
         $I->assertEquals($ent['zacetek'], '2015-02-01T00:00:00+0100');
         $I->assertEquals($ent['konec'], '2016-02-01T00:00:00+0100');
         $I->assertEquals($ent['potrjenProgram'], false);
-        $I->assertEquals($ent['sezona'], null);
         $I->assertEquals($ent['avgZasedDvoran'], 7.89);
         $I->assertEquals($ent['avgCenaVstopnice'], 7.89);
         $I->assertEquals($ent['stProdVstopnic'], 7);

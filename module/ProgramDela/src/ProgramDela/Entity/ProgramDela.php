@@ -122,15 +122,6 @@ class ProgramDela
     protected $programiRazno;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona")
-     * @ORM\JoinColumn(name="sezona_id", referencedColumnName="id")
-     * @Max\I18n(label="programDela.sezona", description="programDela.d.sezona")
-     * @Max\Ui(type="toone", required=true)
-     * @var \Koledar\Entity\Sezona
-     */
-    protected $sezona;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="programDela.stPremier", description="programDela.d.stPremier")
      * @Max\Ui(type="integer")
@@ -1085,7 +1076,6 @@ class ProgramDela
             $this->prerStKopr($object);
         }
 
-
         /**
          * ponovitve prejšnjih sezon
          */
@@ -1414,11 +1404,6 @@ class ProgramDela
     public function getProgramiRazno()
     {
         return $this->programiRazno;
-    }
-
-    public function getSezona()
-    {
-        return $this->sezona;
     }
 
     public function getStPremier()
@@ -1948,12 +1933,6 @@ class ProgramDela
     public function setProgramiRazno($programiRazno)
     {
         $this->programiRazno = $programiRazno;
-        return $this;
-    }
-
-    public function setSezona(\Koledar\Entity\Sezona $sezona = null)
-    {
-        $this->sezona = $sezona;
         return $this;
     }
 
