@@ -23,7 +23,7 @@ class VrsteStroska
 
     protected $sortOptions = [
         "default" => [
-            "naziv" => ["alias" => "p.naziv"],
+            "skupina" => ["alias" => "p.skupina"],
         ],
     ];
 
