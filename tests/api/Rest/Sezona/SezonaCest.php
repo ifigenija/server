@@ -40,7 +40,7 @@ class SezonaCest
     private $lookupSezonaUrl = '/lookup/sezona';
     private $lookUprizoritev1;
     private $lookUprizoritev2;
-    private $zasedenostUrl = '/rest/zasedenost';
+    private $zasedenostUrl   = '/rest/zasedenost';
     private $objZasedenost;
 
     public function _before(ApiTester $I)
@@ -169,11 +169,11 @@ class SezonaCest
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
             'status'          => '100',
-            'razred'          => '500',
+            'razred'          => '200',
             'termin'          => 'zz',
             'ime'             => 'zz',
             'predstava'       => null,
-            'zasedenost'      => $this->objZasedenost['id'],
+            'zasedenost'      => null,
             'vaja'            => $this->objVaja1['id'],
             'gostovanje'      => null,
             'dogodekIzven'    => null,
@@ -194,7 +194,7 @@ class SezonaCest
             'ime'             => 'aa',
             'predstava'       => null,
             'zasedenost'      => $this->objZasedenost['id'],
-            'vaja'            => $this->objVaja2['id'],
+            'vaja'            => null,
             'gostovanje'      => null,
             'dogodekIzven'    => null,
             'prostor'         => null,

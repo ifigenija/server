@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\Dogodek;
+namespace Rest\Koledar\Dogodek;
 
 use ApiTester;
 
