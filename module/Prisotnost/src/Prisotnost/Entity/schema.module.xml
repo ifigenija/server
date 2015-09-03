@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<skipper version="3.2.3.1247" mvc="Zend Framework" orm="Doctrine2">
+  <module name="\../NetBeansProjects/ifiServer/module/Prisotnost/src/Prisotnost/Entity" local-name="../NetBeansProjects/ifiServer/module/Prisotnost/src/Prisotnost/Entity" namespace="\" export-format="Doctrine2Php" export-path="." uuid="752a90c6-042e-47f8-8d83-3f0f48e6bb96">
+    <entity name="\Prisotnost\Entity\TerminStoritve" local-name="TerminStoritve" namespace="\Prisotnost\Entity" local-namespace="\Prisotnost\Entity" uuid="f88fe2c2-b2da-437f-98b7-53bdc1cddc87">
+      <field name="id" type="guid" required="true" primary="true" uuid="bb5de7d7-705e-4459-8e6a-46479069b845">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="planiranZacetek" type="datetime" uuid="6976e4f5-a530-48ca-aa76-b85a8775d648"/>
+      <field name="planiranKonec" type="datetime" uuid="9b1154cf-a822-47b4-8f7c-20aa62239d1a"/>
+      <field name="zacetek" type="datetime" uuid="6e974a49-8068-439c-9c43-7e8358410e93"/>
+      <field name="konec" type="datetime" uuid="bf642cf8-1cba-4ddd-a815-8f3458ab1394"/>
+      <field name="planiranoTraja" type="decimal" uuid="163e6ed7-f667-4b28-86ef-135286d039b2">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">15</attribute>
+        </orm-attributes>
+      </field>
+      <field name="dogodek_id" uuid="46e01025-333c-41fc-9988-301b86886fe3"/>
+      <field name="alternacija_id" uuid="1c560704-c80c-4422-b588-0fc383647ac5"/>
+      <field name="oseba_id" required="true" uuid="d3dc7ea5-43d9-4ea5-a5df-61f342ed23e1"/>
+      <orm-attributes>
+        <attribute name="repository-class">Prisotnost\Repository\TerminiStoritve</attribute>
+        <attribute name="export-file-name">TerminStoritve.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Prisotnost\Entity\TerminStoritve" to="\Koledar\Entity\Dogodek" owner-alias="terminiStoritve" inverse-alias="dogodek" many-owner="true" many-inverse="false" uuid="87342669-a95b-4cdf-b213-84ad5a237f27">
+      <association-field from="dogodek_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\Prisotnost\Entity\TerminStoritve" to="\Produkcija\Entity\Alternacija" owner-alias="storitve" inverse-alias="alternacija" many-owner="true" many-inverse="false" uuid="bd67f63c-cf21-45a3-b2fe-37a6136de4cd">
+      <association-field from="alternacija_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse">
+          <attribute name="fetch">EXTRA_LAZY</attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
+    <association from="\Prisotnost\Entity\TerminStoritve" to="\App\Entity\Oseba" owner-alias="" inverse-alias="oseba" many-owner="true" many-inverse="false" parent-required="true" uuid="df045f1f-4ea0-4361-b22e-9fb6e9ff9796">
+      <association-field from="oseba_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+  </module>
+  <visual-data>
+    <entity uuid="f88fe2c2-b2da-437f-98b7-53bdc1cddc87" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="40" size-x="0" size-x2="148" size-y="0" size-y2="143"/>
+    <module uuid="752a90c6-042e-47f8-8d83-3f0f48e6bb96" bg-color="#FDEBEF" size-x="0" size-x2="188" size-y="0" size-y2="203"/>
+  </visual-data>
+</skipper>

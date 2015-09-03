@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<skipper version="3.2.3.1247" mvc="Zend Framework" orm="Doctrine2">
+  <module name="\../NetBeansProjects/ifiServer/module/Abonmaji/src/Abonmaji/Entity" local-name="../NetBeansProjects/ifiServer/module/Abonmaji/src/Abonmaji/Entity" namespace="\" export-format="Doctrine2Php" export-path="." uuid="8f52212a-5139-4d8d-9a76-96576e80efd2">
+    <entity name="\Abonmaji\Entity\Abonma" local-name="Abonma" namespace="\Abonmaji\Entity" local-namespace="\Abonmaji\Entity" uuid="46cff744-a13c-4dc3-a6ac-48d9fba1046f">
+      <field name="id" type="guid" required="true" primary="true" uuid="e5b37a0b-fa50-4b79-9a51-f0c83462f744">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="stPredstav" type="integer" uuid="76b544cd-d3e3-42a3-b57c-dfb24c19d6dc"/>
+      <field name="stKuponov" type="integer" uuid="f6b100c0-0c87-401a-a8f5-fb9ce312cbc4"/>
+      <field name="ime" type="string" size="40" uuid="c058acf0-4946-4e6c-a0a3-1aed0f170f7a"/>
+      <field name="opis" type="text" uuid="390973b2-205f-4833-a1a0-a75689145cf0"/>
+      <field name="kapaciteta" type="integer" uuid="a06d0f90-d471-4009-a490-7733f8505dc8"/>
+      <orm-attributes>
+        <attribute name="repository-class">Abonmaji\Repository\Abonmaji</attribute>
+        <attribute name="export-file-name">Abonma.php</attribute>
+      </orm-attributes>
+    </entity>
+  </module>
+  <visual-data>
+    <entity uuid="46cff744-a13c-4dc3-a6ac-48d9fba1046f" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="40" size-x="0" size-x2="117" size-y="0" size-y2="101"/>
+    <module uuid="8f52212a-5139-4d8d-9a76-96576e80efd2" bg-color="#E7F3E7" size-x="0" size-x2="157" size-y="0" size-y2="161"/>
+  </visual-data>
+</skipper>

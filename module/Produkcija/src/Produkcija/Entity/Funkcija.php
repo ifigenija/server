@@ -72,7 +72,7 @@ class Funkcija
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="funkcija.velikost", description="funkcija.d.velikost")
-     * @Max\Ui(type="optionalselect", opts="funkcija.velikost", empty="Izberite velikost vloge", required=false)
+     * @Max\Ui(type="optionalselect", opts="funkcija.velikost", empty="Velikost ni določena")
      * @var string
      */
     protected $velikost;
@@ -162,6 +162,9 @@ class Funkcija
     public function validate($mode = 'update')
     {
         $this->setPodrocje($this->getTipFunkcije()->getPodrocje());
+        if ($this->podrocje === "igralec") {
+            $this->expect($this->velikost, "Za igralce je velikost vloge obvezen podatek", 1000566);
+        }
     }
 
     /**

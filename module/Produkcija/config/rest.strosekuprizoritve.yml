@@ -4,17 +4,7 @@ type: rest
 entityClass: Produkcija\Entity\StrosekUprizoritve
 forms:
     default: 
-        elements:
-#            - id
-            - naziv
-            - vrednostDo
-            - vrednostNa
-            - opis
-            - tipstroska
-            - vrstaStroska
-            - sort
-            - uprizoritev
-            - popa
+        class: Produkcija\Form\StrosekForm
 lists:
     default: 
         filter:

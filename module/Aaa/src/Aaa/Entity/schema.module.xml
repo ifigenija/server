@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<skipper version="3.2.3.1247" mvc="Zend Framework" orm="Doctrine2">
+  <module name="\../NetBeansProjects/ifiServer/module/Aaa/src/Aaa/Entity" local-name="../NetBeansProjects/ifiServer/module/Aaa/src/Aaa/Entity" namespace="\" export-format="Doctrine2Php" export-path="." uuid="d9f46216-7518-4f50-995a-a6ffe8dd0049">
+    <entity name="\Aaa\Entity\Permission" local-name="Permission" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" uuid="ee4183b0-61c8-43fb-9232-3e8ee99a5ced">
+      <field name="id" type="guid" required="true" primary="true" uuid="cbb0a299-dde3-48c7-8637-29a1448b3bdb">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="name" size="150" uuid="c2a06651-3f5f-4a96-9282-76968bd6fa03"/>
+      <field name="description" type="text" uuid="004790cd-e2f9-401a-ac98-f5cd105ca243"/>
+      <field name="builtIn" type="boolean" uuid="83917e85-3c88-4ebc-845e-021276bb2b3d"/>
+      <orm-attributes>
+        <attribute name="repository-class">Aaa\Repository\Permissions</attribute>
+        <attribute name="export-file-name">Permission.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Aaa\Entity\Revizija" local-name="Revizija" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" uuid="c4603812-39ee-4b0d-899a-1fdafc17b6e9">
+      <field name="id" type="integer" required="true" primary="true" uuid="1c70e355-26f7-40fe-b2f7-1af9a9a024d0">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">IDENTITY</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="razred" size="100" required="true" uuid="90c1a769-bc75-4883-977f-e5b23264554e"/>
+      <field name="objectId" type="guid" uuid="1f420b8b-635c-4a7b-ad99-91c45e2d87a9"/>
+      <field name="upor" type="guid" uuid="aa93f9b2-97bd-413e-b36b-85270bf9d47a"/>
+      <field name="datum" type="datetime" required="true" uuid="1a5db782-f042-4a5f-a3f4-74681ce0fdf2"/>
+      <field name="tip" size="3" required="true" uuid="1cbd0a20-90ce-4ff5-98bf-4441da7b9c81"/>
+      <field name="data" type="text" required="true" uuid="5cc1b0a0-759e-49b0-b20f-a5595390a31b"/>
+      <orm-attributes>
+        <attribute name="repository-class">Aaa\Repository\Revizije</attribute>
+        <attribute name="table">revizije</attribute>
+        <attribute name="export-file-name">Revizija.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Aaa\Entity\Role" local-name="Role" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" uuid="3c5d5082-2ca2-4582-83af-72d4e77c8f1c">
+      <field name="id" type="guid" required="true" primary="true" uuid="9034805a-e353-4962-b662-ad341685e3b6">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="name" size="150" unique="true" uuid="e2a3ff65-8a16-419b-9ad4-9d2ff0fda139"/>
+      <field name="description" type="text" uuid="594f1ea7-3755-4ed1-870f-03cf56628668"/>
+      <field name="builtIn" type="boolean" uuid="ace3e4c7-577c-44c5-9806-0a4d7b5810f5"/>
+      <orm-attributes>
+        <attribute name="repository-class">Aaa\Repository\Roles</attribute>
+        <attribute name="export-file-name">Role.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Aaa\Entity\Permission2Role" local-name="Permission2Role" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" uuid="526f5233-d9fa-4e89-9f5d-e27d651863eb">
+      <field name="id" type="integer" required="true" unique="true" primary="true" uuid="67f3f2b0-4281-4ce8-b12f-b3923f2ff9c7"/>
+      <field name="role_id" required="true" uuid="96ee9230-7bf4-44d1-aaa9-7b36c9cdecff"/>
+      <field name="permission_id" required="true" uuid="b6597e74-b119-435e-bb51-ab25e21fe3e4"/>
+    </entity>
+    <many-to-many mn-entity="\Aaa\Entity\Permission2Role" uuid="884369de-148e-4b10-a286-200627428f1b">
+      <many-to-many-entity name="\Aaa\Entity\Role" owning-side="true" alias="roles" uuid="8fd2c569-f351-4b26-b9d7-5a297d0c38c4">
+        <many-to-many-field from="role_id" to="id"/>
+      </many-to-many-entity>
+      <many-to-many-entity name="\Aaa\Entity\Permission" owning-side="false" alias="permissions" uuid="579ee777-13a7-4b07-972f-27ad99894f26">
+        <many-to-many-field from="permission_id" to="id"/>
+      </many-to-many-entity>
+    </many-to-many>
+    <entity name="\Aaa\Entity\User" local-name="User" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" uuid="ce52b1f1-1edb-4463-a15e-fd7b635c292b">
+      <field name="id" type="guid" required="true" primary="true" uuid="621b6fb4-4b31-4493-ada5-96492f870300">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="name" type="string" required="true" uuid="bf8689b6-5a89-4cac-b311-d9bbaef76760"/>
+      <field name="password" size="90" uuid="37f05a4e-f1e8-4c26-b20d-9e335f913cac"/>
+      <field name="enabled" type="boolean" uuid="e7f8809f-4d84-4e01-8772-46d0c50ee5f9"/>
+      <field name="expires" type="date" uuid="a4769120-c5ff-4c32-b5eb-a5bf41504001"/>
+      <field name="defaultRoute" type="string" uuid="ace08844-aa73-44d2-9433-50772bc914f1"/>
+      <field name="defaultRouteParams" type="string" uuid="1fa6dfd6-c4ab-4bae-9b21-b70f49f40903"/>
+      <field name="email" type="string" required="true" uuid="4dc93a02-d2e9-4059-b846-46311d7a5b8a"/>
+      <field name="lastLogon" type="date" uuid="17fa3306-8bae-4a42-8214-3a8c1d2c6603"/>
+      <field name="passRestToken" type="string" uuid="ca77d8fa-b3ef-4139-93d7-60697c21e9f1"/>
+      <field name="tokenExpires" type="datetime" uuid="5b7eb721-25e1-44af-a45f-cb08fbb89219"/>
+      <orm-attributes>
+        <attribute name="repository-class">Aaa\Repository\Users</attribute>
+        <attribute name="table">uporabniki</attribute>
+        <attribute name="export-file-name">User.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Aaa\Entity\Role2User" local-name="Role2User" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" uuid="481f8e4c-0981-4633-b6b1-87161cfe58fc">
+      <field name="id" type="integer" required="true" unique="true" primary="true" uuid="92a81ae8-76f3-4157-910b-259bc1909b15"/>
+      <field name="user_id" required="true" uuid="d8ccf693-f1f5-4bcc-8178-7fd9389e054f"/>
+      <field name="role_id" required="true" uuid="5501e6aa-2b34-46da-aa53-4930a653696f"/>
+    </entity>
+    <many-to-many mn-entity="\Aaa\Entity\Role2User" uuid="147fa27f-192e-4d35-a9b3-289e0644b413">
+      <many-to-many-entity name="\Aaa\Entity\User" owning-side="true" alias="users" uuid="7a808d99-b8a3-40f4-8830-0afd2420d549">
+        <many-to-many-field from="user_id" to="id"/>
+      </many-to-many-entity>
+      <many-to-many-entity name="\Aaa\Entity\Role" owning-side="false" alias="roles" uuid="2743f1ec-ca8e-4756-9e01-1ddf000d37f5">
+        <many-to-many-field from="role_id" to="id"/>
+      </many-to-many-entity>
+    </many-to-many>
+  </module>
+  <visual-data>
+    <entity uuid="3c5d5082-2ca2-4582-83af-72d4e77c8f1c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="395" position-y="40" size-x="0" size-x2="90" size-y="0" size-y2="73"/>
+    <entity uuid="481f8e4c-0981-4633-b6b1-87161cfe58fc" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="389" position-y="251" size-x="0" size-x2="101" size-y="0" size-y2="59"/>
+    <entity uuid="526f5233-d9fa-4e89-9f5d-e27d651863eb" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="23" position-y="251" size-x="0" size-x2="130" size-y="0" size-y2="59"/>
+    <entity uuid="c4603812-39ee-4b0d-899a-1fdafc17b6e9" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="218" position-y="40" size-x="0" size-x2="92" size-y="0" size-y2="115"/>
+    <entity uuid="ce52b1f1-1edb-4463-a15e-fd7b635c292b" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="196" position-y="251" size-x="0" size-x2="136" size-y="0" size-y2="171"/>
+    <entity uuid="ee4183b0-61c8-43fb-9232-3e8ee99a5ced" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="35" position-y="40" size-x="0" size-x2="105" size-y="0" size-y2="73"/>
+    <many-to-many-association uuid="147fa27f-192e-4d35-a9b3-289e0644b413" color="#CDC32B"/>
+    <many-to-many-association uuid="884369de-148e-4b10-a286-200627428f1b" color="#61D351"/>
+    <module uuid="d9f46216-7518-4f50-995a-a6ffe8dd0049" bg-color="#E7F5FD" size-x="0" size-x2="528" size-y="0" size-y2="442"/>
+  </visual-data>
+</skipper>
