@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\Vaja;
+namespace Rest\Koledar\Vaja;
 
 use ApiTester;
 

@@ -47,6 +47,17 @@ class ProstorCest
     }
 
     /**
+     * inicializira bazo  glede na DumpFunctional.sql
+     * 
+     * 
+     * @param ApiTester $I
+     */
+    public function initBaze(ApiTester $I)
+    {
+        $I->initDB();
+    }
+
+    /**
      * 
      * @param ApiTester $I
      */
@@ -83,7 +94,7 @@ class ProstorCest
             'sifra'        => '12',
             'naziv'        => 'aa',
             'jePrizorisce' => true,
-            'sePlanira' => true,
+            'sePlanira'    => true,
             'kapaciteta'   => 1,
             'opis'         => 'aa',
             'popa'         => $this->objPopa1['id'],
@@ -99,7 +110,7 @@ class ProstorCest
             'sifra'        => '13',
             'naziv'        => 'bb',
             'jePrizorisce' => true,
-            'sePlanira' => false,
+            'sePlanira'    => false,
             'kapaciteta'   => 2,
             'opis'         => 'bb',
             'popa'         => NULL,
@@ -109,13 +120,13 @@ class ProstorCest
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['sifra'], '13');
-        
+
         // kreiramo še en zapis
         $data       = [
             'sifra'        => '14',
             'naziv'        => 'cc',
             'jePrizorisce' => true,
-            'sePlanira' => false,
+            'sePlanira'    => false,
             'kapaciteta'   => 3,
             'opis'         => 'cc',
             'popa'         => $this->objPopa2['id'],
@@ -133,7 +144,7 @@ class ProstorCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl ;
+        $listUrl = $this->restUrl;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
@@ -198,7 +209,7 @@ class ProstorCest
     public function updateZaValidacijo(ApiTester $I)
     {
         $data           = $this->obj2;
-        $data['popa']  = $this->objPopa1['id'];
+        $data['popa']   = $this->objPopa1['id'];
 //        $data['naslov'] = $this->objPopa1['naslovi'][0]['id'];
         $data['naslov'] = NULL;
 
@@ -207,10 +218,11 @@ class ProstorCest
         $I->assertEquals(1000380, $resp[0]['code']);
 
         $data['naslov'] = $this->objPopa2['naslovi'][0]['id'];   // naslov od drugega popa
-        $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        $resp           = $I->failToUpdate($this->restUrl, $data['id'], $data);
         $I->assertNotEmpty($resp);
         $I->assertEquals(1000381, $resp[0]['code']);
     }
+
     /**
      * brisanje zapisa za test orphan removal
      * 
@@ -218,9 +230,10 @@ class ProstorCest
      */
     public function deletePopa(ApiTester $I)
     {
-       $resp= $I->failToDelete($this->popaUrl, $this->objPopa2['id']);
+        $resp = $I->failToDelete($this->popaUrl, $this->objPopa2['id']);
         $I->assertNotEmpty($resp);
         codecept_debug($resp);
-        $I->assertEquals(23503, $resp[1]['code']," Foreign key violation - brisanje naslova ni mogoček, ker se uporablja v prostoru"); 
+        $I->assertEquals(23503, $resp[1]['code'], " Foreign key violation - brisanje naslova ni mogoček, ker se uporablja v prostoru");
     }
+
 }

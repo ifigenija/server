@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\Zasedenost;
+namespace Rest\Koledar\Zasedenost;
 
 use ApiTester;
 
@@ -102,7 +102,7 @@ class ZasedenostCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
 //        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
     }
 

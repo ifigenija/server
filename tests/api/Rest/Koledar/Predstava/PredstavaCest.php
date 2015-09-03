@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\Predstava;
+namespace Rest\Koledar\Predstava;
 
 use ApiTester;
 
@@ -36,14 +36,12 @@ class PredstavaCest
     private $dogodekUrl     = '/rest/dogodek';
     private $uprizoritevUrl = '/rest/uprizoritev';
     private $gostovanjeUrl  = '/rest/gostovanje';
-    
-    private $drzavaUrl      = '/rest/drzava';
+    private $drzavaUrl = '/rest/drzava';
     private $obj;
     private $objDogodek;
     private $objUprizoritev;
     private $lookUprizoritev;
     private $objGostovanje;
-   
     private $objDrzava;
 
     public function _before(ApiTester $I)
@@ -60,18 +58,28 @@ class PredstavaCest
      * 
      * @param ApiTester $I
      */
-    public function createDrzavo(ApiTester $I)
+    public function lookupDrzavo(ApiTester $I)
     {
-        $data            = [
-            'sifra'     => 'XX',
-            'sifraDolg' => 'xx',
-            'isoNum'    => 'xx',
-            'isoNaziv'  => 'xx',
-            'naziv'     => 'xx',
-        ];
-        $this->objDrzava = $ent             = $I->successfullyCreate($this->drzavaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $this->objDrzava = $look            = $I->lookupEntity("drzava", "SI");
+        $I->assertNotEmpty($look);
     }
+
+//    /**
+//     * 
+//     * @param ApiTester $I
+//     */
+//    public function createDrzavo(ApiTester $I)
+//    {
+//        $data            = [
+//            'sifra'     => 'XX',
+//            'sifraDolg' => 'xx',
+//            'isoNum'    => 'xx',
+//            'isoNaziv'  => 'xx',
+//            'naziv'     => 'xx',
+//        ];
+//        $this->objDrzava = $ent             = $I->successfullyCreate($this->drzavaUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//    }
 
     /**
      * 
@@ -132,8 +140,6 @@ class PredstavaCest
         $I->assertEquals($ent['vrsta'], 'zz');
     }
 
-
-
     /**
      *  kreiramo zapis
      * 
@@ -146,7 +152,6 @@ class PredstavaCest
             'dogodek'     => NULL,
             'uprizoritev' => $this->lookUprizoritev['id'],
             'gostovanje'  => $this->objGostovanje['id'],
-            
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -158,7 +163,6 @@ class PredstavaCest
             'dogodek'     => NULL,
             'uprizoritev' => $this->lookUprizoritev['id'],
             'gostovanje'  => NULL,
-           
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -229,7 +233,7 @@ class PredstavaCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
 //        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
     }
 
