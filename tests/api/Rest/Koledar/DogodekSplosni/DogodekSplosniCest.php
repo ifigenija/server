@@ -4,12 +4,12 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\DogodekIzven;
+namespace Rest\Koledar\DogodekSplosni;
 
 use ApiTester;
 
 /**
- * Description of DogodekIzvenCest
+ * Description of DogodekSplosniCest
  *
  *      metode, ki jo podpira API
  *      - create
@@ -26,7 +26,7 @@ use ApiTester;
  * 
  * @author rado
  */
-class DogodekIzvenCest
+class DogodekSplosniCest
 {
 
     private $restUrl    = '/rest/dogodekSplosni';
@@ -56,7 +56,7 @@ class DogodekIzvenCest
             'dogodek' => null, // zaenkrat prazno, relacijo vzpostavimo pri kreiranju dogodka
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
 
@@ -65,7 +65,7 @@ class DogodekIzvenCest
             'dogodek' => null, // zaenkrat prazno, relacijo vzpostavimo pri kreiranju dogodka
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
     }
@@ -93,7 +93,7 @@ class DogodekIzvenCest
             'sezona'          => null,
         ];
         $this->objDogodek = $ent              = $I->successfullyCreate($this->dogodekUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['status'], "100");
     }
@@ -154,8 +154,8 @@ class DogodekIzvenCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
+        $I->assertGuid($ent['id']);
+        $I->assertEquals($ent['dogodek']['id'], $this->objDogodek['id']);
     }
 
     /**

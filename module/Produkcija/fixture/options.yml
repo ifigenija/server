@@ -48,6 +48,8 @@
            label: Tehnik
         umetnik:
            label: Umetnik
+        inspicient:
+           label: Inšpicient
 -
     name: funkcija.velikost
     type: array

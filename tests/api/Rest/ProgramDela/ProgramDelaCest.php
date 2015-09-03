@@ -259,7 +259,7 @@ class ProgramDelaCest
         $data       = [
 //            'sifra'          => 'BB',
             'naziv'          => 'bb',
-            'zacetek'        => '2016-02-01T00:00:00+0100',
+            'zacetek'        => '2016-01-01T00:00:00+0100',
             'konec'          => '2017-02-01T00:00:00+0100',
             'potrjenProgram' => TRUE,
             'sezona'         => null,
@@ -271,6 +271,7 @@ class ProgramDelaCest
         $I->assertEquals($ent['naziv'], 'bb');
     }
 
+    
     /**
      * spremenim zapis
      * 
@@ -611,7 +612,6 @@ class ProgramDelaCest
         $this->objProgramGostujoca1 = $ent                        = $I->successfullyCreate($this->programGostujocaUrl, $data);
         $I->assertGuid($ent['id']);
     }
-
     /**
      * @depends create
      * @param ApiTester $I
@@ -623,10 +623,18 @@ class ProgramDelaCest
 //        $I->assertNotEmpty($resp);
 //        $I->seeResponseIsJson();
 ////        $I->assertGreaterThanOrEqual(9999, $resp['Do']['avtorskiHonorarji'], "avtorski do");
+//        $I->assertGreaterThanOrEqual(0, $resp['H.1']['vrednost']['premiere'],"['premiere']['H.1']");
+//        $I->assertGreaterThanOrEqual(0, $resp['2.0']['vrednost']['premiere'],"['premiere']['2.0']");
+//        $I->assertGreaterThanOrEqual(0, $resp['2.1']['vrednost']['premiere'],"['premiere']['2.1']");
+//        $I->assertGreaterThanOrEqual(0, $resp['T.0']['vrednost']['premiere'],"['premiere']['T.0']");
+//        $I->assertGreaterThanOrEqual(0, $resp['T.1']['vrednost']['premiere'],"['premiere']['T.1']");
+//        $I->assertGreaterThanOrEqual(0, $resp['T.2']['vrednost']['premiere'],"['premiere']['T.2']");
+//        $I->assertGreaterThanOrEqual(0, $resp['Skupaj']['vrednost']['premiere'],"['premiere']['Skupaj']");
+//        $I->assertGreaterThanOrEqual(0, $resp['Skupaj']['vrednost']['ponovitvePremier'],"['ponovitvePremier']['Skupaj']");
+//        $I->assertGreaterThanOrEqual(0, $resp['Skupaj']['vrednost']['ponovitvePrejsnjih'],"['ponovitvePrejsnjih']['Skupaj']");
 //
 //        $I->assertTrue(false, "začasno");
 //    }
-
     /**
      *  kreiramo zapis
      * 
@@ -1272,7 +1280,7 @@ class ProgramDelaCest
             'obiskInt'                => 1,
             'obiskKoprInt'            => 1,
             'ponoviDoma'              => 2,
-            'ponoviZamejo'            => 3,
+            'ponoviZamejo'            => 4,
             'ponoviGost'              => 2,
             'ponoviKopr'              => 2,
 //            'ponoviInt'            => 1,
@@ -1924,6 +1932,14 @@ class ProgramDelaCest
 
         $entR = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($entR['id']);
+        
+        // vrnemo nazaj čase
+        $ent            = $this->obj2;
+        $ent['zacetek'] = '2016-01-01T00:00:00+0100';
+        $ent['konec']   = '2017-01-01T00:00:00+0100';
+
+        $entR = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertNotEmpty($entR['id']);
     }
 
     /**
@@ -2220,9 +2236,21 @@ class ProgramDelaCest
         codecept_debug($resp);
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
-//        $I->assertGreaterThanOrEqual(9999, $resp['Do']['avtorskiHonorarji'], "avtorski do");
-
-        $I->assertTrue(false, "začasno");
+        $I->assertGreaterThanOrEqual(726.2, $resp['2.0']['vrednost']['premiere'], "['premiere']['2.0']");
+        $I->assertGreaterThanOrEqual(726.2, $resp['2.1']['vrednost']['premiere'], "['premiere']['2.1']");
+        $I->assertGreaterThanOrEqual(40, $resp['H.1']['vrednost']['premiere'], "['premiere']['H.1']");
+        $I->assertGreaterThanOrEqual(330, $resp['T.0']['vrednost']['premiere'], "['premiere']['T.0']");
+        $I->assertGreaterThanOrEqual(300, $resp['T.1']['vrednost']['premiere'], "['premiere']['T.1']");
+        $I->assertGreaterThanOrEqual(30, $resp['T.2']['vrednost']['premiere'], "['premiere']['T.2']");
+        $I->assertGreaterThanOrEqual(1096.2, $resp['Skupaj']['vrednost']['premiere'], "['premiere']['Skupaj']");
+//        $I->assertGreaterThanOrEqual(1080, $resp['ponovitvePremier']['Skupaj']['vrednost'],"['ponovitvePremier']['Skupaj']");
+//        $I->assertGreaterThanOrEqual(747.9, $resp['ponovitvePrejsnjih']['Skupaj']['vrednost'],"['ponovitvePremier']['Skupaj']");
+        $I->assertGreaterThanOrEqual(1461  , $resp['Skupaj']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['Skupaj']");
+        $I->assertGreaterThanOrEqual(930   , $resp['H.1']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['H.1']");
+        $I->assertGreaterThanOrEqual(876.6 , $resp['Skupaj']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['Skupaj']");
+        $I->assertGreaterThanOrEqual(558   , $resp['H.1']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['H.1']");
+        $I->assertGreaterThanOrEqual(1022.7, $resp['Skupaj']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['Skupaj']");
+        $I->assertGreaterThanOrEqual(651   , $resp['H.1']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['H.1']");
     }
 
 }

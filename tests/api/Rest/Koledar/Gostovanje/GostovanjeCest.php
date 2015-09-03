@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\Gostovanje;
+namespace Rest\Koledar\Gostovanje;
 
 use ApiTester;
 
@@ -54,21 +54,14 @@ class GostovanjeCest
         
     }
 
-    /**
+        /**
      * 
      * @param ApiTester $I
      */
-    public function createDrzavo(ApiTester $I)
+    public function lookupDrzavo(ApiTester $I)
     {
-        $data            = [
-            'sifra'     => 'XX',
-            'sifraDolg' => 'xx',
-            'isoNum'    => 'xx',
-            'isoNaziv'  => 'xx',
-            'naziv'     => 'xx',
-        ];
-        $this->objDrzava = $ent             = $I->successfullyCreate($this->drzavaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $this->objDrzava = $look            = $I->lookupEntity("drzava", "SI");
+        $I->assertNotEmpty($look);
     }
 
     /**
@@ -84,6 +77,7 @@ class GostovanjeCest
             'dogodek' => null,
             'drzava'  => $this->objDrzava['id'],
         ];
+        codecept_debug($data);
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
