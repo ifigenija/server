@@ -119,9 +119,8 @@ class ProgramDelaCest
         codecept_debug($resp);
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
-//        $I->assertGreaterThanOrEqual(9999, $resp['Do']['avtorskiHonorarji'], "avtorski do");
+//        $I->assertGreaterThanOrEqual(726.2, $resp['premiere']['2.0']['vrednost'],"['premiere']['2.0']");
 
-        $I->assertTrue(false, "začasno");
     }
 
 }
