@@ -28,7 +28,7 @@ class VrstaStroska
 
     /**
      * @ORM\Column(type="integer")
-     * @Max\I18n(label="vrstastroska.skupina", description="vrstastroska.d.skupina")
+     * @Max\I18n(label="vrstaStroska.skupina", description="vrstaStroska.d.skupina")
      * @Max\Ui(type="integer",icon="fa fa-sort")
      * @var integer
      */
@@ -38,7 +38,7 @@ class VrstaStroska
      * če je 0 se uporablja kotglava npr. ime skupine ali kot seštevek
      * 
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="vrstastroska.podskupina", description="vrstastroska.d.podskupina")
+     * @Max\I18n(label="vrstaStroska.podskupina", description="vrstaStroska.d.podskupina")
      * @Max\Ui(type="integer",icon="fa fa-sort")
      * @var integer
      */
@@ -46,7 +46,7 @@ class VrstaStroska
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="vrstastroska.naziv", description="vrstastroska.d.naziv")
+     * @Max\I18n(label="vrstaStroska.naziv", description="vrstaStroska.d.naziv")
      * @Max\Ui(type="naziv",ident=true, required=true)
      * @var string
      */
@@ -54,7 +54,7 @@ class VrstaStroska
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="vrstastroska.opis", description="vrstastroska.d.opis")
+     * @Max\I18n(label="vrstaStroska.opis", description="vrstaStroska.d.opis")
      * @var string
      */
     protected $opis;
