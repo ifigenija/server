@@ -25,6 +25,9 @@ class Osebe
         "default" => [
             "priimek" => ["alias" => "p.priimek"],
             "ime"     => ["alias" => "p.ime"],
+            "sifra"     => ["alias" => "p.sifra"],
+            "email"     => ["alias" => "p.email"],
+            "psevdonim"     => ["alias" => "p.psevdonim"],
         ],
         "vse"     => [
             "priimek" => ["alias" => "p.priimek"],
@@ -38,7 +41,8 @@ class Osebe
             case "default":
             case "vse":
                 $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name, $qb);
+                $qb->orderBy($sort->order,$sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }
@@ -49,14 +53,25 @@ class Osebe
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $ime     = $e->like('p.ime', ':naz');
-            $priimek = $e->like('p.priimek', ':naz');
-            $emso    = $e->like('p.emso', ':emso');
+            $ime     = $e->like('lower(p.ime)', ':naz');
+            $priimek = $e->like('lower(p.priimek)', ':naz');
+            $qb->andWhere($e->orX($ime, $priimek));
 
-            $qb->andWhere($e->orX($ime, $priimek, $emso));
-
-            $qb->setParameter('naz', "{$options['q']}%", "string");
-            $qb->setParameter('emso', $options['q'], "string");
+            $qb->setParameter('naz', strtolower("{$options['q']}%"), "string");
+        }
+        
+        if(!empty($options['naslov'])){
+            $qb->leftJoin('p.naslovi', 'naslov');
+            
+            $ulica     = $e->like('lower(naslov.ulica)', ':naslov');
+            $dodatnaUlica     = $e->like('lower(naslov.ulicaDva)', ':naslov');
+            $posta     = $e->like('lower(naslov.postaNaziv)', ':naslov');
+            $postnaStevilka     = $e->like('lower(naslov.posta)', ':naslov');
+            
+            
+            $qb->andWhere($e->orX($ulica, $dodatnaUlica, $posta, $postnaStevilka));
+            
+            $qb->setParameter('naslov', strtolower("{$options['naslov']}%"), "string");
         }
 
         return $qb;

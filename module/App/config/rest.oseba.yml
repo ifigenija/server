@@ -61,6 +61,22 @@ lists:
         hydrator: 
             byValue: [trrji, naslovi, telefonske]
     default: 
+        filter: 
+            elements: 
+                - name: q
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči....
+                    label: Išči
+                - name: naslov
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Vpiši del naslova
+                    label: Naslov
+                    
+                    
         hydrator:
             byValue: [telefonske, naslovi]
             exclude: [trrji, datumRojstva, emso, davcna, drzavljanstvo, krajRojstva, alternacije, pogodbe, sodelovanja]
