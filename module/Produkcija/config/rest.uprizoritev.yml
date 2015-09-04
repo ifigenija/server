@@ -69,6 +69,17 @@ lists:
 #            - exclude: []
     vse: 
         filter:
+            elements: 
+                - name: q
+                  type: text
+                  options: 
+                      label: Naslov
+                - name: status
+                  type: multiselect
+                  options: 
+                      multiple: true
+                      required: false
+                      value_options: @uprizoritev.faza
 relation:
     default:
         funkcije:

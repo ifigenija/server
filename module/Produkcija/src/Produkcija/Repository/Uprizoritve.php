@@ -28,7 +28,9 @@ class Uprizoritve
         ],
         "vse"     => [
             "sifra"  => ["alias" => "p.sifra"],
-            "naslov" => ["alias" => "p.naslov"]
+            "naslov" => ["alias" => "p.naslov"],
+            "avtor" => ["alias" => "p.avtor"],
+            "datumPremiere" => ["alias" => "p.datumPremiere"]
         ]
     ];
 
@@ -37,7 +39,8 @@ class Uprizoritve
         switch ($name) {
             case "vse":
                 $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name, $qb);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $this->expect(!(empty($options['besedilo']) ), "Besedilo je obvezno", 770071);
@@ -62,11 +65,14 @@ class Uprizoritve
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
-            $naslov    = $e->like('p.naslov', ':naz');
-            $podnaslov = $e->like('p.podnaslov', ':naz');
-            $avtor     = $e->like('p.avtor', ':naz');
+            $naslov    = $e->like('lower(p.naslov)', ':naz');
+            $podnaslov = $e->like('lower(p.podnaslov)', ':naz');
+            $avtor     = $e->like('lower(p.avtor)', ':naz');
             $qb->andWhere($e->orX($naslov, $podnaslov, $avtor));
-            $qb->setParameter('naz', "{$options['q']}%", "string");
+            $qb->setParameter('naz', strtolower("{$options['q']}%"), "string");
+        }
+        if (!empty($options['status'])) {
+            $qb->andWhere($e->in('p.faza', $options['status']));
         }
         return $qb;
     }
