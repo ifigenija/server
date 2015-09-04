@@ -100,6 +100,8 @@ class ProdukcijaDelitve
         $optionR = $em->getRepository('App\Entity\Option');
         $option  = $optionR->findOneByName("application.tenant.maticnopodjetje");
         $sifra   = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
+        
+        $this->expect($object->getKoproducent(), "Koproducent je obvezen podatek", 1000614);        
         if ($object->getKoproducent()->getSifra() == $sifra) {
             $object->setMaticniKop(TRUE);
         } else {

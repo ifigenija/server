@@ -81,7 +81,7 @@ class StevilcenjeFixture
             $obj->setFormat('%n');
             $obj->setDolzina(4);
             $obj->setZacetek(1000);
-            $obj->setGlobalno(true);
+            $obj->setGlobalno(false);
             $obj->setPoLetih(false);
             $manager->persist($obj);
         }

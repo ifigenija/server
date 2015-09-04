@@ -187,8 +187,8 @@ class ProstorCest
         $I->assertTrue($ent['sePlanira']);
         $I->assertEquals($ent['kapaciteta'], 1);
         $I->assertEquals($ent['opis'], 'aa');
-        $I->assertEquals($ent['popa'], $this->objPopa1['id']);
-        $I->assertEquals($ent['naslov'], $this->objPopa1['naslovi'][0]['id']);
+        $I->assertEquals($ent['popa']['id'], $this->objPopa1['id']);
+        $I->assertEquals($ent['naslov']['id'], $this->objPopa1['naslovi'][0]['id']);
     }
 
     /**
