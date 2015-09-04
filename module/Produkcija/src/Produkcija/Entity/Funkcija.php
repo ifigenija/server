@@ -181,9 +181,10 @@ class Funkcija
                 } else {
                     $ime = $alter->getOseba()->getPolnoIme();
                 }
-                $imena .= ($imena ? "/ " : "") . $ime;
+                $imena = $ime .($imena ? " / " : ""). $imena;
             }
         }
+        
         return $imena;
     }
 
