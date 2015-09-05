@@ -11,3 +11,4 @@ autoload_classmap.php
 ***/api.suite.yml
 .DS_Store
 /data/
+composer.lock

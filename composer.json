@@ -14,9 +14,9 @@
         "ext-apcu": "*",
         "ext-pdo_pgsql": "*",
         "zendframework/zendframework": "2.3.1",
-        "doctrine/doctrine-orm-module": "~0.9.0",
-        "doctrine/doctrine-module": "~0.9.0",
-        "doctrine/orm": "2.5",
+        "doctrine/doctrine-orm-module": "0.9.*",
+        "doctrine/doctrine-module": "*",
+        "doctrine/orm": "~2.5",
         "doctrine/migrations": "*",
         "zf-commons/zfc-rbac": "~2.4",
         "doctrine/data-fixtures": "dev-master"
