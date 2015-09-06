@@ -52,8 +52,8 @@ class ApiHelper
         }
 
         $res = $client->get($url, ['auth' => [\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass]]);
-
-        $a->assertEquals('application/json; charset=utf-8', $res->getHeader('content-type'), "Lookup $entity z identom $ident ni vrnil pravega content type");
+        codecept_debug($res->getHeader('content-type')[0]);
+        $a->assertEquals('application/json; charset=utf-8', $res->getHeader('content-type')[0], "Lookup $entity z identom $ident ni vrnil pravega content type");
 
         $json = $res->getBody();
 

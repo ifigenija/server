@@ -14,6 +14,7 @@ forms:
             - konec
 #            - tip      # zaenkrat izven forme, ker nimamo definiranih vrednosti
             - delovnaObveza
+            - delovnoMesto
 #            - malica   # zaenkrat izven forme, ker nimamo definiranih vrednosti
             - izmenskoDelo
             - individualnaPogodba
@@ -32,12 +33,29 @@ lists:
                   options:
                       label: Oseba
                       targetEntity: App\Entity\Oseba
-                      required: false
+                      required: false    
         hydrator:
             exclude: []
             lookups: [ oseba ]
     vse: 
         filter:
+            elements:
+                - name: q
+                  type: text
+                  options: 
+                    label: Ime
+                - name: delovno
+                  type: text
+                  options:
+                    label: Delovno mesto
+                - name: status
+                  type: multiselect
+                  options:
+                      label: Status
+                      multiple: true
+                      required: false
+                      value_options: @zaposlitev.status 
+                    
         hydrator:
             exclude: []
             lookups: [ oseba ]        

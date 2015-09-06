@@ -118,6 +118,7 @@ class ZaposlitevCest
             'tip'                 => 1,
             'delovnaObveza'       => 2,
             'malica'              => 'zz',
+            'delovnoMesto'              => 'XXX',
             'izmenskoDelo'        => true,
             'individualnaPogodba' => true,
             'jeZaposlenVdrugemJz' => TRUE,
@@ -136,6 +137,7 @@ class ZaposlitevCest
             'konec'               => '2016-02-01T00:00:00+0100',
             'tip'                 => 4,
             'delovnaObveza'       => 5,
+            'delovnoMesto'              => 'XXX',
             'malica'              => 'xx',
             'izmenskoDelo'        => true,
             'individualnaPogodba' => true,
@@ -251,6 +253,7 @@ class ZaposlitevCest
         $I->assertEquals($ent['delovnaObveza'], 2);
 //        $I->assertEquals($ent['malica'], 'zz');  //$$zaenkrat nimamo definiranih vrednosti
         $I->assertEquals($ent['izmenskoDelo'], true);
+        $I->assertEquals( "XXX", $ent['delovnoMesto']);
         $I->assertEquals($ent['individualnaPogodba'], true);
         $I->assertEquals($ent['jeZaposlenVdrugemJz'], TRUE);
         $I->assertEquals($ent['jeNastopajoci'], TRUE);

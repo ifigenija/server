@@ -108,7 +108,7 @@ class Oseba
      * Naslov e-pošte
      * Uporablja se tudi kot uporabniško ime pri prijavi v aplikacijo.
      *
-     * @ORM\Column(length=40, nullable=true)
+     * @ORM\Column(nullable=true)
      * @Max\I18n(label="oseba.email", description="oseba.d.email")   
      * @Max\Ui(type="email",icon="fa fa-at")
      * @var string

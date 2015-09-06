@@ -26,7 +26,9 @@ class Zaposlitve
             "id" => ["alias" => "p.id"]
         ],
         "vse"     => [
-            "id" => ["alias" => "p.id"]
+            "oseba.label" => ["alias" => "oseba.polnoIme"],
+            "sifra" => ["alias" => "p.sifra"],
+            "delovnoMesto" => ["alias" => "p.delobnoMesto"]
         ]
     ];
 
@@ -34,12 +36,11 @@ class Zaposlitve
     {
         switch ($name) {
             case "vse":
-                $qb   = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $qb = $this->getVseQb($options);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $this->expect(!empty($options['oseba']), "Oseba je obvezna", 770051);
-                $qb   = $this->getDefaultQb($options);
+                $qb = $this->getDefaultQb($options);
                 $this->getSort($name, $qb);
                 return new DoctrinePaginator(new Paginator($qb));
 //                $this->expect(!empty($options['oseba']), "Oseba je obvezna", 770051);
@@ -59,13 +60,28 @@ class Zaposlitve
     {
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
+            $qb->join('p.oseba', 'oseba');
         if (!empty($options['q'])) {
-            $naz = $e->like('p.id', ':id');
+            $naz = $e->like('lower(oseba.polnoIme)', ':q');
             $qb->andWhere($e->orX($naz));
-            $qb->setParameter('id', "{$options['q']}%", "string");
+            $qb->setParameter('q', strtolower("%{$options['q']}%"), "string");
         }
+
+        if (!empty($options['delovno'])) {
+            $naz = $e->like('lower(p.delovnoMesto)', ':d');
+            $qb->andWhere($e->orX($naz));
+            $qb->setParameter('d', strtolower("%{$options['delovno']}%"), "string");
+        }
+
+        if (!empty($options['status'])) {
+            $naz = $e->in('p.status', $options['status']);
+            $qb->andWhere($naz);
+        }
+        $sort = $this->getSort('vse', $qb);
+        $qb->orderBy($sort->order, $sort->dir);
         return $qb;
     }
+
     public function getDefaultQb($options)
     {
         $qb = $this->createQueryBuilder('p');
@@ -75,7 +91,7 @@ class Zaposlitve
             $qb->andWhere($e->orX($naz));
             $qb->setParameter('id', "{$options['q']}%", "string");
         }
-                if (!empty($options['oseba'])) {
+        if (!empty($options['oseba'])) {
             $qb->join('p.oseba', 'oseba');
             $naz = $e->eq('oseba.id', ':oseba');
             $qb->andWhere($naz);
@@ -83,15 +99,17 @@ class Zaposlitve
         }
         return $qb;
     }
-   
+
     /**
      * Prenesem šifro osebe na zaposlitev.
      * Uporabim kar šifro osebe, za šifro zaposlitve 
      * @param type $zap
      */
-    public function prepisiSifroOsebe($zap) {
+    public function prepisiSifroOsebe($zap)
+    {
         if ($zap) {
             
         }
     }
+
 }

@@ -8,6 +8,7 @@ return [
         'DoctrineModule',
         'DoctrineORMModule',
         'Max',
+        'Stevilcenje',
         'Util',
     ],
     'module_listener_options' => [

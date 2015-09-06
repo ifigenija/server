@@ -42,6 +42,15 @@ class Zaposlitev
      */
     protected $status;
 
+    
+    /**
+     * @ORM\Column(type="string")
+     * @Max\I18n(label="zaposlitev.delovnoMesto",  description="zaposlitev.d.delovnoMesto")
+     * 
+     * @var string
+     */
+    protected $delovnoMesto;
+    
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="zaposlitev.zacetek",  description="zaposlitev.d.zacetek")
@@ -293,5 +302,17 @@ class Zaposlitev
         $this->oseba = $oseba;
         return $this;
     }
+
+    public function getDelovnoMesto()
+    {
+        return $this->delovnoMesto;
+    }
+
+    public function setDelovnoMesto($delovnoMesto)
+    {
+        $this->delovnoMesto = $delovnoMesto;
+        return $this;
+    }
+
 
 }

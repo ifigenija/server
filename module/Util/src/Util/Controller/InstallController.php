@@ -70,4 +70,5 @@ class InstallController
         $executor->execute($loader->getFixtures(), true);
     }
 
+    
 }
