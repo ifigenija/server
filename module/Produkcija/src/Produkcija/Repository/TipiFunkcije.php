@@ -23,9 +23,11 @@ class TipiFunkcije
 
     protected $sortOptions = [
         "default" => [
+            "sifra" => ["alias" => "p.sifra"],
             "ime" => ["alias" => "p.ime"]
         ],
         "vse"     => [
+            "sifra" => ["alias" => "p.sifra"],
             "ime" => ["alias" => "p.ime"]
         ]
     ];

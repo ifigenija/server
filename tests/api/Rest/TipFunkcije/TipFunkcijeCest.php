@@ -51,6 +51,7 @@ class TipFunkcijeCest
     public function create(ApiTester $I)
     {
         $data      = [
+            'sifra'       => '99',
             'ime'       => 'zz',
             'opis'      => 'zz',
             'imeZenski' => 'zz',
@@ -62,6 +63,7 @@ class TipFunkcijeCest
 //        $I->assertEquals($ent['opis'], 'zz');
         // kreiramo še en zapis
         $data = [
+            'sifra' => '98',
             'ime'        => 'aa',
             'opis'       => 'aa',
             'imeZenski'  => 'aa',
@@ -135,6 +137,7 @@ class TipFunkcijeCest
         codecept_debug($ent);
 
         $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['sifra'], '99');
         $I->assertEquals($ent['ime'], 'zz');
         $I->assertEquals($ent['opis'], 'yy');
         $I->assertEquals($ent['imeZenski'], 'zz');

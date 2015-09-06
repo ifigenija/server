@@ -13,8 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="Produkcija\Repository\TipiFunkcije")
  * @Max\I18n(label="Tip funkcije",plural="Tipi funkcije")
  * @Max\Id(prefix="0015")
- * @Max\Lookup(ident="",label="ime", extra={"opis","podrocje"},search={"ime","opis","podrocje"})
- * @todo $$ rb preveri fixturje oz. TestZaFixture, ali sploh rabimo maksimalno število prekrivanj, razvrščenost v področje ipd.
+ * @Max\Lookup(ident="sifra",label="ime",extra={"opis","podrocje"},search={"sifra", "ime","opis","podrocje"})
  */
 class TipFunkcije
         extends \Max\Entity\Base
@@ -31,9 +30,17 @@ class TipFunkcije
     protected $id;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(unique=true)
+     * @Max\I18n(label="tipFunkcije.sifra", description="tipFunkcije.d.sifra")
+     * @Max\Ui(type="sifra",ident=true, required=true)
+     * @var string
+     */
+    protected $sifra;
+
+    /**
+     * @ORM\Column( unique=true)
      * @Max\I18n(label="tipFunkcije.ime", description="tipFunkcije.d.ime")
-     * @Max\Ui(type="naziv",ident=true, required=true)
+     * @Max\Ui(type="naziv")
      * @var string
      */
     protected $ime;
@@ -143,5 +150,17 @@ class TipFunkcije
         $this->funkcije = $funkcije;
         return $this;
     }
+
+    public function getSifra()
+    {
+        return $this->sifra;
+    }
+
+    public function setSifra($sifra)
+    {
+        $this->sifra = $sifra;
+        return $this;
+    }
+
 
 }

@@ -224,7 +224,7 @@ class Oseba
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Zaposlitev", mappedBy="oseba")
      * @Max\I18n(label="Zaposlitve", description="Zaposlitve osebe")   
-     * @Max\Ui(type="tomany")
+
      * @var <Zaposlitve>
      */
     protected $zaposlitve;

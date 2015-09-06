@@ -42,7 +42,7 @@ class TipFunkcijeFixture
             $o->setIme(trim($v[1]));
             $manager->persist($o);
         }
-
+        $o->setSifra(trim($v[0]));
         $o->setOpis($v[2]);
         $o->setImeZenski($v[3]);
         if ($v[4]) {

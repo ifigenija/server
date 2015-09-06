@@ -11,7 +11,7 @@ else
 fi 
 ./bin/util populate
 ./bin/ifi user resetpass admin@ifigenija.si Admin1234
-./bin/util populateTest
+#./bin/util populateTest
 
 
 
