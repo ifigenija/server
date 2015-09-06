@@ -55,7 +55,7 @@ module.exports = function (grunt) {
             autoload_programdela: {
                 cwd: 'module/ProgramDela',
                 cmd: classmap_generator
-            },            
+            },
             autoload_testAssets: {
                 cwd: 'tests/TestAssets',
                 cmd: classmap_generator
@@ -72,30 +72,19 @@ module.exports = function (grunt) {
                     return  'php ./bin/util.php  orm:generate-proxies';
                 }
 
-            },
-            clean_config: {
-                cmd: function () {
-                    if (os.platform() === 'win32') {
-                        return 'del data\\module-config-cache.4q6dayvdr46we87rw9er3224.php';
-                    }
-                    return  'rm -f data/module-config-cache.4q6dayvdr46we87rw9er3224.php';
-                }
-            },
-            clean_tmp: {
-                cmd: function () {
-                    if (os.platform() === 'win32') {
-                        return 'del data\\tmp\\html*';
-                    }
-                    return  'rm -f data/tmp/html*';
-                }
             }
+        },
+        clean: {
+            config: [
+                "data/module*"
+            ]
         }
-
     });
 
     grunt.loadNpmTasks('grunt-exec');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
 // Default task(s).
-    grunt.registerTask('default', ['exec']);
+    grunt.registerTask('default', ['exec', "clean"]);
 
 };
