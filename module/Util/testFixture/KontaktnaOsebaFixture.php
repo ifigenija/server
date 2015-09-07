@@ -55,12 +55,17 @@ class KontaktnaOsebaFixture
             $getref = $this->getReference($v[4]);
             $o->setOseba($getref);
         }
+        $o->setOpis($v[5]);
+
+        $referenca = 'KontaktnaOseba-' . $v[0];
+        var_dump($referenca);
+        $this->addReference($referenca, $o);
     }
 
     public function getData()
     {
         return [
-            [ 'AK','','','Popa-0988','Oseba-0009',],
+            [ 'AK', '', '', 'Popa-0988', 'Oseba-0009','igralka'],
         ];
     }
 

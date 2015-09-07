@@ -107,10 +107,11 @@ class RekvizitCest
     {
         $resp = $I->successfullyGetList($this->restUrl, []);
         $list = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $this->id = array_pop($list)['id'];
-        $I->assertNotEmpty($this->id);
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totRec);
+        $I->assertEquals("aa", $list[0]['ime']);
+        $I->assertEquals("zz", $list[$totRec - 1]['ime']);
     }
 
     /**

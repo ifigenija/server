@@ -36,7 +36,8 @@ class Gostovanja
             case "default":
             case "vse":
                 $qb   = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
 //            case "default":
 //                $this->expect(!(empty($options['drzava']) ), "Država je obvezna", 770121);

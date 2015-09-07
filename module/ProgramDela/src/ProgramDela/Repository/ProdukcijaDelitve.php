@@ -36,7 +36,8 @@ class ProdukcijaDelitve
             case "default":
             case "vse":
                 $qb   = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }
@@ -100,8 +101,8 @@ class ProdukcijaDelitve
         $optionR = $em->getRepository('App\Entity\Option');
         $option  = $optionR->findOneByName("application.tenant.maticnopodjetje");
         $sifra   = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
-        
-        $this->expect($object->getKoproducent(), "Koproducent je obvezen podatek", 1000614);        
+
+        $this->expect($object->getKoproducent(), "Koproducent je obvezen podatek", 1000614);
         if ($object->getKoproducent()->getSifra() == $sifra) {
             $object->setMaticniKop(TRUE);
         } else {

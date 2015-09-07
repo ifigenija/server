@@ -23,10 +23,10 @@ class ProdukcijskeHise
 
     protected $sortOptions = [
         "default" => [
-            "status" => ["alias" => "p.status"]
+            "sifra" => ["alias" => "p.sifra"]
         ],
         "vse"     => [
-            "status" => ["alias" => "p.status"]
+            "sifra" => ["alias" => "p.sifra"]
         ]
     ];
 
@@ -36,19 +36,9 @@ class ProdukcijskeHise
             case "default":
             case "vse":
                 $qb   = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
-//            case "default":
-//                $this->expect(!(empty($options['popa']) ), "Partner je obvezen", 770041);
-//                $crit = new Criteria();
-//                $e    = $crit->expr();
-//
-//                if (!empty($options['popa'])) {
-//                    $popa = $this->getEntityManager()->find('App\Entity\Popa', $options['popa']);
-//                    $exp  = $e->eq('popa', $popa);
-//                } 
-//                $crit->andWhere($exp);
-//                return new Selectable($this, $crit);
         }
     }
 
@@ -58,11 +48,11 @@ class ProdukcijskeHise
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.status', ':status');
+            $naz = $e->like('p.sifra', ':sifra');
 
             $qb->andWhere($e->orX($naz));
 
-            $qb->setParameter('status', "{$options['q']}%", "string");
+            $qb->setParameter('sifra', $options['q'], "string");
         }
 
         return $qb;

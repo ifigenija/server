@@ -35,23 +35,15 @@ class Zaposlitve
         switch ($name) {
             case "vse":
                 $qb   = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $this->expect(!empty($options['oseba']), "Oseba je obvezna", 770051);
                 $qb   = $this->getDefaultQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
-//                $this->expect(!empty($options['oseba']), "Oseba je obvezna", 770051);
-//                $crit = new Criteria();
-//                $e    = $crit->expr();
-//
-//                if (!empty($options['oseba'])) {
-//                    $oseba = $this->getEntityManager()->find('App\Entity\Oseba', $options['oseba']);
-//                    $exp   = $e->eq('oseba', $oseba);
-//                }
-//                $crit->andWhere($exp);
-//                return new Selectable($this, $crit);
         }
     }
 
@@ -66,6 +58,7 @@ class Zaposlitve
         }
         return $qb;
     }
+
     public function getDefaultQb($options)
     {
         $qb = $this->createQueryBuilder('p');
@@ -75,7 +68,7 @@ class Zaposlitve
             $qb->andWhere($e->orX($naz));
             $qb->setParameter('id', "{$options['q']}%", "string");
         }
-                if (!empty($options['oseba'])) {
+        if (!empty($options['oseba'])) {
             $qb->join('p.oseba', 'oseba');
             $naz = $e->eq('oseba.id', ':oseba');
             $qb->andWhere($naz);
@@ -83,15 +76,17 @@ class Zaposlitve
         }
         return $qb;
     }
-   
+
     /**
      * Prenesem šifro osebe na zaposlitev.
      * Uporabim kar šifro osebe, za šifro zaposlitve 
      * @param type $zap
      */
-    public function prepisiSifroOsebe($zap) {
+    public function prepisiSifroOsebe($zap)
+    {
         if ($zap) {
             
         }
     }
+
 }

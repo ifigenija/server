@@ -38,12 +38,14 @@ class ProgramiDela
         switch ($name) {
             case "default":
             case "vse":
-                $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $qb   = $this->getVseQb($options);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "seznam":
-                $qb = $this->getSeznamQb($options);
-                $this->getSort($name, $qb);
+                $qb   = $this->getSeznamQb($options);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }
@@ -143,4 +145,5 @@ class ProgramiDela
         }
         return false;
     }
+
 }

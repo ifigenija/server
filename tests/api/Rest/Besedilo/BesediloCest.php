@@ -102,8 +102,10 @@ class BesediloCest
         codecept_debug($list);
 
         $I->assertNotEmpty($list);
-        $I->assertTrue($resp['state']['totalRecords'] >= 2);
+        $totalRecords = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totalRecords);
         $I->assertEquals("aa", $list[0]['naslov']);      //glede na sort
+        $I->assertEquals("zz", $list[$totalRecords - 1]['naslov']);      //glede na sort
     }
 
     /**

@@ -34,8 +34,9 @@ class Dogodki
         switch ($name) {
             case "default":
             case "vse":
-                $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $qb   = $this->getVseQb($options);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
 //            case "default":
 //                $this->expect(!(empty($options['sezona']) ), "Sezona je obvezna", 770101);
@@ -72,10 +73,10 @@ class Dogodki
          * Če ni postavljenega konca smatramo, da nas zanima 1 mesec 
          */
         if (empty($options['konec'])) {
-        $options['konec'] = clone $options['zacetek'];
+            $options['konec'] = clone $options['zacetek'];
             $options['konec']->modify('+1 month');
         }
-        
+
         /**
          * Če ni zahtevan status potem prikažemo samo tiste s statusom 500 - potrjen - javno
          */

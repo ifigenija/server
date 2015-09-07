@@ -267,9 +267,35 @@ class ProgramDelaCest
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['naziv'], 'bb');
+
+        /**
+         * kreiramo še nekaj zapisov za sort
+         */
+        $data       = [
+            'sifra'          => '99',
+            'naziv'          => 'gg',
+            'zacetek'        => '2016-01-01T00:00:00+0100',
+            'konec'          => '2017-02-01T00:00:00+0100',
+            'potrjenProgram' => TRUE,
+//            'vrPS1Mat'       => 7.89,
+//            'vrPS1GostovSZ'  => 7.89,
+        ];
+                $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
+
+        $data       = [
+            'sifra'          => '00',
+            'naziv'          => 'hh',
+            'zacetek'        => '2016-01-01T00:00:00+0100',
+            'konec'          => '2017-02-01T00:00:00+0100',
+            'potrjenProgram' => TRUE,
+//            'vrPS1Mat'       => 7.89,
+//            'vrPS1GostovSZ'  => 7.89,
+        ];
+                $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
     }
 
-    
     /**
      * spremenim zapis
      * 
@@ -343,9 +369,11 @@ class ProgramDelaCest
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
+        codecept_debug($list);
+        $totRec  = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $I->assertEquals("00", $list[0]['sifra']);
+        $I->assertEquals("99", $list[$totRec-1]['sifra']);
     }
 
     /**
@@ -609,6 +637,7 @@ class ProgramDelaCest
         $this->objProgramGostujoca1 = $ent                        = $I->successfullyCreate($this->programGostujocaUrl, $data);
         $I->assertGuid($ent['id']);
     }
+
     /**
      * @depends create
      * @param ApiTester $I
@@ -1929,7 +1958,7 @@ class ProgramDelaCest
 
         $entR = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($entR['id']);
-        
+
         // vrnemo nazaj čase
         $ent            = $this->obj2;
         $ent['zacetek'] = '2016-01-01T00:00:00+0100';
@@ -2242,12 +2271,12 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(1096.2, $resp['Skupaj']['vrednost']['premiere'], "['premiere']['Skupaj']");
 //        $I->assertGreaterThanOrEqual(1080, $resp['ponovitvePremier']['Skupaj']['vrednost'],"['ponovitvePremier']['Skupaj']");
 //        $I->assertGreaterThanOrEqual(747.9, $resp['ponovitvePrejsnjih']['Skupaj']['vrednost'],"['ponovitvePremier']['Skupaj']");
-        $I->assertGreaterThanOrEqual(1461  , $resp['Skupaj']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['Skupaj']");
-        $I->assertGreaterThanOrEqual(930   , $resp['H.1']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['H.1']");
-        $I->assertGreaterThanOrEqual(876.6 , $resp['Skupaj']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['Skupaj']");
-        $I->assertGreaterThanOrEqual(558   , $resp['H.1']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['H.1']");
+        $I->assertGreaterThanOrEqual(1461, $resp['Skupaj']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['Skupaj']");
+        $I->assertGreaterThanOrEqual(930, $resp['H.1']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['H.1']");
+        $I->assertGreaterThanOrEqual(876.6, $resp['Skupaj']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['Skupaj']");
+        $I->assertGreaterThanOrEqual(558, $resp['H.1']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['H.1']");
         $I->assertGreaterThanOrEqual(1022.7, $resp['Skupaj']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['Skupaj']");
-        $I->assertGreaterThanOrEqual(651   , $resp['H.1']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['H.1']");
+        $I->assertGreaterThanOrEqual(651, $resp['H.1']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['H.1']");
     }
 
 }

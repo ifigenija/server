@@ -61,14 +61,14 @@ class TipFunkcijeCest
         codecept_debug($ent);
 //        $I->assertEquals($ent['opis'], 'zz');
         // kreiramo še en zapis
-        $data = [
+        $data      = [
             'ime'        => 'aa',
             'opis'       => 'aa',
             'imeZenski'  => 'aa',
             'podrocje'   => 'tehnik',
             'pomembnost' => 'aa',
         ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['opis'], 'aa');
@@ -80,15 +80,13 @@ class TipFunkcijeCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl;
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
+        $resp   = $I->successfullyGetList($this->restUrl, []);
         $list    = $resp['data'];
-//        codecept_debug($resp);
-
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(16, count($list));     // odvisno od testnih fixturjev
-//        $I->assertEquals("Avtor", $list[0]['ime']);      //glede na sort
+        codecept_debug($list);
+        $totRec  = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(16, $resp['state']['totalRecords']);
+        $I->assertEquals("2005-02-01T00:00:00+0100", $list[0]['planiranZacetek']);
+        $I->assertEquals("2021-02-01T00:00:00+0100", $list[$totRec - 1]['planiranZacetek']);
     }
 
     /**

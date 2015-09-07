@@ -38,7 +38,8 @@ class Osebe
             case "default":
             case "vse":
                 $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort=$this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }
@@ -51,6 +52,7 @@ class Osebe
 
             $ime     = $e->like('p.ime', ':naz');
             $priimek = $e->like('p.priimek', ':naz');
+            $priimek = $e->like('p.naziv', ':naz');
             $emso    = $e->like('p.emso', ':emso');
 
             $qb->andWhere($e->orX($ime, $priimek, $emso));

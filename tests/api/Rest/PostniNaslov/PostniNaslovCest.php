@@ -134,7 +134,7 @@ class PostniNaslovCest
         $I->assertEquals('zz', $pnaslov['naziv']);
         $I->assertNotEmpty($pnaslov['id']);
 
-        //kreiramo še enega
+        //kreiramo jih še nekaj za sort
         $data    = [
             'popa'       => $this->lookPopa['id'],
             'oseba'      => null,
@@ -150,7 +150,22 @@ class PostniNaslovCest
         ];
         $pnaslov = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($pnaslov['id']);
-        $I->assertEquals('ww', $pnaslov['naziv']);
+
+        $data    = [
+            'naziv'      => 'aa',
+            'popa'       => $this->lookPopa['id'],
+            'oseba'      => null,
+            'ulica'      => 'aa',
+            'ulicaDva'   => 'aa',
+            'posta'      => 'aa',
+            'postaNaziv' => 'aa',
+            'pokrajina'  => 'aa',
+            'drzava'     => $this->objDrzava['id'],
+            'jeeu'       => true,
+            'privzeti'   => true,
+        ];
+        $pnaslov = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($pnaslov['id']);
     }
 
     /**
@@ -187,9 +202,11 @@ class PostniNaslovCest
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
 
-        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-//        $I->assertEquals("ww", $list[0]['ulica']);
+        $totRec = $resp['state']['totalRecords'];
+        codecept_debug($list);
+        $I->assertGreaterThanOrEqual(2, $totRec);
+        $I->assertEquals("aa", $list[0]['naziv']);
+        $I->assertEquals("ww", $list[$totRec - 1]['naziv']);
     }
 
     /**
@@ -280,7 +297,7 @@ class PostniNaslovCest
             'naziv'      => 'jeee',
             'posta'      => 'aa',
             'postaNaziv' => 'aa',
-            'ulica' => 'aa',
+            'ulica'      => 'aa',
             'jeeu'       => FALSE,
             'privzeti'   => true,
         ];
@@ -291,7 +308,7 @@ class PostniNaslovCest
         $data = [
             'posta'      => 'aa',
             'postaNaziv' => 'aa',
-            'ulica' => 'aa',
+            'ulica'      => 'aa',
             'popa'       => null,
             'oseba'      => $this->lookOseba['id'],
             'naziv'      => 'jeee null',

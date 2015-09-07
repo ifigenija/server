@@ -51,7 +51,7 @@ forms:
 #            - trrji
 #            - alternacije
 #            - pogodbe
-#            - sodelovanja
+#            - sodelovanja 
         hydrator: 
             byValue: [trrji]
             exclude: [naslovi,telefonske,alternacije,pogodbe,sodelovanja]

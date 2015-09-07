@@ -292,7 +292,7 @@ class DogodekCest
             'status'          => '100',
             'razred'          => '500',
             'termin'          => 'zz',
-            'title'             => 'zz',
+            'title'           => 'zz',
             'zasedenost'      => $this->objZasedenost['id'],
             'prostor'         => $this->lookProstor['id'],
             'sezona'          => $this->objSezona['id'],
@@ -311,12 +311,12 @@ class DogodekCest
             'status'          => '200',
             'razred'          => '100',
             'termin'          => 'aa',
-            'title'             => 'aa',
+            'title'           => 'aa',
             'predstava'       => $this->objPredstava['id'],
             'zasedenost'      => null,
             'vaja'            => null,
             'gostovanje'      => null,
-            'splosni'    => null,
+            'splosni'         => null,
             'prostor'         => null,
             'sezona'          => $this->objSezona['id'],
         ];
@@ -326,7 +326,6 @@ class DogodekCest
         $I->assertEquals("200", $ent['status']);
     }
 
-  
     /**
      *  kreiramo zapis
      * 
@@ -399,8 +398,10 @@ class DogodekCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
+        $totR = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totR);
+        $I->assertEquals("aa", $list[0]['title']);      //glede na sort
+        $I->assertEquals("zz", $list[$totR - 1]['title']);      //glede na sort
     }
 
     /**
@@ -479,12 +480,12 @@ class DogodekCest
             'status'          => '100',
             'razred'          => '100',
             'termin'          => 'cc',
-            'title'             => 'cc',
+            'title'           => 'cc',
             'predstava'       => null,
             'zasedenost'      => null,
             'vaja'            => null,
             'gostovanje'      => null,
-            'splosni'    => null,
+            'splosni'         => null,
             'prostor'         => null,
             'sezona'          => $this->objSezona['id'],
         ];
@@ -503,13 +504,13 @@ class DogodekCest
             'status'          => '200',
             'razred'          => '200',
             'termin'          => 'dd',
-            'title'             => 'dd',
+            'title'           => 'dd',
             'predstava'       => null,
             'zasedenost'      => null,
             'vaja'            => $this->objVaja['id'],
-            'predstava'        => $this->objPredstava['id'],
+            'predstava'       => $this->objPredstava['id'],
             'gostovanje'      => null,
-            'splosni'    => null,
+            'splosni'         => null,
             'prostor'         => null,
             'sezona'          => $this->objSezona['id'],
         ];
@@ -520,7 +521,6 @@ class DogodekCest
         // testiramo na enako številko napake kot je v validaciji
         $I->assertEquals(1000361, $resp[0]['code']);
     }
-
 
     /**
      * preberemo relacije

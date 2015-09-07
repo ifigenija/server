@@ -168,14 +168,15 @@ class RekviziterstvoCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl ;
+        $listUrl = $this->restUrl;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-        $I->assertEquals("aa", $list[0]['opisPostavitve']);      //glede na sort
+        codecept_debug($list);
+        $totRec  = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totRec);
+        $I->assertEquals("aa", $list[0]['opisPostavitve']);
+        $I->assertEquals("zz", $list[$totRec - 1]['opisPostavitve']);
     }
 
     /**

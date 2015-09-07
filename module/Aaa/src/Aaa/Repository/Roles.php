@@ -52,6 +52,7 @@ class Roles
         $sort = $this->getSort($name);
         $qb->orderBy($sort->order, $sort->dir);
 
+
         if (!empty($options['text'])) {
             $srch = strtolower($options['text']);
             $qb->Where($ex->like('lower(r.name)', ':name'));

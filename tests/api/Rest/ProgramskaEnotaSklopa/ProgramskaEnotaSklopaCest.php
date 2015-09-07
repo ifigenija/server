@@ -161,7 +161,10 @@ class ProgramskaEnotaSklopaCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totRec);
+        $I->assertEquals("aa", $list[0]['naslovPE']);
+        $I->assertEquals("zz", $list[$totRec - 1]['naslovPE']);
     }
 
     /**

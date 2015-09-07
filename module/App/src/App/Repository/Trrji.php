@@ -36,28 +36,15 @@ class Trrji
 
             case "vse":
                 $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $this->expect(!(empty($options['popa']) && empty($options['oseba'])), "Oseba ali Partner ali država sta obvezna", 770021);
                 $qb = $this->getDefaultQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
-//            case "default":
-//                $this->expect(!(empty($options['popa']) && empty($options['oseba'])), "Oseba ali Partner ali država sta obvezna", 770021);
-//                $crit = new Criteria();
-//                $e    = $crit->expr();
-//
-//                if (!empty($options['popa'])) {
-//                    $popa = $this->getEntityManager()->find('App\Entity\Popa', $options['popa']);
-//                    $exp  = $e->eq('popa', $popa);
-//                } else {
-//                    $oseba = $this->getEntityManager()->find('App\Entity\Oseba', $options['oseba']);
-//
-//                    $exp = $e->eq('oseba', $oseba);
-//                }
-//                $crit->andWhere($exp);
-//                return new Selectable($this, $crit);
         }
     }
 

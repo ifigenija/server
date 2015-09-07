@@ -40,6 +40,7 @@ class TelefonskaCest
     {
         
     }
+
     /**
      * inicializira bazo  glede na DumpFunctional.sql
      * 
@@ -51,28 +52,26 @@ class TelefonskaCest
         $I->initDB();
     }
 
-
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
     public function lookupOsebo(ApiTester $I)
     {
-        $this->lookOseba=$ent = $I->lookupEntity("oseba", "0006",false);
+        $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0006", false);
         $I->assertNotEmpty($ent);
     }
-    
+
     /**
      * 
      * @param ApiTester $I
      */
     public function lookupPopa(ApiTester $I)
     {
-        $this->lookPopa=$ent = $I->lookupEntity("popa", "0988",false);
+        $this->lookPopa = $ent            = $I->lookupEntity("popa", "0988", false);
         $I->assertNotEmpty($ent);
     }
 
-    
     /**
      *  Ustvari osebo
      * 
@@ -114,7 +113,7 @@ class TelefonskaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'vrsta'    => 'mobilna', 
+            'vrsta'    => 'mobilna',
             'stevilka' => '12-34',
             'privzeta' => true,
             'oseba'    => $this->lookOseba['id'],
@@ -125,7 +124,7 @@ class TelefonskaCest
 
         // še en zapis
         $data = [
-            'vrsta'    => 'domaca', 
+            'vrsta'    => 'domaca',
             'stevilka' => '567',
             'privzeta' => true,
             'popa'     => $this->lookPopa['id'],
@@ -180,10 +179,11 @@ class TelefonskaCest
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
         codecept_debug($resp);
-        
+        $totRec  = $resp['state']['totalRecords'];
         $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        $I->assertEquals('012', $list[0]['stevilka']);  
+        $I->assertEquals('012', $list[0]['stevilka']);
+        $I->assertEquals('567', $list[$totRec - 1]['stevilka']);
     }
 
     /**
@@ -212,7 +212,7 @@ class TelefonskaCest
         $ent['stevilka'] = '772-222';
         codecept_debug($ent);
 
-        
+
         // $$ ne deluje, ker je popa hidden
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals($ent['stevilka'], '772-222');
