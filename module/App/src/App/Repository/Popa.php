@@ -82,17 +82,17 @@ class Popa
             $qb->setParameter('naslov', strtolower("{$options['naslov']}%"), "string");
         }
 
-//        if (!empty($options['kontakna'])) {
-//            $qb->leftJoin('p.kontaktneOsebe', 'kontaktna');
-//            $qb->join('kontaktna.oseba', 'oseba');
-//
-//            $ime     = $e->like('lower(oseba.ime)', ':niz');
-//            $priimek = $e->like('lower(oseba.priimek)', ':niz');
-//
-//            $qb->andWhere($e->orX($ime, $priimek));
-//
-//            $qb->setParameter('niz', strtolower("{$options['kontaktna']}%"), "string");
-//        }
+        if (!empty($options['kontaktna'])) {
+            $qb->join('p.kontaktneOsebe', 'kontaktna');
+            $qb->join('kontaktna.oseba', 'oseba');
+
+            $ime     = $e->like('lower(oseba.ime)', ':niz');
+            $priimek = $e->like('lower(oseba.priimek)', ':niz');
+
+            $qb->andWhere($e->orX($ime, $priimek));
+
+            $qb->setParameter('niz', strtolower("{$options['kontaktna']}%"), "string");
+        }
 
         return $qb;
     }

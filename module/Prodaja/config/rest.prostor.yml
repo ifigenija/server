@@ -22,7 +22,26 @@ forms:
                 - naslov
 lists:
     default: 
-        filter:                
+        filter: 
+            elements: 
+                - name: q
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči..
+                    label: Išči
+                - name: popa
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči po poslovnem partnerju..
+                    label: Poslovni partner
+                - name: naslov
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči po naslovu..
+                    label: Naslov
         hydrator:
             lookups: 
                 - popa

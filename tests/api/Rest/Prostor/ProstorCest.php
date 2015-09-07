@@ -155,6 +155,63 @@ class ProstorCest
     }
 
     /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoProstoru(ApiTester $I)
+    {
+        //iskanje sifra
+        $listUrl = $this->restUrl . "?q=" . "01";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+
+        //iskanje naziv
+        $listUrl = $this->restUrl . "?q=" . "pos";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoNaslovu(ApiTester $I)
+    {
+        //iskanje ulica
+        $listUrl = $this->restUrl . "?naslov=" . "rim";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoPopa(ApiTester $I)
+    {
+        //iskanje ulica
+        $listUrl = $this->restUrl . "?popa=" . "juh";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+    }
+
+    /**
      * spremenim zapis
      * 
      * @depends create

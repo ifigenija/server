@@ -21,8 +21,10 @@ class Prostori
 
     protected $sortOptions = [
         "default" => [
-            "sifra" => ["alias" => "p.sifra"],
-            "naziv" => ["alias" => "p.naziv"]
+            "sifra"  => ["alias" => "p.sifra"],
+            "naziv"  => ["alias" => "p.naziv"],
+            "popa"   => ["alias" => "p.popa"],
+            "naslov" => ["alias" => "p.naslov"]
         ],
         "vse"     => [
             "sifra" => ["alias" => "p.sifra"],
@@ -35,8 +37,9 @@ class Prostori
         switch ($name) {
             case "default":
             case "vse":
-                $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $qb   = $this->getVseQb($options);
+                $sort = $this->getSort($name, $qb);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }
@@ -47,13 +50,36 @@ class Prostori
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.sifra', ':sif');
-            $qb->orWhere($naz);
-            $naz = $e->like('p.naziv', ':naz');
-            $qb->orWhere($naz);
+            $sifra = $e->like('lower(p.sifra)', ':query');
+            $naziv = $e->like('lower(p.naziv)', ':query');
 
-            $qb->setParameter('sif', "{$options['q']}%", "string");
-            $qb->setParameter('naz', "%{$options['q']}%", "string");
+            $qb->andWhere($e->orX($sifra, $naziv));
+
+            $qb->setParameter('query', strtolower("%{$options['q']}%"), "string");
+        }
+        if (!empty($options['popa'])) {
+            $qb->leftJoin('p.popa', 'popa');
+
+            $sifraPopa = $e->like('lower(popa.sifra)', ':popa');
+            $nazivPopa = $e->like('lower(popa.naziv)', ':popa');
+
+            $qb->andWhere($e->orX($sifraPopa, $nazivPopa));
+
+            $qb->setParameter('popa', strtolower("%{$options['popa']}%"), "string");
+        }
+
+        if (!empty($options['naslov'])) {
+            $qb->leftJoin('p.naslov', 'naslov');
+
+            $ulica          = $e->like('lower(naslov.ulica)', ':naslov');
+            $dodatnaUlica   = $e->like('lower(naslov.ulicaDva)', ':naslov');
+            $posta          = $e->like('lower(naslov.postaNaziv)', ':naslov');
+            $postnaStevilka = $e->like('lower(naslov.posta)', ':naslov');
+
+
+            $qb->andWhere($e->orX($ulica, $dodatnaUlica, $posta, $postnaStevilka));
+
+            $qb->setParameter('naslov', strtolower("%{$options['naslov']}%"), "string");
         }
         return $qb;
     }
