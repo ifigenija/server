@@ -1040,24 +1040,24 @@ class PopaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoKontaktniOsebi(ApiTester $I)
-    {
-        //iskanje po imenu
-        $listUrl = $this->restUrl . "?kontaktna=" . "aa";
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-
-        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-        
-        //iskanje po priimek
-        $listUrl = $this->restUrl . "?kontaktna=" . "bb";
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-
-        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-    }
+//    public function getListPoKontaktniOsebi(ApiTester $I)
+//    {
+//        //iskanje po imenu
+//        $listUrl = $this->restUrl . "?kontaktna=" . "aa";
+//
+//        $resp = $I->successfullyGetList($listUrl, []);
+//        $list = $resp['data'];
+//
+//        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+//        $I->assertNotEmpty($list);
+//        
+//        //iskanje po priimek
+//        $listUrl = $this->restUrl . "?kontaktna=" . "bb";
+//
+//        $resp = $I->successfullyGetList($listUrl, []);
+//        $list = $resp['data'];
+//
+//        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+//        $I->assertNotEmpty($list);
+//    }
 }

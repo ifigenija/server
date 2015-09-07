@@ -18,6 +18,7 @@ use Max\Repository\AbstractMaxRepository;
 class Popa
         extends AbstractMaxRepository
 {
+
     protected $sortOptions = [
         "default" => [
             "sifra" => ["alias" => "p.sifra"],
@@ -35,9 +36,9 @@ class Popa
         switch ($name) {
             case "default":
             case "vse":
-                $qb = $this->getVseQb($options);
+                $qb   = $this->getVseQb($options);
                 $sort = $this->getSort($name, $qb);
-                $qb->orderBy($sort->order,$sort->dir);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }
@@ -59,42 +60,43 @@ class Popa
             $naziv = $e->like('lower(p.naziv)', ':naz');
             $sifra = $e->like('lower(p.sifra)', ':naz');
             $email = $e->like('lower(p.email)', ':naz');
-            $iddv = $e->like('lower(p.idddv)', ':ddv');
+            $iddv  = $e->like('lower(p.idddv)', ':ddv');
 
             $qb->andWhere($e->orX($naziv, $sifra, $email, $iddv));
-            
+
             $qb->setParameter('naz', strtolower("%{$options['q']}%"), "string");
             $qb->setParameter('ddv', strtolower($options['q']), "string");
         }
-        
-        if(!empty($options['naslov'])){
+
+        if (!empty($options['naslov'])) {
             $qb->leftJoin('p.naslovi', 'naslov');
-            
-            $ulica     = $e->like('lower(naslov.ulica)', ':naslov');
-            $dodatnaUlica     = $e->like('lower(naslov.ulicaDva)', ':naslov');
-            $posta     = $e->like('lower(naslov.postaNaziv)', ':naslov');
-            $postnaStevilka     = $e->like('lower(naslov.posta)', ':naslov');
-            
-            
+
+            $ulica          = $e->like('lower(naslov.ulica)', ':naslov');
+            $dodatnaUlica   = $e->like('lower(naslov.ulicaDva)', ':naslov');
+            $posta          = $e->like('lower(naslov.postaNaziv)', ':naslov');
+            $postnaStevilka = $e->like('lower(naslov.posta)', ':naslov');
+
+
             $qb->andWhere($e->orX($ulica, $dodatnaUlica, $posta, $postnaStevilka));
-            
+
             $qb->setParameter('naslov', strtolower("{$options['naslov']}%"), "string");
         }
-        
-        if(!empty($options['kontakna'])){
-            $qb->leftJoin('p.kontaktneOsebe', 'kontaktna');
-            
-            $ime     = $e->like('lower(kontaktna.oseba.ime)', ':niz');
-            $priimek     = $e->like('lower(kontaktna.oseba.priimek)', ':niz');
-            
-            $qb->andWhere($e->orX($ime, $priimek));
-            
-            $qb->setParameter('niz', strtolower("{$options['kontaktna']}%"), "string");
-        }
+
+//        if (!empty($options['kontakna'])) {
+//            $qb->leftJoin('p.kontaktneOsebe', 'kontaktna');
+//            $qb->join('kontaktna.oseba', 'oseba');
+//
+//            $ime     = $e->like('lower(oseba.ime)', ':niz');
+//            $priimek = $e->like('lower(oseba.priimek)', ':niz');
+//
+//            $qb->andWhere($e->orX($ime, $priimek));
+//
+//            $qb->setParameter('niz', strtolower("{$options['kontaktna']}%"), "string");
+//        }
 
         return $qb;
     }
-    
+
     /**
      * 
      * 

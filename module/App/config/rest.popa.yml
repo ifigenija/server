@@ -57,12 +57,12 @@ lists:
                       required: false
                       placeholder: Vpiši del naslova..
                       label: Naslov
-                - name: kontaktna
-                  type: text
-                  options:
-                      required: false
-                      placeholder: Vpiši kontaktno osebo..
-                      label: Kontaktne osebe
+#                - name: kontaktna
+#                  type: text
+#                  options:
+#                      required: false
+#                      placeholder: Vpiši kontaktno osebo..
+#                      label: Kontaktne osebe
 #    vse:
 #        filter:
 hydrator:      
