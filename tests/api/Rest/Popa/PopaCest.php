@@ -80,6 +80,9 @@ class PopaCest
     private $objProstor2;
     private $objNaslov1;
     private $objNaslov2;
+    private $objNaslov3;
+    private $objNaslov4;
+    private $lookDrzava;
 
     public function _before(ApiTester $I)
     {
@@ -128,6 +131,17 @@ class PopaCest
         $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0002", false);
         $I->assertNotEmpty($ent);
     }
+    
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupDrzava(ApiTester $I)
+    {
+        $this->lookDrzava = $ent              = $I->lookupEntity("drzava", "SI", false);
+        $I->assertNotEmpty($ent);
+    }
+    
 
     /**
      * 
@@ -672,6 +686,41 @@ class PopaCest
         ];
         $this->objNaslov2 = $pnaslov          = $I->successfullyCreate($this->pnaslovUrl, $data);
         $I->assertGuid($pnaslov['id']);
+        
+        // še enega
+        $data = [
+            "popa"      => $this->obj2['id'],
+            "naziv"      => "naslov1",
+            "ulica"      => "cmd 16",
+            "ulicaDva"   => "cankarjeva 16",
+            "posta"      => "2250",
+            "postaNaziv" => "Ptuj",
+            "pokrajina"  => "Štajerska",
+            "drzava"     => $this->lookDrzava['id'],
+            'oseba'      => null,
+            'jeeu'       => true,
+            'privzeti'   => true,
+        ];
+
+        $this->objNaslov3 = $pnaslov             = $I->successfullyCreate($this->pnaslovUrl, $data);
+        $I->assertGuid($pnaslov['id']);
+        
+        $data = [
+            "popa"      => $this->obj2['id'],
+            "naziv"      => "naslov1",
+            "ulica"      => "cmd 16",
+            "ulicaDva"   => "cankarjeva 16",
+            "posta"      => "2250",
+            "postaNaziv" => "Ptuj",
+            "pokrajina"  => "Štajerska",
+            "drzava"     => $this->lookDrzava['id'],
+            'oseba'      => null,
+            'jeeu'       => true,
+            'privzeti'   => true,
+        ];
+
+        $this->objNaslov4 = $pnaslov             = $I->successfullyCreate($this->pnaslovUrl, $data);
+        $I->assertGuid($pnaslov['id']);
     }
 
     /**
@@ -771,7 +820,7 @@ class PopaCest
     public function preberiRelacijeZNaslovi(ApiTester $I)
     {
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "naslovi", "");
-        $I->assertEquals(2, count($resp));
+        $I->assertEquals(4, count($resp));
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "naslovi", $this->objNaslov1['id']);
         $I->assertEquals(1, count($resp));

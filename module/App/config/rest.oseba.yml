@@ -21,12 +21,12 @@ forms:
             - opombe
 #            - naslovi
             - email
-            - datumRojstva
-            - emso
-            - davcna
-            - drzavljanstvo
-            - drzavaRojstva
-            - krajRojstva
+#            - datumRojstva
+#            - emso
+#            - davcna
+#            - drzavljanstvo
+#            - drzavaRojstva
+#            - krajRojstva
 #            - user         # bomo na strani userja urejali
 #            - telefonske@
 #            - trrji
@@ -67,7 +67,7 @@ lists:
                   type: text
                   options:
                     required: false
-                    placeholder: Išči....
+                    placeholder: Išči..
                     label: Išči
                 - name: naslov
                   type: text
