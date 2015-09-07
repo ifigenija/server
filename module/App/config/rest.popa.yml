@@ -34,14 +34,14 @@ forms:
             - producent
             - kupec
         hydrator: 
-            byValue: [ naslovi,trrji,telefonske,kontaktneOsebe]
-            lookups: [ naslovi.drzava, kontaktneOsebe.oseba, kontaktneOsebe.popa]
+            byValue: [ naslovi,trrji,telefonske,kontaktneOsebe, kontaktneOsebe.oseba]
+            lookups: [ naslovi.drzava, kontaktneOsebe.popa]
             exclude: [ pogodbe, stroski]
 lists:
     default: 
         hydrator:
-            byValue: [ naslovi,trrji,telefonske,kontaktneOsebe]
-            lookups: [ kontaktneOsebe.oseba, kontaktneOsebe.popa]
+            byValue: [ naslovi,trrji,telefonske,kontaktneOsebe, kontaktneOsebe.oseba]
+            lookups: [ kontaktneOsebe.popa]
             exclude: [pogodbe, stroski]
         filter:
             elements:
