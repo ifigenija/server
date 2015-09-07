@@ -36,8 +36,9 @@ class Abonmaji
         switch ($name) {
             case "default":
             case "vse":
-                $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $qb   = $this->getVseQb($options);
+                $sort = $this->getSort($name, $qb);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }
@@ -48,11 +49,10 @@ class Abonmaji
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.ime', ':ime');
+            $ime = $e->like('lower(p.ime)', ':ime');
+            $qb->andWhere($e->orX($ime));
 
-            $qb->andWhere($e->orX($naz));
-
-            $qb->setParameter('ime', "{$options['q']}%", "string");
+            $qb->setParameter('ime', strtolower("%{$options['q']}%"), "string");
         }
 
         return $qb;

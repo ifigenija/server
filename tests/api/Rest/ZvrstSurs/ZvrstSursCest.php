@@ -46,22 +46,22 @@ class ZvrstSursCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'sifra' => 'ZZ',
-            'naziv' => 'zz',
+            'sifra' => 'XX',
+            'naziv' => 'yy',
             'opis'  => 'zz',
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals($ent['naziv'], 'zz');
+        $I->assertEquals($ent['naziv'], 'yy');
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
         $data = [
             'sifra' => 'AA',
-            'naziv' => 'aa',
-            'opis'  => 'aa',
+            'naziv' => 'bb',
+            'opis'  => 'cc',
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals($ent['naziv'], 'aa');
+        $I->assertEquals($ent['naziv'], 'bb');
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -74,11 +74,11 @@ class ZvrstSursCest
     public function update(ApiTester $I)
     {
         $ent          = $this->obj;
-        $ent['naziv'] = 'xx';
+        $ent['naziv'] = 'dd';
 
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($ent['naziv'], 'xx');
+        $I->assertEquals($ent['naziv'], 'dd');
     }
 
     /**
@@ -91,8 +91,8 @@ class ZvrstSursCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals($ent['sifra'], 'ZZ');
-        $I->assertEquals($ent['naziv'], 'xx');
+        $I->assertEquals($ent['sifra'], 'XX');
+        $I->assertEquals($ent['naziv'], 'dd');
         $I->assertEquals($ent['opis'], 'zz');
     }
 
@@ -126,6 +126,27 @@ class ZvrstSursCest
         $I->assertNotEmpty($list);
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
 //        $I->assertEquals("aa", $list[0]['ime']);      //glede na sort
+    }
+
+    public function getListPoZvrsti(ApiTester $I)
+    {
+        //iskanje po sifri
+        $listUrl = $this->restUrl . "?q=" . "z";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje po nazivu
+        $listUrl = $this->restUrl . "?q=" . "b";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
     }
 
     /**

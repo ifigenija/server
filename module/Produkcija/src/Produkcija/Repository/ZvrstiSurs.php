@@ -23,7 +23,8 @@ class ZvrstiSurs
 
     protected $sortOptions = [
         "default" => [
-            "sifra" => ["alias" => "p.sifra"]
+            "sifra" => ["alias" => "p.sifra"],
+            "naziv" => ["alias" => "p.naziv"]
         ],
         "vse"     => [
             "sifra" => ["alias" => "p.sifra"]
@@ -36,7 +37,8 @@ class ZvrstiSurs
             case "default":
             case "vse":
                 $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name, $qb);
+                $qb->orderBy($sort->order,$sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }
@@ -46,12 +48,13 @@ class ZvrstiSurs
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
+            
+            $sifra     = $e->like('lower(p.sifra)', ':query');
+            $naziv = $e->like('lower(p.naziv)', ':query');
 
-            $naz = $e->like('p.sifra', ':sifra');
+            $qb->andWhere($e->orX($sifra, $naziv));
 
-            $qb->andWhere($e->orX($naz));
-
-            $qb->setParameter('sifra', "{$options['q']}%", "string");
+            $qb->setParameter('query', strtolower("%{$options['q']}%"), "string");
         }
 
         return $qb;
