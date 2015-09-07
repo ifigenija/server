@@ -50,21 +50,21 @@ class ZvrstUprizoritveCest
     {
         $data      = [
             'sifra' => 'ZZ',
-            'naziv' => 'zz',
-            'opis'  => 'zz',
+            'naziv' => 'xx',
+            'opis'  => 'yy',
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals($ent['naziv'], 'zz');
+        $I->assertEquals($ent['naziv'], 'xx');
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
         $data = [
             'sifra' => 'AA',
-            'naziv' => 'aa',
-            'opis'  => 'aa',
+            'naziv' => 'bb',
+            'opis'  => 'cc',
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals($ent['naziv'], 'aa');
+        $I->assertEquals($ent['naziv'], 'bb');
         $I->assertNotEmpty($ent['id']);
     }
 
@@ -96,7 +96,7 @@ class ZvrstUprizoritveCest
 
         $I->assertEquals($ent['sifra'], 'ZZ');
         $I->assertEquals($ent['naziv'], 'xx');
-        $I->assertEquals($ent['opis'], 'zz');
+        $I->assertEquals($ent['opis'], 'yy');
     }
 
     /**
@@ -129,6 +129,31 @@ class ZvrstUprizoritveCest
         $I->assertNotEmpty($list);
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
 //        $I->assertEquals("aa", $list[0]['naziv']);      //glede na sort
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoZvrstiUprizoritve(ApiTester $I)
+    {
+        //iskanje po sifra
+        $listUrl = $this->restUrl . "?q=" . "zz";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje po sifra
+        $listUrl = $this->restUrl . "?q=" . "bb";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
     }
 
     /**

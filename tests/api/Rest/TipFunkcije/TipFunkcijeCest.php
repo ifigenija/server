@@ -53,8 +53,8 @@ class TipFunkcijeCest
         $data      = [
             'sifra'       => '99',
             'ime'       => 'zz',
-            'opis'      => 'zz',
-            'imeZenski' => 'zz',
+            'opis'      => 'xx',
+            'imeZenski' => 'yy',
             'podrocje'  => 'umetnik',
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
@@ -65,15 +65,15 @@ class TipFunkcijeCest
         $data = [
             'sifra' => '98',
             'ime'        => 'aa',
-            'opis'       => 'aa',
-            'imeZenski'  => 'aa',
+            'opis'       => 'bb',
+            'imeZenski'  => 'cc',
             'podrocje'   => 'tehnik',
             'pomembnost' => 'aa',
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['opis'], 'aa');
+        $I->assertEquals($ent['opis'], 'bb');
     }
 
     /**
@@ -91,6 +91,49 @@ class TipFunkcijeCest
         $I->assertNotEmpty($list);
         $I->assertGreaterThanOrEqual(16, count($list));     // odvisno od testnih fixturjev
 //        $I->assertEquals("Avtor", $list[0]['ime']);      //glede na sort
+    }
+    
+     /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoTipuFunkcije(ApiTester $I)
+    {
+        //iskanje imenu
+        $listUrl = $this->restUrl . "?q=" . "aa";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje zenskem imenu 
+        $listUrl = $this->restUrl . "?q=" . "cc";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje podrocje 
+        $listUrl = $this->restUrl . "?q=" . "umetnik";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(14, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje sifra 
+        $listUrl = $this->restUrl . "?q=" . "98";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
     }
 
     /**
@@ -140,7 +183,7 @@ class TipFunkcijeCest
         $I->assertEquals($ent['sifra'], '99');
         $I->assertEquals($ent['ime'], 'zz');
         $I->assertEquals($ent['opis'], 'yy');
-        $I->assertEquals($ent['imeZenski'], 'zz');
+        $I->assertEquals($ent['imeZenski'], 'yy');
         $I->assertEquals($ent['podrocje'], 'umetnik');
         $I->assertTrue(isset($ent['funkcije']), "ali so funkcije");
         $I->assertEquals(0, count($ent['funkcije']), "število funkcij");
