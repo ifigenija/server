@@ -32,7 +32,8 @@ class VrsteStroska
         switch ($name) {
             case "default":
                 $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }

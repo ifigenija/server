@@ -52,6 +52,17 @@ class AbonmaCest
         $this->obj = $abon      = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($abon['ime'], 'zz');
 
+        // kreiramo še en zapis za test sortov
+        $data = [
+            'stPredstav' => 7,
+            'stKuponov'  => 8,
+            'ime'        => 'Živa',
+            'opis'       => 'aa',
+            'kapaciteta' => 9,
+        ];
+        $abon = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($abon['id']);
+
         // kreiramo še en zapis
         $data = [
             'stPredstav' => 7,
@@ -61,8 +72,7 @@ class AbonmaCest
             'kapaciteta' => 9,
         ];
         $abon = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals($abon['ime'], 'aa');
-        $I->assertNotEmpty($abon['id']);
+        $I->assertGuid($abon['id']);
     }
 
     /**
@@ -126,8 +136,10 @@ class AbonmaCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $totalRecords = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totalRecords);
         $I->assertEquals("aa", $list[0]['ime']);      //glede na sort
+        $I->assertEquals("Živa", $list[$totalRecords - 1]['ime']);      //glede na sort
     }
 
     /**

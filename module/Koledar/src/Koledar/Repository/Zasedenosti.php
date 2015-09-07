@@ -1,4 +1,5 @@
 <?php
+
 /*
  *  Licenca GPLv3
  */
@@ -35,7 +36,8 @@ class Zasedenosti
             case "default":
             case "vse":
                 $qb   = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }

@@ -90,7 +90,7 @@ class TerminStoritveCest
      */
     public function getListDogodek(ApiTester $I)
     {
-        $resp             = $I->successfullyGetList($this->dogodekUrl , []);
+        $resp             = $I->successfullyGetList($this->dogodekUrl, []);
         $list             = $resp['data'];
         $I->assertNotEmpty($list);
         $this->objDogodek = $ent              = array_pop($list);
@@ -219,10 +219,10 @@ class TerminStoritveCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'planiranZacetek' => '2011-02-01T00:00:00+0100',
-            'planiranKonec'   => '2012-02-01T00:00:00+0100',
-            'zacetek'         => '2013-02-01T00:00:00+0100',
-            'konec'           => '2014-02-01T00:00:00+0100',
+            'planiranZacetek' => '2021-02-01T00:00:00+0100',
+            'planiranKonec'   => '2022-02-01T00:00:00+0100',
+            'zacetek'         => '2023-02-01T00:00:00+0100',
+            'konec'           => '2024-02-01T00:00:00+0100',
             'planiranoTraja'  => 1.23,
             'dogodek'         => $this->objDogodek['id'],
             'alternacija'     => $this->lookAlternacija['id'],
@@ -235,10 +235,10 @@ class TerminStoritveCest
 
         // kreiramo še en zapis
         $data = [
-            'planiranZacetek' => '2015-02-01T00:00:00+0100',
-            'planiranKonec'   => '2016-02-01T00:00:00+0100',
-            'zacetek'         => '2017-02-01T00:00:00+0100',
-            'konec'           => '2018-02-01T00:00:00+0100',
+            'planiranZacetek' => '2005-02-01T00:00:00+0100',
+            'planiranKonec'   => '2006-02-01T00:00:00+0100',
+            'zacetek'         => '2007-02-01T00:00:00+0100',
+            'konec'           => '2008-02-01T00:00:00+0100',
             'planiranoTraja'  => 4.56,
             'dogodek'         => $this->objDogodek['id'],
             'alternacija'     => $this->lookAlternacija['id'],
@@ -256,16 +256,15 @@ class TerminStoritveCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoAlternaciji(ApiTester $I)
+    public function getList(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?alternacija=" . $this->lookAlternacija['id'];
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        codecept_debug($resp);
-
+        $resp   = $I->successfullyGetList($this->restUrl, []);
+        $list   = $resp['data'];
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
+        $I->assertEquals("2005-02-01T00:00:00+0100", $list[0]['ime']);
+        $I->assertEquals("2021-02-01T00:00:00+0100", $list[$totRec - 1]['planiranZacetek']);
     }
 
     /**
@@ -310,11 +309,11 @@ class TerminStoritveCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['planiranZacetek'], '2011-02-01T00:00:00+0100');
-        $I->assertEquals($ent['planiranKonec'], '2012-02-01T00:00:00+0100');
-        $I->assertEquals($ent['zacetek'], '2013-02-01T00:00:00+0100');
-        $I->assertEquals($ent['konec'], '2014-02-01T00:00:00+0100');
-        $I->assertEquals($ent['planiranoTraja'], 7.89); 
+        $I->assertEquals($ent['planiranZacetek'], '2021-02-01T00:00:00+0100');
+        $I->assertEquals($ent['planiranKonec'], '2022-02-01T00:00:00+0100');
+        $I->assertEquals($ent['zacetek'], '2023-02-01T00:00:00+0100');
+        $I->assertEquals($ent['konec'], '2024-02-01T00:00:00+0100');
+        $I->assertEquals($ent['planiranoTraja'], 7.89);
         $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
         $I->assertEquals($ent['alternacija'], $this->lookAlternacija['id']);
         $I->assertEquals($ent['oseba'], $this->lookOseba['id']);

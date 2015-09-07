@@ -215,12 +215,11 @@ class SezonaCest
         $listUrl = $this->restUrl;
 
         $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-        codecept_debug($resp);
-
-        $I->assertEquals(2, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-        $I->assertEquals("zz", $list[0]['ime']);      // odvisno od sortiranja
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totRec);
+        $I->assertEquals("00", $list[0]['sifra']);
+        $I->assertEquals("99", $list[$totRec - 1]['sifra']);
     }
 
     /**

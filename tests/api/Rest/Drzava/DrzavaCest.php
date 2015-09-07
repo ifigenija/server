@@ -70,7 +70,7 @@ class DrzavaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'sifra'     => 'XX',
+            'sifra'     => 'ŽŽ',
             'sifraDolg' => 'XX',
             'isoNum'    => 'xx',
             'isoNaziv'  => 'xx',
@@ -118,7 +118,7 @@ class DrzavaCest
     {
         $drz = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals($drz['sifra'], 'XX');
+        $I->assertEquals($drz['sifra'], 'ŽŽ');
         $I->assertEquals($drz['sifraDolg'], 'XX');
         $I->assertEquals($drz['isoNum'], 'xx');
         $I->assertEquals($drz['isoNaziv'], 'xx');
@@ -154,8 +154,25 @@ class DrzavaCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
+        $totRec = $resp['state']['totalRecords'];
         $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertEquals("xx", $list[0]['opomba']);
+       
+        // po vseh
+        $resp    = $I->successfullyGetList($this->restUrl, []);
+        $list    = $resp['data'];
+//        $I->assertNotEmpty($list);
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totRec);
+        $I->assertEquals("AA", $list[0]['sifra']);
+      
+        // zadnjega preberemo
+        $resp    = $I->successfullyGetList($this->restUrl."?sort_by=sifra&order=DESC", []);
+        $list    = $resp['data'];
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totRec);
+        $I->assertEquals("ŽŽ", $list[0]['sifra']);
     }
 
     /**

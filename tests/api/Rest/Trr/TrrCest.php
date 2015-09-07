@@ -144,10 +144,11 @@ class TrrCest
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
-
+        codecept_debug($list);
+        $totRec=$resp['state']['totalRecords'];
         $I->assertEquals(2, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
         $I->assertEquals("A1", $list[0]['stevilka']);
+        $I->assertEquals("WW123", $list[$totRec-1]['stevilka']);
     }
 
     /**

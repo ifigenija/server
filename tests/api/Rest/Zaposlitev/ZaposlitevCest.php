@@ -36,7 +36,8 @@ class ZaposlitevCest
     private $obj;
     private $obj2;
     private $objOseba;
-    private $lookOseba;
+    private $lookOseba1;
+    private $lookOseba2;
     private $lookFunkcija;
     private $objAlternacija1;
     private $objAlternacija2;
@@ -66,8 +67,11 @@ class ZaposlitevCest
      */
     public function lookupOsebo(ApiTester $I)
     {
-        $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0006", false);
-        $I->assertNotEmpty($ent);
+        $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0006", false);
+        $I->assertGuid($ent['id']);
+
+        $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0007", false);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -112,18 +116,19 @@ class ZaposlitevCest
     public function create(ApiTester $I)
     {
         $data      = [
+            'sifra'               => '99',
             'status'              => 'A',
             'zacetek'             => '2010-02-01T00:00:00+0100',
             'konec'               => '2010-02-01T00:00:00+0100',
             'tip'                 => 1,
             'delovnaObveza'       => 2,
             'malica'              => 'zz',
-            'delovnoMesto'              => 'XXX',
+            'delovnoMesto'        => 'XXX',
             'izmenskoDelo'        => true,
             'individualnaPogodba' => true,
             'jeZaposlenVdrugemJz' => TRUE,
             'jeNastopajoci'       => TRUE,
-            'oseba'               => $this->lookOseba['id'],
+            'oseba'               => $this->lookOseba1['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -132,20 +137,42 @@ class ZaposlitevCest
 
         // kreiramo še en zapis
         $data       = [
+            'sifra'               => '00',
             'status'              => 'N',
             'zacetek'             => '2015-02-01T00:00:00+0100',
             'konec'               => '2016-02-01T00:00:00+0100',
             'tip'                 => 4,
             'delovnaObveza'       => 5,
-            'delovnoMesto'              => 'XXX',
+            'delovnoMesto'        => 'XXX',
             'malica'              => 'xx',
             'izmenskoDelo'        => true,
             'individualnaPogodba' => true,
             'jeZaposlenVdrugemJz' => TRUE,
             'jeNastopajoci'       => TRUE,
-            'oseba'               => $this->lookOseba['id'],
+            'oseba'               => $this->lookOseba1['id'],
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['status'], 'N');
+
+        /**
+         * kreiramo še en zapis brez šifre
+         */
+        $data       = [
+            'status'              => 'N',
+            'zacetek'             => '2016-02-01T00:00:00+0100',
+            'konec'               => '2017-02-01T00:00:00+0100',
+            'tip'                 => 4,
+            'delovnaObveza'       => 5,
+            'delovnoMesto'        => 'XXX',
+            'malica'              => 'xx',
+            'izmenskoDelo'        => true,
+            'individualnaPogodba' => true,
+            'jeZaposlenVdrugemJz' => TRUE,
+            'jeNastopajoci'       => TRUE,
+            'oseba'               => $this->lookOseba2['id'],
+        ];
+        $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['status'], 'N');
     }
@@ -163,8 +190,8 @@ class ZaposlitevCest
         $data                  = [
             'zaposlen'     => true,
             'funkcija'     => $this->lookFunkcija['id'],
-            'zaposlitev'  => $this->obj2['id'],
-            'oseba'        => $this->lookOseba['id'],
+            'zaposlitev'   => $this->obj2['id'],
+            'oseba'        => $this->lookOseba1['id'],
             'koprodukcija' => NULL,
             'pogodba'      => NULL,
         ];
@@ -174,8 +201,8 @@ class ZaposlitevCest
         $data                  = [
             'zaposlen'     => true,
             'funkcija'     => $this->lookFunkcija['id'],
-            'zaposlitev'  => $this->obj2['id'],
-            'oseba'        => $this->lookOseba['id'],
+            'zaposlitev'   => $this->obj2['id'],
+            'oseba'        => $this->lookOseba1['id'],
             'koprodukcija' => NULL,
             'pogodba'      => NULL,
         ];
@@ -191,15 +218,16 @@ class ZaposlitevCest
      */
     public function getListPoOsebi(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?oseba=" . $this->lookOseba['id'];
+        $listUrl = $this->restUrl . "?oseba=" . $this->lookOseba1['id'];
 
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
+        $resp   = $I->successfullyGetList($listUrl, []);
+        $list   = $resp['data'];
         codecept_debug($resp);
-
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-//        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
+//        $I->assertEquals("00", $list[0]['sifra']);      // odvisno od sortiranja
+//        $I->assertEquals("99x", $list[$totRec - 1]['sifra']);      // odvisno od sortiranja
     }
 
     /**
@@ -208,14 +236,26 @@ class ZaposlitevCest
      */
     public function getListVse(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "/vse";
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
+        $resp    = $I->successfullyGetList($this->restUrl . "/vse", []);
         $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
+        $I->assertEquals("Ana  Potočnik", $list[0]['oseba']['label']);      //glede na sort
+        $I->assertEquals("Mojca  Vidmar", $list[$totRec - 1]['oseba']['label']);      //glede na sort
+ 
+        /**
+         * še po drugem sortnem polju
+         */
+        $resp    = $I->successfullyGetList($this->restUrl . "/vse?sort_by=sifra&order=DESC", []);
+        $list    = $resp['data'];
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $I->assertEquals("06", $list[0]['sifra']);      //glede na sort
+        $I->assertEquals("0006", $list[$totRec - 1]['sifra']);      //glede na sort
+
+        
     }
 
     /**
@@ -244,7 +284,7 @@ class ZaposlitevCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
         codecept_debug($ent);
-        
+
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['status'], 'A');
         $I->assertEquals($ent['zacetek'], '2010-02-01T00:00:00+0100');
@@ -253,11 +293,11 @@ class ZaposlitevCest
         $I->assertEquals($ent['delovnaObveza'], 2);
 //        $I->assertEquals($ent['malica'], 'zz');  //$$zaenkrat nimamo definiranih vrednosti
         $I->assertEquals($ent['izmenskoDelo'], true);
-        $I->assertEquals( "XXX", $ent['delovnoMesto']);
+        $I->assertEquals("XXX", $ent['delovnoMesto']);
         $I->assertEquals($ent['individualnaPogodba'], true);
         $I->assertEquals($ent['jeZaposlenVdrugemJz'], TRUE);
         $I->assertEquals($ent['jeNastopajoci'], TRUE);
-        $I->assertEquals($ent['oseba'], $this->lookOseba['id']);
+        $I->assertEquals($ent['oseba'], $this->lookOseba1['id']);
     }
 
     /**
@@ -287,7 +327,7 @@ class ZaposlitevCest
         $I->assertEquals(1, count($resp));
     }
 
-        /**
+    /**
      *  testiram #1172 - zakaj zapis une uspe?
      * 
      * @depends lookupOsebo
@@ -307,7 +347,7 @@ class ZaposlitevCest
 //            'individualnaPogodba' => true,
 //            'jeZaposlenVdrugemJz' => TRUE,
 //            'jeNastopajoci'       => TRUE,
-//            'oseba'               => $this->lookOseba['id'],
+//            'oseba'               => $this->lookOseba1['id'],
 //        ];
 //        $ent       = $I->successfullyCreate($this->restUrl."/vse", $data);
 //        $I->assertNotEmpty($ent['id']);
@@ -315,7 +355,4 @@ class ZaposlitevCest
 //        $I->assertEquals($ent['status'], 'A');
 //        
 //    }
-
-    
-    
 }

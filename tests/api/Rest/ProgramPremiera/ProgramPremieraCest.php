@@ -494,6 +494,7 @@ class ProgramPremieraCest
         $I->assertEquals(1000613, $resp[0]['code']);
     }
 
+
     /**
      *  osvežimo zapis s tipom  brez koprodukcije
      * 
@@ -680,7 +681,7 @@ class ProgramPremieraCest
     public function updateKontrolaValidacijeAHSamoz(ApiTester $I)
     {
         $ent                           = $this->obj2;
-        $ent['avtorskiHonorarji'] = 4.56;
+        $ent['avtorskiHonorarji']      = 4.56;
         $ent['avtorskiHonorarjiSamoz'] = 4.56;
         $ent                           = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertGuid($ent['id']);
@@ -693,6 +694,24 @@ class ProgramPremieraCest
         $ent['avtorskiHonorarjiSamoz'] = -0.01;   // v praksi bo že klient zaokrožil na 2 mesti
         $resp                          = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals(1000629, $resp[0]['code']);
+    }
+    /**
+     * test negativnih integer vrednosti
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateZNegativnimObiskom(ApiTester $I)
+    {
+        // negativni obisk:
+        $ent              = $this->obj2;
+        $ent['obiskDoma'] = -11;
+        $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        codecept_debug($resp);
+//        $I->assertEquals(1000999, $resp[0]['code']);
+        // že v validate javi napako:
+        $I->assertContains("not greater", $resp[0]['message']);
+        
     }
 
 }

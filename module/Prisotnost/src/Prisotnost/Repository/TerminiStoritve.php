@@ -23,13 +23,13 @@ class TerminiStoritve
 
     protected $sortOptions = [
         "default" => [
-            "id" => ["alias" => "p.id"]
+            "planiranZacetek" => ["alias" => "p.planiranZacetek"]
         ],
         "vse"     => [
-            "id" => ["alias" => "p.id"]
+            "planiranZacetek" => ["alias" => "p.planiranZacetek"]
         ],
         "ure"     => [
-            "id" => ["alias" => "p.id"]
+            "planiranZacetek" => ["alias" => "p.planiranZacetek"]
         ],
     ];
 
@@ -39,35 +39,15 @@ class TerminiStoritve
             case "default":
             case "vse":
                 $qb   = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
-//            case "default":
-//                $this->expect(!empty($options['alternacija']), "Alternacija je obvezna", 770081);
-//                $crit = new Criteria();
-//                $e    = $crit->expr();
-//
-//                if (!empty($options['alternacija'])) {
-//                    $alternacija = $this->getEntityManager()->find('Produkcija\Entity\Alternacija', $options['alternacija']);
-//                    $exp   = $e->eq('alternacija', $alternacija);
-//                }
-//                $crit->andWhere($exp);
-//                return new Selectable($this, $crit);
             case "ure":
                 $this->expect(!empty($options['dogodek']), "Dogodek je obvezen", 770082);
                 $qb   = $this->getUreQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
-//                $this->expect(!empty($options['dogodek']), "Dogodek je obvezen", 770082);
-//                $crit = new Criteria();
-//                $e    = $crit->expr();
-//
-//                if (!empty($options['dogodek'])) {
-//                    $dogodek = $this->getEntityManager()->find('Koledar\Entity\Dogodek', $options['dogodek']);
-//                    $exp     = $e->eq('dogodek', $dogodek);
-//                }
-//                $crit->andWhere($exp);
-//                // $$ rb tu nekje bi še preverili, če je api enable-an za posamezen zapis
-//                return new Selectable($this, $crit);
         }
     }
 
@@ -76,9 +56,9 @@ class TerminiStoritve
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
-            $naz = $e->like('p.id', ':id');
+            $naz = $e->like('p.planiranZacetek', ':planiranZacetek');
             $qb->andWhere($e->orX($naz));
-            $qb->setParameter('id', "{$options['q']}%", "string");
+            $qb->setParameter('planiranZacetek', "{$options['q']}%", "string");
         }
         return $qb;
     }
@@ -87,9 +67,9 @@ class TerminiStoritve
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
-            $naz = $e->like('p.id', ':id');
+            $naz = $e->like('p.planiranZacetek', ':planiranZacetek');
             $qb->andWhere($e->orX($naz));
-            $qb->setParameter('id', "{$options['q']}%", "string");
+            $qb->setParameter('planiranZacetek', "{$options['q']}%", "string");
         }
                 if (!empty($options['dogodek'])) {
             $qb->join('p.dogodek', 'dogodek');

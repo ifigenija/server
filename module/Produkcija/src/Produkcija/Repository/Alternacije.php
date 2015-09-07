@@ -37,13 +37,15 @@ class Alternacije
         switch ($name) {
             case "vse":
                 $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $this->expect(!(empty($options['funkcija']) && empty($options['uprizoritev']) ), "Ali funkcija  ali uprizoritev je obvezna", 770081);
                 $this->expect(!(!empty($options['funkcija']) && !empty($options['uprizoritev']) ), "Le funkcija ali uprizoritev ne oba hkrati", 770082);
                 $qb = $this->getDefaultQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }

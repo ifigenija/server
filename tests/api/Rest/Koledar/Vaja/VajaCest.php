@@ -100,7 +100,7 @@ class VajaCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'zaporedna'   => 1,
+            'zaporedna'   => 6,
             'porocilo'    => 'zz',
             'dogodek'     => null, // najprej mora biti kreirana vaja, šele potem dogodek.
             'uprizoritev' => $this->lookUprizoritev['id'],
@@ -137,7 +137,7 @@ class VajaCest
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => "100",
+            'status'          => '200',
             'razred'          => '200',
             'termin'          => 'zz',
             'ime'             => 'zz',
@@ -145,7 +145,7 @@ class VajaCest
             'zasedenost'      => null,
             'vaja'            => $this->obj['id'],
             'gostovanje'      => null,
-            'splosni'    => null,
+            'splosni'         => null,
             'prostor'         => null,
             'sezona'          => null,
         ];
@@ -167,14 +167,14 @@ class VajaCest
             'zasedenost'      => null,
             'vaja'            => $this->objVaja2['id'],
             'gostovanje'      => null,
-            'splosni'    => null,
+            'splosni'         => null,
             'prostor'         => null,
             'sezona'          => null,
         ];
         $ent  = $I->successfullyCreate($this->dogodekUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals("100",$ent['status']);
+        $I->assertEquals("100", $ent['status']);
     }
 
     /**
@@ -202,14 +202,16 @@ class VajaCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl ;
+        $listUrl = $this->restUrl;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
+        $totRec = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals(1, $list[0]['zaporedna']);      //  odvisno od sortiranja
+        $I->assertEquals(1, $list[0]['zaporedna']);      //  odvisno od sortiranja
+        $I->assertEquals(1, $list[$totRec - 1]['zaporedna']);      //  odvisno od sortiranja
     }
 
     /**
@@ -239,7 +241,7 @@ class VajaCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['zaporedna'], 1);
+        $I->assertEquals($ent['zaporedna'], 6);
         $I->assertEquals($ent['porocilo'], 'yy');
         $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
         $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);

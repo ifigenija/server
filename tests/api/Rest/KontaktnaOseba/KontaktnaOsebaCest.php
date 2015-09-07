@@ -138,10 +138,10 @@ class KontaktnaOsebaCest
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
-        codecept_debug($resp);
+        codecept_debug($list);
 
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
+//        $I->assertNotEmpty($list);
 //        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
     }
 

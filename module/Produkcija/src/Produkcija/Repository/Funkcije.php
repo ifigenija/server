@@ -35,12 +35,14 @@ class Funkcije
         switch ($name) {
             case "vse":
                 $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1000670);
                 $qb = $this->getDefaultQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }

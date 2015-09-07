@@ -503,9 +503,11 @@ class PogodbaCest
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
 
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-//        $I->assertEquals("ZZ123", $list[0]['sifra']);
+        $I->assertEquals("0001", $list[0]['sifra']);
+        $I->assertEquals("0003", $list[$totRec - 1]['sifra']);
 
         $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev1['id'];
         $resp    = $I->successfullyGetList($listUrl, []);
@@ -513,7 +515,6 @@ class PogodbaCest
 
         $I->assertEquals(0, $resp['state']['totalRecords']);
 //        $I->assertNotEmpty($list);
-//        $I->assertEquals("ZZ123", $list[0]['sifra']);
     }
 
     /**

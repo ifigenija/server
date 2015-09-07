@@ -45,6 +45,7 @@ class ProdukcijskaHisaCest
     private $obj2;
     private $lookPopa1;
     private $lookPopa2;
+    private $lookPopa3;
     private $objKoprodukcija1;
     private $objKoprodukcija2;
     private $programPremieraUrl     = '/rest/programpremiera';
@@ -105,6 +106,8 @@ class ProdukcijskaHisaCest
         $I->assertNotEmpty($ent);
 
         $this->lookPopa2 = $ent             = $I->lookupEntity("popa", "0985", false);
+
+        $this->lookPopa3 = $ent             = $I->lookupEntity("popa", "9999", false);
     }
 
     /**
@@ -219,6 +222,17 @@ class ProdukcijskaHisaCest
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['sifra'], '0985');
+
+        /**
+         * še en za sort
+         */
+        $data       = [
+            'status' => 'AK',
+            'popa'   => $this->lookPopa3['id'],
+        ];
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals($ent['sifra'], '9999');
     }
 
     /**
@@ -317,9 +331,11 @@ class ProdukcijskaHisaCest
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
 
-        $I->assertNotEmpty($list);
+        codecept_debug($list);
+        $totRec=$resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals("bb", $list[0]['status']);
+        $I->assertEquals("0982", $list[0]['sifra']);
+        $I->assertEquals("9999", $list[$totRec-1]['sifra']);
     }
 
     /**

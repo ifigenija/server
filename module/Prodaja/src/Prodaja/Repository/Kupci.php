@@ -33,8 +33,9 @@ class Kupci
         switch ($name) {
             case "default":
             case "vse":
-                $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $qb   = $this->getVseQb($options);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }

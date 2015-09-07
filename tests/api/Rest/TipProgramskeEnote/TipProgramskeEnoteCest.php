@@ -150,13 +150,12 @@ class TipProgramskeEnoteCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl;
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
+        $resp    = $I->successfullyGetList($this->restUrl, []);
         $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
+        $totRec=$resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $I->assertEquals("aa", $list[0]['naziv']);
+        $I->assertEquals("yy", $list[$totRec-1]['naziv']);
     }
 
     /**

@@ -221,7 +221,7 @@ class Alternacija
             if ($this->getFunkcija()) {
                 $this->getFunkcija()->getAlternacije()
                         ->map(function($alt) use(&$idAlt) {
-                            return $alt->setPrivzeti($alt->getId()===$idAlt ? true : false);
+                            return $alt->setPrivzeti($alt->getId() === $idAlt ? true : false);
                         });
 
                 /**

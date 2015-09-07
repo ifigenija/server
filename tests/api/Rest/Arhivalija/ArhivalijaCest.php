@@ -76,8 +76,6 @@ class ArhivalijaCest
 //        $I->assertEquals($ent['naslov'], 'zz');
 //    }
 
-    
-    
     /**
      * 
      * @param ApiTester $I
@@ -88,7 +86,6 @@ class ArhivalijaCest
         $I->assertNotEmpty($look);
     }
 
-    
     /**
      *  kreiramo zapis
      * 
@@ -146,14 +143,13 @@ class ArhivalijaCest
      */
     public function getListDogodek(ApiTester $I)
     {
-        $resp            = $I->successfullyGetList($this->dogodekUrl, []);
-        $list            = $resp['data'];
+        $resp             = $I->successfullyGetList($this->dogodekUrl, []);
+        $list             = $resp['data'];
         $I->assertNotEmpty($list);
-        $this->objDogodek = $ent          = array_pop($list);
+        $this->objDogodek = $ent              = array_pop($list);
         $I->assertNotEmpty($ent);
     }
-    
-    
+
     /**
      * @depends createVajo
      * @param ApiTester $I
@@ -229,7 +225,7 @@ class ArhivalijaCest
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
-        $data = [
+        $data                 = [
             'oznakaDatuma'      => 'bb',
             'datum'             => '2017-02-01T00:00:00+0100',
             'fizicnaOblika'     => 'bb',
@@ -243,7 +239,7 @@ class ArhivalijaCest
             'dogodek'           => $this->objDogodek['id'],
             'uprizoritev'       => null,
         ];
-        $this->objArhivalija2 = $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $this->objArhivalija2 = $ent                  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['naslov'], 'bb');
         $I->assertNotEmpty($ent['id']);
     }
@@ -284,13 +280,13 @@ class ArhivalijaCest
         $I->assertEquals($ent['objavljeno'], 'zz');
         $I->assertEquals($ent['naslov'], 'xx');
         $I->assertEquals($ent['avtorstvo'], 'zz');
-        $I->assertEquals($ent['dogodek'],NULL);
+        $I->assertEquals($ent['dogodek'], NULL);
         $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev['id']);
 
         // preberemo še en zapis
         $ent = $I->successfullyGet($this->restUrl, $this->objArhivalija2['id']);
 
-        $I->assertEquals($ent['oznakaDatuma'      ], 'bb');
+        $I->assertEquals($ent['oznakaDatuma'], 'bb');
         $I->assertEquals($ent['datum'], '2017-02-01T00:00:00+0100');
         $I->assertEquals($ent['fizicnaOblika'], 'bb');
         $I->assertEquals($ent['izvorDigitalizata'], 'bb');
@@ -329,14 +325,16 @@ class ArhivalijaCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl ;
+        $listUrl = $this->restUrl;
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
         codecept_debug($list);
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(3, $resp['state']['totalRecords']);
+        $totalRecords = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(3, $totalRecords);
         $I->assertEquals("aa", $list[0]['naslov']);      //glede na sort
+        $I->assertEquals("zz", $list[$totalRecords-1]['naslov']);      //glede na sort
     }
 
     /**

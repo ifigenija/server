@@ -52,6 +52,7 @@ class OsebaCest
     private $objtrr;
     private $objtel;
     private $lookDrzava;
+    private $lookDrzavaId;
     private $objPopa1;
     private $objPopa2;
     private $objKontaktna1;
@@ -93,6 +94,16 @@ class OsebaCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupDrzavo(ApiTester $I)
+    {
+        $this->lookDrzavaId = $look               = $I->lookupEntity("drzava", "SI");
+        $I->assertNotEmpty($look);
     }
 
     /**
@@ -229,15 +240,15 @@ class OsebaCest
         $this->obj = $oseba     = $I->successfullyCreate($this->restUrl, $data);
 
         $I->assertEquals('zz', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
+        $I->assertGuid($oseba['id']);
         $I->assertNotEmpty($oseba['sifra']);
 
         // kreiramo še en zapis
         $data = [
             'sifra'         => 'AA12',
-            'naziv'         => 'aa',
-            'ime'           => 'aa',
-            'priimek'       => 'aa',
+            'naziv'         => 'aahhh',
+            'priimek'       => 'aa', // ta bo prvi po sortu
+            'ime'           => 'Samir',
             'funkcija'      => 'aa',
             'srednjeIme'    => 'aa',
             'psevdonim'     => 'aa',
@@ -254,10 +265,9 @@ class OsebaCest
         ];
 
         $this->obj2 = $oseba      = $I->successfullyCreate($this->restUrl, $data);
-
-        $I->assertEquals('aa', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
+        $I->assertGuid($oseba['id']);
         $I->assertNotEmpty($oseba['sifra']);
+
         // kreiramo še en zapis
         $data = [
             'sifra'         => '', // prazno -naj sam zgenerira
@@ -280,10 +290,164 @@ class OsebaCest
         ];
 
         $oseba = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($oseba['id']);
 
-        $I->assertEquals('bb', $oseba['ime']);
-        $I->assertNotEmpty($oseba['id']);
-        $I->assertNotEmpty($oseba['sifra']);    // ali je avtomatsko zgeneriral šifro?
+        // še nekaj creatov zaradi testiranja sortiranja
+        $data  = [
+            'priimek'       => '`cc',
+            'ime'           => 'Cene',
+            'sifra'         => '', // prazno -naj sam zgenerira
+            'naziv'         => 'cc',
+            'funkcija'      => 'cc',
+            'srednjeIme'    => 'cc',
+            'psevdonim'     => 'cc',
+            'email'         => 'c@aaa.aa',
+            'datumRojstva'  => '1976-03-28T00:00:00+0100',
+            'emso'          => 'CC',
+            'davcna'        => 'cc123',
+            'spol'          => 'M',
+            'opombe'        => 'CC',
+            'drzavljanstvo' => 'CC',
+            'drzavaRojstva' => 'CC',
+            'krajRojstva'   => 'CC',
+            'user'          => null,
+        ];
+        $oseba = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($oseba['id']);
+
+        // še nekaj creatov zaradi testiranja sortiranja
+        $data  = [
+            'priimek'       => 'cc',
+            'ime'           => 'Žare',
+            'sifra'         => '', // prazno -naj sam zgenerira
+            'naziv'         => 'cchhh',
+            'funkcija'      => 'cc',
+            'srednjeIme'    => 'cc',
+            'psevdonim'     => 'cc',
+            'email'         => 'c@aaa.aa',
+            'datumRojstva'  => '1976-03-28T00:00:00+0100',
+            'emso'          => 'CC',
+            'davcna'        => 'cc123',
+            'spol'          => 'M',
+            'opombe'        => 'CC',
+            'drzavljanstvo' => 'CC',
+            'drzavaRojstva' => 'CC',
+            'krajRojstva'   => 'CC',
+            'user'          => null,
+        ];
+        $oseba = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($oseba['id']);
+
+        $data  = [
+            'ime'           => 'aana', // ta bo prvi, če sortira po imenu
+            'priimek'       => 'ff',
+            'sifra'         => '',
+            'naziv'         => 'dd',
+            'funkcija'      => 'dd',
+            'srednjeIme'    => 'dd',
+            'psevdonim'     => 'dd',
+            'email'         => 'c@aaa.aa',
+            'datumRojstva'  => '1976-03-28T00:00:00+0100',
+            'emso'          => 'DD',
+            'davcna'        => 'dd123',
+            'spol'          => 'M',
+            'opombe'        => 'DD',
+            'drzavljanstvo' => 'DD',
+            'drzavaRojstva' => 'DD',
+            'krajRojstva'   => 'DD',
+            'user'          => null,
+        ];
+        $oseba = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($oseba['id']);
+
+
+        $data  = [
+            'priimek'       => 'Žumer',
+            'ime'           => 'ee',
+            'sifra'         => '', // prazno -naj sam zgenerira
+            'naziv'         => 'ee',
+            'funkcija'      => 'ee',
+            'srednjeIme'    => 'ee',
+            'psevdonim'     => 'ee',
+            'email'         => 'e@aaa.aa',
+            'datumRojstva'  => '1976-03-28T00:00:00+0100',
+            'emso'          => 'EE',
+            'davcna'        => 'ee123',
+            'spol'          => 'M',
+            'opombe'        => 'EE',
+            'drzavljanstvo' => 'EE',
+            'drzavaRojstva' => 'EE',
+            'krajRojstva'   => 'EE',
+            'user'          => null,
+        ];
+        $oseba = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($oseba['id']);
+
+        $data  = [
+            'priimek'       => 'žumer', // bi moral biti sortiran zadnji 
+            'ime'           => 'ee',
+            'sifra'         => '', // prazno -naj sam zgenerira
+            'naziv'         => 'ee',
+            'funkcija'      => 'ee',
+            'srednjeIme'    => 'ee',
+            'psevdonim'     => 'ee',
+            'email'         => 'e@aaa.aa',
+            'datumRojstva'  => '1976-03-28T00:00:00+0100',
+            'emso'          => 'EE',
+            'davcna'        => 'ee123',
+            'spol'          => 'M',
+            'opombe'        => 'EE',
+            'drzavljanstvo' => 'EE',
+            'drzavaRojstva' => 'EE',
+            'krajRojstva'   => 'EE',
+            'user'          => null,
+        ];
+        $oseba = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($oseba['id']);
+
+        $data  = [
+            'priimek'       => 'Šam',
+            'ime'           => 'Korko',
+            'sifra'         => '', // prazno -naj sam zgenerira
+            'naziv'         => 'ee',
+            'funkcija'      => 'ee',
+            'srednjeIme'    => 'ee',
+            'psevdonim'     => 'ee',
+            'email'         => 'e@aaa.aa',
+            'datumRojstva'  => '1976-03-28T00:00:00+0100',
+            'emso'          => 'EE',
+            'davcna'        => 'ee123',
+            'spol'          => 'M',
+            'opombe'        => 'EE',
+            'drzavljanstvo' => 'EE',
+            'drzavaRojstva' => 'EE',
+            'krajRojstva'   => 'EE',
+            'user'          => null,
+        ];
+        $oseba = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($oseba['id']);
+
+        $data  = [
+            'priimek'       => 'Sam',
+            'ime'           => 'Korko',
+            'sifra'         => '', // prazno -naj sam zgenerira
+            'naziv'         => 'ee',
+            'funkcija'      => 'ee',
+            'srednjeIme'    => 'ee',
+            'psevdonim'     => 'ee',
+            'email'         => 'e@aaa.aa',
+            'datumRojstva'  => '1976-03-28T00:00:00+0100',
+            'emso'          => 'EE',
+            'davcna'        => 'ee123',
+            'spol'          => 'M',
+            'opombe'        => 'EE',
+            'drzavljanstvo' => 'EE',
+            'drzavaRojstva' => 'EE',
+            'krajRojstva'   => 'EE',
+            'user'          => null,
+        ];
+        $oseba = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($oseba['id']);
     }
 
 //    /**
@@ -397,13 +561,16 @@ class OsebaCest
      */
     public function dodajVecPostnihNaslovov(\ApiTester $I)
     {
+        $I->assertTrue(true, "začasno");
+        codecept_debug($this->lookDrzavaId);
         $data = [
             "oseba"      => $this->obj['id'],
             "naziv"      => "privzeti naslov",
-            "ulica"      => "cmd 16",
+            "ulica"      => "cmd",
             "posta"      => "2250",
             "postaNaziv" => "Ptuj",
             "pokrajina"  => "Štajerska",
+            "drzava"     => $this->lookDrzavaId,
         ];
 
         $resp = $I->successfullyGetList($this->drzavaUrl, ["q" => "SI"]);
@@ -415,7 +582,7 @@ class OsebaCest
         $this->objpostni = $postni          = $I->successfullyCreate($this->naslUrl, $data);
         $I->assertNotEmpty($postni, "naslov ni vpisan");
         $I->assertEquals('privzeti naslov', $postni['naziv'], "naziv naslova ni isti");
-        
+
         $data = [
             "oseba"      => $this->obj['id'],
             "naziv"      => "naslov1",
@@ -427,7 +594,7 @@ class OsebaCest
             "drzava"     => $this->lookDrzava['id'],
         ];
 
-        $this->objpostni2 = $ent             = $I->successfullyCreate($this->naslUrl, $data);
+        $this->objpostni2 = $ent              = $I->successfullyCreate($this->naslUrl, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['ulica'], "cmd 16");
@@ -443,7 +610,7 @@ class OsebaCest
             "drzava"     => $this->lookDrzava['id'],
         ];
 
-        $this->objpostni3 = $ent             = $I->successfullyCreate($this->naslUrl, $data);
+        $this->objpostni3 = $ent              = $I->successfullyCreate($this->naslUrl, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['ulica'], "prešernova 32");
@@ -527,15 +694,60 @@ class OsebaCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?q=a";     // na nazivu je wildcard, išče a*
+        $listUrl = $this->restUrl . "?q=cch";     // na nazivu je wildcard, išče cch*
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
-
+        codecept_debug($list);
         $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-        $I->assertEquals("aa", $list[0]['opombe']);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+
+        // list brez filtra , default sort
+        $listUrl      = $this->restUrl;
+        codecept_debug($listUrl);
+        $resp         = $I->successfullyGetList($listUrl, []);
+        $list         = $resp['data'];
+        $I->assertNotEmpty($list);
+        codecept_debug($list);
+        $totalRecords = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(6, $totalRecords);
+        $I->assertEquals("aa", $list[0]['priimek']); // prvo sortno polje je priimek
+        $I->assertEquals("Žumer", $list[$totalRecords - 1]['priimek']);
+
+        // list brez filtra , sort po imenu padajoče
+        $listUrl      = $this->restUrl . "?sort_by=ime&order=DESC";
+        codecept_debug($listUrl);
+        $resp         = $I->successfullyGetList($listUrl, []);
+        $list         = $resp['data'];
+        $I->assertNotEmpty($list);
+        codecept_debug($list);
+        $totalRecords = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(6, $totalRecords);
+        $I->assertEquals("Žare", $list[0]['ime']);     // drugi sortno polje je ime
+        $I->assertEquals("aana", $list[$totalRecords - 1]['ime']);
     }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+//    public function getListPoKraju(ApiTester $I)
+//    {
+//        $listUrl = $this->restUrl . "?kraj=Lenar";
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//        codecept_debug($list);
+//        
+//        $I->assertNotEmpty($list);
+//        $I->assertEquals(2, $resp['state']['totalRecords']);
+//
+//        $listUrl = $this->restUrl . "?kraj=Marib";
+//        $resp    = $I->successfullyGetList($listUrl, []);
+//        $list    = $resp['data'];
+//
+//        $I->assertNotEmpty($list);
+//        $I->assertEquals(1, $resp['state']['totalRecords']);
+//    }
 
     /**
      * preberi vse zapise po ulici
@@ -562,7 +774,7 @@ class OsebaCest
 
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         //iskanje posta
         $listUrl = $this->restUrl . "?naslov=" . "2250";
 
@@ -571,7 +783,7 @@ class OsebaCest
 
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         //iskanje postaNaziv
         $listUrl = $this->restUrl . "?naslov=" . "ptuj";
 
@@ -581,7 +793,7 @@ class OsebaCest
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
     }
-    
+
     /**
      * preberi vse zapise po ulici
      * 
@@ -598,7 +810,7 @@ class OsebaCest
 
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         //iskanje po priimek
         $listUrl = $this->restUrl . "?q=" . "kovač";
 
@@ -607,7 +819,7 @@ class OsebaCest
 
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         //iskanje po email
         $listUrl = $this->restUrl . "?q=" . "jani.";
 
@@ -617,7 +829,7 @@ class OsebaCest
         //iskanje po psevdonim
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         $listUrl = $this->restUrl . "?q=" . "joža";
 
         $resp = $I->successfullyGetList($listUrl, []);
@@ -872,7 +1084,7 @@ class OsebaCest
             'individualnaPogodba' => true,
             'jeZaposlenVdrugemJz' => TRUE,
             'jeNastopajoci'       => TRUE,
-            'delovnoMesto'       => "režiser",
+            'delovnoMesto'        => "režiser",
             'oseba'               => $this->obj2['id'],
         ];
         $this->objZaposlitev1 = $ent                  = $I->successfullyCreate($this->zaposlitevUrl, $data);
@@ -889,7 +1101,7 @@ class OsebaCest
             'individualnaPogodba' => true,
             'jeZaposlenVdrugemJz' => TRUE,
             'jeNastopajoci'       => TRUE,
-            'delovnoMesto'       => "režiser",
+            'delovnoMesto'        => "režiser",
             'oseba'               => $this->obj2['id'],
         ];
         $this->objZaposlitev2 = $ent                  = $I->successfullyCreate($this->zaposlitevUrl, $data);
@@ -999,7 +1211,7 @@ class OsebaCest
     {
         $I->successfullyDelete($this->naslUrl, $this->objpostni['id']);
         $I->failToDelete($this->naslUrl, $this->objpostni['id']);
-        
+
         $I->successfullyDelete($this->naslUrl, $this->objpostni2['id']);
         $I->failToDelete($this->naslUrl, $this->objpostni2['id']);
     }
