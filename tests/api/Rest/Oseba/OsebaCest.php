@@ -47,9 +47,11 @@ class OsebaCest
     private $obj;
     private $obj2;
     private $objpostni;
+    private $objpostni2;
+    private $objpostni3;
     private $objtrr;
     private $objtel;
-    private $objDrzava;
+    private $lookDrzava;
     private $objPopa1;
     private $objPopa2;
     private $objKontaktna1;
@@ -123,6 +125,16 @@ class OsebaCest
     {
         $this->lookFunkcija = $look               = $I->lookupEntity("funkcija", "Tezej", false);
         $I->assertNotEmpty($look);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupDrzava(ApiTester $I)
+    {
+        $this->lookDrzava = $ent              = $I->lookupEntity("drzava", "AD", false);
+        $I->assertNotEmpty($ent);
     }
 
     /**
@@ -383,7 +395,7 @@ class OsebaCest
      * 
      * @param ApiTester $I
      */
-    public function dodajPostniNaslov(\ApiTester $I)
+    public function dodajVecPostnihNaslovov(\ApiTester $I)
     {
         $data = [
             "oseba"      => $this->obj['id'],
@@ -403,11 +415,43 @@ class OsebaCest
         $this->objpostni = $postni          = $I->successfullyCreate($this->naslUrl, $data);
         $I->assertNotEmpty($postni, "naslov ni vpisan");
         $I->assertEquals('privzeti naslov', $postni['naziv'], "naziv naslova ni isti");
+        
+        $data = [
+            "oseba"      => $this->obj['id'],
+            "naziv"      => "naslov1",
+            "ulica"      => "cmd 16",
+            "ulicaDva"   => "cankarjeva 16",
+            "posta"      => "2250",
+            "postaNaziv" => "Ptuj",
+            "pokrajina"  => "Štajerska",
+            "drzava"     => $this->lookDrzava['id'],
+        ];
+
+        $this->objpostni2 = $ent             = $I->successfullyCreate($this->naslUrl, $data);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['ulica'], "cmd 16");
+
+        $data = [
+            "oseba"      => $this->obj2['id'],
+            "naziv"      => "naslov2",
+            "ulica"      => "prešernova 32",
+            "ulicaDva"   => "cankarjeva 16",
+            "posta"      => "2250",
+            "postaNaziv" => "Ptuj",
+            "pokrajina"  => "Štajerska",
+            "drzava"     => $this->lookDrzava['id'],
+        ];
+
+        $this->objpostni3 = $ent             = $I->successfullyCreate($this->naslUrl, $data);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['ulica'], "prešernova 32");
     }
 
     /**
      * preberem poštni naslov  
-     * @depends dodajPostniNaslov
+     * @depends dodajVecPostnihNaslovov
      * 
      * @param ApiTester $I
      */
@@ -457,7 +501,7 @@ class OsebaCest
         $I->assertTrue(isset($oseba['naslovi']));
         $I->assertEquals(2, count($oseba['trrji']));
         $I->assertEquals(1, count($oseba['telefonske']));
-        $I->assertEquals(1, count($oseba['naslovi']));
+        $I->assertEquals(2, count($oseba['naslovi']));
         $I->assertEquals(0, count($oseba['kontaktneOsebe']));
     }
 
@@ -489,8 +533,98 @@ class OsebaCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
         $I->assertEquals("aa", $list[0]['opombe']);
+    }
+
+    /**
+     * preberi vse zapise po ulici
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoPostniNaslov(ApiTester $I)
+    {
+        //iskanje ulica
+        $listUrl = $this->restUrl . "?naslov=" . "prešer";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+
+        //iskanje ulicaDva
+        $listUrl = $this->restUrl . "?naslov=" . "cankarj";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje posta
+        $listUrl = $this->restUrl . "?naslov=" . "2250";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje postaNaziv
+        $listUrl = $this->restUrl . "?naslov=" . "ptuj";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+    }
+    
+    /**
+     * preberi vse zapise po ulici
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoOseba(ApiTester $I)
+    {
+        //iskanje po imenu
+        $listUrl = $this->restUrl . "?q=" . "tatjana";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje po priimek
+        $listUrl = $this->restUrl . "?q=" . "kovač";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje po email
+        $listUrl = $this->restUrl . "?q=" . "jani.";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        //iskanje po psevdonim
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        $listUrl = $this->restUrl . "?q=" . "joža";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
     }
 
     /**
@@ -738,6 +872,7 @@ class OsebaCest
             'individualnaPogodba' => true,
             'jeZaposlenVdrugemJz' => TRUE,
             'jeNastopajoci'       => TRUE,
+            'delovnoMesto'       => "režiser",
             'oseba'               => $this->obj2['id'],
         ];
         $this->objZaposlitev1 = $ent                  = $I->successfullyCreate($this->zaposlitevUrl, $data);
@@ -754,6 +889,7 @@ class OsebaCest
             'individualnaPogodba' => true,
             'jeZaposlenVdrugemJz' => TRUE,
             'jeNastopajoci'       => TRUE,
+            'delovnoMesto'       => "režiser",
             'oseba'               => $this->obj2['id'],
         ];
         $this->objZaposlitev2 = $ent                  = $I->successfullyCreate($this->zaposlitevUrl, $data);
@@ -857,12 +993,15 @@ class OsebaCest
     }
 
     /**
-     * @depends dodajPostniNaslov
+     * @depends dodajVecPostnihNaslovov
      */
     public function deletePostniNaslov(ApiTester $I)
     {
         $I->successfullyDelete($this->naslUrl, $this->objpostni['id']);
         $I->failToDelete($this->naslUrl, $this->objpostni['id']);
+        
+        $I->successfullyDelete($this->naslUrl, $this->objpostni2['id']);
+        $I->failToDelete($this->naslUrl, $this->objpostni2['id']);
     }
 
     /**

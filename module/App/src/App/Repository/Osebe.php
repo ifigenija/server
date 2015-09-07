@@ -55,7 +55,10 @@ class Osebe
 
             $ime     = $e->like('lower(p.ime)', ':naz');
             $priimek = $e->like('lower(p.priimek)', ':naz');
-            $qb->andWhere($e->orX($ime, $priimek));
+            $sifra = $e->like('lower(p.sifra)', ':naz');
+            $email = $e->like('lower(p.email)', ':naz');
+            $psevdonim = $e->like('lower(p.psevdonim)', ':naz');
+            $qb->andWhere($e->orX($ime, $priimek, $sifra, $email, $psevdonim));
 
             $qb->setParameter('naz', strtolower("{$options['q']}%"), "string");
         }

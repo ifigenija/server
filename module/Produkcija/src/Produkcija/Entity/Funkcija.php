@@ -173,17 +173,19 @@ class Funkcija
     public function getImena()
     {
         $imena = "";
+        $privzetoIme = "";
         foreach ($this->getAlternacije() as $alter) {
             /* @var $alter \Produkcija\Entity\Alternacija */
             if ($alter->getOseba()) {
                 if ($alter->getPrivzeti()) {
-                    $ime = "<strong>" . $alter->getOseba()->getPolnoIme() . "</strong>";
+                    $privzetoIme = $alter->getOseba()->getPolnoIme();
                 } else {
                     $ime = $alter->getOseba()->getPolnoIme();
+                    $imena = $ime . ($imena ? " / " : ""). $imena;
                 }
-                $imena = $ime .($imena ? " / " : ""). $imena;
             }
         }
+        $imena = $privzetoIme . ($imena ? " / " : ""). $imena;
         
         return $imena;
     }
