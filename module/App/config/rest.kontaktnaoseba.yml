@@ -11,6 +11,8 @@ forms:
             - opis
             - popa
             - oseba
+        hydrator: 
+            byValue: [ oseba, popa]
 lists:
     default: 
         filter:

@@ -150,7 +150,7 @@ class Popa
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\KontaktnaOseba", mappedBy="popa")
-     * var <KontaktnaOseba>
+     * var <KontaktneOsebe>
      */
     protected $kontaktneOsebe;
 

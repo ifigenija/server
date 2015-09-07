@@ -35,12 +35,13 @@ forms:
             - kupec
         hydrator: 
             byValue: [ naslovi,trrji,telefonske,kontaktneOsebe]
-            lookups: [ naslovi.drzava ]
+            lookups: [ naslovi.drzava, kontaktneOsebe.oseba, kontaktneOsebe.popa]
             exclude: [ pogodbe, stroski]
 lists:
     default: 
         hydrator:
             byValue: [ naslovi,trrji,telefonske,kontaktneOsebe]
+            lookups: [ kontaktneOsebe.oseba, kontaktneOsebe.popa]
             exclude: [pogodbe, stroski]
         filter:
             elements:
