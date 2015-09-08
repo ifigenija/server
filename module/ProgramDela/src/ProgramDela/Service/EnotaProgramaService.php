@@ -31,7 +31,7 @@ class EnotaProgramaService
 
         $optionR = $em->getRepository('App\Entity\Option');
         $option  = $optionR->findOneByName("application.tenant.maticnopodjetje");
-        $this->expect($option, "Matično gledališče ni vnešeno:" , 1000953);
+        $this->expect($option, "Matično gledališče ni vnešeno:", 1000953);
 
         $sifra = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
 
@@ -95,10 +95,6 @@ class EnotaProgramaService
                     $data['Do']['materialni']+=$strosekU->getVrednostDo();
                     $data['Na']['materialni']+=$strosekU->getVrednostNa();
                     break;
-                case 'avtorprav':
-                    $data['Do']['avtorskePravice']+=$strosekU->getVrednostDo();
-                    $data['Na']['avtorskePravice']+=$strosekU->getVrednostNa();  // to so tantieme
-                    break;
                 default:
                     $this->expect(false
                             , "Tip stroška uprizoritve je lahko le materialni ali avtorske pravice, je pa:" . $strosekU->getTipstroska(), 1000951);
@@ -136,22 +132,35 @@ class EnotaProgramaService
                             "sort"     => $alternacija->getSort()]);
                     }
                     if ($alternacija->getImaPogodbo()) {
-                        $data['stHonorarnih'] += 1;
+
+
                         $pogodba = $alternacija->getPogodba();
                         if ($pogodba) {
                             if ($pogodba->getAktivna()) {
-                                //$$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
-                                $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
-                                $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
-                                if ($pogodba->getIgralec()) {
-                                    $data['stHonorarnihIgr'] += 1;      //$$
-                                    if ($pogodba->getZaposlenVDrJz()) {
-                                        $data['stHonorarnihIgrTujJZ'] += 1;
-                                    }
-                                    if ($pogodba->getSamozaposlen()) {
-                                        $data['stHonorarnihIgrSamoz'] += 1;
-                                        $data['Do']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostDoPremiere();
-                                        $data['Na']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostPredstave();
+                                if ($pogodba->getJeAvtorskePravice()) {
+                                    /**
+                                     * avtorske pravice
+                                     */
+                                    $data['Do']['avtorskePravice'] += $pogodba->getVrednostDoPremiere();
+                                    $data['Na']['avtorskePravice'] += $pogodba->getVrednostPredstave(); // to so tantieme
+                                } else {
+                                    /**
+                                     * avtorski honorarji
+                                     */
+                                    $data['stHonorarnih'] += 1;
+                                    //$$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
+                                    $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
+                                    $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
+                                    if ($pogodba->getIgralec()) {
+                                        $data['stHonorarnihIgr'] += 1;      //$$
+                                        if ($pogodba->getZaposlenVDrJz()) {
+                                            $data['stHonorarnihIgrTujJZ'] += 1;
+                                        }
+                                        if ($pogodba->getSamozaposlen()) {
+                                            $data['stHonorarnihIgrSamoz'] += 1;
+                                            $data['Do']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostDoPremiere();
+                                            $data['Na']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostPredstave();
+                                        }
                                     }
                                 }
                             }

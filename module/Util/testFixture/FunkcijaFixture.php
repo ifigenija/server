@@ -88,6 +88,7 @@ class FunkcijaFixture
             ['Razsvetljava', '', 'Tehnična podpora', false, '', TRUE, 3, true, true, 'Uprizoritev-0002', null,],
             ['Helena', 'glavna vloga', 'Vloga', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null,],
             ['Lektoriranje', '', 'Lektorstvo', false, '', TRUE, 22, true, true, 'Uprizoritev-0002', null,],
+            ['Avtor', 'Avtor besedila', 'Avtor', false, '', TRUE, 2, true, FALSE, 'Uprizoritev-0002', null,],
         ];
     }
 

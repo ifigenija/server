@@ -137,8 +137,8 @@ class StrosekUprizoritveCest
             'vrednostDo'   => 2.34,
             'vrednostNa'   => 5.67,
             'opis'         => 'aa',
-            'tipstroska'   => 'avtorprav',
-            'vrstaStroska' => NULL,
+            'tipstroska'   => 'materialni',
+            'vrstaStroska' => $this->objVrstaStroska1['id'],
             'sort'         => 2,
             'uprizoritev'  => $this->lookUprizoritev['id'],
             'popa'         => $this->lookPopa['id'],
@@ -251,13 +251,6 @@ class StrosekUprizoritveCest
         $ent                 = $this->obj2;
         $ent['tipstroska']   = 'materialni';
         
-        /**
-         * ali glava
-         */
-        $ent['vrstaStroska'] = $this->objVrstaStroskaGlava['id'];
-        $resp                = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
-        $I->assertNotEmpty($resp);
-        $I->assertEquals(1000371, $resp[0]['code'], "ne sme biti glava vrste stroška");
         
         /**
          * ali brez vrste str.
@@ -265,17 +258,34 @@ class StrosekUprizoritveCest
         $ent['vrstaStroska'] = null;
         $resp                = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($resp);
-        $I->assertEquals(1000370, $resp[0]['code'], "ne sme biti glava vrste stroška");
-       
+        $I->assertEquals(1000370, $resp[0]['code'], "Pri materialnih stroških vrsta stroška obvezen podatek");
+
         /**
          * ali brez vrste str.
          */
-        $ent['tipstroska']   = 'avtorprav';
-        $ent['vrstaStroska'] = $this->objVrstaStroska1['id'];
-        $ent                = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+//        $ent['tipstroska']   = 'avtorprav';
+//        $ent['vrstaStroska'] = $this->objVrstaStroska1['id'];
+//        $ent                = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+//        $I->assertGuid($ent['id']);
+//        codecept_debug($ent);
+//        $I->assertEquals(null, $ent['vrstaStroska'], "ali postavil vrsto stroška na NULL");
+       
+        /**
+         * ali  ne-glava
+         */
+        $ent['vrstaStroska'] = $this->objVrstaStroska1 ['id'];
+        $ent               = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertGuid($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals(null, $ent['vrstaStroska'], "ali postavil vrsto stroška na NULL");
+        
+     
+        /**
+         * ali glava
+         */
+        $ent['vrstaStroska'] = $this->objVrstaStroskaGlava['id'];
+        $resp                = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertNotEmpty($resp);
+//        $I->assertEquals(1000371, $resp[0]['code'], "ne sme biti glava vrste stroška");
+       
     }
 
 }

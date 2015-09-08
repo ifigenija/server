@@ -276,6 +276,7 @@ class PogodbaCest
             'vrednostDoPremiere'  => 66.33,
             'zaposlenVDrJz'       => true,
             'samozaposlen'        => FALSE,
+            'jeAvtorskePravice'   => FALSE,
             'igralec'             => true,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -302,6 +303,7 @@ class PogodbaCest
             'vrednostDoPremiere'  => 62.13,
             'zaposlenVDrJz'       => FALSE,
             'samozaposlen'        => true,
+            'jeAvtorskePravice'   => false,
             'igralec'             => true,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -328,6 +330,7 @@ class PogodbaCest
             'vrednostDoPremiere'  => 67.72,
             'zaposlenVDrJz'       => true,
             'samozaposlen'        => FALSE,
+            'jeAvtorskePravice'   => FALSE,
             'igralec'             => true,
         ];
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -355,6 +358,7 @@ class PogodbaCest
             'vrednostDoPremiere'  => 67.11,
             'zaposlenVDrJz'       => true,
             'samozaposlen'        => FALSE,
+            'jeAvtorskePravice'   => FALSE,
             'igralec'             => true,
         ];
         $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -381,6 +385,7 @@ class PogodbaCest
             'vrednostDoPremiere'  => 67.11,
             'zaposlenVDrJz'       => true,
             'samozaposlen'        => FALSE,
+            'jeAvtorskePravice'   => FALSE,
             'igralec'             => true,
         ];
         $this->obj5 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -425,6 +430,7 @@ class PogodbaCest
         $I->assertEquals($ent['planiranoSteviloVaj'], 10);
 
         $I->assertEquals($ent['aktivna'], false);
+        $I->assertEquals($ent['jeAvtorskePravice'], false,"jeAvtorskePravice");
         $I->assertEquals($ent['opis'], 'xx');
         $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
         $I->assertEquals($ent['popa']['id'], $this->lookPopa1['id']);
