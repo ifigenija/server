@@ -38,7 +38,8 @@ class Sezone
             case "default":
             case "vse":
                 $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name, $qb);
+                $qb->orderBy($sort->order,$sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }
@@ -49,11 +50,12 @@ class Sezone
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.ime', ':ime');
+            $ime = $e->like('lower(p.ime)', ':query');
+            $sifra = $e->like('lower(p.sifra)', ':query');
 
-            $qb->andWhere($e->orX($naz));
+            $qb->andWhere($e->orX($ime, $sifra));
 
-            $qb->setParameter('ime', "{$options['q']}%", "string");
+            $qb->setParameter('query', "%{$options['q']}%", "string");
         }
         return $qb;
     }

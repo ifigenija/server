@@ -124,6 +124,33 @@ class UserCest
 //        $this->id = array_pop($list)['id'];
 //        $I->assertNotEmpty($this->id);
 //    }
+    
+    /**
+     * preberi vse zapise po ulici
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoUser(ApiTester $I)
+    {
+        //iskanje email
+        $listUrl = $this->restUrl . "?q=" . "est6@";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje name
+        $listUrl = $this->restUrl . "?q=" . "za cest";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+    }
 
     /**
      * Preberem userja

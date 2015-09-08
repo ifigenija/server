@@ -56,6 +56,24 @@ class PermissionCest
         $this->objPermission2 = $ent                  = array_pop($list);
         $I->assertNotEmpty($ent);
     }
+    
+    /**
+     * preberi vse zapise po ulici
+     * 
+     * @depends createRolo
+     * @param ApiTester $I
+     */
+    public function getListPoPostniNaslov(ApiTester $I)
+    {
+        //iskanje naziv
+        $listUrl = $this->restUrl . "?q=" . "TEST4";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+    }
 
     /**
      * kreiramo rolo 

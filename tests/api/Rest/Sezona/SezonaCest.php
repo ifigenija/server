@@ -73,6 +73,7 @@ class SezonaCest
 
         // kreiramo še en zapis
         $data       = [
+            'sifra'   => '999',
             'ime'     => 'aa',
             'zacetek' => '2012-02-01T00:00:00+0100',
             'konec'   => '2013-02-01T00:00:00+0100',
@@ -221,6 +222,33 @@ class SezonaCest
         $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
         $I->assertEquals("zz", $list[0]['ime']);      // odvisno od sortiranja
+    }
+
+    /**
+     * preberi vse zapise od osebe
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoSezoni(ApiTester $I)
+    {
+        //iskanje sifra
+        $listUrl = $this->restUrl . "?q=" . "99";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+
+        //iskanje ime
+        $listUrl = $this->restUrl . "?q=" . "zz";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
     }
 
     /**
