@@ -70,6 +70,7 @@ class PopaFixture
             ['0984',  'AK', 'Gledališče Lepote tvoje', 'AR',false,],
             ['0983',  'AK', 'Sunce naše', 'HR',false,],
             ['0982',  'AK', 'Theater Amadeus', 'AT',false,],
+            ['9999',  'AK', 'Fuchs', 'DE',false,],
         ];
     }
 

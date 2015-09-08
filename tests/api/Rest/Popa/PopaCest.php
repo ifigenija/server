@@ -314,6 +314,30 @@ class PopaCest
         $this->obj2 = $popa       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($popa['id']);
         $I->assertNotEmpty($popa['sifra']);
+
+        // kreiramo še en zapis
+        $data       = [
+            'sifra'     => '0000',
+            'stakli'    => 'AK',
+            'naziv'     => 'aa',
+            'naziv1'    => 'aa',
+            'panoga'    => 'aa',
+            'email'     => 'a@zzz.zz',
+            'url'       => 'aa',
+            'opomba'    => 'aa',
+            'drzava'    => $this->objDrzava['id'],
+            'idddv'     => 'aa',
+            'maticna'   => 'AA123',
+            'zavezanec' => 'Da',
+            'jeeu'      => 'Da',
+            'datZav'    => '2011-02-01T00:00:00+0100',
+            'datnZav'   => '2018-02-01T00:00:00+0100',
+            'zamejstvo' => FALSE,
+            'nvo'       => FALSE,
+        ];
+        $this->obj2 = $popa       = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($popa['id']);
+        $I->assertNotEmpty($popa['sifra']);
     }
 
     /**
@@ -426,13 +450,21 @@ class PopaCest
     public function getListDefault(ApiTester $I)
     {
         $listUrl = $this->restUrl . "?q=a";     // na nazivu je wildcard, išče *a*
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+        codecept_debug($list);
+        $totRec=$resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(1,$totRec);
+        
+        $listUrl = $this->restUrl;    
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertTrue($resp['state']['totalRecords'] >= 1);
-//        $I->assertEquals("aa", $list[0]['naziv']);  // glede na sort 
+        codecept_debug($list);
+        $totRec=$resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2,$totRec);
+        $I->assertEquals("0000", $list[0]['sifra']);  // glede na sort 
+        $I->assertEquals("ZZ12", $list[$totRec-1]['sifra']);  // glede na sort 
     }
 
     /**

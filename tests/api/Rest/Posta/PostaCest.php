@@ -35,19 +35,18 @@ class PostaCest
         
     }
 
-    public function getList(ApiTester $I)
-    {
-        $resp     = $I->successfullyGetList($this->restUrl, []);
-        $list     = $resp["data"];
-        $I->assertNotEmpty($list);
-        $this->id = array_pop($list)['id'];
-    }
-
+//    public function getList(ApiTester $I)
+//    {
+//        $resp     = $I->successfullyGetList($this->restUrl, []);
+//        $list     = $resp["data"];
+//        $I->assertNotEmpty($list);
+//        $this->id = array_pop($list)['id'];
+//    }
     // tests
     public function create(ApiTester $I)
     {
         $data      = [
-            'sifra' => 'UU',
+            'sifra' => '9999',
             'naziv' => 'xx',
         ];
         $this->obj = $posta     = $I->successfullyCreate($this->restUrl, $data);
@@ -55,7 +54,7 @@ class PostaCest
 
         // kreiramo še en zapis
         $data  = [
-            'sifra' => 'AA',
+            'sifra' => '0000',
             'naziv' => 'aa',
         ];
         $posta = $I->successfullyCreate($this->restUrl, $data);
@@ -84,7 +83,7 @@ class PostaCest
 
         // preverimo vsa polja
         $I->assertEquals('tralala', $posta['naziv']);
-        $I->assertEquals('UU', $posta['sifra']);
+        $I->assertEquals('9999', $posta['sifra']);
     }
 
     /**
@@ -113,11 +112,17 @@ class PostaCest
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
-    
-
         $I->assertNotEmpty($list);
         $I->assertEquals(480, $resp['state']['totalRecords']);
-        $I->assertEquals("1000", $list[0]['sifra']);      //glede na sort
+        $I->assertEquals("0000", $list[0]['sifra']);      //glede na sort
+
+        /**
+         * še padajoč vrstni red
+         */
+        $resp    = $I->successfullyGetList($this->restUrl."?sort_by=sifra&order=DESC", []);
+        $list    = $resp['data'];
+        $I->assertEquals("9999", $list[0]['sifra']);      //glede na sort
+        
     }
     
     public function getListPoPostniNaslov(ApiTester $I)

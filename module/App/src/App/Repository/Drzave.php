@@ -41,13 +41,13 @@ class Drzave
         switch ($name) {
             case "vse":
                 $qb   = $this->getVseQb($options);
-                $sort = $this->getSort($name, $qb);
-                $qb->orderBy($sort->order,$sort->dir);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $qb = $this->getDefaultQb($options);
-                $sort = $this->getSort($name, $qb);
-                $qb->orderBy($sort->order,$sort->dir);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }

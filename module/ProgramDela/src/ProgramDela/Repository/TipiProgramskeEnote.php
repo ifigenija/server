@@ -5,13 +5,12 @@
  */
 
 namespace ProgramDela\Repository;
+
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineModule\Paginator\Adapter\Selectable;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
-
-
 
 /**
  * Description of TipiProgramskeEnote
@@ -24,10 +23,10 @@ class TipiProgramskeEnote
 
     protected $sortOptions = [
         "default" => [
-            "id" => ["alias" => "p.id"]
+            "naziv" => ["alias" => "p.naziv"]
         ],
         "vse"     => [
-            "id" => ["alias" => "p.id"]
+            "naziv" => ["alias" => "p.naziv"]
         ],
     ];
 
@@ -36,8 +35,9 @@ class TipiProgramskeEnote
         switch ($name) {
             case "default":
             case "vse":
-                $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $qb   = $this->getVseQb($options);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }
@@ -48,11 +48,11 @@ class TipiProgramskeEnote
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.id', ':id');
+            $naz = $e->like('p.naziv', ':naziv');
 
             $qb->andWhere($e->orX($naz));
 
-            $qb->setParameter('id', "{$options['q']}%", "string");
+            $qb->setParameter('naziv', "{$options['q']}%", "string");
         }
 
         return $qb;

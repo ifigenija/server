@@ -39,11 +39,11 @@ class Permissions
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
         $ex = $qb->expr();
-        //$sort = $this->getSort($name);
+        $sort = $this->getSort($name);
+        $qb->orderBy($sort->order, $sort->dir);
 
         $qb->select('p');
         $qb->from('\Aaa\Entity\Permission', 'p');
-        //$qb->orderBy($sort->order, $sort->dir);
 
         if (!empty($options['q'])) {
             $srch        = strtolower($options['q']);

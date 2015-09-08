@@ -80,8 +80,8 @@ class PostniNaslovFixture
     {
         return [
             ['001', 'Popa-0988', NULL, 'Narodni dom', 'Koroška 15', null, '9231', 'Beltinci', null, 'SI', false, true,],
-            ['002', 'Popa-0988', NULL, '', 'Koroška 22', null, '9231', 'Beltinci', null, 'SI', false, false,],
-            ['003', 'Popa-0989', NULL, '', 'Rimska ploščad 7', null, '9231', 'Beltinci', null, 'SI', false, TRUE,],
+            ['002', 'Popa-0988', NULL, 'Korotan', 'Koroška 22', null, '9231', 'Beltinci', null, 'SI', false, false,],
+            ['003', 'Popa-0989', NULL, 'Rimljan', 'Rimska ploščad 7', null, '9231', 'Beltinci', null, 'SI', false, TRUE,],
         ];
     }
 

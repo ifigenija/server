@@ -51,29 +51,43 @@ class TipFunkcijeCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'sifra'       => '99',
+            'sifra'     => '99',
             'ime'       => 'zz',
             'opis'      => 'xx',
             'imeZenski' => 'yy',
             'podrocje'  => 'umetnik',
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         codecept_debug($ent);
 //        $I->assertEquals($ent['opis'], 'zz');
         // kreiramo še en zapis
-        $data = [
-            'sifra' => '98',
+        $data      = [
+            'sifra'      => '98',
             'ime'        => 'aa',
             'opis'       => 'bb',
             'imeZenski'  => 'cc',
             'podrocje'   => 'tehnik',
             'pomembnost' => 'aa',
         ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['opis'], 'bb');
+
+        /**
+         *  kreiramo še en zapis za sort
+         */
+        $data = [
+            'sifra'      => '00',
+            'ime'        => 'dd',
+            'opis'       => 'dd',
+            'imeZenski'  => 'dd',
+            'podrocje'   => 'igralec',
+            'pomembnost' => 'dd',
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -82,18 +96,16 @@ class TipFunkcijeCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl;
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-//        codecept_debug($resp);
-
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(16, count($list));     // odvisno od testnih fixturjev
-//        $I->assertEquals("Avtor", $list[0]['ime']);      //glede na sort
+        $resp   = $I->successfullyGetList($this->restUrl, []);
+        $list   = $resp['data'];
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(16, $resp['state']['totalRecords']);
+        $I->assertEquals("00", $list[0]['sifra']);
+        $I->assertEquals("99", $list[$totRec - 1]['sifra']);
     }
-    
-     /**
+
+    /**
      * @depends create
      * @param ApiTester $I
      */
@@ -107,7 +119,7 @@ class TipFunkcijeCest
 
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         //iskanje zenskem imenu 
         $listUrl = $this->restUrl . "?q=" . "cc";
 
@@ -116,7 +128,7 @@ class TipFunkcijeCest
 
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         //iskanje podrocje 
         $listUrl = $this->restUrl . "?q=" . "umetnik";
 
@@ -125,7 +137,7 @@ class TipFunkcijeCest
 
         $I->assertGreaterThanOrEqual(14, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         //iskanje sifra 
         $listUrl = $this->restUrl . "?q=" . "98";
 
@@ -179,7 +191,7 @@ class TipFunkcijeCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
         codecept_debug($ent);
 
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         $I->assertEquals($ent['sifra'], '99');
         $I->assertEquals($ent['ime'], 'zz');
         $I->assertEquals($ent['opis'], 'yy');

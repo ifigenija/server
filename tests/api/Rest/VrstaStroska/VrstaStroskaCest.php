@@ -49,30 +49,29 @@ class VrstaStroskaCest
      */
     public function create(ApiTester $I)
     {
-        $data      = [
+        $data       = [
             'skupina'    => 100,
             'podskupina' => 102,
             'naziv'      => 'aa',
             'opis'       => 'aa',
         ];
-        $this->obj1 = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['opis'], 'aa');
 
         // kreiramo še en zapis
-        $data      = [
-            'skupina'    => 100,
+        $data       = [
+            'skupina'    => 0,
             'podskupina' => 2,
             'naziv'      => 'bb',
             'opis'       => 'bb',
         ];
-        $this->obj2 = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['opis'], 'bb');
     }
-
 
     /**
      * @depends create
@@ -80,14 +79,14 @@ class VrstaStroskaCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl;
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
+        $resp = $I->successfullyGetList($this->restUrl, []);
+        $list = $resp['data'];
 
         $I->assertNotEmpty($list);
+        $totRec = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
+        $I->assertEquals(0, $list[0]['skupina']);      //glede na sort
+        $I->assertEquals(100, $list[$totRec - 1]['skupina']);      //glede na sort
     }
     
     /**
@@ -117,7 +116,7 @@ class VrstaStroskaCest
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
 
-        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
         
         //iskanje po podskupini
@@ -141,7 +140,7 @@ class VrstaStroskaCest
         $ent         = $this->obj1;
         $ent['opis'] = 'yy';
 
-        $this->obj1 = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
         $I->assertEquals($entR['opis'], 'yy');
     }
@@ -157,10 +156,10 @@ class VrstaStroskaCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertGuid($ent['id']);
-        $I->assertEquals($ent['skupina'    ],100);
-        $I->assertEquals($ent['podskupina' ],102);
-        $I->assertEquals($ent['naziv'      ],'aa');
-        $I->assertEquals($ent['opis'       ],'yy');
+        $I->assertEquals($ent['skupina'], 100);
+        $I->assertEquals($ent['podskupina'], 102);
+        $I->assertEquals($ent['naziv'], 'aa');
+        $I->assertEquals($ent['opis'], 'yy');
     }
 
     /**

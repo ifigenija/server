@@ -139,7 +139,7 @@ class ProgramFestivalCest
 //            'lastnaSredstva'          => 1.24,
 //            'drugiViri'               => 1.24,
             'drugiJavni'         => 1.24,
-            'sort'               => 1,
+            'sort'               => 8,
             'imaKoprodukcije'    => TRUE,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -231,7 +231,7 @@ class ProgramFestivalCest
         $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");
 //        $I->assertEquals($ent['drugiViri'], 1.24);
         $I->assertEquals($ent['drugiJavni'], 1.24);
-        $I->assertEquals($ent['sort'], 1);
+        $I->assertEquals($ent['sort'], 8);
         $I->assertEquals($ent['imaKoprodukcije'], TRUE);
         $I->assertEquals($ent['avtorskiHonorarji'], 0);
         $I->assertEquals($ent['avtorskiHonorarjiSamoz'], 0);
@@ -264,7 +264,10 @@ class ProgramFestivalCest
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totRec);
+        $I->assertEquals(2, $list[0]['sort']);
+        $I->assertEquals(8, $list[$totRec - 1]['sort']);
     }
 
     /**

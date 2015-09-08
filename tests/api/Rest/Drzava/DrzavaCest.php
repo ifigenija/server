@@ -93,6 +93,18 @@ class DrzavaCest
         $drz  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals('BB', $data['sifraDolg']);
         $I->assertNotEmpty($drz['id']);
+
+        // kreiramo še en zapis za sort
+        $data = [
+            'sifra'     => 'ŽŽ',
+            'sifraDolg' => 'gg',
+            'isoNum'    => 'gg',
+            'isoNaziv'  => 'gg',
+            'naziv'     => 'gg',
+            'opomba'    => 'gg',
+        ];
+        $drz  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($drz['id']);
     }
 
     /**
@@ -152,12 +164,26 @@ class DrzavaCest
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertEquals("ss", $list[0]['opomba']);
+
+        // po vseh
+        $resp   = $I->successfullyGetList($this->restUrl, []);
+        $list   = $resp['data'];
+//        $I->assertNotEmpty($list);
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totRec);
+        $I->assertEquals("AA", $list[0]['sifra']);
+
+        // zadnjega preberemo
+        $resp   = $I->successfullyGetList($this->restUrl . "?sort_by=sifra&order=DESC", []);
+        $list   = $resp['data'];
+//        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totRec);
+        $I->assertEquals("ŽŽ", $list[0]['sifra']);
     }
-    
+
     public function getListPoDrzavi(ApiTester $I)
     {
         //iskanje sifra
@@ -168,7 +194,7 @@ class DrzavaCest
 
         $I->assertEquals(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         //iskanje naziv
         $listUrl = $this->restUrl . "?q=" . "ee";
 
@@ -177,7 +203,7 @@ class DrzavaCest
 
         $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         //iskanje isoNum
         $listUrl = $this->restUrl . "?q=" . "zz";
 
@@ -186,7 +212,7 @@ class DrzavaCest
 
         $I->assertEquals(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         //iskanje isoNaziv
         $listUrl = $this->restUrl . "?q=" . "qq";
 

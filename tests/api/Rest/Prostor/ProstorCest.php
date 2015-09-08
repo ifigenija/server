@@ -91,7 +91,7 @@ class ProstorCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'sifra'        => '12',
+            'sifra'        => '99',
             'naziv'        => 'aa',
             'jePrizorisce' => true,
             'sePlanira'    => true,
@@ -103,7 +103,7 @@ class ProstorCest
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['sifra'], '12');
+        $I->assertEquals($ent['sifra'], '99');
 
         // kreiramo še en zapis
         $data       = [
@@ -123,7 +123,7 @@ class ProstorCest
 
         // kreiramo še en zapis
         $data       = [
-            'sifra'        => '14',
+            'sifra'        => '00',
             'naziv'        => 'cc',
             'jePrizorisce' => true,
             'sePlanira'    => false,
@@ -135,7 +135,6 @@ class ProstorCest
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['sifra'], '14');
     }
 
     /**
@@ -145,13 +144,13 @@ class ProstorCest
     public function getListDefault(ApiTester $I)
     {
         $listUrl = $this->restUrl;
-        codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals("Z Z", $list[0]['naziv']);      // odvisno od sortiranja
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totRec);
+        $I->assertEquals("00", $list[0]['sifra']);
+        $I->assertEquals("99", $list[$totRec - 1]['sifra']);
     }
 
     /**
@@ -239,7 +238,7 @@ class ProstorCest
 
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['naziv'], 'yy');
-        $I->assertEquals($ent['sifra'], '12');
+        $I->assertEquals($ent['sifra'], '99');
         $I->assertEquals($ent['jePrizorisce'], true);
         $I->assertTrue($ent['sePlanira']);
         $I->assertEquals($ent['kapaciteta'], 1);

@@ -46,7 +46,7 @@ class ZvrstSursCest
     public function create(ApiTester $I)
     {
         $data      = [
-            'sifra' => 'XX',
+            'sifra' => '99',
             'naziv' => 'yy',
             'opis'  => 'zz',
         ];
@@ -56,13 +56,22 @@ class ZvrstSursCest
 
         // kreiramo še en zapis
         $data = [
-            'sifra' => 'AA',
+            'sifra' => '00',
             'naziv' => 'bb',
             'opis'  => 'cc',
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals($ent['naziv'], 'bb');
         $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis za sort
+        $data = [
+            'sifra' => '91',
+            'naziv' => 'aa',
+            'opis'  => 'aa',
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -74,11 +83,11 @@ class ZvrstSursCest
     public function update(ApiTester $I)
     {
         $ent          = $this->obj;
-        $ent['naziv'] = 'dd';
+        $ent['naziv'] = 'zz';
 
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($ent['naziv'], 'dd');
+        $I->assertEquals($ent['naziv'], 'zz');
     }
 
     /**
@@ -91,8 +100,8 @@ class ZvrstSursCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals($ent['sifra'], 'XX');
-        $I->assertEquals($ent['naziv'], 'dd');
+        $I->assertEquals($ent['sifra'], '99');
+        $I->assertEquals($ent['naziv'], 'zz');
         $I->assertEquals($ent['opis'], 'zz');
     }
 
@@ -118,14 +127,24 @@ class ZvrstSursCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl;
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
+        $resp   = $I->successfullyGetList($this->restUrl, []);
+        $list   = $resp['data'];
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals("aa", $list[0]['ime']);      //glede na sort
+        $I->assertEquals("00", $list[0]['sifra']);      //glede na sort
+        $I->assertEquals("99", $list[$totRec - 1]['sifra']);      //glede na sort
+
+        /**
+         * še sort po drugem polju
+         */
+        $resp   = $I->successfullyGetList($this->restUrl."?sort_by=naziv&order=DESC", []);
+        $list   = $resp['data'];
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $I->assertEquals("zz", $list[0]['naziv']);      //glede na sort
+        $I->assertEquals("aa", $list[$totRec - 1]['naziv']);      //glede na sort
     }
 
     public function getListPoZvrsti(ApiTester $I)
@@ -138,7 +157,7 @@ class ZvrstSursCest
 
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         //iskanje po nazivu
         $listUrl = $this->restUrl . "?q=" . "b";
 

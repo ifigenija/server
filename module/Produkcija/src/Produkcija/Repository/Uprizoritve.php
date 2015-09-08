@@ -39,24 +39,15 @@ class Uprizoritve
         switch ($name) {
             case "vse":
                 $qb = $this->getVseQb($options);
-                $sort = $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $this->expect(!(empty($options['besedilo']) ), "Besedilo je obvezno", 770071);
                 $qb = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
-//                $this->expect(!(empty($options['besedilo']) ), "Besedilo je obvezno", 770071);
-//                $crit = new Criteria();
-//                $e    = $crit->expr();
-//
-//                if (!empty($options['besedilo'])) {
-//                    $besedilo = $this->getEntityManager()->find('Produkcija\Entity\Besedilo', $options['besedilo']);
-//                    $exp      = $e->eq('besedilo', $besedilo);
-//                }
-//                $crit->andWhere($exp);
-//                return new Selectable($this, $crit);
         }
     }
 

@@ -262,7 +262,7 @@ class FunkcijaCest
             'komentar'          => 'zz',
             'velikost'          => 'velika',
             'pomembna'          => true,
-            'sort'              => 2,
+            'sort'              => 8,
             'sePlanira'         => true,
             'dovoliPrekrivanje' => false,
             'uprizoritev'       => $this->lookUprizoritev1['id'],
@@ -282,7 +282,7 @@ class FunkcijaCest
             'komentar'          => 'aa',
             'velikost'          => 'mala',
             'pomembna'          => false,
-            'sort'              => 4,
+            'sort'              => 1,
             'sePlanira'         => true,
             'dovoliPrekrivanje' => false,
             'uprizoritev'       => $this->lookUprizoritev1['id'],
@@ -359,12 +359,14 @@ class FunkcijaCest
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
-        codecept_debug($resp);
+        codecept_debug($list);
 
 //        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $totRec  = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-//        $I->assertEquals("zz", $list[0]['naziv']);      // odvisno od sortiranja
+        $I->assertEquals(1, $list[0]['sort']);      // odvisno od sortiranja
+        $I->assertEquals(8, $list[$totRec - 1]['sort']);      // odvisno od sortiranja
         // še po 2. uprizoritvi
         $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev2['id'];
         $resp    = $I->successfullyGetList($listUrl, []);
@@ -444,7 +446,7 @@ class FunkcijaCest
         $I->assertEquals($ent['komentar'], 'zz');
         $I->assertEquals($ent['velikost'], 'mala', "velikost funkcije");
         $I->assertEquals($ent['pomembna'], true);
-        $I->assertEquals($ent['sort'], 2);
+        $I->assertEquals($ent['sort'], 8);
         $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev1['id']);
         $I->assertEquals($ent['privzeti'], $this->objAlternacija['id'], "privzeti");
         $I->assertEquals($ent['tipFunkcije'], $this->lookTipFunkcije['id'], "tip funkcije");

@@ -194,6 +194,7 @@ class AlternacijaCest
 
         // kreiram še en zapis
         $data       = [
+            'sifra'      => '9090', // za sort
             'zaposlen'   => false, // se lahko povozi v validaciji
             'zacetek'    => '2011-02-01T00:00:00+0100',
             'konec'      => '2021-02-01T00:00:00+0100',
@@ -263,12 +264,17 @@ class AlternacijaCest
         $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev2['id'];
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
-        codecept_debug($resp);
+        codecept_debug($list);
 
-        $I->assertGreaterThanOrEqual(9, $resp['state']['totalRecords'], "po uprizoritvi");
-//        $I->assertNotEmpty($list);
-//        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
-        // še po uprizoritvi, ki nima alternacij
+        $totalRecords = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(9, $totalRecords, "po uprizoritvi");
+        $I->assertEquals("0001", $list[0]['sifra']);      // odvisno od sortiranja
+        $I->assertEquals("9090", $list[$totalRecords - 1]['sifra']);      // odvisno od sortiranja
+
+
+        /**
+         *  še po uprizoritvi, ki nima alternacij
+         */
         $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev1['id'];
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
