@@ -48,9 +48,8 @@ class Permissions
         if (!empty($options['q'])) {
             $srch        = strtolower($options['q']);
             $name        = $ex->like('lower(p.name)', ':query');
-            $description = $ex->like('lower(p.description)', ':query');
 
-            $qb->andWhere($ex->orx($name, $description));
+            $qb->andWhere($ex->orx($name));
 
             $qb->setParameter('query', "%" . $srch . "%");
         }
