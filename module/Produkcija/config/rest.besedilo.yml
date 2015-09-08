@@ -20,9 +20,18 @@ forms:
             - krajIzida
             - zaloznik
             - internacionalniNaslov
+            - name: stevilka
+              options: 
+                  required: false
 lists:
     default: 
         filter:
+            - name: q
+              type: text
+              options: 
+                  required: true
+                  placeholder: Išči..
+                  label: Išči
         hydrator:
             - exclude: []
 #    vse: 
