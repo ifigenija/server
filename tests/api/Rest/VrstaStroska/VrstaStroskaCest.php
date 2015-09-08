@@ -51,7 +51,7 @@ class VrstaStroskaCest
     {
         $data      = [
             'skupina'    => 100,
-            'podskupina' => 1,
+            'podskupina' => 102,
             'naziv'      => 'aa',
             'opis'       => 'aa',
         ];
@@ -89,6 +89,46 @@ class VrstaStroskaCest
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
 //        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
     }
+    
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoVrstiStroska(ApiTester $I)
+    {
+        //iskanje naziv
+        $listUrl = $this->restUrl . "?q=" . "aa";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+    }
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoSkupinah(ApiTester $I)
+    {
+        //iskanje skupina
+        $listUrl = $this->restUrl . "?skupina=" . "100";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje po podskupini
+        $listUrl = $this->restUrl . "?skupina=" . "102";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+    }
 
     /**
      * spremenim zapis
@@ -118,7 +158,7 @@ class VrstaStroskaCest
 
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['skupina'    ],100);
-        $I->assertEquals($ent['podskupina' ],1);
+        $I->assertEquals($ent['podskupina' ],102);
         $I->assertEquals($ent['naziv'      ],'aa');
         $I->assertEquals($ent['opis'       ],'yy');
     }

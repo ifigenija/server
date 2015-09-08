@@ -41,11 +41,13 @@ class Drzave
         switch ($name) {
             case "vse":
                 $qb   = $this->getVseQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name, $qb);
+                $qb->orderBy($sort->order,$sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $qb = $this->getDefaultQb($options);
-                $this->getSort($name, $qb);
+                $sort = $this->getSort($name, $qb);
+                $qb->orderBy($sort->order,$sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
     }
@@ -56,11 +58,11 @@ class Drzave
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.naziv', ':naziv');
+            $naz = $e->like('lower(p.naziv)', ':naziv');
 
             $qb->andWhere($e->orX($naz));
 
-            $qb->setParameter('naziv', "{$options['q']}%", "string");
+            $qb->setParameter('naziv', strtolower("{$options['q']}%"), "string");
         }
 
         return $qb;
@@ -81,24 +83,15 @@ class Drzave
 
         if (!empty($options['q'])) {
 
-            $naz    = $e->like('p.naziv', ':naz');
-            $isoNaz = $e->like('p.isoNaziv', ':naz');
-            $iso    = $e->eq('p.isoNum', ':sif');
-            $sif    = $e->eq('p.sifra', ':sif');
+            $naziv    = $e->like('lower(p.naziv)', ':naz');
+            $isoNaziv = $e->like('lower(p.isoNaziv)', ':naz');
+            $isoNum    = $e->eq('lower(p.isoNum)', ':sif');
+            $sifra    = $e->eq('lower(p.sifra)', ':sif');
 
-            $qb->andWhere($e->orX($naz, $sif, $iso, $isoNaz));
+            $qb->andWhere($e->orX($naziv, $sifra, $isoNum, $isoNaziv));
 
             $qb->setParameter('sif', $options['q'], "string");
             $qb->setParameter('naz', "{$options['q']}%", "string");
-        }
-
-        if (!empty($options['isoNum'])) {
-
-            $iso = $e->eq('p.isoNum', ':isoN');
-
-            $qb->andWhere($iso);
-
-            $qb->setParameter('isoN', $options['isoNum'], "string");
         }
 
         return $qb;

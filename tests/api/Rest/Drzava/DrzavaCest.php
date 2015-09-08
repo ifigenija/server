@@ -71,27 +71,27 @@ class DrzavaCest
     {
         $data      = [
             'sifra'     => 'XX',
-            'sifraDolg' => 'XX',
-            'isoNum'    => 'xx',
-            'isoNaziv'  => 'xx',
-            'naziv'     => 'xx',
-            'opomba'    => 'xx',
+            'sifraDolg' => 'YY',
+            'isoNum'    => 'zz',
+            'isoNaziv'  => 'qq',
+            'naziv'     => 'rr',
+            'opomba'    => 'ss',
         ];
         $this->obj = $drz       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('XX', $data['sifraDolg']);
+        $I->assertEquals('YY', $data['sifraDolg']);
         $I->assertNotEmpty($drz['id']);
 
         // kreiramo še en zapis
         $data = [
             'sifra'     => 'AA',
-            'sifraDolg' => 'AA',
-            'isoNum'    => 'aa',
-            'isoNaziv'  => 'aa',
-            'naziv'     => 'aa',
-            'opomba'    => 'aa',
+            'sifraDolg' => 'BB',
+            'isoNum'    => 'cc',
+            'isoNaziv'  => 'dd',
+            'naziv'     => 'ee',
+            'opomba'    => 'ff',
         ];
         $drz  = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('AA', $data['sifraDolg']);
+        $I->assertEquals('BB', $data['sifraDolg']);
         $I->assertNotEmpty($drz['id']);
     }
 
@@ -119,11 +119,11 @@ class DrzavaCest
         $drz = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         $I->assertEquals($drz['sifra'], 'XX');
-        $I->assertEquals($drz['sifraDolg'], 'XX');
-        $I->assertEquals($drz['isoNum'], 'xx');
-        $I->assertEquals($drz['isoNaziv'], 'xx');
+        $I->assertEquals($drz['sifraDolg'], 'YY');
+        $I->assertEquals($drz['isoNum'], 'zz');
+        $I->assertEquals($drz['isoNaziv'], 'qq');
         $I->assertEquals($drz['naziv'], 'tralala');
-        $I->assertEquals($drz['opomba'], 'xx');
+        $I->assertEquals($drz['opomba'], 'ss');
     }
 
     /**
@@ -155,7 +155,46 @@ class DrzavaCest
 
         $I->assertNotEmpty($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertEquals("xx", $list[0]['opomba']);
+        $I->assertEquals("ss", $list[0]['opomba']);
+    }
+    
+    public function getListPoDrzavi(ApiTester $I)
+    {
+        //iskanje sifra
+        $listUrl = $this->restUrl . "?q=" . "xx";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje naziv
+        $listUrl = $this->restUrl . "?q=" . "ee";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje isoNum
+        $listUrl = $this->restUrl . "?q=" . "zz";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje isoNaziv
+        $listUrl = $this->restUrl . "?q=" . "qq";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
     }
 
     /**

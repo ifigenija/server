@@ -119,6 +119,27 @@ class PostaCest
         $I->assertEquals(480, $resp['state']['totalRecords']);
         $I->assertEquals("1000", $list[0]['sifra']);      //glede na sort
     }
+    
+    public function getListPoPostniNaslov(ApiTester $I)
+    {
+        //iskanje sifra
+        $listUrl = $this->restUrl . "?q=" . "uu";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+        
+        //iskanje naziv
+        $listUrl = $this->restUrl . "?q=" . "aa";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+    }
 
     // tests
     public function delete(ApiTester $I)
