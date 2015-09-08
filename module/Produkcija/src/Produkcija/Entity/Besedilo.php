@@ -28,9 +28,10 @@ class Besedilo
     protected $id;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", unique=true, nullable=false)
      * @Max\I18n(label="besedilo.stevilka", description="besedilo.d.stevilka")
-     * @Max\Ui(ident=true)
+     * @Max\Ui(type="sifra",ident=true, icon="fa fa-barcode")
+     * @var string
      */
     protected $stevilka;
 
