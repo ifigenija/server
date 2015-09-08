@@ -11,6 +11,7 @@ forms:
                   required: false
             - naziv
             - jePrizorisce
+            - jeMaticniOder
             - sePlanira
             - kapaciteta
             - opis

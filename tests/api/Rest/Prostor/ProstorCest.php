@@ -91,14 +91,15 @@ class ProstorCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'sifra'        => '99',
-            'naziv'        => 'aa',
-            'jePrizorisce' => true,
-            'sePlanira'    => true,
-            'kapaciteta'   => 1,
-            'opis'         => 'aa',
-            'popa'         => $this->objPopa1['id'],
-            'naslov'       => $this->objPopa1['naslovi'][0]['id'],
+            'sifra'         => '99',
+            'naziv'         => 'aa',
+            'jePrizorisce'  => true,
+            'jeMaticniOder' => true,
+            'sePlanira'     => true,
+            'kapaciteta'    => 1,
+            'opis'          => 'aa',
+            'popa'          => $this->objPopa1['id'],
+            'naslov'        => $this->objPopa1['naslovi'][0]['id'],
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -107,14 +108,15 @@ class ProstorCest
 
         // kreiramo še en zapis
         $data       = [
-            'sifra'        => '13',
-            'naziv'        => 'bb',
-            'jePrizorisce' => true,
-            'sePlanira'    => false,
-            'kapaciteta'   => 2,
-            'opis'         => 'bb',
-            'popa'         => NULL,
-            'naslov'       => null,
+            'sifra'         => '13',
+            'naziv'         => 'bb',
+            'jePrizorisce'  => true,
+            'jeMaticniOder' => true,
+            'sePlanira'     => false,
+            'kapaciteta'    => 2,
+            'opis'          => 'bb',
+            'popa'          => NULL,
+            'naslov'        => null,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -123,14 +125,15 @@ class ProstorCest
 
         // kreiramo še en zapis
         $data       = [
-            'sifra'        => '00',
-            'naziv'        => 'cc',
-            'jePrizorisce' => true,
-            'sePlanira'    => false,
-            'kapaciteta'   => 3,
-            'opis'         => 'cc',
-            'popa'         => $this->objPopa2['id'],
-            'naslov'       => $this->objPopa2['naslovi'][0]['id'],
+            'sifra'         => '00',
+            'naziv'         => 'cc',
+            'jePrizorisce'  => true,
+            'jeMaticniOder' => true,
+            'sePlanira'     => false,
+            'kapaciteta'    => 3,
+            'opis'          => 'cc',
+            'popa'          => $this->objPopa2['id'],
+            'naslov'        => $this->objPopa2['naslovi'][0]['id'],
         ];
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -147,7 +150,7 @@ class ProstorCest
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
         codecept_debug($list);
-        $totRec = $resp['state']['totalRecords'];
+        $totRec  = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $totRec);
         $I->assertEquals("00", $list[0]['sifra']);
         $I->assertEquals("99", $list[$totRec - 1]['sifra']);
@@ -240,6 +243,7 @@ class ProstorCest
         $I->assertEquals($ent['naziv'], 'yy');
         $I->assertEquals($ent['sifra'], '99');
         $I->assertEquals($ent['jePrizorisce'], true);
+        $I->assertEquals($ent['jeMaticniOder'], true,"jeMaticniOder");
         $I->assertTrue($ent['sePlanira']);
         $I->assertEquals($ent['kapaciteta'], 1);
         $I->assertEquals($ent['opis'], 'aa');

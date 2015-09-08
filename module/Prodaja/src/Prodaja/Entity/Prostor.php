@@ -50,7 +50,14 @@ class Prostor
      */
     protected $jePrizorisce;
 
-    
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="prostor.jeMaticniOder", description="prostor.d.jeMaticniOder")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $jeMaticniOder;
+
     /**
      * @ORM\Column(type="boolean", nullable=false, options={"default"=false})
      * @Max\I18n(label="prostor.sePlanira", description="prostor.d.sePlanira")
@@ -59,7 +66,6 @@ class Prostor
      */
     protected $sePlanira = false;
 
-    
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="prostor.kapaciteta", description="prostor.d.kapaciteta")
@@ -96,7 +102,7 @@ class Prostor
     {
         if ($this->popa) {
             $this->expect($this->naslov, "Naslov prostora je obvezen podatek, če imamo na prostoru vnešenega poslovnega partnerja", 1000380);
-            $naslov      = $this->naslov;
+            $naslov  = $this->naslov;
             $obstaja = false; //init
             $obstaja = $this->popa
                     ->getNaslovi()
@@ -183,18 +189,18 @@ class Prostor
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa=null)
+    public function setPopa(\App\Entity\Popa $popa = null)
     {
         $this->popa = $popa;
         return $this;
     }
 
-    public function setNaslov(\App\Entity\PostniNaslov $naslov=null)
+    public function setNaslov(\App\Entity\PostniNaslov $naslov = null)
     {
         $this->naslov = $naslov;
         return $this;
     }
-    
+
     public function getSePlanira()
     {
         return $this->sePlanira;
@@ -206,6 +212,15 @@ class Prostor
         return $this;
     }
 
+    public function getJeMaticniOder()
+    {
+        return $this->jeMaticniOder;
+    }
 
+    public function setJeMaticniOder($jeMaticniOder)
+    {
+        $this->jeMaticniOder = $jeMaticniOder;
+        return $this;
+    }
 
 }
