@@ -13,5 +13,19 @@ forms:
 lists:
     default: 
         hydrator:
-            exclude: []    
+            exclude: []
+        filter: 
+            elements: 
+                - name: q
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči..
+                    label: Išči
+                - name: skupina
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči po skupinah..
+                    label: Skupina/Podskupina
       

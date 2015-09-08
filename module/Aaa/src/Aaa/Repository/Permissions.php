@@ -15,6 +15,7 @@ use Max\Repository\AbstractMaxRepository;
 class Permissions
         extends AbstractMaxRepository
 {
+
     /**
      * default sort opcije
      *
@@ -22,10 +23,9 @@ class Permissions
      */
     protected $sortOptions = [
         'default' => [
-            'name'  => ['alias' => 'u.name'],
+            'name' => ['alias' => 'u.name'],
         ]
     ];
-
 
     /**
      * Iskanje za privzeto
@@ -46,13 +46,12 @@ class Permissions
         $qb->from('\Aaa\Entity\Permission', 'p');
 
         if (!empty($options['q'])) {
-            $srch = strtolower($options['q']) ;
-            $qb->Where($ex->orx(
-                            $ex->like('lower(p.name)', ':name'), $ex->like('lower(p.description)', ':description')
-            ));
+            $srch        = strtolower($options['q']);
+            $name        = $ex->like('lower(p.name)', ':query');
 
-            $qb->setParameter('name', "%" . $srch . "%");
-            $qb->setParameter('description', "%" . $srch . "%");
+            $qb->andWhere($ex->orx($name));
+
+            $qb->setParameter('query', "%" . $srch . "%");
         }
         return new DoctrinePaginator(new Paginator($qb));
     }

@@ -47,13 +47,14 @@ class Users
         $qb->from('\Aaa\Entity\User', 'u');
         $qb->orderBy($sort->order, $sort->dir);
 
-        if (!empty($options['text'])) {
-            $srch = strtolower($options['text']);
+        if (!empty($options['q'])) {
+            $srch = strtolower($options['q']);
+            $name = $ex->like('lower(u.name)', ':query');
+            $email = $ex->like('lower(u.email)', ':query');
 
-            $qb->Where(
-                    $ex->like('lower(u.name)', ':name')
-            );
-            $qb->setParameter('name', "%" . $srch . "%");
+            $qb->andWhere($ex->orX($name,$email));
+            
+            $qb->setParameter('query', "%" . $srch . "%");
         }
         return new DoctrinePaginator(new Paginator($qb));
     }

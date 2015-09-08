@@ -17,7 +17,14 @@ forms:
 #            - users 
 lists:
     default:
-        filter:
+        filter: 
+            elements: 
+                - name: q
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči..
+                    label: Išči
     
 hydrator:
     exclude: 

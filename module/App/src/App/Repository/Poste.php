@@ -23,7 +23,8 @@ class Poste
 
     protected $sortOptions = [
         "default" => [
-            "sifra" => ["alias" => "p.sifra"]
+            "sifra" => ["alias" => "p.sifra"],
+            "naziv" => ["alias" => "p.naziv"]
         ],
         "vse"     => [
             "sifra" => ["alias" => "p.sifra"]
@@ -48,11 +49,12 @@ class Poste
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $naz = $e->like('p.sifra', ':sifra');
+            $naziv = $e->like('lower(p.naziv)', ':query');
+            $sifra = $e->like('lower(p.sifra)', ':query');
 
-            $qb->andWhere($e->orX($naz));
+            $qb->andWhere($e->orX($naziv, $sifra));
 
-            $qb->setParameter('sifra', "{$options['q']}%", "string");
+            $qb->setParameter('query', "%{$options['q']}%", "string");
         }
 
         return $qb;

@@ -80,22 +80,19 @@ class RoleCest
         $I->assertNotEmpty($role['id']);
     }
 
-    
-    
     /**
      * 
      * @param ApiTester $I
      */
     public function lookupUser(ApiTester $I)
     {
-        $this->lookUser1 = $ent            = $I->lookupEntity("user", "tatjana@ifigenija.si", false);
+        $this->lookUser1 = $ent             = $I->lookupEntity("user", "tatjana@ifigenija.si", false);
         $I->assertNotEmpty($ent);
-        
-        $this->lookUser2 = $ent            = $I->lookupEntity("user", "joze@ifigenija.si", false);
+
+        $this->lookUser2 = $ent             = $I->lookupEntity("user", "joze@ifigenija.si", false);
         $I->assertNotEmpty($ent);
     }
 
-    
     /**
      *  napolnimo vsaj en zapis
      * 
@@ -131,24 +128,40 @@ class RoleCest
 //        $I->assertNotEmpty($user['id']);
 //    }
 
-        /**
+    /**
      * @param ApiTester $I
      */
     public function getListPermission(ApiTester $I)
     {
-        $resp            = $I->successfullyGetList($this->permissionUrl, []);
-        $list            = $resp['data'];
+        $resp = $I->successfullyGetList($this->permissionUrl, []);
+        $list = $resp['data'];
         $I->assertNotEmpty($list);
-        
-        $this->objPermission1 = $drzava          = array_pop($list);
+
+        $this->objPermission1 = $drzava               = array_pop($list);
         $I->assertNotEmpty($drzava);
 
-        $this->objPermission2 = $drzava          = array_pop($list);
+        $this->objPermission2 = $drzava               = array_pop($list);
         $I->assertNotEmpty($drzava);
     }
 
-    
-    
+    /**
+     * preberi vse zapise po ulici
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPoRole(ApiTester $I)
+    {
+        //iskanje ulica
+        $listUrl = $this->restUrl . "?q=" . "TEST4";
+
+        $resp = $I->successfullyGetList($listUrl, []);
+        $list = $resp['data'];
+
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertNotEmpty($list);
+    }
+
     /**
      * 
      * @depends create
@@ -322,6 +335,7 @@ class RoleCest
 
         $resp = $I->failToGetRelation($this->restUrl, $this->objRole2['id'], "permissions", $this->objPermission1['id']);
     }
+
     /**
      * kreiramo relacijo
      * @depends create
