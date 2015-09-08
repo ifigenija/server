@@ -102,6 +102,7 @@ class ProdukcijaDelitev
     {
         if ($this->getMaticniKop()) {
             $this->delez = $this->getEnotaPrograma()->getNasDelez();
+            $this->kpe = $this->getEnotaPrograma()->getKpe();
         }
 
         $this->getEnotaPrograma()->preracunajCelotnoVrednost();     // seštevek vseh deležev

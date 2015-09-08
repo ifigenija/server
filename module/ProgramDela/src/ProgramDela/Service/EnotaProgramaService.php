@@ -31,8 +31,7 @@ class EnotaProgramaService
 
         $optionR = $em->getRepository('App\Entity\Option');
         $option  = $optionR->findOneByName("application.tenant.maticnopodjetje");
-        $this->expect($option
-                , "Matično gledališče ni vnešeno:" , 1000953);
+        $this->expect($option, "Matično gledališče ni vnešeno:" , 1000953);
 
         $sifra = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
 

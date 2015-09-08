@@ -47,14 +47,15 @@ class ProdukcijaDelitve
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
-
             $vrKop = $e->like('p.vrstaKoproducenta', ':vrkop');
-
             $qb->andWhere($e->orX($vrKop));
-
             $qb->setParameter('vrkop', "{$options['q']}%", "string");
         }
-
+        if (!empty($options['enotaPrograma'])) {
+            $qb->leftJoin('p.enotaPrograma', 'ep');
+            $qb->andWhere($e->eq('ep.id', ':ep'));
+            $qb->setParameter('ep', "{$options['enotaPrograma']}", "string");
+        }
         return $qb;
     }
 

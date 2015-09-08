@@ -494,7 +494,6 @@ class ProgramPremieraCest
         $I->assertEquals(1000613, $resp[0]['code']);
     }
 
-
     /**
      *  osvežimo zapis s tipom  brez koprodukcije
      * 
@@ -598,7 +597,7 @@ class ProgramPremieraCest
 
         $ent['kpe'] = -0.01;   // v praksi bo že klient zaokrožil na 2 mesti
         $resp       = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
-        $I->assertEquals(1000445, $resp[0]['code']);
+        $I->assertEquals(1000417, $resp[0]['code']);
 
         /**
          * kontrola vsot kpe koprodukcij
@@ -621,6 +620,40 @@ class ProgramPremieraCest
         $kopr['kpe'] = -0.01;
         $resp        = $I->failToUpdate($this->produkcijaDelitevUrlPremiera, $kopr['id'], $kopr);
         $I->assertEquals(1000417, $resp[0]['code']);
+    }
+
+    /**
+     * ali bo spremenil kpe tudi pri matičnem koproducentu?
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateKpe(ApiTester $I)
+    {
+        $ent                       = $this->obj2;
+        $ent['tipProgramskeEnote'] = $this->lookTipProgramskeEnote3['id'];
+        $ent['kpe']                = 0.22;
+
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        $I->assertEquals(0.22, $ent['kpe']);
+
+
+        $resp = $I->successfullyGetList($this->produkcijaDelitevUrl . "?enotaPrograma=" . $ent['id'], []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        /**
+         * še najdi matičnega 
+         */
+        foreach ($list as $l) {
+            codecept_debug($l);
+            if ($l['maticniKop'] == true) {
+                $maticni = $l;
+            }
+        }
+        codecept_debug($maticni, "matični");
+        $I->assertEquals(0.22, $maticni['kpe']);
     }
 
     /**
@@ -695,6 +728,7 @@ class ProgramPremieraCest
         $resp                          = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals(1000629, $resp[0]['code']);
     }
+
     /**
      * test negativnih integer vrednosti
      * 
@@ -711,7 +745,6 @@ class ProgramPremieraCest
 //        $I->assertEquals(1000999, $resp[0]['code']);
         // že v validate javi napako:
         $I->assertContains("not greater", $resp[0]['message']);
-        
     }
 
 }
