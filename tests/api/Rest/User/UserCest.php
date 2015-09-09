@@ -44,37 +44,36 @@ class UserCest
         
     }
 
-        /**
+    /**
      * kreiramo rolo 
      * 
      * @param ApiTester $I
      */
     public function createRolo(ApiTester $I)
     {
-        $data      = [
+        $data           = [
             'name'        => 'TEST4VLOGA',
             'description' => 'Testna vloga za Cest testiranje',
 //            'builtIn'     => false,     //$$ rb NotEmpty validator ne dovoli false
         ];
-        $this->objRole1 = $role      = $I->successfullyCreate($this->roleUrl, $data);
+        $this->objRole1 = $role           = $I->successfullyCreate($this->roleUrl, $data);
 
         $I->assertEquals('TEST4VLOGA', $role['name']);
         $I->assertEquals('Testna vloga za Cest testiranje', $role['description']);
         $I->assertNotEmpty($role['id']);
 
         // kreiramo še 1 zapis
-        $data      = [
+        $data           = [
             'name'        => 'TEST5VLOGA',
             'description' => 'Testna vlogica za Cest testiranje',
 //            'builtIn'     => false,     //$$ rb NotEmpty validator ne dovoli false
         ];
-        $this->objRole2 = $role      = $I->successfullyCreate($this->roleUrl, $data);
+        $this->objRole2 = $role           = $I->successfullyCreate($this->roleUrl, $data);
 
         $I->assertNotEmpty($role['id']);
         $I->assertEquals('TEST5VLOGA', $role['name']);
     }
 
-    
     /**
      *  napolnimo vsaj en zapis
      * 
@@ -87,7 +86,7 @@ class UserCest
             'name'               => 'Testni uporabnik za Cest testiranje',
             'password'           => 'abc123ASDF',
             'enabled'            => true,
-            'expires'            => '2017-02-01T00:00:00+0100',
+            'expires'            => '2017-02-01T22:22:22+0100',     // ure, minute in sekunde sam odvzame v format date
             'defaultRoute'       => 'zz',
             'defaultRouteParams' => 'zz',
         ];
@@ -96,7 +95,7 @@ class UserCest
         $I->assertNotEmpty($user['id']);
 
         // kreiramo še en zapis
-        $data      = [
+        $data           = [
             'email'              => 'test6@ifigenija.si',
             'name'               => 'Testni uporabnik za Cest testiranje',
             'password'           => 'weiiw3948593845ASDFASEDF',
@@ -105,7 +104,7 @@ class UserCest
             'defaultRoute'       => 'aa',
             'defaultRouteParams' => 'aa',
         ];
-        $this->objUser2 = $user      = $I->successfullyCreate($this->restUrl, $data);
+        $this->objUser2 = $user           = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals('test6@ifigenija.si', $user['email']);
         $I->assertNotEmpty($user['id']);
     }
@@ -124,7 +123,7 @@ class UserCest
 //        $this->id = array_pop($list)['id'];
 //        $I->assertNotEmpty($this->id);
 //    }
-    
+
     /**
      * preberi vse zapise po ulici
      * 
@@ -141,7 +140,7 @@ class UserCest
 
         $I->assertEquals(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         //iskanje name
         $listUrl = $this->restUrl . "?q=" . "za cest";
 
@@ -202,9 +201,9 @@ class UserCest
         $I->assertEquals("test2@ifigenija.si", $user['email']);
         $I->assertEquals("Testni uporabnik za Cest testiranje", $user['name']);
         $I->assertEquals(true, $user['enabled']);
-        $I->assertEquals("2017-02-01T00:00:00+0100", $user['expires'], "expires ni isti");
+        $I->assertEquals("2017-02-01T00:00:00+0100", $user['expires'], "expires");
         $I->assertEquals("yy", $user['defaultRoute'], "defaultRoute ni ista");
-        $I->assertEquals("zz", $user['defaultRouteParams'], "defaultRouteParams ni isto");
+        $I->assertEquals("zz", $user['defaultRouteParams'], "defaultRouteParams");
     }
 
     /**
@@ -293,7 +292,7 @@ class UserCest
         $I->assertTrue($res);
     }
 
-        /**
+    /**
      * Preverim, ali ima user nima več rol
      * 
      * @param ApiTester $I
@@ -308,7 +307,7 @@ class UserCest
         $I->assertEquals(0, count($user['roles']));
     }
 
-        /**
+    /**
      * kreiramo relacijo
      * @depends create
      * @depends createRolo
@@ -354,8 +353,6 @@ class UserCest
         $resp = $I->failToGetRelation($this->restUrl, $this->objUser2['id'], "roles", $this->objRole1['id']);
     }
 
-    
-    
     /**
      * @depends create
      */

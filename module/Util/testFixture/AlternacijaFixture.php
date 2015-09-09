@@ -111,6 +111,7 @@ class AlternacijaFixture
             ['0009', true, 'Funkcija-Hipolita', null, 'Oseba-0004', null, 15, false, true, null, "Zaposlitev-04", '2017-01-01', '2017-04-20',true],
             ['0010', true, 'Funkcija-Hipolita', null, 'Oseba-0009', null, 16, false, true, null, "Zaposlitev-05", null, '2017-04-20',false],
             ['0011', true, 'Funkcija-Hipolita', null, 'Oseba-0007', null, 17, false, true, null, "Zaposlitev-06", '2017-01-01', null,false],
+            ['0012', false, 'Funkcija-Avtor', null, 'Oseba-0010', null, 2, true, true,  'Pogodba-0004', null, null, null,true,],
         ];
     }
 

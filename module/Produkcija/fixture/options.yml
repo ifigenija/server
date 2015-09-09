@@ -96,5 +96,5 @@
     defaultValue: 
         materialni:
            label: Materialni strošek
-        avtorprav:
-           label: Strošek odkupa avtorskih pravic 
+#        avtorprav:
+#           label: Strošek odkupa avtorskih pravic 

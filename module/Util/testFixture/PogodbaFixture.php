@@ -80,6 +80,7 @@ class PogodbaFixture
         $o->setZaposlenVDrJz($v[13]);
         $o->setSamozaposlen($v[14]);
         $o->setIgralec($v[15]);
+        $o->setJeAvtorskePravice($v[16]);
 
         $o->preracunaj();
         /**
@@ -95,9 +96,10 @@ class PogodbaFixture
     public function getData()
     {
         return [
-            ['0001', 10, 30, 10, true, "Pogodba o sodelovanju", 'Oseba-0001', null, null, null, null, false, 3, true, false, true,],
-            ['0002', 11, 31, 11, true, "Pogodba za vlogo Helena", 'Oseba-0006', null, null, null, null, true, 10, false, true, true,],
-            ['0003', 12, 32, 12, true, "Pogodba za lektoriranje", 'Oseba-0013', null, null, null, null, FALSE, 4, false, true, false,],
+            ['0001', 10, 30, 10, true, "Pogodba o sodelovanju", 'Oseba-0001', null, null, null, null, false, 3, true, false, true, false,],
+            ['0002', 11, 31, 11, true, "Pogodba za vlogo Helena", 'Oseba-0006', null, null, null, null, true, 10, false, true, true, false,],
+            ['0003', 12, 32, 12, true, "Pogodba za lektoriranje", 'Oseba-0013', null, null, null, null, FALSE, 4, false, true, false, false,],
+            ['0004', 300, 30, 0, true, "Pogodba za avtorske pravice", 'Oseba-0010', null, null, null, null, FALSE, 2, false, true, false, true,],
         ];
     }
 

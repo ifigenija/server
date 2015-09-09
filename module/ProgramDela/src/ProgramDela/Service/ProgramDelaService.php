@@ -97,46 +97,45 @@ class ProgramDelaService
                     $data[$skupina . "." . $podskupina]['vrednost']['gostovanjaZamejstvo']+=$vrednost;
                     $data["Skupaj"]['vrednost']['gostovanjaZamejstvo'] +=$vrednost;
                     break;
-                case 'avtorprav':
-                    if ($upostevajDo) {
-                        /**
-                         * avtorske pravice
-                         */
-                        // stolpec
-                        $vrednost = $strosek->getVrednostDo();
-                        $data["T.0"]['vrednost']['premiere']+=$vrednost;      //glava
-                        $data["T.1"]['vrednost']['premiere']+=$vrednost;
-                        $data["Skupaj"]['vrednost']['premiere'] +=$vrednost;
-                    }
-
-                    /**
-                     * tantieme
-                     */
-                    // stolpec
-                    $vrednost = $strosek->getVrednostNa() * $stPonovitev;
-                    $data["T.0"]['vrednost'][$stolpec]+=$vrednost;      //glava
-                    $data["T.2"]['vrednost'][$stolpec]+=$vrednost;
-                    $data["Skupaj"]['vrednost'][$stolpec] +=$vrednost;
-
-                    // zamejstvo
-                    $vrednost = $strosek->getVrednostNa() * $stPonovZamejo;
-                    $data["T.0"]['vrednost']['gostovanjaZamejstvo']+=$vrednost;      //glava
-                    $data["T.2"]['vrednost']['gostovanjaZamejstvo']+=$vrednost;
-                    $data["Skupaj"]['vrednost']['gostovanjaZamejstvo'] +=$vrednost;
-                    break;
             }
         }
-        $honorarji = $this->sestejHonorarje($uprizoritev, $programDela);
-
+        $honorInAvt = $this->sestejVrednostiPogodb($uprizoritev, $programDela);
+        /**
+         * avtorske pravice
+         */
         // stolpec
-        $vrednost = $upostevajDo ? $honorarji['Do'] : 0;        // le za premiere
-        $vrednost += $honorarji['Na'] * $stPonovitev;
+        $vrednost   = $upostevajDo ? $honorInAvt['Do']['avtorskePravice'] : 0;        // le za premiere
+        $data["T.0"]['vrednost']['premiere']+=$vrednost;      //glava
+        $data["T.1"]['vrednost']['premiere']+=$vrednost;
+        $data["Skupaj"]['vrednost']['premiere'] +=$vrednost;
+
+        /**
+         * tantieme
+         */
+        // stolpec
+        $vrednost += $honorInAvt['Na']['avtorskePravice'] * $stPonovitev;
+        $data["T.0"]['vrednost'][$stolpec]+=$vrednost;      //glava
+        $data["T.2"]['vrednost'][$stolpec]+=$vrednost;
+        $data["Skupaj"]['vrednost'][$stolpec] +=$vrednost;
+
+        // zamejstvo
+        $vrednost += $honorInAvt['Na']['avtorskePravice'] * $stPonovZamejo;
+        $data["T.0"]['vrednost']['gostovanjaZamejstvo']+=$vrednost;      //glava
+        $data["T.2"]['vrednost']['gostovanjaZamejstvo']+=$vrednost;
+        $data["Skupaj"]['vrednost']['gostovanjaZamejstvo'] +=$vrednost;
+
+        /**
+         * avtorski honorarji
+         */
+        // stolpec
+        $vrednost = $upostevajDo ? $honorInAvt['Do']['avtorskiHonorarji'] : 0;        // le za premiere
+        $vrednost += $honorInAvt['Na']['avtorskiHonorarji'] * $stPonovitev;
         $data["H.0"]['vrednost'][$stolpec]+=$vrednost;      //glava
         $data["H.1"]['vrednost'][$stolpec]+=$vrednost;
         $data["Skupaj"]['vrednost'][$stolpec]+=$vrednost;
 
         // zamejstvo
-        $vrednost = $honorarji['Na'] * $stPonovZamejo;
+        $vrednost = $honorInAvt['Na']['avtorskiHonorarji'] * $stPonovZamejo;
         $data["H.0"]['vrednost']['gostovanjaZamejstvo']+=$vrednost;      //glava
         $data["H.1"]['vrednost']['gostovanjaZamejstvo']+=$vrednost;
         $data["Skupaj"]['vrednost']['gostovanjaZamejstvo'] +=$vrednost;
@@ -186,17 +185,19 @@ class ProgramDelaService
     }
 
     /**
-     * inicializira podatke
+     * sešteje avtorske honorarje in avtorske pravice iz pogodb
      * 
      * @param entity $uprizoritev enota programa
      * @param entity $programDela      programa dela
      * 
-     * @return array $honorarji
+     * @return array $data       honorarji in avtorske pravice (in tantieme)   
      */
-    protected function sestejHonorarje(\Produkcija\Entity\Uprizoritev $uprizoritev, \ProgramDela\Entity\ProgramDela $programDela)
+    protected function sestejVrednostiPogodb(\Produkcija\Entity\Uprizoritev $uprizoritev, \ProgramDela\Entity\ProgramDela $programDela)
     {
-        $honorarji['Do'] = 0; //init
-        $honorarji['Na'] = 0; //init
+        $data['Do']['avtorskePravice']   = 0; // init 
+        $data['Na']['avtorskePravice']   = 0;
+        $data['Do']['avtorskiHonorarji'] = 0;
+        $data['Na']['avtorskiHonorarji'] = 0;
 
         $pdz = $programDela->getZacetek();
         $pdk = $programDela->getKonec();
@@ -214,16 +215,29 @@ class ProgramDelaService
                         $pogodba = $alternacija->getPogodba();
                         if ($pogodba) {
                             if ($pogodba->getAktivna()) {
-                                //$$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
-                                $honorarji['Do']+= $pogodba->getVrednostDoPremiere();
-                                $honorarji['Na']+= $pogodba->getVrednostPredstave();
+                                /**
+                                 *  $$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
+                                 */
+                                if ($pogodba->getJeAvtorskePravice()) {
+                                    /**
+                                     * avtorske pravice
+                                     */
+                                    $data['Do']['avtorskePravice']+= $pogodba->getVrednostDoPremiere();
+                                    $data['Na']['avtorskePravice']+= $pogodba->getVrednostPredstave(); // to so tantieme
+                                } else {
+                                    /**
+                                     * avtorski honorarji
+                                     */
+                                    $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
+                                    $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
+                                }
                             }
                         }
                     }
                 }
             }
         }
-        return $honorarji;
+        return $data;
     }
 
 }

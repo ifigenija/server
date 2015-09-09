@@ -9,6 +9,7 @@ forms:
             - name: sifra
               options:
                   required: false
+            - jeAvtorskePravice
             - vrednostVaje
             - vrednostVaj
             - placiloNaVajo

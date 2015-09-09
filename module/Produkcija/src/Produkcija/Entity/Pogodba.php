@@ -51,6 +51,17 @@ class Pogodba
     protected $konec;
 
     /**
+     * true, če je vsebina pogodbe avtorske pravice (odkup a.p. in/ali tantieme), 
+     * sicer avtorski honorar
+     * 
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="pogodba.jeAvtorskePravice", description="pogodba.d.jeAvtorskePravice")   
+     * @Max\Ui(type="boolcheckbox")                       
+     * @var boolean
+     */
+    protected $jeAvtorskePravice;
+
+    /**
      * @ORM\Column(type="boolean", nullable=true)
      * @Max\I18n(label="pogodba.placiloNaVajo", description="pogodba.d.placiloNaVajo")   
      * @Max\Ui(type="boolcheckbox")                       
@@ -84,6 +95,10 @@ class Pogodba
      * Pavšalna vrednost za vse vaje. 
      * 
      * Polje je aktualno, če je placiloNaVajo=false
+     * 
+     * Polje je aktualno tudi za neigralce, t.j. dramaturge, scenografe itd., 
+     * vendar to ni vrednost vaj ampak kar vrednost do premiere 
+     * oni dobijo vpraksi plačano le vrednost do premiere, ne pa  na predstavo.
      * 
      * V praksi dobijo honorarni igralci ali pavšalni znesek 
      * za vse vaje ali pa nič (le za predstave). Za posamezno vajo se v principu ne plačuje.
@@ -391,19 +406,30 @@ class Pogodba
         $this->alternacije = $alternacije;
     }
 
-    function setOseba(\App\Entity\Oseba $oseba=null)
+    function setOseba(\App\Entity\Oseba $oseba = null)
     {
         $this->oseba = $oseba;
     }
 
-    function setPopa(\App\Entity\Popa $popa=null)
+    function setPopa(\App\Entity\Popa $popa = null)
     {
         $this->popa = $popa;
     }
 
-    function setTrr(\App\Entity\Trr $trr=null)
+    function setTrr(\App\Entity\Trr $trr = null)
     {
         $this->trr = $trr;
+    }
+
+    public function getJeAvtorskePravice()
+    {
+        return $this->jeAvtorskePravice;
+    }
+
+    public function setJeAvtorskePravice($jeAvtorskePravice)
+    {
+        $this->jeAvtorskePravice = $jeAvtorskePravice;
+        return $this;
     }
 
 }
