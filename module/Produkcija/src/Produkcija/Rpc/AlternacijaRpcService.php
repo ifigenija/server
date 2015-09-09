@@ -59,6 +59,7 @@ class AlternacijaRpcService
 //        $pogodba->setVrednostUre(0);
         $pogodba->setVrednostDoPremiere(0);
         $pogodba->setPlaciloNaVajo(FALSE);
+        $pogodba->setJeAvtorskePravice(FALSE);
         $pogodba->setOseba($alternacija->getOseba());
 
         $pogodbaR = $em->getRepository("Produkcija\Entity\Pogodba")

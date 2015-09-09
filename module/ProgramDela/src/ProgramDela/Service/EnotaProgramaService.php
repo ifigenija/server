@@ -97,7 +97,7 @@ class EnotaProgramaService
                     break;
                 default:
                     $this->expect(false
-                            , "Tip stroška uprizoritve je lahko le materialni ali avtorske pravice, je pa:" . $strosekU->getTipstroska(), 1000951);
+                            , "Tip stroška uprizoritve je lahko le materialni, je pa:" . $strosekU->getTipstroska(), 1000951);
             }
         }
 
@@ -132,8 +132,6 @@ class EnotaProgramaService
                             "sort"     => $alternacija->getSort()]);
                     }
                     if ($alternacija->getImaPogodbo()) {
-
-
                         $pogodba = $alternacija->getPogodba();
                         if ($pogodba) {
                             if ($pogodba->getAktivna()) {
