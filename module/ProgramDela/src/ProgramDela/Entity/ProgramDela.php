@@ -122,6 +122,12 @@ class ProgramDela
     protected $programiRazno;
 
     /**
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\PostavkaCDve", mappedBy="programDela")
+     * @var <PostavkeC2>
+     */
+    protected $postavkeC2;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="programDela.stPremier", description="programDela.d.stPremier")
      * @Max\Ui(type="integer")
@@ -916,6 +922,7 @@ class ProgramDela
         $this->gostujoci          = new ArrayCollection();
         $this->gostovanja         = new ArrayCollection();
         $this->programiRazno      = new ArrayCollection();
+        $this->postavkeCDve       = new ArrayCollection();
     }
 
     /**
@@ -2505,6 +2512,17 @@ class ProgramDela
     public function setStObiskPonPremInt($stObiskPonPremInt)
     {
         $this->stObiskPonPremInt = $stObiskPonPremInt;
+        return $this;
+    }
+
+    public function getPostavkeC2()
+    {
+        return $this->postavkeC2;
+    }
+
+    public function setPostavkeC2($postavkeC2)
+    {
+        $this->postavkeC2 = $postavkeC2;
         return $this;
     }
 

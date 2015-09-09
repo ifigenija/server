@@ -16,7 +16,7 @@ return [
             'enotaprograma.rpc.service' => 'ProgramDela\Rpc\EnotaProgramaRpcService',
             'enotaprograma.service'     => 'ProgramDela\Service\EnotaProgramaService',
             'programdela.rpc.service'   => 'ProgramDela\Rpc\ProgramDelaRpcService',
-            'programdela.service'     => 'ProgramDela\Service\ProgramDelaService',
+            'programdela.service'       => 'ProgramDela\Service\ProgramDelaService',
         ],
     ],
     'controllers'     => [
@@ -51,6 +51,7 @@ return [
             'Rest\TipProgramskeEnote'            => 'Max\Factory\RestControllerFactory',
             'Relation\TipProgramskeEnote'        => 'Max\Factory\ToManyControllerFactory',
             'Rest\ProgramskaEnotaSklopa'         => 'Max\Factory\RestControllerFactory',
+            'Rest\PostavkaCDve'                  => 'Max\Factory\RestControllerFactory',
         ],
     ],
     'router'          => [

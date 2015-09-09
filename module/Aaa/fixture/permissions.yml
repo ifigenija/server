@@ -211,6 +211,12 @@
     description: Posta - spreminjanje
 
 -
+    name: PostavkaCDve-read
+    description: PostavkaCDve - branje
+-
+    name: PostavkaCDve-write
+    description: PostavkaCDve - spreminjanje
+-
     name: PostavkaRacuna-read
     description: PostavkaRacuna - branje
 -
