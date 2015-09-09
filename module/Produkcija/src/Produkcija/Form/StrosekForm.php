@@ -54,7 +54,7 @@ class StrosekForm
         $vrste     = $rep->findBy([], ['skupina' => "ASC", "podskupina" => "ASC"]);
         $trensk    = null;
         $trengroup = "";
-        $groups    = ["Brez vrednosti" => ['options' => ['' => 'Določite vrsto stroška']]];
+        $groups    = ["Brez vrednosti" => ['options' => ['' => 'Določite vrsto stroška'], 'label' => "Brez vrednosti"]];
         foreach ($vrste as $vrsta) {          
             
             if ($trensk === null || $trensk !== $vrsta->getSkupina()) {
