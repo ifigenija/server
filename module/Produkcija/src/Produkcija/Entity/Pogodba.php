@@ -230,6 +230,22 @@ class Pogodba
         $this->expect($this->oseba, "Pogodba nima subjekta. Oseba je obvezna", 1000343);
         $this->expect(!($this->zaposlenVDrJz && $this->samozaposlen), "Oseba ne more biti hkrati zaposlena v drugem jz in samozaposlena", 1000345);
     }
+    
+    function getFunkcija()
+    {
+        $alternacije = $this->getAlternacije();
+        $funkcije = '';
+        if($alternacije){
+            foreach ($alternacije as $alter) {
+                $funkcija = $alter->getFunkcija();
+                if($funkcija){
+                    $naziv = $funkcija->getNaziv();
+                    $funkcije = $naziv . ($funkcije ? " / " : ""). $funkcije;
+                }
+            }
+        }
+        return $funkcije;
+    }
 
     function getId()
     {
