@@ -105,9 +105,9 @@ class ProgramDelaService
          */
         // stolpec
         $vrednost   = $upostevajDo ? $honorInAvt['Do']['avtorskePravice'] : 0;        // le za premiere
-        $data["T.0"]['vrednost']['premiere']+=$vrednost;      //glava
-        $data["T.1"]['vrednost']['premiere']+=$vrednost;
-        $data["Skupaj"]['vrednost']['premiere'] +=$vrednost;
+        $data["T.0"]['vrednost'][$stolpec]+=$vrednost;      //glava
+        $data["T.1"]['vrednost'][$stolpec]+=$vrednost;
+        $data["Skupaj"]['vrednost'][$stolpec] +=$vrednost;
 
         /**
          * tantieme
@@ -238,6 +238,70 @@ class ProgramDelaService
             }
         }
         return $data;
+    }
+
+    /**
+     * priprava podatkov za finančno prilogo C2 na osnovi programa dela, enot program in pripadajočih 
+     * uprizoritev 
+     * 
+     * kreira oz. osveži postavke C2 za dotičen program dela. Osveži le tiste kolone, 
+     * za katerega obstajajo podatki (npr. iz uprizoritev)
+     * 
+     * @param entity   $programDela
+     * 
+     * @returns       True|False                uspeh oz. neuspeh klica procedure
+     */
+    public function osveziTabeloC2(\ProgramDela\Entity\ProgramDela $programdela)
+    {
+        $em = $this->getEm();
+
+        $data = $this->podatkiPrilogaC2($programdela);
+
+        /**
+         * iz tabele C2 pobriši vse postavke, ki jih ni v $data
+         */
+        foreach ($programdela->getPostavkeC2() as $postavkaC2) {
+            $skupina    = (string) $postavkaC2->getSkupina();
+            $podskupina = (string) $postavkaC2->getPodskupina();
+            if (!array_key_exists($skupina . "." . $podskupina, $data)) {
+                $em->remove($postavkaC2);
+            };
+        }
+
+        /**
+         * za vse postavke $data
+         *  - kreiraj postavko v tabeli c2, če-le ta še ne obstaja  (če ista skupina, podskupina)
+         *  - update-iraj postavko v tabeli c2 na osnovi vrednosti postavke v $data
+         */
+        foreach ($data as $key => $val) {
+            if (!strpos($key, ".") === FALSE) {     //Skupaj preskočimo
+                $skupina    = explode(".", $key, 2)[0];
+                $podskupina = (integer) explode(".", $key, 2)[1];
+                $postColl   = $programdela->getPostavkeC2()
+                        ->filter(function($ent) use (&$skupina, $podskupina) {
+                    return ($ent->getSkupina() === $skupina && getPodskupina() === $podskupina);     //vrne  koprodukcijo lastnega gledališča
+                });
+                if ($postColl->count() == 0) {
+                    /**
+                     * če postavka še ne obstaja v tabeli, jo kreiramo
+                     */
+                    $postavkaC2 = new \ProgramDela\Entity\PostavkaCDve();
+                    $em->persist($postavkaC2);
+                    $postavkaC2->setProgramDela($programdela);
+                    $postavkaC2->setSkupina($skupina);
+                    $postavkaC2->setPodskupina($podskupina);
+                } else {
+                    $this->expect(($postColl->count() > 1), "Več vrstic v tabeli C2 z isto skupino, podskupino:" . $skupina . "." . $podskupina, 1001040);
+                    $postavkaC2 = $postColl->get(0);  // vrne 1. in edini element 
+                }
+                $postavkaC2->setNaziv($val['nazivStr']);
+                $postavkaC2->setVrPremiere($val['vrednost']['premiere']);
+                $postavkaC2->setVrPonovitvePremier($val['vrednost']['ponovitvePremier']);
+                $postavkaC2->setVrPonovitvePrejsnjih($val['vrednost']['ponovitvePrejsnjih']);
+                $postavkaC2->setVrGostovanjaZamejstvo($val['vrednost']['gostovanjaZamejstvo']);
+            }
+        }
+        return TRUE;
     }
 
 }

@@ -374,6 +374,7 @@ class ProgramDelaRpcService
      * @param string   $programDelaId
      * 
      * @returns        $data                strukturirani podatki priloge C2
+     * @todo preveriti, ali še potrebujemo ta RPC klic, ali je dovolj rpc klic osveziTabeloC2 $$
      */
     public function podatkiPrilogaC2($programDelaId)
     {
@@ -398,7 +399,7 @@ class ProgramDelaRpcService
 
         $this->expectUUID($programDelaId, $this->translate('Pričakujem ID programa dela'), 1000980);
 
-        $programdela= $em->getRepository("ProgramDela\Entity\ProgramDela")
+        $programdela = $em->getRepository("ProgramDela\Entity\ProgramDela")
                 ->findOneById($programDelaId);
         $this->expectPermission("ProgramDela-read", $programdela);
 
@@ -413,6 +414,60 @@ class ProgramDelaRpcService
         $data    = $service->podatkiPrilogaC2($programdela);
 
         return $data;
+    }
+
+    /**
+     * priprava podatkov za finančno prilogo C2 na osnovi programa dela, enot program in pripadajočih 
+     * uprizoritev 
+     * 
+     * kreira oz. osveži postavke C2 za dotičen program dela. Osveži le tiste kolone, 
+     * za katerega obstajajo podatki (npr. iz uprizoritev)
+     * 
+     * @param string   $programDelaId
+     * 
+     * @returns       True|False                uspeh oz. neuspeh klica procedure
+     */
+    public function osveziTabeloC2($programDelaId)
+    {
+        // preverjanje avtorizacije
+        $this->expectPermission("PostavkaCDve-write");
+        $this->expectPermission("ProgramDela-read");
+        $this->expectPermission("ProgramPremiera-read");
+        $this->expectPermission("ProgramPonovitevPrejsnjih-read");
+        $this->expectPermission("ProgramPonovitevPremiere-read");
+        $this->expectPermission("ProgramGostovanje-read");
+        $this->expectPermission("ProgramFestival-read");
+
+        $this->expectPermission("Uprizoritev-read");
+        $this->expectPermission("VrstaStroska-read");
+        $this->expectPermission("StrosekUprizoritve-read");
+        $this->expectPermission("Funkcija-read");
+        $this->expectPermission("Alternacija-read");
+        $this->expectPermission("Oseba-read");
+        $this->expectPermission("Pogodba-read");
+
+        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $tr = $this->getServiceLocator()->get('translator');
+
+        $this->expectUUID($programDelaId, $this->translate('Pričakujem ID programa dela'), 1000982);
+
+        $programdela = $em->getRepository("ProgramDela\Entity\ProgramDela")
+                ->findOneById($programDelaId);
+        $this->expectPermission("ProgramDela-read", $programdela);
+
+        if (!$programdela) {
+            throw new \Max\Exception\UnauthException($tr->translate('Ni programa dela'), 1000983);
+        }
+
+        /**
+         * preračun imamo v posebnem servisu, tako, da ga lahko kličemo direktno iz PHP-ja na strežniški strani
+         */
+        $service = $this->serviceLocator->get('programdela.service');
+        $uspeh   = $service->osveziTabeloC2($programdela);
+        if ($uspeh) {
+            $em->flush();
+        }
+        return $uspeh;
     }
 
 }

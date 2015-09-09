@@ -1,0 +1,38 @@
+## YAML Template.
+---
+type: rest
+entityClass: ProgramDela\Entity\PostavkaCDve
+forms:
+    default: 
+        elements:
+#            - id
+#            - programDela
+#            - skupina
+#            - podskupina
+#            - naziv
+#            - vrPremiere
+#            - vrPonovitvePremier
+#            - vrPonovitvePrejsnjih
+#            - vrGostovanjaZamejstvo
+            - vrFestivali
+            - vrGostovanjaInt
+            - vrOstalo
+lists:
+    default: 
+        hydrator:
+            exclude: []
+        filter: 
+            elements: 
+                - name: q
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči..
+                    label: Išči
+                - name: skupina
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči po skupinah..
+                    label: Skupina/Podskupina
+            
