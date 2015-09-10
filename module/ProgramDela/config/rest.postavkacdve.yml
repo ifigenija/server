@@ -33,6 +33,18 @@ lists:
                   type: text
                   options:
                     required: false
-                    placeholder: Išči po skupinah..
-                    label: Skupina/Podskupina
-            
+                    placeholder: Išči po skupini
+                    label: Skupina
+                - name: podskupina
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči po podskupini
+                    label: Podskupina
+                - name: programDela
+                  type: toone
+                  options:
+                      label: ProgramDela
+                      targetEntity: ProgramDela\Entity\ProgramDela
+                      required: false
+             

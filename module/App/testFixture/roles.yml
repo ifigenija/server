@@ -61,6 +61,8 @@
         - Popa-write
         - Posta-read
         - Posta-write
+        - PostavkaCDve-read
+        - PostavkaCDve-write
         - PostavkaRacuna-read
         - PostavkaRacuna-write
         - PostniNaslov-read

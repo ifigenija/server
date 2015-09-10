@@ -33,7 +33,7 @@ class PostavkeCDve
     {
         switch ($name) {
             case "default":
-                $qb = $this->getVseQb($options);
+                $qb   = $this->getVseQb($options);
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
@@ -45,21 +45,26 @@ class PostavkeCDve
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
-
             $naziv = $e->like('lower(p.naziv)', ':query');
-
             $qb->andWhere($e->orX($naziv));
-
             $qb->setParameter('query', strtolower("%{$options['q']}%"), "string");
         }
         if (!empty($options['skupina'])) {
-            $skupina    = $e->eq('p.skupina', ':st');
-            $podskupina = $e->eq('p.podskupina', ':st');
-
-            $qb->andWhere($e->orX($skupina, $podskupina));
-            $qb->setParameter('st', strtolower("{$options['skupina']}"), "integer");
+            $skupina    = $e->eq('p.skupina', ':sk');
+            $qb->andWhere($e->orX($skupina));
+            $qb->setParameter('sk', "{$options['skupina']}", "string");
         }
-
+        if (!empty($options['podskupina'])) {
+            $podskupina = $e->eq('p.podskupina', ':psk');
+            $qb->andWhere($e->orX($podskupina));
+            $qb->setParameter('psk', "{$options['podskupina']}", "integer");
+        }
+        if (!empty($options['programDela'])) {
+            $qb->join('p.programDela', 'programDela');
+            $pd = $e->eq('programDela.id', ':pd');
+            $qb->andWhere($pd);
+            $qb->setParameter('pd', "{$options['programDela']}", "string");
+        }
         return $qb;
     }
 

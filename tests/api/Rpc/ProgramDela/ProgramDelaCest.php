@@ -120,7 +120,21 @@ class ProgramDelaCest
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
 //        $I->assertGreaterThanOrEqual(726.2, $resp['premiere']['2.0']['vrednost'],"['premiere']['2.0']");
+    }
 
+    /**
+     * osvežim/kreiram tabelo C2 ¸
+     * 
+     * @depends getListProgramDela
+     * @param ApiTester $I
+     */
+    public function osveziTabeloC2(ApiTester $I)
+    {
+        // pričakujemo, da bo zgeneriral/osvežil postavke C2 za dotičen program dela
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'osveziTabeloC2', ["programDelaId" => $this->objProgramDela1['id']]);
+        $I->assertNotEmpty($resp);
+        $I->seeResponseIsJson();
+        $I->assertTrue($resp, "ali uspešno");
     }
 
 }

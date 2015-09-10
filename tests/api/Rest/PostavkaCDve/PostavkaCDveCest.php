@@ -34,8 +34,11 @@ class PostavkaCDveCest
     private $obj1;
     private $obj2;
     private $programDelaUrl    = '/rest/programdela';
-    private $objProgramDela;
+    private $objProgramDela1;
+    private $objProgramDela2;
     private $rpcProgramDelaUrl = '/rpc/programdela/programdela';
+    private $vrstaStroskaUrl   = '/rest/vrstastroska';
+    private $objVrstaStroska;
 
     public function _before(ApiTester $I)
     {
@@ -54,7 +57,7 @@ class PostavkaCDveCest
      */
     public function createProgramDela(ApiTester $I)
     {
-        $data                 = [
+        $data                  = [
             'naziv'            => 'zz',
             'zacetek'          => '2015-02-01T00:00:00+01:00',
             'konec'            => '2016-02-01T00:00:00+0100',
@@ -66,7 +69,23 @@ class PostavkaCDveCest
             'stZaposIgralcev'  => 7,
             'avgStNastopovIgr' => 7.89,
         ];
-        $this->objProgramDela = $ent                  = $I->successfullyCreate($this->programDelaUrl, $data);
+        $this->objProgramDela1 = $ent                   = $I->successfullyCreate($this->programDelaUrl, $data);
+        $I->assertGuid($ent['id']);
+
+        // še enega
+        $data                  = [
+            'naziv'            => 'drugi',
+            'zacetek'          => '2015-02-01T00:00:00+01:00',
+            'konec'            => '2016-02-01T00:00:00+0100',
+            'potrjenProgram'   => false,
+            'avgZasedDvoran'   => 1,
+            'avgCenaVstopnice' => 1,
+            'stProdVstopnic'   => 1,
+            'stZaposlenih'     => 1,
+            'stZaposIgralcev'  => 1,
+            'avgStNastopovIgr' => 1,
+        ];
+        $this->objProgramDela2 = $ent                   = $I->successfullyCreate($this->programDelaUrl, $data);
         $I->assertGuid($ent['id']);
     }
 
@@ -79,9 +98,16 @@ class PostavkaCDveCest
     public function osveziTabeloC2(ApiTester $I)
     {
         codecept_debug($this->rpcProgramDelaUrl);
-        
+
         // pričakujemo, da bo zgeneriral/osvežil postavke C2 za dotičen program dela
-        $resp = $I->successfullyCallRpc($this->rpcProgramDelaUrl, 'osveziTabeloC2', ["programDelaId" => $this->objProgramDela['id']]);
+        $resp = $I->successfullyCallRpc($this->rpcProgramDelaUrl, 'osveziTabeloC2', ["programDelaId" => $this->objProgramDela1['id']]);
+        $I->assertNotEmpty($resp);
+        $I->seeResponseIsJson();
+        $I->assertTrue($resp, "ali uspešno");
+
+
+        // še od 2. programa dela
+        $resp = $I->successfullyCallRpc($this->rpcProgramDelaUrl, 'osveziTabeloC2', ["programDelaId" => $this->objProgramDela2['id']]);
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
         $I->assertTrue($resp, "ali uspešno");
@@ -149,7 +175,7 @@ class PostavkaCDveCest
         $I->assertEquals($ent['vrFestivali'], 1.22);
         $I->assertEquals($ent['vrGostovanjaInt'], 2.33);
         $I->assertEquals($ent['vrOstalo'], 3.44);
-        $I->assertEquals($ent['programDela'], $this->objProgramDela['id']);
+        $I->assertEquals($ent['programDela'], $this->objProgramDela1['id']);
     }
 
     /**
@@ -158,16 +184,104 @@ class PostavkaCDveCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl;
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
+        $resp   = $I->successfullyGetList($this->restUrl, []);
+        $list   = $resp['data'];
+        codecept_debug($list);
         $totRec = $resp['state']['totalRecords'];
-        $I->assertGreaterThanOrEqual(999, $totRec);
-        $I->assertEquals(999, $list[0]['skupina']);
-        $I->assertEquals(999, $list[$totRec - 1]['skupina']);
+        $I->assertGreaterThanOrEqual(66, $totRec);
+        $I->assertEquals("1", $list[0]['skupina']);
+
+        /**
+         * v obrnjenem vrstnem redu
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "?sort_by=skupina&order=DESC", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals("T", $list[0]['skupina']);
+    }
+
+    /**
+     * @depends getListPostavkeC2
+     * @param ApiTester $I
+     */
+    public function getListPoProgramuDela(ApiTester $I)
+    {
+        $resp   = $I->successfullyGetList($this->restUrl . "?programDela=" . $this->objProgramDela1['id'], []);
+        $list   = $resp['data'];
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertEquals(33, $totRec);
+        $I->assertEquals("1", $list[0]['skupina']);
+
+        // še zožimo na skupino
+        $resp   = $I->successfullyGetList($this->restUrl . "?programDela=" . $this->objProgramDela1['id'] . "&skupina=2", []);
+        $list   = $resp['data'];
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertEquals(6, $totRec);
+        $I->assertEquals("2", $list[0]['skupina']);
+
+        // dodatno zožimo na  podskupino
+        $resp   = $I->successfullyGetList($this->restUrl . "?programDela=" . $this->objProgramDela1['id'] . "&skupina=2&podskupina=4", []);
+        $list   = $resp['data'];
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertEquals(1, $totRec);
+        $I->assertEquals("2", $list[0]['skupina']);
+        $I->assertEquals(4, $list[0]['podskupina']);
+    }
+
+    /**
+     * odstranim vrsto stroška in preverim, če izbriše ven iz postavkaC2 po osveži
+     * 
+     * @depends createProgramDela
+     * @param ApiTester $I
+     */
+    public function odstraniVrstoStroska(ApiTester $I)
+    {
+        $skupina    = "2";
+        $podskupina = 3;
+        codecept_debug($podskupina);
+
+        /**
+         * preverimo, če je postavka v tabeli c2
+         */
+        $resp   = $I->successfullyGetList($this->restUrl . "?programDela=" . $this->objProgramDela1['id'] . "&skupina=" . $skupina . "&podskupina=" . $podskupina, []);
+        $list   = $resp['data'];
+        codecept_debug($list);
+        $totRec = $resp['state']['totalRecords'];
+        $I->assertEquals(1, $totRec);
+
+        /**
+         * brišemo postavko iz vrste stroškov
+         */
+        /**
+         * - najdemo vrsto stroška s skupino in podskupino
+         */
+        $resp   = $I->successfullyGetList($this->vrstaStroskaUrl . "?skupina=" . $skupina, []);
+        $list   = $resp['data'];
+        codecept_debug($list);
+        $najden = FALSE;
+        codecept_debug($najden);
+        while (!$najden) {
+            $this->objVrstaStroska = $ent                   = array_pop($list);
+            $najden                = ($ent['skupina'] == $skupina && $ent['podskupina'] == $podskupina) ? true : false;
+        }
+        $I->successfullyDelete($this->vrstaStroskaUrl, $this->objVrstaStroska['id']);
+
+        /**
+         * osveži tabelo C2
+         */
+        $resp = $I->successfullyCallRpc($this->rpcProgramDelaUrl, 'osveziTabeloC2', ["programDelaId" => $this->objProgramDela1['id']]);
+        $I->assertTrue($resp, "ali uspešno");
+        
+        /**
+         * - osveži c2
+         * - preveri, če je izbrisan 
+         */
+        $resp   = $I->successfullyGetList($this->restUrl . "?programDela=" . $this->objProgramDela1['id'] . "&skupina=" . $skupina . "&podskupina=" . $podskupina, []);
+        $list   = $resp['data'];
+        $I->assertEquals(0, $resp['state']['totalRecords']);
     }
 
     /**

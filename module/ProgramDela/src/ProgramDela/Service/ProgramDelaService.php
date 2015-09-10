@@ -278,8 +278,8 @@ class ProgramDelaService
                 $skupina    = explode(".", $key, 2)[0];
                 $podskupina = (integer) explode(".", $key, 2)[1];
                 $postColl   = $programdela->getPostavkeC2()
-                        ->filter(function($ent) use (&$skupina, $podskupina) {
-                    return ($ent->getSkupina() === $skupina && getPodskupina() === $podskupina);     //vrne  koprodukcijo lastnega gledališča
+                        ->filter(function($ent) use (&$skupina, &$podskupina) {
+                    return ($ent->getSkupina() === $skupina && $ent->getPodskupina() === $podskupina);   
                 });
                 if ($postColl->count() == 0) {
                     /**
@@ -291,14 +291,17 @@ class ProgramDelaService
                     $postavkaC2->setSkupina($skupina);
                     $postavkaC2->setPodskupina($podskupina);
                 } else {
-                    $this->expect(($postColl->count() > 1), "Več vrstic v tabeli C2 z isto skupino, podskupino:" . $skupina . "." . $podskupina, 1001040);
-                    $postavkaC2 = $postColl->get(0);  // vrne 1. in edini element 
+                    $this->expect(!($postColl->count() > 1), "Več vrstic v tabeli C2 z isto skupino, podskupino:" . $skupina . "." . $podskupina, 1001040);
+                    $postavkaC2 = $postColl->first();  // vrne 1. in edini element 
                 }
                 $postavkaC2->setNaziv($val['nazivStr']);
                 $postavkaC2->setVrPremiere($val['vrednost']['premiere']);
                 $postavkaC2->setVrPonovitvePremier($val['vrednost']['ponovitvePremier']);
                 $postavkaC2->setVrPonovitvePrejsnjih($val['vrednost']['ponovitvePrejsnjih']);
                 $postavkaC2->setVrGostovanjaZamejstvo($val['vrednost']['gostovanjaZamejstvo']);
+                $postavkaC2->setVrFestivali(0);
+                $postavkaC2->setVrGostovanjaInt(0);
+                $postavkaC2->setVrOstalo(0);
             }
         }
         return TRUE;
