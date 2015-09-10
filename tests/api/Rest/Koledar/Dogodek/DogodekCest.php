@@ -289,7 +289,7 @@ class DogodekCest
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => '100',
+            'status'          => '100s',
             'razred'          => '500',
             'termin'          => 'zz',
             'title'           => 'zz',
@@ -301,7 +301,11 @@ class DogodekCest
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
         $I->assertEquals('100', $ent['status']);
+       
+        
+        $I->assertTrue(false, "začasno");
 
+        
 
         // kreiramo še en zapis
         $data       = [
@@ -323,7 +327,7 @@ class DogodekCest
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals("200", $ent['status']);
+        $I->assertEquals('200', $ent['status']);
     }
 
     /**
@@ -413,11 +417,11 @@ class DogodekCest
     public function update(ApiTester $I)
     {
         $ent           = $this->obj;
-        $ent['status'] = "600";
+        $ent['status'] = '600';
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals("600", $entR['status']);
+        $I->assertEquals('600', $entR['status']);
     }
 
     /**
@@ -434,7 +438,7 @@ class DogodekCest
         $I->assertEquals($ent['planiranZacetek'], '2011-02-01T00:00:00+0100');
         $I->assertEquals($ent['zacetek'], '2012-02-01T00:00:00+0100');
         $I->assertEquals($ent['konec'], '2013-02-01T00:00:00+0100');
-        $I->assertEquals($ent['status'], "600");
+        $I->assertEquals($ent['status'], '600');
         $I->assertEquals($ent['razred'], '500');
         $I->assertEquals($ent['termin'], 'zz');
         $I->assertEquals($ent['title'], 'zz');

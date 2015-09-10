@@ -86,6 +86,8 @@ class DogodekFixture
             $o->setSezona($getref);
         }
 
+        $o->validate();
+        
         $manager->persist($o);
 
         $referenca = 'Dogodek-' . $v[0];
@@ -96,14 +98,14 @@ class DogodekFixture
     public function getData()
     {
         return [
-            ['01', "2015-06-26 10:00", "2015-06-26 10:00", "2015-06-26 12:00", 3, "", "", "", NULL, NULL, 'Vaja-01', NULL, NULL, NULL, NULL,],
-            ['02', "2015-06-27 10:00", "2015-06-27 10:00", "2015-06-27 12:00", 4, "", "", "", NULL, NULL, 'Vaja-02', NULL, NULL, NULL, NULL,],
+            ['01', "2015-06-26 10:00", "2015-06-26 10:00", "2015-06-26 12:00", '200s', "200s", "", "", NULL, NULL, 'Vaja-01', NULL, NULL, NULL, NULL,],
+            ['02', "2015-06-27 10:00", "2015-06-27 10:00", "2015-06-27 12:00", '300s', "200s", "", "", NULL, NULL, 'Vaja-02', NULL, NULL, NULL, NULL,],
             // oddaja prostora, ni vezano na uprizoritev
-            ['03', "2015-08-01 20:00", "2015-08-01 20:00", "2015-08-01 23:00", 5, "", "", "", NULL, NULL, null, NULL, NULL, NULL, NULL,],
-            // status  še ni odobren (zaenkrat <7) $$
-            ['04', "2015-08-01 20:00", "2015-08-01 20:00", "2015-08-01 23:00", 2, "", "", "", NULL, NULL, null, NULL, NULL, NULL, NULL,],
-            // status odobren (zaenkrat >=7) $$
-            ['05', "2015-08-01 20:00", "2015-08-01 20:00", "2015-08-01 23:00", 7, "", "", "", NULL, NULL, null, NULL, NULL, NULL, NULL,],
+            ['03', "2015-08-01 20:00", "2015-08-01 20:00", "2015-08-01 23:00", '400s', "200s", "", "", NULL, NULL, 'Vaja-03', NULL, NULL, NULL, NULL,],
+            // status  še ni odobren (zaenkrat <500) $$
+            ['04', "2015-08-01 20:00", "2015-08-01 20:00", "2015-08-01 23:00", '100s', "200s", "", "", NULL, NULL, 'Vaja-04', NULL, NULL, NULL, NULL,],
+            // status odobren (zaenkrat >='500') $$
+            ['05', "2015-08-01 20:00", "2015-08-01 20:00", "2015-08-01 23:00", '500s', "200s", "", "", NULL, NULL, 'Vaja-05', NULL, NULL, NULL, NULL,],
         ];
     }
 

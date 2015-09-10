@@ -22,12 +22,11 @@ class Dogodek
         extends \Max\Entity\Base
 {
 
-    const PREDSTAVA  = "100";
-    const VAJA       = "200";
-    const GOSTOVANJE = "300";
-    const SPLOSNO    = "400";
-    const ZASEDENOST = "500";
-
+    const PREDSTAVA  = "100s";
+    const VAJA       = "200s";
+    const GOSTOVANJE = "300s";
+    const SPLOSNO    = "400s";
+    const ZASEDENOST = "500s";
 
     private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::ZASEDENOST, self::SPLOSNO];
 
@@ -72,16 +71,15 @@ class Dogodek
     protected $konec;
 
     /**
-     * $$ za podefinirati vrednosti -morda v opcijah? 
-     * @ORM\Column(length=20, nullable=true)
+     * @ORM\Column(type="string", length=4, nullable=true)
      * @Max\I18n(label="Status", description="Status dogodka")
      * @Max\Ui(type="select", opts="dogodek.status")
-     * @var integer     
+     * @var string
      */
     protected $status;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\Column(type="string", length=4, nullable=true)
      * @Max\I18n(label="Razred", description="Razred dogodka")
      * @Max\Ui(type="select", opts="dogodek.razred")
      * @var string
@@ -187,7 +185,7 @@ class Dogodek
     {
 
         $this->expect($this->razred, "Razred dogodka ne sme biti prazen", 1000464);
-        $this->expect(array_search($this->razred, $this->razredi)> -1, "Razred dogodka ni pravilen", 1000462);
+        $this->expect(array_search($this->razred, $this->razredi) > -1, "Razred dogodka ni pravilen", 1000462);
 
         if ($this->razred === self::VAJA) {
             $this->expect($this->vaja, "Dogodek razreda vaja zahteva referenco na vajo", 1000463);
@@ -225,13 +223,12 @@ class Dogodek
 
 
         $this->expect($i === 1, "Napaka - napačno število referenc na podrobnosti dogodka $i", 1000361);
-        
-        
     }
 
-    public function getPodrobno() {
+    public function getPodrobno()
+    {
         switch ($this->razred) {
-            case self::PREDSTAVA: 
+            case self::PREDSTAVA:
                 return $this->predstava;
             case self::VAJA:
                 return $this->vaja;
@@ -241,12 +238,9 @@ class Dogodek
                 return $this->zasedenost;
             case self::SPLOSNO:
                 return $this->splosni;
-                
         }
-            
-        
     }
-    
+
     public function getId()
     {
         return $this->id;

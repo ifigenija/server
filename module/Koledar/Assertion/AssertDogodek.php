@@ -34,7 +34,8 @@ class AssertDogodek
 
         $ret = false;     // init
         // običajni uporabniki 
-        if ($dogodek->getStatus() >= 7) {             // $$ treba je še definirati, od katerega statusa naprej bo odobren dogodek (za test npr. 7)
+        
+        if ($dogodek->getStatus() >= '500s') {   // $$ pazi -to primerjanje velja le za vrednosti od '100s' do '999s'
             $ret = true;
         }
         return $ret;

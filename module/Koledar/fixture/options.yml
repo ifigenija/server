@@ -7,21 +7,20 @@
     readOnly: true
     description: 'Tabela statusa dogodkov'
     defaultValue: 
-        100:
+        100s:
             label: Dolgoročno
-        200:  
+        200s:  
             label: Planirano
-        300: 
+        300s: 
             label: Fiksiran                 
-        400:
+        400s:
             label: Potrjen - interno
-        500: 
+        500s: 
             label: Potrjen - javno
-        600: 
+        600s: 
             label: Zaključen
-        700: 
+        700s: 
             label: Obdelan
-            
 -
     name: dogodek.razred
     type: array
@@ -29,18 +28,18 @@
     readOnly: true
     description: 'Tabela razredov dogodkov, ki jih aplikacija podpira'
     defaultValue: 
-        100:
+        100s:
             label: Predstava
             type: predstava
-        200: 
+        200s: 
            label: Vaja           
            type: vaja
-        300: 
+        300s: 
            label: Gostovanje           
            type: gostovanje 
-        400: 
+        400s: 
            label: Zasedenost           
            type: zasedenost
-        500: 
+        500s: 
            label: Splošni dogodek           
            type: splošni   

@@ -145,15 +145,19 @@ class AvtorizacijeDogodekCest
 
         $resp = $I->successfullyGetList($this->restUrl, []);
         $list = $resp['data'];
-        $I->assertNotEmpty($list);
+        codecept_debug($list);
 
         // poiščemo še neodobren dogodek
-        $key        = array_search(2, array_column($list, 'status'));
+        $key        = array_search('100s', array_column($list, 'status'));
+        $I->assertTrue($key !== false, "objekt ni najden");
         $this->obj1 = $ent        = $list[$key];
+        codecept_debug($ent);
 
         // poiščemo odobren dogodek
-        $key               = array_search(7, array_column($list, 'status'));
+        $key               = array_search('500s', array_column($list, 'status'));
+        $I->assertTrue($key !== false, "objekt ni najden");
         $this->obj2odobren = $ent               = $list[$key];
+        codecept_debug($ent);
     }
 
     /**

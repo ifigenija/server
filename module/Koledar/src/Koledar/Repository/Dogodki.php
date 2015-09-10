@@ -57,11 +57,8 @@ class Dogodki
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
-
             $naslov = $e->like('p.title', ':title');
-
             $qb->andWhere($e->orX($naslov));
-
             $qb->setParameter('title', "{$options['q']}%", "string");
         }
 
@@ -80,7 +77,7 @@ class Dogodki
         /**
          * Če ni zahtevan status potem prikažemo samo tiste s statusom 500 - potrjen - javno
          */
-        if (!$this->getAuth()->isGranted('Dogodek-nepotrjeni') || empty($options['status'])) {
+        if (!$this->getAuth()->isGranted('Dogodek-readVse') || empty($options['status'])) {
             $options['status'] = ['500'];
         }
 

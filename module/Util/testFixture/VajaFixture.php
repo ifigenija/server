@@ -66,6 +66,9 @@ class VajaFixture
         return [
             ['01', 1, "", NULL, 'Uprizoritev-0002',],
             ['02', 2, "", NULL, 'Uprizoritev-0002',],
+            ['03', 3, "", NULL, 'Uprizoritev-0002',],
+            ['04', 4, "", NULL, 'Uprizoritev-0002',],
+            ['05', 5, "", NULL, 'Uprizoritev-0002',],
         ];
     }
 
