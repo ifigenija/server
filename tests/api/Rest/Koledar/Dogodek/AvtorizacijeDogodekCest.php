@@ -126,7 +126,7 @@ class AvtorizacijeDogodekCest
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
 
-        //še ifi-readall
+        //še ifi-readall 
         $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
             'username' => \IfiTest\AuthPage::$berta,
             'rolename' => 'ifi-readall',

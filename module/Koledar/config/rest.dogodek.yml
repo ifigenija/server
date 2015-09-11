@@ -50,6 +50,11 @@ lists:
                   options:
                       label: Začetek
                       required: false
+                - name: status
+                  type: text
+                  options:
+                      label: Status
+                      required: false
     vse: 
         filter:
             elements:                 
@@ -68,6 +73,11 @@ lists:
                   type: text
                   options:
                       label: Začetek
+                      required: false
+                - name: status
+                  type: text
+                  options:
+                      label: Status
                       required: false
         hydrator:
             - exclude: []

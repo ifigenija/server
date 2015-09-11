@@ -79,6 +79,9 @@ class DogodekCest
     private $objOseba2;
     private $lookOseba1;
     private $lookOseba2;
+    private $roleUrl           = '/rest/role';
+    private $rpcRoleUrl        = '/rpc/aaa/role';
+    private $rpcUserUrl        = '/rpc/aaa/user';
 
     public function _before(ApiTester $I)
     {
@@ -451,7 +454,7 @@ class DogodekCest
             'planiranZacetek' => '2011-04-01T00:00:00+0100',
             'zacetek'         => $zacetek->format('c'),
             'konec'           => $konec->format('c'),
-            'status'          => '200s',
+            'status'          => '600s',
             'razred'          => '100s',
             'termin'          => 'dd',
             'title'           => 'dd',
@@ -563,6 +566,41 @@ class DogodekCest
      * @depends create
      * @param ApiTester $I
      */
+    public function getListVsePoStatusu(ApiTester $I)
+    {
+        /**
+         * najprej število vseh
+         */
+        $resp    = $I->successfullyGetList($this->restUrl . "/vse?", []);
+        $list    = $resp['data'];
+        codecept_debug($list);
+        $totRVse = $totR    = $resp['state']['totalRecords'];
+        codecept_debug($totRVse);
+
+        /**
+         * po statusu 100s
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "/vse?status=100s", []);
+        $list = $resp['data'];
+        codecept_debug($resp);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals($totR, $totRVse, 'enako število kot pri vseh');
+
+        /**
+         * po statusu 500s
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "/vse?status=500s", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(3, $totR, 'status 500 ali več');
+        $I->assertGreaterThanOrEqual("500s", $list[0]['status']);
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
     public function getListVsePoZacetkuInKoncu(ApiTester $I)
     {
         $resp = $I->successfullyGetList($this->restUrl . "/vse?konec=2012-05-15", []);
@@ -570,6 +608,7 @@ class DogodekCest
         codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
         $I->assertEquals(2, $totR);
+
 
         // povečamo parameter konec
         $resp = $I->successfullyGetList($this->restUrl . "/vse?konec=2012-06-15", []);
@@ -608,6 +647,92 @@ class DogodekCest
     }
 
     /**
+     * @param ApiTester $I
+     */
+    public function createVloge(ApiTester $I)
+    {
+        // 2. vloga
+        $data = [
+            'name'        => 'TEST-NAVADEN',
+            'description' => 'Testna vloga za navadnega uporabnika z read dostopom do Dogodkov',
+        ];
+        $role = $I->successfullyCreate($this->roleUrl, $data);
+
+        $I->assertEquals('TEST-NAVADEN', $role['name']);
+        $I->assertNotEmpty($role['id']);
+    }
+
+    /**
+     * Doda dovoljenja vlogam
+     * 
+     * @depends createVloge
+     * @param ApiTester $I
+     */
+    public function grantPermissioneVlogam(ApiTester $I)
+    {
+        // 2. vloga, dodamo le -read
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "TEST-NAVADEN",
+            'permname' => 'Dogodek-read',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+    }
+
+    /**
+     * @depends grantPermissioneVlogam
+     * @param ApiTester $I
+     */
+    public function grantRoleUporabnikom(ApiTester $I)
+    {
+        $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
+            'username' => \IfiTest\AuthPage::$irena,
+            'rolename' => 'TEST-NAVADEN',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+    }
+
+    /**
+     * v listi default se začetek in konec nastavita, če je prazen parameter
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListDefaultPoStatusu(ApiTester $I)
+    {
+        /**
+         * default status >=500s
+         */
+        $resp    = $I->successfullyGetList($this->restUrl, []);
+        $list    = $resp['data'];
+        codecept_debug($list);
+        $totRDEf = $totR    = $resp['state']['totalRecords'];
+        $I->assertEquals(1, $totR, "default default");
+
+        /**
+         * sedaj pogledamo vse v default obdobju
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "?status=100s", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertGreaterThan($totRDEf, $totR);
+
+        /**
+         * sedaj preverimo, če z navadnim uporabnikom prestavi default na 500? 
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$irena, \IfiTest\AuthPage::$irenaPass);
+        $resp    = $I->successfullyGetList($this->restUrl . "?status=100s", []);
+        $list    = $resp['data'];
+        codecept_debug($list);
+        $totRDEf = $totR    = $resp['state']['totalRecords'];
+        $I->assertEquals($totRDEf, $totR);
+
+        $I->assertTrue(false, "začasno");
+    }
+
+    /**
      * v listi default se začetek in konec nastavita, če je prazen parameter
      * 
      * @depends create
@@ -616,10 +741,15 @@ class DogodekCest
     public function getListDefaultPoZacetkuInKoncu(ApiTester $I)
     {
         /**
+         * pri default listi je status po defaultu >=500s
+         */
+        $statusvsi = "status=100s&";
+
+        /**
          * začetek in konec
          * ali enako kot pri listi vse?
          */
-        $resp = $I->successfullyGetList($this->restUrl . "?zacetek=2012-05-15&konec=2012-06-15", []);
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "zacetek=2012-05-15&konec=2012-06-15", []);
         $list = $resp['data'];
         codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
@@ -628,7 +758,7 @@ class DogodekCest
         /**
          * konec pred začetkom(danes)
          */
-        $resp = $I->successfullyGetList($this->restUrl . "?konec=2012-05-15", []);
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "konec=2012-05-15", []);
         $list = $resp['data'];
         codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
@@ -638,7 +768,7 @@ class DogodekCest
         /**
          * le parameter začetek
          */
-        $resp        = $I->successfullyGetList($this->restUrl . "?zacetek=2012-05-15", []);
+        $resp        = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "zacetek=2012-05-15", []);
         $list        = $resp['data'];
         codecept_debug($list);
         $totRzac1505 = $totR        = $resp['state']['totalRecords'];
@@ -647,7 +777,7 @@ class DogodekCest
         /**
          * brez paramtrov -> jih sam doda 
          */
-        $resp = $I->successfullyGetList($this->restUrl, []);
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $statusvsi, []);
         $list = $resp['data'];
         codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
@@ -660,7 +790,7 @@ class DogodekCest
         $konec->modify('15 days');
         $konecStr = str_replace("+", "%2B", $konec->format('c'));    // ker drugače urlencoding spremeni "+" v space
         codecept_debug($konecStr);
-        $resp     = $I->successfullyGetList($this->restUrl . "?konec=" . $konecStr, []);
+        $resp     = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "konec=" . $konecStr, []);
         $list     = $resp['data'];
         codecept_debug($list);
         $totR     = $resp['state']['totalRecords'];
@@ -782,7 +912,6 @@ class DogodekCest
         $I->assertNotEmpty($resp);
         // testiramo na enako številko napake kot je v validaciji
         $I->assertEquals(1000361, $resp[0]['code']);
-
     }
 
     /**

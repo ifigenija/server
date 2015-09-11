@@ -69,10 +69,10 @@ class Dogodki
         }
 
         /**
-         * Če ni zahtevan status potem prikažemo samo tiste s statusom 500 - potrjen - javno
+         * Če ni zahtevan status potem prikažemo samo tiste s statusom 500 - potrjen - javno in več
          */
         if (!$this->getAuth()->isGranted('Dogodek-readVse') || empty($options['status'])) {
-            $options['status'] = ['500s'];       // $$ kaj pa dogodki > 500s?
+            $options['status'] = '500s';       // $$ kaj pa dogodki > 500s?
         }
 
         $qb = $this->getVseQb($options);
@@ -90,14 +90,28 @@ class Dogodki
             $qb->setParameter('title', "{$options['q']}%", "string");
         }
         if (!empty($options['zacetek'])) {
+            /**
+             * zac <= konec
+             */
             $cas = $e->lte(':zac', 'p.konec');
             $qb->andWhere($cas);
             $qb->setParameter('zac', "{$options['zacetek']}", "string");
         }
         if (!empty($options['konec'])) {
+            /**
+             * konec <= zacetek
+             */
             $cas = $e->gte(':konec', 'p.zacetek');
             $qb->andWhere($cas);
             $qb->setParameter('konec', "{$options['konec']}", "string");
+        }
+        if (!empty($options['status'])) {
+            /**
+             *  status >= parameter
+             */
+            $stat = $e->gte('p.status',':status' );
+            $qb->andWhere($stat);
+            $qb->setParameter('status', "{$options['status']}", "string");
         }
         if (!empty($options['prostor'])) {
             $qb->join('p.prostor', 'prostor');
