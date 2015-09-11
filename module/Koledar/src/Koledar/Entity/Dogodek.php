@@ -146,8 +146,7 @@ class Dogodek
     protected $splosni;
 
     /**
-     * @ORM\OneToOne(targetEntity="Prodaja\Entity\Prostor")
-     * @ORM\JoinColumn(name="prostor_id", referencedColumnName="id", unique=true)
+     * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Prostor")
      * @Max\I18n(label="Prostor",  description="Prostor")
      * @Max\Ui(type="toone")
      * @var \Prodaja\Entity\Prostor
@@ -183,6 +182,9 @@ class Dogodek
 
     public function validate($mode = 'update')
     {
+        if ($this->zacetek && $this->konec) {
+            $this->expect($this->zacetek <= $this->konec, "Datum konca mora biti za datumom začetka", 1000469);
+        };
 
         $this->expect($this->razred, "Razred dogodka ne sme biti prazen", 1000464);
         $this->expect(array_search($this->razred, $this->razredi) > -1, "Razred dogodka ni pravilen", 1000462);
