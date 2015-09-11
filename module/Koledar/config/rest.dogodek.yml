@@ -24,6 +24,12 @@ forms:
 #            - terminiStoritve
 #            - prodajaPredstave
             - sezona
+    preprost: 
+        elements:
+            - zacetek
+            - title
+            - razred
+            - status
 lists:
     default: 
         filter:

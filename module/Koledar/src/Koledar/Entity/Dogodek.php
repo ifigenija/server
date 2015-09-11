@@ -49,8 +49,9 @@ class Dogodek
 
     /**
      * 
-     * @ORM\Column(type="boolean", options = {"default"=false})
+     * @ORM\Column(type="boolean", options = {"default"=false}, nullable=true)
      * @Max\I18n(label="Celodnevni", description="Dogodek se razteza skozi cel dan")
+     * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
     protected $allDay = false;
