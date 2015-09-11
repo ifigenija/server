@@ -9,7 +9,7 @@ forms:
             - znesek
             - opis
             - enotaPrograma
-            - mednarodni
+            - mednarodnI
 lists:
     default: 
         hydrator:

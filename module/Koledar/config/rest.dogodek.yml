@@ -33,13 +33,42 @@ forms:
 lists:
     default: 
         filter:
-#            elements:                 
-#                - name: sezona
-#                  type: toone
-#                  options:
-#                      label: Sezona
-#                      targetEntity: Koledar\Entity\Sezona
-#                      required: true
+            elements:                 
+                - name: prostor
+                  type: toone
+                  options:
+                      label: Prostor
+                      targetEntity: Prodaja\Entity\Prostor
+                      required: false
+                - name: zacetek
+                  type: text
+                  options:
+                      label: Začetek
+                      required: false
+                - name: konec
+                  type: text
+                  options:
+                      label: Začetek
+                      required: false
+    vse: 
+        filter:
+            elements:                 
+                - name: prostor
+                  type: toone
+                  options:
+                      label: Prostor
+                      targetEntity: Prodaja\Entity\Prostor
+                      required: false
+                - name: zacetek
+                  type: text
+                  options:
+                      label: Začetek
+                      required: false
+                - name: konec
+                  type: text
+                  options:
+                      label: Začetek
+                      required: false
         hydrator:
             - exclude: []
 #    vse: 

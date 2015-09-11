@@ -52,7 +52,13 @@ class DogodekCest
     private $terminStoritveUrl = '/rest/terminstoritve';
     private $osebaUrl          = '/rest/oseba';
     private $obj;
-    private $objPredstava;
+    private $objPredstava1;
+    private $objPredstava2;
+    private $objPredstava3;
+    private $objPredstava4;
+    private $objPredstava5;
+    private $objPredstava6;
+    private $objPredstava7;
     private $objZasedenost;
     private $objVaja;
     private $objGostovanje;
@@ -60,7 +66,9 @@ class DogodekCest
     private $objDogodek1;
     private $obj2;
     private $objProstor;
-    private $lookProstor;
+    private $lookProstor1;
+    private $lookProstor2;
+    private $lookProstor3;
     private $objSezona;
     private $objDrzava;
     private $objArhivalija1;
@@ -88,10 +96,14 @@ class DogodekCest
      */
     public function lookupProstor(ApiTester $I)
     {
-//        $this->lookProstor = $ent               = $I->lookupEntity("prostor", "0006", false);
-        $ent = $I->lookupEntity("prostor", "0006", false);
-        $I->assertTrue(TRUE);
-        $I->assertNotEmpty($ent);
+        $this->lookProstor1 = $ent                = $I->lookupEntity("prostor", "0006", false);
+        $I->assertGuid($ent['id']);
+
+        $this->lookProstor2 = $ent                = $I->lookupEntity("prostor", "0005", false);
+        $I->assertGuid($ent['id']);
+
+        $this->lookProstor3 = $ent                = $I->lookupEntity("prostor", "0003", false);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -183,16 +195,58 @@ class DogodekCest
      */
     public function createPredstavo(ApiTester $I)
     {
-        $data               = [
+        $data                = [
             'dogodek'     => NULL,
             'uprizoritev' => $I->lookupEntity('uprizoritev', "0002"),
             'gostovanje'  => NULL,
         ];
-        $this->objPredstava = $ent                = $I->successfullyCreate($this->predstavaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
+        $this->objPredstava1 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
+        $I->assertGuid($ent['id']);
 
         // kreiramo še en zapis
+        $data                = [
+            'dogodek'     => NULL,
+            'uprizoritev' => $I->lookupEntity('uprizoritev', "0002"),
+            'gostovanje'  => NULL,
+        ];
+        $this->objPredstava2 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
+        $I->assertGuid($ent['id']);
+
+        // kreiramo še en zapis
+        $data                = [
+            'dogodek'     => NULL,
+            'uprizoritev' => $I->lookupEntity('uprizoritev', "0002"),
+            'gostovanje'  => NULL,
+        ];
+        $this->objPredstava3 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
+        $I->assertGuid($ent['id']);
+        // kreiramo še en zapis
+        $data                = [
+            'dogodek'     => NULL,
+            'uprizoritev' => $I->lookupEntity('uprizoritev', "0002"),
+            'gostovanje'  => NULL,
+        ];
+        $this->objPredstava4 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
+        $I->assertGuid($ent['id']);
+        // kreiramo še en zapis
+        $data                = [
+            'dogodek'     => NULL,
+            'uprizoritev' => $I->lookupEntity('uprizoritev', "0002"),
+            'gostovanje'  => NULL,
+        ];
+        $this->objPredstava5 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
+        $I->assertGuid($ent['id']);
+        // kreiramo še en zapis
+        $data                = [
+            'dogodek'     => NULL,
+            'uprizoritev' => $I->lookupEntity('uprizoritev', "0002"),
+            'gostovanje'  => NULL,
+        ];
+        $this->objPredstava6 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
+        $I->assertGuid($ent['id']);
+
+        $this->objPredstava7 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -288,35 +342,72 @@ class DogodekCest
         $data      = [
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
-            'konec'           => '2013-02-01T00:00:00+0100',
+            'konec'           => '2012-05-01T00:00:00+0200',
             'status'          => '100s',
-            'razred'          => '500',
+            'razred'          => '500s',
             'termin'          => 'zz',
             'title'           => 'zz',
             'zasedenost'      => $this->objZasedenost['id'],
-            'prostor'         => $this->lookProstor['id'],
+            'prostor'         => $this->lookProstor1['id'],
             'sezona'          => $this->objSezona['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals('100', $ent['status']);
-       
-        
-        $I->assertTrue(false, "začasno");
-
-        
+        $I->assertEquals('100s', $ent['status']);
 
         // kreiramo še en zapis
         $data       = [
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
-            'zacetek'         => '2012-02-01T00:00:00+0100',
-            'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => '200',
-            'razred'          => '100',
+            'zacetek'         => '2012-03-01T00:00:00+0200',
+            'konec'           => '2012-07-01T00:00:00+0200',
+            'status'          => '200s',
+            'razred'          => '100s',
             'termin'          => 'aa',
             'title'           => 'aa',
-            'predstava'       => $this->objPredstava['id'],
+            'predstava'       => $this->objPredstava1['id'],
+            'zasedenost'      => null,
+            'vaja'            => null,
+            'gostovanje'      => null,
+            'splosni'         => null,
+            'prostor'         => $this->lookProstor1['id'],
+            'sezona'          => $this->objSezona['id'],
+        ];
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals('200s', $ent['status']);
+
+        // kreiramo še en zapis
+        $data = [
+            'planiranZacetek' => '2011-03-01T00:00:00+0100',
+            'zacetek'         => '2012-06-01T00:00:00+0100',
+            'konec'           => '2012-09-01T00:00:00+0100',
+            'status'          => '600s',
+            'razred'          => '100s',
+            'termin'          => 'cc',
+            'title'           => 'cc',
+            'predstava'       => $this->objPredstava2['id'],
+            'zasedenost'      => null,
+            'vaja'            => null,
+            'gostovanje'      => null,
+            'splosni'         => null,
+            'prostor'         => $this->lookProstor2['id'],
+            'sezona'          => $this->objSezona['id'],
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
+
+        // kreiramo še en zapis
+        $data = [
+            'planiranZacetek' => '2011-04-01T00:00:00+0100',
+            'zacetek'         => '2012-08-01T00:00:00+0100',
+            'konec'           => '2012-11-01T00:00:00+0100',
+            'status'          => '200s',
+            'razred'          => '100s',
+            'termin'          => 'cc',
+            'title'           => 'cc',
+            'predstava'       => $this->objPredstava3['id'],
             'zasedenost'      => null,
             'vaja'            => null,
             'gostovanje'      => null,
@@ -324,10 +415,56 @@ class DogodekCest
             'prostor'         => null,
             'sezona'          => $this->objSezona['id'],
         ];
-        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals('200', $ent['status']);
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
+
+        // kreiramo še en zapise glede na trenutni datum
+        $zacetek = new \DateTime();
+        $konec   = clone $zacetek;
+        $konec->modify('2 months');
+        $data    = [
+            'planiranZacetek' => '2011-04-01T00:00:00+0100',
+            'zacetek'         => $zacetek->format('c'),
+            'konec'           => $konec->format('c'),
+            'status'          => '200s',
+            'razred'          => '100s',
+            'termin'          => 'dd',
+            'title'           => 'dd',
+            'predstava'       => $this->objPredstava4['id'],
+            'zasedenost'      => null,
+            'vaja'            => null,
+            'gostovanje'      => null,
+            'splosni'         => null,
+            'prostor'         => null,
+            'sezona'          => $this->objSezona['id'],
+        ];
+        $ent     = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
+
+
+        // kreiramo še en zapise glede na trenutni datum
+        $zacetek = new \DateTime();
+        $zacetek->modify('1 month');
+        $konec   = clone $zacetek;
+        $konec->modify('2 months');
+        $data    = [
+            'planiranZacetek' => '2011-04-01T00:00:00+0100',
+            'zacetek'         => $zacetek->format('c'),
+            'konec'           => $konec->format('c'),
+            'status'          => '200s',
+            'razred'          => '100s',
+            'termin'          => 'dd',
+            'title'           => 'dd',
+            'predstava'       => $this->objPredstava5['id'],
+            'zasedenost'      => null,
+            'vaja'            => null,
+            'gostovanje'      => null,
+            'splosni'         => null,
+            'prostor'         => null,
+            'sezona'          => $this->objSezona['id'],
+        ];
+        $ent     = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -394,18 +531,140 @@ class DogodekCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListDefault(ApiTester $I)
+    public function getListVse(ApiTester $I)
     {
-        $listUrl = $this->restUrl;
+        $listUrl = $this->restUrl . "/vse";
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
 
-        $I->assertNotEmpty($list);
+        codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
-        $I->assertGreaterThanOrEqual(2, $totR);
+        $I->assertGreaterThanOrEqual(4, $totR);
         $I->assertEquals("aa", $list[0]['title']);      //glede na sort
         $I->assertEquals("zz", $list[$totR - 1]['title']);      //glede na sort
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListVsePoProstoru(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->restUrl . "/vse?prostor=" . $this->lookProstor1['id'], []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(2, $totR);
+        $I->assertEquals($this->lookProstor1['id'], $list[0]['prostor']);      //glede na sort
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListVsePoZacetkuInKoncu(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->restUrl . "/vse?konec=2012-05-15", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(2, $totR);
+
+        // povečamo parameter konec
+        $resp = $I->successfullyGetList($this->restUrl . "/vse?konec=2012-06-15", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(3, $totR, "pred 15.6.");
+
+        /**
+         * le parameter začetek
+         */
+        $resp        = $I->successfullyGetList($this->restUrl . "/vse?zacetek=2012-05-15", []);
+        $list        = $resp['data'];
+        codecept_debug($list);
+        $totRzac1505 = $totR        = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(3, $totR);
+
+        /**
+         * začetek večji za nekaj mesecev
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "/vse?zacetek=2012-12-31", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(3, $totRzac1505 - $totR);
+
+
+        /**
+         * začetek in konec
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "/vse?zacetek=2012-05-15&konec=2012-06-15", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(2, $totR);
+    }
+
+    /**
+     * v listi default se začetek in konec nastavita, če je prazen parameter
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListDefaultPoZacetkuInKoncu(ApiTester $I)
+    {
+        /**
+         * začetek in konec
+         * ali enako kot pri listi vse?
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "?zacetek=2012-05-15&konec=2012-06-15", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(2, $totR);
+
+        /**
+         * konec pred začetkom(danes)
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "?konec=2012-05-15", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(0, $totR);
+
+
+        /**
+         * le parameter začetek
+         */
+        $resp        = $I->successfullyGetList($this->restUrl . "?zacetek=2012-05-15", []);
+        $list        = $resp['data'];
+        codecept_debug($list);
+        $totRzac1505 = $totR        = $resp['state']['totalRecords'];
+        $I->assertEquals(2, $totR, "le začetek");
+
+        /**
+         * brez paramtrov -> jih sam doda 
+         */
+        $resp = $I->successfullyGetList($this->restUrl, []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(2, $totR, "brez parametrov");
+
+        /**
+         * od danes do čez 15 dni 
+         */
+        $konec    = new \DateTime();
+        $konec->modify('15 days');
+        $konecStr = str_replace("+", "%2B", $konec->format('c'));    // ker drugače urlencoding spremeni "+" v space
+        codecept_debug($konecStr);
+        $resp     = $I->successfullyGetList($this->restUrl . "?konec=" . $konecStr, []);
+        $list     = $resp['data'];
+        codecept_debug($list);
+        $totR     = $resp['state']['totalRecords'];
+        $I->assertEquals(1, $totR);
     }
 
     /**
@@ -417,11 +676,11 @@ class DogodekCest
     public function update(ApiTester $I)
     {
         $ent           = $this->obj;
-        $ent['status'] = '600';
+        $ent['status'] = '600s';
 
         $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals('600', $entR['status']);
+        $I->assertEquals('600s', $entR['status']);
     }
 
     /**
@@ -433,20 +692,19 @@ class DogodekCest
     public function read(\ApiTester $I)
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
-
         $I->assertNotEmpty($ent['id']);
         $I->assertEquals($ent['planiranZacetek'], '2011-02-01T00:00:00+0100');
         $I->assertEquals($ent['zacetek'], '2012-02-01T00:00:00+0100');
-        $I->assertEquals($ent['konec'], '2013-02-01T00:00:00+0100');
-        $I->assertEquals($ent['status'], '600');
-        $I->assertEquals($ent['razred'], '500');
+        $I->assertEquals($ent['konec'], '2012-05-01T00:00:00+0200');
+        $I->assertEquals($ent['status'], '600s');
+        $I->assertEquals($ent['razred'], '500s');
         $I->assertEquals($ent['termin'], 'zz');
         $I->assertEquals($ent['title'], 'zz');
         $I->assertEquals($ent['predstava'], null);
         $I->assertEquals($ent['zasedenost'], $this->objZasedenost['id']);
         $I->assertEquals($ent['gostovanje'], null);
         $I->assertEquals($ent['splosni'], null);
-        $I->assertEquals($ent['prostor'], $this->lookProstor['id']);
+        $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
         $I->assertEquals($ent['sezona'], $this->objSezona['id']);
 
         $I->assertTrue(isset($ent['terminiStoritve']));
@@ -481,8 +739,8 @@ class DogodekCest
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => '100',
-            'razred'          => '100',
+            'status'          => '100s',
+            'razred'          => '100s',
             'termin'          => 'cc',
             'title'           => 'cc',
             'predstava'       => null,
@@ -505,14 +763,14 @@ class DogodekCest
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => '200',
-            'razred'          => '200',
+            'status'          => '200s',
+            'razred'          => '200s',
             'termin'          => 'dd',
             'title'           => 'dd',
             'predstava'       => null,
             'zasedenost'      => null,
             'vaja'            => $this->objVaja['id'],
-            'predstava'       => $this->objPredstava['id'],
+            'predstava'       => $this->objPredstava1['id'],
             'gostovanje'      => null,
             'splosni'         => null,
             'prostor'         => null,
@@ -524,6 +782,7 @@ class DogodekCest
         $I->assertNotEmpty($resp);
         // testiramo na enako številko napake kot je v validaciji
         $I->assertEquals(1000361, $resp[0]['code']);
+
     }
 
     /**
@@ -541,6 +800,20 @@ class DogodekCest
         // get po popa id  
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "terminiStoritve", $this->objTerminStoritve1['id']);
         $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * test validacije
+     * 
+     * @param ApiTester $I
+     */
+    public function updateValidacijaDatumov(ApiTester $I)
+    {
+        $this->obj2     = $ent            = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $ent['zacetek'] = '2012-02-01T00:00:00+0100';
+        $ent['konec']   = '2012-01-01T00:00:00+0200';
+        $resp           = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertEquals(1000469, $resp[0]['code'], "konec pred začetkom");
     }
 
 }
