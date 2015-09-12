@@ -62,7 +62,7 @@ class Dogodki
             /**
              * konec = začetek + 1 mesec
              */
-            $konec = new \DateTime();   //init
+            $konec            = new \DateTime();   //init
             date_timestamp_set($konec, strtotime($options['zacetek']));
             $konec->modify('+1 month');
             $options['konec'] = $konec->format('c');
@@ -71,7 +71,7 @@ class Dogodki
         /**
          * Če ni zahtevan status potem prikažemo samo tiste s statusom 500 - potrjen - javno in več
          */
-        if (!$this->getAuth()->isGranted('Dogodek-readVse') || empty($options['status'])) {
+        if (empty($options['status'])) {
             $options['status'] = '500s';       // $$ kaj pa dogodki > 500s?
         }
 
@@ -105,11 +105,19 @@ class Dogodki
             $qb->andWhere($cas);
             $qb->setParameter('konec', "{$options['konec']}", "string");
         }
+
+        /**
+         * navadni uporabniki lahko vidijo le dogodke od 500s naprej
+         */
+        if (!$this->getAuth()->isGranted('Dogodek-readVse') && (
+                ( empty($options['status']) || $options['status'] < '500s'))) {
+            $options['status'] = '500s';
+        }
         if (!empty($options['status'])) {
             /**
              *  status >= parameter
              */
-            $stat = $e->gte('p.status',':status' );
+            $stat = $e->gte('p.status', ':status');
             $qb->andWhere($stat);
             $qb->setParameter('status', "{$options['status']}", "string");
         }

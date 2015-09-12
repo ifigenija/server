@@ -549,6 +549,53 @@ class DogodekCest
     }
 
     /**
+     * @param ApiTester $I
+     */
+    public function createVloge(ApiTester $I)
+    {
+        // 2. vloga
+        $data = [
+            'name'        => 'TEST-NAVADEN',
+            'description' => 'Testna vloga za navadnega uporabnika z read dostopom do Dogodkov',
+        ];
+        $role = $I->successfullyCreate($this->roleUrl, $data);
+
+        $I->assertEquals('TEST-NAVADEN', $role['name']);
+        $I->assertNotEmpty($role['id']);
+    }
+
+    /**
+     * Doda dovoljenja vlogam
+     * 
+     * @depends createVloge
+     * @param ApiTester $I
+     */
+    public function grantPermissioneVlogam(ApiTester $I)
+    {
+        // 2. vloga, dodamo le -read
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "TEST-NAVADEN",
+            'permname' => 'Dogodek-read',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+    }
+
+    /**
+     * @depends grantPermissioneVlogam
+     * @param ApiTester $I
+     */
+    public function grantRoleUporabnikom(ApiTester $I)
+    {
+        $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
+            'username' => \IfiTest\AuthPage::$irena,
+            'rolename' => 'TEST-NAVADEN',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+    }
+
+    /**
      * @depends create
      * @param ApiTester $I
      */
@@ -589,12 +636,36 @@ class DogodekCest
         /**
          * po statusu 500s
          */
-        $resp = $I->successfullyGetList($this->restUrl . "/vse?status=500s", []);
+        $resp     = $I->successfullyGetList($this->restUrl . "/vse?status=500s", []);
+        $list     = $resp['data'];
+        codecept_debug($list);
+        $totR500s = $totR     = $resp['state']['totalRecords'];
+        $I->assertEquals(3, $totR, 'status 500 ali več');
+        $I->assertGreaterThanOrEqual("500s", $list[0]['status']);
+
+        /**
+         * neprivilegiran uporanik lahko vidi naprej le od statusa 500s
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$irena, \IfiTest\AuthPage::$irenaPass);
+
+        // neprivilegiran brez parametra status
+        // neprivilegiran brez parametra status
+        $resp = $I->successfullyGetList($this->restUrl . "/vse", []);
         $list = $resp['data'];
         codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
-        $I->assertEquals(3, $totR, 'status 500 ali več');
+        $I->assertEquals($totR500s, $totR, 'ali status 500 ali več');
         $I->assertGreaterThanOrEqual("500s", $list[0]['status']);
+
+        // neprivilegiran s parametrom status, ki ga ne bi smel upoštevati
+        $resp = $I->successfullyGetList($this->restUrl . "/vse?status=100s", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals($totR500s, $totR, 'ali status 500 ali več');
+        $I->assertGreaterThanOrEqual("500s", $list[0]['status']);
+
+//        $I->assertTrue(false, "začasno $$");
     }
 
     /**
@@ -647,53 +718,6 @@ class DogodekCest
     }
 
     /**
-     * @param ApiTester $I
-     */
-    public function createVloge(ApiTester $I)
-    {
-        // 2. vloga
-        $data = [
-            'name'        => 'TEST-NAVADEN',
-            'description' => 'Testna vloga za navadnega uporabnika z read dostopom do Dogodkov',
-        ];
-        $role = $I->successfullyCreate($this->roleUrl, $data);
-
-        $I->assertEquals('TEST-NAVADEN', $role['name']);
-        $I->assertNotEmpty($role['id']);
-    }
-
-    /**
-     * Doda dovoljenja vlogam
-     * 
-     * @depends createVloge
-     * @param ApiTester $I
-     */
-    public function grantPermissioneVlogam(ApiTester $I)
-    {
-        // 2. vloga, dodamo le -read
-        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
-            'rolename' => "TEST-NAVADEN",
-            'permname' => 'Dogodek-read',
-        ]);
-        $I->assertNotEmpty($res);
-        $I->assertTrue($res);
-    }
-
-    /**
-     * @depends grantPermissioneVlogam
-     * @param ApiTester $I
-     */
-    public function grantRoleUporabnikom(ApiTester $I)
-    {
-        $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
-            'username' => \IfiTest\AuthPage::$irena,
-            'rolename' => 'TEST-NAVADEN',
-        ]);
-        $I->assertNotEmpty($res);
-        $I->assertTrue($res);
-    }
-
-    /**
      * v listi default se začetek in konec nastavita, če je prazen parameter
      * 
      * @depends create
@@ -728,8 +752,6 @@ class DogodekCest
         codecept_debug($list);
         $totRDEf = $totR    = $resp['state']['totalRecords'];
         $I->assertEquals($totRDEf, $totR);
-
-        $I->assertTrue(false, "začasno");
     }
 
     /**
