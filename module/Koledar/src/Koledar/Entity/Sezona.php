@@ -45,7 +45,7 @@ class Sezona
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="sezona.zacetek", description="sezona.d.zacetek")
-     * @var string
+     * @var DateTime
      */
     protected $zacetek;
 
@@ -131,6 +131,7 @@ class Sezona
 
     function setZacetek($zacetek)
     {
+        $zacetek->setTimezone(new \DateTimeZone('Europe/Berlin'));
         $this->zacetek = $zacetek;
     }
 
