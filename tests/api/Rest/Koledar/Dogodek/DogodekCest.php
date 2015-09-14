@@ -79,6 +79,8 @@ class DogodekCest
     private $objOseba2;
     private $lookOseba1;
     private $lookOseba2;
+    private $lookUprizoritev1;
+    private $lookUprizoritev2;
     private $roleUrl           = '/rest/role';
     private $rpcRoleUrl        = '/rpc/aaa/role';
     private $rpcUserUrl        = '/rpc/aaa/user';
@@ -123,39 +125,21 @@ class DogodekCest
     }
 
     /**
-     *  napolnimo vsaj en zapis
      * 
      * @param ApiTester $I
      */
-//    public function createOsebo(ApiTester $I)
-//    {
-//        $data = [
-//            'naziv'         => 'zz',
-//            'ime'           => 'zz',
-//            'priimek'       => 'zz',
-//            'funkcija'      => 'zz',
-//            'srednjeIme'    => 'zz',
-//            'psevdonim'     => 'zz',
-//            'email'         => 'x@xxx.xx',
-//            'datumRojstva'  => '1973-28-03T04:30:00',
-//            'emso'          => 'ZZ',
-//            'davcna'        => 'ZZ123',
-//            'spol'          => 'M',
-//            'opombe'        => 'zz',
-//            'drzavljanstvo' => 'zz',
-//            'drzavaRojstva' => 'zz',
-//            'krajRojstva'   => 'zz',
-//            'user'          => null,
-//        ];
-//
-//        $this->objOseba1 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
-//
-//        $I->assertEquals('zz', $oseba['ime']);
-//        $I->assertNotEmpty($oseba['id']);
-//    }
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev1 = $ent                    = $I->lookupEntity('uprizoritev', "0001");
+        codecept_debug($ent);
+        $I->assertGuid($ent);
+
+        $this->lookUprizoritev2 = $ent                    = $I->lookupEntity('uprizoritev', "0002");
+        $I->assertGuid($ent);
+    }
 
     /**
-     * 
+     * @depends lookupUprizoritev
      * @param ApiTester $I
      */
     public function createVajo(ApiTester $I)
@@ -164,7 +148,7 @@ class DogodekCest
             'zaporedna'   => 1,
             'porocilo'    => 'zz',
             'dogodek'     => null, //najprej mora biti kreirana vaja, šele potem dogodek.
-            'uprizoritev' => $I->lookupEntity('uprizoritev', '0001'),
+            'uprizoritev' => $this->lookUprizoritev1,
         ];
         $this->objVaja = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -194,13 +178,14 @@ class DogodekCest
     /**
      *  kreiramo zapis
      * 
+     * @depends lookupUprizoritev
      * @param ApiTester $I
      */
     public function createPredstavo(ApiTester $I)
     {
         $data                = [
             'dogodek'     => NULL,
-            'uprizoritev' => $I->lookupEntity('uprizoritev', "0002"),
+            'uprizoritev' => $this->lookUprizoritev1,
             'gostovanje'  => NULL,
         ];
         $this->objPredstava1 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
@@ -209,7 +194,7 @@ class DogodekCest
         // kreiramo še en zapis
         $data                = [
             'dogodek'     => NULL,
-            'uprizoritev' => $I->lookupEntity('uprizoritev', "0002"),
+            'uprizoritev' => $this->lookUprizoritev2,
             'gostovanje'  => NULL,
         ];
         $this->objPredstava2 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
@@ -218,7 +203,7 @@ class DogodekCest
         // kreiramo še en zapis
         $data                = [
             'dogodek'     => NULL,
-            'uprizoritev' => $I->lookupEntity('uprizoritev', "0002"),
+            'uprizoritev' => $this->lookUprizoritev2,
             'gostovanje'  => NULL,
         ];
         $this->objPredstava3 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
@@ -226,7 +211,7 @@ class DogodekCest
         // kreiramo še en zapis
         $data                = [
             'dogodek'     => NULL,
-            'uprizoritev' => $I->lookupEntity('uprizoritev', "0002"),
+            'uprizoritev' => $this->lookUprizoritev2,
             'gostovanje'  => NULL,
         ];
         $this->objPredstava4 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
@@ -234,7 +219,7 @@ class DogodekCest
         // kreiramo še en zapis
         $data                = [
             'dogodek'     => NULL,
-            'uprizoritev' => $I->lookupEntity('uprizoritev', "0002"),
+            'uprizoritev' => $this->lookUprizoritev1,
             'gostovanje'  => NULL,
         ];
         $this->objPredstava5 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
@@ -242,7 +227,7 @@ class DogodekCest
         // kreiramo še en zapis
         $data                = [
             'dogodek'     => NULL,
-            'uprizoritev' => $I->lookupEntity('uprizoritev', "0002"),
+            'uprizoritev' => $this->lookUprizoritev2,
             'gostovanje'  => NULL,
         ];
         $this->objPredstava6 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
@@ -451,7 +436,7 @@ class DogodekCest
         $konec   = clone $zacetek;
         $konec->modify('2 months');
         $data    = [
-            'planiranZacetek' => '2011-04-01T00:00:00+0100',
+            'planiranZacetek' => '2011-04-02T00:00:00+0100',
             'zacetek'         => $zacetek->format('c'),
             'konec'           => $konec->format('c'),
             'status'          => '600s',
@@ -607,6 +592,25 @@ class DogodekCest
         $totR = $resp['state']['totalRecords'];
         $I->assertEquals(2, $totR);
         $I->assertEquals($this->lookProstor1['id'], $list[0]['prostor']);      //glede na sort
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListVsePoUprizoritvi(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->restUrl . "/vse?uprizoritev=" . $this->lookUprizoritev2, []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(8, $totR);
+
+        $resp = $I->successfullyGetList($this->restUrl . "/vse?uprizoritev=" . $this->lookUprizoritev1, []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(2, $totR);
     }
 
     /**
@@ -816,6 +820,27 @@ class DogodekCest
         $list     = $resp['data'];
         codecept_debug($list);
         $totR     = $resp['state']['totalRecords'];
+        $I->assertEquals(1, $totR);
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListDefaultPoUprizoritvi(ApiTester $I)
+    {
+        $statusvsi = "status=100s&";
+
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "uprizoritev=" . $this->lookUprizoritev1, []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(1, $totR);
+
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "uprizoritev=" . $this->lookUprizoritev2, []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
         $I->assertEquals(1, $totR);
     }
 

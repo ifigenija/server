@@ -55,6 +55,11 @@ lists:
                   options:
                       label: Status
                       required: false
+                - name: uprizoritev
+                  type: text
+                  options:
+                      label: Uprizoritev
+                      required: false
     vse: 
         filter:
             elements:                 
@@ -78,6 +83,11 @@ lists:
                   type: text
                   options:
                       label: Status
+                      required: false
+                - name: uprizoritev
+                  type: text
+                  options:
+                      label: Uprizoritev
                       required: false
         hydrator:
             - exclude: []

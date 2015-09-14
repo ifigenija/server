@@ -128,21 +128,12 @@ class Dogodki
             $qb->setParameter('pros', "{$options['prostor']}", "string");
         }
         if (!empty($options['uprizoritev'])) {
-            /**
-             * 
-             *        case
-             *        vaja.uprizoritev
-             *        predstava.uprizoritev
-             *
-             *        ?? Gostovanje
-             */
-//            $qb->join('p.uprizoritev', 'uprizoritev');
-//            $naz = $e->eq('uprizoritev.id', ':uprizoritev');
-//            $qb->andWhere($naz);
-//            $qb->setParameter('uprizoritev', "{$options['uprizoritev']}", "string");
+            $qb->leftJoin('p.vaja', 'vaja');
+            $qb->leftJoin('p.predstava', 'predstava');
+            $pvup = $e->orx($e->eq('predstava.uprizoritev', ':uprizoritev'), $e->eq('vaja.uprizoritev', ':uprizoritev'));
+            $qb->andWhere($pvup);
+            $qb->setParameter('uprizoritev', "{$options['uprizoritev']}", "string");
         }
-
-
         return $qb;
     }
 
