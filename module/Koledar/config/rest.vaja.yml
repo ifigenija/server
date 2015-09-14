@@ -8,9 +8,20 @@ forms:
 #            - id
 #            - vrsta
             - zaporedna
-            - porocilo
-            - dogodek
+#            - porocilo
+#            - dogodek
             - uprizoritev
+            - name: zacetek
+              type: date
+              options: 
+                  label: Začetek
+                  required: false
+            - name: konec
+              type: date
+              options: 
+                  label: Konec
+                  required: false
+                  
 lists:
     default: 
         filter:
