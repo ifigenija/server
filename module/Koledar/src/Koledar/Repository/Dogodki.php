@@ -72,7 +72,7 @@ class Dogodki
          * Če ni zahtevan status potem prikažemo samo tiste s statusom 500 - potrjen - javno in več
          */
         if (empty($options['status'])) {
-            $options['status'] = '500s';       // $$ kaj pa dogodki > 500s?
+            $options['status'] = ['500s', '600s', '700s'];       //  > 500s
         }
 
         $qb = $this->getVseQb($options);
@@ -109,17 +109,21 @@ class Dogodki
         /**
          * navadni uporabniki lahko vidijo le dogodke od 500s naprej
          */
-        if (!$this->getAuth()->isGranted('Dogodek-readVse') && (
-                ( empty($options['status']) || $options['status'] < '500s'))) {
-            $options['status'] = '500s';
-        }
-        if (!empty($options['status'])) {
+        if (!$this->getAuth()->isGranted('Dogodek-readVse')) {
+            if (empty($options['status'])) {
+                $options['status'] = ['500s', '600s', '700s'];       //  > 500s
+            }
             /**
-             *  status >= parameter
+             * pobriši statuse < 500s
              */
-            $stat = $e->gte('p.status', ':status');
-            $qb->andWhere($stat);
-            $qb->setParameter('status', "{$options['status']}", "string");
+            $options['status'] = array_intersect(['500s', '600s', '700s'], $options['status']);
+        }
+//                || $options['status'] < '500s'))) {
+        if (!empty($options['status'])) {
+            $this->expect(is_array($options['status']), "Parameter status mora biti array", 1000580);
+            $naz = $e->in('p.status', ':statusi');
+            $qb->andWhere($naz);
+            $qb->setParameter('statusi', $options['status']);
         }
         if (!empty($options['prostor'])) {
             $qb->join('p.prostor', 'prostor');
