@@ -79,17 +79,22 @@ class Vaja
      */
     public function setZacetek(\DateTime $zacetek = null)
     {
-        if (!$zacetek && !$this->dogodek) {
+        if ($zacetek && !$this->dogodek) {
             $this->dodajDogodek();
-            $this->dogodek = $zacetek;
-            $this->dogodek->setTitle();
+            $this->dogodek->setZacetek($zacetek);
+        } else if ($zacetek && $this->dogodek) {
+            $this->dogodek->setZacetek($zacetek);
         }
         return $this;
     }
 
-    public function setKonec()
+    public function setKonec(\DateTime $konec = null)
     {
+        if($konec && $this->dogodek){
+            $this->dogodek->setKonec($konec);
+        }
         
+        return $this;
     }
 
     public function dodajDogodek()
@@ -97,24 +102,26 @@ class Vaja
         $this->dogodek = new Dogodek();
         $this->dogodek->setVaja($this);
         $this->dogodek->setRazred(Dogodek::VAJA);
+        
+        $naslov = $this->getUprizoritev()->getNaslov();
+        $zap = $this->zaporedna;
+        $this->dogodek->setTitle($naslov. ' vaja ' .$zap);
     }
 
     public function getZacetek()
     {
-        $zacetek = null;
         if ($this->dogodek) {
-            $zacetek = $this->getDogodek()->getZacetek();
+            return $this->getDogodek()->getZacetek();
         }
-        return $zacetek;
+        return null;
     }
 
     public function getKonec()
     {
-        $konec = null;
         if ($this->dogodek) {
-            $konec = $this->getDogodek()->getKonec();
+            return $this->getDogodek()->getKonec();
         }
-        return $konec;
+        return null;
     }
 
     public function getId()
