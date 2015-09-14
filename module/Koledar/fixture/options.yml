@@ -38,8 +38,8 @@
            label: Gostovanje           
            type: gostovanje 
         400s: 
+           label: Splošni dogodek           
+           type: splošni
+        500s: 
            label: Zasedenost           
            type: zasedenost
-        500s: 
-           label: Splošni dogodek           
-           type: splošni   
