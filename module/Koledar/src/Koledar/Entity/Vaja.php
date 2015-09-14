@@ -92,6 +92,10 @@ class Vaja
     {
         if($konec && $this->dogodek){
             $this->dogodek->setKonec($konec);
+        }else if(!$konec && $this->dogodek){
+            $konec = $this->dogodek->getZacetek();
+            $konec->add(new \DateInterval('PT4H'));
+            $this->dogodek->setKonec($konec);
         }
         
         return $this;
