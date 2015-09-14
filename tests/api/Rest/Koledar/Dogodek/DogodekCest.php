@@ -629,18 +629,20 @@ class DogodekCest
         codecept_debug($totRVse);
 
         /**
-         * po statusu 100s
+         * po statusu 100s in več
          */
-        $resp = $I->successfullyGetList($this->restUrl . "/vse?status=100s", []);
-        $list = $resp['data'];
+        $statusi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
+        $resp    = $I->successfullyGetList($this->restUrl . "/vse?" . $statusi, []);
+        $list    = $resp['data'];
         codecept_debug($resp);
-        $totR = $resp['state']['totalRecords'];
+        $totR    = $resp['state']['totalRecords'];
         $I->assertEquals($totR, $totRVse, 'enako število kot pri vseh');
 
         /**
-         * po statusu 500s
+         * po statusu 500s in več
          */
-        $resp     = $I->successfullyGetList($this->restUrl . "/vse?status=500s", []);
+        $statusi  = "status[]=500s&status[]=600s&status[]=700s&";
+        $resp     = $I->successfullyGetList($this->restUrl . "/vse?" . $statusi, []);
         $list     = $resp['data'];
         codecept_debug($list);
         $totR500s = $totR     = $resp['state']['totalRecords'];
@@ -658,11 +660,12 @@ class DogodekCest
         $list = $resp['data'];
         codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
-        $I->assertEquals($totR500s, $totR, 'ali status 500 ali več');
+        $I->assertEquals($totR500s, $totR, 'takih s statusom 500 ali več');
         $I->assertGreaterThanOrEqual("500s", $list[0]['status']);
 
-        // neprivilegiran s parametrom status, ki ga ne bi smel upoštevati
-        $resp = $I->successfullyGetList($this->restUrl . "/vse?status=100s", []);
+        // neprivilegiran s parametrom status >=100s
+        $statusi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
+        $resp    = $I->successfullyGetList($this->restUrl . "/vse?" . $statusi, []);
         $list = $resp['data'];
         codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
@@ -729,6 +732,7 @@ class DogodekCest
      */
     public function getListDefaultPoStatusu(ApiTester $I)
     {
+
         /**
          * default status >=500s
          */
@@ -741,17 +745,19 @@ class DogodekCest
         /**
          * sedaj pogledamo vse v default obdobju
          */
-        $resp = $I->successfullyGetList($this->restUrl . "?status=100s", []);
-        $list = $resp['data'];
+        $statusi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
+        $resp    = $I->successfullyGetList($this->restUrl . "?" . $statusi, []);
+        $list    = $resp['data'];
         codecept_debug($list);
-        $totR = $resp['state']['totalRecords'];
+        $totR    = $resp['state']['totalRecords'];
         $I->assertGreaterThan($totRDEf, $totR);
 
         /**
          * sedaj preverimo, če z navadnim uporabnikom prestavi default na 500? 
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$irena, \IfiTest\AuthPage::$irenaPass);
-        $resp    = $I->successfullyGetList($this->restUrl . "?status=100s", []);
+        $statusi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
+        $resp    = $I->successfullyGetList($this->restUrl . "?" . $statusi, []);
         $list    = $resp['data'];
         codecept_debug($list);
         $totRDEf = $totR    = $resp['state']['totalRecords'];
@@ -769,7 +775,7 @@ class DogodekCest
         /**
          * pri default listi je status po defaultu >=500s
          */
-        $statusvsi = "status=100s&";
+        $statusvsi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
 
         /**
          * začetek in konec
@@ -829,7 +835,7 @@ class DogodekCest
      */
     public function getListDefaultPoUprizoritvi(ApiTester $I)
     {
-        $statusvsi = "status=100s&";
+        $statusvsi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
 
         $resp = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "uprizoritev=" . $this->lookUprizoritev1, []);
         $list = $resp['data'];
