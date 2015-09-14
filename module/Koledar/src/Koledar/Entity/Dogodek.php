@@ -28,7 +28,7 @@ class Dogodek
     const SPLOSNO    = "400s";
     const ZASEDENOST = "500s";
 
-    private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::ZASEDENOST, self::SPLOSNO];
+    private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::SPLOSNO, self::ZASEDENOST];
 
     /**
      * @ORM\Id
