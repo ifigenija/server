@@ -52,8 +52,7 @@ class Dogodki
          */
         /* Če ni postavljenega začetka, smatramo, da gledamo od danes naprej */
         if (empty($options['zacetek'])) {
-            $zacetek            = new DateTime();
-            $options['zacetek'] = $zacetek->format('c');
+            $options['zacetek'] = new DateTime();;
         }
         /*
          * Če ni postavljenega konca smatramo, da nas zanima 1 mesec 
@@ -62,10 +61,8 @@ class Dogodki
             /**
              * konec = začetek + 1 mesec
              */
-            $konec            = new \DateTime();   //init
-            date_timestamp_set($konec, strtotime($options['zacetek']));
-            $konec->modify('+1 month');
-            $options['konec'] = $konec->format('c');
+            $options['konec'] = clone $options['zacetek'];
+            $options['konec'] ->modify('+1 month');
         }
 
         /**
@@ -95,7 +92,7 @@ class Dogodki
              */
             $cas = $e->lte(':zac', 'p.konec');
             $qb->andWhere($cas);
-            $qb->setParameter('zac', "{$options['zacetek']}", "string");
+            $qb->setParameter('zac', $options['zacetek'], "datetime");
         }
         if (!empty($options['konec'])) {
             /**
@@ -103,7 +100,7 @@ class Dogodki
              */
             $cas = $e->gte(':konec', 'p.zacetek');
             $qb->andWhere($cas);
-            $qb->setParameter('konec', "{$options['konec']}", "string");
+            $qb->setParameter('konec', $options['konec'], "datetime");
         }
 
         /**

@@ -681,7 +681,9 @@ class DogodekCest
      */
     public function getListVsePoZacetkuInKoncu(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl . "/vse?konec=2012-05-15", []);
+        
+//        $resp = $I->successfullyGetList($this->restUrl . "/vse?konec=2012-05-15", []);
+        $resp = $I->successfullyGetList($this->restUrl . "/vse?konec=2012-05-15T00:00:00.000Z", []);  //v cest je to 2 uri več
         $list = $resp['data'];
         codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
