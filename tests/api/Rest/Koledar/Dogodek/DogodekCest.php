@@ -153,7 +153,7 @@ class DogodekCest
         $this->objVaja = $ent           = $I->successfullyCreate($this->vajaUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['porocilo'], 'zz');
+//        $I->assertEquals($ent['porocilo'], 'zz');     //$$
     }
 
     /**
