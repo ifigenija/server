@@ -27,6 +27,12 @@ forms:
             - zaposlenVDrJz
             - samozaposlen
             - igralec
+        hydrator:
+            virtual:
+                - funkcija
+            lookups:
+                - oseba
+                - popa
 lists:
     default: 
         filter:
