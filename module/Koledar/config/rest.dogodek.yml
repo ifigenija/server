@@ -41,12 +41,12 @@ lists:
                       targetEntity: Prodaja\Entity\Prostor
                       required: false
                 - name: zacetek
-                  type: text
+                  type: datetime
                   options:
                       label: Začetek
                       required: false
                 - name: konec
-                  type: text
+                  type: datetime
                   options:
                       label: Začetek
                       required: false
@@ -70,12 +70,12 @@ lists:
                       targetEntity: Prodaja\Entity\Prostor
                       required: false
                 - name: zacetek
-                  type: text
+                  type: datetime
                   options:
                       label: Začetek
                       required: false
                 - name: konec
-                  type: text
+                  type: datetime
                   options:
                       label: Začetek
                       required: false
