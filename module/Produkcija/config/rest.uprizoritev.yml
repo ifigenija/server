@@ -55,10 +55,6 @@ forms:
                - funkcije.alternacije
                - stroski
                - stroski.popa
-               - vaje
-               - vaje.dogodek
-               - predstave
-               - predstave.dogodek
 lists:
 #    default: 
 #        filter:

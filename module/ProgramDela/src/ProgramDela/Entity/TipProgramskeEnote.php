@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\TipiProgramskeEnote")
- * @Max\Lookup
+ * @Max\Lookup(ident="naziv", label="sifra")
  * @Max\I18n(label="Tip programske enote",plural="Tipi programske enote")
  * @Max\Id(prefix="0043") 
  */
@@ -27,7 +27,7 @@ class TipProgramskeEnote
     protected $id;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", unique=true, nullable=false)
      * @Max\I18n(label="tipProgramskeEnote.sifra", description="Šifra tipa programske enote")
      * @Max\Ui(type="sifra",ident=true )
      * @var string    
