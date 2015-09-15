@@ -88,6 +88,11 @@ class Vaja
         return $this;
     }
 
+    /**
+     * 
+     * @param \DateTime $konec
+     * @return \Koledar\Entity\Vaja
+     */
     public function setKonec(\DateTime $konec = null)
     {
         if($konec && $this->dogodek){
@@ -101,6 +106,9 @@ class Vaja
         return $this;
     }
 
+    /**
+     * dodaj dogodek
+     */
     public function dodajDogodek()
     {
         $this->dogodek = new Dogodek();

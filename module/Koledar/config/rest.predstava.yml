@@ -8,7 +8,42 @@ forms:
 #            - id
             - dogodek
             - uprizoritev
-            - gostovanje           
+            - gostovanje 
+            - name: zacetek
+              type: date
+              options: 
+                  label: Začetek
+                  required: false
+            - name: konec
+              type: date
+              options: 
+                  label: Konec
+                  required: false
+        hydrator:
+            byValue:
+                - dogodek
+            virtual:
+                - zacetek
+                - konec
+    uprizoritev: 
+        elements:
+            - uprizoritev
+            - name: zacetek
+              type: date
+              options: 
+                  label: Začetek
+                  required: false
+            - name: konec
+              type: date
+              options: 
+                  label: Konec
+                  required: false
+        hydrator:
+            byValue:
+                - dogodek
+            virtual:
+                - zacetek
+                - konec
 lists:
     default: 
         filter:
@@ -22,5 +57,8 @@ lists:
         hydrator:
             byValue:
                 - dogodek
+            virtual:
+                - zacetek
+                - konec
 #    vse: 
 #        filter:
