@@ -8,8 +8,12 @@ forms:
 #            - id
 #            - vrsta
             - zaporedna
-#            - porocilo
+            - porocilo
 #            - dogodek
+            - uprizoritev
+    uprizoritev:
+        elements:
+            - zaporedna
             - uprizoritev
             - name: zacetek
               type: date
@@ -21,6 +25,12 @@ forms:
               options: 
                   label: Konec
                   required: false
+        hydrator:
+            byValue:
+                - dogodek
+            virtual:
+                - zacetek
+                - konec
                   
 lists:
     default: 
