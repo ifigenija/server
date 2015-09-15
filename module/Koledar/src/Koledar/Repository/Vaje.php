@@ -41,15 +41,20 @@ class Vaje
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 770151);
-                $crit = new Criteria();
-                $e    = $crit->expr();
-
-                if (!empty($options['uprizoritev'])) {
-                    $uprizoritev = $this->getEntityManager()->find('Produkcija\Entity\Uprizoritev', $options['uprizoritev']);
-                    $exp     = $e->eq('uprizoritev', $uprizoritev);
-                }
-                $crit->andWhere($exp);
-                return new Selectable($this, $crit);
+                $qb   = $this->getVseQb($options);
+                $sort = $this->getSort($name);
+                $qb->orderBy($sort->order, $sort->dir);
+                return new DoctrinePaginator(new Paginator($qb));
+//               
+//                $crit = new Criteria();
+//                $e    = $crit->expr();
+//
+//                if (!empty($options['uprizoritev'])) {
+//                    $uprizoritev = $this->getEntityManager()->find('Produkcija\Entity\Uprizoritev', $options['uprizoritev']);
+//                    $exp     = $e->eq('uprizoritev', $uprizoritev);
+//                }
+//                $crit->andWhere($exp);
+//                return new Selectable($this, $crit);
         }
     }
 
@@ -58,12 +63,15 @@ class Vaje
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
-
             $naz = $e->like('p.zaporedna', ':zaporedna');
-
             $qb->andWhere($e->orX($naz));
-
             $qb->setParameter('zaporedna', "{$options['q']}%", "string");
+        }
+        if (!empty($options['uprizoritev'])) {
+            $qb->join('p.uprizoritev', 'uprizoritev');
+            $naz = $e->eq('uprizoritev.id', ':upr');
+            $qb->andWhere($naz);
+            $qb->setParameter('upr', "{$options['uprizoritev']}", "string");
         }
         return $qb;
     }

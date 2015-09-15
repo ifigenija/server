@@ -12,12 +12,12 @@ forms:
 #            - dogodek
             - uprizoritev
             - name: zacetek
-              type: date
+              type: datetime
               options: 
                   label: Začetek
                   required: false
             - name: konec
-              type: date
+              type: datetime
               options: 
                   label: Konec
                   required: false
@@ -32,12 +32,12 @@ forms:
             - zaporedna
             - uprizoritev
             - name: zacetek
-              type: date
+              type: datetime
               options: 
                   label: Začetek
                   required: false
             - name: konec
-              type: date
+              type: datetime
               options: 
                   label: Konec
                   required: false
