@@ -104,10 +104,14 @@ class Predstava
         $this->dogodek->setTitle($naslov. ' predstava');
     }
 
+    /**
+     * začasna rešitev
+     * @return type
+     */
     public function getZacetek()
     {
         if ($this->dogodek) {
-            return $this->getDogodek()->getZacetek();
+            return $this->getDogodek()->getZacetek()->format('d.m.Y H:m');
         }
         return null;
     }
@@ -115,7 +119,7 @@ class Predstava
     public function getKonec()
     {
         if ($this->dogodek) {
-            return $this->getDogodek()->getKonec();
+            return $this->getDogodek()->getKonec()->format('d-m-Y H:m');
         }
         return null;
     }    

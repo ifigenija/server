@@ -120,10 +120,14 @@ class Vaja
         $this->dogodek->setTitle($naslov. ' vaja ' .$zap);
     }
 
+    /**
+     * začasna rešitev
+     * @return type
+     */
     public function getZacetek()
     {
         if ($this->dogodek) {
-            return $this->getDogodek()->getZacetek();
+            return $this->getDogodek()->getZacetek()->format('d.m.Y H:m');
         }
         return null;
     }
@@ -131,7 +135,7 @@ class Vaja
     public function getKonec()
     {
         if ($this->dogodek) {
-            return $this->getDogodek()->getKonec();
+            return $this->getDogodek()->getKonec()->format('d-m-Y H:m');
         }
         return null;
     }
