@@ -131,7 +131,6 @@ class Sezona
 
     function setZacetek($zacetek)
     {
-        $zacetek->setTimezone(new \DateTimeZone('Europe/Berlin'));
         $this->zacetek = $zacetek;
     }
 
