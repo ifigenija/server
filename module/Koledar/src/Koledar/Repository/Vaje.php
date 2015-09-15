@@ -45,16 +45,6 @@ class Vaje
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
-//               
-//                $crit = new Criteria();
-//                $e    = $crit->expr();
-//
-//                if (!empty($options['uprizoritev'])) {
-//                    $uprizoritev = $this->getEntityManager()->find('Produkcija\Entity\Uprizoritev', $options['uprizoritev']);
-//                    $exp     = $e->eq('uprizoritev', $uprizoritev);
-//                }
-//                $crit->andWhere($exp);
-//                return new Selectable($this, $crit);
         }
     }
 

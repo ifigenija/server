@@ -27,6 +27,22 @@ class Predstava
     protected $id;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="Zaporedna št.", description="Zaporedna številka vaje")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $zaporedna;
+
+    /**
+     * 
+     * @ORM\Column(type="text", nullable=true)
+     * @Max\I18n(label="Poročilo", description="Poročilo")
+     * @var string
+     */
+    protected $porocilo;
+
+    /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="predstava", cascade={"persist"})
      * @Max\I18n(label="Dogodek",  description="Dogodek")
      * @Max\Ui(type="toone")
@@ -56,7 +72,7 @@ class Predstava
     {
         $this->expect($this->uprizoritev, "Predstava mora biti vezana na uprizoritev", 1000472);
     }
-    
+
     /**
      * 
      * @param \DateTime $zacetek
@@ -80,14 +96,14 @@ class Predstava
      */
     public function setKonec(\DateTime $konec = null)
     {
-        if($konec && $this->dogodek){
+        if ($konec && $this->dogodek) {
             $this->dogodek->setKonec($konec);
-        }else if(!$konec && $this->dogodek){
+        } else if (!$konec && $this->dogodek) {
             $konec = clone $this->dogodek->getZacetek();
             $konec->add(new \DateInterval('PT4H'));
             $this->dogodek->setKonec($konec);
         }
-        
+
         return $this;
     }
 
@@ -99,9 +115,10 @@ class Predstava
         $this->dogodek = new Dogodek();
         $this->dogodek->setPredstava($this);
         $this->dogodek->setRazred(Dogodek::PREDSTAVA);
-        
+
         $naslov = $this->getUprizoritev()->getNaslov();
-        $this->dogodek->setTitle($naslov. ' predstava');
+        $zap    = $this->zaporedna;
+        $this->dogodek->setTitle($naslov . ' predstava ' . $zap);
     }
 
     /**
@@ -122,7 +139,7 @@ class Predstava
             return $this->getDogodek()->getKonec()->format(\DateTime::ISO8601);
         }
         return null;
-    }    
+    }
 
     public function getId()
     {
@@ -168,6 +185,26 @@ class Predstava
         return $this;
     }
 
+    public function getZaporedna()
+    {
+        return $this->zaporedna;
+    }
 
+    public function setZaporedna($zaporedna)
+    {
+        $this->zaporedna = $zaporedna;
+        return $this;
+    }
+
+    public function getPorocilo()
+    {
+        return $this->porocilo;
+    }
+
+    public function setPorocilo($porocilo)
+    {
+        $this->porocilo = $porocilo;
+        return $this;
+    }
 
 }

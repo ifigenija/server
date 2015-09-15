@@ -23,33 +23,23 @@ class Predstave
 
     protected $sortOptions = [
         "default" => [
-            "id" => ["alias" => "p.id"]
+            "zaporedna" => ["alias" => "p.zaporedna"]
         ],
         "vse"     => [
-            "id" => ["alias" => "p.id"]
+            "zaporedna" => ["alias" => "p.zaporedna"]
         ]
     ];
 
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
-            //case "default":
+            case "default":
+                $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 770111);
             case "vse":
                 $qb   = $this->getVseQb($options);
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
-            case "default":
-                $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 770111);
-                $crit = new Criteria();
-                $e    = $crit->expr();
-
-                if (!empty($options['uprizoritev'])) {
-                    $uprizoritev = $this->getEntityManager()->find('Produkcija\Entity\Uprizoritev', $options['uprizoritev']);
-                    $exp     = $e->eq('uprizoritev', $uprizoritev);
-                }
-                $crit->andWhere($exp);
-                return new Selectable($this, $crit);
         }
     }
 
@@ -65,7 +55,12 @@ class Predstave
 
             $qb->setParameter('id', "{$options['q']}%", "string");
         }
-
+        if (!empty($options['uprizoritev'])) {
+            $qb->join('p.uprizoritev', 'uprizoritev');
+            $naz = $e->eq('uprizoritev.id', ':upr');
+            $qb->andWhere($naz);
+            $qb->setParameter('upr', "{$options['uprizoritev']}", "string");
+        }
         return $qb;
     }
 

@@ -6,7 +6,9 @@ forms:
     default: 
         elements:
 #            - id
-            - dogodek
+#            - dogodek
+            - zaporedna
+            - porocilo
             - uprizoritev
             - gostovanje 
             - name: zacetek

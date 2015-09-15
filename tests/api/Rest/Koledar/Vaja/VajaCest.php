@@ -40,6 +40,8 @@ class VajaCest
     private $objDogodek;
     private $objUprizoritev;
     private $lookUprizoritev1;
+    private $lookUprizoritev2;
+    private $lookUprizoritev3;
 
     public function _before(ApiTester $I)
     {
