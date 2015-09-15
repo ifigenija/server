@@ -11,6 +11,22 @@ forms:
             - porocilo
 #            - dogodek
             - uprizoritev
+            - name: zacetek
+              type: date
+              options: 
+                  label: Začetek
+                  required: false
+            - name: konec
+              type: date
+              options: 
+                  label: Konec
+                  required: false
+        hydrator:
+            byValue:
+                - dogodek
+            virtual:
+                - zacetek
+                - konec
     uprizoritev:
         elements:
             - zaporedna
@@ -45,5 +61,8 @@ lists:
         hydrator:
             byValue:
                 - dogodek
+            virtual:
+                - zacetek
+                - konec
 #    vse: 
 #        filter:
