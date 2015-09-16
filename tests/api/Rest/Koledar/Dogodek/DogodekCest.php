@@ -336,7 +336,7 @@ class DogodekCest
             'termin'          => 'zz',
             'title'           => 'zz',
             'zasedenost'      => $this->objZasedenost['id'],
-            'prostor'         => $this->lookProstor1['id'],
+            'prostor'         => null,
             'sezona'          => $this->objSezona['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
@@ -590,7 +590,7 @@ class DogodekCest
         $list = $resp['data'];
         codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
-        $I->assertEquals(2, $totR);
+        $I->assertEquals(1, $totR);
         $I->assertEquals($this->lookProstor1['id'], $list[0]['prostor']);      //glede na sort
     }
 
@@ -666,9 +666,9 @@ class DogodekCest
         // neprivilegiran s parametrom status >=100s
         $statusi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
         $resp    = $I->successfullyGetList($this->restUrl . "/vse?" . $statusi, []);
-        $list = $resp['data'];
+        $list    = $resp['data'];
         codecept_debug($list);
-        $totR = $resp['state']['totalRecords'];
+        $totR    = $resp['state']['totalRecords'];
         $I->assertEquals($totR500s, $totR, 'ali status 500 ali več');
         $I->assertGreaterThanOrEqual("500s", $list[0]['status']);
 
@@ -681,7 +681,7 @@ class DogodekCest
      */
     public function getListVsePoZacetkuInKoncu(ApiTester $I)
     {
-        
+
 //        $resp = $I->successfullyGetList($this->restUrl . "/vse?konec=2012-05-15", []);
         $resp = $I->successfullyGetList($this->restUrl . "/vse?konec=2012-05-15T00:00:00.000Z", []);  //v cest je to 2 uri več
         $list = $resp['data'];
@@ -889,7 +889,7 @@ class DogodekCest
         $I->assertEquals($ent['zasedenost'], $this->objZasedenost['id']);
         $I->assertEquals($ent['gostovanje'], null);
         $I->assertEquals($ent['splosni'], null);
-        $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
+        $I->assertEquals($ent['prostor'], null);
         $I->assertEquals($ent['sezona'], $this->objSezona['id']);
 
         $I->assertTrue(isset($ent['terminiStoritve']));
@@ -998,6 +998,23 @@ class DogodekCest
         $ent['konec']   = '2012-01-01T00:00:00+0200';
         $resp           = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals(1000469, $resp[0]['code'], "konec pred začetkom");
+    }
+
+    /**
+     * testi validacije
+     * 
+     * @param ApiTester $I
+     */
+    public function updateValidacije(ApiTester $I)
+    {
+        /**
+         * razred mora obstajati
+         */
+        $ent           = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $ent['razred'] = null;
+        $resp          = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        codecept_debug($resp);
+        $I->assertTrue((strpos($resp[0]['message'], 'required') !== false), "razred je obvezen");
     }
 
 }

@@ -34,6 +34,9 @@ class DogodekSplosniCest
     private $obj;
     private $objDogodek;
     private $objVaja;
+    private $lookProstor1;
+    private $lookProstor2;
+    private $lookProstor3;
 
     public function _before(ApiTester $I)
     {
@@ -43,6 +46,22 @@ class DogodekSplosniCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupProstor(ApiTester $I)
+    {
+        $this->lookProstor1 = $ent                = $I->lookupEntity("prostor", "0006", false);
+        $I->assertGuid($ent['id']);
+
+        $this->lookProstor2 = $ent                = $I->lookupEntity("prostor", "0005", false);
+        $I->assertGuid($ent['id']);
+
+        $this->lookProstor3 = $ent                = $I->lookupEntity("prostor", "0003", false);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -70,7 +89,6 @@ class DogodekSplosniCest
         $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
     }
 
-
     /**
      * @depends create
      * @param ApiTester $I
@@ -81,21 +99,21 @@ class DogodekSplosniCest
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => "100",
-            'razred'          => "400",
+            'status'          => "100s",
+            'razred'          => "400s",
             'termin'          => null,
             'ime'             => null,
             'predstava'       => null,
             'zasedenost'      => null,
             'gostovanje'      => null,
-            'splosni'    => $this->obj['id'],
-            'prostor'         => null,
+            'splosni'         => $this->obj['id'],
+            'prostor'         => $this->lookProstor1['id'],
             'sezona'          => null,
         ];
         $this->objDogodek = $ent              = $I->successfullyCreate($this->dogodekUrl, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['status'], "100");
+        $I->assertEquals($ent['status'], "100s");
     }
 
     /**

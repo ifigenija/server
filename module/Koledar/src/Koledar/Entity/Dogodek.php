@@ -200,10 +200,13 @@ class Dogodek
             $this->expect($this->gostovanje, "Dogodek razreda gostovanje zahteva referenco na gostovanje", 1000466);
         }
         if ($this->razred === self::SPLOSNO) {
-            $this->expect($this->splosni, "Dogodek razreda vaja zahteva referenco dogodekSplosni", 1000467);
+            $this->expect($this->splosni, "Dogodek razreda splošno zahteva referenco dogodekSplosni", 1000467);
+            $this->expect($this->prostor, "Dogodek razreda splošno zahteva referenco Prostor", 1001050);
         }
         if ($this->razred === self::ZASEDENOST) {
             $this->expect($this->zasedenost, "Dogodek razreda zasedenost zahteva referenco zasedenost", 1000468);
+            $this->expect($this->terminiStoritve->count()===0, "Dogodek razreda zasedenost ne dovoljuje terminov storitve", 1001051);
+            $this->expect(!$this->prostor, "Dogodek razreda zasedenost ne dovoljuje reference Prostor", 1001052);
         }
 
 

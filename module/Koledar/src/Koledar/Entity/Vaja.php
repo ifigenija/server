@@ -82,8 +82,10 @@ class Vaja
         if ($zacetek && !$this->dogodek) {
             $this->dodajDogodek();
             $this->dogodek->setZacetek($zacetek);
+            $this->dogodek->validate();
         } else if ($zacetek && $this->dogodek) {
             $this->dogodek->setZacetek($zacetek);
+            $this->dogodek->validate();
         }
         return $this;
     }
@@ -97,10 +99,12 @@ class Vaja
     {
         if($konec && $this->dogodek){
             $this->dogodek->setKonec($konec);
+            $this->dogodek->validate();
         }else if(!$konec && $this->dogodek){
             $konec = clone $this->dogodek->getZacetek();
             $konec->add(new \DateInterval('PT4H'));
             $this->dogodek->setKonec($konec);
+            $this->dogodek->validate();
         }
         
         return $this;
