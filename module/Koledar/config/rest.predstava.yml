@@ -25,8 +25,10 @@ forms:
             byValue:
                 - dogodek
             virtual:
-                - zacetek
-                - konec
+                - name: zacetek
+                  type: datetime
+                - name: konec
+                  type: datetime
     uprizoritev: 
         elements:
             - uprizoritev
@@ -44,8 +46,10 @@ forms:
             byValue:
                 - dogodek
             virtual:
-                - zacetek
-                - konec
+                - name: zacetek
+                  type: datetime
+                - name: konec
+                  type: datetime
 lists:
     default: 
         filter:
@@ -60,7 +64,9 @@ lists:
             byValue:
                 - dogodek
             virtual:
-                - zacetek
-                - konec
+                - name: zacetek
+                  type: datetime
+                - name: konec
+                  type: datetime
 #    vse: 
 #        filter:
