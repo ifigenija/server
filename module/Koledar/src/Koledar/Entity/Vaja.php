@@ -131,7 +131,7 @@ class Vaja
     public function getZacetek()
     {
         if ($this->dogodek) {
-            return $this->getDogodek()->getZacetek()->format(\DateTime::ISO8601);
+            return $this->getDogodek()->getZacetek();
         }
         return null;
     }
@@ -139,7 +139,7 @@ class Vaja
     public function getKonec()
     {
         if ($this->dogodek) {
-            return $this->getDogodek()->getKonec()->format(\DateTime::ISO8601);
+            return $this->getDogodek()->getKonec();
         }
         return null;
     }
