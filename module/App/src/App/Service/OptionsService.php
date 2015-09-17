@@ -119,8 +119,8 @@ class OptionsService
      * 
      * Nastavi uporabniško opcijo v OptionValue entiteti
      * 
-     * @param type $name    Ime opcij
-     * @param type $value   vrednost, ki jo vstavi
+     * @param string $name    Ime opcij
+     * @param mixed $value   vrednost, ki jo vstavi
      * @return boolean
      */
     public function setUserOption($name, $value)
@@ -180,8 +180,8 @@ class OptionsService
      * 
      * param type $value   vrednost, ki jo vstavi
      * 
-     * @param type $name    Ime opcij
-     * @param type $value   vrednost, ki jo vstavi
+     * @param string $name    Ime opcij
+     * @param mixed $value   vrednost, ki jo vstavi
      * @return boolean   
      */
     public function setGlobalOption($name, $value)

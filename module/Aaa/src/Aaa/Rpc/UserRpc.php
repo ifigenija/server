@@ -19,14 +19,14 @@ class UserRpcService
 
     /**
      * Dodeljevanje vloge uporabniku
-     * 
-     * procedura deluje podobno kot konzolni ukaz: 
+     *
+     * procedura deluje podobno kot konzolni ukaz:
      *              bin/ifi user grant <username> <rolename>
-     * 
+     *
      * @param string $username
      * @param string $rolename
-     * 
-     * @returns boolean uspešno/neuspešno
+     * @return bool uspešno/neuspešno
+     * @throws \Max\Exception\UnauthException
      */
     public function grant($username, $rolename)
     {
@@ -58,14 +58,14 @@ class UserRpcService
 
     /**
      * Odvzem vloge userju
-     * 
-     * procedura deluje podobno kot konzolni ukaz: 
+     *
+     * procedura deluje podobno kot konzolni ukaz:
      *              bin/ifi user revoke <username> <rolename>
-     * 
+     *
      * @param string $username
      * @param string $rolename
-     * 
-     * @returns boolean uspešno/neuspešno
+     * @return bool uspešno/neuspešno
+     * @throws \Max\Exception\UnauthException
      */
     public function revoke($username, $rolename)
     {

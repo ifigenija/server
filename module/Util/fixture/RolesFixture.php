@@ -12,7 +12,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Zend\Config\Config;
-use Max\Expect\ExpectTrait;
+
 
 /**
  * Nalaganje privzetih opcij dovoljenj in uporabnikov 

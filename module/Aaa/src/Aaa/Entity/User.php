@@ -115,6 +115,7 @@ class User
      * @ORM\Column(type="string", nullable=false)
      * @Max\I18n(label="user.email", description="user.d.email") 
      * @Max\Ui(type="email", ident=true)
+     * @var string
      */
     protected $email;
 
@@ -238,7 +239,7 @@ class User
 
     public function __toString()
     {
-        return $this->getUsername();
+        return $this->getEmail();
     }
 
     public function getId()

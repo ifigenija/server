@@ -3,10 +3,11 @@
 namespace Aaa\Form;
 
 use Max\Form\ManagedForm;
+use Zend\InputFilter\InputFilterProviderInterface;
 
 class ChangePasswordForm
         extends ManagedForm
-        implements \Zend\InputFilter\InputFilterProviderInterface
+        implements InputFilterProviderInterface
 {
 
     public function __construct($name = 'changePass')

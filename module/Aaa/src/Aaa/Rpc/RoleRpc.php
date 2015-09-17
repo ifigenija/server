@@ -19,11 +19,11 @@ class RoleRpcService
 
     /**
      * Dodeljevanje dovoljenja vlogi
-     * 
-     * @param string $rolename  ime vloge
-     * @param string $permname  ime dovoljenja
-     * 
-     * @returns boolean uspešno/neuspešno
+     *
+     * @param string $rolename ime vloge
+     * @param string $permname ime dovoljenja
+     * @return bool uspešno/neuspešno
+     * @throws \Max\Exception\UnauthException
      */
     public function grant($rolename, $permname)
     {
@@ -56,11 +56,11 @@ class RoleRpcService
 
     /**
      * Odvzem dovoljenja vlogi
-     * 
-     * @param string $rolename  ime vloge
-     * @param string $permname  ime dovoljenja
-     * 
-     * @returns boolean uspešno/neuspešno
+     *
+     * @param string $rolename ime vloge
+     * @param string $permname ime dovoljenja
+     * @return bool uspešno/neuspešno
+     * @throws \Max\Exception\UnauthException
      */
     public function revoke($rolename, $permname)
     {

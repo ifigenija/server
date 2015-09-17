@@ -5,6 +5,7 @@
  */
 
 namespace Aaa\Controller;
+use Zend\Mvc\Controller\AbstractActionController;
 
 /**
  * Description of Cli
@@ -12,7 +13,7 @@ namespace Aaa\Controller;
  * @author boris
  */
 class CliController
-        extends \Zend\Mvc\Controller\AbstractActionController
+        extends AbstractActionController
 {
     //put your code here
 

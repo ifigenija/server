@@ -4,6 +4,7 @@ namespace Koledar\Entity;
 
 use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
+use Produkcija\Entity\Uprizoritev;
 
 /**
  * Entiteta za naslove
@@ -54,7 +55,7 @@ class Vaja
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="vaja", cascade={"persist"})
      * @Max\I18n(label="Dogodek",  description="Dogodek")
      * @Max\Ui(type="toone")
-     * @var \Koledar\Entity\Dogodek
+     * @var Dogodek
      */
     protected $dogodek;
 
@@ -63,7 +64,7 @@ class Vaja
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id")
      * @Max\I18n(label="Uprizoritev",  description="Uprizoritve")
      * @Max\Ui(type="hiddenid", required=true)
-     * @var \Produkcija\Entity\Uprizoritev
+     * @var Uprizoritev
      */
     protected $uprizoritev;
 
@@ -183,13 +184,13 @@ class Vaja
         return $this;
     }
 
-    public function setDogodek(\Koledar\Entity\Dogodek $dogodek = null)
+    public function setDogodek(Dogodek $dogodek = null)
     {
         $this->dogodek = $dogodek;
         return $this;
     }
 
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev = null)
+    public function setUprizoritev(Uprizoritev $uprizoritev = null)
     {
         $this->uprizoritev = $uprizoritev;
         return $this;

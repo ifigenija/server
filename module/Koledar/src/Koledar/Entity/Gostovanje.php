@@ -2,9 +2,10 @@
 
 namespace Koledar\Entity;
 
-use Doctrine\ORM\Mapping as ORM,
-    Max\Ann\Entity as Max;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * @ORM\Entity(repositoryClass="Koledar\Repository\Gostovanja")
@@ -12,7 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Max\Id(prefix="0028")
  */
 class Gostovanje
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**

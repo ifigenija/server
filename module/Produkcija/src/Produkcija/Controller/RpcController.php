@@ -5,6 +5,8 @@
  */
 
 namespace Produkcija\Controller;
+use Max\Controller\Traits\RpcTrait;
+use Zend\Mvc\Controller\AbstractActionController;
 
 /**
  * Description of RpcController
@@ -12,9 +14,9 @@ namespace Produkcija\Controller;
  * @author rado
  */
 class RpcController
-        extends \Zend\Mvc\Controller\AbstractActionController
+        extends AbstractActionController
 {
-        use \Max\Controller\Traits\RpcTrait;
+        use RpcTrait;
 
     /**
      * Akcije ki streže nastavitve preko JsonRpc

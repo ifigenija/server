@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM,
-    Max\Ann\Entity as Max;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\KontaktneOsebe")
@@ -11,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM,
  * @Max\Id(prefix="0038")
  */
 class KontaktnaOseba
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**

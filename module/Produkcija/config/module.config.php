@@ -8,7 +8,9 @@
 
 
 return [
-
+    'report_renderer' => [
+        'template_path_stack' => __DIR__ . '/../templates/report'
+    ],
     'service_manager' => [
         'factories'  => [
         ],

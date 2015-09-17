@@ -2,8 +2,9 @@
 
 namespace Produkcija\Entity;
 
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * Vrste materialnih stroškov
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping AS ORM,
  * @Max\Id(prefix="0059")
  */
 class VrstaStroska
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**

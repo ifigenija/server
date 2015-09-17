@@ -2,7 +2,9 @@
 
 namespace Aaa\Repository;
 
-class Revizije extends \Doctrine\ORM\EntityRepository {
+use Doctrine\ORM\EntityRepository;
+
+class Revizije extends EntityRepository {
 
     /**
      * Vrne seznam revizij po objectId, ki so starejše od beforeId

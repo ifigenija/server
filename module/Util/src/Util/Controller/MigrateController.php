@@ -8,6 +8,8 @@
 
 namespace Util\Controller;
 
+use Prodaja\Entity\Prostor;
+use Produkcija\Entity\Zaposlitev;
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
@@ -215,7 +217,7 @@ class MigrateController
                 if (!$os) {
                     continue;
                 }
-                $zaposlitev = new \Produkcija\Entity\Zaposlitev();
+                $zaposlitev = new Zaposlitev();
                 $zaposlitev->setOseba($os);
                 $os->getZaposlitve()->add($zaposlitev);
                 $zaposlitev->setJeZaposlenVdrugemJz($z['jeZaposlenDrugJZ']);
@@ -238,7 +240,7 @@ class MigrateController
         $pr->setServiceLocator($this->getServiceLocator());
 
         foreach ($zap as $u) {
-            $prostor = new \Prodaja\Entity\Prostor();
+            $prostor = new Prostor();
             if (!$u['IDdvorane']) {
                 continue;
             }

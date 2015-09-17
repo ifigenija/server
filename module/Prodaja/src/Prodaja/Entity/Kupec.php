@@ -2,9 +2,11 @@
 
 namespace Prodaja\Entity;
 
-use Doctrine\ORM\Mapping as ORM,
-    Max\Ann\Entity as Max;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
+
 /**
  * Entiteta za naslove
  *
@@ -13,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Max\Id(prefix="0040")
  */
 class Kupec
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**

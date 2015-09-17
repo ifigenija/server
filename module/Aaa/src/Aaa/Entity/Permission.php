@@ -2,8 +2,10 @@
 
 namespace Aaa\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * Entiteta Dovoljenja za dostop
@@ -15,7 +17,7 @@ use Max\Ann\Entity as Max;
 
  */
 class Permission
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**
@@ -69,7 +71,7 @@ class Permission
     public function __construct($name = '')
     {
         $this->name  = $name;
-        $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->roles = new ArrayCollection();
     }
 
     public function addRole($role)

@@ -7,11 +7,10 @@
 namespace Produkcija\Repository;
 
 
-use Doctrine\Common\Collections\Criteria;
+
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use DoctrineModule\Paginator\Adapter\Selectable;
+
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
-use Max\Repository\AbstractMaxRepository;
 
 
 /**

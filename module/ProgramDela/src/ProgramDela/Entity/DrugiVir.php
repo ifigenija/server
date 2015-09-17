@@ -2,8 +2,9 @@
 
 namespace ProgramDela\Entity;
 
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * Se uporablja za nejavne vire
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping AS ORM,
  * @Max\Id(prefix="0051")
  */
 class DrugiVir
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**

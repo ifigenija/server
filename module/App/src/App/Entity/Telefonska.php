@@ -2,15 +2,16 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\Mapping as ORM;
 use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Telefonske")
  * @Max\I18n(label="Telefonska številka",plural="Telefonske številke")
  */
 class Telefonska
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**

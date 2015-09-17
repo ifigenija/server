@@ -6,7 +6,8 @@
 
 namespace ProgramDela\Service;
 
-use Zend\View\Model\JsonModel;
+use Produkcija\Entity\Uprizoritev;
+use ProgramDela\Entity\ProgramDela;
 
 /**
  * Description of EnotaProgramaRpcService
@@ -21,11 +22,11 @@ class ProgramDelaService
      * priprava podatkov za finančno prilogo C2 na osnovi programa dela, enot program in pripadajočih 
      * uprizoritev 
      * 
-     * @param \ProgramDela\Entity\ProgramDela   $programdela
+     * @param ProgramDela   $programdela
      * 
      * @return $data                strukturirani podatki priloge C2
      */
-    public function podatkiPrilogaC2(\ProgramDela\Entity\ProgramDela $programdela)
+    public function podatkiPrilogaC2(ProgramDela $programdela)
     {
         $data = $this->initDataC2();
 
@@ -76,7 +77,7 @@ class ProgramDelaService
      * 
      * @return array $data      dopolnjeni podatki v stolpcu $stolpec
      */
-    protected function napolniDataPoStolpcu($data, $stolpec, $upostevajDo, \Produkcija\Entity\Uprizoritev $uprizoritev, $stPonovitev, $stPonovZamejo, \ProgramDela\Entity\ProgramDela $programDela)
+    protected function napolniDataPoStolpcu($data, $stolpec, $upostevajDo, Uprizoritev $uprizoritev, $stPonovitev, $stPonovZamejo, ProgramDela $programDela)
     {
         foreach ($uprizoritev->getStroski() as $strosek) {
             switch ($strosek->getTipstroska()) {
@@ -192,7 +193,7 @@ class ProgramDelaService
      * 
      * @return array $data       honorarji in avtorske pravice (in tantieme)   
      */
-    protected function sestejVrednostiPogodb(\Produkcija\Entity\Uprizoritev $uprizoritev, \ProgramDela\Entity\ProgramDela $programDela)
+    protected function sestejVrednostiPogodb(Uprizoritev $uprizoritev, ProgramDela $programDela)
     {
         $data['Do']['avtorskePravice']   = 0; // init 
         $data['Na']['avtorskePravice']   = 0;
@@ -251,7 +252,7 @@ class ProgramDelaService
      * 
      * @returns       True|False                uspeh oz. neuspeh klica procedure
      */
-    public function osveziTabeloC2(\ProgramDela\Entity\ProgramDela $programdela)
+    public function osveziTabeloC2(ProgramDela $programdela)
     {
         $em = $this->getEm();
 

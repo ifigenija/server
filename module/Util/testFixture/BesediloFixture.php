@@ -5,6 +5,7 @@ namespace TestFixture;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Produkcija\Entity\Besedilo;
 
 /**
  *
@@ -37,7 +38,7 @@ class BesediloFixture
 
         $o = $rep->findOneByStevilka(trim($v[0]));
         if (!$o) {
-            $o = new \Produkcija\Entity\Besedilo();
+            $o = new Besedilo();
             $o->setStevilka(trim($v[0]));
             $manager->persist($o);
         }

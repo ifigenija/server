@@ -2,8 +2,9 @@
 
 namespace ProgramDela\Entity;
 
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * Postavka za prilogo C2
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping AS ORM,
  * @Max\Id(prefix="0060")
  */
 class PostavkaCDve
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**
@@ -30,7 +31,7 @@ class PostavkaCDve
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramDela", inversedBy="postavkeC2")
      * @Max\I18n(label="postavkaCDve.programDela", description="postavkaCDve.d.programDela")
      * @Max\Ui(type="hiddenid")
-     * @var \ProgramDela\Entity\ProgramDela
+     * @var ProgramDela
      */
     protected $programDela;
 
@@ -192,7 +193,7 @@ class PostavkaCDve
         return $this;
     }
 
-    public function setProgramDela(\ProgramDela\Entity\ProgramDela $programDela = null)
+    public function setProgramDela(ProgramDela $programDela = null)
     {
         $this->programDela = $programDela;
         return $this;

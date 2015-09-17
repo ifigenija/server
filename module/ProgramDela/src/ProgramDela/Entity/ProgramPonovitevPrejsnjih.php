@@ -2,15 +2,15 @@
 
 namespace ProgramDela\Entity;
 
-use Doctrine\ORM\Mapping as ORM,
-    Max\Ann\Entity as Max;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiPonovitevPrejsnjih")
  * @Max\Id(prefix="0050")
  */
 class ProgramPonovitevPrejsnjih
-        extends \ProgramDela\Entity\EnotaPrograma
+        extends EnotaPrograma
 {
 
     /**

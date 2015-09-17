@@ -15,6 +15,7 @@ return [
         'invokables' => [
             'options.service'         => '\App\Service\OptionsService',
             'entity.decorator.filter' => '\App\Filter\DecorateEntity',
+            'entity.stripper.filter' => '\App\Filter\StripEntity',
         ]
     ],
     'controllers'     => [

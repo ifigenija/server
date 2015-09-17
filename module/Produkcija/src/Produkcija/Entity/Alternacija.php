@@ -2,9 +2,11 @@
 
 namespace Produkcija\Entity;
 
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
+use App\Entity\Oseba;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Alternacije")
@@ -13,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Max\Id(prefix="0012")
  */
 class Alternacija
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**
@@ -99,7 +101,7 @@ class Alternacija
      * @ORM\JoinColumn(name="funkcija_id", referencedColumnName="id")
      * @Max\I18n(label="alternacija.funkcija",  description="alternacija.d.funkcija")
      * @Max\Ui(type="toone", required=true);
-     * @var \Produkcija\Entity\Funkcija
+     * @var Funkcija
      */
     protected $funkcija;
 
@@ -114,7 +116,7 @@ class Alternacija
      * @ORM\JoinColumn(name="zaposlitev_id", referencedColumnName="id")
      * @Max\I18n(label="alternacija.zaposlitev",  description="alternacija.d.zaposlitev")
      * @Max\Ui(type="lookupselect", empty="Izberi zaposlitev", required=false, filters={"oseba":{"element":"oseba"}})
-     * @var \Produkcija\Entity\Zaposlitev
+     * @var Zaposlitev
      */
     protected $zaposlitev = null;
 
@@ -123,7 +125,7 @@ class Alternacija
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\I18n(label="alternacija.oseba",  description="alternacija.d.oseba")
      * @Max\Ui(type="toone")
-     * @var \App\Entity\Oseba
+     * @var Oseba
      */
     protected $oseba;
 
@@ -132,7 +134,7 @@ class Alternacija
      * @ORM\JoinColumn(name="pogodba_id", referencedColumnName="id")
      * @Max\I18n(label="alternacija.pogodba",  description="alternacija.d.pogodba")
      * @Max\Ui(type="toone", required=false, filters={"oseba" : {"element":"oseba"}})
-     * @var \Produkcija\Entity\Pogodba      
+     * @var Pogodba
      */
     protected $pogodba;
 
@@ -377,7 +379,7 @@ class Alternacija
         return $this;
     }
 
-    public function setFunkcija(\Produkcija\Entity\Funkcija $funkcija = null)
+    public function setFunkcija(Funkcija $funkcija = null)
     {
         $this->funkcija = $funkcija;
         return $this;
@@ -389,19 +391,19 @@ class Alternacija
         return $this;
     }
 
-    public function setZaposlitev(\Produkcija\Entity\Zaposlitev $zaposlitev = null)
+    public function setZaposlitev(Zaposlitev $zaposlitev = null)
     {
         $this->zaposlitev = $zaposlitev;
         return $this;
     }
 
-    public function setOseba(\App\Entity\Oseba $oseba = null)
+    public function setOseba(Oseba $oseba = null)
     {
         $this->oseba = $oseba;
         return $this;
     }
 
-    public function setPogodba(\Produkcija\Entity\Pogodba $pogodba = null)
+    public function setPogodba(Pogodba $pogodba = null)
     {
         $this->pogodba = $pogodba;
         return $this;

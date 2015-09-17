@@ -2,10 +2,9 @@
 
 namespace Aaa\Repository;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Aaa\Entity\User;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
-use Aaa\Entity\Role;
 use Max\Repository\AbstractMaxRepository;
 
 /**
@@ -101,10 +100,10 @@ class Roles
 
     /**
      * Vrne seznam role objektov, kot array collection 
-     * @param \Aaa\Entity\User $user
+     * @param User $user
      * @param string[] $names
      */
-    public function resolveNames(\Aaa\Entity\User $user, $names)
+    public function resolveNames(User $user, $names)
     {
 
         foreach ($names as $name) {

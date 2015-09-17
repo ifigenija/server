@@ -2,6 +2,8 @@
 
 namespace Prodaja\Entity;
 
+use App\Entity\Popa;
+use App\Entity\PostniNaslov;
 use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
 
@@ -84,7 +86,7 @@ class Prostor
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="prostori")
      * @Max\I18n(label="prostor.popa",  description="prostor.d.popa")
      * @Max\Ui(type="toone")
-     * @var \App\Entity\Popa
+     * @var Popa
      */
     protected $popa;
 
@@ -94,7 +96,7 @@ class Prostor
      * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
      * @Max\I18n(label="prostor.naslov", description="prostor.d.naslov")
      * @Max\Ui(type="toone", empty="Izberi naslov", filters={"popa" : {"element":"popa"}})
-     * @var \App\Entity\PostniNaslov
+     * @var PostniNaslov
      */
     protected $naslov;
 
@@ -189,13 +191,13 @@ class Prostor
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa = null)
+    public function setPopa(Popa $popa = null)
     {
         $this->popa = $popa;
         return $this;
     }
 
-    public function setNaslov(\App\Entity\PostniNaslov $naslov = null)
+    public function setNaslov(PostniNaslov $naslov = null)
     {
         $this->naslov = $naslov;
         return $this;

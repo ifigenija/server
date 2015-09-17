@@ -6,7 +6,7 @@
 
 namespace ProgramDela\Rpc;
 
-use Zend\View\Model\JsonModel;
+
 
 /**
  * Description of ProgramDelaRpcService
@@ -32,8 +32,8 @@ class ProgramDelaRpcService
 
     /**
      * @param string $programDelaId
-     * 
-     * @returns boolean     uspeh 
+     * @return bool uspeh
+     * @throws \Max\Exception\UnauthException
      */
     public function zakleni($programDelaId)
     {
@@ -69,8 +69,8 @@ class ProgramDelaRpcService
 
     /**
      * @param string $programDelaId
-     * 
-     * @returns boolean     uspeh 
+     * @return bool uspeh
+     * @throws \Max\Exception\UnauthException
      */
     public function odkleni($programDelaId)
     {
@@ -368,12 +368,12 @@ class ProgramDelaRpcService
     }
 
     /**
-     * priprava podatkov za finančno prilogo C2 na osnovi programa dela, enot program in pripadajočih 
-     * uprizoritev 
-     * 
-     * @param string   $programDelaId
-     * 
-     * @returns        $data                strukturirani podatki priloge C2
+     * priprava podatkov za finančno prilogo C2 na osnovi programa dela, enot program in pripadajočih
+     * uprizoritev
+     *
+     * @param string $programDelaId
+     * @return  $data                strukturirani podatki priloge C2
+     * @throws \Max\Exception\UnauthException
      * @todo preveriti, ali še potrebujemo ta RPC klic, ali je dovolj rpc klic osveziTabeloC2 $$
      */
     public function podatkiPrilogaC2($programDelaId)
@@ -417,15 +417,15 @@ class ProgramDelaRpcService
     }
 
     /**
-     * priprava podatkov za finančno prilogo C2 na osnovi programa dela, enot program in pripadajočih 
-     * uprizoritev 
-     * 
-     * kreira oz. osveži postavke C2 za dotičen program dela. Osveži le tiste kolone, 
+     * priprava podatkov za finančno prilogo C2 na osnovi programa dela, enot program in pripadajočih
+     * uprizoritev
+     *
+     * kreira oz. osveži postavke C2 za dotičen program dela. Osveži le tiste kolone,
      * za katerega obstajajo podatki (npr. iz uprizoritev)
-     * 
-     * @param string   $programDelaId
-     * 
-     * @returns       True|False                uspeh oz. neuspeh klica procedure
+     *
+     * @param string $programDelaId
+     * @return False|True uspeh oz. neuspeh klica procedure
+     * @throws \Max\Exception\UnauthException
      */
     public function osveziTabeloC2($programDelaId)
     {

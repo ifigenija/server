@@ -2,9 +2,10 @@
 
 namespace Produkcija\Entity;
 
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Rekviziti")
@@ -12,7 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Max\Id(prefix="0018")
  */
 class Rekvizit
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**

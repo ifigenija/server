@@ -4,12 +4,10 @@ namespace TestFixture;
 
 use Aaa\Entity\User;
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
-use Zend\Config\Config;
-use Max\Expect\ExpectTrait;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
  *

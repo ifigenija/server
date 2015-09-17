@@ -2,15 +2,16 @@
 
 namespace ProgramDela\Entity;
 
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramskeEnoteSklopa")
  * @Max\Id(prefix="0052")
  */
 class ProgramskaEnotaSklopa
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**

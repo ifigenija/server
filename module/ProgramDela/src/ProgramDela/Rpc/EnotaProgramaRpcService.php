@@ -6,7 +6,7 @@
 
 namespace ProgramDela\Rpc;
 
-use Zend\View\Model\JsonModel;
+
 
 /**
  * Description of EnotaProgramaRpcService
@@ -19,11 +19,11 @@ class EnotaProgramaRpcService
 
     /**
      * Kreiranje nove koprodukcije za lastno gledališče za določeno enoto programa
-     * 
-     * 
+     *
+     *
      * @param string $enotaProgramaId
-     * 
-     * @returns koprodukcija id 
+     * @return koprodukcija id
+     * @throws \Max\Exception\UnauthException
      */
     public function novaMaticnaKoprodukcija($enotaProgramaId)
     {
@@ -56,15 +56,15 @@ class EnotaProgramaRpcService
 
     /**
      * pridobitev podatkov o uprizoritvi, ki se uporabljajo v programu dela
-     * 
-     * Podatke, ki jih pridobi ta procedura lahko uporabnik po želji prenese v enoto programa - 
+     *
+     * Podatke, ki jih pridobi ta procedura lahko uporabnik po želji prenese v enoto programa -
      * npr. v program premiera, program ponovitve premiere ipd.
-     * 
+     *
      * @param string $uprizoritevId
-     * @param string $zacetek       začetek programa dela v ISO8601 obliki, npr. "1970-01-01T01:00:00+01:00"
-     * @param string $konec         konec programa dela v ISO8601 obliki, npr. "2999-01-01T01:00:00+01:00"
-     * 
-     * @returns data                strukturirani podatki uprizoritve 
+     * @param string $zacetek začetek programa dela v ISO8601 obliki, npr. "1970-01-01T01:00:00+01:00"
+     * @param string $konec konec programa dela v ISO8601 obliki, npr. "2999-01-01T01:00:00+01:00"
+     * @return data strukturirani podatki uprizoritve
+     * @throws \Max\Exception\UnauthException
      */
     public function podatkiUprizoritve($uprizoritevId, $zacetek = \Max\Consts::MINISODATE, $konec = \Max\Consts::MAXISODATE)
     {

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 use Rbac\Role\RoleInterface;
 
 /**
@@ -16,7 +17,7 @@ use Rbac\Role\RoleInterface;
  * @Max\Lookup(ident="name", label="description", search={"name","description"})
  *  */
 class Role
-        extends \Max\Entity\Base
+        extends Base
         implements RoleInterface
 {
 

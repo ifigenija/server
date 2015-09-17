@@ -7,6 +7,9 @@
  */
 
 namespace Aaa\Rpc;
+use Max\Exception\MaxException;
+use Max\Exception\UnauthException;
+use Max\Service\AbstractMaxService;
 
 /**
  * Wrapper za strežbo rpc klicev v AaaService
@@ -14,7 +17,7 @@ namespace Aaa\Rpc;
  * @author boris
  */
 class AuthRpcService
-        extends \Max\Service\AbstractMaxService
+        extends AbstractMaxService
 {
 
     /**
@@ -37,12 +40,14 @@ class AuthRpcService
 
     /**
      * Prijava uporabnika
-     * 
-     * Preveri geslo in vrne seznam vlog, če je bila prijava uspešna. 
+     *
+     * Preveri geslo in vrne seznam vlog, če je bila prijava uspešna.
      * Če prijava ni uspešna vrne napako.
-     * 
+     *
      * @param string $username
      * @param string $password
+     * @return array
+     * @throws UnauthException
      */
     public function login($username, $password)
     {
@@ -73,7 +78,7 @@ class AuthRpcService
         }
 
         $tr = $this->getServiceLocator()->get('translator');
-        throw new \Max\Exception\UnauthException($tr->translate('Vpis ni uspel'), 1000998);
+        throw new UnauthException($tr->translate('Vpis ni uspel'), 1000998);
     }
 
     /**
@@ -143,7 +148,7 @@ class AuthRpcService
                 // 
                 $to = $user->getEmail();
 
-                throw new \Max\Exception\MaxException('not implemented', 1000997);
+                throw new MaxException('not implemented', 1000997);
             }
         } catch (\Exception $e) {
             return ["error" => "Error", "code" => 1000996];
@@ -154,7 +159,10 @@ class AuthRpcService
      * zamenja geslo uporabniku
      * @params string $oldPassword
      * @params string $newPassword
-     * @returns   true          če geslo uspešno menjano,
+     * @param $oldPassword
+     * @param $newPassword
+     * @return true če geslo uspešno menjano,
+     * @throws MaxException
      */
     public function changePassword($oldPassword, $newPassword)
     {
@@ -163,14 +171,14 @@ class AuthRpcService
          */
         $ident = $this->getIdentity();
         if (!$ident) {
-            throw new \Max\Exception\MaxException('Uporabnik ni prijavljen', 1000995);
+            throw new MaxException('Uporabnik ni prijavljen', 1000995);
         }
 
         /**
          * ali novo geslo različno staremu?
          */
         if ($newPassword ==$oldPassword) {
-            throw new \Max\Exception\MaxException('Novo geslo enako staremu', 1000993);
+            throw new MaxException('Novo geslo enako staremu', 1000993);
         }
 
         /**
@@ -178,7 +186,7 @@ class AuthRpcService
          */
         $staroGesloOk = \Aaa\Service\AaaService::checkPassword($ident, $oldPassword);
         if (!$staroGesloOk) {
-            throw new \Max\Exception\MaxException('Napačno staro geslo', 1000994);
+            throw new MaxException('Napačno staro geslo', 1000994);
         }
 
         /**

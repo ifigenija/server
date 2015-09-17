@@ -2,6 +2,8 @@
 
 namespace ProgramDela\Entity;
 
+use App\Entity\Drzava;
+use App\Entity\Popa;
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 
@@ -26,7 +28,7 @@ class ProgramGostovanje
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
      * @Max\I18n(label="gostovanje.drzava",  description="gostovanje.d.drzava")
      * @Max\Ui(type="toone")
-     * @var \App\Entity\Drzava
+     * @var Drzava
      */
     protected $drzavaGostovanja;
 
@@ -68,7 +70,7 @@ class ProgramGostovanje
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
      * @Max\I18n(label="gostovanje.programDela", description="gostovanje.d.programDela")
      * @Max\Ui(type="hiddenid")
-     * @var \ProgramDela\Entity\ProgramDela
+     * @var ProgramDela
      */
     protected $dokument;
 
@@ -77,7 +79,7 @@ class ProgramGostovanje
      * @ORM\JoinColumn(name="gostitelj_id", referencedColumnName="id")
      * @Max\I18n(label="gostovanje.gostitelj", description="gostovanje.d.gostitelj")
      * @Max\Ui(type="toone")
-     * @var \App\Entity\Popa
+     * @var Popa
      */
     protected $gostitelj;
 
@@ -198,13 +200,13 @@ class ProgramGostovanje
         return $this;
     }
 
-    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument=null)
+    public function setDokument(ProgramDela $dokument=null)
     {
         $this->dokument = $dokument;
         return $this;
     }
 
-    public function setGostitelj(\App\Entity\Popa $gostitelj=null)
+    public function setGostitelj(Popa $gostitelj=null)
     {
         $this->gostitelj = $gostitelj;
         return $this;
@@ -215,7 +217,7 @@ class ProgramGostovanje
         return $this->drzavaGostovanja;
     }
 
-    public function setDrzavaGostovanja(\App\Entity\Drzava $drzavaGostovanja=null)
+    public function setDrzavaGostovanja(Drzava $drzavaGostovanja=null)
     {
         $this->drzavaGostovanja = $drzavaGostovanja;
         return $this;

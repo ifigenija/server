@@ -9,7 +9,7 @@
 namespace Produkcija;
 
 use Zend\Console\Adapter\AdapterInterface;
-use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
+
 use Zend\Mvc\MvcEvent;
 
 Class Module

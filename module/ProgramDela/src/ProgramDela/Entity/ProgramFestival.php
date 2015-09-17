@@ -2,8 +2,9 @@
 
 namespace ProgramDela\Entity;
 
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use ProgramDela\Entity\ProgramDela;
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiFestival")
@@ -11,7 +12,7 @@ use Doctrine\ORM\Mapping AS ORM,
  * @Max\Id(prefix="0044")
  */
 class ProgramFestival
-        extends \ProgramDela\Entity\EnotaPrograma
+        extends EnotaPrograma
 {
 
     /**
@@ -19,7 +20,7 @@ class ProgramFestival
      * @ORM\JoinColumn(name="program_dela_id", referencedColumnName="id")
      * @Max\I18n(label="festival.programDela", description="festival.d.programDela")
      * @Max\Ui(type="hiddenid")
-     * @var \ProgramDela\Entity\ProgramDela
+     * @var ProgramDela
      */
     protected $programDela;
 
@@ -253,7 +254,7 @@ class ProgramFestival
         return $this->stTujihSelektorjev;
     }
 
-    public function setProgramDela(\ProgramDela\Entity\ProgramDela $programDela=null)
+    public function setProgramDela(ProgramDela $programDela=null)
     {
         $this->programDela = $programDela;
         return $this;

@@ -6,11 +6,9 @@
 
 namespace App\Repository;
 
-use Doctrine\Common\Collections\Criteria;
-use DoctrineModule\Paginator\Adapter\Selectable;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * Description of PostniNaslovi

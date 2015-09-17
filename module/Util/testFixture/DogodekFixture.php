@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Koledar\Entity\Dogodek;
 
 /**
  *
@@ -43,7 +44,7 @@ class DogodekFixture
 
         $rep = $manager->getRepository('Koledar\Entity\Dogodek');
 
-        $o = new \Koledar\Entity\Dogodek();
+        $o = new Dogodek();
 
         $date = empty($v[1]) ? null : date_create($v[1]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setPlaniranZacetek($date);

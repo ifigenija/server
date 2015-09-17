@@ -5,6 +5,9 @@ namespace Aaa\EntityEvents;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\OnFlushEventArgs;
+use Doctrine\ORM\PersistentCollection;
+use Max\Entity\Base;
+use Max\Exception\MaxException;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -333,7 +336,7 @@ class RevisionsListener
 
     protected function isEntity($obj)
     {
-        if (is_object($obj) && $obj instanceof \Max\Entity\Base) {
+        if (is_object($obj) && $obj instanceof Base) {
             return true;
         }
         return false;
@@ -341,7 +344,7 @@ class RevisionsListener
 
     protected function isCollection($obj)
     {
-        return is_object($obj) && $obj instanceof \Doctrine\ORM\PersistentCollection;
+        return is_object($obj) && $obj instanceof PersistentCollection;
     }
 
     protected function isEntityTracked($entityClass)
@@ -354,7 +357,7 @@ class RevisionsListener
     {
         $ann = $this->metaFactory->factory($entityClass);
         return $ann->getFieldTracking($field)->log;
-        return true;
+
     }
 
     protected function isCollectionTracked($collection)
@@ -366,14 +369,14 @@ class RevisionsListener
     /**
      * Zahteva da entiteta deduje \Max\Entity\Base
      *
-     * @param \Max\Entity\Base $entity
-     * @throws \Max\Exception\MaxException
+     * @param Base $entity
+     * @throws MaxException
      */
     protected function checkBaseEntity($entity)
     {
-        if (!$entity instanceof \Max\Entity\Base) {
+        if (!$entity instanceof Base) {
             $class = get_class($entity);
-            throw new \Max\Exception\MaxException("Entiteta '$class' mora dedovati '\\Max\\Entity\\Base'", 100077);
+            throw new MaxException("Entiteta '$class' mora dedovati '\\Max\\Entity\\Base'", 100077);
         }
     }
 

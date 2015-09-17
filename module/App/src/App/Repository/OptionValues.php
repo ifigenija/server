@@ -7,10 +7,6 @@
 namespace App\Repository;
 
 use Doctrine\ORM\Query;
-use Doctrine\ORM\Tools\Pagination\Paginator;
-use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
-use Exception;
-use Max\Repository\AbstractMaxRepository;
 
 /**
  * 

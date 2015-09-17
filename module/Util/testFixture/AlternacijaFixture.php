@@ -3,9 +3,10 @@
 namespace TestFixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Produkcija\Entity\Alternacija;
 
 /**
  *
@@ -44,7 +45,7 @@ class AlternacijaFixture
 
         $o = $rep->findOneBySifra(trim($v[0]));
         if (!$o) {
-            $o = new \Produkcija\Entity\Alternacija();
+            $o = new Alternacija();
             $o->setSifra(trim($v[0]));
             $manager->persist($o);
         }

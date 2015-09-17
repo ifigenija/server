@@ -7,9 +7,6 @@ use App\Entity\OptionValue;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManager;
-use Zend\Config\Config;
-use Max\Expect\ExpectTrait;
 
 /**
  *

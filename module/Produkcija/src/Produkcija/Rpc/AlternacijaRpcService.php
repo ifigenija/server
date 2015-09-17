@@ -6,7 +6,7 @@
 
 namespace Produkcija\Rpc;
 
-use Zend\View\Model\JsonModel;
+
 
 /**
  * Description of AlternacijaRpcService
@@ -19,14 +19,14 @@ class AlternacijaRpcService
 
     /**
      * Kreiranje nove pogodbe Alternaciji
-     * 
+     *
      * Procedura deluje podobno kot 2 REST ukaza, vendar v 1 flushu:
      *  POST /rest/pogodba      vrednostPredstave=0,...
-     *  PUT  /rest/alternacija   pogodba= idPogodbe 
-     * 
+     *  PUT  /rest/alternacija   pogodba= idPogodbe
+     *
      * @param string $alternacijaId
-     * 
-     * @returns pogodba id (ali celi objekt od pogodbe)  ali ?false  , če ne uspe $$
+     * @return pogodba id (ali celi objekt od pogodbe)  ali ?false  , če ne uspe $$
+     * @throws \Max\Exception\UnauthException
      */
     public function novaPogodba($alternacijaId)
     {

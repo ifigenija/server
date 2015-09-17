@@ -4,6 +4,7 @@ namespace Produkcija\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Koledar\Entity\Dogodek;
 
 /**
  * Zvrst uprizoritve
@@ -101,7 +102,7 @@ class Arhivalija
      * @ORM\JoinColumn(name="dogodek_id", referencedColumnName="id")
      * @Max\I18n(label="Dogodek",  description="Dogodek, na katerega se nanaša arhivalija")
      * @Max\Ui(type="toone")
-     * @var \Koledar\Entity\Dogodek
+     * @var Dogodek
      */
     protected $dogodek;
 
@@ -251,7 +252,7 @@ class Arhivalija
         return $this;
     }
 
-    public function setDogodek(\Koledar\Entity\Dogodek $dogodek=null)
+    public function setDogodek(Dogodek $dogodek=null)
     {
         $this->dogodek = $dogodek;
         return $this;

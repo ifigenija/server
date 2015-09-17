@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Produkcija\Entity\Funkcija;
 
 /**
  *
@@ -44,7 +45,7 @@ class FunkcijaFixture
 
         $o = $rep->findOneByNaziv(trim($v[0]));
         if (!$o) {
-            $o = new \Produkcija\Entity\Funkcija();
+            $o = new Funkcija();
             $o->setNaziv(trim($v[0]));
             $manager->persist($o);
         }

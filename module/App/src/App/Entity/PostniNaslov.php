@@ -39,7 +39,7 @@ class PostniNaslov
      * 
      * @Max\I18n(label="postniNaslov.popa",  description="postniNaslov.d.popa")
      * @Max\Ui(type="hiddenid") 
-     * @var \App\Entity\Popa
+     * @var Popa
      */
     protected $popa;
 
@@ -50,7 +50,7 @@ class PostniNaslov
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\I18n(label="postniNaslov.oseba",  description="postniNaslov.d.oseba")
      * @Max\Ui(type="hiddenid")
-     * @var \App\Entity\Oseba
+     * @var Oseba
      */
     protected $oseba;
 
@@ -246,13 +246,13 @@ class PostniNaslov
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa=null)
+    public function setPopa(Popa $popa=null)
     {
         $this->popa = $popa;
         return $this;
     }
 
-    public function setOseba(\App\Entity\Oseba $oseba=null)
+    public function setOseba(Oseba $oseba=null)
     {
         $this->oseba = $oseba;
         return $this;

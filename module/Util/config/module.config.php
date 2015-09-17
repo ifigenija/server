@@ -13,58 +13,53 @@ return [
         'factories' => [
         ]
     ],
-    'controllers'     => [
+    'controllers' => [
         'invokables' => [
             'Util\Install' => 'Util\Controller\InstallController',
             'Util\Migrate' => 'Util\Controller\MigrateController',
         ]
     ],
-    'router'          => [
+    'router' => [
         'routes' => [
         ],
     ],
-    'console'         => [
+    'console' => [
         'router' => [
             'routes' => [
-                'populate'     => [
+                'populate' => [
                     'options' => [
-                        'route'    => 'populate',
+                        'route' => 'populate',
                         'defaults' => [
                             'controller' => 'Util\Install',
-                            'action'     => 'populate'
+                            'action' => 'populate'
                         ]
                     ]
                 ],
                 'populateTest' => [
                     'options' => [
-                        'route'    => 'populateTest',
+                        'route' => 'populateTest',
                         'defaults' => [
                             'controller' => 'Util\Install',
-                            'action'     => 'populateTest'
+                            'action' => 'populateTest'
                         ]
                     ]
                 ],
                 'migrate' => [
                     'options' => [
-                        'route'    => 'migrate <db>',
+                        'route' => 'migrate <db>',
                         'defaults' => [
                             'controller' => 'Util\Migrate',
-                            'action'     => 'migrate'
+                            'action' => 'migrate'
                         ]
                     ]
                 ],
             ]
         ]
     ],
-    'form_elements'   => [
-        'invokables' => [
-// elementi
-        ]
-    ],
-    'fixtures'        => [
+    'fixtures' => [
         __DIR__ . '/../fixture'
     ],
-    'test_fixtures'   => [
+    'test_fixtures' => [
         __DIR__ . '/../testFixture'
     ]
 ];

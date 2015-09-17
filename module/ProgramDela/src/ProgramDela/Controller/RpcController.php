@@ -5,6 +5,7 @@
  */
 
 namespace ProgramDela\Controller;
+use Zend\Mvc\Controller\AbstractActionController;
 
 /**
  * Description of RpcController
@@ -12,7 +13,7 @@ namespace ProgramDela\Controller;
  * @author rado
  */
 class RpcController
-        extends \Zend\Mvc\Controller\AbstractActionController
+        extends AbstractActionController
 {
         use \Max\Controller\Traits\RpcTrait;
 

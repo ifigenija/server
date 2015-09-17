@@ -2,8 +2,9 @@
 
 namespace Abonmaji\Entity;
 
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * @ORM\Entity(repositoryClass="Abonmaji\Repository\Abonmaji")
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping AS ORM,
 
  */
 class Abonma
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**

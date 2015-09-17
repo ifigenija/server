@@ -2,9 +2,12 @@
 
 namespace ProgramDela\Entity;
 
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Consts;
+use Max\Entity\Base;
+use Max\Functions;
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProgramiDela")
@@ -12,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Max\Id(prefix="0041")
  */
 class ProgramDela
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**
@@ -1060,8 +1063,8 @@ class ProgramDela
          * premiere
          */
         foreach ($this->getPremiere() as $numObject => $object) {
-            if ($smer == \Max\Consts::DOWN) {
-                $object->preracunaj(\Max\Consts::DOWN);
+            if ($smer == Consts::DOWN) {
+                $object->preracunaj(Consts::DOWN);
             }
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->vrPS1Do += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
@@ -1090,8 +1093,8 @@ class ProgramDela
          * ponovitve premier
          */
         foreach ($this->getPonovitvePremiere() as $numObject => $object) {
-            if ($smer == \Max\Consts::DOWN) {
-                $object->preracunaj(\Max\Consts::DOWN);
+            if ($smer == Consts::DOWN) {
+                $object->preracunaj(Consts::DOWN);
             }
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->vrPS1Mat+= $object->getCelotnaVrednostMat();
@@ -1126,8 +1129,8 @@ class ProgramDela
          * ponovitve prejšnjih sezon
          */
         foreach ($this->getPonovitvePrejsnjih() as $numObject => $object) {
-            if ($smer == \Max\Consts::DOWN) {
-                $object->preracunaj(\Max\Consts::DOWN);
+            if ($smer == Consts::DOWN) {
+                $object->preracunaj(Consts::DOWN);
             }
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->vrPS1Mat+= $object->getCelotnaVrednostMat();
@@ -1180,8 +1183,8 @@ class ProgramDela
          * gostujoče predstave
          */
         foreach ($this->getGostujoci() as $numObject => $object) {
-            if ($smer == \Max\Consts::DOWN) {
-                $object->preracunaj(\Max\Consts::DOWN);
+            if ($smer == Consts::DOWN) {
+                $object->preracunaj(Consts::DOWN);
             }
             $this->stIzvNekomerc+=$object->getPonoviDoma();
             $this->stIzvGostuj+=$object->getPonoviDoma();
@@ -1197,8 +1200,8 @@ class ProgramDela
          * mednarodna gostovanja
          */
         foreach ($this->getGostovanja() as $numObject => $object) {
-            if ($smer == \Max\Consts::DOWN) {
-                $object->preracunaj(\Max\Consts::DOWN);
+            if ($smer == Consts::DOWN) {
+                $object->preracunaj(Consts::DOWN);
             }
             $this->stIzvNekomerc+=$object->getPonoviInt();
             $this->stIzvGostovanjInt += $object->getPonoviInt();
@@ -1238,8 +1241,8 @@ class ProgramDela
          * festivali
          */
         foreach ($this->getProgramiFestival() as $numObject => $object) {
-            if ($smer == \Max\Consts::DOWN) {
-                $object->preracunaj(\Max\Consts::DOWN);
+            if ($smer == Consts::DOWN) {
+                $object->preracunaj(Consts::DOWN);
             }
             $this->stIzvNekomerc+=1;      // 1 festival ena prireditev
             $this->stIzvOstalihNek+=1;      // 1 festival ena prireditev
@@ -1256,8 +1259,8 @@ class ProgramDela
          * razno
          */
         foreach ($this->getProgramiRazno() as $numObject => $object) {
-            if ($smer == \Max\Consts::DOWN) {
-                $object->preracunaj(\Max\Consts::DOWN);
+            if ($smer == Consts::DOWN) {
+                $object->preracunaj(Consts::DOWN);
             }
             $this->stIzvNekomerc+=$object->getStPE();     //$$ prištevamo število programskih enot
             $this->stIzvOstalihNek+=$object->getStPE();     //$$ prištevamo število programskih enot
@@ -1274,8 +1277,8 @@ class ProgramDela
          * izjemni dogodki
          */
         foreach ($this->getIzjemni() as $numObject => $object) {
-            if ($smer == \Max\Consts::DOWN) {
-                $object->preracunaj(\Max\Consts::DOWN);
+            if ($smer == Consts::DOWN) {
+                $object->preracunaj(Consts::DOWN);
             }
             $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost() + $object->getPonoviInt();
             $this->stIzvOstalihNek+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost() + $object->getPonoviInt();
@@ -1292,7 +1295,7 @@ class ProgramDela
         }
 
         if ($this->stIzvNekomerc > 0) {
-            $this->avgObiskPrired = \Max\Functions::numberRound($this->stObiskNekom / $this->stIzvNekomerc);
+            $this->avgObiskPrired = Functions::numberRound($this->stObiskNekom / $this->stIzvNekomerc);
         } else {
             $this->avgObiskPrired = 0;
         }

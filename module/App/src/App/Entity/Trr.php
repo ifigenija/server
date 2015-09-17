@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Trrji")
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping AS ORM,
  * @Max\Lookup(ident="stevilka", label="stevilka", search={"stevilka"})
  */
 class Trr
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**

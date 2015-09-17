@@ -5,6 +5,7 @@
  */
 
 namespace App\Filter;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
 /**
  * Description of DecorateEntity
@@ -12,7 +13,7 @@ namespace App\Filter;
  * @author boris
  */
 class DecorateEntity
-        implements \Zend\ServiceManager\ServiceLocatorAwareInterface
+        implements ServiceLocatorAwareInterface
 {
 
     use \Zend\ServiceManager\ServiceLocatorAwareTrait;

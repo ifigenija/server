@@ -6,13 +6,12 @@
 
 namespace Produkcija\Repository;
 
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use DoctrineModule\Paginator\Adapter\Selectable;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
+use Max\Form\Element\DateTime;
 use Max\Repository\AbstractMaxRepository;
 use Produkcija\Entity\Alternacija;
-use Max\Form\Element\DateTime;
+use Produkcija\Entity\Funkcija;
 
 /**
  * Description of Alternacije
@@ -193,7 +192,7 @@ class Alternacije
      * 
      * @param entity $funkcija
      */
-    public function nastaviEnPrivzeti(\Produkcija\Entity\Funkcija $funkcija)
+    public function nastaviEnPrivzeti(Funkcija $funkcija)
     {
         if ($funkcija && $funkcija->getAlternacije()->count() >= 1 && !($funkcija->getAlternacije()->exists(function($key, $alt) use(&$id) {
                     return $alt->getPrivzeti(); //vrne true, če obstaja vsaj ena alternacija s privzeti

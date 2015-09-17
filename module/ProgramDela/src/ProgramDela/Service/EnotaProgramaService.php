@@ -6,7 +6,7 @@
 
 namespace ProgramDela\Service;
 
-use Zend\View\Model\JsonModel;
+
 
 /**
  * Description of EnotaProgramaRpcService

@@ -5,6 +5,7 @@
  */
 
 namespace Produkcija\Form;
+use Max\Form\JsonForm;
 
 /**
  * Description of StrosekForm
@@ -12,7 +13,7 @@ namespace Produkcija\Form;
  * @author boris
  */
 class StrosekForm
-        extends \Max\Form\JsonForm
+        extends JsonForm
 {
 
     public function init()

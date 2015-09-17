@@ -2,8 +2,9 @@
 
 namespace Prisotnost\Entity;
 
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * @ORM\Entity(repositoryClass="Prisotnost\Repository\TerminiStoritve")
@@ -11,7 +12,7 @@ use Doctrine\ORM\Mapping AS ORM,
  * @Max\Id(prefix="0026")
  */
 class TerminStoritve
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**

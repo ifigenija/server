@@ -2,10 +2,9 @@
 
 namespace ProgramDela\Entity;
 
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
-use Doctrine\Common\Collections\ArrayCollection;
-use Max\Functions;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * @ORM\Entity(repositoryClass="ProgramDela\Repository\ProdukcijaDelitve")
@@ -13,7 +12,7 @@ use Max\Functions;
  * @Max\Id(prefix="0017")
  */
 class ProdukcijaDelitev
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**
@@ -51,7 +50,7 @@ class ProdukcijaDelitev
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\EnotaPrograma", inversedBy="koprodukcije")
      * @Max\I18n(label="prodel.enotaPrograma", description="prodel.d.enotaPrograma")   
      * @Max\Ui(type="hiddenid")
-     * @var \ProgramDela\Entity\EnotaPrograma
+     * @var EnotaPrograma
      */
     protected $enotaPrograma;
 
@@ -60,7 +59,7 @@ class ProdukcijaDelitev
      * @ORM\JoinColumn(name="koproducent_id", referencedColumnName="id", nullable=false)
      * @Max\I18n(label="prodel.koproducent",  description="prodel.d.koproducent")
      * @Max\Ui(type="toone", required=true)
-     * @var \ProgramDela\Entity\ProdukcijskaHisa
+     * @var ProdukcijskaHisa
      */
     protected $koproducent;
 
@@ -218,13 +217,13 @@ class ProdukcijaDelitev
         return $this;
     }
 
-    public function setEnotaPrograma(\ProgramDela\Entity\EnotaPrograma $enotaPrograma=null)
+    public function setEnotaPrograma(EnotaPrograma $enotaPrograma=null)
     {
         $this->enotaPrograma = $enotaPrograma;
         return $this;
     }
 
-    public function setKoproducent(\ProgramDela\Entity\ProdukcijskaHisa $koproducent=null)
+    public function setKoproducent(ProdukcijskaHisa $koproducent=null)
     {
         $this->koproducent = $koproducent;
         return $this;

@@ -5,6 +5,7 @@
  */
 
 namespace App\Controller;
+use Zend\Mvc\Controller\AbstractActionController;
 
 /**
  * Description of Cli
@@ -12,7 +13,7 @@ namespace App\Controller;
  * @author boris
  */
 class CliController
-        extends \Zend\Mvc\Controller\AbstractActionController
+        extends AbstractActionController
 {
 
     /**
@@ -57,7 +58,7 @@ class CliController
         if (empty($popa->getSifra())) {
             $num   = $this->getServiceLocator()->get('stevilcenje.generator');
             $popa->setSifra($num->generate('popa'));
-            $sifra = $popa->getSifra($popa);
+            $sifra = $popa->getSifra();
         }
         $popa->setNaziv($naziv);
         $popa->setStaKli('AK');

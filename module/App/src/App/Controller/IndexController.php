@@ -2,6 +2,7 @@
 
 
 namespace App\Controller;
+use Zend\Mvc\Controller\AbstractActionController;
 
 /**
  * Kontroller za index akcijo 
@@ -10,7 +11,7 @@ namespace App\Controller;
  *
  * @author boris
  */
-class IndexController extends \Zend\Mvc\Controller\AbstractActionController
+class IndexController extends AbstractActionController
 {
    /**
     * Redirect na client aplikacijo 

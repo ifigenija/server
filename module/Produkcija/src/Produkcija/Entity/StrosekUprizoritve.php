@@ -2,8 +2,10 @@
 
 namespace Produkcija\Entity;
 
-use Doctrine\ORM\Mapping AS ORM,
-    Max\Ann\Entity as Max;
+use App\Entity\Popa;
+use Doctrine\ORM\Mapping as ORM;
+use Max\Ann\Entity as Max;
+use Max\Entity\Base;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\StroskiUprizoritve")
@@ -11,7 +13,7 @@ use Doctrine\ORM\Mapping AS ORM,
  * @Max\Id(prefix="0039")
  */
 class StrosekUprizoritve
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**
@@ -70,7 +72,7 @@ class StrosekUprizoritve
      * @Max\I18n(label="strupr.vrstaStroska",  description="strupr.d.vrstaStroska")
      * $$ začasno izključimo ,ker javlja napako 1010001:
      * Max\Ui(type="optionalselect",empty="brez vrste stroška",required=false)
-     * @var \Produkcija\Entity\VrstaStroska
+     * @var VrstaStroska
      */
     protected $vrstaStroska;
 
@@ -96,7 +98,7 @@ class StrosekUprizoritve
      * @ORM\JoinColumn(name="popa_id", referencedColumnName="id")
      * @Max\I18n(label="strupr.popa",  description="strupr.d.popa")
      * @Max\Ui(type="toone")
-     * @var \App\Entity\Popa
+     * @var Popa
      */
     protected $popa;
 
@@ -192,7 +194,7 @@ class StrosekUprizoritve
         return $this;
     }
 
-    public function setPopa(\App\Entity\Popa $popa=null)
+    public function setPopa(Popa $popa=null)
     {
         $this->popa = $popa;
         return $this;
@@ -214,7 +216,7 @@ class StrosekUprizoritve
         return $this->vrstaStroska;
     }
 
-    public function setVrstaStroska(\Produkcija\Entity\VrstaStroska $vrstaStroska=null)
+    public function setVrstaStroska(VrstaStroska $vrstaStroska=null)
     {
         $this->vrstaStroska = $vrstaStroska;
         return $this;

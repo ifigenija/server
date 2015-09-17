@@ -6,13 +6,15 @@
  * and open the template in the editor.
  */
 namespace App\Controller;
+use Zend\Mvc\Controller\AbstractActionController;
+
 /**
  * Description of IfiRpcController
  *
  * @author boris
  */
 class RpcController
- extends \Zend\Mvc\Controller\AbstractActionController
+ extends AbstractActionController
 {
     
     use \Max\Controller\Traits\RpcTrait;
