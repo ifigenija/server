@@ -24,12 +24,22 @@ forms:
 #            - terminiStoritve
 #            - prodajaPredstave
             - sezona
-    preprost: 
+    vaja: 
         elements:
             - zacetek
-            - title
-            - razred
-            - status
+            - konec
+            - prostor
+            - name: uprizoritevVaja
+              type: toone
+              options: 
+                  label: Uprizoritev
+                  targetEntity: Produkcija\Entity\Uprizoritev
+                  required: false
+        hydrator:
+            virtual:
+                - name: uprizoritevVaja
+                  type: lookup
+                  targetEntity: Produkcija\Entity\Uprizoritev
 lists:
     default: 
         filter:

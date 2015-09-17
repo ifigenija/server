@@ -97,16 +97,16 @@ class Vaja
      */
     public function setKonec(\DateTime $konec = null)
     {
-        if($konec && $this->dogodek){
+        if ($konec && $this->dogodek) {
             $this->dogodek->setKonec($konec);
             $this->dogodek->validate();
-        }else if(!$konec && $this->dogodek){
+        } else if (!$konec && $this->dogodek) {
             $konec = clone $this->dogodek->getZacetek();
             $konec->add(new \DateInterval('PT4H'));
             $this->dogodek->setKonec($konec);
             $this->dogodek->validate();
         }
-        
+
         return $this;
     }
 
@@ -118,16 +118,12 @@ class Vaja
         $this->dogodek = new Dogodek();
         $this->dogodek->setVaja($this);
         $this->dogodek->setRazred(Dogodek::VAJA);
-        
+
         $naslov = $this->getUprizoritev()->getNaslov();
-        $zap = $this->zaporedna;
-        $this->dogodek->setTitle($naslov. ' vaja ' .$zap);
+        $zap    = $this->zaporedna;
+        $this->dogodek->setTitle($naslov . ' vaja ' . $zap);
     }
 
-    /**
-     * začasna rešitev
-     * @return type
-     */
     public function getZacetek()
     {
         if ($this->dogodek) {

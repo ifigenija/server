@@ -205,7 +205,7 @@ class Dogodek
         }
         if ($this->razred === self::ZASEDENOST) {
             $this->expect($this->zasedenost, "Dogodek razreda zasedenost zahteva referenco zasedenost", 1000468);
-            $this->expect($this->terminiStoritve->count()===0, "Dogodek razreda zasedenost ne dovoljuje terminov storitve", 1001051);
+            $this->expect($this->terminiStoritve->count() === 0, "Dogodek razreda zasedenost ne dovoljuje terminov storitve", 1001051);
             $this->expect(!$this->prostor, "Dogodek razreda zasedenost ne dovoljuje reference Prostor", 1001052);
         }
 
@@ -229,6 +229,16 @@ class Dogodek
 
 
         $this->expect($i === 1, "Napaka - napačno število referenc na podrobnosti dogodka $i", 1000361);
+    }
+
+    public function getUprizoritevVaja()
+    {
+        return $this->getVaja()->getUprizoritev();
+    }
+    
+    public function getUprizoritevPredstava()
+    {
+        return $this->getPredstava()->getUprizoritev();
     }
 
     public function getPodrobno()
