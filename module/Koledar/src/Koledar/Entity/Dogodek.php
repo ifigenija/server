@@ -231,15 +231,34 @@ class Dogodek
         $this->expect($i === 1, "Napaka - napačno število referenc na podrobnosti dogodka $i", 1000361);
     }
 
+    //pridobimo uprizoritev vaje
     public function getUprizoritevVaja()
     {
         return $this->getVaja()->getUprizoritev();
     }
     
+    //pridobimo uprizoritev predstave
     public function getUprizoritevPredstava()
     {
         return $this->getPredstava()->getUprizoritev();
     }
+    
+    //pridobimo kraj gostovanja
+    public function getKraj()
+    {
+        return $this->getGostovanje()->getKraj();
+    }
+    
+    //pridobimo drzavo gostovanja
+    public function getDrzava()
+    {
+        return $this->getGostovanje()->getDrzava();
+    }
+//    //pridobimo osebo na zasedenosti
+//    public function getOseba()
+//    {
+//        return $this->getZasedenost()->getOseba();
+//    }
 
     public function getPodrobno()
     {

@@ -31,14 +31,20 @@ class Gostovanje
      * @var string
      */
     protected $vrsta;
-
+    
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="Zamejstvo", description="Zamejstvo")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
      */
     protected $zamejstvo;
-
+    
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Max\I18n(label="Kraj", description="Kraj")
+     * @Max\Ui(type="naziv")
+     * @var string
      */
     protected $kraj;
 
@@ -84,6 +90,16 @@ class Gostovanje
     {
         return $this->vrsta;
     }
+    
+    public function getZamejstvo()
+    {
+        return $this->zamejstvo;
+    }
+    
+    public function getKraj()
+    {
+        return $this->vrsta;
+    }
 
     public function getDogodek()
     {
@@ -109,6 +125,18 @@ class Gostovanje
     public function setVrsta($vrsta)
     {
         $this->vrsta = $vrsta;
+        return $this;
+    }
+    
+    public function setZamejstvo($zamejstvo)
+    {
+        $this->zamejstvo = $zamejstvo;
+        return $this;
+    }
+    
+    public function setKraj($kraj)
+    {
+        $this->kraj = $kraj;
         return $this;
     }
 

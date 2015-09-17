@@ -56,6 +56,43 @@ forms:
                 - name: uprizoritevPredstava
                   type: lookup
                   targetEntity: Produkcija\Entity\Uprizoritev
+    zasedenost: 
+        elements:
+            - planiranZacetek
+            - zacetek
+            - konec
+            - allDay
+#            - oseba
+#        hydrator:
+#            virtual:
+#                - name: oseba
+#                  type: lookup
+#                  targetEntity: App\Entity\Oseba
+    splosni: 
+        elements:
+            - planiranZacetek
+            - zacetek
+            - konec
+            - prostor
+            - allDay
+    gostovanje: 
+        elements:
+            - planiranZacetek
+            - zacetek
+            - konec
+            - allDay
+            - kraj
+            - name: drzava
+              type: toone
+              options: 
+                  label: Država
+                  targetEntity: App\Entity\Drzava
+                  required: false
+        hydrator:
+            virtual:
+                - name: drzava
+                  type: lookup
+                  targetEntity: App\Entity\Drzava
 lists:
     default: 
         filter:
