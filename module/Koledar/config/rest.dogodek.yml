@@ -40,6 +40,22 @@ forms:
                 - name: uprizoritevVaja
                   type: lookup
                   targetEntity: Produkcija\Entity\Uprizoritev
+    predstava: 
+        elements:
+            - zacetek
+            - konec
+            - prostor
+            - name: uprizoritevPredstava
+              type: toone
+              options: 
+                  label: Uprizoritev
+                  targetEntity: Produkcija\Entity\Uprizoritev
+                  required: false
+        hydrator:
+            virtual:
+                - name: uprizoritevPredstava
+                  type: lookup
+                  targetEntity: Produkcija\Entity\Uprizoritev
 lists:
     default: 
         filter:
