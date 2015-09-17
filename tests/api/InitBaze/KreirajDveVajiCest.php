@@ -82,16 +82,13 @@ class KreirajDveVajiCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
+    public function getListDefaultPoUprizoritvi(ApiTester $I)
     {
-//        $listUrl = $this->restUrl . "/vse";
-        $listUrl = $this->restUrl;
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertEquals(4, $resp['state']['totalRecords']);    // zaekrat 4
+        $resp   = $I->successfullyGetList($this->restUrl . "?uprizoritev=" . $this->lookUprizoritev['id'], []);
+        $list   = $resp['data'];
+        $totRec = $resp['state']['totalRecords'];
+        codecept_debug($list);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
     }
 
 }

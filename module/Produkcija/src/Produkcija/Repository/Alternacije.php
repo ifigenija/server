@@ -201,6 +201,11 @@ class Alternacije
             $altPr = $funkcija->getAlternacije()->first();
             $altPr->setPrivzeti(true);
             $funkcija->setPrivzeti($altPr);
+        } else {
+            /**
+             * če brišemo zadnjo alternacijo pri funkciji
+             */
+            $funkcija->setPrivzeti(null);
         }
     }
 

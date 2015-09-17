@@ -25,6 +25,17 @@ class ProgramPremiera
     protected $dokument;
 
     /**
+     * 
+     * ali je premiera pri koproducentu in ne na domačem odru?
+     * 
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     * @Max\I18n(label="programPremiera.priKoproducentu", description="programPremiera.d.priKoproducentu")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $priKoproducentu;
+
+    /**
      * preračuna polja, ki se uporabljajo v matični koprodukciji
      * 
      * naš delež in ostala polja kot zaprošeno morajo biti nastavljena še predno se prenesejo v matično koprodukcijo
@@ -39,7 +50,6 @@ class ProgramPremiera
         // neaktualna polja, ki jih tudi v formi ni:
         $this->stZaposlenih            = 0;
         $this->celotnaVrednostGostovSZ = 0;
-        $this->obiskKopr               = 0;
         $this->obiskGost               = 0;
         $this->obiskZamejo             = 0;
         $this->obiskKoprInt            = 0;
@@ -52,7 +62,14 @@ class ProgramPremiera
         $this->vlozekGostitelja        = 0;
         $this->naziv                   = "";        // dobimo iz uprizoritve
 
-        $this->setPonoviDoma(1);        // le premiera
+
+        if ($this->priKoproducentu) {
+            $this->ponoviKopr = 1;        // le premiera
+            $this->obiskDoma  = 0;
+        } else {
+            $this->ponoviDoma = 1;        // le premiera
+            $this->obiskKopr  = 0;
+        }
         $this->preracunajPoljaZaMatKoprodukcijo();
 
         parent::preracunaj($smer);
@@ -109,9 +126,20 @@ class ProgramPremiera
         return $this->dokument;
     }
 
-    function setDokument(\ProgramDela\Entity\ProgramDela $dokument=null)
+    function setDokument(\ProgramDela\Entity\ProgramDela $dokument = null)
     {
         $this->dokument = $dokument;
+    }
+
+    public function getPriKoproducentu()
+    {
+        return $this->priKoproducentu;
+    }
+
+    public function setPriKoproducentu($priKoproducentu)
+    {
+        $this->priKoproducentu = $priKoproducentu;
+        return $this;
     }
 
 }
