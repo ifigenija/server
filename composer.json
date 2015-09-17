@@ -19,7 +19,8 @@
         "doctrine/orm": "~2.5",
         "doctrine/migrations": "*",
         "zf-commons/zfc-rbac": "~2.4",
-        "doctrine/data-fixtures": "dev-master"
+        "doctrine/data-fixtures": "dev-master",
+        "mpdf/mpdf": "~6.0.0"
     }, 
     "require-dev":{
         "codeception/codeception": "2.1.2",

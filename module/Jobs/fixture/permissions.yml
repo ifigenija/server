@@ -1,0 +1,10 @@
+# ročno vzrževano:
+-
+    name: Job-read
+    description: Branje opravil - samo zase - branje
+-
+    name: Job-write
+    description: Dodajanje in spreminjanje opravil - samo zase
+-
+    name: Job-admin
+    description: Upravljanje opravil za vse uporabnike

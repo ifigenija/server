@@ -64,6 +64,10 @@ module.exports = function (grunt) {
                 cwd: 'module/Zapisi',
                 cmd: classmap_generator
             },
+            autoload_zapisi: {
+                cwd: 'module/Jobs',
+                cmd: classmap_generator
+            },
             proxies: {
                 cmd: function () {
                     if (os.platform() === 'win32') {
@@ -71,7 +75,6 @@ module.exports = function (grunt) {
                     }
                     return  'php ./bin/util.php  orm:generate-proxies';
                 }
-
             }
         },
         clean: {
