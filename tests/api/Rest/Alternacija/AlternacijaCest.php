@@ -78,7 +78,7 @@ class AlternacijaCest
      */
     public function getListDogodkov(ApiTester $I)
     {
-        $resp             = $I->successfullyGetList($this->dogodekUrl, []);
+        $resp             = $I->successfullyGetList($this->dogodekUrl . "/vse", []);
         $list             = $resp['data'];
         $I->assertNotEmpty($list);
         $this->objDogodek = $drzava           = array_pop($list);
@@ -133,6 +133,7 @@ class AlternacijaCest
             'tip'                 => 1,
             'delovnaObveza'       => 2,
             'malica'              => 'zz',
+            'delovnoMesto'        => 'XXX',
             'izmenskoDelo'        => true,
             'individualnaPogodba' => true,
             'jeZaposlenVdrugemJz' => TRUE,
