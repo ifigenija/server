@@ -25,6 +25,15 @@ class Zasedenost
      * @var string
      */
     protected $id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="zasedenost")
+     * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
+     * @Max\I18n(label="zasedenost.oseba",  description="zasedenost.d.oseba")
+     * @Max\Ui(type="toone", required=true)
+     * @var \App\Entity\Oseba
+     */
+    protected $oseba;
 
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="zasedenost")
@@ -36,10 +45,20 @@ class Zasedenost
 
     public function validate($mode = 'update')
     {
-        
+        $this->expect($this->oseba, "Oseba je obvezna", 1000900);
+    }
+    function getOseba()
+    {
+        return $this->oseba;
     }
 
-    public function getId()
+    function setOseba(\App\Entity\Oseba $oseba = null)
+    {
+        $this->oseba = $oseba;
+        return $this;
+    }
+
+        public function getId()
     {
         return $this->id;
     }
