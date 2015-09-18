@@ -22,9 +22,7 @@ class Besedila
         "default" => [
             "naslov"                => ["alias" => "p.naslov"],
             "stevilka"              => ["alias" => "p.stevilka"],
-            "avtor"                 => ["alias" => "p.avtor"],
             "naslovIzvirnika"       => ["alias" => "p.naslovIzvirnika"],
-            "prevajalec"            => ["alias" => "p.naslov"],
             "zaloznik"              => ["alias" => "p.zaloznik"],
             "internacionalniNaslov" => ["alias" => "p.internacionalniNaslov"]
         ],
@@ -53,13 +51,11 @@ class Besedila
 
             $naslov          = $e->like('lower(p.naslov)', ':query');
             $stevilka        = $e->like('lower(p.stevilka)', ':query');
-            $avtor           = $e->like('lower(p.avtor)', ':query');
             $naslovIzvirnika = $e->like('lower(p.naslovIzvirnika)', ':query');
-            $prevajalec      = $e->like('lower(p.prevajalec)', ':query');
             $zaloznik        = $e->like('lower(p.zaloznik)', ':query');
             $intNaslov       = $e->like('lower(p.internacionalniNaslov)', ':query');
 
-            $qb->andWhere($e->orX($naslov, $stevilka, $avtor, $naslovIzvirnika, $prevajalec, $zaloznik, $intNaslov));
+            $qb->andWhere($e->orX($naslov, $stevilka, $naslovIzvirnika, $zaloznik, $intNaslov));
 
             $qb->setParameter('query', strtolower("%{$options['q']}%"), "string");
         }

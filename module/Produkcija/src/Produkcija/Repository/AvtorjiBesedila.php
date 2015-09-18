@@ -32,6 +32,7 @@ class AvtorjiBesedila
     {
         switch ($name) {
             case "default":
+                $this->expect(!(empty($options['besedilo']) ), "Besedilo je obvezno", 1001060);
             case "vse":
                 $qb   = $this->getVseQb($options);
                 $sort = $this->getSort($name);
@@ -45,14 +46,16 @@ class AvtorjiBesedila
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
-
             $naz = $e->like('p.tipAvtorja', ':tipAvtorja');
-
             $qb->andWhere($e->orX($naz));
-
             $qb->setParameter('tipAvtorja', "{$options['q']}%", "string");
         }
-
+        if (!empty($options['besedilo'])) {
+            $qb->join('p.besedilo', 'besedilo');
+            $naz = $e->eq('besedilo.id', ':bes');
+            $qb->andWhere($naz);
+            $qb->setParameter('bes', "{$options['besedilo']}", "string");
+        }
         return $qb;
     }
 

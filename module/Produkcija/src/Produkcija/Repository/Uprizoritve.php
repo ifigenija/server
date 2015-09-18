@@ -25,9 +25,9 @@ class Uprizoritve
             "naslov" => ["alias" => "p.naslov"]
         ],
         "vse"     => [
-            "sifra"  => ["alias" => "p.sifra"],
-            "naslov" => ["alias" => "p.naslov"],
-            "avtor" => ["alias" => "p.avtor"],
+            "sifra"         => ["alias" => "p.sifra"],
+            "naslov"        => ["alias" => "p.naslov"],
+            "avtor"         => ["alias" => "p.avtor"],
             "datumPremiere" => ["alias" => "p.datumPremiere"]
         ]
     ];
@@ -36,13 +36,13 @@ class Uprizoritve
     {
         switch ($name) {
             case "vse":
-                $qb = $this->getVseQb($options);
+                $qb   = $this->getVseQb($options);
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $this->expect(!(empty($options['besedilo']) ), "Besedilo je obvezno", 770071);
-                $qb = $this->getVseQb($options);
+                $qb   = $this->getVseQb($options);
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
@@ -92,7 +92,14 @@ class Uprizoritve
             $num = $this->getServiceLocator()->get('stevilcenje.generator');
             $object->setSifra($num->generate('uprizoritev'));
         }
+        $object->preracunaj();
         parent::create($object, $params);
+    }
+
+    public function update($object, $params = null)
+    {
+        $object->preracunaj();
+        parent::update($object, $params);
     }
 
 }

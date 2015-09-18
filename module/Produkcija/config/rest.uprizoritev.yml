@@ -22,7 +22,7 @@ forms:
             - datumPremiere
             - maticniOder
             - stOdmorov
-            - avtor
+#            - avtor
             - gostujoca
             - trajanje
             - opis

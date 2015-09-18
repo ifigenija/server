@@ -66,11 +66,11 @@ class StrosekUprizoritveFixture
         if ($v[8]) {
             $sk    = (integer) strtok($v[8], ".");
             $podsk = (integer) strtok(".");
-            echo " .............    sk=" . $sk . PHP_EOL;
-            echo " ............. podsk=" . $podsk . PHP_EOL;
-            print_r($podsk);
+//            echo " .............    sk=" . $sk . PHP_EOL;
+//            echo " ............. podsk=" . $podsk . PHP_EOL;
+//            print_r($podsk);
             $value = $vrstaStroskaR->findOneBy(["skupina" => $sk, "podskupina" => $podsk]);
-            var_dump($value);
+//            var_dump($value);
             $o->setVrstaStroska($value);
         }
 

@@ -29,7 +29,7 @@ class UprizoritevFixture
 
     public function getDependencies()
     {
-        return array('TestFixture\BesediloFixture', 'TestFixture\ProstorFixture', 'TestFixture\ProdukcijskaHisaFixture'); // fixture classes fixture is dependent on 
+        return array('TestFixture\BesediloFixture', 'TestFixture\ProstorFixture', 'TestFixture\ProdukcijskaHisaFixture','TestFixture\AvtorBesedilaFixture', );
     }
 
     /**
@@ -69,7 +69,7 @@ class UprizoritevFixture
                 $getref
         );
         $o->setStOdmorov($v[8]);
-        $o->setAvtor($v[9]);
+//        $o->setAvtor($v[9]);
         $o->setGostujoca($v[10]);
         $o->setTrajanje($v[11]);
         $o->setOpis($v[12]);
@@ -99,6 +99,7 @@ class UprizoritevFixture
             $o->setProducent($getref);
         }
 
+        $o->preracunaj();
         $o->validate();
 
         $referenca = 'Uprizoritev-' . $v[0];

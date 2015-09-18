@@ -276,9 +276,8 @@ class Uprizoritev
      */
     protected $predstave;
 
-
     /**
-     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Besedilo")
+     * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Besedilo", inversedBy="uprizoritve")
      * @Max\I18n(label="uprizoritev.besedilo",  description="uprizoritev.d.besedilo")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Besedilo
@@ -323,7 +322,35 @@ class Uprizoritev
         $this->stroski        = new ArrayCollection();
         $this->vaje           = new ArrayCollection();
         $this->predstave      = new ArrayCollection();
+    }
 
+    public function preracunaj()
+    {
+        if ($this->besedilo) {
+            $avtorji   = $zaporedna = []; //init
+            foreach ($this->besedilo->getAvtorji() as $avt) {
+                if ($avt->getAliVNaslovu()) {
+                    if ($avt->getOseba()) {
+                        $avtorji[] = array('zaporedna' => $avt->getZaporedna(), "polnoime" => $avt->getOseba()->getPolnoIme());
+                    }
+                }
+            }
+            /**
+             * sort po zaporedni
+             */
+            foreach ($avtorji as $key => $row) {
+                $zaporedna[$key] = $row['zaporedna'];
+            }
+            array_multisort($zaporedna, SORT_ASC, $avtorji);
+
+            /**
+             * napolni polje avtor po avtorjih, ločenih z vejico
+             */
+            $this->avtor = "";    //init
+            foreach ($avtorji as $avt) {
+                $this->avtor = (empty($this->avtor)) ? $avt['polnoime'] : $this->avtor . ", " . $avt['polnoime'];
+            }
+        }
     }
 
     public function validate($mode = 'update')
@@ -480,8 +507,6 @@ class Uprizoritev
         return $this->predstave;
     }
 
-
-
     public function getBesedilo()
     {
         return $this->besedilo;
@@ -568,7 +593,7 @@ class Uprizoritev
         return $this;
     }
 
-    public function setMaticniOder(\Prodaja\Entity\Prostor $maticniOder=null)
+    public function setMaticniOder(\Prodaja\Entity\Prostor $maticniOder = null)
     {
         $this->maticniOder = $maticniOder;
         return $this;
@@ -670,25 +695,25 @@ class Uprizoritev
         return $this;
     }
 
-    public function setBesedilo(\Produkcija\Entity\Besedilo $besedilo=null)
+    public function setBesedilo(\Produkcija\Entity\Besedilo $besedilo = null)
     {
         $this->besedilo = $besedilo;
         return $this;
     }
 
-    public function setZvrstUprizoritve(\Produkcija\Entity\ZvrstUprizoritve $zvrstUprizoritve=null)
+    public function setZvrstUprizoritve(\Produkcija\Entity\ZvrstUprizoritve $zvrstUprizoritve = null)
     {
         $this->zvrstUprizoritve = $zvrstUprizoritve;
         return $this;
     }
 
-    public function setZvrstSurs(\Produkcija\Entity\ZvrstSurs $zvrstSurs=null)
+    public function setZvrstSurs(\Produkcija\Entity\ZvrstSurs $zvrstSurs = null)
     {
         $this->zvrstSurs = $zvrstSurs;
         return $this;
     }
 
-    public function setProducent(\ProgramDela\Entity\ProdukcijskaHisa $producent=null)
+    public function setProducent(\ProgramDela\Entity\ProdukcijskaHisa $producent = null)
     {
         $this->producent = $producent;
         return $this;
