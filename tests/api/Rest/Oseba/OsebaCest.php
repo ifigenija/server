@@ -43,6 +43,8 @@ class OsebaCest
     private $alternacijaUrl       = '/rest/alternacija';
     private $sodelovanjeUrl       = '/rest/sodelovanje';
     private $zaposlitevUrl        = '/rest/zaposlitev';
+    private $zasedenostUrl        = '/rest/zasedenost';
+    private $dogodekUrl           = '/rest/dogodek';
     private $id;
     private $obj;
     private $obj2;
@@ -1109,6 +1111,71 @@ class OsebaCest
     }
 
     /**
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecZasedenosti(ApiTester $I)
+    {
+        $data                 = [
+            'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
+            'oseba'   => $this->obj['id']
+        ];
+        $this->objZasedenost1 = $ent                  = $I->successfullyCreate($this->zasedenostUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        $data                 = [
+            'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
+            'oseba'   => $this->obj2['id']
+        ];
+        $this->objZasedenost2 = $ent                  = $I->successfullyCreate($this->zasedenostUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        
+        $data                 = [
+            'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
+            'oseba'   => $this->obj2['id']
+        ];
+        $this->objZasedenost3 = $ent                  = $I->successfullyCreate($this->zasedenostUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        $data = [
+            'planiranZacetek' => '2011-02-01T00:00:00+0100',
+            'zacetek'         => '2012-02-01T00:00:00+0100',
+            'konec'           => '2013-02-01T00:00:00+0100',
+            'status'          => "100s",
+            'razred'          => "500s",
+            'termin'          => null,
+            'ime'             => null,
+            'predstava'       => null,
+            'zasedenost'      => $this->objZasedenost1['id'],
+            'gostovanje'      => null,
+            'dogodekIzven'    => null,
+            'prostor'         => null,
+            'sezona'          => null,
+        ];
+        $ent  = $I->successfullyCreate($this->dogodekUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        
+        $data = [
+            'planiranZacetek' => '2011-02-01T00:00:00+0100',
+            'zacetek'         => '2012-02-01T00:00:00+0100',
+            'konec'           => '2013-02-01T00:00:00+0100',
+            'status'          => "100s",
+            'razred'          => "500s",
+            'termin'          => null,
+            'ime'             => null,
+            'predstava'       => null,
+            'zasedenost'      => $this->objZasedenost2['id'],
+            'gostovanje'      => null,
+            'dogodekIzven'    => null,
+            'prostor'         => null,
+            'sezona'          => null,
+        ];
+        $ent  = $I->successfullyCreate($this->dogodekUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
      * preberemo relacije
      * 
      * @depends createVecTelefonskih
@@ -1201,6 +1268,22 @@ class OsebaCest
         $I->assertEquals(2, count($resp));
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "kontaktneOsebe", $this->objKontaktna1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+    
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecZasedenosti
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZZasedenostmi(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "zasedenosti", "");
+        $I->assertEquals(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "zasedenosti", $this->objZasedenost2['id']);
         $I->assertEquals(1, count($resp));
     }
 

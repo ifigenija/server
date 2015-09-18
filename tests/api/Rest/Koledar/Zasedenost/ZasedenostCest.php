@@ -32,7 +32,7 @@ class ZasedenostCest
     private $dogodekUrl = '/rest/dogodek';
     private $obj;
     private $objDogodek;
-    private $objVaja;
+    private $lookOseba;
 
     public function _before(ApiTester $I)
     {
@@ -44,6 +44,11 @@ class ZasedenostCest
         
     }
 
+    public function lookupOsebo(ApiTester $I)
+    {
+        $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0001", false);
+        $I->assertNotEmpty($ent);
+    }
 
     /**
      *  kreiramo zapis
@@ -54,11 +59,12 @@ class ZasedenostCest
     {
         $data      = [
             'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
+            'oseba' => $this->lookOseba['id']
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
+        $I->assertEquals($ent['oseba'], $this->lookOseba['id']);
     }
 
     /**
@@ -73,8 +79,8 @@ class ZasedenostCest
             'planiranZacetek' => '2011-02-01T00:00:00+0100',
             'zacetek'         => '2012-02-01T00:00:00+0100',
             'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => "100",
-            'razred'          => "500",
+            'status'          => "100s",
+            'razred'          => "500s",
             'termin'          => null,
             'ime'             => null,
             'predstava'       => null,
@@ -87,7 +93,7 @@ class ZasedenostCest
         $this->objDogodek = $ent              = $I->successfullyCreate($this->dogodekUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['status'], "100");
+        $I->assertEquals($ent['status'], "100s");
     }
 
     /**
