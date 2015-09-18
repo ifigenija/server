@@ -163,9 +163,9 @@ class Funkcija
     public function validate($mode = 'update')
     {
         $this->setPodrocje($this->getTipFunkcije()->getPodrocje());
-//        if ($this->podrocje === "igralec") {
-//            $this->expect($this->velikost, "Za igralce je velikost vloge obvezen podatek", 1000566);
-//        }
+        if ($this->podrocje === "igralec") {
+            $this->expect($this->velikost, "Za igralce je velikost vloge obvezen podatek", 1000566);
+        }
     }
 
     /**
