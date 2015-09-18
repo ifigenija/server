@@ -6,6 +6,8 @@ use Aaa\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Max\Ann\Entity as Max;
 use Max\Entity\Base;
+use Max\Exception\MaxException;
+use Zend\Filter\Word\SeparatorToSeparator;
 
 /**
  * Entiteta Datoteke
@@ -30,6 +32,12 @@ class Report
      */
     protected $id;
 
+    /**
+     *
+     * @var Job
+     * @ORM\ManyToOne(targetEntity="Job", inversedBy="reports")
+     */
+    protected $job;
     /**
      *
      * @var string
@@ -86,7 +94,99 @@ class Report
      */
     protected $createdAt;
 
+    /**
+     * Vrne privzeti root upload direktorija
+     *
+     * @param $hash
+     * @return string
+     * @throws MaxException
+     * @todo - zagotovi možnost določitve upload direktorija v konfigu
+     */
+    public function getUploadDirectory($hash= '')
+    {
+        $dir = 'data/upload';
 
+        if (!is_dir($dir)) {
+            throw new MaxException('Upload direktorij ne obstaja', 7700602);
+        }
+
+        if (!is_writable($dir)) {
+            throw new MaxException("Upload direktorij $dir ni zapisljiv", '0114');
+        }
+
+        if ($hash === '') {
+            $hash = $this->hash;
+        }
+
+        for ($ii = 1; $ii <= 4; $ii++) {
+            $dir .= '/' . substr($hash, $ii - 1, 1);
+        }
+
+        return $dir;
+    }
+
+
+    /**
+     * Kreira folder za uploadano datoteko in vrne destination filename za uploadano datoteko
+     *
+     * @param string $hash
+     * @return string polni file name kamor se shrani datoteka
+     * @throws MaxException
+     */
+    public function zagotoviFolder($hash)
+    {
+        $dir = $this->getUploadDirectory($hash);
+
+        if (!is_dir($dir)) {
+            $success = mkdir($dir, 02775, true);
+            if (!$success) {
+                throw new MaxException("Ne morem ustvariti direktorija $dir", 7700603);
+            }
+        } else {
+            if (!is_writable($dir)) {
+                throw new MaxException("Direktorij $dir ni zapisljiv", 7700604);
+            }
+        }
+
+        return $this->getFileName($hash);
+    }
+
+
+    /**
+     * Preveri ali obstaja katera druga datoteka z istim hashom
+     *
+     * @param string $hash
+     * @param int $size
+     * @return bool
+     * @throws MaxException
+     */
+    public function checkSameFileExists($hash, $size = 0)
+    {
+        $filename = $this->getFileName($hash);
+        if (file_exists($filename)) {
+            $stat = stat($filename);
+            if ($stat['size'] !== $size) {
+                throw new MaxException("Isti hash, različna velikost... h: $hash " . $this->getTitle(), 7700605);
+            }
+        }
+    }
+
+    /**
+     * Vrne filename za datoteko z znanim hashom
+     *
+     * @param string $hash
+     * @return string
+     */
+    public function getFileName($hash = '')
+    {
+        if ($hash === '') {
+            $hash = $this->hash;
+        }
+        $f    = new SeparatorToSeparator('-', '');
+        $hash = $f->filter($hash);
+        $dir  = $this->getUploadDirectory($hash);
+        return $dir . '/' . $hash;
+    }
 
     public function countTransfer()
     {
@@ -113,14 +213,6 @@ class Report
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFilename()
-    {
-        return $this->filename;
     }
 
     /**
@@ -225,6 +317,24 @@ class Report
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return Job
+     */
+    public function getJob()
+    {
+        return $this->job;
+    }
+
+    /**
+     * @param Job $job
+     * @return Report
+     */
+    public function setJob($job)
+    {
+        $this->job = $job;
+        return $this;
     }
 
 

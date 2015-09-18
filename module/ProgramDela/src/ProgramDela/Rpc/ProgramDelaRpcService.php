@@ -470,4 +470,37 @@ class ProgramDelaRpcService
         return $uspeh;
     }
 
+    /**
+     *
+     * Tiskanje dokumenta
+     *
+     * @param string $dokument
+     * @param array $printOptions
+     * @return array
+     * @throws MaxException
+     */
+    public function tiskajDokument($dokument, $printOptions)
+    {
+
+        $this->expectUUID($dokument
+            , $this->translate('Pričakujem ID dokumenta')
+            , 520082);
+        $dr = $this->getDokRep();
+        $dok = $dr->find($dokument);
+        $this->expect($dok
+            , $this->translate('Dokument ne obstaja')
+            , 520081);
+        $this->expectAuthorized($dok, 'read');
+
+        $report = '\ProgramDela\Task\ProgramDelaReport';
+
+        try {
+            $job = $this->docPrint($report, $dokument, $printOptions);
+            return $job;
+        } catch (\Exception $ex) {
+            throw new MaxException($this->translate('Napaka pri tiskanju dokumenta:')
+                . ' ' . $ex->getCode() . ' '
+                . $this->translate($ex->getMessage()), 520080, $ex);
+        }
+    }
 }

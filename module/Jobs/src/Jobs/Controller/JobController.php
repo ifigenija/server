@@ -21,25 +21,26 @@ class JobController extends ActionController
 {
 
     /**
+     * Tip session
+     */
+    public $sess;
+    /**
      * Repozitorij entitet
      *
      * @var JobManager
      */
     protected $jr;
-
     /**
      * Razred entitete
      * @var string
      */
     protected $entityClass = 'Jobs\Entity\Job';
-
     /**
      * Filter za parsanje imena entitet
      *
      * @var \App\Filter\StripEntity
      */
     protected $f;
-
     /**
      * Filter za parsanje imena entitet kratko -> polno
      *
@@ -48,18 +49,12 @@ class JobController extends ActionController
     protected $f1;
 
     /**
-     * Tip session
-     */
-    public $sess;
-
-
-    /**
      * Prikaže seznam vseh jobov
      */
     public function listAction()
     {
         $formManager = $this->serviceLocator->get('FormElementManager');
-        $form = $formManager->get('Tip\Form\Filter\Simple');
+        $form        = $formManager->get('Tip\Form\Filter\Simple');
 
         $form->setName('filter');
 
@@ -72,7 +67,7 @@ class JobController extends ActionController
 
         $form->setData($this->request->getPost());
         if ($form->isValid()) {
-            $list = $jr->getPaginator($form->getData());
+            $list      = $jr->getPaginator($form->getData());
             $paginator = new Paginator(new DoctrinePaginator(($list)));
 
             $page = ($this->request->getQuery('page')) ? $this->request->getQuery('page') : 1;
@@ -83,7 +78,7 @@ class JobController extends ActionController
         }
 
         $vm = new ViewModel([
-            'filter' => $form,
+            'filter'    => $form,
             'paginator' => $paginator
         ]);
         return $vm;
@@ -102,7 +97,7 @@ class JobController extends ActionController
         /** @var JobManager $jr */
         $jr = $this->getServiceLocator()->get('jobmanager.service');
 
-        $jobs = $jr->findBy(['status'=> '0']);
+        $jobs   = $jr->findBy(['status' => '0']);
         $output = "";
         foreach ($jobs as $job) {
             $output .= "{$job->getId()}\t";
@@ -117,13 +112,13 @@ class JobController extends ActionController
      */
     public function cmdListRunningAction()
     {
-        if (!$this->getRequest() instanceof Request)
+        if (!$this->getRequest() instanceof Request) {
             return 'Akcija je namenjena konzoli';
+        }
 
         $console = $this->getServiceLocator()->get('console');
         /** @var JobManager $jr */
         $jr = $this->getServiceLocator()->get('jobmanager.service');
-
 
         $jobs = $jr->findByStatus(1);
 
@@ -143,8 +138,9 @@ class JobController extends ActionController
     {
         $console = $this->getServiceLocator()->get('console');
 
-        if (!$this->getRequest() instanceof Request)
+        if (!$this->getRequest() instanceof Request) {
             return 'Akcija je namenjena konzoli';
+        }
 
         $id = $this->getRequest()->getParam('id');
 
@@ -206,29 +202,26 @@ class JobController extends ActionController
     public function cmdLogAction()
     {
         $console = $this->getServiceLocator()->get('console');
-        if (!$this->getRequest() instanceof Request)
+        if (!$this->getRequest() instanceof Request) {
             return 'Akcija je namenjena konzoli';
+        }
 
         $id = $this->getRequest()->getParam('id');
-
         try {
             /** @var JobManager $jr */
             $jr = $this->getServiceLocator()->get('jobmanager.service');
 
 
             $job = $jr->find($id);
-            if (!$job)
+            if (!$job) {
                 throw new MaxException('Job ne obstaja', 7700305);
-
+            }
             $log = $job->getLog();
+            return !$log ? "Log je prazen\n" : $log;
         } catch (\Exception $e) {
             return $console->colorize("Napaka: {$e->getMessage()}\n", ColorInterface::RED);
         }
 
-        if (!$log)
-            return "Log je prazen\n";
-        else
-            return $log;
     }
 
     /**
@@ -237,8 +230,9 @@ class JobController extends ActionController
     public function cmdResetAction()
     {
         $console = $this->getServiceLocator()->get('console');
-        if (!$this->getRequest() instanceof Request)
+        if (!$this->getRequest() instanceof Request) {
             return 'Akcija je namenjena konzoli';
+        }
 
         $id = $this->getRequest()->getParam('id');
 
@@ -248,16 +242,14 @@ class JobController extends ActionController
 
 
             $job = $jr->find($id);
-            if (!$job)
+            if (!$job) {
                 throw new MaxException('Job ne obstaja', 7700205);
+            }
 
             $jr->resetJob($job);
-            $this->em->flush();
 
             if ($job->getStatus() == 0) {
                 return $console->colorize("Job vrnjen v čakanje\n", ColorInterface::GREEN);
-            } else {
-                return $console->colorize("Prišlo je do napake\n", ColorInterface::RED);
             }
         } catch (\Exception $e) {
             $output = new ConsoleModel();
@@ -274,10 +266,11 @@ class JobController extends ActionController
     public function cmdFailAction()
     {
         $console = $this->getServiceLocator()->get('console');
-        if (!$this->getRequest() instanceof Request)
+        if (!$this->getRequest() instanceof Request) {
             return 'Akcija je namenjena konzoli';
+        }
 
-        $id = $this->getRequest()->getParam('id');
+        $id      = $this->getRequest()->getParam('id');
         $message = $this->getRequest()->getParam('error');
 
         try {
@@ -285,18 +278,16 @@ class JobController extends ActionController
             $jr = $this->getServiceLocator()->get('jobmanager.service');
 
             $job = $jr->find($id);
-            if (!$job)
+            if (!$job) {
                 throw new MaxException('Job ne obstaja', 7700405);
-
+            }
             $jr->failJob($job, $message);
-            $this->em->flush();
 
-            return $console->colorize("Job uspešno zaključen\n", ColorInterface::RED);
+            return $console->colorize("Job postavljen v stanje neuspešno zaključen\n", ColorInterface::RED);
         } catch (\Exception $e) {
             $output = new ConsoleModel();
             $output->setResult($console->colorize("Napaka: {$e->getMessage()}\n", ColorInterface::RED));
             $output->setErrorLevel(1);
-
             return $output;
         }
     }

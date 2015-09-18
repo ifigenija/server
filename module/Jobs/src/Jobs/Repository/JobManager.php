@@ -28,7 +28,7 @@ class JobManager
 
     /**
      * Hrani default sort opcije, ki se uporabljajo na seznamih
-     * 
+     *
      * @var array
      */
     protected $sortOptions = [
@@ -65,26 +65,24 @@ class JobManager
         $qb->orderBy($sort->order, $sort->dir);
 
         if ($srch) {
-            
+
         }
         return new DoctrinePaginator(new Paginator($qb));
     }
 
-    public function getJsonHydrator($options = [])
+    public function getInputHydrator()
     {
-        return parent::getJsonHydrator(array_merge_recursive([
-                'byValue' => [
-                    'user',
-                    'reports'
-                ],
-                'exclude' => [
-                    'data',
-                    'user.roles',
-                    'user.hierRoles',
-                    'user.groups',
-                    'user.email'
-                ]
-                    ], $options));
+        return parent::getJsonHydrator([
+            'exclude' => [
+                'user',
+                'reports',
+                'data',
+                'user.roles',
+                'user.hierRoles',
+                'user.groups',
+                'user.email'
+            ]
+        ]);
     }
 
     /**
@@ -102,6 +100,23 @@ class JobManager
             throw new MaxException('Status joba je neveljaven', 7700002);
     }
 
+    public function getJsonHydrator($options = [])
+    {
+        return parent::getJsonHydrator(array_merge_recursive([
+            'byValue' => [
+                'user',
+                'reports'
+            ],
+            'exclude' => [
+                'data',
+                'user.roles',
+                'user.hierRoles',
+                'user.groups',
+                'user.email'
+            ]
+        ], $options));
+    }
+
     /**
      * Pridobi seznam jobov
      * @param null $user
@@ -111,7 +126,7 @@ class JobManager
     public function listJobs($user = null, $options = [])
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
-        $e = $qb->expr();
+        $e  = $qb->expr();
         $qb->select('j')->from('Jobs\Entity\Job', 'j');
 
         if ($user) {
@@ -167,15 +182,14 @@ class JobManager
      * user: uporabnik, ki je prožil job
      * sync: proži job takoj?
      * data: podatki za task
-     * 
+     *
      * @param array $params
-     * @return Job 
+     * @return Job
      */
     public function createJob(array $params)
     {
         $job = new Job();
-
-        // nastavi parametre za task in njihove defaulte 
+        // nastavi parametre za task in njihove defaulte
         $this->configureJob($job, $params);
 
         // Preveri pravilnost taska
@@ -193,27 +207,9 @@ class JobManager
     }
 
     /**
-     * Poženi job (izvedi task)
+     * Iz vhodnih parametrov nastavi vse potrebne parametre ali pa
+     * sproži napako
      *
-     * @param Job $job
-     * @param array $args
-     * @throws MaxException
-     * @throws \Exception
-     * @throws BadTaskDataException
-     */
-    public function runJob(Job $job, $args = [])
-    {
-        if ($job->getStatus() != 0)
-            throw new MaxException('Neveljavno stanje joba', 7700006);
-
-        $task = $this->checkTask($job);
-        $task->runTask(isset($args['throw']));
-    }
-
-    /**
-     * Iz vhodnih parametrov nastavi vse potrebne parametre ali pa 
-     * sproži napako 
-     * 
      * @param Job $job
      * @param array $params
      * @throws MaxException
@@ -243,19 +239,19 @@ class JobManager
         }
 
         // preverim, če ima uporabnik dostop do zagona job-a
-//        if (!empty($meta->acl)) {
-//            if (!$acl->isGranted($meta->acl)) {
-//                throw new MaxException('Uporabnik nima dovoljenja za izvajanje taska', 7700056);
-//            }
-//        } else {
-//            throw new MaxException('Dovoljenje na tasku ni določeno', 7700054);
-//        }
+        if (!empty($meta->acl)) {
+            if (!$acl->isGranted($meta->acl)) {
+                throw new MaxException('Uporabnik nima dovoljenja za izvajanje taska', 7700056);
+            }
+        } else {
+            throw new MaxException('Dovoljenje na tasku ni določeno', 7700054);
+        }
 
         // nastacimo "lepo ime job-a
         if (!empty($params['name'])) {
             $job->setName($params['name']);
         } else {
-            $job->setName($meta->name ? : $params['task'] );
+            $job->setName($meta->name ?: $params['task']);
         }
 
         $job->setStatus(0);
@@ -269,54 +265,19 @@ class JobManager
         }
 
         $job->setHidden(isset($params['hidden']) ? true : false);
-    }
-
-    /**
-     * Vrne job v čakanje
-     * 
-     * @param Job $job
-     */
-    public function resetJob(Job $job)
-    {
-        $job->setStatus(0);
-        $job->setLog(null);
-
-        // Pobrišem reporte
-        $dr = $this->getEntityManager()->getRepository('Zapisi\Entity\Datoteka');
-        $reports = $job->getReports();
-        $job->getReports()->clear();
-        foreach ($reports as $rep) {
-            $dr->brisiDatoteko($rep, null, $user);
-        }
-
-        $job->setIzveden(null);
-        $job->setAlert(null);
-    }
-
-    /**
-     * Spremeni status joba v napako, tudi če je v izvajanju
-     * 
-     * @param Job $job
-     * @param string $error Sporočilo napake
-     */
-    public function failJob(Job $job, $error)
-    {
-        $job->setStatus(3);
-        $job->setLog("{$job->getLog()}$error");
-
-        $job->setIzveden(new DateTime());
-        $job->setAlert(true);
+        $this->getEntityManager()->persist($job);
+        $this->getEntityManager()->flush($job);
     }
 
     /**
      * Pridobivanje metapodatkov o tasku iz annotacija
-     * 
+     *
      * @param Job $job
      * @return Meta Task Metadata
      */
     public function getTaskMeta(Job $job)
     {
-        $em = $this->getEntityManager();
+        $em    = $this->getEntityManager();
         $class = $job->getTask();
 
         $cache = $em->getConfiguration()->getMetadataCacheImpl();
@@ -345,22 +306,8 @@ class JobManager
                 }
             }
         }
-        $meta->name = $meta->name ? : $class;
+        $meta->name = $meta->name ?: $class;
         return $meta;
-    }
-
-    /**
-     * Serializiraj entitete za vnos v bazo.
-     * Vrne polje oblike
-     * @param $entities
-     * @return array
-     */
-    public function serializeEntities($entities)
-    {
-        $ent_out = [];
-        foreach ($entities as $e)
-            $ent_out[] = $e->getId();
-        return $ent_out;
     }
 
     /**
@@ -378,44 +325,93 @@ class JobManager
             throw new MaxException('Task ne obstaja' . $task, 7700001);
         }
 
-
         if (!($job->getUser() instanceof User)) {
             throw new MaxException('Job nima nastavljenega uporabnika' . $task, 7700099);
         }
 
         try {
-            $task = new $task($job, $this->getEntityManager());
-            $task->setServiceLocator($this->getServiceLocator());
-            $task->checkData();
+            /** @var AbstractTask $inst */
+            $inst = new $task($job, $this->getEntityManager());
+            $inst->setServiceLocator($this->getServiceLocator());
+            $inst->checkData();
+            return $inst;
         } catch (\Exception $e) {
             throw new BadTaskDataException('napačni podatki za task', 500, $e);
         }
-        return $task;
         //  } else {
         //      throw new \Tip\Exception\DostopZavrnjen('Nimate dovoljenja ta izvajanje opravila', 7700099);
         //  }
     }
 
     /**
-     * Obstajajo čakajoči jobi za userja?
-     * 
-     * @param string $user
-     * @return boolean
+     * Poženi job (izvedi task)
+     *
+     * @param Job $job
+     * @param array $args
+     * @throws MaxException
+     * @throws \Exception
+     * @throws BadTaskDataException
      */
-    public function jobsWaiting($user = null)
+    public function runJob(Job $job, $args = [])
     {
-        $qb = $this->getEntityManager()->createQueryBuilder();
-        $e = $qb->expr();
-        $qb->select('j')->from('\Jobs\Entity\Job', 'j')->where($e->lt('j.status', 2));
+        if ($job->getStatus() != 0)
+            throw new MaxException('Neveljavno stanje joba', 7700006);
 
-        if ($user) {
-            $qb->andWhere('j.user = :user');
-            $qb->setParameter('user', $user);
+        $task = $this->checkTask($job);
+        $task->runTask(isset($args['throw']));
+    }
+
+    /**
+     * Vrne job v čakanje
+     *
+     * @param Job $job
+     */
+    public function resetJob(Job $job)
+    {
+        $job->setStatus(0);
+        $job->setLog(null);
+
+        // Pobrišem reporte
+        $dr      = $this->getEntityManager()->getRepository('Zapisi\Entity\Datoteka');
+        $reports = $job->getReports();
+        $job->getReports()->clear();
+        foreach ($reports as $rep) {
+            $dr->brisiDatoteko($rep, null, $user);
         }
 
-        $jobs = $qb->getQuery()->getResult();
+        $job->setIzveden(null);
+        $job->setAlert(null);
+        $this->getEntityManager()->flush($job);
+    }
 
-        return count($jobs) > 0;
+    /**
+     * Spremeni status joba v napako, tudi če je v izvajanju
+     *
+     * @param Job $job
+     * @param string $error Sporočilo napake
+     */
+    public function failJob(Job $job, $error)
+    {
+        $job->setStatus(3);
+        $job->setLog("{$job->getLog()}$error");
+
+        $job->setIzveden(new DateTime());
+        $job->setAlert(true);
+        $this->getEntityManager()->flush($job);
+    }
+
+    /**
+     * Serializiraj entitete za vnos v bazo.
+     * Vrne polje oblike
+     * @param $entities
+     * @return array
+     */
+    public function serializeEntities($entities)
+    {
+        $ent_out = [];
+        foreach ($entities as $e)
+            $ent_out[] = $e->getId();
+        return $ent_out;
     }
 
     /**
@@ -434,8 +430,30 @@ class JobManager
     }
 
     /**
-     * Vrne extractano verzijo job-a 
-     * 
+     * Obstajajo čakajoči jobi za userja?
+     *
+     * @param string $user
+     * @return boolean
+     */
+    public function jobsWaiting($user = null)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $e  = $qb->expr();
+        $qb->select('j')->from('\Jobs\Entity\Job', 'j')->where($e->lt('j.status', 2));
+
+        if ($user) {
+            $qb->andWhere('j.user = :user');
+            $qb->setParameter('user', $user);
+        }
+
+        $jobs = $qb->getQuery()->getResult();
+
+        return count($jobs) > 0;
+    }
+
+    /**
+     * Vrne extractano verzijo job-a
+     *
      * @param Job $job
      * @return array
      */
@@ -443,8 +461,8 @@ class JobManager
     {
         $hydr = $this->getJsonHydrator();
 
-        $meta = $this->getTaskMeta($job);
-        $jobArr = $hydr->extract($job);
+        $meta               = $this->getTaskMeta($job);
+        $jobArr             = $hydr->extract($job);
         $jobArr['taskName'] = $meta->name;
         $jobArr['taskMeta'] = $this->getTaskMeta($job);
 

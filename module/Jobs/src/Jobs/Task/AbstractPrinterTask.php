@@ -9,6 +9,7 @@ use Tip\Printing\Cups;
 use Tip\Printing\Model\TableModel;
 use Tip\Printing\mPdfPrinter;
 use Tip\Repository\Popa;
+use Zend\Config\Config;
 use Zend\I18n\Translator\Translator;
 use Zend\Mvc\Service\ViewHelperManagerFactory;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -67,11 +68,8 @@ abstract class AbstractPrinterTask
     public function addDocumentReport($templateName, $title, $entity, $vars = [])
     {
         $template = $this->getTemplate($templateName);
-        if (!$template) {
-
-        }
-
-        $this->setTmpl('');
+        $config   = $this->getTemplateConfig($name);
+        $this->setTmpl($config['background']);
         // če imam template za ozadje, ne potrebujem headerja in footerja
         $isHeaderFooter = !$this->tmpl;
 
@@ -80,9 +78,9 @@ abstract class AbstractPrinterTask
             'ishf'        => $isHeaderFooter,
             '_css'        => '',
             'firma'       => $this->getFirma(),
-            'orientation' => 'Portrait',
-            'margins'     => [0, 0, 0, 0],
-            'pageSize'    => 'A4',
+            'orientation' => $config['orientation'],
+            'margins'     => $config['margins'],
+            'pageSize'    => $config['page_size'],
             'title'       => $title,
             'model'       => $entity,
             'date'        => new DateTime()
@@ -251,7 +249,6 @@ abstract class AbstractPrinterTask
     }
 
 
-
     /**
      * Vse znake pretvori v ASCII, simbole pa zamenja s podčrtajem (_)
      *
@@ -354,11 +351,42 @@ abstract class AbstractPrinterTask
     }
 
     /**
-     *  Default implementacija checkData,
+     * Prbere konfiguracijo predloge iz konfiga aplikacije
+     *
+     * @param string $name
+     * @return array
+     */
+    private function getTemplateConfig($name)
+    {
+        /** @var Config $cfg */
+        $cfg = $this->getServiceLocator()->get('Config');
+
+        $tempalteConfig = $cfg->report_template_config->get($name, []);
+        $defaultConfig  = new Config([
+            'orientation' => "Portrait",
+            'page_size'   => "A4",
+            'backgroud'   => ''
+        ]);
+
+        return $defaultConfig->merge($tempalteConfig)->toArray();
+    }
+
+    /**
+     *  Default implementacija checkData, nastavi parametre makePdf in
      *
      */
     public function checkData()
     {
+        if (!empty($this->data['makeHtml'])) {
+            $this->makeHtml = true;
+        } else {
+            $this->makeHtml = false;
+        }
+        if (!empty($this->data['makePdf'])) {
+            $this->makePdf = true;
+        } else {
+            $this->makePdf = false;
+        }
     }
 
     /**
@@ -407,6 +435,5 @@ abstract class AbstractPrinterTask
         $this->makeHtml = $makeHtml;
         return $this;
     }
-
 
 }

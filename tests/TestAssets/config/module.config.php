@@ -15,5 +15,13 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../templates/report'
         ]
-    ]
+    ],
+    'report_template_config' => [
+        'test-report' => [
+
+        ],
+        'test-report1' => [
+
+        ]
+    ],
 ];

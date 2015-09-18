@@ -6,92 +6,110 @@ return [
             'jobmanager.service' => 'Jobs\Factory\JobManagerFactory'
         ],
     ],
-    'controllers' => [
+    'controllers'     => [
         'invokables' => [
             'Jobs\Job' => 'Jobs\Controller\JobController',
             'Rest\job' => 'Jobs\Controller\JobRestController',
+            'Jobs\ReportFiles' => 'Jobs\Controller\ReportFilesController',
         ]
     ],
-    'console' => [
+    'router'          => [
+        'routes' => [
+            'reports'       => [
+                'type'    => 'Segment',
+                'options' => [
+                    'route'       => '/reports/prenesi/:id',
+                    'defaults'    => [
+                        '__NAMESPACE__' => 'Jobs',
+                        'sekcija'       => 'public',
+                        'action'        => 'prenesi',
+                        'controller'    => 'ReportFiles'
+                    ],
+                    'constraints' => ['id' => \Max\Consts::UUID],
+                ]
+            ]
+        ]
+    ],
+    'console'         => [
         'router' => [
             'routes' => [
-                'job-list' => [
+                'job-list'         => [
                     'options' => [
-                        'route' => 'job list',
+                        'route'    => 'job list',
                         'defaults' => [
                             'controller' => '\Jobs\Job',
-                            'action' => 'cmdList'
+                            'action'     => 'cmdList'
                         ]
                     ]
                 ],
                 'job-list-running' => [
                     'options' => [
-                        'route' => 'job list-running',
+                        'route'    => 'job list-running',
                         'defaults' => [
                             'controller' => '\Jobs\Job',
-                            'action' => 'cmdListRunning'
+                            'action'     => 'cmdListRunning'
                         ]
                     ]
                 ],
-                'job-run' => [
+                'job-run'          => [
                     'options' => [
-                        'route' => 'job run <id>',
+                        'route'    => 'job run <id>',
                         'defaults' => [
                             'controller' => '\Jobs\Job',
-                            'action' => 'cmdRun'
+                            'action'     => 'cmdRun'
                         ]
                     ]
                 ],
-                'job-run-all' => [
+                'job-run-all'      => [
                     'options' => [
-                        'route' => 'job runall',
+                        'route'    => 'job runall',
                         'defaults' => [
                             'controller' => '\Jobs\Job',
-                            'action' => 'cmdRunAll'
+                            'action'     => 'cmdRunAll'
                         ]
                     ]
                 ],
-                'job-fail' => [
+                'job-fail'         => [
                     'options' => [
-                        'route' => 'job fail <id> <error>',
+                        'route'    => 'job fail <id> <error>',
                         'defaults' => [
                             'controller' => '\Jobs\Job',
-                            'action' => 'cmdFail'
+                            'action'     => 'cmdFail'
                         ]
                     ]
                 ],
-                'job-log' => [
+                'job-log'          => [
                     'options' => [
-                        'route' => 'job log <id>',
+                        'route'    => 'job log <id>',
                         'defaults' => [
                             'controller' => '\Jobs\Job',
-                            'action' => 'cmdLog'
+                            'action'     => 'cmdLog'
                         ]
                     ]
                 ],
-                'job-reset' => [
+                'job-reset'        => [
                     'options' => [
-                        'route' => 'job reset <id>',
+                        'route'    => 'job reset <id>',
                         'defaults' => [
                             'controller' => '\Jobs\Job',
-                            'action' => 'cmdReset'
+                            'action'     => 'cmdReset'
                         ]
                     ]
                 ]
             ]
         ]
     ],
-    'view_manager' => [
+    'view_manager'    => [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ]
     ],
-    'view_helpers'       => [
+    'view_helpers'    => [
         'invokables' => [
-            'table'         => 'Jobs\View\Helper\Table',
+            'table' => 'Jobs\View\Helper\Table',
         ]
     ],
-    'report_renderer'    => [
+    'report_renderer' => [
         'template_map' => [
             'printlayout/table'    => __DIR__ . '/../templates/report/table.phtml',
             'printlayout/document' => __DIR__ . '/../templates/report/document.phtml',

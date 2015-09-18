@@ -65,7 +65,7 @@ class Job extends Base
     
     /**
      * Seznam reportov (datotek)
-     * @ORM\ManyToMany(targetEntity="\Zapisi\Entity\Datoteka")
+     * @ORM\OneToMany(targetEntity="Jobs\Entity\Report", mappedBy="job", orphanRemoval=true )
      *
      * @var ArrayCollection
      */
@@ -73,7 +73,7 @@ class Job extends Base
     
     /**
      * Uporabnik, ki je sprožil job
-     * @ORM\ManyToOne(targetEntity="\Aaa\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Aaa\Entity\User")
      *
      * @var User
      */

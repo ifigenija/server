@@ -13,6 +13,13 @@ return [
             __DIR__ . '/../templates/report'
         ]
     ],
+    'report_template_config' => [
+        'program-dela' => [
+            'orientation' => 'portrait',
+            'size' => '',
+            'margins' => [0,0,0,0]
+        ]
+    ],
     'service_manager' => [
         'factories'  => [
         ],

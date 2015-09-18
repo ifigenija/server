@@ -63,7 +63,7 @@ abstract class AbstractTask implements ServiceLocatorAwareInterface
     {
         try {
             $this->job->setStatus(1);
-            $this->em->flush();
+            $this->em->flush($this->job);
 
             $this->taskBody();
 
@@ -71,9 +71,6 @@ abstract class AbstractTask implements ServiceLocatorAwareInterface
             $this->job->setStatus(2);
             $this->job->setAlert(true);
             $this->job->setIzveden(new DateTime());
-
-            $this->em->flush();
-
         } catch (\Exception $e) {
 
             $msg = "Napaka pri izvajanju joba";
@@ -87,12 +84,13 @@ abstract class AbstractTask implements ServiceLocatorAwareInterface
             $this->job->setAlert(true);
             $this->job->setIzveden(new DateTime());
 
-            $this->em->flush();
-
             if ($throw) {
                 throw $e;
             }
+        } finally {
+            $this->em->flush($this->job);
         }
+
     }
 
     /**
@@ -125,6 +123,8 @@ abstract class AbstractTask implements ServiceLocatorAwareInterface
         $dr->setServiceLocator($this->serviceLocator);
 
         $report = new Report();
+        $report->setJob($this->job);
+        $this->job->getReports()->add($report);
         $report->setTitle($name);
         $report->setTransfers(0);
         $report->setCreatedAt(new DateTime());
@@ -132,7 +132,7 @@ abstract class AbstractTask implements ServiceLocatorAwareInterface
         $this->shraniDatoteko($file, $report, $filename);
         $this->em->persist($report);
         $this->job->getReports()->add($report);
-
+        $this->em->flush($report);
         return $report;
     }
 
@@ -180,8 +180,8 @@ abstract class AbstractTask implements ServiceLocatorAwareInterface
         $report->setFormat($type);
         $report->setSize($stat['size']);
 
-        if (!$this->checkSameFileExists($hash, $stat['size'])) {
-            $destFileName = $this->zagotoviFolder($hash);
+        if (!$report->checkSameFileExists($hash, $stat['size'])) {
+            $destFileName = $report->zagotoviFolder($hash);
             if (is_uploaded_file($src)) {
                 move_uploaded_file($src, $destFileName);
             } else {
@@ -191,92 +191,6 @@ abstract class AbstractTask implements ServiceLocatorAwareInterface
         }
     }
 
-    /**
-     * Vrne privzeti root upload direktorija
-     *
-     * @param $hash
-     * @return string
-     * @throws MaxException
-     * @todo - zagotovi možnost določitve upload direktorija v konfigu
-     */
-    public function getUploadDirectory($hash)
-    {
-        $dir = 'data/upload';
-
-        if (!is_dir($dir)) {
-            throw new MaxException('Upload direktorij ne obstaja', 'TIP-DAT-0113');
-        }
-
-        if (!is_writable($dir)) {
-            throw new MaxException("Upload direktorij $dir ni zapisljiv", '0114');
-        }
-
-        for ($ii = 1; $ii <= 4; $ii++) {
-            $dir .= '/' . substr($hash, $ii - 1, 1);
-        }
-
-        return $dir;
-    }
-
-
-    /**
-     * Kreira folder za uploadano datoteko in vrne destination filename za uploadano datoteko
-     *
-     * @param string $hash
-     * @return string polni file name kamor se shrani datoteka
-     * @throws MaxException
-     */
-    public function zagotoviFolder($hash)
-    {
-        $dir = $this->getUploadDirectory($hash);
-
-        if (!is_dir($dir)) {
-            $success = mkdir($dir, 02775, true);
-            if (!$success) {
-                throw new MaxException("Ne morem ustvariti direktorija $dir", 'TIP-DAT-0115');
-            }
-        } else {
-            if (!is_writable($dir)) {
-                throw new MaxException("Direktorij $dir ni zapisljiv", 'TIP-DAT-0114');
-            }
-        }
-
-        return $this->getFileName($hash);
-    }
-
-
-    /**
-     * Preveri ali obstaja katera druga datoteka z istim hashom
-     *
-     * @param string $hash
-     * @param int $size
-     * @return bool
-     * @throws MaxException
-     */
-    public function checkSameFileExists($hash, $size = 0)
-    {
-        $filename = $this->getFileName($hash);
-        if (file_exists($filename)) {
-            $stat = stat($filename);
-            if ($stat['size'] !== $size) {
-                throw new MaxException("Isti hash, različna velikost... h: $hash  datoteka id: $object->id", 7701112);
-            }
-        }
-    }
-
-    /**
-     * Vrne filename za datoteko z znanim hashom
-     *
-     * @param string $hash
-     * @return string
-     */
-    public function getFileName($hash)
-    {
-        $f    = new SeparatorToSeparator('-', '');
-        $hash = $f->filter($hash);
-        $dir  = $this->getUploadDirectory($hash);
-        return $dir . '/' . $hash;
-    }
 
     /**
      * Preveri, ali imamo primerne podatke za task
