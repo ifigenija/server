@@ -4,10 +4,11 @@
 class_name: UnitTester
 modules:
     enabled: [Db, Asserts, ZF2,  UnitHelper]
+    config:
         Db:
-            dsn: 'pgsql:host=localhost;dbname=IfiFunc'
-            user: 'ifi'
-            password: 'geslo'
-            dump: 'tests/_data/DumpFunctional.sql'
+            dsn: pgsql:host=localhost;dbname=IfiFunc
+            user: ifi
+            password: geslo
+            dump: tests/_data/DumpFunctional.sql
             populate: true
             cleanup: false

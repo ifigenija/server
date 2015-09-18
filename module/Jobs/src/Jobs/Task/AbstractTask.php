@@ -124,7 +124,6 @@ abstract class AbstractTask implements ServiceLocatorAwareInterface
 
         $report = new Report();
         $report->setJob($this->job);
-        $this->job->getReports()->add($report);
         $report->setTitle($name);
         $report->setTransfers(0);
         $report->setCreatedAt(new DateTime());

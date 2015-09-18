@@ -12,6 +12,7 @@ use Max\Exception\MaxException;
 use Jobs\Annotation\Task as Task;
 use Jobs\Task\AbstractPrinterTask;
 use TestAssets\Entity\Dokument;
+use TestAssets\Entity\Pozicija;
 
 
 /**
@@ -29,6 +30,16 @@ class DokumentTestReport extends AbstractPrinterTask {
     
     
     public function taskBody() {
+        $entities = [];
+
+        $stor = new Dokument();
+        $stor->setNaziv('Prevoz')
+            ->setSifra('1233312 CCCCC');
+
+        $err = $this->addDocumentReport('test-report', 'naziv report', $stor);
+        if ($err) throw new \Exception($err);
+        $err = $this->finishReport('xxxx');
+        if ($err) throw new \Exception($err);
     }
 
     public function checkData() { 

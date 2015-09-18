@@ -195,7 +195,6 @@ class JobManager
         // Preveri pravilnost taska
         $this->checkTask($job);
 
-        $this->getEntityManager()->persist($job);
 
         // če je zahtevana sinhrona izvedba, potem se job kar požene 
         if (isset($params['sync']) && $params['sync']) {

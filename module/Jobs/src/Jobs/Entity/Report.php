@@ -172,6 +172,20 @@ class Report
     }
 
     /**
+     * Prebere datoteko
+     *
+     * @return stirng
+     */
+    public function readContent()
+    {
+        // TODO preveriti velikost datoteke
+        $filename = $this->getFileName($this->hash);
+        if (file_exists($filename)) {
+            return file_get_contents($filename);
+        }
+        return '';
+    }
+    /**
      * Vrne filename za datoteko z znanim hashom
      *
      * @param string $hash

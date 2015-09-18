@@ -1,11 +1,10 @@
 <?php
 
 use Codeception\Util\Stub;
+use Jobs\Entity\Job;
 use TestAssets\Entity\Dokument;
 use TestAssets\Entity\Pozicija;
 use TestAssets\Task\DokumentTestReport;
-
-use Jobs\Entity\Job;
 
 /**
  * Test za  AbstractPrinterTaskTest
@@ -15,31 +14,8 @@ use Jobs\Entity\Job;
 class AbstractPrinterTaskTest
     extends \AbstractTest
 {
+
     static $html = '';
-
-    public function mockmPdfPrinter()
-    {
-        $stub = Stub::make('\Jobs\Printing\mPdfPrinter', [
-            'printOut' => function ($html) {
-                AbstractPrinterTaskTest::$html .= $html;
-                return '';
-            },
-            'finishReport' => function () {
-                $out = tempnam(sys_get_temp_dir(), 'pdf_');
-                file_put_contents($out,AbstractPrinterTaskTest::$html);
-                AbstractPrinterTaskTest::$html;
-                return $out;
-            }
-
-        ]);
-        $this->tester
-            ->grabServiceManager()
-            ->setAllowOverride(true);
-        $this->tester
-            ->grabServiceManager()
-            ->setService('mpdf.printer', $stub);
-    }
-
 
     public function testGetRenderer()
     {
@@ -114,47 +90,61 @@ class AbstractPrinterTaskTest
     public function testAddDocumentReport()
     {
 
-
-        $newT = function ($t) {
-            $job = new Job();
-            $job->setData([
-                'id' => ''
-            ])
-                ->setName('Testni izpis')
-                ->setTask('TestAssets\Report\DokumentTestReport');
-
-            $task = new DokumentTestReport($job, $t->em);
-            $task->setServiceLocator($t->sm);
-            $task->setMakePdf(false);
-            return $task;
-        };
-
         $this->mockmPdfPrinter();
+
+        $this->tester->impersonate();
 
         $stev = 'xxxxxxXXXXXXxxxxxZZZZZZzzzzz';
         $doc  = new Dokument();
         $doc->setStevilka($stev);
 
+        /** @var \Jobs\Repository\JobManager $jm */
+        $jm  = $this->sm->get('jobmanager.service');
+        $job = new Job();
 
-        /** @var DokumentTestReport $task */
-        $task = $newT($this);
-        $err = $task->addDocumentReport('test-report', "naslov report", $doc);
+        $jm->configureJob($job, [
+                'task' => 'TestAssets\Task\DokumentTestReport',
+                'data' =>
+                    [
+                        'makePdf'  => true,
+                        'makeHtml' => false,
+                    ]
+            ]
+        );
 
-        $this->assertEmpty($err, 'napaka');
-        $this->assertContains('naslov report', AbstractPrinterTaskTest::$html);
-        $this->assertContains($stev, AbstractPrinterTaskTest::$html);
+        $jm->runJob($job, true);
+
+        $out = $job->getReports();
+        $this->assertCount(1, $out);
+        $this->assertContains('naziv report', AbstractPrinterTaskTest::$html);
+        $this->assertContains('1233312 CCCCC', AbstractPrinterTaskTest::$html);
     }
 
-
-    /**
-     *
-     * Test zaključka reporta, ko se html-ji združijo in pošljejo
-     *  na tiskalnik ali pripnejo na job
-     */
-    public function testFinishReportSendToPrinter()
+    public function mockmPdfPrinter()
     {
+        $stub = Stub::make('\Jobs\Printing\mPdfPrinter', [
+            'printOut'     => function ($html) {
+                AbstractPrinterTaskTest::$html .= $html;
+                return '';
+            },
+            'finishReport' => function () {
+                $out = tempnam(sys_get_temp_dir(), 'pdf_');
+                file_put_contents($out, AbstractPrinterTaskTest::$html);
+                AbstractPrinterTaskTest::$html;
+                return $out;
+            }
 
+        ]);
+        $this->tester
+            ->grabServiceManager()
+            ->setAllowOverride(true);
+        $this->tester
+            ->grabServiceManager()
+            ->setService('mpdf.printer', $stub);
+    }
 
+    public function testFinishReport()
+    {
 // naredim task
         $job = new Job();
         $job->setData([
@@ -175,7 +165,7 @@ class AbstractPrinterTaskTest
 
         $task->checkData();
         $error = $task->finishReport('Testni Izpis');
-        $this->assertEquals("",$error,'ni napake');
+        $this->assertEquals("", $error, 'ni napake');
     }
 
 
@@ -184,89 +174,35 @@ class AbstractPrinterTaskTest
      */
     public function testAddTableReport()
     {
-
-        $entities = [];
-
-        $stor = new Dokument();
-        $stor->setNaziv('Prevoz')
-            ->setSifra('001');
-
-        $obj = new Pozicija();
-        $obj->setDatum(new \DateTime)
-            ->setOpis('tralala')
-            ->setZnesek(100)
-            ->setDokument($stor)
-            ->setZaporedna(1);
-        $entities[] = $obj;
-
-        $obj = new Pozicija();
-        $obj->setDatum(new \DateTime)
-            ->setZnesek(100)
-            ->setOpis('99899')
-            ->setDokument($stor)->setZaporedna(3);
-        $entities[] = $obj;
-
-        $obj = new Pozicija();
-        $obj->setDatum(new \DateTime)
-            ->setZnesek(200)
-            ->setOpis('998999')
-            ->setDokument($stor)->setZaporedna(2);
-        $entities[] = $obj;
-
-        $obj = new Pozicija();
-        $obj->setDatum(new \DateTime)
-            ->setZnesek(100)
-            ->setDokument($stor)
-            ->setZaporedna(2);
-        $entities[] = $obj;
-
-        $tableDef = [
-            'title'  => 'naslov 123',
-            'groups' => [
-                'main' => [
-                    'pozicija'       => [
-                        'title' => 'Poz.',
-                        'type'  => 'pozicija',
-                        'align' => 'right',
-                        'width' => '3%'
-                    ],
-                    'opis' => ['width' => "10%"],
-                    'dokument.naziv' => ['twidth' => '10%'],
-                    'znesek'         => ['width' => '5%', 'final' => 'sum'],
-                ]
-            ]
-        ];
-
         $this->mockmPdfPrinter();
 
         $this->tester->impersonate();
-        $user = $this->em->getRepository('Aaa\Entity\User')->findOneByEmail('admin@ifigenija.si');
-        $job  = new Job();
-        $job->setData([
-            'id'      => 'XXXX',
-            'makePdf' => true,
-            'makeHtml' => true,
-        ])
-            ->setUser($user)
-            ->setName('Testni izpis')
-            ->setTask('TestAssets\Report\DocumentTestReport');
 
-        $task = new DokumentTestReport($job, $this->em);
-        $task->setMakeHtml(true);
-        $task->setServiceLocator($this->sm);
+        /** @var \Jobs\Repository\JobManager $jm */
+        $jm  = $this->sm->get('jobmanager.service');
+        $job = new Job();
 
-        $html = $task->addTableReport('test123', $tableDef, $entities);
-        codecept_debug($html);
+        $jm->configureJob($job, [
+                'task' => 'TestAssets\Task\TableTestReport',
+                'name' => 'testni izpis',
+                'data' =>
+                    [
+                        'id'       => 'XXXX',
+                        'makePdf'  => true,
+                        'makeHtml' => false,
+                    ]
+            ]
+        );
 
-        $this->assertContains('tralala', AbstractPrinterTaskTest::$html);
-        $this->assertContains('<table', AbstractPrinterTaskTest::$html);
-        $this->assertContains('>500,00</td', AbstractPrinterTaskTest::$html);
-
-        $err = $task->finishReport('xxxx');
+        $jm->runJob($job, true);
 
         $out = $job->getReports();
-        $this->assertCount(2, $out);
+        $this->assertCount(1, $out);
+        $html = $out[0]->readContent();
         $this->assertInstanceOf('Jobs\Entity\Report', $out[0]);
+        $this->assertContains('">500,00</td', $html );
+        codecept_debug($html);
+
 
     }
 
