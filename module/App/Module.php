@@ -19,13 +19,17 @@ use Zend\Authentication\AuthenticationService;
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\Console\Request;
 use Zend\EventManager\EventInterface;
+use Zend\EventManager\Event;
 use Zend\Http\Header\Authorization;
 use Zend\Http\Request as Request2;
+use Zend\Console\Console as Cons;
 use Zend\Http\Response;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Zend\I18n\Translator\Translator;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Paginator\Paginator;
+use Zend\Validator\AbstractValidator;
 
 /**
  * Base nastavitve za Ifigenijo
@@ -52,7 +56,7 @@ class Module
     }
 
     // priključim service 
-    public function onBootstrap(EventInterface $e)
+    public function onBootstrap(MvcEvent $e)
     {
         Paginator::setDefaultItemCountPerPage(30);
 
@@ -64,6 +68,26 @@ class Module
         $sm   = $e->getApplication()->getServiceManager();
         $em   = $sm->get('doctrine.entitymanager.orm_default');
         $auth = $sm->get('Zend\Authentication\AuthenticationService');
+
+        if (Cons::isConsole()) {
+            $locale = locale_get_default();
+        } else {
+            /* @var $al \Zend\Http\Header\Accept */
+            $al = $e->getRequest()->getHeaders('accept-language');
+            if ($al) {
+                $locales = $al->getPrioritized();
+                $locale = reset($locales)->getTypeString();
+
+                \Locale::acceptFromHttp($locale);
+            } else {
+                $locale = locale_get_default();
+            }
+        }
+        /** @var Translator $translator */
+        $translator = $sm->get('MvcTranslator');
+        $translator->setLocale(substr($locale,0,2));
+//        $translator->getEventManager()->attach('missingTranslation', array($this, 'translationListener'));
+        AbstractValidator::setDefaultTranslator($translator);
 
         //
         // Narediti session tako, da se virtual hosti ne bodo med seboj mešali 
@@ -158,4 +182,9 @@ class Module
         ];
     }
 
+    public function translationListener(Event $e)
+    {
+        $m = $e->getParams();
+        error_log(sprintf("missingTranslation;%s;%s;", $m['message'], $m['locale']));
+    }
 }

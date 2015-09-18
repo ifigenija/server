@@ -10,5 +10,10 @@
 return [
         'fixtures' => [
         __DIR__ . '/../fixture'
+    ],
+    'report_renderer' => [
+        'template_path_stack' => [
+            __DIR__ . '/../templates/report'
+        ]
     ]
 ];

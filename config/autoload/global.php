@@ -75,5 +75,28 @@ return [
             'error/403'     => 'module/App/layout/error/403.phtml',
             'error/index'   => 'module/App/layout/error/index.phtml',
         ]
+    ],
+    'translator' => [
+      //  'event_manager_enabled' => true,
+        'translation_file_patterns' => [
+            [
+                'type' => 'phparray',
+                'base_dir' => 'locale',
+                'pattern' => '%s/messages.php',
+            ],
+            [
+                'type' => 'phparray',
+                'base_dir' => 'locale',
+                'pattern' => '%s/Zend_Validate.php',
+            ]
+        ],
+        'cache' => [
+            'adapter' => [
+                'name' => 'apc',
+                'options' => [
+                    'ttl' => 86400
+                ]
+            ],
+        ]
     ]
 ];

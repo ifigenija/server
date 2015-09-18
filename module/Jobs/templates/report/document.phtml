@@ -1,0 +1,85 @@
+<?php
+/**
+ * Template za izpis dokumentov
+ * Inputs:
+ *      $_tpl       - pot do template partial
+ *      $_css       - pot do css partial
+ *      $title      - naslov izpisa
+ *      $model      - entiteta
+ */
+
+$tr = $this->plugin('translate')->getTranslator();
+if (method_exists($model, 'getJezik')) {
+    $tr->setLocale($model->getJezik());
+}
+
+$tm = !empty($this->margins[0]) ? $this->margins[0] : 17;
+$lm = !empty($this->margins[1]) ? $this->margins[1] : 15;
+$bm = !empty($this->margins[2]) ? $this->margins[2] : 17;
+$rm = !empty($this->margins[3]) ? $this->margins[3] : 15;
+$pagesize       = $this->pageSize ? $this->pagesize : 'a4';
+$orientation    = $this->orientation ? $this->orientation : 'p';
+$isheaderfooter = $this->ishf;
+$firmanaziv     = $this->firma->getNaziv();
+$naslov         = !empty($this->title[0]) ? $this->translate($this->title[0]) . ' ' . $this->title[1] : ''; 
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><?= $naslov ?></title>
+        <meta charset="UTF-8">
+        <style type="text/css">
+            
+            <?= $this->partial('printlayout/style') ?>
+
+            @page {
+                sheet-size: <?= $pagesize . '-' . $orientation ?>;                
+                size: auto;
+                margin-top: <?= $tm ?>mm ;
+                margin-left: <?= $lm ?>mm ;
+                margin-bottom: <?= $bm ?>mm ;
+                margin-right: <?= $rm ?>mm ;
+                margin-footer: 5mm;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-size: 9px;
+                odd-header-name: docHeader;
+                even-header-name: docHeader;
+                odd-footer-name: docFooter;
+                even-footer-name: docFooter;
+                };
+            }
+                        
+            <?= $_css ? $this->partial($_css) : '' ?>
+            
+        </style>
+    </head>
+    <body> 
+        <?php if ($isheaderfooter) { ?>
+            <htmlpageheader name="docHeader"> 
+            <table width="100%" style="topntail: 0; border-bottom: 1px solid #000000; vertical-align: bottom; color: #000088;">
+                <tr>
+                    <td width="33%"><?= isset($firmanaziv) ? $firmanaziv : '' ?></td>
+                    <td width="33%"></td>
+                    <td width="33%" style="text-align: right; font-style: italic;"><?= $naslov ?></td>
+                </tr>
+            </table>
+            </htmlpageheader>
+            <htmlpagefooter name="docFooter">
+            <table width="100%" style="topntail: 0; border-top: 1px solid #000000; vertical-align: bottom; color: #000088; font-weight: bold; font-style: italic;">
+                <tr>
+                    <td width="33%">{DATE j.m.Y}</td>
+                    <td width="33%"></td>
+                    <td width="33%" style="text-align: right;"><?= $this->translate('Stran') ?>: {PAGENO}/{nbpg}</td>
+                </tr>
+            </table>        
+            </htmlpagefooter>       
+            <sethtmlpageheader name="docHeader" page="all" value="on" show-this-page="1" />
+            <sethtmlpagefooter name="docFooter" page="all" value="on" />
+            <setpageheader name="docHeader" page="all" value="on" show-this-page="1" />
+            <setpagefooter name="docFooter" page="all" value="on" />
+        <?php } ?>
+        
+        <?= $_tpl ? $this->partial($_tpl, get_defined_vars()) : '' ?>
+
+    </body>
+</html>

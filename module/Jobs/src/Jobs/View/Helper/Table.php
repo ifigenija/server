@@ -6,6 +6,7 @@ use Max\Exception\MaxException;
 use Jobs\Printing\Model\TableModel;
 use Jobs\Printing\Model\TableCell;
 use Traversable;
+use Zend\Filter\StripTags;
 use Zend\I18n\Translator\Translator;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -16,15 +17,11 @@ class Table extends AbstractHelper implements ServiceLocatorAwareInterface {
     use ServiceLocatorAwareTrait;
     
     /**
-     * @var Table
+     * @var TableModel
      */
     protected $def;
     
-    /**
-     * @var Tipformat
-     */
-    protected $tf;
-    
+
     /**
      * 
      * @var Translator
@@ -49,7 +46,6 @@ class Table extends AbstractHelper implements ServiceLocatorAwareInterface {
             throw new MaxException('Definicija tabele ni veljavna', 7710006);
         }
         
-        $this->tf = $this->view->plugin('tipformat');
         $this->tr = $this->view->plugin('translate')->getTranslator();
         
         if ($entities instanceof Traversable) {
@@ -172,8 +168,8 @@ class Table extends AbstractHelper implements ServiceLocatorAwareInterface {
      * @return string
      */
     private function makeTitle($entities) {
-        $value = $this->tf->format($this->def->getTitle(), null, $entities);
-        return $this->tf->makeEl('caption', $this->tr->translate($value));
+        $value = $this->format($this->def->getTitle(), null, $entities);
+        return $this->makeEl('caption', $this->tr->translate($value));
     }
     
     /**
@@ -185,8 +181,8 @@ class Table extends AbstractHelper implements ServiceLocatorAwareInterface {
     private function makeHeaderTitle($entities) {
         $groups = $this->def->getGroups();
         $colspan = count(reset($groups));
-        $value = $this->tf->format($this->def->getHeaderTitle(), null, $entities);
-        $header = $this->tf->makeEl('th', $this->tr->translate($value), [
+        $value = $this->format($this->def->getHeaderTitle(), null, $entities);
+        $header = $this->makeEl('th', $this->tr->translate($value), [
             'colspan' => $colspan,
             'class' => 'cell-type-header-title'
         ]);
@@ -214,7 +210,7 @@ class Table extends AbstractHelper implements ServiceLocatorAwareInterface {
      * @return string
      */
     private function makeHeader(TableCell $cell) {
-        return $this->tf->makeEl('th', $this->tf->format($this->tr->translate($cell->getTitle())), [
+        return $this->makeEl('th', $this->format($this->tr->translate($cell->getTitle())), [
             'class' => $cell->getFullClassString(),
             'style' => $this->resolveAlignment($cell)
         ]);
@@ -239,7 +235,7 @@ class Table extends AbstractHelper implements ServiceLocatorAwareInterface {
      * @return string
      */
     private function makeCol(TableCell $cell) {
-        return $this->tf->makeEl('col', [
+        return $this->makeEl('col', [
             'class' => $cell->getFullClassString(),
             'style' => "width: {$cell->getWidth()}"
         ]);
@@ -269,7 +265,7 @@ class Table extends AbstractHelper implements ServiceLocatorAwareInterface {
                 $html .= '<tr>';
                 foreach ($row as $key => $value) {
                     $cell = $groups[$groupKey][$key];
-                    $html .= $this->tf->makeEl('td', $value, [
+                    $html .= $this->makeEl('td', $value, [
                         'colspan' => $cell->getColspan(),
                         'rowspan' => $this->resolveRowspan($cell->getRowspan(), $lenghts),
                         'class' => $cell->getFullClassString(),
@@ -407,7 +403,7 @@ class Table extends AbstractHelper implements ServiceLocatorAwareInterface {
             $value = $this->getField($cell, $value);
         }
         
-        return $this->tf->makeEl('td', $value, [
+        return $this->makeEl('td', $value, [
             'colspan' => $cell->getColspan(),
             'rowspan' => $cell->getRowspan(),
             'class' => $cell->getFullClassString(),
@@ -425,25 +421,25 @@ class Table extends AbstractHelper implements ServiceLocatorAwareInterface {
         $func = $cell->getFinal();
         if ($func) {
             foreach ($entities as $entity) {
-                $value = $this->tf->get($entity, $cell->getField(), ['format' => false]);
+                $value = $this->get($entity, $cell->getField(), ['format' => false]);
                 $final = $func($final, $value, $entity);
             }
         }
         
-        $value = $this->tf->format($final, $cell->getType());
+        $value = $this->format($final, $cell->getType());
         $class = $cell->getFullClassString();
         
-        return $this->tf->makeEl('td', $value, [
+        return $this->makeEl('td', $value, [
             'class' => "cell-type-final {$class}"
         ]);
     }
     
     private function getField(TableCell $cell, $entity) {
-        return $this->tf->get($entity, $cell->getField(), ['type' => $cell->getType()]);
+        return $this->get($entity, $cell->getField(), ['type' => $cell->getType()]);
     }
     
     private function getDiscriminatorField($entity) {
-        return $this->tf->get($entity, $this->def->getDiscriminator(), ['lookup' => 'ident']);
+        return $this->get($entity, $this->def->getDiscriminator(), ['lookup' => 'ident']);
     }
     
     private function groupEntities($entities) {
@@ -471,6 +467,264 @@ class Table extends AbstractHelper implements ServiceLocatorAwareInterface {
         
         return $result;
     }
-    
 
+
+    /**
+     * Ustvari html element
+     *
+     *  $tf->makeEl('div', 'Vsebina', ['class' => 'neke']);
+     *  $tf->makeEl('div', 'Vsebina');
+     *  $tf->makeEl('div', ['class' => 'neke']);
+     *  $tf->makeEl('br');
+     *
+     * @param string $el    html element
+     * @param string $arg1  vrednost
+     * @param array $arg2   html argumenti
+     * @return string
+     */
+    public function makeEl($el, $arg1 = null, $arg2 = [])
+    {
+        $value = null;
+        $args = null;
+
+        if (is_array($arg1)) {
+            $args = $arg1;
+        } else {
+            $value = $arg1;
+            $args = $arg2;
+        }
+
+        // začetek elementa
+        $html = "<{$el}";
+
+        // atributi
+        foreach ($args as $k => $v) {
+            if ($v !== null) {
+                $html .= " {$k}=\"{$v}\"";
+            }
+        }
+        $f = new StripTags(['allowTags' => ['sub', 'sup', 'br', 'p', 'strong', ]]);
+        if ($value === null) {
+            // konec elementa brez vrednosti
+            $html .= ' />';
+        } else {
+            // konec elementa z vrednostjo
+            $html .= '>';
+            $html .= $f->filter($value);
+            $html .= "</{$el}>";
+        }
+
+        return $html;
+    }
+
+
+    /**
+     * Extracta field iz entitete po stringu ali funkciji
+     *
+     * Opcije:
+     *  - format: ali formatiramo v string ali vrnemo tako kot je
+     *  - type: tip formatiranja
+     *  - lookup: po katerem polju delamo lookup (label / ident)
+     *
+     * $value = $tf->get($entity, 'maticna');
+     * $value = $tf->get($entity, 'maticna.sifra');
+     * $array = $tf->get($entityArray, 'collection.field');
+     * $mixed = $tf->get($entity, function($entity) { return $entity->getFoo(); });
+     *
+     * @param mixed $entity entiteta ali hash table ali seznam teh
+     * @param string $arg pot do fielda
+     * @param array $options
+     * @return mixed
+     */
+    public function get($entity, $arg = '', $options = [])
+    {
+        if ($entity === null) {
+            return null;
+        }
+
+        $options = array_merge([
+            'format' => true,
+            'type' => null,
+            'lookup' => 'label',
+        ], $options);
+
+        $result = null;
+        if (is_callable($arg)) {
+            $result = $arg($entity);
+        } else if (is_string($arg)) {
+            $result = $this->resolveField($entity, $arg);
+        } else {
+            return null;
+        }
+
+        if ($result === null) {
+            return null;
+        }
+
+        // če je rezultat entiteta, dodatno resolvamo po lookup anotaciji
+        if ($options['lookup']) {
+            if (is_array($result)) {
+                if (isset($result[0]) && $result[0] instanceof Base) {
+                    $result = array_map(function($x) use ($options) {
+                        return $this->resolveLookup($x, $options['lookup']);
+                    }, $result);
+                }
+            } else if ($result instanceof Base) {
+                $result = $this->resolveLookup($result, $options['lookup']);
+            }
+        }
+
+        // če imamo vključeno formatiranje, formatiramo v string
+        if ($options['format']) {
+            if (is_array($result)) {
+                $result = array_map(function($x) use ($options) {
+                    return $this->format($x, $options['type']);
+                }, $result);
+            } else {
+                $result = $this->format($result, $options['type']);
+            }
+        }
+
+        return $result;
+    }
+
+
+    /**
+     * Formatira vrednost v string
+     *
+     * @param mixed $value      vrednost ki pretvarjamo
+     * @param string $fromType  tip formatiranja, če ga ne podamo ga funkcija ugotovi sama
+     * @param mixed $args       dodatni argumenti ki so poslani v closure, če je $value tipa function
+     * @return string
+     */
+    public function format($value, $fromType = null, $args = null)
+    {
+        if ($value === '' || $value === null) {
+            return '';
+        }
+
+        if (is_callable($value)) {
+            return $this->format($value($args), $fromType, $args);
+        }
+
+        // formatiraj izpis
+        switch ($fromType) {
+            // doctrinovi tipi
+            case 'string':
+            case 'text':
+                return (string) $value;
+            case 'integer':
+            case 'int':
+                return (string) (int) $value;
+            case 'decimal':
+                return $this->num($value);
+            case 'date':
+                return $value->format('d.m.Y');
+            // custom
+            case 'pozicija':
+                return (int) $value . '.';
+        }
+
+        // poskusi avtomatsko formatirati izpis
+        if ($value instanceof \DateTime) {
+            return $value->format('d.m.Y H:i');
+        } else if (is_string($value)) {
+            return $value;
+        } else if (is_numeric($value) || is_object($value)) {
+            return (string) $value;
+        }
+
+        return '';
+    }
+
+    /**
+     * Formatiran izpis splošne številke
+     * @param float $data
+     * @param int $digits
+     * @return string
+     */
+    public function num($data, $digits = 2)
+    {
+        $locale = \Locale::getDefault();
+
+        $format = new \NumberFormatter($locale, \NumberFormatter::DECIMAL);
+        $format->setAttribute(\NumberFormatter::FRACTION_DIGITS, $digits);
+        return $format->format($data, \NumberFormatter::TYPE_DOUBLE);
+    }
+
+
+    /**
+     * Pomožna funkcija za extractanje fielda iz entitete
+     *
+     * $value = $tf->resolveField($entity, 'maticna');
+     * $value = $tf->resolveField($entity, 'maticna.sifra');
+     * $array = $tf->resolveField($entityArray, 'collection.field');
+     *
+     * @param mixed $obj    entiteta ali hash table ali seznam teh
+     * @param string $path  pot do fielda
+     * @return mixed
+     */
+    public function resolveField($obj, $path)
+    {
+        if (!$obj) {
+            return null;
+        }
+        if (!$path) {
+            return $obj;
+        }
+
+        $parts = explode('.', $path);
+        $first = $parts[0];
+        $rest = implode('.', array_slice($parts, 1));
+
+        if ($obj instanceof \Traversable) {
+            $obj = iterator_to_array($obj);
+        }
+
+        $method = 'get' . ucfirst($first);
+        if (is_array($obj)) {
+            if (array_keys($obj) === range(0, count($obj) - 1)) {
+                // array je sekvenčni (seznam elementov)
+                return array_map(function($x) use ($method, $rest) {
+                    return $this->resolveField($x->$method(), $rest);
+                }, $obj);
+            } else if (array_key_exists($path, $obj)) {
+                // array je associativni (hash table propertijev)
+                return $obj[$path];
+            } else {
+                return null;
+            }
+        } else if (method_exists($obj, $method)) {
+            return $this->resolveField($obj->$method(), $rest);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Resolva entiteto po lookup metadata
+     *
+     * @param Object $entity
+     * @param string $lookupType
+     * @return mixed
+     */
+    public function resolveLookup($entity, $lookupType = 'label')
+    {
+        $sl = $this->serviceLocator->getServiceLocator();
+        $em = $sl->get('doctrine.entitymanager.orm_default');
+
+        $class = get_class($entity);
+        $rep = $em->getRepository($class);
+        $rep->setServiceLocator($sl);
+
+        $lookup = $rep->getMeta()->getLookup();
+        $field = $lookup->$lookupType;
+        $method = 'get' . ucfirst($field);
+
+        if (method_exists($entity, $method)) {
+            return $entity->$method();
+        } else {
+            return null;
+        }
+    }
 }

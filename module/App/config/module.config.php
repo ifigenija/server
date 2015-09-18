@@ -1,9 +1,7 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Licenca gplv3
  */
 
 
@@ -13,9 +11,10 @@ return [
             'Zend\Session\SessionManager' => 'App\Factory\SessionFactory'
         ],
         'invokables' => [
-            'options.service'         => '\App\Service\OptionsService',
-            'entity.decorator.filter' => '\App\Filter\DecorateEntity',
-            'entity.stripper.filter' => '\App\Filter\StripEntity',
+            'options.rpc.service'     => 'App\Service\OptionsRpcService',
+            'options.service'         => 'App\Service\OptionsService',
+            'entity.decorator.filter' => 'App\Filter\DecorateEntity',
+            'entity.stripper.filter'  => 'App\Filter\StripEntity',
         ]
     ],
     'controllers'     => [
@@ -121,12 +120,12 @@ return [
             ]
         ]
     ],
-    
+
     'console'         => [
         'router' => [
             'routes' => [
-               
-                'matica-create'     => [
+
+                'matica-create' => [
                     'options' => [
                         'route'    => 'matica [--force] <naziv>',
                         'defaults' => [

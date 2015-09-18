@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Jobs\src\Jobs\Factory;
+namespace Jobs\Factory;
 
 
 use Zend\ServiceManager\FactoryInterface;
@@ -13,7 +13,7 @@ class JobManagerFactory implements FactoryInterface
     {
         $em = $serviceLocator->get('doctrine.entitymanager.orm_default');
         $rep = $em->getRepository('Jobs\Entity\Job');
-        $rep->setServiceLocator($sm);
+        $rep->setServiceLocator($serviceLocator);
         return $rep;
     }
 

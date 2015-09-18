@@ -2,6 +2,7 @@
 
 namespace ProgramDela\Task;
 
+use Jobs\Task\AbstractPrinterTask;
 use Max\Exception\MaxException;
 use ProgramDela\Entity\ProgramDela;
 
@@ -10,7 +11,7 @@ use Jobs\Annotation\Task as Task;
 /**
  * Task za izpis reporta dobavnice
  *
- *  @Task\Meta(name="Dobavnica", acl="Logistika-DokumentDobavnica-read")
+ *  @Task\Meta(name="Program dela", acl="ProgramDela-write")
  */
 class DobavnicaReport extends AbstractPrinterTask {
 
@@ -23,8 +24,10 @@ class DobavnicaReport extends AbstractPrinterTask {
 
     public function taskBody() {
 
-        $title = ["Program dela","{$this->entity->getStevilka()}"];
-        $this->addDocumentReport($title, $this->entity);
+        $title = "Program dela " . $this->entity->getStevilka();
+        $this->addDocumentReport('program-dela', $title, $this->entity);
+
+        $this->finishReport($title);
     }
 
     public function checkData() {

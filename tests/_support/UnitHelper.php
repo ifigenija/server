@@ -25,7 +25,7 @@ class UnitHelper
         return $this->grabServiceManager()->get('doctrine.entitymanager.orm_default');
     }
 
-    public function impersonate($userName = 'console')
+    public function impersonate($userName = 'console@ifigenija.si')
     {
 
         $authService = $this->grabServiceManager()

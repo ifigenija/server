@@ -98,12 +98,11 @@ class JobController extends ActionController
             return 'Akcija je namenjena konzoli';
 
         $console = $this->getServiceLocator()->get('console');
-        $jr = $this->getRepository($this->entityClass);
 
         /** @var JobManager $jr */
         $jr = $this->getServiceLocator()->get('jobmanager.service');
 
-
+        $jobs = $jr->findBy(['status'=> '0']);
         $output = "";
         foreach ($jobs as $job) {
             $output .= "{$job->getId()}\t";

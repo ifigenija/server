@@ -24,7 +24,7 @@ class RpcController
      */
     public function optionsAction() {
         
-        $srv = $this->getServiceLocator()->get('options.service');
+        $srv = $this->getServiceLocator()->get('options.rpc.service');
         
         return $this->handleJsonRpcCall($srv);
     }

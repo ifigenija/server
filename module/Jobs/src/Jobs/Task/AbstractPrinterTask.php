@@ -28,42 +28,22 @@ abstract class AbstractPrinterTask
     protected $renderer;
 
     /**
-     *
-     * @var boolean
-     */
-    protected $multiple = false;
-
-    /**
-     * Vsebine vseh renderiranih reportov
-     * 
-     * @var array
-     */
-    protected $html = [];
-
-    /**
      * pdf template za report (ozadje)
-     * 
+     *
      * @var string
      */
     protected $tmpl = '';
 
     /**
-     * Ali naj report pošljemo neposredno v tiskanje 
-     * @var boolean
+     * Ali naj naredimo html in ga pripnemo na na Job, ki je sprožil tiskanje
+     * @var bool
      */
-    protected $sendToPrinter = false;
+    protected $makeHtml = false;
 
     /**
-     * Id tiskalnika iz \Tip\Entity\Tiskalnik
-     * @var string
-     * 
-     */
-   protected $printerId = '';
-
-    /**
-     * 
-     * Ali naj naredimo pdf in ga pripnemo na na Job, ki je sprožil tiskanje 
-     * 
+     *
+     * Ali naj naredimo pdf in ga pripnemo na na Job, ki je sprožil tiskanje
+     *
      * @var boolean
      */
     protected $makePdf = true;
@@ -86,89 +66,70 @@ abstract class AbstractPrinterTask
      */
     public function addDocumentReport($templateName, $title, $entity, $vars = [])
     {
-        $template = $dokr->getTemplate($templateName);
+        $template = $this->getTemplate($templateName);
         if (!$template) {
-            $template = $this->getFallbackDocumentTemplate($templateName);
+
         }
-        
-        $this->setTmpl($dokr->getBckpdf($tdok));
+
+        $this->setTmpl('');
         // če imam template za ozadje, ne potrebujem headerja in footerja
         $isHeaderFooter = !$this->tmpl;
-             
+
         $variables = array_merge([
-            '_tpl' => $template,
-            'ishf' => $isHeaderFooter,
-            '_css' => $dokr->getStyle($tdok),
-            'firma' => $this->getFirma(),
-            'orientation' => $tdok->getOrientation(),
-            'margins' => explode(",", $tdok->getPagemargins()),
-            'pageSize' => $tdok->getPageSize(),
-            'title' => $title,
-            'model' => $entity,
-            'date' => new DateTime()
-            ], $vars);
+            '_tpl'        => $template,
+            'ishf'        => $isHeaderFooter,
+            '_css'        => '',
+            'firma'       => $this->getFirma(),
+            'orientation' => 'Portrait',
+            'margins'     => [0, 0, 0, 0],
+            'pageSize'    => 'A4',
+            'title'       => $title,
+            'model'       => $entity,
+            'date'        => new DateTime()
+        ], $vars);
 
-        
-        $this->render('printlayout/document', $variables);
 
-        if (!$this->multiple) {
-            return $this->finishReport($title);
-        }
-        return false;
+        $html = $this->render('printlayout/document', $variables, $title);
+
+        return $this->printOut($html);
     }
 
-    protected function getTdok($entity)
-    {
-        return $entity->getDok();
-    }
 
     /**
      *  Ustvari PDF report iz tabele
      *
      * @param array $title naslov reporta
-     * @param TableModel $table definicija tabele
+     * @param array $table definicija tabele
      * @param array $entities seznam entitet (podatki)
      * @param array $vars seznam spremenljivk ki jih pošljemo v template
      * @return bool|string
      */
     public function addTableReport($title, $table, $entities, $vars = [])
     {
-        $variables  = array_merge([
-            'title' => $title,
-            'date'  => new DateTime(),
+        $variables = array_merge([
+            'title'    => $title,
+            'date'     => new \DateTime(),
             'entities' => $entities,
-            'firma' => $this->getFirma(),
-            'table' => $table
-            ], $vars);
+            'firma'    => $this->getFirma(),
+            'table'    => $table
+        ], $vars);
 
-        $this->render('printlayout/table', $variables);
-        if (!$this->multiple) {
-            return $this->finishReport($title);
-        }
-        return false;
+        $html = $this->render('printlayout/table', $variables, $title);
+        return $this->printOut($html);
+
     }
 
-    /**
-     * Doda html za izpis v finish metodi
-     *
-     * @param $html
-     *
-     */
-    public function addHtml($html)
-    {
-        $this->html[] = $html;
-    }
 
     /**
      * Ustvari PDF report (izriše izpolnjen template, in doda report)
      *
      * @param string $template pod to templatea za izpis
      * @param array $vars seznam spremenljivk ki jih pošljemo v template
+     * @param string $title
+     * @return string
      * @throws \Exception
-     *
-     *
      */
-    public function render($template, $vars)
+    public function render($template, $vars, $title = 'report')
     {
         // nastavim language za report
         // default implementacija ne prestavi ničesar, samo vrne trenutni jezik
@@ -185,59 +146,77 @@ abstract class AbstractPrinterTask
         $modelHelper->setRoot($model);
 
         // Zgeneriramo HTML in ga dodamo v vrsto za izpise 
-        $this->addHtml($this->renderer->render($model));
+        $html = $this->renderer->render($model);
 
         // vrnem originalni locale nazaj 
         $this->setTranslatorLocale($old);
+
+        if ($this->isMakeHtml()) {
+            $file = tempnam(sys_get_temp_dir(), 'html_');
+            file_put_contents($file, $html);
+            chmod($file, 0777);
+            $date = new DateTime();
+            $t    = "{$title}_" . $date->format('d.m.Y') . "'.html'";
+            $this->addReport($title, [
+                'name' => $file,
+                'type' => 'text/html'
+            ], $title);
+        }
+        return $html;
     }
 
     /**
      *
-     * @param string $title
-     * @return bool|string
+     * @param string $html
+     * @return string
      */
-    public function finishReport($title)
+    public function printOut($html)
     {
-       /** 
-        * 
-        * Iz html naredimo PDF dokument
-        * @var $pdfPrinter mPdfPrinter 
-        * 
-        */
+        /**
+         * @var $pdfPrinter \Jobs\Printing\mPdfPrinter
+         */
         $pdfPrinter = $this->getServiceLocator()->get('mpdf.printer');
 
-        if (is_array($title)) {
-            $titlestr = $title[0] . $title[1];
-        } else {
-            $titlestr = $title;
+        try {
+            $pdfPrinter->printOut($html, $this->getTmpl());
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
-            
-        $path = $pdfPrinter->printOut($this->html, $this->tmpl);
+        return '';
+    }
+
+    /**
+     * Zaključi report in naredi pdf, če je zahtevan
+     * @param string $titlestr
+     * @return string
+     */
+    public function finishReport($titlestr)
+    {
+        /**
+         * @var $pdfPrinter \Jobs\Printing\mPdfPrinter
+         */
+        $pdfPrinter = $this->getServiceLocator()->get('mpdf.printer');
+
+        $out = '';
         try {
             $date = new DateTime();
+            $path = $pdfPrinter->finishReport();
 
-            $name = $this->escapeFilename($titlestr);
+            $name     = $this->escapeFilename($titlestr);
             $filename = "{$name}_{$date->format('Ymd')}.pdf";
 
-
-            // če je zahtevan izpis potem pošljemo pripravljen pdf na tiskalnik
-            if ($this->getSendToPrinter()) {
-                $this->sendToPrinter($this->getPrinterId(), $path);
-            }
-
-            // če je zahtevana izdelava pdf-ja, potem pdf pripnemo na 
+            // če je zahtevana izdelava pdf-ja, potem pdf pripnemo na
             // job. Pdf je tako ali tako že narejen.
-            if ($this->getMakePdf()) {
+            if ($this->isMakePdf()) {
                 $this->addReport("{$titlestr} {$date->format('d.m.Y')}", [
                     'name' => $path,
                     'type' => 'application/pdf'
-                    ], $filename);
+                ], $filename);
             }
-            $out = false;
         } catch (\Exception $e) {
             $out = $e->getMessage();
         } finally {
-            // cleanup pdf datoteke, če ni bila prenešena na datoteko  
+            // cleanup pdf datoteke, če ni bila prenešena na datoteko
             if (is_file($path)) {
                 unlink($path);
             }
@@ -245,16 +224,17 @@ abstract class AbstractPrinterTask
         return $out;
     }
 
+
     /**
      * Jezik spremenimo tako, da nastavimo locale v translator service;
      * @param string $locale če je locale prazen se ne zgodi nič
-     * @return string Vrne locale, ki je bil nastavljen pred klicem 
+     * @return string Vrne locale, ki je bil nastavljen pred klicem
      */
     public function setTranslatorLocale($locale = '')
     {
         /* @var $translator Translator */
         $translator = $this->serviceLocator->get('translator');
-        $old = $translator->getLocale();
+        $old        = $translator->getLocale();
         if ($locale) {
             $translator->setLocale($locale);
         }
@@ -262,29 +242,19 @@ abstract class AbstractPrinterTask
     }
 
     /**
-     * Izvedeni razredi naj implementirajo to medodo, če morajo 
-     * spremeniti jezik dokumenta 
+     * Izvedeni razredi naj implementirajo to medodo, če morajo
+     * spremeniti jezik dokumenta
      */
     protected function getReportLocale()
     {
         return null;
     }
 
-    /**
-     * Pošljemo datoteko na tiskalnik preko cups servisa
-     * @param $tiskalnikId
-     * @param $path
-     */
-    protected function sendToPrinter($tiskalnikId, $path)
-    {
-        /* @var $cups Cups */
-        $cups = $this->serviceLocator->get('cups.printer');
-        $cups->printDatoteka($tiskalnikId, $path);
-    }
+
 
     /**
      * Vse znake pretvori v ASCII, simbole pa zamenja s podčrtajem (_)
-     * 
+     *
      * @param string $name
      * @return string
      */
@@ -321,8 +291,8 @@ abstract class AbstractPrinterTask
 
         $map = $templates['template_map'];
 
-        $resolver->attach(new TemplateMapResolver($map))    // this will be consulted first
-            ->attach(new TemplatePathStack(['script_paths' => $stack]));
+        $resolver->attach(new TemplateMapResolver($map))// this will be consulted first
+        ->attach(new TemplatePathStack(['script_paths' => $stack]));
 
         $factory = new ViewHelperManagerFactory();
 
@@ -331,8 +301,8 @@ abstract class AbstractPrinterTask
         // To je zato, ker je globalni view helper manager 
         // že injectan za rendererjem na view-ju in pride do 
         // konflikta 
-        $helpers = $factory->createService($this->getServiceLocator());
-        $config = $this->getServiceLocator()->get('Config');
+        $helpers       = $factory->createService($this->getServiceLocator());
+        $config        = $this->getServiceLocator()->get('Config');
         $helper_config = $config['view_helpers'];
 
         foreach ($helper_config['invokables'] as $name => $service) {
@@ -350,88 +320,53 @@ abstract class AbstractPrinterTask
 
     /**
      * Iz nastavitev potegne firmo za kateri delamo report
-     * 
+     *
      * @return Popa
      */
     public function getFirma()
     {
-        $nast = $this->getServiceLocator()->get('nastavitve.service');
-        return $nast->getFirma();
+        return new \App\Entity\Popa();
+//        $nast = $this->getServiceLocator()->get('options.service');
+//        $firma = $nast->getOptions('application.tenant.maticnopodjetje');
+//        $rep = $this->em->getRepository('App\Entity\Popa');
+//        return $rep->findOneBySifra($firma);
     }
 
     /**
      * Poišče fallback template za dokument. Generira ime predloge iz $vrsta
      * proerty-ja na Tdok.
      *
-     * @param Tdok $tdok
+     * @param string $name
      * @return string
      * @throws MaxException
      */
-    public function getFallbackDocumentTemplate(Tdok $tdok)
+    public function getTemplate($name)
     {
-
-        $sif = 'template-' . $tdok->getSifra();
-        $bySifra = $this->renderer->resolver($sif);
-        if ($bySifra) {
-            return $sif;
+        if (!$this->renderer) {
+            $this->renderer = $this->getRenderer();
         }
-
-        $tip = 'template-' . $tdok->getVrsta();
-        $byTip = $this->renderer->resolver($tip);
-        if ($byTip) {
-            return $tip;
+        $file = $this->renderer->resolver($name);
+        if ($file) {
+            return $name;
         }
-
         // Če pridem do sem potem ne bo mogoče izpisati dokumenta
-        throw new MaxException('Ne najdem predloge za dokument ' . $tdok->getVrsta(), 'TIP-PRT-0077');
+        throw new MaxException('Ne najdem predloge za dokument ' . $name, 770008);
     }
 
     /**
-     *  Default implementacija checkData, 
-     * ki skrbi za preverjanje podatkov o tem, kam se bo izpis odložil, ali se bo 
-     * poslal neposredno na tiskalnik ali pa samo naredil pdf.  
-     * 
+     *  Default implementacija checkData,
+     *
      */
     public function checkData()
     {
-        if (!empty($this->data['toPrinter'])) {
-            if (preg_match(Consts::UUID_RE, $this->data['toPrinter'])) {
-                $this->setSendToPrinter(true);
-                if (!empty($this->data['makePdf'])) {
-                    $this->makePdf = true;
-                } else {
-                    $this->makePdf = false;
-                }
-                $this->setPrinterId($this->data['toPrinter']);
-            }
-        }
     }
 
-    public function getSendToPrinter()
-    {
-        return $this->sendToPrinter;
-    }
-
-    public function getPrinterId()
-    {
-        return $this->printerId;
-    }
-
-    public function getMakePdf()
+    /**
+     * @return boolean
+     */
+    public function isMakePdf()
     {
         return $this->makePdf;
-    }
-
-    public function setSendToPrinter($sendToPrinter)
-    {
-        $this->sendToPrinter = $sendToPrinter;
-        return $this;
-    }
-
-    public function setPrinterId($printerId)
-    {
-        $this->printerId = $printerId;
-        return $this;
     }
 
     public function setMakePdf($makePdf)
@@ -440,28 +375,10 @@ abstract class AbstractPrinterTask
         return $this;
     }
 
-    public function getMultiple()
-    {
-        return $this->multiple;
-    }
-
-    public function getHtml()
-    {
-        return $this->html;
-    }
-
-    public function setMultiple($multiple)
-    {
-        $this->multiple = $multiple;
-        return $this;
-    }
-
-    public function setHtml($html)
-    {
-        $this->html = $html;
-        return $this;
-    }
-
+    /**
+     * @param string $tmpl
+     * @return $this
+     */
     public function setTmpl($tmpl)
     {
         $this->tmpl = $tmpl;
@@ -472,5 +389,24 @@ abstract class AbstractPrinterTask
     {
         return $this->tmpl;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isMakeHtml()
+    {
+        return $this->makeHtml;
+    }
+
+    /**
+     * @param boolean $makeHtml
+     * @return AbstractPrinterTask
+     */
+    public function setMakeHtml($makeHtml)
+    {
+        $this->makeHtml = $makeHtml;
+        return $this;
+    }
+
 
 }

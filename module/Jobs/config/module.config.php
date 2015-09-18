@@ -85,5 +85,17 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ]
-    ]
+    ],
+    'view_helpers'       => [
+        'invokables' => [
+            'table'         => 'Jobs\View\Helper\Table',
+        ]
+    ],
+    'report_renderer'    => [
+        'template_map' => [
+            'printlayout/table'    => __DIR__ . '/../templates/report/table.phtml',
+            'printlayout/document' => __DIR__ . '/../templates/report/document.phtml',
+            'printlayout/style'    => __DIR__ . '/../templates/report/style.css'
+        ],
+    ],
 ];

@@ -21,7 +21,7 @@ return [
             './vendor',
         ],
         'config_cache_enabled' => FALSE,
-        'config_cache_key'     => '4q6dayvdr46we87rw9er3224',
+        'config_cache_key'     => 'minimal-config' . $env,
         'cache_dir'            => 'data',
     ]
 ];

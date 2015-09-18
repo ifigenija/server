@@ -12,6 +12,8 @@ return array(
         'Max',
         'Aaa',
         'App',
+        'Jobs',
+        'Zapisi',
         'Produkcija',
         'Abonmaji',
         'Koledar',
