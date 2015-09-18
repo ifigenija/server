@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
 use Doctrine\Common\Collections\ArrayCollection;
 
-
 /**
  * Entiteta za osebe
  * 
@@ -214,6 +213,14 @@ class Oseba
     protected $alternacije;
 
     /**
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\AvtorBesedila", mappedBy="oseba")
+     * @Max\I18n(label="Avtorji besedil", description="Avtorji besedil")   
+     * @Max\Ui(type="tomany")
+     * @var <AvtorjiBesedil>
+     */
+    protected $avtorjiBesedil;
+
+    /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Pogodba", mappedBy="oseba")
      * @Max\I18n(label="Pogodbe", description="Pogodbe osebe")   
      * @Max\Ui(type="tomany")
@@ -228,7 +235,7 @@ class Oseba
      * @var <Zaposlitve>
      */
     protected $zaposlitve;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Zasedenost", mappedBy="oseba")
      * @Max\I18n(label="Zasedenost", description="Zasedenost osebe")   
@@ -253,7 +260,7 @@ class Oseba
         $this->alternacije    = new ArrayCollection();
         $this->pogodbe        = new ArrayCollection();
         $this->zaposlitve     = new ArrayCollection();
-        $this->zasedenosti     = new ArrayCollection();
+        $this->zasedenosti    = new ArrayCollection();
     }
 
     /**
@@ -396,7 +403,7 @@ class Oseba
     {
         return $this->zaposlitve;
     }
-    
+
     public function getZasedenosti()
     {
         return $this->zasedenosti;
@@ -521,7 +528,7 @@ class Oseba
         return $this;
     }
 
-    public function setUser(\Aaa\Entity\User $user=null)
+    public function setUser(\Aaa\Entity\User $user = null)
     {
         $this->user = $user;
         return $this;
@@ -562,7 +569,7 @@ class Oseba
         $this->zaposlitve = $zaposlitve;
         return $this;
     }
-    
+
     public function setZasedenosti($zasedenosti)
     {
         $this->v = $zasedenosti;
@@ -572,6 +579,17 @@ class Oseba
     public function setNaslov($naslov)
     {
         $this->naslov = $naslov;
+        return $this;
+    }
+
+    public function getAvtorjiBesedil()
+    {
+        return $this->avtorjiBesedil;
+    }
+
+    public function setAvtorjiBesedil($avtorjiBesedil)
+    {
+        $this->avtorjiBesedil = $avtorjiBesedil;
         return $this;
     }
 

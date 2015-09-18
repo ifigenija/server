@@ -72,7 +72,6 @@ class OsebaFixture
             $o->setUser($getref);
         }
 
-
         $referenca = 'Oseba-' . $v[0];
         var_dump($referenca);
         $this->addReference($referenca, $o);
@@ -94,6 +93,11 @@ class OsebaFixture
             ['0011', '', 'xx', 'write protected12345', "a", '', '', 'xx@xxx.xx', null, null, null, 'Z', '', null, NULL, NULL, null,],
             ['0012', '', 'Luka', 'Golob', 'luč', 'a', '', 'luka.golob@xxx.xx', null, null, null, 'M', '', null, NULL, NULL, null,],
             ['0013', '', 'Tatjana', 'Božič', 'tajnica', 'a', '', 'tatjana.bozic@xxx.xx', null, null, null, 'Z', '', null, NULL, NULL, 'User-tatjana@ifigenija.si',],
+            ['0014', '', 'William', 'Shakespeare', 'avtor', '', '', null, null, null, null, 'M', '', null, NULL, NULL, null,],
+            ['0015', '', 'Nebojša', 'Kavader', 'avtor', '', '', null, null, null, null, 'M', '', null, NULL, NULL, null,],
+            ['0016', '', 'Fjodor', 'Dostojevski', 'avtor', 'Mihajlovič', '', null, null, null, null, 'M', '', null, NULL, NULL, null,],
+            ['0017', '', 'Berta ', 'Hočevar', 'avtorica', '', '', null, null, null, null, 'Z', '', null, NULL, NULL, null,],
+            ['0018', '', 'Katarina', 'Podbevšek', 'lektorica', '', '', null, null, null, null, 'Z', '', null, NULL, NULL, null,],
         ];
     }
 

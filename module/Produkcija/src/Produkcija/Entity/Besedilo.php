@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Besedila")
  * @Max\I18n(label="Besedilo",plural="Besedilo uprizoritve")
  * @Max\Id(prefix="0022")
- * @Max\Lookup(ident="stevilka",label="naslov",search={"avtor","podnaslov"},extra={"podnaslov","avtor", "datumPrejema"})
+ * @Max\Lookup(ident="stevilka",label="naslov",search={"podnaslov"},extra={"podnaslov", "datumPrejema"})
  */
 class Besedilo
         extends \Max\Entity\Base
@@ -133,12 +133,18 @@ class Besedilo
      * @var <Avtorji>
      */
     protected $avtorji;
-    
-        public function __construct()
-    {
-        $this->avtorji = new ArrayCollection();
-    }
 
+    /**
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\Uprizoritev", mappedBy="besedilo")
+     * @var <Uprizoritve>
+     */
+    protected $uprizoritve;
+
+    public function __construct()
+    {
+        $this->avtorji     = new ArrayCollection();
+        $this->uprizoritve = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {
@@ -310,5 +316,15 @@ class Besedilo
         return $this;
     }
 
+    public function getUprizoritve()
+    {
+        return $this->uprizoritve;
+    }
+
+    public function setUprizoritve($uprizoritve)
+    {
+        $this->uprizoritve = $uprizoritve;
+        return $this;
+    }
 
 }

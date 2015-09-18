@@ -64,10 +64,23 @@ class AvtorBesedila
      */
     protected $besedilo;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="avtorjiBesedil")
+     * @Max\I18n(label="avtorBesedila.oseba",  description="avtorBesedila.d.oseba")
+     * @Max\Ui(type="toone")
+     * @var \App\Entity\Oseba
+     */
+    protected $oseba;
+
+    public function preracunaj()
+    {
+        
+    }
     public function validate($mode = 'update')
     {
         
     }
+
     public function getId()
     {
         return $this->id;
@@ -117,9 +130,20 @@ class AvtorBesedila
         return $this;
     }
 
-    public function setBesedilo(\Produkcija\Entity\Besedilo $besedilo=null)
+    public function setBesedilo(\Produkcija\Entity\Besedilo $besedilo = null)
     {
         $this->besedilo = $besedilo;
+        return $this;
+    }
+
+    public function getOseba()
+    {
+        return $this->oseba;
+    }
+
+    public function setOseba(\App\Entity\Oseba $oseba = null)
+    {
+        $this->oseba = $oseba;
         return $this;
     }
 

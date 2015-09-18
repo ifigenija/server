@@ -51,14 +51,12 @@ class BesediloCest
     {
         $data      = [
             'naslov'                => 'zz',
-            'avtor'                 => 'yy',
             'podnaslov'             => 'xx',
             'jezik'                 => 'ww',
             'naslovIzvirnika'       => 'vv',
             'datumPrejema'          => '2010-02-01T00:00:00+0100',
             'moskeVloge'            => 1,
             'zenskeVloge'           => 2,
-            'prevajalec'            => 'uu',
             'povzetekVsebine'       => 'tt',
             'letoIzida'             => '1995',
             'krajIzida'             => 'ss',
@@ -72,14 +70,12 @@ class BesediloCest
         // kreiramo še en zapis
         $data       = [
             'naslov'                => 'aa',
-            'avtor'                 => 'bb',
             'podnaslov'             => 'cc',
             'jezik'                 => 'dd',
             'naslovIzvirnika'       => 'ee',
             'datumPrejema'          => '2011-03-01T00:00:00+0100',
             'moskeVloge'            => 1,
             'zenskeVloge'           => 2,
-            'prevajalec'            => 'ff',
             'povzetekVsebine'       => 'gg',
             'letoIzida'             => '1996',
             'krajIzida'             => 'hh',
@@ -117,67 +113,35 @@ class BesediloCest
     public function getListPoBesedilu(ApiTester $I)
     {
         //iskanje po številki
-        $listUrl = $this->restUrl . "?q=" . "999";
-
-        $resp = $I->successfullyGetList($listUrl, []);
+        $resp = $I->successfullyGetList($this->restUrl . "?q=" . "999", []);
         $list = $resp['data'];
-
+        codecept_debug($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-        
-        //iskanje po avtor
-        $listUrl = $this->restUrl . "?q=" . "bb";
 
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
 
-        $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-        
         //iskanje po naslov
-        $listUrl = $this->restUrl . "?q=" . "aa";
-
-        $resp = $I->successfullyGetList($listUrl, []);
+        $resp = $I->successfullyGetList($this->restUrl . "?q=" . "aa", []);
         $list = $resp['data'];
-
+        codecept_debug($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-        
+
         //iskanje po naslovIzvirnika
-        $listUrl = $this->restUrl . "?q=" . "ee";
-
-        $resp = $I->successfullyGetList($listUrl, []);
+        $resp = $I->successfullyGetList($this->restUrl . "?q=" . "ee", []);
         $list = $resp['data'];
-
+        codecept_debug($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-        
+
         //iskanje po internacionalni naslov
-        $listUrl = $this->restUrl . "?q=" . "jj";
-
-        $resp = $I->successfullyGetList($listUrl, []);
+        $resp = $I->successfullyGetList($this->restUrl . "?q=" . "jj", []);
         $list = $resp['data'];
-
+        codecept_debug($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-        
-        //iskanje po prevajalec
-        $listUrl = $this->restUrl . "?q=" . "ff";
 
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
-
-        $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
-        
         //iskanje po založnik
-        $listUrl = $this->restUrl . "?q=" . "ii";
-
-        $resp = $I->successfullyGetList($listUrl, []);
+        $resp = $I->successfullyGetList($this->restUrl . "?q=" . "ii", []);
         $list = $resp['data'];
-
+        codecept_debug($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
     }
 
     /**
@@ -204,12 +168,13 @@ class BesediloCest
      */
     public function update(ApiTester $I)
     {
-        $ent          = $this->obj;
-        $ent['avtor'] = 'xx';
+        $ent              = $this->obj;
+        $ent['podnaslov'] = 'uu';
 
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($ent['avtor'], 'xx');
+        $I->assertGuid($ent['id']);
+        $I->assertEquals($ent['podnaslov'], 'uu');
     }
 
     /**
@@ -224,16 +189,12 @@ class BesediloCest
 
         $I->assertNotEmpty($ent['id'], 'zz');
         $I->assertEquals($ent['naslov'], 'zz');
-        $I->assertEquals($ent['avtor'], 'xx');
-        $I->assertEquals($ent['podnaslov'], 'xx');
+        $I->assertEquals($ent['podnaslov'], 'uu');
         $I->assertEquals($ent['jezik'], 'ww');
         $I->assertEquals($ent['naslovIzvirnika'], 'vv');
-#        $I->assertEquals($ent['datumPrejema'], '2010-02-01T00:00:00+0100');
         $I->assertEquals($ent['moskeVloge'], 1);
         $I->assertEquals($ent['zenskeVloge'], 2);
-        $I->assertEquals($ent['prevajalec'], 'uu');
         $I->assertEquals($ent['povzetekVsebine'], 'tt');
-
         $I->assertEquals($ent['letoIzida'], '1995');
         $I->assertEquals($ent['krajIzida'], 'ss');
         $I->assertEquals($ent['zaloznik'], 'rr');

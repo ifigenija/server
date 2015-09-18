@@ -95,6 +95,12 @@ class UprizoritevCest
     private $objStrosekUprizoritve1;
     private $objStrosekUprizoritve2;
     private $lookupProdukcijskaHisa = '/lookup/produkcijskahisa';
+    private $objVrstaStroska1;
+    private $objVrstaStroska2;
+    private $objVrstaStroska3;
+    private $objVrstaStroska4;
+    private $objVrstaStroskaGlava;
+    private $vrstaStroskaUrl = '/rest/vrstastroska';
 
     public function _before(ApiTester $I)
     {
@@ -112,7 +118,7 @@ class UprizoritevCest
      */
     public function lookupTipFunkcije(ApiTester $I)
     {
-        $this->lookTipFunkcije = $ent                   = $I->lookupEntity("tipfunkcije", "Režija", false);
+        $this->lookTipFunkcije = $ent                   = $I->lookupEntity("tipfunkcije", "04", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -274,7 +280,7 @@ class UprizoritevCest
             'datumPremiere'         => '2012-02-01T00:00:00+0100',
             'maticniOder'           => $this->lookProstor['id'],
             'stOdmorov'             => 1,
-            'avtor'                 => 'avzz',
+//            'avtor'                 => 'avzz',
             'gostujoca'             => FALSE,
             'trajanje'              => 2,
             'opis'                  => 'zz',
@@ -310,7 +316,7 @@ class UprizoritevCest
             'datumPremiere'         => '2012-02-01T00:00:00+0100',
             'maticniOder'           => $this->lookProstor['id'],
             'stOdmorov'             => 3,
-            'avtor'                 => 'avaa',
+//            'avtor'                 => 'avaa',
             'gostujoca'             => true, // $$ bool vrača napako convertToBool
             'trajanje'              => 4,
             'opis'                  => 'aa',
@@ -342,7 +348,7 @@ class UprizoritevCest
             'datumPremiere'         => '2013-02-01T00:00:00+0100',
             'maticniOder'           => $this->lookProstor['id'],
             'stOdmorov'             => 5,
-            'avtor'                 => 'avbb',
+//            'avtor'                 => 'avbb',
             'gostujoca'             => true, // $$ bool vrača napako convertToBool
             'trajanje'              => 5,
             'opis'                  => 'bb',
@@ -380,7 +386,7 @@ class UprizoritevCest
             'delovniNaslov'    => 'bb',
             'datumPremiere'    => '2010-02-01T00:00:00+0100',
             'stOdmorov'        => null, // testiramo notEmpty filter
-            'avtor'            => null,
+//            'avtor'            => null,
             'gostujoca'        => false,
             'trajanje'         => null, // testiramo notEmpty filter   $$ rb preveri unit test za integer!
             'opis'             => 'b',
@@ -791,7 +797,7 @@ class UprizoritevCest
         $I->assertEquals($ent['datumPremiere'], '2012-02-01T00:00:00+0100');
         $I->assertEquals($ent['maticniOder'], $this->lookProstor['id']);
         $I->assertEquals($ent['stOdmorov'], 1);
-        $I->assertEquals($ent['avtor'], 'avzz');
+//        $I->assertEquals($ent['avtor'], 'avzz');
         $I->assertEquals($ent['gostujoca'], FALSE);
         $I->assertEquals($ent['trajanje'], 2);
         $I->assertEquals($ent['opis'], 'yy');
@@ -861,6 +867,38 @@ class UprizoritevCest
 //        $I->assertNotEmpty($ent['id']);
 //    }
 
+        /**
+     * najde enoto programa
+     * 
+     * @param ApiTester $I
+     */
+    public function getListVrstaStroska(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->vrstaStroskaUrl, []);
+        $list = $resp['data'];
+        $I->assertNotEmpty($list);
+
+        /**
+         * preberemo vrsto stroška, ki ni  glava 
+         */
+        $glava = TRUE;
+        while ($glava) {
+            $this->objVrstaStroska1 = $vrstaStroska           = array_pop($list);
+            $glava                  = ($vrstaStroska['podskupina'] === 0) ? true : false;
+        }
+        codecept_debug($vrstaStroska);
+        /**
+         * preberemo še eno glavo
+         */
+        $glava = false;
+        while (!$glava) {
+            $this->objVrstaStroskaGlava = $vrstaStroska               = array_pop($list);
+            $glava                      = ($vrstaStroska['podskupina'] === 0) ? true : false;
+        }
+        codecept_debug($vrstaStroska);
+    }
+
+    
     /**
      *  kreiramo zapis
      * 
@@ -870,28 +908,29 @@ class UprizoritevCest
      */
     public function createVecStroskov(ApiTester $I)
     {
-
         $data                         = [
-            'uprizoritev' => $this->obj2['id'],
-            'naziv'       => 'bb',
-            'vrednostDo'  => 2.34,
-            'vrednostNa'  => 4.56,
-            'tipstroska'  => 'avtorprav',
-            'opis'        => 'bb',
-            'sort'        => 1,
+            'uprizoritev'  => $this->obj2['id'],
+            'naziv'        => 'bb',
+            'vrednostDo'   => 2.34,
+            'vrednostNa'   => 4.56,
+            'tipstroska'   => 'materialni',
+            'vrstaStroska' => $this->objVrstaStroska1['id'],
+            'opis'         => 'bb',
+            'sort'         => 1,
         ];
         $this->objStrosekUprizoritve1 = $ent                          = $I->successfullyCreate($this->strosekUprizoritveUrl, $data);
         $I->assertNotEmpty($ent['id']);
 
         // kreiramo še en zapis
         $data                         = [
-            'uprizoritev' => $this->obj2['id'],
-            'naziv'       => 'cc',
-            'vrednostDo'  => 8.9,
-            'vrednostNa'  => 9.1,
-            'tipstroska'  => 'avtorprav',
-            'opis'        => 'cc',
-            'sort'        => 2,
+            'uprizoritev'  => $this->obj2['id'],
+            'naziv'        => 'cc',
+            'vrednostDo'   => 8.9,
+            'vrednostNa'   => 9.1,
+            'tipstroska'   => 'materialni',
+            'vrstaStroska' => $this->objVrstaStroska1['id'],
+            'opis'         => 'cc',
+            'sort'         => 2,
         ];
         $this->objStrosekUprizoritve2 = $ent                          = $I->successfullyCreate($this->strosekUprizoritveUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -1064,7 +1103,7 @@ class UprizoritevCest
         // premiera pred začetkom
         $ent['datumZacStudija'] = '2016-02-01T00:00:00+0100';
         $ent['datumPremiere']   = '2016-01-30T00:00:00+0100';
-        $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $resp                   = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals(1000878, $resp[0]['code']);
     }
 

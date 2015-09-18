@@ -5,16 +5,13 @@ entityClass: Produkcija\Entity\Besedilo
 forms:
     default: 
         elements:
-#            - id
             - naslov
-            - avtor
             - podnaslov
             - jezik
             - naslovIzvirnika
             - datumPrejema
             - moskeVloge
             - zenskeVloge
-            - prevajalec
             - povzetekVsebine
             - letoIzida
             - krajIzida
