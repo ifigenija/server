@@ -281,6 +281,22 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPremDoma", description="programDela.d.stIzvPremDoma")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPremDoma;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stIzvPremKopr", description="programDela.d.stIzvPremKopr")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stIzvPremKopr;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="programDela.stIzvPonPrem", description="programDela.d.stIzvPonPrem")
      * @Max\Ui(type="integer")
      * @var integer
@@ -478,6 +494,22 @@ class ProgramDela
      * @var integer
      */
     protected $stObiskPrem;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskPremDoma", description="programDela.d.stObiskPremDoma")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stObiskPremDoma;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stObiskPremKopr", description="programDela.d.stObiskPremKopr")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stObiskPremKopr;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -1029,12 +1061,15 @@ class ProgramDela
             }
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->vrPS1Do += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
-            $this->stIzvNekomerc+=$object->getPonoviDoma();
-            $this->stIzvPrem+=$object->getPonoviDoma();
-            $this->stObiskNekom +=$object->getObiskDoma();
+            $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviKopr();
+            $this->stIzvPrem+=$object->getPonoviDoma() + $object->getPonoviKopr();
+            $this->stIzvPremDoma+=$object->getPonoviDoma();
+            $this->stIzvPremKopr+=$object->getPonoviKopr();
+            $this->stObiskNekom +=$object->getObiskDoma() + $object->getObiskKopr();
             $this->stObiskNekomMat +=$object->getObiskDoma();
-            $this->stObiskPrem +=$object->getObiskDoma();
-
+            $this->stObiskPrem +=$object->getObiskDoma() + $object->getObiskKopr();
+            $this->stObiskPremDoma +=$object->getObiskDoma();
+            $this->stObiskPremKopr +=$object->getObiskKopr();
             $this->stHonorarnih +=$object->getStHonorarnih();
             $this->stHonorarnihIgr +=$object->getStHonorarnihIgr();
             $this->stHonorarnihIgrTujJZ +=$object->getStHonorarnihIgrTujJZ();
@@ -1057,8 +1092,8 @@ class ProgramDela
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->vrPS1Mat+= $object->getCelotnaVrednostMat();
             $this->vrPS1GostovSZ+= $object->getCelotnaVrednostGostovSZ();
-            $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
-            $this->stIzvPonPrem+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
+            $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost() + $object->getPonoviKopr();      //$$ ali prištevvamo tudi mednarodne?
+            $this->stIzvPonPrem+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost() + $object->getPonoviKopr();      //$$ ali prištevvamo tudi mednarodne?
             $this->stIzvPonPremDoma+=$object->getPonoviDoma();
             $this->stIzvPonPremZamejo+=$object->getPonoviZamejo();
             $this->stIzvPonPremGost+=$object->getPonoviGost();
@@ -1300,6 +1335,10 @@ class ProgramDela
         $this->validateIntGE0($this->stRazno, "Št. razno", 1000744);
         $this->validateIntGE0($this->stZaposIgralcev, "Št. zaposlenih igralcev", 1000745);
         $this->validateIntGE0($this->stZaposlenih, "Št. zaposlenih", 1000746);
+        $this->validateIntGE0($this->stIzvPremDoma, "stIzvPremDoma", 1000785);
+        $this->validateIntGE0($this->stIzvPremKopr, "stIzvPremKopr", 1000786);
+        $this->validateIntGE0($this->stObiskPremDoma, "stObiskPremDoma", 1000787);
+        $this->validateIntGE0($this->stObiskPremKopr, "stObiskPremKopr", 1000788);
 
         $this->validateEuroGE0($this->avgCenaVstopnice, "avgCenaVstopnice", 1000750);
         $this->validateEuroGE0($this->avgObiskPrired, "avgObiskPrired", 1000751);
@@ -2523,6 +2562,50 @@ class ProgramDela
     public function setPostavkeC2($postavkeC2)
     {
         $this->postavkeC2 = $postavkeC2;
+        return $this;
+    }
+
+    public function getStIzvPremDoma()
+    {
+        return $this->stIzvPremDoma;
+    }
+
+    public function getStIzvPremKopr()
+    {
+        return $this->stIzvPremKopr;
+    }
+
+    public function getStObiskPremDoma()
+    {
+        return $this->stObiskPremDoma;
+    }
+
+    public function getStObiskPremKopr()
+    {
+        return $this->stObiskPremKopr;
+    }
+
+    public function setStIzvPremDoma($stIzvPremDoma)
+    {
+        $this->stIzvPremDoma = $stIzvPremDoma;
+        return $this;
+    }
+
+    public function setStIzvPremKopr($stIzvPremKopr)
+    {
+        $this->stIzvPremKopr = $stIzvPremKopr;
+        return $this;
+    }
+
+    public function setStObiskPremDoma($stObiskPremDoma)
+    {
+        $this->stObiskPremDoma = $stObiskPremDoma;
+        return $this;
+    }
+
+    public function setStObiskPremKopr($stObiskPremKopr)
+    {
+        $this->stObiskPremKopr = $stObiskPremKopr;
         return $this;
     }
 

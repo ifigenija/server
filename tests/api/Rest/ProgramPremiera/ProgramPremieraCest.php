@@ -173,6 +173,7 @@ class ProgramPremieraCest
 //            'vlozekGostitelja'     =>1.24,
             'drugiJavni'             => 1.24,
             'obiskDoma'              => 1,
+            'obiskKopr'              => 0,
 //            'obiskGost'          => 1,
 //            'obiskZamejo'        => 1,
 //            'obiskInt'           => 1,
@@ -210,6 +211,7 @@ class ProgramPremieraCest
 //            'vlozekGostitelja'     => 4.56,
             'drugiJavni'             => 4.56,
             'obiskDoma'              => 4,
+            'obiskKopr'              => 0,
 //            'obiskGost'          => 4,
 //            'obiskZamejo'        => 4,
 //            'obiskInt'           => 4,
@@ -231,6 +233,45 @@ class ProgramPremieraCest
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
+
+        // kreiramo še en zapis s premiero pri koproducentu
+        $data       = [
+            'priKoproducentu'        => true,
+            'obiskDoma'              => 22, // to bi moral popraviti na 0
+            'obiskKopr'              => 123,
+//            'celotnaVrednost'      => 4.56,
+//            'nasDelez'               => 19,
+            'zaproseno'              => 2.66,
+//            'lastnaSredstva'       => 4.56,
+            'avtorskiHonorarji'      => 3.56,
+            'avtorskiHonorarjiSamoz' => 3.56,
+            'tantieme'               => 3.56,
+            'materialni'             => 3.56,
+            'avtorskePravice'        => 3.56,
+//            'vlozekGostitelja'     => 4.56,
+            'drugiJavni'             => 4.56,
+//            'obiskGost'          => 4,
+//            'obiskZamejo'        => 4,
+//            'obiskInt'           => 4,
+//            'ponoviDoma'         => 4,
+//            'ponoviZamejo'       => 4,
+//            'ponoviGost'         => 4,
+//            'ponoviInt'          => 4,
+            'uprizoritev'            => $this->lookUprizoritev['id'],
+            'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
+            'kpe'                    => 0.4,
+            'dokument'               => null,
+            'sort'                   => 4,
+            'stZaposUmet'            => 4,
+            'stZaposDrug'            => 4,
+            'stHonorarnih'           => 4,
+            'stHonorarnihIgr'        => 4,
+            'stHonorarnihIgrTujJZ'   => 4,
+            'stHonorarnihIgrSamoz'   => 4,
+        ];
+        $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
+        $I->assertEquals(true, $ent['priKoproducentu']);
     }
 
     /**
@@ -274,6 +315,7 @@ class ProgramPremieraCest
         $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], " lastna sredstva (ni nejavnih virov)");
 //        $I->assertEquals($ent['vlozekGostitelja'],1.24);
         $I->assertEquals($ent['obiskDoma'], 1);
+        $I->assertEquals($ent['obiskKopr'], 0);
 //        $I->assertEquals($ent['obiskGost'          ],1 );
 //        $I->assertEquals($ent['obiskZamejo'        ],1 );
 //        $I->assertEquals($ent['obiskInt'           ],1 );
@@ -292,6 +334,14 @@ class ProgramPremieraCest
         $I->assertEquals($ent['stHonorarnihIgr'], 1);
         $I->assertEquals($ent['stHonorarnihIgrTujJZ'], 1, "honor. igralec tuj JZ");
         $I->assertEquals($ent['stHonorarnihIgrSamoz'], 1, "samozaposlen igralec");
+
+        // še pri koproducentu
+        $ent = $I->successfullyGet($this->restUrl, $this->obj4['id']);
+        codecept_debug($ent);
+        $I->assertGuid($ent['id']);
+        $I->assertEquals($ent['priKoproducentu'], true);
+        $I->assertEquals($ent['obiskDoma'], 0);     // ali forsiral na 0
+        $I->assertEquals($ent['obiskKopr'], 123);
     }
 
     /**
@@ -680,6 +730,7 @@ class ProgramPremieraCest
 //            'vlozekGostitelja'     =>1.24,
             'drugiJavni'             => 1.24,
             'obiskDoma'              => 1,
+            'obiskKopr'              => 0,
 //            'obiskGost'          => 1,
 //            'obiskZamejo'        => 1,
 //            'obiskInt'           => 1,

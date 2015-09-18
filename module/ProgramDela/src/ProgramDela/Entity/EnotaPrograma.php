@@ -497,6 +497,7 @@ class EnotaPrograma
         $this->validateIntGE0($this->stHonorarnihIgrTujJZ, "", 1000689);
         $this->validateIntGE0($this->stHonorarnihIgrSamoz, "", 1000690);
         $this->validateIntGE0($this->obiskDoma, "", 1000691);
+        $this->validateIntGE0($this->obiskKopr, "", 1001201);
         $this->validateIntGE0($this->obiskGost, "", 1000692);
         $this->validateIntGE0($this->obiskZamejo, "", 1000693);
         $this->validateIntGE0($this->obiskInt, "", 1000694);
@@ -504,6 +505,7 @@ class EnotaPrograma
         $this->validateIntGE0($this->ponoviZamejo, "", 1000696);
         $this->validateIntGE0($this->ponoviGost, "", 1000697);
         $this->validateIntGE0($this->ponoviInt, "", 1000698);
+        $this->validateIntGE0($this->ponoviKopr, "", 1001202);
         $this->validateIntGE0($this->sort, "", 1000699);
         $this->validateEuroGE0($this->materialni, "Materialni", 1001200);
 

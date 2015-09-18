@@ -54,7 +54,6 @@ class ProgramPremiera
         $this->obiskZamejo             = 0;
         $this->obiskKoprInt            = 0;
         $this->obiskInt                = 0;
-        $this->ponoviKopr              = 0;
         $this->ponoviZamejo            = 0;
         $this->ponoviGost              = 0;
         $this->ponoviKoprInt           = 0;
@@ -65,9 +64,11 @@ class ProgramPremiera
 
         if ($this->priKoproducentu) {
             $this->ponoviKopr = 1;        // le premiera
+            $this->ponoviDoma = 0;       
             $this->obiskDoma  = 0;
         } else {
             $this->ponoviDoma = 1;        // le premiera
+            $this->ponoviKopr = 0;    
             $this->obiskKopr  = 0;
         }
         $this->preracunajPoljaZaMatKoprodukcijo();
@@ -84,6 +85,8 @@ class ProgramPremiera
     {
         $this->expect(($this->getTipProgramskeEnote()), "Tip programske enote ne obstaja", 1000443);
         $this->expect($this->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000444);
+
+         $this->validateIntGE0($this->obiskDoma, "", 1000447);
 
 
         /**
