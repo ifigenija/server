@@ -977,6 +977,8 @@ class ProgramDela
         $this->vrPS1GostovSZ             = 0;
         $this->stIzvNekomerc             = 0;
         $this->stIzvPrem                 = 0;
+        $this->stIzvPremDoma             = 0;
+        $this->stIzvPremKopr             = 0;
         $this->stIzvPonPrem              = 0;
         $this->stIzvPonPremDoma          = 0;
         $this->stIzvPonPremZamejo        = 0;
@@ -1002,6 +1004,8 @@ class ProgramDela
         $this->stObiskNekomGostZam       = 0;
         $this->stObiskNekomGostInt       = 0;
         $this->stObiskPrem               = 0;
+        $this->stObiskPremDoma           = 0;
+        $this->stObiskPremKopr           = 0;
         $this->stObiskPonPrem            = 0;
         $this->stObiskPonPremDoma        = 0;
         $this->stObiskPonPremKopr        = 0;

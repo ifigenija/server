@@ -278,7 +278,6 @@ class Uprizoritev
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Besedilo")
-     * @ORM\JoinColumn(name="besedilo_id", referencedColumnName="id")
      * @Max\I18n(label="uprizoritev.besedilo",  description="uprizoritev.d.besedilo")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Besedilo

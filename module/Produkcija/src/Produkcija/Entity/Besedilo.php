@@ -4,6 +4,7 @@ namespace Produkcija\Entity;
 
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Besedilo uprizoritve
@@ -42,13 +43,6 @@ class Besedilo
      * @var string
      */
     protected $naslov;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="besedilo.avtor", description="besedilo.d.avtor")
-     * @var string
-     */
-    protected $avtor;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -104,13 +98,6 @@ class Besedilo
     protected $zenskeVloge;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="besedilo.prevajalec", description="besedilo.d.prevajalec")
-     * @var string
-     */
-    protected $prevajalec;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="besedilo.povzetekVsebine", description="besedilo.d.povzetekVsebine")
      * @var string
@@ -141,10 +128,23 @@ class Besedilo
      */
     protected $zaloznik;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\AvtorBesedila", mappedBy="besedilo")
+     * @var <Avtorji>
+     */
+    protected $avtorji;
+    
+        public function __construct()
+    {
+        $this->avtorji = new ArrayCollection();
+    }
+
+
     public function validate($mode = 'update')
     {
         $this->expect($this->getStevilka(), "Številka besedila ni določena", 1000800);
     }
+
     public function getId()
     {
         return $this->id;
@@ -158,11 +158,6 @@ class Besedilo
     public function getNaslov()
     {
         return $this->naslov;
-    }
-
-    public function getAvtor()
-    {
-        return $this->avtor;
     }
 
     public function getPodnaslov()
@@ -200,11 +195,6 @@ class Besedilo
         return $this->zenskeVloge;
     }
 
-    public function getPrevajalec()
-    {
-        return $this->prevajalec;
-    }
-
     public function getPovzetekVsebine()
     {
         return $this->povzetekVsebine;
@@ -225,6 +215,11 @@ class Besedilo
         return $this->zaloznik;
     }
 
+    public function getAvtorji()
+    {
+        return $this->avtorji;
+    }
+
     public function setId($id)
     {
         $this->id = $id;
@@ -240,12 +235,6 @@ class Besedilo
     public function setNaslov($naslov)
     {
         $this->naslov = $naslov;
-        return $this;
-    }
-
-    public function setAvtor($avtor)
-    {
-        $this->avtor = $avtor;
         return $this;
     }
 
@@ -291,12 +280,6 @@ class Besedilo
         return $this;
     }
 
-    public function setPrevajalec($prevajalec)
-    {
-        $this->prevajalec = $prevajalec;
-        return $this;
-    }
-
     public function setPovzetekVsebine($povzetekVsebine)
     {
         $this->povzetekVsebine = $povzetekVsebine;
@@ -318,6 +301,12 @@ class Besedilo
     public function setZaloznik($zaloznik)
     {
         $this->zaloznik = $zaloznik;
+        return $this;
+    }
+
+    public function setAvtorji($avtorji)
+    {
+        $this->avtorji = $avtorji;
         return $this;
     }
 

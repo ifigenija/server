@@ -45,6 +45,7 @@ return [
             'Rest\tipFunkcije'           => 'Max\Factory\RestControllerFactory',
             'Rest\strosekUprizoritve'    => 'Max\Factory\RestControllerFactory',
             'Rest\VrstaStroska'          => 'Max\Factory\RestControllerFactory',
+            'Rest\AvtorBesedila'         => 'Max\Factory\RestControllerFactory',
         ],
     ],
     'router'          => [

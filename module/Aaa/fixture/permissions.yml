@@ -70,6 +70,12 @@
 -
     name: Arhivalija-write
     description: Arhivalija - spreminjanje
+-
+    name: AvtorBesedila-read
+    description: AvtorBesedila - branje
+-
+    name: AvtorBesedila-write
+    description: AvtorBesedila - spreminjanje
 
 -
     name: Besedilo-read

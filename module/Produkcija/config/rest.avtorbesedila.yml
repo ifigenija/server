@@ -1,0 +1,19 @@
+## YAML Template.
+---
+type: rest
+entityClass: Produkcija\Entity\AvtorBesedila
+forms:
+    default: 
+        elements:
+#            - id
+            - tipAvtorja
+            - zaporedna
+            - aliVNaslovu
+            - besedilo
+lists:
+    default: 
+        filter:
+        hydrator:
+            - exclude: []
+#    vse: 
+#        filter:
