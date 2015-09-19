@@ -347,7 +347,7 @@ class Uprizoritev
              */
             $this->avtor = "";    //init
             foreach ($avtorji as $avt) {
-                $this->avtor = (empty($this->avtor)) ? $avt['polnoime'] : $this->avtor . ", " . $avt['polnoime'];
+                $this->avtor = (empty($this->avtor)) ? $avt['polnoime'] : $this->avtor . " - " . $avt['polnoime'];
             }
         }
     }
