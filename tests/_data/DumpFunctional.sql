@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.4.0
 -- Dumped by pg_dump version 9.4.0
--- Started on 2015-09-18 22:55:39 CEST
+-- Started on 2015-09-19 18:21:43 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -1818,6 +1818,7 @@ COPY gostovanje (id, drzava_id, vrsta, zamejstvo, kraj) FROM stdin;
 --
 
 COPY job (id, user_id, name, task, status, log, datum, casizvedbe, izveden, data, alert, hidden, upor, datknj) FROM stdin;
+00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-0af6-08ed70b40f06	Program dela	ProgramDela\\Task\\ProgramDelaReport	2	\N	2015-09-19 16:43:51	2015-09-19 16:43:51	2015-09-19 17:24:42	a:4:{s:3:"pdf";b:0;s:4:"html";b:1;s:2:"id";s:36:"00290000-55fd-5bed-9820-9ff88ab1e53c";s:8:"makeHtml";b:1;}	t	f	\N	\N
 \.
 
 
@@ -2856,6 +2857,7 @@ COPY produkcijskahisa (id, popa_id, sifra, status) FROM stdin;
 --
 
 COPY programdela (id, sifra, naziv, zacetek, konec, zakljuceno, potrjenprogram, stpremier, stint, stfest, strazno, stizjem, stponprem, stponprej, stponprejvelikih, stponprejmalih, stponprejmalihkopr, stponprejsredkopr, stponprejvelikihkopr, stgostujo, vrps1, vrps1do, vrps1mat, vrps1gostovsz, stizvnekomerc, stizvprem, stizvpremdoma, stizvpremkopr, stizvponprem, stizvponpremdoma, stizvponpremzamejo, stizvponpremgost, stizvponpremkopr, stizvponpremint, stizvponpremkoprint, stizvponprej, stizvponprejdoma, stizvponprejzamejo, stizvponprejgost, stizvponprejkopr, stizvponprejint, stizvponprejkoprint, stizvgostuj, stizvostalihnek, stizvgostovanjslo, stizvgostovanjzam, stizvgostovanjint, stobisknekom, stobisknekommat, stobisknekomgostslo, stobisknekomgostzam, stobisknekomgostint, stobiskprem, stobiskpremdoma, stobiskpremkopr, stobiskponprem, stobiskponpremdoma, stobiskponpremkopr, stobiskponpremkoprint, stobiskponpremgost, stobiskponpremzamejo, stobiskponpremint, avgobiskprired, avgzaseddvoran, avgcenavstopnice, stprodvstopnic, stkoprodukcij, stkoprodukcijint, stkoprodukcijnvo, stzaposlenih, stzaposigralcev, avgstnastopovigr, sthonorarnih, sthonorarnihigr, sthonorarnihigrtujjz, sthonorarnihigrsamoz, sredstvaint, sredstvaavt, sredstvazaprosenoprem, sredstvazaprosenoponprem, sredstvazaprosenoponprej, sredstvazaprosenogostujo, sredstvazaprosenoint, sredstvazaprosenofest, sredstvazaprosenorazno, sredstvazaprosenoizjem, sredstvadrugijavniprem, sredstvadrugijavniponprem, sredstvadrugijavniponprej, sredstvadrugijavnigostujo, sredstvadrugijavniint, sredstvadrugijavnifest, sredstvadrugijavnirazno, sredstvadrugijavniizjem, sredstvadrugiviriprem, sredstvadrugiviriponprem, sredstvadrugiviriponprej, sredstvadrugivirigostujo, sredstvadrugiviriint, sredstvadrugivirifest, sredstvadrugivirirazno, sredstvadrugiviriizjem, sredstvaavtsamoz) FROM stdin;
+00290000-55fd-5bed-9820-9ff88ab1e53c	2015-2	weqweqwe	2015-09-01	2015-09-01	f	f	0	0	0	0	0	0	0	0	0	0	0	0	0	0.00	0.00	0.00	0.00	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	\N	\N	\N	0.00	0.00	0.00	0	0	0	0	0	0	0.00	0	0	0	0	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00
 \.
 
 
@@ -2926,6 +2928,7 @@ COPY rekviziterstvo (id, rekvizit_id, uprizoritev_id, namenuporabe, opispostavit
 --
 
 COPY report (id, job_id, title, filename, transfers, size, format, hash, createdat) FROM stdin;
+00000000-55fd-7e3a-17f7-2ab9302b8a7e	00000000-55fd-74a7-b896-3c673482a005	Program dela 2015-2 19.09.2015	program_dela_2015_2_20150919.pdf	0	43619	application/pdf	abc3ae08-3b9b-c8f1-ed18-4cb266e1bb47	2015-09-19 17:24:42
 \.
 
 
@@ -2936,6 +2939,25 @@ COPY report (id, job_id, title, filename, transfers, size, format, hash, created
 --
 
 COPY revizije (id, razred, objectid, upor, datum, tip, data) FROM stdin;
+1	ProgramDela\\Entity\\ProgramDela	00290000-55fd-5bed-9820-9ff88ab1e53c	00010000-55fc-7a41-0af6-08ed70b40f06	2015-09-19 14:58:21	INS	a:0:{}
+2	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-0af6-08ed70b40f06	2015-09-19 16:43:51	INS	a:0:{}
+3	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:02:03	UPD	a:1:{s:6:"status";a:2:{i:0;i:0;i:1;i:1;}}
+4	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:03:42	UPD	a:1:{s:6:"status";a:2:{i:0;i:1;i:1;i:0;}}
+5	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:03:48	UPD	a:1:{s:6:"status";a:2:{i:0;i:0;i:1;i:1;}}
+6	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:03:48	UPD	a:4:{s:6:"status";a:2:{i:0;i:1;i:1;i:3;}s:3:"log";a:2:{i:0;N;i:1;s:2869:"Napaka pri izvajanju joba (0): Zend\\ServiceManager\\ServiceManager::get was unable to fetch or create an instance for mpdf.printer\n#0 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Task/AbstractPrinterTask.php(376): Zend\\ServiceManager\\ServiceManager->get('mpdf.printer')\n#1 /Users/boris/NetBeansProjects/ifiServer/module/ProgramDela/src/ProgramDela/Task/ProgramDelaReport.php(30): Jobs\\Task\\AbstractPrinterTask->finishReport('Program dela 20...')\n#2 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Task/AbstractTask.php(68): ProgramDela\\Task\\ProgramDelaReport->taskBody()\n#3 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Repository/JobManager.php(360): Jobs\\Task\\AbstractTask->runTask(false)\n#4 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Controller/JobController.php(168): Jobs\\Repository\\JobManager->runJob(Object(Jobs\\Entity\\Job))\n#5 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/Controller/AbstractActionController.php(83): Jobs\\Controller\\JobController->cmdRunAction()\n#6 [internal function]: Zend\\Mvc\\Controller\\AbstractActionController->onDispatch(Object(Zend\\Mvc\\MvcEvent))\n#7 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\\Mvc\\MvcEvent))\n#8 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\\EventManager\\EventManager->triggerListeners('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#9 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/Controller/AbstractController.php(117): Zend\\EventManager\\EventManager->trigger('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#10 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/DispatchListener.php(114): Zend\\Mvc\\Controller\\AbstractController->dispatch(Object(Zend\\Console\\Request), Object(Zend\\Console\\Response))\n#11 [internal function]: Zend\\Mvc\\DispatchListener->onDispatch(Object(Zend\\Mvc\\MvcEvent))\n#12 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\\Mvc\\MvcEvent))\n#13 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\\EventManager\\EventManager->triggerListeners('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#14 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(313): Zend\\EventManager\\EventManager->trigger('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#15 /Users/boris/NetBeansProjects/ifiServer/bin/ifi(16): Zend\\Mvc\\Application->run()\n#16 {main}\n";}s:7:"izveden";a:2:{i:0;N;i:1;O:8:"DateTime":3:{s:4:"date";s:26:"2015-09-19 17:03:48.000000";s:13:"timezone_type";i:3;s:8:"timezone";s:16:"Europe/Ljubljana";}}s:5:"alert";a:2:{i:0;N;i:1;b:1;}}
+7	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:05:30	UPD	a:4:{s:6:"status";a:2:{i:0;i:3;i:1;i:0;}s:3:"log";a:2:{i:0;s:2869:"Napaka pri izvajanju joba (0): Zend\\ServiceManager\\ServiceManager::get was unable to fetch or create an instance for mpdf.printer\n#0 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Task/AbstractPrinterTask.php(376): Zend\\ServiceManager\\ServiceManager->get('mpdf.printer')\n#1 /Users/boris/NetBeansProjects/ifiServer/module/ProgramDela/src/ProgramDela/Task/ProgramDelaReport.php(30): Jobs\\Task\\AbstractPrinterTask->finishReport('Program dela 20...')\n#2 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Task/AbstractTask.php(68): ProgramDela\\Task\\ProgramDelaReport->taskBody()\n#3 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Repository/JobManager.php(360): Jobs\\Task\\AbstractTask->runTask(false)\n#4 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Controller/JobController.php(168): Jobs\\Repository\\JobManager->runJob(Object(Jobs\\Entity\\Job))\n#5 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/Controller/AbstractActionController.php(83): Jobs\\Controller\\JobController->cmdRunAction()\n#6 [internal function]: Zend\\Mvc\\Controller\\AbstractActionController->onDispatch(Object(Zend\\Mvc\\MvcEvent))\n#7 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\\Mvc\\MvcEvent))\n#8 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\\EventManager\\EventManager->triggerListeners('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#9 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/Controller/AbstractController.php(117): Zend\\EventManager\\EventManager->trigger('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#10 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/DispatchListener.php(114): Zend\\Mvc\\Controller\\AbstractController->dispatch(Object(Zend\\Console\\Request), Object(Zend\\Console\\Response))\n#11 [internal function]: Zend\\Mvc\\DispatchListener->onDispatch(Object(Zend\\Mvc\\MvcEvent))\n#12 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\\Mvc\\MvcEvent))\n#13 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\\EventManager\\EventManager->triggerListeners('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#14 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(313): Zend\\EventManager\\EventManager->trigger('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#15 /Users/boris/NetBeansProjects/ifiServer/bin/ifi(16): Zend\\Mvc\\Application->run()\n#16 {main}\n";i:1;N;}s:7:"izveden";a:2:{i:0;O:8:"DateTime":3:{s:4:"date";s:26:"2015-09-19 17:03:48.000000";s:13:"timezone_type";i:3;s:8:"timezone";s:16:"Europe/Ljubljana";}i:1;N;}s:5:"alert";a:2:{i:0;b:1;i:1;N;}}
+8	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:05:33	UPD	a:1:{s:6:"status";a:2:{i:0;i:0;i:1;i:1;}}
+9	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:05:33	UPD	a:4:{s:6:"status";a:2:{i:0;i:1;i:1;i:3;}s:3:"log";a:2:{i:0;N;i:1;s:2869:"Napaka pri izvajanju joba (0): Zend\\ServiceManager\\ServiceManager::get was unable to fetch or create an instance for mpdf.printer\n#0 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Task/AbstractPrinterTask.php(376): Zend\\ServiceManager\\ServiceManager->get('mpdf.printer')\n#1 /Users/boris/NetBeansProjects/ifiServer/module/ProgramDela/src/ProgramDela/Task/ProgramDelaReport.php(30): Jobs\\Task\\AbstractPrinterTask->finishReport('Program dela 20...')\n#2 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Task/AbstractTask.php(68): ProgramDela\\Task\\ProgramDelaReport->taskBody()\n#3 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Repository/JobManager.php(360): Jobs\\Task\\AbstractTask->runTask(false)\n#4 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Controller/JobController.php(168): Jobs\\Repository\\JobManager->runJob(Object(Jobs\\Entity\\Job))\n#5 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/Controller/AbstractActionController.php(83): Jobs\\Controller\\JobController->cmdRunAction()\n#6 [internal function]: Zend\\Mvc\\Controller\\AbstractActionController->onDispatch(Object(Zend\\Mvc\\MvcEvent))\n#7 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\\Mvc\\MvcEvent))\n#8 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\\EventManager\\EventManager->triggerListeners('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#9 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/Controller/AbstractController.php(117): Zend\\EventManager\\EventManager->trigger('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#10 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/DispatchListener.php(114): Zend\\Mvc\\Controller\\AbstractController->dispatch(Object(Zend\\Console\\Request), Object(Zend\\Console\\Response))\n#11 [internal function]: Zend\\Mvc\\DispatchListener->onDispatch(Object(Zend\\Mvc\\MvcEvent))\n#12 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\\Mvc\\MvcEvent))\n#13 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\\EventManager\\EventManager->triggerListeners('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#14 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(313): Zend\\EventManager\\EventManager->trigger('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#15 /Users/boris/NetBeansProjects/ifiServer/bin/ifi(16): Zend\\Mvc\\Application->run()\n#16 {main}\n";}s:7:"izveden";a:2:{i:0;N;i:1;O:8:"DateTime":3:{s:4:"date";s:26:"2015-09-19 17:05:33.000000";s:13:"timezone_type";i:3;s:8:"timezone";s:16:"Europe/Ljubljana";}}s:5:"alert";a:2:{i:0;N;i:1;b:1;}}
+10	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:09:31	UPD	a:4:{s:6:"status";a:2:{i:0;i:3;i:1;i:0;}s:3:"log";a:2:{i:0;s:2869:"Napaka pri izvajanju joba (0): Zend\\ServiceManager\\ServiceManager::get was unable to fetch or create an instance for mpdf.printer\n#0 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Task/AbstractPrinterTask.php(376): Zend\\ServiceManager\\ServiceManager->get('mpdf.printer')\n#1 /Users/boris/NetBeansProjects/ifiServer/module/ProgramDela/src/ProgramDela/Task/ProgramDelaReport.php(30): Jobs\\Task\\AbstractPrinterTask->finishReport('Program dela 20...')\n#2 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Task/AbstractTask.php(68): ProgramDela\\Task\\ProgramDelaReport->taskBody()\n#3 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Repository/JobManager.php(360): Jobs\\Task\\AbstractTask->runTask(false)\n#4 /Users/boris/NetBeansProjects/ifiServer/module/Jobs/src/Jobs/Controller/JobController.php(168): Jobs\\Repository\\JobManager->runJob(Object(Jobs\\Entity\\Job))\n#5 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/Controller/AbstractActionController.php(83): Jobs\\Controller\\JobController->cmdRunAction()\n#6 [internal function]: Zend\\Mvc\\Controller\\AbstractActionController->onDispatch(Object(Zend\\Mvc\\MvcEvent))\n#7 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\\Mvc\\MvcEvent))\n#8 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\\EventManager\\EventManager->triggerListeners('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#9 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/Controller/AbstractController.php(117): Zend\\EventManager\\EventManager->trigger('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#10 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/DispatchListener.php(114): Zend\\Mvc\\Controller\\AbstractController->dispatch(Object(Zend\\Console\\Request), Object(Zend\\Console\\Response))\n#11 [internal function]: Zend\\Mvc\\DispatchListener->onDispatch(Object(Zend\\Mvc\\MvcEvent))\n#12 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(468): call_user_func(Array, Object(Zend\\Mvc\\MvcEvent))\n#13 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/EventManager/EventManager.php(207): Zend\\EventManager\\EventManager->triggerListeners('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#14 /Users/boris/NetBeansProjects/ifiServer/vendor/zendframework/zendframework/library/Zend/Mvc/Application.php(313): Zend\\EventManager\\EventManager->trigger('dispatch', Object(Zend\\Mvc\\MvcEvent), Object(Closure))\n#15 /Users/boris/NetBeansProjects/ifiServer/bin/ifi(16): Zend\\Mvc\\Application->run()\n#16 {main}\n";i:1;N;}s:7:"izveden";a:2:{i:0;O:8:"DateTime":3:{s:4:"date";s:26:"2015-09-19 17:05:33.000000";s:13:"timezone_type";i:3;s:8:"timezone";s:16:"Europe/Ljubljana";}i:1;N;}s:5:"alert";a:2:{i:0;b:1;i:1;N;}}
+11	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:11:36	UPD	a:1:{s:6:"status";a:2:{i:0;i:0;i:1;i:1;}}
+12	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:12:52	UPD	a:1:{s:6:"status";a:2:{i:0;i:1;i:1;i:0;}}
+13	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:13:06	UPD	a:1:{s:6:"status";a:2:{i:0;i:0;i:1;i:1;}}
+14	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:23:30	UPD	a:1:{s:6:"status";a:2:{i:0;i:1;i:1;i:0;}}
+15	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:23:33	UPD	a:1:{s:6:"status";a:2:{i:0;i:0;i:1;i:1;}}
+16	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:24:39	UPD	a:1:{s:6:"status";a:2:{i:0;i:1;i:1;i:0;}}
+17	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:24:42	UPD	a:1:{s:6:"status";a:2:{i:0;i:0;i:1;i:1;}}
+18	Jobs\\Entity\\Report	00000000-55fd-7e3a-17f7-2ab9302b8a7e	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:24:42	INS	a:0:{}
+19	Jobs\\Entity\\Job	00000000-55fd-74a7-b896-3c673482a005	00010000-55fc-7a41-df67-ee5135fa47a4	2015-09-19 17:24:42	UPD	a:3:{s:6:"status";a:2:{i:0;i:1;i:1;i:2;}s:7:"izveden";a:2:{i:0;N;i:1;O:8:"DateTime":3:{s:4:"date";s:26:"2015-09-19 17:24:42.000000";s:13:"timezone_type";i:3;s:8:"timezone";s:16:"Europe/Ljubljana";}}s:5:"alert";a:2:{i:0;N;i:1;b:1;}}
 \.
 
 
@@ -2945,7 +2967,7 @@ COPY revizije (id, razred, objectid, upor, datum, tip, data) FROM stdin;
 -- Name: revizije_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('revizije_id_seq', 1, false);
+SELECT pg_catalog.setval('revizije_id_seq', 19, true);
 
 
 --
@@ -3065,6 +3087,7 @@ COPY stevilcenjekonfig (id, stevilcenje_id, dok) FROM stdin;
 --
 
 COPY stevilcenjestanje (id, objid, leto, stevilka) FROM stdin;
+953de175-f224-4645-ae82-824169d35637	00240000-55fc-7a41-6397-7cef2595dd38	2015	2
 \.
 
 
@@ -5054,7 +5077,7 @@ CREATE UNIQUE INDEX uniq_f75b25545e237e06 ON role USING btree (name);
 
 
 --
--- TOC entry 3052 (class 2606 OID 1346709)
+-- TOC entry 3048 (class 2606 OID 1346709)
 -- Name: fk_11e93b5d14a6c237; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5063,7 +5086,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 3051 (class 2606 OID 1346714)
+-- TOC entry 3049 (class 2606 OID 1346714)
 -- Name: fk_11e93b5d18640538; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5072,7 +5095,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 3047 (class 2606 OID 1346734)
+-- TOC entry 3053 (class 2606 OID 1346734)
 -- Name: fk_11e93b5d3a0e32e3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5081,7 +5104,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 3053 (class 2606 OID 1346704)
+-- TOC entry 3047 (class 2606 OID 1346704)
 -- Name: fk_11e93b5d5ac894aa; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5090,7 +5113,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 3049 (class 2606 OID 1346724)
+-- TOC entry 3051 (class 2606 OID 1346724)
 -- Name: fk_11e93b5dbbc7a989; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5099,7 +5122,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 3048 (class 2606 OID 1346729)
+-- TOC entry 3052 (class 2606 OID 1346729)
 -- Name: fk_11e93b5dcc3aa562; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5117,7 +5140,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 3100 (class 2606 OID 1346959)
+-- TOC entry 3098 (class 2606 OID 1346959)
 -- Name: fk_11ffe6e05c75296c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5135,7 +5158,7 @@ ALTER TABLE ONLY strosekuprizoritve
 
 
 --
--- TOC entry 3098 (class 2606 OID 1346969)
+-- TOC entry 3100 (class 2606 OID 1346969)
 -- Name: fk_11ffe6e06beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5144,7 +5167,7 @@ ALTER TABLE ONLY strosekuprizoritve
 
 
 --
--- TOC entry 3119 (class 2606 OID 1347069)
+-- TOC entry 3120 (class 2606 OID 1347069)
 -- Name: fk_14a5d6d3727aca70; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5153,7 +5176,7 @@ ALTER TABLE ONLY mapa
 
 
 --
--- TOC entry 3120 (class 2606 OID 1347064)
+-- TOC entry 3119 (class 2606 OID 1347064)
 -- Name: fk_14a5d6d38a4a6c12; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5180,7 +5203,7 @@ ALTER TABLE ONLY placilniinstrument
 
 
 --
--- TOC entry 3126 (class 2606 OID 1347109)
+-- TOC entry 3128 (class 2606 OID 1347109)
 -- Name: fk_1ed92829253c4123; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5198,7 +5221,7 @@ ALTER TABLE ONLY zapis
 
 
 --
--- TOC entry 3125 (class 2606 OID 1347114)
+-- TOC entry 3129 (class 2606 OID 1347114)
 -- Name: fk_1ed9282987ff3295; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5207,7 +5230,7 @@ ALTER TABLE ONLY zapis
 
 
 --
--- TOC entry 3128 (class 2606 OID 1347099)
+-- TOC entry 3126 (class 2606 OID 1347099)
 -- Name: fk_1ed92829a54dbb1f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5216,7 +5239,7 @@ ALTER TABLE ONLY zapis
 
 
 --
--- TOC entry 3129 (class 2606 OID 1347094)
+-- TOC entry 3125 (class 2606 OID 1347094)
 -- Name: fk_1ed92829ef943358; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5225,7 +5248,7 @@ ALTER TABLE ONLY zapis
 
 
 --
--- TOC entry 3065 (class 2606 OID 1346799)
+-- TOC entry 3066 (class 2606 OID 1346799)
 -- Name: fk_20d95c7fa81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5234,7 +5257,7 @@ ALTER TABLE ONLY prodajapredstave
 
 
 --
--- TOC entry 3066 (class 2606 OID 1346794)
+-- TOC entry 3065 (class 2606 OID 1346794)
 -- Name: fk_20d95c7fb31ae31; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5252,7 +5275,7 @@ ALTER TABLE ONLY vaja
 
 
 --
--- TOC entry 3092 (class 2606 OID 1346919)
+-- TOC entry 3090 (class 2606 OID 1346919)
 -- Name: fk_23aeb95862b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5261,7 +5284,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 3090 (class 2606 OID 1346929)
+-- TOC entry 3092 (class 2606 OID 1346929)
 -- Name: fk_23aeb9586b361365; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5279,7 +5302,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 3031 (class 2606 OID 1346629)
+-- TOC entry 3032 (class 2606 OID 1346629)
 -- Name: fk_2942b10710389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5288,7 +5311,7 @@ ALTER TABLE ONLY kontaktnaoseba
 
 
 --
--- TOC entry 3032 (class 2606 OID 1346624)
+-- TOC entry 3031 (class 2606 OID 1346624)
 -- Name: fk_2942b1076beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5315,7 +5338,7 @@ ALTER TABLE ONLY programskaenotasklopa
 
 
 --
--- TOC entry 3095 (class 2606 OID 1346934)
+-- TOC entry 3093 (class 2606 OID 1346934)
 -- Name: fk_2decfc5910389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5333,7 +5356,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 3093 (class 2606 OID 1346944)
+-- TOC entry 3095 (class 2606 OID 1346944)
 -- Name: fk_2decfc59fa5529ee; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5351,7 +5374,7 @@ ALTER TABLE ONLY zapislastnik
 
 
 --
--- TOC entry 3102 (class 2606 OID 1346989)
+-- TOC entry 3104 (class 2606 OID 1346989)
 -- Name: fk_344a77a3b262815; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5360,7 +5383,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 3105 (class 2606 OID 1346974)
+-- TOC entry 3101 (class 2606 OID 1346974)
 -- Name: fk_344a77a7c3b0d59; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5369,7 +5392,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 3101 (class 2606 OID 1346994)
+-- TOC entry 3105 (class 2606 OID 1346994)
 -- Name: fk_344a77a853a965c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5387,7 +5410,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 3104 (class 2606 OID 1346979)
+-- TOC entry 3102 (class 2606 OID 1346979)
 -- Name: fk_344a77af35157b1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5396,7 +5419,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 3043 (class 2606 OID 1346689)
+-- TOC entry 3044 (class 2606 OID 1346689)
 -- Name: fk_37f6541a10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5405,7 +5428,7 @@ ALTER TABLE ONLY trr
 
 
 --
--- TOC entry 3044 (class 2606 OID 1346684)
+-- TOC entry 3043 (class 2606 OID 1346684)
 -- Name: fk_37f6541a6beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5414,7 +5437,7 @@ ALTER TABLE ONLY trr
 
 
 --
--- TOC entry 3035 (class 2606 OID 1346649)
+-- TOC entry 3036 (class 2606 OID 1346649)
 -- Name: fk_466966d769e8d4; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5423,7 +5446,7 @@ ALTER TABLE ONLY oseba
 
 
 --
--- TOC entry 3036 (class 2606 OID 1346644)
+-- TOC entry 3035 (class 2606 OID 1346644)
 -- Name: fk_466966d7a76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5441,7 +5464,7 @@ ALTER TABLE ONLY rezervacija
 
 
 --
--- TOC entry 3028 (class 2606 OID 1346604)
+-- TOC entry 3027 (class 2606 OID 1346604)
 -- Name: fk_4ff23396d60322ac; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5450,7 +5473,7 @@ ALTER TABLE ONLY permission2role
 
 
 --
--- TOC entry 3027 (class 2606 OID 1346609)
+-- TOC entry 3028 (class 2606 OID 1346609)
 -- Name: fk_4ff23396fed90cca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5459,7 +5482,7 @@ ALTER TABLE ONLY permission2role
 
 
 --
--- TOC entry 3078 (class 2606 OID 1346869)
+-- TOC entry 3080 (class 2606 OID 1346869)
 -- Name: fk_52ed210b1c0dc15a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5477,7 +5500,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 3080 (class 2606 OID 1346859)
+-- TOC entry 3078 (class 2606 OID 1346859)
 -- Name: fk_52ed210bef943358; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5486,7 +5509,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 3056 (class 2606 OID 1346744)
+-- TOC entry 3055 (class 2606 OID 1346744)
 -- Name: fk_602f6e4662b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5495,7 +5518,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 3055 (class 2606 OID 1346749)
+-- TOC entry 3056 (class 2606 OID 1346749)
 -- Name: fk_602f6e46ef0f30b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5513,7 +5536,7 @@ ALTER TABLE ONLY stevilcenjekonfig
 
 
 --
--- TOC entry 3073 (class 2606 OID 1346849)
+-- TOC entry 3076 (class 2606 OID 1346849)
 -- Name: fk_667e35d117619010; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5522,7 +5545,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 3075 (class 2606 OID 1346839)
+-- TOC entry 3074 (class 2606 OID 1346839)
 -- Name: fk_667e35d1c146c3f3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5531,7 +5554,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 3076 (class 2606 OID 1346834)
+-- TOC entry 3073 (class 2606 OID 1346834)
 -- Name: fk_667e35d1f5e1d2d3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5540,7 +5563,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 3074 (class 2606 OID 1346844)
+-- TOC entry 3075 (class 2606 OID 1346844)
 -- Name: fk_667e35d1fe7b16e1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5549,7 +5572,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 3030 (class 2606 OID 1346614)
+-- TOC entry 3029 (class 2606 OID 1346614)
 -- Name: fk_704d3abca76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5558,7 +5581,7 @@ ALTER TABLE ONLY role2user
 
 
 --
--- TOC entry 3029 (class 2606 OID 1346619)
+-- TOC entry 3030 (class 2606 OID 1346619)
 -- Name: fk_704d3abcd60322ac; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5585,7 +5608,7 @@ ALTER TABLE ONLY datoteka
 
 
 --
--- TOC entry 3088 (class 2606 OID 1346914)
+-- TOC entry 3089 (class 2606 OID 1346914)
 -- Name: fk_7ab77b7910389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5594,7 +5617,7 @@ ALTER TABLE ONLY avtorbesedila
 
 
 --
--- TOC entry 3089 (class 2606 OID 1346909)
+-- TOC entry 3088 (class 2606 OID 1346909)
 -- Name: fk_7ab77b79f35157b1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5603,7 +5626,7 @@ ALTER TABLE ONLY avtorbesedila
 
 
 --
--- TOC entry 3124 (class 2606 OID 1347084)
+-- TOC entry 3123 (class 2606 OID 1347084)
 -- Name: fk_7adc957157ed422f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5612,7 +5635,7 @@ ALTER TABLE ONLY mapaacl
 
 
 --
--- TOC entry 3123 (class 2606 OID 1347089)
+-- TOC entry 3124 (class 2606 OID 1347089)
 -- Name: fk_7adc9571fa6311ef; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5630,7 +5653,7 @@ ALTER TABLE ONLY postavkaracuna
 
 
 --
--- TOC entry 3097 (class 2606 OID 1346949)
+-- TOC entry 3096 (class 2606 OID 1346949)
 -- Name: fk_8198265413e60bc0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5639,7 +5662,7 @@ ALTER TABLE ONLY rekviziterstvo
 
 
 --
--- TOC entry 3096 (class 2606 OID 1346954)
+-- TOC entry 3097 (class 2606 OID 1346954)
 -- Name: fk_8198265462b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5648,7 +5671,7 @@ ALTER TABLE ONLY rekviziterstvo
 
 
 --
--- TOC entry 3108 (class 2606 OID 1347029)
+-- TOC entry 3112 (class 2606 OID 1347029)
 -- Name: fk_8787a0e54ae1cd1c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5657,7 +5680,7 @@ ALTER TABLE ONLY enotaprograma
 
 
 --
--- TOC entry 3109 (class 2606 OID 1347024)
+-- TOC entry 3111 (class 2606 OID 1347024)
 -- Name: fk_8787a0e55d0da56c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5666,7 +5689,7 @@ ALTER TABLE ONLY enotaprograma
 
 
 --
--- TOC entry 3112 (class 2606 OID 1347009)
+-- TOC entry 3108 (class 2606 OID 1347009)
 -- Name: fk_8787a0e562b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5675,7 +5698,7 @@ ALTER TABLE ONLY enotaprograma
 
 
 --
--- TOC entry 3111 (class 2606 OID 1347014)
+-- TOC entry 3109 (class 2606 OID 1347014)
 -- Name: fk_8787a0e57222d84b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5702,7 +5725,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 3040 (class 2606 OID 1346659)
+-- TOC entry 3038 (class 2606 OID 1346659)
 -- Name: fk_89c1f9d2a233cb39; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5711,7 +5734,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 3038 (class 2606 OID 1346669)
+-- TOC entry 3040 (class 2606 OID 1346669)
 -- Name: fk_89c1f9d2ee4b985a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5720,7 +5743,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 3067 (class 2606 OID 1346809)
+-- TOC entry 3068 (class 2606 OID 1346809)
 -- Name: fk_952dd21969e8d4; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5729,7 +5752,7 @@ ALTER TABLE ONLY prostor
 
 
 --
--- TOC entry 3068 (class 2606 OID 1346804)
+-- TOC entry 3067 (class 2606 OID 1346804)
 -- Name: fk_952dd2196beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5738,7 +5761,7 @@ ALTER TABLE ONLY prostor
 
 
 --
--- TOC entry 3115 (class 2606 OID 1347039)
+-- TOC entry 3114 (class 2606 OID 1347039)
 -- Name: fk_97af082e38c06eb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5747,7 +5770,7 @@ ALTER TABLE ONLY produkcijadelitev
 
 
 --
--- TOC entry 3114 (class 2606 OID 1347044)
+-- TOC entry 3115 (class 2606 OID 1347044)
 -- Name: fk_97af082ec532925b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5756,7 +5779,7 @@ ALTER TABLE ONLY produkcijadelitev
 
 
 --
--- TOC entry 3083 (class 2606 OID 1346889)
+-- TOC entry 3084 (class 2606 OID 1346889)
 -- Name: fk_a4b7244f10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5765,7 +5788,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 3082 (class 2606 OID 1346894)
+-- TOC entry 3085 (class 2606 OID 1346894)
 -- Name: fk_a4b7244f5bc4d310; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5774,7 +5797,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 3085 (class 2606 OID 1346879)
+-- TOC entry 3082 (class 2606 OID 1346879)
 -- Name: fk_a4b7244f861baed2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5783,7 +5806,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 3084 (class 2606 OID 1346884)
+-- TOC entry 3083 (class 2606 OID 1346884)
 -- Name: fk_a4b7244fa4976613; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5801,7 +5824,7 @@ ALTER TABLE ONLY zaposlitev
 
 
 --
--- TOC entry 3069 (class 2606 OID 1346829)
+-- TOC entry 3072 (class 2606 OID 1346829)
 -- Name: fk_b5b84f4533341ab8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5810,7 +5833,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 3070 (class 2606 OID 1346824)
+-- TOC entry 3071 (class 2606 OID 1346824)
 -- Name: fk_b5b84f45a420584d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5819,7 +5842,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 3072 (class 2606 OID 1346814)
+-- TOC entry 3069 (class 2606 OID 1346814)
 -- Name: fk_b5b84f45bc902d3b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5828,7 +5851,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 3071 (class 2606 OID 1346819)
+-- TOC entry 3070 (class 2606 OID 1346819)
 -- Name: fk_b5b84f45fe7b16e1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5837,7 +5860,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 3086 (class 2606 OID 1346904)
+-- TOC entry 3087 (class 2606 OID 1346904)
 -- Name: fk_bbff875562b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5846,7 +5869,7 @@ ALTER TABLE ONLY arhivalija
 
 
 --
--- TOC entry 3087 (class 2606 OID 1346899)
+-- TOC entry 3086 (class 2606 OID 1346899)
 -- Name: fk_bbff8755a81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5909,7 +5932,7 @@ ALTER TABLE ONLY drugivir
 
 
 --
--- TOC entry 3122 (class 2606 OID 1347074)
+-- TOC entry 3121 (class 2606 OID 1347074)
 -- Name: fk_e9f8ee8257ed422f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5918,7 +5941,7 @@ ALTER TABLE ONLY mapa_zapis
 
 
 --
--- TOC entry 3121 (class 2606 OID 1347079)
+-- TOC entry 3122 (class 2606 OID 1347079)
 -- Name: fk_e9f8ee82af91ecd; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5927,7 +5950,7 @@ ALTER TABLE ONLY mapa_zapis
 
 
 --
--- TOC entry 3033 (class 2606 OID 1346639)
+-- TOC entry 3034 (class 2606 OID 1346639)
 -- Name: fk_ef01221fa76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5936,7 +5959,7 @@ ALTER TABLE ONLY optionvalue
 
 
 --
--- TOC entry 3034 (class 2606 OID 1346634)
+-- TOC entry 3033 (class 2606 OID 1346634)
 -- Name: fk_ef01221fa7c41d6f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5945,7 +5968,7 @@ ALTER TABLE ONLY optionvalue
 
 
 --
--- TOC entry 3042 (class 2606 OID 1346674)
+-- TOC entry 3041 (class 2606 OID 1346674)
 -- Name: fk_ef76e55910389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5954,7 +5977,7 @@ ALTER TABLE ONLY telefonska
 
 
 --
--- TOC entry 3041 (class 2606 OID 1346679)
+-- TOC entry 3042 (class 2606 OID 1346679)
 -- Name: fk_ef76e5596beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5972,7 +5995,7 @@ ALTER TABLE ONLY zasedenost
 
 
 --
--- TOC entry 3059 (class 2606 OID 1346774)
+-- TOC entry 3061 (class 2606 OID 1346774)
 -- Name: fk_fef7d84b10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5990,7 +6013,7 @@ ALTER TABLE ONLY terminstoritve
 
 
 --
--- TOC entry 3061 (class 2606 OID 1346764)
+-- TOC entry 3059 (class 2606 OID 1346764)
 -- Name: fk_fef7d84ba81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5998,7 +6021,7 @@ ALTER TABLE ONLY terminstoritve
     ADD CONSTRAINT fk_fef7d84ba81ccef6 FOREIGN KEY (dogodek_id) REFERENCES dogodek(id);
 
 
--- Completed on 2015-09-18 22:55:39 CEST
+-- Completed on 2015-09-19 18:21:43 CEST
 
 --
 -- PostgreSQL database dump complete

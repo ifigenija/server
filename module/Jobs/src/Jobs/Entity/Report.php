@@ -15,7 +15,7 @@ use Zend\Filter\Word\SeparatorToSeparator;
  * @ORM\Entity(repositoryClass="Jobs\Repository\Reports")
  * @Max\I18n(label="Poročilo",plural="Poročila")
  * @Max\Lookup(search={"identifier", "filename"}, ident="identifier",label="title")
- * @Max\Id(prefix="0055")
+ * @Max\Id(prefix="00fe")
  */
 class Report
     extends Base

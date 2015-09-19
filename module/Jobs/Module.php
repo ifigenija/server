@@ -11,14 +11,6 @@ class Module
     implements  ConsoleUsageProviderInterface
 {
 
-    public function getServiceConfig()
-    {
-        return [
-            'factories' => [
-                'jobmanager.service' => function ($sm) {
-                }]
-        ];
-    }
 
     public function getConfig()
     {

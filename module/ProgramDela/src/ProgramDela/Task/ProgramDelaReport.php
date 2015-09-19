@@ -13,7 +13,7 @@ use Jobs\Annotation\Task as Task;
  *
  *  @Task\Meta(name="Program dela", acl="ProgramDela-write")
  */
-class DobavnicaReport extends AbstractPrinterTask {
+class ProgramDelaReport extends AbstractPrinterTask {
 
     /**
      *
@@ -24,13 +24,14 @@ class DobavnicaReport extends AbstractPrinterTask {
 
     public function taskBody() {
 
-        $title = "Program dela " . $this->entity->getStevilka();
+        $title = "Program dela " . $this->entity->getSifra();
         $this->addDocumentReport('program-dela', $title, $this->entity);
 
         $this->finishReport($title);
     }
 
     public function checkData() {
+        parent::checkData();
         $rep = $this->em->getRepository('\ProgramDela\Entity\ProgramDela');
         $this->entity = $rep->find($this->data['id']);
 

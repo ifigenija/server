@@ -14,6 +14,8 @@ use Max\Controller\Traits\EntityTrait;
 use Max\Controller\Traits\JsonErrorsTrait;
 use Max\Exception\ParamsException;
 use Max\Exception\UnauthException;
+use Zend\Http\Headers;
+use Zend\Http\Response\Stream;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 

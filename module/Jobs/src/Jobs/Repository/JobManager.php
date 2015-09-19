@@ -77,10 +77,11 @@ class JobManager
                 'user',
                 'reports',
                 'data',
-                'user.roles',
-                'user.hierRoles',
-                'user.groups',
-                'user.email'
+                'log',
+                'name',
+                'task',
+                'status',
+                'datum'
             ]
         ]);
     }
@@ -94,10 +95,12 @@ class JobManager
      */
     public function updateJob(Job $job, $data)
     {
-        $job = $this->getJsonHydrator()->hydrate($data, $job);
+        $job = $this->getInputHydrator()->hydrate($data, $job);
 
         if ($job->getStatus() < 0 || $job->getStatus() > 3)
             throw new MaxException('Status joba je neveljaven', 7700002);
+
+        $this->getEntityManager()->flush($job);
     }
 
     public function getJsonHydrator($options = [])

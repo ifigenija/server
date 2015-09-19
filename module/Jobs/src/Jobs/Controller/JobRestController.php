@@ -57,7 +57,7 @@ class JobRestController
 
             $job = $jr->createJob($data);
             $this->em->flush();
-            $j = $jr->getHydrator()->extract($job);
+            $j = $jr->getJsonHydrator()->extract($job);
             $this->getResponse()->setStatusCode(201);
             return new JsonModel($j);
         } catch (\Exception $e) {
@@ -81,7 +81,7 @@ class JobRestController
                 return $this->getErrors();
             }
 
-            $user = $this->authorization->getIdentity();
+            $user = $this->getAuth()->getIdentity();
             /** @var JobManager $jr */
             $jr = $this->getServiceLocator()->get('jobmanager.service');
 
@@ -99,9 +99,7 @@ class JobRestController
 
             $jr->updateJob($job, $data);
 
-            $this->em->flush();
-
-            $j = $jr->getHydrator()->extract($job);
+            $j = $jr->getJsonHydrator()->extract($job);
 
             //$this->getResponse()->setStatusCode(200);
             return new JsonModel($j);
@@ -128,7 +126,7 @@ class JobRestController
 
             // ACL ček za vse ali uporabnikove jobe
             if (!$this->isGranted('Job-admin')) {
-                $user = $this->authorization->getIdentity();
+                $user = $this->getAuth()->getIdentity();
             } else {
                 $user = null;
             }
@@ -174,7 +172,7 @@ class JobRestController
             // ACL ček za vse ali uporabnikove jobe
             $res = 'Job-admin';
             if (!$this->isGranted($res)) {
-                $user = $this->authorization->getIdentity();
+                $user = $this->getAuth()->getIdentity();
 
                 if (!($user === $job->getUser())) {
                     $this->addError('Dostop zavrnjen!', 'TIP-DAT-0103');

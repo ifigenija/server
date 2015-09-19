@@ -24,7 +24,7 @@ class ProgramDelaService
      * 
      * @param ProgramDela   $programdela
      * 
-     * @return $data                strukturirani podatki priloge C2
+     * @return array                strukturirani podatki priloge C2
      */
     public function podatkiPrilogaC2(ProgramDela $programdela)
     {
@@ -66,15 +66,14 @@ class ProgramDelaService
 
     /**
      * dopolni podatke v stolpec   $stolpec   in v stolpec  gostovanjaZamejstvo
-     * 
-     * @param array $data           tabela, ki jo dopolnjujemo
+     *
+     * @param array $data tabela, ki jo dopolnjujemo
      * @param string $stolpec ime stolpca npr. premiere ali ponovitvePrejsnjih
-     * @param boolean $upostevajDo   pri premierah mora biti true, pri ostalih false    
-     * @param entity $uprizoritev enota programa
+     * @param boolean $upostevajDo pri premierah mora biti true, pri ostalih false
+     * @param Uprizoritev $uprizoritev enota programa
      * @param integer $stPonovitev število ponovitev doma, v Sloveniji
      * @param integer $stPonovZamejo število ponovitev v zamejstvu
-     * @param entity $programDela      programa dela - rabimo zaradi začetka in konca
-     * 
+     * @param ProgramDela $programDela programa dela - rabimo zaradi začetka in konca
      * @return array $data      dopolnjeni podatki v stolpcu $stolpec
      */
     protected function napolniDataPoStolpcu($data, $stolpec, $upostevajDo, Uprizoritev $uprizoritev, $stPonovitev, $stPonovZamejo, ProgramDela $programDela)
@@ -242,15 +241,16 @@ class ProgramDelaService
     }
 
     /**
-     * priprava podatkov za finančno prilogo C2 na osnovi programa dela, enot program in pripadajočih 
-     * uprizoritev 
-     * 
-     * kreira oz. osveži postavke C2 za dotičen program dela. Osveži le tiste kolone, 
+     * priprava podatkov za finančno prilogo C2 na osnovi programa dela, enot program in pripadajočih
+     * uprizoritev
+     *
+     * kreira oz. osveži postavke C2 za dotičen program dela. Osveži le tiste kolone,
      * za katerega obstajajo podatki (npr. iz uprizoritev)
-     * 
-     * @param entity   $programDela
-     * 
-     * @returns       True|False                uspeh oz. neuspeh klica procedure
+     *
+     * @param ProgramDela $programdela
+     * @return bool uspeh oz. neuspeh klica procedure
+     * @throws \Max\Exception\MaxException
+     *
      */
     public function osveziTabeloC2(ProgramDela $programdela)
     {

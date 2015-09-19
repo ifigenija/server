@@ -2,6 +2,9 @@
 
 return [
     'service_manager' => [
+        'invokables'=> [
+            'mpdf.printer' => 'Jobs\Printing\mPdfPrinter'
+        ],
         'factories' => [
             'jobmanager.service' => 'Jobs\Factory\JobManagerFactory'
         ],
@@ -10,7 +13,7 @@ return [
         'invokables' => [
             'Jobs\Job' => 'Jobs\Controller\JobController',
             'Rest\job' => 'Jobs\Controller\JobRestController',
-            'Jobs\ReportFiles' => 'Jobs\Controller\ReportFilesController',
+            'Jobs\ReportFiles' => 'Jobs\Controller\ReportFileController',
         ]
     ],
     'router'          => [

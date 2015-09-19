@@ -3,9 +3,11 @@
 namespace Jobs\Controller;
 
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
+use Jobs\Entity\Job;
 use Jobs\Repository\JobManager;
 use Max\Controller\ActionController;
 use Max\Exception\MaxException;
+use Max\Form\JsonForm;
 use Zend\Console\ColorInterface;
 use Zend\Console\Request;
 use Zend\Paginator\Paginator;
@@ -54,6 +56,8 @@ class JobController extends ActionController
     public function listAction()
     {
         $formManager = $this->serviceLocator->get('FormElementManager');
+
+        /** @var JsonForm $form */
         $form        = $formManager->get('Tip\Form\Filter\Simple');
 
         $form->setName('filter');
@@ -99,9 +103,10 @@ class JobController extends ActionController
 
         $jobs   = $jr->findBy(['status' => '0']);
         $output = "";
+        /** @var Job $job */
         foreach ($jobs as $job) {
             $output .= "{$job->getId()}\t";
-            $output .= "{$console->colorize($job->getUser()->getUsername(), ColorInterface::RED)}\t";
+            $output .= "{$console->colorize($job->getUser()->getEmail(), ColorInterface::RED)}\t";
             $output .= "{$job->getName()}\n";
         }
         return $output;
@@ -123,9 +128,10 @@ class JobController extends ActionController
         $jobs = $jr->findByStatus(1);
 
         $output = "";
+        /** @var Job $job */
         foreach ($jobs as $job) {
             $output .= "{$job->getId()}\t";
-            $output .= "{$console->colorize($job->getUser()->getUsername(), ColorInterface::RED)}\t";
+            $output .= "{$console->colorize($job->getUser()->getEmail(), ColorInterface::RED)}\t";
             $output .= "{$job->getName()}\n";
         }
         return $output;

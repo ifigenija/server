@@ -192,7 +192,7 @@ abstract class AbstractPrinterTask
      */
     public function getFirma()
     {
-        return new \App\Entity\Popa();
+        return (new \App\Entity\Popa())->setNaziv('gledališče');
 //        $nast = $this->getServiceLocator()->get('options.service');
 //        $firma = $nast->getOptions('application.tenant.maticnopodjetje');
 //        $rep = $this->em->getRepository('App\Entity\Popa');
@@ -386,7 +386,7 @@ abstract class AbstractPrinterTask
             // job. Pdf je tako ali tako že narejen.
             if ($this->isMakePdf()) {
                 $path = $pdfPrinter->finishReport();
-                $this->addReport("{$titlestr} {$date->format('d.m.Y')}", [
+                $this->addReport("{$titlestr} {$date->format('d.m.Y H:i')}", [
                     'name' => $path,
                     'type' => 'application/pdf'
                 ], $filename);

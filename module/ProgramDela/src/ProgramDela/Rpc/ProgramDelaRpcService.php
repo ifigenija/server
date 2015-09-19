@@ -6,6 +6,8 @@
 
 namespace ProgramDela\Rpc;
 
+use Max\Exception\MaxException;
+use ProgramDela\Repository\ProgramiDela;
 
 
 /**
@@ -485,14 +487,16 @@ class ProgramDelaRpcService
         $this->expectUUID($dokument
             , $this->translate('Pričakujem ID dokumenta')
             , 520082);
-        $dr = $this->getDokRep();
+        /** @var ProgramiDela $dr */
+        $dr = $this->getEm()->getRepository('ProgramDela\Entity\ProgramDela');
+        $dr->setServiceLocator($this->getServiceLocator());
         $dok = $dr->find($dokument);
         $this->expect($dok
             , $this->translate('Dokument ne obstaja')
             , 520081);
-        $this->expectAuthorized($dok, 'read');
+        $this->expectPermission('ProgramDela-write', $dok);
 
-        $report = '\ProgramDela\Task\ProgramDelaReport';
+        $report = 'ProgramDela\Task\ProgramDelaReport';
 
         try {
             $job = $this->docPrint($report, $dokument, $printOptions);

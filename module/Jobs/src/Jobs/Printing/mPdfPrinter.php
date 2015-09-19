@@ -13,7 +13,7 @@ class mPdfPrinter
 
     private $cleanup = [];
     private $debug = false;
-    private $printer;
+    private $printer = null;
 
     function __destruct()
     {
@@ -28,8 +28,8 @@ class mPdfPrinter
 
     public function getMPdf()
     {
-        if ($this->printer !== null) {
-            $this->printer = new \mPdf();
+        if ($this->printer === null) {
+            $this->printer = new \mPDF();
         }
         return $this->printer;
     }
@@ -70,7 +70,7 @@ class mPdfPrinter
     public function finishReport()
     {
         $out = tempnam(sys_get_temp_dir(), 'pdf_');
-        $this->printer->Output($out_file, 'F');
+        $this->printer->Output($out, 'F');
         $this->printer = null;
         return $out;
     }

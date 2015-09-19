@@ -16,8 +16,8 @@ return [
     'report_template_config' => [
         'program-dela' => [
             'orientation' => 'portrait',
-            'size' => '',
-            'margins' => [0,0,0,0]
+            'size' => 'A4',
+            'margins' => [5,5,5,5]
         ]
     ],
     'service_manager' => [

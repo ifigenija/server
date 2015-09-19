@@ -14,6 +14,7 @@ use Max\Entity\Base;
  * @ORM\Entity(repositoryClass="Jobs\Repository\JobManager")
  * @ORM\Table(indexes={@ORM\Index(columns={"casIzvedbe"}),@ORM\Index(columns={"datum"}),@ORM\Index(columns={"izveden"})})
  * @Max\I18n(label="Job",plural="Jobs",description="Job queue")
+ * @Max\Id(prefix="00ff")
  */
 class Job extends Base
 {
