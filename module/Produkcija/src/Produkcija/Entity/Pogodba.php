@@ -121,6 +121,25 @@ class Pogodba
     protected $vrednostPredstave;
 
     /**
+     * zaenkrat le informativno polje- zaenkrat se uporablja le vrednostPredstave
+     * 
+     * @ORM\Column(type="decimal", nullable=true, precision=12, scale=2)
+     * @Max\I18n(label="pogodba.procentOdInkasa", description="pogodba.d.procentOdInkasa")   
+     * @var double
+     */
+    protected $procentOdInkasa;
+
+    /**
+     * ali je polje prodendOdInkasa aktualno
+     * 
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     * @Max\I18n(label="pogodba.jeProcentOdInkasa", description="pogodba.d.jeProcentOdInkasa")   
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean     
+     */
+    protected $jeProcentOdInkasa = false;
+
+    /**
      * polje se lahko vpisuje (vrednostDo) ali pa izračuna iz cene na vajo in planiranega števila vaj
      * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
@@ -231,6 +250,11 @@ class Pogodba
         $this->expect($this->sifra, "sifra je obvezen podatek", 1000342);
         $this->expect($this->oseba, "Pogodba nima subjekta. Oseba je obvezna", 1000343);
         $this->expect(!($this->zaposlenVDrJz && $this->samozaposlen), "Oseba ne more biti hkrati zaposlena v drugem jz in samozaposlena", 1000345);
+
+        if (!$this->jeProcentOdInkasa) {
+            $this->procentOdInkasa = 0;
+        }
+        $this->validateProcGE0LE100($this->procentOdInkasa, "odstotek od inkasa", 1000344);
 
         /**
          * Pri pogodbi preverim, če je nosilec pogodbe oseba na alternaciji
@@ -468,6 +492,28 @@ class Pogodba
             function setJeAvtorskePravice($jeAvtorskePravice)
     {
         $this->jeAvtorskePravice = $jeAvtorskePravice;
+        return $this;
+    }
+
+    public function getProcentOdInkasa()
+    {
+        return $this->procentOdInkasa;
+    }
+
+    public function getJeProcentOdInkasa()
+    {
+        return $this->jeProcentOdInkasa;
+    }
+
+    public function setProcentOdInkasa($procentOdInkasa)
+    {
+        $this->procentOdInkasa = $procentOdInkasa;
+        return $this;
+    }
+
+    public function setJeProcentOdInkasa($jeProcentOdInkasa)
+    {
+        $this->jeProcentOdInkasa = $jeProcentOdInkasa;
         return $this;
     }
 
