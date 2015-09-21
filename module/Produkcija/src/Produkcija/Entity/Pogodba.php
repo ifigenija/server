@@ -223,7 +223,7 @@ class Pogodba
      * @ORM\ManyToOne(targetEntity="App\Entity\Trr")
      * @ORM\JoinColumn(name="trr_id", referencedColumnName="id")
      * @Max\I18n(label="pogodba.trr",  description="pogodba.d.trr")
-     * @Max\Ui(type="toone", required=false, filters={"popa":{"element":"popa"}})
+     * @Max\Ui(type="toone", required=false)
      * @var \App\Entity\Trr
      */
     protected $trr;
