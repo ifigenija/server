@@ -22,6 +22,8 @@ forms:
             - jeNastopajoci
 #            - alternacije
             - oseba
+        hydrator:
+            lookups: [ oseba ]
     vse:
         link: default
 lists:
