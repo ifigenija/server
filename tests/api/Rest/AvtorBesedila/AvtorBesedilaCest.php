@@ -17,7 +17,9 @@ use ApiTester;
 class AvtorBesedilaCest
 {
 
-    private $restUrl = '/rest/avtorbesedila';
+    private $restUrl        = '/rest/avtorbesedila';
+    private $osebaUrl       = '/rest/oseba';
+    private $uprizoritevUrl = '/rest/uprizoritev';
     private $obj1;
     private $obj2;
     private $lookBesedilo1;
@@ -26,6 +28,7 @@ class AvtorBesedilaCest
     private $lookOseba2;
     private $lookOseba3;
     private $lookOseba4;
+    private $lookUprizoritev1;
 
     public function _before(ApiTester $I)
     {
@@ -43,11 +46,11 @@ class AvtorBesedilaCest
      */
     public function lookupBesedilo(ApiTester $I)
     {
-        $this->lookBesedilo1 = $ent                = $I->lookupEntity("besedilo", "0001", false);
+        $this->lookBesedilo1 = $ent                 = $I->lookupEntity("besedilo", "0001", false);
         codecept_debug($ent);
         $I->assertGuid($ent['id']);
-        
-        $this->lookBesedilo2 = $ent                = $I->lookupEntity("besedilo", "0002", false);
+
+        $this->lookBesedilo2 = $ent                 = $I->lookupEntity("besedilo", "0002", false);
         codecept_debug($ent);
         $I->assertGuid($ent['id']);
     }
@@ -69,6 +72,16 @@ class AvtorBesedilaCest
         $I->assertGuid($ent['id']);
 
         $this->lookOseba4 = $ent              = $I->lookupEntity("oseba", "0012", false);
+        $I->assertGuid($ent['id']);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev1 = $ent                    = $I->lookupEntity("uprizoritev", "0001", false);
         $I->assertGuid($ent['id']);
     }
 
@@ -99,7 +112,7 @@ class AvtorBesedilaCest
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
-        
+
         // kreiramo še en zapis z drugim besedilom
         $data       = [
             'besedilo'    => $this->lookBesedilo2['id'],
@@ -127,15 +140,15 @@ class AvtorBesedilaCest
 //        $I->assertEquals(2, $list[0]['zaporedna']);      //glede na sort
 //        $I->assertEquals(6, $list[$totalRecords - 1]['zaporedna']);      //glede na sort
 //    }
-    
+
     /**
      * @depends create
      * @param ApiTester $I
      */
     public function getListPoBesedilu(ApiTester $I)
     {
-        $resp    = $I->successfullyGetList($this->restUrl."?besedilo=".$this->lookBesedilo1['id'], []);
-        $list    = $resp['data'];
+        $resp = $I->successfullyGetList($this->restUrl . "?besedilo=" . $this->lookBesedilo1['id'], []);
+        $list = $resp['data'];
         codecept_debug($list);
 
         $totalRecords = $resp['state']['totalRecords'];
@@ -143,7 +156,6 @@ class AvtorBesedilaCest
         $I->assertEquals(2, $list[0]['zaporedna']);      //glede na sort
         $I->assertEquals(77, $list[$totalRecords - 1]['zaporedna']);      //glede na sort
     }
-
 
     /**
      * spremenim zapis
@@ -185,6 +197,28 @@ class AvtorBesedilaCest
     {
         $I->successfullyDelete($this->restUrl, $this->obj1['id']);
         $I->failToGet($this->restUrl, $this->obj1['id']);
+    }
+
+    /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateOsebo(ApiTester $I)
+    {
+        $polnoIme        = 'Mojculja Vidmarski';
+        $ent             = $I->successfullyGet($this->osebaUrl, $this->lookOseba2['id']);
+        $ent['polnoIme'] = $polnoIme;
+        $ent             = $I->successfullyUpdate($this->osebaUrl, $ent['id'], $ent);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+                
+        // ali je popravil avtorja v uprizoritvi?
+        codecept_debug($this->lookUprizoritev1,"look upr 1");
+        $ent             = $I->successfullyGet($this->uprizoritevUrl, $this->lookUprizoritev1['id']);
+        codecept_debug($ent['avtor']);
+        $I->assertTrue(strpos($ent['avtor'], $polnoIme)!==false, "update-an avtor $polnoIme v uprizoritvi");   
     }
 
 }

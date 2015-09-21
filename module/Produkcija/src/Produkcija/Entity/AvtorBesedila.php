@@ -72,10 +72,18 @@ class AvtorBesedila
      */
     protected $oseba;
 
-    public function preracunaj()
+    public function preracunaj($smer = false)
     {
-        
+        /**
+         * smer up pomeni oseba->avtorbesedila->besedilo->uprizoritve
+         */
+        if ($smer == \Max\Consts::UP) {
+            if ($this->getBesedilo()) {
+                $this->getBesedilo()->preracunaj(\Max\Consts::UP);
+            }
+        }
     }
+
     public function validate($mode = 'update')
     {
         
