@@ -230,18 +230,37 @@ class Pogodba
         $this->expect($this->sifra, "sifra je obvezen podatek", 1000342);
         $this->expect($this->oseba, "Pogodba nima subjekta. Oseba je obvezna", 1000343);
         $this->expect(!($this->zaposlenVDrJz && $this->samozaposlen), "Oseba ne more biti hkrati zaposlena v drugem jz in samozaposlena", 1000345);
+
+        /**
+         * Pri pogodbi preverim, če je nosilec pogodbe oseba na alternaciji
+         * Če je nosilec pogodbe poslovni partner grem čez kontaktne osebe 
+         * in preverim ,da je oseba kontakt na poslovnem partnerju
+         */
+        $popa = $this->getPopa();
+        if ($popa) {
+            $found = FALSE;
+            foreach ($popa->getKontaktneOsebe() as $kon) {
+                if ($kon->getOseba() === $this->getOseba()) {
+                    $found = true;
+                    break;
+                }
+            }
+            $this->expect($found
+                    , 'Oseba na alternaciji ni kontakt na poslovnem partnerju, ki je nosilec pogodbe'
+                    , 1000346);
+        }
     }
-    
+
     function getFunkcija()
     {
         $alternacije = $this->getAlternacije();
-        $funkcije = '';
-        if($alternacije){
+        $funkcije    = '';
+        if ($alternacije) {
             foreach ($alternacije as $alter) {
                 $funkcija = $alter->getFunkcija();
-                if($funkcija){
-                    $naziv = $funkcija->getNaziv();
-                    $funkcije = $naziv . ($funkcije ? " / " : ""). $funkcije;
+                if ($funkcija) {
+                    $naziv    = $funkcija->getNaziv();
+                    $funkcije = $naziv . ($funkcije ? " / " : "") . $funkcije;
                 }
             }
         }
@@ -438,12 +457,14 @@ class Pogodba
         $this->trr = $trr;
     }
 
-    public function getJeAvtorskePravice()
+    public
+            function getJeAvtorskePravice()
     {
         return $this->jeAvtorskePravice;
     }
 
-    public function setJeAvtorskePravice($jeAvtorskePravice)
+    public
+            function setJeAvtorskePravice($jeAvtorskePravice)
     {
         $this->jeAvtorskePravice = $jeAvtorskePravice;
         return $this;

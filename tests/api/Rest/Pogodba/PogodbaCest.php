@@ -549,6 +549,36 @@ class PogodbaCest
         // testiramo na enako številko napake kot je v validaciji
         $I->assertEquals(1000343, $resp[0]['code']);
     }
+    
+    public function createPogodboNapacniPopa(ApiTester $I)
+    {
+//        //ta pogodba se ne sme ustvarit
+        $data       = [
+            'sifra'               => 'ZZ999',
+            'vrednostVaj'         => 33.33,
+            'vrednostPredstave'   => 44.44,
+            'vrednostVaje'        => 22.22,
+            'placiloNaVajo'       => false,
+            'planiranoSteviloVaj' => 10,
+            'aktivna'             => false,
+            'opis'                => 'zz',
+            'oseba'               => $this->lookOseba4['id'],
+            'popa'                => $this->lookPopa1['id'],
+            'trr'                 => $this->objTrr['id'],
+            'vrednostDo'          => 55.5,
+            'zacetek'             => '2012-02-01T00:00:00+0100',
+            'konec'               => '2014-02-01T00:00:00+0100',
+            'vrednostDoPremiere'  => 66.33,
+            'zaposlenVDrJz'       => true,
+            'samozaposlen'        => FALSE,
+            'jeAvtorskePravice'   => FALSE,
+            'igralec'             => true,
+        ];
+        $resp = $I->failToCreate($this->restUrl, $data);
+        $I->assertNotEmpty($resp);
+        // testiramo na enako številko napake kot je v validaciji
+        $I->assertEquals(1000346, $resp[0]['code']);
+    }
 
     /**
      * brisanje pogodbe
