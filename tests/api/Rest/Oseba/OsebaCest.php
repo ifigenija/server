@@ -1005,6 +1005,9 @@ class OsebaCest
             'popa'              => null,
             'oseba'             => $this->obj2['id'],
             'trr'               => $this->objTrr1['id'],
+            'zacetek'           => '2012-02-01T00:00:00+0100',
+            'procentOdInkasa'   => 5.1,
+            'jeProcentOdInkasa' => true,
         ];
         $this->objPogodba1 = $ent               = $I->successfullyCreate($this->pogodbaUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -1021,6 +1024,9 @@ class OsebaCest
             'popa'              => null,
             'oseba'             => $this->obj2['id'],
             'trr'               => $this->objTrr1['id'],
+            'zacetek'           => '2012-02-01T00:00:00+0100',
+            'procentOdInkasa'   => 5.1,
+            'jeProcentOdInkasa' => true,
         ];
         $this->objPogodba2 = $ent               = $I->successfullyCreate($this->pogodbaUrl, $data);
         $I->assertNotEmpty($ent['id']);

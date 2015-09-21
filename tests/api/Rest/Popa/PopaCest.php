@@ -453,18 +453,18 @@ class PopaCest
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
         codecept_debug($list);
-        $totRec=$resp['state']['totalRecords'];
-        $I->assertGreaterThanOrEqual(1,$totRec);
-        
-        $listUrl = $this->restUrl;    
+        $totRec  = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(1, $totRec);
+
+        $listUrl = $this->restUrl;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
         codecept_debug($list);
-        $totRec=$resp['state']['totalRecords'];
-        $I->assertGreaterThanOrEqual(2,$totRec);
+        $totRec  = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(2, $totRec);
         $I->assertEquals("0000", $list[0]['sifra']);  // glede na sort 
-        $I->assertEquals("ZZ12", $list[$totRec-1]['sifra']);  // glede na sort 
+        $I->assertEquals("ZZ12", $list[$totRec - 1]['sifra']);  // glede na sort 
     }
 
     /**
@@ -653,6 +653,9 @@ class PopaCest
             'popa'              => $this->obj2['id'],
             'oseba'             => $this->lookOseba1['id'],
             'trr'               => $this->objTrr1['id'],
+            'zacetek'           => '2012-02-01T00:00:00+0100',
+            'procentOdInkasa'   => 5.1,
+            'jeProcentOdInkasa' => true,
         ];
         $I->assertTrue(true, "začasno za test 2");
         $I->assertNotEmpty($data);
@@ -671,6 +674,9 @@ class PopaCest
             'popa'              => $this->obj2['id'],
             'oseba'             => $this->lookOseba2['id'],
             'trr'               => $this->objTrr1['id'],
+            'zacetek'           => '2012-02-01T00:00:00+0100',
+            'procentOdInkasa'   => 5.1,
+            'jeProcentOdInkasa' => true,
         ];
         $this->objPogodba2 = $ent               = $I->successfullyCreate($this->pogodbaUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -1055,7 +1061,7 @@ class PopaCest
 
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        
+
         //iskanje po idddv ki ni v celoti
         $listUrl = $this->restUrl . "?q=" . "01234567";
 
