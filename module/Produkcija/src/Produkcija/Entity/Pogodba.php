@@ -39,7 +39,8 @@ class Pogodba
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="pogodba.zacetek", description="pogodba.d.zacetek")
+     * @Max\I18n(label="pogodba.zacetek",  description="pogodba.d.zacetek")
+     * @Max\Ui(required=true)
      * @var string
      */
     protected $zacetek;

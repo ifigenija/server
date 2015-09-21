@@ -47,6 +47,7 @@ class Alternacija
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="alternacija.zacetek", description="alternacija.d.zacetek")
+     * @Max\Ui(required=true)
      * @var string
      */
     protected $zacetek;
