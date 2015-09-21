@@ -59,7 +59,7 @@ class AvtorBesedila
      * 
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Besedilo", inversedBy="avtorji")
      * @Max\I18n(label="avtorBesedila.besedilo", description="avtorBesedila.d.besedilo")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hiddenid")
      * @var \Produkcija\Entity\Besedilo
      */
     protected $besedilo;

@@ -11,6 +11,10 @@ forms:
             - aliVNaslovu
             - besedilo
             - oseba
+        hydrator:
+            lookups:
+                - oseba
+                - besedilo
 lists:
     default: 
         filter:
@@ -22,6 +26,8 @@ lists:
                       targetEntity: Produkcija\Entity\Besedilo
                       required: true
         hydrator:
-            - exclude: []
+            lookups:
+                - oseba
+                - besedilo
 #    vse: 
 #        filter:
