@@ -251,6 +251,12 @@ class Oseba
      */
     protected $naslov;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Produkcija\Entity\AvtorBesedila", mappedBy="oseba")
+     * @var <Avtorji>
+     */
+    protected $avtorji;
+
     public function __construct($name = '')
     {
         $this->naslovi        = new ArrayCollection();
@@ -261,6 +267,19 @@ class Oseba
         $this->pogodbe        = new ArrayCollection();
         $this->zaposlitve     = new ArrayCollection();
         $this->zasedenosti    = new ArrayCollection();
+        $this->avtorji        = new ArrayCollection();
+    }
+
+    public function preracunaj($smer = false)
+    {
+        /**
+         * smer up pomeni oseba->avtorbesedila->besedilo->uprizoritve
+         */
+        if ($smer == \Max\Consts::UP) {
+            foreach  ($this->getAvtorji() as $avtor) {
+                $avtor->preracunaj(\Max\Consts::UP);
+            }
+        }
     }
 
     /**
@@ -590,6 +609,17 @@ class Oseba
     public function setAvtorjiBesedil($avtorjiBesedil)
     {
         $this->avtorjiBesedil = $avtorjiBesedil;
+        return $this;
+    }
+
+    public function getAvtorji()
+    {
+        return $this->avtorji;
+    }
+
+    public function setAvtorji($avtorji)
+    {
+        $this->avtorji = $avtorji;
         return $this;
     }
 

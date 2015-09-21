@@ -20,11 +20,11 @@ class Osebe
 
     protected $sortOptions = [
         "default" => [
-            "priimek" => ["alias" => "p.priimek"],
-            "ime"     => ["alias" => "p.ime"],
+            "priimek"   => ["alias" => "p.priimek"],
+            "ime"       => ["alias" => "p.ime"],
             "sifra"     => ["alias" => "p.sifra"],
             "email"     => ["alias" => "p.email"],
-            "psevdonim"     => ["alias" => "p.psevdonim"],
+            "psevdonim" => ["alias" => "p.psevdonim"],
         ],
         "vse"     => [
             "priimek" => ["alias" => "p.priimek"],
@@ -37,8 +37,8 @@ class Osebe
         switch ($name) {
             case "default":
             case "vse":
-                $qb = $this->getVseQb($options);
-                $sort=$this->getSort($name);
+                $qb   = $this->getVseQb($options);
+                $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
         }
@@ -50,27 +50,27 @@ class Osebe
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $ime     = $e->like('lower(p.ime)', ':naz');
-            $priimek = $e->like('lower(p.priimek)', ':naz');
-            $sifra = $e->like('lower(p.sifra)', ':naz');
-            $email = $e->like('lower(p.email)', ':naz');
+            $ime       = $e->like('lower(p.ime)', ':naz');
+            $priimek   = $e->like('lower(p.priimek)', ':naz');
+            $sifra     = $e->like('lower(p.sifra)', ':naz');
+            $email     = $e->like('lower(p.email)', ':naz');
             $psevdonim = $e->like('lower(p.psevdonim)', ':naz');
             $qb->andWhere($e->orX($ime, $priimek, $sifra, $email, $psevdonim));
 
             $qb->setParameter('naz', strtolower("{$options['q']}%"), "string");
         }
-        
-        if(!empty($options['naslov'])){
+
+        if (!empty($options['naslov'])) {
             $qb->leftJoin('p.naslovi', 'naslov');
-            
-            $ulica     = $e->like('lower(naslov.ulica)', ':naslov');
-            $dodatnaUlica     = $e->like('lower(naslov.ulicaDva)', ':naslov');
-            $posta     = $e->like('lower(naslov.postaNaziv)', ':naslov');
-            $postnaStevilka     = $e->like('lower(naslov.posta)', ':naslov');
-            
-            
+
+            $ulica          = $e->like('lower(naslov.ulica)', ':naslov');
+            $dodatnaUlica   = $e->like('lower(naslov.ulicaDva)', ':naslov');
+            $posta          = $e->like('lower(naslov.postaNaziv)', ':naslov');
+            $postnaStevilka = $e->like('lower(naslov.posta)', ':naslov');
+
+
             $qb->andWhere($e->orX($ulica, $dodatnaUlica, $posta, $postnaStevilka));
-            
+
             $qb->setParameter('naslov', strtolower("{$options['naslov']}%"), "string");
         }
 
@@ -89,7 +89,24 @@ class Osebe
             $num = $this->getServiceLocator()->get('stevilcenje.generator');
             $object->setSifra($num->generate('oseba'));
         }
+
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
+
         parent::create($object, $params);
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function update($object, $params = null)
+    {
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
+
+        parent::update($object, $params);
     }
 
 }

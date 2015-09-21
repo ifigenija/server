@@ -146,6 +146,15 @@ class Besedilo
         $this->uprizoritve = new ArrayCollection();
     }
 
+    public function preracunaj($smer = false)
+    {
+        if ($smer == \Max\Consts::UP) {
+            foreach ($this->getUprizoritve() as $uprizoritev) {
+                $uprizoritev->preracunaj(\Max\Consts::UP);
+            }
+        }
+    }
+
     public function validate($mode = 'update')
     {
         $this->expect($this->getStevilka(), "Številka besedila ni določena", 1000800);
