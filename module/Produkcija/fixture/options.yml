@@ -56,15 +56,15 @@
     public: false
     readOnly: true
     description: Velikost funkcije
-    defaultValue: 
-        stataza:
-           label: Stataža
-        mala:
-           label: Mala vloga / funkcija
-        srednja:
-           label: Srednja vloga / funkcija
+    defaultValue:
         velika:
            label: Velika vloga / funkcija
+        srednja:
+           label: Srednja vloga / funkcija
+        mala:
+           label: Mala vloga / funkcija
+        stataza:
+           label: Stataža
 -
     name: zaposlitev.status
     type: array

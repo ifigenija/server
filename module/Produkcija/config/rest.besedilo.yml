@@ -29,12 +29,19 @@ forms:
 lists:
     default: 
         filter:
-            - name: q
-              type: text
-              options: 
-                  required: true
-                  placeholder: Išči..
-                  label: Išči
+            elements:
+                - name: q
+                  type: text
+                  options: 
+                      required: false
+                      placeholder: Išči..
+                      label: Išči
+                - name: avtor
+                  type: text
+                  options: 
+                      required: false
+                      placeholder: Vpiši avtorja..
+                      label: Avtor
         hydrator:
             virtual:
                 - imena

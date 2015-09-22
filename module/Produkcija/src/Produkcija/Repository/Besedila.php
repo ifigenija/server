@@ -60,6 +60,21 @@ class Besedila
             $qb->setParameter('query', strtolower("%{$options['q']}%"), "string");
         }
 
+        if (!empty($options['avtor'])) {
+            $qb->leftJoin('p.avtorji', 'avtor');
+            $qb->leftJoin('avtor.oseba', 'oseba');
+
+            $ime        = $e->like('lower(oseba.ime)', ':avtor');
+            $priimek    = $e->like('lower(oseba.priimek)', ':avtor');
+            $srednjeIme = $e->like('lower(oseba.srednjeIme)', ':avtor');
+            $psevdonim  = $e->like('lower(oseba.psevdonim)', ':avtor');
+
+
+            $qb->andWhere($e->orX($ime, $priimek, $psevdonim, $srednjeIme));
+
+            $qb->setParameter('avtor', strtolower("{$options['avtor']}%"), "string");
+        }
+
         return $qb;
     }
 
