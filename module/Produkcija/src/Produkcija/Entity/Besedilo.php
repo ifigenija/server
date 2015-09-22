@@ -160,6 +160,23 @@ class Besedilo
         $this->expect($this->getStevilka(), "Številka besedila ni določena", 1000800);
     }
 
+    /**
+     * Vrne imena ljudi, ki so na alternacijah
+     */
+    public function getImena()
+    {
+        $imena = "";
+        foreach ($this->getAvtorji() as $avtor) {
+            /* @var $alter \Produkcija\Entity\Alternacija */
+            $oseba = $avtor->getOseba();
+            if ($oseba) {
+                $ime   = $oseba->getPolnoIme();
+                $imena = $ime . ($imena ? " / " : "") . $imena;
+            }
+        }
+        return $imena;
+    }
+
     public function getId()
     {
         return $this->id;

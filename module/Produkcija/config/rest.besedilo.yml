@@ -30,6 +30,8 @@ lists:
                   placeholder: Išči..
                   label: Išči
         hydrator:
-            - exclude: []
+            virtual:
+                - imena
+                
 #    vse: 
 #        filter:
