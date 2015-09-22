@@ -14,3 +14,4 @@ autoload_classmap.php
 .idea
 /data/
 composer.lock
+.idea

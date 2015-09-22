@@ -11,7 +11,7 @@ return [
         'driver' => [
             'Koledar' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'apc',
+                'cache' => 'meta',
                 'paths' => [
                     __DIR__ . '/../src/Koledar/Entity'
                 ]
