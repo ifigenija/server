@@ -6,8 +6,6 @@
 
 namespace ProgramDela\Service;
 
-
-
 /**
  * Description of EnotaProgramaRpcService
  *
@@ -167,6 +165,7 @@ class EnotaProgramaService
                 }
             }
         }
+        $data['avtor'] = $uprizoritev->getAvtor();
         $data['Do']['nasDelez'] = $data['Do']['avtorskiHonorarji'] + $data['Do']['avtorskePravice'] + $data['Do']['materialni'];
 
         $data['datumZacStudija'] = $uprizoritev->getDatumZacStudija() ? date(\DateTime::ISO8601, strtotime($uprizoritev->getDatumZacStudija()->format('c'))) : null;       // datum v ISO8601 obliki 
@@ -205,6 +204,7 @@ class EnotaProgramaService
         $data['stHonorarnihIgrTujJZ'] = 0;
         $data['stHonorarnihIgrSamoz'] = 0;
         $data['stZaposUmet']          = 0;
+        $data['avtor']                = 0;
         return $data;
     }
 
