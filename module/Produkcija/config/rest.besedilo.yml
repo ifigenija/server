@@ -20,6 +20,12 @@ forms:
             - name: stevilka
               options: 
                   required: false
+        hydrator:
+            byValue:
+                - avtorji
+            lookups:
+                - avtorji.oseba
+                - avtorji.besedilo
 lists:
     default: 
         filter:
