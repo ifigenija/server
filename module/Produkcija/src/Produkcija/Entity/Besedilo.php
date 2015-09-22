@@ -129,6 +129,14 @@ class Besedilo
     protected $zaloznik;
 
     /**
+     * izpisno polje - se "izračuna" iz avtorjev besedila
+     * 
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    protected $avtor;
+
+    /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\AvtorBesedila", mappedBy="besedilo")
      * @var <Avtorji>
      */
@@ -148,6 +156,33 @@ class Besedilo
 
     public function preracunaj($smer = false)
     {
+        /**
+         * avtor se "izračuna" enako kot v uprizoritvi
+         */
+        $avtorji   = $zaporedna = []; //init
+        foreach ($this->avtorji as $avt) {
+            if ($avt->getAliVNaslovu()) {
+                if ($avt->getOseba()) {
+                    $avtorji[] = array('zaporedna' => $avt->getZaporedna(), "polnoime" => $avt->getOseba()->getPolnoIme());
+                }
+            }
+        }
+        /**
+         * sort po zaporedni
+         */
+        foreach ($avtorji as $key => $row) {
+            $zaporedna[$key] = $row['zaporedna'];
+        }
+        array_multisort($zaporedna, SORT_ASC, $avtorji);
+
+        /**
+         * napolni polje avtor po avtorjih, ločenih s pomišljajem
+         */
+        $this->avtor = "";    //init
+        foreach ($avtorji as $avt) {
+            $this->avtor = (empty($this->avtor)) ? $avt['polnoime'] : $this->avtor . " - " . $avt['polnoime'];
+        }
+
         if ($smer == \Max\Consts::UP) {
             foreach ($this->getUprizoritve() as $uprizoritev) {
                 $uprizoritev->preracunaj(\Max\Consts::UP);
@@ -350,6 +385,17 @@ class Besedilo
     public function setUprizoritve($uprizoritve)
     {
         $this->uprizoritve = $uprizoritve;
+        return $this;
+    }
+
+    public function getAvtor()
+    {
+        return $this->avtor;
+    }
+
+    public function setAvtor($avtor)
+    {
+        $this->avtor = $avtor;
         return $this;
     }
 

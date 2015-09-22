@@ -181,13 +181,14 @@ class AvtorBesedilaCest
     public function read(\ApiTester $I)
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
-
+        codecept_debug($ent);
+        
         $I->assertGuid($ent['id'], 'zz');
         $I->assertEquals($ent['tipAvtorja'], 'uu');
         $I->assertEquals($ent['zaporedna'], 77);
         $I->assertEquals($ent['aliVNaslovu'], true);
-        $I->assertEquals($ent['besedilo'], $this->lookBesedilo1['id']);
-        $I->assertEquals($ent['oseba'], $this->lookOseba1['id']);
+        $I->assertEquals($ent['besedilo']['id'], $this->lookBesedilo1['id']);
+        $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
     }
 
     /**
