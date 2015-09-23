@@ -29,6 +29,7 @@ class AvtorBesedila
      * 
      * @ORM\Column(type="string")
      * @Max\I18n(label="avtorBesedila.tipAvtorja", description="avtorBesedila.d.tipAvtorja")
+     * @Max\Ui(type="select",opts="avtorbesedila.tipavtorja",required=true)
      * @var string
      */
     protected $tipAvtorja;

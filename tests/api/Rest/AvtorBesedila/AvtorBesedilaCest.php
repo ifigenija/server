@@ -93,7 +93,7 @@ class AvtorBesedilaCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'tipAvtorja'  => 'zz.',
+            'tipAvtorja'  => 'aizv',
             'zaporedna'   => 77,
             'aliVNaslovu' => true,
             'besedilo'    => $this->lookBesedilo1['id'],
@@ -104,7 +104,7 @@ class AvtorBesedilaCest
 
         // kreiramo še en zapis
         $data       = [
-            'tipAvtorja'  => 'aa',
+            'tipAvtorja'  => 'aizv',
             'zaporedna'   => 2,
             'aliVNaslovu' => true,
             'besedilo'    => $this->lookBesedilo1['id'],
@@ -116,7 +116,7 @@ class AvtorBesedilaCest
         // kreiramo še en zapis z drugim besedilom
         $data       = [
             'besedilo'    => $this->lookBesedilo2['id'],
-            'tipAvtorja'  => 'bb',
+            'tipAvtorja'  => 'apri',
             'zaporedna'   => 1,
             'aliVNaslovu' => true,
             'oseba'       => $this->lookOseba2['id'],
@@ -166,10 +166,10 @@ class AvtorBesedilaCest
     public function update(ApiTester $I)
     {
         $ent               = $this->obj1;
-        $ent['tipAvtorja'] = 'uu';
+        $ent['tipAvtorja'] = 'prev';
         $ent               = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($ent['tipAvtorja'], 'uu');
+        $I->assertEquals($ent['tipAvtorja'], 'prev');
     }
 
     /**
@@ -182,9 +182,9 @@ class AvtorBesedilaCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
         codecept_debug($ent);
-        
+
         $I->assertGuid($ent['id'], 'zz');
-        $I->assertEquals($ent['tipAvtorja'], 'uu');
+        $I->assertEquals($ent['tipAvtorja'], 'prev');
         $I->assertEquals($ent['zaporedna'], 77);
         $I->assertEquals($ent['aliVNaslovu'], true);
         $I->assertEquals($ent['besedilo']['id'], $this->lookBesedilo1['id']);
@@ -214,12 +214,12 @@ class AvtorBesedilaCest
         $ent             = $I->successfullyUpdate($this->osebaUrl, $ent['id'], $ent);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
-                
+
         // ali je popravil avtorja v uprizoritvi?
-        codecept_debug($this->lookUprizoritev1,"look upr 1");
-        $ent             = $I->successfullyGet($this->uprizoritevUrl, $this->lookUprizoritev1['id']);
+        codecept_debug($this->lookUprizoritev1, "look upr 1");
+        $ent = $I->successfullyGet($this->uprizoritevUrl, $this->lookUprizoritev1['id']);
         codecept_debug($ent['avtor']);
-        $I->assertTrue(strpos($ent['avtor'], $polnoIme)!==false, "update-an avtor $polnoIme v uprizoritvi");   
+        $I->assertTrue(strpos($ent['avtor'], $polnoIme) !== false, "update-an avtor $polnoIme v uprizoritvi");
     }
 
 }
