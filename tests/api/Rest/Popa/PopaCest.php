@@ -633,56 +633,6 @@ class PopaCest
     }
 
     /**
-     *  kreiramo pogodbo
-     * 
-     * @depends create
-     * 
-     * @param ApiTester $I
-     */
-    public function createVecPogodb(ApiTester $I)
-    {
-        $I->assertTrue(true, "začasno za test");
-        $data              = [
-            'sifra'             => 'ZZ123',
-            'alternacija'       => $this->lookAlternacija1['id'],
-            'vrednostVaj'       => 33.33,
-            'vrednostPredstave' => 44.44,
-            'vrednostUre'       => 22.22,
-            'aktivna'           => false,
-            'opis'              => 'zz',
-            'popa'              => $this->obj2['id'],
-            'oseba'             => $this->lookOseba1['id'],
-            'trr'               => $this->objTrr1['id'],
-            'zacetek'           => '2012-02-01T00:00:00+0100',
-            'procentOdInkasa'   => 5.1,
-            'jeProcentOdInkasa' => true,
-        ];
-        $I->assertTrue(true, "začasno za test 2");
-        $I->assertNotEmpty($data);
-        $this->objPogodba1 = $ent               = $I->successfullyCreate($this->pogodbaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-
-        // kreiramo še en zapis
-        $data              = [
-            'sifra'             => 'WW4',
-            'vrednostVaj'       => 33.33,
-            'alternacija'       => $this->lookAlternacija2['id'],
-            'vrednostPredstave' => 44.44,
-            'vrednostUre'       => 22.22,
-            'aktivna'           => false,
-            'opis'              => 'ww',
-            'popa'              => $this->obj2['id'],
-            'oseba'             => $this->lookOseba2['id'],
-            'trr'               => $this->objTrr1['id'],
-            'zacetek'           => '2012-02-01T00:00:00+0100',
-            'procentOdInkasa'   => 5.1,
-            'jeProcentOdInkasa' => true,
-        ];
-        $this->objPogodba2 = $ent               = $I->successfullyCreate($this->pogodbaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-    }
-
-    /**
      *  napolnimo vsaj en zapis
      * 
      * @depends create
@@ -893,7 +843,7 @@ class PopaCest
             'vrednostDo'  => 1.23,
             'vrednostNa'  => 4.56,
             'opis'        => 'zz',
-            'tipstroska'  => 'avtorprav',
+            'tipstroska'  => 'materialni',
             'sort'        => 1,
 //            'uprizoritev' => $this->lookUprizoritev,
             'uprizoritev' => null,
@@ -909,7 +859,7 @@ class PopaCest
             'vrednostDo'  => 1.23,
             'vrednostNa'  => 4.56,
             'opis'        => 'zz',
-            'tipstroska'  => 'avtorprav',
+            'tipstroska'  => 'materialni',
             'sort'        => 1,
 //            'uprizoritev' => $this->lookUprizoritev,
             'uprizoritev' => null,
@@ -960,9 +910,61 @@ class PopaCest
             'funkcija' => 'bb',
             'opis'     => 'bb',
             'popa'     => $this->obj2['id'],
-            'oseba'    => $this->objOseba2['id'],
+            'oseba'    => $this->lookOseba1['id'],
         ];
         $this->objKontaktna2 = $ent                 = $I->successfullyCreate($this->kontaktnaOsebaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     *  kreiramo pogodbo
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createVecPogodb(ApiTester $I)
+    {
+        $this->obj2 = $popa       = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        codecept_debug($popa);
+
+        $data              = [
+            'sifra'             => 'ZZ123',
+            'alternacija'       => $this->lookAlternacija1['id'],
+            'vrednostVaj'       => 33.33,
+            'vrednostPredstave' => 44.44,
+            'vrednostUre'       => 22.22,
+            'aktivna'           => false,
+            'opis'              => 'zz',
+            'popa'              => $this->obj2['id'],
+            'oseba'             => $this->lookOseba1['id'],
+            'trr'               => $this->objTrr1['id'],
+            'zacetek'           => '2012-02-01T00:00:00+0100',
+            'procentOdInkasa'   => 5.1,
+            'jeProcentOdInkasa' => true,
+        ];
+        $I->assertTrue(true, "začasno za test 2");
+        $I->assertNotEmpty($data);
+        $this->objPogodba1 = $ent               = $I->successfullyCreate($this->pogodbaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+
+        // kreiramo še en zapis
+        $data              = [
+            'sifra'             => 'WW4',
+            'vrednostVaj'       => 33.33,
+            'alternacija'       => $this->lookAlternacija2['id'],
+            'vrednostPredstave' => 44.44,
+            'vrednostUre'       => 22.22,
+            'aktivna'           => false,
+            'opis'              => 'ww',
+            'popa'              => $this->obj2['id'],
+            'oseba'             => $this->lookOseba2['id'],
+            'trr'               => $this->objTrr1['id'],
+            'zacetek'           => '2012-02-01T00:00:00+0100',
+            'procentOdInkasa'   => 5.1,
+            'jeProcentOdInkasa' => true,
+        ];
+        $this->objPogodba2 = $ent               = $I->successfullyCreate($this->pogodbaUrl, $data);
         $I->assertNotEmpty($ent['id']);
     }
 

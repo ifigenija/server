@@ -296,7 +296,6 @@ class PogodbaCest
             'vrednostVaje'        => 22.22,
             'placiloNaVajo'       => false,
             'planiranoSteviloVaj' => 10,
-            'aktivna'             => false,
             'opis'                => 'zz',
             'oseba'               => $this->lookOseba1['id'],
             'popa'                => $this->lookPopa1['id'],
@@ -325,7 +324,6 @@ class PogodbaCest
             'vrednostVaje'        => 11.11,
             'placiloNaVajo'       => true,
             'planiranoSteviloVaj' => 10,
-            'aktivna'             => false,
             'opis'                => 'ww',
             'oseba'               => $this->lookOseba2['id'],
             'popa'                => null,
@@ -354,7 +352,6 @@ class PogodbaCest
             'vrednostVaje'        => 2.22,
             'placiloNaVajo'       => false,
             'planiranoSteviloVaj' => 10,
-            'aktivna'             => false,
             'opis'                => 'aa',
             'oseba'               => $this->lookOseba3['id'],
             'popa'                => null,
@@ -384,7 +381,6 @@ class PogodbaCest
             'vrednostVaje'        => 22.22,
             'placiloNaVajo'       => false,
             'planiranoSteviloVaj' => 10,
-            'aktivna'             => false,
             'opis'                => 'bb',
             'oseba'               => $this->lookOseba1['id'],
             'popa'                => null,
@@ -413,7 +409,6 @@ class PogodbaCest
             'vrednostVaje'        => 22.22,
             'placiloNaVajo'       => false,
             'planiranoSteviloVaj' => 10,
-            'aktivna'             => false,
             'opis'                => 'cc',
             'oseba'               => $this->lookOseba1['id'],
             'popa'                => null,
@@ -470,7 +465,6 @@ class PogodbaCest
         $I->assertEquals($ent['placiloNaVajo'], false);
         $I->assertEquals($ent['planiranoSteviloVaj'], 10);
 
-        $I->assertEquals($ent['aktivna'], false);
         $I->assertEquals($ent['jeAvtorskePravice'], false, "jeAvtorskePravice");
         $I->assertEquals($ent['opis'], 'xx');
         $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
@@ -580,7 +574,6 @@ class PogodbaCest
             'vrednostVaj'       => 33.33,
             'vrednostPredstave' => 44.44,
             'vrednostVaje'      => 22.22,
-            'aktivna'           => false,
             'opis'              => 'yy',
             'oseba'             => null,
             'popa'              => null,
@@ -606,7 +599,6 @@ class PogodbaCest
             'vrednostVaje'        => 22.22,
             'placiloNaVajo'       => false,
             'planiranoSteviloVaj' => 10,
-            'aktivna'             => false,
             'opis'                => 'zz',
             'oseba'               => $this->lookOseba4['id'],
             'popa'                => $this->lookPopa1['id'],

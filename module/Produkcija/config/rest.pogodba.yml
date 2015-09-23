@@ -17,7 +17,6 @@ forms:
             - procentOdInkasa
             - jeProcentOdInkasa
             - planiranoSteviloVaj
-            - aktivna
             - opis
 #            - alternacije
             - oseba

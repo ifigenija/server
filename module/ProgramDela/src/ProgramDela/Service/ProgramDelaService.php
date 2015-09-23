@@ -214,23 +214,21 @@ class ProgramDelaService
                     if ($alternacija->getImaPogodbo()) {
                         $pogodba = $alternacija->getPogodba();
                         if ($pogodba) {
-                            if ($pogodba->getAktivna()) {
+                            /**
+                             *  $$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
+                             */
+                            if ($pogodba->getJeAvtorskePravice()) {
                                 /**
-                                 *  $$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
+                                 * avtorske pravice
                                  */
-                                if ($pogodba->getJeAvtorskePravice()) {
-                                    /**
-                                     * avtorske pravice
-                                     */
-                                    $data['Do']['avtorskePravice']+= $pogodba->getVrednostDoPremiere();
-                                    $data['Na']['avtorskePravice']+= $pogodba->getVrednostPredstave(); // to so tantieme
-                                } else {
-                                    /**
-                                     * avtorski honorarji
-                                     */
-                                    $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
-                                    $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
-                                }
+                                $data['Do']['avtorskePravice']+= $pogodba->getVrednostDoPremiere();
+                                $data['Na']['avtorskePravice']+= $pogodba->getVrednostPredstave(); // to so tantieme
+                            } else {
+                                /**
+                                 * avtorski honorarji
+                                 */
+                                $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
+                                $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
                             }
                         }
                     }
@@ -280,7 +278,7 @@ class ProgramDelaService
                 $podskupina = (integer) explode(".", $key, 2)[1];
                 $postColl   = $programdela->getPostavkeC2()
                         ->filter(function($ent) use (&$skupina, &$podskupina) {
-                    return ($ent->getSkupina() === $skupina && $ent->getPodskupina() === $podskupina);   
+                    return ($ent->getSkupina() === $skupina && $ent->getPodskupina() === $podskupina);
                 });
                 if ($postColl->count() == 0) {
                     /**
