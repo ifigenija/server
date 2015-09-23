@@ -35,14 +35,14 @@ class Alternacije
     {
         switch ($name) {
             case "vse":
-                $qb = $this->getVseQb($options);
+                $qb   = $this->getVseQb($options);
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $this->expect(!(empty($options['funkcija']) && empty($options['uprizoritev']) ), "Ali funkcija  ali uprizoritev je obvezna", 770081);
                 $this->expect(!(!empty($options['funkcija']) && !empty($options['uprizoritev']) ), "Le funkcija ali uprizoritev ne oba hkrati", 770082);
-                $qb = $this->getDefaultQb($options);
+                $qb   = $this->getDefaultQb($options);
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
@@ -122,6 +122,35 @@ class Alternacije
         }
 
         $object->preracunaj();
+
+        /**
+         * le pri creatu napolni zaposlitev iz osebe, če je še ni:
+         */
+        if (empty($object->getZaposlitev()) && !empty($object->getOseba())) {
+            $zaposlitev = null; //init
+            $zdaj      = new \DateTime();
+            $danes      = $zdaj->format('Y-m-d');
+            ;
+            /**
+             * najdi, če obstaja ustrezna zaposlitev glede na osebo
+             * zaenkrat je narejeno poenostavljeno, da preverja , če je konec zaposlitve večji od danes
+             * natančneje bi lahko preverjal, če je interval alternacije znotraj intervala zaposlitve. $$
+             */
+            foreach ($object->getOseba()->getZaposlitve() as $zap) {
+                if ($zap->getStatus() == 'A' && (empty($zap->getKonec()) || $zap->getKonec()->format('Y-m-d') <= $danes )) {
+                    $zaposlitev = $zap;
+                }
+            }
+            $object->setZaposlitev($zaposlitev);
+        }
+
+
+
+        if (empty($object->getSifra())) {
+            $num = $this->getServiceLocator()->get('stevilcenje.generator');
+            $object->setSifra($num->generate('alternacija'));
+        }
+
 
         $this->preveriZaposlitev($object);
         $this->nastaviEnPrivzeti($object->getFunkcija());

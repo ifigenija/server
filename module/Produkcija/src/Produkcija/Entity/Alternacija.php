@@ -172,7 +172,10 @@ class Alternacija
     public function validate($mode = 'update')
     {
         if ($this->getZaposlitev()) {
-            $this->expect($this->getOseba() === $this->getZaposlitev()->getOseba());
+            $this->expect($this->getOseba() === $this->getZaposlitev()->getOseba()
+                    , 'Oseba na zaposlitvi ni enaka kot oseba na alternaciji'
+                    , 1000338);
+            ;
             $this->setZaposlen(true);
         } else {
             $this->setZaposlen(false);

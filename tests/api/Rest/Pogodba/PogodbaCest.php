@@ -73,6 +73,8 @@ class PogodbaCest
     private $lookupAlternacijaUrl = '/lookup/alternacija';
     private $lookUprizoritev1;
     private $lookUprizoritev2;
+    private $zaposlitevUrl          = '/rest/zaposlitev';
+    private $objZaposlitev;
 
     public function _before(ApiTester $I)
     {
@@ -185,6 +187,35 @@ class PogodbaCest
         $this->objTrr = $trr          = $I->successfullyCreate($this->trrUrl, $data);
         $I->assertEquals('ZZ123', $trr['banka']);
         $I->assertNotEmpty($trr['id']);
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends lookupOsebo
+     * 
+     * @param ApiTester $I
+     */
+    public function createZaposlitev(ApiTester $I)
+    {
+        $data                = [
+            'status'              => 'A',
+            'zacetek'             => '2010-02-01T00:00:00+0100',
+            'konec'               => '2010-02-01T00:00:00+0100',
+            'tip'                 => 1,
+            'delovnaObveza'       => 2,
+            'malica'              => 'zz',
+            'delovnoMesto'        => 'XXX',
+            'izmenskoDelo'        => true,
+            'individualnaPogodba' => true,
+            'jeZaposlenVdrugemJz' => TRUE,
+            'jeNastopajoci'       => TRUE,
+            'oseba'               => $this->lookOseba2['id'],
+        ];
+        $this->objZaposlitev = $ent                 = $I->successfullyCreate($this->zaposlitevUrl, $data);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['status'], 'A');
     }
 
     /**
@@ -588,8 +619,8 @@ class PogodbaCest
             'samozaposlen'        => FALSE,
             'jeAvtorskePravice'   => FALSE,
             'igralec'             => true,
-            'procentOdInkasa'   => 5.1,
-            'jeProcentOdInkasa' => true,
+            'procentOdInkasa'     => 5.1,
+            'jeProcentOdInkasa'   => true,
         ];
         $resp = $I->failToCreate($this->restUrl, $data);
         $I->assertNotEmpty($resp);
@@ -684,6 +715,10 @@ class PogodbaCest
      */
     public function createVecAlternacij(ApiTester $I)
     {
+        
+        /**
+         * kreiramo alternacijo z zaposlitvijo in pogodbo
+         */
         $data                  = [
             'zaposlen'   => false, // v validaciji postavimo na true, če je zaposlitev
             'zacetek'    => '2010-02-01T00:00:00+0100',
@@ -693,7 +728,7 @@ class PogodbaCest
             'privzeti'   => true,
             'aktivna'    => true,
             'funkcija'   => $this->lookFunkcija['id'],
-            'zaposlitev' => null,
+            'zaposlitev' => $this->objZaposlitev['id'],
             'oseba'      => $this->lookOseba2['id'],
             'pomembna'   => TRUE,
             'pogodba'    => $this->obj2['id'],
