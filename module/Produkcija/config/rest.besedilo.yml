@@ -9,6 +9,7 @@ forms:
             - podnaslov
             - jezik
             - naslovIzvirnika
+            - podnaslovIzvirnika
             - datumPrejema
             - moskeVloge
             - zenskeVloge

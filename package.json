@@ -1,9 +1,12 @@
 {
+  "description": "nacionalna gledališka aplikacija - server",
+  "repository": "http://git.max.si/ifigenija/server",
   "name": "IFIGENIJA",
   "dependencies": {
     "grunt": "~0.4.1",
+    "grunt-contrib-clean": "^0.6.0",
     "grunt-exec": "0.4.2",
-    "grunt-contrib-clean": "^0.6.0"
+    "grunt-mkdir": "^0.1.2"
   },
   "devDependencies": {
     "grunt-contrib-clean": "~0.6.0"
