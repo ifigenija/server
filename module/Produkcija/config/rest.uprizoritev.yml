@@ -80,6 +80,11 @@ lists:
                       multiple: true
                       required: false
                       value_options: @uprizoritev.faza
+                - name: avtor
+                  type: text
+                  options:
+                      placeholder: Išči po avtorja..
+                      label: Avtor
 relation:
     default:
         funkcije:

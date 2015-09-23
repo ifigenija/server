@@ -1,5 +1,5 @@
 <?php
-
+$env = getenv('APP_ENV') ? : (isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : 'XXX');
 /**
  * Global Configuration Override
  *
@@ -42,13 +42,24 @@ return [
             ],
         ]
     ],
-        'doctrine'        => [
+    'doctrine'        => [
+        'cache'                    => array(
+            'priv' => array(
+                'class'     => 'Doctrine\Common\Cache\ApcCache',
+                'namespace' => 'Private',
+            ),
+            'meta' => array(
+                'class'     => 'Doctrine\Common\Cache\ApcCache',
+                'namespace' => 'Metadata',
+            ),
+
+        ),
         'configuration'            => [
             'orm_default' => [
-                'metadata_cache'   => 'apc',
-                'query_cache'      => 'apc',
-                'result_cache'     => 'apc',
-                'hydration_cache'  => 'apc',
+                'metadata_cache'   => 'meta',
+                'query_cache'      => 'meta',
+                'result_cache'     => 'priv',
+                'hydration_cache'  => 'priv',
                 'driver'           => 'orm_default',
                 'generate_proxies' => false,
             ]

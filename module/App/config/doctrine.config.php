@@ -11,7 +11,7 @@ return [
         'driver' => [
             'App' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'apc',
+                'cache' => 'meta',
                 'paths' => [
                     __DIR__ . '/../src/App/Entity'
                 ]

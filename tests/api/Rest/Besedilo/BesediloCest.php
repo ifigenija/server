@@ -148,6 +148,37 @@ class BesediloCest
      * @depends create
      * @param ApiTester $I
      */
+    public function getListPoAvtorju(ApiTester $I)
+    {
+        //po imenu
+        $resp = $I->successfullyGetList($this->restUrl . "?avtor=" . "999", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        
+        //po priimku
+        $resp = $I->successfullyGetList($this->restUrl . "?avtor=" . "999", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        
+        //po srednjem imenu
+        $resp = $I->successfullyGetList($this->restUrl . "?avtor=" . "999", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        
+        //psevdonim
+        $resp = $I->successfullyGetList($this->restUrl . "?avtor=" . "999", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
 //    public function getListVse(ApiTester $I)
 //    {
 //        $listUrl = $this->restUrl . "/vse";

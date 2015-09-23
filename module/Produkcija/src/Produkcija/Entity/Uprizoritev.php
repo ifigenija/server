@@ -327,29 +327,7 @@ class Uprizoritev
     public function preracunaj()
     {
         if ($this->besedilo) {
-            $avtorji   = $zaporedna = []; //init
-            foreach ($this->besedilo->getAvtorji() as $avt) {
-                if ($avt->getAliVNaslovu()) {
-                    if ($avt->getOseba()) {
-                        $avtorji[] = array('zaporedna' => $avt->getZaporedna(), "polnoime" => $avt->getOseba()->getPolnoIme());
-                    }
-                }
-            }
-            /**
-             * sort po zaporedni
-             */
-            foreach ($avtorji as $key => $row) {
-                $zaporedna[$key] = $row['zaporedna'];
-            }
-            array_multisort($zaporedna, SORT_ASC, $avtorji);
-
-            /**
-             * napolni polje avtor po avtorjih, ločenih z vejico
-             */
-            $this->avtor = "";    //init
-            foreach ($avtorji as $avt) {
-                $this->avtor = (empty($this->avtor)) ? $avt['polnoime'] : $this->avtor . " - " . $avt['polnoime'];
-            }
+            $this->avtor = $this->besedilo->getAvtor();
         }
     }
 

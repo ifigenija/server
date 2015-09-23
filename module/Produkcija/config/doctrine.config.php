@@ -11,7 +11,7 @@ return [
         'driver' => [
             'Produkcija' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'apc',
+                'cache' => 'meta',
                 'paths' => [
                     __DIR__ . '/../src/Produkcija/Entity'
                 ]

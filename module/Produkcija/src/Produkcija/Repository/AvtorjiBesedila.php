@@ -59,4 +59,49 @@ class AvtorjiBesedila
         return $qb;
     }
 
+    /**
+     * 
+     * @param type $object  entiteta
+     * @param type $params
+     */
+    public function create($object, $params = null)
+    {
+        if ($object->getBesedilo()) {
+            $object->getBesedilo()->getAvtorji()->add($object);
+        }
+
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
+
+        parent::create($object, $params);
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function update($object, $params = null)
+    {
+        // preračunamo vrednosti v smeri navzgor
+        $object->preracunaj(\Max\Consts::UP);
+
+        parent::update($object, $params);
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function delete($object)
+    {
+        if ($object->getBesedilo()) {
+            $object->getBesedilo()->getAvtorji()->removeElement($object);
+            $object->getBesedilo()->preracunaj(\Max\Consts::UP);
+        }
+
+        parent::delete($object);
+    }
+
 }

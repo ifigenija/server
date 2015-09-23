@@ -6,6 +6,12 @@ return array(
         'local_dir' => ''
     ),
     'doctrine' => array(
+            'priv' => array(
+                'namespace' => 'private_xxxx',
+            ),
+            'meta' => array(
+                'namespace' => 'Metadata_prod',
+            ),
         'connection' => array(
             'orm_default' => array(
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',

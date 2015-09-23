@@ -278,6 +278,8 @@ class PogodbaCest
             'samozaposlen'        => FALSE,
             'jeAvtorskePravice'   => FALSE,
             'igralec'             => true,
+            'procentOdInkasa'     => 5.1,
+            'jeProcentOdInkasa'   => true,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -305,6 +307,8 @@ class PogodbaCest
             'samozaposlen'        => true,
             'jeAvtorskePravice'   => false,
             'igralec'             => true,
+            'procentOdInkasa'     => 5.1,
+            'jeProcentOdInkasa'   => true,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -332,6 +336,8 @@ class PogodbaCest
             'samozaposlen'        => FALSE,
             'jeAvtorskePravice'   => FALSE,
             'igralec'             => true,
+            'procentOdInkasa'     => 5.1,
+            'jeProcentOdInkasa'   => true,
         ];
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -360,6 +366,8 @@ class PogodbaCest
             'samozaposlen'        => FALSE,
             'jeAvtorskePravice'   => FALSE,
             'igralec'             => true,
+            'procentOdInkasa'     => 5.1,
+            'jeProcentOdInkasa'   => true,
         ];
         $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -387,6 +395,8 @@ class PogodbaCest
             'samozaposlen'        => FALSE,
             'jeAvtorskePravice'   => FALSE,
             'igralec'             => true,
+            'procentOdInkasa'     => 5.1,
+            'jeProcentOdInkasa'   => true,
         ];
         $this->obj5 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -430,7 +440,7 @@ class PogodbaCest
         $I->assertEquals($ent['planiranoSteviloVaj'], 10);
 
         $I->assertEquals($ent['aktivna'], false);
-        $I->assertEquals($ent['jeAvtorskePravice'], false,"jeAvtorskePravice");
+        $I->assertEquals($ent['jeAvtorskePravice'], false, "jeAvtorskePravice");
         $I->assertEquals($ent['opis'], 'xx');
         $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
         $I->assertEquals($ent['popa']['id'], $this->lookPopa1['id']);
@@ -440,6 +450,8 @@ class PogodbaCest
         $I->assertEquals($ent['zaposlenVDrJz'], true, "zaposlen v drugem JZ");
         $I->assertEquals($ent['samozaposlen'], FALSE, "samozaposlen");
         $I->assertEquals($ent['igralec'], true, "igralec");
+        $I->assertEquals($ent['procentOdInkasa'], 5.1);
+        $I->assertEquals($ent['jeProcentOdInkasa'], true);
 
         /**
          * $$ še alternacije
@@ -513,7 +525,7 @@ class PogodbaCest
         $totRec = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertEquals("0001", $list[0]['sifra']);
-        $I->assertEquals("0003", $list[$totRec - 1]['sifra']);
+        $I->assertEquals("0004", $list[$totRec - 1]['sifra']);
 
         $listUrl = $this->restUrl . "?uprizoritev=" . $this->lookUprizoritev1['id'];
         $resp    = $I->successfullyGetList($listUrl, []);
@@ -542,12 +554,47 @@ class PogodbaCest
             'oseba'             => null,
             'popa'              => null,
             'trr'               => null,
+            'zacetek'           => '2012-02-01T00:00:00+0100',
+            'procentOdInkasa'   => 5.1,
+            'jeProcentOdInkasa' => true,
         ];
         // test validacije - oseba mora imeti ime
         $resp = $I->failToCreate($this->restUrl, $data);
         $I->assertNotEmpty($resp);
         // testiramo na enako številko napake kot je v validaciji
         $I->assertEquals(1000343, $resp[0]['code']);
+    }
+
+    public function createPogodboNapacniPopa(ApiTester $I)
+    {
+//        //ta pogodba se ne sme ustvarit
+        $data = [
+            'sifra'               => 'ZZ999',
+            'vrednostVaj'         => 33.33,
+            'vrednostPredstave'   => 44.44,
+            'vrednostVaje'        => 22.22,
+            'placiloNaVajo'       => false,
+            'planiranoSteviloVaj' => 10,
+            'aktivna'             => false,
+            'opis'                => 'zz',
+            'oseba'               => $this->lookOseba4['id'],
+            'popa'                => $this->lookPopa1['id'],
+            'trr'                 => $this->objTrr['id'],
+            'vrednostDo'          => 55.5,
+            'zacetek'             => '2012-02-01T00:00:00+0100',
+            'konec'               => '2014-02-01T00:00:00+0100',
+            'vrednostDoPremiere'  => 66.33,
+            'zaposlenVDrJz'       => true,
+            'samozaposlen'        => FALSE,
+            'jeAvtorskePravice'   => FALSE,
+            'igralec'             => true,
+            'procentOdInkasa'   => 5.1,
+            'jeProcentOdInkasa' => true,
+        ];
+        $resp = $I->failToCreate($this->restUrl, $data);
+        $I->assertNotEmpty($resp);
+        // testiramo na enako številko napake kot je v validaciji
+        $I->assertEquals(1000346, $resp[0]['code']);
     }
 
     /**

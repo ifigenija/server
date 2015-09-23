@@ -39,7 +39,8 @@ class Pogodba
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Max\I18n(label="pogodba.zacetek", description="pogodba.d.zacetek")
+     * @Max\I18n(label="pogodba.zacetek",  description="pogodba.d.zacetek")
+     * @Max\Ui(required=true)
      * @var string
      */
     protected $zacetek;
@@ -118,6 +119,25 @@ class Pogodba
      * @var double
      */
     protected $vrednostPredstave;
+
+    /**
+     * zaenkrat le informativno polje- zaenkrat se uporablja le vrednostPredstave
+     * 
+     * @ORM\Column(type="decimal", nullable=true, precision=12, scale=2)
+     * @Max\I18n(label="pogodba.procentOdInkasa", description="pogodba.d.procentOdInkasa")   
+     * @var double
+     */
+    protected $procentOdInkasa;
+
+    /**
+     * ali je polje prodendOdInkasa aktualno
+     * 
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     * @Max\I18n(label="pogodba.jeProcentOdInkasa", description="pogodba.d.jeProcentOdInkasa")   
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean     
+     */
+    protected $jeProcentOdInkasa = false;
 
     /**
      * polje se lahko vpisuje (vrednostDo) ali pa izračuna iz cene na vajo in planiranega števila vaj
@@ -203,7 +223,7 @@ class Pogodba
      * @ORM\ManyToOne(targetEntity="App\Entity\Trr")
      * @ORM\JoinColumn(name="trr_id", referencedColumnName="id")
      * @Max\I18n(label="pogodba.trr",  description="pogodba.d.trr")
-     * @Max\Ui(type="toone", required=false, filters={"popa":{"element":"popa"}})
+     * @Max\Ui(type="toone", required=false)
      * @var \App\Entity\Trr
      */
     protected $trr;
@@ -230,18 +250,42 @@ class Pogodba
         $this->expect($this->sifra, "sifra je obvezen podatek", 1000342);
         $this->expect($this->oseba, "Pogodba nima subjekta. Oseba je obvezna", 1000343);
         $this->expect(!($this->zaposlenVDrJz && $this->samozaposlen), "Oseba ne more biti hkrati zaposlena v drugem jz in samozaposlena", 1000345);
+
+        if (!$this->jeProcentOdInkasa) {
+            $this->procentOdInkasa = 0;
+        }
+        $this->validateProcGE0LE100($this->procentOdInkasa, "odstotek od inkasa", 1000344);
+
+        /**
+         * Pri pogodbi preverim, če je nosilec pogodbe oseba na alternaciji
+         * Če je nosilec pogodbe poslovni partner grem čez kontaktne osebe 
+         * in preverim ,da je oseba kontakt na poslovnem partnerju
+         */
+        $popa = $this->getPopa();
+        if ($popa) {
+            $found = FALSE;
+            foreach ($popa->getKontaktneOsebe() as $kon) {
+                if ($kon->getOseba() === $this->getOseba()) {
+                    $found = true;
+                    break;
+                }
+            }
+            $this->expect($found
+                    , 'Oseba na alternaciji ni kontakt na poslovnem partnerju, ki je nosilec pogodbe'
+                    , 1000346);
+        }
     }
-    
+
     function getFunkcija()
     {
         $alternacije = $this->getAlternacije();
-        $funkcije = '';
-        if($alternacije){
+        $funkcije    = '';
+        if ($alternacije) {
             foreach ($alternacije as $alter) {
                 $funkcija = $alter->getFunkcija();
-                if($funkcija){
-                    $naziv = $funkcija->getNaziv();
-                    $funkcije = $naziv . ($funkcije ? " / " : ""). $funkcije;
+                if ($funkcija) {
+                    $naziv    = $funkcija->getNaziv();
+                    $funkcije = $naziv . ($funkcije ? " / " : "") . $funkcije;
                 }
             }
         }
@@ -438,14 +482,38 @@ class Pogodba
         $this->trr = $trr;
     }
 
-    public function getJeAvtorskePravice()
+    public
+            function getJeAvtorskePravice()
     {
         return $this->jeAvtorskePravice;
     }
 
-    public function setJeAvtorskePravice($jeAvtorskePravice)
+    public
+            function setJeAvtorskePravice($jeAvtorskePravice)
     {
         $this->jeAvtorskePravice = $jeAvtorskePravice;
+        return $this;
+    }
+
+    public function getProcentOdInkasa()
+    {
+        return $this->procentOdInkasa;
+    }
+
+    public function getJeProcentOdInkasa()
+    {
+        return $this->jeProcentOdInkasa;
+    }
+
+    public function setProcentOdInkasa($procentOdInkasa)
+    {
+        $this->procentOdInkasa = $procentOdInkasa;
+        return $this;
+    }
+
+    public function setJeProcentOdInkasa($jeProcentOdInkasa)
+    {
+        $this->jeProcentOdInkasa = $jeProcentOdInkasa;
         return $this;
     }
 
