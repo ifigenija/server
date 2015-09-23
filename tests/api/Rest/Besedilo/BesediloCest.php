@@ -54,6 +54,7 @@ class BesediloCest
             'podnaslov'             => 'xx',
             'jezik'                 => 'ww',
             'naslovIzvirnika'       => 'vv',
+            'podnaslovIzvirnika'    => 'yy',
             'datumPrejema'          => '2010-02-01T00:00:00+0100',
             'moskeVloge'            => 1,
             'zenskeVloge'           => 2,
@@ -73,6 +74,7 @@ class BesediloCest
             'podnaslov'             => 'cc',
             'jezik'                 => 'dd',
             'naslovIzvirnika'       => 'ee',
+            'podnaslovIzvirnika'    => 'ff',
             'datumPrejema'          => '2011-03-01T00:00:00+0100',
             'moskeVloge'            => 1,
             'zenskeVloge'           => 2,
@@ -148,32 +150,32 @@ class BesediloCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoAvtorju(ApiTester $I)
-    {
-        //po imenu
-        $resp = $I->successfullyGetList($this->restUrl . "?avtor=" . "999", []);
-        $list = $resp['data'];
-        codecept_debug($list);
-        $I->assertEquals(1, $resp['state']['totalRecords']);
-        
-        //po priimku
-        $resp = $I->successfullyGetList($this->restUrl . "?avtor=" . "999", []);
-        $list = $resp['data'];
-        codecept_debug($list);
-        $I->assertEquals(1, $resp['state']['totalRecords']);
-        
-        //po srednjem imenu
-        $resp = $I->successfullyGetList($this->restUrl . "?avtor=" . "999", []);
-        $list = $resp['data'];
-        codecept_debug($list);
-        $I->assertEquals(1, $resp['state']['totalRecords']);
-        
-        //psevdonim
-        $resp = $I->successfullyGetList($this->restUrl . "?avtor=" . "999", []);
-        $list = $resp['data'];
-        codecept_debug($list);
-        $I->assertEquals(1, $resp['state']['totalRecords']);
-    }
+//    public function getListPoAvtorju(ApiTester $I)
+//    {
+//        //po imenu
+//        $resp = $I->successfullyGetList($this->restUrl . "?avtor=" . "999", []);
+//        $list = $resp['data'];
+//        codecept_debug($list);
+//        $I->assertEquals(1, $resp['state']['totalRecords']);
+//
+//        //po priimku
+//        $resp = $I->successfullyGetList($this->restUrl . "?avtor=" . "999", []);
+//        $list = $resp['data'];
+//        codecept_debug($list);
+//        $I->assertEquals(1, $resp['state']['totalRecords']);
+//
+//        //po srednjem imenu
+//        $resp = $I->successfullyGetList($this->restUrl . "?avtor=" . "999", []);
+//        $list = $resp['data'];
+//        codecept_debug($list);
+//        $I->assertEquals(1, $resp['state']['totalRecords']);
+//
+//        //psevdonim
+//        $resp = $I->successfullyGetList($this->restUrl . "?avtor=" . "999", []);
+//        $list = $resp['data'];
+//        codecept_debug($list);
+//        $I->assertEquals(1, $resp['state']['totalRecords']);
+//    }
 
     /**
      * @depends create
@@ -223,6 +225,7 @@ class BesediloCest
         $I->assertEquals($ent['podnaslov'], 'uu');
         $I->assertEquals($ent['jezik'], 'ww');
         $I->assertEquals($ent['naslovIzvirnika'], 'vv');
+        $I->assertEquals($ent['podnaslovIzvirnika'], 'yy');
         $I->assertEquals($ent['moskeVloge'], 1);
         $I->assertEquals($ent['zenskeVloge'], 2);
         $I->assertEquals($ent['povzetekVsebine'], 'tt');
