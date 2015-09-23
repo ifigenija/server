@@ -104,10 +104,10 @@ class Report
      */
     public function getUploadDirectory($hash= '')
     {
-        $dir = 'data/upload';
+        $dir = 'data/reports';
 
         if (!is_dir($dir)) {
-            throw new MaxException('Upload direktorij ne obstaja', 7700602);
+            throw new MaxException('Reports direktorij ne obstaja', 7700602);
         }
 
         if (!is_writable($dir)) {

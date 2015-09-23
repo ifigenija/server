@@ -81,13 +81,19 @@ module.exports = function (grunt) {
             config: [
                 "data/module*"
             ]
-        }
+        },
+        mkdir: {
+            data: {
+                create: ['data/uploads', 'data/reports', 'data/local'],
+                mode: '2770'
+            }
+        },
     });
 
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-contrib-clean');
-
-// Default task(s).
-    grunt.registerTask('default', ['exec', "clean"]);
+    grunt.loadNpmTasks('grunt-mkdir');
+    // Default task(s).
+    grunt.registerTask('default', ['mkdir', 'exec', "clean"]);
 
 };
