@@ -173,7 +173,7 @@ class Funkcija
      */
     public function getImena()
     {
-        $imena = "";
+        $imena       = "";
         $privzetoIme = "";
         foreach ($this->getAlternacije() as $alter) {
             /* @var $alter \Produkcija\Entity\Alternacija */
@@ -181,13 +181,13 @@ class Funkcija
                 if ($alter->getPrivzeti()) {
                     $privzetoIme = $alter->getOseba()->getPolnoIme();
                 } else {
-                    $ime = $alter->getOseba()->getPolnoIme();
-                    $imena = $ime . ($imena ? " / " : ""). $imena;
+                    $ime   = $alter->getOseba()->getPolnoIme();
+                    $imena = $ime . ($imena ? " / " : "") . $imena;
                 }
             }
         }
-        $imena = $privzetoIme . ($imena ? " / " : ""). $imena;
-        
+        $imena = $privzetoIme . ($imena ? " / " : "") . $imena;
+
         return $imena;
     }
 
@@ -338,7 +338,7 @@ class Funkcija
         return $this;
     }
 
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev=null)
+    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev = null)
     {
         $this->uprizoritev = $uprizoritev;
         return $this;
@@ -350,7 +350,7 @@ class Funkcija
         return $this;
     }
 
-    public function setTipFunkcije(\Produkcija\Entity\TipFunkcije $tipFunkcije=null)
+    public function setTipFunkcije(\Produkcija\Entity\TipFunkcije $tipFunkcije = null)
     {
         $this->tipFunkcije = $tipFunkcije;
         return $this;

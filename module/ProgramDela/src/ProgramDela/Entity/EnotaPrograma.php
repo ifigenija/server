@@ -162,7 +162,7 @@ class EnotaPrograma
      * Pojasnilo MK: : Prihodek od odkupa predstave v primeru gostovanja po Sloveniji in zamejstvu
      * 
      * če poenostavimo, je tudi:
-     *  Odkup (vložek gostitelja)   pri mednarodnih gostovanjih
+     *  Odkup (vložek gos   titelja)   pri mednarodnih gostovanjih
      * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.vlozekGostitelja", description="ep.d.vlozekGostitelja")   

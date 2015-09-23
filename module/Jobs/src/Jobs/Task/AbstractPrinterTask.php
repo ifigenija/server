@@ -54,7 +54,7 @@ abstract class AbstractPrinterTask
      * Ustvari PDF report iz vzorca definiranega v Tdok entitete
      *
      * @param string $templateName ime predloge dokumenta
-     * @param string $title naslov tabele - array dven elementov [vrsta-dokumenta, številka]
+     * @param string $title naslov tabele 
      * @param object $entity entiteta
      * @param array $vars seznam spremenljivk ki jih pošljemo v view
      * @return bool|string
@@ -71,7 +71,7 @@ abstract class AbstractPrinterTask
         $variables = array_merge([
             '_tpl'        => $template,
             'ishf'        => $isHeaderFooter,
-            '_css'        => '',
+            '_css'        => 'style.css',
             'firma'       => $this->getFirma(),
             'orientation' => $config['orientation'],
             'margins'     => $config['margins'],
@@ -81,6 +81,48 @@ abstract class AbstractPrinterTask
             'date'        => new DateTime()
         ], $vars);
 
+        $html = $this->render('printlayout/document', $variables, $title);
+
+        return $this->printOut($html);
+    }
+
+    /**
+     * Dodaja prilogo iz zapisov, če je le-ta PDF, sicer doda v report opis priloge
+     *
+     * @param string $templateName ime predloge dokumenta
+     * @param string $title naslov 
+     * @param \Zapisi\Entity\Zapis $zapis 
+     * @param array $vars seznam spremenljivk ki jih pošljemo v view
+     * @return bool|string
+     * @throws MaxException
+     */
+    public function addDocumentAttachment($templateName, $title, $zapis, $vars = [])
+    {
+        $template = $this->getTemplate($templateName);
+        $config   = $this->getTemplateConfig($templateName);
+        $this->setTmpl($config['background']);
+        // če imam template za ozadje, ne potrebujem headerja in footerja
+        $isHeaderFooter = !$this->tmpl;
+
+        /**
+         * če je pdf ali slika...
+         */
+        /*
+        if ($zapis->
+        */
+        
+        $variables = array_merge([
+            '_tpl'        => $template,
+            'ishf'        => $isHeaderFooter,
+            '_css'        => '',
+            'firma'       => $this->getFirma(),
+            'orientation' => $config['orientation'],
+            'margins'     => $config['margins'],
+            'pageSize'    => $config['page_size'],
+            'title'       => $title,
+            'zapis'       => $zapis,
+            'date'        => new DateTime()
+        ], $vars);
 
         $html = $this->render('printlayout/document', $variables, $title);
 
@@ -174,7 +216,7 @@ abstract class AbstractPrinterTask
         $cfg = $this->getServiceLocator()->get('Config');
 
         $tempalteConfig = new Config($cfg['report_template_config']);
-        $override       = $tempalteConfig->get($name, []);
+        $override       = $tempalteConfig->get($name, new Config([]));
         $defaultConfig  = new Config([
             'orientation' => "Portrait",
             'page_size'   => "A4",
