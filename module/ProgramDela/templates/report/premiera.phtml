@@ -1,0 +1,142 @@
+<?php
+/**
+ * partial tmpl za premiere 
+ * User: Alesch
+ * Date: 21.9.2015
+ */
+
+// 
+$upr             = $model->uprizoritev;
+$kop             = $model->koprodukcije;
+$drugiViri       = $model->drugiViri;
+// iz premiere
+$imakop          = $model->imaKoprodukcije;
+$stUmetnikov     = $model->stZaposUmet;
+$stDrugih        = $model->stZaposDrug;
+$stHonVsi        = $model->stHonorarnih;
+$stHonIgr        = $model->stHonorarnihIgr;
+$stHonTuj        = $model->stHonorarnihIgrTujJZ;
+$stSamozap       = $model->stHonorarnihIgrSamoz;
+$trajanjeStudija = 'od ' . $upr->datumZacStudija->format('d-m-Y') . ' do ' . $upr->datumPremiere->format('d-m-Y');
+$datumPremiere   = $upr->datumPremiere->format('d-m-Y');
+$prizorisce      = ''; // $model
+$tipEnote        = $model->tipProgramskeEnote->naziv;
+$koeEnote        = $model->kpe;
+$zaprSredstva    = $model->zaproseno;
+$lastSredstva    = $model->lastnaSredstva;
+$drugSredstva    = 0; // $model
+$avtHonorar      = $model->avtorskiHonorarji;
+$avtPravice      = $model->avtorskePravice;
+$tant            = $model->tantieme;
+
+?>
+<div id="premiere">
+    <h2>Premiere</h2>
+    <table>
+        <?php 
+            echo $this->partial('uprizoritev', array('upr' => $upr)); 
+        ?>
+        
+        <tr>
+            <td>Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri uprizoritvi:</td>
+            <td class="cell-type-number"><?= $stUmetnikov ?></td>
+        </tr>
+        <tr>
+            <td>Št. drugih zaposlenih, ki sodelujejo pri uprizoritvi (brez upravno-administrativnih delavcev):</td>
+            <td class="cell-type-number"><?= $stDrugih ?></td>
+        </tr>
+        <tr>
+            <td>Št. vseh, ki sodelujejo honorarno:</td>
+            <td class="cell-type-number"><?= $stHonvsi ?></td>
+        </tr>
+        <tr>
+            <td>     - od tega igralcev:</td>
+            <td class="cell-type-number"><?= $stHonIgr ?></td>
+        </tr>
+        <tr>
+            <td>    - od tega igralcev, zaposlenih v drugih javnih zavodih:</td>
+            <td class="cell-type-number"><?= $stHonTuj ?></td>
+        </tr>
+        <tr>
+            <td>    - od tega igralcev s statusom samozaposlenega v kulturi:</td>
+            <td class="cell-type-number"><?= $stSamozap ?></td>
+        </tr>
+        <tr>
+            <td>Trajanje študija (od-do):</td>
+            <td><?= $trajanjeStudija ?></td>
+        </tr>
+        <tr>
+            <td>Datum premiere:</td>
+            <td><?= $datumPremiere ?></td>
+        </tr>
+        <tr>
+            <td>Prizorišče:</td>
+            <td><?= $prizorisce ?></td>
+        </tr>
+        <tr>
+            <td>Tip programske enote:</td>
+            <td><?= $tipEnote ?></td>
+        </tr>
+        <tr>
+            <td>Koeficient programske enote:</td>
+            <td><?= $koeEnote ?></td>
+        </tr>
+        
+        <?php if($imakop) { ?>
+            <tr>
+                <td>Koproducenti:</td>
+                <td></td>
+            </tr>
+            <?php 
+                echo $this->partial('koproducenti', array('kop' => $kop)); 
+            ?>
+        <?php } ?>
+        <tr>
+            <td>Zaprošena sredstva Ministrstva za kulturo:</td>
+            <td class="cell-type-number"><?= $zaprSredstva ?></td>
+        </tr>
+        <tr>
+            <td>Lastna sredstva:</td>
+            <td class="cell-type-number"><?= $lastSredstva ?></td>
+        </tr>
+        
+        <tr>
+            <td>Drugi Viri:</td>
+            <td></td>
+        </tr>
+        <?php
+            $this->partialLoop()->setObjectKey('drugiViri');
+            echo $this->partialLoop('drugiViri', $drugiViri);
+        ?>
+        
+        <tr>
+            <td>Vir druga ministrstva in lokalna skupnost:</td>
+            <td class="cell-type-number"><?= $drugSredstva ?></td>
+        </tr>
+        <tr>
+            <td>Stroški avtorskih honorarjev do premiere:</td>
+            <td class="cell-type-number"><?= $avtHonorar ?></td>
+        </tr>
+        <tr>
+            <td>Stroški odkupa avtorskih pravic:</td>
+            <td class="cell-type-number"><?= $avtPravice ?></td>
+        </tr>
+        <tr>
+            <td>Stroški tantiem, vezanih na uprizoritev:</td>
+            <td class="cell-type-number"><?= $tant ?></td>
+        </tr>
+        <tr>
+            <td>Celotna vrednost uprizoritve do premiere:</td>
+            <td class="cell-type-number"></td>
+        </tr>
+        <tr>
+            <td>     - od tega stroški matičnega javnega zavoda:</td>
+            <td class="cell-type-number"></td>
+        </tr>
+        <tr>
+            <td><h2>Priloge:</h2></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+

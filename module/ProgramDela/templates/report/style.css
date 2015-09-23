@@ -1,0 +1,163 @@
+body {
+    color: #333333;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 9px;
+}
+
+header {
+    width: 100%;
+    page-break-before: always;
+}
+
+footer {
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 2em;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-color: gray;
+    table-layout: fixed;
+    box-sizing: border-box;
+    topntail: 0.02cm solid #c0c0c0;
+}
+
+table thead {
+    page-break-inside: avoid;
+}
+
+caption {
+    font-size: 12px;
+    font-weight: bold;
+    page-break-after: avoid;
+}
+
+th {
+    padding: 2px;
+}
+
+td {
+    padding: 2px;
+}
+
+td.cell-type-final {
+    font-weight: bold;
+}
+
+table.horizontal th {
+    /* border-bottom: 0.2mm solid #dddddd; */
+    vertical-align: bottom;
+    text-align: left;
+}
+
+table.horizontal td {
+    vertical-align: top; 
+}
+
+table.horizontal .cell-type-number {
+    text-align: right;
+}
+
+table.horizontal .cell-type-date {
+    text-align: right;
+}
+
+table.horizontal .cell-type-header-title {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.page-break {
+    page-break-after: always;
+}
+
+.page-break-avoid {
+    page-break-inside: avoid;
+}
+
+.clearfix {
+    clear: both;
+}
+
+/** Formatting **/
+address {
+    font-style: normal;
+    margin-bottom: 1em;
+}
+
+address .naziv {
+    font-weight: bold;
+}
+
+address .ulica { 
+
+}
+
+address .posta { 
+
+}
+
+address .drzava {
+    margin-bottom: 1em;
+}
+
+address .tel { 
+
+}
+
+/* added styles for documents */
+#client {
+    padding-left: 6px;
+    /* border-left: 3px solid #FF0000; */
+    width: 50%;
+    text-align: left;
+}
+
+#dokument {
+    width: 50%;
+    text-align: right;
+}
+
+#client .prejemnik {
+    color: #000000;
+}
+
+h2.name {
+    font-size: 1.4em;
+    font-weight: normal;
+    margin: 0;
+}
+
+#dokument h1 {
+    color: #000000;
+    font-size: 2.4em;
+    line-height: 1em;
+    font-weight: normal;
+    margin: 0  0 10px 0;
+}
+
+#dokument .date {
+    font-size: 1.5em;
+    color: #000000;
+}
+
+.nobordertable {
+    topntail: 0;
+}
+
+.topbottomborder {
+    border-top: 0.02cm solid #c0c0c0;
+    border-bottom: 0.02cm solid #c0c0c0;
+}
+
+.halfwidth {
+    width: 50%;
+}
+
+.right-10 {
+    padding-left: 1%;
+}

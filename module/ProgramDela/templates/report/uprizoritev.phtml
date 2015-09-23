@@ -1,0 +1,27 @@
+<?php
+/**
+ * Partial tmpl za podatke o uprizoritvi
+ * User: Alesch
+ * date: 21.9.2015
+ */
+
+$nas = $this->upr->naslov;
+$pod = $this->upr->podnaslov;
+$avt = $this->upr->avtor;
+
+$fun = $this->upr->funkcije;
+?>
+
+<tr>
+    <td>Naslov uprizoritve:</td>
+    <td><?= $nas ?></td>
+</tr>
+<tr>
+    <td>Podnaslov:</td>
+    <td><?= $pod ?></td>
+</tr> 
+<!--?php if ($fun->pomembna) { -->
+    <?php
+            $this->partialLoop()->setObjectKey('fun');
+            echo $this->partialLoop('funkcija.phtml', $fun);
+    ?>

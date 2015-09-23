@@ -1,0 +1,162 @@
+<?php
+/**
+ * partial tmpl za ponovitve prejšnjih uprizoritev
+ * User: Alesch
+ * Date: 21.9.2015
+ */
+
+$drugiViri       = $model->drugiViri;
+$upr             = $model->uprizoritev;
+
+// iz Ponovitve
+$tipEnote        = $model->tipProgramskeEnote->naziv;
+$koeEnote        = $model->kpe;
+$stUmetnikov     = $model->stZaposUmet;
+$stDrugih        = $model->stZaposDrug;
+$stHonVsi        = $model->stHonorarnih;
+$stHonIgr        = $model->stHonorarnihIgr;
+$stHonTuj        = $model->stHonorarnihIgrTujJZ;
+$stSamozap       = $model->stHonorarnihIgrSamoz;
+$naDomacemOdru   = $model->ponoviDoma;
+$naGosSlo        = $model->ponoviGost;
+$naGosZam        = $model->ponoviZamejo;
+$obiskDoma       = $model->obiskDoma;
+$obiskGosSlo     = $model->obiskGost;
+$obiskGosZam     = $model->obiskZamejo;
+$sredstvaMK      = $model->zaproseno;
+$celotnaVred     = $model->celotnaVrednost;
+// $vredPonMat      = $model->;
+// $vredPonGos      = $model->;
+$tant            = $model->tantieme;
+$avtHonorar      = $model->avtorskiHonorarji;
+$lastSredstva    = $model->lastnaSredstva;
+// $vlozKop         = $model->;
+// $vlozGos         = $model->;
+// $vlozOst         = $model->;
+
+?>
+<div id="premiere">
+    <h2>Ponovitve prejšnjih uprizoritev</h2>
+    <table>
+        <?php 
+            echo $this->partial('uprizoritev', array('upr' => $upr)); 
+        ?>
+        <tr>
+            <td>Tip programske enote:</td>
+            <td><?= $tipEnote ?></td>
+        </tr>
+        <tr>
+            <td>Koeficient programske enote:</td>
+            <td><?= $koeEnote ?></td>
+        </tr>
+        <tr>
+            <td>Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri uprizoritvi:</td>
+            <td class="cell-type-number"><?= $stUmetnikov ?></td>
+        </tr>
+        <tr>
+            <td>Št. drugih zaposlenih, ki sodelujejo pri uprizoritvi (brez upravno-administrativnih delavcev):</td>
+            <td class="cell-type-number"><?= $stDrugih ?></td>
+        </tr>
+        <tr>
+            <td>Št. vseh, ki sodelujejo honorarno:</td>
+            <td class="cell-type-number"><?= $stHonvsi ?></td>
+        </tr>
+        <tr>
+            <td>     - od tega igralcev:</td>
+            <td class="cell-type-number"><?= $stHonIgr ?></td>
+        </tr>
+        <tr>
+            <td>    - od tega igralcev, zaposlenih v drugih javnih zavodih:</td>
+            <td class="cell-type-number"><?= $stHonTuj ?></td>
+        </tr>
+        <tr>
+            <td>    - od tega igralcev s statusom samozaposlenega v kulturi:</td>
+            <td class="cell-type-number"><?= $stSamozap ?></td>
+        </tr>
+        <tr>
+            <td>Načrtovano št. vseh ponovitev v letu 2015:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td> - na domačem odru:</td>
+            <td class="cell-type-number"><?= $naDomacemOdru ?></td>
+        </tr>
+        <tr>
+            <td> - na gostovanjih po Sloveniji:</td>
+            <td class="cell-type-number"><?= $naGosSlo ?></td>
+        </tr>
+        <tr>
+            <td> - na gostovanjih v zamejstvu:</td>
+            <td class="cell-type-number"><?= $naGosZam ?></td>
+        </tr>
+        <tr>
+            <td>Načrtovano št. vseh obiskovalcev:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td> - na domačem odru:</td>
+            <td class="cell-type-number"><?= $obiskDoma ?></td>
+        </tr>
+        <tr>
+            <td> - na gostovanjih po Sloveniji:</td>
+            <td class="cell-type-number"><?= $obiskGosSlo ?></td>
+        </tr>
+        <tr>
+            <td> - na gostovanjih v zamejstvu:</td>
+            <td class="cell-type-number"><?= $obiskGosZam ?></td>
+        </tr>
+        <tr>
+            <td>Zaprošena sredstva Ministrstva za kulturo:</td>
+            <td class="cell-type-number"><?= $sredstvaMK ?></td>
+        </tr>
+        <tr>
+            <td>Celotna vrednost ponovitev:</td>
+            <td class="cell-type-number"><?= $celotnaVred ?></td>
+        </tr>
+        <tr>
+            <td> - vrednost ponovitev na matičnem odru:</td>
+            <td class="cell-type-number"><?= $vredPonMat ?></td>
+        </tr>
+        <tr>
+            <td>vrednost ponovitev na gostovanjih po SLO in v zamejstvu:</td>
+            <td class="cell-type-number"><?= $vredPonGos ?></td>
+        </tr>
+        <tr>
+            <td>Stroški avtorskih honorarjev zunanjih sodelavcev:</td>
+            <td class="cell-type-number"><?= $avtHonorar ?></td>
+        </tr>
+        <tr>
+            <td>Stroški tantiem, vezanih na ponovitve:</td>
+            <td class="cell-type-number"><?= $tant ?></td>
+        </tr>
+        <tr>
+            <td>Lastna sredstva:</td>
+            <td class="cell-type-number"><?= $lastSredstva ?></td>
+        </tr>
+        <tr>
+            <td>Drugi Viri:</td>
+            <td></td>
+        </tr>
+        <?php
+            $this->partialLoop()->setObjectKey('drugiViri');
+            echo $this->partialLoop('drugiViri', $drugiViri);
+        ?>
+        <tr>
+            <td> - od tega vložek koproducenta:</td>
+            <td class="cell-type-number"><?= $vlozKop ?></td>
+        </tr>
+        <tr>
+            <td> - od tega vložek gostitelja:</td>
+            <td class="cell-type-number"><?= $vlozGos ?></td>
+        </tr>
+        <tr>
+            <td>Vir druga ministrstva in lokalna skupnost:</td>
+            <td class="cell-type-number"><?= $vlozOst ?></td>
+        </tr>
+        <tr>
+            <td><h2>Priloge:</h2></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
