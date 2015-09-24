@@ -67,7 +67,28 @@ class ProgramDelaReport
             }
             $printer->AddPage();
         }
+
+        // Gostujoče uprizoritve
+        foreach ($prgdela->gostujoci as $gostujoce) {
+            $this->addDocumentReport('gostujoce', $title, $gostujoce);
+            // dodam zapise 
+            $myzapisi = $zs->getZapiseZaLastnika($gostujoce->id);
+            foreach ($myzapisi as $myzapis) {
+                $this->addDocumentAttachment('zapisi', $title, $myzapis);
+            }
+            $printer->AddPage();
+        }
         
+        // Mednarodna gostovanja 
+        foreach ($prgdela->gostovanja as $gostovanje) {
+            $this->addDocumentReport('mednarodna', $title, $gostovanje);
+            // dodam zapise 
+            $myzapisi = $zs->getZapiseZaLastnika($gostovanje->id);
+            foreach ($myzapisi as $myzapis) {
+                $this->addDocumentAttachment('zapisi', $title, $myzapis);
+            }
+            $printer->AddPage();
+        }
         $this->finishReport($title);
     }
 

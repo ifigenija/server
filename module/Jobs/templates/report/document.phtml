@@ -21,7 +21,7 @@ $pagesize       = $this->pageSize ? $this->pagesize : 'a4';
 $orientation    = $this->orientation ? $this->orientation : 'p';
 $isheaderfooter = $this->ishf;
 $firmanaziv     = $this->firma->getNaziv();
-$naslov         = !empty($this->title[0]) ? $this->translate($this->title[0]) . ' ' . $this->title[1] : ''; 
+$naslov         = !empty($title) ? $this->translate($title) : ''; 
 ?>
 <!DOCTYPE html>
 <html>

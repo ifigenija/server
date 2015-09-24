@@ -19,22 +19,24 @@ $stHonTuj        = $model->stHonorarnihIgrTujJZ;
 $stSamozap       = $model->stHonorarnihIgrSamoz;
 $trajanjeStudija = 'od ' . $upr->datumZacStudija->format('d-m-Y') . ' do ' . $upr->datumPremiere->format('d-m-Y');
 $datumPremiere   = $upr->datumPremiere->format('d-m-Y');
-$prizorisce      = ''; // $model
+$prizorisce      = $model->priKoproducentu ? 'pri koproducentu' : 'na matičnem odru';
 $tipEnote        = $model->tipProgramskeEnote->naziv;
 $koeEnote        = $model->kpe;
 $zaprSredstva    = $model->zaproseno;
 $lastSredstva    = $model->lastnaSredstva;
-$drugSredstva    = 0; // $model
+$drugSredstva    = $model->drugiJavni;
 $avtHonorar      = $model->avtorskiHonorarji;
 $avtPravice      = $model->avtorskePravice;
 $tant            = $model->tantieme;
-
+$celotnaVred     = $model->celotnaVrednost;
+$celotnaVredMat  = $model->celotnaVrednostMat;
 ?>
 <div id="premiere">
     <h2>Premiere</h2>
     <table>
         <?php 
-            echo $this->partial('uprizoritev', array('upr' => $upr)); 
+            $this->partial()->setObjectKey('upr');
+            echo $this->partial('uprizoritev', $upr); 
         ?>
         
         <tr>
@@ -47,7 +49,7 @@ $tant            = $model->tantieme;
         </tr>
         <tr>
             <td>Št. vseh, ki sodelujejo honorarno:</td>
-            <td class="cell-type-number"><?= $stHonvsi ?></td>
+            <td class="cell-type-number"><?= $stHonVsi ?></td>
         </tr>
         <tr>
             <td>     - od tega igralcev:</td>
@@ -67,7 +69,7 @@ $tant            = $model->tantieme;
         </tr>
         <tr>
             <td>Datum premiere:</td>
-            <td><?= $datumPremiere ?></td>
+            <td class="cell-type-date"><?= $datumPremiere ?></td>
         </tr>
         <tr>
             <td>Prizorišče:</td>
@@ -81,7 +83,6 @@ $tant            = $model->tantieme;
             <td>Koeficient programske enote:</td>
             <td><?= $koeEnote ?></td>
         </tr>
-        
         <?php if($imakop) { ?>
             <tr>
                 <td>Koproducenti:</td>
@@ -127,11 +128,11 @@ $tant            = $model->tantieme;
         </tr>
         <tr>
             <td>Celotna vrednost uprizoritve do premiere:</td>
-            <td class="cell-type-number"></td>
+            <td class="cell-type-number"><?= $celotnaVred ?></td>
         </tr>
         <tr>
             <td>     - od tega stroški matičnega javnega zavoda:</td>
-            <td class="cell-type-number"></td>
+            <td class="cell-type-number"><?= $celotnaVredMat ?></td>
         </tr>
         <tr>
             <td><h2>Priloge:</h2></td>

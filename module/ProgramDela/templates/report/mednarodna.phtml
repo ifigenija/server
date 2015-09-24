@@ -1,12 +1,104 @@
-
 <?php
 /**
- * partial tmpl za mednarodna gostovanja
+ * tmpl za mednarodna gostovanja
  * User: Alesch
  * Date: 21.9.2015
  */
+// 
+$drugiViri       = $model->drugiViri;
 
+// iz mednarodna gostovanja
+$upr             = $model->uprizoritev->naslov;
+$krajGos         = $model->krajGostovanja . ' / ' . $model->drzavaGostovanja->naziv;
+$datumGos        = $model->datumGostovanja->format('d-m-Y');
+$ustanovaGos     = $model->ustanova;
+$stPonovitevGos  = $model->ponoviInt;
+$stPonovitevKop  = $model->ponoviKoprInt;
+$stGledalcev     = $model->obiskInt;
+$stGledalcevKop  = $model->obiskKoprInt;
+$organizator     = $model->gostitelj->naziv;
+$transStro       = $model->transportniStroski;
+$zunAvtHon       = $model->avtorskiHonorarji;
+$celotniStro     = $model->nasDelez;
+$celotnaVred     = $model->celotnaVrednost;        
+$lastSredstva    = $model->lastnaSredstva;
+$drugSredstva    = $model->drugiJavni;
 ?>
+<div id="mednarodna">
+    <h2>Mednarodna gostovanja - gostovanja javnega zavoda v tujini (brez Zamejstva)</h2>
+    <table>
+        <tr>
+            <td>Naslov uprizoritve:</td>
+            <td><?= $upr ?></td>
+        </tr>
+        <tr>
+            <td>Kraj gostovanja in država:</td>
+            <td><?= $krajGos ?></td>
+        </tr>
+        <tr>
+            <td>Ustanova, v kateri se gostuje:</td>
+            <td><?= $ustanovaGos ?></td>
+        </tr>
+        <tr>
+            <td>Datum gostovanja:</td>
+            <td class="cell-type-date"><?= $datumGos ?></td>
+        </tr>
+        <tr>
+            <td>Število ponovitev v okviru gostovanja:</td>
+            <td class="cell-type-number"><?= $stPonovitevGos ?></td>
+        </tr>       
+        <tr>
+            <td>Število ponovitev na odru koproducenta v tujini:</td>
+            <td class="cell-type-number"><?= $stPonovitevKop ?></td>
+        </tr>       
+        <tr>
+            <td>Načrtovano št. gledalcev:</td>
+            <td class="cell-type-number"><?= $stGledalcev ?></td>
+        </tr>
+        <tr>
+            <td>Načrtovano št. gledalcev na odru koproducenta v tujini:</td>
+            <td class="cell-type-number"><?= $stGledalcevKop ?></td>
+        </tr>
+        <tr>
+            <td>Organizator (gostitelj)</td>
+            <td><?= $organizator ?></td>
+        </tr>
+        <tr>
+            <td>Transportni stroški opreme ter stroški prevozov ansambla in tehnike:</td>
+            <td class="cell-type-number"><?= $transStro ?></td>
+        </tr>
+        <tr>
+            <td>Stroški avtorskih honorarjev zunanjih sodelavcev:</td>
+            <td class="cell-type-number"><?= $zunAvtHon ?></td>
+        </tr>
+        <tr>
+            <td>Celotni stroški gostovanja:</td>
+            <td class="cell-type-number"><?= $celotniStro ?></td>
+        </tr>
+        <tr>
+            <td>Lastna sredstva:</td>
+            <td class="cell-type-number"><?= $lastSredstva ?></td>
+        </tr>
 
-Mednarodna
-
+        <tr>
+            <td>Drugi Viri:</td>
+            <td></td>
+        </tr>
+        <?php
+            $this->partialLoop()->setObjectKey('drugiViri');
+            echo $this->partialLoop('drugiViri', $drugiViri);
+        ?>
+        <tr>
+            <td>Vir druga ministrstva in lokalna skupnost:</td>
+            <td class="cell-type-number"><?= $drugSredstva ?></td>
+        </tr>
+        <tr>
+            <td>Celotna vrednost gostovanja:</td>
+            <td class="cell-type-number"><?= $celotnaVred ?></td>
+        </tr>
+        <tr>
+            <td><h2>Vsebinska utemeljitev predloga:</h2></td>
+            <td></td>
+        </tr>
+    </table>
+</div>

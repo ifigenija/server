@@ -1,11 +1,150 @@
 <?php
 /**
- * partial tmpl za festivale
+ * tmpl za festivale
+ *  programski sklop 2 - zavihek 2
+ * 
  * User: Alesch
  * Date: 21.9.2015
  */
+// 
+$drugiViri       = $model->drugiViri;
+$kop             = $model->koprodukcije;
 
+// iz festivali
+$nazFestivala    = $model->naziv;
+$zvrstFestivala  = $model->zvrst;
+$stPredstav      = $model->stPredstav; 
+$stOkroglihMiz   = $model->stOkroglihMiz;
+$stPredstavitev  = $model->stPredstavitev;
+$stDelavnic      = $model->stDelavnic;
+$stOstalo        = $model->stDrugiDogodki;
+$stDogodkov      = $stPredstav + $stOkroglihMiz + $stPredstavitev + $stDelavnic + $stOstalo;
+$stProdukcij     = $model->stProdukcij;
+$stObiskovalcev  = $model->obiskDoma;
+$casPriprave     = $model->casPriprave;
+$casIzvedbe      = $model->casIzvedbe;
+$prizorisca      = $model->prizorisca;
+$vodjaFestivala  = $model->umetvodja;
+$programskoTelo  = $model->programskoTelo;
+$tujihSel        = $model->stTujihSelektorjev;
+$stZaposlenih    = $model->stZaposlenih;
+$stAvtHon        = $model->stHonorarnih;
+$zaprSredstva    = $model->zaproseno;
+$drugSredstva    = $model->drugiJavni;
+$celotnaVred     = $model->celotnaVrednost;
 ?>
+<div id="festivali">
+    <h2>Festivali</h2>
+    <table>
+        <tr>
+            <td>Naziv festivala:</td>
+            <td><?= $nazFestivala ?></td>
+        </tr>
+        <tr>
+            <td>Zvrst festivala:</td>
+            <td><?= $zvrstFestivala ?></td>
+        </tr>
+        <tr>
+            <td>Skupno število dogodkov v okviru festivala:</td>
+            <td class="cell-type-number"><?= $stDogodkov ?></td>
+        </tr>
+        <tr>
+            <td>    - predstav:</td>
+            <td class="cell-type-date"><?= $stPredstav ?></td>
+        </tr>
+        <tr>
+            <td>    - okroglih miz:</td>
+            <td class="cell-type-number"><?= $stOkroglihMiz ?></td>
+        </tr>       
+        <tr>
+            <td>    - predstavitev:</td>
+            <td class="cell-type-number"><?= $stPredstavitev ?></td>
+        </tr>       
+        <tr>
+            <td>    - delavnic:</td>
+            <td class="cell-type-number"><?= $stDelavnic ?></td>
+        </tr>
+        <tr>
+            <td>    - drugih dogodkov:</td>
+            <td class="cell-type-number"><?= $stDrugih ?></td>
+        </tr>
+        <tr>
+            <td>Skupno število festivalskih produkcij:</td>
+            <td class="cell-type-number"><?= $stProdukcij ?></td>
+        </tr>
+        <tr>
+            <td>Pričakovano število obiskovalcev:</td>
+            <td class="cell-type-number"><?= $stObiskovalcev ?></td>
+        </tr>
+        <tr>
+            <td>Čas priprave festivala:</td>
+            <td class="cell-type-number"><?= $casPriprave ?></td>
+        </tr>
+        <tr>
+            <td>Čas izvedbe festivala:</td>
+            <td class="cell-type-number"><?= $casIzvedbe ?></td>
+        </tr>
+        <tr>
+            <td>Prizorišče(šča):</td>
+            <td class="cell-type-number"><?= $prizorisca ?></td>
+        </tr>
+        <tr>
+            <td>Umetniški vodja festivala:</td>
+            <td><?= $vodjaFestivala ?></td>
+        </tr>
+        <tr>
+            <td>Programsko telo festivala:</td>
+            <td><?= $programskoTelo ?></td>
+        </tr>
+        <?php if($imakop) { ?>
+            <tr>
+                <td>Soorganizatorji:</td>
+                <td></td>
+            </tr>
+            <?php 
+                echo $this->partial('koproducenti', array('kop' => $kop)); 
+            ?>
+        <?php } ?>
 
-Festivali
-
+        <tr>
+            <td>Predvideno št. tujih selektorjev - gostov:</td>
+            <td class="cell-type-number"><?= $tujihSel ?></td>
+        </tr>
+        <tr>
+            <td>Št. zaposlenih, ki sodelujejo pri izvedbi festivala:</td>
+            <td class="cell-type-number"><?= $stZaposlenih ?></td>
+        </tr>
+        <tr>
+            <td>Št. vseh, ki sodelujejo honorarno pri izvedbi festivala in jim honorar izplačuje javni zavod:</td>
+            <td class="cell-type-number"><?= $stAvtHon ?></td>
+        </tr>
+        <tr>
+            <td>Zaprošena sredstva Ministrstva za kulturo:</td>
+            <td class="cell-type-number"><?= $zaprSredstva ?></td>
+        </tr>
+        <tr>
+            <td>Lastna sredstva:</td>
+            <td class="cell-type-number"><?= $lastSredstva ?></td>
+        </tr>
+        <tr>
+            <td>Drugi Viri:</td>
+            <td></td>
+        </tr>
+        <?php
+            $this->partialLoop()->setObjectKey('drugiViri');
+            echo $this->partialLoop('drugiViri', $drugiViri);
+        ?>
+        <tr>
+            <td>Vir druga ministrstva in lokalna skupnost:</td>
+            <td class="cell-type-number"><?= $drugSredstva ?></td>
+        </tr>
+        <tr>
+            <td>Celotna vrednost festivala:</td>
+            <td class="cell-type-number"><?= $celotnaVred ?></td>
+        </tr>
+        <tr>
+            <td><h2>Vsebinska utemeljitev predloga:</h2></td>
+            <td></td>
+        </tr>
+    </table>
+</div>

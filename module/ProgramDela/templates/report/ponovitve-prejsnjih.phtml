@@ -1,6 +1,6 @@
 <?php
 /**
- * partial tmpl za ponovitve prejšnjih uprizoritev
+ * tmpl za ponovitve prejšnjih uprizoritev
  * User: Alesch
  * Date: 21.9.2015
  */
@@ -25,14 +25,13 @@ $obiskGosSlo     = $model->obiskGost;
 $obiskGosZam     = $model->obiskZamejo;
 $sredstvaMK      = $model->zaproseno;
 $celotnaVred     = $model->celotnaVrednost;
-// $vredPonMat      = $model->;
-// $vredPonGos      = $model->;
+$vredPonMat      = $model->celotnaVrednostMat;
+$vredPonGos      = $model->celotnaVrednostGostovSZ;
 $tant            = $model->tantieme;
 $avtHonorar      = $model->avtorskiHonorarji;
 $lastSredstva    = $model->lastnaSredstva;
-// $vlozKop         = $model->;
-// $vlozGos         = $model->;
-// $vlozOst         = $model->;
+$vlozGos         = $model->vlozekGostitelja;
+$vlozOst         = $model->drugiJavni;
 
 ?>
 <div id="premiere">
@@ -143,8 +142,11 @@ $lastSredstva    = $model->lastnaSredstva;
         ?>
         <tr>
             <td> - od tega vložek koproducenta:</td>
-            <td class="cell-type-number"><?= $vlozKop ?></td>
+            <td></td>
         </tr>
+        <?php if($imakop) { 
+            echo $this->partial('koproducenti', array('kop' => $kop)); 
+        } ?>
         <tr>
             <td> - od tega vložek gostitelja:</td>
             <td class="cell-type-number"><?= $vlozGos ?></td>

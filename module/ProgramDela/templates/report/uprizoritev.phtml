@@ -20,8 +20,7 @@ $fun = $this->upr->funkcije;
     <td>Podnaslov:</td>
     <td><?= $pod ?></td>
 </tr> 
-<!--?php if ($fun->pomembna) { -->
-    <?php
-            $this->partialLoop()->setObjectKey('fun');
-            echo $this->partialLoop('funkcija.phtml', $fun);
-    ?>
+<?php 
+    $this->partialLoop()->setObjectKey('fun');
+    echo $this->partialLoop('funkcija.phtml', $fun);
+?>

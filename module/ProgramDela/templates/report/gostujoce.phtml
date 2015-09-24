@@ -6,27 +6,14 @@
  */
 // 
 $upr             = $model->uprizoritev;
-$kop             = $model->koprodukcije;
 $drugiViri       = $model->drugiViri;
-// iz premiere
-$imakop          = $model->imaKoprodukcije;
-$stUmetnikov     = $model->stZaposUmet;
-$stDrugih        = $model->stZaposDrug;
-$stHonVsi        = $model->stHonorarnih;
-$stHonIgr        = $model->stHonorarnihIgr;
-$stHonTuj        = $model->stHonorarnihIgrTujJZ;
-$stSamozap       = $model->stHonorarnihIgrSamoz;
-$trajanjeStudija = 'od ' . $upr->datumZacStudija->format('d-m-Y') . ' do ' . $upr->datumPremiere->format('d-m-Y');
-$datumPremiere   = $upr->datumPremiere->format('d-m-Y');
-$prizorisce      = ''; // $model
-$tipEnote        = $model->tipProgramskeEnote->naziv;
-$koeEnote        = $model->kpe;
+
+// iz gostovanja
 $zaprSredstva    = $model->zaproseno;
 $lastSredstva    = $model->lastnaSredstva;
-$drugSredstva    = 0; // $model
-$avtHonorar      = $model->avtorskiHonorarji;
-$avtPravice      = $model->avtorskePravice;
-$tant            = $model->tantieme;
+$drugSredstva    = $model->drugiJavni;
+$obiskDoma       = $model->obiskDoma;
+$stPredstav      = $model->ponoviDoma;
 
 ?>
 <div id="premiere">
@@ -37,11 +24,11 @@ $tant            = $model->tantieme;
         ?>
         <tr>
             <td>Število predstav:</td>
-            <td></td>
+            <td class="cell-type-number"><?= $stPredstav ?></td>
         </tr>       
         <tr>
             <td>Načrtovano št. vseh obiskovalcev:</td>
-            <td></td>
+            <td class="cell-type-number"><?= $obiskDoma ?></td>
         </tr>
         <tr>
             <td>Zaprošena sredstva Ministrstva za kulturo:</td>
@@ -66,27 +53,7 @@ $tant            = $model->tantieme;
             <td class="cell-type-number"><?= $drugSredstva ?></td>
         </tr>
         <tr>
-            <td>Stroški avtorskih honorarjev do premiere:</td>
-            <td class="cell-type-number"><?= $avtHonorar ?></td>
-        </tr>
-        <tr>
-            <td>Stroški odkupa avtorskih pravic:</td>
-            <td class="cell-type-number"><?= $avtPravice ?></td>
-        </tr>
-        <tr>
-            <td>Stroški tantiem, vezanih na uprizoritev:</td>
-            <td class="cell-type-number"><?= $tant ?></td>
-        </tr>
-        <tr>
-            <td>Celotna vrednost uprizoritve do premiere:</td>
-            <td class="cell-type-number"></td>
-        </tr>
-        <tr>
-            <td>     - od tega stroški matičnega javnega zavoda:</td>
-            <td class="cell-type-number"></td>
-        </tr>
-        <tr>
-            <td><h2>Priloge:</h2></td>
+            <td><h2>Vsebinska utemeljitev predloga:</h2></td>
             <td></td>
         </tr>
     </table>

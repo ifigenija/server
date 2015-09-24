@@ -14,13 +14,13 @@ $pagesize       = $this->pageSize ? $this->pagesize : 'a4';
 $orientation    = $this->orientation ? $this->orientation : 'p';
 $isheaderfooter = $this->ishf;
 $firmanaziv     = $this->firma->getNaziv();
-$nas            = !empty($title) ? $this->translate($title) : '';
+$naslov         = !empty($title) ? $this->translate($title) : '';
 ?>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title><h1><?= $nas ?></h1></title>
+        <title><h1><?= $naslov ?></h1></title>
         <meta charset="UTF-8">
         <style type="text/css">
 
@@ -52,7 +52,7 @@ $nas            = !empty($title) ? $this->translate($title) : '';
                     <tr>
                         <td width="33%"><?= isset($firmanaziv) ? $firmanaziv : '' ?></td>
                         <td width="33%"></td>
-                        <td width="33%" style="text-align: right; font-style: italic;"><?= $nas ?></td>
+                        <td width="33%" style="text-align: right; font-style: italic;"><?= $naslov ?></td>
                     </tr>
                 </table>
             </htmlpageheader>
