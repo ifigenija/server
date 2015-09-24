@@ -25,7 +25,7 @@ class ProgramDelaReport
     {
         $ps = $this->getServiceLocator()->get('mpdf.printer');
 
-        $mainTitle   = "Program dela " . $this->entity->getSifra();
+        $title   = "Program dela " . $this->entity->getSifra();
         $prgdela = $this->entity;
 
         $printer = $ps->getMPdf();
@@ -36,13 +36,13 @@ class ProgramDelaReport
         // Premiere
         $this->reportSklopPrograma($printer, $prgdela->premiere, 'premiera', 'Premiere');
         // Ponovitve premier
-        $this->reportSklopPrograma($printer, $prgdela->ponovitvePremiere , 'ponovitve-premier', 'Ponovitve premiernih uprizoritev');
+        $this->reportSklopPrograma($printer, $prgdela->ponovitvePremiere , 'ponovitve-premier', 'Ponovitve premier');
         // Ponovitve prejšnjih
-        $this->reportSklopPrograma($printer, $prgdela->ponovitvePrejsnjih , 'ponovitve-prejsnjih', 'Ponovitve uprizoritev iz prejšnjih sezon');
+        $this->reportSklopPrograma($printer, $prgdela->ponovitvePrejsnjih , 'ponovitve-prejsnjih', 'Ponovitve uprizoritev');
         // Gostujoče
-        $this->reportSklopPrograma($printer, $prgdela->gostujoci, 'gostujoce', 'Gostujoče uprizoritve – iz Slovenije, zamejstva in tujine');
+        $this->reportSklopPrograma($printer, $prgdela->gostujoci, 'gostujoce', 'Gostujoče uprizoritve');
         // Mednarodna gostovanja
-        $this->reportSklopPrograma($printer, $prgdela->gostovanja, 'mednarodna', 'Mednarodna gostovanja – gostovanja javnega zavoda v tujini ');
+        $this->reportSklopPrograma($printer, $prgdela->gostovanja, 'mednarodna', 'Mednarodna gostovanja');
         // Festivali 
         $this->reportSklopPrograma($printer, $prgdela->programiFestival, 'festivali', 'Festivali');
         // Razno
@@ -57,13 +57,13 @@ class ProgramDelaReport
      * Izpis posameznega sklopa programa dela
      * 
      * @param object $printer   tiskalnik (mPdf) 
-     * @param object $sklopi    objekt sklopa programa dela (premiere. ponovitve, festivali...)
+     * @param object $sklopi    vsebinski sklopi programa dela (premiere. ponovitve, festivali...)
      * @param string $tmpl      ime predloge
      * @param string $naslov    naslov reporta
      */
     public function reportSklopPrograma($printer, $sklopi, $tmpl, $naslov)
     {
-        $this->zs = $this->getServiceLocator()->get('zapisi.service');
+        $zs = $this->getServiceLocator()->get('zapisi.service');
 
         foreach ($sklopi as $sklop) {
             $this->addDocumentReport($tmpl, $naslov, $sklop);
