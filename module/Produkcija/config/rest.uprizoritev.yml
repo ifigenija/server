@@ -83,7 +83,7 @@ lists:
                 - name: avtor
                   type: text
                   options:
-                      placeholder: Išči po avtorja..
+                      placeholder: Išči po avtorju..
                       label: Avtor
 relation:
     default:
