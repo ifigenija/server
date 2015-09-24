@@ -297,7 +297,7 @@ class ZaposlitevCest
         $I->assertEquals($ent['individualnaPogodba'], true);
         $I->assertEquals($ent['jeZaposlenVdrugemJz'], TRUE);
         $I->assertEquals($ent['jeNastopajoci'], TRUE);
-        $I->assertEquals($ent['oseba'], $this->lookOseba1['id']);
+        $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
     }
 
     /**

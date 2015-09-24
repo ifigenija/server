@@ -52,7 +52,7 @@ class PogodbaFixture
         $o->setVrednostVaj($v[1]);
         $o->setVrednostPredstave($v[2]);
         $o->setVrednostVaje($v[3]);
-        $o->setAktivna($v[4]);
+//        $o->setAktivna($v[4]);
         $o->setOpis($v[5]);
 
         if ($v[6]) {

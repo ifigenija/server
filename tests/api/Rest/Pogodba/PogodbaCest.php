@@ -73,6 +73,8 @@ class PogodbaCest
     private $lookupAlternacijaUrl = '/lookup/alternacija';
     private $lookUprizoritev1;
     private $lookUprizoritev2;
+    private $zaposlitevUrl          = '/rest/zaposlitev';
+    private $objZaposlitev;
 
     public function _before(ApiTester $I)
     {
@@ -188,6 +190,35 @@ class PogodbaCest
     }
 
     /**
+     *  kreiramo zapis
+     * 
+     * @depends lookupOsebo
+     * 
+     * @param ApiTester $I
+     */
+    public function createZaposlitev(ApiTester $I)
+    {
+        $data                = [
+            'status'              => 'A',
+            'zacetek'             => '2010-02-01T00:00:00+0100',
+            'konec'               => '2010-02-01T00:00:00+0100',
+            'tip'                 => 1,
+            'delovnaObveza'       => 2,
+            'malica'              => 'zz',
+            'delovnoMesto'        => 'XXX',
+            'izmenskoDelo'        => true,
+            'individualnaPogodba' => true,
+            'jeZaposlenVdrugemJz' => TRUE,
+            'jeNastopajoci'       => TRUE,
+            'oseba'               => $this->lookOseba2['id'],
+        ];
+        $this->objZaposlitev = $ent                 = $I->successfullyCreate($this->zaposlitevUrl, $data);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+        $I->assertEquals($ent['status'], 'A');
+    }
+
+    /**
      * 
      * @param ApiTester $I
      */
@@ -265,7 +296,6 @@ class PogodbaCest
             'vrednostVaje'        => 22.22,
             'placiloNaVajo'       => false,
             'planiranoSteviloVaj' => 10,
-            'aktivna'             => false,
             'opis'                => 'zz',
             'oseba'               => $this->lookOseba1['id'],
             'popa'                => $this->lookPopa1['id'],
@@ -294,7 +324,6 @@ class PogodbaCest
             'vrednostVaje'        => 11.11,
             'placiloNaVajo'       => true,
             'planiranoSteviloVaj' => 10,
-            'aktivna'             => false,
             'opis'                => 'ww',
             'oseba'               => $this->lookOseba2['id'],
             'popa'                => null,
@@ -323,7 +352,6 @@ class PogodbaCest
             'vrednostVaje'        => 2.22,
             'placiloNaVajo'       => false,
             'planiranoSteviloVaj' => 10,
-            'aktivna'             => false,
             'opis'                => 'aa',
             'oseba'               => $this->lookOseba3['id'],
             'popa'                => null,
@@ -353,7 +381,6 @@ class PogodbaCest
             'vrednostVaje'        => 22.22,
             'placiloNaVajo'       => false,
             'planiranoSteviloVaj' => 10,
-            'aktivna'             => false,
             'opis'                => 'bb',
             'oseba'               => $this->lookOseba1['id'],
             'popa'                => null,
@@ -382,7 +409,6 @@ class PogodbaCest
             'vrednostVaje'        => 22.22,
             'placiloNaVajo'       => false,
             'planiranoSteviloVaj' => 10,
-            'aktivna'             => false,
             'opis'                => 'cc',
             'oseba'               => $this->lookOseba1['id'],
             'popa'                => null,
@@ -439,7 +465,6 @@ class PogodbaCest
         $I->assertEquals($ent['placiloNaVajo'], false);
         $I->assertEquals($ent['planiranoSteviloVaj'], 10);
 
-        $I->assertEquals($ent['aktivna'], false);
         $I->assertEquals($ent['jeAvtorskePravice'], false, "jeAvtorskePravice");
         $I->assertEquals($ent['opis'], 'xx');
         $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
@@ -549,7 +574,6 @@ class PogodbaCest
             'vrednostVaj'       => 33.33,
             'vrednostPredstave' => 44.44,
             'vrednostVaje'      => 22.22,
-            'aktivna'           => false,
             'opis'              => 'yy',
             'oseba'             => null,
             'popa'              => null,
@@ -575,7 +599,6 @@ class PogodbaCest
             'vrednostVaje'        => 22.22,
             'placiloNaVajo'       => false,
             'planiranoSteviloVaj' => 10,
-            'aktivna'             => false,
             'opis'                => 'zz',
             'oseba'               => $this->lookOseba4['id'],
             'popa'                => $this->lookPopa1['id'],
@@ -588,8 +611,8 @@ class PogodbaCest
             'samozaposlen'        => FALSE,
             'jeAvtorskePravice'   => FALSE,
             'igralec'             => true,
-            'procentOdInkasa'   => 5.1,
-            'jeProcentOdInkasa' => true,
+            'procentOdInkasa'     => 5.1,
+            'jeProcentOdInkasa'   => true,
         ];
         $resp = $I->failToCreate($this->restUrl, $data);
         $I->assertNotEmpty($resp);
@@ -684,6 +707,10 @@ class PogodbaCest
      */
     public function createVecAlternacij(ApiTester $I)
     {
+        
+        /**
+         * kreiramo alternacijo z zaposlitvijo in pogodbo
+         */
         $data                  = [
             'zaposlen'   => false, // v validaciji postavimo na true, če je zaposlitev
             'zacetek'    => '2010-02-01T00:00:00+0100',
@@ -693,7 +720,7 @@ class PogodbaCest
             'privzeti'   => true,
             'aktivna'    => true,
             'funkcija'   => $this->lookFunkcija['id'],
-            'zaposlitev' => null,
+            'zaposlitev' => $this->objZaposlitev['id'],
             'oseba'      => $this->lookOseba2['id'],
             'pomembna'   => TRUE,
             'pogodba'    => $this->obj2['id'],

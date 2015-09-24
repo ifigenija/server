@@ -70,11 +70,11 @@ class AvtorBesedilaFixture
     public function getData()
     {
         return [
-            ['01', 'Avtor originala', 10, true, "Besedilo-0001", "Oseba-0014",],
-            ['02', 'Predelava', 14, true, "Besedilo-0001", "Oseba-0015",],
-            ['03', 'Avtor originala', 11, true, "Besedilo-0002", "Oseba-0016",],
-            ['04', 'Avtor originala', 12, true, "Besedilo-0003", "Oseba-0017",],
-            ['05', 'Predelava', 18, false, "Besedilo-0001", "Oseba-0018",],
+            ['01', 'aizv', 10, true, "Besedilo-0001", "Oseba-0014",],
+            ['02', 'apri', 14, true, "Besedilo-0001", "Oseba-0015",],
+            ['03', 'aizv', 11, true, "Besedilo-0002", "Oseba-0016",],
+            ['04', 'aizv', 12, true, "Besedilo-0003", "Oseba-0017",],
+            ['05', 'apri', 18, false, "Besedilo-0001", "Oseba-0018",],
         ];
     }
 

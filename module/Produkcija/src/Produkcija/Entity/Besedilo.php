@@ -64,6 +64,13 @@ class Besedilo
      * @var string
      */
     protected $naslovIzvirnika;
+    
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Max\I18n(label="besedilo.podnaslovIzvirnika", description="besedilo.d.podnaslovIzvirnika")
+     * @var string
+     */
+    protected $podnaslovIzvirnika;
 
     /**
      * Predvidoma v angleščini
@@ -241,7 +248,13 @@ class Besedilo
     {
         return $this->naslovIzvirnika;
     }
+    
+    function getPodnaslovIzvirnika()
+    {
+        return $this->podnaslovIzvirnika;
+    }
 
+    
     public function getInternacionalniNaslov()
     {
         return $this->internacionalniNaslov;
@@ -322,7 +335,13 @@ class Besedilo
         $this->naslovIzvirnika = $naslovIzvirnika;
         return $this;
     }
-
+    
+    function setPodnaslovIzvirnika($podnaslovIzvirnika)
+    {
+        $this->podnaslovIzvirnika = $podnaslovIzvirnika;
+        return $this;
+    }
+    
     public function setInternacionalniNaslov($internacionalniNaslov)
     {
         $this->internacionalniNaslov = $internacionalniNaslov;

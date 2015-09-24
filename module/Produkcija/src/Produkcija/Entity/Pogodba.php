@@ -151,14 +151,6 @@ class Pogodba
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="pogodba.aktivna", description="pogodba.d.aktivna")   
-     * @Max\Ui(type="boolcheckbox")                       
-     * @var boolean
-     */
-    protected $aktivna;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
      * @Max\I18n(label="pogodba.zaposlenVDrJz", description="pogodba.d.zaposlenVDrJz")   
      * @Max\Ui(type="boolcheckbox")                       
      * @var boolean
@@ -271,7 +263,7 @@ class Pogodba
                 }
             }
             $this->expect($found
-                    , 'Oseba na alternaciji ni kontakt na poslovnem partnerju, ki je nosilec pogodbe'
+                    , 'Oseba na pogodbi ni kontakt na poslovnem partnerju, ki je nosilec pogodbe'
                     , 1000346);
         }
     }
@@ -342,10 +334,6 @@ class Pogodba
         return $this->vrednostDoPremiere;
     }
 
-    function getAktivna()
-    {
-        return $this->aktivna;
-    }
 
     function getZaposlenVDrJz()
     {
@@ -437,10 +425,6 @@ class Pogodba
         $this->vrednostDoPremiere = $vrednostDoPremiere;
     }
 
-    function setAktivna($aktivna)
-    {
-        $this->aktivna = $aktivna;
-    }
 
     function setZaposlenVDrJz($zaposlenVDrJz)
     {

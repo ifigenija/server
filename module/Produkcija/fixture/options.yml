@@ -98,3 +98,18 @@
            label: Materialni strošek
 #        avtorprav:
 #           label: Strošek odkupa avtorskih pravic 
+-
+    name: avtorbesedila.tipavtorja
+    type: array
+    public: false
+    readOnly: true
+    description: Tip stroška
+    defaultValue: 
+        aizv:
+           label: Avtor izvirnika
+        prev:
+           label: Prevajalec
+        apri:
+           label: Avtor priredbe
+        dram:
+           label: Dramatizator

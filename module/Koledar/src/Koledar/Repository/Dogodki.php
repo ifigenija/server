@@ -52,7 +52,7 @@ class Dogodki
          */
         /* Če ni postavljenega začetka, smatramo, da gledamo od danes naprej */
         if (empty($options['zacetek'])) {
-            $options['zacetek'] = new DateTime();;
+            $options['zacetek'] = new DateTime();
         }
         /*
          * Če ni postavljenega konca smatramo, da nas zanima 1 mesec 

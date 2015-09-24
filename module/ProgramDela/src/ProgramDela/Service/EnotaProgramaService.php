@@ -132,31 +132,29 @@ class EnotaProgramaService
                     if ($alternacija->getImaPogodbo()) {
                         $pogodba = $alternacija->getPogodba();
                         if ($pogodba) {
-                            if ($pogodba->getAktivna()) {
-                                if ($pogodba->getJeAvtorskePravice()) {
-                                    /**
-                                     * avtorske pravice
-                                     */
-                                    $data['Do']['avtorskePravice'] += $pogodba->getVrednostDoPremiere();
-                                    $data['Na']['avtorskePravice'] += $pogodba->getVrednostPredstave(); // to so tantieme
-                                } else {
-                                    /**
-                                     * avtorski honorarji
-                                     */
-                                    $data['stHonorarnih'] += 1;
-                                    //$$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
-                                    $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
-                                    $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
-                                    if ($pogodba->getIgralec()) {
-                                        $data['stHonorarnihIgr'] += 1;      //$$
-                                        if ($pogodba->getZaposlenVDrJz()) {
-                                            $data['stHonorarnihIgrTujJZ'] += 1;
-                                        }
-                                        if ($pogodba->getSamozaposlen()) {
-                                            $data['stHonorarnihIgrSamoz'] += 1;
-                                            $data['Do']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostDoPremiere();
-                                            $data['Na']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostPredstave();
-                                        }
+                            if ($pogodba->getJeAvtorskePravice()) {
+                                /**
+                                 * avtorske pravice
+                                 */
+                                $data['Do']['avtorskePravice'] += $pogodba->getVrednostDoPremiere();
+                                $data['Na']['avtorskePravice'] += $pogodba->getVrednostPredstave(); // to so tantieme
+                            } else {
+                                /**
+                                 * avtorski honorarji
+                                 */
+                                $data['stHonorarnih'] += 1;
+                                //$$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
+                                $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
+                                $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
+                                if ($pogodba->getIgralec()) {
+                                    $data['stHonorarnihIgr'] += 1;      //$$
+                                    if ($pogodba->getZaposlenVDrJz()) {
+                                        $data['stHonorarnihIgrTujJZ'] += 1;
+                                    }
+                                    if ($pogodba->getSamozaposlen()) {
+                                        $data['stHonorarnihIgrSamoz'] += 1;
+                                        $data['Do']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostDoPremiere();
+                                        $data['Na']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostPredstave();
                                     }
                                 }
                             }
@@ -165,7 +163,7 @@ class EnotaProgramaService
                 }
             }
         }
-        $data['avtor'] = $uprizoritev->getAvtor();
+        $data['avtor']          = $uprizoritev->getAvtor();
         $data['Do']['nasDelez'] = $data['Do']['avtorskiHonorarji'] + $data['Do']['avtorskePravice'] + $data['Do']['materialni'];
 
         $data['datumZacStudija'] = $uprizoritev->getDatumZacStudija() ? date(\DateTime::ISO8601, strtotime($uprizoritev->getDatumZacStudija()->format('c'))) : null;       // datum v ISO8601 obliki 
