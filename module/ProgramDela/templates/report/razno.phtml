@@ -1,10 +1,88 @@
 <?php
 /**
- * partial tmpl za razno 
+ * tmpl za razno
  * User: Alesch
  * Date: 21.9.2015
  */
+// 
+$drugiViri       = $model->drugiViri;
+$kop             = $model->koproducenti;
+$pEnote          = $model->programskeEnoteSklopa;
 
+$stEnot          = $model->stPE;
+$naziv           = $model->naziv;
+$stGledalcev     = $model->obiskInt;
+$celotnaVred     = $model->celotnaVrednost;        
+$lastSredstva    = $model->lastnaSredstva;
+$drugSredstva    = $model->drugiJavni;
+$stZaposlenih    = $model->stZaposlenih;
+$stAvtHon        = $model->stHonorarnih;
+$zaprSredstva    = $model->zaproseno;
 ?>
+<div id="razno">
+    <h2>Razno</h2>
+    <table>
+        <tr>
+            <td>Naziv Sklopa:</td>
+            <td><?= $naziv ?></td>
+        </tr>
+        <?php 
+            $this->partialLoop()->setObjectKey('pEnote');
+            echo $this->partialLoop('programske-enote', $pEnote); 
+        ?>
+        <tr>
+            <td>Št. programskih enot v sklopu:</td>
+            <td><?= $stEnot ?></td>
+        </tr>
+        <?php if($imakop) { ?>
+            <tr>
+                <td>Koproducenti:</td>
+                <td></td>
+            </tr>
+            <?php 
+                echo $this->partial('koproducenti', array('kop' => $kop)); 
+            ?>
+        <?php } ?>
+        <tr>
+            <td>Načrtovano število obiskovalcev:</td>
+            <td class="cell-type-number"><?= $stGledalcev ?></td>
+        </tr>
+        <tr>
+            <td>Št. zaposlenih, ki sodelujejo pri izvedbi projekta:</td>
+            <td class="cell-type-number"><?= $stZaposlenih ?></td>
+        </tr>       
+        <tr>
+            <td>Št. vseh, ki sodelujejo honorarno pri izvedbi projekta in jim honorar izplačuje javni zavod:</td>
+            <td class="cell-type-number"><?= $atAvtHon ?></td>
+        </tr>       
+        <tr>
+            <td>Zaprošena sredstva Ministrstva za kulturo:</td>
+            <td class="cell-type-number"><?= $zaprSredstva ?></td>
+        </tr>
+        <tr>
+            <td>Lastna sredstva:</td>
+            <td class="cell-type-number"><?= $lastSredstva ?></td>
+        </tr>
 
-Razno
+        <tr>
+            <td>Drugi Viri:</td>
+            <td></td>
+        </tr>
+        <?php
+            $this->partialLoop()->setObjectKey('drugiViri');
+            echo $this->partialLoop('drugiViri', $drugiViri);
+        ?>
+        <tr>
+            <td>Vir druga ministrstva in lokalna skupnost:</td>
+            <td class="cell-type-number"><?= $drugSredstva ?></td>
+        </tr>
+        <tr>
+            <td>Celotna vrednost sklopa:</td>
+            <td class="cell-type-number"><?= $celotnaVred ?></td>
+        </tr>
+        <tr>
+            <td><h2>Vsebinska utemeljitev predloga - celotnega sklopa in posameznih enot:</h2></td>
+            <td></td>
+        </tr>
+    </table>
+</div>

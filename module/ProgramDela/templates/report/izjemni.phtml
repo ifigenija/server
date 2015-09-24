@@ -1,11 +1,74 @@
 <?php
 /**
- * partial tmpl za izjemne dogodke
+ * tmpl za izjemne dogodke
  * User: Alesch
  * Date: 21.9.2015
  */
+// 
+$upr             = $model->uprizoritev;
+$drugiViri       = $model->drugiViri;
+
+// iz gostovanja
+$zaprSredstva    = $model->zaproseno;
+$lastSredstva    = $model->lastnaSredstva;
+$drugSredstva    = $model->drugiJavni;
+$obiskDoma       = $model->obiskDoma;
+$stPredstav      = $model->ponoviDoma;
 
 ?>
+<div id="premiere">
+    <h2>Gostujoče uprizoritve - iz Slovenije, zamejstva in tujine</h2>
+    <table>
+        <?php
+            echo $this->partial('uprizoritev', array('upr' => $upr));
+        ?>
+        <tr>
+            <td>Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri dogodku:</td>
+            <td class="cell-type-number"><?= $ ?></td>
+        </tr>       
+        <tr>
+            <td>Št. vseh, ki sodelujejo honorarno:</td>
+            <td class="cell-type-number"><?= $ ?></td>
+        </tr>
+        <tr>
+            <td>    - od tega igralcev:</td>
+            <td class="cell-type-number"><?= $ ?></td>
+        </tr>
+        <tr>
+            <td>    - od tega igralcev, zaposlenih v drugih javnih zavodih:</td>
+            <td class="cell-type-number"><?= $ ?></td>
+        </tr>
+        
 
-Izjemni
+        <tr>
+            <td>Lastna sredstva:</td>
+            <td class="cell-type-number"><?= $lastSredstva ?></td>
+        </tr>
+
+        <tr>
+            <td>Drugi Viri:</td>
+            <td></td>
+        </tr>
+        <?php
+            $this->partialLoop()->setObjectKey('drugiViri');
+            echo $this->partialLoop('drugiViri', $drugiViri);
+        ?>
+        <tr>
+            <td>Vir druga ministrstva in lokalna skupnost:</td>
+            <td class="cell-type-number"><?= $drugSredstva ?></td>
+        </tr>
+        <tr>
+            <td>Celotna vrednost dogodka:</td>
+            <td class="cell-type-number"><?= $celotnaVred ?></td>
+        </tr>
+        <tr>
+            <td>     - od tega stroški matičnega javnega zavoda:</td>
+            <td class="cell-type-number"><?= $ ?></td>
+        </tr>
+        <tr>
+            <td><h2>Vsebinska utemeljitev predloga:</h2></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
 

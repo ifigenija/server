@@ -15,81 +15,65 @@ use Jobs\Annotation\Task as Task;
 class ProgramDelaReport
         extends AbstractPrinterTask
 {
-
     /**
      *
      * @var ProgramDela
      */
     protected $entity;
-
+    
     public function taskBody()
     {
         $ps = $this->getServiceLocator()->get('mpdf.printer');
-        $zs = $this->getServiceLocator()->get('zapisi.service');
-                
-        $title   = "Program dela " . $this->entity->getSifra();
+
+        $mainTitle   = "Program dela " . $this->entity->getSifra();
         $prgdela = $this->entity;
 
         $printer = $ps->getMPdf();
 
         // Splošno za program dela - nastavim header in footer + zavihek 'splošno' iz vnosne forme
         $this->addDocumentReport('program-dela', $title, $this->entity);
-        
-        // Premiere
-        foreach ($prgdela->premiere as $premiera) {
-            $this->addDocumentReport('premiera', $title, $premiera);
-            // dodam zapise 
-            $myzapisi = $zs->getZapiseZaLastnika($premiera->id);
-            foreach ($myzapisi as $myzapis) {
-                $this->addDocumentAttachment('zapisi', $title, $myzapis->zapis);
-            }
-            $printer->AddPage();
-        }
-      
-        // Ponovitve premier
-        foreach ($prgdela->ponovitvePremiere as $ponovitevPremiere) {
-            $this->addDocumentReport('ponovitve-premier', $title, $ponovitevPremiere);
-            // dodam zapise 
-            $myzapisi = $zs->getZapiseZaLastnika($ponovitevPremiere->id);
-            foreach ($myzapisi as $myzapis) {
-                $this->addDocumentAttachment('zapisi', $title, $myzapis);
-            }
-            $printer->AddPage();
-        }
-      
-        // Ponovitve prejšnjih uprizoritev
-        foreach ($prgdela->ponovitvePremiere as $ponovitevPrejsnje) {
-            $this->addDocumentReport('ponovitve-prejsnjih', $title, $ponovitevPrejsnje);
-            // dodam zapise 
-            $myzapisi = $zs->getZapiseZaLastnika($ponovitevPrejsnje->id);
-            foreach ($myzapisi as $myzapis) {
-                $this->addDocumentAttachment('zapisi', $title, $myzapis);
-            }
-            $printer->AddPage();
-        }
 
-        // Gostujoče uprizoritve
-        foreach ($prgdela->gostujoci as $gostujoce) {
-            $this->addDocumentReport('gostujoce', $title, $gostujoce);
-            // dodam zapise 
-            $myzapisi = $zs->getZapiseZaLastnika($gostujoce->id);
-            foreach ($myzapisi as $myzapis) {
-                $this->addDocumentAttachment('zapisi', $title, $myzapis);
-            }
-            $printer->AddPage();
-        }
-        
-        // Mednarodna gostovanja 
-        foreach ($prgdela->gostovanja as $gostovanje) {
-            $this->addDocumentReport('mednarodna', $title, $gostovanje);
-            // dodam zapise 
-            $myzapisi = $zs->getZapiseZaLastnika($gostovanje->id);
-            foreach ($myzapisi as $myzapis) {
-                $this->addDocumentAttachment('zapisi', $title, $myzapis);
-            }
-            $printer->AddPage();
-        }
+        // Premiere
+        $this->reportSklopPrograma($printer, $prgdela->premiere, 'premiera', 'Premiere');
+        // Ponovitve premier
+        $this->reportSklopPrograma($printer, $prgdela->ponovitvePremiere , 'ponovitve-premier', 'Ponovitve premiernih uprizoritev');
+        // Ponovitve prejšnjih
+        $this->reportSklopPrograma($printer, $prgdela->ponovitvePrejsnjih , 'ponovitve-prejsnjih', 'Ponovitve uprizoritev iz prejšnjih sezon');
+        // Gostujoče
+        $this->reportSklopPrograma($printer, $prgdela->gostujoci, 'gostujoce', 'Gostujoče uprizoritve – iz Slovenije, zamejstva in tujine');
+        // Mednarodna gostovanja
+        $this->reportSklopPrograma($printer, $prgdela->gostovanja, 'mednarodna', 'Mednarodna gostovanja – gostovanja javnega zavoda v tujini ');
+        // Festivali 
+        $this->reportSklopPrograma($printer, $prgdela->programiFestival, 'festivali', 'Festivali');
+        // Razno
+        $this->reportSklopPrograma($printer, $prgdela->programiRazno, 'razno', 'Razno');
+        // Izjemni dogodki
+//        $this->reportSklopPrograma($printer, $prgdela->izjemni, 'izjemni', 'Izjemni dogodki');
+
         $this->finishReport($title);
+    }
+
+    /**
+     * Izpis posameznega sklopa programa dela
+     * 
+     * @param object $printer   tiskalnik (mPdf) 
+     * @param object $sklopi    objekt sklopa programa dela (premiere. ponovitve, festivali...)
+     * @param string $tmpl      ime predloge
+     * @param string $naslov    naslov reporta
+     */
+    public function reportSklopPrograma($printer, $sklopi, $tmpl, $naslov)
+    {
+        $this->zs = $this->getServiceLocator()->get('zapisi.service');
+
+        foreach ($sklopi as $sklop) {
+            $this->addDocumentReport($tmpl, $naslov, $sklop);
+            // dodam zapise 
+            $myzapisi = $zs->getZapiseZaLastnika($sklop->id);
+            foreach ($myzapisi as $myzapis) {
+                $this->addDocumentAttachment('zapisi', $naslov, $myzapis);
+            }
+            $printer->AddPage();
+        }
     }
 
     public function checkData()
@@ -102,4 +86,5 @@ class ProgramDelaReport
             throw new MaxException('Program dela ne obstaja', 1000688);
         }
     }
+
 }
