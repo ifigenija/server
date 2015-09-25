@@ -96,7 +96,7 @@ abstract class AbstractPrinterTask
      * @return bool|string
      * @throws MaxException
      */
-    public function addDocumentAttachment($templateName, $title, $zapis, $vars = [])
+    public function addDocumentAttachment($printer,$templateName, $title, $zapis, $vars = [])
     {
         $template = $this->getTemplate($templateName);
         $config   = $this->getTemplateConfig($templateName);
@@ -108,7 +108,12 @@ abstract class AbstractPrinterTask
          * če je pdf ali slika...
          */
         /*
-        if ($zapis->
+        if ($zapis->datoteka = pdf) {
+            $stStrani = $printer->SetSourceFile($datoteka);
+            $tplId = $printer->ImportPage($stStrani);
+            $printer->UseTemplate($tplId);
+            $printer->Output();
+        }
         */
         
         $variables = array_merge([

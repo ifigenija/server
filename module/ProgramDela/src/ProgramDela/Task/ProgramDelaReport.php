@@ -70,7 +70,7 @@ class ProgramDelaReport
             // dodam zapise 
             $myzapisi = $zs->getZapiseZaLastnika($sklop->id);
             foreach ($myzapisi as $myzapis) {
-                $this->addDocumentAttachment('zapisi', $naslov, $myzapis);
+                $this->addDocumentAttachment($printer, 'zapisi', $naslov, $myzapis);
             }
             $printer->AddPage();
         }
