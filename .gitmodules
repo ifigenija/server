@@ -7,3 +7,6 @@
 [submodule "module/Zapisi"]
 	path = module/Zapisi
 	url = http://git.max.si/tip2/zapisi
+[submodule "module/Jobs"]
+	path = module/Jobs
+	url = https://git.max.si/tip2/jobs
