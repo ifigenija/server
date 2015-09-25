@@ -271,7 +271,7 @@ class ProgramDelaCest
         /**
          * kreiramo še nekaj zapisov za sort
          */
-        $data       = [
+        $data = [
             'sifra'          => '99',
             'naziv'          => 'gg',
             'zacetek'        => '2016-01-01T00:00:00+0100',
@@ -280,10 +280,10 @@ class ProgramDelaCest
 //            'vrPS1Mat'       => 7.89,
 //            'vrPS1GostovSZ'  => 7.89,
         ];
-                $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
 
-        $data       = [
+        $data = [
             'sifra'          => '00',
             'naziv'          => 'hh',
             'zacetek'        => '2016-01-01T00:00:00+0100',
@@ -292,7 +292,7 @@ class ProgramDelaCest
 //            'vrPS1Mat'       => 7.89,
 //            'vrPS1GostovSZ'  => 7.89,
         ];
-                $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
     }
 
@@ -373,7 +373,7 @@ class ProgramDelaCest
         $totRec  = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertEquals("00", $list[0]['sifra']);
-        $I->assertEquals("99", $list[$totRec-1]['sifra']);
+        $I->assertEquals("99", $list[$totRec - 1]['sifra']);
     }
 
     /**
@@ -1673,6 +1673,7 @@ class ProgramDelaCest
             'obsegPE'      => 'zz',
             'mesecPE'      => 'zz',
             'vrednostPE'   => 100.11,
+            'obiskDoma'    => 22,
             'programRazno' => $this->objProgramRazno1['id']
         ];
         $this->objPESklopa1 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
@@ -1685,6 +1686,7 @@ class ProgramDelaCest
             'obsegPE'      => 'aa',
             'mesecPE'      => 'aa',
             'vrednostPE'   => 200.22,
+            'obiskDoma'    => 22,
             'programRazno' => $this->objProgramRazno1['id']
         ];
         $this->objPESklopa2 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
@@ -2277,9 +2279,9 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(1096.2, $resp['Skupaj']['vrednost']['premiere'], "['premiere']['Skupaj']");
 //        $I->assertGreaterThanOrEqual(1080, $resp['ponovitvePremier']['Skupaj']['vrednost'],"['ponovitvePremier']['Skupaj']");
 //        $I->assertGreaterThanOrEqual(747.9, $resp['ponovitvePrejsnjih']['Skupaj']['vrednost'],"['ponovitvePremier']['Skupaj']");
-        $I->assertGreaterThanOrEqual(1461, $resp['Skupaj']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['Skupaj']");
-        $I->assertGreaterThanOrEqual(930, $resp['H.1']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['H.1']");
-        $I->assertGreaterThanOrEqual(876.6, $resp['Skupaj']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['Skupaj']");
+        $I->assertGreaterThanOrEqual(841, $resp['Skupaj']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['Skupaj']");
+        $I->assertGreaterThanOrEqual(610, $resp['H.1']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['H.1']");
+        $I->assertGreaterThanOrEqual(504.6, $resp['Skupaj']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['Skupaj']");
         $I->assertGreaterThanOrEqual(558, $resp['H.1']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['H.1']");
         $I->assertGreaterThanOrEqual(1022.7, $resp['Skupaj']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['Skupaj']");
         $I->assertGreaterThanOrEqual(651, $resp['H.1']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['H.1']");

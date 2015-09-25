@@ -80,7 +80,7 @@ class ProgramRaznoCest
             'dokument'        => NULL,
             'naziv'           => 'zz',
 //            'stPE'            => 1,
-            'obiskDoma'       => 1,
+//            'obiskDoma'       => 1,
             'stZaposlenih'    => 1,
             'stHonorarnih'    => 1,
             'zaproseno'       => 0,
@@ -106,7 +106,7 @@ class ProgramRaznoCest
 //            'mesecPE'         => 'aa',
 //            'vrednostPE'      => 2.23,
 //            'stPE'            => 2,
-            'obiskDoma'       => 2,
+//            'obiskDoma'       => 2,
             'stZaposlenih'    => 2,
             'stHonorarnih'    => 2,
             'zaproseno'       => 0,
@@ -136,6 +136,7 @@ class ProgramRaznoCest
             'obsegPE'      => 'zz',
             'mesecPE'      => 'zz',
             'vrednostPE'   => 1,
+            'obiskDoma'   => 40,
             'programRazno' => $this->obj1['id']
         ];
         $this->objPESklopa3 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
@@ -148,6 +149,7 @@ class ProgramRaznoCest
             'obsegPE'      => 'aa',
             'mesecPE'      => 'aa',
             'vrednostPE'   => 3,
+            'obiskDoma'   => 30,
             'programRazno' => $this->obj1['id']
         ];
         $this->objPESklopa4 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
@@ -158,6 +160,7 @@ class ProgramRaznoCest
             'obsegPE'      => 'zz',
             'mesecPE'      => 'zz',
             'vrednostPE'   => 1,
+            'obiskDoma'   => 30,
             'programRazno' => $this->obj2['id']
         ];
         $this->objPESklopa1 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
@@ -169,6 +172,7 @@ class ProgramRaznoCest
             'obsegPE'      => 'aa',
             'mesecPE'      => 'aa',
             'vrednostPE'   => 3,
+            'obiskDoma'   => 30,
             'programRazno' => $this->obj2['id']
         ];
         $this->objPESklopa2 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
@@ -184,12 +188,12 @@ class ProgramRaznoCest
     public function update(ApiTester $I)
     {
         $ent              = $this->obj1;
-        $ent['obiskDoma'] = 33;
+//        $ent['obiskDoma'] = 33;
         $ent['zaproseno'] = 1.22;
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['obiskDoma'], 33);
+//        $I->assertEquals($entR['obiskDoma'], 33);
         $I->assertEquals($entR['zaproseno'], 1.22);
     }
 
@@ -212,7 +216,7 @@ class ProgramRaznoCest
 //        $I->assertEquals($ent['mesecPE'], 'zz');
 //        $I->assertEquals($ent['vrednostPE'], 1.24);
         $I->assertEquals($ent['stPE'], 2);
-        $I->assertEquals($ent['obiskDoma'], 33);
+        $I->assertEquals($ent['obiskDoma'], 70);
         $I->assertEquals($ent['stZaposlenih'], 1);
         $I->assertEquals($ent['stHonorarnih'], 1);
         $I->assertEquals($ent['celotnaVrednost'], 4);
@@ -345,6 +349,7 @@ class ProgramRaznoCest
             'obsegPE'      => 'uk',
             'mesecPE'      => 'uk',
             'vrednostPE'   => 14.01,
+            'obiskDoma'   => 22,
             'programRazno' => $this->obj2['id']
         ];
         $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);

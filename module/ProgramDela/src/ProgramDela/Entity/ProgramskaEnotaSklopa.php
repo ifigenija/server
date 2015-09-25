@@ -61,6 +61,15 @@ class ProgramskaEnotaSklopa
     protected $vrednostPE;
 
     /**
+     * 
+     * @ORM\Column(type="integer", nullable=false, options={"default":0})
+     * @Max\I18n(label="peSklopa.obiskDoma", description="peSklopa.d.obiskDoma")   
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    protected $obiskDoma;
+
+    /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramRazno", inversedBy="programskeEnoteSklopa")
      * @Max\I18n(label="peSklopa.programRazno", description="peSklopa.d.programRazno")   
      * @Max\Ui(type="hiddenid")
@@ -81,6 +90,7 @@ class ProgramskaEnotaSklopa
     {
         $this->expect($this->naslovPE, "Nima naslova PE. Naslov programske enote je obvezen podatek", 1000650);
         $this->validateEuroGE0($this->vrednostPE, "Vrednost PE", 1000651);
+        $this->validateIntGE0($this->obiskDoma, "", 1000652);
     }
 
     public function getId()
@@ -154,9 +164,20 @@ class ProgramskaEnotaSklopa
         return $this;
     }
 
-    public function setProgramRazno(\ProgramDela\Entity\ProgramRazno $programRazno=null)
+    public function setProgramRazno(\ProgramDela\Entity\ProgramRazno $programRazno = null)
     {
         $this->programRazno = $programRazno;
+        return $this;
+    }
+
+    public function getObiskDoma()
+    {
+        return $this->obiskDoma;
+    }
+
+    public function setObiskDoma($obiskDoma)
+    {
+        $this->obiskDoma = $obiskDoma;
         return $this;
     }
 

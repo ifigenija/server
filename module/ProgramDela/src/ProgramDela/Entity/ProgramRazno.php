@@ -81,11 +81,14 @@ class ProgramRazno
         $this->ponoviKoprInt           = 0;
         $this->kpe                     = 0;
 
+
         $this->preracunajPoljaZaMatKoprodukcijo();
 
         $this->stPE = 0;
+        $this->obiskDoma = 0;
         foreach ($this->getProgramskeEnoteSklopa() as $numObject => $object) {
             $this->stPE += 1;
+            $this->obiskDoma += $object->getObiskDoma();
         }
         parent::preracunaj($smer);
         if ($smer == \Max\Consts::UP) {
@@ -126,7 +129,7 @@ class ProgramRazno
         return $this->stPE;
     }
 
-    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument=null)
+    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument = null)
     {
         $this->dokument = $dokument;
         return $this;

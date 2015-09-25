@@ -79,6 +79,7 @@ class ProgramskaEnotaSklopaCest
             'obsegPE'      => 'zz',
             'mesecPE'      => 'zz',
             'vrednostPE'   => 100.11,
+            'obiskDoma'   => 55,
             'programRazno' => $this->objProgramRazno1['id']
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -92,6 +93,7 @@ class ProgramskaEnotaSklopaCest
             'obsegPE'      => 'aa',
             'mesecPE'      => 'aa',
             'vrednostPE'   => 200.22,
+            'obiskDoma'   => 60,
             'programRazno' => $this->objProgramRazno1['id']
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -131,6 +133,7 @@ class ProgramskaEnotaSklopaCest
         $I->assertEquals($ent['obsegPE'], 'zz');
         $I->assertEquals($ent['mesecPE'], 'zz');
         $I->assertEquals($ent['vrednostPE'], 100.11);
+        $I->assertEquals($ent['obiskDoma'], 55);
         $I->assertEquals($ent['programRazno'], $this->objProgramRazno1['id']);
     }
 
