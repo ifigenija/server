@@ -69,6 +69,16 @@ class TipFunkcije
     protected $podrocje;
 
     /**
+     * v kakšnem vrstnem redu naj se prikaže v izbirnem polju
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="tipFunkcije.sort", description="tipFunkcije.d.sort")
+     * @Max\Ui(type="integer", icon="fa fa-sort")
+     * @var integer
+     */
+    protected $sort;
+
+    /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Funkcija", mappedBy="tipFunkcije", fetch="EXTRA_LAZY")
      * @var <Funkcije>
      */
@@ -158,6 +168,16 @@ class TipFunkcije
     public function setSifra($sifra)
     {
         $this->sifra = $sifra;
+        return $this;
+    }
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    public function setSort($sort)
+    {
+        $this->sort = $sort;
         return $this;
     }
 

@@ -56,6 +56,7 @@ class TipFunkcijeCest
             'opis'      => 'xx',
             'imeZenski' => 'yy',
             'podrocje'  => 'umetnik',
+            'sort'  => 9999,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -69,6 +70,7 @@ class TipFunkcijeCest
             'imeZenski'  => 'cc',
             'podrocje'   => 'tehnik',
             'pomembnost' => 'aa',
+            'sort'  => 9999,
         ];
         $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -85,6 +87,7 @@ class TipFunkcijeCest
             'imeZenski'  => 'dd',
             'podrocje'   => 'igralec',
             'pomembnost' => 'dd',
+            'sort'  => 9999,
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -197,6 +200,7 @@ class TipFunkcijeCest
         $I->assertEquals($ent['opis'], 'yy');
         $I->assertEquals($ent['imeZenski'], 'yy');
         $I->assertEquals($ent['podrocje'], 'umetnik');
+        $I->assertEquals($ent['sort'], 9999);
         $I->assertTrue(isset($ent['funkcije']), "ali so funkcije");
         $I->assertEquals(0, count($ent['funkcije']), "število funkcij");
     }
