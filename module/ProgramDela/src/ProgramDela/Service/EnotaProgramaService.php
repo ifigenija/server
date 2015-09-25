@@ -141,20 +141,40 @@ class EnotaProgramaService
                             } else {
                                 /**
                                  * avtorski honorarji
+                                 * $$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
                                  */
-                                $data['stHonorarnih'] += 1;
-                                //$$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
-                                $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
-                                $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
+                                if ($pogodba->getVrednostDoPremiere() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                    $data['Do']['stHonorarnih'] += 1;
+                                    $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
+                                }
+                                if ($pogodba->getVrednostPredstave() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                    $data['Na']['stHonorarnih'] += 1;
+                                    $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
+                                }
                                 if ($pogodba->getIgralec()) {
-                                    $data['stHonorarnihIgr'] += 1;      //$$
+                                    if ($pogodba->getVrednostDoPremiere() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                        $data['Do']['stHonorarnihIgr'] += 1;
+                                    }
+                                    if ($pogodba->getVrednostPredstave() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                        $data['Na']['stHonorarnihIgr'] += 1;
+                                    }
                                     if ($pogodba->getZaposlenVDrJz()) {
-                                        $data['stHonorarnihIgrTujJZ'] += 1;
+                                        if ($pogodba->getVrednostDoPremiere() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                            $data['Do']['stHonorarnihIgrTujJZ'] += 1;
+                                        }
+                                        if ($pogodba->getVrednostPredstave() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                            $data['Na']['stHonorarnihIgrTujJZ'] += 1;
+                                        }
                                     }
                                     if ($pogodba->getSamozaposlen()) {
-                                        $data['stHonorarnihIgrSamoz'] += 1;
-                                        $data['Do']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostDoPremiere();
-                                        $data['Na']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostPredstave();
+                                        if ($pogodba->getVrednostDoPremiere() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                            $data['Do']['stHonorarnihIgrSamoz'] += 1;
+                                            $data['Do']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostDoPremiere();
+                                        }
+                                        if ($pogodba->getVrednostPredstave() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                            $data['Na']['stHonorarnihIgrSamoz'] += 1;
+                                            $data['Na']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostPredstave();
+                                        }
                                     }
                                 }
                             }
@@ -185,24 +205,28 @@ class EnotaProgramaService
      */
     private function initData()
     {
-        $polje                        = [
+        $polje                  = [
             'avtorskiHonorarji'      => 0,
             'avtorskiHonorarjiSamoz' => 0,
             'avtorskePravice'        => 0,
             'materialni'             => 0,
+            'stHonorarnih'           => 0,
+            'stHonorarnihIgr'        => 0,
+            'stHonorarnihIgrTujJZ'   => 0,
+            'stHonorarnihIgrSamoz'   => 0,
         ];
-        $data['naziv']                = '';
-        $data['Funkcije']             = [];
-        $data['Na']                   = $polje;
-        $data['Do']                   = $polje;
-        $data['Do']['nasDelez']       = 0;           // nasDelez na predstavo se izracunava na klientu
-        $data['stZaposDrug']          = 0;
-        $data['stHonorarnih']         = 0;
-        $data['stHonorarnihIgr']      = 0;
-        $data['stHonorarnihIgrTujJZ'] = 0;
-        $data['stHonorarnihIgrSamoz'] = 0;
-        $data['stZaposUmet']          = 0;
-        $data['avtor']                = 0;
+        $data['naziv']          = '';
+        /**
+         * to polje zaenkrat še ne uporabljamo, ker na klientu funkcij v programu dela 
+         * ne prikazujemo. Pri izpisu programa dela pa se ne kliče ta service. 
+         */
+        $data['Funkcije']       = [];
+        $data['Na']             = $polje;
+        $data['Do']             = $polje;
+        $data['Do']['nasDelez'] = 0;           // nasDelez na predstavo se izracunava na klientu
+        $data['stZaposDrug']    = 0;
+        $data['stZaposUmet']    = 0;
+        $data['avtor']          = 0;
         return $data;
     }
 
