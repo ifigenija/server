@@ -13,6 +13,7 @@ forms:
             - opis
             - imeZenski
             - podrocje
+            - sort
 #            - funkcije
 lists:
     default: 
