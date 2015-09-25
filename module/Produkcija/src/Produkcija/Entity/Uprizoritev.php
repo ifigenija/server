@@ -241,6 +241,19 @@ class Uprizoritev
     protected $kratkiNaslov;
 
     /**
+     *  ali je uprizoritev koprodukcija
+     * 
+     * $$ zaenkrat le flag - kasneje bi naredili tudi otm relacijo s koprodukcijami (verjetno nova entiteta)
+     *   tam bi se vnašali procenti delitve le do premiere, ker se pri ponovitvah lahko spreminjajo
+     * 
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     * @Max\I18n(label="ep.jeKoprodukcija", description="ep.d.jeKoprodukcija")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $jeKoprodukcija;
+
+    /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Funkcija", mappedBy="uprizoritev")
      * @var <Funkcije>
      */
@@ -738,6 +751,17 @@ class Uprizoritev
     public function setPrvaSlovenska($prvaSlovenska)
     {
         $this->prvaSlovenska = $prvaSlovenska;
+        return $this;
+    }
+
+    public function getJeKoprodukcija()
+    {
+        return $this->jeKoprodukcija;
+    }
+
+    public function setJeKoprodukcija($jeKoprodukcija)
+    {
+        $this->jeKoprodukcija = $jeKoprodukcija;
         return $this;
     }
 

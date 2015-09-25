@@ -288,6 +288,7 @@ class UprizoritevCest
             'arhOpomba'             => 'zz',
             'datumZakljucka'        => '2019-02-01T00:00:00+0100',
             'sloAvtor'              => FALSE,
+            'jeKoprodukcija'              => FALSE,
             'kratkiNaslov'          => 'zz',
             'besedilo'              => $this->lookBesedilo['id'],
             'zvrstUprizoritve'      => null,
@@ -324,6 +325,7 @@ class UprizoritevCest
             'arhOpomba'             => 'aa',
             'datumZakljucka'        => '2019-02-01T00:00:00+0100',
             'sloAvtor'              => true, // $$ bool vrača napako convertToBool
+            'jeKoprodukcija'              => true, 
             'kratkiNaslov'          => 'aa',
             'besedilo'              => $this->lookBesedilo['id'],
             'zvrstUprizoritve'      => null,
@@ -356,6 +358,7 @@ class UprizoritevCest
             'arhOpomba'             => 'bb',
             'datumZakljucka'        => '2014-02-01T00:00:00+0100',
             'sloAvtor'              => true, // $$ bool vrača napako convertToBool
+            'jeKoprodukcija'              => true, // $$ bool vrača napako convertToBool
             'kratkiNaslov'          => 'bb',
             'besedilo'              => $this->lookBesedilo['id'],
             'zvrstUprizoritve'      => null,
@@ -394,6 +397,7 @@ class UprizoritevCest
             'arhOpomba'        => 'b',
             'datumZakljucka'   => '2019-02-01T00:00:00+0100',
             'sloAvtor'         => true, // $$ bool vrača napako convertToBool
+            'jeKoprodukcija'         => true, 
             'kratkiNaslov'     => 'bb',
             'maticniOder'      => $this->lookProstor['id'],
             'besedilo'         => $this->lookBesedilo['id'],
@@ -805,6 +809,7 @@ class UprizoritevCest
         $I->assertEquals($ent['arhOpomba'], 'zz');
         $I->assertEquals($ent['datumZakljucka'], '2019-02-01T00:00:00+0100');
         $I->assertEquals($ent['sloAvtor'], FALSE);
+        $I->assertEquals($ent['jeKoprodukcija'], FALSE);
         $I->assertEquals($ent['kratkiNaslov'], 'zz');
         $I->assertEquals($ent['besedilo']['id'], $this->lookBesedilo['id'], "Besedilo");
         $I->assertEquals($ent['zvrstUprizoritve'], null);
