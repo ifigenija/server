@@ -12,7 +12,7 @@ use Max\Ann\Entity as Max;
  * @ORM\Entity(repositoryClass="Produkcija\Repository\TipiFunkcije")
  * @Max\I18n(label="Tip funkcije",plural="Tipi funkcije")
  * @Max\Id(prefix="0015")
- * @Max\Lookup(ident="sifra",label="ime",extra={"opis","podrocje"},search={"sifra", "ime","opis","podrocje"})
+ * @Max\Lookup(ident="ime",label="sort",extra={"opis","podrocje"},search={"sifra", "ime","opis","podrocje"})
  */
 class TipFunkcije
         extends \Max\Entity\Base
