@@ -29,7 +29,13 @@ forms:
                 - oseba
                 - funkcija
                 - pogodba
-            
+    uredi:
+        elements:
+            - zacetek
+            - konec
+            - opomba
+            - sifra
+            - pomembna
 lists:
     default: 
         filter:
