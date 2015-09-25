@@ -36,19 +36,23 @@ class ProgramPonovitevPremiere
     public function preracunaj($smer = false)
     {
         // neaktualna polja, ki jih tudi v formi ni:
-        $this->avtorskePravice      = 0;
-        $this->stZaposlenih         = 0;
+        $this->avtorskePravice = 0;
+        $this->stZaposlenih    = 0;
+        $this->ponoviKoprInt   = 0;
+        $this->ponoviInt       = 0;
+        $this->obiskKoprInt    = 0;
+        $this->obiskInt        = 0;
+        $this->kpe             = 0;
+        $this->naziv           = "";        // dobimo iz uprizoritve
+
+        /**
+         * ne velja za ponov. prejšnjih:
+         */
         $this->stZaposUmet          = 0;
         $this->stZaposDrug          = 0;
         $this->stHonorarnih         = 0;
         $this->stHonorarnihIgr      = 0;
         $this->stHonorarnihIgrTujJZ = 0;
-        $this->ponoviKoprInt        = 0;
-        $this->ponoviInt            = 0;
-        $this->obiskKoprInt         = 0;
-        $this->obiskInt             = 0;
-        $this->kpe                  = 0;
-        $this->naziv                = "";        // dobimo iz uprizoritve
 
         $this->preracunajPoljaZaMatKoprodukcijo();
 
@@ -90,7 +94,7 @@ class ProgramPonovitevPremiere
         return $this->dokument;
     }
 
-    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument=null)
+    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument = null)
     {
         $this->dokument = $dokument;
         return $this;
