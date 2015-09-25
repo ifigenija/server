@@ -9,7 +9,7 @@ forms:
             - dokument
             - naziv
 #            - stPE
-#            - obiskDoma
+            - obiskDoma
             - stZaposlenih
             - stHonorarnih
             - zaproseno
