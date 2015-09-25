@@ -237,12 +237,12 @@ class ProgramDelaCest
             'zacetek'          => '2015-02-01T00:00:00+01:00',
             'konec'            => '2016-02-01T00:00:00+0100',
             'potrjenProgram'   => false,
-            'avgZasedDvoran'   => 7.89,
+//            'avgZasedDvoran'   => 7.89,
             'avgCenaVstopnice' => 7.89,
             'stProdVstopnic'   => 7,
             'stZaposlenih'     => 7,
             'stZaposIgralcev'  => 7,
-            'avgStNastopovIgr' => 7.89,
+//            'avgStNastopovIgr' => 7.89,
 //            'vrPS1Mat'         => 7.89,
 //            'vrPS1GostovSZ'    => 7.89,
 //            'stHonorarnih'         => 7,
@@ -261,6 +261,10 @@ class ProgramDelaCest
             'zacetek'        => '2016-01-01T00:00:00+0100',
             'konec'          => '2017-02-01T00:00:00+0100',
             'potrjenProgram' => TRUE,
+            'avgCenaVstopnice' => 7.89,
+            'stProdVstopnic'   => 7,
+            'stZaposlenih'     => 7,
+            'stZaposIgralcev'  => 7,
 //            'vrPS1Mat'       => 7.89,
 //            'vrPS1GostovSZ'  => 7.89,
         ];
@@ -277,6 +281,10 @@ class ProgramDelaCest
             'zacetek'        => '2016-01-01T00:00:00+0100',
             'konec'          => '2017-02-01T00:00:00+0100',
             'potrjenProgram' => TRUE,
+            'avgCenaVstopnice' => 7.89,
+            'stProdVstopnic'   => 7,
+            'stZaposlenih'     => 7,
+            'stZaposIgralcev'  => 7,
 //            'vrPS1Mat'       => 7.89,
 //            'vrPS1GostovSZ'  => 7.89,
         ];
@@ -289,6 +297,10 @@ class ProgramDelaCest
             'zacetek'        => '2016-01-01T00:00:00+0100',
             'konec'          => '2017-02-01T00:00:00+0100',
             'potrjenProgram' => TRUE,
+            'avgCenaVstopnice' => 7.89,
+            'stProdVstopnic'   => 7,
+            'stZaposlenih'     => 7,
+            'stZaposIgralcev'  => 7,
 //            'vrPS1Mat'       => 7.89,
 //            'vrPS1GostovSZ'  => 7.89,
         ];
@@ -330,12 +342,12 @@ class ProgramDelaCest
         $I->assertEquals($ent['zacetek'], '2015-02-01T00:00:00+0100');
         $I->assertEquals($ent['konec'], '2016-02-01T00:00:00+0100');
         $I->assertEquals($ent['potrjenProgram'], false);
-        $I->assertEquals($ent['avgZasedDvoran'], 7.89);
+//        $I->assertEquals($ent['avgZasedDvoran'], 7.89);
         $I->assertEquals($ent['avgCenaVstopnice'], 7.89);
         $I->assertEquals($ent['stProdVstopnic'], 7);
         $I->assertEquals($ent['stZaposlenih'], 7);
         $I->assertEquals($ent['stZaposIgralcev'], 7);
-        $I->assertEquals($ent['avgStNastopovIgr'], 7.89);
+//        $I->assertEquals($ent['avgStNastopovIgr'], 7.89);
 //        $I->assertEquals($ent['vrPS1Mat'], 7.89);
 //        $I->assertEquals($ent['vrPS1GostovSZ'], 7.89);
 //        $I->assertEquals($ent['stHonorarnih'], 7);
@@ -1704,7 +1716,6 @@ class ProgramDelaCest
     {
 
         $ent  = $I->successfullyGet($this->restUrl, $this->obj2['id']);
-//        codecept_debug($ent);
         // pri update preračuna kazalnike
         $entR = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($entR['id']);
@@ -1795,6 +1806,10 @@ class ProgramDelaCest
         $I->assertEquals(3, $entR['stKoprodukcij'], "");
         $I->assertEquals(2, $entR['stKoprodukcijInt'], "število mednarodnih koprodukcij");
         $I->assertEquals(1, $entR['stKoprodukcijNVO'], "");
+        $I->assertEquals(1, $entR['stKoprodukcijNVO'], "");
+
+        $I->assertEquals(3.64, $entR['avgZasedDvoran'], "% povprečna zasedenost dvoran");
+        $I->assertEquals(7.43, $entR['avgStNastopovIgr'], "povprečno število nastopov zaposlenih igralcev");
     }
 
     /**
@@ -2282,9 +2297,9 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(841, $resp['Skupaj']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['Skupaj']");
         $I->assertGreaterThanOrEqual(610, $resp['H.1']['vrednost']['ponovitvePremier'], "['ponovitvePremier']['H.1']");
         $I->assertGreaterThanOrEqual(504.6, $resp['Skupaj']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['Skupaj']");
-        $I->assertGreaterThanOrEqual(558, $resp['H.1']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['H.1']");
-        $I->assertGreaterThanOrEqual(1022.7, $resp['Skupaj']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['Skupaj']");
-        $I->assertGreaterThanOrEqual(651, $resp['H.1']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['H.1']");
+        $I->assertGreaterThanOrEqual(366, $resp['H.1']['vrednost']['ponovitvePrejsnjih'], "['ponovitvePrejsnjih']['H.1']");
+        $I->assertGreaterThanOrEqual(888.7, $resp['Skupaj']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['Skupaj']");
+        $I->assertGreaterThanOrEqual(427, $resp['H.1']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['H.1']");
     }
 
 }
