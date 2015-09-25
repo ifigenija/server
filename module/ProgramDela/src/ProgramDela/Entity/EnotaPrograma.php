@@ -520,7 +520,16 @@ class EnotaPrograma
 
         $ah  = \Max\Functions::euroRoundS($this->getAvtorskiHonorarji());
         $ahs = \Max\Functions::euroRoundS($this->getAvtorskiHonorarjiSamoz());
-        $this->expect($ahs <= $ah, "Avtorski honorarji samozaposlenih (" . $ahs . ") ne smejo biti večji od avtorskih honorarjev (" . $ah . ")", 10001201);
+        $this->expect($ahs <= $ah, "Avtorski honorarji samozaposlenih (" . $ahs . ") ne smejo biti večji od avtorskih honorarjev (" . $ah . ")", 1001202);
+
+        /**
+         * za tiste ep, ki imajo uprizoritev je lahko obisk doma lahko največ število ponovitev doma * kapaciteta matičnega odra
+         */
+        if ($this->uprizoritev) {
+            $this->expect($this->obiskDoma <= $this->ponoviDoma * $this->uprizoritev->getMaticniOder()->getKapaciteta()
+                    , "Obisk doma ne sme biti večji kot št. ponovitev doma * kapaciteta matičnega odra (" . $this->uprizoritev->getMaticniOder()->getKapaciteta() . ")"
+                    , 1001203);
+        }
     }
 
     public function getId()

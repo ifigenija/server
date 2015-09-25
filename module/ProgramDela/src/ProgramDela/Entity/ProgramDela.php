@@ -641,6 +641,8 @@ class ProgramDela
     protected $stZaposIgralcev;
 
     /**
+     * Povprečna zasedenost zaposlenih igralcev
+     * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.avgStNastopovIgr", description="programDela.d.avgStNastopovIgr")   
      * @var double
@@ -914,7 +916,7 @@ class ProgramDela
     }
 
     /**
-     * 
+     * preračunaj število koprodukcij
      * 
      * @param enotaPrograma $object
      */
@@ -943,6 +945,30 @@ class ProgramDela
         }
         if ($koprNvo) {
             $this->stKoprodukcijNVO +=1;
+        }
+    }
+
+    /**
+     * povečaj število nastopov zaposlenih igralcev pri določeni uprizoritvi
+     * 
+     * @param entiteta $object
+     * @param integer $stNastopovZaposIgralcev
+     */
+    protected function pristejKStNastopovZaposIgr($object, &$stNastopovZaposIgralcev)
+    {
+        /**
+         * uporabi le privzete alternacije in le za zaposlene igralce
+         */
+        if ($object->getUprizoritev()) {
+            foreach ($object->getUprizoritev()->getFunkcije() as $funkcija) {
+                if ($funkcija->getPodrocje() == 'igralec') {
+                    foreach ($funkcija->getAlternacije() as $alternacija) {
+                        if ($alternacija->getPrivzeti() && $alternacija->getZaposlen()) {
+                            $stNastopovZaposIgralcev+=$object->getPonoviDoma() + $object->getPonoviKopr() + $object->getPonoviZamejo() + $object->getPonoviGost() + $object->getPonoviInt() + $object->getPonoviKoprInt();
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -1049,6 +1075,17 @@ class ProgramDela
         $this->sredstvaDrugiViriRazno    = 0;
         $this->sredstvaDrugiViriIzjem    = 0;
 
+        /**
+         * init za izračun  zasedenosti igralcev
+         * 
+         */
+        $stNastopovZaposIgralcev = 0;
+
+        /**
+         * init za izračun povprečne zasedenosti dvoran
+         */
+        $obiskDomaUpriz = 0;
+        $maxKapaciteta  = 0;
 
         $this->stPremier = $this->getPremiere()->count();
         $this->stPonPrem = $this->getPonovitvePremiere()->count();
@@ -1087,6 +1124,9 @@ class ProgramDela
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
             $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
             $this->prerStKopr($object);
+            $obiskDomaUpriz+= $object->getObiskDoma();
+            $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta();
+            $this->pristejKStNastopovZaposIgr($object, $stNastopovZaposIgralcev);
         }
 
         /**
@@ -1123,6 +1163,9 @@ class ProgramDela
             $this->sredstvaDrugiJavniPonPrem+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriPonPrem+=$this->sestejDrugeVire($object);
             $this->prerStKopr($object);
+            $obiskDomaUpriz+= $object->getObiskDoma();
+            $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta();
+            $this->pristejKStNastopovZaposIgr($object, $stNastopovZaposIgralcev);
         }
 
         /**
@@ -1177,6 +1220,9 @@ class ProgramDela
             $this->sredstvaDrugiJavniPonPrej+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriPonPrej+=$this->sestejDrugeVire($object);
             $this->prerStKopr($object);
+            $obiskDomaUpriz+= $object->getObiskDoma();
+            $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta();
+            $this->pristejKStNastopovZaposIgr($object, $stNastopovZaposIgralcev);
         }
 
         /**
@@ -1194,6 +1240,9 @@ class ProgramDela
             $this->sredstvaDrugiJavniGostujo+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriGostujo+=$this->sestejDrugeVire($object);
             $this->prerStKopr($object);
+            $obiskDomaUpriz+= $object->getObiskDoma();
+            $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta();
+            $this->pristejKStNastopovZaposIgr($object, $stNastopovZaposIgralcev);
         }
 
         /**
@@ -1235,6 +1284,7 @@ class ProgramDela
             $this->sredstvaDrugiJavniInt+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriInt+=$this->sestejDrugeVire($object);
             $this->prerStKopr($object);
+            $this->pristejKStNastopovZaposIgr($object, $stNastopovZaposIgralcev);
         }
 
         /**
@@ -1299,6 +1349,8 @@ class ProgramDela
         } else {
             $this->avgObiskPrired = 0;
         }
+        $this->avgZasedDvoran   = $maxKapaciteta > 0 ? ($obiskDomaUpriz / $maxKapaciteta) * 100 : 0;  //$$ to je v primeru, če kapacitete prostorov niso vnešene
+        $this->avgStNastopovIgr = $this->stZaposIgralcev > 0 ? $stNastopovZaposIgralcev / $this->stZaposIgralcev : 0;
     }
 
     public function validate($mode = 'update')
@@ -1349,8 +1401,8 @@ class ProgramDela
 
         $this->validateEuroGE0($this->avgCenaVstopnice, "avgCenaVstopnice", 1000750);
         $this->validateEuroGE0($this->avgObiskPrired, "avgObiskPrired", 1000751);
-        $this->validateEuroGE0($this->avgStNastopovIgr, "avgStNastopovIgr", 1000752);
-        $this->validateEuroGE0($this->avgZasedDvoran, "avgZasedDvoran", 1000753);
+        $this->validateNumberGE0($this->avgStNastopovIgr, "avgStNastopovIgr", 1000752);
+        $this->validateProcGE0LE100($this->avgZasedDvoran, "avgZasedDvoran", 1000753);
         $this->validateEuroGE0($this->sredstvaAvt, "sredstvaAvt", 1000754);
         $this->validateEuroGE0($this->sredstvaAvtSamoz, "sredstvaAvtSamoz", 1000755);
         $this->validateEuroGE0($this->sredstvaDrugiJavniFest, "sredstvaDrugiJavniFest", 1000756);

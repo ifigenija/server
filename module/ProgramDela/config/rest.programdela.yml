@@ -48,7 +48,7 @@ forms:
 #            - stObiskNekomGostZam
 #            - stObiskNekomGostInt
 #            - avgObiskPrired
-            - avgZasedDvoran
+#            - avgZasedDvoran
             - avgCenaVstopnice
             - stProdVstopnic
 #            - stKoprodukcij
@@ -56,7 +56,7 @@ forms:
 #            - stKoprodukcijNVO
             - stZaposlenih     
             - stZaposIgralcev  
-            - avgStNastopovIgr 
+#            - avgStNastopovIgr 
 #            - stHonorarnih
 #            - stHonorarnihIgr
 #            - stHonorarnihIgrTujJZ

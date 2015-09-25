@@ -59,7 +59,7 @@ class ProstorFixture
             ['0002', 'Poskusna 3', false, 34, 'Poskusna učilnica v tretjem', false],
             ['0003', 'Kazinska', true, 84, 'Kazinska dvorana', true],
             ['0004', 'Mali oder', true, 24, 'Mali oder ', true],
-            ['0005', 'Komorni oder', true, 15, 'Komorni oder', true],
+            ['0005', 'Komorni oder', true, 150, 'Komorni oder', true],
             ['0006', 'Stara dvorana', true, 96, 'Stara dvorana ali dvorana Franceta Prešerna', true],
             ['0007', 'Velika dvorana', true, 160, 'Velika, glavna dvorana', true],
         ];
