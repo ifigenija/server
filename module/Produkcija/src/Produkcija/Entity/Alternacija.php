@@ -100,7 +100,7 @@ class Alternacija
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Funkcija", inversedBy="alternacije")
      * @ORM\JoinColumn(name="funkcija_id", referencedColumnName="id")
      * @Max\I18n(label="alternacija.funkcija",  description="alternacija.d.funkcija")
-     * @Max\Ui(type="toone", required=true);
+     * @Max\Ui(type="hiddenid", required=true);
      * @var Funkcija
      */
     protected $funkcija;
@@ -124,7 +124,7 @@ class Alternacija
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="alternacije")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\I18n(label="alternacija.oseba",  description="alternacija.d.oseba")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hiddenid")
      * @var Oseba
      */
     protected $oseba;

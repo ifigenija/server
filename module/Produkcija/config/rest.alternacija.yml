@@ -34,8 +34,22 @@ forms:
             - zacetek
             - konec
             - opomba
-            - sifra
+            - name: sifra
+              options: 
+                  required: false
             - pomembna
+            - sort
+    stroskovnik:
+        elements:
+            - name: sifra
+              options: 
+                  required: false
+            - opomba
+            - funkcija
+            - oseba
+            - zaposlitev
+            - pogodba
+            - sort
 lists:
     default: 
         filter:
