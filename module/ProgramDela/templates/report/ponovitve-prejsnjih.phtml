@@ -23,15 +23,15 @@ $naGosZam        = $model->ponoviZamejo;
 $obiskDoma       = $model->obiskDoma;
 $obiskGosSlo     = $model->obiskGost;
 $obiskGosZam     = $model->obiskZamejo;
-$sredstvaMK      = $model->zaproseno;
-$celotnaVred     = $model->celotnaVrednost;
-$vredPonMat      = $model->celotnaVrednostMat;
-$vredPonGos      = $model->celotnaVrednostGostovSZ;
-$tant            = $model->tantieme;
-$avtHonorar      = $model->avtorskiHonorarji;
-$lastSredstva    = $model->lastnaSredstva;
-$vlozGos         = $model->vlozekGostitelja;
-$vlozOst         = $model->drugiJavni;
+$sredstvaMK      = number_format($model->zaproseno, 2, ',', '.');
+$celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');
+$vredPonMat      = number_format($model->celotnaVrednostMat, 2, ',', '.');
+$vredPonGos      = number_format($model->celotnaVrednostGostovSZ, 2, ',', '.');
+$tant            = number_format($model->tantieme, 2, ',', '.');
+$avtHonorar      = number_format($model->avtorskiHonorarji, 2, ',', '.');
+$lastSredstva    = number_format($model->lastnaSredstva, 2, ',', '.');
+$vlozGos         = number_format($model->vlozekGostitelja, 2, ',', '.');
+$vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
 
 ?>
 <div id="premiere">
@@ -42,11 +42,11 @@ $vlozOst         = $model->drugiJavni;
         ?>
         <tr>
             <td>Tip programske enote:</td>
-            <td><?= $tipEnote ?></td>
+            <td  class="right-align"><?= $tipEnote ?></td>
         </tr>
         <tr>
             <td>Koeficient programske enote:</td>
-            <td><?= $koeEnote ?></td>
+            <td class="cell-type-number"><?= $koeEnote ?></td>
         </tr>
         <tr>
             <td>Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri uprizoritvi:</td>

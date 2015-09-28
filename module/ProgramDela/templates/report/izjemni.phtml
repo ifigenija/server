@@ -3,46 +3,57 @@
  * tmpl za izjemne dogodke
  * User: Alesch
  * Date: 21.9.2015
+ * 
  */
+/** @var \ProgramDela\Entity\ProgramIzjemni $model */
 // 
-$upr             = $model->uprizoritev;
-$drugiViri       = $model->drugiViri;
-
-// iz gostovanja
-$zaprSredstva    = $model->zaproseno;
-$lastSredstva    = $model->lastnaSredstva;
-$drugSredstva    = $model->drugiJavni;
-$obiskDoma       = $model->obiskDoma;
-$stPredstav      = $model->ponoviDoma;
+$upr              = $model->uprizoritev;
+$drugiViri        = $model->drugiViri;
+$trajanjePriprave = ''; /* 'od ' . $upr->datumZacStudija->format('d-m-Y') . ' do ' . $upr->datumPremiere->format('d-m-Y'); */
 
 ?>
 <div id="premiere">
     <h2>Gostujoče uprizoritve - iz Slovenije, zamejstva in tujine</h2>
     <table>
         <?php
-            echo $this->partial('uprizoritev', array('upr' => $upr));
+            // $this->partial()->setObjectKey('upr');
+            // echo $this->partial('uprizoritev', $upr);
         ?>
         <tr>
             <td>Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri dogodku:</td>
-            <td class="cell-type-number"><?= $ ?></td>
+            <td class="cell-type-number"><?= $model->stZaposUmet ?></td>
         </tr>       
         <tr>
             <td>Št. vseh, ki sodelujejo honorarno:</td>
-            <td class="cell-type-number"><?= $ ?></td>
+            <td class="cell-type-number"><?= $model->stHonorarnih ?></td>
         </tr>
         <tr>
             <td>    - od tega igralcev:</td>
-            <td class="cell-type-number"><?= $ ?></td>
+            <td class="cell-type-number"><?= $model->stHonorarnihIgr ?></td>
         </tr>
         <tr>
             <td>    - od tega igralcev, zaposlenih v drugih javnih zavodih:</td>
-            <td class="cell-type-number"><?= $ ?></td>
+            <td class="cell-type-number"><?= $model->stHonorarnihIgrTujJZ ?></td>
         </tr>
-        
-
+        <tr>
+            <td>Trajanje priprave dogodka:</td>
+            <td><?= $trajanjePriprave ?></td>
+        </tr>
+        <tr>
+            <td>Zaprošena sredstva Ministrstva za kulturo:</td>
+            <td class="cell-type-number"><?= $model->zaproseno ?></td>
+        </tr>
+        <tr>
+            <td>Stroški avtorskih honorarjev zunanjih sodelavcev:</td>
+            <td class="cell-type-number"><?= $model->avtorskiHonorarji ?></td>
+        </tr>
+        <tr>
+            <td>Stroški tantiem, vezanih na uprizoritev:</td>
+            <td class="cell-type-number"><?= $model->tantieme ?> </td>
+        </tr>
         <tr>
             <td>Lastna sredstva:</td>
-            <td class="cell-type-number"><?= $lastSredstva ?></td>
+            <td class="cell-type-number"><?= $model->lastnaSredstva ?></td>
         </tr>
 
         <tr>
@@ -50,20 +61,20 @@ $stPredstav      = $model->ponoviDoma;
             <td></td>
         </tr>
         <?php
-            $this->partialLoop()->setObjectKey('drugiViri');
-            echo $this->partialLoop('drugiViri', $drugiViri);
+            // $this->partialLoop()->setObjectKey('drugiViri');
+            // echo $this->partialLoop('drugiViri', $drugiViri);
         ?>
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
-            <td class="cell-type-number"><?= $drugSredstva ?></td>
+            <td class="cell-type-number"><?= $model->drugiJavni ?></td>
         </tr>
         <tr>
             <td>Celotna vrednost dogodka:</td>
-            <td class="cell-type-number"><?= $celotnaVred ?></td>
+            <td class="cell-type-number"><?= $model->celotnaVrednost ?></td>
         </tr>
         <tr>
             <td>     - od tega stroški matičnega javnega zavoda:</td>
-            <td class="cell-type-number"><?= $ ?></td>
+            <td class="cell-type-number"><?= $model->nasDelez ?></td>
         </tr>
         <tr>
             <td><h2>Vsebinska utemeljitev predloga:</h2></td>

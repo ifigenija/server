@@ -4,21 +4,21 @@
  * User: Alesch
  * date: 21.9.2015
  */
-
-$nas = $this->upr->naslov;
-$pod = $this->upr->podnaslov;
-$avt = $this->upr->avtor;
-
 $fun = $this->upr->funkcije;
 ?>
 
 <tr>
     <td>Naslov uprizoritve:</td>
-    <td><?= $nas ?></td>
+    <td class="right-align"><?= $this->upr->naslov ?></td>
 </tr>
 <tr>
+    <td>Avtor:</td>
+    <td class="right-align"><?= $this->upr->avtor ?></td>
+</tr>
+
+<tr>
     <td>Podnaslov:</td>
-    <td><?= $pod ?></td>
+    <td class="right-align"><?= $this->upr->podnaslov ?></td>
 </tr> 
 <?php 
     $this->partialLoop()->setObjectKey('fun');

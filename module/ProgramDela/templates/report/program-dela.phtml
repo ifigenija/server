@@ -14,7 +14,12 @@ $pagesize       = $this->pageSize ? $this->pagesize : 'a4';
 $orientation    = $this->orientation ? $this->orientation : 'p';
 $isheaderfooter = $this->ishf;
 $firmanaziv     = $this->firma->getNaziv();
-$naslov         = !empty($title) ? $this->translate($title) : '';
+
+if (is_array($title)) {
+    $naslov = !empty($title[0]) ? $this->translate($title[0]) . ' ' . $title[1] : '';
+} else {
+    $naslov = !empty($title) ? $this->translate($title) : '';
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +44,12 @@ $naslov         = !empty($title) ? $this->translate($title) : '';
                 odd-footer-name: docFooter;
                 even-footer-name: docFooter;
             };
-
+            @media screen {
+                #docHeader, #docFooter {
+                    display: none;
+                }
+            }
+            
             <?= $_css ? $this->partial($_css) : '' ?>
 
         </style>
@@ -47,7 +57,7 @@ $naslov         = !empty($title) ? $this->translate($title) : '';
     <body>
         <!-- definicija glave in noge -->
         <?php if ($isheaderfooter) { ?>
-            <htmlpageheader name="docHeader"> 
+            <htmlpageheader name="docHeader" id="docHeader"> 
                 <table width="100%" style="topntail: 0; border-bottom: 1px solid #000000; vertical-align: bottom; color: #000088;">
                     <tr>
                         <td width="33%"><?= isset($firmanaziv) ? $firmanaziv : '' ?></td>
@@ -56,7 +66,7 @@ $naslov         = !empty($title) ? $this->translate($title) : '';
                     </tr>
                 </table>
             </htmlpageheader>
-            <htmlpagefooter name="docFooter">
+            <htmlpagefooter name="docFooter" id="docFooter">
                 <table width="100%" style="topntail: 0; border-top: 1px solid #000000; vertical-align: bottom; color: #000088; font-weight: bold; font-style: italic;">
                     <tr>
                         <td width="33%">{DATE j.m.Y}</td>

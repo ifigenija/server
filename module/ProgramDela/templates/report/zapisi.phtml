@@ -4,14 +4,12 @@
  * User: Alesch
  * Date: 21.9.2015
  */
+$zapis = $this->zapis;
 
-$nas = $this->zapis->title;
-$naz = $this->zapis->subject;
-$opi = $this->zapis->description;
 ?>
 <div class="zapis">
-    <p><?= $nas ?></p>
-    <p><?= $naz ?></p>
-    <p><?= $opi ?></p>
+    <p><?= $zapis->zapis->title ?></p>
+    <p><?= $zapis->zapis->subject ?></p>
+    <p><?= $zapis->zapis->description ?></p>
 </div>
 

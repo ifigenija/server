@@ -25,31 +25,38 @@ class ProgramDelaReport
     {
         $ps = $this->getServiceLocator()->get('mpdf.printer');
 
-        $title   = "Program dela " . $this->entity->getSifra();
         $prgdela = $this->entity;
+        $title   = "Program dela " . $prgdela->getSifra();
 
         $printer = $ps->getMPdf();
 
         // Splošno za program dela - nastavim header in footer + zavihek 'splošno' iz vnosne forme
         $this->addDocumentReport('program-dela', $title, $this->entity);
 
+        // Sklop 1
         // Premiere
-        $this->reportSklopPrograma($printer, $prgdela->premiere, 'premiera', 'Premiere');
+        $this->reportSklopPrograma($printer, $prgdela->getPremiere(), 'premiera', 'Premiere');
         // Ponovitve premier
-        $this->reportSklopPrograma($printer, $prgdela->ponovitvePremiere , 'ponovitve-premier', 'Ponovitve premier');
+        $this->reportSklopPrograma($printer, $prgdela->getPonovitvePremiere(), 'ponovitve-premier', 'Ponovitve premier');
         // Ponovitve prejšnjih
-        $this->reportSklopPrograma($printer, $prgdela->ponovitvePrejsnjih , 'ponovitve-prejsnjih', 'Ponovitve uprizoritev');
+        $this->reportSklopPrograma($printer, $prgdela->getPonovitvePrejsnjih(), 'ponovitve-prejsnjih', 'Ponovitve uprizoritev');
         // Gostujoče
-        $this->reportSklopPrograma($printer, $prgdela->gostujoci, 'gostujoce', 'Gostujoče uprizoritve');
+        $this->reportSklopPrograma($printer, $prgdela->getGostujoci(), 'gostujoce', 'Gostujoče uprizoritve');
+        // Sklop 2
         // Mednarodna gostovanja
-        $this->reportSklopPrograma($printer, $prgdela->gostovanja, 'mednarodna', 'Mednarodna gostovanja');
+        $this->reportSklopPrograma($printer, $prgdela->getGostovanja(), 'mednarodna', 'Mednarodna gostovanja');
         // Festivali 
-        $this->reportSklopPrograma($printer, $prgdela->programiFestival, 'festivali', 'Festivali');
+        $this->reportSklopPrograma($printer, $prgdela->getProgramiFestival(), 'festivali', 'Festivali');
         // Razno
-        $this->reportSklopPrograma($printer, $prgdela->programiRazno, 'razno', 'Razno');
+        $this->reportSklopPrograma($printer, $prgdela->getProgramiRazno(), 'razno', 'Razno');
         // Izjemni dogodki
-//        $this->reportSklopPrograma($printer, $prgdela->izjemni, 'izjemni', 'Izjemni dogodki');
-
+        $this->reportSklopPrograma($printer, $prgdela->getIzjemni(), 'izjemni', 'Izjemni dogodki');
+        // Kazalniki
+        $this->addDocumentReport('kazalniki', $title, $this->entity);
+        // Kazalniki - priloga
+        $printer->AddPage();
+        $this->addDocumentReport('kazalniki-priloga', $title, $this->entity);
+        
         $this->finishReport($title);
     }
 

@@ -17,27 +17,27 @@ $stPonovitevKop  = $model->ponoviKoprInt;
 $stGledalcev     = $model->obiskInt;
 $stGledalcevKop  = $model->obiskKoprInt;
 $organizator     = $model->gostitelj->naziv;
-$transStro       = $model->transportniStroski;
-$zunAvtHon       = $model->avtorskiHonorarji;
-$celotniStro     = $model->nasDelez;
-$celotnaVred     = $model->celotnaVrednost;        
-$lastSredstva    = $model->lastnaSredstva;
-$drugSredstva    = $model->drugiJavni;
+$transStro       = number_format($model->transportniStroski, 2, ',', '.');
+$zunAvtHon       = number_format($model->avtorskiHonorarji, 2, ',', '.');
+$celotniStro     = number_format($model->nasDelez, 2, ',', '.');
+$celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');        
+$lastSredstva    = number_format($model->lastnaSredstva, 2, ',', '.');
+$drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
 ?>
 <div id="mednarodna">
     <h2>Mednarodna gostovanja - gostovanja javnega zavoda v tujini (brez Zamejstva)</h2>
     <table>
         <tr>
             <td>Naslov uprizoritve:</td>
-            <td><?= $upr ?></td>
+            <td class="right-align"><?= $upr ?></td>
         </tr>
         <tr>
             <td>Kraj gostovanja in država:</td>
-            <td><?= $krajGos ?></td>
+            <td class="right-align"><?= $krajGos ?></td>
         </tr>
         <tr>
             <td>Ustanova, v kateri se gostuje:</td>
-            <td><?= $ustanovaGos ?></td>
+            <td class="right-align"><?= $ustanovaGos ?></td>
         </tr>
         <tr>
             <td>Datum gostovanja:</td>
@@ -61,7 +61,7 @@ $drugSredstva    = $model->drugiJavni;
         </tr>
         <tr>
             <td>Organizator (gostitelj)</td>
-            <td><?= $organizator ?></td>
+            <td class="right-align"><?= $organizator ?></td>
         </tr>
         <tr>
             <td>Transportni stroški opreme ter stroški prevozov ansambla in tehnike:</td>

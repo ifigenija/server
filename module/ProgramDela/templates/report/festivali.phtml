@@ -29,20 +29,20 @@ $programskoTelo  = $model->programskoTelo;
 $tujihSel        = $model->stTujihSelektorjev;
 $stZaposlenih    = $model->stZaposlenih;
 $stAvtHon        = $model->stHonorarnih;
-$zaprSredstva    = $model->zaproseno;
-$drugSredstva    = $model->drugiJavni;
-$celotnaVred     = $model->celotnaVrednost;
+$zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
+$drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
+$celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');
 ?>
 <div id="festivali">
     <h2>Festivali</h2>
     <table>
         <tr>
             <td>Naziv festivala:</td>
-            <td><?= $nazFestivala ?></td>
+            <td class="right-align"><?= $nazFestivala ?></td>
         </tr>
         <tr>
             <td>Zvrst festivala:</td>
-            <td><?= $zvrstFestivala ?></td>
+            <td class="right-align"><?= $zvrstFestivala ?></td>
         </tr>
         <tr>
             <td>Skupno število dogodkov v okviru festivala:</td>
@@ -90,11 +90,11 @@ $celotnaVred     = $model->celotnaVrednost;
         </tr>
         <tr>
             <td>Umetniški vodja festivala:</td>
-            <td><?= $vodjaFestivala ?></td>
+            <td class="right-align"><?= $vodjaFestivala ?></td>
         </tr>
         <tr>
             <td>Programsko telo festivala:</td>
-            <td><?= $programskoTelo ?></td>
+            <td class="right-align"><?= $programskoTelo ?></td>
         </tr>
         <?php if($imakop) { ?>
             <tr>

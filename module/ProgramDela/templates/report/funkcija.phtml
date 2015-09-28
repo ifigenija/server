@@ -1,6 +1,6 @@
 <?php if ($fun->pomembna) { ?>
 <tr>
-    <td><?= $fun->tipFunkcije->ime . ' - ' . $fun->naziv ?></td>
-    <td><?= $fun->getImena() ?></td>
+    <td><?= $fun->getTipFunkcije()->getIme() . ' - ' . $fun->getNaziv() ?></td>
+    <td class="right-align"><?= $fun->getImena() ?></td>
 </tr>
 <?php } ?>

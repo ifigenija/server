@@ -9,9 +9,9 @@ $upr             = $model->uprizoritev;
 $drugiViri       = $model->drugiViri;
 
 // iz gostovanja
-$zaprSredstva    = $model->zaproseno;
-$lastSredstva    = $model->lastnaSredstva;
-$drugSredstva    = $model->drugiJavni;
+$zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
+$lastSredstva    = number_format($model->lastnaSredstva, 2, ',', '.');
+$drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
 $obiskDoma       = $model->obiskDoma;
 $stPredstav      = $model->ponoviDoma;
 

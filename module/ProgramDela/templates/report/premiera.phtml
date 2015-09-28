@@ -5,6 +5,8 @@
  * Date: 21.9.2015
  */
 
+/** @var \ProgramDela\Entity\EnotaPrograma $model */
+
 // 
 $upr             = $model->uprizoritev;
 $kop             = $model->koprodukcije;
@@ -21,15 +23,15 @@ $trajanjeStudija = 'od ' . $upr->datumZacStudija->format('d-m-Y') . ' do ' . $up
 $datumPremiere   = $upr->datumPremiere->format('d-m-Y');
 $prizorisce      = $model->priKoproducentu ? 'pri koproducentu' : 'na matičnem odru';
 $tipEnote        = $model->tipProgramskeEnote->naziv;
-$koeEnote        = $model->kpe;
-$zaprSredstva    = $model->zaproseno;
-$lastSredstva    = $model->lastnaSredstva;
-$drugSredstva    = $model->drugiJavni;
-$avtHonorar      = $model->avtorskiHonorarji;
-$avtPravice      = $model->avtorskePravice;
-$tant            = $model->tantieme;
-$celotnaVred     = $model->celotnaVrednost;
-$celotnaVredMat  = $model->celotnaVrednostMat;
+$koeEnote        = number_format($model->kpe, 2, ',', '');
+$zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
+$lastSredstva    = number_format($model->lastnaSredstva, 2, ',', '.');
+$drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
+$avtHonorar      = number_format($model->avtorskiHonorarji, 2, ',', '.');
+$avtPravice      = number_format($model->avtorskePravice, 2, ',', '.');
+$tant            = number_format($model->tantieme, 2, ',', '.');
+$celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');
+$celotnaVredMat  = number_format($model->celotnaVrednostMat, 2, ',', '.');
 ?>
 <div id="premiere">
     <h2>Premiere</h2>
@@ -64,7 +66,7 @@ $celotnaVredMat  = $model->celotnaVrednostMat;
         </tr>
         <tr>
             <td>Trajanje študija (od-do):</td>
-            <td><?= $trajanjeStudija ?></td>
+            <td class="right-align"><?= $trajanjeStudija ?></td>
         </tr>
         <tr>
             <td>Datum premiere:</td>
@@ -72,15 +74,15 @@ $celotnaVredMat  = $model->celotnaVrednostMat;
         </tr>
         <tr>
             <td>Prizorišče:</td>
-            <td><?= $prizorisce ?></td>
+            <td class="right-align"><?= $prizorisce ?></td>
         </tr>
         <tr>
             <td>Tip programske enote:</td>
-            <td><?= $tipEnote ?></td>
+            <td class="right-align"><?= $tipEnote ?></td>
         </tr>
         <tr>
             <td>Koeficient programske enote:</td>
-            <td><?= $koeEnote ?></td>
+            <td class="cell-type-number"><?= $koeEnote ?></td>
         </tr>
         <?php if($imakop) { ?>
             <tr>

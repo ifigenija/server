@@ -12,19 +12,19 @@ $pEnote          = $model->programskeEnoteSklopa;
 $stEnot          = $model->stPE;
 $naziv           = $model->naziv;
 $stGledalcev     = $model->obiskInt;
-$celotnaVred     = $model->celotnaVrednost;        
-$lastSredstva    = $model->lastnaSredstva;
-$drugSredstva    = $model->drugiJavni;
+$celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');        
+$lastSredstva    = number_format($model->lastnaSredstva, 2, ',', '.');
+$drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
 $stZaposlenih    = $model->stZaposlenih;
 $stAvtHon        = $model->stHonorarnih;
-$zaprSredstva    = $model->zaproseno;
+$zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
 ?>
 <div id="razno">
     <h2>Razno</h2>
     <table>
         <tr>
             <td>Naziv Sklopa:</td>
-            <td><?= $naziv ?></td>
+            <td class="right-align"><?= $naziv ?></td>
         </tr>
         <?php 
             $this->partialLoop()->setObjectKey('pEnote');
@@ -32,7 +32,7 @@ $zaprSredstva    = $model->zaproseno;
         ?>
         <tr>
             <td>Št. programskih enot v sklopu:</td>
-            <td><?= $stEnot ?></td>
+            <td class="cell-type-number"><?= $stEnot ?></td>
         </tr>
         <?php if($imakop) { ?>
             <tr>

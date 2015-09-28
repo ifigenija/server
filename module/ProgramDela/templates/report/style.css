@@ -58,16 +58,16 @@ table.horizontal td {
     vertical-align: top; 
 }
 
-table.horizontal .cell-type-number {
+.cell-type-number {
     text-align: right;
 }
 
-table.horizontal .cell-type-date {
+.cell-type-date {
     text-align: right;
 }
 
-table.horizontal .cell-type-header-title {
-    font-size: 12px;
+.cell-type-header-title {
+    font-size: 9px;
     font-weight: bold;
 }
 
@@ -160,4 +160,12 @@ h2.name {
 
 .right-10 {
     padding-left: 1%;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.left-align {
+    text-align: left;
 }
