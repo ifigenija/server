@@ -9,10 +9,10 @@ forms:
             - dokument
             - naziv
 #            - stPE
-#            - obiskDoma
             - stZaposlenih
             - stHonorarnih
             - zaproseno
+#            - obiskDoma
 #            - celotnaVrednost
 #            - nasDelez
 #            - lastnaSredstva
