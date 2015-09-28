@@ -44,7 +44,7 @@ class PostavkaCDve
      * 
      * @ORM\Column(type="string", length=2 )
      * @Max\I18n(label="postavkaCdve.skupina", description="postavkaCdve.d.skupina")
-     * @Max\Ui(type="integer",icon="fa fa-sort")
+     * @Max\Ui(type="hidden",icon="fa fa-sort")
      * @var string
      */
     protected $skupina;
@@ -54,7 +54,7 @@ class PostavkaCDve
      * 
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="postavkaCdve.podskupina", description="postavkaCdve.d.podskupina")
-     * @Max\Ui(type="integer",icon="fa fa-sort")
+     * @Max\Ui(type="hidden",icon="fa fa-sort")
      * @var integer
      */
     protected $podskupina;
@@ -62,7 +62,7 @@ class PostavkaCDve
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="postavkaCdve.naziv", description="postavkaCdve.d.naziv")
-     * @Max\Ui(type="naziv",ident=true, required=true)
+     * @Max\Ui(type="hidden",ident=true, required=true)
      * @var string
      */
     protected $naziv;
