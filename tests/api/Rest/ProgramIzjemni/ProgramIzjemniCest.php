@@ -113,6 +113,8 @@ class ProgramIzjemniCest
             'stHonorarnihIgr'        => 1,
             'stHonorarnihIgrTujJZ'   => 1,
             'stHonorarnihIgrSamoz'   => 1,
+            'trajanje'               => "avgust-oktober",
+            'prizorisce'             => "samostan",
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -151,6 +153,8 @@ class ProgramIzjemniCest
             'stHonorarnihIgr'        => 2,
             'stHonorarnihIgrTujJZ'   => 2,
             'stHonorarnihIgrSamoz'   => 2,
+            'trajanje'               => "avgust-oktober",
+            'prizorisce'             => "samostan",
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -212,10 +216,12 @@ class ProgramIzjemniCest
         $I->assertEquals($ent['imaKoprodukcije'], true);
         $I->assertEquals($ent['stZaposlenih'], 1);
 //        $I->assertEquals($ent['stDrugih'], 1);
-        $I->assertEquals($ent['stHonorarnih'], 1);
+        $I->assertEquals($ent['stHonorarnih'], 1, "št. honorarnih");
         $I->assertEquals($ent['stHonorarnihIgr'], 1);
         $I->assertEquals($ent['stHonorarnihIgrTujJZ'], 1);
         $I->assertEquals($ent['stHonorarnihIgrSamoz'], 1);
+        $I->assertEquals($ent['trajanje'], "avgust-oktober");
+        $I->assertEquals($ent['prizorisce'], "samostan");
     }
 
     /**
@@ -327,12 +333,13 @@ class ProgramIzjemniCest
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
-        
-        $ent['zaproseno']         = 18.02;
+
+        $ent['zaproseno'] = 18.02;
         $resp             = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertEquals(1000544, $resp[0]['code']);
     }
-        /**
+
+    /**
      * test validate
      * 
      * @depends create
@@ -340,10 +347,10 @@ class ProgramIzjemniCest
      */
     public function updateBrezNaziva(ApiTester $I)
     {
-        $ent              = $this->obj2;
+        $ent          = $this->obj2;
         $ent['naziv'] = '';
 
-        $resp   = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $resp = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         codecept_debug($resp);
         $I->assertEquals(1000545, $resp[0]['code']);
     }

@@ -23,6 +23,22 @@ class ProgramIzjemni
     protected $dokument;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Max\I18n(label="programIzjemni.prizorisce", description="programIzjemni.d.prizorisce")
+     * @var string
+     */
+    protected $prizorisce;
+
+    /**
+     * Trajanje priprave dogodka (od-do)
+     * 
+     * @ORM\Column(type="string", nullable=true)
+     * @Max\I18n(label="programIzjemni.trajanje", description="programIzjemni.d.trajanje")
+     * @var string
+     */
+    protected $trajanje;
+
+    /**
      * preračuna polja, ki se uporabljajo v matični koprodukciji
      * 
      * naš delež in ostala polja kot zaprošeno morajo biti nastavljena še predno se prenesejo v matično koprodukcijo
@@ -60,6 +76,8 @@ class ProgramIzjemni
         $this->expect(!($this->getTipProgramskeEnote()), "Tip programske enote obstaja, a ne sme obstajati za program izjemni", 1000541);
         $this->expect(!($this->getUprizoritev()), "Uprizoritev obstaja, a ne sme obstajati za program izjemni", 1000542);
         $this->expect($this->getNaziv(), "Naziv ne sme biti prazen", 1000545);
+        $this->expect($this->getTrajanje(), "Trajanje ne sme biti prazno", 1000546);
+        $this->expect($this->getPrizorisce(), "Prizorišče ne sme biti prazno", 1000547);
 
         $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
         $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni);
@@ -78,9 +96,31 @@ class ProgramIzjemni
         return $this->dokument;
     }
 
-    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument=null)
+    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument = null)
     {
         $this->dokument = $dokument;
+        return $this;
+    }
+
+    public function getPrizorisce()
+    {
+        return $this->prizorisce;
+    }
+
+    public function setPrizorisce($prizorisce)
+    {
+        $this->prizorisce = $prizorisce;
+        return $this;
+    }
+
+    public function getTrajanje()
+    {
+        return $this->trajanje;
+    }
+
+    public function setTrajanje($trajanje)
+    {
+        $this->trajanje = $trajanje;
         return $this;
     }
 

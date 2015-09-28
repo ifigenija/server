@@ -38,6 +38,8 @@ forms:
             - stHonorarnihIgrTujJZ
             - stHonorarnihIgrSamoz
             - imaKoprodukcije
+            - prizorisce
+            - trajanje
         hydrator:
             lookups: 
                 - uprizoritev

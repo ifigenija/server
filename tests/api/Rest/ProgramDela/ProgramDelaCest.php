@@ -257,10 +257,10 @@ class ProgramDelaCest
 // kreiramo še en zapis
         $data       = [
 //            'sifra'          => 'BB',
-            'naziv'          => 'bb',
-            'zacetek'        => '2016-01-01T00:00:00+0100',
-            'konec'          => '2017-02-01T00:00:00+0100',
-            'potrjenProgram' => TRUE,
+            'naziv'            => 'bb',
+            'zacetek'          => '2016-01-01T00:00:00+0100',
+            'konec'            => '2017-02-01T00:00:00+0100',
+            'potrjenProgram'   => TRUE,
             'avgCenaVstopnice' => 7.89,
             'stProdVstopnic'   => 7,
             'stZaposlenih'     => 7,
@@ -276,11 +276,11 @@ class ProgramDelaCest
          * kreiramo še nekaj zapisov za sort
          */
         $data = [
-            'sifra'          => '99',
-            'naziv'          => 'gg',
-            'zacetek'        => '2016-01-01T00:00:00+0100',
-            'konec'          => '2017-02-01T00:00:00+0100',
-            'potrjenProgram' => TRUE,
+            'sifra'            => '99',
+            'naziv'            => 'gg',
+            'zacetek'          => '2016-01-01T00:00:00+0100',
+            'konec'            => '2017-02-01T00:00:00+0100',
+            'potrjenProgram'   => TRUE,
             'avgCenaVstopnice' => 7.89,
             'stProdVstopnic'   => 7,
             'stZaposlenih'     => 7,
@@ -292,11 +292,11 @@ class ProgramDelaCest
         $I->assertGuid($ent['id']);
 
         $data = [
-            'sifra'          => '00',
-            'naziv'          => 'hh',
-            'zacetek'        => '2016-01-01T00:00:00+0100',
-            'konec'          => '2017-02-01T00:00:00+0100',
-            'potrjenProgram' => TRUE,
+            'sifra'            => '00',
+            'naziv'            => 'hh',
+            'zacetek'          => '2016-01-01T00:00:00+0100',
+            'konec'            => '2017-02-01T00:00:00+0100',
+            'potrjenProgram'   => TRUE,
             'avgCenaVstopnice' => 7.89,
             'stProdVstopnic'   => 7,
             'stZaposlenih'     => 7,
@@ -613,6 +613,8 @@ class ProgramDelaCest
             'stHonorarnihIgrTujJZ'   => 1,
             'stHonorarnihIgrSamoz'   => 1,
             'dokument'               => $this->obj2['id'],
+            'trajanje'               => "avgust-oktober",
+            'prizorisce'             => "samostan",
         ];
         $this->objProgramIzjemni1 = $ent                      = $I->successfullyCreate($this->programIzjemniUrl, $data);
         $I->assertGuid($ent['id']);
