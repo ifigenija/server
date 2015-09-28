@@ -7,13 +7,13 @@ forms:
         elements:
 #            - id
 #            - programDela
-#            - skupina
-#            - podskupina
-#            - naziv
-#            - vrPremiere
-#            - vrPonovitvePremier
-#            - vrPonovitvePrejsnjih
-#            - vrGostovanjaZamejstvo
+            - skupina
+            - podskupina
+            - naziv
+            - vrPremiere
+            - vrPonovitvePremier
+            - vrPonovitvePrejsnjih
+            - vrGostovanjaZamejstvo
             - vrFestivali
             - vrGostovanjaInt
             - vrOstalo
