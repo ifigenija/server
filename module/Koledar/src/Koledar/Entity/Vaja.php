@@ -14,7 +14,7 @@ use Produkcija\Entity\Uprizoritev;
  * @Max\Id(prefix="0032")
  *  */
 class Vaja
-        extends \Max\Entity\Base
+    extends \Max\Entity\Base
 {
 
     /**
@@ -44,7 +44,7 @@ class Vaja
     protected $zaporedna;
 
     /**
-     * 
+     *
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="Poročilo", description="Poročilo")
      * @var string
@@ -74,44 +74,6 @@ class Vaja
     }
 
     /**
-     * 
-     * @param \DateTime $zacetek
-     * @return \Koledar\Entity\Vaja
-     */
-    public function setZacetek(\DateTime $zacetek = null)
-    {
-        if ($zacetek && !$this->dogodek) {
-            $this->dodajDogodek();
-            $this->dogodek->setZacetek($zacetek);
-            $this->dogodek->validate();
-        } else if ($zacetek && $this->dogodek) {
-            $this->dogodek->setZacetek($zacetek);
-            $this->dogodek->validate();
-        }
-        return $this;
-    }
-
-    /**
-     * 
-     * @param \DateTime $konec
-     * @return \Koledar\Entity\Vaja
-     */
-    public function setKonec(\DateTime $konec = null)
-    {
-        if ($konec && $this->dogodek) {
-            $this->dogodek->setKonec($konec);
-            $this->dogodek->validate();
-        } else if (!$konec && $this->dogodek) {
-            $konec = clone $this->dogodek->getZacetek();
-            $konec->add(new \DateInterval('PT4H'));
-            $this->dogodek->setKonec($konec);
-            $this->dogodek->validate();
-        }
-
-        return $this;
-    }
-
-    /**
      * dodaj dogodek
      */
     public function dodajDogodek()
@@ -125,12 +87,74 @@ class Vaja
         $this->dogodek->setTitle($naslov . ' vaja ' . $zap);
     }
 
+    public function getUprizoritev()
+    {
+        return $this->uprizoritev;
+    }
+
+    public function setUprizoritev(Uprizoritev $uprizoritev = null)
+    {
+        $this->uprizoritev = $uprizoritev;
+        return $this;
+    }
+
+    /**
+     *
+     * @param \DateTime $zacetek
+     * @return \Koledar\Entity\Vaja
+     */
+    public function setZacetek(\DateTime $zacetek = null)
+    {
+        if (!$zacetek) {
+            return $this;
+        }
+        if (!$this->dogodek) {
+            $this->dodajDogodek();
+        }
+
+        $this->dogodek->setZacetek($zacetek);
+        $this->dogodek->validate();
+
+        return $this;
+    }
+
+    /**
+     *
+     * @param \DateTime $konec
+     * @return \Koledar\Entity\Vaja
+     */
+    public function setKonec(\DateTime $konec = null)
+    {
+        if (!$this->dogodek) {
+            return $this;
+        }
+        if (!$konec) {
+            $konec = clone $this->dogodek->getZacetek();
+            $konec->add(new \DateInterval('PT4H'));
+        }
+        $this->dogodek->setKonec($konec);
+        $this->dogodek->validate();
+
+        return $this;
+    }
+
     public function getZacetek()
     {
         if ($this->dogodek) {
             return $this->getDogodek()->getZacetek();
         }
         return null;
+    }
+
+    public function getDogodek()
+    {
+        return $this->dogodek;
+    }
+
+    public function setDogodek(Dogodek $dogodek = null)
+    {
+        $this->dogodek = $dogodek;
+        return $this;
     }
 
     public function getKonec()
@@ -146,30 +170,15 @@ class Vaja
         return $this->id;
     }
 
-    public function getZaporedna()
-    {
-        return $this->zaporedna;
-    }
-
-    public function getPorocilo()
-    {
-        return $this->porocilo;
-    }
-
-    public function getDogodek()
-    {
-        return $this->dogodek;
-    }
-
-    public function getUprizoritev()
-    {
-        return $this->uprizoritev;
-    }
-
     public function setId($id)
     {
         $this->id = $id;
         return $this;
+    }
+
+    public function getZaporedna()
+    {
+        return $this->zaporedna;
     }
 
     public function setZaporedna($zaporedna)
@@ -178,21 +187,14 @@ class Vaja
         return $this;
     }
 
+    public function getPorocilo()
+    {
+        return $this->porocilo;
+    }
+
     public function setPorocilo($porocilo)
     {
         $this->porocilo = $porocilo;
-        return $this;
-    }
-
-    public function setDogodek(Dogodek $dogodek = null)
-    {
-        $this->dogodek = $dogodek;
-        return $this;
-    }
-
-    public function setUprizoritev(Uprizoritev $uprizoritev = null)
-    {
-        $this->uprizoritev = $uprizoritev;
         return $this;
     }
 

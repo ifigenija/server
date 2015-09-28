@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/module/Jobs" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/module/Max" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/module/Stevilcenje" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/module/Zapisi" vcs="Git" />

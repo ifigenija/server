@@ -114,16 +114,25 @@ lists:
                       label: Začetek
                       required: false
                 - name: status
-                  type: text
+                  type: multiselect
                   options:
                       label: Status
+                      multiple: true
+                      value_options: @dogodek.status
                       required: false
                 - name: uprizoritev
-                  type: text
+                  type: toone
                   options:
                       label: Uprizoritev
+                      targetEntity: Produkcija\Entity\Uprizoritev
                       required: false
-    vse: 
+                - name: razred
+                  type: multiselect
+                  options:
+                      required: false
+                      multiple: true
+                      value_options: @dogodek.razred
+    vse:
         filter:
             elements:                 
                 - name: prostor
