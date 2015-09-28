@@ -2304,4 +2304,17 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(427, $resp['H.1']['vrednost']['gostovanjaZamejstvo'], "['gostovanjaZamejstvo']['H.1']");
     }
 
+        /**
+     * osvežim/kreiram tabelo C2 ¸
+     * 
+     * @param ApiTester $I
+     */
+    public function osveziTabeloC2(ApiTester $I)
+    {
+        // pričakujemo, da bo zgeneriral/osvežil postavke C2 za dotičen program dela
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'osveziTabeloC2', ["programDelaId" => $this->obj2['id']]);
+        $I->assertNotEmpty($resp);
+        $I->seeResponseIsJson();
+        $I->assertTrue($resp, "ali uspešno");
+    }  
 }
