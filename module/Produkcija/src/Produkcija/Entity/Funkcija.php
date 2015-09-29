@@ -86,7 +86,7 @@ class Funkcija
      * 
      * @ORM\Column(type="boolean", nullable=false)
      * @Max\I18n(label="funkcija.pomembna", description="funkcija.d.pomembna")
-     * @Max\Ui(type="boolcheckbox")
+     * @Max\Ui(type="boolcheckbox", required=false)
      * @var boolean
      */
     protected $pomembna;
@@ -102,14 +102,14 @@ class Funkcija
     /**
      * @ORM\Column(type="boolean", nullable=false)
      * @Max\I18n(label="funkcija.sePlanira")
-     * @Max\Ui(type="boolcheckbox")
+     * @Max\Ui(type="boolcheckbox", required=false)
      */
     protected $sePlanira;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
      * @Max\I18n(label="funkcija.dovoliPrekrivanje")
-     * @Max\Ui(type="boolcheckbox")
+     * @Max\Ui(type="boolcheckbox", required=false)
      */
     protected $dovoliPrekrivanje;
 
