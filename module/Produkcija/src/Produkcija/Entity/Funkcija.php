@@ -55,7 +55,7 @@ class Funkcija
      * 
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="funkcija.naziv", description="funkcija.d.naziv")
-     * @Max\Ui(type="naziv",ident=true )
+     * @Max\Ui(type="naziv",ident=true, required=true )
      * @var string
      */
     protected $naziv;
