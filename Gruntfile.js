@@ -64,7 +64,7 @@ module.exports = function (grunt) {
                 cwd: 'module/Zapisi',
                 cmd: classmap_generator
             },
-            autoload_zapisi: {
+            autoload_jobs: {
                 cwd: 'module/Jobs',
                 cmd: classmap_generator
             },
