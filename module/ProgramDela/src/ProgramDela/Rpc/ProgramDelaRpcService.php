@@ -9,7 +9,6 @@ namespace ProgramDela\Rpc;
 use Max\Exception\MaxException;
 use ProgramDela\Repository\ProgramiDela;
 
-
 /**
  * Description of ProgramDelaRpcService
  *
@@ -30,6 +29,114 @@ class ProgramDelaRpcService
         $rep = $this->getEm()->getRepository('ProgramDela\Entity\ProgramDela');
         $rep->setServiceLocator($this->getServiceLocator());
         return $rep;
+    }
+
+    /**
+     * @param entity $programDela
+     * @return bool uspeh
+     * @throws \Max\Exception\UnauthException
+     */
+    protected function preveriStZapisov($programDela)
+    {
+        $zaplR = $this->getEm()->getRepository('Zapisi\Entity\ZapisLastnik');
+        $tr = $this->getServiceLocator()->get('translator');
+
+        /**
+         * premiere 2 zapisa
+         */
+        foreach ($programDela->getPremiere() as $ep) {
+            $stZapisov = count($zaplR->findByLastnik($ep->getId()));
+            if ($stZapisov < 2) {
+                throw new \Max\Exception\UnauthException($tr
+                        ->translate('Program premierne uprizoritve (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev in 1 priponko ,ima pa ' . $stZapisov)
+                , 1000967);
+            }
+        }
+
+        /**
+         * ponovitev premiere 1 zapis
+         */
+        foreach ($programDela->getPonovitvePremiere() as $ep) {
+            $stZapisov = count($zaplR->findByLastnik($ep->getId()));
+            if ($stZapisov < 1) {
+                throw new \Max\Exception\UnauthException($tr
+                        ->translate('Program ponovitve premierne uprizoritve (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 priponko ,ima pa ' . $stZapisov)
+                , 1000968);
+            }
+        }
+
+        /**
+         * ponovitev prejšnjih 1 zapis
+         */
+        foreach ($programDela->getPonovitvePrejsnjih() as $ep) {
+            $stZapisov = count($zaplR->findByLastnik($ep->getId()));
+            if ($stZapisov < 1) {
+                throw new \Max\Exception\UnauthException($tr
+                        ->translate('Program ponovitve prejšnjih sezon (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 priponko ,ima pa ' . $stZapisov)
+                , 1000969);
+            }
+        }
+
+        /**
+         * gostujoča 1 zapis
+         */
+        foreach ($programDela->getGostujoci() as $ep) {
+            $stZapisov = count($zaplR->findByLastnik($ep->getId()));
+            if ($stZapisov < 1) {
+                throw new \Max\Exception\UnauthException($tr
+                        ->translate('Program gostujočih uprizoritev (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev, ima pa ' . $stZapisov)
+                , 1001220);
+            }
+        }
+        
+        /**
+         * gostovanja 2 zapisa
+         */
+        foreach ($programDela->getGostovanja() as $ep) {
+            $stZapisov = count($zaplR->findByLastnik($ep->getId()));
+            if ($stZapisov < 2) {
+                throw new \Max\Exception\UnauthException($tr
+                        ->translate('Program mednarodnih gostovanj (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev, ima pa ' . $stZapisov)
+                , 1001221);
+            }
+        }
+
+        /**
+         * festivali 3 zapise
+         */
+        foreach ($programDela->getProgramiFestival() as $ep) {
+            $stZapisov = count($zaplR->findByLastnik($ep->getId()));
+            if ($stZapisov < 3) {
+                throw new \Max\Exception\UnauthException($tr
+                        ->translate('Program festivali (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev in 2 priponki, ima pa ' . $stZapisov)
+                , 1001222);
+            }
+        }
+
+        /**
+         * razno 2 zapisa
+         */
+        foreach ($programDela->getProgramiRazno() as $ep) {
+            $stZapisov = count($zaplR->findByLastnik($ep->getId()));
+            if ($stZapisov < 2) {
+                throw new \Max\Exception\UnauthException($tr
+                        ->translate('Program razno (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev in 1 priponko, ima pa ' . $stZapisov)
+                , 1001223);
+            }
+        }
+        /**
+         * izjemni 3 zapisa
+         */
+        foreach ($programDela->getIzjemni() as $ep) {
+            $stZapisov = count($zaplR->findByLastnik($ep->getId()));
+            if ($stZapisov < 2) {
+                throw new \Max\Exception\UnauthException($tr
+                        ->translate('Program izjemni dogodki (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev in 2 priponki, ima pa ' . $stZapisov)
+                , 1001224);
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -54,6 +161,13 @@ class ProgramDelaRpcService
 
         if (!$programDela) {
             throw new \Max\Exception\UnauthException($tr->translate('Ni enote programa'), 1000961);
+        }
+
+        /**
+         * preverimo število zapisov za vse programe dela
+         */
+        if (!$this->preveriStZapisov($programDela)) {
+            throw new \Max\Exception\UnauthException($tr->translate('Napačno število zapisov'), 1000966);
         }
 
         $programDela->setZakljuceno(true);           // tu nastavimo novo vrednost
@@ -485,15 +599,15 @@ class ProgramDelaRpcService
     {
 
         $this->expectUUID($dokument
-            , $this->translate('Pričakujem ID dokumenta')
-            , 520082);
+                , $this->translate('Pričakujem ID dokumenta')
+                , 520082);
         /** @var ProgramiDela $dr */
-        $dr = $this->getEm()->getRepository('ProgramDela\Entity\ProgramDela');
+        $dr  = $this->getEm()->getRepository('ProgramDela\Entity\ProgramDela');
         $dr->setServiceLocator($this->getServiceLocator());
         $dok = $dr->find($dokument);
         $this->expect($dok
-            , $this->translate('Dokument ne obstaja')
-            , 520081);
+                , $this->translate('Dokument ne obstaja')
+                , 520081);
         $this->expectPermission('ProgramDela-write', $dok);
 
         $report = 'ProgramDela\Task\ProgramDelaReport';
@@ -503,8 +617,9 @@ class ProgramDelaRpcService
             return $job;
         } catch (\Exception $ex) {
             throw new MaxException($this->translate('Napaka pri tiskanju dokumenta:')
-                . ' ' . $ex->getCode() . ' '
-                . $this->translate($ex->getMessage()), 520080, $ex);
+            . ' ' . $ex->getCode() . ' '
+            . $this->translate($ex->getMessage()), 520080, $ex);
         }
     }
+
 }
