@@ -1,6 +1,36 @@
 <?php
-$naslov = !empty($this->title) ? $this->translate($this->title) : '';
+$naslov   = !empty($this->title) ? $this->translate($this->title) : '';
+$postavke = $model->getPostavkeC2;
 
+// izračunam končne vsote
+$sumaPremiere            = 0;
+$sumaPonovitvePremier    = 0;
+$sumaPonovitvePrejsnjih  = 0;
+$sumaGostovanjaZamejstvo = 0;
+$sumaFestivali           = 0;
+$sumaGostovanjaInt       = 0;
+$sumaOstalo              = 0;
+$sumaSkupaj              = 0;
+
+foreach ($postavke as $postavka) {
+    if ($postavka->getPodskupina() == '0') {
+        $sumaPremiere += $postavka->getVrPremiere();
+        $sumaPonovitvePremier += $postavka->getVrPonovitvePremier();
+        $sumaPonovitvePrejsnjih += $postavka->getVrPonovitvePrejsnjih();
+        $sumaGostovanjaZamejstvo += $postavka->getVrGostovanjaZamejstvo();
+        $sumaFestivali += $postavka->getVrFestivali();
+        $sumaGostovanjaInt += $postavka->getVrGostovanjaInt();
+        $sumaOstalo += $postavka->getVrOstalo();
+        $sumaSkupaj += 
+                $postavka->getVrPremiere() +
+                $postavka->getVrPonovitvePremier() +
+                $postavka->getVrPonovitvePrejsnjih() +
+                $postavka->getVrGostovanjaZamejstvo() +
+                $postavka->getVrFestivali() +
+                $postavka->getVrGostovanjaInt() +
+                $postavka->getVrOstalo();
+    }
+}
 ?> 
 <div id="postavke-c2">
     <h2>Programski materialni stroški</h2>
@@ -17,98 +47,23 @@ $naslov = !empty($this->title) ? $this->translate($this->title) : '';
             <th class="cell-type-header-title right-align">Ostalo</th>
             <th class="cell-type-header-title right-align">SKUPAJ</th>
         </tr>
-        
+
         <?php
             $this->partialLoop()->setObjectKey('model');
             echo $this->partialLoop('postavka-c2', $model);
         ?>
 
+        <tr class="suma-row">
+            <td class="cell-type-header-title">  </td>
+            <td class="cell-type-header-title">SKUPAJ</td>
+            <td class="cell-type-number"><?= number_format($sumaPremiere,2,',','.') ?></td>
+            <td class="cell-type-number"><?= number_format($sumaPonovitvePremier,2,',','.') ?></td>
+            <td class="cell-type-number"><?= number_format($sumaPonovitvePrejsnjih,2,',','.') ?></td>
+            <td class="cell-type-number"><?= number_format($sumaFestivali,2,',','.') ?></td>
+            <td class="cell-type-number"><?= number_format($sumaGostovanjaZamejstvo,2,',','.') ?></td>
+            <td class="cell-type-number"><?= number_format($sumaGostovanjaInt,2,',','.') ?></td>
+            <td class="cell-type-number"><?= number_format($sumaOstalo,2,',','.') ?></td>
+            <td class="cell-type-number"><?= number_format($sumaSkupaj,2,',','.') ?></td>
+        </tr>
     </table>
 </div>
-    
-    
-    
-    
-<!--
-$tablePoz = [
-    'title'  => '',
-    'groups' => [
-        'main1' => [
-            'skupina'               => [
-                'class' => 'int',
-                'title' => '',
-                'align' => 'middle left'],
-            'podskupina'            => [
-                'class' => 'int',
-                'title' => '',
-                'align' => 'middle left'],
-            'naziv'                 => [
-                'class' => 'desc',
-                'title' => '',
-                'align' => 'middle left'],
-            'vrPremiere'            => [
-                'class' => 'price',
-                'final' => 'sum',
-                'title' => "Premiere",
-                'align' => 'middle right'],
-            'vrPonovitvePremier'    => [
-                'class' => 'price',
-                'final' => 'sum',
-                'title' => 'Ponovitve<br/> premiernih<br/> uprizoritev',
-                'align' => 'middle right'],
-            'vrPonovitvePrejsnjih'  => [
-                'class' => 'price',
-                'final' => 'sum',
-                'title' => 'Ponovitve<br/> iz prejšnjih<br/> let',
-                'align' => 'middle right'],
-            'vrGostovanjaZamejstvo' => [
-                'class' => 'price',
-                'final' => 'sum',
-                'title' => 'Festivalske<br/> akcije',
-                'align' => 'middle right'],
-            'vrFestivali'           => [
-                'class' => 'price',
-                'final' => 'sum',
-                'title' => 'Gostovanja<br/> v zamejstvu',
-                'align' => 'middle right'],
-            'vrGostovanjaInt'       => [
-                'class' => 'price',
-                'final' => 'sum',
-                'title' => 'Mednarodna<br/> gostovanja',
-                'align' => 'middle right'],
-            'vrOstalo'              => [
-                'class' => 'price',
-                'final' => 'sum',
-                'title' => 'Ostalo',
-                'align' => 'middle right'],
-            'skupaj'                => [
-                'class' => 'price',
-                'final' => 'sum',
-                'title' => 'Skupaj',
-                'align' => 'middle right',
-                'field' => function($entity) {
-                    $suma = $entity->getVrPremiere() +
-                            $entity->getVrPonovitvePremier() +
-                            $entity->getVrPonovitvePrejsnjih() +
-                            $entity->getVrGostovanjaZamejstvo() +
-                            $entity->getVrFestivali() +
-                            $entity->getVrGostovanjaInt() +
-                            $entity->getVrOstalo();
-                    return number_format($suma,2,',','.');
-                }
-            ],
-        ],
-    ]
-];
-?>
-
-<div id="postavke-c2">
-    <h2>Programski materialni stroški</h2>
-    <!--?= $this->table($tablePoz, $model->getPostavkeC2()); ?-->
-<!--/div -->
-
-
-
-
-
-

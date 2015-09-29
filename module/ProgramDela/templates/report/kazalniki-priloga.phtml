@@ -1,6 +1,6 @@
 <?php
-$povprecnoObisk = ($model->getStObiskPonPrem() + $model->getStObiskPrem()) / 
-                  ($model->getStIzvPonPrem() + $model->getStIzvPrem())
+$povprecnoObisk = ($model->getStIzvPonPrem() + $model->getStIzvPrem() != 0) ? 
+                  ($model->getStObiskPonPrem() + $model->getStObiskPrem()) / ($model->getStIzvPonPrem() + $model->getStIzvPrem()) : 0
 ?>
 
 <h1>Kazalniki priloga 2</h1>
