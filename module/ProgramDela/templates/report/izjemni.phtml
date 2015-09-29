@@ -9,11 +9,11 @@
 // 
 $upr              = $model->uprizoritev;
 $drugiViri        = $model->drugiViri;
-$trajanjePriprave = ''; /* 'od ' . $upr->datumZacStudija->format('d-m-Y') . ' do ' . $upr->datumPremiere->format('d-m-Y'); */
+$trajanjePriprave = ''; /* 'od ' . $upr->datumOD->format('d-m-Y') . ' do ' . $upr->datumDO->format('d-m-Y'); */
 
 ?>
-<div id="premiere">
-    <h2>Gostujoče uprizoritve - iz Slovenije, zamejstva in tujine</h2>
+<div id="izjemni-dogodki">
+    <h2>Izjemni dogodki</h2>
     <table>
         <?php
             // $this->partial()->setObjectKey('upr');
@@ -21,19 +21,19 @@ $trajanjePriprave = ''; /* 'od ' . $upr->datumZacStudija->format('d-m-Y') . ' do
         ?>
         <tr>
             <td>Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri dogodku:</td>
-            <td class="cell-type-number"><?= $model->stZaposUmet ?></td>
+            <td class="cell-type-number"><?= number_format($model->stZaposUmet, 0, ',', '.') ?></td>
         </tr>       
         <tr>
             <td>Št. vseh, ki sodelujejo honorarno:</td>
-            <td class="cell-type-number"><?= $model->stHonorarnih ?></td>
+            <td class="cell-type-number"><?= number_format($model->stHonorarnih, 0, ',', '.') ?></td>
         </tr>
         <tr>
-            <td>    - od tega igralcev:</td>
-            <td class="cell-type-number"><?= $model->stHonorarnihIgr ?></td>
+            <td class="alineja">od tega igralcev:</td>
+            <td class="cell-type-number"><?= number_format($model->stHonorarnihIgr, 0, ',', '.') ?></td>
         </tr>
         <tr>
-            <td>    - od tega igralcev, zaposlenih v drugih javnih zavodih:</td>
-            <td class="cell-type-number"><?= $model->stHonorarnihIgrTujJZ ?></td>
+            <td class="alineja">od tega igralcev, zaposlenih v drugih javnih zavodih:</td>
+            <td class="cell-type-number"><?= number_format($model->stHonorarnihIgrTujJZ, 0, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Trajanje priprave dogodka:</td>
@@ -41,19 +41,19 @@ $trajanjePriprave = ''; /* 'od ' . $upr->datumZacStudija->format('d-m-Y') . ' do
         </tr>
         <tr>
             <td>Zaprošena sredstva Ministrstva za kulturo:</td>
-            <td class="cell-type-number"><?= $model->zaproseno ?></td>
+            <td class="cell-type-number"><?= number_format($model->zaproseno, 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Stroški avtorskih honorarjev zunanjih sodelavcev:</td>
-            <td class="cell-type-number"><?= $model->avtorskiHonorarji ?></td>
+            <td class="cell-type-number"><?= number_format($model->avtorskiHonorarji, 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Stroški tantiem, vezanih na uprizoritev:</td>
-            <td class="cell-type-number"><?= $model->tantieme ?> </td>
+            <td class="cell-type-number"><?= number_format($model->tantieme, 2, ',', '.') ?> </td>
         </tr>
         <tr>
             <td>Lastna sredstva:</td>
-            <td class="cell-type-number"><?= $model->lastnaSredstva ?></td>
+            <td class="cell-type-number"><?= number_format($model->lastnaSredstva, 2, ',', '.') ?></td>
         </tr>
 
         <tr>
@@ -61,25 +61,22 @@ $trajanjePriprave = ''; /* 'od ' . $upr->datumZacStudija->format('d-m-Y') . ' do
             <td></td>
         </tr>
         <?php
-            // $this->partialLoop()->setObjectKey('drugiViri');
-            // echo $this->partialLoop('drugiViri', $drugiViri);
+            $this->partialLoop()->setObjectKey('drugiViri');
+            echo $this->partialLoop('drugiViri', $drugiViri);
         ?>
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
-            <td class="cell-type-number"><?= $model->drugiJavni ?></td>
+            <td class="cell-type-number"><?= number_format($model->drugiJavni, 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Celotna vrednost dogodka:</td>
-            <td class="cell-type-number"><?= $model->celotnaVrednost ?></td>
+            <td class="cell-type-number"><?= number_format($model->celotnaVrednost, 2, ',', '.') ?></td>
         </tr>
         <tr>
-            <td>     - od tega stroški matičnega javnega zavoda:</td>
-            <td class="cell-type-number"><?= $model->nasDelez ?></td>
-        </tr>
-        <tr>
-            <td><h2>Vsebinska utemeljitev predloga:</h2></td>
-            <td></td>
+            <td class="alineja">od tega stroški matičnega javnega zavoda:</td>
+            <td class="cell-type-number"><?= number_format($model->nasDelez, 2, ',', '.') ?></td>
         </tr>
     </table>
+    <h2>Vsebinska utemeljitev predloga:</h2>
 </div>
 

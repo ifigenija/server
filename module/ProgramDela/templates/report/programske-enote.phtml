@@ -11,18 +11,18 @@
     <td class="right-align"><?= $pEnote->naslovPE ?></td>
 </tr>
 <tr>
-    <td>    - avtor:</td>
+    <td class="alineja">avtor:</td>
     <td class="right-align"><?= $pEnote->avtorPE ?></td>
 </tr> 
 <tr>
-    <td>    - obseg:</td>
+    <td class="alineja">obseg:</td>
     <td class="right-align"><?= $pEnote->obsegPE ?></td>
 </tr>
 <tr>
-    <td>    - mesec realizacije:</td>
+    <td class="alineja">mesec realizacije:</td>
     <td class="right-align"><?= $pEnote->mesecPE ?></td>
 </tr>
 <tr>
-    <td>    - vrednost:</td>
-    <td class="cell-type-number"><?= $pEnote->vrednostPE ?></td>
+    <td class="alineja">vrednost:</td>
+    <td class="cell-type-number"><?= number_format($pEnote->vrednostPE,2,',','.') ?></td>
 </tr>

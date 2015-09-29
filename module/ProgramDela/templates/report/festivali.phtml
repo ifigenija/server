@@ -13,22 +13,22 @@ $kop             = $model->koprodukcije;
 // iz festivali
 $nazFestivala    = $model->naziv;
 $zvrstFestivala  = $model->zvrst;
-$stPredstav      = $model->stPredstav; 
-$stOkroglihMiz   = $model->stOkroglihMiz;
-$stPredstavitev  = $model->stPredstavitev;
-$stDelavnic      = $model->stDelavnic;
-$stOstalo        = $model->stDrugiDogodki;
-$stDogodkov      = $stPredstav + $stOkroglihMiz + $stPredstavitev + $stDelavnic + $stOstalo;
-$stProdukcij     = $model->stProdukcij;
-$stObiskovalcev  = $model->obiskDoma;
+$stPredstav      = number_format($model->stPredstav, 0, ',', '.'); 
+$stOkroglihMiz   = number_format($model->stOkroglihMiz, 0, ',', '.');
+$stPredstavitev  = number_format($model->stPredstavitev, 0, ',', '.');
+$stDelavnic      = number_format($model->stDelavnic, 0, ',', '.');
+$stOstalo        = number_format($model->stDrugiDogodki, 0, ',', '.');
+$stDogodkov      = number_format($stPredstav + $stOkroglihMiz + $stPredstavitev + $stDelavnic + $stOstalo, 0, ',', '.');
+$stProdukcij     = number_format($model->stProdukcij, 0, ',', '.');
+$stObiskovalcev  = number_format($model->obiskDoma, 0, ',', '.');
 $casPriprave     = $model->casPriprave;
 $casIzvedbe      = $model->casIzvedbe;
 $prizorisca      = $model->prizorisca;
 $vodjaFestivala  = $model->umetvodja;
 $programskoTelo  = $model->programskoTelo;
 $tujihSel        = $model->stTujihSelektorjev;
-$stZaposlenih    = $model->stZaposlenih;
-$stAvtHon        = $model->stHonorarnih;
+$stZaposlenih    = number_format($model->stZaposlenih, 0, ',', '.');
+$stAvtHon        = number_format($model->stHonorarnih, 0, ',', '.');
 $zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
 $drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
 $celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');
@@ -49,23 +49,23 @@ $celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');
             <td class="cell-type-number"><?= $stDogodkov ?></td>
         </tr>
         <tr>
-            <td>    - predstav:</td>
+            <td class="alineja">predstav:</td>
             <td class="cell-type-date"><?= $stPredstav ?></td>
         </tr>
         <tr>
-            <td>    - okroglih miz:</td>
+            <td class="alineja">okroglih miz:</td>
             <td class="cell-type-number"><?= $stOkroglihMiz ?></td>
         </tr>       
         <tr>
-            <td>    - predstavitev:</td>
+            <td class="alineja">predstavitev:</td>
             <td class="cell-type-number"><?= $stPredstavitev ?></td>
         </tr>       
         <tr>
-            <td>    - delavnic:</td>
+            <td class="alineja">delavnic:</td>
             <td class="cell-type-number"><?= $stDelavnic ?></td>
         </tr>
         <tr>
-            <td>    - drugih dogodkov:</td>
+            <td class="alineja">drugih dogodkov:</td>
             <td class="cell-type-number"><?= $stDrugih ?></td>
         </tr>
         <tr>
@@ -142,9 +142,6 @@ $celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');
             <td>Celotna vrednost festivala:</td>
             <td class="cell-type-number"><?= $celotnaVred ?></td>
         </tr>
-        <tr>
-            <td><h2>Vsebinska utemeljitev predloga:</h2></td>
-            <td></td>
-        </tr>
     </table>
+    <h2>Vsebinska utemeljitev predloga:</h2>
 </div>

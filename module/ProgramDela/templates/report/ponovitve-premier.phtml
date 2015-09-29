@@ -10,12 +10,12 @@ $kop             = $model->koprodukcije;
 // iz Ponovitvepremiere
 $imakop          = $model->imaKoprodukcije;
 $upr             = $model->uprizoritev->naslov;
-$naDomacemOdru   = $model->ponoviDoma;
-$naGosSlo        = $model->ponoviGost;
-$naGosZam        = $model->ponoviZamejo;
-$obiskDoma       = $model->obiskDoma;
-$obiskGosSlo     = $model->obiskGost;
-$obiskGosZam     = $model->obiskZamejo;
+$naDomacemOdru   = number_format($model->ponoviDoma, 0, ',', '.');
+$naGosSlo        = number_format($model->ponoviGost, 0, ',', '.');
+$naGosZam        = number_format($model->ponoviZamejo, 0, ',', '.');
+$obiskDoma       = number_format($model->obiskDoma, 0, ',', '.');
+$obiskGosSlo     = number_format($model->obiskGost, 0, ',', '.');
+$obiskGosZam     = number_format($model->obiskZamejo, 0, ',', '.');
 $sredstvaMK      = number_format($model->zaproseno, 2, ',', '.');
 $celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');
 $vredPonMat      = number_format($model->celotnaVrednostMat, 2, ',', '.');
@@ -38,15 +38,15 @@ $vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
             <td></td>
         </tr>
         <tr>
-            <td> - na domačem odru:</td>
+            <td class="alineja">na domačem odru:</td>
             <td class="cell-type-number"><?= $naDomacemOdru ?></td>
         </tr>
         <tr>
-            <td> - na gostovanjih po Sloveniji:</td>
+            <td class="alineja">na gostovanjih po Sloveniji:</td>
             <td class="cell-type-number"><?= $naGosSlo ?></td>
         </tr>
         <tr>
-            <td> - na gostovanjih v zamejstvu:</td>
+            <td class="alineja">na gostovanjih v zamejstvu:</td>
             <td class="cell-type-number"><?= $naGosZam ?></td>
         </tr>
         <tr>
@@ -54,15 +54,15 @@ $vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
             <td></td>
         </tr>
         <tr>
-            <td> - na domačem odru:</td>
+            <td class="alineja">na domačem odru:</td>
             <td class="cell-type-number"><?= $obiskDoma ?></td>
         </tr>
         <tr>
-            <td> - na gostovanjih po Sloveniji:</td>
+            <td class="alineja">na gostovanjih po Sloveniji:</td>
             <td class="cell-type-number"><?= $obiskGosSlo ?></td>
         </tr>
         <tr>
-            <td> - na gostovanjih v zamejstvu:</td>
+            <td class="alineja">na gostovanjih v zamejstvu:</td>
             <td class="cell-type-number"><?= $obiskGosZam ?></td>
         </tr>
         <tr>
@@ -75,11 +75,11 @@ $vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
             <td class="cell-type-number"><?= $celotnaVred ?></td>
         </tr>
         <tr>
-            <td> - vrednost ponovitev na matičnem odru:</td>
+            <td class="alineja">vrednost ponovitev na matičnem odru:</td>
             <td class="cell-type-number"><?= $vredPonMat ?></td>
         </tr>
         <tr>
-            <td>vrednost ponovitev na gostovanjih po SLO in v zamejstvu:</td>
+            <td class="alineja">vrednost ponovitev na gostovanjih po SLO in v zamejstvu:</td>
             <td class="cell-type-number"><?= $vredPonGos ?></td>
         </tr>
         <tr>
@@ -102,11 +102,11 @@ $vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
             $this->partialLoop()->setObjectKey('drugiViri');
             echo $this->partialLoop('drugiViri', $drugiViri);
         ?>
-        <tr>
-            <td> - od tega vložek koproducenta:</td>
-            <td></td>
-        </tr>
         <?php if($imakop) { ?>
+            <tr>
+                <td class="alineja">od tega vložek koproducenta:</td>
+                <td></td>
+            </tr>
             <tr>
                 <td>Koproducenti:</td>
                 <td></td>
@@ -116,17 +116,14 @@ $vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
             ?>
         <?php } ?>
         <tr>
-            <td> - od tega vložek gostitelja:</td>
+            <td class="alineja">od tega vložek gostitelja:</td>
             <td class="cell-type-number"><?= $vlozGos ?></td>
         </tr>
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
             <td class="cell-type-number"><?= $vlozOst ?></td>
         </tr>
-        <tr>
-            <td><h2>Priloge:</h2></td>
-            <td></td>
-        </tr>
     </table>
+    <h2>Priloge:</h2>
 </div>
 

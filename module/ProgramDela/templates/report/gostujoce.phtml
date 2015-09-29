@@ -12,11 +12,11 @@ $drugiViri       = $model->drugiViri;
 $zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
 $lastSredstva    = number_format($model->lastnaSredstva, 2, ',', '.');
 $drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
-$obiskDoma       = $model->obiskDoma;
-$stPredstav      = $model->ponoviDoma;
+$obiskDoma       = number_format($model->obiskDoma, 0, ',', '.');
+$stPredstav      = number_format($model->ponoviDoma, 0, ',', '.');
 
 ?>
-<div id="premiere">
+<div id="gostujoce">
     <h2>Gostujoče uprizoritve - iz Slovenije, zamejstva in tujine</h2>
     <table>
         <?php
@@ -52,10 +52,7 @@ $stPredstav      = $model->ponoviDoma;
             <td>Vir druga ministrstva in lokalna skupnost:</td>
             <td class="cell-type-number"><?= $drugSredstva ?></td>
         </tr>
-        <tr>
-            <td><h2>Vsebinska utemeljitev predloga:</h2></td>
-            <td></td>
-        </tr>
     </table>
+    <h2>Vsebinska utemeljitev predloga:</h2>
 </div>
 

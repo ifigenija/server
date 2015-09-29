@@ -58,7 +58,7 @@ if (is_array($title)) {
         <!-- definicija glave in noge -->
         <?php if ($isheaderfooter) { ?>
             <htmlpageheader name="docHeader" id="docHeader"> 
-                <table width="100%" style="topntail: 0; border-bottom: 1px solid #000000; vertical-align: bottom; color: #000088;">
+                <table width="100%" style="topntail: 0; border-bottom: 1px solid #000000; vertical-align: bottom; ">
                     <tr>
                         <td width="33%"><?= isset($firmanaziv) ? $firmanaziv : '' ?></td>
                         <td width="33%"></td>
@@ -67,7 +67,7 @@ if (is_array($title)) {
                 </table>
             </htmlpageheader>
             <htmlpagefooter name="docFooter" id="docFooter">
-                <table width="100%" style="topntail: 0; border-top: 1px solid #000000; vertical-align: bottom; color: #000088; font-weight: bold; font-style: italic;">
+                <table width="100%" style="topntail: 0; border-top: 1px solid #000000; vertical-align: bottom; font-weight: bold; font-style: italic;">
                     <tr>
                         <td width="33%">{DATE j.m.Y}</td>
                         <td width="33%"></td>

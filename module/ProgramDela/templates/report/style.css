@@ -66,9 +66,15 @@ table.horizontal td {
     text-align: right;
 }
 
+.ime-vrstice {
+    width: 25%;
+}
+
 .cell-type-header-title {
     font-size: 9px;
     font-weight: bold;
+    vertical-align: top;
+    text-align: left;
 }
 
 .page-break {
@@ -110,20 +116,9 @@ address .tel {
 }
 
 /* added styles for documents */
-#client {
-    padding-left: 6px;
-    /* border-left: 3px solid #FF0000; */
-    width: 50%;
-    text-align: left;
-}
-
 #dokument {
     width: 50%;
     text-align: right;
-}
-
-#client .prejemnik {
-    color: #000000;
 }
 
 h2.name {
@@ -158,14 +153,14 @@ h2.name {
     width: 50%;
 }
 
-.right-10 {
-    padding-left: 1%;
-}
-
 .right-align {
     text-align: right;
 }
 
 .left-align {
     text-align: left;
+}
+
+.alineja {
+    padding-left: 3%;
 }

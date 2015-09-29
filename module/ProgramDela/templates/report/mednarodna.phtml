@@ -12,10 +12,10 @@ $upr             = $model->uprizoritev->naslov;
 $krajGos         = $model->krajGostovanja . ' / ' . $model->drzavaGostovanja->naziv;
 $datumGos        = $model->datumGostovanja->format('d-m-Y');
 $ustanovaGos     = $model->ustanova;
-$stPonovitevGos  = $model->ponoviInt;
-$stPonovitevKop  = $model->ponoviKoprInt;
-$stGledalcev     = $model->obiskInt;
-$stGledalcevKop  = $model->obiskKoprInt;
+$stPonovitevGos  = number_format($model->ponoviInt, 0, ',', '.');
+$stPonovitevKop  = number_format($model->ponoviKoprInt, 0, ',', '.');
+$stGledalcev     = number_format($model->obiskInt, 0, ',', '.');
+$stGledalcevKop  = number_format($model->obiskKoprInt, 0, ',', '.');
 $organizator     = $model->gostitelj->naziv;
 $transStro       = number_format($model->transportniStroski, 2, ',', '.');
 $zunAvtHon       = number_format($model->avtorskiHonorarji, 2, ',', '.');
@@ -96,9 +96,6 @@ $drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
             <td>Celotna vrednost gostovanja:</td>
             <td class="cell-type-number"><?= $celotnaVred ?></td>
         </tr>
-        <tr>
-            <td><h2>Vsebinska utemeljitev predloga:</h2></td>
-            <td></td>
-        </tr>
     </table>
+    <h2>Vsebinska utemeljitev predloga:</h2>
 </div>

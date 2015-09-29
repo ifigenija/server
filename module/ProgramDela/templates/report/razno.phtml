@@ -9,14 +9,14 @@ $drugiViri       = $model->drugiViri;
 $kop             = $model->koproducenti;
 $pEnote          = $model->programskeEnoteSklopa;
 
-$stEnot          = $model->stPE;
 $naziv           = $model->naziv;
-$stGledalcev     = $model->obiskInt;
+$stEnot          = number_format($model->stPE, 0, ',', '.');
+$stGledalcev     = number_format($model->obiskInt, 0, ',', '.');
 $celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');        
 $lastSredstva    = number_format($model->lastnaSredstva, 2, ',', '.');
 $drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
-$stZaposlenih    = $model->stZaposlenih;
-$stAvtHon        = $model->stHonorarnih;
+$stZaposlenih    = number_format($model->stZaposlenih, 0, ',', '.');
+$stAvtHon        = number_format($model->stHonorarnih, 0, ',', '.');
 $zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
 ?>
 <div id="razno">
@@ -80,9 +80,6 @@ $zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
             <td>Celotna vrednost sklopa:</td>
             <td class="cell-type-number"><?= $celotnaVred ?></td>
         </tr>
-        <tr>
-            <td><h2>Vsebinska utemeljitev predloga - celotnega sklopa in posameznih enot:</h2></td>
-            <td></td>
-        </tr>
     </table>
+    <h2>Vsebinska utemeljitev predloga - celotnega sklopa in posameznih enot:</h2>
 </div>

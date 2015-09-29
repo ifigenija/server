@@ -1,0 +1,114 @@
+<?php
+$naslov = !empty($this->title) ? $this->translate($this->title) : '';
+
+?> 
+<div id="postavke-c2">
+    <h2>Programski materialni stroški</h2>
+    <table>
+        <tr>
+            <th class="cell-type-header-title">  </th>
+            <th class="cell-type-header-title">Programski materialni stroški</th>
+            <th class="cell-type-header-title right-align">Premiere</th>
+            <th class="cell-type-header-title right-align">Ponovitve<br/> premiernih<br/> uprizoritev</th>
+            <th class="cell-type-header-title right-align">Ponovitve iz<br/> prejšnjih let</th>
+            <th class="cell-type-header-title right-align">Festivalske<br/> akcije</th>
+            <th class="cell-type-header-title right-align">Gostovanja<br/> pri Slovencih<br/> v zamejstvu</th>
+            <th class="cell-type-header-title right-align">Mednsrodna<br/> gostovanja</th>
+            <th class="cell-type-header-title right-align">Ostalo</th>
+            <th class="cell-type-header-title right-align">SKUPAJ</th>
+        </tr>
+        
+        <?php
+            $this->partialLoop()->setObjectKey('model');
+            echo $this->partialLoop('postavka-c2', $model);
+        ?>
+
+    </table>
+</div>
+    
+    
+    
+    
+<!--
+$tablePoz = [
+    'title'  => '',
+    'groups' => [
+        'main1' => [
+            'skupina'               => [
+                'class' => 'int',
+                'title' => '',
+                'align' => 'middle left'],
+            'podskupina'            => [
+                'class' => 'int',
+                'title' => '',
+                'align' => 'middle left'],
+            'naziv'                 => [
+                'class' => 'desc',
+                'title' => '',
+                'align' => 'middle left'],
+            'vrPremiere'            => [
+                'class' => 'price',
+                'final' => 'sum',
+                'title' => "Premiere",
+                'align' => 'middle right'],
+            'vrPonovitvePremier'    => [
+                'class' => 'price',
+                'final' => 'sum',
+                'title' => 'Ponovitve<br/> premiernih<br/> uprizoritev',
+                'align' => 'middle right'],
+            'vrPonovitvePrejsnjih'  => [
+                'class' => 'price',
+                'final' => 'sum',
+                'title' => 'Ponovitve<br/> iz prejšnjih<br/> let',
+                'align' => 'middle right'],
+            'vrGostovanjaZamejstvo' => [
+                'class' => 'price',
+                'final' => 'sum',
+                'title' => 'Festivalske<br/> akcije',
+                'align' => 'middle right'],
+            'vrFestivali'           => [
+                'class' => 'price',
+                'final' => 'sum',
+                'title' => 'Gostovanja<br/> v zamejstvu',
+                'align' => 'middle right'],
+            'vrGostovanjaInt'       => [
+                'class' => 'price',
+                'final' => 'sum',
+                'title' => 'Mednarodna<br/> gostovanja',
+                'align' => 'middle right'],
+            'vrOstalo'              => [
+                'class' => 'price',
+                'final' => 'sum',
+                'title' => 'Ostalo',
+                'align' => 'middle right'],
+            'skupaj'                => [
+                'class' => 'price',
+                'final' => 'sum',
+                'title' => 'Skupaj',
+                'align' => 'middle right',
+                'field' => function($entity) {
+                    $suma = $entity->getVrPremiere() +
+                            $entity->getVrPonovitvePremier() +
+                            $entity->getVrPonovitvePrejsnjih() +
+                            $entity->getVrGostovanjaZamejstvo() +
+                            $entity->getVrFestivali() +
+                            $entity->getVrGostovanjaInt() +
+                            $entity->getVrOstalo();
+                    return number_format($suma,2,',','.');
+                }
+            ],
+        ],
+    ]
+];
+?>
+
+<div id="postavke-c2">
+    <h2>Programski materialni stroški</h2>
+    <!--?= $this->table($tablePoz, $model->getPostavkeC2()); ?-->
+<!--/div -->
+
+
+
+
+
+

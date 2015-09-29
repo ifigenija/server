@@ -35,28 +35,31 @@ class ProgramDelaReport
 
         // Sklop 1
         // Premiere
-        $this->reportSklopPrograma($printer, $prgdela->getPremiere(), 'premiera', 'Premiere');
+        $this->reportSklopPrograma($printer, $prgdela->getPremiere(), 'premiera', $title);
         // Ponovitve premier
-        $this->reportSklopPrograma($printer, $prgdela->getPonovitvePremiere(), 'ponovitve-premier', 'Ponovitve premier');
+        $this->reportSklopPrograma($printer, $prgdela->getPonovitvePremiere(), 'ponovitve-premier', $title);
         // Ponovitve prejšnjih
-        $this->reportSklopPrograma($printer, $prgdela->getPonovitvePrejsnjih(), 'ponovitve-prejsnjih', 'Ponovitve uprizoritev');
+        $this->reportSklopPrograma($printer, $prgdela->getPonovitvePrejsnjih(), 'ponovitve-prejsnjih', $title);
         // Gostujoče
-        $this->reportSklopPrograma($printer, $prgdela->getGostujoci(), 'gostujoce', 'Gostujoče uprizoritve');
+        $this->reportSklopPrograma($printer, $prgdela->getGostujoci(), 'gostujoce', $title);
         // Sklop 2
         // Mednarodna gostovanja
-        $this->reportSklopPrograma($printer, $prgdela->getGostovanja(), 'mednarodna', 'Mednarodna gostovanja');
+        $this->reportSklopPrograma($printer, $prgdela->getGostovanja(), 'mednarodna', $title);
         // Festivali 
-        $this->reportSklopPrograma($printer, $prgdela->getProgramiFestival(), 'festivali', 'Festivali');
+        $this->reportSklopPrograma($printer, $prgdela->getProgramiFestival(), 'festivali', $title);
         // Razno
-        $this->reportSklopPrograma($printer, $prgdela->getProgramiRazno(), 'razno', 'Razno');
+        $this->reportSklopPrograma($printer, $prgdela->getProgramiRazno(), 'razno', $title);
         // Izjemni dogodki
-        $this->reportSklopPrograma($printer, $prgdela->getIzjemni(), 'izjemni', 'Izjemni dogodki');
+        $this->reportSklopPrograma($printer, $prgdela->getIzjemni(), 'izjemni', $title);
         // Kazalniki
         $this->addDocumentReport('kazalniki', $title, $this->entity);
         // Kazalniki - priloga
         $printer->AddPage();
         $this->addDocumentReport('kazalniki-priloga', $title, $this->entity);
-        
+        // Postavka C2
+        $printer->AddPage();
+        // $this->addDocumentReport('postavke-c2', 'Postavke C2', $prgdela->getPostavkeC2());
+
         $this->finishReport($title);
     }
 
