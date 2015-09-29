@@ -45,9 +45,7 @@ class DogodekFixture
         $rep = $manager->getRepository('Koledar\Entity\Dogodek');
 
         $o = new Dogodek();
-
-        $date = empty($v[1]) ? null : date_create($v[1]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
-        $o->setPlaniranZacetek($date);
+        
         $date = empty($v[2]) ? null : date_create($v[2]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setZacetek($date);
         $date = empty($v[3]) ? null : date_create($v[3]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
