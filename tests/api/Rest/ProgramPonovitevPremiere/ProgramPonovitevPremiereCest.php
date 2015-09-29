@@ -54,6 +54,7 @@ class ProgramPonovitevPremiereCest
     private $lookProdukcijskaHisa5;
     private $rpcOptionsUrl          = '/rpc/app/options';
     private $maticnoGledalisce;
+    private $popaUrl                = '/rest/popa';
 
     public function _before(ApiTester $I)
     {
@@ -72,9 +73,11 @@ class ProgramPonovitevPremiereCest
      */
     public function preberiOpcijoMaticno(ApiTester $I)
     {
-        $opt                     = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
-        $I->assertNotEmpty($opt);
-        $this->maticnoGledalisce = $opt;
+        $popaId = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
+        codecept_debug($popaId);
+
+        $popa                    = $I->successfullyGet($this->popaUrl, $popaId);
+        $this->maticnoGledalisce = $popa['sifra'];
     }
 
     /**

@@ -49,6 +49,7 @@ class ProgramFestivalCest
     private $objProdukcijaDelitev1;
     private $objProdukcijaDelitev2;
     private $produkcijskaHisaUrl    = '/rest/produkcijskahisa';
+    private $popaUrl                = '/rest/popa';
 
     public function _before(ApiTester $I)
     {
@@ -67,9 +68,11 @@ class ProgramFestivalCest
      */
     public function preberiOpcijoMaticno(ApiTester $I)
     {
-        $opt                     = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
-        $I->assertNotEmpty($opt);
-        $this->maticnoGledalisce = $opt;
+        $popaId = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
+        codecept_debug($popaId);
+
+        $popa = $I->successfullyGet($this->popaUrl, $popaId);
+        $this->maticnoGledalisce=$popa['sifra'];
     }
 
     /**

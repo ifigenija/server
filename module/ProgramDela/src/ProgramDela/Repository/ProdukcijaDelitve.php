@@ -99,7 +99,10 @@ class ProdukcijaDelitve
         $em      = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         $optionR = $em->getRepository('App\Entity\Option');
         $option  = $optionR->findOneByName("application.tenant.maticnopodjetje");
-        $sifra   = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
+        $popaId   = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
+        $popaR  = $em->getRepository('App\Entity\Popa');
+        $sifra  = $popaR->findOneById($popaId)
+                ->getSifra();
 
         $this->expect($object->getKoproducent(), "Koproducent je obvezen podatek", 1000614);
         if ($object->getKoproducent()->getSifra() == $sifra) {

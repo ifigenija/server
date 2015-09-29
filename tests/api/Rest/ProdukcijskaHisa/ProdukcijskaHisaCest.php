@@ -75,9 +75,11 @@ class ProdukcijskaHisaCest
      */
     public function preberiOpcijoMaticno(ApiTester $I)
     {
-        $opt                     = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
-        $I->assertNotEmpty($opt);
-        $this->maticnoGledalisce = $opt;
+        $popaId = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
+        codecept_debug($popaId);
+
+        $popa = $I->successfullyGet($this->popaUrl, $popaId);
+        $this->maticnoGledalisce=$popa['sifra'];
     }
 
     /**
@@ -111,58 +113,6 @@ class ProdukcijskaHisaCest
     }
 
     /**
-     * najde državo
-     * 
-     * @param ApiTester $I
-     */
-//    public function getListDrzava(ApiTester $I)
-//    {
-//        $resp            = $I->successfullyGetList($this->drzavaUrl, []);
-//        $list            = $resp['data'];
-//        $I->assertNotEmpty($list);
-//        $this->objDrzava = $drzava          = array_pop($list);
-//        $I->assertNotEmpty($drzava);
-//    }
-
-    /**
-     * kreiram popa
-     *  
-     * @param ApiTester $I
-     */
-//    public function createPopa(ApiTester $I)
-//    {
-//        $data           = [
-//            'sifra'  => 'X12',
-//            'naziv'  => 'zz',
-////            'naziv1'    => 'zz',
-////            'panoga'    => 'zz',
-////            'email'     => 'z@zzz.zz',
-////            'url'       => 'zz',
-////            'opomba'    => 'zz',
-//            'drzava' => $this->objDrzava['id'],
-////            'idddv'     => 'zz',
-////            'maticna'   => 'ZZ123',
-////            'zavezanec' => 'Da',
-////            'jeeu'      => 'Da',
-////            'datZav'    => '2010-02-01T00:00:00+0100',
-////            'datnZav'   => '2017-02-01T00:00:00+0100',
-////            'zamejstvo' => FALSE,
-//        ];
-//        $this->objPopa1 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
-//
-//        $I->assertNotEmpty($popa['id']);
-//
-//        $data           = [
-//            'sifra'  => 'A12',
-//            'naziv'  => 'aa',
-//            'drzava' => $this->objDrzava['id'],
-//        ];
-//        $this->objPopa2 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
-//
-//        $I->assertNotEmpty($popa['id']);
-//    }
-
-    /**
      * 
      * @param ApiTester $I
      */
@@ -175,23 +125,29 @@ class ProdukcijskaHisaCest
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords'], "total records");
 
+        codecept_debug($this->maticnoGledalisce);
         $ind                         = array_search($this->maticnoGledalisce, array_column($resp['data'], 'ident'));
+        $I->assertTrue($ind !== false, "objekt ni najden");
         $this->lookProdukcijskaHisa1 = $lookPH                      = $resp['data'][$ind];
         codecept_debug($lookPH);
 
         $ind                         = array_search("0989", array_column($resp['data'], 'ident'));
+        $I->assertTrue($ind !== false, "objekt ni najden");
         $this->lookProdukcijskaHisa2 = $lookPH                      = $resp['data'][$ind];
         codecept_debug($lookPH);
 
         $ind                         = array_search("0986", array_column($resp['data'], 'ident'));
+        $I->assertTrue($ind !== false, "objekt ni najden");
         $this->lookProdukcijskaHisa3 = $lookPH                      = $resp['data'][$ind];
         codecept_debug($lookPH);
 
         $ind                         = array_search("0982", array_column($resp['data'], 'ident'));
+        $I->assertTrue($ind !== false, "objekt ni najden");
         $this->lookProdukcijskaHisa4 = $lookPH                      = $resp['data'][$ind];
         codecept_debug($lookPH);
 
         $ind                         = array_search("0984", array_column($resp['data'], 'ident'));
+        $I->assertTrue($ind !== false, "objekt ni najden");
         $this->lookProdukcijskaHisa5 = $lookPH                      = $resp['data'][$ind];
         codecept_debug($lookPH);
     }
@@ -332,10 +288,10 @@ class ProdukcijskaHisaCest
         $list    = $resp['data'];
 
         codecept_debug($list);
-        $totRec=$resp['state']['totalRecords'];
+        $totRec = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertEquals("0982", $list[0]['sifra']);
-        $I->assertEquals("9999", $list[$totRec-1]['sifra']);
+        $I->assertEquals("9999", $list[$totRec - 1]['sifra']);
     }
 
     /**

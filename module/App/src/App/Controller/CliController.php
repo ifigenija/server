@@ -5,6 +5,7 @@
  */
 
 namespace App\Controller;
+
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
@@ -42,9 +43,9 @@ class CliController
         $optionMaticno = "application.tenant.maticnopodjetje";
         $option        = $optionR->findOneByName($optionMaticno);
         if ($option) {
-            $sifra = $option->getDefaultValue();
+            $popaId = $option->getDefaultValue();
             if (!$this->params('force')) {
-                echo "Opcija " . $optionMaticno . " že obstaja z vrednostjo (šifro):" . $sifra . PHP_EOL;
+                echo "Opcija " . $optionMaticno . " že obstaja z vrednostjo (popaId):" . $popaId . PHP_EOL;
                 echo "Kreiranje matičnega gledališča ni mogoče" . PHP_EOL;
                 throw new \Exception();
             }
@@ -63,6 +64,7 @@ class CliController
         $popa->setNaziv($naziv);
         $popa->setStaKli('AK');
         $popa->setDrzava($drzava);
+        $popaId=$popa->getId();
 
         /**
          * ustvarimo opcijo za matično gledališče
@@ -72,10 +74,10 @@ class CliController
             $em->persist($option);
         }
         $option->setName($optionMaticno);
-        $option->setDefaultValue($sifra);
+        $option->setDefaultValue($popaId); //$$ $popaId še prej določiti - verjetno šele po flushu??
         $option->setType('string');
         $option->setReadOnly(TRUE);
-        $option->setDescription('Šifra matičnega podjetja v Popa in ProdukcijskaHisa');
+        $option->setDescription('Id matičnega podjetja v Popa');
 
         /**
          * zapišemo matično podjetje v ProdukcijskaHisa

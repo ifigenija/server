@@ -31,7 +31,7 @@ class ProdukcijaDelitevCest
 {
 
     private $restUrl                = '/rest/produkcijadelitev';
-    private $restUrlPremiera                = '/rest/produkcijadelitev/premiera';
+    private $restUrlPremiera        = '/rest/produkcijadelitev/premiera';
     private $produkcijskaHisaUrl    = '/rest/produkcijskahisa';
     private $popaUrl                = '/rest/popa';
     private $alternacijaUrl         = '/rest/alternacija';
@@ -80,9 +80,11 @@ class ProdukcijaDelitevCest
      */
     public function preberiOpcijoMaticno(ApiTester $I)
     {
-        $opt                     = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
-        $I->assertNotEmpty($opt);
-        $this->maticnoGledalisce = $opt;
+        $popaId = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
+        codecept_debug($popaId);
+
+        $popa                    = $I->successfullyGet($this->popaUrl, $popaId);
+        $this->maticnoGledalisce = $popa['sifra'];
     }
 
     /**
@@ -280,14 +282,14 @@ class ProdukcijaDelitevCest
 //        $I->assertNotEmpty($list);
 //        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
 //    }
-    
+
     /**
      * @depends create
      * @param ApiTester $I
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl ;
+        $listUrl = $this->restUrl;
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];

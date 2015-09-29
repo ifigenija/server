@@ -112,4 +112,26 @@ class Popa
         parent::create($object, $params);
     }
 
+        /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function delete($object)
+    {
+        /**
+         * matičnega gledališča ni mogoče brisati
+         */
+        $em      = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $optionR = $em->getRepository('App\Entity\Option');
+        $option  = $optionR->findOneByName("application.tenant.maticnopodjetje");
+        $popaId   = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
+
+        $this->expect($object->getId()!=$popaId, "Matičnega gledališča ni mogoče brisati", 1001210);
+
+        parent::delete($object);
+    }
+
+    
+    
 }

@@ -62,6 +62,7 @@ class ProgramPremieraCest
     private $lookProdukcijskaHisa3;
     private $lookProdukcijskaHisa4;
     private $lookProdukcijskaHisa5;
+    private $popaUrl                = '/rest/popa';
 
     public function _before(ApiTester $I)
     {
@@ -80,9 +81,11 @@ class ProgramPremieraCest
      */
     public function preberiOpcijoMaticno(ApiTester $I)
     {
-        $opt                     = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
-        $I->assertNotEmpty($opt);
-        $this->maticnoGledalisce = $opt;
+        $popaId = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
+        codecept_debug($popaId);
+
+        $popa                    = $I->successfullyGet($this->popaUrl, $popaId);
+        $this->maticnoGledalisce = $popa['sifra'];
     }
 
     /**
@@ -773,7 +776,7 @@ class ProgramPremieraCest
 
         $ent['avtorskiHonorarjiSamoz'] = 4.57;   // v praksi bo že klient zaokrožil na 2 mesti
         $resp                          = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
-        $I->assertEquals(10001201, $resp[0]['code']);
+        $I->assertEquals(1001204, $resp[0]['code']);
 
         $ent['avtorskiHonorarjiSamoz'] = -0.01;   // v praksi bo že klient zaokrožil na 2 mesti
         $resp                          = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
