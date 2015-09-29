@@ -51,6 +51,8 @@ class EnotaPrograma
     protected $celotnaVrednost;
 
     /**
+     * delež matičnega JZ
+     * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.nasDelez", description="ep.d.nasDelez")   
      * @Max\Ui(icon="fa fa-euro")
