@@ -16,6 +16,8 @@ class DogodekSplosni
         extends \Max\Entity\Base
 {
 
+    use DogodekTrait;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
@@ -38,6 +40,16 @@ class DogodekSplosni
     {
         
     }
+
+    function dodajDogodek()
+    {
+        $dogodek = new Dogodek();
+        $dogodek->setRazred(Dogodek::SPLOSNO);
+        $dogodek->setSplosni($this);
+
+    }
+
+
     public function getId()
     {
         return $this->id;

@@ -19,6 +19,8 @@
             label: Potrjen - javno
         600s: 
             label: Zaključen
+        610s:
+            label: Odpovedan
         700s: 
             label: Obdelan
 -

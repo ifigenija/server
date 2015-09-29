@@ -17,6 +17,7 @@ class Vaja
     extends \Max\Entity\Base
 {
 
+    use DogodekTrait;
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
@@ -29,8 +30,8 @@ class Vaja
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Vrsta vaje", description="Vrsta vaje")
-     * @Max\Ui(type="optionalselect", opts="koledar.vrstaVaje", empty="Izberi vrsto vaje")
+     * @Max\I18n(label="Vrsta - opis vaje", description="Vrsta vaje. Lučna, generalka, tonska, ... ")
+     * @Max\Ui(icon="fa fa-cog")
      * @var string
      */
     protected $vrsta;
@@ -38,7 +39,7 @@ class Vaja
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="Zaporedna št.", description="Zaporedna številka vaje")
-     * @Max\Ui(type="integer")
+     * @Max\Ui(type="integer", ident=true)
      * @var integer
      */
     protected $zaporedna;
@@ -73,19 +74,6 @@ class Vaja
         $this->expect($this->uprizoritev, "Vaja mora biti vezana na uprizoritev", 1000471);
     }
 
-    /**
-     * dodaj dogodek
-     */
-    public function dodajDogodek()
-    {
-        $this->dogodek = new Dogodek();
-        $this->dogodek->setVaja($this);
-        $this->dogodek->setRazred(Dogodek::VAJA);
-
-        $naslov = $this->getUprizoritev()->getNaslov();
-        $zap    = $this->zaporedna;
-        $this->dogodek->setTitle($naslov . ' vaja ' . $zap);
-    }
 
     public function getUprizoritev()
     {
@@ -98,52 +86,25 @@ class Vaja
         return $this;
     }
 
-    /**
-     *
-     * @param \DateTime $zacetek
-     * @return \Koledar\Entity\Vaja
-     */
-    public function setZacetek(\DateTime $zacetek = null)
-    {
-        if (!$zacetek) {
-            return $this;
-        }
-        if (!$this->dogodek) {
-            $this->dodajDogodek();
-        }
 
-        $this->dogodek->setZacetek($zacetek);
-        $this->dogodek->validate();
-
-        return $this;
+    public function lahkoBrisem() {
+        if ($this->getDogodek()) {
+            $niPotrjen = $this->getDogodek()->getStatus()< Dogodek::POTRJEN_JAVNO;
+            $this->expect($niPotrjen, "Dogodek je javno potrjen, brisanje ni mogoče", 1000544);
+        }
     }
 
     /**
-     *
-     * @param \DateTime $konec
-     * @return \Koledar\Entity\Vaja
+     * dodaj dogodek
      */
-    public function setKonec(\DateTime $konec = null)
+    public function dodajDogodek()
     {
-        if (!$this->dogodek) {
-            return $this;
-        }
-        if (!$konec) {
-            $konec = clone $this->dogodek->getZacetek();
-            $konec->add(new \DateInterval('PT4H'));
-        }
-        $this->dogodek->setKonec($konec);
-        $this->dogodek->validate();
 
-        return $this;
-    }
+        $this->dogodek = new Dogodek();
 
-    public function getZacetek()
-    {
-        if ($this->dogodek) {
-            return $this->getDogodek()->getZacetek();
-        }
-        return null;
+        $this->dogodek->setVaja($this);
+        $this->dogodek->setRazred(Dogodek::VAJA);
+
     }
 
     public function getDogodek()
@@ -157,13 +118,7 @@ class Vaja
         return $this;
     }
 
-    public function getKonec()
-    {
-        if ($this->dogodek) {
-            return $this->getDogodek()->getKonec();
-        }
-        return null;
-    }
+
 
     public function getId()
     {

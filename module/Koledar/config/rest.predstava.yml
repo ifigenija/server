@@ -10,7 +10,19 @@ forms:
             - zaporedna
             - porocilo
             - uprizoritev
-            - gostovanje 
+            - gostovanje
+            - objavljenZacetek
+            - name: title
+              type: text
+              options:
+                  label: Naslov dogodka
+                  required: true
+            - name: status
+              type: select
+              options:
+                  label: Status
+                  reqired: true
+                  value_options: @dogodek.status
             - name: zacetek
               type: datetime
               options: 
@@ -29,27 +41,7 @@ forms:
                   type: datetime
                 - name: konec
                   type: datetime
-    uprizoritev: 
-        elements:
-            - uprizoritev
-            - name: zacetek
-              type: datetime
-              options: 
-                  label: Začetek
-                  required: false
-            - name: konec
-              type: datetime
-              options: 
-                  label: Konec
-                  required: false
-        hydrator:
-            byValue:
-                - dogodek
-            virtual:
-                - name: zacetek
-                  type: datetime
-                - name: konec
-                  type: datetime
+
 lists:
     default: 
         filter:

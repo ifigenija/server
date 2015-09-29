@@ -6,11 +6,21 @@ forms:
     default: 
         elements:
 #            - id
-#            - vrsta
+            - vrsta
             - zaporedna
             - porocilo
 #            - dogodek
             - uprizoritev
+            - name: title
+              type: text
+              options:
+                  label: Naslov dogodka
+            - name: status
+              type: select
+              options:
+                  label: Status
+                  reqired: true
+                  value_options: @dogodek.status
             - name: zacetek
               type: datetime
               options: 
@@ -21,36 +31,21 @@ forms:
               options: 
                   label: Konec
                   required: false
+            - name: prostor
+              type: toone
+              options:
+                  targetEntity: Prodaja\Entity\Prostor
+                  label: Prostor
+                  required: false
         hydrator:
-            byValue:
-                - dogodek
             virtual:
                 - name: zacetek
                   type: datetime
                 - name: konec
                   type: datetime
-    uprizoritev:
-        elements:
-            - zaporedna
-            - uprizoritev
-            - name: zacetek
-              type: datetime
-              options: 
-                  label: Začetek
-                  required: false
-            - name: konec
-              type: datetime
-              options: 
-                  label: Konec
-                  required: false
-        hydrator:
-            byValue:
-                - dogodek
-            virtual:
-                - name: zacetek
-                  type: datetime
-                - name: konec
-                  type: datetime
+                - title
+                - status
+                - prostor
                   
 lists:
     default: 
@@ -63,12 +58,13 @@ lists:
                       targetEntity: Produkcija\Entity\Uprizoritev
                       required: true
         hydrator:
-            byValue:
-                - dogodek
             virtual:
                 - name: zacetek
                   type: datetime
                 - name: konec
                   type: datetime
+                - status
+                - title
+                - prostor
 #    vse: 
 #        filter:

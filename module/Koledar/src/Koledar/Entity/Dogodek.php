@@ -5,10 +5,14 @@ namespace Koledar\Entity;
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 use Doctrine\Common\Collections\ArrayCollection;
+use Prodaja\Entity\ProdajaPredstave;
+use Prodaja\Entity\Prostor;
+use Produkcija\Entity\Uprizoritev;
+use Zend\I18n\Validator\DateTime;
 
 /**
  * Dogodek uprizoritve - ali vaja ali predstava
- * 
+ *
  * @ORM\Entity(repositoryClass="Koledar\Repository\Dogodki")
  * @ORM\Table(indexes={
  *    @ORM\Index(name="dogodki_zacetek", columns={"zacetek"}),
@@ -19,58 +23,54 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Max\Id(prefix="0024")
  */
 class Dogodek
-        extends \Max\Entity\Base
+    extends \Max\Entity\Base
 {
 
-    const PREDSTAVA  = "100s";
-    const VAJA       = "200s";
+    const PREDSTAVA = "100s";
+    const VAJA = "200s";
     const GOSTOVANJE = "300s";
-    const SPLOSNO    = "400s";
+    const SPLOSNO = "400s";
     const ZASEDENOST = "500s";
 
-    private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::SPLOSNO, self::ZASEDENOST];
-
+    const DOLGOROCNO = "100s";
+    const PLANIRAN = "200s";
+    const FIKSIRAN = "300s";
+    const POTRJEN = "400s";
+    const POTRJEN_JAVNO = "500s";
+    const ODPOVEDAN = "610s";
+    const ZAKLJUCEN = "600s";
+    const OBDELAN = "700s";
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="NONE")
      * @Max\I18n(label="Id", description="ID dogodka")
      * @Max\Ui(type="id")
-     * @var string     
+     * @var string
      */
     protected $id;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Max\I18n(label="Planiran začetek", description="Planiran začetek dogodka")
-     * @var \DateTime
-     */
-    protected $planiranZacetek;
-
-    /**
-     * 
+     *
      * @ORM\Column(type="boolean", options = {"default"=false}, nullable=true)
      * @Max\I18n(label="Celodnevni", description="Dogodek se razteza skozi cel dan")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
     protected $allDay = false;
-
     /**
-     * 
+     *
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Začetek", description="Začetek dogodka")
      * @var \DateTime
      */
     protected $zacetek;
-
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Konec", description="Konec dogodka")
      * @var \DateTime
      */
     protected $konec;
-
     /**
      * @ORM\Column(type="string", length=4, nullable=true)
      * @Max\I18n(label="Status", description="Status dogodka")
@@ -78,29 +78,25 @@ class Dogodek
      * @var string
      */
     protected $status;
-
     /**
      * @ORM\Column(type="string", length=4, nullable=true)
      * @Max\I18n(label="Razred", description="Razred dogodka")
-     * @Max\Ui(type="select", opts="dogodek.razred")
+     * @Max\Ui(type="hidden", opts="dogodek.razred")
      * @var string
      */
     protected $razred;
-
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Termin", description="Termin dogodka")
      * @var string
      */
     protected $termin;
-
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Ime", description="Ime dogodka")
      * @var string
      */
     protected $title;
-
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Predstava", inversedBy="dogodek")
      * @ORM\JoinColumn(name="predstava_id", referencedColumnName="id", unique=true)
@@ -109,16 +105,14 @@ class Dogodek
      * @var \Koledar\Entity\Predstava
      */
     protected $predstava;
-
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Zasedenost", inversedBy="dogodek")
      * @ORM\JoinColumn(name="zasedenost_id", referencedColumnName="id", unique=true)
      * @Max\I18n(label="Zasedenost",  description="Zasedenost")
      * @Max\Ui(type="toone")
-     * @var \Koledar\Entity\Zasedenost
+     * @var Zasedenost
      */
     protected $zasedenost;
-
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Vaja", inversedBy="dogodek")
      * @ORM\JoinColumn(name="vaja_id", referencedColumnName="id", unique=true)
@@ -127,7 +121,6 @@ class Dogodek
      * @var \Koledar\Entity\Vaja
      */
     protected $vaja;
-
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Gostovanje", inversedBy="dogodek")
      * @ORM\JoinColumn(name="gostovanje_id", referencedColumnName="id", unique=true)
@@ -136,7 +129,6 @@ class Dogodek
      * @var \Koledar\Entity\Gostovanje
      */
     protected $gostovanje;
-
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\DogodekSplosni", inversedBy="dogodek")
      * @ORM\JoinColumn(name="dogodek_splosni_id", referencedColumnName="id", unique=true)
@@ -145,7 +137,6 @@ class Dogodek
      * @var \Koledar\Entity\DogodekSplosni
      */
     protected $splosni;
-
     /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Prostor")
      * @Max\I18n(label="Prostor",  description="Prostor")
@@ -153,19 +144,16 @@ class Dogodek
      * @var \Prodaja\Entity\Prostor
      */
     protected $prostor;
-
     /**
      * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="dogodek")
      * @var <TerminiStoritve>
      */
     protected $terminiStoritve;
-
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\ProdajaPredstave", mappedBy="dogodek")
      * @var <ProdajaPredstave>
      */
     protected $prodajaPredstave;
-
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona", inversedBy="dogodki")
      * @ORM\JoinColumn(name="sezona_id", referencedColumnName="id")
@@ -174,6 +162,7 @@ class Dogodek
      * @var \Koledar\Entity\Sezona
      */
     protected $sezona;
+    private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::SPLOSNO, self::ZASEDENOST];
 
     public function __construct()
     {
@@ -231,35 +220,27 @@ class Dogodek
         $this->expect($i === 1, "Napaka - napačno število referenc na podrobnosti dogodka $i", 1000361);
     }
 
-    //pridobimo uprizoritev vaje
-    public function getUprizoritevVaja()
+    /**
+     * @return  Uprizoritev|null
+     *
+     */
+    public function getUprizoritev()
     {
-        return $this->getVaja()->getUprizoritev();
-    }
-    
-    //pridobimo uprizoritev predstave
-    public function getUprizoritevPredstava()
-    {
-        return $this->getPredstava()->getUprizoritev();
-    }
-    
-    //pridobimo kraj gostovanja
-    public function getKraj()
-    {
-        return $this->getGostovanje()->getKraj();
-    }
-    
-    //pridobimo drzavo gostovanja
-    public function getDrzava()
-    {
-        return $this->getGostovanje()->getDrzava();
-    }
-//    //pridobimo osebo na zasedenosti
-//    public function getOseba()
-//    {
-//        return $this->getZasedenost()->getOseba();
-//    }
+        switch ($this->razred) {
+            case Dogodek::VAJA:
+                return $this->getVaja() !== null ? $this->getVaja()->getUprizoritev(): null;
+            case Dogodek::PREDSTAVA:
+                return $this->getPredstava() !== null ? $this->getPredstava()->getUprizoritev(): null;
+        }
 
+        return null;
+    }
+
+    /**
+     * Vrne podrobne podatke od dogodku, sktruktura glede na vrsto dogodka
+     *
+     * @return DogodekSplosni|Gostovanje|Predstava|Vaja|Zasedenost
+     */
     public function getPodrobno()
     {
         switch ($this->razred) {
@@ -276,214 +257,311 @@ class Dogodek
         }
     }
 
+    /**
+     * @return string
+     */
     public function getId()
     {
         return $this->id;
     }
 
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    public function getRazred()
-    {
-        return $this->razred;
-    }
-
-    public function getTermin()
-    {
-        return $this->termin;
-    }
-
-    public function getPredstava()
-    {
-        return $this->predstava;
-    }
-
-    public function getZasedenost()
-    {
-        return $this->zasedenost;
-    }
-
-    public function getVaja()
-    {
-        return $this->vaja;
-    }
-
-    public function getGostovanje()
-    {
-        return $this->gostovanje;
-    }
-
-    public function getProstor()
-    {
-        return $this->prostor;
-    }
-
-    public function getTerminiStoritve()
-    {
-        return $this->terminiStoritve;
-    }
-
-    public function getProdajaPredstave()
-    {
-        return $this->prodajaPredstave;
-    }
-
-    public function getSezona()
-    {
-        return $this->sezona;
-    }
-
+    /**
+     * @param string $id
+     * @return Dogodek
+     */
     public function setId($id)
     {
         $this->id = $id;
         return $this;
     }
 
-    public function setStatus($status)
-    {
-        $this->status = $status;
-        return $this;
-    }
-
-    public function setRazred($razred)
-    {
-        $this->razred = $razred;
-
-        return $this;
-    }
-
-    public function setTermin($termin)
-    {
-        $this->termin = $termin;
-        return $this;
-    }
-
-    public function setPredstava(\Koledar\Entity\Predstava $predstava = null)
-    {
-        $this->predstava = $predstava;
-        return $this;
-    }
-
-    public function setZasedenost(\Koledar\Entity\Zasedenost $zasedenost = null)
-    {
-        $this->zasedenost = $zasedenost;
-        return $this;
-    }
-
-    public function setVaja(\Koledar\Entity\Vaja $vaja = null)
-    {
-        $this->vaja = $vaja;
-        return $this;
-    }
-
-    public function setGostovanje(\Koledar\Entity\Gostovanje $gostovanje = null)
-    {
-        $this->gostovanje = $gostovanje;
-        return $this;
-    }
-
-    public function setProstor(\Prodaja\Entity\Prostor $prostor = null)
-    {
-        $this->prostor = $prostor;
-        return $this;
-    }
-
-    public function setTerminiStoritve($terminiStoritve)
-    {
-        $this->terminiStoritve = $terminiStoritve;
-        return $this;
-    }
-
-    public function setProdajaPredstave($prodajaPredstave)
-    {
-        $this->prodajaPredstave = $prodajaPredstave;
-        return $this;
-    }
-
-    public function setSezona(\Koledar\Entity\Sezona $sezona = null)
-    {
-        $this->sezona = $sezona;
-        return $this;
-    }
-
-    public function getPlaniranZacetek()
-    {
-        return $this->planiranZacetek;
-    }
-
-    public function getAllDay()
+    /**
+     * @return boolean
+     */
+    public function isAllDay()
     {
         return $this->allDay;
     }
 
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    public function setPlaniranZacetek(\DateTime $planiranZacetek = null)
-    {
-        $this->planiranZacetek = $planiranZacetek;
-        return $this;
-    }
-
+    /**
+     * @param boolean $allDay
+     * @return Dogodek
+     */
     public function setAllDay($allDay)
     {
         $this->allDay = $allDay;
         return $this;
     }
 
-    public function setTitle($title)
-    {
-        $this->title = $title;
-        return $this;
-    }
-
+    /**
+     * @return \DateTime
+     */
     public function getZacetek()
     {
         return $this->zacetek;
     }
 
-    public function getKonec()
-    {
-        return $this->konec;
-    }
-
+    /**
+     * @param \DateTime $zacetek
+     * @return Dogodek
+     */
     public function setZacetek(\DateTime $zacetek)
     {
         $this->zacetek = $zacetek;
         return $this;
     }
 
-    public function setKonec(\DateTime $konec)
+    /**
+     * @return \DateTime
+     */
+    public function getKonec()
+    {
+        return $this->konec;
+    }
+
+    /**
+     * @param \DateTime $konec
+     * @return Dogodek
+     */
+    public function setKonec($konec)
     {
         $this->konec = $konec;
         return $this;
     }
 
-    public function getStatusi()
+    /**
+     * @return string
+     */
+    public function getStatus()
     {
-        return $this->statusi;
+        return $this->status;
     }
 
+    /**
+     * @param string $status
+     * @return Dogodek
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRazred()
+    {
+        return $this->razred;
+    }
+
+    /**
+     * @param string $razred
+     * @return Dogodek
+     */
+    public function setRazred($razred)
+    {
+        $this->razred = $razred;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTermin()
+    {
+        return $this->termin;
+    }
+
+    /**
+     * @param string $termin
+     * @return Dogodek
+     */
+    public function setTermin($termin)
+    {
+        $this->termin = $termin;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return Dogodek
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return Predstava
+     */
+    public function getPredstava()
+    {
+        return $this->predstava;
+    }
+
+    /**
+     * @param Predstava $predstava
+     * @return Dogodek
+     */
+    public function setPredstava(Predstava $predstava = null)
+    {
+        $this->predstava = $predstava;
+        return $this;
+    }
+
+    /**
+     * @return Zasedenost
+     */
+    public function getZasedenost()
+    {
+        return $this->zasedenost;
+    }
+
+    /**
+     * @param Zasedenost $zasedenost
+     * @return Dogodek
+     */
+    public function setZasedenost(Zasedenost $zasedenost = null)
+    {
+        $this->zasedenost = $zasedenost;
+        return $this;
+    }
+
+    /**
+     * @return Vaja
+     */
+    public function getVaja()
+    {
+        return $this->vaja;
+    }
+
+    /**
+     * @param Vaja $vaja
+     * @return Dogodek
+     */
+    public function setVaja(Vaja $vaja = null)
+    {
+        $this->vaja = $vaja;
+        return $this;
+    }
+
+    /**
+     * @return Gostovanje
+     */
+    public function getGostovanje()
+    {
+        return $this->gostovanje;
+    }
+
+    /**
+     * @param Gostovanje $gostovanje
+     * @return Dogodek
+     */
+    public function setGostovanje(Gostovanje $gostovanje = null)
+    {
+        $this->gostovanje = $gostovanje;
+        return $this;
+    }
+
+    /**
+     * @return DogodekSplosni
+     */
     public function getSplosni()
     {
         return $this->splosni;
     }
 
-    public function setStatusi($statusi)
-    {
-        $this->statusi = $statusi;
-        return $this;
-    }
-
-    public function setSplosni(\Koledar\Entity\DogodekSplosni $splosni = null)
+    /**
+     * @param DogodekSplosni $splosni
+     * @return Dogodek
+     */
+    public function setSplosni(DogodekSplosni $splosni)
     {
         $this->splosni = $splosni;
         return $this;
     }
+
+    /**
+     * @return \Prodaja\Entity\Prostor
+     */
+    public function getProstor()
+    {
+        return $this->prostor;
+    }
+
+    /**
+     * @param \Prodaja\Entity\Prostor $prostor
+     * @return Dogodek
+     */
+    public function setProstor(Prostor $prostor)
+    {
+        $this->prostor = $prostor;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTerminiStoritve()
+    {
+        return $this->terminiStoritve;
+    }
+
+    /**
+     * @param ArrayCollection  $terminiStoritve
+     * @return Dogodek
+     */
+    public function setTerminiStoritve($terminiStoritve)
+    {
+        $this->terminiStoritve = $terminiStoritve;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProdajaPredstave()
+    {
+        return $this->prodajaPredstave;
+    }
+
+    /**
+     * @param ProdajaPredstave $prodajaPredstave
+     * @return Dogodek
+     */
+    public function setProdajaPredstave(ProdajaPredstave $prodajaPredstave = null)
+    {
+        $this->prodajaPredstave = $prodajaPredstave;
+        return $this;
+    }
+
+    /**
+     * @return Sezona
+     */
+    public function getSezona()
+    {
+        return $this->sezona;
+    }
+
+    /**
+     * @param Sezona $sezona
+     * @return Dogodek
+     */
+    public function setSezona(Sezona $sezona = null)
+    {
+        $this->sezona = $sezona;
+        return $this;
+    }
+
 
 }
