@@ -148,7 +148,7 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriGostujo(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($gostujoceSredstva, 2, ',', '.') ?></td>
         </tr>
-        <tr>
+        <tr class="suma-row">
             <td class="cell-type-header-title left-align">Skupaj programski sklop I</td>
             <td class="cell-type-number"><?= number_format($stEnotSK1, 0, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($mkViriSK1, 2, ',', '.') ?></td>
@@ -199,7 +199,7 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriIzjem(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($izjemniSredstva, 2, ',', '.') ?></td>
         <tr>
-        <tr>
+        <tr class="suma-row">
             <td class="cell-type-header-title">Skupaj programski sklop II</td>
             <td class="cell-type-number"><?= number_format($stEnotSK2, 0, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($mkViriSK2, 2, ',', '.') ?></td>
@@ -215,7 +215,7 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <th class="cell-type-header-title right-align">Drugi viri</th>
             <th class="cell-type-header-title right-align">Skupaj</th>
         </tr>
-        <tr>
+        <tr class="suma-row">
             <td class="cell-type-header-title">SKUPAJ (I+II)</td>
             <td class="cell-type-number"><?= number_format($stEnotSK1 + $stEnotSK2, 0, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($mkViriSK1 + $mkViriSK2, 2, ',', '.') ?></td>
