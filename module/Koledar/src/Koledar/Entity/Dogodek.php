@@ -278,7 +278,7 @@ class Dogodek
     /**
      * @return boolean
      */
-    public function isAllDay()
+    public function getAllDay()
     {
         return $this->allDay;
     }
@@ -503,7 +503,7 @@ class Dogodek
      * @param \Prodaja\Entity\Prostor $prostor
      * @return Dogodek
      */
-    public function setProstor(Prostor $prostor)
+    public function setProstor(Prostor $prostor = null)
     {
         $this->prostor = $prostor;
         return $this;
