@@ -7,10 +7,12 @@
 // 
 $drugiViri       = $model->drugiViri;
 
+
 // iz mednarodna gostovanja
+/** @var \ProgramDela\Entity\ProgramGostovanje $model */
 $upr             = $model->uprizoritev->naslov;
 $krajGos         = $model->krajGostovanja . ' / ' . $model->drzavaGostovanja->naziv;
-$datumGos        = $model->datumGostovanja->format('d-m-Y');
+$datumGos        = $model->datumGostovanja? $model->getDatumGostovanja()->format('d-m-Y'):'';
 $ustanovaGos     = $model->ustanova;
 $stPonovitevGos  = number_format($model->ponoviInt, 0, ',', '.');
 $stPonovitevKop  = number_format($model->ponoviKoprInt, 0, ',', '.');

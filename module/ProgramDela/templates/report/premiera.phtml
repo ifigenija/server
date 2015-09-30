@@ -8,7 +8,7 @@
 /** @var \ProgramDela\Entity\EnotaPrograma $model */
 
 // 
-$upr             = $model->uprizoritev;
+$upr             = $model->getUprizoritev();
 $kop             = $model->koprodukcije;
 $drugiViri       = $model->drugiViri;
 // iz premiere
@@ -19,8 +19,9 @@ $stHonVsi        = $model->stHonorarnih;
 $stHonIgr        = $model->stHonorarnihIgr;
 $stHonTuj        = $model->stHonorarnihIgrTujJZ;
 $stSamozap       = $model->stHonorarnihIgrSamoz;
-$trajanjeStudija = 'od ' . $upr->datumZacStudija->format('d-m-Y') . ' do ' . $upr->datumPremiere->format('d-m-Y');
-$datumPremiere   = $upr->datumPremiere->format('d-m-Y');
+
+$trajanjeStudija = 'od ' . ($upr->getDatumZacStudija() ?  $upr->datumZacStudija->format('d-m-Y') :'' ). ' do ' .($upr->getDatumZacStudija() ?  $upr->datumPremiere->format('d-m-Y'): '');
+$datumPremiere   = $upr->getDatumPremiere() ? $upr->getDatumPremiere()->format('d-m-Y'): '';
 $prizorisce      = $model->priKoproducentu ? 'pri koproducentu' : 'na matičnem odru';
 $tipEnote        = $model->tipProgramskeEnote->naziv;
 $koeEnote        = number_format($model->kpe, 2, ',', '');
