@@ -20,7 +20,8 @@ forms:
 lists:
     default: 
         hydrator:
-            exclude: []
+            virtual:
+                - razred
         filter: 
             elements: 
                 - name: q

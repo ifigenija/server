@@ -132,6 +132,11 @@ class PostavkaCDve
         
     }
 
+    public function getRazred()
+    {
+        return $this->getSkupina() . '.' . $this->getPodskupina();
+    }
+
     public function getId()
     {
         return $this->id;
