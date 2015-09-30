@@ -48,10 +48,11 @@ foreach ($postavke as $postavka) {
             <th class="cell-type-header-title right-align">SKUPAJ</th>
         </tr>
 
-        <?php
+        
+        <?php if ($postavke) {
             $this->partialLoop()->setObjectKey('model');
             echo $this->partialLoop('postavka-c2', $model);
-        ?>
+        } ?>
 
         <tr class="suma-row">
             <td class="cell-type-header-title">  </td>

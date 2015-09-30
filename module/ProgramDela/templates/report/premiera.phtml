@@ -3,9 +3,9 @@
  * partial tmpl za premiere 
  * User: Alesch
  * Date: 21.9.2015
+ *
+ * @var ProgramDela\Entity\EnotaPrograma $model 
  */
-
-/** @var \ProgramDela\Entity\EnotaPrograma $model */
 
 // 
 $upr             = $model->getUprizoritev();
@@ -32,10 +32,10 @@ $avtHonorar      = number_format($model->avtorskiHonorarji, 2, ',', '.');
 $avtPravice      = number_format($model->avtorskePravice, 2, ',', '.');
 $tant            = number_format($model->tantieme, 2, ',', '.');
 $celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');
-$celotnaVredMat  = number_format($model->celotnaVrednostMat, 2, ',', '.');
+$celotnaVredMat  = number_format($model->nasDelez, 2, ',', '.');
 ?>
 <div id="premiere">
-    <h2>Premiere</h2>
+    <h3>Premiere</h3>
     <table>
         <?php 
             $this->partial()->setObjectKey('upr');
