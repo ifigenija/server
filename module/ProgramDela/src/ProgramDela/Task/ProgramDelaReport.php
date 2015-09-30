@@ -51,12 +51,12 @@ class ProgramDelaReport
         $this->reportSklopPrograma($printer, $prgdela->izjemni, 'izjemni', 'Izjemni dogodki');
         // Kazalniki
         $this->addDocumentReport('kazalniki', $title, $prgdela);
-        $printer->AddPage();
         // Kazalniki - priloga 
-        $this->addDocumentReport('kazalniki-priloga', $title, $prgdela);
         $printer->AddPage();
+        $this->addDocumentReport('kazalniki-priloga', $title, $prgdela);
         // Postavke C2
-        $this->addDocumentReport('postavke-c2', $title, $prgdela->getPostavkeC2());
+        $printer->AddPage('l','','','','','','','','','','','','','','',0,0,0,0,'','a4-l');
+        $this->addDocumentReport('postavke-c2', $title, $prgdela);
                 
         $this->finishReport($title);
     }

@@ -5,8 +5,8 @@
  * Date: 21.9.2015
  */
 // 
-$upr             = $model->uprizoritev;
-$drugiViri       = $model->drugiViri;
+$upr             = $model->getUprizoritev();
+$drugiViri       = $model->getDrugiViri();
 
 // iz gostovanja
 $zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
@@ -14,13 +14,15 @@ $lastSredstva    = number_format($model->lastnaSredstva, 2, ',', '.');
 $drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
 $obiskDoma       = number_format($model->obiskDoma, 0, ',', '.');
 $stPredstav      = number_format($model->ponoviDoma, 0, ',', '.');
+$celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');
 
 ?>
 <div id="gostujoce">
     <h2>Gostujoče uprizoritve - iz Slovenije, zamejstva in tujine</h2>
     <table>
         <?php
-            echo $this->partial('uprizoritev', array('upr' => $upr));
+            $this->partial()->setObjectKey('upr');
+            echo $this->partial('uprizoritev', $upr);
         ?>
         <tr>
             <td>Število predstav:</td>
@@ -39,18 +41,27 @@ $stPredstav      = number_format($model->ponoviDoma, 0, ',', '.');
             <td class="cell-type-number"><?= $lastSredstva ?></td>
         </tr>
 
-        <tr>
-            <td>Drugi Viri:</td>
-            <td></td>
-        </tr>
-        <?php
+        <?php if ($drugiViri) { ?>
+            <tr class="suma-row">
+                <td>Drugi Viri:</td>
+                <td class="cell-type-number"><?= number_format($model->vsotaDrugihVirov(), 2, ',', '.') ?> </td>
+            </tr>        
+            <?php
             $this->partialLoop()->setObjectKey('drugiViri');
-            echo $this->partialLoop('drugiViri', $drugiViri);
-        ?>
+            echo $this->partialLoop('drugiViri.phtml', $drugiViri); ?>
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
+            </tr>
+        <?php } ?>
 
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
             <td class="cell-type-number"><?= $drugSredstva ?></td>
+        </tr>
+        <tr>
+            <td>Celotna vrednost gostovanja:</td>
+            <td class="cell-type-number"><?= $celotnaVred ?></td>
         </tr>
     </table>
     <h2>Vsebinska utemeljitev predloga:</h2>

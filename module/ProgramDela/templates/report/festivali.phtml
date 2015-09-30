@@ -131,18 +131,19 @@ $celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');
             <td>Lastna sredstva:</td>
             <td class="cell-type-number"><?= $lastSredstva ?></td>
         </tr>
-        <tr>
-            <td>Drugi Viri:</td>
-            <td></td>
-        </tr>
-        <?php
+        <?php if ($drugiViri) { ?>
+            <tr class="suma-row">
+                <td>Drugi Viri:</td>
+                <td class="cell-type-number"><?= number_format($model->vsotaDrugihVirov(), 2, ',', '.') ?> </td>
+            </tr>        
+            <?php
             $this->partialLoop()->setObjectKey('drugiViri');
-            echo $this->partialLoop('drugiViri', $drugiViri);
-        ?>
-        <tr>
-            <td>Skupaj drugi viri:</td>
-            <td class="cell-type-number"> /* number_format($) */  </td>
-        </tr>
+            echo $this->partialLoop('drugiViri.phtml', $drugiViri); ?>
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
+            </tr>
+        <?php } ?>
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
             <td class="cell-type-number"><?= $drugSredstva ?></td>

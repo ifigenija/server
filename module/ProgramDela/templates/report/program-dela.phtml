@@ -30,7 +30,7 @@ if (is_array($title)) {
         <style type="text/css">
 
             @page {
-                sheet-size: <?= $pagesize . '-' . $orientation ?>;                
+                sheet-size: <?= $pagesize . '-' . $orientation ?>;
                 size: auto;
                 margin-top: <?= $tm ?>mm ;
                 margin-left: <?= $lm ?>mm ;
@@ -67,7 +67,7 @@ if (is_array($title)) {
                 </table>
             </htmlpageheader>
             <htmlpagefooter name="docFooter" id="docFooter">
-                <table width="100%" style="topntail: 0; border-top: 1px solid #000000; vertical-align: bottom; font-weight: bold; font-style: italic;">
+                <table width="100%" style="topntail: 0; border-top: 1px solid #000000; border-bottom: hidden; vertical-align: bottom; font-weight: bold; font-style: italic;">
                     <tr>
                         <td width="33%">{DATE j.m.Y}</td>
                         <td width="33%"></td>

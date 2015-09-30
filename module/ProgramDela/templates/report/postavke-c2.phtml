@@ -1,6 +1,6 @@
 <?php
 $naslov   = !empty($this->title) ? $this->translate($this->title) : '';
-$postavke = $model->getPostavkeC2;
+$postavke = $model->getPostavkeC2();
 
 // izračunam končne vsote
 $sumaPremiere            = 0;
@@ -50,8 +50,8 @@ foreach ($postavke as $postavka) {
 
         
         <?php if ($postavke) {
-            $this->partialLoop()->setObjectKey('model');
-            echo $this->partialLoop('postavka-c2', $model);
+            $this->partialLoop()->setObjectKey('postavke');
+            echo $this->partialLoop('postavka-c2', $postavke);
         } ?>
 
         <tr class="suma-row">

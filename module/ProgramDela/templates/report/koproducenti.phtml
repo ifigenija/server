@@ -5,11 +5,11 @@
  * date: 21.9.2015
  */
 
-$imekop = $this->kop->koproducent->popa->naziv;
-$delez  = $this->kop->delez;
-?>
-
-<tr>
-    <td class="alineja"><?= $imekop ?></td>
-    <td class="cell-type-number"><?= number_format($delez,2,',','.') ?></td>
-</tr>
+foreach ($kop as $koprodukcija) {
+    $imekop = $koprodukcija->getKoproducent() ? $koprodukcija->getKoproducent()->getPopa()->getNaziv() : '';
+    $delez  = $koprodukcija->getDelez(); ?>
+    <tr>
+        <td class="alineja"><?= $imekop ?></td>
+        <td class="cell-type-number"><?= number_format($delez, 2, ',', '.') ?></td>
+    </tr>
+<?php } ?>

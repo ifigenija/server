@@ -6,22 +6,21 @@
  *
  * @var ProgramDela\Entity\EnotaPrograma $model 
  */
-
 // 
-$upr             = $model->getUprizoritev();
-$kop             = $model->koprodukcije;
-$drugiViri       = $model->drugiViri;
+$upr         = $model->getUprizoritev();
+$kop         = $model->getKoprodukcije();
+$drugiViri   = $model->getDrugiViri();
 // iz premiere
-$imakop          = $model->imaKoprodukcije;
-$stUmetnikov     = number_format($model->stZaposUmet, 0, ',', '');
-$stDrugih        = number_format($model->stZaposDrug, 0, ',', '');
-$stHonVsi        = number_format($model->stHonorarnih, 0, ',', '');
-$stHonIgr        = number_format($model->stHonorarnihIgr, 0, ',', '');
-$stHonTuj        = number_format($model->stHonorarnihIgrTujJZ, 0, ',', '');
-$stSamozap       = number_format($model->stHonorarnihIgrSamoz, 0, ',', '');
+$imakop      = $model->getImaKoprodukcije();
+$stUmetnikov = number_format($model->stZaposUmet, 0, ',', '');
+$stDrugih    = number_format($model->stZaposDrug, 0, ',', '');
+$stHonVsi    = number_format($model->stHonorarnih, 0, ',', '');
+$stHonIgr    = number_format($model->stHonorarnihIgr, 0, ',', '');
+$stHonTuj    = number_format($model->stHonorarnihIgrTujJZ, 0, ',', '');
+$stSamozap   = number_format($model->stHonorarnihIgrSamoz, 0, ',', '');
 
-$trajanjeStudija = 'od ' . ($upr->getDatumZacStudija() ?  $upr->datumZacStudija->format('d-m-Y') :'' ). ' do ' .($upr->getDatumZacStudija() ?  $upr->datumPremiere->format('d-m-Y'): '');
-$datumPremiere   = $upr->getDatumPremiere() ? $upr->getDatumPremiere()->format('d-m-Y'): '';
+$trajanjeStudija = 'od ' . ($upr->getDatumZacStudija() ? $upr->datumZacStudija->format('d-m-Y') : '' ) . ' do ' . ($upr->getDatumZacStudija() ? $upr->datumPremiere->format('d-m-Y') : '');
+$datumPremiere   = $upr->getDatumPremiere() ? $upr->getDatumPremiere()->format('d-m-Y') : '';
 $prizorisce      = $model->priKoproducentu ? 'pri koproducentu' : 'na matičnem odru';
 $tipEnote        = $model->tipProgramskeEnote->naziv;
 $koeEnote        = number_format($model->kpe, 2, ',', '');
@@ -32,14 +31,14 @@ $avtHonorar      = number_format($model->avtorskiHonorarji, 2, ',', '.');
 $avtPravice      = number_format($model->avtorskePravice, 2, ',', '.');
 $tant            = number_format($model->tantieme, 2, ',', '.');
 $celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');
-$celotnaVredMat  = number_format($model->nasDelez, 2, ',', '.');
+$nasDelez        = number_format($model->nasDelez, 2, ',', '.');
 ?>
 <div id="premiere">
     <h3>Premiere</h3>
     <table>
-        <?php 
+        <?php
             $this->partial()->setObjectKey('upr');
-            echo $this->partial('uprizoritev', $upr); 
+            echo $this->partial('uprizoritev', $upr);
         ?>
         <tr>
             <td>Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri uprizoritvi:</td>
@@ -85,14 +84,19 @@ $celotnaVredMat  = number_format($model->nasDelez, 2, ',', '.');
             <td>Koeficient programske enote:</td>
             <td class="cell-type-number"><?= $koeEnote ?></td>
         </tr>
-        <?php if($imakop) { ?>
-            <tr>
+        <?php if ($imakop) { ?>
+            <tr class="suma-row">
                 <td>Koproducenti:</td>
                 <td></td>
             </tr>
-            <?php 
-                echo $this->partial('koproducenti', array('kop' => $kop)); 
+            <?php
+            $this->partial()->setObjectKey('kop');
+            echo $this->partial('koproducenti', $kop);
             ?>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
         <?php } ?>
         <tr>
             <td>Zaprošena sredstva Ministrstva za kulturo:</td>
@@ -102,16 +106,20 @@ $celotnaVredMat  = number_format($model->nasDelez, 2, ',', '.');
             <td>Lastna sredstva:</td>
             <td class="cell-type-number"><?= $lastSredstva ?></td>
         </tr>
-        
-        <tr>
-            <td>Drugi Viri:</td>
-            <td></td>
-        </tr>
-        <?php
+
+        <?php if ($drugiViri) { ?>
+            <tr class="suma-row">
+                <td>Drugi Viri:</td>
+                <td class="cell-type-number"><?= number_format($model->vsotaDrugihVirov(), 2, ',', '.') ?> </td>
+            </tr>        
+            <?php
             $this->partialLoop()->setObjectKey('drugiViri');
-            echo $this->partialLoop('drugiViri', $drugiViri);
-        ?>
-        
+            echo $this->partialLoop('drugiViri.phtml', $drugiViri); ?>
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
+            </tr>
+        <?php } ?>
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
             <td class="cell-type-number"><?= $drugSredstva ?></td>
@@ -134,7 +142,7 @@ $celotnaVredMat  = number_format($model->nasDelez, 2, ',', '.');
         </tr>
         <tr>
             <td class="alineja">od tega stroški matičnega javnega zavoda:</td>
-            <td class="cell-type-number"><?= $celotnaVredMat ?></td>
+            <td class="cell-type-number"><?= $nasDelez ?></td>
         </tr>
     </table>
     <h2>Priloge:</h2>

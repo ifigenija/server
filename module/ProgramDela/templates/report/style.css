@@ -1,7 +1,7 @@
 body {
     color: #333333;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 9px;
+    font-size: 11px;
 }
 
 header {
@@ -23,7 +23,7 @@ table {
     border-color: gray;
     table-layout: fixed;
     box-sizing: border-box;
-    topntail: 0.02cm solid #c0c0c0;
+    topntail: 0.01cm solid #c0c0c0;
 }
 
 table thead {
@@ -42,6 +42,7 @@ th {
 
 td {
     padding: 2px;
+    border-bottom: 0.01cm solid #c0c0c0;
 }
 
 td.cell-type-final {

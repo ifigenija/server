@@ -1,36 +1,36 @@
 <?php
-$skupaj = $model->getVrPremiere() +
-        $model->getVrPonovitvePremier() +
-        $model->getVrPonovitvePrejsnjih() +
-        $model->getVrGostovanjaZamejstvo() +
-        $model->getVrFestivali() +
-        $model->getVrGostovanjaInt() +
-        $model->getVrOstalo();
+$skupaj = $postavke->getVrPremiere() +
+        $postavke->getVrPonovitvePremier() +
+        $postavke->getVrPonovitvePrejsnjih() +
+        $postavke->getVrGostovanjaZamejstvo() +
+        $postavke->getVrFestivali() +
+        $postavke->getVrGostovanjaInt() +
+        $postavke->getVrOstalo();
 ?>
-<?php if ($model->getPodskupina() == '0') { ?>
+<?php if ($postavke->getPodskupina() == '0') { ?>
     <tr class="suma-row">
-        <td><?= $model->getSkupina() . '.' . $model->getPodSkupina() ?></td>
-        <td><?= $model->getnaziv() ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrPremiere(), 2, ',', '.') ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrPonovitvePremier(), 2, ',', '.') ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrPonovitvePrejsnjih(), 2, ',', '.') ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrGostovanjaZamejstvo(), 2, ',', '.') ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrFestivali(), 2, ',', '.') ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrGostovanjaInt(), 2, ',', '.') ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrOstalo(), 2, ',', '.') ?></td>
+        <td><?= $postavke->getSkupina() . '.' . $postavke->getPodSkupina() ?></td>
+        <td><?= $postavke->getnaziv() ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrPremiere(), 2, ',', '.') ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrPonovitvePremier(), 2, ',', '.') ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrPonovitvePrejsnjih(), 2, ',', '.') ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrGostovanjaZamejstvo(), 2, ',', '.') ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrFestivali(), 2, ',', '.') ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrGostovanjaInt(), 2, ',', '.') ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrOstalo(), 2, ',', '.') ?></td>
         <td class="cell-type-number"><?= number_format($skupaj, 2, ',', '.') ?></td>
     </tr>
 <?php } else { ?>
     <tr>
-        <td><?= $model->getSkupina() . '.' . $model->getPodSkupina() ?></td>
-        <td><?= $model->getnaziv() ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrPremiere(), 2, ',', '.') ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrPonovitvePremier(), 2, ',', '.') ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrPonovitvePrejsnjih(), 2, ',', '.') ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrGostovanjaZamejstvo(), 2, ',', '.') ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrFestivali(), 2, ',', '.') ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrGostovanjaInt(), 2, ',', '.') ?></td>
-        <td class="cell-type-number"><?= number_format($model->getVrOstalo(), 2, ',', '.') ?></td>
+        <td><?= $postavke->getSkupina() . '.' . $postavke->getPodSkupina() ?></td>
+        <td><?= $postavke->getnaziv() ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrPremiere(), 2, ',', '.') ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrPonovitvePremier(), 2, ',', '.') ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrPonovitvePrejsnjih(), 2, ',', '.') ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrGostovanjaZamejstvo(), 2, ',', '.') ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrFestivali(), 2, ',', '.') ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrGostovanjaInt(), 2, ',', '.') ?></td>
+        <td class="cell-type-number"><?= number_format($postavke->getVrOstalo(), 2, ',', '.') ?></td>
         <td class="cell-type-number"><?= number_format($skupaj, 2, ',', '.') ?></td>
     </tr>
 <?php }; ?>

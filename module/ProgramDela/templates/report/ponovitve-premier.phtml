@@ -4,34 +4,39 @@
  * User: Alesch
  * Date: 21.9.2015
  */
-
-$drugiViri       = $model->drugiViri;
-$kop             = $model->koprodukcije;
+$drugiViri     = $model->getDrugiViri();
+$kop           = $model->getKoprodukcije();
 // iz Ponovitvepremiere
-$imakop          = $model->imaKoprodukcije;
-$upr             = $model->uprizoritev->naslov;
-$naDomacemOdru   = number_format($model->ponoviDoma, 0, ',', '.');
-$naGosSlo        = number_format($model->ponoviGost, 0, ',', '.');
-$naGosZam        = number_format($model->ponoviZamejo, 0, ',', '.');
-$obiskDoma       = number_format($model->obiskDoma, 0, ',', '.');
-$obiskGosSlo     = number_format($model->obiskGost, 0, ',', '.');
-$obiskGosZam     = number_format($model->obiskZamejo, 0, ',', '.');
-$sredstvaMK      = number_format($model->zaproseno, 2, ',', '.');
-$celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');
-$vredPonMat      = number_format($model->celotnaVrednostMat, 2, ',', '.');
-$vredPonGos      = number_format($model->celotnaVrednostGostovSZ, 2, ',', '.');
-$tant            = number_format($model->tantieme, 2, ',', '.');
-$avtHonorar      = number_format($model->avtorskiHonorarji, 2, ',', '.');
-$lastSredstva    = number_format($model->lastnaSredstva, 2, ',', '.');
-$vlozGos         = number_format($model->vlozekGostitelja, 2, ',', '.');
-$vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
+$imakop        = $model->getImaKoprodukcije();
+$upr           = $model->uprizoritev->naslov;
+$naDomacemOdru = number_format($model->ponoviDoma, 0, ',', '.');
+$naGosSlo      = number_format($model->ponoviGost, 0, ',', '.');
+$naKopOdru     = number_format($model->getPonoviKopr(), 0, ',', '.');
+$naGosZam      = number_format($model->ponoviZamejo, 0, ',', '.');
+$obiskDoma     = number_format($model->obiskDoma, 0, ',', '.');
+$obiskGosSlo   = number_format($model->obiskGost, 0, ',', '.');
+$obiskGosZam   = number_format($model->obiskZamejo, 0, ',', '.');
+$obiskKopr     = number_format($model->getObiskKopr(), 0, ',', '.'); 
+$sredstvaMK    = number_format($model->zaproseno, 2, ',', '.');
+$celotnaVred   = number_format($model->celotnaVrednost, 2, ',', '.');
+$nasDelez      = number_format($model->getNasDelez(), 2, ',', '.');
+$vredPonMat    = number_format($model->celotnaVrednostMat, 2, ',', '.');
+$vredPonGos    = number_format($model->celotnaVrednostGostovSZ, 2, ',', '.');
+$tant          = number_format($model->tantieme, 2, ',', '.');
+$avtHonorar    = number_format($model->avtorskiHonorarji, 2, ',', '.');
+$lastSredstva  = number_format($model->lastnaSredstva, 2, ',', '.');
+$vlozOst       = number_format($model->drugiJavni, 2, ',', '.');
 ?>
 <div id="ponovitve-premier">
-    <h2>Ponovitve premier</h2>
+    <h2>Ponovitve premiernih uprizoritev</h2>
     <table>
-        <tr>
+        <tr class="suma-row">
             <td>Naslov uprizoritve:</td>
             <td  class="right-align"><?= $upr ?></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
         </tr>
         <tr>
             <td>Načrtovano št. vseh ponovitev v letu 2015:</td>
@@ -42,12 +47,20 @@ $vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
             <td class="cell-type-number"><?= $naDomacemOdru ?></td>
         </tr>
         <tr>
+            <td class="alineja">na odru slovenskega ali zamejskega koproducenta:</td>
+            <td class="cell-type-number"><?= $naKopOdru ?></td>
+        </tr>
+        <tr>
             <td class="alineja">na gostovanjih po Sloveniji:</td>
             <td class="cell-type-number"><?= $naGosSlo ?></td>
         </tr>
         <tr>
             <td class="alineja">na gostovanjih v zamejstvu:</td>
             <td class="cell-type-number"><?= $naGosZam ?></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
         </tr>
         <tr>
             <td>Načrtovano št. vseh obiskovalcev:</td>
@@ -58,6 +71,10 @@ $vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
             <td class="cell-type-number"><?= $obiskDoma ?></td>
         </tr>
         <tr>
+            <td class="alineja">na odru slovenskega ali zamejskega koproducenta:</td>
+            <td class="cell-type-number"><?= $obiskKopr ?></td>
+        </tr>
+        <tr>
             <td class="alineja">na gostovanjih po Sloveniji:</td>
             <td class="cell-type-number"><?= $obiskGosSlo ?></td>
         </tr>
@@ -66,20 +83,27 @@ $vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
             <td class="cell-type-number"><?= $obiskGosZam ?></td>
         </tr>
         <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
             <td>Zaprošena sredstva Ministrstva za kulturo:</td>
             <td class="cell-type-number"><?= $sredstvaMK ?></td>
         </tr>
-        
         <tr>
             <td>Celotna vrednost ponovitev:</td>
             <td class="cell-type-number"><?= $celotnaVred ?></td>
         </tr>
         <tr>
-            <td class="alineja">vrednost ponovitev na matičnem odru:</td>
+            <td class="alineja">od tega stroški matičnega javnega zavoda:</td>
+            <td class="cell-type-number"><?= $nasDelez ?></td>
+        </tr>
+        <tr>
+            <td>vrednost ponovitev na matičnem odru:</td>
             <td class="cell-type-number"><?= $vredPonMat ?></td>
         </tr>
         <tr>
-            <td class="alineja">vrednost ponovitev na gostovanjih po SLO in v zamejstvu:</td>
+            <td>vrednost ponovitev na gostovanjih po SLO in v zamejstvu:</td>
             <td class="cell-type-number"><?= $vredPonGos ?></td>
         </tr>
         <tr>
@@ -94,31 +118,34 @@ $vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
             <td>Lastna sredstva:</td>
             <td class="cell-type-number"><?= $lastSredstva ?></td>
         </tr>
-        <tr>
-            <td>Drugi Viri:</td>
-            <td></td>
-        </tr>
-        <?php
+        <?php if ($drugiViri) { ?>
+            <tr class="suma-row">
+                <td>Drugi Viri:</td>
+                <td class="cell-type-number"><?= number_format($model->vsotaDrugihVirov(), 2, ',', '.') ?> </td>
+            </tr>        
+            <?php
             $this->partialLoop()->setObjectKey('drugiViri');
-            echo $this->partialLoop('drugiViri', $drugiViri);
-        ?>
-        <?php if($imakop) { ?>
+            echo $this->partialLoop('drugiViri.phtml', $drugiViri); ?>
             <tr>
-                <td class="alineja">od tega vložek koproducenta:</td>
-                <td></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
             </tr>
-            <tr>
+        <?php } ?>
+
+        <?php if ($imakop) { ?>
+            <tr class="suma-row">
                 <td>Koproducenti:</td>
                 <td></td>
             </tr>
-            <?php 
-                echo $this->partial('koproducenti', array('kop' => $kop)); 
+            <?php
+            $this->partial()->setObjectKey('kop');
+            echo $this->partial('koproducenti', $kop);
             ?>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
         <?php } ?>
-        <tr>
-            <td class="alineja">od tega vložek gostitelja:</td>
-            <td class="cell-type-number"><?= $vlozGos ?></td>
-        </tr>
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
             <td class="cell-type-number"><?= $vlozOst ?></td>

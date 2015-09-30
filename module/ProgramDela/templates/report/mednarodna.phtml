@@ -7,11 +7,12 @@
 // 
 $drugiViri       = $model->drugiViri;
 
+
 // iz mednarodna gostovanja
 /** @var \ProgramDela\Entity\ProgramGostovanje $model */
 $upr             = $model->uprizoritev->naslov;
 $krajGos         = $model->krajGostovanja . ' / ' . $model->drzavaGostovanja->naziv;
-$datumGos        = $model->datumGostovanja ? $model->getDatumGostovanja()->format('d-m-Y'):'';
+$datumGos        = $model->datumGostovanja? $model->getDatumGostovanja()->format('d-m-Y'):'';
 $ustanovaGos     = $model->ustanova;
 $stPonovitevGos  = number_format($model->ponoviInt, 0, ',', '.');
 $stPonovitevKop  = number_format($model->ponoviKoprInt, 0, ',', '.');
@@ -24,11 +25,12 @@ $celotniStro     = number_format($model->nasDelez, 2, ',', '.');
 $celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');        
 $lastSredstva    = number_format($model->lastnaSredstva, 2, ',', '.');
 $drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
+$zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
 ?>
 <div id="mednarodna">
     <h2>Mednarodna gostovanja - gostovanja javnega zavoda v tujini (brez Zamejstva)</h2>
     <table>
-        <tr>
+        <tr class="suma-row">
             <td>Naslov uprizoritve:</td>
             <td class="right-align"><?= $upr ?></td>
         </tr>
@@ -65,6 +67,10 @@ $drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
             <td class="right-align"><?= $organizator ?></td>
         </tr>
         <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
             <td>Transportni stroški opreme ter stroški prevozov ansambla in tehnike:</td>
             <td class="cell-type-number"><?= $transStro ?></td>
         </tr>
@@ -77,18 +83,30 @@ $drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
             <td class="cell-type-number"><?= $celotniStro ?></td>
         </tr>
         <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Zaprošena sredstva Ministrstva za kulturo:</td>
+            <td class="cell-type-number"><?= $zaprSredstva ?></td>
+        </tr>
+        <tr>
             <td>Lastna sredstva:</td>
             <td class="cell-type-number"><?= $lastSredstva ?></td>
         </tr>
-
-        <tr>
-            <td>Drugi Viri:</td>
-            <td></td>
-        </tr>
-        <?php
+        <?php if ($drugiViri) { ?>
+            <tr class="suma-row">
+                <td>Drugi Viri:</td>
+                <td class="cell-type-number"><?= number_format($model->vsotaDrugihVirov(), 2, ',', '.') ?> </td>
+            </tr>        
+            <?php
             $this->partialLoop()->setObjectKey('drugiViri');
-            echo $this->partialLoop('drugiViri', $drugiViri);
-        ?>
+            echo $this->partialLoop('drugiViri.phtml', $drugiViri); ?>
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
+            </tr>
+        <?php } ?>
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
             <td class="cell-type-number"><?= $drugSredstva ?></td>

@@ -18,9 +18,11 @@ $stHonIgr        = number_format($model->stHonorarnihIgr, 0, ',', '.');
 $stHonTuj        = number_format($model->stHonorarnihIgrTujJZ, 0, ',', '.');
 $stSamozap       = number_format($model->stHonorarnihIgrSamoz, 0, ',', '.');
 $naDomacemOdru   = number_format($model->ponoviDoma, 0, ',', '.');
+$naOdruKopr      = number_format($model->ponoviKopr, 0, ',', '.');
 $naGosSlo        = number_format($model->ponoviGost, 0, ',', '.');
 $naGosZam        = number_format($model->ponoviZamejo, 0, ',', '.');
 $obiskDoma       = number_format($model->obiskDoma, 0, ',', '.');
+$obiskKopr       = number_format($model->obiskKopr, 0, ',', '.');
 $obiskGosSlo     = number_format($model->obiskGost, 0, ',', '.');
 $obiskGosZam     = number_format($model->obiskZamejo, 0, ',', '.');
 $sredstvaMK      = number_format($model->zaproseno, 2, ',', '.');
@@ -34,11 +36,12 @@ $vlozGos         = number_format($model->vlozekGostitelja, 2, ',', '.');
 $vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
 
 ?>
-<div id="premiere">
-    <h2>Ponovitve prejšnjih uprizoritev</h2>
+<div id="ponovitve-prej">
+    <h2>Ponovitve uprizoritev iz prejšnjih sezon</h2>
     <table>
-        <?php 
-            echo $this->partial('uprizoritev', array('upr' => $upr)); 
+        <?php
+            $this->partial()->setObjectKey('upr');
+            echo $this->partial('uprizoritev', $upr);
         ?>
         <tr>
             <td>Tip programske enote:</td>
@@ -81,12 +84,20 @@ $vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
             <td class="cell-type-number"><?= $naDomacemOdru ?></td>
         </tr>
         <tr>
+            <td class="alineja">na odru slovenskega ali zamejskega koproducenta:</td>
+            <td class="cell-type-number"><?= $naOdruKopr ?></td>
+        </tr>
+        <tr>
             <td class="alineja">na gostovanjih po Sloveniji:</td>
             <td class="cell-type-number"><?= $naGosSlo ?></td>
         </tr>
         <tr>
             <td class="alineja">na gostovanjih v zamejstvu:</td>
             <td class="cell-type-number"><?= $naGosZam ?></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
         </tr>
         <tr>
             <td>Načrtovano št. vseh obiskovalcev:</td>
@@ -101,9 +112,17 @@ $vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
             <td class="cell-type-number"><?= $obiskGosSlo ?></td>
         </tr>
         <tr>
+            <td class="alineja">na odru slovenskega ali zamejskega koproducenta:</td>
+            <td class="cell-type-number"><?= $obiskKopr ?></td>
+        </tr>
+        <tr>
             <td class="alineja">na gostovanjih v zamejstvu:</td>
             <td class="cell-type-number"><?= $obiskGosZam ?></td>
         </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>      
         <tr>
             <td>Zaprošena sredstva Ministrstva za kulturo:</td>
             <td class="cell-type-number"><?= $sredstvaMK ?></td>
@@ -132,26 +151,34 @@ $vlozOst         = number_format($model->drugiJavni, 2, ',', '.');
             <td>Lastna sredstva:</td>
             <td class="cell-type-number"><?= $lastSredstva ?></td>
         </tr>
-        <tr>
-            <td>Drugi Viri:</td>
-            <td></td>
-        </tr>
-        <?php
+        
+        <?php if ($drugiViri) { ?>
+            <tr class="suma-row">
+                <td>Drugi Viri:</td>
+                <td class="cell-type-number"><?= number_format($model->vsotaDrugihVirov(), 2, ',', '.') ?> </td>
+            </tr>        
+            <?php
             $this->partialLoop()->setObjectKey('drugiViri');
-            echo $this->partialLoop('drugiViri', $drugiViri);
-        ?>
-        <?php if($imakop) { ?>
+            echo $this->partialLoop('drugiViri.phtml', $drugiViri); ?>
             <tr>
-                <td class="alineja">od tega vložek koproducenta:</td>
+                <td>&nbsp;</td>
+                <td></td>
+            </tr>
+        <?php } ?>
+        <?php if ($imakop) { ?>
+            <tr class="suma-row">
+                <td>Koproducenti:</td>
                 <td></td>
             </tr>
             <?php
-            echo $this->partial('koproducenti', array('kop' => $kop)); 
-        } ?>
-        <tr>
-            <td class="alineja">od tega vložek gostitelja:</td>
-            <td class="cell-type-number"><?= $vlozGos ?></td>
-        </tr>
+            $this->partial()->setObjectKey('kop');
+            echo $this->partial('koproducenti', $kop);
+            ?>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        <?php } ?>
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
             <td class="cell-type-number"><?= $vlozOst ?></td>

@@ -126,6 +126,7 @@ class ProgramDela
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\PostavkaCDve", mappedBy="programDela")
+     * @ORM\OrderBy({"skupina" = "ASC", "podskupina" = "ASC"})
      * @var <PostavkeC2>
      */
     protected $postavkeC2;

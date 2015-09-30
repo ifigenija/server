@@ -5,19 +5,19 @@
  * Date: 21.9.2015
  */
 // 
-$drugiViri       = $model->drugiViri;
-$kop             = $model->koproducenti;
-$pEnote          = $model->programskeEnoteSklopa;
+$drugiViri = $model->drugiViri;
+$kop       = $model->koproducenti;
+$pEnote    = $model->programskeEnoteSklopa;
 
-$naziv           = $model->naziv;
-$stEnot          = number_format($model->stPE, 0, ',', '.');
-$stGledalcev     = number_format($model->obiskInt, 0, ',', '.');
-$celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');        
-$lastSredstva    = number_format($model->lastnaSredstva, 2, ',', '.');
-$drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
-$stZaposlenih    = number_format($model->stZaposlenih, 0, ',', '.');
-$stAvtHon        = number_format($model->stHonorarnih, 0, ',', '.');
-$zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
+$naziv        = $model->naziv;
+$stEnot       = number_format($model->stPE, 0, ',', '.');
+$stGledalcev  = number_format($model->obiskInt, 0, ',', '.');
+$celotnaVred  = number_format($model->celotnaVrednost, 2, ',', '.');
+$lastSredstva = number_format($model->lastnaSredstva, 2, ',', '.');
+$drugSredstva = number_format($model->drugiJavni, 2, ',', '.');
+$stZaposlenih = number_format($model->stZaposlenih, 0, ',', '.');
+$stAvtHon     = number_format($model->stHonorarnih, 0, ',', '.');
+$zaprSredstva = number_format($model->zaproseno, 2, ',', '.');
 ?>
 <div id="razno">
     <h2>Razno</h2>
@@ -26,23 +26,30 @@ $zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
             <td>Naziv Sklopa:</td>
             <td class="right-align"><?= $naziv ?></td>
         </tr>
-        <?php 
-            $this->partialLoop()->setObjectKey('pEnote');
-            echo $this->partialLoop('programske-enote', $pEnote); 
+        <?php
+        $this->partialLoop()->setObjectKey('pEnote');
+        echo $this->partialLoop('programske-enote', $pEnote);
         ?>
         <tr>
             <td>Št. programskih enot v sklopu:</td>
             <td class="cell-type-number"><?= $stEnot ?></td>
         </tr>
-        <?php if($imakop) { ?>
-            <tr>
+
+        <?php if ($imakop) { ?>
+            <tr class="suma-row">
                 <td>Koproducenti:</td>
                 <td></td>
             </tr>
-            <?php 
-                echo $this->partial('koproducenti', array('kop' => $kop)); 
+            <?php
+            $this->partial()->setObjectKey('kop');
+            echo $this->partial('koproducenti', $kop);
             ?>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
         <?php } ?>
+
         <tr>
             <td>Načrtovano število obiskovalcev:</td>
             <td class="cell-type-number"><?= $stGledalcev ?></td>
@@ -63,15 +70,20 @@ $zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
             <td>Lastna sredstva:</td>
             <td class="cell-type-number"><?= $lastSredstva ?></td>
         </tr>
-
-        <tr>
-            <td>Drugi Viri:</td>
-            <td></td>
-        </tr>
-        <?php
+        <?php if ($drugiViri) { ?>
+            <tr class="suma-row">
+                <td>Drugi Viri:</td>
+                <td class="cell-type-number"><?= number_format($model->vsotaDrugihVirov(), 2, ',', '.') ?> </td>
+            </tr>        
+            <?php
             $this->partialLoop()->setObjectKey('drugiViri');
-            echo $this->partialLoop('drugiViri', $drugiViri);
-        ?>
+            echo $this->partialLoop('drugiViri.phtml', $drugiViri);
+            ?>
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
+            </tr>
+        <?php } ?>
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
             <td class="cell-type-number"><?= $drugSredstva ?></td>
