@@ -13,12 +13,12 @@ $kop             = $model->koprodukcije;
 $drugiViri       = $model->drugiViri;
 // iz premiere
 $imakop          = $model->imaKoprodukcije;
-$stUmetnikov     = $model->stZaposUmet;
-$stDrugih        = $model->stZaposDrug;
-$stHonVsi        = $model->stHonorarnih;
-$stHonIgr        = $model->stHonorarnihIgr;
-$stHonTuj        = $model->stHonorarnihIgrTujJZ;
-$stSamozap       = $model->stHonorarnihIgrSamoz;
+$stUmetnikov     = number_format($model->stZaposUmet, 0, ',', '');
+$stDrugih        = number_format($model->stZaposDrug, 0, ',', '');
+$stHonVsi        = number_format($model->stHonorarnih, 0, ',', '');
+$stHonIgr        = number_format($model->stHonorarnihIgr, 0, ',', '');
+$stHonTuj        = number_format($model->stHonorarnihIgrTujJZ, 0, ',', '');
+$stSamozap       = number_format($model->stHonorarnihIgrSamoz, 0, ',', '');
 
 $trajanjeStudija = 'od ' . ($upr->getDatumZacStudija() ?  $upr->datumZacStudija->format('d-m-Y') :'' ). ' do ' .($upr->getDatumZacStudija() ?  $upr->datumPremiere->format('d-m-Y'): '');
 $datumPremiere   = $upr->getDatumPremiere() ? $upr->getDatumPremiere()->format('d-m-Y'): '';

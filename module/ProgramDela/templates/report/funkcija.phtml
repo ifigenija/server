@@ -1,6 +1,12 @@
-<?php if ($alt->getPomembna()) { ?>
+<?php 
+$alt = $fun->getAlternacije();
+foreach ($alt as $alternacija) {
+    if ($alternacija->getPomembna()) { ?>
     <tr>
         <td><?= $fun->getTipFunkcije()->getIme() . ' - ' . $fun->getNaziv() ?></td>
-        <td class="right-align"><?= $alt->getOseba()->getPolnoIme() ?></td>
+        <td class="right-align"><?= $alternacija->getOseba()->getPolnoIme() ?></td>
     </tr>
-<?php } ?>
+<?php
+    }
+}
+?>

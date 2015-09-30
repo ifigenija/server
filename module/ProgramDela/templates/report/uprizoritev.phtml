@@ -4,21 +4,26 @@
  * User: Alesch
  * date: 21.9.2015
  */
-$fun = $this->upr->getFunkcije()->getAlternacije();;
+
+$fun = $upr->getFunkcije();
 ?>
 
 <tr>
     <td>Naslov uprizoritve:</td>
-    <td class="right-align"><?= $this->upr->naslov ?></td>
+    <td class="right-align"><?= $upr->getNaslov() ?></td>
 </tr>
 <tr>
-    <td>Avtor:</td>
-    <td class="right-align"><?= $this->upr->avtor ?></td>
+    <td>Zvrst uprizoritve:</td>
+    <td class="right-align"><?= $upr->getZvrstUprizoritve() ? $upr->getZvrstUprizoritve()->getNaziv() : '' ?></td>
+</tr>
+<tr>
+    <td>Avtor (pisec dela):</td>
+    <td class="right-align"><?= $upr->getAvtor() ?></td>
 </tr>
 
 <tr>
     <td>Podnaslov:</td>
-    <td class="right-align"><?= $this->upr->podnaslov ?></td>
+    <td class="right-align"><?= $upr->getPodnaslov() ?></td>
 </tr> 
 <?php 
     $this->partialLoop()->setObjectKey('fun');
