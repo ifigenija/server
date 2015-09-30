@@ -23,7 +23,7 @@ class Permissions
      */
     protected $sortOptions = [
         'default' => [
-            'name' => ['alias' => 'u.name'],
+            'name' => ['alias' => 'p.name'],
         ]
     ];
 
