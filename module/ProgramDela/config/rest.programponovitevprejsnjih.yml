@@ -37,10 +37,10 @@ forms:
 #            - stZaposlenih
             - stZaposUmet
             - stZaposDrug
-            - stHonorarnih
-            - stHonorarnihIgr
-            - stHonorarnihIgrTujJZ
-            - stHonorarnihIgrSamoz
+            - stHonorarnihZun
+            - stHonorarnihZunIgr
+            - stHonorarnihZunIgrTujJZ
+            - stHonorarnihZunSamoz
 #            - koprodukcije
         hydrator:
             lookups: 

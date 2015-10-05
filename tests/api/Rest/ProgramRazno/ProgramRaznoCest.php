@@ -82,7 +82,7 @@ class ProgramRaznoCest
 //            'stPE'            => 1,
 //            'obiskDoma'       => 1,
             'stZaposlenih'    => 1,
-            'stHonorarnih'    => 1,
+            'stHonorarnihZun'    => 1,
             'zaproseno'       => 0,
 //            'celotnaVrednost' => 1.24,
 //            'nasDelez'        => 4,
@@ -108,7 +108,7 @@ class ProgramRaznoCest
 //            'stPE'            => 2,
 //            'obiskDoma'       => 2,
             'stZaposlenih'    => 2,
-            'stHonorarnih'    => 2,
+            'stHonorarnihZun'    => 2,
             'zaproseno'       => 0,
 //            'celotnaVrednost' => 2.23,
 //            'nasDelez'        => 2.23,
@@ -218,7 +218,7 @@ class ProgramRaznoCest
         $I->assertEquals($ent['stPE'], 2);
         $I->assertEquals($ent['obiskDoma'], 70);
         $I->assertEquals($ent['stZaposlenih'], 1);
-        $I->assertEquals($ent['stHonorarnih'], 1);
+        $I->assertEquals($ent['stHonorarnihZun'], 1);
         $I->assertEquals($ent['celotnaVrednost'], 4);
         $I->assertEquals($ent['nasDelez'], 4, "naš delež kot setštevek vrednostiPE");
         $I->assertEquals($ent['lastnaSredstva'], $ent['nasDelez'] - $ent['zaproseno'] - $ent['drugiJavni'] - $ent['vlozekGostitelja'], "lastna sredstva");

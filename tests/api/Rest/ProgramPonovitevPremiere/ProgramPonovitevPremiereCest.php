@@ -470,11 +470,11 @@ class ProgramPonovitevPremiereCest
             'sort'                    => 1,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
-            'stHonorarnih'            => 1,
-            'stHonorarnihIgr'         => 1,
-            'stHonorarnihIgrTujJZ'    => 1,
-            'stHonorarnihIgrTujJZ'    => 1,
-            'stHonorarnihIgrSamoz'    => 1,
+//            'stHonorarnih'            => 1,
+//            'stHonorarnihIgr'         => 1,
+//            'stHonorarnihIgrTujJZ'    => 1,
+//            'stHonorarnihIgrTujJZ'    => 1,
+//            'stHonorarnihIgrSamoz'    => 1,
         ];
         codecept_debug($data);
         $resp = $I->failToCreate($this->restUrl, $data);

@@ -107,9 +107,10 @@ class ProgramGostovanje
         $this->ponoviZamejo            = 0;
         $this->ponoviGost              = 0;
         $this->ponoviKopr              = 0;
-        $this->stHonorarnih            = 0;
-        $this->stHonorarnihIgr         = 0;
-        $this->stHonorarnihIgrTujJZ    = 0;
+        $this->stHonorarnihZun         = 0;
+        $this->stHonorarnihZunIgr      = 0;
+        $this->stHonorarnihZunIgrTujJZ = 0;
+        $this->stHonorarnihZunSamoz    = 0;
         $this->stZaposlenih            = 0;
         $this->stZaposUmet             = 0;
         $this->stZaposDrug             = 0;
@@ -200,13 +201,13 @@ class ProgramGostovanje
         return $this;
     }
 
-    public function setDokument(ProgramDela $dokument=null)
+    public function setDokument(ProgramDela $dokument = null)
     {
         $this->dokument = $dokument;
         return $this;
     }
 
-    public function setGostitelj(Popa $gostitelj=null)
+    public function setGostitelj(Popa $gostitelj = null)
     {
         $this->gostitelj = $gostitelj;
         return $this;
@@ -217,7 +218,7 @@ class ProgramGostovanje
         return $this->drzavaGostovanja;
     }
 
-    public function setDrzavaGostovanja(Drzava $drzavaGostovanja=null)
+    public function setDrzavaGostovanja(Drzava $drzavaGostovanja = null)
     {
         $this->drzavaGostovanja = $drzavaGostovanja;
         return $this;

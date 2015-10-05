@@ -23,7 +23,7 @@ forms:
             - programskoTelo
             - stTujihSelektorjev
             - stZaposlenih
-            - stHonorarnih
+            - stHonorarnihZun
             - zaproseno
 #            - celotnaVrednost
             - nasDelez

@@ -174,11 +174,11 @@ class ProgramPonovitevPrejsnjihCest
             'sort'                    => 1,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
-            'stHonorarnih'            => 1,
-            'stHonorarnihIgr'         => 1,
-            'stHonorarnihIgrTujJZ'    => 1,
-            'stHonorarnihIgrTujJZ'    => 1,
-            'stHonorarnihIgrSamoz'    => 1,
+            'stHonorarnihZun'            => 1,
+            'stHonorarnihZunIgr'         => 1,
+            'stHonorarnihZunIgrTujJZ'    => 1,
+            'stHonorarnihZunIgrTujJZ'    => 1,
+            'stHonorarnihZunSamoz'    => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -215,10 +215,10 @@ class ProgramPonovitevPrejsnjihCest
             'sort'                    => 2,
             'stZaposUmet'             => 2,
             'stZaposDrug'             => 2,
-            'stHonorarnih'            => 2,
-            'stHonorarnihIgr'         => 2,
-            'stHonorarnihIgrTujJZ'    => 2,
-            'stHonorarnihIgrSamoz'    => 2,
+            'stHonorarnihZun'            => 2,
+            'stHonorarnihZunIgr'         => 2,
+            'stHonorarnihZunIgrTujJZ'    => 2,
+            'stHonorarnihZunSamoz'    => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -284,10 +284,10 @@ class ProgramPonovitevPrejsnjihCest
         $I->assertEquals($ent['dokument'], null);
         $I->assertEquals($ent['stZaposUmet'], 1);
         $I->assertEquals($ent['stZaposDrug'], 1);
-        $I->assertEquals($ent['stHonorarnih'], 1);
-        $I->assertEquals($ent['stHonorarnihIgr'], 1);
-        $I->assertEquals($ent['stHonorarnihIgrTujJZ'], 1);
-        $I->assertEquals($ent['stHonorarnihIgrSamoz'], 1);
+        $I->assertEquals($ent['stHonorarnihZun'], 1);
+        $I->assertEquals($ent['stHonorarnihZunIgr'], 1);
+        $I->assertEquals($ent['stHonorarnihZunIgrTujJZ'], 1);
+        $I->assertEquals($ent['stHonorarnihZunSamoz'], 1);
     }
 
     /**
@@ -495,11 +495,11 @@ class ProgramPonovitevPrejsnjihCest
             'sort'                    => 1,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
-            'stHonorarnih'            => 1,
-            'stHonorarnihIgr'         => 1,
-            'stHonorarnihIgrTujJZ'    => 1,
-            'stHonorarnihIgrTujJZ'    => 1,
-            'stHonorarnihIgrSamoz'    => 1,
+            'stHonorarnihZun'            => 1,
+            'stHonorarnihZunIgr'         => 1,
+            'stHonorarnihZunIgrTujJZ'    => 1,
+            'stHonorarnihZunIgrTujJZ'    => 1,
+            'stHonorarnihZunSamoz'    => 1,
         ];
         codecept_debug($data);
         $resp = $I->failToCreate($this->restUrl, $data);

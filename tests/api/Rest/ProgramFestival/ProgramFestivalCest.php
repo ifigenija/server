@@ -71,8 +71,8 @@ class ProgramFestivalCest
         $popaId = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
         codecept_debug($popaId);
 
-        $popa = $I->successfullyGet($this->popaUrl, $popaId);
-        $this->maticnoGledalisce=$popa['sifra'];
+        $popa                    = $I->successfullyGet($this->popaUrl, $popaId);
+        $this->maticnoGledalisce = $popa['sifra'];
     }
 
     /**
@@ -135,7 +135,7 @@ class ProgramFestivalCest
             'programskoTelo'     => 'zz',
             'stTujihSelektorjev' => 1,
             'stZaposlenih'       => 1,
-            'stHonorarnih'       => 1,
+            'stHonorarnihZun'    => 1,
 //            'celotnaVrednost'         => 1.24,
             'nasDelez'           => 4,
             'zaproseno'          => 1.24,
@@ -168,7 +168,7 @@ class ProgramFestivalCest
             'programskoTelo'     => 'aa',
             'stTujihSelektorjev' => 2,
             'stZaposlenih'       => 2,
-            'stHonorarnih'       => 2,
+            'stHonorarnihZun'    => 2,
 //            'zaproseno'            =>1.23,
             'nasDelez'           => 2.24,
             'zaproseno'          => 1.11,
@@ -227,7 +227,7 @@ class ProgramFestivalCest
         $I->assertEquals($ent['programskoTelo'], 'zz');
         $I->assertEquals($ent['stTujihSelektorjev'], 1);
         $I->assertEquals($ent['stZaposlenih'], 1);
-        $I->assertEquals($ent['stHonorarnih'], 1);
+        $I->assertEquals($ent['stHonorarnihZun'], 1);
         $I->assertEquals($ent['zaproseno'], 1.22, "zaprošeno");
         $I->assertEquals($ent['celotnaVrednost'], 4);
         $I->assertEquals($ent['nasDelez'], 4);

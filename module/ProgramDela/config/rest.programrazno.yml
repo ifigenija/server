@@ -10,7 +10,7 @@ forms:
             - naziv
 #            - stPE
             - stZaposlenih
-            - stHonorarnih
+            - stHonorarnihZun
             - zaproseno
 #            - obiskDoma
 #            - celotnaVrednost

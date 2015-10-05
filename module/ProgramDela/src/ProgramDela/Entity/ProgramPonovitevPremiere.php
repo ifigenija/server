@@ -48,11 +48,12 @@ class ProgramPonovitevPremiere
         /**
          * ne velja za ponov. prejšnjih:
          */
-        $this->stZaposUmet          = 0;
-        $this->stZaposDrug          = 0;
-        $this->stHonorarnih         = 0;
-        $this->stHonorarnihIgr      = 0;
-        $this->stHonorarnihIgrTujJZ = 0;
+        $this->stZaposUmet             = 0;
+        $this->stZaposDrug             = 0;
+        $this->stHonorarnihZun         = 0;
+        $this->stHonorarnihZunIgr      = 0;
+        $this->stHonorarnihZunIgrTujJZ = 0;
+        $this->stHonorarnihZunSamoz    = 0;
 
         $this->preracunajPoljaZaMatKoprodukcijo();
 

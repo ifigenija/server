@@ -219,11 +219,11 @@ class EnotaPrograma
      * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
      * 
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="ep.stHonorarnih", description="ep.d.stHonorarnih")
+     * @Max\I18n(label="ep.stHonorarnihZun", description="ep.d.stHonorarnihZun")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    protected $stHonorarnih;
+    protected $stHonorarnihZun;
 
     /**
      *  št. honorarnih igralcev
@@ -231,11 +231,11 @@ class EnotaPrograma
      * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
      * 
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="ep.stHonorarnihIgr", description="ep.d.stHonorarnihIgr")
+     * @Max\I18n(label="ep.stHonorarnihZunIgr", description="ep.d.stHonorarnihZunIgr")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    protected $stHonorarnihIgr;
+    protected $stHonorarnihZunIgr;
 
     /**
      *  št. honorarnih igralcev, zaposlenih v drugih javnih zavodih
@@ -243,11 +243,11 @@ class EnotaPrograma
      * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
      * 
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="ep.stHonorarnihIgrTujJZ", description="ep.d.stHonorarnihIgrTujJZ")
+     * @Max\I18n(label="ep.stHonorarnihZunIgrTujJZ", description="ep.d.stHonorarnihZunIgrTujJZ")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    protected $stHonorarnihIgrTujJZ;
+    protected $stHonorarnihZunIgrTujJZ;
 
     /**
      *  št. honorarnih igralcev,samozaposlenih v drugih javnih zavodih
@@ -255,11 +255,11 @@ class EnotaPrograma
      * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
      * 
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="ep.stHonorarnihIgrSamoz", description="ep.d.stHonorarnihIgrSamoz")
+     * @Max\I18n(label="ep.stHonorarnihZunSamoz", description="ep.d.stHonorarnihZunSamoz")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    protected $stHonorarnihIgrSamoz;
+    protected $stHonorarnihZunSamoz;
 
     /**
      * 
@@ -494,10 +494,10 @@ class EnotaPrograma
         $this->validateIntGE0($this->stZaposlenih, "", 1000684);
         $this->validateIntGE0($this->stZaposUmet, "", 1000685);
         $this->validateIntGE0($this->stZaposDrug, "", 1000686);
-        $this->validateIntGE0($this->stHonorarnih, "", 1000687);
-        $this->validateIntGE0($this->stHonorarnihIgr, "", 1000688);
-        $this->validateIntGE0($this->stHonorarnihIgrTujJZ, "", 1000689);
-        $this->validateIntGE0($this->stHonorarnihIgrSamoz, "", 1000690);
+        $this->validateIntGE0($this->stHonorarnihZun, "", 1000687);
+        $this->validateIntGE0($this->stHonorarnihZunIgr, "", 1000688);
+        $this->validateIntGE0($this->stHonorarnihZunIgrTujJZ, "", 1000689);
+        $this->validateIntGE0($this->stHonorarnihZunSamoz, "", 1000690);
         $this->validateIntGE0($this->obiskDoma, "", 1000691);
         $this->validateIntGE0($this->obiskKopr, "", 1001201);
         $this->validateIntGE0($this->obiskGost, "", 1000692);
@@ -533,456 +533,458 @@ class EnotaPrograma
                     , 1001203);
         }
     }
-
-    public function getId()
+    
+    
+    function getId()
     {
         return $this->id;
     }
 
-    public function getCelotnaVrednost()
+    function getCelotnaVrednost()
     {
         return $this->celotnaVrednost;
     }
 
-    public function getNasDelez()
+    function getNasDelez()
     {
         return $this->nasDelez;
     }
 
-    public function getCelotnaVrednostMat()
+    function getCelotnaVrednostMat()
     {
         return $this->celotnaVrednostMat;
     }
 
-    public function getCelotnaVrednostGostovSZ()
+    function getCelotnaVrednostGostovSZ()
     {
         return $this->celotnaVrednostGostovSZ;
     }
 
-    public function getZaproseno()
+    function getZaproseno()
     {
         return $this->zaproseno;
     }
 
-    public function getLastnaSredstva()
+    function getLastnaSredstva()
     {
         return $this->lastnaSredstva;
     }
 
-    public function getAvtorskiHonorarji()
+    function getAvtorskiHonorarji()
     {
         return $this->avtorskiHonorarji;
     }
 
-    public function getTantieme()
+    function getAvtorskiHonorarjiSamoz()
+    {
+        return $this->avtorskiHonorarjiSamoz;
+    }
+
+    function getTantieme()
     {
         return $this->tantieme;
     }
 
-    public function getDrugiViri()
+    function getAvtorskePravice()
+    {
+        return $this->avtorskePravice;
+    }
+
+    function getMaterialni()
+    {
+        return $this->materialni;
+    }
+
+    function getDrugiViri()
     {
         return $this->drugiViri;
     }
 
-    public function getKoprodukcije()
+    function getImaKoprodukcije()
+    {
+        return $this->imaKoprodukcije;
+    }
+
+    function getKoprodukcije()
     {
         return $this->koprodukcije;
     }
 
-    public function getVlozekGostitelja()
+    function getVlozekGostitelja()
     {
         return $this->vlozekGostitelja;
     }
 
-    public function getDrugiJavni()
+    function getDrugiJavni()
     {
         return $this->drugiJavni;
     }
 
-    public function getStZaposlenih()
+    function getStZaposlenih()
     {
         return $this->stZaposlenih;
     }
 
-    public function getStZaposUmet()
+    function getStZaposUmet()
     {
         return $this->stZaposUmet;
     }
 
-    public function getStZaposDrug()
+    function getStZaposDrug()
     {
         return $this->stZaposDrug;
     }
 
-    public function getStHonorarnih()
+    function getStHonorarnihZun()
     {
-        return $this->stHonorarnih;
+        return $this->stHonorarnihZun;
     }
 
-    public function getStHonorarnihIgr()
+    function getStHonorarnihZunIgr()
     {
-        return $this->stHonorarnihIgr;
+        return $this->stHonorarnihZunIgr;
     }
 
-    public function getStHonorarnihIgrTujJZ()
+    function getStHonorarnihZunIgrTujJZ()
     {
-        return $this->stHonorarnihIgrTujJZ;
+        return $this->stHonorarnihZunIgrTujJZ;
     }
 
-    public function getObiskDoma()
+    function getStHonorarnihZunSamoz()
+    {
+        return $this->stHonorarnihZunSamoz;
+    }
+
+    function getObiskDoma()
     {
         return $this->obiskDoma;
     }
 
-    public function getObiskGost()
+    function getObiskKopr()
+    {
+        return $this->obiskKopr;
+    }
+
+    function getObiskGost()
     {
         return $this->obiskGost;
     }
 
-    public function getObiskZamejo()
+    function getObiskZamejo()
     {
         return $this->obiskZamejo;
     }
 
-    public function getObiskInt()
+    function getObiskInt()
     {
         return $this->obiskInt;
     }
 
-    public function getPonoviDoma()
+    function getObiskKoprInt()
+    {
+        return $this->obiskKoprInt;
+    }
+
+    function getPonoviDoma()
     {
         return $this->ponoviDoma;
     }
 
-    public function getPonoviZamejo()
+    function getPonoviKopr()
+    {
+        return $this->ponoviKopr;
+    }
+
+    function getPonoviZamejo()
     {
         return $this->ponoviZamejo;
     }
 
-    public function getPonoviGost()
+    function getPonoviGost()
     {
         return $this->ponoviGost;
     }
 
-    public function getPonoviInt()
+    function getPonoviKoprInt()
+    {
+        return $this->ponoviKoprInt;
+    }
+
+    function getPonoviInt()
     {
         return $this->ponoviInt;
     }
 
-    public function getUprizoritev()
+    function getUprizoritev()
     {
         return $this->uprizoritev;
     }
 
-    public function getNaziv()
+    function getNaziv()
     {
         return $this->naziv;
     }
 
-    public function getTipProgramskeEnote()
+    function getTipProgramskeEnote()
     {
         return $this->tipProgramskeEnote;
     }
 
-    public function getSort()
+    function getKpe()
+    {
+        return $this->kpe;
+    }
+
+    function getSort()
     {
         return $this->sort;
     }
 
-    public function setId($id)
+    function setId($id)
     {
         $this->id = $id;
         return $this;
     }
 
-    public function setCelotnaVrednost($celotnaVrednost)
+    function setCelotnaVrednost($celotnaVrednost)
     {
         $this->celotnaVrednost = $celotnaVrednost;
         return $this;
     }
 
-    public function setNasDelez($nasDelez)
+    function setNasDelez($nasDelez)
     {
         $this->nasDelez = $nasDelez;
         return $this;
     }
 
-    public function setCelotnaVrednostMat($celotnaVrednostMat)
+    function setCelotnaVrednostMat($celotnaVrednostMat)
     {
         $this->celotnaVrednostMat = $celotnaVrednostMat;
         return $this;
     }
 
-    public function setCelotnaVrednostGostovSZ($celotnaVrednostGostovSZ)
+    function setCelotnaVrednostGostovSZ($celotnaVrednostGostovSZ)
     {
         $this->celotnaVrednostGostovSZ = $celotnaVrednostGostovSZ;
         return $this;
     }
 
-    public function setZaproseno($zaproseno)
+    function setZaproseno($zaproseno)
     {
         $this->zaproseno = $zaproseno;
         return $this;
     }
 
-    public function setLastnaSredstva($lastnaSredstva)
+    function setLastnaSredstva($lastnaSredstva)
     {
         $this->lastnaSredstva = $lastnaSredstva;
         return $this;
     }
 
-    public function setAvtorskiHonorarji($avtorskiHonorarji)
+    function setAvtorskiHonorarji($avtorskiHonorarji)
     {
         $this->avtorskiHonorarji = $avtorskiHonorarji;
         return $this;
     }
 
-    public function setTantieme($tantieme)
-    {
-        $this->tantieme = $tantieme;
-        return $this;
-    }
-
-    public function setDrugiViri($drugiViri)
-    {
-        $this->drugiViri = $drugiViri;
-        return $this;
-    }
-
-    public function setKoprodukcije($koprodukcije)
-    {
-        $this->koprodukcije = $koprodukcije;
-        return $this;
-    }
-
-    public function setVlozekGostitelja($vlozekGostitelja)
-    {
-        $this->vlozekGostitelja = $vlozekGostitelja;
-        return $this;
-    }
-
-    public function setDrugiJavni($drugiJavni)
-    {
-        $this->drugiJavni = $drugiJavni;
-        return $this;
-    }
-
-    public function setStZaposlenih($stZaposlenih)
-    {
-        $this->stZaposlenih = $stZaposlenih;
-        return $this;
-    }
-
-    public function setStZaposUmet($stZaposUmet)
-    {
-        $this->stZaposUmet = $stZaposUmet;
-        return $this;
-    }
-
-    public function setStZaposDrug($stZaposDrug)
-    {
-        $this->stZaposDrug = $stZaposDrug;
-        return $this;
-    }
-
-    public function setStHonorarnih($stHonorarnih)
-    {
-        $this->stHonorarnih = $stHonorarnih;
-        return $this;
-    }
-
-    public function setStHonorarnihIgr($stHonorarnihIgr)
-    {
-        $this->stHonorarnihIgr = $stHonorarnihIgr;
-        return $this;
-    }
-
-    public function setStHonorarnihIgrTujJZ($stHonorarnihIgrTujJZ)
-    {
-        $this->stHonorarnihIgrTujJZ = $stHonorarnihIgrTujJZ;
-        return $this;
-    }
-
-    public function setObiskDoma($obiskDoma)
-    {
-        $this->obiskDoma = $obiskDoma;
-        return $this;
-    }
-
-    public function setObiskGost($obiskGost)
-    {
-        $this->obiskGost = $obiskGost;
-        return $this;
-    }
-
-    public function setObiskZamejo($obiskZamejo)
-    {
-        $this->obiskZamejo = $obiskZamejo;
-        return $this;
-    }
-
-    public function setObiskInt($obiskInt)
-    {
-        $this->obiskInt = $obiskInt;
-        return $this;
-    }
-
-    public function setPonoviDoma($ponoviDoma)
-    {
-        $this->ponoviDoma = $ponoviDoma;
-        return $this;
-    }
-
-    public function setPonoviZamejo($ponoviZamejo)
-    {
-        $this->ponoviZamejo = $ponoviZamejo;
-        return $this;
-    }
-
-    public function setPonoviGost($ponoviGost)
-    {
-        $this->ponoviGost = $ponoviGost;
-        return $this;
-    }
-
-    public function setPonoviInt($ponoviInt)
-    {
-        $this->ponoviInt = $ponoviInt;
-        return $this;
-    }
-
-    public function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev = null)
-    {
-        $this->uprizoritev = $uprizoritev;
-        return $this;
-    }
-
-    public function setNaziv($naziv)
-    {
-        $this->naziv = $naziv;
-        return $this;
-    }
-
-    public function setTipProgramskeEnote(\ProgramDela\Entity\TipProgramskeEnote $tipProgramskeEnote = null)
-    {
-        $this->tipProgramskeEnote = $tipProgramskeEnote;
-        return $this;
-    }
-
-    public function setSort($sort)
-    {
-        $this->sort = $sort;
-        return $this;
-    }
-
-    public function getStHonorarnihIgrSamoz()
-    {
-        return $this->stHonorarnihIgrSamoz;
-    }
-
-    public function setStHonorarnihIgrSamoz($stHonorarnihIgrSamoz)
-    {
-        $this->stHonorarnihIgrSamoz = $stHonorarnihIgrSamoz;
-        return $this;
-    }
-
-    public function getAvtorskePravice()
-    {
-        return $this->avtorskePravice;
-    }
-
-    public function setAvtorskePravice($avtorskePravice)
-    {
-        $this->avtorskePravice = $avtorskePravice;
-        return $this;
-    }
-
-    public function getAvtorskiHonorarjiSamoz()
-    {
-        return $this->avtorskiHonorarjiSamoz;
-    }
-
-    public function setAvtorskiHonorarjiSamoz($avtorskiHonorarjiSamoz)
+    function setAvtorskiHonorarjiSamoz($avtorskiHonorarjiSamoz)
     {
         $this->avtorskiHonorarjiSamoz = $avtorskiHonorarjiSamoz;
         return $this;
     }
 
-    public function getMaterialni()
+    function setTantieme($tantieme)
     {
-        return $this->materialni;
+        $this->tantieme = $tantieme;
+        return $this;
     }
 
-    public function setMaterialni($materialni)
+    function setAvtorskePravice($avtorskePravice)
+    {
+        $this->avtorskePravice = $avtorskePravice;
+        return $this;
+    }
+
+    function setMaterialni($materialni)
     {
         $this->materialni = $materialni;
         return $this;
     }
 
-    public function getImaKoprodukcije()
+    function setDrugiViri($drugiViri)
     {
-        return $this->imaKoprodukcije;
+        $this->drugiViri = $drugiViri;
+        return $this;
     }
 
-    public function setImaKoprodukcije($imaKoprodukcije)
+    function setImaKoprodukcije($imaKoprodukcije)
     {
         $this->imaKoprodukcije = $imaKoprodukcije;
         return $this;
     }
 
-    public function getObiskKopr()
+    function setKoprodukcije($koprodukcije)
     {
-        return $this->obiskKopr;
+        $this->koprodukcije = $koprodukcije;
+        return $this;
     }
 
-    public function getObiskKoprInt()
+    function setVlozekGostitelja($vlozekGostitelja)
     {
-        return $this->obiskKoprInt;
+        $this->vlozekGostitelja = $vlozekGostitelja;
+        return $this;
     }
 
-    public function getPonoviKopr()
+    function setDrugiJavni($drugiJavni)
     {
-        return $this->ponoviKopr;
+        $this->drugiJavni = $drugiJavni;
+        return $this;
     }
 
-    public function getPonoviKoprInt()
+    function setStZaposlenih($stZaposlenih)
     {
-        return $this->ponoviKoprInt;
+        $this->stZaposlenih = $stZaposlenih;
+        return $this;
     }
 
-    public function setObiskKopr($obiskKopr)
+    function setStZaposUmet($stZaposUmet)
+    {
+        $this->stZaposUmet = $stZaposUmet;
+        return $this;
+    }
+
+    function setStZaposDrug($stZaposDrug)
+    {
+        $this->stZaposDrug = $stZaposDrug;
+        return $this;
+    }
+
+    function setStHonorarnihZun($stHonorarnihZun)
+    {
+        $this->stHonorarnihZun = $stHonorarnihZun;
+        return $this;
+    }
+
+    function setStHonorarnihZunIgr($stHonorarnihZunIgr)
+    {
+        $this->stHonorarnihZunIgr = $stHonorarnihZunIgr;
+        return $this;
+    }
+
+    function setStHonorarnihZunIgrTujJZ($stHonorarnihZunIgrTujJZ)
+    {
+        $this->stHonorarnihZunIgrTujJZ = $stHonorarnihZunIgrTujJZ;
+        return $this;
+    }
+
+    function setStHonorarnihZunSamoz($stHonorarnihZunSamoz)
+    {
+        $this->stHonorarnihZunSamoz = $stHonorarnihZunSamoz;
+        return $this;
+    }
+
+    function setObiskDoma($obiskDoma)
+    {
+        $this->obiskDoma = $obiskDoma;
+        return $this;
+    }
+
+    function setObiskKopr($obiskKopr)
     {
         $this->obiskKopr = $obiskKopr;
         return $this;
     }
 
-    public function setObiskKoprInt($obiskKoprInt)
+    function setObiskGost($obiskGost)
+    {
+        $this->obiskGost = $obiskGost;
+        return $this;
+    }
+
+    function setObiskZamejo($obiskZamejo)
+    {
+        $this->obiskZamejo = $obiskZamejo;
+        return $this;
+    }
+
+    function setObiskInt($obiskInt)
+    {
+        $this->obiskInt = $obiskInt;
+        return $this;
+    }
+
+    function setObiskKoprInt($obiskKoprInt)
     {
         $this->obiskKoprInt = $obiskKoprInt;
         return $this;
     }
 
-    public function setPonoviKopr($ponoviKopr)
+    function setPonoviDoma($ponoviDoma)
+    {
+        $this->ponoviDoma = $ponoviDoma;
+        return $this;
+    }
+
+    function setPonoviKopr($ponoviKopr)
     {
         $this->ponoviKopr = $ponoviKopr;
         return $this;
     }
 
-    public function setPonoviKoprInt($ponoviKoprInt)
+    function setPonoviZamejo($ponoviZamejo)
+    {
+        $this->ponoviZamejo = $ponoviZamejo;
+        return $this;
+    }
+
+    function setPonoviGost($ponoviGost)
+    {
+        $this->ponoviGost = $ponoviGost;
+        return $this;
+    }
+
+    function setPonoviKoprInt($ponoviKoprInt)
     {
         $this->ponoviKoprInt = $ponoviKoprInt;
         return $this;
     }
 
-    public function getKpe()
+    function setPonoviInt($ponoviInt)
     {
-        return $this->kpe;
+        $this->ponoviInt = $ponoviInt;
+        return $this;
     }
 
-    public function setKpe($kpe)
+    function setUprizoritev(\Produkcija\Entity\Uprizoritev $uprizoritev=null)
+    {
+        $this->uprizoritev = $uprizoritev;
+        return $this;
+    }
+
+    function setNaziv($naziv)
+    {
+        $this->naziv = $naziv;
+        return $this;
+    }
+
+    function setTipProgramskeEnote(\ProgramDela\Entity\TipProgramskeEnote $tipProgramskeEnote=null)
+    {
+        $this->tipProgramskeEnote = $tipProgramskeEnote;
+        return $this;
+    }
+
+    function setKpe($kpe)
     {
         $this->kpe = $kpe;
         return $this;
     }
 
+    function setSort($sort)
+    {
+        $this->sort = $sort;
+        return $this;
+    }
+
+    
 }

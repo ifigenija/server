@@ -192,10 +192,10 @@ class ProgramPremieraCest
             'sort'                   => 1,
             'stZaposUmet'            => 1,
             'stZaposDrug'            => 1,
-            'stHonorarnih'           => 1,
-            'stHonorarnihIgr'        => 1,
-            'stHonorarnihIgrTujJZ'   => 1,
-            'stHonorarnihIgrSamoz'   => 1,
+            'stHonorarnihZun'           => 1,
+            'stHonorarnihZunIgr'        => 1,
+            'stHonorarnihZunIgrTujJZ'   => 1,
+            'stHonorarnihZunSamoz'   => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -229,10 +229,10 @@ class ProgramPremieraCest
             'sort'                   => 2,
             'stZaposUmet'            => 2,
             'stZaposDrug'            => 2,
-            'stHonorarnih'           => 2,
-            'stHonorarnihIgr'        => 2,
-            'stHonorarnihIgrTujJZ'   => 2,
-            'stHonorarnihIgrSamoz'   => 2,
+            'stHonorarnihZun'           => 2,
+            'stHonorarnihZunIgr'        => 2,
+            'stHonorarnihZunIgrTujJZ'   => 2,
+            'stHonorarnihZunSamoz'   => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -267,10 +267,10 @@ class ProgramPremieraCest
             'sort'                   => 4,
             'stZaposUmet'            => 4,
             'stZaposDrug'            => 4,
-            'stHonorarnih'           => 4,
-            'stHonorarnihIgr'        => 4,
-            'stHonorarnihIgrTujJZ'   => 4,
-            'stHonorarnihIgrSamoz'   => 4,
+            'stHonorarnihZun'           => 4,
+            'stHonorarnihZunIgr'        => 4,
+            'stHonorarnihZunIgrTujJZ'   => 4,
+            'stHonorarnihZunSamoz'   => 4,
         ];
         $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -333,10 +333,10 @@ class ProgramPremieraCest
         $I->assertEquals($ent['sort'], 1, "sort");
         $I->assertEquals($ent['stZaposUmet'], 1);
         $I->assertEquals($ent['stZaposDrug'], 1);
-        $I->assertEquals($ent['stHonorarnih'], 1);
-        $I->assertEquals($ent['stHonorarnihIgr'], 1);
-        $I->assertEquals($ent['stHonorarnihIgrTujJZ'], 1, "honor. igralec tuj JZ");
-        $I->assertEquals($ent['stHonorarnihIgrSamoz'], 1, "samozaposlen igralec");
+        $I->assertEquals($ent['stHonorarnihZun'], 1);
+        $I->assertEquals($ent['stHonorarnihZunIgr'], 1);
+        $I->assertEquals($ent['stHonorarnihZunIgrTujJZ'], 1, "honor. igralec tuj JZ");
+        $I->assertEquals($ent['stHonorarnihZunSamoz'], 1, "samozaposlen igralec");
 
         // še pri koproducentu
         $ent = $I->successfullyGet($this->restUrl, $this->obj4['id']);
@@ -748,10 +748,10 @@ class ProgramPremieraCest
             'sort'                   => 1,
             'stZaposUmet'            => 1,
             'stZaposDrug'            => 1,
-            'stHonorarnih'           => 1,
-            'stHonorarnihIgr'        => 1,
-            'stHonorarnihIgrTujJZ'   => 1,
-            'stHonorarnihIgrSamoz'   => 1,
+            'stHonorarnihZun'           => 1,
+            'stHonorarnihZunIgr'        => 1,
+            'stHonorarnihZunIgrTujJZ'   => 1,
+            'stHonorarnihZunSamoz'   => 1,
         ];
 
         $resp = $I->failToCreate($this->restUrl, $data);

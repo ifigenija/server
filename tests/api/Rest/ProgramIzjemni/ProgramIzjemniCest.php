@@ -109,10 +109,10 @@ class ProgramIzjemniCest
             'imaKoprodukcije'        => true,
             'stZaposlenih'           => 1,
 //            'stDrugih'             => 1,
-            'stHonorarnih'           => 1,
-            'stHonorarnihIgr'        => 1,
-            'stHonorarnihIgrTujJZ'   => 1,
-            'stHonorarnihIgrSamoz'   => 1,
+            'stHonorarnihZun'           => 1,
+            'stHonorarnihZunIgr'        => 1,
+            'stHonorarnihZunIgrTujJZ'   => 1,
+            'stHonorarnihZunSamoz'   => 1,
             'trajanje'               => "avgust-oktober",
             'prizorisce'             => "samostan",
         ];
@@ -149,10 +149,10 @@ class ProgramIzjemniCest
             'imaKoprodukcije'        => false,
             'stZaposlenih'           => 2,
 //            'stDrugih'             => 2,
-            'stHonorarnih'           => 2,
-            'stHonorarnihIgr'        => 2,
-            'stHonorarnihIgrTujJZ'   => 2,
-            'stHonorarnihIgrSamoz'   => 2,
+            'stHonorarnihZun'           => 2,
+            'stHonorarnihZunIgr'        => 2,
+            'stHonorarnihZunIgrTujJZ'   => 2,
+            'stHonorarnihZunSamoz'   => 2,
             'trajanje'               => "avgust-oktober",
             'prizorisce'             => "samostan",
         ];
@@ -216,10 +216,10 @@ class ProgramIzjemniCest
         $I->assertEquals($ent['imaKoprodukcije'], true);
         $I->assertEquals($ent['stZaposlenih'], 1);
 //        $I->assertEquals($ent['stDrugih'], 1);
-        $I->assertEquals($ent['stHonorarnih'], 1, "št. honorarnih");
-        $I->assertEquals($ent['stHonorarnihIgr'], 1);
-        $I->assertEquals($ent['stHonorarnihIgrTujJZ'], 1);
-        $I->assertEquals($ent['stHonorarnihIgrSamoz'], 1);
+        $I->assertEquals($ent['stHonorarnihZun'], 1, "št. honorarnih");
+        $I->assertEquals($ent['stHonorarnihZunIgr'], 1);
+        $I->assertEquals($ent['stHonorarnihZunIgrTujJZ'], 1);
+        $I->assertEquals($ent['stHonorarnihZunSamoz'], 1);
         $I->assertEquals($ent['trajanje'], "avgust-oktober");
         $I->assertEquals($ent['prizorisce'], "samostan");
     }

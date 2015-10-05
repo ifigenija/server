@@ -147,36 +147,57 @@ class EnotaProgramaService
                                  * $$ tu obstaja možnost, da bo honorarje 2x štel, če bo ista pogodba na več alternacijah
                                  */
                                 if ($pogodba->getVrednostDoPremiere() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
-                                    $data['Do']['stHonorarnih'] += 1;
                                     $data['Do']['avtorskiHonorarji'] += $pogodba->getVrednostDoPremiere();
                                 }
                                 if ($pogodba->getVrednostPredstave() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
-                                    $data['Na']['stHonorarnih'] += 1;
                                     $data['Na']['avtorskiHonorarji'] += $pogodba->getVrednostPredstave();
                                 }
-                                if ($pogodba->getIgralec()) {
+                                if ($pogodba->getSamozaposlen()) {
                                     if ($pogodba->getVrednostDoPremiere() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
-                                        $data['Do']['stHonorarnihIgr'] += 1;
+                                        $data['Do']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostDoPremiere();
                                     }
                                     if ($pogodba->getVrednostPredstave() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
-                                        $data['Na']['stHonorarnihIgr'] += 1;
+                                        $data['Na']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostPredstave();
                                     }
-                                    if ($pogodba->getZaposlenVDrJz()) {
-                                        if ($pogodba->getVrednostDoPremiere() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
-                                            $data['Do']['stHonorarnihIgrTujJZ'] += 1;
-                                        }
-                                        if ($pogodba->getVrednostPredstave() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
-                                            $data['Na']['stHonorarnihIgrTujJZ'] += 1;
-                                        }
+                                }
+                                /**
+                                 * štejemo le zunanje sodelavce
+                                 */
+                                if (!$alternacija->getZaposlen()) {
+                                    if ($pogodba->getVrednostDoPremiere() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                        $data['Do']['stHonorarnihZun'] += 1;
                                     }
+                                    if ($pogodba->getVrednostPredstave() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                        $data['Na']['stHonorarnihZun'] += 1;
+                                    }
+                                    /**
+                                     * samozaposlenih
+                                     */
                                     if ($pogodba->getSamozaposlen()) {
                                         if ($pogodba->getVrednostDoPremiere() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
-                                            $data['Do']['stHonorarnihIgrSamoz'] += 1;
-                                            $data['Do']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostDoPremiere();
+                                            $data['Do']['stHonorarnihZunSamoz'] += 1;
                                         }
                                         if ($pogodba->getVrednostPredstave() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
-                                            $data['Na']['stHonorarnihIgrSamoz'] += 1;
-                                            $data['Na']['avtorskiHonorarjiSamoz'] += $pogodba->getVrednostPredstave();
+                                            $data['Na']['stHonorarnihZunSamoz'] += 1;
+                                        }
+                                    }
+                                    /**
+                                     * igralcev
+                                     */
+                                    if ($pogodba->getIgralec()) {
+                                        if ($pogodba->getVrednostDoPremiere() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                            $data['Do']['stHonorarnihZunIgr'] += 1;
+                                        }
+                                        if ($pogodba->getVrednostPredstave() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                            $data['Na']['stHonorarnihZunIgr'] += 1;
+                                        }
+                                        if ($pogodba->getZaposlenVDrJz()) {
+                                            if ($pogodba->getVrednostDoPremiere() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                                $data['Do']['stHonorarnihZunIgrTujJZ'] += 1;
+                                            }
+                                            if ($pogodba->getVrednostPredstave() > 0.009) { //vsaj 1 cent, a da preprečimo floating point težave
+                                                $data['Na']['stHonorarnihZunIgrTujJZ'] += 1;
+                                            }
                                         }
                                     }
                                 }
@@ -209,14 +230,14 @@ class EnotaProgramaService
     private function initData()
     {
         $polje                  = [
-            'avtorskiHonorarji'      => 0,
-            'avtorskiHonorarjiSamoz' => 0,
-            'avtorskePravice'        => 0,
-            'materialni'             => 0,
-            'stHonorarnih'           => 0,
-            'stHonorarnihIgr'        => 0,
-            'stHonorarnihIgrTujJZ'   => 0,
-            'stHonorarnihIgrSamoz'   => 0,
+            'avtorskiHonorarji'       => 0,
+            'avtorskiHonorarjiSamoz'  => 0,
+            'avtorskePravice'         => 0,
+            'materialni'              => 0,
+            'stHonorarnihZun'         => 0,
+            'stHonorarnihZunIgr'      => 0,
+            'stHonorarnihZunIgrTujJZ' => 0,
+            'stHonorarnihZunSamoz'    => 0,
         ];
         $data['naziv']          = '';
         /**
