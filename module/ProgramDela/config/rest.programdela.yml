@@ -133,10 +133,10 @@ lists:
                 - stZaposlenih
                 - stZaposIgralcev
                 - avgStNastopovIgr
-                - stHonorarnih
-                - stHonorarnihIgr
-                - stHonorarnihIgrTujJZ
-                - stHonorarnihIgrSamoz
+                - stHonorarnihZun        
+                - stHonorarnihZunSamoz
+                - stHonorarnihZunIgr     
+                - stHonorarnihZunTujJZ
                 - sredstvaInt
 relation:
     default:

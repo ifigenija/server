@@ -37,8 +37,8 @@ class ProgramGostujoca
      * 
      * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="gostujoca.stroskiOstali", description="gostujoca.d.stroskiOstali")   
-      * @Max\Ui(icon="fa fa-euro")
-    * @var double
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
      */
     protected $stroskiOstali;
 
@@ -75,9 +75,10 @@ class ProgramGostujoca
         $this->stZaposlenih            = 0;
         $this->stZaposUmet             = 0;
         $this->stZaposDrug             = 0;
-        $this->stHonorarnih            = 0;
-        $this->stHonorarnihIgr         = 0;
-        $this->stHonorarnihIgrTujJZ    = 0;
+        $this->stHonorarnihZun         = 0;
+        $this->stHonorarnihZunIgr      = 0;
+        $this->stHonorarnihZunIgrTujJZ = 0;
+        $this->stHonorarnihZunSamoz = 0;
         $this->kpe                     = 0;
         $this->naziv                   = "";        // dobimo iz uprizoritve
         $this->preracunajPoljaZaMatKoprodukcijo();
@@ -128,7 +129,7 @@ class ProgramGostujoca
         return $this->dokument;
     }
 
-    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument=null)
+    public function setDokument(\ProgramDela\Entity\ProgramDela $dokument = null)
     {
         $this->dokument = $dokument;
         return $this;

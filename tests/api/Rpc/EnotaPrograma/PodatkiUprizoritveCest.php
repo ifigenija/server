@@ -70,14 +70,14 @@ class PodatkiUprizoritveCest
         $I->assertGreaterThanOrEqual(23.1, $resp['Na']['materialni'], "materialni");
         $I->assertGreaterThanOrEqual(5, $resp['stZaposUmet'], "št. zaposlenih umetnikov");
         $I->assertGreaterThanOrEqual(1, $resp['stZaposDrug'], "št. zaposl. drugih");
-        $I->assertGreaterThanOrEqual(3, $resp['Do']['stHonorarnih'], "honorarnih do");
-        $I->assertGreaterThanOrEqual(2, $resp['Na']['stHonorarnih'], "honorarnih na");
-        $I->assertGreaterThanOrEqual(2, $resp['Do']['stHonorarnihIgr'], "honorarnih igralcev do");
-        $I->assertGreaterThanOrEqual(2, $resp['Na']['stHonorarnihIgr'], "honorarnih igralcev na");
-        $I->assertGreaterThanOrEqual(1, $resp['Do']['stHonorarnihIgrTujJZ']);
-        $I->assertGreaterThanOrEqual(1, $resp['Na']['stHonorarnihIgrTujJZ']);
-        $I->assertGreaterThanOrEqual(1, $resp['Do']['stHonorarnihIgrSamoz']);
-        $I->assertGreaterThanOrEqual(1, $resp['Na']['stHonorarnihIgrSamoz']);
+        $I->assertGreaterThanOrEqual(3, $resp['Do']['stHonorarnihZun'], "honorarnih do");
+        $I->assertGreaterThanOrEqual(2, $resp['Na']['stHonorarnihZun'], "honorarnih na");
+        $I->assertGreaterThanOrEqual(2, $resp['Do']['stHonorarnihZunIgr'], "honorarnih igralcev do");
+        $I->assertGreaterThanOrEqual(2, $resp['Na']['stHonorarnihZunIgr'], "honorarnih igralcev na");
+        $I->assertGreaterThanOrEqual(1, $resp['Do']['stHonorarnihZunIgrTujJZ']);
+        $I->assertGreaterThanOrEqual(1, $resp['Na']['stHonorarnihZunIgrTujJZ']);
+        $I->assertGreaterThanOrEqual(1, $resp['Do']['stHonorarnihZunSamoz']);
+        $I->assertGreaterThanOrEqual(1, $resp['Na']['stHonorarnihZunSamoz']);
         $I->assertEquals("2016-01-01T00:00:00+0100", $resp['datumZacStudija']);
         $I->assertEquals("2016-04-20T00:00:00+0200", $resp['datumPremiere']);
     }
@@ -100,14 +100,14 @@ class PodatkiUprizoritveCest
         $I->assertGreaterThanOrEqual(61, $resp['Na']['avtorskiHonorarji'], "avtorski na");
         $I->assertGreaterThanOrEqual(5, $resp['stZaposUmet'], "št. zaposlenih umetnikov"); //$$ prej 2
         $I->assertGreaterThanOrEqual(1, $resp['stZaposDrug'], "št. zaposl. drugih");  //$$ PREJ 3
-        $I->assertGreaterThanOrEqual(3, $resp['Do']['stHonorarnih'], "honorarnih do");
-        $I->assertGreaterThanOrEqual(2, $resp['Na']['stHonorarnih'], "honorarnih na");
-        $I->assertGreaterThanOrEqual(2, $resp['Do']['stHonorarnihIgr'], "honorarnih igralcev do");
-        $I->assertGreaterThanOrEqual(2, $resp['Na']['stHonorarnihIgr'], "honorarnih igralcev na");
-        $I->assertGreaterThanOrEqual(1, $resp['Do']['stHonorarnihIgrTujJZ']);
-        $I->assertGreaterThanOrEqual(1, $resp['Na']['stHonorarnihIgrTujJZ']);
-        $I->assertGreaterThanOrEqual(1, $resp['Do']['stHonorarnihIgrSamoz']);
-        $I->assertGreaterThanOrEqual(1, $resp['Na']['stHonorarnihIgrSamoz']);
+        $I->assertGreaterThanOrEqual(3, $resp['Do']['stHonorarnihZun'], "honorarnih do");
+        $I->assertGreaterThanOrEqual(2, $resp['Na']['stHonorarnihZun'], "honorarnih na");
+        $I->assertGreaterThanOrEqual(2, $resp['Do']['stHonorarnihZunIgr'], "honorarnih igralcev do");
+        $I->assertGreaterThanOrEqual(2, $resp['Na']['stHonorarnihZunIgr'], "honorarnih igralcev na");
+        $I->assertGreaterThanOrEqual(1, $resp['Do']['stHonorarnihZunIgrTujJZ']);
+        $I->assertGreaterThanOrEqual(1, $resp['Na']['stHonorarnihZunIgrTujJZ']);
+        $I->assertGreaterThanOrEqual(1, $resp['Do']['stHonorarnihZunSamoz']);
+        $I->assertGreaterThanOrEqual(1, $resp['Na']['stHonorarnihZunSamoz']);
         $I->assertEquals("2016-01-01T00:00:00+0100", $resp['datumZacStudija']);
         $I->assertEquals("2016-04-20T00:00:00+0200", $resp['datumPremiere']);
     }

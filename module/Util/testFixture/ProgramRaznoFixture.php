@@ -48,7 +48,7 @@ class ProgramRaznoFixture
         $o->setSort($v[2]);
         $o->setObiskDoma($v[3]);
         $o->setStZaposlenih($v[4]);
-        $o->setStHonorarnih($v[5]);
+        $o->setStHonorarnihZun($v[5]);
         $o->setZaproseno($v[6]);
 //        $o->setNasDelez($v[7]);
         $o->setLastnaSredstva($v[8]);

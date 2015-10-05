@@ -132,12 +132,55 @@ class ProgramDela
     protected $postavkeC2;
 
     /**
+     * 
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="programDela.stPremier", description="programDela.d.stPremier")
      * @Max\Ui(type="integer")
      * @var integer
      */
     protected $stPremier;
+
+    /**
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPremierVelikih", description="programDela.d.stPremierVelikih")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stPremierVelikih;
+
+    /**
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPremierMalih", description="programDela.d.stPremierMalih")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stPremierMalih;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPremierMalihKopr", description="programDela.d.stPremierMalihKopr")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stPremierMalihKopr;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPremierVelikihKopr", description="programDela.d.stPremierVelikihKopr")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stPremierVelikihKopr;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stPremier", description="programDela.d.stPremier")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stPremierSredKopr;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -651,37 +694,48 @@ class ProgramDela
     protected $avgStNastopovIgr;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stHonorarnih", description="programDela.d.stHonorarnih")
-     * @Max\Ui(type="integer")
-     * @var integer
-     */
-    protected $stHonorarnih;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stHonorarnihIgr", description="programDela.d.stHonorarnihIgr")
-     * @Max\Ui(type="integer")
-     * @var integer
-     */
-    protected $stHonorarnihIgr;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stHonorarnihIgrTujJZ", description="programDela.d.stHonorarnihIgrTujJZ")
-     * @Max\Ui(type="integer")
-     * @var integer
-     */
-    protected $stHonorarnihIgrTujJZ;
-
-    /**
+     * 
+     * Št. honorarnih zunanjih sodelavcev:
      * 
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="programDela.stHonorarnihIgrSamoz", description="programDela.d.stHonorarnihIgrSamoz")
+     * @Max\I18n(label="programDela.stHonorarnihZun", description="programDela.d.stHonorarnihZun")
      * @Max\Ui(type="integer")
      * @var integer
      */
-    protected $stHonorarnihIgrSamoz;
+    protected $stHonorarnihZun;
+
+    /**
+     * Št. honorarnih zunanjih sodelavcev:
+     *      - od tega igralcev
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stHonorarnihZunIgr", description="programDela.d.stHonorarnihZunIgr")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stHonorarnihZunIgr;
+
+    /**
+     * Št. honorarnih zunanjih sodelavcev:
+     *      - od tega igralcev, zaposlenih v drugih javnih zavodih
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stHonorarnihZunIgrTujJZ", description="programDela.d.stHonorarnihZunIgrTujJZ")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stHonorarnihZunIgrTujJZ;
+
+    /**
+     * Št. honorarnih zunanjih sodelavcev:
+     *      - od tega s statusom samozaposlenega v kulturi
+     *  
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="programDela.stHonorarnihZunSamoz", description="programDela.d.stHonorarnihZunSamoz")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $stHonorarnihZunSamoz;
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
@@ -997,10 +1051,16 @@ class ProgramDela
         /**
          * init
          */
+        $this->stPonPrejVelikih          = 0;
         $this->stPonPrejMalih            = 0;
         $this->stPonPrejMalihKopr        = 0;
         $this->stPonPrejSredKopr         = 0;
         $this->stPonPrejVelikihKopr      = 0;
+        $this->stPremierVelikih          = 0;
+        $this->stPremierMalih            = 0;
+        $this->stPremierMalihKopr        = 0;
+        $this->stPremierSredKopr         = 0;
+        $this->stPremierVelikihKopr      = 0;
         $this->vrPS1                     = 0;
         $this->vrPS1Do                   = 0;
         $this->vrPS1Mat                  = 0;
@@ -1040,17 +1100,16 @@ class ProgramDela
         $this->stObiskPonPremDoma        = 0;
         $this->stObiskPonPremKopr        = 0;
         $this->stObiskPonPremKoprInt     = 0;
-        $this->stHonorarnih              = 0;
-        $this->stHonorarnihIgr           = 0;
-        $this->stHonorarnihIgrTujJZ      = 0;
-        $this->stHonorarnihIgrSamoz      = 0;
+        $this->stHonorarnihZun           = 0;
+        $this->stHonorarnihZunIgr        = 0;
+        $this->stHonorarnihZunIgrTujJZ   = 0;
+        $this->stHonorarnihZunSamoz      = 0;
         $this->sredstvaAvt               = 0;
         $this->sredstvaAvtSamoz          = 0;
         $this->sredstvaInt               = 0;
         $this->stKoprodukcij             = 0;
         $this->stKoprodukcijInt          = 0;
         $this->stKoprodukcijNVO          = 0;
-        $this->stPonPrejVelikih          = 0;
         $this->sredstvaZaprosenoPrem     = 0;
         $this->sredstvaZaprosenoPonPrem  = 0;
         $this->sredstvaZaprosenoPonPrej  = 0;
@@ -1115,10 +1174,10 @@ class ProgramDela
             $this->stObiskPrem +=$object->getObiskDoma() + $object->getObiskKopr();
             $this->stObiskPremDoma +=$object->getObiskDoma();
             $this->stObiskPremKopr +=$object->getObiskKopr();
-            $this->stHonorarnih +=$object->getStHonorarnih();
-            $this->stHonorarnihIgr +=$object->getStHonorarnihIgr();
-            $this->stHonorarnihIgrTujJZ +=$object->getStHonorarnihIgrTujJZ();
-            $this->stHonorarnihIgrSamoz +=$object->getStHonorarnihIgrSamoz();
+            $this->stHonorarnihZun +=$object->getStHonorarnihZun();
+            $this->stHonorarnihZunIgr +=$object->getStHonorarnihZunIgr();
+            $this->stHonorarnihZunIgrTujJZ +=$object->getStHonorarnihZunIgrTujJZ();
+            $this->stHonorarnihZunSamoz +=$object->getStHonorarnihZunSamoz();
             $this->sredstvaZaprosenoPrem+=$object->getZaproseno();
             $this->sredstvaDrugiJavniPrem+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriPrem+=$this->sestejDrugeVire($object);
@@ -1128,6 +1187,26 @@ class ProgramDela
             $obiskDomaUpriz+= $object->getObiskDoma();
             $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta();
             $this->pristejKStNastopovZaposIgr($object, $stNastopovZaposIgralcev);
+
+            switch ($object->getTipProgramskeEnote()->getSifra()) {
+                case "01":
+                    $this->stPremierVelikih+=1;         // Velike predstave
+                    break;
+                case "02":
+                    $this->stPremierMalih +=1;
+                    break;
+                case "03":
+                    $this->stPremierMalihKopr +=1;
+                    break;
+                case "04":
+                    $this->stPremierSredKopr +=1;
+                    break;
+                case "05":
+                    $this->stPremierVelikihKopr +=1;
+                    break;
+                default:
+                    $this->expect(FALSE, "Premiera ima napačen tip programske enote:" . $object->getTipProgramskeEnote()->getSifra(), 1000491);
+            }
         }
 
         /**
@@ -1191,10 +1270,10 @@ class ProgramDela
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stObiskNekomGostSlo +=$object->getObiskGost();
             $this->stObiskNekomGostZam +=$object->getObiskZamejo();
-            $this->stHonorarnih +=$object->getStHonorarnih();
-            $this->stHonorarnihIgr +=$object->getStHonorarnihIgr();
-            $this->stHonorarnihIgrTujJZ +=$object->getStHonorarnihIgrTujJZ();
-            $this->stHonorarnihIgrSamoz +=$object->getStHonorarnihIgrSamoz();
+            $this->stHonorarnihZun +=$object->getStHonorarnihZun();
+            $this->stHonorarnihZunIgr +=$object->getStHonorarnihZunIgr();
+            $this->stHonorarnihZunIgrTujJZ +=$object->getStHonorarnihZunIgrTujJZ();
+            $this->stHonorarnihZunSamoz +=$object->getStHonorarnihZunSamoz();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
             $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
 
@@ -1299,7 +1378,7 @@ class ProgramDela
             $this->stIzvOstalihNek+=1;      // 1 festival ena prireditev
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
-            $this->stHonorarnih +=$object->getStHonorarnih();
+            $this->stHonorarnihZun +=$object->getStHonorarnihZun();
             $this->sredstvaZaprosenoFest+=$object->getZaproseno();
             $this->sredstvaDrugiJavniFest+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriFest+=$this->sestejDrugeVire($object);
@@ -1317,7 +1396,7 @@ class ProgramDela
             $this->stIzvOstalihNek+=$object->getStPE();     //$$ prištevamo število programskih enot
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
-            $this->stHonorarnih +=$object->getStHonorarnih();
+            $this->stHonorarnihZun +=$object->getStHonorarnihZun();
             $this->sredstvaZaprosenoRazno+=$object->getZaproseno();
             $this->sredstvaDrugiJavniRazno+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriRazno+=$this->sestejDrugeVire($object);
@@ -1360,10 +1439,10 @@ class ProgramDela
 
         $this->validateIntGE0($this->stFest, "Št. festivalov", 1000710);
         $this->validateIntGE0($this->stGostujo, "Št. gostujočih", 1000711);
-        $this->validateIntGE0($this->stHonorarnih, "Št. honorarnih", 1000712);
-        $this->validateIntGE0($this->stHonorarnihIgr, "Št. honorarnih igralcev", 1000713);
-        $this->validateIntGE0($this->stHonorarnihIgrSamoz, "Št. honorarnih igralcev samozaposenih", 1000714);
-        $this->validateIntGE0($this->stHonorarnihIgrTujJZ, "Št. honorarnig igralcev tuj JZ", 1000715);
+        $this->validateIntGE0($this->stHonorarnihZun, "Št. honorarnih", 1000712);
+        $this->validateIntGE0($this->stHonorarnihZunIgr, "Št. honorarnih igralcev", 1000713);
+        $this->validateIntGE0($this->stHonorarnihZunSamoz, "Št. honorarnih igralcev samozaposenih", 1000714);
+        $this->validateIntGE0($this->stHonorarnihZunIgrTujJZ, "Št. honorarnig igralcev tuj JZ", 1000715);
         $this->validateIntGE0($this->stInt, "Št. dogodkov mednarodnih gostovanj", 1000716);
         $this->validateIntGE0($this->stIzjem, "Št. izjemnih dogodkov", 1000717);
         $this->validateIntGE0($this->stIzvGostovanjInt, "Št. izvedb mednaronih gostovanj", 1000718);
@@ -1391,6 +1470,11 @@ class ProgramDela
         $this->validateIntGE0($this->stPonPrejVelikihKopr, "Št. ponovitev prejšnjih - velike kopr.", 1000740);
         $this->validateIntGE0($this->stPonPrem, "Št. ponovitev premiere", 1000741);
         $this->validateIntGE0($this->stPremier, "Št. premier", 1000742);
+        $this->validateIntGE0($this->stPremierMalih, "Št. premier - malih", 1000492);
+        $this->validateIntGE0($this->stPremierMalihKopr, "Št. premier - malih koprodukcij", 1000493);
+        $this->validateIntGE0($this->stPremierSredKopr, "Št. premier - srednje kopr.", 1000494);
+        $this->validateIntGE0($this->stPremierVelikih, "Št. premier - velike", 1000495);
+        $this->validateIntGE0($this->stPremierVelikihKopr, "Št. premier - velike kopr.", 100046);
         $this->validateIntGE0($this->stProdVstopnic, "Št. prodanih vstopnic", 1000743);
         $this->validateIntGE0($this->stRazno, "Št. razno", 1000744);
         $this->validateIntGE0($this->stZaposIgralcev, "Št. zaposlenih igralcev", 1000745);
@@ -1436,1237 +1520,1292 @@ class ProgramDela
         $this->validateEuroGE0($this->vrPS1GostovSZ, "vrPS1GostovSZ", 1000783);
         $this->validateEuroGE0($this->vrPS1Mat, "vrPS1Mat", 1000784);
     }
-
-    public function getId()
+    function getId()
     {
         return $this->id;
     }
 
-    public function getSifra()
+    function getSifra()
     {
         return $this->sifra;
     }
 
-    public function getNaziv()
+    function getNaziv()
     {
         return $this->naziv;
     }
 
-    public function getZacetek()
+    function getZacetek()
     {
         return $this->zacetek;
     }
 
-    public function getKonec()
+    function getKonec()
     {
         return $this->konec;
     }
 
-    public function getZakljuceno()
+    function getZakljuceno()
     {
         return $this->zakljuceno;
     }
 
-    public function getPotrjenProgram()
+    function getPotrjenProgram()
     {
         return $this->potrjenProgram;
     }
 
-    public function getPremiere()
+    function getPremiere()
     {
         return $this->premiere;
     }
 
-    public function getPonovitvePremiere()
+    function getPonovitvePremiere()
     {
         return $this->ponovitvePremiere;
     }
 
-    public function getPonovitvePrejsnjih()
+    function getPonovitvePrejsnjih()
     {
         return $this->ponovitvePrejsnjih;
     }
 
-    public function getIzjemni()
+    function getIzjemni()
     {
         return $this->izjemni;
     }
 
-    public function getProgramiFestival()
+    function getProgramiFestival()
     {
         return $this->programiFestival;
     }
 
-    public function getGostujoci()
+    function getGostujoci()
     {
         return $this->gostujoci;
     }
 
-    public function getGostovanja()
+    function getGostovanja()
     {
         return $this->gostovanja;
     }
 
-    public function getProgramiRazno()
+    function getProgramiRazno()
     {
         return $this->programiRazno;
     }
 
-    public function getStPremier()
+    function getPostavkeC2()
+    {
+        return $this->postavkeC2;
+    }
+
+    function getStPremier()
     {
         return $this->stPremier;
     }
 
-    public function getStInt()
+    function getStPremierVelikih()
+    {
+        return $this->stPremierVelikih;
+    }
+
+    function getStPremierMalih()
+    {
+        return $this->stPremierMalih;
+    }
+
+    function getStPremierMalihKopr()
+    {
+        return $this->stPremierMalihKopr;
+    }
+
+    function getStPremierVelikihKopr()
+    {
+        return $this->stPremierVelikihKopr;
+    }
+
+    function getStPremierSredKopr()
+    {
+        return $this->stPremierSredKopr;
+    }
+
+    function getStInt()
     {
         return $this->stInt;
     }
 
-    public function getStFest()
+    function getStFest()
     {
         return $this->stFest;
     }
 
-    public function getStRazno()
+    function getStRazno()
     {
         return $this->stRazno;
     }
 
-    public function getStIzjem()
+    function getStIzjem()
     {
         return $this->stIzjem;
     }
 
-    public function getStPonPrem()
+    function getStPonPrem()
     {
         return $this->stPonPrem;
     }
 
-    public function getStPonPrej()
+    function getStPonPrej()
     {
         return $this->stPonPrej;
     }
 
-    public function getStPonPrejVelikih()
+    function getStPonPrejVelikih()
     {
         return $this->stPonPrejVelikih;
     }
 
-    public function getStPonPrejMalih()
+    function getStPonPrejMalih()
     {
         return $this->stPonPrejMalih;
     }
 
-    public function getStPonPrejMalihKopr()
+    function getStPonPrejMalihKopr()
     {
         return $this->stPonPrejMalihKopr;
     }
 
-    public function getStPonPrejSredKopr()
+    function getStPonPrejSredKopr()
     {
         return $this->stPonPrejSredKopr;
     }
 
-    public function getStPonPrejVelikihKopr()
+    function getStPonPrejVelikihKopr()
     {
         return $this->stPonPrejVelikihKopr;
     }
 
-    public function getStGostujo()
+    function getStGostujo()
     {
         return $this->stGostujo;
     }
 
-    public function getVrPS1()
+    function getVrPS1()
     {
         return $this->vrPS1;
     }
 
-    public function getVrPS1Do()
+    function getVrPS1Do()
     {
         return $this->vrPS1Do;
     }
 
-    public function getVrPS1Mat()
+    function getVrPS1Mat()
     {
         return $this->vrPS1Mat;
     }
 
-    public function getVrPS1GostovSZ()
+    function getVrPS1GostovSZ()
     {
         return $this->vrPS1GostovSZ;
     }
 
-    public function getStIzvNekomerc()
+    function getStIzvNekomerc()
     {
         return $this->stIzvNekomerc;
     }
 
-    public function getStIzvPrem()
+    function getStIzvPrem()
     {
         return $this->stIzvPrem;
     }
 
-    public function getStIzvPonPrem()
+    function getStIzvPremDoma()
+    {
+        return $this->stIzvPremDoma;
+    }
+
+    function getStIzvPremKopr()
+    {
+        return $this->stIzvPremKopr;
+    }
+
+    function getStIzvPonPrem()
     {
         return $this->stIzvPonPrem;
     }
 
-    public function getStIzvPonPremDoma()
+    function getStIzvPonPremDoma()
     {
         return $this->stIzvPonPremDoma;
     }
 
-    public function getStIzvPonPremZamejo()
+    function getStIzvPonPremZamejo()
     {
         return $this->stIzvPonPremZamejo;
     }
 
-    public function getStIzvPonPremGost()
+    function getStIzvPonPremGost()
     {
         return $this->stIzvPonPremGost;
     }
 
-    public function getStIzvPonPremKopr()
+    function getStIzvPonPremKopr()
     {
         return $this->stIzvPonPremKopr;
     }
 
-    public function getStIzvPonPremInt()
+    function getStIzvPonPremInt()
     {
         return $this->stIzvPonPremInt;
     }
 
-    public function getStIzvPonPremKoprInt()
+    function getStIzvPonPremKoprInt()
     {
         return $this->stIzvPonPremKoprInt;
     }
 
-    public function getStIzvPonPrej()
+    function getStIzvPonPrej()
     {
         return $this->stIzvPonPrej;
     }
 
-    public function getStIzvPonPrejDoma()
+    function getStIzvPonPrejDoma()
     {
         return $this->stIzvPonPrejDoma;
     }
 
-    public function getStIzvPonPrejZamejo()
+    function getStIzvPonPrejZamejo()
     {
         return $this->stIzvPonPrejZamejo;
     }
 
-    public function getStIzvPonPrejGost()
+    function getStIzvPonPrejGost()
     {
         return $this->stIzvPonPrejGost;
     }
 
-    public function getStIzvPonPrejKopr()
+    function getStIzvPonPrejKopr()
     {
         return $this->stIzvPonPrejKopr;
     }
 
-    public function getStIzvPonPrejInt()
+    function getStIzvPonPrejInt()
     {
         return $this->stIzvPonPrejInt;
     }
 
-    public function getStIzvPonPrejKoprInt()
+    function getStIzvPonPrejKoprInt()
     {
         return $this->stIzvPonPrejKoprInt;
     }
 
-    public function getStIzvGostuj()
+    function getStIzvGostuj()
     {
         return $this->stIzvGostuj;
     }
 
-    public function getStIzvOstalihNek()
+    function getStIzvOstalihNek()
     {
         return $this->stIzvOstalihNek;
     }
 
-    public function getStIzvGostovanjSlo()
+    function getStIzvGostovanjSlo()
     {
         return $this->stIzvGostovanjSlo;
     }
 
-    public function getStIzvGostovanjZam()
+    function getStIzvGostovanjZam()
     {
         return $this->stIzvGostovanjZam;
     }
 
-    public function getStIzvGostovanjInt()
+    function getStIzvGostovanjInt()
     {
         return $this->stIzvGostovanjInt;
     }
 
-    public function getStObiskNekom()
+    function getStObiskNekom()
     {
         return $this->stObiskNekom;
     }
 
-    public function getStObiskNekomMat()
+    function getStObiskNekomMat()
     {
         return $this->stObiskNekomMat;
     }
 
-    public function getStObiskNekomGostSlo()
+    function getStObiskNekomGostSlo()
     {
         return $this->stObiskNekomGostSlo;
     }
 
-    public function getStObiskNekomGostZam()
+    function getStObiskNekomGostZam()
     {
         return $this->stObiskNekomGostZam;
     }
 
-    public function getStObiskNekomGostInt()
+    function getStObiskNekomGostInt()
     {
         return $this->stObiskNekomGostInt;
     }
 
-    public function getStObiskPrem()
+    function getStObiskPrem()
     {
         return $this->stObiskPrem;
     }
 
-    public function getStObiskPonPremDoma()
+    function getStObiskPremDoma()
+    {
+        return $this->stObiskPremDoma;
+    }
+
+    function getStObiskPremKopr()
+    {
+        return $this->stObiskPremKopr;
+    }
+
+    function getStObiskPonPrem()
+    {
+        return $this->stObiskPonPrem;
+    }
+
+    function getStObiskPonPremDoma()
     {
         return $this->stObiskPonPremDoma;
     }
 
-    public function getStObiskPonPremKopr()
+    function getStObiskPonPremKopr()
     {
         return $this->stObiskPonPremKopr;
     }
 
-    public function getStObiskPonPremKoprInt()
+    function getStObiskPonPremKoprInt()
     {
         return $this->stObiskPonPremKoprInt;
     }
 
-    public function getAvgObiskPrired()
+    function getStObiskPonPremGost()
+    {
+        return $this->stObiskPonPremGost;
+    }
+
+    function getStObiskPonPremZamejo()
+    {
+        return $this->stObiskPonPremZamejo;
+    }
+
+    function getStObiskPonPremInt()
+    {
+        return $this->stObiskPonPremInt;
+    }
+
+    function getAvgObiskPrired()
     {
         return $this->avgObiskPrired;
     }
 
-    public function getAvgZasedDvoran()
+    function getAvgZasedDvoran()
     {
         return $this->avgZasedDvoran;
     }
 
-    public function getAvgCenaVstopnice()
+    function getAvgCenaVstopnice()
     {
         return $this->avgCenaVstopnice;
     }
 
-    public function getStProdVstopnic()
+    function getStProdVstopnic()
     {
         return $this->stProdVstopnic;
     }
 
-    public function getStKoprodukcij()
+    function getStKoprodukcij()
     {
         return $this->stKoprodukcij;
     }
 
-    public function getStKoprodukcijInt()
+    function getStKoprodukcijInt()
     {
         return $this->stKoprodukcijInt;
     }
 
-    public function getStKoprodukcijNVO()
+    function getStKoprodukcijNVO()
     {
         return $this->stKoprodukcijNVO;
     }
 
-    public function getStZaposlenih()
+    function getStZaposlenih()
     {
         return $this->stZaposlenih;
     }
 
-    public function getStZaposIgralcev()
+    function getStZaposIgralcev()
     {
         return $this->stZaposIgralcev;
     }
 
-    public function getAvgStNastopovIgr()
+    function getAvgStNastopovIgr()
     {
         return $this->avgStNastopovIgr;
     }
 
-    public function getStHonorarnih()
+    function getStHonorarnihZun()
     {
-        return $this->stHonorarnih;
+        return $this->stHonorarnihZun;
     }
 
-    public function getStHonorarnihIgr()
+    function getStHonorarnihZunIgr()
     {
-        return $this->stHonorarnihIgr;
+        return $this->stHonorarnihZunIgr;
     }
 
-    public function getStHonorarnihIgrTujJZ()
+    function getStHonorarnihZunIgrTujJZ()
     {
-        return $this->stHonorarnihIgrTujJZ;
+        return $this->stHonorarnihZunIgrTujJZ;
     }
 
-    public function getStHonorarnihIgrSamoz()
+    function getStHonorarnihZunSamoz()
     {
-        return $this->stHonorarnihIgrSamoz;
+        return $this->stHonorarnihZunSamoz;
     }
 
-    public function getSredstvaInt()
+    function getSredstvaInt()
     {
         return $this->sredstvaInt;
     }
 
-    public function getSredstvaAvt()
+    function getSredstvaAvt()
     {
         return $this->sredstvaAvt;
     }
 
-    public function getSredstvaZaprosenoPrem()
+    function getSredstvaZaprosenoPrem()
     {
         return $this->sredstvaZaprosenoPrem;
     }
 
-    public function getSredstvaZaprosenoPonPrem()
+    function getSredstvaZaprosenoPonPrem()
     {
         return $this->sredstvaZaprosenoPonPrem;
     }
 
-    public function getSredstvaZaprosenoPonPrej()
+    function getSredstvaZaprosenoPonPrej()
     {
         return $this->sredstvaZaprosenoPonPrej;
     }
 
-    public function getSredstvaZaprosenoGostujo()
+    function getSredstvaZaprosenoGostujo()
     {
         return $this->sredstvaZaprosenoGostujo;
     }
 
-    public function getSredstvaZaprosenoInt()
+    function getSredstvaZaprosenoInt()
     {
         return $this->sredstvaZaprosenoInt;
     }
 
-    public function getSredstvaZaprosenoFest()
+    function getSredstvaZaprosenoFest()
     {
         return $this->sredstvaZaprosenoFest;
     }
 
-    public function getSredstvaZaprosenoRazno()
+    function getSredstvaZaprosenoRazno()
     {
         return $this->sredstvaZaprosenoRazno;
     }
 
-    public function getSredstvaZaprosenoIzjem()
+    function getSredstvaZaprosenoIzjem()
     {
         return $this->sredstvaZaprosenoIzjem;
     }
 
-    public function getSredstvaDrugiJavniPrem()
+    function getSredstvaDrugiJavniPrem()
     {
         return $this->sredstvaDrugiJavniPrem;
     }
 
-    public function getSredstvaDrugiJavniPonPrem()
+    function getSredstvaDrugiJavniPonPrem()
     {
         return $this->sredstvaDrugiJavniPonPrem;
     }
 
-    public function getSredstvaDrugiJavniPonPrej()
+    function getSredstvaDrugiJavniPonPrej()
     {
         return $this->sredstvaDrugiJavniPonPrej;
     }
 
-    public function getSredstvaDrugiJavniGostujo()
+    function getSredstvaDrugiJavniGostujo()
     {
         return $this->sredstvaDrugiJavniGostujo;
     }
 
-    public function getSredstvaDrugiJavniInt()
+    function getSredstvaDrugiJavniInt()
     {
         return $this->sredstvaDrugiJavniInt;
     }
 
-    public function getSredstvaDrugiJavniFest()
+    function getSredstvaDrugiJavniFest()
     {
         return $this->sredstvaDrugiJavniFest;
     }
 
-    public function getSredstvaDrugiJavniRazno()
+    function getSredstvaDrugiJavniRazno()
     {
         return $this->sredstvaDrugiJavniRazno;
     }
 
-    public function getSredstvaDrugiJavniIzjem()
+    function getSredstvaDrugiJavniIzjem()
     {
         return $this->sredstvaDrugiJavniIzjem;
     }
 
-    public function getSredstvaDrugiViriPrem()
+    function getSredstvaDrugiViriPrem()
     {
         return $this->sredstvaDrugiViriPrem;
     }
 
-    public function getSredstvaDrugiViriPonPrem()
+    function getSredstvaDrugiViriPonPrem()
     {
         return $this->sredstvaDrugiViriPonPrem;
     }
 
-    public function getSredstvaDrugiViriPonPrej()
+    function getSredstvaDrugiViriPonPrej()
     {
         return $this->sredstvaDrugiViriPonPrej;
     }
 
-    public function getSredstvaDrugiViriGostujo()
+    function getSredstvaDrugiViriGostujo()
     {
         return $this->sredstvaDrugiViriGostujo;
     }
 
-    public function getSredstvaDrugiViriInt()
+    function getSredstvaDrugiViriInt()
     {
         return $this->sredstvaDrugiViriInt;
     }
 
-    public function getSredstvaDrugiViriFest()
+    function getSredstvaDrugiViriFest()
     {
         return $this->sredstvaDrugiViriFest;
     }
 
-    public function getSredstvaDrugiViriRazno()
+    function getSredstvaDrugiViriRazno()
     {
         return $this->sredstvaDrugiViriRazno;
     }
 
-    public function getSredstvaDrugiViriIzjem()
+    function getSredstvaDrugiViriIzjem()
     {
         return $this->sredstvaDrugiViriIzjem;
     }
 
-    public function getSredstvaAvtSamoz()
+    function getSredstvaAvtSamoz()
     {
         return $this->sredstvaAvtSamoz;
     }
 
-    public function setId($id)
+    function setId($id)
     {
         $this->id = $id;
         return $this;
     }
 
-    public function setSifra($sifra)
+    function setSifra($sifra)
     {
         $this->sifra = $sifra;
         return $this;
     }
 
-    public function setNaziv($naziv)
+    function setNaziv($naziv)
     {
         $this->naziv = $naziv;
         return $this;
     }
 
-    public function setZacetek($zacetek)
+    function setZacetek($zacetek)
     {
         $this->zacetek = $zacetek;
         return $this;
     }
 
-    public function setKonec($konec)
+    function setKonec($konec)
     {
         $this->konec = $konec;
         return $this;
     }
 
-    public function setZakljuceno($zakljuceno)
+    function setZakljuceno($zakljuceno)
     {
         $this->zakljuceno = $zakljuceno;
         return $this;
     }
 
-    public function setPotrjenProgram($potrjenProgram)
+    function setPotrjenProgram($potrjenProgram)
     {
         $this->potrjenProgram = $potrjenProgram;
         return $this;
     }
 
-    public function setPremiere($premiere)
+    function setPremiere($premiere)
     {
         $this->premiere = $premiere;
         return $this;
     }
 
-    public function setPonovitvePremiere($ponovitvePremiere)
+    function setPonovitvePremiere($ponovitvePremiere)
     {
         $this->ponovitvePremiere = $ponovitvePremiere;
         return $this;
     }
 
-    public function setPonovitvePrejsnjih($ponovitvePrejsnjih)
+    function setPonovitvePrejsnjih($ponovitvePrejsnjih)
     {
         $this->ponovitvePrejsnjih = $ponovitvePrejsnjih;
         return $this;
     }
 
-    public function setIzjemni($izjemni)
+    function setIzjemni($izjemni)
     {
         $this->izjemni = $izjemni;
         return $this;
     }
 
-    public function setProgramiFestival($programiFestival)
+    function setProgramiFestival($programiFestival)
     {
         $this->programiFestival = $programiFestival;
         return $this;
     }
 
-    public function setGostujoci($gostujoci)
+    function setGostujoci($gostujoci)
     {
         $this->gostujoci = $gostujoci;
         return $this;
     }
 
-    public function setGostovanja($gostovanja)
+    function setGostovanja($gostovanja)
     {
         $this->gostovanja = $gostovanja;
         return $this;
     }
 
-    public function setProgramiRazno($programiRazno)
+    function setProgramiRazno($programiRazno)
     {
         $this->programiRazno = $programiRazno;
         return $this;
     }
 
-    public function setStPremier($stPremier)
-    {
-        $this->stPremier = $stPremier;
-        return $this;
-    }
-
-    public function setStInt($stInt)
-    {
-        $this->stInt = $stInt;
-        return $this;
-    }
-
-    public function setStFest($stFest)
-    {
-        $this->stFest = $stFest;
-        return $this;
-    }
-
-    public function setStRazno($stRazno)
-    {
-        $this->stRazno = $stRazno;
-        return $this;
-    }
-
-    public function setStIzjem($stIzjem)
-    {
-        $this->stIzjem = $stIzjem;
-        return $this;
-    }
-
-    public function setStPonPrem($stPonPrem)
-    {
-        $this->stPonPrem = $stPonPrem;
-        return $this;
-    }
-
-    public function setStPonPrej($stPonPrej)
-    {
-        $this->stPonPrej = $stPonPrej;
-        return $this;
-    }
-
-    public function setStPonPrejVelikih($stPonPrejVelikih)
-    {
-        $this->stPonPrejVelikih = $stPonPrejVelikih;
-        return $this;
-    }
-
-    public function setStPonPrejMalih($stPonPrejMalih)
-    {
-        $this->stPonPrejMalih = $stPonPrejMalih;
-        return $this;
-    }
-
-    public function setStPonPrejMalihKopr($stPonPrejMalihKopr)
-    {
-        $this->stPonPrejMalihKopr = $stPonPrejMalihKopr;
-        return $this;
-    }
-
-    public function setStPonPrejSredKopr($stPonPrejSredKopr)
-    {
-        $this->stPonPrejSredKopr = $stPonPrejSredKopr;
-        return $this;
-    }
-
-    public function setStPonPrejVelikihKopr($stPonPrejVelikihKopr)
-    {
-        $this->stPonPrejVelikihKopr = $stPonPrejVelikihKopr;
-        return $this;
-    }
-
-    public function setStGostujo($stGostujo)
-    {
-        $this->stGostujo = $stGostujo;
-        return $this;
-    }
-
-    public function setVrPS1($vrPS1)
-    {
-        $this->vrPS1 = $vrPS1;
-        return $this;
-    }
-
-    public function setVrPS1Do($vrPS1Do)
-    {
-        $this->vrPS1Do = $vrPS1Do;
-        return $this;
-    }
-
-    public function setVrPS1Mat($vrPS1Mat)
-    {
-        $this->vrPS1Mat = $vrPS1Mat;
-        return $this;
-    }
-
-    public function setVrPS1GostovSZ($vrPS1GostovSZ)
-    {
-        $this->vrPS1GostovSZ = $vrPS1GostovSZ;
-        return $this;
-    }
-
-    public function setStIzvNekomerc($stIzvNekomerc)
-    {
-        $this->stIzvNekomerc = $stIzvNekomerc;
-        return $this;
-    }
-
-    public function setStIzvPrem($stIzvPrem)
-    {
-        $this->stIzvPrem = $stIzvPrem;
-        return $this;
-    }
-
-    public function setStIzvPonPrem($stIzvPonPrem)
-    {
-        $this->stIzvPonPrem = $stIzvPonPrem;
-        return $this;
-    }
-
-    public function setStIzvPonPremDoma($stIzvPonPremDoma)
-    {
-        $this->stIzvPonPremDoma = $stIzvPonPremDoma;
-        return $this;
-    }
-
-    public function setStIzvPonPremZamejo($stIzvPonPremZamejo)
-    {
-        $this->stIzvPonPremZamejo = $stIzvPonPremZamejo;
-        return $this;
-    }
-
-    public function setStIzvPonPremGost($stIzvPonPremGost)
-    {
-        $this->stIzvPonPremGost = $stIzvPonPremGost;
-        return $this;
-    }
-
-    public function setStIzvPonPremKopr($stIzvPonPremKopr)
-    {
-        $this->stIzvPonPremKopr = $stIzvPonPremKopr;
-        return $this;
-    }
-
-    public function setStIzvPonPremInt($stIzvPonPremInt)
-    {
-        $this->stIzvPonPremInt = $stIzvPonPremInt;
-        return $this;
-    }
-
-    public function setStIzvPonPremKoprInt($stIzvPonPremKoprInt)
-    {
-        $this->stIzvPonPremKoprInt = $stIzvPonPremKoprInt;
-        return $this;
-    }
-
-    public function setStIzvPonPrej($stIzvPonPrej)
-    {
-        $this->stIzvPonPrej = $stIzvPonPrej;
-        return $this;
-    }
-
-    public function setStIzvPonPrejDoma($stIzvPonPrejDoma)
-    {
-        $this->stIzvPonPrejDoma = $stIzvPonPrejDoma;
-        return $this;
-    }
-
-    public function setStIzvPonPrejZamejo($stIzvPonPrejZamejo)
-    {
-        $this->stIzvPonPrejZamejo = $stIzvPonPrejZamejo;
-        return $this;
-    }
-
-    public function setStIzvPonPrejGost($stIzvPonPrejGost)
-    {
-        $this->stIzvPonPrejGost = $stIzvPonPrejGost;
-        return $this;
-    }
-
-    public function setStIzvPonPrejKopr($stIzvPonPrejKopr)
-    {
-        $this->stIzvPonPrejKopr = $stIzvPonPrejKopr;
-        return $this;
-    }
-
-    public function setStIzvPonPrejInt($stIzvPonPrejInt)
-    {
-        $this->stIzvPonPrejInt = $stIzvPonPrejInt;
-        return $this;
-    }
-
-    public function setStIzvPonPrejKoprInt($stIzvPonPrejKoprInt)
-    {
-        $this->stIzvPonPrejKoprInt = $stIzvPonPrejKoprInt;
-        return $this;
-    }
-
-    public function setStIzvGostuj($stIzvGostuj)
-    {
-        $this->stIzvGostuj = $stIzvGostuj;
-        return $this;
-    }
-
-    public function setStIzvOstalihNek($stIzvOstalihNek)
-    {
-        $this->stIzvOstalihNek = $stIzvOstalihNek;
-        return $this;
-    }
-
-    public function setStIzvGostovanjSlo($stIzvGostovanjSlo)
-    {
-        $this->stIzvGostovanjSlo = $stIzvGostovanjSlo;
-        return $this;
-    }
-
-    public function setStIzvGostovanjZam($stIzvGostovanjZam)
-    {
-        $this->stIzvGostovanjZam = $stIzvGostovanjZam;
-        return $this;
-    }
-
-    public function setStIzvGostovanjInt($stIzvGostovanjInt)
-    {
-        $this->stIzvGostovanjInt = $stIzvGostovanjInt;
-        return $this;
-    }
-
-    public function setStObiskNekom($stObiskNekom)
-    {
-        $this->stObiskNekom = $stObiskNekom;
-        return $this;
-    }
-
-    public function setStObiskNekomMat($stObiskNekomMat)
-    {
-        $this->stObiskNekomMat = $stObiskNekomMat;
-        return $this;
-    }
-
-    public function setStObiskNekomGostSlo($stObiskNekomGostSlo)
-    {
-        $this->stObiskNekomGostSlo = $stObiskNekomGostSlo;
-        return $this;
-    }
-
-    public function setStObiskNekomGostZam($stObiskNekomGostZam)
-    {
-        $this->stObiskNekomGostZam = $stObiskNekomGostZam;
-        return $this;
-    }
-
-    public function setStObiskNekomGostInt($stObiskNekomGostInt)
-    {
-        $this->stObiskNekomGostInt = $stObiskNekomGostInt;
-        return $this;
-    }
-
-    public function setStObiskPrem($stObiskPrem)
-    {
-        $this->stObiskPrem = $stObiskPrem;
-        return $this;
-    }
-
-    public function setStObiskPonPremDoma($stObiskPonPremDoma)
-    {
-        $this->stObiskPonPremDoma = $stObiskPonPremDoma;
-        return $this;
-    }
-
-    public function setStObiskPonPremKopr($stObiskPonPremKopr)
-    {
-        $this->stObiskPonPremKopr = $stObiskPonPremKopr;
-        return $this;
-    }
-
-    public function setStObiskPonPremKoprInt($stObiskPonPremKoprInt)
-    {
-        $this->stObiskPonPremKoprInt = $stObiskPonPremKoprInt;
-        return $this;
-    }
-
-    public function setAvgObiskPrired($avgObiskPrired)
-    {
-        $this->avgObiskPrired = $avgObiskPrired;
-        return $this;
-    }
-
-    public function setAvgZasedDvoran($avgZasedDvoran)
-    {
-        $this->avgZasedDvoran = $avgZasedDvoran;
-        return $this;
-    }
-
-    public function setAvgCenaVstopnice($avgCenaVstopnice)
-    {
-        $this->avgCenaVstopnice = $avgCenaVstopnice;
-        return $this;
-    }
-
-    public function setStProdVstopnic($stProdVstopnic)
-    {
-        $this->stProdVstopnic = $stProdVstopnic;
-        return $this;
-    }
-
-    public function setStKoprodukcij($stKoprodukcij)
-    {
-        $this->stKoprodukcij = $stKoprodukcij;
-        return $this;
-    }
-
-    public function setStKoprodukcijInt($stKoprodukcijInt)
-    {
-        $this->stKoprodukcijInt = $stKoprodukcijInt;
-        return $this;
-    }
-
-    public function setStKoprodukcijNVO($stKoprodukcijNVO)
-    {
-        $this->stKoprodukcijNVO = $stKoprodukcijNVO;
-        return $this;
-    }
-
-    public function setStZaposlenih($stZaposlenih)
-    {
-        $this->stZaposlenih = $stZaposlenih;
-        return $this;
-    }
-
-    public function setStZaposIgralcev($stZaposIgralcev)
-    {
-        $this->stZaposIgralcev = $stZaposIgralcev;
-        return $this;
-    }
-
-    public function setAvgStNastopovIgr($avgStNastopovIgr)
-    {
-        $this->avgStNastopovIgr = $avgStNastopovIgr;
-        return $this;
-    }
-
-    public function setStHonorarnih($stHonorarnih)
-    {
-        $this->stHonorarnih = $stHonorarnih;
-        return $this;
-    }
-
-    public function setStHonorarnihIgr($stHonorarnihIgr)
-    {
-        $this->stHonorarnihIgr = $stHonorarnihIgr;
-        return $this;
-    }
-
-    public function setStHonorarnihIgrTujJZ($stHonorarnihIgrTujJZ)
-    {
-        $this->stHonorarnihIgrTujJZ = $stHonorarnihIgrTujJZ;
-        return $this;
-    }
-
-    public function setStHonorarnihIgrSamoz($stHonorarnihIgrSamoz)
-    {
-        $this->stHonorarnihIgrSamoz = $stHonorarnihIgrSamoz;
-        return $this;
-    }
-
-    public function setSredstvaInt($sredstvaInt)
-    {
-        $this->sredstvaInt = $sredstvaInt;
-        return $this;
-    }
-
-    public function setSredstvaAvt($sredstvaAvt)
-    {
-        $this->sredstvaAvt = $sredstvaAvt;
-        return $this;
-    }
-
-    public function setSredstvaZaprosenoPrem($sredstvaZaprosenoPrem)
-    {
-        $this->sredstvaZaprosenoPrem = $sredstvaZaprosenoPrem;
-        return $this;
-    }
-
-    public function setSredstvaZaprosenoPonPrem($sredstvaZaprosenoPonPrem)
-    {
-        $this->sredstvaZaprosenoPonPrem = $sredstvaZaprosenoPonPrem;
-        return $this;
-    }
-
-    public function setSredstvaZaprosenoPonPrej($sredstvaZaprosenoPonPrej)
-    {
-        $this->sredstvaZaprosenoPonPrej = $sredstvaZaprosenoPonPrej;
-        return $this;
-    }
-
-    public function setSredstvaZaprosenoGostujo($sredstvaZaprosenoGostujo)
-    {
-        $this->sredstvaZaprosenoGostujo = $sredstvaZaprosenoGostujo;
-        return $this;
-    }
-
-    public function setSredstvaZaprosenoInt($sredstvaZaprosenoInt)
-    {
-        $this->sredstvaZaprosenoInt = $sredstvaZaprosenoInt;
-        return $this;
-    }
-
-    public function setSredstvaZaprosenoFest($sredstvaZaprosenoFest)
-    {
-        $this->sredstvaZaprosenoFest = $sredstvaZaprosenoFest;
-        return $this;
-    }
-
-    public function setSredstvaZaprosenoRazno($sredstvaZaprosenoRazno)
-    {
-        $this->sredstvaZaprosenoRazno = $sredstvaZaprosenoRazno;
-        return $this;
-    }
-
-    public function setSredstvaZaprosenoIzjem($sredstvaZaprosenoIzjem)
-    {
-        $this->sredstvaZaprosenoIzjem = $sredstvaZaprosenoIzjem;
-        return $this;
-    }
-
-    public function setSredstvaDrugiJavniPrem($sredstvaDrugiJavniPrem)
-    {
-        $this->sredstvaDrugiJavniPrem = $sredstvaDrugiJavniPrem;
-        return $this;
-    }
-
-    public function setSredstvaDrugiJavniPonPrem($sredstvaDrugiJavniPonPrem)
-    {
-        $this->sredstvaDrugiJavniPonPrem = $sredstvaDrugiJavniPonPrem;
-        return $this;
-    }
-
-    public function setSredstvaDrugiJavniPonPrej($sredstvaDrugiJavniPonPrej)
-    {
-        $this->sredstvaDrugiJavniPonPrej = $sredstvaDrugiJavniPonPrej;
-        return $this;
-    }
-
-    public function setSredstvaDrugiJavniGostujo($sredstvaDrugiJavniGostujo)
-    {
-        $this->sredstvaDrugiJavniGostujo = $sredstvaDrugiJavniGostujo;
-        return $this;
-    }
-
-    public function setSredstvaDrugiJavniInt($sredstvaDrugiJavniInt)
-    {
-        $this->sredstvaDrugiJavniInt = $sredstvaDrugiJavniInt;
-        return $this;
-    }
-
-    public function setSredstvaDrugiJavniFest($sredstvaDrugiJavniFest)
-    {
-        $this->sredstvaDrugiJavniFest = $sredstvaDrugiJavniFest;
-        return $this;
-    }
-
-    public function setSredstvaDrugiJavniRazno($sredstvaDrugiJavniRazno)
-    {
-        $this->sredstvaDrugiJavniRazno = $sredstvaDrugiJavniRazno;
-        return $this;
-    }
-
-    public function setSredstvaDrugiJavniIzjem($sredstvaDrugiJavniIzjem)
-    {
-        $this->sredstvaDrugiJavniIzjem = $sredstvaDrugiJavniIzjem;
-        return $this;
-    }
-
-    public function setSredstvaDrugiViriPrem($sredstvaDrugiViriPrem)
-    {
-        $this->sredstvaDrugiViriPrem = $sredstvaDrugiViriPrem;
-        return $this;
-    }
-
-    public function setSredstvaDrugiViriPonPrem($sredstvaDrugiViriPonPrem)
-    {
-        $this->sredstvaDrugiViriPonPrem = $sredstvaDrugiViriPonPrem;
-        return $this;
-    }
-
-    public function setSredstvaDrugiViriPonPrej($sredstvaDrugiViriPonPrej)
-    {
-        $this->sredstvaDrugiViriPonPrej = $sredstvaDrugiViriPonPrej;
-        return $this;
-    }
-
-    public function setSredstvaDrugiViriGostujo($sredstvaDrugiViriGostujo)
-    {
-        $this->sredstvaDrugiViriGostujo = $sredstvaDrugiViriGostujo;
-        return $this;
-    }
-
-    public function setSredstvaDrugiViriInt($sredstvaDrugiViriInt)
-    {
-        $this->sredstvaDrugiViriInt = $sredstvaDrugiViriInt;
-        return $this;
-    }
-
-    public function setSredstvaDrugiViriFest($sredstvaDrugiViriFest)
-    {
-        $this->sredstvaDrugiViriFest = $sredstvaDrugiViriFest;
-        return $this;
-    }
-
-    public function setSredstvaDrugiViriRazno($sredstvaDrugiViriRazno)
-    {
-        $this->sredstvaDrugiViriRazno = $sredstvaDrugiViriRazno;
-        return $this;
-    }
-
-    public function setSredstvaDrugiViriIzjem($sredstvaDrugiViriIzjem)
-    {
-        $this->sredstvaDrugiViriIzjem = $sredstvaDrugiViriIzjem;
-        return $this;
-    }
-
-    public function setSredstvaAvtSamoz($sredstvaAvtSamoz)
-    {
-        $this->sredstvaAvtSamoz = $sredstvaAvtSamoz;
-        return $this;
-    }
-
-    public function getStObiskPonPrem()
-    {
-        return $this->stObiskPonPrem;
-    }
-
-    public function setStObiskPonPrem($stObiskPonPrem)
-    {
-        $this->stObiskPonPrem = $stObiskPonPrem;
-        return $this;
-    }
-
-    public function getStObiskPonPremGost()
-    {
-        return $this->stObiskPonPremGost;
-    }
-
-    public function getStObiskPonPremZamejo()
-    {
-        return $this->stObiskPonPremZamejo;
-    }
-
-    public function getStObiskPonPremInt()
-    {
-        return $this->stObiskPonPremInt;
-    }
-
-    public function setStObiskPonPremGost($stObiskPonPremGost)
-    {
-        $this->stObiskPonPremGost = $stObiskPonPremGost;
-        return $this;
-    }
-
-    public function setStObiskPonPremZamejo($stObiskPonPremZamejo)
-    {
-        $this->stObiskPonPremZamejo = $stObiskPonPremZamejo;
-        return $this;
-    }
-
-    public function setStObiskPonPremInt($stObiskPonPremInt)
-    {
-        $this->stObiskPonPremInt = $stObiskPonPremInt;
-        return $this;
-    }
-
-    public function getPostavkeC2()
-    {
-        return $this->postavkeC2;
-    }
-
-    public function setPostavkeC2($postavkeC2)
+    function setPostavkeC2($postavkeC2)
     {
         $this->postavkeC2 = $postavkeC2;
         return $this;
     }
 
-    public function getStIzvPremDoma()
+    function setStPremier($stPremier)
     {
-        return $this->stIzvPremDoma;
+        $this->stPremier = $stPremier;
+        return $this;
     }
 
-    public function getStIzvPremKopr()
+    function setStPremierVelikih($stPremierVelikih)
     {
-        return $this->stIzvPremKopr;
+        $this->stPremierVelikih = $stPremierVelikih;
+        return $this;
     }
 
-    public function getStObiskPremDoma()
+    function setStPremierMalih($stPremierMalih)
     {
-        return $this->stObiskPremDoma;
+        $this->stPremierMalih = $stPremierMalih;
+        return $this;
     }
 
-    public function getStObiskPremKopr()
+    function setStPremierMalihKopr($stPremierMalihKopr)
     {
-        return $this->stObiskPremKopr;
+        $this->stPremierMalihKopr = $stPremierMalihKopr;
+        return $this;
     }
 
-    public function setStIzvPremDoma($stIzvPremDoma)
+    function setStPremierVelikihKopr($stPremierVelikihKopr)
+    {
+        $this->stPremierVelikihKopr = $stPremierVelikihKopr;
+        return $this;
+    }
+
+    function setStPremierSredKopr($stPremierSredKopr)
+    {
+        $this->stPremierSredKopr = $stPremierSredKopr;
+        return $this;
+    }
+
+    function setStInt($stInt)
+    {
+        $this->stInt = $stInt;
+        return $this;
+    }
+
+    function setStFest($stFest)
+    {
+        $this->stFest = $stFest;
+        return $this;
+    }
+
+    function setStRazno($stRazno)
+    {
+        $this->stRazno = $stRazno;
+        return $this;
+    }
+
+    function setStIzjem($stIzjem)
+    {
+        $this->stIzjem = $stIzjem;
+        return $this;
+    }
+
+    function setStPonPrem($stPonPrem)
+    {
+        $this->stPonPrem = $stPonPrem;
+        return $this;
+    }
+
+    function setStPonPrej($stPonPrej)
+    {
+        $this->stPonPrej = $stPonPrej;
+        return $this;
+    }
+
+    function setStPonPrejVelikih($stPonPrejVelikih)
+    {
+        $this->stPonPrejVelikih = $stPonPrejVelikih;
+        return $this;
+    }
+
+    function setStPonPrejMalih($stPonPrejMalih)
+    {
+        $this->stPonPrejMalih = $stPonPrejMalih;
+        return $this;
+    }
+
+    function setStPonPrejMalihKopr($stPonPrejMalihKopr)
+    {
+        $this->stPonPrejMalihKopr = $stPonPrejMalihKopr;
+        return $this;
+    }
+
+    function setStPonPrejSredKopr($stPonPrejSredKopr)
+    {
+        $this->stPonPrejSredKopr = $stPonPrejSredKopr;
+        return $this;
+    }
+
+    function setStPonPrejVelikihKopr($stPonPrejVelikihKopr)
+    {
+        $this->stPonPrejVelikihKopr = $stPonPrejVelikihKopr;
+        return $this;
+    }
+
+    function setStGostujo($stGostujo)
+    {
+        $this->stGostujo = $stGostujo;
+        return $this;
+    }
+
+    function setVrPS1($vrPS1)
+    {
+        $this->vrPS1 = $vrPS1;
+        return $this;
+    }
+
+    function setVrPS1Do($vrPS1Do)
+    {
+        $this->vrPS1Do = $vrPS1Do;
+        return $this;
+    }
+
+    function setVrPS1Mat($vrPS1Mat)
+    {
+        $this->vrPS1Mat = $vrPS1Mat;
+        return $this;
+    }
+
+    function setVrPS1GostovSZ($vrPS1GostovSZ)
+    {
+        $this->vrPS1GostovSZ = $vrPS1GostovSZ;
+        return $this;
+    }
+
+    function setStIzvNekomerc($stIzvNekomerc)
+    {
+        $this->stIzvNekomerc = $stIzvNekomerc;
+        return $this;
+    }
+
+    function setStIzvPrem($stIzvPrem)
+    {
+        $this->stIzvPrem = $stIzvPrem;
+        return $this;
+    }
+
+    function setStIzvPremDoma($stIzvPremDoma)
     {
         $this->stIzvPremDoma = $stIzvPremDoma;
         return $this;
     }
 
-    public function setStIzvPremKopr($stIzvPremKopr)
+    function setStIzvPremKopr($stIzvPremKopr)
     {
         $this->stIzvPremKopr = $stIzvPremKopr;
         return $this;
     }
 
-    public function setStObiskPremDoma($stObiskPremDoma)
+    function setStIzvPonPrem($stIzvPonPrem)
+    {
+        $this->stIzvPonPrem = $stIzvPonPrem;
+        return $this;
+    }
+
+    function setStIzvPonPremDoma($stIzvPonPremDoma)
+    {
+        $this->stIzvPonPremDoma = $stIzvPonPremDoma;
+        return $this;
+    }
+
+    function setStIzvPonPremZamejo($stIzvPonPremZamejo)
+    {
+        $this->stIzvPonPremZamejo = $stIzvPonPremZamejo;
+        return $this;
+    }
+
+    function setStIzvPonPremGost($stIzvPonPremGost)
+    {
+        $this->stIzvPonPremGost = $stIzvPonPremGost;
+        return $this;
+    }
+
+    function setStIzvPonPremKopr($stIzvPonPremKopr)
+    {
+        $this->stIzvPonPremKopr = $stIzvPonPremKopr;
+        return $this;
+    }
+
+    function setStIzvPonPremInt($stIzvPonPremInt)
+    {
+        $this->stIzvPonPremInt = $stIzvPonPremInt;
+        return $this;
+    }
+
+    function setStIzvPonPremKoprInt($stIzvPonPremKoprInt)
+    {
+        $this->stIzvPonPremKoprInt = $stIzvPonPremKoprInt;
+        return $this;
+    }
+
+    function setStIzvPonPrej($stIzvPonPrej)
+    {
+        $this->stIzvPonPrej = $stIzvPonPrej;
+        return $this;
+    }
+
+    function setStIzvPonPrejDoma($stIzvPonPrejDoma)
+    {
+        $this->stIzvPonPrejDoma = $stIzvPonPrejDoma;
+        return $this;
+    }
+
+    function setStIzvPonPrejZamejo($stIzvPonPrejZamejo)
+    {
+        $this->stIzvPonPrejZamejo = $stIzvPonPrejZamejo;
+        return $this;
+    }
+
+    function setStIzvPonPrejGost($stIzvPonPrejGost)
+    {
+        $this->stIzvPonPrejGost = $stIzvPonPrejGost;
+        return $this;
+    }
+
+    function setStIzvPonPrejKopr($stIzvPonPrejKopr)
+    {
+        $this->stIzvPonPrejKopr = $stIzvPonPrejKopr;
+        return $this;
+    }
+
+    function setStIzvPonPrejInt($stIzvPonPrejInt)
+    {
+        $this->stIzvPonPrejInt = $stIzvPonPrejInt;
+        return $this;
+    }
+
+    function setStIzvPonPrejKoprInt($stIzvPonPrejKoprInt)
+    {
+        $this->stIzvPonPrejKoprInt = $stIzvPonPrejKoprInt;
+        return $this;
+    }
+
+    function setStIzvGostuj($stIzvGostuj)
+    {
+        $this->stIzvGostuj = $stIzvGostuj;
+        return $this;
+    }
+
+    function setStIzvOstalihNek($stIzvOstalihNek)
+    {
+        $this->stIzvOstalihNek = $stIzvOstalihNek;
+        return $this;
+    }
+
+    function setStIzvGostovanjSlo($stIzvGostovanjSlo)
+    {
+        $this->stIzvGostovanjSlo = $stIzvGostovanjSlo;
+        return $this;
+    }
+
+    function setStIzvGostovanjZam($stIzvGostovanjZam)
+    {
+        $this->stIzvGostovanjZam = $stIzvGostovanjZam;
+        return $this;
+    }
+
+    function setStIzvGostovanjInt($stIzvGostovanjInt)
+    {
+        $this->stIzvGostovanjInt = $stIzvGostovanjInt;
+        return $this;
+    }
+
+    function setStObiskNekom($stObiskNekom)
+    {
+        $this->stObiskNekom = $stObiskNekom;
+        return $this;
+    }
+
+    function setStObiskNekomMat($stObiskNekomMat)
+    {
+        $this->stObiskNekomMat = $stObiskNekomMat;
+        return $this;
+    }
+
+    function setStObiskNekomGostSlo($stObiskNekomGostSlo)
+    {
+        $this->stObiskNekomGostSlo = $stObiskNekomGostSlo;
+        return $this;
+    }
+
+    function setStObiskNekomGostZam($stObiskNekomGostZam)
+    {
+        $this->stObiskNekomGostZam = $stObiskNekomGostZam;
+        return $this;
+    }
+
+    function setStObiskNekomGostInt($stObiskNekomGostInt)
+    {
+        $this->stObiskNekomGostInt = $stObiskNekomGostInt;
+        return $this;
+    }
+
+    function setStObiskPrem($stObiskPrem)
+    {
+        $this->stObiskPrem = $stObiskPrem;
+        return $this;
+    }
+
+    function setStObiskPremDoma($stObiskPremDoma)
     {
         $this->stObiskPremDoma = $stObiskPremDoma;
         return $this;
     }
 
-    public function setStObiskPremKopr($stObiskPremKopr)
+    function setStObiskPremKopr($stObiskPremKopr)
     {
         $this->stObiskPremKopr = $stObiskPremKopr;
         return $this;
     }
+
+    function setStObiskPonPrem($stObiskPonPrem)
+    {
+        $this->stObiskPonPrem = $stObiskPonPrem;
+        return $this;
+    }
+
+    function setStObiskPonPremDoma($stObiskPonPremDoma)
+    {
+        $this->stObiskPonPremDoma = $stObiskPonPremDoma;
+        return $this;
+    }
+
+    function setStObiskPonPremKopr($stObiskPonPremKopr)
+    {
+        $this->stObiskPonPremKopr = $stObiskPonPremKopr;
+        return $this;
+    }
+
+    function setStObiskPonPremKoprInt($stObiskPonPremKoprInt)
+    {
+        $this->stObiskPonPremKoprInt = $stObiskPonPremKoprInt;
+        return $this;
+    }
+
+    function setStObiskPonPremGost($stObiskPonPremGost)
+    {
+        $this->stObiskPonPremGost = $stObiskPonPremGost;
+        return $this;
+    }
+
+    function setStObiskPonPremZamejo($stObiskPonPremZamejo)
+    {
+        $this->stObiskPonPremZamejo = $stObiskPonPremZamejo;
+        return $this;
+    }
+
+    function setStObiskPonPremInt($stObiskPonPremInt)
+    {
+        $this->stObiskPonPremInt = $stObiskPonPremInt;
+        return $this;
+    }
+
+    function setAvgObiskPrired($avgObiskPrired)
+    {
+        $this->avgObiskPrired = $avgObiskPrired;
+        return $this;
+    }
+
+    function setAvgZasedDvoran($avgZasedDvoran)
+    {
+        $this->avgZasedDvoran = $avgZasedDvoran;
+        return $this;
+    }
+
+    function setAvgCenaVstopnice($avgCenaVstopnice)
+    {
+        $this->avgCenaVstopnice = $avgCenaVstopnice;
+        return $this;
+    }
+
+    function setStProdVstopnic($stProdVstopnic)
+    {
+        $this->stProdVstopnic = $stProdVstopnic;
+        return $this;
+    }
+
+    function setStKoprodukcij($stKoprodukcij)
+    {
+        $this->stKoprodukcij = $stKoprodukcij;
+        return $this;
+    }
+
+    function setStKoprodukcijInt($stKoprodukcijInt)
+    {
+        $this->stKoprodukcijInt = $stKoprodukcijInt;
+        return $this;
+    }
+
+    function setStKoprodukcijNVO($stKoprodukcijNVO)
+    {
+        $this->stKoprodukcijNVO = $stKoprodukcijNVO;
+        return $this;
+    }
+
+    function setStZaposlenih($stZaposlenih)
+    {
+        $this->stZaposlenih = $stZaposlenih;
+        return $this;
+    }
+
+    function setStZaposIgralcev($stZaposIgralcev)
+    {
+        $this->stZaposIgralcev = $stZaposIgralcev;
+        return $this;
+    }
+
+    function setAvgStNastopovIgr($avgStNastopovIgr)
+    {
+        $this->avgStNastopovIgr = $avgStNastopovIgr;
+        return $this;
+    }
+
+    function setStHonorarnihZun($stHonorarnihZun)
+    {
+        $this->stHonorarnihZun = $stHonorarnihZun;
+        return $this;
+    }
+
+    function setStHonorarnihZunIgr($stHonorarnihZunIgr)
+    {
+        $this->stHonorarnihZunIgr = $stHonorarnihZunIgr;
+        return $this;
+    }
+
+    function setStHonorarnihZunIgrTujJZ($stHonorarnihZunIgrTujJZ)
+    {
+        $this->stHonorarnihZunIgrTujJZ = $stHonorarnihZunIgrTujJZ;
+        return $this;
+    }
+
+    function setStHonorarnihZunSamoz($stHonorarnihZunSamoz)
+    {
+        $this->stHonorarnihZunSamoz = $stHonorarnihZunSamoz;
+        return $this;
+    }
+
+    function setSredstvaInt($sredstvaInt)
+    {
+        $this->sredstvaInt = $sredstvaInt;
+        return $this;
+    }
+
+    function setSredstvaAvt($sredstvaAvt)
+    {
+        $this->sredstvaAvt = $sredstvaAvt;
+        return $this;
+    }
+
+    function setSredstvaZaprosenoPrem($sredstvaZaprosenoPrem)
+    {
+        $this->sredstvaZaprosenoPrem = $sredstvaZaprosenoPrem;
+        return $this;
+    }
+
+    function setSredstvaZaprosenoPonPrem($sredstvaZaprosenoPonPrem)
+    {
+        $this->sredstvaZaprosenoPonPrem = $sredstvaZaprosenoPonPrem;
+        return $this;
+    }
+
+    function setSredstvaZaprosenoPonPrej($sredstvaZaprosenoPonPrej)
+    {
+        $this->sredstvaZaprosenoPonPrej = $sredstvaZaprosenoPonPrej;
+        return $this;
+    }
+
+    function setSredstvaZaprosenoGostujo($sredstvaZaprosenoGostujo)
+    {
+        $this->sredstvaZaprosenoGostujo = $sredstvaZaprosenoGostujo;
+        return $this;
+    }
+
+    function setSredstvaZaprosenoInt($sredstvaZaprosenoInt)
+    {
+        $this->sredstvaZaprosenoInt = $sredstvaZaprosenoInt;
+        return $this;
+    }
+
+    function setSredstvaZaprosenoFest($sredstvaZaprosenoFest)
+    {
+        $this->sredstvaZaprosenoFest = $sredstvaZaprosenoFest;
+        return $this;
+    }
+
+    function setSredstvaZaprosenoRazno($sredstvaZaprosenoRazno)
+    {
+        $this->sredstvaZaprosenoRazno = $sredstvaZaprosenoRazno;
+        return $this;
+    }
+
+    function setSredstvaZaprosenoIzjem($sredstvaZaprosenoIzjem)
+    {
+        $this->sredstvaZaprosenoIzjem = $sredstvaZaprosenoIzjem;
+        return $this;
+    }
+
+    function setSredstvaDrugiJavniPrem($sredstvaDrugiJavniPrem)
+    {
+        $this->sredstvaDrugiJavniPrem = $sredstvaDrugiJavniPrem;
+        return $this;
+    }
+
+    function setSredstvaDrugiJavniPonPrem($sredstvaDrugiJavniPonPrem)
+    {
+        $this->sredstvaDrugiJavniPonPrem = $sredstvaDrugiJavniPonPrem;
+        return $this;
+    }
+
+    function setSredstvaDrugiJavniPonPrej($sredstvaDrugiJavniPonPrej)
+    {
+        $this->sredstvaDrugiJavniPonPrej = $sredstvaDrugiJavniPonPrej;
+        return $this;
+    }
+
+    function setSredstvaDrugiJavniGostujo($sredstvaDrugiJavniGostujo)
+    {
+        $this->sredstvaDrugiJavniGostujo = $sredstvaDrugiJavniGostujo;
+        return $this;
+    }
+
+    function setSredstvaDrugiJavniInt($sredstvaDrugiJavniInt)
+    {
+        $this->sredstvaDrugiJavniInt = $sredstvaDrugiJavniInt;
+        return $this;
+    }
+
+    function setSredstvaDrugiJavniFest($sredstvaDrugiJavniFest)
+    {
+        $this->sredstvaDrugiJavniFest = $sredstvaDrugiJavniFest;
+        return $this;
+    }
+
+    function setSredstvaDrugiJavniRazno($sredstvaDrugiJavniRazno)
+    {
+        $this->sredstvaDrugiJavniRazno = $sredstvaDrugiJavniRazno;
+        return $this;
+    }
+
+    function setSredstvaDrugiJavniIzjem($sredstvaDrugiJavniIzjem)
+    {
+        $this->sredstvaDrugiJavniIzjem = $sredstvaDrugiJavniIzjem;
+        return $this;
+    }
+
+    function setSredstvaDrugiViriPrem($sredstvaDrugiViriPrem)
+    {
+        $this->sredstvaDrugiViriPrem = $sredstvaDrugiViriPrem;
+        return $this;
+    }
+
+    function setSredstvaDrugiViriPonPrem($sredstvaDrugiViriPonPrem)
+    {
+        $this->sredstvaDrugiViriPonPrem = $sredstvaDrugiViriPonPrem;
+        return $this;
+    }
+
+    function setSredstvaDrugiViriPonPrej($sredstvaDrugiViriPonPrej)
+    {
+        $this->sredstvaDrugiViriPonPrej = $sredstvaDrugiViriPonPrej;
+        return $this;
+    }
+
+    function setSredstvaDrugiViriGostujo($sredstvaDrugiViriGostujo)
+    {
+        $this->sredstvaDrugiViriGostujo = $sredstvaDrugiViriGostujo;
+        return $this;
+    }
+
+    function setSredstvaDrugiViriInt($sredstvaDrugiViriInt)
+    {
+        $this->sredstvaDrugiViriInt = $sredstvaDrugiViriInt;
+        return $this;
+    }
+
+    function setSredstvaDrugiViriFest($sredstvaDrugiViriFest)
+    {
+        $this->sredstvaDrugiViriFest = $sredstvaDrugiViriFest;
+        return $this;
+    }
+
+    function setSredstvaDrugiViriRazno($sredstvaDrugiViriRazno)
+    {
+        $this->sredstvaDrugiViriRazno = $sredstvaDrugiViriRazno;
+        return $this;
+    }
+
+    function setSredstvaDrugiViriIzjem($sredstvaDrugiViriIzjem)
+    {
+        $this->sredstvaDrugiViriIzjem = $sredstvaDrugiViriIzjem;
+        return $this;
+    }
+
+    function setSredstvaAvtSamoz($sredstvaAvtSamoz)
+    {
+        $this->sredstvaAvtSamoz = $sredstvaAvtSamoz;
+        return $this;
+    }
+
 
 }

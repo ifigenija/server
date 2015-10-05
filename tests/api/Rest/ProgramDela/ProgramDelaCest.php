@@ -248,9 +248,9 @@ class ProgramDelaCest
 //            'avgStNastopovIgr' => 7.89,
 //            'vrPS1Mat'         => 7.89,
 //            'vrPS1GostovSZ'    => 7.89,
-//            'stHonorarnih'         => 7,
-//            'stHonorarnihIgr'      => 7,
-//            'stHonorarnihIgrTujJZ' => 7,
+//            'stHonorarnihZun'         => 7,
+//            'stHonorarnihZunIgr'      => 7,
+//            'stHonorarnihZunIgrTujJZ' => 7,
 //            'sredstvaInt'          => 7.89,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -353,9 +353,9 @@ class ProgramDelaCest
 //        $I->assertEquals($ent['avgStNastopovIgr'], 7.89);
 //        $I->assertEquals($ent['vrPS1Mat'], 7.89);
 //        $I->assertEquals($ent['vrPS1GostovSZ'], 7.89);
-//        $I->assertEquals($ent['stHonorarnih'], 7);
-//        $I->assertEquals($ent['stHonorarnihIgr'], 7);
-//        $I->assertEquals($ent['stHonorarnihIgrTujJZ'], 7);
+//        $I->assertEquals($ent['stHonorarnihZun'], 7);
+//        $I->assertEquals($ent['stHonorarnihZunIgr'], 7);
+//        $I->assertEquals($ent['stHonorarnihZunIgrTujJZ'], 7);
 //        $I->assertEquals($ent['sredstvaInt'], 7.89);
     }
 
@@ -456,10 +456,10 @@ class ProgramDelaCest
             'sort'                   => 1,
             'stZaposUmet'            => 1,
             'stZaposDrug'            => 1,
-            'stHonorarnih'           => 10,
-            'stHonorarnihIgr'        => 7,
-            'stHonorarnihIgrTujJZ'   => 5,
-            'stHonorarnihIgrSamoz'   => 5,
+            'stHonorarnihZun'           => 10,
+            'stHonorarnihZunIgr'        => 7,
+            'stHonorarnihZunIgrTujJZ'   => 5,
+            'stHonorarnihZunSamoz'   => 5,
             'uprizoritev'            => $this->lookUprizoritev2['id'],
             'dokument'               => $this->obj2['id'],
         ];
@@ -496,10 +496,10 @@ class ProgramDelaCest
             'sort'                   => 2,
             'stZaposUmet'            => 2,
             'stZaposDrug'            => 2,
-            'stHonorarnih'           => 9,
-            'stHonorarnihIgr'        => 6,
-            'stHonorarnihIgrTujJZ'   => 2,
-            'stHonorarnihIgrSamoz'   => 2,
+            'stHonorarnihZun'           => 9,
+            'stHonorarnihZunIgr'        => 6,
+            'stHonorarnihZunIgrTujJZ'   => 2,
+            'stHonorarnihZunSamoz'   => 2,
             'uprizoritev'            => $this->lookUprizoritev1['id'],
             'dokument'               => $this->obj2['id'],
         ];
@@ -611,10 +611,10 @@ class ProgramDelaCest
             'sort'                   => 1,
             'stZaposlenih'           => 1,
 //            'stZaposDrug'             => 1,
-            'stHonorarnih'           => 5,
-            'stHonorarnihIgr'        => 3,
-            'stHonorarnihIgrTujJZ'   => 1,
-            'stHonorarnihIgrSamoz'   => 1,
+            'stHonorarnihZun'           => 5,
+            'stHonorarnihZunIgr'        => 3,
+            'stHonorarnihZunIgrTujJZ'   => 1,
+            'stHonorarnihZunSamoz'   => 1,
             'dokument'               => $this->obj2['id'],
             'trajanje'               => "avgust-oktober",
             'prizorisce'             => "samostan",
@@ -706,7 +706,7 @@ class ProgramDelaCest
             'programskoTelo'       => 'zz',
             'stTujihSelektorjev'   => 1,
             'stZaposlenih'         => 1,
-            'stHonorarnih'         => 22,
+            'stHonorarnihZun'         => 22,
             'zaproseno'            => 1.24,
             'celotnaVrednost'      => 1.24,
             'nasDelez'             => 100.24,
@@ -738,7 +738,7 @@ class ProgramDelaCest
             'programskoTelo'       => 'zz',
             'stTujihSelektorjev'   => 1,
             'stZaposlenih'         => 1,
-            'stHonorarnih'         => 30,
+            'stHonorarnihZun'         => 30,
             'zaproseno'            => 1.24,
             'celotnaVrednost'      => 1.24,
             'nasDelez'             => 100.24,
@@ -840,7 +840,7 @@ class ProgramDelaCest
 //            'stPE'            => 1,
             'obiskDoma'    => 6,
             'stZaposlenih' => 1,
-            'stHonorarnih' => 18,
+            'stHonorarnihZun' => 18,
             'zaproseno'    => 0,
 //            'nasDelez'      => 100.24,
 //            'lastnaSredstva'  => 1.24,
@@ -858,7 +858,7 @@ class ProgramDelaCest
 //            'stPE'            => 1,
             'obiskDoma'    => 22,
             'stZaposlenih' => 1,
-            'stHonorarnih' => 14,
+            'stHonorarnihZun' => 14,
             'zaproseno'    => 0,
 //            'nasDelez'      => 100.24,
 //            'lastnaSredstva'  => 1.24,
@@ -997,10 +997,10 @@ class ProgramDelaCest
             'sort'                   => 1,
             'stZaposUmet'            => 1,
             'stZaposDrug'            => 1,
-            'stHonorarnih'           => 1,
-            'stHonorarnihIgr'        => 1,
-            'stHonorarnihIgrTujJZ'   => 1,
-            'stHonorarnihIgrSamoz'   => 1,
+            'stHonorarnihZun'           => 1,
+            'stHonorarnihZunIgr'        => 1,
+            'stHonorarnihZunIgrTujJZ'   => 1,
+            'stHonorarnihZunSamoz'   => 1,
             'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
             'kpe'                    => 0.1,
             'dokument'               => $this->obj2['id'],
@@ -1038,10 +1038,10 @@ class ProgramDelaCest
             'sort'                   => 1,
             'stZaposUmet'            => 1,
             'stZaposDrug'            => 1,
-            'stHonorarnih'           => 1,
-            'stHonorarnihIgr'        => 1,
-            'stHonorarnihIgrTujJZ'   => 1,
-            'stHonorarnihIgrSamoz'   => 1,
+            'stHonorarnihZun'           => 1,
+            'stHonorarnihZunIgr'        => 1,
+            'stHonorarnihZunIgrTujJZ'   => 1,
+            'stHonorarnihZunSamoz'   => 1,
             'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
             'kpe'                    => 0.1,
             'dokument'               => $this->obj2['id'],
@@ -1078,10 +1078,10 @@ class ProgramDelaCest
             'sort'                   => 1,
             'stZaposUmet'            => 1,
             'stZaposDrug'            => 1,
-            'stHonorarnih'           => 1,
-            'stHonorarnihIgr'        => 1,
-            'stHonorarnihIgrTujJZ'   => 1,
-            'stHonorarnihIgrSamoz'   => 1,
+            'stHonorarnihZun'           => 1,
+            'stHonorarnihZunIgr'        => 1,
+            'stHonorarnihZunIgrTujJZ'   => 1,
+            'stHonorarnihZunSamoz'   => 1,
             'tipProgramskeEnote'     => $this->lookTipProgramskeEnote1['id'],
             'kpe'                    => 0.1,
             'dokument'               => $this->obj2['id'],
@@ -1251,10 +1251,10 @@ class ProgramDelaCest
             'sort'                    => 1,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
-            'stHonorarnih'            => 11,
-            'stHonorarnihIgr'         => 5,
-            'stHonorarnihIgrTujJZ'    => 3,
-            'stHonorarnihIgrSamoz'    => 3,
+            'stHonorarnihZun'            => 11,
+            'stHonorarnihZunIgr'         => 5,
+            'stHonorarnihZunIgrTujJZ'    => 3,
+            'stHonorarnihZunSamoz'    => 3,
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote2['id'],
             'dokument'                => $this->obj2['id'],
             'uprizoritev'             => $this->lookUprizoritev5['id'], // ista uprizoritev
@@ -1293,10 +1293,10 @@ class ProgramDelaCest
             'sort'                    => 1,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
-            'stHonorarnih'            => 1,
-            'stHonorarnihIgr'         => 1,
-            'stHonorarnihIgrTujJZ'    => 1,
-            'stHonorarnihIgrSamoz'    => 1,
+            'stHonorarnihZun'            => 1,
+            'stHonorarnihZunIgr'         => 1,
+            'stHonorarnihZunIgrTujJZ'    => 1,
+            'stHonorarnihZunSamoz'    => 1,
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote2['id'],
             'dokument'                => $this->obj2['id'],
             'uprizoritev'             => $this->lookUprizoritev5['id'], // ista uprizoritev
@@ -1335,10 +1335,10 @@ class ProgramDelaCest
             'sort'                    => 1,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
-            'stHonorarnih'            => 25,
-            'stHonorarnihIgr'         => 8,
-            'stHonorarnihIgrTujJZ'    => 8,
-            'stHonorarnihIgrSamoz'    => 8,
+            'stHonorarnihZun'            => 25,
+            'stHonorarnihZunIgr'         => 8,
+            'stHonorarnihZunIgrTujJZ'    => 8,
+            'stHonorarnihZunSamoz'    => 8,
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote5['id'],
             'dokument'                => $this->obj2['id'],
             'uprizoritev'             => $this->lookUprizoritev2['id'], // ista uprizoritev
@@ -1721,8 +1721,13 @@ class ProgramDelaCest
     {
 
         $ent  = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        codecept_debug($ent);
+//        $I->assertTrue(false,"začasno $$");
+        
         // pri update preračuna kazalnike
         $entR = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        codecept_debug($entR);
+        
         $I->assertNotEmpty($entR['id']);
         $I->assertGreaterThanOrEqual(4, $entR['stPremier'], "št. premier");
         $I->assertGreaterThanOrEqual(3, $entR['stPonPrem'], "št. ponovitev premiere");
@@ -1777,10 +1782,10 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(326, $entR['stObiskPonPremZamejo'], 'stObiskPonPremZamejo');
         $I->assertGreaterThanOrEqual(243, $entR['stObiskPonPremInt'], 'stObiskPonPremInt');
         $I->assertEquals($entR['avgObiskPrired'], round($entR['stObiskNekom'] / $entR['stIzvNekomerc'], 2), "povprečno št. obiskovalcev");     //kvocient drugih dveh števil
-        $I->assertGreaterThanOrEqual(141, $entR['stHonorarnih'], "");
-        $I->assertGreaterThanOrEqual(28, $entR['stHonorarnihIgr'], "");
-        $I->assertGreaterThanOrEqual(20, $entR['stHonorarnihIgrTujJZ'], "");
-        $I->assertGreaterThanOrEqual(20, $entR['stHonorarnihIgrSamoz'], "");
+        $I->assertGreaterThanOrEqual(141, $entR['stHonorarnihZun'], "");
+        $I->assertGreaterThanOrEqual(28, $entR['stHonorarnihZunIgr'], "");
+        $I->assertGreaterThanOrEqual(20, $entR['stHonorarnihZunIgrTujJZ'], "");
+        $I->assertGreaterThanOrEqual(20, $entR['stHonorarnihZunSamoz'], "");
         $I->assertGreaterThanOrEqual(548.12, $entR['sredstvaAvt'], "sredstvaAvt");
         $I->assertGreaterThanOrEqual(548.12, $entR['sredstvaAvtSamoz'], "sredstvaAvtSamoz");
         $I->assertGreaterThanOrEqual(4.96, $entR['sredstvaZaprosenoPrem'], "sredstvaZaprosenoPrem");
@@ -1857,10 +1862,10 @@ class ProgramDelaCest
             'sort'                   => 8,
             'stZaposUmet'            => 9,
             'stZaposDrug'            => 6,
-            'stHonorarnih'           => 11,
-            'stHonorarnihIgr'        => 3,
-            'stHonorarnihIgrTujJZ'   => 2,
-            'stHonorarnihIgrSamoz'   => 2,
+            'stHonorarnihZun'           => 11,
+            'stHonorarnihZunIgr'        => 3,
+            'stHonorarnihZunIgrTujJZ'   => 2,
+            'stHonorarnihZunSamoz'   => 2,
             'uprizoritev'            => $this->lookUprizoritev5['id'],
             'dokument'               => $this->obj2['id'],
         ];
@@ -1912,6 +1917,11 @@ class ProgramDelaCest
         codecept_debug($ent);
         $I->assertNotEmpty($entR['id']);
         $I->assertGreaterThanOrEqual(5, $entR['stPremier'], "št. premier");     // ena premiera bi morala biti sedaj več
+        $I->assertGreaterThanOrEqual(0, $entR['stPremierVelikih'], "stPremierVelikih"); 
+        $I->assertGreaterThanOrEqual(0, $entR['stPremierMalih'], "stPremierMalih");     
+        $I->assertGreaterThanOrEqual(0, $entR['stPremierMalihKopr'], "stPremierMalihKopr");
+        $I->assertGreaterThanOrEqual(0, $entR['stPremierSredKopr'], "stPremierSredKopr");    
+        $I->assertGreaterThanOrEqual(0, $entR['stPremierVelikihKopr'], "stPremierVelikihKopr"); 
         $I->assertGreaterThanOrEqual(3, $entR['stPonPrem'], "št. ponovitev premiere");
         $I->assertGreaterThanOrEqual(4, $entR['stPonPrej'], "št. ponovitev prejšnjih sezon"); // ena ponovitev prejšnjih več
         $I->assertGreaterThanOrEqual(3, $entR['stGostujo'], "stGostujo");
@@ -2206,6 +2216,11 @@ class ProgramDelaCest
         $I->assertNotEquals($oldPD['id'], $entR['id'], " id");
         $I->assertNotEquals($oldPD['sifra'], $entR['sifra'], " id");
         $I->assertEquals($oldPD['stPremier'], $entR['stPremier'], "št. premier");
+        $I->assertEquals($oldPD['stPremierVelikih'], $entR['stPremierVelikih'], "št. premier velikih predstav");
+        $I->assertEquals($oldPD['stPremierMalih'], $entR['stPremierMalih'], "št. premier malih predstav");
+        $I->assertEquals($oldPD['stPremierMalihKopr'], $entR['stPremierMalihKopr'], "št. premier predstav mallih kopr");
+        $I->assertEquals($oldPD['stPremierSredKopr'], $entR['stPremierSredKopr'], "št. premier predstav srednjih koprodukcij");
+        $I->assertEquals($oldPD['stPremierVelikihKopr'], $entR['stPremierVelikihKopr'], "št. premier predstav velikih koprodukcij");
         $I->assertEquals($oldPD['stPonPrem'], $entR['stPonPrem'], "št. ponovitev premiere");
         $I->assertEquals($oldPD['stPonPrej'], $entR['stPonPrej'], "št. ponovitev prejšnjih sezon");
         $I->assertEquals($oldPD['stPonPrejVelikih'], $entR['stPonPrejVelikih']);
@@ -2250,10 +2265,10 @@ class ProgramDelaCest
         $I->assertEquals($oldPD['stObiskPonPremKopr'], $entR['stObiskPonPremKopr'], "stObiskPonPremKopr");
         $I->assertEquals($oldPD['stObiskPonPremKoprInt'], $entR['stObiskPonPremKoprInt'], "stObiskPonPremKoprInt");
         $I->assertEquals($oldPD['avgObiskPrired'], $entR['avgObiskPrired'], "povprečno št. obiskovalcev");     //kvocient drugih dveh števil
-        $I->assertEquals($oldPD['stHonorarnih'], $entR['stHonorarnih'], "");
-        $I->assertEquals($oldPD['stHonorarnihIgr'], $entR['stHonorarnihIgr'], "");
-        $I->assertEquals($oldPD['stHonorarnihIgrTujJZ'], $entR['stHonorarnihIgrTujJZ'], "");
-        $I->assertEquals($oldPD['stHonorarnihIgrSamoz'], $entR['stHonorarnihIgrSamoz'], "");
+        $I->assertEquals($oldPD['stHonorarnihZun'], $entR['stHonorarnihZun'], "");
+        $I->assertEquals($oldPD['stHonorarnihZunIgr'], $entR['stHonorarnihZunIgr'], "");
+        $I->assertEquals($oldPD['stHonorarnihZunIgrTujJZ'], $entR['stHonorarnihZunIgrTujJZ'], "");
+        $I->assertEquals($oldPD['stHonorarnihZunSamoz'], $entR['stHonorarnihZunSamoz'], "");
         $I->assertEquals($oldPD['sredstvaAvt'], $entR['sredstvaAvt'], "sredstvaAvt");
         $I->assertEquals($oldPD['sredstvaAvtSamoz'], $entR['sredstvaAvtSamoz'], "sredstvaAvtSamoz");
         $I->assertEquals($oldPD['sredstvaZaprosenoPrem'], $entR['sredstvaZaprosenoPrem'], "sredstvaZaprosenoPrem");

@@ -33,10 +33,10 @@ forms:
             - sort
             - stZaposlenih
 #            - stDrugih
-            - stHonorarnih
-            - stHonorarnihIgr
-            - stHonorarnihIgrTujJZ
-            - stHonorarnihIgrSamoz
+            - stHonorarnihZun
+            - stHonorarnihZunIgr
+            - stHonorarnihZunIgrTujJZ
+            - stHonorarnihZunSamoz
             - imaKoprodukcije
             - prizorisce
             - trajanje

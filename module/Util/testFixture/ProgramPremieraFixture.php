@@ -65,10 +65,11 @@ class ProgramPremieraFixture
         $o->setObiskDoma($v[10]);
         $o->setStZaposUmet($v[11]);
         $o->setStZaposDrug($v[12]);
-        $o->setStHonorarnih($v[13]);
-        $o->setStHonorarnihIgr($v[14]);
-        $o->setStHonorarnihIgrTujJZ($v[15]);
+        $o->setStHonorarnihZun($v[13]);
+        $o->setStHonorarnihZunIgr($v[14]);
+        $o->setStHonorarnihZunIgrTujJZ($v[15]);
         $o->setMaterialni($v[16]);
+        $o->setStHonorarnihZunSamoz($v[18]);
 
         $o->preracunaj();
         $o->validate();
@@ -80,9 +81,9 @@ class ProgramPremieraFixture
     public function getData()
     {
         return [
-            ['01', 10000.80, '04', 3600.12, 2222.3, 4000.4, 1000.4, 200.2, 200.3, 100.2, 40, 2, 2, 2, 2, 2, 4599.4,'Uprizoritev-0001',],
-            ['02', 5000.000, '05', 1960.08, 1000.2, 600.70, 100.70, 200.2, 200.2, 100.2, 60, 3, 3, 3, 3, 3, 3899.1,'Uprizoritev-0002',],
-            ['03', 5000.000, '04', 1960.08, 1000.2, 600.70, 100.70, 200.2, 200.2, 100.2, 60, 3, 3, 3, 3, 3, 3899.1,'Uprizoritev-0003',],
+            ['01', 10000.80, '04', 3600.12, 2222.3, 4000.4, 1000.4, 200.2, 200.3, 100.2, 40, 2, 2, 2, 2, 2, 4599.4,'Uprizoritev-0001',0,],
+            ['02', 5000.000, '05', 1960.08, 1000.2, 600.70, 100.70, 200.2, 200.2, 100.2, 60, 3, 3, 3, 3, 3, 3899.1,'Uprizoritev-0002',0,],
+            ['03', 5000.000, '04', 1960.08, 1000.2, 600.70, 100.70, 200.2, 200.2, 100.2, 60, 3, 3, 3, 3, 3, 3899.1,'Uprizoritev-0003',0,],
         ];
     }
 

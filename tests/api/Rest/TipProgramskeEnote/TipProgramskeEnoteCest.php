@@ -247,9 +247,9 @@ class TipProgramskeEnoteCest
             'sort'                    => 1,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
-            'stHonorarnih'            => 1,
-            'stHonorarnihIgr'         => 1,
-            'stHonorarnihIgrTujJZ'    => 1,
+            'stHonorarnihZun'            => 1,
+            'stHonorarnihZunIgr'         => 1,
+            'stHonorarnihZunIgrTujJZ'    => 1,
         ];
         $this->objProgramPonovitevPrejsnjih11 = $ent                                  = $I->successfullyCreate($this->programPonovitevPrejsnjihUrl, $data);
         $I->assertNotEmpty($ent['id']);

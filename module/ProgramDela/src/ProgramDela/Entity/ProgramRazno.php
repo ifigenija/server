@@ -70,8 +70,9 @@ class ProgramRazno
         $this->ponoviZamejo            = 0;
         $this->stZaposUmet             = 0;
         $this->stZaposDrug             = 0;
-        $this->stHonorarnihIgr         = 0;
-        $this->stHonorarnihIgrTujJZ    = 0;
+        $this->stHonorarnihZunIgr      = 0;
+        $this->stHonorarnihZunIgrTujJZ = 0;
+        $this->stHonorarnihZunSamoz    = 0;
         $this->tantieme                = 0;
         $this->avtorskePravice         = 0;
         $this->vlozekGostitelja        = 0;
@@ -84,7 +85,7 @@ class ProgramRazno
 
         $this->preracunajPoljaZaMatKoprodukcijo();
 
-        $this->stPE = 0;
+        $this->stPE      = 0;
         $this->obiskDoma = 0;
         foreach ($this->getProgramskeEnoteSklopa() as $numObject => $object) {
             $this->stPE += 1;
