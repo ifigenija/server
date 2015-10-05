@@ -39,6 +39,34 @@ class ProgramIzjemni
     protected $trajanje;
 
     /**
+     * @ORM\Column(type="string")
+     * @Max\I18n(label="programIzjemni.zvrst", description="programIzjemni.d.zvrst")
+     * @var string
+     */
+    protected $zvrst;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Max\I18n(label="programIzjemni.avtor", description="programIzjemni.d.avtor")
+     * @var string
+     */
+    protected $avtor;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Max\I18n(label="programIzjemni.reziser", description="programIzjemni.d.reziser")
+     * @var string
+     */
+    protected $reziser;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     * @Max\I18n(label="programIzjemni.datum", description="programIzjemni.d.datum")
+     * @var string
+     */
+    protected $datum;
+
+    /**
      * preračuna polja, ki se uporabljajo v matični koprodukciji
      * 
      * naš delež in ostala polja kot zaprošeno morajo biti nastavljena še predno se prenesejo v matično koprodukcijo
@@ -78,6 +106,10 @@ class ProgramIzjemni
         $this->expect($this->getNaziv(), "Naziv ne sme biti prazen", 1000545);
         $this->expect($this->getTrajanje(), "Trajanje ne sme biti prazno", 1000546);
         $this->expect($this->getPrizorisce(), "Prizorišče ne sme biti prazno", 1000547);
+        $this->expect($this->getZvrst(), "Zvrst je obvezen podatek", 1000548);
+        $this->expect($this->getAvtor(), "Avtor je obvezen podatek", 1001230);
+        $this->expect($this->getReziser(), "Režiser je obvezen podatek", 1001231);
+        $this->expect($this->getDatum(), "Datum je obvezen podatek", 1001232);
 
         $nd     = \Max\Functions::euroRoundS($this->getNasDelez());
         $sumStr = \Max\Functions::euroRoundS($this->avtorskiHonorarji + $this->tantieme + $this->avtorskePravice + $this->materialni);
@@ -121,6 +153,50 @@ class ProgramIzjemni
     public function setTrajanje($trajanje)
     {
         $this->trajanje = $trajanje;
+        return $this;
+    }
+
+    function getZvrst()
+    {
+        return $this->zvrst;
+    }
+
+    function getAvtor()
+    {
+        return $this->avtor;
+    }
+
+    function getReziser()
+    {
+        return $this->reziser;
+    }
+
+    function getDatum()
+    {
+        return $this->datum;
+    }
+
+    function setZvrst($zvrst)
+    {
+        $this->zvrst = $zvrst;
+        return $this;
+    }
+
+    function setAvtor($avtor)
+    {
+        $this->avtor = $avtor;
+        return $this;
+    }
+
+    function setReziser($reziser)
+    {
+        $this->reziser = $reziser;
+        return $this;
+    }
+
+    function setDatum($datum)
+    {
+        $this->datum = $datum;
         return $this;
     }
 

@@ -40,6 +40,10 @@ forms:
             - imaKoprodukcije
             - prizorisce
             - trajanje
+            - zvrst
+            - avtor
+            - reziser
+            - datum
         hydrator:
             lookups: 
                 - uprizoritev
