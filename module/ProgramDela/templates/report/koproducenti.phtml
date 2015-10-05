@@ -4,12 +4,18 @@
  * User: Alesch
  * date: 21.9.2015
  */
+?>
 
-foreach ($kop as $koprodukcija) {
+<table>
+<?php foreach ($kop as $koprodukcija) {
     $imekop = $koprodukcija->getKoproducent() ? $koprodukcija->getKoproducent()->getPopa()->getNaziv() : '';
-    $delez  = $koprodukcija->getDelez(); ?>
+    $delez  = $koprodukcija->getDelez(); 
+    $kpe    = $koprodukcija->getKpe(); 
+    ?>
     <tr>
         <td class="alineja"><?= $imekop ?></td>
+        <td class="cell-type-number"><?= number_format($kpe, 2, ',', '.') ?></td>
         <td class="cell-type-number"><?= number_format($delez, 2, ',', '.') ?></td>
     </tr>
 <?php } ?>
+</table>

@@ -34,6 +34,8 @@ foreach ($postavke as $postavka) {
 ?> 
 <div id="postavke-c2">
     <h2>Programski materialni stroški</h2>
+    <p>&nbsp;</p>
+    <h2>Priloga C2</h2>
     <table>
         <tr>
             <th class="cell-type-header-title">  </th>
@@ -47,7 +49,6 @@ foreach ($postavke as $postavka) {
             <th class="cell-type-header-title right-align">Ostalo</th>
             <th class="cell-type-header-title right-align">SKUPAJ</th>
         </tr>
-
         
         <?php if ($postavke) {
             $this->partialLoop()->setObjectKey('postavke');

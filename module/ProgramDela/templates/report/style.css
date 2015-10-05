@@ -170,3 +170,9 @@ h2.name {
     background-color: #E8EAEC;
     font-weight: bold;
 }
+
+.glavni-naslov {
+    font-weight: bold;
+    font-size: 1cm;
+    text-align: center;
+}

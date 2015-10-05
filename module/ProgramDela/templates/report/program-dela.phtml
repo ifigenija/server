@@ -1,84 +1,71 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: boris
- * Date: 17. 09. 15
- * Time: 15.59
- */
+<style>
 
-$tm             = !empty($this->margins[0]) ? $this->margins[0] : 17;
-$lm             = !empty($this->margins[1]) ? $this->margins[1] : 15;
-$bm             = !empty($this->margins[2]) ? $this->margins[2] : 17;
-$rm             = !empty($this->margins[3]) ? $this->margins[3] : 15;
-$pagesize       = $this->pageSize ? $this->pagesize : 'a4';
-$orientation    = $this->orientation ? $this->orientation : 'p';
-$isheaderfooter = $this->ishf;
-$firmanaziv     = $this->firma->getNaziv();
+    @page lezeca {sheet-size: A4-L;}
+    @page pokoncna {sheet-size: A4-P;}
 
-if (is_array($title)) {
-    $naslov = !empty($title[0]) ? $this->translate($title[0]) . ' ' . $title[1] : '';
-} else {
-    $naslov = !empty($title) ? $this->translate($title) : '';
-}
-?>
+    #premiere {
+        page-break-before: always;
+    }
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title><h1><?= $naslov ?></h1></title>
-        <meta charset="UTF-8">
-        <style type="text/css">
+    #ponovitve-premier {
+        page-break-before: always;
+    }
 
-            @page {
-                sheet-size: <?= $pagesize . '-' . $orientation ?>;
-                size: auto;
-                margin-top: <?= $tm ?>mm ;
-                margin-left: <?= $lm ?>mm ;
-                margin-bottom: <?= $bm ?>mm ;
-                margin-right: <?= $rm ?>mm ;
-                margin-footer: 5mm;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-                font-size: 9px;
-                odd-header-name: docHeader;
-                even-header-name: docHeader;
-                odd-footer-name: docFooter;
-                even-footer-name: docFooter;
-            };
-            @media screen {
-                #docHeader, #docFooter {
-                    display: none;
-                }
-            }
-            
-            <?= $_css ? $this->partial($_css) : '' ?>
+    #ponovitve-prej {
+        page-break-before: always;
+    }
 
-        </style>
-    </head>
-    <body>
-        <!-- definicija glave in noge -->
-        <?php if ($isheaderfooter) { ?>
-            <htmlpageheader name="docHeader" id="docHeader"> 
-                <table width="100%" style="topntail: 0; border-bottom: 1px solid #000000; vertical-align: bottom; ">
-                    <tr>
-                        <td width="33%"><?= isset($firmanaziv) ? $firmanaziv : '' ?></td>
-                        <td width="33%"></td>
-                        <td width="33%" style="text-align: right; font-style: italic;"><?= $naslov ?></td>
-                    </tr>
-                </table>
-            </htmlpageheader>
-            <htmlpagefooter name="docFooter" id="docFooter">
-                <table width="100%" style="topntail: 0; border-top: 1px solid #000000; border-bottom: hidden; vertical-align: bottom; font-weight: bold; font-style: italic;">
-                    <tr>
-                        <td width="33%">{DATE j.m.Y}</td>
-                        <td width="33%"></td>
-                        <td width="33%" style="text-align: right;"><?= $this->translate('Stran') ?>: {PAGENO}/{nbpg}</td>
-                    </tr>
-                </table>        
-            </htmlpagefooter>       
-            <sethtmlpageheader name="docHeader" page="all" value="ON" show-this-page="1" />
-            <sethtmlpagefooter name="docFooter" page="all" value="ON" />
-            <setpageheader name="docHeader" page="all" value="ON" />
-            <setpagefooter name="docFooter" page="all" value="ON" />
-        <?php } ?>
-        <h2>Uprizoritvena umetnost – Programski sklop I</h2>
-            
+    #gostujoce {
+        page-break-before: always;
+    }
+
+    #mednarodna {
+        page-break-before: always;
+    }
+
+    #festivali {
+        page-break-before: always;      
+    }
+
+    #razno {
+        page-break-before: always;
+    }
+
+    #izjemni-dogodki {
+        page-break-before: always;
+    }
+
+    #kazalniki {
+        page-break-after: avoid;
+        page: lezeca;        
+    }
+
+    #kazalniki-priloga {
+        page: pokoncna;        
+    }
+
+    #postavke-c2 {
+        page: lezeca;
+    }
+
+</style>
+
+<div id="naslovnica">
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p class="glavni-naslov"><?= $naslov ?></p>
+</div>

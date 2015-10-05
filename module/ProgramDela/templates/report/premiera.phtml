@@ -7,33 +7,18 @@
  * @var ProgramDela\Entity\EnotaPrograma $model 
  */
 // 
-$upr         = $model->getUprizoritev();
-$kop         = $model->getKoprodukcije();
-$drugiViri   = $model->getDrugiViri();
-// iz premiere
-$imakop      = $model->getImaKoprodukcije();
-$stUmetnikov = number_format($model->stZaposUmet, 0, ',', '');
-$stDrugih    = number_format($model->stZaposDrug, 0, ',', '');
-$stHonVsi    = number_format($model->stHonorarnih, 0, ',', '');
-$stHonIgr    = number_format($model->stHonorarnihIgr, 0, ',', '');
-$stHonTuj    = number_format($model->stHonorarnihIgrTujJZ, 0, ',', '');
-$stSamozap   = number_format($model->stHonorarnihIgrSamoz, 0, ',', '');
 
-$trajanjeStudija = 'od ' . ($upr->getDatumZacStudija() ? $upr->datumZacStudija->format('d-m-Y') : '' ) . ' do ' . ($upr->getDatumZacStudija() ? $upr->datumPremiere->format('d-m-Y') : '');
+$upr             = $model->getUprizoritev();
+$kop             = $model->getKoprodukcije();
+$drugiViri       = $model->getDrugiViri();
+$imakop          = $model->getImaKoprodukcije();
+$trajanjeStudija = 'od ' . ($upr->getDatumZacStudija() ? $upr->getDatumZacStudija()->format('d-m-Y') : '' ) .
+                   ' do ' . ($upr->getDatumPremiere() ? $upr->getDatumPremiere()->format('d-m-Y') : '');
 $datumPremiere   = $upr->getDatumPremiere() ? $upr->getDatumPremiere()->format('d-m-Y') : '';
-$prizorisce      = $model->priKoproducentu ? 'pri koproducentu' : 'na matičnem odru';
-$tipEnote        = $model->tipProgramskeEnote->naziv;
-$koeEnote        = number_format($model->kpe, 2, ',', '');
-$zaprSredstva    = number_format($model->zaproseno, 2, ',', '.');
-$lastSredstva    = number_format($model->lastnaSredstva, 2, ',', '.');
-$drugSredstva    = number_format($model->drugiJavni, 2, ',', '.');
-$avtHonorar      = number_format($model->avtorskiHonorarji, 2, ',', '.');
-$avtPravice      = number_format($model->avtorskePravice, 2, ',', '.');
-$tant            = number_format($model->tantieme, 2, ',', '.');
-$celotnaVred     = number_format($model->celotnaVrednost, 2, ',', '.');
-$nasDelez        = number_format($model->nasDelez, 2, ',', '.');
+$prizorisce      = $model->getPriKoproducentu() ? 'pri koproducentu' : 'na matičnem odru';
 ?>
 <div id="premiere">
+    <h2>Uprizoritvena umetnost – Programski sklop I</h2>
     <h3>Premiere</h3>
     <table>
         <?php
@@ -42,27 +27,27 @@ $nasDelez        = number_format($model->nasDelez, 2, ',', '.');
         ?>
         <tr>
             <td>Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri uprizoritvi:</td>
-            <td class="cell-type-number"><?= $stUmetnikov ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStZaposUmet(), 0, ',', '') ?></td>
         </tr>
         <tr>
             <td>Št. drugih zaposlenih, ki sodelujejo pri uprizoritvi (brez upravno-administrativnih delavcev):</td>
-            <td class="cell-type-number"><?= $stDrugih ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStZaposDrug(), 0, ',', '') ?></td>
         </tr>
         <tr>
             <td>Št. vseh, ki sodelujejo honorarno:</td>
-            <td class="cell-type-number"><?= $stHonVsi ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStHonorarnih(), 0, ',', '') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega igralcev:</td>
-            <td class="cell-type-number"><?= $stHonIgr ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStHonorarnihIgr(), 0, ',', '') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega igralcev, zaposlenih v drugih javnih zavodih:</td>
-            <td class="cell-type-number"><?= $stHonTuj ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStHonorarnihIgrTujJZ(), 0, ',', '') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega igralcev s statusom samozaposlenega v kulturi:</td>
-            <td class="cell-type-number"><?= $stSamozap ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStHonorarnihIgrSamoz(), 0, ',', '') ?></td>
         </tr>
         <tr>
             <td>Trajanje študija (od-do):</td>
@@ -77,36 +62,39 @@ $nasDelez        = number_format($model->nasDelez, 2, ',', '.');
             <td class="right-align"><?= $prizorisce ?></td>
         </tr>
         <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
             <td>Tip programske enote:</td>
-            <td class="right-align"><?= $tipEnote ?></td>
+            <td class="right-align"><?= $model->getTipProgramskeEnote() ? $model->getTipProgramskeEnote()->getNaziv() : '' ?></td>
         </tr>
         <tr>
             <td>Koeficient programske enote:</td>
-            <td class="cell-type-number"><?= $koeEnote ?></td>
+            <td class="cell-type-number"><?= number_format($model->getKpe(), 2, ',', '') ?></td>
         </tr>
         <?php if ($imakop) { ?>
-            <tr class="suma-row">
+            <tr>
                 <td>Koproducenti:</td>
                 <td></td>
             </tr>
             <?php
-            $this->partial()->setObjectKey('kop');
-            echo $this->partial('koproducenti', $kop);
+                $this->partial()->setObjectKey('kop');
+                echo $this->partial('koproducenti', $kop);
             ?>
-            <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
         <?php } ?>
         <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
             <td>Zaprošena sredstva Ministrstva za kulturo:</td>
-            <td class="cell-type-number"><?= $zaprSredstva ?></td>
+            <td class="cell-type-number"><?= number_format($model->getZaproseno(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Lastna sredstva:</td>
-            <td class="cell-type-number"><?= $lastSredstva ?></td>
+            <td class="cell-type-number"><?= number_format($model->getLastnaSredstva(), 2, ',', '.') ?></td>
         </tr>
-
         <?php if ($drugiViri) { ?>
             <tr class="suma-row">
                 <td>Drugi Viri:</td>
@@ -114,37 +102,37 @@ $nasDelez        = number_format($model->nasDelez, 2, ',', '.');
             </tr>        
             <?php
             $this->partialLoop()->setObjectKey('drugiViri');
-            echo $this->partialLoop('drugiViri.phtml', $drugiViri); ?>
+            echo $this->partialLoop('drugiViri.phtml', $drugiViri);
+            ?>
             <tr>
                 <td>&nbsp;</td>
-                <td></td>
+                <td>&nbsp;</td>
             </tr>
         <?php } ?>
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
-            <td class="cell-type-number"><?= $drugSredstva ?></td>
+            <td class="cell-type-number"><?= number_format($model->getDrugiJavni(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Stroški avtorskih honorarjev do premiere:</td>
-            <td class="cell-type-number"><?= $avtHonorar ?></td>
+            <td class="cell-type-number"><?= number_format($model->getAvtorskiHonorarji(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Stroški odkupa avtorskih pravic:</td>
-            <td class="cell-type-number"><?= $avtPravice ?></td>
+            <td class="cell-type-number"><?= number_format($model->getAvtorskePravice(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Stroški tantiem, vezanih na uprizoritev:</td>
-            <td class="cell-type-number"><?= $tant ?></td>
+            <td class="cell-type-number"><?= number_format($model->getTantieme(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Celotna vrednost uprizoritve do premiere:</td>
-            <td class="cell-type-number"><?= $celotnaVred ?></td>
+            <td class="cell-type-number"><?= number_format($model->getCelotnaVrednost(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega stroški matičnega javnega zavoda:</td>
-            <td class="cell-type-number"><?= $nasDelez ?></td>
+            <td class="cell-type-number"><?= number_format($model->getNasDelez(), 2, ',', '.') ?></td>
         </tr>
     </table>
     <h2>Priloge:</h2>
 </div>
-
