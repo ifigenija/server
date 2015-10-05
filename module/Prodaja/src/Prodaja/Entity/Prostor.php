@@ -113,6 +113,7 @@ class Prostor
             });
             $this->expect($obstaja, "Naslov prostora je lahko le eden od naslovov poslovnega partnerja", 1000381);
         }
+        $this->validateIntGE0($this->kapaciteta, "Kapaciteta", 1000382);
     }
 
     public function getId()

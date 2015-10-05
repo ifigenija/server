@@ -39,16 +39,17 @@ class ProgramDelaRpcService
     protected function preveriStZapisov($programDela)
     {
         $zaplR = $this->getEm()->getRepository('Zapisi\Entity\ZapisLastnik');
-        $tr = $this->getServiceLocator()->get('translator');
+        $tr    = $this->getServiceLocator()->get('translator');
 
         /**
          * premiere 2 zapisa
          */
         foreach ($programDela->getPremiere() as $ep) {
-            $stZapisov = count($zaplR->findByLastnik($ep->getId()));
-            if ($stZapisov < 2) {
+            $minPriponk = $ep->getImaKoprodukcije() ? 1 : 0;
+            $stZapisov  = count($zaplR->findByLastnik($ep->getId()));
+            if ($stZapisov < 1 + $minPriponk) {
                 throw new \Max\Exception\UnauthException($tr
-                        ->translate('Program premierne uprizoritve (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev in 1 priponko ,ima pa ' . $stZapisov)
+                        ->translate('Program premierne uprizoritve (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk ,ima pa " . $stZapisov)
                 , 1000967);
             }
         }
@@ -88,7 +89,7 @@ class ProgramDelaRpcService
                 , 1001220);
             }
         }
-        
+
         /**
          * gostovanja 2 zapisa
          */
@@ -117,10 +118,11 @@ class ProgramDelaRpcService
          * razno 2 zapisa
          */
         foreach ($programDela->getProgramiRazno() as $ep) {
-            $stZapisov = count($zaplR->findByLastnik($ep->getId()));
-            if ($stZapisov < 2) {
+            $minPriponk = $ep->getImaKoprodukcije() ? 1 : 0;
+            $stZapisov  = count($zaplR->findByLastnik($ep->getId()));
+            if ($stZapisov < 1 + $minPriponk) {
                 throw new \Max\Exception\UnauthException($tr
-                        ->translate('Program razno (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev in 1 priponko, ima pa ' . $stZapisov)
+                        ->translate('Program razno (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk, ima pa " . $stZapisov)
                 , 1001223);
             }
         }
@@ -128,10 +130,15 @@ class ProgramDelaRpcService
          * izjemni 3 zapisa
          */
         foreach ($programDela->getIzjemni() as $ep) {
+            $minPriponk = $ep->getImaKoprodukcije() ? 1 : 0;
+            if ($ep->getPonoviZamejo() + $ep->getPonoviGost() >0) {
+                $minPriponk+=1;
+            }
+
             $stZapisov = count($zaplR->findByLastnik($ep->getId()));
-            if ($stZapisov < 2) {
+            if ($stZapisov < 1+$minPriponk) {
                 throw new \Max\Exception\UnauthException($tr
-                        ->translate('Program izjemni dogodki (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev in 2 priponki, ima pa ' . $stZapisov)
+                        ->translate('Program izjemni dogodki (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk, ima pa $stZapisov")
                 , 1001224);
             }
         }
@@ -164,7 +171,7 @@ class ProgramDelaRpcService
         }
 
         /**
-         * preverimo število zapisov za vse programe dela
+         * preverimo število zapisov za vse enote programa
          */
         if (!$this->preveriStZapisov($programDela)) {
             throw new \Max\Exception\UnauthException($tr->translate('Napačno število zapisov'), 1000966);
