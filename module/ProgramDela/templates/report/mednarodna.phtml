@@ -21,89 +21,109 @@ $organizator     = $model->getGostitelj() ? $model->getGostitelj()->getNaziv() :
     <table>
         <tr class="suma-row">
             <td>Naslov uprizoritve:</td>
+            <td></td>
             <td class="right-align"><strong><?= $upr ?></strong></td>
         </tr>
         <tr>
             <td>Kraj gostovanja in država:</td>
+            <td></td>
             <td class="right-align"><?= $krajGos ?></td>
         </tr>
         <tr>
             <td>Ustanova, v kateri se gostuje:</td>
+            <td></td>
             <td class="right-align"><?= $model->getUstanova() ?></td>
         </tr>
         <tr>
             <td>Datum gostovanja:</td>
+            <td></td>
             <td class="cell-type-date"><?= $datumGos ?></td>
         </tr>
         <tr>
             <td>Število ponovitev v okviru gostovanja:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getPonoviInt(), 0, ',', '.') ?></td>
         </tr>       
         <tr>
             <td>Število ponovitev na odru koproducenta v tujini:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getPonoviKoprInt(), 0, ',', '.') ?></td>
         </tr>       
         <tr>
             <td>Načrtovano št. gledalcev:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getObiskInt(), 0, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Načrtovano št. gledalcev na odru koproducenta v tujini:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getObiskKoprInt(), 0, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Organizator (gostitelj)</td>
+            <td></td>
             <td class="right-align"><?= $organizator ?></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
         </tr>
         <tr>
             <td>Transportni stroški opreme ter stroški prevozov ansambla in tehnike:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getTransportniStroski(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Stroški avtorskih honorarjev zunanjih sodelavcev:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getAvtorskiHonorarji(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Celotni stroški gostovanja:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getNasDelez(), 2, ',', '.') ?></td>
         </tr>
         <tr>
+            <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
         </tr>
         <?php if ($imakop) { ?>
             <tr class="suma-row">
                 <td>Koproducenti:</td>
-                <td></td>
+                <td class="cell-type-number">Koeficient</td>
+                <td class="cell-type-number">Delež</td>
             </tr>
             <?php
-            $this->partial()->setObjectKey('kop');
-            echo $this->partial('koproducenti', $kop);
+                $this->partial()->setObjectKey('kop');
+                echo $this->partial('koproducenti', $kop);
             ?>
         <?php } ?>
         <tr>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
         </tr>
         <tr>
             <td>Zaprošena sredstva Ministrstva za kulturo:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getZaproseno(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Odkup (vložek gostitelja):</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getVlozekGostitelja(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Lastna sredstva:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getLastnaSredstva(), 2, ',', '.') ?></td>
         </tr>
         <?php if ($drugiViri) { ?>
             <tr class="suma-row">
                 <td>Drugi Viri:</td>
+                <td></td>
                 <td class="cell-type-number"><?= number_format($model->vsotaDrugihVirov(), 2, ',', '.') ?> </td>
             </tr>        
             <?php
@@ -112,14 +132,17 @@ $organizator     = $model->getGostitelj() ? $model->getGostitelj()->getNaziv() :
             <tr>
                 <td>&nbsp;</td>
                 <td></td>
+                <td></td>
             </tr>
         <?php } ?>
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getDrugiJavni(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Celotna vrednost gostovanja:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getCelotnaVrednost(), 2, ',', '.') ?></td>
         </tr>
     </table>

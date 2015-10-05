@@ -2,7 +2,7 @@
 
 namespace ProgramDela\Task;
 
-use Jobs\Task\AbstractPrinterTask;
+use App\Task\IfiPrinterTask;
 use Max\Exception\MaxException;
 use ProgramDela\Entity\ProgramDela;
 use Jobs\Annotation\Task as Task;
@@ -13,7 +13,7 @@ use Jobs\Annotation\Task as Task;
  *  @Task\Meta(name="Program dela", acl="ProgramDela-write")
  */
 class ProgramDelaReport
-        extends AbstractPrinterTask
+        extends IfiPrinterTask
 {
     /**
      *

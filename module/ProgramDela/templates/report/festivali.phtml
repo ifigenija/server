@@ -26,105 +26,129 @@ $stDogodkov      = $model->getStPredstav() +
     <table>
         <tr class="suma-row">
             <td>Naziv festivala:</td>
+            <td></td>
             <td class="right-align"><strong><?= $model->getNaziv() ?></strong></td>
         </tr>
         <tr>
             <td>Zvrst festivala:</td>
+            <td></td>
             <td class="right-align"><?= $model->getZvrst() ?></td>
         </tr>
         <tr>
             <td>Skupno število dogodkov v okviru festivala:</td>
+            <td></td>
             <td class="cell-type-number"><?= $stDogodkov ?></td>
         </tr>
         <tr>
             <td class="alineja">predstav:</td>
+            <td></td>
             <td class="cell-type-date"><?= $model->getStPredstav() ?></td>
         </tr>
         <tr>
             <td class="alineja">okroglih miz:</td>
+            <td></td>
             <td class="cell-type-number"><?= $model->getStOkroglihMiz() ?></td>
         </tr>       
         <tr>
             <td class="alineja">predstavitev:</td>
+            <td></td>
             <td class="cell-type-number"><?= $model->getStPredstavitev() ?></td>
         </tr>       
         <tr>
             <td class="alineja">delavnic:</td>
+            <td></td>
             <td class="cell-type-number"><?= $model->getStDelavnic() ?></td>
         </tr>
         <tr>
             <td class="alineja">drugih dogodkov:</td>
+            <td></td>
             <td class="cell-type-number"><?= $model->getStDrugiDogodki() ?></td>
         </tr>
         <tr>
             <td>Skupno število festivalskih produkcij:</td>
+            <td></td>
             <td class="cell-type-number"><?= $model->getStProdukcij() ?></td>
         </tr>
         <tr>
             <td>Pričakovano število obiskovalcev:</td>
+            <td></td>
             <td class="cell-type-number"><?= $model->getObiskDoma() ?></td>
         </tr>
         <tr>
             <td>Čas priprave festivala:</td>
+            <td></td>
             <td class="cell-type-number"><?= $model->getCasPriprave() ?></td>
         </tr>
         <tr>
             <td>Čas izvedbe festivala:</td>
+            <td></td>
             <td class="cell-type-number"><?= $model->getCasIzvedbe() ?></td>
         </tr>
         <tr>
             <td>Prizorišče(šča):</td>
+            <td></td>
             <td class="cell-type-number"><?= $model->getPrizorisca() ?></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
         </tr>
         <tr>
             <td>Umetniški vodja festivala:</td>
+            <td></td>
             <td class="right-align"><?= $model->getUmetvodja() ?></td>
         </tr>
         <tr>
             <td>Programsko telo festivala:</td>
+            <td></td>
             <td class="right-align"><?= $model->getProgramskoTelo() ?></td>
         </tr>
-        <?php if($imakop) { ?>
-            <tr>
+        <?php if ($imakop) { ?>
+            <tr class="suma-row">
                 <td>Soorganizatorji:</td>
-                <td></td>
+                <td class="cell-type-number">Koeficient</td>
+                <td class="cell-type-number">Delež</td>
             </tr>
-            <?php 
-                echo $this->partial('koproducenti', array('kop' => $kop)); 
-            ?>
+        <?php
+            $this->partial()->setObjectKey('kop');
+            echo $this->partial('koproducenti', $kop);
+        ?>
         <?php } ?>
-
         <tr>
             <td>Predvideno št. tujih selektorjev - gostov:</td>
+            <td></td>
             <td class="cell-type-number"><?= $model->getStTujihSelektorjev() ?></td>
         </tr>
         <tr>
             <td>Št. zaposlenih, ki sodelujejo pri izvedbi festivala:</td>
+            <td></td>
             <td class="cell-type-number"><?= $model->getStZaposlenih() ?></td>
         </tr>
         <tr>
             <td>Št. vseh, ki sodelujejo honorarno pri izvedbi festivala in jim honorar izplačuje javni zavod:</td>
-            <td class="cell-type-number"><?= $model->getStHonorarnih() ?></td>
+            <td></td>
+            <td class="cell-type-number"><?= $model->getStHonorarnihZun() ?></td>
         </tr>
         <tr>
+            <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
         </tr>
         <tr>
             <td>Zaprošena sredstva Ministrstva za kulturo:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getZaproseno(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Lastna sredstva:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getLastnaSredstva(), 2, ',', '.') ?></td>
         </tr>
         <?php if ($drugiViri) { ?>
             <tr class="suma-row">
                 <td>Drugi Viri:</td>
+                <td></td>
                 <td class="cell-type-number"><?= number_format($model->vsotaDrugihVirov(), 2, ',', '.') ?> </td>
             </tr>        
             <?php
@@ -132,19 +156,23 @@ $stDogodkov      = $model->getStPredstav() +
             echo $this->partialLoop('drugiViri.phtml', $drugiViri); ?>
             <tr>
                 <td>&nbsp;</td>
-                <td></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
             </tr>
         <?php } ?>
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getDrugiJavni(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Celotna vrednost festivala:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getCelotnaVrednost(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td><h2>Vsebinska utemeljitev predloga:</h2></td>
+            <td></td>
             <td></td>
         </tr>
     </table>

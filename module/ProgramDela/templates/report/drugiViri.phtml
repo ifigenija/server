@@ -1,5 +1,5 @@
 <tr>
     <td class="alineja"><?= $drugiViri->getOpis() ?></td>
+    <td class="cell-type-bool"><?= $drugiViri->getMednarodni() ? "mednarodni" : " " ?></td>
     <td class="cell-type-number"><?= number_format($drugiViri->getZnesek(),2,',','.') ?></td>
-    <td class="cell-type-bool"><?= $drugiViri->getMednarodni() ? "+" : " " ?></td>
 </tr>

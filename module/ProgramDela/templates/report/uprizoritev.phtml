@@ -10,22 +10,27 @@ $fun = $upr->getFunkcije();
 
 <tr class="suma-row"> 
     <td>Naslov uprizoritve:</td>
+    <td></td>
     <td class="right-align"><strong><?= $upr->getNaslov() ?></strong></td>
 </tr>
 <tr>
     <td>Podnaslov:</td>
+    <td></td>
     <td class="right-align"><?= $upr->getPodnaslov() ?></td>
 </tr> 
 <tr>
     <td>Zvrst uprizoritve:</td>
+    <td></td>
     <td class="right-align"><?= $upr->getZvrstUprizoritve() ? $upr->getZvrstUprizoritve()->getNaziv() : '' ?></td>
 </tr>
 <tr>
     <td>Avtor (pisec dela):</td>
+    <td></td>
     <td class="right-align"><?= $upr->getAvtor() ?></td>
 </tr>
 <tr>
     <td>datum premiere:</td>
+    <td></td>
     <td class="right-align"><?= $upr->getDatumPremiere() ? $upr->getDatumPremiere()->format('d-m-Y') : '' ?></td>
 </tr>
 <?php 
@@ -33,6 +38,7 @@ $fun = $upr->getFunkcije();
     echo $this->partialLoop('funkcija.phtml', $fun);
 ?>
 <tr>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
 </tr>

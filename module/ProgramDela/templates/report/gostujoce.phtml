@@ -5,8 +5,10 @@
  * Date: 21.9.2015
  */
 // 
-$upr             = $model->getUprizoritev();
-$drugiViri       = $model->getDrugiViri();
+$upr              = $model->getUprizoritev();
+$drugiViri        = $model->getDrugiViri();
+$kop              = $model->getKoprodukcije();
+$imakop           = $model->getImaKoprodukcije();
 
 ?>
 <div id="gostujoce">
@@ -19,28 +21,45 @@ $drugiViri       = $model->getDrugiViri();
         ?>
         <tr>
             <td>Število predstav:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getPonoviDoma(), 0, ',', '.') ?></td>
         </tr>       
         <tr>
             <td>Načrtovano št. vseh obiskovalcev:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getObiskDoma(), 0, ',', '.') ?></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
         </tr>
+        <?php if ($imakop) { ?>
+            <tr class="suma-row">
+                <td>Koproducenti:</td>
+                <td class="cell-type-number">Koeficient</td>
+                <td class="cell-type-number">Delež</td>
+            </tr>
+            <?php
+                $this->partial()->setObjectKey('kop');
+                echo $this->partial('koproducenti', $kop);
+            ?>
+        <?php } ?>
         <tr>
             <td>Zaprošena sredstva Ministrstva za kulturo:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getZaproseno(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Lastna sredstva:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getLastnaSredstva(), 2, ',', '.') ?></td>
         </tr>
 
         <?php if ($drugiViri) { ?>
             <tr class="suma-row">
                 <td>Drugi Viri:</td>
+                <td></td>
                 <td class="cell-type-number"><?= number_format($model->vsotaDrugihVirov(), 2, ',', '.') ?> </td>
             </tr>        
             <?php
@@ -49,19 +68,23 @@ $drugiViri       = $model->getDrugiViri();
             <tr>
                 <td>&nbsp;</td>
                 <td></td>
+                <td></td>
             </tr>
         <?php } ?>
 
         <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getDrugiJavni(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Celotna vrednost gostovanja:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getCelotnaVrednost(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega stroški matičnega javnega zavoda:</td>
+            <td></td>
             <td class="cell-type-number"><?= number_format($model->getNasDelez(), 2, ',', '.') ?></td>
         </tr>
         
