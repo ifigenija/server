@@ -67,6 +67,15 @@ class ProgramIzjemni
     protected $datum;
 
     /**
+     * Drugi pomembni soustvarjalci dogodka:
+     * 
+     * @ORM\Column(type="string")
+     * @Max\I18n(label="programIzjemni.soustvarjalci", description="programIzjemni.d.soustvarjalci")
+     * @var string
+     */
+    protected $soustvarjalci;
+
+    /**
      * preračuna polja, ki se uporabljajo v matični koprodukciji
      * 
      * naš delež in ostala polja kot zaprošeno morajo biti nastavljena še predno se prenesejo v matično koprodukcijo
@@ -197,6 +206,17 @@ class ProgramIzjemni
     function setDatum($datum)
     {
         $this->datum = $datum;
+        return $this;
+    }
+
+    function getSoustvarjalci()
+    {
+        return $this->soustvarjalci;
+    }
+
+    function setSoustvarjalci($soustvarjalci)
+    {
+        $this->soustvarjalci = $soustvarjalci;
         return $this;
     }
 

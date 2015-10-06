@@ -118,6 +118,7 @@ class ProgramIzjemniCest
             'zvrst'                   => "zz",
             'avtor'                   => "zz",
             'reziser'                 => "zz",
+            'soustvarjalci'                 => "zz",
             'datum'                   => "2012-02-01T00:00:00+0100",
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -162,6 +163,7 @@ class ProgramIzjemniCest
             'zvrst'                   => "zz",
             'avtor'                   => "zz",
             'reziser'                 => "zz",
+            'soustvarjalci'                 => "zz",
             'datum'                   => "2012-02-01T00:00:00+0100",
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -233,6 +235,7 @@ class ProgramIzjemniCest
         $I->assertEquals($ent['zvrst'], "zz");
         $I->assertEquals($ent['avtor'], "zz");
         $I->assertEquals($ent['reziser'], "zz");
+        $I->assertEquals($ent['soustvarjalci'], "zz");
         $I->assertEquals($ent['datum'], "2012-02-01T00:00:00+0100");
     }
 
