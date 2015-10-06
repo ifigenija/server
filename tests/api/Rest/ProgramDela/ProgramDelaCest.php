@@ -621,6 +621,7 @@ class ProgramDelaCest
             'zvrst'                   => "zz",
             'avtor'                   => "zz",
             'reziser'                 => "zz",
+            'soustvarjalci'                 => "zz",
             'datum'                   => "2012-02-01T00:00:00+0100",
         ];
         $this->objProgramIzjemni1 = $ent                      = $I->successfullyCreate($this->programIzjemniUrl, $data);
