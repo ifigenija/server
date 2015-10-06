@@ -36,9 +36,14 @@ $prizorisce      = $model->getPriKoproducentu() ? 'pri koproducentu' : 'na mati�
             <td class="cell-type-number"><?= number_format($model->getStZaposDrug(), 0, ',', '') ?></td>
         </tr>
         <tr>
-            <td>Št. vseh, ki sodelujejo honorarno:</td>
+            <td>Št. honorarnih zunanjih sodelavcev:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getStHonorarnihZun(), 0, ',', '') ?></td>
+        </tr>
+        <tr>
+            <td class="alineja">od tega s statusom samozaposlenega v kulturi:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getStHonorarnihZunSamoz(), 0, ',', '') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega igralcev:</td>
@@ -49,11 +54,6 @@ $prizorisce      = $model->getPriKoproducentu() ? 'pri koproducentu' : 'na mati�
             <td class="alineja">od tega igralcev, zaposlenih v drugih javnih zavodih:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getStHonorarnihZunIgrTujJZ(), 0, ',', '') ?></td>
-        </tr>
-        <tr>
-            <td class="alineja">od tega igralcev s statusom samozaposlenega v kulturi:</td>
-            <td></td>
-            <td class="cell-type-number"><?= number_format($model->getStHonorarnihZunSamoz(), 0, ',', '') ?></td>
         </tr>
         <tr>
             <td>Trajanje študija (od-do):</td>
@@ -133,7 +133,7 @@ $prizorisce      = $model->getPriKoproducentu() ? 'pri koproducentu' : 'na mati�
             <td class="cell-type-number"><?= number_format($model->getDrugiJavni(), 2, ',', '.') ?></td>
         </tr>
         <tr>
-            <td>Stroški avtorskih honorarjev do premiere:</td>
+            <td>Stroški avtorskih honorarjev do premiere, vključno s premiero:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getAvtorskiHonorarji(), 2, ',', '.') ?></td>
         </tr>

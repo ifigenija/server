@@ -255,6 +255,7 @@ class Uprizoritev
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Funkcija", mappedBy="uprizoritev")
+     * @ORM\OrderBy({"sort" = "ASC"})
      * @var <Funkcije>
      */
     protected $funkcije;

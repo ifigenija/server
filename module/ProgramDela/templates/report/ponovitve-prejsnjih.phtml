@@ -57,9 +57,14 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td class="cell-type-number"><?= number_format($model->getStZaposDrug(), 0, ',', '.') ?></td>
         </tr>
         <tr>
-            <td>Št. vseh, ki sodelujejo honorarno:</td>
+            <td>Št. honorarnih zunanjih sodelavcev:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getStHonorarnihZun(), 0, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td class="alineja">od tega s statusom samozaposlenega v kulturi:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getStHonorarnihZunSamoz(), 0, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega igralcev:</td>
@@ -70,11 +75,6 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td class="alineja">od tega igralcev, zaposlenih v drugih javnih zavodih:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getStHonorarnihZunIgrTujJZ(), 0, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td class="alineja">od tega igralcev s statusom samozaposlenega v kulturi:</td>
-            <td></td>
-            <td class="cell-type-number"><?= number_format($model->getStHonorarnihZunSamoz(), 0, ',', '.') ?></td>
         </tr>
         <tr class="suma-row">
             <td>Načrtovano št. vseh ponovitev v letu:</td>

@@ -123,6 +123,7 @@ class Funkcija
 
     /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\Alternacija", mappedBy="funkcija")
+     * @ORM\OrderBy({"sort" = "ASC"})
      * @var <Alternacije>
      */
     protected $alternacije;
