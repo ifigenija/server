@@ -55,6 +55,9 @@ class BesediloFixture
 //        $o->setPrevajalec($v[9]);
         $o->setPovzetekVsebine($v[10]);
 
+        $o->preracunaj(\Max\Consts::UP);
+        $o->validate();
+
         $referenca = 'Besedilo-' . $v[0];
         var_dump($referenca);
         $this->addReference($referenca, $o);

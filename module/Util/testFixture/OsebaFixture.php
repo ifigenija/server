@@ -71,6 +71,8 @@ class OsebaFixture
             $getref = $this->getReference($v[16]);
             $o->setUser($getref);
         }
+        $o->preracunaj(\Max\Consts::UP);
+        $o->validate();
 
         $referenca = 'Oseba-' . $v[0];
         var_dump($referenca);
