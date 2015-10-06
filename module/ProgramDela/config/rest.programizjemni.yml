@@ -44,6 +44,7 @@ forms:
             - avtor
             - reziser
             - datum
+            - soustvarjalci
         hydrator:
             lookups: 
                 - uprizoritev
