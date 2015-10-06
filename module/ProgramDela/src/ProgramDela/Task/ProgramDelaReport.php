@@ -17,7 +17,8 @@ class ProgramDelaReport
 {
     /**
      *
-     * @var ProgramDela
+     * @var ProgramDela\Entity\ProgramDela $prgdela 
+     * @var Jobs\Printing\mPdfPrinter $printer 
      */
     protected $entity;
     
@@ -30,6 +31,14 @@ class ProgramDelaReport
 
         $printer = $ps->getMPdf();
 
+        // Osnutek, če Program dela ni zaključen
+        if ($prgdela->getZakljuceno() == false) {
+            $printer->setWatermarkText('Osnutek', 0.1);
+            $printer->showWatermarkText = true;
+        } else {
+            $printer->showWatermarkText = false;
+        }
+        
         // Splošno za program dela - nastavim header in footer + zavihek 'splošno' iz vnosne forme
         $this->addDocumentReport('program-dela', $title, $prgdela);
 
