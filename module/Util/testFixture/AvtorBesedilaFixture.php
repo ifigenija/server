@@ -43,7 +43,6 @@ class AvtorBesedilaFixture
 
         $rep = $manager->getRepository('Produkcija\Entity\AvtorBesedila');
         $o   = new \Produkcija\Entity\AvtorBesedila();
-        $manager->persist($o);
 
         $o->setTipAvtorja($v[1]);
         $o->setZaporedna($v[2]);
@@ -58,7 +57,16 @@ class AvtorBesedilaFixture
             $o->setOseba($getref);
         }
 
-        $o->preracunaj();
+        /**
+         * ponovimo to, kar je v repozitoriju
+         */
+        if (!$o->getId()) {         // če novi
+            if ($o->getBesedilo()) {
+                $o->getBesedilo()->getAvtorji()->add($o);
+            }
+        }
+        $manager->persist($o);
+        $o->preracunaj(\Max\Consts::UP);
         $o->validate();
 
 
