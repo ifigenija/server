@@ -6,6 +6,8 @@
  */
 
 $fun = $upr->getFunkcije();
+$producent = $upr->getProducent() ? $upr->getProducent()->getPopa()->getNaziv() : '';
+
 ?>
 
 <tr class="suma-row"> 
@@ -33,6 +35,13 @@ $fun = $upr->getFunkcije();
     <td></td>
     <td class="right-align"><?= $upr->getDatumPremiere() ? $upr->getDatumPremiere()->format('d-m-Y') : '' ?></td>
 </tr>
+<?php if ($producent <> '')  { ?>
+        <tr>
+            <td>Producent:</td>
+            <td></td>
+            <td class="right-align"><?= $producent ?></td>
+        </tr>       
+<?php } ?>
 <?php 
     $this->partialLoop()->setObjectKey('fun');
     echo $this->partialLoop('funkcija.phtml', $fun);

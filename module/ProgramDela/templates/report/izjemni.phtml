@@ -33,20 +33,20 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td class="right-align"><?= $model->getAvtor() ?></td>
         </tr>
         <tr>
-            <td>Režiser:</td>
-            <td></td>
-            <td class="right-align"><?= $model->getReziser() ?></td>
-        </tr>
-        <tr>
             <td>Zvrst:</td>
             <td></td>
             <td class="right-align"><?= $model->getZvrst() ?></td>
         </tr>
         <tr>
-            <td>Datum:</td>
+            <td>Režiser:</td>
             <td></td>
-            <td class="right-align"><?= $model->getDatum ? $model->getDatum()->format('d-m-y') : '' ?></td>
-        </tr>       
+            <td class="right-align"><?= $model->getReziser() ?></td>
+        </tr>
+        <tr>
+            <td>Drugi pomembni soustvarjalci dogodka:</td>
+            <td></td>
+            <td class="right-align"><?= $model->getSoustvarjalci() ?></td>
+        </tr>
         <tr>
             <td>Št. zaposlenih čl. umetniškega ansambla, ki sodelujejo pri dogodku:</td>
             <td></td>
@@ -80,8 +80,8 @@ $sumaObiskovalcev = $model->getObiskDoma() +
         <tr>
             <td>Datum dogodka:</td>
             <td></td>
-            <td></td>
-        </tr>
+            <td class="right-align"><?= $model->getDatum() ? $model->getDatum()->format('d-m-y') : '' ?></td>
+        </tr>       
         <tr>
             <td>Prizorišče:</td>
             <td></td>
@@ -129,11 +129,6 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td class = "cell-type-number"><?= number_format($model->getPonoviDoma(), 0, ',', '.') ?></td>
         </tr>
         <tr>
-            <td class="alineja">na odru slovenskega ali zamejskega koproducenta:</td>
-            <td></td>
-            <td class="cell-type-number"><?= number_format($model->getPonoviKopr(), 0, ',', '.') ?></td>
-        </tr>
-        <tr>
             <td class="alineja">na gostovanjih po Sloveniji:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getPonoviGost(), 0, ',', '.') ?></td>
@@ -142,6 +137,11 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td class="alineja">na gostovanjih v zamejstvu:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getPonoviZamejo(), 0, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td class="alineja">na mednarodnih gostovanjih:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getPonoviInt(), 0, ',', '.') ?></td>
         </tr>
         <tr class="suma-row">
             <td>Načrtovano št. vseh obiskovalcev:</td>
@@ -154,11 +154,6 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td class="cell-type-number"><?= number_format($model->getObiskDoma(), 0, ',', '.') ?></td>
         </tr>
         <tr>
-            <td class="alineja">na odru slovenskega ali zamejskega koproducenta:</td>
-            <td></td>
-            <td class="cell-type-number"><?= number_format($model->getObiskKopr(), 0, ',', '.') ?></td>
-        </tr>
-        <tr>
             <td class="alineja">na gostovanjih po Sloveniji:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getObiskGost(), 0, ',', '.') ?></td>
@@ -167,6 +162,11 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td class="alineja">na gostovanjih v zamejstvu:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getObiskZamejo(), 0, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td class="alineja">na mednarodnih gostovanjih:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getObiskInt(), 0, ',', '.') ?></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
@@ -225,5 +225,5 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td class="cell-type-number"><?= number_format($model->getNasDelez(), 2, ',', '.') ?></td>
         </tr>
     </table>
-    <h2>Vsebinska utemeljitev predloga:</h2>
+    <h3>Vsebinska utemeljitev predloga:</h3>
 </div>
