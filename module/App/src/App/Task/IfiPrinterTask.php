@@ -19,7 +19,7 @@ abstract class IfiPrinterTask
         $option    = $repo->findOneByName("application.tenant.maticnopodjetje");
         $matGledId = $option->getDefaultValue();
         $repo      = $em->getRepository('App\Entity\Popa');
-        return $repo->findOneBy(['id' => $matGledId])->getNaziv();
+        return $repo->findOneBySifra($matGledId);
     }
     
 }
