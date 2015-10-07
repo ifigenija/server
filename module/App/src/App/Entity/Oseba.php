@@ -53,7 +53,7 @@ class Oseba
     /**
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="oseba.ime", description="oseba.d.ime")
-     * @Max\Ui(type="naziv", required=true)  
+     * @Max\Ui(type="naziv")       // npr. Homer je brez imena  
      * @var string
      */
     protected $ime;
@@ -288,7 +288,7 @@ class Oseba
      */
     public function validate($mode = 'update')
     {
-        $this->expect($this->ime, "Ime je obvezen podatek", 1000301);
+//        $this->expect($this->ime, "Ime je obvezen podatek", 1000301);     //npr. Homer je brez imena
         $this->expect($this->priimek, "Priimek je obvezen podatek", 1000302);
         $this->expect($this->sifra, "Šifra je obvezen podatek", 1000303);
     }
