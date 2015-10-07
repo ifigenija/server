@@ -97,7 +97,7 @@ class ProgramDelaRpcService
             $stZapisov = count($zaplR->findByLastnik($ep->getId()));
             if ($stZapisov < 2) {
                 throw new \Max\Exception\UnauthException($tr
-                        ->translate('Program mednarodnih gostovanj (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev, ima pa ' . $stZapisov)
+                        ->translate('Program mednarodnih gostovanj (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev in 1 priponko, ima pa ' . $stZapisov)
                 , 1001221);
             }
         }
@@ -106,10 +106,14 @@ class ProgramDelaRpcService
          * festivali 3 zapise
          */
         foreach ($programDela->getProgramiFestival() as $ep) {
+            $minPriponk = 1;
+            if ($ep->getImaKoprodukcije()) {
+                $minPriponk += 1;
+            }
             $stZapisov = count($zaplR->findByLastnik($ep->getId()));
-            if ($stZapisov < 3) {
+            if ($stZapisov < 1+$minPriponk) {
                 throw new \Max\Exception\UnauthException($tr
-                        ->translate('Program festivali (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev in 2 priponki, ima pa ' . $stZapisov)
+                        ->translate('Program festivali (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk, ima pa $stZapisov")
                 , 1001222);
             }
         }
@@ -131,12 +135,12 @@ class ProgramDelaRpcService
          */
         foreach ($programDela->getIzjemni() as $ep) {
             $minPriponk = $ep->getImaKoprodukcije() ? 1 : 0;
-            if ($ep->getPonoviZamejo() + $ep->getPonoviGost() >0) {
+            if ($ep->getPonoviZamejo() + $ep->getPonoviGost() > 0) {
                 $minPriponk+=1;
             }
 
             $stZapisov = count($zaplR->findByLastnik($ep->getId()));
-            if ($stZapisov < 1+$minPriponk) {
+            if ($stZapisov < 1 + $minPriponk) {
                 throw new \Max\Exception\UnauthException($tr
                         ->translate('Program izjemni dogodki (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk, ima pa $stZapisov")
                 , 1001224);
