@@ -24,10 +24,12 @@ class Zaposlitve
             "sifra" => ["alias" => "p.sifra"],
         ],
         "vse"     => [
-            "oseba.priimek" => ["alias" => "oseba.priimek"],
-            "oseba.ime" => ["alias" => "oseba.ime"],
-            "sifra" => ["alias" => "p.sifra"],
-            "delovnoMesto" => ["alias" => "p.delovnoMesto"]
+            "oseba.priimek"   => ["alias" => "oseba.priimek"],
+            "oseba.ime"       => ["alias" => "oseba.ime"],
+            "oseba.polnoIme"  => ["alias" => "oseba.polnoIme"],
+            "oseba.psevdonim" => ["alias" => "oseba.psevdonim"],
+            "sifra"           => ["alias" => "p.sifra"],
+            "delovnoMesto"    => ["alias" => "p.delovnoMesto"]
         ]
     ];
 
@@ -52,12 +54,14 @@ class Zaposlitve
     {
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
-            $qb->join('p.oseba', 'oseba');
+        $qb->join('p.oseba', 'oseba');
         if (!empty($options['q'])) {
-            $ime = $e->like('lower(oseba.ime)', ':q');
-            $priimek = $e->like('lower(oseba.priimek)', ':q');
-            
-            $qb->andWhere($e->orX($ime, $priimek));
+            $ime       = $e->like('lower(oseba.ime)', ':q');
+            $priimek   = $e->like('lower(oseba.priimek)', ':q');
+            $polnoIme  = $e->like('lower(oseba.polnoIme)', ':q');
+            $psevdonim = $e->like('lower(oseba.psevdonim)', ':q');
+
+            $qb->andWhere($e->orX($ime, $priimek, $polnoIme, $psevdonim));
             $qb->setParameter('q', strtolower("%{$options['q']}%"), "string");
         }
 

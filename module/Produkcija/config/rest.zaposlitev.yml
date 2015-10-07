@@ -45,7 +45,7 @@ lists:
                 - name: q
                   type: text
                   options: 
-                    label: Ime/Priimek
+                    label: Oseba
                 - name: delovno
                   type: text
                   options:
