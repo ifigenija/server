@@ -24,7 +24,8 @@ class Zaposlitve
             "sifra" => ["alias" => "p.sifra"],
         ],
         "vse"     => [
-            "oseba.label" => ["alias" => "oseba.polnoIme"],
+            "oseba.priimek" => ["alias" => "oseba.priimek"],
+            "oseba.ime" => ["alias" => "oseba.ime"],
             "sifra" => ["alias" => "p.sifra"],
             "delovnoMesto" => ["alias" => "p.delovnoMesto"]
         ]
@@ -53,8 +54,10 @@ class Zaposlitve
         $e  = $qb->expr();
             $qb->join('p.oseba', 'oseba');
         if (!empty($options['q'])) {
-            $naz = $e->like('lower(oseba.polnoIme)', ':q');
-            $qb->andWhere($e->orX($naz));
+            $ime = $e->like('lower(oseba.ime)', ':q');
+            $priimek = $e->like('lower(oseba.priimek)', ':q');
+            
+            $qb->andWhere($e->orX($ime, $priimek));
             $qb->setParameter('q', strtolower("%{$options['q']}%"), "string");
         }
 
@@ -68,8 +71,8 @@ class Zaposlitve
             $naz = $e->in('p.status', $options['status']);
             $qb->andWhere($naz);
         }
-        $sort = $this->getSort('vse', $qb);
-        $qb->orderBy($sort->order, $sort->dir);
+        //$sort = $this->getSort('vse', $qb);
+        //$qb->orderBy($sort->order, $sort->dir);
         return $qb;
     }
 
