@@ -13,53 +13,63 @@ return [
         'factories' => [
         ]
     ],
-    'controllers' => [
+    'controllers'     => [
         'invokables' => [
-            'Util\Install' => 'Util\Controller\InstallController',
-            'Util\Migrate' => 'Util\Controller\MigrateController',
+            'Util\Install'       => 'Util\Controller\InstallController',
+            'Util\Migrate'       => 'Util\Controller\MigrateController',
+            'Util\ImportBesedil' => 'Util\Controller\ImportBesedilController',
         ]
     ],
-    'router' => [
+    'router'          => [
         'routes' => [
         ],
     ],
-    'console' => [
+    'console'         => [
         'router' => [
             'routes' => [
-                'populate' => [
+                'populate'      => [
                     'options' => [
-                        'route' => 'populate',
+                        'route'    => 'populate',
                         'defaults' => [
                             'controller' => 'Util\Install',
-                            'action' => 'populate'
+                            'action'     => 'populate'
                         ]
                     ]
                 ],
-                'populateTest' => [
+                'populateTest'  => [
                     'options' => [
-                        'route' => 'populateTest',
+                        'route'    => 'populateTest',
                         'defaults' => [
                             'controller' => 'Util\Install',
-                            'action' => 'populateTest'
+                            'action'     => 'populateTest'
                         ]
                     ]
                 ],
-                'migrate' => [
+                'migrate'       => [
                     'options' => [
-                        'route' => 'migrate <db>',
+                        'route'    => 'migrate <db>',
                         'defaults' => [
                             'controller' => 'Util\Migrate',
-                            'action' => 'migrate'
+                            'action'     => 'migrate'
+                        ]
+                    ]
+                ],
+                'importBesedil' => [
+                    'options' => [
+                        'route'    => 'importBesedil <csvfile>',
+                        'defaults' => [
+                            'controller' => 'Util\ImportBesedil',
+                            'action'     => 'importBesedil'
                         ]
                     ]
                 ],
             ]
         ]
     ],
-    'fixtures' => [
+    'fixtures'        => [
         __DIR__ . '/../fixture'
     ],
-    'test_fixtures' => [
+    'test_fixtures'   => [
         __DIR__ . '/../testFixture'
     ]
 ];
