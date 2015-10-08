@@ -78,17 +78,42 @@ $imakop           = $model->getImaKoprodukcije();
             <td class="cell-type-number"><?= number_format($model->getDrugiJavni(), 2, ',', '.') ?></td>
         </tr>
         <tr>
-            <td>Celotna vrednost gostovanja:</td>
-            <td></td>
-            <td class="cell-type-number"><?= number_format($model->getCelotnaVrednost(), 2, ',', '.') ?></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
         </tr>
-        <tr>
-            <td class="alineja">od tega stroški matičnega javnega zavoda:</td>
+        <tr class="suma-row">
+            <td>Delež matičnega JZ:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getNasDelez(), 2, ',', '.') ?></td>
         </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Strošek odkupa predstave:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getStrosekOdkPred(), 2, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td>Ostali stroški:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getStroskiOstali(), 2, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Celotna vrednost:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getCelotnaVrednost(), 2, ',', '.') ?></td>
+        </tr>
         
     </table>
-    <h3>Vsebinska utemeljitev predloga:</h3>
+    <h3>Priloge:</h3>
 </div>
 

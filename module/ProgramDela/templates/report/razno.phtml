@@ -94,10 +94,25 @@ $pEnote    = $model->getProgramskeEnoteSklopa();
             <td class="cell-type-number"><?= number_format($model->getDrugiJavni(), 2, ',', '.') ?></td>
         </tr>
         <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr class="suma-row">
+            <td>Delež matičnega JZ:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getNasDelez(), 2, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
             <td>Celotna vrednost sklopa:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getCelotnaVrednost(), 2, ',', '.') ?></td>
         </tr>
     </table>
-    <h3>Vsebinska utemeljitev predloga - celotnega sklopa in posameznih enot:</h3>
+    <h3>Priloge:</h3>
 </div>
