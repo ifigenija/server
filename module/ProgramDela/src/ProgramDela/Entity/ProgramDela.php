@@ -364,10 +364,9 @@ class ProgramDela
     protected $stIzvPonPremZamejo;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="programDela.stIzvPonPremGost", description="programDela.d.stIzvPonPremGost")
-     * @Max\Ui(type="integer")
-     * @var integer
+     * @var double
      */
     protected $stIzvPonPremGost;
 
@@ -396,10 +395,9 @@ class ProgramDela
     protected $stIzvPonPremKoprInt;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="programDela.stIzvPonPrej", description="programDela.d.stIzvPonPrej")
-     * @Max\Ui(type="integer")
-     * @var integer
+     * @var double
      */
     protected $stIzvPonPrej;
 
@@ -412,18 +410,16 @@ class ProgramDela
     protected $stIzvPonPrejDoma;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="programDela.stIzvPonPrejZamejo", description="programDela.d.stIzvPonPrejZamejo")
-     * @Max\Ui(type="integer")
-     * @var integer
+     * @var double
      */
     protected $stIzvPonPrejZamejo;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="programDela.stIzvPonPrejGost", description="programDela.d.stIzvPonPrejGost")
-     * @Max\Ui(type="integer")
-     * @var integer
+     * @var double
      */
     protected $stIzvPonPrejGost;
 
@@ -467,10 +463,9 @@ class ProgramDela
     protected $stIzvOstalihNek;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="programDela.stIzvGostovanjSlo", description="programDela.d.stIzvGostovanjSlo")
-     * @Max\Ui(type="integer")
-     * @var integer
+     * @var double
      */
     protected $stIzvGostovanjSlo;
 
