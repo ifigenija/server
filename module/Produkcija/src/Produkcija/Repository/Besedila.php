@@ -24,7 +24,10 @@ class Besedila
             "stevilka"              => ["alias" => "p.stevilka"],
             "naslovIzvirnika"       => ["alias" => "p.naslovIzvirnika"],
             "zaloznik"              => ["alias" => "p.zaloznik"],
-            "internacionalniNaslov" => ["alias" => "p.internacionalniNaslov"]
+            "internacionalniNaslov" => ["alias" => "p.internacionalniNaslov"],
+            "avtor" => ["alias" => "p.avtor"],
+            "letoIzida" => ["alias" => "p.letoIzida"],
+            "datumPrejema" => ["alias" => "p.datumPrejema"],
         ],
         "vse"     => [
             "naslov" => ["alias" => "p.naslov"]
