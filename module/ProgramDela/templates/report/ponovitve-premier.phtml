@@ -96,36 +96,6 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td class="cell-type-number"><?= number_format($model->getZaproseno(), 2, ',', '.') ?></td>
         </tr>
         <tr>
-            <td>Celotna vrednost ponovitev:</td>
-            <td></td>
-            <td class="cell-type-number"><?= number_format($model->getCelotnaVrednost(), 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td class="alineja">od tega stroški matičnega javnega zavoda:</td>
-            <td></td>
-            <td class="cell-type-number"><?= number_format($model->getNasDelez(), 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td>vrednost ponovitev na matičnem odru:</td>
-            <td></td>
-            <td class="cell-type-number"><?= number_format($model->getCelotnaVrednostMat(), 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td>vrednost ponovitev na gostovanjih po SLO in v zamejstvu:</td>
-            <td></td>
-            <td class="cell-type-number"><?= number_format($model->getCelotnaVrednostGostovSZ(), 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td>Stroški avtorskih honorarjev zunanjih sodelavcev:</td>
-            <td></td>
-            <td class="cell-type-number"><?= number_format($model->getAvtorskiHonorarji(), 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td>Stroški tantiem, vezanih na ponovitve:</td>
-            <td></td>
-            <td class="cell-type-number"><?= number_format($model->getTantieme(), 2, ',', '.') ?></td>
-        </tr>
-        <tr>
             <td>Lastna sredstva:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getLastnaSredstva(), 2, ',', '.') ?></td>
@@ -163,11 +133,66 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td>&nbsp;</td>
         </tr>
         <tr>
+            <td>Vložek gostitelja:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getVlozekGostitelja(), 2, ',', '.') ?></td>
+        </tr>
+        <tr>
             <td>Vir druga ministrstva in lokalna skupnost:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getDrugiJavni(), 2, ',', '.') ?></td>
         </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr class="suma-row">
+            <td>Delež matičnega JZ:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getNasDelez(), 2, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Stroški avtorskih honorarjev:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getAvtorskiHonorarji(), 2, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td>Stroški tantiem:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getTantieme(), 2, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td>Materialni stroški:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getMaterialni(), 2, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Avtorski honorarji za sodelavce s statusom samozaposlenega v kulturi:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getAvtorskiHonorarjiSamoz(), 2, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Celotna vrednost ponovitev:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getCelotnaVrednost(), 2, ',', '.') ?></td>
+        </tr>
+
     </table>
     <h3>Priloge:</h3>
 </div>
-
