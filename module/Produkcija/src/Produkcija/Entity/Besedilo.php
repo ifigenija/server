@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Besedila")
  * @Max\I18n(label="Besedilo",plural="Besedilo uprizoritve")
  * @Max\Id(prefix="0022")
- * @Max\Lookup(ident="stevilka",label="naslov",search={"podnaslov"},extra={"podnaslov", "datumPrejema"})
+ * @Max\Lookup(ident="stevilka",label="naslov",search={"naslov"},extra={"podnaslov", "datumPrejema"})
  */
 class Besedilo
         extends \Max\Entity\Base
