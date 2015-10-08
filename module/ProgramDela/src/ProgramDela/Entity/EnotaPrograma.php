@@ -281,6 +281,8 @@ class EnotaPrograma
     protected $obiskKopr;
 
     /**
+     * delež matičnega JZ
+     * 
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
      * @Max\I18n(label="ep.obiskGost", description="ep.d.obiskGost")   
      * @Max\Ui(type="integer")
@@ -289,12 +291,34 @@ class EnotaPrograma
     protected $obiskGost;
 
     /**
+     * delež koproducentov
+     * 
+     * @ORM\Column(type="integer", nullable=false, options={"default":0})
+     * @Max\I18n(label="ep.obiskKoprGost", description="ep.d.obiskKoprGost")   
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    protected $obiskKoprGost;
+
+    /**
+     * delež matičnega JZ
+     * 
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
      * @Max\I18n(label="ep.obiskZamejo", description="ep.d.obiskZamejo")   
      * @Max\Ui(type="integer")
      * @var integer     
      */
     protected $obiskZamejo;
+
+    /**
+     * delež ostalih koproducentov
+     * 
+     * @ORM\Column(type="integer", nullable=false, options={"default":0})
+     * @Max\I18n(label="ep.obiskKoprZamejo", description="ep.d.obiskKoprZamejo")   
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    protected $obiskKoprZamejo;
 
     /**
      * @ORM\Column(type="integer", nullable=false, options={"default":0})
@@ -333,22 +357,40 @@ class EnotaPrograma
     protected $ponoviKopr;
 
     /**
-     * @ORM\Column(type="integer", nullable=false, options={"default":0})
+     * delež matičnega JZ
+     * 
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.ponoviZamejo", description="ep.d.ponoviZamejo")   
-     * @Max\Ui(type="integer")
-     * @var integer     
+     * @var double
      */
     protected $ponoviZamejo;
 
     /**
-     * število gostovanj po Sloveniji
+     * delež koproducentov
      * 
-     * @ORM\Column(type="integer", nullable=false, options={"default":0})
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="ep.ponoviKoprZamejo", description="ep.d.ponoviKoprZamejo")   
+     * @var double
+     */
+    protected $ponoviKoprZamejo;
+
+    /**
+     * število gostovanj po Sloveniji - delež matičnega JZ
+     * 
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="ep.ponoviGost", description="ep.d.ponoviGost")   
-     * @Max\Ui(type="integer")
-     * @var integer     
+     * @var double
      */
     protected $ponoviGost;
+
+    /**
+     * število gostovanj po Sloveniji - delež koproducentov
+     * 
+     * @ORM\Column(type="decimal", nullable=false, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="ep.ponoviKoprGost", description="ep.d.ponoviKoprGost")   
+     * @var double
+     */
+    protected $ponoviKoprGost;
 
     /**
      * Število ponovitev na odru koproducenta v tujini:
@@ -504,8 +546,10 @@ class EnotaPrograma
         $this->validateIntGE0($this->obiskZamejo, "", 1000693);
         $this->validateIntGE0($this->obiskInt, "", 1000694);
         $this->validateIntGE0($this->ponoviDoma, "", 1000695);
-        $this->validateIntGE0($this->ponoviZamejo, "", 1000696);
-        $this->validateIntGE0($this->ponoviGost, "", 1000697);
+        $this->validateNumberGE0($this->ponoviZamejo, "", 1000696);
+        $this->validateNumberGE0($this->ponoviKoprZamejo, "", 1001205);
+        $this->validateNumberGE0($this->ponoviGost, "", 1000697);
+        $this->validateNumberGE0($this->ponoviKoprGost, "", 1001206);
         $this->validateIntGE0($this->ponoviInt, "", 1000698);
         $this->validateIntGE0($this->ponoviKopr, "", 1001202);
         $this->validateIntGE0($this->sort, "", 1000699);
@@ -533,8 +577,7 @@ class EnotaPrograma
                     , 1001203);
         }
     }
-    
-    
+
     function getId()
     {
         return $this->id;
@@ -670,9 +713,19 @@ class EnotaPrograma
         return $this->obiskGost;
     }
 
+    function getObiskKoprGost()
+    {
+        return $this->obiskKoprGost;
+    }
+
     function getObiskZamejo()
     {
         return $this->obiskZamejo;
+    }
+
+    function getObiskKoprZamejo()
+    {
+        return $this->obiskKoprZamejo;
     }
 
     function getObiskInt()
@@ -700,9 +753,19 @@ class EnotaPrograma
         return $this->ponoviZamejo;
     }
 
+    function getPonoviKoprZamejo()
+    {
+        return $this->ponoviKoprZamejo;
+    }
+
     function getPonoviGost()
     {
         return $this->ponoviGost;
+    }
+
+    function getPonoviKoprGost()
+    {
+        return $this->ponoviKoprGost;
     }
 
     function getPonoviKoprInt()
@@ -902,9 +965,21 @@ class EnotaPrograma
         return $this;
     }
 
+    function setObiskKoprGost($obiskKoprGost)
+    {
+        $this->obiskKoprGost = $obiskKoprGost;
+        return $this;
+    }
+
     function setObiskZamejo($obiskZamejo)
     {
         $this->obiskZamejo = $obiskZamejo;
+        return $this;
+    }
+
+    function setObiskKoprZamejo($obiskKoprZamejo)
+    {
+        $this->obiskKoprZamejo = $obiskKoprZamejo;
         return $this;
     }
 
@@ -938,9 +1013,21 @@ class EnotaPrograma
         return $this;
     }
 
+    function setPonoviKoprZamejo($ponoviKoprZamejo)
+    {
+        $this->ponoviKoprZamejo = $ponoviKoprZamejo;
+        return $this;
+    }
+
     function setPonoviGost($ponoviGost)
     {
         $this->ponoviGost = $ponoviGost;
+        return $this;
+    }
+
+    function setPonoviKoprGost($ponoviKoprGost)
+    {
+        $this->ponoviKoprGost = $ponoviKoprGost;
         return $this;
     }
 
@@ -986,5 +1073,5 @@ class EnotaPrograma
         return $this;
     }
 
-    
+
 }

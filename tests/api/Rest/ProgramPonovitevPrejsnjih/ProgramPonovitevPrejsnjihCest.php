@@ -54,7 +54,7 @@ class ProgramPonovitevPrejsnjihCest
     protected $lookProdukcijskaHisa5;
     private $rpcOptionsUrl            = '/rpc/app/options';
     private $maticnoGledalisce;
-    private $popaUrl                = '/rest/popa';
+    private $popaUrl                  = '/rest/popa';
 
     public function _before(ApiTester $I)
     {
@@ -66,7 +66,6 @@ class ProgramPonovitevPrejsnjihCest
         
     }
 
-
     /**
      * - getOptions  globalna vrednost
      * 
@@ -77,8 +76,8 @@ class ProgramPonovitevPrejsnjihCest
         $popaId = $I->successfullyCallRpc($this->rpcOptionsUrl, 'getOptions', ["name" => "application.tenant.maticnopodjetje"]);
         codecept_debug($popaId);
 
-        $popa = $I->successfullyGet($this->popaUrl, $popaId);
-        $this->maticnoGledalisce=$popa['sifra'];
+        $popa                    = $I->successfullyGet($this->popaUrl, $popaId);
+        $this->maticnoGledalisce = $popa['sifra'];
     }
 
     /**
@@ -161,12 +160,16 @@ class ProgramPonovitevPrejsnjihCest
             'obiskDoma'               => 1,
             'obiskKopr'               => 1,
             'obiskGost'               => 1,
+            'obiskKoprGost'               => 1,
             'obiskZamejo'             => 1,
+            'obiskKoprZamejo'         => 1,
             'obiskInt'                => 1,
             'ponoviDoma'              => 1,
             'ponoviKopr'              => 1,
             'ponoviZamejo'            => 1,
+            'ponoviKoprZamejo'        => 1,
             'ponoviGost'              => 1,
+            'ponoviKoprGost'          => 1,
 //            'ponoviInt'            => 1,
             'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
@@ -174,10 +177,10 @@ class ProgramPonovitevPrejsnjihCest
             'sort'                    => 1,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
-            'stHonorarnihZun'            => 1,
-            'stHonorarnihZunIgr'         => 1,
-            'stHonorarnihZunIgrTujJZ'    => 1,
-            'stHonorarnihZunIgrTujJZ'    => 1,
+            'stHonorarnihZun'         => 1,
+            'stHonorarnihZunIgr'      => 1,
+            'stHonorarnihZunIgrTujJZ' => 1,
+            'stHonorarnihZunIgrTujJZ' => 1,
             'stHonorarnihZunSamoz'    => 1,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -202,12 +205,16 @@ class ProgramPonovitevPrejsnjihCest
             'obiskDoma'               => 4,
             'obiskKopr'               => 4,
             'obiskGost'               => 4,
+            'obiskKoprGost'           => 4,
             'obiskZamejo'             => 4,
+            'obiskKoprZamejo'         => 4,
             'obiskInt'                => 4,
             'ponoviDoma'              => 4,
             'ponoviKopr'              => 4,
             'ponoviZamejo'            => 4,
+            'ponoviKoprZamejo'        => 4,
             'ponoviGost'              => 4,
+            'ponoviKoprGost'          => 4,
 //            'ponoviInt'            => 4,
             'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
@@ -215,9 +222,9 @@ class ProgramPonovitevPrejsnjihCest
             'sort'                    => 2,
             'stZaposUmet'             => 2,
             'stZaposDrug'             => 2,
-            'stHonorarnihZun'            => 2,
-            'stHonorarnihZunIgr'         => 2,
-            'stHonorarnihZunIgrTujJZ'    => 2,
+            'stHonorarnihZun'         => 2,
+            'stHonorarnihZunIgr'      => 2,
+            'stHonorarnihZunIgrTujJZ' => 2,
             'stHonorarnihZunSamoz'    => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -269,12 +276,16 @@ class ProgramPonovitevPrejsnjihCest
         $I->assertEquals($ent['obiskDoma'], 1);
         $I->assertEquals($ent['obiskKopr'], 1);
         $I->assertEquals($ent['obiskGost'], 1);
+        $I->assertEquals($ent['obiskKoprGost'], 1);
         $I->assertEquals($ent['obiskZamejo'], 1);
+        $I->assertEquals($ent['obiskKoprZamejo'], 1);
         $I->assertEquals($ent['obiskInt'], 0, "obisk Int");
         $I->assertEquals($ent['ponoviDoma'], 1);
         $I->assertEquals($ent['ponoviKopr'], 1);
         $I->assertEquals($ent['ponoviZamejo'], 1);
+        $I->assertEquals($ent['ponoviKoprZamejo'], 1);
         $I->assertEquals($ent['ponoviGost'], 1);
+        $I->assertEquals($ent['ponoviKoprGost'], 1);
         $I->assertEquals($ent['ponoviInt'], 0, "ponovi Int");
         $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev['id']);
 
@@ -483,22 +494,26 @@ class ProgramPonovitevPrejsnjihCest
             'obiskDoma'               => 1,
             'obiskKopr'               => 1,
             'obiskGost'               => 1,
+            'obiskKoprGost'           => 1,
             'obiskZamejo'             => 1,
+            'obiskKoprZamejo'         => 1,
             'obiskInt'                => 1,
             'ponoviDoma'              => 1,
             'ponoviKopr'              => 1,
             'ponoviZamejo'            => 1,
+            'ponoviKoprZamejo'        => 1,
             'ponoviGost'              => 1,
+            'ponoviKoprGost'          => 1,
 //            'ponoviInt'            => 1,
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
             'dokument'                => null,
             'sort'                    => 1,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
-            'stHonorarnihZun'            => 1,
-            'stHonorarnihZunIgr'         => 1,
-            'stHonorarnihZunIgrTujJZ'    => 1,
-            'stHonorarnihZunIgrTujJZ'    => 1,
+            'stHonorarnihZun'         => 1,
+            'stHonorarnihZunIgr'      => 1,
+            'stHonorarnihZunIgrTujJZ' => 1,
+            'stHonorarnihZunIgrTujJZ' => 1,
             'stHonorarnihZunSamoz'    => 1,
         ];
         codecept_debug($data);

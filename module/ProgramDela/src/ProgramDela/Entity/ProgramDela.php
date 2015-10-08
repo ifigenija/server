@@ -311,10 +311,9 @@ class ProgramDela
     protected $vrPS1GostovSZ;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="programDela.stIzvNekomerc", description="programDela.d.stIzvNekomerc")
-     * @Max\Ui(type="integer")
-     * @var integer
+     * @var double
      */
     protected $stIzvNekomerc;
 
@@ -343,10 +342,9 @@ class ProgramDela
     protected $stIzvPremKopr;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="programDela.stIzvPonPrem", description="programDela.d.stIzvPonPrem")
-     * @Max\Ui(type="integer")
-     * @var integer
+     * @var double
      */
     protected $stIzvPonPrem;
 
@@ -359,10 +357,9 @@ class ProgramDela
     protected $stIzvPonPremDoma;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="programDela.stIzvPonPremZamejo", description="programDela.d.stIzvPonPremZamejo")
-     * @Max\Ui(type="integer")
-     * @var integer
+     * @var double
      */
     protected $stIzvPonPremZamejo;
 
@@ -463,10 +460,9 @@ class ProgramDela
     protected $stIzvGostuj;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="programDela.stIzvOstalihNek", description="programDela.d.stIzvOstalihNek")
-     * @Max\Ui(type="integer")
-     * @var integer
+     * @var double
      */
     protected $stIzvOstalihNek;
 
@@ -479,10 +475,9 @@ class ProgramDela
     protected $stIzvGostovanjSlo;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="programDela.stIzvGostovanjZam", description="programDela.d.stIzvGostovanjZam")
-     * @Max\Ui(type="integer")
-     * @var integer
+     * @var double
      */
     protected $stIzvGostovanjZam;
 
@@ -1399,7 +1394,7 @@ class ProgramDela
                 $object->preracunaj(Consts::DOWN);
             }
             $this->stIzvNekomerc+=1;      // 1 festival ena prireditev
-            $this->stIzvOstalihNek+=1;      // 1 festival ena prireditev
+            $this->stIzvOstalihNek+=1;      // 1 festival ena prireditev $$ tu zaenkrat ne upošteva deleža koproducentov
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stHonorarnihZun +=$object->getStHonorarnihZun();
@@ -1471,12 +1466,12 @@ class ProgramDela
         $this->validateIntGE0($this->stIzjem, "Št. izjemnih dogodkov", 1000717);
         $this->validateIntGE0($this->stIzvGostovanjInt, "Št. izvedb mednaronih gostovanj", 1000718);
         $this->validateIntGE0($this->stIzvGostovanjSlo, "Št. izvedb gostovanj v Sloveniji", 1000719);
-        $this->validateIntGE0($this->stIzvGostovanjZam, "Št. izvedb gostovanj v zamejstvu", 1000720);
+        $this->validateNumberGE0($this->stIzvGostovanjZam, "Št. izvedb gostovanj v zamejstvu", 1000720);
         $this->validateIntGE0($this->stIzvGostuj, "Št izvedb gostujočih", 1000721);
-        $this->validateIntGE0($this->stIzvNekomerc, "Št. izvedb nekomercialnih", 1000722);
-        $this->validateIntGE0($this->stIzvOstalihNek, "Št. izvedb ostalih nekomercialnih", 1000723);
+        $this->validateNumberGE0($this->stIzvNekomerc, "Št. izvedb nekomercialnih", 1000722);
+        $this->validateNumberGE0($this->stIzvOstalihNek, "Št. izvedb ostalih nekomercialnih", 1000723);
         $this->validateIntGE0($this->stIzvPonPrej, "Št. izvedb ponov. prejšnjih", 1000724);
-        $this->validateIntGE0($this->stIzvPonPrem, "Št. izvedb ponov. premiernih upr.", 1000725);
+        $this->validateNumberGE0($this->stIzvPonPrem, "Št. izvedb ponov. premiernih upr.", 1000725);
         $this->validateIntGE0($this->stIzvPrem, "Št. izvedb premiere", 1000726);
         $this->validateIntGE0($this->stKoprodukcij, "Št. koprodukcij", 1000727);
         $this->validateIntGE0($this->stKoprodukcijInt, "Št. medn. koprodukcij", 1000728);

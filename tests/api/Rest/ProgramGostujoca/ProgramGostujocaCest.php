@@ -81,12 +81,7 @@ class ProgramGostujocaCest
 //            'vlozekGostitelja'     => 1.24,
             'drugiJavni'      => 1.24,
             'obiskDoma'       => 1,
-//            'obiskGost'          => 1,
-//            'obiskZamejo'        => 1,
-//            'obiskInt'           => 1,
             'ponoviDoma'      => 1,
-//            'ponoviZamejo'       => 1,
-//            'ponoviGost'         => 1,
 //            'ponoviInt'          => 1,
             'uprizoritev'     => $this->lookUprizoritev['id'],
 //            'tipProgramskeEnote' => NULL,
@@ -114,12 +109,7 @@ class ProgramGostujocaCest
             'uprizoritev'     => $this->lookUprizoritev['id'],
             'drugiJavni'      => 4.56,
             'obiskDoma'       => 4,
-//            'obiskGost'          => 4,
-//            'obiskZamejo'        => 4,
-//            'obiskInt'           => 4,
             'ponoviDoma'      => 4,
-//            'ponoviZamejo'       => 4,
-//            'ponoviGost'         => 4,
 //            'ponoviInt'          => 4,
 //            'tipProgramskeEnote' => NULL,
             'dokument'        => null,
@@ -169,13 +159,7 @@ class ProgramGostujocaCest
 //        $I->assertEquals($ent['vlozekGostitelja'], 1.24);
         $I->assertEquals($ent['drugiJavni'], 1.24);
         $I->assertEquals($ent['obiskDoma'], 1);
-//        $I->assertEquals($ent['obiskGost'], 1);
-//        $I->assertEquals($ent['obiskZamejo'], 1);
-//        $I->assertEquals($ent['obiskInt'], 1);
         $I->assertEquals($ent['ponoviDoma'], 1);
-//        $I->assertEquals($ent['ponoviZamejo'], 1);
-//        $I->assertEquals($ent['ponoviGost'], 1);
-//        $I->assertEquals($ent['ponoviInt'], 1);
         $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev['id']);
 //        $I->assertEquals($ent['tipProgramskeEnote'], NULL);
         $I->assertEquals($ent['dokument'], null);
@@ -368,13 +352,7 @@ class ProgramGostujocaCest
 //            'vlozekGostitelja'     => 1.24,
             'drugiJavni'      => 1.24,
             'obiskDoma'       => 1,
-//            'obiskGost'          => 1,
-//            'obiskZamejo'        => 1,
-//            'obiskInt'           => 1,
             'ponoviDoma'      => 1,
-//            'ponoviZamejo'       => 1,
-//            'ponoviGost'         => 1,
-//            'ponoviInt'          => 1,
 //            'tipProgramskeEnote' => NULL,
 //            'tip'                => 'gostujoci', 
             'dokument'        => null,

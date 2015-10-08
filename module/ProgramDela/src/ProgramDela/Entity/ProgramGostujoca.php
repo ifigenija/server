@@ -62,10 +62,14 @@ class ProgramGostujoca
         $this->avtorskePravice         = 0;
         $this->materialni              = 0;
         $this->obiskGost               = 0;
+        $this->obiskKoprGost           = 0;
         $this->obiskZamejo             = 0;
+        $this->obiskKoprZamejo         = 0;
         $this->obiskInt                = 0;
         $this->ponoviZamejo            = 0;
+        $this->ponoviKoprZamejo        = 0;
         $this->ponoviGost              = 0;
+        $this->ponoviKoprGost          = 0;
         $this->ponoviInt               = 0;
         $this->obiskKopr               = 0;
         $this->ponoviKopr              = 0;
@@ -78,7 +82,7 @@ class ProgramGostujoca
         $this->stHonorarnihZun         = 0;
         $this->stHonorarnihZunIgr      = 0;
         $this->stHonorarnihZunIgrTujJZ = 0;
-        $this->stHonorarnihZunSamoz = 0;
+        $this->stHonorarnihZunSamoz    = 0;
         $this->kpe                     = 0;
         $this->naziv                   = "";        // dobimo iz uprizoritve
         $this->preracunajPoljaZaMatKoprodukcijo();

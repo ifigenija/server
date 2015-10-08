@@ -96,11 +96,15 @@ class ProgramIzjemniCest
             'drugiJavni'              => 1.24,
             'obiskDoma'               => 1,
             'obiskGost'               => 1,
+            'obiskKoprGost'               => 1,
             'obiskZamejo'             => 1,
+            'obiskKoprZamejo'             => 1,
             'obiskInt'                => 1,
             'ponoviDoma'              => 1,
-            'ponoviZamejo'            => 1,
-            'ponoviGost'              => 1,
+            'ponoviZamejo'            => 1.5,
+            'ponoviKoprZamejo'        => 0.5,
+            'ponoviGost'              => 1.5,
+            'ponoviKoprGost'          => 0.5,
             'ponoviInt'               => 1,
 //            'uprizoritev'          => NULL,
 //            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
@@ -118,7 +122,7 @@ class ProgramIzjemniCest
             'zvrst'                   => "zz",
             'avtor'                   => "zz",
             'reziser'                 => "zz",
-            'soustvarjalci'                 => "zz",
+            'soustvarjalci'           => "zz",
             'datum'                   => "2012-02-01T00:00:00+0100",
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -141,11 +145,15 @@ class ProgramIzjemniCest
             'drugiJavni'              => 4.56,
             'obiskDoma'               => 4,
             'obiskGost'               => 4,
+            'obiskKoprGost'               => 4,
             'obiskZamejo'             => 4,
+            'obiskKoprZamejo'             => 4,
             'obiskInt'                => 4,
             'ponoviDoma'              => 4,
-            'ponoviZamejo'            => 4,
-            'ponoviGost'              => 4,
+            'ponoviZamejo'            => 4.5,
+            'ponoviKoprZamejo'        => 0.5,
+            'ponoviGost'              => 4.5,
+            'ponoviKoprGost'          => 0.5,
             'ponoviInt'               => 4,
 //            'uprizoritev'          => NULL,
 //            'tipProgramskeEnote'   => $this->lookTipProgramskeEnote['id'],
@@ -163,7 +171,7 @@ class ProgramIzjemniCest
             'zvrst'                   => "zz",
             'avtor'                   => "zz",
             'reziser'                 => "zz",
-            'soustvarjalci'                 => "zz",
+            'soustvarjalci'           => "zz",
             'datum'                   => "2012-02-01T00:00:00+0100",
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -212,11 +220,15 @@ class ProgramIzjemniCest
         $I->assertEquals($ent['drugiJavni'], 1.24);
         $I->assertEquals($ent['obiskDoma'], 1);
         $I->assertEquals($ent['obiskGost'], 1);
+        $I->assertEquals($ent['obiskKoprGost'], 1);
         $I->assertEquals($ent['obiskZamejo'], 1);
+        $I->assertEquals($ent['obiskKoprZamejo'], 1);
         $I->assertEquals($ent['obiskInt'], 1);
         $I->assertEquals($ent['ponoviDoma'], 1);
-        $I->assertEquals($ent['ponoviZamejo'], 1);
-        $I->assertEquals($ent['ponoviGost'], 1);
+        $I->assertEquals($ent['ponoviZamejo'], 1.5);
+        $I->assertEquals($ent['ponoviKoprZamejo'], 0.5);
+        $I->assertEquals($ent['ponoviGost'], 1.5);
+        $I->assertEquals($ent['ponoviKoprGost'], 0.5);
         $I->assertEquals($ent['ponoviInt'], 1);
 //        $I->assertEquals($ent['uprizoritev'], NULL);
 //        $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);

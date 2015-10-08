@@ -19,14 +19,18 @@ forms:
 #            - drugiViri
 #            - vlozekGostitelja      
             - drugiJavni
-            - obiskDoma          # $$ morda tudi to damo ven iz forme, ker ni vezano na uprizoritev
-            - obiskGost
-            - obiskZamejo
-            - obiskInt
-            - ponoviDoma        # $$ morda tudi to damo ven iz forme, ker ni vezano na uprizoritev
             - ponoviZamejo
+            - ponoviKoprZamejo
             - ponoviGost
+            - ponoviKoprGost
+            - obiskZamejo
+            - obiskKoprZamejo
+            - obiskGost
+            - obiskKoprGost
+            - obiskDoma  
+            - obiskInt
             - ponoviInt
+            - ponoviDoma  
 #            - uprizoritev
 #            - tipProgramskeEnote
             - dokument

@@ -22,13 +22,17 @@ forms:
 #            - lastnaSredstva
             - obiskDoma
             - obiskKopr
-            - obiskGost
+            - ponoviZamejo
+            - ponoviKoprZamejo
+            - ponoviGost
+            - ponoviKoprGost
             - obiskZamejo
+            - obiskKoprZamejo
+            - obiskGost
+            - obiskKoprGost
 #            - obiskInt
             - ponoviDoma
             - ponoviKopr
-            - ponoviZamejo
-            - ponoviGost
 #            - ponoviInt
             - uprizoritev
             - tipProgramskeEnote

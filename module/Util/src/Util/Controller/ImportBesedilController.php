@@ -154,12 +154,13 @@ class ImportBesedilController
             $avtor->setZaporedna($vrsta[8]);
 
             $avtorR->create($avtor);
-            
-            
-            $polnoIme=$oseba->getPolnoIme();
+
+
+            $polnoIme = $oseba->getPolnoIme();
             echo "oseba $vrsta[0] $polnoIme " . PHP_EOL;
+
             /**
-             * $$ probamo, da bo našel iste osebe, ki smo jih prej dodali
+             * da bo lahko našel osebe, ki smo jih prej dodali
              * 
              * performančno je sicer slabše
              */

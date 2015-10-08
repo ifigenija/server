@@ -159,12 +159,16 @@ class ProgramPonovitevPremiereCest
             'obiskDoma'               => 1,
             'obiskKopr'               => 1,
             'obiskGost'               => 1,
+            'obiskKoprGost'           => 1,
             'obiskZamejo'             => 1,
+            'obiskKoprZamejo'         => 1,
             'obiskInt'                => 1,
             'ponoviDoma'              => 1,
             'ponoviKopr'              => 1,
             'ponoviZamejo'            => 1,
+            'ponoviKoprZamejo'        => 1,
             'ponoviGost'              => 1,
+            'ponoviKoprGost'          => 1,
             'ponoviInt'               => 1,
             'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
@@ -193,12 +197,16 @@ class ProgramPonovitevPremiereCest
             'obiskDoma'               => 4,
             'obiskKopr'               => 4,
             'obiskGost'               => 4,
+            'obiskKoprGost'           => 4,
             'obiskZamejo'             => 4,
+            'obiskKoprZamejo'         => 4,
             'obiskInt'                => 4,
             'ponoviDoma'              => 4,
             'ponoviKopr'              => 4,
             'ponoviZamejo'            => 4,
+            'ponoviKoprZamejo'        => 4,
             'ponoviGost'              => 4,
+            'ponoviKoprGost'          => 4,
             'ponoviInt'               => 4,
             'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
@@ -253,12 +261,16 @@ class ProgramPonovitevPremiereCest
         $I->assertEquals($ent['obiskDoma'], 1);
         $I->assertEquals($ent['obiskKopr'], 1);
         $I->assertEquals($ent['obiskGost'], 1);
+        $I->assertEquals($ent['obiskKoprGost'], 1);
         $I->assertEquals($ent['obiskZamejo'], 1, "obisk za mejo");
+        $I->assertEquals($ent['obiskKoprZamejo'], 1, "obisk za mejo");
         $I->assertEquals($ent['obiskInt'], 0, "obisk Int");
         $I->assertEquals($ent['ponoviDoma'], 1);
         $I->assertEquals($ent['ponoviKopr'], 1);
         $I->assertEquals($ent['ponoviZamejo'], 1);
+        $I->assertEquals($ent['ponoviKoprZamejo'], 1);
         $I->assertEquals($ent['ponoviGost'], 1);
+        $I->assertEquals($ent['ponoviKoprGost'], 1);
         $I->assertEquals($ent['ponoviInt'], 0);
         $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev['id']);
         $I->assertEquals($ent['tipProgramskeEnote'], $this->lookTipProgramskeEnote['id']);
@@ -458,12 +470,16 @@ class ProgramPonovitevPremiereCest
             'obiskDoma'               => 1,
             'obiskKopr'               => 1,
             'obiskGost'               => 1,
+            'obiskKoprGost'           => 1,
             'obiskZamejo'             => 1,
+            'obiskKoprZamejo'         => 1,
             'obiskInt'                => 1,
             'ponoviDoma'              => 1,
             'ponoviKopr'              => 1,
             'ponoviZamejo'            => 1,
+            'ponoviKoprZamejo'        => 1,
             'ponoviGost'              => 1,
+            'ponoviKoprGost'          => 1,
 //            'ponoviInt'            => 1,
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote['id'],
             'dokument'                => null,

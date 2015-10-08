@@ -133,12 +133,16 @@ class ProgramFestival
         $this->avtorskiHonorarji       = 0;
         $this->avtorskiHonorarjiSamoz  = 0;
         $this->obiskGost               = 0;
+        $this->obiskKoprGost           = 0;
         $this->obiskInt                = 0;
         $this->obiskZamejo             = 0;
+        $this->obiskKoprZamejo         = 0;
         $this->ponoviDoma              = 0;
         $this->ponoviGost              = 0;
+        $this->ponoviKoprGost          = 0;
         $this->ponoviInt               = 0;
         $this->ponoviZamejo            = 0;
+        $this->ponoviKoprZamejo        = 0;
         $this->obiskKopr               = 0;
         $this->ponoviKopr              = 0;
         $this->obiskKoprInt            = 0;

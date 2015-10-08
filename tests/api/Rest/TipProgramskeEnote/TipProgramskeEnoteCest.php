@@ -150,12 +150,12 @@ class TipProgramskeEnoteCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $resp    = $I->successfullyGetList($this->restUrl, []);
-        $list    = $resp['data'];
-        $totRec=$resp['state']['totalRecords'];
+        $resp   = $I->successfullyGetList($this->restUrl, []);
+        $list   = $resp['data'];
+        $totRec = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertEquals("aa", $list[0]['naziv']);
-        $I->assertEquals("yy", $list[$totRec-1]['naziv']);
+        $I->assertEquals("yy", $list[$totRec - 1]['naziv']);
     }
 
     /**
@@ -194,21 +194,25 @@ class TipProgramskeEnoteCest
             'drugiJavni'              => 1.23,
             'obiskDoma'               => 1,
             'obiskGost'               => 1,
+            'obiskKoprGost'               => 1,
             'obiskKopr'               => 1,
             'obiskZamejo'             => 1,
+            'obiskKoprZamejo'             => 1,
             'obiskInt'                => 1,
-            'obiskKoprInt'                => 1,
+            'obiskKoprInt'            => 1,
             'ponoviDoma'              => 1,
             'ponoviZamejo'            => 1,
+            'ponoviKoprZamejo'        => 1,
             'ponoviGost'              => 1,
+            'ponoviKoprGost'          => 1,
             'ponoviKopr'              => 1,
             'ponoviInt'               => 1,
-            'ponoviKoprInt'               => 1,
+            'ponoviKoprInt'           => 1,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
             'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->obj2['id'],
-            'kpe'      => 0.1,
+            'kpe'                     => 0.1,
             'dokument'                => null,
         ];
         $this->objProgramPremiera1 = $ent                       = $I->successfullyCreate($this->programPremieraUrl, $data);
@@ -231,25 +235,29 @@ class TipProgramskeEnoteCest
             'drugiJavni'              => 1.23,
             'obiskDoma'               => 1,
             'obiskGost'               => 1,
+            'obiskKoprGost'               => 1,
             'obiskKopr'               => 1,
             'obiskZamejo'             => 1,
+            'obiskKoprZamejo'             => 1,
             'obiskInt'                => 1,
-            'obiskKoprInt'                => 1,
+            'obiskKoprInt'            => 1,
             'ponoviDoma'              => 1,
             'ponoviZamejo'            => 1,
+            'ponoviKoprZamejo'        => 1,
             'ponoviGost'              => 1,
+            'ponoviKoprGost'          => 1,
             'ponoviKopr'              => 1,
 //            'ponoviInt'            => 1,
             'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->obj2['id'],
-            'kpe'      => 0.1,
+            'kpe'                     => 0.1,
             'dokument'                => null,
             'sort'                    => 1,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
-            'stHonorarnihZun'            => 1,
-            'stHonorarnihZunIgr'         => 1,
-            'stHonorarnihZunIgrTujJZ'    => 1,
+            'stHonorarnihZun'         => 1,
+            'stHonorarnihZunIgr'      => 1,
+            'stHonorarnihZunIgrTujJZ' => 1,
         ];
         $this->objProgramPonovitevPrejsnjih11 = $ent                                  = $I->successfullyCreate($this->programPonovitevPrejsnjihUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -272,16 +280,20 @@ class TipProgramskeEnoteCest
             'drugiJavni'              => 1.23,
             'obiskDoma'               => 1,
             'obiskGost'               => 1,
+            'obiskKoprGost'               => 1,
             'obiskKopr'               => 1,
             'obiskZamejo'             => 1,
+            'obiskKoprZamejo'             => 1,
             'obiskInt'                => 1,
-            'obiskKoprInt'                => 1,
+            'obiskKoprInt'            => 1,
             'ponoviDoma'              => 1,
             'ponoviZamejo'            => 1,
+            'ponoviKoprZamejo'        => 1,
             'ponoviGost'              => 1,
+            'ponoviKoprGost'          => 1,
             'ponoviKopr'              => 1,
             'ponoviInt'               => 1,
-            'ponoviKoprInt'               => 1,
+            'ponoviKoprInt'           => 1,
             'uprizoritev'             => $this->lookUprizoritev['id'],
             'tipProgramskeEnote'      => $this->obj2['id'],
             'dokument'                => null,
