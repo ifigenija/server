@@ -94,12 +94,12 @@ $sumaObiskovalcev = $model->getObiskDoma() +
         <tr>
             <td class="alineja">na gostovanjih po Sloveniji:</td>
             <td></td>
-            <td class="cell-type-number"><?= number_format($model->getPonoviGost(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getPonoviGost(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">na gostovanjih v zamejstvu:</td>
             <td></td>
-            <td class="cell-type-number"><?= number_format($model->getPonoviZamejo(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getPonoviZamejo(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>&nbsp;</td>

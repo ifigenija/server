@@ -26,7 +26,7 @@ $mkViriSK1                  = $model->getSredstvaZaprosenoPrem() +
 $dmlsViriSK1                = $model->getSredstvaDrugiJavniPrem() +
         $model->getSredstvaDrugiJavniPonPrem() +
         $model->getSredstvaDrugiJavniPonPrej() +
-        $model->getSredstvaDrugiJavniGostujo;
+        $model->getSredstvaDrugiJavniGostujo();
 $drugiViriSK1               = $model->getSredstvaDrugiViriPrem() +
         $model->getSredstvaDrugiViriPonPrem() +
         $model->getSredstvaDrugiViriPonPrej() +
@@ -95,11 +95,11 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
         </tr>
         <tr>
             <td>Število gostovanj po Sloveniji</td>
-            <td class="right-align"><?= number_format($model->getStIzvGostovanjSlo(), 0, ',', '.') ?></td>
+            <td class="right-align"><?= number_format($model->getStIzvGostovanjSlo(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Število gostovanj v zamejstvu</td>
-            <td class="right-align"><?= number_format($model->getStIzvGostovanjZam(), 0, ',', '.') ?></td>
+            <td class="right-align"><?= number_format($model->getstIzvGostovanjZam(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Število mednarodnih gostovanj (brez zamejstva)</td>
