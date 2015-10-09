@@ -102,6 +102,16 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td class="cell-type-number"><?= number_format($model->getPonoviZamejo(), 2, ',', '.') ?></td>
         </tr>
         <tr>
+            <td class="alineja">Število ponovitev na gostovanjih po Sloveniji - delež ostalih koproducentov:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getPonoviKoprGost(), 2, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td class="alineja">Število ponovitev v zamejstvu - delež ostalih koproducentov:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getPonoviKoprZamejo(), 2, ',', '.') ?></td>
+        </tr>
+        <tr>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
@@ -130,6 +140,16 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td class="alineja">na gostovanjih v zamejstvu:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getObiskZamejo(), 0, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td class="alineja">Število obiskovalcev na gostovanjih - delež ostalih koproducentov:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getObiskKoprGost(), 0, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td class="alineja">Število obiskovalcev v zamejstvu - delež ostalih koproducentov:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getObiskKoprZamejo(), 0, ',', '.') ?></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
@@ -216,6 +236,16 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Vrednost ponovitev na matičnem odru:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getCelotnaVrednostMat(), 2, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td>Vrednost ponovitev na gostovanjih po SLO in v zamejstvu:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getCelotnaVrednostGostovSZ(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Celotna vrednost ponovitev:</td>

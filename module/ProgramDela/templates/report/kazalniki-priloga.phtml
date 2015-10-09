@@ -80,15 +80,15 @@ $povprecnoObisk = ($model->getStIzvPonPrem() + $model->getStIzvPrem() != 0) ?
         </tr>
         <tr>
             <td>Število izvedb premiernih produkcij</td>
-            <td class="cell-type-number"><?= number_format($model->getStIzvPonPrem() + $model->getstIzvPrem(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStIzvPonPrem() + $model->getstIzvPrem(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega na domačem odru</td>
-            <td class="cell-type-number"><?= number_format($model->getStIzvPonPremDoma() + $model->getStIzvPremDoma(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStIzvPonPremDoma() + $model->getStIzvPremDoma(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">na odru slovenskega ali zamejskega koproducenta</td>
-            <td class="cell-type-number"><?= number_format($model->getStIzvPonPremKopr() + $model->getStIzvPremKopr(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStIzvPonPremKopr() + $model->getStIzvPremKopr(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega na gostovanjih po Sloveniji</td>
@@ -100,11 +100,11 @@ $povprecnoObisk = ($model->getStIzvPonPrem() + $model->getStIzvPrem() != 0) ?
         </tr>
         <tr>
             <td class="alineja">od tega na gostovanjih v tujini</td>
-            <td class="cell-type-number"><?= number_format($model->getStIzvPonPremInt(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStIzvPonPremInt(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">na odru koproducenta v tujini</td>
-            <td class="cell-type-number"><?= number_format($model->getStIzvPonPremKoprInt(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStIzvPonPremKoprInt(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Število izvedb ponovitev iz prejšnjih sezon</td>
@@ -112,11 +112,11 @@ $povprecnoObisk = ($model->getStIzvPonPrem() + $model->getStIzvPrem() != 0) ?
         </tr>
         <tr>
             <td class="alineja">od tega na domačem odru</td>
-            <td class="cell-type-number"><?= number_format($model->getStIzvPonPrejDoma(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStIzvPonPrejDoma(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">na odru slovenskega ali zamejskega koproducenta</td>
-            <td class="cell-type-number"><?= number_format($model->getStIzvPonPrejKopr(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStIzvPonPrejKopr(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega na gostovanjih po Sloveniji</td>
@@ -128,15 +128,15 @@ $povprecnoObisk = ($model->getStIzvPonPrem() + $model->getStIzvPrem() != 0) ?
         </tr>
         <tr>
             <td class="alineja">od tega na gostovanjih v tujini</td>
-            <td class="cell-type-number"><?= number_format($model->getStIzvPonPrejInt(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStIzvPonPrejInt(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">na odru koproducenta v tujini</td>
-            <td class="cell-type-number"><?= number_format($model->getStIzvPonPrejKoprInt(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStIzvPonPrejKoprInt(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Število izvedb gostujočih predstav</td>
-            <td class="cell-type-number"><?= number_format($model->getStIzvGostuj(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStIzvGostuj(), 2, ',', '.') ?></td>
         </tr>	
         <tr>
             <td>Število ostalih javnih nekomercialnih prireditev</td>
@@ -152,7 +152,7 @@ $povprecnoObisk = ($model->getStIzvPonPrem() + $model->getStIzvPrem() != 0) ?
         </tr>	
         <tr>
             <td>Število mednarodnih gostovanj (brez zamejstva)</td>
-            <td class="cell-type-number"><?= number_format($model->getStIzvGostovanjInt(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStIzvGostovanjInt(), 2, ',', '.') ?></td>
         </tr>	
         <tr>
             <td>Število obiskovalcev vseh premiernih uprizoritev in njihovih ponovitev</td>
@@ -224,7 +224,7 @@ $povprecnoObisk = ($model->getStIzvPonPrem() + $model->getStIzvPrem() != 0) ?
         </tr>
         <tr>
             <td>Število koprodukcij</td>
-            <td class="cell-type-number"><?= number_format($model->getStKoprodukcij(), 0, ',', '.') ?></td>    <!--  + $model->getStKoprodukcijInt() + $model->getStKoprodukcijNVO() -->
+            <td class="cell-type-number"><?= number_format($model->getStKoprodukcij(), 0, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Število koprodukcij z mednarodnimi koproducenti</td>

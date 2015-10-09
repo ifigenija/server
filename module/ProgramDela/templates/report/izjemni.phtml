@@ -74,7 +74,7 @@ $sumaObiskovalcev = $model->getObiskDoma() +
         </tr>
         <tr>
             <td>Trajanje priprave dogodka:</td>
-            <td></td>
+            <td>&nbsp;</td>
             <td><?= $model->getTrajanje() ?></td>
         </tr>
         <tr>
@@ -84,7 +84,7 @@ $sumaObiskovalcev = $model->getObiskDoma() +
         </tr>       
         <tr>
             <td>Prizorišče:</td>
-            <td></td>
+            <td>&nbsp;</td>
             <td><?= $model->getPrizorisce() ?></td>
         </tr>
         <tr>
@@ -143,6 +143,16 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getPonoviInt(), 0, ',', '.') ?></td>
         </tr>
+        <tr>
+            <td class="alineja">Število ponovitev na gostovanjih po Sloveniji - delež ostalih koproducentov:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getPonoviKoprGost(), 2, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td class="alineja">Število ponovitev v zamejstvu - delež ostalih koproducentov:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getPonoviKoprZamejo(), 2, ',', '.') ?></td>
+        </tr>
         <tr class="suma-row">
             <td>Načrtovano št. vseh obiskovalcev:</td>
             <td></td>
@@ -167,6 +177,16 @@ $sumaObiskovalcev = $model->getObiskDoma() +
             <td class="alineja">na mednarodnih gostovanjih:</td>
             <td></td>
             <td class="cell-type-number"><?= number_format($model->getObiskInt(), 0, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td class="alineja">Število obiskovalcev na gostovanjih - delež ostalih koproducentov:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getObiskKoprGost(), 0, ',', '.') ?></td>
+        </tr>
+        <tr>
+            <td class="alineja">Število obiskovalcev v zamejstvu - delež ostalih koproducentov:</td>
+            <td></td>
+            <td class="cell-type-number"><?= number_format($model->getObiskKoprZamejo(), 0, ',', '.') ?></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
