@@ -38,7 +38,7 @@ class Uprizoritev
     /**
      * @ORM\Column(type="string", length=35, nullable=true)
      * @Max\I18n(label="uprizoritev.faza", description="uprizoritev.d.faza")
-     * @Max\Ui(type="select", opts="uprizoritev.faza")
+     * @Max\Ui(type="select", empty="Izberite stanje", opts="uprizoritev.faza")
      * @var string
      */
     protected $faza;
