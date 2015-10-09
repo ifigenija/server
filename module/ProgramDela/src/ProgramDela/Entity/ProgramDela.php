@@ -1215,8 +1215,8 @@ class ProgramDela
             $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->vrPS1Mat+= $object->getCelotnaVrednostMat();
             $this->vrPS1GostovSZ+= $object->getCelotnaVrednostGostovSZ();
-            $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost() + $object->getPonoviKopr();      //$$ ali prištevvamo tudi mednarodne?
-            $this->stIzvPonPrem+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost() + $object->getPonoviKopr();      //$$ ali prištevvamo tudi mednarodne?
+            $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost() ;      //$$ ali prištevvamo tudi mednarodne?
+            $this->stIzvPonPrem+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost() ;      //$$ ali prištevvamo tudi mednarodne?
             $this->stIzvPonPremDoma+=$object->getPonoviDoma();
             $this->stIzvPonPremZamejo+=$object->getPonoviZamejo();
             $this->stIzvPonPremGost+=$object->getPonoviGost();
