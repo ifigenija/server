@@ -142,7 +142,7 @@ class ProgramDela
 
     /**
      * 
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stPremierVelikih", description="programDela.d.stPremierVelikih")
      * @Max\Ui(type="integer")
      * @var integer
@@ -151,7 +151,7 @@ class ProgramDela
 
     /**
      * 
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stPremierMalih", description="programDela.d.stPremierMalih")
      * @Max\Ui(type="integer")
      * @var integer
@@ -159,7 +159,7 @@ class ProgramDela
     protected $stPremierMalih;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stPremierMalihKopr", description="programDela.d.stPremierMalihKopr")
      * @Max\Ui(type="integer")
      * @var integer
@@ -167,7 +167,7 @@ class ProgramDela
     protected $stPremierMalihKopr;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stPremierVelikihKopr", description="programDela.d.stPremierVelikihKopr")
      * @Max\Ui(type="integer")
      * @var integer
@@ -175,7 +175,7 @@ class ProgramDela
     protected $stPremierVelikihKopr;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stPremier", description="programDela.d.stPremier")
      * @Max\Ui(type="integer")
      * @var integer
@@ -695,7 +695,7 @@ class ProgramDela
      * 
      * Št. honorarnih zunanjih sodelavcev:
      * 
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stHonorarnihZun", description="programDela.d.stHonorarnihZun")
      * @Max\Ui(type="integer")
      * @var integer
@@ -706,7 +706,7 @@ class ProgramDela
      * Št. honorarnih zunanjih sodelavcev:
      *      - od tega igralcev
      * 
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stHonorarnihZunIgr", description="programDela.d.stHonorarnihZunIgr")
      * @Max\Ui(type="integer")
      * @var integer
@@ -728,7 +728,7 @@ class ProgramDela
      * Št. honorarnih zunanjih sodelavcev:
      *      - od tega s statusom samozaposlenega v kulturi
      *  
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stHonorarnihZunSamoz", description="programDela.d.stHonorarnihZunSamoz")
      * @Max\Ui(type="integer")
      * @var integer

@@ -218,7 +218,7 @@ class EnotaPrograma
      * 
      * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
      * 
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="ep.stHonorarnihZun", description="ep.d.stHonorarnihZun")
      * @Max\Ui(type="integer")
      * @var integer
@@ -230,7 +230,7 @@ class EnotaPrograma
      * 
      * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
      * 
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="ep.stHonorarnihZunIgr", description="ep.d.stHonorarnihZunIgr")
      * @Max\Ui(type="integer")
      * @var integer
@@ -242,7 +242,7 @@ class EnotaPrograma
      * 
      * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
      * 
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="ep.stHonorarnihZunIgrTujJZ", description="ep.d.stHonorarnihZunIgrTujJZ")
      * @Max\Ui(type="integer")
      * @var integer
@@ -254,7 +254,7 @@ class EnotaPrograma
      * 
      * obstaja naj možnost da se podatek prepišejo iz uprizoritve in njenih relacij
      * 
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="ep.stHonorarnihZunSamoz", description="ep.d.stHonorarnihZunSamoz")
      * @Max\Ui(type="integer")
      * @var integer
