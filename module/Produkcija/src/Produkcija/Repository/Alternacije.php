@@ -165,8 +165,6 @@ class Alternacije
      */
     public function update($object, $params = null)
     {
-        $this->preveriZaposlitev($object);
-
         $object->preracunaj();
         $this->nastaviEnPrivzeti($object->getFunkcija());
 
