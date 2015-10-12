@@ -12,51 +12,51 @@ $povprecnoObisk = ($model->getStIzvPonPrem() + $model->getStIzvPrem() != 0) ?
         </tr>
         <tr>
             <td>Število premier</td>
-            <td class="cell-type-number"><?= number_format($model->getStPremier(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStPremier(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega velikih predstav</td>
-            <td class="cell-type-number"><?= number_format($model->getStPremierVelikih(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStPremierVelikih(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega malih predstav</td>
-            <td class="cell-type-number"><?= number_format($model->getStPremierMalih(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStPremierMalih(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega malih koprodukcij</td>
-            <td class="cell-type-number"><?= number_format($model->getStPremierMalihKopr(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStPremierMalihKopr(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega srednjih koprodukcij</td>
-            <td class="cell-type-number"><?= number_format($model->getStPremierSredKopr(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStPremierSredKopr(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega velikih koprodukcij</td>
-            <td class="cell-type-number"><?= number_format($model->getStPremierVelikihKopr(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStPremierVelikihKopr(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Število ponovitev iz prejšnjih sezon</td>
-            <td class="cell-type-number"><?= number_format($model->getStPonPrej(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStPonPrej(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega velikih predstav</td>
-            <td class="cell-type-number"><?= number_format($model->getStPonPrejVelikih(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStPonPrejVelikih(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega malih predstav</td>
-            <td class="cell-type-number"><?= number_format($model->getStPonPrejMalih(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStPonPrejMalih(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega malih koprodukcij</td>
-            <td class="cell-type-number"><?= number_format($model->getStPonPrejMalihKopr(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStPonPrejMalihKopr(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega srednjih koprodukcij</td>
-            <td class="cell-type-number"><?= number_format($model->getStPonPrejSredKopr(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStPonPrejSredKopr(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega velikih koprodukcij</td>
-            <td class="cell-type-number"><?= number_format($model->getStPonPrejVelikihKopr(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStPonPrejVelikihKopr(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Celotna vrednost lastne produkcije in postprodukcije (ponovitev) - programski sklop 1</td>
@@ -156,51 +156,51 @@ $povprecnoObisk = ($model->getStIzvPonPrem() + $model->getStIzvPrem() != 0) ?
         </tr>	
         <tr>
             <td>Število obiskovalcev vseh premiernih uprizoritev in njihovih ponovitev</td>
-            <td class="cell-type-number"><?= number_format($model->getStObiskPonPrem() + $model->getStObiskPrem(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStObiskPonPrem() + $model->getStObiskPrem(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">na domačem odru</td>
-            <td class="cell-type-number"><?= number_format($model->getStObiskPonPremDoma() + $model->getStObiskPremDoma(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStObiskPonPremDoma() + $model->getStObiskPremDoma(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">na odru slovenskega ali zamejskega koproducenta</td>
-            <td class="cell-type-number"><?= number_format($model->getStObiskPonPremKopr() + $model->getStObiskPremKopr(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStObiskPonPremKopr() + $model->getStObiskPremKopr(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">na odru koproducenta iz tujine</td>
-            <td class="cell-type-number"><?= number_format($model->getStObiskPonPremKoprInt(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStObiskPonPremKoprInt(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">na gostovanjih po Sloveniji</td>
-            <td class="cell-type-number"><?= number_format($model->getStObiskPonPremGost(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStObiskPonPremGost(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">na gostovanjih v zamejstvu</td>
-            <td class="cell-type-number"><?= number_format($model->getStObiskPonPremZamejo(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStObiskPonPremZamejo(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">na mednarodnih gostovanjih (brez zamejstva)</td>
-            <td class="cell-type-number"><?= number_format($model->getStObiskPonPremInt(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStObiskPonPremInt(), 2, ',', '.') ?></td>
         </tr>	
         <tr>
             <td>Število obiskovalcev vseh nekomercialnih prireditev</td>
-            <td class="cell-type-number"><?= number_format($model->getStObiskNekom(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStObiskNekom(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">V lastnih dvoranah ali matičnih prizoriščih</td>
-            <td class="cell-type-number"><?= number_format($model->getStObiskNekomMat(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStObiskNekomMat(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">Na gostovanjih po Sloveniji</td>
-            <td class="cell-type-number"><?= number_format($model->getStObiskNekomGostSlo(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStObiskNekomGostSlo(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">Na gostovanjih v zamejstvu</td>
-            <td class="cell-type-number"><?= number_format($model->getStObiskNekomGostZam(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStObiskNekomGostZam(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">Na mednarodnih gostovanjih (brez zamejstva)</td>
-            <td class="cell-type-number"><?= number_format($model->getStObiskNekomGostInt(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStObiskNekomGostInt(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Povprečno število obiskovalcev na prireditev</td>
@@ -220,27 +220,27 @@ $povprecnoObisk = ($model->getStIzvPonPrem() + $model->getStIzvPrem() != 0) ?
         </tr>
         <tr>
             <td>Število prodanih vstopnic</td>
-            <td class="cell-type-number"><?= number_format($model->getStProdVstopnic(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStProdVstopnic(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Število koprodukcij</td>
-            <td class="cell-type-number"><?= number_format($model->getStKoprodukcij(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStKoprodukcij(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Število koprodukcij z mednarodnimi koproducenti</td>
-            <td class="cell-type-number"><?= number_format($model->getStKoprodukcijInt(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStKoprodukcijInt(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Število koprodukcij s slovenskimi NVO</td>
-            <td class="cell-type-number"><?= number_format($model->getStKoprodukcijNVO(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStKoprodukcijNVO(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Število vseh zaposlenih v javnem zavodu</td>
-            <td class="cell-type-number"><?= number_format($model->getStZaposlenih(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStZaposlenih(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Število zaposlenih igralcev</td>
-            <td class="cell-type-number"><?= number_format($model->getStZaposIgralcev(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStZaposIgralcev(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Povprečna zasedenost zaposlenih igralcev (popvprečno število nastopov v letu)</td>
@@ -248,19 +248,19 @@ $povprecnoObisk = ($model->getStIzvPonPrem() + $model->getStIzvPrem() != 0) ?
         </tr>
         <tr>
             <td>Načrtovano število honorarnih zunanjih sodelavcev</td>
-            <td class="cell-type-number"><?= number_format($model->getStHonorarnihZun(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStHonorarnihZun(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega s statusom samozaposlenega v kulturi</td>
-            <td class="cell-type-number"><?= number_format($model->getStHonorarnihZunSamoz(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStHonorarnihZunSamoz(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega igralcev</td>
-            <td class="cell-type-number"><?= number_format($model->getStHonorarnihZunIgr(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStHonorarnihZunIgr(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td class="alineja">od tega igralcev, zaposlenih v drugih javnih zavodih</td>
-            <td class="cell-type-number"><?= number_format($model->getStHonorarnihZunIgrTujJZ(), 0, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getStHonorarnihZunIgrTujJZ(), 2, ',', '.') ?></td>
         </tr>
         <tr>
             <td>Višina sredstev iz mednarodnih virov - z razpisi pridobljena sredstva</td>
