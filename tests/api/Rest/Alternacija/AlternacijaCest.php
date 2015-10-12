@@ -79,7 +79,8 @@ class AlternacijaCest
      */
     public function getListDogodkov(ApiTester $I)
     {
-        $resp             = $I->successfullyGetList($this->dogodekUrl . "/vse", []);
+//        $resp             = $I->successfullyGetList($this->dogodekUrl . "/vse", []);
+        $resp             = $I->successfullyGetList($this->dogodekUrl . "?zacetek=1900-01-01&konec=2900-06-15", []);
         $list             = $resp['data'];
         $I->assertNotEmpty($list);
         $this->objDogodek = $drzava           = array_pop($list);
@@ -350,6 +351,27 @@ class AlternacijaCest
         $I->assertEquals($ent['pomembna'], true, "pomembna");
     }
 
+    /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+//    public function updateZbrisiZaposlitev(ApiTester $I)
+//    {
+//        $ent           = $I->successfullyGet($this->restUrl, $this->obj1['id']);
+//        codecept_debug($ent);
+//        $I->assertGuid($ent['zaposlitev']);
+//        $I->assertTrue($ent['zaposlen']);
+//
+//        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+//        codecept_debug($entR);
+//        
+//        
+//        $I->assertTrue(false,"$$ začasno");
+//    }
+
+    
     /**
      * brisanje zapisa
      * 
