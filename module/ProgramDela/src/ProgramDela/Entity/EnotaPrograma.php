@@ -495,7 +495,7 @@ class EnotaPrograma
             $koprodukcija->preracunaj();        // se ne zacikla, ker ni smer=up
         }
 
-        $this->celotnaVrednostMat = $this->celotnaVrednost - $this->celotnaVrednostGostovSZ;
+        $this->celotnaVrednostMat = $this->nasDelez - $this->celotnaVrednostGostovSZ;
     }
 
     /**

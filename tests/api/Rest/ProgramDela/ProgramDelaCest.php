@@ -1786,10 +1786,10 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(2, $entR['stFest'], "štev. Festivali:");
         $I->assertGreaterThanOrEqual(2, $entR['stRazno'], "štev. Razno: ");
         $I->assertGreaterThanOrEqual(1, $entR['stIzjem'], "štev. Izjemni dogodki:");
-        $I->assertGreaterThanOrEqual(464.67, $entR['vrPS1'], "vrednost PS1");
-        $I->assertGreaterThanOrEqual(6.12, $entR['vrPS1Mat'], "vr PS1 mat");
+        $I->assertGreaterThanOrEqual(396.15, $entR['vrPS1'], "vrednost PS1");
+        $I->assertGreaterThanOrEqual(277.72, $entR['vrPS1Mat'], "vr PS1 mat");
         $I->assertGreaterThanOrEqual(0.66, $entR['vrPS1GostovSZ'], "vr ps1 gostov slo zam");
-        $I->assertGreaterThanOrEqual(166.07, $entR['vrPS1Do']);
+        $I->assertGreaterThanOrEqual(117.77, $entR['vrPS1Do']);
         $I->assertGreaterThanOrEqual(112, $entR['stIzvNekomerc'], "št nekomerc");
         $I->assertEquals($entR['stIzvPrem'] + $entR['stIzvPonPrem'] + $entR['stIzvPonPrej'] + $entR['stIzvGostuj'] + $entR['stIzvOstalihNek'], $entR['stIzvNekomerc'], "št nekomerc kot vsota a+b+c+d");
         $I->assertGreaterThanOrEqual(4, $entR['stIzvPrem'], "št. izvedb premier");
@@ -1797,16 +1797,16 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(12, $entR['stIzvPonPremDoma'], "stIzvPonPremDoma  ");
         $I->assertGreaterThanOrEqual(13, $entR['stIzvPonPremZamejo'], "stIzvPonPremZamejo");
         $I->assertGreaterThanOrEqual(14, $entR['stIzvPonPremGost'], "stIzvPonPremGost");
-        $I->assertGreaterThanOrEqual(9, $entR['stIzvPonPremInt'], "stIzvPonPremInt");
+        $I->assertGreaterThanOrEqual(0, $entR['stIzvPonPremInt'], "stIzvPonPremInt");
         $I->assertGreaterThanOrEqual(4, $entR['stIzvPonPremKopr'], "stIzvPonPremKopr");
         $I->assertGreaterThanOrEqual(0, $entR['stIzvPonPremKoprInt'], "stIzvPonPremKoprInt");
-        $I->assertGreaterThanOrEqual(47, $entR['stIzvPonPrej'], "št. izvedb prejšnjih");
+        $I->assertGreaterThanOrEqual(37, $entR['stIzvPonPrej'], "št. izvedb prejšnjih");
         $I->assertGreaterThanOrEqual(11, $entR['stIzvPonPrejDoma'], "stIzvPonPrejDoma  ");
         $I->assertGreaterThanOrEqual(12, $entR['stIzvPonPrejZamejo'], "stIzvPonPrejZamejo");
         $I->assertGreaterThanOrEqual(13, $entR['stIzvPonPrejGost'], "stIzvPonPrejGost");
         $I->assertGreaterThanOrEqual(8, $entR['stIzvPonPrejKopr'], "stIzvPonPrejKopr");
-        $I->assertGreaterThanOrEqual(11, $entR['stIzvPonPrejInt'], "stIzvPonPremInt");
-        $I->assertGreaterThanOrEqual(11, $entR['stIzvPonPrejKoprInt'], "stIzvPonPremKoprInt");
+        $I->assertGreaterThanOrEqual(0, $entR['stIzvPonPrejInt'], "stIzvPonPrejInt");
+        $I->assertGreaterThanOrEqual(0, $entR['stIzvPonPrejKoprInt'], "stIzvPonPrejKoprInt");
         $I->assertGreaterThanOrEqual(4, $entR['stIzvGostuj'], "št. izvedb gostujočih");
         $I->assertGreaterThanOrEqual(9, $entR['stIzvOstalihNek'], "št. izvedb ostalih nekom");
         $I->assertGreaterThanOrEqual(27, $entR['stIzvGostovanjSlo'], "");
@@ -1822,9 +1822,9 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(23, $entR['stObiskPonPremDoma'], "stObiskPonPremDoma");
         $I->assertGreaterThanOrEqual(33, $entR['stObiskPonPremKopr'], "stObiskPonPremKopr");
         $I->assertGreaterThanOrEqual(9, $entR['stObiskPonPremKoprInt'], "stObiskPonPremKoprInt");
-        $I->assertGreaterThanOrEqual(1262, $entR['stObiskPonPremGost'], 'stObiskPonPremGost');
-        $I->assertGreaterThanOrEqual(326, $entR['stObiskPonPremZamejo'], 'stObiskPonPremZamejo');
-        $I->assertGreaterThanOrEqual(243, $entR['stObiskPonPremInt'], 'stObiskPonPremInt');
+        $I->assertGreaterThanOrEqual(33, $entR['stObiskPonPremGost'], 'stObiskPonPremGost');
+        $I->assertGreaterThanOrEqual(9, $entR['stObiskPonPremZamejo'], 'stObiskPonPremZamejo');
+        $I->assertGreaterThanOrEqual(9, $entR['stObiskPonPremInt'], 'stObiskPonPremInt');
         $I->assertEquals($entR['avgObiskPrired'], round($entR['stObiskNekom'] / $entR['stIzvNekomerc'], 2), "povprečno št. obiskovalcev");     //kvocient drugih dveh števil
         $I->assertGreaterThanOrEqual(141, $entR['stHonorarnihZun'], "");
         $I->assertGreaterThanOrEqual(28, $entR['stHonorarnihZunIgr'], "");

@@ -279,6 +279,8 @@ class ProgramDela
     protected $stGostujo;
 
     /**
+     * Celotna vrednost lastne produkcije in postprodukcije (ponovitev) - programski sklop 1:
+     * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.vrPS1", description="programDela.d.vrPS1")   
      * @Max\Ui(icon="fa fa-euro")
@@ -287,6 +289,8 @@ class ProgramDela
     protected $vrPS1;
 
     /**
+     *   - Vrednost produkcije (do premiere):
+     * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.vrPS1Do", description="programDela.d.vrPS1Do")   
      * @Max\Ui(icon="fa fa-euro")
@@ -295,6 +299,8 @@ class ProgramDela
     protected $vrPS1Do;
 
     /**
+     *   - Vrednost ponovitev na matičnem odru:
+     * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.vrPS1Mat", description="programDela.d.vrPS1Mat")   
      * @Max\Ui(icon="fa fa-euro")
@@ -303,6 +309,8 @@ class ProgramDela
     protected $vrPS1Mat;
 
     /**
+     *   - Vrednost ponovitev na gostovanjih po SLO in  zamejstvu:
+     * 
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.vrPS1GostovSZ", description="programDela.d.vrPS1GostovSZ")   
      * @Max\Ui(icon="fa fa-euro")
@@ -1088,8 +1096,11 @@ class ProgramDela
         $this->stObiskPremKopr           = 0;
         $this->stObiskPonPrem            = 0;
         $this->stObiskPonPremDoma        = 0;
+        $this->stObiskPonPremGost        = 0;
+        $this->stObiskPonPremZamejo      = 0;
         $this->stObiskPonPremKopr        = 0;
         $this->stObiskPonPremKoprInt     = 0;
+        $this->stObiskPonPremInt         = 0;
         $this->stHonorarnihZun           = 0;
         $this->stHonorarnihZunIgr        = 0;
         $this->stHonorarnihZunIgrTujJZ   = 0;
@@ -1153,8 +1164,16 @@ class ProgramDela
             if ($smer == Consts::DOWN) {
                 $object->preracunaj(Consts::DOWN);
             }
-            $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
-            $this->vrPS1Do += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
+
+            /**
+             * $$ začasno
+             */
+            $tmpND = $object->getNasDelez();
+            $tmpCVMat = $object->getCelotnaVrednostMat();
+            $tmpnNdMinMat = $tmpND-$tmpCVMat;
+                    
+            $this->vrPS1 += $object->getNasDelez();
+            $this->vrPS1Do += $object->getNasDelez();
             $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviKopr();
             $this->stIzvPrem+=$object->getPonoviDoma() + $object->getPonoviKopr();
             $this->stIzvPremDoma+=$object->getPonoviDoma();
@@ -1212,11 +1231,12 @@ class ProgramDela
             if ($smer == Consts::DOWN) {
                 $object->preracunaj(Consts::DOWN);
             }
-            $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
+
+            $this->vrPS1 += $object->getNasDelez();
             $this->vrPS1Mat+= $object->getCelotnaVrednostMat();
             $this->vrPS1GostovSZ+= $object->getCelotnaVrednostGostovSZ();
-            $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost() ;      //$$ ali prištevvamo tudi mednarodne?
-            $this->stIzvPonPrem+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost() ;      //$$ ali prištevvamo tudi mednarodne?
+            $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
+            $this->stIzvPonPrem+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
             $this->stIzvPonPremDoma+=$object->getPonoviDoma();
             $this->stIzvPonPremZamejo+=$object->getPonoviZamejo();
             $this->stIzvPonPremGost+=$object->getPonoviGost();
@@ -1257,7 +1277,7 @@ class ProgramDela
             if ($smer == Consts::DOWN) {
                 $object->preracunaj(Consts::DOWN);
             }
-            $this->vrPS1 += $object->getCelotnaVrednost();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
+            $this->vrPS1 += $object->getNasDelez();        //$$ tu še preveriti ali celotna vrednost ali le delež matičnega koproducenta
             $this->vrPS1Mat+= $object->getCelotnaVrednostMat();
             $this->vrPS1GostovSZ+= $object->getCelotnaVrednostGostovSZ();
             $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
@@ -1354,22 +1374,23 @@ class ProgramDela
             $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
 
             // $$ glede na to, ali je mednarodno gostovanje za premiero, ki bo letos, ali iz prejšnjih sezon
-            $idUpr          = $object->getUprizoritev();
-            $obstajaPonPrem = false;  //init
+            $idUpr           = $object->getUprizoritev();
+            $obstajaPremiera = false;  //init
             if (!empty($idUpr)) {
-                $obstajaPonPrem = $this->getPonovitvePremiere()
-                        ->exists(function($key, $ponovitvePrem) use(&$idUpr) {
-                    return ($ponovitvePrem->getUprizoritev() == $idUpr); //vrne true, če obstaja ponovitev premiere z isto uprizoritvijo
+                $obstajaPremiera = $this->getPremiere()
+                        ->exists(function($key, $premiera) use(&$idUpr) {
+                    return ($premiera->getUprizoritev() == $idUpr); //vrne true, če obstaja premiera z isto uprizoritvijo
                 });
             }
-            if ($obstajaPonPrem) {
+            if ($obstajaPremiera) {
                 $this->stIzvPonPrem+=$object->getPonoviInt();
                 $this->stIzvPonPremInt+=$object->getPonoviInt();
                 $this->stIzvPonPremKoprInt+=$object->getPonoviKoprInt();
-                $this->stObiskPonPremKoprInt+=$object->getObiskKoprInt();
+                $this->stObiskPonPrem +=$object->getObiskInt();
                 $this->stObiskPonPremInt +=$object->getObiskInt();
+                $this->stObiskPonPremKoprInt+=$object->getObiskKoprInt();
             } else {
-                // če ni uprizoritev iz ponovitve (letošnje) premiere je najverjetneje  iz ponovitve premiere prejšnjih sezon
+                // če uprizoritev ni iz  (letošnje) premiere je najverjetneje  iz ponovitve premiere prejšnjih sezon
                 $this->stIzvPonPrej+=$object->getPonoviInt();
                 $this->stIzvPonPrejInt+=$object->getPonoviInt();
                 $this->stIzvPonPrejKoprInt+=$object->getPonoviKoprInt();
@@ -1430,6 +1451,7 @@ class ProgramDela
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stObiskNekomGostSlo +=$object->getObiskGost();
             $this->stObiskNekomGostZam +=$object->getObiskZamejo();
+            $this->stObiskNekomGostInt += $object->getObiskInt();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
             $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
             $this->sredstvaZaprosenoIzjem+=$object->getZaproseno();
