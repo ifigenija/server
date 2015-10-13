@@ -71,7 +71,7 @@ class ProgramDela
     /**
      * @ORM\Column(type="boolean", nullable=false)
      * @Max\I18n(label="programDela.potrjenProgram", description="programDela.d.potrjenProgram")
-     * @Max\Ui(type="boolcheckbox")
+     * @Max\Ui(type="boolcheckbox", required=false)
      * @var boolean
      */
     protected $potrjenProgram;
