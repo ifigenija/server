@@ -60,13 +60,11 @@ class Popa
      * šole, gledalci, sponzorji,...
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\TipPopa", inversedBy="popa", fetch="EAGER")
-     * @ORM\Column( nullable=true)
      * @Max\I18n(label = "popa.tipkli", description = "popa.d.tipkli")
-     * @Max\Ui(type="select", empty="Izberite tip poslovnega partnerja", required=false)
-     * @Max\Ui(type="lookupselect", empty="Izberi zaposlitev", required=false, filters={"oseba":{"element":"oseba"}})
+     * @Max\Ui(type="lookupselect", empty="Izberite tip poslovnega partnerja", required=false)
      * @var \App\Entity\TipPopa
      */
-    protected $tipkli;
+    protected $tipkli = null;
 
     /**
      * Naziv klienta

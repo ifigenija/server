@@ -371,6 +371,24 @@ class AlternacijaCest
 //        $I->assertTrue(false,"$$ začasno");
 //    }
 
+        /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateBrezZaposlitve(ApiTester $I)
+    {
+        $ent           = $I->successfullyGet($this->restUrl, $this->obj1['id']);
+        $ent['zaposlitev'] = null;
+
+        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        codecept_debug($entR);
+        $I->assertEquals($entR['zaposlitev'], null);
+    }
+
+    
+    
     
     /**
      * brisanje zapisa

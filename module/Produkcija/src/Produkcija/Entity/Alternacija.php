@@ -116,7 +116,7 @@ class Alternacija
      * @ORM\JoinColumn(name="zaposlitev_id", referencedColumnName="id")
      * @Max\I18n(label="alternacija.zaposlitev",  description="alternacija.d.zaposlitev")
      * @Max\Ui(type="lookupselect", empty="Izberi zaposlitev", required=false, filters={"oseba":{"element":"oseba"}})
-     * @var Zaposlitev
+     * @var \Produkcija\Entity\Zaposlitev
      */
     protected $zaposlitev = null;
 
@@ -393,14 +393,13 @@ class Alternacija
         $this->tmp1 = $tmp1;
         return $this;
     }
-
-    public function setZaposlitev(Zaposlitev $zaposlitev = null)
+    function setZaposlitev(\Produkcija\Entity\Zaposlitev $zaposlitev=null)
     {
         $this->zaposlitev = $zaposlitev;
         return $this;
     }
 
-    public function setOseba(Oseba $oseba = null)
+        public function setOseba(Oseba $oseba = null)
     {
         $this->oseba = $oseba;
         return $this;

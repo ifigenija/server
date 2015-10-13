@@ -86,6 +86,12 @@ class PopaCest
     private $lookTipPopa1;
     private $lookTipPopa2;
     private $lookTipPopa3;
+    private $vrstaStroskaUrl       = '/rest/vrstastroska';
+    private $objVrstaStroska1;
+    private $objVrstaStroska2;
+    private $objVrstaStroska3;
+    private $objVrstaStroska4;
+    private $objVrstaStroskaGlava;
 
     public function _before(ApiTester $I)
     {
@@ -106,6 +112,37 @@ class PopaCest
     public function initBaze(ApiTester $I)
     {
         $I->initDB();
+    }
+
+    /**
+     * najde enoto programa
+     * 
+     * @param ApiTester $I
+     */
+    public function getListVrstaStroska(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->vrstaStroskaUrl, []);
+        $list = $resp['data'];
+        $I->assertNotEmpty($list);
+
+        /**
+         * preberemo vrsto stroška, ki ni  glava 
+         */
+        $glava = TRUE;
+        while ($glava) {
+            $this->objVrstaStroska1 = $vrstaStroska           = array_pop($list);
+            $glava                  = ($vrstaStroska['podskupina'] === 0) ? true : false;
+        }
+        codecept_debug($vrstaStroska);
+        /**
+         * preberemo še eno glavo
+         */
+        $glava = false;
+        while (!$glava) {
+            $this->objVrstaStroskaGlava = $vrstaStroska               = array_pop($list);
+            $glava                      = ($vrstaStroska['podskupina'] === 0) ? true : false;
+        }
+        codecept_debug($vrstaStroska);
     }
 
     /**
@@ -134,19 +171,20 @@ class PopaCest
         $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0002", false);
         $I->assertNotEmpty($ent);
     }
+
     /**
      * 
      * @param ApiTester $I
      */
     public function lookupTipPopa(ApiTester $I)
     {
-        $this->lookTipPopa1 = $ent              = $I->lookupEntity("tippopa", "šola", false);
+        $this->lookTipPopa1 = $ent                = $I->lookupEntity("tippopa", "šola", false);
         $I->assertNotEmpty($ent);
 
-        $this->lookTipPopa2 = $ent              = $I->lookupEntity("tippopa", "gledalec", false);
+        $this->lookTipPopa2 = $ent                = $I->lookupEntity("tippopa", "gledalec", false);
         $I->assertNotEmpty($ent);
 
-        $this->lookTipPopa3 = $ent              = $I->lookupEntity("tippopa", "sponzor", false);
+        $this->lookTipPopa3 = $ent                = $I->lookupEntity("tippopa", "sponzor", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -314,6 +352,7 @@ class PopaCest
         $data       = [
             'sifra'     => '',
             'stakli'    => 'AK',
+            'tipkli'    => $this->lookTipPopa2['id'],
             'naziv'     => 'aa',
             'naziv1'    => 'aa',
             'panoga'    => 'aa',
@@ -338,14 +377,15 @@ class PopaCest
         $data       = [
             'sifra'     => '0000',
             'stakli'    => 'AK',
-            'naziv'     => 'aa',
-            'naziv1'    => 'aa',
-            'panoga'    => 'aa',
-            'email'     => 'a@zzz.zz',
-            'url'       => 'aa',
-            'opomba'    => 'aa',
+            'tipkli'    => null,
+            'naziv'     => 'bb',
+            'naziv1'    => 'bb',
+            'panoga'    => 'bb',
+            'email'     => 'bb@zzz.zz',
+            'url'       => 'bb',
+            'opomba'    => 'bb',
             'drzava'    => $this->objDrzava['id'],
-            'idddv'     => 'aa',
+            'idddv'     => 'bb',
             'maticna'   => 'AA123',
             'zavezanec' => 'Da',
             'jeeu'      => 'Da',
@@ -803,22 +843,6 @@ class PopaCest
     /**
      * preberemo relacije
      * 
-     * @depends createVecPogodb
-     * 
-     * @param ApiTester $I
-     */
-    public function preberiRelacijeSPogodbami(ApiTester $I)
-    {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "pogodbe", "");
-        $I->assertEquals(2, count($resp));
-
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "pogodbe", $this->objPogodba1['id']);
-        $I->assertEquals(1, count($resp));
-    }
-
-    /**
-     * preberemo relacije
-     * 
      * @depends createVecNaslovov
      * 
      * @param ApiTester $I
@@ -858,15 +882,16 @@ class PopaCest
     public function createVecStroskov(ApiTester $I)
     {
         $data = [
-            'naziv'       => 'zz',
-            'vrednostDo'  => 1.23,
-            'vrednostNa'  => 4.56,
-            'opis'        => 'zz',
-            'tipstroska'  => 'materialni',
-            'sort'        => 1,
+            'naziv'        => 'zz',
+            'vrednostDo'   => 1.23,
+            'vrednostNa'   => 4.56,
+            'opis'         => 'zz',
+            'tipstroska'   => 'materialni',
+            'sort'         => 1,
 //            'uprizoritev' => $this->lookUprizoritev,
-            'uprizoritev' => null,
-            'popa'        => $this->obj2['id'],
+            'uprizoritev'  => null,
+            'popa'         => $this->obj2['id'],
+            'vrstaStroska' => $this->objVrstaStroska1['id'],
         ];
 
         $this->objStrosekUprizoritve1 = $ent                          = $I->successfullyCreate($this->strosekUprizoritveUrl, $data);
@@ -874,15 +899,16 @@ class PopaCest
 
         // kreiramo še en zapis
         $data                         = [
-            'naziv'       => 'popacc',
-            'vrednostDo'  => 1.23,
-            'vrednostNa'  => 4.56,
-            'opis'        => 'zz',
-            'tipstroska'  => 'materialni',
-            'sort'        => 1,
+            'naziv'        => 'popacc',
+            'vrednostDo'   => 1.23,
+            'vrednostNa'   => 4.56,
+            'opis'         => 'zz',
+            'tipstroska'   => 'materialni',
+            'sort'         => 1,
 //            'uprizoritev' => $this->lookUprizoritev,
-            'uprizoritev' => null,
-            'popa'        => $this->obj2['id'],
+            'uprizoritev'  => null,
+            'popa'         => $this->obj2['id'],
+            'vrstaStroska' => $this->objVrstaStroska1['id'],
         ];
         $this->objStrosekUprizoritve2 = $ent                          = $I->successfullyCreate($this->strosekUprizoritveUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -956,7 +982,7 @@ class PopaCest
             'aktivna'           => false,
             'opis'              => 'zz',
             'popa'              => $this->obj2['id'],
-            'oseba'             => $this->lookOseba1['id'],
+            'oseba'             => $this->objOseba2['id'],
             'trr'               => $this->objTrr1['id'],
             'zacetek'           => '2012-02-01T00:00:00+0100',
             'procentOdInkasa'   => 5.1,
@@ -977,7 +1003,7 @@ class PopaCest
             'aktivna'           => false,
             'opis'              => 'ww',
             'popa'              => $this->obj2['id'],
-            'oseba'             => $this->lookOseba2['id'],
+            'oseba'             => $this->lookOseba1['id'],
             'trr'               => $this->objTrr1['id'],
             'zacetek'           => '2012-02-01T00:00:00+0100',
             'procentOdInkasa'   => 5.1,
@@ -985,6 +1011,22 @@ class PopaCest
         ];
         $this->objPogodba2 = $ent               = $I->successfullyCreate($this->pogodbaUrl, $data);
         $I->assertNotEmpty($ent['id']);
+    }
+
+    /**
+     * preberemo relacije
+     * 
+     * @depends createVecPogodb
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeSPogodbami(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "pogodbe", "");
+        $I->assertEquals(2, count($resp));
+
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "pogodbe", $this->objPogodba1['id']);
+        $I->assertEquals(1, count($resp));
     }
 
     /**
