@@ -27,5 +27,11 @@ lists:
                   options:
                     required: false
                     placeholder: Išči po skupinah..
-                    label: Skupina/Podskupina
+                    label: Skupina
+                - name: podskupina
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči po podskupinah..
+                    label: Podskupina
       

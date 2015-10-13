@@ -52,10 +52,15 @@ class VrsteStroska
         }
         if (!empty($options['skupina'])) {
             $skupina    = $e->eq('p.skupina', ':st');
+
+            $qb->andWhere($e->orX($skupina));
+            $qb->setParameter('st', strtolower("{$options['skupina']}"), "integer");
+        }
+        if (!empty($options['podskupina'])) {
             $podskupina = $e->eq('p.podskupina', ':st');
 
-            $qb->andWhere($e->orX($skupina, $podskupina));
-            $qb->setParameter('st', strtolower("{$options['skupina']}"), "integer");
+            $qb->andWhere($e->orX($podskupina));
+            $qb->setParameter('st', strtolower("{$options['podskupina']}"), "integer");
         }
 
         return $qb;
