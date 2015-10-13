@@ -2387,5 +2387,17 @@ class ProgramDelaCest
         $I->seeResponseIsJson();
         $I->assertTrue($resp, "ali uspešno");
     }
+    
+/**
+     * brisanje programa dela z vsemi podentitetami
+     * 
+     * @depends create
+     */
+    public function deletePDSPodentitetami(ApiTester $I)
+    {
+        $I->successfullyDelete($this->restUrl, $this->obj2['id']);
+        $I->failToGet($this->restUrl, $this->obj2['id']);
+    }
+    
 
 }

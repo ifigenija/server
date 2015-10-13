@@ -77,55 +77,55 @@ class ProgramDela
     protected $potrjenProgram;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPremiera", mappedBy="dokument")
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPremiera", mappedBy="dokument", orphanRemoval=true)
      * @var <Premiere>
      */
     protected $premiere;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPonovitevPremiere", mappedBy="dokument")
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPonovitevPremiere", mappedBy="dokument", orphanRemoval=true)
      * @var <PonovitvePremiere>
      */
     protected $ponovitvePremiere;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPonovitevPrejsnjih", mappedBy="dokument")
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPonovitevPrejsnjih", mappedBy="dokument", orphanRemoval=true)
      * @var <PonovitvePrejsnjih>
      */
     protected $ponovitvePrejsnjih;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramIzjemni", mappedBy="dokument")
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramIzjemni", mappedBy="dokument", orphanRemoval=true)
      * @var <Izjemni>
      */
     protected $izjemni;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramFestival", mappedBy="programDela")
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramFestival", mappedBy="programDela", orphanRemoval=true)
      * @var <ProgramiFestival>
      */
     protected $programiFestival;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramGostujoca", mappedBy="dokument")
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramGostujoca", mappedBy="dokument", orphanRemoval=true)
      * @var <Gostujoci>
      */
     protected $gostujoci;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramGostovanje", mappedBy="dokument")
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramGostovanje", mappedBy="dokument", orphanRemoval=true)
      * @var <Gostovanja>
      */
     protected $gostovanja;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramRazno", mappedBy="dokument")
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramRazno", mappedBy="dokument", orphanRemoval=true)
      * @var <ProgramiRazno>
      */
     protected $programiRazno;
 
     /**
-     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\PostavkaCDve", mappedBy="programDela")
+     * @ORM\OneToMany(targetEntity="ProgramDela\Entity\PostavkaCDve", mappedBy="programDela", orphanRemoval=true)
      * @ORM\OrderBy({"skupina" = "ASC", "podskupina" = "ASC"})
      * @var <PostavkeC2>
      */
