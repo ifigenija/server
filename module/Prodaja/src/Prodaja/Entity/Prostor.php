@@ -63,7 +63,7 @@ class Prostor
     /**
      * @ORM\Column(type="boolean", nullable=false, options={"default"=false})
      * @Max\I18n(label="prostor.sePlanira", description="prostor.d.sePlanira")
-     * @Max\Ui(type="boolcheckbox")
+     * @Max\Ui(type="boolcheckbox", required=false)
      * @var boolean
      */
     protected $sePlanira = false;
