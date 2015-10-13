@@ -24,6 +24,7 @@ class Permissions
     protected $sortOptions = [
         'default' => [
             'name' => ['alias' => 'p.name'],
+            'builtIn' => ['alias' => 'p.builtIn']
         ]
     ];
 

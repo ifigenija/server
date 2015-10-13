@@ -24,7 +24,8 @@ class Popa
             "sifra" => ["alias" => "p.sifra"],
             "naziv" => ["alias" => "p.naziv"],
             "email" => ["alias" => "p.email"],
-            "idddv" => ["alias" => "p.iddv"],
+            "idddv" => ["alias" => "p.idddv"],
+            "stakli" => ["alias" => "p.stakli"],
         ],
         "vse"     => [
             "sifra" => ["alias" => "p.sifra"],

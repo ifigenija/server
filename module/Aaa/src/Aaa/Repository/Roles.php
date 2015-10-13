@@ -22,7 +22,8 @@ class Roles
     protected $sortOptions     = [
         'default' => [
             'name'        => [ 'alias' => 'r.name',],
-            'description' => [ 'alias' => 'r.description']
+            'description' => [ 'alias' => 'r.description'],
+            'builtIn'     => [ 'alias' => 'r.builtIn']
         ]
     ];
     protected $hydratorOptions = [

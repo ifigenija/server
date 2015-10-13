@@ -21,7 +21,10 @@ class Abonmaji
 
     protected $sortOptions = [
         "default" => [
-            "ime" => ["alias" => "p.ime"]
+            "ime"        => ["alias" => "p.ime"],
+            "stPredstav" => ["alias" => "p.stPredstav"],
+            "stKuponov"  => ["alias" => "p.stKuponov"],
+            "kapaciteta" => ["alias" => "p.kapaciteta"]
         ],
         "vse"     => [
             "ime" => ["alias" => "p.ime"]
@@ -33,7 +36,7 @@ class Abonmaji
         switch ($name) {
             case "default":
             case "vse":
-                $qb = $this->getVseQb($options);
+                $qb   = $this->getVseQb($options);
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));

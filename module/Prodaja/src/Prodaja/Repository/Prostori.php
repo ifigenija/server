@@ -24,7 +24,10 @@ class Prostori
             "sifra"  => ["alias" => "p.sifra"],
             "naziv"  => ["alias" => "p.naziv"],
             "popa"   => ["alias" => "p.popa"],
-            "naslov" => ["alias" => "p.naslov"]
+            "naslov" => ["alias" => "p.naslov"],
+            "jeMaticniOder" => ["alias" => "p.jeMaticniOder"],
+            "jePrizorisce" => ["alias" => "p.jePrizorisce"],
+            "kapaciteta" => ["alias" => "p.kapaciteta"],
         ],
         "vse"     => [
             "sifra" => ["alias" => "p.sifra"],

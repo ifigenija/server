@@ -29,7 +29,10 @@ class Zaposlitve
             "oseba.polnoIme"  => ["alias" => "oseba.polnoIme"],
             "oseba.psevdonim" => ["alias" => "oseba.psevdonim"],
             "sifra"           => ["alias" => "p.sifra"],
-            "delovnoMesto"    => ["alias" => "p.delovnoMesto"]
+            "delovnoMesto"    => ["alias" => "p.delovnoMesto"],
+            "status"          => ["alias" => "p.status"],
+            "zacetek"         => ["alias" => "p.zacetek"],
+            "konec"           => ["alias" => "p.konec"]
         ]
     ];
 
