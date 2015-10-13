@@ -89,7 +89,7 @@ lists:
                 - name: gostujoca
                   type: boolcheckbox
                   options:
-                      label: Gostujoca
+                      label: Gostujoča
                       required: false
 relation:
     default:
