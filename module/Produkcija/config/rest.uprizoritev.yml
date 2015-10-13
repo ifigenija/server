@@ -86,6 +86,11 @@ lists:
                   options:
                       placeholder: Išči po avtorju..
                       label: Avtor
+                - name: gostujoca
+                  type: boolcheckbox
+                  options:
+                      label: Gostujoca
+                      required: false
 relation:
     default:
         funkcije:
