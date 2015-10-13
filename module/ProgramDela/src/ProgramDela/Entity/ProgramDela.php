@@ -1165,13 +1165,6 @@ class ProgramDela
                 $object->preracunaj(Consts::DOWN);
             }
 
-            /**
-             * $$ začasno
-             */
-            $tmpND = $object->getNasDelez();
-            $tmpCVMat = $object->getCelotnaVrednostMat();
-            $tmpnNdMinMat = $tmpND-$tmpCVMat;
-                    
             $this->vrPS1 += $object->getNasDelez();
             $this->vrPS1Do += $object->getNasDelez();
             $this->stIzvNekomerc+=$object->getPonoviDoma() + $object->getPonoviKopr();
@@ -1196,9 +1189,11 @@ class ProgramDela
             $obiskDomaUpriz+= $object->getObiskDoma();
 
             $this->expect($object->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000790);
-            $this->expect($object->getUprizoritev()->getMaticniOder(), "Matični oder je obvezen podatek", 1000791);
-            if ($object->getUprizoritev()->getMaticniOder()) {
-                $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta();
+            if (!$object->getPriKoproducentu()) {
+                $this->expect($object->getUprizoritev()->getMaticniOder(), "Matični oder je obvezen podatek", 1000791);
+                if ($object->getUprizoritev()->getMaticniOder()) {
+                    $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta() * $object->getPonoviDoma();
+                }
             }
 
             $this->pristejKStNastopovZaposIgr($object, $stNastopovZaposIgralcev);
@@ -1264,7 +1259,7 @@ class ProgramDela
             $this->expect($object->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000792);
             $this->expect($object->getUprizoritev()->getMaticniOder(), "Matični oder je obvezen podatek", 1000793);
             if ($object->getUprizoritev()->getMaticniOder()) {
-                $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta();
+                $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta() * $object->getPonoviDoma();
             }
 
             $this->pristejKStNastopovZaposIgr($object, $stNastopovZaposIgralcev);
@@ -1327,7 +1322,7 @@ class ProgramDela
             $this->expect($object->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000794);
             $this->expect($object->getUprizoritev()->getMaticniOder(), "Matični oder je obvezen podatek", 1000795);
             if ($object->getUprizoritev()->getMaticniOder()) {
-                $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta();
+                $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta() * $object->getPonoviDoma();
             }
 
             $this->pristejKStNastopovZaposIgr($object, $stNastopovZaposIgralcev);
@@ -1353,7 +1348,7 @@ class ProgramDela
             $this->expect($object->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000796);
             $this->expect($object->getUprizoritev()->getMaticniOder(), "Matični oder je obvezen podatek", 1000797);
             if ($object->getUprizoritev()->getMaticniOder()) {
-                $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta();
+                $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta()*$object->getPonoviDoma();
             }
 
             $this->pristejKStNastopovZaposIgr($object, $stNastopovZaposIgralcev);

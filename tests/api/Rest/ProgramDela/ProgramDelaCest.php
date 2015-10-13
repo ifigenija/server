@@ -1862,7 +1862,7 @@ class ProgramDelaCest
         $I->assertEquals(1, $entR['stKoprodukcijNVO'], "");
         $I->assertEquals(1, $entR['stKoprodukcijNVO'], "");
 
-        $I->assertEquals(3.64, $entR['avgZasedDvoran'], "% povprečna zasedenost dvoran");
+        $I->assertEquals(1.51, $entR['avgZasedDvoran'], "% povprečna zasedenost dvoran");
         $I->assertEquals(7.43, $entR['avgStNastopovIgr'], "povprečno število nastopov zaposlenih igralcev");
     }
 
