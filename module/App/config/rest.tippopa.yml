@@ -1,0 +1,27 @@
+## YAML Template.
+---
+type: rest
+entityClass: App\Entity\TipPopa
+forms:
+    default: 
+        elements:
+#            - id
+            - ime
+            - opis
+            - sort
+#            - popa
+lists:
+    default: 
+        filter:
+            elements: 
+                - name: q
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči..
+                    label: Išči
+        hydrator:
+            - exclude: []
+#    vse: 
+#        filter:
+    

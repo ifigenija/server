@@ -454,6 +454,12 @@
     description: TipFunkcije - spreminjanje
 
 -
+    name: TipPopa-read
+    description: TipPopa - branje
+-
+    name: TipPopa-write
+    description: TipPopa - spreminjanje
+-
     name: TipProgramskeEnote-read
     description: TipProgramskeEnote - branje
 -

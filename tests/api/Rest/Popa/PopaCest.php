@@ -83,6 +83,9 @@ class PopaCest
     private $objNaslov3;
     private $objNaslov4;
     private $lookDrzava;
+    private $lookTipPopa1;
+    private $lookTipPopa2;
+    private $lookTipPopa3;
 
     public function _before(ApiTester $I)
     {
@@ -129,6 +132,21 @@ class PopaCest
         $I->assertNotEmpty($ent);
 
         $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0002", false);
+        $I->assertNotEmpty($ent);
+    }
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupTipPopa(ApiTester $I)
+    {
+        $this->lookTipPopa1 = $ent              = $I->lookupEntity("tippopa", "šola", false);
+        $I->assertNotEmpty($ent);
+
+        $this->lookTipPopa2 = $ent              = $I->lookupEntity("tippopa", "gledalec", false);
+        $I->assertNotEmpty($ent);
+
+        $this->lookTipPopa3 = $ent              = $I->lookupEntity("tippopa", "sponzor", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -269,6 +287,7 @@ class PopaCest
         $data      = [
             'sifra'     => 'ZZ12',
             'stakli'    => 'AK',
+            'tipkli'    => $this->lookTipPopa1['id'],
             'naziv'     => 'zz',
             'naziv1'    => 'zz',
             'panoga'    => 'zz',

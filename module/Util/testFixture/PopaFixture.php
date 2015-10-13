@@ -5,6 +5,7 @@ namespace TestFixture;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
  * Nalaganje privzetih Drzav
@@ -13,7 +14,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class PopaFixture
         extends AbstractFixture
-        implements FixtureInterface
+        implements FixtureInterface, DependentFixtureInterface
 {
 
     public function load(ObjectManager $manager)
@@ -25,6 +26,10 @@ class PopaFixture
 
         $manager->flush();
     }
+    public function getDependencies()
+    {
+        return array('TestFixture\TipPopaFixture');     // morda lahko tudi prazno?
+    }
 
     /**
      *
@@ -34,7 +39,7 @@ class PopaFixture
     public function populatePopa($manager, $v)
     {
 
-        $popaR  = $manager->getRepository('App\Entity\Popa');
+        $popaR   = $manager->getRepository('App\Entity\Popa');
         $drzavaR = $manager->getRepository('App\Entity\Drzava');
 
 
@@ -62,15 +67,15 @@ class PopaFixture
     public function getData()
     {
         return [
-            ['0988', 'AK', 'Juhuhu d.o.o.', 'SI',false, ],
-            ['0989',  'AK', 'Hopsasa d.o.o.', 'SI', true,],
-            ['0987',  'AK', 'Gledališče Šrum d.o.o.', 'SI',false,],
-            ['0986',  'AK', 'Lutkovni Direndaj d.o.o.', 'SI',false,],
-            ['0985', 'AK', 'Tatjana Stanič, Lektoriranje, s.p.', 'SI',false,],
-            ['0984',  'AK', 'Gledališče Lepote tvoje', 'AR',false,],
-            ['0983',  'AK', 'Sunce naše', 'HR',false,],
-            ['0982',  'AK', 'Theater Amadeus', 'AT',false,],
-            ['9999',  'AK', 'Fuchs', 'DE',false,],
+            ['0988', 'AK', 'Juhuhu d.o.o.', 'SI', false,],
+            ['0989', 'AK', 'Hopsasa d.o.o.', 'SI', true,],
+            ['0987', 'AK', 'Gledališče Šrum d.o.o.', 'SI', false,],
+            ['0986', 'AK', 'Lutkovni Direndaj d.o.o.', 'SI', false,],
+            ['0985', 'AK', 'Tatjana Stanič, Lektoriranje, s.p.', 'SI', false,],
+            ['0984', 'AK', 'Gledališče Lepote tvoje', 'AR', false,],
+            ['0983', 'AK', 'Sunce naše', 'HR', false,],
+            ['0982', 'AK', 'Theater Amadeus', 'AT', false,],
+            ['9999', 'AK', 'Fuchs', 'DE', false,],
         ];
     }
 

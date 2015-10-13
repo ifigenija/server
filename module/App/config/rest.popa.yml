@@ -10,6 +10,9 @@ forms:
               options: 
                   required: false                  
             - stakli           
+            - name: tipkli 
+              options: 
+                  required: false                  
             - naziv
             - naziv1 
             - panoga

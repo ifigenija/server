@@ -31,6 +31,7 @@ return [
             'Rest\role'           => 'Max\Factory\RestControllerFactory',
             'Rest\user'           => 'Max\Factory\RestControllerFactory',
             'Rest\kontaktnaoseba' => 'Max\Factory\RestControllerFactory',
+            'Rest\tippopa'           => 'Max\Factory\RestControllerFactory',
         ],
         'invokables' => [
             'Rest\options' => 'App\Controller\OptionsRestController',

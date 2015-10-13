@@ -54,6 +54,21 @@ class Popa
     protected $stakli;
 
     /**
+     * Tip klienta - označuje vrsto poslovnega partnerja. 
+     * 
+     * dodano glede na potrebno LGLJ , ker rabijo statistike glede na
+     * šole, gledalci, sponzorji,...
+     * 
+     * @ORM\ManyToOne(targetEntity="App\Entity\TipPopa", inversedBy="popa", fetch="EAGER")
+     * @ORM\Column( nullable=true)
+     * @Max\I18n(label = "popa.tipkli", description = "popa.d.tipkli")
+     * @Max\Ui(type="select", empty="Izberite tip poslovnega partnerja", required=false)
+     * @Max\Ui(type="lookupselect", empty="Izberi zaposlitev", required=false, filters={"oseba":{"element":"oseba"}})
+     * @var \App\Entity\TipPopa
+     */
+    protected $tipkli;
+
+    /**
      * Naziv klienta
      *
      * @ORM\Column(length=60, nullable=false) 
@@ -313,8 +328,8 @@ class Popa
     {
 
         $this->expect($this->sifra, "Šifra je obvezen podatek", 1000310);
-        //      če je na polju nastavljena anotacija @ORM\Column( nullable=false) , 
-        //      potem bi moral že prej biti error in do sem sploh ne bi smel priti
+//      če je na polju nastavljena anotacija @ORM\Column( nullable=false) , 
+//      potem bi moral že prej biti error in do sem sploh ne bi smel priti
         $this->expect($this->naziv, "Naziv je obvezen podatek", 1000311);
         $this->expect($this->drzava, "Država je obvezen podatek", 1000312);
     }
@@ -503,7 +518,7 @@ class Popa
         return $this;
     }
 
-    public function setDrzava(\App\Entity\Drzava $drzava=null)
+    public function setDrzava(\App\Entity\Drzava $drzava = null)
     {
         $this->drzava = $drzava;
         return $this;
@@ -593,13 +608,13 @@ class Popa
         return $this;
     }
 
-    public function setProducent(\ProgramDela\Entity\ProdukcijskaHisa $producent=null)
+    public function setProducent(\ProgramDela\Entity\ProdukcijskaHisa $producent = null)
     {
         $this->producent = $producent;
         return $this;
     }
 
-    public function setKupec(\Prodaja\Entity\Kupec $kupec=null)
+    public function setKupec(\Prodaja\Entity\Kupec $kupec = null)
     {
         $this->kupec = $kupec;
         return $this;
@@ -624,6 +639,17 @@ class Popa
     public function setProstori($prostori)
     {
         $this->prostori = $prostori;
+        return $this;
+    }
+
+    function getTipkli()
+    {
+        return $this->tipkli;
+    }
+
+    function setTipkli(\App\Entity\TipPopa $tipkli = null)
+    {
+        $this->tipkli = $tipkli;
         return $this;
     }
 

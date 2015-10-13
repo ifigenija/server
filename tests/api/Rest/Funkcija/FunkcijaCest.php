@@ -484,4 +484,29 @@ class FunkcijaCest
         $I->assertEquals(1, count($resp));
     }
 
+    /**
+     * napolnimo vsaj en zapis
+     *
+     * @param ApiTester $I
+     */
+    public function createBrezTipafunkcije(ApiTester $I)
+    {
+        $data      = [
+            'tipFunkcije'       => null,
+            'vodjaEkipe'        => FALSE,
+            'naziv'             => 'btf',
+            'komentar'          => 'btf',
+            'velikost'          => 'velika',
+            'pomembna'          => true,
+            'sort'              => 11,
+            'sePlanira'         => true,
+            'dovoliPrekrivanje' => false,
+            'uprizoritev'       => $this->lookUprizoritev1['id'],
+            'privzeti'          => $this->objAlternacija['id'], //$$ to ne deluje izgleda - jemlje kot null?
+            'maxPrekrivanj'     => 34,
+        ];
+        $resp       = $I->failToCreate($this->restUrl, $data);
+        $I->assertContains("required",$resp[0]['message'],"tip funkcije obvezen podatek");
+    }
+
 }
