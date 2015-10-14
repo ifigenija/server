@@ -21,7 +21,8 @@ class TipiPopa
 
     protected $sortOptions = [
         "default" => [
-            "ime" => ["alias" => "p.ime"],
+            "sifra" => ["alias" => "p.sifra"],
+            "ime"   => ["alias" => "p.ime"],
         ],
         "vse"     => [
             "ime" => ["alias" => "p.ime"]
@@ -65,13 +66,13 @@ class TipiPopa
     public function create($object, $params = null)
     {
         if (empty($object->getSifra())) {
-            
+
             /**
              * $$ začasno 
              */
-            $tmpSL = $this->getServiceLocator();
+            $tmpSL  = $this->getServiceLocator();
             $tmpGen = $tmpSL->get('stevilcenje.generator');
-            
+
             $num = $this->getServiceLocator()->get('stevilcenje.generator');
             $object->setSifra($num->generate('tippopa'));
         }

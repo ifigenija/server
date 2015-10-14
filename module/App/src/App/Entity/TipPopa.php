@@ -31,7 +31,7 @@ class TipPopa
     /**
      * @ORM\Column(unique=true)
      * @Max\I18n(label="tipPopa.sifra", description="tipPopa.d.sifra")
-     * @Max\Ui(type="sifra",ident=true, required=true)
+     * @Max\Ui(type="sifra",ident=true, required=true, icon="fa fa-barcode")
      * @var string
      */
     protected $sifra;
