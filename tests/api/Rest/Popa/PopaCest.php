@@ -178,13 +178,13 @@ class PopaCest
      */
     public function lookupTipPopa(ApiTester $I)
     {
-        $this->lookTipPopa1 = $ent                = $I->lookupEntity("tippopa", "šola", false);
+        $this->lookTipPopa1 = $ent                = $I->lookupEntity("tippopa", "0001", false);
         $I->assertNotEmpty($ent);
 
-        $this->lookTipPopa2 = $ent                = $I->lookupEntity("tippopa", "gledalec", false);
+        $this->lookTipPopa2 = $ent                = $I->lookupEntity("tippopa", "0002", false);
         $I->assertNotEmpty($ent);
 
-        $this->lookTipPopa3 = $ent                = $I->lookupEntity("tippopa", "sponzor", false);
+        $this->lookTipPopa3 = $ent                = $I->lookupEntity("tippopa", "0003", false);
         $I->assertNotEmpty($ent);
     }
 

@@ -29,6 +29,14 @@ class TipPopa
     protected $id;
 
     /**
+     * @ORM\Column(unique=true)
+     * @Max\I18n(label="tipPopa.sifra", description="tipPopa.d.sifra")
+     * @Max\Ui(type="sifra",ident=true, required=true)
+     * @var string
+     */
+    protected $sifra;
+
+    /**
      * Ime tipa klienta, npr. šola, gledalci,sponzorji
      * 
      * @ORM\Column( unique=true)
@@ -63,7 +71,7 @@ class TipPopa
 
     public function validate($mode = 'update')
     {
-        $this->expect($this->ime , "Ime obvezen podatek", 1001070);
+        $this->expect($this->ime, "Ime obvezen podatek", 1001070);
     }
 
     public function __construct()
@@ -123,6 +131,17 @@ class TipPopa
     function setPopa($popa)
     {
         $this->popa = $popa;
+        return $this;
+    }
+
+    function getSifra()
+    {
+        return $this->sifra;
+    }
+
+    function setSifra($sifra)
+    {
+        $this->sifra = $sifra;
         return $this;
     }
 

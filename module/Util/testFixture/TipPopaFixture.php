@@ -36,10 +36,11 @@ class TipPopaFixture
 
         $tippopaR = $manager->getRepository('App\Entity\TipPopa');
 
-        $o   = $tippopaR->findByIme($v[1]);
+        $o   = $tippopaR->findBySifra($v[0]);
         $nov = false;
         if (!$o) {
             $o = new \App\Entity\TipPopa();
+            $o->setSifra(trim($v[0]));
             $nov=true;
         }
         $o->setIme($v[1]);
@@ -59,9 +60,9 @@ class TipPopaFixture
     public function getData()
     {
         return [
-            ['01', 'šola', 'osnovna ali srednja šola', 1],
-            ['02', 'gledalec', 'gledalec, ki ima abonma ali podobno', 2],
-            ['03', 'sponzor', 'sponzor dogodkov', 3],
+            ['0001', 'šola', 'osnovna ali srednja šola', 1],
+            ['0002', 'gledalec', 'gledalec, ki ima abonma ali podobno', 2],
+            ['0003', 'sponzor', 'sponzor dogodkov', 3],
         ];
     }
 

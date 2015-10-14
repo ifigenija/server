@@ -21,10 +21,10 @@ class TipiPopa
 
     protected $sortOptions = [
         "default" => [
-            "ime"       => ["alias" => "p.ime"],
+            "ime" => ["alias" => "p.ime"],
         ],
         "vse"     => [
-            "ime"   => ["alias" => "p.ime"]
+            "ime" => ["alias" => "p.ime"]
         ]
     ];
 
@@ -46,7 +46,7 @@ class TipiPopa
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $ime       = $e->like('lower(p.ime)', ':query');
+            $ime  = $e->like('lower(p.ime)', ':query');
             $opis = $e->like('lower(p.opis)', ':query');
 
             $qb->andWhere($e->orX($ime, $opis));
@@ -55,6 +55,27 @@ class TipiPopa
         }
 
         return $qb;
+    }
+
+    /**
+     * Preverim, če ima šifro
+     * @param TipPopa $object
+     * @param array $params
+     */
+    public function create($object, $params = null)
+    {
+        if (empty($object->getSifra())) {
+            
+            /**
+             * $$ začasno 
+             */
+            $tmpSL = $this->getServiceLocator();
+            $tmpGen = $tmpSL->get('stevilcenje.generator');
+            
+            $num = $this->getServiceLocator()->get('stevilcenje.generator');
+            $object->setSifra($num->generate('tippopa'));
+        }
+        parent::create($object, $params);
     }
 
 }

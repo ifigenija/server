@@ -21,10 +21,10 @@ class Popa
 
     protected $sortOptions = [
         "default" => [
-            "sifra" => ["alias" => "p.sifra"],
-            "naziv" => ["alias" => "p.naziv"],
-            "email" => ["alias" => "p.email"],
-            "idddv" => ["alias" => "p.idddv"],
+            "sifra"  => ["alias" => "p.sifra"],
+            "naziv"  => ["alias" => "p.naziv"],
+            "email"  => ["alias" => "p.email"],
+            "idddv"  => ["alias" => "p.idddv"],
             "stakli" => ["alias" => "p.stakli"],
         ],
         "vse"     => [
@@ -37,7 +37,7 @@ class Popa
         switch ($name) {
             case "default":
             case "vse":
-                $qb = $this->getVseQb($options);
+                $qb   = $this->getVseQb($options);
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
@@ -113,7 +113,7 @@ class Popa
         parent::create($object, $params);
     }
 
-        /**
+    /**
      * 
      * @param type $object entiteta
      * @param type $params
@@ -126,13 +126,11 @@ class Popa
         $em      = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         $optionR = $em->getRepository('App\Entity\Option');
         $option  = $optionR->findOneByName("application.tenant.maticnopodjetje");
-        $popaId   = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
+        $popaId  = $option->getDefaultValue();      // šifra matičnega podjetja t.j. lastnega gledališča
 
-        $this->expect($object->getId()!=$popaId, "Matičnega gledališča ni mogoče brisati", 1001210);
+        $this->expect($object->getId() != $popaId, "Matičnega gledališča ni mogoče brisati", 1001210);
 
         parent::delete($object);
     }
 
-    
-    
 }

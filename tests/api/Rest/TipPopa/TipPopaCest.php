@@ -54,9 +54,10 @@ class TipPopaCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'ime'  => 'zz',
-            'opis' => 'znd',
-            'sort' => 9999,
+            'sifra' => '01',
+            'ime'   => 'zz',
+            'opis'  => 'znd',
+            'sort'  => 9999,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -65,9 +66,10 @@ class TipPopaCest
 
         // kreiramo še en zapis
         $data       = [
-            'ime'  => 'aa',
-            'opis' => 'and',
-            'sort' => 2,
+            'sifra' => '02',
+            'ime'   => 'aa',
+            'opis'  => 'and',
+            'sort'  => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -77,12 +79,25 @@ class TipPopaCest
          *  kreiramo še en zapis za sort
          */
         $data       = [
-            'ime'  => 'bb',
-            'opis' => 'bnd',
-            'sort' => 5,
+            'sifra' => '03',
+            'ime'   => 'bb',
+            'opis'  => 'bnd',
+            'sort'  => 5,
         ];
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
+
+        /**
+         *  kreiramo še en zapis za številčenje (brez šifre)
+         */
+        $data       = [
+            'ime'   => 'xx',
+            'opis'  => 'cnd',
+            'sort'  =>4,
+        ];
+        $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
+        $I->assertNotEmpty($ent['ime'], 'zz');
     }
 
     /**
@@ -152,6 +167,7 @@ class TipPopaCest
         codecept_debug($ent);
 
         $I->assertGuid($ent['id']);
+        $I->assertEquals($ent['sifra'], '01');
         $I->assertEquals($ent['ime'], 'zz');
         $I->assertEquals($ent['opis'], 'yy');
         $I->assertEquals($ent['sort'], 9999);
@@ -170,7 +186,7 @@ class TipPopaCest
 
         $resp = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
         codecept_debug($resp);
-        $I->assertContains("required",$resp[0]['message'], 'ime ne sme biti prazno');
+        $I->assertContains("required", $resp[0]['message'], 'ime ne sme biti prazno');
     }
 
     /**
