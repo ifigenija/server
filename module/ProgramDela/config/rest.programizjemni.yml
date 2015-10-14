@@ -6,7 +6,9 @@ forms:
     default: 
         elements:
 #            - id
-            - naziv
+            - name: naziv 
+              options: 
+                  required: true
 #            - celotnaVrednost
 #            - nasDelez
             - zaproseno

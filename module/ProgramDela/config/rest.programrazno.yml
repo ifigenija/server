@@ -7,7 +7,9 @@ forms:
         elements:
 #            - id
             - dokument
-            - naziv
+            - name: naziv 
+              options: 
+                  required: true
 #            - stPE
             - stZaposlenih
             - stHonorarnihZun

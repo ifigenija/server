@@ -7,7 +7,9 @@ forms:
         elements:
 #            - id
             - programDela
-            - naziv
+            - name: naziv 
+              options: 
+                  required: true
             - zvrst
             - stPredstav
             - stOkroglihMiz

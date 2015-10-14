@@ -25,6 +25,7 @@ class ProgramIzjemni
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="programIzjemni.prizorisce", description="programIzjemni.d.prizorisce")
+     * @Max\Ui(type="naziv",required=true)
      * @var string
      */
     protected $prizorisce;
@@ -34,6 +35,7 @@ class ProgramIzjemni
      * 
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="programIzjemni.trajanje", description="programIzjemni.d.trajanje")
+     * @Max\Ui(type="naziv",required=true)
      * @var string
      */
     protected $trajanje;
