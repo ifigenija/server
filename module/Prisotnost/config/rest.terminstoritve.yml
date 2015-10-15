@@ -13,6 +13,8 @@ forms:
             - planiranoTraja
             - dogodek
             - alternacija
+            - dezurni
+            - gost
             - oseba
 lists:
     default: 

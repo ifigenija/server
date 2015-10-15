@@ -63,7 +63,7 @@ class TerminStoritve
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Dogodek", inversedBy="terminiStoritve")
      * @ORM\JoinColumn(name="dogodek_id", referencedColumnName="id")
-     * @Max\I18n(label="Dogodek",  description="Dogodek")
+     * @Max\I18n(label="terminStoritve.dogodek",  description="terminStoritve.d.dogodek")
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Dogodek
      */
@@ -72,7 +72,7 @@ class TerminStoritve
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Alternacija", inversedBy="storitve")
      * @ORM\JoinColumn(name="alternacija_id", referencedColumnName="id")
-     * @Max\I18n(label="Alternacija",  description="Alternacija")
+     * @Max\I18n(label="terminStoritve.alternacija",  description="terminStoritve.d.alternacija")
      * @Max\Ui(type="toone")
      * @var \Produkcija\Entity\Alternacija
      */
@@ -81,15 +81,52 @@ class TerminStoritve
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id", nullable=false)
-     * @Max\I18n(label="Oseba",  description="Oseba")
+     * @Max\I18n(label="terminStoritve.oseba",  description="terminStoritve.d.oseba")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */
     protected $oseba;
 
+    /**
+     * Ali je dežurni na predstavi?
+     * 
+     * $$ razčistiti še moramo, ali bo pripet na alternacijo ali ne. 
+     * V SLOGI-jevem hierarhičnem seznamu funkcij dežurnega ni
+     * 
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="terminStoritve.dezurni",  description="terminStoritve.d.dezurni")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $dezurni;
+
+    /**
+     * Ali je gost na vaji?
+     * 
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="terminStoritve.oseba",  description="terminStoritve.d.oseba")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $gost;
+
     public function validate($mode = 'update')
     {
-        
+        $i = 0;
+        if ($this->alternacija) {
+            $i++;
+        }
+        if ($this->dezurni) {
+            $i++;
+        }
+        if ($this->gost) {
+            $i++;
+        }
+        $this->expect($i === 1, "Napačno število referenc ($i) v terminu storitve. Dovoljen natanko eden od alternacija/dezurni/gost", 1001080);
+
+        if ($this->alternacija) {
+            $this->oseba = $this->alternacija->getOseba();
+        }
     }
 
     public function getId()
@@ -173,21 +210,43 @@ class TerminStoritve
         return $this;
     }
 
-    public function setDogodek(\Koledar\Entity\Dogodek $dogodek=null)
+    public function setDogodek(\Koledar\Entity\Dogodek $dogodek = null)
     {
         $this->dogodek = $dogodek;
         return $this;
     }
 
-    public function setAlternacija(\Produkcija\Entity\Alternacija $alternacija=null)
+    public function setAlternacija(\Produkcija\Entity\Alternacija $alternacija = null)
     {
         $this->alternacija = $alternacija;
         return $this;
     }
 
-    public function setOseba(\App\Entity\Oseba $oseba=null)
+    public function setOseba(\App\Entity\Oseba $oseba = null)
     {
         $this->oseba = $oseba;
+        return $this;
+    }
+
+    function getDezurni()
+    {
+        return $this->dezurni;
+    }
+
+    function getGost()
+    {
+        return $this->gost;
+    }
+
+    function setDezurni($dezurni)
+    {
+        $this->dezurni = $dezurni;
+        return $this;
+    }
+
+    function setGost($gost)
+    {
+        $this->gost = $gost;
         return $this;
     }
 
