@@ -63,14 +63,19 @@ class Uprizoritve
         if (!empty($options['status'])) {
             $qb->andWhere($e->in('p.faza', $options['status']));
         }
-        
+
         if (!empty($options['gostujoca'])) {
             $qb->andWhere($e->eq('p.gostujoca', ':gostujoca'));
             $qb->setParameter('gostujoca', $options['gostujoca'], "boolean");
         } else {
-            $qb->andWhere($e->eq('p.gostujoca', "false"));
+            /**
+             * prikaže naj vse negostujoče
+             */
+            $gostFalse=($e->eq('p.gostujoca', "false"));
+            $gostNull=($e->isNull('p.gostujoca'));
+            $qb->andWhere($e->orX($gostFalse,$gostNull));
         }
-        
+
         if (!empty($options['avtor'])) {
             $qb->leftJoin('p.besedilo', 'besedilo');
             $qb->leftJoin('besedilo.avtorji', 'avtor');

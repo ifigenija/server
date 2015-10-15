@@ -12,7 +12,7 @@ use Max\Ann\Entity as Max;
  * @ORM\Entity(repositoryClass="App\Repository\TipiPopa")
  * @Max\I18n(label="Tip poslovnega partnerja",plural="Tipi poslovnega partnerja")
  * @Max\Id(prefix="0064")
- * @Max\Lookup(ident="ime",label="sort",extra={"opis"},search={ "ime","opis"})
+ * @Max\Lookup(ident="ime",label="sifra",extra={"opis"},search={ "sifra","ime","opis"})
  */
 class TipPopa
         extends \Max\Entity\Base
@@ -54,16 +54,6 @@ class TipPopa
     protected $opis;
 
     /**
-     * v kakšnem vrstnem redu naj se prikaže v izbirnem polju
-     * 
-     * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="tipPopa.sort", description="tipPopa.d.sort")
-     * @Max\Ui(type="integer", icon="fa fa-sort")
-     * @var integer
-     */
-    protected $sort;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Popa", mappedBy="tipkli", fetch="EXTRA_LAZY")
      * @var <Popa>
      */
@@ -94,11 +84,6 @@ class TipPopa
         return $this->opis;
     }
 
-    function getSort()
-    {
-        return $this->sort;
-    }
-
     function getPopa()
     {
         return $this->popa;
@@ -122,11 +107,6 @@ class TipPopa
         return $this;
     }
 
-    function setSort($sort)
-    {
-        $this->sort = $sort;
-        return $this;
-    }
 
     function setPopa($popa)
     {

@@ -25,6 +25,7 @@ class TipiPopa
             "ime"   => ["alias" => "p.ime"],
         ],
         "vse"     => [
+            "sifra" => ["alias" => "p.sifra"],
             "ime" => ["alias" => "p.ime"]
         ]
     ];

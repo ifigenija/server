@@ -23,23 +23,23 @@ use Zend\I18n\Validator\DateTime;
  * @Max\Id(prefix="0024")
  */
 class Dogodek
-    extends \Max\Entity\Base
+        extends \Max\Entity\Base
 {
 
-    const PREDSTAVA = "100s";
-    const VAJA = "200s";
+    const PREDSTAVA  = "100s";
+    const VAJA       = "200s";
     const GOSTOVANJE = "300s";
-    const SPLOSNO = "400s";
+    const SPLOSNO    = "400s";
     const ZASEDENOST = "500s";
-
-    const DOLGOROCNO = "100s";
-    const PLANIRAN = "200s";
-    const FIKSIRAN = "300s";
-    const POTRJEN = "400s";
+    const DOLGOROCNO    = "100s";
+    const PLANIRAN      = "200s";
+    const FIKSIRAN      = "300s";
+    const POTRJEN       = "400s";
     const POTRJEN_JAVNO = "500s";
-    const ODPOVEDAN = "610s";
-    const ZAKLJUCEN = "600s";
-    const OBDELAN = "700s";
+    const ODPOVEDAN     = "610s";
+    const ZAKLJUCEN     = "600s";
+    const OBDELAN       = "700s";
+
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
@@ -58,6 +58,7 @@ class Dogodek
      * @var boolean
      */
     protected $allDay = false;
+
     /**
      *
      * @ORM\Column(type="datetime", nullable=true)
@@ -65,12 +66,14 @@ class Dogodek
      * @var \DateTime
      */
     protected $zacetek;
+
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Konec", description="Konec dogodka")
      * @var \DateTime
      */
     protected $konec;
+
     /**
      * @ORM\Column(type="string", length=4, nullable=true)
      * @Max\I18n(label="Status", description="Status dogodka")
@@ -78,6 +81,7 @@ class Dogodek
      * @var string
      */
     protected $status;
+
     /**
      * @ORM\Column(type="string", length=4, nullable=true)
      * @Max\I18n(label="Razred", description="Razred dogodka")
@@ -85,18 +89,21 @@ class Dogodek
      * @var string
      */
     protected $razred;
+
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Termin", description="Termin dogodka")
      * @var string
      */
     protected $termin;
+
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Ime", description="Ime dogodka")
      * @var string
      */
     protected $title;
+
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Predstava", inversedBy="dogodek")
      * @ORM\JoinColumn(name="predstava_id", referencedColumnName="id", unique=true)
@@ -105,6 +112,7 @@ class Dogodek
      * @var \Koledar\Entity\Predstava
      */
     protected $predstava;
+
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Zasedenost", inversedBy="dogodek")
      * @ORM\JoinColumn(name="zasedenost_id", referencedColumnName="id", unique=true)
@@ -113,6 +121,7 @@ class Dogodek
      * @var Zasedenost
      */
     protected $zasedenost;
+
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Vaja", inversedBy="dogodek")
      * @ORM\JoinColumn(name="vaja_id", referencedColumnName="id", unique=true)
@@ -121,6 +130,7 @@ class Dogodek
      * @var \Koledar\Entity\Vaja
      */
     protected $vaja;
+
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Gostovanje", inversedBy="dogodek")
      * @ORM\JoinColumn(name="gostovanje_id", referencedColumnName="id", unique=true)
@@ -129,6 +139,7 @@ class Dogodek
      * @var \Koledar\Entity\Gostovanje
      */
     protected $gostovanje;
+
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\DogodekSplosni", inversedBy="dogodek")
      * @ORM\JoinColumn(name="dogodek_splosni_id", referencedColumnName="id", unique=true)
@@ -137,6 +148,7 @@ class Dogodek
      * @var \Koledar\Entity\DogodekSplosni
      */
     protected $splosni;
+
     /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Prostor")
      * @Max\I18n(label="Prostor",  description="Prostor")
@@ -144,16 +156,19 @@ class Dogodek
      * @var \Prodaja\Entity\Prostor
      */
     protected $prostor;
+
     /**
      * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="dogodek")
      * @var <TerminiStoritve>
      */
     protected $terminiStoritve;
+
     /**
      * @ORM\OneToMany(targetEntity="Prodaja\Entity\ProdajaPredstave", mappedBy="dogodek")
      * @var <ProdajaPredstave>
      */
     protected $prodajaPredstave;
+
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona", inversedBy="dogodki")
      * @ORM\JoinColumn(name="sezona_id", referencedColumnName="id")
@@ -162,7 +177,7 @@ class Dogodek
      * @var \Koledar\Entity\Sezona
      */
     protected $sezona;
-    private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::SPLOSNO, self::ZASEDENOST];
+    private $razredi  = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::SPLOSNO, self::ZASEDENOST];
 
     public function __construct()
     {
@@ -228,9 +243,9 @@ class Dogodek
     {
         switch ($this->razred) {
             case Dogodek::VAJA:
-                return $this->getVaja() !== null ? $this->getVaja()->getUprizoritev(): null;
+                return $this->getVaja() !== null ? $this->getVaja()->getUprizoritev() : null;
             case Dogodek::PREDSTAVA:
-                return $this->getPredstava() !== null ? $this->getPredstava()->getUprizoritev(): null;
+                return $this->getPredstava() !== null ? $this->getPredstava()->getUprizoritev() : null;
         }
 
         return null;
@@ -562,6 +577,5 @@ class Dogodek
         $this->sezona = $sezona;
         return $this;
     }
-
 
 }

@@ -101,21 +101,21 @@ class Funkcija
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
-     * @Max\I18n(label="funkcija.sePlanira")
+     * @Max\I18n(label="funkcija.sePlanira", description="funkcija.d.sePlanira")
      * @Max\Ui(type="boolcheckbox", required=false)
      */
     protected $sePlanira;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
-     * @Max\I18n(label="funkcija.dovoliPrekrivanje")
+     * @Max\I18n(label="funkcija.dovoliPrekrivanje", description="funkcija.d.dovoliPrekrivanje")
      * @Max\Ui(type="boolcheckbox", required=false)
      */
     protected $dovoliPrekrivanje;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="funkcija.maxPrekrivanj")
+     * @Max\I18n(label="funkcija.maxPrekrivanj", description="funkcija.d.maxPrekrivanj")
      * @Max\Ui(type="integer")
      * @var integer     
      */

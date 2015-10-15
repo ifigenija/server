@@ -54,10 +54,9 @@ class TipPopaCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'sifra' => '01',
+            'sifra' => '9000',
             'ime'   => 'zz',
             'opis'  => 'znd',
-            'sort'  => 9999,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -69,7 +68,6 @@ class TipPopaCest
             'sifra' => '02',
             'ime'   => 'aa',
             'opis'  => 'and',
-            'sort'  => 2,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -82,7 +80,6 @@ class TipPopaCest
             'sifra' => '03',
             'ime'   => 'bb',
             'opis'  => 'bnd',
-            'sort'  => 5,
         ];
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -93,7 +90,6 @@ class TipPopaCest
         $data       = [
             'ime'   => 'xx',
             'opis'  => 'cnd',
-            'sort'  =>4,
         ];
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -110,9 +106,9 @@ class TipPopaCest
         $list   = $resp['data'];
         codecept_debug($list);
         $totRec = $resp['state']['totalRecords'];
-        $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);
-        $I->assertEquals(2, $list[0]['sort']);
-        $I->assertEquals(9999, $list[$totRec - 1]['sort']);
+        $I->assertGreaterThanOrEqual(7, $resp['state']['totalRecords']);
+//        $I->assertEquals("02", $list[0]['sifra']);
+        $I->assertEquals("9000", $list[$totRec - 1]['sifra']);
     }
 
     /**
@@ -167,10 +163,9 @@ class TipPopaCest
         codecept_debug($ent);
 
         $I->assertGuid($ent['id']);
-        $I->assertEquals($ent['sifra'], '01');
+        $I->assertEquals($ent['sifra'], '9000');
         $I->assertEquals($ent['ime'], 'zz');
         $I->assertEquals($ent['opis'], 'yy');
-        $I->assertEquals($ent['sort'], 9999);
     }
 
     /**

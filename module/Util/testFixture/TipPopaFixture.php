@@ -45,7 +45,6 @@ class TipPopaFixture
         }
         $o->setIme($v[1]);
         $o->setOpis($v[2]);
-        $o->setSort($v[3]);
         if ($nov) {
             $tippopaR->create($o);
         } else {
@@ -60,9 +59,9 @@ class TipPopaFixture
     public function getData()
     {
         return [
-            ['0001', 'šola', 'osnovna ali srednja šola', 1],
-            ['0002', 'gledalec', 'gledalec, ki ima abonma ali podobno', 2],
-            ['0003', 'sponzor', 'sponzor dogodkov', 3],
+            ['0001', 'šola', 'osnovna ali srednja šola'],
+            ['0002', 'gledalec', 'gledalec, ki ima abonma ali podobno'],
+            ['0003', 'sponzor', 'sponzor dogodkov'],
         ];
     }
 

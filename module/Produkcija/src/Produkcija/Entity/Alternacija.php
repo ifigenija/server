@@ -106,12 +106,6 @@ class Alternacija
     protected $funkcija;
 
     /**
-     * $$ začasno
-     */
-    /* @var $variable Alternacija */
-    private $tmp1;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Zaposlitev", inversedBy="alternacije")
      * @ORM\JoinColumn(name="zaposlitev_id", referencedColumnName="id")
      * @Max\I18n(label="alternacija.zaposlitev",  description="alternacija.d.zaposlitev")
