@@ -99,11 +99,11 @@ class Uprizoritve
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
-            $naslov    = $e->like('p.naslov', ':naz');
-            $podnaslov = $e->like('p.podnaslov', ':naz');
-            $avtor     = $e->like('p.avtor', ':naz');
+            $naslov    = $e->like('lower(p.naslov)', ':naz');
+            $podnaslov = $e->like('lower(p.podnaslov)', ':naz');
+            $avtor     = $e->like('lower(p.avtor)', ':naz');
             $qb->andWhere($e->orX($naslov, $podnaslov, $avtor));
-            $qb->setParameter('naz', "{$options['q']}%", "string");
+            $qb->setParameter('naz', strtolower("{$options['q']}%"), "string");
         }
         if (!empty($options['besedilo'])) {
             $qb->join('p.besedilo', 'besedilo');
