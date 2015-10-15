@@ -138,10 +138,35 @@ class Zaposlitev
      * @var \App\Entity\Oseba
      */
     protected $oseba;
+    
+    /**
+     * 
+     * @ORM\ManyToOne(targetEntity="App\Entity\OrganizacijskaEnota", inversedBy="zaposlitve")
+     * @Max\I18n(label="zaposlitev.organizacijskaEnota",  description="zaposlitev.d.organizacijskaEnota")
+     * @Max\Ui(type="toone",required=false);
+     * @var \App\Entity\OrganizacijskaEnota
+     */
+    protected $organizacijskaEnota;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OrganizacijskaEnota", mappedBy="vodja")
+     * @Max\Ui(type="hiddenid");
+     * @var <VodjaOrganizacijskihEnot>
+     */
+    protected $vodjaOrganizacijskihEnot;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OrganizacijskaEnota", mappedBy="namestnik")
+     * @Max\Ui(type="hiddenid");
+     * @var <NamestnikOrganizacijskihEnot>
+     */
+    protected $namestnikOrganizacijskihEnot;
 
     public function __construct()
     {
         $this->alternacije = new ArrayCollection();
+        $this->vodjaOrganizacijskihEnot = new ArrayCollection();
+        $this->namestnikOrganizacijskihEnot = new ArrayCollection();
     }
 
     public function validate($mode = 'update')

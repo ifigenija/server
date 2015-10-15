@@ -1,0 +1,32 @@
+## YAML Template.
+---
+type: rest
+#    - list
+#    - update
+entityClass: App\Entity\OrganizacijskaEnota
+forms:
+    default: 
+        elements:
+#            - id
+            - sifra
+            - naziv
+            - parent
+#            - children
+            - vodja
+            - namestnik
+#            - zaposlitve
+lists:
+    default: 
+        hydrator:
+            - exclude: []
+        filter:
+relation:
+    default:
+        zaposlitve:
+            enabled: true
+            hydrator:
+                exclude: []
+        children:
+            enabled: true
+            hydrator:
+                exclude: []

@@ -91,6 +91,21 @@ class Uprizoritve
 
             $qb->setParameter('avtor', strtolower("{$options['avtor']}%"), "string");
         }
+        if (!empty($options['sodelujoci'])) {
+            $qb->leftJoin('p.funkcije', 'funkcija');
+            $qb->leftJoin('funkcija.alternacije', 'alternacija');
+            $qb->leftJoin('alternacija.oseba', 'oseba');
+
+            $ime        = $e->like('lower(oseba.ime)', ':sodelujoci');
+            $priimek    = $e->like('lower(oseba.priimek)', ':sodelujoci');
+            $srednjeIme = $e->like('lower(oseba.srednjeIme)', ':sodelujoci');
+            $psevdonim  = $e->like('lower(oseba.psevdonim)', ':sodelujoci');
+
+
+            $qb->andWhere($e->orX($ime, $priimek, $psevdonim, $srednjeIme));
+
+            $qb->setParameter('sodelujoci', strtolower("{$options['sodelujoci']}%"), "string");
+        }
         return $qb;
     }
 

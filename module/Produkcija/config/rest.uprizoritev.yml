@@ -86,6 +86,11 @@ lists:
                   options:
                       placeholder: Išči po avtorju..
                       label: Avtor
+                - name: sodelujoci
+                  type: text
+                  options:
+                      placeholder: Išči po sodelujočih..
+                      label: Sodelujoči
                 - name: gostujoca
                   type: boolcheckbox
                   options:

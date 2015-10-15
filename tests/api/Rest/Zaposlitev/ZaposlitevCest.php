@@ -129,6 +129,7 @@ class ZaposlitevCest
             'jeZaposlenVdrugemJz' => TRUE,
             'jeNastopajoci'       => TRUE,
             'oseba'               => $this->lookOseba1['id'],
+            'organizacijskaEnota' => null,
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -150,6 +151,7 @@ class ZaposlitevCest
             'jeZaposlenVdrugemJz' => TRUE,
             'jeNastopajoci'       => TRUE,
             'oseba'               => $this->lookOseba1['id'],
+            'organizacijskaEnota' => null,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -234,29 +236,29 @@ class ZaposlitevCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListVse(ApiTester $I)
-    {
-        $resp    = $I->successfullyGetList($this->restUrl . "/vse", []);
-        $list    = $resp['data'];
-        codecept_debug($list);
-        $totRec = $resp['state']['totalRecords'];
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-        $I->assertEquals("Ana  Potočnik", $list[0]['oseba']['label']);      //glede na sort
-        $I->assertEquals("Mojca  Vidmar", $list[$totRec - 1]['oseba']['label']);      //glede na sort
- 
-        /**
-         * še po drugem sortnem polju
-         */
-        $resp    = $I->successfullyGetList($this->restUrl . "/vse?sort_by=sifra&order=DESC", []);
-        $list    = $resp['data'];
-        codecept_debug($list);
-        $totRec = $resp['state']['totalRecords'];
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-        $I->assertEquals("06", $list[0]['sifra']);      //glede na sort
-        $I->assertEquals("0006", $list[$totRec - 1]['sifra']);      //glede na sort
-
-        
-    }
+//    public function getListVse(ApiTester $I)
+//    {
+//        $resp    = $I->successfullyGetList($this->restUrl . "/vse", []);
+//        $list    = $resp['data'];
+//        codecept_debug($list);
+//        $totRec = $resp['state']['totalRecords'];
+//        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+//        $I->assertEquals("Ana  Potočnik", $list[0]['oseba']['label']);      //glede na sort
+//        $I->assertEquals("Mojca  Vidmar", $list[$totRec - 1]['oseba']['label']);      //glede na sort
+// 
+//        /**
+//         * še po drugem sortnem polju
+//         */
+//        $resp    = $I->successfullyGetList($this->restUrl . "/vse?sort_by=sifra&order=DESC", []);
+//        $list    = $resp['data'];
+//        codecept_debug($list);
+//        $totRec = $resp['state']['totalRecords'];
+//        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+//        $I->assertEquals("06", $list[0]['sifra']);      //glede na sort
+//        $I->assertEquals("0006", $list[$totRec - 1]['sifra']);      //glede na sort
+//
+//        
+//    }
 
     /**
      * spremenim zapis

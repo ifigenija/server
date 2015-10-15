@@ -19,19 +19,21 @@ return [
     ],
     'controllers'     => [
         'factories'  => [
-            'Rest\drzava'         => 'Max\Factory\RestControllerFactory',
-            'Rest\oseba'          => 'Max\Factory\RestControllerFactory',
-            'Relation\oseba'      => 'Max\Factory\ToManyControllerFactory',
-            'Rest\posta'          => 'Max\Factory\RestControllerFactory',
-            'Rest\postninaslov'   => 'Max\Factory\RestControllerFactory',
-            'Rest\trr'            => 'Max\Factory\RestControllerFactory',
-            'Rest\telefonska'     => 'Max\Factory\RestControllerFactory',
-            'Rest\popa'           => 'Max\Factory\RestControllerFactory',
-            'Relation\popa'       => 'Max\Factory\ToManyControllerFactory',
-            'Rest\role'           => 'Max\Factory\RestControllerFactory',
-            'Rest\user'           => 'Max\Factory\RestControllerFactory',
-            'Rest\kontaktnaoseba' => 'Max\Factory\RestControllerFactory',
-            'Rest\tippopa'           => 'Max\Factory\RestControllerFactory',
+            'Rest\drzava'                  => 'Max\Factory\RestControllerFactory',
+            'Rest\oseba'                   => 'Max\Factory\RestControllerFactory',
+            'Relation\oseba'               => 'Max\Factory\ToManyControllerFactory',
+            'Rest\posta'                   => 'Max\Factory\RestControllerFactory',
+            'Rest\postninaslov'            => 'Max\Factory\RestControllerFactory',
+            'Rest\trr'                     => 'Max\Factory\RestControllerFactory',
+            'Rest\telefonska'              => 'Max\Factory\RestControllerFactory',
+            'Rest\popa'                    => 'Max\Factory\RestControllerFactory',
+            'Relation\popa'                => 'Max\Factory\ToManyControllerFactory',
+            'Rest\role'                    => 'Max\Factory\RestControllerFactory',
+            'Rest\user'                    => 'Max\Factory\RestControllerFactory',
+            'Rest\kontaktnaoseba'          => 'Max\Factory\RestControllerFactory',
+            'Rest\tippopa'                 => 'Max\Factory\RestControllerFactory',
+            'Rest\organizacijskaenota'     => 'Max\Factory\RestControllerFactory',
+            'Relation\organizacijskaenota' => 'Max\Factory\ToManyControllerFactory',
         ],
         'invokables' => [
             'Rest\options' => 'App\Controller\OptionsRestController',
@@ -121,7 +123,6 @@ return [
             ]
         ]
     ],
-
     'console'         => [
         'router' => [
             'routes' => [

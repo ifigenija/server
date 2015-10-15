@@ -21,6 +21,9 @@ forms:
             - jeZaposlenVdrugemJz
             - jeNastopajoci
 #            - alternacije
+            - organizacijskaEnota
+#            - vodjaOrganizacijskihEnot
+#            - namestnikOrganizacijskihEnot
             - oseba
         hydrator:
             lookups: [ oseba ]

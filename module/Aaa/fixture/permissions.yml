@@ -173,6 +173,13 @@
 -
     name: OptionValue-write
     description: OptionValue - spreminjanje
+    
+-
+    name: OrganizacijskaEnota-read
+    description: OrganizacijskaEnota - branje
+-
+    name: OrganizacijskaEnota-write
+    description: OrganizacijskaEnota - spreminjanje
 
 -
     name: Oseba-read
