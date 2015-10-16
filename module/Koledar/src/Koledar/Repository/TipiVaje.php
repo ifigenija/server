@@ -68,7 +68,7 @@ class TipiVaje
     {
         if (empty($object->getSifra())) {
             $num = $this->getServiceLocator()->get('stevilcenje.generator');
-            $object->setSifra($num->generate('tippopa'));
+            $object->setSifra($num->generate('tipvaje'));
         }
         parent::create($object, $params);
     }

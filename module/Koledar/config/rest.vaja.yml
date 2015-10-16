@@ -6,7 +6,7 @@ forms:
     default: 
         elements:
 #            - id
-            - vrsta
+            - tipvaje
             - zaporedna
             - porocilo
 #            - dogodek

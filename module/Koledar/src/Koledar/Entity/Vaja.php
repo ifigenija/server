@@ -14,10 +14,11 @@ use Produkcija\Entity\Uprizoritev;
  * @Max\Id(prefix="0032")
  *  */
 class Vaja
-    extends \Max\Entity\Base
+        extends \Max\Entity\Base
 {
 
     use DogodekTrait;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
@@ -29,16 +30,16 @@ class Vaja
     protected $id;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Vrsta - opis vaje", description="Vrsta vaje. Lučna, generalka, tonska, ... ")
-     * @Max\Ui(icon="fa fa-cog")
-     * @var string
+     * @ORM\ManyToOne(targetEntity="Koledar\Entity\TipVaje", inversedBy="vaje", fetch="EAGER")
+     * @Max\I18n(label = "vaja.tipvaje", description = "vaja.d.tipvaje")
+     * @Max\Ui(type="lookupselect", empty="Izberite tip vaje", required=false)
+     * @var \Koledar\Entity\TipVaje
      */
-    protected $vrsta;
+    protected $tipvaje = null;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="Zaporedna št.", description="Zaporedna številka vaje")
+     * @Max\I18n(label = "vaja.zaporedna", description = "vaja.d.zaporedna")
      * @Max\Ui(type="integer", ident=true)
      * @var integer
      */
@@ -47,23 +48,23 @@ class Vaja
     /**
      *
      * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label="Poročilo", description="Poročilo")
+     * @Max\I18n(label = "vaja.porocilo", description = "vaja.d.porocilo")
      * @var string
      */
     protected $porocilo;
 
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="vaja", cascade={"persist"})
-     * @Max\I18n(label="Dogodek",  description="Dogodek")
+     * @Max\I18n(label = "vaja.dogodek", description = "vaja.d.dogodek")
      * @Max\Ui(type="toone")
-     * @var Dogodek
+     * @var \Koledar\Entity\Dogodek
      */
     protected $dogodek;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="vaje")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id")
-     * @Max\I18n(label="Uprizoritev",  description="Uprizoritve")
+     * @Max\I18n(label = "vaja.uprizoritev", description = "vaja.d.uprizoritev")
      * @Max\Ui(type="hiddenid", required=true)
      * @var Uprizoritev
      */
@@ -73,7 +74,6 @@ class Vaja
     {
         $this->expect($this->uprizoritev, "Vaja mora biti vezana na uprizoritev", 1000471);
     }
-
 
     public function getUprizoritev()
     {
@@ -86,10 +86,10 @@ class Vaja
         return $this;
     }
 
-
-    public function lahkoBrisem() {
+    public function lahkoBrisem()
+    {
         if ($this->getDogodek()) {
-            $niPotrjen = $this->getDogodek()->getStatus()< Dogodek::POTRJEN_JAVNO;
+            $niPotrjen = $this->getDogodek()->getStatus() < Dogodek::POTRJEN_JAVNO;
             $this->expect($niPotrjen, "Dogodek je javno potrjen, brisanje ni mogoče", 1000544);
         }
     }
@@ -104,7 +104,6 @@ class Vaja
 
         $this->dogodek->setVaja($this);
         $this->dogodek->setRazred(Dogodek::VAJA);
-
     }
 
     public function getDogodek()
@@ -118,36 +117,45 @@ class Vaja
         return $this;
     }
 
-
-
-    public function getId()
+    function getId()
     {
         return $this->id;
     }
 
-    public function setId($id)
+    function getTipvaje()
+    {
+        return $this->tipvaje;
+    }
+
+    function getZaporedna()
+    {
+        return $this->zaporedna;
+    }
+
+    function getPorocilo()
+    {
+        return $this->porocilo;
+    }
+
+    function setId($id)
     {
         $this->id = $id;
         return $this;
     }
 
-    public function getZaporedna()
+    function setTipvaje(\Koledar\Entity\TipVaje $tipvaje = null)
     {
-        return $this->zaporedna;
+        $this->tipvaje = $tipvaje;
+        return $this;
     }
 
-    public function setZaporedna($zaporedna)
+    function setZaporedna($zaporedna)
     {
         $this->zaporedna = $zaporedna;
         return $this;
     }
 
-    public function getPorocilo()
-    {
-        return $this->porocilo;
-    }
-
-    public function setPorocilo($porocilo)
+    function setPorocilo($porocilo)
     {
         $this->porocilo = $porocilo;
         return $this;

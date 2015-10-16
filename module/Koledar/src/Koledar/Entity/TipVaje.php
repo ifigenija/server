@@ -9,7 +9,7 @@ use Max\Ann\Entity as Max;
  * 
  * Tip vaja
  * 
- * @ORM\Entity(repositoryClass="App\Repository\TipiVaje")
+ * @ORM\Entity(repositoryClass="Koledar\Repository\TipiVaje")
  * @Max\I18n(label="Tip vaje",plural="Tipi vaje")
  * @Max\Id(prefix="0066")
  * @Max\Lookup(ident="ime",label="sifra",extra={"opis"},search={ "sifra","ime","opis"})

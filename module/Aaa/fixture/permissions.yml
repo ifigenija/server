@@ -472,6 +472,12 @@
 -
     name: TipProgramskeEnote-write
     description: TipProgramskeEnote - spreminjanje
+-
+    name: TipVaje-read
+    description: TipVaje - branje
+-
+    name: TipVaje-write
+    description: TipVaje - spreminjanje
 
 -
     name: Trr-read
