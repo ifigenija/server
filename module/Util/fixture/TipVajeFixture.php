@@ -27,7 +27,6 @@ class TipVajeFixture
     }
 
     /**
-     *
      * @param string $object
      * @param array $vals
      */
