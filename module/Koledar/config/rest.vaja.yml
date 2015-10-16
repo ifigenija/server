@@ -45,7 +45,9 @@ forms:
                   type: datetime
                 - title
                 - status
-                - prostor
+                - name: prostor
+                  targetEntity: Prodaja\Entity\Prostor
+                  type: byref
                   
 lists:
     default: 
