@@ -20,6 +20,13 @@ lists:
         hydrator:
             - exclude: []
         filter:
+            elements:                 
+                - name: parent
+                  type: toone
+                  options:
+                      label: Parent
+                      targetEntity: App\Entity\OrganizacijskaEnota
+                      required: false
 relation:
     default:
         zaposlitve:

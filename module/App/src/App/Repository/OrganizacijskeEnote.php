@@ -27,10 +27,10 @@ class OrganizacijskeEnote
             "namestnik" => ["alias" => "p.namestnik"]
         ],
         "vse"     => [
-            "sifra"     => ["alias" => "p.sifra"]
+            "sifra" => ["alias" => "p.sifra"]
         ]
     ];
-    
+
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
@@ -69,6 +69,17 @@ class OrganizacijskeEnote
             $qb->andWhere($e->orX($naz));
             $qb->setParameter('oseba', "{$options['q']}%", "string");
         }
+
+        if (!empty($options['parent'])) {
+            $qb->join('p.parent', 'parent');
+            $naz = $e->eq('parent.id', ':parent');
+            $qb->andWhere($naz);
+            $qb->setParameter('parent', $options['parent'], "string");
+        }else {
+            $parentNull=($e->isNull('p.parent'));
+            $qb->andWhere($e->orX($parentNull));
+        }
+        
         return $qb;
     }
 
