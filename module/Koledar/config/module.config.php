@@ -18,16 +18,17 @@ return [
         ],
         'factories'  => [
             'Rest\dogodek'        => 'Max\Factory\RestControllerFactory',
-            'Relation\dogodek' => 'Max\Factory\ToManyControllerFactory',
+            'Relation\dogodek'    => 'Max\Factory\ToManyControllerFactory',
             'Rest\predstava'      => 'Max\Factory\RestControllerFactory',
             'Rest\gostovanje'     => 'Max\Factory\RestControllerFactory',
             'Relation\gostovanje' => 'Max\Factory\ToManyControllerFactory',
             'Rest\gostujoca'      => 'Max\Factory\RestControllerFactory',
-            'Rest\dogodekSplosni'   => 'Max\Factory\RestControllerFactory',
+            'Rest\dogodekSplosni' => 'Max\Factory\RestControllerFactory',
             'Rest\sezona'         => 'Max\Factory\RestControllerFactory',
-            'Relation\sezona' => 'Max\Factory\ToManyControllerFactory',
+            'Relation\sezona'     => 'Max\Factory\ToManyControllerFactory',
             'Rest\vaja'           => 'Max\Factory\RestControllerFactory',
             'Rest\zasedenost'     => 'Max\Factory\RestControllerFactory',
+            'Rest\tipVaje'        => 'Max\Factory\RestControllerFactory',
         ]
     ],
     'router'          => [
@@ -44,7 +45,7 @@ return [
         'invokables' => [
         ]
     ],
-   'zfc_rbac'        => [
+    'zfc_rbac'        => [
         'assertion_manager' => [
             "invokables" => [
                 "chck-dogodek" => "Koledar\Assertion\AssertDogodek",
@@ -54,5 +55,4 @@ return [
             "Dogodek-read" => "chck-dogodek"
         ],
     ],
-
 ];

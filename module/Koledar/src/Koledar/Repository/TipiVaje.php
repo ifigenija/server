@@ -4,18 +4,18 @@
  *  Licenca GPLv3
  */
 
-namespace App\Repository;
+namespace Koledar\Repository;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Max\Repository\AbstractMaxRepository;
 
 /**
- * Description of TipiPopa
+ * Description of TipiVaje
  *
  * @author rado
  */
-class TipiPopa
+class TipiVaje
         extends AbstractMaxRepository
 {
 
