@@ -51,7 +51,7 @@ class ZvrstiSurs
 
             $qb->andWhere($e->orX($sifra, $naziv));
 
-            $qb->setParameter('query', strtolower("%{$options['q']}%"), "string");
+            $qb->setParameter('query', mb_strtolower("%{$options['q']}%"), "string");
         }
 
         return $qb;

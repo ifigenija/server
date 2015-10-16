@@ -56,7 +56,7 @@ class Osebe
             $email     = $e->like('lower(p.email)', ':naz');
             $psevdonim = $e->like('lower(p.psevdonim)', ':naz');
             $qb->andWhere($e->orX($ime, $priimek, $sifra, $email, $psevdonim));
-            $q = strtolower($options['q']);
+            $q = mb_strtolower($options['q']);
             $qb->setParameter('naz', "%" . $q . "%", "string");
         }
 
@@ -71,7 +71,7 @@ class Osebe
 
             $qb->andWhere($e->orX($ulica, $dodatnaUlica, $posta, $postnaStevilka));
 
-            $qb->setParameter('naslov', strtolower("{$options['naslov']}%"), "string");
+            $qb->setParameter('naslov', mb_strtolower("{$options['naslov']}%"), "string");
         }
 
         return $qb;

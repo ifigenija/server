@@ -85,7 +85,7 @@ class Module
         }
         /** @var Translator $translator */
         $translator = $sm->get('MvcTranslator');
-        $translator->setLocale(substr($locale,0,2));
+        $translator->setLocale(mb_substr($locale,0,2));
 //        $translator->getEventManager()->attach('missingTranslation', array($this, 'translationListener'));
         AbstractValidator::setDefaultTranslator($translator);
 

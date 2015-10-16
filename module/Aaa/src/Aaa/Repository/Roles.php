@@ -54,7 +54,7 @@ class Roles
 
 
         if (!empty($options['text'])) {
-            $srch = strtolower($options['text']);
+            $srch = mb_strtolower($options['text']);
             $qb->Where($ex->like('lower(r.name)', ':name'));
             $qb->setParameter('name', "%" . $srch . "%");
         }

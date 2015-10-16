@@ -53,7 +53,7 @@ class TipiPopa
 
             $qb->andWhere($e->orX($ime, $opis));
 
-            $qb->setParameter('query', strtolower("%{$options['q']}%"), "string");
+            $qb->setParameter('query', mb_strtolower("%{$options['q']}%"), "string");
         }
 
         return $qb;

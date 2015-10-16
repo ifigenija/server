@@ -60,7 +60,7 @@ class Besedila
 
             $qb->andWhere($e->orX($naslov, $stevilka, $naslovIzvirnika, $zaloznik, $intNaslov));
 
-            $qb->setParameter('query', strtolower("%{$options['q']}%"), "string");
+            $qb->setParameter('query', mb_strtolower("%{$options['q']}%"), "string");
         }
 
         if (!empty($options['avtor'])) {
@@ -75,7 +75,7 @@ class Besedila
 
             $qb->andWhere($e->orX($ime, $priimek, $psevdonim, $srednjeIme));
 
-            $qb->setParameter('avtor', strtolower("{$options['avtor']}%"), "string");
+            $qb->setParameter('avtor', mb_strtolower("{$options['avtor']}%"), "string");
         }
 
         return $qb;

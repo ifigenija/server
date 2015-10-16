@@ -65,13 +65,13 @@ class Zaposlitve
             $psevdonim = $e->like('lower(oseba.psevdonim)', ':q');
 
             $qb->andWhere($e->orX($ime, $priimek, $polnoIme, $psevdonim));
-            $qb->setParameter('q', strtolower("%{$options['q']}%"), "string");
+            $qb->setParameter('q', mb_strtolower("%{$options['q']}%"), "string");
         }
 
         if (!empty($options['delovno'])) {
             $naz = $e->like('lower(p.delovnoMesto)', ':d');
             $qb->andWhere($e->orX($naz));
-            $qb->setParameter('d', strtolower("%{$options['delovno']}%"), "string");
+            $qb->setParameter('d', mb_strtolower("%{$options['delovno']}%"), "string");
         }
 
         if (!empty($options['status'])) {

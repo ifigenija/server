@@ -60,7 +60,7 @@ class Drzave
 
             $qb->andWhere($e->orX($naz));
 
-            $qb->setParameter('naziv', strtolower("{$options['q']}%"), "string");
+            $qb->setParameter('naziv', mb_strtolower("{$options['q']}%"), "string");
         }
 
         return $qb;

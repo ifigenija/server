@@ -58,7 +58,7 @@ class Prostori
 
             $qb->andWhere($e->orX($sifra, $naziv));
 
-            $qb->setParameter('query', strtolower("%{$options['q']}%"), "string");
+            $qb->setParameter('query', mb_strtolower("%{$options['q']}%"), "string");
         }
         if (!empty($options['popa'])) {
             $qb->leftJoin('p.popa', 'popa');
@@ -68,7 +68,7 @@ class Prostori
 
             $qb->andWhere($e->orX($sifraPopa, $nazivPopa));
 
-            $qb->setParameter('popa', strtolower("%{$options['popa']}%"), "string");
+            $qb->setParameter('popa', mb_strtolower("%{$options['popa']}%"), "string");
         }
 
         if (!empty($options['naslov'])) {
@@ -82,7 +82,7 @@ class Prostori
 
             $qb->andWhere($e->orX($ulica, $dodatnaUlica, $posta, $postnaStevilka));
 
-            $qb->setParameter('naslov', strtolower("%{$options['naslov']}%"), "string");
+            $qb->setParameter('naslov', mb_strtolower("%{$options['naslov']}%"), "string");
         }
         return $qb;
     }

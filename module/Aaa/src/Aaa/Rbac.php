@@ -69,7 +69,7 @@ class Rbac
             }
  
             if ($role === 'ifi-readall') {
-                $part = substr($permission, -5);
+                $part = mb_substr($permission, -5);
                 if ($part === '-read' || $part === '-list') {
                     return true;
                 }

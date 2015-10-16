@@ -30,7 +30,7 @@ class DecorateEntity
         foreach ($classes as $class) {
             $parts = explode('\\', $class);
             $name = array_pop($parts);
-            if (strtolower($name) === strtolower($entity)) {
+            if (mb_strtolower($name) === mb_strtolower($entity)) {
                 return $class;
             }
         }

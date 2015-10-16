@@ -58,7 +58,7 @@ class Uprizoritve
             $podnaslov = $e->like('lower(p.podnaslov)', ':naz');
             $avtor     = $e->like('lower(p.avtor)', ':naz');
             $qb->andWhere($e->orX($naslov, $podnaslov, $avtor));
-            $qb->setParameter('naz', strtolower("{$options['q']}%"), "string");
+            $qb->setParameter('naz', mb_strtolower("{$options['q']}%"), "string");
         }
         if (!empty($options['status'])) {
             $qb->andWhere($e->in('p.faza', $options['status']));
@@ -89,7 +89,7 @@ class Uprizoritve
 
             $qb->andWhere($e->orX($ime, $priimek, $psevdonim, $srednjeIme));
 
-            $qb->setParameter('avtor', strtolower("{$options['avtor']}%"), "string");
+            $qb->setParameter('avtor', mb_strtolower("{$options['avtor']}%"), "string");
         }
         if (!empty($options['sodelujoci'])) {
             $qb->leftJoin('p.funkcije', 'funkcija');
@@ -104,7 +104,7 @@ class Uprizoritve
 
             $qb->andWhere($e->orX($ime, $priimek, $psevdonim, $srednjeIme));
 
-            $qb->setParameter('sodelujoci', strtolower("{$options['sodelujoci']}%"), "string");
+            $qb->setParameter('sodelujoci', mb_strtolower("{$options['sodelujoci']}%"), "string");
         }
         return $qb;
     }
@@ -118,7 +118,7 @@ class Uprizoritve
             $podnaslov = $e->like('lower(p.podnaslov)', ':naz');
             $avtor     = $e->like('lower(p.avtor)', ':naz');
             $qb->andWhere($e->orX($naslov, $podnaslov, $avtor));
-            $qb->setParameter('naz', strtolower("{$options['q']}%"), "string");
+            $qb->setParameter('naz', mb_strtolower("{$options['q']}%"), "string");
         }
         if (!empty($options['besedilo'])) {
             $qb->join('p.besedilo', 'besedilo');

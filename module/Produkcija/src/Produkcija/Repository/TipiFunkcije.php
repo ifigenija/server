@@ -57,7 +57,7 @@ class TipiFunkcije
 
             $qb->andWhere($e->orX($ime, $imeZenski, $podrocje, $sifra));
 
-            $qb->setParameter('query', strtolower("%{$options['q']}%"), "string");
+            $qb->setParameter('query', mb_strtolower("%{$options['q']}%"), "string");
         }
 
         return $qb;

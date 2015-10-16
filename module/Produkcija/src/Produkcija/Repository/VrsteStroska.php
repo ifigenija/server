@@ -48,19 +48,19 @@ class VrsteStroska
 
             $qb->andWhere($e->orX($naziv));
 
-            $qb->setParameter('query', strtolower("%{$options['q']}%"), "string");
+            $qb->setParameter('query', mb_strtolower("%{$options['q']}%"), "string");
         }
         if (!empty($options['skupina'])) {
             $skupina    = $e->eq('p.skupina', ':st');
 
             $qb->andWhere($e->orX($skupina));
-            $qb->setParameter('st', strtolower("{$options['skupina']}"), "integer");
+            $qb->setParameter('st', mb_strtolower("{$options['skupina']}"), "integer");
         }
         if (!empty($options['podskupina'])) {
             $podskupina = $e->eq('p.podskupina', ':st');
 
             $qb->andWhere($e->orX($podskupina));
-            $qb->setParameter('st', strtolower("{$options['podskupina']}"), "integer");
+            $qb->setParameter('st', mb_strtolower("{$options['podskupina']}"), "integer");
         }
 
         return $qb;

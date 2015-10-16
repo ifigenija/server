@@ -48,7 +48,7 @@ class Users
         $qb->orderBy($sort->order, $sort->dir);
 
         if (!empty($options['q'])) {
-            $srch = strtolower($options['q']);
+            $srch = mb_strtolower($options['q']);
             $name = $ex->like('lower(u.name)', ':query');
             $email = $ex->like('lower(u.email)', ':query');
 

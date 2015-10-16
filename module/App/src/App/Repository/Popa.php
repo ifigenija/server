@@ -65,8 +65,8 @@ class Popa
 
             $qb->andWhere($e->orX($naziv, $sifra, $email, $iddv));
 
-            $qb->setParameter('naz', strtolower("%{$options['q']}%"), "string");
-            $qb->setParameter('ddv', strtolower($options['q']), "string");
+            $qb->setParameter('naz', mb_strtolower("%{$options['q']}%"), "string");
+            $qb->setParameter('ddv', mb_strtolower($options['q']), "string");
         }
 
         if (!empty($options['naslov'])) {
@@ -80,7 +80,7 @@ class Popa
 
             $qb->andWhere($e->orX($ulica, $dodatnaUlica, $posta, $postnaStevilka));
 
-            $qb->setParameter('naslov', strtolower("{$options['naslov']}%"), "string");
+            $qb->setParameter('naslov', mb_strtolower("{$options['naslov']}%"), "string");
         }
 
         if (!empty($options['kontaktna'])) {
@@ -92,7 +92,7 @@ class Popa
 
             $qb->andWhere($e->orX($ime, $priimek));
 
-            $qb->setParameter('niz', strtolower("{$options['kontaktna']}%"), "string");
+            $qb->setParameter('niz', mb_strtolower("{$options['kontaktna']}%"), "string");
         }
 
         return $qb;

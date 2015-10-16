@@ -182,7 +182,7 @@ class User
         $num   = 0;
         $other = 0;
         for ($i = 0, $j = $dolzinagesla; $i < $j; $i++) {
-            $c = substr($password, $i, 1);
+            $c = mb_substr($password, $i, 1);
             if (preg_match('/^[[:upper:]]$/', $c)) {
                 $uc++;
             } elseif (preg_match('/^[[:lower:]]$/', $c)) {

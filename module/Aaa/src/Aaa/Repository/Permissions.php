@@ -47,7 +47,7 @@ class Permissions
         $qb->from('\Aaa\Entity\Permission', 'p');
 
         if (!empty($options['q'])) {
-            $srch        = strtolower($options['q']);
+            $srch        = mb_strtolower($options['q']);
             $name        = $ex->like('lower(p.name)', ':query');
 
             $qb->andWhere($ex->orx($name));

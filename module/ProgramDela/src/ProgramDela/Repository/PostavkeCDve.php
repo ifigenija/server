@@ -45,7 +45,7 @@ class PostavkeCDve
         if (!empty($options['q'])) {
             $naziv = $e->like('lower(p.naziv)', ':query');
             $qb->andWhere($e->orX($naziv));
-            $qb->setParameter('query', strtolower("%{$options['q']}%"), "string");
+            $qb->setParameter('query', mb_strtolower("%{$options['q']}%"), "string");
         }
         if (!empty($options['skupina'])) {
             $skupina    = $e->eq('p.skupina', ':sk');

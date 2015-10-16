@@ -52,7 +52,7 @@ class Abonmaji
             $ime = $e->like('lower(p.ime)', ':ime');
             $qb->andWhere($e->orX($ime));
 
-            $qb->setParameter('ime', strtolower("%{$options['q']}%"), "string");
+            $qb->setParameter('ime', mb_strtolower("%{$options['q']}%"), "string");
         }
 
         return $qb;
