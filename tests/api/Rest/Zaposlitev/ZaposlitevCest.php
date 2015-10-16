@@ -33,6 +33,8 @@ class ZaposlitevCest
     private $restUrl        = '/rest/zaposlitev';
     private $osebaUrl       = '/rest/oseba';
     private $alternacijaUrl = '/rest/alternacija';
+    private $zaposlitevUrl = '/rest/zaposlitev';
+    private $orgEnotaUrl = '/rest/organizacijskaEnota';
     private $obj;
     private $obj2;
     private $objOseba;
@@ -41,6 +43,7 @@ class ZaposlitevCest
     private $lookFunkcija;
     private $objAlternacija1;
     private $objAlternacija2;
+    private $objOrgEnota1;
 
     public function _before(ApiTester $I)
     {
@@ -72,6 +75,55 @@ class ZaposlitevCest
 
         $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0007", false);
         $I->assertGuid($ent['id']);
+    }
+    
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends lookupOsebo
+     * 
+     * @param ApiTester $I
+     */
+    public function createZaposlitev(ApiTester $I)
+    {
+        $data                 = [
+            'sifra'                        => '99',
+            'status'                       => 'A',
+            'zacetek'                      => '2010-02-01T00:00:00+0100',
+            'konec'                        => '2010-02-01T00:00:00+0100',
+            'tip'                          => 1,
+            'delovnaObveza'                => 2,
+            'malica'                       => 'zz',
+            'delovnoMesto'                 => 'XXX',
+            'izmenskoDelo'                 => true,
+            'individualnaPogodba'          => true,
+            'jeZaposlenVdrugemJz'          => TRUE,
+            'jeNastopajoci'                => TRUE,
+            'oseba'                        => $this->lookOseba1['id'],
+            'organizacijskaEnota'          => null,
+            'vodjaOrganizacijskihEnot'     => null,
+            'namestnikOrganizacijskihEnot' => null
+        ];
+        $this->objZaposlitev1 = $ent                  = $I->successfullyCreate($this->zaposlitevUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+    }
+    
+    /**
+     * @depends createZaposlitev
+     * @param ApiTester $I
+     */
+    public function createOrgEnota(ApiTester $I)
+    {
+        $data      = [
+            'sifra'      => '99',
+            'naziv'      => 'OEA',
+            'parent'     => null,
+            'vodja'      => $this->objZaposlitev1['id'],
+            'namestnik'  => $this->objZaposlitev1['id'],
+            'zaposlitve' => $this->objZaposlitev1['id'],
+        ];
+        $this->objOrgEnota1 = $ent       = $I->successfullyCreate($this->orgEnotaUrl, $data);
+        $I->assertNotEmpty($ent['id']);
     }
 
     /**
@@ -110,6 +162,7 @@ class ZaposlitevCest
      *  kreiramo zapis
      * 
      * @depends lookupOsebo
+     * @depends createOrgEnota
      * 
      * @param ApiTester $I
      */
@@ -151,7 +204,7 @@ class ZaposlitevCest
             'jeZaposlenVdrugemJz' => TRUE,
             'jeNastopajoci'       => TRUE,
             'oseba'               => $this->lookOseba1['id'],
-            'organizacijskaEnota' => null,
+            'organizacijskaEnota' => $this->objOrgEnota1['id'],
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
