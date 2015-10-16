@@ -43,6 +43,9 @@ forms:
                   type: datetime
                 - name: konec
                   type: datetime
+                - name: prostor
+                  type: byRef
+                  targetEntity: Prodaja\Entity\Prostor
                 - title
                 - status
                 - prostor
