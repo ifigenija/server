@@ -26,11 +26,11 @@ class Dogodek
         extends \Max\Entity\Base
 {
 
-    const PREDSTAVA  = "100s";
-    const VAJA       = "200s";
-    const GOSTOVANJE = "300s";
-    const SPLOSNO    = "400s";
-    const ZASEDENOST = "500s";
+    const PREDSTAVA     = "100s";
+    const VAJA          = "200s";
+    const GOSTOVANJE    = "300s";
+    const SPLOSNO       = "400s";
+    const ZASEDENOST    = "500s";
     const DOLGOROCNO    = "100s";
     const PLANIRAN      = "200s";
     const FIKSIRAN      = "300s";
@@ -53,7 +53,7 @@ class Dogodek
     /**
      *
      * @ORM\Column(type="boolean", options = {"default"=false}, nullable=true)
-     * @Max\I18n(label="Celodnevni", description="Dogodek se razteza skozi cel dan")
+     * @Max\I18n(label = "dogodek.allDay", description = "dogodek.d.allDay")
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
@@ -62,21 +62,21 @@ class Dogodek
     /**
      *
      * @ORM\Column(type="datetime", nullable=true)
-     * @Max\I18n(label="Začetek", description="Začetek dogodka")
+     * @Max\I18n(label = "dogodek.zacetek", description = "dogodek.d.zacetek")
      * @var \DateTime
      */
     protected $zacetek;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Max\I18n(label="Konec", description="Konec dogodka")
+     * @Max\I18n(label = "dogodek.konec", description = "dogodek.d.konec")
      * @var \DateTime
      */
     protected $konec;
 
     /**
      * @ORM\Column(type="string", length=4, nullable=true)
-     * @Max\I18n(label="Status", description="Status dogodka")
+     * @Max\I18n(label = "dogodek.status", description = "dogodek.d.status")
      * @Max\Ui(type="select", opts="dogodek.status")
      * @var string
      */
@@ -84,7 +84,7 @@ class Dogodek
 
     /**
      * @ORM\Column(type="string", length=4, nullable=true)
-     * @Max\I18n(label="Razred", description="Razred dogodka")
+     * @Max\I18n(label = "dogodek.razred", description = "dogodek.d.razred")
      * @Max\Ui(type="hidden", opts="dogodek.razred")
      * @var string
      */
@@ -92,14 +92,14 @@ class Dogodek
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Termin", description="Termin dogodka")
+     * @Max\I18n(label = "dogodek.termin", description = "dogodek.d.termin")
      * @var string
      */
     protected $termin;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Max\I18n(label="Ime", description="Ime dogodka")
+     * @Max\I18n(label = "dogodek.title", description = "dogodek.d.title")
      * @var string
      */
     protected $title;
@@ -107,7 +107,7 @@ class Dogodek
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Predstava", inversedBy="dogodek")
      * @ORM\JoinColumn(name="predstava_id", referencedColumnName="id", unique=true)
-     * @Max\I18n(label="Predstava",  description="Predstava")
+     * @Max\I18n(label = "dogodek.predstava", description = "dogodek.d.predstava")
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Predstava
      */
@@ -116,7 +116,7 @@ class Dogodek
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Zasedenost", inversedBy="dogodek")
      * @ORM\JoinColumn(name="zasedenost_id", referencedColumnName="id", unique=true)
-     * @Max\I18n(label="Zasedenost",  description="Zasedenost")
+     * @Max\I18n(label = "dogodek.zasedenost", description = "dogodek.d.zasedenost")
      * @Max\Ui(type="toone")
      * @var Zasedenost
      */
@@ -125,7 +125,7 @@ class Dogodek
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Vaja", inversedBy="dogodek")
      * @ORM\JoinColumn(name="vaja_id", referencedColumnName="id", unique=true)
-     * @Max\I18n(label="Vaja",  description="Vaja")
+     * @Max\I18n(label = "dogodek.vaja", description = "dogodek.d.vaja")
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Vaja
      */
@@ -134,16 +134,18 @@ class Dogodek
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Gostovanje", inversedBy="dogodek")
      * @ORM\JoinColumn(name="gostovanje_id", referencedColumnName="id", unique=true)
-     * @Max\I18n(label="Gostovanje",  description="Gostovanje")
+     * @Max\I18n(label = "dogodek.gostovanje", description = "dogodek.d.gostovanje")
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Gostovanje
      */
     protected $gostovanje;
 
     /**
+     * Dogodek, ki ni ne vaja, ne predstava, ne gostovanje, zaseda pa prostor
+     * 
      * @ORM\OneToOne(targetEntity="Koledar\Entity\DogodekSplosni", inversedBy="dogodek")
      * @ORM\JoinColumn(name="dogodek_splosni_id", referencedColumnName="id", unique=true)
-     * @Max\I18n(label="Splošni dogodek",  description="Dogodek, ki ni ne vaja, ne predstava, ne gostovanje, zaseda pa prostor")
+     * @Max\I18n(label = "dogodek.splosni", description = "dogodek.d.splosni")
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\DogodekSplosni
      */
@@ -151,7 +153,7 @@ class Dogodek
 
     /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Prostor")
-     * @Max\I18n(label="Prostor",  description="Prostor")
+     * @Max\I18n(label = "dogodek.prostor", description = "dogodek.d.prostor")
      * @Max\Ui(type="toone")
      * @var \Prodaja\Entity\Prostor
      */
@@ -172,12 +174,12 @@ class Dogodek
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona", inversedBy="dogodki")
      * @ORM\JoinColumn(name="sezona_id", referencedColumnName="id")
-     * @Max\I18n(label="Sezona",  description="Sezona")
+     * @Max\I18n(label = "dogodek.sezona", description = "dogodek.d.sezona")
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Sezona
      */
     protected $sezona;
-    private $razredi  = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::SPLOSNO, self::ZASEDENOST];
+    private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::SPLOSNO, self::ZASEDENOST];
 
     public function __construct()
     {
@@ -524,7 +526,7 @@ class Dogodek
         return $this;
     }
 
-        /**
+    /**
      * @return mixed
      */
     public function getTerminiStoritve()

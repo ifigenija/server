@@ -47,11 +47,7 @@ forms:
                   type: byRef
                   targetEntity: Prodaja\Entity\Prostor
                 - title
-                - status
-                - name: prostor
-                  targetEntity: Prodaja\Entity\Prostor
-                  type: byref
-                  
+                - status                  
 lists:
     default: 
         filter:
