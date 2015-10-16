@@ -7,9 +7,9 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Nalaganje privzetih Drzav
+ * Nalaganje Tipov Vaj
  *
- * @author boris
+ * @author rado
  */
 class TipVajeFixture
         extends AbstractFixture
@@ -27,7 +27,6 @@ class TipVajeFixture
     }
 
     /**
-     *
      * @param string $object
      * @param array $vals
      */
