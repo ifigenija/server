@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping AS ORM;
+use Max\Entity\Base;
 
 /**
+ *   @ORM\Entity
+ *
  *   name        : ime opcije
  *                 opcija je lahko globalno in/ali uporabniško nastavljiva; v tem
  *                 primeru se vrednost zapiše v OptionValue entiteto
@@ -14,13 +17,12 @@ use Doctrine\ORM\Mapping AS ORM;
  *   perUser     : opicjo lahko uporabnik spremeni, v tem primeru bo veljala le zanj
  *   readOnly    : če je true, potem opcija ni niti globalno niti uporabniško nastavljiva
  *   public      : velja za anonymous uporabnika
- *   role        : se uporabi če je posamezno polje v entiteti zaščiteno in dostop do njega 
+ *   role        : se uporabi če je posamezno polje v entiteti zaščiteno in dostop do njega
  *                 zahteva posebne uporabniške pravice
  *
- *   @ORM\Entity
  */
 class Option
-        extends \Max\Entity\Base
+        extends Base
 {
 
     /**

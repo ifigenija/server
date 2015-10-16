@@ -63,10 +63,9 @@ trait DogodekTrait
 
     /**
      *
-     * @param string $prostor
      * @return self
      */
-    public function setProstor( $prostor = null)
+    public function setProstor(\Prodaja\Entity\Prostor $prostor = null)
     {
         if (!$this->dogodek) {
             $this->dodajDogodek();

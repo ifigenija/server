@@ -33,7 +33,7 @@ class VajaCest
     private $restUrl        = '/rest/vaja';
     private $dogodekUrl     = '/rest/dogodek';
     private $uprizoritevUrl = '/rest/uprizoritev';
-    private $obj;
+    private $obj1;
     private $obj2;
     private $obj3;
     private $obj4;
@@ -42,6 +42,12 @@ class VajaCest
     private $lookUprizoritev1;
     private $lookUprizoritev2;
     private $lookUprizoritev3;
+    private $lookTipVaje1;
+    private $lookTipVaje2;
+    private $lookTipVaje3;
+    private $lookProstor1;
+    private $lookProstor2;
+    private $lookProstor3;
 
     public function _before(ApiTester $I)
     {
@@ -60,42 +66,43 @@ class VajaCest
     public function lookupUprizoritev(ApiTester $I)
     {
         $this->lookUprizoritev1 = $look                   = $I->lookupEntity("uprizoritev", "0001", false);
-        $I->assertNotEmpty($look);
+        $I->assertGuid($look['id']);
         $this->lookUprizoritev2 = $look                   = $I->lookupEntity("uprizoritev", "0002", false);
-        $I->assertNotEmpty($look);
+        $I->assertGuid($look['id']);
         $this->lookUprizoritev3 = $look                   = $I->lookupEntity("uprizoritev", "0003", false);
-        $I->assertNotEmpty($look);
+        $I->assertGuid($look['id']);
     }
 
     /**
-     *  kreiramo zapis
      * 
      * @param ApiTester $I
      */
-    public function create(ApiTester $I)
+    public function lookupTipVaje(ApiTester $I)
     {
-        $data      = [
-            'zaporedna'   => 6,
-            'porocilo'    => 'zz',
-            'dogodek'     => null, // najprej mora biti kreirana vaja, šele potem dogodek.
-            'uprizoritev' => $this->lookUprizoritev1['id'],
-        ];
-        $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['porocilo'], 'zz');
+        $this->lookTipVaje1 = $look               = $I->lookupEntity("tipvaje", "0001", false);
+        $I->assertGuid($look['id']);
 
-        // kreiramo še en zapis
-        $data       = [
-            'zaporedna'   => 2,
-            'porocilo'    => 'aa',
-            'dogodek'     => null, //najprej mora biti kreirana vaja, šele potem dogodek.
-            'uprizoritev' => $this->lookUprizoritev1['id'],
-        ];
-        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['porocilo'], 'aa');
+        $this->lookTipVaje2 = $look               = $I->lookupEntity("tipvaje", "0002", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookTipVaje3 = $look               = $I->lookupEntity("tipvaje", "0003", false);
+        $I->assertGuid($look['id']);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupProstor(ApiTester $I)
+    {
+        $this->lookProstor1 = $look               = $I->lookupEntity("prostor", "0001", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookProstor2 = $look               = $I->lookupEntity("prostor", "0002", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookProstor3 = $look               = $I->lookupEntity("prostor", "0003", false);
+        $I->assertGuid($look['id']);
     }
 
     /**
@@ -105,84 +112,53 @@ class VajaCest
      * 
      * @param ApiTester $I
      */
-    public function createZDogodkom(ApiTester $I)
+    public function create(ApiTester $I)
     {
-        $zacetek    = '2014-05-07T00:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $zacetek    = '2014-05-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data       = [
-            'zacetek'     => $zacetek,
-            'konec'       => null, // prazno, da ga sam doda zraven
+            'tipvaje'     => $this->lookTipVaje1['id'],
             'zaporedna'   => 9,
             'porocilo'    => 'dd',
-            'uprizoritev' => $this->lookUprizoritev3['id'],
+            'uprizoritev' => $this->lookUprizoritev1['id'],
+            'title'       => "Vaja $zacetek",
+            'status'      => '100s',
+            'zacetek'     => $zacetek,
+            'konec'       => '2014-05-07T14:00:00+0200',
+            'prostor'     => $this->lookProstor1['id'],
         ];
-        $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['dogodek']['zacetek'], $zacetek);
-        $I->assertEquals($ent['dogodek']['konec'], '2014-05-07T04:00:00+0200'); // začetek + 4h
+        codecept_debug($data);
+        $I->assertEquals($ent['zacetek'], $data['zacetek']);
+        $I->assertEquals($ent['konec'], $data['konec']);
 
         /**
          * preveri dogodek
          */
-        $dogodek = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']['id']);
+        $this->objDogodek = $dogodek          = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']);
         codecept_debug($dogodek);
         $I->assertGuid($dogodek['id']);
-        $I->assertEquals($dogodek['zacetek'], $zacetek, "začetek");
-        $I->assertEquals($dogodek['konec'], '2014-05-07T04:00:00+0200', "konec"); // začetek + 4h
-    }
+        $I->assertEquals($dogodek['zacetek'], $data['zacetek'], "začetek");
+        $I->assertEquals($dogodek['konec'], $data['konec'], "konec");
 
-    /**
-     *  kreiramo zapis
-     * 
-     * najprej mora biti generirana vaja, šele potem lahko generiramo dogodek
-     * 
-     * @depends create
-     * @param ApiTester $I
-     */
-    public function createDogodekZVajo(ApiTester $I)
-    {
-        $data             = [
-            'planiranZacetek' => '2011-02-01T00:00:00+0100',
-            'zacetek'         => '2012-02-01T00:00:00+0100',
-            'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => '200s',
-            'razred'          => '200s',
-            'termin'          => 'zz',
-            'ime'             => 'zz',
-            'predstava'       => null,
-            'zasedenost'      => null,
-            'vaja'            => $this->obj['id'],
-            'gostovanje'      => null,
-            'splosni'         => null,
-            'prostor'         => null,
-            'sezona'          => null,
+        /**
+         * kreiramo še eno vajo
+         */
+        $zacetek    = '2014-05-08T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data       = [
+            'tipvaje'     => NULL,
+            'zaporedna'   => 2,
+            'porocilo'    => 'ee',
+            'uprizoritev' => $this->lookUprizoritev1['id'],
+            'title'       => "Vaja $zacetek",
+            'status'      => '200s',
+            'zacetek'     => $zacetek,
+            'konec'       => '2014-05-08T14:00:00+0200',
+            'prostor'     => null,
         ];
-        $this->objDogodek = $ent              = $I->successfullyCreate($this->dogodekUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals("200s", $ent['status']);
-
-        //kreiramo še en zapis
-        $data = [
-            'planiranZacetek' => '2011-02-01T00:00:00+0100',
-            'zacetek'         => '2012-02-01T00:00:00+0100',
-            'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => "100s",
-            'razred'          => '200s',
-            'termin'          => 'aa',
-            'ime'             => 'aa',
-            'predstava'       => null,
-            'zasedenost'      => null,
-            'vaja'            => $this->obj2['id'],
-            'gostovanje'      => null,
-            'splosni'         => null,
-            'prostor'         => null,
-            'sezona'          => null,
-        ];
-        $ent  = $I->successfullyCreate($this->dogodekUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals("100s", $ent['status']);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -197,7 +173,7 @@ class VajaCest
         codecept_debug($list);
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertEquals(2, $list[0]['zaporedna']);      //  odvisno od sortiranja
-        $I->assertEquals(6, $list[$totRec - 1]['zaporedna']);      //  odvisno od sortiranja
+        $I->assertEquals(9, $list[$totRec - 1]['zaporedna']);      //  odvisno od sortiranja
     }
 
     /**
@@ -208,12 +184,12 @@ class VajaCest
      */
     public function update(ApiTester $I)
     {
-        $ent             = $this->obj;
+        $ent             = $this->obj1;
         $ent['porocilo'] = 'yy';
 
-        $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['porocilo'], 'yy');
+        $I->assertEquals($entR['porocilo'], $ent['porocilo']);
     }
 
     /**
@@ -224,51 +200,34 @@ class VajaCest
      */
     public function read(\ApiTester $I)
     {
-        $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         codecept_debug($ent);
+        $zacetek = '2014-05-07T10:00:00+0200';
         $I->assertGuid($ent['id']);
-        $I->assertEquals($ent['zaporedna'], 6);
+        $I->assertEquals($ent['tipvaje'], $this->lookTipVaje1['id']);
+        $I->assertEquals($ent['zaporedna'], 9);
         $I->assertEquals($ent['porocilo'], 'yy');
-        $I->assertEquals($ent['dogodek']['id'], $this->objDogodek['id']);
         $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev1['id']);
+        $I->assertEquals($ent['title'], "Vaja $zacetek");
+        $I->assertEquals($ent['status'], '100s');
+        $I->assertEquals($ent['zacetek'], $zacetek);
+        $I->assertEquals($ent['konec'], '2014-05-07T14:00:00+0200');
+        $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
     }
 
     /**
      * brisanje zapisa
-     * 
-     * @depends create
-     */
-    public function deleteDogodek(ApiTester $I)
-    {
-        $I->successfullyDelete($this->dogodekUrl, $this->objDogodek['id']);
-        $I->failToGet($this->dogodekUrl, $this->objDogodek['id']);
-    }
-
-    /**
-     * brisanje zapisa
-     * @depends deleteDogodek
      * @depends create
      */
     public function delete(ApiTester $I)
     {
-        $I->successfullyDelete($this->restUrl, $this->obj['id']);
-        $I->failToGet($this->restUrl, $this->obj['id']);
-    }
-
-    /**
-     * poskusi brisanje vaje z dogodkom
-     * 
-     * @depends createZDogodkom
-     */
-    public function deleteVajeZDogodkom(ApiTester $I)
-    {
+        $I->successfullyDelete($this->restUrl, $this->obj1['id']);
+        $I->failToGet($this->restUrl, $this->obj1['id']);
         /**
-         * ne gre izbrisati, ker je dogodek referenciran
+         * ali je hkrati brisal tudi dogodek
          */
-        $resp = $I->failToDelete($this->restUrl, $this->obj3['id']);
-        codecept_debug($resp);
-        $I->assertEquals(23503, $resp[1]['code'], " Foreign key violation - brisanje  vaje ni mogoček, ker se uporablja v dogodku");
+        $I->failToGet($this->dogodekUrl, $this->obj1['dogodek']);
     }
 
 }

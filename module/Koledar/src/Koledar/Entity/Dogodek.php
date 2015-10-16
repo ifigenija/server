@@ -518,13 +518,13 @@ class Dogodek
      * @param \Prodaja\Entity\Prostor $prostor
      * @return Dogodek
      */
-    public function setProstor(Prostor $prostor = null)
+    public function setProstor(\Prodaja\Entity\Prostor $prostor = null)
     {
         $this->prostor = $prostor;
         return $this;
     }
 
-    /**
+        /**
      * @return mixed
      */
     public function getTerminiStoritve()
