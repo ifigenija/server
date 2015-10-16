@@ -45,7 +45,7 @@ class Zaposlitve
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
-                $this->expect(!empty($options['oseba']), "Oseba je obvezna", 770051);
+                //$this->expect(!empty($options['oseba']), "Oseba je obvezna", 770051);
                 $qb   = $this->getDefaultQb($options);
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
@@ -97,6 +97,12 @@ class Zaposlitve
             $naz = $e->eq('oseba.id', ':oseba');
             $qb->andWhere($naz);
             $qb->setParameter('oseba', "{$options['oseba']}", "string");
+        }
+        if (!empty($options['organizacijskaenota'])) {
+            $qb->join('p.organizacijskaEnota', 'organizacijskaEnota');
+            $naz = $e->eq('organizacijskaEnota.id', ':orgEnota');
+            $qb->andWhere($naz);
+            $qb->setParameter('orgEnota', "{$options['organizacijskaenota']}", "string");
         }
         return $qb;
     }

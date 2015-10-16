@@ -33,12 +33,19 @@ lists:
     default: 
         filter:
             elements:                 
+                - name: organizacijskaenota
+                  type: toone
+                  options:
+                      label: Organizacijska enota
+                      targetEntity: App\Entity\OrganizacijskaEnota
+                      required: false
+            elements:                 
                 - name: oseba
                   type: toone
                   options:
                       label: Oseba
                       targetEntity: App\Entity\Oseba
-                      required: false    
+                      required: false
         hydrator:
             exclude: []
             lookups: [ oseba ]
