@@ -35,6 +35,8 @@ class AvtorizacijeTerminStoritveCest
     private $lookupAlternacijaUrl = '/lookup/alternacija';
     private $obj1;
     private $obj2Teh;
+    private $obj3dez;
+    private $obj4gost;
     private $lookAlternacija1;
     private $lookAlternacija2Teh;
     private $roleUrl              = '/rest/role';
@@ -203,11 +205,8 @@ class AvtorizacijeTerminStoritveCest
 
         $resp       = $I->successfullyGetList($this->restUrl, []);
         $list       = $resp['data'];
-//        codecept_debug($list);
-        $I->assertNotEmpty($list);
-//        $this->obj1 = $ent        = array_pop($list);
-//        codecept_debug($ent);
-//        $I->assertNotEmpty($ent);
+        codecept_debug($list);
+        //        $I->assertNotEmpty($list);
         // poiščemo termina storitve - najprej za ne-tehnika:
         $key        = array_search($this->lookAlternacija1['id'], array_column($list, 'alternacija'));
         $this->obj1 = $ent        = $list[$key];
@@ -219,8 +218,13 @@ class AvtorizacijeTerminStoritveCest
         codecept_debug($ent);
 
         // poiščemo termina brez alternacije
-        $key        = array_search(null, array_column($list, 'alternacija'));
-        $this->obj3 = $ent        = $list[$key];
+        $key           = array_search(true, array_column($list, 'dezurni'));
+        $this->obj3dez = $ent           = $list[$key];
+        codecept_debug($ent);
+
+        // poiščemo termin gost
+        $key            = array_search(true, array_column($list, 'gost'));
+        $this->obj4gost = $ent            = $list[$key];
         codecept_debug($ent);
     }
 
@@ -237,7 +241,7 @@ class AvtorizacijeTerminStoritveCest
         $ent['planiranoTraja'] = 1;
         $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
 
-        $ent                   = $this->obj3;
+        $ent                   = $this->obj3dez;
         $ent['planiranoTraja'] = 1;
         $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
     }
@@ -261,7 +265,7 @@ class AvtorizacijeTerminStoritveCest
         $I->assertNotEmpty($resp);
 
         // zapis brez alternacije / uprizoritve
-        $ent                   = $this->obj3;
+        $ent                   = $this->obj3dez;
         $ent['planiranoTraja'] = 1;
         $resp                  = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($resp);
@@ -286,7 +290,7 @@ class AvtorizacijeTerminStoritveCest
         $I->assertNotEmpty($resp);
 
         // zapis brez alternacije / uprizoritve
-        $ent                   = $this->obj3;
+        $ent                   = $this->obj3dez;
         $ent['planiranoTraja'] = 1;
         $resp                  = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($resp);
@@ -309,7 +313,7 @@ class AvtorizacijeTerminStoritveCest
         $I->failToUpdate($this->restUrl, $ent['id'], $ent);
 
         // zapis brez alternacije / uprizoritve
-        $ent                   = $this->obj3;
+        $ent                   = $this->obj3dez;
         $ent['planiranoTraja'] = 1;
         $I->failToUpdate($this->restUrl, $ent['id'], $ent);
     }
@@ -333,7 +337,7 @@ class AvtorizacijeTerminStoritveCest
         $I->assertNotEmpty($resp);
 
         // zapis brez alternacije / uprizoritve
-        $ent                   = $this->obj3;
+        $ent                   = $this->obj3dez;
         $ent['planiranoTraja'] = 1;
         $resp                  = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($resp);
@@ -357,9 +361,14 @@ class AvtorizacijeTerminStoritveCest
         $resp                  = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($resp);
 
-        $ent                   = $this->obj3;
+        $ent                   = $this->obj3dez;
         $ent['planiranoTraja'] = 3;
-        $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+//        $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        /**
+         *  inšpicient lahko ažurira vse TS , če obstaja uprizoritev
+         */
+        $resp                  = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $I->assertNotEmpty($resp);
     }
 
     /**
@@ -380,7 +389,7 @@ class AvtorizacijeTerminStoritveCest
         $resp                  = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($resp);
 
-        $ent                   = $this->obj3;
+        $ent                   = $this->obj3dez;
         $ent['planiranoTraja'] = 3;
         $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
     }
@@ -402,7 +411,7 @@ class AvtorizacijeTerminStoritveCest
         $ent['planiranoTraja'] = 7;
         $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
 
-        $ent                   = $this->obj3;
+        $ent                   = $this->obj3dez;
         $ent['planiranoTraja'] = 7;
         $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
     }
@@ -424,7 +433,7 @@ class AvtorizacijeTerminStoritveCest
         $ent['planiranoTraja'] = 6;
         $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
 
-        $ent                   = $this->obj3;
+        $ent                   = $this->obj3dez;
         $ent['planiranoTraja'] = 6;
         $resp                  = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
     }

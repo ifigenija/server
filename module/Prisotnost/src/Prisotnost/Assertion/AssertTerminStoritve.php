@@ -63,21 +63,34 @@ class AssertTerminStoritve
         $funR = $em->getRepository('Produkcija\Entity\Funkcija');
         $uprR = $em->getRepository('Produkcija\Entity\Uprizoritev');
         $oseR = $em->getRepository('App\Entity\Oseba');
+
+        /**
+         * za dežurnega pri predstavi in gosta ima inšpicient pravico ažurirati
+         */
+        $fpodrocje = '';      //init
         if (!empty($terminStoritve->getAlternacija())) {
             $alt = $altR->findOneById($terminStoritve->getAlternacija());
             if (!empty($alt->getFunkcija())) {
                 $fun       = $funR->findOneById($alt->getFunkcija());
                 $fpodrocje = $fun->getPodrocje();                      // ali je tehnik ali netehnik
-                if (!empty($fun->getUprizoritev())) {
-                    $upr = $uprR->findOneById($fun->getUprizoritev());
-                }
             }
         }
 
-        // če smo našli uprizoritev, pogledamo še, če je vodja ekipe
-        // ident -> oseba -> alternacije ->funkcija -> uprizoritev  (ista kot tista iz terminastoritve)
-        if (!empty($upr)) {
+        /**
+         * najdemo uprizoritev, ki pripada temu terminu storitve
+         */
+        if (!empty($terminStoritve->getDogodek())) {
+            $upr = $terminStoritve->getDogodek()->getUprizoritev();
+        }
 
+        /**
+         * če smo našli uprizoritev, pogledamo še, če je vodja ekipe
+         * ident -> oseba -> alternacije ->funkcija -> uprizoritev  (ista kot tista iz terminastoritve)
+         */
+        if (!empty($upr)) {
+            /**
+             * ali je uporabnik vodja ekipe inšpicient ali tehnik?
+             */
             $qb = $em->createQueryBuilder();
             $e  = $qb->expr();
             $qb->select('count(a) c');
@@ -90,7 +103,10 @@ class AssertTerminStoritve
             $qb->andWhere('o.user=:user');
             $qb->setParameter('user', $iden->getId(), "string");
 
-            // ali vodja ekipe umetnik ali igralec
+            /**
+             * $$ tu bi še lahko kontrolirali, če je še veljavna alternacija 
+             */
+            // ali vodja ekipe umetnik ali igralec ali inšpicient
             $qbUI    = clone $qb;
             $qbUI->andWhere('f.podrocje = :igralec OR f.podrocje = :umetnik OR f.podrocje = :inspicient');
             $qbUI->setParameter('igralec', 'igralec', "string");
@@ -99,6 +115,10 @@ class AssertTerminStoritve
             $queryUI = $qbUI->getQuery();
             $cntUI   = $queryUI->getSingleScalarResult();
             if ($cntUI >= 1) {             //vodja celotne ekipe 
+                /**
+                 * lahko za celotno ekipo - torej tudi za
+                 * dezurnega in gosta
+                 */
                 return true;
             }
 
