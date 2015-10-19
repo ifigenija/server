@@ -22,10 +22,12 @@ class Predstave
 
     protected $sortOptions = [
         "default" => [
-            "zaporedna" => ["alias" => "p.zaporedna"]
+            "zaporedna"    => ["alias" => "p.zaporedna"],
+            "zaporednaSez" => ["alias" => "p.zaporednaSez"],
         ],
         "vse"     => [
-            "zaporedna" => ["alias" => "p.zaporedna"]
+            "zaporedna"    => ["alias" => "p.zaporedna"],
+            "zaporednaSez" => ["alias" => "p.zaporednaSez"],
         ]
     ];
 
@@ -90,6 +92,5 @@ class Predstave
         parent::delete($object);
         $this->getEntityManager()->remove($object->getDogodek());
     }
-
 
 }

@@ -8,6 +8,7 @@ forms:
 #            - id
 #            - dogodek
             - zaporedna
+            - zaporednaSez
             - porocilo
             - uprizoritev
             - gostovanje
@@ -33,6 +34,13 @@ forms:
               options: 
                   label: Konec
                   required: false
+#                                   če je gostovanje, ne potrebujemo prostora
+            - name: prostor
+              type: toone
+              options:
+                  targetEntity: Prodaja\Entity\Prostor
+                  label: Prostor
+                  required: false
         hydrator:
             byValue:
                 - dogodek
@@ -41,7 +49,11 @@ forms:
                   type: datetime
                 - name: konec
                   type: datetime
-
+                - name: prostor
+                  type: byRef
+                  targetEntity: Prodaja\Entity\Prostor
+                - title
+                - status                  
 lists:
     default: 
         filter:
