@@ -5,6 +5,7 @@ namespace Koledar\Entity;
 use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
 use Produkcija\Entity\Uprizoritev;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Entiteta za naslove
@@ -94,9 +95,20 @@ class Predstava
      */
     protected $gostovanje;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Abonmaji\Entity\Abonma", inversedBy="predstave")
+     * @var <Abonmaji>
+     */
+    protected $abonmaji;
+
     public function validate($mode = 'update')
     {
         $this->expect($this->uprizoritev, "Predstava mora biti vezana na uprizoritev", 1000472);
+    }
+
+    public function __construct()
+    {
+        $this->abonmaji = new ArrayCollection();
     }
 
     public function lahkoBrisem()
@@ -251,6 +263,17 @@ class Predstava
     function setZaporednaSez($zaporednaSez)
     {
         $this->zaporednaSez = $zaporednaSez;
+        return $this;
+    }
+
+    function getAbonmaji()
+    {
+        return $this->abonmaji;
+    }
+
+    function setAbonmaji($abonmaji)
+    {
+        $this->abonmaji = $abonmaji;
         return $this;
     }
 

@@ -12,7 +12,9 @@ use ApiTester;
  *      -get - kontrola vseh polj te entitete
  *      -delete
  *      validate metodo za entiteto - zaenkrat ni veljavne validacije
- *      relacije z drugimi entitetami - zaenkrat jih ni
+ * relacije z drugimi entitetami (to many relacije)
+ * .pri many to many relacijah testiraj : update, get (list+id), delete
+ *          .pri one to many relacijah testiraj : get (list+id)
  *      getlist različne variante relacij
  *      - vse
  *      - default

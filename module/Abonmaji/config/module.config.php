@@ -20,7 +20,8 @@ return [
         'invokables' => [
         ],
         'factories'  => [
-            'Rest\abonma' => 'Max\Factory\RestControllerFactory',
+            'Rest\abonma'     => 'Max\Factory\RestControllerFactory',
+            'Relation\abonma' => 'Max\Factory\ToManyControllerFactory',
         ],
     ],
     'router'          => [

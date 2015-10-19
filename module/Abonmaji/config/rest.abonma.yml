@@ -25,3 +25,9 @@ lists:
                     label: Išči    
 #    vse:
 #        filter:
+relation:
+    default:
+        predstave:
+            enabled: true
+            hydrator:
+                exclude: []

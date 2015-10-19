@@ -74,3 +74,10 @@ lists:
                   type: datetime
 #    vse: 
 #        filter:
+relation:
+    default:
+        abonmaji:
+            enabled: true
+            hydrator:
+                exclude: []
+                

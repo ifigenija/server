@@ -49,6 +49,10 @@ class PredstavaCest
     private $lookProstor1;
     private $lookProstor2;
     private $lookProstor3;
+    private $abonmaUrl      = '/rest/abonma';
+    private $objAbonma1;
+    private $objAbonma2;
+    private $objAbonma3;
 
     public function _before(ApiTester $I)
     {
@@ -98,6 +102,30 @@ class PredstavaCest
 
         $this->lookProstor3 = $look               = $I->lookupEntity("prostor", "0003", false);
         $I->assertGuid($look['id']);
+    }
+
+    /**
+     * najdemo abonmaje
+     * 
+     * @param ApiTester $I
+     */
+    public function getListAbonmaji(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->abonmaUrl, []);
+        $list = $resp['data'];
+        $I->assertNotEmpty($list);
+
+        $this->objAbonma1 = $ent              = array_pop($list);
+        codecept_debug($ent);
+        $I->assertGuid($ent['id']);
+
+        $this->objAbonma2 = $ent              = array_pop($list);
+        codecept_debug($ent);
+        $I->assertGuid($ent['id']);
+        
+        $this->objAbonma3 = $ent              = array_pop($list);
+        codecept_debug($ent);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -221,18 +249,18 @@ class PredstavaCest
         $zacetek = '2014-05-07T20:00:00+0200';
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['dogodek']['id'], $this->objDogodek['id']);
-        $I->assertEquals($ent['zaporedna'], 6 );
-        $I->assertEquals($ent['zaporednaSez'], 3 );
+        $I->assertEquals($ent['zaporedna'], 6);
+        $I->assertEquals($ent['zaporednaSez'], 3);
         $I->assertEquals($ent['porocilo'], 'uu');
         $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev1['id']);
         $I->assertEquals($ent['title'], "Predstava $zacetek");
         $I->assertEquals($ent['status'], '200s');
         $I->assertEquals($ent['zacetek'], $zacetek);
-        $I->assertEquals($ent['konec'],  '2014-05-07T23:00:00+0200');
+        $I->assertEquals($ent['konec'], '2014-05-07T23:00:00+0200');
         $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
     }
 
-  /**
+    /**
      * brisanje zapisa
      * @depends create
      */

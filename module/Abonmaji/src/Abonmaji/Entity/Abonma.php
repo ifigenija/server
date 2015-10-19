@@ -5,15 +5,15 @@ namespace Abonmaji\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Max\Ann\Entity as Max;
 use Max\Entity\Base;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Abonmaji\Repository\Abonmaji")
  * @Max\Id(prefix="0010")
  * @Max\I18n(label="Abonma",plural="Abonmaji")
-
  */
 class Abonma
-        extends Base
+        extends \Max\Entity\Base
 {
 
     /**
@@ -64,9 +64,20 @@ class Abonma
      */
     protected $kapaciteta;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Koledar\Entity\Predstava", mappedBy="abonmaji")
+     * @var <Predstave>
+     */
+    protected $predstave;
+
     public function validate($mode = 'update')
     {
         $this->expect($this->stPredstav >= 0, "Število predstava ne sme biti negativno", 1000330);
+    }
+
+    public function __construct()
+    {
+        $this->predstave = new ArrayCollection();
     }
 
     public function getId()
@@ -132,6 +143,17 @@ class Abonma
     public function setKapaciteta($kapaciteta)
     {
         $this->kapaciteta = $kapaciteta;
+        return $this;
+    }
+
+    function getPredstave()
+    {
+        return $this->predstave;
+    }
+
+    function setPredstave($predstave)
+    {
+        $this->predstave = $predstave;
         return $this;
     }
 
