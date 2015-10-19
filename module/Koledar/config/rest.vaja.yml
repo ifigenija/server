@@ -37,6 +37,12 @@ forms:
                   targetEntity: Prodaja\Entity\Prostor
                   label: Prostor
                   required: false
+            - name: sezona
+              type: toone
+              options:
+                  targetEntity: Koledar\Entity\Sezona
+                  label: Sezona
+                  required: false
         hydrator:
             virtual:
                 - name: zacetek
@@ -46,6 +52,9 @@ forms:
                 - name: prostor
                   type: byRef
                   targetEntity: Prodaja\Entity\Prostor
+                - name: sezona
+                  type: byRef
+                  targetEntity: Koledar\Entity\Sezona
                 - title
                 - status                  
 lists:

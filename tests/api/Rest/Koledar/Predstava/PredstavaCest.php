@@ -53,6 +53,9 @@ class PredstavaCest
     private $objAbonma1;
     private $objAbonma2;
     private $objAbonma3;
+    private $lookSezona1;
+    private $lookSezona2;
+    private $lookSezona3;
 
     public function _before(ApiTester $I)
     {
@@ -105,6 +108,22 @@ class PredstavaCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupSezona(ApiTester $I)
+    {
+        $this->lookSezona1 = $look              = $I->lookupEntity("sezona", "2015", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona2 = $look              = $I->lookupEntity("sezona", "2016", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona3 = $look              = $I->lookupEntity("sezona", "2017", false);
+        $I->assertGuid($look['id']);
+    }
+
+    /**
      * najdemo abonmaje
      * 
      * @param ApiTester $I
@@ -122,7 +141,7 @@ class PredstavaCest
         $this->objAbonma2 = $ent              = array_pop($list);
         codecept_debug($ent);
         $I->assertGuid($ent['id']);
-        
+
         $this->objAbonma3 = $ent              = array_pop($list);
         codecept_debug($ent);
         $I->assertGuid($ent['id']);
@@ -166,6 +185,7 @@ class PredstavaCest
             'zacetek'      => $zacetek,
             'konec'        => '2014-05-07T23:00:00+0200',
             'prostor'      => $this->lookProstor1['id'],
+            'sezona'      => $this->lookSezona1['id'],
 //            'gostovanje'  => $this->objGostovanje['id'],
 //            'dogodek'     => NULL,
         ];
@@ -199,6 +219,7 @@ class PredstavaCest
             'zacetek'      => $zacetek,
             'konec'        => '2014-05-08T23:00:00+0200',
             'prostor'      => null, // če je gostovanje ne rabimo prostora
+            'sezona'      => null, 
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -258,6 +279,7 @@ class PredstavaCest
         $I->assertEquals($ent['zacetek'], $zacetek);
         $I->assertEquals($ent['konec'], '2014-05-07T23:00:00+0200');
         $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
+        $I->assertEquals($ent['sezona'], $this->lookSezona1['id']);
     }
 
     /**
@@ -272,6 +294,54 @@ class PredstavaCest
          * ali je hkrati brisal tudi dogodek
          */
         $I->failToGet($this->dogodekUrl, $this->obj1['dogodek']['id']);
+    }
+
+    /**
+     * kreiramo relacijo
+     * 
+     * @depends create
+     * @depends getListAbonmaji
+     * 
+     * @param ApiTester $I
+     */
+    public function dodajAbonmaNaPredstavo(ApiTester $I)
+    {
+        $resp = $I->successfullyUpdate($this->restUrl, $this->obj2['id'] . "/abonmaji/" . $this->objAbonma1['id'], []);
+        codecept_debug($resp);
+
+        // ustvarimo še eno relacijo
+        $resp = $I->successfullyUpdate($this->restUrl, $this->obj2['id'] . "/abonmaji/" . $this->objAbonma2['id'], []);
+        codecept_debug($resp);
+    }
+
+    /**
+     * preberemo relacije
+     * @depends dodajAbonmaNaPredstavo
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZAbonma(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "abonmaji", "");
+        $I->assertGreaterThanOrEqual(2, count($resp));
+        codecept_debug($resp);
+
+        // get po abonma ID
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "abonmaji", $this->objAbonma1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * brisanje relacij
+     * @depends dodajAbonmaNaPredstavo
+     * 
+     * @param ApiTester $I
+     */
+    public function deleteRelacijoZAbonma(ApiTester $I)
+    {
+        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->obj2['id'], "abonmaji", $this->objAbonma1['id']);
+
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "abonmaji", $this->objAbonma1['id']);
     }
 
 }

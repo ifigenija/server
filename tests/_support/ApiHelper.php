@@ -372,9 +372,10 @@ class ApiHelper
 
         $I->seeResponseCodeIs('200');
         $I->seeResponseIsJson();
-        $resp = $I->grabDataFromJsonResponse();
+//        $resp = $I->grabDataFromJsonResponse();
+        $resp = $I->grabResponse();
         codecept_debug($resp);
-        $I->assertEquals($resp, [], "Json prazen seznam");
+        $I->assertEquals($resp, "[]", "Json prazen seznam");
         return $I->grabDataFromResponseByJsonPath('$.errors');
     }
 

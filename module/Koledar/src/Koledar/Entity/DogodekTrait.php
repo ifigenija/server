@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: boris
@@ -41,7 +42,7 @@ trait DogodekTrait
      * @param string $title
      * @return self
      */
-    public function setTitle( $title = null)
+    public function setTitle($title = null)
     {
         if (!$this->dogodek) {
             $this->dodajDogodek();
@@ -65,7 +66,7 @@ trait DogodekTrait
      *
      * @return self
      */
-    public function setProstor( $prostor = null)
+    public function setProstor($prostor = null)
     {
         if (!$this->dogodek) {
             $this->dodajDogodek();
@@ -85,14 +86,12 @@ trait DogodekTrait
         return null;
     }
 
-
-
     /**
      *
      * @param string $status
      * @return self
      */
-    public function setStatus($status )
+    public function setStatus($status)
     {
         if (!$this->dogodek) {
             $this->dodajDogodek();
@@ -111,7 +110,6 @@ trait DogodekTrait
         }
         return null;
     }
-
 
     /**
      *
@@ -139,6 +137,30 @@ trait DogodekTrait
     {
         if ($this->dogodek) {
             return $this->getDogodek()->getKonec();
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @return self
+     */
+    public function setSezona($sezona = null)
+    {
+        if (!$this->dogodek) {
+            $this->dodajDogodek();
+        }
+        $this->dogodek->setSezona($sezona);
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSezona()
+    {
+        if ($this->dogodek) {
+            return $this->dogodek->getSezona();
         }
         return null;
     }

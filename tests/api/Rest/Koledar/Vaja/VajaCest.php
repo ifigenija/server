@@ -48,6 +48,9 @@ class VajaCest
     private $lookProstor1;
     private $lookProstor2;
     private $lookProstor3;
+    private $lookSezona1;
+    private $lookSezona2;
+    private $lookSezona3;
 
     public function _before(ApiTester $I)
     {
@@ -106,6 +109,22 @@ class VajaCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupSezona(ApiTester $I)
+    {
+        $this->lookSezona1 = $look              = $I->lookupEntity("sezona", "2015", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona2 = $look              = $I->lookupEntity("sezona", "2016", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona3 = $look              = $I->lookupEntity("sezona", "2017", false);
+        $I->assertGuid($look['id']);
+    }
+
+    /**
      *  kreiramo zapisa vaja in dogodek
      * 
      * če je začetek naveden, se kreira zraven tudi dogodek
@@ -125,6 +144,7 @@ class VajaCest
             'zacetek'     => $zacetek,
             'konec'       => '2014-05-07T14:00:00+0200',
             'prostor'     => $this->lookProstor1['id'],
+            'sezona'      => $this->lookSezona1['id'],
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -156,6 +176,7 @@ class VajaCest
             'zacetek'     => $zacetek,
             'konec'       => '2014-05-08T14:00:00+0200',
             'prostor'     => null,
+            'sezona'      => null,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -214,6 +235,7 @@ class VajaCest
         $I->assertEquals($ent['zacetek'], $zacetek);
         $I->assertEquals($ent['konec'], '2014-05-07T14:00:00+0200');
         $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
+        $I->assertEquals($ent['sezona'], $this->lookSezona1['id']);
     }
 
     /**
