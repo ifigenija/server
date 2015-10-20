@@ -43,7 +43,6 @@ class Zaposlitev
      */
     protected $status;
 
-    
     /**
      * @ORM\Column(type="string")
      * @Max\I18n(label="zaposlitev.delovnoMesto",  description="zaposlitev.d.delovnoMesto")
@@ -51,7 +50,7 @@ class Zaposlitev
      * @var string
      */
     protected $delovnoMesto;
-    
+
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Max\I18n(label="zaposlitev.zacetek",  description="zaposlitev.d.zacetek")
@@ -138,7 +137,7 @@ class Zaposlitev
      * @var \App\Entity\Oseba
      */
     protected $oseba;
-    
+
     /**
      * 
      * @ORM\ManyToOne(targetEntity="App\Entity\OrganizacijskaEnota", inversedBy="zaposlitve")
@@ -147,14 +146,14 @@ class Zaposlitev
      * @var \App\Entity\OrganizacijskaEnota
      */
     protected $organizacijskaEnota;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\OrganizacijskaEnota", mappedBy="vodja")
      * @Max\Ui(type="hiddenid");
      * @var <VodjaOrganizacijskihEnot>
      */
     protected $vodjaOrganizacijskihEnot;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\OrganizacijskaEnota", mappedBy="namestnik")
      * @Max\Ui(type="hiddenid");
@@ -164,8 +163,8 @@ class Zaposlitev
 
     public function __construct()
     {
-        $this->alternacije = new ArrayCollection();
-        $this->vodjaOrganizacijskihEnot = new ArrayCollection();
+        $this->alternacije                  = new ArrayCollection();
+        $this->vodjaOrganizacijskihEnot     = new ArrayCollection();
         $this->namestnikOrganizacijskihEnot = new ArrayCollection();
     }
 
@@ -243,6 +242,21 @@ class Zaposlitev
     public function getOseba()
     {
         return $this->oseba;
+    }
+
+    function getOrganizacijskaEnota()
+    {
+        return $this->organizacijskaEnota;
+    }
+
+    function getVodjaOrganizacijskihEnot()
+    {
+        return $this->vodjaOrganizacijskihEnot;
+    }
+
+    function getNamestnikOrganizacijskihEnot()
+    {
+        return $this->namestnikOrganizacijskihEnot;
     }
 
     public function setId($id)
@@ -323,7 +337,7 @@ class Zaposlitev
         return $this;
     }
 
-    public function setOseba(\App\Entity\Oseba $oseba=null)
+    public function setOseba(\App\Entity\Oseba $oseba = null)
     {
         $this->oseba = $oseba;
         return $this;
@@ -340,5 +354,22 @@ class Zaposlitev
         return $this;
     }
 
+    function setOrganizacijskaEnota(\App\Entity\OrganizacijskaEnota $organizacijskaEnota = null)
+    {
+        $this->organizacijskaEnota = $organizacijskaEnota;
+        return $this;
+    }
+
+    function setVodjaOrganizacijskihEnot($vodjaOrganizacijskihEnot)
+    {
+        $this->vodjaOrganizacijskihEnot = $vodjaOrganizacijskihEnot;
+        return $this;
+    }
+
+    function setNamestnikOrganizacijskihEnot($namestnikOrganizacijskihEnot)
+    {
+        $this->namestnikOrganizacijskihEnot = $namestnikOrganizacijskihEnot;
+        return $this;
+    }
 
 }
