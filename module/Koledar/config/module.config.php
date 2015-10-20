@@ -10,11 +10,16 @@
 return [
 
     'service_manager' => [
-        'factories' => [
-        ]
+        'factories'  => [
+        ],
+        'invokables' => [
+            'praznik.rpc.service' => 'Koledar\Rpc\PraznikRpcService',
+            'praznik.service'     => 'Koledar\Service\PraznikService',
+        ],
     ],
     'controllers'     => [
         'invokables' => [
+            'Rpc\koledar' => 'Koledar\Controller\RpcController',
         ],
         'factories'  => [
             'Rest\dogodek'        => 'Max\Factory\RestControllerFactory',
@@ -30,6 +35,7 @@ return [
             'Rest\vaja'           => 'Max\Factory\RestControllerFactory',
             'Rest\zasedenost'     => 'Max\Factory\RestControllerFactory',
             'Rest\tipVaje'        => 'Max\Factory\RestControllerFactory',
+            'Rest\Praznik'        => 'Max\Factory\RestControllerFactory',
         ]
     ],
     'router'          => [

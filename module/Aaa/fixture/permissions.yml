@@ -249,6 +249,12 @@
 -
     name: Predstava-write
     description: Predstava - spreminjanje
+-
+    name: Praznik-read
+    description: Praznik - branje
+-
+    name: Praznik-write
+    description: Praznik - spreminjanje
 
 -
     name: ProdajaPredstave-read

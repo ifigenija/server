@@ -1,0 +1,26 @@
+## YAML Template.
+---
+type: rest
+entityClass: Koledar\Entity\Praznik
+forms:
+    default: 
+        elements:
+#            - id
+            - ime
+            - dan
+            - mesec
+            - leto
+            - delaProst
+lists:
+    default: 
+        filter: 
+            elements: 
+                - name: q
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči..
+                    label: Išči
+        hydrator:
+            - exclude: []
+            
