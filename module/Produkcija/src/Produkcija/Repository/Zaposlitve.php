@@ -77,6 +77,12 @@ class Zaposlitve
         if (!empty($options['status'])) {
             $naz = $e->in('p.status', $options['status']);
             $qb->andWhere($naz);
+        } else {
+            /**
+             * v primeru da je status null prikaži vse aktivne zaposlitve
+             */
+            $status=$e->in('p.status', ['A']);
+            $qb->andWhere($status);
         }
         //$sort = $this->getSort('vse', $qb);
         //$qb->orderBy($sort->order, $sort->dir);
