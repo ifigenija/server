@@ -38,8 +38,7 @@ lists:
                   options:
                       label: Organizacijska enota
                       targetEntity: App\Entity\OrganizacijskaEnota
-                      required: false
-            elements:                 
+                      required: false             
                 - name: oseba
                   type: toone
                   options:
