@@ -183,7 +183,7 @@ class Funkcija
                     $privzetoIme = $alter->getOseba()->getPolnoIme();
                 } else {
                     $ime   = $alter->getOseba()->getPolnoIme();
-                    $imena = $ime . ($imena ? " / " : "") . $imena;
+                    $imena = $imena . ($imena ? " / " : "") . $ime;
                 }
             }
         }
