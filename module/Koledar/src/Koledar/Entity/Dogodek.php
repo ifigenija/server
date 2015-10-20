@@ -18,7 +18,7 @@ use Zend\I18n\Validator\DateTime;
  *    @ORM\Index(name="dogodki_zacetek", columns={"zacetek"}),
  *    @ORM\Index(name="dogodki_konec", columns={"konec"}),
  *    @ORM\Index(name="dogodki_razred", columns={"razred"})})
- * })
+ * })p
  * @Max\I18n(label="Dogodek",plural="Dogodki")
  * @Max\Id(prefix="0024")
  */

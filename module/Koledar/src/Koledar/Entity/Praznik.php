@@ -9,10 +9,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity(repositoryClass="Koledar\Repository\Sezone")
  * @Max\Lookup(ident="sifra",label="ime",search={"ime","sifra"},)
- * @Max\I18n(label="Sezona",plural="Sezone")
+ * @Max\I18n(label="Praznik",plural="Sezone")
  * @Max\Id(prefix="0031")
  */
-class Sezona
+class Praznik
         extends \Max\Entity\Base
 {
 
@@ -79,75 +79,5 @@ class Sezona
     {
         
     }
-    function getId()
-    {
-        return $this->id;
-    }
-
-    function getSifra()
-    {
-        return $this->sifra;
-    }
-
-    function getIme()
-    {
-        return $this->ime;
-    }
-
-    function getZacetek()
-    {
-        return $this->zacetek;
-    }
-
-    function getKonec()
-    {
-        return $this->konec;
-    }
-
-    function getAktivna()
-    {
-        return $this->aktivna;
-    }
-
-    function getDogodki()
-    {
-        return $this->dogodki;
-    }
-
-    function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    function setSifra($sifra)
-    {
-        $this->sifra = $sifra;
-    }
-
-    function setIme($ime)
-    {
-        $this->ime = $ime;
-    }
-
-    function setZacetek($zacetek)
-    {
-        $this->zacetek = $zacetek;
-    }
-
-    function setKonec($konec)
-    {
-        $this->konec = $konec;
-    }
-
-    function setAktivna($aktivna)
-    {
-        $this->aktivna = $aktivna;
-    }
-
-    function setDogodki($dogodki)
-    {
-        $this->dogodki = $dogodki;
-    }
-
 
 }
