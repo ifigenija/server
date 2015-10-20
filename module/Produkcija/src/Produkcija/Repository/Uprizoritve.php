@@ -71,9 +71,9 @@ class Uprizoritve
             /**
              * prikaže naj vse negostujoče
              */
-            $gostFalse=($e->eq('p.gostujoca', "false"));
-            $gostNull=($e->isNull('p.gostujoca'));
-            $qb->andWhere($e->orX($gostFalse,$gostNull));
+            $gostFalse = ($e->eq('p.gostujoca', "false"));
+            $gostNull  = ($e->isNull('p.gostujoca'));
+            $qb->andWhere($e->orX($gostFalse, $gostNull));
         }
 
         if (!empty($options['avtor'])) {
@@ -96,15 +96,11 @@ class Uprizoritve
             $qb->leftJoin('funkcija.alternacije', 'alternacija');
             $qb->leftJoin('alternacija.oseba', 'oseba');
 
-            $ime        = $e->like('lower(oseba.ime)', ':sodelujoci');
-            $priimek    = $e->like('lower(oseba.priimek)', ':sodelujoci');
-            $srednjeIme = $e->like('lower(oseba.srednjeIme)', ':sodelujoci');
-            $psevdonim  = $e->like('lower(oseba.psevdonim)', ':sodelujoci');
+            $id = $e->eq('oseba.id', ':sodelujoci');
 
+            $qb->andWhere($id);
 
-            $qb->andWhere($e->orX($ime, $priimek, $psevdonim, $srednjeIme));
-
-            $qb->setParameter('sodelujoci', mb_strtolower("{$options['sodelujoci']}%"), "string");
+            $qb->setParameter('sodelujoci', "{$options['sodelujoci']}", "string");
         }
         return $qb;
     }

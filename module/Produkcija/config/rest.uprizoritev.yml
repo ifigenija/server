@@ -87,10 +87,12 @@ lists:
                       placeholder: Išči po avtorju..
                       label: Avtor
                 - name: sodelujoci
-                  type: text
+                  type: toone
                   options:
                       placeholder: Išči po sodelujočih..
                       label: Sodelujoči
+                      targetEntity: App\Entity\Oseba
+                      required: false
                 - name: gostujoca
                   type: boolcheckbox
                   options:
