@@ -182,7 +182,7 @@ class ZaposlitevCest
             'jeZaposlenVdrugemJz' => TRUE,
             'jeNastopajoci'       => TRUE,
             'oseba'               => $this->lookOseba1['id'],
-            'organizacijskaEnota' => null,
+            'organizacijskaEnota' => $this->objOrgEnota1['id'],
         ];
         $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -204,7 +204,7 @@ class ZaposlitevCest
             'jeZaposlenVdrugemJz' => TRUE,
             'jeNastopajoci'       => TRUE,
             'oseba'               => $this->lookOseba1['id'],
-            'organizacijskaEnota' => $this->objOrgEnota1['id'],
+            'organizacijskaEnota' => null,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -353,6 +353,7 @@ class ZaposlitevCest
         $I->assertEquals($ent['jeZaposlenVdrugemJz'], TRUE);
         $I->assertEquals($ent['jeNastopajoci'], TRUE);
         $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
+        $I->assertEquals($ent['organizacijskaEnota'], $this->objOrgEnota1['id']);
     }
 
     /**
