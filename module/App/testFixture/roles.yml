@@ -4,33 +4,25 @@
     permissions: 
         - Aaa-read
         - Aaa-write
-        - TerminStoritve-vse
-        - Dogodek-readVse
-        - Oseba-vse
-        - ProgramDela-lock 
-        - ProgramDela-unlock 
-        - User-read
-        - User-write
-        - Role-read
-        - Role-write
-        - Permission-read
-        - Permission-write
         - Abonma-read
         - Abonma-write
         - Alternacija-read
         - Alternacija-write
         - Arhivalija-read
         - Arhivalija-write
+        - AvtorBesedila-read
+        - AvtorBesedila-write
         - Besedilo-read
         - Besedilo-write
         - DogodekIzven-read
         - DogodekIzven-write
         - Dogodek-read
+        - Dogodek-readVse
         - Dogodek-write
-        - Drzava-read
-        - Drzava-write
         - DrugiVir-read
         - DrugiVir-write
+        - Drzava-read
+        - Drzava-write
         - EnotaPrograma-read
         - EnotaPrograma-write
         - Funkcija-read
@@ -46,10 +38,13 @@
         - NacinPlacina-read
         - NacinPlacina-write
         - Option-read
-        - Option-write
         - OptionValue-read
         - OptionValue-write
+        - Option-write
+        - OrganizacijskaEnota-read
+        - OrganizacijskaEnota-write
         - Oseba-read
+        - Oseba-vse
         - Oseba-write
         - PlacilniInstrument-read
         - PlacilniInstrument-write
@@ -60,13 +55,15 @@
         - Popa-read
         - Popa-write
         - Posta-read
-        - Posta-write
         - PostavkaCDve-read
         - PostavkaCDve-write
         - PostavkaRacuna-read
         - PostavkaRacuna-write
+        - Posta-write
         - PostniNaslov-read
         - PostniNaslov-write
+        - Praznik-read
+        - Praznik-write
         - Predstava-read
         - Predstava-write
         - ProdajaPredstave-read
@@ -75,7 +72,9 @@
         - ProdukcijaDelitev-write
         - ProdukcijskaHisa-read
         - ProdukcijskaHisa-write
+        - ProgramDela-lock
         - ProgramDela-read
+        - ProgramDela-unlock
         - ProgramDela-write
         - ProgramFestival-read
         - ProgramFestival-write
@@ -118,19 +117,24 @@
         - StevilcenjeKonfig-read
         - StevilcenjeKonfig-write
         - Stevilcenje-read
-        - Stevilcenje-write
         - StevilcenjeStanje-read
         - StevilcenjeStanje-write
+        - Stevilcenje-write
         - StrosekUprizoritve-read
         - StrosekUprizoritve-write
         - Telefonska-read
         - Telefonska-write
         - TerminStoritve-read
+        - TerminStoritve-vse
         - TerminStoritve-write
         - TipFunkcije-read
         - TipFunkcije-write
+        - TipPopa-read
+        - TipPopa-write
         - TipProgramskeEnote-read
         - TipProgramskeEnote-write
+        - TipVaje-read
+        - TipVaje-write
         - Trr-read
         - Trr-write
         - Uprizoritev-read

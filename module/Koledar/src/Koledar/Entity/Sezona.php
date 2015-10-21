@@ -25,7 +25,7 @@ class Sezona
      * @var string     */
     protected $id;
 
-     /**
+    /**
      * @ORM\Column(type="string", unique=true, nullable=false)
      * @Max\I18n(label="sezona.sifra", description="sezona.d.sifra")
      * @Max\Ui(type="sifra",ident=true,icon="fa fa-barcode")
@@ -33,7 +33,6 @@ class Sezona
      */
     protected $sifra;
 
-    
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="sezona.ime", description="sezona.d.ime")
@@ -79,6 +78,7 @@ class Sezona
     {
         
     }
+
     function getId()
     {
         return $this->id;
@@ -148,6 +148,5 @@ class Sezona
     {
         $this->dogodki = $dogodki;
     }
-
 
 }
