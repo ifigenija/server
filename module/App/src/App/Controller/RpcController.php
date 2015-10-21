@@ -5,7 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 namespace App\Controller;
+
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
@@ -14,19 +16,29 @@ use Zend\Mvc\Controller\AbstractActionController;
  * @author boris
  */
 class RpcController
- extends AbstractActionController
+        extends AbstractActionController
 {
-    
+
     use \Max\Controller\Traits\RpcTrait;
+
     /**
      * Akcije ki streže nastavitve preko JsonRpc
      * 
      */
-    public function optionsAction() {
-        
+    public function optionsAction()
+    {
+
         $srv = $this->getServiceLocator()->get('options.rpc.service');
-        
+
         return $this->handleJsonRpcCall($srv);
     }
-    
+
+    public function osebaAction()
+    {
+
+        $srv = $this->getServiceLocator()->get('oseba.rpc.service');
+
+        return $this->handleJsonRpcCall($srv);
+    }
+
 }

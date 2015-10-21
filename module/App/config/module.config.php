@@ -15,6 +15,8 @@ return [
             'options.service'         => 'App\Service\OptionsService',
             'entity.decorator.filter' => 'App\Filter\DecorateEntity',
             'entity.stripper.filter'  => 'App\Filter\StripEntity',
+            'oseba.rpc.service'       => 'App\Service\OsebaRpcService',
+            'oseba.service'           => 'App\Service\OsebaService',
         ]
     ],
     'controllers'     => [

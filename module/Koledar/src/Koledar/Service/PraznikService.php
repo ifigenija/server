@@ -25,7 +25,6 @@ class PraznikService
     public function delaProstDan($datum)
     {
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
-        $tr = $this->getServiceLocator()->get('translator');
 
         $praznikR = $em->getRepository("Koledar\Entity\Praznik");
 

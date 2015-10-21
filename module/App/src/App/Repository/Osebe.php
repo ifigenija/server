@@ -68,7 +68,6 @@ class Osebe
             $posta          = $e->like('lower(naslov.postaNaziv)', ':naslov');
             $postnaStevilka = $e->like('lower(naslov.posta)', ':naslov');
 
-
             $qb->andWhere($e->orX($ulica, $dodatnaUlica, $posta, $postnaStevilka));
 
             $qb->setParameter('naslov', mb_strtolower("{$options['naslov']}%"), "string");

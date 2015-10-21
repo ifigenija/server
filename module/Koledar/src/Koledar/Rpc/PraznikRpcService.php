@@ -28,12 +28,7 @@ class PraznikRpcService
         // preverjanje avtorizacije
         $this->expectPermission("Praznik-read");
 
-        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
-        $tr = $this->getServiceLocator()->get('translator');
-
         $this->expectIsoDate($datum, $this->translate("Datum ($datum) ni datum v ISO8601 obliki"), 1001110);
-
-//        $praznikR = $em->getRepository("Koledar\Entity\Praznik");
 
         /**
          * preračun imamo v posebnem servisu, tako, da ga lahko kličemo direktno iz PHP-ja na strežniški strani
