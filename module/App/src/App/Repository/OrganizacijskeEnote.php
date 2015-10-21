@@ -82,5 +82,19 @@ class OrganizacijskeEnote
         
         return $qb;
     }
+    
+    /**
+     * 
+     * @param OrganizacijskaEnota $object
+     * @param type $params
+     */
+    public function create($object, $params = null)
+    {
+        if (empty($object->getSifra())) {
+            $num = $this->getServiceLocator()->get('stevilcenje.generator');
+            $object->setSifra($num->generate('organizacijskaenota'));
+        }
+        parent::create($object, $params);
+    }
 
 }

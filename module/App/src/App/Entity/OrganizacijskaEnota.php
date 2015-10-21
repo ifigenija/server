@@ -29,9 +29,9 @@ class OrganizacijskaEnota
 
     /**
      * Šifra organizacijske enote
-     * @ORM\Column(unique=true, length=2, nullable=true)
+     * @ORM\Column(type="string", unique=true, nullable=false)
      * @Max\I18n(label="orgEnota.sifra",description="orgEnota.d.sifra")
-     * @Max\Ui(type="sifra",class="sifra",icon="fa fa-flag",ident=true)
+     * @Max\Ui(type="sifra",class="sifra",icon="fa fa-flag",ident=true,required=false)
      * @var string
      */
     protected $sifra;
