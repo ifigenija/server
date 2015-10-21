@@ -80,7 +80,7 @@ lists:
                     
         hydrator:
             byValue: [telefonske, naslovi]
-            exclude: [trrji, datumRojstva, emso, davcna, drzavljanstvo, krajRojstva, alternacije, pogodbe, sodelovanja]
+#            exclude: [trrji, datumRojstva, emso, davcna, drzavljanstvo, krajRojstva, alternacije, pogodbe, sodelovanja]
 #    vse:
 #        filter:
 hydrator:      
@@ -89,6 +89,8 @@ relation:
         kontaktneOsebe:
             enabled: true
             hydrator:
+                lookups:
+                    - popa
                 exclude: []
         telefonske:
             enabled: true
@@ -101,14 +103,25 @@ relation:
         alternacije:
             enabled: true
             hydrator:
+                byValue:
+                    - funkcija
+                lookups:
+                    - funkcija.uprizoritev
                 exclude: []
         pogodbe:
             enabled: true
             hydrator:
+                byValue:
+                    - alternacije
+                    - alternacije.funkcija
+                lookups:
+                    - alternacije.funkcija.uprizoritev
                 exclude: []
         zaposlitve:
             enabled: true
             hydrator:
+                lookups:
+                    - oseba
                 exclude: []
         zasedenosti:
             enabled: true
