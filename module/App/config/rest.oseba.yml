@@ -127,4 +127,10 @@ relation:
             enabled: true
             hydrator:
                 exclude: []
+        avtorjiBesedil:
+            enabled: true
+            hydrator:
+                lookups:
+                    - besedilo
+                exclude: []
     
