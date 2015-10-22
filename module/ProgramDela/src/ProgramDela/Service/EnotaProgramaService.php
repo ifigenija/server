@@ -56,7 +56,7 @@ class EnotaProgramaService
             $kopr->setKpe($enotaPrograma->getKpe());  // velja le za premiere
         } else {
             // če matična koprodukcija že obstaja, jo le preberemo
-            $kopr = $matkoprColl->get(0);
+            $kopr = $matkoprColl->first();
         }
 
         $kopr->preracunaj();
