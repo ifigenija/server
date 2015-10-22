@@ -35,7 +35,7 @@ class TipVajeFixture
 
         $tipvajeR = $manager->getRepository('Koledar\Entity\TipVaje');
 
-        $o   = $tipvajeR->findBySifra($v[0]);
+        $o   = $tipvajeR->findOneBySifra($v[0]);
         $nov = false;
         if (!$o) {
             $o = new \Koledar\Entity\TipVaje();

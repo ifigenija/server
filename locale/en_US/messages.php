@@ -7,6 +7,6 @@
  */
 return [
     // upravljanje predpomnilnika
-    "Šifra" => "ID",
+    "Šifra" => "",
 ];
 
