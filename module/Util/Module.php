@@ -60,8 +60,8 @@ Class Module
     {
         return [
             'Pomožne operacije ',
-            'populate'     => 'Vnese inicialne podatke v prazno bazo. Če se požene na polni bazi poskuša dopolniti manjkajoče vnose',
-            'populateTest' => 'Vnese testne podatke podatke v bazo, ki ima napolnjene inicialne podatke.'
+            'populate [<fixturename>]'     => 'Vnese inicialne podatke v prazno bazo. Če se požene na polni bazi poskuša dopolniti manjkajoče vnose',
+            'populateTest [<fixturename>]' => 'Vnese testne podatke podatke v bazo, ki ima napolnjene inicialne podatke.'
         ];
     }
 

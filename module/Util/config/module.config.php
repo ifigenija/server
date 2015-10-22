@@ -29,7 +29,7 @@ return [
             'routes' => [
                 'populate'      => [
                     'options' => [
-                        'route'    => 'populate',
+                        'route'    => 'populate [<fixturename>]',
                         'defaults' => [
                             'controller' => 'Util\Install',
                             'action'     => 'populate'
@@ -38,7 +38,7 @@ return [
                 ],
                 'populateTest'  => [
                     'options' => [
-                        'route'    => 'populateTest',
+                        'route'    => 'populateTest [<fixturename>]',
                         'defaults' => [
                             'controller' => 'Util\Install',
                             'action'     => 'populateTest'

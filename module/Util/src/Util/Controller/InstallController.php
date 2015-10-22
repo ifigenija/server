@@ -21,7 +21,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 class InstallController
         extends AbstractActionController
 {
-   
+
     /**
      * Napolni podatke iz Fixtures
      */
@@ -31,14 +31,28 @@ class InstallController
             echo $message . PHP_EOL;
         };
 
-        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $em     = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $config = new Config($this->serviceLocator->get('config'));
 
         $loader = new Loader();
 
         $fixtures = isset($config->fixtures) ? $config->fixtures : [];
-        foreach ($fixtures as $dir) {
-            $loader->loadFromDirectory($dir);
+
+        $fixturename = $this->params('fixturename');
+        if (!empty($fixturename)) {
+            foreach ($fixtures as $dir) {
+                $loader->loadFromFile($dir . '/' . $fixturename . 'Fixture.php');
+                /**
+                 * če je dependent naj ne izvede nobenega
+                 */
+                if (count($loader->getFixtures()) > 1) {
+                    throw new \InvalidArgumentException('Loadanih več fixtur-jev -verjetno zaradi dependencies. Kot parameter možen le fixture brez odvisnosti.');
+                }
+            }
+        } else {
+            foreach ($fixtures as $dir) {
+                $loader->loadFromDirectory($dir);
+            }
         }
 
         $executor = new ORMExecutor($em);
@@ -46,7 +60,7 @@ class InstallController
         $executor->execute($loader->getFixtures(), true);
     }
 
-        /**
+    /**
      * Napolni podatke iz Fixtures
      */
     public function populateTestAction()
@@ -55,14 +69,27 @@ class InstallController
             echo $message . PHP_EOL;
         };
 
-        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $em     = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $config = new Config($this->serviceLocator->get('config'));
 
-        $loader = new Loader();
-
+        $loader   = new Loader();
         $fixtures = isset($config->test_fixtures) ? $config->test_fixtures : [];
-        foreach ($fixtures as $dir) {
-            $loader->loadFromDirectory($dir);
+
+        $fixturename = $this->params('fixturename');
+        if (!empty($fixturename)) {
+            foreach ($fixtures as $dir) {
+                $loader->loadFromFile($dir . '/' . $fixturename . 'Fixture.php');
+                /**
+                 * če je dependent naj ne izvede nobenega
+                 */
+                if (count($loader->getFixtures()) > 1) {
+                    throw new \InvalidArgumentException('Loadanih več fixtur-jev -verjetno zaradi dependencies. Kot parameter možen le fixture brez odvisnosti.');
+                }
+            }
+        } else {
+            foreach ($fixtures as $dir) {
+                $loader->loadFromDirectory($dir);
+            }
         }
 
         $executor = new ORMExecutor($em);
@@ -70,5 +97,4 @@ class InstallController
         $executor->execute($loader->getFixtures(), true);
     }
 
-    
 }
