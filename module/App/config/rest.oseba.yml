@@ -105,8 +105,8 @@ relation:
             hydrator:
                 byValue:
                     - funkcija
-                lookups:
                     - funkcija.uprizoritev
+                    - funkcija.tipFunkcije
                 exclude: []
         pogodbe:
             enabled: true
@@ -114,7 +114,7 @@ relation:
                 byValue:
                     - alternacije
                     - alternacije.funkcija
-                lookups:
+                    - alternacije.funkcija.tipFunkcije
                     - alternacije.funkcija.uprizoritev
                 exclude: []
         zaposlitve:
