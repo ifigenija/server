@@ -7,7 +7,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Nalaganje TipFunkcije
+ * Nalaganje TipProgramskeEnote
  *
  * @author rado
  */
@@ -19,7 +19,7 @@ class TipProgramskeEnoteFixture
     public function load(ObjectManager $manager)
     {
         foreach ($this->getData() as $value) {
-            $this->populateTipFunkcije($manager, $value);
+            $this->populateTipProgramskeEnote($manager, $value);
         }
 
         $manager->flush();
@@ -31,22 +31,28 @@ class TipProgramskeEnoteFixture
      * @param string $object
      * @param array $vals
      */
-    public function populateTipFunkcije($manager, $v)
+    public function populateTipProgramskeEnote($manager, $v)
     {
 
         $rep = $manager->getRepository('ProgramDela\Entity\TipProgramskeEnote');
 
-        $o = $rep->findOneBySifra(trim($v[0]));
+        $o   = $rep->findOneBySifra(trim($v[0]));
+        $nov = false;
         if (!$o) {
-            $o = new \ProgramDela\Entity\TipProgramskeEnote();
+            $o   = new \ProgramDela\Entity\TipProgramskeEnote();
             $o->setSifra(trim($v[0]));
-            $manager->persist($o);
+            $nov = true;
         }
 
         $o->setNaziv($v[1]);
         $o->setKoprodukcija($v[2]);
         $o->setMaxFaktor($v[3]);
         $o->setMaxVsi($v[4]);
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
     }
 
     public function getData()

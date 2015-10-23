@@ -37,21 +37,27 @@ class ZvrstUprizoritveFixture
 
         $rep = $manager->getRepository('Produkcija\Entity\ZvrstUprizoritve');
 
-        $o = $rep->findOneBySifra(trim($v[0]));
+        $o   = $rep->findOneBySifra(trim($v[0]));
+        $nov = false;
         if (!$o) {
-            $o = new \Produkcija\Entity\ZvrstUprizoritve();
+            $o   = new \Produkcija\Entity\ZvrstUprizoritve();
             $o->setSifra(trim($v[0]));
-            $manager->persist($o);
+            $nov = true;
         }
 
         $o->setNaziv($v[1]);
         $o->setOpis($v[2]);
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
     }
 
     public function getData()
     {
         return [
-                // #1169 - naj bo prazno
+            // #1169 - naj bo prazno
 //            ['01', 'Opera', 'opera'],
 //            ['02', 'Opereta', 'opereta'],
 //            ['03', 'Balet', 'balet'],

@@ -28,13 +28,26 @@ class VrstaStroskaFixture
     {
         $rep = $manager->getRepository('Produkcija\Entity\VrstaStroska');
 
-        $o = new \Produkcija\Entity\VrstaStroska();
-        $manager->persist($o);
-
-        $o->setSkupina($v[0]);
-        $o->setPodskupina($v[1]);
+        $skupina    = intval($v[0]);
+        $podskupina = intval($v[1]);
+        $nov        = false;
+        $o          = $rep->findOneBy(["skupina" => $skupina, "podskupina" => $podskupina]);
+        $nov        = false;
+        if (!$o) {
+            $o   = new \Produkcija\Entity\VrstaStroska();
+            $o->setLeto($leto);
+            $o->setSkupina($skupina);
+            $o->setPodskupina($podskupina);
+            $nov = true;
+        }
         $o->setNaziv($v[2]);
         $o->setOpis($v[3]);
+
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
     }
 
     public function getData()

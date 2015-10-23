@@ -37,11 +37,12 @@ class DrzavaFixture
 
         $rep = $manager->getRepository('App\Entity\Drzava');
 
-        $o = $rep->findOneBySifra(trim($v[0]));
+        $o   = $rep->findOneBySifra(trim($v[0]));
+        $nov = false;
         if (!$o) {
-            $o = new \App\Entity\Drzava();
+            $o   = new \App\Entity\Drzava();
             $o->setSifra(trim($v[0]));
-            $manager->persist($o);
+            $nov = true;
         }
 
         $o->setSifraDolg($v[1]);
@@ -49,6 +50,12 @@ class DrzavaFixture
         $o->setIsoNaziv($v[3]);
         $o->setNaziv($v[4]);
         $o->setOpomba(isset($v[5]) ? $v[5] : null);
+
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
     }
 
     public function getData()

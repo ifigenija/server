@@ -33,9 +33,9 @@ class TipVajeFixture
     public function populateTipVaje($manager, $v)
     {
 
-        $tipvajeR = $manager->getRepository('Koledar\Entity\TipVaje');
+        $rep = $manager->getRepository('Koledar\Entity\TipVaje');
 
-        $o   = $tipvajeR->findOneBySifra($v[0]);
+        $o   = $rep->findOneBySifra($v[0]);
         $nov = false;
         if (!$o) {
             $o = new \Koledar\Entity\TipVaje();
@@ -45,14 +45,10 @@ class TipVajeFixture
         $o->setIme($v[1]);
         $o->setOpis($v[2]);
         if ($nov) {
-            $tipvajeR->create($o);
+            $rep->create($o);
         } else {
-            $tipvajeR->update($o);
+            $rep->update($o);
         }
-
-        $referenca = 'TipVaje-' . $v[0];
-        var_dump($referenca);
-        $this->addReference($referenca, $o);
     }
 
     public function getData()

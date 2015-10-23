@@ -40,9 +40,6 @@ class PraznikFixture
         $dan   = intval($v[2]);
         $mesec = intval($v[3]);
         $leto  = is_null($v[4]) ? null : intval($v[4]);
-        var_dump($dan);
-        var_dump($mesec);
-        var_dump($leto);
         $o     = $rep->findOneBy(["dan" => $dan, "mesec" => $mesec, "leto" => $leto]);
         $nov   = false;
         if (!$o) {
