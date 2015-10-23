@@ -227,6 +227,9 @@ class OsebaCest
             'srednjeIme'    => 'zz',
             'psevdonim'     => 'zz',
             'email'         => 'x@xxx.xx',
+            'twitter'       => '@xx',
+            'skype'         => 'xxxxxx',
+            'fb'            => 'fb.com/xx',
 //            'datumRojstva'  => '1973-03-28T00:00:00+0100',
             'emso'          => 'ZZ',
             'davcna'        => 'ZZ123',
@@ -255,6 +258,9 @@ class OsebaCest
             'srednjeIme'    => 'aa',
             'psevdonim'     => 'aa',
             'email'         => 'a@aaa.aa',
+            'twitter'       => '@aa',
+            'skype'         => 'aaaaaa',
+            'fb'            => 'fb.com/aa',
 //            'datumRojstva'  => '1975-03-28T00:00:00+0100',
             'emso'          => 'AA',
             'davcna'        => 'AA123',
@@ -280,6 +286,9 @@ class OsebaCest
             'srednjeIme'    => 'bb',
             'psevdonim'     => 'bb',
             'email'         => 'b@aaa.aa',
+            'twitter'       => '@bb',
+            'skype'         => 'bbbbbb',
+            'fb'            => 'fb.com/bb',
 //            'datumRojstva'  => '1976-03-28T00:00:00+0100',
             'emso'          => 'BB',
             'davcna'        => 'BB123',
@@ -645,6 +654,9 @@ class OsebaCest
         $I->assertEquals('zz', $oseba['srednjeIme']);
         $I->assertEquals('zz', $oseba['psevdonim'], "psevdonim");
         $I->assertEquals('x@xxx.xx', $oseba['email'], "email");
+        $I->assertEquals($oseba['twitter'], '@xx');
+        $I->assertEquals($oseba['skype'], 'xxxxxx');
+        $I->assertEquals($oseba['fb'], 'fb.com/xx');
 //        $I->assertEquals('1973-03-28T00:00:00+0100', $oseba['datumRojstva']);
 //        $I->assertEquals('ZZ', $oseba['emso'], "napačen emšo");
 //        $I->assertEquals('ZZ123', $oseba['davcna'], 'napačna davčna');

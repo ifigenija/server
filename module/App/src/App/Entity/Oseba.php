@@ -109,10 +109,40 @@ class Oseba
      *
      * @ORM\Column(nullable=true)
      * @Max\I18n(label="oseba.email", description="oseba.d.email")   
-     * @Max\Ui(type="email",icon="fa fa-at")
+     * @Max\Ui(type="email")
      * @var string
      */
     protected $email = '';
+
+    /**
+     * twitter naslov 
+     *
+     * @ORM\Column(nullable=true)
+     * @Max\I18n(label="oseba.twitter", description="oseba.d.twitter")   
+     * @Max\Ui(type="twitter")
+     * @var string
+     */
+    protected $twitter = '';
+
+    /**
+     * skype naslov /Skype name
+     *
+     * @ORM\Column(nullable=true)
+     * @Max\I18n(label="oseba.skype", description="oseba.d.skype")   
+     * @Max\Ui(type="skype")
+     * @var string
+     */
+    protected $skype = '';
+
+    /**
+     * facebook naslov /Facebook account?
+     *
+     * @ORM\Column(nullable=true)
+     * @Max\I18n(label="oseba.fb", description="oseba.d.fb")   
+     * @Max\Ui(type="facebook")
+     * @var string
+     */
+    protected $fb = '';
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -276,7 +306,7 @@ class Oseba
          * smer up pomeni oseba->avtorbesedila->besedilo->uprizoritve
          */
         if ($smer == \Max\Consts::UP) {
-            foreach  ($this->getAvtorji() as $avtor) {
+            foreach ($this->getAvtorji() as $avtor) {
                 $avtor->preracunaj(\Max\Consts::UP);
             }
         }
@@ -620,6 +650,39 @@ class Oseba
     public function setAvtorji($avtorji)
     {
         $this->avtorji = $avtorji;
+        return $this;
+    }
+
+    function getTwitter()
+    {
+        return $this->twitter;
+    }
+
+    function getSkype()
+    {
+        return $this->skype;
+    }
+
+    function getFb()
+    {
+        return $this->fb;
+    }
+
+    function setTwitter($twitter)
+    {
+        $this->twitter = $twitter;
+        return $this;
+    }
+
+    function setSkype($skype)
+    {
+        $this->skype = $skype;
+        return $this;
+    }
+
+    function setFb($fb)
+    {
+        $this->fb = $fb;
         return $this;
     }
 

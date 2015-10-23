@@ -21,6 +21,9 @@ forms:
             - opombe
 #            - naslovi
             - email
+            - twitter
+            - skype
+            - fb
 #            - datumRojstva
 #            - emso
 #            - davcna
