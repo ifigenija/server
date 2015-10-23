@@ -102,6 +102,7 @@ class OsebaFixture
             ['0018', '', 'Katarina', 'Podbevšek', 'lektorica', '', '', null, null, null, null, 'Z', '', null, NULL, NULL, null,],
             ['0019', '', 'Lojze', 'Žumer', '', '', '', null, null, null, null, 'M', '', null, NULL, NULL, null,],
             ['0020', '', 'Luka', 'Novak', '', '', '', null, null, null, null, 'M', '', null, NULL, NULL, null,],
+            ['0021', '', 'Vinko', '   Netriman   ', '', '', '', null, null, null, null, 'M', '', null, NULL, NULL, null,],
         ];
     }
 

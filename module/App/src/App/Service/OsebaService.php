@@ -40,10 +40,10 @@ class OsebaService
          */
         $qb      = $osebaR->createQueryBuilder('p');
         $e       = $qb->expr();
-        $priimek = $e->like('lower(p.priimek)', ':priimek');
+        $priimek = $e->like('trim(lower(p.priimek))', ':priimek');
         $id      = $e->notLike('CAST(p.id AS uuid)', ':id');
 //        $qb->setParameter('id', $oseba['id'], "string");
-        $qb->setParameter('priimek', mb_strtolower($oseba['priimek']), "string");
+        $qb->setParameter('priimek', trim(mb_strtolower($oseba['priimek'])), "string");
 //        $qb->andWhere($e->orX($id, $priimek));
         $qb->andWhere($e->orX($priimek));
 

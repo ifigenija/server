@@ -75,6 +75,30 @@ class OsebaCest
         $I->assertGreaterThanOrEqual(1, count($resp), "število najdenih oseb");
 
         /**
+         * če presledki na koncu 
+         */
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'podobneOsebe', ["oseba" => [
+                'id'      => null, // to je razlika
+                'ime'     => mb_strtolower($this->objOseba2['ime']),
+                'priimek' => mb_strtolower($this->objOseba2['priimek'].'   '),
+            ]]
+        );
+        codecept_debug($resp);
+        $I->assertGreaterThanOrEqual(1, count($resp), "število najdenih oseb");
+
+        /**
+         * če v bazi netriman 
+         */
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'podobneOsebe', ["oseba" => [
+                'id'      => null, // to je razlika
+                'ime'     => 'Vinko',
+                'priimek' => 'netriman',
+            ]]
+        );
+        codecept_debug($resp);
+        $I->assertGreaterThanOrEqual(1, count($resp), "število najdenih oseb");
+
+        /**
          * po stringih
          */
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'podobneOsebe', ["oseba" => [
