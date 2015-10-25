@@ -35,7 +35,6 @@ class VrstaStroskaFixture
         $nov        = false;
         if (!$o) {
             $o   = new \Produkcija\Entity\VrstaStroska();
-            $o->setLeto($leto);
             $o->setSkupina($skupina);
             $o->setPodskupina($podskupina);
             $nov = true;
