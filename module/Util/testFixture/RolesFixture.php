@@ -18,8 +18,6 @@ class RolesFixture
 
     use \Max\Expect\ExpectTrait;
 
-    protected $repo;
-
     public function load(ObjectManager $manager)
     {
         echo "Nalagam - vloge" . PHP_EOL;
@@ -51,22 +49,30 @@ class RolesFixture
 
     public function populateRole($manager, $val)
     {
-        $this->repo = $manager->getRepository('\Aaa\Entity\Role');
-        $this->pr   = $manager->getRepository('\Aaa\Entity\Permission');
+        $rep   = $manager->getRepository('\Aaa\Entity\Role');
+        $permR = $manager->getRepository('\Aaa\Entity\Permission');
 
-        $o = $this->repo->findOneByName($val['name']);
+        $o   = $rep->findOneByName($val['name']);
+        $nov = false;
         if (!$o) {
-            $o = new Role;
+            $o   = new Role;
             $o->setName($val['name']);
-            $o->setDescription($val['description']);
             $o->setBuiltIn(true);
-            if ($val['permissions']) {
-                $this->pr->resolveNames($o, $val['permissions']);
-            }
-            $o->setBuiltIn(true);
-            $manager->persist($o);
+            $nov = true;
         }
 
+        if ($o->getBuiltIn()) {
+            $o->setDescription($val['description']);
+            if ($val['permissions']) {
+                $permR->azurirajNames($o, $val['permissions']);
+            }
+        }
+
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
         return false;
     }
 

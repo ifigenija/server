@@ -44,10 +44,11 @@ class PopaFixture
 
 
         $o = $popaR->findOneBySifra(trim($v[0]));
+        $nov = false;
         if (!$o) {
             $o = new \App\Entity\Popa();
             $o->setSifra(trim($v[0]));
-            $manager->persist($o);
+            $nov=true;
         }
 
 
@@ -57,7 +58,11 @@ class PopaFixture
         $drzava = $drzavaR->findOneBySifra(trim($v[3]));
         $o->setDrzava($drzava);
         $o->setNvo($v[4]);
-
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'Popa-' . $v[0];
         var_dump($referenca);

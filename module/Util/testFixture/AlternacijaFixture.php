@@ -44,10 +44,11 @@ class AlternacijaFixture
 //        $tipFunR = $manager->getRepository('Produkcija\Entity\TipFunkcije');
 
         $o = $rep->findOneBySifra(trim($v[0]));
+        $nov = false;
         if (!$o) {
             $o = new Alternacija();
             $o->setSifra(trim($v[0]));
-            $manager->persist($o);
+            $nov=true;
         }
 
         $o->setZaposlen($v[1]);
@@ -87,10 +88,11 @@ class AlternacijaFixture
         
         $o->setPrivzeti($v[13]);
 
-
-        $o->preracunaj();
-        $o->validate();
-
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'Alternacija-' . $v[0];
         var_dump($referenca);

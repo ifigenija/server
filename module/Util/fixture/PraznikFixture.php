@@ -19,7 +19,7 @@ class PraznikFixture
     public function load(ObjectManager $manager)
     {
         foreach ($this->getData() as $value) {
-            var_dump($value);
+//            var_dump($value);
             $this->populatePraznik($manager, $value);
         }
 

@@ -43,10 +43,11 @@ class ZaposlitevFixture
         $rep = $manager->getRepository('Produkcija\Entity\Zaposlitev');
 
         $o = $rep->findOneBySifra(trim($v[0]));
+                $nov = false;
         if (!$o) {
             $o = new \Produkcija\Entity\Zaposlitev();
             $o->setSifra(trim($v[0]));
-            $manager->persist($o);
+            $nov = true;
         }
         $o->setStatus($v[1]);
         $date = empty($v[2]) ? null : date_create($v[2]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
@@ -66,7 +67,11 @@ class ZaposlitevFixture
             $o->setOseba($getref);
         }
 
-        $o->validate();
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'Zaposlitev-' . $v[0];
         var_dump($referenca);

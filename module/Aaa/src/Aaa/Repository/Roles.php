@@ -115,6 +115,26 @@ class Roles
             }
         }
     }
+    
+        /**
+     * doda/ažurira seznam role objektov 
+     * 
+     * @param string[] $names
+     * @return boolean  
+     */
+    public function azurirajNames(User $user, $names)
+    {
+        foreach ($names as $name) {
+            $role = $this->findOneByName($name);
+            if ($role) {
+                if (!$user->getRoles()->contains($role)) {
+                    $user->addRoles($role);
+                }
+            }
+        }
+        return true;
+    }
+
 
     // vrne userje za vse vloge
     public function getRolesUsersArray()

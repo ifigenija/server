@@ -4,12 +4,7 @@
     enabled: true
     roles: [ifi-all]
 -
-    name: Konzolni
+    name: Konzolcni
     email: console@ifigenija.si
     enabled: true
     roles: [ifi-all]
-#-
-#    name: Jani
-#    email: jani@ifigenija.si
-#    enabled: true
-#    roles: []

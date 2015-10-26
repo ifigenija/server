@@ -23,7 +23,7 @@ class Permissions
      */
     protected $sortOptions = [
         'default' => [
-            'name' => ['alias' => 'p.name'],
+            'name'    => ['alias' => 'p.name'],
             'builtIn' => ['alias' => 'p.builtIn']
         ]
     ];
@@ -37,9 +37,9 @@ class Permissions
     public function getPaginator(array $options, $name = 'default')
     {
 
-        $em = $this->getEntityManager();
-        $qb = $em->createQueryBuilder();
-        $ex = $qb->expr();
+        $em   = $this->getEntityManager();
+        $qb   = $em->createQueryBuilder();
+        $ex   = $qb->expr();
         $sort = $this->getSort($name);
         $qb->orderBy($sort->order, $sort->dir);
 
@@ -47,8 +47,8 @@ class Permissions
         $qb->from('\Aaa\Entity\Permission', 'p');
 
         if (!empty($options['q'])) {
-            $srch        = mb_strtolower($options['q']);
-            $name        = $ex->like('lower(p.name)', ':query');
+            $srch = mb_strtolower($options['q']);
+            $name = $ex->like('lower(p.name)', ':query');
 
             $qb->andWhere($ex->orx($name));
 
@@ -73,6 +73,25 @@ class Permissions
             }
         }
         return $ret;
+    }
+
+    /**
+     * doda/ažurira seznam permission objektov 
+     * 
+     * @param string[] $names
+     * @return boolean  
+     */
+    public function azurirajNames($role, $names)
+    {
+        foreach ($names as $name) {
+            $perm = $this->findOneByName($name);
+            if ($perm) {
+                if (!$role->getPermissions()->contains($perm)) {
+                    $role->addPermissions($perm);
+                }
+            }
+        }
+        return true;
     }
 
 }

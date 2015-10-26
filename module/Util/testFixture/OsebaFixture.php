@@ -28,7 +28,7 @@ class OsebaFixture
 
     public function getDependencies()
     {
-        return array('TestFixture\UserTestFixture'); // fixture classes fixture is dependent on , 
+        return array('TestFixture\UsersFixture'); // fixture classes fixture is dependent on , 
     }
 
     /**
@@ -43,10 +43,11 @@ class OsebaFixture
         $rep = $manager->getRepository('App\Entity\Oseba');
 
         $o = $rep->findOneBySifra(trim($v[0]));
+        $nov = false;
         if (!$o) {
             $o = new \App\Entity\Oseba();
             $o->setSifra(trim($v[0]));
-            $manager->persist($o);
+            $nov=true;
         }
         $o->setNaziv($v[1]);
         $o->setIme($v[2]);
@@ -71,8 +72,11 @@ class OsebaFixture
             $getref = $this->getReference($v[16]);
             $o->setUser($getref);
         }
-        $o->preracunaj(\Max\Consts::UP);
-        $o->validate();
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'Oseba-' . $v[0];
         var_dump($referenca);

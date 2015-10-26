@@ -36,16 +36,22 @@ class ProstorFixture
         $rep = $manager->getRepository('Prodaja\Entity\Prostor');
 
         $o = $rep->findOneBySifra(trim($v[0]));
+        $nov = false;
         if (!$o) {
             $o = new \Prodaja\Entity\Prostor();
             $o->setSifra(trim($v[0]));
-            $manager->persist($o);
+            $nov=true;
         }
         $o->setNaziv($v[1]);
         $o->setJePrizorisce($v[2]);
         $o->setKapaciteta($v[3]);
         $o->setOpis($v[4]);
         $o->setSePlanira($v[5]);
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'Prostor-' . $v[0];
         var_dump($referenca);

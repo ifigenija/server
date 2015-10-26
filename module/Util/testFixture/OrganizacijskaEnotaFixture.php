@@ -42,11 +42,12 @@ class OrganizacijskaEnota
 
         $rep = $manager->getRepository('App\Entity\OrganizacijskaEnota');
 
-        $o = $rep->findOneBySifra(trim($v[0]));
+        $o   = $rep->findOneBySifra(trim($v[0]));
+        $nov = false;
         if (!$o) {
-            $o = new \App\Entity\OrganizacijskaEnota();
+            $o   = new \App\Entity\OrganizacijskaEnota();
             $o->setSifra(trim($v[0]));
-            $manager->persist($o);
+            $nov = true;
         }
         $o->setNaziv($v[1]);
         if ($v[2]) {
@@ -63,8 +64,11 @@ class OrganizacijskaEnota
             $o->setNamestnik($getref);
         }
 
-        $o->validate();
-
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
         $referenca = 'OrganizacijskaEnota-' . $v[0];
         var_dump($referenca);
         $this->addReference($referenca, $o);

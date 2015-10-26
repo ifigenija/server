@@ -23,7 +23,7 @@ class OptionsFixture
 
     public function load(ObjectManager $manager)
     {
-         // opcije je potrebno naložiti za uporabniki
+        // opcije je potrebno naložiti za uporabniki
         echo "Nalagam - opcije" . PHP_EOL;
         $res = $this->getData('options');
         foreach ($res as $val) {
@@ -61,29 +61,42 @@ class OptionsFixture
      */
     public function populateOptions($em, $val)
     {
-        $pr = $em->getRepository('App\Entity\Option');
-        $o  = $pr->findOneByName($val['name']);
-
+        $optR     = $em->getRepository('App\Entity\Option');
+        $o        = $optR->findOneByName($val['name']);
+        $readOnly = (empty($val['readOnly']) ? false : $val['readOnly']);
         if (!$o) {
             $o = new Option();
             $em->persist($o);
+            $o->setName($val['name']);
+        } else {
+            /**
+             * spremembe naredimo le, če je readonly
+             * 
+             * $$ morda bi lahko v testnih fixturjih tudi ne readonly spremenili?
+             */
+            if (!$readOnly)
+                return;
         }
-        $o->setName($val['name']);
+
+        $o->setReadOnly($readOnly);
         $o->setType($val['type']);
         $o->setDescription($val['description']);
-        $o->setReadOnly(empty($val['readOnly']) ? false : $val['readOnly']);
         $o->setDefaultValue(empty($val['defaultValue']) ? null : $val['defaultValue']);
         $o->setPerUser(empty($val['perUser']) ? false : $val['perUser']);
         $o->setPublic(empty($val['public']) ? false : $val['public']);
         $o->setRole(empty($val['role']) ? null : $val['role'] );
 
-        //         če obstajajo globalne ali uporabniške vrednosti ažuriramo entiteto OptionValue:
+        /**
+         *          če obstajajo globalne ali uporabniške vrednosti ažuriramo entiteto OptionValue:
+         */
         if (!empty($val['optionValue'])) {
             echo " " . $val['name'] . '  ->  not empty Option Value ' . PHP_EOL;
             if (!empty($val['optionValue']['global'])) {
                 echo "  global" . PHP_EOL;
 
-                // ali obstaja globalna opcija ?
+                /**
+                 *  ali obstaja globalna opcija ?
+                 */
                 $optValue = $em->getRepository('App\Entity\OptionValue')->getOptionValuesGlobalValue($o);
 
                 // pričakujemo, da najde največ 1 globalno vrednost. 
@@ -92,7 +105,7 @@ class OptionsFixture
                     $optVal->setValue($val['optionValue']['global']['value']);
                     $optVal->setGlobal(true);
                     $optVal->addOption($o);
-                    $em->persist($optVal);  // $$ ali je lahko več persistov pred flush-em?
+                    $em->persist($optVal);
                 }
                 echo "     opt val: " .
                 $val['optionValue']['global']['value'][0]['key'] . "  " .
@@ -100,7 +113,9 @@ class OptionsFixture
                 PHP_EOL;
             }
 
-            // ali obstajajo uporabniške vrednosti 
+            /**
+             * ali obstajajo uporabniške vrednosti 
+             */
             if (!empty($val['optionValue']['user'])) {
                 $optValueUserY = $val['optionValue']['user'];
                 foreach ($optValueUserY as $user) {
@@ -128,6 +143,5 @@ class OptionsFixture
             }
         }
     }
-
 
 }

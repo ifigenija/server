@@ -13,7 +13,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Zend\Config\Config;
 
-
 /**
  * Nalaganje privzetih opcij dovoljenj in uporabnikov 
  * V load metodi je potrebno vključiti modul,
@@ -73,22 +72,33 @@ class RolesFixture
     public function populateUser($em, $val)
     {
 
-        $ur = $em->getRepository('\Aaa\Entity\User');
-        $rr = $em->getRepository('\Aaa\Entity\Role');
-        $o  = $ur->findOneByEmail($val['email']);
+        $rep = $em->getRepository('\Aaa\Entity\User');
+        $rr  = $em->getRepository('\Aaa\Entity\Role');
+        $o   = $rep->findOneByEmail($val['email']);
+        $nov = false;
         if (!$o) {
-            $o        = new User();
+            $o   = new User();
             $o->setEmail($val['email']);
+            $nov = true;
+
             $password = 'AaBbCc1' . uniqid() . uniqid();
             $o->setPassword($password);
             echo "User {$val['name']} geslo $password\n";
-            $o->setName($val['name']);
-            $o->setEnabled($val['enabled']);
-            $rr->resolveNames($o, $val['roles']);
-            $em->persist($o);
-
-            $this->addReference('user-' . $val['email'], $o);
         }
+        $o->setName($val['name']);
+        $o->setEnabled($val['enabled']);
+        if ($val['roles']) {
+            $rr->azurirajNames($o, $val['roles']);
+        }
+
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
+
+        $this->addReference('User-' . $val['email'], $o);
+        return;
     }
 
     public function getData($entity)
@@ -119,29 +129,41 @@ class RolesFixture
      */
     public function populateOptions($em, $val)
     {
-        $pr = $em->getRepository('App\Entity\Option');
-        $o  = $pr->findOneByName($val['name']);
-
+        $optR = $em->getRepository('App\Entity\Option');
+        $o    = $optR->findOneByName($val['name']);
+        $readOnly=(empty($val['readOnly']) ? false : $val['readOnly']);
         if (!$o) {
-            $o = new Option();
+            $o   = new Option();
             $em->persist($o);
+            $o->setName($val['name']);
+        } else {
+            /**
+             * spremembe naredimo le, če je readonly
+             */
+            if (!$readOnly)
+                return;
         }
-        $o->setName($val['name']);
+            
+        
+        $o->setReadOnly($readOnly);
         $o->setType($val['type']);
         $o->setDescription($val['description']);
-        $o->setReadOnly(empty($val['readOnly']) ? false : $val['readOnly']);
         $o->setDefaultValue(empty($val['defaultValue']) ? null : $val['defaultValue']);
         $o->setPerUser(empty($val['perUser']) ? false : $val['perUser']);
         $o->setPublic(empty($val['public']) ? false : $val['public']);
         $o->setRole(empty($val['role']) ? null : $val['role'] );
 
-        //         če obstajajo globalne ali uporabniške vrednosti ažuriramo entiteto OptionValue:
+        /**
+         *          če obstajajo globalne ali uporabniške vrednosti ažuriramo entiteto OptionValue:
+         */
         if (!empty($val['optionValue'])) {
             echo " " . $val['name'] . '  ->  not empty Option Value ' . PHP_EOL;
             if (!empty($val['optionValue']['global'])) {
                 echo "  global" . PHP_EOL;
 
-                // ali obstaja globalna opcija ?
+                /**
+                 *  ali obstaja globalna opcija ?
+                 */
                 $optValue = $em->getRepository('App\Entity\OptionValue')->getOptionValuesGlobalValue($o);
 
                 // pričakujemo, da najde največ 1 globalno vrednost. 
@@ -150,7 +172,7 @@ class RolesFixture
                     $optVal->setValue($val['optionValue']['global']['value']);
                     $optVal->setGlobal(true);
                     $optVal->addOption($o);
-                    $em->persist($optVal);  
+                    $em->persist($optVal);
                 }
                 echo "     opt val: " .
                 $val['optionValue']['global']['value'][0]['key'] . "  " .
@@ -158,7 +180,9 @@ class RolesFixture
                 PHP_EOL;
             }
 
-            // ali obstajajo uporabniške vrednosti 
+            /**
+             * ali obstajajo uporabniške vrednosti 
+             */
             if (!empty($val['optionValue']['user'])) {
                 $optValueUserY = $val['optionValue']['user'];
                 foreach ($optValueUserY as $user) {
@@ -189,39 +213,57 @@ class RolesFixture
 
     public function populateRole($manager, $val)
     {
-        $this->repo = $manager->getRepository('\Aaa\Entity\Role');
-        $this->pr   = $manager->getRepository('\Aaa\Entity\Permission');
+        $rep   = $manager->getRepository('\Aaa\Entity\Role');
+        $permR = $manager->getRepository('\Aaa\Entity\Permission');
 
-        $o = $this->repo->findOneByName($val['name']);
+        $o   = $rep->findOneByName($val['name']);
+        $nov = false;
         if (!$o) {
-            $o = new Role;
+            $o   = new Role;
             $o->setName($val['name']);
-            $o->setDescription($val['description']);
             $o->setBuiltIn(true);
-            if ($val['permissions']) {
-                $this->pr->resolveNames($o, $val['permissions']);
-            }
-            $o->setBuiltIn(true);
-            $manager->persist($o);
+            $nov = true;
         }
 
-        return false;
+        if ($o->getBuiltIn()) {
+            $o->setDescription($val['description']);
+            if ($val['permissions']) {
+                $permR->azurirajNames($o, $val['permissions']);
+            }
+        }
+
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
+        return;
     }
 
     public function populatePermissions($manager, $valarray)
     {
-        $this->pr = $manager->getRepository('\Aaa\Entity\Permission');
+        $rep = $manager->getRepository('\Aaa\Entity\Permission');
 
         $val = new Config($valarray);
 
-        $o = $this->pr->findOneByName($val->name);
+        $o   = $rep->findOneByName($val->name);
+        $nov = false;
         if (!$o) {
-            $o = new Permission();
+            $o   = new Permission();
             $o->setName($val->name);
-            $o->setDescription($val->description);
+            $o->setBuiltIn(true);
+            $nov = true;
         }
-        $manager->persist($o);
-        return false;
+        if ($o->getBuiltIn()) {
+            $o->setDescription($val['description']);
+        }
+
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
+        return;
     }
 
 }

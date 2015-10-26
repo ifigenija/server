@@ -34,7 +34,7 @@ class SezonaFixture
 
         $sezonaR = $manager->getRepository('Koledar\Entity\Sezona');
 
-        $o   = $sezonaR->findBySifra($v[0]);
+        $o   = $sezonaR->findOneBySifra($v[0]);
         $nov = false;
         if (!$o) {
             $o   = new \Koledar\Entity\Sezona();
@@ -62,7 +62,7 @@ class SezonaFixture
     {
         return [
             ['2015', 'Sezona 2015', '2015-01-01T00:00:00+0100', '2015-12-31T23:59:59+0100', true,],
-            ['2016', 'Sezona 2016', '2016-01-01T00:00:00+0100', '2016-12-31T23:59:59+0100', true,],
+            ['2016', 'Sezona 2016', '2016-01-01T00:00:01+0100', '2016-12-31T23:59:59+0100', true,],
             ['2017', 'Sezona 2017', '2017-01-01T00:00:00+0100', '2017-12-31T23:59:59+0100', true,],
         ];
     }

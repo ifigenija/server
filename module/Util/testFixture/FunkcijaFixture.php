@@ -44,10 +44,11 @@ class FunkcijaFixture
         $tipFunR = $manager->getRepository('Produkcija\Entity\TipFunkcije');
 
         $o = $rep->findOneByNaziv(trim($v[0]));
+        $nov = false;
         if (!$o) {
             $o = new Funkcija();
             $o->setNaziv(trim($v[0]));
-            $manager->persist($o);
+            $nov=true;
         }
 
         $o->setKomentar($v[1]);
@@ -71,7 +72,11 @@ class FunkcijaFixture
 
         // ker ni v isti skupini fixtur-jev, ne deluje getReference
 
-        $o->validate();
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'Funkcija-' . $v[0];
         var_dump($referenca);
@@ -85,8 +90,8 @@ class FunkcijaFixture
             ['Tezej', 'glavna vloga', 'Vloga', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null,],
             ['Režija', '', 'Režija', false, 'velika', TRUE, 8, true, true, 'Uprizoritev-0002', null,],
             ['Inšpicient', '', 'Inšpicient', true, '', TRUE, 8, true, true, 'Uprizoritev-0002', null,],
-            ['Tehnični vodja', '', 'Tehnična podpora', true, '', TRUE, 8, true, true, 'Uprizoritev-0002', null,],
-            ['Razsvetljava', '', 'Tehnična podpora', false, '', TRUE, 3, true, true, 'Uprizoritev-0002', null,],
+            ['Tehnični vodja', '', 'Tehnična in druga podpora', true, '', TRUE, 8, true, true, 'Uprizoritev-0002', null,],
+            ['Razsvetljava', '', 'Tehnična in druga podpora', false, '', TRUE, 3, true, true, 'Uprizoritev-0002', null,],
             ['Helena', 'glavna vloga', 'Vloga', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null,],
             ['Lektoriranje', '', 'Lektorstvo', false, '', TRUE, 22, true, true, 'Uprizoritev-0002', null,],
             ['Avtor', 'Avtor besedila', 'Avtor', false, '', TRUE, 2, true, FALSE, 'Uprizoritev-0002', null,],

@@ -36,7 +36,7 @@ class TipPopaFixture
 
         $tippopaR = $manager->getRepository('App\Entity\TipPopa');
 
-        $o   = $tippopaR->findBySifra($v[0]);
+        $o   = $tippopaR->findOneBySifra($v[0]);
         $nov = false;
         if (!$o) {
             $o = new \App\Entity\TipPopa();

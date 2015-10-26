@@ -37,10 +37,11 @@ class BesediloFixture
         $rep = $manager->getRepository('Produkcija\Entity\Besedilo');
 
         $o = $rep->findOneByStevilka(trim($v[0]));
+        $nov = false;
         if (!$o) {
             $o = new Besedilo();
             $o->setStevilka(trim($v[0]));
-            $manager->persist($o);
+            $nov=true;
         }
         $o->setNaslov($v[1]);
 //        $o->setAvtor($v[2]);
@@ -55,8 +56,11 @@ class BesediloFixture
 //        $o->setPrevajalec($v[9]);
         $o->setPovzetekVsebine($v[10]);
 
-        $o->preracunaj(\Max\Consts::UP);
-        $o->validate();
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'Besedilo-' . $v[0];
         var_dump($referenca);

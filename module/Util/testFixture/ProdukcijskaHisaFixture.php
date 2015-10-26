@@ -45,18 +45,23 @@ class ProdukcijskaHisaFixture
 //        
 
 
-        $o = $rep->findOneBySifra(trim($v[0]));
+        $o   = $rep->findOneBySifra(trim($v[0]));
+        $nov = FALSE;
         if (!$o) {
-            $o = new \ProgramDela\Entity\ProdukcijskaHisa();
+            $o   = new \ProgramDela\Entity\ProdukcijskaHisa();
             $o->setSifra(trim($v[0]));
-            $manager->persist($o);
+            $nov = true;
         }
 
         $o->setStatus($v[1]);
         $getref = $this->getReference($v[2]);
         $o->setPopa($getref);
 
-        $o->validate();
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'ProdukcijskaHisa-' . $v[0];
         var_dump($referenca);

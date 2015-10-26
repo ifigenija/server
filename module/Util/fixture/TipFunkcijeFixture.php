@@ -77,7 +77,7 @@ class TipFunkcijeFixture
             ['14', 'Posebni efekti -izvedba in svetovanje', 'Posebni efekti -izvedba in svetovanje', 'Posebni efekti -izvedba in svetovanje', 'umetnik', 120,],
             ['15', 'Vloga', 'Intermedijski ustvarjalci', 'Intermedijska ustvarjalka', 'igralec', 10,],
             ['16', 'Produkcija, mentorstvo', 'Produkcija, mentorstvo', 'Produkcija, mentorstvo', 'umetnik', 140,],
-            ['17', 'Tehnična podpora', 'Tehnična podpora', 'Tehnična podpora', 'tehnik', 180,],
+            ['17', 'Tehnična in druga podpora', 'Tehnična in druga podpora', 'Tehnična in druga podpora', 'tehnik', 180,],
             // specifika Ifigenije:
             ['18', 'Inšpicient', 'Inšpicienti', 'Inšpicientka', 'inspicient', 170,],
         ];

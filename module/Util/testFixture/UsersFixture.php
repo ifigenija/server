@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityManager;
  *
  * @author rado
  */
-class UserTestFixture
+class UsersFixture
         extends AbstractFixture
         implements FixtureInterface, DependentFixtureInterface
 {
@@ -32,12 +32,12 @@ class UserTestFixture
         $manager->flush();
         $manager->clear();
     }
+
     public function getDependencies()
     {
         return array('TestFixture\RolesFixture');
     }
 
-    
     public function getData($entity)
     {
 
@@ -55,7 +55,7 @@ class UserTestFixture
         }
         return $data;
     }
-    
+
     /**
      * Dodajanje skupin
      * @param EntityManager $em 
@@ -64,21 +64,30 @@ class UserTestFixture
     public function populateUser($em, $val)
     {
 
-        $ur = $em->getRepository('\Aaa\Entity\User');
-        $rr = $em->getRepository('\Aaa\Entity\Role');
-        $o  = $ur->findOneByEmail($val['email']);
+        $rep  = $em->getRepository('\Aaa\Entity\User');
+        $rr  = $em->getRepository('\Aaa\Entity\Role');
+        $o   = $rep->findOneByEmail($val['email']);
+        $nov = false;
         if (!$o) {
-            $o        = new User();
+            $o   = new User();
             $o->setEmail($val['email']);
-            $o->setPassword($val['password']);
-            $o->setName($val['name']);
-            $o->setEnabled($val['enabled']);
-            $rr->resolveNames($o, $val['roles']);
-            $em->persist($o);
-
-            $this->addReference('User-' . $val['email'], $o);
+            $nov = true;
         }
-    }
+        $o->setPassword($val['password']);
+        $o->setName($val['name']);
+        $o->setEnabled($val['enabled']);
+        if ($val['roles']) {
+            $rr->azurirajNames($o, $val['roles']);
+        }
 
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
+
+        $this->addReference('User-' . $val['email'], $o);
+        return;
+    }
 
 }

@@ -30,7 +30,6 @@ class VrstaStroskaFixture
 
         $skupina    = intval($v[0]);
         $podskupina = intval($v[1]);
-        $nov        = false;
         $o          = $rep->findOneBy(["skupina" => $skupina, "podskupina" => $podskupina]);
         $nov        = false;
         if (!$o) {

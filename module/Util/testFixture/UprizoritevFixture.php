@@ -46,10 +46,11 @@ class UprizoritevFixture
         $zvrSursR = $manager->getRepository('Produkcija\Entity\ZvrstSurs');
 
         $o = $rep->findOneBySifra(trim($v[0]));
+        $nov = false;
         if (!$o) {
             $o = new \Produkcija\Entity\Uprizoritev();
             $o->setSifra(trim($v[0]));
-            $manager->persist($o);
+            $nov=true;
         }
 
         $o->setNaslov($v[1]);
@@ -98,9 +99,11 @@ class UprizoritevFixture
             $getref = $this->getReference($v[21]);
             $o->setProducent($getref);
         }
-
-        $o->preracunaj();
-        $o->validate();
+        if ($nov) {
+            $tippopaR->create($o);
+        } else {
+            $tippopaR->update($o);
+        }
 
         $referenca = 'Uprizoritev-' . $v[0];
         var_dump($referenca);

@@ -43,9 +43,9 @@ class VajaFixture
 
         $rep = $manager->getRepository('Koledar\Entity\Vaja');
 
-        $o = new \Koledar\Entity\Vaja();
+        $o   = new \Koledar\Entity\Vaja();
         $o->setZaporedna($v[1]);
-                $o->setPorocilo($v[2]);
+        $o->setPorocilo($v[2]);
         if ($v[3]) {
             // še za implementirati, če bo potrebno
             $getref = $this->getReference($v[3]);
@@ -54,7 +54,7 @@ class VajaFixture
         $getref = $this->getReference($v[4]);
         $o->setUprizoritev($getref);
         $rep->create($o);
-        
+
         $referenca = 'Vaja-' . $v[0];
         var_dump($referenca);
         $this->addReference($referenca, $o);

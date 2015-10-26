@@ -42,10 +42,11 @@ class ProgramDelaFixture
         $rep = $manager->getRepository('ProgramDela\Entity\ProgramDela');
 
         $o = $rep->findOneBySifra(trim($v[0]));
+        $nov = FALSE;
         if (!$o) {
             $o = new \ProgramDela\Entity\ProgramDela();
             $o->setSifra(trim($v[0]));
-            $manager->persist($o);
+            $nov = true;
         }
 //            'Naziv          => 'bb',
 //            'Zacetek        => '2016-02-01T00:00:00+0100',
@@ -62,6 +63,11 @@ class ProgramDelaFixture
         $date = empty($v[3]) ? null : date_create($v[3]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setKonec          ($date);
         $o->setPotrjenProgram ($v[4]);
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'ProgramDela-' . $v[0];
         var_dump($referenca);
