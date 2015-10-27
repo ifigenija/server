@@ -126,9 +126,26 @@ class PodatkiUprizoritveCest
         codecept_debug($resp);
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
-        $I->assertEquals(2, $resp['stZaposUmet'], "št. zaposlenih umetnikov -ali sedaj manjše?");
+        $I->assertEquals(3, $resp['stZaposUmet'], "št. zaposlenih umetnikov -ali sedaj manjše?");
         $I->assertEquals("2016-01-01T00:00:00+0100", $resp['datumZacStudija']);
         $I->assertEquals("2016-04-20T00:00:00+0200", $resp['datumPremiere']);
+    }
+
+    /**
+     * moral bi sešteti le tiste alternacije, ki se vsaj deloma prekrivajo z datumom in začetkom programa dela
+     * 
+     * @param ApiTester $I 
+     */
+    public function podatkiUprizoritveZNeIsoZacetkom(ApiTester $I)
+    {
+//
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'podatkiUprizoritve', ["uprizoritevId" => $this->lookUprizoritev1['id']
+            , "zacetek"       => "2015-10-27T11:33:29+0200", "konec"         => "2016-04-20T00:00:00+0200"
+//            , "zacetek"       => "1995-10-27T11:33:29+0200", "konec"         => "2016-04-20T00:00:00+0200"
+//            , "zacetek"       => "2016-01-01T00:00:00+0100", "konec"         => "2016-04-20T00:00:00+0200"
+        ]);
+        codecept_debug($resp);
+        $I->assertNotEmpty($resp);
     }
 
     /**

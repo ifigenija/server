@@ -29,7 +29,7 @@ class UprizoritevFixture
 
     public function getDependencies()
     {
-        return array('TestFixture\BesediloFixture', 'TestFixture\ProstorFixture', 'TestFixture\ProdukcijskaHisaFixture','TestFixture\AvtorBesedilaFixture', );
+        return array('TestFixture\BesediloFixture', 'TestFixture\ProstorFixture', 'TestFixture\ProdukcijskaHisaFixture', 'TestFixture\AvtorBesedilaFixture',);
     }
 
     /**
@@ -45,12 +45,12 @@ class UprizoritevFixture
         $zvrUpriR = $manager->getRepository('Produkcija\Entity\ZvrstUprizoritve');
         $zvrSursR = $manager->getRepository('Produkcija\Entity\ZvrstSurs');
 
-        $o = $rep->findOneBySifra(trim($v[0]));
+        $o   = $rep->findOneBySifra(trim($v[0]));
         $nov = false;
         if (!$o) {
-            $o = new \Produkcija\Entity\Uprizoritev();
+            $o   = new \Produkcija\Entity\Uprizoritev();
             $o->setSifra(trim($v[0]));
-            $nov=true;
+            $nov = true;
         }
 
         $o->setNaslov($v[1]);
@@ -100,9 +100,9 @@ class UprizoritevFixture
             $o->setProducent($getref);
         }
         if ($nov) {
-            $tippopaR->create($o);
+            $rep->create($o);
         } else {
-            $tippopaR->update($o);
+            $rep->update($o);
         }
 
         $referenca = 'Uprizoritev-' . $v[0];

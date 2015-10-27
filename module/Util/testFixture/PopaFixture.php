@@ -39,11 +39,11 @@ class PopaFixture
     public function populatePopa($manager, $v)
     {
 
-        $popaR   = $manager->getRepository('App\Entity\Popa');
+        $rep   = $manager->getRepository('App\Entity\Popa');
         $drzavaR = $manager->getRepository('App\Entity\Drzava');
 
 
-        $o = $popaR->findOneBySifra(trim($v[0]));
+        $o = $rep->findOneBySifra(trim($v[0]));
         $nov = false;
         if (!$o) {
             $o = new \App\Entity\Popa();
