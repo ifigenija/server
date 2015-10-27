@@ -13,7 +13,7 @@
         "ext-intl": "*",
         "ext-apcu": "*",
         "ext-pdo_pgsql": "*",
-        "zendframework/zendframework": "2.3.1",
+        "zendframework/zendframework": "2.4.*",
         "doctrine/doctrine-orm-module": "0.9.*",
         "doctrine/doctrine-module": "*",
         "doctrine/orm": "~2.5",
