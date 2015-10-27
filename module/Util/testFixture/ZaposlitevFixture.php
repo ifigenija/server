@@ -42,10 +42,10 @@ class ZaposlitevFixture
 
         $rep = $manager->getRepository('Produkcija\Entity\Zaposlitev');
 
-        $o = $rep->findOneBySifra(trim($v[0]));
-                $nov = false;
+        $o   = $rep->findOneBySifra(trim($v[0]));
+        $nov = false;
         if (!$o) {
-            $o = new \Produkcija\Entity\Zaposlitev();
+            $o   = new \Produkcija\Entity\Zaposlitev();
             $o->setSifra(trim($v[0]));
             $nov = true;
         }
@@ -81,13 +81,14 @@ class ZaposlitevFixture
     public function getData()
     {
         return [
-            ["01", "A", "2010-02-01T00:00:00+0100", null, 1, 2, "", true, false, false, TRUE, "Oseba-0010", "Mojster"],
-            ["02", "A", "2010-02-01T00:00:00+0100", null, 1, 2, "", true, false, false, TRUE, "Oseba-0003", "Igralec"],
-            ["03", "A", "2010-02-01T00:00:00+0100", null, 1, 2, "", true, false, false, TRUE, "Oseba-0008", "Natakar"],
-            ["04", "A", "2010-02-01T00:00:00+0100", null, 1, 2, "", true, false, false, TRUE, "Oseba-0004", "Mizar"],
-            ["05", "A", "2010-02-01T00:00:00+0100", null, 1, 2, "", true, false, false, TRUE, "Oseba-0009", "Šivilja"],
-            ["06", "A", "2010-02-01T00:00:00+0100", null, 1, 2, "", true, false, false, TRUE, "Oseba-0007", "Inšpicient"]
+            ["0010", "A", "2010-02-01T00:00:00+0100", null, 1, 2, "", true, false, false, TRUE, "Oseba-0010", "Mojster"],
+            ["0003", "A", "2010-02-01T00:00:00+0100", null, 1, 2, "", true, false, false, TRUE, "Oseba-0003", "Igralec"],
+            ["0008", "A", "2010-02-01T00:00:00+0100", null, 1, 2, "", true, false, false, TRUE, "Oseba-0008", "Natakar"],
+            ["0004", "A", "2010-02-01T00:00:00+0100", null, 1, 2, "", true, false, false, TRUE, "Oseba-0004", "Mizar"],
+            ["0009", "A", "2010-02-01T00:00:00+0100", null, 1, 2, "", true, false, false, TRUE, "Oseba-0009", "Šivilja"],
+            ["0007", "A", "2010-02-01T00:00:00+0100", null, 1, 2, "", true, false, false, TRUE, "Oseba-0007", "Inšpicient"]
         ];
     }
 
 }
+    

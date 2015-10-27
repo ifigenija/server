@@ -42,32 +42,27 @@ class AvtorBesedilaFixture
     {
 
         $rep = $manager->getRepository('Produkcija\Entity\AvtorBesedila');
-        $o   = new \Produkcija\Entity\AvtorBesedila();
 
+        $besediloId = $this->getReference($v[4]);
+        $osebaId    = $this->getReference($v[5]);
+        $o          = $rep->findOneBy(["besedilo" => $besediloId, "oseba" => $osebaId]);
+        $nov        = false;
+        if (!$o) {
+            $o   = new \Produkcija\Entity\AvtorBesedila();
+            $o->setBesedilo($besediloId);
+            $o->setOseba($osebaId);
+            $nov = true;
+        }
         $o->setTipAvtorja($v[1]);
         $o->setZaporedna($v[2]);
         $o->setAliVNaslovu($v[3]);
 
-        if ($v[4]) {
-            $getref = $this->getReference($v[4]);
-            $o->setBesedilo($getref);
-        }
-        if ($v[5]) {
-            $getref = $this->getReference($v[5]);
-            $o->setOseba($getref);
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
         }
 
-        /**
-         * ponovimo to, kar je v repozitoriju
-         */
-        if (!$o->getId()) {         // če novi
-            if ($o->getBesedilo()) {
-                $o->getBesedilo()->getAvtorji()->add($o);
-            }
-        }
-        $manager->persist($o);
-        $o->preracunaj(\Max\Consts::UP);
-        $o->validate();
 
 
         $referenca = 'AvtorBesedila-' . $v[0];

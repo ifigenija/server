@@ -499,16 +499,6 @@ class Dogodek
     }
 
     /**
-     * @param DogodekSplosni $splosni
-     * @return Dogodek
-     */
-    public function setSplosni(DogodekSplosni $splosni)
-    {
-        $this->splosni = $splosni;
-        return $this;
-    }
-
-    /**
      * @return \Prodaja\Entity\Prostor
      */
     public function getProstor()
@@ -577,6 +567,12 @@ class Dogodek
     public function setSezona(Sezona $sezona = null)
     {
         $this->sezona = $sezona;
+        return $this;
+    }
+
+    function setSplosni(\Koledar\Entity\DogodekSplosni $splosni = null)
+    {
+        $this->splosni = $splosni;
         return $this;
     }
 

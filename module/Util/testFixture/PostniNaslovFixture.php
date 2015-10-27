@@ -7,7 +7,6 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-
 /**
  * Nalaganje privzetih Drzav
  *
@@ -41,35 +40,41 @@ class PostniNaslovFixture
     public function populatePostniNaslov($manager, $v)
     {
 
-        $naslovR = $manager->getRepository('App\Entity\PostniNaslov');
+        $rep     = $manager->getRepository('App\Entity\PostniNaslov');
         $drzavaR = $manager->getRepository('App\Entity\Drzava');
 
-
-        $o = new \App\Entity\PostniNaslov();
-        $manager->persist($o);
-
-        if ($v[1]) {
-            $getref = $this->getReference($v[1]);
-            $o->setPopa($getref);
+        $popaId  = $v[1] ? $this->getReference($v[1]) : null;
+        $osebaId = $v[2] ? $this->getReference($v[2]) : null;
+        $o       = $rep->findOneBy([
+            "popa"  => $popaId,
+            "oseba" => $osebaId,
+            "naziv" => $v[3],
+        ]);
+        $nov     = false;
+        if (!$o) {
+            $o   = new \App\Entity\PostniNaslov();
+            $o->setNaziv($v[3]);
+            $o->setPopa($popaId);
+            $o->setOseba($osebaId);
+            $nov = true;
         }
-        if ($v[2]) {
-            $getref = $this->getReference($v[2]);
-            $o->setOseba($getref);
-        }
 
-        $o->setNaziv($v[3]);
         $o->setUlica($v[4]);
         $o->setUlicaDva($v[5]);
         $o->setPosta($v[6]);
         $o->setPostaNaziv($v[7]);
         $o->setPokrajina($v[8]);
-
+        
         $drzava = $drzavaR->findOneBySifra(trim($v[9]));
         $o->setDrzava($drzava);
 
         $o->setJeeu($v[10]);
         $o->setPrivzeti($v[11]);
-
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'PostniNaslov-' . $v[0];
         var_dump($referenca);

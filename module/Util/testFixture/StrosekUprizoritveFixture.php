@@ -44,20 +44,25 @@ class StrosekUprizoritveFixture
         $rep           = $manager->getRepository('Produkcija\Entity\StrosekUprizoritve');
         $vrstaStroskaR = $manager->getRepository('Produkcija\Entity\VrstaStroska');
 
-
-        $o = new \Produkcija\Entity\StrosekUprizoritve();
-        $manager->persist($o);
-
-        $o->setNaziv(trim($v[0]));
+        $uprizoritevId = $v[5] ? $this->getReference($v[5]) : null;
+        $popaId        = $v[6] ? $this->getReference($v[6]) : null;
+        $o             = $rep->findOneBy([
+            "uprizoritev" => $uprizoritevId,
+            "popa"        => $popaId,
+            "naziv"       => trim($v[0]),
+        ]);
+        $nov           = false;
+        if (!$o) {
+            $o   = new \Produkcija\Entity\StrosekUprizoritve();
+            $o->setNaziv(trim($v[0]));
+            $o->setUprizoritev($uprizoritevId);
+            $o->setPopa($popaId);
+            $nov = true;
+        }
         $o->setVrednostDo(trim($v[1]));
         $o->setVrednostNa(trim($v[2]));
         $o->setOpis(trim($v[3]));
         $o->setSort(trim($v[4]));
-
-        $getref = $this->getReference($v[5]);
-        $o->setUprizoritev($getref);
-        $getref = $this->getReference($v[6]);
-        $o->setPopa($getref);
         $o->setTipstroska(trim($v[7]));
 
         /**
@@ -66,16 +71,14 @@ class StrosekUprizoritveFixture
         if ($v[8]) {
             $sk    = (integer) strtok($v[8], ".");
             $podsk = (integer) strtok(".");
-//            echo " .............    sk=" . $sk . PHP_EOL;
-//            echo " ............. podsk=" . $podsk . PHP_EOL;
-//            print_r($podsk);
             $value = $vrstaStroskaR->findOneBy(["skupina" => $sk, "podskupina" => $podsk]);
-//            var_dump($value);
             $o->setVrstaStroska($value);
         }
-
-        $o->validate();
-
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'StrosekUprizoritve-' . $v[0];
         var_dump($referenca);

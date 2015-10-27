@@ -43,17 +43,30 @@ class VajaFixture
 
         $rep = $manager->getRepository('Koledar\Entity\Vaja');
 
-        $o   = new \Koledar\Entity\Vaja();
-        $o->setZaporedna($v[1]);
+        $uprizoritevId = $v[4] ? $this->getReference($v[4]) : null;
+        $o             = $rep->findOneBy([
+            "uprizoritev" => $uprizoritevId,
+            "zaporedna"   => $v[1],
+        ]);
+        $nov           = false;
+        if (!$o) {
+            $o   = new \Koledar\Entity\Vaja();
+            $o->setZaporedna($v[1]);
+            $o->setUprizoritev($uprizoritevId);
+            $nov = true;
+        }
+
         $o->setPorocilo($v[2]);
         if ($v[3]) {
             // še za implementirati, če bo potrebno
             $getref = $this->getReference($v[3]);
             $o->setDogodek($getref);
         }
-        $getref = $this->getReference($v[4]);
-        $o->setUprizoritev($getref);
-        $rep->create($o);
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'Vaja-' . $v[0];
         var_dump($referenca);

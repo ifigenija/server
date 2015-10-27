@@ -44,13 +44,20 @@ class ProgramPremieraFixture
         $rep      = $manager->getRepository('ProgramDela\Entity\ProgramPremiera');
         $tipPrEnR = $manager->getRepository('ProgramDela\Entity\TipProgramskeEnote');
 
-        $o = new \ProgramDela\Entity\ProgramPremiera();
-        $manager->persist($o);
 
-        $getref = $this->getReference($v[17]);
-        $o->setUprizoritev($getref);
-
-//        $o->setCelotnaVrednost($v[1]);
+        $programdDelaId = $v[19] ? $this->getReference($v[19]) : null;
+        $uprizoritevId  = $v[17] ? $this->getReference($v[17]) : null;
+        $o              = $rep->findOneBy([
+            "dokument"    => $programdDelaId,
+            "uprizoritev" => $uprizoritevId,
+        ]);
+        $nov            = false;
+        if (!$o) {
+            $o   = new \ProgramDela\Entity\ProgramPremiera();
+            $o->setDokument($programdDelaId);
+            $o->setUprizoritev($uprizoritevId);
+            $nov = true;
+        }
 
         $value = $tipPrEnR->findOneBySifra($v[2]);
         $o->setTipProgramskeEnote($value);
@@ -70,9 +77,16 @@ class ProgramPremieraFixture
         $o->setStHonorarnihZunIgrTujJZ($v[15]);
         $o->setMaterialni($v[16]);
         $o->setStHonorarnihZunSamoz($v[18]);
-
+        
+        /**
+         * pri create oz. update javi v repozitoriju, da ne more nekega servica poklicati
+         */
+        if ($nov) {
+            $manager->persist($o);
+        } 
         $o->preracunaj();
         $o->validate();
+        
         $referenca = 'ProgramPremiera-' . $v[0];
         var_dump($referenca);
         $this->addReference($referenca, $o);
@@ -81,9 +95,9 @@ class ProgramPremieraFixture
     public function getData()
     {
         return [
-            ['01', 10000.80, '04', 3600.12, 2222.3, 4000.4, 1000.4, 200.2, 200.3, 100.2, 40, 2, 2, 2, 2, 2, 4599.4,'Uprizoritev-0001',0,],
-            ['02', 5000.000, '05', 1960.08, 1000.2, 600.70, 100.70, 200.2, 200.2, 100.2, 60, 3, 3, 3, 3, 3, 3899.1,'Uprizoritev-0002',0,],
-            ['03', 5000.000, '04', 1960.08, 1000.2, 600.70, 100.70, 200.2, 200.2, 100.2, 60, 3, 3, 3, 3, 3, 3899.1,'Uprizoritev-0003',0,],
+            ['01', 10000.80, '04', 3600.12, 2222.3, 4000.4, 1000.4, 200.2, 200.3, 100.2, 40, 2, 2, 2, 2, 2, 4599.4, 'Uprizoritev-0001', 0, null,],
+            ['02', 5000.000, '05', 1960.08, 1000.2, 600.70, 100.70, 200.2, 200.2, 100.2, 60, 3, 3, 3, 3, 3, 3899.1, 'Uprizoritev-0002', 0, null,],
+            ['03', 5000.000, '04', 1960.08, 1000.2, 600.70, 100.70, 200.2, 200.2, 100.2, 60, 3, 3, 3, 3, 3, 3899.1, 'Uprizoritev-0003', 0, null,],
         ];
     }
 

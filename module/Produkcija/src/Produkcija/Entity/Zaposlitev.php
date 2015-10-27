@@ -26,9 +26,9 @@ class Zaposlitev
      * @var string     
      */
     protected $id;
-
+    
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(unique=true, length=4, nullable=false)
      * @Max\I18n(label="zaposlitev.sifra",  description="zaposlitev.d.sifra")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode")
      * @var string

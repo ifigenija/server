@@ -32,16 +32,26 @@ class AbonmaFixture
     public function populateAbonma($manager, $v)
     {
 
-        $abonmaR = $manager->getRepository('Abonmaji\Entity\Abonma');
+        $rep = $manager->getRepository('Abonmaji\Entity\Abonma');
 
-        $o = new \Abonmaji\Entity\Abonma();
+        $o   = $rep->findOneByIme(trim($v[3]));
+        $nov = false;
+        if (!$o) {
+            $o   = new \Abonmaji\Entity\Abonma();
+            $o->setIme(trim($v[3]));
+            $nov = true;
+        }
         $o->setStPredstav($v[1]);
         $o->setStKuponov($v[2]);
-        $o->setIme($v[3]);
         $o->setOpis($v[4]);
         $o->setKapaciteta($v[5]);
-        $abonmaR->create($o);
 
+         if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
+    
         $referenca = 'Abonma-' . $v[0];
         var_dump($referenca);
         $this->addReference($referenca, $o);

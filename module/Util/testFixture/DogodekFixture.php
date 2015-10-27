@@ -44,8 +44,29 @@ class DogodekFixture
 
         $rep = $manager->getRepository('Koledar\Entity\Dogodek');
 
-        $o = new Dogodek();
-        
+        $predstavaId  = $v[8] ? $this->getReference($v[8]) : null;
+        $zasedenostId = $v[9] ? $this->getReference($v[9]) : null;
+        $vajaId       = $v[10] ? $this->getReference($v[10]) : null;
+        $gostovanjeId = $v[11] ? $this->getReference($v[11]) : null;
+        $splosniId    = $v[12] ? $this->getReference($v[12]) : null;
+        $o            = $rep->findOneBy([
+            "predstava"  => $predstavaId,
+            "zasedenost" => $zasedenostId,
+            "vaja"       => $vajaId,
+            "gostovanje" => $gostovanjeId,
+            "splosni"    => $splosniId,
+        ]);
+        $nov          = false;
+        if (!$o) {
+            $o   = new \Koledar\Entity\Dogodek();
+            $o->setPredstava($predstavaId);
+            $o->setZasedenost($zasedenostId);
+            $o->setVaja($vajaId);
+            $o->setGostovanje($gostovanjeId);
+            $o->setSplosni($splosniId);
+            $nov = true;
+        }
+
         $date = empty($v[2]) ? null : date_create($v[2]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setZacetek($date);
         $date = empty($v[3]) ? null : date_create($v[3]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
@@ -56,26 +77,6 @@ class DogodekFixture
         $o->setTermin($v[6]);
         $o->setTitle($v[7]);
 
-        if ($v[8]) {
-            $getref = $this->getReference($v[8]);
-            $o->setPredstava($getref);
-        }
-        if ($v[9]) {
-            $getref = $this->getReference($v[9]);
-            $o->setZasedenost($getref);
-        }
-        if ($v[10]) {
-            $getref = $this->getReference($v[10]);
-            $o->setVaja($getref);
-        }
-        if ($v[11]) {
-            $getref = $this->getReference($v[11]);
-            $o->setGostovanje($getref);
-        }
-        if ($v[12]) {
-            $getref = $this->getReference($v[12]);
-            $o->setDogodekIzven($getref);
-        }
         if ($v[13]) {
             $getref = $this->getReference($v[13]);
             $o->setProstor($getref);
@@ -84,10 +85,11 @@ class DogodekFixture
             $getref = $this->getReference($v[14]);
             $o->setSezona($getref);
         }
-
-        $o->validate();
-        
-        $manager->persist($o);
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'Dogodek-' . $v[0];
         var_dump($referenca);

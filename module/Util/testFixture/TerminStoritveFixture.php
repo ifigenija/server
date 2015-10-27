@@ -43,21 +43,26 @@ class TerminStoritveFixture
 
         $rep = $manager->getRepository('Prisotnost\Entity\TerminStoritve');
 
-//            'planiranZacetek => '2011-02-01T00:00:00+0100',
-//            'planiranKonec   => '2012-02-01T00:00:00+0100',
-//            'zacetek         => '2013-02-01T00:00:00+0100',
-//            'konec           => '2014-02-01T00:00:00+0100',
-//            'planiranoTraja  => 1.23,
-//            'dogodek         => $this->objDogodek['id'],
-//            'alternacija     => $this->objAlternacija['id'],
-//            'oseba           => $this->objOseba['id'],
+        $dogodekId       = $v[6] ? $this->getReference($v[6]) : null;
+        $alternacijaId   = $v[7] ? $this->getReference($v[7]) : null;
+        $osebaId         = $v[8] ? $this->getReference($v[8]) : null;
+        $planiranZacetek = empty($v[1]) ? null : date_create($v[1]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
+        $o               = $rep->findOneBy([
+            "dogodek"         => $dogodekId,
+            "alternacija"     => $alternacijaId,
+            "oseba"           => $osebaId,
+            "planiranZacetek" => $planiranZacetek,
+        ]);
+        $nov             = false;
+        if (!$o) {
+            $o   = new \Prisotnost\Entity\TerminStoritve();
+            $o->setDogodek($dogodekId);
+            $o->setAlternacija($alternacijaId);
+            $o->setOseba($osebaId);
+            $o->setPlaniranZacetek($planiranZacetek);
+            $nov = true;
+        }
 
-
-        $o = new \Prisotnost\Entity\TerminStoritve();
-
-
-        $date = empty($v[1]) ? null : date_create($v[1]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
-        $o->setPlaniranZacetek($date);
         $date = empty($v[2]) ? null : date_create($v[2]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setPlaniranKonec($date);
         $date = empty($v[3]) ? null : date_create($v[3]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
@@ -65,24 +70,13 @@ class TerminStoritveFixture
         $date = empty($v[4]) ? null : date_create($v[4]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setKonec($date);
         $o->setPlaniranoTraja($v[5]);
-
-        if ($v[6]) {
-            $getref = $this->getReference($v[6]);
-            $o->setDogodek($getref);
-        }
-        if ($v[7]) {
-            $getref = $this->getReference($v[7]);
-            $o->setAlternacija($getref);
-        }
-        if ($v[8]) {
-            $getref = $this->getReference($v[8]);
-            $o->setOseba($getref);
-        }
         $o->setDezurni($v[9]);
         $o->setGost($v[10]);
-
-        $rep->create($o);
-
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
 
         $referenca = 'TerminStoritve-' . $v[0];
         var_dump($referenca);
@@ -92,15 +86,15 @@ class TerminStoritveFixture
     public function getData()
     {
         return [
-            ['01', "2015-06-26 10:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0001", "Oseba-0009", false, false,],
-            ['02', "2015-06-26 10:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0002", "Oseba-0010", false, false,],
-            ['03', "2015-06-26 10:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0003", "Oseba-0003", false, false,],
-            ['04', "2015-06-26 10:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0004", "Oseba-0002", false, false,],
-            ['05', "2015-06-26 10:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0005", "Oseba-0012", false, false,],
+            ['01', "2015-06-26 10:00:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0001", "Oseba-0001", false, false,],
+            ['02', "2015-06-26 10:00:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0002", "Oseba-0010", false, false,],
+            ['03', "2015-06-26 10:00:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0003", "Oseba-0003", false, false,],
+            ['04', "2015-06-26 10:00:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0004", "Oseba-0002", false, false,],
+            ['05', "2015-06-26 10:00:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0005", "Oseba-0012", false, false,],
             // dezurni
-            ['06', "2015-08-01 20:00", "2015-08-01 23:00", null, null, 2, "Dogodek-03", null, "Oseba-0012", TRUE, false,],
+            ['06', "2015-08-01 20:00:00", "2015-08-01 23:00", null, null, 2, "Dogodek-03", null, "Oseba-0012", TRUE, false,],
             // gost
-            ['07', "2015-08-01 20:00", "2015-08-01 23:00", null, null, 2, "Dogodek-03", null, "Oseba-0010", false, TRUE,],
+            ['07', "2015-08-01 20:00:00", "2015-08-01 23:00", null, null, 2, "Dogodek-03", null, "Oseba-0010", false, TRUE,],
         ];
     }
 

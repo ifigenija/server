@@ -41,21 +41,26 @@ class KontaktnaOsebaFixture
 
         $rep = $manager->getRepository('App\Entity\KontaktnaOseba');
 
-        $o = new \App\Entity\KontaktnaOseba();
+        $popaId  = $v[3] ? $this->getReference($v[3]) : null;
+        $osebaId = $v[4] ? $this->getReference($v[4]) : null;
+        $o       = $rep->findOneBy(["popa" => $popaId, "oseba" => $osebaId]);
+        $nov     = false;
+        if (!$o) {
+            $o   = new \App\Entity\KontaktnaOseba();
+            $o->setPopa($popaId);
+            $o->setOseba($osebaId);
+            $nov = true;
+        }
         $o->setStatus(trim($v[0]));
-        $manager->persist($o);
-
         $o->setFunkcija($v[1]);
         $o->setOpis($v[2]);
-        if ($v[3]) {
-            $getref = $this->getReference($v[3]);
-            $o->setPopa($getref);
-        }
-        if ($v[4]) {
-            $getref = $this->getReference($v[4]);
-            $o->setOseba($getref);
-        }
         $o->setOpis($v[5]);
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
+
 
         $referenca = 'KontaktnaOseba-' . $v[0];
         var_dump($referenca);
@@ -65,7 +70,7 @@ class KontaktnaOsebaFixture
     public function getData()
     {
         return [
-            [ 'AK', '', '', 'Popa-0988', 'Oseba-0009','igralka'],
+            [ 'AK', '', '', 'Popa-0988', 'Oseba-0009', 'igralka'],
         ];
     }
 

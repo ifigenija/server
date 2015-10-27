@@ -28,25 +28,26 @@ class PogodbaFixture
     public function getDependencies()
     {
         return array('TestFixture\PopaFixture', 'TestFixture\OsebaFixture'); // fixture classes fixture is dependent on , 
-    }
+        }
 
-    /**
-     *
-     * @param \Tip\Repository\IzbirneOpcije $rep
-     * @param string $object
-     * @param array $vals
-     */
-    public function populatePogodba($manager, $v)
-    {
+        /**
+         *
+         * @param \Tip\Repository\IzbirneOpcije $rep
+         * @param string $object
+         * @param array $vals
+         */
+        public function populatePogodba($manager, $v)
+        {
 
         $rep = $manager->getRepository('Produkcija\Entity\Pogodba');
 //        $tipFunR = $manager->getRepository('Produkcija\Entity\TipFunkcije');
 
         $o = $rep->findOneBySifra(trim($v[0]));
+        $nov = false;
         if (!$o) {
-            $o = new \Produkcija\Entity\Pogodba();
-            $o->setSifra(trim($v[0]));
-            $manager->persist($o);
+        $o = new \Produkcija\Entity\Pogodba();
+        $o->setSifra(trim($v[0]));
+        $nov = TRUE;
         }
 
         $o->setVrednostVaj($v[1]);
@@ -82,7 +83,11 @@ class PogodbaFixture
         $o->setIgralec($v[15]);
         $o->setJeAvtorskePravice($v[16]);
 
-        $o->preracunaj();
+        if ($nov) {
+            $rep->create($o);
+        } else {
+            $rep->update($o);
+        }
         /**
          * validate javi napako, ker alternacije še ni
          */

@@ -41,10 +41,17 @@ class ProgramRaznoFixture
 
         $rep = $manager->getRepository('ProgramDela\Entity\ProgramRazno');
 
-        $o = new \ProgramDela\Entity\ProgramRazno();
-        $manager->persist($o);
+        $o              = $rep->findOneBy([
+            "naziv"       => $v[1],
+            "uprizoritev" => $uprizoritevId,
+        ]);
+        $nov            = false;
+        if (!$o) {
+            $o   = new \ProgramDela\Entity\ProgramRazno();
+            $o->setNaziv($v[1]);
+            $nov = true;
+        }
 
-        $o->setNaziv($v[1]);
         $o->setSort($v[2]);
         $o->setObiskDoma($v[3]);
         $o->setStZaposlenih($v[4]);
@@ -54,8 +61,15 @@ class ProgramRaznoFixture
         $o->setLastnaSredstva($v[8]);
         $o->setDrugiJavni($v[9]);
 
+        /**
+         * pri create oz. update javi v repozitoriju, da ne more nekega servica poklicati
+         */
+        if ($nov) {
+            $manager->persist($o);
+        } 
         $o->preracunaj();
         $o->validate();
+        
         $referenca = 'ProgramRazno-' . $v[0];
         var_dump($referenca);
         $this->addReference($referenca, $o);

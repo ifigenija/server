@@ -63,12 +63,12 @@ class OrganizacijskaEnota
             $getref = $this->getReference($v[4]);
             $o->setNamestnik($getref);
         }
-
         if ($nov) {
             $rep->create($o);
         } else {
             $rep->update($o);
         }
+
         $referenca = 'OrganizacijskaEnota-' . $v[0];
         var_dump($referenca);
         $this->addReference($referenca, $o);
@@ -77,10 +77,10 @@ class OrganizacijskaEnota
     public function getData()
     {
         return [
-            ["01", "Gledališče Nimbis", null, "Zaposlitev-01", "Zaposlitev-02"],
-            ["02", "Tehnika", "OrganizacijskaEnota-01", "Zaposlitev-01", "Zaposlitev-02"]
-//            ["03", "Šiviljstvo",        null, null, "Zaposlitev-01", "Zaposlitev-02", "Zaposlitev-03"],
-//            ["04", "Administracija",    "OrganizacijskaEnota-01", null, "Zaposlitev-01", "Zaposlitev-02", "Zaposlitev-03"],
+            ["01", "Gledališče Nimbis", null, "Zaposlitev-0010", "Zaposlitev-0003"],
+            ["02", "Tehnika", "OrganizacijskaEnota-01", "Zaposlitev-0010", "Zaposlitev-0003"]
+//            ["03", "Šiviljstvo",        null, null, "Zaposlitev-0010", "Zaposlitev-0003", "Zaposlitev-03"],
+//            ["04", "Administracija",    "OrganizacijskaEnota-01", null, "Zaposlitev-0010", "Zaposlitev-0003", "Zaposlitev-03"],
         ];
     }
 
