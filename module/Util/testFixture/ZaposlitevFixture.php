@@ -42,6 +42,9 @@ class ZaposlitevFixture
 
         $rep = $manager->getRepository('Produkcija\Entity\Zaposlitev');
 
+        /**
+         * $$ zaenkrat šifra še ni unique, -a bi morala biti
+         */
         $o   = $rep->findOneBySifra(trim($v[0]));
         $nov = false;
         if (!$o) {

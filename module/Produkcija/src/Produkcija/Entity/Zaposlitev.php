@@ -28,7 +28,9 @@ class Zaposlitev
     protected $id;
     
     /**
-     * @ORM\Column(unique=true, length=4, nullable=false)
+     * $$ morali bi spremeniti v unique, ampak potem več ne sme šifre avtomatsko prenašati iz osebe
+     * 
+     * @ORM\Column( length=4, nullable=false)
      * @Max\I18n(label="zaposlitev.sifra",  description="zaposlitev.d.sifra")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode")
      * @var string
