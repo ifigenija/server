@@ -78,7 +78,7 @@ class EnotaProgramaRpcService
         $this->expectPermission("Oseba-read");
         $this->expectPermission("Pogodba-read");
 
-        $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $em = $this->serviceLocator->get("doctrine.entitymanager.orm_default");
         $tr = $this->getServiceLocator()->get('translator');
 
         $this->expectUUID($uprizoritevId, $this->translate('Pričakujem ID uprizoritve'), 1000971);

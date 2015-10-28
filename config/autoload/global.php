@@ -20,7 +20,7 @@ return [
         ]
     ],
     'translator'      => [
-        'event_manager_enabled'     => true,
+        'event_manager_enabled'     => false,
         'translation_file_patterns' => [
             [
                 'type'     => 'phparray',
@@ -35,7 +35,7 @@ return [
         ],
         'cache'                     => [
             'adapter' => [
-                'name'    => 'apc',
+                'name'    => 'blackhole',
                 'options' => [
                     'ttl' => 86400
                 ]
@@ -87,27 +87,5 @@ return [
             'error/index'   => 'module/App/layout/error/index.phtml',
         ]
     ],
-    'translator' => [
-      //  'event_manager_enabled' => true,
-        'translation_file_patterns' => [
-            [
-                'type' => 'phparray',
-                'base_dir' => 'locale',
-                'pattern' => '%s/messages.php',
-            ],
-            [
-                'type' => 'phparray',
-                'base_dir' => 'locale',
-                'pattern' => '%s/Zend_Validate.php',
-            ]
-        ],
-        'cache' => [
-            'adapter' => [
-                'name' => 'apc',
-                'options' => [
-                    'ttl' => 86400
-                ]
-            ],
-        ]
-    ]
+
 ];

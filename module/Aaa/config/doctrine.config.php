@@ -9,7 +9,7 @@
 return [
     'doctrine' => [
         'driver' => [
-            'aaa' => [
+            'Aaa' => [
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'apc',
                 'paths' => [
@@ -18,7 +18,7 @@ return [
             ],
             'orm_default' => [
                 'drivers' => [
-                    'Aaa\Entity' => 'aaa'
+                    'Aaa\Entity' => 'Aaa'
                 ]
             ]
         ],
