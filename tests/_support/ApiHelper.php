@@ -452,12 +452,11 @@ class ApiHelper
         $I->sendOPTIONS("/rest/$controller" . ( $view ? "/$view" : ""));
         $I->seeResponseCodeIs('200');
         $I->seeResponseIsJson();
-        $formMeta = $I->grabDataFromJsonResponse();
+        $formMeta = $I->grabDataFromResponseByJsonPath('*');
 
-        codecept_debug($formMeta);
 //        $I->assertNotEmpty($formMeta, "Prazni metapodatki za $controller/$view");     //$$ začasno izkjljučimo , ker je fail
 
-        foreach ($formMeta['schema'] as $field) {
+        foreach ($formMeta[0] as $field) {
             codecept_debug($field);
 
             if (!empty($expected['field'])) {

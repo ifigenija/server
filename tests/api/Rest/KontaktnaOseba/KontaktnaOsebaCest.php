@@ -191,7 +191,7 @@ class KontaktnaOsebaCest
         $I->assertEquals($ent['status'], 'AK');
         $I->assertEquals($ent['funkcija'], 'zz');
         $I->assertEquals($ent['opis'], 'yy');
-        $I->assertEquals($ent['popa'], $this->lookPopa['id']);
+        $I->assertEquals($ent['popa']['id'], $this->lookPopa['id']);
         $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
     }
 
