@@ -111,7 +111,7 @@ class ProgramDelaRpcService
                 $minPriponk += 1;
             }
             $stZapisov = count($zaplR->findByLastnik($ep->getId()));
-            if ($stZapisov < 1+$minPriponk) {
+            if ($stZapisov < 1 + $minPriponk) {
                 throw new \Max\Exception\UnauthException($tr
                         ->translate('Program festivali (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk, ima pa $stZapisov")
                 , 1001222);
@@ -602,13 +602,12 @@ class ProgramDelaRpcService
      * Tiskanje dokumenta
      *
      * @param string $dokument
-     * @param array $printOptions
+     * @param array $options
      * @return array
      * @throws MaxException
      */
-    public function tiskajDokument($dokument, $printOptions)
+    public function tiskajDokument($dokument, $options)
     {
-
         $this->expectUUID($dokument
                 , $this->translate('Pričakujem ID dokumenta')
                 , 520082);
@@ -620,11 +619,10 @@ class ProgramDelaRpcService
                 , $this->translate('Dokument ne obstaja')
                 , 520081);
         $this->expectPermission('ProgramDela-write', $dok);
-
         $report = 'ProgramDela\Task\ProgramDelaReport';
 
         try {
-            $job = $this->docPrint($report, $dokument, $printOptions);
+            $job = $this->docPrint($report, $dokument, $options);
             return $job;
         } catch (\Exception $ex) {
             throw new MaxException($this->translate('Napaka pri tiskanju dokumenta:')

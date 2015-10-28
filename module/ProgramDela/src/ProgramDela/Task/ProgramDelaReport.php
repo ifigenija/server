@@ -15,13 +15,14 @@ use Jobs\Annotation\Task as Task;
 class ProgramDelaReport
         extends IfiPrinterTask
 {
+
     /**
      *
      * @var ProgramDela\Entity\ProgramDela $prgdela 
      * @var Jobs\Printing\mPdfPrinter $printer 
      */
     protected $entity;
-    
+
     public function taskBody()
     {
         $ps = $this->getServiceLocator()->get('mpdf.printer');
@@ -38,33 +39,59 @@ class ProgramDelaReport
         } else {
             $printer->showWatermarkText = false;
         }
+
+        $jePs1   = $this->data['jePs1'];
+        $jePs2   = $this->data['jePs2'];
+        $jeKaz   = $this->data['jeKaz'];
+        $jeC2    = $this->data['jeC2'];
+        $jeZapis = !$this->data['jeZapis'];
+        
+        $vars = [
+            'jePs1' => $jePs1,
+            'jePs2' => $jePs2,
+            'jeKaz' => $jeKaz,
+            'jeC2'  => $jeC2,
+            'jeZapis' => $jeZapis
+        ];
         
         // Splošno za program dela - nastavim header in footer + zavihek 'splošno' iz vnosne forme
-        $this->addDocumentReport('program-dela', $title, $prgdela);
+        $this->addDocumentReport('program-dela', $title, $prgdela, $vars);
 
-        // Premiere
-        $this->reportSklopPrograma($printer, $prgdela->premiere, 'premiera', $title);
-        // Ponovitve premier
-        $this->reportSklopPrograma($printer, $prgdela->ponovitvePremiere , 'ponovitve-premier', $title);
-        // Ponovitve prejšnjih
-        $this->reportSklopPrograma($printer, $prgdela->ponovitvePrejsnjih , 'ponovitve-prejsnjih', $title);
-        // Gostujoče
-        $this->reportSklopPrograma($printer, $prgdela->gostujoci, 'gostujoce', $title);
-        // Mednarodna gostovanja
-        $this->reportSklopPrograma($printer, $prgdela->gostovanja, 'mednarodna', $title);
-        // Festivali 
-        $this->reportSklopPrograma($printer, $prgdela->programiFestival, 'festivali', $title);
-        // Razno
-        $this->reportSklopPrograma($printer, $prgdela->programiRazno, 'razno', $title);
-        // Izjemni dogodki
-        $this->reportSklopPrograma($printer, $prgdela->izjemni, 'izjemni', $title);
+        // Programski sklop 1
+        if ($jePs1) {
+            // Premiere
+            $this->reportSklopPrograma($printer, $prgdela->premiere, 'premiera', $title, $jeZapis);
+            // Ponovitve premier
+            $this->reportSklopPrograma($printer, $prgdela->ponovitvePremiere, 'ponovitve-premier', $title, $jeZapis);
+            // Ponovitve prejšnjih
+            $this->reportSklopPrograma($printer, $prgdela->ponovitvePrejsnjih, 'ponovitve-prejsnjih', $title, $jeZapis);
+            // Gostujoče
+            $this->reportSklopPrograma($printer, $prgdela->gostujoci, 'gostujoce', $title, $jeZapis);
+        }
+
+        // Programski sklop 2
+        if ($jePs2) {
+            // Mednarodna gostovanja
+            $this->reportSklopPrograma($printer, $prgdela->gostovanja, 'mednarodna', $title, $jeZapis);
+            // Festivali 
+            $this->reportSklopPrograma($printer, $prgdela->programiFestival, 'festivali', $title, $jeZapis);
+            // Razno
+            $this->reportSklopPrograma($printer, $prgdela->programiRazno, 'razno', $title, $jeZapis);
+            // Izjemni dogodki
+            $this->reportSklopPrograma($printer, $prgdela->izjemni, 'izjemni', $title, $jeZapis);
+        }
+
         // Kazalniki
-        $this->addDocumentReport('kazalniki', $title, $prgdela);
-        // Kazalniki - priloga 
-        $this->addDocumentReport('kazalniki-priloga', $title, $prgdela);
+        if ($jeKaz) {
+            $this->addDocumentReport('kazalniki', $title, $prgdela);
+            // Kazalniki - priloga 
+            $this->addDocumentReport('kazalniki-priloga', $title, $prgdela);
+        }
+
         // Postavke C2
-        $this->addDocumentReport('postavke-c2', $title, $prgdela);
-                
+        if ($jeC2) {
+            $this->addDocumentReport('postavke-c2', $title, $prgdela);
+        }
         $this->finishReport($title);
     }
 
@@ -76,16 +103,19 @@ class ProgramDelaReport
      * @param string $tmpl      ime predloge
      * @param string $naslov    naslov reporta
      */
-    public function reportSklopPrograma($printer, $sklopi, $tmpl, $naslov)
+    public function reportSklopPrograma($printer, $sklopi, $tmpl, $naslov, $jeZapis)
     {
         $zs = $this->getServiceLocator()->get('zapisi.service');
 
         foreach ($sklopi as $sklop) {
             $this->addDocumentReport($tmpl, $naslov, $sklop);
+
             // dodam zapise 
-            $myzapisi = $zs->getZapiseZaLastnika($sklop->id);
-            foreach ($myzapisi as $myzapis) {
-                $this->addDocumentAttachment($printer, 'zapisi', $naslov, $myzapis);
+            if ($jeZapis) {
+                $myzapisi = $zs->getZapiseZaLastnika($sklop->id);
+                foreach ($myzapisi as $myzapis) {
+                    $this->addDocumentAttachment($printer, 'zapisi', $naslov, $myzapis);
+                }
             }
         }
     }
