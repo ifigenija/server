@@ -120,7 +120,7 @@ class VrstaStroskaCest
         $I->assertNotEmpty($list);
         
         //iskanje po podskupini
-        $listUrl = $this->restUrl . "?skupina=" . "102";
+        $listUrl = $this->restUrl . "?podskupina=" . "102";
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];

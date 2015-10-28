@@ -97,7 +97,7 @@ class UserCest
         // kreiramo še en zapis
         $data           = [
             'email'              => 'test6@ifigenija.si',
-            'name'               => 'Testni uporabnik za Cest testiranje',
+            'name'               => 'Testni uporabnik za Cest3 testiranje',
             'password'           => 'weiiw3948593845ASDFASEDF',
             'enabled'            => true,
             'expires'            => '2018-02-01T00:00:00+0100',
@@ -142,7 +142,7 @@ class UserCest
         $I->assertNotEmpty($list);
 
         //iskanje name
-        $listUrl = $this->restUrl . "?q=" . "za cest";
+        $listUrl = $this->restUrl . "?q=" . "za cest3";
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];

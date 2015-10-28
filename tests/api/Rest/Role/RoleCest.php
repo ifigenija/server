@@ -152,11 +152,11 @@ class RoleCest
      */
     public function getListPoRole(ApiTester $I)
     {
-        //iskanje ulica
-        $listUrl = $this->restUrl . "?q=" . "TEST4";
+        $listUrl = $this->restUrl . "?q=" . "TEST5";
 
         $resp = $I->successfullyGetList($listUrl, []);
         $list = $resp['data'];
+        codecept_debug($list);
 
         $I->assertEquals(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);

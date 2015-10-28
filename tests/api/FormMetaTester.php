@@ -42,7 +42,8 @@ class FormMetaTester
             $I->assertTrue(array_key_exists('editorAttrs', $field), "ima editorAttrs");
             $I->assertTrue(array_key_exists('help', $field), "Ima help");
             $I->assertTrue(array_key_exists('validators', $field), "Ima validators");
-        }    }
+        }
+    }
 
     protected function filterHasField($name)
     {

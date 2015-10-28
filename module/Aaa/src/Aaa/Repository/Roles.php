@@ -38,7 +38,7 @@ class Roles
     /**
      * Iskanje za privzeto
      *
-     * @param type $options['text'] je obvezen
+     * @param type $options['q'] je obvezen
      * @return Paginator
      */
     public function getPaginator(array $options, $name = 'default')
@@ -53,8 +53,8 @@ class Roles
         $qb->orderBy($sort->order, $sort->dir);
 
 
-        if (!empty($options['text'])) {
-            $srch = mb_strtolower($options['text']);
+        if (!empty($options['q'])) {
+            $srch = mb_strtolower($options['q']);
             $qb->Where($ex->like('lower(r.name)', ':name'));
             $qb->setParameter('name', "%" . $srch . "%");
         }

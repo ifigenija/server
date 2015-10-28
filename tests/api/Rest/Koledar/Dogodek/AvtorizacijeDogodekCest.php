@@ -143,7 +143,7 @@ class AvtorizacijeDogodekCest
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
 
-        $resp = $I->successfullyGetList($this->restUrl, []);
+        $resp = $I->successfullyGetList($this->restUrl . "?zacetek=2000-01-01&konec=3000-01-01", []);
         $list = $resp['data'];
         codecept_debug($list);
 

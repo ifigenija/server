@@ -100,7 +100,7 @@ class UprizoritevCest
     private $objVrstaStroska3;
     private $objVrstaStroska4;
     private $objVrstaStroskaGlava;
-    private $vrstaStroskaUrl = '/rest/vrstastroska';
+    private $vrstaStroskaUrl        = '/rest/vrstastroska';
 
     public function _before(ApiTester $I)
     {
@@ -288,7 +288,7 @@ class UprizoritevCest
             'arhOpomba'             => 'zz',
             'datumZakljucka'        => '2019-02-01T00:00:00+0100',
             'sloAvtor'              => FALSE,
-            'jeKoprodukcija'              => FALSE,
+            'jeKoprodukcija'        => FALSE,
             'kratkiNaslov'          => 'zz',
             'besedilo'              => $this->lookBesedilo['id'],
             'zvrstUprizoritve'      => null,
@@ -325,7 +325,7 @@ class UprizoritevCest
             'arhOpomba'             => 'aa',
             'datumZakljucka'        => '2019-02-01T00:00:00+0100',
             'sloAvtor'              => true, // $$ bool vrača napako convertToBool
-            'jeKoprodukcija'              => true, 
+            'jeKoprodukcija'        => true,
             'kratkiNaslov'          => 'aa',
             'besedilo'              => $this->lookBesedilo['id'],
             'zvrstUprizoritve'      => null,
@@ -358,7 +358,7 @@ class UprizoritevCest
             'arhOpomba'             => 'bb',
             'datumZakljucka'        => '2014-02-01T00:00:00+0100',
             'sloAvtor'              => true, // $$ bool vrača napako convertToBool
-            'jeKoprodukcija'              => true, // $$ bool vrača napako convertToBool
+            'jeKoprodukcija'        => true, // $$ bool vrača napako convertToBool
             'kratkiNaslov'          => 'bb',
             'besedilo'              => $this->lookBesedilo['id'],
             'zvrstUprizoritve'      => null,
@@ -397,7 +397,7 @@ class UprizoritevCest
             'arhOpomba'        => 'b',
             'datumZakljucka'   => '2019-02-01T00:00:00+0100',
             'sloAvtor'         => true, // $$ bool vrača napako convertToBool
-            'jeKoprodukcija'         => true, 
+            'jeKoprodukcija'   => true,
             'kratkiNaslov'     => 'bb',
             'maticniOder'      => $this->lookProstor['id'],
             'besedilo'         => $this->lookBesedilo['id'],
@@ -631,26 +631,36 @@ class UprizoritevCest
      */
     public function createVecVaj(ApiTester $I)
     {
-        $I->assertTrue(true);
+        $zacetek        = '2014-09-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data           = [
+            'tipvaje'     => $this->lookTipVaje1['id'],
             'zaporedna'   => 1,
             'porocilo'    => 'zz',
-            'dogodek'     => null, // najprej mora biti kreirana vaja, šele potem dogodek.
             'uprizoritev' => $this->obj2['id'],
+            'title'       => "Vaja $zacetek",
+            'status'      => '100s',
+            'zacetek'     => $zacetek,
+            'konec'       => '2014-05-07T14:00:00+0200',
+            'prostor'     => $this->lookProstor1['id'],
+            'sezona'      => $this->lookSezona1['id'],
         ];
         $this->objVaja1 = $ent            = $I->successfullyCreate($this->vajaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['porocilo'], 'zz');
+        $I->assertGuid($ent['id']);
 
+        $zacetek        = '2014-10-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data           = [
-            'zaporedna'   => 1,
+            'tipvaje'     => $this->lookTipVaje1['id'],
+            'zaporedna'   => 2,
             'porocilo'    => 'cc',
-            'dogodek'     => null, // najprej mora biti kreirana vaja, šele potem dogodek.
             'uprizoritev' => $this->obj2['id'],
+            'title'       => "Vaja $zacetek",
+            'status'      => '100s',
+            'zacetek'     => $zacetek,
+            'konec'       => '2014-05-07T14:00:00+0200',
+            'prostor'     => $this->lookProstor1['id'],
+            'sezona'      => $this->lookSezona1['id'],
         ];
         $this->objVaja2 = $ent            = $I->successfullyCreate($this->vajaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
     }
 
     /**
@@ -872,7 +882,7 @@ class UprizoritevCest
 //        $I->assertNotEmpty($ent['id']);
 //    }
 
-        /**
+    /**
      * najde enoto programa
      * 
      * @param ApiTester $I
@@ -903,7 +913,6 @@ class UprizoritevCest
         codecept_debug($vrstaStroska);
     }
 
-    
     /**
      *  kreiramo zapis
      * 
