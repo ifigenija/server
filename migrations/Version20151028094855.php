@@ -18,7 +18,7 @@ class Version20151028094855 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('DROP INDEX uniq_b2449041559828a3');
+//        $this->addSql('DROP INDEX uniq_b2449041559828a3');
     }
 
     /**
@@ -30,6 +30,6 @@ class Version20151028094855 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('CREATE UNIQUE INDEX uniq_b2449041559828a3 ON Zaposlitev (sifra)');
+//        $this->addSql('CREATE UNIQUE INDEX uniq_b2449041559828a3 ON Zaposlitev (sifra)');
     }
 }

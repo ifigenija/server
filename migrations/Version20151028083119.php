@@ -25,7 +25,7 @@ class Version20151028083119 extends AbstractMigration
         $this->addSql('ALTER TABLE organizacijskaenota ALTER sifra SET NOT NULL');
         $this->addSql('ALTER TABLE organizacijskaenota ALTER sifra TYPE VARCHAR(255)');
         $this->addSql('ALTER TABLE zaposlitev ALTER sifra TYPE VARCHAR(4)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_B2449041559828A3 ON zaposlitev (sifra)');
+//        $this->addSql('CREATE UNIQUE INDEX UNIQ_B2449041559828A3 ON zaposlitev (sifra)');
     }
 
     /**
@@ -41,7 +41,7 @@ class Version20151028083119 extends AbstractMigration
         $this->addSql('ALTER TABLE Oseba DROP twitter');
         $this->addSql('ALTER TABLE Oseba DROP skype');
         $this->addSql('ALTER TABLE Oseba DROP fb');
-        $this->addSql('DROP INDEX UNIQ_B2449041559828A3');
+//        $this->addSql('DROP INDEX UNIQ_B2449041559828A3');
         $this->addSql('ALTER TABLE Zaposlitev ALTER sifra TYPE VARCHAR(10)');
         $this->addSql('ALTER TABLE OrganizacijskaEnota ALTER sifra DROP NOT NULL');
         $this->addSql('ALTER TABLE OrganizacijskaEnota ALTER sifra TYPE VARCHAR(2)');
