@@ -44,11 +44,10 @@ class AuthenticationServiceFactory implements FactoryInterface
     {
 
         $chain = new Chain();
-        $chain->add($serviceLocator->get('doctrine.authenticationstorage.orm_default'),0);
+        $chain->add($serviceLocator->get('doctrine.authenticationstorage.orm_default'),2);
         $conn = $serviceLocator->get('doctrine.connection.orm_default');
-        $chain->add(new DbalStorage($conn),2);
+        $chain->add(new DbalStorage($conn),1);
         return new AuthenticationService(
-
             $chain,
             $serviceLocator->get('doctrine.authenticationadapter.orm_default')
         );

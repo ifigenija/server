@@ -9,12 +9,27 @@
 namespace Aaa\Authentication\Storage;
 
 
+use Aaa\Entity\User;
+use Doctrine\DBAL\Connection;
 use Zend\Authentication\Storage\StorageInterface;
 
 class DbalStorage implements StorageInterface
 {
 
     private $cache;
+
+    /**
+     * @var DBALConnection
+     */
+    private $conn;
+
+    /**
+     * @param Connection $connection
+     */
+    public function __construct(Connection $connection)
+    {
+        $this->conn = $connection;
+    }
 
     /**
      * Returns true if and only if storage is empty
@@ -24,6 +39,15 @@ class DbalStorage implements StorageInterface
      */
     public function isEmpty()
     {
+        $dat  = (new \DateTime())->modify('-1 day')->format('Y-m-d H:i:s');
+        $stmt = $this->conn->query("select count(*) from authstorage where sessionId ='" . session_id() . "' and deleted = 'FALSE' and datum > '" . $dat . "' ");
+        $col  = $stmt->fetchColumn();
+
+        if (count($col) && $col[0]) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -39,7 +63,7 @@ class DbalStorage implements StorageInterface
         if ($this->cache) {
             return $this->cache;
         } else {
-            return new \Aaa\Entity\User();
+            return new User();
         }
     }
 
@@ -52,9 +76,19 @@ class DbalStorage implements StorageInterface
      */
     public function write($contents)
     {
-        $this->cache = $contents;
-        error_log($contents->getId());
-        error_log(session_id());
+
+        if ($this->cache !== $contents) {
+            $this->cache = $contents;
+            $dat         = (new \DateTime())->format('Y-m-d H:i:s');
+            $sessionId   = session_id();
+            $userId      = $contents->getId();
+            $ip          = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+            if ($sessionId && $ip) {
+                $this->conn->executeQuery("insert into authstorage (sessionId, upor, datum, \"ip\") values ('$sessionId', '$userId', '$dat', '$ip')");
+            }
+        }
+
+
     }
 
     /**
@@ -65,7 +99,7 @@ class DbalStorage implements StorageInterface
      */
     public function clear()
     {
-        // TODO: Implement clear() method.
+        $this->conn->executeUpdate("update  authstorage set deleted = true where sessionId ='" . session_id() . "' ");
     }
 
 

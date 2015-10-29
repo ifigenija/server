@@ -74,6 +74,9 @@ return [
             ),
         ),
     ],
+    'doctrine_factories' => array(
+        'cache'                 => 'Max\Factory\CacheFactory',
+    ),
     'view_manager'    => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,

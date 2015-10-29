@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="App\Repository\Osebe")
  * @Max\I18n(label="Oseba",plural="Osebe")
  * @Max\Id(prefix="0009")
- * @Max\Lookup(ident="sifra", label="polnoIme", search={"ime","priimek","psevdonim"}, extra={"ime","srednjeIme","priimek","psevdonim"})
+ * @Max\Lookup(ident="sifra", label="polnoIme", search={"sifra","ime","priimek", "email","psevdonim", "polnoIme"}, extra={"priimek","ime","email","psevdonim"})
  */
 class Oseba
         extends \Max\Entity\Base

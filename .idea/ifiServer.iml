@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/module/App/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/module/Aaa/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/module/Max/src" isTestSource="false" packagePrefix="Max" />
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/tests/_output" />
     </content>
