@@ -143,8 +143,10 @@ class ArhivalijaCest
      */
     public function getListDogodek(ApiTester $I)
     {
-        $resp             = $I->successfullyGetList($this->dogodekUrl, []);
+        $resp             = $I->successfullyGetList($this->dogodekUrl . "?zacetek=2000-01-01&konec=3000-01-01", []);
+        codecept_debug($resp);
         $list             = $resp['data'];
+        codecept_debug($list);
         $I->assertNotEmpty($list);
         $this->objDogodek = $ent              = array_pop($list);
         $I->assertNotEmpty($ent);
@@ -327,14 +329,13 @@ class ArhivalijaCest
     {
         $listUrl = $this->restUrl;
         $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-        codecept_debug($list);
-
+        $list = $resp['data'];
         $I->assertNotEmpty($list);
+        codecept_debug($list);
         $totalRecords = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(3, $totalRecords);
         $I->assertEquals("aa", $list[0]['naslov']);      //glede na sort
-        $I->assertEquals("zz", $list[$totalRecords-1]['naslov']);      //glede na sort
+        $I->assertEquals("xx", $list[$totalRecords - 1]['naslov']);      //glede na sort
     }
 
     /**

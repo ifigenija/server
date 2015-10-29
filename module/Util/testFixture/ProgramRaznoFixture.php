@@ -43,7 +43,6 @@ class ProgramRaznoFixture
 
         $o              = $rep->findOneBy([
             "naziv"       => $v[1],
-            "uprizoritev" => $uprizoritevId,
         ]);
         $nov            = false;
         if (!$o) {

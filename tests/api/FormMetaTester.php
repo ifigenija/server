@@ -1,6 +1,7 @@
 <?php
 
 namespace Test;
+
 use ApiTester;
 
 class FormMetaTester
@@ -22,21 +23,21 @@ class FormMetaTester
         
     }
 
-
     protected function testFormOptions($entity, $fieldset = null)
     {
-        $I        = $this->I;
+        $I = $this->I;
         $I->sendOPTIONS('/rest/' . $entity . ($fieldset ? "/$fieldset" : ""));
         $I->seeResponseCodeIs('200');
         $I->seeResponseIsJson();
-        $formMeta = $I->grabDataFromJsonResponse();
+
+        $formMeta = $I->grabDataFromResponseByJsonPath('*');
 
         $I->assertNotEmpty($formMeta, 'Prazni metapodatki za ' . $entity);
-       foreach ($formMeta['schema'] as $field) {
+        foreach ($formMeta[0] as $field) {
             $I->assertTrue(array_key_exists('name', $field), "Ima name");
             $I->assertTrue(array_key_exists('type', $field), "Ima type");
-                        $I->assertNotEmpty($field['type']);
-                        $I->assertNotNull($field['type']);
+            $I->assertNotEmpty($field['type']);
+            $I->assertNotNull($field['type']);
 
             $I->assertTrue(array_key_exists('editorAttrs', $field), "ima editorAttrs");
             $I->assertTrue(array_key_exists('help', $field), "Ima help");

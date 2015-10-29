@@ -9,7 +9,7 @@ namespace Rest\ProgramPremiera;
 use ApiTester;
 
 class FormMetaCest
-        extends \FormMetaTester
+        extends \Test\FormMetaTester
 {
 
     public function testForm(\ApiTester $I)

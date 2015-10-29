@@ -46,8 +46,10 @@ class OsebaCest
     private $zasedenostUrl        = '/rest/zasedenost';
     private $dogodekUrl           = '/rest/dogodek';
     private $id;
-    private $obj;
+    private $obj1;
     private $obj2;
+    private $obj3;
+    private $obj4;
     private $objpostni;
     private $objpostni2;
     private $objpostni3;
@@ -242,7 +244,7 @@ class OsebaCest
 //            'user'          => $this->lookUser['id'],
         ];
 
-        $this->obj = $oseba     = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj1 = $oseba     = $I->successfullyCreate($this->restUrl, $data);
 //        $I->assertEquals($oseba['datumRojstva'], '1973-03-28T00:00:00+0100');
         $I->assertEquals('zz', $oseba['ime']);
         $I->assertGuid($oseba['id']);
@@ -300,7 +302,7 @@ class OsebaCest
             'user'          => null,
         ];
 
-        $oseba = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj3=$oseba = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($oseba['id']);
 
         // še nekaj creatov zaradi testiranja sortiranja
@@ -328,7 +330,7 @@ class OsebaCest
 
         // še nekaj creatov zaradi testiranja sortiranja
         $data  = [
-            'priimek'       => 'cc',
+            'priimek'       => 'cchhh',
             'ime'           => 'Žare',
             'sifra'         => '', // prazno -naj sam zgenerira
             'naziv'         => 'cchhh',
@@ -481,7 +483,7 @@ class OsebaCest
      */
     public function update(ApiTester $I)
     {
-        $oseba        = $this->obj;
+        $oseba        = $this->obj1;
         $oseba['ime'] = 'tralala';
 
         $oseba = $I->successfullyUpdate($this->restUrl, $oseba['id'], $oseba);
@@ -499,7 +501,7 @@ class OsebaCest
     {
 
         $data = [
-            'oseba'    => $this->obj['id'],
+            'oseba'    => $this->obj1['id'],
             "banka"    => "NLB",
             "stevilka" => "123456677",
             "swift"    => "sdfsdf",
@@ -509,7 +511,7 @@ class OsebaCest
         $this->objtrr = $trr          = $I->successfullyCreate($this->trrUrl, $data);
         $I->assertEquals('NLB', $trr['banka']);
 
-        $I->assertEquals($trr['oseba'], $this->obj['id'], "osebe ni");
+        $I->assertEquals($trr['oseba'], $this->obj1['id'], "osebe ni");
         $I->assertEmpty($trr['popa'], "popa mora biti null");
 
         $data['stevilka'] = "44444444";
@@ -540,7 +542,7 @@ class OsebaCest
     public function dodajTelefonskoStevilko(\ApiTester $I)
     {
         $data = [
-            "oseba"    => $this->obj['id'],
+            "oseba"    => $this->obj1['id'],
             "stevilka" => "7777-122123",
             "vrsta"    => "mobilna",
             "privzeta" => false,
@@ -574,7 +576,7 @@ class OsebaCest
     {
         codecept_debug($this->lookDrzavaId);
         $data = [
-            "oseba"      => $this->obj['id'],
+            "oseba"      => $this->obj1['id'],
             "naziv"      => "privzeti naslov",
             "ulica"      => "cmd",
             "posta"      => "2250",
@@ -589,7 +591,7 @@ class OsebaCest
         $I->assertGuid($ent['id']);
 
         $data = [
-            "oseba"      => $this->obj['id'],
+            "oseba"      => $this->obj1['id'],
             "naziv"      => "naslov1",
             "ulica"      => "cmd 16",
             "ulicaDva"   => "cankarjeva 16",
@@ -642,7 +644,7 @@ class OsebaCest
      */
     public function read(ApiTester $I)
     {
-        $oseba = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $oseba = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($oseba, "osebe ni");
 
@@ -700,7 +702,7 @@ class OsebaCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl . "?q=cch";     // na nazivu je wildcard, išče cch*
+        $listUrl = $this->restUrl . "?q=cch";     // na priimku je wildcard, išče cch*
         codecept_debug($listUrl);
         $resp    = $I->successfullyGetList($listUrl, []);
         $list    = $resp['data'];
@@ -718,7 +720,7 @@ class OsebaCest
         $totalRecords = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(6, $totalRecords);
         $I->assertEquals("aa", $list[0]['priimek']); // prvo sortno polje je priimek
-        $I->assertEquals("Žumer", $list[$totalRecords - 1]['priimek']);
+//        $I->assertEquals("Žumer", $list[$totalRecords - 1]['priimek']);
 
         // list brez filtra , sort po imenu padajoče
         $listUrl      = $this->restUrl . "?sort_by=ime&order=DESC";
@@ -730,7 +732,7 @@ class OsebaCest
         $totalRecords = $resp['state']['totalRecords'];
         $I->assertGreaterThanOrEqual(6, $totalRecords);
         $I->assertEquals("Žare", $list[0]['ime']);     // drugi sortno polje je ime
-        $I->assertEquals("aana", $list[$totalRecords - 1]['ime']);
+//        $I->assertEquals("aana", $list[$totalRecords - 1]['ime']);
     }
 
     /**
@@ -873,11 +875,9 @@ class OsebaCest
             'krajRojstva'   => 'bb',
         ];
 
-        // test validacije - oseba mora imeti ime
-        $resp = $I->failToCreate($this->restUrl, $data);
+        //  oseba ima lahko  ime prazno
+        $resp = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($resp);
-        // testiramo na enako številko napake kot je v validaciji
-//        $I->assertEquals(1000301, $resp[0]['code']);
 
 
         $data = [
@@ -1129,7 +1129,7 @@ class OsebaCest
     {
         $data                 = [
             'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
-            'oseba'   => $this->obj['id']
+            'oseba'   => $this->obj3['id']
         ];
         $this->objZasedenost1 = $ent                  = $I->successfullyCreate($this->zasedenostUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -1315,9 +1315,9 @@ class OsebaCest
      */
     public function delete(ApiTester $I)
     {
-        $oseba = $I->successfullyDelete($this->restUrl, $this->obj['id']);
+        $oseba = $I->successfullyDelete($this->restUrl, $this->obj1['id']);
 
-        $I->failToGet($this->restUrl, $this->obj['id']);
+        $I->failToGet($this->restUrl, $this->obj1['id']);
     }
 
 }

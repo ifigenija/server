@@ -69,11 +69,11 @@ class PostaCest
     public function update(ApiTester $I)
     {
         $posta          = $this->obj;
-        $posta['naziv'] = 'tralala';
+        $posta['naziv'] = 'uu';
 
         $posta = $I->successfullyUpdate($this->restUrl, $posta['id'], $posta);
 
-        $I->assertEquals('tralala', $posta['naziv']);
+        $I->assertEquals('uu', $posta['naziv']);
     }
 
     // tests
@@ -82,7 +82,7 @@ class PostaCest
         $posta = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
         // preverimo vsa polja
-        $I->assertEquals('tralala', $posta['naziv']);
+        $I->assertEquals('uu', $posta['naziv']);
         $I->assertEquals('9999', $posta['sifra']);
     }
 
