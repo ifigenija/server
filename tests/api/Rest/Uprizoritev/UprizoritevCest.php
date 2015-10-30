@@ -633,34 +633,29 @@ class UprizoritevCest
     {
         $zacetek        = '2014-09-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data           = [
-            'tipvaje'     => $this->lookTipVaje1['id'],
             'zaporedna'   => 1,
             'porocilo'    => 'zz',
             'uprizoritev' => $this->obj2['id'],
             'title'       => "Vaja $zacetek",
             'status'      => '100s',
             'zacetek'     => $zacetek,
-            'konec'       => '2014-05-07T14:00:00+0200',
-            'prostor'     => $this->lookProstor1['id'],
-            'sezona'      => $this->lookSezona1['id'],
+            'konec'       => '2015-05-07T14:00:00+0200',
         ];
         $this->objVaja1 = $ent            = $I->successfullyCreate($this->vajaUrl, $data);
         $I->assertGuid($ent['id']);
 
         $zacetek        = '2014-10-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data           = [
-            'tipvaje'     => $this->lookTipVaje1['id'],
             'zaporedna'   => 2,
-            'porocilo'    => 'cc',
+            'porocilo'    => 'zz',
             'uprizoritev' => $this->obj2['id'],
             'title'       => "Vaja $zacetek",
             'status'      => '100s',
             'zacetek'     => $zacetek,
-            'konec'       => '2014-05-07T14:00:00+0200',
-            'prostor'     => $this->lookProstor1['id'],
-            'sezona'      => $this->lookSezona1['id'],
+            'konec'       => '2015-05-07T14:00:00+0200',
         ];
         $this->objVaja2 = $ent            = $I->successfullyCreate($this->vajaUrl, $data);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -672,48 +667,38 @@ class UprizoritevCest
      */
     public function createVecPredstav(ApiTester $I)
     {
+        $zacetek             = '2013-10-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data                = [
-            'dogodek'     => NULL,
-            'uprizoritev' => $this->obj2['id'],
-            'gostovanje'  => null,
-            'gostujoca'   => null,
+            'uprizoritev'  => $this->obj2['id'],
+            'gostovanje'   => null,
+            'gostujoca'    => null,
+            'zaporedna'    => 6,
+            'zaporednaSez' => 3,
+            'porocilo'     => "zz",
+            'title'        => "Predstava $zacetek",
+            'status'       => '200s',
+            'zacetek'      => $zacetek,
+            'konec'        => '2014-05-07T23:00:00+0200',
         ];
         $this->objPredstava1 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
 
         // kreiramo še en zapis
         $data                = [
-            'dogodek'     => NULL,
-            'uprizoritev' => $this->obj2['id'],
-            'gostovanje'  => null,
-            'gostujoca'   => null,
+            'uprizoritev'  => $this->obj2['id'],
+            'gostovanje'   => null,
+            'gostujoca'    => null,
+            'zaporedna'    => 9,
+            'zaporednaSez' => 4,
+            'porocilo'     => "zz",
+            'title'        => "Predstava $zacetek",
+            'status'       => '200s',
+            'zacetek'      => $zacetek,
+            'konec'        => '2016-05-07T23:00:00+0200',
         ];
         $this->objPredstava2 = $ent                 = $I->successfullyCreate($this->predstavaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
     }
-
-    /**
-     * @depends create
-     * @param ApiTester $I
-     */
-//    public function getListVse(ApiTester $I)
-//    {
-//        $listUrl = $this->restUrl . "/vse";
-//        $resp    = $I->successfullyGetList($listUrl, []);
-//        $list    = $resp['data'];
-//
-//        $I->assertNotEmpty($list);
-//        $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);      //$$ začasno izključimo, dokler integer =null ne stestiramo
-////        $I->assertEquals("aa", $list[0]['naslov']);      //glede na sort   
-//        // iščemo naprimer tudi po vrednosti v avtor
-//        $listUrl = $this->restUrl . "/vse?q=avzz";
-//        $resp    = $I->successfullyGetList($listUrl, []);
-//        $list    = $resp['data'];
-//
-//        $I->assertNotEmpty($list);
-//        $I->assertEquals(1, $resp['state']['totalRecords']);      //$$ začasno izključimo, dokler integer =null ne stestiramo
-////        $I->assertEquals("avzz", $list[0]['avtor']);
-//    }
 
     /**
      *  napolnimo vsaj en zapis

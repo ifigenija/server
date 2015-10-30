@@ -79,7 +79,7 @@ class OsebaFixture
         }
 
         $referenca = 'Oseba-' . $v[0];
-        var_dump($referenca);
+        //var_dump($referenca);
         $this->addReference($referenca, $o);
     }
 

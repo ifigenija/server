@@ -81,7 +81,7 @@ class StrosekUprizoritveFixture
         }
 
         $referenca = 'StrosekUprizoritve-' . $v[0];
-        var_dump($referenca);
+        //var_dump($referenca);
         $this->addReference($referenca, $o);
     }
 

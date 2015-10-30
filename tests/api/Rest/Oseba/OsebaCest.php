@@ -1127,62 +1127,42 @@ class OsebaCest
      */
     public function createVecZasedenosti(ApiTester $I)
     {
-        $data                 = [
+        $zacetek    = '2014-05-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data       = [
             'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
-            'oseba'   => $this->obj3['id']
+            'oseba'   => $this->obj3['id'],
+            'title'   => "Zasedenost $zacetek",
+            'status'  => '100s',
+            'zacetek' => $zacetek,
+            'konec'   => '2014-05-07T14:00:00+0200',
         ];
         $this->objZasedenost1 = $ent                  = $I->successfullyCreate($this->zasedenostUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
 
-        $data                 = [
+        $zacetek    = '2014-06-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data       = [
             'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
-            'oseba'   => $this->obj2['id']
+            'oseba'   => $this->obj2['id'],
+            'title'   => "Zasedenost $zacetek",
+            'status'  => '100s',
+            'zacetek' => $zacetek,
+            'konec'   => '2014-06-07T14:00:00+0200',
         ];
         $this->objZasedenost2 = $ent                  = $I->successfullyCreate($this->zasedenostUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
 
-        $data                 = [
+        $zacetek    = '2014-08-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data       = [
             'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
-            'oseba'   => $this->obj2['id']
+            'oseba'   => $this->obj2['id'],
+            'title'   => "Zasedenost $zacetek",
+            'status'  => '100s',
+            'zacetek' => $zacetek,
+            'konec'   => '2014-08-07T14:00:00+0200',
         ];
         $this->objZasedenost3 = $ent                  = $I->successfullyCreate($this->zasedenostUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
 
-        $data = [
-            'planiranZacetek' => '2011-02-01T00:00:00+0100',
-            'zacetek'         => '2012-02-01T00:00:00+0100',
-            'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => "100s",
-            'razred'          => "500s",
-            'termin'          => null,
-            'ime'             => null,
-            'predstava'       => null,
-            'zasedenost'      => $this->objZasedenost1['id'],
-            'gostovanje'      => null,
-            'dogodekIzven'    => null,
-            'prostor'         => null,
-            'sezona'          => null,
-        ];
-        $ent  = $I->successfullyCreate($this->dogodekUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-
-        $data = [
-            'planiranZacetek' => '2011-02-01T00:00:00+0100',
-            'zacetek'         => '2012-02-01T00:00:00+0100',
-            'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => "100s",
-            'razred'          => "500s",
-            'termin'          => null,
-            'ime'             => null,
-            'predstava'       => null,
-            'zasedenost'      => $this->objZasedenost2['id'],
-            'gostovanje'      => null,
-            'dogodekIzven'    => null,
-            'prostor'         => null,
-            'sezona'          => null,
-        ];
-        $ent  = $I->successfullyCreate($this->dogodekUrl, $data);
-        $I->assertNotEmpty($ent['id']);
     }
 
     /**
