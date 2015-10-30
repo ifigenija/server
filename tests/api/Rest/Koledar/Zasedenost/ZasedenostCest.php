@@ -30,9 +30,16 @@ class ZasedenostCest
 
     private $restUrl    = '/rest/zasedenost';
     private $dogodekUrl = '/rest/dogodek';
-    private $obj;
-    private $objDogodek;
-    private $lookOseba;
+    private $obj1;
+    private $obj2;
+    private $obj3;
+    private $obj4;
+    private $objDogodek1;
+    private $objDogodek2;
+    private $objDogodek3;
+    private $objDogodek4;
+    private $lookOseba1;
+    private $lookOseba2;
 
     public function _before(ApiTester $I)
     {
@@ -46,8 +53,10 @@ class ZasedenostCest
 
     public function lookupOsebo(ApiTester $I)
     {
-        $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0001", false);
-        $I->assertNotEmpty($ent);
+        $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0001", false);
+        $I->assertGuid($ent['id']);
+        $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0002", false);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -57,59 +66,64 @@ class ZasedenostCest
      */
     public function create(ApiTester $I)
     {
-        $data      = [
+        $zacetek    = '2014-05-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data       = [
             'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
-            'oseba' => $this->lookOseba['id']
+            'oseba'   => $this->lookOseba1['id'],
+            'title'   => "Zasedenost $zacetek",
+            'status'  => '100s',
+            'zacetek' => $zacetek,
+            'konec'   => '2014-05-07T14:00:00+0200',
         ];
-        $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['oseba'], $this->lookOseba['id']);
+        codecept_debug($data);
+        $I->assertEquals($ent['oseba'], $this->lookOseba1['id']);
+        $I->assertEquals($ent['title'], $data['title']);
+        $I->assertEquals($ent['status'], $data['status']);
+        $I->assertEquals($ent['zacetek'], $data['zacetek']);
+        $I->assertEquals($ent['konec'], $data['konec']);
+
+        /**
+         * preveri dogodek
+         */
+        $this->objDogodek1 = $dogodek           = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']);
+        codecept_debug($dogodek);
+        $I->assertGuid($dogodek['id']);
+        $I->assertEquals($dogodek['title'], $data['title'], "title");
+        $I->assertEquals($dogodek['status'], $data['status'], "status");
+        $I->assertEquals($dogodek['zacetek'], $data['zacetek'], "začetek");
+        $I->assertEquals($dogodek['konec'], $data['konec'], "konec");
+       
+        /**
+         * kreiramo še eno zasedenost
+         */
+        $zacetek    = '2014-02-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data       = [
+            'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
+            'oseba'   => $this->lookOseba1['id'],
+            'title'   => "Zasedenost $zacetek",
+            'status'  => '100s',
+            'zacetek' => $zacetek,
+            'konec'   => '2014-03-07T14:00:00+0200',
+        ];
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
     }
 
     /**
-     * dogodek kreiramo, ko zapis zasedenost obstaja, ker je Dogodek lastnik relacije
-     * 
      * @depends create
      * @param ApiTester $I
      */
-    public function createDogodek(ApiTester $I)
+    public function getListDefaultPoOsebi(ApiTester $I)
     {
-        $data             = [
-            'planiranZacetek' => '2011-02-01T00:00:00+0100',
-            'zacetek'         => '2012-02-01T00:00:00+0100',
-            'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => "100s",
-            'razred'          => "500s",
-            'termin'          => null,
-            'ime'             => null,
-            'predstava'       => null,
-            'zasedenost'      => $this->obj['id'],
-            'gostovanje'      => null,
-            'dogodekIzven'    => null,
-            'prostor'         => null,
-            'sezona'          => null,
-        ];
-        $this->objDogodek = $ent              = $I->successfullyCreate($this->dogodekUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['status'], "100s");
-    }
+        $resp = $I->successfullyGetList($this->restUrl . "?oseba=" . $this->lookOseba1['id'], []);
 
-    /**
-     * @depends create
-     * @param ApiTester $I
-     */
-    public function getListDefault(ApiTester $I)
-    {
-        $listUrl = $this->restUrl;
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
+        $list = $resp['data'];
 
         $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-//        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
     }
 
     /**
@@ -131,10 +145,10 @@ class ZasedenostCest
      */
     public function read(\ApiTester $I)
     {
-        $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertNotEmpty($ent['id']);
-        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
+        $I->assertEquals($ent['dogodek'], $this->objDogodek1['id']);
     }
 
     /**
@@ -144,8 +158,8 @@ class ZasedenostCest
      */
     public function deleteDogodek(ApiTester $I)
     {
-        $I->successfullyDelete($this->dogodekUrl, $this->objDogodek['id']);
-        $I->failToGet($this->dogodekUrl, $this->objDogodek['id']);
+        $I->successfullyDelete($this->dogodekUrl, $this->objDogodek1['id']);
+        $I->failToGet($this->dogodekUrl, $this->objDogodek1['id']);
     }
 
     /**
@@ -156,8 +170,8 @@ class ZasedenostCest
      */
     public function delete(ApiTester $I)
     {
-        $I->successfullyDelete($this->restUrl, $this->obj['id']);
-        $I->failToGet($this->restUrl, $this->obj['id']);
+        $I->successfullyDelete($this->restUrl, $this->obj1['id']);
+        $I->failToGet($this->restUrl, $this->obj1['id']);
     }
 
 }

@@ -289,9 +289,7 @@ class ProdukcijaDelitevCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl;
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
+        $resp    = $I->successfullyGetList($this->restUrl.'?enotaPrograma='. $this->objProgramPremiera2['id'], []);
         $list    = $resp['data'];
 
         $I->assertNotEmpty($list);

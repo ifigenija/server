@@ -8,10 +8,50 @@ forms:
 #            - id
             - dogodek
             - oseba
+            - name: title
+              type: text
+              options:
+                  label: Naslov dogodka
+            - name: status
+              type: select
+              options:
+                  label: Status
+                  reqired: true
+                  value_options: @dogodek.status
+            - name: zacetek
+              type: datetime
+              options: 
+                  label: Začetek
+                  required: false
+            - name: konec
+              type: datetime
+              options: 
+                  label: Konec
+                  required: false
+        hydrator:
+            virtual:
+                - name: zacetek
+                  type: datetime
+                - name: konec
+                  type: datetime
+                - title
+                - status                  
 lists:
     default: 
         filter:
+            elements:                 
+                - name: oseba
+                  type: toone
+                  options:
+                      label: Oseba
+                      targetEntity: App\Entity\Oseba
+                      required: true
         hydrator:
-            - exclude: []
-#    vse: 
-#        filter:
+            virtual:
+                - name: zacetek
+                  type: datetime
+                - name: konec
+                  type: datetime
+                - status
+                - title
+                

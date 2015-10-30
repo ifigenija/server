@@ -945,6 +945,134 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaVlozekGostiteljaPrem", description="programDela.d.sredstvaVlozekGostiteljaPrem")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaVlozekGostiteljaPrem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaVlozekGostiteljaPonPrem", description="programDela.d.sredstvaVlozekGostiteljaPonPrem")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaVlozekGostiteljaPonPrem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaVlozekGostiteljaPonPrej", description="programDela.d.sredstvaVlozekGostiteljaPonPrej")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaVlozekGostiteljaPonPrej;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaVlozekGostiteljaGostujo", description="programDela.d.sredstvaVlozekGostiteljaGostujo")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaVlozekGostiteljaGostujo;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaVlozekGostiteljaInt", description="programDela.d.sredstvaVlozekGostiteljaInt")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaVlozekGostiteljaInt;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaVlozekGostiteljaFest", description="programDela.d.sredstvaVlozekGostiteljaFest")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaVlozekGostiteljaFest;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaVlozekGostiteljaRazno", description="programDela.d.sredstvaVlozekGostiteljaRazno")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaVlozekGostiteljaRazno;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaVlozekGostiteljaIzjem", description="programDela.d.sredstvaVlozekGostiteljaIzjem")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaVlozekGostiteljaIzjem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaLastnaPrem", description="programDela.d.sredstvaLastnaPrem")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaLastnaPrem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaLastnaPonPrem", description="programDela.d.sredstvaLastnaPonPrem")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaLastnaPonPrem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaLastnaPonPrej", description="programDela.d.sredstvaLastnaPonPrej")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaLastnaPonPrej;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaLastnaGostujo", description="programDela.d.sredstvaLastnaGostujo")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaLastnaGostujo;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaLastnaInt", description="programDela.d.sredstvaLastnaInt")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaLastnaInt;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaLastnaFest", description="programDela.d.sredstvaLastnaFest")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaLastnaFest;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaLastnaRazno", description="programDela.d.sredstvaLastnaRazno")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaLastnaRazno;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
+     * @Max\I18n(label="programDela.sredstvaLastnaIzjem", description="programDela.d.sredstvaLastnaIzjem")   
+     * @Max\Ui(icon="fa fa-euro")
+     * @var double
+     */
+    protected $sredstvaLastnaIzjem;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, scale=2, precision=12)
      * @Max\I18n(label="programDela.sredstvaAvtSamoz", description="programDela.d.sredstvaAvtSamoz")   
      * @Max\Ui(icon="fa fa-euro")
      * @var double
@@ -1049,92 +1177,108 @@ class ProgramDela
         /**
          * init
          */
-        $this->stPonPrejVelikih          = 0;
-        $this->stPonPrejMalih            = 0;
-        $this->stPonPrejMalihKopr        = 0;
-        $this->stPonPrejSredKopr         = 0;
-        $this->stPonPrejVelikihKopr      = 0;
-        $this->stPremierVelikih          = 0;
-        $this->stPremierMalih            = 0;
-        $this->stPremierMalihKopr        = 0;
-        $this->stPremierSredKopr         = 0;
-        $this->stPremierVelikihKopr      = 0;
-        $this->vrPS1                     = 0;
-        $this->vrPS1Do                   = 0;
-        $this->vrPS1Mat                  = 0;
-        $this->vrPS1GostovSZ             = 0;
-        $this->stIzvNekomerc             = 0;
-        $this->stIzvPrem                 = 0;
-        $this->stIzvPremDoma             = 0;
-        $this->stIzvPremKopr             = 0;
-        $this->stIzvPonPrem              = 0;
-        $this->stIzvPonPremDoma          = 0;
-        $this->stIzvPonPremZamejo        = 0;
-        $this->stIzvPonPremGost          = 0;
-        $this->stIzvPonPremKopr          = 0;
-        $this->stIzvPonPremInt           = 0;
-        $this->stIzvPonPremKoprInt       = 0;
-        $this->stIzvPonPrej              = 0;
-        $this->stIzvPonPrejDoma          = 0;
-        $this->stIzvPonPrejZamejo        = 0;
-        $this->stIzvPonPrejGost          = 0;
-        $this->stIzvPonPrejKopr          = 0;
-        $this->stIzvPonPrejInt           = 0;
-        $this->stIzvPonPrejKoprInt       = 0;
-        $this->stIzvGostuj               = 0;
-        $this->stIzvOstalihNek           = 0;
-        $this->stIzvGostovanjSlo         = 0;
-        $this->stIzvGostovanjZam         = 0;
-        $this->stIzvGostovanjInt         = 0;
-        $this->stObiskNekom              = 0;
-        $this->stObiskNekomMat           = 0;
-        $this->stObiskNekomGostSlo       = 0;
-        $this->stObiskNekomGostZam       = 0;
-        $this->stObiskNekomGostInt       = 0;
-        $this->stObiskPrem               = 0;
-        $this->stObiskPremDoma           = 0;
-        $this->stObiskPremKopr           = 0;
-        $this->stObiskPonPrem            = 0;
-        $this->stObiskPonPremDoma        = 0;
-        $this->stObiskPonPremGost        = 0;
-        $this->stObiskPonPremZamejo      = 0;
-        $this->stObiskPonPremKopr        = 0;
-        $this->stObiskPonPremKoprInt     = 0;
-        $this->stObiskPonPremInt         = 0;
-        $this->stHonorarnihZun           = 0;
-        $this->stHonorarnihZunIgr        = 0;
-        $this->stHonorarnihZunIgrTujJZ   = 0;
-        $this->stHonorarnihZunSamoz      = 0;
-        $this->sredstvaAvt               = 0;
-        $this->sredstvaAvtSamoz          = 0;
-        $this->sredstvaInt               = 0;
-        $this->stKoprodukcij             = 0;
-        $this->stKoprodukcijInt          = 0;
-        $this->stKoprodukcijNVO          = 0;
-        $this->sredstvaZaprosenoPrem     = 0;
-        $this->sredstvaZaprosenoPonPrem  = 0;
-        $this->sredstvaZaprosenoPonPrej  = 0;
-        $this->sredstvaZaprosenoGostujo  = 0;
-        $this->sredstvaZaprosenoInt      = 0;
-        $this->sredstvaZaprosenoFest     = 0;
-        $this->sredstvaZaprosenoRazno    = 0;
-        $this->sredstvaZaprosenoIzjem    = 0;
-        $this->sredstvaDrugiJavniPrem    = 0;
-        $this->sredstvaDrugiJavniPonPrem = 0;
-        $this->sredstvaDrugiJavniPonPrej = 0;
-        $this->sredstvaDrugiJavniGostujo = 0;
-        $this->sredstvaDrugiJavniInt     = 0;
-        $this->sredstvaDrugiJavniFest    = 0;
-        $this->sredstvaDrugiJavniRazno   = 0;
-        $this->sredstvaDrugiJavniIzjem   = 0;
-        $this->sredstvaDrugiViriPrem     = 0;
-        $this->sredstvaDrugiViriPonPrem  = 0;
-        $this->sredstvaDrugiViriPonPrej  = 0;
-        $this->sredstvaDrugiViriGostujo  = 0;
-        $this->sredstvaDrugiViriInt      = 0;
-        $this->sredstvaDrugiViriFest     = 0;
-        $this->sredstvaDrugiViriRazno    = 0;
-        $this->sredstvaDrugiViriIzjem    = 0;
+        $this->stPonPrejVelikih                = 0;
+        $this->stPonPrejMalih                  = 0;
+        $this->stPonPrejMalihKopr              = 0;
+        $this->stPonPrejSredKopr               = 0;
+        $this->stPonPrejVelikihKopr            = 0;
+        $this->stPremierVelikih                = 0;
+        $this->stPremierMalih                  = 0;
+        $this->stPremierMalihKopr              = 0;
+        $this->stPremierSredKopr               = 0;
+        $this->stPremierVelikihKopr            = 0;
+        $this->vrPS1                           = 0;
+        $this->vrPS1Do                         = 0;
+        $this->vrPS1Mat                        = 0;
+        $this->vrPS1GostovSZ                   = 0;
+        $this->stIzvNekomerc                   = 0;
+        $this->stIzvPrem                       = 0;
+        $this->stIzvPremDoma                   = 0;
+        $this->stIzvPremKopr                   = 0;
+        $this->stIzvPonPrem                    = 0;
+        $this->stIzvPonPremDoma                = 0;
+        $this->stIzvPonPremZamejo              = 0;
+        $this->stIzvPonPremGost                = 0;
+        $this->stIzvPonPremKopr                = 0;
+        $this->stIzvPonPremInt                 = 0;
+        $this->stIzvPonPremKoprInt             = 0;
+        $this->stIzvPonPrej                    = 0;
+        $this->stIzvPonPrejDoma                = 0;
+        $this->stIzvPonPrejZamejo              = 0;
+        $this->stIzvPonPrejGost                = 0;
+        $this->stIzvPonPrejKopr                = 0;
+        $this->stIzvPonPrejInt                 = 0;
+        $this->stIzvPonPrejKoprInt             = 0;
+        $this->stIzvGostuj                     = 0;
+        $this->stIzvOstalihNek                 = 0;
+        $this->stIzvGostovanjSlo               = 0;
+        $this->stIzvGostovanjZam               = 0;
+        $this->stIzvGostovanjInt               = 0;
+        $this->stObiskNekom                    = 0;
+        $this->stObiskNekomMat                 = 0;
+        $this->stObiskNekomGostSlo             = 0;
+        $this->stObiskNekomGostZam             = 0;
+        $this->stObiskNekomGostInt             = 0;
+        $this->stObiskPrem                     = 0;
+        $this->stObiskPremDoma                 = 0;
+        $this->stObiskPremKopr                 = 0;
+        $this->stObiskPonPrem                  = 0;
+        $this->stObiskPonPremDoma              = 0;
+        $this->stObiskPonPremGost              = 0;
+        $this->stObiskPonPremZamejo            = 0;
+        $this->stObiskPonPremKopr              = 0;
+        $this->stObiskPonPremKoprInt           = 0;
+        $this->stObiskPonPremInt               = 0;
+        $this->stHonorarnihZun                 = 0;
+        $this->stHonorarnihZunIgr              = 0;
+        $this->stHonorarnihZunIgrTujJZ         = 0;
+        $this->stHonorarnihZunSamoz            = 0;
+        $this->sredstvaAvt                     = 0;
+        $this->sredstvaAvtSamoz                = 0;
+        $this->sredstvaInt                     = 0;
+        $this->stKoprodukcij                   = 0;
+        $this->stKoprodukcijInt                = 0;
+        $this->stKoprodukcijNVO                = 0;
+        $this->sredstvaZaprosenoPrem           = 0;
+        $this->sredstvaZaprosenoPonPrem        = 0;
+        $this->sredstvaZaprosenoPonPrej        = 0;
+        $this->sredstvaZaprosenoGostujo        = 0;
+        $this->sredstvaZaprosenoInt            = 0;
+        $this->sredstvaZaprosenoFest           = 0;
+        $this->sredstvaZaprosenoRazno          = 0;
+        $this->sredstvaZaprosenoIzjem          = 0;
+        $this->sredstvaDrugiJavniPrem          = 0;
+        $this->sredstvaDrugiJavniPonPrem       = 0;
+        $this->sredstvaDrugiJavniPonPrej       = 0;
+        $this->sredstvaDrugiJavniGostujo       = 0;
+        $this->sredstvaDrugiJavniInt           = 0;
+        $this->sredstvaDrugiJavniFest          = 0;
+        $this->sredstvaDrugiJavniRazno         = 0;
+        $this->sredstvaDrugiJavniIzjem         = 0;
+        $this->sredstvaDrugiViriPrem           = 0;
+        $this->sredstvaDrugiViriPonPrem        = 0;
+        $this->sredstvaDrugiViriPonPrej        = 0;
+        $this->sredstvaDrugiViriGostujo        = 0;
+        $this->sredstvaDrugiViriInt            = 0;
+        $this->sredstvaDrugiViriFest           = 0;
+        $this->sredstvaDrugiViriRazno          = 0;
+        $this->sredstvaDrugiViriIzjem          = 0;
+        $this->sredstvaVlozekGostiteljaPrem    = 0;
+        $this->sredstvaVlozekGostiteljaPonPrem = 0;
+        $this->sredstvaVlozekGostiteljaPonPrej = 0;
+        $this->sredstvaVlozekGostiteljaGostujo = 0;
+        $this->sredstvaVlozekGostiteljaInt     = 0;
+        $this->sredstvaVlozekGostiteljaFest    = 0;
+        $this->sredstvaVlozekGostiteljaRazno   = 0;
+        $this->sredstvaVlozekGostiteljaIzjem   = 0;
+        $this->sredstvaLastnaPrem              = 0;
+        $this->sredstvaLastnaPonPrem           = 0;
+        $this->sredstvaLastnaPonPrej           = 0;
+        $this->sredstvaLastnaGostujo           = 0;
+        $this->sredstvaLastnaInt               = 0;
+        $this->sredstvaLastnaFest              = 0;
+        $this->sredstvaLastnaRazno             = 0;
+        $this->sredstvaLastnaIzjem             = 0;
 
         /**
          * init za izračun  zasedenosti igralcev
@@ -1183,6 +1327,8 @@ class ProgramDela
             $this->sredstvaZaprosenoPrem+=$object->getZaproseno();
             $this->sredstvaDrugiJavniPrem+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriPrem+=$this->sestejDrugeVire($object);
+            $this->sredstvaVlozekGostiteljaPrem+=$object->getVlozekGostitelja();
+            $this->sredstvaLastnaPrem+=$object->getLastnaSredstva();
             $this->sredstvaAvt+=$object->getAvtorskiHonorarji();
             $this->sredstvaAvtSamoz+=$object->getAvtorskiHonorarjiSamoz();
             $this->prerStKopr($object);
@@ -1253,6 +1399,9 @@ class ProgramDela
             $this->sredstvaZaprosenoPonPrem+=$object->getZaproseno();
             $this->sredstvaDrugiJavniPonPrem+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriPonPrem+=$this->sestejDrugeVire($object);
+            $this->sredstvaVlozekGostiteljaPonPrem+=$object->getVlozekGostitelja();
+            $this->sredstvaLastnaPonPrem+=$object->getLastnaSredstva();
+
             $this->prerStKopr($object);
             $obiskDomaUpriz+= $object->getObiskDoma();
 
@@ -1316,6 +1465,8 @@ class ProgramDela
             $this->sredstvaZaprosenoPonPrej+=$object->getZaproseno();
             $this->sredstvaDrugiJavniPonPrej+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriPonPrej+=$this->sestejDrugeVire($object);
+            $this->sredstvaVlozekGostiteljaPonPrej+=$object->getVlozekGostitelja();
+            $this->sredstvaLastnaPonPrej+=$object->getLastnaSredstva();
             $this->prerStKopr($object);
             $obiskDomaUpriz+= $object->getObiskDoma();
 
@@ -1342,13 +1493,15 @@ class ProgramDela
             $this->sredstvaZaprosenoGostujo+=$object->getZaproseno();
             $this->sredstvaDrugiJavniGostujo+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriGostujo+=$this->sestejDrugeVire($object);
+            $this->sredstvaVlozekGostiteljaGostujo+=$object->getVlozekGostitelja();
+            $this->sredstvaLastnaGostujo+=$object->getLastnaSredstva();
             $this->prerStKopr($object);
             $obiskDomaUpriz+= $object->getObiskDoma();
 
             $this->expect($object->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000796);
             $this->expect($object->getUprizoritev()->getMaticniOder(), "Matični oder je obvezen podatek", 1000797);
             if ($object->getUprizoritev()->getMaticniOder()) {
-                $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta()*$object->getPonoviDoma();
+                $maxKapaciteta+= $object->getUprizoritev()->getMaticniOder()->getKapaciteta() * $object->getPonoviDoma();
             }
 
             $this->pristejKStNastopovZaposIgr($object, $stNastopovZaposIgralcev);
@@ -1393,6 +1546,8 @@ class ProgramDela
             $this->sredstvaZaprosenoInt+=$object->getZaproseno();
             $this->sredstvaDrugiJavniInt+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriInt+=$this->sestejDrugeVire($object);
+            $this->sredstvaVlozekGostiteljaInt+=$object->getVlozekGostitelja();
+            $this->sredstvaLastnaInt+=$object->getLastnaSredstva();
             $this->prerStKopr($object);
             $this->pristejKStNastopovZaposIgr($object, $stNastopovZaposIgralcev);
         }
@@ -1412,6 +1567,8 @@ class ProgramDela
             $this->sredstvaZaprosenoFest+=$object->getZaproseno();
             $this->sredstvaDrugiJavniFest+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriFest+=$this->sestejDrugeVire($object);
+            $this->sredstvaVlozekGostiteljaFest+=$object->getVlozekGostitelja();
+            $this->sredstvaLastnaFest+=$object->getLastnaSredstva();
             $this->prerStKopr($object);
         }
 
@@ -1430,6 +1587,8 @@ class ProgramDela
             $this->sredstvaZaprosenoRazno+=$object->getZaproseno();
             $this->sredstvaDrugiJavniRazno+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriRazno+=$this->sestejDrugeVire($object);
+            $this->sredstvaVlozekGostiteljaRazno+=$object->getVlozekGostitelja();
+            $this->sredstvaLastnaRazno+=$object->getLastnaSredstva();
             $this->prerStKopr($object);
         }
 
@@ -1452,6 +1611,8 @@ class ProgramDela
             $this->sredstvaZaprosenoIzjem+=$object->getZaproseno();
             $this->sredstvaDrugiJavniIzjem+=$object->getDrugiJavni();
             $this->sredstvaDrugiViriIzjem+=$this->sestejDrugeVire($object);
+            $this->sredstvaVlozekGostiteljaIzjem+=$object->getVlozekGostitelja();
+            $this->sredstvaLastnaIzjem+=$object->getLastnaSredstva();
             $this->prerStKopr($object);
         }
 
@@ -1550,6 +1711,14 @@ class ProgramDela
         $this->validateEuroGE0($this->vrPS1Do, "vrPS1Do", 1000782);
         $this->validateEuroGE0($this->vrPS1GostovSZ, "vrPS1GostovSZ", 1000783);
         $this->validateEuroGE0($this->vrPS1Mat, "vrPS1Mat", 1000784);
+        $this->validateEuroGE0($this->sredstvaVlozekGostiteljaPrem, "sredstvaVlozekGostiteljaPrem", 1000789);
+        $this->validateEuroGE0($this->sredstvaVlozekGostiteljaPonPrem, "sredstvaVlozekGostiteljaPonPrem", 1000798);
+        $this->validateEuroGE0($this->sredstvaVlozekGostiteljaPonPrej, "sredstvaVlozekGostiteljaPonPrej", 1000799);
+        $this->validateEuroGE0($this->sredstvaVlozekGostiteljaGostujo, "sredstvaVlozekGostiteljaGostujo", 1000810);
+        $this->validateEuroGE0($this->sredstvaVlozekGostiteljaInt, "sredstvaVlozekGostiteljaInt", 1000811);
+        $this->validateEuroGE0($this->sredstvaVlozekGostiteljaFest, "sredstvaVlozekGostiteljaFest", 1000812);
+        $this->validateEuroGE0($this->sredstvaVlozekGostiteljaRazno, "sredstvaVlozekGostiteljaRazno", 1000813);
+        $this->validateEuroGE0($this->sredstvaVlozekGostiteljaIzjem, "sredstvaVlozekGostiteljaIzjem", 1000814);
     }
 
     function getId()
@@ -2836,6 +3005,182 @@ class ProgramDela
     function setSredstvaAvtSamoz($sredstvaAvtSamoz)
     {
         $this->sredstvaAvtSamoz = $sredstvaAvtSamoz;
+        return $this;
+    }
+
+    function getSredstvaVlozekGostiteljaPrem()
+    {
+        return $this->sredstvaVlozekGostiteljaPrem;
+    }
+
+    function getSredstvaVlozekGostiteljaPonPrem()
+    {
+        return $this->sredstvaVlozekGostiteljaPonPrem;
+    }
+
+    function getSredstvaVlozekGostiteljaPonPrej()
+    {
+        return $this->sredstvaVlozekGostiteljaPonPrej;
+    }
+
+    function getSredstvaVlozekGostiteljaGostujo()
+    {
+        return $this->sredstvaVlozekGostiteljaGostujo;
+    }
+
+    function getSredstvaVlozekGostiteljaInt()
+    {
+        return $this->sredstvaVlozekGostiteljaInt;
+    }
+
+    function getSredstvaVlozekGostiteljaFest()
+    {
+        return $this->sredstvaVlozekGostiteljaFest;
+    }
+
+    function getSredstvaVlozekGostiteljaRazno()
+    {
+        return $this->sredstvaVlozekGostiteljaRazno;
+    }
+
+    function getSredstvaVlozekGostiteljaIzjem()
+    {
+        return $this->sredstvaVlozekGostiteljaIzjem;
+    }
+
+    function getSredstvaLastnaPrem()
+    {
+        return $this->sredstvaLastnaPrem;
+    }
+
+    function getSredstvaLastnaPonPrem()
+    {
+        return $this->sredstvaLastnaPonPrem;
+    }
+
+    function getSredstvaLastnaPonPrej()
+    {
+        return $this->sredstvaLastnaPonPrej;
+    }
+
+    function getSredstvaLastnaGostujo()
+    {
+        return $this->sredstvaLastnaGostujo;
+    }
+
+    function getSredstvaLastnaInt()
+    {
+        return $this->sredstvaLastnaInt;
+    }
+
+    function getSredstvaLastnaFest()
+    {
+        return $this->sredstvaLastnaFest;
+    }
+
+    function getSredstvaLastnaRazno()
+    {
+        return $this->sredstvaLastnaRazno;
+    }
+
+    function getSredstvaLastnaIzjem()
+    {
+        return $this->sredstvaLastnaIzjem;
+    }
+
+    function setSredstvaVlozekGostiteljaPrem($sredstvaVlozekGostiteljaPrem)
+    {
+        $this->sredstvaVlozekGostiteljaPrem = $sredstvaVlozekGostiteljaPrem;
+        return $this;
+    }
+
+    function setSredstvaVlozekGostiteljaPonPrem($sredstvaVlozekGostiteljaPonPrem)
+    {
+        $this->sredstvaVlozekGostiteljaPonPrem = $sredstvaVlozekGostiteljaPonPrem;
+        return $this;
+    }
+
+    function setSredstvaVlozekGostiteljaPonPrej($sredstvaVlozekGostiteljaPonPrej)
+    {
+        $this->sredstvaVlozekGostiteljaPonPrej = $sredstvaVlozekGostiteljaPonPrej;
+        return $this;
+    }
+
+    function setSredstvaVlozekGostiteljaGostujo($sredstvaVlozekGostiteljaGostujo)
+    {
+        $this->sredstvaVlozekGostiteljaGostujo = $sredstvaVlozekGostiteljaGostujo;
+        return $this;
+    }
+
+    function setSredstvaVlozekGostiteljaInt($sredstvaVlozekGostiteljaInt)
+    {
+        $this->sredstvaVlozekGostiteljaInt = $sredstvaVlozekGostiteljaInt;
+        return $this;
+    }
+
+    function setSredstvaVlozekGostiteljaFest($sredstvaVlozekGostiteljaFest)
+    {
+        $this->sredstvaVlozekGostiteljaFest = $sredstvaVlozekGostiteljaFest;
+        return $this;
+    }
+
+    function setSredstvaVlozekGostiteljaRazno($sredstvaVlozekGostiteljaRazno)
+    {
+        $this->sredstvaVlozekGostiteljaRazno = $sredstvaVlozekGostiteljaRazno;
+        return $this;
+    }
+
+    function setSredstvaVlozekGostiteljaIzjem($sredstvaVlozekGostiteljaIzjem)
+    {
+        $this->sredstvaVlozekGostiteljaIzjem = $sredstvaVlozekGostiteljaIzjem;
+        return $this;
+    }
+
+    function setSredstvaLastnaPrem($sredstvaLastnaPrem)
+    {
+        $this->sredstvaLastnaPrem = $sredstvaLastnaPrem;
+        return $this;
+    }
+
+    function setSredstvaLastnaPonPrem($sredstvaLastnaPonPrem)
+    {
+        $this->sredstvaLastnaPonPrem = $sredstvaLastnaPonPrem;
+        return $this;
+    }
+
+    function setSredstvaLastnaPonPrej($sredstvaLastnaPonPrej)
+    {
+        $this->sredstvaLastnaPonPrej = $sredstvaLastnaPonPrej;
+        return $this;
+    }
+
+    function setSredstvaLastnaGostujo($sredstvaLastnaGostujo)
+    {
+        $this->sredstvaLastnaGostujo = $sredstvaLastnaGostujo;
+        return $this;
+    }
+
+    function setSredstvaLastnaInt($sredstvaLastnaInt)
+    {
+        $this->sredstvaLastnaInt = $sredstvaLastnaInt;
+        return $this;
+    }
+
+    function setSredstvaLastnaFest($sredstvaLastnaFest)
+    {
+        $this->sredstvaLastnaFest = $sredstvaLastnaFest;
+        return $this;
+    }
+
+    function setSredstvaLastnaRazno($sredstvaLastnaRazno)
+    {
+        $this->sredstvaLastnaRazno = $sredstvaLastnaRazno;
+        return $this;
+    }
+
+    function setSredstvaLastnaIzjem($sredstvaLastnaIzjem)
+    {
+        $this->sredstvaLastnaIzjem = $sredstvaLastnaIzjem;
         return $this;
     }
 
