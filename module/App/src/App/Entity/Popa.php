@@ -275,7 +275,7 @@ class Popa
     /**
      * @ORM\OneToOne(targetEntity="ProgramDela\Entity\ProdukcijskaHisa", mappedBy="popa")
      * @Max\I18n(label="popa.producent",  description="popa.d.producent")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hiddenid")
      * @var \ProgramDela\Entity\ProdukcijskaHisa
      */
     protected $producent;
@@ -283,7 +283,7 @@ class Popa
     /**
      * @ORM\OneToOne(targetEntity="Prodaja\Entity\Kupec", mappedBy="popa")
      * @Max\I18n(label="popa.kupec",  description="popa.d.kupec")
-     * @Max\Ui(type="toone")
+     * @Max\Ui(type="hiddenid")
      * @var \Prodaja\Entity\Kupec
      */
     protected $kupec;
