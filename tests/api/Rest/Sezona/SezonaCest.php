@@ -191,7 +191,7 @@ class SezonaCest
 
            
         codecept_debug($this->obj2);
-        $I->assertGuid($ent,"začasno $$");
+        $I->assertGuid($ent['id'],"začasno $$");
         
         /**
          * spremenimo še en zapis
