@@ -33,7 +33,6 @@ class Predstava
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label = "predstava.zaporedna", description = "predstava.d.zaporedna")
-     * @Max\I18n(label="Zaporedna št.", description="Zaporedna številka predstave")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -42,7 +41,6 @@ class Predstava
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label = "predstava.zaporednaSez", description = "predstava.d.zaporednaSez")
-     * @Max\I18n(label="Zaporedna št. v sezoni", description="Zaporedna številka predstave v sezoni")
      * @Max\Ui(type="integer")
      * @var integer
      */
@@ -52,7 +50,6 @@ class Predstava
      *
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label = "predstava.objavljenZacetek", description = "predstava.d.objavljenZacetek")
-     * @Max\I18n(label="Začetek za objavo", description="Čas začetka predstave, kot je objavljen za publiko.")
      * @var string
      */
     protected $objavljenZacetek;
@@ -69,7 +66,6 @@ class Predstava
     /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="predstava", cascade={"persist"})
      * @Max\I18n(label = "predstava.dogodek", description = "predstava.d.dogodek")
-     * @Max\I18n(label="Dogodek",  description="Dogodek")
      * @Max\Ui(type="toone")
      * @var Dogodek
      */
@@ -79,7 +75,6 @@ class Predstava
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="predstave")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id")
      * @Max\I18n(label = "predstava.uprizoritev", description = "predstava.d.uprizoritev")
-     * @Max\I18n(label="Uprizoritev",  description="Uprizoritev")
      * @Max\Ui(type="hiddenid")
      * @var Uprizoritev
      */
@@ -89,7 +84,6 @@ class Predstava
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Gostovanje", inversedBy="predstave")
      * @ORM\JoinColumn(name="gostovanje_id", referencedColumnName="id")
      * @Max\I18n(label = "predstava.gostovanje", description = "predstava.d.gostovanje")
-     * @Max\I18n(label="Gostovanje",  description="Gostovanje")
      * @Max\Ui(type="toone")
      * @var Gostovanje
      */

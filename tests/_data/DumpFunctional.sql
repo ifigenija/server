@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.10
 -- Dumped by pg_dump version 9.3.10
--- Started on 2015-10-30 14:10:24 CET
+-- Started on 2015-11-02 09:57:53 CET
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -35,7 +35,7 @@ SET search_path = public, pg_catalog;
 SET default_with_oids = false;
 
 --
--- TOC entry 183 (class 1259 OID 24315469)
+-- TOC entry 183 (class 1259 OID 24472270)
 -- Name: abonma; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -50,7 +50,7 @@ CREATE TABLE abonma (
 
 
 --
--- TOC entry 236 (class 1259 OID 24316077)
+-- TOC entry 236 (class 1259 OID 24472878)
 -- Name: alternacija; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -74,7 +74,7 @@ CREATE TABLE alternacija (
 
 
 --
--- TOC entry 235 (class 1259 OID 24316060)
+-- TOC entry 235 (class 1259 OID 24472861)
 -- Name: arhivalija; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -96,7 +96,7 @@ CREATE TABLE arhivalija (
 
 
 --
--- TOC entry 182 (class 1259 OID 24315462)
+-- TOC entry 182 (class 1259 OID 24472263)
 -- Name: authstorage; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -111,7 +111,7 @@ CREATE TABLE authstorage (
 
 
 --
--- TOC entry 181 (class 1259 OID 24315460)
+-- TOC entry 181 (class 1259 OID 24472261)
 -- Name: authstorage_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -133,7 +133,7 @@ ALTER SEQUENCE authstorage_id_seq OWNED BY authstorage.id;
 
 
 --
--- TOC entry 226 (class 1259 OID 24315937)
+-- TOC entry 226 (class 1259 OID 24472738)
 -- Name: avtorbesedila; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -148,7 +148,7 @@ CREATE TABLE avtorbesedila (
 
 
 --
--- TOC entry 229 (class 1259 OID 24315967)
+-- TOC entry 229 (class 1259 OID 24472768)
 -- Name: besedilo; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -173,7 +173,7 @@ CREATE TABLE besedilo (
 
 
 --
--- TOC entry 250 (class 1259 OID 24316364)
+-- TOC entry 250 (class 1259 OID 24473165)
 -- Name: datoteka; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -193,7 +193,7 @@ CREATE TABLE datoteka (
 
 
 --
--- TOC entry 203 (class 1259 OID 24315717)
+-- TOC entry 203 (class 1259 OID 24472518)
 -- Name: dogodek; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -217,7 +217,7 @@ CREATE TABLE dogodek (
 
 
 --
--- TOC entry 205 (class 1259 OID 24315748)
+-- TOC entry 205 (class 1259 OID 24472549)
 -- Name: dogodeksplosni; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -227,7 +227,7 @@ CREATE TABLE dogodeksplosni (
 
 
 --
--- TOC entry 244 (class 1259 OID 24316290)
+-- TOC entry 244 (class 1259 OID 24473091)
 -- Name: drugivir; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -241,7 +241,7 @@ CREATE TABLE drugivir (
 
 
 --
--- TOC entry 194 (class 1259 OID 24315614)
+-- TOC entry 194 (class 1259 OID 24472415)
 -- Name: drza; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -257,7 +257,7 @@ CREATE TABLE drza (
 
 
 --
--- TOC entry 237 (class 1259 OID 24316090)
+-- TOC entry 237 (class 1259 OID 24472891)
 -- Name: enotaprograma; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -341,7 +341,7 @@ CREATE TABLE enotaprograma (
 
 
 --
--- TOC entry 222 (class 1259 OID 24315891)
+-- TOC entry 222 (class 1259 OID 24472692)
 -- Name: funkcija; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -364,7 +364,7 @@ CREATE TABLE funkcija (
 
 
 --
--- TOC entry 200 (class 1259 OID 24315688)
+-- TOC entry 200 (class 1259 OID 24472489)
 -- Name: gostovanje; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -378,7 +378,7 @@ CREATE TABLE gostovanje (
 
 
 --
--- TOC entry 197 (class 1259 OID 24315654)
+-- TOC entry 197 (class 1259 OID 24472455)
 -- Name: job; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -410,7 +410,7 @@ COMMENT ON COLUMN job.data IS '(DC2Type:object)';
 
 
 --
--- TOC entry 195 (class 1259 OID 24315631)
+-- TOC entry 195 (class 1259 OID 24472432)
 -- Name: kontaktnaoseba; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -425,7 +425,7 @@ CREATE TABLE kontaktnaoseba (
 
 
 --
--- TOC entry 211 (class 1259 OID 24315805)
+-- TOC entry 211 (class 1259 OID 24472606)
 -- Name: kupec; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -436,7 +436,7 @@ CREATE TABLE kupec (
 
 
 --
--- TOC entry 248 (class 1259 OID 24316345)
+-- TOC entry 248 (class 1259 OID 24473146)
 -- Name: mapa; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -455,7 +455,7 @@ CREATE TABLE mapa (
 
 
 --
--- TOC entry 249 (class 1259 OID 24316357)
+-- TOC entry 249 (class 1259 OID 24473158)
 -- Name: mapa_zapis; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -466,7 +466,7 @@ CREATE TABLE mapa_zapis (
 
 
 --
--- TOC entry 251 (class 1259 OID 24316379)
+-- TOC entry 251 (class 1259 OID 24473180)
 -- Name: mapaacl; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -491,7 +491,7 @@ CREATE TABLE migrations (
 
 
 --
--- TOC entry 215 (class 1259 OID 24315830)
+-- TOC entry 215 (class 1259 OID 24472631)
 -- Name: nacinplacina; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -503,7 +503,7 @@ CREATE TABLE nacinplacina (
 
 
 --
--- TOC entry 192 (class 1259 OID 24315588)
+-- TOC entry 192 (class 1259 OID 24472389)
 -- Name: option; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -521,7 +521,7 @@ CREATE TABLE option (
 
 
 --
--- TOC entry 185 (class 1259 OID 24315488)
+-- TOC entry 185 (class 1259 OID 24472289)
 -- Name: optionvalue; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -535,7 +535,7 @@ CREATE TABLE optionvalue (
 
 
 --
--- TOC entry 189 (class 1259 OID 24315555)
+-- TOC entry 189 (class 1259 OID 24472356)
 -- Name: organizacijskaenota; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -550,7 +550,7 @@ CREATE TABLE organizacijskaenota (
 
 
 --
--- TOC entry 186 (class 1259 OID 24315499)
+-- TOC entry 186 (class 1259 OID 24472300)
 -- Name: oseba; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -582,7 +582,7 @@ CREATE TABLE oseba (
 
 
 --
--- TOC entry 178 (class 1259 OID 24315434)
+-- TOC entry 178 (class 1259 OID 24472235)
 -- Name: permission; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -595,7 +595,7 @@ CREATE TABLE permission (
 
 
 --
--- TOC entry 180 (class 1259 OID 24315453)
+-- TOC entry 180 (class 1259 OID 24472254)
 -- Name: permission2role; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -606,7 +606,7 @@ CREATE TABLE permission2role (
 
 
 --
--- TOC entry 216 (class 1259 OID 24315837)
+-- TOC entry 216 (class 1259 OID 24472638)
 -- Name: placilniinstrument; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -618,7 +618,7 @@ CREATE TABLE placilniinstrument (
 
 
 --
--- TOC entry 220 (class 1259 OID 24315871)
+-- TOC entry 220 (class 1259 OID 24472672)
 -- Name: podrocjesedenja; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -632,7 +632,7 @@ CREATE TABLE podrocjesedenja (
 
 
 --
--- TOC entry 232 (class 1259 OID 24316008)
+-- TOC entry 232 (class 1259 OID 24472809)
 -- Name: pogodba; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -661,7 +661,7 @@ CREATE TABLE pogodba (
 
 
 --
--- TOC entry 188 (class 1259 OID 24315535)
+-- TOC entry 188 (class 1259 OID 24472336)
 -- Name: popa; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -689,7 +689,7 @@ CREATE TABLE popa (
 
 
 --
--- TOC entry 191 (class 1259 OID 24315580)
+-- TOC entry 191 (class 1259 OID 24472381)
 -- Name: posta; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -701,7 +701,7 @@ CREATE TABLE posta (
 
 
 --
--- TOC entry 239 (class 1259 OID 24316235)
+-- TOC entry 239 (class 1259 OID 24473036)
 -- Name: postavkacdve; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -722,7 +722,7 @@ CREATE TABLE postavkacdve (
 
 
 --
--- TOC entry 212 (class 1259 OID 24315811)
+-- TOC entry 212 (class 1259 OID 24472612)
 -- Name: postavkaracuna; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -733,7 +733,7 @@ CREATE TABLE postavkaracuna (
 
 
 --
--- TOC entry 190 (class 1259 OID 24315565)
+-- TOC entry 190 (class 1259 OID 24472366)
 -- Name: postninaslovi; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -755,7 +755,7 @@ CREATE TABLE postninaslovi (
 
 
 --
--- TOC entry 202 (class 1259 OID 24315709)
+-- TOC entry 202 (class 1259 OID 24472510)
 -- Name: praznik; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -770,7 +770,7 @@ CREATE TABLE praznik (
 
 
 --
--- TOC entry 198 (class 1259 OID 24315669)
+-- TOC entry 198 (class 1259 OID 24472470)
 -- Name: predstava; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -787,7 +787,7 @@ CREATE TABLE predstava (
 
 
 --
--- TOC entry 199 (class 1259 OID 24315681)
+-- TOC entry 199 (class 1259 OID 24472482)
 -- Name: predstava_abonma; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -798,7 +798,7 @@ CREATE TABLE predstava_abonma (
 
 
 --
--- TOC entry 214 (class 1259 OID 24315823)
+-- TOC entry 214 (class 1259 OID 24472624)
 -- Name: prodajapredstave; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -810,7 +810,7 @@ CREATE TABLE prodajapredstave (
 
 
 --
--- TOC entry 240 (class 1259 OID 24316249)
+-- TOC entry 240 (class 1259 OID 24473050)
 -- Name: produkcijadelitev; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -826,7 +826,7 @@ CREATE TABLE produkcijadelitev (
 
 
 --
--- TOC entry 241 (class 1259 OID 24316259)
+-- TOC entry 241 (class 1259 OID 24473060)
 -- Name: produkcijskahisa; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -839,7 +839,7 @@ CREATE TABLE produkcijskahisa (
 
 
 --
--- TOC entry 238 (class 1259 OID 24316158)
+-- TOC entry 238 (class 1259 OID 24472959)
 -- Name: programdela; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -972,7 +972,7 @@ CREATE TABLE programdela (
 
 
 --
--- TOC entry 242 (class 1259 OID 24316267)
+-- TOC entry 242 (class 1259 OID 24473068)
 -- Name: programskaenotasklopa; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -989,7 +989,7 @@ CREATE TABLE programskaenotasklopa (
 
 
 --
--- TOC entry 218 (class 1259 OID 24315852)
+-- TOC entry 218 (class 1259 OID 24472653)
 -- Name: prostor; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1008,7 +1008,7 @@ CREATE TABLE prostor (
 
 
 --
--- TOC entry 210 (class 1259 OID 24315796)
+-- TOC entry 210 (class 1259 OID 24472597)
 -- Name: racun; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1022,7 +1022,7 @@ CREATE TABLE racun (
 
 
 --
--- TOC entry 209 (class 1259 OID 24315786)
+-- TOC entry 209 (class 1259 OID 24472587)
 -- Name: razpisansedez; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1037,7 +1037,7 @@ CREATE TABLE razpisansedez (
 
 
 --
--- TOC entry 231 (class 1259 OID 24315997)
+-- TOC entry 231 (class 1259 OID 24472798)
 -- Name: rekvizit; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1050,7 +1050,7 @@ CREATE TABLE rekvizit (
 
 
 --
--- TOC entry 225 (class 1259 OID 24315927)
+-- TOC entry 225 (class 1259 OID 24472728)
 -- Name: rekviziterstvo; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1064,7 +1064,7 @@ CREATE TABLE rekviziterstvo (
 
 
 --
--- TOC entry 196 (class 1259 OID 24315643)
+-- TOC entry 196 (class 1259 OID 24472444)
 -- Name: report; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1082,7 +1082,7 @@ CREATE TABLE report (
 
 
 --
--- TOC entry 175 (class 1259 OID 24315405)
+-- TOC entry 175 (class 1259 OID 24472206)
 -- Name: revizije; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1098,7 +1098,7 @@ CREATE TABLE revizije (
 
 
 --
--- TOC entry 174 (class 1259 OID 24315403)
+-- TOC entry 174 (class 1259 OID 24472204)
 -- Name: revizije_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1120,7 +1120,7 @@ ALTER SEQUENCE revizije_id_seq OWNED BY revizije.id;
 
 
 --
--- TOC entry 219 (class 1259 OID 24315865)
+-- TOC entry 219 (class 1259 OID 24472666)
 -- Name: rezervacija; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1131,7 +1131,7 @@ CREATE TABLE rezervacija (
 
 
 --
--- TOC entry 179 (class 1259 OID 24315443)
+-- TOC entry 179 (class 1259 OID 24472244)
 -- Name: role; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1144,7 +1144,7 @@ CREATE TABLE role (
 
 
 --
--- TOC entry 177 (class 1259 OID 24315427)
+-- TOC entry 177 (class 1259 OID 24472228)
 -- Name: role2user; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1155,7 +1155,7 @@ CREATE TABLE role2user (
 
 
 --
--- TOC entry 221 (class 1259 OID 24315879)
+-- TOC entry 221 (class 1259 OID 24472680)
 -- Name: sedez; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1174,7 +1174,7 @@ CREATE TABLE sedez (
 
 
 --
--- TOC entry 213 (class 1259 OID 24315817)
+-- TOC entry 213 (class 1259 OID 24472618)
 -- Name: sedeznired; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1186,7 +1186,7 @@ CREATE TABLE sedeznired (
 
 
 --
--- TOC entry 207 (class 1259 OID 24315763)
+-- TOC entry 207 (class 1259 OID 24472564)
 -- Name: sezona; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1201,7 +1201,7 @@ CREATE TABLE sezona (
 
 
 --
--- TOC entry 173 (class 1259 OID 24315392)
+-- TOC entry 173 (class 1259 OID 24472193)
 -- Name: stevilcenje; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1220,7 +1220,7 @@ CREATE TABLE stevilcenje (
 
 
 --
--- TOC entry 172 (class 1259 OID 24315384)
+-- TOC entry 172 (class 1259 OID 24472185)
 -- Name: stevilcenjekonfig; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1232,7 +1232,7 @@ CREATE TABLE stevilcenjekonfig (
 
 
 --
--- TOC entry 171 (class 1259 OID 24315379)
+-- TOC entry 171 (class 1259 OID 24472180)
 -- Name: stevilcenjestanje; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1245,7 +1245,7 @@ CREATE TABLE stevilcenjestanje (
 
 
 --
--- TOC entry 227 (class 1259 OID 24315944)
+-- TOC entry 227 (class 1259 OID 24472745)
 -- Name: strosekuprizoritve; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1264,7 +1264,7 @@ CREATE TABLE strosekuprizoritve (
 
 
 --
--- TOC entry 187 (class 1259 OID 24315527)
+-- TOC entry 187 (class 1259 OID 24472328)
 -- Name: telefonska; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1279,7 +1279,7 @@ CREATE TABLE telefonska (
 
 
 --
--- TOC entry 208 (class 1259 OID 24315773)
+-- TOC entry 208 (class 1259 OID 24472574)
 -- Name: terminstoritve; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1299,7 +1299,7 @@ CREATE TABLE terminstoritve (
 
 
 --
--- TOC entry 230 (class 1259 OID 24315985)
+-- TOC entry 230 (class 1259 OID 24472786)
 -- Name: tipfunkcije; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1315,7 +1315,7 @@ CREATE TABLE tipfunkcije (
 
 
 --
--- TOC entry 184 (class 1259 OID 24315478)
+-- TOC entry 184 (class 1259 OID 24472279)
 -- Name: tippopa; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1328,7 +1328,7 @@ CREATE TABLE tippopa (
 
 
 --
--- TOC entry 243 (class 1259 OID 24316278)
+-- TOC entry 243 (class 1259 OID 24473079)
 -- Name: tipprogramskeenote; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1343,7 +1343,7 @@ CREATE TABLE tipprogramskeenote (
 
 
 --
--- TOC entry 206 (class 1259 OID 24315753)
+-- TOC entry 206 (class 1259 OID 24472554)
 -- Name: tipvaje; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1356,7 +1356,7 @@ CREATE TABLE tipvaje (
 
 
 --
--- TOC entry 193 (class 1259 OID 24315600)
+-- TOC entry 193 (class 1259 OID 24472401)
 -- Name: trr; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1372,7 +1372,7 @@ CREATE TABLE trr (
 
 
 --
--- TOC entry 176 (class 1259 OID 24315414)
+-- TOC entry 176 (class 1259 OID 24472215)
 -- Name: uporabniki; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1392,7 +1392,7 @@ CREATE TABLE uporabniki (
 
 
 --
--- TOC entry 234 (class 1259 OID 24316035)
+-- TOC entry 234 (class 1259 OID 24472836)
 -- Name: uprizoritev; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1432,7 +1432,7 @@ CREATE TABLE uprizoritev (
 
 
 --
--- TOC entry 201 (class 1259 OID 24315699)
+-- TOC entry 201 (class 1259 OID 24472500)
 -- Name: vaja; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1446,7 +1446,7 @@ CREATE TABLE vaja (
 
 
 --
--- TOC entry 217 (class 1259 OID 24315844)
+-- TOC entry 217 (class 1259 OID 24472645)
 -- Name: vrstasedezev; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1460,7 +1460,7 @@ CREATE TABLE vrstasedezev (
 
 
 --
--- TOC entry 228 (class 1259 OID 24315958)
+-- TOC entry 228 (class 1259 OID 24472759)
 -- Name: vrstastroska; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1474,7 +1474,7 @@ CREATE TABLE vrstastroska (
 
 
 --
--- TOC entry 246 (class 1259 OID 24316325)
+-- TOC entry 246 (class 1259 OID 24473126)
 -- Name: vrstazapisa; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1491,7 +1491,7 @@ CREATE TABLE vrstazapisa (
 
 
 --
--- TOC entry 245 (class 1259 OID 24316297)
+-- TOC entry 245 (class 1259 OID 24473098)
 -- Name: zapis; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1525,7 +1525,7 @@ CREATE TABLE zapis (
 
 
 --
--- TOC entry 247 (class 1259 OID 24316337)
+-- TOC entry 247 (class 1259 OID 24473138)
 -- Name: zapislastnik; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1541,7 +1541,7 @@ CREATE TABLE zapislastnik (
 
 
 --
--- TOC entry 224 (class 1259 OID 24315916)
+-- TOC entry 224 (class 1259 OID 24472717)
 -- Name: zaposlitev; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1565,7 +1565,7 @@ CREATE TABLE zaposlitev (
 
 
 --
--- TOC entry 204 (class 1259 OID 24315742)
+-- TOC entry 204 (class 1259 OID 24472543)
 -- Name: zasedenost; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1576,7 +1576,7 @@ CREATE TABLE zasedenost (
 
 
 --
--- TOC entry 233 (class 1259 OID 24316025)
+-- TOC entry 233 (class 1259 OID 24472826)
 -- Name: zvrstsurs; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1589,7 +1589,7 @@ CREATE TABLE zvrstsurs (
 
 
 --
--- TOC entry 223 (class 1259 OID 24315906)
+-- TOC entry 223 (class 1259 OID 24472707)
 -- Name: zvrstuprizoritve; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1602,7 +1602,7 @@ CREATE TABLE zvrstuprizoritve (
 
 
 --
--- TOC entry 2238 (class 2604 OID 24315465)
+-- TOC entry 2238 (class 2604 OID 24472266)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1610,7 +1610,7 @@ ALTER TABLE ONLY authstorage ALTER COLUMN id SET DEFAULT nextval('authstorage_id
 
 
 --
--- TOC entry 2230 (class 2604 OID 24315408)
+-- TOC entry 2230 (class 2604 OID 24472209)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -1618,42 +1618,42 @@ ALTER TABLE ONLY revizije ALTER COLUMN id SET DEFAULT nextval('revizije_id_seq':
 
 
 --
--- TOC entry 3093 (class 0 OID 24315469)
+-- TOC entry 3093 (class 0 OID 24472270)
 -- Dependencies: 183
 -- Data for Name: abonma; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY abonma (id, stpredstav, stkuponov, ime, opis, kapaciteta) FROM stdin;
-000a0000-5633-6c3c-34b2-c2c2d873b2bf	10	30	Otroci	Abonma za otroke	200
-000a0000-5633-6c3c-0340-e4fc4ad59774	20	60	Mladina	Abonma za mladino	400
-000a0000-5633-6c3c-7e5f-2691a9ca20ab	15	50	Odrasli	Abonma za odrasle	300
+000a0000-5637-258e-4609-8fb378810785	10	30	Otroci	Abonma za otroke	200
+000a0000-5637-258e-8a47-36e392724c8a	20	60	Mladina	Abonma za mladino	400
+000a0000-5637-258e-669b-69bce819fd69	15	50	Odrasli	Abonma za odrasle	300
 \.
 
 
 --
--- TOC entry 3146 (class 0 OID 24316077)
+-- TOC entry 3146 (class 0 OID 24472878)
 -- Dependencies: 236
 -- Data for Name: alternacija; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY alternacija (id, funkcija_id, zaposlitev_id, oseba_id, pogodba_id, sifra, zaposlen, zacetek, konec, opomba, sort, privzeti, aktivna, imapogodbo, pomembna) FROM stdin;
-000c0000-5633-6c3d-d806-c6ffbb4a0461	000d0000-5633-6c3d-64e7-07ed3b6319d4	\N	00090000-5633-6c3d-f31e-d745e1558e51	000b0000-5633-6c3d-e819-61a24963c78d	0001	f	\N	\N	\N	3	t	\N	t	t
-000c0000-5633-6c3d-2a39-e761b085796d	000d0000-5633-6c3d-cbc6-0fb8f382fe84	00100000-5633-6c3d-1ba3-49a79da54c8f	00090000-5633-6c3d-fd31-b494da40fd86	\N	0002	t	2016-01-01	\N	\N	8	t	\N	f	f
-000c0000-5633-6c3d-71e9-8cda09bb4dde	000d0000-5633-6c3d-f8cd-e209ee1a9735	00100000-5633-6c3d-19ab-de474e6876d2	00090000-5633-6c3d-afd2-8217a84f69a0	\N	0003	t	\N	2015-10-30	\N	2	t	\N	f	f
-000c0000-5633-6c3d-5216-b38a507ca046	000d0000-5633-6c3d-1f26-2a199996983a	\N	00090000-5633-6c3d-250a-a12ad23c1824	\N	0004	f	2016-01-01	2016-01-01	\N	26	t	\N	f	f
-000c0000-5633-6c3d-2f62-b27647e356b0	000d0000-5633-6c3d-f0c6-61a67f88402a	\N	00090000-5633-6c3d-6b84-e1fd649751b2	\N	0005	f	2016-01-01	2016-01-01	\N	7	t	\N	f	f
-000c0000-5633-6c3d-9f57-5942245f3bd5	000d0000-5633-6c3d-3629-cba792c581a5	\N	00090000-5633-6c3d-2b80-b1fd54a0f016	000b0000-5633-6c3d-d8df-19202ae76df4	0006	f	2016-01-01	2016-01-01	\N	1	t	\N	t	t
-000c0000-5633-6c3d-4675-dbfcf944a1a3	000d0000-5633-6c3d-13e7-27c161902ab2	00100000-5633-6c3d-bc8d-1dcab0853e11	00090000-5633-6c3d-de4b-43632e11f01c	\N	0007	t	2016-01-01	2016-01-01	\N	14	f	\N	f	t
-000c0000-5633-6c3d-4d1f-40034a87a72d	000d0000-5633-6c3d-a778-a468425b656a	\N	00090000-5633-6c3d-a36b-48865c91e446	000b0000-5633-6c3d-6803-bf5dfa652411	0008	f	2016-01-01	2016-01-01	\N	12	t	\N	t	t
-000c0000-5633-6c3d-298d-72b9c469ab1e	000d0000-5633-6c3d-13e7-27c161902ab2	00100000-5633-6c3d-3325-949def7327c5	00090000-5633-6c3d-e239-b5d3c53e3b5a	\N	0009	t	2017-01-01	2017-01-01	\N	15	t	\N	f	t
-000c0000-5633-6c3d-d454-252875f7f492	000d0000-5633-6c3d-13e7-27c161902ab2	00100000-5633-6c3d-4ad9-cd0d8def84f0	00090000-5633-6c3d-e7a0-9053bed7e04d	\N	0010	t	\N	2015-10-30	\N	16	f	\N	f	t
-000c0000-5633-6c3d-2562-993ce1adc668	000d0000-5633-6c3d-13e7-27c161902ab2	00100000-5633-6c3d-15b0-9a38a4efdd69	00090000-5633-6c3d-46de-ac092853426c	\N	0011	t	2017-01-01	\N	\N	17	f	\N	f	t
-000c0000-5633-6c3d-16fb-96d3a7b5695f	000d0000-5633-6c3d-9d43-4ea8c331b05b	00100000-5633-6c3d-1ba3-49a79da54c8f	00090000-5633-6c3d-fd31-b494da40fd86	000b0000-5633-6c3d-6285-2a10f5273ffa	0012	t	\N	\N	\N	2	t	\N	t	t
+000c0000-5637-258f-4093-bd0028f42bb3	000d0000-5637-258f-d666-459eb6638d5f	\N	00090000-5637-258e-1322-64b6318fe593	000b0000-5637-258e-7e9c-f74bf553da56	0001	f	\N	\N	\N	3	t	\N	t	t
+000c0000-5637-258f-243a-af2f40c43f0b	000d0000-5637-258f-5cf9-6c0f24071b97	00100000-5637-258e-e829-ea67a4aece26	00090000-5637-258e-a0fa-d9f6b12d0ba9	\N	0002	t	2016-01-01	\N	\N	8	t	\N	f	f
+000c0000-5637-258f-7ea6-3da14e45e970	000d0000-5637-258f-472d-f7a9184a89ee	00100000-5637-258e-8b74-4ee5ea09d9dc	00090000-5637-258e-55a6-ba61a01b45d5	\N	0003	t	\N	2015-11-02	\N	2	t	\N	f	f
+000c0000-5637-258f-1aae-4812d0bfc183	000d0000-5637-258f-bd07-56cac1d84fdb	\N	00090000-5637-258e-c15b-37a3397f2b60	\N	0004	f	2016-01-01	2016-01-01	\N	26	t	\N	f	f
+000c0000-5637-258f-e2ba-b9a9ce88c8c2	000d0000-5637-258f-403b-567362074d5f	\N	00090000-5637-258e-3370-b8dc850227a6	\N	0005	f	2016-01-01	2016-01-01	\N	7	t	\N	f	f
+000c0000-5637-258f-81c6-d60e2ff01ecf	000d0000-5637-258f-f5c6-fe2342fa70e6	\N	00090000-5637-258e-7752-c3fa85f98991	000b0000-5637-258e-9a85-aa052dc5017d	0006	f	2016-01-01	2016-01-01	\N	1	t	\N	t	t
+000c0000-5637-258f-3007-6acfd740e426	000d0000-5637-258f-35f6-6d8f48f07807	00100000-5637-258e-1d51-37f7f10a1514	00090000-5637-258e-3d64-b4d5c53d684a	\N	0007	t	2016-01-01	2016-01-01	\N	14	f	\N	f	t
+000c0000-5637-258f-d87e-29aed5082856	000d0000-5637-258f-4499-5b05e45e2a24	\N	00090000-5637-258e-f460-ec5788882ea5	000b0000-5637-258e-eba6-602b795a047c	0008	f	2016-01-01	2016-01-01	\N	12	t	\N	t	t
+000c0000-5637-258f-1b9b-853c4f12793c	000d0000-5637-258f-35f6-6d8f48f07807	00100000-5637-258e-6b47-cd7aa8900fd6	00090000-5637-258e-4220-5779164d10cf	\N	0009	t	2017-01-01	2017-01-01	\N	15	t	\N	f	t
+000c0000-5637-258f-f247-6107f4c6e0d9	000d0000-5637-258f-35f6-6d8f48f07807	00100000-5637-258e-b192-9f8ad60f67d4	00090000-5637-258e-0943-32335453a0d0	\N	0010	t	\N	2015-11-02	\N	16	f	\N	f	t
+000c0000-5637-258f-b0a6-8444cd6afb50	000d0000-5637-258f-35f6-6d8f48f07807	00100000-5637-258e-5e49-dc233055428d	00090000-5637-258e-33d2-c94bfbee297c	\N	0011	t	2017-01-01	\N	\N	17	f	\N	f	t
+000c0000-5637-258f-0a0e-9349d505fc0d	000d0000-5637-258f-0699-77639185da95	00100000-5637-258e-e829-ea67a4aece26	00090000-5637-258e-a0fa-d9f6b12d0ba9	000b0000-5637-258e-763a-96fa7d01c185	0012	t	\N	\N	\N	2	t	\N	t	t
 \.
 
 
 --
--- TOC entry 3145 (class 0 OID 24316060)
+-- TOC entry 3145 (class 0 OID 24472861)
 -- Dependencies: 235
 -- Data for Name: arhivalija; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1663,7 +1663,7 @@ COPY arhivalija (id, dogodek_id, uprizoritev_id, oznakadatuma, datum, fizicnaobl
 
 
 --
--- TOC entry 3092 (class 0 OID 24315462)
+-- TOC entry 3092 (class 0 OID 24472263)
 -- Dependencies: 182
 -- Data for Name: authstorage; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1682,35 +1682,35 @@ SELECT pg_catalog.setval('authstorage_id_seq', 1, false);
 
 
 --
--- TOC entry 3136 (class 0 OID 24315937)
+-- TOC entry 3136 (class 0 OID 24472738)
 -- Dependencies: 226
 -- Data for Name: avtorbesedila; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY avtorbesedila (id, besedilo_id, oseba_id, tipavtorja, zaporedna, alivnaslovu) FROM stdin;
-003d0000-5633-6c3d-a38d-c636c552b44d	00160000-5633-6c3c-b86d-1cc23b771584	00090000-5633-6c3d-bd6a-984ea39656a2	aizv	10	t
-003d0000-5633-6c3d-9dbf-7cef972cf43e	00160000-5633-6c3c-b86d-1cc23b771584	00090000-5633-6c3d-eee0-fe6c285b4bfc	apri	14	t
-003d0000-5633-6c3d-546a-37bdd435591b	00160000-5633-6c3c-d4bd-52511c177c37	00090000-5633-6c3d-9269-96b3e7502f02	aizv	11	t
-003d0000-5633-6c3d-677c-22cf057f5877	00160000-5633-6c3c-ce6a-d14617ce5535	00090000-5633-6c3d-8a96-dd3eb52dfd6d	aizv	12	t
-003d0000-5633-6c3d-05a6-2442f5243f0f	00160000-5633-6c3c-b86d-1cc23b771584	00090000-5633-6c3d-41b6-ce132f69df5c	apri	18	f
+003d0000-5637-258e-a9d0-206131e162eb	00160000-5637-258e-11eb-f4a3ea021377	00090000-5637-258e-fbf8-cd02af7c3503	aizv	10	t
+003d0000-5637-258e-5a6a-dd1ec5fab86c	00160000-5637-258e-11eb-f4a3ea021377	00090000-5637-258e-2e3f-1a4f0bff986b	apri	14	t
+003d0000-5637-258e-ddee-3574244d2750	00160000-5637-258e-979c-ea9ce509765b	00090000-5637-258e-6cd7-6424a0b86fb5	aizv	11	t
+003d0000-5637-258e-5ef5-3e35bfa84a43	00160000-5637-258e-33e6-58846a97e047	00090000-5637-258e-b277-217f6bfc8524	aizv	12	t
+003d0000-5637-258e-c56c-df29fca50fee	00160000-5637-258e-11eb-f4a3ea021377	00090000-5637-258e-a9d0-70fba87e29e8	apri	18	f
 \.
 
 
 --
--- TOC entry 3139 (class 0 OID 24315967)
+-- TOC entry 3139 (class 0 OID 24472768)
 -- Dependencies: 229
 -- Data for Name: besedilo; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY besedilo (id, stevilka, naslov, podnaslov, jezik, naslovizvirnika, podnaslovizvirnika, internacionalninaslov, datumprejema, moskevloge, zenskevloge, povzetekvsebine, letoizida, krajizida, zaloznik, avtor) FROM stdin;
-00160000-5633-6c3c-b86d-1cc23b771584	0001	Sen kresne noči		slovenščina	A Midsummer Night's Dream	\N	\N	2015-04-26	5	5	Nastopajo Titanija, Hipolita, Oberon, ...	\N	\N	\N	William  Shakespeare - Nebojša  Kavader
-00160000-5633-6c3c-d4bd-52511c177c37	0002	Bratje Karamazovi		slovenščina	Bratja Karamazjovji	\N	\N	2015-12-04	4	1	Svetovna uspešnica	\N	\N	\N	Fjodor Mihajlovič Dostojevski
-00160000-5633-6c3c-ce6a-d14617ce5535	0003	Smoletov Vrt		slovenščina		\N	\N	2015-05-26	2	8		\N	\N	\N	Berta   Hočevar
+00160000-5637-258e-11eb-f4a3ea021377	0001	Sen kresne noči		slovenščina	A Midsummer Night's Dream	\N	\N	2015-04-26	5	5	Nastopajo Titanija, Hipolita, Oberon, ...	\N	\N	\N	William  Shakespeare - Nebojša  Kavader
+00160000-5637-258e-979c-ea9ce509765b	0002	Bratje Karamazovi		slovenščina	Bratja Karamazjovji	\N	\N	2015-12-04	4	1	Svetovna uspešnica	\N	\N	\N	Fjodor Mihajlovič Dostojevski
+00160000-5637-258e-33e6-58846a97e047	0003	Smoletov Vrt		slovenščina		\N	\N	2015-05-26	2	8		\N	\N	\N	Berta   Hočevar
 \.
 
 
 --
--- TOC entry 3160 (class 0 OID 24316364)
+-- TOC entry 3160 (class 0 OID 24473165)
 -- Dependencies: 250
 -- Data for Name: datoteka; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1720,22 +1720,22 @@ COPY datoteka (id, owner_id, filename, transfers, size, format, hash, createdat,
 
 
 --
--- TOC entry 3113 (class 0 OID 24315717)
+-- TOC entry 3113 (class 0 OID 24472518)
 -- Dependencies: 203
 -- Data for Name: dogodek; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY dogodek (id, predstava_id, zasedenost_id, vaja_id, gostovanje_id, dogodek_splosni_id, prostor_id, sezona_id, allday, zacetek, konec, status, razred, termin, title) FROM stdin;
-00180000-5633-6c3d-5e98-103910d280dc	\N	\N	00200000-5633-6c3d-0d4e-0d5792d5fac7	\N	\N	\N	\N	f	2015-06-26 10:00:00	2015-06-26 12:00:00	200s	200s		dogodek 1
-00180000-5633-6c3d-2ca7-5e32699f91f6	\N	\N	00200000-5633-6c3d-29ac-bdda3bf67195	\N	\N	\N	\N	f	2015-06-27 10:00:00	2015-06-27 12:00:00	300s	200s		dogodek 2
-00180000-5633-6c3d-3f5a-4c03199a6302	\N	\N	00200000-5633-6c3d-d253-6f90d07eefeb	\N	\N	\N	\N	f	2015-08-01 20:00:00	2015-08-01 23:00:00	400s	200s		dogodek 3
-00180000-5633-6c3d-399a-75a81763a385	\N	\N	00200000-5633-6c3d-41ed-233ece90caff	\N	\N	\N	\N	f	2015-08-01 20:00:00	2015-08-01 23:00:00	100s	200s		dogodek 4
-00180000-5633-6c3d-ef1a-32c72b1366a4	\N	\N	00200000-5633-6c3d-6519-7785987e64cf	\N	\N	\N	\N	f	2015-08-01 20:00:00	2015-08-01 23:00:00	500s	200s		dogodek 5
+00180000-5637-258f-3112-f304d1a8de71	\N	\N	00200000-5637-258f-e115-ce11eadbad6d	\N	\N	\N	\N	f	2015-06-26 10:00:00	2015-06-26 12:00:00	200s	200s		dogodek 1
+00180000-5637-258f-0eab-3b36db0795fc	\N	\N	00200000-5637-258f-6480-6399ecdb628e	\N	\N	\N	\N	f	2015-06-27 10:00:00	2015-06-27 12:00:00	300s	200s		dogodek 2
+00180000-5637-258f-38a4-5f83c529a31b	\N	\N	00200000-5637-258f-dc46-9346eba0f015	\N	\N	\N	\N	f	2015-08-01 20:00:00	2015-08-01 23:00:00	400s	200s		dogodek 3
+00180000-5637-258f-f2be-d23da13051e6	\N	\N	00200000-5637-258f-41e8-e5edf1c656c9	\N	\N	\N	\N	f	2015-08-01 20:00:00	2015-08-01 23:00:00	100s	200s		dogodek 4
+00180000-5637-258f-e9ab-84af4f07706c	\N	\N	00200000-5637-258f-e379-644ceeb23392	\N	\N	\N	\N	f	2015-08-01 20:00:00	2015-08-01 23:00:00	500s	200s		dogodek 5
 \.
 
 
 --
--- TOC entry 3115 (class 0 OID 24315748)
+-- TOC entry 3115 (class 0 OID 24472549)
 -- Dependencies: 205
 -- Data for Name: dogodeksplosni; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1745,7 +1745,7 @@ COPY dogodeksplosni (id) FROM stdin;
 
 
 --
--- TOC entry 3154 (class 0 OID 24316290)
+-- TOC entry 3154 (class 0 OID 24473091)
 -- Dependencies: 244
 -- Data for Name: drugivir; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -1755,300 +1755,300 @@ COPY drugivir (id, znesek, opis, mednarodni, enotaprograma_id) FROM stdin;
 
 
 --
--- TOC entry 3104 (class 0 OID 24315614)
+-- TOC entry 3104 (class 0 OID 24472415)
 -- Dependencies: 194
 -- Data for Name: drza; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY drza (id, sifra, sifradolg, isonum, isonaziv, naziv, opomba) FROM stdin;
-00040000-5633-6c3a-5666-f2208ad083cc	AF	AFG	004	Afghanistan 	Afganistan	\N
-00040000-5633-6c3a-24d9-b1554c5943d2	AX	ALA	248	Ålland Islands 	Alandski otoki	Otočje v Baltiku.
-00040000-5633-6c3a-a983-9a08f6555946	AL	ALB	008	Albania 	Albanija	\N
-00040000-5633-6c3a-1ad0-61eb425c256b	DZ	DZA	012	Algeria 	Alžirija	Koda po kabilskem nazivu: Dzayer.
-00040000-5633-6c3a-4e9a-988fad9a6022	AS	ASM	016	American Samoa 	Ameriška Samoa	Zunanji teritorij ZDA v južnem Tihem oceanu.
-00040000-5633-6c3a-a3bd-2a8e83a1c66f	AD	AND	020	Andorra 	Andora	\N
-00040000-5633-6c3a-c9b9-0fb472b12069	AO	AGO	024	Angola 	Angola	\N
-00040000-5633-6c3a-9d08-56c77bc18cd6	AI	AIA	660	Anguilla 	Angvila	Čezmorska skupnost Velike Britanije, predhodno je AI predstavljal francoski: Afar and Issas.
-00040000-5633-6c3a-c3ff-32f509c88be4	AQ	ATA	010	Antarctica 	Antarktika	Koda pa francoskem nazivu: Antarctique.
-00040000-5633-6c3a-b8f2-2f6bbccfa01b	AG	ATG	028	Antigua and Barbuda 	Antigva in Barbuda	Otoška država v malih Antilih v Karibskem morju.
-00040000-5633-6c3a-b945-387eee38dc0b	AR	ARG	032	Argentina 	Argenitna	\N
-00040000-5633-6c3a-0267-a3ac3990afd9	AM	ARM	051	Armenia 	Armenija	\N
-00040000-5633-6c3a-d3d4-c2f41fefeeca	AW	ABW	533	Aruba 	Aruba	Otok v Karibskem morju, del kraljevine Nizozemske.
-00040000-5633-6c3a-3980-bf9cae965cff	AU	AUS	036	Australia 	Avstralija	\N
-00040000-5633-6c3a-8fef-206fbd5e207d	AT	AUT	040	Austria 	Avstrija	\N
-00040000-5633-6c3a-1696-461daa3f960b	AZ	AZE	031	Azerbaijan 	Azerbajdžan	\N
-00040000-5633-6c3a-b607-4a236c1f06de	BS	BHS	044	Bahamas 	Bahami	\N
-00040000-5633-6c3a-ae72-b88ea51d72eb	BH	BHR	048	Bahrain 	Bahrajn	\N
-00040000-5633-6c3a-2143-e9676c839db6	BD	BGD	050	Bangladesh 	Bangladeš	\N
-00040000-5633-6c3a-4c2b-b07b1714a55f	BB	BRB	052	Barbados 	Barbados	\N
-00040000-5633-6c3a-027d-c060ae8ccdfb	BY	BLR	112	Belarus 	Belorusija	Bivši ISO naziv države: Byelorussian SSR.
-00040000-5633-6c3a-1221-7da330bfe311	BE	BEL	056	Belgium 	Belgija	\N
-00040000-5633-6c3a-3833-544a5dae668f	BZ	BLZ	084	Belize 	Belize	\N
-00040000-5633-6c3a-2542-bd979e6d2685	BJ	BEN	204	Benin 	Benin	Bivši ISO naziv države: Dahomey (DY).
-00040000-5633-6c3a-502e-b9a6e3940bc3	BM	BMU	060	Bermuda 	Bermudi	\N
-00040000-5633-6c3a-f0c9-84e1d4cd14eb	BT	BTN	064	Bhutan 	Butan	\N
-00040000-5633-6c3a-f355-9962977c2860	BO	BOL	068	Bolivia, Plurinational State of 	Bolivija	\N
-00040000-5633-6c3a-ef11-616346eb58d9	BQ	BES	535	Bonaire, Sint Eustatius and Saba 	Otočje Bonaire, Sv. Eustatij in Saba	Otočje v karibih pod nizozemsko upravo (the BES Islands). Bivši ISO naziv države: Bonaire, Saint Eustatius and Saba. BQ je prej predstavljal: British Antarctic Territory.
-00040000-5633-6c3a-c6e6-64c8f978efa7	BA	BIH	070	Bosnia and Herzegovina 	Bosna in Hercegovina	\N
-00040000-5633-6c3a-f63b-6334bcddc065	BW	BWA	072	Botswana 	Bocvana	\N
-00040000-5633-6c3a-2b6d-00d57b08117c	BV	BVT	074	Bouvet Island 	Bouvetov otok	Norveški otok v južnem Atlantskem oceanu.
-00040000-5633-6c3a-3481-e75962673a49	BR	BRA	076	Brazil 	Brazilija	\N
-00040000-5633-6c3a-f9bb-fd0a474eb86a	IO	IOT	086	British Indian Ocean Territory 	Britansko ozemlje v Indijskem oceanu	\N
-00040000-5633-6c3a-0aba-0af58427425c	BN	BRN	096	Brunei Darussalam 	Brunej	ISO naziv države po nazivu v ZN. Otoška država na otok Borneo v JV Aziji.
-00040000-5633-6c3a-2f40-53d6d1fbb2c9	BG	BGR	100	Bulgaria 	Bolgarija	\N
-00040000-5633-6c3a-85ae-044640e1e8e9	BF	BFA	854	Burkina Faso 	Burkina Faso	Bivši ISO naziv države: Upper Volta (HV).
-00040000-5633-6c3a-8090-8d2a6f5cb555	BI	BDI	108	Burundi 	Burundi 	\N
-00040000-5633-6c3a-5c01-ca99fa6ac5ac	KH	KHM	116	Cambodia 	Kambodža	Koda po bivšem nazivu: Khmer Republic. Bivši ISO naziv države: Kampuchea.
-00040000-5633-6c3a-fe26-be9e4e7a62e2	CM	CMR	120	Cameroon 	Kamerun	\N
-00040000-5633-6c3a-660f-a9dacbfbd3fe	CA	CAN	124	Canada 	Kanada	\N
-00040000-5633-6c3a-1a9f-fce4c75a1b19	CV	CPV	132	Cape Verde 	Kapverdski otoki (Zelenortski otoki)	Otočje v Atlantskem oceanu ob Afriki.
-00040000-5633-6c3a-f46f-41640b12b134	KY	CYM	136	Cayman Islands 	Kajmanski otoki	\N
-00040000-5633-6c3a-ee54-23c2149d04c7	CF	CAF	140	Central African Republic 	Srednjeafriška republika	Prej znana kot francoska kolonija Ubangi-Shari.
-00040000-5633-6c3a-fe3e-bb9c1e1b840b	TD	TCD	148	Chad 	Čad	Koda po francoskem nazivu: Tchad.
-00040000-5633-6c3a-9b15-e80420de8de9	CL	CHL	152	Chile 	Čile	\N
-00040000-5633-6c3a-e06b-9a00cffb45d9	CN	CHN	156	China 	Kitajska	\N
-00040000-5633-6c3a-adb0-7a2dc64991b6	CX	CXR	162	Christmas Island 	Božični otok	Avstralsko ozemlje v Indijskem oceanu.
-00040000-5633-6c3a-807e-eb9d40dc00d6	CC	CCK	166	Cocos (Keeling) Islands 	Kokosovi in Keelingovi otoki	Otočje pod upravo Avstralije v Indijskem oceanu.
-00040000-5633-6c3a-d629-4eb4ed6dc3d8	CO	COL	170	Colombia 	Kolumbija	\N
-00040000-5633-6c3a-8c2a-2047e44748a1	KM	COM	174	Comoros 	Komori	Otočje v Indijskem oceanu. Koda po nazivu v komorščini: Komori.
-00040000-5633-6c3a-6594-cd7091ae6c9e	CG	COG	178	Congo 	Kongo	Srednji Kongo (celinska država brez morja).
-00040000-5633-6c3a-1262-3d4ced0907cc	CD	COD	180	Congo, the Democratic Republic of the 	Demokratična republika Kongo	Bivše ime: Zaire (ZR), obmorska država.
-00040000-5633-6c3a-6c3e-1f50f54bdbd3	CK	COK	184	Cook Islands 	Cookovi otoki	\N
-00040000-5633-6c3a-ff9e-bd6b152ee1c4	CR	CRI	188	Costa Rica 	Kostarika	\N
-00040000-5633-6c3a-436e-a304dda883b9	CI	CIV	384	Côte d'Ivoire 	Slonokoščena obala	\N
-00040000-5633-6c3a-4614-82b29651b7f3	HR	HRV	191	Croatia 	Hrvaška	Koda po nazivu v hrvaščini: Hrvatska.
-00040000-5633-6c3a-2c5b-8cbd69ea9482	CU	CUB	192	Cuba 	Kuba	\N
-00040000-5633-6c3a-5387-d1b727cdde0c	CW	CUW	531	Curaçao 	Kurasao	Spada v čezmorsko ozemlje Nizozemske, Nizozemski Antili.
-00040000-5633-6c3a-481c-572fd6e12103	CY	CYP	196	Cyprus 	Ciper	\N
-00040000-5633-6c3a-3bd3-1bfcffef6bb8	CZ	CZE	203	Czech Republic 	Češka	\N
-00040000-5633-6c3a-4584-b8b721f3af25	DK	DNK	208	Denmark 	Danska	\N
-00040000-5633-6c3a-4f5b-e9307328d8c7	DJ	DJI	262	Djibouti 	Džibuti	Staro ime: French Afar and Issas (AI).
-00040000-5633-6c3a-15e3-47bda8d62fac	DM	DMA	212	Dominica 	Dominika	Otoška država v malih Antilih v Karibskem morju.
-00040000-5633-6c3a-063c-3aa8255527d7	DO	DOM	214	Dominican Republic 	Dominikanska republika	\N
-00040000-5633-6c3a-17b8-763d526726c0	EC	ECU	218	Ecuador 	Ekvador	\N
-00040000-5633-6c3a-f96c-d0b866c4eadc	EG	EGY	818	Egypt 	Egipt	\N
-00040000-5633-6c3a-0cba-f1d114437c71	SV	SLV	222	El Salvador 	Salvador	\N
-00040000-5633-6c3a-cdd0-7b3f6669c498	GQ	GNQ	226	Equatorial Guinea 	Ekvatorialna Gvineja	Koda po francoskem nazivu: Guinée équatoriale.
-00040000-5633-6c3a-1399-2fd3d2e487ad	ER	ERI	232	Eritrea 	Eritreja	\N
-00040000-5633-6c3a-d277-30c728207f2e	EE	EST	233	Estonia 	Estonija	Koda po estonskem nazivu: Eesti.
-00040000-5633-6c3a-5bbc-71fd360d7ab4	ET	ETH	231	Ethiopia 	Etiopija	\N
-00040000-5633-6c3a-e4c9-a4c74ab7bddf	FK	FRO	234	Falkland Islands (Malvinas) 	Falkalndski otoki	Čezmorsko otočje velike Britanije.
-00040000-5633-6c3a-ee25-5e32bb42df50	FO	FLK	238	Faroe Islands 	Ferski otoki	\N
-00040000-5633-6c3a-0087-b39b5a92ab5a	FJ	FJI	242	Fiji 	Fidži	Otočje v južnem Tihem oceanu.
-00040000-5633-6c3a-d07f-55725ff73d1f	FI	FIN	246	Finland 	Finska	\N
-00040000-5633-6c3a-c424-d58e4a06f5fe	FR	FRA	250	France 	Francija	\N
-00040000-5633-6c3a-94da-705c909e17ca	GF	GUF	254	French Guiana 	Francoska Gvajana	Koda po francoskem nazivu: Guyane française.
-00040000-5633-6c3a-bc3a-4b10eecab47c	NL	NLD	528	Netherlands 	Nizozemska	\N
-00040000-5633-6c3a-aa7d-55181d71cda1	PF	PYF	258	French Polynesia 	Francoska Polinezija	Čezmorsko otočje Francije v južnem Tihem oceanu. Koda po francoskem nazivu: Polynésie française.
-00040000-5633-6c3a-bb2d-8d890cb37005	TF	ATF	260	French Southern Territories 	Francoska južna ozemlja	Predstavlja francoske vulkanske otoke JV od Afrike v Indijskem oceanu in del antarktike, ki Franciji niso mednarodno priznani. Koda po francokem nazivu: Terres australes françaises.
-00040000-5633-6c3a-569c-c6bc965b7307	GA	GAB	266	Gabon 	Gabon	\N
-00040000-5633-6c3a-d473-93a3c4d7d420	GM	GMB	270	Gambia 	Gambija	\N
-00040000-5633-6c3a-8817-9f2cb2771e20	GE	GEO	268	Georgia 	Gruzija	Koda GE je prej predstavljala Gilbertove in Ellisijine otoke.
-00040000-5633-6c3a-25e2-83d3bc9a6529	DE	DEU	276	Germany 	Nemčija	Koda po nemškem nazivu: Deutschland. Koda pred 1990 v uporabi za Zahodno Nemčijo.
-00040000-5633-6c3a-c4c1-75c3d89e03fc	GH	GHA	288	Ghana 	Gana	\N
-00040000-5633-6c3a-3b0f-5710b78f1364	GI	GIB	292	Gibraltar 	Gibraltar	\N
-00040000-5633-6c3a-c929-0a8fdb2ffcdf	GR	GRC	300	Greece 	Grčija	\N
-00040000-5633-6c3a-0521-7d860023c475	GL	GRL	304	Greenland 	Grenlandija	\N
-00040000-5633-6c3a-6fbf-51ba65f1e9de	GD	GRD	308	Grenada 	Grenada	\N
-00040000-5633-6c3a-45dd-ba21d4e34929	GP	GLP	312	Guadeloupe 	Guadeloupe	Čezmorski otok Francije v Karibskem morju.
-00040000-5633-6c3a-f2bd-bf8920e218ce	GU	GUM	316	Guam 	Guam	Zunanji teritorij ZDA v Tihem oceanu (tudi Guahan).
-00040000-5633-6c3a-282a-7c657a779ceb	GT	GTM	320	Guatemala 	Gvatemala	\N
-00040000-5633-6c3a-49ab-8191445e1c9c	GG	GGY	831	Guernsey 	Otok Guernsey	Bailwick of Goursey je Britanski otok ob Franciji.
-00040000-5633-6c3a-bd00-37ff3bc9ef3b	GN	GIN	324	Guinea 	Gvineja	\N
-00040000-5633-6c3a-ab42-818f6a3e8265	GW	GNB	624	Guinea-Bissau 	Gvineja-Bissau	\N
-00040000-5633-6c3a-28e3-2ec2fef82070	GY	GUY	328	Guyana 	Gvajana	\N
-00040000-5633-6c3a-620e-2b5ce391bc39	HT	HTI	332	Haiti 	Haiti	\N
-00040000-5633-6c3a-48c0-2ad9e224675f	HM	HMD	334	Heard Island and McDonald Islands 	Otok Heard in otočje McDonald	Nenaseljeno otočje v Indijskem oceanu pod upravo Avstralije.
-00040000-5633-6c3a-8971-69b93969d11c	VA	VAT	336	Holy See (Vatican City State) 	Vatikan	Bivši ISO naziv države: Vatican City State (Vatikanska mestna država).
-00040000-5633-6c3a-6896-8409b244b75f	HN	HND	340	Honduras 	Honduras	\N
-00040000-5633-6c3a-1515-aac47186f2b0	HK	HKG	344	Hong Kong 	Hong Kong	\N
-00040000-5633-6c3a-34b6-b5f503223cb6	HU	HUN	348	Hungary 	Madžarska	\N
-00040000-5633-6c3a-3977-398c205340b8	IS	ISL	352	Iceland 	Islandija	Koda po nazivu v islandščini: Ísland.
-00040000-5633-6c3a-dc7c-2583b9a40153	IN	IND	356	India 	Indija	\N
-00040000-5633-6c3a-1eb9-9ce3f8050f0b	ID	IDN	360	Indonesia 	Indonezija	\N
-00040000-5633-6c3a-0c78-c73c918d2370	IR	IRN	364	Iran, Islamic Republic of 	Iran	\N
-00040000-5633-6c3a-7e36-442baff332bf	IQ	IRQ	368	Iraq 	Irak	\N
-00040000-5633-6c3a-509c-47718c490a59	IE	IRL	372	Ireland 	Irska	\N
-00040000-5633-6c3a-201a-8b369bd69b8e	IM	IMN	833	Isle of Man 	Otok Man	Spada neposredno pod Britansko krono a ni del Velike Britanije, nahaja se med Irsko in Veliko Britanijo.
-00040000-5633-6c3a-dc75-1fd95bd1f344	IL	ISR	376	Israel 	Izrael	\N
-00040000-5633-6c3a-6f1f-da27cffb7412	IT	ITA	380	Italy 	Italija	\N
-00040000-5633-6c3a-09eb-9e8cb0397296	JM	JAM	388	Jamaica 	Jamajka	\N
-00040000-5633-6c3a-7990-f1a61b590d80	JP	JPN	392	Japan 	Japonska	\N
-00040000-5633-6c3a-191a-092a364a8a2c	JE	JEY	832	Jersey 	Otok Jersey	Bailwick of Jersey je Britanski otok med Anglijo in Francijo.
-00040000-5633-6c3a-4fb3-99b3deee228c	JO	JOR	400	Jordan 	Jordanija	\N
-00040000-5633-6c3a-2892-721ac9bfa8e8	KZ	KAZ	398	Kazakhstan 	Kazahstan	Bivši ISO naziv države: Kazakstan.
-00040000-5633-6c3a-fce0-3a506f487632	KE	KEN	404	Kenya 	Kenija	\N
-00040000-5633-6c3a-aee2-744ae571868f	KI	KIR	296	Kiribati 	Kiribati	Razpršeno otočje v Tihem oceanu. Stari naziv: Gilbertovi otoki.
-00040000-5633-6c3a-d1cb-414c88f2cc92	KP	PRK	408	Korea, Democratic People's Republic of 	Severna Koreja	ISO naziv države po uradnem nazivu v ZN (splošno ime: Severna Koreja).
-00040000-5633-6c3a-5ec4-6dfe463efa70	KR	KOR	410	Korea, Republic of 	Južna Koreja	ISO naziv države po uradnem nazivu v ZN (splošno ime: Južna Koreja).
-00040000-5633-6c3a-6671-0241001b94dc	KW	KWT	414	Kuwait 	Kuvajt	\N
-00040000-5633-6c3a-2fc1-14f85b340e53	KG	KGZ	417	Kyrgyzstan 	Kirgizistan (Kirgizija)	\N
-00040000-5633-6c3a-bbe5-e35ab7079688	LA	LAO	418	Lao People's Democratic Republic 	Laos	\N
-00040000-5633-6c3a-b231-df2b80d72384	LV	LVA	428	Latvia 	Latvija	\N
-00040000-5633-6c3a-814f-8295e2b1db70	LB	LBN	422	Lebanon 	Libanon	\N
-00040000-5633-6c3a-76ad-1c061c6dbb11	LS	LSO	426	Lesotho 	Lesoto	\N
-00040000-5633-6c3a-ec92-6161e9469583	LR	LBR	430	Liberia 	Liberija	\N
-00040000-5633-6c3a-96aa-79e236bde60b	LY	LBY	434	Libya 	Libija	Bivši ISO naziv države: Libyan Arab Jamahiriya.
-00040000-5633-6c3a-0b89-6e0b2cba1926	LI	LIE	438	Liechtenstein 	Lihtenštajn	\N
-00040000-5633-6c3a-e329-6212428f5401	LT	LTU	440	Lithuania 	Litva	\N
-00040000-5633-6c3a-6b2b-23b910f26949	LU	LUX	442	Luxembourg 	Luksemburg	\N
-00040000-5633-6c3a-0e9e-16cf371a057a	MO	MAC	446	Macao 	Makao	Bivši ISO naziv države: Macau.
-00040000-5633-6c3a-e003-81ea8d9fe829	MK	MKD	807	Macedonia, the former Yugoslav Republic of 	Makedonija	ISO naziv države glede na spor o nazivu države. Uradno domače ime države: Republika Makedonija.
-00040000-5633-6c3a-81a7-d00296886efc	MG	MDG	450	Madagascar 	Madagaskar	\N
-00040000-5633-6c3a-884f-c55699015e0f	MW	MWI	454	Malawi 	Malavi	\N
-00040000-5633-6c3a-8b16-9b0c97330fe7	MY	MYS	458	Malaysia 	Malezija	\N
-00040000-5633-6c3a-8df7-83c7fdf1526d	MV	MDV	462	Maldives 	Maldivi	\N
-00040000-5633-6c3a-0d12-631c2751f448	ML	MLI	466	Mali 	Mali	\N
-00040000-5633-6c3a-73ae-edf8e1ffb27d	MT	MLT	470	Malta 	Malta	\N
-00040000-5633-6c3a-ba34-8c98836f2c58	MH	MHL	584	Marshall Islands 	Maršalovi otoki	Majhno otočje v Tihem oceanu.
-00040000-5633-6c3a-0a18-ffdd4e9fd649	MQ	MTQ	474	Martinique 	Martinik	Čezmorski otok Francije v malih Antilih v Karibsekm morju.
-00040000-5633-6c3a-60b4-f37841158b9c	MR	MRT	478	Mauritania 	Mavretanija	\N
-00040000-5633-6c3a-8aca-5ca53ae98f3e	MU	MUS	480	Mauritius 	Mauricius (Moris)	Domačini v kreolščini imenujejo otok: Moris.
-00040000-5633-6c3a-708d-b7ba7291686a	YT	MYT	175	Mayotte 	Francoska skupnost Mejot	Čezmorska skupnost Francije ob vzhodni obali Afrike.
-00040000-5633-6c3a-e6e4-3dc9a83b52f2	MX	MEX	484	Mexico 	Mehika	\N
-00040000-5633-6c3a-e626-271c8149246d	FM	FSM	583	Micronesia, Federated States of 	Mikronezija	Bivši ISO naziv države: Micronesia. Nahaja se v Tihem oceanu.
-00040000-5633-6c3a-9786-0d4deba95875	MD	MDA	498	Moldova, Republic of 	Moldavija	\N
-00040000-5633-6c3a-ec54-8c73e1cdc7df	MC	MCO	492	Monaco 	Monako	\N
-00040000-5633-6c3a-1f08-ea5ba702ee1e	MN	MNG	496	Mongolia 	Mongolija	\N
-00040000-5633-6c3a-9558-97612cad037c	ME	MNE	499	Montenegro 	Črna Gora	\N
-00040000-5633-6c3a-f7ee-00953c119a15	MS	MSR	500	Montserrat 	Montserat	Otok v Antilih v Karibskem morju odvisen od Velike Britanije.
-00040000-5633-6c3a-be16-9807e0db69f7	MA	MAR	504	Morocco 	Maroko	\N
-00040000-5633-6c3a-4b57-fc990e266aa0	MZ	MOZ	508	Mozambique 	Mozambik	\N
-00040000-5633-6c3a-2f87-2065ef437f26	MM	MMR	104	Myanmar 	Mjanmar	Bivši naziv: Burma (BU).
-00040000-5633-6c3a-5b4a-212f17c8286a	NA	NAM	516	Namibia 	Namibija	\N
-00040000-5633-6c3a-4b67-744a474c9842	NR	NRU	520	Nauru 	Nauru	Otoška država v Južnem Tihem oceanu.
-00040000-5633-6c3a-ada9-fed49f113e39	NP	NPL	524	Nepal 	Nepal	\N
-00040000-5633-6c3a-3f7c-1c28e8836af4	NC	NCL	540	New Caledonia 	Nova Kaledonija	Čezmorsko otočje Francije v Pacifiku.
-00040000-5633-6c3a-4508-b4a8452c10e2	NZ	NZL	554	New Zealand 	Nova Zelandija	\N
-00040000-5633-6c3a-99ac-9b806670a179	NI	NIC	558	Nicaragua 	Nikaragva	\N
-00040000-5633-6c3a-08ff-d8af67dfe226	NE	NER	562	Niger 	Niger 	\N
-00040000-5633-6c3a-5934-c35188ebbaf2	NG	NGA	566	Nigeria 	Nigerija	\N
-00040000-5633-6c3a-7b56-57ecd836acff	NU	NIU	570	Niue 	Niu	Otoška država v Južnem Tihem oceanu.
-00040000-5633-6c3a-72a9-1bfaee5fecf7	NF	NFK	574	Norfolk Island 	Otok Norflok	Del Avstralije s samoupravo.
-00040000-5633-6c3a-b6b0-3e10ef04a98f	MP	MNP	580	Northern Mariana Islands 	Severni Marianski otoki	Ameriško otočje v severnem Tihem oceanu.
-00040000-5633-6c3a-daa0-af89fc02eb6b	NO	NOR	578	Norway 	Norveška	\N
-00040000-5633-6c3a-86ef-8ce5a304b350	OM	OMN	512	Oman 	Oman	\N
-00040000-5633-6c3a-9c55-e8d12bcb662e	PK	PAK	586	Pakistan 	Pakistan	\N
-00040000-5633-6c3a-883c-5828354e8ba8	PW	PLW	585	Palau 	Palau 	Majhna otoška država v Tihem oceanu.
-00040000-5633-6c3a-30dc-877cca6732ae	PS	PSE	275	Palestinian Territory, Occupied 	Palestina	Sestavljena iz Zahodnega brega in Gaze.
-00040000-5633-6c3a-b9b6-c368adf6e997	PA	PAN	591	Panama 	Panama	\N
-00040000-5633-6c3a-8b81-bca3417aed6a	PG	PNG	598	Papua New Guinea 	Papua Nova Gvineja	\N
-00040000-5633-6c3a-79e9-a5ed233e8ed9	PY	PRY	600	Paraguay 	Paragvaj	\N
-00040000-5633-6c3a-a321-849ad79f1622	PE	PER	604	Peru 	Peru	\N
-00040000-5633-6c3a-b718-c84fcbb5c6d5	PH	PHL	608	Philippines 	Filipini	\N
-00040000-5633-6c3a-b86d-dca00563aaee	PN	PCN	612	Pitcairn 	Pitcairnovi otoki	Čezmorsko otočje Velike Britanije v Tihem oceanu.
-00040000-5633-6c3a-08f5-1bbcf77b23d7	PL	POL	616	Poland 	Poljska	\N
-00040000-5633-6c3a-b300-5f30fea04f39	PT	PRT	620	Portugal 	Portugalska	\N
-00040000-5633-6c3a-4f71-fcd5abbf4bb2	PR	PRI	630	Puerto Rico 	Portoriko	\N
-00040000-5633-6c3a-dd0a-3eb0b24d3b8f	QA	QAT	634	Qatar 	Katar	\N
-00040000-5633-6c3a-e32a-3401d7178329	RE	REU	638	Réunion 	Francoska skupnost Reunion	Čezmorska otoška skupnost Francije v Indijskem oceanu.
-00040000-5633-6c3a-4302-918fe16045af	RO	ROU	642	Romania 	Romunija	\N
-00040000-5633-6c3a-bfa0-6edf17eba95d	RU	RUS	643	Russian Federation 	Ruska federacija	\N
-00040000-5633-6c3a-802c-35f0d498976b	RW	RWA	646	Rwanda 	Ruanda	\N
-00040000-5633-6c3a-fc5b-90bf86a09519	BL	BLM	652	Saint Barthélemy 	Sveti Bartolomej	Čezmosrksa skupnost Francije.
-00040000-5633-6c3a-4d19-cb76d213e3df	SH	SHN	654	Saint Helena, Ascension and Tristan da Cunha 	Sveta Helena	Čezmorsko ozemlje Sveta Helena Velike Britanije v Atlantskem oceanu. Bivši ISO naziv države: Saint Helena.
-00040000-5633-6c3a-1f85-eb883997db24	KN	KNA	659	Saint Kitts and Nevis 	Sveti Kits in Nevis	Otoška državica v karibskih Malih Antilih. Bivši ISO naziv države: Saint Kitts-Nevis-Anguilla.
-00040000-5633-6c3a-54c3-af7cb7595360	LC	LCA	662	Saint Lucia 	Sveta Lucija	Otoška država v južnem Karibskem morju.
-00040000-5633-6c3a-b738-0bc06051f443	MF	MAF	663	Saint Martin (French part) 	Otok svetega Martina	Čezmorsko otočje Francije v Karibskem morju. Nizozmski del otoka Sv. Martina ima kodo SX.
-00040000-5633-6c3a-1796-0777416e25fc	PM	SPM	666	Saint Pierre and Miquelon 	Sveta Pierre in Miquelon	Čezmorsko otočje Francije ob Kanadi in Grenlandiji.
-00040000-5633-6c3a-4a30-e4ded1cb9cb3	VC	VCT	670	Saint Vincent and the Grenadines 	Sveti Vincent in Grenadini	Majhna otoška država v Karibskem otočju.
-00040000-5633-6c3a-1fd9-ec4ff7492bf0	WS	WSM	882	Samoa 	Samoa	Koda nastala po bivšem nazivu: Western Samoa (Zahodna Samoa).
-00040000-5633-6c3a-e13e-3a50cc4bf00e	SM	SMR	674	San Marino 	San Marino	\N
-00040000-5633-6c3a-4369-121f1207b6b1	ST	STP	678	Sao Tome and Principe 	Sao Tome in Principe	Majhna otoška država v Gvinejskem zalivu ob Afriki.
-00040000-5633-6c3a-06f3-b0796b205564	SA	SAU	682	Saudi Arabia 	Savdska Arabija	\N
-00040000-5633-6c3a-67ac-6d08d76c8e5f	SN	SEN	686	Senegal 	Senegal	\N
-00040000-5633-6c3a-1703-b0d37b062612	RS	SRB	688	Serbia 	Srbija	Koda po uradnem nazivu: Republika Srbija.
-00040000-5633-6c3a-85cb-7c402c9ab508	SC	SYC	690	Seychelles 	Sejšeli	\N
-00040000-5633-6c3a-df13-5d6fef144fd8	SL	SLE	694	Sierra Leone 	Siera Leone	\N
-00040000-5633-6c3a-f86d-da0272b5d6c6	SG	SGP	702	Singapore 	Singapur	\N
-00040000-5633-6c3a-ee7d-4e1de490ce58	SX	SXM	534	Sint Maarten (Dutch part) 	Otok svetega.Martina (Nizozemska)	Francoski del otoka Sv. Martina ima ISO kodo MF. Nahaja se v Karibskem morju.
-00040000-5633-6c3a-7c5d-c3bbae0a9c46	SK	SVK	703	Slovakia 	Slovaška	SK je prej predstavljal: Sikkim.
-00040000-5633-6c3a-d15a-81c1e66e1222	SI	SVN	705	Slovenia 	Slovenija	\N
-00040000-5633-6c3a-d9ce-cebb884135d0	SB	SLB	090	Solomon Islands 	Solomonovi otoki	Koda izhaja iz starega naziva: British Solomon Islands.
-00040000-5633-6c3a-d91f-612620840cd5	SO	SOM	706	Somalia 	Somalija	\N
-00040000-5633-6c3a-5c1f-ee30f9011bf5	ZA	ZAF	710	South Africa 	Južna afrika	Koda iz naziva v nizozemščini: Zuid-Afrika.
-00040000-5633-6c3a-39b5-b20b7840658e	GS	SGS	239	South Georgia and the South Sandwich Islands 	Južna Georgia in Južni Sandwichevi otoki	Čezmorsko otočje Velike Britanije na jugu Atlantskega oceana.
-00040000-5633-6c3a-401f-9b6214a5ad08	SS	SSD	728	South Sudan 	Južni Sudan	\N
-00040000-5633-6c3a-bb14-d5665b1fd390	ES	ESP	724	Spain 	Španija	Koda po nazivu v spanščini: España.
-00040000-5633-6c3a-23a3-ce13793f4fbb	LK	LKA	144	Sri Lanka 	Šri Lanka	\N
-00040000-5633-6c3a-f4ba-d2b809fbc8bc	SD	SDN	729	Sudan 	Sudan	\N
-00040000-5633-6c3a-86ba-deeb5f5d4fe4	SR	SUR	740	Suriname 	Surinam	\N
-00040000-5633-6c3a-d03a-0716eb6f5c84	SJ	SJM	744	Svalbard and Jan Mayen 	Svalbard in Jan Majen 	Sestavljata ga dva arktična ozemlja pod suverenostjo Norveške: Svalbardski otoki in otok Jan Mayen.
-00040000-5633-6c3a-5309-5d51d26f9053	SZ	SWZ	748	Swaziland 	Svazi	\N
-00040000-5633-6c3a-3bef-2b14439770ee	SE	SWE	752	Sweden 	Švedska	\N
-00040000-5633-6c3a-6ac5-7646b1d2360f	CH	CHE	756	Switzerland 	Švica	Koda je narejena po nazivu v latinščini: Confoederatio Helvetica.
-00040000-5633-6c3a-8867-1355863dbdff	SY	SYR	760	Syrian Arab Republic 	Sirija	\N
-00040000-5633-6c3a-6005-9376cdb65737	TW	TWN	158	Taiwan, Province of China 	Tajvan	\N
-00040000-5633-6c3a-2148-6a0a58f8d629	TJ	TJK	762	Tajikistan 	Tadžikistan	\N
-00040000-5633-6c3a-4aac-da3f18db9f90	TZ	TZA	834	Tanzania, United Republic of 	Tanzanija	\N
-00040000-5633-6c3a-57dc-86575ce804db	TH	THA	764	Thailand 	Tajska	\N
-00040000-5633-6c3a-6b72-3377c9008701	TL	TLS	626	Timor-Leste 	Vzhodni Timor	Bivši naziv: East Timor (TP). Majhna otoška država v JV Aziji.
-00040000-5633-6c3a-798b-01709c0be2a8	TG	TGO	768	Togo 	Togo	\N
-00040000-5633-6c3a-6a87-da21d7569e59	TK	TKL	772	Tokelau 	Tokelau	Trije koralni otoki pod upravo Nove Zelandije.
-00040000-5633-6c3a-f290-8bc5c680af87	TO	TON	776	Tonga 	Tonga	Majhna otoška država v Tihem oceanu.
-00040000-5633-6c3a-1685-9af33896326a	TT	TTO	780	Trinidad and Tobago 	Trinidad in Tobago	\N
-00040000-5633-6c3a-de8c-678c22273fb9	TN	TUN	788	Tunisia 	Tunizija	\N
-00040000-5633-6c3a-08dd-9821901ee41c	TR	TUR	792	Turkey 	Turčija	\N
-00040000-5633-6c3a-0abd-e4fb49ceea4d	TM	TKM	795	Turkmenistan 	Turkmenistan	\N
-00040000-5633-6c3a-ec05-bc10fce0697e	TC	TCA	796	Turks and Caicos Islands 	Tirški in Kajkoški otoki	Čezmorska skupnost Velike Britanije v Karibskem morju.
-00040000-5633-6c3a-2850-a01f03b3887d	TV	TUV	798	Tuvalu 	Tuvalu	Majhna otoška država v Tihem oceanu.
-00040000-5633-6c3a-dfdc-5e899c679704	UG	UGA	800	Uganda 	Uganda	\N
-00040000-5633-6c3a-6531-debd9f29745c	UA	UKR	804	Ukraine 	Ukrajina	Bivši ISO naziv države: Ukrainian SSR. 
-00040000-5633-6c3a-3881-72babbdc4968	AE	ARE	784	United Arab Emirates 	Združeni Arabski Emirati	\N
-00040000-5633-6c3a-c818-372e0c512f75	GB	GBR	826	United Kingdom 	Velika Britanija	Koda po nazivu: Great Britain (iz uradnega naziva: United Kingdom of Great Britain and Northern Ireland). 
-00040000-5633-6c3a-af7b-97881b385942	US	USA	840	United States 	Združene države Amerike	\N
-00040000-5633-6c3a-a17a-83b1918b48a7	UM	UMI	581	United States Minor Outlying Islands 	ZDA zunanji otoki	Sestavljeno iz devetih manjših otokov ZDA: Baker Island, Howland Island, Jarvis Island, Johnston Atoll, Kingman Reef, Midway Islands, Navassa Island, Palmyra Atoll, and Wake Island.
-00040000-5633-6c3a-a581-08adb8aee955	UY	URY	858	Uruguay 	Urugvaj	\N
-00040000-5633-6c3a-052b-828c1df5d2aa	UZ	UZB	860	Uzbekistan 	Uzbekistan	\N
-00040000-5633-6c3a-6244-d061904f87cf	VU	VUT	548	Vanuatu 	Republika Vanuatu	Stari naziv: New Hebrides (NH).
-00040000-5633-6c3a-7678-aa84cc82c0a7	VE	VEN	862	Venezuela, Bolivarian Republic of 	Venezuela	\N
-00040000-5633-6c3a-fd7e-704c5f860408	VN	VNM	704	Viet Nam 	Vietnam	\N
-00040000-5633-6c3a-87af-fc643d9f74df	VG	VGB	092	Virgin Islands, British 	Britanski Deviški otoki	Čezmorska skupnost Velike Britanije v Karibskem morju.
-00040000-5633-6c3a-2a53-81fb3ddfb83b	VI	VIR	850	Virgin Islands, U.S. 	Ameriški Deviški otoki	\N
-00040000-5633-6c3a-9152-572e4343a93b	WF	WLF	876	Wallis and Futuna 	Otočje Valis in Futuna	Čezmorska skupnost Francije v Pacifiku.
-00040000-5633-6c3a-3b7c-9eb0d0f496ad	EH	ESH	732	Western Sahara 	Zahodna Sahara	Bivši ISO naziv države: Spanish Sahara (koda po španskem nazivu: Sahara español).
-00040000-5633-6c3a-7ace-231a8e5b46fb	YE	YEM	887	Yemen 	Jemen	Bivši ISO naziv države: Republic of Yemen, koda se je uporabljala za Severni Jemen pred letom 1990.
-00040000-5633-6c3a-50e5-ce065b76b363	ZM	ZMB	894	Zambia 	Zambija	\N
-00040000-5633-6c3a-9961-3113c0c4f390	ZW	ZWE	716	Zimbabwe 	Zimbabve	Naziv se je spremenil iz: Suthern Rhodesia (RH, Južna Rodezija).
+00040000-5637-258c-e5e4-5a60c172f9dd	AF	AFG	004	Afghanistan 	Afganistan	\N
+00040000-5637-258c-d9e2-796fa1fd7896	AX	ALA	248	Ålland Islands 	Alandski otoki	Otočje v Baltiku.
+00040000-5637-258c-e8f2-21152fe769d0	AL	ALB	008	Albania 	Albanija	\N
+00040000-5637-258c-ccc8-00322f436ab0	DZ	DZA	012	Algeria 	Alžirija	Koda po kabilskem nazivu: Dzayer.
+00040000-5637-258c-c264-656eced4d8c5	AS	ASM	016	American Samoa 	Ameriška Samoa	Zunanji teritorij ZDA v južnem Tihem oceanu.
+00040000-5637-258c-a4e2-b04679f40e29	AD	AND	020	Andorra 	Andora	\N
+00040000-5637-258c-31af-055108f3b11b	AO	AGO	024	Angola 	Angola	\N
+00040000-5637-258c-53e0-abfef812659b	AI	AIA	660	Anguilla 	Angvila	Čezmorska skupnost Velike Britanije, predhodno je AI predstavljal francoski: Afar and Issas.
+00040000-5637-258c-05a5-52073cd86b30	AQ	ATA	010	Antarctica 	Antarktika	Koda pa francoskem nazivu: Antarctique.
+00040000-5637-258c-5d97-8ef6f10fd8f2	AG	ATG	028	Antigua and Barbuda 	Antigva in Barbuda	Otoška država v malih Antilih v Karibskem morju.
+00040000-5637-258c-c67a-9998ae0d91ea	AR	ARG	032	Argentina 	Argenitna	\N
+00040000-5637-258c-0120-0ff4f3fc8b06	AM	ARM	051	Armenia 	Armenija	\N
+00040000-5637-258c-7853-c2911b74bf86	AW	ABW	533	Aruba 	Aruba	Otok v Karibskem morju, del kraljevine Nizozemske.
+00040000-5637-258c-80c1-1bdf31674451	AU	AUS	036	Australia 	Avstralija	\N
+00040000-5637-258c-15bb-14d898b3a148	AT	AUT	040	Austria 	Avstrija	\N
+00040000-5637-258c-c273-30318bc2d7cc	AZ	AZE	031	Azerbaijan 	Azerbajdžan	\N
+00040000-5637-258c-23c9-3b249f2e9b27	BS	BHS	044	Bahamas 	Bahami	\N
+00040000-5637-258c-3f52-ade4d7cdcab0	BH	BHR	048	Bahrain 	Bahrajn	\N
+00040000-5637-258c-7a42-ef62a81e9787	BD	BGD	050	Bangladesh 	Bangladeš	\N
+00040000-5637-258c-d0a6-c3e7a73421a6	BB	BRB	052	Barbados 	Barbados	\N
+00040000-5637-258c-3c1e-2b70ec432568	BY	BLR	112	Belarus 	Belorusija	Bivši ISO naziv države: Byelorussian SSR.
+00040000-5637-258c-4f9b-9dc4aaa981c2	BE	BEL	056	Belgium 	Belgija	\N
+00040000-5637-258c-f518-dff90cfc1bb7	BZ	BLZ	084	Belize 	Belize	\N
+00040000-5637-258c-a722-5fedd5ab58b0	BJ	BEN	204	Benin 	Benin	Bivši ISO naziv države: Dahomey (DY).
+00040000-5637-258c-dc8c-df01b7f7a85a	BM	BMU	060	Bermuda 	Bermudi	\N
+00040000-5637-258c-ab5e-3b5fd24edcf5	BT	BTN	064	Bhutan 	Butan	\N
+00040000-5637-258c-15cf-5c7ea454312d	BO	BOL	068	Bolivia, Plurinational State of 	Bolivija	\N
+00040000-5637-258c-432a-95468dbcf9f3	BQ	BES	535	Bonaire, Sint Eustatius and Saba 	Otočje Bonaire, Sv. Eustatij in Saba	Otočje v karibih pod nizozemsko upravo (the BES Islands). Bivši ISO naziv države: Bonaire, Saint Eustatius and Saba. BQ je prej predstavljal: British Antarctic Territory.
+00040000-5637-258c-0aaf-71f8f1f46307	BA	BIH	070	Bosnia and Herzegovina 	Bosna in Hercegovina	\N
+00040000-5637-258c-b474-14740010d23b	BW	BWA	072	Botswana 	Bocvana	\N
+00040000-5637-258c-b17c-a39d7b78a589	BV	BVT	074	Bouvet Island 	Bouvetov otok	Norveški otok v južnem Atlantskem oceanu.
+00040000-5637-258c-3f3b-3c4effb385f2	BR	BRA	076	Brazil 	Brazilija	\N
+00040000-5637-258c-a617-6d045bc5b7bd	IO	IOT	086	British Indian Ocean Territory 	Britansko ozemlje v Indijskem oceanu	\N
+00040000-5637-258c-145b-78769a7945c4	BN	BRN	096	Brunei Darussalam 	Brunej	ISO naziv države po nazivu v ZN. Otoška država na otok Borneo v JV Aziji.
+00040000-5637-258c-1881-04eb9bec7cdd	BG	BGR	100	Bulgaria 	Bolgarija	\N
+00040000-5637-258c-719c-e5dc141f0c00	BF	BFA	854	Burkina Faso 	Burkina Faso	Bivši ISO naziv države: Upper Volta (HV).
+00040000-5637-258c-256e-cfd419cc3022	BI	BDI	108	Burundi 	Burundi 	\N
+00040000-5637-258c-fedb-309f82e72d92	KH	KHM	116	Cambodia 	Kambodža	Koda po bivšem nazivu: Khmer Republic. Bivši ISO naziv države: Kampuchea.
+00040000-5637-258c-376c-5b20e299d77b	CM	CMR	120	Cameroon 	Kamerun	\N
+00040000-5637-258c-0460-19cf48bffc8f	CA	CAN	124	Canada 	Kanada	\N
+00040000-5637-258c-28c8-3f13b794e510	CV	CPV	132	Cape Verde 	Kapverdski otoki (Zelenortski otoki)	Otočje v Atlantskem oceanu ob Afriki.
+00040000-5637-258c-a1dd-4b60d8b63d7a	KY	CYM	136	Cayman Islands 	Kajmanski otoki	\N
+00040000-5637-258c-932d-068e351c47b9	CF	CAF	140	Central African Republic 	Srednjeafriška republika	Prej znana kot francoska kolonija Ubangi-Shari.
+00040000-5637-258c-46ed-e1fe221176c9	TD	TCD	148	Chad 	Čad	Koda po francoskem nazivu: Tchad.
+00040000-5637-258c-432b-262da0b184c8	CL	CHL	152	Chile 	Čile	\N
+00040000-5637-258c-522a-63a831521a83	CN	CHN	156	China 	Kitajska	\N
+00040000-5637-258c-937e-aeec8123595e	CX	CXR	162	Christmas Island 	Božični otok	Avstralsko ozemlje v Indijskem oceanu.
+00040000-5637-258c-61c6-13ad0ab492bb	CC	CCK	166	Cocos (Keeling) Islands 	Kokosovi in Keelingovi otoki	Otočje pod upravo Avstralije v Indijskem oceanu.
+00040000-5637-258c-ba31-6e54da54f87f	CO	COL	170	Colombia 	Kolumbija	\N
+00040000-5637-258c-bb2a-0fd6859a5bef	KM	COM	174	Comoros 	Komori	Otočje v Indijskem oceanu. Koda po nazivu v komorščini: Komori.
+00040000-5637-258c-b8dc-86d89b4c1f11	CG	COG	178	Congo 	Kongo	Srednji Kongo (celinska država brez morja).
+00040000-5637-258c-4a7b-47b7613e126a	CD	COD	180	Congo, the Democratic Republic of the 	Demokratična republika Kongo	Bivše ime: Zaire (ZR), obmorska država.
+00040000-5637-258c-96d6-d7b638a4d10f	CK	COK	184	Cook Islands 	Cookovi otoki	\N
+00040000-5637-258c-d2ac-2e06871aaa4b	CR	CRI	188	Costa Rica 	Kostarika	\N
+00040000-5637-258c-8c46-b434d86504ba	CI	CIV	384	Côte d'Ivoire 	Slonokoščena obala	\N
+00040000-5637-258c-3a00-7f2b00a631fe	HR	HRV	191	Croatia 	Hrvaška	Koda po nazivu v hrvaščini: Hrvatska.
+00040000-5637-258c-bb43-5bec6fbae2c6	CU	CUB	192	Cuba 	Kuba	\N
+00040000-5637-258c-8a77-145d4a9f6522	CW	CUW	531	Curaçao 	Kurasao	Spada v čezmorsko ozemlje Nizozemske, Nizozemski Antili.
+00040000-5637-258c-12c9-8e0563d120f2	CY	CYP	196	Cyprus 	Ciper	\N
+00040000-5637-258c-e39b-a0acac351421	CZ	CZE	203	Czech Republic 	Češka	\N
+00040000-5637-258c-2f9e-b737917d23bb	DK	DNK	208	Denmark 	Danska	\N
+00040000-5637-258c-c34c-916ea1ce0bfc	DJ	DJI	262	Djibouti 	Džibuti	Staro ime: French Afar and Issas (AI).
+00040000-5637-258c-dd62-8f698a73cf8e	DM	DMA	212	Dominica 	Dominika	Otoška država v malih Antilih v Karibskem morju.
+00040000-5637-258c-3128-30177bbdbe8e	DO	DOM	214	Dominican Republic 	Dominikanska republika	\N
+00040000-5637-258c-79ec-ec92cea5706c	EC	ECU	218	Ecuador 	Ekvador	\N
+00040000-5637-258c-91e1-b3a27662daa9	EG	EGY	818	Egypt 	Egipt	\N
+00040000-5637-258c-0383-81ac42005fc5	SV	SLV	222	El Salvador 	Salvador	\N
+00040000-5637-258c-4e6f-56627d2560cd	GQ	GNQ	226	Equatorial Guinea 	Ekvatorialna Gvineja	Koda po francoskem nazivu: Guinée équatoriale.
+00040000-5637-258c-d2e3-1670af86e031	ER	ERI	232	Eritrea 	Eritreja	\N
+00040000-5637-258c-c9dd-e83495332325	EE	EST	233	Estonia 	Estonija	Koda po estonskem nazivu: Eesti.
+00040000-5637-258c-528e-1a1d937bff53	ET	ETH	231	Ethiopia 	Etiopija	\N
+00040000-5637-258c-f40a-3564f9351aaf	FK	FRO	234	Falkland Islands (Malvinas) 	Falkalndski otoki	Čezmorsko otočje velike Britanije.
+00040000-5637-258c-b24f-f82f272f0f30	FO	FLK	238	Faroe Islands 	Ferski otoki	\N
+00040000-5637-258c-ebfa-9f92aa6b86d8	FJ	FJI	242	Fiji 	Fidži	Otočje v južnem Tihem oceanu.
+00040000-5637-258c-8dc5-295f8a3fe5bb	FI	FIN	246	Finland 	Finska	\N
+00040000-5637-258c-142b-e88612e18501	FR	FRA	250	France 	Francija	\N
+00040000-5637-258c-b9a2-2710436f16d5	GF	GUF	254	French Guiana 	Francoska Gvajana	Koda po francoskem nazivu: Guyane française.
+00040000-5637-258c-d268-44e9f85969f0	NL	NLD	528	Netherlands 	Nizozemska	\N
+00040000-5637-258c-aeb2-a1b099f246ee	PF	PYF	258	French Polynesia 	Francoska Polinezija	Čezmorsko otočje Francije v južnem Tihem oceanu. Koda po francoskem nazivu: Polynésie française.
+00040000-5637-258c-d46c-8faf8a8a49fc	TF	ATF	260	French Southern Territories 	Francoska južna ozemlja	Predstavlja francoske vulkanske otoke JV od Afrike v Indijskem oceanu in del antarktike, ki Franciji niso mednarodno priznani. Koda po francokem nazivu: Terres australes françaises.
+00040000-5637-258c-3f2c-60625d7ae18f	GA	GAB	266	Gabon 	Gabon	\N
+00040000-5637-258c-b641-188a03cbb8d8	GM	GMB	270	Gambia 	Gambija	\N
+00040000-5637-258c-c218-d33ff1597c1a	GE	GEO	268	Georgia 	Gruzija	Koda GE je prej predstavljala Gilbertove in Ellisijine otoke.
+00040000-5637-258c-fbb2-0232f912ff00	DE	DEU	276	Germany 	Nemčija	Koda po nemškem nazivu: Deutschland. Koda pred 1990 v uporabi za Zahodno Nemčijo.
+00040000-5637-258c-dd02-f274c01c60a2	GH	GHA	288	Ghana 	Gana	\N
+00040000-5637-258c-3773-53bf26c88272	GI	GIB	292	Gibraltar 	Gibraltar	\N
+00040000-5637-258c-41e3-8fde7b783184	GR	GRC	300	Greece 	Grčija	\N
+00040000-5637-258c-dfc4-fb6601f3fff1	GL	GRL	304	Greenland 	Grenlandija	\N
+00040000-5637-258c-e4ff-9ac0d3f84ce7	GD	GRD	308	Grenada 	Grenada	\N
+00040000-5637-258c-e523-e443a4bd6e9d	GP	GLP	312	Guadeloupe 	Guadeloupe	Čezmorski otok Francije v Karibskem morju.
+00040000-5637-258c-ac46-322cf1ea56a9	GU	GUM	316	Guam 	Guam	Zunanji teritorij ZDA v Tihem oceanu (tudi Guahan).
+00040000-5637-258c-47c5-0bc2013cb65c	GT	GTM	320	Guatemala 	Gvatemala	\N
+00040000-5637-258c-0fac-44f2b6e460c8	GG	GGY	831	Guernsey 	Otok Guernsey	Bailwick of Goursey je Britanski otok ob Franciji.
+00040000-5637-258c-f838-71a733d3082e	GN	GIN	324	Guinea 	Gvineja	\N
+00040000-5637-258c-e741-a2732fffc817	GW	GNB	624	Guinea-Bissau 	Gvineja-Bissau	\N
+00040000-5637-258c-9c15-26ec4cd46c7b	GY	GUY	328	Guyana 	Gvajana	\N
+00040000-5637-258c-57de-69434f7532a1	HT	HTI	332	Haiti 	Haiti	\N
+00040000-5637-258c-f0d1-d8727e338b32	HM	HMD	334	Heard Island and McDonald Islands 	Otok Heard in otočje McDonald	Nenaseljeno otočje v Indijskem oceanu pod upravo Avstralije.
+00040000-5637-258c-857f-e1d9d71c15c8	VA	VAT	336	Holy See (Vatican City State) 	Vatikan	Bivši ISO naziv države: Vatican City State (Vatikanska mestna država).
+00040000-5637-258c-f95a-252d4e733961	HN	HND	340	Honduras 	Honduras	\N
+00040000-5637-258c-a6a3-3d8a69a88324	HK	HKG	344	Hong Kong 	Hong Kong	\N
+00040000-5637-258c-4cf4-77f624c3a633	HU	HUN	348	Hungary 	Madžarska	\N
+00040000-5637-258c-beee-d1154d3ac01e	IS	ISL	352	Iceland 	Islandija	Koda po nazivu v islandščini: Ísland.
+00040000-5637-258c-1e2f-eed93fce4206	IN	IND	356	India 	Indija	\N
+00040000-5637-258c-e602-2616f7b5c79b	ID	IDN	360	Indonesia 	Indonezija	\N
+00040000-5637-258c-c5a0-a95c923cfb28	IR	IRN	364	Iran, Islamic Republic of 	Iran	\N
+00040000-5637-258c-9012-574a1aa6e902	IQ	IRQ	368	Iraq 	Irak	\N
+00040000-5637-258c-a877-2eadcd025ae6	IE	IRL	372	Ireland 	Irska	\N
+00040000-5637-258c-77df-98d63e924390	IM	IMN	833	Isle of Man 	Otok Man	Spada neposredno pod Britansko krono a ni del Velike Britanije, nahaja se med Irsko in Veliko Britanijo.
+00040000-5637-258c-8f12-9c2c373a5dd3	IL	ISR	376	Israel 	Izrael	\N
+00040000-5637-258c-e333-7ff4bf3ed98d	IT	ITA	380	Italy 	Italija	\N
+00040000-5637-258c-ee74-c2782c16a49a	JM	JAM	388	Jamaica 	Jamajka	\N
+00040000-5637-258c-8698-83a042937395	JP	JPN	392	Japan 	Japonska	\N
+00040000-5637-258c-e447-3e6146853c3a	JE	JEY	832	Jersey 	Otok Jersey	Bailwick of Jersey je Britanski otok med Anglijo in Francijo.
+00040000-5637-258c-406d-605eec4f8961	JO	JOR	400	Jordan 	Jordanija	\N
+00040000-5637-258c-e9f1-259956f032b9	KZ	KAZ	398	Kazakhstan 	Kazahstan	Bivši ISO naziv države: Kazakstan.
+00040000-5637-258c-2708-830b7254476d	KE	KEN	404	Kenya 	Kenija	\N
+00040000-5637-258c-3f33-5026ef87e6f8	KI	KIR	296	Kiribati 	Kiribati	Razpršeno otočje v Tihem oceanu. Stari naziv: Gilbertovi otoki.
+00040000-5637-258c-c20b-06ea0ef71e7e	KP	PRK	408	Korea, Democratic People's Republic of 	Severna Koreja	ISO naziv države po uradnem nazivu v ZN (splošno ime: Severna Koreja).
+00040000-5637-258c-6300-15e6ba3583a7	KR	KOR	410	Korea, Republic of 	Južna Koreja	ISO naziv države po uradnem nazivu v ZN (splošno ime: Južna Koreja).
+00040000-5637-258c-d8e3-aa2b98aeff66	KW	KWT	414	Kuwait 	Kuvajt	\N
+00040000-5637-258c-7d8f-5d8a60b296cc	KG	KGZ	417	Kyrgyzstan 	Kirgizistan (Kirgizija)	\N
+00040000-5637-258c-0c7e-f1b7433730f5	LA	LAO	418	Lao People's Democratic Republic 	Laos	\N
+00040000-5637-258c-af20-470381cba2bb	LV	LVA	428	Latvia 	Latvija	\N
+00040000-5637-258c-820a-6cbcce9f49d5	LB	LBN	422	Lebanon 	Libanon	\N
+00040000-5637-258c-9c90-700aee3543d0	LS	LSO	426	Lesotho 	Lesoto	\N
+00040000-5637-258c-c2bf-7ac66d74b4d4	LR	LBR	430	Liberia 	Liberija	\N
+00040000-5637-258c-820c-10c56d971d5d	LY	LBY	434	Libya 	Libija	Bivši ISO naziv države: Libyan Arab Jamahiriya.
+00040000-5637-258c-9114-5c84428a7b89	LI	LIE	438	Liechtenstein 	Lihtenštajn	\N
+00040000-5637-258c-5b56-8f8eb7df5398	LT	LTU	440	Lithuania 	Litva	\N
+00040000-5637-258c-7e6f-958dbd1f45d9	LU	LUX	442	Luxembourg 	Luksemburg	\N
+00040000-5637-258c-dd6b-474afc564c01	MO	MAC	446	Macao 	Makao	Bivši ISO naziv države: Macau.
+00040000-5637-258c-679d-a28d75f75659	MK	MKD	807	Macedonia, the former Yugoslav Republic of 	Makedonija	ISO naziv države glede na spor o nazivu države. Uradno domače ime države: Republika Makedonija.
+00040000-5637-258c-6080-310637536eb5	MG	MDG	450	Madagascar 	Madagaskar	\N
+00040000-5637-258c-b002-c04f4298d445	MW	MWI	454	Malawi 	Malavi	\N
+00040000-5637-258c-c076-2db444362c1f	MY	MYS	458	Malaysia 	Malezija	\N
+00040000-5637-258c-3ce9-0b197fe8d6a9	MV	MDV	462	Maldives 	Maldivi	\N
+00040000-5637-258c-eadd-cb922b7dac45	ML	MLI	466	Mali 	Mali	\N
+00040000-5637-258c-5bee-966b7167a07b	MT	MLT	470	Malta 	Malta	\N
+00040000-5637-258c-9b1a-843833d76a59	MH	MHL	584	Marshall Islands 	Maršalovi otoki	Majhno otočje v Tihem oceanu.
+00040000-5637-258c-5130-6e09d8b68fba	MQ	MTQ	474	Martinique 	Martinik	Čezmorski otok Francije v malih Antilih v Karibsekm morju.
+00040000-5637-258c-df99-e3e9e56bf35d	MR	MRT	478	Mauritania 	Mavretanija	\N
+00040000-5637-258c-0ae6-ee2890dde31e	MU	MUS	480	Mauritius 	Mauricius (Moris)	Domačini v kreolščini imenujejo otok: Moris.
+00040000-5637-258c-acf5-be4f074fd7c9	YT	MYT	175	Mayotte 	Francoska skupnost Mejot	Čezmorska skupnost Francije ob vzhodni obali Afrike.
+00040000-5637-258c-9896-3829d74cdbbb	MX	MEX	484	Mexico 	Mehika	\N
+00040000-5637-258c-9ce5-c79e71261ee1	FM	FSM	583	Micronesia, Federated States of 	Mikronezija	Bivši ISO naziv države: Micronesia. Nahaja se v Tihem oceanu.
+00040000-5637-258c-2e6f-9a74aae87437	MD	MDA	498	Moldova, Republic of 	Moldavija	\N
+00040000-5637-258c-9577-01ce731f59fa	MC	MCO	492	Monaco 	Monako	\N
+00040000-5637-258c-a863-1a0253179aa3	MN	MNG	496	Mongolia 	Mongolija	\N
+00040000-5637-258c-003e-57db4744a751	ME	MNE	499	Montenegro 	Črna Gora	\N
+00040000-5637-258c-5ece-ac0b298614d8	MS	MSR	500	Montserrat 	Montserat	Otok v Antilih v Karibskem morju odvisen od Velike Britanije.
+00040000-5637-258c-e3f8-c0829d1dd71c	MA	MAR	504	Morocco 	Maroko	\N
+00040000-5637-258c-506c-18a64907e258	MZ	MOZ	508	Mozambique 	Mozambik	\N
+00040000-5637-258c-ea99-0c576e9b615d	MM	MMR	104	Myanmar 	Mjanmar	Bivši naziv: Burma (BU).
+00040000-5637-258c-d271-207a919ac97a	NA	NAM	516	Namibia 	Namibija	\N
+00040000-5637-258c-3982-c88bb9b35123	NR	NRU	520	Nauru 	Nauru	Otoška država v Južnem Tihem oceanu.
+00040000-5637-258c-5242-d6cf0797f7c6	NP	NPL	524	Nepal 	Nepal	\N
+00040000-5637-258c-30a0-011b7333a340	NC	NCL	540	New Caledonia 	Nova Kaledonija	Čezmorsko otočje Francije v Pacifiku.
+00040000-5637-258c-ab3c-915da88afb94	NZ	NZL	554	New Zealand 	Nova Zelandija	\N
+00040000-5637-258c-d5e8-a67f63661459	NI	NIC	558	Nicaragua 	Nikaragva	\N
+00040000-5637-258c-1f84-bc4200353053	NE	NER	562	Niger 	Niger 	\N
+00040000-5637-258c-102a-850c8b6515d3	NG	NGA	566	Nigeria 	Nigerija	\N
+00040000-5637-258c-2da0-92e17a8b07bb	NU	NIU	570	Niue 	Niu	Otoška država v Južnem Tihem oceanu.
+00040000-5637-258c-a8a9-f6de2a09177a	NF	NFK	574	Norfolk Island 	Otok Norflok	Del Avstralije s samoupravo.
+00040000-5637-258c-e748-11f7589d88d8	MP	MNP	580	Northern Mariana Islands 	Severni Marianski otoki	Ameriško otočje v severnem Tihem oceanu.
+00040000-5637-258c-39f7-5eb7081b341c	NO	NOR	578	Norway 	Norveška	\N
+00040000-5637-258c-d697-e4df984413af	OM	OMN	512	Oman 	Oman	\N
+00040000-5637-258c-b96d-904e4c8841e0	PK	PAK	586	Pakistan 	Pakistan	\N
+00040000-5637-258c-3df4-13dd498eb339	PW	PLW	585	Palau 	Palau 	Majhna otoška država v Tihem oceanu.
+00040000-5637-258c-c3e2-7feb2e1bffa8	PS	PSE	275	Palestinian Territory, Occupied 	Palestina	Sestavljena iz Zahodnega brega in Gaze.
+00040000-5637-258c-7be2-0f05c3aaae84	PA	PAN	591	Panama 	Panama	\N
+00040000-5637-258c-2b14-9c7d41d12957	PG	PNG	598	Papua New Guinea 	Papua Nova Gvineja	\N
+00040000-5637-258c-a7a4-59e275cf9fb4	PY	PRY	600	Paraguay 	Paragvaj	\N
+00040000-5637-258c-4c0e-73aac94287ae	PE	PER	604	Peru 	Peru	\N
+00040000-5637-258c-ab96-7bd4a2e3a48f	PH	PHL	608	Philippines 	Filipini	\N
+00040000-5637-258c-5c87-bcb84fe764c3	PN	PCN	612	Pitcairn 	Pitcairnovi otoki	Čezmorsko otočje Velike Britanije v Tihem oceanu.
+00040000-5637-258c-83cb-0e47cfc555bf	PL	POL	616	Poland 	Poljska	\N
+00040000-5637-258c-d34c-deeb6990aaf4	PT	PRT	620	Portugal 	Portugalska	\N
+00040000-5637-258c-1f37-3fa7e6d26f9f	PR	PRI	630	Puerto Rico 	Portoriko	\N
+00040000-5637-258c-44d3-4b79fe342ab5	QA	QAT	634	Qatar 	Katar	\N
+00040000-5637-258c-419b-aa0b59f3fd7f	RE	REU	638	Réunion 	Francoska skupnost Reunion	Čezmorska otoška skupnost Francije v Indijskem oceanu.
+00040000-5637-258c-4856-745e3597e399	RO	ROU	642	Romania 	Romunija	\N
+00040000-5637-258c-9056-0b4097b42869	RU	RUS	643	Russian Federation 	Ruska federacija	\N
+00040000-5637-258c-0243-7149940e89ba	RW	RWA	646	Rwanda 	Ruanda	\N
+00040000-5637-258c-2b07-d77fd8e2e718	BL	BLM	652	Saint Barthélemy 	Sveti Bartolomej	Čezmosrksa skupnost Francije.
+00040000-5637-258c-7e1f-f70e2676746f	SH	SHN	654	Saint Helena, Ascension and Tristan da Cunha 	Sveta Helena	Čezmorsko ozemlje Sveta Helena Velike Britanije v Atlantskem oceanu. Bivši ISO naziv države: Saint Helena.
+00040000-5637-258c-28cd-a2f9836477ef	KN	KNA	659	Saint Kitts and Nevis 	Sveti Kits in Nevis	Otoška državica v karibskih Malih Antilih. Bivši ISO naziv države: Saint Kitts-Nevis-Anguilla.
+00040000-5637-258c-b597-880e9b365bf1	LC	LCA	662	Saint Lucia 	Sveta Lucija	Otoška država v južnem Karibskem morju.
+00040000-5637-258c-fb22-64d03e550aee	MF	MAF	663	Saint Martin (French part) 	Otok svetega Martina	Čezmorsko otočje Francije v Karibskem morju. Nizozmski del otoka Sv. Martina ima kodo SX.
+00040000-5637-258c-4f0c-a259e00c0c6c	PM	SPM	666	Saint Pierre and Miquelon 	Sveta Pierre in Miquelon	Čezmorsko otočje Francije ob Kanadi in Grenlandiji.
+00040000-5637-258c-de3d-dd885a2cae6d	VC	VCT	670	Saint Vincent and the Grenadines 	Sveti Vincent in Grenadini	Majhna otoška država v Karibskem otočju.
+00040000-5637-258c-8b35-cbf678eef94b	WS	WSM	882	Samoa 	Samoa	Koda nastala po bivšem nazivu: Western Samoa (Zahodna Samoa).
+00040000-5637-258c-20f1-1c27b1685271	SM	SMR	674	San Marino 	San Marino	\N
+00040000-5637-258c-c3a5-f5a0227929d2	ST	STP	678	Sao Tome and Principe 	Sao Tome in Principe	Majhna otoška država v Gvinejskem zalivu ob Afriki.
+00040000-5637-258c-b5b1-3b7241339771	SA	SAU	682	Saudi Arabia 	Savdska Arabija	\N
+00040000-5637-258c-15c7-b5a675d26dd7	SN	SEN	686	Senegal 	Senegal	\N
+00040000-5637-258c-8723-a756b2728a55	RS	SRB	688	Serbia 	Srbija	Koda po uradnem nazivu: Republika Srbija.
+00040000-5637-258c-f2c6-40b21beaa919	SC	SYC	690	Seychelles 	Sejšeli	\N
+00040000-5637-258c-e85f-19dfb6661c79	SL	SLE	694	Sierra Leone 	Siera Leone	\N
+00040000-5637-258c-b3ef-b037df308a40	SG	SGP	702	Singapore 	Singapur	\N
+00040000-5637-258c-d3fc-9648ebb6a793	SX	SXM	534	Sint Maarten (Dutch part) 	Otok svetega.Martina (Nizozemska)	Francoski del otoka Sv. Martina ima ISO kodo MF. Nahaja se v Karibskem morju.
+00040000-5637-258c-103a-69dbd8fb8d3b	SK	SVK	703	Slovakia 	Slovaška	SK je prej predstavljal: Sikkim.
+00040000-5637-258c-1820-c0f8993afd54	SI	SVN	705	Slovenia 	Slovenija	\N
+00040000-5637-258c-c7c6-4f39dc269ead	SB	SLB	090	Solomon Islands 	Solomonovi otoki	Koda izhaja iz starega naziva: British Solomon Islands.
+00040000-5637-258c-5347-b80072651689	SO	SOM	706	Somalia 	Somalija	\N
+00040000-5637-258c-1bf6-a80d02a449d5	ZA	ZAF	710	South Africa 	Južna afrika	Koda iz naziva v nizozemščini: Zuid-Afrika.
+00040000-5637-258c-bc84-e66b6ad0da1b	GS	SGS	239	South Georgia and the South Sandwich Islands 	Južna Georgia in Južni Sandwichevi otoki	Čezmorsko otočje Velike Britanije na jugu Atlantskega oceana.
+00040000-5637-258c-195a-f5136556a87c	SS	SSD	728	South Sudan 	Južni Sudan	\N
+00040000-5637-258c-4403-c474db75690f	ES	ESP	724	Spain 	Španija	Koda po nazivu v spanščini: España.
+00040000-5637-258c-5f32-cb908bf8e36e	LK	LKA	144	Sri Lanka 	Šri Lanka	\N
+00040000-5637-258c-d8b0-3e7544b33312	SD	SDN	729	Sudan 	Sudan	\N
+00040000-5637-258c-ff5c-47a85f75a722	SR	SUR	740	Suriname 	Surinam	\N
+00040000-5637-258c-a83f-0e67c46b3863	SJ	SJM	744	Svalbard and Jan Mayen 	Svalbard in Jan Majen 	Sestavljata ga dva arktična ozemlja pod suverenostjo Norveške: Svalbardski otoki in otok Jan Mayen.
+00040000-5637-258c-c7e0-162ec9f830d2	SZ	SWZ	748	Swaziland 	Svazi	\N
+00040000-5637-258c-76f2-983f49f75dca	SE	SWE	752	Sweden 	Švedska	\N
+00040000-5637-258c-a649-08e10c69804c	CH	CHE	756	Switzerland 	Švica	Koda je narejena po nazivu v latinščini: Confoederatio Helvetica.
+00040000-5637-258c-8035-0b4707920fa1	SY	SYR	760	Syrian Arab Republic 	Sirija	\N
+00040000-5637-258c-2702-e59172d85983	TW	TWN	158	Taiwan, Province of China 	Tajvan	\N
+00040000-5637-258c-b4c9-639d37c43ec9	TJ	TJK	762	Tajikistan 	Tadžikistan	\N
+00040000-5637-258c-e0af-ccd2b60759e4	TZ	TZA	834	Tanzania, United Republic of 	Tanzanija	\N
+00040000-5637-258c-ce1b-94b91b93aa81	TH	THA	764	Thailand 	Tajska	\N
+00040000-5637-258c-27e1-91fe46354592	TL	TLS	626	Timor-Leste 	Vzhodni Timor	Bivši naziv: East Timor (TP). Majhna otoška država v JV Aziji.
+00040000-5637-258c-27dd-5ef03f832dfc	TG	TGO	768	Togo 	Togo	\N
+00040000-5637-258c-9e53-eb9a1907f46e	TK	TKL	772	Tokelau 	Tokelau	Trije koralni otoki pod upravo Nove Zelandije.
+00040000-5637-258c-ad6f-1f92808bf9c8	TO	TON	776	Tonga 	Tonga	Majhna otoška država v Tihem oceanu.
+00040000-5637-258c-034d-802d1dd96502	TT	TTO	780	Trinidad and Tobago 	Trinidad in Tobago	\N
+00040000-5637-258c-ccb0-a817ea2a6be7	TN	TUN	788	Tunisia 	Tunizija	\N
+00040000-5637-258c-19ab-63df45f6dfcf	TR	TUR	792	Turkey 	Turčija	\N
+00040000-5637-258c-4b6a-a55596694a0f	TM	TKM	795	Turkmenistan 	Turkmenistan	\N
+00040000-5637-258c-6f22-a03c39ffd8a7	TC	TCA	796	Turks and Caicos Islands 	Tirški in Kajkoški otoki	Čezmorska skupnost Velike Britanije v Karibskem morju.
+00040000-5637-258c-505f-dd407e77a2d5	TV	TUV	798	Tuvalu 	Tuvalu	Majhna otoška država v Tihem oceanu.
+00040000-5637-258c-9c2a-99e44010adcb	UG	UGA	800	Uganda 	Uganda	\N
+00040000-5637-258c-33dd-9ff2827b0eab	UA	UKR	804	Ukraine 	Ukrajina	Bivši ISO naziv države: Ukrainian SSR. 
+00040000-5637-258c-d1ca-c6143a8e58aa	AE	ARE	784	United Arab Emirates 	Združeni Arabski Emirati	\N
+00040000-5637-258c-53c2-c414139aeab4	GB	GBR	826	United Kingdom 	Velika Britanija	Koda po nazivu: Great Britain (iz uradnega naziva: United Kingdom of Great Britain and Northern Ireland). 
+00040000-5637-258c-44d3-35db75c024e9	US	USA	840	United States 	Združene države Amerike	\N
+00040000-5637-258c-4c23-d54a5fe57569	UM	UMI	581	United States Minor Outlying Islands 	ZDA zunanji otoki	Sestavljeno iz devetih manjših otokov ZDA: Baker Island, Howland Island, Jarvis Island, Johnston Atoll, Kingman Reef, Midway Islands, Navassa Island, Palmyra Atoll, and Wake Island.
+00040000-5637-258c-801b-0534a528e1ee	UY	URY	858	Uruguay 	Urugvaj	\N
+00040000-5637-258c-dd0d-1a532be70234	UZ	UZB	860	Uzbekistan 	Uzbekistan	\N
+00040000-5637-258c-d0b2-6d84c704cb5c	VU	VUT	548	Vanuatu 	Republika Vanuatu	Stari naziv: New Hebrides (NH).
+00040000-5637-258c-fdf0-530de3959946	VE	VEN	862	Venezuela, Bolivarian Republic of 	Venezuela	\N
+00040000-5637-258c-734f-6f2bb4ade527	VN	VNM	704	Viet Nam 	Vietnam	\N
+00040000-5637-258c-9986-aa5e33f04092	VG	VGB	092	Virgin Islands, British 	Britanski Deviški otoki	Čezmorska skupnost Velike Britanije v Karibskem morju.
+00040000-5637-258c-6b45-d2fb12884a69	VI	VIR	850	Virgin Islands, U.S. 	Ameriški Deviški otoki	\N
+00040000-5637-258c-0f4b-472d7a14045c	WF	WLF	876	Wallis and Futuna 	Otočje Valis in Futuna	Čezmorska skupnost Francije v Pacifiku.
+00040000-5637-258c-4f5a-816c915ede9f	EH	ESH	732	Western Sahara 	Zahodna Sahara	Bivši ISO naziv države: Spanish Sahara (koda po španskem nazivu: Sahara español).
+00040000-5637-258c-a630-edaa8e4b3eff	YE	YEM	887	Yemen 	Jemen	Bivši ISO naziv države: Republic of Yemen, koda se je uporabljala za Severni Jemen pred letom 1990.
+00040000-5637-258c-6fbf-32cb0236d6aa	ZM	ZMB	894	Zambia 	Zambija	\N
+00040000-5637-258c-caf1-d8c8a4e444c5	ZW	ZWE	716	Zimbabwe 	Zimbabve	Naziv se je spremenil iz: Suthern Rhodesia (RH, Južna Rodezija).
 \.
 
 
 --
--- TOC entry 3147 (class 0 OID 24316090)
+-- TOC entry 3147 (class 0 OID 24472891)
 -- Dependencies: 237
 -- Data for Name: enotaprograma; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY enotaprograma (id, uprizoritev_id, program_dela_id, gostitelj_id, celotnavrednost, nasdelez, celotnavrednostmat, celotnavrednostgostovsz, zaproseno, lastnasredstva, avtorskihonorarji, avtorskihonorarjisamoz, tantieme, avtorskepravice, materialni, imakoprodukcije, vlozekgostitelja, drugijavni, stzaposlenih, stzaposumet, stzaposdrug, sthonorarnihzun, sthonorarnihzunigr, sthonorarnihzunigrtujjz, sthonorarnihzunsamoz, obiskdoma, obiskkopr, obiskgost, obiskkoprgost, obiskzamejo, obiskkoprzamejo, obiskint, obiskkoprint, ponovidoma, ponovikopr, ponovizamejo, ponovikoprzamejo, ponovigost, ponovikoprgost, ponovikoprint, ponoviint, naziv, kpe, sort, tipprogramskeenote_id, tip, prikoproducentu, prizorisce, trajanje, zvrst, avtor, reziser, datum, soustvarjalci, strosekodkpred, stroskiostali, krajgostovanja, ustanova, datumgostovanja, transportnistroski, dnevprvzad, drzavagostovanja_id, stpe, stpredstav, stokroglihmiz, stpredstavitev, stdelavnic, stdrugidogodki, stprodukcij, caspriprave, casizvedbe, prizorisca, umetvodja, programskotelo, sttujihselektorjev) FROM stdin;
-002f0000-5633-6c3d-0bea-5cb427f8503f	000e0000-5633-6c3d-1945-f974d3ba94b3	\N	\N	9000.30	9000.30	9000.30	0.00	3600.12	5299.98	4000.40	1000.40	200.20	200.30	4599.40	\N	0.00	100.20	0	2	2	2	2	2	0	40	0	0	0	0	0	0	0	1	0	0.00	0.00	0.00	0.00	0	0		0.00	\N	002b0000-5633-6c3a-930e-bb73b718c17e	premiera	\N	\N	\N	\N	\N	\N	\N	\N	0.00	0.00	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-002f0000-5633-6c3d-c053-5bf9568d09b8	000e0000-5633-6c3d-85ce-1fd56fc01617	\N	\N	4900.20	4900.20	4900.20	0.00	1960.08	2839.92	600.70	100.70	200.20	200.20	3899.10	\N	0.00	100.20	0	3	3	3	3	3	0	60	0	0	0	0	0	0	0	1	0	0.00	0.00	0.00	0.00	0	0		0.00	\N	002b0000-5633-6c3a-d855-0b396d15b0d4	premiera	\N	\N	\N	\N	\N	\N	\N	\N	0.00	0.00	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-002f0000-5633-6c3d-f857-aa63a1357fd8	000e0000-5633-6c3d-fea4-69a8f65158b8	\N	\N	4900.20	4900.20	4900.20	0.00	1960.08	2839.92	600.70	100.70	200.20	200.20	3899.10	\N	0.00	100.20	0	3	3	3	3	3	0	60	0	0	0	0	0	0	0	1	0	0.00	0.00	0.00	0.00	0	0		0.00	\N	002b0000-5633-6c3a-930e-bb73b718c17e	premiera	\N	\N	\N	\N	\N	\N	\N	\N	0.00	0.00	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-00310000-5633-6c3d-4337-22a7045d75a1	\N	\N	\N	0.00	0.00	0.00	0.00	0.00	-54.20	0.00	0.00	0.00	0.00	0.00	\N	0.00	54.20	5	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0.00	0.00	0.00	0.00	0	0	Urejanje portala	0.00	10	\N	razno	\N	\N	\N	\N	\N	\N	\N	\N	0.00	0.00	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-00310000-5633-6c3d-ae83-21e940b8085b	\N	\N	\N	0.00	0.00	0.00	0.00	0.00	-31.20	0.00	0.00	0.00	0.00	0.00	\N	0.00	31.20	5	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0.00	0.00	0.00	0.00	0	0	Delavnice otroci	0.00	8	\N	razno	\N	\N	\N	\N	\N	\N	\N	\N	0.00	0.00	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+002f0000-5637-258f-d668-68018930df3c	000e0000-5637-258e-dbd1-a7b907fa8a12	\N	\N	9000.30	9000.30	9000.30	0.00	3600.12	5299.98	4000.40	1000.40	200.20	200.30	4599.40	\N	0.00	100.20	0	2	2	2	2	2	0	40	0	0	0	0	0	0	0	1	0	0.00	0.00	0.00	0.00	0	0		0.00	\N	002b0000-5637-258c-349a-8cdc352170ed	premiera	\N	\N	\N	\N	\N	\N	\N	\N	0.00	0.00	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+002f0000-5637-258f-6dbf-b0c690de88b9	000e0000-5637-258e-b535-6f3e01020ab0	\N	\N	4900.20	4900.20	4900.20	0.00	1960.08	2839.92	600.70	100.70	200.20	200.20	3899.10	\N	0.00	100.20	0	3	3	3	3	3	0	60	0	0	0	0	0	0	0	1	0	0.00	0.00	0.00	0.00	0	0		0.00	\N	002b0000-5637-258c-9a6f-f7368d0d24ba	premiera	\N	\N	\N	\N	\N	\N	\N	\N	0.00	0.00	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+002f0000-5637-258f-b734-91df9b1bb273	000e0000-5637-258e-9596-86d6866e65d0	\N	\N	4900.20	4900.20	4900.20	0.00	1960.08	2839.92	600.70	100.70	200.20	200.20	3899.10	\N	0.00	100.20	0	3	3	3	3	3	0	60	0	0	0	0	0	0	0	1	0	0.00	0.00	0.00	0.00	0	0		0.00	\N	002b0000-5637-258c-349a-8cdc352170ed	premiera	\N	\N	\N	\N	\N	\N	\N	\N	0.00	0.00	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+00310000-5637-258f-418c-4e75f62a4915	\N	\N	\N	0.00	0.00	0.00	0.00	0.00	-54.20	0.00	0.00	0.00	0.00	0.00	\N	0.00	54.20	5	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0.00	0.00	0.00	0.00	0	0	Urejanje portala	0.00	10	\N	razno	\N	\N	\N	\N	\N	\N	\N	\N	0.00	0.00	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+00310000-5637-258f-6560-d499e1850f4f	\N	\N	\N	0.00	0.00	0.00	0.00	0.00	-31.20	0.00	0.00	0.00	0.00	0.00	\N	0.00	31.20	5	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0.00	0.00	0.00	0.00	0	0	Delavnice otroci	0.00	8	\N	razno	\N	\N	\N	\N	\N	\N	\N	\N	0.00	0.00	\N	\N	\N	\N	\N	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 \.
 
 
 --
--- TOC entry 3132 (class 0 OID 24315891)
+-- TOC entry 3132 (class 0 OID 24472692)
 -- Dependencies: 222
 -- Data for Name: funkcija; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY funkcija (id, uprizoritev_id, alternacija_id, podrocje, vodjaekipe, naziv, komentar, velikost, pomembna, sort, seplanira, dovoliprekrivanje, maxprekrivanj, tipfunkcije_id) FROM stdin;
-000d0000-5633-6c3d-13e7-27c161902ab2	000e0000-5633-6c3d-85ce-1fd56fc01617	\N	igralec	\N	Hipolita	glavna vloga	velika	t	6	t	t	\N	000f0000-5633-6c3a-841f-e6544c603e7c
-000d0000-5633-6c3d-64e7-07ed3b6319d4	000e0000-5633-6c3d-85ce-1fd56fc01617	000c0000-5633-6c3d-d806-c6ffbb4a0461	igralec	\N	Tezej	glavna vloga	velika	t	5	t	t	\N	000f0000-5633-6c3a-841f-e6544c603e7c
-000d0000-5633-6c3d-cbc6-0fb8f382fe84	000e0000-5633-6c3d-85ce-1fd56fc01617	000c0000-5633-6c3d-2a39-e761b085796d	umetnik	\N	Režija		velika	t	8	t	t	\N	000f0000-5633-6c3a-7590-1190dadb27b0
-000d0000-5633-6c3d-f8cd-e209ee1a9735	000e0000-5633-6c3d-85ce-1fd56fc01617	000c0000-5633-6c3d-71e9-8cda09bb4dde	inspicient	t	Inšpicient			t	8	t	t	\N	000f0000-5633-6c3a-73f0-f3d742cd6ab4
-000d0000-5633-6c3d-1f26-2a199996983a	000e0000-5633-6c3d-85ce-1fd56fc01617	000c0000-5633-6c3d-5216-b38a507ca046	tehnik	t	Tehnični vodja			t	8	t	t	\N	000f0000-5633-6c3a-edd5-46426afdeb21
-000d0000-5633-6c3d-f0c6-61a67f88402a	000e0000-5633-6c3d-85ce-1fd56fc01617	000c0000-5633-6c3d-2f62-b27647e356b0	tehnik	\N	Razsvetljava			t	3	t	t	\N	000f0000-5633-6c3a-edd5-46426afdeb21
-000d0000-5633-6c3d-3629-cba792c581a5	000e0000-5633-6c3d-85ce-1fd56fc01617	000c0000-5633-6c3d-9f57-5942245f3bd5	igralec	\N	Helena	glavna vloga	velika	t	5	t	t	\N	000f0000-5633-6c3a-841f-e6544c603e7c
-000d0000-5633-6c3d-a778-a468425b656a	000e0000-5633-6c3d-85ce-1fd56fc01617	000c0000-5633-6c3d-4d1f-40034a87a72d	umetnik	\N	Lektoriranje			t	22	t	t	\N	000f0000-5633-6c3a-24a0-2caadd752eb1
-000d0000-5633-6c3d-9d43-4ea8c331b05b	000e0000-5633-6c3d-85ce-1fd56fc01617	000c0000-5633-6c3d-16fb-96d3a7b5695f	umetnik	\N	Avtor	Avtor besedila		t	2	t	f	\N	000f0000-5633-6c3a-06d5-700652ae140a
+000d0000-5637-258f-35f6-6d8f48f07807	000e0000-5637-258e-b535-6f3e01020ab0	\N	igralec	\N	Hipolita	glavna vloga	velika	t	6	t	t	\N	000f0000-5637-258c-0dbe-bfa5babd4ba3
+000d0000-5637-258f-d666-459eb6638d5f	000e0000-5637-258e-b535-6f3e01020ab0	000c0000-5637-258f-4093-bd0028f42bb3	igralec	\N	Tezej	glavna vloga	velika	t	5	t	t	\N	000f0000-5637-258c-0dbe-bfa5babd4ba3
+000d0000-5637-258f-5cf9-6c0f24071b97	000e0000-5637-258e-b535-6f3e01020ab0	000c0000-5637-258f-243a-af2f40c43f0b	umetnik	\N	Režija		velika	t	8	t	t	\N	000f0000-5637-258c-faac-5c2a36cfccfb
+000d0000-5637-258f-472d-f7a9184a89ee	000e0000-5637-258e-b535-6f3e01020ab0	000c0000-5637-258f-7ea6-3da14e45e970	inspicient	t	Inšpicient			t	8	t	t	\N	000f0000-5637-258c-6c7f-e11c59290704
+000d0000-5637-258f-bd07-56cac1d84fdb	000e0000-5637-258e-b535-6f3e01020ab0	000c0000-5637-258f-1aae-4812d0bfc183	tehnik	t	Tehnični vodja			t	8	t	t	\N	000f0000-5637-258c-a8ff-7bea8b0d11ba
+000d0000-5637-258f-403b-567362074d5f	000e0000-5637-258e-b535-6f3e01020ab0	000c0000-5637-258f-e2ba-b9a9ce88c8c2	tehnik	\N	Razsvetljava			t	3	t	t	\N	000f0000-5637-258c-a8ff-7bea8b0d11ba
+000d0000-5637-258f-f5c6-fe2342fa70e6	000e0000-5637-258e-b535-6f3e01020ab0	000c0000-5637-258f-81c6-d60e2ff01ecf	igralec	\N	Helena	glavna vloga	velika	t	5	t	t	\N	000f0000-5637-258c-0dbe-bfa5babd4ba3
+000d0000-5637-258f-4499-5b05e45e2a24	000e0000-5637-258e-b535-6f3e01020ab0	000c0000-5637-258f-d87e-29aed5082856	umetnik	\N	Lektoriranje			t	22	t	t	\N	000f0000-5637-258c-7c25-e0e7cbd996e6
+000d0000-5637-258f-0699-77639185da95	000e0000-5637-258e-b535-6f3e01020ab0	000c0000-5637-258f-0a0e-9349d505fc0d	umetnik	\N	Avtor	Avtor besedila		t	2	t	f	\N	000f0000-5637-258c-f029-4bae79830aa8
 \.
 
 
 --
--- TOC entry 3110 (class 0 OID 24315688)
+-- TOC entry 3110 (class 0 OID 24472489)
 -- Dependencies: 200
 -- Data for Name: gostovanje; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2058,7 +2058,7 @@ COPY gostovanje (id, drzava_id, vrsta, zamejstvo, kraj) FROM stdin;
 
 
 --
--- TOC entry 3107 (class 0 OID 24315654)
+-- TOC entry 3107 (class 0 OID 24472455)
 -- Dependencies: 197
 -- Data for Name: job; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2068,18 +2068,18 @@ COPY job (id, user_id, name, task, status, log, datum, casizvedbe, izveden, data
 
 
 --
--- TOC entry 3105 (class 0 OID 24315631)
+-- TOC entry 3105 (class 0 OID 24472432)
 -- Dependencies: 195
 -- Data for Name: kontaktnaoseba; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY kontaktnaoseba (id, popa_id, oseba_id, status, funkcija, opis) FROM stdin;
-00260000-5633-6c3d-d71a-10c217e1ffe6	00080000-5633-6c3c-7c03-5984226b44ef	00090000-5633-6c3d-e7a0-9053bed7e04d	AK		igralka
+00260000-5637-258e-66b7-a64ac39e3255	00080000-5637-258e-b26f-2e0ebf660f43	00090000-5637-258e-0943-32335453a0d0	AK		igralka
 \.
 
 
 --
--- TOC entry 3121 (class 0 OID 24315805)
+-- TOC entry 3121 (class 0 OID 24472606)
 -- Dependencies: 211
 -- Data for Name: kupec; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2089,7 +2089,7 @@ COPY kupec (id, popa_id) FROM stdin;
 
 
 --
--- TOC entry 3158 (class 0 OID 24316345)
+-- TOC entry 3158 (class 0 OID 24473146)
 -- Dependencies: 248
 -- Data for Name: mapa; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2099,7 +2099,7 @@ COPY mapa (id, lastnik_id, parent_id, ime, komentar, caskreiranja, casspremembe,
 
 
 --
--- TOC entry 3159 (class 0 OID 24316357)
+-- TOC entry 3159 (class 0 OID 24473158)
 -- Dependencies: 249
 -- Data for Name: mapa_zapis; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2109,7 +2109,7 @@ COPY mapa_zapis (mapa_id, zapis_id) FROM stdin;
 
 
 --
--- TOC entry 3161 (class 0 OID 24316379)
+-- TOC entry 3161 (class 0 OID 24473180)
 -- Dependencies: 251
 -- Data for Name: mapaacl; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2146,7 +2146,7 @@ COPY migrations (version) FROM stdin;
 
 
 --
--- TOC entry 3125 (class 0 OID 24315830)
+-- TOC entry 3125 (class 0 OID 24472631)
 -- Dependencies: 215
 -- Data for Name: nacinplacina; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2156,579 +2156,579 @@ COPY nacinplacina (id, ime, vrsta) FROM stdin;
 
 
 --
--- TOC entry 3102 (class 0 OID 24315588)
+-- TOC entry 3102 (class 0 OID 24472389)
 -- Dependencies: 192
 -- Data for Name: option; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY option (id, name, type, defaultvalue, peruser, readonly, public, role, description) FROM stdin;
-00000000-5633-6c3b-4738-7001aed8f359	popa.stakli	array	a:2:{s:2:"AK";a:1:{s:5:"label";s:7:"aktiven";}s:2:"NA";a:1:{s:5:"label";s:9:"neaktiven";}}	f	t	f	\N	Status poslovnega partnerja
-00000000-5633-6c3b-49ae-a9d7c5a338cd	oseba.spol	array	a:2:{s:1:"M";a:1:{s:5:"label";s:6:"Moški";}s:1:"Z";a:1:{s:5:"label";s:7:"Ženska";}}	f	t	f	\N	Spol osebe
-00000000-5633-6c3b-5a77-f46f5b09d971	telefonska.vrsta	array	a:3:{s:7:"mobilna";a:1:{s:5:"label";s:7:"Mobilni";}s:6:"domaca";a:1:{s:5:"label";s:6:"Domač";}s:6:"fiksna";a:1:{s:5:"label";s:6:"Fiksni";}}	f	t	f	\N	Vrsta telefonske številke
-00000000-5633-6c3b-bfee-2e4e11b08cf3	kontaktnaoseba.status	array	a:2:{s:2:"AK";a:1:{s:5:"label";s:7:"aktiven";}s:2:"NA";a:1:{s:5:"label";s:9:"neaktiven";}}	f	t	f	\N	Status kontaktne osebe
-00000000-5633-6c3b-4334-44a724fc6417	dogodek.status	array	a:8:{s:4:"100s";a:1:{s:5:"label";s:11:"Dolgoročno";}s:4:"200s";a:1:{s:5:"label";s:9:"Planirano";}s:4:"300s";a:1:{s:5:"label";s:8:"Fiksiran";}s:4:"400s";a:1:{s:5:"label";s:17:"Potrjen - interno";}s:4:"500s";a:1:{s:5:"label";s:15:"Potrjen - javno";}s:4:"600s";a:1:{s:5:"label";s:10:"Zaključen";}s:4:"610s";a:1:{s:5:"label";s:9:"Odpovedan";}s:4:"700s";a:1:{s:5:"label";s:7:"Obdelan";}}	f	t	t	\N	Tabela statusa dogodkov
-00000000-5633-6c3b-94e6-07dd2f051c41	dogodek.razred	array	a:5:{s:4:"100s";a:2:{s:5:"label";s:9:"Predstava";s:4:"type";s:9:"predstava";}s:4:"200s";a:2:{s:5:"label";s:4:"Vaja";s:4:"type";s:4:"vaja";}s:4:"300s";a:2:{s:5:"label";s:10:"Gostovanje";s:4:"type";s:10:"gostovanje";}s:4:"400s";a:2:{s:5:"label";s:16:"Splošni dogodek";s:4:"type";s:8:"splošni";}s:4:"500s";a:2:{s:5:"label";s:10:"Zasedenost";s:4:"type";s:10:"zasedenost";}}	f	t	t	\N	Tabela razredov dogodkov, ki jih aplikacija podpira
-00000000-5633-6c3b-44d8-2bb67e1054c8	uprizoritev.faza	array	a:6:{s:20:"predprodukcija-ideja";a:1:{s:5:"label";s:16:"Dolgoročni plan";}s:20:"predprodukcija-poziv";a:1:{s:5:"label";s:29:"Predprodukcija, v fazi poziva";}s:30:"predprodukcija-potrjen_program";a:1:{s:5:"label";s:34:"Predprodukcija, program je potrjen";}s:10:"produkcija";a:1:{s:5:"label";s:10:"Produkcija";}s:14:"postprodukcija";a:1:{s:5:"label";s:14:"Postprodukcija";}s:5:"arhiv";a:1:{s:5:"label";s:10:"Arhivirana";}}	f	t	f	\N	Faza uprizoritve
-00000000-5633-6c3b-ae9f-077ca6b9da1e	funkcija.podrocje	array	a:4:{s:7:"igralec";a:1:{s:5:"label";s:7:"Igralec";}s:6:"tehnik";a:1:{s:5:"label";s:6:"Tehnik";}s:7:"umetnik";a:1:{s:5:"label";s:7:"Umetnik";}s:10:"inspicient";a:1:{s:5:"label";s:11:"Inšpicient";}}	f	t	f	\N	Področje funkcije
-00000000-5633-6c3b-915f-6f8904a8d001	tipfunkcije.podrocje	array	a:4:{s:7:"igralec";a:1:{s:5:"label";s:7:"Igralec";}s:6:"tehnik";a:1:{s:5:"label";s:6:"Tehnik";}s:7:"umetnik";a:1:{s:5:"label";s:7:"Umetnik";}s:10:"inspicient";a:1:{s:5:"label";s:11:"Inšpicient";}}	f	t	f	\N	Področje funkcije
-00000000-5633-6c3b-660c-c1f8ebcd99cb	funkcija.velikost	array	a:4:{s:6:"velika";a:1:{s:5:"label";s:23:"Velika vloga / funkcija";}s:7:"srednja";a:1:{s:5:"label";s:24:"Srednja vloga / funkcija";}s:4:"mala";a:1:{s:5:"label";s:21:"Mala vloga / funkcija";}s:7:"stataza";a:1:{s:5:"label";s:8:"Stataža";}}	f	t	f	\N	Velikost funkcije
-00000000-5633-6c3b-7971-98980dd6c286	zaposlitev.status	array	a:2:{s:1:"A";a:1:{s:5:"label";s:7:"Aktivna";}s:1:"N";a:1:{s:5:"label";s:9:"Neaktivna";}}	f	t	f	\N	Status zaposlitve
-00000000-5633-6c3b-3dff-d44f31446b79	produkcijskahisa.status	array	a:2:{s:2:"AK";a:1:{s:5:"label";s:7:"aktivna";}s:2:"NA";a:1:{s:5:"label";s:9:"neaktivna";}}	f	t	f	\N	Status produkcijske hiše
-00000000-5633-6c3b-427e-bb05e857f2ea	strosekuprizoritve.tipstroska	array	a:1:{s:10:"materialni";a:1:{s:5:"label";s:19:"Materialni strošek";}}	f	t	f	\N	Tip stroška
-00000000-5633-6c3b-9d52-dd836d81aca2	avtorbesedila.tipavtorja	array	a:4:{s:4:"aizv";a:1:{s:5:"label";s:15:"Avtor izvirnika";}s:4:"prev";a:1:{s:5:"label";s:10:"Prevajalec";}s:4:"apri";a:1:{s:5:"label";s:14:"Avtor priredbe";}s:4:"dram";a:1:{s:5:"label";s:12:"Dramatizator";}}	f	t	f	\N	Tip stroška
-00000000-5633-6c3b-bfdd-470bc6d2d764	fsacl.dostop	array	a:4:{s:1:"X";a:1:{s:5:"label";s:12:"Brez dostopa";}s:1:"R";a:1:{s:5:"label";s:11:"Samo branje";}s:2:"RW";a:1:{s:5:"label";s:17:"Branje in pisanje";}s:3:"RWD";a:1:{s:5:"label";s:26:"Branje pisanje in brisanje";}}	f	t	f	\N	ACL Javni dostop
-00000000-5633-6c3c-f6ed-0c24bd25793f	test1.barva.ozadja	array	a:1:{i:0;a:2:{s:3:"key";s:1:"b";s:5:"value";s:4:"bela";}}	t	f	f	\N	barva ozadja
-00000000-5633-6c3c-f342-0a2bde14a9f7	test2.glob	array	a:1:{i:0;a:2:{s:3:"key";s:1:"d";s:5:"value";s:9:"defaultna";}}	f	f	f	\N	test2 le globalna vrednost
-00000000-5633-6c3c-ef98-7669bf2907b8	test3.readonly	array	a:1:{i:0;s:15:"privzeta trojka";}	f	t	f	\N	za test- le privzeta vrednost, onemogočeni globalna in user opcija
-00000000-5633-6c3c-d12b-0b36e448d62d	test4	array	a:1:{i:0;s:17:"privzeta štirica";}	t	f	f	\N	za test globalna in user vrednost se lahko kreirata
-00000000-5633-6c3c-1e31-f71962572389	test5.notperUser	array	a:1:{i:0;s:17:"privzeta štirica";}	f	f	f	\N	za test - user opcija onemogočena
-00000000-5633-6c3e-d53d-a308dc876940	application.tenant.maticnopodjetje	string	s:36:"00080000-5633-6c3e-3538-b47753dc711d";	f	t	f		Id matičnega podjetja v Popa
+00000000-5637-258d-f1e7-ca8af3b6688c	popa.stakli	array	a:2:{s:2:"AK";a:1:{s:5:"label";s:7:"aktiven";}s:2:"NA";a:1:{s:5:"label";s:9:"neaktiven";}}	f	t	f	\N	Status poslovnega partnerja
+00000000-5637-258d-87a3-3a63ca0c91a8	oseba.spol	array	a:2:{s:1:"M";a:1:{s:5:"label";s:6:"Moški";}s:1:"Z";a:1:{s:5:"label";s:7:"Ženska";}}	f	t	f	\N	Spol osebe
+00000000-5637-258d-e271-ea0be4b0eb93	telefonska.vrsta	array	a:3:{s:7:"mobilna";a:1:{s:5:"label";s:7:"Mobilni";}s:6:"domaca";a:1:{s:5:"label";s:6:"Domač";}s:6:"fiksna";a:1:{s:5:"label";s:6:"Fiksni";}}	f	t	f	\N	Vrsta telefonske številke
+00000000-5637-258d-7e18-2296b817d6e2	kontaktnaoseba.status	array	a:2:{s:2:"AK";a:1:{s:5:"label";s:7:"aktiven";}s:2:"NA";a:1:{s:5:"label";s:9:"neaktiven";}}	f	t	f	\N	Status kontaktne osebe
+00000000-5637-258d-ea1f-735db688568e	dogodek.status	array	a:8:{s:4:"100s";a:1:{s:5:"label";s:11:"Dolgoročno";}s:4:"200s";a:1:{s:5:"label";s:9:"Planirano";}s:4:"300s";a:1:{s:5:"label";s:8:"Fiksiran";}s:4:"400s";a:1:{s:5:"label";s:17:"Potrjen - interno";}s:4:"500s";a:1:{s:5:"label";s:15:"Potrjen - javno";}s:4:"600s";a:1:{s:5:"label";s:10:"Zaključen";}s:4:"610s";a:1:{s:5:"label";s:9:"Odpovedan";}s:4:"700s";a:1:{s:5:"label";s:7:"Obdelan";}}	f	t	t	\N	Tabela statusa dogodkov
+00000000-5637-258d-af4f-a5b85aa22713	dogodek.razred	array	a:5:{s:4:"100s";a:2:{s:5:"label";s:9:"Predstava";s:4:"type";s:9:"predstava";}s:4:"200s";a:2:{s:5:"label";s:4:"Vaja";s:4:"type";s:4:"vaja";}s:4:"300s";a:2:{s:5:"label";s:10:"Gostovanje";s:4:"type";s:10:"gostovanje";}s:4:"400s";a:2:{s:5:"label";s:16:"Splošni dogodek";s:4:"type";s:8:"splošni";}s:4:"500s";a:2:{s:5:"label";s:10:"Zasedenost";s:4:"type";s:10:"zasedenost";}}	f	t	t	\N	Tabela razredov dogodkov, ki jih aplikacija podpira
+00000000-5637-258d-bb6d-30c7c72bd4e1	uprizoritev.faza	array	a:6:{s:20:"predprodukcija-ideja";a:1:{s:5:"label";s:16:"Dolgoročni plan";}s:20:"predprodukcija-poziv";a:1:{s:5:"label";s:29:"Predprodukcija, v fazi poziva";}s:30:"predprodukcija-potrjen_program";a:1:{s:5:"label";s:34:"Predprodukcija, program je potrjen";}s:10:"produkcija";a:1:{s:5:"label";s:10:"Produkcija";}s:14:"postprodukcija";a:1:{s:5:"label";s:14:"Postprodukcija";}s:5:"arhiv";a:1:{s:5:"label";s:10:"Arhivirana";}}	f	t	f	\N	Faza uprizoritve
+00000000-5637-258d-e87e-bfbd9fc90a77	funkcija.podrocje	array	a:4:{s:7:"igralec";a:1:{s:5:"label";s:7:"Igralec";}s:6:"tehnik";a:1:{s:5:"label";s:6:"Tehnik";}s:7:"umetnik";a:1:{s:5:"label";s:7:"Umetnik";}s:10:"inspicient";a:1:{s:5:"label";s:11:"Inšpicient";}}	f	t	f	\N	Področje funkcije
+00000000-5637-258d-b9ba-60bd80451675	tipfunkcije.podrocje	array	a:4:{s:7:"igralec";a:1:{s:5:"label";s:7:"Igralec";}s:6:"tehnik";a:1:{s:5:"label";s:6:"Tehnik";}s:7:"umetnik";a:1:{s:5:"label";s:7:"Umetnik";}s:10:"inspicient";a:1:{s:5:"label";s:11:"Inšpicient";}}	f	t	f	\N	Področje funkcije
+00000000-5637-258d-0b4c-493f74232422	funkcija.velikost	array	a:4:{s:6:"velika";a:1:{s:5:"label";s:23:"Velika vloga / funkcija";}s:7:"srednja";a:1:{s:5:"label";s:24:"Srednja vloga / funkcija";}s:4:"mala";a:1:{s:5:"label";s:21:"Mala vloga / funkcija";}s:7:"stataza";a:1:{s:5:"label";s:8:"Stataža";}}	f	t	f	\N	Velikost funkcije
+00000000-5637-258d-6183-d9bfcc4c4418	zaposlitev.status	array	a:2:{s:1:"A";a:1:{s:5:"label";s:7:"Aktivna";}s:1:"N";a:1:{s:5:"label";s:9:"Neaktivna";}}	f	t	f	\N	Status zaposlitve
+00000000-5637-258d-6aa3-de12a3f197b5	produkcijskahisa.status	array	a:2:{s:2:"AK";a:1:{s:5:"label";s:7:"aktivna";}s:2:"NA";a:1:{s:5:"label";s:9:"neaktivna";}}	f	t	f	\N	Status produkcijske hiše
+00000000-5637-258d-25cd-f4f2d35d5ea1	strosekuprizoritve.tipstroska	array	a:1:{s:10:"materialni";a:1:{s:5:"label";s:19:"Materialni strošek";}}	f	t	f	\N	Tip stroška
+00000000-5637-258d-d03e-acee40fef3e5	avtorbesedila.tipavtorja	array	a:4:{s:4:"aizv";a:1:{s:5:"label";s:15:"Avtor izvirnika";}s:4:"prev";a:1:{s:5:"label";s:10:"Prevajalec";}s:4:"apri";a:1:{s:5:"label";s:14:"Avtor priredbe";}s:4:"dram";a:1:{s:5:"label";s:12:"Dramatizator";}}	f	t	f	\N	Tip stroška
+00000000-5637-258d-84fc-b66e0b2075d2	fsacl.dostop	array	a:4:{s:1:"X";a:1:{s:5:"label";s:12:"Brez dostopa";}s:1:"R";a:1:{s:5:"label";s:11:"Samo branje";}s:2:"RW";a:1:{s:5:"label";s:17:"Branje in pisanje";}s:3:"RWD";a:1:{s:5:"label";s:26:"Branje pisanje in brisanje";}}	f	t	f	\N	ACL Javni dostop
+00000000-5637-258e-7962-51f57c315102	test1.barva.ozadja	array	a:1:{i:0;a:2:{s:3:"key";s:1:"b";s:5:"value";s:4:"bela";}}	t	f	f	\N	barva ozadja
+00000000-5637-258e-7d11-ec16bc9860e7	test2.glob	array	a:1:{i:0;a:2:{s:3:"key";s:1:"d";s:5:"value";s:9:"defaultna";}}	f	f	f	\N	test2 le globalna vrednost
+00000000-5637-258e-2c6e-2975faa0963d	test3.readonly	array	a:1:{i:0;s:15:"privzeta trojka";}	f	t	f	\N	za test- le privzeta vrednost, onemogočeni globalna in user opcija
+00000000-5637-258e-e1ad-ca7a7f077773	test4	array	a:1:{i:0;s:17:"privzeta štirica";}	t	f	f	\N	za test globalna in user vrednost se lahko kreirata
+00000000-5637-258e-4f10-62ec78f37858	test5.notperUser	array	a:1:{i:0;s:17:"privzeta štirica";}	f	f	f	\N	za test - user opcija onemogočena
+00000000-5637-2590-3156-ce9d3ce5d875	application.tenant.maticnopodjetje	string	s:36:"00080000-5637-2590-ed21-c4cf4350e921";	f	t	f		Id matičnega podjetja v Popa
 \.
 
 
 --
--- TOC entry 3095 (class 0 OID 24315488)
+-- TOC entry 3095 (class 0 OID 24472289)
 -- Dependencies: 185
 -- Data for Name: optionvalue; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY optionvalue (id, option_id, user_id, value, global) FROM stdin;
-00000000-5633-6c3c-7ca4-acb5fc58c447	00000000-5633-6c3c-f6ed-0c24bd25793f	\N	a:1:{i:0;a:2:{s:3:"key";s:1:"m";s:5:"value";s:5:"modra";}}	t
-00000000-5633-6c3c-8f99-23355cb8af7c	00000000-5633-6c3c-f6ed-0c24bd25793f	00010000-5633-6c3b-8e26-86ee7a9daad4	a:1:{i:0;a:2:{s:3:"key";s:1:"r";s:5:"value";s:6:"rumena";}}	f
-00000000-5633-6c3c-2b73-cc77690106c6	00000000-5633-6c3c-f342-0a2bde14a9f7	\N	a:1:{i:0;a:2:{s:3:"key";s:1:"g";s:5:"value";s:8:"globalna";}}	t
+00000000-5637-258e-2910-ec8dd559cc6e	00000000-5637-258e-7962-51f57c315102	\N	a:1:{i:0;a:2:{s:3:"key";s:1:"m";s:5:"value";s:5:"modra";}}	t
+00000000-5637-258e-d633-a8d773fc037a	00000000-5637-258e-7962-51f57c315102	00010000-5637-258d-8c5c-167938b1ee65	a:1:{i:0;a:2:{s:3:"key";s:1:"r";s:5:"value";s:6:"rumena";}}	f
+00000000-5637-258e-5c53-0e3a38698752	00000000-5637-258e-7d11-ec16bc9860e7	\N	a:1:{i:0;a:2:{s:3:"key";s:1:"g";s:5:"value";s:8:"globalna";}}	t
 \.
 
 
 --
--- TOC entry 3099 (class 0 OID 24315555)
+-- TOC entry 3099 (class 0 OID 24472356)
 -- Dependencies: 189
 -- Data for Name: organizacijskaenota; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY organizacijskaenota (id, parent_id, vodja_id, namestnik_id, sifra, naziv) FROM stdin;
-00410000-5633-6c3d-d555-c0dbe092ff73	\N	00100000-5633-6c3d-1ba3-49a79da54c8f	00100000-5633-6c3d-19ab-de474e6876d2	01	Gledališče Nimbis
-00410000-5633-6c3d-10e7-0e44df4aa061	00410000-5633-6c3d-d555-c0dbe092ff73	00100000-5633-6c3d-1ba3-49a79da54c8f	00100000-5633-6c3d-19ab-de474e6876d2	02	Tehnika
+00410000-5637-258e-d0e7-4775dcc7051c	\N	00100000-5637-258e-e829-ea67a4aece26	00100000-5637-258e-8b74-4ee5ea09d9dc	01	Gledališče Nimbis
+00410000-5637-258e-baa1-a38cbeb77fa8	00410000-5637-258e-d0e7-4775dcc7051c	00100000-5637-258e-e829-ea67a4aece26	00100000-5637-258e-8b74-4ee5ea09d9dc	02	Tehnika
 \.
 
 
 --
--- TOC entry 3096 (class 0 OID 24315499)
+-- TOC entry 3096 (class 0 OID 24472300)
 -- Dependencies: 186
 -- Data for Name: oseba; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY oseba (id, user_id, naslov_id, sifra, naziv, ime, priimek, funkcija, srednjeime, polnoime, psevdonim, email, twitter, skype, fb, datumrojstva, emso, davcna, spol, opombe, drzavljanstvo, drzavarojstva, krajrojstva) FROM stdin;
-00090000-5633-6c3d-f31e-d745e1558e51	\N	\N	0001	g.	Janez	Novak	a	Peter	Janez Peter Novak	Jani	jani.novak@xxx.xx				1958-01-06	0601958000000	123456789	M	Jani Janez	Slovenija	Slovenija	Ljubljana
-00090000-5633-6c3d-250a-a12ad23c1824	00010000-5633-6c3c-0d67-c59fa165fa2c	\N	0002	dr.	Anton	Horvat	b		Anton  Horvat	Tona	anton.horvat@xxx.xx				1968-02-12	1202968111111	234567890	M		Slovenija	Slovenija	Maribor
-00090000-5633-6c3d-afd2-8217a84f69a0	00010000-5633-6c3c-d047-3824f905952c	\N	0003		Ivan	Kovačič	c		Ivan  Kovačič	Ivo	ivan.kovacic@xxx.xx				1975-03-26	2603976222222	345678901	M		Slovenija	Slovenija	Celje
-00090000-5633-6c3d-e239-b5d3c53e3b5a	00010000-5633-6c3c-9b46-215bafb7db0f	\N	0004	prof.	Jožef	Krajnc	d		Jožef  Krajnc	Joža	jozef.krajnc@xxx.xx				1971-04-30	3004971333333	456789012	M		Slovenija	Slovenija	Kranj
-00090000-5633-6c3d-87ac-0da4d3bfa615	\N	\N	0005		Marko	Zupančič	e		Marko  Zupančič		marko.zupancic@xxx.xx				1984-05-07	0705984444444	567890123	M		Slovenija	Slovenija	Koper
-00090000-5633-6c3d-2b80-b1fd54a0f016	\N	\N	0006	ga.	Marija	Kovač	f		Marija  Kovač		marija.kovac@xxx.xx				1962-06-19	1906962444444	678901234	Z		Slovenija	Slovenija	Murska Sobota
-00090000-5633-6c3d-46de-ac092853426c	\N	\N	0007	ga.	Ana	Potočnik	g		Ana  Potočnik		ana.potocnik@xxx.xx				1975-07-24	2407975555555	789012345	Z		Slovenija	Slovenija	Novo Mesto
-00090000-5633-6c3d-de4b-43632e11f01c	\N	\N	0008	ga.	Maja	Mlakar	h		Maja  Mlakar		maja.mlakar@xxx.xx				1986-08-02	0208986666666	890123456	Z		Slovenija	Slovenija	Nova Gorica
-00090000-5633-6c3d-e7a0-9053bed7e04d	00010000-5633-6c3c-8c43-f536795512ce	\N	0009		Irena	Kos	i		Irena  Kos		irena.kos@xxx.xx				1967-09-14	1409967777777	901234567	Z		Slovenija	Slovenija	Ptuj
-00090000-5633-6c3d-fd31-b494da40fd86	\N	\N	0010		Mojca	Vidmar	J		Mojca  Vidmar		mojca.vidmar@xxx.xx				1967-09-14	1409967777777	901234567	Z		Slovenija	Slovenija	Idrija
-00090000-5633-6c3d-b5dd-e1137472cde3	\N	\N	0011		xx	write protected12345	a		xx  write protected12345		xx@xxx.xx				\N	\N	\N	Z		\N	\N	\N
-00090000-5633-6c3d-6b84-e1fd649751b2	\N	\N	0012		Luka	Golob	luč	a	Luka a Golob		luka.golob@xxx.xx				\N	\N	\N	M		\N	\N	\N
-00090000-5633-6c3d-a36b-48865c91e446	00010000-5633-6c3c-3424-df654f3dbc6b	\N	0013		Tatjana	Božič	tajnica	a	Tatjana a Božič		tatjana.bozic@xxx.xx				\N	\N	\N	Z		\N	\N	\N
-00090000-5633-6c3d-bd6a-984ea39656a2	\N	\N	0014		William	Shakespeare	avtor		William  Shakespeare		\N				\N	\N	\N	M		\N	\N	\N
-00090000-5633-6c3d-eee0-fe6c285b4bfc	\N	\N	0015		Nebojša	Kavader	avtor		Nebojša  Kavader		\N				\N	\N	\N	M		\N	\N	\N
-00090000-5633-6c3d-9269-96b3e7502f02	\N	\N	0016		Fjodor	Dostojevski	avtor	Mihajlovič	Fjodor Mihajlovič Dostojevski		\N				\N	\N	\N	M		\N	\N	\N
-00090000-5633-6c3d-8a96-dd3eb52dfd6d	\N	\N	0017		Berta 	Hočevar	avtorica		Berta   Hočevar		\N				\N	\N	\N	Z		\N	\N	\N
-00090000-5633-6c3d-41b6-ce132f69df5c	\N	\N	0018		Katarina	Podbevšek	lektorica		Katarina  Podbevšek		\N				\N	\N	\N	Z		\N	\N	\N
-00090000-5633-6c3d-4bf7-afd7089d8777	\N	\N	0019		Lojze	Žumer			Lojze  Žumer		\N				\N	\N	\N	M		\N	\N	\N
-00090000-5633-6c3d-9727-aca391763874	\N	\N	0020		Luka	Novak			Luka  Novak		\N				\N	\N	\N	M		\N	\N	\N
-00090000-5633-6c3d-5fc4-8421feaafccd	\N	\N	0021		Vinko	   Netriman   			Vinko     Netriman   		\N				\N	\N	\N	M		\N	\N	\N
+00090000-5637-258e-1322-64b6318fe593	\N	\N	0001	g.	Janez	Novak	a	Peter	Janez Peter Novak	Jani	jani.novak@xxx.xx				1958-01-06	0601958000000	123456789	M	Jani Janez	Slovenija	Slovenija	Ljubljana
+00090000-5637-258e-c15b-37a3397f2b60	00010000-5637-258e-336c-f90aa06514c5	\N	0002	dr.	Anton	Horvat	b		Anton  Horvat	Tona	anton.horvat@xxx.xx				1968-02-12	1202968111111	234567890	M		Slovenija	Slovenija	Maribor
+00090000-5637-258e-55a6-ba61a01b45d5	00010000-5637-258e-1ffe-81bd5952124d	\N	0003		Ivan	Kovačič	c		Ivan  Kovačič	Ivo	ivan.kovacic@xxx.xx				1975-03-26	2603976222222	345678901	M		Slovenija	Slovenija	Celje
+00090000-5637-258e-4220-5779164d10cf	00010000-5637-258e-b2d1-2d2906019000	\N	0004	prof.	Jožef	Krajnc	d		Jožef  Krajnc	Joža	jozef.krajnc@xxx.xx				1971-04-30	3004971333333	456789012	M		Slovenija	Slovenija	Kranj
+00090000-5637-258e-b84f-5df0f2830b2e	\N	\N	0005		Marko	Zupančič	e		Marko  Zupančič		marko.zupancic@xxx.xx				1984-05-07	0705984444444	567890123	M		Slovenija	Slovenija	Koper
+00090000-5637-258e-7752-c3fa85f98991	\N	\N	0006	ga.	Marija	Kovač	f		Marija  Kovač		marija.kovac@xxx.xx				1962-06-19	1906962444444	678901234	Z		Slovenija	Slovenija	Murska Sobota
+00090000-5637-258e-33d2-c94bfbee297c	\N	\N	0007	ga.	Ana	Potočnik	g		Ana  Potočnik		ana.potocnik@xxx.xx				1975-07-24	2407975555555	789012345	Z		Slovenija	Slovenija	Novo Mesto
+00090000-5637-258e-3d64-b4d5c53d684a	\N	\N	0008	ga.	Maja	Mlakar	h		Maja  Mlakar		maja.mlakar@xxx.xx				1986-08-02	0208986666666	890123456	Z		Slovenija	Slovenija	Nova Gorica
+00090000-5637-258e-0943-32335453a0d0	00010000-5637-258e-5bff-243b7997c9fb	\N	0009		Irena	Kos	i		Irena  Kos		irena.kos@xxx.xx				1967-09-14	1409967777777	901234567	Z		Slovenija	Slovenija	Ptuj
+00090000-5637-258e-a0fa-d9f6b12d0ba9	\N	\N	0010		Mojca	Vidmar	J		Mojca  Vidmar		mojca.vidmar@xxx.xx				1967-09-14	1409967777777	901234567	Z		Slovenija	Slovenija	Idrija
+00090000-5637-258e-69c4-fb6900869234	\N	\N	0011		xx	write protected12345	a		xx  write protected12345		xx@xxx.xx				\N	\N	\N	Z		\N	\N	\N
+00090000-5637-258e-3370-b8dc850227a6	\N	\N	0012		Luka	Golob	luč	a	Luka a Golob		luka.golob@xxx.xx				\N	\N	\N	M		\N	\N	\N
+00090000-5637-258e-f460-ec5788882ea5	00010000-5637-258e-420d-f7a32902e0ad	\N	0013		Tatjana	Božič	tajnica	a	Tatjana a Božič		tatjana.bozic@xxx.xx				\N	\N	\N	Z		\N	\N	\N
+00090000-5637-258e-fbf8-cd02af7c3503	\N	\N	0014		William	Shakespeare	avtor		William  Shakespeare		\N				\N	\N	\N	M		\N	\N	\N
+00090000-5637-258e-2e3f-1a4f0bff986b	\N	\N	0015		Nebojša	Kavader	avtor		Nebojša  Kavader		\N				\N	\N	\N	M		\N	\N	\N
+00090000-5637-258e-6cd7-6424a0b86fb5	\N	\N	0016		Fjodor	Dostojevski	avtor	Mihajlovič	Fjodor Mihajlovič Dostojevski		\N				\N	\N	\N	M		\N	\N	\N
+00090000-5637-258e-b277-217f6bfc8524	\N	\N	0017		Berta 	Hočevar	avtorica		Berta   Hočevar		\N				\N	\N	\N	Z		\N	\N	\N
+00090000-5637-258e-a9d0-70fba87e29e8	\N	\N	0018		Katarina	Podbevšek	lektorica		Katarina  Podbevšek		\N				\N	\N	\N	Z		\N	\N	\N
+00090000-5637-258e-28a5-179def686fbb	\N	\N	0019		Lojze	Žumer			Lojze  Žumer		\N				\N	\N	\N	M		\N	\N	\N
+00090000-5637-258e-5542-41b0a8a90b2b	\N	\N	0020		Luka	Novak			Luka  Novak		\N				\N	\N	\N	M		\N	\N	\N
+00090000-5637-258e-7a9d-a009b0f5a038	\N	\N	0021		Vinko	   Netriman   			Vinko     Netriman   		\N				\N	\N	\N	M		\N	\N	\N
 \.
 
 
 --
--- TOC entry 3088 (class 0 OID 24315434)
+-- TOC entry 3088 (class 0 OID 24472235)
 -- Dependencies: 178
 -- Data for Name: permission; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY permission (id, name, description, builtin) FROM stdin;
-00030000-5633-6c3a-4400-0d99c2b52b8f	Aaa-read	Aaa (User,Role,Permission) - branje	t
-00030000-5633-6c3a-9977-4126fd8cbd0f	Aaa-write	Aaa (User,Role,Permission)- spreminjanje	t
-00030000-5633-6c3a-4e2e-935fd6fd1222	TerminStoritve-vse	TerminStoritve - spreminjanje vseh zapisov	t
-00030000-5633-6c3a-ea53-188a28c0cbcf	Dogodek-readVse	Dogodek - branje vseh, ne glede na status dogodka	t
-00030000-5633-6c3a-ce9d-9099f50339cb	Oseba-vse	Oseba - vse - za testiranje assert	t
-00030000-5633-6c3a-ad70-9c26494f32ce	ProgramDela-lock	ProgramDela - zaklepanje	t
-00030000-5633-6c3a-c099-e5f749db3d81	ProgramDela-unlock	ProgramDela - odklepanje	t
-00030000-5633-6c3a-8c00-5284348cf9ff	Abonma-read	Abonma - branje	t
-00030000-5633-6c3a-d531-b8d357b2b073	Abonma-write	Abonma - spreminjanje	t
-00030000-5633-6c3a-ecd0-3d7695418380	Alternacija-read	Alternacija - branje	t
-00030000-5633-6c3a-90fd-db03234763cd	Alternacija-write	Alternacija - spreminjanje	t
-00030000-5633-6c3a-ad25-d0f72709416f	Arhivalija-read	Arhivalija - branje	t
-00030000-5633-6c3a-b22e-67edb7bfb2e1	Arhivalija-write	Arhivalija - spreminjanje	t
-00030000-5633-6c3a-8ea6-012ce5ef403f	AvtorBesedila-read	AvtorBesedila - branje	t
-00030000-5633-6c3a-a83f-36ab794314eb	AvtorBesedila-write	AvtorBesedila - spreminjanje	t
-00030000-5633-6c3a-876c-f23279f2897c	Besedilo-read	Besedilo - branje	t
-00030000-5633-6c3a-9baa-b91cf0bbec66	Besedilo-write	Besedilo - spreminjanje	t
-00030000-5633-6c3a-51d6-65e80f7f6d59	DogodekIzven-read	DogodekIzven - branje	t
-00030000-5633-6c3a-2983-4cadd6f62335	DogodekIzven-write	DogodekIzven - spreminjanje	t
-00030000-5633-6c3a-2d33-938636206770	Dogodek-read	Dogodek - branje	t
-00030000-5633-6c3a-ff76-b126b5c7121c	Dogodek-write	Dogodek - spreminjanje	t
-00030000-5633-6c3a-e2d7-e70dc2f6392d	DrugiVir-read	DrugiVir - branje	t
-00030000-5633-6c3a-9d06-2d24ab3a4720	DrugiVir-write	DrugiVir - spreminjanje	t
-00030000-5633-6c3a-2dad-e42938553a42	Drzava-read	Drzava - branje	t
-00030000-5633-6c3a-53a1-546299415982	Drzava-write	Drzava - spreminjanje	t
-00030000-5633-6c3a-12bd-de854bcaff47	EnotaPrograma-read	EnotaPrograma - branje	t
-00030000-5633-6c3a-942e-4276c926daf0	EnotaPrograma-write	EnotaPrograma - spreminjanje	t
-00030000-5633-6c3a-3232-3fd487f37b2c	Funkcija-read	Funkcija - branje	t
-00030000-5633-6c3a-7ca7-21549aaba70a	Funkcija-write	Funkcija - spreminjanje	t
-00030000-5633-6c3a-3a83-c379f60ff569	Gostovanje-read	Gostovanje - branje	t
-00030000-5633-6c3a-ffe1-4100426bbf42	Gostovanje-write	Gostovanje - spreminjanje	t
-00030000-5633-6c3a-9f33-b7c7df3e9794	Gostujoca-read	Gostujoca - branje	t
-00030000-5633-6c3a-aec0-da7cff3f0d79	Gostujoca-write	Gostujoca - spreminjanje	t
-00030000-5633-6c3a-55fb-a527bc4a33f7	KontaktnaOseba-read	KontaktnaOseba - branje	t
-00030000-5633-6c3a-5f9e-b1bc31f85fd0	KontaktnaOseba-write	KontaktnaOseba - spreminjanje	t
-00030000-5633-6c3a-3f93-b473ace5488d	Kupec-read	Kupec - branje	t
-00030000-5633-6c3a-3138-d27ab35c7807	Kupec-write	Kupec - spreminjanje	t
-00030000-5633-6c3a-7776-c52642b91193	NacinPlacina-read	NacinPlacina - branje	t
-00030000-5633-6c3a-f1b6-ad4d7d818f45	NacinPlacina-write	NacinPlacina - spreminjanje	t
-00030000-5633-6c3a-4c54-12fc49818e13	Option-read	Option - branje	t
-00030000-5633-6c3a-5fda-64edd8a16748	Option-write	Option - spreminjanje	t
-00030000-5633-6c3a-c469-a3a633421c5d	OptionValue-read	OptionValue - branje	t
-00030000-5633-6c3a-35e8-6360b937e5b0	OptionValue-write	OptionValue - spreminjanje	t
-00030000-5633-6c3a-6a44-637aaaf01c0d	OrganizacijskaEnota-read	OrganizacijskaEnota - branje	t
-00030000-5633-6c3a-69f2-729534ff7a1e	OrganizacijskaEnota-write	OrganizacijskaEnota - spreminjanje	t
-00030000-5633-6c3a-0045-404e3fa8f92f	Oseba-read	Oseba - branje	t
-00030000-5633-6c3a-77b2-217511465b68	Oseba-write	Oseba - spreminjanje	t
-00030000-5633-6c3a-3deb-386c213939b1	PlacilniInstrument-read	PlacilniInstrument - branje	t
-00030000-5633-6c3a-737e-15e334fec92f	PlacilniInstrument-write	PlacilniInstrument - spreminjanje	t
-00030000-5633-6c3a-e4bf-7b05f45a8705	PodrocjeSedenja-read	PodrocjeSedenja - branje	t
-00030000-5633-6c3a-2cc4-c1c559136113	PodrocjeSedenja-write	PodrocjeSedenja - spreminjanje	t
-00030000-5633-6c3a-7e69-e17f0729ad3f	Pogodba-read	Pogodba - branje	t
-00030000-5633-6c3a-a1c6-2e2d38878231	Pogodba-write	Pogodba - spreminjanje	t
-00030000-5633-6c3a-3f17-1bec674ff6f5	Popa-read	Popa - branje	t
-00030000-5633-6c3a-6737-138ca1f795a5	Popa-write	Popa - spreminjanje	t
-00030000-5633-6c3a-c2b1-db7876d92859	Posta-read	Posta - branje	t
-00030000-5633-6c3a-d205-19ebb484dbb9	Posta-write	Posta - spreminjanje	t
-00030000-5633-6c3a-6aed-b462bf447815	PostavkaCDve-read	PostavkaCDve - branje	t
-00030000-5633-6c3a-01db-db6e0d15486e	PostavkaCDve-write	PostavkaCDve - spreminjanje	t
-00030000-5633-6c3a-1be4-8024bd94e3bc	PostavkaRacuna-read	PostavkaRacuna - branje	t
-00030000-5633-6c3a-9fbd-159454d9b486	PostavkaRacuna-write	PostavkaRacuna - spreminjanje	t
-00030000-5633-6c3a-47f3-cecb4cb89c95	PostniNaslov-read	PostniNaslov - branje	t
-00030000-5633-6c3a-d60e-a1a8ae875a85	PostniNaslov-write	PostniNaslov - spreminjanje	t
-00030000-5633-6c3a-c1af-b51b9657ff65	Predstava-read	Predstava - branje	t
-00030000-5633-6c3a-6b10-adfb466e36ea	Predstava-write	Predstava - spreminjanje	t
-00030000-5633-6c3a-7a19-834a771fa853	Praznik-read	Praznik - branje	t
-00030000-5633-6c3a-cd95-26f280e90481	Praznik-write	Praznik - spreminjanje	t
-00030000-5633-6c3a-723b-750db2d8fae0	ProdajaPredstave-read	ProdajaPredstave - branje	t
-00030000-5633-6c3a-1205-d578066406df	ProdajaPredstave-write	ProdajaPredstave - spreminjanje	t
-00030000-5633-6c3a-3e7d-4799d6c294e2	ProdukcijaDelitev-read	ProdukcijaDelitev - branje	t
-00030000-5633-6c3a-9ae2-2a35ceb23ced	ProdukcijaDelitev-write	ProdukcijaDelitev - spreminjanje	t
-00030000-5633-6c3a-273a-5b1e507eaf2a	ProdukcijskaHisa-read	ProdukcijskaHisa - branje	t
-00030000-5633-6c3a-ea70-6b393011a3be	ProdukcijskaHisa-write	ProdukcijskaHisa - spreminjanje	t
-00030000-5633-6c3a-19aa-211e746b12aa	ProgramDela-read	ProgramDela - branje	t
-00030000-5633-6c3a-cc46-69c91cfb25b6	ProgramDela-write	ProgramDela - spreminjanje	t
-00030000-5633-6c3a-6b87-99cf8728b58c	ProgramFestival-read	ProgramFestival - branje	t
-00030000-5633-6c3a-4008-7144218d4930	ProgramFestival-write	ProgramFestival - spreminjanje	t
-00030000-5633-6c3a-a8bf-503586ec1e76	ProgramGostovanje-read	ProgramGostovanje - branje	t
-00030000-5633-6c3a-4704-b31d162b8144	ProgramGostovanje-write	ProgramGostovanje - spreminjanje	t
-00030000-5633-6c3b-bc06-f18c8c9cac72	ProgramGostujoca-read	ProgramGostujoca - branje	t
-00030000-5633-6c3b-efeb-a8f6848f241e	ProgramGostujoca-write	ProgramGostujoca - spreminjanje	t
-00030000-5633-6c3b-e2e7-fda6e269f70e	ProgramIzjemni-read	ProgramIzjemni - branje	t
-00030000-5633-6c3b-8c35-760c67c878a1	ProgramIzjemni-write	ProgramIzjemni - spreminjanje	t
-00030000-5633-6c3b-38a8-0dd33a85e9bf	ProgramPonovitevPrejsnjih-read	ProgramPonovitevPrejsnjih - branje	t
-00030000-5633-6c3b-3ccb-375152e84d83	ProgramPonovitevPrejsnjih-write	ProgramPonovitevPrejsnjih - spreminjanje	t
-00030000-5633-6c3b-c250-e188e1f29f28	ProgramPonovitevPremiere-read	ProgramPonovitevPremiere - branje	t
-00030000-5633-6c3b-b765-611c9ef06443	ProgramPonovitevPremiere-write	ProgramPonovitevPremiere - spreminjanje	t
-00030000-5633-6c3b-06a7-4a6cc6592114	ProgramPremiera-read	ProgramPremiera - branje	t
-00030000-5633-6c3b-32e3-1a42ad364900	ProgramPremiera-write	ProgramPremiera - spreminjanje	t
-00030000-5633-6c3b-5b32-9f4463323e8c	ProgramRazno-read	ProgramRazno - branje	t
-00030000-5633-6c3b-c5bb-118f77fb4669	ProgramRazno-write	ProgramRazno - spreminjanje	t
-00030000-5633-6c3b-45f4-04ecf7fd18b0	ProgramskaEnotaSklopa-read	ProgramskaEnotaSklopa - branje	t
-00030000-5633-6c3b-62cc-540430453dcf	ProgramskaEnotaSklopa-write	ProgramskaEnotaSklopa - spreminjanje	t
-00030000-5633-6c3b-eb73-870e14075c09	Prostor-read	Prostor - branje	t
-00030000-5633-6c3b-dc1f-ffdaf1723e2f	Prostor-write	Prostor - spreminjanje	t
-00030000-5633-6c3b-44d5-a19537c0d727	Racun-read	Racun - branje	t
-00030000-5633-6c3b-72ca-48e79ee77859	Racun-write	Racun - spreminjanje	t
-00030000-5633-6c3b-19bf-6033597ed3b7	RazpisanSedez-read	RazpisanSedez - branje	t
-00030000-5633-6c3b-b2c6-fb73b286599f	RazpisanSedez-write	RazpisanSedez - spreminjanje	t
-00030000-5633-6c3b-9a55-2093d8f215a3	Rekviziterstvo-read	Rekviziterstvo - branje	t
-00030000-5633-6c3b-0093-3b6f7334ed58	Rekviziterstvo-write	Rekviziterstvo - spreminjanje	t
-00030000-5633-6c3b-8a53-15e19f6b5473	Rekvizit-read	Rekvizit - branje	t
-00030000-5633-6c3b-9bd7-add2b0cf8d36	Rekvizit-write	Rekvizit - spreminjanje	t
-00030000-5633-6c3b-052d-61de92c5006f	Revizija-read	Revizija - branje	t
-00030000-5633-6c3b-3be1-c84ce9ee2e4c	Revizija-write	Revizija - spreminjanje	t
-00030000-5633-6c3b-7346-365813876b5e	Rezervacija-read	Rezervacija - branje	t
-00030000-5633-6c3b-ae5c-72710ddbc64b	Rezervacija-write	Rezervacija - spreminjanje	t
-00030000-5633-6c3b-3a75-cfe3a7dd1e30	SedezniRed-read	SedezniRed - branje	t
-00030000-5633-6c3b-da88-93148bab3ccb	SedezniRed-write	SedezniRed - spreminjanje	t
-00030000-5633-6c3b-87b7-837c61152e8a	Sedez-read	Sedez - branje	t
-00030000-5633-6c3b-0366-c6f3c9fd49db	Sedez-write	Sedez - spreminjanje	t
-00030000-5633-6c3b-57cb-85ffc25a6423	Sezona-read	Sezona - branje	t
-00030000-5633-6c3b-b60f-8cf12ae9b01b	Sezona-write	Sezona - spreminjanje	t
-00030000-5633-6c3b-4d76-165f85750536	StevilcenjeKonfig-read	StevilcenjeKonfig - branje	t
-00030000-5633-6c3b-09a2-1039c5c1d5a6	StevilcenjeKonfig-write	StevilcenjeKonfig - spreminjanje	t
-00030000-5633-6c3b-cb79-1acb4b1ba0ed	Stevilcenje-read	Stevilcenje - branje	t
-00030000-5633-6c3b-cd7a-745e1251202a	Stevilcenje-write	Stevilcenje - spreminjanje	t
-00030000-5633-6c3b-b38a-3e8f5ecebf14	StevilcenjeStanje-read	StevilcenjeStanje - branje	t
-00030000-5633-6c3b-f563-da1857cf169d	StevilcenjeStanje-write	StevilcenjeStanje - spreminjanje	t
-00030000-5633-6c3b-32e5-edf736ae95d6	StrosekUprizoritve-read	StrosekUprizoritve - branje	t
-00030000-5633-6c3b-845f-0e8a9ceeb849	StrosekUprizoritve-write	StrosekUprizoritve - spreminjanje	t
-00030000-5633-6c3b-eece-6dcc082f0f11	Telefonska-read	Telefonska - branje	t
-00030000-5633-6c3b-23e7-ec0df7dd8978	Telefonska-write	Telefonska - spreminjanje	t
-00030000-5633-6c3b-d71f-62a84bfbcb2e	TerminStoritve-read	TerminStoritve - branje	t
-00030000-5633-6c3b-967d-cd2c0553ccf6	TerminStoritve-write	TerminStoritve - spreminjanje	t
-00030000-5633-6c3b-9994-686812981a4b	TipFunkcije-read	TipFunkcije - branje	t
-00030000-5633-6c3b-4140-647c08e2388a	TipFunkcije-write	TipFunkcije - spreminjanje	t
-00030000-5633-6c3b-8bbe-af3e55c3425c	TipPopa-read	TipPopa - branje	t
-00030000-5633-6c3b-721a-f404cbec054c	TipPopa-write	TipPopa - spreminjanje	t
-00030000-5633-6c3b-1a90-e338a3869405	TipProgramskeEnote-read	TipProgramskeEnote - branje	t
-00030000-5633-6c3b-77e0-744174433a5d	TipProgramskeEnote-write	TipProgramskeEnote - spreminjanje	t
-00030000-5633-6c3b-b5b6-af4128c59e91	TipVaje-read	TipVaje - branje	t
-00030000-5633-6c3b-00d0-1c01cabb9d76	TipVaje-write	TipVaje - spreminjanje	t
-00030000-5633-6c3b-0ce4-b81586c00568	Trr-read	Trr - branje	t
-00030000-5633-6c3b-6597-300bc4ff4367	Trr-write	Trr - spreminjanje	t
-00030000-5633-6c3b-5095-412a66289820	Uprizoritev-read	Uprizoritev - branje	t
-00030000-5633-6c3b-714c-97fb89364409	Uprizoritev-write	Uprizoritev - spreminjanje	t
-00030000-5633-6c3b-9e24-5e74879e7ea4	Vaja-read	Vaja - branje	t
-00030000-5633-6c3b-4ad7-326cddc62996	Vaja-write	Vaja - spreminjanje	t
-00030000-5633-6c3b-deb9-48f770e7a6fa	VrstaSedezev-read	VrstaSedezev - branje	t
-00030000-5633-6c3b-e10b-73bc009d0d83	VrstaSedezev-write	VrstaSedezev - spreminjanje	t
-00030000-5633-6c3b-74e4-2a531901bde2	VrstaStroska-read	VrstaStroska - branje	t
-00030000-5633-6c3b-2a5d-91e2d89b607d	VrstaStroska-write	VrstaStroska - spreminjanje	t
-00030000-5633-6c3b-22ec-59882ab7d4ed	Zaposlitev-read	Zaposlitev - branje	t
-00030000-5633-6c3b-9f61-130769b12d27	Zaposlitev-write	Zaposlitev - spreminjanje	t
-00030000-5633-6c3b-a22f-c5478c3b3822	Zasedenost-read	Zasedenost - branje	t
-00030000-5633-6c3b-faec-548f040808f7	Zasedenost-write	Zasedenost - spreminjanje	t
-00030000-5633-6c3b-509c-9ba206b4d7df	ZvrstSurs-read	ZvrstSurs - branje	t
-00030000-5633-6c3b-d234-efb14aa8335b	ZvrstSurs-write	ZvrstSurs - spreminjanje	t
-00030000-5633-6c3b-c982-5b92ff6bf9a8	ZvrstUprizoritve-read	ZvrstUprizoritve - branje	t
-00030000-5633-6c3b-7a5d-2749edf6bf12	ZvrstUprizoritve-write	ZvrstUprizoritve - spreminjanje	t
-00030000-5633-6c3b-27cf-8e2d717d53a1	Job-read	Branje opravil - samo zase - branje	t
-00030000-5633-6c3b-cebe-465e372b344f	Job-write	Dodajanje in spreminjanje opravil - samo zase	t
-00030000-5633-6c3b-485c-ec6e775e1d61	Job-admin	Upravljanje opravil za vse uporabnike	t
-00030000-5633-6c3b-198a-92c0a6295386	Mapa-write	Mapa - osnovno dovoljenje za pisanje	t
-00030000-5633-6c3b-c43c-d95353f6461f	Mapa-read	Mapa - osnovno dovoljenje za branje	t
-00030000-5633-6c3b-2b1d-41e1be0d4cb2	MapaAcl-write	MapaAcl - dovoljenje za dostop pisanje ACL-jev mape	t
-00030000-5633-6c3b-b302-d3f3e1730800	MapaAcl-read	MapaAcl - dovoljenje za dostop branje ACL-jev mape	t
-00030000-5633-6c3b-2a00-b46147a7064c	Zapis-write	Zapis - dovoljenje za pisanje zapisov	t
-00030000-5633-6c3b-a7fb-82409770e7ab	Zapis-read	Zapis - dovoljenje za pisanje zapisov	t
-00030000-5633-6c3b-ab60-06b6f92b0a3f	ZapisLastnik-write	ZapisLastnik - dovoljenje za povezovanje zapisov na lastnike	t
-00030000-5633-6c3b-2cd0-6e926762e44d	ZapisLastnik-read	ZapisLastnik - dovoljenje za povezovanje zapisov na lastnike	t
-00030000-5633-6c3b-37a5-be725f4dbb04	VrstaZapisa-write	Šifrant vrst zapisa - spreminjanje	t
-00030000-5633-6c3b-abcb-1fa8765e56f7	VrstaZapisa-read	Šifrant vrst zapisa - branje	t
-00030000-5633-6c3b-d76a-3ae1143df409	Datoteka-write	Datoteka - spreminjanje	t
-00030000-5633-6c3b-277f-6da59c230329	Datoteka-read	Datoteke - branje	t
+00030000-5637-258c-12bb-c406dddd766b	Aaa-read	Aaa (User,Role,Permission) - branje	t
+00030000-5637-258c-8abc-fba86a3901bb	Aaa-write	Aaa (User,Role,Permission)- spreminjanje	t
+00030000-5637-258c-fb34-6542bf113821	TerminStoritve-vse	TerminStoritve - spreminjanje vseh zapisov	t
+00030000-5637-258c-57bb-c77cf421002b	Dogodek-readVse	Dogodek - branje vseh, ne glede na status dogodka	t
+00030000-5637-258c-f21b-9f1fa4e9a340	Oseba-vse	Oseba - vse - za testiranje assert	t
+00030000-5637-258c-4e23-9a8e10cadb7f	ProgramDela-lock	ProgramDela - zaklepanje	t
+00030000-5637-258c-53c5-e1a73530b3e4	ProgramDela-unlock	ProgramDela - odklepanje	t
+00030000-5637-258c-fba7-f4dfe2faedf8	Abonma-read	Abonma - branje	t
+00030000-5637-258c-bf0b-5c54b67d8ebb	Abonma-write	Abonma - spreminjanje	t
+00030000-5637-258c-3c2f-e57a1f804b6f	Alternacija-read	Alternacija - branje	t
+00030000-5637-258c-971e-965b0343570e	Alternacija-write	Alternacija - spreminjanje	t
+00030000-5637-258c-8204-ca0a13ccbb18	Arhivalija-read	Arhivalija - branje	t
+00030000-5637-258c-2186-3d1055d1cf20	Arhivalija-write	Arhivalija - spreminjanje	t
+00030000-5637-258c-304b-9904d54b098a	AvtorBesedila-read	AvtorBesedila - branje	t
+00030000-5637-258c-0c37-99f7f66736bd	AvtorBesedila-write	AvtorBesedila - spreminjanje	t
+00030000-5637-258c-c7e1-c8649f713afd	Besedilo-read	Besedilo - branje	t
+00030000-5637-258c-85cb-ad22f8de8cfb	Besedilo-write	Besedilo - spreminjanje	t
+00030000-5637-258c-a0b4-5bc297d39b8f	DogodekIzven-read	DogodekIzven - branje	t
+00030000-5637-258c-b6e6-e757b9cdc0aa	DogodekIzven-write	DogodekIzven - spreminjanje	t
+00030000-5637-258c-231e-90f7873ee410	Dogodek-read	Dogodek - branje	t
+00030000-5637-258c-ee5a-50d9f17d9c36	Dogodek-write	Dogodek - spreminjanje	t
+00030000-5637-258c-1a4c-f403b7aefd54	DrugiVir-read	DrugiVir - branje	t
+00030000-5637-258c-db09-02578131b6e4	DrugiVir-write	DrugiVir - spreminjanje	t
+00030000-5637-258c-dca3-08374f8a45bd	Drzava-read	Drzava - branje	t
+00030000-5637-258c-aa7a-9f124e9d473f	Drzava-write	Drzava - spreminjanje	t
+00030000-5637-258c-9c89-bb61fef86141	EnotaPrograma-read	EnotaPrograma - branje	t
+00030000-5637-258c-9a40-aef21256e113	EnotaPrograma-write	EnotaPrograma - spreminjanje	t
+00030000-5637-258c-950c-19d76e7309b8	Funkcija-read	Funkcija - branje	t
+00030000-5637-258c-fce6-81bcb57420d9	Funkcija-write	Funkcija - spreminjanje	t
+00030000-5637-258c-990a-26f81a13a060	Gostovanje-read	Gostovanje - branje	t
+00030000-5637-258c-4144-208d53deb4c7	Gostovanje-write	Gostovanje - spreminjanje	t
+00030000-5637-258c-34b3-787926b8c3ad	Gostujoca-read	Gostujoca - branje	t
+00030000-5637-258c-6f06-4ee82363ce77	Gostujoca-write	Gostujoca - spreminjanje	t
+00030000-5637-258c-9e6a-db5f1b73af0b	KontaktnaOseba-read	KontaktnaOseba - branje	t
+00030000-5637-258c-b077-a1673b80d31c	KontaktnaOseba-write	KontaktnaOseba - spreminjanje	t
+00030000-5637-258c-5515-6bb37dac1207	Kupec-read	Kupec - branje	t
+00030000-5637-258c-b244-337f262970e4	Kupec-write	Kupec - spreminjanje	t
+00030000-5637-258c-ca6b-4843f84fe107	NacinPlacina-read	NacinPlacina - branje	t
+00030000-5637-258c-5f7a-1204d307eb86	NacinPlacina-write	NacinPlacina - spreminjanje	t
+00030000-5637-258c-2017-eaeaaa61bbcc	Option-read	Option - branje	t
+00030000-5637-258c-42de-40b6bf12dd06	Option-write	Option - spreminjanje	t
+00030000-5637-258c-fcd6-38bd1dffcdf6	OptionValue-read	OptionValue - branje	t
+00030000-5637-258c-3541-a02d33dc12c9	OptionValue-write	OptionValue - spreminjanje	t
+00030000-5637-258c-8871-99fb996d86aa	OrganizacijskaEnota-read	OrganizacijskaEnota - branje	t
+00030000-5637-258c-5795-f90401e6f050	OrganizacijskaEnota-write	OrganizacijskaEnota - spreminjanje	t
+00030000-5637-258c-e5b0-e4e63438d5aa	Oseba-read	Oseba - branje	t
+00030000-5637-258c-7f9b-fc5182ae2139	Oseba-write	Oseba - spreminjanje	t
+00030000-5637-258c-c03d-61ac4f29165b	PlacilniInstrument-read	PlacilniInstrument - branje	t
+00030000-5637-258c-45b6-1e7e2ca06478	PlacilniInstrument-write	PlacilniInstrument - spreminjanje	t
+00030000-5637-258c-f70d-81776e9f6bb0	PodrocjeSedenja-read	PodrocjeSedenja - branje	t
+00030000-5637-258c-d276-a49c25012546	PodrocjeSedenja-write	PodrocjeSedenja - spreminjanje	t
+00030000-5637-258c-92c2-d3f254d7a67c	Pogodba-read	Pogodba - branje	t
+00030000-5637-258c-f490-abd03fe07cdd	Pogodba-write	Pogodba - spreminjanje	t
+00030000-5637-258c-3db9-d939ab9b7e2f	Popa-read	Popa - branje	t
+00030000-5637-258c-67c9-5d7ed132911f	Popa-write	Popa - spreminjanje	t
+00030000-5637-258c-cca9-014a7173f44c	Posta-read	Posta - branje	t
+00030000-5637-258c-d378-92a3b21a83fd	Posta-write	Posta - spreminjanje	t
+00030000-5637-258c-d093-1d6c29f98f43	PostavkaCDve-read	PostavkaCDve - branje	t
+00030000-5637-258c-e36e-18f919f6a8a1	PostavkaCDve-write	PostavkaCDve - spreminjanje	t
+00030000-5637-258d-749a-b99cf2b591f2	PostavkaRacuna-read	PostavkaRacuna - branje	t
+00030000-5637-258d-3069-b78a245415ff	PostavkaRacuna-write	PostavkaRacuna - spreminjanje	t
+00030000-5637-258d-5b97-006209be3888	PostniNaslov-read	PostniNaslov - branje	t
+00030000-5637-258d-922d-de2be2379db1	PostniNaslov-write	PostniNaslov - spreminjanje	t
+00030000-5637-258d-768f-ceddeeb63337	Predstava-read	Predstava - branje	t
+00030000-5637-258d-c21e-0c542c070a40	Predstava-write	Predstava - spreminjanje	t
+00030000-5637-258d-18ab-d828675807bf	Praznik-read	Praznik - branje	t
+00030000-5637-258d-ce96-6820e45faa6c	Praznik-write	Praznik - spreminjanje	t
+00030000-5637-258d-1e90-890e2539064d	ProdajaPredstave-read	ProdajaPredstave - branje	t
+00030000-5637-258d-172b-bed85cce12ca	ProdajaPredstave-write	ProdajaPredstave - spreminjanje	t
+00030000-5637-258d-7314-973e3f04a843	ProdukcijaDelitev-read	ProdukcijaDelitev - branje	t
+00030000-5637-258d-7c50-20f26ebb0da0	ProdukcijaDelitev-write	ProdukcijaDelitev - spreminjanje	t
+00030000-5637-258d-7162-6b5eb3075e37	ProdukcijskaHisa-read	ProdukcijskaHisa - branje	t
+00030000-5637-258d-f292-36f0a4d80e8a	ProdukcijskaHisa-write	ProdukcijskaHisa - spreminjanje	t
+00030000-5637-258d-7bf2-2dd7be5ae8cb	ProgramDela-read	ProgramDela - branje	t
+00030000-5637-258d-f97a-ffae2ccb91eb	ProgramDela-write	ProgramDela - spreminjanje	t
+00030000-5637-258d-4856-243f2641f8ad	ProgramFestival-read	ProgramFestival - branje	t
+00030000-5637-258d-271a-a4b3c8a99fa3	ProgramFestival-write	ProgramFestival - spreminjanje	t
+00030000-5637-258d-0084-913eb8b88b94	ProgramGostovanje-read	ProgramGostovanje - branje	t
+00030000-5637-258d-0a16-6a94e98f4862	ProgramGostovanje-write	ProgramGostovanje - spreminjanje	t
+00030000-5637-258d-a1d5-b0b888c9cf59	ProgramGostujoca-read	ProgramGostujoca - branje	t
+00030000-5637-258d-6adf-edba745d542d	ProgramGostujoca-write	ProgramGostujoca - spreminjanje	t
+00030000-5637-258d-f1ce-8d1f475cdbd8	ProgramIzjemni-read	ProgramIzjemni - branje	t
+00030000-5637-258d-f16c-2b941b8e236b	ProgramIzjemni-write	ProgramIzjemni - spreminjanje	t
+00030000-5637-258d-c827-83b838a43ca5	ProgramPonovitevPrejsnjih-read	ProgramPonovitevPrejsnjih - branje	t
+00030000-5637-258d-b356-d39bbf41335f	ProgramPonovitevPrejsnjih-write	ProgramPonovitevPrejsnjih - spreminjanje	t
+00030000-5637-258d-2b8a-7258eec562ca	ProgramPonovitevPremiere-read	ProgramPonovitevPremiere - branje	t
+00030000-5637-258d-c1c2-aadcfaa81ade	ProgramPonovitevPremiere-write	ProgramPonovitevPremiere - spreminjanje	t
+00030000-5637-258d-13e4-d1eb28e2f582	ProgramPremiera-read	ProgramPremiera - branje	t
+00030000-5637-258d-fc9c-fac378f39cb8	ProgramPremiera-write	ProgramPremiera - spreminjanje	t
+00030000-5637-258d-0b67-13593d3898f0	ProgramRazno-read	ProgramRazno - branje	t
+00030000-5637-258d-94cf-17152f052c47	ProgramRazno-write	ProgramRazno - spreminjanje	t
+00030000-5637-258d-5213-b14bf03bbd9d	ProgramskaEnotaSklopa-read	ProgramskaEnotaSklopa - branje	t
+00030000-5637-258d-ca99-947516029dfd	ProgramskaEnotaSklopa-write	ProgramskaEnotaSklopa - spreminjanje	t
+00030000-5637-258d-6d27-1bd9bc873907	Prostor-read	Prostor - branje	t
+00030000-5637-258d-71b9-dbbf4e683fdc	Prostor-write	Prostor - spreminjanje	t
+00030000-5637-258d-555b-a078750a33d5	Racun-read	Racun - branje	t
+00030000-5637-258d-5f7a-40acc8f9945b	Racun-write	Racun - spreminjanje	t
+00030000-5637-258d-0edb-fa838651c0a8	RazpisanSedez-read	RazpisanSedez - branje	t
+00030000-5637-258d-f590-a06ed4f10e81	RazpisanSedez-write	RazpisanSedez - spreminjanje	t
+00030000-5637-258d-ae17-54526ee11bdd	Rekviziterstvo-read	Rekviziterstvo - branje	t
+00030000-5637-258d-a98a-2a33f517dbd7	Rekviziterstvo-write	Rekviziterstvo - spreminjanje	t
+00030000-5637-258d-46a4-55ebdf3bedf2	Rekvizit-read	Rekvizit - branje	t
+00030000-5637-258d-5982-97f24652935c	Rekvizit-write	Rekvizit - spreminjanje	t
+00030000-5637-258d-5e29-3d807f5e243b	Revizija-read	Revizija - branje	t
+00030000-5637-258d-8813-395357889cc0	Revizija-write	Revizija - spreminjanje	t
+00030000-5637-258d-1b8c-95edac2c7585	Rezervacija-read	Rezervacija - branje	t
+00030000-5637-258d-511b-8ff6b290fb9b	Rezervacija-write	Rezervacija - spreminjanje	t
+00030000-5637-258d-8808-f62b04be18c5	SedezniRed-read	SedezniRed - branje	t
+00030000-5637-258d-9160-cbc9c0a1677b	SedezniRed-write	SedezniRed - spreminjanje	t
+00030000-5637-258d-03c6-89205c6718a7	Sedez-read	Sedez - branje	t
+00030000-5637-258d-76ed-63cccf0b2636	Sedez-write	Sedez - spreminjanje	t
+00030000-5637-258d-76cc-71961c74261d	Sezona-read	Sezona - branje	t
+00030000-5637-258d-78db-758d61117f46	Sezona-write	Sezona - spreminjanje	t
+00030000-5637-258d-f556-3a76ef2e1ba4	StevilcenjeKonfig-read	StevilcenjeKonfig - branje	t
+00030000-5637-258d-1d08-894eedf7ed79	StevilcenjeKonfig-write	StevilcenjeKonfig - spreminjanje	t
+00030000-5637-258d-ec71-a528d6f2f272	Stevilcenje-read	Stevilcenje - branje	t
+00030000-5637-258d-99f8-5095715dbf9d	Stevilcenje-write	Stevilcenje - spreminjanje	t
+00030000-5637-258d-295c-5764c6d41813	StevilcenjeStanje-read	StevilcenjeStanje - branje	t
+00030000-5637-258d-0558-e10f93c28fec	StevilcenjeStanje-write	StevilcenjeStanje - spreminjanje	t
+00030000-5637-258d-4fa6-d4bdb30d0422	StrosekUprizoritve-read	StrosekUprizoritve - branje	t
+00030000-5637-258d-4029-f3e91f384ea3	StrosekUprizoritve-write	StrosekUprizoritve - spreminjanje	t
+00030000-5637-258d-54f5-d8781595e529	Telefonska-read	Telefonska - branje	t
+00030000-5637-258d-4a6b-f59e453a9f98	Telefonska-write	Telefonska - spreminjanje	t
+00030000-5637-258d-ebd2-aa4d5f71cc20	TerminStoritve-read	TerminStoritve - branje	t
+00030000-5637-258d-d762-5f5047c8b039	TerminStoritve-write	TerminStoritve - spreminjanje	t
+00030000-5637-258d-6265-237e233987e1	TipFunkcije-read	TipFunkcije - branje	t
+00030000-5637-258d-cfb7-c70546eaf8f3	TipFunkcije-write	TipFunkcije - spreminjanje	t
+00030000-5637-258d-86cb-8ba33d269ab8	TipPopa-read	TipPopa - branje	t
+00030000-5637-258d-92b1-4a022cf0bbc7	TipPopa-write	TipPopa - spreminjanje	t
+00030000-5637-258d-1cff-2f6152642c47	TipProgramskeEnote-read	TipProgramskeEnote - branje	t
+00030000-5637-258d-a637-f17714615d00	TipProgramskeEnote-write	TipProgramskeEnote - spreminjanje	t
+00030000-5637-258d-376b-75ed8671469c	TipVaje-read	TipVaje - branje	t
+00030000-5637-258d-0ab1-1215a5169adb	TipVaje-write	TipVaje - spreminjanje	t
+00030000-5637-258d-07c7-87d119131c14	Trr-read	Trr - branje	t
+00030000-5637-258d-b7fc-7c06e53e5fdd	Trr-write	Trr - spreminjanje	t
+00030000-5637-258d-49b0-02607f357130	Uprizoritev-read	Uprizoritev - branje	t
+00030000-5637-258d-100c-ba37d06bc2bf	Uprizoritev-write	Uprizoritev - spreminjanje	t
+00030000-5637-258d-a485-6277c0b957a7	Vaja-read	Vaja - branje	t
+00030000-5637-258d-f811-7921952ad8eb	Vaja-write	Vaja - spreminjanje	t
+00030000-5637-258d-c8d2-ef2859a670fb	VrstaSedezev-read	VrstaSedezev - branje	t
+00030000-5637-258d-dd68-067d91118b95	VrstaSedezev-write	VrstaSedezev - spreminjanje	t
+00030000-5637-258d-8e3f-69941e3a8214	VrstaStroska-read	VrstaStroska - branje	t
+00030000-5637-258d-04f6-ebd79f07cf7b	VrstaStroska-write	VrstaStroska - spreminjanje	t
+00030000-5637-258d-0fa5-d27bb454beb2	Zaposlitev-read	Zaposlitev - branje	t
+00030000-5637-258d-20b5-486510091c7e	Zaposlitev-write	Zaposlitev - spreminjanje	t
+00030000-5637-258d-c1bd-bbe3804cd6d4	Zasedenost-read	Zasedenost - branje	t
+00030000-5637-258d-3b4d-c069d074c4bb	Zasedenost-write	Zasedenost - spreminjanje	t
+00030000-5637-258d-322f-2ccf4ed87ea3	ZvrstSurs-read	ZvrstSurs - branje	t
+00030000-5637-258d-b187-902abfe2e2d2	ZvrstSurs-write	ZvrstSurs - spreminjanje	t
+00030000-5637-258d-2a82-46d4683302b8	ZvrstUprizoritve-read	ZvrstUprizoritve - branje	t
+00030000-5637-258d-2d33-f9b48da99035	ZvrstUprizoritve-write	ZvrstUprizoritve - spreminjanje	t
+00030000-5637-258d-bf53-36f621a7af2b	Job-read	Branje opravil - samo zase - branje	t
+00030000-5637-258d-dd6c-bf31e1b2f778	Job-write	Dodajanje in spreminjanje opravil - samo zase	t
+00030000-5637-258d-80ac-1507a3731424	Job-admin	Upravljanje opravil za vse uporabnike	t
+00030000-5637-258d-4af1-248f46ed475a	Mapa-write	Mapa - osnovno dovoljenje za pisanje	t
+00030000-5637-258d-ab60-3319c681c7ae	Mapa-read	Mapa - osnovno dovoljenje za branje	t
+00030000-5637-258d-9f8c-13fca42ea155	MapaAcl-write	MapaAcl - dovoljenje za dostop pisanje ACL-jev mape	t
+00030000-5637-258d-a7bf-dedbae70dce6	MapaAcl-read	MapaAcl - dovoljenje za dostop branje ACL-jev mape	t
+00030000-5637-258d-c367-8b1d92cc4a2d	Zapis-write	Zapis - dovoljenje za pisanje zapisov	t
+00030000-5637-258d-5608-cf447c097554	Zapis-read	Zapis - dovoljenje za pisanje zapisov	t
+00030000-5637-258d-1a1e-4e9eb9b0ccd8	ZapisLastnik-write	ZapisLastnik - dovoljenje za povezovanje zapisov na lastnike	t
+00030000-5637-258d-cc6e-9fcf793cb277	ZapisLastnik-read	ZapisLastnik - dovoljenje za povezovanje zapisov na lastnike	t
+00030000-5637-258d-3d7c-3daf118c3586	VrstaZapisa-write	Šifrant vrst zapisa - spreminjanje	t
+00030000-5637-258d-7351-12afd335d191	VrstaZapisa-read	Šifrant vrst zapisa - branje	t
+00030000-5637-258d-9d30-f800de318d47	Datoteka-write	Datoteka - spreminjanje	t
+00030000-5637-258d-2831-d26390e7b4a5	Datoteka-read	Datoteke - branje	t
 \.
 
 
 --
--- TOC entry 3090 (class 0 OID 24315453)
+-- TOC entry 3090 (class 0 OID 24472254)
 -- Dependencies: 180
 -- Data for Name: permission2role; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY permission2role (role_id, permission_id) FROM stdin;
-00020000-5633-6c3b-43d5-6e74ddded961	00030000-5633-6c3a-9977-4126fd8cbd0f
-00020000-5633-6c3b-6605-3dd63c6ff174	00030000-5633-6c3a-2dad-e42938553a42
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-8c00-5284348cf9ff
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-d531-b8d357b2b073
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-ecd0-3d7695418380
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-90fd-db03234763cd
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-ad25-d0f72709416f
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-2d33-938636206770
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-ea53-188a28c0cbcf
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-ff76-b126b5c7121c
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-2dad-e42938553a42
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-53a1-546299415982
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-3232-3fd487f37b2c
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-7ca7-21549aaba70a
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-3a83-c379f60ff569
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-ffe1-4100426bbf42
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-9f33-b7c7df3e9794
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-aec0-da7cff3f0d79
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-55fb-a527bc4a33f7
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-5f9e-b1bc31f85fd0
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-4c54-12fc49818e13
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-c469-a3a633421c5d
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-0045-404e3fa8f92f
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-77b2-217511465b68
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-3f17-1bec674ff6f5
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-6737-138ca1f795a5
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-c2b1-db7876d92859
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-d205-19ebb484dbb9
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-47f3-cecb4cb89c95
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-d60e-a1a8ae875a85
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-c1af-b51b9657ff65
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-6b10-adfb466e36ea
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-273a-5b1e507eaf2a
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3a-ea70-6b393011a3be
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-eb73-870e14075c09
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-dc1f-ffdaf1723e2f
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-9a55-2093d8f215a3
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-0093-3b6f7334ed58
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-8a53-15e19f6b5473
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-9bd7-add2b0cf8d36
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-57cb-85ffc25a6423
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-b60f-8cf12ae9b01b
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-9994-686812981a4b
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-5095-412a66289820
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-714c-97fb89364409
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-9e24-5e74879e7ea4
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-4ad7-326cddc62996
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-a22f-c5478c3b3822
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-faec-548f040808f7
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-509c-9ba206b4d7df
-00020000-5633-6c3b-7f80-469519e10e41	00030000-5633-6c3b-c982-5b92ff6bf9a8
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-8c00-5284348cf9ff
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-ad25-d0f72709416f
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-2d33-938636206770
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-2dad-e42938553a42
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-3a83-c379f60ff569
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-9f33-b7c7df3e9794
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-55fb-a527bc4a33f7
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-5f9e-b1bc31f85fd0
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-4c54-12fc49818e13
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-c469-a3a633421c5d
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-0045-404e3fa8f92f
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-77b2-217511465b68
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-3f17-1bec674ff6f5
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-c2b1-db7876d92859
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-47f3-cecb4cb89c95
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-d60e-a1a8ae875a85
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3a-c1af-b51b9657ff65
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3b-eb73-870e14075c09
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3b-9a55-2093d8f215a3
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3b-8a53-15e19f6b5473
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3b-57cb-85ffc25a6423
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3b-eece-6dcc082f0f11
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3b-23e7-ec0df7dd8978
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3b-0ce4-b81586c00568
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3b-6597-300bc4ff4367
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3b-22ec-59882ab7d4ed
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3b-9f61-130769b12d27
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3b-509c-9ba206b4d7df
-00020000-5633-6c3b-9859-73daf39842d4	00030000-5633-6c3b-c982-5b92ff6bf9a8
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-8c00-5284348cf9ff
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-ecd0-3d7695418380
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-ad25-d0f72709416f
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-b22e-67edb7bfb2e1
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-876c-f23279f2897c
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-51d6-65e80f7f6d59
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-2d33-938636206770
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-2dad-e42938553a42
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-3232-3fd487f37b2c
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-3a83-c379f60ff569
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-9f33-b7c7df3e9794
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-55fb-a527bc4a33f7
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-4c54-12fc49818e13
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-c469-a3a633421c5d
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-0045-404e3fa8f92f
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-3f17-1bec674ff6f5
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-c2b1-db7876d92859
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-c1af-b51b9657ff65
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3a-273a-5b1e507eaf2a
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3b-eb73-870e14075c09
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3b-9a55-2093d8f215a3
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3b-8a53-15e19f6b5473
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3b-57cb-85ffc25a6423
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3b-9994-686812981a4b
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3b-9e24-5e74879e7ea4
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3b-a22f-c5478c3b3822
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3b-509c-9ba206b4d7df
-00020000-5633-6c3b-a11b-3de96b320fb4	00030000-5633-6c3b-c982-5b92ff6bf9a8
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3a-8c00-5284348cf9ff
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3a-d531-b8d357b2b073
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3a-90fd-db03234763cd
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3a-ad25-d0f72709416f
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3a-2d33-938636206770
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3a-2dad-e42938553a42
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3a-3a83-c379f60ff569
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3a-9f33-b7c7df3e9794
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3a-4c54-12fc49818e13
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3a-c469-a3a633421c5d
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3a-3f17-1bec674ff6f5
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3a-c2b1-db7876d92859
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3a-c1af-b51b9657ff65
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3b-eb73-870e14075c09
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3b-9a55-2093d8f215a3
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3b-8a53-15e19f6b5473
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3b-57cb-85ffc25a6423
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3b-9994-686812981a4b
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3b-509c-9ba206b4d7df
-00020000-5633-6c3b-ae44-13b20e034ee8	00030000-5633-6c3b-c982-5b92ff6bf9a8
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3a-8c00-5284348cf9ff
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3a-ad25-d0f72709416f
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3a-2d33-938636206770
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3a-2dad-e42938553a42
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3a-3a83-c379f60ff569
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3a-9f33-b7c7df3e9794
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3a-4c54-12fc49818e13
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3a-c469-a3a633421c5d
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3a-3f17-1bec674ff6f5
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3a-c2b1-db7876d92859
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3a-c1af-b51b9657ff65
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3b-eb73-870e14075c09
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3b-9a55-2093d8f215a3
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3b-8a53-15e19f6b5473
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3b-57cb-85ffc25a6423
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3b-d71f-62a84bfbcb2e
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3a-4e2e-935fd6fd1222
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3b-9994-686812981a4b
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3b-509c-9ba206b4d7df
-00020000-5633-6c3b-1eb8-6a327f992f25	00030000-5633-6c3b-c982-5b92ff6bf9a8
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-4400-0d99c2b52b8f
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-9977-4126fd8cbd0f
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-8c00-5284348cf9ff
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-d531-b8d357b2b073
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-ecd0-3d7695418380
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-90fd-db03234763cd
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-ad25-d0f72709416f
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-b22e-67edb7bfb2e1
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-8ea6-012ce5ef403f
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-a83f-36ab794314eb
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-876c-f23279f2897c
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-9baa-b91cf0bbec66
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-51d6-65e80f7f6d59
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-2983-4cadd6f62335
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-2d33-938636206770
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-ea53-188a28c0cbcf
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-ff76-b126b5c7121c
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-e2d7-e70dc2f6392d
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-9d06-2d24ab3a4720
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-2dad-e42938553a42
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-53a1-546299415982
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-12bd-de854bcaff47
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-942e-4276c926daf0
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-3232-3fd487f37b2c
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-7ca7-21549aaba70a
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-3a83-c379f60ff569
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-ffe1-4100426bbf42
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-9f33-b7c7df3e9794
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-aec0-da7cff3f0d79
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-55fb-a527bc4a33f7
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-5f9e-b1bc31f85fd0
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-3f93-b473ace5488d
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-3138-d27ab35c7807
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-7776-c52642b91193
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-f1b6-ad4d7d818f45
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-4c54-12fc49818e13
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-c469-a3a633421c5d
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-35e8-6360b937e5b0
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-5fda-64edd8a16748
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-6a44-637aaaf01c0d
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-69f2-729534ff7a1e
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-0045-404e3fa8f92f
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-ce9d-9099f50339cb
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-77b2-217511465b68
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-3deb-386c213939b1
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-737e-15e334fec92f
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-e4bf-7b05f45a8705
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-2cc4-c1c559136113
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-7e69-e17f0729ad3f
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-a1c6-2e2d38878231
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-3f17-1bec674ff6f5
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-6737-138ca1f795a5
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-c2b1-db7876d92859
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-6aed-b462bf447815
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-01db-db6e0d15486e
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-1be4-8024bd94e3bc
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-9fbd-159454d9b486
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-d205-19ebb484dbb9
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-47f3-cecb4cb89c95
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-d60e-a1a8ae875a85
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-7a19-834a771fa853
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-cd95-26f280e90481
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-c1af-b51b9657ff65
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-6b10-adfb466e36ea
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-723b-750db2d8fae0
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-1205-d578066406df
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-3e7d-4799d6c294e2
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-9ae2-2a35ceb23ced
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-273a-5b1e507eaf2a
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-ea70-6b393011a3be
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-ad70-9c26494f32ce
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-19aa-211e746b12aa
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-c099-e5f749db3d81
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-cc46-69c91cfb25b6
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-6b87-99cf8728b58c
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-4008-7144218d4930
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-a8bf-503586ec1e76
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-4704-b31d162b8144
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-bc06-f18c8c9cac72
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-efeb-a8f6848f241e
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-e2e7-fda6e269f70e
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-8c35-760c67c878a1
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-38a8-0dd33a85e9bf
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-3ccb-375152e84d83
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-c250-e188e1f29f28
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-b765-611c9ef06443
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-06a7-4a6cc6592114
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-32e3-1a42ad364900
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-5b32-9f4463323e8c
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-c5bb-118f77fb4669
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-45f4-04ecf7fd18b0
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-62cc-540430453dcf
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-eb73-870e14075c09
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-dc1f-ffdaf1723e2f
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-44d5-a19537c0d727
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-72ca-48e79ee77859
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-19bf-6033597ed3b7
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-b2c6-fb73b286599f
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-9a55-2093d8f215a3
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-0093-3b6f7334ed58
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-8a53-15e19f6b5473
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-9bd7-add2b0cf8d36
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-052d-61de92c5006f
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-3be1-c84ce9ee2e4c
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-7346-365813876b5e
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-ae5c-72710ddbc64b
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-3a75-cfe3a7dd1e30
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-da88-93148bab3ccb
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-87b7-837c61152e8a
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-0366-c6f3c9fd49db
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-57cb-85ffc25a6423
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-b60f-8cf12ae9b01b
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-4d76-165f85750536
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-09a2-1039c5c1d5a6
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-cb79-1acb4b1ba0ed
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-b38a-3e8f5ecebf14
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-f563-da1857cf169d
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-cd7a-745e1251202a
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-32e5-edf736ae95d6
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-845f-0e8a9ceeb849
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-eece-6dcc082f0f11
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-23e7-ec0df7dd8978
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-d71f-62a84bfbcb2e
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3a-4e2e-935fd6fd1222
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-967d-cd2c0553ccf6
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-9994-686812981a4b
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-4140-647c08e2388a
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-8bbe-af3e55c3425c
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-721a-f404cbec054c
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-1a90-e338a3869405
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-77e0-744174433a5d
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-b5b6-af4128c59e91
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-00d0-1c01cabb9d76
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-0ce4-b81586c00568
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-6597-300bc4ff4367
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-5095-412a66289820
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-714c-97fb89364409
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-9e24-5e74879e7ea4
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-4ad7-326cddc62996
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-deb9-48f770e7a6fa
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-e10b-73bc009d0d83
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-74e4-2a531901bde2
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-2a5d-91e2d89b607d
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-22ec-59882ab7d4ed
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-9f61-130769b12d27
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-a22f-c5478c3b3822
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-faec-548f040808f7
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-509c-9ba206b4d7df
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-d234-efb14aa8335b
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-c982-5b92ff6bf9a8
-00020000-5633-6c3c-5b32-9490a1911e15	00030000-5633-6c3b-7a5d-2749edf6bf12
+00020000-5637-258d-1abb-e60f79d9553a	00030000-5637-258c-8abc-fba86a3901bb
+00020000-5637-258d-1ba9-d18ba8e4ade0	00030000-5637-258c-dca3-08374f8a45bd
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-fba7-f4dfe2faedf8
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-bf0b-5c54b67d8ebb
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-3c2f-e57a1f804b6f
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-971e-965b0343570e
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-8204-ca0a13ccbb18
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-231e-90f7873ee410
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-57bb-c77cf421002b
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-ee5a-50d9f17d9c36
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-dca3-08374f8a45bd
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-aa7a-9f124e9d473f
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-950c-19d76e7309b8
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-fce6-81bcb57420d9
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-990a-26f81a13a060
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-4144-208d53deb4c7
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-34b3-787926b8c3ad
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-6f06-4ee82363ce77
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-9e6a-db5f1b73af0b
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-b077-a1673b80d31c
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-2017-eaeaaa61bbcc
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-fcd6-38bd1dffcdf6
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-e5b0-e4e63438d5aa
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-7f9b-fc5182ae2139
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-3db9-d939ab9b7e2f
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-67c9-5d7ed132911f
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-cca9-014a7173f44c
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258c-d378-92a3b21a83fd
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-5b97-006209be3888
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-922d-de2be2379db1
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-768f-ceddeeb63337
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-c21e-0c542c070a40
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-7162-6b5eb3075e37
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-f292-36f0a4d80e8a
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-6d27-1bd9bc873907
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-71b9-dbbf4e683fdc
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-ae17-54526ee11bdd
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-a98a-2a33f517dbd7
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-46a4-55ebdf3bedf2
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-5982-97f24652935c
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-76cc-71961c74261d
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-78db-758d61117f46
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-6265-237e233987e1
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-49b0-02607f357130
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-100c-ba37d06bc2bf
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-a485-6277c0b957a7
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-f811-7921952ad8eb
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-c1bd-bbe3804cd6d4
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-3b4d-c069d074c4bb
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-322f-2ccf4ed87ea3
+00020000-5637-258d-59d7-fdcb7a9a5038	00030000-5637-258d-2a82-46d4683302b8
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-fba7-f4dfe2faedf8
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-8204-ca0a13ccbb18
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-231e-90f7873ee410
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-dca3-08374f8a45bd
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-990a-26f81a13a060
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-34b3-787926b8c3ad
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-9e6a-db5f1b73af0b
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-b077-a1673b80d31c
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-2017-eaeaaa61bbcc
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-fcd6-38bd1dffcdf6
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-e5b0-e4e63438d5aa
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-7f9b-fc5182ae2139
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-3db9-d939ab9b7e2f
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258c-cca9-014a7173f44c
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-5b97-006209be3888
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-922d-de2be2379db1
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-768f-ceddeeb63337
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-6d27-1bd9bc873907
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-ae17-54526ee11bdd
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-46a4-55ebdf3bedf2
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-76cc-71961c74261d
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-54f5-d8781595e529
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-4a6b-f59e453a9f98
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-07c7-87d119131c14
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-b7fc-7c06e53e5fdd
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-0fa5-d27bb454beb2
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-20b5-486510091c7e
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-322f-2ccf4ed87ea3
+00020000-5637-258d-94e1-ef3a3239cfd0	00030000-5637-258d-2a82-46d4683302b8
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-fba7-f4dfe2faedf8
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-3c2f-e57a1f804b6f
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-8204-ca0a13ccbb18
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-2186-3d1055d1cf20
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-c7e1-c8649f713afd
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-a0b4-5bc297d39b8f
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-231e-90f7873ee410
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-dca3-08374f8a45bd
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-950c-19d76e7309b8
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-990a-26f81a13a060
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-34b3-787926b8c3ad
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-9e6a-db5f1b73af0b
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-2017-eaeaaa61bbcc
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-fcd6-38bd1dffcdf6
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-e5b0-e4e63438d5aa
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-3db9-d939ab9b7e2f
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258c-cca9-014a7173f44c
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258d-768f-ceddeeb63337
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258d-7162-6b5eb3075e37
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258d-6d27-1bd9bc873907
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258d-ae17-54526ee11bdd
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258d-46a4-55ebdf3bedf2
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258d-76cc-71961c74261d
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258d-6265-237e233987e1
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258d-a485-6277c0b957a7
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258d-c1bd-bbe3804cd6d4
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258d-322f-2ccf4ed87ea3
+00020000-5637-258d-963e-521e62e8fd6f	00030000-5637-258d-2a82-46d4683302b8
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258c-fba7-f4dfe2faedf8
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258c-bf0b-5c54b67d8ebb
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258c-971e-965b0343570e
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258c-8204-ca0a13ccbb18
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258c-231e-90f7873ee410
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258c-dca3-08374f8a45bd
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258c-990a-26f81a13a060
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258c-34b3-787926b8c3ad
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258c-2017-eaeaaa61bbcc
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258c-fcd6-38bd1dffcdf6
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258c-3db9-d939ab9b7e2f
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258c-cca9-014a7173f44c
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258d-768f-ceddeeb63337
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258d-6d27-1bd9bc873907
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258d-ae17-54526ee11bdd
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258d-46a4-55ebdf3bedf2
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258d-76cc-71961c74261d
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258d-6265-237e233987e1
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258d-322f-2ccf4ed87ea3
+00020000-5637-258d-d8e5-907e3e939914	00030000-5637-258d-2a82-46d4683302b8
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258c-fba7-f4dfe2faedf8
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258c-8204-ca0a13ccbb18
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258c-231e-90f7873ee410
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258c-dca3-08374f8a45bd
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258c-990a-26f81a13a060
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258c-34b3-787926b8c3ad
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258c-2017-eaeaaa61bbcc
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258c-fcd6-38bd1dffcdf6
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258c-3db9-d939ab9b7e2f
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258c-cca9-014a7173f44c
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258d-768f-ceddeeb63337
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258d-6d27-1bd9bc873907
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258d-ae17-54526ee11bdd
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258d-46a4-55ebdf3bedf2
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258d-76cc-71961c74261d
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258d-ebd2-aa4d5f71cc20
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258c-fb34-6542bf113821
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258d-6265-237e233987e1
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258d-322f-2ccf4ed87ea3
+00020000-5637-258d-fbd1-c562870c49e7	00030000-5637-258d-2a82-46d4683302b8
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-12bb-c406dddd766b
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-8abc-fba86a3901bb
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-fba7-f4dfe2faedf8
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-bf0b-5c54b67d8ebb
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-3c2f-e57a1f804b6f
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-971e-965b0343570e
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-8204-ca0a13ccbb18
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-2186-3d1055d1cf20
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-304b-9904d54b098a
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-0c37-99f7f66736bd
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-c7e1-c8649f713afd
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-85cb-ad22f8de8cfb
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-a0b4-5bc297d39b8f
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-b6e6-e757b9cdc0aa
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-231e-90f7873ee410
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-57bb-c77cf421002b
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-ee5a-50d9f17d9c36
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-1a4c-f403b7aefd54
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-db09-02578131b6e4
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-dca3-08374f8a45bd
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-aa7a-9f124e9d473f
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-9c89-bb61fef86141
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-9a40-aef21256e113
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-950c-19d76e7309b8
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-fce6-81bcb57420d9
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-990a-26f81a13a060
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-4144-208d53deb4c7
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-34b3-787926b8c3ad
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-6f06-4ee82363ce77
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-9e6a-db5f1b73af0b
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-b077-a1673b80d31c
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-5515-6bb37dac1207
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-b244-337f262970e4
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-ca6b-4843f84fe107
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-5f7a-1204d307eb86
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-2017-eaeaaa61bbcc
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-fcd6-38bd1dffcdf6
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-3541-a02d33dc12c9
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-42de-40b6bf12dd06
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-8871-99fb996d86aa
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-5795-f90401e6f050
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-e5b0-e4e63438d5aa
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-f21b-9f1fa4e9a340
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-7f9b-fc5182ae2139
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-c03d-61ac4f29165b
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-45b6-1e7e2ca06478
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-f70d-81776e9f6bb0
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-d276-a49c25012546
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-92c2-d3f254d7a67c
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-f490-abd03fe07cdd
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-3db9-d939ab9b7e2f
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-67c9-5d7ed132911f
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-cca9-014a7173f44c
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-d093-1d6c29f98f43
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-e36e-18f919f6a8a1
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-749a-b99cf2b591f2
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-3069-b78a245415ff
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-d378-92a3b21a83fd
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-5b97-006209be3888
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-922d-de2be2379db1
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-18ab-d828675807bf
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-ce96-6820e45faa6c
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-768f-ceddeeb63337
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-c21e-0c542c070a40
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-1e90-890e2539064d
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-172b-bed85cce12ca
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-7314-973e3f04a843
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-7c50-20f26ebb0da0
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-7162-6b5eb3075e37
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-f292-36f0a4d80e8a
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-4e23-9a8e10cadb7f
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-7bf2-2dd7be5ae8cb
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-53c5-e1a73530b3e4
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-f97a-ffae2ccb91eb
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-4856-243f2641f8ad
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-271a-a4b3c8a99fa3
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-0084-913eb8b88b94
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-0a16-6a94e98f4862
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-a1d5-b0b888c9cf59
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-6adf-edba745d542d
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-f1ce-8d1f475cdbd8
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-f16c-2b941b8e236b
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-c827-83b838a43ca5
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-b356-d39bbf41335f
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-2b8a-7258eec562ca
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-c1c2-aadcfaa81ade
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-13e4-d1eb28e2f582
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-fc9c-fac378f39cb8
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-0b67-13593d3898f0
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-94cf-17152f052c47
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-5213-b14bf03bbd9d
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-ca99-947516029dfd
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-6d27-1bd9bc873907
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-71b9-dbbf4e683fdc
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-555b-a078750a33d5
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-5f7a-40acc8f9945b
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-0edb-fa838651c0a8
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-f590-a06ed4f10e81
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-ae17-54526ee11bdd
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-a98a-2a33f517dbd7
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-46a4-55ebdf3bedf2
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-5982-97f24652935c
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-5e29-3d807f5e243b
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-8813-395357889cc0
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-1b8c-95edac2c7585
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-511b-8ff6b290fb9b
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-8808-f62b04be18c5
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-9160-cbc9c0a1677b
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-03c6-89205c6718a7
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-76ed-63cccf0b2636
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-76cc-71961c74261d
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-78db-758d61117f46
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-f556-3a76ef2e1ba4
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-1d08-894eedf7ed79
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-ec71-a528d6f2f272
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-295c-5764c6d41813
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-0558-e10f93c28fec
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-99f8-5095715dbf9d
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-4fa6-d4bdb30d0422
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-4029-f3e91f384ea3
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-54f5-d8781595e529
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-4a6b-f59e453a9f98
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-ebd2-aa4d5f71cc20
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258c-fb34-6542bf113821
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-d762-5f5047c8b039
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-6265-237e233987e1
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-cfb7-c70546eaf8f3
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-86cb-8ba33d269ab8
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-92b1-4a022cf0bbc7
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-1cff-2f6152642c47
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-a637-f17714615d00
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-376b-75ed8671469c
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-0ab1-1215a5169adb
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-07c7-87d119131c14
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-b7fc-7c06e53e5fdd
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-49b0-02607f357130
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-100c-ba37d06bc2bf
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-a485-6277c0b957a7
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-f811-7921952ad8eb
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-c8d2-ef2859a670fb
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-dd68-067d91118b95
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-8e3f-69941e3a8214
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-04f6-ebd79f07cf7b
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-0fa5-d27bb454beb2
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-20b5-486510091c7e
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-c1bd-bbe3804cd6d4
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-3b4d-c069d074c4bb
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-322f-2ccf4ed87ea3
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-b187-902abfe2e2d2
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-2a82-46d4683302b8
+00020000-5637-258e-6140-9bbc84dae0ef	00030000-5637-258d-2d33-f9b48da99035
 \.
 
 
 --
--- TOC entry 3126 (class 0 OID 24315837)
+-- TOC entry 3126 (class 0 OID 24472638)
 -- Dependencies: 216
 -- Data for Name: placilniinstrument; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2738,7 +2738,7 @@ COPY placilniinstrument (id, nacin_placina_id, ime) FROM stdin;
 
 
 --
--- TOC entry 3130 (class 0 OID 24315871)
+-- TOC entry 3130 (class 0 OID 24472672)
 -- Dependencies: 220
 -- Data for Name: podrocjesedenja; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -2748,529 +2748,529 @@ COPY podrocjesedenja (id, ime, kapaciteta, templateplaceholder, barva) FROM stdi
 
 
 --
--- TOC entry 3142 (class 0 OID 24316008)
+-- TOC entry 3142 (class 0 OID 24472809)
 -- Dependencies: 232
 -- Data for Name: pogodba; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY pogodba (id, oseba_id, popa_id, trr_id, sifra, zacetek, konec, jeavtorskepravice, placilonavajo, vrednostvaje, planiranostevilovaj, vrednostvaj, vrednostpredstave, procentodinkasa, jeprocentodinkasa, vrednostdopremiere, zaposlenvdrjz, samozaposlen, igralec, opis) FROM stdin;
-000b0000-5633-6c3d-e819-61a24963c78d	00090000-5633-6c3d-f31e-d745e1558e51	\N	\N	0001	\N	\N	f	f	10.00	3	10.00	30.00	0.00	f	10.00	t	f	t	Pogodba o sodelovanju
-000b0000-5633-6c3d-d8df-19202ae76df4	00090000-5633-6c3d-2b80-b1fd54a0f016	\N	\N	0002	\N	\N	f	t	11.00	10	11.00	31.00	0.00	f	110.00	f	t	t	Pogodba za vlogo Helena
-000b0000-5633-6c3d-6803-bf5dfa652411	00090000-5633-6c3d-a36b-48865c91e446	\N	\N	0003	\N	\N	f	f	12.00	4	12.00	0.00	0.00	f	12.00	f	t	f	Pogodba za lektoriranje
-000b0000-5633-6c3d-6285-2a10f5273ffa	00090000-5633-6c3d-fd31-b494da40fd86	\N	\N	0004	\N	\N	t	f	0.00	2	300.00	0.00	0.00	f	300.00	f	t	f	Pogodba za avtorske pravice
+000b0000-5637-258e-7e9c-f74bf553da56	00090000-5637-258e-1322-64b6318fe593	\N	\N	0001	\N	\N	f	f	10.00	3	10.00	30.00	0.00	f	10.00	t	f	t	Pogodba o sodelovanju
+000b0000-5637-258e-9a85-aa052dc5017d	00090000-5637-258e-7752-c3fa85f98991	\N	\N	0002	\N	\N	f	t	11.00	10	11.00	31.00	0.00	f	110.00	f	t	t	Pogodba za vlogo Helena
+000b0000-5637-258e-eba6-602b795a047c	00090000-5637-258e-f460-ec5788882ea5	\N	\N	0003	\N	\N	f	f	12.00	4	12.00	0.00	0.00	f	12.00	f	t	f	Pogodba za lektoriranje
+000b0000-5637-258e-763a-96fa7d01c185	00090000-5637-258e-a0fa-d9f6b12d0ba9	\N	\N	0004	\N	\N	t	f	0.00	2	300.00	0.00	0.00	f	300.00	f	t	f	Pogodba za avtorske pravice
 \.
 
 
 --
--- TOC entry 3098 (class 0 OID 24315535)
+-- TOC entry 3098 (class 0 OID 24472336)
 -- Dependencies: 188
 -- Data for Name: popa; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY popa (id, tipkli_id, drzava_id, sifra, stakli, naziv, naziv1, panoga, email, url, opomba, idddv, maticna, zavezanec, jeeu, datzav, datnzav, zamejstvo, nvo) FROM stdin;
-00080000-5633-6c3c-7c03-5984226b44ef	\N	00040000-5633-6c3a-d15a-81c1e66e1222	0988	AK	Juhuhu d.o.o.		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
-00080000-5633-6c3c-65e8-7a57cf47d658	\N	00040000-5633-6c3a-d15a-81c1e66e1222	0989	AK	Hopsasa d.o.o.		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	t
-00080000-5633-6c3c-2ccd-28643cab5b93	\N	00040000-5633-6c3a-d15a-81c1e66e1222	0987	AK	Gledališče Šrum d.o.o.		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
-00080000-5633-6c3d-27a1-ee9d6745ba06	\N	00040000-5633-6c3a-d15a-81c1e66e1222	0986	AK	Lutkovni Direndaj d.o.o.		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
-00080000-5633-6c3d-e665-905fc93e0482	\N	00040000-5633-6c3a-d15a-81c1e66e1222	0985	AK	Tatjana Stanič, Lektoriranje, s.p.		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
-00080000-5633-6c3d-88a5-bdff5eba4163	\N	00040000-5633-6c3a-b945-387eee38dc0b	0984	AK	Gledališče Lepote tvoje		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
-00080000-5633-6c3d-bdb4-71451bc54ec6	\N	00040000-5633-6c3a-4614-82b29651b7f3	0983	AK	Sunce naše		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
-00080000-5633-6c3d-1013-1528733676f8	\N	00040000-5633-6c3a-8fef-206fbd5e207d	0982	AK	Theater Amadeus		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
-00080000-5633-6c3d-a721-abaf2d55695b	\N	00040000-5633-6c3a-25e2-83d3bc9a6529	9999	AK	Fuchs		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
-00080000-5633-6c3e-3538-b47753dc711d	\N	00040000-5633-6c3a-d15a-81c1e66e1222	1001	AK	Gledališče Matica		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
+00080000-5637-258e-b26f-2e0ebf660f43	\N	00040000-5637-258c-1820-c0f8993afd54	0988	AK	Juhuhu d.o.o.		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
+00080000-5637-258e-9d0f-62429bb973b3	\N	00040000-5637-258c-1820-c0f8993afd54	0989	AK	Hopsasa d.o.o.		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	t
+00080000-5637-258e-f88c-1e7ed3bb3632	\N	00040000-5637-258c-1820-c0f8993afd54	0987	AK	Gledališče Šrum d.o.o.		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
+00080000-5637-258e-86b8-6f5d38b01deb	\N	00040000-5637-258c-1820-c0f8993afd54	0986	AK	Lutkovni Direndaj d.o.o.		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
+00080000-5637-258e-1f1f-56df19cf20e3	\N	00040000-5637-258c-1820-c0f8993afd54	0985	AK	Tatjana Stanič, Lektoriranje, s.p.		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
+00080000-5637-258e-79f0-00d9f55256dc	\N	00040000-5637-258c-c67a-9998ae0d91ea	0984	AK	Gledališče Lepote tvoje		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
+00080000-5637-258e-ffd7-02f69914d368	\N	00040000-5637-258c-3a00-7f2b00a631fe	0983	AK	Sunce naše		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
+00080000-5637-258e-66d2-1788078e3562	\N	00040000-5637-258c-15bb-14d898b3a148	0982	AK	Theater Amadeus		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
+00080000-5637-258e-9973-3987058d8337	\N	00040000-5637-258c-fbb2-0232f912ff00	9999	AK	Fuchs		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
+00080000-5637-2590-ed21-c4cf4350e921	\N	00040000-5637-258c-1820-c0f8993afd54	1001	AK	Gledališče Matica		\N	\N		\N	\N	\N	\N	\N	\N	\N	f	f
 \.
 
 
 --
--- TOC entry 3101 (class 0 OID 24315580)
+-- TOC entry 3101 (class 0 OID 24472381)
 -- Dependencies: 191
 -- Data for Name: posta; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY posta (id, sifra, naziv) FROM stdin;
-00050000-5633-6c3a-cc20-e15db217bf03	8341	Adlešiči
-00050000-5633-6c3a-c281-6a43e62e9524	5270	Ajdovščina
-00050000-5633-6c3a-024a-106d4ef37076	6280	Ankaran/Ancarano
-00050000-5633-6c3a-5589-23f2a3df3b24	9253	Apače
-00050000-5633-6c3a-02c1-538de5d53a2a	8253	Artiče
-00050000-5633-6c3a-e0dd-bded5f7cef43	4275	Begunje na Gorenjskem
-00050000-5633-6c3a-1b56-56a3178b55ed	1382	Begunje pri Cerknici
-00050000-5633-6c3a-c4d9-31a810b182a5	9231	Beltinci
-00050000-5633-6c3a-a0d8-b32b909722b3	2234	Benedikt
-00050000-5633-6c3a-015d-840c3929a3ff	2345	Bistrica ob Dravi
-00050000-5633-6c3a-731f-6151f12237b4	3256	Bistrica ob Sotli
-00050000-5633-6c3a-3047-98c2bdf35e05	8259	Bizeljsko
-00050000-5633-6c3a-8a36-45ce416eaf8e	1223	Blagovica
-00050000-5633-6c3a-e4cd-0e851795b263	8283	Blanca
-00050000-5633-6c3a-e4fa-8a4593657153	4260	Bled
-00050000-5633-6c3a-f256-a75211260665	4273	Blejska Dobrava
-00050000-5633-6c3a-7207-34619478fe31	9265	Bodonci
-00050000-5633-6c3a-86f8-41fb5e2f6141	9222	Bogojina
-00050000-5633-6c3a-09f1-52fb65950373	4263	Bohinjska Bela
-00050000-5633-6c3a-8a0a-7606b79cf5bb	4264	Bohinjska Bistrica
-00050000-5633-6c3a-bcb8-3044c53da7d6	4265	Bohinjsko jezero
-00050000-5633-6c3a-ccc4-b61adf043f8b	1353	Borovnica
-00050000-5633-6c3a-428e-f87ad61288f6	8294	Boštanj
-00050000-5633-6c3a-fe34-8b1eb17445bc	5230	Bovec
-00050000-5633-6c3a-b5da-623a78964a9c	5295	Branik
-00050000-5633-6c3a-1238-558896022969	3314	Braslovče
-00050000-5633-6c3a-be32-c76d784a5de8	5223	Breginj
-00050000-5633-6c3a-e074-7b8ac60e3196	8280	Brestanica
-00050000-5633-6c3a-543d-52ae34c603d1	2354	Bresternica
-00050000-5633-6c3a-4b60-5451c37bd401	4243	Brezje
-00050000-5633-6c3a-d68f-5c65c1ed8b18	1351	Brezovica pri Ljubljani
-00050000-5633-6c3a-f1e9-5bbddac802e5	8250	Brežice
-00050000-5633-6c3a-4156-62c5916cd750	4210	Brnik - Aerodrom
-00050000-5633-6c3a-75ca-78916171cee3	8321	Brusnice
-00050000-5633-6c3a-3642-e916f20a89c7	3255	Buče
-00050000-5633-6c3a-840e-f9a5ecdbf332	8276	Bučka 
-00050000-5633-6c3a-4aa0-238c3818acf7	9261	Cankova
-00050000-5633-6c3a-b3b5-99791419739e	3000	Celje 
-00050000-5633-6c3a-5863-6d6ed18e4fa7	3001	Celje - poštni predali
-00050000-5633-6c3a-e96f-733387f972a8	4207	Cerklje na Gorenjskem
-00050000-5633-6c3a-c6f1-cd2e87443e87	8263	Cerklje ob Krki
-00050000-5633-6c3a-46de-1becdd1b6c8d	1380	Cerknica
-00050000-5633-6c3a-f71d-cb52f6c7f80d	5282	Cerkno
-00050000-5633-6c3a-e2ed-db832be6595e	2236	Cerkvenjak
-00050000-5633-6c3a-cb22-96c489a1002f	2215	Ceršak
-00050000-5633-6c3a-9a97-b438f1cfce61	2326	Cirkovce
-00050000-5633-6c3a-dfc6-a140429ee8bd	2282	Cirkulane
-00050000-5633-6c3a-aa84-96a5479a9bcb	5273	Col
-00050000-5633-6c3a-bc01-14f6f4a9d9ea	8251	Čatež ob Savi
-00050000-5633-6c3a-4139-b83f05382892	1413	Čemšenik
-00050000-5633-6c3a-9442-8e1b7e2f12ca	5253	Čepovan
-00050000-5633-6c3a-6d6e-971a25e5577c	9232	Črenšovci
-00050000-5633-6c3a-38e8-68dc58171485	2393	Črna na Koroškem
-00050000-5633-6c3a-a805-e4285e8c5857	6275	Črni Kal
-00050000-5633-6c3a-fcf7-1ff417d85739	5274	Črni Vrh nad Idrijo
-00050000-5633-6c3a-c455-d3baee8cd1b4	5262	Črniče
-00050000-5633-6c3a-e618-be0fc81d8b0d	8340	Črnomelj
-00050000-5633-6c3a-5a53-a01997ea220a	6271	Dekani
-00050000-5633-6c3a-588d-58b789687206	5210	Deskle
-00050000-5633-6c3a-73da-29d1510f45fb	2253	Destrnik
-00050000-5633-6c3a-168b-64bb8686ebdf	6215	Divača
-00050000-5633-6c3a-baec-f3bc7b94e070	1233	Dob
-00050000-5633-6c3a-9848-7f5f9bcf73f2	3224	Dobje pri Planini
-00050000-5633-6c3a-d3f4-e67646d50f31	8257	Dobova
-00050000-5633-6c3a-a2e4-eac5767dc5aa	1423	Dobovec
-00050000-5633-6c3a-31ca-412b4e13d411	5263	Dobravlje
-00050000-5633-6c3a-b82b-c7fce621b03c	3204	Dobrna
-00050000-5633-6c3a-5313-cc4dfe8b0cfd	8211	Dobrnič
-00050000-5633-6c3a-ced7-5d71f2312965	1356	Dobrova
-00050000-5633-6c3a-f99f-daf26c9f078c	9223	Dobrovnik/Dobronak 
-00050000-5633-6c3a-c2d4-4f2a6fe2134e	5212	Dobrovo v Brdih
-00050000-5633-6c3a-bc01-7cf9662d7d07	1431	Dol pri Hrastniku
-00050000-5633-6c3a-47f9-f7fea15b165b	1262	Dol pri Ljubljani
-00050000-5633-6c3a-58a6-ae1b9432ad0a	1273	Dole pri Litiji
-00050000-5633-6c3a-326e-621b3b97ad32	1331	Dolenja vas
-00050000-5633-6c3a-2b35-df2201845860	8350	Dolenjske Toplice
-00050000-5633-6c3a-85bf-4701b5b30f07	1230	Domžale
-00050000-5633-6c3a-dd5d-db5003ce462e	2252	Dornava
-00050000-5633-6c3a-4f5e-92a30306fa2e	5294	Dornberk
-00050000-5633-6c3a-01ff-6c190a2bf07d	1319	Draga
-00050000-5633-6c3a-0888-e451ae31aa52	8343	Dragatuš
-00050000-5633-6c3a-ad8c-4e6fd14cfff0	3222	Dramlje
-00050000-5633-6c3a-eec5-a483b9f3ec39	2370	Dravograd
-00050000-5633-6c3a-9ed4-4fda248e80b9	4203	Duplje
-00050000-5633-6c3a-0f9b-ddb2fb6756ee	6221	Dutovlje
-00050000-5633-6c3a-0415-d7b903bf63c3	8361	Dvor
-00050000-5633-6c3a-143b-3c775881d341	2343	Fala
-00050000-5633-6c3a-4d3c-11b0ffb18a91	9208	Fokovci
-00050000-5633-6c3a-a8e3-f942741f0604	2313	Fram
-00050000-5633-6c3a-7697-c3457fcd3b45	3213	Frankolovo
-00050000-5633-6c3a-15d8-db800a56f647	1274	Gabrovka
-00050000-5633-6c3a-016b-ab2b229bc219	8254	Globoko
-00050000-5633-6c3a-ef0a-824b27be587c	5275	Godovič
-00050000-5633-6c3a-87f6-e79388ce533d	4204	Golnik
-00050000-5633-6c3a-27b3-b06363029480	3303	Gomilsko
-00050000-5633-6c3a-1a82-49812e9e8d4c	4224	Gorenja vas
-00050000-5633-6c3a-9a98-27a01656e32a	3263	Gorica pri Slivnici
-00050000-5633-6c3a-151b-1f77ec5505c2	2272	Gorišnica
-00050000-5633-6c3a-13c9-6afe4c02e59a	9250	Gornja Radgona
-00050000-5633-6c3a-db2c-ebfa86a19e1c	3342	Gornji Grad
-00050000-5633-6c3a-0230-9cc4016df60c	4282	Gozd Martuljek
-00050000-5633-6c3a-105d-5193d23020af	6272	Gračišče
-00050000-5633-6c3a-71a1-97c30dbef685	9264	Grad
-00050000-5633-6c3a-b78e-2120e8355bc7	8332	Gradac
-00050000-5633-6c3a-cc84-0877e56ed914	1384	Grahovo
-00050000-5633-6c3a-91bd-50b02731952b	5242	Grahovo ob Bači
-00050000-5633-6c3a-eee2-1ababaa5fa66	5251	Grgar
-00050000-5633-6c3a-fc07-214bd89e8f6e	3302	Griže
-00050000-5633-6c3a-1451-daf7d764a4b1	3231	Grobelno
-00050000-5633-6c3a-1ce6-f677b47232b5	1290	Grosuplje
-00050000-5633-6c3a-d965-4ce31e8d3edd	2288	Hajdina
-00050000-5633-6c3a-61b9-b12e9ff8f519	8362	Hinje
-00050000-5633-6c3a-982c-567823a850d1	2311	Hoče
-00050000-5633-6c3a-30cf-d1dbe5af1f3a	9205	Hodoš/Hodos
-00050000-5633-6c3a-44e5-fa171826b79e	1354	Horjul
-00050000-5633-6c3a-7205-5591831c4aab	1372	Hotedršica
-00050000-5633-6c3a-5c35-003dcfa89200	1430	Hrastnik
-00050000-5633-6c3a-266a-923d73b21bd2	6225	Hruševje
-00050000-5633-6c3a-485a-6ed521512a2c	4276	Hrušica
-00050000-5633-6c3a-b630-0a3a8872ae9c	5280	Idrija
-00050000-5633-6c3a-9172-ae45f9a51e6f	1292	Ig
-00050000-5633-6c3a-568d-9215c02d0d52	6250	Ilirska Bistrica
-00050000-5633-6c3a-e53d-dca6a5f2f20f	6251	Ilirska Bistrica-Trnovo
-00050000-5633-6c3a-0aa6-be5f42b537ae	1295	Ivančna Gorica
-00050000-5633-6c3a-ec7d-de5bd32683e0	2259	Ivanjkovci
-00050000-5633-6c3a-6402-6d19a5a1db9b	1411	Izlake
-00050000-5633-6c3a-272f-b45699ded6ea	6310	Izola/Isola
-00050000-5633-6c3a-3218-0049aa02e07d	2222	Jakobski Dol
-00050000-5633-6c3a-0ac7-b2d33882cc04	2221	Jarenina
-00050000-5633-6c3a-9144-bac5a59553c4	6254	Jelšane
-00050000-5633-6c3a-08a7-8d9667566454	4270	Jesenice
-00050000-5633-6c3a-3d7c-47ff635213fa	8261	Jesenice na Dolenjskem
-00050000-5633-6c3a-323c-eb1b4e29b5ea	3273	Jurklošter
-00050000-5633-6c3a-1e19-4b3bc12cd619	2223	Jurovski Dol
-00050000-5633-6c3a-ee61-94157bada93a	2256	Juršinci
-00050000-5633-6c3a-ea91-4e6add6eb9e8	5214	Kal nad Kanalom
-00050000-5633-6c3a-d0a1-b3f8530e3e92	3233	Kalobje
-00050000-5633-6c3a-bb75-5691229b2cb7	4246	Kamna Gorica
-00050000-5633-6c3a-0b6b-0c51909c1042	2351	Kamnica
-00050000-5633-6c3a-670e-0496183fd8bc	1241	Kamnik
-00050000-5633-6c3a-dc55-c4cba50898df	5213	Kanal
-00050000-5633-6c3a-e213-756313dbf733	8258	Kapele
-00050000-5633-6c3a-add8-91bbfcdf39f0	2362	Kapla
-00050000-5633-6c3a-813f-0879c467f51b	2325	Kidričevo
-00050000-5633-6c3a-9908-96c9ac67c6ac	1412	Kisovec
-00050000-5633-6c3a-835b-dc8532a8aac6	6253	Knežak
-00050000-5633-6c3a-4c5d-608037140485	5222	Kobarid
-00050000-5633-6c3a-a276-c474aa5ff629	9227	Kobilje
-00050000-5633-6c3a-08bd-7cc95dddddfa	1330	Kočevje
-00050000-5633-6c3a-ac04-4bea917647a1	1338	Kočevska Reka
-00050000-5633-6c3a-cacc-d570636a50ea	2276	Kog
-00050000-5633-6c3a-c082-ac21f004a299	5211	Kojsko
-00050000-5633-6c3a-2122-a1ea6224728b	6223	Komen
-00050000-5633-6c3a-57d0-0b7edece770b	1218	Komenda
-00050000-5633-6c3a-1cb6-920e13db0d50	6000	Koper/Capodistria 
-00050000-5633-6c3a-8cc0-01254f319cf8	6001	Koper/Capodistria - poštni predali
-00050000-5633-6c3a-9f4d-e7a2b63e7d51	8282	Koprivnica
-00050000-5633-6c3a-2b75-40f89230d60f	5296	Kostanjevica na Krasu
-00050000-5633-6c3a-498b-c40d7897bc16	8311	Kostanjevica na Krki
-00050000-5633-6c3a-8249-e55c9e3cf68c	1336	Kostel
-00050000-5633-6c3a-5c81-7174f60078c5	6256	Košana
-00050000-5633-6c3a-ab8b-25cf19c5dee4	2394	Kotlje
-00050000-5633-6c3a-426c-b00f6c398c36	6240	Kozina
-00050000-5633-6c3a-7cad-7bc2b1487ba5	3260	Kozje
-00050000-5633-6c3a-d547-be616f82302d	4000	Kranj 
-00050000-5633-6c3a-435b-9ed722a9796a	4001	Kranj - poštni predali
-00050000-5633-6c3a-386c-bf888f4a69f7	4280	Kranjska Gora
-00050000-5633-6c3a-9158-f89c21f070b3	1281	Kresnice
-00050000-5633-6c3a-3799-c4987fbfc9d0	4294	Križe
-00050000-5633-6c3a-8732-f4e478e37a80	9206	Križevci
-00050000-5633-6c3a-2c6a-734365358eb7	9242	Križevci pri Ljutomeru
-00050000-5633-6c3a-9e21-7df954abd4da	1301	Krka
-00050000-5633-6c3a-0a67-fb8f748e4aeb	8296	Krmelj
-00050000-5633-6c3a-87a4-cfe559b82e5a	4245	Kropa
-00050000-5633-6c3a-eb71-008f9b8cadab	8262	Krška vas
-00050000-5633-6c3a-1e6b-0dca5122f063	8270	Krško
-00050000-5633-6c3a-8bb2-270d97bbd600	9263	Kuzma
-00050000-5633-6c3a-3ec1-b332666c220b	2318	Laporje
-00050000-5633-6c3a-1e7c-e7ba23f01c9f	3270	Laško
-00050000-5633-6c3a-6f19-313b6e53ef2f	1219	Laze v Tuhinju
-00050000-5633-6c3a-0242-6eaaccaa8efa	2230	Lenart v Slovenskih goricah
-00050000-5633-6c3a-03a2-b6cd4bb8b642	9220	Lendava/Lendva
-00050000-5633-6c3a-a828-a678ad28bd23	4248	Lesce
-00050000-5633-6c3a-caff-ca9b761bf761	3261	Lesično
-00050000-5633-6c3a-b91b-5ca352f21df0	8273	Leskovec pri Krškem
-00050000-5633-6c3a-49d7-82ee1e0f81ca	2372	Libeliče
-00050000-5633-6c3a-16a0-3d2650a5a49a	2341	Limbuš
-00050000-5633-6c3a-ba88-01589293f72e	1270	Litija
-00050000-5633-6c3a-3dd1-3d07170fa9df	3202	Ljubečna
-00050000-5633-6c3a-7762-d39d352abbc5	1000	Ljubljana 
-00050000-5633-6c3a-7841-f0416e02bc82	1001	Ljubljana - poštni predali
-00050000-5633-6c3a-7600-75ecdafd4836	1231	Ljubljana - Črnuče
-00050000-5633-6c3a-411c-a912a30c508f	1261	Ljubljana - Dobrunje
-00050000-5633-6c3a-a442-8f35673c28fd	1260	Ljubljana - Polje
-00050000-5633-6c3a-b7bb-eb7755f8f4b5	1210	Ljubljana - Šentvid
-00050000-5633-6c3a-bb35-e1906c411224	1211	Ljubljana - Šmartno
-00050000-5633-6c3a-6099-125194418dd0	3333	Ljubno ob Savinji
-00050000-5633-6c3a-98fd-4f5ca6221793	9240	Ljutomer
-00050000-5633-6c3a-02c1-451a844e3c4a	3215	Loče
-00050000-5633-6c3a-dca3-6ada179500de	5231	Log pod Mangartom
-00050000-5633-6c3a-8334-083ae16234ec	1358	Log pri Brezovici
-00050000-5633-6c3a-5237-db59a817d4aa	1370	Logatec
-00050000-5633-6c3a-a5d4-1fa5fc9664c4	1371	Logatec
-00050000-5633-6c3a-3c18-0148ce3f1180	1434	Loka pri Zidanem Mostu
-00050000-5633-6c3a-a1fe-aaf2d8720df0	3223	Loka pri Žusmu
-00050000-5633-6c3a-1d4b-6a93d48a3d42	6219	Lokev
-00050000-5633-6c3a-90de-3de83b23471f	1318	Loški Potok
-00050000-5633-6c3a-f128-79384f23a3e5	2324	Lovrenc na Dravskem polju
-00050000-5633-6c3a-d832-30b184a047b8	2344	Lovrenc na Pohorju
-00050000-5633-6c3a-4851-c91a1440d2e5	3334	Luče
-00050000-5633-6c3a-ee26-4239cf02e62a	1225	Lukovica
-00050000-5633-6c3a-5931-98a2c5a16878	9202	Mačkovci
-00050000-5633-6c3a-ba6f-2463f958cea1	2322	Majšperk
-00050000-5633-6c3a-201a-6816cfb31b49	2321	Makole
-00050000-5633-6c3a-506a-ba182d756eaf	9243	Mala Nedelja
-00050000-5633-6c3a-ef5a-93e7ef1ee3e3	2229	Malečnik
-00050000-5633-6c3a-2733-70a867b49be3	6273	Marezige
-00050000-5633-6c3a-3ab9-17615cf1720e	2000	Maribor 
-00050000-5633-6c3a-7b79-fcb5511807bb	2001	Maribor - poštni predali
-00050000-5633-6c3a-cf29-5894fcbade4c	2206	Marjeta na Dravskem polju
-00050000-5633-6c3a-f7e7-e8f609005c03	2281	Markovci
-00050000-5633-6c3a-9435-98597858bd03	9221	Martjanci
-00050000-5633-6c3a-f41f-009a236affbb	6242	Materija
-00050000-5633-6c3a-e71f-d88b312cbe2f	4211	Mavčiče
-00050000-5633-6c3a-bc49-85890f4bb167	1215	Medvode
-00050000-5633-6c3a-f5b4-924f3b316f75	1234	Mengeš
-00050000-5633-6c3a-ea2e-ecf309b02a36	8330	Metlika
-00050000-5633-6c3a-c36f-21bb841ca4f6	2392	Mežica
-00050000-5633-6c3a-610f-29f9676132a8	2204	Miklavž na Dravskem polju
-00050000-5633-6c3a-0be9-9c4fbd8617dd	2275	Miklavž pri Ormožu
-00050000-5633-6c3a-7e3f-887a47e323f5	5291	Miren
-00050000-5633-6c3a-2ef6-3f3713bf84ca	8233	Mirna
-00050000-5633-6c3a-20b9-4b9d267e36e3	8216	Mirna Peč
-00050000-5633-6c3a-23a1-ee932982c265	2382	Mislinja
-00050000-5633-6c3a-9383-9b2be5dfdab2	4281	Mojstrana
-00050000-5633-6c3a-742f-e0afd21c4e6a	8230	Mokronog
-00050000-5633-6c3a-858a-7cd21b89b9c6	1251	Moravče
-00050000-5633-6c3a-b751-70eda106ed85	9226	Moravske Toplice
-00050000-5633-6c3a-a50f-de7dc954b4fa	5216	Most na Soči
-00050000-5633-6c3a-60d8-7a3baec74736	1221	Motnik
-00050000-5633-6c3a-06a4-7bead0795ff2	3330	Mozirje
-00050000-5633-6c3a-59b3-80bf5ecbc079	9000	Murska Sobota 
-00050000-5633-6c3a-d4a8-9a32f90acde6	9001	Murska Sobota - poštni predali
-00050000-5633-6c3a-1a9a-99f89330d916	2366	Muta
-00050000-5633-6c3a-f9fe-6ddb1933d322	4202	Naklo
-00050000-5633-6c3a-a361-2dd705ea548b	3331	Nazarje
-00050000-5633-6c3a-4000-ce4b4548298a	1357	Notranje Gorice
-00050000-5633-6c3a-fafd-80ccb39b37db	3203	Nova Cerkev
-00050000-5633-6c3a-9b91-4163a420a488	5000	Nova Gorica 
-00050000-5633-6c3a-9c64-a37dbf43b486	5001	Nova Gorica - poštni predali
-00050000-5633-6c3a-b18d-3d28c83bd5d7	1385	Nova vas
-00050000-5633-6c3a-d39c-2ae511506010	8000	Novo mesto
-00050000-5633-6c3a-05f6-08cd51fb1c68	8001	Novo mesto - poštni predali
-00050000-5633-6c3a-77d9-150bd747646f	6243	Obrov
-00050000-5633-6c3a-1b5a-44ade12ed681	9233	Odranci
-00050000-5633-6c3a-980f-741fd3e054b0	2317	Oplotnica
-00050000-5633-6c3a-9dbe-01c8e4a95329	2312	Orehova vas
-00050000-5633-6c3a-fc3f-193d5865d2cc	2270	Ormož
-00050000-5633-6c3a-e63e-f886982b1725	1316	Ortnek
-00050000-5633-6c3a-d41d-baaf40274940	1337	Osilnica
-00050000-5633-6c3a-52a8-b32b79794c39	8222	Otočec
-00050000-5633-6c3a-7353-39ed3aba0100	2361	Ožbalt
-00050000-5633-6c3a-9c1f-e10d9201c7d4	2231	Pernica
-00050000-5633-6c3a-34a5-2b1f99465111	2211	Pesnica pri Mariboru
-00050000-5633-6c3a-5031-f4026b390e6f	9203	Petrovci
-00050000-5633-6c3a-7d22-e59c89624a6c	3301	Petrovče
-00050000-5633-6c3a-7007-2ed93a443149	6330	Piran/Pirano
-00050000-5633-6c3a-3bde-6b5705c507ea	8255	Pišece
-00050000-5633-6c3a-a5d3-21da163dae1a	6257	Pivka
-00050000-5633-6c3a-f265-ccc1a9b0c886	6232	Planina
-00050000-5633-6c3a-aee4-598440992f4f	3225	Planina pri Sevnici
-00050000-5633-6c3a-4d12-8edea64135bd	6276	Pobegi
-00050000-5633-6c3a-bd82-340186c69a8d	8312	Podbočje
-00050000-5633-6c3a-fa93-ddbd87b196b1	5243	Podbrdo
-00050000-5633-6c3a-85e2-ca84a4da76aa	3254	Podčetrtek
-00050000-5633-6c3a-805e-e1cb7d8dc680	2273	Podgorci
-00050000-5633-6c3a-3e21-770d45ed86cb	6216	Podgorje
-00050000-5633-6c3a-50fd-08be3f7104f9	2381	Podgorje pri Slovenj Gradcu
-00050000-5633-6c3a-72c5-eba0dd70e8de	6244	Podgrad
-00050000-5633-6c3a-9445-c683881f0ef2	1414	Podkum
-00050000-5633-6c3a-bb9b-c7a02dd7d619	2286	Podlehnik
-00050000-5633-6c3a-42b4-b19c68dda993	5272	Podnanos
-00050000-5633-6c3a-cb1b-f55a4593a3bb	4244	Podnart
-00050000-5633-6c3a-0028-cd4f26fe4e37	3241	Podplat
-00050000-5633-6c3a-b03b-c10799a7795b	3257	Podsreda
-00050000-5633-6c3a-41a5-85871768f26e	2363	Podvelka
-00050000-5633-6c3a-dbdb-7d8e6af4d416	2208	Pohorje
-00050000-5633-6c3a-17f4-13c2e1435da3	2257	Polenšak
-00050000-5633-6c3a-6fb9-4b4df93adc03	1355	Polhov Gradec
-00050000-5633-6c3a-7387-482803c261c8	4223	Poljane nad Škofjo Loko
-00050000-5633-6c3a-f72a-3de4f2706635	2319	Poljčane
-00050000-5633-6c3a-5aac-c3866edbc0a5	1272	Polšnik
-00050000-5633-6c3a-e2b1-8b6c8132cf29	3313	Polzela
-00050000-5633-6c3a-9484-1f31ad48ace7	3232	Ponikva
-00050000-5633-6c3a-2ed2-4d42c9e8aa93	6320	Portorož/Portorose
-00050000-5633-6c3a-4fc6-5efe1dc23d9d	6230	Postojna
-00050000-5633-6c3a-ef4d-0295d47fa454	2331	Pragersko
-00050000-5633-6c3a-1896-8f16434b31ca	3312	Prebold
-00050000-5633-6c3a-e9ab-465cfd2ce671	4205	Preddvor
-00050000-5633-6c3a-31b3-5e0c946a8825	6255	Prem
-00050000-5633-6c3a-dbf4-6fb6074ccdd1	1352	Preserje
-00050000-5633-6c3a-16d6-c258a84a3ebb	6258	Prestranek
-00050000-5633-6c3a-970f-161d80a70d4b	2391	Prevalje
-00050000-5633-6c3a-b7aa-41302baf60ce	3262	Prevorje
-00050000-5633-6c3a-c64d-fec1a1ce2a3d	1276	Primskovo 
-00050000-5633-6c3a-954e-ceadd44b3a2b	3253	Pristava pri Mestinju
-00050000-5633-6c3a-0b62-bfb34d132ca1	9207	Prosenjakovci/Partosfalva
-00050000-5633-6c3a-e155-795b96ee52e5	5297	Prvačina
-00050000-5633-6c3a-51d7-92e8d97a31b1	2250	Ptuj
-00050000-5633-6c3a-7fe9-ae690919e419	2323	Ptujska Gora
-00050000-5633-6c3a-3413-89fdd35279b9	9201	Puconci
-00050000-5633-6c3a-a651-6ce3ec758d35	2327	Rače
-00050000-5633-6c3a-309c-8d1610718038	1433	Radeče
-00050000-5633-6c3a-1cfc-f6362c2d691a	9252	Radenci
-00050000-5633-6c3a-110a-c6ddb19bb7b3	2360	Radlje ob Dravi
-00050000-5633-6c3a-dbeb-de8fcb437231	1235	Radomlje
-00050000-5633-6c3a-ab20-1c27adcb7c26	4240	Radovljica
-00050000-5633-6c3a-c087-ea8247f702cf	8274	Raka
-00050000-5633-6c3a-27a5-c72934d54a00	1381	Rakek
-00050000-5633-6c3a-ad5c-3c488bf8272e	4283	Rateče - Planica
-00050000-5633-6c3a-74d1-642281eeda31	2390	Ravne na Koroškem
-00050000-5633-6c3a-d002-98aea840f0a9	9246	Razkrižje
-00050000-5633-6c3a-54d6-272974d151ec	3332	Rečica ob Savinji
-00050000-5633-6c3a-d96c-e6a6fe2bcfa0	5292	Renče
-00050000-5633-6c3a-82f1-3b4dfa08efac	1310	Ribnica
-00050000-5633-6c3a-4760-28ec6f3d7429	2364	Ribnica na Pohorju
-00050000-5633-6c3a-76a8-f7801eb8407a	3272	Rimske Toplice
-00050000-5633-6c3a-6818-451ab1996ca3	1314	Rob
-00050000-5633-6c3a-2f96-c2ce8e750c51	5215	Ročinj
-00050000-5633-6c3a-c048-9b2c2f6e1a39	3250	Rogaška Slatina
-00050000-5633-6c3a-512c-a291e14903f2	9262	Rogašovci
-00050000-5633-6c3a-1272-f947651626b6	3252	Rogatec
-00050000-5633-6c3a-5e2c-81a536bbf793	1373	Rovte
-00050000-5633-6c3a-060b-2cff5742ff0c	2342	Ruše
-00050000-5633-6c3a-9f4c-2e0e912aeef5	1282	Sava
-00050000-5633-6c3a-28cb-c4dfea95aede	6333	Sečovlje/Sicciole
-00050000-5633-6c3a-7c04-7d9619e50297	4227	Selca
-00050000-5633-6c3a-0ed9-dbd123ca4389	2352	Selnica ob Dravi
-00050000-5633-6c3a-9cb4-854c5e9aa7fa	8333	Semič
-00050000-5633-6c3a-f44f-3beb5ce9a749	8281	Senovo
-00050000-5633-6c3a-ce6b-b706fad32d81	6224	Senožeče
-00050000-5633-6c3a-64f0-1fa1162f8914	8290	Sevnica
-00050000-5633-6c3a-404e-adb807ecb69f	6210	Sežana
-00050000-5633-6c3a-4339-c63798d1eb6a	2214	Sladki Vrh
-00050000-5633-6c3a-13e8-f7596ae22f4b	5283	Slap ob Idrijci
-00050000-5633-6c3a-3462-33e17e9c47da	2380	Slovenj Gradec
-00050000-5633-6c3a-66af-0c5b8df6eb0b	2310	Slovenska Bistrica
-00050000-5633-6c3a-21ef-49666af67f50	3210	Slovenske Konjice
-00050000-5633-6c3a-4b74-8c2d57f3734b	1216	Smlednik
-00050000-5633-6c3a-7a69-92a8fb19569d	5232	Soča
-00050000-5633-6c3a-d5de-f94767acc19c	1317	Sodražica
-00050000-5633-6c3a-4c7a-bef332015764	3335	Solčava
-00050000-5633-6c3a-6990-26a14d892a50	5250	Solkan
-00050000-5633-6c3a-a53c-1067584ab13a	4229	Sorica
-00050000-5633-6c3a-b783-ad010e0910d4	4225	Sovodenj
-00050000-5633-6c3a-e367-bc6f6c9212ca	5281	Spodnja Idrija
-00050000-5633-6c3a-1a07-d09795a1d0f0	2241	Spodnji Duplek
-00050000-5633-6c3a-2df8-0afaca73c573	9245	Spodnji Ivanjci
-00050000-5633-6c3a-8bda-f0933ba28a52	2277	Središče ob Dravi
-00050000-5633-6c3a-8000-5b59f88befcb	4267	Srednja vas v Bohinju
-00050000-5633-6c3a-2433-68ab08711f4a	8256	Sromlje 
-00050000-5633-6c3a-f670-31e4ad18664d	5224	Srpenica
-00050000-5633-6c3a-bd00-010d04c92f81	1242	Stahovica
-00050000-5633-6c3a-e819-ccb56fc2d4cc	1332	Stara Cerkev
-00050000-5633-6c3a-9d7b-9ca7a78c8ab7	8342	Stari trg ob Kolpi
-00050000-5633-6c3a-20ff-6a61c5081f89	1386	Stari trg pri Ložu
-00050000-5633-6c3a-90d3-a0d17777f58e	2205	Starše
-00050000-5633-6c3a-fb04-8263215cec27	2289	Stoperce
-00050000-5633-6c3a-0811-cd51ef0c393e	8322	Stopiče
-00050000-5633-6c3a-f502-4107e939cff3	3206	Stranice
-00050000-5633-6c3a-a957-51b53ac17c0f	8351	Straža
-00050000-5633-6c3a-198e-58310c8b836f	1313	Struge
-00050000-5633-6c3a-22b1-26d51db0c025	8293	Studenec
-00050000-5633-6c3a-b096-44c37efb3c64	8331	Suhor
-00050000-5633-6c3a-2e95-4be6c053d973	2233	Sv. Ana v Slovenskih goricah
-00050000-5633-6c3a-4263-495792d6b0f3	2235	Sv. Trojica v Slovenskih goricah
-00050000-5633-6c3a-a11e-847636df9f71	2353	Sveti Duh na Ostrem Vrhu
-00050000-5633-6c3a-0ea5-79c0432a54e0	9244	Sveti Jurij ob Ščavnici
-00050000-5633-6c3a-7c47-bd7550b6f653	3264	Sveti Štefan
-00050000-5633-6c3a-5109-aea7685ab6cf	2258	Sveti Tomaž
-00050000-5633-6c3a-e839-79015dae8ef6	9204	Šalovci
-00050000-5633-6c3a-3fcd-77ebc2321336	5261	Šempas
-00050000-5633-6c3a-f56a-2bf8d841c9db	5290	Šempeter pri Gorici
-00050000-5633-6c3a-103a-9d98f3f2c64a	3311	Šempeter v Savinjski dolini
-00050000-5633-6c3a-87c0-ed0f6c79935c	4208	Šenčur
-00050000-5633-6c3a-a933-bc9fb24dadaa	2212	Šentilj v Slovenskih goricah
-00050000-5633-6c3a-5414-d9bc0be64027	8297	Šentjanž
-00050000-5633-6c3a-15b6-673c6bff7faf	2373	Šentjanž pri Dravogradu
-00050000-5633-6c3a-1e5b-8a10a67f8cb2	8310	Šentjernej
-00050000-5633-6c3a-7059-340f0f63e76c	3230	Šentjur
-00050000-5633-6c3a-724e-6ee676342d62	3271	Šentrupert
-00050000-5633-6c3a-1506-e1a9fd9894c3	8232	Šentrupert
-00050000-5633-6c3a-3e83-057307900cdd	1296	Šentvid pri Stični
-00050000-5633-6c3a-0e1d-5616655e8432	8275	Škocjan
-00050000-5633-6c3a-a2dc-0b3c219179c0	6281	Škofije
-00050000-5633-6c3a-2232-db158d13f1d8	4220	Škofja Loka
-00050000-5633-6c3a-699d-571e2b7113bc	3211	Škofja vas
-00050000-5633-6c3a-a8e9-d8829f04e1ba	1291	Škofljica
-00050000-5633-6c3a-22df-f52a924ab4c7	6274	Šmarje
-00050000-5633-6c3a-1944-8e5590f898dc	1293	Šmarje - Sap
-00050000-5633-6c3a-fecf-1eec74215083	3240	Šmarje pri Jelšah
-00050000-5633-6c3a-ab0e-4420c52400df	8220	Šmarješke Toplice
-00050000-5633-6c3a-734e-02e97c3cdcd9	2315	Šmartno na Pohorju
-00050000-5633-6c3a-c96d-260eb519d33d	3341	Šmartno ob Dreti
-00050000-5633-6c3a-2501-e826aee45f4f	3327	Šmartno ob Paki
-00050000-5633-6c3a-e729-54c0366ca1e9	1275	Šmartno pri Litiji
-00050000-5633-6c3a-2c55-1d294f9e91ad	2383	Šmartno pri Slovenj Gradcu
-00050000-5633-6c3a-160a-ab4cea30c18c	3201	Šmartno v Rožni dolini
-00050000-5633-6c3a-07d7-0c2bd9cd61aa	3325	Šoštanj
-00050000-5633-6c3a-ccdd-1bbfe8276c9a	6222	Štanjel
-00050000-5633-6c3a-42b3-a9f611618b82	3220	Štore
-00050000-5633-6c3a-a220-e36c29e954d9	3304	Tabor
-00050000-5633-6c3a-5390-952d09405f8b	3221	Teharje
-00050000-5633-6c3a-b934-d959cdcf3f94	9251	Tišina
-00050000-5633-6c3a-6763-1a2c26ca868b	5220	Tolmin
-00050000-5633-6c3a-3683-dc3b362386b6	3326	Topolšica
-00050000-5633-6c3a-b968-ed4f8b10757b	2371	Trbonje
-00050000-5633-6c3a-cf3a-ae1089875c45	1420	Trbovlje
-00050000-5633-6c3a-9c20-b86ad256a087	8231	Trebelno 
-00050000-5633-6c3a-404e-003e8ea7576a	8210	Trebnje
-00050000-5633-6c3a-5c96-feb6b9a36e0d	5252	Trnovo pri Gorici
-00050000-5633-6c3a-ac40-dae0d6d05eb9	2254	Trnovska vas
-00050000-5633-6c3a-f302-5b5ce5cb2a59	1222	Trojane
-00050000-5633-6c3a-468c-772447d8172b	1236	Trzin
-00050000-5633-6c3a-26ce-66e7a4871a0d	4290	Tržič
-00050000-5633-6c3a-ca68-7f12e614ed89	8295	Tržišče
-00050000-5633-6c3a-b53d-76c54f817d66	1311	Turjak
-00050000-5633-6c3a-2b03-73a7b7440618	9224	Turnišče
-00050000-5633-6c3a-ca82-325b52c5f3f3	8323	Uršna sela
-00050000-5633-6c3a-63eb-a053c8a20ddf	1252	Vače
-00050000-5633-6c3a-7877-60a399437373	3320	Velenje 
-00050000-5633-6c3a-af0f-3f4ac12de175	3322	Velenje - poštni predali
-00050000-5633-6c3a-a7e2-667f18deee89	8212	Velika Loka
-00050000-5633-6c3a-ed73-fe53ff9fe60a	2274	Velika Nedelja
-00050000-5633-6c3a-5c81-015e24e0b3ce	9225	Velika Polana
-00050000-5633-6c3a-b01e-63fb6930b913	1315	Velike Lašče
-00050000-5633-6c3a-1197-891a546d2da9	8213	Veliki Gaber
-00050000-5633-6c3a-728f-2056e1c185cf	9241	Veržej
-00050000-5633-6c3a-1925-7a0539a1d7b6	1312	Videm - Dobrepolje
-00050000-5633-6c3a-d0f4-4f24b025739b	2284	Videm pri Ptuju
-00050000-5633-6c3a-74d8-53b54149aa33	8344	Vinica
-00050000-5633-6c3a-49fe-36d0aa7cda3e	5271	Vipava
-00050000-5633-6c3a-279d-5f82e6f686da	4212	Visoko
-00050000-5633-6c3a-9147-4a544fce8245	1294	Višnja Gora
-00050000-5633-6c3a-03cf-a9b33c6f10b2	3205	Vitanje
-00050000-5633-6c3a-d9c9-42dbdff2fe57	2255	Vitomarci
-00050000-5633-6c3a-32c8-0d34331e491a	1217	Vodice
-00050000-5633-6c3a-67cd-ee9657dde4ec	3212	Vojnik\t
-00050000-5633-6c3a-e4c6-5b44d2eb9ccf	5293	Volčja Draga
-00050000-5633-6c3a-3f03-32547e6fcd7e	2232	Voličina
-00050000-5633-6c3a-4576-15758da758ba	3305	Vransko
-00050000-5633-6c3a-4c76-10a77c77b06a	6217	Vremski Britof
-00050000-5633-6c3a-2e65-7ca79a60b306	1360	Vrhnika
-00050000-5633-6c3a-1aeb-b6d042648b74	2365	Vuhred
-00050000-5633-6c3a-bb25-968e3d6460f4	2367	Vuzenica
-00050000-5633-6c3a-f60b-b05db04384ad	8292	Zabukovje 
-00050000-5633-6c3a-47f5-e4911dac80f2	1410	Zagorje ob Savi
-00050000-5633-6c3a-933c-e5ed8561f5e1	1303	Zagradec
-00050000-5633-6c3a-4cfa-3359763ffeb0	2283	Zavrč
-00050000-5633-6c3a-8fa0-800c2361bca9	8272	Zdole 
-00050000-5633-6c3a-2f1f-9c889f4911f0	4201	Zgornja Besnica
-00050000-5633-6c3a-8ddd-bc5409973431	2242	Zgornja Korena
-00050000-5633-6c3a-0287-cbbab57e28ce	2201	Zgornja Kungota
-00050000-5633-6c3a-311f-c3cccbd0268b	2316	Zgornja Ložnica
-00050000-5633-6c3a-4f03-908104470086	2314	Zgornja Polskava
-00050000-5633-6c3a-d2a6-b7f602aed997	2213	Zgornja Velka
-00050000-5633-6c3a-e0d0-5c7b9ae5cd35	4247	Zgornje Gorje
-00050000-5633-6c3a-b8c4-3437976f5a10	4206	Zgornje Jezersko
-00050000-5633-6c3a-7588-5dd2949cf861	2285	Zgornji Leskovec
-00050000-5633-6c3a-1b58-4b737a29b945	1432	Zidani Most
-00050000-5633-6c3a-7b04-3c94e38657f1	3214	Zreče
-00050000-5633-6c3a-1363-d26bbdda452d	4209	Žabnica
-00050000-5633-6c3a-8e95-f4975eee7436	3310	Žalec
-00050000-5633-6c3a-de80-e9c202357707	4228	Železniki
-00050000-5633-6c3a-a413-713e0998efe5	2287	Žetale
-00050000-5633-6c3a-e43f-5baeac0c01bb	4226	Žiri
-00050000-5633-6c3a-c233-81ef0f56f997	4274	Žirovnica
-00050000-5633-6c3a-57a1-18c9de23e6ec	8360	Žužemberk
+00050000-5637-258c-c167-c4591108b08c	8341	Adlešiči
+00050000-5637-258c-c9d6-d1b39a154804	5270	Ajdovščina
+00050000-5637-258c-e7e7-12c73469c402	6280	Ankaran/Ancarano
+00050000-5637-258c-3c04-7d84936e819a	9253	Apače
+00050000-5637-258c-6edb-ba50b327b5f9	8253	Artiče
+00050000-5637-258c-abfc-191bf4ae38db	4275	Begunje na Gorenjskem
+00050000-5637-258c-e8e8-7d59b62f0d28	1382	Begunje pri Cerknici
+00050000-5637-258c-06e0-2e92976a5c3d	9231	Beltinci
+00050000-5637-258c-9901-b2571f086ab7	2234	Benedikt
+00050000-5637-258c-d983-246ab07bfbea	2345	Bistrica ob Dravi
+00050000-5637-258c-727a-95dd0d594a73	3256	Bistrica ob Sotli
+00050000-5637-258c-bca5-aa81e121f67e	8259	Bizeljsko
+00050000-5637-258c-ff8e-c941ae3760bc	1223	Blagovica
+00050000-5637-258c-f773-19da9186c4ae	8283	Blanca
+00050000-5637-258c-3617-596af75c8fda	4260	Bled
+00050000-5637-258c-f81d-e0430885cbb3	4273	Blejska Dobrava
+00050000-5637-258c-0ff8-60d7f28fcc5b	9265	Bodonci
+00050000-5637-258c-519c-4ee5ed210b4a	9222	Bogojina
+00050000-5637-258c-db67-ca3e87f6e304	4263	Bohinjska Bela
+00050000-5637-258c-3e5c-a7777033db0f	4264	Bohinjska Bistrica
+00050000-5637-258c-5be0-11cdd199f7bf	4265	Bohinjsko jezero
+00050000-5637-258c-ee7a-679592a6156b	1353	Borovnica
+00050000-5637-258c-7654-7e45af46bdec	8294	Boštanj
+00050000-5637-258c-c695-22f8735e90d1	5230	Bovec
+00050000-5637-258c-7e4c-182b813e32ce	5295	Branik
+00050000-5637-258c-b89a-5b6524762995	3314	Braslovče
+00050000-5637-258c-446a-3a2d6ac1d0e2	5223	Breginj
+00050000-5637-258c-acdb-bead9efd426e	8280	Brestanica
+00050000-5637-258c-d8e7-d317ee492393	2354	Bresternica
+00050000-5637-258c-8d9d-a2e80cca6d6e	4243	Brezje
+00050000-5637-258c-9e0e-77e661fbf36c	1351	Brezovica pri Ljubljani
+00050000-5637-258c-adec-9c633b48555f	8250	Brežice
+00050000-5637-258c-7b78-4b7e4f2fadb4	4210	Brnik - Aerodrom
+00050000-5637-258c-f032-39f589cdea72	8321	Brusnice
+00050000-5637-258c-bd02-6276e59c8ba6	3255	Buče
+00050000-5637-258c-6b81-71ab6bfba699	8276	Bučka 
+00050000-5637-258c-25aa-3e797c316303	9261	Cankova
+00050000-5637-258c-cead-98619473514a	3000	Celje 
+00050000-5637-258c-b4b8-e269ef4403b3	3001	Celje - poštni predali
+00050000-5637-258c-6553-dc76cdc3b4ab	4207	Cerklje na Gorenjskem
+00050000-5637-258c-e7bd-019b110c4476	8263	Cerklje ob Krki
+00050000-5637-258c-9b8c-2d513d3bf65b	1380	Cerknica
+00050000-5637-258c-6913-316cbdc0d9ee	5282	Cerkno
+00050000-5637-258c-a66e-1d416f9a1983	2236	Cerkvenjak
+00050000-5637-258c-14cd-343e9ee2d9f7	2215	Ceršak
+00050000-5637-258c-86f5-0f9a69fc6e47	2326	Cirkovce
+00050000-5637-258c-6e86-68d024853ce3	2282	Cirkulane
+00050000-5637-258c-4bd2-fd06588e2c6c	5273	Col
+00050000-5637-258c-43c3-c611eb20d859	8251	Čatež ob Savi
+00050000-5637-258c-57f0-2c878c866100	1413	Čemšenik
+00050000-5637-258c-c031-46e6dfb4452a	5253	Čepovan
+00050000-5637-258c-e136-986d68b6900f	9232	Črenšovci
+00050000-5637-258c-af62-e54989824b5d	2393	Črna na Koroškem
+00050000-5637-258c-761e-3bf7aba7257f	6275	Črni Kal
+00050000-5637-258c-ceb7-813c87f1ec51	5274	Črni Vrh nad Idrijo
+00050000-5637-258c-3632-60e286dcc5d8	5262	Črniče
+00050000-5637-258c-1ad2-fd5b3b9de12d	8340	Črnomelj
+00050000-5637-258c-a8c9-ebdeb07c3e6c	6271	Dekani
+00050000-5637-258c-0c14-7e1f9ed85f2b	5210	Deskle
+00050000-5637-258c-ac70-f3c2f0aa1adc	2253	Destrnik
+00050000-5637-258c-d46b-7323129def8a	6215	Divača
+00050000-5637-258c-9f51-ef757d46c3d2	1233	Dob
+00050000-5637-258c-0820-e69ab75e41af	3224	Dobje pri Planini
+00050000-5637-258c-7f94-1f238b9b8d95	8257	Dobova
+00050000-5637-258c-aa48-60e15690f044	1423	Dobovec
+00050000-5637-258c-fd4c-1b7d0bb4c2ee	5263	Dobravlje
+00050000-5637-258c-dc29-16425ecd06e9	3204	Dobrna
+00050000-5637-258c-85ae-9b052fa49388	8211	Dobrnič
+00050000-5637-258c-013c-dbee90732637	1356	Dobrova
+00050000-5637-258c-686a-0857c6e4b63e	9223	Dobrovnik/Dobronak 
+00050000-5637-258c-7d81-1e9624508e02	5212	Dobrovo v Brdih
+00050000-5637-258c-6e48-1efd1c3c9580	1431	Dol pri Hrastniku
+00050000-5637-258c-1258-b6f10c9c1552	1262	Dol pri Ljubljani
+00050000-5637-258c-7eab-01ec3bb4fb09	1273	Dole pri Litiji
+00050000-5637-258c-89f0-ac0f995434de	1331	Dolenja vas
+00050000-5637-258c-377b-31e798f434fd	8350	Dolenjske Toplice
+00050000-5637-258c-1296-a4e3d77fa9e7	1230	Domžale
+00050000-5637-258c-7a19-d9aa016c055a	2252	Dornava
+00050000-5637-258c-ef61-35461b37e388	5294	Dornberk
+00050000-5637-258c-f293-32d3388332b7	1319	Draga
+00050000-5637-258c-7923-457a99718e2a	8343	Dragatuš
+00050000-5637-258c-3892-5a876ea0cf46	3222	Dramlje
+00050000-5637-258c-035e-ba8e9179d622	2370	Dravograd
+00050000-5637-258c-9928-7e0e5d6247c3	4203	Duplje
+00050000-5637-258c-ad19-4e9199960184	6221	Dutovlje
+00050000-5637-258c-9eb5-5b3f3b11f5b8	8361	Dvor
+00050000-5637-258c-1150-6f6ed1ab4018	2343	Fala
+00050000-5637-258c-1d9e-3627bcde9cd9	9208	Fokovci
+00050000-5637-258c-de2e-e12ef65612b3	2313	Fram
+00050000-5637-258c-bf8e-a0646c229c5b	3213	Frankolovo
+00050000-5637-258c-0597-6b12a765e2be	1274	Gabrovka
+00050000-5637-258c-9963-713236ddf6f8	8254	Globoko
+00050000-5637-258c-bc0c-c2102a95a20a	5275	Godovič
+00050000-5637-258c-d661-986526b0c5f2	4204	Golnik
+00050000-5637-258c-9db2-7581d140fe9b	3303	Gomilsko
+00050000-5637-258c-5dd8-58b4d5faa041	4224	Gorenja vas
+00050000-5637-258c-333b-3af298c38add	3263	Gorica pri Slivnici
+00050000-5637-258c-57ae-1c2c61c5b0bb	2272	Gorišnica
+00050000-5637-258c-1196-bfcd4c3bae5f	9250	Gornja Radgona
+00050000-5637-258c-af8a-05e85953ab0f	3342	Gornji Grad
+00050000-5637-258c-b2f9-6518ea02bb6d	4282	Gozd Martuljek
+00050000-5637-258c-57c3-d9e7819b4683	6272	Gračišče
+00050000-5637-258c-a166-e2b49465cb91	9264	Grad
+00050000-5637-258c-f5be-4c87a12d017e	8332	Gradac
+00050000-5637-258c-7e40-77914f232841	1384	Grahovo
+00050000-5637-258c-1b0d-f0d5e2e36069	5242	Grahovo ob Bači
+00050000-5637-258c-12ad-1f68bb1f7dc6	5251	Grgar
+00050000-5637-258c-e767-26db4d88418c	3302	Griže
+00050000-5637-258c-2413-91341631dad1	3231	Grobelno
+00050000-5637-258c-fc2c-89d2b99545ee	1290	Grosuplje
+00050000-5637-258c-0037-15f0f86bf76b	2288	Hajdina
+00050000-5637-258c-5607-bf81f343ba20	8362	Hinje
+00050000-5637-258c-0ee5-b6bbafe4ade7	2311	Hoče
+00050000-5637-258c-27a9-cba0c4d1a80d	9205	Hodoš/Hodos
+00050000-5637-258c-d4b1-aa6631ed3ed4	1354	Horjul
+00050000-5637-258c-8f1e-027321175c25	1372	Hotedršica
+00050000-5637-258c-355c-772c72ee5ee9	1430	Hrastnik
+00050000-5637-258c-2385-b05266e7cbb9	6225	Hruševje
+00050000-5637-258c-a932-a3dc8f8bafd4	4276	Hrušica
+00050000-5637-258c-b721-41a37be49d75	5280	Idrija
+00050000-5637-258c-5e51-b9ad6d492068	1292	Ig
+00050000-5637-258c-bbb3-c2e386234950	6250	Ilirska Bistrica
+00050000-5637-258c-2d2e-e2fcedcfeae0	6251	Ilirska Bistrica-Trnovo
+00050000-5637-258c-77fe-b52363941344	1295	Ivančna Gorica
+00050000-5637-258c-053f-0235ca956fa2	2259	Ivanjkovci
+00050000-5637-258c-cdc2-f0c7f7dfcdf6	1411	Izlake
+00050000-5637-258c-2e54-015b1af68798	6310	Izola/Isola
+00050000-5637-258c-767b-212990592dad	2222	Jakobski Dol
+00050000-5637-258c-752a-59c6da4a15fe	2221	Jarenina
+00050000-5637-258c-8278-960ff49d3095	6254	Jelšane
+00050000-5637-258c-64b0-1c5aa80c5e18	4270	Jesenice
+00050000-5637-258c-d0b8-fda0e3fe6c57	8261	Jesenice na Dolenjskem
+00050000-5637-258c-e767-fdb47b945dc0	3273	Jurklošter
+00050000-5637-258c-29af-15e8e60b9d47	2223	Jurovski Dol
+00050000-5637-258c-f4f0-a564ff0c3b74	2256	Juršinci
+00050000-5637-258c-683c-4bf0ced49e9c	5214	Kal nad Kanalom
+00050000-5637-258c-b43f-2f2569754280	3233	Kalobje
+00050000-5637-258c-05ec-d36a51314137	4246	Kamna Gorica
+00050000-5637-258c-3cf6-386856237b01	2351	Kamnica
+00050000-5637-258c-f656-19615647d827	1241	Kamnik
+00050000-5637-258c-1bd7-0a5d6c7d8c37	5213	Kanal
+00050000-5637-258c-1d62-561f9fbbcf11	8258	Kapele
+00050000-5637-258c-42dc-105c602db0d0	2362	Kapla
+00050000-5637-258c-f572-5b7d7bf34747	2325	Kidričevo
+00050000-5637-258c-2bf3-51db1dbd881b	1412	Kisovec
+00050000-5637-258c-524b-af97c6315098	6253	Knežak
+00050000-5637-258c-9ef3-905763e2af09	5222	Kobarid
+00050000-5637-258c-2cdc-85ee8643a344	9227	Kobilje
+00050000-5637-258c-c1c8-17484ca4afe1	1330	Kočevje
+00050000-5637-258c-47d3-c7b1341e7a89	1338	Kočevska Reka
+00050000-5637-258c-2549-d7da33174cb9	2276	Kog
+00050000-5637-258c-6698-6633bc26ff89	5211	Kojsko
+00050000-5637-258c-a979-15987a824aff	6223	Komen
+00050000-5637-258c-b1d6-0b5d6c239260	1218	Komenda
+00050000-5637-258c-9855-13147166313f	6000	Koper/Capodistria 
+00050000-5637-258c-322f-d26c126c45af	6001	Koper/Capodistria - poštni predali
+00050000-5637-258c-c45d-c6220e22536b	8282	Koprivnica
+00050000-5637-258c-2703-e395f4b1c15f	5296	Kostanjevica na Krasu
+00050000-5637-258c-01e4-962de1f996b9	8311	Kostanjevica na Krki
+00050000-5637-258c-359d-a54613de10e9	1336	Kostel
+00050000-5637-258c-fece-d121fa408d12	6256	Košana
+00050000-5637-258c-0f3a-a16a5f2feae0	2394	Kotlje
+00050000-5637-258c-4998-08bf95be0781	6240	Kozina
+00050000-5637-258c-382a-84dc3d7cb2d9	3260	Kozje
+00050000-5637-258c-49f2-505048b50a2a	4000	Kranj 
+00050000-5637-258c-09cb-34d732046677	4001	Kranj - poštni predali
+00050000-5637-258c-ef83-a013a372ebb0	4280	Kranjska Gora
+00050000-5637-258c-51af-f0d9ead72114	1281	Kresnice
+00050000-5637-258c-a597-e98f0bab5ba7	4294	Križe
+00050000-5637-258c-e1c5-3d04a34b8089	9206	Križevci
+00050000-5637-258c-be49-35d7afc96a71	9242	Križevci pri Ljutomeru
+00050000-5637-258c-a5e7-cbd7f85f97dc	1301	Krka
+00050000-5637-258c-f129-4145b5b4dd54	8296	Krmelj
+00050000-5637-258c-8728-3e6371cb1a2a	4245	Kropa
+00050000-5637-258c-6b2d-ed46c3e82c0a	8262	Krška vas
+00050000-5637-258c-3afe-722f1916f301	8270	Krško
+00050000-5637-258c-1182-20a179a1ff01	9263	Kuzma
+00050000-5637-258c-fd47-a12f5aec8755	2318	Laporje
+00050000-5637-258c-3ff8-a7145f30404b	3270	Laško
+00050000-5637-258c-d016-bce3d63ced56	1219	Laze v Tuhinju
+00050000-5637-258c-d613-810ce0abb500	2230	Lenart v Slovenskih goricah
+00050000-5637-258c-7641-f362d3cfcdf7	9220	Lendava/Lendva
+00050000-5637-258c-c2a0-b847ed39c3ee	4248	Lesce
+00050000-5637-258c-4262-ca56d57200bd	3261	Lesično
+00050000-5637-258c-1e35-e3b0d64213d0	8273	Leskovec pri Krškem
+00050000-5637-258c-2e16-3da3e4afa2ac	2372	Libeliče
+00050000-5637-258c-9396-f9e6313c1472	2341	Limbuš
+00050000-5637-258c-f27b-1d6cedb70dbe	1270	Litija
+00050000-5637-258c-a2c6-aa907fa78b9f	3202	Ljubečna
+00050000-5637-258c-5083-a96ae6e8dc73	1000	Ljubljana 
+00050000-5637-258c-122e-c5255ed63bca	1001	Ljubljana - poštni predali
+00050000-5637-258c-a17b-193eb141377a	1231	Ljubljana - Črnuče
+00050000-5637-258c-4e5a-aa4c172e071c	1261	Ljubljana - Dobrunje
+00050000-5637-258c-79f2-3ee2a99f846c	1260	Ljubljana - Polje
+00050000-5637-258c-7632-a19abb9bcb61	1210	Ljubljana - Šentvid
+00050000-5637-258c-92e4-827654e7d6d2	1211	Ljubljana - Šmartno
+00050000-5637-258c-7bff-f1b747663543	3333	Ljubno ob Savinji
+00050000-5637-258c-40d3-9cb47e71d731	9240	Ljutomer
+00050000-5637-258c-b546-0b79e5791631	3215	Loče
+00050000-5637-258c-d3d3-a17d6863987f	5231	Log pod Mangartom
+00050000-5637-258c-a739-c6e669614708	1358	Log pri Brezovici
+00050000-5637-258c-e40a-1b572995565f	1370	Logatec
+00050000-5637-258c-0024-ce56045805e5	1371	Logatec
+00050000-5637-258c-a7d8-3ddbb2224291	1434	Loka pri Zidanem Mostu
+00050000-5637-258c-264d-0ec3b096b404	3223	Loka pri Žusmu
+00050000-5637-258c-21b3-288c9127afff	6219	Lokev
+00050000-5637-258c-40e1-f516cb94a348	1318	Loški Potok
+00050000-5637-258c-468f-15c16b88a47c	2324	Lovrenc na Dravskem polju
+00050000-5637-258c-2646-973c48aa1047	2344	Lovrenc na Pohorju
+00050000-5637-258c-d9c5-a9d464de5af5	3334	Luče
+00050000-5637-258c-f0bc-0d588a10a45f	1225	Lukovica
+00050000-5637-258c-5a64-9b868a4152c9	9202	Mačkovci
+00050000-5637-258c-4b89-e68a89e4ce2f	2322	Majšperk
+00050000-5637-258c-ae00-a5eb28dbbcf7	2321	Makole
+00050000-5637-258c-cc7c-9f1cf8acc4da	9243	Mala Nedelja
+00050000-5637-258c-5920-5d59c5bc0229	2229	Malečnik
+00050000-5637-258c-e608-3adf92942db6	6273	Marezige
+00050000-5637-258c-22ad-997a57ccc89f	2000	Maribor 
+00050000-5637-258c-3b4f-6e32be39b834	2001	Maribor - poštni predali
+00050000-5637-258c-f85d-b69d69640537	2206	Marjeta na Dravskem polju
+00050000-5637-258c-0266-501a1a26978e	2281	Markovci
+00050000-5637-258c-c9fe-52838b2fa43c	9221	Martjanci
+00050000-5637-258c-1223-5fd164aa5031	6242	Materija
+00050000-5637-258c-8243-77784edd1be1	4211	Mavčiče
+00050000-5637-258c-43ea-1bb4e78db609	1215	Medvode
+00050000-5637-258c-a2f2-b41896519ca8	1234	Mengeš
+00050000-5637-258c-b3bb-9775b4f878d7	8330	Metlika
+00050000-5637-258c-f794-d89007d91bc2	2392	Mežica
+00050000-5637-258c-1bd7-ff7c8fae4fc4	2204	Miklavž na Dravskem polju
+00050000-5637-258c-0ac4-609080c48857	2275	Miklavž pri Ormožu
+00050000-5637-258c-745b-570e16a5331e	5291	Miren
+00050000-5637-258c-41e9-3d745b3f419f	8233	Mirna
+00050000-5637-258c-97cf-c4b291e8bc77	8216	Mirna Peč
+00050000-5637-258c-ef80-c720b01f5ebe	2382	Mislinja
+00050000-5637-258c-2afe-f41fb20431f7	4281	Mojstrana
+00050000-5637-258c-be4c-0016d16b6896	8230	Mokronog
+00050000-5637-258c-9335-967bfe33b5a7	1251	Moravče
+00050000-5637-258c-1bab-cabb610c121e	9226	Moravske Toplice
+00050000-5637-258c-9510-645fc6cf63dc	5216	Most na Soči
+00050000-5637-258c-f924-bc865f6481cb	1221	Motnik
+00050000-5637-258c-8ca9-c16a4af0eaf8	3330	Mozirje
+00050000-5637-258c-9cc4-225764452156	9000	Murska Sobota 
+00050000-5637-258c-87ec-3e4f74e786bd	9001	Murska Sobota - poštni predali
+00050000-5637-258c-1c6c-00f32ea3eba2	2366	Muta
+00050000-5637-258c-7209-2c22021a8d5d	4202	Naklo
+00050000-5637-258c-687a-921fc7f058a5	3331	Nazarje
+00050000-5637-258c-c24e-9c8a60b0ec1f	1357	Notranje Gorice
+00050000-5637-258c-8989-554f8144605a	3203	Nova Cerkev
+00050000-5637-258c-34c2-a6b14388961c	5000	Nova Gorica 
+00050000-5637-258c-958d-fa21e53ef02e	5001	Nova Gorica - poštni predali
+00050000-5637-258c-2c90-79bde103cba5	1385	Nova vas
+00050000-5637-258c-f5aa-cb19ec44b155	8000	Novo mesto
+00050000-5637-258c-c3a2-801d998d5d3c	8001	Novo mesto - poštni predali
+00050000-5637-258c-b45f-f4d9272573e0	6243	Obrov
+00050000-5637-258c-5705-58490084a5c7	9233	Odranci
+00050000-5637-258c-7714-b31d59218740	2317	Oplotnica
+00050000-5637-258c-5436-4c5ef2a9a13a	2312	Orehova vas
+00050000-5637-258c-4d16-38406ca2c1db	2270	Ormož
+00050000-5637-258c-94df-3a89ef23f875	1316	Ortnek
+00050000-5637-258c-eaef-9b254e2d456d	1337	Osilnica
+00050000-5637-258c-d2b5-8be1c6636ae4	8222	Otočec
+00050000-5637-258c-4dd1-70c609ccb52a	2361	Ožbalt
+00050000-5637-258c-3480-b6cdf0ecc2e1	2231	Pernica
+00050000-5637-258c-9565-edd2c383b119	2211	Pesnica pri Mariboru
+00050000-5637-258c-1c09-8a9f0d2a9296	9203	Petrovci
+00050000-5637-258c-c48f-55177caa8a7c	3301	Petrovče
+00050000-5637-258c-78d6-95f2523440bc	6330	Piran/Pirano
+00050000-5637-258c-5312-292e25341d1f	8255	Pišece
+00050000-5637-258c-a8dd-8513a7aefe80	6257	Pivka
+00050000-5637-258c-77f2-b22de934e5bc	6232	Planina
+00050000-5637-258c-cbc8-24791cc57af7	3225	Planina pri Sevnici
+00050000-5637-258c-471d-3cb353f41d57	6276	Pobegi
+00050000-5637-258c-965b-83679a472020	8312	Podbočje
+00050000-5637-258c-065e-e5efdcbd50af	5243	Podbrdo
+00050000-5637-258c-34c4-0ebb6fb52a7f	3254	Podčetrtek
+00050000-5637-258c-62da-649555cc29c2	2273	Podgorci
+00050000-5637-258c-567b-a695a4a00d5a	6216	Podgorje
+00050000-5637-258c-9344-8d954e10bad4	2381	Podgorje pri Slovenj Gradcu
+00050000-5637-258c-4fc2-8ecf2c69dc25	6244	Podgrad
+00050000-5637-258c-54dd-d56da7b79c2f	1414	Podkum
+00050000-5637-258c-8d69-34974674e358	2286	Podlehnik
+00050000-5637-258c-b6b7-095431a5dae5	5272	Podnanos
+00050000-5637-258c-3ea3-e425a37a0869	4244	Podnart
+00050000-5637-258c-407b-51b70125673f	3241	Podplat
+00050000-5637-258c-1d29-f74615bfd9e1	3257	Podsreda
+00050000-5637-258c-a386-f9d67a258fc9	2363	Podvelka
+00050000-5637-258c-ec4d-ab7af783b019	2208	Pohorje
+00050000-5637-258c-e6b0-7994b9692804	2257	Polenšak
+00050000-5637-258c-79da-0942581dc0f6	1355	Polhov Gradec
+00050000-5637-258c-37df-a6a0ea64b2ff	4223	Poljane nad Škofjo Loko
+00050000-5637-258c-5fa8-b0fd515b4b18	2319	Poljčane
+00050000-5637-258c-13e9-8be2db9d8e24	1272	Polšnik
+00050000-5637-258c-bdec-015c9620ed95	3313	Polzela
+00050000-5637-258c-ccf1-9f9efb5c2b9b	3232	Ponikva
+00050000-5637-258c-aba3-56669fda991d	6320	Portorož/Portorose
+00050000-5637-258c-535c-84123c2cd223	6230	Postojna
+00050000-5637-258c-beb2-866053f8f986	2331	Pragersko
+00050000-5637-258c-cc81-7e3bb62882ae	3312	Prebold
+00050000-5637-258c-5f1a-6b06ad5d83be	4205	Preddvor
+00050000-5637-258c-4d0f-81984e06fb14	6255	Prem
+00050000-5637-258c-98c0-1782ad7543d7	1352	Preserje
+00050000-5637-258c-ac68-88658bbb10bf	6258	Prestranek
+00050000-5637-258c-d252-6d964fb50063	2391	Prevalje
+00050000-5637-258c-1fcd-f4e71ae06c86	3262	Prevorje
+00050000-5637-258c-8580-37deb3fe437f	1276	Primskovo 
+00050000-5637-258c-a7a8-6ed5cdf3421f	3253	Pristava pri Mestinju
+00050000-5637-258c-4d38-87a2feef5d70	9207	Prosenjakovci/Partosfalva
+00050000-5637-258c-b14d-98f3473d24cf	5297	Prvačina
+00050000-5637-258c-ecd1-cbace9f6dd7a	2250	Ptuj
+00050000-5637-258c-ad54-f084c88ff3e3	2323	Ptujska Gora
+00050000-5637-258c-31c5-9a85c99d56d8	9201	Puconci
+00050000-5637-258c-dc31-9c847068ecbf	2327	Rače
+00050000-5637-258c-8670-32e87fa393db	1433	Radeče
+00050000-5637-258c-8112-3542eb59422e	9252	Radenci
+00050000-5637-258c-8445-6893a8e15a48	2360	Radlje ob Dravi
+00050000-5637-258c-4a36-427cc17710ba	1235	Radomlje
+00050000-5637-258c-7f96-ae89c28ff6c5	4240	Radovljica
+00050000-5637-258c-ecc4-70288ca99b79	8274	Raka
+00050000-5637-258c-9b11-59b4811d1589	1381	Rakek
+00050000-5637-258c-3106-536cb3887142	4283	Rateče - Planica
+00050000-5637-258c-354a-67b13202329c	2390	Ravne na Koroškem
+00050000-5637-258c-a381-7e501da4ff82	9246	Razkrižje
+00050000-5637-258c-15d1-856c1bb92e0d	3332	Rečica ob Savinji
+00050000-5637-258c-d812-1fcc440fa28f	5292	Renče
+00050000-5637-258c-20b6-db338936f966	1310	Ribnica
+00050000-5637-258c-7ca5-0bd97008178d	2364	Ribnica na Pohorju
+00050000-5637-258c-0428-13d6672b8d20	3272	Rimske Toplice
+00050000-5637-258c-826d-6049008fa51e	1314	Rob
+00050000-5637-258c-9d34-32b290d69b5e	5215	Ročinj
+00050000-5637-258c-0bb2-67cc0d357c3b	3250	Rogaška Slatina
+00050000-5637-258c-b921-159e5e277c83	9262	Rogašovci
+00050000-5637-258c-82f6-89feed0fb9b8	3252	Rogatec
+00050000-5637-258c-a087-c776f25d5976	1373	Rovte
+00050000-5637-258c-be4f-dc6278e8b1e3	2342	Ruše
+00050000-5637-258c-2a93-d37021a3a79e	1282	Sava
+00050000-5637-258c-9340-2f0da29876c0	6333	Sečovlje/Sicciole
+00050000-5637-258c-a7cd-ec7f4e86a018	4227	Selca
+00050000-5637-258c-64be-4ed4981aefe4	2352	Selnica ob Dravi
+00050000-5637-258c-4d2a-abfd3ad562c4	8333	Semič
+00050000-5637-258c-3e4b-af8c76b2de00	8281	Senovo
+00050000-5637-258c-d20d-2d6fa378c51f	6224	Senožeče
+00050000-5637-258c-5393-e54930e436f3	8290	Sevnica
+00050000-5637-258c-3c9b-326c668d494a	6210	Sežana
+00050000-5637-258c-b9aa-9b7f52adbb78	2214	Sladki Vrh
+00050000-5637-258c-19ff-82e79572b2df	5283	Slap ob Idrijci
+00050000-5637-258c-bdf1-038307b28b90	2380	Slovenj Gradec
+00050000-5637-258c-a69c-58576b7c7f84	2310	Slovenska Bistrica
+00050000-5637-258c-91c0-cf687110dc30	3210	Slovenske Konjice
+00050000-5637-258c-39a4-27296e8fd3fd	1216	Smlednik
+00050000-5637-258c-158d-4606a18b914c	5232	Soča
+00050000-5637-258c-cf27-c85acb10fc3c	1317	Sodražica
+00050000-5637-258c-51ad-972364cc4aa8	3335	Solčava
+00050000-5637-258c-65a3-56b73b6fcef5	5250	Solkan
+00050000-5637-258c-75ec-8ce484275657	4229	Sorica
+00050000-5637-258c-6f8d-6586fd9b9ae5	4225	Sovodenj
+00050000-5637-258c-1e04-2d449a174ff7	5281	Spodnja Idrija
+00050000-5637-258c-fe30-15f8e79252ff	2241	Spodnji Duplek
+00050000-5637-258c-81e6-b307c01f42cb	9245	Spodnji Ivanjci
+00050000-5637-258c-4c53-4cc0c128a28c	2277	Središče ob Dravi
+00050000-5637-258c-8e2c-42e2f9da1578	4267	Srednja vas v Bohinju
+00050000-5637-258c-b6c5-1f9e8dec7038	8256	Sromlje 
+00050000-5637-258c-0647-85844d7d5dab	5224	Srpenica
+00050000-5637-258c-9a5f-1f8bc7b7a0d8	1242	Stahovica
+00050000-5637-258c-c894-5b7bfec450b6	1332	Stara Cerkev
+00050000-5637-258c-1b58-9a8654324a0c	8342	Stari trg ob Kolpi
+00050000-5637-258c-f30e-99def87c83be	1386	Stari trg pri Ložu
+00050000-5637-258c-bc21-c2b54162085d	2205	Starše
+00050000-5637-258c-612d-ac989e9c4f5c	2289	Stoperce
+00050000-5637-258c-c079-9ecd989a96e8	8322	Stopiče
+00050000-5637-258c-12cf-8772ea29d8a6	3206	Stranice
+00050000-5637-258c-f1eb-8f0da90165c6	8351	Straža
+00050000-5637-258c-330d-892db5767144	1313	Struge
+00050000-5637-258c-90d7-55f7b5998546	8293	Studenec
+00050000-5637-258c-9fff-66af6967acb9	8331	Suhor
+00050000-5637-258c-59c9-c94e353b670c	2233	Sv. Ana v Slovenskih goricah
+00050000-5637-258c-7a61-791aace38e66	2235	Sv. Trojica v Slovenskih goricah
+00050000-5637-258c-a6c2-f9a3fe086325	2353	Sveti Duh na Ostrem Vrhu
+00050000-5637-258c-90ee-09c82f6fa831	9244	Sveti Jurij ob Ščavnici
+00050000-5637-258c-186e-51551cdb69ca	3264	Sveti Štefan
+00050000-5637-258c-55cb-546270826457	2258	Sveti Tomaž
+00050000-5637-258c-c2fb-efddc12dae4f	9204	Šalovci
+00050000-5637-258c-66d2-421900dcc379	5261	Šempas
+00050000-5637-258c-779f-f7754add02ec	5290	Šempeter pri Gorici
+00050000-5637-258c-434e-507b89af61e5	3311	Šempeter v Savinjski dolini
+00050000-5637-258c-2633-cd312440691c	4208	Šenčur
+00050000-5637-258c-8c9e-0c0c39e693d9	2212	Šentilj v Slovenskih goricah
+00050000-5637-258c-0f6d-5fc2c4e5cac5	8297	Šentjanž
+00050000-5637-258c-2dbe-29cd4e13098f	2373	Šentjanž pri Dravogradu
+00050000-5637-258c-32e9-dacbbcb4fb02	8310	Šentjernej
+00050000-5637-258c-80e6-b2937f54a182	3230	Šentjur
+00050000-5637-258c-6ab5-5270663d3d8f	3271	Šentrupert
+00050000-5637-258c-f79d-445139b74d8f	8232	Šentrupert
+00050000-5637-258c-21d8-43f4a952f009	1296	Šentvid pri Stični
+00050000-5637-258c-6e19-22589d4b7992	8275	Škocjan
+00050000-5637-258c-7734-62f1bac045b8	6281	Škofije
+00050000-5637-258c-5104-659c860e88d1	4220	Škofja Loka
+00050000-5637-258c-ad81-d15e2a8a2941	3211	Škofja vas
+00050000-5637-258c-96b6-708af578d0d3	1291	Škofljica
+00050000-5637-258c-38c0-849801263e4b	6274	Šmarje
+00050000-5637-258c-b766-ffa8ceaba572	1293	Šmarje - Sap
+00050000-5637-258c-43f6-6d00b8b54b84	3240	Šmarje pri Jelšah
+00050000-5637-258c-52ee-0b6045870484	8220	Šmarješke Toplice
+00050000-5637-258c-7dc5-d303375229cd	2315	Šmartno na Pohorju
+00050000-5637-258c-44a9-495f03e0c1fb	3341	Šmartno ob Dreti
+00050000-5637-258c-35c0-a2b1af725138	3327	Šmartno ob Paki
+00050000-5637-258c-3358-475bbd068626	1275	Šmartno pri Litiji
+00050000-5637-258c-6ad9-a65d33492382	2383	Šmartno pri Slovenj Gradcu
+00050000-5637-258c-0b30-44d72abf8fc6	3201	Šmartno v Rožni dolini
+00050000-5637-258c-1d5e-abd845778013	3325	Šoštanj
+00050000-5637-258c-b937-d0bc562e50f4	6222	Štanjel
+00050000-5637-258c-7bc1-c46a7c30a1ab	3220	Štore
+00050000-5637-258c-e362-0d486e41f91c	3304	Tabor
+00050000-5637-258c-8a01-03eaa4bed1f5	3221	Teharje
+00050000-5637-258c-af0c-ce10e8787905	9251	Tišina
+00050000-5637-258c-edd4-00919a5a4337	5220	Tolmin
+00050000-5637-258c-a192-a1fa740e5d48	3326	Topolšica
+00050000-5637-258c-d086-d6de4e67eac0	2371	Trbonje
+00050000-5637-258c-b6c8-2522da57fc88	1420	Trbovlje
+00050000-5637-258c-eeb1-a6e1e8667ea4	8231	Trebelno 
+00050000-5637-258c-4489-c7b78daa816f	8210	Trebnje
+00050000-5637-258c-6e26-82e3a35614cd	5252	Trnovo pri Gorici
+00050000-5637-258c-0c33-1f77bcb13251	2254	Trnovska vas
+00050000-5637-258c-edc1-03fb16e9c1db	1222	Trojane
+00050000-5637-258c-ff72-11bb081e866f	1236	Trzin
+00050000-5637-258c-3aec-8e7c1c8af255	4290	Tržič
+00050000-5637-258c-7bb4-b17714dc080a	8295	Tržišče
+00050000-5637-258c-aa73-2e5879a25db5	1311	Turjak
+00050000-5637-258c-40f5-12a0f7d6d275	9224	Turnišče
+00050000-5637-258c-ebb5-bf64ca648683	8323	Uršna sela
+00050000-5637-258c-cabd-fb282374acd9	1252	Vače
+00050000-5637-258c-058d-a5175bb4fade	3320	Velenje 
+00050000-5637-258c-dffe-5c350dd5fdc7	3322	Velenje - poštni predali
+00050000-5637-258c-a10f-5de558c0ce57	8212	Velika Loka
+00050000-5637-258c-a6ec-d0238737e6ea	2274	Velika Nedelja
+00050000-5637-258c-88e4-d74a5ecbf2b9	9225	Velika Polana
+00050000-5637-258c-2817-cae4c43a5327	1315	Velike Lašče
+00050000-5637-258c-3b3a-c086fd7a5d17	8213	Veliki Gaber
+00050000-5637-258c-7e03-28d8044dfe17	9241	Veržej
+00050000-5637-258c-12a3-073ede9d7534	1312	Videm - Dobrepolje
+00050000-5637-258c-4241-ef619610215a	2284	Videm pri Ptuju
+00050000-5637-258c-ab71-109b10e270ea	8344	Vinica
+00050000-5637-258c-a69f-116983f79577	5271	Vipava
+00050000-5637-258c-7463-9c505832c1b3	4212	Visoko
+00050000-5637-258c-d69f-d27967051fdb	1294	Višnja Gora
+00050000-5637-258c-c5a6-17dccd790ef1	3205	Vitanje
+00050000-5637-258c-4325-d8936ac85228	2255	Vitomarci
+00050000-5637-258c-0a3d-467be0c43510	1217	Vodice
+00050000-5637-258c-3a4c-83e9088c5eb1	3212	Vojnik\t
+00050000-5637-258c-0ea9-c6305b10f860	5293	Volčja Draga
+00050000-5637-258c-a539-4ad8ac498fca	2232	Voličina
+00050000-5637-258c-a538-b547785b0a55	3305	Vransko
+00050000-5637-258c-a447-a3fcea8bfd59	6217	Vremski Britof
+00050000-5637-258c-135e-59bab86c9b4d	1360	Vrhnika
+00050000-5637-258c-7c8f-e1dc8b1d9d09	2365	Vuhred
+00050000-5637-258c-b0a4-dd78dc798621	2367	Vuzenica
+00050000-5637-258c-15f4-cf65c479b34f	8292	Zabukovje 
+00050000-5637-258c-78b0-6da4f7193aac	1410	Zagorje ob Savi
+00050000-5637-258c-2060-7368399ce992	1303	Zagradec
+00050000-5637-258c-d081-72a98c8d942d	2283	Zavrč
+00050000-5637-258c-eb44-c0b8ceac834f	8272	Zdole 
+00050000-5637-258c-2646-0d5411c61258	4201	Zgornja Besnica
+00050000-5637-258c-42ee-e65b4dd9658d	2242	Zgornja Korena
+00050000-5637-258c-5dd9-351fc7328111	2201	Zgornja Kungota
+00050000-5637-258c-48a3-6dac3f9b2a93	2316	Zgornja Ložnica
+00050000-5637-258c-69a6-bdd5bd4996ae	2314	Zgornja Polskava
+00050000-5637-258c-cf2a-0c6e381d017e	2213	Zgornja Velka
+00050000-5637-258c-9d38-dce3b9043dcd	4247	Zgornje Gorje
+00050000-5637-258c-3d3e-a77d135613c6	4206	Zgornje Jezersko
+00050000-5637-258c-b0ec-4f49f02e62a9	2285	Zgornji Leskovec
+00050000-5637-258c-fbe0-5879ac59fe2c	1432	Zidani Most
+00050000-5637-258c-de3c-c65e6272a923	3214	Zreče
+00050000-5637-258c-1884-05616da4cc64	4209	Žabnica
+00050000-5637-258c-da2c-995314dcccca	3310	Žalec
+00050000-5637-258c-d5e0-1c9055005ff5	4228	Železniki
+00050000-5637-258c-9796-ac8ed734f97b	2287	Žetale
+00050000-5637-258c-cf0f-60ccebf3d339	4226	Žiri
+00050000-5637-258c-71b0-6b83a02cfbc2	4274	Žirovnica
+00050000-5637-258c-e879-3d3ceb4373a1	8360	Žužemberk
 \.
 
 
 --
--- TOC entry 3149 (class 0 OID 24316235)
+-- TOC entry 3149 (class 0 OID 24473036)
 -- Dependencies: 239
 -- Data for Name: postavkacdve; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3280,7 +3280,7 @@ COPY postavkacdve (id, skupina, podskupina, naziv, vrpremiere, vrponovitvepremie
 
 
 --
--- TOC entry 3122 (class 0 OID 24315811)
+-- TOC entry 3122 (class 0 OID 24472612)
 -- Dependencies: 212
 -- Data for Name: postavkaracuna; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3290,91 +3290,91 @@ COPY postavkaracuna (id, racun_id) FROM stdin;
 
 
 --
--- TOC entry 3100 (class 0 OID 24315565)
+-- TOC entry 3100 (class 0 OID 24472366)
 -- Dependencies: 190
 -- Data for Name: postninaslovi; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY postninaslovi (id, klient_id, oseba_id, drzava_id, naziv, nazivdva, ulica, ulicadva, posta, postanaziv, pokrajina, jeeu, privzeti) FROM stdin;
-00060000-5633-6c3d-3cca-90ba364c9d8d	00080000-5633-6c3c-7c03-5984226b44ef	\N	00040000-5633-6c3a-d15a-81c1e66e1222	Narodni dom	\N	Koroška 15	\N	9231	Beltinci	\N	f	t
-00060000-5633-6c3d-67ed-d65a50011645	00080000-5633-6c3c-7c03-5984226b44ef	\N	00040000-5633-6c3a-d15a-81c1e66e1222	Korotan	\N	Koroška 22	\N	9231	Beltinci	\N	f	f
-00060000-5633-6c3d-b7bd-4369cd9df8a6	00080000-5633-6c3c-65e8-7a57cf47d658	\N	00040000-5633-6c3a-d15a-81c1e66e1222	Rimljan	\N	Rimska ploščad 7	\N	9231	Beltinci	\N	f	t
+00060000-5637-258e-d283-dbd1e68e9cfa	00080000-5637-258e-b26f-2e0ebf660f43	\N	00040000-5637-258c-1820-c0f8993afd54	Narodni dom	\N	Koroška 15	\N	9231	Beltinci	\N	f	t
+00060000-5637-258e-f4a0-43f7f429f499	00080000-5637-258e-b26f-2e0ebf660f43	\N	00040000-5637-258c-1820-c0f8993afd54	Korotan	\N	Koroška 22	\N	9231	Beltinci	\N	f	f
+00060000-5637-258e-94d3-24d1ab14b018	00080000-5637-258e-9d0f-62429bb973b3	\N	00040000-5637-258c-1820-c0f8993afd54	Rimljan	\N	Rimska ploščad 7	\N	9231	Beltinci	\N	f	t
 \.
 
 
 --
--- TOC entry 3112 (class 0 OID 24315709)
+-- TOC entry 3112 (class 0 OID 24472510)
 -- Dependencies: 202
 -- Data for Name: praznik; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY praznik (id, ime, dan, mesec, leto, delaprost) FROM stdin;
-00430000-5633-6c3a-e137-31380cd91db7	novo leto	1	1	\N	t
-00430000-5633-6c3a-cadf-482195bce507	Prešernov dan, slovenski kulturni praznik	8	2	\N	t
-00430000-5633-6c3a-32b7-75ec8608c782	dan upora proti okupatorju	27	4	\N	t
-00430000-5633-6c3a-fa59-dd9a751bffb3	praznik dela	1	5	\N	t
-00430000-5633-6c3a-3308-d09da3f2272b	praznik dela	2	5	\N	t
-00430000-5633-6c3a-6ef8-bffd7229abe0	dan Primoža Trubarja	8	6	\N	f
-00430000-5633-6c3a-376d-0f8a8d8ac35f	dan državnosti	25	6	\N	t
-00430000-5633-6c3a-683e-8a30d4e97690	združitev prekmurskih Slovencev z matičnim narodom	17	8	\N	f
-00430000-5633-6c3a-5c91-9509a9b01df7	vrnitev Primorske k matični domovini	15	9	\N	f
-00430000-5633-6c3a-06e6-af0a48525cba	dan suverenosti	25	10	\N	f
-00430000-5633-6c3a-f7e7-d9f6e3720158	dan spomina na mrtve	1	11	\N	t
-00430000-5633-6c3a-791b-e087e8a5e40d	dan Rudolfa Maistra	23	11	\N	f
-00430000-5633-6c3a-01c7-b0472367bc39	božič	25	12	\N	t
-00430000-5633-6c3a-a0e1-8b2d24d4eb12	dan samostojnosti in enotnosti	26	12	\N	t
-00430000-5633-6c3a-51b8-8dbb57ce86e8	Marijino vnebovzetje	15	8	\N	t
-00430000-5633-6c3a-2db9-9021b6bac309	dan reformacije	31	10	\N	t
-00430000-5633-6c3a-d6dc-7249b295af71	velikonočna nedelja	27	3	2016	t
-00430000-5633-6c3a-28f9-0989a0c49519	velikonočna nedelja	16	4	2017	t
-00430000-5633-6c3a-68d7-e48e16265c33	velikonočna nedelja	1	4	2018	t
-00430000-5633-6c3a-9df6-cbe8cb2e7776	velikonočna nedelja	21	4	2019	t
-00430000-5633-6c3a-8618-2d7744abbd9e	velikonočna nedelja	12	4	2020	t
-00430000-5633-6c3a-2d61-f1b08d07cab1	velikonočna nedelja	4	4	2021	t
-00430000-5633-6c3a-559f-81a4ebbac35c	velikonočna nedelja	17	4	2022	t
-00430000-5633-6c3a-1324-30f983dc5b97	velikonočna nedelja	9	4	2023	t
-00430000-5633-6c3a-46cf-1c9a9355ecc8	velikonočna nedelja	31	3	2024	t
-00430000-5633-6c3a-814e-f5cd236a9df4	velikonočna nedelja	20	4	2025	t
-00430000-5633-6c3a-e095-142517899ac2	velikonočna nedelja	5	4	2026	t
-00430000-5633-6c3a-ad34-5b5dd79d95c6	velikonočna nedelja	28	3	2027	t
-00430000-5633-6c3a-65f1-a27baa9e1693	velikonočna nedelja	16	4	2028	t
-00430000-5633-6c3a-c242-fe912cf6d3da	velikonočna nedelja	1	4	2029	t
-00430000-5633-6c3a-50fd-855406131981	velikonočna nedelja	21	4	2030	t
-00430000-5633-6c3a-7614-6ef37f33ae17	velikonočni ponedeljek	28	3	2016	t
-00430000-5633-6c3a-4887-d4e881b19979	velikonočni ponedeljek	17	4	2017	t
-00430000-5633-6c3a-596e-8e05f8661dc8	velikonočni ponedeljek	2	4	2018	t
-00430000-5633-6c3a-440c-dc9acd15d64e	velikonočni ponedeljek	22	4	2019	t
-00430000-5633-6c3a-9e9e-dcb76c75c83c	velikonočni ponedeljek	13	4	2020	t
-00430000-5633-6c3a-9437-6f54386b4ab6	velikonočni ponedeljek	5	4	2021	t
-00430000-5633-6c3a-6b5a-df3799f199b8	velikonočni ponedeljek	18	4	2022	t
-00430000-5633-6c3a-d69e-d44b0b6dc143	velikonočni ponedeljek	10	4	2023	t
-00430000-5633-6c3a-6c26-ef22db308195	velikonočni ponedeljek	1	4	2024	t
-00430000-5633-6c3a-9b85-a33fe973432c	velikonočni ponedeljek	21	4	2025	t
-00430000-5633-6c3a-71d2-831d72a4f52d	velikonočni ponedeljek	6	4	2026	t
-00430000-5633-6c3a-b327-b366cd128bad	velikonočni ponedeljek	29	3	2027	t
-00430000-5633-6c3a-3a0d-05c4868179d8	velikonočni ponedeljek	17	4	2028	t
-00430000-5633-6c3a-3292-89b532faa472	velikonočni ponedeljek	2	4	2029	t
-00430000-5633-6c3a-94b0-44942760b738	velikonočni ponedeljek	22	4	2030	t
-00430000-5633-6c3a-4d4f-c4bf49670616	binkoštna nedelja - binkošti	15	5	2016	t
-00430000-5633-6c3a-8b7f-398856cb1d3e	binkoštna nedelja - binkošti	4	6	2017	t
-00430000-5633-6c3a-cb4e-2d808d0b35c8	binkoštna nedelja - binkošti	20	5	2018	t
-00430000-5633-6c3a-1621-bfb30dfadb3a	binkoštna nedelja - binkošti	9	6	2019	t
-00430000-5633-6c3a-c47d-e45d16cd2349	binkoštna nedelja - binkošti	31	5	2020	t
-00430000-5633-6c3a-26c3-ef5d4b37f13c	binkoštna nedelja - binkošti	23	5	2021	t
-00430000-5633-6c3a-9bd9-7d25424aec37	binkoštna nedelja - binkošti	5	6	2022	t
-00430000-5633-6c3a-96c8-a3416cd91c13	binkoštna nedelja - binkošti	28	5	2023	t
-00430000-5633-6c3a-6b73-6bb11523e9aa	binkoštna nedelja - binkošti	19	5	2024	t
-00430000-5633-6c3a-1906-89be519a3770	binkoštna nedelja - binkošti	8	6	2025	t
-00430000-5633-6c3a-084d-6bae28532c03	binkoštna nedelja - binkošti	24	5	2026	t
-00430000-5633-6c3a-603f-31805a481e7b	binkoštna nedelja - binkošti	16	5	2027	t
-00430000-5633-6c3a-8acd-b45588894e78	binkoštna nedelja - binkošti	4	6	2028	t
-00430000-5633-6c3a-5644-3939f203d033	binkoštna nedelja - binkošti	20	5	2029	t
-00430000-5633-6c3a-21f7-748f17aec755	binkoštna nedelja - binkošti	9	6	2030	t
+00430000-5637-258c-a1c6-e1575b9fe71c	novo leto	1	1	\N	t
+00430000-5637-258c-be08-451d2fb76cef	Prešernov dan, slovenski kulturni praznik	8	2	\N	t
+00430000-5637-258c-66b2-24ffe0aa223a	dan upora proti okupatorju	27	4	\N	t
+00430000-5637-258c-0186-4e3902a2a2da	praznik dela	1	5	\N	t
+00430000-5637-258c-d9e6-0dd6e90a1605	praznik dela	2	5	\N	t
+00430000-5637-258c-dd48-7c6ba5916f17	dan Primoža Trubarja	8	6	\N	f
+00430000-5637-258c-5f77-04f22d10cc2f	dan državnosti	25	6	\N	t
+00430000-5637-258c-c574-bd33acba4fa2	združitev prekmurskih Slovencev z matičnim narodom	17	8	\N	f
+00430000-5637-258c-5b9b-20d13704622c	vrnitev Primorske k matični domovini	15	9	\N	f
+00430000-5637-258c-b359-bc50ca68ed7f	dan suverenosti	25	10	\N	f
+00430000-5637-258c-e28c-1211cb2c00e3	dan spomina na mrtve	1	11	\N	t
+00430000-5637-258c-191f-ed0292d4ad06	dan Rudolfa Maistra	23	11	\N	f
+00430000-5637-258c-f05f-2e2ecefac9d0	božič	25	12	\N	t
+00430000-5637-258c-c1a3-1e9e4d67867d	dan samostojnosti in enotnosti	26	12	\N	t
+00430000-5637-258c-3ebe-908dd01351f8	Marijino vnebovzetje	15	8	\N	t
+00430000-5637-258c-9b4e-0219c204d8e3	dan reformacije	31	10	\N	t
+00430000-5637-258c-80d3-e29f1fe2dc58	velikonočna nedelja	27	3	2016	t
+00430000-5637-258c-b341-8ce930738b21	velikonočna nedelja	16	4	2017	t
+00430000-5637-258c-fd3e-b97a1568b387	velikonočna nedelja	1	4	2018	t
+00430000-5637-258c-70f7-d47423dd428f	velikonočna nedelja	21	4	2019	t
+00430000-5637-258c-6894-bbb835b3af34	velikonočna nedelja	12	4	2020	t
+00430000-5637-258c-6d1f-edf73ea609d7	velikonočna nedelja	4	4	2021	t
+00430000-5637-258c-e1c1-f12c7df2bca2	velikonočna nedelja	17	4	2022	t
+00430000-5637-258c-846e-43a54bb60f46	velikonočna nedelja	9	4	2023	t
+00430000-5637-258c-7062-62a544977e2c	velikonočna nedelja	31	3	2024	t
+00430000-5637-258c-fddf-92571ff8df42	velikonočna nedelja	20	4	2025	t
+00430000-5637-258c-59eb-4590e47ba8f3	velikonočna nedelja	5	4	2026	t
+00430000-5637-258c-e3af-bb898c5b8f1d	velikonočna nedelja	28	3	2027	t
+00430000-5637-258c-1463-ddf407f92d50	velikonočna nedelja	16	4	2028	t
+00430000-5637-258c-9ec8-e283aac2a6e0	velikonočna nedelja	1	4	2029	t
+00430000-5637-258c-1543-a8e7ed152d84	velikonočna nedelja	21	4	2030	t
+00430000-5637-258c-f180-ada518918766	velikonočni ponedeljek	28	3	2016	t
+00430000-5637-258c-e84d-85383fcb2087	velikonočni ponedeljek	17	4	2017	t
+00430000-5637-258c-bf12-b39fdf37c98c	velikonočni ponedeljek	2	4	2018	t
+00430000-5637-258c-553f-315828c14bd8	velikonočni ponedeljek	22	4	2019	t
+00430000-5637-258c-38f7-0a6c2e9964ef	velikonočni ponedeljek	13	4	2020	t
+00430000-5637-258c-70dd-a2c4c46ac84f	velikonočni ponedeljek	5	4	2021	t
+00430000-5637-258c-c131-d06434db99be	velikonočni ponedeljek	18	4	2022	t
+00430000-5637-258c-cf40-0f0c8a68f4a2	velikonočni ponedeljek	10	4	2023	t
+00430000-5637-258c-73e0-f4e93c06ac8a	velikonočni ponedeljek	1	4	2024	t
+00430000-5637-258c-e263-15fe9ecf215b	velikonočni ponedeljek	21	4	2025	t
+00430000-5637-258c-0fbc-b5338083eaf1	velikonočni ponedeljek	6	4	2026	t
+00430000-5637-258c-bb23-58c5763129de	velikonočni ponedeljek	29	3	2027	t
+00430000-5637-258c-0f05-6137beb5d451	velikonočni ponedeljek	17	4	2028	t
+00430000-5637-258c-eb71-a26a236a596c	velikonočni ponedeljek	2	4	2029	t
+00430000-5637-258c-4988-8e2cad90030d	velikonočni ponedeljek	22	4	2030	t
+00430000-5637-258c-488c-eb140aa51ff9	binkoštna nedelja - binkošti	15	5	2016	t
+00430000-5637-258c-0f69-048b18dc700a	binkoštna nedelja - binkošti	4	6	2017	t
+00430000-5637-258c-eca7-b2e12104bb48	binkoštna nedelja - binkošti	20	5	2018	t
+00430000-5637-258c-f2ca-4f7abc3f0d49	binkoštna nedelja - binkošti	9	6	2019	t
+00430000-5637-258c-72c6-ec2b38fb7519	binkoštna nedelja - binkošti	31	5	2020	t
+00430000-5637-258c-da9a-0b0c32f31101	binkoštna nedelja - binkošti	23	5	2021	t
+00430000-5637-258c-dbc4-1af8e14ebd99	binkoštna nedelja - binkošti	5	6	2022	t
+00430000-5637-258c-a461-611c70c2e3be	binkoštna nedelja - binkošti	28	5	2023	t
+00430000-5637-258c-04c5-3f78567d376d	binkoštna nedelja - binkošti	19	5	2024	t
+00430000-5637-258c-d494-6a77c8fc18b1	binkoštna nedelja - binkošti	8	6	2025	t
+00430000-5637-258c-5968-3ea450db0ce0	binkoštna nedelja - binkošti	24	5	2026	t
+00430000-5637-258c-0f9c-3712f77f7b0a	binkoštna nedelja - binkošti	16	5	2027	t
+00430000-5637-258c-cecc-86d03c2670cb	binkoštna nedelja - binkošti	4	6	2028	t
+00430000-5637-258c-d9f1-3fe660fd4d44	binkoštna nedelja - binkošti	20	5	2029	t
+00430000-5637-258c-1a66-122d201c5109	binkoštna nedelja - binkošti	9	6	2030	t
 \.
 
 
 --
--- TOC entry 3108 (class 0 OID 24315669)
+-- TOC entry 3108 (class 0 OID 24472470)
 -- Dependencies: 198
 -- Data for Name: predstava; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3384,7 +3384,7 @@ COPY predstava (id, uprizoritev_id, gostovanje_id, dezurni_id, zaporedna, zapore
 
 
 --
--- TOC entry 3109 (class 0 OID 24315681)
+-- TOC entry 3109 (class 0 OID 24472482)
 -- Dependencies: 199
 -- Data for Name: predstava_abonma; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3394,7 +3394,7 @@ COPY predstava_abonma (predstava_id, abonma_id) FROM stdin;
 
 
 --
--- TOC entry 3124 (class 0 OID 24315823)
+-- TOC entry 3124 (class 0 OID 24472624)
 -- Dependencies: 214
 -- Data for Name: prodajapredstave; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3404,7 +3404,7 @@ COPY prodajapredstave (id, sedezni_red_id, dogodek_id) FROM stdin;
 
 
 --
--- TOC entry 3150 (class 0 OID 24316249)
+-- TOC entry 3150 (class 0 OID 24473050)
 -- Dependencies: 240
 -- Data for Name: produkcijadelitev; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3414,35 +3414,35 @@ COPY produkcijadelitev (id, koproducent_id, odstotekfinanciranja, delez, maticni
 
 
 --
--- TOC entry 3151 (class 0 OID 24316259)
+-- TOC entry 3151 (class 0 OID 24473060)
 -- Dependencies: 241
 -- Data for Name: produkcijskahisa; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY produkcijskahisa (id, popa_id, sifra, status) FROM stdin;
-00190000-5633-6c3d-8a83-3b7d6e840038	00080000-5633-6c3c-2ccd-28643cab5b93	0987	AK
-00190000-5633-6c3d-12a3-0b7eb0f192ac	00080000-5633-6c3c-65e8-7a57cf47d658	0989	AK
-00190000-5633-6c3d-a9ba-cc538c5373ce	00080000-5633-6c3d-27a1-ee9d6745ba06	0986	AK
-00190000-5633-6c3d-5583-05c69ff39524	00080000-5633-6c3d-88a5-bdff5eba4163	0984	AK
-00190000-5633-6c3d-33d0-fa3d6c1b4609	00080000-5633-6c3d-bdb4-71451bc54ec6	0983	AK
-00190000-5633-6c3d-0a5a-36d24b06c495	00080000-5633-6c3d-1013-1528733676f8	0982	AK
-00190000-5633-6c3e-b888-dc811ef75f71	00080000-5633-6c3e-3538-b47753dc711d	1001	AK
+00190000-5637-258e-f0ec-57f7ef04d542	00080000-5637-258e-f88c-1e7ed3bb3632	0987	AK
+00190000-5637-258e-6e74-af400d5ce6bc	00080000-5637-258e-9d0f-62429bb973b3	0989	AK
+00190000-5637-258e-abe1-5f02f391599b	00080000-5637-258e-86b8-6f5d38b01deb	0986	AK
+00190000-5637-258e-742a-22c6fde26dc9	00080000-5637-258e-79f0-00d9f55256dc	0984	AK
+00190000-5637-258e-9a6a-0afc3e67c3e9	00080000-5637-258e-ffd7-02f69914d368	0983	AK
+00190000-5637-258e-ab48-0290a41b0444	00080000-5637-258e-66d2-1788078e3562	0982	AK
+00190000-5637-2590-1622-afccd4c5cca6	00080000-5637-2590-ed21-c4cf4350e921	1001	AK
 \.
 
 
 --
--- TOC entry 3148 (class 0 OID 24316158)
+-- TOC entry 3148 (class 0 OID 24472959)
 -- Dependencies: 238
 -- Data for Name: programdela; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY programdela (id, sifra, naziv, zacetek, konec, zakljuceno, potrjenprogram, stpremier, stpremiervelikih, stpremiermalih, stpremiermalihkopr, stpremiervelikihkopr, stpremiersredkopr, stint, stfest, strazno, stizjem, stponprem, stponprej, stponprejvelikih, stponprejmalih, stponprejmalihkopr, stponprejsredkopr, stponprejvelikihkopr, stgostujo, vrps1, vrps1do, vrps1mat, vrps1gostovsz, stizvnekomerc, stizvprem, stizvpremdoma, stizvpremkopr, stizvponprem, stizvponpremdoma, stizvponpremzamejo, stizvponpremgost, stizvponpremkopr, stizvponpremint, stizvponpremkoprint, stizvponprej, stizvponprejdoma, stizvponprejzamejo, stizvponprejgost, stizvponprejkopr, stizvponprejint, stizvponprejkoprint, stizvgostuj, stizvostalihnek, stizvgostovanjslo, stizvgostovanjzam, stizvgostovanjint, stobisknekom, stobisknekommat, stobisknekomgostslo, stobisknekomgostzam, stobisknekomgostint, stobiskprem, stobiskpremdoma, stobiskpremkopr, stobiskponprem, stobiskponpremdoma, stobiskponpremkopr, stobiskponpremkoprint, stobiskponpremgost, stobiskponpremzamejo, stobiskponpremint, avgobiskprired, avgzaseddvoran, avgcenavstopnice, stprodvstopnic, stkoprodukcij, stkoprodukcijint, stkoprodukcijnvo, stzaposlenih, stzaposigralcev, avgstnastopovigr, sthonorarnihzun, sthonorarnihzunigr, sthonorarnihzunigrtujjz, sthonorarnihzunsamoz, sredstvaint, sredstvaavt, sredstvazaprosenoprem, sredstvazaprosenoponprem, sredstvazaprosenoponprej, sredstvazaprosenogostujo, sredstvazaprosenoint, sredstvazaprosenofest, sredstvazaprosenorazno, sredstvazaprosenoizjem, sredstvadrugijavniprem, sredstvadrugijavniponprem, sredstvadrugijavniponprej, sredstvadrugijavnigostujo, sredstvadrugijavniint, sredstvadrugijavnifest, sredstvadrugijavnirazno, sredstvadrugijavniizjem, sredstvadrugiviriprem, sredstvadrugiviriponprem, sredstvadrugiviriponprej, sredstvadrugivirigostujo, sredstvadrugiviriint, sredstvadrugivirifest, sredstvadrugivirirazno, sredstvadrugiviriizjem, sredstvavlozekgostiteljaprem, sredstvavlozekgostiteljaponprem, sredstvavlozekgostiteljaponprej, sredstvavlozekgostiteljagostujo, sredstvavlozekgostiteljaint, sredstvavlozekgostiteljafest, sredstvavlozekgostiteljarazno, sredstvavlozekgostiteljaizjem, sredstvalastnaprem, sredstvalastnaponprem, sredstvalastnaponprej, sredstvalastnagostujo, sredstvalastnaint, sredstvalastnafest, sredstvalastnarazno, sredstvalastnaizjem, sredstvaavtsamoz) FROM stdin;
-00290000-5633-6c3d-6ecc-b448b71ff24b	0001	Testni program dela	2016-02-01	2017-02-01	f	f	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0.00	0.00	0.00	0.00	0.00	0	0	0	0.00	0	0.00	0.00	0	0	0	0.00	0	0.00	0.00	0	0	0	0	0.00	0.00	0.00	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0.00	0.00	0.00	\N	0	0	0	\N	\N	0.00	0	0	0	0	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00
+00290000-5637-258f-148c-9d51252f116e	0001	Testni program dela	2016-02-01	2017-02-01	f	f	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0.00	0.00	0.00	0.00	0.00	0	0	0	0.00	0	0.00	0.00	0	0	0	0.00	0	0.00	0.00	0	0	0	0	0.00	0.00	0.00	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0.00	0.00	0.00	\N	0	0	0	\N	\N	0.00	0	0	0	0	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00	0.00
 \.
 
 
 --
--- TOC entry 3152 (class 0 OID 24316267)
+-- TOC entry 3152 (class 0 OID 24473068)
 -- Dependencies: 242
 -- Data for Name: programskaenotasklopa; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3452,24 +3452,24 @@ COPY programskaenotasklopa (id, naslovpe, avtorpe, obsegpe, mesecpe, vrednostpe,
 
 
 --
--- TOC entry 3128 (class 0 OID 24315852)
+-- TOC entry 3128 (class 0 OID 24472653)
 -- Dependencies: 218
 -- Data for Name: prostor; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY prostor (id, popa_id, naslov_id, sifra, naziv, jeprizorisce, jematicnioder, seplanira, kapaciteta, opis) FROM stdin;
-00220000-5633-6c3c-869d-f9239f6b8ff6	\N	\N	0001	Poskusna 1	f	\N	t	8	Poskusna učilnica v prvem
-00220000-5633-6c3c-7afb-b43194beaa0d	\N	\N	0002	Poskusna 3	f	\N	f	34	Poskusna učilnica v tretjem
-00220000-5633-6c3c-67ac-f7ed295d87d8	\N	\N	0003	Kazinska	t	\N	t	84	Kazinska dvorana
-00220000-5633-6c3c-c6e8-f60a77391369	\N	\N	0004	Mali oder	t	\N	t	24	Mali oder 
-00220000-5633-6c3c-ab64-943cf304ea71	\N	\N	0005	Komorni oder	t	\N	t	150	Komorni oder
-00220000-5633-6c3c-6f54-fc365ef1a4b1	\N	\N	0006	Stara dvorana	t	\N	t	96	Stara dvorana ali dvorana Franceta Prešerna
-00220000-5633-6c3c-fa94-d18e7ccb5489	\N	\N	0007	Velika dvorana	t	\N	t	160	Velika, glavna dvorana
+00220000-5637-258e-8542-064217804126	\N	\N	0001	Poskusna 1	f	\N	t	8	Poskusna učilnica v prvem
+00220000-5637-258e-02de-0d1142fc3db4	\N	\N	0002	Poskusna 3	f	\N	f	34	Poskusna učilnica v tretjem
+00220000-5637-258e-d10c-e40bd3c27c31	\N	\N	0003	Kazinska	t	\N	t	84	Kazinska dvorana
+00220000-5637-258e-72ad-6360da63a12d	\N	\N	0004	Mali oder	t	\N	t	24	Mali oder 
+00220000-5637-258e-159c-fdcf675545bd	\N	\N	0005	Komorni oder	t	\N	t	150	Komorni oder
+00220000-5637-258e-c381-af3e70e403d0	\N	\N	0006	Stara dvorana	t	\N	t	96	Stara dvorana ali dvorana Franceta Prešerna
+00220000-5637-258e-56fb-a526383f56b6	\N	\N	0007	Velika dvorana	t	\N	t	160	Velika, glavna dvorana
 \.
 
 
 --
--- TOC entry 3120 (class 0 OID 24315796)
+-- TOC entry 3120 (class 0 OID 24472597)
 -- Dependencies: 210
 -- Data for Name: racun; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3479,7 +3479,7 @@ COPY racun (id, kupec_id, prodaja_predstave_id, nacin_placina_id, placilni_instr
 
 
 --
--- TOC entry 3119 (class 0 OID 24315786)
+-- TOC entry 3119 (class 0 OID 24472587)
 -- Dependencies: 209
 -- Data for Name: razpisansedez; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3489,7 +3489,7 @@ COPY razpisansedez (id, postavka_racuna_id, sedez_id, prodaja_predstave_id, reze
 
 
 --
--- TOC entry 3141 (class 0 OID 24315997)
+-- TOC entry 3141 (class 0 OID 24472798)
 -- Dependencies: 231
 -- Data for Name: rekvizit; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3499,7 +3499,7 @@ COPY rekvizit (id, ime, vrsta, status) FROM stdin;
 
 
 --
--- TOC entry 3135 (class 0 OID 24315927)
+-- TOC entry 3135 (class 0 OID 24472728)
 -- Dependencies: 225
 -- Data for Name: rekviziterstvo; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3509,7 +3509,7 @@ COPY rekviziterstvo (id, rekvizit_id, uprizoritev_id, namenuporabe, opispostavit
 
 
 --
--- TOC entry 3106 (class 0 OID 24315643)
+-- TOC entry 3106 (class 0 OID 24472444)
 -- Dependencies: 196
 -- Data for Name: report; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3519,15 +3519,15 @@ COPY report (id, job_id, title, filename, transfers, size, format, hash, created
 
 
 --
--- TOC entry 3085 (class 0 OID 24315405)
+-- TOC entry 3085 (class 0 OID 24472206)
 -- Dependencies: 175
 -- Data for Name: revizije; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY revizije (id, razred, objectid, upor, datum, tip, data) FROM stdin;
-1	App\\Entity\\Popa	00080000-5633-6c3e-3538-b47753dc711d	00010000-5633-6c3b-524f-9153cc77d3b5	2015-10-30 14:10:22	INS	a:0:{}
-2	App\\Entity\\Option	00000000-5633-6c3e-d53d-a308dc876940	00010000-5633-6c3b-524f-9153cc77d3b5	2015-10-30 14:10:22	INS	a:0:{}
-3	ProgramDela\\Entity\\ProdukcijskaHisa	00190000-5633-6c3e-b888-dc811ef75f71	00010000-5633-6c3b-524f-9153cc77d3b5	2015-10-30 14:10:22	INS	a:0:{}
+1	App\\Entity\\Popa	00080000-5637-2590-ed21-c4cf4350e921	00010000-5637-258d-d860-6011d7245e5f	2015-11-02 09:57:52	INS	a:0:{}
+2	App\\Entity\\Option	00000000-5637-2590-3156-ce9d3ce5d875	00010000-5637-258d-d860-6011d7245e5f	2015-11-02 09:57:52	INS	a:0:{}
+3	ProgramDela\\Entity\\ProdukcijskaHisa	00190000-5637-2590-1622-afccd4c5cca6	00010000-5637-258d-d860-6011d7245e5f	2015-11-02 09:57:52	INS	a:0:{}
 \.
 
 
@@ -3541,7 +3541,7 @@ SELECT pg_catalog.setval('revizije_id_seq', 3, true);
 
 
 --
--- TOC entry 3129 (class 0 OID 24315865)
+-- TOC entry 3129 (class 0 OID 24472666)
 -- Dependencies: 219
 -- Data for Name: rezervacija; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3551,40 +3551,40 @@ COPY rezervacija (id, prodaja_predstave_id) FROM stdin;
 
 
 --
--- TOC entry 3089 (class 0 OID 24315443)
+-- TOC entry 3089 (class 0 OID 24472244)
 -- Dependencies: 179
 -- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY role (id, name, description, builtin) FROM stdin;
-00020000-5633-6c3b-43d5-6e74ddded961	administrator-dostopov	Uporavljanje uporabnikov, skupin, vlog in dovoljenj.	t
-00020000-5633-6c3b-6605-3dd63c6ff174	anonymous	Vloga za javne - neavtenticirane uporabnike	t
-00020000-5633-6c3b-970e-5547f6e9b2d3	ifi-all	Polni dostop do vsega v aplikaciji.	t
-00020000-5633-6c3b-2a0f-adde5b57cd34	ifi-readall	Dostop do vseh -read in -list dovoljenj.	t
-00020000-5633-6c3b-7f80-469519e10e41	planer	Planer dogodkov v koledarju	t
-00020000-5633-6c3b-9859-73daf39842d4	kadrovska	Kadrovska služba	t
-00020000-5633-6c3b-a11b-3de96b320fb4	arhivar	Ažuriranje arhivalij	t
-00020000-5633-6c3b-ae44-13b20e034ee8	igralec	Igralec	t
-00020000-5633-6c3b-1eb8-6a327f992f25	prisotnost	Vnašalec prisotnosti, tudi za tiste izven uprizoritev	t
-00020000-5633-6c3c-5b32-9490a1911e15	vsadovoljenja	Vloga z vsemi posameznimi dovoljenji	t
+00020000-5637-258d-1abb-e60f79d9553a	administrator-dostopov	Uporavljanje uporabnikov, skupin, vlog in dovoljenj.	t
+00020000-5637-258d-1ba9-d18ba8e4ade0	anonymous	Vloga za javne - neavtenticirane uporabnike	t
+00020000-5637-258d-1d4e-b6bdc31cf612	ifi-all	Polni dostop do vsega v aplikaciji.	t
+00020000-5637-258d-ef58-a73bc736529e	ifi-readall	Dostop do vseh -read in -list dovoljenj.	t
+00020000-5637-258d-59d7-fdcb7a9a5038	planer	Planer dogodkov v koledarju	t
+00020000-5637-258d-94e1-ef3a3239cfd0	kadrovska	Kadrovska služba	t
+00020000-5637-258d-963e-521e62e8fd6f	arhivar	Ažuriranje arhivalij	t
+00020000-5637-258d-d8e5-907e3e939914	igralec	Igralec	t
+00020000-5637-258d-fbd1-c562870c49e7	prisotnost	Vnašalec prisotnosti, tudi za tiste izven uprizoritev	t
+00020000-5637-258e-6140-9bbc84dae0ef	vsadovoljenja	Vloga z vsemi posameznimi dovoljenji	t
 \.
 
 
 --
--- TOC entry 3087 (class 0 OID 24315427)
+-- TOC entry 3087 (class 0 OID 24472228)
 -- Dependencies: 177
 -- Data for Name: role2user; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY role2user (user_id, role_id) FROM stdin;
-00010000-5633-6c3b-8e26-86ee7a9daad4	00020000-5633-6c3b-970e-5547f6e9b2d3
-00010000-5633-6c3b-524f-9153cc77d3b5	00020000-5633-6c3b-970e-5547f6e9b2d3
-00010000-5633-6c3c-6c0c-0dc986f05523	00020000-5633-6c3c-5b32-9490a1911e15
+00010000-5637-258d-8c5c-167938b1ee65	00020000-5637-258d-1d4e-b6bdc31cf612
+00010000-5637-258d-d860-6011d7245e5f	00020000-5637-258d-1d4e-b6bdc31cf612
+00010000-5637-258e-8659-48af139b9572	00020000-5637-258e-6140-9bbc84dae0ef
 \.
 
 
 --
--- TOC entry 3131 (class 0 OID 24315879)
+-- TOC entry 3131 (class 0 OID 24472680)
 -- Dependencies: 221
 -- Data for Name: sedez; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3594,7 +3594,7 @@ COPY sedez (id, vrsta_id, sedezni_red_id, podrocja_sedenja_id, stevilka, oznaka,
 
 
 --
--- TOC entry 3123 (class 0 OID 24315817)
+-- TOC entry 3123 (class 0 OID 24472618)
 -- Dependencies: 213
 -- Data for Name: sedeznired; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3604,85 +3604,85 @@ COPY sedeznired (id, kapaciteta, ime) FROM stdin;
 
 
 --
--- TOC entry 3117 (class 0 OID 24315763)
+-- TOC entry 3117 (class 0 OID 24472564)
 -- Dependencies: 207
 -- Data for Name: sezona; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY sezona (id, sifra, ime, zacetek, konec, aktivna) FROM stdin;
-001f0000-5633-6c3c-eec2-ceab2308eaa9	2015	Sezona 2015	2015-01-01	2015-12-31	t
-001f0000-5633-6c3c-17df-5ee2666f88b5	2016	Sezona 2016	2016-01-01	2016-12-31	t
-001f0000-5633-6c3c-78c7-665481fce1a7	2017	Sezona 2017	2017-01-01	2017-12-31	t
+001f0000-5637-258e-c15f-16983b32a6c8	2015	Sezona 2015	2015-01-01	2015-12-31	t
+001f0000-5637-258e-e5a7-f4a0f97bf04d	2016	Sezona 2016	2016-01-01	2016-12-31	t
+001f0000-5637-258e-b3d0-73cca6f5e664	2017	Sezona 2017	2017-01-01	2017-12-31	t
 \.
 
 
 --
--- TOC entry 3083 (class 0 OID 24315392)
+-- TOC entry 3083 (class 0 OID 24472193)
 -- Dependencies: 173
 -- Data for Name: stevilcenje; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY stevilcenje (id, sifra, naziv, prefix, suffix, zacetek, dolzina, format, globalno, poletih) FROM stdin;
-00230000-5633-6c3a-2c30-429d38622033	pri	Privzeto številčenje po letih YYYY-N	\N	\N	1	1	%l-%n	f	t
-00230000-5633-6c3a-6b1d-32c84cc9d27b	123	Privzeto številčenje kratkih šifer	\N	\N	100	3	%n	f	f
-00230000-5633-6c3a-6719-51a434c4f3a3	bcd	Globalno številčenje črtnih kod	\N	\N	1	9	%n	t	f
-00230000-5633-6c3a-b99c-c9af2c2eab2c	sif	Številčenje šifrant	\N	\N	1000	4	%n	f	f
-00230000-5633-6c3a-1023-e77da4800705	tmp	Globalno številčenje začasnih številk	tmp	\N	1000	5	%l%n	t	t
+00230000-5637-258c-a251-2649d4adda1c	pri	Privzeto številčenje po letih YYYY-N	\N	\N	1	1	%l-%n	f	t
+00230000-5637-258c-746e-c4e230d23414	123	Privzeto številčenje kratkih šifer	\N	\N	100	3	%n	f	f
+00230000-5637-258c-01a5-bfb16d1a73e1	bcd	Globalno številčenje črtnih kod	\N	\N	1	9	%n	t	f
+00230000-5637-258c-85ab-766727da571f	sif	Številčenje šifrant	\N	\N	1000	4	%n	f	f
+00230000-5637-258c-116d-c71d7fa332d2	tmp	Globalno številčenje začasnih številk	tmp	\N	1000	5	%l%n	t	t
 \.
 
 
 --
--- TOC entry 3082 (class 0 OID 24315384)
+-- TOC entry 3082 (class 0 OID 24472185)
 -- Dependencies: 172
 -- Data for Name: stevilcenjekonfig; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY stevilcenjekonfig (id, stevilcenje_id, dok) FROM stdin;
-00240000-5633-6c3a-4465-95854685394d	00230000-5633-6c3a-b99c-c9af2c2eab2c	popa
-00240000-5633-6c3a-0741-634340c57f89	00230000-5633-6c3a-b99c-c9af2c2eab2c	oseba
-00240000-5633-6c3a-4495-149f37cfc9f5	00230000-5633-6c3a-b99c-c9af2c2eab2c	tippopa
-00240000-5633-6c3a-fb0a-40ffca929ee3	00230000-5633-6c3a-b99c-c9af2c2eab2c	organizacijskaenota
-00240000-5633-6c3a-4b22-46540531d67d	00230000-5633-6c3a-b99c-c9af2c2eab2c	sezona
-00240000-5633-6c3a-8b0c-8f4c25717274	00230000-5633-6c3a-b99c-c9af2c2eab2c	tipvaje
-00240000-5633-6c3a-308f-05e7e0b23547	00230000-5633-6c3a-6b1d-32c84cc9d27b	prostor
-00240000-5633-6c3a-518c-39c5879ade9c	00230000-5633-6c3a-b99c-c9af2c2eab2c	besedilo
-00240000-5633-6c3a-7633-4c309e61fbb7	00230000-5633-6c3a-b99c-c9af2c2eab2c	uprizoritev
-00240000-5633-6c3a-b3a8-885648d1cf36	00230000-5633-6c3a-b99c-c9af2c2eab2c	funkcija
-00240000-5633-6c3a-9eb6-f0b8e64c1e11	00230000-5633-6c3a-b99c-c9af2c2eab2c	tipfunkcije
-00240000-5633-6c3a-3db8-0d6004032bfd	00230000-5633-6c3a-b99c-c9af2c2eab2c	alternacija
-00240000-5633-6c3a-739a-4f500d55c272	00230000-5633-6c3a-2c30-429d38622033	pogodba
-00240000-5633-6c3a-b8b8-c2de2097d765	00230000-5633-6c3a-b99c-c9af2c2eab2c	zaposlitev
-00240000-5633-6c3a-dd3b-c10567605b6c	00230000-5633-6c3a-b99c-c9af2c2eab2c	zvrstuprizoritve
-00240000-5633-6c3a-fc94-f33873d1b443	00230000-5633-6c3a-2c30-429d38622033	programdela
-00240000-5633-6c3a-8d38-1ba79417489e	00230000-5633-6c3a-b99c-c9af2c2eab2c	zapis
+00240000-5637-258c-f000-98550ab5a684	00230000-5637-258c-85ab-766727da571f	popa
+00240000-5637-258c-c21f-ac41d476a6c6	00230000-5637-258c-85ab-766727da571f	oseba
+00240000-5637-258c-d1f0-b8d4f939ae63	00230000-5637-258c-85ab-766727da571f	tippopa
+00240000-5637-258c-f9f6-c4d557f55531	00230000-5637-258c-85ab-766727da571f	organizacijskaenota
+00240000-5637-258c-af3a-1442186c6a79	00230000-5637-258c-85ab-766727da571f	sezona
+00240000-5637-258c-7db2-603375387562	00230000-5637-258c-85ab-766727da571f	tipvaje
+00240000-5637-258c-c815-2e81479a6b51	00230000-5637-258c-746e-c4e230d23414	prostor
+00240000-5637-258c-eb97-9b88bb4337c1	00230000-5637-258c-85ab-766727da571f	besedilo
+00240000-5637-258c-7af9-e6209cb81f0c	00230000-5637-258c-85ab-766727da571f	uprizoritev
+00240000-5637-258c-36eb-5ee08aa78704	00230000-5637-258c-85ab-766727da571f	funkcija
+00240000-5637-258c-830c-e8f5b43bb840	00230000-5637-258c-85ab-766727da571f	tipfunkcije
+00240000-5637-258c-b755-dd48389d066b	00230000-5637-258c-85ab-766727da571f	alternacija
+00240000-5637-258c-743f-d05f5a900ae4	00230000-5637-258c-a251-2649d4adda1c	pogodba
+00240000-5637-258c-347e-4daa869458b4	00230000-5637-258c-85ab-766727da571f	zaposlitev
+00240000-5637-258c-cd93-80a150e7de43	00230000-5637-258c-85ab-766727da571f	zvrstuprizoritve
+00240000-5637-258c-3e53-05d62decd6d2	00230000-5637-258c-a251-2649d4adda1c	programdela
+00240000-5637-258c-bc26-bf5d3392574d	00230000-5637-258c-85ab-766727da571f	zapis
 \.
 
 
 --
--- TOC entry 3081 (class 0 OID 24315379)
+-- TOC entry 3081 (class 0 OID 24472180)
 -- Dependencies: 171
 -- Data for Name: stevilcenjestanje; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY stevilcenjestanje (id, objid, leto, stevilka) FROM stdin;
-c3685e2d-de4f-4c7d-9b2c-1c1c5d7d49ac	00240000-5633-6c3a-4465-95854685394d	0	1001
+04e7a5e6-74fc-4c63-9754-428d8f7770de	00240000-5637-258c-f000-98550ab5a684	0	1001
 \.
 
 
 --
--- TOC entry 3137 (class 0 OID 24315944)
+-- TOC entry 3137 (class 0 OID 24472745)
 -- Dependencies: 227
 -- Data for Name: strosekuprizoritve; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY strosekuprizoritve (id, uprizoritev_id, popa_id, naziv, vrednostdo, vrednostna, opis, tipstroska, sort, vrstastroska_id) FROM stdin;
-00270000-5633-6c3d-ba27-6ca0cac65857	000e0000-5633-6c3d-85ce-1fd56fc01617	00080000-5633-6c3c-7c03-5984226b44ef	Nabava kostumov	600.50	20.00	Krila in maske	materialni	1	003b0000-5633-6c3a-f65a-7fd8cd3cd25d
-00270000-5633-6c3d-4d70-cfe752d34933	000e0000-5633-6c3d-85ce-1fd56fc01617	00080000-5633-6c3c-7c03-5984226b44ef	Zavese	125.70	3.10	Modra in zelena zavesa	materialni	2	003b0000-5633-6c3a-f65a-7fd8cd3cd25d
+00270000-5637-258f-dcfb-7b4899c75719	000e0000-5637-258e-b535-6f3e01020ab0	00080000-5637-258e-b26f-2e0ebf660f43	Nabava kostumov	600.50	20.00	Krila in maske	materialni	1	003b0000-5637-258c-4f22-e0731127c910
+00270000-5637-258f-4336-d1e19fe49412	000e0000-5637-258e-b535-6f3e01020ab0	00080000-5637-258e-b26f-2e0ebf660f43	Zavese	125.70	3.10	Modra in zelena zavesa	materialni	2	003b0000-5637-258c-4f22-e0731127c910
 \.
 
 
 --
--- TOC entry 3097 (class 0 OID 24315527)
+-- TOC entry 3097 (class 0 OID 24472328)
 -- Dependencies: 187
 -- Data for Name: telefonska; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3692,104 +3692,104 @@ COPY telefonska (id, oseba_id, popa_id, vrsta, stevilka, privzeta) FROM stdin;
 
 
 --
--- TOC entry 3118 (class 0 OID 24315773)
+-- TOC entry 3118 (class 0 OID 24472574)
 -- Dependencies: 208
 -- Data for Name: terminstoritve; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY terminstoritve (id, dogodek_id, alternacija_id, oseba_id, planiranzacetek, planirankonec, zacetek, konec, planiranotraja, dezurni, gost) FROM stdin;
-001a0000-5633-6c3d-3326-1a1cf84fd1c0	00180000-5633-6c3d-5e98-103910d280dc	000c0000-5633-6c3d-d806-c6ffbb4a0461	00090000-5633-6c3d-f31e-d745e1558e51	2015-06-26 10:00:00	2015-06-26 10:00:00	\N	\N	2.00	f	f
-001a0000-5633-6c3d-4011-4a84c159c3bc	00180000-5633-6c3d-5e98-103910d280dc	000c0000-5633-6c3d-2a39-e761b085796d	00090000-5633-6c3d-fd31-b494da40fd86	2015-06-26 10:00:00	2015-06-26 10:00:00	\N	\N	2.00	f	f
-001a0000-5633-6c3d-0ea9-27b0f82b9d79	00180000-5633-6c3d-5e98-103910d280dc	000c0000-5633-6c3d-71e9-8cda09bb4dde	00090000-5633-6c3d-afd2-8217a84f69a0	2015-06-26 10:00:00	2015-06-26 10:00:00	\N	\N	2.00	f	f
-001a0000-5633-6c3d-800d-66b0402fec35	00180000-5633-6c3d-5e98-103910d280dc	000c0000-5633-6c3d-5216-b38a507ca046	00090000-5633-6c3d-250a-a12ad23c1824	2015-06-26 10:00:00	2015-06-26 10:00:00	\N	\N	2.00	f	f
-001a0000-5633-6c3d-4d4a-7701392adf16	00180000-5633-6c3d-5e98-103910d280dc	000c0000-5633-6c3d-2f62-b27647e356b0	00090000-5633-6c3d-6b84-e1fd649751b2	2015-06-26 10:00:00	2015-06-26 10:00:00	\N	\N	2.00	f	f
-001a0000-5633-6c3d-0d8c-cef6c7c238d0	00180000-5633-6c3d-3f5a-4c03199a6302	\N	00090000-5633-6c3d-6b84-e1fd649751b2	2015-08-01 20:00:00	2015-08-01 23:00:00	\N	\N	2.00	t	f
-001a0000-5633-6c3d-4571-1b0dbc05891b	00180000-5633-6c3d-3f5a-4c03199a6302	\N	00090000-5633-6c3d-fd31-b494da40fd86	2015-08-01 20:00:00	2015-08-01 23:00:00	\N	\N	2.00	f	t
+001a0000-5637-258f-a9e2-05baa314efca	00180000-5637-258f-3112-f304d1a8de71	000c0000-5637-258f-4093-bd0028f42bb3	00090000-5637-258e-1322-64b6318fe593	2015-06-26 10:00:00	2015-06-26 10:00:00	\N	\N	2.00	f	f
+001a0000-5637-258f-fedb-6daa907d549e	00180000-5637-258f-3112-f304d1a8de71	000c0000-5637-258f-243a-af2f40c43f0b	00090000-5637-258e-a0fa-d9f6b12d0ba9	2015-06-26 10:00:00	2015-06-26 10:00:00	\N	\N	2.00	f	f
+001a0000-5637-258f-ff4a-696dc577ad33	00180000-5637-258f-3112-f304d1a8de71	000c0000-5637-258f-7ea6-3da14e45e970	00090000-5637-258e-55a6-ba61a01b45d5	2015-06-26 10:00:00	2015-06-26 10:00:00	\N	\N	2.00	f	f
+001a0000-5637-258f-5156-8ae27f03c037	00180000-5637-258f-3112-f304d1a8de71	000c0000-5637-258f-1aae-4812d0bfc183	00090000-5637-258e-c15b-37a3397f2b60	2015-06-26 10:00:00	2015-06-26 10:00:00	\N	\N	2.00	f	f
+001a0000-5637-258f-8e28-7ab90333ccd3	00180000-5637-258f-3112-f304d1a8de71	000c0000-5637-258f-e2ba-b9a9ce88c8c2	00090000-5637-258e-3370-b8dc850227a6	2015-06-26 10:00:00	2015-06-26 10:00:00	\N	\N	2.00	f	f
+001a0000-5637-258f-258c-e8633ab6269c	00180000-5637-258f-38a4-5f83c529a31b	\N	00090000-5637-258e-3370-b8dc850227a6	2015-08-01 20:00:00	2015-08-01 23:00:00	\N	\N	2.00	t	f
+001a0000-5637-258f-7e16-9b59ca0ffe27	00180000-5637-258f-38a4-5f83c529a31b	\N	00090000-5637-258e-a0fa-d9f6b12d0ba9	2015-08-01 20:00:00	2015-08-01 23:00:00	\N	\N	2.00	f	t
 \.
 
 
 --
--- TOC entry 3140 (class 0 OID 24315985)
+-- TOC entry 3140 (class 0 OID 24472786)
 -- Dependencies: 230
 -- Data for Name: tipfunkcije; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY tipfunkcije (id, sifra, ime, opis, imezenski, podrocje, sort) FROM stdin;
-000f0000-5633-6c3a-06d5-700652ae140a	01	Avtor	Avtorji	Avtorka	umetnik	150
-000f0000-5633-6c3a-006a-4143bba700aa	02	Priredba	Priredba	Priredba	umetnik	160
-000f0000-5633-6c3a-2a3b-481000ee24d9	03	Prevod	Prevod	Prevod	umetnik	20
-000f0000-5633-6c3a-7590-1190dadb27b0	04	Režija	Režija	Režija	umetnik	30
-000f0000-5633-6c3a-cb6a-168307bc67f3	05	Dramaturgija	Dramaturgija	Dramaturgija	umetnik	40
-000f0000-5633-6c3a-1583-78a62bb5c490	06	Scenografija	Scenografija	Scenografija	umetnik	60
-000f0000-5633-6c3a-cf61-9b946c9bc227	07	Kostumografija	Kostumografija	Kostumografija	umetnik	70
-000f0000-5633-6c3a-f85c-1150680d8126	08	Koreografija	Koreografija	Koreografija	umetnik	90
-000f0000-5633-6c3a-496f-53781a1dd0e9	09	Oblikovanje svetlobe in zvoka	Oblikovanje svetlobe in zvoka	Oblikovanje svetlobe in zvoka	umetnik	100
-000f0000-5633-6c3a-bc07-f53b0356b4ca	10	Oblikovanje maske	Oblikovanje maske	Oblikovanje maske	umetnik	110
-000f0000-5633-6c3a-24a0-2caadd752eb1	11	Lektorstvo	Lektorstvo	Lektorstvo	umetnik	50
-000f0000-5633-6c3a-e0d4-ed83ec60dd16	12	Glasbeni soustvarjalec	Glasbeni soustvarjalci	Glasbena soustvarjalka	umetnik	80
-000f0000-5633-6c3a-101d-cda42ebf7015	13	Intermedijski ustvarjalec	Intermedijski ustvarjalci	Intermedijski ustvarjalka	umetnik	130
-000f0000-5633-6c3a-6bdc-15c16aa70b7c	14	Posebni efekti -izvedba in svetovanje	Posebni efekti -izvedba in svetovanje	Posebni efekti -izvedba in svetovanje	umetnik	120
-000f0000-5633-6c3a-841f-e6544c603e7c	15	Vloga	Intermedijski ustvarjalci	Intermedijska ustvarjalka	igralec	10
-000f0000-5633-6c3a-1f6b-3fe6cac7b81c	16	Produkcija, mentorstvo	Produkcija, mentorstvo	Produkcija, mentorstvo	umetnik	140
-000f0000-5633-6c3a-edd5-46426afdeb21	17	Tehnična in druga podpora	Tehnična in druga podpora	Tehnična in druga podpora	tehnik	180
-000f0000-5633-6c3a-73f0-f3d742cd6ab4	18	Inšpicient	Inšpicienti	Inšpicientka	inspicient	170
+000f0000-5637-258c-f029-4bae79830aa8	01	Avtor	Avtorji	Avtorka	umetnik	150
+000f0000-5637-258c-bdce-f12d1aef34db	02	Priredba	Priredba	Priredba	umetnik	160
+000f0000-5637-258c-cb3e-080bd7c5e580	03	Prevod	Prevod	Prevod	umetnik	20
+000f0000-5637-258c-faac-5c2a36cfccfb	04	Režija	Režija	Režija	umetnik	30
+000f0000-5637-258c-fd81-dd0b4c9e580b	05	Dramaturgija	Dramaturgija	Dramaturgija	umetnik	40
+000f0000-5637-258c-5bdf-cc3fd2b6f63a	06	Scenografija	Scenografija	Scenografija	umetnik	60
+000f0000-5637-258c-33f7-a174d0c268d7	07	Kostumografija	Kostumografija	Kostumografija	umetnik	70
+000f0000-5637-258c-4f43-e5b71bb35dbd	08	Koreografija	Koreografija	Koreografija	umetnik	90
+000f0000-5637-258c-3177-8e82e3266246	09	Oblikovanje svetlobe in zvoka	Oblikovanje svetlobe in zvoka	Oblikovanje svetlobe in zvoka	umetnik	100
+000f0000-5637-258c-f928-58371766801e	10	Oblikovanje maske	Oblikovanje maske	Oblikovanje maske	umetnik	110
+000f0000-5637-258c-7c25-e0e7cbd996e6	11	Lektorstvo	Lektorstvo	Lektorstvo	umetnik	50
+000f0000-5637-258c-bb40-25631ad51518	12	Glasbeni soustvarjalec	Glasbeni soustvarjalci	Glasbena soustvarjalka	umetnik	80
+000f0000-5637-258c-d69a-f76b77c31d2e	13	Intermedijski ustvarjalec	Intermedijski ustvarjalci	Intermedijski ustvarjalka	umetnik	130
+000f0000-5637-258c-5740-4f89f983e159	14	Posebni efekti -izvedba in svetovanje	Posebni efekti -izvedba in svetovanje	Posebni efekti -izvedba in svetovanje	umetnik	120
+000f0000-5637-258c-0dbe-bfa5babd4ba3	15	Vloga	Intermedijski ustvarjalci	Intermedijska ustvarjalka	igralec	10
+000f0000-5637-258c-3e6d-07bc20148ec7	16	Produkcija, mentorstvo	Produkcija, mentorstvo	Produkcija, mentorstvo	umetnik	140
+000f0000-5637-258c-a8ff-7bea8b0d11ba	17	Tehnična in druga podpora	Tehnična in druga podpora	Tehnična in druga podpora	tehnik	180
+000f0000-5637-258c-6c7f-e11c59290704	18	Inšpicient	Inšpicienti	Inšpicientka	inspicient	170
 \.
 
 
 --
--- TOC entry 3094 (class 0 OID 24315478)
+-- TOC entry 3094 (class 0 OID 24472279)
 -- Dependencies: 184
 -- Data for Name: tippopa; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY tippopa (id, sifra, ime, opis) FROM stdin;
-00400000-5633-6c3c-9fa7-15904722ef2f	0001	šola	osnovna ali srednja šola
-00400000-5633-6c3c-db02-0e104e2fa546	0002	gledalec	gledalec, ki ima abonma ali podobno
-00400000-5633-6c3c-31a4-bad72d6f081c	0003	sponzor	sponzor dogodkov
+00400000-5637-258e-ba11-e06567493a8d	0001	šola	osnovna ali srednja šola
+00400000-5637-258e-c436-a2d284b17229	0002	gledalec	gledalec, ki ima abonma ali podobno
+00400000-5637-258e-ea13-f0f874f353b8	0003	sponzor	sponzor dogodkov
 \.
 
 
 --
--- TOC entry 3153 (class 0 OID 24316278)
+-- TOC entry 3153 (class 0 OID 24473079)
 -- Dependencies: 243
 -- Data for Name: tipprogramskeenote; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY tipprogramskeenote (id, sifra, naziv, koprodukcija, maxfaktor, maxvsi) FROM stdin;
-002b0000-5633-6c3a-73a6-5bacbbc2be93	01	Velika predstava	f	1.00	1.00
-002b0000-5633-6c3a-2fec-432421aedbef	02	Mala predstava	f	0.50	0.50
-002b0000-5633-6c3a-1323-bdf7531a17da	03	Mala koprodukcija	t	0.40	1.00
-002b0000-5633-6c3a-930e-bb73b718c17e	04	Srednja koprodukcija	t	0.70	2.00
-002b0000-5633-6c3a-d855-0b396d15b0d4	05	Velika koprodukcija	t	1.00	3.00
+002b0000-5637-258c-7b5f-091b542624f5	01	Velika predstava	f	1.00	1.00
+002b0000-5637-258c-34d0-c12e6287d7ce	02	Mala predstava	f	0.50	0.50
+002b0000-5637-258c-0542-88f3779b6478	03	Mala koprodukcija	t	0.40	1.00
+002b0000-5637-258c-349a-8cdc352170ed	04	Srednja koprodukcija	t	0.70	2.00
+002b0000-5637-258c-9a6f-f7368d0d24ba	05	Velika koprodukcija	t	1.00	3.00
 \.
 
 
 --
--- TOC entry 3116 (class 0 OID 24315753)
+-- TOC entry 3116 (class 0 OID 24472554)
 -- Dependencies: 206
 -- Data for Name: tipvaje; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY tipvaje (id, sifra, ime, opis) FROM stdin;
-00420000-5633-6c3a-3952-f873b50c84e2	0001	prva vaja	prva vaja
-00420000-5633-6c3a-b5a4-67917c80cdb8	0002	tehnična vaja	tehnična vaja
-00420000-5633-6c3a-f5de-ef0df0cb4f81	0003	lučna vaja	lučna vaja
-00420000-5633-6c3a-0265-f0565aa29328	0004	kostumska vaja	kostumska vaja
-00420000-5633-6c3a-b1cc-e1e3f0483c79	0005	foto vaja	foto vaja
-00420000-5633-6c3a-2cab-b8b43be7c8a0	0006	1. glavna vaja	1. glavna vaja
-00420000-5633-6c3a-2ed8-9f9471f36627	0007	2. glavna vaja	2. glavna vaja
-00420000-5633-6c3a-11ee-972e22e35ef3	0008	1. generalka	1. generalka
-00420000-5633-6c3a-3b68-60fa88a0729c	0009	2. generalka	2. generalka
-00420000-5633-6c3a-f0de-69ad6e5ade71	0010	odprta generalka	odprta generalka
-00420000-5633-6c3a-f8b0-13b5f0771128	0011	obnovitvena vaja	obnovitvena vaja
-00420000-5633-6c3a-3b11-ed6b1413f189	0012	pevska vaja	pevska vaja
-00420000-5633-6c3a-200e-bcd0827263c7	0013	postavitev scene	postavitev scene (za pripravo vaje)
-00420000-5633-6c3a-bac5-7991805a774b	0014	postavitev luči	postavitev luči (za pripravo vaje)
+00420000-5637-258c-6e1d-0475784c60b7	0001	prva vaja	prva vaja
+00420000-5637-258c-55c8-5c796286bb5a	0002	tehnična vaja	tehnična vaja
+00420000-5637-258c-92e5-53a10af1499b	0003	lučna vaja	lučna vaja
+00420000-5637-258c-a09c-11dd6f077eef	0004	kostumska vaja	kostumska vaja
+00420000-5637-258c-1f4e-c6fd433175c6	0005	foto vaja	foto vaja
+00420000-5637-258c-23c5-890834e0c4f3	0006	1. glavna vaja	1. glavna vaja
+00420000-5637-258c-01d4-2baf635befd2	0007	2. glavna vaja	2. glavna vaja
+00420000-5637-258c-bfeb-39fceff3ab9b	0008	1. generalka	1. generalka
+00420000-5637-258c-04d7-b6b740954eac	0009	2. generalka	2. generalka
+00420000-5637-258c-a570-4e59003d905b	0010	odprta generalka	odprta generalka
+00420000-5637-258c-2361-c791d4345868	0011	obnovitvena vaja	obnovitvena vaja
+00420000-5637-258c-a17c-673a873a5d24	0012	pevska vaja	pevska vaja
+00420000-5637-258c-663f-d49ea4f93fb8	0013	postavitev scene	postavitev scene (za pripravo vaje)
+00420000-5637-258c-6f5f-a54433d4ca5c	0014	postavitev luči	postavitev luči (za pripravo vaje)
 \.
 
 
 --
--- TOC entry 3103 (class 0 OID 24315600)
+-- TOC entry 3103 (class 0 OID 24472401)
 -- Dependencies: 193
 -- Data for Name: trr; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3799,60 +3799,60 @@ COPY trr (id, popa_id, oseba_id, stevilka, swift, bic, banka) FROM stdin;
 
 
 --
--- TOC entry 3086 (class 0 OID 24315414)
+-- TOC entry 3086 (class 0 OID 24472215)
 -- Dependencies: 176
 -- Data for Name: uporabniki; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY uporabniki (id, name, password, enabled, expires, defaultroute, defaultrouteparams, email, lastlogon, passresttoken, tokenexpires) FROM stdin;
-00010000-5633-6c3b-524f-9153cc77d3b5	Konzolcni	$2y$05$NS4xMjkyMTcwMzExMjAxROW7VjK.qA10aMb0XMQ2l6A/HL1EU9ZKe	t	\N	\N	\N	console@ifigenija.si	\N	\N	\N
-00010000-5633-6c3c-d047-3824f905952c	testni uporabnik za inšpicienta	$2y$05$NS4xMjkyMTcwMzExMjAxROxkJ1B6xAXex6EZLIwJfWzRJ8DpfecFO	t	\N	\N	\N	ivo@ifigenija.si	\N	\N	\N
-00010000-5633-6c3c-0d67-c59fa165fa2c	testni uporabnik za Tehničnega vodjo	$2y$05$NS4xMjkyMTcwMzExMjAxROu/kXWR9sP9oamkesKuxXLbxkCb387.G	t	\N	\N	\N	tona@ifigenija.si	\N	\N	\N
-00010000-5633-6c3c-8c43-f536795512ce	testni uporabnik za igralca	$2y$05$NS4xMjkyMTcwMzExMjAxRO/hLCgClfERRsfCAFYwxNCcFIVjP2982	t	\N	\N	\N	irena@ifigenija.si	\N	\N	\N
-00010000-5633-6c3c-3424-df654f3dbc6b	testni uporabnik vnašalca termina storitev (TerminStoritve-vse)	$2y$05$NS4xMjkyMTcwMzExMjAxROT6.kTHqEq4.wa2SOnf124/N14m9qeP.	t	\N	\N	\N	tatjana@ifigenija.si	\N	\N	\N
-00010000-5633-6c3c-9b46-215bafb7db0f	testni uporabnik, ki je inšpicient brez zapisov v TerminStoritve	$2y$05$NS4xMjkyMTcwMzExMjAxROHau47Dtb7CME5.nlWwBVM.nusFP.ra2	t	\N	\N	\N	joze@ifigenija.si	\N	\N	\N
-00010000-5633-6c3c-7055-15e3b2d06bef	testna uporabnica, ki je planerka	$2y$05$NS4xMjkyMTcwMzExMjAxRO.B/uJO3C7QRNhdX9Q2hTLQsSupj1V1S	t	\N	\N	\N	petra@ifigenija.si	\N	\N	\N
-00010000-5633-6c3c-aeba-f797c5b8a5c6	testni uporabnik, ki dobi ifi-all vlogo	$2y$05$NS4xMjkyMTcwMzExMjAxROv2d7jqhaV/Mz3EIsKoi7UoFR.SDSMBm	t	\N	\N	\N	ali@ifigenija.si	\N	\N	\N
-00010000-5633-6c3c-b850-0f4805c58694	testni uporabnik, ki dobi ifi-readall vlogo	$2y$05$NS4xMjkyMTcwMzExMjAxROYB9g.gnkufr1l/gWK6mkx.ySqrOWnJC	t	\N	\N	\N	berta@ifigenija.si	\N	\N	\N
-00010000-5633-6c3c-6163-0cbe4dfe7fe0	testni uporabnik, ki dobi aaa-write dovoljenje	$2y$05$NS4xMjkyMTcwMzExMjAxRORujYObKX.DzpXVYbePkiJkHqg0/Ylya	t	\N	\N	\N	aaron@ifigenija.si	\N	\N	\N
-00010000-5633-6c3c-6c0c-0dc986f05523	testni uporabnik ki dobi vsa posamezna dovoljenja	$2y$05$NS4xMjkyMTcwMzExMjAxRO2ymwxVXTr7U4Ncdn.bN49E8rLw9Jg0O	t	\N	\N	\N	vesna@ifigenija.si	\N	\N	\N
-00010000-5633-6c3b-8e26-86ee7a9daad4	Administrator	$2y$05$NS4xMjkyMTcwMzExMjAxROvZ3ZK1rCz1z6kWFFbQn0D.v3kzLt6iq	t	\N	\N	\N	admin@ifigenija.si	\N	\N	\N
+00010000-5637-258d-d860-6011d7245e5f	Konzolcni	$2y$05$NS4xMjkyMTcwMzExMjAxROIenCxFjxdge7X4WbTBY.cGVnlyQq6ku	t	\N	\N	\N	console@ifigenija.si	\N	\N	\N
+00010000-5637-258e-1ffe-81bd5952124d	testni uporabnik za inšpicienta	$2y$05$NS4xMjkyMTcwMzExMjAxROxkJ1B6xAXex6EZLIwJfWzRJ8DpfecFO	t	\N	\N	\N	ivo@ifigenija.si	\N	\N	\N
+00010000-5637-258e-336c-f90aa06514c5	testni uporabnik za Tehničnega vodjo	$2y$05$NS4xMjkyMTcwMzExMjAxROu/kXWR9sP9oamkesKuxXLbxkCb387.G	t	\N	\N	\N	tona@ifigenija.si	\N	\N	\N
+00010000-5637-258e-5bff-243b7997c9fb	testni uporabnik za igralca	$2y$05$NS4xMjkyMTcwMzExMjAxRO/hLCgClfERRsfCAFYwxNCcFIVjP2982	t	\N	\N	\N	irena@ifigenija.si	\N	\N	\N
+00010000-5637-258e-420d-f7a32902e0ad	testni uporabnik vnašalca termina storitev (TerminStoritve-vse)	$2y$05$NS4xMjkyMTcwMzExMjAxROT6.kTHqEq4.wa2SOnf124/N14m9qeP.	t	\N	\N	\N	tatjana@ifigenija.si	\N	\N	\N
+00010000-5637-258e-b2d1-2d2906019000	testni uporabnik, ki je inšpicient brez zapisov v TerminStoritve	$2y$05$NS4xMjkyMTcwMzExMjAxROHau47Dtb7CME5.nlWwBVM.nusFP.ra2	t	\N	\N	\N	joze@ifigenija.si	\N	\N	\N
+00010000-5637-258e-9152-ea2e6ee008d5	testna uporabnica, ki je planerka	$2y$05$NS4xMjkyMTcwMzExMjAxRO.B/uJO3C7QRNhdX9Q2hTLQsSupj1V1S	t	\N	\N	\N	petra@ifigenija.si	\N	\N	\N
+00010000-5637-258e-e305-33268a7d12c0	testni uporabnik, ki dobi ifi-all vlogo	$2y$05$NS4xMjkyMTcwMzExMjAxROv2d7jqhaV/Mz3EIsKoi7UoFR.SDSMBm	t	\N	\N	\N	ali@ifigenija.si	\N	\N	\N
+00010000-5637-258e-5c24-0e885203e0f4	testni uporabnik, ki dobi ifi-readall vlogo	$2y$05$NS4xMjkyMTcwMzExMjAxROYB9g.gnkufr1l/gWK6mkx.ySqrOWnJC	t	\N	\N	\N	berta@ifigenija.si	\N	\N	\N
+00010000-5637-258e-f8a4-de0666b95a84	testni uporabnik, ki dobi aaa-write dovoljenje	$2y$05$NS4xMjkyMTcwMzExMjAxRORujYObKX.DzpXVYbePkiJkHqg0/Ylya	t	\N	\N	\N	aaron@ifigenija.si	\N	\N	\N
+00010000-5637-258e-8659-48af139b9572	testni uporabnik ki dobi vsa posamezna dovoljenja	$2y$05$NS4xMjkyMTcwMzExMjAxRO2ymwxVXTr7U4Ncdn.bN49E8rLw9Jg0O	t	\N	\N	\N	vesna@ifigenija.si	\N	\N	\N
+00010000-5637-258d-8c5c-167938b1ee65	Administrator	$2y$05$NS4xMjkyMTcwMzExMjAxROvZ3ZK1rCz1z6kWFFbQn0D.v3kzLt6iq	t	\N	\N	\N	admin@ifigenija.si	\N	\N	\N
 \.
 
 
 --
--- TOC entry 3144 (class 0 OID 24316035)
+-- TOC entry 3144 (class 0 OID 24472836)
 -- Dependencies: 234
 -- Data for Name: uprizoritev; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY uprizoritev (id, besedilo_id, zvrst_uprizoritve_id, zvrst_surs_id, producent_id, sifra, faza, naslov, podnaslov, delovninaslov, internacionalninaslov, naslovizvirnika, podnaslovizvirnika, datumzacstudija, stevilovaj, planiranostevilovaj, datumpremiere, stodmorov, avtor, gostujoca, trajanje, opis, arhident, arhopomba, datumzakljucka, sloavtor, krstna, prvaslovenska, kratkinaslov, jekoprodukcija, maticnioder_id) FROM stdin;
-000e0000-5633-6c3d-1945-f974d3ba94b3	00160000-5633-6c3c-b86d-1cc23b771584	\N	00140000-5633-6c3a-a7e0-6dc6a4727c47	\N	0001	produkcija	Sen kresne noči		Sanje	\N	\N	\N	2016-02-01	\N	\N	2016-06-01	1	William  Shakespeare - Nebojša  Kavader	f	2				\N	f	\N	\N		\N	00220000-5633-6c3c-ab64-943cf304ea71
-000e0000-5633-6c3d-85ce-1fd56fc01617	00160000-5633-6c3c-ce6a-d14617ce5535	\N	00140000-5633-6c3a-7992-b26012944ad4	\N	0002	predprodukcija-ideja	Smoletov vrt			\N	\N	\N	2016-01-01	\N	\N	2016-04-20	2	Berta   Hočevar	f	2				\N	f	\N	\N		\N	00220000-5633-6c3c-6f54-fc365ef1a4b1
-000e0000-5633-6c3d-fea4-69a8f65158b8	\N	\N	00140000-5633-6c3a-7992-b26012944ad4	00190000-5633-6c3d-8a83-3b7d6e840038	0003	postprodukcija	Kisli maček			\N	\N	\N	2016-02-01	\N	\N	2016-04-20	2	\N	t	2				\N	f	\N	\N		\N	00220000-5633-6c3c-ab64-943cf304ea71
-000e0000-5633-6c3d-6309-22271daed4b5	\N	\N	00140000-5633-6c3a-7992-b26012944ad4	00190000-5633-6c3d-8a83-3b7d6e840038	0004	postprodukcija	Vladimir			\N	\N	\N	2017-03-01	\N	\N	2017-04-20	2	\N	t	2				\N	f	\N	\N		\N	00220000-5633-6c3c-ab64-943cf304ea71
-000e0000-5633-6c3d-da58-09a23395f2ef	\N	\N	00140000-5633-6c3a-7992-b26012944ad4	00190000-5633-6c3d-8a83-3b7d6e840038	0005	postprodukcija	Španska princesa			\N	\N	\N	2017-04-01	\N	\N	2017-05-20	1	\N	f	1				\N	f	\N	\N		\N	00220000-5633-6c3c-869d-f9239f6b8ff6
-000e0000-5633-6c3d-c8ae-3a6b47d5c467	\N	\N	00140000-5633-6c3a-7992-b26012944ad4	00190000-5633-6c3d-8a83-3b7d6e840038	0006	postprodukcija	Ne vemo datumov			\N	\N	\N	\N	\N	\N	\N	1	\N	f	1				\N	f	\N	\N		\N	00220000-5633-6c3c-869d-f9239f6b8ff6
+000e0000-5637-258e-dbd1-a7b907fa8a12	00160000-5637-258e-11eb-f4a3ea021377	\N	00140000-5637-258c-5cf5-daf6e40fecba	\N	0001	produkcija	Sen kresne noči		Sanje	\N	\N	\N	2016-02-01	\N	\N	2016-06-01	1	William  Shakespeare - Nebojša  Kavader	f	2				\N	f	\N	\N		\N	00220000-5637-258e-159c-fdcf675545bd
+000e0000-5637-258e-b535-6f3e01020ab0	00160000-5637-258e-33e6-58846a97e047	\N	00140000-5637-258c-bc27-686f64eda4c4	\N	0002	predprodukcija-ideja	Smoletov vrt			\N	\N	\N	2016-01-01	\N	\N	2016-04-20	2	Berta   Hočevar	f	2				\N	f	\N	\N		\N	00220000-5637-258e-c381-af3e70e403d0
+000e0000-5637-258e-9596-86d6866e65d0	\N	\N	00140000-5637-258c-bc27-686f64eda4c4	00190000-5637-258e-f0ec-57f7ef04d542	0003	postprodukcija	Kisli maček			\N	\N	\N	2016-02-01	\N	\N	2016-04-20	2	\N	t	2				\N	f	\N	\N		\N	00220000-5637-258e-159c-fdcf675545bd
+000e0000-5637-258e-062c-7f95ff096dbb	\N	\N	00140000-5637-258c-bc27-686f64eda4c4	00190000-5637-258e-f0ec-57f7ef04d542	0004	postprodukcija	Vladimir			\N	\N	\N	2017-03-01	\N	\N	2017-04-20	2	\N	t	2				\N	f	\N	\N		\N	00220000-5637-258e-159c-fdcf675545bd
+000e0000-5637-258e-2dab-5f68d126226d	\N	\N	00140000-5637-258c-bc27-686f64eda4c4	00190000-5637-258e-f0ec-57f7ef04d542	0005	postprodukcija	Španska princesa			\N	\N	\N	2017-04-01	\N	\N	2017-05-20	1	\N	f	1				\N	f	\N	\N		\N	00220000-5637-258e-8542-064217804126
+000e0000-5637-258e-595a-37a09ade1a92	\N	\N	00140000-5637-258c-bc27-686f64eda4c4	00190000-5637-258e-f0ec-57f7ef04d542	0006	postprodukcija	Ne vemo datumov			\N	\N	\N	\N	\N	\N	\N	1	\N	f	1				\N	f	\N	\N		\N	00220000-5637-258e-8542-064217804126
 \.
 
 
 --
--- TOC entry 3111 (class 0 OID 24315699)
+-- TOC entry 3111 (class 0 OID 24472500)
 -- Dependencies: 201
 -- Data for Name: vaja; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY vaja (id, tipvaje_id, uprizoritev_id, zaporedna, porocilo) FROM stdin;
-00200000-5633-6c3d-0d4e-0d5792d5fac7	\N	000e0000-5633-6c3d-85ce-1fd56fc01617	1	
-00200000-5633-6c3d-29ac-bdda3bf67195	\N	000e0000-5633-6c3d-85ce-1fd56fc01617	2	
-00200000-5633-6c3d-d253-6f90d07eefeb	\N	000e0000-5633-6c3d-85ce-1fd56fc01617	3	
-00200000-5633-6c3d-41ed-233ece90caff	\N	000e0000-5633-6c3d-85ce-1fd56fc01617	4	
-00200000-5633-6c3d-6519-7785987e64cf	\N	000e0000-5633-6c3d-85ce-1fd56fc01617	5	
+00200000-5637-258f-e115-ce11eadbad6d	\N	000e0000-5637-258e-b535-6f3e01020ab0	1	
+00200000-5637-258f-6480-6399ecdb628e	\N	000e0000-5637-258e-b535-6f3e01020ab0	2	
+00200000-5637-258f-dc46-9346eba0f015	\N	000e0000-5637-258e-b535-6f3e01020ab0	3	
+00200000-5637-258f-41e8-e5edf1c656c9	\N	000e0000-5637-258e-b535-6f3e01020ab0	4	
+00200000-5637-258f-e379-644ceeb23392	\N	000e0000-5637-258e-b535-6f3e01020ab0	5	
 \.
 
 
 --
--- TOC entry 3127 (class 0 OID 24315844)
+-- TOC entry 3127 (class 0 OID 24472645)
 -- Dependencies: 217
 -- Data for Name: vrstasedezev; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3862,45 +3862,45 @@ COPY vrstasedezev (id, podrocja_sedenja_id, kapaciteta, poravnava, oblika) FROM 
 
 
 --
--- TOC entry 3138 (class 0 OID 24315958)
+-- TOC entry 3138 (class 0 OID 24472759)
 -- Dependencies: 228
 -- Data for Name: vrstastroska; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY vrstastroska (id, skupina, podskupina, naziv, opis) FROM stdin;
-003b0000-5633-6c3a-41d3-9d52668376d6	1	0	PISARNIŠKI IN SPLOŠNI  MATERIAL IN STORITVE	PISARNIŠKI IN SPLOŠNI  MATERIAL IN STORITVE
-003b0000-5633-6c3a-3c98-e3dfc6781b67	1	1	Storitve varovanja zgradb in prostorov	storitve varovanja zgradb in prostorov (npr. gasilci na predstavah)
-003b0000-5633-6c3a-be1e-7d88c6d58d44	1	2	Založniške in tiskarske storitve	založniške in tiskarske storitve
-003b0000-5633-6c3a-02d3-4ab4a8ea4473	1	3	Časopisi, revije, knjige in strokovna literatura	časopisi, revije, knjige in strokovna literatura
-003b0000-5633-6c3a-b75d-d10da6735d7d	1	4	Stroški prevajalskih storitev	stroški prevajalskih storitev
-003b0000-5633-6c3a-c5d9-ee5f9ff2f936	1	5	Stroški oglaševalskih storitev	stroški oglaševalskih storitev
-003b0000-5633-6c3a-f934-f3f10d808385	1	6	Izdatki za reprezentanco	izdatki za reprezentanco
-003b0000-5633-6c3a-8769-6ea916b5ea61	2	0	POSEBNI MATERIAL IN STORITVE	POSEBNI MATERIAL IN STORITVE
-003b0000-5633-6c3a-f65a-7fd8cd3cd25d	2	1	Drugi posebni material in storitve	drugi posebni material in storitve (npr. za instrumete - navedite)
-003b0000-5633-6c3a-ad63-c6ace6b41f75	2	2	Oprema predstave – stroški rekvizitov	Oprema predstave – stroški rekvizitov
-003b0000-5633-6c3a-3b81-0d8b4e8a2ae0	2	3	Oprema predstave – stroški kostumov	Oprema predstave – stroški kostumov
-003b0000-5633-6c3a-07fe-3a850d728a31	2	4	Oprema predstave – stroški scenske opreme	Oprema predstave – stroški scenske opreme
-003b0000-5633-6c3a-4aa9-e7afd6c4235d	2	5	Oprema predstave – stroški avdio in video opreme	Oprema predstave – stroški avdio in video opreme
-003b0000-5633-6c3a-42b1-f2000b0d0186	3	0	ENERGIJA, VODA, KOMUNALNE STORITVE IN KOMUNIKACIJE	ENERGIJA, VODA, KOMUNALNE STORITVE IN KOMUNIKACIJE
-003b0000-5633-6c3a-c089-7050b987289b	3	1	Poštnina in kurirske storitve	poštnina in kurirske storitve
-003b0000-5633-6c3a-8fe5-7a6712c4cfcb	4	0	PREVOZNI STROŠKI IN STORITVE	PREVOZNI STROŠKI IN STORITVE
-003b0000-5633-6c3a-6a81-543ca9872004	4	1	Goriva in maziva za prevozna sredstva	goriva in maziva za prevozna sredstva
-003b0000-5633-6c3a-2914-3944ced61008	4	2	Najem vozil in selitveni stroški	najem vozil in selitveni stroški
-003b0000-5633-6c3a-bdde-d66191aa52ad	4	3	Drugi prevozni in transportni stroški 	drugi prevozni in transportni stroški (navedite)
-003b0000-5633-6c3a-74a8-51638da19c56	5	0	IZDATKI ZA SLUŽBENA POTOVANJA	IZDATKI ZA SLUŽBENA POTOVANJA
-003b0000-5633-6c3a-cf94-16db1b9abce8	5	1	Dnevnice za službena potovanja v državi in tujini	dnevnice za službena potovanja v državi in tujini
-003b0000-5633-6c3a-9549-67389f9ca7bd	5	2	Hotelske in restavra. storitve v državi in tujini	hotelske in restavra. storitve v državi in tujini
-003b0000-5633-6c3a-28d5-fcb92a6773c0	5	3	Stroški prevoza v državi in tujini	stroški prevoza v državi in tujini
-003b0000-5633-6c3a-efe2-e26602bf915d	5	4	Drugi izdatki za službena potovanja	drugi izdatki za službena potovanja (navedite)
-003b0000-5633-6c3a-caa8-2d2f459539d4	6	0	NAJEMNINE IN ZAKUPNINE	NAJEMNINE IN ZAKUPNINE
-003b0000-5633-6c3a-9011-08c966fbf241	6	1	Druge najemnine, zakupnine in licenčnine	druge najemnine, zakupnine in licenčnine (npr. najem notnega materiala, instrumentov - navedite)
-003b0000-5633-6c3a-fc43-ac0c19491ac4	7	0	DRUGI OPERATIVNI ODHODKI	DRUGI OPERATIVNI ODHODKI
-003b0000-5633-6c3a-7c6b-816055c592ae	7	1	Izdatki za strok. izobraževanje zap.	izdatki za strok. izobraževanje zap.(vezani na program. enote)  
+003b0000-5637-258c-897e-225324ca4058	1	0	PISARNIŠKI IN SPLOŠNI  MATERIAL IN STORITVE	PISARNIŠKI IN SPLOŠNI  MATERIAL IN STORITVE
+003b0000-5637-258c-5761-d743d2a228d0	1	1	Storitve varovanja zgradb in prostorov	storitve varovanja zgradb in prostorov (npr. gasilci na predstavah)
+003b0000-5637-258c-6cca-b14dbb366f84	1	2	Založniške in tiskarske storitve	založniške in tiskarske storitve
+003b0000-5637-258c-ea96-849cad036dcc	1	3	Časopisi, revije, knjige in strokovna literatura	časopisi, revije, knjige in strokovna literatura
+003b0000-5637-258c-8f72-cd7b29cdf81e	1	4	Stroški prevajalskih storitev	stroški prevajalskih storitev
+003b0000-5637-258c-f650-970bf98b7be0	1	5	Stroški oglaševalskih storitev	stroški oglaševalskih storitev
+003b0000-5637-258c-0b00-ae3a7471fbac	1	6	Izdatki za reprezentanco	izdatki za reprezentanco
+003b0000-5637-258c-5dae-4afb08ddf52a	2	0	POSEBNI MATERIAL IN STORITVE	POSEBNI MATERIAL IN STORITVE
+003b0000-5637-258c-4f22-e0731127c910	2	1	Drugi posebni material in storitve	drugi posebni material in storitve (npr. za instrumete - navedite)
+003b0000-5637-258c-180f-ccdadf6ef4f7	2	2	Oprema predstave – stroški rekvizitov	Oprema predstave – stroški rekvizitov
+003b0000-5637-258c-1ba8-aacf59d1e204	2	3	Oprema predstave – stroški kostumov	Oprema predstave – stroški kostumov
+003b0000-5637-258c-5c81-39952a5d74de	2	4	Oprema predstave – stroški scenske opreme	Oprema predstave – stroški scenske opreme
+003b0000-5637-258c-2924-3f6bf3698fd9	2	5	Oprema predstave – stroški avdio in video opreme	Oprema predstave – stroški avdio in video opreme
+003b0000-5637-258c-7c74-717926e52375	3	0	ENERGIJA, VODA, KOMUNALNE STORITVE IN KOMUNIKACIJE	ENERGIJA, VODA, KOMUNALNE STORITVE IN KOMUNIKACIJE
+003b0000-5637-258c-4786-38de17eb061b	3	1	Poštnina in kurirske storitve	poštnina in kurirske storitve
+003b0000-5637-258c-bf4c-4013fe249019	4	0	PREVOZNI STROŠKI IN STORITVE	PREVOZNI STROŠKI IN STORITVE
+003b0000-5637-258c-c97f-eb80a038998a	4	1	Goriva in maziva za prevozna sredstva	goriva in maziva za prevozna sredstva
+003b0000-5637-258c-b99a-0893b635fe64	4	2	Najem vozil in selitveni stroški	najem vozil in selitveni stroški
+003b0000-5637-258c-bbad-f2f849d0b73f	4	3	Drugi prevozni in transportni stroški 	drugi prevozni in transportni stroški (navedite)
+003b0000-5637-258c-6ec9-d3e8b37d6447	5	0	IZDATKI ZA SLUŽBENA POTOVANJA	IZDATKI ZA SLUŽBENA POTOVANJA
+003b0000-5637-258c-249d-6a17660abbd1	5	1	Dnevnice za službena potovanja v državi in tujini	dnevnice za službena potovanja v državi in tujini
+003b0000-5637-258c-eb72-8be4d45ed2a3	5	2	Hotelske in restavra. storitve v državi in tujini	hotelske in restavra. storitve v državi in tujini
+003b0000-5637-258c-8b8b-7071df5dd9fe	5	3	Stroški prevoza v državi in tujini	stroški prevoza v državi in tujini
+003b0000-5637-258c-ac2b-344e301604f8	5	4	Drugi izdatki za službena potovanja	drugi izdatki za službena potovanja (navedite)
+003b0000-5637-258c-a0d2-bf57e8f40f66	6	0	NAJEMNINE IN ZAKUPNINE	NAJEMNINE IN ZAKUPNINE
+003b0000-5637-258c-bbc1-dfa2f2733ba8	6	1	Druge najemnine, zakupnine in licenčnine	druge najemnine, zakupnine in licenčnine (npr. najem notnega materiala, instrumentov - navedite)
+003b0000-5637-258c-9a21-bae54e7ead80	7	0	DRUGI OPERATIVNI ODHODKI	DRUGI OPERATIVNI ODHODKI
+003b0000-5637-258c-2de3-5e6934930bbc	7	1	Izdatki za strok. izobraževanje zap.	izdatki za strok. izobraževanje zap.(vezani na program. enote)  
 \.
 
 
 --
--- TOC entry 3156 (class 0 OID 24316325)
+-- TOC entry 3156 (class 0 OID 24473126)
 -- Dependencies: 246
 -- Data for Name: vrstazapisa; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3910,7 +3910,7 @@ COPY vrstazapisa (id, oznaka, naziv, aktiven, znacka, ikona, upor, datknj) FROM 
 
 
 --
--- TOC entry 3155 (class 0 OID 24316297)
+-- TOC entry 3155 (class 0 OID 24473098)
 -- Dependencies: 245
 -- Data for Name: zapis; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3920,7 +3920,7 @@ COPY zapis (id, vrsta_id, datoteka_id, mapa_id, avtor_id, zaklenil_id, tip, zakl
 
 
 --
--- TOC entry 3157 (class 0 OID 24316337)
+-- TOC entry 3157 (class 0 OID 24473138)
 -- Dependencies: 247
 -- Data for Name: zapislastnik; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3930,23 +3930,23 @@ COPY zapislastnik (id, zapis_id, lastnik, classlastnika, datum, upor, datknj) FR
 
 
 --
--- TOC entry 3134 (class 0 OID 24315916)
+-- TOC entry 3134 (class 0 OID 24472717)
 -- Dependencies: 224
 -- Data for Name: zaposlitev; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY zaposlitev (id, oseba_id, sifra, status, delovnomesto, zacetek, konec, tip, delovnaobveza, malica, izmenskodelo, individualnapogodba, jezaposlenvdrugemjz, jenastopajoci, organizacijskaenota_id) FROM stdin;
-00100000-5633-6c3d-1ba3-49a79da54c8f	00090000-5633-6c3d-fd31-b494da40fd86	0010	A	Mojster	2010-02-01	\N	1	2		t	f	f	t	\N
-00100000-5633-6c3d-19ab-de474e6876d2	00090000-5633-6c3d-afd2-8217a84f69a0	0003	A	Igralec	2010-02-01	\N	1	2		t	f	f	t	\N
-00100000-5633-6c3d-bc8d-1dcab0853e11	00090000-5633-6c3d-de4b-43632e11f01c	0008	A	Natakar	2010-02-01	\N	1	2		t	f	f	t	\N
-00100000-5633-6c3d-3325-949def7327c5	00090000-5633-6c3d-e239-b5d3c53e3b5a	0004	A	Mizar	2010-02-01	\N	1	2		t	f	f	t	\N
-00100000-5633-6c3d-4ad9-cd0d8def84f0	00090000-5633-6c3d-e7a0-9053bed7e04d	0009	A	Šivilja	2010-02-01	\N	1	2		t	f	f	t	\N
-00100000-5633-6c3d-15b0-9a38a4efdd69	00090000-5633-6c3d-46de-ac092853426c	0007	A	Inšpicient	2010-02-01	\N	1	2		t	f	f	t	\N
+00100000-5637-258e-e829-ea67a4aece26	00090000-5637-258e-a0fa-d9f6b12d0ba9	0010	A	Mojster	2010-02-01	\N	1	2		t	f	f	t	\N
+00100000-5637-258e-8b74-4ee5ea09d9dc	00090000-5637-258e-55a6-ba61a01b45d5	0003	A	Igralec	2010-02-01	\N	1	2		t	f	f	t	\N
+00100000-5637-258e-1d51-37f7f10a1514	00090000-5637-258e-3d64-b4d5c53d684a	0008	A	Natakar	2010-02-01	\N	1	2		t	f	f	t	\N
+00100000-5637-258e-6b47-cd7aa8900fd6	00090000-5637-258e-4220-5779164d10cf	0004	A	Mizar	2010-02-01	\N	1	2		t	f	f	t	\N
+00100000-5637-258e-b192-9f8ad60f67d4	00090000-5637-258e-0943-32335453a0d0	0009	A	Šivilja	2010-02-01	\N	1	2		t	f	f	t	\N
+00100000-5637-258e-5e49-dc233055428d	00090000-5637-258e-33d2-c94bfbee297c	0007	A	Inšpicient	2010-02-01	\N	1	2		t	f	f	t	\N
 \.
 
 
 --
--- TOC entry 3114 (class 0 OID 24315742)
+-- TOC entry 3114 (class 0 OID 24472543)
 -- Dependencies: 204
 -- Data for Name: zasedenost; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3956,24 +3956,24 @@ COPY zasedenost (id, oseba_id) FROM stdin;
 
 
 --
--- TOC entry 3143 (class 0 OID 24316025)
+-- TOC entry 3143 (class 0 OID 24472826)
 -- Dependencies: 233
 -- Data for Name: zvrstsurs; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY zvrstsurs (id, sifra, naziv, opis) FROM stdin;
-00140000-5633-6c3a-a7e0-6dc6a4727c47	01	Drama	drama (SURS 01)
-00140000-5633-6c3a-af38-2225f75e4868	02	Opera	opera (SURS 02)
-00140000-5633-6c3a-8c8d-5a107648d71f	03	Balet	balet (SURS 03)
-00140000-5633-6c3a-db5a-124912759462	04	Plesne prireditve	plesne prireditve (SURS 04)
-00140000-5633-6c3a-c612-ed643eb08fc5	05	Lutkovno gledališče	lutkovno gledališče (SURS 05)
-00140000-5633-6c3a-7992-b26012944ad4	06	Raziskovalno gledališče	raziskovalno gledališče (SURS 06)
-00140000-5633-6c3a-2ea9-9a1f0014cefb	07	Drugo	drugo (SURS 07)
+00140000-5637-258c-5cf5-daf6e40fecba	01	Drama	drama (SURS 01)
+00140000-5637-258c-0b7f-fef53de96be5	02	Opera	opera (SURS 02)
+00140000-5637-258c-a4b6-8fa2200fe6b8	03	Balet	balet (SURS 03)
+00140000-5637-258c-2ec5-a7ea2eeccb01	04	Plesne prireditve	plesne prireditve (SURS 04)
+00140000-5637-258c-d373-4cec8576ede9	05	Lutkovno gledališče	lutkovno gledališče (SURS 05)
+00140000-5637-258c-bc27-686f64eda4c4	06	Raziskovalno gledališče	raziskovalno gledališče (SURS 06)
+00140000-5637-258c-5613-5b925f9631f8	07	Drugo	drugo (SURS 07)
 \.
 
 
 --
--- TOC entry 3133 (class 0 OID 24315906)
+-- TOC entry 3133 (class 0 OID 24472707)
 -- Dependencies: 223
 -- Data for Name: zvrstuprizoritve; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -3983,7 +3983,7 @@ COPY zvrstuprizoritve (id, sifra, naziv, opis) FROM stdin;
 
 
 --
--- TOC entry 2580 (class 2606 OID 24315477)
+-- TOC entry 2580 (class 2606 OID 24472278)
 -- Name: abonma_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3992,7 +3992,7 @@ ALTER TABLE ONLY abonma
 
 
 --
--- TOC entry 2796 (class 2606 OID 24316084)
+-- TOC entry 2796 (class 2606 OID 24472885)
 -- Name: alternacija_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4001,7 +4001,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2792 (class 2606 OID 24316074)
+-- TOC entry 2792 (class 2606 OID 24472875)
 -- Name: arhivalija_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4010,7 +4010,7 @@ ALTER TABLE ONLY arhivalija
 
 
 --
--- TOC entry 2578 (class 2606 OID 24315468)
+-- TOC entry 2578 (class 2606 OID 24472269)
 -- Name: authstorage_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4019,7 +4019,7 @@ ALTER TABLE ONLY authstorage
 
 
 --
--- TOC entry 2755 (class 2606 OID 24315941)
+-- TOC entry 2755 (class 2606 OID 24472742)
 -- Name: avtorbesedila_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4028,7 +4028,7 @@ ALTER TABLE ONLY avtorbesedila
 
 
 --
--- TOC entry 2766 (class 2606 OID 24315983)
+-- TOC entry 2766 (class 2606 OID 24472784)
 -- Name: besedilo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4037,7 +4037,7 @@ ALTER TABLE ONLY besedilo
 
 
 --
--- TOC entry 2853 (class 2606 OID 24316377)
+-- TOC entry 2853 (class 2606 OID 24473178)
 -- Name: datoteka_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4046,7 +4046,7 @@ ALTER TABLE ONLY datoteka
 
 
 --
--- TOC entry 2662 (class 2606 OID 24315731)
+-- TOC entry 2662 (class 2606 OID 24472532)
 -- Name: dogodek_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4055,7 +4055,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2677 (class 2606 OID 24315752)
+-- TOC entry 2677 (class 2606 OID 24472553)
 -- Name: dogodeksplosni_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4064,7 +4064,7 @@ ALTER TABLE ONLY dogodeksplosni
 
 
 --
--- TOC entry 2829 (class 2606 OID 24316295)
+-- TOC entry 2829 (class 2606 OID 24473096)
 -- Name: drugivir_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4073,7 +4073,7 @@ ALTER TABLE ONLY drugivir
 
 
 --
--- TOC entry 2625 (class 2606 OID 24315626)
+-- TOC entry 2625 (class 2606 OID 24472427)
 -- Name: drza_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4082,7 +4082,7 @@ ALTER TABLE ONLY drza
 
 
 --
--- TOC entry 2803 (class 2606 OID 24316152)
+-- TOC entry 2803 (class 2606 OID 24472953)
 -- Name: enotaprograma_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4091,7 +4091,7 @@ ALTER TABLE ONLY enotaprograma
 
 
 --
--- TOC entry 2739 (class 2606 OID 24315902)
+-- TOC entry 2739 (class 2606 OID 24472703)
 -- Name: funkcija_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4100,7 +4100,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 2653 (class 2606 OID 24315697)
+-- TOC entry 2653 (class 2606 OID 24472498)
 -- Name: gostovanje_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4109,7 +4109,7 @@ ALTER TABLE ONLY gostovanje
 
 
 --
--- TOC entry 2642 (class 2606 OID 24315664)
+-- TOC entry 2642 (class 2606 OID 24472465)
 -- Name: job_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4118,7 +4118,7 @@ ALTER TABLE ONLY job
 
 
 --
--- TOC entry 2633 (class 2606 OID 24315640)
+-- TOC entry 2633 (class 2606 OID 24472441)
 -- Name: kontaktnaoseba_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4127,7 +4127,7 @@ ALTER TABLE ONLY kontaktnaoseba
 
 
 --
--- TOC entry 2703 (class 2606 OID 24315809)
+-- TOC entry 2703 (class 2606 OID 24472610)
 -- Name: kupec_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4136,7 +4136,7 @@ ALTER TABLE ONLY kupec
 
 
 --
--- TOC entry 2847 (class 2606 OID 24316354)
+-- TOC entry 2847 (class 2606 OID 24473155)
 -- Name: mapa_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4145,7 +4145,7 @@ ALTER TABLE ONLY mapa
 
 
 --
--- TOC entry 2851 (class 2606 OID 24316361)
+-- TOC entry 2851 (class 2606 OID 24473162)
 -- Name: mapa_zapis_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4154,7 +4154,7 @@ ALTER TABLE ONLY mapa_zapis
 
 
 --
--- TOC entry 2858 (class 2606 OID 24316385)
+-- TOC entry 2858 (class 2606 OID 24473186)
 -- Name: mapaacl_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4172,7 +4172,7 @@ ALTER TABLE ONLY migrations
 
 
 --
--- TOC entry 2715 (class 2606 OID 24315836)
+-- TOC entry 2715 (class 2606 OID 24472637)
 -- Name: nacinplacina_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4181,7 +4181,7 @@ ALTER TABLE ONLY nacinplacina
 
 
 --
--- TOC entry 2618 (class 2606 OID 24315598)
+-- TOC entry 2618 (class 2606 OID 24472399)
 -- Name: option_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4190,7 +4190,7 @@ ALTER TABLE ONLY option
 
 
 --
--- TOC entry 2588 (class 2606 OID 24315496)
+-- TOC entry 2588 (class 2606 OID 24472297)
 -- Name: optionvalue_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4199,7 +4199,7 @@ ALTER TABLE ONLY optionvalue
 
 
 --
--- TOC entry 2607 (class 2606 OID 24315560)
+-- TOC entry 2607 (class 2606 OID 24472361)
 -- Name: organizacijskaenota_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4208,7 +4208,7 @@ ALTER TABLE ONLY organizacijskaenota
 
 
 --
--- TOC entry 2591 (class 2606 OID 24315523)
+-- TOC entry 2591 (class 2606 OID 24472324)
 -- Name: oseba_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4217,7 +4217,7 @@ ALTER TABLE ONLY oseba
 
 
 --
--- TOC entry 2576 (class 2606 OID 24315457)
+-- TOC entry 2576 (class 2606 OID 24472258)
 -- Name: permission2role_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4226,7 +4226,7 @@ ALTER TABLE ONLY permission2role
 
 
 --
--- TOC entry 2569 (class 2606 OID 24315442)
+-- TOC entry 2569 (class 2606 OID 24472243)
 -- Name: permission_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4235,7 +4235,7 @@ ALTER TABLE ONLY permission
 
 
 --
--- TOC entry 2718 (class 2606 OID 24315842)
+-- TOC entry 2718 (class 2606 OID 24472643)
 -- Name: placilniinstrument_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4244,7 +4244,7 @@ ALTER TABLE ONLY placilniinstrument
 
 
 --
--- TOC entry 2732 (class 2606 OID 24315878)
+-- TOC entry 2732 (class 2606 OID 24472679)
 -- Name: podrocjesedenja_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4253,7 +4253,7 @@ ALTER TABLE ONLY podrocjesedenja
 
 
 --
--- TOC entry 2778 (class 2606 OID 24316020)
+-- TOC entry 2778 (class 2606 OID 24472821)
 -- Name: pogodba_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4262,7 +4262,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 2601 (class 2606 OID 24315551)
+-- TOC entry 2601 (class 2606 OID 24472352)
 -- Name: popa_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4271,7 +4271,7 @@ ALTER TABLE ONLY popa
 
 
 --
--- TOC entry 2615 (class 2606 OID 24315586)
+-- TOC entry 2615 (class 2606 OID 24472387)
 -- Name: posta_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4280,7 +4280,7 @@ ALTER TABLE ONLY posta
 
 
 --
--- TOC entry 2813 (class 2606 OID 24316247)
+-- TOC entry 2813 (class 2606 OID 24473048)
 -- Name: postavkacdve_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4289,7 +4289,7 @@ ALTER TABLE ONLY postavkacdve
 
 
 --
--- TOC entry 2707 (class 2606 OID 24315815)
+-- TOC entry 2707 (class 2606 OID 24472616)
 -- Name: postavkaracuna_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4298,7 +4298,7 @@ ALTER TABLE ONLY postavkaracuna
 
 
 --
--- TOC entry 2613 (class 2606 OID 24315576)
+-- TOC entry 2613 (class 2606 OID 24472377)
 -- Name: postninaslovi_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4307,7 +4307,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2660 (class 2606 OID 24315716)
+-- TOC entry 2660 (class 2606 OID 24472517)
 -- Name: praznik_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4316,7 +4316,7 @@ ALTER TABLE ONLY praznik
 
 
 --
--- TOC entry 2651 (class 2606 OID 24315685)
+-- TOC entry 2651 (class 2606 OID 24472486)
 -- Name: predstava_abonma_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4325,7 +4325,7 @@ ALTER TABLE ONLY predstava_abonma
 
 
 --
--- TOC entry 2647 (class 2606 OID 24315677)
+-- TOC entry 2647 (class 2606 OID 24472478)
 -- Name: predstava_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4334,7 +4334,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 2713 (class 2606 OID 24315827)
+-- TOC entry 2713 (class 2606 OID 24472628)
 -- Name: prodajapredstave_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4343,7 +4343,7 @@ ALTER TABLE ONLY prodajapredstave
 
 
 --
--- TOC entry 2817 (class 2606 OID 24316256)
+-- TOC entry 2817 (class 2606 OID 24473057)
 -- Name: produkcijadelitev_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4352,7 +4352,7 @@ ALTER TABLE ONLY produkcijadelitev
 
 
 --
--- TOC entry 2819 (class 2606 OID 24316264)
+-- TOC entry 2819 (class 2606 OID 24473065)
 -- Name: produkcijskahisa_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4361,7 +4361,7 @@ ALTER TABLE ONLY produkcijskahisa
 
 
 --
--- TOC entry 2810 (class 2606 OID 24316234)
+-- TOC entry 2810 (class 2606 OID 24473035)
 -- Name: programdela_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4370,7 +4370,7 @@ ALTER TABLE ONLY programdela
 
 
 --
--- TOC entry 2824 (class 2606 OID 24316276)
+-- TOC entry 2824 (class 2606 OID 24473077)
 -- Name: programskaenotasklopa_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4379,7 +4379,7 @@ ALTER TABLE ONLY programskaenotasklopa
 
 
 --
--- TOC entry 2725 (class 2606 OID 24315860)
+-- TOC entry 2725 (class 2606 OID 24472661)
 -- Name: prostor_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4388,7 +4388,7 @@ ALTER TABLE ONLY prostor
 
 
 --
--- TOC entry 2701 (class 2606 OID 24315800)
+-- TOC entry 2701 (class 2606 OID 24472601)
 -- Name: racun_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4397,7 +4397,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2695 (class 2606 OID 24315791)
+-- TOC entry 2695 (class 2606 OID 24472592)
 -- Name: razpisansedez_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4406,7 +4406,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2773 (class 2606 OID 24316007)
+-- TOC entry 2773 (class 2606 OID 24472808)
 -- Name: rekvizit_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4415,7 +4415,7 @@ ALTER TABLE ONLY rekvizit
 
 
 --
--- TOC entry 2753 (class 2606 OID 24315934)
+-- TOC entry 2753 (class 2606 OID 24472735)
 -- Name: rekviziterstvo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4424,7 +4424,7 @@ ALTER TABLE ONLY rekviziterstvo
 
 
 --
--- TOC entry 2636 (class 2606 OID 24315652)
+-- TOC entry 2636 (class 2606 OID 24472453)
 -- Name: report_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4433,7 +4433,7 @@ ALTER TABLE ONLY report
 
 
 --
--- TOC entry 2561 (class 2606 OID 24315413)
+-- TOC entry 2561 (class 2606 OID 24472214)
 -- Name: revizije_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4442,7 +4442,7 @@ ALTER TABLE ONLY revizije
 
 
 --
--- TOC entry 2730 (class 2606 OID 24315869)
+-- TOC entry 2730 (class 2606 OID 24472670)
 -- Name: rezervacija_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4451,7 +4451,7 @@ ALTER TABLE ONLY rezervacija
 
 
 --
--- TOC entry 2567 (class 2606 OID 24315431)
+-- TOC entry 2567 (class 2606 OID 24472232)
 -- Name: role2user_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4460,7 +4460,7 @@ ALTER TABLE ONLY role2user
 
 
 --
--- TOC entry 2571 (class 2606 OID 24315451)
+-- TOC entry 2571 (class 2606 OID 24472252)
 -- Name: role_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4469,7 +4469,7 @@ ALTER TABLE ONLY role
 
 
 --
--- TOC entry 2737 (class 2606 OID 24315887)
+-- TOC entry 2737 (class 2606 OID 24472688)
 -- Name: sedez_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4478,7 +4478,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2709 (class 2606 OID 24315822)
+-- TOC entry 2709 (class 2606 OID 24472623)
 -- Name: sedeznired_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4487,7 +4487,7 @@ ALTER TABLE ONLY sedeznired
 
 
 --
--- TOC entry 2683 (class 2606 OID 24315771)
+-- TOC entry 2683 (class 2606 OID 24472572)
 -- Name: sezona_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4496,7 +4496,7 @@ ALTER TABLE ONLY sezona
 
 
 --
--- TOC entry 2558 (class 2606 OID 24315401)
+-- TOC entry 2558 (class 2606 OID 24472202)
 -- Name: stevilcenje_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4505,7 +4505,7 @@ ALTER TABLE ONLY stevilcenje
 
 
 --
--- TOC entry 2555 (class 2606 OID 24315389)
+-- TOC entry 2555 (class 2606 OID 24472190)
 -- Name: stevilcenjekonfig_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4514,7 +4514,7 @@ ALTER TABLE ONLY stevilcenjekonfig
 
 
 --
--- TOC entry 2552 (class 2606 OID 24315383)
+-- TOC entry 2552 (class 2606 OID 24472184)
 -- Name: stevilcenjestanje_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4523,7 +4523,7 @@ ALTER TABLE ONLY stevilcenjestanje
 
 
 --
--- TOC entry 2762 (class 2606 OID 24315954)
+-- TOC entry 2762 (class 2606 OID 24472755)
 -- Name: strosekuprizoritve_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4532,7 +4532,7 @@ ALTER TABLE ONLY strosekuprizoritve
 
 
 --
--- TOC entry 2597 (class 2606 OID 24315532)
+-- TOC entry 2597 (class 2606 OID 24472333)
 -- Name: telefonska_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4541,7 +4541,7 @@ ALTER TABLE ONLY telefonska
 
 
 --
--- TOC entry 2689 (class 2606 OID 24315782)
+-- TOC entry 2689 (class 2606 OID 24472583)
 -- Name: terminstoritve_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4550,7 +4550,7 @@ ALTER TABLE ONLY terminstoritve
 
 
 --
--- TOC entry 2769 (class 2606 OID 24315994)
+-- TOC entry 2769 (class 2606 OID 24472795)
 -- Name: tipfunkcije_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4559,7 +4559,7 @@ ALTER TABLE ONLY tipfunkcije
 
 
 --
--- TOC entry 2582 (class 2606 OID 24315485)
+-- TOC entry 2582 (class 2606 OID 24472286)
 -- Name: tippopa_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4568,7 +4568,7 @@ ALTER TABLE ONLY tippopa
 
 
 --
--- TOC entry 2826 (class 2606 OID 24316288)
+-- TOC entry 2826 (class 2606 OID 24473089)
 -- Name: tipprogramskeenote_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4577,7 +4577,7 @@ ALTER TABLE ONLY tipprogramskeenote
 
 
 --
--- TOC entry 2679 (class 2606 OID 24315760)
+-- TOC entry 2679 (class 2606 OID 24472561)
 -- Name: tipvaje_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4586,7 +4586,7 @@ ALTER TABLE ONLY tipvaje
 
 
 --
--- TOC entry 2623 (class 2606 OID 24315611)
+-- TOC entry 2623 (class 2606 OID 24472412)
 -- Name: trr_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4595,7 +4595,7 @@ ALTER TABLE ONLY trr
 
 
 --
--- TOC entry 2563 (class 2606 OID 24315426)
+-- TOC entry 2563 (class 2606 OID 24472227)
 -- Name: uporabniki_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4604,7 +4604,7 @@ ALTER TABLE ONLY uporabniki
 
 
 --
--- TOC entry 2790 (class 2606 OID 24316053)
+-- TOC entry 2790 (class 2606 OID 24472854)
 -- Name: uprizoritev_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4613,7 +4613,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2658 (class 2606 OID 24315706)
+-- TOC entry 2658 (class 2606 OID 24472507)
 -- Name: vaja_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4622,7 +4622,7 @@ ALTER TABLE ONLY vaja
 
 
 --
--- TOC entry 2721 (class 2606 OID 24315850)
+-- TOC entry 2721 (class 2606 OID 24472651)
 -- Name: vrstasedezev_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4631,7 +4631,7 @@ ALTER TABLE ONLY vrstasedezev
 
 
 --
--- TOC entry 2764 (class 2606 OID 24315966)
+-- TOC entry 2764 (class 2606 OID 24472767)
 -- Name: vrstastroska_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4640,7 +4640,7 @@ ALTER TABLE ONLY vrstastroska
 
 
 --
--- TOC entry 2840 (class 2606 OID 24316335)
+-- TOC entry 2840 (class 2606 OID 24473136)
 -- Name: vrstazapisa_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4649,7 +4649,7 @@ ALTER TABLE ONLY vrstazapisa
 
 
 --
--- TOC entry 2837 (class 2606 OID 24316319)
+-- TOC entry 2837 (class 2606 OID 24473120)
 -- Name: zapis_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4658,7 +4658,7 @@ ALTER TABLE ONLY zapis
 
 
 --
--- TOC entry 2843 (class 2606 OID 24316343)
+-- TOC entry 2843 (class 2606 OID 24473144)
 -- Name: zapislastnik_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4667,7 +4667,7 @@ ALTER TABLE ONLY zapislastnik
 
 
 --
--- TOC entry 2749 (class 2606 OID 24315924)
+-- TOC entry 2749 (class 2606 OID 24472725)
 -- Name: zaposlitev_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4676,7 +4676,7 @@ ALTER TABLE ONLY zaposlitev
 
 
 --
--- TOC entry 2675 (class 2606 OID 24315746)
+-- TOC entry 2675 (class 2606 OID 24472547)
 -- Name: zasedenost_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4685,7 +4685,7 @@ ALTER TABLE ONLY zasedenost
 
 
 --
--- TOC entry 2782 (class 2606 OID 24316033)
+-- TOC entry 2782 (class 2606 OID 24472834)
 -- Name: zvrstsurs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4694,7 +4694,7 @@ ALTER TABLE ONLY zvrstsurs
 
 
 --
--- TOC entry 2745 (class 2606 OID 24315914)
+-- TOC entry 2745 (class 2606 OID 24472715)
 -- Name: zvrstuprizoritve_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4703,7 +4703,7 @@ ALTER TABLE ONLY zvrstuprizoritve
 
 
 --
--- TOC entry 2663 (class 1259 OID 24315740)
+-- TOC entry 2663 (class 1259 OID 24472541)
 -- Name: dogodki_konec; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4711,7 +4711,7 @@ CREATE INDEX dogodki_konec ON dogodek USING btree (konec);
 
 
 --
--- TOC entry 2664 (class 1259 OID 24315741)
+-- TOC entry 2664 (class 1259 OID 24472542)
 -- Name: dogodki_razred; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4719,7 +4719,7 @@ CREATE INDEX dogodki_razred ON dogodek USING btree (razred);
 
 
 --
--- TOC entry 2665 (class 1259 OID 24315739)
+-- TOC entry 2665 (class 1259 OID 24472540)
 -- Name: dogodki_zacetek; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4727,7 +4727,7 @@ CREATE INDEX dogodki_zacetek ON dogodek USING btree (zacetek);
 
 
 --
--- TOC entry 2666 (class 1259 OID 24315738)
+-- TOC entry 2666 (class 1259 OID 24472539)
 -- Name: idx_11e93b5d3a0e32e3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4735,7 +4735,7 @@ CREATE INDEX idx_11e93b5d3a0e32e3 ON dogodek USING btree (sezona_id);
 
 
 --
--- TOC entry 2667 (class 1259 OID 24315737)
+-- TOC entry 2667 (class 1259 OID 24472538)
 -- Name: idx_11e93b5dcc3aa562; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4743,7 +4743,7 @@ CREATE INDEX idx_11e93b5dcc3aa562 ON dogodek USING btree (prostor_id);
 
 
 --
--- TOC entry 2758 (class 1259 OID 24315955)
+-- TOC entry 2758 (class 1259 OID 24472756)
 -- Name: idx_11ffe6e05c75296c; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4751,7 +4751,7 @@ CREATE INDEX idx_11ffe6e05c75296c ON strosekuprizoritve USING btree (vrstastrosk
 
 
 --
--- TOC entry 2759 (class 1259 OID 24315956)
+-- TOC entry 2759 (class 1259 OID 24472757)
 -- Name: idx_11ffe6e062b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4759,7 +4759,7 @@ CREATE INDEX idx_11ffe6e062b4ffca ON strosekuprizoritve USING btree (uprizoritev
 
 
 --
--- TOC entry 2760 (class 1259 OID 24315957)
+-- TOC entry 2760 (class 1259 OID 24472758)
 -- Name: idx_11ffe6e06beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4767,7 +4767,7 @@ CREATE INDEX idx_11ffe6e06beede51 ON strosekuprizoritve USING btree (popa_id);
 
 
 --
--- TOC entry 2844 (class 1259 OID 24316356)
+-- TOC entry 2844 (class 1259 OID 24473157)
 -- Name: idx_14a5d6d3727aca70; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4775,7 +4775,7 @@ CREATE INDEX idx_14a5d6d3727aca70 ON mapa USING btree (parent_id);
 
 
 --
--- TOC entry 2845 (class 1259 OID 24316355)
+-- TOC entry 2845 (class 1259 OID 24473156)
 -- Name: idx_14a5d6d38a4a6c12; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4783,7 +4783,7 @@ CREATE INDEX idx_14a5d6d38a4a6c12 ON mapa USING btree (lastnik_id);
 
 
 --
--- TOC entry 2598 (class 1259 OID 24315553)
+-- TOC entry 2598 (class 1259 OID 24472354)
 -- Name: idx_1c7adba589552cb2; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4791,7 +4791,7 @@ CREATE INDEX idx_1c7adba589552cb2 ON popa USING btree (tipkli_id);
 
 
 --
--- TOC entry 2599 (class 1259 OID 24315554)
+-- TOC entry 2599 (class 1259 OID 24472355)
 -- Name: idx_1c7adba5ee4b985a; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4799,7 +4799,7 @@ CREATE INDEX idx_1c7adba5ee4b985a ON popa USING btree (drzava_id);
 
 
 --
--- TOC entry 2716 (class 1259 OID 24315843)
+-- TOC entry 2716 (class 1259 OID 24472644)
 -- Name: idx_1df2e9faa420584d; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4807,7 +4807,7 @@ CREATE INDEX idx_1df2e9faa420584d ON placilniinstrument USING btree (nacin_placi
 
 
 --
--- TOC entry 2831 (class 1259 OID 24316323)
+-- TOC entry 2831 (class 1259 OID 24473124)
 -- Name: idx_1ed92829253c4123; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4815,7 +4815,7 @@ CREATE INDEX idx_1ed92829253c4123 ON zapis USING btree (avtor_id);
 
 
 --
--- TOC entry 2832 (class 1259 OID 24316322)
+-- TOC entry 2832 (class 1259 OID 24473123)
 -- Name: idx_1ed9282957ed422f; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4823,7 +4823,7 @@ CREATE INDEX idx_1ed9282957ed422f ON zapis USING btree (mapa_id);
 
 
 --
--- TOC entry 2833 (class 1259 OID 24316324)
+-- TOC entry 2833 (class 1259 OID 24473125)
 -- Name: idx_1ed9282987ff3295; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4831,7 +4831,7 @@ CREATE INDEX idx_1ed9282987ff3295 ON zapis USING btree (zaklenil_id);
 
 
 --
--- TOC entry 2834 (class 1259 OID 24316321)
+-- TOC entry 2834 (class 1259 OID 24473122)
 -- Name: idx_1ed92829a54dbb1f; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4839,7 +4839,7 @@ CREATE INDEX idx_1ed92829a54dbb1f ON zapis USING btree (datoteka_id);
 
 
 --
--- TOC entry 2835 (class 1259 OID 24316320)
+-- TOC entry 2835 (class 1259 OID 24473121)
 -- Name: idx_1ed92829ef943358; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4847,7 +4847,7 @@ CREATE INDEX idx_1ed92829ef943358 ON zapis USING btree (vrsta_id);
 
 
 --
--- TOC entry 2710 (class 1259 OID 24315829)
+-- TOC entry 2710 (class 1259 OID 24472630)
 -- Name: idx_20d95c7fa81ccef6; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4855,7 +4855,7 @@ CREATE INDEX idx_20d95c7fa81ccef6 ON prodajapredstave USING btree (dogodek_id);
 
 
 --
--- TOC entry 2711 (class 1259 OID 24315828)
+-- TOC entry 2711 (class 1259 OID 24472629)
 -- Name: idx_20d95c7fb31ae31; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4863,7 +4863,7 @@ CREATE INDEX idx_20d95c7fb31ae31 ON prodajapredstave USING btree (sedezni_red_id
 
 
 --
--- TOC entry 2655 (class 1259 OID 24315707)
+-- TOC entry 2655 (class 1259 OID 24472508)
 -- Name: idx_2390fc964ad2a6ea; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4871,7 +4871,7 @@ CREATE INDEX idx_2390fc964ad2a6ea ON vaja USING btree (tipvaje_id);
 
 
 --
--- TOC entry 2656 (class 1259 OID 24315708)
+-- TOC entry 2656 (class 1259 OID 24472509)
 -- Name: idx_2390fc9662b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4879,7 +4879,7 @@ CREATE INDEX idx_2390fc9662b4ffca ON vaja USING btree (uprizoritev_id);
 
 
 --
--- TOC entry 2740 (class 1259 OID 24315903)
+-- TOC entry 2740 (class 1259 OID 24472704)
 -- Name: idx_23aeb95862b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4887,7 +4887,7 @@ CREATE INDEX idx_23aeb95862b4ffca ON funkcija USING btree (uprizoritev_id);
 
 
 --
--- TOC entry 2741 (class 1259 OID 24315905)
+-- TOC entry 2741 (class 1259 OID 24472706)
 -- Name: idx_23aeb9586b361365; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4895,7 +4895,7 @@ CREATE INDEX idx_23aeb9586b361365 ON funkcija USING btree (tipfunkcije_id);
 
 
 --
--- TOC entry 2742 (class 1259 OID 24315904)
+-- TOC entry 2742 (class 1259 OID 24472705)
 -- Name: idx_23aeb958740eb038; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4903,7 +4903,7 @@ CREATE INDEX idx_23aeb958740eb038 ON funkcija USING btree (alternacija_id);
 
 
 --
--- TOC entry 2630 (class 1259 OID 24315642)
+-- TOC entry 2630 (class 1259 OID 24472443)
 -- Name: idx_2942b10710389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4911,7 +4911,7 @@ CREATE INDEX idx_2942b10710389148 ON kontaktnaoseba USING btree (oseba_id);
 
 
 --
--- TOC entry 2631 (class 1259 OID 24315641)
+-- TOC entry 2631 (class 1259 OID 24472442)
 -- Name: idx_2942b1076beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4919,7 +4919,7 @@ CREATE INDEX idx_2942b1076beede51 ON kontaktnaoseba USING btree (popa_id);
 
 
 --
--- TOC entry 2822 (class 1259 OID 24316277)
+-- TOC entry 2822 (class 1259 OID 24473078)
 -- Name: idx_2d901816d6bc69d6; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4927,7 +4927,7 @@ CREATE INDEX idx_2d901816d6bc69d6 ON programskaenotasklopa USING btree (programr
 
 
 --
--- TOC entry 2774 (class 1259 OID 24316022)
+-- TOC entry 2774 (class 1259 OID 24472823)
 -- Name: idx_2decfc5910389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4935,7 +4935,7 @@ CREATE INDEX idx_2decfc5910389148 ON pogodba USING btree (oseba_id);
 
 
 --
--- TOC entry 2775 (class 1259 OID 24316023)
+-- TOC entry 2775 (class 1259 OID 24472824)
 -- Name: idx_2decfc596beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4943,7 +4943,7 @@ CREATE INDEX idx_2decfc596beede51 ON pogodba USING btree (popa_id);
 
 
 --
--- TOC entry 2776 (class 1259 OID 24316024)
+-- TOC entry 2776 (class 1259 OID 24472825)
 -- Name: idx_2decfc59fa5529ee; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4951,7 +4951,7 @@ CREATE INDEX idx_2decfc59fa5529ee ON pogodba USING btree (trr_id);
 
 
 --
--- TOC entry 2841 (class 1259 OID 24316344)
+-- TOC entry 2841 (class 1259 OID 24473145)
 -- Name: idx_2eaff9dcaf91ecd; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4959,7 +4959,7 @@ CREATE INDEX idx_2eaff9dcaf91ecd ON zapislastnik USING btree (zapis_id);
 
 
 --
--- TOC entry 2783 (class 1259 OID 24316058)
+-- TOC entry 2783 (class 1259 OID 24472859)
 -- Name: idx_344a77a3b262815; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4967,7 +4967,7 @@ CREATE INDEX idx_344a77a3b262815 ON uprizoritev USING btree (zvrst_surs_id);
 
 
 --
--- TOC entry 2784 (class 1259 OID 24316055)
+-- TOC entry 2784 (class 1259 OID 24472856)
 -- Name: idx_344a77a7c3b0d59; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4975,7 +4975,7 @@ CREATE INDEX idx_344a77a7c3b0d59 ON uprizoritev USING btree (maticnioder_id);
 
 
 --
--- TOC entry 2785 (class 1259 OID 24316059)
+-- TOC entry 2785 (class 1259 OID 24472860)
 -- Name: idx_344a77a853a965c; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4983,7 +4983,7 @@ CREATE INDEX idx_344a77a853a965c ON uprizoritev USING btree (producent_id);
 
 
 --
--- TOC entry 2786 (class 1259 OID 24316057)
+-- TOC entry 2786 (class 1259 OID 24472858)
 -- Name: idx_344a77a8e27eb8d; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4991,7 +4991,7 @@ CREATE INDEX idx_344a77a8e27eb8d ON uprizoritev USING btree (zvrst_uprizoritve_i
 
 
 --
--- TOC entry 2787 (class 1259 OID 24316056)
+-- TOC entry 2787 (class 1259 OID 24472857)
 -- Name: idx_344a77af35157b1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4999,7 +4999,7 @@ CREATE INDEX idx_344a77af35157b1 ON uprizoritev USING btree (besedilo_id);
 
 
 --
--- TOC entry 2620 (class 1259 OID 24315613)
+-- TOC entry 2620 (class 1259 OID 24472414)
 -- Name: idx_37f6541a10389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5007,7 +5007,7 @@ CREATE INDEX idx_37f6541a10389148 ON trr USING btree (oseba_id);
 
 
 --
--- TOC entry 2621 (class 1259 OID 24315612)
+-- TOC entry 2621 (class 1259 OID 24472413)
 -- Name: idx_37f6541a6beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5015,7 +5015,7 @@ CREATE INDEX idx_37f6541a6beede51 ON trr USING btree (popa_id);
 
 
 --
--- TOC entry 2589 (class 1259 OID 24315526)
+-- TOC entry 2589 (class 1259 OID 24472327)
 -- Name: idx_466966d769e8d4; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5023,7 +5023,7 @@ CREATE INDEX idx_466966d769e8d4 ON oseba USING btree (naslov_id);
 
 
 --
--- TOC entry 2728 (class 1259 OID 24315870)
+-- TOC entry 2728 (class 1259 OID 24472671)
 -- Name: idx_48f1f62bfe7b16e1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5031,7 +5031,7 @@ CREATE INDEX idx_48f1f62bfe7b16e1 ON rezervacija USING btree (prodaja_predstave_
 
 
 --
--- TOC entry 2573 (class 1259 OID 24315458)
+-- TOC entry 2573 (class 1259 OID 24472259)
 -- Name: idx_4ff23396d60322ac; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5039,7 +5039,7 @@ CREATE INDEX idx_4ff23396d60322ac ON permission2role USING btree (role_id);
 
 
 --
--- TOC entry 2574 (class 1259 OID 24315459)
+-- TOC entry 2574 (class 1259 OID 24472260)
 -- Name: idx_4ff23396fed90cca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5047,7 +5047,7 @@ CREATE INDEX idx_4ff23396fed90cca ON permission2role USING btree (permission_id)
 
 
 --
--- TOC entry 2733 (class 1259 OID 24315890)
+-- TOC entry 2733 (class 1259 OID 24472691)
 -- Name: idx_52ed210b1c0dc15a; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5055,7 +5055,7 @@ CREATE INDEX idx_52ed210b1c0dc15a ON sedez USING btree (podrocja_sedenja_id);
 
 
 --
--- TOC entry 2734 (class 1259 OID 24315889)
+-- TOC entry 2734 (class 1259 OID 24472690)
 -- Name: idx_52ed210bb31ae31; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5063,7 +5063,7 @@ CREATE INDEX idx_52ed210bb31ae31 ON sedez USING btree (sedezni_red_id);
 
 
 --
--- TOC entry 2735 (class 1259 OID 24315888)
+-- TOC entry 2735 (class 1259 OID 24472689)
 -- Name: idx_52ed210bef943358; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5071,7 +5071,7 @@ CREATE INDEX idx_52ed210bef943358 ON sedez USING btree (vrsta_id);
 
 
 --
--- TOC entry 2603 (class 1259 OID 24315563)
+-- TOC entry 2603 (class 1259 OID 24472364)
 -- Name: idx_5e2fdc29289ed596; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5079,7 +5079,7 @@ CREATE INDEX idx_5e2fdc29289ed596 ON organizacijskaenota USING btree (vodja_id);
 
 
 --
--- TOC entry 2604 (class 1259 OID 24315562)
+-- TOC entry 2604 (class 1259 OID 24472363)
 -- Name: idx_5e2fdc29727aca70; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5087,7 +5087,7 @@ CREATE INDEX idx_5e2fdc29727aca70 ON organizacijskaenota USING btree (parent_id)
 
 
 --
--- TOC entry 2605 (class 1259 OID 24315564)
+-- TOC entry 2605 (class 1259 OID 24472365)
 -- Name: idx_5e2fdc29f0020ed7; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5095,7 +5095,7 @@ CREATE INDEX idx_5e2fdc29f0020ed7 ON organizacijskaenota USING btree (namestnik_
 
 
 --
--- TOC entry 2643 (class 1259 OID 24315680)
+-- TOC entry 2643 (class 1259 OID 24472481)
 -- Name: idx_602f6e461174bb0e; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5103,7 +5103,7 @@ CREATE INDEX idx_602f6e461174bb0e ON predstava USING btree (dezurni_id);
 
 
 --
--- TOC entry 2644 (class 1259 OID 24315678)
+-- TOC entry 2644 (class 1259 OID 24472479)
 -- Name: idx_602f6e4662b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5111,7 +5111,7 @@ CREATE INDEX idx_602f6e4662b4ffca ON predstava USING btree (uprizoritev_id);
 
 
 --
--- TOC entry 2645 (class 1259 OID 24315679)
+-- TOC entry 2645 (class 1259 OID 24472480)
 -- Name: idx_602f6e46ef0f30b; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5119,7 +5119,7 @@ CREATE INDEX idx_602f6e46ef0f30b ON predstava USING btree (gostovanje_id);
 
 
 --
--- TOC entry 2553 (class 1259 OID 24315391)
+-- TOC entry 2553 (class 1259 OID 24472192)
 -- Name: idx_6054e804ff55f926; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5127,7 +5127,7 @@ CREATE INDEX idx_6054e804ff55f926 ON stevilcenjekonfig USING btree (stevilcenje_
 
 
 --
--- TOC entry 2690 (class 1259 OID 24315795)
+-- TOC entry 2690 (class 1259 OID 24472596)
 -- Name: idx_667e35d117619010; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5135,7 +5135,7 @@ CREATE INDEX idx_667e35d117619010 ON razpisansedez USING btree (rezervacija_id);
 
 
 --
--- TOC entry 2691 (class 1259 OID 24315793)
+-- TOC entry 2691 (class 1259 OID 24472594)
 -- Name: idx_667e35d1c146c3f3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5143,7 +5143,7 @@ CREATE INDEX idx_667e35d1c146c3f3 ON razpisansedez USING btree (sedez_id);
 
 
 --
--- TOC entry 2692 (class 1259 OID 24315792)
+-- TOC entry 2692 (class 1259 OID 24472593)
 -- Name: idx_667e35d1f5e1d2d3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5151,7 +5151,7 @@ CREATE INDEX idx_667e35d1f5e1d2d3 ON razpisansedez USING btree (postavka_racuna_
 
 
 --
--- TOC entry 2693 (class 1259 OID 24315794)
+-- TOC entry 2693 (class 1259 OID 24472595)
 -- Name: idx_667e35d1fe7b16e1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5159,7 +5159,7 @@ CREATE INDEX idx_667e35d1fe7b16e1 ON razpisansedez USING btree (prodaja_predstav
 
 
 --
--- TOC entry 2564 (class 1259 OID 24315432)
+-- TOC entry 2564 (class 1259 OID 24472233)
 -- Name: idx_704d3abca76ed395; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5167,7 +5167,7 @@ CREATE INDEX idx_704d3abca76ed395 ON role2user USING btree (user_id);
 
 
 --
--- TOC entry 2565 (class 1259 OID 24315433)
+-- TOC entry 2565 (class 1259 OID 24472234)
 -- Name: idx_704d3abcd60322ac; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5175,7 +5175,7 @@ CREATE INDEX idx_704d3abcd60322ac ON role2user USING btree (role_id);
 
 
 --
--- TOC entry 2719 (class 1259 OID 24315851)
+-- TOC entry 2719 (class 1259 OID 24472652)
 -- Name: idx_7069c3c41c0dc15a; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5183,7 +5183,7 @@ CREATE INDEX idx_7069c3c41c0dc15a ON vrstasedezev USING btree (podrocja_sedenja_
 
 
 --
--- TOC entry 2854 (class 1259 OID 24316378)
+-- TOC entry 2854 (class 1259 OID 24473179)
 -- Name: idx_781826c67e3c61f9; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5191,7 +5191,7 @@ CREATE INDEX idx_781826c67e3c61f9 ON datoteka USING btree (owner_id);
 
 
 --
--- TOC entry 2756 (class 1259 OID 24315943)
+-- TOC entry 2756 (class 1259 OID 24472744)
 -- Name: idx_7ab77b7910389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5199,7 +5199,7 @@ CREATE INDEX idx_7ab77b7910389148 ON avtorbesedila USING btree (oseba_id);
 
 
 --
--- TOC entry 2757 (class 1259 OID 24315942)
+-- TOC entry 2757 (class 1259 OID 24472743)
 -- Name: idx_7ab77b79f35157b1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5207,7 +5207,7 @@ CREATE INDEX idx_7ab77b79f35157b1 ON avtorbesedila USING btree (besedilo_id);
 
 
 --
--- TOC entry 2855 (class 1259 OID 24316386)
+-- TOC entry 2855 (class 1259 OID 24473187)
 -- Name: idx_7adc957157ed422f; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5215,7 +5215,7 @@ CREATE INDEX idx_7adc957157ed422f ON mapaacl USING btree (mapa_id);
 
 
 --
--- TOC entry 2856 (class 1259 OID 24316387)
+-- TOC entry 2856 (class 1259 OID 24473188)
 -- Name: idx_7adc9571fa6311ef; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5223,7 +5223,7 @@ CREATE INDEX idx_7adc9571fa6311ef ON mapaacl USING btree (perm_id);
 
 
 --
--- TOC entry 2705 (class 1259 OID 24315816)
+-- TOC entry 2705 (class 1259 OID 24472617)
 -- Name: idx_80b6f3595b3d808c; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5231,7 +5231,7 @@ CREATE INDEX idx_80b6f3595b3d808c ON postavkaracuna USING btree (racun_id);
 
 
 --
--- TOC entry 2750 (class 1259 OID 24315935)
+-- TOC entry 2750 (class 1259 OID 24472736)
 -- Name: idx_8198265413e60bc0; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5239,7 +5239,7 @@ CREATE INDEX idx_8198265413e60bc0 ON rekviziterstvo USING btree (rekvizit_id);
 
 
 --
--- TOC entry 2751 (class 1259 OID 24315936)
+-- TOC entry 2751 (class 1259 OID 24472737)
 -- Name: idx_8198265462b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5247,7 +5247,7 @@ CREATE INDEX idx_8198265462b4ffca ON rekviziterstvo USING btree (uprizoritev_id)
 
 
 --
--- TOC entry 2804 (class 1259 OID 24316157)
+-- TOC entry 2804 (class 1259 OID 24472958)
 -- Name: idx_8787a0e54ae1cd1c; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5255,7 +5255,7 @@ CREATE INDEX idx_8787a0e54ae1cd1c ON enotaprograma USING btree (gostitelj_id);
 
 
 --
--- TOC entry 2805 (class 1259 OID 24316156)
+-- TOC entry 2805 (class 1259 OID 24472957)
 -- Name: idx_8787a0e55d0da56c; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5263,7 +5263,7 @@ CREATE INDEX idx_8787a0e55d0da56c ON enotaprograma USING btree (drzavagostovanja
 
 
 --
--- TOC entry 2806 (class 1259 OID 24316153)
+-- TOC entry 2806 (class 1259 OID 24472954)
 -- Name: idx_8787a0e562b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5271,7 +5271,7 @@ CREATE INDEX idx_8787a0e562b4ffca ON enotaprograma USING btree (uprizoritev_id);
 
 
 --
--- TOC entry 2807 (class 1259 OID 24316154)
+-- TOC entry 2807 (class 1259 OID 24472955)
 -- Name: idx_8787a0e57222d84b; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5279,7 +5279,7 @@ CREATE INDEX idx_8787a0e57222d84b ON enotaprograma USING btree (tipprogramskeeno
 
 
 --
--- TOC entry 2808 (class 1259 OID 24316155)
+-- TOC entry 2808 (class 1259 OID 24472956)
 -- Name: idx_8787a0e5771ec7bd; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5287,7 +5287,7 @@ CREATE INDEX idx_8787a0e5771ec7bd ON enotaprograma USING btree (program_dela_id)
 
 
 --
--- TOC entry 2609 (class 1259 OID 24315578)
+-- TOC entry 2609 (class 1259 OID 24472379)
 -- Name: idx_89c1f9d210389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5295,7 +5295,7 @@ CREATE INDEX idx_89c1f9d210389148 ON postninaslovi USING btree (oseba_id);
 
 
 --
--- TOC entry 2610 (class 1259 OID 24315577)
+-- TOC entry 2610 (class 1259 OID 24472378)
 -- Name: idx_89c1f9d2a233cb39; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5303,7 +5303,7 @@ CREATE INDEX idx_89c1f9d2a233cb39 ON postninaslovi USING btree (klient_id);
 
 
 --
--- TOC entry 2611 (class 1259 OID 24315579)
+-- TOC entry 2611 (class 1259 OID 24472380)
 -- Name: idx_89c1f9d2ee4b985a; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5311,7 +5311,7 @@ CREATE INDEX idx_89c1f9d2ee4b985a ON postninaslovi USING btree (drzava_id);
 
 
 --
--- TOC entry 2722 (class 1259 OID 24315864)
+-- TOC entry 2722 (class 1259 OID 24472665)
 -- Name: idx_952dd21969e8d4; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5319,7 +5319,7 @@ CREATE INDEX idx_952dd21969e8d4 ON prostor USING btree (naslov_id);
 
 
 --
--- TOC entry 2723 (class 1259 OID 24315863)
+-- TOC entry 2723 (class 1259 OID 24472664)
 -- Name: idx_952dd2196beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5327,7 +5327,7 @@ CREATE INDEX idx_952dd2196beede51 ON prostor USING btree (popa_id);
 
 
 --
--- TOC entry 2814 (class 1259 OID 24316257)
+-- TOC entry 2814 (class 1259 OID 24473058)
 -- Name: idx_97af082e38c06eb; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5335,7 +5335,7 @@ CREATE INDEX idx_97af082e38c06eb ON produkcijadelitev USING btree (enotaprograma
 
 
 --
--- TOC entry 2815 (class 1259 OID 24316258)
+-- TOC entry 2815 (class 1259 OID 24473059)
 -- Name: idx_97af082ec532925b; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5343,7 +5343,7 @@ CREATE INDEX idx_97af082ec532925b ON produkcijadelitev USING btree (koproducent_
 
 
 --
--- TOC entry 2797 (class 1259 OID 24316088)
+-- TOC entry 2797 (class 1259 OID 24472889)
 -- Name: idx_a4b7244f10389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5351,7 +5351,7 @@ CREATE INDEX idx_a4b7244f10389148 ON alternacija USING btree (oseba_id);
 
 
 --
--- TOC entry 2798 (class 1259 OID 24316089)
+-- TOC entry 2798 (class 1259 OID 24472890)
 -- Name: idx_a4b7244f5bc4d310; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5359,7 +5359,7 @@ CREATE INDEX idx_a4b7244f5bc4d310 ON alternacija USING btree (pogodba_id);
 
 
 --
--- TOC entry 2799 (class 1259 OID 24316086)
+-- TOC entry 2799 (class 1259 OID 24472887)
 -- Name: idx_a4b7244f861baed2; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5367,7 +5367,7 @@ CREATE INDEX idx_a4b7244f861baed2 ON alternacija USING btree (funkcija_id);
 
 
 --
--- TOC entry 2800 (class 1259 OID 24316087)
+-- TOC entry 2800 (class 1259 OID 24472888)
 -- Name: idx_a4b7244fa4976613; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5375,7 +5375,7 @@ CREATE INDEX idx_a4b7244fa4976613 ON alternacija USING btree (zaposlitev_id);
 
 
 --
--- TOC entry 2746 (class 1259 OID 24315925)
+-- TOC entry 2746 (class 1259 OID 24472726)
 -- Name: idx_b244904110389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5383,7 +5383,7 @@ CREATE INDEX idx_b244904110389148 ON zaposlitev USING btree (oseba_id);
 
 
 --
--- TOC entry 2747 (class 1259 OID 24315926)
+-- TOC entry 2747 (class 1259 OID 24472727)
 -- Name: idx_b24490415f1e9d88; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5391,7 +5391,7 @@ CREATE INDEX idx_b24490415f1e9d88 ON zaposlitev USING btree (organizacijskaenota
 
 
 --
--- TOC entry 2696 (class 1259 OID 24315804)
+-- TOC entry 2696 (class 1259 OID 24472605)
 -- Name: idx_b5b84f4533341ab8; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5399,7 +5399,7 @@ CREATE INDEX idx_b5b84f4533341ab8 ON racun USING btree (placilni_instrument_id);
 
 
 --
--- TOC entry 2697 (class 1259 OID 24315803)
+-- TOC entry 2697 (class 1259 OID 24472604)
 -- Name: idx_b5b84f45a420584d; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5407,7 +5407,7 @@ CREATE INDEX idx_b5b84f45a420584d ON racun USING btree (nacin_placina_id);
 
 
 --
--- TOC entry 2698 (class 1259 OID 24315801)
+-- TOC entry 2698 (class 1259 OID 24472602)
 -- Name: idx_b5b84f45bc902d3b; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5415,7 +5415,7 @@ CREATE INDEX idx_b5b84f45bc902d3b ON racun USING btree (kupec_id);
 
 
 --
--- TOC entry 2699 (class 1259 OID 24315802)
+-- TOC entry 2699 (class 1259 OID 24472603)
 -- Name: idx_b5b84f45fe7b16e1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5423,7 +5423,7 @@ CREATE INDEX idx_b5b84f45fe7b16e1 ON racun USING btree (prodaja_predstave_id);
 
 
 --
--- TOC entry 2793 (class 1259 OID 24316076)
+-- TOC entry 2793 (class 1259 OID 24472877)
 -- Name: idx_bbff875562b4ffca; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5431,7 +5431,7 @@ CREATE INDEX idx_bbff875562b4ffca ON arhivalija USING btree (uprizoritev_id);
 
 
 --
--- TOC entry 2794 (class 1259 OID 24316075)
+-- TOC entry 2794 (class 1259 OID 24472876)
 -- Name: idx_bbff8755a81ccef6; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5439,7 +5439,7 @@ CREATE INDEX idx_bbff8755a81ccef6 ON arhivalija USING btree (dogodek_id);
 
 
 --
--- TOC entry 2634 (class 1259 OID 24315653)
+-- TOC entry 2634 (class 1259 OID 24472454)
 -- Name: idx_c38372b2be04ea9; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5447,7 +5447,7 @@ CREATE INDEX idx_c38372b2be04ea9 ON report USING btree (job_id);
 
 
 --
--- TOC entry 2637 (class 1259 OID 24315667)
+-- TOC entry 2637 (class 1259 OID 24472468)
 -- Name: idx_c395a6181bb9e62c; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5455,7 +5455,7 @@ CREATE INDEX idx_c395a6181bb9e62c ON job USING btree (datum);
 
 
 --
--- TOC entry 2638 (class 1259 OID 24315666)
+-- TOC entry 2638 (class 1259 OID 24472467)
 -- Name: idx_c395a618941027cc; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5463,7 +5463,7 @@ CREATE INDEX idx_c395a618941027cc ON job USING btree (casizvedbe);
 
 
 --
--- TOC entry 2639 (class 1259 OID 24315665)
+-- TOC entry 2639 (class 1259 OID 24472466)
 -- Name: idx_c395a618a76ed395; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5471,7 +5471,7 @@ CREATE INDEX idx_c395a618a76ed395 ON job USING btree (user_id);
 
 
 --
--- TOC entry 2640 (class 1259 OID 24315668)
+-- TOC entry 2640 (class 1259 OID 24472469)
 -- Name: idx_c395a618aecf5af0; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5479,7 +5479,7 @@ CREATE INDEX idx_c395a618aecf5af0 ON job USING btree (izveden);
 
 
 --
--- TOC entry 2654 (class 1259 OID 24315698)
+-- TOC entry 2654 (class 1259 OID 24472499)
 -- Name: idx_cae790c7ee4b985a; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5487,7 +5487,7 @@ CREATE INDEX idx_cae790c7ee4b985a ON gostovanje USING btree (drzava_id);
 
 
 --
--- TOC entry 2648 (class 1259 OID 24315686)
+-- TOC entry 2648 (class 1259 OID 24472487)
 -- Name: idx_d9ece16b5ac894aa; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5495,7 +5495,7 @@ CREATE INDEX idx_d9ece16b5ac894aa ON predstava_abonma USING btree (predstava_id)
 
 
 --
--- TOC entry 2649 (class 1259 OID 24315687)
+-- TOC entry 2649 (class 1259 OID 24472488)
 -- Name: idx_d9ece16bbe74b11; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5503,7 +5503,7 @@ CREATE INDEX idx_d9ece16bbe74b11 ON predstava_abonma USING btree (abonma_id);
 
 
 --
--- TOC entry 2811 (class 1259 OID 24316248)
+-- TOC entry 2811 (class 1259 OID 24473049)
 -- Name: idx_dba42fe79e3adf2c; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5511,7 +5511,7 @@ CREATE INDEX idx_dba42fe79e3adf2c ON postavkacdve USING btree (programdela_id);
 
 
 --
--- TOC entry 2830 (class 1259 OID 24316296)
+-- TOC entry 2830 (class 1259 OID 24473097)
 -- Name: idx_e7d4cf2638c06eb; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5519,7 +5519,7 @@ CREATE INDEX idx_e7d4cf2638c06eb ON drugivir USING btree (enotaprograma_id);
 
 
 --
--- TOC entry 2848 (class 1259 OID 24316362)
+-- TOC entry 2848 (class 1259 OID 24473163)
 -- Name: idx_e9f8ee8257ed422f; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5527,7 +5527,7 @@ CREATE INDEX idx_e9f8ee8257ed422f ON mapa_zapis USING btree (mapa_id);
 
 
 --
--- TOC entry 2849 (class 1259 OID 24316363)
+-- TOC entry 2849 (class 1259 OID 24473164)
 -- Name: idx_e9f8ee82af91ecd; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5535,7 +5535,7 @@ CREATE INDEX idx_e9f8ee82af91ecd ON mapa_zapis USING btree (zapis_id);
 
 
 --
--- TOC entry 2585 (class 1259 OID 24315498)
+-- TOC entry 2585 (class 1259 OID 24472299)
 -- Name: idx_ef01221fa76ed395; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5543,7 +5543,7 @@ CREATE INDEX idx_ef01221fa76ed395 ON optionvalue USING btree (user_id);
 
 
 --
--- TOC entry 2586 (class 1259 OID 24315497)
+-- TOC entry 2586 (class 1259 OID 24472298)
 -- Name: idx_ef01221fa7c41d6f; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5551,7 +5551,7 @@ CREATE INDEX idx_ef01221fa7c41d6f ON optionvalue USING btree (option_id);
 
 
 --
--- TOC entry 2594 (class 1259 OID 24315533)
+-- TOC entry 2594 (class 1259 OID 24472334)
 -- Name: idx_ef76e55910389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5559,7 +5559,7 @@ CREATE INDEX idx_ef76e55910389148 ON telefonska USING btree (oseba_id);
 
 
 --
--- TOC entry 2595 (class 1259 OID 24315534)
+-- TOC entry 2595 (class 1259 OID 24472335)
 -- Name: idx_ef76e5596beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5567,7 +5567,7 @@ CREATE INDEX idx_ef76e5596beede51 ON telefonska USING btree (popa_id);
 
 
 --
--- TOC entry 2673 (class 1259 OID 24315747)
+-- TOC entry 2673 (class 1259 OID 24472548)
 -- Name: idx_f44a386d10389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5575,7 +5575,7 @@ CREATE INDEX idx_f44a386d10389148 ON zasedenost USING btree (oseba_id);
 
 
 --
--- TOC entry 2685 (class 1259 OID 24315785)
+-- TOC entry 2685 (class 1259 OID 24472586)
 -- Name: idx_fef7d84b10389148; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5583,7 +5583,7 @@ CREATE INDEX idx_fef7d84b10389148 ON terminstoritve USING btree (oseba_id);
 
 
 --
--- TOC entry 2686 (class 1259 OID 24315784)
+-- TOC entry 2686 (class 1259 OID 24472585)
 -- Name: idx_fef7d84b740eb038; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5591,7 +5591,7 @@ CREATE INDEX idx_fef7d84b740eb038 ON terminstoritve USING btree (alternacija_id)
 
 
 --
--- TOC entry 2687 (class 1259 OID 24315783)
+-- TOC entry 2687 (class 1259 OID 24472584)
 -- Name: idx_fef7d84ba81ccef6; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5599,7 +5599,7 @@ CREATE INDEX idx_fef7d84ba81ccef6 ON terminstoritve USING btree (dogodek_id);
 
 
 --
--- TOC entry 2668 (class 1259 OID 24315733)
+-- TOC entry 2668 (class 1259 OID 24472534)
 -- Name: uniq_11e93b5d14a6c237; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5607,7 +5607,7 @@ CREATE UNIQUE INDEX uniq_11e93b5d14a6c237 ON dogodek USING btree (zasedenost_id)
 
 
 --
--- TOC entry 2669 (class 1259 OID 24315734)
+-- TOC entry 2669 (class 1259 OID 24472535)
 -- Name: uniq_11e93b5d18640538; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5615,7 +5615,7 @@ CREATE UNIQUE INDEX uniq_11e93b5d18640538 ON dogodek USING btree (vaja_id);
 
 
 --
--- TOC entry 2670 (class 1259 OID 24315732)
+-- TOC entry 2670 (class 1259 OID 24472533)
 -- Name: uniq_11e93b5d5ac894aa; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5623,7 +5623,7 @@ CREATE UNIQUE INDEX uniq_11e93b5d5ac894aa ON dogodek USING btree (predstava_id);
 
 
 --
--- TOC entry 2671 (class 1259 OID 24315736)
+-- TOC entry 2671 (class 1259 OID 24472537)
 -- Name: uniq_11e93b5dbbc7a989; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5631,7 +5631,7 @@ CREATE UNIQUE INDEX uniq_11e93b5dbbc7a989 ON dogodek USING btree (dogodek_splosn
 
 
 --
--- TOC entry 2672 (class 1259 OID 24315735)
+-- TOC entry 2672 (class 1259 OID 24472536)
 -- Name: uniq_11e93b5def0f30b; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5639,7 +5639,7 @@ CREATE UNIQUE INDEX uniq_11e93b5def0f30b ON dogodek USING btree (gostovanje_id);
 
 
 --
--- TOC entry 2602 (class 1259 OID 24315552)
+-- TOC entry 2602 (class 1259 OID 24472353)
 -- Name: uniq_1c7adba5559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5647,7 +5647,7 @@ CREATE UNIQUE INDEX uniq_1c7adba5559828a3 ON popa USING btree (sifra);
 
 
 --
--- TOC entry 2583 (class 1259 OID 24315486)
+-- TOC entry 2583 (class 1259 OID 24472287)
 -- Name: uniq_1d30700559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5655,7 +5655,7 @@ CREATE UNIQUE INDEX uniq_1d30700559828a3 ON tippopa USING btree (sifra);
 
 
 --
--- TOC entry 2584 (class 1259 OID 24315487)
+-- TOC entry 2584 (class 1259 OID 24472288)
 -- Name: uniq_1d3070055cca980; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5663,7 +5663,7 @@ CREATE UNIQUE INDEX uniq_1d3070055cca980 ON tippopa USING btree (ime);
 
 
 --
--- TOC entry 2626 (class 1259 OID 24315627)
+-- TOC entry 2626 (class 1259 OID 24472428)
 -- Name: uniq_2d10c3c4559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5671,7 +5671,7 @@ CREATE UNIQUE INDEX uniq_2d10c3c4559828a3 ON drza USING btree (sifra);
 
 
 --
--- TOC entry 2627 (class 1259 OID 24315629)
+-- TOC entry 2627 (class 1259 OID 24472430)
 -- Name: uniq_2d10c3c45841b2e7; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5679,7 +5679,7 @@ CREATE UNIQUE INDEX uniq_2d10c3c45841b2e7 ON drza USING btree (isonum);
 
 
 --
--- TOC entry 2628 (class 1259 OID 24315628)
+-- TOC entry 2628 (class 1259 OID 24472429)
 -- Name: uniq_2d10c3c4a73e48e1; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5687,7 +5687,7 @@ CREATE UNIQUE INDEX uniq_2d10c3c4a73e48e1 ON drza USING btree (sifradolg);
 
 
 --
--- TOC entry 2629 (class 1259 OID 24315630)
+-- TOC entry 2629 (class 1259 OID 24472431)
 -- Name: uniq_2d10c3c4bec28cef; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5695,7 +5695,7 @@ CREATE UNIQUE INDEX uniq_2d10c3c4bec28cef ON drza USING btree (isonaziv);
 
 
 --
--- TOC entry 2704 (class 1259 OID 24315810)
+-- TOC entry 2704 (class 1259 OID 24472611)
 -- Name: uniq_2d2009bb6beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5703,7 +5703,7 @@ CREATE UNIQUE INDEX uniq_2d2009bb6beede51 ON kupec USING btree (popa_id);
 
 
 --
--- TOC entry 2779 (class 1259 OID 24316021)
+-- TOC entry 2779 (class 1259 OID 24472822)
 -- Name: uniq_2decfc59559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5711,7 +5711,7 @@ CREATE UNIQUE INDEX uniq_2decfc59559828a3 ON pogodba USING btree (sifra);
 
 
 --
--- TOC entry 2788 (class 1259 OID 24316054)
+-- TOC entry 2788 (class 1259 OID 24472855)
 -- Name: uniq_344a77a559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5719,7 +5719,7 @@ CREATE UNIQUE INDEX uniq_344a77a559828a3 ON uprizoritev USING btree (sifra);
 
 
 --
--- TOC entry 2770 (class 1259 OID 24315995)
+-- TOC entry 2770 (class 1259 OID 24472796)
 -- Name: uniq_3f50510d559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5727,7 +5727,7 @@ CREATE UNIQUE INDEX uniq_3f50510d559828a3 ON tipfunkcije USING btree (sifra);
 
 
 --
--- TOC entry 2771 (class 1259 OID 24315996)
+-- TOC entry 2771 (class 1259 OID 24472797)
 -- Name: uniq_3f50510d55cca980; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5735,7 +5735,7 @@ CREATE UNIQUE INDEX uniq_3f50510d55cca980 ON tipfunkcije USING btree (ime);
 
 
 --
--- TOC entry 2592 (class 1259 OID 24315524)
+-- TOC entry 2592 (class 1259 OID 24472325)
 -- Name: uniq_466966d7559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5743,7 +5743,7 @@ CREATE UNIQUE INDEX uniq_466966d7559828a3 ON oseba USING btree (sifra);
 
 
 --
--- TOC entry 2593 (class 1259 OID 24315525)
+-- TOC entry 2593 (class 1259 OID 24472326)
 -- Name: uniq_466966d7a76ed395; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5751,7 +5751,7 @@ CREATE UNIQUE INDEX uniq_466966d7a76ed395 ON oseba USING btree (user_id);
 
 
 --
--- TOC entry 2743 (class 1259 OID 24315915)
+-- TOC entry 2743 (class 1259 OID 24472716)
 -- Name: uniq_5216fcb0559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5759,7 +5759,7 @@ CREATE UNIQUE INDEX uniq_5216fcb0559828a3 ON zvrstuprizoritve USING btree (sifra
 
 
 --
--- TOC entry 2559 (class 1259 OID 24315402)
+-- TOC entry 2559 (class 1259 OID 24472203)
 -- Name: uniq_5a434fbc559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5767,7 +5767,7 @@ CREATE UNIQUE INDEX uniq_5a434fbc559828a3 ON stevilcenje USING btree (sifra);
 
 
 --
--- TOC entry 2619 (class 1259 OID 24315599)
+-- TOC entry 2619 (class 1259 OID 24472400)
 -- Name: uniq_5d2a05865e237e06; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5775,7 +5775,7 @@ CREATE UNIQUE INDEX uniq_5d2a05865e237e06 ON option USING btree (name);
 
 
 --
--- TOC entry 2608 (class 1259 OID 24315561)
+-- TOC entry 2608 (class 1259 OID 24472362)
 -- Name: uniq_5e2fdc29559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5783,7 +5783,7 @@ CREATE UNIQUE INDEX uniq_5e2fdc29559828a3 ON organizacijskaenota USING btree (si
 
 
 --
--- TOC entry 2556 (class 1259 OID 24315390)
+-- TOC entry 2556 (class 1259 OID 24472191)
 -- Name: uniq_6054e804889a7556; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5791,7 +5791,7 @@ CREATE UNIQUE INDEX uniq_6054e804889a7556 ON stevilcenjekonfig USING btree (dok)
 
 
 --
--- TOC entry 2827 (class 1259 OID 24316289)
+-- TOC entry 2827 (class 1259 OID 24473090)
 -- Name: uniq_7d834df4559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5799,7 +5799,7 @@ CREATE UNIQUE INDEX uniq_7d834df4559828a3 ON tipprogramskeenote USING btree (sif
 
 
 --
--- TOC entry 2726 (class 1259 OID 24315862)
+-- TOC entry 2726 (class 1259 OID 24472663)
 -- Name: uniq_952dd21937854736; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5807,7 +5807,7 @@ CREATE UNIQUE INDEX uniq_952dd21937854736 ON prostor USING btree (naziv);
 
 
 --
--- TOC entry 2727 (class 1259 OID 24315861)
+-- TOC entry 2727 (class 1259 OID 24472662)
 -- Name: uniq_952dd219559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5815,7 +5815,7 @@ CREATE UNIQUE INDEX uniq_952dd219559828a3 ON prostor USING btree (sifra);
 
 
 --
--- TOC entry 2680 (class 1259 OID 24315761)
+-- TOC entry 2680 (class 1259 OID 24472562)
 -- Name: uniq_99664b14559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5823,7 +5823,7 @@ CREATE UNIQUE INDEX uniq_99664b14559828a3 ON tipvaje USING btree (sifra);
 
 
 --
--- TOC entry 2681 (class 1259 OID 24315762)
+-- TOC entry 2681 (class 1259 OID 24472563)
 -- Name: uniq_99664b1455cca980; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5831,7 +5831,7 @@ CREATE UNIQUE INDEX uniq_99664b1455cca980 ON tipvaje USING btree (ime);
 
 
 --
--- TOC entry 2801 (class 1259 OID 24316085)
+-- TOC entry 2801 (class 1259 OID 24472886)
 -- Name: uniq_a4b7244f559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5839,7 +5839,7 @@ CREATE UNIQUE INDEX uniq_a4b7244f559828a3 ON alternacija USING btree (sifra);
 
 
 --
--- TOC entry 2616 (class 1259 OID 24315587)
+-- TOC entry 2616 (class 1259 OID 24472388)
 -- Name: uniq_ba25e4b6559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5847,7 +5847,7 @@ CREATE UNIQUE INDEX uniq_ba25e4b6559828a3 ON posta USING btree (sifra);
 
 
 --
--- TOC entry 2780 (class 1259 OID 24316034)
+-- TOC entry 2780 (class 1259 OID 24472835)
 -- Name: uniq_cede8e36559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5855,7 +5855,7 @@ CREATE UNIQUE INDEX uniq_cede8e36559828a3 ON zvrstsurs USING btree (sifra);
 
 
 --
--- TOC entry 2838 (class 1259 OID 24316336)
+-- TOC entry 2838 (class 1259 OID 24473137)
 -- Name: uniq_de1c8aa1d55226c7; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5863,7 +5863,7 @@ CREATE UNIQUE INDEX uniq_de1c8aa1d55226c7 ON vrstazapisa USING btree (oznaka);
 
 
 --
--- TOC entry 2820 (class 1259 OID 24316265)
+-- TOC entry 2820 (class 1259 OID 24473066)
 -- Name: uniq_e6fc2028559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5871,7 +5871,7 @@ CREATE UNIQUE INDEX uniq_e6fc2028559828a3 ON produkcijskahisa USING btree (sifra
 
 
 --
--- TOC entry 2821 (class 1259 OID 24316266)
+-- TOC entry 2821 (class 1259 OID 24473067)
 -- Name: uniq_e6fc20286beede51; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5879,7 +5879,7 @@ CREATE UNIQUE INDEX uniq_e6fc20286beede51 ON produkcijskahisa USING btree (popa_
 
 
 --
--- TOC entry 2767 (class 1259 OID 24315984)
+-- TOC entry 2767 (class 1259 OID 24472785)
 -- Name: uniq_ec773670ca2e5fcb; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5887,7 +5887,7 @@ CREATE UNIQUE INDEX uniq_ec773670ca2e5fcb ON besedilo USING btree (stevilka);
 
 
 --
--- TOC entry 2684 (class 1259 OID 24315772)
+-- TOC entry 2684 (class 1259 OID 24472573)
 -- Name: uniq_ecc8f8c5559828a3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5895,7 +5895,7 @@ CREATE UNIQUE INDEX uniq_ecc8f8c5559828a3 ON sezona USING btree (sifra);
 
 
 --
--- TOC entry 2572 (class 1259 OID 24315452)
+-- TOC entry 2572 (class 1259 OID 24472253)
 -- Name: uniq_f75b25545e237e06; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5903,7 +5903,7 @@ CREATE UNIQUE INDEX uniq_f75b25545e237e06 ON role USING btree (name);
 
 
 --
--- TOC entry 2897 (class 2606 OID 24316558)
+-- TOC entry 2897 (class 2606 OID 24473359)
 -- Name: fk_11e93b5d14a6c237; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5912,7 +5912,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2896 (class 2606 OID 24316563)
+-- TOC entry 2896 (class 2606 OID 24473364)
 -- Name: fk_11e93b5d18640538; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5921,7 +5921,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2892 (class 2606 OID 24316583)
+-- TOC entry 2892 (class 2606 OID 24473384)
 -- Name: fk_11e93b5d3a0e32e3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5930,7 +5930,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2898 (class 2606 OID 24316553)
+-- TOC entry 2898 (class 2606 OID 24473354)
 -- Name: fk_11e93b5d5ac894aa; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5939,7 +5939,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2894 (class 2606 OID 24316573)
+-- TOC entry 2894 (class 2606 OID 24473374)
 -- Name: fk_11e93b5dbbc7a989; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5948,7 +5948,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2893 (class 2606 OID 24316578)
+-- TOC entry 2893 (class 2606 OID 24473379)
 -- Name: fk_11e93b5dcc3aa562; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5957,7 +5957,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2895 (class 2606 OID 24316568)
+-- TOC entry 2895 (class 2606 OID 24473369)
 -- Name: fk_11e93b5def0f30b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5966,7 +5966,7 @@ ALTER TABLE ONLY dogodek
 
 
 --
--- TOC entry 2934 (class 2606 OID 24316753)
+-- TOC entry 2934 (class 2606 OID 24473554)
 -- Name: fk_11ffe6e05c75296c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5975,7 +5975,7 @@ ALTER TABLE ONLY strosekuprizoritve
 
 
 --
--- TOC entry 2933 (class 2606 OID 24316758)
+-- TOC entry 2933 (class 2606 OID 24473559)
 -- Name: fk_11ffe6e062b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5984,7 +5984,7 @@ ALTER TABLE ONLY strosekuprizoritve
 
 
 --
--- TOC entry 2932 (class 2606 OID 24316763)
+-- TOC entry 2932 (class 2606 OID 24473564)
 -- Name: fk_11ffe6e06beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5993,7 +5993,7 @@ ALTER TABLE ONLY strosekuprizoritve
 
 
 --
--- TOC entry 2966 (class 2606 OID 24316928)
+-- TOC entry 2966 (class 2606 OID 24473729)
 -- Name: fk_14a5d6d3727aca70; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6002,7 +6002,7 @@ ALTER TABLE ONLY mapa
 
 
 --
--- TOC entry 2967 (class 2606 OID 24316923)
+-- TOC entry 2967 (class 2606 OID 24473724)
 -- Name: fk_14a5d6d38a4a6c12; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6011,7 +6011,7 @@ ALTER TABLE ONLY mapa
 
 
 --
--- TOC entry 2871 (class 2606 OID 24316443)
+-- TOC entry 2871 (class 2606 OID 24473244)
 -- Name: fk_1c7adba589552cb2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6020,7 +6020,7 @@ ALTER TABLE ONLY popa
 
 
 --
--- TOC entry 2870 (class 2606 OID 24316448)
+-- TOC entry 2870 (class 2606 OID 24473249)
 -- Name: fk_1c7adba5ee4b985a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6029,7 +6029,7 @@ ALTER TABLE ONLY popa
 
 
 --
--- TOC entry 2915 (class 2606 OID 24316668)
+-- TOC entry 2915 (class 2606 OID 24473469)
 -- Name: fk_1df2e9faa420584d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6038,7 +6038,7 @@ ALTER TABLE ONLY placilniinstrument
 
 
 --
--- TOC entry 2961 (class 2606 OID 24316908)
+-- TOC entry 2961 (class 2606 OID 24473709)
 -- Name: fk_1ed92829253c4123; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6047,7 +6047,7 @@ ALTER TABLE ONLY zapis
 
 
 --
--- TOC entry 2962 (class 2606 OID 24316903)
+-- TOC entry 2962 (class 2606 OID 24473704)
 -- Name: fk_1ed9282957ed422f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6056,7 +6056,7 @@ ALTER TABLE ONLY zapis
 
 
 --
--- TOC entry 2960 (class 2606 OID 24316913)
+-- TOC entry 2960 (class 2606 OID 24473714)
 -- Name: fk_1ed9282987ff3295; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6065,7 +6065,7 @@ ALTER TABLE ONLY zapis
 
 
 --
--- TOC entry 2963 (class 2606 OID 24316898)
+-- TOC entry 2963 (class 2606 OID 24473699)
 -- Name: fk_1ed92829a54dbb1f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6074,7 +6074,7 @@ ALTER TABLE ONLY zapis
 
 
 --
--- TOC entry 2964 (class 2606 OID 24316893)
+-- TOC entry 2964 (class 2606 OID 24473694)
 -- Name: fk_1ed92829ef943358; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6083,7 +6083,7 @@ ALTER TABLE ONLY zapis
 
 
 --
--- TOC entry 2913 (class 2606 OID 24316663)
+-- TOC entry 2913 (class 2606 OID 24473464)
 -- Name: fk_20d95c7fa81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6092,7 +6092,7 @@ ALTER TABLE ONLY prodajapredstave
 
 
 --
--- TOC entry 2914 (class 2606 OID 24316658)
+-- TOC entry 2914 (class 2606 OID 24473459)
 -- Name: fk_20d95c7fb31ae31; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6101,7 +6101,7 @@ ALTER TABLE ONLY prodajapredstave
 
 
 --
--- TOC entry 2891 (class 2606 OID 24316543)
+-- TOC entry 2891 (class 2606 OID 24473344)
 -- Name: fk_2390fc964ad2a6ea; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6110,7 +6110,7 @@ ALTER TABLE ONLY vaja
 
 
 --
--- TOC entry 2890 (class 2606 OID 24316548)
+-- TOC entry 2890 (class 2606 OID 24473349)
 -- Name: fk_2390fc9662b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6119,7 +6119,7 @@ ALTER TABLE ONLY vaja
 
 
 --
--- TOC entry 2925 (class 2606 OID 24316708)
+-- TOC entry 2925 (class 2606 OID 24473509)
 -- Name: fk_23aeb95862b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6128,7 +6128,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 2923 (class 2606 OID 24316718)
+-- TOC entry 2923 (class 2606 OID 24473519)
 -- Name: fk_23aeb9586b361365; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6137,7 +6137,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 2924 (class 2606 OID 24316713)
+-- TOC entry 2924 (class 2606 OID 24473514)
 -- Name: fk_23aeb958740eb038; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6146,7 +6146,7 @@ ALTER TABLE ONLY funkcija
 
 
 --
--- TOC entry 2880 (class 2606 OID 24316498)
+-- TOC entry 2880 (class 2606 OID 24473299)
 -- Name: fk_2942b10710389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6155,7 +6155,7 @@ ALTER TABLE ONLY kontaktnaoseba
 
 
 --
--- TOC entry 2881 (class 2606 OID 24316493)
+-- TOC entry 2881 (class 2606 OID 24473294)
 -- Name: fk_2942b1076beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6164,7 +6164,7 @@ ALTER TABLE ONLY kontaktnaoseba
 
 
 --
--- TOC entry 2911 (class 2606 OID 24316648)
+-- TOC entry 2911 (class 2606 OID 24473449)
 -- Name: fk_2d2009bb6beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6173,7 +6173,7 @@ ALTER TABLE ONLY kupec
 
 
 --
--- TOC entry 2958 (class 2606 OID 24316883)
+-- TOC entry 2958 (class 2606 OID 24473684)
 -- Name: fk_2d901816d6bc69d6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6182,7 +6182,7 @@ ALTER TABLE ONLY programskaenotasklopa
 
 
 --
--- TOC entry 2937 (class 2606 OID 24316768)
+-- TOC entry 2937 (class 2606 OID 24473569)
 -- Name: fk_2decfc5910389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6191,7 +6191,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 2936 (class 2606 OID 24316773)
+-- TOC entry 2936 (class 2606 OID 24473574)
 -- Name: fk_2decfc596beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6200,7 +6200,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 2935 (class 2606 OID 24316778)
+-- TOC entry 2935 (class 2606 OID 24473579)
 -- Name: fk_2decfc59fa5529ee; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6209,7 +6209,7 @@ ALTER TABLE ONLY pogodba
 
 
 --
--- TOC entry 2965 (class 2606 OID 24316918)
+-- TOC entry 2965 (class 2606 OID 24473719)
 -- Name: fk_2eaff9dcaf91ecd; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6218,7 +6218,7 @@ ALTER TABLE ONLY zapislastnik
 
 
 --
--- TOC entry 2939 (class 2606 OID 24316798)
+-- TOC entry 2939 (class 2606 OID 24473599)
 -- Name: fk_344a77a3b262815; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6227,7 +6227,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2942 (class 2606 OID 24316783)
+-- TOC entry 2942 (class 2606 OID 24473584)
 -- Name: fk_344a77a7c3b0d59; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6236,7 +6236,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2938 (class 2606 OID 24316803)
+-- TOC entry 2938 (class 2606 OID 24473604)
 -- Name: fk_344a77a853a965c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6245,7 +6245,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2940 (class 2606 OID 24316793)
+-- TOC entry 2940 (class 2606 OID 24473594)
 -- Name: fk_344a77a8e27eb8d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6254,7 +6254,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2941 (class 2606 OID 24316788)
+-- TOC entry 2941 (class 2606 OID 24473589)
 -- Name: fk_344a77af35157b1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6263,7 +6263,7 @@ ALTER TABLE ONLY uprizoritev
 
 
 --
--- TOC entry 2878 (class 2606 OID 24316488)
+-- TOC entry 2878 (class 2606 OID 24473289)
 -- Name: fk_37f6541a10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6272,7 +6272,7 @@ ALTER TABLE ONLY trr
 
 
 --
--- TOC entry 2879 (class 2606 OID 24316483)
+-- TOC entry 2879 (class 2606 OID 24473284)
 -- Name: fk_37f6541a6beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6281,7 +6281,7 @@ ALTER TABLE ONLY trr
 
 
 --
--- TOC entry 2866 (class 2606 OID 24316428)
+-- TOC entry 2866 (class 2606 OID 24473229)
 -- Name: fk_466966d769e8d4; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6290,7 +6290,7 @@ ALTER TABLE ONLY oseba
 
 
 --
--- TOC entry 2867 (class 2606 OID 24316423)
+-- TOC entry 2867 (class 2606 OID 24473224)
 -- Name: fk_466966d7a76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6299,7 +6299,7 @@ ALTER TABLE ONLY oseba
 
 
 --
--- TOC entry 2919 (class 2606 OID 24316688)
+-- TOC entry 2919 (class 2606 OID 24473489)
 -- Name: fk_48f1f62bfe7b16e1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6308,7 +6308,7 @@ ALTER TABLE ONLY rezervacija
 
 
 --
--- TOC entry 2863 (class 2606 OID 24316403)
+-- TOC entry 2863 (class 2606 OID 24473204)
 -- Name: fk_4ff23396d60322ac; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6317,7 +6317,7 @@ ALTER TABLE ONLY permission2role
 
 
 --
--- TOC entry 2862 (class 2606 OID 24316408)
+-- TOC entry 2862 (class 2606 OID 24473209)
 -- Name: fk_4ff23396fed90cca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6326,7 +6326,7 @@ ALTER TABLE ONLY permission2role
 
 
 --
--- TOC entry 2920 (class 2606 OID 24316703)
+-- TOC entry 2920 (class 2606 OID 24473504)
 -- Name: fk_52ed210b1c0dc15a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6335,7 +6335,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2921 (class 2606 OID 24316698)
+-- TOC entry 2921 (class 2606 OID 24473499)
 -- Name: fk_52ed210bb31ae31; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6344,7 +6344,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2922 (class 2606 OID 24316693)
+-- TOC entry 2922 (class 2606 OID 24473494)
 -- Name: fk_52ed210bef943358; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6353,7 +6353,7 @@ ALTER TABLE ONLY sedez
 
 
 --
--- TOC entry 2873 (class 2606 OID 24316458)
+-- TOC entry 2873 (class 2606 OID 24473259)
 -- Name: fk_5e2fdc29289ed596; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6362,7 +6362,7 @@ ALTER TABLE ONLY organizacijskaenota
 
 
 --
--- TOC entry 2874 (class 2606 OID 24316453)
+-- TOC entry 2874 (class 2606 OID 24473254)
 -- Name: fk_5e2fdc29727aca70; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6371,7 +6371,7 @@ ALTER TABLE ONLY organizacijskaenota
 
 
 --
--- TOC entry 2872 (class 2606 OID 24316463)
+-- TOC entry 2872 (class 2606 OID 24473264)
 -- Name: fk_5e2fdc29f0020ed7; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6380,7 +6380,7 @@ ALTER TABLE ONLY organizacijskaenota
 
 
 --
--- TOC entry 2884 (class 2606 OID 24316523)
+-- TOC entry 2884 (class 2606 OID 24473324)
 -- Name: fk_602f6e461174bb0e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6389,7 +6389,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 2886 (class 2606 OID 24316513)
+-- TOC entry 2886 (class 2606 OID 24473314)
 -- Name: fk_602f6e4662b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6398,7 +6398,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 2885 (class 2606 OID 24316518)
+-- TOC entry 2885 (class 2606 OID 24473319)
 -- Name: fk_602f6e46ef0f30b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6407,7 +6407,7 @@ ALTER TABLE ONLY predstava
 
 
 --
--- TOC entry 2859 (class 2606 OID 24316388)
+-- TOC entry 2859 (class 2606 OID 24473189)
 -- Name: fk_6054e804ff55f926; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6416,7 +6416,7 @@ ALTER TABLE ONLY stevilcenjekonfig
 
 
 --
--- TOC entry 2903 (class 2606 OID 24316623)
+-- TOC entry 2903 (class 2606 OID 24473424)
 -- Name: fk_667e35d117619010; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6425,7 +6425,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2905 (class 2606 OID 24316613)
+-- TOC entry 2905 (class 2606 OID 24473414)
 -- Name: fk_667e35d1c146c3f3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6434,7 +6434,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2906 (class 2606 OID 24316608)
+-- TOC entry 2906 (class 2606 OID 24473409)
 -- Name: fk_667e35d1f5e1d2d3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6443,7 +6443,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2904 (class 2606 OID 24316618)
+-- TOC entry 2904 (class 2606 OID 24473419)
 -- Name: fk_667e35d1fe7b16e1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6452,7 +6452,7 @@ ALTER TABLE ONLY razpisansedez
 
 
 --
--- TOC entry 2861 (class 2606 OID 24316393)
+-- TOC entry 2861 (class 2606 OID 24473194)
 -- Name: fk_704d3abca76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6461,7 +6461,7 @@ ALTER TABLE ONLY role2user
 
 
 --
--- TOC entry 2860 (class 2606 OID 24316398)
+-- TOC entry 2860 (class 2606 OID 24473199)
 -- Name: fk_704d3abcd60322ac; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6470,7 +6470,7 @@ ALTER TABLE ONLY role2user
 
 
 --
--- TOC entry 2916 (class 2606 OID 24316673)
+-- TOC entry 2916 (class 2606 OID 24473474)
 -- Name: fk_7069c3c41c0dc15a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6479,7 +6479,7 @@ ALTER TABLE ONLY vrstasedezev
 
 
 --
--- TOC entry 2970 (class 2606 OID 24316943)
+-- TOC entry 2970 (class 2606 OID 24473744)
 -- Name: fk_781826c67e3c61f9; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6488,7 +6488,7 @@ ALTER TABLE ONLY datoteka
 
 
 --
--- TOC entry 2930 (class 2606 OID 24316748)
+-- TOC entry 2930 (class 2606 OID 24473549)
 -- Name: fk_7ab77b7910389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6497,7 +6497,7 @@ ALTER TABLE ONLY avtorbesedila
 
 
 --
--- TOC entry 2931 (class 2606 OID 24316743)
+-- TOC entry 2931 (class 2606 OID 24473544)
 -- Name: fk_7ab77b79f35157b1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6506,7 +6506,7 @@ ALTER TABLE ONLY avtorbesedila
 
 
 --
--- TOC entry 2972 (class 2606 OID 24316948)
+-- TOC entry 2972 (class 2606 OID 24473749)
 -- Name: fk_7adc957157ed422f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6515,7 +6515,7 @@ ALTER TABLE ONLY mapaacl
 
 
 --
--- TOC entry 2971 (class 2606 OID 24316953)
+-- TOC entry 2971 (class 2606 OID 24473754)
 -- Name: fk_7adc9571fa6311ef; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6524,7 +6524,7 @@ ALTER TABLE ONLY mapaacl
 
 
 --
--- TOC entry 2912 (class 2606 OID 24316653)
+-- TOC entry 2912 (class 2606 OID 24473454)
 -- Name: fk_80b6f3595b3d808c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6533,7 +6533,7 @@ ALTER TABLE ONLY postavkaracuna
 
 
 --
--- TOC entry 2929 (class 2606 OID 24316733)
+-- TOC entry 2929 (class 2606 OID 24473534)
 -- Name: fk_8198265413e60bc0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6542,7 +6542,7 @@ ALTER TABLE ONLY rekviziterstvo
 
 
 --
--- TOC entry 2928 (class 2606 OID 24316738)
+-- TOC entry 2928 (class 2606 OID 24473539)
 -- Name: fk_8198265462b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6551,7 +6551,7 @@ ALTER TABLE ONLY rekviziterstvo
 
 
 --
--- TOC entry 2949 (class 2606 OID 24316858)
+-- TOC entry 2949 (class 2606 OID 24473659)
 -- Name: fk_8787a0e54ae1cd1c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6560,7 +6560,7 @@ ALTER TABLE ONLY enotaprograma
 
 
 --
--- TOC entry 2950 (class 2606 OID 24316853)
+-- TOC entry 2950 (class 2606 OID 24473654)
 -- Name: fk_8787a0e55d0da56c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6569,7 +6569,7 @@ ALTER TABLE ONLY enotaprograma
 
 
 --
--- TOC entry 2953 (class 2606 OID 24316838)
+-- TOC entry 2953 (class 2606 OID 24473639)
 -- Name: fk_8787a0e562b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6578,7 +6578,7 @@ ALTER TABLE ONLY enotaprograma
 
 
 --
--- TOC entry 2952 (class 2606 OID 24316843)
+-- TOC entry 2952 (class 2606 OID 24473644)
 -- Name: fk_8787a0e57222d84b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6587,7 +6587,7 @@ ALTER TABLE ONLY enotaprograma
 
 
 --
--- TOC entry 2951 (class 2606 OID 24316848)
+-- TOC entry 2951 (class 2606 OID 24473649)
 -- Name: fk_8787a0e5771ec7bd; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6596,7 +6596,7 @@ ALTER TABLE ONLY enotaprograma
 
 
 --
--- TOC entry 2876 (class 2606 OID 24316473)
+-- TOC entry 2876 (class 2606 OID 24473274)
 -- Name: fk_89c1f9d210389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6605,7 +6605,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2877 (class 2606 OID 24316468)
+-- TOC entry 2877 (class 2606 OID 24473269)
 -- Name: fk_89c1f9d2a233cb39; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6614,7 +6614,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2875 (class 2606 OID 24316478)
+-- TOC entry 2875 (class 2606 OID 24473279)
 -- Name: fk_89c1f9d2ee4b985a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6623,7 +6623,7 @@ ALTER TABLE ONLY postninaslovi
 
 
 --
--- TOC entry 2917 (class 2606 OID 24316683)
+-- TOC entry 2917 (class 2606 OID 24473484)
 -- Name: fk_952dd21969e8d4; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6632,7 +6632,7 @@ ALTER TABLE ONLY prostor
 
 
 --
--- TOC entry 2918 (class 2606 OID 24316678)
+-- TOC entry 2918 (class 2606 OID 24473479)
 -- Name: fk_952dd2196beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6641,7 +6641,7 @@ ALTER TABLE ONLY prostor
 
 
 --
--- TOC entry 2956 (class 2606 OID 24316868)
+-- TOC entry 2956 (class 2606 OID 24473669)
 -- Name: fk_97af082e38c06eb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6650,7 +6650,7 @@ ALTER TABLE ONLY produkcijadelitev
 
 
 --
--- TOC entry 2955 (class 2606 OID 24316873)
+-- TOC entry 2955 (class 2606 OID 24473674)
 -- Name: fk_97af082ec532925b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6659,7 +6659,7 @@ ALTER TABLE ONLY produkcijadelitev
 
 
 --
--- TOC entry 2946 (class 2606 OID 24316828)
+-- TOC entry 2946 (class 2606 OID 24473629)
 -- Name: fk_a4b7244f10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6668,7 +6668,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2945 (class 2606 OID 24316833)
+-- TOC entry 2945 (class 2606 OID 24473634)
 -- Name: fk_a4b7244f5bc4d310; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6677,7 +6677,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2948 (class 2606 OID 24316818)
+-- TOC entry 2948 (class 2606 OID 24473619)
 -- Name: fk_a4b7244f861baed2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6686,7 +6686,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2947 (class 2606 OID 24316823)
+-- TOC entry 2947 (class 2606 OID 24473624)
 -- Name: fk_a4b7244fa4976613; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6695,7 +6695,7 @@ ALTER TABLE ONLY alternacija
 
 
 --
--- TOC entry 2927 (class 2606 OID 24316723)
+-- TOC entry 2927 (class 2606 OID 24473524)
 -- Name: fk_b244904110389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6704,7 +6704,7 @@ ALTER TABLE ONLY zaposlitev
 
 
 --
--- TOC entry 2926 (class 2606 OID 24316728)
+-- TOC entry 2926 (class 2606 OID 24473529)
 -- Name: fk_b24490415f1e9d88; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6713,7 +6713,7 @@ ALTER TABLE ONLY zaposlitev
 
 
 --
--- TOC entry 2907 (class 2606 OID 24316643)
+-- TOC entry 2907 (class 2606 OID 24473444)
 -- Name: fk_b5b84f4533341ab8; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6722,7 +6722,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2908 (class 2606 OID 24316638)
+-- TOC entry 2908 (class 2606 OID 24473439)
 -- Name: fk_b5b84f45a420584d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6731,7 +6731,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2910 (class 2606 OID 24316628)
+-- TOC entry 2910 (class 2606 OID 24473429)
 -- Name: fk_b5b84f45bc902d3b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6740,7 +6740,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2909 (class 2606 OID 24316633)
+-- TOC entry 2909 (class 2606 OID 24473434)
 -- Name: fk_b5b84f45fe7b16e1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6749,7 +6749,7 @@ ALTER TABLE ONLY racun
 
 
 --
--- TOC entry 2943 (class 2606 OID 24316813)
+-- TOC entry 2943 (class 2606 OID 24473614)
 -- Name: fk_bbff875562b4ffca; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6758,7 +6758,7 @@ ALTER TABLE ONLY arhivalija
 
 
 --
--- TOC entry 2944 (class 2606 OID 24316808)
+-- TOC entry 2944 (class 2606 OID 24473609)
 -- Name: fk_bbff8755a81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6767,7 +6767,7 @@ ALTER TABLE ONLY arhivalija
 
 
 --
--- TOC entry 2882 (class 2606 OID 24316503)
+-- TOC entry 2882 (class 2606 OID 24473304)
 -- Name: fk_c38372b2be04ea9; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6776,7 +6776,7 @@ ALTER TABLE ONLY report
 
 
 --
--- TOC entry 2883 (class 2606 OID 24316508)
+-- TOC entry 2883 (class 2606 OID 24473309)
 -- Name: fk_c395a618a76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6785,7 +6785,7 @@ ALTER TABLE ONLY job
 
 
 --
--- TOC entry 2889 (class 2606 OID 24316538)
+-- TOC entry 2889 (class 2606 OID 24473339)
 -- Name: fk_cae790c7ee4b985a; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6794,7 +6794,7 @@ ALTER TABLE ONLY gostovanje
 
 
 --
--- TOC entry 2888 (class 2606 OID 24316528)
+-- TOC entry 2888 (class 2606 OID 24473329)
 -- Name: fk_d9ece16b5ac894aa; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6803,7 +6803,7 @@ ALTER TABLE ONLY predstava_abonma
 
 
 --
--- TOC entry 2887 (class 2606 OID 24316533)
+-- TOC entry 2887 (class 2606 OID 24473334)
 -- Name: fk_d9ece16bbe74b11; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6812,7 +6812,7 @@ ALTER TABLE ONLY predstava_abonma
 
 
 --
--- TOC entry 2954 (class 2606 OID 24316863)
+-- TOC entry 2954 (class 2606 OID 24473664)
 -- Name: fk_dba42fe79e3adf2c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6821,7 +6821,7 @@ ALTER TABLE ONLY postavkacdve
 
 
 --
--- TOC entry 2957 (class 2606 OID 24316878)
+-- TOC entry 2957 (class 2606 OID 24473679)
 -- Name: fk_e6fc20286beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6830,7 +6830,7 @@ ALTER TABLE ONLY produkcijskahisa
 
 
 --
--- TOC entry 2959 (class 2606 OID 24316888)
+-- TOC entry 2959 (class 2606 OID 24473689)
 -- Name: fk_e7d4cf2638c06eb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6839,7 +6839,7 @@ ALTER TABLE ONLY drugivir
 
 
 --
--- TOC entry 2969 (class 2606 OID 24316933)
+-- TOC entry 2969 (class 2606 OID 24473734)
 -- Name: fk_e9f8ee8257ed422f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6848,7 +6848,7 @@ ALTER TABLE ONLY mapa_zapis
 
 
 --
--- TOC entry 2968 (class 2606 OID 24316938)
+-- TOC entry 2968 (class 2606 OID 24473739)
 -- Name: fk_e9f8ee82af91ecd; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6857,7 +6857,7 @@ ALTER TABLE ONLY mapa_zapis
 
 
 --
--- TOC entry 2864 (class 2606 OID 24316418)
+-- TOC entry 2864 (class 2606 OID 24473219)
 -- Name: fk_ef01221fa76ed395; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6866,7 +6866,7 @@ ALTER TABLE ONLY optionvalue
 
 
 --
--- TOC entry 2865 (class 2606 OID 24316413)
+-- TOC entry 2865 (class 2606 OID 24473214)
 -- Name: fk_ef01221fa7c41d6f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6875,7 +6875,7 @@ ALTER TABLE ONLY optionvalue
 
 
 --
--- TOC entry 2869 (class 2606 OID 24316433)
+-- TOC entry 2869 (class 2606 OID 24473234)
 -- Name: fk_ef76e55910389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6884,7 +6884,7 @@ ALTER TABLE ONLY telefonska
 
 
 --
--- TOC entry 2868 (class 2606 OID 24316438)
+-- TOC entry 2868 (class 2606 OID 24473239)
 -- Name: fk_ef76e5596beede51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6893,7 +6893,7 @@ ALTER TABLE ONLY telefonska
 
 
 --
--- TOC entry 2899 (class 2606 OID 24316588)
+-- TOC entry 2899 (class 2606 OID 24473389)
 -- Name: fk_f44a386d10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6902,7 +6902,7 @@ ALTER TABLE ONLY zasedenost
 
 
 --
--- TOC entry 2900 (class 2606 OID 24316603)
+-- TOC entry 2900 (class 2606 OID 24473404)
 -- Name: fk_fef7d84b10389148; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6911,7 +6911,7 @@ ALTER TABLE ONLY terminstoritve
 
 
 --
--- TOC entry 2901 (class 2606 OID 24316598)
+-- TOC entry 2901 (class 2606 OID 24473399)
 -- Name: fk_fef7d84b740eb038; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6920,7 +6920,7 @@ ALTER TABLE ONLY terminstoritve
 
 
 --
--- TOC entry 2902 (class 2606 OID 24316593)
+-- TOC entry 2902 (class 2606 OID 24473394)
 -- Name: fk_fef7d84ba81ccef6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6928,7 +6928,7 @@ ALTER TABLE ONLY terminstoritve
     ADD CONSTRAINT fk_fef7d84ba81ccef6 FOREIGN KEY (dogodek_id) REFERENCES dogodek(id);
 
 
--- Completed on 2015-10-30 14:10:24 CET
+-- Completed on 2015-11-02 09:57:54 CET
 
 --
 -- PostgreSQL database dump complete
