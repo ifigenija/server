@@ -152,6 +152,10 @@ class VajaCest
         codecept_debug($data);
         $I->assertEquals($ent['zacetek'], $data['zacetek']);
         $I->assertEquals($ent['konec'], $data['konec']);
+        $I->assertEquals($ent['title'], $data['title']);
+        $I->assertEquals($ent['status'], $data['status']);
+        $I->assertEquals($ent['prostor'], $data['prostor']);
+        $I->assertEquals($ent['sezona'], $data['sezona']);
 
         /**
          * preveri dogodek
@@ -159,8 +163,14 @@ class VajaCest
         $this->objDogodek = $dogodek          = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']);
         codecept_debug($dogodek);
         $I->assertGuid($dogodek['id']);
-        $I->assertEquals($dogodek['zacetek'], $data['zacetek'], "začetek");
-        $I->assertEquals($dogodek['konec'], $data['konec'], "konec");
+        $I->assertEquals($dogodek['title'], $data['title'], 'title');
+        $I->assertEquals($dogodek['status'], $data['status'], 'status');
+        $I->assertEquals($dogodek['zacetek'], $data['zacetek'], 'zacetek');
+        $I->assertEquals($dogodek['konec'], $data['konec'], 'konec');
+        $I->assertEquals($dogodek['prostor'], $data['prostor'], 'prostor');
+        $I->assertEquals($dogodek['sezona'], $data['sezona'], 'sezona');
+
+
 
         /**
          * kreiramo še eno vajo

@@ -215,7 +215,6 @@ class Dogodek
             $this->expect(!$this->prostor, "Dogodek razreda zasedenost ne dovoljuje reference Prostor", 1001052);
         }
 
-
         $i = 0;
         if ($this->vaja) {
             $i++;
@@ -232,7 +231,6 @@ class Dogodek
         if ($this->splosni) {
             $i++;
         }
-
 
         $this->expect($i === 1, "Napaka - napačno število referenc na podrobnosti dogodka $i", 1000361);
     }
