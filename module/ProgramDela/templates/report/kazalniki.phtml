@@ -1,69 +1,109 @@
 <?php
-$stVsehPredstav             = $model->getStIzvPrem() +
+$stVsehPredstav = $model->getStIzvPrem() +
         $model->getStIzvPonPrem() +
         $model->getStIzvPonPrej() +
         $model->getStIzvGostovanjInt();
+
 $premiereSredstva           = $model->getSredstvaZaprosenoPrem() +
         $model->getSredstvaDrugiJavniPrem() +
-        $model->getSredstvaDrugiViriPrem();
+        $model->getSredstvaLastnaPrem() +
+        $model->getSredstvaDrugiViriPrem() +
+        $model->getSredstvaVlozekGostiteljaPrem();
 $ponovitvePremierSredstva   = $model->getSredstvaZaprosenoPonPrem() +
         $model->getSredstvaDrugiJavniPonPrem() +
-        $model->getSredstvaDrugiViriPonPrem();
+        $model->getSredstvaLastnaPonPrem() +
+        $model->getSredstvaDrugiViriPonPrem() +
+        $model->getSredstvaVlozekGostiteljaPonPrem();
 $ponovitvePrejsnjihSredstva = $model->getSredstvaZaprosenoPonPrej() +
         $model->getSredstvaDrugiJavniPonPrej() +
-        $model->getSredstvaDrugiViriPonPrej();
+        $model->getSredstvaLastnaPonPrej() +
+        $model->getSredstvaDrugiViriPonPrej() +
+        $model->getSredstvaVlozekGostiteljaPonPrej();
 $gostujoceSredstva          = $model->getSredstvaZaprosenoGostujo() +
         $model->getSredstvaDrugiJavniGostujo() +
-        $model->getSredstvaDrugiViriGostujo();
-$stEnotSK1                  = $model->getStPremier() +
+        $model->getSredstvaLastnaGostujo() +
+        $model->getSredstvaDrugiViriGostujo() +
+        $model->getSredstvaVlozekGostiteljaGostujo();
+
+// skupaj programski sklop I
+$stEnotSK1           = $model->getStPremier() +
         $model->getStPonPrem() +
         $model->getStPonPrej() +
         $model->getStGostujo();
-$mkViriSK1                  = $model->getSredstvaZaprosenoPrem() +
+$mkViriSK1           = $model->getSredstvaZaprosenoPrem() +
         $model->getSredstvaZaprosenoPonPrem() +
         $model->getSredstvaZaprosenoPonPrej() +
         $model->getSredstvaZaprosenoGostujo();
-$dmlsViriSK1                = $model->getSredstvaDrugiJavniPrem() +
+$dmlsViriSK1         = $model->getSredstvaDrugiJavniPrem() +
         $model->getSredstvaDrugiJavniPonPrem() +
         $model->getSredstvaDrugiJavniPonPrej() +
         $model->getSredstvaDrugiJavniGostujo();
-$drugiViriSK1               = $model->getSredstvaDrugiViriPrem() +
+$lsViriSK1           = $model->getSredstvaLastnaPrem() +
+        $model->getSredstvaLastnaPonPrem() +
+        $model->getSredstvaLastnaPonPrej() +
+        $model->getSredstvaLastnaGostujo();
+$drugiViriSK1        = $model->getSredstvaDrugiViriPrem() +
         $model->getSredstvaDrugiViriPonPrem() +
         $model->getSredstvaDrugiViriPonPrej() +
         $model->getSredstvaDrugiViriGostujo();
-$sredstvaSkupajSK1          = $premiereSredstva +
+$vlozekGostiteljaSK1 = $model->getSredstvaVlozekGostiteljaPrem() +
+        $model->getSredstvaVlozekGostiteljaPonPrem() +
+        $model->getSredstvaVlozekGostiteljaPonPrej() +
+        $model->getSredstvaVlozekGostiteljaGostujo();
+
+$sredstvaSkupajSK1 = $premiereSredstva +
         $ponovitvePremierSredstva +
         $ponovitvePrejsnjihSredstva +
         $gostujoceSredstva;
-$gostovanjaSredstva         = $model->getSredstvaZaprosenoInt() +
+
+$gostovanjaSredstva = $model->getSredstvaZaprosenoInt() +
         $model->getSredstvaDrugiJavniInt() +
-        $model->getSredstvaDrugiViriInt();
-$festivaliSredstva          = $model->getSredstvaZaprosenoFest() +
+        $model->getSredstvaLastnaInt() +
+        $model->getSredstvaDrugiViriInt() +
+        $model->getSredstvaVlozekGostiteljaInt();
+$festivaliSredstva  = $model->getSredstvaZaprosenoFest() +
         $model->getSredstvaDrugiJavniFest() +
-        $model->getSredstvaDrugiViriFest();
-$raznoSredstva              = $model->getSredstvaZaprosenoRazno() +
+        $model->getSredstvaLastnaFest() +
+        $model->getSredstvaDrugiViriFest() +
+        $model->getSredstvaVlozekGostiteljaFest();
+$raznoSredstva      = $model->getSredstvaZaprosenoRazno() +
         $model->getSredstvaDrugiJavniRazno() +
-        $model->getSredstvaDrugiViriRazno();
-$izjemniSredstva            = $model->getSredstvaZaprosenoIzjem() +
+        $model->getSredstvaLastnaRazno() +
+        $model->getSredstvaDrugiViriRazno() +
+        $model->getSredstvaVlozekGostiteljaRazno();
+$izjemniSredstva    = $model->getSredstvaZaprosenoIzjem() +
         $model->getSredstvaDrugiJavniIzjem() +
-        $model->getSredstvaDrugiViriIzjem();
-$stEnotSK2                  = $model->getStInt() +
+        $model->getSredstvaLastnaIzjem() +
+        $model->getSredstvaDrugiViriIzjem() +
+        $model->getSredstvaVlozekGostiteljaIzjem();
+
+// skupaj programski sklop II
+$stEnotSK2           = $model->getStInt() +
         $model->getStFest() +
         $model->getStRazno() +
         $model->getStIzjem();
-$mkViriSK2                  = $model->getSredstvaZaprosenoInt() +
+$mkViriSK2           = $model->getSredstvaZaprosenoInt() +
         $model->getSredstvaZaprosenoFest() +
         $model->getSredstvaZaprosenoRazno() +
         $model->getSredstvaZaprosenoIzjem();
-$dmlsViriSK2                = $model->getSredstvaDrugiJavniInt() +
+$dmlsViriSK2         = $model->getSredstvaDrugiJavniInt() +
         $model->getSredstvaDrugiJavniFest() +
         $model->getSredstvaDrugiJavniRazno() +
         $model->getSredstvaDrugiJavniIzjem();
-$drugiViriSK2               = $model->getSredstvaDrugiViriInt() +
+$lsViriSK2           = $model->getSredstvaLastnaInt() +
+        $model->getSredstvaLastnaFest() +
+        $model->getSredstvaLastnaRazno() +
+        $model->getSredstvaLastnaIzjem();
+$drugiViriSK2        = $model->getSredstvaDrugiViriInt() +
         $model->getSredstvaDrugiViriFest() +
         $model->getSredstvaDrugiViriRazno() +
         $model->getSredstvaDrugiViriIzjem();
-$sredstvaSkupajSK2          = $gostovanjaSredstva +
+$vlozekGostiteljaSK2 = $model->getSredstvaVlozekGostiteljaInt() +
+        $model->getSredstvaVlozekGostiteljaFest() +
+        $model->getSredstvaVlozekGostiteljaRazno() +
+        $model->getSredstvaVlozekGostiteljaIzjem();
+
+$sredstvaSkupajSK2 = $gostovanjaSredstva +
         $festivaliSredstva +
         $raznoSredstva +
         $izjemniSredstva;
@@ -113,7 +153,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <th class="cell-type-header-title right-align">Število enot</th>
             <th class="cell-type-header-title right-align">Vir Ministrstvo za kulturo</th>
             <th class="cell-type-header-title right-align">Vir druga ministrstva<br/>in lokalna skupnost</th>
-            <th class="cell-type-header-title right-align">Drugi viri</th>
+            <th class="cell-type-header-title right-align">Lastna sredstva</th>
+            <th class="cell-type-header-title right-align">Drugi nejavni viri</th>
+            <th class="cell-type-header-title right-align">Vložek gostiteljev</th>
             <th class="cell-type-header-title right-align">Skupaj</th>
         </tr>
         <tr>
@@ -121,7 +163,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <td class="cell-type-number"><?= number_format($model->getStPremier(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoPrem(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniPrem(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaPrem(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriPrem(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaPrem(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($premiereSredstva, 2, ',', '.') ?></td>
         </tr>
         <tr>
@@ -129,7 +173,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <td class="cell-type-number"><?= number_format($model->getStPonPrem(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoPonPrem(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniPonPrem(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaPonPrem(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriPonPrem(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaPonPrem(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($ponovitvePremierSredstva, 2, ',', '.') ?></td>
         </tr>
         <tr>
@@ -137,7 +183,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <td class="cell-type-number"><?= number_format($model->getStPonPrej(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoPonPrej(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniPonPrej(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaPonPrej(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriPonPrej(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaPonPrej(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($ponovitvePrejsnjihSredstva, 2, ',', '.') ?></td>
         </tr>
         <tr>
@@ -145,7 +193,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <td class="cell-type-number"><?= number_format($model->getStGostujo(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoGostujo(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniGostujo(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaGostujo(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriGostujo(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaGostujo(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($gostujoceSredstva, 2, ',', '.') ?></td>
         </tr>
         <tr class="suma-row">
@@ -153,7 +203,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <td class="cell-type-number"><?= number_format($stEnotSK1, 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($mkViriSK1, 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($dmlsViriSK1, 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($lsViriSK1, 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($drugiViriSK1, 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($vlozekGostiteljaSK1, 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($sredstvaSkupajSK1, 2, ',', '.') ?></td>
         </tr>
     </table>
@@ -164,7 +216,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <th class="cell-type-header-title right-align">Število enot</th>
             <th class="cell-type-header-title right-align">Vir Ministrstvo za kulturo</th>
             <th class="cell-type-header-title right-align">Vir druga ministrstva<br/>in lokalna skupnost</th>
-            <th class="cell-type-header-title right-align">Drugi viri</th>
+            <th class="cell-type-header-title right-align">Lastna sredstva</th>
+            <th class="cell-type-header-title right-align">Drugi nejavni viri</th>
+            <th class="cell-type-header-title right-align">Vložek gostiteljev</th>
             <th class="cell-type-header-title right-align">Skupaj</th>
         </tr>
         <tr>
@@ -172,7 +226,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <td class="cell-type-number"><?= number_format($model->getStInt(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoInt(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniInt(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaInt(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriInt(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaInt(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($gostovanjaSredstva, 2, ',', '.') ?></td>
         </tr>
         <tr>
@@ -180,7 +236,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <td class="cell-type-number"><?= number_format($model->getStFest(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoFest(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniFest(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaFest(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriFest(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaFest(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($festivaliSredstva, 2, ',', '.') ?></td>
         </tr>
         <tr>
@@ -188,7 +246,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <td class="cell-type-number"><?= number_format($model->getStRazno(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoRazno(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniRazno(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaRazno(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriRazno(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaRazno(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($raznoSredstva, 2, ',', '.') ?></td>
         </tr>
         <tr>
@@ -196,7 +256,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <td class="cell-type-number"><?= number_format($model->getStIzjem(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoIzjem(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniIzjem(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaIzjem(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriIzjem(), 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaIzjem(), 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($izjemniSredstva, 2, ',', '.') ?></td>
         <tr>
         <tr class="suma-row">
@@ -204,7 +266,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <td class="cell-type-number"><?= number_format($stEnotSK2, 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($mkViriSK2, 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($dmlsViriSK2, 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($lsViriSK2, 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($drugiViriSK2, 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($vlozekGostiteljaSK2, 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($sredstvaSkupajSK2, 2, ',', '.') ?></td>
         </tr>
         <tr>
@@ -212,7 +276,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <th class="cell-type-header-title right-align">Število enot</th>
             <th class="cell-type-header-title right-align">Vir Ministrstvo za kulturo</th>
             <th class="cell-type-header-title right-align">Vir druga ministrstva<br/>in lokalna skupnost</th>
-            <th class="cell-type-header-title right-align">Drugi viri</th>
+            <th class="cell-type-header-title right-align">Lastna sredstva</th>
+            <th class="cell-type-header-title right-align">Drugi nejavni viri</th>
+            <th class="cell-type-header-title right-align">Vložek gostiteljev</th>
             <th class="cell-type-header-title right-align">Skupaj</th>
         </tr>
         <tr class="suma-row">
@@ -220,7 +286,9 @@ $sredstvaSkupajSK2          = $gostovanjaSredstva +
             <td class="cell-type-number"><?= number_format($stEnotSK1 + $stEnotSK2, 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($mkViriSK1 + $mkViriSK2, 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($dmlsViriSK1 + $dmlsViriSK2, 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($lsViriSK1 + $lsViriSK2, 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($drugiViriSK1 + $drugiViriSK2, 2, ',', '.') ?></td>
+            <td class="cell-type-number"><?= number_format($vlozekGostiteljaSK1 + $vlozekGostiteljaSK2, 2, ',', '.') ?></td>
             <td class="cell-type-number"><?= number_format($sredstvaSkupajSK1 + $sredstvaSkupajSK2, 2, ',', '.') ?></td>
         </tr>
     </table>
