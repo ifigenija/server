@@ -6,7 +6,8 @@ use Doctrine\ORM\Mapping as ORM,
     Max\Ann\Entity as Max;
 
 /**
- * Entiteta za naslove
+ * Entiteta splošne dogodke
+ * Dogodek, ki ni ne vaja, ne predstava, ne gostovanje, zaseda pa prostor
  *
  * @ORM\Entity(repositoryClass="Koledar\Repository\DogodkiSplosni")
  * @Max\I18n(label="Dogodek za izven",plural="Dogodki za izven")
@@ -29,8 +30,8 @@ class DogodekSplosni
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="splosni")
-     * @Max\I18n(label="Dogodek", description="Dogodek")
+     * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="splosni", cascade={"persist"})
+     * @Max\I18n(label = "dogodekSplosni.dogodek", description = "dogodekSplosni.d.dogodek")
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Dogodek
      */
@@ -43,12 +44,10 @@ class DogodekSplosni
 
     function dodajDogodek()
     {
-        $dogodek = new Dogodek();
-        $dogodek->setRazred(Dogodek::SPLOSNO);
-        $dogodek->setSplosni($this);
-
+        $this->dogodek = new Dogodek();
+        $this->dogodek->setSplosni($this);
+        $this->dogodek->setRazred(Dogodek::SPLOSNO);
     }
-
 
     public function getId()
     {
@@ -66,11 +65,10 @@ class DogodekSplosni
         return $this;
     }
 
-    public function setDogodek(\Koledar\Entity\Dogodek $dogodek=null)
+    public function setDogodek(\Koledar\Entity\Dogodek $dogodek = null)
     {
         $this->dogodek = $dogodek;
         return $this;
     }
-
 
 }

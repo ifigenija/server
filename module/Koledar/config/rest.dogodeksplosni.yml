@@ -6,15 +6,71 @@ forms:
     default: 
         elements:
 #            - id
-            - dogodek
-        
+#            - dogodek
+            - name: title
+              type: text
+              options:
+                  label: Naslov dogodka
+                  required: true
+            - name: status
+              type: select
+              options:
+                  label: Status
+                  reqired: true
+                  value_options: @dogodek.status
+            - name: zacetek
+              type: datetime
+              options: 
+                  label: Začetek
+                  required: false
+            - name: konec
+              type: datetime
+              options: 
+                  label: Konec
+                  required: false
+            - name: prostor
+              type: toone
+              options:
+                  targetEntity: Prodaja\Entity\Prostor
+                  label: Prostor
+                  required: false
+            - name: sezona
+              type: toone
+              options:
+                  targetEntity: Koledar\Entity\Sezona
+                  label: Sezona
+                  required: false
+        hydrator:
+            byValue:
+                - dogodek
+            virtual:
+                - name: zacetek
+                  type: datetime
+                - name: konec
+                  type: datetime
+                - name: prostor
+                  type: byRef
+                  targetEntity: Prodaja\Entity\Prostor
+                - name: sezona
+                  type: byRef
+                  targetEntity: Koledar\Entity\Sezona
+                - title
+                - status                  
 lists:
     default: 
         filter:
+            elements:                 
+                - name: prostor
+                  type: toone
+                  options:
+                      label: Prostor
+                      targetEntity: Prodaja\Entity\Prostor
+                      required: true
         hydrator:
-            - exclude: []
-#    vse: 
-#        filter:
-    
-hydrator: 
-    byValue: [dogodek]
+            byValue:
+                - dogodek
+            virtual:
+                - name: zacetek
+                  type: datetime
+                - name: konec
+                  type: datetime

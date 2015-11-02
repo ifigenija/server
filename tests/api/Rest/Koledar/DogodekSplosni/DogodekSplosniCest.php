@@ -31,7 +31,10 @@ class DogodekSplosniCest
 
     private $restUrl    = '/rest/dogodekSplosni';
     private $dogodekUrl = '/rest/dogodek';
-    private $obj;
+    private $obj1;
+    private $obj2;
+    private $obj3;
+    private $obj4;
     private $objDogodek;
     private $objVaja;
     private $lookProstor1;
@@ -65,55 +68,73 @@ class DogodekSplosniCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupSezona(ApiTester $I)
+    {
+        $this->lookSezona1 = $look              = $I->lookupEntity("sezona", "2015", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona2 = $look              = $I->lookupEntity("sezona", "2016", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona3 = $look              = $I->lookupEntity("sezona", "2017", false);
+        $I->assertGuid($look['id']);
+    }
+
+    /**
      *  kreiramo zapis
      * 
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
     {
-        $data      = [
-            'dogodek' => null, // zaenkrat prazno, relacijo vzpostavimo pri kreiranju dogodka
+        $zacetek    = '2014-05-07T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data       = [
+            'zacetek' => $zacetek,
+            'title'   => "Splošni $zacetek",
+            'status'  => '200s',
+            'konec'   => '2014-05-07T23:00:00+0200',
+            'prostor' => $this->lookProstor1['id'],
+            'sezona'  => $this->lookSezona1['id'],
         ];
-        $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
+        codecept_debug($data);
+        $I->assertEquals($ent['title'], $data['title']);
+        $I->assertEquals($ent['status'], $data['status']);
+        $I->assertEquals($ent['zacetek'], $data['zacetek']);
+        $I->assertEquals($ent['konec'], $data['konec']);
+        $I->assertEquals($ent['prostor'], $data['prostor']);
+        $I->assertEquals($ent['sezona'], $data['sezona']);
 
-        // kreiramo še en zapis
-        $data = [
-            'dogodek' => null, // zaenkrat prazno, relacijo vzpostavimo pri kreiranju dogodka
-        ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertGuid($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
-    }
+        /**
+         * preveri dogodek
+         */
+        $this->objDogodek = $dogodek          = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']['id']);
 
-    /**
-     * @depends create
-     * @param ApiTester $I
-     */
-    public function createDogodek(ApiTester $I)
-    {
-        $data             = [
-            'planiranZacetek' => '2011-02-01T00:00:00+0100',
-            'zacetek'         => '2012-02-01T00:00:00+0100',
-            'konec'           => '2013-02-01T00:00:00+0100',
-            'status'          => "100s",
-            'razred'          => "400s",
-            'termin'          => null,
-            'ime'             => null,
-            'predstava'       => null,
-            'zasedenost'      => null,
-            'gostovanje'      => null,
-            'splosni'         => $this->obj['id'],
-            'prostor'         => $this->lookProstor1['id'],
-            'sezona'          => null,
+        codecept_debug($dogodek);
+        $I->assertGuid($dogodek['id']);
+        $I->assertEquals($dogodek['title'], $data['title'], 'title');
+        $I->assertEquals($dogodek['status'], $data['status'], 'status');
+        $I->assertEquals($dogodek['zacetek'], $data['zacetek'], 'zacetek');
+        $I->assertEquals($dogodek['konec'], $data['konec'], 'konec');
+        $I->assertEquals($dogodek['prostor'], $data['prostor'], 'prostor');
+        $I->assertEquals($dogodek['sezona'], $data['sezona'], 'sezona');
+
+        $zacetek    = '2014-06-07T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data       = [
+            'zacetek' => $zacetek,
+            'title'   => "Splošni $zacetek",
+            'status'  => '200s',
+            'konec'   => '2014-06-07T23:00:00+0200',
+            'prostor' => $this->lookProstor1['id'],
+            'sezona'  => $this->lookSezona1['id'],
         ];
-        $this->objDogodek = $ent              = $I->successfullyCreate($this->dogodekUrl, $data);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
-        codecept_debug($ent);
-        $I->assertEquals($ent['status'], "100s");
     }
 
     /**
@@ -122,34 +143,16 @@ class DogodekSplosniCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getList(ApiTester $I)
+    public function getListPoProstoru(ApiTester $I)
     {
-        $listUrl = $this->restUrl;
-
-        $resp = $I->successfullyGetList($listUrl, []);
-        $list = $resp['data'];
+        $resp   = $I->successfullyGetList($this->restUrl . "?prostor=" . $this->lookProstor1['id'], []);
+        $list   = $resp['data'];
         codecept_debug($resp);
+        $totRec = $resp['state']['totalRecords'];
 
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-//        $I->assertEquals("xx", $list[0]['status']);      // odvisno od sortiranja
     }
-
-    /**
-     * @depends create
-     * @param ApiTester $I
-     */
-//    public function getListVse(ApiTester $I)
-//    {
-//        $listUrl = $this->restUrl . "/vse";
-//        codecept_debug($listUrl);
-//        $resp    = $I->successfullyGetList($listUrl, []);
-//        $list    = $resp['data'];
-//
-//        $I->assertNotEmpty($list);
-//        $I->assertEquals(2, $resp['state']['totalRecords']);
-////        $I->assertEquals("zz", $list[0]['status']);      //glede na sort
-//    }
 
     /**
      * spremenim zapis
@@ -159,7 +162,11 @@ class DogodekSplosniCest
      */
     public function update(ApiTester $I)
     {
-        $I->assertTrue(true, "ni polja za update");  //$$ rb verjetno update-a sploh ni možnega
+        $ent           = $this->obj1;
+        $ent['status'] = '400s';
+        $this->obj1    = $entR          = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+
+        $I->assertEquals($entR['status'], $ent['status']);
     }
 
     /**
@@ -170,33 +177,33 @@ class DogodekSplosniCest
      */
     public function read(\ApiTester $I)
     {
-        $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['dogodek']['id'], $this->objDogodek['id']);
+
+        $zacetek = '2014-05-07T20:00:00+0200';
+        $I->assertEquals($ent['zacetek'], $zacetek);
+        $I->assertEquals($ent['title'], "Splošni $zacetek");
+        $I->assertEquals($ent['status'], '400s');
+        $I->assertEquals($ent['konec'], '2014-05-07T23:00:00+0200');
+        $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
+        $I->assertEquals($ent['sezona'], $this->lookSezona1['id']);
     }
 
     /**
      * brisanje zapisa
      * 
-     * @depends create
-     */
-    public function deleteDogodek(ApiTester $I)
-    {
-        $I->successfullyDelete($this->dogodekUrl, $this->objDogodek['id']);
-        $I->failToGet($this->dogodekUrl, $this->objDogodek['id']);
-    }
-
-    /**
-     * brisanje zapisa
-     * 
-     * @depends deleteDogodek
      * @depends create
      */
     public function delete(ApiTester $I)
     {
-        $I->successfullyDelete($this->restUrl, $this->obj['id']);
-        $I->failToGet($this->restUrl, $this->obj['id']);
+        $I->successfullyDelete($this->restUrl, $this->obj1['id']);
+        $I->failToGet($this->restUrl, $this->obj1['id']);
+        /**
+         * ali je hkrati brisal tudi dogodek
+         */
+        $I->failToGet($this->dogodekUrl, $this->obj1['dogodek']['id']);
     }
 
 }
