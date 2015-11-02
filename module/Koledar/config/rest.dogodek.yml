@@ -13,6 +13,7 @@ forms:
             - razred
             - title
             - prostor
+            - sezona
 lists:
     default: 
         filter:

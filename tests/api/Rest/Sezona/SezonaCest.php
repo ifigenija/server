@@ -201,6 +201,22 @@ class SezonaCest
         $this->objDogodek2 = $ent             = $I->successfullyUpdate($this->dogodekUrl, $data['id'], $data);
         $I->assertGuid($ent['id']);
     }
+    /**
+     * preberemo relacije
+     * 
+     * @depends updateDogodekSSezono
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeZDogodki(ApiTester $I)
+    {
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "dogodki", "");
+        $I->assertEquals(2, count($resp));
+
+        // get po popa id  
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "dogodki", $this->objDogodek1['id']);
+        $I->assertEquals(1, count($resp));
+    }
 
     /**
      * preberi vse zapise od osebe
@@ -311,21 +327,5 @@ class SezonaCest
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
 
-    /**
-     * preberemo relacije
-     * 
-     * @depends updateDogodekSSezono
-     * 
-     * @param ApiTester $I
-     */
-    public function preberiRelacijeZDogodki(ApiTester $I)
-    {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "dogodki", "");
-        $I->assertEquals(2, count($resp));
-
-        // get po popa id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "dogodki", $this->objDogodek1['id']);
-        $I->assertEquals(1, count($resp));
-    }
 
 }
