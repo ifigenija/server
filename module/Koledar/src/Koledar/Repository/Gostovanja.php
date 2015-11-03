@@ -66,4 +66,32 @@ class Gostovanja
         return $qb;
     }
 
+    /**
+     * Opravila pri ustvarjanju nove entitete
+     *
+     * @param Gostovanje $object
+     * @param Parameters $params
+     */
+    public function create($object, $params = null)
+    {
+        if ($object->dogodek) {
+            /** @var Dogodki $rep */
+            $rep = $this->getEntityManager()->getRepository('Koledar\Entity\Dogodek');
+            $rep->create($object->getDogodek(), $params);
+        }
+        parent::create($object, $params); 
+    }
+
+    /**
+     * Pri brisanju brišem tudi dogodek
+     *
+     * @param Predstava $object
+     */
+    public function delete($object)
+    {
+        parent::delete($object);
+        $this->getEntityManager()->remove($object->getDogodek());
+    }
+
+    
 }

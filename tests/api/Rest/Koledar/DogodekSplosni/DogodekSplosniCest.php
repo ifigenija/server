@@ -40,6 +40,9 @@ class DogodekSplosniCest
     private $lookProstor1;
     private $lookProstor2;
     private $lookProstor3;
+    private $lookSezona1;
+    private $lookSezona2;
+    private $lookSezona3;
 
     public function _before(ApiTester $I)
     {

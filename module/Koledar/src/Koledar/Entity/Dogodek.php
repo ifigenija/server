@@ -31,6 +31,7 @@ class Dogodek
     const GOSTOVANJE    = "300s";
     const SPLOSNO       = "400s";
     const ZASEDENOST    = "500s";
+    const TEHNICNI      = "600s";
     const DOLGOROCNO    = "100s";
     const PLANIRAN      = "200s";
     const FIKSIRAN      = "300s";

@@ -4,6 +4,10 @@
  *  Licenca GPLv3
  */
 
+namespace Rest\Permission;
+
+use ApiTester;
+
 /**
  * Description of PermissionCest
  * 
@@ -48,7 +52,7 @@ class PermissionCest
     {
         $resp = $I->successfullyGetList($this->restUrl, []);
         $list = $resp['data'];
-        $I->assertNotEmpty($list);
+        codecept_debug($list);
 
         $this->objPermission1 = $ent                  = array_pop($list);
         $I->assertNotEmpty($ent);
@@ -56,25 +60,22 @@ class PermissionCest
         $this->objPermission2 = $ent                  = array_pop($list);
         $I->assertNotEmpty($ent);
     }
-    
-    /**
-     * preberi vse zapise po ulici
+
+        /**
      * 
-     * @depends createRolo
      * @param ApiTester $I
      */
-    public function getListPoPostniNaslov(ApiTester $I)
+    public function getListPoImenu(ApiTester $I)
     {
         //iskanje naziv
-        $listUrl = $this->restUrl . "?q=" . "TEST4";
-
-        $resp = $I->successfullyGetList($listUrl, []);
+        $resp = $I->successfullyGetList($this->restUrl . "?q=" . "Drzava-", []);
         $list = $resp['data'];
+        codecept_debug($list);
 
-        $I->assertEquals(1, $resp['state']['totalRecords']);
-        $I->assertNotEmpty($list);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
     }
 
+    
     /**
      * kreiramo rolo 
      * 
@@ -135,6 +136,7 @@ class PermissionCest
         $resp = $I->successfullyGetRelation($this->restUrl, $this->objPermission2['id'], "roles", $this->objRole1['id']);
         $I->assertEquals(1, count($resp));
     }
+
 
     /**
      * brisanje relacij

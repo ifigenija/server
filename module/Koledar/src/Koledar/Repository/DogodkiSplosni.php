@@ -62,6 +62,7 @@ class DogodkiSplosni
         }
         return $qb;
     }
+
     /**
      * Opravila pri ustvarjanju nove entitete
      *

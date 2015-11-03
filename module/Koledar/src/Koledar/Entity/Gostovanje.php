@@ -15,6 +15,7 @@ use Max\Entity\Base;
 class Gostovanje
         extends Base
 {
+    use DogodekTrait;
 
     /**
      * @ORM\Id
@@ -50,7 +51,7 @@ class Gostovanje
     protected $kraj;
 
     /**
-     * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="gostovanje")
+     * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="gostovanje", cascade={"persist"})
      * @Max\I18n(label="Dogodek",  description="Dogodek")
      * @Max\Ui(type="toone")
      * @var \Koledar\Entity\Dogodek
@@ -81,6 +82,13 @@ class Gostovanje
     {
         
     }
+    function dodajDogodek()
+    {
+        $this->dogodek = new Dogodek();
+        $this->dogodek->setGostovanje($this);
+        $this->dogodek->setRazred(Dogodek::GOSTOVANJE);
+    }
+
 
     public function getId()
     {
