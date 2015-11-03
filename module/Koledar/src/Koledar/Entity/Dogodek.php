@@ -153,6 +153,16 @@ class Dogodek
     protected $splosni;
 
     /**
+     * Samostojni dogodek, ki je namenjen za planiranje tehničnega osebja,
+     * 
+     * @ORM\OneToOne(targetEntity="Koledar\Entity\DogodekTehnicni", inversedBy="dogodek")
+     * @Max\I18n(label = "dogodek.tehnicni", description = "dogodek.d.tehnicni")
+     * @Max\Ui(type="toone")
+     * @var \Koledar\Entity\DogodekTehnicni
+     */
+    protected $tehnicni;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Prostor")
      * @Max\I18n(label = "dogodek.prostor", description = "dogodek.d.prostor")
      * @Max\Ui(type="toone")
@@ -180,7 +190,7 @@ class Dogodek
      * @var \Koledar\Entity\Sezona
      */
     protected $sezona;
-    private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::SPLOSNO, self::ZASEDENOST];
+    private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::SPLOSNO, self::ZASEDENOST, self::TEHNICNI];
 
     public function __construct()
     {
@@ -230,6 +240,9 @@ class Dogodek
             $i++;
         }
         if ($this->splosni) {
+            $i++;
+        }
+        if ($this->tehnicni) {
             $i++;
         }
 
@@ -572,6 +585,17 @@ class Dogodek
     function setSplosni(\Koledar\Entity\DogodekSplosni $splosni = null)
     {
         $this->splosni = $splosni;
+        return $this;
+    }
+
+    function getTehnicni()
+    {
+        return $this->tehnicni;
+    }
+
+    function setTehnicni(\Koledar\Entity\DogodekTehnicni $tehnicni=null)
+    {
+        $this->tehnicni = $tehnicni;
         return $this;
     }
 

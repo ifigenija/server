@@ -14,8 +14,8 @@
         - AvtorBesedila-write
         - Besedilo-read
         - Besedilo-write
-        - DogodekIzven-read
-        - DogodekIzven-write
+        - DogodekSplosni-read
+        - DogodekSplosni-write
         - Dogodek-read
         - Dogodek-readVse
         - Dogodek-write

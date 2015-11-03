@@ -85,11 +85,17 @@
     description: Besedilo - spreminjanje
 
 -
-    name: DogodekIzven-read
-    description: DogodekIzven - branje
+    name: DogodekSplosni-read
+    description: DogodekSplosni - branje
 -
-    name: DogodekIzven-write
-    description: DogodekIzven - spreminjanje
+    name: DogodekSplosni-write
+    description: DogodekSplosni - spreminjanje
+-
+    name: DogodekTehnicni-read
+    description: DogodekTehnicni - branje
+-
+    name: DogodekTehnicni-write
+    description: DogodekTehnicni - spreminjanje
 
 -
     name: Dogodek-read
