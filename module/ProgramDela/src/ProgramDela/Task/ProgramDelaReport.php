@@ -93,6 +93,7 @@ class ProgramDelaReport
             $this->addDocumentReport('postavke-c2', $title, $prgdela);
         }
         $this->finishReport($title);
+        $this->cleanupTmp();
     }
 
     /**

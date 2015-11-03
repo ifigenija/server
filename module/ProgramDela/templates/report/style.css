@@ -176,3 +176,13 @@ h2.name {
     font-size: 1cm;
     text-align: center;
 }
+
+.alert {
+    color: red;
+    font-size: 0.5cm;
+}
+
+.alert .alert-desc {
+    color: black;
+    font-size: 50%;
+}
