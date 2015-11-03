@@ -84,7 +84,7 @@ module.exports = function (grunt) {
         },
         mkdir: {
             data: {
-                create: ['data/uploads', 'data/reports', 'data/local', 'data/DoctrineModule/cache'],
+                create: ['data/uploads', 'data/reports', 'data/local', 'data/DoctrineModule/cache', 'data/tmp'],
                 mode: '2770'
             }
         },
