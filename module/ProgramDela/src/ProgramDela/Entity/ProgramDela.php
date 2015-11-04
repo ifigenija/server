@@ -1559,8 +1559,15 @@ class ProgramDela
             if ($smer == Consts::DOWN) {
                 $object->preracunaj(Consts::DOWN);
             }
-            $this->stIzvNekomerc+=1;      // 1 festival ena prireditev
-            $this->stIzvOstalihNek+=1;      // 1 festival ena prireditev $$ tu zaenkrat ne upošteva deleža koproducentov
+            /**
+             *  1 festival ena prireditev + ostale prireditve festivala 
+             */
+            $this->stIzvNekomerc+= 1 + $object->getStPredstav() + $object->getStPredstavitev() + $object->getStDelavnic() + $object->getStOkroglihMiz() + $object->getStDrugiDogodki() + $object->getStProdukcij();
+            /**
+             *  1 festival ena prireditev + ostale prireditve festivala $$ tu zaenkrat ne upošteva deleža koproducentov
+             */
+            $this->stIzvOstalihNek+= 1 + $object->getStPredstav() + $object->getStPredstavitev() + $object->getStDelavnic() + $object->getStOkroglihMiz() + $object->getStDrugiDogodki() + $object->getStProdukcij();
+
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stHonorarnihZun +=$object->getStHonorarnihZun();

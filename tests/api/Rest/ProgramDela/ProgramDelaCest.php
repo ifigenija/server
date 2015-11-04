@@ -1790,7 +1790,7 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(277.72, $entR['vrPS1Mat'], "vr PS1 mat");
         $I->assertGreaterThanOrEqual(0.66, $entR['vrPS1GostovSZ'], "vr ps1 gostov slo zam");
         $I->assertGreaterThanOrEqual(117.77, $entR['vrPS1Do']);
-        $I->assertGreaterThanOrEqual(112, $entR['stIzvNekomerc'], "št nekomerc");
+        $I->assertGreaterThanOrEqual(135, $entR['stIzvNekomerc'], "št nekomerc");
         $I->assertEquals($entR['stIzvPrem'] + $entR['stIzvPonPrem'] + $entR['stIzvPonPrej'] + $entR['stIzvGostuj'] + $entR['stIzvOstalihNek'], $entR['stIzvNekomerc'], "št nekomerc kot vsota a+b+c+d");
         $I->assertGreaterThanOrEqual(4, $entR['stIzvPrem'], "št. izvedb premier");
         $I->assertGreaterThanOrEqual(48, $entR['stIzvPonPrem'], "št. izvedb pon premier");
@@ -1808,7 +1808,7 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(0, $entR['stIzvPonPrejInt'], "stIzvPonPrejInt");
         $I->assertGreaterThanOrEqual(0, $entR['stIzvPonPrejKoprInt'], "stIzvPonPrejKoprInt");
         $I->assertGreaterThanOrEqual(4, $entR['stIzvGostuj'], "št. izvedb gostujočih");
-        $I->assertGreaterThanOrEqual(9, $entR['stIzvOstalihNek'], "št. izvedb ostalih nekom");
+        $I->assertGreaterThanOrEqual(31, $entR['stIzvOstalihNek'], "št. izvedb ostalih nekom");
         $I->assertGreaterThanOrEqual(27, $entR['stIzvGostovanjSlo'], "");
         $I->assertGreaterThanOrEqual(25, $entR['stIzvGostovanjZam'], "");
         $I->assertGreaterThanOrEqual(20, $entR['stIzvGostovanjInt'], "");
