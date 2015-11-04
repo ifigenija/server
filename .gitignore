@@ -1,3 +1,4 @@
+/config/autoload/crpalka.*.php
 /vendor/
 ***/dumpStage.sh
 /config/application.config.php
