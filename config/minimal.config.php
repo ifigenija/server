@@ -1,19 +1,20 @@
 <?php
 
 $env = getenv('APP_ENV') ? : (isset($_SERVER['APP_ENV']) ? $_SERVER['APP_ENV'] : 'XXX');
+$crp = getenv('DEST_DB') ? : (isset($_SERVER['SRC_DB']) ? $_SERVER['DEST_DB'] : 'XXX');
 
 return [
     'modules'                 => [
-        //    'ZendDeveloperTools',
         'DoctrineModule',
         'DoctrineORMModule',
         'Max',
         'Stevilcenje',
+        'Crpalka',
         'Util',
     ],
     'module_listener_options' => [
         'config_glob_paths'    => [
-            sprintf('config/autoload/{global,local,local.%s}.php', $env),
+            sprintf('config/autoload/{global,local,local.%s,crpalka.%s}.php', $env, $crp),
             'module/*/config/doctrine.config.php',
         ],
         'module_paths'         => [
