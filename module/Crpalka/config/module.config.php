@@ -5,6 +5,15 @@
  *  
  */
 return array(
+
+    'crpalka'         => array(
+        'pravila' => array(
+            'pot'          => array(),
+            'owningside'   => array(),
+            'neowningside' => array(),
+            'ident'        => array(),
+        ),
+    ),
     'controllers'     => array(
         'invokables' => array(
             'Crpalka\Controller\Crpalka' => 'Crpalka\Controller\CrpalkaController',
@@ -13,9 +22,6 @@ return array(
     'service_manager' => array(
         'factories'  => array(
             'crpalka.Service.Factory' => 'Crpalka\Service\CrpalkaServiceFactory',
-        ),
-        'invokables' => array(
-            'entity.metadata.factory' => '\Max\Factory\EntityMetadataFactory',
         ),
     ),
     'doctrine'        => array(
@@ -64,19 +70,6 @@ return array(
                 ),
 
             ),
-        ),
-    ),
-    'view_manager'    => array(
-        'template_path_stack' => array(
-            'crpalka' => __DIR__ . '/../view',
-        ),
-    ),
-    'crpalka'         => array(
-        'pravila' => array(
-            'pot'          => array(),
-            'owningside'   => array(),
-            'neowningside' => array(),
-            'ident'        => array(),
         ),
     ),
 );

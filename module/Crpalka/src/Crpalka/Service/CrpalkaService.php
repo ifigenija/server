@@ -29,10 +29,13 @@ class CrpalkaService
 
     use ServiceLocatorAwareTrait;
 
-    /* @var $em$emIzvor \Doctrine\ORM\EntityManager
-      @var $em$emCilj \Doctrine\ORM\EntityManager */
-
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
     protected $emIzvor;
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
     protected $emCilj;
     protected $logger;
     protected $poljeEntitet;
@@ -266,39 +269,36 @@ class CrpalkaService
      * 
      * @param object $testnaEntiteta 
      * @param string $imeEntitete
-     * @param object $IzvornaEntiteta
+     * @param object $izvornaEntiteta
      * @return object
      */
-    private function nastaviPropertije($testnaEntiteta, $imeEntitete, $IzvornaEntiteta)
+    private function nastaviPropertije($testnaEntiteta, $imeEntitete, $izvornaEntiteta)
     {
         $emIzvr = $this->emIzvor;
+
         $emCilj = $this->emCilj;
 
         if (!$testnaEntiteta) {
 
             //imena vseh propertijev pridobimo da določimo samo propertije, ki nimajo asociacij
             $imeaPropertijev = $emIzvr->getClassMetadata($imeEntitete)->getFieldNames();
-            $ime = $emIzvr->getClassMetadata(get_class($IzvornaEntiteta))->getName();
+            $meta = $emIzvr->getClassMetadata(get_class($izvornaEntiteta));
+            $ime = $meta->getName();
+
             $ImenaAsociacije = $emIzvr->getClassMetadata($imeEntitete)->getAssociationNames();
+
 
             $testnaEntiteta = new $ime();
 
             foreach ($imeaPropertijev as $imePropertija) {
                 //preverimo, da ni property v polju asociacij
                 if (!$this->preveriVsebnost($imePropertija, $ImenaAsociacije)) {
-                    $vrednost = $this->getProperty($IzvornaEntiteta, $imePropertija);
-                    //preverimo ali je properti norma saj nam je norma nagajala
-                    if ($imePropertija == "norma") {
-                        if (is_string($vrednost)) {
-                            $this->setProperty($testnaEntiteta, $imePropertija, floatval($vrednost));
-                        } else {
-                            $this->setProperty($testnaEntiteta, $imePropertija, $vrednost->getNorma());
-                        }
+                    $vrednost = $this->getProperty($izvornaEntiteta, $imePropertija);
+                    if ($meta->isUniqueField($imePropertija)) {
+                        $vrednost = $vrednost . '-' . getenv('APP_ENV');
                     }
-                    //če ni norma se properti nastavi na pridobljeno vrednost
-                    else {
-                        $this->setProperty($testnaEntiteta, $imePropertija, $vrednost);
-                    }
+                    $this->setProperty($testnaEntiteta, $imePropertija, $vrednost);
+
                 }
             }
 

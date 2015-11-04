@@ -7,9 +7,9 @@
 
 namespace Crpalka\Controller;
 
+use App\Filter\DecorateEntity;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
-use Tip\Filter\DecorateEntity;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class CrpalkaController
@@ -26,6 +26,7 @@ class CrpalkaController
         $entiteta = $this->params('entity');
 
         $f = new DecorateEntity();
+        $f->$this->setServiceLocator($this->getServiceLocator());
         $entityClass = $f->filter($entiteta);
         
         // če id ni guid, potem poiščem entiteto po identu  
@@ -42,8 +43,8 @@ class CrpalkaController
         $cs = $this->serviceLocator->get('crpalka.service.factory');
         $entiteta = $this->params('entity');
 
-        $f = new DecorateEntity();
-
+        $f = new \App\Filter\DecorateEntity();
+        $f->setServiceLocator($this->serviceLocator);
         $cs->precrpajVseBazo($f->filter($entiteta));
     }
 

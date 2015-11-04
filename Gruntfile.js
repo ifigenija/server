@@ -68,6 +68,10 @@ module.exports = function (grunt) {
                 cwd: 'module/Jobs',
                 cmd: classmap_generator
             },
+            'autoload_crpalka': {
+                cwd: 'module/Crpalka',
+                cmd: classmap_generator
+            },
             proxies: {
                 cmd: function () {
                     if (os.platform() === 'win32') {

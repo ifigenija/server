@@ -6,7 +6,6 @@
  */
 chdir(dirname(__DIR__));
 define('REQUEST_MICROTIME', microtime(true));
-ini_set('xdebug.max_nesting_level', '200');
 
 // Setup autoloading
 include 'init_autoloader.php';

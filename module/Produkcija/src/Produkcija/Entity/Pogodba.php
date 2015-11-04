@@ -30,7 +30,7 @@ class Pogodba
     /**
      * Šifra pogodbe
      *
-     * @ORM\Column(unique=true, length=7, nullable=false)
+     * @ORM\Column(unique=true, nullable=false)
      * @Max\I18n(label="pogodba.sifra", description="pogodba.d.sifra")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode")
      * @var string

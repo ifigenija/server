@@ -1,6 +1,19 @@
 <?php
 
 return [
+'crpalka'         => array(
+        'pravila' => array(
+            'pot'          => array(),
+            'owningside'   => array(),
+            'neowningside' => array(),
+            'ident'        => array(
+                'Produkcija\Entity\TipFunkcije' => true,
+                'ProgramDela\Entity\TipProgramskeEnote' => true,
+                'ProgramDela\Entity\TipProgramskeEnote' => true,
+
+            ),
+        ),
+    ),
     'doctrine' => [
         'connection' => array(
             'orm_dest' => array(

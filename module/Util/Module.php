@@ -40,7 +40,6 @@ Class Module
                 'module/ProgramDela/autoload_classmap.php',
                 'module/Zapisi/autoload_classmap.php',
                 'module/Jobs/autoload_classmap.php',
-
             ]
         ];
     }

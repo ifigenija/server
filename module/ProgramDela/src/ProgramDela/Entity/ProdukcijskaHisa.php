@@ -30,7 +30,7 @@ class ProdukcijskaHisa
     /**
      * Šifra klienta
      *
-     * @ORM\Column(unique=true, length=4, nullable=false)
+     * @ORM\Column(unique=true,  nullable=false)
      * @Max\I18n(label="Šifra", description="Unikatna šifra klienta")
      * @Max\Ui(ident=true, type="sifra",icon="fa fa-barcode",group="Osnovni podatki")
      * @var string
