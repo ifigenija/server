@@ -553,7 +553,7 @@ class ProgramDelaRpcService
             /** @var ProgramDela $src */
             $src = $this->getProgramDelaRep()->find($srcId);
 
-            if (!$src) {
+            if (!$src || $src === $newPd) {
                 continue;
             }
 
@@ -683,8 +683,9 @@ class ProgramDelaRpcService
                 $newEP->preracunaj();
             }
         }
-        $newPd->setAvgCenaVstopnice($newPd->getAvgCenaVstopnice() / $newPd->getStProdVstopnic() );
-
+        if ($newPd->getStProdVstopnic() > 0 ) {
+            $newPd->setAvgCenaVstopnice($newPd->getAvgCenaVstopnice() / $newPd->getStProdVstopnic());
+        }
         $newPd->preracunaj();
         $newPd->validate();
 

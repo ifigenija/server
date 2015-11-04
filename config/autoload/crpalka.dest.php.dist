@@ -8,7 +8,8 @@ return [
             'neowningside' => array(),
             'ident'        => array(
                 'Produkcija\Entity\TipFunkcije' => true,
-                'ProgramDela\Entity\TipProgramskeEnote' => true,
+                'Produkcija\Entity\ZvrstSurs' => true,
+                'App\Entity\Drzava' => true,
                 'ProgramDela\Entity\TipProgramskeEnote' => true,
 
             ),
