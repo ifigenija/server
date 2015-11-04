@@ -1429,7 +1429,7 @@ class ProgramDela
             $this->stIzvPonPrejDoma+=$object->getPonoviDoma();
             $this->stIzvPonPrejZamejo+=$object->getPonoviZamejo();
             $this->stIzvPonPrejGost+=$object->getPonoviGost();
-            $this->stIzvPonPrejKopr = $object->getPonoviKopr();
+            $this->stIzvPonPrejKopr += $object->getPonoviKopr();
             $this->stIzvGostovanjSlo +=$object->getPonoviGost();
             $this->stIzvGostovanjZam +=$object->getPonoviZamejo();
             $this->stObiskNekom +=$object->getObiskDoma() + $object->getObiskGost() + $object->getObiskZamejo();
