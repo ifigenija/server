@@ -28,7 +28,7 @@ class ProgramDelaReport
         $ps = $this->getServiceLocator()->get('mpdf.printer');
 
         $prgdela = $this->entity;
-        $title   = "Program dela " . $prgdela->getSifra();
+        $title   = $prgdela->getNaziv() ? $prgdela->getNaziv() : 'Program dela' ;
 
         $printer = $ps->getMPdf();
 
