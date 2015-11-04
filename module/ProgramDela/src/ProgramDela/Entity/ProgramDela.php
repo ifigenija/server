@@ -1145,7 +1145,7 @@ class ProgramDela
                 if ($funkcija->getPodrocje() == 'igralec') {
                     foreach ($funkcija->getAlternacije() as $alternacija) {
                         if ($alternacija->getPrivzeti() && $alternacija->getZaposlen()) {
-                            $stNastopovZaposIgralcev+=$object->getPonoviDoma() + $object->getPonoviKopr() + $object->getPonoviZamejo() + $object->getPonoviGost() + $object->getPonoviInt() + $object->getPonoviKoprInt();
+                            $stNastopovZaposIgralcev+=$object->getPonoviDoma() + $object->getPonoviKopr() + $object->getPonoviZamejo() + $object->getPonoviGost() + $object->getPonoviInt() + $object->getPonoviKoprInt() + $object->getPonoviKoprZamejo() + $object->getPonoviKoprGost();
                         }
                     }
                 }
