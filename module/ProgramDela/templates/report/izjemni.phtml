@@ -98,16 +98,16 @@ $sumaObiskovalcev = $model->getObiskDoma() +
                 <td class="cell-type-number">Koeficient</td>
                 <td class="cell-type-number">Delež</td>
             </tr>
-        <?php
-            $this->partial()->setObjectKey('kop');
-            echo $this->partial('koproducenti', $kop);
-        ?>
+            <?php
+                $this->partial()->setObjectKey('kop');
+                echo $this->partial('koproducenti', $kop);
+            ?>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
         <?php } ?>
-        <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-        </tr>
         <tr>
             <td>Tip programske enote:</td>
             <td></td>
