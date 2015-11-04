@@ -1145,7 +1145,7 @@ class ProgramDela
                 if ($funkcija->getPodrocje() == 'igralec') {
                     foreach ($funkcija->getAlternacije() as $alternacija) {
                         if ($alternacija->getPrivzeti() && $alternacija->getZaposlen()) {
-                            $stNastopovZaposIgralcev+=$object->getPonoviDoma() + $object->getPonoviKopr() + $object->getPonoviZamejo() + $object->getPonoviGost() + $object->getPonoviInt() + $object->getPonoviKoprInt();
+                            $stNastopovZaposIgralcev+=$object->getPonoviDoma() + $object->getPonoviKopr() + $object->getPonoviZamejo() + $object->getPonoviGost() + $object->getPonoviInt() + $object->getPonoviKoprInt() + $object->getPonoviKoprZamejo() + $object->getPonoviKoprGost();
                         }
                     }
                 }
@@ -1381,7 +1381,7 @@ class ProgramDela
             $this->stIzvPonPremDoma+=$object->getPonoviDoma();
             $this->stIzvPonPremZamejo+=$object->getPonoviZamejo();
             $this->stIzvPonPremGost+=$object->getPonoviGost();
-            $this->stIzvPonPremKopr = $object->getPonoviKopr();
+            $this->stIzvPonPremKopr += $object->getPonoviKopr();
             $this->stIzvGostovanjSlo +=$object->getPonoviGost();
             $this->stIzvGostovanjZam +=$object->getPonoviZamejo();
             $this->stObiskNekom +=$object->getObiskDoma() + $object->getObiskGost() + $object->getObiskZamejo();
@@ -1429,7 +1429,7 @@ class ProgramDela
             $this->stIzvPonPrejDoma+=$object->getPonoviDoma();
             $this->stIzvPonPrejZamejo+=$object->getPonoviZamejo();
             $this->stIzvPonPrejGost+=$object->getPonoviGost();
-            $this->stIzvPonPrejKopr = $object->getPonoviKopr();
+            $this->stIzvPonPrejKopr += $object->getPonoviKopr();
             $this->stIzvGostovanjSlo +=$object->getPonoviGost();
             $this->stIzvGostovanjZam +=$object->getPonoviZamejo();
             $this->stObiskNekom +=$object->getObiskDoma() + $object->getObiskGost() + $object->getObiskZamejo();
