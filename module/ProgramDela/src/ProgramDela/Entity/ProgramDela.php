@@ -78,48 +78,56 @@ class ProgramDela
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPremiera", mappedBy="dokument", orphanRemoval=true)
+     * @ORM\OrderBy({"sort" = "ASC"})
      * @var <Premiere>
      */
     protected $premiere;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPonovitevPremiere", mappedBy="dokument", orphanRemoval=true)
+     * @ORM\OrderBy({"sort" = "ASC"})
      * @var <PonovitvePremiere>
      */
     protected $ponovitvePremiere;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramPonovitevPrejsnjih", mappedBy="dokument", orphanRemoval=true)
+     * @ORM\OrderBy({"sort" = "ASC"})
      * @var <PonovitvePrejsnjih>
      */
     protected $ponovitvePrejsnjih;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramIzjemni", mappedBy="dokument", orphanRemoval=true)
+     * @ORM\OrderBy({"sort" = "ASC"})
      * @var <Izjemni>
      */
     protected $izjemni;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramFestival", mappedBy="programDela", orphanRemoval=true)
+     * @ORM\OrderBy({"sort" = "ASC"})
      * @var <ProgramiFestival>
      */
     protected $programiFestival;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramGostujoca", mappedBy="dokument", orphanRemoval=true)
+     * @ORM\OrderBy({"sort" = "ASC"})
      * @var <Gostujoci>
      */
     protected $gostujoci;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramGostovanje", mappedBy="dokument", orphanRemoval=true)
+     * @ORM\OrderBy({"sort" = "ASC"})
      * @var <Gostovanja>
      */
     protected $gostovanja;
 
     /**
      * @ORM\OneToMany(targetEntity="ProgramDela\Entity\ProgramRazno", mappedBy="dokument", orphanRemoval=true)
+     * @ORM\OrderBy({"sort" = "ASC"})
      * @var <ProgramiRazno>
      */
     protected $programiRazno;
