@@ -153,4 +153,24 @@
         - ZvrstSurs-write
         - ZvrstUprizoritve-read
         - ZvrstUprizoritve-write
+- 
+    name: ZapisLastnik-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - ZapisLastnik-read
+- 
+    name: ZapisLastnik-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - ZapisLastnik-write
+- 
+    name: Uprizoritev-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Uprizoritev-write
+- 
+    name: Uprizoritev-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Uprizoritev-read
         

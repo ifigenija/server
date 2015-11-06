@@ -59,3 +59,40 @@
     enabled: true
     roles: 
         - vsadovoljenja
+-
+    name: testni uporabnik ki nima dovoljenj
+    email: breznik@ifigenija.si
+    password: Breznik1234567
+    enabled: true
+    roles: []
+-
+    name: testni uporabnik za testiranje zapisov
+    email: rudi@ifigenija.si
+    password: Rudi1234567
+    enabled: true
+    roles:
+        - ZapisLastnik-read
+-
+    name: testni uporabnik za testiranje zapisov
+    email: vinko@ifigenija.si
+    password: Vinko1234567
+    enabled: true
+    roles: 
+        - ZapisLastnik-write
+-
+    name: testni uporabnik za testiranje zapisov
+    email: vlado@ifigenija.si
+    password: Vlado1234567
+    enabled: true
+    roles:
+        - ZapisLastnik-write	
+        - Uprizoritev-write
+
+-
+    name: testni uporabnik za testiranje zapisov
+    email: rikard@ifigenija.si
+    password: Rikard1234567
+    enabled: true
+    roles: 
+        - ZapisLastnik-read
+        - Uprizoritev-read
