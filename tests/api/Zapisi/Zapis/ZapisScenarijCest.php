@@ -5,7 +5,7 @@
  *  
  */
 
-namespace module\Zapisi\Zapis;
+namespace Zapisi\Zapis;
 
 /*
  * Licenca GPL V3 or later
@@ -43,7 +43,7 @@ class ZapisScenarijCest
 
     public function _before(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\Page\AuthPage::$admin, \Page\AuthPage::$adminPass);
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
     }
 
     /**

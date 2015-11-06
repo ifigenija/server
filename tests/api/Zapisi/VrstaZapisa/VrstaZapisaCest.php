@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace module\Zapisi\VrstaZapisa;
+namespace Zapisi\VrstaZapisa;
 
 use ApiTester;
 
@@ -37,7 +37,7 @@ class VrstaZapisaCest
 
     public function _before(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\Page\AuthPage::$admin, \Page\AuthPage::$adminPass);
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
     }
 
     public function _after(ApiTester $I)
@@ -83,7 +83,7 @@ class VrstaZapisaCest
      */
     public function update(ApiTester $I)
     {
-        $ent             = $this->obj1;
+        $ent          = $this->obj1;
         $ent['naziv'] = 'uu';
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
@@ -101,27 +101,12 @@ class VrstaZapisaCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
         $I->assertGuid($ent['id']);
-        $I->assertEquals($ent['oznaka'  ], 'AA');
-        $I->assertEquals($ent['naziv'   ], 'uu');
-        $I->assertEquals($ent['aktiven' ], TRUE);
-        $I->assertEquals($ent['znacka'  ], TRUE);
-        $I->assertEquals($ent['ikona'   ], 'AA');
+        $I->assertEquals($ent['oznaka'], 'AA');
+        $I->assertEquals($ent['naziv'], 'uu');
+        $I->assertEquals($ent['aktiven'], TRUE);
+        $I->assertEquals($ent['znacka'], TRUE);
+        $I->assertEquals($ent['ikona'], 'AA');
     }
-
-    /**
-     * @depends create
-     * @param ApiTester $I
-     */
-//    public function getListVse(ApiTester $I)
-//    {
-//        $listUrl = $this->restUrlVse;
-//        codecept_debug($listUrl);
-//        $resp    = $I->successfullyGetList($listUrl, []);
-//        $list    = $resp['data'];
-//
-//        $I->assertNotEmpty($list);
-//        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//    }
 
     /**
      * @depends create

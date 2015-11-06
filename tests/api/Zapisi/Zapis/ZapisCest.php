@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace module\Zapisi\Zapis;
+namespace Zapisi\Zapis;
 
 use ApiTester;
 
@@ -49,7 +49,7 @@ class ZapisCest
 
     public function _before(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\Page\AuthPage::$admin, \Page\AuthPage::$adminPass);
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
     }
 
     public function _after(ApiTester $I)

@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace module\Zapisi\Mapa;
+namespace Zapisi\Mapa;
 
 use ApiTester;
 
@@ -37,7 +37,7 @@ class MapaCest
 
     public function _before(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\Page\AuthPage::$admin, \Page\AuthPage::$adminPass);
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
     }
 
     public function _after(ApiTester $I)

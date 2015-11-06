@@ -1,9 +1,5 @@
 <?php
 
-namespace Test;
-
-use ApiTester;
-
 class FormMetaTester
 {
 
