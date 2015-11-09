@@ -46,6 +46,11 @@ class ZapisCest
     private $objProgramPremiera1;
     private $objProgramPremiera2;
     private $objProgramPremiera3;
+    private $lookUprizoritev1;
+    private $lookUprizoritev2;
+    private $lookUprizoritev3;
+    private $lookUprizoritev4;
+    private $lookUprizoritev5;
 
     public function _before(ApiTester $I)
     {
@@ -58,6 +63,28 @@ class ZapisCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev1 = $look                   = $I->lookupEntity("uprizoritev", "0001", false);
+        codecept_debug($look);
+
+        $this->lookUprizoritev2 = $look                   = $I->lookupEntity("uprizoritev", "0002", false);
+        codecept_debug($look);
+
+        $this->lookUprizoritev3 = $look                   = $I->lookupEntity("uprizoritev", "0003", false);
+        codecept_debug($look);
+
+        $this->lookUprizoritev4 = $look                   = $I->lookupEntity("uprizoritev", "0004", false);
+        codecept_debug($look);
+
+        $this->lookUprizoritev5 = $look                   = $I->lookupEntity("uprizoritev", "0005", false);
+        codecept_debug($look);
+    }
+
+    /**
      *  kreiramo zapis lastnika
      * 
      * 
@@ -66,8 +93,8 @@ class ZapisCest
     public function createZapisLastnik(ApiTester $I)
     {
         $data                   = [
-            'lastnik'       => \Page\SifrantPage::$dokument_ponudba_1,
-            'classLastnika' => 'DokumentPonudba',
+            'lastnik'       => $this->lookUprizoritev4['id'],
+            'classLastnika' => 'Uprizoritev',
             'zapis'         => null,
         ];
         $this->objZapisLastnik1 = $ent                    = $I->successfullyCreate($this->zapisLastnikUrl, $data);
@@ -75,8 +102,8 @@ class ZapisCest
 
         // kreiramo še en zapis
         $data                   = [
-            'lastnik'       => \Page\SifrantPage::$dokument_ponudba_2,
-            'classLastnika' => 'DokumentPonudba',
+            'lastnik'       => $this->lookUprizoritev5['id'],
+            'classLastnika' => 'Uprizoritev',
             'zapis'         => null,
         ];
         $this->objZapisLastnik2 = $ent                    = $I->successfullyCreate($this->zapisLastnikUrl, $data);
@@ -227,8 +254,8 @@ class ZapisCest
     public function createVecLastnikovZapisa(ApiTester $I)
     {
         $data                   = [
-            'lastnik'       => \Page\SifrantPage::$dokument_ponudba_3,
-            'classLastnika' => 'DokumentPonudba',
+            'lastnik'       => $this->lookUprizoritev1['id'],
+            'classLastnika' => 'Uprizoritev',
             'zapis'         => $this->obj2['id'],
         ];
         $this->objZapisLastnik3 = $ent                    = $I->successfullyCreate($this->zapisLastnikUrl, $data);

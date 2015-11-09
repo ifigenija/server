@@ -13,7 +13,8 @@ namespace Zapisi\Zapis;
  */
 
 use ApiTester;
-use Page\SifrantPage;
+
+//use Page\SifrantPage;
 
 /**
  * Kreiranje kalkulacije 
@@ -40,6 +41,12 @@ class ZapisScenarijCest
     private $objDatoteka2;
     private $objDatoteka3;
     private $objDatoteka4;
+    private $lookOseba1;
+    private $lookOseba2;
+    private $lookProgramDela1;
+    private $lookProgramDela2;
+    private $lookMapa1;
+    private $lookMapa2;
 
     public function _before(ApiTester $I)
     {
@@ -47,16 +54,50 @@ class ZapisScenarijCest
     }
 
     /**
-     * Ustvarim nov komentar in ga povežem na kontaktno osebe 
      * 
+     * @param ApiTester $I
+     */
+    public function lookupMapa(ApiTester $I)
+    {
+        $this->lookMapa1 = $ent             = $I->lookupEntity("mapa", "Prva mapa", false);
+        $I->assertGuid($ent['id']);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupOsebo(ApiTester $I)
+    {
+        $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0006", false);
+        $I->assertGuid($ent['id']);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupProgramDela(ApiTester $I)
+    {
+        $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0006", false);
+        $I->assertGuid($ent['id']);
+
+        $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0007", false);
+        $I->assertGuid($ent['id']);
+    }
+
+    /**
+     * Ustvarim nov komentar in ga povežem na osebo 
+     * 
+     * @depends lookupOsebo
      * @param ApiTester $I
      */
     public function ustvariKomentar(ApiTester $I)
     {
         // pripnem komentar na kontaktno osebo         
         $lastnik = [
-            'lastnik'       => SifrantPage::$kontaktna_k1_1,
-            'classLastnika' => 'Kontaktna',
+            'lastnik'       => $this->lookOseba1['id'],
+            'classLastnika' => 'Oseba',
         ];
 
         $l = $I->successfullyCreate($this->lastnikUrl, $lastnik);
@@ -64,7 +105,8 @@ class ZapisScenarijCest
         $data = [
             'title'       => 'tralalla',
             'tip'         => 'komentar',
-            'description' => "1212"
+            'description' => "1212",
+            'vrsta'       => null,
         ];
 
         $prip = $I->successfullyCreate($this->pripUrl . '?lastnik=' . $l['id'], $data);
@@ -82,6 +124,8 @@ class ZapisScenarijCest
 
     /**
      * Testiram ustvarjanje priponke, tipa datoteka 
+     * 
+     * @depends lookupOsebo
      * @param ApiTester $I
      */
     public function ustvariDatoteko(ApiTester $I)
@@ -89,16 +133,20 @@ class ZapisScenarijCest
 
         // pripnem komentar na kontaktno osebo         
         $lastnik = [
-            'lastnik'       => SifrantPage::$kontaktna_k1_1,
-            'classLastnika' => 'Kontaktna',
+            'lastnik'       => $this->lookOseba1['id'],
+            'classLastnika' => 'Oseba',
         ];
 
+        /**
+         * kreiram zapis
+         */
         $l = $I->successfullyCreate($this->lastnikUrl, $lastnik);
 
         $data               = [
             'title'       => 'tralalla',
             'tip'         => 'datoteka',
             'description' => "zz",
+            'vrsta'       => null,
         ];
         $prip               = $I->successfullyCreate($this->pripUrl . "?lastnik=" . $l['id'], $data);
         codecept_debug($prip['datoteka']);
@@ -107,6 +155,9 @@ class ZapisScenarijCest
         $this->objDatoteka1 = $prip['datoteka'];
         $I->assertEquals($data['title'], $prip['title'], " title");
 
+        /**
+         * update zapisa
+         */
         $prip['title'] = "hopsasa";
         $p             = $I->successfullyUpdate($this->pripUrl, $prip['id'], $prip);
         $I->assertEquals('hopsasa', $p['title']);
@@ -118,22 +169,25 @@ class ZapisScenarijCest
      */
     public function uploadDatoteke(ApiTester $I)
     {
-
-
         $urlcel   = $this->uploadUrl . "/" . $this->objDatoteka1['id'];
         $base_url = $I->getPhpBrowserUrl();
 
-        codecept_debug($urlcel);
-        $client   = new \GuzzleHttp\Client(['base_url' => $base_url, 'defaults' => ['auth' => [\Page\AuthPage::$admin, \Page\AuthPage::$admin],]]);
-        $request  = $client->createRequest('POST', $urlcel);
-        $postBody = $request->getBody();
         $filePath = 'data/fileexamples/a.txt';
-        $postBody->addFile(New \GuzzleHttp\Post\PostFile('fileupload', fopen($filePath, 'r')));
-        $resp     = $client->send($request);
-        codecept_debug($resp->getHeader('Content-Type'));
+        $body     = fopen($filePath, 'r');
+
+        $client   = new \GuzzleHttp\Client(['base_uri' => $base_url]);
+        $response = $client->request('POST', $urlcel, [
+            'multipart' => [
+                [
+                    'name'     => 'fileupload',
+                    'contents' => fopen($filePath, 'r')
+                ],
+            ]
+        ]);
     }
 
     /**
+     * @depends uploadDatoteke
      * @param ApiTester $I
      */
     public function downloadDatoteke(ApiTester $I)
@@ -151,10 +205,10 @@ class ZapisScenarijCest
      */
     public function ustvariMapo(ApiTester $I)
     {
-        // pripnem komentar na kontaktno osebo         
+        // pripnem komentar na osebo         
         $lastnik = [
-            'lastnik'       => SifrantPage::$kontaktna_k1_1,
-            'classLastnika' => 'Kontaktna',
+            'lastnik'       => $this->lookOseba1['id'],
+            'classLastnika' => 'Oseba',
         ];
 
         $l = $I->successfullyCreate($this->lastnikUrl, $lastnik);
@@ -163,7 +217,8 @@ class ZapisScenarijCest
             'title'       => 'neki naslov',
             'tip'         => 'mapa',
             'description' => "1212",
-            "mapa"        => \Page\SifrantPage::$mapa_prva
+            'vrsta'       => null,
+            "mapa"        => $this->lookMapa1['id'],
         ];
         $prip = $I->successfullyCreate($this->pripUrl . "?lastnik=" . $l['id'], $data);
 
@@ -173,15 +228,6 @@ class ZapisScenarijCest
         $prip['title'] = "juhuhu";
         $p             = $I->successfullyUpdate($this->pripUrl, $prip['id'], $prip);
         $I->assertEquals('juhuhu', $p['title']);
-    }
-
-    /**
-     * izpis prefix url-ja iz konfiguracijske datoteke.
-     */
-    public function izpisUrljaOdModulaPhpBrowser(ApiTester $I)
-    {
-        $url = $I->getPhpBrowserUrl();
-        codecept_debug($url);
     }
 
 }

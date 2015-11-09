@@ -199,6 +199,28 @@ class ApiHelper
     }
 
     /**
+     * Get rest metoda po ID-ju objekta
+     * pričakuje uspeh
+     *
+     * @param string $url
+     * @param string $id
+     * @return array
+     */
+    public function successfullyGetAttachment($url, $id)
+    {
+        $I = $this->getModule('REST');
+
+        $I->sendGET($url . '/' . $id);
+        $I->seeResponseCodeIs('200');
+
+//        $I->seeHttpHeader("Content-Disposition","attachment" ); // ni ok
+        $I->seeHttpHeader("Content-Disposition");
+        // tu bi še lahko naredilli več kontrol za attachment
+
+        return $I->grabResponse();
+    }
+
+    /**
      * Get rest metoda po ID-ju objekta in relacije po ID 
      * pričakuje uspeh 
      * 
@@ -507,6 +529,19 @@ class ApiHelper
 
         $match_re = preg_match(self::ID_RE, $ident) ? true : false;
         $a->assertFalse($match_re);
+    }
+
+    /**
+     * Vrne url iz  konfiguracijske datoteke (npr. api.suite.yml) od modula PhpBrowser.
+     *
+     * $$ zaenkrat iz neznanega razloga vrača url, ki je naveden pod REST modulom v konf. datoteki
+     * kar sicer ne moti
+     *
+     * @return string       prefix url
+     */
+    public function getPhpBrowserUrl()
+    {
+        return $this->getModule('PhpBrowser')->_getUrl();
     }
 
 }
