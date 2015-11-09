@@ -34,15 +34,36 @@ class MapaCest
     private $restUrlVse = '/rest/mapa/vse';
     private $obj1;
     private $obj2;
+    private $lookMapa1;
+    private $lookMapa2;
+    private $lookUser1;
 
     public function _before(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
     }
 
-    public function _after(ApiTester $I)
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUser(ApiTester $I)
     {
-        
+        /**
+         * isti kot v _before
+         */
+        $this->lookUser1 = $ent             = $I->lookupEntity("user", \IfiTest\AuthPage::$admin, false);
+        $I->assertGuid($ent['id']);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupMapa(ApiTester $I)
+    {
+        $this->lookMapa1 = $ent             = $I->lookupEntity("mapa", "Prva mapa", false);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -56,9 +77,8 @@ class MapaCest
         $data       = [
             'ime'         => 'aa',
             'komentar'    => 'aa',
-            'lastnik'     => \Page\SifrantPage::$user_admin,
             'javniDostop' => 'R',
-            'parent'      => \Page\SifrantPage::$mapa_prva,
+            'parent'      => $this->lookMapa1['id'],
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -67,9 +87,8 @@ class MapaCest
         $data       = [
             'ime'         => 'bb',
             'komentar'    => 'bb',
-            'lastnik'     => \Page\SifrantPage::$user_joza,
             'javniDostop' => 'R',
-            'parent'      => \Page\SifrantPage::$mapa_prva,
+            'parent'      => $this->lookMapa1['id'],
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -100,27 +119,14 @@ class MapaCest
     public function read(\ApiTester $I)
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
+        codecept_debug($ent);
+
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['ime'], 'aa');
         $I->assertEquals($ent['komentar'], 'uu');
-        $I->assertEquals($ent['lastnik'], \Page\SifrantPage::$user_admin);
+        $I->assertEquals($ent['lastnik'], $this->lookUser1['id']); // isti,ki je kreiral
         $I->assertEquals($ent['javniDostop'], 'R', "javni dostop");
-        $I->assertEquals($ent['parent'], \Page\SifrantPage::$mapa_prva);
-    }
-
-    /**
-     * @depends create
-     * @param ApiTester $I
-     */
-    public function getListVse(ApiTester $I)
-    {
-        $listUrl = $this->restUrlVse;
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
-
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $I->assertEquals($ent['parent'], $this->lookMapa1['id']);
     }
 
     /**
@@ -129,10 +135,9 @@ class MapaCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl . "?parent=" . \Page\SifrantPage::$mapa_prva, []);
+        $resp = $I->successfullyGetList($this->restUrl . "?parent=" . $this->lookMapa1['id'], []);
         $list = $resp['data'];
         codecept_debug($list);
-        $I->assertNotEmpty($list);
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
     }
 

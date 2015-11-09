@@ -36,15 +36,23 @@ class MapaAclCest
     private $obj2;
     private $lookPermission1;
     private $lookPermission2;
+    private $lookMapa1;
+    private $lookMapa2;
+    private $lookUser1;
 
     public function _before(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
     }
 
-    public function _after(ApiTester $I)
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupMapa(ApiTester $I)
     {
-        
+        $this->lookMapa1 = $ent             = $I->lookupEntity("mapa", "Prva mapa", false);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -68,7 +76,7 @@ class MapaAclCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'mapa'   => \Page\SifrantPage::$mapa_prva,
+            'mapa'   => $this->lookMapa1['id'],
             'perm'   => $this->lookPermission1['id'],
             'dostop' => 'R',
         ];
@@ -77,7 +85,7 @@ class MapaAclCest
 
         // kreiramo še en zapis
         $data       = [
-            'mapa'   => \Page\SifrantPage::$mapa_prva,
+            'mapa'   => $this->lookMapa1['id'],
             'perm'   => $this->lookPermission2['id'],
             'dostop' => 'D',
         ];
@@ -111,8 +119,8 @@ class MapaAclCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
         $I->assertGuid($ent['id']);
-        $I->assertEquals($ent['mapa'], \Page\SifrantPage::$mapa_prva);
-        $I->assertEquals($ent['perm'], $this->lookPermission1['id'],"permission");
+        $I->assertEquals($ent['mapa'], $this->lookMapa1['id']);
+        $I->assertEquals($ent['perm'], $this->lookPermission1['id'], "permission");
         $I->assertEquals($ent['dostop'], 'W');
     }
 
@@ -120,24 +128,9 @@ class MapaAclCest
      * @depends create
      * @param ApiTester $I
      */
-//    public function getListVse(ApiTester $I)
-//    {
-//        $listUrl = $this->restUrlVse;
-//        codecept_debug($listUrl);
-//        $resp    = $I->successfullyGetList($listUrl, []);
-//        $list    = $resp['data'];
-//
-//        $I->assertNotEmpty($list);
-//        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//    }
-
-    /**
-     * @depends create
-     * @param ApiTester $I
-     */
     public function getListDefault(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl."?mapa=". \Page\SifrantPage::$mapa_prva, []);
+        $resp = $I->successfullyGetList($this->restUrl . "?mapa=" . $this->lookMapa1['id'], []);
         $list = $resp['data'];
         codecept_debug($list);
         $I->assertNotEmpty($list);
@@ -166,21 +159,20 @@ class MapaAclCest
 //        $this->expect($this->dostop, "Dostop ne sme biti prazen", 1001014);
 //        $this->expect(preg_match('/^[RWAD]+$/', $this->dostop), 'Dostop ni prave oblike', 1001013);
 
-        $data=  $this->obj2;
+        $data = $this->obj2;
         $entR = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
 
-        $data=  $this->obj2;
-        $data['dostop']='';
-        $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        $data           = $this->obj2;
+        $data['dostop'] = '';
+        $resp           = $I->failToUpdate($this->restUrl, $data['id'], $data);
         codecept_debug($resp);
 //        $I->assertEquals(1001012, $resp[0]['code']);
-     
-        $data=  $this->obj2;
-        $data['dostop']='X';
-        $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
+
+        $data           = $this->obj2;
+        $data['dostop'] = 'X';
+        $resp           = $I->failToUpdate($this->restUrl, $data['id'], $data);
         codecept_debug($resp);
         $I->assertEquals(1001013, $resp[0]['code']);
     }
 
-    
 }
