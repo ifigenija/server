@@ -42,7 +42,6 @@ class MapaFixture
 
         $rep   = $manager->getRepository('Zapisi\Entity\Mapa');
         $userR = $manager->getRepository('Aaa\Entity\User');
-        $admin = $userR->findOneByEmail('admin@ifigenija.si');
 
         $o   = $rep->findOneByIme($v[1]);
         $nov = false;
@@ -53,6 +52,10 @@ class MapaFixture
         }
         $o->setKomentar($v[2]);
         $o->setJavniDostop($v[3]);
+
+        $lastnik = $userR->findOneByEmail($v[5]);
+        $o->setLastnik($lastnik);
+
         if ($nov) {
             if ($v[4] == null) {
                 /**
@@ -64,14 +67,11 @@ class MapaFixture
                 $o->setCasKreiranja(new \DateTime());
                 $o->setCasSpremembe(new \DateTime());
 
-                /**
-                 * forsiramo admin
-                 */
-                $o->setLastnik($admin);
-                $rep->preveriIme($o);
-
                 $manager->persist($o);
             } else {
+                /**
+                 *  povozi lastnika
+                 */
                 $rep->create($o);
             }
         } else {
@@ -87,7 +87,7 @@ class MapaFixture
     {
         return [
             [
-                '01', 'Prva mapa', 'Root mapa', 'R', null,],
+                '01', 'Prva mapa', 'Root mapa', 'R', null, 'admin@ifigenija.si',],
         ];
     }
 

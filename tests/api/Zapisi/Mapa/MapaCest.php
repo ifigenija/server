@@ -37,6 +37,7 @@ class MapaCest
     private $lookMapa1;
     private $lookMapa2;
     private $lookUser1;
+    private $lookUser2;
 
     public function _before(ApiTester $I)
     {
@@ -53,6 +54,9 @@ class MapaCest
          * isti kot v _before
          */
         $this->lookUser1 = $ent             = $I->lookupEntity("user", \IfiTest\AuthPage::$admin, false);
+        $I->assertGuid($ent['id']);
+        
+        $this->lookUser2 = $ent             = $I->lookupEntity("user", \IfiTest\AuthPage::$breznik, false);
         $I->assertGuid($ent['id']);
     }
 
@@ -104,10 +108,12 @@ class MapaCest
     {
         $ent             = $this->obj1;
         $ent['komentar'] = 'uu';
+        $ent['lastnik'] = $this->lookUser2['id'];
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['komentar'], 'uu');
+        $I->assertEquals($entR['komentar'],$ent['komentar']);
+        $I->assertEquals($entR['lastnik'],$ent['lastnik']);
     }
 
     /**
@@ -124,7 +130,7 @@ class MapaCest
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['ime'], 'aa');
         $I->assertEquals($ent['komentar'], 'uu');
-        $I->assertEquals($ent['lastnik'], $this->lookUser1['id']); // isti,ki je kreiral
+        $I->assertEquals($ent['lastnik'], $this->lookUser2['id']); 
         $I->assertEquals($ent['javniDostop'], 'R', "javni dostop");
         $I->assertEquals($ent['parent'], $this->lookMapa1['id']);
     }
@@ -148,8 +154,8 @@ class MapaCest
      */
     public function delete(ApiTester $I)
     {
-        $I->successfullyDelete($this->restUrl, $this->obj1['id']);
-        $I->failToGet($this->restUrl, $this->obj1['id']);
+        $I->successfullyDelete($this->restUrl, $this->obj2['id']);
+        $I->failToGet($this->restUrl, $this->obj2['id']);
     }
 
 }

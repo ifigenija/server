@@ -35,8 +35,11 @@ class ZapisScenarijCest
     private $datUrl      = '/rest/zapis/default';
     private $uploadUrl   = '/fs/nalozi/zapisi';
     private $downloadUrl = '/fs/prenesi/zapisi';
-    private $obj1;
-    private $obj2;
+    private $mapaUrl     = '/rest/mapa/default';
+    private $objZapis1;
+    private $objZapis2;
+    private $objZapis3;
+    private $objZapis4;
     private $objDatoteka1;
     private $objDatoteka2;
     private $objDatoteka3;
@@ -71,16 +74,6 @@ class ZapisScenarijCest
     {
         $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0006", false);
         $I->assertGuid($ent['id']);
-    }
-
-    /**
-     * 
-     * @param ApiTester $I
-     */
-    public function lookupProgramDela(ApiTester $I)
-    {
-        $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0006", false);
-        $I->assertGuid($ent['id']);
 
         $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0007", false);
         $I->assertGuid($ent['id']);
@@ -92,9 +85,9 @@ class ZapisScenarijCest
      * @depends lookupOsebo
      * @param ApiTester $I
      */
-    public function ustvariKomentar(ApiTester $I)
+    public function ustvariZapisKomentar(ApiTester $I)
     {
-        // pripnem komentar na kontaktno osebo         
+// pripnem komentar na kontaktno osebo         
         $lastnik = [
             'lastnik'       => $this->lookOseba1['id'],
             'classLastnika' => 'Oseba',
@@ -102,22 +95,21 @@ class ZapisScenarijCest
 
         $l = $I->successfullyCreate($this->lastnikUrl, $lastnik);
 
-        $data = [
+        $data            = [
             'title'       => 'tralalla',
             'tip'         => 'komentar',
             'description' => "1212",
             'vrsta'       => null,
         ];
-
-        $prip = $I->successfullyCreate($this->pripUrl . '?lastnik=' . $l['id'], $data);
+        $this->objZapis1 = $prip            = $I->successfullyCreate($this->pripUrl . '?lastnik=' . $l['id'], $data);
 
         $I->assertNull($prip['datoteka']);
         $I->assertEquals($data['title'], $prip['title']);
 
-        // spremenim komentar
-        $prip['title'] = "hopsasa";
+// spremenim komentar
+        $prip['title'] = "trala komen";
         $updated       = $I->successfullyUpdate($this->pripUrl, $prip['id'], $prip);
-        $I->assertEquals('hopsasa', $updated['title']);
+        $I->assertEquals($updated['title'], $prip['title']);
         $I->assertNotEmpty($updated['lastniki']);
         $I->assertNull($updated['datoteka']);
     }
@@ -128,10 +120,10 @@ class ZapisScenarijCest
      * @depends lookupOsebo
      * @param ApiTester $I
      */
-    public function ustvariDatoteko(ApiTester $I)
+    public function ustvariZapisDatoteka(ApiTester $I)
     {
 
-        // pripnem komentar na kontaktno osebo         
+// pripnem komentar na kontaktno osebo         
         $lastnik = [
             'lastnik'       => $this->lookOseba1['id'],
             'classLastnika' => 'Oseba',
@@ -143,12 +135,12 @@ class ZapisScenarijCest
         $l = $I->successfullyCreate($this->lastnikUrl, $lastnik);
 
         $data               = [
-            'title'       => 'tralalla',
+            'title'       => 'hopsasa',
             'tip'         => 'datoteka',
             'description' => "zz",
             'vrsta'       => null,
         ];
-        $prip               = $I->successfullyCreate($this->pripUrl . "?lastnik=" . $l['id'], $data);
+        $this->objZapis2    = $prip               = $I->successfullyCreate($this->pripUrl . "?lastnik=" . $l['id'], $data);
         codecept_debug($prip['datoteka']);
         $I->assertNotEmpty($prip['datoteka'], "datoteka");
         $I->assertGuid($prip['datoteka']['id'], "id datoteke");
@@ -158,9 +150,9 @@ class ZapisScenarijCest
         /**
          * update zapisa
          */
-        $prip['title'] = "hopsasa";
+        $prip['title'] = "hopsasa dat";
         $p             = $I->successfullyUpdate($this->pripUrl, $prip['id'], $prip);
-        $I->assertEquals('hopsasa', $p['title']);
+        $I->assertEquals($p['title'], $prip['title']);
     }
 
     /**
@@ -203,9 +195,11 @@ class ZapisScenarijCest
      * Testiram ustvarjanje priponke, tipa datoteka 
      * @param ApiTester $I
      */
-    public function ustvariMapo(ApiTester $I)
+    public function ustvariZapisMapa(ApiTester $I)
     {
-        // pripnem komentar na osebo         
+        /**
+         *  pripnem komentar na osebo         
+         */
         $lastnik = [
             'lastnik'       => $this->lookOseba1['id'],
             'classLastnika' => 'Oseba',
@@ -213,21 +207,83 @@ class ZapisScenarijCest
 
         $l = $I->successfullyCreate($this->lastnikUrl, $lastnik);
 
-        $data = [
+        $data            = [
             'title'       => 'neki naslov',
             'tip'         => 'mapa',
             'description' => "1212",
             'vrsta'       => null,
             "mapa"        => $this->lookMapa1['id'],
         ];
-        $prip = $I->successfullyCreate($this->pripUrl . "?lastnik=" . $l['id'], $data);
+        $this->objZapis3 = $prip            = $I->successfullyCreate($this->pripUrl . "?lastnik=" . $l['id'], $data);
 
         $I->assertNotNull($prip['mapa']);
         $I->assertEquals($data['title'], $prip['title']);
 
-        $prip['title'] = "juhuhu";
+        $prip['title'] = "juhuhu mapca";
         $p             = $I->successfullyUpdate($this->pripUrl, $prip['id'], $prip);
-        $I->assertEquals('juhuhu', $p['title']);
+        $I->assertEquals($p['title'], $prip['title']);
+    }
+
+    /**
+     * kreiramo relacijo
+     * 
+     * @param ApiTester $I
+     */
+    public function dodajZapisVMapo(ApiTester $I)
+    {
+        $resp = $I->successfullyUpdate($this->mapaUrl, $this->lookMapa1['id'] . "/zapisi/" . $this->objZapis1['id'], []);
+        codecept_debug($resp);
+
+        /**
+         *  ustvarimo še eno relacijo
+         */
+        $resp = $I->successfullyUpdate($this->mapaUrl, $this->lookMapa1['id'] . "/zapisi/" . $this->objZapis2['id'], []);
+        codecept_debug($resp);
+    }
+
+    /**
+     * preberemo relacije
+     * @depends dodajZapisVMapo
+     * 
+     * @param ApiTester $I
+     */
+    public function preberiRelacijeMapaZapis(ApiTester $I)
+    {
+
+        $resp = $I->successfullyGetRelation($this->mapaUrl, $this->lookMapa1['id'], "zapisi", "");
+        $I->assertGreaterThanOrEqual(2, count($resp));
+        codecept_debug($resp);
+
+        $resp = $I->successfullyGetRelation($this->mapaUrl, $this->lookMapa1['id'], "zapisi", $this->objZapis1['id']);
+        $I->assertEquals(1, count($resp));
+    }
+
+    /**
+     * brisanje relacij
+     * @depends dodajZapisVMapo
+     * 
+     * @param ApiTester $I
+     */
+    public function deleteRelacijoMapaZapis(ApiTester $I)
+    {
+        $resp = $I->successfullyDeleteRelation($this->mapaUrl, $this->lookMapa1['id'], "zapisi", $this->objZapis1['id']);
+
+        $resp = $I->failToGetRelation($this->mapaUrl, $this->lookMapa1['id'], "zapisi", $this->objZapis1['id']);
+    }
+
+    /**
+     * za nek zapis kreiramo novega zapis lastnika
+     * 
+     * @param ApiTester $I
+     */
+    public function poveziZapisIzMape(ApiTester $I)
+    {
+        $lastnik = [
+            'lastnik'       => $this->lookOseba2['id'],
+            'classLastnika' => 'Oseba',
+            'zapis'         => $this->objZapis1['id'],
+        ];
+        $l       = $I->successfullyCreate($this->lastnikUrl, $lastnik);
     }
 
 }
