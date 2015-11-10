@@ -72,6 +72,8 @@
     enabled: true
     roles:
         - ZapisLastnik-read
+        - Mapa-read
+        
 -
     name: testni uporabnik za testiranje zapisov
     email: vinko@ifigenija.si
@@ -79,6 +81,8 @@
     enabled: true
     roles: 
         - ZapisLastnik-write
+        - Mapa-write
+        
 -
     name: testni uporabnik za testiranje zapisov
     email: vlado@ifigenija.si

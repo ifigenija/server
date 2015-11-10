@@ -174,3 +174,13 @@
     permissions: 
         - Uprizoritev-read
         
+- 
+    name: Mapa-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Mapa-read
+- 
+    name: Mapa-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Mapa-write

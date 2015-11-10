@@ -73,6 +73,19 @@ class VrstaZapisaCest
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
+
+        /**
+         *  kreiramo še en  neaktiven zapis
+         */
+        $data = [
+            'oznaka'  => 'cc',
+            'naziv'   => 'cc',
+            'aktiven' => false,
+            'znacka'  => TRUE,
+            'ikona'   => 'ccc',
+        ];
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -114,11 +127,23 @@ class VrstaZapisaCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl . "?parent=" . \Page\SifrantPage::$mapa_prva, []);
+        $resp = $I->successfullyGetList($this->restUrl, []);
         $list = $resp['data'];
         codecept_debug($list);
-        $I->assertNotEmpty($list);
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
+
+        $resp = $I->successfullyGetList($this->restUrl . "?text=u", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+
+        /**
+         * neaktivne
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "?neaktivne=true", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
     }
 
     /**

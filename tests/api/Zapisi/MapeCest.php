@@ -8,39 +8,56 @@ class MapeCest
 {
 
     protected $mapaUrl = '/rest/mapa/default';
-    protected $aclUrl = '/rest/mapaacl/default';
+    protected $aclUrl  = '/rest/mapaacl/default';
     protected $root;
-    protected $pod;
+    protected $pod1;
     protected $pod2;
-    protected $aclId;
+    protected $lookPermission1;
+    protected $lookPermission2;
 
-// tests
+    /**
+     * @param ApiTester $I
+     */
+    public function lookupDovoljenje(ApiTester $I)
+    {
+        $this->lookPermission1 = $look                  = $I->lookupEntity("permission", "Posta-read", false);
+        $I->assertNotEmpty($look);
+
+        $this->lookPermission2 = $look                  = $I->lookupEntity("permission", "Posta-write", false);
+        $I->assertNotEmpty($look);
+    }
+
+    /*
+     *  tests
+     */
+
     public function ustvariDrevoMap(ApiTester $I)
     {
-
-        $I->amHttpAuthenticated('admin', 'Admin1234');
-        $data = [
-            'ime' => "root",
-            'komentar' => null,
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+        $data       = [
+            'ime'         => "root",
+            'komentar'    => null,
             'javniDostop' => 'R'
         ];
+        $this->root = $m          = $I->successfullyCreate($this->mapaUrl, $data);
 
-        $this->root = $m = $I->successfullyCreate($this->mapaUrl, $data);
+        /**
+         *  Mapa s takim imenom že obstaja
+         */
+        $resp = $I->failToCreate($this->mapaUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1005000, $resp[0]['code']);
 
-        $x = $I->failToCreate($this->mapaUrl, $data);
-
-        $data['ime'] = 'podmapa';
+        $data['ime']    = 'podmapa';
         $data['parent'] = $m['id'];
         $I->successfullyCreate($this->mapaUrl, $data);
 
-        $data['ime'] = 'podmapa2';
-        $this->pod = $I->successfullyCreate($this->mapaUrl, $data);
+        $data['ime'] = 'podmapa 1';
+        $this->pod1  = $I->successfullyCreate($this->mapaUrl, $data);
 
-        $data['ime'] = 'podmapa';
-        $data['parent'] = $this->pod['id'];
-        $this->pod2 = $I->successfullyCreate($this->mapaUrl, $data);
-        
-        $this->aclId = $I->lookupEntity('Aaa-Permission','Tehen-write');
+        $data['ime']    = 'podmapa 2';
+        $data['parent'] = $this->pod1['id'];
+        $this->pod2     = $I->successfullyCreate($this->mapaUrl, $data);
     }
 
     /**
@@ -48,9 +65,15 @@ class MapeCest
      */
     public function brisiMapo(ApiTester $I)
     {
-        $I->amHttpAuthenticated('admin', 'Admin1234');
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
         $I->successfullyDelete($this->mapaUrl, $this->pod2['id']);
-        $I->failToDelete($this->mapaUrl, $this->root['id']);
+        $resp = $I->failToDelete($this->mapaUrl, $this->root['id']);
+        codecept_debug($resp);
+
+        /**
+         * Mapa ima podmape. Brisanje ni možno
+         */
+        $I->assertEquals(1007002, $resp[0]['code']);
     }
 
     /**
@@ -58,15 +81,17 @@ class MapeCest
      */
     public function dodajBrezPrivilegija(ApiTester $I)
     {
-        $I->amHttpAuthenticated('joza', 'geslo1234');
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
         $data = [
-            'ime' => "rootx",
-            'komentar' => null,
+            'ime'         => "rootx",
+            'komentar'    => null,
             'javniDostop' => 'R',
-            'parent' => $this->root['id']
+            'parent'      => $this->root['id']
         ];
 
-        $I->failToCreate($this->mapaUrl, $data);
+        $resp = $I->failToCreate($this->mapaUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1000008, $resp[0]['code']);
     }
 
     /**
@@ -76,17 +101,17 @@ class MapeCest
     public function dodajAclNaMapoInPreveriDovoljenjeZaKreiranje(\ApiTester $I)
     {
 
-        $I->amHttpAuthenticated('admin', 'Admin1234');
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
         $data = [
-            'mapa' => $this->root['id'],
-            'perm' => $this->aclId,
+            'mapa'   => $this->root['id'],
+            'perm'   => $this->lookPermission1['id'],
             'dostop' => 'RAW'
         ];
 
         $mapaAcl = $I->successfullyCreate($this->aclUrl, $data);
 
         $mapa = $I->successfullyGet($this->mapaUrl, $this->root['id']);
-
+        codecept_debug($mapa);
         $I->assertEquals($mapa['acl'][0]['id'], $mapaAcl['id']);
     }
 
@@ -98,12 +123,12 @@ class MapeCest
     public function dodajJozaDodaMapoKjerLahko(\ApiTester $I)
     {
 
-        $I->amHttpAuthenticated('joza', 'geslo1234');
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
         $dataM = [
-            'ime' => "rootx",
-            'komentar' => null,
+            'ime'         => "rootx",
+            'komentar'    => null,
             'javniDostop' => 'R',
-            'parent' => $this->root['id']
+            'parent'      => $this->root['id']
         ];
 
         $mapa = $I->successfullyCreate($this->mapaUrl, $dataM);
@@ -112,13 +137,14 @@ class MapeCest
 
         $this->pod2 = $I->successfullyCreate($this->mapaUrl, $dataM);
 
-        $dataM['parent'] = $this->pod['id'];
+        $dataM['parent'] = $this->pod1['id'];
         $I->failToCreate($this->mapaUrl, $dataM);
 
-        // joža briše mapo, ki je njegova
+        // uporabnik lahko briše mapo, ki je njegova
         $I->successfullyDelete($this->mapaUrl, $mapa['id']);
 
-        $I->failToDelete($this->mapaUrl, $this->pod['id']);
+        $I->failToDelete($this->mapaUrl, $this->pod1['id']);
+        $I->assertTrue(false, "$$ začasno");
     }
 
     /**
@@ -130,8 +156,8 @@ class MapeCest
 
         $I->amHttpAuthenticated('joza', 'geslo1234');
         $data = [
-            'mapa' => $this->pod['id'],
-            'perm' => $this->aclId,
+            'mapa'   => $this->pod1['id'],
+            'perm'   => $this->lookPermission1['id'],
             'dostop' => 'RAW'
         ];
         // na root mapi nima dovoljenja 
@@ -139,9 +165,9 @@ class MapeCest
 
         // na podmapi sem lastnik in bi moralo 
         // biti dovolj za dostop
-        $data['mapa'] =  $this->pod2['id'];
-        $mapaAcl = $I->successfullyCreate($this->aclUrl, $data);
-                
+        $data['mapa'] = $this->pod2['id'];
+        $mapaAcl      = $I->successfullyCreate($this->aclUrl, $data);
+
         $mapa = $I->successfullyGet($this->mapaUrl, $this->pod2['id']);
 
         $I->assertEquals($mapa['acl'][0]['id'], $mapaAcl['id']);

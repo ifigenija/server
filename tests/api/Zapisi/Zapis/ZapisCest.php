@@ -133,6 +133,9 @@ class ZapisCest
             'source'      => 'zz',
             'standard'    => 'zz',
             'lokacija'    => 'zz',
+            'contributor' => 'zz',
+            'type'        => 'zz',
+            'format'      => 'zz',
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl . '?lastnik=' . $this->objZapisLastnik1['id'], $data);
         codecept_debug($ent);
@@ -202,6 +205,9 @@ class ZapisCest
         $I->assertEquals($ent['source'], 'zz');
         $I->assertEquals($ent['standard'], 'zz');
         $I->assertEquals($ent['lokacija'], 'zz');
+        $I->assertEquals($ent['contributor'], 'zz','contributor');
+        $I->assertEquals($ent['type'], 'zz', 'type');
+        $I->assertEquals($ent['format'], 'zz', 'format' );
     }
 
     /**
