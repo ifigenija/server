@@ -172,7 +172,7 @@ class MapaAclCest
         $data['dostop'] = 'X';
         $resp           = $I->failToUpdate($this->restUrl, $data['id'], $data);
         codecept_debug($resp);
-        $I->assertEquals(1001013, $resp[0]['code']);
+        $I->assertEquals(1007063, $resp[0]['code']);
     }
 
 }

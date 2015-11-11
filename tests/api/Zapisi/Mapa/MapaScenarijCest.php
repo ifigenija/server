@@ -212,7 +212,8 @@ class MapaScenarijCest
 
     /**
      * test avtorizacij update root mape
-     *  
+     * 
+     * @depends kreirajRootMape 
      * @param ApiTester $I
      */
     public function spremeniRootMape(\ApiTester $I)
@@ -267,7 +268,8 @@ class MapaScenarijCest
 
     /**
      * test avtorizacij delete root mape
-     *  
+     * 
+     * @depends ustvariDrevoMap
      * @param ApiTester $I
      */
     public function izbrisiRootMape(\ApiTester $I)
@@ -282,7 +284,7 @@ class MapaScenarijCest
         $resp = $I->failToDelete($this->mapaUrl, $this->root5['id']);
         codecept_debug($resp);
         $I->assertEquals(100201, $resp[0]['code']);
-        
+
         /**
          * z le read pravico
          */
@@ -290,7 +292,7 @@ class MapaScenarijCest
         $resp = $I->failToDelete($this->mapaUrl, $this->root5['id']);
         codecept_debug($resp);
         $I->assertEquals(100201, $resp[0]['code']);
-        
+
         /**
          * z write pravicami, brez writeroot
          */
@@ -308,8 +310,8 @@ class MapaScenarijCest
 
     /**
      * 
-     * 
      * @depends dodajAclNaMapoInPreveriDovoljenjeZaKreiranje
+     * @param ApiTester $I
      */
     public function dodajJozaDodaMapoKjerLahko(\ApiTester $I)
     {
