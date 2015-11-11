@@ -22,6 +22,9 @@ class AssertDogodek
 {
     public function assert(\ZfcRbac\Service\AuthorizationService $authorizationService, $dogodek = null)
     {
+        /**
+         * a la short curcuit
+         */
         $permread=true; // ker  se permission konča z -read
         if (parent::assert($authorizationService, $dogodek,$permread)){
             return true;

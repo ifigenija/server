@@ -70,6 +70,14 @@
 -
     name: Arhivalija-write
     description: Arhivalija - spreminjanje
+
+-
+    name: AuthStorage-read
+    description: AuthStorage - branje
+-
+    name: AuthStorage-write
+    description: AuthStorage - spreminjanje
+
 -
     name: AvtorBesedila-read
     description: AvtorBesedila - branje
@@ -85,11 +93,19 @@
     description: Besedilo - spreminjanje
 
 -
+    name: Dogodek-read
+    description: Dogodek - branje
+-
+    name: Dogodek-write
+    description: Dogodek - spreminjanje
+
+-
     name: DogodekSplosni-read
     description: DogodekSplosni - branje
 -
     name: DogodekSplosni-write
     description: DogodekSplosni - spreminjanje
+
 -
     name: DogodekTehnicni-read
     description: DogodekTehnicni - branje
@@ -98,11 +114,11 @@
     description: DogodekTehnicni - spreminjanje
 
 -
-    name: Dogodek-read
-    description: Dogodek - branje
+    name: DogodekTrait-read
+    description: DogodekTrait - branje
 -
-    name: Dogodek-write
-    description: Dogodek - spreminjanje
+    name: DogodekTrait-write
+    description: DogodekTrait - spreminjanje
 
 -
     name: DrugiVir-read
@@ -110,6 +126,7 @@
 -
     name: DrugiVir-write
     description: DrugiVir - spreminjanje
+
 -
     name: Drzava-read
     description: Drzava - branje
@@ -137,13 +154,6 @@
 -
     name: Gostovanje-write
     description: Gostovanje - spreminjanje
-
--
-    name: Gostujoca-read
-    description: Gostujoca - branje
--
-    name: Gostujoca-write
-    description: Gostujoca - spreminjanje
 
 -
     name: KontaktnaOseba-read
@@ -179,7 +189,7 @@
 -
     name: OptionValue-write
     description: OptionValue - spreminjanje
-    
+
 -
     name: OrganizacijskaEnota-read
     description: OrganizacijskaEnota - branje
@@ -235,6 +245,7 @@
 -
     name: PostavkaCDve-write
     description: PostavkaCDve - spreminjanje
+
 -
     name: PostavkaRacuna-read
     description: PostavkaRacuna - branje
@@ -250,17 +261,18 @@
     description: PostniNaslov - spreminjanje
 
 -
-    name: Predstava-read
-    description: Predstava - branje
--
-    name: Predstava-write
-    description: Predstava - spreminjanje
--
     name: Praznik-read
     description: Praznik - branje
 -
     name: Praznik-write
     description: Praznik - spreminjanje
+
+-
+    name: Predstava-read
+    description: Predstava - branje
+-
+    name: Predstava-write
+    description: Predstava - spreminjanje
 
 -
     name: ProdajaPredstave-read
@@ -478,12 +490,14 @@
 -
     name: TipPopa-write
     description: TipPopa - spreminjanje
+
 -
     name: TipProgramskeEnote-read
     description: TipProgramskeEnote - branje
 -
     name: TipProgramskeEnote-write
     description: TipProgramskeEnote - spreminjanje
+
 -
     name: TipVaje-read
     description: TipVaje - branje
@@ -518,6 +532,7 @@
 -
     name: VrstaSedezev-write
     description: VrstaSedezev - spreminjanje
+
 -
     name: VrstaStroska-read
     description: VrstaStroska - branje

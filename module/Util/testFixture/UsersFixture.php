@@ -64,7 +64,7 @@ class UsersFixture
     public function populateUser($em, $val)
     {
 
-        $rep  = $em->getRepository('\Aaa\Entity\User');
+        $rep = $em->getRepository('\Aaa\Entity\User');
         $rr  = $em->getRepository('\Aaa\Entity\Role');
         $o   = $rep->findOneByEmail($val['email']);
         $nov = false;
