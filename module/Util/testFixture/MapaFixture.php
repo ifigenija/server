@@ -52,6 +52,11 @@ class MapaFixture
         }
         $o->setKomentar($v[2]);
         $o->setJavniDostop($v[3]);
+        
+        /***
+         * za ne-root mape še verjetno ni pripravljen fixture
+         */
+        $o->setParent($v[4]);
 
         $lastnik = $userR->findOneByEmail($v[5]);
         $o->setLastnik($lastnik);
@@ -74,6 +79,7 @@ class MapaFixture
                  */
                 $rep->create($o);
             }
+//            $rep->create($o);
         } else {
             $rep->update($o);
         }

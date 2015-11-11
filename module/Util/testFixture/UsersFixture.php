@@ -85,14 +85,7 @@ class UsersFixture
         } else {
             $rep->update($o);
         }
-        
-        /**
-         * $$začasno
-         */
-        $tmp='User-' . $val['email'];
-        var_dump($tmp);
-        var_dump($val);
-        
+
         $this->addReference('User-' . $val['email'], $o);
         return;
     }

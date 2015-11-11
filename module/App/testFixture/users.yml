@@ -91,6 +91,9 @@
     roles:
         - ZapisLastnik-write	
         - Uprizoritev-write
+        - Mapa-write
+        - Mapa-writeroot
+        - Mapa-append
 
 -
     name: testni uporabnik za testiranje zapisov
