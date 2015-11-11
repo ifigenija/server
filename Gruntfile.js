@@ -5,7 +5,7 @@ module.exports = function (grunt) {
         if (os.platform() === 'win32') {
             return '..\\..\\vendor\\bin\\classmap_generator.php.bat';
         }
-        return  '../../vendor/bin/classmap_generator.php';
+        return '../../vendor/bin/classmap_generator.php';
     };
 
 // Project configuration.
@@ -77,7 +77,7 @@ module.exports = function (grunt) {
                     if (os.platform() === 'win32') {
                         return 'bin\\util.bat orm:generate-proxies';
                     }
-                    return  'php ./bin/util.php  orm:generate-proxies';
+                    return 'php ./bin/util.php  orm:generate-proxies';
                 }
             }
         },
@@ -88,8 +88,10 @@ module.exports = function (grunt) {
         },
         mkdir: {
             data: {
-                create: ['data/uploads', 'data/reports', 'data/local', 'data/DoctrineModule/cache', 'data/tmp'],
-                mode: '2770'
+                options: {
+                    create: ['data/uploads', 'data/reports', 'data/local', 'data/DoctrineModule/cache', 'data/tmp'],
+                    mode: '2770'
+                }
             }
         },
     });
