@@ -194,3 +194,13 @@
     description: 'Vloga z 1 dovoljenjem'
     permissions: 
         - Mapa-append
+- 
+    name: MapaAcl-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - MapaAcl-read
+- 
+    name: MapaAcl-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - MapaAcl-write
