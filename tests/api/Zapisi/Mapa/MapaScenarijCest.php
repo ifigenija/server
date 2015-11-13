@@ -14,9 +14,11 @@ class MapaScenarijCest
     protected $root3;
     protected $root4;
     protected $root5;
+    protected $root6;
     protected $pod1;
     protected $pod2;
     protected $pod3;
+    protected $pod4;
     protected $lookPermission1;
     protected $lookPermission2;
 
@@ -59,6 +61,12 @@ class MapaScenarijCest
             'javniDostop' => 'RWDA'
         ];
         $this->root5 = $m           = $I->successfullyCreate($this->mapaUrl, $data);
+        $data        = [
+            'ime'         => "root6",
+            'komentar'    => 'ad',
+            'javniDostop' => 'RWDA'
+        ];
+        $this->root6 = $m           = $I->successfullyCreate($this->mapaUrl, $data);
 
         /**
          *  Mapa s takim imenom že obstaja
@@ -71,6 +79,7 @@ class MapaScenarijCest
         $data['parent'] = $this->root1['id'];
         $I->successfullyCreate($this->mapaUrl, $data);
 
+        $data['javniDostop'] = 'RW';
         $data['ime'] = 'podmapa 1';
         $this->pod1  = $I->successfullyCreate($this->mapaUrl, $data);
 
@@ -313,22 +322,22 @@ class MapaScenarijCest
      * @depends dodajAclNaMapoInPreveriDovoljenjeZaKreiranje
      * @param ApiTester $I
      */
-    public function dodajJozaDodaMapoKjerLahko(\ApiTester $I)
+    public function dodajVladoDodaMapoKjerLahko(\ApiTester $I)
     {
 
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vlado, \IfiTest\AuthPage::$vladoPass);
         $dataM = [
             'ime'         => "rootx",
             'komentar'    => null,
             'javniDostop' => 'R',
-            'parent'      => $this->root1['id']
+            'parent'      => $this->root6['id']
         ];
 
         $mapa = $I->successfullyCreate($this->mapaUrl, $dataM);
 
-        $dataM['ime'] = 'xxxxxx';
+        $dataM['ime'] = 'p 4';
 
-        $this->pod2 = $I->successfullyCreate($this->mapaUrl, $dataM);
+        $this->pod4 = $I->successfullyCreate($this->mapaUrl, $dataM);
 
         $dataM['parent'] = $this->pod1['id'];
         $I->failToCreate($this->mapaUrl, $dataM);
@@ -337,19 +346,18 @@ class MapaScenarijCest
         $I->successfullyDelete($this->mapaUrl, $mapa['id']);
 
         $I->failToDelete($this->mapaUrl, $this->pod1['id']);
-        $I->assertTrue(false, "$$ začasno");
     }
 
     /**
      * 
-     * @depends dodajJozaDodaMapoKjerLahko
+     * @depends dodajVladoDodaMapoKjerLahko
      */
-    public function jozeUrejaAcl(\ApiTester $I)
+    public function vladoUrejaAcl(\ApiTester $I)
     {
 
-        $I->amHttpAuthenticated('joza', 'geslo1234');
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vlado, \IfiTest\AuthPage::$vladoPass);
         $data = [
-            'mapa'   => $this->pod1['id'],
+            'mapa'   => $this->root1['id'],
             'perm'   => $this->lookPermission1['id'],
             'dostop' => 'RAW'
         ];
@@ -358,10 +366,13 @@ class MapaScenarijCest
 
         // na podmapi sem lastnik in bi moralo 
         // biti dovolj za dostop
-        $data['mapa'] = $this->pod2['id'];
+        $data['mapa'] = $this->pod4['id'];
         $mapaAcl      = $I->successfullyCreate($this->aclUrl, $data);
 
-        $mapa = $I->successfullyGet($this->mapaUrl, $this->pod2['id']);
+        $mapa = $I->successfullyGet($this->mapaUrl, $this->pod4['id']);
+        
+        codecept_debug($mapa);
+        codecept_debug($mapaAcl);
 
         $I->assertEquals($mapa['acl'][0]['id'], $mapaAcl['id']);
     }

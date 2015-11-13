@@ -82,6 +82,7 @@
     roles: 
         - ZapisLastnik-write
         - Mapa-write
+        - MapaAcl-write
         
 -
     name: testni uporabnik za testiranje zapisov
@@ -94,6 +95,8 @@
         - Mapa-write
         - Mapa-writeroot
         - Mapa-append
+        - Mapa-read
+        - MapaAcl-write
 
 -
     name: testni uporabnik za testiranje zapisov
@@ -103,3 +106,5 @@
     roles: 
         - ZapisLastnik-read
         - Uprizoritev-read
+        - Mapa-read
+        - MapaAcl-read
