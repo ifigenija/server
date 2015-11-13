@@ -91,7 +91,8 @@ class MapaCest
         $data       = [
             'ime'         => 'bb',
             'komentar'    => 'bb',
-            'javniDostop' => 'R',
+//            'javniDostop' => 'W',
+            'javniDostop' => '',
             'parent'      => $this->lookMapa1['id'],
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);

@@ -87,7 +87,7 @@ class MapaAclCest
         $data       = [
             'mapa'   => $this->lookMapa1['id'],
             'perm'   => $this->lookPermission2['id'],
-            'dostop' => 'D',
+            'dostop' => 'W',
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
@@ -157,7 +157,7 @@ class MapaAclCest
     {
 //        $this->expect($this->perm, "Dovoljenje ne sme biti prazno", 1001012);
 //        $this->expect($this->dostop, "Dostop ne sme biti prazen", 1001014);
-//        $this->expect(preg_match('/^[RWAD]+$/', $this->dostop), 'Dostop ni prave oblike', 1001013);
+//        $this->expect(preg_match('/^[RWA]+$/', $this->dostop), 'Dostop ni prave oblike', 1001013);
 
         $data = $this->obj2;
         $entR = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
@@ -169,7 +169,7 @@ class MapaAclCest
 //        $I->assertEquals(1001012, $resp[0]['code']);
 
         $data           = $this->obj2;
-        $data['dostop'] = 'X';
+        $data['dostop'] = 'Y';
         $resp           = $I->failToUpdate($this->restUrl, $data['id'], $data);
         codecept_debug($resp);
         $I->assertEquals(1007063, $resp[0]['code']);

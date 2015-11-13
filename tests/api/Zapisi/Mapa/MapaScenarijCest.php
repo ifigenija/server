@@ -56,20 +56,20 @@ class MapaScenarijCest
         $data        = [
             'ime'         => "root4",
             'komentar'    => 'ad',
-            'javniDostop' => 'RWDA'
+            'javniDostop' => 'RWA'
         ];
         $this->root4 = $m           = $I->successfullyCreate($this->mapaUrl, $data);
 
         $data        = [
             'ime'         => "root5",
             'komentar'    => 'ad',
-            'javniDostop' => 'RWDA'
+            'javniDostop' => 'RWA'
         ];
         $this->root5 = $m           = $I->successfullyCreate($this->mapaUrl, $data);
         $data        = [
             'ime'         => "root6",
             'komentar'    => 'ad',
-            'javniDostop' => 'RWDA'
+            'javniDostop' => 'RWA'
         ];
         $this->root6 = $m           = $I->successfullyCreate($this->mapaUrl, $data);
 
@@ -163,7 +163,7 @@ class MapaScenarijCest
         $data        = [
             'ime'         => "vrhnja admin",
             'komentar'    => "ad",
-            'javniDostop' => 'RWDA'
+            'javniDostop' => 'RWA'
         ];
         $this->root2 = $m           = $I->successfullyCreate($this->mapaUrl, $data);
 
@@ -333,7 +333,7 @@ class MapaScenarijCest
         $dataM = [
             'ime'         => "rootx",
             'komentar'    => null,
-            'javniDostop' => 'X',
+            'javniDostop' => '',
             'parent'      => $this->root6['id']
         ];
         $mapa  = $I->successfullyCreate($this->mapaUrl, $dataM);
@@ -389,7 +389,7 @@ class MapaScenarijCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
         $data       = [
             'ime'         => "pod 5",
-            'javniDostop' => 'X',
+            'javniDostop' => '',
             'parent'      => $this->root6['id'],
         ];
         $this->pod5 = $m          = $I->successfullyCreate($this->mapaUrl, $data);
@@ -485,7 +485,7 @@ class MapaScenarijCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
         $data = [
             'ime'         => "assert lastnik vihra",
-            'javniDostop' => 'X',
+            'javniDostop' => '',
             'parent'      => $this->pod5['id'], //lastnik admin
         ];
         $resp = $I->failToCreate($this->mapaUrl, $data);
@@ -501,7 +501,7 @@ class MapaScenarijCest
          */
         $data                = [
             'ime'         => "assert javni dostop vihra",
-            'javniDostop' => 'X',
+            'javniDostop' => '',
             'parent'      => $this->pod4['id'], //brez javnega dostopa
         ];
         $resp                = $I->failToCreate($this->mapaUrl, $data);
@@ -512,7 +512,7 @@ class MapaScenarijCest
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
         $mapa                = $I->successfullyGet($this->mapaUrl, $this->pod4['id']);
-        $mapa['javniDostop'] = 'RWDA';
+        $mapa['javniDostop'] = 'RWA';
         $this->pod4          = $I->successfullyUpdate($this->mapaUrl, $mapa['id'], $mapa);
         /**
          * ponovimo isti dostop, da vidimo, če spremenjen dostop javni sedaj pomaga
@@ -526,7 +526,7 @@ class MapaScenarijCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vlado, \IfiTest\AuthPage::$vladoPass);
         $data    = [
             'ime'         => "assert acl vlado",
-            'javniDostop' => 'X',
+            'javniDostop' => '',
             'parent'      => $this->pod5['id'],
         ];
         $resp    = $I->failToCreate($this->mapaUrl, $data);
