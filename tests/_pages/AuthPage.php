@@ -51,6 +51,8 @@ class AuthPage
     public static $rudiPass    = "Rudi1234567";
     public static $vinko       = "vinko@ifigenija.si";
     public static $vinkoPass   = "Vinko1234567";
+    public static $vihra       = "vihra@ifigenija.si";
+    public static $vihraPass   = "Vihra1234567";
     public static $vlado       = "vlado@ifigenija.si";
     public static $vladoPass   = "Vlado1234567";
     public static $rikard      = "rikard@ifigenija.si";
