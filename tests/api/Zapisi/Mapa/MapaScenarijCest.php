@@ -428,6 +428,7 @@ class MapaScenarijCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
         $data['ime'] = 'podmapa vihra';
         $this->pod6  = $I->successfullyCreate($this->mapaUrl, $data);
+
     }
 
     /**
@@ -536,7 +537,7 @@ class MapaScenarijCest
          * dodamo acl za dovoljenje, ki ga ima tudi uporabnik
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
-        $dataAcl    = [
+        $dataAcl = [
             'mapa'   => $this->pod5['id'],
             'perm'   => $this->lookPermission2['id'], // to doovoljenje že ima uporabnik
             'dostop' => 'RAW'
@@ -549,3 +550,4 @@ class MapaScenarijCest
     }
 
 }
+//        $I->assertTrue(false, "$$ začasno");

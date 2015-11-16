@@ -204,3 +204,24 @@
     description: 'Vloga z 1 dovoljenjem'
     permissions: 
         - MapaAcl-write
+- 
+    name: Zapis-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Zapis-read
+- 
+    name: Zapis-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Zapis-write
+- 
+    name: Oseba-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Oseba-write
+- 
+    name: Oseba-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Oseba-read
+        
