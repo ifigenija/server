@@ -40,8 +40,7 @@ class AvtorizacijeCest
     private $datUrl      = '/rest/zapis/default';
     private $uploadUrl   = '/fs/nalozi/zapisi';
     private $downloadUrl = '/fs/prenesi/zapisi';
-//    private $mapaUrl     = '/rest/mapa';
-    private $mapaDefUrl  = '/rest/mapa/default';
+    private $mapaUrl     = '/rest/mapa/default';
     private $objZapis1;
     private $objZapis2;
     private $objZapis3;
@@ -173,20 +172,19 @@ class AvtorizacijeCest
     public function ustvariDrevoMap(ApiTester $I)
     {
         $data['ime']         = 'm1a';
-//        $data['javniDostop'] = 'A';
-        $data['javniDostop'] = 'WA';     //$$ začasno
+        $data['javniDostop'] = 'A';
         $data['parent']      = $this->lookMapa1['id'];
-        $this->objMapa1      = $I->successfullyCreate($this->mapaDefUrl, $data);
+        $this->objMapa1      = $I->successfullyCreate($this->mapaUrl, $data);
 
         $data['ime']    = 'm2a';
-        $this->objMapa2 = $I->successfullyCreate($this->mapaDefUrl, $data);
+        $this->objMapa2 = $I->successfullyCreate($this->mapaUrl, $data);
 
         $data['ime']    = 'm4a';
-        $this->objMapa4 = $I->successfullyCreate($this->mapaDefUrl, $data);
+        $this->objMapa4 = $I->successfullyCreate($this->mapaUrl, $data);
 
         $data['ime']         = 'm3r';
         $data['javniDostop'] = 'R';
-        $this->objMapa3      = $I->successfullyCreate($this->mapaDefUrl, $data);
+        $this->objMapa3      = $I->successfullyCreate($this->mapaUrl, $data);
     }
 
     /**
@@ -196,10 +194,10 @@ class AvtorizacijeCest
      */
     public function dodajZapisVMapi(ApiTester $I)
     {
-        $resp = $I->successfullyUpdate($this->mapaDefUrl, $this->objMapa1['id'] . "/zapisi/" . $this->objZapis2['id'], []);
+        $resp = $I->successfullyUpdate($this->mapaUrl, $this->objMapa1['id'] . "/zapisi/" . $this->objZapis2['id'], []);
         codecept_debug($resp);
 
-        $resp = $I->successfullyUpdate($this->mapaDefUrl, $this->objMapa2['id'] . "/zapisi/" . $this->objZapis2['id'], []);
+        $resp = $I->successfullyUpdate($this->mapaUrl, $this->objMapa2['id'] . "/zapisi/" . $this->objZapis2['id'], []);
         codecept_debug($resp);
     }
 
@@ -225,23 +223,24 @@ class AvtorizacijeCest
          *
          * v ne append mapo ne more dodajati
          */
-        $resp            = $I->failToUpdate($this->mapaDefUrl, $this->objMapa3['id'] . "/zapisi/" . $this->objZapis2['id'], []);
+        $resp            = $I->failToUpdate($this->mapaUrl, $this->objMapa3['id'] . "/zapisi/" . $this->objZapis2['id'], []);
         codecept_debug($resp);
         $I->assertEquals(1000601, $resp[0]['code']);
-         /**
+        /**
          * iz ne append mapo ne more odvzemati zapisa
          */
-        $resp            = $I->failToDelete($this->mapaDefUrl, $this->objMapa3['id'] . "/zapisi/" . $this->objZapis2['id'], []);
+        $resp            = $I->failToDelete($this->mapaUrl, $this->objMapa3['id'] . "/zapisi/" . $this->objZapis2['id'], []);
         codecept_debug($resp);
         $I->assertEquals(100681, $resp[0]['code']);
         /**
          * v append mapo lahko dodaja
          */
-        $I->successfullyUpdate($this->mapaDefUrl, $this->objMapa4['id'] . "/zapisi/" . $this->objZapis2['id'], []);
+        $I->successfullyUpdate($this->mapaUrl, $this->objMapa4['id'] . "/zapisi/" . $this->objZapis2['id'], []);
+
         /**
          * iz append mapo lahko odvzame zapis
          */
-        $I->successfullyDelete($this->mapaDefUrl, $this->objMapa4['id'] . "/zapisi/" . $this->objZapis2['id'], []);
+        $I->successfullyDelete($this->mapaUrl, $this->objMapa4['id'] . "/zapisi/" . $this->objZapis2['id'], []);
 
 
         /**
@@ -338,7 +337,7 @@ class AvtorizacijeCest
      */
     public function dodajZapisVReadMapi(ApiTester $I)
     {
-        $resp = $I->successfullyUpdate($this->mapaDefUrl, $this->objMapa3['id'] . "/zapisi/" . $this->objZapis2['id'], []);
+        $resp = $I->successfullyUpdate($this->mapaUrl, $this->objMapa3['id'] . "/zapisi/" . $this->objZapis2['id'], []);
         codecept_debug($resp);
     }
 
@@ -371,6 +370,35 @@ class AvtorizacijeCest
          * getlist
          */
         $I->successfullyGetList($this->zapisUrl . "?lastnik=" . $this->objZapisLastnik2['lastnik'], []);
+    }
+
+    /**
+     * 
+     * 
+     * @depends ustvariDrevoMap
+     * @param ApiTester $I
+     */
+    public function checkDodajPodmapo(ApiTester $I)
+    {
+        /**
+         * v append mapo lahko dodamo podmapo
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
+        $data['ime']         = 'podmapa 4.1 r';
+        $data['javniDostop'] = 'R';
+        $data['parent']      = $this->objMapa4['id'];
+        $this->objMapa5      = $I->successfullyCreate($this->mapaUrl, $data);
+
+        /**
+         * v ne append mapo ne moremo dodati podmape
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
+        $data['ime']         = 'podmapa 4.2 r';
+        $data['javniDostop'] = 'R';
+        $data['parent']      = $this->objMapa3['id'];
+        $resp                = $I->failToCreate($this->mapaUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1007008, $resp[0]['code']);
     }
 
 }

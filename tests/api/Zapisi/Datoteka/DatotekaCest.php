@@ -38,7 +38,7 @@ class DatotekaCest
     {
         $this->lookUser2 = $ent             = $I->lookupEntity("user", \IfiTest\AuthPage::$irena, false);
         $I->assertGuid($ent['id']);
-        
+
         $this->lookUser3 = $ent             = $I->lookupEntity("user", \IfiTest\AuthPage::$breznik, false);
         $I->assertGuid($ent['id']);
     }
@@ -74,7 +74,7 @@ class DatotekaCest
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['owner']['id'], $ent['owner'] );
+        $I->assertEquals($entR['owner']['id'], $ent['owner']);
     }
 
     /**
@@ -95,7 +95,7 @@ class DatotekaCest
      * get list je nalašč disablean
      * 
      * @depends create
-     * @param ApiTester $I
+     * @param ApiTester $I  
      */
     public function getListDefault(ApiTester $I)
     {

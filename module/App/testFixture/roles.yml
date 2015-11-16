@@ -224,4 +224,14 @@
     description: 'Vloga z 1 dovoljenjem'
     permissions: 
         - Oseba-read
+- 
+    name: Datoteka-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Datoteka-write
+- 
+    name: Datoteka-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Datoteka-read
         

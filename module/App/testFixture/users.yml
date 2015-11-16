@@ -76,6 +76,8 @@
         - MapaAcl-read
         - Zapis-read
         - Oseba-read
+        - Datoteka-read
+       
 -
     name: testni uporabnik za testiranje zapisov
     email: vinko@ifigenija.si
@@ -86,6 +88,7 @@
         - Mapa-write
         - MapaAcl-write
         - Zapis-write
+        - Datoteka-write
 -
     name: testni uporabnik za testiranje zapisov
     email: vihra@ifigenija.si
@@ -97,6 +100,7 @@
         - Mapa-append
         - MapaAcl-write
         - Zapis-write
+        - Datoteka-write
         
 -
     name: testni uporabnik za testiranje zapisov
@@ -112,6 +116,7 @@
         - Mapa-read
         - MapaAcl-write
         - Zapis-write	
+        - Datoteka-write
 
 -
     name: testni uporabnik za testiranje zapisov
@@ -125,3 +130,4 @@
         - MapaAcl-read
         - Zapis-read
         - Oseba-read
+        - Datoteka-read
