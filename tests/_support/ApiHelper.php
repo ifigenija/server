@@ -221,6 +221,26 @@ class ApiHelper
     }
 
     /**
+     * Get rest metoda po ID-ju objekta za download datotek
+     * pričakuje neuspeh
+     *
+     * @param string $url
+     * @param string $id
+     * @return array
+     */
+    public function failToGetAttachment($url, $id)
+    {
+        $I = $this->getModule('REST');
+
+        $I->sendGET($url . '/' . $id);
+        $I->dontSeeResponseCodeIs('200');
+        $I->seeResponseContainsJson(['success' => false]);
+
+//        return $I->grabResponse();
+        return $I->grabDataFromResponseByJsonPath('$.errors');
+    }
+
+    /**
      * Get rest metoda po ID-ju objekta in relacije po ID 
      * pričakuje uspeh 
      * 

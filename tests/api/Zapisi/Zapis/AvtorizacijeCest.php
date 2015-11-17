@@ -41,6 +41,7 @@ class AvtorizacijeCest
     private $uploadUrl   = '/fs/nalozi/zapisi';
     private $downloadUrl = '/fs/prenesi/zapisi';
     private $mapaUrl     = '/rest/mapa/default';
+    private $baseUrl;
     private $objZapis1;
     private $objZapis2;
     private $objZapis3;
@@ -72,6 +73,15 @@ class AvtorizacijeCest
     public function _before(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function baseUrl(ApiTester $I)
+    {
+        $this->baseUrl = $I->getPhpBrowserUrl();
     }
 
     /**
@@ -241,6 +251,22 @@ class AvtorizacijeCest
          * iz append mapo lahko odvzame zapis
          */
         $I->successfullyDelete($this->mapaUrl, $this->objMapa4['id'] . "/zapisi/" . $this->objZapis2['id'], []);
+        /**
+         * u1 lahko uploada
+         */
+        $client    = new \GuzzleHttp\Client(['base_uri' => $this->baseUrl
+            /* pri guzzle-u se je potreno še enkrat (posebaj) avtenticirati */
+            , 'auth'     => [ \IfiTest\AuthPage::$vlado, \IfiTest\AuthPage::$vladoPass]
+        ]);
+        $requestOk = true; //init
+        try {
+            $resp = $client->request('POST', $this->uploadUrl . "/" . $this->objDatoteka1['id'], [
+                'multipart' => [ [ 'name' => 'fileupload', 'contents' => fopen('data/fileexamples/a.txt', 'r')],]]);
+        } catch (\Exception $ex) {
+            $requestOk = false;
+        }
+        $I->assertTrue($requestOk);
+        codecept_debug($resp);
 
 
         /**
@@ -256,6 +282,12 @@ class AvtorizacijeCest
         $resp = $I->failToGetList($this->zapisUrl . "?lastnik=" . $this->objZapisLastnik2['lastnik'], []);
         codecept_debug($resp);
         $I->assertEquals(1001018, $resp[0]['code']);
+        /**
+         * u2 ne more downloadati
+         */
+        $resp = $I->failToGetAttachment($this->downloadUrl, $this->objDatoteka1['id']);
+        codecept_debug($resp);
+        $I->assertEquals(1007078, $resp[0][0]['code']);
     }
 
     /**
@@ -284,7 +316,7 @@ class AvtorizacijeCest
      * 
      * @param ApiTester $I
      */
-    public function checkDostopaDoZapisaZ2WIn1RLastnikomVVecAMapah(ApiTester $I)
+    public function checkDostopaDoZapisaZ2WIn1RLastVVecAMapah(ApiTester $I)
     {
         /**
          * u1 nima write dostopa do vseh lastnikov
@@ -294,16 +326,38 @@ class AvtorizacijeCest
         $data['subject'] = "upd 2 vlado";
         $resp            = $I->failToUpdate($this->zapisUrl, $data['id'], $data);
         $I->assertEquals(1000101, $resp[0]['code']);
+        /**
+         * u1 ne more uploadati
+         */
+        $client          = new \GuzzleHttp\Client(['base_uri' => $this->baseUrl
+            /* pri guzzle-u se je potreno še enkrat (posebaj) avtenticirati */
+            , 'auth'     => [ \IfiTest\AuthPage::$vlado, \IfiTest\AuthPage::$vladoPass]
+        ]);
+        $requestOk       = true; //init
+        try {
+            $resp = $client->request('POST', $this->uploadUrl . "/" . $this->objDatoteka1['id'], [
+                'multipart' => [ [ 'name' => 'fileupload', 'contents' => fopen('data/fileexamples/a.txt', 'r')],]]);
+        } catch (\Exception $ex) {
+            $requestOk = false;
+        }
+        $I->assertFalse($requestOk, "request");
+        codecept_debug($resp);
+
 
         /**
          * u2  ima read dostopa do 1 lastnika
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
-        $ent = $I->successfullyGet($this->zapisUrl, $data['id']);
+        $ent  = $I->successfullyGet($this->zapisUrl, $data['id']);
         /**
          * getlist
          */
         $I->successfullyGetList($this->zapisUrl . "?lastnik=" . $this->objZapisLastnik2['lastnik'], []);
+        /**
+         * u2 lahko downloada
+         */
+        $resp = $I->successfullyGetAttachment($this->downloadUrl, $this->objDatoteka1['id']);
+        codecept_debug($resp);
     }
 
     /**
@@ -360,16 +414,38 @@ class AvtorizacijeCest
         $data['subject'] = "upd 3 vlado";
         $resp            = $I->failToUpdate($this->zapisUrl, $data['id'], $data);
         $I->assertEquals(1000101, $resp[0]['code']);
+        /**
+         * u1 ne more uploadati
+         */
+        $client          = new \GuzzleHttp\Client(['base_uri' => $this->baseUrl
+            /* pri guzzle-u se je potreno še enkrat (posebaj) avtenticirati */
+            , 'auth'     => [ \IfiTest\AuthPage::$vlado, \IfiTest\AuthPage::$vladoPass]
+        ]);
+        $requestOk       = true; //init
+        try {
+            $resp = $client->request('POST', $this->uploadUrl . "/" . $this->objDatoteka1['id'], [
+                'multipart' => [ [ 'name' => 'fileupload', 'contents' => fopen('data/fileexamples/a.txt', 'r')],]]);
+        } catch (\Exception $ex) {
+            $requestOk = false;
+        }
+        $I->assertFalse($requestOk, "request");
+        codecept_debug($resp);
+
 
         /**
          * u2  ima read dostopa do 1 mape
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
-        $ent = $I->successfullyGet($this->zapisUrl, $data['id']);
+        $ent  = $I->successfullyGet($this->zapisUrl, $data['id']);
         /**
          * getlist
          */
         $I->successfullyGetList($this->zapisUrl . "?lastnik=" . $this->objZapisLastnik2['lastnik'], []);
+        /**
+         * u2 lahko downloada
+         */
+        $resp = $I->successfullyGetAttachment($this->downloadUrl, $this->objDatoteka1['id']);
+        codecept_debug($resp);
     }
 
     /**
