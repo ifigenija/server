@@ -199,8 +199,8 @@ class ZapisScenarijCest
         /**
          * prikaži vsebino Datoteke
          */
-        $this->objDatoteka1 = $dat                = $I->successfullyGet($this->datotekaUrl, $this->objDatoteka1['id']);
-        codecept_debug($dat);
+//        $this->objDatoteka1 = $dat                = $I->successfullyGet($this->datotekaUrl, $this->objDatoteka1['id']);
+//        codecept_debug($dat);
     }
 
     /**
@@ -215,8 +215,8 @@ class ZapisScenarijCest
         /**
          * prikaži vsebino Datoteke
          */
-        $this->objDatoteka1['id'] = $dat                      = $I->successfullyGet($this->datotekaUrl, $this->objDatoteka1['id']);
-        codecept_debug($dat);
+//        $this->objDatoteka1['id'] = $dat                      = $I->successfullyGet($this->datotekaUrl, $this->objDatoteka1['id']);
+//        codecept_debug($dat);
     }
 
     /**
@@ -296,7 +296,7 @@ class ZapisScenarijCest
     {
         $resp = $I->successfullyDeleteRelation($this->mapaUrl, $this->lookMapa1['id'], "zapisi", $this->objZapis1['id']);
 
-        $resp = $I->failToGetRelation($this->mapaUrl, $this->lookMapa1['id'], "zapisi", $this->objZapis1['id']);
+        $resp = $I->emptyGetRelation($this->mapaUrl, $this->lookMapa1['id'], "zapisi", $this->objZapis1['id']);
     }
 
     /**

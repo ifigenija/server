@@ -570,7 +570,7 @@ class PopaCest
 //    {
 //        $resp = $I->successfullyDeleteRelation($this->restUrl, $this->obj['id'], "osebe", $this->objOseba1['id']);
 //
-//        $resp = $I->failToGetRelation($this->restUrl, $this->obj['id'], "osebe", $this->objOseba1['id']);
+//        $resp = $I->emptyGetRelation($this->restUrl, $this->obj['id'], "osebe", $this->objOseba1['id']);
 //    }
 
     /**

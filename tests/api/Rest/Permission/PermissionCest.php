@@ -150,7 +150,7 @@ class PermissionCest
         // DELETE   http://ifigenija.local:8080/rest/oseba/00090000-555b-31ed-d438-f3f46c26b59e/popa/00080000-555b-31ed-7683-d4cdd224d2b5?XDEBUG_SESSION_START=netbeans-xdebug
         $resp = $I->successfullyDeleteRelation($this->restUrl, $this->objPermission2['id'], "roles", $this->objRole1['id']);
 
-        $resp = $I->failToGetRelation($this->restUrl, $this->objPermission2['id'], "roles", $this->objRole1['id']);
+        $resp = $I->emptyGetRelation($this->restUrl, $this->objPermission2['id'], "roles", $this->objRole1['id']);
     }
 
 }

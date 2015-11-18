@@ -11,6 +11,8 @@ use ApiTester;
 /**
  * Description of DatotekaCest
  * 
+ * zaenkrat mora biti forma /list disable-an
+ * 
  * 
  * @author rado
  */
@@ -56,20 +58,28 @@ class DatotekaCest
      */
     public function create(ApiTester $I)
     {
-        $data       = [
-            'filename' => 'aa',
+        $data = [
+            'filename' => 'dis',
             'owner'    => $this->lookUser2['id'],
         ];
-        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertGuid($ent['id']);
+        $resp = $I->failToCreate($this->restUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals('create disabled', $resp[0]['message']);
 
-        // kreiramo še en zapis
-        $data       = [
-            'filename' => 'bb',
-            'owner'    => $this->lookUser1['id'],
-        ];
-        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertGuid($ent['id']);
+//        $data       = [
+//            'filename' => 'aa',
+//            'owner'    => $this->lookUser2['id'],
+//        ];
+//        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+//        $I->assertGuid($ent['id']);
+//
+//        // kreiramo še en zapis
+//        $data       = [
+//            'filename' => 'bb',
+//            'owner'    => $this->lookUser1['id'],
+//        ];
+//        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+//        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -80,12 +90,19 @@ class DatotekaCest
      */
     public function update(ApiTester $I)
     {
-        $ent          = $this->obj1;
+        
+        $ent['id'] = '00370000-564c-2a63-8ad7-1aa02f8b2c04 '; // nek random id
         $ent['owner'] = $this->lookUser3['id'];
+        $resp = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        codecept_debug($resp);
+//        $I->assertEquals('update disabled', $resp[0]['message']);
 
-        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
-
-        $I->assertEquals($entR['owner']['id'], $ent['owner']);
+//        $ent          = $this->obj1;
+//        $ent['owner'] = $this->lookUser3['id'];
+//
+//        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+//
+//        $I->assertEquals($entR['owner']['id'], $ent['owner']);
     }
 
     /**
@@ -94,15 +111,15 @@ class DatotekaCest
      * @depends create
      * @param ApiTester $I
      */
-    public function read(\ApiTester $I)
-    {
-        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
-        codecept_debug($ent);
-        
-        $I->assertGuid($ent['id']);
-        $I->assertEquals($ent['filename'], 'aa');
-        $I->assertEquals($ent['owner']['id'], $this->lookUser3['id']);
-    }
+//    public function read(\ApiTester $I)
+//    {
+//        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
+//        codecept_debug($ent);
+//
+//        $I->assertGuid($ent['id']);
+//        $I->assertEquals($ent['filename'], 'aa');
+//        $I->assertEquals($ent['owner']['id'], $this->lookUser3['id']);
+//    }
 
     /**
      * get list je nalašč disablean
@@ -136,74 +153,74 @@ class DatotekaCest
      * 
      * @depends create
      */
-    public function delete(ApiTester $I)
-    {
-        $I->successfullyDelete($this->restUrl, $this->obj1['id']);
-        $I->failToGet($this->restUrl, $this->obj1['id']);
-    }
+//    public function delete(ApiTester $I)
+//    {
+//        $I->successfullyDelete($this->restUrl, $this->obj1['id']);
+//        $I->failToGet($this->restUrl, $this->obj1['id']);
+//    }
 
     /**
      * test validacij v datoteke kontrolerju
      * 
      * @param ApiTester $I
      */
-    public function downloadNeobstojeceDatoteke(ApiTester $I)
-    {
-        /**
-         * datoteka še ni bila uploadana 
-         */
-        $resp = $I->failToGetAttachment($this->downloadUrl, $this->obj2['id']);
-        codecept_debug($resp);
-        $I->assertEquals(1007079, $resp[0][0]['code']);
-    }
-
-    /**
-     * 
-     * @param ApiTester $I
-     */
-    public function uploadDatoteke(ApiTester $I)
-    {
-        $urlcel   = $this->uploadUrl . "/" . $this->obj2['id'];
-        $base_url = $I->getPhpBrowserUrl();
-
-        $filePath = 'data/fileexamples/b.txt';
-        $body     = fopen($filePath, 'r');
-
-        $client   = new \GuzzleHttp\Client(['base_uri' => $base_url
-            /* pri guzzle-u se je potreno še enkrat (posebaj) avtenticirati */
-            , 'auth'     => [ \IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass]
-        ]);
-        $response = $client->request('POST', $urlcel, [
-            'multipart' => [
-                [
-                    'name'     => 'fileupload',
-                    'contents' => fopen($filePath, 'r'),
-                ],
-            ]
-        ]);
-        codecept_debug($response);
-
-        /**
-         * prikaži vsebino Datoteke
-         */
-        $this->obj2 = $dat        = $I->successfullyGet($this->restUrl, $this->obj2['id']);
-        codecept_debug($dat);
-    }
-
-    /**
-     * @depends uploadDatoteke
-     * @param ApiTester $I
-     */
-    public function downloadDatoteke(ApiTester $I)
-    {
-        $resp = $I->successfullyGetAttachment($this->downloadUrl, $this->obj2['id']);
-        codecept_debug($resp);
-
-        /**
-         * prikaži vsebino Datoteke
-         */
-        $this->obj2['id'] = $dat              = $I->successfullyGet($this->restUrl, $this->obj2['id']);
-        codecept_debug($dat);
-    }
+//    public function downloadNeobstojeceDatoteke(ApiTester $I)
+//    {
+//        /**
+//         * datoteka še ni bila uploadana 
+//         */
+//        $resp = $I->failToGetAttachment($this->downloadUrl, $this->obj2['id']);
+//        codecept_debug($resp);
+//        $I->assertEquals(1007079, $resp[0][0]['code']);
+//    }
+//
+//    /**
+//     * 
+//     * @param ApiTester $I
+//     */
+//    public function uploadDatoteke(ApiTester $I)
+//    {
+//        $urlcel   = $this->uploadUrl . "/" . $this->obj2['id'];
+//        $base_url = $I->getPhpBrowserUrl();
+//
+//        $filePath = 'data/fileexamples/b.txt';
+//        $body     = fopen($filePath, 'r');
+//
+//        $client   = new \GuzzleHttp\Client(['base_uri' => $base_url
+//            /* pri guzzle-u se je potreno še enkrat (posebaj) avtenticirati */
+//            , 'auth'     => [ \IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass]
+//        ]);
+//        $response = $client->request('POST', $urlcel, [
+//            'multipart' => [
+//                [
+//                    'name'     => 'fileupload',
+//                    'contents' => fopen($filePath, 'r'),
+//                ],
+//            ]
+//        ]);
+//        codecept_debug($response);
+//
+//        /**
+//         * prikaži vsebino Datoteke
+//         */
+//        $this->obj2 = $dat        = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+//        codecept_debug($dat);
+//    }
+//
+//    /**
+//     * @depends uploadDatoteke
+//     * @param ApiTester $I
+//     */
+//    public function downloadDatoteke(ApiTester $I)
+//    {
+//        $resp = $I->successfullyGetAttachment($this->downloadUrl, $this->obj2['id']);
+//        codecept_debug($resp);
+//
+//        /**
+//         * prikaži vsebino Datoteke
+//         */
+//        $this->obj2['id'] = $dat              = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+//        codecept_debug($dat);
+//    }
 
 }

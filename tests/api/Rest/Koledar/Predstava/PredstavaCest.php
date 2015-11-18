@@ -361,7 +361,7 @@ class PredstavaCest
     {
         $resp = $I->successfullyDeleteRelation($this->restUrl, $this->obj2['id'], "abonmaji", $this->objAbonma1['id']);
 
-        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "abonmaji", $this->objAbonma1['id']);
+        $resp = $I->emptyGetRelation($this->restUrl, $this->obj2['id'], "abonmaji", $this->objAbonma1['id']);
     }
 
 }

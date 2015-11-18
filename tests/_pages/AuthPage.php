@@ -59,5 +59,9 @@ class AuthPage
     public static $rikardPass  = "Rikard1234567";
     public static $gorazd      = "gorazd@ifigenija.si";
     public static $gorazdPass  = "Gorazd1234567";
+    public static $cene        = "cene@ifigenija.si";
+    public static $cenePass    = "Cene1234567";
+    public static $dana        = "dana@ifigenija.si";
+    public static $danaPass    = "Dana1234567";
 
 }

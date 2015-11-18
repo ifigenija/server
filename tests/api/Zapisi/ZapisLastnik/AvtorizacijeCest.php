@@ -114,7 +114,7 @@ class AvtorizacijeCest
      * 
      * @param ApiTester $I
      */
-    public function createZWriteBrezWriteZaEntitetoLasnika(ApiTester $I)
+    public function createZWriteBrezWriteZaEntitetoLastnika(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
 

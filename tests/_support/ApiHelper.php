@@ -252,6 +252,7 @@ class ApiHelper
      */
     public function successfullyGetRelation($url, $id1, $ent, $id2)
     {
+        codecept_debug($url);
         $I = $this->getModule('REST');
 
         // sestavimo geturl, glede na to, če sta id1 in id2 prazna
@@ -412,11 +413,45 @@ class ApiHelper
 
         $I->sendGET($geturl);
 
-        $I->seeResponseCodeIs('200');
+        $I->dontSeeResponseCodeIs('200');
         $I->seeResponseIsJson();
 //        $resp = $I->grabDataFromJsonResponse();
         $resp = $I->grabResponse();
-        codecept_debug($resp);
+//        $I->assertEquals($resp, "[]", "Json prazen seznam");
+        return $I->grabDataFromResponseByJsonPath('$.errors');
+    }
+
+    /**
+     * get  po ID-ju objekta in relacije po ID 
+     * in preverja, če je rezultat prazen seznam 
+     * 
+     * @param string $url
+     * @param string $id1
+     * @param string $ent
+     * @param string $id2
+     * @return array
+     */
+    public function emptyGetRelation($url, $id1, $ent, $id2)
+    {
+        codecept_debug($url);
+        $I = $this->getModule('REST');
+
+        // sestavimo geturl, glede na to, če sta id1 in id2 prazna
+        $geturl = $url;
+        if (!empty($id1)) {
+            $geturl = $geturl . '/' . $id1;
+        }
+        $geturl = $geturl . "/" . $ent;
+        if (!empty($id2)) {
+            $geturl = $geturl . '/' . $id2;
+        }
+
+        $I->sendGET($geturl);
+
+//        $I->dontSeeResponseCodeIs('200');
+        $I->seeResponseIsJson();
+//        $resp = $I->grabDataFromJsonResponse();
+        $resp = $I->grabResponse();
         $I->assertEquals($resp, "[]", "Json prazen seznam");
         return $I->grabDataFromResponseByJsonPath('$.errors');
     }

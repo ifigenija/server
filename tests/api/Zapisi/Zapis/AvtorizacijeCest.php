@@ -108,6 +108,9 @@ class AvtorizacijeCest
 
         $this->lookUprizoritev3 = $look                   = $I->lookupEntity("uprizoritev", "0003", false);
         codecept_debug($look);
+
+        $this->lookUprizoritev4 = $look                   = $I->lookupEntity("uprizoritev", "0004", false);
+        codecept_debug($look);
     }
 
     /**
@@ -152,8 +155,20 @@ class AvtorizacijeCest
         $this->objZapis2 = $prip            = $I->successfullyCreate($this->zapisUrl . "?lastnik=" . $l['id'], $data);
         codecept_debug($this->objZapis2);
 
-        $this->objDatoteka1 = $prip['datoteka'];
+        $this->objDatoteka2 = $prip['datoteka'];
         $I->assertEquals($data['title'], $prip['title'], " title");
+
+        /**
+         * še en zapis
+         */
+        $data            = [
+            'title'       => 'miška',
+            'tip'         => 'datoteka',
+            'description' => "",
+            'vrsta'       => null,
+        ];
+        $this->objZapis3 = $prip            = $I->successfullyCreate($this->zapisUrl . "?lastnik=" . $l['id'], $data);
+        codecept_debug($this->objZapis2);
     }
 
     /**
@@ -195,6 +210,9 @@ class AvtorizacijeCest
         $data['ime']         = 'm3r';
         $data['javniDostop'] = 'R';
         $this->objMapa3      = $I->successfullyCreate($this->mapaUrl, $data);
+
+        $data['ime']    = 'm5r';
+        $this->objMapa5 = $I->successfullyCreate($this->mapaUrl, $data);
     }
 
     /**
@@ -246,7 +264,6 @@ class AvtorizacijeCest
          * v append mapo lahko dodaja
          */
         $I->successfullyUpdate($this->mapaUrl, $this->objMapa4['id'] . "/zapisi/" . $this->objZapis2['id'], []);
-
         /**
          * iz append mapo lahko odvzame zapis
          */
@@ -254,13 +271,13 @@ class AvtorizacijeCest
         /**
          * u1 lahko uploada
          */
-        $client    = new \GuzzleHttp\Client(['base_uri' => $this->baseUrl
+        $client          = new \GuzzleHttp\Client(['base_uri' => $this->baseUrl
             /* pri guzzle-u se je potreno še enkrat (posebaj) avtenticirati */
             , 'auth'     => [ \IfiTest\AuthPage::$vlado, \IfiTest\AuthPage::$vladoPass]
         ]);
-        $requestOk = true; //init
+        $requestOk       = true; //init
         try {
-            $resp = $client->request('POST', $this->uploadUrl . "/" . $this->objDatoteka1['id'], [
+            $resp = $client->request('POST', $this->uploadUrl . "/" . $this->objDatoteka2['id'], [
                 'multipart' => [ [ 'name' => 'fileupload', 'contents' => fopen('data/fileexamples/a.txt', 'r')],]]);
         } catch (\Exception $ex) {
             $requestOk = false;
@@ -285,7 +302,7 @@ class AvtorizacijeCest
         /**
          * u2 ne more downloadati
          */
-        $resp = $I->failToGetAttachment($this->downloadUrl, $this->objDatoteka1['id']);
+        $resp = $I->failToGetAttachment($this->downloadUrl, $this->objDatoteka2['id']);
         codecept_debug($resp);
         $I->assertEquals(1007072, $resp[0][0]['code']);
     }
@@ -335,7 +352,7 @@ class AvtorizacijeCest
         ]);
         $requestOk       = true; //init
         try {
-            $resp = $client->request('POST', $this->uploadUrl . "/" . $this->objDatoteka1['id'], [
+            $resp = $client->request('POST', $this->uploadUrl . "/" . $this->objDatoteka2['id'], [
                 'multipart' => [ [ 'name' => 'fileupload', 'contents' => fopen('data/fileexamples/a.txt', 'r')],]]);
         } catch (\Exception $ex) {
             $requestOk = false;
@@ -356,7 +373,7 @@ class AvtorizacijeCest
         /**
          * u2 lahko downloada
          */
-        $resp = $I->successfullyGetAttachment($this->downloadUrl, $this->objDatoteka1['id']);
+        $resp = $I->successfullyGetAttachment($this->downloadUrl, $this->objDatoteka2['id']);
         codecept_debug($resp);
     }
 
@@ -396,6 +413,63 @@ class AvtorizacijeCest
     }
 
     /**
+     * preveri avtorizacijo listanje zapisov v mapi 
+     * 
+     * to je 1. korak od poveži zapis iz mape
+     * 
+     * @param ApiTester $I
+     */
+    public function checkListZapisiVReadMapi(ApiTester $I)
+    {
+        /**
+         * u nima Mapa-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
+        $resp = $I->failToGetRelation($this->mapaUrl, $this->objMapa5['id'], "zapisi", "");
+        codecept_debug($resp);
+        $I->assertEquals(100699, $resp[0][0]['code']);
+
+        /**
+         * u2 ima Mapa-read dovoljenje
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->successfullyGetRelation($this->mapaUrl, $this->objMapa5['id'], "zapisi", "");
+        codecept_debug($resp);
+    }
+
+    /**
+     * preveri avtorizacijo listanje zapisov v mapi 
+     * 
+     * to je 2. korak od poveži zapis iz mape
+     * 
+     * @param ApiTester $I
+     */
+    public function checkDodajZapisEntiteti(ApiTester $I)
+    {
+        /**
+         * u brez Zapis-read ,
+         * a z entity-write, ZapisLastnik-write 
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
+        $data = [
+            'lastnik'       => $this->lookUprizoritev4['id'],
+            'classLastnika' => 'Uprizoritev',
+            'zapis'         => $this->objZapis3,
+        ];
+        $resp = $I->failToCreate($this->lastnikUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001141, $resp[0]['code']);
+
+        /**
+         * u z Zapis-read 
+         * in tudi z entity-write, ZapisLastnik-write 
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$dana, \IfiTest\AuthPage::$danaPass);
+        $resp = $I->successfullyCreate($this->lastnikUrl, $data);
+        codecept_debug($resp);
+    }
+
+    /**
      * 3. scenarij Zapis (ima 2 write lastnika)   in  je v 2 append in eni read mapah 
      *   . u1 nima update dostopa
      *   . u2 ima read dostop
@@ -423,7 +497,7 @@ class AvtorizacijeCest
         ]);
         $requestOk       = true; //init
         try {
-            $resp = $client->request('POST', $this->uploadUrl . "/" . $this->objDatoteka1['id'], [
+            $resp = $client->request('POST', $this->uploadUrl . "/" . $this->objDatoteka2['id'], [
                 'multipart' => [ [ 'name' => 'fileupload', 'contents' => fopen('data/fileexamples/a.txt', 'r')],]]);
         } catch (\Exception $ex) {
             $requestOk = false;
@@ -444,7 +518,7 @@ class AvtorizacijeCest
         /**
          * u2 lahko downloada
          */
-        $resp = $I->successfullyGetAttachment($this->downloadUrl, $this->objDatoteka1['id']);
+        $resp = $I->successfullyGetAttachment($this->downloadUrl, $this->objDatoteka2['id']);
         codecept_debug($resp);
     }
 

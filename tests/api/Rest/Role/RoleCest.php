@@ -333,7 +333,7 @@ class RoleCest
     {
         $resp = $I->successfullyDeleteRelation($this->restUrl, $this->objRole2['id'], "permissions", $this->objPermission1['id']);
 
-        $resp = $I->failToGetRelation($this->restUrl, $this->objRole2['id'], "permissions", $this->objPermission1['id']);
+        $resp = $I->emptyGetRelation($this->restUrl, $this->objRole2['id'], "permissions", $this->objPermission1['id']);
     }
 
     /**
@@ -377,7 +377,7 @@ class RoleCest
     {
         $resp = $I->successfullyDeleteRelation($this->restUrl, $this->objRole2['id'], "users", $this->lookUser1['id']);
 
-        $resp = $I->failToGetRelation($this->restUrl, $this->objRole2['id'], "users", $this->lookUser1['id']);
+        $resp = $I->emptyGetRelation($this->restUrl, $this->objRole2['id'], "users", $this->lookUser1['id']);
     }
 
 }

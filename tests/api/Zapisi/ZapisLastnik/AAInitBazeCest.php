@@ -4,7 +4,7 @@
  *  Licenca GPLv3
  */
 
-namespace Rest\Koledar\Predstava;
+namespace Zapisi\ZapisLastnik;
 
 use ApiTester;
 

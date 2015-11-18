@@ -77,7 +77,29 @@
         - Zapis-read
         - Oseba-read
         - Datoteka-read
-       
+        - Uprizoritev-write
+
+-
+    name: testni uporabnik za testiranje zapisov
+    email: cene@ifigenija.si
+    password: Cene1234567
+    enabled: true
+    roles:
+        - ZapisLastnik-read
+        - ZapisLastnik-write
+        - Uprizoritev-write
+        - Uprizoritev-read
+-
+    name: testni uporabnik za testiranje zapisov
+    email: dana@ifigenija.si
+    password: Dana1234567
+    enabled: true
+    roles:
+        - ZapisLastnik-read
+        - ZapisLastnik-write
+        - Uprizoritev-write
+        - Uprizoritev-read
+        - Zapis-read
 -
     name: testni uporabnik za testiranje zapisov
     email: vinko@ifigenija.si
@@ -88,6 +110,7 @@
         - Mapa-write
         - MapaAcl-write
         - Zapis-write
+        - Zapis-read
         - Datoteka-write
 -
     name: testni uporabnik za testiranje zapisov
@@ -100,6 +123,7 @@
         - Mapa-append
         - MapaAcl-write
         - Zapis-write
+        - Zapis-read
         - Datoteka-write
         
 -
@@ -116,6 +140,7 @@
         - Mapa-read
         - MapaAcl-write
         - Zapis-write	
+        - Zapis-read	
         - Datoteka-write
 
 -
