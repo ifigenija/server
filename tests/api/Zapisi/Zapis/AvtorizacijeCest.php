@@ -287,7 +287,7 @@ class AvtorizacijeCest
          */
         $resp = $I->failToGetAttachment($this->downloadUrl, $this->objDatoteka1['id']);
         codecept_debug($resp);
-        $I->assertEquals(1007078, $resp[0][0]['code']);
+        $I->assertEquals(1007072, $resp[0][0]['code']);
     }
 
     /**
