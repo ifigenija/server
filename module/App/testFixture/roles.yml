@@ -234,4 +234,11 @@
     description: 'Vloga z 1 dovoljenjem'
     permissions: 
         - Datoteka-read
+- 
+    name: tajnicaXY
+    description: 'vloga se uporablja v predstavitvah avtorizacij'
+    permissions: 
+        - Popa-read
+        - Popa-write
+        - Uprizoritev-read
         

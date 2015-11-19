@@ -156,3 +156,10 @@
         - Zapis-read
         - Oseba-read
         - Datoteka-read
+-
+    name: Denisa testna
+    email: denisa@ifigenija.si
+    password: Denisa1234567
+    enabled: true
+    roles: 
+        - tajnicaXY
