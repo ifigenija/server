@@ -30,7 +30,8 @@ class PermissionCest
 
     private $restUrl = '/rest/permission';
     private $roleUrl = '/rest/role';
-    private $obj;
+    private $obj1;
+    private $obj2;
     private $objPermission2;
     private $objRole1;
     private $objRole2;
@@ -43,6 +44,85 @@ class PermissionCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     *  kreiramo dovoljenje
+     * 
+     * @param ApiTester $I
+     */
+    public function create(ApiTester $I)
+    {
+        $data       = [
+            'description' => 'dovoljenje testni A',
+            'name'        => 'TESTA',
+        ];
+        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
+
+        $data       = [
+            'description' => 'dovoljenje testni B',
+            'name'        => 'TESTB',
+        ];
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
+    }
+
+    /**
+     * spremenim zapis
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function update(ApiTester $I)
+    {
+        $ent                = $this->obj1;
+        $ent['description'] = 'to je A';
+
+        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+
+        $I->assertEquals($entR['description'], $ent['description']);
+    }
+
+    /**
+     * Preberem zapis in preverim vsa polja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function read(\ApiTester $I)
+    {
+        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
+        codecept_debug($ent);
+
+        $I->assertGuid($ent['id']);
+        $I->assertEquals($ent['name'], 'TESTA');
+        $I->assertEquals($ent['description'], 'to je A');
+        $I->assertEquals($ent['builtIn'], false); //sam določi
+    }
+
+    /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListDefault(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->restUrl , []);
+        $list = $resp['data'];
+
+        $I->assertNotEmpty($list);
+        $I->assertGreaterThanOrEqual(170, $resp['state']['totalRecords']);
+    }
+
+    /**
+     * brisanje zapisa
+     * 
+     * @depends create
+     */
+    public function delete(ApiTester $I)
+    {
+        $I->successfullyDelete($this->restUrl, $this->obj1['id']);
+        $I->failToGet($this->restUrl, $this->obj1['id']);
     }
 
     /**
@@ -61,7 +141,7 @@ class PermissionCest
         $I->assertNotEmpty($ent);
     }
 
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
@@ -75,7 +155,6 @@ class PermissionCest
         $I->assertEquals(2, $resp['state']['totalRecords']);
     }
 
-    
     /**
      * kreiramo rolo 
      * 
@@ -136,7 +215,6 @@ class PermissionCest
         $resp = $I->successfullyGetRelation($this->restUrl, $this->objPermission2['id'], "roles", $this->objRole1['id']);
         $I->assertEquals(1, count($resp));
     }
-
 
     /**
      * brisanje relacij

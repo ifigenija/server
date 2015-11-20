@@ -94,4 +94,46 @@ class Permissions
         return true;
     }
 
+    /**
+     * 
+     * @param Permission $object
+     * @param type $params
+     * @return boolean
+     */
+    public function update($object, $params = null)
+    {
+        if (!empty($params) && array_key_exists('__relation', $params) && $params['__relation'] == 'roles') {
+            /**
+             * dodajanje vlog k dovoljenjem
+             * možno dodajati le ne vgrajene vloge
+             * $$ dokončaj: - poglej computeAssociationChanges, computeChangeSet
+             */
+            $uow  = $this->getEntityManager()->getUnitOfWork();
+            $spremembeA = $uow->getEntityChangeSet($object); //verjetno nič ne pomaga ta ukaz $$
+        } else {
+            /**
+             * rest update dovoljen le za nevgrajena dovoljenja
+             */
+            $this->expect(!$object->getBuiltIn(), "Vgrajenih dovoljenj ni dovoljeno spreminjati", 1001400);
+        }
+
+
+        parent::update($object, $params);
+        return true;
+    }
+
+    /**
+     * 
+     * @param Permission $object
+     */
+    public function delete($object)
+    {
+        /**
+         * rest delete dovoljen le za nevgrajena dovoljenja
+         */
+        $this->expect(!$object->getBuiltIn(), "Vgrajenih dovoljenj ni dovoljeno brisati", 1001401);
+
+        parent::delete($object);
+    }
+
 }

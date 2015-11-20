@@ -29,7 +29,7 @@ class RoleRpcService
     {
         // preverjanje avtorizacije
         $this->expectPermission("Aaa-write");
-        
+
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
         $tr = $this->getServiceLocator()->get('translator');
 
@@ -37,6 +37,9 @@ class RoleRpcService
                 ->findOneByName($rolename);
         if (!$role) {
             throw new \Max\Exception\UnauthException($tr->translate('Ni role'), 1000911);
+        }
+        if ($role->getBuiltIn() == TRUE) {
+            throw new \Max\Exception\UnauthException($tr->translate('Vloga je vgrajena'), 1000910);
         }
         $perm = $em->getRepository("Aaa\Entity\Permission")
                 ->findOneByName($permname);
@@ -75,18 +78,20 @@ class RoleRpcService
         if (!$role) {
             throw new \Max\Exception\UnauthException($tr->translate('Ni role'), 1000914);
         }
+        if ($role->getBuiltIn() == TRUE) {
+            throw new \Max\Exception\UnauthException($tr->translate('Vloga je vgrajena'), 1000913);
+        }
         $perm = $em->getRepository("Aaa\Entity\Permission")
                 ->findOneByName($permname);
         if (!$perm) {
             throw new \Max\Exception\UnauthException($tr->translate('Ni permission-a'), 1000915);
         }
-        
-        $perms = $role->getPermissions();   //$$ rb za implementirati
 
+        $perms = $role->getPermissions();   //$$ rb za implementirati
         // z metodo contains bomo preverili, če vloga že ima permission
         if ($perms->contains($perm)) {
             // permission vlogi dodeljen, zato ga odvzami:
-            $role->removePermissions($perm);  
+            $role->removePermissions($perm);
             $em->flush();
         }
         return true;

@@ -29,26 +29,35 @@ use ApiTester;
  *      - depends
  *      - parametri
  * 
+ * 
  */
 class AvtorizacijeCest
 {
 
+    private $permUrl = '/rest/permission';
     private $roleUrl    = '/rest/role';
     private $userUrl    = '/rest/user';
     private $osebaUrl   = '/rest/oseba';
     private $rpcRoleUrl = '/rpc/aaa/role';
     private $rpcUserUrl = '/rpc/aaa/user';
-    private $objOseba1;
-    private $objOseba2;
-    private $objOseba3Prot;
-    private $lookOseba1;
-    private $lookOseba2;
-    private $lookOseba3Prot;
-    private $oseba;
-
+    private $objRole1;
+    private $objRole2;
+    private $objPermission1;
+    private $objPermission2;
+    private $objPermission3;
+     
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public function _before(ApiTester $I)
     {
-        
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
     }
 
     public function _after(ApiTester $I)
@@ -63,7 +72,6 @@ class AvtorizacijeCest
      */
     public function createVloge(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
         $data = [
             'name'        => 'TEST1R',
             'description' => 'Testna vloga',
@@ -112,8 +120,6 @@ class AvtorizacijeCest
      */
     public function grantPermissioneVlogam(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
-
         //1. vlogi read
         $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
             'rolename' => "TEST1R",
@@ -224,8 +230,6 @@ class AvtorizacijeCest
      */
     public function createUserje(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
-
         $data = [
             'email'    => \IfiTest\AuthPage::$test1,
             'name'     => 'Testni uporabnik za Cest testiranje',
@@ -275,8 +279,6 @@ class AvtorizacijeCest
      */
     public function grantRoleUporabnikom(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
-
         $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
             'username' => \IfiTest\AuthPage::$test1,
             'rolename' => 'TEST1R',
@@ -323,48 +325,6 @@ class AvtorizacijeCest
     }
 
     /**
-     * Ustvari podatke - tri osebe
-     * 
-     * @param ApiTester $I
-     */
-//    public function createOsebe(ApiTester $I)
-//    {
-//        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
-//
-//        $data            = [
-//            'naziv'   => 'xx',
-//            'ime'     => 'xx',
-//            'priimek' => 'xx',
-//            'email'   => 'x@xxx.xx',
-//        ];
-//        $this->objOseba1 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
-//        $I->assertEquals('xx', $oseba['ime']);
-//        $I->assertNotEmpty($oseba['id']);
-//
-//        // 2. oseba:
-//        $data            = [
-//            'naziv'   => 'yy',
-//            'ime'     => 'yy',
-//            'priimek' => 'yy',
-//            'email'   => 'y@yyy.yy',
-//        ];
-//        $this->objOseba2 = $oseba           = $I->successfullyCreate($this->osebaUrl, $data);
-//        $I->assertEquals('yy', $oseba['ime']);
-//        $I->assertNotEmpty($oseba['id']);
-//
-//        // 3. oseba: z assert zaščitena
-//        $data                = [
-//            'naziv'   => 'zz',
-//            'ime'     => 'zz',
-//            'priimek' => 'write protected12345',
-//            'email'   => 'zz@yyy.yy',
-//        ];
-//        $this->objOseba3Prot = $oseba               = $I->successfullyCreate($this->osebaUrl, $data);
-//        $I->assertEquals('zz', $oseba['ime']);
-//        $I->assertNotEmpty($oseba['id']);
-//    }
-
-    /**
      * Sproba getList dostop z Read uporabnikom
      * 
      * @depends createUserje
@@ -373,7 +333,6 @@ class AvtorizacijeCest
     public function getListZReadUserjem(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$test1, \IfiTest\AuthPage::$test1Pass);
-
 
         $list = $I->successfullyGetList($this->osebaUrl, []);
         $I->assertNotEmpty($list);
@@ -432,7 +391,6 @@ class AvtorizacijeCest
      */
     public function dostopiZWriteUserjem(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
         $oseba = $I->successfullyGet($this->osebaUrl, $this->lookOseba1['id']);
 
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$test2, \IfiTest\AuthPage::$test2Pass);
@@ -568,7 +526,6 @@ class AvtorizacijeCest
      */
     public function assertPoVsebiniNaUserja(ApiTester $I)
     {
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
         $data = $I->successfullyGet($this->osebaUrl, $this->lookOseba3Prot['id']);
 
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$test4, \IfiTest\AuthPage::$test4Pass);
@@ -580,6 +537,156 @@ class AvtorizacijeCest
         // dostop uspe zaradi posebnega dovoljenja "Oseba-vse"
         $I->successfullyUpdate($this->osebaUrl, $data['id'], $data);
         $I->assertEquals($data['ime'], 'cirkocarko');
+    }
+
+    /**
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateRole(ApiTester $I)
+    {
+        $role                = $this->obj;
+        $role['description'] = 'spremenjeno';
+        $role['name']        = 'TEST4S';
+
+        $this->obj = $role      = $I->successfullyUpdate($this->permUrl, $role['id'], $role);
+
+        $I->assertEquals('TEST4S', $role['name']);
+        $I->assertEquals('spremenjeno', $role['description']);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupRole(ApiTester $I)
+    {
+        /**
+         * poiščemo built in vloge
+         */
+        $look           = $I->lookupEntity("role", "Oseba-read", false);
+        $this->objRole1 = $ent            = $I->successfullyGet($this->roleUrl, $look['id']);
+        codecept_debug($ent);
+//        $I->assertEquals($ent['builtIn'], true); // $$ zaenkrat ne vrača tega podatka
+    }
+
+    /**
+     * update ne sme uspeti za built in vloge
+     * 
+     * @depends lookupRole
+     * @param ApiTester $I
+     */
+    public function update(ApiTester $I)
+    {
+        $ent  = $this->objRole1;
+        $resp = $I->failToUpdate($this->roleUrl, $ent['id'], $ent);
+        $I->assertEquals(1001500, $resp[0]['code']);
+    }
+
+    /**
+     * brisanje ne sme uspeti za builtin vloge
+     * 
+     * @depends lookupRole
+     * @param ApiTester $I
+     * 
+     * @param ApiTester $I
+     */
+    public function delete(ApiTester $I)
+    {
+        $resp = $I->failToDelete($this->roleUrl, $this->objRole1['id']);
+        $I->assertEquals(1001501, $resp[0]['code']);
+    }
+
+    /**
+     * kreiranje dovoljenja
+     * 
+     * @param ApiTester $I
+     */
+    public function create(ApiTester $I)
+    {
+        /**
+         * uporabnik brez dovoljenj
+         * ne more kreirati vloge
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $data = [
+            'description' => 'breznikov',
+            'name'        => 'TEST breznikov',
+        ];
+        $resp = $I->failToCreate($this->roleUrl, $data);
+        $I->assertEquals(1000008, $resp[0]['code']);
+    }
+
+    /**
+     * built in vlogam ne sme pustiti dodajanja dovoljenj
+     * 
+     * @param ApiTester $I
+     */
+    public function grantPermissionBuiltInVlogi(ApiTester $I)
+    {
+        /*
+         * built in vloga
+         */
+        $resp = $I->failCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => $this->objRole1['name'],
+            'permname' => 'OptionValue-read',
+        ]);
+        $I->assertEquals(1000910, $resp['code']);
+    }
+
+    /**
+     * built in vlogam ne sme pustiti odvzemanja dovoljenj
+     * 
+     * @param ApiTester $I
+     */
+    public function revokePermissionaBuiltInVlogi(ApiTester $I)
+    {
+        /*
+         * built in vloga
+         */
+        $resp = $I->failCallRpc($this->rpcRoleUrl, 'revoke', [
+            'rolename' => $this->objRole1['name'],
+            'permname' => 'OptionValue-read',
+        ]);
+        $I->assertEquals(1000913, $resp['code']);
+    }
+
+        /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupPermission(ApiTester $I)
+    {
+        $look                 = $I->lookupEntity("permission", "Trr-read", false);
+        $this->objPermission1 = $ent                  = $I->successfullyGet($this->permUrl, $look['id']);
+
+        $look                 = $I->lookupEntity("permission", "Trr-write", false);
+        $this->objPermission2 = $ent                  = $I->successfullyGet($this->permUrl, $look['id']);
+    }
+
+    /**
+     * dodajanje dovoljenja vgrajeni vlogi ne sme biti dovoljeno 
+     * 
+     * @param ApiTester $I
+     */
+    public function ustvariRelacijoVgrajeneSPermissionom(ApiTester $I)
+    {
+        $resp = $I->failToUpdate($this->roleUrl, $this->objRole1['id'] . "/permissions/" . $this->objPermission1['id'], []);
+        $I->assertEquals(1001500, $resp[0]['code']);
+    }
+
+    /**
+     * brisanje dovoljenja vgrajeni vlogi ne sme biti dovoljeno 
+     * 
+     * @param ApiTester $I
+     */
+    public function brisiRelacijaVgrajeneSPermissionom(ApiTester $I)
+    {
+        $resp = $I->failToUpdate($this->roleUrl, $this->objRole1['id'] . "/permissions/" . $this->objPermission1['id'], []);
+        $I->assertEquals(1001500, $resp[0]['code']);
+       
+        $I->assertTrue(false, '$$ začasno');
     }
 
 }

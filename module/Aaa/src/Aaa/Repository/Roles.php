@@ -154,4 +154,38 @@ class Roles
         return $query->getArrayResult();
     }
 
+        /**
+     * 
+     * @param Role $object
+     * @param type $params
+     * @return boolean
+     */
+    public function update($object, $params = null)
+    {
+
+        /**
+         * rest update dovoljen le za nevgrajena dovoljenja
+         */
+        $this->expect(!$object->getBuiltIn(), "Vgrajenih vlog ni dovoljeno spreminjati", 1001500);
+
+        parent::update($object, $params);
+        return true;
+    }
+
+    /**
+     * 
+     * @param Permission $object
+     */
+    public function delete($object)
+    {
+        /**
+         * rest delete dovoljen le za nevgrajena dovoljenja
+         */
+        $this->expect(!$object->getBuiltIn(), "Vgrajenih vlog ni dovoljeno brisati", 1001501);
+
+        parent::delete($object);
+    }
+
+    
+    
 }
