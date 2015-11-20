@@ -10,15 +10,21 @@
         - Alternacija-write
         - Arhivalija-read
         - Arhivalija-write
+        - AuthStorage-read
+        - AuthStorage-write
         - AvtorBesedila-read
         - AvtorBesedila-write
         - Besedilo-read
         - Besedilo-write
+        - Datoteka-read
+        - Datoteka-write
+        - Dogodek-read
+        - Dogodek-readVse 
+        - Dogodek-write
         - DogodekSplosni-read
         - DogodekSplosni-write
-        - Dogodek-read
-        - Dogodek-readVse
-        - Dogodek-write
+        - DogodekTehnicni-read
+        - DogodekTehnicni-write
         - DrugiVir-read
         - DrugiVir-write
         - Drzava-read
@@ -29,22 +35,29 @@
         - Funkcija-write
         - Gostovanje-read
         - Gostovanje-write
-        - Gostujoca-read
-        - Gostujoca-write
+        - Job-admin
+        - Job-read
+        - Job-write
         - KontaktnaOseba-read
         - KontaktnaOseba-write
         - Kupec-read
         - Kupec-write
+        - Mapa-append
+        - Mapa-read
+        - Mapa-write
+        - Mapa-writeroot
+        - MapaAcl-read
+        - MapaAcl-write
         - NacinPlacina-read
         - NacinPlacina-write
         - Option-read
+        - Option-write
         - OptionValue-read
         - OptionValue-write
-        - Option-write
         - OrganizacijskaEnota-read
         - OrganizacijskaEnota-write
         - Oseba-read
-        - Oseba-vse
+        - Oseba-vse 
         - Oseba-write
         - PlacilniInstrument-read
         - PlacilniInstrument-write
@@ -55,11 +68,11 @@
         - Popa-read
         - Popa-write
         - Posta-read
+        - Posta-write
         - PostavkaCDve-read
         - PostavkaCDve-write
         - PostavkaRacuna-read
         - PostavkaRacuna-write
-        - Posta-write
         - PostniNaslov-read
         - PostniNaslov-write
         - Praznik-read
@@ -100,26 +113,28 @@
         - Racun-write
         - RazpisanSedez-read
         - RazpisanSedez-write
-        - Rekviziterstvo-read
-        - Rekviziterstvo-write
         - Rekvizit-read
         - Rekvizit-write
+        - Rekviziterstvo-read
+        - Rekviziterstvo-write
+        - Report-read
+        - Report-write
         - Revizija-read
         - Revizija-write
         - Rezervacija-read
         - Rezervacija-write
-        - SedezniRed-read
-        - SedezniRed-write
         - Sedez-read
         - Sedez-write
+        - SedezniRed-read
+        - SedezniRed-write
         - Sezona-read
         - Sezona-write
+        - Stevilcenje-read
+        - Stevilcenje-write
         - StevilcenjeKonfig-read
         - StevilcenjeKonfig-write
-        - Stevilcenje-read
         - StevilcenjeStanje-read
         - StevilcenjeStanje-write
-        - Stevilcenje-write
         - StrosekUprizoritve-read
         - StrosekUprizoritve-write
         - Telefonska-read
@@ -145,6 +160,12 @@
         - VrstaSedezev-write
         - VrstaStroska-read
         - VrstaStroska-write
+        - VrstaZapisa-read
+        - VrstaZapisa-write
+        - Zapis-read
+        - Zapis-write
+        - ZapisLastnik-read
+        - ZapisLastnik-write
         - Zaposlitev-read
         - Zaposlitev-write
         - Zasedenost-read
@@ -153,6 +174,9 @@
         - ZvrstSurs-write
         - ZvrstUprizoritve-read
         - ZvrstUprizoritve-write
+
+
+
 - 
     name: ZapisLastnik-read
     description: 'Vloga z 1 dovoljenjem'

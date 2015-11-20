@@ -3876,7 +3876,7 @@ trait ApiTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * get  po ID-ju objekta in relacije po ID 
-     * dobi prazen seznam kot rezultat 
+     * in preverja, če je rezultat prazen seznam 
      * 
      * @param string $url
      * @param string $id1

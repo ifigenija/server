@@ -2,7 +2,9 @@
     name: Administrator
     email: admin@ifigenija.si
     enabled: true
-    roles: [ifi-all]
+    roles: 
+        - ifi-all
+
 -
     name: Konzolcni
     email: console@ifigenija.si

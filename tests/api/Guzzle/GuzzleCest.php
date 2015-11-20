@@ -57,14 +57,15 @@ class GuzzleCest
         $I->assertTrue(true, " sedaj izpišemo response po ->get: ");
         codecept_debug($response);
         $body     = $response->getBody();
-        $I->assertTrue(true, " body: ");
+        $I->assertTrue(true, " body 1: ");
         codecept_debug($body);
 
-        $response = $client->get('http://www.henrik.si/');
+        
+        $response = $client->get('http://www.najdi.si/');
         $I->assertTrue(true, " sedaj izpišemo response po ->get 2: ");
         codecept_debug($response);
         $body     = $response->getBody();
-        $I->assertTrue(true, " body: ");
+        $I->assertTrue(true, " body 2: ");
         codecept_debug($body);
     }
 

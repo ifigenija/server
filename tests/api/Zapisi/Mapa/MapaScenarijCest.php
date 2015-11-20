@@ -26,6 +26,7 @@ class MapaScenarijCest
     protected $pod9;
     protected $lookPermission1;
     protected $lookPermission2;
+    protected $lookPermission3writeroot;
 
     /**
      * @param ApiTester $I
@@ -36,6 +37,9 @@ class MapaScenarijCest
         $I->assertNotEmpty($look);
 
         $this->lookPermission2 = $look                  = $I->lookupEntity("permission", "Uprizoritev-write", false);
+        $I->assertNotEmpty($look);
+
+        $this->lookPermission3writeroot = $look                           = $I->lookupEntity("permission", "Mapa-writeroot", false);
         $I->assertNotEmpty($look);
     }
 
@@ -221,6 +225,17 @@ class MapaScenarijCest
         ];
         $this->root3 = $m           = $I->successfullyCreate($this->mapaUrl, $data);
         codecept_debug($m);
+
+        /**
+         * dodamo acl, dalo z vsemi dovoljenji potem spreminjaš to mapo
+         * sicer bi lahko le lastnik in userjji z ifi-all vlogo
+         */
+        $data = [
+            'mapa'   => $this->root3['id'],
+            'perm'   => $this->lookPermission3writeroot['id'],
+            'dostop' => 'ARW',
+        ];
+        $ent  = $I->successfullyCreate($this->aclUrl, $data);
     }
 
     /**
@@ -428,7 +443,6 @@ class MapaScenarijCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
         $data['ime'] = 'podmapa vihra';
         $this->pod6  = $I->successfullyCreate($this->mapaUrl, $data);
-
     }
 
     /**
@@ -550,4 +564,5 @@ class MapaScenarijCest
     }
 
 }
+
 //        $I->assertTrue(false, "$$ začasno");
