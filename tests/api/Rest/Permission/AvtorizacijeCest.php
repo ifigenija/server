@@ -30,6 +30,7 @@ class AvtorizacijeCest
     private $objRole2;
     private $objPermission1;
     private $objPermission2;
+    private $objPermission3;
 
     public function _before(ApiTester $I)
     {
@@ -59,6 +60,10 @@ class AvtorizacijeCest
         $this->objPermission2 = $ent                  = $I->successfullyGet($this->restUrl, $look['id']);
         codecept_debug($ent);
         $I->assertEquals($ent['builtIn'], true);
+
+        $look                 = $I->lookupEntity("permission", "Popa-write", false);
+        $this->objPermission3 = $ent                  = $I->successfullyGet($this->restUrl, $look['id']);
+        codecept_debug($ent);
     }
 
     /**
@@ -70,8 +75,13 @@ class AvtorizacijeCest
         /**
          * poiščemo built in vloge
          */
-        $look            = $I->lookupEntity("role", "tajnicaXY", false);
-        $this->objRole1= $ent             = $I->successfullyGet($this->roleUrl, $look['id']);
+        $look           = $I->lookupEntity("role", "tajnicaXY", false);
+        $this->objRole1 = $ent            = $I->successfullyGet($this->roleUrl, $look['id']);
+        codecept_debug($ent);
+//        $I->assertEquals($ent['builtIn'], true); // $$ zaenkrat ne vrača tega podatka
+
+        $look           = $I->lookupEntity("role", "vsadovoljenja", false);
+        $this->objRole2 = $ent            = $I->successfullyGet($this->roleUrl, $look['id']);
         codecept_debug($ent);
 //        $I->assertEquals($ent['builtIn'], true); // $$ zaenkrat ne vrača tega podatka
     }
@@ -129,7 +139,6 @@ class AvtorizacijeCest
         ];
         $resp = $I->failToCreate($this->restUrl, $data);
         $I->assertEquals(1000008, $resp[0]['code']);
-
     }
 
     /**
@@ -140,12 +149,24 @@ class AvtorizacijeCest
      * 
      * @param ApiTester $I
      */
-    public function ustvariRelacijoZRolo(ApiTester $I)
+    public function ustvariRelacijoZVgrajenoRolo(ApiTester $I)
     {
         $resp = $I->failToUpdate($this->restUrl, $this->objPermission1['id'] . "/roles/" . $this->objRole1['id'], []);
-        $I->assertEquals(1001400, $resp[0]['code']);
-
-        $I->assertTrue(false, '$$ začasno');
+        $I->assertEquals(1001402, $resp[0]['code']);
     }
-    
+
+    /**
+     * ne sme pustiti brisanja relacije z vgrajeno vlogo
+     * 
+     * @depends lookupRole
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function deleteRelacijeZVgrajenoRolo(ApiTester $I)
+    {
+        $resp = $I->failToDelete($this->restUrl, $this->objPermission3['id'] . "/roles/" . $this->objRole1['id'], []);
+        $I->assertEquals(1001403, $resp[0]['code']);
+    }
+
 }

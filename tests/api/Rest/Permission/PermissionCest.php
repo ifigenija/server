@@ -32,6 +32,7 @@ class PermissionCest
     private $roleUrl = '/rest/role';
     private $obj1;
     private $obj2;
+    private $objPermission1;
     private $objPermission2;
     private $objRole1;
     private $objRole2;
@@ -107,7 +108,7 @@ class PermissionCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl , []);
+        $resp = $I->successfullyGetList($this->restUrl, []);
         $list = $resp['data'];
 
         $I->assertNotEmpty($list);

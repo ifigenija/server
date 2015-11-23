@@ -34,7 +34,7 @@ use ApiTester;
 class AvtorizacijeCest
 {
 
-    private $permUrl = '/rest/permission';
+    private $permUrl    = '/rest/permission';
     private $roleUrl    = '/rest/role';
     private $userUrl    = '/rest/user';
     private $osebaUrl   = '/rest/oseba';
@@ -45,16 +45,7 @@ class AvtorizacijeCest
     private $objPermission1;
     private $objPermission2;
     private $objPermission3;
-     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     public function _before(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
@@ -541,23 +532,6 @@ class AvtorizacijeCest
 
     /**
      * 
-     * @depends create
-     * @param ApiTester $I
-     */
-    public function updateRole(ApiTester $I)
-    {
-        $role                = $this->obj;
-        $role['description'] = 'spremenjeno';
-        $role['name']        = 'TEST4S';
-
-        $this->obj = $role      = $I->successfullyUpdate($this->permUrl, $role['id'], $role);
-
-        $I->assertEquals('TEST4S', $role['name']);
-        $I->assertEquals('spremenjeno', $role['description']);
-    }
-
-    /**
-     * 
      * @param ApiTester $I
      */
     public function lookupRole(ApiTester $I)
@@ -603,7 +577,7 @@ class AvtorizacijeCest
      * 
      * @param ApiTester $I
      */
-    public function create(ApiTester $I)
+    public function createPermission(ApiTester $I)
     {
         /**
          * uporabnik brez dovoljenj
@@ -652,7 +626,7 @@ class AvtorizacijeCest
         $I->assertEquals(1000913, $resp['code']);
     }
 
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
@@ -685,8 +659,6 @@ class AvtorizacijeCest
     {
         $resp = $I->failToUpdate($this->roleUrl, $this->objRole1['id'] . "/permissions/" . $this->objPermission1['id'], []);
         $I->assertEquals(1001500, $resp[0]['code']);
-       
-        $I->assertTrue(false, '$$ začasno');
     }
 
 }

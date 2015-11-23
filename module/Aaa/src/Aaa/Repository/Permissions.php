@@ -104,19 +104,33 @@ class Permissions
     {
         if (!empty($params) && array_key_exists('__relation', $params) && $params['__relation'] == 'roles') {
             /**
-             * dodajanje vlog k dovoljenjem
-             * možno dodajati le ne vgrajene vloge
-             * $$ dokončaj: - poglej computeAssociationChanges, computeChangeSet
+             * dodajanje dovoljenja vlogi
              */
-            $uow  = $this->getEntityManager()->getUnitOfWork();
-            $spremembeA = $uow->getEntityChangeSet($object); //verjetno nič ne pomaga ta ukaz $$
+            foreach ($object->getRoles() as $role) {
+                /**
+                 * built In vlogam ni dovoljeno dodajati dovoljenj
+                 */
+                $this->expect(!($role->getBuiltIn() && $role->getPermissions()->isDirty())
+                        , "Vgrajenim vlogam ni dovoljeno dodajati dovoljenj", 1001402);
+            }
+            /**
+             * brisanje dovoljenja vlogi
+             */
+            $uow       = $this->getEntityManager()->getUnitOfWork();
+            $uow->computeChangeSets();
+            foreach ($uow->getScheduledEntityUpdates() as $ent) {
+                /**
+                 * built In vlogam ni dovoljeno ovzemati dovoljenj
+                 */
+                $this->expect(!($ent instanceof \Aaa\Entity\Role && $ent->getBuiltIn() && $ent->getPermissions()->isDirty())
+                        , "Vgrajenim vlogam ni dovoljeno odvzemati dovoljenj", 1001403);
+            }
         } else {
             /**
              * rest update dovoljen le za nevgrajena dovoljenja
              */
             $this->expect(!$object->getBuiltIn(), "Vgrajenih dovoljenj ni dovoljeno spreminjati", 1001400);
         }
-
 
         parent::update($object, $params);
         return true;
