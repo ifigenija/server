@@ -40,7 +40,7 @@ return [
             'routes' => [
                 'user-password' => [
                     'options' => [
-                        'route'    => 'user resetpass <username> <password>',
+                        'route'    => 'user resetpass <username> [<password>]',
                         'defaults' => [
                             'controller' => 'Aaa\Cli',
                             'action'     => 'password'

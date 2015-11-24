@@ -64,7 +64,9 @@ class OsebaCest
     private $lookPopa1;
     private $lookPopa2;
     private $objUser;
-    private $lookUser;
+    private $lookUser1;
+    private $lookUser2;
+    private $lookUser3;
     private $trr;
     private $postni;
     private $tel;
@@ -129,7 +131,7 @@ class OsebaCest
      */
     public function lookupUser(ApiTester $I)
     {
-        $this->lookUser = $ent            = $I->lookupEntity("user", "tatjana@ifigenija.si", false);
+        $this->lookUser1 = $ent            = $I->lookupEntity("user", "tatjana@ifigenija.si", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -271,7 +273,7 @@ class OsebaCest
             'drzavljanstvo' => 'aa',
             'drzavaRojstva' => 'aa',
             'krajRojstva'   => 'aa',
-            'user'          => $this->lookUser['id'],
+            'user'          => $this->lookUser1['id'],
         ];
 
         $this->obj2 = $oseba      = $I->successfullyCreate($this->restUrl, $data);
@@ -1290,7 +1292,7 @@ class OsebaCest
     }
 
     /**
-     * @depends create
+     * @depends create 
      * @depends deletePostniNaslov
      */
     public function delete(ApiTester $I)

@@ -44,7 +44,7 @@ Class Module
     {
         return [
             'Upravljanje uporabnikov',
-            'user resetpass <username> <password>'                         => 'Ponastavi uporabnikovo geslo',
+            'user resetpass <username> [<password>]'                       => 'Ponastavi uporabnikovo geslo',
             'user (enable|disable) <username>'                             => 'Omogoči/onemogoči uporabnika',
             'user (grant|revoke) <username> <rolename>'                    => 'Dodaj/odstrani uporabnika v/iz skupino(e)',
             '(user|role) list [--username=username] [--rolename=rolename]' => 'Seznam uporavnikov / vlog',

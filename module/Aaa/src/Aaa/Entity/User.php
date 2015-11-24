@@ -215,13 +215,12 @@ class User
 
     public function setPassword($password)
     {
-        if ($password !== '' && $password !== null) {
-            if ($this->preveriGeslo($password)) {
-                $bcrypt         = new Bcrypt();
-                $bcrypt->setSalt(51292170311201451452855644564);  //$$ rb potrebno še dopolniti, da se bo salt generiral dinamično
-                $bcrypt->setCost(5);
-                $this->password = $bcrypt->create($password);
-            }
+        $this->expect(($password !== '' && $password !== null), "Geslo ne sme biti prazno", 1000474);
+        if ($this->preveriGeslo($password)) {
+            $bcrypt         = new Bcrypt();
+            $bcrypt->setSalt(51292170311201451452855644564);  //$$ rb potrebno še dopolniti, da se bo salt generiral dinamično
+            $bcrypt->setCost(5);
+            $this->password = $bcrypt->create($password);
         }
 
         return $this;

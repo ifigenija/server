@@ -23,10 +23,20 @@ class CliController
     public function passwordAction()
     {
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+
         $username = $this->params('username');
         $password = $this->params('password');
 
-        // nastavimo novo geslo
+        /**
+         * omogočimo prazen parameter password, da ga ni v GNU history Library
+         */
+        if (is_null($password)){
+            $password = readline('password:');
+        }
+        
+        /*
+         *  nastavimo novo geslo
+         */
         $user = $em->getRepository("Aaa\Entity\User")
                 ->resetPassword($username, $password);
 
