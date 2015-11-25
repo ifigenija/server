@@ -267,12 +267,12 @@
         - Uprizoritev-read
 - 
     name: mn-arhiv-arhivbesedil
-    description: vloga, ki pokriva akcije v meniju arhiv->arhivbesedil
+    description: omogoča akcije v meniju arhiv->arhivbesedil
     permissions: 
         - AvtorBesedila-write
         - Besedilo-write
         - Datoteka-write
-        - Oseba-write
+#        - Oseba-write
         - Zapis-write
         - ZapisLastnik-write
         - AvtorBesedila-read
@@ -283,26 +283,298 @@
         - ZapisLastnik-read
 - 
     name: mn-arhiv-arhivbesedil-r
-    description: vloga, ki pokriva read akcije v meniju arhiv->arhivbesedil
+    description: omogoča read akcije v meniju arhiv->arhivbesedil
     permissions: 
         - AvtorBesedila-read
         - Besedilo-read
         - Datoteka-read
         - Zapis-read
         - ZapisLastnik-read
+#        - Oseba-read
 - 
     name: mn-seznami-zaposleni
-    description: vloga, ki pokriva akcije v meniju arhiv->arhivbesedil
+    description: omogoča akcije v meniju Seznami->Zaposleni
     permissions: 
         - Oseba-read
-        - Oseba-write
+#        - Oseba-write
         - Zaposlitev-read
         - Zaposlitev-write
+        - OrganizacijskaEnota-read
 - 
     name: mn-seznami-zaposleni-r
-    description: vloga, ki pokriva read akcije v meniju arhiv->arhivbesedil
+    description: omogoča read akcije v meniju Seznami->Zaposleni
     permissions: 
 #        - Oseba-read
         - Zaposlitev-read
+# $$ ne vidi OE zaposlenega, ker rabi za lookup        
+#        - OrganizacijskaEnota-read
+- 
+    name: mn-seznami-poslovnipartnerji
+    description: omogoča akcije v meniju Seznami->Poslovni partnerji
+    permissions: 
+        - Telefonska-read
+        - PostniNaslov-read
+        - Oseba-read
+        - Zapis-read
+        - Trr-read
+        - Popa-read
+        - Datoteka-read
+        - ZapisLastnik-read
+        - KontaktnaOseba-read
+        - ProdukcijskaHisa-read
+        - Telefonska-write
+        - PostniNaslov-write
+#        - Oseba-write
+        - Zapis-write
+        - Trr-write
+        - Popa-write
+        - Datoteka-write
+        - ZapisLastnik-write
+        - KontaktnaOseba-write
+        - ProdukcijskaHisa-write
+        - Drzava-read
+        - TipPopa-read
 
        
+- 
+    name: mn-seznami-poslovnipartnerji-r
+    description: omogoča read akcije v meniju Seznami->Poslovni partnerji
+    permissions: 
+        - Telefonska-read
+        - PostniNaslov-read
+#        - Oseba-read
+        - Zapis-read
+        - Trr-read
+        - Popa-read
+        - Datoteka-read
+        - ZapisLastnik-read
+        - KontaktnaOseba-read
+        - ProdukcijskaHisa-read
+        - Drzava-read
+        - TipPopa-read
+       
+- 
+    name: mn-seznami-tipiposlovnihpartnerjev
+    description: omogoča akcije v meniju Seznami->Tipi poslovnih partnerjev
+    permissions: 
+        - TipPopa-read
+        - TipPopa-write
+- 
+    name: mn-seznami-tipiposlovnihpartnerjev-r
+    description: omogoča read akcije v meniju Seznami->Tipi poslovnih partnerjev
+    permissions: 
+        - TipPopa-read
+- 
+    name: mn-seznami-posta
+    description: omogoča akcije v meniju Seznami->Pošta
+    permissions: 
+        - Posta-read
+        - Posta-write
+- 
+    name: mn-seznami-posta-r
+    description: omogoča read akcije v meniju Seznami->Pošta
+    permissions: 
+        - Posta-read
+- 
+    name: mn-seznami-drzave
+    description: omogoča akcije v meniju Seznami->Države
+    permissions: 
+        - Drzava-read
+        - Drzava-write
+
+- 
+    name: mn-seznami-drzave-r
+    description: omogoča read akcije v meniju Seznami->Države
+    permissions: 
+        - Drzava-read
+- 
+    name: mn-seznami-vrsteuprizoritev
+    description: omogoča akcije v meniju Seznami->Vrste uprizoritev
+    permissions: 
+        - ZvrstUprizoritve-read
+        - ZvrstUprizoritve-write
+
+- 
+    name: mn-seznami-vrsteuprizoritev-r
+    description: omogoča read akcije v meniju Seznami->Vrste uprizoritev
+    permissions: 
+        - ZvrstUprizoritve-read
+- 
+    name: mn-seznami-zvrstiposurs
+    description: omogoča akcije v meniju Seznami->Zvrsti po SURS
+    permissions: 
+        - ZvrstSurs-read
+        - ZvrstSurs-write
+
+- 
+    name: mn-seznami-zvrstiposurs-r
+    description: omogoča read akcije v meniju Seznami->Zvrsti po SURS
+    permissions: 
+        - ZvrstSurs-read
+- 
+    name: mn-seznami-abonmaji
+    description: omogoča akcije v meniju Seznami->Abonmaji
+    permissions: 
+        - Abonma-read
+        - Abonma-write
+
+- 
+    name: mn-seznami-abonmaji-r
+    description: omogoča read akcije v meniju Seznami->Abonmaji
+    permissions: 
+        - Abonma-read
+- 
+    name: mn-seznami-prostori
+    description: omogoča akcije v meniju Seznami->Prostori
+    permissions: 
+        - Prostor-read
+        - Prostor-write
+
+- 
+    name: mn-seznami-prostori-r
+    description: omogoča read akcije v meniju Seznami->Prostori
+    permissions: 
+        - Prostor-read
+- 
+    name: mn-seznami-vrstestroska
+    description: omogoča akcije v meniju Seznami->Vrste stroška
+    permissions: 
+        - VrstaStroska-read
+        - VrstaStroska-write
+- 
+    name: mn-seznami-vrstestroska-r
+    description: omogoča read akcije v meniju Seznami->Vrste stroška
+    permissions: 
+        - VrstaStroska-read
+- 
+    name: mn-seznami-organizacijskeenote
+    description: omogoča akcije v meniju Seznami->Organizacijske enote
+    permissions: 
+        - OrganizacijskaEnota-write
+        - OrganizacijskaEnota-read
+        - Datoteka-write
+        - Datoteka-read
+        - Zapis-write
+        - Zapis-read
+        - ZapisLastnik-write
+        - ZapisLastnik-read
+        
+- 
+    name: mn-seznami-organizacijskeenote-r
+    description: omogoča read akcije v meniju Seznami->Organizacijske enote
+    permissions: 
+        - OrganizacijskaEnota-read
+        - Datoteka-read
+        - Zapis-read
+        - ZapisLastnik-read        
+- 
+    name: mn-seznami-tipvaje
+    description: omogoča akcije v meniju Seznami->Tip vaje
+    permissions: 
+        - TipVaje-read
+        - TipVaje-write
+- 
+    name: mn-seznami-tipvaje-r
+    description: omogoča read akcije v meniju Seznami->Tip vaje
+    permissions: 
+        - TipVaje-read
+- 
+    name: mn-programdela
+    description: omogoča akcije v meniju Program dela
+    permissions: 
+        - ProgramDela-lock
+        - ProgramDela-unlock
+        - ProgramDela-read
+        - ProgramDela-write
+        - ProgramFestival-read
+        - ProgramFestival-write
+        - ProgramGostovanje-read
+        - ProgramGostovanje-write
+        - ProgramGostujoca-read
+        - ProgramGostujoca-write
+        - ProgramIzjemni-read
+        - ProgramIzjemni-write
+        - ProgramPonovitevPrejsnjih-read
+        - ProgramPonovitevPrejsnjih-write
+        - ProgramPonovitevPremiere-read
+        - ProgramPonovitevPremiere-write
+        - ProgramPremiera-read
+        - ProgramPremiera-write
+        - ProgramRazno-read
+        - ProgramRazno-write
+        - ProgramskaEnotaSklopa-read
+        - ProgramskaEnotaSklopa-write
+        - ProdukcijaDelitev-write
+        - DrugiVir-write
+        - PostavkaCDve-write
+        - Job-write
+        - Report-write
+        - Datoteka-write
+        - Zapis-write
+        - ZapisLastnik-write
+        - ProdukcijaDelitev-read
+        - DrugiVir-read
+        - PostavkaCDve-read
+        - Drzava-read
+        - Job-read
+        - Report-read
+        - Datoteka-read
+        - Zapis-read
+        - ZapisLastnik-read
+
+-
+    name: mn-programdela-r
+    description: omogoča read akcije v meniju Program dela
+    permissions: 
+        - ProgramDela-read
+        - ProgramFestival-read
+        - ProgramGostovanje-read
+        - ProgramGostujoca-read
+        - ProgramIzjemni-read
+        - ProgramPonovitevPrejsnjih-read
+        - ProgramPonovitevPremiere-read
+        - ProgramPremiera-read
+        - ProgramRazno-read
+        - ProgramskaEnotaSklopa-read
+        - ProdukcijaDelitev-read
+        - DrugiVir-read
+        - PostavkaCDve-read
+        - Drzava-read
+        - Job-read
+        - Report-read
+        - Datoteka-read
+        - Zapis-read
+        - ZapisLastnik-read
+    
+-
+    name: mn-produkcija-uprizoritve
+    description: omogoča akcije v meniju Produkcija->Uprizoritve
+    permissions: 
+-
+    name: mn-produkcija-uprizoritve-r
+    description: omogoča read akcije v meniju Produkcija->Uprizoritve
+    permissions: 
+-
+    name: mn-produkcija-stroskovnik-
+    description: omogoča akcije v meniju Produkcija->Stroškovnik
+    permissions: 
+-
+    name: mn-produkcija-stroskovnik-r
+    description: omogoča read akcije v meniju Produkcija->Stroškovnik
+    permissions: 
+-
+    name: mn-produkcija-stroskovnik-splosno
+    description: omogoča akcije v meniju Produkcija->Stroškovnik->Splošno
+    permissions: 
+-
+    name: mn-produkcija-stroskovnik-splosno-r
+    description: omogoča read akcije v meniju Produkcija->Stroškovnik->Splošno
+    permissions: 
+-
+    name: mn-produkcija-stroskovnik-materialnistroski
+    description: omogoča akcije v meniju Produkcija->Stroškovnik->Materialni stroški
+    permissions: 
+-
+    name: mn-produkcija-stroskovnik-materialnistroski-r
+    description: omogoča read akcije v meniju Produkcija->Stroškovnik->Materialni stroški
+    permissions: 
