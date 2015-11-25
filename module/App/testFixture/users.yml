@@ -60,7 +60,7 @@
     roles: 
         - vsadovoljenja
 -
-    name: testni uporabnik ki nima dovoljenj
+    name: breznik, testni uporabnik ki nima dovoljenj
     email: breznik@ifigenija.si
     password: Breznik1234567
     enabled: true

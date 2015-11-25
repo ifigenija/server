@@ -18,8 +18,8 @@ use ApiTester;
 class LookupCest
 {
 
-    private $lookupDrzavaUrl        = '/lookup/drzava';
-    private $lookupAlternacijaUrl      = '/lookup/alternacija';
+    private $lookupDrzavaUrl      = '/lookup/drzava';
+    private $lookupAlternacijaUrl = '/lookup/alternacija';
 
     public function _before(ApiTester $I)
     {
@@ -77,12 +77,19 @@ class LookupCest
     {
 
         $resp = $I->successfullyGetList($this->lookupDrzavaUrl . '?ident=SI', []);
-        $I->assertNotEmpty($resp);
         codecept_debug($resp);
         $I->assertTrue(array_key_exists('data', $resp), "ima data");
         $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
         $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
         $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+
+        /**
+         * avtorizacija
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $resp = $I->failToGetList($this->lookupDrzavaUrl . '?ident=SI', []);
+        codecept_debug($resp);
+        $I->assertEquals(1000632, $resp[0]['code']);
     }
 
     /**
@@ -111,5 +118,14 @@ class LookupCest
         $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
         $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
         $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
+ 
+        /**
+         * avtorizacija
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $resp = $I->failToGetList($this->lookupDrzavaUrl . '?ident=SI', []);
+        codecept_debug($resp);
+        $I->assertEquals(1000632, $resp[0]['code']);
     }
+
 }

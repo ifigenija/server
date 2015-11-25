@@ -265,4 +265,44 @@
         - Popa-read
         - Popa-write
         - Uprizoritev-read
-        
+- 
+    name: mn-arhiv-arhivbesedil
+    description: vloga, ki pokriva akcije v meniju arhiv->arhivbesedil
+    permissions: 
+        - AvtorBesedila-write
+        - Besedilo-write
+        - Datoteka-write
+        - Oseba-write
+        - Zapis-write
+        - ZapisLastnik-write
+        - AvtorBesedila-read
+        - Besedilo-read
+        - Datoteka-read
+        - Oseba-read
+        - Zapis-read
+        - ZapisLastnik-read
+- 
+    name: mn-arhiv-arhivbesedil-r
+    description: vloga, ki pokriva read akcije v meniju arhiv->arhivbesedil
+    permissions: 
+        - AvtorBesedila-read
+        - Besedilo-read
+        - Datoteka-read
+        - Zapis-read
+        - ZapisLastnik-read
+- 
+    name: mn-seznami-zaposleni
+    description: vloga, ki pokriva akcije v meniju arhiv->arhivbesedil
+    permissions: 
+        - Oseba-read
+        - Oseba-write
+        - Zaposlitev-read
+        - Zaposlitev-write
+- 
+    name: mn-seznami-zaposleni-r
+    description: vloga, ki pokriva read akcije v meniju arhiv->arhivbesedil
+    permissions: 
+#        - Oseba-read
+        - Zaposlitev-read
+
+       
