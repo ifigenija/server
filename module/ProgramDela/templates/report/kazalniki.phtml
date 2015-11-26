@@ -1,4 +1,5 @@
 <?php
+// seštevki
 $stVsehPredstav = $model->getStIzvPrem() +
         $model->getStIzvPonPrem() +
         $model->getStIzvPonPrej() +
@@ -107,189 +108,230 @@ $sredstvaSkupajSK2 = $gostovanjaSredstva +
         $festivaliSredstva +
         $raznoSredstva +
         $izjemniSredstva;
-?>
 
-<div id="kazalniki">
-    <h1>Kazalniki glavni dokument</h1>
-    <h3>Kazalci</h3>	
-    <table>
-        <tr>
-            <td>Število premier</td>
-            <td class="right-align"><?= number_format($model->getStPremier(), 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td>Število ponovitev premier prejšnjih sezon</td>
-            <td class="right-align"><?= number_format($model->getStPonPrej(), 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td>Število vseh predstav (izvedbe premier in ponovitev)</td>
-            <td class="right-align"><?= number_format($stVsehPredstav, 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td>Število obiskovalcev vseh nekomercialnih prireditev</td>
-            <td class="right-align"><?= number_format($model->getStObiskNekom(), 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td>Število prodanih vstopnic</td>
-            <td class="right-align"><?= number_format($model->getStProdVstopnic(), 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td>Število gostovanj po Sloveniji</td>
-            <td class="right-align"><?= number_format($model->getStIzvGostovanjSlo(), 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td>Število gostovanj v zamejstvu</td>
-            <td class="right-align"><?= number_format($model->getstIzvGostovanjZam(), 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td>Število mednarodnih gostovanj (brez zamejstva)</td>
-            <td class="right-align"><?= number_format($model->getStIzvGostovanjInt(), 2, ',', '.') ?></td>
-        </tr>
-    </table>
-    <h2>Programski sklop I</h2>
-    <table>
-        <tr>
-            <th class="cell-type-header-title left-align">Programski sklop I</th>
-            <th class="cell-type-header-title right-align">Število enot</th>
-            <th class="cell-type-header-title right-align">Vir Ministrstvo za kulturo</th>
-            <th class="cell-type-header-title right-align">Vir druga ministrstva<br/>in lokalna skupnost</th>
-            <th class="cell-type-header-title right-align">Lastna sredstva</th>
-            <th class="cell-type-header-title right-align">Drugi nejavni viri</th>
-            <th class="cell-type-header-title right-align">Vložek gostiteljev</th>
-            <th class="cell-type-header-title right-align">Skupaj</th>
-        </tr>
-        <tr>
-            <td class="ime-vrstice">Premiere</td>
-            <td class="cell-type-number"><?= number_format($model->getStPremier(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoPrem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniPrem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaPrem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriPrem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaPrem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($premiereSredstva, 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td class="ime-vrstice">Ponovitve premiernih uprizoritev</td>
-            <td class="cell-type-number"><?= number_format($model->getStPonPrem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoPonPrem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniPonPrem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaPonPrem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriPonPrem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaPonPrem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($ponovitvePremierSredstva, 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td class="ime-vrstice">Ponovitve uprizoritev iz prejšnjih sezon</td>
-            <td class="cell-type-number"><?= number_format($model->getStPonPrej(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoPonPrej(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniPonPrej(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaPonPrej(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriPonPrej(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaPonPrej(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($ponovitvePrejsnjihSredstva, 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td class="ime-vrstice">Gostujoče uprizoritve</td>
-            <td class="cell-type-number"><?= number_format($model->getStGostujo(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoGostujo(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniGostujo(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaGostujo(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriGostujo(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaGostujo(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($gostujoceSredstva, 2, ',', '.') ?></td>
-        </tr>
-        <tr class="suma-row">
-            <td class="cell-type-header-title left-align">Skupaj programski sklop I</td>
-            <td class="cell-type-number"><?= number_format($stEnotSK1, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($mkViriSK1, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($dmlsViriSK1, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($lsViriSK1, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($drugiViriSK1, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($vlozekGostiteljaSK1, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($sredstvaSkupajSK1, 2, ',', '.') ?></td>
-        </tr>
-    </table>
-    <h2>Programski sklop II</h2>
-    <table>
-        <tr>
-            <th class="cell-type-header-title left-align">Programski sklop II</th>
-            <th class="cell-type-header-title right-align">Število enot</th>
-            <th class="cell-type-header-title right-align">Vir Ministrstvo za kulturo</th>
-            <th class="cell-type-header-title right-align">Vir druga ministrstva<br/>in lokalna skupnost</th>
-            <th class="cell-type-header-title right-align">Lastna sredstva</th>
-            <th class="cell-type-header-title right-align">Drugi nejavni viri</th>
-            <th class="cell-type-header-title right-align">Vložek gostiteljev</th>
-            <th class="cell-type-header-title right-align">Skupaj</th>
-        </tr>
-        <tr>
-            <td class="ime-vrstice">Mednarodna gostovanja</td>
-            <td class="cell-type-number"><?= number_format($model->getStInt(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoInt(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniInt(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaInt(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriInt(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaInt(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($gostovanjaSredstva, 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td class="ime-vrstice">Festivali</td>
-            <td class="cell-type-number"><?= number_format($model->getStFest(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoFest(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniFest(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaFest(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriFest(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaFest(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($festivaliSredstva, 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td class="ime-vrstice">Razno</td>
-            <td class="cell-type-number"><?= number_format($model->getStRazno(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoRazno(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniRazno(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaRazno(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriRazno(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaRazno(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($raznoSredstva, 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <td class="ime-vrstice">Izjemni dogodki</td>
-            <td class="cell-type-number"><?= number_format($model->getStIzjem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoIzjem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniIzjem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaIzjem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriIzjem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaIzjem(), 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($izjemniSredstva, 2, ',', '.') ?></td>
-        <tr>
-        <tr class="suma-row">
-            <td class="cell-type-header-title left-align">Skupaj programski sklop II</td>
-            <td class="cell-type-number"><?= number_format($stEnotSK2, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($mkViriSK2, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($dmlsViriSK2, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($lsViriSK2, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($drugiViriSK2, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($vlozekGostiteljaSK2, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($sredstvaSkupajSK2, 2, ',', '.') ?></td>
-        </tr>
-        <tr>
-            <th class="cell-type-header-title"></th>
-            <th class="cell-type-header-title right-align">Število enot</th>
-            <th class="cell-type-header-title right-align">Vir Ministrstvo za kulturo</th>
-            <th class="cell-type-header-title right-align">Vir druga ministrstva<br/>in lokalna skupnost</th>
-            <th class="cell-type-header-title right-align">Lastna sredstva</th>
-            <th class="cell-type-header-title right-align">Drugi nejavni viri</th>
-            <th class="cell-type-header-title right-align">Vložek gostiteljev</th>
-            <th class="cell-type-header-title right-align">Skupaj</th>
-        </tr>
-        <tr class="suma-row">
-            <td class="cell-type-header-title left-align">SKUPAJ (I+II)</td>
-            <td class="cell-type-number"><?= number_format($stEnotSK1 + $stEnotSK2, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($mkViriSK1 + $mkViriSK2, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($dmlsViriSK1 + $dmlsViriSK2, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($lsViriSK1 + $lsViriSK2, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($drugiViriSK1 + $drugiViriSK2, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($vlozekGostiteljaSK1 + $vlozekGostiteljaSK2, 2, ',', '.') ?></td>
-            <td class="cell-type-number"><?= number_format($sredstvaSkupajSK1 + $sredstvaSkupajSK2, 2, ',', '.') ?></td>
-        </tr>
-    </table>
-</div>
+// splošno za template
+$tr = $this->plugin('translate')->getTranslator();
+if (method_exists($model, 'getJezik')) {
+    $tr->setLocale($model->getJezik());
+}
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><?= $naslov ?></title>
+        <meta charset="UTF-8">
+        <style type="text/css">
+
+            @page {
+                sheet-size: A4-L;
+                size: auto;
+                odd-header-name: _blank;
+                even-header-name: _blank;
+                odd-footer-name: _blank;
+                even-footer-name: _blank;
+
+                margin-top: 17mm ;
+                margin-left: 15mm ;
+                margin-bottom: 17mm ;
+                margin-right: 15mm ;
+                margin-footer: 5mm;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-size: 10px;
+            }
+
+            <?= $_css ? $this->partial($_css) : '' ?>
+
+        </style>
+    </head>
+    <body>
+
+        <div id="kazalniki">
+            <h1>Kazalniki glavni dokument</h1>
+            <h3>Kazalci</h3>	
+            <table>
+                <tr>
+                    <td>Število premier</td>
+                    <td class="right-align"><?= number_format($model->getStPremier(), 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td>Vsota koeficientov</td>
+                    <td class="right-align"><?= number_format($model->getVsotaKpe(), 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td>Število ponovitev premier prejšnjih sezon</td>
+                    <td class="right-align"><?= number_format($model->getStPonPrej(), 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td>Število vseh predstav (izvedbe premier in ponovitev)</td>
+                    <td class="right-align"><?= number_format($stVsehPredstav, 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td>Število obiskovalcev vseh nekomercialnih prireditev</td>
+                    <td class="right-align"><?= number_format($model->getStObiskNekom(), 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td>Število prodanih vstopnic</td>
+                    <td class="right-align"><?= number_format($model->getStProdVstopnic(), 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td>Število gostovanj po Sloveniji</td>
+                    <td class="right-align"><?= number_format($model->getStIzvGostovanjSlo(), 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td>Število gostovanj v zamejstvu</td>
+                    <td class="right-align"><?= number_format($model->getstIzvGostovanjZam(), 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td>Število mednarodnih gostovanj (brez zamejstva)</td>
+                    <td class="right-align"><?= number_format($model->getStIzvGostovanjInt(), 2, ',', '.') ?></td>
+                </tr>
+            </table>
+            <h2>Programski sklop I</h2>
+            <table>
+                <tr>
+                    <th class="cell-type-header-title left-align">Programski sklop I</th>
+                    <th class="cell-type-header-title right-align">Število enot</th>
+                    <th class="cell-type-header-title right-align">Vir Ministrstvo za kulturo</th>
+                    <th class="cell-type-header-title right-align">Vir druga ministrstva<br/>in lokalna skupnost</th>
+                    <th class="cell-type-header-title right-align">Lastna sredstva</th>
+                    <th class="cell-type-header-title right-align">Drugi nejavni viri</th>
+                    <th class="cell-type-header-title right-align">Vložek gostiteljev</th>
+                    <th class="cell-type-header-title right-align">Skupaj</th>
+                </tr>
+                <tr>
+                    <td class="ime-vrstice">Premiere</td>
+                    <td class="cell-type-number"><?= number_format($model->getStPremier(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoPrem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniPrem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaPrem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriPrem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaPrem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($premiereSredstva, 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td class="ime-vrstice">Ponovitve premiernih uprizoritev</td>
+                    <td class="cell-type-number"><?= number_format($model->getStPonPrem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoPonPrem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniPonPrem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaPonPrem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriPonPrem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaPonPrem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($ponovitvePremierSredstva, 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td class="ime-vrstice">Ponovitve uprizoritev iz prejšnjih sezon</td>
+                    <td class="cell-type-number"><?= number_format($model->getStPonPrej(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoPonPrej(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniPonPrej(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaPonPrej(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriPonPrej(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaPonPrej(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($ponovitvePrejsnjihSredstva, 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td class="ime-vrstice">Gostujoče uprizoritve</td>
+                    <td class="cell-type-number"><?= number_format($model->getStGostujo(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoGostujo(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniGostujo(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaGostujo(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriGostujo(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaGostujo(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($gostujoceSredstva, 2, ',', '.') ?></td>
+                </tr>
+                <tr class="suma-row">
+                    <td class="cell-type-header-title left-align">Skupaj programski sklop I</td>
+                    <td class="cell-type-number"><?= number_format($stEnotSK1, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($mkViriSK1, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($dmlsViriSK1, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($lsViriSK1, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($drugiViriSK1, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($vlozekGostiteljaSK1, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($sredstvaSkupajSK1, 2, ',', '.') ?></td>
+                </tr>
+            </table>
+            <h2>Programski sklop II</h2>
+            <table>
+                <tr>
+                    <th class="cell-type-header-title left-align">Programski sklop II</th>
+                    <th class="cell-type-header-title right-align">Število enot</th>
+                    <th class="cell-type-header-title right-align">Vir Ministrstvo za kulturo</th>
+                    <th class="cell-type-header-title right-align">Vir druga ministrstva<br/>in lokalna skupnost</th>
+                    <th class="cell-type-header-title right-align">Lastna sredstva</th>
+                    <th class="cell-type-header-title right-align">Drugi nejavni viri</th>
+                    <th class="cell-type-header-title right-align">Vložek gostiteljev</th>
+                    <th class="cell-type-header-title right-align">Skupaj</th>
+                </tr>
+                <tr>
+                    <td class="ime-vrstice">Mednarodna gostovanja</td>
+                    <td class="cell-type-number"><?= number_format($model->getStInt(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoInt(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniInt(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaInt(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriInt(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaInt(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($gostovanjaSredstva, 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td class="ime-vrstice">Festivali</td>
+                    <td class="cell-type-number"><?= number_format($model->getStFest(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoFest(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniFest(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaFest(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriFest(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaFest(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($festivaliSredstva, 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td class="ime-vrstice">Razno</td>
+                    <td class="cell-type-number"><?= number_format($model->getStRazno(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoRazno(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniRazno(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaRazno(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriRazno(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaRazno(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($raznoSredstva, 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td class="ime-vrstice">Izjemni dogodki</td>
+                    <td class="cell-type-number"><?= number_format($model->getStIzjem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaZaprosenoIzjem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiJavniIzjem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaLastnaIzjem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaDrugiViriIzjem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($model->getSredstvaVlozekGostiteljaIzjem(), 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($izjemniSredstva, 2, ',', '.') ?></td>
+                <tr>
+                <tr class="suma-row">
+                    <td class="cell-type-header-title left-align">Skupaj programski sklop II</td>
+                    <td class="cell-type-number"><?= number_format($stEnotSK2, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($mkViriSK2, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($dmlsViriSK2, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($lsViriSK2, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($drugiViriSK2, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($vlozekGostiteljaSK2, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($sredstvaSkupajSK2, 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <th class="cell-type-header-title"></th>
+                    <th class="cell-type-header-title right-align">Število enot</th>
+                    <th class="cell-type-header-title right-align">Vir Ministrstvo za kulturo</th>
+                    <th class="cell-type-header-title right-align">Vir druga ministrstva<br/>in lokalna skupnost</th>
+                    <th class="cell-type-header-title right-align">Lastna sredstva</th>
+                    <th class="cell-type-header-title right-align">Drugi nejavni viri</th>
+                    <th class="cell-type-header-title right-align">Vložek gostiteljev</th>
+                    <th class="cell-type-header-title right-align">Skupaj</th>
+                </tr>
+                <tr class="suma-row">
+                    <td class="cell-type-header-title left-align">SKUPAJ (I+II)</td>
+                    <td class="cell-type-number"><?= number_format($stEnotSK1 + $stEnotSK2, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($mkViriSK1 + $mkViriSK2, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($dmlsViriSK1 + $dmlsViriSK2, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($lsViriSK1 + $lsViriSK2, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($drugiViriSK1 + $drugiViriSK2, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($vlozekGostiteljaSK1 + $vlozekGostiteljaSK2, 2, ',', '.') ?></td>
+                    <td class="cell-type-number"><?= number_format($sredstvaSkupajSK1 + $sredstvaSkupajSK2, 2, ',', '.') ?></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

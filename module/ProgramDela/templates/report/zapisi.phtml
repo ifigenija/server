@@ -5,10 +5,11 @@
  * Date: 21.9.2015
  */
 $zapis = $this->zapis;
+$count = $this->count;
 
 ?>
 <div class="zapis">
-    <h2><?= $zapis->getTitle() ?></h2>
+    <h2><?= $zapis->getTitle() ?><?= $count ? '<span class="opomba"> (Priloga ' . $count . ')</span>' : '' ?></h2>
     <p><?= $zapis->getSubject() ?></p>
     <p><?= $zapis->getDescription() ?></p>
 </div>

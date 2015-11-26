@@ -186,3 +186,15 @@ h2.name {
     color: black;
     font-size: 50%;
 }
+
+.zapis p {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+}
+
+.opomba {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 9px;
+    font-style: italic; 
+    font-weight: normal;
+}

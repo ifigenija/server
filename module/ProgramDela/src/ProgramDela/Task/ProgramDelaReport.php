@@ -25,13 +25,12 @@ class ProgramDelaReport
 
     public function taskBody()
     {
-        $ps = $this->getServiceLocator()->get('mpdf.printer');
-
         $prgdela = $this->entity;
-        $title   = $prgdela->getNaziv() ? $prgdela->getNaziv() : 'Program dela' ;
+        $title   = $prgdela->getNaziv() ? $prgdela->getNaziv() : 'Program dela';
 
+        // Dobim printer 
+        $ps = $this->getServiceLocator()->get('mpdf.printer');
         $printer = $ps->getMPdf();
-
         // Osnutek, če Program dela ni zaključen
         if ($prgdela->getZakljuceno() == false) {
             $printer->setWatermarkText('Osnutek', 0.1);
@@ -40,22 +39,61 @@ class ProgramDelaReport
             $printer->showWatermarkText = false;
         }
 
+        // Filter izpisa
         $jePs1   = $this->data['jePs1'];
         $jePs2   = $this->data['jePs2'];
         $jeKaz   = $this->data['jeKaz'];
         $jeC2    = $this->data['jeC2'];
         $jeZapis = !$this->data['jeZapis'];
-        
-        $vars = [
-            'jePs1' => $jePs1,
-            'jePs2' => $jePs2,
-            'jeKaz' => $jeKaz,
-            'jeC2'  => $jeC2,
+
+        $kajizp = [
+            'jePs1'   => $jePs1,
+            'jePs2'   => $jePs2,
+            'jeKaz'   => $jeKaz,
+            'jeC2'    => $jeC2,
             'jeZapis' => $jeZapis
         ];
+
+        if ($jeKaz) {
+            // Kazalniki glavni dokument izpišem pred dejanskim izpisom programa dela
+            $html = $this->render('kazalniki', [
+                'title' => $title,
+                'model' => $prgdela,
+                'ishf'  => false,
+                '_css'  => 'style.css',
+            ]);
+            $this->printOut($html);
+            $this->finishReport($title);
+            $this->cleanupTmp();
+        }
+
+        $this->html = [];
         
-        // Splošno za program dela - nastavim header in footer + zavihek 'splošno' iz vnosne forme
-        $this->addDocumentReport('program-dela', $title, $prgdela, $vars);
+        // Zaradi dveh reportov (kazalniki in ostalo), moram še enkrat
+        // po printer
+        $printer = $ps->getMPdf();
+        // Osnutek, če Program dela ni zaključen
+        if ($prgdela->getZakljuceno() == false) {
+            $printer->setWatermarkText('Osnutek', 0.1);
+            $printer->showWatermarkText = true;
+        } else {
+            $printer->showWatermarkText = false;
+        }
+
+        // Splošno - osnovne nastavitve HTML in naslovnica 
+        $html = $this->render('program-dela', array_merge([
+            'title'       => $title,
+            'ishf'        => true,
+            '_css'        => 'style.css',
+            'firma'       => $this->getFirma(),
+            'orientation' => $config['orientation'],
+            'margins'     => $config['margins'],
+            'pageSize'    => $config['page_size'],
+            'naslov'      => $title,
+            'model'       => $prgdela,
+            'ishf'        => true,
+                        ], $kajizp));
+        $this->printOut($html);
 
         // Programski sklop 1
         if ($jePs1) {
@@ -81,17 +119,32 @@ class ProgramDelaReport
             $this->reportSklopPrograma($printer, $prgdela->izjemni, 'izjemni', $title, $jeZapis);
         }
 
-        // Kazalniki
+        // Kazalniki  - še preostanek kazalnikov (priloga 2), glavni dokument izpisan na vrhu
         if ($jeKaz) {
-            $this->addDocumentReport('kazalniki', $title, $prgdela);
             // Kazalniki - priloga 
-            $this->addDocumentReport('kazalniki-priloga', $title, $prgdela);
+            $html = $this->render('kazalniki-priloga', [
+                'title' => $title,
+                'model' => $prgdela,
+                'ishf'  => false,
+                '_css'  => 'style.css',
+            ]);
+            $this->printOut($html);
         }
 
         // Postavke C2
         if ($jeC2) {
-            $this->addDocumentReport('postavke-c2', $title, $prgdela);
+            $html = $this->render('postavke-c2', [
+                'title' => $title,
+                'model' => $prgdela,
+                'ishf'  => false,
+                '_css'  => 'style.css',
+            ]);
+            $this->printOut($html);
         }
+        // zaključek html-ja
+        $html = $this->render('outro', []);
+        $this->printOut($html);
+
         $this->finishReport($title);
         $this->cleanupTmp();
     }
@@ -103,19 +156,38 @@ class ProgramDelaReport
      * @param object $sklopi    vsebinski sklopi programa dela (premiere. ponovitve, festivali...)
      * @param string $tmpl      ime predloge
      * @param string $naslov    naslov reporta
+     * @param boolean $jeZapis   ali izpisujem priloge
      */
     public function reportSklopPrograma($printer, $sklopi, $tmpl, $naslov, $jeZapis)
     {
         $zs = $this->getServiceLocator()->get('zapisi.service');
 
         foreach ($sklopi as $sklop) {
-            $this->addDocumentReport($tmpl, $naslov, $sklop);
+            // $this->addDocumentReport($tmpl, $naslov, $sklop);
+            $html = $this->render($tmpl, [
+                'title' => $naslov,
+                'model' => $sklop,
+                'ishf'  => true,
+                '_css'  => 'style.css',
+            ]);
+            $this->printOut($html);
 
             // dodam zapise 
             if ($jeZapis) {
                 $myzapisi = $zs->getZapiseZaLastnika($sklop->id);
+
+                // najprej tekstovni del prilog
+                $count = 1;
                 foreach ($myzapisi as $myzapis) {
-                    $this->addDocumentAttachment($printer, 'zapisi', $naslov, $myzapis);
+                    $this->addAttachmentTxt($printer, 'zapisi', $naslov, $myzapis, $count);
+                    $count++;
+                }
+
+                // potem priloženi dokumenti
+                $count = 1;
+                foreach ($myzapisi as $myzapis) {
+                    $this->addAttachmentDoc($printer, $myzapis, $count);
+                    $count++;
                 }
             }
         }

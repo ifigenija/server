@@ -3,7 +3,7 @@ $alt = $fun->getAlternacije();
 foreach ($alt as $alternacija) {
     if ($alternacija->getPomembna()) { ?>
     <tr>
-        <td><?= $fun->getTipFunkcije()->getIme() . ' - ' . $fun->getNaziv() ?></td>
+        <td><?= $fun->getNaziv() ?></td>
         <td></td>
         <td class="right-align"><?= $alternacija->getOseba()->getPolnoIme() ?></td>
     </tr>

@@ -2321,6 +2321,15 @@ class ProgramDela
         return $this->sredstvaAvtSamoz;
     }
 
+    function getVsotaKpe()
+    {
+        $vsotaKpe = 0;
+        foreach ($this->getPremiere() as $numObject => $object) {
+            $vsotaKpe += $object->getKpe();            
+        }
+        return $vsotaKpe;
+    }
+    
     function setId($id)
     {
         $this->id = $id;

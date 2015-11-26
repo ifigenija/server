@@ -8,10 +8,16 @@
 
 <?php foreach ($kop as $koprodukcija) {
     $imekop = $koprodukcija->getKoproducent() ? $koprodukcija->getKoproducent()->getPopa()->getNaziv() : '';
+    $kpekop = $koprodukcija->getKpe();
+    if ($kpekop == 0) {
+        $koekop = '';
+    } else {
+        $koekop = number_format($koprodukcija->getKpe(), 2, ',', '.');
+    }
     ?>
     <tr>
         <td class="alineja"><?= $imekop ?></td>
-        <td class="cell-type-number"><?= number_format($koprodukcija->getKpe(), 2, ',', '.') ?></td>
+        <td class="cell-type-number"><?= $koekop ?></td>
         <td class="cell-type-number"><?= number_format($koprodukcija->getDelez(), 2, ',', '.') ?></td>
     </tr>
 <?php } ?>
