@@ -275,7 +275,7 @@ class MapaScenarijCest
         $I->assertEquals(1000101, $resp[0]['code']);
 
         /**
-         * brez write pravicami, brez writeroot
+         * brez write pravic, brez writeroot
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
         $data             = $this->root2;
