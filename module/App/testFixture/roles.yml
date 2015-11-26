@@ -522,9 +522,8 @@
         - Uprizoritev-read
         - StrosekUprizoritve-read
         - Funkcija-read
-        - Uprizoritev-read               
+        - Alternacija-read
         - StrosekUprizoritve-read        
-        - Funkcija-read                  
         - TipFunkcije-read               
         - Oseba-read                     
         - Pogodba-read                   
