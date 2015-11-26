@@ -429,12 +429,17 @@
     permissions: 
         - Prostor-read
         - Prostor-write
-
-- 
+        - Popa-read
+        - PostniNaslov-read
+        - PostniNaslov-write
+        - Drzava-read
+-
     name: mn-seznami-prostori-r
     description: omogoča read akcije v meniju Seznami->Prostori
     permissions: 
         - Prostor-read
+        - Popa-read
+        - PostniNaslov-read
 - 
     name: mn-seznami-vrstestroska
     description: omogoča akcije v meniju Seznami->Vrste stroška
@@ -506,18 +511,30 @@
         - ProgramskaEnotaSklopa-write
         - ProdukcijaDelitev-write
         - DrugiVir-write
-        - PostavkaCDve-write
-        - Job-write
-        - Report-write
+        - PostavkaCDve-write 
+#        - Job-write
+#        - Report-write
+        - DrugiVir-read
+        - ProdukcijaDelitev-read
+        - ProdukcijskaHisa-read
+        - PostavkaCDve-read
+        - VrstaStroska-read
+        - Uprizoritev-read
+        - StrosekUprizoritve-read
+        - Funkcija-read
+        - Uprizoritev-read               
+        - StrosekUprizoritve-read        
+        - Funkcija-read                  
+        - TipFunkcije-read               
+        - Oseba-read                     
+        - Pogodba-read                   
+        - Drzava-read
+        - Popa-read
         - Datoteka-write
         - Zapis-write
         - ZapisLastnik-write
-        - ProdukcijaDelitev-read
-        - DrugiVir-read
-        - PostavkaCDve-read
-        - Drzava-read
-        - Job-read
-        - Report-read
+#        - Job-read
+#        - Report-read
         - Datoteka-read
         - Zapis-read
         - ZapisLastnik-read
