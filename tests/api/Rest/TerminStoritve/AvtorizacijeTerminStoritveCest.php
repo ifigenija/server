@@ -173,6 +173,8 @@ class AvtorizacijeTerminStoritveCest
      */
     public function lookupAlternacije(ApiTester $I)
     {
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+
         // igralec
         $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0001', []);
         $I->assertNotEmpty($resp);

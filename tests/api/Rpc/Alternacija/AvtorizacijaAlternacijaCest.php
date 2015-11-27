@@ -109,6 +109,8 @@ class AvtorizacijaAlternacijaCest
      */
     public function lookupAlternacija(ApiTester $I)
     {
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+
         // alternacija brez pogodbe
         $resp                   = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0002', []);
         $I->assertNotEmpty($resp);
