@@ -10,7 +10,7 @@ use Jobs\Annotation\Task as Task;
 /**
  * Task za izpis reporta dobavnice
  *
- *  @Task\Meta(name="Program dela", acl="ProgramDela-write")
+ *  @Task\Meta(name="Program dela", acl="ProgramDela-read")
  */
 class ProgramDelaReport
         extends IfiPrinterTask

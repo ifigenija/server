@@ -1,13 +1,9 @@
-# $$ rb - ali je admin vloga za izbrisati , ker obstajata že ifi-*?
-#-
-#    name: beri-vse
-#    description: 'Polni dostop do vsega v aplikaciji.'
-#    permissions: {  }
 -
     name: administrator-dostopov
     description: 'Uporavljanje uporabnikov, skupin, vlog in dovoljenj.'
     permissions:
         - Aaa-write
+        - Aaa-read
 -
     name: anonymous
     description: 'Vloga za javne - neavtenticirane uporabnike'
@@ -21,169 +17,561 @@
     name: ifi-readall
     description: 'Dostop do vseh -read in -list dovoljenj.'
     permissions: {  }
+#- 
+#    name: planer
+#    description: 'Planer dogodkov v koledarju'
+#    permissions: 
+#        - Abonma-read
+#        - Abonma-write
+#        - Alternacija-read
+#        - Alternacija-write
+#        - Arhivalija-read
+#        - Dogodek-read
+#        - Dogodek-readVse 
+#        - Dogodek-write
+#        - Drzava-read
+#        - Drzava-write
+#        - Funkcija-read
+#        - Funkcija-write
+#        - Gostovanje-read
+#        - Gostovanje-write
+#        - Gostujoca-read
+#        - Gostujoca-write
+#        - KontaktnaOseba-read
+#        - KontaktnaOseba-write
+#        - Option-read
+#        - OptionValue-read
+#        - Oseba-read
+#        - Oseba-write
+#        - Popa-read
+#        - Popa-write
+#        - Posta-read
+#        - Posta-write
+#        - PostniNaslov-read
+#        - PostniNaslov-write
+#        - Predstava-read
+#        - Predstava-write
+#        - ProdukcijskaHisa-read
+#        - ProdukcijskaHisa-write
+#        - Prostor-read
+#        - Prostor-write
+#        - Rekviziterstvo-read
+#        - Rekviziterstvo-write
+#        - Rekvizit-read
+#        - Rekvizit-write
+#        - Sezona-read
+#        - Sezona-write
+#        - TipFunkcije-read
+#        - Uprizoritev-read
+#        - Uprizoritev-write
+#        - Vaja-read
+#        - Vaja-write
+#        - Zasedenost-read
+#        - Zasedenost-write
+#        - ZvrstSurs-read
+#        - ZvrstUprizoritve-read
+#- 
+#    name: kadrovska
+#    description: 'Kadrovska služba'
+#    permissions: 
+#        - Abonma-read
+#        - Arhivalija-read
+#        - Dogodek-read
+#        - Drzava-read
+#        - Gostovanje-read
+#        - Gostujoca-read
+#        - KontaktnaOseba-read
+#        - KontaktnaOseba-write
+#        - Option-read
+#        - OptionValue-read
+#        - Oseba-read
+#        - Oseba-write
+#        - Popa-read
+#        - Posta-read
+#        - PostniNaslov-read
+#        - PostniNaslov-write
+#        - Predstava-read
+#        - Prostor-read
+#        - Rekviziterstvo-read
+#        - Rekvizit-read
+#        - Sezona-read
+#        - Telefonska-read
+#        - Telefonska-write
+#        - Trr-read
+#        - Trr-write
+#        - Zaposlitev-read
+#        - Zaposlitev-write
+#        - ZvrstSurs-read
+#        - ZvrstUprizoritve-read
+#- 
+#    name: arhivar
+#    description: 'Ažuriranje arhivalij'
+#    permissions: 
+#        - Abonma-read
+#        - Alternacija-read
+#        - Arhivalija-read
+#        - Arhivalija-write
+#        - Besedilo-read
+#        - DogodekSplosni-read
+#        - Dogodek-read
+#        - Drzava-read
+#        - Funkcija-read
+#        - Gostovanje-read
+#        - Gostujoca-read
+#        - KontaktnaOseba-read
+#        - Option-read
+#        - OptionValue-read
+#        - Oseba-read
+#        - Popa-read
+#        - Posta-read
+#        - Predstava-read
+#        - ProdukcijskaHisa-read
+#        - Prostor-read
+#        - Rekviziterstvo-read
+#        - Rekvizit-read
+#        - Sezona-read
+#        - TipFunkcije-read
+#        - Vaja-read
+#        - Zasedenost-read
+#        - ZvrstSurs-read
+#        - ZvrstUprizoritve-read
+#- 
+#    name: igralec
+#    description: 'Igralec'
+#    permissions: 
+#        - Abonma-read
+#        - Abonma-write
+#        - Alternacija-write
+#        - Arhivalija-read
+#        - Dogodek-read
+#        - Drzava-read
+#        - Gostovanje-read
+#        - Gostujoca-read
+#        - Option-read
+#        - OptionValue-read
+#        - Popa-read
+#        - Posta-read
+#        - Predstava-read
+#        - Prostor-read
+#        - Rekviziterstvo-read
+#        - Rekvizit-read
+#        - Sezona-read
+#        - TipFunkcije-read
+#        - ZvrstSurs-read
+#        - ZvrstUprizoritve-read
+#- 
+#    name: prisotnost
+#    description: 'Vnašalec prisotnosti, tudi za tiste izven uprizoritev'
+#    permissions: 
+#        - Abonma-read
+#        - Arhivalija-read
+#        - Dogodek-read
+#        - Drzava-read
+#        - Gostovanje-read
+#        - Gostujoca-read
+#        - Option-read
+#        - OptionValue-read
+#        - Popa-read
+#        - Posta-read
+#        - Predstava-read
+#        - Prostor-read
+#        - Rekviziterstvo-read
+#        - Rekvizit-read
+#        - Sezona-read
+#        - TerminStoritve-read
+#        - TerminStoritve-vse
+#        - TipFunkcije-read
+#        - ZvrstSurs-read
+#        - ZvrstUprizoritve-read
 - 
-    name: planer
-    description: 'Planer dogodkov v koledarju'
+    name: mn-arhiv-arhivbesedil
+    description: omogoča akcije v meniju arhiv->arhivbesedil
     permissions: 
-        - Abonma-read
-        - Abonma-write
-        - Alternacija-read
-        - Alternacija-write
-        - Arhivalija-read
-        - Dogodek-read
-        - Dogodek-readVse 
-        - Dogodek-write
-        - Drzava-read
-        - Drzava-write
-        - Funkcija-read
-        - Funkcija-write
-        - Gostovanje-read
-        - Gostovanje-write
-        - Gostujoca-read
-        - Gostujoca-write
-        - KontaktnaOseba-read
-        - KontaktnaOseba-write
-        - Option-read
-        - OptionValue-read
+        - AvtorBesedila-write
+        - Besedilo-write
+        - Datoteka-write
+#        - Oseba-write
+        - Zapis-write
+        - ZapisLastnik-write
+        - AvtorBesedila-read
+        - Besedilo-read
+        - Datoteka-read
         - Oseba-read
-        - Oseba-write
-        - Popa-read
-        - Popa-write
-        - Posta-read
-        - Posta-write
-        - PostniNaslov-read
-        - PostniNaslov-write
-        - Predstava-read
-        - Predstava-write
-        - ProdukcijskaHisa-read
-        - ProdukcijskaHisa-write
-        - Prostor-read
-        - Prostor-write
-        - Rekviziterstvo-read
-        - Rekviziterstvo-write
-        - Rekvizit-read
-        - Rekvizit-write
-        - Sezona-read
-        - Sezona-write
-        - TipFunkcije-read
-        - Uprizoritev-read
-        - Uprizoritev-write
-        - Vaja-read
-        - Vaja-write
-        - Zasedenost-read
-        - Zasedenost-write
-        - ZvrstSurs-read
-        - ZvrstUprizoritve-read
+        - Zapis-read
+        - ZapisLastnik-read
 - 
-    name: kadrovska
-    description: 'Kadrovska služba'
+    name: mn-arhiv-arhivbesedil-r
+    description: omogoča read akcije v meniju arhiv->arhivbesedil
     permissions: 
-        - Abonma-read
-        - Arhivalija-read
-        - Dogodek-read
-        - Drzava-read
-        - Gostovanje-read
-        - Gostujoca-read
-        - KontaktnaOseba-read
-        - KontaktnaOseba-write
-        - Option-read
-        - OptionValue-read
+        - AvtorBesedila-read
+        - Besedilo-read
+        - Datoteka-read
+        - Zapis-read
+        - ZapisLastnik-read
+#        - Oseba-read
+- 
+    name: mn-seznami-zaposleni
+    description: omogoča akcije v meniju Seznami->Zaposleni
+    permissions: 
         - Oseba-read
-        - Oseba-write
-        - Popa-read
-        - Posta-read
-        - PostniNaslov-read
-        - PostniNaslov-write
-        - Predstava-read
-        - Prostor-read
-        - Rekviziterstvo-read
-        - Rekvizit-read
-        - Sezona-read
-        - Telefonska-read
-        - Telefonska-write
-        - Trr-read
-        - Trr-write
+#        - Oseba-write
         - Zaposlitev-read
         - Zaposlitev-write
-        - ZvrstSurs-read
-        - ZvrstUprizoritve-read
+        - OrganizacijskaEnota-read
 - 
-    name: arhivar
-    description: 'Ažuriranje arhivalij'
+    name: mn-seznami-zaposleni-r
+    description: omogoča read akcije v meniju Seznami->Zaposleni
     permissions: 
-        - Abonma-read
-        - Alternacija-read
-        - Arhivalija-read
-        - Arhivalija-write
-        - Besedilo-read
-        - DogodekSplosni-read
-        - Dogodek-read
-        - Drzava-read
-        - Funkcija-read
-        - Gostovanje-read
-        - Gostujoca-read
-        - KontaktnaOseba-read
-        - Option-read
-        - OptionValue-read
+#        - Oseba-read
+        - Zaposlitev-read
+        - OrganizacijskaEnota-read
+- 
+    name: mn-seznami-poslovnipartnerji
+    description: omogoča akcije v meniju Seznami->Poslovni partnerji
+    permissions: 
+        - Telefonska-read
+        - PostniNaslov-read
         - Oseba-read
+        - Zapis-read
+        - Trr-read
         - Popa-read
-        - Posta-read
-        - Predstava-read
+        - Datoteka-read
+        - ZapisLastnik-read
+        - KontaktnaOseba-read
         - ProdukcijskaHisa-read
-        - Prostor-read
-        - Rekviziterstvo-read
-        - Rekvizit-read
-        - Sezona-read
-        - TipFunkcije-read
-        - Vaja-read
-        - Zasedenost-read
-        - ZvrstSurs-read
+        - Telefonska-write
+        - PostniNaslov-write
+        - Zapis-write
+        - Trr-write
+        - Popa-write
+        - Datoteka-write
+        - ZapisLastnik-write
+        - KontaktnaOseba-write
+        - ProdukcijskaHisa-write
+        - Drzava-read
+        - TipPopa-read
+
+       
+- 
+    name: mn-seznami-poslovnipartnerji-r
+    description: omogoča read akcije v meniju Seznami->Poslovni partnerji
+    permissions: 
+        - Telefonska-read
+        - PostniNaslov-read
+#        - Oseba-read
+        - Zapis-read
+        - Trr-read
+        - Popa-read
+        - Datoteka-read
+        - ZapisLastnik-read
+        - KontaktnaOseba-read
+        - ProdukcijskaHisa-read
+        - Drzava-read
+        - TipPopa-read
+       
+- 
+    name: mn-seznami-tipiposlovnihpartnerjev
+    description: omogoča akcije v meniju Seznami->Tipi poslovnih partnerjev
+    permissions: 
+        - TipPopa-read
+        - TipPopa-write
+- 
+    name: mn-seznami-tipiposlovnihpartnerjev-r
+    description: omogoča read akcije v meniju Seznami->Tipi poslovnih partnerjev
+    permissions: 
+        - TipPopa-read
+- 
+    name: mn-seznami-posta
+    description: omogoča akcije v meniju Seznami->Pošta
+    permissions: 
+        - Posta-read
+        - Posta-write
+- 
+    name: mn-seznami-posta-r
+    description: omogoča read akcije v meniju Seznami->Pošta
+    permissions: 
+        - Posta-read
+- 
+    name: mn-seznami-drzave
+    description: omogoča akcije v meniju Seznami->Države
+    permissions: 
+        - Drzava-read
+        - Drzava-write
+
+- 
+    name: mn-seznami-drzave-r
+    description: omogoča read akcije v meniju Seznami->Države
+    permissions: 
+        - Drzava-read
+- 
+    name: mn-seznami-vrsteuprizoritev
+    description: omogoča akcije v meniju Seznami->Vrste uprizoritev
+    permissions: 
+        - ZvrstUprizoritve-read
+        - ZvrstUprizoritve-write
+
+- 
+    name: mn-seznami-vrsteuprizoritev-r
+    description: omogoča read akcije v meniju Seznami->Vrste uprizoritev
+    permissions: 
         - ZvrstUprizoritve-read
 - 
-    name: igralec
-    description: 'Igralec'
+    name: mn-seznami-zvrstiposurs
+    description: omogoča akcije v meniju Seznami->Zvrsti po SURS
+    permissions: 
+        - ZvrstSurs-read
+        - ZvrstSurs-write
+
+- 
+    name: mn-seznami-zvrstiposurs-r
+    description: omogoča read akcije v meniju Seznami->Zvrsti po SURS
+    permissions: 
+        - ZvrstSurs-read
+- 
+    name: mn-seznami-abonmaji
+    description: omogoča akcije v meniju Seznami->Abonmaji
     permissions: 
         - Abonma-read
         - Abonma-write
-        - Alternacija-write
-        - Arhivalija-read
-        - Dogodek-read
-        - Drzava-read
-        - Gostovanje-read
-        - Gostujoca-read
-        - Option-read
-        - OptionValue-read
-        - Popa-read
-        - Posta-read
-        - Predstava-read
-        - Prostor-read
-        - Rekviziterstvo-read
-        - Rekvizit-read
-        - Sezona-read
-        - TipFunkcije-read
-        - ZvrstSurs-read
-        - ZvrstUprizoritve-read
+
 - 
-    name: prisotnost
-    description: 'Vnašalec prisotnosti, tudi za tiste izven uprizoritev'
+    name: mn-seznami-abonmaji-r
+    description: omogoča read akcije v meniju Seznami->Abonmaji
     permissions: 
         - Abonma-read
-        - Arhivalija-read
-        - Dogodek-read
-        - Drzava-read
-        - Gostovanje-read
-        - Gostujoca-read
-        - Option-read
-        - OptionValue-read
-        - Popa-read
-        - Posta-read
-        - Predstava-read
+- 
+    name: mn-seznami-prostori
+    description: omogoča akcije v meniju Seznami->Prostori
+    permissions: 
         - Prostor-read
-        - Rekviziterstvo-read
-        - Rekvizit-read
-        - Sezona-read
-        - TerminStoritve-read
-        - TerminStoritve-vse
+        - Prostor-write
+        - Popa-read
+        - PostniNaslov-read
+        - PostniNaslov-write
+        - Drzava-read
+-
+    name: mn-seznami-prostori-r
+    description: omogoča read akcije v meniju Seznami->Prostori
+    permissions: 
+        - Prostor-read
+        - Popa-read
+        - PostniNaslov-read
+- 
+    name: mn-seznami-vrstestroska
+    description: omogoča akcije v meniju Seznami->Vrste stroška
+    permissions: 
+        - VrstaStroska-read
+        - VrstaStroska-write
+- 
+    name: mn-seznami-vrstestroska-r
+    description: omogoča read akcije v meniju Seznami->Vrste stroška
+    permissions: 
+        - VrstaStroska-read
+- 
+    name: mn-seznami-organizacijskeenote
+    description: omogoča akcije v meniju Seznami->Organizacijske enote
+    permissions: 
+        - OrganizacijskaEnota-write
+        - OrganizacijskaEnota-read
+        - Zaposlitev-read
+        - Datoteka-write
+        - Datoteka-read
+        - Zapis-write
+        - Zapis-read
+        - ZapisLastnik-write
+        - ZapisLastnik-read
+        
+- 
+    name: mn-seznami-organizacijskeenote-r
+    description: omogoča read akcije v meniju Seznami->Organizacijske enote
+    permissions: 
+        - OrganizacijskaEnota-read
+        - Zaposlitev-read
+        - Datoteka-read
+        - Zapis-read
+        - ZapisLastnik-read        
+- 
+    name: mn-seznami-tipvaje
+    description: omogoča akcije v meniju Seznami->Tip vaje
+    permissions: 
+        - TipVaje-read
+        - TipVaje-write
+- 
+    name: mn-seznami-tipvaje-r
+    description: omogoča read akcije v meniju Seznami->Tip vaje
+    permissions: 
+        - TipVaje-read
+- 
+    name: mn-programdela
+    description: omogoča akcije v meniju Program dela
+    permissions: 
+        - ProgramDela-lock
+        - ProgramDela-unlock
+        - ProgramDela-read
+        - ProgramDela-write
+        - ProgramFestival-read
+        - ProgramFestival-write
+        - ProgramGostovanje-read
+        - ProgramGostovanje-write
+        - ProgramGostujoca-read
+        - ProgramGostujoca-write
+        - ProgramIzjemni-read
+        - ProgramIzjemni-write
+        - ProgramPonovitevPrejsnjih-read
+        - ProgramPonovitevPrejsnjih-write
+        - ProgramPonovitevPremiere-read
+        - ProgramPonovitevPremiere-write
+        - ProgramPremiera-read
+        - ProgramPremiera-write
+        - ProgramRazno-read
+        - ProgramRazno-write
+        - ProgramskaEnotaSklopa-read
+        - ProgramskaEnotaSklopa-write
+        - ProdukcijaDelitev-write
+        - DrugiVir-write
+        - PostavkaCDve-write 
+#        - Job-write
+#        - Report-write
+        - DrugiVir-read
+        - ProdukcijaDelitev-read
+        - ProdukcijskaHisa-read
+        - PostavkaCDve-read
+        - VrstaStroska-read
+        - Uprizoritev-read
+        - StrosekUprizoritve-read
+        - Funkcija-read
+        - Alternacija-read
+        - StrosekUprizoritve-read        
+        - TipFunkcije-read               
+        - Oseba-read                     
+        - Pogodba-read                   
+        - Drzava-read
+        - Popa-read
+        - Datoteka-write
+        - Zapis-write
+        - ZapisLastnik-write
+#        - Job-read
+#        - Report-read
+        - Datoteka-read
+        - Zapis-read
+        - ZapisLastnik-read
+
+-
+    name: mn-programdela-r
+    description: omogoča read akcije v meniju Program dela
+    permissions: 
+        - ProgramDela-read
+        - ProgramFestival-read
+        - ProgramGostovanje-read
+        - ProgramGostujoca-read
+        - ProgramIzjemni-read
+        - ProgramPonovitevPrejsnjih-read
+        - ProgramPonovitevPremiere-read
+        - ProgramPremiera-read
+        - ProgramRazno-read
+        - ProgramskaEnotaSklopa-read
+        - ProdukcijaDelitev-read
+        - DrugiVir-read
+        - PostavkaCDve-read
+        - Drzava-read
+#        - Job-read
+        - Report-read
+        - Datoteka-read
+        - Zapis-read
+        - ZapisLastnik-read
+    
+-
+    name: mn-produkcija-uprizoritve
+    description: omogoča akcije v meniju Produkcija->Uprizoritve
+    permissions: 
+        - Uprizoritev-read
+        - Uprizoritev-write
+        - Alternacija-read
+        - Alternacija-write
+        - Besedilo-read
+        - Funkcija-read
+        - Funkcija-write
+        - Oseba-read
+        - ProdukcijskaHisa-read
         - TipFunkcije-read
-        - ZvrstSurs-read
-        - ZvrstUprizoritve-read
+        - Datoteka-read
+        - Datoteka-write
+        - Zapis-read
+        - Zapis-write
+        - ZapisLastnik-read
+        - ZapisLastnik-write
+
+-
+    name: mn-produkcija-uprizoritve-r
+    description: omogoča read akcije v meniju Produkcija->Uprizoritve
+    permissions: 
+        - Uprizoritev-read
+        - Alternacija-read
+        - Besedilo-read
+        - Funkcija-read
+        - Oseba-read
+        - ProdukcijskaHisa-read
+        - TipFunkcije-read
+        - Datoteka-read
+        - Zapis-read
+        - Zapis-write
+        - ZapisLastnik-read
+-
+    name: mn-produkcija-stroskovnik
+    description: omogoča akcije v meniju Produkcija->Stroškovnik
+    permissions: 
+        - Alternacija-read
+        - Alternacija-write
+        - Funkcija-read
+        - Oseba-read
+        - Pogodba-read
+        - Pogodba-write
+        - Popa-read
+        - ProdukcijskaHisa-read
+        - StrosekUprizoritve-read
+        - StrosekUprizoritve-write
+        - TipFunkcije-read
+        - Trr-read
+        - Uprizoritev-read
+        - Zaposlitev-read
+-
+    name: mn-produkcija-stroskovnik-r
+    description: omogoča read akcije v meniju Produkcija->Stroškovnik
+    permissions: 
+        - Alternacija-read
+        - Funkcija-read
+        - Oseba-read
+        - Pogodba-read
+        - Popa-read
+        - ProdukcijskaHisa-read
+        - StrosekUprizoritve-read
+        - TipFunkcije-read
+        - Trr-read
+        - Uprizoritev-read
+        - Zaposlitev-read
+-
+    name: mn-produkcija-stroskovnik-splosno-r
+    description: omogoča read akcije v meniju Produkcija->Stroškovnik->Splošno
+    permissions: 
+        - StrosekUprizoritve-read
+        - Uprizoritev-read
+        - Funkcija-read
+        - Pogodba-read
+        - ProdukcijskaHisa-read
+        - TipFunkcije-read
+        - Oseba-read
+-
+    name: mn-produkcija-stroskovnik-materialnistroski
+    description: omogoča akcije v meniju Produkcija->Stroškovnik->Materialni stroški
+    permissions: 
+        - StrosekUprizoritve-read
+        - StrosekUprizoritve-write
+        - Uprizoritev-read
+        - Popa-read
+-
+    name: mn-produkcija-stroskovnik-materialnistroski-r
+    description: omogoča read akcije v meniju Produkcija->Stroškovnik->Materialni stroški
+    permissions: 
+        - StrosekUprizoritve-read
+        - Uprizoritev-read
+#        - Popa-read

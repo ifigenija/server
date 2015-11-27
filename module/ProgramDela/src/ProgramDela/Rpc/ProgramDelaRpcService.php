@@ -800,7 +800,7 @@ class ProgramDelaRpcService
      *
      * Tiskanje dokumenta
      *
-     * @param string $dokument
+     * @param string $dokument  id programa dela
      * @param array $options
      * @return array
      * @throws MaxException
@@ -817,7 +817,8 @@ class ProgramDelaRpcService
         $this->expect($dok
             , $this->translate('Dokument ne obstaja')
             , 520081);
-        $this->expectPermission('ProgramDela-write', $dok);
+//        $this->expectPermission('ProgramDela-write', $dok);
+        $this->expectPermission('ProgramDela-read', $dok);
         $report = 'ProgramDela\Task\ProgramDelaReport';
 
         try {
