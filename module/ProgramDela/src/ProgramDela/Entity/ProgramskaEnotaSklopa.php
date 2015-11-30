@@ -70,6 +70,15 @@ class ProgramskaEnotaSklopa
     protected $obiskDoma;
 
     /**
+     * 
+     * @ORM\Column(type="integer", nullable=false, options={"default":1})
+     * @Max\I18n(label="peSklopa.stDogodkov", description="peSklopa.d.stDogodkov")   
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    protected $stDogodkov;
+
+    /**
      * @ORM\ManyToOne(targetEntity="ProgramDela\Entity\ProgramRazno", inversedBy="programskeEnoteSklopa")
      * @Max\I18n(label="peSklopa.programRazno", description="peSklopa.d.programRazno")   
      * @Max\Ui(type="hiddenid")
@@ -91,6 +100,7 @@ class ProgramskaEnotaSklopa
         $this->expect($this->naslovPE, "Nima naslova PE. Naslov programske enote je obvezen podatek", 1000650);
         $this->validateEuroGE0($this->vrednostPE, "Vrednost PE", 1000651);
         $this->validateIntGE0($this->obiskDoma, "", 1000652);
+        $this->validateIntGE0($this->stDogodkov, "", 1000653);
     }
 
     public function getId()
@@ -178,6 +188,17 @@ class ProgramskaEnotaSklopa
     public function setObiskDoma($obiskDoma)
     {
         $this->obiskDoma = $obiskDoma;
+        return $this;
+    }
+
+    function getStDogodkov()
+    {
+        return $this->stDogodkov;
+    }
+
+    function setStDogodkov($stDogodkov)
+    {
+        $this->stDogodkov = $stDogodkov;
         return $this;
     }
 

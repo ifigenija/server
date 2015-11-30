@@ -37,6 +37,14 @@ class ProgramRazno
      */
     protected $stPE;
 
+    /**
+     * @ORM\Column(type="integer", nullable=false, options={"default":0})
+     * @Max\I18n(label="programRazno.stDogodkov", description="programRazno.d.stDogodkov")
+     * @Max\Ui(type="integer")
+     * @var integer     
+     */
+    protected $stDogodkov;
+
     public function __construct()
     {
         $this->programskeEnoteSklopa = new ArrayCollection();
@@ -89,10 +97,12 @@ class ProgramRazno
 
         $this->preracunajPoljaZaMatKoprodukcijo();
 
-        $this->stPE      = 0;
-        $this->obiskDoma = 0;
+        $this->stPE       = 0;
+        $this->stDogodkov = 0;
+        $this->obiskDoma  = 0;
         foreach ($this->getProgramskeEnoteSklopa() as $numObject => $object) {
             $this->stPE += 1;
+            $this->stDogodkov += $object->getStDogodkov();
             $this->obiskDoma += $object->getObiskDoma();
         }
         parent::preracunaj($smer);
@@ -149,6 +159,17 @@ class ProgramRazno
     public function setStPE($stPE)
     {
         $this->stPE = $stPE;
+        return $this;
+    }
+
+    function getStDogodkov()
+    {
+        return $this->stDogodkov;
+    }
+
+    function setStDogodkov($stDogodkov)
+    {
+        $this->stDogodkov = $stDogodkov;
         return $this;
     }
 

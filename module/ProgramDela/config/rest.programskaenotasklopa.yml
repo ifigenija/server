@@ -7,11 +7,12 @@ forms:
         elements:
 #            - id
             - naslovPE
+            - stDogodkov
             - avtorPE
             - obsegPE
             - mesecPE
-            - vrednostPE
             - obiskDoma
+            - vrednostPE
             - programRazno
 lists:
     default: 

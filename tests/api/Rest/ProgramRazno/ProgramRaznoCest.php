@@ -137,6 +137,7 @@ class ProgramRaznoCest
             'mesecPE'      => 'zz',
             'vrednostPE'   => 1,
             'obiskDoma'   => 40,
+            'stDogodkov'   => 3,
             'programRazno' => $this->obj1['id']
         ];
         $this->objPESklopa3 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
@@ -150,6 +151,7 @@ class ProgramRaznoCest
             'mesecPE'      => 'aa',
             'vrednostPE'   => 3,
             'obiskDoma'   => 30,
+            'stDogodkov'   => 1,
             'programRazno' => $this->obj1['id']
         ];
         $this->objPESklopa4 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
@@ -160,6 +162,7 @@ class ProgramRaznoCest
             'obsegPE'      => 'zz',
             'mesecPE'      => 'zz',
             'vrednostPE'   => 1,
+            'stDogodkov'   => 6,
             'obiskDoma'   => 30,
             'programRazno' => $this->obj2['id']
         ];
@@ -173,6 +176,7 @@ class ProgramRaznoCest
             'mesecPE'      => 'aa',
             'vrednostPE'   => 3,
             'obiskDoma'   => 30,
+            'stDogodkov'   => 5,
             'programRazno' => $this->obj2['id']
         ];
         $this->objPESklopa2 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
@@ -217,6 +221,7 @@ class ProgramRaznoCest
 //        $I->assertEquals($ent['vrednostPE'], 1.24);
         $I->assertEquals($ent['stPE'], 2);
         $I->assertEquals($ent['obiskDoma'], 70);
+        $I->assertEquals($ent['stDogodkov'], 4,"stDogodkov");
         $I->assertEquals($ent['stZaposlenih'], 1);
         $I->assertEquals($ent['stHonorarnihZun'], 1);
         $I->assertEquals($ent['celotnaVrednost'], 4);
@@ -350,6 +355,7 @@ class ProgramRaznoCest
             'mesecPE'      => 'uk',
             'vrednostPE'   => 14.01,
             'obiskDoma'   => 22,
+            'stDogodkov'   => 2,
             'programRazno' => $this->obj2['id']
         ];
         $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);

@@ -1594,8 +1594,8 @@ class ProgramDela
             if ($smer == Consts::DOWN) {
                 $object->preracunaj(Consts::DOWN);
             }
-            $this->stIzvNekomerc+=$object->getStPE();     //$$ prištevamo število programskih enot
-            $this->stIzvOstalihNek+=$object->getStPE();     //$$ prištevamo število programskih enot
+            $this->stIzvNekomerc+=$object->getStDogodkov(); 
+            $this->stIzvOstalihNek+=$object->getStDogodkov(); 
             $this->stObiskNekom +=$object->getObiskDoma();
             $this->stObiskNekomMat +=$object->getObiskDoma();
             $this->stHonorarnihZun +=$object->getStHonorarnihZun();
