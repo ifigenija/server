@@ -63,7 +63,7 @@ class ProgramDelaReport
                 '_css'  => 'style.css',
             ]);
             $this->printOut($html);
-            $this->finishReport($title);
+            $this->finishReport($title.'-kazalniki glavni dokument-');
             $this->cleanupTmp();
         }
 
@@ -145,7 +145,7 @@ class ProgramDelaReport
         $html = $this->render('outro', []);
         $this->printOut($html);
 
-        $this->finishReport($title);
+        $this->finishReport($title.'-priloge-');
         $this->cleanupTmp();
     }
 

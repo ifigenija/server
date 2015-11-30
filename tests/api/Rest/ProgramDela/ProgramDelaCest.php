@@ -809,7 +809,7 @@ class ProgramDelaCest
             'drugiViri'              => 9.12,
             'drugiJavni'             => 9.12,
             'gostitelj'              => $this->lookPopa1['id'],
-            'sort'                   => 1,
+            'sort'                   => 3,
         ];
         $this->objProgramGostovanj1 = $ent                        = $I->successfullyCreate($this->programGostovanjaUrl, $data);
         $I->assertGuid($ent['id']);
@@ -840,7 +840,7 @@ class ProgramDelaCest
             'drugiViri'              => 9.12,
             'drugiJavni'             => 9.12,
             'gostitelj'              => $this->lookPopa1['id'],
-            'sort'                   => 1,
+            'sort'                   => 4,
         ];
         $this->objProgramGostovanj2 = $ent                        = $I->successfullyCreate($this->programGostovanjaUrl, $data);
         $I->assertGuid($ent['id']);
@@ -867,7 +867,7 @@ class ProgramDelaCest
 //            'lastnaSredstva'  => 1.24,
             'drugiViri'       => 1.24,
             'drugiJavni'      => 1.24,
-            'sort'            => 1,
+            'sort'            => 5,
         ];
         $this->objProgramRazno1 = $ent                    = $I->successfullyCreate($this->programRaznoUrl, $data);
         $I->assertGuid($ent['id']);
@@ -885,7 +885,7 @@ class ProgramDelaCest
 //            'lastnaSredstva'  => 1.24,
             'drugiViri'       => 1.24,
             'drugiJavni'      => 1.24,
-            'sort'            => 1,
+            'sort'            => 6,
         ];
         $this->objProgramRazno2 = $ent                    = $I->successfullyCreate($this->programRaznoUrl, $data);
         $I->assertGuid($ent['id']);
@@ -1015,7 +1015,7 @@ class ProgramDelaCest
 //            'ponoviGost'         => 1,
 //            'ponoviInt'          => 1,
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
-            'sort'                    => 1,
+            'sort'                    => 7,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
             'stHonorarnihZun'         => 1,
@@ -1056,7 +1056,7 @@ class ProgramDelaCest
 //            'ponoviGost'         => 1,
 //            'ponoviInt'          => 1,
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
-            'sort'                    => 1,
+            'sort'                    => 8,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
             'stHonorarnihZun'         => 1,
@@ -1096,7 +1096,7 @@ class ProgramDelaCest
 //            'ponoviGost'         => 1,
 //            'ponoviInt'          => 1,
 //            'tip'                => 'premiera', // ali to polje potrebujemo - ne. Ne rabimo vnašati, samo se nastavi
-            'sort'                    => 1,
+            'sort'                    => 9,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
             'stHonorarnihZun'         => 1,
@@ -1153,7 +1153,7 @@ class ProgramDelaCest
             'ponoviKopr'              => 4,
             'ponoviInt'               => 4,
             'ponoviKoprInt'           => 4,
-            'sort'                    => 1,
+            'sort'                    => 10,
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote1['id'],
             'dokument'                => $this->obj2['id'],
             'uprizoritev'             => $this->lookUprizoritev1['id'], // ista uprizoritev
@@ -1194,7 +1194,7 @@ class ProgramDelaCest
             'ponoviKopr'              => 5,
             'ponoviInt'               => 5,
             'ponoviKoprInt'           => 5,
-            'sort'                    => 1,
+            'sort'                    => 11,
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote1['id'],
             'dokument'                => $this->obj2['id'],
             'uprizoritev'             => $this->lookUprizoritev1['id'], // ista uprizoritev
@@ -1235,7 +1235,7 @@ class ProgramDelaCest
             'ponoviKopr'              => 6,
             'ponoviInt'               => 6,
             'ponoviKoprInt'           => 6,
-            'sort'                    => 1,
+            'sort'                    => 12,
             'tipProgramskeEnote'      => $this->lookTipProgramskeEnote1['id'],
             'dokument'                => $this->obj2['id'],
             'uprizoritev'             => $this->lookUprizoritev3['id'], // druga uprizoritev
@@ -1285,7 +1285,7 @@ class ProgramDelaCest
             'ponoviKoprGost'          => 3,
             'ponoviKopr'              => 3,
 //            'ponoviInt'            => 1,
-            'sort'                    => 1,
+            'sort'                    => 13,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
             'stHonorarnihZun'         => 11,
@@ -1331,7 +1331,7 @@ class ProgramDelaCest
             'ponoviKoprGost'          => 5,
             'ponoviKopr'              => 5,
 //            'ponoviInt'            => 1,
-            'sort'                    => 1,
+            'sort'                    => 14,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
             'stHonorarnihZun'         => 1,
@@ -1377,7 +1377,7 @@ class ProgramDelaCest
             'ponoviKoprGost'          => 2,
             'ponoviKopr'              => 2,
 //            'ponoviInt'            => 1,
-            'sort'                    => 1,
+            'sort'                    => 15,
             'stZaposUmet'             => 1,
             'stZaposDrug'             => 1,
             'stHonorarnihZun'         => 25,
@@ -1427,7 +1427,7 @@ class ProgramDelaCest
 //            'ponoviInt'          => 1,
 //            'tipProgramskeEnote' => NULL,
 //            'tip'                => 'gostujoci', 
-            'sort'                 => 1,
+            'sort'                 => 16,
             'dokument'             => $this->obj2['id'],
             'uprizoritev'          => $this->lookUprizoritev1['id'], // ista uprizoritev
         ];
@@ -1460,7 +1460,7 @@ class ProgramDelaCest
 //            'ponoviInt'          => 1,
 //            'tipProgramskeEnote' => NULL,
 //            'tip'                => 'gostujoci', 
-            'sort'                 => 1,
+            'sort'                 => 17,
             'dokument'             => $this->obj2['id'],
             'uprizoritev'          => $this->lookUprizoritev1['id'], // ista uprizoritev
         ];
@@ -1493,7 +1493,7 @@ class ProgramDelaCest
 //            'ponoviInt'          => 1,
 //            'tipProgramskeEnote' => NULL,
 //            'tip'                => 'gostujoci', 
-            'sort'                 => 1,
+            'sort'                 => 18,
             'dokument'             => $this->obj2['id'],
             'uprizoritev'          => $this->lookUprizoritev3['id'], // druga uprizoritev
         ];
@@ -1510,12 +1510,12 @@ class ProgramDelaCest
     {
         //pri validaciji ne bi smel najti samega sebe
         $data         = $this->objProgramPremiera1;
-        $data['sort'] = 3;
+        $data['sort'] = 20;
 
         $ent = $I->successfullyUpdate($this->programPremieraUrl, $data['id'], $data);
         codecept_debug($ent);
 
-        $I->assertEquals($ent['sort'], 3);
+        $I->assertEquals($ent['sort'], 20);
     }
 
     /**
