@@ -226,6 +226,60 @@
         - Zaposlitev-read
         - OrganizacijskaEnota-read
 - 
+    name: mn-seznami-osebe-splosno
+    description: omogoča akcije v meniju Seznami->Osebe->Splošno
+    permissions: 
+        - Oseba-write
+        - Oseba-read
+        - Drzava-read
+        - PostniNaslov-read
+        - PostniNaslov-write
+        - Telefonska-read
+        - Telefonska-write
+        - Datoteka-read
+        - Datoteka-write
+        - ZapisLastnik-read
+        - ZapisLastnik-write
+        - Zapis-read
+        - Zapis-write
+- 
+    name: mn-seznami-osebe-splosno-r
+    description: omogoča read akcije v meniju Seznami->Osebe->Splošno
+    permissions: 
+        - Oseba-read
+        - Drzava-read
+        - PostniNaslov-read
+        - Telefonska-read
+        - Datoteka-read
+        - ZapisLastnik-read
+        - Zapis-read
+- 
+    name: mn-seznami-osebe-osebnipodatki
+    description: omogoča akcije v meniju Seznami->Osebe->Splošno
+    permissions: 
+#        $$
+        - Oseba-vse
+        - Oseba-readvse
+        - Oseba-write
+        - Oseba-read
+        - Datoteka-read
+        - Datoteka-write
+        - ZapisLastnik-read
+        - ZapisLastnik-write
+        - Zapis-read
+        - Zapis-write
+- 
+    name: mn-seznami-osebe-osebnipodatki-r
+    description: omogoča read akcije v meniju Seznami->Osebe->Splošno
+    permissions: 
+#        $$
+        - Oseba-readvse
+        - Oseba-read
+        - Trr-read
+        - Datoteka-read
+        - ZapisLastnik-read
+        - Zapis-read
+- 
     name: mn-seznami-poslovnipartnerji
     description: omogoča akcije v meniju Seznami->Poslovni partnerji
     permissions: 
@@ -430,7 +484,7 @@
         - ProdukcijaDelitev-write
         - DrugiVir-write
         - PostavkaCDve-write 
-#        - Job-write
+        - Job-write
 #        - Report-write
         - DrugiVir-read
         - ProdukcijaDelitev-read
@@ -450,7 +504,7 @@
         - Datoteka-write
         - Zapis-write
         - ZapisLastnik-write
-#        - Job-read
+        - Job-read
 #        - Report-read
         - Datoteka-read
         - Zapis-read
@@ -474,8 +528,8 @@
         - DrugiVir-read
         - PostavkaCDve-read
         - Drzava-read
-#        - Job-read
-        - Report-read
+        - Job-read
+#        - Report-read
         - Datoteka-read
         - Zapis-read
         - ZapisLastnik-read
@@ -575,3 +629,43 @@
         - StrosekUprizoritve-read
         - Uprizoritev-read
 #        - Popa-read
+
+-
+    name: arhivar
+    description: arhivar
+    permissions: 
+        - Abonma-read
+        - Alternacija-read
+        - AvtorBesedila-read
+        - AvtorBesedila-write
+        - Besedilo-read
+        - Besedilo-write
+        - Datoteka-read
+        - Datoteka-write
+        - Drzava-read
+        - Funkcija-read
+        - KontaktnaOseba-read
+        - OrganizacijskaEnota-read
+        - Oseba-read
+        - Oseba-write
+        - Popa-read
+        - Posta-read
+        - PostniNaslov-read
+        - PostniNaslov-write
+        - ProdukcijskaHisa-read
+        - Prostor-read
+        - Telefonska-read
+        - Telefonska-write
+        - TipFunkcije-read
+        - TipPopa-read
+        - TipVaje-read
+        - Trr-read
+        - Uprizoritev-read
+        - VrstaStroska-read
+        - ZapisLastnik-read
+        - ZapisLastnik-write
+        - Zapis-read
+        - Zapis-write
+        - Zaposlitev-read
+        - ZvrstSurs-read
+        - ZvrstUprizoritve-read

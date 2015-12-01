@@ -51,16 +51,16 @@ class VrsteStroska
             $qb->setParameter('query', mb_strtolower("%{$options['q']}%"), "string");
         }
         if (!empty($options['skupina'])) {
-            $skupina    = $e->eq('p.skupina', ':st');
+            $skupina    = $e->eq('p.skupina', ':sk');
 
             $qb->andWhere($e->orX($skupina));
-            $qb->setParameter('st', mb_strtolower("{$options['skupina']}"), "integer");
+            $qb->setParameter('sk', mb_strtolower("{$options['skupina']}"), "integer");
         }
         if (!empty($options['podskupina'])) {
-            $podskupina = $e->eq('p.podskupina', ':st');
+            $podskupina = $e->eq('p.podskupina', ':psk');
 
             $qb->andWhere($e->orX($podskupina));
-            $qb->setParameter('st', mb_strtolower("{$options['podskupina']}"), "integer");
+            $qb->setParameter('psk', mb_strtolower("{$options['podskupina']}"), "integer");
         }
 
         return $qb;
