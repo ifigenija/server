@@ -26,6 +26,13 @@ class Osebe
             "email"     => ["alias" => "p.email"],
             "psevdonim" => ["alias" => "p.psevdonim"],
         ],
+        "osebni"  => [
+            "priimek"   => ["alias" => "p.priimek"],
+            "ime"       => ["alias" => "p.ime"],
+            "sifra"     => ["alias" => "p.sifra"],
+            "email"     => ["alias" => "p.email"],
+            "psevdonim" => ["alias" => "p.psevdonim"],
+        ],
         "vse"     => [
             "priimek" => ["alias" => "p.priimek"],
             "ime"     => ["alias" => "p.ime"],
@@ -37,11 +44,15 @@ class Osebe
         switch ($name) {
             case "default":
             case "vse":
-                $qb   = $this->getVseQb($options);
-                $sort = $this->getSort($name);
-                $qb->orderBy($sort->order, $sort->dir);
-                return new DoctrinePaginator(new Paginator($qb));
+                $qb = $this->getVseQb($options);
+                break;
+            case "osebni":
+                $qb = $this->getOsebniQb($options);
+                break;
         }
+        $sort = $this->getSort($name);
+        $qb->orderBy($sort->order, $sort->dir);
+        return new DoctrinePaginator(new Paginator($qb));
     }
 
     public function getVseQb($options)
@@ -56,7 +67,7 @@ class Osebe
             $email     = $e->like('lower(p.email)', ':naz');
             $psevdonim = $e->like('lower(p.psevdonim)', ':naz');
             $qb->andWhere($e->orX($ime, $priimek, $sifra, $email, $psevdonim));
-            $q = mb_strtolower($options['q']);
+            $q         = mb_strtolower($options['q']);
             $qb->setParameter('naz', "%" . $q . "%", "string");
         }
 
@@ -74,6 +85,14 @@ class Osebe
         }
 
         return $qb;
+    }
+
+    public function getOsebniQb($options)
+    {
+        $this->expect($this->getAuthorizationService()->isGranted('Oseba-readVse'),
+                'Nimate dovoljenja za branje osebnih podatkov', 1001600);
+
+        return $this->getVseQb($options);
     }
 
     /**

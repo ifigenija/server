@@ -8,6 +8,8 @@
 
 namespace App\Service;
 
+use Max\Ann\EntityMetadata;
+
 /**
  * 
  * Ponuja vmesnik do podatkov o osebah
@@ -23,7 +25,7 @@ class OsebaRpcService
     /**
      * Poišče podobne osebe glede na kriterije kot npr. enak priimek,
      *
-     * @param array $oseba      oseba, za katero iščemo podobne osebe
+     * @param App\Entity\Oseba $oseba      oseba, za katero iščemo podobne osebe
      * @return array            hidriran seznam podobnih oseb
      * @throws \Max\Exception\UnauthException
      */
@@ -32,12 +34,14 @@ class OsebaRpcService
 
         // preverjanje avtorizacije
         $this->expectPermission("Oseba-read");
-        
+
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
+        $metaF    = $this->getServiceLocator()->get('entity.metadata.factory');
+        $meta = $metaF->factory("App\Entity\Oseba");
 
         $osebaR = $em->getRepository("App\Entity\Oseba");
 
-        
+
         $this->expect(is_array($oseba), $this->translate("Vhodni parameter oseba mora biti array"), 1001120);
 
         $imepolja = 'priimek';
@@ -60,19 +64,19 @@ class OsebaRpcService
 
         /**
          * še hidriramo
+         * brez osebnih podatkov, zato uporabimo polja, ki so v lookup-u
          */
         $jsonList = [];
-
-        $hydr = $osebaR->getJsonHydrator();
 
         /**
          * $$ tu bi morda še bilo potrebno preverjati avtorizacije po kontekstu
          */
         foreach ($podobneOsebe as $object) {
-            $array      = $hydr->extract($object);
+            $this->expectPermission("Oseba-read", $oseba);
+            $array     = $meta->filterForLookup($object);
             $jsonList[] = $array;
         }
-
+        
         return $jsonList;
     }
 

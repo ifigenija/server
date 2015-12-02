@@ -717,7 +717,6 @@ class ProgramDelaRpcService
         $this->expectPermission("StrosekUprizoritve-read");
         $this->expectPermission("Funkcija-read");
         $this->expectPermission("Alternacija-read");
-        $this->expectPermission("Oseba-read");
         $this->expectPermission("Pogodba-read");
 
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
@@ -769,7 +768,6 @@ class ProgramDelaRpcService
         $this->expectPermission("StrosekUprizoritve-read");
         $this->expectPermission("Funkcija-read");
         $this->expectPermission("Alternacija-read");
-        $this->expectPermission("Oseba-read");
         $this->expectPermission("Pogodba-read");
 
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");

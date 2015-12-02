@@ -53,8 +53,8 @@ class OsebaCest
         /**
          * le en s takim priimkom, sebe ne sme najti
          */
-        $resp    = $I->successfullyCallRpc($this->rpcUrl, 'podobneOsebe', ["oseba" => [
-                'id'      =>  $this->objOseba2['id'],
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'podobneOsebe', ["oseba" => [
+                'id'      => $this->objOseba2['id'],
                 'ime'     => mb_strtolower($this->objOseba2['ime']),
                 'priimek' => mb_strtolower($this->objOseba2['priimek']),
             ]]
@@ -80,7 +80,7 @@ class OsebaCest
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'podobneOsebe', ["oseba" => [
                 'id'      => null, // to je razlika
                 'ime'     => mb_strtolower($this->objOseba2['ime']),
-                'priimek' => mb_strtolower($this->objOseba2['priimek'].'   '),
+                'priimek' => mb_strtolower($this->objOseba2['priimek'] . '   '),
             ]]
         );
         codecept_debug($resp);
@@ -104,11 +104,22 @@ class OsebaCest
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'podobneOsebe', ["oseba" => [
                 'id'      => null, // to je razlika
                 'ime'     => 'Anabel',
-                'priimek' => 'novAK',   // lower/upper case ni pomemben
+                'priimek' => 'novAK', // lower/upper case ni pomemben
             ]]
         );
         codecept_debug($resp);
         $I->assertGreaterThanOrEqual(2, count($resp), "število najdenih oseb");
+        /**
+         * osebnih podatkov ne sme biti vidnih 
+         */
+        $I->assertTrue(array_key_exists('id', $resp[0]), 'id ni osebni podatek');
+        $I->assertFalse(array_key_exists('datumRojstva', $resp[0]), 'datumRojstva osebni podatek');
+        $I->assertFalse(array_key_exists('emso', $resp[0]), 'emso osebni podatek');
+        $I->assertFalse(array_key_exists('davcna', $resp[0]), 'davcna osebni podatek');
+        $I->assertFalse(array_key_exists('drzavljanstvo', $resp[0]), 'drzavljanstvo osebni podatek');
+        $I->assertFalse(array_key_exists('drzavaRojstva', $resp[0]), 'drzavaRojstva osebni podatek');
+        $I->assertFalse(array_key_exists('krajRojstva', $resp[0]), 'krajRojstva osebni podatek');
+        $I->assertFalse(array_key_exists('trrji', $resp[0]), 'trrji osebni podatek');
     }
 
     /**
