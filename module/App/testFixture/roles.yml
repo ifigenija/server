@@ -239,15 +239,25 @@
     permissions: 
         - Zapis-write
 - 
+    name: Oseba-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Oseba-read
+- 
     name: Oseba-write
     description: 'Vloga z 1 dovoljenjem'
     permissions: 
         - Oseba-write
 - 
-    name: Oseba-read
+    name: Oseba-vse
     description: 'Vloga z 1 dovoljenjem'
     permissions: 
-        - Oseba-read
+        - Oseba-vse
+- 
+    name: Oseba-readVse
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Oseba-readVse
 - 
     name: Datoteka-write
     description: 'Vloga z 1 dovoljenjem'

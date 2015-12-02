@@ -89,6 +89,8 @@
         - ZapisLastnik-write
         - Uprizoritev-write
         - Uprizoritev-read
+        - Oseba-read
+        - Oseba-readVse
 -
     name: testni uporabnik za testiranje zapisov
     email: dana@ifigenija.si
@@ -112,6 +114,8 @@
         - Zapis-write
         - Zapis-read
         - Datoteka-write
+        - Oseba-read
+        - Oseba-write
 -
     name: testni uporabnik za testiranje zapisov
     email: vihra@ifigenija.si
@@ -125,7 +129,9 @@
         - Zapis-write
         - Zapis-read
         - Datoteka-write
-        
+        - Oseba-read
+        - Oseba-write
+        - Oseba-vse
 -
     name: testni uporabnik za testiranje zapisov
     email: vlado@ifigenija.si

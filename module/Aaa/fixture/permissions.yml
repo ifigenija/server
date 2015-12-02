@@ -13,7 +13,10 @@
     description: Dogodek - branje vseh, ne glede na status dogodka
 -
     name: Oseba-vse
-    description: Oseba - vse - za testiranje assert
+    description: Oseba - spreminjanje osebnih podatkov
+-
+    name: Oseba-readVse
+    description: Oseba - branje tudi osebnih podatkov 
 -
     name: ProgramDela-lock
     description: ProgramDela - zaklepanje

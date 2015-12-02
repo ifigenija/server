@@ -145,7 +145,7 @@ class DatotekaCest
         $resp = $I->failToGetList($this->restUrlVse, []);
         codecept_debug($resp);
         $I->assertEquals('list disabled', $resp[0]['message']);
-        $I->assertEquals(404, $resp[0]['code']);
+        $I->assertEquals(1000021, $resp[0]['code']);
     }
 
     /**

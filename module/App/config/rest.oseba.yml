@@ -39,29 +39,38 @@ forms:
 #            - zasedenost
         hydrator: 
             byValue: [naslovi, telefonske]
-            exclude: [alternacije, pogodbe, sodelovanja]
-    osebni: 
-        elements:    
-#            - id              
+            exclude: 
+            - alternacije
+            - pogodbe
+            - sodelovanja
+#                           osebni podatki:
             - datumRojstva
             - emso
             - davcna
-#            - spol     # $$ rb v filter validator haystack trenutno narobe zloži Moški in Ženska namesto M in Z
             - drzavljanstvo
             - drzavaRojstva
             - krajRojstva
-#            - user         # bomo na strani userja urejali
-#            - telefonske@
-#            - trrji
-#            - alternacije
-#            - pogodbe
-#            - sodelovanja 
+            - trrji
+    osebni: 
+        disabledMethods:
+            - create
+            - delete
+#        $$     za geet bi rabil -readVse, za update -vse
+        perm: Oseba-vse  
+        elements:    
+            - datumRojstva
+            - emso
+            - davcna
+            - drzavljanstvo
+            - drzavaRojstva
+            - krajRojstva
         hydrator: 
             byValue: [trrji]
             exclude: [naslovi,telefonske,alternacije,pogodbe,sodelovanja]
             
 lists:
-    full: 
+#    vsi podatki, tudi osebni
+    osebni: 
         hydrator: 
             byValue: [trrji, naslovi, telefonske]
     default: 
@@ -83,9 +92,16 @@ lists:
                     
         hydrator:
             byValue: [telefonske, naslovi]
+            exclude: 
+#                           osebni podatki:
+            - datumRojstva
+            - emso
+            - davcna
+            - drzavljanstvo
+            - drzavaRojstva
+            - krajRojstva
+            - trrji
 #            exclude: [trrji, datumRojstva, emso, davcna, drzavljanstvo, krajRojstva, alternacije, pogodbe, sodelovanja]
-#    vse:
-#        filter:
 hydrator:      
 relation:
     default:

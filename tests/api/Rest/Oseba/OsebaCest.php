@@ -32,6 +32,7 @@ class OsebaCest
 {
 
     private $restUrl              = '/rest/oseba';
+    private $osebniUrl            = '/rest/oseba/osebni';
     private $relationPopaUrl      = '/rest/user/popa/';
     private $trrUrl               = '/rest/trr';
     private $naslUrl              = '/rest/postninaslov';
@@ -131,7 +132,7 @@ class OsebaCest
      */
     public function lookupUser(ApiTester $I)
     {
-        $this->lookUser1 = $ent            = $I->lookupEntity("user", "tatjana@ifigenija.si", false);
+        $this->lookUser1 = $ent             = $I->lookupEntity("user", "tatjana@ifigenija.si", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -235,7 +236,7 @@ class OsebaCest
             'skype'         => 'xxxxxx',
             'fb'            => 'fb.com/xx',
 //            'datumRojstva'  => '1973-03-28T00:00:00+0100',
-            'emso'          => 'ZZ',
+            'emso'          => 'ZZ', //POST ignorira, ker je osebni podatek
             'davcna'        => 'ZZ123',
             'spol'          => 'M',
             'opombe'        => 'zz',
@@ -246,7 +247,7 @@ class OsebaCest
 //            'user'          => $this->lookUser['id'],
         ];
 
-        $this->obj1 = $oseba     = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj1 = $oseba      = $I->successfullyCreate($this->restUrl, $data);
 //        $I->assertEquals($oseba['datumRojstva'], '1973-03-28T00:00:00+0100');
         $I->assertEquals('zz', $oseba['ime']);
         $I->assertGuid($oseba['id']);
@@ -304,7 +305,7 @@ class OsebaCest
             'user'          => null,
         ];
 
-        $this->obj3=$oseba = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj3 = $oseba      = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($oseba['id']);
 
         // še nekaj creatov zaradi testiranja sortiranja
@@ -479,6 +480,52 @@ class OsebaCest
 //    }
 
     /**
+     *  create po formi osebni
+     * 
+     * @param ApiTester $I
+     */
+    public function createOsebni(ApiTester $I)
+    {
+        $data = [
+            'sifra'         => 'hh',
+            'naziv'         => 'hh',
+            'priimek'       => 'hh',
+            'funkcija'      => 'hh',
+            'srednjeIme'    => 'hh',
+            'psevdonim'     => 'hh',
+            'email'         => 'h@xxx.xx',
+            'twitter'       => '@hh',
+            'skype'         => 'hh',
+            'fb'            => 'fb.com/hh',
+//            'datumRojstva'  => '1973-03-28T00:00:00+0100',
+            'emso'          => 'hh',
+            'davcna'        => 'ZZ123',
+            'spol'          => 'M',
+            'opombe'        => 'hh',
+            'drzavljanstvo' => 'hh',
+            'drzavaRojstva' => 'hh',
+            'krajRojstva'   => 'hh',
+            'user'          => null,
+        ];
+
+        $resp = $I->failToCreate($this->osebniUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1000022, $resp[0]['code'], 'ali api disablean');
+    }
+
+    /**
+     *      delete po formi osebni
+     * 
+     * @param ApiTester $I
+     */
+    public function deleteOsebni(ApiTester $I)
+    {
+        $resp = $I->failToDelete($this->osebniUrl, $this->obj1['id']);
+        codecept_debug($resp);
+        $I->assertEquals(1000022, $resp[0]['code'], 'ali api disablean');
+    }
+
+    /**
      * 
      * @depends create
      * @param ApiTester $I
@@ -491,6 +538,59 @@ class OsebaCest
         $oseba = $I->successfullyUpdate($this->restUrl, $oseba['id'], $oseba);
 
         $I->assertEquals('tralala', $oseba['ime']);
+    }
+
+    /**
+     * update po formi osebni
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateOsebni(ApiTester $I)
+    {
+        $data['id']            = $this->obj1['id'];
+        $data['datumRojstva']  = '1977-06-28T00:00:00+0100';
+        $data['emso']          = 'HH';
+        $data['davcna']        = 'HH123';
+        $data['drzavljanstvo'] = 'hh';
+        $data['drzavaRojstva'] = 'hh';
+        $data['krajRojstva']   = 'hh';
+
+        $ent = $I->successfullyUpdate($this->osebniUrl, $data['id'], $data);
+
+        $I->assertEquals($ent['id'], $data['id']);
+        $I->assertEquals($ent['datumRojstva'], $data['datumRojstva']);
+        $I->assertEquals($ent['emso'], $data['emso']);
+        $I->assertEquals($ent['davcna'], $data['davcna']);
+        $I->assertEquals($ent['drzavljanstvo'], $data['drzavljanstvo']);
+        $I->assertEquals($ent['drzavaRojstva'], $data['drzavaRojstva']);
+        $I->assertEquals($ent['krajRojstva'], $data['krajRojstva']);
+
+
+        /*
+         * uporabnik brez Oseba-write in Oseba-vse dovoljenja
+         * $$ zaenkrat kontrolira le Oseba-vse
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $resp = $I->failToUpdate($this->osebniUrl, $data['id'], $data);
+        codecept_debug($resp);
+        $I->assertEquals(1000101, $resp[0]['code']);
+
+        /*
+         * uporabnik brez Oseba-vse dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
+        $resp = $I->failToUpdate($this->osebniUrl, $data['id'], $data);
+        codecept_debug($resp);
+        $I->assertEquals(1000101, $resp[0]['code']);
+
+        /*
+         * uporabnik z Oseba-vse dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
+        $I->successfullyUpdate($this->osebniUrl, $data['id'], $data);
+
+        $I->fail('$$začasno');
     }
 
     /**
@@ -647,8 +747,9 @@ class OsebaCest
     public function read(ApiTester $I)
     {
         $oseba = $I->successfullyGet($this->restUrl, $this->obj1['id']);
+        codecept_debug($oseba);
 
-        $I->assertNotEmpty($oseba, "osebe ni");
+        $I->assertGuid($oseba['id'], "osebe ni");
 
         // preverim vsa vidna polja
         $I->assertEquals('zz', $oseba['naziv']);
@@ -661,42 +762,130 @@ class OsebaCest
         $I->assertEquals($oseba['twitter'], '@xx');
         $I->assertEquals($oseba['skype'], 'xxxxxx');
         $I->assertEquals($oseba['fb'], 'fb.com/xx');
-//        $I->assertEquals('1973-03-28T00:00:00+0100', $oseba['datumRojstva']);
-//        $I->assertEquals('ZZ', $oseba['emso'], "napačen emšo");
-//        $I->assertEquals('ZZ123', $oseba['davcna'], 'napačna davčna');
         $I->assertEquals('M', $oseba['spol'], "spol ni pravilen");
         $I->assertEquals('zz', $oseba['opombe']);
-//        $I->assertEquals('zz', $oseba['drzavljanstvo']);
-//        $I->assertEquals('zz', $oseba['drzavaRojstva']);
-//        $I->assertEquals('zz', $oseba['krajRojstva'], "kraj rojstva");
-        $I->assertEquals(null, $oseba['user'], "user");
 
-        codecept_debug($oseba);
         $I->assertTrue(isset($oseba['kontaktneOsebe']));
-        $I->assertTrue(isset($oseba['trrji']));
+//        $I->assertTrue(isset($oseba['trrji']));
         $I->assertTrue(isset($oseba['telefonske']));
         $I->assertTrue(isset($oseba['naslovi']));
-        $I->assertEquals(2, count($oseba['trrji']));
+//        $I->assertEquals(2, count($oseba['trrji']));
         $I->assertEquals(1, count($oseba['telefonske']));
         $I->assertEquals(2, count($oseba['naslovi']));
         $I->assertEquals(0, count($oseba['kontaktneOsebe']));
+
+        /**
+         * osebnih podatkov ne sme biti vidnih 
+         */
+        $I->assertFalse(array_key_exists('datumRojstva', $oseba), 'datumRojstva osebni podatek');
+        $I->assertFalse(array_key_exists('emso', $oseba), 'emso osebni podatek');
+        $I->assertFalse(array_key_exists('davcna', $oseba), 'davcna osebni podatek');
+        $I->assertFalse(array_key_exists('drzavljanstvo', $oseba), 'drzavljanstvo osebni podatek');
+        $I->assertFalse(array_key_exists('drzavaRojstva', $oseba), 'drzavaRojstva osebni podatek');
+        $I->assertFalse(array_key_exists('krajRojstva', $oseba), 'krajRojstva osebni podatek');
+        $I->assertFalse(array_key_exists('trrji', $oseba), 'trrji osebni podatek');
     }
 
     /**
-     * @depends create
+     * Preberem osebo po formi osebni
+     * 
+     * @depends updateOsebni
      * @param ApiTester $I
      */
-//    public function getListVse(ApiTester $I)
-//    {
-//        $listUrl = $this->restUrl . "/vse";
-//        codecept_debug($listUrl);
-//        $resp    = $I->successfullyGetList($listUrl, []);
-//        $list    = $resp['data'];
-//
-//        $I->assertNotEmpty($list);
-//        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals("aa", $list[0]['opombe']);      //glede na sort
-//    }
+    public function readOsebni(ApiTester $I)
+    {
+        $ent = $I->successfullyGet($this->osebniUrl, $this->obj1['id']);
+        codecept_debug($ent);
+
+        $I->assertGuid($ent['id'], "osebe ni");
+
+        // preverim vsa vidna polja
+        /**
+         * najprej osebni podatki
+         */
+        $I->assertEquals($ent['datumRojstva'], '1977-06-28T00:00:00+0100');
+        $I->assertEquals($ent['emso'], 'HH');
+        $I->assertEquals($ent['davcna'], 'HH123');
+        $I->assertEquals($ent['drzavljanstvo'], 'hh');
+        $I->assertEquals($ent['drzavaRojstva'], 'hh');
+        $I->assertEquals($ent['krajRojstva'], 'hh');
+        $I->assertTrue(isset($ent['trrji']));
+        $I->assertEquals(2, count($ent['trrji']));
+
+        /**
+         * ostale podatke
+         */
+        $I->assertEquals('zz', $ent['naziv']);
+        $I->assertEquals('tralala', $ent['ime']);
+        $I->assertEquals('zz', $ent['priimek']);
+        $I->assertEquals('zz', $ent['funkcija']);
+        $I->assertEquals('zz', $ent['srednjeIme']);
+        $I->assertEquals('zz', $ent['psevdonim'], "psevdonim");
+        $I->assertEquals('x@xxx.xx', $ent['email'], "email");
+        $I->assertEquals($ent['twitter'], '@xx');
+        $I->assertEquals($ent['skype'], 'xxxxxx');
+        $I->assertEquals($ent['fb'], 'fb.com/xx');
+        $I->assertEquals('M', $ent['spol'], "spol ni pravilen");
+        $I->assertEquals('zz', $ent['opombe']);
+
+
+        $I->assertTrue(isset($ent['kontaktneOsebe']), 'isset kontaktneOsebe');
+//        $I->assertTrue(isset($ent['telefonske']),'isset telefonske');
+//        $I->assertTrue(isset($ent['naslovi']),'isset naslovi');
+        $I->assertEquals(0, count($ent['kontaktneOsebe']));
+//        $I->assertEquals(1, count($ent['telefonske']));
+//        $I->assertEquals(2, count($ent['naslovi']));
+    }
+
+    /**
+     * lista po vseh, tudi osebnih podatkih
+     * 
+     * @depends createOsebni
+     * @param ApiTester $I
+     */
+    public function getListOsebni(ApiTester $I)
+    {
+        /*         * *
+         * uporabnik z Oseba-readVse dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
+
+        $listUrl = $this->osebniUrl . "?q=cch";     // na priimku je wildcard, išče cch*
+        codecept_debug($listUrl);
+        $resp    = $I->successfullyGetList($listUrl, []);
+        $list    = $resp['data'];
+        codecept_debug($list);
+        $I->assertNotEmpty($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+
+        /**
+         * osebnih podatki so tu vidni 
+         */
+        $I->assertTrue(array_key_exists('datumRojstva', $list[0]), 'datumRojstva osebni podatek');
+        $I->assertTrue(array_key_exists('emso', $list[0]), 'emso osebni podatek');
+        $I->assertTrue(array_key_exists('davcna', $list[0]), 'davcna osebni podatek');
+        $I->assertTrue(array_key_exists('drzavljanstvo', $list[0]), 'drzavljanstvo osebni podatek');
+        $I->assertTrue(array_key_exists('drzavaRojstva', $list[0]), 'drzavaRojstva osebni podatek');
+        $I->assertTrue(array_key_exists('krajRojstva', $list[0]), 'krajRojstva osebni podatek');
+        $I->assertTrue(array_key_exists('trrji', $list[0]), 'trrji osebni podatek');
+
+
+        /*
+         * uporabnik brez Oseba-readVse dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->failToGetList($listUrl, []);
+        codecept_debug($resp);
+        $I->assertEquals(1001600, $resp[0]['code']);
+
+        /*
+         * uporabnik brez Oseba-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $resp = $I->failToGetList($listUrl, []);
+        codecept_debug($resp);
+        $I->assertEquals(1000012, $resp[0]['code']);
+    }
 
     /**
      * @depends create
@@ -712,7 +901,20 @@ class OsebaCest
         $I->assertNotEmpty($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);
 
-        // list brez filtra , default sort
+        /**
+         * osebnih podatkov ne sme biti vidnih 
+         */
+        $I->assertFalse(array_key_exists('datumRojstva', $list[0]), 'datumRojstva osebni podatek');
+        $I->assertFalse(array_key_exists('emso', $list[0]), 'emso osebni podatek');
+        $I->assertFalse(array_key_exists('davcna', $list[0]), 'davcna osebni podatek');
+        $I->assertFalse(array_key_exists('drzavljanstvo', $list[0]), 'drzavljanstvo osebni podatek');
+        $I->assertFalse(array_key_exists('drzavaRojstva', $list[0]), 'drzavaRojstva osebni podatek');
+        $I->assertFalse(array_key_exists('krajRojstva', $list[0]), 'krajRojstva osebni podatek');
+        $I->assertFalse(array_key_exists('trrji', $list[0]), 'trrji osebni podatek');
+
+        /**
+         * list brez filtra , default sort
+         */
         $listUrl      = $this->restUrl;
         codecept_debug($listUrl);
         $resp         = $I->successfullyGetList($listUrl, []);
@@ -723,7 +925,6 @@ class OsebaCest
         $I->assertGreaterThanOrEqual(6, $totalRecords);
         $I->assertEquals("aa", $list[0]['priimek']); // prvo sortno polje je priimek
 //        $I->assertEquals("Žumer", $list[$totalRecords - 1]['priimek']);
-
         // list brez filtra , sort po imenu padajoče
         $listUrl      = $this->restUrl . "?sort_by=ime&order=DESC";
         codecept_debug($listUrl);
@@ -1129,8 +1330,8 @@ class OsebaCest
      */
     public function createVecZasedenosti(ApiTester $I)
     {
-        $zacetek    = '2014-05-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
-        $data       = [
+        $zacetek              = '2014-05-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data                 = [
             'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
             'oseba'   => $this->obj3['id'],
             'title'   => "Zasedenost $zacetek",
@@ -1141,8 +1342,8 @@ class OsebaCest
         $this->objZasedenost1 = $ent                  = $I->successfullyCreate($this->zasedenostUrl, $data);
         $I->assertGuid($ent['id']);
 
-        $zacetek    = '2014-06-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
-        $data       = [
+        $zacetek              = '2014-06-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data                 = [
             'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
             'oseba'   => $this->obj2['id'],
             'title'   => "Zasedenost $zacetek",
@@ -1153,8 +1354,8 @@ class OsebaCest
         $this->objZasedenost2 = $ent                  = $I->successfullyCreate($this->zasedenostUrl, $data);
         $I->assertGuid($ent['id']);
 
-        $zacetek    = '2014-08-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
-        $data       = [
+        $zacetek              = '2014-08-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data                 = [
             'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
             'oseba'   => $this->obj2['id'],
             'title'   => "Zasedenost $zacetek",
@@ -1164,7 +1365,6 @@ class OsebaCest
         ];
         $this->objZasedenost3 = $ent                  = $I->successfullyCreate($this->zasedenostUrl, $data);
         $I->assertGuid($ent['id']);
-
     }
 
     /**
@@ -1300,6 +1500,13 @@ class OsebaCest
         $oseba = $I->successfullyDelete($this->restUrl, $this->obj1['id']);
 
         $I->failToGet($this->restUrl, $this->obj1['id']);
+
+
+
+
+        $I->fail("$$ še trrji po osebni dodaj in preveri");
     }
 
 }
+
+//        $I->fail('$$začasno');
