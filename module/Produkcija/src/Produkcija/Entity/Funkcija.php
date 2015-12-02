@@ -9,7 +9,7 @@ use Max\Entity\Base;
 
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Funkcije")
- * @Max\Lookup(ident="naziv",search={"naziv"},)
+ * @Max\Lookup(ident="naziv",search={"naziv"}, extra={"tipFunkcije.podrocje"})
  * @Max\I18n(label="Funkcija",plural="Funkcije")
  * @Max\Id(prefix="0013")
  */
