@@ -438,26 +438,26 @@
     name: Sezona-write
     description: Sezona - spreminjanje
 
--
-    name: StevilcenjeKonfig-read
-    description: StevilcenjeKonfig - branje
--
-    name: StevilcenjeKonfig-write
-    description: StevilcenjeKonfig - spreminjanje
+#-
+#    name: StevilcenjeKonfig-read
+#    description: StevilcenjeKonfig - branje
+#-
+#    name: StevilcenjeKonfig-write
+#    description: StevilcenjeKonfig - spreminjanje
 
--
-    name: Stevilcenje-read
-    description: Stevilcenje - branje
--
-    name: Stevilcenje-write
-    description: Stevilcenje - spreminjanje
-
--
-    name: StevilcenjeStanje-read
-    description: StevilcenjeStanje - branje
--
-    name: StevilcenjeStanje-write
-    description: StevilcenjeStanje - spreminjanje
+#-
+#    name: Stevilcenje-read
+#    description: Stevilcenje - branje
+#-
+#    name: Stevilcenje-write
+#    description: Stevilcenje - spreminjanje
+#
+#-
+#    name: StevilcenjeStanje-read
+#    description: StevilcenjeStanje - branje
+#-
+#    name: StevilcenjeStanje-write
+#    description: StevilcenjeStanje - spreminjanje
 
 -
     name: StrosekUprizoritve-read

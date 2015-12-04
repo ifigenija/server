@@ -275,4 +275,21 @@
         - Popa-read
         - Popa-write
         - Uprizoritev-read
+- 
+    name: Trr-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Trr-read
+- 
+    name: Trr-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Trr-write
+       
+- 
+    name: Stevilcenje-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Stevilcenje-write
+
        

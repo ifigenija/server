@@ -55,8 +55,10 @@ forms:
         disabledMethods:
             - create
             - delete
-#        $$     za geet bi rabil -readVse, za update -vse
-        perm: Oseba-vse  
+        perm-update: Oseba-vse  
+        perm-delete: Oseba-vse  # za vsak slučaj, čeprav je disable-ano  
+        perm-create: Oseba-vse  # za vsak slučaj, čeprav je disable-ano
+        perm-read: Oseba-readVse
         elements:    
             - datumRojstva
             - emso

@@ -78,6 +78,8 @@
         - Oseba-read
         - Datoteka-read
         - Uprizoritev-write
+        - Trr-read	
+
 
 -
     name: testni uporabnik za testiranje zapisov
@@ -91,6 +93,8 @@
         - Uprizoritev-read
         - Oseba-read
         - Oseba-readVse
+        - Trr-read	
+        
 -
     name: testni uporabnik za testiranje zapisov
     email: dana@ifigenija.si
@@ -116,6 +120,9 @@
         - Datoteka-write
         - Oseba-read
         - Oseba-write
+        - Trr-read	
+        - Trr-write
+        
 -
     name: testni uporabnik za testiranje zapisov
     email: vihra@ifigenija.si
@@ -132,6 +139,10 @@
         - Oseba-read
         - Oseba-write
         - Oseba-vse
+        - Trr-read	
+        - Trr-write
+        - Stevilcenje-write
+
 -
     name: testni uporabnik za testiranje zapisov
     email: vlado@ifigenija.si

@@ -157,11 +157,15 @@ return [
         'protection_policy' => \ZfcRbac\Guard\GuardInterface::POLICY_ALLOW,
         'assertion_manager' => [
             "invokables" => [
-                "chck-oseba" => "App\Assertion\AssertOseba",
+                "chck-oseba-write"    => "App\Assertion\AssertOseba",
+                "chck-trr-write"      => "App\Assertion\AssertTrrWrite",
+                "chck-trr" => "App\Assertion\AssertTrr",
             ],
         ],
         "assertion_map"     => [
-            "Oseba-write" => "chck-oseba"
+            "Oseba-write" => "chck-oseba-write",
+            "Trr-write"   => "chck-trr-write",
+            "Trr-read"    => "chck-trr",
         ],
         'guest_role'        => 'anonymous',
         'role_provider'     => [

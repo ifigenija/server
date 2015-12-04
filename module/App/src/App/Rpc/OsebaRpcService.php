@@ -68,9 +68,6 @@ class OsebaRpcService
          */
         $jsonList = [];
 
-        /**
-         * $$ tu bi morda še bilo potrebno preverjati avtorizacije po kontekstu
-         */
         foreach ($podobneOsebe as $object) {
             $this->expectPermission("Oseba-read", $oseba);
             $array     = $meta->filterForLookup($object);
