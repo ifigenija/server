@@ -33,17 +33,22 @@ class PostniNaslovi
         switch ($name) {
 
             case "vse":
-                $qb   = $this->getVseQb($options);
-                $sort = $this->getSort($name);
-                $qb->orderBy($sort->order, $sort->dir);
-                return new DoctrinePaginator(new Paginator($qb));
+                $qb = $this->getVseQb($options);
+                break;
             case "default":
                 $this->expect(!(empty($options['popa']) && empty($options['oseba'])), "Oseba ali Partner ali država sta obvezna", 770001);
-                $qb   = $this->getDefaultQb($options);
-                $sort = $this->getSort($name);
-                $qb->orderBy($sort->order, $sort->dir);
-                return new DoctrinePaginator(new Paginator($qb));
+                $qb = $this->getDefaultQb($options);
+                break;
         }
+        $sort = $this->getSort($name);
+        $qb->orderBy($sort->order, $sort->dir);
+
+        /**
+         * če bo potreben getList za večji seznam, se lahko implementira posebno dovoljenje
+         */
+        $this->areGranted($qb, 'PostniNaslov-read', 1001640);
+
+        return new DoctrinePaginator(new Paginator($qb));
     }
 
     public function getVseQb($options)
@@ -57,6 +62,7 @@ class PostniNaslovi
         }
         return $qb;
     }
+
     public function getDefaultQb($options)
     {
         $qb = $this->createQueryBuilder('p');

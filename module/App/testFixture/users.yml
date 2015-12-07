@@ -80,6 +80,8 @@
         - Uprizoritev-write
         - Trr-read	
         - Telefonska-read
+        - PostniNaslov-read
+        - Zaposlitev-read
 
 
 -
@@ -96,6 +98,8 @@
         - Oseba-readVse
         - Trr-read	
         - Telefonska-read
+        - PostniNaslov-read
+        - Zaposlitev-read
         
 -
     name: testni uporabnik za testiranje zapisov
@@ -126,6 +130,10 @@
         - Trr-write
         - Telefonska-read
         - Telefonska-write
+        - PostniNaslov-read
+        - PostniNaslov-write
+        - Zaposlitev-read
+        - Zaposlitev-write
         
 -
     name: testni uporabnik za testiranje zapisov
@@ -148,6 +156,10 @@
         - Stevilcenje-write
         - Telefonska-read
         - Telefonska-write
+        - PostniNaslov-read
+        - PostniNaslov-write
+        - Zaposlitev-read
+        - Zaposlitev-write
 
 -
     name: testni uporabnik za testiranje zapisov

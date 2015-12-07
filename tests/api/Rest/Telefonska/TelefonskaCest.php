@@ -417,8 +417,6 @@ class TelefonskaCest
         $entPo = $this->obj3;
         $I->assertNull($entPo['oseba']);
 
-
-
         /*
          * uporabnik brez Telefonska-write dovoljenja
          */

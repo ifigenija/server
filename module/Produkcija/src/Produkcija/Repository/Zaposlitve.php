@@ -40,17 +40,16 @@ class Zaposlitve
     {
         switch ($name) {
             case "vse":
-                $qb   = $this->getVseQb($options);
-                $sort = $this->getSort($name);
-                $qb->orderBy($sort->order, $sort->dir);
-                return new DoctrinePaginator(new Paginator($qb));
+                $qb = $this->getVseQb($options);
+                break;
             case "default":
                 //$this->expect(!empty($options['oseba']), "Oseba je obvezna", 770051);
-                $qb   = $this->getDefaultQb($options);
-                $sort = $this->getSort($name);
-                $qb->orderBy($sort->order, $sort->dir);
-                return new DoctrinePaginator(new Paginator($qb));
+                $qb = $this->getDefaultQb($options);
+                break;
         }
+        $sort = $this->getSort($name);
+        $qb->orderBy($sort->order, $sort->dir);
+        return new DoctrinePaginator(new Paginator($qb));
     }
 
     public function getVseQb($options)
@@ -81,7 +80,7 @@ class Zaposlitve
             /**
              * v primeru da je status null prikaži vse aktivne zaposlitve
              */
-            $status=$e->in('p.status', ['A']);
+            $status = $e->in('p.status', ['A']);
             $qb->andWhere($status);
         }
         //$sort = $this->getSort('vse', $qb);

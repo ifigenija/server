@@ -303,4 +303,24 @@
     description: 'Vloga z 1 dovoljenjem'
     permissions: 
         - Telefonska-write
+- 
+    name: PostniNaslov-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - PostniNaslov-read
+- 
+    name: PostniNaslov-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - PostniNaslov-write
+- 
+    name: Zaposlitev-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Zaposlitev-read
+- 
+    name: Zaposlitev-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Zaposlitev-write
        

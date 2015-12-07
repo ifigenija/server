@@ -10,7 +10,7 @@ use Max\Entity\Base;
 /**
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Zaposlitve")
  * @Max\I18n(label="Zaposlitev",plural="Zaposlitve")
- * @Max\Lookup(ident="sifra", label="oseba.polnoIme", search={"oseba.sifra", "oseba.priimek", "oseba.polnoIme", "oseba.ime"}, extra={"zacetek", "konec","status"})
+ * @Max\Lookup(ident="sifra", label="oseba.polnoIme", search={"oseba.sifra", "oseba.priimek", "oseba.polnoIme", "oseba.ime"}, extra={"status","delovnoMesto"})
  * @Max\Id(prefix="0016")
  */
 class Zaposlitev
