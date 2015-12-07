@@ -18,12 +18,7 @@ forms:
             - psevdonim
             - polnoIme
             - spol     
-            - opombe
 #            - naslovi
-            - email
-            - twitter
-            - skype
-            - fb
 #            - datumRojstva
 #            - emso
 #            - davcna
@@ -35,14 +30,10 @@ forms:
 #            - trrji
 #            - alternacije
 #            - pogodbe
-#            - sodelovanja
 #            - zasedenost
         hydrator: 
-            byValue: [naslovi, telefonske]
             exclude: 
             - alternacije
-            - pogodbe
-            - sodelovanja
 #                           osebni podatki:
             - datumRojstva
             - emso
@@ -50,7 +41,15 @@ forms:
             - drzavljanstvo
             - drzavaRojstva
             - krajRojstva
+            - email
+            - opombe
+            - twitter
+            - skype
+            - fb
             - trrji
+            - naslovi
+            - telefonske
+            - pogodbe
     osebni: 
         disabledMethods:
             - create
@@ -66,15 +65,26 @@ forms:
             - drzavljanstvo
             - drzavaRojstva
             - krajRojstva
+            - email
+            - twitter
+            - skype
+            - fb
+            - opombe
         hydrator: 
-            byValue: [trrji]
-            exclude: [naslovi,telefonske,alternacije,pogodbe,sodelovanja]
+            byValue:
+                - trrji
+                - naslovi
+                - telefonske
+            exclude: [alternacije,pogodbe]
             
 lists:
 #    vsi podatki, tudi osebni
     osebni: 
         hydrator: 
-            byValue: [trrji, naslovi, telefonske]
+            byValue:
+                - trrji
+                - naslovi
+                - telefonske
     default: 
         filter: 
             elements: 
@@ -90,10 +100,7 @@ lists:
                     required: false
                     placeholder: Vpiši del naslova
                     label: Naslov
-                    
-                    
-        hydrator:
-            byValue: [telefonske, naslovi]
+        hydrator: 
             exclude: 
 #                           osebni podatki:
             - datumRojstva
@@ -102,8 +109,15 @@ lists:
             - drzavljanstvo
             - drzavaRojstva
             - krajRojstva
+            - email
+            - opombe
+            - twitter
+            - skype
+            - fb
             - trrji
-#            exclude: [trrji, datumRojstva, emso, davcna, drzavljanstvo, krajRojstva, alternacije, pogodbe, sodelovanja]
+            - naslovi
+            - telefonske
+            - pogodbe
 hydrator:      
 relation:
     default:

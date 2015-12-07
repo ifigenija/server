@@ -27,7 +27,10 @@ class PostniNaslovCest
     private $osebaUrl  = '/rest/oseba';
     private $popaUrl   = '/rest/popa';
     private $drzavaUrl = '/rest/drzava';
-    private $obj;
+    private $obj1;
+    private $obj2;
+    private $obj3;
+    private $obj4;
     private $objOseba;
     private $lookOseba;
     private $objPopa;
@@ -117,7 +120,7 @@ class PostniNaslovCest
      */
     public function create(ApiTester $I)
     {
-        $data      = [
+        $data       = [
             'popa'       => null,
             'oseba'      => $this->lookOseba['id'],
             'naziv'      => 'zz',
@@ -130,7 +133,7 @@ class PostniNaslovCest
             'jeeu'       => false,
             'privzeti'   => true,
         ];
-        $this->obj = $pnaslov   = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj1 = $pnaslov    = $I->successfullyCreate($this->restUrl, $data);
         $I->assertEquals('zz', $pnaslov['naziv']);
         $I->assertNotEmpty($pnaslov['id']);
 
@@ -166,6 +169,62 @@ class PostniNaslovCest
         ];
         $pnaslov = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($pnaslov['id']);
+
+        /**
+         * še preverjanja avtorizacij, posebnih dovoljenj
+         */
+        $dataOs = [
+            'oseba'      => $this->lookOseba['id'],
+            'popa'       => null,
+            'naziv'      => 'nas ose',
+            'ulica'      => 'nas ose',
+            'ulicaDva'   => 'nas ose',
+            'posta'      => 'nas ose',
+            'postaNaziv' => 'nas ose',
+            'pokrajina'  => 'nas ose',
+            'drzava'     => $this->objDrzava['id'],
+            'jeeu'       => false,
+            'privzeti'   => true,
+        ];
+        $dataPo = [
+            'popa'       => $this->lookPopa['id'],
+            'oseba'      => null,
+            'naziv'      => 'nas popa',
+            'ulica'      => 'nas popa',
+            'ulicaDva'   => 'nas popa',
+            'posta'      => 'nas popa',
+            'postaNaziv' => 'nas popa',
+            'pokrajina'  => 'nas popa',
+            'drzava'     => $this->objDrzava['id'],
+            'jeeu'       => false,
+            'privzeti'   => true,
+        ];
+
+        /*
+         * uporabnik brez PostniNaslov-write dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->failToCreate($this->restUrl, $dataOs);
+        codecept_debug($resp);
+        $I->assertEquals(1000008, $resp[0]['code']);
+
+        /*
+         * uporabnik brez Oseba-vse dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
+        $resp       = $I->failToCreate($this->restUrl, $dataOs);
+        codecept_debug($resp);
+        $I->assertEquals(1000009, $resp[0]['code']);
+        /**
+         * za naslov od popa ima pravice
+         */
+        $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $dataPo);
+
+        /*
+         * uporabnik z Oseba-vse dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
+        $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl, $dataOs);
     }
 
     /**
@@ -183,9 +242,35 @@ class PostniNaslovCest
         $list = $resp['data'];
 //        codecept_debug($list);
 
-        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertEquals(2, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
-        $I->assertEquals("zz", $list[0]['ulica']);
+//        $I->assertEquals("zz", $list[0]['ulica']);
+
+
+        /**
+         * še preverjanja avtorizacij, posebnih dovoljenj
+         */
+        /*
+         * uporabnik brez PostniNaslov-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $resp = $I->failToGetList($listUrl, []);
+        codecept_debug($resp);
+        $I->assertEquals(1000012, $resp[0]['code']);
+
+        /*
+         * uporabnik brez Oseba-readVse dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->failToGetList($listUrl, []);
+        codecept_debug($resp);
+        $I->assertEquals(1001640, $resp[0]['code']);
+
+        /*
+         * uporabnik z Oseba-vse dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
+        $resp = $I->successfullyGetList($listUrl, []);
     }
 
     /**
@@ -204,9 +289,27 @@ class PostniNaslovCest
 
         $totRec = $resp['state']['totalRecords'];
         codecept_debug($list);
-        $I->assertGreaterThanOrEqual(2, $totRec);
+        $I->assertGreaterThanOrEqual(3, $totRec);
         $I->assertEquals("aa", $list[0]['naziv']);
         $I->assertEquals("ww", $list[$totRec - 1]['naziv']);
+
+
+        /**
+         * še preverjanja avtorizacij, posebnih dovoljenj
+         */
+        /*
+         * uporabnik brez PostniNaslov-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $resp = $I->failToGetList($listUrl, []);
+        codecept_debug($resp);
+        $I->assertEquals(1000012, $resp[0]['code']);
+
+        /*
+         * uporabnik brez Oseba-readVse dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->successfullyGetList($listUrl, []);
     }
 
     /**
@@ -231,13 +334,52 @@ class PostniNaslovCest
      */
     public function update(ApiTester $I)
     {
-        $ent          = $this->obj;
+        $ent          = $this->obj1;
         $ent['naziv'] = 'tralala';
         codecept_debug($ent);
 
         $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
         $I->assertEquals('tralala', $ent['naziv']);
+
+
+        /**
+         * še preverjanja avtorizacij, posebnih dovoljenj
+         */
+        $entOs          = $this->obj4;
+        $entOs['naziv'] = 'ZA ose';
+        codecept_debug($entOs);
+        $I->assertNotNull($entOs['oseba']);
+
+        $entPo          = $this->obj3;
+        $entOs['naziv'] = 'ZA popa';
+        $I->assertNull($entPo['oseba']);
+
+        /*
+         * uporabnik brez PostniNaslov-write dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->failToUpdate($this->restUrl, $entOs['id'], $entOs);
+        codecept_debug($resp);
+        $I->assertEquals(1000101, $resp[0]['code']);
+
+        /*
+         * uporabnik brez Oseba-vse dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
+        $resp = $I->failToUpdate($this->restUrl, $entOs['id'], $entOs);
+        codecept_debug($resp);
+        $I->assertEquals(1000101, $resp[0]['code']);
+        /**
+         * za naslov od popa ima pravice
+         */
+        $ent  = $I->successfullyUpdate($this->restUrl, $entPo['id'], $entPo);
+
+        /*
+         * uporabnik z Oseba-vse dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
+        $ent = $I->successfullyUpdate($this->restUrl, $entOs['id'], $entOs);
     }
 
     /**
@@ -248,7 +390,7 @@ class PostniNaslovCest
      */
     public function read(ApiTester $I)
     {
-        $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         $I->assertEquals($ent['popa'], null);
         $I->assertEquals($ent['oseba'], $this->lookOseba['id']);
@@ -262,6 +404,42 @@ class PostniNaslovCest
         $I->assertEquals($ent['drzava']['id'], $this->objDrzava['id']);   // na državi je narejena hidracija
         $I->assertEquals($ent['jeeu'], FALSE);
         $I->assertEquals($ent['privzeti'], true);
+
+
+        /**
+         * še preverjanja avtorizacij, posebnih dovoljenj
+         */
+        $entOs = $this->obj4;
+        $I->assertNotNull($entOs['oseba']);
+
+        $entPo = $this->obj3;
+        $I->assertNull($entPo['oseba']);
+
+        /*
+         * uporabnik brez PostniNaslov-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $resp = $I->failToGet($this->restUrl, $entOs['id']);
+        codecept_debug($resp);
+        $I->assertEquals(100099, $resp[0][0]['code']);
+
+        /*
+         * uporabnik brez Oseba-readVse dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->failToGet($this->restUrl, $entOs['id']);
+        codecept_debug($resp);
+        $I->assertEquals(100099, $resp[0][0]['code']);
+        /**
+         * za naslov od popa ima pravice
+         */
+        $ent  = $I->successfullyGet($this->restUrl, $entPo['id']);
+
+        /*
+         * uporabnik z Oseba-vse dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
+        $ent = $I->successfullyGet($this->restUrl, $entOs['id']);
     }
 
     /**
@@ -329,9 +507,45 @@ class PostniNaslovCest
      */
     public function delete(ApiTester $I)
     {
-        $pnaslov = $I->successfullyDelete($this->restUrl, $this->obj['id']);
+        $pnaslov = $I->successfullyDelete($this->restUrl, $this->obj1['id']);
 
-        $I->failToGet($this->restUrl, $this->obj['id']);
+        $I->failToGet($this->restUrl, $this->obj1['id']);
+
+
+        /**
+         * še preverjanja avtorizacij, posebnih dovoljenj
+         */
+        $entOs = $this->obj4;
+        $I->assertNotNull($entOs['oseba']);
+
+        $entPo = $this->obj3;
+        $I->assertNull($entPo['oseba']);
+
+        /*
+         * uporabnik brez PostniNaslov-write dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->failToDelete($this->restUrl, $entOs['id']);
+        codecept_debug($resp);
+        $I->assertEquals(100201, $resp[0]['code']);
+
+        /*
+         * uporabnik brez Oseba-vse dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
+        $resp = $I->failToDelete($this->restUrl, $entOs['id']);
+        codecept_debug($resp);
+        $I->assertEquals(100201, $resp[0]['code']);
+        /**
+         * za naslov od popa ima pravice
+         */
+        $ent  = $I->successfullyDelete($this->restUrl, $entPo['id']);
+
+        /*
+         * uporabnik z Oseba-vse dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
+        $ent = $I->successfullyDelete($this->restUrl, $entOs['id']);
     }
 
 }
