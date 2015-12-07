@@ -50,7 +50,6 @@ forms:
             - oseba
             - zaposlitev
             - pogodba
-            - pomembna
             - sort
 lists:
     default: 
