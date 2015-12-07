@@ -36,9 +36,9 @@ class Trrji
                 break;
             case "default":
                 $this->expect(!(empty($options['popa']) && empty($options['oseba'])), "Oseba ali Partner ali država sta obvezna", 770021);
+                $qb = $this->getDefaultQb($options);
                 break;
         }
-        $qb   = $this->getDefaultQb($options);
         $sort = $this->getSort($name);
         $qb->orderBy($sort->order, $sort->dir);
         /**

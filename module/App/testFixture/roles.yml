@@ -293,3 +293,14 @@
         - Stevilcenje-write
 
        
+- 
+    name: Telefonska-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Telefonska-read
+- 
+    name: Telefonska-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Telefonska-write
+       

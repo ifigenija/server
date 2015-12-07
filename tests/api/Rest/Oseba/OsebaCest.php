@@ -224,26 +224,15 @@ class OsebaCest
     public function create(ApiTester $I)
     {
         $data = [
-            'sifra'         => 'ZZ12',
-            'naziv'         => 'zz',
-            'ime'           => 'zz',
-            'priimek'       => 'zz',
-            'funkcija'      => 'zz',
-            'srednjeIme'    => 'zz',
-            'psevdonim'     => 'zz',
-            'email'         => 'x@xxx.xx',
-            'twitter'       => '@xx',
-            'skype'         => 'xxxxxx',
-            'fb'            => 'fb.com/xx',
-//            'datumRojstva'  => '1973-03-28T00:00:00+0100',
-            'emso'          => 'ZZ', //POST ignorira, ker je osebni podatek
-            'davcna'        => 'ZZ123',
-            'spol'          => 'M',
-            'opombe'        => 'zz',
-            'drzavljanstvo' => 'zz',
-            'drzavaRojstva' => 'zz',
-            'krajRojstva'   => 'zz',
-            'user'          => null,
+            'sifra'      => 'ZZ12',
+            'naziv'      => 'zz',
+            'ime'        => 'zz',
+            'priimek'    => 'zz',
+            'funkcija'   => 'zz',
+            'srednjeIme' => 'zz',
+            'psevdonim'  => 'zz',
+            'spol'       => 'M',
+            'user'       => null,
 //            'user'          => $this->lookUser['id'],
         ];
 
@@ -555,6 +544,11 @@ class OsebaCest
         $data['drzavljanstvo'] = 'hh';
         $data['drzavaRojstva'] = 'hh';
         $data['krajRojstva']   = 'hh';
+        $data['email']         = 'x@xxx.xx';
+        $data['twitter']       = '@xx';
+        $data['skype']         = 'xxxxxx';
+        $data['fb']            = 'fb.com/xx';
+        $data['opombe']        = 'zz';
 
         $ent = $I->successfullyUpdate($this->osebniUrl, $data['id'], $data);
 
@@ -749,32 +743,32 @@ class OsebaCest
 
         $I->assertGuid($oseba['id'], "osebe ni");
 
-// preverim vsa vidna polja
+        /*
+         *  preverim vsa vidna polja
+         */
         $I->assertEquals('zz', $oseba['naziv']);
         $I->assertEquals('tralala', $oseba['ime']);
         $I->assertEquals('zz', $oseba['priimek']);
         $I->assertEquals('zz', $oseba['funkcija']);
         $I->assertEquals('zz', $oseba['srednjeIme']);
-        $I->assertEquals('zz', $oseba['psevdonim'], "psevdonim");
-        $I->assertEquals('x@xxx.xx', $oseba['email'], "email");
-        $I->assertEquals($oseba['twitter'], '@xx');
-        $I->assertEquals($oseba['skype'], 'xxxxxx');
-        $I->assertEquals($oseba['fb'], 'fb.com/xx');
         $I->assertEquals('M', $oseba['spol'], "spol ni pravilen");
-        $I->assertEquals('zz', $oseba['opombe']);
+        $I->assertEquals('zz', $oseba['psevdonim'], "psevdonim");
 
         $I->assertTrue(isset($oseba['kontaktneOsebe']));
-//        $I->assertTrue(isset($oseba['trrji']));
-        $I->assertTrue(isset($oseba['telefonske']));
-        $I->assertTrue(isset($oseba['naslovi']));
-//        $I->assertEquals(2, count($oseba['trrji']));
-        $I->assertEquals(1, count($oseba['telefonske']));
-        $I->assertEquals(2, count($oseba['naslovi']));
         $I->assertEquals(0, count($oseba['kontaktneOsebe']));
 
         /**
          * osebnih podatkov ne sme biti vidnih 
          */
+        $I->assertFalse(array_key_exists('twitter', $oseba), 'twitter osebni podatek');
+        $I->assertFalse(array_key_exists('skype', $oseba), 'skype osebni podatek');
+        $I->assertFalse(array_key_exists('fb', $oseba), 'fb osebni podatek');
+        $I->assertFalse(array_key_exists('opombe', $oseba), 'opombe osebni podatek');
+        $I->assertFalse(array_key_exists('telefonske', $oseba), 'telefonske osebni podatek');
+        $I->assertFalse(array_key_exists('naslovi', $oseba), 'naslovi osebni podatek');
+        $I->assertFalse(array_key_exists('telefonske', $oseba), 'telefonske osebni podatek');
+        $I->assertFalse(array_key_exists('naslovi', $oseba), 'naslovi osebni podatek');
+        $I->assertFalse(array_key_exists('email', $oseba), 'email osebni podatek');
         $I->assertFalse(array_key_exists('datumRojstva', $oseba), 'datumRojstva osebni podatek');
         $I->assertFalse(array_key_exists('emso', $oseba), 'emso osebni podatek');
         $I->assertFalse(array_key_exists('davcna', $oseba), 'davcna osebni podatek');
@@ -801,14 +795,24 @@ class OsebaCest
         /**
          * najprej osebni podatki
          */
+        $I->assertEquals('x@xxx.xx', $ent['email'], "email");
         $I->assertEquals($ent['datumRojstva'], '1977-06-28T00:00:00+0100');
         $I->assertEquals($ent['emso'], 'HH');
         $I->assertEquals($ent['davcna'], 'HH123');
         $I->assertEquals($ent['drzavljanstvo'], 'hh');
         $I->assertEquals($ent['drzavaRojstva'], 'hh');
         $I->assertEquals($ent['krajRojstva'], 'hh');
+        $I->assertEquals($ent['twitter'], '@xx');
+        $I->assertEquals($ent['skype'], 'xxxxxx');
+        $I->assertEquals($ent['fb'], 'fb.com/xx');
+        $I->assertEquals('zz', $ent['opombe']);
+
         $I->assertTrue(isset($ent['trrji']));
         $I->assertEquals(2, count($ent['trrji']));
+        $I->assertTrue(isset($ent['telefonske']));
+        $I->assertTrue(isset($ent['naslovi']));
+        $I->assertEquals(1, count($ent['telefonske']));
+        $I->assertEquals(2, count($ent['naslovi']));
 
         /**
          * ostale podatke
@@ -819,21 +823,13 @@ class OsebaCest
         $I->assertEquals('zz', $ent['funkcija']);
         $I->assertEquals('zz', $ent['srednjeIme']);
         $I->assertEquals('zz', $ent['psevdonim'], "psevdonim");
-        $I->assertEquals('x@xxx.xx', $ent['email'], "email");
-        $I->assertEquals($ent['twitter'], '@xx');
-        $I->assertEquals($ent['skype'], 'xxxxxx');
-        $I->assertEquals($ent['fb'], 'fb.com/xx');
         $I->assertEquals('M', $ent['spol'], "spol ni pravilen");
-        $I->assertEquals('zz', $ent['opombe']);
 
 
         $I->assertTrue(isset($ent['kontaktneOsebe']), 'isset kontaktneOsebe');
-//        $I->assertTrue(isset($ent['telefonske']),'isset telefonske');
-//        $I->assertTrue(isset($ent['naslovi']),'isset naslovi');
         $I->assertEquals(0, count($ent['kontaktneOsebe']));
-//        $I->assertEquals(1, count($ent['telefonske']));
-//        $I->assertEquals(2, count($ent['naslovi']));
 
+//        $I->fail('$$ začasno');
 
         /*
          * uporabnik brez Oseba-read in Oseba-readVse dovoljenja
@@ -1213,7 +1209,9 @@ class OsebaCest
         $I->assertNotEmpty($trr['id']);
 
 
-//kreiramo še en zapis
+        /*
+         * kreiramo še en zapis
+         */
         $data          = [
             'stevilka' => 'A1',
             'swift'    => 'A1',

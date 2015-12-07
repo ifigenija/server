@@ -160,12 +160,16 @@ return [
                 "chck-oseba-write"    => "App\Assertion\AssertOseba",
                 "chck-trr-write"      => "App\Assertion\AssertTrrWrite",
                 "chck-trr" => "App\Assertion\AssertTrr",
+                "chck-tel-write"      => "App\Assertion\AssertTelefonskaWrite",
+                "chck-tel" => "App\Assertion\AssertTelefonska",
             ],
         ],
         "assertion_map"     => [
             "Oseba-write" => "chck-oseba-write",
             "Trr-write"   => "chck-trr-write",
             "Trr-read"    => "chck-trr",
+            "Telefonska-write"   => "chck-tel-write",
+            "Telefonska-read"    => "chck-tel",
         ],
         'guest_role'        => 'anonymous',
         'role_provider'     => [

@@ -79,6 +79,7 @@
         - Datoteka-read
         - Uprizoritev-write
         - Trr-read	
+        - Telefonska-read
 
 
 -
@@ -94,6 +95,7 @@
         - Oseba-read
         - Oseba-readVse
         - Trr-read	
+        - Telefonska-read
         
 -
     name: testni uporabnik za testiranje zapisov
@@ -122,6 +124,8 @@
         - Oseba-write
         - Trr-read	
         - Trr-write
+        - Telefonska-read
+        - Telefonska-write
         
 -
     name: testni uporabnik za testiranje zapisov
@@ -142,6 +146,8 @@
         - Trr-read	
         - Trr-write
         - Stevilcenje-write
+        - Telefonska-read
+        - Telefonska-write
 
 -
     name: testni uporabnik za testiranje zapisov

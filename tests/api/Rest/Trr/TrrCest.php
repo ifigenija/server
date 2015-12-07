@@ -83,9 +83,9 @@ class TrrCest
             'popa'     => null,
             'oseba'    => $this->lookOseba['id'],
         ];
-        $this->obj = $trr       = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals('ZZ123', $trr['banka']);
-        $I->assertNotEmpty($trr['id']);
+        $this->obj = $ent       = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals('ZZ123', $ent['banka']);
+        $I->assertNotEmpty($ent['id']);
 
         //kreiramo še en zapis
         $data       = [
@@ -96,9 +96,9 @@ class TrrCest
             'popa'     => $this->lookPopa['id'],
             'oseba'    => null,
         ];
-        $this->obj2 = $trr        = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($trr['id']);
-        $I->assertEquals('WW123', $trr['banka']);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals('WW123', $ent['banka']);
 
 
         //kreiramo še en zapis
@@ -110,9 +110,9 @@ class TrrCest
             'popa'     => $this->lookPopa['id'],
             'oseba'    => null, 
         ];
-        $trr  = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($trr['id']);
-        $I->assertEquals('A1', $trr['banka']);
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertNotEmpty($ent['id']);
+        $I->assertEquals('A1', $ent['banka']);
 
 
         /**
@@ -153,13 +153,13 @@ class TrrCest
         /**
          * za trr od popa ima pravice
          */
-        $this->obj3 = $trr        = $I->successfullyCreate($this->restUrl, $dataPo);
+        $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $dataPo);
 
         /*
          * uporabnik z Oseba-vse dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
-        $this->obj4 = $trr        = $I->successfullyCreate($this->restUrl, $dataOs);
+        $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl, $dataOs);
     }
 
     /**
@@ -266,34 +266,34 @@ class TrrCest
      */
     public function update(ApiTester $I)
     {
-        $trr          = $this->obj;
-        codecept_debug($trr);
-        $trr['banka'] = 'TRA123';
-        codecept_debug($trr);
+        $ent          = $this->obj;
+        codecept_debug($ent);
+        $ent['banka'] = 'TRA123';
+        codecept_debug($ent);
 
-        $trr = $I->successfullyUpdate($this->restUrl, $trr['id'], $trr);
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals('TRA123', $trr['banka']);
+        $I->assertEquals('TRA123', $ent['banka']);
 
 
         /**
          * še preverjanja avtorizacij, posebnih dovoljenj
          */
-        $trrOs          = $this->obj4;
-        $trrOs['banka'] = 'ZA ose';
-        codecept_debug($trrOs);
-        $I->assertNotNull($trrOs['oseba']);
+        $entOs          = $this->obj4;
+        $entOs['banka'] = 'ZA ose';
+        codecept_debug($entOs);
+        $I->assertNotNull($entOs['oseba']);
 
-        $trrPo          = $this->obj3;
-        $trrPo['banka'] = 'ZA popa';
-        $I->assertNull($trrPo['oseba']);
+        $entPo          = $this->obj3;
+        $entPo['banka'] = 'ZA popa';
+        $I->assertNull($entPo['oseba']);
 
 
         /*
          * uporabnik brez Trr-write dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
-        $resp = $I->failToUpdate($this->restUrl, $trrOs['id'], $trrOs);
+        $resp = $I->failToUpdate($this->restUrl, $entOs['id'], $entOs);
         codecept_debug($resp);
         $I->assertEquals(1000101, $resp[0]['code']);
 
@@ -301,19 +301,19 @@ class TrrCest
          * uporabnik brez Oseba-vse dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
-        $resp = $I->failToUpdate($this->restUrl, $trrOs['id'], $trrOs);
+        $resp = $I->failToUpdate($this->restUrl, $entOs['id'], $entOs);
         codecept_debug($resp);
         $I->assertEquals(1000101, $resp[0]['code']);
         /**
          * za trr od popa ima pravice
          */
-        $trr  = $I->successfullyUpdate($this->restUrl, $trrPo['id'], $trrPo);
+        $ent  = $I->successfullyUpdate($this->restUrl, $entPo['id'], $entPo);
 
         /*
          * uporabnik z Oseba-vse dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
-        $trr = $I->successfullyUpdate($this->restUrl, $trrOs['id'], $trrOs);
+        $ent = $I->successfullyUpdate($this->restUrl, $entOs['id'], $entOs);
 
     }
 
@@ -322,40 +322,40 @@ class TrrCest
      */
     public function read(ApiTester $I)
     {
-        $trr = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj['id']);
 
-        $I->assertEquals($trr['stevilka'], 'ZZ123');
-        $I->assertEquals($trr['swift'], 'ZZ123');
-        $I->assertEquals($trr['bic'], 'ZZ123');
-        $I->assertEquals($trr['popa'], NULL);
-        $I->assertEquals($trr['oseba'], $this->lookOseba['id']);
-        $I->assertEquals('TRA123', $trr['banka']);
+        $I->assertEquals($ent['stevilka'], 'ZZ123');
+        $I->assertEquals($ent['swift'], 'ZZ123');
+        $I->assertEquals($ent['bic'], 'ZZ123');
+        $I->assertEquals($ent['popa'], NULL);
+        $I->assertEquals($ent['oseba'], $this->lookOseba['id']);
+        $I->assertEquals('TRA123', $ent['banka']);
 
         // preberemo še en zapis
-        $trr = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj2['id']);
 
-        $I->assertEquals($trr['stevilka'], 'WW123');
-        $I->assertEquals($trr['swift'], 'WW123');
-        $I->assertEquals($trr['bic'], 'WW123');
-        $I->assertEquals($trr['banka'], 'WW123');
-        $I->assertEquals($trr['popa'], $this->lookPopa['id']);
-        $I->assertEquals($trr['oseba'], null);
+        $I->assertEquals($ent['stevilka'], 'WW123');
+        $I->assertEquals($ent['swift'], 'WW123');
+        $I->assertEquals($ent['bic'], 'WW123');
+        $I->assertEquals($ent['banka'], 'WW123');
+        $I->assertEquals($ent['popa'], $this->lookPopa['id']);
+        $I->assertEquals($ent['oseba'], null);
 
 
         /**
          * še preverjanja avtorizacij, posebnih dovoljenj
          */
-        $trrOs = $this->obj4;
-        $I->assertNotNull($trrOs['oseba']);
+        $entOs = $this->obj4;
+        $I->assertNotNull($entOs['oseba']);
 
-        $trrPo = $this->obj3;
-        $I->assertNull($trrPo['oseba']);
+        $entPo = $this->obj3;
+        $I->assertNull($entPo['oseba']);
 
         /*
          * uporabnik brez Trr-read dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
-        $resp = $I->failToGet($this->restUrl, $trrOs['id']);
+        $resp = $I->failToGet($this->restUrl, $entOs['id']);
         codecept_debug($resp);
         $I->assertEquals(100099, $resp[0][0]['code']);
 
@@ -363,19 +363,19 @@ class TrrCest
          * uporabnik brez Oseba-readVse dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
-        $resp = $I->failToGet($this->restUrl, $trrOs['id']);
+        $resp = $I->failToGet($this->restUrl, $entOs['id']);
         codecept_debug($resp);
         $I->assertEquals(100099, $resp[0][0]['code']);
         /**
          * za trr od popa ima pravice
          */
-        $trr  = $I->successfullyGet($this->restUrl, $trrPo['id']);
+        $ent  = $I->successfullyGet($this->restUrl, $entPo['id']);
 
         /*
          * uporabnik z Oseba-vse dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
-        $trr = $I->successfullyGet($this->restUrl, $trrOs['id']);
+        $ent = $I->successfullyGet($this->restUrl, $entOs['id']);
     }
 
     /**
@@ -383,7 +383,7 @@ class TrrCest
      */
     public function delete(ApiTester $I)
     {
-        $trr = $I->successfullyDelete($this->restUrl, $this->obj['id']);
+        $ent = $I->successfullyDelete($this->restUrl, $this->obj['id']);
 
         $I->failToGet($this->restUrl, $this->obj['id']);
 
@@ -391,18 +391,18 @@ class TrrCest
         /**
          * še preverjanja avtorizacij, posebnih dovoljenj
          */
-        $trrOs = $this->obj4;
-        $I->assertNotNull($trrOs['oseba']);
+        $entOs = $this->obj4;
+        $I->assertNotNull($entOs['oseba']);
 
-        $trrPo = $this->obj3;
-        $I->assertNull($trrPo['oseba']);
+        $entPo = $this->obj3;
+        $I->assertNull($entPo['oseba']);
 
 
         /*
          * uporabnik brez Trr-write dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
-        $resp = $I->failToDelete($this->restUrl, $trrOs['id']);
+        $resp = $I->failToDelete($this->restUrl, $entOs['id']);
         codecept_debug($resp);
         $I->assertEquals(100201, $resp[0]['code']);
 
@@ -410,20 +410,19 @@ class TrrCest
          * uporabnik brez Oseba-vse dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
-        $resp = $I->failToDelete($this->restUrl, $trrOs['id']);
+        $resp = $I->failToDelete($this->restUrl, $entOs['id']);
         codecept_debug($resp);
         $I->assertEquals(100201, $resp[0]['code']);
         /**
          * za trr od popa ima pravice
          */
-        $trr  = $I->successfullyDelete($this->restUrl, $trrPo['id']);
+        $ent  = $I->successfullyDelete($this->restUrl, $entPo['id']);
 
         /*
          * uporabnik z Oseba-vse dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
-        $trr = $I->successfullyDelete($this->restUrl, $trrOs['id']);
-
+        $ent = $I->successfullyDelete($this->restUrl, $entOs['id']);
     }
 
     /**
