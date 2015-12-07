@@ -27,7 +27,7 @@ lists:
 #                      targetEntity: Produkcija\Entity\Alternacija
 #                      required: true
         hydrator:
-            - exclude: []
+            byValue: [oseba,alternacija]
 #    vse: 
 #        filter:
 #    ure: 

@@ -41,6 +41,7 @@ class ProgramskaEnotaSklopa
     /**
      * @ORM\Column(type="string")
      * @Max\I18n(label="peSklopa.obsegPE", description="peSklopa.d.obsegPE")
+     * @Max\Ui(required=false)
      * @var string
      */
     protected $obsegPE;
