@@ -257,27 +257,20 @@
     name: mn-seznami-osebe-osebnipodatki
     description: omogoča akcije v meniju Seznami->Osebe->Splošno
     permissions: 
-#        $$
-        - Oseba-vse
-        - Oseba-readvse
         - Oseba-write
         - Oseba-read
-        - Datoteka-read
-        - Datoteka-write
-        - ZapisLastnik-read
-        - ZapisLastnik-write
+        - Oseba-readVse
+        - Oseba-vse
+        - Trr-read
+        - Trr-write
         - Zapis-read
-        - Zapis-write
 - 
     name: mn-seznami-osebe-osebnipodatki-r
     description: omogoča read akcije v meniju Seznami->Osebe->Splošno
     permissions: 
-#        $$
-        - Oseba-readvse
         - Oseba-read
+        - Oseba-readVse
         - Trr-read
-        - Datoteka-read
-        - ZapisLastnik-read
         - Zapis-read
 - 
     name: mn-seznami-poslovnipartnerji
