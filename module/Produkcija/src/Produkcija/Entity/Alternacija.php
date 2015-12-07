@@ -150,7 +150,7 @@ class Alternacija
      * @Max\Ui(type="boolcheckbox")
      * @var boolean
      */
-    protected $pomembna = true;
+    protected $pomembna = false;
 
     public function __construct()
     {

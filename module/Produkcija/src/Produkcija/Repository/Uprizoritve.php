@@ -25,10 +25,14 @@ class Uprizoritve
             "naslov" => ["alias" => "p.naslov"]
         ],
         "vse"     => [
-            "sifra"         => ["alias" => "p.sifra"],
-            "naslov"        => ["alias" => "p.naslov"],
-            "avtor"         => ["alias" => "p.avtor"],
-            "datumPremiere" => ["alias" => "p.datumPremiere"]
+            "sifra"            => ["alias" => "p.sifra"],
+            "naslov"           => ["alias" => "p.naslov"],
+            "avtor"            => ["alias" => "p.avtor"],
+            "datumPremiere"    => ["alias" => "p.datumPremiere"],
+            "faza"             => ["alias" => "p.faza"],
+            "zvrstUprizoritve" => ["alias" => "p.zvrstUprizoritve"],
+            "maticniOder"      => ["alias" => "p.maticniOder"],
+            "gostujoca"        => ["alias" => "p.gostujoca"]
         ]
     ];
 

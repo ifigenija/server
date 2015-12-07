@@ -24,10 +24,15 @@ class Alternacije
 
     protected $sortOptions = [
         "default" => [
-            "sifra" => ["alias" => "p.sifra"]
+            "sifra"      => ["alias" => "p.sifra"],
+            "pomembna"   => ["alias" => "p.pomembna"],
+            "zacetek"    => ["alias" => "p.zacetek"],
+            "konec"      => ["alias" => "p.konec"],
+            "zaposlen"   => ["alias" => "p.zaposlen"],
+            "imaPogodbo" => ["alias" => "p.imaPogodbo"]
         ],
         "vse"     => [
-            "sifra" => ["alias" => "p.sifra"]
+            "sifra" => ["alias" => "p.sifra"],
         ]
     ];
 
@@ -128,7 +133,7 @@ class Alternacije
          */
         if (empty($object->getZaposlitev()) && !empty($object->getOseba())) {
             $zaposlitev = null; //init
-            $zdaj      = new \DateTime();
+            $zdaj       = new \DateTime();
             $danes      = $zdaj->format('Y-m-d');
             ;
             /**
