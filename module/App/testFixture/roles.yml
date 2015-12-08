@@ -334,4 +334,14 @@
     description: 'Vloga z 1 dovoljenjem'
     permissions: 
         - Pogodba-write
+- 
+    name: StrosekUprizoritve-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - StrosekUprizoritve-read
+- 
+    name: StrosekUprizoritve-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - StrosekUprizoritve-write
        

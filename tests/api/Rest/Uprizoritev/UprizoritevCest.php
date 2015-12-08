@@ -1061,6 +1061,28 @@ class UprizoritevCest
         // get po popa id  
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "stroski", $this->objStrosekUprizoritve1['id']);
         $I->assertEquals(1, count($resp));
+
+        
+        /**
+         * še preverjanje posebnih dovoljenj
+         */
+        /*
+         * uporabnik z Uprizoritev-read, a brez StrosekUprizoritve-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "stroski", "");
+        codecept_debug($resp);
+        $I->assertEquals(100699999, $resp[0][0]['code']);
+
+        /*
+         * uporabnik z Uprizoritev-read in StrosekUprizoritve-read dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "stroski", "");
+
+        
+        
+        $I->fail('$$');
     }
 
     /**

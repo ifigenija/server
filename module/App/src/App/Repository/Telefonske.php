@@ -31,9 +31,6 @@ class Telefonske
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
-            case"vse":
-                $qb = $this->getVseQb($options);
-                break;
             case"default":
                 $this->expect(!(empty($options['popa']) && empty($options['oseba'])), "Oseba ali Partner ali država sta obvezna", 770011);
                 $qb = $this->getDefaultQb($options);

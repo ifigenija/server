@@ -101,7 +101,7 @@
         - PostniNaslov-read
         - Zaposlitev-read
         - Pogodba-read
-        
+       
 -
     name: testni uporabnik za testiranje zapisov
     email: dana@ifigenija.si
@@ -196,6 +196,8 @@
         - Zapis-read
         - Oseba-read
         - Datoteka-read
+        - StrosekUprizoritve-read
+        
 -
     name: Denisa testna
     email: denisa@ifigenija.si

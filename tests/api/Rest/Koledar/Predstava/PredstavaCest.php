@@ -126,7 +126,7 @@ class PredstavaCest
         $I->assertGuid($look['id']);
     }
 
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
@@ -139,7 +139,6 @@ class PredstavaCest
         $I->assertNotEmpty($ent);
     }
 
-    
     /**
      * najdemo abonmaje
      * 
@@ -202,7 +201,7 @@ class PredstavaCest
             'zacetek'      => $zacetek,
             'konec'        => '2014-05-07T23:00:00+0200',
             'prostor'      => $this->lookProstor1['id'],
-            'sezona'      => $this->lookSezona1['id'],
+            'sezona'       => $this->lookSezona1['id'],
             'dezurni'      => $this->lookOseba1['id'],
 //            'gostovanje'  => $this->objGostovanje['id'],
 //            'dogodek'     => NULL,
@@ -237,7 +236,7 @@ class PredstavaCest
             'zacetek'      => $zacetek,
             'konec'        => '2014-05-08T23:00:00+0200',
             'prostor'      => null, // če je gostovanje ne rabimo prostora
-            'sezona'      => null, 
+            'sezona'       => null,
             'dezurni'      => NULL,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -298,7 +297,7 @@ class PredstavaCest
         $I->assertEquals($ent['zacetek'], $zacetek);
         $I->assertEquals($ent['konec'], '2014-05-07T23:00:00+0200');
         $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
-        $I->assertEquals($ent['sezona'], $this->lookSezona1['id'],"sezona");
+        $I->assertEquals($ent['sezona'], $this->lookSezona1['id'], "sezona");
         $I->assertEquals($ent['dezurni'], $this->lookOseba1['id']);
     }
 

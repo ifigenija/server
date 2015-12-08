@@ -1418,10 +1418,15 @@ class OsebaCest
     public function preberiRelacijeSTrrji(ApiTester $I)
     {
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "trrji", "");
+        codecept_debug($resp);
         $I->assertEquals(2, count($resp));
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "trrji", $this->objTrr1['id']);
+        codecept_debug($resp);
         $I->assertEquals(1, count($resp));
+
+        
+        $I->fail('$$');
     }
 
     /**
