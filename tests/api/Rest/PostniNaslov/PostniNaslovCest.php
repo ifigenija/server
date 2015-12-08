@@ -267,7 +267,7 @@ class PostniNaslovCest
         $I->assertEquals(1001640, $resp[0]['code']);
 
         /*
-         * uporabnik z OsebniPodatki-write dovoljenjem
+         * uporabnik z OsebniPodatki-read dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
         $resp = $I->successfullyGetList($listUrl, []);
@@ -436,7 +436,7 @@ class PostniNaslovCest
         $ent  = $I->successfullyGet($this->restUrl, $entPo['id']);
 
         /*
-         * uporabnik z OsebniPodatki-write dovoljenjem
+         * uporabnik z OsebniPodatki-read dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
         $ent = $I->successfullyGet($this->restUrl, $entOs['id']);

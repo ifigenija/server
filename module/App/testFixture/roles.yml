@@ -324,3 +324,14 @@
     permissions: 
         - Zaposlitev-write
        
+- 
+    name: Pogodba-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Pogodba-read
+- 
+    name: Pogodba-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Pogodba-write
+       

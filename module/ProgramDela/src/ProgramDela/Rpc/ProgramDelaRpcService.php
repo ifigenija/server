@@ -16,7 +16,7 @@ use ProgramDela\Repository\ProgramiDela;
  * @author rado
  */
 class ProgramDelaRpcService
-    extends \Max\Service\AbstractMaxService
+        extends \Max\Service\AbstractMaxService
 {
 
     /**
@@ -27,8 +27,8 @@ class ProgramDelaRpcService
     public function zakleni($programDelaId)
     {
         $this->expectUUID($programDelaId
-            , $this->translate('Pričakujem ID programa dela')
-            , 1000963);
+                , $this->translate('Pričakujem ID programa dela')
+                , 1000963);
 
         // preverjanje avtorizacije
         $this->expectPermission("ProgramDela-write");
@@ -94,8 +94,8 @@ class ProgramDelaRpcService
             $stZapisov  = count($zaplR->findByLastnik($ep->getId()));
             if ($stZapisov < 1 + $minPriponk) {
                 throw new \Max\Exception\UnauthException($tr
-                    ->translate('Program premierne uprizoritve (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk ,ima pa " . $stZapisov)
-                    , 1000967);
+                        ->translate('Program premierne uprizoritve (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk ,ima pa " . $stZapisov)
+                , 1000967);
             }
         }
 
@@ -106,8 +106,8 @@ class ProgramDelaRpcService
             $stZapisov = count($zaplR->findByLastnik($ep->getId()));
             if ($stZapisov < 1) {
                 throw new \Max\Exception\UnauthException($tr
-                    ->translate('Program ponovitve premierne uprizoritve (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 priponko ,ima pa ' . $stZapisov)
-                    , 1000968);
+                        ->translate('Program ponovitve premierne uprizoritve (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 priponko ,ima pa ' . $stZapisov)
+                , 1000968);
             }
         }
 
@@ -118,8 +118,8 @@ class ProgramDelaRpcService
             $stZapisov = count($zaplR->findByLastnik($ep->getId()));
             if ($stZapisov < 1) {
                 throw new \Max\Exception\UnauthException($tr
-                    ->translate('Program ponovitve prejšnjih sezon (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 priponko ,ima pa ' . $stZapisov)
-                    , 1000969);
+                        ->translate('Program ponovitve prejšnjih sezon (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 priponko ,ima pa ' . $stZapisov)
+                , 1000969);
             }
         }
 
@@ -130,8 +130,8 @@ class ProgramDelaRpcService
             $stZapisov = count($zaplR->findByLastnik($ep->getId()));
             if ($stZapisov < 1) {
                 throw new \Max\Exception\UnauthException($tr
-                    ->translate('Program gostujočih uprizoritev (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev, ima pa ' . $stZapisov)
-                    , 1001220);
+                        ->translate('Program gostujočih uprizoritev (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev, ima pa ' . $stZapisov)
+                , 1001220);
             }
         }
 
@@ -142,8 +142,8 @@ class ProgramDelaRpcService
             $stZapisov = count($zaplR->findByLastnik($ep->getId()));
             if ($stZapisov < 2) {
                 throw new \Max\Exception\UnauthException($tr
-                    ->translate('Program mednarodnih gostovanj (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev in 1 priponko, ima pa ' . $stZapisov)
-                    , 1001221);
+                        ->translate('Program mednarodnih gostovanj (zaporedna ' . $ep->getSort() . ') mora imeti vsaj 1 utemeljitev in 1 priponko, ima pa ' . $stZapisov)
+                , 1001221);
             }
         }
 
@@ -158,8 +158,8 @@ class ProgramDelaRpcService
             $stZapisov = count($zaplR->findByLastnik($ep->getId()));
             if ($stZapisov < 1 + $minPriponk) {
                 throw new \Max\Exception\UnauthException($tr
-                    ->translate('Program festivali (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk, ima pa $stZapisov")
-                    , 1001222);
+                        ->translate('Program festivali (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk, ima pa $stZapisov")
+                , 1001222);
             }
         }
 
@@ -171,8 +171,8 @@ class ProgramDelaRpcService
             $stZapisov  = count($zaplR->findByLastnik($ep->getId()));
             if ($stZapisov < 1 + $minPriponk) {
                 throw new \Max\Exception\UnauthException($tr
-                    ->translate('Program razno (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk, ima pa " . $stZapisov)
-                    , 1001223);
+                        ->translate('Program razno (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk, ima pa " . $stZapisov)
+                , 1001223);
             }
         }
         /**
@@ -187,8 +187,8 @@ class ProgramDelaRpcService
             $stZapisov = count($zaplR->findByLastnik($ep->getId()));
             if ($stZapisov < 1 + $minPriponk) {
                 throw new \Max\Exception\UnauthException($tr
-                    ->translate('Program izjemni dogodki (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk, ima pa $stZapisov")
-                    , 1001224);
+                        ->translate('Program izjemni dogodki (zaporedna ' . $ep->getSort() . ") mora imeti vsaj 1 utemeljitev in $minPriponk priponk, ima pa $stZapisov")
+                , 1001224);
             }
         }
 
@@ -203,8 +203,8 @@ class ProgramDelaRpcService
     public function odkleni($programDelaId)
     {
         $this->expectUUID($programDelaId
-            , $this->translate('Pričakujem ID programa dela')
-            , 1000964);
+                , $this->translate('Pričakujem ID programa dela')
+                , 1000964);
 
         // preverjanje avtorizacije
         $this->expectPermission("ProgramDela-write");
@@ -244,8 +244,8 @@ class ProgramDelaRpcService
     public function kloniraj($programDelaId)
     {
         $this->expectUUID($programDelaId
-            , $this->translate('Pričakujem ID programa dela')
-            , 1000962);
+                , $this->translate('Pričakujem ID programa dela')
+                , 1000962);
         /**
          * preverjanje avtorizacije
          */
@@ -277,8 +277,8 @@ class ProgramDelaRpcService
         $programDela = $this->getProgramDelaRep()->findOneById($programDelaId);
 
         $this->expect($programDela
-            , $this->translate('Programdela ne obstaja')
-            , 520091);
+                , $this->translate('Programdela ne obstaja')
+                , 520091);
 
         /**
          * naredim kopijo glave
@@ -289,15 +289,15 @@ class ProgramDelaRpcService
          * pripravim prazne kolekcije za postavke
          */
         $newPD
-            ->setPremiere(new \Doctrine\Common\Collections\ArrayCollection())
-            ->setPonovitvePremiere(new \Doctrine\Common\Collections\ArrayCollection())
-            ->setPonovitvePrejsnjih(new \Doctrine\Common\Collections\ArrayCollection())
-            ->setIzjemni(new \Doctrine\Common\Collections\ArrayCollection())
-            ->setProgramiFestival(new \Doctrine\Common\Collections\ArrayCollection())
-            ->setGostujoci(new \Doctrine\Common\Collections\ArrayCollection())
-            ->setGostovanja(new \Doctrine\Common\Collections\ArrayCollection())
-            ->setProgramiRazno(new \Doctrine\Common\Collections\ArrayCollection())
-            ->setZakljuceno(false);  // klon prog. dela ni zaključen
+                ->setPremiere(new \Doctrine\Common\Collections\ArrayCollection())
+                ->setPonovitvePremiere(new \Doctrine\Common\Collections\ArrayCollection())
+                ->setPonovitvePrejsnjih(new \Doctrine\Common\Collections\ArrayCollection())
+                ->setIzjemni(new \Doctrine\Common\Collections\ArrayCollection())
+                ->setProgramiFestival(new \Doctrine\Common\Collections\ArrayCollection())
+                ->setGostujoci(new \Doctrine\Common\Collections\ArrayCollection())
+                ->setGostovanja(new \Doctrine\Common\Collections\ArrayCollection())
+                ->setProgramiRazno(new \Doctrine\Common\Collections\ArrayCollection())
+                ->setZakljuceno(false);  // klon prog. dela ni zaključen
 
         /**
          * nov program dela dobi novo šifro
@@ -509,8 +509,8 @@ class ProgramDelaRpcService
     public function uvozi($programDelaId, $srcIds)
     {
         $this->expectUUID($programDelaId
-            , $this->translate('Pričakujem ID programa dela')
-            , 1000962);
+                , $this->translate('Pričakujem ID programa dela')
+                , 1000962);
         /**
          * preverjanje avtorizacije
          */
@@ -543,10 +543,10 @@ class ProgramDelaRpcService
         $newPd = $this->getProgramDelaRep()->find($programDelaId);
 
         $this->expect($newPd
-            , $this->translate('Programdela ne obstaja')
-            , 520091);
+                , $this->translate('Programdela ne obstaja')
+                , 520091);
 
-        $newPd->setAvgCenaVstopnice($newPd->getAvgCenaVstopnice() * $newPd->getStProdVstopnic() );
+        $newPd->setAvgCenaVstopnice($newPd->getAvgCenaVstopnice() * $newPd->getStProdVstopnic());
         foreach ($srcIds as $srcId) {
 
             $this->expectUUID($srcId, "Nepravilne oblike", 3000550);
@@ -560,7 +560,7 @@ class ProgramDelaRpcService
             $newPd->setStZaposlenih($newPd->getStZaposlenih() + $src->getStZaposlenih());
             $newPd->setStZaposIgralcev($newPd->getStZaposIgralcev() + $src->getStZaposIgralcev());
             $newPd->setStProdVstopnic($newPd->getStProdVstopnic() + $src->getStProdVstopnic());
-            $newPd->setAvgCenaVstopnice($newPd->getAvgCenaVstopnice() + $src->getStProdVstopnic() * $src->getAvgCenaVstopnice() );
+            $newPd->setAvgCenaVstopnice($newPd->getAvgCenaVstopnice() + $src->getStProdVstopnic() * $src->getAvgCenaVstopnice());
 
             /**
              * kloniram Programe premiere in jih dodam na nov program dela
@@ -683,7 +683,7 @@ class ProgramDelaRpcService
                 $newEP->preracunaj();
             }
         }
-        if ($newPd->getStProdVstopnic() > 0 ) {
+        if ($newPd->getStProdVstopnic() > 0) {
             $newPd->setAvgCenaVstopnice($newPd->getAvgCenaVstopnice() / $newPd->getStProdVstopnic());
         }
         $newPd->preracunaj();
@@ -725,7 +725,7 @@ class ProgramDelaRpcService
         $this->expectUUID($programDelaId, $this->translate('Pričakujem ID programa dela'), 1000980);
 
         $programdela = $em->getRepository("ProgramDela\Entity\ProgramDela")
-            ->findOneById($programDelaId);
+                ->findOneById($programDelaId);
         $this->expectPermission("ProgramDela-read", $programdela);
 
         if (!$programdela) {
@@ -776,7 +776,7 @@ class ProgramDelaRpcService
         $this->expectUUID($programDelaId, $this->translate('Pričakujem ID programa dela'), 1000982);
 
         $programdela = $em->getRepository("ProgramDela\Entity\ProgramDela")
-            ->findOneById($programDelaId);
+                ->findOneById($programDelaId);
         $this->expectPermission("ProgramDela-read", $programdela);
 
         if (!$programdela) {
@@ -791,6 +791,11 @@ class ProgramDelaRpcService
         if ($uspeh) {
             $em->flush();
         }
+
+        /**
+         * tu so le sumarni rezultati za vse pogodbe v uprizoritvi, tako da ni osebnih podatkov
+         * in ni potrebno preverjanje OsebniPodatki-read dovoljenja
+         */
         return $uspeh;
     }
 
@@ -806,15 +811,15 @@ class ProgramDelaRpcService
     public function tiskajDokument($dokument, $options)
     {
         $this->expectUUID($dokument
-            , $this->translate('Pričakujem ID dokumenta')
-            , 520082);
+                , $this->translate('Pričakujem ID dokumenta')
+                , 520082);
         /** @var ProgramiDela $dr */
-        $dr = $this->getEm()->getRepository('ProgramDela\Entity\ProgramDela');
+        $dr     = $this->getEm()->getRepository('ProgramDela\Entity\ProgramDela');
         $dr->setServiceLocator($this->getServiceLocator());
-        $dok = $dr->find($dokument);
+        $dok    = $dr->find($dokument);
         $this->expect($dok
-            , $this->translate('Dokument ne obstaja')
-            , 520081);
+                , $this->translate('Dokument ne obstaja')
+                , 520081);
 //        $this->expectPermission('ProgramDela-write', $dok);
         $this->expectPermission('ProgramDela-read', $dok);
         $report = 'ProgramDela\Task\ProgramDelaReport';
@@ -824,8 +829,8 @@ class ProgramDelaRpcService
             return $job;
         } catch (\Exception $ex) {
             throw new MaxException($this->translate('Napaka pri tiskanju dokumenta:')
-                . ' ' . $ex->getCode() . ' '
-                . $this->translate($ex->getMessage()), 520080, $ex);
+            . ' ' . $ex->getCode() . ' '
+            . $this->translate($ex->getMessage()), 520080, $ex);
         }
     }
 

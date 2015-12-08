@@ -83,6 +83,7 @@ lists:
 relation:
     default:
         alternacije:
+            perm-read: OsebniPodatki-read
             enabled: true
             hydrator:
                 exclude: []    

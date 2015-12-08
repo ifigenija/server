@@ -61,5 +61,17 @@ return [
     'form_elements'   => [
         'invokables' => [
         ]
-    ]
+    ],
+    'zfc_rbac'        => [
+        'assertion_manager' => [
+            "invokables" => [
+                "chck-pogodba-write"     => "Produkcija\Assertion\AssertPogodbaWrite",
+                "chck-pogodba"           => "Produkcija\Assertion\AssertPogodba",
+            ],
+        ],
+        "assertion_map"     => [
+            "Pogodba-write"          => "chck-pogodba-write",
+            "Pogodba-read"           => "chck-pogodba",
+        ],
+    ],
 ];

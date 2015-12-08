@@ -82,7 +82,7 @@
         - Telefonska-read
         - PostniNaslov-read
         - Zaposlitev-read
-
+        - Pogodba-read
 
 -
     name: testni uporabnik za testiranje zapisov
@@ -100,6 +100,7 @@
         - Telefonska-read
         - PostniNaslov-read
         - Zaposlitev-read
+        - Pogodba-read
         
 -
     name: testni uporabnik za testiranje zapisov
@@ -134,6 +135,8 @@
         - PostniNaslov-write
         - Zaposlitev-read
         - Zaposlitev-write
+        - Pogodba-read
+        - Pogodba-write
         
 -
     name: testni uporabnik za testiranje zapisov
@@ -160,6 +163,8 @@
         - PostniNaslov-write
         - Zaposlitev-read
         - Zaposlitev-write
+        - Pogodba-read
+        - Pogodba-write
 
 -
     name: testni uporabnik za testiranje zapisov
