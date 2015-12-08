@@ -1,6 +1,27 @@
 <?xml version="1.0"?>
-<skipper version="3.2.3.1247" mvc="Zend Framework" orm="Doctrine2" name="Ifigenija" uuid="8a007160-ad58-4154-8595-ad0aa70b4d27">
+<skipper version="3.2.4.1256" mvc="Zend Framework" orm="Doctrine2" name="Ifigenija" uuid="8a007160-ad58-4154-8595-ad0aa70b4d27">
   <module name="\Aaa/src/Aaa/Entity" local-name="Aaa/src/Aaa/Entity" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" export-format="Doctrine2Php" export-path="module/Aaa/src/Aaa/Entity" uuid="3824a8e0-7d80-4d0c-a5ca-debd633c5932">
+    <entity name="\Aaa\Entity\AuthStorage" local-name="AuthStorage" namespace="\Aaa\Entity" uuid="40f6e236-c078-433c-adf5-027e9fd37792">
+      <field name="id" type="integer" required="true" primary="true" uuid="d41251b6-3a22-400c-ba98-c73a56919efc">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">IDENTITY</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="sessionId" size="100" uuid="5c468992-a667-427e-91ac-b750fbbfbd89"/>
+      <field name="upor" type="guid" uuid="04744784-3dce-4196-8d73-7311aba0b6eb"/>
+      <field name="datum" type="datetime" required="true" uuid="a617818a-c23c-4caa-916c-7d7f4e41603c"/>
+      <field name="ip" size="255" uuid="ae82452f-6977-42a6-87f3-fe808c570cb1"/>
+      <field name="deleted" type="boolean" default="false" uuid="80239804-4015-4f44-8301-331ed7764e8f">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="export-file-name">AuthStorage.php</attribute>
+      </orm-attributes>
+    </entity>
     <entity name="\Aaa\Entity\Permission" local-name="Permission" namespace="\Aaa\Entity" uuid="8365f846-b650-414f-b2dc-4e901c464a8a">
       <field name="id" type="guid" required="true" primary="true" uuid="11edaeba-5e0d-4db8-80ad-607a29c63a8d">
         <orm-attributes>
@@ -236,6 +257,45 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
+    <entity name="\App\Entity\OrganizacijskaEnota" local-name="OrganizacijskaEnota" namespace="\App\Entity" uuid="7ea2015a-0b07-4a4d-9bb7-6043a6c2a469">
+      <field name="id" type="guid" required="true" primary="true" uuid="c2db4ca2-007c-4f60-95af-5476e3a98ae4">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="sifra" type="string" required="true" unique="true" uuid="74101f56-9849-4c72-9bb8-8329af6414ef"/>
+      <field name="naziv" size="50" uuid="c654dff7-7b6b-49ec-a4d3-f958d28fd66a"/>
+      <field name="parent_id" uuid="a8d7ffa6-2fc9-4d81-9a9b-91c1b30741b5"/>
+      <field name="vodja_id" uuid="93531c0d-f355-472d-9886-b38bdccd1f0c"/>
+      <field name="namestnik_id" uuid="f0c89d39-e516-4dcd-a984-b1cb0352ddca"/>
+      <orm-attributes>
+        <attribute name="repository-class">App\Repository\OrganizacijskeEnote</attribute>
+        <attribute name="export-file-name">OrganizacijskaEnota.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\App\Entity\OrganizacijskaEnota" to="\App\Entity\OrganizacijskaEnota" owner-alias="children" inverse-alias="parent" many-owner="true" many-inverse="false" uuid="e73b2aef-4e2a-404d-be8e-3dfe069d3bec">
+      <association-field from="parent_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\App\Entity\OrganizacijskaEnota" to="\Produkcija\Entity\Zaposlitev" owner-alias="vodjaOrganizacijskihEnot" inverse-alias="vodja" many-owner="true" many-inverse="false" uuid="89c25626-8f20-4cd6-999d-42fda3a4efae">
+      <association-field from="vodja_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\App\Entity\OrganizacijskaEnota" to="\Produkcija\Entity\Zaposlitev" owner-alias="namestnikOrganizacijskihEnot" inverse-alias="namestnik" many-owner="true" many-inverse="false" uuid="d7971856-1adc-4cb4-b400-764c5b0bc304">
+      <association-field from="namestnik_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
     <entity name="\App\Entity\Oseba" local-name="Oseba" namespace="\App\Entity" uuid="d2f63d49-4722-45c9-80ed-be8010f3190f">
       <field name="id" type="guid" required="true" primary="true" uuid="3ef541cb-425a-4238-9544-4848cb95ec44">
         <orm-attributes>
@@ -263,6 +323,9 @@
       <field name="krajRojstva" uuid="0046257d-cd0a-492e-b20d-b80bab101d5a"/>
       <field name="user_id" unique="true" uuid="b222c3bc-267d-462c-b513-c4557f59a822"/>
       <field name="naslov_id" uuid="0332a08b-99c7-43cb-b49a-9c98e5d9f75d"/>
+      <field name="twitter" uuid="272bed29-a400-46d3-9cf1-7f1fb3648c5e"/>
+      <field name="skype" uuid="08d5fe6d-6e6c-4f98-bf35-dd8e09815655"/>
+      <field name="fb" uuid="50a3f1cc-4b1e-4f6c-af62-0700ef3432db"/>
       <orm-attributes>
         <attribute name="repository-class">App\Repository\Osebe</attribute>
         <attribute name="export-file-name">Oseba.php</attribute>
@@ -308,6 +371,7 @@
       <field name="zamejstvo" type="boolean" uuid="aa4c4636-6c06-4295-8ceb-dc58911d4baf"/>
       <field name="nvo" type="boolean" uuid="dbd99515-8c2e-43bd-9ed3-e63c46ed7c0b"/>
       <field name="drzava_id" required="true" uuid="b98edd4a-89eb-48f7-8f13-17fcdb8fc3dc"/>
+      <field name="tipkli_id" uuid="fa31ad96-6758-4608-bb1b-b6d73f850ac2"/>
       <orm-attributes>
         <attribute name="repository-class">App\Repository\Popa</attribute>
         <attribute name="table">popa</attribute>
@@ -319,6 +383,17 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\App\Entity\Popa" to="\App\Entity\TipPopa" owner-alias="popa" inverse-alias="tipkli" many-owner="true" many-inverse="false" uuid="a324c25b-0f72-4ac7-bf07-c2950926da7d">
+      <association-field from="tipkli_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning">
+          <attribute name="fetch">EAGER</attribute>
+        </attribute>
+        <attribute name="side-inverse">
+          <attribute name="fetch">EXTRA_LAZY</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <entity name="\App\Entity\Posta" local-name="Posta" namespace="\App\Entity" uuid="75b3e057-7d6a-47df-8efb-ad52d65faf35">
@@ -423,6 +498,22 @@
         </attribute>
       </orm-attributes>
     </association>
+    <entity name="\App\Entity\TipPopa" local-name="TipPopa" namespace="\App\Entity" uuid="391603b3-3b78-4bc8-a40c-708ab9bb28ef">
+      <field name="id" type="guid" required="true" primary="true" uuid="698669b0-c3d3-4905-9ce4-044946eb3dd6">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="sifra" unique="true" uuid="351b5e30-e5f7-4358-9c36-d7d56bccc47c"/>
+      <field name="ime" unique="true" uuid="875740e4-32e0-488c-aa19-998c1429a424"/>
+      <field name="opis" type="text" uuid="27ccdd45-c210-4da2-9604-805820b04321"/>
+      <orm-attributes>
+        <attribute name="repository-class">App\Repository\TipiPopa</attribute>
+        <attribute name="export-file-name">TipPopa.php</attribute>
+      </orm-attributes>
+    </entity>
     <entity name="\App\Entity\Trr" local-name="Trr" namespace="\App\Entity" uuid="2feaa061-21cf-45b7-a650-ccf18b698b94">
       <field name="id" type="guid" required="true" primary="true" uuid="1f185bf0-597d-42c3-9527-8601ec214e15">
         <orm-attributes>
@@ -460,6 +551,15 @@
     </association>
   </module>
   <module name="\Koledar/src/Koledar/Entity" local-name="Koledar/src/Koledar/Entity" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" export-format="Doctrine2Php" export-path="module/Koledar/src/Koledar/Entity" uuid="fc3d8164-87bc-4341-88a1-15d59570d9f6">
+    <entity name="\Koledar\Entity\PredstavaAbonma" local-name="PredstavaAbonma" namespace="\Koledar\Entity" uuid="b3a597c4-80fc-46d9-8aff-912bd5199b90">
+      <field name="Abonma_id" type="guid" uuid="e651461b-fde1-47a4-aeaf-048fd5d36e7d"/>
+    </entity>
+    <many-to-many mn-entity="\Koledar\Entity\PredstavaAbonma" caption="abonma" uuid="63195545-79a8-4f67-b2d1-01fc8a363b84">
+      <many-to-many-entity name="\Koledar\Entity\Predstava" owning-side="true" alias="predstave" uuid="f9c68b5d-1d89-4620-8ef0-ce6f93f6e112"/>
+      <many-to-many-entity name="\Abonmaji\Entity\Abonma" owning-side="false" alias="abonmaji" uuid="9c7308be-9ac4-42bf-a280-a6c1060b9ab3">
+        <many-to-many-field from="Abonma_id" to="id"/>
+      </many-to-many-entity>
+    </many-to-many>
     <entity name="\Koledar\Entity\DogodekIzven" local-name="DogodekIzven" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" uuid="46e3fbbf-63e4-4d39-9e02-3056f511a0de">
       <field name="id" type="guid" required="true" primary="true" uuid="643b8c0a-7e3c-44e2-bddc-ae1fb4a4d1b5">
         <orm-attributes>
@@ -505,8 +605,8 @@
       <field name="planiranZacetek" type="datetime" uuid="953d3cc9-dded-41ed-94a9-5f1efd71644e"/>
       <field name="zacetek" type="datetime" uuid="905078ea-8c6c-464b-9961-4e1eeb2c6559"/>
       <field name="konec" type="datetime" uuid="b99e50eb-7202-48bb-b7ac-b9b223cf0f04"/>
-      <field name="status" type="integer" size="20" uuid="beea0477-bb5d-42ea-9a68-12f7cf0195c4"/>
-      <field name="razred" type="string" size="10" uuid="eb4c6d0a-7b76-4c33-8796-1cb13a7be842"/>
+      <field name="status" type="string" size="4" uuid="beea0477-bb5d-42ea-9a68-12f7cf0195c4"/>
+      <field name="razred" type="string" size="4" uuid="eb4c6d0a-7b76-4c33-8796-1cb13a7be842"/>
       <field name="termin" type="string" uuid="6ae58696-7499-4671-be0f-23bd56227712"/>
       <field name="ime" type="string" uuid="fd3bc18e-336f-4bea-a50b-5e0366027421"/>
       <field name="predstava_id" unique="true" uuid="fae31c67-b3c0-4c78-9b3b-2a6b0f745763"/>
@@ -523,6 +623,7 @@
       </field>
       <field name="title" type="string" uuid="6cc3a25f-5c54-4d8c-a93c-42b2f9d08f1a"/>
       <field name="dogodek_splosni_id" unique="true" uuid="27e9cf14-9559-4d4d-a4d2-e55451a73c42"/>
+      <field name="tehnicni_id" uuid="46f91fee-4606-4ff3-85e6-1a88a481774e"/>
       <index name="zacetek">
         <index-field name="zacetek"/>
       </index>
@@ -547,7 +648,11 @@
       <association-field from="predstava_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="cascade">
+            <attribute name="cascade-persist">true</attribute>
+          </attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <association from="\Koledar\Entity\Dogodek" to="\Koledar\Entity\Zasedenost" owner-alias="dogodek" inverse-alias="zasedenost" many-owner="false" many-inverse="false" uuid="64540d58-0813-452e-9950-f54000725410">
@@ -561,14 +666,22 @@
       <association-field from="vaja_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="cascade">
+            <attribute name="cascade-persist">true</attribute>
+          </attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <association from="\Koledar\Entity\Dogodek" to="\Koledar\Entity\Gostovanje" owner-alias="dogodek" inverse-alias="gostovanje" many-owner="false" many-inverse="false" uuid="e3869ac2-0617-42a1-a9c3-f6d9ae56ca02">
       <association-field from="gostovanje_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="cascade">
+            <attribute name="cascade-persist">true</attribute>
+          </attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <association from="\Koledar\Entity\Dogodek" to="\Koledar\Entity\DogodekIzven" owner-alias="dogodek" inverse-alias="dogodekIzven" many-owner="false" many-inverse="false" uuid="4285cf01-5255-49ff-89d6-c3eafe0fe550">
@@ -592,13 +705,54 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Koledar\Entity\Dogodek" to="\DogodekSplosni" owner-alias="dogodek" inverse-alias="splosni" many-owner="false" many-inverse="false" uuid="bcf85701-7434-495b-b451-055d7f877f26">
+    <association from="\Koledar\Entity\Dogodek" to="\Koledar\Entity\DogodekSplosni" owner-alias="dogodek" inverse-alias="splosni" many-owner="false" many-inverse="false" uuid="bcf85701-7434-495b-b451-055d7f877f26">
       <association-field from="dogodek_splosni_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="cascade">
+            <attribute name="cascade-persist">true</attribute>
+          </attribute>
+        </attribute>
       </orm-attributes>
     </association>
+    <association from="\Koledar\Entity\Dogodek" to="\Koledar\Entity\DogodekTehnicni" owner-alias="dogodek" inverse-alias="tehnicni" many-owner="true" many-inverse="false" uuid="8e789318-f588-4cf6-851f-43e56ace7299">
+      <association-field from="tehnicni_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse">
+          <attribute name="cascade">
+            <attribute name="cascade-persist">true</attribute>
+          </attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
+    <entity name="\Koledar\Entity\DogodekSplosni" local-name="DogodekSplosni" namespace="\Koledar\Entity" uuid="bd6ec087-87e4-422c-bc7a-ff7fd24dc618">
+      <field name="id" type="guid" required="true" primary="true" uuid="7568ce4e-04b9-46d0-80c8-1dcc30058785">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\DogodkiSplosni</attribute>
+        <attribute name="export-file-name">DogodekSplosni.php</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Koledar\Entity\DogodekTehnicni" local-name="DogodekTehnicni" namespace="\Koledar\Entity" uuid="08cf27ff-1ad6-4c22-883a-bebc82aaf954">
+      <field name="id" type="guid" required="true" primary="true" uuid="f515322d-5468-4737-bf90-e06f3e7fa2a8">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\DogodkiTehnicni</attribute>
+        <attribute name="export-file-name">DogodekTehnicni.php</attribute>
+      </orm-attributes>
+    </entity>
     <entity name="\Koledar\Entity\Gostovanje" local-name="Gostovanje" namespace="\Koledar\Entity" uuid="14a2a9d5-151d-4a89-8a8d-314ffb7c4b71">
       <field name="id" type="guid" required="true" primary="true" uuid="d55d7dc0-3ffa-457c-b7b7-dc1556e662e9">
         <orm-attributes>
@@ -623,6 +777,24 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
+    <entity name="\Koledar\Entity\Praznik" local-name="Praznik" namespace="\Koledar\Entity" uuid="025b4ecf-ec1e-47a2-a6e5-997f2b9dc841">
+      <field name="id" type="guid" required="true" primary="true" uuid="743d4e23-1ffc-411e-869f-c3e57d0c88dc">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="ime" type="string" uuid="d53e2093-3ff0-4609-b2cf-33480110470d"/>
+      <field name="dan" uuid="c2aaec60-5ff3-4011-85df-ad6eceba5b6a"/>
+      <field name="mesec" type="integer" uuid="56c9789c-0ff4-4c19-aa9d-2221f1ee11e8"/>
+      <field name="leto" type="integer" uuid="bcdc0387-f7a3-4ba3-9aef-d3294f4fa331"/>
+      <field name="delaProst" type="boolean" uuid="593ad30d-6b23-41d9-b7d2-27914a3b6f69"/>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\Prazniki</attribute>
+        <attribute name="export-file-name">Praznik.php</attribute>
+      </orm-attributes>
+    </entity>
     <entity name="\Koledar\Entity\Predstava" local-name="Predstava" namespace="\Koledar\Entity" uuid="5b7f499c-37a3-49d8-9803-6bc7470b4601">
       <field name="id" type="guid" required="true" primary="true" uuid="e971ad42-8802-4361-b262-28b79c8f4ddf">
         <orm-attributes>
@@ -634,6 +806,11 @@
       <field name="uprizoritev_id" uuid="90787579-be0b-4610-9e4c-de6194348212"/>
       <field name="gostovanje_id" uuid="9fe65a35-eb88-4e6f-9d4f-cee9991e48d0"/>
       <field name="gostujoc_id" uuid="7bf27e4c-42d9-4309-af80-ebe3e9afa672"/>
+      <field name="zaporedna" type="integer" uuid="921d3751-9e5d-4da9-b3c7-bf2888d779cf"/>
+      <field name="zaporednaSez" type="integer" uuid="5133292b-3dec-4187-9b4d-3a3e3300148c"/>
+      <field name="objavljenZacetek" type="datetime" uuid="bf9ff6e2-8473-4803-a6e9-2503338c334d"/>
+      <field name="porocilo" type="text" uuid="1bf2ec85-957f-4384-b545-6426bc703c65"/>
+      <field name="dezurni_id" uuid="9ac3b7a2-1f7e-490c-b9fa-1d0799c662a5"/>
       <orm-attributes>
         <attribute name="repository-class">Koledar\Repository\Predstave</attribute>
         <attribute name="export-file-name">Predstava.php</attribute>
@@ -660,6 +837,13 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
+    <association from="\Koledar\Entity\Predstava" to="\App\Entity\Oseba" owner-alias="" inverse-alias="dezurni" many-owner="true" many-inverse="false" uuid="fc5ebc31-82ce-4c5b-aa20-1e656d9dd71b">
+      <association-field from="dezurni_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
     <entity name="\Koledar\Entity\Sezona" local-name="Sezona" namespace="\Koledar\Entity" uuid="8855280e-2c8f-48e3-937e-4846bf13c1d7">
       <field name="id" type="guid" required="true" primary="true" uuid="5bd364d6-78e3-48f7-9f49-3237d3f45b1b">
         <orm-attributes>
@@ -679,6 +863,22 @@
         <attribute name="export-file-name">Sezona.php</attribute>
       </orm-attributes>
     </entity>
+    <entity name="\Koledar\Entity\TipVaje" local-name="TipVaje" namespace="\Koledar\Entity" uuid="8b345c44-acf4-4962-88cc-d80fd02759ed">
+      <field name="id" type="guid" required="true" primary="true" uuid="a46fa628-6cff-4bad-a451-fed99b33f261">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="sifra" unique="true" uuid="a0772a03-3c9d-44a6-86cc-01eec08bdef6"/>
+      <field name="ime" unique="true" uuid="938ccf37-071c-492a-8966-ab47464e8a9b"/>
+      <field name="opis" type="text" uuid="3c2cb2a6-e2a5-4a5b-9c12-f3feeef77a31"/>
+      <orm-attributes>
+        <attribute name="repository-class">Koledar\Repository\TipiVaje</attribute>
+        <attribute name="export-file-name">TipVaje.php</attribute>
+      </orm-attributes>
+    </entity>
     <entity name="\Koledar\Entity\Vaja" local-name="Vaja" namespace="\Koledar\Entity" uuid="2ddca9df-8b16-4233-af59-aa50f92706fd">
       <field name="id" type="guid" required="true" primary="true" uuid="a7d37f56-a6a0-4784-8046-9a066cad2761">
         <orm-attributes>
@@ -691,6 +891,7 @@
       <field name="porocilo" type="text" uuid="7a93cbcd-6402-4ba0-ac22-f8c065b00c7e"/>
       <field name="uprizoritev_id" uuid="6ede0f73-07de-4b52-ac03-530bf8dbf7bf"/>
       <field name="vrsta" type="string" uuid="98ec544b-1f1d-4929-bcf5-8a166569ae62"/>
+      <field name="tipvaje_id" uuid="e77d3f09-5eb5-484e-8cc5-0d6af7a4ad20"/>
       <orm-attributes>
         <attribute name="repository-class">Koledar\Repository\Vaje</attribute>
         <attribute name="export-file-name">Vaja.php</attribute>
@@ -703,6 +904,17 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
+    <association from="\Koledar\Entity\Vaja" to="\Koledar\Entity\TipVaje" owner-alias="vaje" inverse-alias="tipvaje" many-owner="true" many-inverse="false" uuid="0ac81fcf-7b33-4187-ba4c-28106d52dd3c">
+      <association-field from="tipvaje_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning">
+          <attribute name="fetch">EAGER</attribute>
+        </attribute>
+        <attribute name="side-inverse">
+          <attribute name="fetch">EXTRA_LAZY</attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
     <entity name="\Koledar\Entity\Zasedenost" local-name="Zasedenost" namespace="\Koledar\Entity" uuid="4b044038-030d-41a7-bee9-095834fcfda1">
       <field name="id" type="guid" required="true" primary="true" uuid="13e654fb-02cc-4225-8c70-682920239db8">
         <orm-attributes>
@@ -711,11 +923,19 @@
           </attribute>
         </orm-attributes>
       </field>
+      <field name="oseba_id" uuid="20de28ef-6156-4a8e-9b98-e41312f39a6f"/>
       <orm-attributes>
         <attribute name="repository-class">Koledar\Repository\Zasedenosti</attribute>
         <attribute name="export-file-name">Zasedenost.php</attribute>
       </orm-attributes>
     </entity>
+    <association from="\Koledar\Entity\Zasedenost" to="\App\Entity\Oseba" owner-alias="zasedenosti" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="b45857fa-93a8-4177-bc82-7dbc7a6fdfa0">
+      <association-field from="oseba_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
   </module>
   <module name="\Prisotnost/src/Prisotnost/Entity" local-name="Prisotnost/src/Prisotnost/Entity" namespace="\Prisotnost\Entity" local-namespace="\Prisotnost\Entity" export-format="Doctrine2Php" export-path="module/Prisotnost/src/Prisotnost/Entity" uuid="014b3d03-7303-40f7-bef2-10e70c884791">
     <entity name="\Prisotnost\Entity\TerminStoritve" local-name="TerminStoritve" namespace="\Prisotnost\Entity" uuid="df09ee8d-8cd1-4c4d-aa94-33b20237a936">
@@ -739,6 +959,8 @@
       <field name="dogodek_id" uuid="576ec9d2-edf5-4c26-adf1-acd8e74144e7"/>
       <field name="alternacija_id" uuid="d25d6032-7097-4ccb-b8fe-d8154107a6f6"/>
       <field name="oseba_id" required="true" uuid="d16528a6-07fc-43ba-b41d-e65867e69583"/>
+      <field name="dezurni" type="boolean" uuid="26576ad7-a09e-47f8-aa5a-0d5bc8ebbaea"/>
+      <field name="gost" type="boolean" uuid="516df567-8086-4c8d-b329-1f0fc3a09949"/>
       <orm-attributes>
         <attribute name="repository-class">Prisotnost\Repository\TerminiStoritve</attribute>
         <attribute name="export-file-name">TerminStoritve.php</attribute>
@@ -909,6 +1131,7 @@
           <attribute name="options"/>
         </orm-attributes>
       </field>
+      <field name="jeMaticniOder" type="boolean" uuid="8929d8f2-485e-4661-a2bd-0afe9349e6ca"/>
       <orm-attributes>
         <attribute name="repository-class">Prodaja\Repository\Prostori</attribute>
         <attribute name="export-file-name">Prostor.php</attribute>
@@ -1149,7 +1372,14 @@
       <association-field from="funkcija_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="field">sort</attribute>
+              <attribute name="direction">ASC</attribute>
+            </attribute>
+          </attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <association from="\Produkcija\Entity\Alternacija" to="\Produkcija\Entity\Zaposlitev" owner-alias="alternacije" inverse-alias="zaposlitev" many-owner="true" many-inverse="false" uuid="69fcb50e-6ea6-42c7-9497-4b8829461f52">
@@ -1212,6 +1442,38 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
+    <entity name="\Produkcija\Entity\AvtorBesedila" local-name="AvtorBesedila" namespace="\Produkcija\Entity" uuid="47f334d0-4634-4310-9454-52ebc916b8b1">
+      <field name="id" type="guid" required="true" primary="true" uuid="6b8e1499-145c-4d9d-91ee-b537068aa443">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="tipAvtorja" type="string" uuid="e2b3b803-460a-4fec-8922-ccfbb3dcce39"/>
+      <field name="zaporedna" type="integer" uuid="d65a5ef8-00a7-4976-b279-9a323ef673df"/>
+      <field name="aliVNaslovu" type="boolean" size="1" uuid="d70278d7-08d5-4792-8d69-822c3c566def"/>
+      <field name="besedilo_id" uuid="c428589b-a848-4634-bb9c-86fdb3cdb1a4"/>
+      <field name="oseba_id" uuid="fda0574d-7acf-4475-a31c-38b0777e32b7"/>
+      <orm-attributes>
+        <attribute name="repository-class">Produkcija\Repository\AvtorjiBesedila</attribute>
+        <attribute name="export-file-name">AvtorBesedila.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Produkcija\Entity\AvtorBesedila" to="\Produkcija\Entity\Besedilo" owner-alias="avtorji" inverse-alias="besedilo" many-owner="true" many-inverse="false" uuid="7e554d4c-b5ec-41aa-8f20-e5308eb53149">
+      <association-field from="besedilo_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\Produkcija\Entity\AvtorBesedila" to="\App\Entity\Oseba" owner-alias="avtorjiBesedil" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="fd165ab8-2585-4cf2-b1e4-12149d60bc3b">
+      <association-field from="oseba_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
     <entity name="\Produkcija\Entity\Besedilo" local-name="Besedilo" namespace="\Produkcija\Entity" uuid="c23625f8-90ec-4509-b8d0-9568c4327c32">
       <field name="id" type="guid" required="true" primary="true" uuid="a9b781e6-af32-4ecd-a7fb-2f5f0641829b">
         <orm-attributes>
@@ -1220,7 +1482,7 @@
           </attribute>
         </orm-attributes>
       </field>
-      <field name="stevilka" type="string" required="true" uuid="2474e727-ced5-4730-aecb-c85f36ca9b4c"/>
+      <field name="stevilka" type="string" required="true" unique="true" uuid="2474e727-ced5-4730-aecb-c85f36ca9b4c"/>
       <field name="naslov" type="string" uuid="3d6d2b42-8deb-4857-8057-b66a84708117"/>
       <field name="avtor" type="string" uuid="5e8449e0-a1cf-4b50-ade3-7b0e2bc7bb75"/>
       <field name="podnaslov" type="string" uuid="80ac3204-d210-45bc-a744-2868d87c3096"/>
@@ -1235,6 +1497,7 @@
       <field name="letoIzida" type="integer" size="4" uuid="49e98ba2-1585-4881-802d-129634882a31"/>
       <field name="krajIzida" type="string" uuid="a6b88e63-cf71-443e-98e9-a5ee5c12f4a3"/>
       <field name="zaloznik" type="string" uuid="4f6a0875-f6ac-4c70-99a3-97caeefac483"/>
+      <field name="podnaslovIzvirnika" type="string" uuid="73a43fab-7ffd-4963-8318-57ea55b83162"/>
       <orm-attributes>
         <attribute name="repository-class">Produkcija\Repository\Besedila</attribute>
         <attribute name="export-file-name">Besedilo.php</attribute>
@@ -1270,7 +1533,14 @@
       <association-field from="uprizoritev_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="field">sort</attribute>
+              <attribute name="direction">ASC</attribute>
+            </attribute>
+          </attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <association from="\Produkcija\Entity\Funkcija" to="\Produkcija\Entity\Alternacija" owner-alias="" inverse-alias="privzeti" many-owner="true" many-inverse="false" uuid="14a6cf15-a17a-46b5-b0d9-62f5c92e6882">
@@ -1348,6 +1618,14 @@
       <field name="planiranoSteviloVaj" type="integer" uuid="8c868273-631a-4c56-bad2-97ec211e9969"/>
       <field name="samozaposlen" type="boolean" uuid="9d9bad7a-8318-495b-b5eb-a2b2bfb1bd91"/>
       <field name="igralec" type="boolean" uuid="6bf12692-a1f0-4190-9423-0665774d3252"/>
+      <field name="jeAvtorskePravice" type="boolean" uuid="a43a0966-3780-476f-98c2-1b81e0ecb0c0"/>
+      <field name="procentOdInkasa" type="decimal" uuid="32c34221-fc2a-4516-9526-2908aaeb82c6">
+        <orm-attributes>
+          <attribute name="precision">12</attribute>
+          <attribute name="scale">2</attribute>
+        </orm-attributes>
+      </field>
+      <field name="jeProcentOdInkasa" type="boolean" size="1" uuid="84ac6ade-a3d0-44de-a915-8290fc96de2c"/>
       <orm-attributes>
         <attribute name="repository-class">Produkcija\Repository\Pogodbe</attribute>
         <attribute name="export-file-name">Pogodba.php</attribute>
@@ -1482,11 +1760,13 @@
           </attribute>
         </orm-attributes>
       </field>
-      <field name="ime" type="string" uuid="4c542f58-5f9d-43db-9ea8-0743f7bc53ca"/>
+      <field name="ime" type="string" unique="true" uuid="4c542f58-5f9d-43db-9ea8-0743f7bc53ca"/>
       <field name="opis" type="text" uuid="e1e8c2e4-715d-4bf5-b10c-85d97f382eba"/>
       <field name="nastopajoc" type="boolean" uuid="4cd74a0c-654a-41b8-b674-dadfd43d8c84"/>
       <field name="imeZenski" type="string" uuid="43276f9c-4b23-406e-a7df-293d55094969"/>
       <field name="podrocje" type="string" uuid="56345db5-4c54-4c25-b4d7-51a0b8262c53"/>
+      <field name="sifra" unique="true" uuid="55f0ef13-4418-48db-bb12-9c62c0f4eed5"/>
+      <field name="sort" type="integer" uuid="4afff5bf-4ca8-49f7-bad8-f4ad81bb330c"/>
       <orm-attributes>
         <attribute name="repository-class">Produkcija\Repository\TipiFunkcije</attribute>
         <attribute name="export-file-name">TipFunkcije.php</attribute>
@@ -1529,6 +1809,7 @@
       <field name="podnaslovIzvirnika" type="string" uuid="93b0ef9d-872a-4bf5-bda3-3f2e40ec826c"/>
       <field name="krstna" type="boolean" uuid="30f15c15-ea5e-4070-bd81-3a3d0155c473"/>
       <field name="prvaSlovenska" type="boolean" uuid="051250bc-6e45-4cd8-b2d0-b05d93f692da"/>
+      <field name="jeKoprodukcija" type="boolean" size="1" uuid="8ffaaca8-634d-4ff5-9e9e-2c7f1bdb639a"/>
       <orm-attributes>
         <attribute name="repository-class">Produkcija\Repository\Uprizoritve</attribute>
         <attribute name="export-file-name">Uprizoritev.php</attribute>
@@ -1541,7 +1822,7 @@
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Produkcija\Entity\Uprizoritev" to="\Produkcija\Entity\Besedilo" owner-alias="" inverse-alias="besedilo" many-owner="true" many-inverse="false" uuid="f1ceedad-0dcb-4649-b08a-b7388397b5a1">
+    <association from="\Produkcija\Entity\Uprizoritev" to="\Produkcija\Entity\Besedilo" owner-alias="uprizoritve" inverse-alias="besedilo" many-owner="true" many-inverse="false" uuid="f1ceedad-0dcb-4649-b08a-b7388397b5a1">
       <association-field from="besedilo_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
@@ -1594,7 +1875,7 @@
           </attribute>
         </orm-attributes>
       </field>
-      <field name="sifra" type="string" size="10" uuid="55ff6a45-85b3-4e81-ba18-8c6f3a3525b1"/>
+      <field name="sifra" type="string" size="4" required="true" uuid="55ff6a45-85b3-4e81-ba18-8c6f3a3525b1"/>
       <field name="status" type="string" size="10" uuid="2a9edc06-2bf0-4adb-910a-f58c6ef97f04"/>
       <field name="zacetek" type="date" uuid="53a99228-7dd5-4e63-9f43-00caf148fd6d"/>
       <field name="konec" type="date" uuid="b66f23f1-6289-45d9-8482-78678350f82c"/>
@@ -1606,6 +1887,8 @@
       <field name="jeZaposlenVdrugemJz" type="boolean" uuid="6453a3f9-3b5d-41d5-b0d8-59497770ac40"/>
       <field name="jeNastopajoci" type="boolean" uuid="8d604fdd-820f-4ae5-a913-a9bcebd05da2"/>
       <field name="oseba_id" uuid="a5398898-5d92-48a6-a018-79488e554e6a"/>
+      <field name="delovnoMesto" type="string" uuid="13a11765-2c26-472d-bcc7-af22baa30e5e"/>
+      <field name="organizacijskaEnota_id" uuid="28cdd7fa-eb1a-4894-b0cb-bb01dca0116a"/>
       <orm-attributes>
         <attribute name="repository-class">Produkcija\Repository\Zaposlitve</attribute>
         <attribute name="export-file-name">Zaposlitev.php</attribute>
@@ -1613,6 +1896,13 @@
     </entity>
     <association from="\Produkcija\Entity\Zaposlitev" to="\App\Entity\Oseba" caption="Zaposlitev-Oseba" owner-alias="zaposlitve" inverse-alias="oseba" many-owner="true" many-inverse="false" uuid="0937899a-47d7-4a63-8cb6-00d6550ca740">
       <association-field from="oseba_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <association from="\Produkcija\Entity\Zaposlitev" to="\App\Entity\OrganizacijskaEnota" owner-alias="zaposlitve" inverse-alias="organizacijskaEnota" many-owner="true" many-inverse="false" uuid="bd59cf41-5c65-457e-aaaf-ba14e62d1872">
+      <association-field from="organizacijskaEnota_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
@@ -1786,14 +2076,18 @@
           <attribute name="options"/>
         </orm-attributes>
       </field>
-      <field name="ponoviZamejo" type="integer" default="0" required="true" uuid="15851013-0d8b-40df-a445-f7ad531e75ce">
+      <field name="ponoviZamejo" type="decimal" default="0" required="true" uuid="15851013-0d8b-40df-a445-f7ad531e75ce">
         <orm-attributes>
           <attribute name="options"/>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
         </orm-attributes>
       </field>
-      <field name="ponoviGost" type="integer" default="0" required="true" uuid="12098897-927d-4694-b071-28dbc6f43160">
+      <field name="ponoviGost" type="decimal" default="0" required="true" uuid="12098897-927d-4694-b071-28dbc6f43160">
         <orm-attributes>
           <attribute name="options"/>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
         </orm-attributes>
       </field>
       <field name="ponoviInt" type="integer" default="0" required="true" uuid="0bb873dc-4c93-427a-b104-64049cebf9bc">
@@ -1888,6 +2182,50 @@
           <attribute name="options"/>
         </orm-attributes>
       </field>
+      <field name="stHonorarnihZun" type="integer" default="0" uuid="3739e60e-21b7-4133-9a14-68cebe1b2756">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="stHonorarnihZunIgr" type="integer" default="0" uuid="a0f12940-4c90-4809-ac14-d50a445d8306">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="stHonorarnihZunIgrTujJZ" type="integer" default="0" uuid="4230b51b-fbc6-4202-8f64-a88758bfffe8">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="stHonorarnihZunSamoz" type="integer" default="0" uuid="330694b9-3c3a-4501-8b6b-ca0d6bce2d45">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="obiskKoprGost" type="integer" default="0" required="true" uuid="a923201b-9de6-4aa9-9d43-7648500d167b">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="obiskKoprZamejo" type="integer" default="0" required="true" uuid="f45a6db5-efb7-4d49-91fd-e3b5b77c76ae">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="ponoviKoprZamejo" type="decimal" default="0" required="true" uuid="8022ebab-cae6-4dc2-a78f-ad3dd1034bea">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="ponoviKoprGost" type="decimal" default="0" required="true" uuid="51f92768-bcbd-480f-b184-51aac09a6eba">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
       <inheritance-parent discriminator-field="tip" type="SINGLE_TABLE" discriminator-value-base="enota" uuid="d6e09e98-d935-4ffb-811a-d3f7063e0e79"/>
       <orm-attributes>
         <attribute name="repository-class">ProgramDela\Repository\EnotePrograma</attribute>
@@ -1906,6 +2244,84 @@
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\ProgramDela\Entity\PostavkaCDve" local-name="PostavkaCDve" namespace="\ProgramDela\Entity" uuid="6a07a0d3-6694-409c-9467-15e28307dc42">
+      <field name="id" type="guid" required="true" primary="true" uuid="e3cf7098-04f0-4193-bae3-6c4d39300c52">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="skupina" type="string" size="2" uuid="5b609aed-8ad8-458c-8afa-e79d78e465a1"/>
+      <field name="podskupina" type="integer" uuid="0d5d56eb-d61e-4f6f-9b25-f6d767d9c661"/>
+      <field name="naziv" type="string" uuid="bf33de07-2b91-4023-9204-303a3ec6a6af"/>
+      <field name="vrPremiere" type="decimal" uuid="37b310ce-d315-464e-86c2-b7042adce27d">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+        </orm-attributes>
+      </field>
+      <field name="vrPonovitvePremier" type="decimal" uuid="cc2075de-36f6-4382-a455-4a1c0b3e5f51">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+        </orm-attributes>
+      </field>
+      <field name="vrPonovitvePrejsnjih" type="decimal" uuid="52ea9f36-c749-4791-853c-35cfa264fd5c">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+        </orm-attributes>
+      </field>
+      <field name="vrGostovanjaZamejstvo" type="decimal" uuid="80cdb105-c643-4b08-ad31-e9383c6d31d7">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+        </orm-attributes>
+      </field>
+      <field name="vrFestivali" type="decimal" uuid="01159c28-1e56-49d2-92bb-3673058149d6">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+        </orm-attributes>
+      </field>
+      <field name="vrGostovanjaInt" type="decimal" uuid="70df9f14-c35d-46d9-ad78-6e3543a115d5">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+        </orm-attributes>
+      </field>
+      <field name="vrOstalo" type="decimal" uuid="9471ac3b-1828-44f3-af18-1a7fa620bf1d">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+        </orm-attributes>
+      </field>
+      <field name="programDela_id" uuid="1bf6324a-c415-429b-b766-8bb6ea036723"/>
+      <orm-attributes>
+        <attribute name="repository-class">ProgramDela\Repository\PostavkeCDve</attribute>
+        <attribute name="export-file-name">PostavkaCDve.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\ProgramDela\Entity\PostavkaCDve" to="\ProgramDela\Entity\ProgramDela" owner-alias="postavkeC2" inverse-alias="programDela" many-owner="true" many-inverse="false" uuid="19a894fa-d7e7-456a-98ca-604697c6dd3b">
+      <association-field from="programDela_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="field">skupina</attribute>
+              <attribute name="direction">ASC</attribute>
+            </attribute>
+            <attribute name="order-by-field">
+              <attribute name="field">podskupina</attribute>
+              <attribute name="direction">ASC</attribute>
+            </attribute>
+          </attribute>
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <entity name="\ProgramDela\Entity\ProdukcijaDelitev" local-name="ProdukcijaDelitev" namespace="\ProgramDela\Entity" uuid="d5a7c04a-c687-4566-b52e-7b340dfdbed1">
@@ -2039,10 +2455,22 @@
         </orm-attributes>
       </field>
       <field name="stNekomerc" type="integer" uuid="067a417c-755d-4a5c-b581-6c7fa6e4d010"/>
-      <field name="stIzvPonPrem" type="integer" uuid="9671364e-3956-42e3-9272-76507bb94758"/>
+      <field name="stIzvPonPrem" type="decimal" default="0" uuid="9671364e-3956-42e3-9272-76507bb94758">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
       <field name="stIzvPrej" type="integer" uuid="b59e27ad-aa86-44b6-b0f4-33f421ed2e1f"/>
       <field name="stIzvGostuj" type="integer" uuid="52c2307f-cafc-4bf6-b6e1-cfae30fc90ac"/>
-      <field name="stIzvOstalihNek" type="integer" uuid="d1dcae30-8ecc-46bc-8188-6542fbf3df66"/>
+      <field name="stIzvOstalihNek" type="decimal" default="0" uuid="d1dcae30-8ecc-46bc-8188-6542fbf3df66">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
       <field name="stGostovanjSlo" type="integer" uuid="f0fe47df-0766-45bc-9360-0d711d40c756"/>
       <field name="stGostovanjZam" type="integer" uuid="ecfdb082-a05c-4ff5-b278-e2b8eaf57015"/>
       <field name="stGostovanjInt" type="integer" uuid="395a950e-ad43-4a34-8133-2fb528ffdeb2"/>
@@ -2104,23 +2532,71 @@
       <field name="stIzjem" type="integer" uuid="de1025d8-bd67-439b-920e-57535171227c"/>
       <field name="stPonPrem" type="integer" uuid="c6cfc02b-3ee8-4291-83bf-36304433b150"/>
       <field name="stGostujo" type="integer" uuid="3c05a395-35da-412a-8d69-ecfe8be096c0"/>
-      <field name="stIzvNekomerc" type="integer" uuid="09278ed3-b6ed-4e9f-81da-939f4c68437c"/>
+      <field name="stIzvNekomerc" type="decimal" default="0" uuid="09278ed3-b6ed-4e9f-81da-939f4c68437c">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
       <field name="stIzvPrem" type="integer" uuid="96dd6b1a-c277-427c-9c10-e5445b964977"/>
       <field name="stIzvPonPremDoma" type="integer" uuid="f9e209e9-06ba-4572-bf8b-4049458daefe"/>
-      <field name="stIzvPonPremZamejo" type="integer" uuid="2f2409ca-ecdb-4f01-bd73-c44b50f278fd"/>
-      <field name="stIzvPonPremGost" type="integer" uuid="f1501d69-7da0-46ad-898a-7b5cb6068699"/>
+      <field name="stIzvPonPremZamejo" type="decimal" default="0" uuid="2f2409ca-ecdb-4f01-bd73-c44b50f278fd">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="stIzvPonPremGost" type="decimal" default="0" uuid="f1501d69-7da0-46ad-898a-7b5cb6068699">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
       <field name="stIzvPonPremKopr" type="integer" uuid="f0338e32-60d4-47f2-9c5e-1b843e71c613"/>
       <field name="stIzvPonPremInt" type="integer" uuid="1ad72915-857d-4a6a-bff6-de888f9de66c"/>
       <field name="stIzvPonPremKoprInt" type="integer" uuid="953002c3-c575-4d94-bf59-b56eef4a51ec"/>
-      <field name="stIzvPonPrej" type="integer" uuid="2fb7ea0b-3ec3-4009-bfa6-b6cd16c1a550"/>
+      <field name="stIzvPonPrej" type="decimal" default="0" uuid="2fb7ea0b-3ec3-4009-bfa6-b6cd16c1a550">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
       <field name="stIzvPonPrejDoma" type="integer" uuid="481b7287-ce4c-46ed-8417-8b716acda7f7"/>
-      <field name="stIzvPonPrejZamejo" type="integer" uuid="5e40cd6f-1e8a-4866-acd3-bb7a04296f71"/>
-      <field name="stIzvPonPrejGost" type="integer" uuid="fcb13de5-5eed-40e0-8f3d-e86d8baaec11"/>
+      <field name="stIzvPonPrejZamejo" type="decimal" default="0" uuid="5e40cd6f-1e8a-4866-acd3-bb7a04296f71">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="stIzvPonPrejGost" type="decimal" default="0" uuid="fcb13de5-5eed-40e0-8f3d-e86d8baaec11">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
       <field name="stIzvPonPrejKopr" type="integer" uuid="b7be426b-e5fa-47b5-b350-56a3ac0d17b2"/>
       <field name="stIzvPonPrejInt" type="integer" uuid="6669d614-3cc5-424b-8a85-d6cb1cda35c2"/>
       <field name="stIzvPonPrejKoprInt" type="integer" uuid="dfaad7c1-189d-47e6-8f2e-a77331bbfc3e"/>
-      <field name="stIzvGostovanjSlo" type="integer" uuid="68729dda-4c30-4e21-bb7f-f2968a6c8aa1"/>
-      <field name="stIzvGostovanjZam" type="integer" uuid="7111375c-0f77-4ede-8cc5-7f2ee82bb6ee"/>
+      <field name="stIzvGostovanjSlo" type="decimal" default="0" uuid="68729dda-4c30-4e21-bb7f-f2968a6c8aa1">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="stIzvGostovanjZam" type="decimal" default="0" uuid="7111375c-0f77-4ede-8cc5-7f2ee82bb6ee">
+        <orm-attributes>
+          <attribute name="precision">15</attribute>
+          <attribute name="scale">2</attribute>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
       <field name="stIzvGostovanjInt" type="integer" uuid="fbf7a93e-1710-4488-a146-e5703f8c906d"/>
       <field name="stObiskPrem" type="integer" uuid="ec5b3bdb-a66d-47c1-9c0e-88e9c5a4fa0a"/>
       <field name="stObiskPonPrem" type="integer" uuid="da4e2970-7c32-4a67-b946-72c1d87e110e"/>
@@ -2281,6 +2757,147 @@
       <field name="stObiskPonPremGost" type="integer" uuid="fcdb4e42-0f16-4cab-8df4-1c3869a166d0"/>
       <field name="stObiskPonPremZamejo" type="integer" uuid="ffe6ccd6-741b-4834-9b5a-d5be4f18ce2b"/>
       <field name="stObiskPonPremInt" type="integer" uuid="8edc049e-ab08-4d8c-8494-2f8aeb93e0ff"/>
+      <field name="stPremierVelikih" type="integer" default="0" uuid="3b0f7a86-98ff-4228-ab52-4d75354a6485">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="stPremierMalih" type="integer" default="0" uuid="69d89f21-b46c-49d3-90d2-1ba6fb3b1b79">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="stPremierMalihKopr" type="integer" default="0" uuid="985d98b0-7d11-4bff-84d5-e32747cee5b8">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="stPremierVelikihKopr" type="integer" default="0" uuid="2bf4e76f-fa5b-4b67-a801-3a5c6f50af8f">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="stPremierSredKopr" type="integer" default="0" uuid="bb4af277-bc2f-4eb2-89a0-0b76aec360c0">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="stIzvPremDoma" type="integer" uuid="69fd7755-44e3-416b-bdc9-878819abe992"/>
+      <field name="stIzvPremKopr" type="integer" uuid="4050b7fe-bc6c-4039-8a96-68a58b7cc045"/>
+      <field name="stObiskPremDoma" type="integer" uuid="c781f3bb-ff4f-4bbe-bc4f-0d2df373a4ef"/>
+      <field name="stObiskPremKopr" type="integer" uuid="446fa346-b906-4d70-acc8-1c9100c1aef7"/>
+      <field name="stHonorarnihZun" type="integer" default="0" uuid="59d25e2d-f071-474a-a64f-1d4bfcfe6c81">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="stHonorarnihZunIgr" type="integer" default="0" uuid="aeefa3e5-9f93-48a3-86ec-668453c20626">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="stHonorarnihZunIgrTujJZ" type="integer" uuid="6f2a65ca-9f27-448e-aecf-277ff10f87ef"/>
+      <field name="stHonorarnihZunSamoz" type="integer" default="0" uuid="63a4b192-e617-4a64-a647-55bb9dc33937">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaVlozekGostiteljaPrem" type="decimal" uuid="ce5896fa-409c-4957-8fa8-a0adda9ddb43">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaVlozekGostiteljaPonPrem" type="decimal" uuid="2d327335-51bd-44d1-b372-ec3acc677bea">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaVlozekGostiteljaPonPrej" type="decimal" uuid="44ee43a2-1a72-49b3-875d-8734ce640b6d">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaVlozekGostiteljaGostujo" type="decimal" uuid="e75ffaec-5f36-44b4-8c14-890c533cdfac">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaVlozekGostiteljaInt" type="decimal" uuid="d013f290-4239-45d3-b289-bda474f50a89">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaVlozekGostiteljaFest" type="decimal" uuid="d00187c1-ec90-4915-9ff7-ba09c7a3528a">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaVlozekGostiteljaRazno" type="decimal" uuid="0949d390-d7b8-4b07-b7dd-b57d9e4f692c">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaVlozekGostiteljaIzjem" type="decimal" uuid="1a770604-13bb-4904-a001-f9588ed2b420">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaLastnaPrem" type="decimal" uuid="dff006cf-4de4-4138-9f00-1fde97ecf849">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaLastnaPonPrem" type="decimal" uuid="4c7997b7-2755-410f-9b1a-571d3c96dbae">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaLastnaPonPrej" type="decimal" uuid="7cdc8b01-8f31-4a2d-ae98-bc6d9ebb674f">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaLastnaGostujo" type="decimal" uuid="c3327355-4564-4995-a7ec-a32dac113d83">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaLastnaInt" type="decimal" uuid="fd7d744b-3bea-47a7-86ae-aae8fed663ba">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaLastnaFest" type="decimal" uuid="7a61f70b-020e-4ecf-803e-04768e2b765e">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaLastnaRazno" type="decimal" uuid="19e1fd38-cce1-48f4-928a-c5aa8237aa64">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
+      <field name="sredstvaLastnaIzjem" type="decimal" uuid="26a68e69-097c-4fef-a59e-ced30c24d2c9">
+        <orm-attributes>
+          <attribute name="scale">2</attribute>
+          <attribute name="precision">12</attribute>
+        </orm-attributes>
+      </field>
       <orm-attributes>
         <attribute name="repository-class">ProgramDela\Repository\ProgramiDela</attribute>
         <attribute name="export-file-name">ProgramDela.php</attribute>
@@ -2321,7 +2938,15 @@
       <association-field from="program_dela_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="field">sort</attribute>
+              <attribute name="direction">ASC</attribute>
+            </attribute>
+          </attribute>
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <entity name="\ProgramDela\Entity\ProgramGostovanje" local-name="ProgramGostovanje" namespace="\ProgramDela\Entity" uuid="727da840-0c27-4e4f-8174-0d22395c3cdd">
@@ -2359,7 +2984,15 @@
       <association-field from="program_dela_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="field">sort</attribute>
+              <attribute name="direction">ASC</attribute>
+            </attribute>
+          </attribute>
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <association from="\ProgramDela\Entity\ProgramGostovanje" to="\App\Entity\Popa" owner-alias="" inverse-alias="gostitelj" many-owner="true" many-inverse="false" uuid="1b868ce6-ac1f-482f-931a-1e061e180603">
@@ -2402,11 +3035,26 @@
       <association-field from="program_dela_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="field">sort</attribute>
+              <attribute name="direction">ASC</attribute>
+            </attribute>
+          </attribute>
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <entity name="\ProgramDela\Entity\ProgramIzjemni" local-name="ProgramIzjemni" namespace="\ProgramDela\Entity" uuid="be3d278e-7e2e-4d34-b3c1-a575a3a69d84">
       <field name="program_dela_id" uuid="c392874e-b31d-4600-a4c5-b34d2ead952e"/>
+      <field name="prizorisce" type="string" uuid="a113e222-0dbc-4681-83ee-921ec7a06ce9"/>
+      <field name="trajanje" type="string" uuid="b2f3ab2a-3f65-4160-ad5d-da07d23bc9ae"/>
+      <field name="zvrst" type="string" uuid="76007a25-2aca-4f6c-b340-8f6fbf49e699"/>
+      <field name="avtor" type="string" uuid="af508792-5197-415c-953e-3ad86d67bdc8"/>
+      <field name="reziser" type="string" uuid="d2fa2178-8871-41b9-aa1a-6c489a370739"/>
+      <field name="datum" type="date" uuid="f34a9486-a4bd-4fb8-8552-c7a4a95ee480"/>
+      <field name="soustvarjalci" type="string" uuid="c4014afb-2a3b-43fc-83c1-b529e265fb21"/>
       <inheritance-child derived-from="\ProgramDela\Entity\EnotaPrograma" discriminator-value="izjemni" uuid="0e30654c-d2f6-4065-82f8-57d961e11ea4"/>
       <orm-attributes>
         <attribute name="repository-class">ProgramDela\Repository\ProgramiIzjemni</attribute>
@@ -2417,7 +3065,15 @@
       <association-field from="program_dela_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="field">sort</attribute>
+              <attribute name="direction">ASC</attribute>
+            </attribute>
+          </attribute>
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <entity name="\ProgramDela\Entity\ProgramPonovitevPrejsnjih" local-name="ProgramPonovitevPrejsnjih" namespace="\ProgramDela\Entity" uuid="f2a27014-a51d-41b1-9d24-97cc447053af">
@@ -2432,7 +3088,15 @@
       <association-field from="program_dela_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="field">sort</attribute>
+              <attribute name="direction">ASC</attribute>
+            </attribute>
+          </attribute>
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <entity name="\ProgramDela\Entity\ProgramPonovitevPremiere" local-name="ProgramPonovitevPremiere" namespace="\ProgramDela\Entity" uuid="abe3065d-aef9-4f7f-bcc2-355e574ede6a">
@@ -2447,11 +3111,20 @@
       <association-field from="program_dela_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="field">sort</attribute>
+              <attribute name="direction">ASC</attribute>
+            </attribute>
+          </attribute>
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <entity name="\ProgramDela\Entity\ProgramPremiera" local-name="ProgramPremiera" namespace="\ProgramDela\Entity" uuid="ba4dd087-2f4e-4148-99c5-d0ddf280fb2a">
       <field name="program_dela_id" uuid="171c99cd-505e-4e3e-8c37-2517ffe8794f"/>
+      <field name="priKoproducentu" type="boolean" size="1" uuid="672064e1-ca0c-4833-819e-1f59f1f2de1c"/>
       <inheritance-child derived-from="\ProgramDela\Entity\EnotaPrograma" discriminator-value="premiera" uuid="e2f225dd-44ef-49fd-9fce-85879f5b2cea"/>
       <orm-attributes>
         <attribute name="repository-class">ProgramDela\Repository\ProgramiPremiere</attribute>
@@ -2462,7 +3135,15 @@
       <association-field from="program_dela_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="field">sort</attribute>
+              <attribute name="direction">ASC</attribute>
+            </attribute>
+          </attribute>
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <entity name="\ProgramDela\Entity\ProgramRazno" local-name="ProgramRazno" namespace="\ProgramDela\Entity" uuid="83b96999-fcb4-4a66-a2b0-0a065663eef6">
@@ -2495,7 +3176,15 @@
       <association-field from="program_dela_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
-        <attribute name="side-inverse"/>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="field">sort</attribute>
+              <attribute name="direction">ASC</attribute>
+            </attribute>
+          </attribute>
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
       </orm-attributes>
     </association>
     <association from="\ProgramDela\Entity\ProgramRazno" to="\App\Entity\Popa" caption="soorganizator" inverse-alias="soorganizator" many-owner="true" many-inverse="false" uuid="623782a9-a48a-4315-b04e-5c3856bf641d">
@@ -2525,6 +3214,11 @@
         </orm-attributes>
       </field>
       <field name="programRazno_id" uuid="ce4f1fdf-0010-4d13-88d5-0aa69871fc8f"/>
+      <field name="obiskDoma" type="integer" default="0" required="true" uuid="bba6920a-e607-4d98-844a-501029b9989c">
+        <orm-attributes>
+          <attribute name="options"/>
+        </orm-attributes>
+      </field>
       <orm-attributes>
         <attribute name="repository-class">ProgramDela\Repository\ProgramskeEnoteSklopa</attribute>
         <attribute name="export-file-name">ProgramskaEnotaSklopa.php</attribute>
@@ -2547,7 +3241,7 @@
           </attribute>
         </orm-attributes>
       </field>
-      <field name="sifra" type="string" required="true" uuid="572791c4-bf0a-4d5f-9599-d089ef443c01"/>
+      <field name="sifra" type="string" required="true" unique="true" uuid="572791c4-bf0a-4d5f-9599-d089ef443c01"/>
       <field name="naziv" type="string" required="true" uuid="5076b199-3721-45f0-a1bd-68dd510d5ff4"/>
       <field name="koprodukcija" type="boolean" default="false" required="true" uuid="eecc00fa-6142-4940-9146-3780af5ac8d3">
         <orm-attributes>
@@ -2614,25 +3308,24 @@
       <field name="stevilka" type="integer" uuid="a107dd14-30b2-4f9b-a93a-b76b137b667d"/>
       <orm-attributes>
         <attribute name="export-file-name">StevilcenjeStanje.php</attribute>
+        <attribute name="repository-class">Stevilcenje\Repository\StevilcenjeStanja</attribute>
       </orm-attributes>
     </entity>
   </module>
-  <module name="\module/Zapisi/src/Zapisi/Entity" local-name="module/Zapisi/src/Zapisi/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Zapisi/src/Zapisi/Entity" uuid="a9308c3a-c148-44c7-8a88-d4705324e9b3">
-    <entity name="\MapaZapis" local-name="MapaZapis" namespace="\" uuid="9256541b-d039-4c3e-aded-44a3de0462af">
+  <module name="\module/Zapisi/src/Zapisi/Entity" local-name="module/Zapisi/src/Zapisi/Entity" namespace="\Zapisi\Entity" local-namespace="\Zapisi\Entity" export-format="Doctrine2Php" export-path="module/Zapisi/src/Zapisi/Entity" uuid="013762e3-1d8e-4655-9b8b-76b1c3cd1ff1">
+    <entity name="\Zapisi\Entity\MapaZapis" local-name="MapaZapis" namespace="\Zapisi\Entity" uuid="9256541b-d039-4c3e-aded-44a3de0462af">
       <field name="Mapa_id" type="guid" uuid="2cb98b4d-bb8a-49ae-8b5d-680761bea802"/>
       <field name="Zapis_id" type="guid" uuid="dfdd2857-5243-4355-90a3-feabf79ce747"/>
     </entity>
-    <many-to-many mn-entity="\MapaZapis" uuid="bccc79b8-0960-4ce8-a92f-9bc8005ea459">
-      <many-to-many-entity name="\Mapa" owning-side="true" alias="vsebujoceMape" uuid="55f7a248-d9c1-4c28-8a0a-f161bf1eec6e">
+    <many-to-many mn-entity="\Zapisi\Entity\MapaZapis" uuid="bccc79b8-0960-4ce8-a92f-9bc8005ea459">
+      <many-to-many-entity name="\Zapisi\Entity\Mapa" owning-side="true" alias="vsebujoceMape" uuid="62715813-ffd1-46e5-a759-9d56767c5efc">
         <many-to-many-field from="Mapa_id" to="id"/>
       </many-to-many-entity>
-      <many-to-many-entity name="\Zapis" owning-side="false" alias="zapisi" uuid="5d654fc6-23f1-46d4-a408-de695cc4157c">
+      <many-to-many-entity name="\Zapisi\Entity\Zapis" owning-side="false" alias="zapisi" uuid="5783706f-8b68-45e4-abe4-a77178406ab5">
         <many-to-many-field from="Zapis_id" to="id"/>
       </many-to-many-entity>
-      <many-to-many-entity name="\Mapa" owning-side="true" alias="vsebujoceMape" uuid="62715813-ffd1-46e5-a759-9d56767c5efc"/>
-      <many-to-many-entity name="\Zapis" owning-side="false" alias="zapisi" uuid="5783706f-8b68-45e4-abe4-a77178406ab5"/>
     </many-to-many>
-    <entity name="\Datoteka" local-name="Datoteka" namespace="\" uuid="93d2e1c6-3c09-4fe6-9088-0c87720fbd13">
+    <entity name="\Zapisi\Entity\Datoteka" local-name="Datoteka" namespace="\Zapisi\Entity" uuid="93d2e1c6-3c09-4fe6-9088-0c87720fbd13">
       <field name="id" type="guid" required="true" primary="true" uuid="60940769-82ec-45a0-96fd-24dd87529707">
         <orm-attributes>
           <attribute name="generator">
@@ -2655,14 +3348,14 @@
         <attribute name="export-file-name">Datoteka.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="\Datoteka" to="\Aaa\Entity\User" owner-alias="" inverse-alias="owner" many-owner="true" many-inverse="false" uuid="e838e969-455c-417c-9dbf-55c2902d9319">
+    <association from="\Zapisi\Entity\Datoteka" to="\Aaa\Entity\User" owner-alias="" inverse-alias="owner" many-owner="true" many-inverse="false" uuid="e838e969-455c-417c-9dbf-55c2902d9319">
       <association-field from="owner_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\Mapa" local-name="Mapa" namespace="\" uuid="18f95dd5-c94a-4664-a3df-a965e7e499a2">
+    <entity name="\Zapisi\Entity\Mapa" local-name="Mapa" namespace="\Zapisi\Entity" uuid="18f95dd5-c94a-4664-a3df-a965e7e499a2">
       <field name="id" type="guid" required="true" primary="true" uuid="b8fc9946-b9d5-4f8b-b6f6-41610b780b58">
         <orm-attributes>
           <attribute name="generator">
@@ -2684,21 +3377,21 @@
         <attribute name="export-file-name">Mapa.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="\Mapa" to="\Aaa\Entity\User" owner-alias="" inverse-alias="lastnik" many-owner="true" many-inverse="false" uuid="fab5e6ba-ebae-4ccb-94eb-552b9cfd4c58">
+    <association from="\Zapisi\Entity\Mapa" to="\Aaa\Entity\User" owner-alias="" inverse-alias="lastnik" many-owner="true" many-inverse="false" uuid="fab5e6ba-ebae-4ccb-94eb-552b9cfd4c58">
       <association-field from="lastnik_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Mapa" to="\Mapa" owner-alias="podMape" inverse-alias="parent" many-owner="true" many-inverse="false" uuid="c0543791-63e8-4eba-b4ac-5902651b0250">
+    <association from="\Zapisi\Entity\Mapa" to="\Zapisi\Entity\Mapa" owner-alias="podMape" inverse-alias="parent" many-owner="true" many-inverse="false" uuid="c0543791-63e8-4eba-b4ac-5902651b0250">
       <association-field from="parent_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\MapaAcl" local-name="MapaAcl" namespace="\" uuid="214ca9ce-333d-4337-9823-4128d9548b78">
+    <entity name="\Zapisi\Entity\MapaAcl" local-name="MapaAcl" namespace="\Zapisi\Entity" uuid="214ca9ce-333d-4337-9823-4128d9548b78">
       <field name="id" type="guid" required="true" primary="true" uuid="6222e37e-9554-4589-a1c9-26ccf5153175">
         <orm-attributes>
           <attribute name="generator">
@@ -2716,7 +3409,7 @@
         <attribute name="export-file-name">MapaAcl.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="\MapaAcl" to="\Mapa" owner-alias="acl" inverse-alias="mapa" many-owner="true" many-inverse="false" uuid="eaa64f75-3e02-4396-aa20-6515a56b4cf3">
+    <association from="\Zapisi\Entity\MapaAcl" to="\Zapisi\Entity\Mapa" owner-alias="acl" inverse-alias="mapa" many-owner="true" many-inverse="false" uuid="eaa64f75-3e02-4396-aa20-6515a56b4cf3">
       <association-field from="mapa_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
@@ -2729,14 +3422,14 @@
         </attribute>
       </orm-attributes>
     </association>
-    <association from="\MapaAcl" to="\Aaa\Entity\Permission" owner-alias="" inverse-alias="perm" many-owner="true" many-inverse="false" uuid="ece70ae3-4037-4881-b21a-335aa126f221">
+    <association from="\Zapisi\Entity\MapaAcl" to="\Aaa\Entity\Permission" owner-alias="" inverse-alias="perm" many-owner="true" many-inverse="false" uuid="ece70ae3-4037-4881-b21a-335aa126f221">
       <association-field from="perm_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <entity name="\VrstaZapisa" local-name="VrstaZapisa" namespace="\" uuid="14b97b25-c8dd-4d60-8b83-3a404d425fcf">
+    <entity name="\Zapisi\Entity\VrstaZapisa" local-name="VrstaZapisa" namespace="\Zapisi\Entity" uuid="14b97b25-c8dd-4d60-8b83-3a404d425fcf">
       <field name="id" type="guid" required="true" primary="true" uuid="77387408-b549-45dd-af0b-a55676a7a38d">
         <orm-attributes>
           <attribute name="generator">
@@ -2756,7 +3449,7 @@
         <attribute name="export-file-name">VrstaZapisa.php</attribute>
       </orm-attributes>
     </entity>
-    <entity name="\Zapis" local-name="Zapis" namespace="\" uuid="5a2aaa6c-1ae0-4178-ba18-a0cbd298bca2">
+    <entity name="\Zapisi\Entity\Zapis" local-name="Zapis" namespace="\Zapisi\Entity" uuid="5a2aaa6c-1ae0-4178-ba18-a0cbd298bca2">
       <field name="id" type="guid" required="true" primary="true" uuid="617ab703-ec01-469e-b17d-99838e001ecb">
         <orm-attributes>
           <attribute name="generator">
@@ -2788,90 +3481,152 @@
       <field name="mapa_id" uuid="839300cc-48c7-436a-a3fc-c5875469f2f9"/>
       <field name="avtor_id" uuid="7a63b19d-94ed-4889-8eb5-ca4ae138b5e9"/>
       <field name="zaklenil_id" uuid="d64b0945-eb6c-4e75-ba9b-3a4f7d410923"/>
+      <field name="contributor" size="255" uuid="5193c035-c976-4b96-80fb-ba63e9818bb5"/>
+      <field name="type" size="255" uuid="3485ab00-32a5-4769-940f-e8c2ef1bac14"/>
+      <field name="format" size="255" uuid="a7b58ef0-7af1-4970-86ab-721eb91664dc"/>
       <orm-attributes>
         <attribute name="repository-class">Zapisi\Repository\Zapisi</attribute>
         <attribute name="export-file-name">Zapis.php</attribute>
       </orm-attributes>
     </entity>
-    <association from="\Zapis" to="\VrstaZapisa" owner-alias="" inverse-alias="vrsta" many-owner="true" many-inverse="false" uuid="b2ead267-beaa-40ba-aa57-9c057acc54c8">
+    <association from="\Zapisi\Entity\Zapis" to="\Zapisi\Entity\VrstaZapisa" owner-alias="" inverse-alias="vrsta" many-owner="true" many-inverse="false" uuid="b2ead267-beaa-40ba-aa57-9c057acc54c8">
       <association-field from="vrsta_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Zapis" to="\Datoteka" owner-alias="" inverse-alias="datoteka" many-owner="true" many-inverse="false" uuid="016a32b5-1c11-443d-b2f1-4536352bad58">
+    <association from="\Zapisi\Entity\Zapis" to="\Zapisi\Entity\Datoteka" owner-alias="" inverse-alias="datoteka" many-owner="true" many-inverse="false" uuid="016a32b5-1c11-443d-b2f1-4536352bad58">
       <association-field from="datoteka_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Zapis" to="\Mapa" owner-alias="vsebujociZapisi" inverse-alias="mapa" many-owner="true" many-inverse="false" uuid="6529b4d0-6ece-42dd-8d22-5cc0698fcbbf">
+    <association from="\Zapisi\Entity\Zapis" to="\Zapisi\Entity\Mapa" owner-alias="vsebujociZapisi" inverse-alias="mapa" many-owner="true" many-inverse="false" uuid="6529b4d0-6ece-42dd-8d22-5cc0698fcbbf">
       <association-field from="mapa_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Zapis" to="\Aaa\Entity\User" owner-alias="" inverse-alias="avtor" many-owner="true" many-inverse="false" uuid="46d87b18-9511-463d-9825-57b13dcef99b">
+    <association from="\Zapisi\Entity\Zapis" to="\Aaa\Entity\User" owner-alias="" inverse-alias="avtor" many-owner="true" many-inverse="false" uuid="46d87b18-9511-463d-9825-57b13dcef99b">
       <association-field from="avtor_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-    <association from="\Zapis" to="\Aaa\Entity\User" owner-alias="" inverse-alias="zaklenil" many-owner="true" many-inverse="false" uuid="659dc617-8741-4d63-9e18-e1c7da2ece1b">
+    <association from="\Zapisi\Entity\Zapis" to="\Aaa\Entity\User" owner-alias="" inverse-alias="zaklenil" many-owner="true" many-inverse="false" uuid="659dc617-8741-4d63-9e18-e1c7da2ece1b">
       <association-field from="zaklenil_id" to="id"/>
       <orm-attributes>
         <attribute name="side-owning"/>
         <attribute name="side-inverse"/>
       </orm-attributes>
     </association>
-  </module>
-  <module name="\module/Aaa/src/Aaa/Entity" local-name="module/Aaa/src/Aaa/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Aaa/src/Aaa/Entity" uuid="747044f0-2cd6-4158-9202-bdff2c3ff26f"/>
-  <module name="\module/Abonmaji/src/Abonmaji/Entity" local-name="module/Abonmaji/src/Abonmaji/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Abonmaji/src/Abonmaji/Entity" uuid="2f1267c0-d385-42ca-9a78-d3e515ed5e87"/>
-  <module name="\module/App/src/App/Entity" local-name="module/App/src/App/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/App/src/App/Entity" uuid="fa4e5962-ab59-42c1-a1b3-75c348f38ead"/>
-  <module name="\module/Koledar/src/Koledar/Entity" local-name="module/Koledar/src/Koledar/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Koledar/src/Koledar/Entity" uuid="236c4712-5984-4a5e-ab98-0be35f62aa5c">
-    <entity name="\DogodekSplosni" local-name="DogodekSplosni" namespace="\" uuid="bd6ec087-87e4-422c-bc7a-ff7fd24dc618">
-      <field name="id" type="guid" required="true" primary="true" uuid="7568ce4e-04b9-46d0-80c8-1dcc30058785">
+    <entity name="\Zapisi\Entity\ZapisLastnik" local-name="ZapisLastnik" namespace="\Zapisi\Entity" uuid="6e4b461e-c000-4bd9-8d1d-0b9e13ff1daf">
+      <field name="id" type="guid" required="true" primary="true" uuid="249a003c-94b3-46b6-b1cd-afbe8d20f611">
         <orm-attributes>
           <attribute name="generator">
             <attribute name="strategy">NONE</attribute>
           </attribute>
         </orm-attributes>
       </field>
+      <field name="lastnik" type="guid" uuid="be6f9374-141b-46f8-ae33-b2abc5bfa30e"/>
+      <field name="classLastnika" size="200" uuid="80d9f5b2-f145-48cd-b917-7e78cb290bc4"/>
+      <field name="datum" type="datetime" uuid="61f8c493-ca2c-4944-89a9-b0efa2ba2b51"/>
+      <field name="upor" size="10" uuid="8faa283e-9e06-4704-a70d-83acf50735a8"/>
+      <field name="datKnj" type="datetime" uuid="3f6af418-668d-4b06-9650-b05a30fcccc1"/>
+      <field name="zapis_id" uuid="e094ecde-0f3b-4341-93dd-a9369d1e3e69"/>
       <orm-attributes>
-        <attribute name="repository-class">Koledar\Repository\DogodkiSplosni</attribute>
-        <attribute name="export-file-name">DogodekSplosni.php</attribute>
+        <attribute name="repository-class">Zapisi\Repository\ZapisLastniki</attribute>
+        <attribute name="export-file-name">ZapisLastnik.php</attribute>
       </orm-attributes>
     </entity>
+    <association from="\Zapisi\Entity\ZapisLastnik" to="\Zapisi\Entity\Zapis" owner-alias="lastniki" inverse-alias="zapis" many-owner="true" many-inverse="false" uuid="9dec0c40-881e-4571-838e-1cfd654406c1">
+      <association-field from="zapis_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
   </module>
-  <module name="\module/Prisotnost/src/Prisotnost/Entity" local-name="module/Prisotnost/src/Prisotnost/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Prisotnost/src/Prisotnost/Entity" uuid="9524ad4b-5de3-4444-9709-5e62cc41be0f"/>
-  <module name="\module/Prodaja/src/Prodaja/Entity" local-name="module/Prodaja/src/Prodaja/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Prodaja/src/Prodaja/Entity" uuid="ced46fdd-f36d-4ad2-82bf-b932bdaba41f"/>
-  <module name="\module/Produkcija/src/Produkcija/Entity" local-name="module/Produkcija/src/Produkcija/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Produkcija/src/Produkcija/Entity" uuid="30f33e41-07a2-4e64-8ab6-fa9cdd99095a"/>
-  <module name="\module/ProgramDela/src/ProgramDela/Entity" local-name="module/ProgramDela/src/ProgramDela/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/ProgramDela/src/ProgramDela/Entity" uuid="59e9d283-c65e-45df-81a5-1048b7d764cf"/>
-  <module name="\module/Stevilcenje/src/Stevilcenje/Entity" local-name="module/Stevilcenje/src/Stevilcenje/Entity" namespace="\" export-format="Doctrine2Php" export-path="module/Stevilcenje/src/Stevilcenje/Entity" uuid="81dbb49c-ba7b-47fa-8394-7f5af838d718"/>
-  <module name="\module/Aaa/src/Aaa/Entity" local-name="module/Aaa/src/Aaa/Entity" namespace="\Aaa\Entity" local-namespace="\Aaa\Entity" export-format="Doctrine2Php" export-path="module/Aaa/src/Aaa/Entity" uuid="611d1643-7e8a-4580-9885-9c3c758807af"/>
-  <module name="\module/Abonmaji/src/Abonmaji/Entity" local-name="module/Abonmaji/src/Abonmaji/Entity" namespace="\Abonmaji\Entity" local-namespace="\Abonmaji\Entity" export-format="Doctrine2Php" export-path="module/Abonmaji/src/Abonmaji/Entity" uuid="1878c2ac-2ce6-4e10-b87d-74f68884be06"/>
-  <module name="\module/App/src/App/Entity" local-name="module/App/src/App/Entity" namespace="\App\Entity" local-namespace="\App\Entity" export-format="Doctrine2Php" export-path="module/App/src/App/Entity" uuid="bf62f4e9-ce48-45e3-a1ba-b1ed5c4ebe04"/>
-  <module name="\module/Koledar/src/Koledar/Entity" local-name="module/Koledar/src/Koledar/Entity" namespace="\Koledar\Entity" local-namespace="\Koledar\Entity" export-format="Doctrine2Php" export-path="module/Koledar/src/Koledar/Entity" uuid="4f943079-c29e-46db-904b-a81b5bf66637"/>
-  <module name="\module/Prisotnost/src/Prisotnost/Entity" local-name="module/Prisotnost/src/Prisotnost/Entity" namespace="\Prisotnost\Entity" local-namespace="\Prisotnost\Entity" export-format="Doctrine2Php" export-path="module/Prisotnost/src/Prisotnost/Entity" uuid="cda07b1f-8a75-4430-8e27-d96fa426d90f"/>
-  <module name="\module/Prodaja/src/Prodaja/Entity" local-name="module/Prodaja/src/Prodaja/Entity" namespace="\Prodaja\Entity" local-namespace="\Prodaja\Entity" export-format="Doctrine2Php" export-path="module/Prodaja/src/Prodaja/Entity" uuid="4d4c99fb-d4c6-4421-a451-24811bd5ade3"/>
-  <module name="\module/Produkcija/src/Produkcija/Entity" local-name="module/Produkcija/src/Produkcija/Entity" namespace="\Produkcija\Entity" local-namespace="\Produkcija\Entity" export-format="Doctrine2Php" export-path="module/Produkcija/src/Produkcija/Entity" uuid="686d32d7-2005-4ac8-b478-245ce3ae5e0c"/>
-  <module name="\module/ProgramDela/src/ProgramDela/Entity" local-name="module/ProgramDela/src/ProgramDela/Entity" namespace="\ProgramDela\Entity" local-namespace="\ProgramDela\Entity" export-format="Doctrine2Php" export-path="module/ProgramDela/src/ProgramDela/Entity" uuid="1cea2743-049f-422c-988e-566ab30cd5d5"/>
-  <module name="\module/Stevilcenje/src/Stevilcenje/Entity" local-name="module/Stevilcenje/src/Stevilcenje/Entity" namespace="\Stevilcenje\Entity" local-namespace="\Stevilcenje\Entity" export-format="Doctrine2Php" export-path="module/Stevilcenje/src/Stevilcenje/Entity" uuid="b8dea434-6a52-4be5-b490-d632cea00fcf"/>
-  <module name="\module/Zapisi/src/Zapisi/Entity" local-name="module/Zapisi/src/Zapisi/Entity" namespace="\Zapisi\Entity" local-namespace="\Zapisi\Entity" export-format="Doctrine2Php" export-path="module/Zapisi/src/Zapisi/Entity" uuid="013762e3-1d8e-4655-9b8b-76b1c3cd1ff1"/>
+  <module name="\module/Jobs/src/Jobs/Entity" local-name="module/Jobs/src/Jobs/Entity" namespace="\Jobs\Entity" local-namespace="\Jobs\Entity" export-format="Doctrine2Php" export-path="module/Jobs/src/Jobs/Entity" uuid="0df0070a-f954-4f86-9551-f40cb1233a1b">
+    <entity name="\Jobs\Entity\Job" local-name="Job" namespace="\Jobs\Entity" uuid="d96ee304-36dc-407b-b529-f8c701b8b4ef">
+      <field name="id" type="guid" required="true" primary="true" uuid="c4cf43ad-9d8c-4639-92f9-37d09346c0d3"/>
+      <field name="name" size="50" required="true" uuid="a7cdb06f-4488-4933-a36d-012f4350b10a"/>
+      <field name="task" size="50" required="true" uuid="2895faa8-29b7-40ad-9a8b-d693c01cf0d0"/>
+      <field name="status" type="integer" uuid="f594b49e-bac3-41a2-b883-aa808732acc7"/>
+      <field name="log" type="text" uuid="ba6f491f-9ab9-495e-a439-a6b53ed01ca4"/>
+      <field name="datum" type="datetime" required="true" uuid="8ddfacbe-e326-4d75-8901-4f076c2f371b"/>
+      <field name="casIzvedbe" type="datetime" required="true" uuid="27ae4a5c-369a-4488-b949-fb0ceaaddc59"/>
+      <field name="izveden" type="datetime" uuid="fa7f2bc7-4563-4fdc-a916-52d21ce8360f"/>
+      <field name="data" type="object" uuid="ad89aa78-9f9d-4153-8f4e-e3b2a0ce7fbd"/>
+      <field name="alert" type="boolean" uuid="cbefdbb8-f4b0-4b57-ad8b-4eeac2c8b2d5"/>
+      <field name="hidden" type="boolean" uuid="72cd32e4-b431-407a-a789-eb82cfb05434"/>
+      <field name="upor" size="10" uuid="e854549b-5fa9-4b19-a2d3-cc00466a0413"/>
+      <field name="datKnj" type="datetime" uuid="8ba37497-de3e-4b1f-beb6-7ea804798469"/>
+      <field name="user_id" uuid="57d3c506-2c1f-4da8-95f0-a13445fc1a31"/>
+      <index name="">
+        <index-field name="casIzvedbe"/>
+        <index-field name="datum"/>
+        <index-field name="izveden"/>
+      </index>
+      <orm-attributes>
+        <attribute name="repository-class">Jobs\Repository\JobManager</attribute>
+        <attribute name="export-file-name">Job.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Jobs\Entity\Job" to="\Aaa\Entity\User" owner-alias="" inverse-alias="user" many-owner="true" many-inverse="false" uuid="e5b18011-a81c-49fb-bf58-c654f2052e42">
+      <association-field from="user_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse"/>
+      </orm-attributes>
+    </association>
+    <entity name="\Jobs\Entity\Report" local-name="Report" namespace="\Jobs\Entity" uuid="ecef445b-075e-4dc7-bfe4-6dabc96d2fc7">
+      <field name="id" type="guid" required="true" primary="true" uuid="5ef7c9a7-6f06-4959-b858-06d010d41bef">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">NONE</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="title" type="string" uuid="d4afc573-50e9-4adc-8ef0-9173a16623bf"/>
+      <field name="filename" size="255" uuid="f080629f-0ec9-4396-ad63-718515f40671"/>
+      <field name="transfers" type="integer" uuid="0bbca4e8-e3ce-4693-b709-9a2798f89a23"/>
+      <field name="size" type="integer" uuid="c2701867-a58c-49b5-ad3a-ffdd37ed23ac"/>
+      <field name="format" size="255" uuid="5828332b-1de7-407e-9e53-45b38fcd8ca5"/>
+      <field name="hash" type="guid" uuid="6b059df8-6ef8-494c-9729-21b373a3542d"/>
+      <field name="createdAt" type="datetime" uuid="46dc90d4-133a-4f1e-809e-64b29e011345"/>
+      <field name="job_id" uuid="d09f8cab-bd5a-440f-a54a-d3c25185e4ad"/>
+      <orm-attributes>
+        <attribute name="repository-class">Jobs\Repository\Reports</attribute>
+        <attribute name="export-file-name">Report.php</attribute>
+      </orm-attributes>
+    </entity>
+    <association from="\Jobs\Entity\Report" to="\Jobs\Entity\Job" owner-alias="reports" inverse-alias="job" many-owner="true" many-inverse="false" uuid="b1cf8dc8-4f6e-49e4-b6e8-4623d468776c">
+      <association-field from="job_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-owning"/>
+        <attribute name="side-inverse">
+          <attribute name="orphan-removal">true</attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
+  </module>
   <visual-data>
     <association uuid="016a32b5-1c11-443d-b2f1-4536352bad58" color="#00B4D0"/>
     <association uuid="0893669c-7923-4287-a9f9-81a71d62fe70" center-position-x="0" center-position-y="0" color="#C774AF"/>
     <association uuid="08d90b03-6966-4199-b528-2ff659312fd3" color="#61D351"/>
     <association uuid="0937899a-47d7-4a63-8cb6-00d6550ca740" caption1-position-x="-55" caption1-position-y="-2" caption2-position-x="0" caption2-position-y="0" center-position-x="0" center-position-y="0" color="#00B4D0" split="1"/>
     <association uuid="09b57fb4-0c61-4312-add0-364be4f42d8d" color="#A8A8A8"/>
+    <association uuid="0ac81fcf-7b33-4187-ba4c-28106d52dd3c" color="#CDC32B"/>
     <association uuid="0f3d3bc8-24a5-4bbf-aa92-a3ed30b31b6c" color="#CDC32B"/>
     <association uuid="114a0551-43f2-45f0-a194-39b972ba3101" color="#61D351"/>
-    <association uuid="1167bce3-7d60-4ce9-bca8-bd1b4936acbe" color="#F4931F"/>
+    <association uuid="1167bce3-7d60-4ce9-bca8-bd1b4936acbe" center-position-x="0" center-position-y="0" color="#F4931F"/>
     <association uuid="14a6cf15-a17a-46b5-b0d9-62f5c92e6882" center-position-x="0" center-position-y="0" color="#B31F24"/>
+    <association uuid="19a894fa-d7e7-456a-98ca-604697c6dd3b" color="#2E63AF"/>
     <association uuid="1b868ce6-ac1f-482f-931a-1e061e180603" color="#00B4D0"/>
     <association uuid="24457347-0715-4cfd-9b21-f4d631261905" color="#C774AF"/>
     <association uuid="26fe7396-ca4e-43e3-aabd-d2bdeb3e1294" caption1-position-x="3" caption1-position-y="-8" caption2-position-x="2" caption2-position-y="-42" center-position-x="0" center-position-y="0" color="#2E63AF" split="1"/>
@@ -2907,6 +3662,7 @@
     <association uuid="6ea9b3c5-ec07-490e-ad63-ccf799ca95bd" center-position-x="0" center-position-y="0" color="#2E63AF"/>
     <association uuid="717d361e-78f4-4d88-8b70-267f7469fec2" color="#A8A8A8"/>
     <association uuid="7da2308b-467b-4184-b7a7-524a189d2997" color="#0A783D"/>
+    <association uuid="7e554d4c-b5ec-41aa-8f20-e5308eb53149" color="#B31F24"/>
     <association uuid="80a676db-93e6-4f9d-bcea-a3fb1760c5d7" color="#CDC32B"/>
     <association uuid="84d6915c-d5e0-426f-b044-1abafd71b022" color="#0A783D"/>
     <association uuid="8506a2b7-f1a5-4e03-a211-4da90d88e41f" color="#B31F24"/>
@@ -2914,9 +3670,11 @@
     <association uuid="86717dfd-559c-4f8c-8776-4668c82705dc" color="#C774AF"/>
     <association uuid="87d42448-4769-4ba2-92bf-ac85a0fd347c" color="#61D351"/>
     <association uuid="898936cd-b919-4631-bbde-fec5900b39d6" color="#C774AF"/>
+    <association uuid="89c25626-8f20-4cd6-999d-42fda3a4efae" color="#C774AF"/>
     <association uuid="8be2cf89-12d5-481e-b43a-6eaf8f137a46" caption1-position-x="-15" caption1-position-y="-15" caption2-position-x="0" caption2-position-y="0" center-position-x="0" center-position-y="0" color="#8A54A2" split="1"/>
     <association uuid="8d28ee9a-a332-469c-820d-ff12ae72c5e2" color="#00B4D0"/>
     <association uuid="8df4a045-ced4-4aab-b8d0-842964ca0385" color="#61D351"/>
+    <association uuid="8e789318-f588-4cf6-851f-43e56ace7299" color="#0A783D"/>
     <association uuid="8f326be6-8c86-4dc5-babb-f714117d0a80" color="#61D351"/>
     <association uuid="90798659-6f82-458b-b914-8bd1fc2ca7ca" color="#CDC32B" split="1"/>
     <association uuid="92feb7d1-6eeb-4eb2-85ea-abd114dd6142" color="#B31F24"/>
@@ -2929,16 +3687,21 @@
     <association uuid="9b46b6c7-f66f-4e8c-af31-4abb38738fde" color="#0A783D" split="1"/>
     <association uuid="9b6e8b0d-25b7-4fa1-ba45-e91727f09a75" color="#0A783D"/>
     <association uuid="9c683e5b-ea26-4b4e-8c59-616d3a9802a8" color="#0A783D"/>
+    <association uuid="9dec0c40-881e-4571-838e-1cfd654406c1" center-position-x="0" center-position-y="0" color="#00B4D0"/>
     <association uuid="a1acd2eb-c237-4fbf-81c1-c3b557c91717" color="#0A783D"/>
+    <association uuid="a324c25b-0f72-4ac7-bf07-c2950926da7d" color="#2E63AF"/>
     <association uuid="a5b0cad1-3590-4d24-992f-164f9a3affe1" color="#F4931F"/>
     <association uuid="a69089b5-2e4f-4c77-aac9-07f58965ed1c" color="#00B4D0" split="1"/>
     <association uuid="a7512562-ff24-4d07-814a-acf6dedc034a" color="#0A783D" split="1"/>
     <association uuid="ad555c4a-4954-41ba-b9c4-df0fe34392ca" color="#00B4D0"/>
     <association uuid="b046e0d4-1454-406b-8149-50a9f368f8f2" color="#B31F24"/>
+    <association uuid="b1cf8dc8-4f6e-49e4-b6e8-4623d468776c" color="#A8A8A8"/>
     <association uuid="b2ead267-beaa-40ba-aa57-9c057acc54c8" color="#2E63AF"/>
     <association uuid="b330e60f-56a0-4160-9214-a93a5f6ba024" center-position-x="0" center-position-y="0" color="#F4931F"/>
+    <association uuid="b45857fa-93a8-4177-bc82-7dbc7a6fdfa0" color="#F4931F"/>
     <association uuid="b6541dd0-8d8d-497f-823f-d28ca69f6363" color="#F4931F" split="1"/>
     <association uuid="bcf85701-7434-495b-b451-055d7f877f26" color="#A8A8A8"/>
+    <association uuid="bd59cf41-5c65-457e-aaaf-ba14e62d1872" color="#8A54A2"/>
     <association uuid="c03277a0-6df1-44f4-bca7-59bce8a71c57" color="#2E63AF"/>
     <association uuid="c0543791-63e8-4eba-b4ac-5902651b0250" center-position-x="0" center-position-y="-20" color="#B31F24"/>
     <association uuid="c237ca76-907a-4223-b00b-213749a2fba9" color="#CDC32B"/>
@@ -2948,10 +3711,13 @@
     <association uuid="cee62248-cb01-4e41-9daa-d64cea2c5cf5" color="#A8A8A8" split="1"/>
     <association uuid="d44cc5d4-e61f-4d7e-87ea-af592fbb404e" color="#2E63AF"/>
     <association uuid="d52910ed-e9de-4631-a0d2-3631b31b3043" center-position-x="0" center-position-y="10" color="#F4931F"/>
+    <association uuid="d7971856-1adc-4cb4-b400-764c5b0bc304" color="#8A54A2"/>
     <association uuid="da721b0f-733d-4a79-95f2-eda6bce8c6d0" color="#0A783D"/>
     <association uuid="daaff4fa-f85b-498e-960d-f2be173b43b6" color="#8A54A2"/>
     <association uuid="e3869ac2-0617-42a1-a9c3-f6d9ae56ca02" color="#8A54A2"/>
     <association uuid="e3b3acbb-bd5b-431f-8410-88194eb96f7f" color="#61D351" split="1"/>
+    <association uuid="e5b18011-a81c-49fb-bf58-c654f2052e42" color="#00B4D0"/>
+    <association uuid="e73b2aef-4e2a-404d-be8e-3dfe069d3bec" color="#B31F24"/>
     <association uuid="e838e969-455c-417c-9dbf-55c2902d9319" color="#CDC32B"/>
     <association uuid="e89e251d-dbd2-406d-b78a-7810297867ab" color="#C774AF"/>
     <association uuid="eaa64f75-3e02-4396-aa20-6515a56b4cf3" color="#C774AF"/>
@@ -2967,7 +3733,11 @@
     <association uuid="f72b194e-1746-4943-8873-63a1e7708143" color="#61D351"/>
     <association uuid="fa585c37-b0f7-4cce-b7c4-3e5af4275e4f" color="#0A783D"/>
     <association uuid="fab5e6ba-ebae-4ccb-94eb-552b9cfd4c58" color="#F4931F"/>
-    <entity uuid="0b011d6c-5fd2-4576-948e-819e646ce232" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="220" position-y="40" size-x="0" size-x2="145" size-y="0" size-y2="409"/>
+    <association uuid="fc5ebc31-82ce-4c5b-aa20-1e656d9dd71b" color="#61D351"/>
+    <association uuid="fd165ab8-2585-4cf2-b1e4-12149d60bc3b" color="#C774AF"/>
+    <entity uuid="025b4ecf-ec1e-47a2-a6e5-997f2b9dc841" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="609" position-y="-97" size-x="0" size-x2="102" size-y="0" size-y2="101"/>
+    <entity uuid="08cf27ff-1ad6-4c22-883a-bebc82aaf954" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="202" position-y="-35" size-x="0" size-x2="83" size-y="0" size-y2="31"/>
+    <entity uuid="0b011d6c-5fd2-4576-948e-819e646ce232" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="244" position-y="-49" size-x="0" size-x2="168" size-y="0" size-y2="731"/>
     <entity uuid="14a2a9d5-151d-4a89-8a8d-314ffb7c4b71" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="72" position-y="95" size-x="0" size-x2="105" size-y="0" size-y2="87"/>
     <entity uuid="14b97b25-c8dd-4d60-8b83-3a404d425fcf" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="29" position-y="447" size-x="0" size-x2="117" size-y="0" size-y2="129"/>
     <entity uuid="166776cc-9d01-441d-9d17-0fe9ea672409" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="99" position-y="40" size-x="0" size-x2="57" size-y="0" size-y2="45"/>
@@ -2982,34 +3752,41 @@
     <entity uuid="2b7772ed-9d36-462a-a27a-7045e6f4562e" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="218" position-y="40" size-x="0" size-x2="92" size-y="0" size-y2="115"/>
     <entity uuid="2b7b7047-448d-47a0-8e8b-6d984b8ffbfd" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="275" position-y="62" size-x="0" size-x2="117" size-y="0" size-y2="101"/>
     <entity uuid="2d7cb729-43e3-4f4e-8a4b-792d4ae976f9" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="576" position-y="438" size-x="0" size-x2="108" size-y="0" size-y2="157"/>
-    <entity uuid="2ddca9df-8b16-4233-af59-aa50f92706fd" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="551" position-y="380" size-x="0" size-x2="102" size-y="0" size-y2="73"/>
+    <entity uuid="2ddca9df-8b16-4233-af59-aa50f92706fd" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="581" position-y="387" size-x="0" size-x2="102" size-y="0" size-y2="101"/>
     <entity uuid="2f45ed64-4451-4d98-aeba-0e105601908a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="186" position-y="115" size-x="0" size-x2="163" size-y="0" size-y2="59"/>
-    <entity uuid="2f5b53cb-f1f3-47f8-80e8-6363a309adab" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="31" position-y="177" size-x="0" size-x2="115" size-y="0" size-y2="101"/>
+    <entity uuid="2f5b53cb-f1f3-47f8-80e8-6363a309adab" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="358" position-y="762" size-x="0" size-x2="115" size-y="0" size-y2="101"/>
     <entity uuid="2feaa061-21cf-45b7-a650-ccf18b698b94" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="483" position-y="529" size-x="0" size-x2="84" size-y="0" size-y2="115"/>
+    <entity uuid="391603b3-3b78-4bc8-a40c-708ab9bb28ef" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="293" position-y="383" size-x="0" size-x2="63" size-y="0" size-y2="73"/>
+    <entity uuid="40f6e236-c078-433c-adf5-027e9fd37792" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="521" position-y="40" size-x="0" size-x2="94" size-y="0" size-y2="101"/>
     <entity uuid="43957a3e-1d12-4d56-8935-0f528883a34c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="40" size-x="0" size-x2="98" size-y="0" size-y2="157"/>
     <entity uuid="46e3fbbf-63e4-4d39-9e02-3056f511a0de" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="320" position-y="33" size-x="0" size-x2="69" size-y="0" size-y2="31"/>
     <entity uuid="46ff9387-5f95-4759-b45a-fd56eb895dba" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="36" position-y="40" size-x="0" size-x2="123" size-y="0" size-y2="87"/>
+    <entity uuid="47f334d0-4634-4310-9454-52ebc916b8b1" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="849" position-y="508" size-x="0" size-x2="123" size-y="0" size-y2="101"/>
     <entity uuid="4b044038-030d-41a7-bee9-095834fcfda1" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="579" position-y="106" size-x="0" size-x2="124" size-y="0" size-y2="31"/>
     <entity uuid="4c1a3e82-745c-4281-bf8b-139f0d721898" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="766" position-y="72" size-x="0" size-x2="155" size-y="0" size-y2="661"/>
     <entity uuid="4d81d01e-1118-4c16-bff8-5a2686b293c1" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="395" position-y="40" size-x="0" size-x2="90" size-y="0" size-y2="73"/>
     <entity uuid="4e52efba-352a-4494-bc2e-726ca01795f3" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="21" position-y="303" size-x="0" size-x2="146" size-y="0" size-y2="227"/>
-    <entity uuid="562297b9-0d57-47b5-a5e7-79d26f56a51a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="60" position-y="518" size-x="0" size-x2="94" size-y="0" size-y2="73"/>
+    <entity uuid="562297b9-0d57-47b5-a5e7-79d26f56a51a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="9" position-y="175" size-x="0" size-x2="94" size-y="0" size-y2="73"/>
     <entity uuid="57d3062d-616b-4311-a32b-18fa159655e9" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="264" position-y="349" size-x="0" size-x2="108" size-y="0" size-y2="101"/>
     <entity uuid="5a2aaa6c-1ae0-4178-ba18-a0cbd298bca2" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="211" position-y="419" size-x="0" size-x2="136" size-y="0" size-y2="367"/>
     <entity uuid="5ab5125d-5d21-454e-b4e5-0229fa61e9e6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="640" position-y="211" size-x="0" size-x2="108" size-y="0" size-y2="87"/>
     <entity uuid="5b7f499c-37a3-49d8-9803-6bc7470b4601" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="24" position-y="354" size-x="0" size-x2="80" size-y="0" size-y2="73"/>
     <entity uuid="5ec21453-9b6c-4cbd-9bf0-a09a5cdf80c0" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="272" position-y="280" size-x="0" size-x2="86" size-y="0" size-y2="59"/>
     <entity uuid="68f55ad4-393f-4c42-9d35-cda1f19bf6eb" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="520" position-y="10" size-x="0" size-x2="78" size-y="0" size-y2="45"/>
+    <entity uuid="6a07a0d3-6694-409c-9467-15e28307dc42" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="386" position-y="1571" size-x="0" size-x2="158" size-y="0" size-y2="185"/>
     <entity uuid="6d7e14c2-fda7-47c9-8d61-7b9b113807d1" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="502" position-y="589" size-x="0" size-x2="166" size-y="0" size-y2="157"/>
-    <entity uuid="727da840-0c27-4e4f-8174-0d22395c3cdd" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="219" position-y="588" size-x="0" size-x2="133" size-y="0" size-y2="115"/>
+    <entity uuid="6e4b461e-c000-4bd9-8d1d-0b9e13ff1daf" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="385" position-y="694" size-x="0" size-x2="107" size-y="0" size-y2="115"/>
+    <entity uuid="727da840-0c27-4e4f-8174-0d22395c3cdd" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="123" position-y="771" size-x="0" size-x2="133" size-y="0" size-y2="143"/>
     <entity uuid="7462f2ef-0184-4d19-9393-5d121c7aa6c7" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="24" position-y="237" size-x="0" size-x2="90" size-y="0" size-y2="73"/>
     <entity uuid="75b3e057-7d6a-47df-8efb-ad52d65faf35" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="173" position-y="159" size-x="0" size-x2="69" size-y="0" size-y2="59"/>
+    <entity uuid="7ea2015a-0b07-4a4d-9bb7-6043a6c2a469" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="598" position-y="517" size-x="0" size-x2="96" size-y="0" size-y2="101"/>
     <entity uuid="81cc830c-ce4c-41b7-b6e9-c4831d060256" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="830" position-y="175" size-x="0" size-x2="120" size-y="0" size-y2="199"/>
     <entity uuid="8365f846-b650-414f-b2dc-4e901c464a8a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="43" position-y="40" size-x="0" size-x2="90" size-y="0" size-y2="73"/>
-    <entity uuid="83b96999-fcb4-4a66-a2b0-0a065663eef6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="521" position-y="292" size-x="0" size-x2="110" size-y="0" size-y2="129"/>
+    <entity uuid="83b96999-fcb4-4a66-a2b0-0a065663eef6" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="502" position-y="385" size-x="0" size-x2="110" size-y="0" size-y2="143"/>
     <entity uuid="8855280e-2c8f-48e3-937e-4846bf13c1d7" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="613" position-y="226" size-x="0" size-x2="105" size-y="0" size-y2="115"/>
     <entity uuid="88d29855-b6f1-45bb-ac5d-7490fb88000f" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="289" position-y="188" size-x="0" size-x2="131" size-y="0" size-y2="227"/>
     <entity uuid="897df77a-f03c-4360-96b2-3863dc5c029e" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="622" position-y="109" size-x="0" size-x2="93" size-y="0" size-y2="199"/>
+    <entity uuid="8b345c44-acf4-4962-88cc-d80fd02759ed" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="490" position-y="152" size-x="0" size-x2="63" size-y="0" size-y2="73"/>
     <entity uuid="900f6704-8825-4b0f-917b-c28e8002c127" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="474" position-y="117" size-x="0" size-x2="92" size-y="0" size-y2="31"/>
     <entity uuid="91a4e243-563b-443f-85ff-3c2aa754c36b" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="461" position-y="18" size-x="0" size-x2="140" size-y="0" size-y2="437"/>
     <entity uuid="9256541b-d039-4c3e-aded-44a3de0462af" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="398" position-y="447" size-x="0" size-x2="84" size-y="0" size-y2="45"/>
@@ -3022,11 +3799,12 @@
     <entity uuid="abe3065d-aef9-4f7f-bcc2-355e574ede6a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="501" position-y="79" size-x="0" size-x2="126" size-y="0" size-y2="31"/>
     <entity uuid="ac2e44ec-7a4c-4e9f-9322-13b939006c9a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="165" position-y="557" size-x="0" size-x2="126" size-y="0" size-y2="227"/>
     <entity uuid="ae11b2b4-a48c-45f6-ad6b-7989c8effcc5" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="406" position-y="251" size-x="0" size-x2="67" size-y="0" size-y2="59"/>
+    <entity uuid="b3a597c4-80fc-46d9-8aff-912bd5199b90" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="135" position-y="227" size-x="0" size-x2="120" size-y="0" size-y2="46"/>
     <entity uuid="b5e001e4-77e6-41a7-ae02-455f26af00b9" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="830" position-y="39" size-x="0" size-x2="78" size-y="0" size-y2="73"/>
     <entity uuid="ba4dd087-2f4e-4148-99c5-d0ddf280fb2a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="496" position-y="244" size-x="0" size-x2="92" size-y="0" size-y2="31"/>
-    <entity uuid="bd6ec087-87e4-422c-bc7a-ff7fd24dc618" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="40" size-x="0" size-x2="145" size-y="0" size-y2="31"/>
+    <entity uuid="bd6ec087-87e4-422c-bc7a-ff7fd24dc618" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="-48" size-x="0" size-x2="79" size-y="0" size-y2="31"/>
     <entity uuid="be3d278e-7e2e-4d34-b3c1-a575a3a69d84" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="477" position-y="179" size-x="0" size-x2="92" size-y="0" size-y2="31"/>
-    <entity uuid="c12ee1c0-f575-4e3f-b4aa-1f176b3d415a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="402" position-y="444" size-x="0" size-x2="145" size-y="0" size-y2="241"/>
+    <entity uuid="c12ee1c0-f575-4e3f-b4aa-1f176b3d415a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="500" position-y="544" size-x="0" size-x2="145" size-y="0" size-y2="255"/>
     <entity uuid="c14a09b9-385b-4d02-a692-5422c2255083" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="349" position-y="390" size-x="0" size-x2="111" size-y="0" size-y2="45"/>
     <entity uuid="c23625f8-90ec-4509-b8d0-9568c4327c32" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="621" position-y="329" size-x="0" size-x2="140" size-y="0" size-y2="241"/>
     <entity uuid="cb14e3bf-c469-485c-8fbd-ce71b22c76c5" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="44" position-y="314" size-x="0" size-x2="105" size-y="0" size-y2="283"/>
@@ -3035,13 +3813,15 @@
     <entity uuid="d2bd7d6f-8c3a-460d-91b0-db4b3c83922b" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="110" position-y="63" size-x="0" size-x2="154" size-y="0" size-y2="199"/>
     <entity uuid="d2f17580-bbcd-4fb4-8fa6-360a2d4a2b71" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="92" position-y="337" size-x="0" size-x2="145" size-y="0" size-y2="45"/>
     <entity uuid="d2f63d49-4722-45c9-80ed-be8010f3190f" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="428" position-y="181" size-x="0" size-x2="105" size-y="0" size-y2="297"/>
-    <entity uuid="d5a7c04a-c687-4566-b52e-7b340dfdbed1" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="34" position-y="319" size-x="0" size-x2="146" size-y="0" size-y2="129"/>
-    <entity uuid="d951e113-9fcc-4278-8c57-7b7bd5857f6c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="815" position-y="454" size-x="0" size-x2="141" size-y="0" size-y2="87"/>
+    <entity uuid="d5a7c04a-c687-4566-b52e-7b340dfdbed1" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="21" position-y="325" size-x="0" size-x2="146" size-y="0" size-y2="143"/>
+    <entity uuid="d951e113-9fcc-4278-8c57-7b7bd5857f6c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="705" position-y="674" size-x="0" size-x2="106" size-y="0" size-y2="87"/>
+    <entity uuid="d96ee304-36dc-407b-b529-f8c701b8b4ef" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="40" size-x="0" size-x2="112" size-y="0" size-y2="213"/>
     <entity uuid="df09ee8d-8cd1-4c4d-aa94-33b20237a936" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="61" position-y="80" size-x="0" size-x2="131" size-y="0" size-y2="143"/>
     <entity uuid="dff31078-2db5-40db-b57a-9a1d91327b55" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="203" position-y="205" size-x="0" size-x2="136" size-y="0" size-y2="171"/>
     <entity uuid="e040b4fe-ac28-4b82-ad10-8e2c98b9202f" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="530" position-y="53" size-x="0" size-x2="152" size-y="0" size-y2="87"/>
     <entity uuid="e963c6b8-a93f-471b-8fa6-17c38995fe44" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="34" position-y="79" size-x="0" size-x2="82" size-y="0" size-y2="115"/>
     <entity uuid="e978cf61-8663-4eb8-b2d4-940acf87594e" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="277" position-y="230" size-x="0" size-x2="75" size-y="0" size-y2="73"/>
+    <entity uuid="ecef445b-075e-4dc7-bfe4-6dabc96d2fc7" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="175" position-y="40" size-x="0" size-x2="105" size-y="0" size-y2="143"/>
     <entity uuid="f2a27014-a51d-41b1-9d24-97cc447053af" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="513" position-y="40" size-x="0" size-x2="126" size-y="0" size-y2="31"/>
     <entity uuid="fab11b2f-4506-4b8b-b8b4-4a32f3674c1d" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="260" position-y="515" size-x="0" size-x2="111" size-y="0" size-y2="101"/>
     <entity uuid="ff81ef00-8867-4050-9407-11ee271e4548" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="37" position-y="269" size-x="0" size-x2="130" size-y="0" size-y2="74"/>
@@ -3050,41 +3830,26 @@
     <inheritance-child uuid="4de7817b-0dd4-4dd5-a63e-083a15f7e192" color="#F4931F"/>
     <inheritance-child uuid="6c7b04e2-32d5-42ea-ac02-0acf095e0b4e" color="#B31F24"/>
     <inheritance-child uuid="8941cfce-acb0-447c-9dd9-762d895a8f58" color="#8A54A2"/>
-    <inheritance-child uuid="ad51555c-aab7-4d67-8eca-3071b311d3bd" color="#A8A8A8"/>
-    <inheritance-child uuid="b5b2bd0f-7963-47e0-ae7a-dce58b931b64" color="#0A783D"/>
+    <inheritance-child uuid="ad51555c-aab7-4d67-8eca-3071b311d3bd" center-position-x="0" center-position-y="0" color="#A8A8A8"/>
+    <inheritance-child uuid="b5b2bd0f-7963-47e0-ae7a-dce58b931b64" center-position-x="0" center-position-y="0" color="#0A783D"/>
     <inheritance-child uuid="e2f225dd-44ef-49fd-9fce-85879f5b2cea" color="#C774AF"/>
+    <many-to-many-association uuid="63195545-79a8-4f67-b2d1-01fc8a363b84" color="#A8A8A8"/>
     <many-to-many-association uuid="6ef15f19-bc23-411d-9185-ed67927cf246" color="#2E63AF"/>
     <many-to-many-association uuid="9354722a-39ec-4747-ac8c-1b8e4329c4a5" color="#00B4D0"/>
     <many-to-many-association uuid="bccc79b8-0960-4ce8-a92f-9bc8005ea459" color="#CDC32B"/>
-    <module uuid="013762e3-1d8e-4655-9b8b-76b1c3cd1ff1" bg-color="#FDEBEF" position-x="5051" position-y="908" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
+    <many-to-many-association-entity uuid="9c7308be-9ac4-42bf-a280-a6c1060b9ab3" split="1"/>
+    <many-to-many-association-entity uuid="f9c68b5d-1d89-4620-8ef0-ce6f93f6e112" center-position-x="0" center-position-y="0"/>
+    <module uuid="013762e3-1d8e-4655-9b8b-76b1c3cd1ff1" bg-color="#FDEBEF" position-x="3038" position-y="2021" size-x="0" size-x2="512" size-y="0" size-y2="829"/>
     <module uuid="014b3d03-7303-40f7-bef2-10e70c884791" bg-color="#E7F5FD" position-x="1026" position-y="705" size-x="0" size-x2="282" size-y="-33" size-y2="298"/>
-    <module uuid="1060d1d6-0fcc-45a5-8709-b5151ef61cbd" bg-color="#FEEFE3" position-x="2596" position-y="1630" size-x="0" size-x2="412" size-y="-8" size-y2="183"/>
-    <module uuid="1878c2ac-2ce6-4e10-b87d-74f68884be06" bg-color="#FEFCE8" position-x="4651" position-y="908" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="1b9aa36d-f802-4696-a2e2-8f9e5a9f0a59" bg-color="#FDEBEF" position-x="2529" position-y="1924" size-x="0" size-x2="369" size-y="33" size-y2="345"/>
-    <module uuid="1cea2743-049f-422c-988e-566ab30cd5d5" bg-color="#FEFCE8" position-x="5251" position-y="1108" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="236c4712-5984-4a5e-ab98-0be35f62aa5c" bg-color="#E7F3E7" position-x="3851" position-y="708" size-x="0" size-x2="185" size-y="0" size-y2="100"/>
-    <module uuid="2f1267c0-d385-42ca-9a78-d3e515ed5e87" bg-color="#EAE4F1" position-x="4051" position-y="908" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="30f33e41-07a2-4e64-8ab6-fa9cdd99095a" bg-color="#FDEBEF" position-x="4451" position-y="1308" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="3824a8e0-7d80-4d0c-a5ca-debd633c5932" bg-color="#FEFCE8" position-x="3088" position-y="1540" size-x="0" size-x2="528" size-y="0" size-y2="442"/>
+    <module uuid="0df0070a-f954-4f86-9551-f40cb1233a1b" bg-color="#EAE4F1" position-x="2663" position-y="1927" size-x="0" size-x2="304" size-y="0" size-y2="273"/>
+    <module uuid="1060d1d6-0fcc-45a5-8709-b5151ef61cbd" bg-color="#FEEFE3" position-x="2388" position-y="1509" size-x="0" size-x2="412" size-y="-8" size-y2="183"/>
+    <module uuid="1b9aa36d-f802-4696-a2e2-8f9e5a9f0a59" bg-color="#FDEBEF" position-x="2325" position-y="2333" size-x="0" size-x2="369" size-y="33" size-y2="345"/>
+    <module uuid="3824a8e0-7d80-4d0c-a5ca-debd633c5932" bg-color="#FEFCE8" position-x="3088" position-y="1540" size-x="0" size-x2="648" size-y="0" size-y2="442"/>
     <module uuid="3e4bd11d-e8a2-481e-bb8a-3418db81b6ef" bg-color="#FEFCE8" position-x="1285" position-y="1424" size-x="17" size-x2="1011" size-y="0" size-y2="825"/>
-    <module uuid="4d4c99fb-d4c6-4421-a451-24811bd5ade3" bg-color="#E7F5FD" position-x="5051" position-y="1308" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="4f943079-c29e-46db-904b-a81b5bf66637" bg-color="#FDEBEF" position-x="4851" position-y="1108" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="59e9d283-c65e-45df-81a5-1048b7d764cf" bg-color="#EAE4F1" position-x="4451" position-y="1108" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="611d1643-7e8a-4580-9885-9c3c758807af" bg-color="#E7F3E7" position-x="4651" position-y="708" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
     <module uuid="647b3aa3-fe25-4f40-bbae-c6174d4c6448" bg-color="#FEEFE3" position-x="258" position-y="1507" size-x="0" size-x2="1000" size-y="81" size-y2="1579"/>
-    <module uuid="686d32d7-2005-4ac8-b478-245ce3ae5e0c" bg-color="#E7F3E7" position-x="5251" position-y="1308" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="6abd186b-e07d-400d-91c1-8c31254e38ae" bg-color="#E7F3E7" position-x="2974" position-y="718" size-x="0" size-x2="777" size-y="-2" size-y2="649"/>
+    <module uuid="6abd186b-e07d-400d-91c1-8c31254e38ae" bg-color="#E7F3E7" position-x="2406" position-y="714" size-x="0" size-x2="777" size-y="-2" size-y2="672"/>
     <module uuid="6b6667c5-b52e-4a56-8877-89fba08a10bb" bg-color="#FDEBEF" position-x="259" position-y="735" size-x="0" size-x2="751" size-y="-2" size-y2="676"/>
-    <module uuid="747044f0-2cd6-4158-9202-bdff2c3ff26f" bg-color="#FDEBEF" position-x="3851" position-y="908" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="81dbb49c-ba7b-47fa-8394-7f5af838d718" bg-color="#E7F5FD" position-x="4051" position-y="1308" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="9524ad4b-5de3-4444-9709-5e62cc41be0f" bg-color="#FEFCE8" position-x="4251" position-y="1108" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="a9308c3a-c148-44c7-8a88-d4705324e9b3" bg-color="#FEFCE8" position-x="2368" position-y="759" size-x="0" size-x2="596" size-y="0" size-y2="834"/>
-    <module uuid="b8dea434-6a52-4be5-b490-d632cea00fcf" bg-color="#FEEFE3" position-x="4851" position-y="1308" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="bf62f4e9-ce48-45e3-a1ba-b1ed5c4ebe04" bg-color="#FEEFE3" position-x="4851" position-y="908" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="cda07b1f-8a75-4430-8e27-d96fa426d90f" bg-color="#EAE4F1" position-x="5051" position-y="1108" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="ced46fdd-f36d-4ad2-82bf-b932bdaba41f" bg-color="#FEEFE3" position-x="4251" position-y="1308" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
-    <module uuid="fa4e5962-ab59-42c1-a1b3-75c348f38ead" bg-color="#E7F5FD" position-x="4051" position-y="1108" size-x="0" size-x2="100" size-y="0" size-y2="100"/>
     <module uuid="fc3d8164-87bc-4341-88a1-15d59570d9f6" bg-color="#EAE4F1" position-x="1359" position-y="816" size-x="35" size-x2="732" size-y="108" size-y2="536"/>
-    <project uuid="8a007160-ad58-4154-8595-ad0aa70b4d27" size-x="-183" size-x2="5584" size-y="-658" size-y2="3794"/>
+    <project uuid="8a007160-ad58-4154-8595-ad0aa70b4d27" size-x="-183" size-x2="3932" size-y="-540" size-y2="3584"/>
   </visual-data>
 </skipper>
