@@ -12,10 +12,10 @@
     name: Dogodek-readVse
     description: Dogodek - branje vseh, ne glede na status dogodka
 -
-    name: Oseba-vse
+    name: OsebniPodatki-write
     description: Oseba - spreminjanje osebnih podatkov
 -
-    name: Oseba-readVse
+    name: OsebniPodatki-read
     description: Oseba - branje tudi osebnih podatkov 
 -
     name: ProgramDela-lock

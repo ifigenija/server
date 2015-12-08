@@ -54,10 +54,10 @@ forms:
         disabledMethods:
             - create
             - delete
-        perm-update: Oseba-vse  
-        perm-delete: Oseba-vse  # za vsak slučaj, čeprav je disable-ano  
-        perm-create: Oseba-vse  # za vsak slučaj, čeprav je disable-ano
-        perm-read: Oseba-readVse
+        perm-update: OsebniPodatki-write  
+        perm-delete: OsebniPodatki-write  # za vsak slučaj, čeprav je disable-ano  
+        perm-create: OsebniPodatki-write  # za vsak slučaj, čeprav je disable-ano
+        perm-read: OsebniPodatki-read
         elements:    
             - datumRojstva
             - emso

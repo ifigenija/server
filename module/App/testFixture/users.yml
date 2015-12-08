@@ -95,7 +95,7 @@
         - Uprizoritev-write
         - Uprizoritev-read
         - Oseba-read
-        - Oseba-readVse
+        - OsebniPodatki-read
         - Trr-read	
         - Telefonska-read
         - PostniNaslov-read
@@ -150,7 +150,7 @@
         - Datoteka-write
         - Oseba-read
         - Oseba-write
-        - Oseba-vse
+        - OsebniPodatki-write
         - Trr-read	
         - Trr-write
         - Stevilcenje-write

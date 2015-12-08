@@ -28,6 +28,6 @@ class AssertPostniNaslovWrite
         /**
          * naslovi pri osebah so osebni podatki
          */
-        return (!$naslov->getOseba() || $authorizationService->isGranted("Oseba-vse", $naslov));
+        return (!$naslov->getOseba() || $authorizationService->isGranted("OsebniPodatki-write", $naslov));
     }
 }

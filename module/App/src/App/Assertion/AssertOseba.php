@@ -29,9 +29,9 @@ class AssertOseba
         }
 
 //                       'priimek' => 'write protected12345', //to je vrednost, ki je assert ne dovoli
-        $isG     = $authorizationService->isGranted("Oseba-vse", $oseba);  //ker je drug perm, se ne bi smel zaciklati
+        $isG     = $authorizationService->isGranted("OsebniPodatki-write", $oseba);  //ker je drug perm, se ne bi smel zaciklati
         $priimek = $oseba->getPriimek();
-// za zaščiten zapis potrebujemo dodaten permission Oseba-vse
+// za zaščiten zapis potrebujemo dodaten permission OsebniPodatki-write
         $ret     = (!('write protected12345' === $priimek) or $isG);
         return $ret;
     }

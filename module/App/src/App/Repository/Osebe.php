@@ -89,7 +89,7 @@ class Osebe
 
     public function getOsebniQb($options)
     {
-        $this->expect($this->getAuthorizationService()->isGranted('Oseba-readVse'),
+        $this->expect($this->getAuthorizationService()->isGranted('OsebniPodatki-read'),
                 'Nimate dovoljenja za branje osebnih podatkov', 1001600);
 
         return $this->getVseQb($options);

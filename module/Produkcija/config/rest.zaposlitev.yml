@@ -4,10 +4,10 @@ type: rest
 entityClass: Produkcija\Entity\Zaposlitev
 forms:
     default: 
-        perm-update: Oseba-vse  
-        perm-delete: Oseba-vse
-        perm-create: Oseba-vse 
-        perm-read: Oseba-readVse
+        perm-update: OsebniPodatki-write  
+        perm-delete: OsebniPodatki-write
+        perm-create: OsebniPodatki-write 
+        perm-read: OsebniPodatki-read
         elements:
 #            - id
             - status
@@ -32,14 +32,14 @@ forms:
         hydrator:
             lookups: [ oseba ]
     vse:
-        perm-update: Oseba-vse  
-        perm-delete: Oseba-vse
-        perm-create: Oseba-vse 
-        perm-read: Oseba-readVse
+        perm-update: OsebniPodatki-write  
+        perm-delete: OsebniPodatki-write
+        perm-create: OsebniPodatki-write 
+        perm-read: OsebniPodatki-read
         link: default
 lists:
     default: 
-        perm: Oseba-readVse
+        perm: OsebniPodatki-read
         filter:
             elements:                 
                 - name: organizacijskaenota
@@ -58,7 +58,7 @@ lists:
             exclude: []
             lookups: [ oseba ]
     vse: 
-        perm: Oseba-readVse
+        perm: OsebniPodatki-read
         filter:
             elements:
                 - name: q

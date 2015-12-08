@@ -28,6 +28,6 @@ class AssertTelefonskaWrite
         /**
          * telefonska pri osebah so osebni podatki
          */
-        return (!$tel->getOseba() || $authorizationService->isGranted("Oseba-vse", $tel));
+        return (!$tel->getOseba() || $authorizationService->isGranted("OsebniPodatki-write", $tel));
     }
 }

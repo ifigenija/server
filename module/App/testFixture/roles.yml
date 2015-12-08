@@ -57,7 +57,7 @@
         - OrganizacijskaEnota-read
         - OrganizacijskaEnota-write
         - Oseba-read
-        - Oseba-vse 
+        - OsebniPodatki-write 
         - Oseba-write
         - PlacilniInstrument-read
         - PlacilniInstrument-write
@@ -249,15 +249,15 @@
     permissions: 
         - Oseba-write
 - 
-    name: Oseba-vse
+    name: OsebniPodatki-write
     description: 'Vloga z 1 dovoljenjem'
     permissions: 
-        - Oseba-vse
+        - OsebniPodatki-write
 - 
-    name: Oseba-readVse
+    name: OsebniPodatki-read
     description: 'Vloga z 1 dovoljenjem'
     permissions: 
-        - Oseba-readVse
+        - OsebniPodatki-read
 - 
     name: Datoteka-write
     description: 'Vloga z 1 dovoljenjem'

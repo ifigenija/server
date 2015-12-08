@@ -176,7 +176,7 @@ class TelefonskaCest
         $I->assertEquals(1000008, $resp[0]['code']);
 
         /*
-         * uporabnik brez Oseba-vse dovoljenja
+         * uporabnik brez OsebniPodatki-write dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
         $resp       = $I->failToCreate($this->restUrl, $dataOs);
@@ -188,7 +188,7 @@ class TelefonskaCest
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $dataPo);
 
         /*
-         * uporabnik z Oseba-vse dovoljenjem
+         * uporabnik z OsebniPodatki-write dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
         $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl, $dataOs);
@@ -224,7 +224,7 @@ class TelefonskaCest
         $I->assertEquals(1000012, $resp[0]['code']);
 
         /*
-         * uporabnik brez Oseba-readVse dovoljenja
+         * uporabnik brez OsebniPodatki-read dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
         $resp = $I->failToGetList($listUrl, []);
@@ -232,7 +232,7 @@ class TelefonskaCest
         $I->assertEquals(1001630, $resp[0]['code']);
 
         /*
-         * uporabnik z Oseba-vse dovoljenjem
+         * uporabnik z OsebniPodatki-write dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
         $resp = $I->successfullyGetList($listUrl, []);
@@ -270,7 +270,7 @@ class TelefonskaCest
         $I->assertEquals(1000012, $resp[0]['code']);
 
         /*
-         * uporabnik brez Oseba-readVse dovoljenja
+         * uporabnik brez OsebniPodatki-read dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
         $resp = $I->successfullyGetList($listUrl, []);
@@ -328,7 +328,7 @@ class TelefonskaCest
         $I->assertEquals(1000101, $resp[0]['code']);
 
         /*
-         * uporabnik brez Oseba-vse dovoljenja
+         * uporabnik brez OsebniPodatki-write dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
         $resp = $I->failToUpdate($this->restUrl, $entOs['id'], $entOs);
@@ -340,7 +340,7 @@ class TelefonskaCest
         $ent  = $I->successfullyUpdate($this->restUrl, $entPo['id'], $entPo);
 
         /*
-         * uporabnik z Oseba-vse dovoljenjem
+         * uporabnik z OsebniPodatki-write dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
         $ent = $I->successfullyUpdate($this->restUrl, $entOs['id'], $entOs);
@@ -381,7 +381,7 @@ class TelefonskaCest
         $I->assertEquals(100099, $resp[0][0]['code']);
 
         /*
-         * uporabnik brez Oseba-readVse dovoljenja
+         * uporabnik brez OsebniPodatki-read dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
         $resp = $I->failToGet($this->restUrl, $entOs['id']);
@@ -393,7 +393,7 @@ class TelefonskaCest
         $ent  = $I->successfullyGet($this->restUrl, $entPo['id']);
 
         /*
-         * uporabnik z Oseba-vse dovoljenjem
+         * uporabnik z OsebniPodatki-write dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
         $ent = $I->successfullyGet($this->restUrl, $entOs['id']);
@@ -426,7 +426,7 @@ class TelefonskaCest
         $I->assertEquals(100201, $resp[0]['code']);
 
         /*
-         * uporabnik brez Oseba-vse dovoljenja
+         * uporabnik brez OsebniPodatki-write dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
         $resp = $I->failToDelete($this->restUrl, $entOs['id']);
@@ -438,7 +438,7 @@ class TelefonskaCest
         $ent  = $I->successfullyDelete($this->restUrl, $entPo['id']);
 
         /*
-         * uporabnik z Oseba-vse dovoljenjem
+         * uporabnik z OsebniPodatki-write dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
         $ent = $I->successfullyDelete($this->restUrl, $entOs['id']);

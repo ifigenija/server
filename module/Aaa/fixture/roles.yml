@@ -259,8 +259,8 @@
     permissions: 
         - Oseba-write
         - Oseba-read
-        - Oseba-readVse
-        - Oseba-vse
+        - OsebniPodatki-read
+        - OsebniPodatki-write
         - Trr-read
         - Trr-write
         - Zapis-read
@@ -269,7 +269,7 @@
     description: omogoča read akcije v meniju Seznami->Osebe->Splošno
     permissions: 
         - Oseba-read
-        - Oseba-readVse
+        - OsebniPodatki-read
         - Trr-read
         - Zapis-read
 - 

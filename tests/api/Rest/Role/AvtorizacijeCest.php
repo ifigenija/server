@@ -192,7 +192,7 @@ class AvtorizacijeCest
         $I->assertTrue($res);
         $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
             'rolename' => "TEST4RWVSE",
-            'permname' => 'Oseba-vse',
+            'permname' => 'OsebniPodatki-write',
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
@@ -525,7 +525,7 @@ class AvtorizacijeCest
         codecept_debug($data);
         $data['ime'] = 'cirkocarko';
 
-        // dostop uspe zaradi posebnega dovoljenja "Oseba-vse"
+        // dostop uspe zaradi posebnega dovoljenja "OsebniPodatki-write"
         $I->successfullyUpdate($this->osebaUrl, $data['id'], $data);
         $I->assertEquals($data['ime'], 'cirkocarko');
     }

@@ -562,8 +562,8 @@ class OsebaCest
 
 
         /*
-         * uporabnik brez Oseba-write in Oseba-vse dovoljenja
-         * kontrolira le Oseba-vse
+         * uporabnik brez Oseba-write in OsebniPodatki-write dovoljenja
+         * kontrolira le OsebniPodatki-write
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
         $resp = $I->failToUpdate($this->osebniUrl, $data['id'], $data);
@@ -571,7 +571,7 @@ class OsebaCest
         $I->assertEquals(1000101, $resp[0]['code']);
 
         /*
-         * uporabnik brez Oseba-vse dovoljenja
+         * uporabnik brez OsebniPodatki-write dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
         $resp = $I->failToUpdate($this->osebniUrl, $data['id'], $data);
@@ -579,7 +579,7 @@ class OsebaCest
         $I->assertEquals(1000101, $resp[0]['code']);
 
         /*
-         * uporabnik z Oseba-vse dovoljenjem
+         * uporabnik z OsebniPodatki-write dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
         $I->successfullyUpdate($this->osebniUrl, $data['id'], $data);
@@ -832,7 +832,7 @@ class OsebaCest
 //        $I->fail('$$ začasno');
 
         /*
-         * uporabnik brez Oseba-read in Oseba-readVse dovoljenja
+         * uporabnik brez Oseba-read in OsebniPodatki-read dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
         $resp = $I->failToGet($this->osebniUrl, $this->obj1['id']);
@@ -840,7 +840,7 @@ class OsebaCest
         $I->assertEquals(100099, $resp[0][0]['code']);
 
         /*
-         * uporabnik brez Oseba-readVse dovoljenja
+         * uporabnik brez OsebniPodatki-read dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
         $resp = $I->failToGet($this->osebniUrl, $this->obj1['id']);
@@ -848,7 +848,7 @@ class OsebaCest
         $I->assertEquals(100099, $resp[0][0]['code']);
 
         /*
-         * uporabnik z Oseba-readVse dovoljenjem
+         * uporabnik z OsebniPodatki-read dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
         $ent = $I->successfullyGet($this->osebniUrl, $this->obj1['id']);
@@ -863,7 +863,7 @@ class OsebaCest
     public function getListOsebni(ApiTester $I)
     {
         /*
-         * uporabnik z Oseba-readVse dovoljenjem
+         * uporabnik z OsebniPodatki-read dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
 
@@ -896,7 +896,7 @@ class OsebaCest
         $I->assertEquals(1000012, $resp[0]['code']);
 
         /*
-         * uporabnik brez Oseba-readVse dovoljenja
+         * uporabnik brez OsebniPodatki-read dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
         $resp = $I->failToGetList($listUrl, []);
@@ -904,7 +904,7 @@ class OsebaCest
         $I->assertEquals(1001600, $resp[0]['code']);
 
         /*
-         * uporabnik z Oseba-readVse dovoljenjem
+         * uporabnik z OsebniPodatki-read dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
         $resp = $I->successfullyGetList($listUrl, []);

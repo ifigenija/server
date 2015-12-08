@@ -230,7 +230,7 @@ class ZaposlitevCest
 
 
         /*
-         * uporabnik brez Oseba-vse dovoljenja
+         * uporabnik brez OsebniPodatki-write dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
         $resp       = $I->failToCreate($this->restUrl, $dataOs);
@@ -238,7 +238,7 @@ class ZaposlitevCest
         $I->assertEquals(1000008, $resp[0]['code']);
 
         /*
-         * uporabnik z Oseba-vse dovoljenjem
+         * uporabnik z OsebniPodatki-write dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
         $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl, $dataOs);

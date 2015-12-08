@@ -28,6 +28,6 @@ class AssertTrrWrite
         /**
          * trr pri osebah so osebni podatki
          */
-        return (!$trr->getOseba() || $authorizationService->isGranted("Oseba-vse", $trr));
+        return (!$trr->getOseba() || $authorizationService->isGranted("OsebniPodatki-write", $trr));
     }
 }
