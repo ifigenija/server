@@ -19,7 +19,7 @@ lists:
         filter:
             elements:                 
                 - name: prostor
-                  type: toone
+                  type: tomany
                   options:
                       label: Prostor
                       targetEntity: Prodaja\Entity\Prostor
@@ -42,7 +42,7 @@ lists:
                       value_options: @dogodek.status
                       required: false
                 - name: uprizoritev
-                  type: toone
+                  type: tomany
                   options:
                       label: Uprizoritev
                       targetEntity: Produkcija\Entity\Uprizoritev
