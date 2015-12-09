@@ -556,16 +556,16 @@ class AlternacijaCest
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
-        $I->assertTrue($ent['pomembna'], 'default za pomembna');
+        $I->assertFalse($ent['pomembna'], 'default za pomembna');
 
         // še enkrat preverimo z get za vsak slučaj
         $ent = $I->successfullyGet($this->restUrl, $ent['id']);
-        $I->assertTrue($ent['pomembna'], 'po read:default za pomembna');
+        $I->assertFalse($ent['pomembna'], 'po read:default za pomembna');
 
 
         // kreiramo enega z nastavljenim poljem 'pomembna'
         $data = [
-            'pomembna'   => FALSE, // nalašč brez parametra pomembna
+            'pomembna'   => True, // nalašč brez parametra pomembna
             'zaposlen'   => false, // v validaciji postavimo na true, če je zaposlitev
             'zacetek'    => '2010-02-01T00:00:00+0100',
             'konec'      => '2020-02-01T00:00:00+0100',
@@ -580,11 +580,11 @@ class AlternacijaCest
         ];
         $ent  = $I->successfullyCreate($this->restUrl, $data);
         $I->assertGuid($ent['id']);
-        $I->assertFalse($ent['pomembna'], 'default za pomembna');
+        $I->assertTrue($ent['pomembna'], 'default za pomembna');
 
         // še enkrat preverimo z get za vsak slučaj
         $ent = $I->successfullyGet($this->restUrl, $ent['id']);
-        $I->assertFalse($ent['pomembna'], 'po read:default za pomembna');
+        $I->assertTrue($ent['pomembna'], 'po read:default za pomembna');
     }
 
     /**

@@ -49,6 +49,11 @@ class Zaposlitve
         }
         $sort = $this->getSort($name);
         $qb->orderBy($sort->order, $sort->dir);
+        /**
+         * če bo potreben getList za večji seznam, se lahko implementira posebno dovoljenje
+         */
+        $this->areGranted($qb, 'Trr-read', 1001660);
+
         return new DoctrinePaginator(new Paginator($qb));
     }
 

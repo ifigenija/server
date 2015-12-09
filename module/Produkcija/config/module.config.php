@@ -67,11 +67,15 @@ return [
             "invokables" => [
                 "chck-pogodba-write"     => "Produkcija\Assertion\AssertPogodbaWrite",
                 "chck-pogodba"           => "Produkcija\Assertion\AssertPogodba",
+                "chck-zaposlitev-write"     => "Produkcija\Assertion\AssertZaposlitevWrite",
+                "chck-zaposlitev"           => "Produkcija\Assertion\AssertZaposlitev",
             ],
         ],
         "assertion_map"     => [
             "Pogodba-write"          => "chck-pogodba-write",
             "Pogodba-read"           => "chck-pogodba",
+            "Zaposlitev-write"          => "chck-zaposlitev-write",
+            "Zaposlitev-read"           => "chck-zaposlitev",
         ],
     ],
 ];

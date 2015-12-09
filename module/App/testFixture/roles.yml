@@ -344,4 +344,13 @@
     description: 'Vloga z 1 dovoljenjem'
     permissions: 
         - StrosekUprizoritve-write
-       
+- 
+    name: Alternacija-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Alternacija-read
+- 
+    name: Alternacija-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Alternacija-write

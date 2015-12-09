@@ -31,6 +31,7 @@ class ZaposlitevCest
 {
 
     private $restUrl        = '/rest/zaposlitev';
+    private $lookupUrl      = '/lookup/zaposlitev';
     private $osebaUrl       = '/rest/oseba';
     private $alternacijaUrl = '/rest/alternacija';
     private $zaposlitevUrl  = '/rest/zaposlitev';
@@ -235,7 +236,7 @@ class ZaposlitevCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
         $resp = $I->failToCreate($this->restUrl, $dataOs);
         codecept_debug($resp);
-        $I->assertEquals(1000008, $resp[0]['code']);
+        $I->assertEquals(1000009, $resp[0]['code']);
 
         /*
          * uporabnik z OsebniPodatki-write dovoljenjem
@@ -303,7 +304,7 @@ class ZaposlitevCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
         $resp = $I->failToGetList($listUrl, []);
         codecept_debug($resp);
-        $I->assertEquals(1000012, $resp[0]['code']);
+        $I->assertEquals(1001660, $resp[0]['code']);
 
         /*
          * uporabnik z OsebniPodatki-read dovoljenjem
@@ -491,6 +492,39 @@ class ZaposlitevCest
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "alternacije", $this->objAlternacija1['id']);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookup(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->lookupUrl, []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+
+
+        /**
+         * še preverjanja avtorizacij, posebnih dovoljenj
+         */
+        /*
+         * uporabnik brez Zaposlitev-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $resp = $I->failToGetList($this->lookupUrl, []);
+        codecept_debug($resp);
+        $I->assertEquals(1000632, $resp[0]['code']);
+
+        /*
+         * 
+         * uporabnik z Zaposlitev-read dovoljenjem
+         * uporabnik brez OsebniPodatki-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->successfullyGetList($this->lookupUrl, []);
     }
 
 }

@@ -65,9 +65,10 @@ class TipVajeFixture
             ['0009', '2. generalka', '2. generalka'],
             ['0010', 'odprta generalka', 'odprta generalka'],
             ['0011', 'obnovitvena vaja', 'obnovitvena vaja'],
-            ['0012', 'pevska vaja', 'pevska vaja'],
-            ['0013', 'postavitev scene', 'postavitev scene (za pripravo vaje)'],
-            ['0014', 'postavitev luči', 'postavitev luči (za pripravo vaje)'],
+            ['0012', 'italijanka', 'krajša "obnovitvena" vaja'],
+            ['0013', 'pevska vaja', 'pevska vaja'],
+            ['0014', 'postavitev scene', 'postavitev scene (za pripravo vaje)'],
+            ['0015', 'postavitev luči', 'postavitev luči (za pripravo vaje)'],
         ];
     }
 

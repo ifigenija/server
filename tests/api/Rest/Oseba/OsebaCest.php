@@ -829,8 +829,6 @@ class OsebaCest
         $I->assertTrue(isset($ent['kontaktneOsebe']), 'isset kontaktneOsebe');
         $I->assertEquals(0, count($ent['kontaktneOsebe']));
 
-//        $I->fail('$$ začasno');
-
         /*
          * uporabnik brez Oseba-read in OsebniPodatki-read dovoljenja
          */
@@ -1406,6 +1404,40 @@ class OsebaCest
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "telefonske", $this->objTelefonska1['id']);
         $I->assertEquals(1, count($resp));
+
+
+        /**
+         * test avtorizacij oz. posebnih dovoljenj
+         */
+        /*
+         * uporabnik brez Oseba-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "telefonske", "");
+        codecept_debug($resp);
+        $I->assertEquals(100699, $resp[0][0]['code']);
+
+        /*
+         * uporabnik brez Telefonska-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$dana, \IfiTest\AuthPage::$danaPass);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "telefonske", "");
+        codecept_debug($resp);
+        $I->assertEquals(100696, $resp[0][0]['code']);
+
+        /*
+         * uporabnik brez OsebniPodatki-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "telefonske", "");
+        codecept_debug($resp);
+        $I->assertEquals(100696, $resp[0][0]['code']);
+
+        /*
+         * uporabnik z OsebniPodatki-read dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "telefonske", "");
     }
 
     /**
@@ -1425,8 +1457,38 @@ class OsebaCest
         codecept_debug($resp);
         $I->assertEquals(1, count($resp));
 
-        
-        $I->fail('$$');
+        /**
+         * test avtorizacij oz. posebnih dovoljenj
+         */
+        /*
+         * uporabnik brez Oseba-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "trrji", "");
+        codecept_debug($resp);
+        $I->assertEquals(100699, $resp[0][0]['code']);
+
+        /*
+         * uporabnik brez Trr-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$dana, \IfiTest\AuthPage::$danaPass);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "trrji", "");
+        codecept_debug($resp);
+        $I->assertEquals(100696, $resp[0][0]['code']);
+
+        /*
+         * uporabnik brez OsebniPodatki-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "trrji", "");
+        codecept_debug($resp);
+        $I->assertEquals(100696, $resp[0][0]['code']);
+
+        /*
+         * uporabnik z OsebniPodatki-read dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "trrji", "");
     }
 
     /**
@@ -1443,6 +1505,39 @@ class OsebaCest
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "pogodbe", $this->objPogodba1['id']);
         $I->assertEquals(1, count($resp));
+
+        /**
+         * test avtorizacij oz. posebnih dovoljenj
+         */
+        /*
+         * uporabnik brez Oseba-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "pogodbe", "");
+        codecept_debug($resp);
+        $I->assertEquals(100699, $resp[0][0]['code']);
+
+        /*
+         * uporabnik brez Pogodba-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$dana, \IfiTest\AuthPage::$danaPass);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "pogodbe", "");
+        codecept_debug($resp);
+        $I->assertEquals(100696, $resp[0][0]['code']);
+
+        /*
+         * uporabnik brez OsebniPodatki-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "pogodbe", "");
+        codecept_debug($resp);
+        $I->assertEquals(100696, $resp[0][0]['code']);
+
+        /*
+         * uporabnik z OsebniPodatki-read dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "pogodbe", "");
     }
 
     /**
@@ -1475,6 +1570,29 @@ class OsebaCest
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "zaposlitve", $this->objZaposlitev1['id']);
         $I->assertEquals(1, count($resp));
+
+
+        /*
+         * uporabnik brez Oseba-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "zaposlitve", "");
+        codecept_debug($resp);
+        $I->assertEquals(100699, $resp[0][0]['code']);
+
+        /*
+         * uporabnik brez OsebniPodatki-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "zaposlitve", "");
+        codecept_debug($resp);
+        $I->assertEquals(100696, $resp[0][0]['code']);
+
+        /*
+         * uporabnik z OsebniPodatki-read dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "zaposlitve", "");
     }
 
     /**

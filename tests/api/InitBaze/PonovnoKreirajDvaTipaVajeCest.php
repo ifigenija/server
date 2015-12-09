@@ -82,7 +82,7 @@ class PonovnoKreirajDvaTipaVajeCest
         $list   = $resp['data'];
         codecept_debug($list);
         $totRec = $resp['state']['totalRecords'];
-        $I->assertEquals(16, $resp['state']['totalRecords']);
+        $I->assertEquals(17, $resp['state']['totalRecords']);
     }
 
 }

@@ -54,10 +54,16 @@ class AvtorizacijaAlternacijaCest
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
 
-        //1. vlogi read
         $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
             'rolename' => "NOVAPOGODBA",
             'permname' => 'Pogodba-write',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "NOVAPOGODBA",
+            'permname' => 'OsebniPodatki-write',
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);

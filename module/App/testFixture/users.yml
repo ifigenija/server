@@ -83,6 +83,7 @@
         - PostniNaslov-read
         - Zaposlitev-read
         - Pogodba-read
+        - Alternacija-read
 
 -
     name: testni uporabnik za testiranje zapisov
@@ -101,6 +102,7 @@
         - PostniNaslov-read
         - Zaposlitev-read
         - Pogodba-read
+        - Alternacija-read
        
 -
     name: testni uporabnik za testiranje zapisov
@@ -113,6 +115,7 @@
         - Uprizoritev-write
         - Uprizoritev-read
         - Zapis-read
+        - Oseba-read
 -
     name: testni uporabnik za testiranje zapisov
     email: vinko@ifigenija.si
