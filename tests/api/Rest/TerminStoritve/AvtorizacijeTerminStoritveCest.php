@@ -205,27 +205,34 @@ class AvtorizacijeTerminStoritveCest
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
 
-        $resp       = $I->successfullyGetList($this->restUrl, []);
-        $list       = $resp['data'];
+        $resp = $I->successfullyGetList($this->restUrl, []);
+        $list = $resp['data'];
         codecept_debug($list);
         //        $I->assertNotEmpty($list);
         // poiščemo termina storitve - najprej za ne-tehnika:
-        $key        = array_search($this->lookAlternacija1['id'], array_column($list, 'alternacija'));
+
+        $key        = array_search($this->lookAlternacija1['id'], array_column(array_column($list, 'alternacija'), 'id'));
+        $I->assertTrue(is_int($key), "key ni integer");
         $this->obj1 = $ent        = $list[$key];
         codecept_debug($ent);
 
-        // poiščemo termina za tehnika
-        $key           = array_search($this->lookAlternacija2Teh['id'], array_column($list, 'alternacija'));
+        /*
+         *  poiščemo termina za tehnika
+         */
+        $key           = array_search($this->lookAlternacija2Teh['id'], array_column(array_column($list, 'alternacija'), 'id'));
+        $I->assertTrue(is_int($key), "key ni integer");
         $this->obj2Teh = $ent           = $list[$key];
         codecept_debug($ent);
 
         // poiščemo termina brez alternacije
         $key           = array_search(true, array_column($list, 'dezurni'));
+        $I->assertTrue(is_int($key), "key ni integer");
         $this->obj3dez = $ent           = $list[$key];
         codecept_debug($ent);
 
         // poiščemo termin gost
         $key            = array_search(true, array_column($list, 'gost'));
+        $I->assertTrue(is_int($key), "key ni integer");
         $this->obj4gost = $ent            = $list[$key];
         codecept_debug($ent);
     }
@@ -388,6 +395,7 @@ class AvtorizacijeTerminStoritveCest
         //drug zapis  tehnik
         $ent                   = $this->obj2Teh;
         $ent['planiranoTraja'] = 3;
+        codecept_debug($ent);
         $resp                  = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         $I->assertNotEmpty($resp);
 

@@ -153,6 +153,8 @@ relation:
                     - alternacije.funkcija.uprizoritev
                 exclude: []
         zaposlitve:
+#            $$ implementiraj detail-perm
+            detail-perm-read: OsebniPodatki-read
             enabled: true
             hydrator:
                 lookups:

@@ -11,7 +11,7 @@ use Max\Entity\Base;
  * @ORM\Entity(repositoryClass="Produkcija\Repository\Pogodbe")
  * @Max\I18n(label="Pogodba",plural="Pogodbe")
  * @Max\Id(prefix="0011")
- * @Max\Lookup(ident="sifra",label="oseba.polnoIme", search={"sifra","oseba.polnoIme", "popa.naziv"}, extra={"oseba.polnoIme", "popa.naziv","zacetek" })
+ * @Max\Lookup(ident="sifra",label="oseba.polnoIme", search={"sifra","oseba.polnoIme", "popa.naziv"}, extra={"oseba.polnoIme", "popa.naziv"})
  */
 class Pogodba
         extends Base
@@ -240,6 +240,11 @@ class Pogodba
 //        $this->expect($this->oseba || $this->popa, "Pogodba nima subjekta. Oseba ali poslovni partner sta obvezna", 1000340);
 //        $this->expect(!($this->popa && $this->oseba), "Pogodba nima subjekta. Subjekt je lahko samo ali poslovni partner ali oseba -ne oba hkrati", 1000341);
         $this->expect($this->sifra, "sifra je obvezen podatek", 1000342);
+        /**
+         * $$ verjetno kasneje oseba ne bo obvezna, v primeru če npr. neko alternacijo (npr. tehnično)
+         * izvede neka firma . 
+         * $$ v tem primeru še bo potrebno avtorizacije preveriti (assertion,cest)
+         */
         $this->expect($this->oseba, "Pogodba nima subjekta. Oseba je obvezna", 1000343);
         $this->expect(!($this->zaposlenVDrJz && $this->samozaposlen), "Oseba ne more biti hkrati zaposlena v drugem jz in samozaposlena", 1000345);
 
@@ -334,7 +339,6 @@ class Pogodba
         return $this->vrednostDoPremiere;
     }
 
-
     function getZaposlenVDrJz()
     {
         return $this->zaposlenVDrJz;
@@ -424,7 +428,6 @@ class Pogodba
     {
         $this->vrednostDoPremiere = $vrednostDoPremiere;
     }
-
 
     function setZaposlenVDrJz($zaposlenVDrJz)
     {
