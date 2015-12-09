@@ -131,11 +131,8 @@ class Dogodki
             $qb->leftJoin('p.vaja', 'vaja');
             $qb->leftJoin('p.predstava', 'predstava');
             
-            $qb->join('predstava.uprizoritev', 'pu');
-            $qb->join('vaja.uprizoritev', 'vu');
-            
-            $pu = $e->in('pu.id', $options['uprizoritev']);
-            $vu = $e->in('vu.id', $options['uprizoritev']);
+            $pu = $e->in('vaja.uprizoritev', $options['uprizoritev']);
+            $vu = $e->in('predstava.uprizoritev', $options['uprizoritev']);
             
             $qb->andWhere($e->orX($pu, $vu));
             //$qb->setParameter('uprizoritev', $options['uprizoritev'], "string");
