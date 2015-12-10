@@ -52,7 +52,7 @@ class Zaposlitve
         /**
          * če bo potreben getList za večji seznam, se lahko implementira posebno dovoljenje
          */
-        $this->areGranted($qb, 'Trr-read', 1001660);
+        $this->areGranted($qb, 'Zaposlitev-read', 1001660);
 
         return new DoctrinePaginator(new Paginator($qb));
     }

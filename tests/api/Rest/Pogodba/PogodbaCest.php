@@ -53,6 +53,7 @@ class PogodbaCest
     private $obj5;
     private $obj6;
     private $obj7;
+    private $obj8;
     private $objPopa;
     private $objDrzava;
     private $objOseba;
@@ -458,11 +459,39 @@ class PogodbaCest
             'jeProcentOdInkasa'   => true,
         ];
 
+        $dataPoOs = [
+            'oseba'               => $this->lookOseba1['id'],
+            'popa'                => $this->lookPopa1['id'],
+            'opis'                => 'Za Oseba',
+            'vrednostVaj'         => 45.6,
+            'vrednostPredstave'   => 45.6,
+            'vrednostVaje'        => 45.6,
+            'vrednostDo'          => 45.6,
+            'vrednostDoPremiere'  => 45.6,
+            'procentOdInkasa'     => 45.6,
+            'placiloNaVajo'       => false,
+            'planiranoSteviloVaj' => 12,
+            'trr'                 => null,
+            'zacetek'             => '2012-03-01T00:00:00+0100',
+            'konec'               => '2013-04-01T00:00:00+0100',
+            'zaposlenVDrJz'       => true,
+            'samozaposlen'        => FALSE,
+            'jeAvtorskePravice'   => FALSE,
+            'igralec'             => true,
+            'jeProcentOdInkasa'   => true,
+        ];
+
         /*
          * uporabnik brez Pogodba-write dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
         $resp = $I->failToCreate($this->restUrl, $dataOs);
+        codecept_debug($resp);
+        $I->assertEquals(1000008, $resp[0]['code']);
+        /**
+         * tudi če ni osebni podatek nima dostopa
+         */
+        $resp = $I->failToCreate($this->restUrl, $dataPoOs);
         codecept_debug($resp);
         $I->assertEquals(1000008, $resp[0]['code']);
 
@@ -473,6 +502,11 @@ class PogodbaCest
         $resp       = $I->failToCreate($this->restUrl, $dataOs);
         codecept_debug($resp);
         $I->assertEquals(1000009, $resp[0]['code']);
+        /*
+         * če je pogodba od popa in osebe ni več osebni podatek
+         */
+        $this->obj8 = $ent        = $I->successfullyCreate($this->restUrl, $dataPoOs);
+
         /*
          * uporabnik z OsebniPodatki-write dovoljenjem
          */
@@ -562,8 +596,12 @@ class PogodbaCest
         /**
          * še preverjanja avtorizacij, posebnih dovoljenj
          */
-        $entOs = $this->obj4;
+        $entOs   = $this->obj4;
         $I->assertNotNull($entOs['oseba']);
+        $I->assertNull($entOs['popa']);
+        $entPoOs = $this->obj8;
+        $I->assertNotNull($entPoOs['oseba']);
+        $I->assertNotNull($entPoOs['popa']);
 
         /*
          * uporabnik brez Pogodba-read dovoljenja
@@ -580,6 +618,10 @@ class PogodbaCest
         $resp = $I->failToGet($this->restUrl, $entOs['id']);
         codecept_debug($resp);
         $I->assertEquals(100099, $resp[0][0]['code']);
+        /*
+         * čim je od popa ni več osebni podatek 
+         */
+        $ent  = $I->successfullyGet($this->restUrl, $entPoOs['id']);
 
         /*
          * uporabnik z OsebniPodatki-read dovoljenjem

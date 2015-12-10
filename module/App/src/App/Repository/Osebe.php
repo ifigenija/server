@@ -33,17 +33,12 @@ class Osebe
             "email"     => ["alias" => "p.email"],
             "psevdonim" => ["alias" => "p.psevdonim"],
         ],
-        "vse"     => [
-            "priimek" => ["alias" => "p.priimek"],
-            "ime"     => ["alias" => "p.ime"],
-        ],
     ];
 
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
             case "default":
-            case "vse":
                 $qb = $this->getVseQb($options);
                 break;
             case "osebni":

@@ -26,8 +26,8 @@ class AssertPogodbaWrite
             return true;
         }
         /**
-         * pogodbe pri osebah so osebni podatki
+         * pogodbe pri osebah so osebni podatki če ni preko poslovnega partnerja
          */
-        return (!$pogodba->getOseba() || $authorizationService->isGranted("OsebniPodatki-write", $pogodba));
+        return ($pogodba->getPopa() || !$pogodba->getOseba() ||  $authorizationService->isGranted("OsebniPodatki-write", $pogodba));
     }
 }
