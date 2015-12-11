@@ -8,8 +8,10 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20151210170541 extends AbstractMigration
+class Version20151210170541
+        extends AbstractMigration
 {
+
     /**
      * @param Schema $schema
      */
@@ -28,6 +30,16 @@ class Version20151210170541 extends AbstractMigration
         $this->addSql('ALTER TABLE zapis ADD type VARCHAR(255) DEFAULT NULL');
         $this->addSql('ALTER TABLE zapis ADD format VARCHAR(255) DEFAULT NULL');
         $this->addSql('ALTER TABLE mapa ALTER javnidostop DROP NOT NULL');
+
+        /*
+         * ročno dodano:
+         */
+        /*
+         * programrazno.stDogodkov potrebno sešteti glede na pripadajoče pes.stdogodkov
+         */
+        $this->addSql('update enotaprograma set stdogodkov= coalesce((select sum(programskaenotasklopa.stdogodkov) '
+                .' from programskaenotasklopa where programskaenotasklopa.programrazno_id=enotaprograma.id),0)'
+                .' WHERE tip=\'razno\';');
     }
 
     /**
@@ -50,4 +62,5 @@ class Version20151210170541 extends AbstractMigration
         $this->addSql('ALTER TABLE Zapis DROP type');
         $this->addSql('ALTER TABLE Zapis DROP format');
     }
+
 }
