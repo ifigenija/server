@@ -1736,7 +1736,7 @@ class ProgramDelaCest
             'mesecPE'      => 'zz',
             'vrednostPE'   => 100.11,
             'obiskDoma'    => 22,
-            'stDogodkov'    => 2,
+            'stDogodkov'   => 2,
             'programRazno' => $this->objProgramRazno1['id']
         ];
         $this->objPESklopa1 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
@@ -1750,7 +1750,7 @@ class ProgramDelaCest
             'mesecPE'      => 'aa',
             'vrednostPE'   => 200.22,
             'obiskDoma'    => 22,
-            'stDogodkov'    => 3,
+            'stDogodkov'   => 3,
             'programRazno' => $this->objProgramRazno1['id']
         ];
         $this->objPESklopa2 = $ent                = $I->successfullyCreate($this->programskaEnotaSklopaUrl, $data);
@@ -1827,6 +1827,12 @@ class ProgramDelaCest
         $I->assertGreaterThanOrEqual(33, $entR['stObiskPonPremGost'], 'stObiskPonPremGost');
         $I->assertGreaterThanOrEqual(9, $entR['stObiskPonPremZamejo'], 'stObiskPonPremZamejo');
         $I->assertGreaterThanOrEqual(9, $entR['stObiskPonPremInt'], 'stObiskPonPremInt');
+        $I->assertGreaterThanOrEqual(5, $entR['stObiskPonPrejKopr'], 'stObiskPonPrejKopr');
+        $I->assertGreaterThanOrEqual(0, $entR['stObiskPonPrejKoprInt'], 'stObiskPonPrejKoprInt');
+        $I->assertGreaterThanOrEqual(9, $entR['stObiskPonPremZamejoKopr'], 'stObiskPonPremZamejoKopr');
+        $I->assertGreaterThanOrEqual(33, $entR['stObiskPonPremGostKopr'], 'stObiskPonPremGostKopr');
+        $I->assertGreaterThanOrEqual(13, $entR['stObiskPonPrejZamejoKopr'], 'stObiskPonPrejZamejoKopr');
+        $I->assertGreaterThanOrEqual(5, $entR['stObiskPonPrejGostKopr'], 'stObiskPonPrejGostKopr');
         $I->assertEquals($entR['avgObiskPrired'], round($entR['stObiskNekom'] / $entR['stIzvNekomerc'], 2), "povprečno št. obiskovalcev");     //kvocient drugih dveh števil
         $I->assertGreaterThanOrEqual(141, $entR['stHonorarnihZun'], "");
         $I->assertGreaterThanOrEqual(28, $entR['stHonorarnihZunIgr'], "");
@@ -1884,8 +1890,6 @@ class ProgramDelaCest
 
         $I->assertEquals(1.51, $entR['avgZasedDvoran'], "% povprečna zasedenost dvoran");
         $I->assertEquals(5.57, $entR['avgStNastopovIgr'], "povprečno število nastopov zaposlenih igralcev");
-
-//        $I->assertTrue(false,"$$ začasno");
     }
 
     /**
