@@ -40,6 +40,22 @@ class Version20151210170541
         $this->addSql('update enotaprograma set stdogodkov= coalesce((select sum(programskaenotasklopa.stdogodkov) '
                 .' from programskaenotasklopa where programskaenotasklopa.programrazno_id=enotaprograma.id),0)'
                 .' WHERE tip=\'razno\';');
+        
+        /**
+         * $$ ročne akcije za narediti:
+         * 
+         * (psql) delete from tipvaje;
+         * bin/util populate TipVaje
+         * (psql) select * from tipvaje; 
+         * 
+         * 
+         * bin/util populate Roles
+         * (psql) select * from permission where name like 'Oseb%';
+         * (psql) select * from role where name like 'mn%';
+         * 
+         */
+        
+        
     }
 
     /**
