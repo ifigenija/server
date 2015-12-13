@@ -24,7 +24,7 @@ class OptionsFixture
     public function load(ObjectManager $manager)
     {
         // opcije je potrebno naložiti za uporabniki
-        echo "Nalagam - opcije" . PHP_EOL;
+//        echo "Nalagam - opcije" . PHP_EOL;
         $res = $this->getData('options');
         foreach ($res as $val) {
             $this->populateOptions($manager, $val);
@@ -90,9 +90,9 @@ class OptionsFixture
          *          če obstajajo globalne ali uporabniške vrednosti ažuriramo entiteto OptionValue:
          */
         if (!empty($val['optionValue'])) {
-            echo " " . $val['name'] . '  ->  not empty Option Value ' . PHP_EOL;
+//            echo " " . $val['name'] . '  ->  not empty Option Value ' . PHP_EOL;
             if (!empty($val['optionValue']['global'])) {
-                echo "  global" . PHP_EOL;
+//                echo "  global" . PHP_EOL;
 
                 /**
                  *  ali obstaja globalna opcija ?
@@ -107,7 +107,7 @@ class OptionsFixture
                     $optVal->addOption($o);
                     $em->persist($optVal);
                 }
-                echo "     opt val: " .
+//                echo "     opt val: " .
                 $val['optionValue']['global']['value'][0]['key'] . "  " .
                 $val['optionValue']['global']['value'][0]['value'] .
                 PHP_EOL;
@@ -120,7 +120,7 @@ class OptionsFixture
                 $optValueUserY = $val['optionValue']['user'];
                 foreach ($optValueUserY as $user) {
 
-                    echo "  user    " . $user['email'] . PHP_EOL;
+//                    echo "  user    " . $user['email'] . PHP_EOL;
 
                     // najprej preverim, če uporabniško ime že obstaja v entiteti User
                     $u        = $em->getRepository('Aaa\Entity\User')
@@ -138,7 +138,7 @@ class OptionsFixture
                         $optVal->addUser($u);
                         $em->persist($optVal);  // ali je lahko več persistov pred flush-em?
                     }
-                    echo "     opt val: " . $user['value'][0]['key'] . " " . $user['value'][0]['value'] . PHP_EOL;
+//                    echo "     opt val: " . $user['value'][0]['key'] . " " . $user['value'][0]['value'] . PHP_EOL;
                 }
             }
         }

@@ -101,6 +101,11 @@ class EnotaProgramaRpcService
 
         $em->flush();
 
+        /**
+         * tu so le sumarni rezultati za vse pogodbe v uprizoritvi, tako da ni osebnih podatkov
+         * in ni potrebno preverjanje OsebniPodatki-read dovoljenja
+         */
+        
         return $data;
     }
 

@@ -129,11 +129,11 @@ class RolesFixture
      */
     public function populateOptions($em, $val)
     {
-        $optR = $em->getRepository('App\Entity\Option');
-        $o    = $optR->findOneByName($val['name']);
-        $readOnly=(empty($val['readOnly']) ? false : $val['readOnly']);
+        $optR     = $em->getRepository('App\Entity\Option');
+        $o        = $optR->findOneByName($val['name']);
+        $readOnly = (empty($val['readOnly']) ? false : $val['readOnly']);
         if (!$o) {
-            $o   = new Option();
+            $o = new Option();
             $em->persist($o);
             $o->setName($val['name']);
         } else {
@@ -143,8 +143,8 @@ class RolesFixture
             if (!$readOnly)
                 return;
         }
-            
-        
+
+
         $o->setReadOnly($readOnly);
         $o->setType($val['type']);
         $o->setDescription($val['description']);
@@ -235,7 +235,11 @@ class RolesFixture
         if ($nov) {
             $rep->create($o);
         } else {
-            $rep->update($o);
+//            $rep->update($o);
+            /**
+             * za built in vloge ne moremo uporabiti update
+             */
+            $rep->validate($o, 'update');
         }
         return;
     }
@@ -261,7 +265,11 @@ class RolesFixture
         if ($nov) {
             $rep->create($o);
         } else {
-            $rep->update($o);
+//            $rep->update($o);
+            /**
+             * za built in dovoljenja ne moremo uporabiti update
+             */
+            $rep->validate($o, 'update');
         }
         return;
     }

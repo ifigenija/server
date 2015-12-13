@@ -67,6 +67,7 @@ class DogodekCest
     private $objZasedenost;
     private $objVaja1;
     private $objVaja2;
+    private $objVaja3;
     private $objGostovanje;
     private $objDogodekIzven;
     private $objDogodek1;
@@ -241,6 +242,34 @@ class DogodekCest
         $this->objVaja2 = $ent            = $I->successfullyCreate($this->vajaUrl, $data);
         $I->assertGuid($ent['id']);
         $this->obj2     = $dogodek        = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']);
+        $I->assertGuid($dogodek['id']);
+        
+        /**
+         * še eno vajo
+         */
+        $zacetekD       = new \DateTime();
+        $zacetekD->modify('+20 day');
+        $zacetek        = $zacetekD->format('c');
+        codecept_debug($zacetek);
+        $konecD         = clone $zacetekD;
+        $konecD->modify('+4 hours');
+        $konec          = $konecD->format('c');
+        $data           = [
+//            'tipvaje'     => $this->lookTipVaje1['id'],
+            'tipvaje'     => null,
+            'zaporedna'   => 3,
+            'porocilo'    => 'aa',
+            'uprizoritev' => $this->lookUprizoritev2['id'],
+            'title'       => "Vaja $zacetek",
+            'status'      => '500s',
+            'zacetek'     => $zacetek,
+            'konec'       => $konec,
+            'prostor'     => $this->lookProstor2['id'],
+            'sezona'      => $this->lookSezona1['id'],
+        ];
+        $this->objVaja3 = $ent            = $I->successfullyCreate($this->vajaUrl, $data);
+        $I->assertGuid($ent['id']);
+        $this->obj3     = $dogodek        = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']);
         $I->assertGuid($dogodek['id']);
     }
 
@@ -426,19 +455,29 @@ class DogodekCest
         $I->assertTrue($res);
     }
 
-//    /**
-//     * @depends create
-//     * @param ApiTester $I
-//     */
-//    public function getListVsePoProstoru(ApiTester $I)
-//    {
-//        $resp = $I->successfullyGetList($this->restUrl . "/vse?prostor=" . $this->lookProstor1['id'], []);
-//        $list = $resp['data'];
-//        codecept_debug($list);
-//        $totR = $resp['state']['totalRecords'];
-//        $I->assertEquals(1, $totR);
-//        $I->assertEquals($this->lookProstor1['id'], $list[0]['prostor']);      //glede na sort
-//    }
+    /**
+     * @depends createVajo
+     * @depends lookupProstor
+     * @param ApiTester $I
+     */
+    public function getListPoProstorih(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->restUrl . "?prostor[]=" . $this->lookProstor1['id']."&prostor[]=" . $this->lookProstor2['id'], []);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(3, $totR);
+    }
+    
+    /**
+     * @depends createVajo
+     * @depends lookupUprizoritev
+     * @param ApiTester $I
+     */
+    public function getListPoUprizoritvah(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->restUrl . "?uprizoritev[]=" . $this->lookUprizoritev2['id']."&uprizoritev[]=" . $this->lookUprizoritev1['id'], []);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(3, $totR);
+    }
 //
 //    /**
 //     * @depends create
@@ -622,7 +661,7 @@ class DogodekCest
         $list = $resp['data'];
         codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
-        $I->assertEquals(2, $totR, "brez parametrov");
+        $I->assertEquals(3, $totR, "brez parametrov");
 
         /**
          * od danes do čez 15 dni 
@@ -654,7 +693,7 @@ class DogodekCest
         $list    = $resp['data'];
         codecept_debug($list);
         $totRDEf = $totR    = $resp['state']['totalRecords'];
-        $I->assertEquals(2, $totR, "default default");
+        $I->assertEquals(3, $totR, "default default");
 
         /**
          *  status >=500s
@@ -664,7 +703,7 @@ class DogodekCest
         $list    = $resp['data'];
         codecept_debug($list);
         $totR500 = $totR    = $resp['state']['totalRecords'];
-        $I->assertEquals(1, $totR, "default default");
+        $I->assertEquals(2, $totR, "default default");
 
         /**
          * sedaj pogledamo vse v default obdobju
@@ -696,17 +735,23 @@ class DogodekCest
     {
         $statusvsi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
 
-        $resp = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "uprizoritev=" . $this->lookUprizoritev1['id'], []);
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "uprizoritev[]=" . $this->lookUprizoritev1['id'], []);
         $list = $resp['data'];
         codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
         $I->assertEquals(1, $totR);
 
-        $resp = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "uprizoritev=" . $this->lookUprizoritev2['id'], []);
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "uprizoritev[]=" . $this->lookUprizoritev2['id'], []);
         $list = $resp['data'];
         codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
-        $I->assertEquals(1, $totR);
+        $I->assertEquals(2, $totR);
+        
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "uprizoritev[]=", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(3, $totR);
     }
 
     /**

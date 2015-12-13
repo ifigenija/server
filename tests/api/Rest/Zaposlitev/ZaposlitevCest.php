@@ -31,6 +31,7 @@ class ZaposlitevCest
 {
 
     private $restUrl        = '/rest/zaposlitev';
+    private $lookupUrl      = '/lookup/zaposlitev';
     private $osebaUrl       = '/rest/oseba';
     private $alternacijaUrl = '/rest/alternacija';
     private $zaposlitevUrl  = '/rest/zaposlitev';
@@ -233,17 +234,15 @@ class ZaposlitevCest
          * uporabnik brez OsebniPodatki-write dovoljenja
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
-        $resp       = $I->failToCreate($this->restUrl, $dataOs);
+        $resp = $I->failToCreate($this->restUrl, $dataOs);
         codecept_debug($resp);
-        $I->assertEquals(1000008, $resp[0]['code']);
+        $I->assertEquals(1000009, $resp[0]['code']);
 
         /*
          * uporabnik z OsebniPodatki-write dovoljenjem
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
         $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl, $dataOs);
-        
-        $I->fail('$$ začasno');
     }
 
     /**
@@ -297,6 +296,21 @@ class ZaposlitevCest
         $I->assertNotEmpty($list);
 //        $I->assertEquals("00", $list[0]['sifra']);      // odvisno od sortiranja
 //        $I->assertEquals("99x", $list[$totRec - 1]['sifra']);      // odvisno od sortiranja
+
+
+        /*
+         * uporabnik brez OsebniPodatki-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->failToGetList($listUrl, []);
+        codecept_debug($resp);
+        $I->assertEquals(1001660, $resp[0]['code']);
+
+        /*
+         * uporabnik z OsebniPodatki-read dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
+        $resp = $I->successfullyGetList($listUrl, []);
     }
 
     /**
@@ -341,6 +355,28 @@ class ZaposlitevCest
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
         $I->assertEquals($entR['status'], 'A');
+
+        /**
+         * še preverjanja avtorizacij, posebnih dovoljenj
+         */
+        $entOs                 = $this->obj4;
+        $entOs['delovnoMesto'] = 'ZA ose';
+        codecept_debug($entOs);
+        $I->assertNotNull($entOs['oseba']);
+
+        /*
+         * uporabnik brez OsebniPodatki-write dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
+        $resp = $I->failToUpdate($this->restUrl, $entOs['id'], $entOs);
+        codecept_debug($resp);
+        $I->assertEquals(1000101, $resp[0]['code']);
+
+        /*
+         * uporabnik z OsebniPodatki-write dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
+        $ent = $I->successfullyUpdate($this->restUrl, $entOs['id'], $entOs);
     }
 
     /**
@@ -368,6 +404,27 @@ class ZaposlitevCest
         $I->assertEquals($ent['jeNastopajoci'], TRUE);
         $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
         $I->assertEquals($ent['organizacijskaEnota'], $this->objOrgEnota1['id']);
+
+
+        /**
+         * še preverjanja avtorizacij, posebnih dovoljenj
+         */
+        $entOs = $this->obj4;
+        $I->assertNotNull($entOs['oseba']);
+
+        /*
+         * uporabnik brez OsebniPodatki-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->failToGet($this->restUrl, $entOs['id']);
+        codecept_debug($resp);
+        $I->assertEquals(100099, $resp[0][0]['code']);
+
+        /*
+         * uporabnik z OsebniPodatki-read dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
+        $ent = $I->successfullyGet($this->restUrl, $entOs['id']);
     }
 
     /**
@@ -379,6 +436,27 @@ class ZaposlitevCest
     {
         $I->successfullyDelete($this->restUrl, $this->obj1['id']);
         $I->failToGet($this->restUrl, $this->obj1['id']);
+
+
+        /**
+         * še preverjanja avtorizacij, posebnih dovoljenj
+         */
+        $entOs = $this->obj4;
+        $I->assertNotNull($entOs['oseba']);
+
+        /*
+         * uporabnik brez OsebniPodatki-write dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
+        $resp = $I->failToDelete($this->restUrl, $entOs['id']);
+        codecept_debug($resp);
+        $I->assertEquals(100201, $resp[0]['code']);
+
+        /*
+         * uporabnik z OsebniPodatki-write dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vihra, \IfiTest\AuthPage::$vihraPass);
+        $ent = $I->successfullyDelete($this->restUrl, $entOs['id']);
     }
 
     /**
@@ -397,34 +475,56 @@ class ZaposlitevCest
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "alternacije", $this->objAlternacija1['id']);
         codecept_debug($resp);
         $I->assertEquals(1, count($resp));
+
+        /**
+         * še preverjanje posebnih dovoljenj
+         */
+        /*
+         * uporabnik brez OsebniPodatki-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->failToGetRelation($this->restUrl, $this->obj2['id'], "alternacije", "");
+        codecept_debug($resp);
+        $I->assertEquals(100699, $resp[0][0]['code']);
+
+        /*
+         * uporabnik z OsebniPodatki-read dovoljenjem
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$cene, \IfiTest\AuthPage::$cenePass);
+        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "alternacije", $this->objAlternacija1['id']);
     }
 
     /**
-     *  testiram #1172 - zakaj zapis une uspe?
-     * 
-     * @depends lookupOsebo
      * 
      * @param ApiTester $I
      */
-//    public function createNaVse(ApiTester $I)
-//    {
-//        $data      = [
-//            'status'              => 'vv',
-//            'zacetek'             => '2010-02-01T00:00:00+0100',
-//            'konec'               => '2010-02-01T00:00:00+0100',
-//            'tip'                 => 1,
-//            'delovnaObveza'       => 2,
-//            'malica'              => 'vv',
-//            'izmenskoDelo'        => true,
-//            'individualnaPogodba' => true,
-//            'jeZaposlenVdrugemJz' => TRUE,
-//            'jeNastopajoci'       => TRUE,
-//            'oseba'               => $this->lookOseba1['id'],
-//        ];
-//        $ent       = $I->successfullyCreate($this->restUrl."/vse", $data);
-//        $I->assertNotEmpty($ent['id']);
-//        codecept_debug($ent);
-//        $I->assertEquals($ent['status'], 'A');
-//        
-//    }
+    public function lookup(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->lookupUrl, []);
+        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
+        $I->assertTrue(array_key_exists('data', $resp), "ima data");
+        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
+
+
+        /**
+         * še preverjanja avtorizacij, posebnih dovoljenj
+         */
+        /*
+         * uporabnik brez Zaposlitev-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$breznik, \IfiTest\AuthPage::$breznikPass);
+        $resp = $I->failToGetList($this->lookupUrl, []);
+        codecept_debug($resp);
+        $I->assertEquals(1000632, $resp[0]['code']);
+
+        /*
+         * 
+         * uporabnik z Zaposlitev-read dovoljenjem
+         * uporabnik brez OsebniPodatki-read dovoljenja
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$rudi, \IfiTest\AuthPage::$rudiPass);
+        $resp = $I->successfullyGetList($this->lookupUrl, []);
+    }
+
 }

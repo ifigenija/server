@@ -324,3 +324,33 @@
     permissions: 
         - Zaposlitev-write
        
+- 
+    name: Pogodba-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Pogodba-read
+- 
+    name: Pogodba-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Pogodba-write
+- 
+    name: StrosekUprizoritve-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - StrosekUprizoritve-read
+- 
+    name: StrosekUprizoritve-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - StrosekUprizoritve-write
+- 
+    name: Alternacija-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Alternacija-read
+- 
+    name: Alternacija-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Alternacija-write

@@ -121,17 +121,21 @@ class Dogodki
          //   $qb->setParameter('statusi', , 'array');
         }
         if (!empty($options['prostor'])) {
+            $this->expect(is_array($options['prostor']), "Parameter prostor mora biti array idjev", 1000581);
             $qb->join('p.prostor', 'prostor');
-            $naz = $e->eq('prostor.id', ':pros');
+            $naz = $e->in('prostor.id', $options['prostor']);
             $qb->andWhere($naz);
-            $qb->setParameter('pros', $options['prostor'], "string");
         }
         if (!empty($options['uprizoritev'])) {
+            $this->expect(is_array($options['uprizoritev']), "Parameter uprizoritev mora biti array idjev", 1000581);
             $qb->leftJoin('p.vaja', 'vaja');
             $qb->leftJoin('p.predstava', 'predstava');
-            $pvup = $e->orx($e->eq('predstava.uprizoritev', ':uprizoritev'), $e->eq('vaja.uprizoritev', ':uprizoritev'));
-            $qb->andWhere($pvup);
-            $qb->setParameter('uprizoritev', $options['uprizoritev'], "string");
+            
+            $pu = $e->in('vaja.uprizoritev', $options['uprizoritev']);
+            $vu = $e->in('predstava.uprizoritev', $options['uprizoritev']);
+            
+            $qb->andWhere($e->orX($pu, $vu));
+            //$qb->setParameter('uprizoritev', $options['uprizoritev'], "string");
         }
         return $qb;
     }

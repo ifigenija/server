@@ -53,7 +53,6 @@ class AssertTerminStoritve
             return true;
         }
 
-        $ret  = false;     // init
         $em   = $this->getServiceLocator()->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         // najprej najdemo uprizoritev od termina storitve, če le-ta obstaja
 //        $uprizoritevId=""; //$$
@@ -131,11 +130,11 @@ class AssertTerminStoritve
             $cntT   = $queryT->getSingleScalarResult();
             if ($cntT >= 1) {             //vodja tehnične ekipe
                 if ($fpodrocje == 'tehnik') {     //lahko le za svojo ekipo
-                    $ret = true;
+                    return true;
                 }
             }
         }
-        return $ret;
+        return false;
     }
 
 }
