@@ -160,18 +160,24 @@ class Alternacije
         $this->preveriZaposlitev($object);
         $this->nastaviEnPrivzeti($object->getFunkcija());
 
+        // posodobim štetje alternacij
+        $object->getFunkcija()->setAlterCount($object->getFunkcija()->getAlternacije()->count());
+
         parent::create($object, $params);
     }
 
     /**
      * 
      * Preverim če je oseba zaposlena, potem alternacijo nastavim kot zaposlitev 
-     * 
+     * @param Alternacija $object
      */
     public function update($object, $params = null)
     {
         $object->preracunaj();
         $this->nastaviEnPrivzeti($object->getFunkcija());
+
+        // posodobim štetje alternacij
+        $object->getFunkcija()->setAlterCount($object->getFunkcija()->getAlternacije()->count());
 
         parent::update($object, $params);
     }
@@ -214,6 +220,9 @@ class Alternacije
             $object->getFunkcija()->getAlternacije()->removeElement($object);
         }
         $this->nastaviEnPrivzeti($object->getFunkcija());
+        // posodobim štetje alternacij
+        $object->getFunkcija()->setAlterCount($object->getFunkcija()->getAlternacije()->count());
+
         parent::delete($object);
     }
 

@@ -15,11 +15,13 @@ return [
         'invokables' => [
             'praznik.rpc.service' => 'Koledar\Rpc\PraznikRpcService',
             'praznik.service'     => 'Koledar\Service\PraznikService',
+            'vzporednice.service' => 'Koledar\Service\VzporedniceService',
         ],
     ],
     'controllers'     => [
         'invokables' => [
-            'Rpc\koledar' => 'Koledar\Controller\RpcController',
+            'Rpc\koledar'            => 'Koledar\Controller\RpcController',
+            'Koledar\Cli' => 'Koledar\Controller\CliController',
         ],
         'factories'  => [
             'Rest\dogodek'         => 'Max\Factory\RestControllerFactory',
@@ -41,11 +43,32 @@ return [
     ],
     'router'          => [
         'routes' => [
+
         ],
     ],
     'console'         => [
         'router' => [
             'routes' => [
+                'prekrivanje' => [
+                    'options' => [
+                        'route'    => 'prekrivanje <stevilka>',
+                        'defaults' => [
+                            'controller' => 'Koledar\Cli',
+                            'action'     => 'prekrivanje'
+                        ]
+                    ],
+
+                ],
+                'vzporednice' => [
+                    'options' => [
+                        'route'    => 'vzporednice <stevilka> [<stevx>]',
+                        'defaults' => [
+                            'controller' => 'Koledar\Cli',
+                            'action'     => 'vzporednice'
+                        ]
+                    ]
+
+                ],
             ]
         ]
     ],
@@ -56,7 +79,7 @@ return [
     'zfc_rbac'        => [
         'assertion_manager' => [
             "invokables" => [
-                "chck-dogodek" => "Koledar\Assertion\AssertDogodek",
+                "chck-dogodek" => 'Koledar\Assertion\AssertDogodek',
             ],
         ],
         "assertion_map"     => [
