@@ -194,4 +194,5 @@ class TipVajeCest
         $I->failToGet($this->restUrl, $this->obj1['id']);
     }
 
+    
 }

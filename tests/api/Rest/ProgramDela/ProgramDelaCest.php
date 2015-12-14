@@ -2321,6 +2321,10 @@ class ProgramDelaCest
         $I->assertEquals($oldPD['stIzvPonPrejKopr'], $entR['stIzvPonPrejKopr'], "stIzvPonPrejKopr");
         $I->assertEquals($oldPD['stIzvPonPrejKoprInt'], $entR['stIzvPonPrejKoprInt'], "stIzvPonPrejKoprInt");
         $I->assertEquals($oldPD['stIzvPonPrejInt'], $entR['stIzvPonPrejInt'], "stIzvPonPrejInt");
+        $I->assertEquals($oldPD['stIzvPonPremKoprZamejo'], $entR['stIzvPonPremKoprZamejo'], "stIzvPonPremKoprZamejo");
+        $I->assertEquals($oldPD['stIzvPonPremKoprGost'], $entR['stIzvPonPremKoprGost'], "stIzvPonPremKoprGost");
+        $I->assertEquals($oldPD['stIzvPonPrejKoprZamejo'], $entR['stIzvPonPrejKoprZamejo'], "stIzvPonPrejKoprZamejo");
+        $I->assertEquals($oldPD['stIzvPonPrejKoprGost'], $entR['stIzvPonPrejKoprGost'], "stIzvPonPrejKoprGost");
         $I->assertEquals($oldPD['stIzvGostuj'], $entR['stIzvGostuj'], "št. izvedb gostujočih");
         $I->assertEquals($oldPD['stIzvOstalihNek'], $entR['stIzvOstalihNek'], "št. izvedb ostalih nekom");
         $I->assertEquals($oldPD['stIzvGostovanjSlo'], $entR['stIzvGostovanjSlo'], "");
@@ -2371,6 +2375,16 @@ class ProgramDelaCest
         $I->assertEquals($oldPD['stKoprodukcij'], $entR['stKoprodukcij'], "");
         $I->assertEquals($oldPD['stKoprodukcijInt'], $entR['stKoprodukcijInt'], "število mednarodnih koprodukcij");
         $I->assertEquals($oldPD['stKoprodukcijNVO'], $entR['stKoprodukcijNVO'], "");
+        $I->assertEquals($oldPD['stIzvPonPrejKoprGost'], $entR['stIzvPonPrejKoprGost'], "stIzvPonPrejKoprGost");
+        $I->assertEquals($oldPD['stIzvPonPrejKoprZamejo'], $entR['stIzvPonPrejKoprZamejo'], "stIzvPonPrejKoprZamejo");
+        $I->assertEquals($oldPD['stIzvPonPremKoprGost'], $entR['stIzvPonPremKoprGost'], "stIzvPonPremKoprGost");
+        $I->assertEquals($oldPD['stIzvPonPremKoprZamejo'], $entR['stIzvPonPremKoprZamejo'], "stIzvPonPremKoprZamejo");
+        $I->assertEquals($oldPD['stObiskPonPrejGostKopr'], $entR['stObiskPonPrejGostKopr'], "stObiskPonPrejGostKopr");
+        $I->assertEquals($oldPD['stObiskPonPrejKopr'], $entR['stObiskPonPrejKopr'], "stObiskPonPrejKopr");
+        $I->assertEquals($oldPD['stObiskPonPrejKoprInt'], $entR['stObiskPonPrejKoprInt'], "stObiskPonPrejKoprInt");
+        $I->assertEquals($oldPD['stObiskPonPrejZamejoKopr'], $entR['stObiskPonPrejZamejoKopr'], "stObiskPonPrejZamejoKopr");
+        $I->assertEquals($oldPD['stObiskPonPremGostKopr'], $entR['stObiskPonPremGostKopr'], "stObiskPonPremGostKopr");
+        $I->assertEquals($oldPD['stObiskPonPremZamejoKopr'], $entR['stObiskPonPremZamejoKopr'], "stObiskPonPremZamejoKopr");
     }
 
     /**

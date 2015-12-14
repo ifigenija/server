@@ -14,8 +14,7 @@ use Doctrine\ORM\Mapping as ORM,
  * @Max\Lookup
  */
 class Drzava
-               extends \Max\Entity\Base
-
+        extends \Max\Entity\Base
 {
 
     /**
@@ -81,10 +80,11 @@ class Drzava
      */
     protected $opomba;
 
-     public function validate($mode = 'update')
+    public function validate($mode = 'update')
     {
+        
     }
-    
+
     public function getId()
     {
         return $this->id;

@@ -4,13 +4,19 @@ $stVsehPredstav             = $model->getStIzvPrem() +
         $model->getStIzvPonPrem() +
         $model->getStIzvPonPrej();
 $stVsehPredstavSKopr        = $model->getStIzvPrem() +
+        $model->getStIzvPremKopr() +
         $model->getStIzvPonPrem() +
         $model->getStIzvPonPrej() +
         $model->getStIzvPonPremKopr() +
+        $model->getStIzvPonPremKoprZamejo() +
+        $model->getStIzvPonPremKoprGost() +
+        $model->getStIzvPonPrejKoprZamejo() +
+        $model->getStIzvPonPrejKoprGost() +
         $model->getStIzvPonPremKoprInt() +
         $model->getStIzvPonPrejKopr() +
         $model->getStIzvPonPrejKoprInt();
 $stObiskSKopr               = $model->getStObiskNekom() +
+        $model->getStObiskPremKopr() +
         $model->getStObiskPonPremKopr() +
         $model->getStObiskPonPremGostKopr() +
         $model->getStObiskPonPremZamejoKopr() +
@@ -180,7 +186,7 @@ if (method_exists($model, 'getJezik')) {
                     <td class="right-align"><?= number_format($stVsehPredstav, 2, ',', '.') ?></td>
                 </tr>
                 <tr>
-                    <td>Število vseh predstav (izv. premier in ponovitev,vključno s koproducenti)</td>
+                    <td>Število vseh predstav (izv. premier in ponovitev, vključno s koproducenti)</td>
                     <td class="right-align"><?= number_format($stVsehPredstavSKopr, 2, ',', '.') ?></td>
                 </tr>
                 <tr>

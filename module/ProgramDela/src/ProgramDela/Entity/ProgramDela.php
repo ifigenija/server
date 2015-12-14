@@ -381,10 +381,24 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="programDela.stIzvPonPremKoprZamejo", description="programDela.d.stIzvPonPremKoprZamejo")
+     * @var double
+     */
+    protected $stIzvPonPremKoprZamejo;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="programDela.stIzvPonPremGost", description="programDela.d.stIzvPonPremGost")
      * @var double
      */
     protected $stIzvPonPremGost;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="programDela.stIzvPonPremKoprGost", description="programDela.d.stIzvPonPremKoprGost")
+     * @var double
+     */
+    protected $stIzvPonPremKoprGost;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -434,10 +448,24 @@ class ProgramDela
 
     /**
      * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="programDela.stIzvPonPrejKoprZamejo", description="programDela.d.stIzvPonPrejKoprZamejo")
+     * @var double
+     */
+    protected $stIzvPonPrejKoprZamejo;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
      * @Max\I18n(label="programDela.stIzvPonPrejGost", description="programDela.d.stIzvPonPrejGost")
      * @var double
      */
     protected $stIzvPonPrejGost;
+
+    /**
+     * @ORM\Column(type="decimal", nullable=true, precision=15, scale=2, options={"default":0})
+     * @Max\I18n(label="programDela.stIzvPonPrejKoprGost", description="programDela.d.stIzvPonPrejKoprGost")
+     * @var double
+     */
+    protected $stIzvPonPrejKoprGost;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -1259,14 +1287,18 @@ class ProgramDela
         $this->stIzvPonPrem                    = 0;
         $this->stIzvPonPremDoma                = 0;
         $this->stIzvPonPremZamejo              = 0;
+        $this->stIzvPonPremKoprZamejo          = 0;
         $this->stIzvPonPremGost                = 0;
+        $this->stIzvPonPremKoprGost            = 0;
         $this->stIzvPonPremKopr                = 0;
         $this->stIzvPonPremInt                 = 0;
         $this->stIzvPonPremKoprInt             = 0;
         $this->stIzvPonPrej                    = 0;
         $this->stIzvPonPrejDoma                = 0;
+        $this->stIzvPonPrejKoprZamejo          = 0;
         $this->stIzvPonPrejZamejo              = 0;
         $this->stIzvPonPrejGost                = 0;
+        $this->stIzvPonPrejKoprGost            = 0;
         $this->stIzvPonPrejKopr                = 0;
         $this->stIzvPonPrejInt                 = 0;
         $this->stIzvPonPrejKoprInt             = 0;
@@ -1448,7 +1480,9 @@ class ProgramDela
             $this->stIzvPonPrem+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
             $this->stIzvPonPremDoma+=$object->getPonoviDoma();
             $this->stIzvPonPremZamejo+=$object->getPonoviZamejo();
+            $this->stIzvPonPremKoprZamejo+=$object->getPonoviKoprZamejo();
             $this->stIzvPonPremGost+=$object->getPonoviGost();
+            $this->stIzvPonPremKoprGost+=$object->getPonoviKoprGost();
             $this->stIzvPonPremKopr += $object->getPonoviKopr();
             $this->stIzvGostovanjSlo +=$object->getPonoviGost();
             $this->stIzvGostovanjZam +=$object->getPonoviZamejo();
@@ -1498,7 +1532,9 @@ class ProgramDela
             $this->stIzvPonPrej+=$object->getPonoviDoma() + $object->getPonoviZamejo() + $object->getPonoviGost();      //$$ ali prištevvamo tudi mednarodne?
             $this->stIzvPonPrejDoma+=$object->getPonoviDoma();
             $this->stIzvPonPrejZamejo+=$object->getPonoviZamejo();
+            $this->stIzvPonPrejKoprZamejo+=$object->getPonoviKoprZamejo();
             $this->stIzvPonPrejGost+=$object->getPonoviGost();
+            $this->stIzvPonPrejKoprGost+=$object->getPonoviKoprGost();
             $this->stIzvPonPrejKopr += $object->getPonoviKopr();
             $this->stIzvGostovanjSlo +=$object->getPonoviGost();
             $this->stIzvGostovanjZam +=$object->getPonoviZamejo();
@@ -3337,6 +3373,50 @@ class ProgramDela
     function setStObiskPonPrejZamejoKopr($stObiskPonPrejZamejoKopr)
     {
         $this->stObiskPonPrejZamejoKopr = $stObiskPonPrejZamejoKopr;
+        return $this;
+    }
+
+    function getStIzvPonPremKoprZamejo()
+    {
+        return $this->stIzvPonPremKoprZamejo;
+    }
+
+    function getStIzvPonPremKoprGost()
+    {
+        return $this->stIzvPonPremKoprGost;
+    }
+
+    function getStIzvPonPrejKoprZamejo()
+    {
+        return $this->stIzvPonPrejKoprZamejo;
+    }
+
+    function getStIzvPonPrejKoprGost()
+    {
+        return $this->stIzvPonPrejKoprGost;
+    }
+
+    function setStIzvPonPremKoprZamejo($stIzvPonPremKoprZamejo)
+    {
+        $this->stIzvPonPremKoprZamejo = $stIzvPonPremKoprZamejo;
+        return $this;
+    }
+
+    function setStIzvPonPremKoprGost($stIzvPonPremKoprGost)
+    {
+        $this->stIzvPonPremKoprGost = $stIzvPonPremKoprGost;
+        return $this;
+    }
+
+    function setStIzvPonPrejKoprZamejo($stIzvPonPrejKoprZamejo)
+    {
+        $this->stIzvPonPrejKoprZamejo = $stIzvPonPrejKoprZamejo;
+        return $this;
+    }
+
+    function setStIzvPonPrejKoprGost($stIzvPonPrejKoprGost)
+    {
+        $this->stIzvPonPrejKoprGost = $stIzvPonPrejKoprGost;
         return $this;
     }
 
