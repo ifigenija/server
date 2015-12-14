@@ -1767,10 +1767,12 @@ class ProgramDelaCest
     public function updateZaPreracunKazalnikov(ApiTester $I)
     {
 
-        $ent  = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         codecept_debug($ent);
-//        $I->assertTrue(false,"začasno $$");
-        // pri update preračuna kazalnike
+
+        /*
+         *  pri update preračuna kazalnike
+         */
         $entR = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         codecept_debug($entR);
 
@@ -2150,8 +2152,6 @@ class ProgramDelaCest
         // ali se je vrednost popravila nazaj v EP?
         $pd  = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         $I->assertEquals($oldStPremier - 1, $pd['stPremier']);
-
-//        Še zbrišemo en festival $$
     }
 
     /**

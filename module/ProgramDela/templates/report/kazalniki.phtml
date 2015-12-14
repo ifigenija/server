@@ -1,10 +1,24 @@
 <?php
 // seštevki
-$stVsehPredstav = $model->getStIzvPrem() +
+$stVsehPredstav             = $model->getStIzvPrem() +
+        $model->getStIzvPonPrem() +
+        $model->getStIzvPonPrej();
+$stVsehPredstavSKopr        = $model->getStIzvPrem() +
         $model->getStIzvPonPrem() +
         $model->getStIzvPonPrej() +
-        $model->getStIzvGostovanjInt();
-
+        $model->getStIzvPonPremKopr() +
+        $model->getStIzvPonPremKoprInt() +
+        $model->getStIzvPonPrejKopr() +
+        $model->getStIzvPonPrejKoprInt();
+$stObiskSKopr               = $model->getStObiskNekom() +
+        $model->getStObiskPonPremKopr() +
+        $model->getStObiskPonPremGostKopr() +
+        $model->getStObiskPonPremZamejoKopr() +
+        $model->getStObiskPonPremKoprInt() +
+        $model->getStObiskPonPrejKopr() +
+        $model->getStObiskPonPrejGostKopr() +
+        $model->getStObiskPonPrejZamejoKopr() +
+        $model->getStObiskPonPrejKoprInt();
 $premiereSredstva           = $model->getSredstvaZaprosenoPrem() +
         $model->getSredstvaDrugiJavniPrem() +
         $model->getSredstvaLastnaPrem() +
@@ -166,8 +180,16 @@ if (method_exists($model, 'getJezik')) {
                     <td class="right-align"><?= number_format($stVsehPredstav, 2, ',', '.') ?></td>
                 </tr>
                 <tr>
+                    <td>Število vseh predstav (izv. premier in ponovitev,vključno s koproducenti)</td>
+                    <td class="right-align"><?= number_format($stVsehPredstavSKopr, 2, ',', '.') ?></td>
+                </tr>
+                <tr>
                     <td>Število obiskovalcev vseh nekomercialnih prireditev</td>
                     <td class="right-align"><?= number_format($model->getStObiskNekom(), 2, ',', '.') ?></td>
+                </tr>
+                <tr>
+                    <td>Število obiskovalcev vseh nekomercialnih prireditev (vključno s koproducenti)</td>
+                    <td class="right-align"><?= number_format($stObiskSKopr, 2, ',', '.') ?></td>
                 </tr>
                 <tr>
                     <td>Število prodanih vstopnic</td>
