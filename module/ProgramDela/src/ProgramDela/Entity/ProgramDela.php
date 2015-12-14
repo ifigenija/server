@@ -609,7 +609,7 @@ class ProgramDela
     protected $stObiskPonPremDoma;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stObiskPonPrejKopr", description="programDela.d.stObiskPonPrejKopr")
      * @Max\Ui(type="integer")
      * @var integer
@@ -617,7 +617,7 @@ class ProgramDela
     protected $stObiskPonPrejKopr;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stObiskPonPrejKoprInt", description="programDela.d.stObiskPonPrejKoprInt")
      * @Max\Ui(type="integer")
      * @var integer
@@ -649,7 +649,7 @@ class ProgramDela
     protected $stObiskPonPremGost;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stObiskPonPremGostKopr", description="programDela.d.stObiskPonPremGostKopr")
      * @Max\Ui(type="integer")
      * @var integer
@@ -657,7 +657,7 @@ class ProgramDela
     protected $stObiskPonPremGostKopr;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stObiskPonPrejGostKopr", description="programDela.d.stObiskPonPrejGostKopr")
      * @Max\Ui(type="integer")
      * @var integer
@@ -675,7 +675,7 @@ class ProgramDela
     /**
      * delež ostalih koprocudentov
      * 
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stObiskPonPremZamejoKopr", description="programDela.d.stObiskPonPremZamejoKopr")
      * @Max\Ui(type="integer")
      * @var integer
@@ -685,7 +685,7 @@ class ProgramDela
     /**
      * delež ostalih koprocudentov
      * 
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, options={"default":0})
      * @Max\I18n(label="programDela.stObiskPonPrejZamejoKopr", description="programDela.d.stObiskPonPrejZamejoKopr")
      * @Max\Ui(type="integer")
      * @var integer
