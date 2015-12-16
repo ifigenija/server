@@ -44,6 +44,8 @@ forms:
                   label: Sezona
                   required: false
         hydrator:
+            byValue:
+                - dogodek
             virtual:
                 - name: zacetek
                   type: datetime
