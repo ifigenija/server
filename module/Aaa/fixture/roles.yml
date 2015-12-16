@@ -190,7 +190,7 @@
         - AvtorBesedila-write
         - Besedilo-write
         - Datoteka-write
-#        - Oseba-write
+        - Oseba-write
         - Zapis-write
         - ZapisLastnik-write
         - AvtorBesedila-read
@@ -208,7 +208,7 @@
         - Datoteka-read
         - Zapis-read
         - ZapisLastnik-read
-#        - Oseba-read
+        - Oseba-read
 - 
     name: mn-seznami-zaposleni
     description: omogoča akcije v meniju Seznami->Zaposleni
@@ -234,11 +234,6 @@
     permissions: 
         - Oseba-write
         - Oseba-read
-        - Drzava-read
-        - PostniNaslov-read
-        - PostniNaslov-write
-        - Telefonska-read
-        - Telefonska-write
         - Datoteka-read
         - Datoteka-write
         - ZapisLastnik-read
@@ -250,9 +245,6 @@
     description: omogoča read akcije v meniju Seznami->Osebe->Splošno
     permissions: 
         - Oseba-read
-        - Drzava-read
-        - PostniNaslov-read
-        - Telefonska-read
         - Datoteka-read
         - ZapisLastnik-read
         - Zapis-read
@@ -266,6 +258,11 @@
         - OsebniPodatki-write
         - Trr-read
         - Trr-write
+        - PostniNaslov-read
+        - PostniNaslov-write
+        - Telefonska-read
+        - Telefonska-write
+        - Drzava-read
         - Zapis-read
 - 
     name: mn-seznami-osebe-osebnipodatki-r
@@ -274,6 +271,9 @@
         - Oseba-read
         - OsebniPodatki-read
         - Trr-read
+        - PostniNaslov-read
+        - Telefonska-read
+        - Drzava-read
         - Zapis-read
 - 
     name: mn-seznami-poslovnipartnerji
@@ -300,8 +300,6 @@
         - ProdukcijskaHisa-write
         - Drzava-read
         - TipPopa-read
-
-       
 - 
     name: mn-seznami-poslovnipartnerji-r
     description: omogoča read akcije v meniju Seznami->Poslovni partnerji
@@ -318,7 +316,6 @@
         - ProdukcijskaHisa-read
         - Drzava-read
         - TipPopa-read
-       
 - 
     name: mn-seznami-tipiposlovnihpartnerjev
     description: omogoča akcije v meniju Seznami->Tipi poslovnih partnerjev
@@ -347,7 +344,6 @@
     permissions: 
         - Drzava-read
         - Drzava-write
-
 - 
     name: mn-seznami-drzave-r
     description: omogoča read akcije v meniju Seznami->Države
@@ -359,7 +355,6 @@
     permissions: 
         - ZvrstUprizoritve-read
         - ZvrstUprizoritve-write
-
 - 
     name: mn-seznami-vrsteuprizoritev-r
     description: omogoča read akcije v meniju Seznami->Vrste uprizoritev
@@ -371,7 +366,6 @@
     permissions: 
         - ZvrstSurs-read
         - ZvrstSurs-write
-
 - 
     name: mn-seznami-zvrstiposurs-r
     description: omogoča read akcije v meniju Seznami->Zvrsti po SURS
@@ -383,7 +377,6 @@
     permissions: 
         - Abonma-read
         - Abonma-write
-
 - 
     name: mn-seznami-abonmaji-r
     description: omogoča read akcije v meniju Seznami->Abonmaji
@@ -430,7 +423,6 @@
         - Zapis-read
         - ZapisLastnik-write
         - ZapisLastnik-read
-        
 - 
     name: mn-seznami-organizacijskeenote-r
     description: omogoča read akcije v meniju Seznami->Organizacijske enote
@@ -505,7 +497,6 @@
         - Datoteka-read
         - Zapis-read
         - ZapisLastnik-read
-
 -
     name: mn-programdela-r
     description: omogoča read akcije v meniju Program dela
@@ -529,7 +520,6 @@
         - Datoteka-read
         - Zapis-read
         - ZapisLastnik-read
-    
 -
     name: mn-produkcija-uprizoritve
     description: omogoča akcije v meniju Produkcija->Uprizoritve
@@ -550,7 +540,6 @@
         - Zapis-write
         - ZapisLastnik-read
         - ZapisLastnik-write
-
 -
     name: mn-produkcija-uprizoritve-r
     description: omogoča read akcije v meniju Produkcija->Uprizoritve
@@ -566,6 +555,18 @@
         - Zapis-read
         - Zapis-write
         - ZapisLastnik-read
+-
+    name: mn-produkcija-uprizoritve-ostali
+    description: omogoča akcije v meniju Produkcija->Uprizoritve->Ostali sodelujoči
+    permissions: 
+        - Alternacija-read
+        - Alternacija-write
+        - Funkcija-read
+        - Funkcija-write
+        - Oseba-read
+        - TipFunkcije-read
+        - Uprizoritev-read
+        - Zapis-read
 -
     name: mn-produkcija-stroskovnik
     description: omogoča akcije v meniju Produkcija->Stroškovnik
@@ -628,9 +629,84 @@
         - StrosekUprizoritve-read
         - Uprizoritev-read
 #        - Popa-read
-
 -
-    name: arhivar
+    name: direktor
+    description: minimalne pravice za direktorja
+    permissions: 
+        - Abonma-read
+        - Alternacija-read
+        - Alternacija-write
+        - AvtorBesedila-read
+        - AvtorBesedila-write
+        - Besedilo-read
+        - Besedilo-write
+        - Datoteka-read
+        - Datoteka-write
+        - DrugiVir-read
+        - DrugiVir-write
+        - Drzava-read
+        - Funkcija-read
+        - Funkcija-write
+        - Job-read
+        - Job-write
+        - KontaktnaOseba-read
+        - OrganizacijskaEnota-read
+        - Oseba-read
+        - Oseba-write
+        - OsebniPodatki-read
+        - OsebniPodatki-write
+        - Pogodba-read
+        - Pogodba-write
+        - Popa-read
+        - Posta-read
+        - PostavkaCDve-read
+        - PostavkaCDve-write
+        - PostniNaslov-read
+        - ProdukcijaDelitev-read
+        - ProdukcijaDelitev-write
+        - ProdukcijskaHisa-read
+        - ProgramDela-lock
+        - ProgramDela-read
+        - ProgramDela-unlock
+        - ProgramDela-write
+        - ProgramFestival-read
+        - ProgramFestival-write
+        - ProgramGostovanje-read
+        - ProgramGostovanje-write
+        - ProgramGostujoca-read
+        - ProgramGostujoca-write
+        - ProgramIzjemni-read
+        - ProgramIzjemni-write
+        - ProgramPonovitevPrejsnjih-read
+        - ProgramPonovitevPrejsnjih-write
+        - ProgramPonovitevPremiere-read
+        - ProgramPonovitevPremiere-write
+        - ProgramPremiera-read
+        - ProgramPremiera-write
+        - ProgramRazno-read
+        - ProgramRazno-write
+        - ProgramskaEnotaSklopa-read
+        - ProgramskaEnotaSklopa-write
+        - Prostor-read
+        - StrosekUprizoritve-read
+        - StrosekUprizoritve-write
+        - Telefonska-read
+        - TipFunkcije-read
+        - TipPopa-read
+        - TipVaje-read
+        - Trr-read
+        - Uprizoritev-read
+        - Uprizoritev-write
+        - VrstaStroska-read
+        - ZapisLastnik-read
+        - ZapisLastnik-write
+        - Zapis-read
+        - Zapis-write
+        - Zaposlitev-read
+        - ZvrstSurs-read
+        - ZvrstUprizoritve-read
+-
+    name: arhivar	
     description: arhivar
     permissions: 
         - Abonma-read
@@ -647,14 +723,13 @@
         - OrganizacijskaEnota-read
         - Oseba-read
         - Oseba-write
+        - OsebniPodatki-read
         - Popa-read
         - Posta-read
         - PostniNaslov-read
-        - PostniNaslov-write
         - ProdukcijskaHisa-read
         - Prostor-read
         - Telefonska-read
-        - Telefonska-write
         - TipFunkcije-read
         - TipPopa-read
         - TipVaje-read
@@ -668,3 +743,293 @@
         - Zaposlitev-read
         - ZvrstSurs-read
         - ZvrstUprizoritve-read
+-
+    name: dramaturg	
+    description: dramaturg
+    permissions: 
+        - Abonma-read
+        - Alternacija-read
+        - Alternacija-write
+        - AvtorBesedila-read
+        - AvtorBesedila-write
+        - Besedilo-read
+        - Besedilo-write
+        - Datoteka-read
+        - Datoteka-write
+        - Drzava-read
+        - Funkcija-read
+        - Funkcija-write
+        - KontaktnaOseba-read
+        - OrganizacijskaEnota-read
+        - Oseba-read
+        - Oseba-write
+        - OsebniPodatki-read
+        - Popa-read
+        - Posta-read
+        - PostniNaslov-read
+        - ProdukcijskaHisa-read
+        - Prostor-read
+        - Telefonska-read
+        - TipFunkcije-read
+        - TipPopa-read
+        - TipVaje-read
+        - Trr-read
+        - Uprizoritev-read
+        - Uprizoritev-write
+        - VrstaStroska-read
+        - ZapisLastnik-read
+        - ZapisLastnik-write
+        - Zapis-read
+        - Zapis-write
+        - Zaposlitev-read
+        - ZvrstSurs-read
+        - ZvrstUprizoritve-read
+-
+    name: pripravljalec-programa-dela	
+    description: pripravljalec programa dela
+    permissions: 
+        - Alternacija-read
+        - Alternacija-write
+        - AvtorBesedila-read
+        - AvtorBesedila-write
+        - Besedilo-read
+        - Besedilo-write
+        - Datoteka-read
+        - Datoteka-write
+        - DrugiVir-read
+        - DrugiVir-write
+        - Drzava-read
+        - Funkcija-read
+        - Funkcija-write
+        - Job-read
+        - Job-write
+        - KontaktnaOseba-read
+        - KontaktnaOseba-write
+        - OrganizacijskaEnota-read
+        - Oseba-read
+        - Oseba-write
+        - OsebniPodatki-read
+        - OsebniPodatki-write
+        - Pogodba-read
+        - Pogodba-write
+        - Popa-read
+        - Popa-write
+        - Posta-read
+        - PostavkaCDve-read
+        - PostavkaCDve-write
+        - PostniNaslov-read
+        - PostniNaslov-write
+        - ProdukcijaDelitev-read
+        - ProdukcijaDelitev-write
+        - ProdukcijskaHisa-read
+        - ProdukcijskaHisa-write
+        - ProgramDela-lock
+        - ProgramDela-read
+        - ProgramDela-unlock
+        - ProgramDela-write
+        - ProgramFestival-read
+        - ProgramFestival-write
+        - ProgramGostovanje-read
+        - ProgramGostovanje-write
+        - ProgramGostujoca-read
+        - ProgramGostujoca-write
+        - ProgramIzjemni-read
+        - ProgramIzjemni-write
+        - ProgramPonovitevPrejsnjih-read
+        - ProgramPonovitevPrejsnjih-write
+        - ProgramPonovitevPremiere-read
+        - ProgramPonovitevPremiere-write
+        - ProgramPremiera-read
+        - ProgramPremiera-write
+        - ProgramRazno-read
+        - ProgramRazno-write
+        - ProgramskaEnotaSklopa-read
+        - ProgramskaEnotaSklopa-write
+        - Prostor-read
+        - StrosekUprizoritve-read
+        - StrosekUprizoritve-write
+        - Telefonska-read
+        - Telefonska-write
+        - TipFunkcije-read
+        - TipPopa-read
+        - Trr-read
+        - Trr-write
+        - Uprizoritev-read
+        - Uprizoritev-write
+        - VrstaStroska-read
+        - ZapisLastnik-read
+        - ZapisLastnik-write
+        - Zapis-read
+        - Zapis-write
+        - Zaposlitev-read
+        - Zaposlitev-write
+        - ZvrstSurs-read
+        - ZvrstUprizoritve-read
+-
+    name: poslovni-sekretar	
+    description: poslovni sekretar
+    permissions: 
+        - Abonma-read
+        - Alternacija-read
+        - Alternacija-write
+        - AvtorBesedila-read
+        - AvtorBesedila-write
+        - Besedilo-read
+        - Besedilo-write
+        - Datoteka-read
+        - Datoteka-write
+        - Drzava-read
+        - Funkcija-read
+        - Funkcija-write
+        - KontaktnaOseba-read
+        - KontaktnaOseba-write
+        - OrganizacijskaEnota-read
+        - Oseba-read
+        - Oseba-write
+        - OsebniPodatki-read
+        - OsebniPodatki-write
+        - Pogodba-read
+        - Popa-read
+        - Popa-write
+        - Posta-read
+        - PostniNaslov-read
+        - PostniNaslov-write
+        - ProdukcijskaHisa-read
+        - ProdukcijskaHisa-write
+        - Prostor-read
+        - StrosekUprizoritve-read
+        - Telefonska-read
+        - Telefonska-write
+        - TipFunkcije-read
+        - TipPopa-read
+        - TipVaje-read
+        - Trr-read
+        - Trr-write
+        - Uprizoritev-read
+        - Uprizoritev-write
+        - VrstaStroska-read
+        - ZapisLastnik-read
+        - ZapisLastnik-write
+        - Zapis-read
+        - Zapis-write
+        - Zaposlitev-read
+        - Zaposlitev-write
+        - ZvrstSurs-read
+        - ZvrstUprizoritve-read
+-
+    name: vodja-tehnike	
+    description: vodja tehnike
+    permissions: 
+        - Abonma-read
+        - Alternacija-read
+        - Alternacija-write
+        - AvtorBesedila-read
+        - Besedilo-read
+        - Datoteka-read
+        - Drzava-read
+        - Funkcija-read
+        - Funkcija-write
+        - KontaktnaOseba-read
+        - OrganizacijskaEnota-read
+        - Oseba-read
+        - OsebniPodatki-read
+        - Pogodba-read
+        - Popa-read
+        - Posta-read
+        - PostniNaslov-read
+        - ProdukcijskaHisa-read
+        - Prostor-read
+        - StrosekUprizoritve-read
+        - Telefonska-read
+        - TipFunkcije-read
+        - TipPopa-read
+        - TipVaje-read
+        - Trr-read
+        - Uprizoritev-read
+        - VrstaStroska-read
+        - ZapisLastnik-read
+        - Zapis-read
+        - Zaposlitev-read
+        - ZvrstSurs-read
+        - ZvrstUprizoritve-read
+-
+    name: racunovodja	
+    description: računovodja
+    permissions: 
+        - Abonma-read
+        - Alternacija-read
+        - Alternacija-write
+        - Besedilo-read
+        - Datoteka-read
+        - Datoteka-write
+        - DrugiVir-read
+        - DrugiVir-write
+        - Drzava-read
+        - Funkcija-read
+        - Job-read
+        - Job-write
+        - KontaktnaOseba-read
+        - KontaktnaOseba-write
+        - OrganizacijskaEnota-read
+        - OrganizacijskaEnota-write
+        - Oseba-read
+        - Oseba-write
+        - OsebniPodatki-read
+        - OsebniPodatki-write
+        - Pogodba-read
+        - Pogodba-write
+        - Popa-read
+        - Popa-write
+        - Posta-read
+        - PostavkaCDve-read
+        - PostavkaCDve-write
+        - PostniNaslov-read
+        - PostniNaslov-write
+        - ProdukcijaDelitev-read
+        - ProdukcijaDelitev-write
+        - ProdukcijskaHisa-read
+        - ProdukcijskaHisa-write
+        - ProgramDela-lock
+        - ProgramDela-read
+        - ProgramDela-unlock
+        - ProgramDela-write
+        - ProgramFestival-read
+        - ProgramFestival-write
+        - ProgramGostovanje-read
+        - ProgramGostovanje-write
+        - ProgramGostujoca-read
+        - ProgramGostujoca-write
+        - ProgramIzjemni-read
+        - ProgramIzjemni-write
+        - ProgramPonovitevPrejsnjih-read
+        - ProgramPonovitevPrejsnjih-write
+        - ProgramPonovitevPremiere-read
+        - ProgramPonovitevPremiere-write
+        - ProgramPremiera-read
+        - ProgramPremiera-write
+        - ProgramRazno-read
+        - ProgramRazno-write
+        - ProgramskaEnotaSklopa-read
+        - ProgramskaEnotaSklopa-write
+        - Prostor-read
+        - StrosekUprizoritve-read
+        - StrosekUprizoritve-write
+        - Telefonska-read
+        - Telefonska-write
+        - TipFunkcije-read
+        - TipPopa-read
+        - TipVaje-read
+        - Trr-read
+        - Trr-write
+        - Uprizoritev-read
+        - VrstaStroska-read
+        - VrstaStroska-write
+        - ZapisLastnik-read
+        - ZapisLastnik-write
+        - Zapis-read
+        - Zapis-write
+        - Zaposlitev-read
+        - Zaposlitev-write
+        - ZvrstSurs-read
+        - ZvrstUprizoritve-read
+        

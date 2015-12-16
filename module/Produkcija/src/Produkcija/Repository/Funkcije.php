@@ -31,13 +31,13 @@ class Funkcije
     {
         switch ($name) {
             case "vse":
-                $qb = $this->getVseQb($options);
+                $qb   = $this->getVseQb($options);
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "default":
                 $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1000670);
-                $qb = $this->getDefaultQb($options);
+                $qb   = $this->getDefaultQb($options);
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
@@ -82,6 +82,24 @@ class Funkcije
             $qb->setParameter('podrocja', $options['podrocje']);
         }
         return $qb;
+    }
+
+    /**
+     * 
+     * @param type $object entiteta
+     * @param type $params
+     */
+    public function update($object, $params = null)
+    {
+        parent::update($object, $params);
+
+        /**
+         * po validate-u dobimo nove vrednosti objekta
+         * 
+         * npr. če tehnični vodja zamenja področje funkcije
+         */
+        $this->expect($this->getAuthorizationService()->isGranted('Funkcija-write', $object)
+                , 'Nimate dovoljenja za spreminjanje nekaterih kategorij funkcije', 1000672);
     }
 
 }

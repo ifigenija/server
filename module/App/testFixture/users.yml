@@ -140,7 +140,10 @@
         - Zaposlitev-write
         - Pogodba-read
         - Pogodba-write
-        
+        - Alternacija-read
+        - Alternacija-write
+        - Funkcija-read
+        - Funkcija-write
 -
     name: testni uporabnik za testiranje zapisov
     email: vihra@ifigenija.si
@@ -168,6 +171,12 @@
         - Zaposlitev-write
         - Pogodba-read
         - Pogodba-write
+        - Alternacija-read
+        - Alternacija-write
+        - Alternacija-vse
+        - Funkcija-read
+        - Funkcija-write
+        - Funkcija-vse
 
 -
     name: testni uporabnik za testiranje zapisov
@@ -208,3 +217,52 @@
     enabled: true
     roles: 
         - tajnicaXY
+-
+    name: uporabnik z vlogo direktor
+    email: direktor@ifigenija.si
+    password: testni.D
+    enabled: true
+    roles: 
+        - direktor
+-
+    name: uporabnik z vlogo arhivar
+    email: arhivar@ifigenija.si
+    password: testni.A
+    enabled: true
+    roles: 
+        - arhivar
+-
+    name: uporabnik z vlogo dramaturg
+    email: dramaturg@ifigenija.si
+    password: testni.D
+    enabled: true
+    roles: 
+        - dramaturg
+-
+    name: uporabnik z vlogo pripravljalec-programa-dela 
+    email: pripravljalec-programa-dela@ifigenija.si
+    password: testni.P
+    enabled: true
+    roles: 
+        - pripravljalec-programa-dela
+-
+    name: uporabnik z vlogo poslovni-sekretar 
+    email: poslovni-sekretar@ifigenija.si
+    password: testni.P
+    enabled: true
+    roles: 
+        - poslovni-sekretar
+-
+    name: uporabnik z vlogo vodja-tehnike
+    email: vodja-tehnike@ifigenija.si
+    password: testni.V
+    enabled: true
+    roles: 
+        - vodja-tehnike
+-
+    name: uporabnik z vlogo racunovodja
+    email: racunovodja@ifigenija.si
+    password: testni.R
+    enabled: true
+    roles: 
+        - racunovodja

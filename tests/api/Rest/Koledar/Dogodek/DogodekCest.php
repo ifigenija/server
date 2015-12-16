@@ -243,7 +243,7 @@ class DogodekCest
         $I->assertGuid($ent['id']);
         $this->obj2     = $dogodek        = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']);
         $I->assertGuid($dogodek['id']);
-        
+
         /**
          * še eno vajo
          */
@@ -462,11 +462,11 @@ class DogodekCest
      */
     public function getListPoProstorih(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl . "?prostor[]=" . $this->lookProstor1['id']."&prostor[]=" . $this->lookProstor2['id'], []);
+        $resp = $I->successfullyGetList($this->restUrl . "?prostor[]=" . $this->lookProstor1['id'] . "&prostor[]=" . $this->lookProstor2['id'], []);
         $totR = $resp['state']['totalRecords'];
         $I->assertEquals(3, $totR);
     }
-    
+
     /**
      * @depends createVajo
      * @depends lookupUprizoritev
@@ -474,142 +474,10 @@ class DogodekCest
      */
     public function getListPoUprizoritvah(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl . "?uprizoritev[]=" . $this->lookUprizoritev2['id']."&uprizoritev[]=" . $this->lookUprizoritev1['id'], []);
+        $resp = $I->successfullyGetList($this->restUrl . "?uprizoritev[]=" . $this->lookUprizoritev2['id'] . "&uprizoritev[]=" . $this->lookUprizoritev1['id'], []);
         $totR = $resp['state']['totalRecords'];
         $I->assertEquals(3, $totR);
     }
-//
-//    /**
-//     * @depends create
-//     * @param ApiTester $I
-//     */
-//    public function getListVsePoUprizoritvi(ApiTester $I)
-//    {
-//        $resp = $I->successfullyGetList($this->restUrl . "/vse?uprizoritev=" . $this->lookUprizoritev2, []);
-//        $list = $resp['data'];
-//        codecept_debug($list);
-//        $totR = $resp['state']['totalRecords'];
-//        $I->assertEquals(8, $totR);
-//
-//        $resp = $I->successfullyGetList($this->restUrl . "/vse?uprizoritev=" . $this->lookUprizoritev1, []);
-//        $list = $resp['data'];
-//        codecept_debug($list);
-//        $totR = $resp['state']['totalRecords'];
-//        $I->assertEquals(2, $totR);
-//    }
-//
-//    /**
-//     * @depends create
-//     * @param ApiTester $I
-//     */
-//    public function getListVsePoStatusu(ApiTester $I)
-//    {
-//        /**
-//         * najprej število vseh
-//         */
-//        $resp    = $I->successfullyGetList($this->restUrl . "/vse?", []);
-//        $list    = $resp['data'];
-//        codecept_debug($list);
-//        $totRVse = $totR    = $resp['state']['totalRecords'];
-//        codecept_debug($totRVse);
-//
-//        /**
-//         * po statusu 100s in več
-//         */
-//        $statusi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
-//        $resp    = $I->successfullyGetList($this->restUrl . "/vse?" . $statusi, []);
-//        $list    = $resp['data'];
-//        codecept_debug($resp);
-//        $totR    = $resp['state']['totalRecords'];
-//        $I->assertEquals($totR, $totRVse, 'enako število kot pri vseh');
-//
-//        /**
-//         * po statusu 500s in več
-//         */
-//        $statusi  = "status[]=500s&status[]=600s&status[]=700s&";
-//        $resp     = $I->successfullyGetList($this->restUrl . "/vse?" . $statusi, []);
-//        $list     = $resp['data'];
-//        codecept_debug($list);
-//        $totR500s = $totR     = $resp['state']['totalRecords'];
-//        $I->assertEquals(3, $totR, 'status 500 ali več');
-//        $I->assertGreaterThanOrEqual("500s", $list[0]['status']);
-//
-//        /**
-//         * neprivilegiran uporanik lahko vidi naprej le od statusa 500s
-//         */
-//        $I->amHttpAuthenticated(\IfiTest\AuthPage::$irena, \IfiTest\AuthPage::$irenaPass);
-//
-//        // neprivilegiran brez parametra status
-//        // neprivilegiran brez parametra status
-//        $resp = $I->successfullyGetList($this->restUrl . "/vse", []);
-//        $list = $resp['data'];
-//        codecept_debug($list);
-//        $totR = $resp['state']['totalRecords'];
-//        $I->assertEquals($totR500s, $totR, 'takih s statusom 500 ali več');
-//        $I->assertGreaterThanOrEqual("500s", $list[0]['status']);
-//
-//        // neprivilegiran s parametrom status >=100s
-//        $statusi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
-//        $resp    = $I->successfullyGetList($this->restUrl . "/vse?" . $statusi, []);
-//        $list    = $resp['data'];
-//        codecept_debug($list);
-//        $totR    = $resp['state']['totalRecords'];
-//        $I->assertEquals($totR500s, $totR, 'ali status 500 ali več');
-//        $I->assertGreaterThanOrEqual("500s", $list[0]['status']);
-//
-////        $I->assertTrue(false, "začasno $$");
-//    }
-//
-//    /**
-//     * @depends createVajo
-//     * @param ApiTester $I
-//     */
-//    public function getListVsePoZacetkuInKoncu(ApiTester $I)
-//    {
-//
-////        $resp = $I->successfullyGetList($this->restUrl . "/vse?konec=2012-05-15", []);
-//        $resp = $I->successfullyGetList($this->restUrl . "/vse?konec=2012-05-15T00:00:00.000Z", []);  //v cest je to 2 uri več
-//        $list = $resp['data'];
-//        codecept_debug($list);
-//        $totR = $resp['state']['totalRecords'];
-//        $I->assertEquals(2, $totR);
-//
-//
-//        // povečamo parameter konec
-//        $resp = $I->successfullyGetList($this->restUrl . "/vse?konec=2012-06-15", []);
-//        $list = $resp['data'];
-//        codecept_debug($list);
-//        $totR = $resp['state']['totalRecords'];
-//        $I->assertEquals(3, $totR, "pred 15.6.");
-//
-//        /**
-//         * le parameter začetek
-//         */
-//        $resp        = $I->successfullyGetList($this->restUrl . "/vse?zacetek=2012-05-15", []);
-//        $list        = $resp['data'];
-//        codecept_debug($list);
-//        $totRzac1505 = $totR        = $resp['state']['totalRecords'];
-//        $I->assertGreaterThanOrEqual(3, $totR);
-//
-//        /**
-//         * začetek večji za nekaj mesecev
-//         */
-//        $resp = $I->successfullyGetList($this->restUrl . "/vse?zacetek=2012-12-31", []);
-//        $list = $resp['data'];
-//        codecept_debug($list);
-//        $totR = $resp['state']['totalRecords'];
-//        $I->assertEquals(3, $totRzac1505 - $totR);
-//
-//
-//        /**
-//         * začetek in konec
-//         */
-//        $resp = $I->successfullyGetList($this->restUrl . "/vse?zacetek=2012-05-15&konec=2012-06-15", []);
-//        $list = $resp['data'];
-//        codecept_debug($list);
-//        $totR = $resp['state']['totalRecords'];
-//        $I->assertEquals(2, $totR);
-//    }
 
     /**
      * v listi default se začetek in konec nastavita, če je prazen parameter
@@ -746,7 +614,7 @@ class DogodekCest
         codecept_debug($list);
         $totR = $resp['state']['totalRecords'];
         $I->assertEquals(2, $totR);
-        
+
         $resp = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "uprizoritev[]=", []);
         $list = $resp['data'];
         codecept_debug($list);
