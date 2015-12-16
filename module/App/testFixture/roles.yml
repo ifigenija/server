@@ -354,3 +354,23 @@
     description: 'Vloga z 1 dovoljenjem'
     permissions: 
         - Alternacija-write
+- 
+    name: Alternacija-vse
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Alternacija-vse
+- 
+    name: Funkcija-read
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Funkcija-read
+- 
+    name: Funkcija-write
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Funkcija-write
+- 
+    name: Funkcija-vse
+    description: 'Vloga z 1 dovoljenjem'
+    permissions: 
+        - Funkcija-vse

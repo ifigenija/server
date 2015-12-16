@@ -23,6 +23,12 @@
 -
     name: ProgramDela-unlock
     description: ProgramDela - odklepanje
+-
+    name: Alternacija-vse
+    description: Alternacija write dostop ne le do področja tehnike
+-
+    name: Funkcija-vse
+    description: Funkcija write dostop ne le do področje tehnike
 
 # perm prefix za je Aaa
 #-

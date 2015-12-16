@@ -69,6 +69,8 @@ return [
                 "chck-pogodba"           => "Produkcija\Assertion\AssertPogodba",
                 "chck-zaposlitev-write"     => "Produkcija\Assertion\AssertZaposlitevWrite",
                 "chck-zaposlitev"           => "Produkcija\Assertion\AssertZaposlitev",
+                "chck-funkcija-write"     => "Produkcija\Assertion\AssertFunkcijaWrite",
+                "chck-alternacija-write"     => "Produkcija\Assertion\AssertAlternacijaWrite",
             ],
         ],
         "assertion_map"     => [
@@ -76,6 +78,8 @@ return [
             "Pogodba-read"           => "chck-pogodba",
             "Zaposlitev-write"          => "chck-zaposlitev-write",
             "Zaposlitev-read"           => "chck-zaposlitev",
+            "Funkcija-write"          => "chck-funkcija-write",
+            "Alternacija-write"          => "chck-alternacija-write",
         ],
     ],
 ];
