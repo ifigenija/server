@@ -274,6 +274,10 @@ class ProgramDelaRpcService
         $this->expectPermission("ProgramskaEnotaSklopa-write");
         $this->expectPermission("ProgramskaEnotaSklopa-read");
 
+        /*
+         * $$ še permissioni zapislastnik,zapis, datoteka ? mape?,...
+         */
+
         $programDela = $this->getProgramDelaRep()->findOneById($programDelaId);
 
         $this->expect($programDela
@@ -431,6 +435,12 @@ class ProgramDelaRpcService
         $newPD->preracunaj();
         $newPD->validate();
 
+        /**
+         * še zapise kloniraj za vse entitete $$
+         */
+        $this->klonirajZapise($programDela, $newPD);
+
+
         $this->getEm()->flush();
         return $newPD->getId();
     }
@@ -493,6 +503,41 @@ class ProgramDelaRpcService
             $this->getEm()->persist($newPES);
             $newPES->preracunaj();
         }
+    }
+
+    /**
+     * Kloniraj zapise iz ene na drugo entiteto
+     * 
+     * @param entity $oldObj    entiteta z zapisi
+     * @param entity $newObj    entiteta na katere kopiramo zapise
+     */
+    private function klonirajZapise($oldObj, $newObj)
+    {
+        $ZapLast=new \Zapisi\Entity\ZapisLastnik();
+                
+
+        /**
+         * $$ dokončaj
+         */
+        $tmp1=1;
+        /**
+         * psevdokoda:
+         *  za vse zapislastnike( lastnik=$oldObj)
+         *     newZapisLastnik =zapislastnik->copy,  $oldObj->NewObj
+         */
+        
+        
+        
+//        $newEP->setProgramskeEnoteSklopa(new \Doctrine\Common\Collections\ArrayCollection());
+//        $collPES = $ep->getProgramskeEnoteSklopa();
+//        foreach ($collPES as $pes) {
+//            $newPES = $pes->copy();
+//            $newPES->setProgramRazno($newEP);
+//            $newEP->getProgramskeEnoteSklopa()->add($newPES);
+//
+//            $this->getEm()->persist($newPES);
+//            $newPES->preracunaj();
+//        }
     }
 
     /**
