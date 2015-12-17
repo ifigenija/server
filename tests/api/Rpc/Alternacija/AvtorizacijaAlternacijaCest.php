@@ -74,6 +74,13 @@ class AvtorizacijaAlternacijaCest
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
+        
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "NOVAPOGODBA",
+            'permname' => 'Alternacija-vse',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
     }
 
     /**

@@ -202,10 +202,13 @@ class DogodekCest
         $I->assertEquals($ent['zacetek'], $data['zacetek']);
         $I->assertEquals($ent['konec'], $data['konec']);
 
+        
         /**
          * preveri dogodek
          */
-        $this->obj1 = $dogodek    = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']);
+        codecept_debug($ent['dogodek']['id']);
+        codecept_debug($this->dogodekUrl);
+        $this->obj1 = $dogodek    = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']['id']);
         codecept_debug($dogodek);
         $I->assertGuid($dogodek['id']);
         $I->assertEquals($ent['zacetek'], $data['zacetek']);
@@ -239,9 +242,11 @@ class DogodekCest
             'prostor'     => $this->lookProstor1['id'],
             'sezona'      => $this->lookSezona1['id'],
         ];
+
+        
         $this->objVaja2 = $ent            = $I->successfullyCreate($this->vajaUrl, $data);
         $I->assertGuid($ent['id']);
-        $this->obj2     = $dogodek        = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']);
+        $this->obj2     = $dogodek        = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']['id']);
         $I->assertGuid($dogodek['id']);
 
         /**
@@ -269,26 +274,27 @@ class DogodekCest
         ];
         $this->objVaja3 = $ent            = $I->successfullyCreate($this->vajaUrl, $data);
         $I->assertGuid($ent['id']);
-        $this->obj3     = $dogodek        = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']);
+        $this->obj3     = $dogodek        = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']['id']);
         $I->assertGuid($dogodek['id']);
+//        $I->fail('$$');
     }
 
     /**
      * 
      * @param ApiTester $I
      */
-    public function createDrzavo(ApiTester $I)
-    {
-        $data            = [
-            'sifra'     => 'XX',
-            'sifraDolg' => 'xx',
-            'isoNum'    => 'xx',
-            'isoNaziv'  => 'xx',
-            'naziv'     => 'xx',
-        ];
-        $this->objDrzava = $ent             = $I->successfullyCreate($this->drzavaUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-    }
+//    public function createDrzavo(ApiTester $I)
+//    {
+//        $data            = [
+//            'sifra'     => 'XX',
+//            'sifraDolg' => 'xx',
+//            'isoNum'    => 'xx',
+//            'isoNaziv'  => 'xx',
+//            'naziv'     => 'xx',
+//        ];
+//        $this->objDrzava = $ent             = $I->successfullyCreate($this->drzavaUrl, $data);
+//        $I->assertNotEmpty($ent['id']);
+//    }
 
     /**
      *  kreiramo zapis

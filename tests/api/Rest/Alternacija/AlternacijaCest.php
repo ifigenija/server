@@ -42,7 +42,9 @@ class AlternacijaCest
     private $terminStoritveUrl      = '/rest/terminstoritve';
     private $obj1;
     private $obj2;
-    private $obj3teh;
+    private $obj3;
+    private $obj4;
+    private $obj5teh;
     private $objOseba;
     private $lookOseba1;
     private $lookOseba2;
@@ -215,6 +217,52 @@ class AlternacijaCest
 
         /*
          *  kreiram še en zapis
+         */
+        $data       = [
+            'funkcija'   => $this->lookFunkcija1Ig['id'],
+            'zaposlen'   => false,
+            'zacetek'    => '2023-03-01T00:00:00+0100',
+            'konec'      => '2024-03-01T00:00:00+0100',
+            'opomba'     => 'ddd',
+            'sort'       => 6,
+            'privzeti'   => true,
+            'aktivna'    => true,
+            'zaposlitev' => $this->objZaposlitev['id'],
+            'oseba'      => $this->lookOseba1['id'],
+            'pogodba'    => null,
+            'imaPogodbo' => false,
+            'pomembna'   => TRUE,
+        ];
+        $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        codecept_debug($ent);
+        $I->assertGuid($ent['id']);
+
+        /*
+         *  kreiram še en zapis
+         *   z isto funkcijo kot obj3
+         */
+        $data       = [
+            'funkcija'   => $this->lookFunkcija1Ig['id'],
+            'zaposlen'   => false,
+            'zacetek'    => '2023-05-01T00:00:00+0100',
+            'konec'      => '2024-05-01T00:00:00+0100',
+            'opomba'     => 'eee',
+            'sort'       => 6,
+            'privzeti'   => false,
+            'aktivna'    => true,
+            'zaposlitev' => $this->objZaposlitev['id'],
+            'oseba'      => $this->lookOseba1['id'],
+            'pogodba'    => null,
+            'imaPogodbo' => false,
+            'pomembna'   => false,
+        ];
+        $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        codecept_debug($ent);
+        $I->assertGuid($ent['id']);
+
+
+        /*
+         *  kreiram še en zapis
          *  s področjem funkcije tehnik
          */
         $data          = [
@@ -232,7 +280,7 @@ class AlternacijaCest
             'imaPogodbo' => false,
             'pomembna'   => FALSE,
         ];
-        $this->obj3teh = $ent           = $I->successfullyCreate($this->restUrl, $data);
+        $this->obj5teh = $ent           = $I->successfullyCreate($this->restUrl, $data);
         codecept_debug($ent);
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['opomba'], 'bb');
@@ -309,7 +357,7 @@ class AlternacijaCest
         /**
          * še preverjanja avtorizacij, posebnih dovoljenj
          */
-        $entTeh = $this->obj3teh;
+        $entTeh = $this->obj5teh;
         $I->assertEquals('tehnik', $entTeh['funkcija']['tipFunkcije.podrocje']);
         $entIg  = $this->obj2;                            //netehnik
         $I->assertNotEquals('tehnik', $entIg['funkcija']['tipFunkcije.podrocje']);
@@ -515,7 +563,7 @@ class AlternacijaCest
      */
     public function odstranimZaposlitev(\ApiTester $I)
     {
-        $ent               = $I->successfullyGet($this->restUrl, $this->obj3teh['id']);
+        $ent               = $I->successfullyGet($this->restUrl, $this->obj5teh['id']);
         $I->assertEquals($ent['zaposlitev'], $this->objZaposlitev['id'], "zaposlitev");
         $I->assertEquals($ent['zaposlen'], true);               // v validaciji se bi moralo postaviti na true, če je zaposlitev
         // odstranimo zaposlitev
@@ -538,7 +586,7 @@ class AlternacijaCest
      */
     public function updateZaValidacijoDatumov(ApiTester $I)
     {
-        $ent = $I->successfullyGet($this->restUrl, $this->obj3teh['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj5teh['id']);
 
         // enaka datuma
         $ent['zacetek'] = '2016-02-01T00:00:00+0100';
@@ -629,22 +677,30 @@ class AlternacijaCest
     public function updateAzurirajPrivzeto(ApiTester $I)
     {
         // nastavimo enega na true
-        $ent             = $this->obj2;
+        $ent             = $this->obj3;
         $ent['privzeti'] = TRUE;
         $this->obj2      = $ent             = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         codecept_debug($ent);
         $I->assertTrue($ent['privzeti']);
+        $funkcijaIdPrv   = $ent['funkcija']['id'];
 
 
         // nastavimo drugega na true -> prejšnji bi se moral postaviti na false
-        $ent             = $this->obj3teh;
+        $ent             = $this->obj4;
         $ent['privzeti'] = TRUE;
         $ent             = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
-        $ent             = $I->successfullyGet($this->restUrl, $this->obj3teh['id']);
+        $ent             = $I->successfullyGet($this->restUrl, $ent['id']);
+        codecept_debug($ent);
         $I->assertTrue($ent['privzeti']);
 
+        /**
+         * ali sta alternaciji v isti funkciji
+         */
+        $I->assertEquals($funkcijaIdPrv, $ent['funkcija']['id']);
 
-        // ali se je prejšnji postavil na false?
+        /*
+         *  ali se je prejšnji postavil na false?
+         */
         $ent = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         codecept_debug($ent);
         $I->assertFalse($ent['privzeti'], 'privzeti prestavljen na false?');
@@ -657,7 +713,7 @@ class AlternacijaCest
      */
     public function deletePrivzetega(ApiTester $I)
     {
-        $ent = $I->successfullyGet($this->restUrl, $this->obj3teh['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj5teh['id']);
         $I->assertTrue($ent['privzeti']);
 
         $I->successfullyDelete($this->restUrl, $ent['id']);
