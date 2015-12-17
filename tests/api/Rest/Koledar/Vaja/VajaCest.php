@@ -160,7 +160,7 @@ class VajaCest
         /**
          * preveri dogodek
          */
-        $this->objDogodek = $dogodek          = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']);
+        $this->objDogodek = $dogodek          = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']['id']);
         codecept_debug($dogodek);
         $I->assertGuid($dogodek['id']);
         $I->assertEquals($dogodek['title'], $data['title'], 'title');
@@ -259,7 +259,7 @@ class VajaCest
         /**
          * ali je hkrati brisal tudi dogodek
          */
-        $I->failToGet($this->dogodekUrl, $this->obj1['dogodek']);
+        $I->failToGet($this->dogodekUrl, $this->obj1['dogodek']['id']);
     }
 
 }
