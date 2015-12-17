@@ -281,9 +281,7 @@ class ProgramDelaRpcService
         $this->expectPermission("Datoteka-read");
         $this->expectPermission("Datoteka-write");
 
-        /*
-         * $$ še permissioni zapislastnik,zapis, datoteka ? mape?,...
-         */
+        $zs = $this->getServiceLocator()->get('zapisi.service');
 
         $programDela = $this->getProgramDelaRep()->findOneById($programDelaId);
 
@@ -308,6 +306,7 @@ class ProgramDelaRpcService
                 ->setGostujoci(new \Doctrine\Common\Collections\ArrayCollection())
                 ->setGostovanja(new \Doctrine\Common\Collections\ArrayCollection())
                 ->setProgramiRazno(new \Doctrine\Common\Collections\ArrayCollection())
+                ->setPostavkeC2(new \Doctrine\Common\Collections\ArrayCollection())
                 ->setZakljuceno(false);  // klon prog. dela ni zaključen
 
         /**
@@ -333,7 +332,7 @@ class ProgramDelaRpcService
             $newEP->preracunaj();
 
             if ($klonirajZapise) {
-                $this->klonirajZapise($ep, $newEP);
+                $zs->klonirajZapise($ep, $newEP);
             }
         }
 
@@ -352,7 +351,7 @@ class ProgramDelaRpcService
             $newEP->preracunaj();
 
             if ($klonirajZapise) {
-                $this->klonirajZapise($ep, $newEP);
+                $zs->klonirajZapise($ep, $newEP);
             }
         }
 
@@ -371,7 +370,7 @@ class ProgramDelaRpcService
             $newEP->preracunaj();
 
             if ($klonirajZapise) {
-                $this->klonirajZapise($ep, $newEP);
+                $zs->klonirajZapise($ep, $newEP);
             }
         }
 
@@ -390,7 +389,7 @@ class ProgramDelaRpcService
             $newEP->preracunaj();
 
             if ($klonirajZapise) {
-                $this->klonirajZapise($ep, $newEP);
+                $zs->klonirajZapise($ep, $newEP);
             }
         }
 
@@ -409,7 +408,7 @@ class ProgramDelaRpcService
             $newEP->preracunaj();
 
             if ($klonirajZapise) {
-                $this->klonirajZapise($ep, $newEP);
+                $zs->klonirajZapise($ep, $newEP);
             }
         }
 
@@ -428,7 +427,7 @@ class ProgramDelaRpcService
             $newEP->preracunaj();
 
             if ($klonirajZapise) {
-                $this->klonirajZapise($ep, $newEP);
+                $zs->klonirajZapise($ep, $newEP);
             }
         }
 
@@ -447,7 +446,7 @@ class ProgramDelaRpcService
             $newEP->preracunaj();
 
             if ($klonirajZapise) {
-                $this->klonirajZapise($ep, $newEP);
+                $zs->klonirajZapise($ep, $newEP);
             }
         }
 
@@ -467,16 +466,34 @@ class ProgramDelaRpcService
             $newEP->preracunaj();
 
             if ($klonirajZapise) {
-                $this->klonirajZapise($ep, $newEP);
+                $zs->klonirajZapise($ep, $newEP);
             }
         }
+        
+        /*
+         * kloniram postavke c2 in jih dodam na nov program dela
+         */
+        $coll = $programDela->getPostavkeC2();
+        foreach ($coll as $c2) {
+            $newC2 = $c2->copy();
+            $newC2->setProgramDela($newPD);
+            $newPD->getPostavkeC2()->add($newC2);
+
+            $this->getEm()->persist($newC2);
+
+            if ($klonirajZapise) {
+                $zs->klonirajZapise($c2, $newC2);
+            }
+        }
+
 
         $newPD->preracunaj();
         $newPD->validate();
 
         if ($klonirajZapise) {
-            $this->klonirajZapise($programDela, $newPD);
+            $zs->klonirajZapise($programDela, $newPD);
         }
+
 
 
         $this->getEm()->flush();
@@ -492,6 +509,8 @@ class ProgramDelaRpcService
      */
     private function klonirajDrugeVire($ep, $newEP, $klonirajZapise = false)
     {
+        $zs = $this->getServiceLocator()->get('zapisi.service');
+
         $newEP->setDrugiViri(new \Doctrine\Common\Collections\ArrayCollection());
         $collDV = $ep->getDrugiViri();
         foreach ($collDV as $dv) {
@@ -503,7 +522,7 @@ class ProgramDelaRpcService
             $newDV->preracunaj();
 
             if ($klonirajZapise) {
-                $this->klonirajZapise($dv, $newDV);
+                $zs->klonirajZapise($dv, $newDV);
             }
         }
     }
@@ -517,6 +536,8 @@ class ProgramDelaRpcService
      */
     private function klonirajKoprodukcije($ep, $newEP, $klonirajZapise = false)
     {
+        $zs = $this->getServiceLocator()->get('zapisi.service');
+
         $newEP->setKoprodukcije(new \Doctrine\Common\Collections\ArrayCollection());
         $collKop = $ep->getKoprodukcije();
         foreach ($collKop as $kop) {
@@ -528,7 +549,7 @@ class ProgramDelaRpcService
             $newKop->preracunaj();
 
             if ($klonirajZapise) {
-                $this->klonirajZapise($kop, $newKop);
+                $zs->klonirajZapise($kop, $newKop);
             }
         }
     }
@@ -542,6 +563,8 @@ class ProgramDelaRpcService
      */
     private function klonirajPESklopa($ep, $newEP, $klonirajZapise = false)
     {
+        $zs = $this->getServiceLocator()->get('zapisi.service');
+
         $newEP->setProgramskeEnoteSklopa(new \Doctrine\Common\Collections\ArrayCollection());
         $collPES = $ep->getProgramskeEnoteSklopa();
         foreach ($collPES as $pes) {
@@ -553,65 +576,7 @@ class ProgramDelaRpcService
             $newPES->preracunaj();
 
             if ($klonirajZapise) {
-                $this->klonirajZapise($pes, $newPES);
-            }
-        }
-    }
-
-    /**
-     * Kloniraj zapise iz ene na drugo entiteto
-     * struktura novih zapisov je lahko različna od starih:
-     *  - niso v nobeni mapi
-     *  - imajo le enega lastnika
-     * nova datoteka ima isti hash kot stara datoteka
-     * 
-     * @param entity $oldObj    entiteta z zapisi
-     * @param entity $newObj    entiteta na katere kopiramo zapise
-     */
-    private function klonirajZapise($oldObj, $newObj)
-    {
-        $zapisLastnikR = $this->getEm()->getRepository('Zapisi\Entity\ZapisLastnik');
-        $oldZapLastA   = $zapisLastnikR->findByLastnik($oldObj->getId());
-
-        $f = $this->getServiceLocator()->get('entity.stripper.filter');
-        $newClassLastnika = $f->filter(get_class($newObj));
-
-        foreach ($oldZapLastA as $oldZapLast) {
-            /**
-             * kreiramo nov zapis
-             */
-            $newZapLast = $oldZapLast->copy();
-            $this->getEm()->persist($newZapLast);
-            $newZapLast->setLastnik($newObj->getId());
-            $newZapLast->setClassLastnika($newClassLastnika);
-            $newZapLast->setZapis(null); //začasno
-            if ($oldZapLast->getZapis()) {
-                $newZapis = $oldZapLast->getZapis()->copy();
-                $this->getEm()->persist($newZapis);
-                $newZapis->setMapa(null);
-                $newZapis->setVsebujoceMape(new \Doctrine\Common\Collections\ArrayCollection());
-
-                $newZapis->setLastniki(new \Doctrine\Common\Collections\ArrayCollection()); // začasno
-                $newZapis->setDatoteka(null); //začasno
-
-                /**
-                 * podobno kot v create v repozitoriju
-                 */
-                $newZapLast->setZapis($newZapis);
-                $newZapis->getLastniki()->add($newZapLast);
-
-                if ($oldZapLast->getZapis()->getDatoteka()) {
-                    /*
-                     * kreiramo novo datoteko (hash ostane isti)
-                     */
-                    $newDat = $oldZapLast->getZapis()->getDatoteka()->copy();
-                    $this->getEm()->persist($newDat);
-                    $newZapis->setDatoteka($newDat);
-                }
-
-                $num  = $this->getServiceLocator()->get('stevilcenje.generator');
-                $stev = $num->generate('zapis');
-                $newZapis->setIdentifier($stev);
+                $zs->klonirajZapise($pes, $newPES);
             }
         }
     }
