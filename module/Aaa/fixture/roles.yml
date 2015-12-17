@@ -528,9 +528,11 @@
         - Uprizoritev-write
         - Alternacija-read
         - Alternacija-write
+        - Alternacija-vse
         - Besedilo-read
         - Funkcija-read
         - Funkcija-write
+        - Funkcija-vse
         - Oseba-read
         - ProdukcijskaHisa-read
         - TipFunkcije-read
@@ -573,6 +575,7 @@
     permissions: 
         - Alternacija-read
         - Alternacija-write
+        - Alternacija-vse
         - Funkcija-read
         - Oseba-read
         - OsebniPodatki-read
@@ -636,6 +639,7 @@
         - Abonma-read
         - Alternacija-read
         - Alternacija-write
+        - Alternacija-vse
         - AvtorBesedila-read
         - AvtorBesedila-write
         - Besedilo-read
@@ -647,6 +651,7 @@
         - Drzava-read
         - Funkcija-read
         - Funkcija-write
+        - Funkcija-vse
         - Job-read
         - Job-write
         - KontaktnaOseba-read
@@ -750,6 +755,7 @@
         - Abonma-read
         - Alternacija-read
         - Alternacija-write
+        - Alternacija-vse
         - AvtorBesedila-read
         - AvtorBesedila-write
         - Besedilo-read
@@ -759,6 +765,7 @@
         - Drzava-read
         - Funkcija-read
         - Funkcija-write
+        - Funkcija-vse
         - KontaktnaOseba-read
         - OrganizacijskaEnota-read
         - Oseba-read
@@ -790,6 +797,7 @@
     permissions: 
         - Alternacija-read
         - Alternacija-write
+        - Alternacija-vse
         - AvtorBesedila-read
         - AvtorBesedila-write
         - Besedilo-read
@@ -801,6 +809,7 @@
         - Drzava-read
         - Funkcija-read
         - Funkcija-write
+        - Funkcija-vse
         - Job-read
         - Job-write
         - KontaktnaOseba-read
@@ -872,6 +881,7 @@
         - Abonma-read
         - Alternacija-read
         - Alternacija-write
+        - Alternacija-vse
         - AvtorBesedila-read
         - AvtorBesedila-write
         - Besedilo-read
@@ -881,6 +891,7 @@
         - Drzava-read
         - Funkcija-read
         - Funkcija-write
+        - Funkcija-vse
         - KontaktnaOseba-read
         - KontaktnaOseba-write
         - OrganizacijskaEnota-read
@@ -959,6 +970,7 @@
         - Abonma-read
         - Alternacija-read
         - Alternacija-write
+        - Alternacija-vse
         - Besedilo-read
         - Datoteka-read
         - Datoteka-write
