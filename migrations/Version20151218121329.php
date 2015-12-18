@@ -22,6 +22,13 @@ class Version20151218121329
         /*
          * ročno dodano:
          */
+        $this->addSql('delete from permission2role where permission_id=(select permission.id from permission where permission.name=\'Oseba-vse\');');
+        $this->addSql('delete from permission2role where permission_id=(select permission.id from permission where permission.name=\'StevilcenjeKonfig-read\');');
+        $this->addSql('delete from permission2role where permission_id=(select permission.id from permission where permission.name=\'StevilcenjeKonfig-write\');');
+        $this->addSql('delete from permission2role where permission_id=(select permission.id from permission where permission.name=\'Stevilcenje-read\');');
+        $this->addSql('delete from permission2role where permission_id=(select permission.id from permission where permission.name=\'Stevilcenje-write\');');
+        $this->addSql('delete from permission2role where permission_id=(select permission.id from permission where permission.name=\'StevilcenjeStanje-read\');');
+        $this->addSql('delete from permission2role where permission_id=(select permission.id from permission where permission.name=\'StevilcenjeStanje-write\');');
         $this->addSql('delete from permission where name=\'Oseba-vse\';');
         $this->addSql('delete from permission where name=\'StevilcenjeKonfig-read\';');
         $this->addSql('delete from permission where name=\'StevilcenjeKonfig-write\';');
