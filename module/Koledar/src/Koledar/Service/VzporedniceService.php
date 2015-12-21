@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Servis, ki računa vzporednice in prekrivanja
  *
@@ -9,15 +10,14 @@
 
 namespace Koledar\Service;
 
-
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Max\Service\AbstractMaxService;
 use Produkcija\Entity\Uprizoritev;
 
-class VzporedniceService extends AbstractMaxService
+class VzporedniceService
+        extends AbstractMaxService
 {
-
     /**
      * ./bin/util orm:run-dql 'update Produkcija\Entity\Funkcija f set f.alterCount = (select count(x) from Produkcija\Entity\Alternacija x where x.funkcija = f.id)'
      * ./bin/util orm:run-dql 'update Produkcija\Entity\Uprizoritev f set f.gostujoca = FALSE where f.gostujoca is null'
@@ -44,12 +44,17 @@ class VzporedniceService extends AbstractMaxService
          * pridemo do pravih vzporednic.
          *
          */
-
         $u = $this->getPrivzeteAlternacije($uprizoritve);
 
         // obrnem rezultat v fun=> oseba
         $r = [];
         foreach ($u as $row) {
+
+            /**
+             * $$ tu bi morda bilo boljše
+             * da ne bi ostal brez nekaterih oseb, ki so v isti funkciji
+             * $r[]            = $row['oseba'];
+             */
             $r[$row['fun']] = $row['oseba'];
         }
         // dodam override in  vrnem samo osebe
@@ -73,16 +78,16 @@ class VzporedniceService extends AbstractMaxService
             $keys[] = $u->getId();
         }
         $u = $qb->select('o.id oseba, funkcija.id fun')
-            ->from('Produkcija\Entity\Funkcija', 'funkcija')
-            ->join('funkcija.uprizoritev', 'u')
-            //     ->join('funkcija.privzeti', 'alternacija')
-            ->join('funkcija.alternacije', 'alternacija')
-            ->join('alternacija.oseba', 'o')
-            ->andWhere('funkcija.sePlanira = TRUE')
-            ->andWhere('u.gostujoca =  FALSE ')
-            ->andWhere($qb->expr()->in('funkcija.uprizoritev', $keys))
-            ->getQuery()
-            ->getResult();
+                ->from('Produkcija\Entity\Funkcija', 'funkcija')
+                ->join('funkcija.uprizoritev', 'u')
+                ->join('funkcija.privzeti', 'alternacija')
+//                ->join('funkcija.alternacije', 'alternacija')
+                ->join('alternacija.oseba', 'o')
+                ->andWhere('funkcija.sePlanira = TRUE')
+                ->andWhere('u.gostujoca =  FALSE ')
+                ->andWhere($qb->expr()->in('funkcija.uprizoritev', $keys))
+                ->getQuery()
+                ->getResult();
 
         return $u;
     }
@@ -102,18 +107,18 @@ class VzporedniceService extends AbstractMaxService
         $konfliktneUprizoritve = $this->getEm()->createQueryBuilder();
         $e                     = $konfliktneUprizoritve->expr();
         $konfliktneUprizoritve->select('u.id')
-            ->from('Produkcija\Entity\Uprizoritev', 'u')
-            ->join('u.funkcije', 'f')
-            ->where($e->in('f.id', $konfliktneFunkcije->getDql()));
+                ->from('Produkcija\Entity\Uprizoritev', 'u')
+                ->join('u.funkcije', 'f')
+                ->where($e->in('f.id', $konfliktneFunkcije->getDql()));
 
         $vzporednice = $this->getEm()->createQueryBuilder();
         $e           = $vzporednice->expr();
 
         $vzporednice->select('vzp')
-            ->from('Produkcija\Entity\Uprizoritev', 'vzp')
-            ->where($e->in('vzp.faza', ['produkcija', 'postprodukcija']))
-            ->andWhere('vzp.gostujoca = FALSE')
-            ->andWhere($e->notIn('vzp.id', $konfliktneUprizoritve->getDQL()));
+                ->from('Produkcija\Entity\Uprizoritev', 'vzp')
+                ->where($e->in('vzp.faza', $this->getStatusiUprizoritev()))
+                ->andWhere('vzp.gostujoca = FALSE')
+                ->andWhere($e->notIn('vzp.id', $konfliktneUprizoritve->getDQL()));
 
         return $vzporednice->getQuery()->getResult();
     }
@@ -132,14 +137,14 @@ class VzporedniceService extends AbstractMaxService
         $konfliktneFunkcije = $this->getEm()->createQueryBuilder();
         $e                  = $konfliktneFunkcije->expr();
         $konfliktneFunkcije->select('fk')
-            ->from('Produkcija\Entity\Funkcija', 'fk')
-            ->join('fk.alternacije', 'al')
-            ->join('al.oseba', 'os')
-            ->join('fk.uprizoritev', 'up')
-            ->where($e->in('os.id', $osebe))
-            ->andWhere('fk.sePlanira = TRUE')
-            ->andWhere($e->in('up.faza', $this->getStatusiUprizoritev()))
-            ->orderBy('up.sifra');
+                ->from('Produkcija\Entity\Funkcija', 'fk')
+                ->join('fk.alternacije', 'al')
+                ->join('al.oseba', 'os')
+                ->join('fk.uprizoritev', 'up')
+                ->where($e->in('os.id', $osebe))
+                ->andWhere('fk.sePlanira = TRUE')
+                ->andWhere($e->in('up.faza', $this->getStatusiUprizoritev()))
+                ->orderBy('up.sifra');
 
         return $konfliktneFunkcije;
     }
@@ -159,36 +164,35 @@ class VzporedniceService extends AbstractMaxService
      * @param $osebe
      * @return array
      */
-
     public function getPogojneUprizoritve($osebe)
     {
 
         $konfliktneFunkcije = $this->getKonfliktneFunkcije($osebe)
-            ->andWhere('fk.alterCount = 1');
+                ->andWhere('fk.alterCount = 1');
 
 
         $konfliktneUprizoritve = $this->getEm()->createQueryBuilder();
         $e                     = $konfliktneUprizoritve->expr();
         $konfliktneUprizoritve->select('u')
-            ->from('Produkcija\Entity\Uprizoritev', 'u')
-            ->join('u.funkcije', 'f')
-            ->where($e->in('u.faza', $this->getStatusiUprizoritev()))
-            ->andWhere($e->in('f', $konfliktneFunkcije->getDql()));
+                ->from('Produkcija\Entity\Uprizoritev', 'u')
+                ->join('u.funkcije', 'f')
+                ->where($e->in('u.faza', $this->getStatusiUprizoritev()))
+                ->andWhere($e->in('f', $konfliktneFunkcije->getDql()));
 
 
         $konfliktneFunkcijeZAlternacijami = $this->getEm()->createQueryBuilder();
         $e                                = $konfliktneFunkcijeZAlternacijami->expr();
         $konfliktneFunkcijeZAlternacijami->select('fn')
-            ->from('Produkcija\Entity\Funkcija', 'fn')
-            ->join('fn.alternacije', 'alt')
-            ->join('alt.oseba', 'ose')
-            ->join('fn.uprizoritev', 'uprizoritev')
-            ->where($e->in('ose.id', $osebe))
-            ->andWhere('fn.alterCount > 1')
-            ->andWhere('fn.sePlanira = TRUE')
-            ->andWhere($e->notIn('uprizoritev', $konfliktneUprizoritve->getDQL()))// brez konfliktnih
-            ->andWhere($e->in('uprizoritev.faza', $this->getStatusiUprizoritev()))
-            ->orderBy('uprizoritev.sifra');
+                ->from('Produkcija\Entity\Funkcija', 'fn')
+                ->join('fn.alternacije', 'alt')
+                ->join('alt.oseba', 'ose')
+                ->join('fn.uprizoritev', 'uprizoritev')
+                ->where($e->in('ose.id', $osebe))
+                ->andWhere('fn.alterCount > 1')
+                ->andWhere('fn.sePlanira = TRUE')
+                ->andWhere($e->notIn('uprizoritev', $konfliktneUprizoritve->getDQL()))// brez konfliktnih
+                ->andWhere($e->in('uprizoritev.faza', $this->getStatusiUprizoritev()))
+                ->orderBy('uprizoritev.sifra');
 
 
         return $konfliktneFunkcijeZAlternacijami->getQuery()->getResult();
