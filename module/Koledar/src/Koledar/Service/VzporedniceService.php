@@ -51,16 +51,14 @@ class VzporedniceService
         foreach ($u as $row) {
 
             /**
-             * $$ tu bi morda bilo boljše
-             * da ne bi ostal brez nekaterih oseb, ki so v isti funkciji
-             * $r[]            = $row['oseba'];
+             * pričakujemo, da ima ena funkcija le 1 osebo
              */
             $r[$row['fun']] = $row['oseba'];
         }
         // dodam override in  vrnem samo osebe
-        $u = array_values(array_merge($r, $alternacije));
+        $osebe = array_unique(array_values(array_merge($r, $alternacije)));
 
-        return $u;
+        return $osebe;
     }
 
     /**
@@ -166,18 +164,43 @@ class VzporedniceService
      */
     public function getPogojneUprizoritve($osebe)
     {
+        /**
+         * število prostih oseb v določeni funkciji
+         */
+        $prosteOsebe =$this->getEm()->createQueryBuilder();
+        $est                             = $prosteOsebe->expr();
+        $prosteOsebe
+                ->select('count(fkpro)')
+                ->from('Produkcija\Entity\Funkcija', 'fkpro')
+                ->join('fkpro.alternacije', 'alte')
+                ->join('alte.oseba', 'oseb')
+                ->where('fkpro.id=fk.id')
+                ->andWhere($est->notIn('oseb.id', $osebe)) // le proste oz. nezasedene osebe
+        ;
 
-        $konfliktneFunkcije = $this->getKonfliktneFunkcije($osebe)
-                ->andWhere('fk.alterCount = 1');
-
-
+        /**
+         * konfliktne funkcije brez alternacij s prostimi osebami
+         */
+        $konfliktneFunkcijeBrezProstih = $this->getKonfliktneFunkcije($osebe);
+        $e                             = $konfliktneFunkcijeBrezProstih->expr();
+        $konfliktneFunkcijeBrezProstih 
+                ->addSelect('('.$prosteOsebe->getDQL().') cnt')
+                ->andWhere('cnt = 0');
+        
+        /**
+         * $$ začasno
+         */
+        $tmpFBrezPr = $konfliktneFunkcijeBrezProstih ->getQuery()->getResult();
+        
+        
+        
         $konfliktneUprizoritve = $this->getEm()->createQueryBuilder();
         $e                     = $konfliktneUprizoritve->expr();
         $konfliktneUprizoritve->select('u')
                 ->from('Produkcija\Entity\Uprizoritev', 'u')
                 ->join('u.funkcije', 'f')
                 ->where($e->in('u.faza', $this->getStatusiUprizoritev()))
-                ->andWhere($e->in('f', $konfliktneFunkcije->getDql()));
+                ->andWhere($e->in('f', $konfliktneFunkcijeBrezProstih->getDql()));
 
 
         $konfliktneFunkcijeZAlternacijami = $this->getEm()->createQueryBuilder();
@@ -188,11 +211,17 @@ class VzporedniceService
                 ->join('alt.oseba', 'ose')
                 ->join('fn.uprizoritev', 'uprizoritev')
                 ->where($e->in('ose.id', $osebe))
-                ->andWhere('fn.alterCount > 1')
+                ->andWhere('fn.alterCount > 1') //$$ popravi v nezasedene osebe
                 ->andWhere('fn.sePlanira = TRUE')
                 ->andWhere($e->notIn('uprizoritev', $konfliktneUprizoritve->getDQL()))// brez konfliktnih
                 ->andWhere($e->in('uprizoritev.faza', $this->getStatusiUprizoritev()))
                 ->orderBy('uprizoritev.sifra');
+
+        /**
+         * $$ začasno
+         */
+        $tmpKA = $konfliktneFunkcijeZAlternacijami->getQuery();
+
 
 
         return $konfliktneFunkcijeZAlternacijami->getQuery()->getResult();
