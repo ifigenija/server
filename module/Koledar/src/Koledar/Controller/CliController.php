@@ -43,12 +43,12 @@ use ExpectTrait;
         /** @var VzporedniceService $srv */
         $srv = $this->getServiceLocator()->get('vzporednice.service');
 
-        $input = [$u];
+        $uprA = [$u];
         if ($u2) {
-            $input[] = $u2;
+            $uprA[] = $u2;
         }
 
-        $osebe = $srv->getSodelujoci($input);
+        $osebe = $srv->getSodelujoci($uprA);
         $this->expect(!empty($osebe), 'Uprizoritev nima zasedbe', 3000602);
         $this->dumpOsebe($osebe);
 
@@ -57,7 +57,7 @@ use ExpectTrait;
         // izpis rezultata
         /** @var Uprizoritev $upr */
         foreach ($rezultat as $upr) {
-            echo sprintf("%10s %s\n", $upr->getSifra(), $upr->getNaslov());
+            echo sprintf("%s %s\n", $upr->getSifra(), $upr->getNaslov());
         }
 
         $rezultat = $srv->getPogojneUprizoritve($osebe);

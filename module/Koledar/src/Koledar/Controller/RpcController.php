@@ -5,6 +5,7 @@
  */
 
 namespace Koledar\Controller;
+
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
@@ -15,16 +16,27 @@ use Zend\Mvc\Controller\AbstractActionController;
 class RpcController
         extends AbstractActionController
 {
-        use \Max\Controller\Traits\RpcTrait;
+
+    use \Max\Controller\Traits\RpcTrait;
 
     /**
      * Akcije ki streže nastavitve preko JsonRpc
      * 
      */
-    public function praznikAction() {
-        
+    public function praznikAction()
+    {
+
         $srv = $this->getServiceLocator()->get('praznik.rpc.service');
-        
+
         return $this->handleJsonRpcCall($srv);
     }
+
+    public function vzporedniceAction()
+    {
+
+        $srv = $this->getServiceLocator()->get('vzporednice.rpc.service');
+
+        return $this->handleJsonRpcCall($srv);
+    }
+
 }

@@ -13,14 +13,15 @@ return [
         'factories'  => [
         ],
         'invokables' => [
-            'praznik.rpc.service' => 'Koledar\Rpc\PraznikRpcService',
-            'praznik.service'     => 'Koledar\Service\PraznikService',
-            'vzporednice.service' => 'Koledar\Service\VzporedniceService',
+            'praznik.rpc.service'     => 'Koledar\Rpc\PraznikRpcService',
+            'praznik.service'         => 'Koledar\Service\PraznikService',
+            'vzporednice.service'     => 'Koledar\Service\VzporedniceService',
+            'vzporednice.rpc.service' => 'Koledar\Rpc\VzporedniceRpcService',
         ],
     ],
     'controllers'     => [
         'invokables' => [
-            'Rpc\koledar'            => 'Koledar\Controller\RpcController',
+            'Rpc\koledar' => 'Koledar\Controller\RpcController',
             'Koledar\Cli' => 'Koledar\Controller\CliController',
         ],
         'factories'  => [
@@ -43,7 +44,6 @@ return [
     ],
     'router'          => [
         'routes' => [
-
         ],
     ],
     'console'         => [
@@ -57,7 +57,6 @@ return [
                             'action'     => 'prekrivanje'
                         ]
                     ],
-
                 ],
                 'vzporednice' => [
                     'options' => [
@@ -67,7 +66,6 @@ return [
                             'action'     => 'vzporednice'
                         ]
                     ]
-
                 ],
             ]
         ]
