@@ -128,7 +128,6 @@ class Funkcija
      */
     protected $alternacije;
 
-
     /**
      *
      * Število alternacij, ki jih ima funkcija. To je interno polje, ki
@@ -140,7 +139,6 @@ class Funkcija
      * @var integer
      */
     protected $alterCount = 0;
-
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="funkcije")
@@ -183,21 +181,33 @@ class Funkcija
         }
     }
 
+
     /**
      * Vrne imena ljudi, ki so na alternacijah
+     * in so v seznamu zasedenih oseb
+     * 
+     * @param array $zasedeneOsebe      seznam id-jev oseb , ki jih naj izpiše oz. neizpiše glede
+     * @param boolean $izpisiZasedene   ali naj izpiše osebe ki so na seznamu zasedene osebe ali tiste, ki niso
+     * @return string
      */
-    public function getImena()
+    public function getImena(array $zasedeneOsebe = [], $izpisiZasedene=false)
     {
         $imena       = "";
         $privzetoIme = "";
         foreach ($this->getAlternacije() as $alter) {
             /* @var $alter \Produkcija\Entity\Alternacija */
             if ($alter->getOseba()) {
-                if ($alter->getPrivzeti()) {
-                    $privzetoIme = $alter->getOseba()->getPolnoIme();
-                } else {
-                    $ime   = $alter->getOseba()->getPolnoIme();
-                    $imena = $imena . ($imena ? " / " : "") . $ime;
+
+                if (
+                        (($izpisiZasedene) && in_array($alter->getOseba()->getId(), $zasedeneOsebe))
+                    ||    ((!$izpisiZasedene) && !in_array($alter->getOseba()->getId(), $zasedeneOsebe))
+                                ){
+                    if ($alter->getPrivzeti()) {
+                        $privzetoIme = $alter->getOseba()->getPolnoIme();
+                    } else {
+                        $ime   = $alter->getOseba()->getPolnoIme();
+                        $imena = $imena . ($imena ? " / " : "") . $ime;
+                    }
                 }
             }
         }
@@ -388,7 +398,5 @@ class Funkcija
         $this->alterCount = $alterCount;
         return $this;
     }
-
-
 
 }

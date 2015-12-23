@@ -164,7 +164,7 @@ class VzporedniceService
      */
     public function getPogojneUprizoritve($osebe)
     {
-        
+
         /**
          * število prostih oseb v določeni funkciji
          */
@@ -194,20 +194,6 @@ class VzporedniceService
                 ->andWhere($est->notIn('oseb2.id', $osebe)) // le proste oz. nezasedene osebe
         ;
 
-
-        /**
-         * $$ začasno
-         */
-        $tmpPrDql = $stProstihOseb->getDQL();
-        $tmpPrQue = $stProstihOseb->getQuery();
-        /**
-         * ->semanticalError(''fk' is not def...', Array)
-         */
-//        $tmpPrRes = $prosteOsebe->getQuery()->getResult();
-
-
-
-
         /**
          * konfliktne funkcije brez alternacij s prostimi osebami
          */
@@ -215,13 +201,6 @@ class VzporedniceService
         $e                             = $konfliktneFunkcijeBrezProstih->expr();
         $konfliktneFunkcijeBrezProstih
                 ->andWhere($e->eq("(" . $stProstihOseb->getDQL() . ")", 0));
-
-        /**
-         * $$ začasno
-         */
-        $tmpFBPDql = $konfliktneFunkcijeBrezProstih->getDQL();
-        $tmpFBPQue = $konfliktneFunkcijeBrezProstih->getQuery();
-        $tmpFBPRes = $konfliktneFunkcijeBrezProstih->getQuery()->getResult();
 
         $konfliktneUprizoritve = $this->getEm()->createQueryBuilder();
         $e                     = $konfliktneUprizoritve->expr();
@@ -231,20 +210,8 @@ class VzporedniceService
                 ->where($e->in('u.faza', $this->getStatusiUprizoritev()))
                 ->andWhere($e->in('f', $konfliktneFunkcijeBrezProstih->getDql()));
 
-
-        /**
-         * $$ začasno
-         */
-        $tmpKUDql = $konfliktneUprizoritve->getDQL();
-        $tmpKUQue = $konfliktneUprizoritve->getQuery();
-        $tmpKURes = $konfliktneUprizoritve->getQuery()->getResult();
-
-
         $konfliktneFunkcijeZAlternacijami = $this->getEm()->createQueryBuilder();
         $e                                = $konfliktneFunkcijeZAlternacijami->expr();
-        /**
-         * $$ začasno nekatere vrstice komentiramo:
-         */
         $konfliktneFunkcijeZAlternacijami->select('fn')
                 ->from('Produkcija\Entity\Funkcija', 'fn')
                 ->join('fn.alternacije', 'alt')
@@ -256,17 +223,11 @@ class VzporedniceService
                 ->andWhere($e->notIn('uprizoritev', $konfliktneUprizoritve->getDQL()))// brez konfliktnih
                 ->andWhere($e->in('uprizoritev.faza', $this->getStatusiUprizoritev()))
                 ->orderBy('uprizoritev.sifra');
-
-
+     
         /**
-         * $$ začasno
+         * $$ začasno 
          */
-        $tmpFADql = $konfliktneFunkcijeZAlternacijami->getDQL();
-        $tmpFAQue = $konfliktneFunkcijeZAlternacijami->getQuery();
-        $tmpFARes = $konfliktneFunkcijeZAlternacijami->getQuery()->getResult();
-
-        print_r($osebe);
-        print_r($tmpFADql);
+        $tmp= $konfliktneFunkcijeZAlternacijami->getQuery()->getResult();
 
         return $konfliktneFunkcijeZAlternacijami->getQuery()->getResult();
     }

@@ -60,10 +60,10 @@ class CliController extends AbstractActionController
 
         $rezultat = $srv->getPogojneUprizoritve($osebe);
 
-        $this->groupByUprizoritev($rezultat);
+        $this->groupByUprizoritev($rezultat,$osebe);
     }
 
-    public function groupByUprizoritev($rezultat)
+    public function groupByUprizoritev($rezultat,$osebe=[])
     {
         $u = '';
 
@@ -74,7 +74,9 @@ class CliController extends AbstractActionController
                 echo sprintf("%s %s\n", $fun->getUprizoritev()->getSifra(), $fun->getUprizoritev()->getNaslov());
                 $u = $fun->getUprizoritev()->getSifra();
             }
-            echo sprintf("  - %s: %s\n", trim($fun->getNaziv()), $fun->getImena());
+            echo sprintf("  - %s\n", trim($fun->getNaziv()));
+            echo sprintf("      - zasedeni: %s\n",  $fun->getImena($osebe,true));
+            echo sprintf("      - prosti  : %s\n",  $fun->getImena($osebe,false));
         }
     }
 
@@ -111,7 +113,7 @@ class CliController extends AbstractActionController
 
         $rezultat = $srv->getKonfliktneFunkcije($osebe)->getQuery()->getResult();
 
-        $this->groupByUprizoritev($rezultat);
+        $this->groupByUprizoritev($rezultat,$osebe);
     }
 
 }
