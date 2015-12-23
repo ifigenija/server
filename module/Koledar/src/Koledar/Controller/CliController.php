@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: boris
@@ -8,18 +9,19 @@
 
 namespace Koledar\Controller;
 
-
 use Koledar\Service\VzporedniceService;
 use Max\Controller\Traits\EntityTrait;
 use Max\Expect\ExpectTrait;
 use Produkcija\Entity\Uprizoritev;
 use Zend\Mvc\Controller\AbstractActionController;
 
-class CliController extends AbstractActionController
+class CliController
+        extends AbstractActionController
 {
 
     use EntityTrait;
-    use ExpectTrait;
+
+use ExpectTrait;
 
     /**
      * @throws \Max\Exception\MaxException
@@ -60,32 +62,43 @@ class CliController extends AbstractActionController
 
         $rezultat = $srv->getPogojneUprizoritve($osebe);
 
-        $this->groupByUprizoritev($rezultat,$osebe);
+        $this->groupByUprizoritev($rezultat, $osebe);
     }
 
-    public function groupByUprizoritev($rezultat,$osebe=[])
+    /**
+     * Izpiše funkcije, ki so že grupirane po šifri uprizoritve,
+     * izpusti uprizoritve, ki so v parametrih
+     * 
+     * @param type $rezultat
+     * @param type $osebe
+     * @param type $uprA
+     */
+    public function groupByUprizoritev($rezultat, $osebe = [], $uprA = [])
     {
         $u = '';
 
         // izpis pogojnih
         /** @var Uprizoritev $upr */
         foreach ($rezultat as $fun) {
-            if ($u !== $fun->getUprizoritev()->getSifra()) {
-                echo sprintf("%s %s\n", $fun->getUprizoritev()->getSifra(), $fun->getUprizoritev()->getNaslov());
-                $u = $fun->getUprizoritev()->getSifra();
+            if (!in_array($fun->getUprizoritev(), $uprA)) {
+                if ($u !== $fun->getUprizoritev()->getSifra()) {
+                    echo sprintf("%s %s\n", $fun->getUprizoritev()->getSifra(), $fun->getUprizoritev()->getNaslov());
+                    $u = $fun->getUprizoritev()->getSifra();
+                }
+                echo sprintf("  - %s\n", trim($fun->getNaziv()));
+                echo sprintf("      - zasedeni: %s\n", $fun->getImena($osebe, true));
+                echo sprintf("      - prosti  : %s\n", $fun->getImena($osebe, false));
             }
-            echo sprintf("  - %s\n", trim($fun->getNaziv()));
-            echo sprintf("      - zasedeni: %s\n",  $fun->getImena($osebe,true));
-            echo sprintf("      - prosti  : %s\n",  $fun->getImena($osebe,false));
         }
     }
 
-    public function dumpOsebe($osebe){
+    public function dumpOsebe($osebe)
+    {
 
         echo "------------------------------------------\n";
         $r = $this->getEm()->getRepository('App\Entity\Oseba');
-        foreach($osebe as $o) {
-              $os = $r->find($o);
+        foreach ($osebe as $o) {
+            $os = $r->find($o);
             echo $os->getPolnoime() . ";";
         }
         echo "\n------------------------------------------\n";
@@ -100,20 +113,31 @@ class CliController extends AbstractActionController
         $rep = $this->getRepository('Produkcija\Entity\Uprizoritev');
 
         $u = $rep->findOneBySifra($this->params('stevilka'));
+        $u = $rep->findOneBySifra($this->params('stevilka'));
+        if ($this->params('stevx')) {
+            $u2 = $rep->findOneBySifra($this->params('stevx'));
+        } else {
+            $u2 = null;
+        }
         $this->expect($u !== null, "Ne najdem uprizoritve", 3000601);
 
 
         /** @var VzporedniceService $srv */
         $srv = $this->getServiceLocator()->get('vzporednice.service');
 
-        $osebe = $srv->getSodelujoci([$u]);
+        $uprA = [$u];
+        if ($u2) {
+            $uprA[] = $u2;
+        }
+
+        $osebe = $srv->getSodelujoci($uprA);
         $this->dumpOsebe($osebe);
         $this->expect(!empty($osebe), 'Uprizoritev nima zasedbe', 3000602);
 
 
         $rezultat = $srv->getKonfliktneFunkcije($osebe)->getQuery()->getResult();
 
-        $this->groupByUprizoritev($rezultat,$osebe);
+        $this->groupByUprizoritev($rezultat, $osebe, $uprA);
     }
 
 }

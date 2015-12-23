@@ -51,7 +51,7 @@ return [
             'routes' => [
                 'prekrivanje' => [
                     'options' => [
-                        'route'    => 'prekrivanje <stevilka>',
+                        'route'    => 'prekrivanje <stevilka> [<stevx>]',
                         'defaults' => [
                             'controller' => 'Koledar\Cli',
                             'action'     => 'prekrivanje'

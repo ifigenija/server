@@ -224,11 +224,6 @@ class VzporedniceService
                 ->andWhere($e->in('uprizoritev.faza', $this->getStatusiUprizoritev()))
                 ->orderBy('uprizoritev.sifra');
      
-        /**
-         * $$ začasno 
-         */
-        $tmp= $konfliktneFunkcijeZAlternacijami->getQuery()->getResult();
-
         return $konfliktneFunkcijeZAlternacijami->getQuery()->getResult();
     }
 
