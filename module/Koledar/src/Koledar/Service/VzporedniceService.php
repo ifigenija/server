@@ -164,12 +164,13 @@ class VzporedniceService
      */
     public function getPogojneUprizoritve($osebe)
     {
+        
         /**
          * število prostih oseb v določeni funkciji
          */
-        $prosteOsebe =$this->getEm()->createQueryBuilder();
-        $est                             = $prosteOsebe->expr();
-        $prosteOsebe
+        $stProstihOseb  = $this->getEm()->createQueryBuilder();
+        $est            = $stProstihOseb->expr();
+        $stProstihOseb
                 ->select('count(fkpro)')
                 ->from('Produkcija\Entity\Funkcija', 'fkpro')
                 ->join('fkpro.alternacije', 'alte')
@@ -177,23 +178,51 @@ class VzporedniceService
                 ->where('fkpro.id=fk.id')
                 ->andWhere($est->notIn('oseb.id', $osebe)) // le proste oz. nezasedene osebe
         ;
+        /**
+         * kre rabimo št. prostih oseb kasneje v istem DQL-u
+         * se imena ne smejo podvajati, 
+         * tako da naredimo vsebinsko enak (sub)query, vsebinsko prilagojan
+         */
+        $stProstihOseb2 = $this->getEm()->createQueryBuilder();
+        $est            = $stProstihOseb2->expr();
+        $stProstihOseb2
+                ->select('count(fkpro2)')
+                ->from('Produkcija\Entity\Funkcija', 'fkpro2')
+                ->join('fkpro2.alternacije', 'alte2')
+                ->join('alte2.oseba', 'oseb2')
+                ->where('fkpro2.id=fn.id')      //fn.id - odvisno od glavnega query-ja!
+                ->andWhere($est->notIn('oseb2.id', $osebe)) // le proste oz. nezasedene osebe
+        ;
+
+
+        /**
+         * $$ začasno
+         */
+        $tmpPrDql = $stProstihOseb->getDQL();
+        $tmpPrQue = $stProstihOseb->getQuery();
+        /**
+         * ->semanticalError(''fk' is not def...', Array)
+         */
+//        $tmpPrRes = $prosteOsebe->getQuery()->getResult();
+
+
+
 
         /**
          * konfliktne funkcije brez alternacij s prostimi osebami
          */
         $konfliktneFunkcijeBrezProstih = $this->getKonfliktneFunkcije($osebe);
         $e                             = $konfliktneFunkcijeBrezProstih->expr();
-        $konfliktneFunkcijeBrezProstih 
-                ->addSelect('('.$prosteOsebe->getDQL().') cnt')
-                ->andWhere('cnt = 0');
-        
+        $konfliktneFunkcijeBrezProstih
+                ->andWhere($e->eq("(" . $stProstihOseb->getDQL() . ")", 0));
+
         /**
          * $$ začasno
          */
-        $tmpFBrezPr = $konfliktneFunkcijeBrezProstih ->getQuery()->getResult();
-        
-        
-        
+        $tmpFBPDql = $konfliktneFunkcijeBrezProstih->getDQL();
+        $tmpFBPQue = $konfliktneFunkcijeBrezProstih->getQuery();
+        $tmpFBPRes = $konfliktneFunkcijeBrezProstih->getQuery()->getResult();
+
         $konfliktneUprizoritve = $this->getEm()->createQueryBuilder();
         $e                     = $konfliktneUprizoritve->expr();
         $konfliktneUprizoritve->select('u')
@@ -203,26 +232,41 @@ class VzporedniceService
                 ->andWhere($e->in('f', $konfliktneFunkcijeBrezProstih->getDql()));
 
 
+        /**
+         * $$ začasno
+         */
+        $tmpKUDql = $konfliktneUprizoritve->getDQL();
+        $tmpKUQue = $konfliktneUprizoritve->getQuery();
+        $tmpKURes = $konfliktneUprizoritve->getQuery()->getResult();
+
+
         $konfliktneFunkcijeZAlternacijami = $this->getEm()->createQueryBuilder();
         $e                                = $konfliktneFunkcijeZAlternacijami->expr();
+        /**
+         * $$ začasno nekatere vrstice komentiramo:
+         */
         $konfliktneFunkcijeZAlternacijami->select('fn')
                 ->from('Produkcija\Entity\Funkcija', 'fn')
                 ->join('fn.alternacije', 'alt')
                 ->join('alt.oseba', 'ose')
                 ->join('fn.uprizoritev', 'uprizoritev')
                 ->where($e->in('ose.id', $osebe))
-                ->andWhere('fn.alterCount > 1') //$$ popravi v nezasedene osebe
+                ->andWhere($e->gt("(" . $stProstihOseb2->getDQL() . ")", 0))
                 ->andWhere('fn.sePlanira = TRUE')
                 ->andWhere($e->notIn('uprizoritev', $konfliktneUprizoritve->getDQL()))// brez konfliktnih
                 ->andWhere($e->in('uprizoritev.faza', $this->getStatusiUprizoritev()))
                 ->orderBy('uprizoritev.sifra');
 
+
         /**
          * $$ začasno
          */
-        $tmpKA = $konfliktneFunkcijeZAlternacijami->getQuery();
+        $tmpFADql = $konfliktneFunkcijeZAlternacijami->getDQL();
+        $tmpFAQue = $konfliktneFunkcijeZAlternacijami->getQuery();
+        $tmpFARes = $konfliktneFunkcijeZAlternacijami->getQuery()->getResult();
 
-
+        print_r($osebe);
+        print_r($tmpFADql);
 
         return $konfliktneFunkcijeZAlternacijami->getQuery()->getResult();
     }
