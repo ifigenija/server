@@ -120,32 +120,32 @@ class VzporedniceRpcService
         /**
          * vsem uprizoritvam  dodamo funkcije z večimi alternacijammi (alterCount>1) 
          */
-        $jsonList2 = [];
-        foreach ($jsonList as $jsonItem) {
-            $u = $uprR->findOneById($jsonItem['id']);
-            foreach ($u->getFunkcije() as $fun) {
-                if ($fun->getSePlanira() && ($fun->getAlterCount() > 1)) {
+//        $jsonList2 = [];
+//        foreach ($jsonList as $jsonItem) {
+//            $u = $uprR->findOneById($jsonItem['id']);
+//            foreach ($u->getFunkcije() as $fun) {
+//                if ($fun->getSePlanira() && ($fun->getAlterCount() > 1)) {
+//
+//                    $vecaltF = $metaF->filterForLookup($fun);
+//
+//                    $zasedeneOsebe = $this->getOsebe($fun, $osebe, true);
+//                    foreach ($zasedeneOsebe as $zos) {
+//                        $o                        = $osebaR->findOneById($zos);
+//                        $vecaltF[zasedeneOsebe][] = $metaO->filterForLookup($o);
+//                    }
+//                    $nezasedeneOsebe = $this->getOsebe($fun, $osebe, false);
+//                    foreach ($nezasedeneOsebe as $nos) {
+//                        $o                          = $osebaR->findOneById($nos);
+//                        $vecaltF[nezasedeneOsebe][] = $metaO->filterForLookup($o);
+//                    }
+//
+//                    $jsonItem['vecaltFunkcije'][] = $vecaltF;
+//                }
+//            }
+//            $jsonList2[] = $jsonItem;
+//        }
 
-                    $vecaltF = $metaF->filterForLookup($fun);
-
-                    $zasedeneOsebe = $this->getOsebe($fun, $osebe, true);
-                    foreach ($zasedeneOsebe as $zos) {
-                        $o                        = $osebaR->findOneById($zos);
-                        $vecaltF[zasedeneOsebe][] = $metaO->filterForLookup($o);
-                    }
-                    $nezasedeneOsebe = $this->getOsebe($fun, $osebe, false);
-                    foreach ($nezasedeneOsebe as $nos) {
-                        $o                          = $osebaR->findOneById($nos);
-                        $vecaltF[nezasedeneOsebe][] = $metaO->filterForLookup($o);
-                    }
-
-                    $jsonItem['vecaltFunkcije'][] = $vecaltF;
-                }
-            }
-            $jsonList2[] = $jsonItem;
-        }
-
-        return $jsonList2;
+        return $jsonList;
     }
 
     /**

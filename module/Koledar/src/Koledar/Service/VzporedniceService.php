@@ -53,10 +53,28 @@ class VzporedniceService
             /**
              * pričakujemo, da ima ena funkcija le 1 osebo
              */
-            $r[$row['fun']] = $row['oseba'];
+            $r[$row['fun']] = [$row['oseba']];
         }
-        // dodam override in  vrnem samo osebe
-        $osebe = array_unique(array_values(array_merge($r, $alternacije)));
+
+        $altFO = [];
+        foreach ($alternacije as $a) {
+            $altFO[$a[0]] = $a[1];
+        }
+
+
+
+        // funkcija se override-a, če obstaja alternacija za njo
+        /**
+         * $$ začasno
+         */
+        $tmp1  = array_merge($r, $altFO);
+        $osebe = [];
+        foreach (array_merge($r, $altFO) as $t) {
+            foreach ($t as $p) {
+                $osebe[] = $p;
+            }
+        }
+        $osebe = array_unique($osebe);
 
         return $osebe;
     }
@@ -223,7 +241,7 @@ class VzporedniceService
                 ->andWhere($e->notIn('uprizoritev', $konfliktneUprizoritve->getDQL()))// brez konfliktnih
                 ->andWhere($e->in('uprizoritev.faza', $this->getStatusiUprizoritev()))
                 ->orderBy('uprizoritev.sifra');
-     
+
         return $konfliktneFunkcijeZAlternacijami->getQuery()->getResult();
     }
 

@@ -738,7 +738,7 @@ class OsebaCest
      */
     public function read(ApiTester $I)
     {
-        $oseba = $I->successfullyGet($this->restUrl, $this->obj1['id']);
+        $this->obj1 = $oseba      = $I->successfullyGet($this->restUrl, $this->obj1['id'], false);
         codecept_debug($oseba);
 
         $I->assertGuid($oseba['id'], "osebe ni");
@@ -776,6 +776,42 @@ class OsebaCest
         $I->assertFalse(array_key_exists('drzavaRojstva', $oseba), 'drzavaRojstva osebni podatek');
         $I->assertFalse(array_key_exists('krajRojstva', $oseba), 'krajRojstva osebni podatek');
         $I->assertFalse(array_key_exists('trrji', $oseba), 'trrji osebni podatek');
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookup(ApiTester $I)
+    {
+        $ent  = $this->obj1;
+        $look = $I->lookupEntity("oseba", $ent['sifra'], false);
+        codecept_debug($look);
+
+        $I->assertEquals($ent['id'], $look['id']);
+        $I->assertEquals($ent['priimek'], $look['priimek']);
+        $I->assertEquals($ent['ime'], $look['ime']);
+        $I->assertEquals($ent['psevdonim'], $look['psevdonim']);
+
+        /**
+         * osebnih podatkov ne sme biti vidnih 
+         */
+        $I->assertFalse(array_key_exists('twitter', $look), 'twitter osebni podatek');
+        $I->assertFalse(array_key_exists('skype', $look), 'skype osebni podatek');
+        $I->assertFalse(array_key_exists('fb', $look), 'fb osebni podatek');
+        $I->assertFalse(array_key_exists('opombe', $look), 'opombe osebni podatek');
+        $I->assertFalse(array_key_exists('telefonske', $look), 'telefonske osebni podatek');
+        $I->assertFalse(array_key_exists('naslovi', $look), 'naslovi osebni podatek');
+        $I->assertFalse(array_key_exists('telefonske', $look), 'telefonske osebni podatek');
+        $I->assertFalse(array_key_exists('naslovi', $look), 'naslovi osebni podatek');
+        $I->assertFalse(array_key_exists('email', $look), 'email osebni podatek');
+        $I->assertFalse(array_key_exists('datumRojstva', $look), 'datumRojstva osebni podatek');
+        $I->assertFalse(array_key_exists('emso', $look), 'emso osebni podatek');
+        $I->assertFalse(array_key_exists('davcna', $look), 'davcna osebni podatek');
+        $I->assertFalse(array_key_exists('drzavljanstvo', $look), 'drzavljanstvo osebni podatek');
+        $I->assertFalse(array_key_exists('drzavaRojstva', $look), 'drzavaRojstva osebni podatek');
+        $I->assertFalse(array_key_exists('krajRojstva', $look), 'krajRojstva osebni podatek');
+        $I->assertFalse(array_key_exists('trrji', $look), 'trrji osebni podatek');
     }
 
     /**
