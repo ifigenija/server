@@ -136,6 +136,11 @@ class VzporedniceService
                 ->andWhere('vzp.gostujoca = FALSE')
                 ->andWhere($e->notIn('vzp.id', $konfliktneUprizoritve->getDQL()));
 
+        /**
+         * $$ začasno
+         */
+        $tmp=$vzporednice->getDQL();
+        
         return $vzporednice->getQuery()->getResult();
     }
 
