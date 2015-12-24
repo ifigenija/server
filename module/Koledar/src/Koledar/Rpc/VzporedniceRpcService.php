@@ -24,10 +24,10 @@ class VzporedniceRpcService
      *  - terminov storitev glede na časovni interval
      *
      * @param array $uprizoritveIds
+     * @param array $alternacije
      * @return type
-     * @throws \Max\Exception\UnauthException
      */
-    public function vzporednice(array $uprizoritveIds = [])
+    public function vzporednice( array $uprizoritveIds = [] ,array $alternacije=[])
     {
 
         // preverjanje avtorizacije
@@ -39,6 +39,7 @@ class VzporedniceRpcService
         /**
          * $$ preverjanje vhodnih parametrov 
          *   - morda če so guid?
+         *    - kako so lahko prazni ([], null)
          */
 //$$        $this->expectIsoDate($datum, $this->translate("Datum ($datum) ni datum v ISO8601 obliki"), 1001110);
 
@@ -50,7 +51,7 @@ class VzporedniceRpcService
         /** @var VzporedniceService $srv */
         $srv = $this->getServiceLocator()->get('vzporednice.service');
 
-        $osebe = $srv->getSodelujoci($uprA);
+        $osebe = $srv->getSodelujoci($uprA, $alternacije);
 
         $uprizoritveMozne = $srv->getMozneUprizoritve($osebe);
 
