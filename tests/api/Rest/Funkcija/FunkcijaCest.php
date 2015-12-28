@@ -185,7 +185,7 @@ class FunkcijaCest
             'velikost'          => 'mala',
             'pomembna'          => false,
             'sort'              => 4,
-            'sePlanira'         => true,
+            'sePlanira'         => false,
             'dovoliPrekrivanje' => true,
             'uprizoritev'       => $this->lookUprizoritev1['id'],
             'privzeti'          => null,
@@ -296,6 +296,25 @@ class FunkcijaCest
     }
 
     /**
+     * preberi vse zapise od uprizoritve
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPlanirane(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->restUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev1['id'], []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+
+        $sePlaniraA = array_unique(array_column($list, "sePlanira"));
+        codecept_debug($sePlaniraA);
+        $I->assertEquals(1, count($sePlaniraA), "vsi vse planira morajo biti true");
+        $I->assertEquals(true, $sePlaniraA[0]);
+    }
+
+    /**
      * spremenim zapis
      * 
      * @depends create
@@ -324,19 +343,19 @@ class FunkcijaCest
          * ne tehnika ne sme spreminjati
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vinko, \IfiTest\AuthPage::$vinkoPass);
-        $resp = $I->failToUpdate($this->restUrl, $entUm['id'], $entUm);
+        $resp                  = $I->failToUpdate($this->restUrl, $entUm['id'], $entUm);
         codecept_debug($resp);
         $I->assertEquals(1000101, $resp[0]['code']);
         /**
          * tehnika lahko spremeni
          */
-        $resp = $I->successfullyUpdate($this->restUrl, $entTeh['id'], $entTeh);
+        $resp                  = $I->successfullyUpdate($this->restUrl, $entTeh['id'], $entTeh);
         codecept_debug($resp);
         /*
          * ne more spremeniti področja funkcije
          */
         $entTeh['tipFunkcije'] = $this->lookTipFunkcije1Um['id'];
-        $resp = $I->failToUpdate($this->restUrl, $entTeh['id'], $entTeh);
+        $resp                  = $I->failToUpdate($this->restUrl, $entTeh['id'], $entTeh);
         codecept_debug($resp);
         $I->assertEquals(1000672, $resp[0]['code']);
 

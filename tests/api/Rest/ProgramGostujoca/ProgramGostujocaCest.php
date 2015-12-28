@@ -71,7 +71,7 @@ class ProgramGostujocaCest
             'celotnaVrednost' => 1.24,
 //            'nasDelez'        => 4,
             'strosekOdkPred'  => 3.11,
-            'stroskiOstali'  => 0.89,
+            'stroskiOstali'   => 0.89,
             'zaproseno'       => 1.24,
 //            'lastnaSredstva'  => 1.24,
 //            'avtorskiHonorarji'  => 1.24,
@@ -98,7 +98,7 @@ class ProgramGostujocaCest
 //            'celotnaVrednost' => 4.56,
 //            'nasDelez'        => 22,
             'strosekOdkPred'  => 3.11,
-            'stroskiOstali'  => 18.89,
+            'stroskiOstali'   => 18.89,
             'zaproseno'       => 1.24,
 //'lastnaSredstva'  => 4.56,
 //            'avtorskiHonorarji'  => 4.56,
@@ -190,10 +190,9 @@ class ProgramGostujocaCest
      */
     public function getListDefault(ApiTester $I)
     {
-        $listUrl = $this->restUrl;
-        codecept_debug($listUrl);
-        $resp    = $I->successfullyGetList($listUrl, []);
-        $list    = $resp['data'];
+        $resp = $I->successfullyGetList($this->restUrl, []);
+        $list = $resp['data'];
+        codecept_debug($list);
 
         $I->assertNotEmpty($list);
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
@@ -337,12 +336,12 @@ class ProgramGostujocaCest
     {
 //                $this->expect($this->getUprizoritev(), "Uprizoritev je obvezen podatek", 1000562);
         // brez uprizoritve
-        $data       = [
+        $data = [
             'uprizoritev'     => NULL,
             'celotnaVrednost' => 1.24,
 //            'nasDelez'        => 4,
             'strosekOdkPred'  => 3.11,
-            'stroskiOstali'  => 0.89,
+            'stroskiOstali'   => 0.89,
             'zaproseno'       => 1.24,
 //            'lastnaSredstva'  => 1.24,
 //            'avtorskiHonorarji'  => 1.24,

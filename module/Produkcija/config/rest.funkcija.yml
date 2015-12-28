@@ -38,6 +38,20 @@ lists:
                       multiple: true
                       required: false
                       value_options: @funkcija.podrocje
+    planirane: 
+        filter:
+            elements:                 
+                - name: uprizoritev
+                  type: toone
+                  options:
+                      label: Uprizoritev
+                      targetEntity: Produkcija\Entity\Uprizoritev
+                      required: true
+        hydrator:
+            byValue:
+                - alternacije
+            lookups:
+                - alternacije.oseba
 #    vse: 
 #        filter:
 hydrator:
