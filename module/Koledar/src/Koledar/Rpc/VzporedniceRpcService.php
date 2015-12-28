@@ -93,21 +93,21 @@ class VzporedniceRpcService
                 /**
                  * doddamo zasedene osebe
                  */
-                $konF[zasedeneOsebe] = [];
+                $konF['zasedeneOsebe'] = [];
                 $zasedeneOsebe       = $this->getOsebe($fun, $osebe, true);
                 foreach ($zasedeneOsebe as $zos) {
                     $o                     = $osebaR->findOneById($zos);
-                    $konF[zasedeneOsebe][] = $metaO->filterForLookup($o);
+                    $konF['zasedeneOsebe'][] = $metaO->filterForLookup($o);
                 }
 
                 /**
                  * doddamo nezasedene osebe
                  */
-                $konF[nezasedeneOsebe] = [];
+                $konF['nezasedeneOsebe'] = [];
                 $nezasedeneOsebe       = $this->getOsebe($fun, $osebe, false);
                 foreach ($nezasedeneOsebe as $nos) {
                     $o                       = $osebaR->findOneById($nos);
-                    $konF[nezasedeneOsebe][] = $metaO->filterForLookup($o);
+                    $konF['nezasedeneOsebe'][] = $metaO->filterForLookup($o);
                 }
 
                 $array['konfliktneFunkcije'][] = $konF;
