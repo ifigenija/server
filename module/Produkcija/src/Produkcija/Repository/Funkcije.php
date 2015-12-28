@@ -42,6 +42,11 @@ class Funkcije
                 break;
             case "planirane":
                 $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1000674);
+                $this->expect($this->getAuthorizationService()->isGranted('Alternacija-read', $object)
+                        , 'Nimate dovoljenja za branje alternacij', 1000675);
+                $this->expect($this->getAuthorizationService()->isGranted('Oseba-read', $object)
+                        , 'Nimate dovoljenja za branje oseb', 1000676);
+
                 $qb = $this->getPlaniraneQb($options);
                 break;
             default:
@@ -113,7 +118,6 @@ class Funkcije
         /**
          * $$ preveri še, če je alternacija aktivna
          */
-        
         return $qb;
     }
 

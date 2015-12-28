@@ -27,10 +27,10 @@ class VzporedniceRpcService
      * @param array $alternacije
      * @return type
      */
-    public function vzporednice( array $uprizoritveIds = [] ,array $alternacije=[])
+    public function vzporednice(array $uprizoritveIds = [], array $alternacije = [])
     {
 
-        // preverjanje avtorizacije
+// preverjanje avtorizacije
         $this->expectPermission("Uprizoritev-read");
         $this->expectPermission("Funkcija-read");
         $this->expectPermission("Alternacija-read");
@@ -43,107 +43,56 @@ class VzporedniceRpcService
          */
 //$$        $this->expectIsoDate($datum, $this->translate("Datum ($datum) ni datum v ISO8601 obliki"), 1001110);
 
-        $uprR   = $this->getEm()->getRepository('Produkcija\Entity\Uprizoritev');
-        $osebaR = $this->getEm()->getRepository('App\Entity\Oseba');
+        $osebe = $this->getZasedeneOsebe($uprizoritveIds, $alternacije);
 
-        $uprA = $uprR->findById($uprizoritveIds);
-
-        /** @var VzporedniceService $srv */
-        $srv = $this->getServiceLocator()->get('vzporednice.service');
-
-        $osebe = $srv->getSodelujoci($uprA, $alternacije);
-
+        $srv              = $this->getServiceLocator()->get('vzporednice.service');
         $uprizoritveMozne = $srv->getMozneUprizoritve($osebe);
 
-        $pogojneFunkcije = $srv->getPogojneUprizoritve($osebe);
+        $konfliktneFunkcije = $srv->getPogojneUprizoritve($osebe);
 
         /*
          * vzporednice so najdene. Še priprava izhoda 
          */
-        $metaFac = $this->getServiceLocator()->get('entity.metadata.factory');
-        $metaU   = $metaFac->factory("Produkcija\Entity\Uprizoritev");
-        $metaF   = $metaFac->factory("Produkcija\Entity\Funkcija");
-        $metaO   = $metaFac->factory("App\Entity\Oseba");
+
+        $jsonList = $this->dajJson([], $konfliktneFunkcije, $osebe, $uprizoritveIds);
+
+        return $jsonList;
+    }
+
+    /**
+     * 
+     * @param array $uprizoritveIds
+     * @param array $alternacije
+     * @return type
+     */
+    public function prekrivanje(array $uprizoritveIds = [], array $alternacije = [])
+    {
+        /*
+         *  preverjanje avtorizacije
+         */
+        $this->expectPermission("Uprizoritev-read");
+        $this->expectPermission("Funkcija-read");
+        $this->expectPermission("Alternacija-read");
+        $this->expectPermission("Oseba-read");
 
         /**
-         * še hidriramo
+         * $$ preverjanje vhodnih parametrov 
+         *   - morda če so guid?
+         *    - kako so lahko prazni ([], null)
          */
-        $jsonList = [];
+//$$        $this->expectIsoDate($datum, $this->translate("Datum ($datum) ni datum v ISO8601 obliki"), 1001110);
 
-        foreach ($uprizoritveMozne as $u) {
-            $array                       = $metaU->filterForLookup($u);
-            $array['konfliktneFunkcije'] = [];
-            $jsonList[]                  = $array;
-        }
-        /**
-         * zanašamo se, da so pogojne funkcije razvrščene po uprizoritvi
+        $osebe = $this->getZasedeneOsebe($uprizoritveIds, $alternacije);
+
+        $srv = $this->getServiceLocator()->get('vzporednice.service');
+
+        $konfliktneFunkcije = $srv->getKonfliktneFunkcije($osebe)->getQuery()->getResult();
+
+        /*
+         * prekrivanja so najdena. Še priprava izhoda 
          */
-        $u = '';
-        foreach ($pogojneFunkcije as $fun) {
-            if (!in_array($fun->getUprizoritev()->getId(), $uprizoritveIds)) {
-                if ($u !== $fun->getUprizoritev()->getSifra()) {
-                    if ($u !== '') {
-                        $jsonList[] = $array;
-                    };
-                    $array = $metaU->filterForLookup($fun->getUprizoritev());
-                    $u     = $fun->getUprizoritev()->getSifra();
-                }
-                $konF = $metaF->filterForLookup($fun);
 
-                /**
-                 * doddamo zasedene osebe
-                 */
-                $konF['zasedeneOsebe'] = [];
-                $zasedeneOsebe       = $this->getOsebe($fun, $osebe, true);
-                foreach ($zasedeneOsebe as $zos) {
-                    $o                     = $osebaR->findOneById($zos);
-                    $konF['zasedeneOsebe'][] = $metaO->filterForLookup($o);
-                }
-
-                /**
-                 * doddamo nezasedene osebe
-                 */
-                $konF['nezasedeneOsebe'] = [];
-                $nezasedeneOsebe       = $this->getOsebe($fun, $osebe, false);
-                foreach ($nezasedeneOsebe as $nos) {
-                    $o                       = $osebaR->findOneById($nos);
-                    $konF['nezasedeneOsebe'][] = $metaO->filterForLookup($o);
-                }
-
-                $array['konfliktneFunkcije'][] = $konF;
-            }
-        };
-        if ($u !== '') {
-            $jsonList[] = $array;
-        }
-
-        /**
-         * vsem uprizoritvam  dodamo funkcije z večimi alternacijammi (alterCount>1) 
-         */
-//        $jsonList2 = [];
-//        foreach ($jsonList as $jsonItem) {
-//            $u = $uprR->findOneById($jsonItem['id']);
-//            foreach ($u->getFunkcije() as $fun) {
-//                if ($fun->getSePlanira() && ($fun->getAlterCount() > 1)) {
-//
-//                    $vecaltF = $metaF->filterForLookup($fun);
-//
-//                    $zasedeneOsebe = $this->getOsebe($fun, $osebe, true);
-//                    foreach ($zasedeneOsebe as $zos) {
-//                        $o                        = $osebaR->findOneById($zos);
-//                        $vecaltF[zasedeneOsebe][] = $metaO->filterForLookup($o);
-//                    }
-//                    $nezasedeneOsebe = $this->getOsebe($fun, $osebe, false);
-//                    foreach ($nezasedeneOsebe as $nos) {
-//                        $o                          = $osebaR->findOneById($nos);
-//                        $vecaltF[nezasedeneOsebe][] = $metaO->filterForLookup($o);
-//                    }
-//
-//                    $jsonItem['vecaltFunkcije'][] = $vecaltF;
-//                }
-//            }
-//            $jsonList2[] = $jsonItem;
-//        }
+        $jsonList = $this->dajJson([], $konfliktneFunkcije, $osebe, $uprizoritveIds);
 
         return $jsonList;
     }
@@ -171,6 +120,95 @@ class VzporedniceRpcService
             }
         }
         return $rezultat;
+    }
+
+    /**
+     * 
+     * @param array $uprizoritveIds
+     * @param array $alternacije
+     * @return type
+     */
+    private function getZasedeneOsebe(array $uprizoritveIds = [], array $alternacije = [])
+    {
+        $uprA = $this->getEm()->getRepository('Produkcija\Entity\Uprizoritev')->findById($uprizoritveIds);
+
+        /** @var VzporedniceService $srv */
+        $srv = $this->getServiceLocator()->get('vzporednice.service');
+
+        $osebe = $srv->getSodelujoci($uprA, $alternacije);
+        return $osebe;
+    }
+
+    /**
+     * Sestavi Json
+     * 
+     * @param type $uprizoritveMozne
+     * @param type $konfliktneFunkcije
+     * @param type $osebe
+     * @param type $uprizoritveIds              uprizoritve, ki jih ne damo v Json
+     * @return type
+     */
+    private function dajJson($uprizoritveMozne, $konfliktneFunkcije, $osebe, $uprizoritveIds = [])
+    {
+        $metaFac = $this->getServiceLocator()->get('entity.metadata.factory');
+        $metaU   = $metaFac->factory("Produkcija\Entity\Uprizoritev");
+        $metaF   = $metaFac->factory("Produkcija\Entity\Funkcija");
+        $metaO   = $metaFac->factory("App\Entity\Oseba");
+
+        /**
+         * še hidriramo
+         */
+        $jsonList = [];
+        $osebaR   = $this->getEm()->getRepository('App\Entity\Oseba');
+
+        foreach ($uprizoritveMozne as $u) {
+            $array                       = $metaU->filterForLookup($u);
+            $array['konfliktneFunkcije'] = [];
+            $jsonList[]                  = $array;
+        }
+        /**
+         * zanašamo se, da so pogojne funkcije razvrščene po uprizoritvi
+         */
+        $u = '';
+        foreach ($konfliktneFunkcije as $fun) {
+            if (!in_array($fun->getUprizoritev()->getId(), $uprizoritveIds)) {
+                if ($u !== $fun->getUprizoritev()->getSifra()) {
+                    if ($u !== '') {
+                        $jsonList[] = $array;
+                    };
+                    $array = $metaU->filterForLookup($fun->getUprizoritev());
+                    $u     = $fun->getUprizoritev()->getSifra();
+                }
+                $konF = $metaF->filterForLookup($fun);
+
+                /**
+                 * doddamo zasedene osebe
+                 */
+                $konF['zasedeneOsebe'] = [];
+                $zasedeneOsebe         = $this->getOsebe($fun, $osebe, true);
+                foreach ($zasedeneOsebe as $zos) {
+                    $o                       = $osebaR->findOneById($zos);
+                    $konF['zasedeneOsebe'][] = $metaO->filterForLookup($o);
+                }
+
+                /**
+                 * doddamo nezasedene osebe
+                 */
+                $konF['nezasedeneOsebe'] = [];
+                $nezasedeneOsebe         = $this->getOsebe($fun, $osebe, false);
+                foreach ($nezasedeneOsebe as $nos) {
+                    $o                         = $osebaR->findOneById($nos);
+                    $konF['nezasedeneOsebe'][] = $metaO->filterForLookup($o);
+                }
+
+                $array['konfliktneFunkcije'][] = $konF;
+            }
+        };
+        if ($u !== '') {
+            $jsonList[] = $array;
+        }
+
+        return $jsonList;
     }
 
 }
