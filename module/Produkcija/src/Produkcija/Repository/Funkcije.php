@@ -19,29 +19,38 @@ class Funkcije
 {
 
     protected $sortOptions = [
-        "default" => [
+        "default"   => [
             "sort" => ["alias" => "p.sort"]
         ],
-        "vse"     => [
+        "planirane" => [
             "sort" => ["alias" => "p.sort"]
-        ]
+        ],
+        "vse"       => [
+            "sort" => ["alias" => "p.sort"]
+        ],
     ];
 
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
             case "vse":
-                $qb   = $this->getVseQb($options);
-                $sort = $this->getSort($name);
-                $qb->orderBy($sort->order, $sort->dir);
-                return new DoctrinePaginator(new Paginator($qb));
+                $qb = $this->getVseQb($options);
+                break;
             case "default":
                 $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1000670);
-                $qb   = $this->getDefaultQb($options);
-                $sort = $this->getSort($name);
-                $qb->orderBy($sort->order, $sort->dir);
-                return new DoctrinePaginator(new Paginator($qb));
+                $qb = $this->getDefaultQb($options);
+                break;
+            case "planirane":
+                $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1000674);
+                $qb = $this->getPlaniraneQb($options);
+                break;
+            default:
+                $this->expect(false, "Lista $name ne obstaja", 1000673);
         }
+        $sort = $this->getSort($name);
+        $qb->orderBy($sort->order, $sort->dir);
+
+        return new DoctrinePaginator(new Paginator($qb));
     }
 
     public function getVseQb($options)
@@ -81,6 +90,30 @@ class Funkcije
             $qb->andWhere($naz);
             $qb->setParameter('podrocja', $options['podrocje']);
         }
+        return $qb;
+    }
+
+    /**
+     * vrne seznam planirajočih se funkcij z aktivnimi alternacijami
+     * 
+     * @param type $options
+     * @return type
+     */
+    public function getPlaniraneQb($options)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $e  = $qb->expr();
+        if (!empty($options['uprizoritev'])) {
+            $qb->join('p.uprizoritev', 'uprizoritev');
+            $naz = $e->eq('uprizoritev.id', ':upriz');
+            $qb->andWhere($naz);
+            $qb->setParameter('upriz', "{$options['uprizoritev']}", "string");
+        }
+        $qb->andWhere($e->in('p.sePlanira', [TRUE]));
+        /**
+         * $$ preveri še, če je alternacija aktivna
+         */
+        
         return $qb;
     }
 
