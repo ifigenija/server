@@ -27,7 +27,7 @@ class VzporedniceRpcService
      * @param array $alternacije
      * @return type
      */
-    public function vzporednice(array $uprizoritveIds = [], array $alternacije = [])
+    public function dajVzporednice(array $uprizoritveIds = [], array $alternacije = [])
     {
 
 // preverjanje avtorizacije
@@ -65,7 +65,7 @@ class VzporedniceRpcService
      * @param array $alternacije
      * @return type
      */
-    public function prekrivanje(array $uprizoritveIds = [], array $alternacije = [])
+    public function dajPrekrivanja(array $uprizoritveIds = [], array $alternacije = [])
     {
         /*
          *  preverjanje avtorizacije
