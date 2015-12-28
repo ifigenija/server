@@ -30,7 +30,7 @@ class VzporedniceService
      *
      *
      * @param array <Uprizoritev> $uprizoritve
-     * @param array $alternacije - seznam mora biti v obliki: ['id-funkcije' => 'id-osebe']
+     * @param array $alternacije - seznam mora biti v obliki: [ ['id-funkcije1', ['id-osebe1', 'id-osebe2, ...], ...]
      * @return array
      */
     function getSodelujoci($uprizoritve, $alternacije = [])
@@ -61,8 +61,6 @@ class VzporedniceService
             $altFO[$a[0]] = $a[1];
         }
 
-
-
         // funkcija se override-a, če obstaja alternacija za njo
         /**
          * $$ začasno
@@ -87,25 +85,32 @@ class VzporedniceService
      */
     public function getPrivzeteAlternacije($uprizoritve)
     {
+        /**
+         * če ni uprizoritev tudi ni privzetih alternacij
+         */
+        if (count($uprizoritve) == 0) {
+            return [];
+        }
+
         $qb = $this->getEm()->createQueryBuilder();
 
         $keys = [];
         foreach ($uprizoritve as $u) {
             $keys[] = $u->getId();
         }
-        $u = $qb->select('o.id oseba, funkcija.id fun')
+        $fo = $qb->select('o.id oseba, funkcija.id fun')
                 ->from('Produkcija\Entity\Funkcija', 'funkcija')
                 ->join('funkcija.uprizoritev', 'u')
                 ->join('funkcija.privzeti', 'alternacija')
 //                ->join('funkcija.alternacije', 'alternacija')
                 ->join('alternacija.oseba', 'o')
                 ->andWhere('funkcija.sePlanira = TRUE')
-                ->andWhere('u.gostujoca =  FALSE ')
+                ->andWhere('u.gostujoca =  FALSE or u.gostujoca is NULL')
                 ->andWhere($qb->expr()->in('funkcija.uprizoritev', $keys))
                 ->getQuery()
                 ->getResult();
 
-        return $u;
+        return $fo;
     }
 
     /**
@@ -133,14 +138,14 @@ class VzporedniceService
         $vzporednice->select('vzp')
                 ->from('Produkcija\Entity\Uprizoritev', 'vzp')
                 ->where($e->in('vzp.faza', $this->getStatusiUprizoritev()))
-                ->andWhere('vzp.gostujoca = FALSE')
+                ->andWhere('vzp.gostujoca = FALSE OR vzp.gostujoca is NULL')
                 ->andWhere($e->notIn('vzp.id', $konfliktneUprizoritve->getDQL()));
 
         /**
          * $$ začasno
          */
-        $tmp=$vzporednice->getDQL();
-        
+        $tmp = $vzporednice->getDQL();
+
         return $vzporednice->getQuery()->getResult();
     }
 
@@ -162,10 +167,17 @@ class VzporedniceService
                 ->join('fk.alternacije', 'al')
                 ->join('al.oseba', 'os')
                 ->join('fk.uprizoritev', 'up')
-                ->where($e->in('os.id', $osebe))
                 ->andWhere('fk.sePlanira = TRUE')
                 ->andWhere($e->in('up.faza', $this->getStatusiUprizoritev()))
-                ->orderBy('up.sifra');
+                ->orderBy('up.sifra')
+        ;
+        if (count($osebe) > 0) {
+            $konfliktneFunkcije
+                    ->andWhere($e->in('os.id', $osebe));
+        } else {
+            $konfliktneFunkcije
+                    ->andWhere('1=0');
+        }
 
         return $konfliktneFunkcije;
     }
@@ -191,16 +203,19 @@ class VzporedniceService
         /**
          * število prostih oseb v določeni funkciji
          */
-        $stProstihOseb  = $this->getEm()->createQueryBuilder();
-        $est            = $stProstihOseb->expr();
+        $stProstihOseb = $this->getEm()->createQueryBuilder();
+        $est           = $stProstihOseb->expr();
         $stProstihOseb
                 ->select('count(fkpro)')
                 ->from('Produkcija\Entity\Funkcija', 'fkpro')
                 ->join('fkpro.alternacije', 'alte')
                 ->join('alte.oseba', 'oseb')
                 ->where('fkpro.id=fk.id')
-                ->andWhere($est->notIn('oseb.id', $osebe)) // le proste oz. nezasedene osebe
         ;
+        if (count($osebe) > 0) {
+            $stProstihOseb
+                    ->andWhere($est->notIn('oseb.id', $osebe)); // le proste oz. nezasedene osebe
+        }
         /**
          * kre rabimo št. prostih oseb kasneje v istem DQL-u
          * se imena ne smejo podvajati, 
@@ -214,8 +229,11 @@ class VzporedniceService
                 ->join('fkpro2.alternacije', 'alte2')
                 ->join('alte2.oseba', 'oseb2')
                 ->where('fkpro2.id=fn.id')      //fn.id - odvisno od glavnega query-ja!
-                ->andWhere($est->notIn('oseb2.id', $osebe)) // le proste oz. nezasedene osebe
         ;
+        if (count($osebe) > 0) {
+            $stProstihOseb2
+                    ->andWhere($est->notIn('oseb2.id', $osebe)); // le proste oz. nezasedene osebe
+        }
 
         /**
          * konfliktne funkcije brez alternacij s prostimi osebami
@@ -240,14 +258,62 @@ class VzporedniceService
                 ->join('fn.alternacije', 'alt')
                 ->join('alt.oseba', 'ose')
                 ->join('fn.uprizoritev', 'uprizoritev')
-                ->where($e->in('ose.id', $osebe))
                 ->andWhere($e->gt("(" . $stProstihOseb2->getDQL() . ")", 0))
                 ->andWhere('fn.sePlanira = TRUE')
                 ->andWhere($e->notIn('uprizoritev', $konfliktneUprizoritve->getDQL()))// brez konfliktnih
                 ->andWhere($e->in('uprizoritev.faza', $this->getStatusiUprizoritev()))
                 ->orderBy('uprizoritev.sifra');
+        /**
+         * $$ začasno
+         */
+        $tmp2                             = $konfliktneFunkcijeZAlternacijami->getDQL();
+
+        if (count($osebe) > 0) {
+            $konfliktneFunkcijeZAlternacijami->andWhere($e->in('ose.id', $osebe));
+        } else {
+            $konfliktneFunkcijeZAlternacijami->andWhere('1=0'); //$$ spremeni v false
+        }
+
 
         return $konfliktneFunkcijeZAlternacijami->getQuery()->getResult();
+    }
+
+    /**
+     * Poišče med alternacijami, če je katera oseba prisotna v različnih uprizoritvah
+     * 
+     * @param array $alternacije - seznam mora biti v obliki: [ ['id-funkcije1', ['id-osebe1', 'id-osebe2, ...], ...]
+     * @return array                   v obliki [ ['id-osebe1', ['id-uprizoritve1', 'id-uprizoritve2'],...]
+     */
+    function getKonfliktOsebaUpriz($alternacije)
+    {
+        $funR = $this->getEm()->getRepository('Produkcija\Entity\Funkcija');
+
+        $ou = [];
+        foreach ($alternacije as $a) {
+            foreach ($a[1] as $o) {
+                $fun  = $funR->findOneById($a[0]);
+                $ou[] = [$o, $fun->getUprizoritev()->getId()];
+            }
+        }
+
+        /**
+         * sort polja po osebi, uprizoritvi
+         * $$ ta sort še ne deluje v redu!
+         */
+        uasort($ou, function($a, $b) {
+            return ($a[0] < $b[0]) ? -1 : (($a[0] > $b[0]) ? 1 : ( ($a[1] < $b[1]) ? -1 : 1));
+        });
+
+        $konflikti = [];
+        $osPrej    = $upPrej    = "";   //init
+        foreach ($ou as $osUp) {
+            if ($osUp[0] === $osPrej && $osUp[1] !== $upPrej) {
+                $konflikti[] = [$osUp[0], [$osUp[1], $upPrej]];
+            }
+            $osPrej = $osUp[0];
+            $upPrej = $osUp[1];
+        }
+        return $konflikti;
     }
 
 }

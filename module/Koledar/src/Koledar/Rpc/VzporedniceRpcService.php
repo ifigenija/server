@@ -30,7 +30,9 @@ class VzporedniceRpcService
     public function dajVzporednice(array $uprizoritveIds = [], array $alternacije = [])
     {
 
-// preverjanje avtorizacije
+        /*
+         *  preverjanje avtorizacije
+         */
         $this->expectPermission("Uprizoritev-read");
         $this->expectPermission("Funkcija-read");
         $this->expectPermission("Alternacija-read");
@@ -43,9 +45,23 @@ class VzporedniceRpcService
          */
 //$$        $this->expectIsoDate($datum, $this->translate("Datum ($datum) ni datum v ISO8601 obliki"), 1001110);
 
+        $srv = $this->getServiceLocator()->get('vzporednice.service');
+
+        $konfliktiOseUpr = $srv->getKonfliktOsebaUpriz($alternacije);
+        $this->expect(count($konfliktiOseUpr) == 0
+        , sprintf("Konfliktne alternacije niso dovoljene npr. %s, %s, %s"
+        , $konfliktiOseUpr[0][0]
+        , $konfliktiOseUpr[0][1][0]
+        , $konfliktiOseUpr[0][1][1])
+        , 1001670);
+
+        /**
+         * $$ še izpis katere
+         */
         $osebe = $this->getZasedeneOsebe($uprizoritveIds, $alternacije);
 
-        $srv              = $this->getServiceLocator()->get('vzporednice.service');
+
+
         $uprizoritveMozne = $srv->getMozneUprizoritve($osebe);
 
         $pogojneFunkcije = $srv->getPogojneUprizoritve($osebe);
@@ -81,10 +97,17 @@ class VzporedniceRpcService
          *    - kako so lahko prazni ([], null)
          */
 //$$        $this->expectIsoDate($datum, $this->translate("Datum ($datum) ni datum v ISO8601 obliki"), 1001110);
+        $srv = $this->getServiceLocator()->get('vzporednice.service');
+
+        $konfliktiOseUpr = $srv->getKonfliktOsebaUpriz($alternacije);
+        $this->expect(count($konfliktiOseUpr) == 0
+        , sprintf("Konfliktne alternacije niso dovoljene npr. %s, %s, %s"
+        , $konfliktiOseUpr[0][0]
+        , $konfliktiOseUpr[0][1][0]
+        , $konfliktiOseUpr[0][1][1])
+        , 1001671);
 
         $osebe = $this->getZasedeneOsebe($uprizoritveIds, $alternacije);
-
-        $srv = $this->getServiceLocator()->get('vzporednice.service');
 
         $konfliktneFunkcije = $srv->getKonfliktneFunkcije($osebe)->getQuery()->getResult();
 
