@@ -48,13 +48,13 @@ class VzporedniceRpcService
         $srv              = $this->getServiceLocator()->get('vzporednice.service');
         $uprizoritveMozne = $srv->getMozneUprizoritve($osebe);
 
-        $konfliktneFunkcije = $srv->getPogojneUprizoritve($osebe);
+        $pogojneFunkcije = $srv->getPogojneUprizoritve($osebe);
 
         /*
          * vzporednice so najdene. Še priprava izhoda 
          */
 
-        $jsonList = $this->dajJson([], $konfliktneFunkcije, $osebe, $uprizoritveIds);
+        $jsonList = $this->dajJson($uprizoritveMozne, $pogojneFunkcije, $osebe, $uprizoritveIds);
 
         return $jsonList;
     }
