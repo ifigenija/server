@@ -300,12 +300,19 @@ class VzporedniceService
         $osPrej    = $upPrej    = "";   //init
         foreach ($ou as $osUp) {
             if ($osUp[0] === $osPrej && $osUp[1] !== $upPrej) {
-                $konflikti[] = [$osUp[0], [$osUp[1], $upPrej]];
+                $konflikti[$osUp[0]][] = $upPrej;
+                $konflikti[$osUp[0]][] = $osUp[1];
             }
             $osPrej = $osUp[0];
             $upPrej = $osUp[1];
         }
-        return $konflikti;
+
+        /**
+         * odstranim duplicirane uprizoritve
+         */
+        return array_map(function($val) {
+            return array_values(array_unique($val));
+        }, $konflikti);
     }
 
 }
