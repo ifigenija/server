@@ -48,14 +48,6 @@ class VzporedniceRpcService
         $srv = $this->getServiceLocator()->get('vzporednice.service');
 
         $konfliktiOseUpr = $srv->getKonfliktOsebaUpriz($alternacije);
-        if (count($konfliktiOseUpr) != 0) {     // drugače sprintf javi napako zaradi neobstoječega offseta
-            $this->expect(count($konfliktiOseUpr) == 0
-                    , sprintf("Konfliktne alternacije niso dovoljene npr. %s, %s, %s"
-                            , $konfliktiOseUpr[0][0]
-                            , $konfliktiOseUpr[0][1][0]
-                            , $konfliktiOseUpr[0][1][1])
-                    , 1001670);
-        }
 
         /**
          * $$ še izpis katere
@@ -72,9 +64,9 @@ class VzporedniceRpcService
          * vzporednice so najdene. Še priprava izhoda 
          */
 
-        $jsonList = $this->dajJson($uprizoritveMozne, $pogojneFunkcije, $osebe, $uprizoritveIds);
+        $jsonResult = $this->dajJson($uprizoritveMozne, $pogojneFunkcije, $osebe, $uprizoritveIds, $konfliktiOseUpr);
 
-        return $jsonList;
+        return $jsonResult;
     }
 
     /**
@@ -102,14 +94,6 @@ class VzporedniceRpcService
         $srv = $this->getServiceLocator()->get('vzporednice.service');
 
         $konfliktiOseUpr = $srv->getKonfliktOsebaUpriz($alternacije);
-        if (count($konfliktiOseUpr) != 0) {     // drugače sprintf javi napako zaradi neobstoječega offseta
-            $this->expect(count($konfliktiOseUpr) == 0
-                    , sprintf("Konfliktne alternacije niso dovoljene npr. %s, %s, %s"
-                            , $konfliktiOseUpr[0][0]
-                            , $konfliktiOseUpr[0][1][0]
-                            , $konfliktiOseUpr[0][1][1])
-                    , 1001671);
-        }
 
         $osebe = $this->getZasedeneOsebe($uprizoritveIds, $alternacije);
 
@@ -122,9 +106,9 @@ class VzporedniceRpcService
          * prekrivanja so najdena. Še priprava izhoda 
          */
 
-        $jsonList = $this->dajJson([], $konfliktneFunkcije, $osebe, $uprizoritveIds);
+        $jsonResult = $this->dajJson([], $konfliktneFunkcije, $osebe, $uprizoritveIds, $konfliktiOseUpr);
 
-        return $jsonList;
+        return $jsonResult;
     }
 
     /**
@@ -176,9 +160,10 @@ class VzporedniceRpcService
      * @param type $konfliktneFunkcije
      * @param type $osebe
      * @param type $uprizoritveIds              uprizoritve, ki jih ne damo v Json
+     * @param type $konfliktiOseUpr             konflikti, ki jih naj izpiše v errorju
      * @return type
      */
-    private function dajJson($uprizoritveMozne, $konfliktneFunkcije, $osebe, $uprizoritveIds = [])
+    private function dajJson($uprizoritveMozne, $konfliktneFunkcije, $osebe, $uprizoritveIds = [], $konfliktiOseUpr)
     {
         $metaFac = $this->getServiceLocator()->get('entity.metadata.factory');
         $metaU   = $metaFac->factory("Produkcija\Entity\Uprizoritev");
@@ -237,8 +222,10 @@ class VzporedniceRpcService
         if ($u !== '') {
             $jsonList[] = $array;
         }
+        $jsonResult['error'] = $konfliktiOseUpr;
+        $jsonResult['data']  = $jsonList;
 
-        return $jsonList;
+        return $jsonResult;
     }
 
 }
