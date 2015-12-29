@@ -30,7 +30,7 @@ class VzporedniceService
      *
      *
      * @param array <Uprizoritev> $uprizoritve
-     * @param array $alternacije - seznam mora biti v obliki: [ ['id-funkcije1', ['id-osebe1', 'id-osebe2, ...], ...]
+     * @param array $alternacije - seznam mora biti v obliki: [ ['id-funkcije1'=> ['id-osebe1', 'id-osebe2, ...], ...]
      * @return array
      */
     function getSodelujoci($uprizoritve, $alternacije = [])
@@ -38,7 +38,7 @@ class VzporedniceService
 
         /**
          * $alternacije mora biti v obliki:
-         *  ['id-funkcije' => 'id-osebe']
+         *  [ ['id-funkcije1'=> ['id-osebe1', 'id-osebe2, ...], ...]
          * v tem primeru se defaultne alternacije prepišejo s podanimi in se zračunajo vzporednice za
          * takšno zasedbo. Na ta način ni potrebno spreminjati defaulta na alternaciji, pa še vedno
          * pridemo do pravih vzporednic.
@@ -58,7 +58,11 @@ class VzporedniceService
 
         $altFO = [];
         foreach ($alternacije as $a) {
-            $altFO[$a[0]] = $a[1];
+            foreach ($a as $key => $val) {
+                foreach ($val as $o) {
+                    $altFO[$key] = $val;
+                }
+            }
         }
 
         // funkcija se override-a, če obstaja alternacija za njo
@@ -281,7 +285,7 @@ class VzporedniceService
     /**
      * Poišče med alternacijami, če je katera oseba prisotna v različnih uprizoritvah
      * 
-     * @param array $alternacije - seznam mora biti v obliki: [ ['id-funkcije1', ['id-osebe1', 'id-osebe2, ...], ...]
+     * @param array $alternacije - seznam mora biti v obliki: [ 'id-funkcije1 => ['id-osebe1', 'id-osebe2, ...], ...]
      * @return array                   v obliki [ ['id-osebe1', ['id-uprizoritve1', 'id-uprizoritve2'],...]
      */
     function getKonfliktOsebaUpriz($alternacije)
@@ -290,9 +294,12 @@ class VzporedniceService
 
         $ou = [];
         foreach ($alternacije as $a) {
-            foreach ($a[1] as $o) {
-                $fun  = $funR->findOneById($a[0]);
-                $ou[] = [$o, $fun->getUprizoritev()->getId()];
+            foreach ($a as $key => $val) {
+                $fun = $funR->findOneById($key);
+                foreach ($val as $o) {
+
+                    $ou[] = [$o, $fun->getUprizoritev()->getId()];
+                }
             }
         }
 
