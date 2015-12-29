@@ -48,12 +48,14 @@ class VzporedniceRpcService
         $srv = $this->getServiceLocator()->get('vzporednice.service');
 
         $konfliktiOseUpr = $srv->getKonfliktOsebaUpriz($alternacije);
-        $this->expect(count($konfliktiOseUpr) == 0
-        , sprintf("Konfliktne alternacije niso dovoljene npr. %s, %s, %s"
-        , $konfliktiOseUpr[0][0]
-        , $konfliktiOseUpr[0][1][0]
-        , $konfliktiOseUpr[0][1][1])
-        , 1001670);
+        if (count($konfliktiOseUpr) != 0) {     // drugače sprintf javi napako zaradi neobstoječega offseta
+            $this->expect(count($konfliktiOseUpr) == 0
+                    , sprintf("Konfliktne alternacije niso dovoljene npr. %s, %s, %s"
+                            , $konfliktiOseUpr[0][0]
+                            , $konfliktiOseUpr[0][1][0]
+                            , $konfliktiOseUpr[0][1][1])
+                    , 1001670);
+        }
 
         /**
          * $$ še izpis katere
@@ -100,16 +102,21 @@ class VzporedniceRpcService
         $srv = $this->getServiceLocator()->get('vzporednice.service');
 
         $konfliktiOseUpr = $srv->getKonfliktOsebaUpriz($alternacije);
-        $this->expect(count($konfliktiOseUpr) == 0
-        , sprintf("Konfliktne alternacije niso dovoljene npr. %s, %s, %s"
-        , $konfliktiOseUpr[0][0]
-        , $konfliktiOseUpr[0][1][0]
-        , $konfliktiOseUpr[0][1][1])
-        , 1001671);
+        if (count($konfliktiOseUpr) != 0) {     // drugače sprintf javi napako zaradi neobstoječega offseta
+            $this->expect(count($konfliktiOseUpr) == 0
+                    , sprintf("Konfliktne alternacije niso dovoljene npr. %s, %s, %s"
+                            , $konfliktiOseUpr[0][0]
+                            , $konfliktiOseUpr[0][1][0]
+                            , $konfliktiOseUpr[0][1][1])
+                    , 1001671);
+        }
 
         $osebe = $this->getZasedeneOsebe($uprizoritveIds, $alternacije);
 
-        $konfliktneFunkcije = $srv->getKonfliktneFunkcije($osebe)->getQuery()->getResult();
+//        $konfliktneFunkcije = $srv->getKonfliktneFunkcije($osebe)->getQuery()->getResult();
+        $vrniKonfliktne     = true;
+        $konfliktneFunkcije = $srv->getPogojneUprizoritve($osebe, $vrniKonfliktne);
+
 
         /*
          * prekrivanja so najdena. Še priprava izhoda 

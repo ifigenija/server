@@ -59,17 +59,11 @@ class VzporedniceService
         $altFO = [];
         foreach ($alternacije as $a) {
             foreach ($a as $key => $val) {
-                foreach ($val as $o) {
-                    $altFO[$key] = $val;
-                }
+                $altFO[$key] = $val;
             }
         }
 
         // funkcija se override-a, če obstaja alternacija za njo
-        /**
-         * $$ začasno
-         */
-        $tmp1  = array_merge($r, $altFO);
         $osebe = [];
         foreach (array_merge($r, $altFO) as $t) {
             foreach ($t as $p) {
@@ -192,18 +186,20 @@ class VzporedniceService
     }
 
     /**
-     * Seznam pogojno sprejemljivih funkcij na uprizoritvah
-     * ki nimajo konfliktov na funkcijah, brez alternacij,
-     * prekrivajo se samo na funkcijah, ki imajo alternacije - alterCount > 1
+     * Seznam seznam konfliktnih funkcij na pogojno sprejemljivih  (oz. nesprejemljivih) 
+     * uprizoritvah
      *
-     * Vrne seznam funkcij, ker je zaželjeno, da pokažemo s kom se prekriva
-     *
-     * @param $osebe
-     * @return array
+     * Vrne seznam (brezpogojno in pogojno) konflitnih funkcij 
+     * 
+     * @param type $osebe
+     * @param boolean $vrniKonfliktne  če true, vrne funkcije le brezpogojno 
+     *                                          konfliktnih uprizoritev
+     *                                 če false, vrne  funkcije le pogojno 
+     *                                          konfliktnih uprizoritev
+     * @return type
      */
-    public function getPogojneUprizoritve($osebe)
+    public function getPogojneUprizoritve($osebe, $vrniKonfliktne = false)
     {
-
         /**
          * število prostih oseb v določeni funkciji
          */
@@ -219,24 +215,6 @@ class VzporedniceService
         if (count($osebe) > 0) {
             $stProstihOseb
                     ->andWhere($est->notIn('oseb.id', $osebe)); // le proste oz. nezasedene osebe
-        }
-        /**
-         * kre rabimo št. prostih oseb kasneje v istem DQL-u
-         * se imena ne smejo podvajati, 
-         * tako da naredimo vsebinsko enak (sub)query, vsebinsko prilagojan
-         */
-        $stProstihOseb2 = $this->getEm()->createQueryBuilder();
-        $est            = $stProstihOseb2->expr();
-        $stProstihOseb2
-                ->select('count(fkpro2)')
-                ->from('Produkcija\Entity\Funkcija', 'fkpro2')
-                ->join('fkpro2.alternacije', 'alte2')
-                ->join('alte2.oseba', 'oseb2')
-                ->where('fkpro2.id=fn.id')      //fn.id - odvisno od glavnega query-ja!
-        ;
-        if (count($osebe) > 0) {
-            $stProstihOseb2
-                    ->andWhere($est->notIn('oseb2.id', $osebe)); // le proste oz. nezasedene osebe
         }
 
         /**
@@ -262,15 +240,22 @@ class VzporedniceService
                 ->join('fn.alternacije', 'alt')
                 ->join('alt.oseba', 'ose')
                 ->join('fn.uprizoritev', 'uprizoritev')
-                ->andWhere($e->gt("(" . $stProstihOseb2->getDQL() . ")", 0))
                 ->andWhere('fn.sePlanira = TRUE')
-                ->andWhere($e->notIn('uprizoritev', $konfliktneUprizoritve->getDQL()))// brez konfliktnih
                 ->andWhere($e->in('uprizoritev.faza', $this->getStatusiUprizoritev()))
                 ->orderBy('uprizoritev.sifra');
+
+        if ($vrniKonfliktne) {
+            $konfliktneFunkcijeZAlternacijami
+                    ->andWhere($e->in('uprizoritev', $konfliktneUprizoritve->getDQL())); // le konfliktne
+        } else {
+            $konfliktneFunkcijeZAlternacijami
+                    ->andWhere($e->notIn('uprizoritev', $konfliktneUprizoritve->getDQL())); // brez konfliktnih
+        }
+
         /**
          * $$ začasno
          */
-        $tmp2                             = $konfliktneFunkcijeZAlternacijami->getDQL();
+        $tmp2 = $konfliktneFunkcijeZAlternacijami->getDQL();
 
         if (count($osebe) > 0) {
             $konfliktneFunkcijeZAlternacijami->andWhere($e->in('ose.id', $osebe));

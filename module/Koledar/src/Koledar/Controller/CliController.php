@@ -71,7 +71,7 @@ use ExpectTrait;
      * 
      * @param type $rezultat
      * @param type $osebe
-     * @param type $uprA
+     * @param type $uprA            seznam uprizoritev, ki jih ne vključi v izpis
      */
     public function groupByUprizoritev($rezultat, $osebe = [], $uprA = [])
     {
@@ -135,7 +135,9 @@ use ExpectTrait;
         $this->expect(!empty($osebe), 'Uprizoritev nima zasedbe', 3000602);
 
 
-        $rezultat = $srv->getKonfliktneFunkcije($osebe)->getQuery()->getResult();
+//        $rezultat = $srv->getKonfliktneFunkcije($osebe)->getQuery()->getResult();
+        $vrniKonfliktne=true;
+        $rezultat = $srv->getPogojneUprizoritve($osebe,$vrniKonfliktne);
 
         $this->groupByUprizoritev($rezultat, $osebe, $uprA);
     }
