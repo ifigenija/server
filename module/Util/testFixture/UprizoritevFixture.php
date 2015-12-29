@@ -122,6 +122,15 @@ class UprizoritevFixture
              * ena brez datumov
              */
             ['0006', 'Ne vemo datumov', 'postprodukcija', '', '', NULL, NULL, 'Prostor-0001', 1, 'Nandi Frafar', false, 1, '', '', '', null, FALSE, '', null, null, '06', 'ProdukcijskaHisa-0987'],
+            ['0011', 'U11_EP_test_vzporednic', 'postprodukcija', '', '', NULL, NULL, 'Prostor-0001', 1, 'Nandi Frafar', false, 1, '', '', '', null, FALSE, '', null, null, '05', null],
+            ['0012', 'U12_ED_test_vzporednic', 'postprodukcija', '', '', NULL, NULL, 'Prostor-0001', 1, 'Nandi Frafar', false, 1, '', '', '', null, FALSE, '', null, null, '05', null],
+            ['0013', 'U13_DP_test_vzporednic', 'postprodukcija', '', '', NULL, NULL, 'Prostor-0001', 1, 'Nandi Frafar', false, 1, '', '', '', null, FALSE, '', null, null, '05', null],
+            ['0014', 'U14_DD_test_vzporednic', 'postprodukcija', '', '', NULL, NULL, 'Prostor-0001', 1, 'Nandi Frafar', false, 1, '', '', '', null, FALSE, '', null, null, '05', null],
+            ['0015', 'U15_test_vzporednic', 'postprodukcija', '', '', NULL, NULL, 'Prostor-0001', 1, 'Nandi Frafar', false, 1, '', '', '', null, FALSE, '', null, null, '05', null],
+            ['0016', 'U16_EE_test_vzporednic', 'postprodukcija', '', '', NULL, NULL, 'Prostor-0001', 1, 'Nandi Frafar', false, 1, '', '', '', null, FALSE, '', null, null, '05', null],
+            ['0017', 'U17_EP_ED_test_vzporednic', 'postprodukcija', '', '', NULL, NULL, 'Prostor-0001', 1, 'Nandi Frafar', false, 1, '', '', '', null, FALSE, '', null, null, '05', null],
+            ['0018', 'U18_EP_ED_NT_test_vzporednic', 'postprodukcija', '', '', NULL, NULL, 'Prostor-0001', 1, 'Nandi Frafar', false, 1, '', '', '', null, FALSE, '', null, null, '05', null],
+            ['0019', 'U19_ED_ZAS_PROST_test_vzporednic', 'postprodukcija', '', '', NULL, NULL, 'Prostor-0001', 1, 'Nandi Frafar', false, 1, '', '', '', null, FALSE, '', null, null, '05', null],
         ];
     }
 

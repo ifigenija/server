@@ -179,9 +179,11 @@ class VzporedniceRpcService
         $osebaR   = $this->getEm()->getRepository('App\Entity\Oseba');
 
         foreach ($uprizoritveMozne as $u) {
-            $array                       = $metaU->filterForLookup($u);
-            $array['konfliktneFunkcije'] = [];
-            $jsonList[]                  = $array;
+            if (!in_array($u->getId(), $uprizoritveIds)) {
+                $array                       = $metaU->filterForLookup($u);
+                $array['konfliktneFunkcije'] = [];
+                $jsonList[]                  = $array;
+            }
         }
         /**
          * zanašamo se, da so pogojne funkcije razvrščene po uprizoritvi

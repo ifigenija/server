@@ -57,12 +57,14 @@ use ExpectTrait;
         // izpis rezultata
         /** @var Uprizoritev $upr */
         foreach ($rezultat as $upr) {
-            echo sprintf("%s %s\n", $upr->getSifra(), $upr->getNaslov());
+            if (!in_array($upr, $uprA)) {
+                echo sprintf("%s %s\n", $upr->getSifra(), $upr->getNaslov());
+            }
         }
 
         $rezultat = $srv->getPogojneUprizoritve($osebe);
 
-        $this->groupByUprizoritev($rezultat, $osebe);
+        $this->groupByUprizoritev($rezultat, $osebe, $uprA);
     }
 
     /**
@@ -136,8 +138,8 @@ use ExpectTrait;
 
 
 //        $rezultat = $srv->getKonfliktneFunkcije($osebe)->getQuery()->getResult();
-        $vrniKonfliktne=true;
-        $rezultat = $srv->getPogojneUprizoritve($osebe,$vrniKonfliktne);
+        $vrniKonfliktne = true;
+        $rezultat       = $srv->getPogojneUprizoritve($osebe, $vrniKonfliktne);
 
         $this->groupByUprizoritev($rezultat, $osebe, $uprA);
     }

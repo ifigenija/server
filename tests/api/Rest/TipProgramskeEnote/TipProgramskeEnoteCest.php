@@ -61,6 +61,7 @@ class TipProgramskeEnoteCest
     {
         $this->lookUprizoritev = $look                  = $I->lookupEntity("uprizoritev", "0001", false);
         $I->assertNotEmpty($look);
+        codecept_debug($look);
     }
 
     /**
@@ -194,10 +195,10 @@ class TipProgramskeEnoteCest
             'drugiJavni'              => 1.23,
             'obiskDoma'               => 1,
             'obiskGost'               => 1,
-            'obiskKoprGost'               => 1,
+            'obiskKoprGost'           => 1,
             'obiskKopr'               => 1,
             'obiskZamejo'             => 1,
-            'obiskKoprZamejo'             => 1,
+            'obiskKoprZamejo'         => 1,
             'obiskInt'                => 1,
             'obiskKoprInt'            => 1,
             'ponoviDoma'              => 1,
@@ -235,10 +236,10 @@ class TipProgramskeEnoteCest
             'drugiJavni'              => 1.23,
             'obiskDoma'               => 1,
             'obiskGost'               => 1,
-            'obiskKoprGost'               => 1,
+            'obiskKoprGost'           => 1,
             'obiskKopr'               => 1,
             'obiskZamejo'             => 1,
-            'obiskKoprZamejo'             => 1,
+            'obiskKoprZamejo'         => 1,
             'obiskInt'                => 1,
             'obiskKoprInt'            => 1,
             'ponoviDoma'              => 1,
@@ -280,10 +281,10 @@ class TipProgramskeEnoteCest
             'drugiJavni'              => 1.23,
             'obiskDoma'               => 1,
             'obiskGost'               => 1,
-            'obiskKoprGost'               => 1,
+            'obiskKoprGost'           => 1,
             'obiskKopr'               => 1,
             'obiskZamejo'             => 1,
-            'obiskKoprZamejo'             => 1,
+            'obiskKoprZamejo'         => 1,
             'obiskInt'                => 1,
             'obiskKoprInt'            => 1,
             'ponoviDoma'              => 1,

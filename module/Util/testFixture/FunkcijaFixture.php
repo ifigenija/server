@@ -95,6 +95,20 @@ class FunkcijaFixture
             ['Helena', 'glavna vloga', 'Vloga', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null,],
             ['Lektoriranje', '', 'Lektorstvo', false, '', TRUE, 22, true, true, 'Uprizoritev-0002', null,],
             ['Avtor', 'Avtor besedila', 'Avtor', false, '', TRUE, 2, true, FALSE, 'Uprizoritev-0002', null,],
+            ['Konj', 'glavna vloga', 'Vloga', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0005', null,],
+            ['Režiramo', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0005', null,],
+            ['u11_DN fja', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0011', null,],
+            ['u12_EN fja', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0012', null,],
+            ['u12_ND fja', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0012', null,],
+            ['u13_BN fja', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0013', null,],
+            ['u14_NB fja', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0014', null,],
+            ['u15_N fja', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0015', null,],
+            ['u16_D_fja', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0016', null,],
+            ['u17_DE_fja', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0017', null,],
+            ['u18_NN_fja', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0018', null,],
+            ['u18_DENN_fja', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0018', null,],
+            ['u19_D_fja', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0019', null,],
+            ['u19_EN_fja', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0019', null,],
         ];
     }
 
