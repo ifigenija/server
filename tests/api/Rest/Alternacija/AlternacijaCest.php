@@ -237,6 +237,33 @@ class AlternacijaCest
         codecept_debug($ent);
         $I->assertGuid($ent['id']);
 
+
+
+        /*
+         *  kreiram še en zapis
+         *  s področjem funkcije tehnik
+         */
+        $data          = [
+            'zaposlen'   => false,
+            'zacetek'    => '2013-02-01T00:00:00+0100',
+            'konec'      => '2024-02-01T00:00:00+0100',
+            'opomba'     => 'bb',
+            'sort'       => 3,
+            'privzeti'   => TRUE,
+            'aktivna'    => true,
+            'funkcija'   => $this->lookFunkcija2Te['id'],
+            'zaposlitev' => $this->objZaposlitev['id'],
+            'oseba'      => $this->lookOseba1['id'],
+            'pogodba'    => null,
+            'imaPogodbo' => false,
+            'pomembna'   => FALSE,
+        ];
+        $this->obj5teh = $ent           = $I->successfullyCreate($this->restUrl, $data);
+        codecept_debug($ent);
+        $I->assertGuid($ent['id']);
+        $I->assertEquals($ent['opomba'], 'bb');
+        $I->assertEquals($ent['funkcija']['tipFunkcije.podrocje'], 'tehnik');
+
         /*
          *  kreiram še en zapis
          *   z isto funkcijo kot obj3
@@ -259,32 +286,6 @@ class AlternacijaCest
         $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         codecept_debug($ent);
         $I->assertGuid($ent['id']);
-
-
-        /*
-         *  kreiram še en zapis
-         *  s področjem funkcije tehnik
-         */
-        $data          = [
-            'zaposlen'   => false,
-            'zacetek'    => '2013-02-01T00:00:00+0100',
-            'konec'      => '2024-02-01T00:00:00+0100',
-            'opomba'     => 'bb',
-            'sort'       => 3,
-            'privzeti'   => true,
-            'aktivna'    => true,
-            'funkcija'   => $this->lookFunkcija2Te['id'],
-            'zaposlitev' => $this->objZaposlitev['id'],
-            'oseba'      => $this->lookOseba1['id'],
-            'pogodba'    => null,
-            'imaPogodbo' => false,
-            'pomembna'   => FALSE,
-        ];
-        $this->obj5teh = $ent           = $I->successfullyCreate($this->restUrl, $data);
-        codecept_debug($ent);
-        $I->assertGuid($ent['id']);
-        $I->assertEquals($ent['opomba'], 'bb');
-        $I->assertEquals($ent['funkcija']['tipFunkcije.podrocje'], 'tehnik');
     }
 
     /**

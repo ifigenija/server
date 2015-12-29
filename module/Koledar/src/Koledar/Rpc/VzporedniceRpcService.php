@@ -20,11 +20,10 @@ class VzporedniceRpcService
      * Zasedene osebe lahko dobimo iz:
      *  - uprizoritev (to so privzete alternacije)
      *  - alternacijah (če izberemo ne neprivzete alternacije na funkciji) 
-     *      $$ tu je potrebno raziskati - kaj če je izbor več alternacij v isti funkciji (bi jih moralo vrniti vse te osebe)
      *  - terminov storitev glede na časovni interval
      *
-     * @param array $uprizoritveIds
-     * @param array $alternacije
+     * @param array $uprizoritveIds    seznam mora biti v obliki: [ "id-uprizoritve", ...]
+     * @param array $alternacije       seznam mora biti v obliki: [ {"id-funkcije" : ["id-osebe", ...]}, ...]
      * @return type
      */
     public function dajVzporednice(array $uprizoritveIds = [], array $alternacije = [])
@@ -70,9 +69,12 @@ class VzporedniceRpcService
     }
 
     /**
+     * Vrne brezpogojno konfliktne uprizoritve
      * 
-     * @param array $uprizoritveIds
-     * @param array $alternacije
+     * parametri so enaki kot v dajVzporednice
+     *  
+     * @param array $uprizoritveIds    seznam mora biti v obliki: [ "id-uprizoritve", ...]
+     * @param array $alternacije       seznam mora biti v obliki: [ {"id-funkcije" : ["id-osebe", ...]}, ...]
      * @return type
      */
     public function dajPrekrivanja(array $uprizoritveIds = [], array $alternacije = [])

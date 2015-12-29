@@ -235,12 +235,15 @@ class Alternacije
      */
     public function nastaviEnPrivzeti(Funkcija $funkcija)
     {
-        if ($funkcija && $funkcija->getAlternacije()->count() >= 1 && !($funkcija->getAlternacije()->exists(function($key, $alt) use(&$id) {
-                    return $alt->getPrivzeti(); //vrne true, če obstaja vsaj ena alternacija s privzeti
-                }))) {
-            $altPr = $funkcija->getAlternacije()->first();
-            $altPr->setPrivzeti(true);
-            $funkcija->setPrivzeti($altPr);
+        if ($funkcija && $funkcija->getAlternacije()->count() >= 1) {
+            if (!($funkcija->getAlternacije()->exists(function($key, $alt) use(&$id) {
+                        return $alt->getPrivzeti(); //vrne true, če obstaja vsaj ena alternacija s privzeti
+                    }))) {
+
+                $altPr = $funkcija->getAlternacije()->first();
+                $altPr->setPrivzeti(true);
+                $funkcija->setPrivzeti($altPr);
+            }
         } else {
             /**
              * če brišemo zadnjo alternacijo pri funkciji

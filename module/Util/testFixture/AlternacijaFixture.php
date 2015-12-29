@@ -43,12 +43,12 @@ class AlternacijaFixture
         $rep = $manager->getRepository('Produkcija\Entity\Alternacija');
 //        $tipFunR = $manager->getRepository('Produkcija\Entity\TipFunkcije');
 
-        $o = $rep->findOneBySifra(trim($v[0]));
+        $o   = $rep->findOneBySifra(trim($v[0]));
         $nov = false;
         if (!$o) {
-            $o = new Alternacija();
+            $o   = new Alternacija();
             $o->setSifra(trim($v[0]));
-            $nov=true;
+            $nov = true;
         }
 
         $o->setZaposlen($v[1]);
@@ -85,8 +85,13 @@ class AlternacijaFixture
         $o->setZacetek($date);
         $date = empty($v[12]) ? null : date_create($v[11]);
         $o->setKonec($date);
-        
+
         $o->setPrivzeti($v[13]);
+
+        /*
+         * $$ začasno
+         */
+        echo "  " . $v[0] . " " . $v[2] . PHP_EOL;
 
         if ($nov) {
             $rep->create($o);
@@ -103,18 +108,18 @@ class AlternacijaFixture
     {
         return [
 //            ['0001', false, 'Funkcija-Tezej', null, 'Oseba-0009', null,3, TRUE,True,'Pogodba-0001',],
-            ['0001', false, 'Funkcija-Tezej', null, 'Oseba-0001', null, 3, TRUE, True, 'Pogodba-0001', null, null, null,true,],
-            ['0002', true, 'Funkcija-Režija', null, 'Oseba-0010', null, 8, false, false, null, "Zaposlitev-0010", '2016-01-01', null,true,],
-            ['0003', TRUE, 'Funkcija-Inšpicient', null, 'Oseba-0003', null, 2, false, false, null, "Zaposlitev-0003", null, '2016-04-20',true,],
-            ['0004', TRUE, 'Funkcija-Tehnični vodja', null, 'Oseba-0002', null, 26, false, false, null, null, '2016-01-01', '2016-04-20',true],
-            ['0005', TRUE, 'Funkcija-Razsvetljava', null, 'Oseba-0012', null, 7, false, false, null, null, '2016-01-01', '2016-04-20',true],
-            ['0006', false, 'Funkcija-Helena', null, 'Oseba-0006', null, 1, true, true, 'Pogodba-0002', null, '2016-01-01', '2016-04-20',true],
-            ['0007', true, 'Funkcija-Hipolita', null, 'Oseba-0008', null, 14, false, true, null, "Zaposlitev-0008", '2016-01-01', '2016-04-20',true],
-            ['0008', false, 'Funkcija-Lektoriranje', null, 'Oseba-0013', null, 12, true, true, 'Pogodba-0003', null, '2016-01-01', '2016-04-20',true],
-            ['0009', true, 'Funkcija-Hipolita', null, 'Oseba-0004', null, 15, false, true, null, "Zaposlitev-0004", '2017-01-01', '2017-04-20',true],
-            ['0010', true, 'Funkcija-Hipolita', null, 'Oseba-0009', null, 16, false, true, null, "Zaposlitev-0009", null, '2017-04-20',false],
-            ['0011', true, 'Funkcija-Hipolita', null, 'Oseba-0007', null, 17, false, true, null, "Zaposlitev-0007", '2017-01-01', null,false],
-            ['0012', false, 'Funkcija-Avtor', null, 'Oseba-0010', null, 2, true, true,  'Pogodba-0004', null, null, null,true,],
+            ['0001', false, 'Funkcija-Tezej', null, 'Oseba-0001', null, 3, TRUE, True, 'Pogodba-0001', null, null, null, true,],
+            ['0002', true, 'Funkcija-Režija', null, 'Oseba-0010', null, 8, false, false, null, "Zaposlitev-0010", '2016-01-01', null, true,],
+            ['0003', TRUE, 'Funkcija-Inšpicient', null, 'Oseba-0003', null, 2, false, false, null, "Zaposlitev-0003", null, '2016-04-20', true,],
+            ['0004', TRUE, 'Funkcija-Tehnični vodja', null, 'Oseba-0002', null, 26, false, false, null, null, '2016-01-01', '2016-04-20', true],
+            ['0005', TRUE, 'Funkcija-Razsvetljava', null, 'Oseba-0012', null, 7, false, false, null, null, '2016-01-01', '2016-04-20', true],
+            ['0006', false, 'Funkcija-Helena', null, 'Oseba-0006', null, 1, true, true, 'Pogodba-0002', null, '2016-01-01', '2016-04-20', true],
+            ['0007', true, 'Funkcija-Hipolita', null, 'Oseba-0008', null, 14, false, true, null, "Zaposlitev-0008", '2016-01-01', '2016-04-20', true],
+            ['0008', false, 'Funkcija-Lektoriranje', null, 'Oseba-0013', null, 12, true, true, 'Pogodba-0003', null, '2016-01-01', '2016-04-20', true],
+            ['0009', true, 'Funkcija-Hipolita', null, 'Oseba-0004', null, 15, false, true, null, "Zaposlitev-0004", '2017-01-01', '2017-04-20', true],
+            ['0010', true, 'Funkcija-Hipolita', null, 'Oseba-0009', null, 16, false, true, null, "Zaposlitev-0009", null, '2017-04-20', false],
+            ['0011', true, 'Funkcija-Hipolita', null, 'Oseba-0007', null, 17, false, true, null, "Zaposlitev-0007", '2017-01-01', null, false],
+            ['0012', false, 'Funkcija-Avtor', null, 'Oseba-0010', null, 2, true, true, 'Pogodba-0004', null, null, null, true,],
         ];
     }
 
