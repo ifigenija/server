@@ -318,7 +318,7 @@ class UprizoritevCest
             'maticniOder'           => $this->lookProstor['id'],
             'stOdmorov'             => 3,
 //            'avtor'                 => 'avaa',
-            'gostujoca'             => true, // $$ bool vrača napako convertToBool
+            'gostujoca'             => false, // $$ bool vrača napako convertToBool
             'trajanje'              => 4,
             'opis'                  => 'aa',
             'arhIdent'              => 'aa',
@@ -478,106 +478,6 @@ class UprizoritevCest
         $this->lookPopa = $ent            = $I->lookupEntity("popa", "0988", false);
         $I->assertNotEmpty($ent);
     }
-
-    /**
-     * kreiram popa
-     *  
-     * @param ApiTester $I
-     */
-//    public function createPopa(ApiTester $I)
-//    {
-//        $data           = [
-//            'sifra'  => 'X12',
-//            'naziv'  => 'zz',
-////            'naziv1'    => 'zz',
-////            'panoga'    => 'zz',
-////            'email'     => 'z@zzz.zz',
-////            'url'       => 'zz',
-////            'opomba'    => 'zz',
-//            'drzava' => $this->objDrzava['id'],
-////            'idddv'     => 'zz',
-////            'maticna'   => 'ZZ123',
-////            'zavezanec' => 'Da',
-////            'jeeu'      => 'Da',
-////            'datZav'    => '2010-02-01T00:00:00+0100',
-////            'datnZav'   => '2017-02-01T00:00:00+0100',
-////            'zamejstvo' => FALSE,
-//        ];
-//        $this->objPopa1 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
-//
-//        $I->assertNotEmpty($popa['id']);
-//
-//        $data           = [
-//            'sifra'  => 'A12',
-//            'naziv'  => 'aa',
-//            'drzava' => $this->objDrzava['id'],
-//        ];
-//        $this->objPopa2 = $popa           = $I->successfullyCreate($this->popaUrl, $data);
-//
-//        $I->assertNotEmpty($popa['id']);
-//    }
-
-    /**
-     *  kreiramo zapis
-     * 
-     * @depends createPopa
-     * 
-     * @param ApiTester $I
-     */
-//    public function createProdukcijskaHisa(ApiTester $I)
-//    {
-//        $data                       = [
-//            'status' => 'zz',
-//            'popa'   => $this->objPopa1['id'],
-//        ];
-//        $this->objProdukcijskaHisa1 = $ent                        = $I->successfullyCreate($this->produkcijskaHisaUrl, $data);
-//        $I->assertNotEmpty($ent['id']);
-//        $I->assertEquals($ent['status'], 'zz');
-//
-//
-//        $data                       = [
-//            'status' => 'bb',
-//            'popa'   => $this->objPopa2['id'],
-//        ];
-//        $this->objProdukcijskaHisa2 = $ent                        = $I->successfullyCreate($this->produkcijskaHisaUrl, $data);
-//        $I->assertNotEmpty($ent['id']);
-//    }
-
-    /**
-     *  kreiramo zapis
-     * 
-     * @depends create
-     * @depends lookupProdukcijskaHisa
-     * 
-     * @param ApiTester $I
-     */
-//    public function createVecKoproducentov(ApiTester $I)
-//    {
-//        $data                   = [
-//            'odstotekFinanciranja' => 1.23,
-//            'nasStrosek'           => false,
-//            'uprizoritev'          => $this->obj2['id'],
-//            'koproducent'          => $this->lookProdukcijskaHisa1['id'],
-//        ];
-//        $I->assertTrue(true);
-//        $this->objKoprodukcija1 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
-//        $I->assertNotEmpty($ent['id']);
-//        $I->assertFalse($ent['nasStrosek']);
-//        codecept_debug($ent);
-//
-//
-//        // kreiram še en zapis
-//        $data                   = [
-//            'odstotekFinanciranja' => 7.90,
-//            'nasStrosek'           => true,
-//            'uprizoritev'          => $this->obj2['id'],
-//            'koproducent'          => $this->lookProdukcijskaHisa2['id'],
-//        ];
-//        $this->objKoprodukcija2 = $ent                    = $I->successfullyCreate($this->produkcijaDelitevUrl, $data);
-//        $I->assertNotEmpty($ent['id']);
-//        codecept_debug($ent);
-//        $I->assertTrue($ent['nasStrosek']);
-//    }
 
     /**
      *  napolnimo vsaj en zapis
@@ -834,6 +734,60 @@ class UprizoritevCest
     }
 
     /**
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListVse(ApiTester $I)
+    {
+        /**
+         * negostujoče
+         */
+        $resp      = $I->successfullyGetList($this->uprizoritevUrl . "/vse", []);
+        $list      = $resp['data'];
+        codecept_debug($list);
+        $gostujoce = array_unique(array_column($resp['data'], "gostujoca"));
+        codecept_debug($gostujoce);
+        $I->assertNotContains(true, $gostujoce);
+        $faze      = array_unique(array_column($resp['data'], "faza"));
+        codecept_debug($faze);
+        $I->assertContains('predprodukcija-potrjen_program', $faze);
+        $I->assertContains('produkcija', $faze);
+        $I->assertContains('postprodukcija', $faze);
+
+        $totRecNegost = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(16, $resp['state']['totalRecords']);
+
+        /**
+         * gostujoče
+         */
+        $resp      = $I->successfullyGetList($this->uprizoritevUrl . "/vse?gostujoca=true", []);
+        $list      = $resp['data'];
+        codecept_debug($list);
+        $gostujoce = array_unique(array_column($resp['data'], "gostujoca"));
+        codecept_debug($gostujoce);
+        $I->assertContains(true, $gostujoce);
+        $I->assertLessThanOrEqual(3, $resp['state']['totalRecords']);
+
+        /**
+         * negostujoče v določenih fazah
+         */
+        $resp      = $I->successfullyGetList($this->uprizoritevUrl . "/vse?status[]=produkcija&status[]=postprodukcija", []);
+        $list      = $resp['data'];
+        codecept_debug($list);
+        $gostujoce = array_unique(array_column($resp['data'], "gostujoca"));
+        codecept_debug($gostujoce);
+        $I->assertNotContains(true, $gostujoce);
+        $faze      = array_unique(array_column($resp['data'], "faza"));
+        codecept_debug($faze);
+        $I->assertEquals(2, count($faze));
+        $I->assertNotContains('predprodukcija-potrjen_program', $faze);
+        $I->assertContains('produkcija', $faze);
+        $I->assertContains('postprodukcija', $faze);
+
+        $I->assertLessThan($totRecNegost, $resp['state']['totalRecords']);
+    }
+
+    /**
      * brisanje zapisa
      * 
      * @depends create
@@ -843,29 +797,6 @@ class UprizoritevCest
         $I->successfullyDelete($this->restUrl, $this->obj['id']);
         $I->failToGet($this->restUrl, $this->obj['id']);
     }
-
-    /**
-     *  kreiramo zapis
-     * 
-     * @depends create
-     * 
-     * @param ApiTester $I
-     */
-//    public function createVecGostujocih(ApiTester $I)
-//    {
-//        $data                = [
-//            'uprizoritev' => $this->obj2['id'],
-//        ];
-//        $this->objGostujoca1 = $ent                 = $I->successfullyCreate($this->gostujocaUrl, $data);
-//        $I->assertNotEmpty($ent['id']);
-//
-//        // kreiramo še en zapis
-//        $data                = [
-//            'uprizoritev' => $this->obj2['id'],
-//        ];
-//        $this->objGostujoca2 = $ent                 = $I->successfullyCreate($this->gostujocaUrl, $data);
-//        $I->assertNotEmpty($ent['id']);
-//    }
 
     /**
      * najde enoto programa
