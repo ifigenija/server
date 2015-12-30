@@ -11,18 +11,18 @@ use ApiTester;
  *      - dajVzporednice
  *      - dajPrekrivanja
  * variante testov
- * - različni vhodni parametri:
- *  . več uprizoritevId  / prazna UprizoritevId
- *  . več alternacij /prazne alternacije
- * - ugotavljanje rezultatov:
- *      . v izhodu ne sme biti vhodnih uprizoritev
- *      . ali so vse izhodne uprizoritve : negostujoce, v ustrezni fazi
- *  . ali je error v pravi obliki / oz. prazen
- *      . kombinacije vzporednice / prekrivanje:
+ *      - različni vhodni parametri:
+ *       . več uprizoritevId  / prazna UprizoritevId
+ *       . več alternacij /prazne alternacije
+ *      - ugotavljanje rezultatov:
+ *       . v izhodu ne sme biti vhodnih uprizoritev
+ *       . ali so vse izhodne uprizoritve : negostujoce, v ustrezni fazi
+ *       . ali je error v pravi obliki / oz. prazen
+ *       . kombinacije vzporednice / prekrivanje:
  *          .. presek uprizoritev V in P prazen
  *          .. (unije upr. V in P ) enaka vsem dopustnim upr.
- *  . ali je določena oseba v zasedenih /prostih alternacijah
- *  . ali je določena upriz. v rezultatu
+ *       . ali je določena oseba v zasedenih /prostih alternacijah
+ *       . ali je določena upriz. v rezultatu
  * negativni testi
  * - neveljaven id enote programa
  * - koprodukcija že obstaja
@@ -33,6 +33,7 @@ class VzporedniceCest
 
     private $rpcUrl         = '/rpc/koledar/vzporednice';
     private $uprizoritevUrl = '/rest/uprizoritev';
+    private $funkcijaUrl    = '/rest/funkcija';
     private $uprizoritveVseNegostPlanIds;
     private $lookUprizoritev1;
     private $lookUprizoritev2;
@@ -46,11 +47,36 @@ class VzporedniceCest
     private $lookOsebaN;
     private $lookOsebaN2;
     private $lookOsebaN3;
+    private $lookAlternacijaFOO1;
+    private $lookAlternacijaFOO2;
+    private $lookAlternacijaFOO3;
 
     public function _before(ApiTester $I)
     {
         // da testiramo vsa posamezna dovoljenja brez shortCurcuit
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+    }
+
+    /**
+     * vrne vrednosti subarray-ev v array z nivojem manj
+     * npr:
+     *  [[1, 2, 3], [ 4, 5]]     =>   [1,2,3,4,5]
+     * 
+     * @param type $resp
+     * @param type $zasedene
+     * @return type
+     */
+    private function subarrayValuesToArray(array $polje)
+    {
+        codecept_debug(__FUNCTION__);
+
+        $resultA = [];
+        foreach ($polje as $p) {
+            foreach ($p as $v) {
+                array_push($resultA, $v);
+            }
+        }
+        return $resultA;
     }
 
     /**
@@ -105,10 +131,11 @@ class VzporedniceCest
     }
 
     /**
+     * Iz Rpc response-a  izlušči iz konfliktnih funkcij zasedene oz. proste osebe
      * 
      * @param type $resp
-     * @param type $zasedene
-     * @return type
+     * @param boolean $zasedene     
+     * @return array
      */
     private function osebeIds($resp, $zasedene = true)
     {
@@ -116,24 +143,15 @@ class VzporedniceCest
 
         $kf = array_column($resp['data'], "konfliktneFunkcije");
 
-        $zasOsA = [];
-        foreach ($kf as $ai) {
-            foreach ($ai as $v) {
-                array_push($zasOsA, $v);
-            }
-        }
+        $zasOsA = $this->subarrayValuesToArray($kf);
+
         if ($zasedene) {
             $colName = "zasedeneOsebe";
         } else {
             $colName = "nezasedeneOsebe";
         }
-        $zasOsA   = array_column($zasOsA, $colName);
-        $zasOsebe = [];
-        foreach ($zasOsA as $ai) {
-            foreach ($ai as $v) {
-                array_push($zasOsebe, $v);
-            }
-        }
+        $zasOsA      = array_column($zasOsA, $colName);
+        $zasOsebe    = $this->subarrayValuesToArray($zasOsA);
         $zasOsebeIds = array_column($zasOsebe, "id");
         return $zasOsebeIds;
     }
@@ -153,6 +171,10 @@ class VzporedniceCest
         $I->assertGuid($look['id']);
 
         $this->lookUprizoritev3 = $look                   = $I->lookupEntity("uprizoritev", "0019", false);
+        codecept_debug($look);
+        $I->assertGuid($look['id']);
+
+        $this->lookUprizoritev4 = $look                   = $I->lookupEntity("uprizoritev", "0014", false);
         codecept_debug($look);
         $I->assertGuid($look['id']);
     }
@@ -190,6 +212,54 @@ class VzporedniceCest
         $this->lookOsebaN3 = $look              = $I->lookupEntity("oseba", "0016", false);
         codecept_debug($look);
         $I->assertGuid($look['id']);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupAlternacijFoo(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->funkcijaUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev1['id'], []);
+        $list = $resp['data'];
+        $foos = [];
+        $foo  = [];
+        foreach ($list as $l) {
+            $foo[$l['id']] = [];
+            foreach ($l['alternacije'] as $alt) {
+                $foo[$l['id']] [] = $alt['oseba']['id'];
+            }
+            $foos[] = $foo;
+            $foo    = [];
+        }
+        codecept_debug($foos);
+        /**
+         * so vse alternacije od uprizoritve v obliki, ki je primerna za input 
+         * alternacij vzporednic
+         */
+        $this->lookAlternacijaFOO1 = $foos;
+
+        /**
+         * še vse alternacije od druge uprizoritve
+         */
+        $resp = $I->successfullyGetList($this->funkcijaUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev4['id'], []);
+        $list = $resp['data'];
+        $foos = [];
+        $foo  = [];
+        foreach ($list as $l) {
+            $foo[$l['id']] = [];
+            foreach ($l['alternacije'] as $alt) {
+                $foo[$l['id']] [] = $alt['oseba']['id'];
+            }
+            $foos[] = $foo;
+            $foo    = [];
+        }
+        codecept_debug($foos);
+        /**
+         * so vse alternacije od uprizoritve v obliki, ki je primerna za input 
+         * alternacij vzporednic
+         */
+        $this->lookAlternacijaFOO2 = $foos;
     }
 
     /**
@@ -265,7 +335,7 @@ class VzporedniceCest
      * 
      * @param ApiTester $I
      */
-    public function dajVzpPre(ApiTester $I)
+    public function dajVzporedniceInPrekrivanjaOd0002(ApiTester $I)
     {
         /**
          * vhodni parametri
@@ -276,7 +346,7 @@ class VzporedniceCest
         /**
          * daj vzporednice
          */
-        $respV = $I->successfullyCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        $respV         = $I->successfullyCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
         codecept_debug($respV);
         $this->kontroleRezultatov($I, $uprIdsVho, $alts, $respV);
         $I->assertEmpty($respV['error'], 'errorja ni');
@@ -301,7 +371,7 @@ class VzporedniceCest
         /**
          * daj prekrivanja
          */
-        $respP = $I->successfullyCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        $respP         = $I->successfullyCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
         codecept_debug($respP);
         $this->kontroleRezultatov($I, $uprIdsVho, $alts, $respP);
         $I->assertEmpty($respP['error'], 'errorja ni');
@@ -322,8 +392,60 @@ class VzporedniceCest
         $I->assertNotContains($this->lookOsebaN2['id'], $nezasOsebeIds);
         $I->assertNotContains($this->lookOsebaN3['id'], $zasOsebeIds);
         $I->assertNotContains($this->lookOsebaN3['id'], $nezasOsebeIds);
-        
-        
+        /**
+         * ali je uprizoritev s  funkcijami, ki imajo in tudi nimajo prostih oseb
+         * med rezultati?
+         */
+        $uprIzhodneIds = array_column($respP['data'], "id");
+        $I->assertContains($this->lookUprizoritev3['id'], $uprIzhodneIds);
+
+
+        /**
+         * kontrola kombinacij
+         */
+        $this->kontroleObehRezultatov($I, $uprIdsVho, $respV, $respP);
+    }
+
+    /**
+     * vzporednice in prekrivanja 
+     *  z vhodom alternacije dveh uprizoritev
+     * 
+     * @param ApiTester $I
+     */
+    public function dajVzporPrekrOdAlternacij(ApiTester $I)
+    {
+        /**
+         * vhodni parametri
+         */
+        $uprIdsVho = [];
+        $alts      = array_merge($this->lookAlternacijaFOO1, $this->lookAlternacijaFOO2);
+
+        /**
+         * daj vzporednice
+         */
+        $respV = $I->successfullyCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+//        codecept_debug($respV);
+        $this->kontroleRezultatov($I, $uprIdsVho, $alts, $respV);
+        /*
+         * konfliktne alternacije - oseba je zasedena v dveh ali večih uprizoritvah
+         */
+        $I->assertNotEmpty($respV['error'], 'error');
+        codecept_debug($respV['error']);
+        $I->assertContains($this->lookOsebaB['id'], array_keys($respV['error']));
+
+
+        /**
+         * daj prekrivanja
+         */
+        $respP = $I->successfullyCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+//        codecept_debug($respP);
+        $this->kontroleRezultatov($I, $uprIdsVho, $alts, $respP);
+        /*
+         * konfliktne alternacije - oseba je zasedena v dveh ali večih uprizoritvah
+         */
+        $I->assertNotEmpty($respP['error'], 'error');
+        codecept_debug($respP['error']);
+        $I->assertContains($this->lookOsebaB['id'], array_keys($respP['error']));
 
         /**
          * kontrola kombinacij

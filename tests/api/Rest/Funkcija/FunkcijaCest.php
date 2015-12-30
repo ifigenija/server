@@ -312,6 +312,9 @@ class FunkcijaCest
         codecept_debug($sePlaniraA);
         $I->assertEquals(1, count($sePlaniraA), "vsi vse planira morajo biti true");
         $I->assertEquals(true, $sePlaniraA[0]);
+        
+        $I->fail('$$');
+   
     }
 
     /**
