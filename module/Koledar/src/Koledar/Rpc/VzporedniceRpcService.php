@@ -24,9 +24,11 @@ class VzporedniceRpcService
      *
      * @param array $uprizoritveIds    seznam mora biti v obliki: [ "id-uprizoritve", ...]
      * @param array $alternacije       seznam mora biti v obliki: [ {"id-funkcije" : ["id-osebe", ...]}, ...]
-     * @return type
+     * @param type $zacetek            začetek  intervala 
+     * @param type $konec              konec intervala v katerem iščemo že zasedene osebe iz terminov storitev
+     * @return string
      */
-    public function dajVzporednice(array $uprizoritveIds = [], array $alternacije = [])
+    public function dajVzporednice(array $uprizoritveIds = [], array $alternacije = [], $zacetek = null, $konec = null)
     {
 
         /*
@@ -37,12 +39,8 @@ class VzporedniceRpcService
         $this->expectPermission("Alternacija-read");
         $this->expectPermission("Oseba-read");
 
-        /**
-         * $$ preverjanje vhodnih parametrov 
-         *   - morda če so guid?
-         *    - kako so lahko prazni ([], null)
-         */
-//$$        $this->expectIsoDate($datum, $this->translate("Datum ($datum) ni datum v ISO8601 obliki"), 1001110);
+
+        $this->preveriVhodneParametre($uprizoritveIds, $alternacije, $zacetek, $konec);
 
         $srv = $this->getServiceLocator()->get('vzporednice.service');
 
@@ -75,9 +73,11 @@ class VzporedniceRpcService
      *  
      * @param array $uprizoritveIds    seznam mora biti v obliki: [ "id-uprizoritve", ...]
      * @param array $alternacije       seznam mora biti v obliki: [ {"id-funkcije" : ["id-osebe", ...]}, ...]
+     * @param type $zacetek
+     * @param type $konec
      * @return type
      */
-    public function dajPrekrivanja(array $uprizoritveIds = [], array $alternacije = [])
+    public function dajPrekrivanja(array $uprizoritveIds = [], array $alternacije = [], $zacetek = null, $konec = null)
     {
         /*
          *  preverjanje avtorizacije
@@ -87,12 +87,8 @@ class VzporedniceRpcService
         $this->expectPermission("Alternacija-read");
         $this->expectPermission("Oseba-read");
 
-        /**
-         * $$ preverjanje vhodnih parametrov 
-         *   - morda če so guid?
-         *    - kako so lahko prazni ([], null)
-         */
-//$$        $this->expectIsoDate($datum, $this->translate("Datum ($datum) ni datum v ISO8601 obliki"), 1001110);
+        $this->preveriVhodneParametre($uprizoritveIds, $alternacije, $zacetek, $konec);
+
         $srv = $this->getServiceLocator()->get('vzporednice.service');
 
         $konfliktiOseUpr = $srv->getKonfliktOsebaUpriz($alternacije);
@@ -230,6 +226,35 @@ class VzporedniceRpcService
         $jsonResult['data']  = $jsonList;
 
         return $jsonResult;
+    }
+
+    /**
+     * preveri vhodne parametre RPC klicev in nasilno prekini program, če niso v redu
+     * 
+     */
+    private function preveriVhodneParametre($uprizoritveIds, $alternacije, $zacetek, $konec)
+    {
+        foreach ($uprizoritveIds as $u) {
+            $this->expectUUID($u, 'Pričakujem ID uprizoritev v prvem parametru', 1001670);
+        }
+        foreach ($alternacije as $key => $foo) {
+            $this->expect(is_array($foo) && is_integer($key), 'Pričakujem array fun:(os,os,..) v drugem parametru', 1001676);
+            foreach ($foo as $fun => $osebe) {
+                $this->expectUUID($fun, 'Pričakujem Id funkcije kot ključ v drugem parametru', 1001674);
+                foreach ($osebe as $o) {
+                    $this->expectUUID($o, 'Pričakujem Id oseb v drugem parametru', 1001675);
+                }
+            }
+        }
+
+        if (!empty($zacetek)) {
+            $this->expectIsoDate($zacetek, $this->translate('Začetek (' . $zacetek . ') ni datum v ISO8601 obliki'), 1001671);
+        }
+        if (!empty($konec)) {
+            $this->expectIsoDate($konec, $this->translate('Konec (' . $konec . ') ni datum v ISO8601 obliki'), 1001672);
+        }
+        $this->expect((empty($zacetek) && empty($konec) || (empty($zacetek) && empty($konec) ))
+                , "Začetek in konec morata biti ali oba prazna ali oba čas", 1001673);
     }
 
 }

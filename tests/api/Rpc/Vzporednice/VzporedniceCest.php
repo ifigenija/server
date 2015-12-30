@@ -54,7 +54,7 @@ class VzporedniceCest
     public function _before(ApiTester $I)
     {
         // da testiramo vsa posamezna dovoljenja brez shortCurcuit
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$vesna, \IfiTest\AuthPage::$vesnaPass);
     }
 
     /**
@@ -124,8 +124,8 @@ class VzporedniceCest
 
         $unijaUprIdsVhoVzpPre = array_keys(array_flip($uprIdsVho) + array_flip($uprIdsVzp) + array_flip($uprIdsPre));
         sort($unijaUprIdsVhoVzpPre);
-//        codecept_debug($this->uprizoritveVseNegostPlanIds);
-//        codecept_debug($unijaUprIdsVhoVzpPre);
+        codecept_debug($this->uprizoritveVseNegostPlanIds);
+        codecept_debug($unijaUprIdsVhoVzpPre);
         $I->assertTrue($this->uprizoritveVseNegostPlanIds == $unijaUprIdsVhoVzpPre
                 , "unija  vhodnih upriz. in izhodnih vzporednic in prekrivanj enaka vsem dopustnim");
     }
@@ -419,6 +419,7 @@ class VzporedniceCest
          */
         $uprIdsVho = [];
         $alts      = array_merge($this->lookAlternacijaFOO1, $this->lookAlternacijaFOO2);
+        codecept_debug($alts);
 
         /**
          * daj vzporednice
@@ -451,6 +452,151 @@ class VzporedniceCest
          * kontrola kombinacij
          */
         $this->kontroleObehRezultatov($I, $uprIdsVho, $respV, $respP);
+    }
+
+    /**
+     * vzporednice in prekrivanja 
+     *  z neveljavnim vhodom
+     * 
+     * @param ApiTester $I
+     */
+    public function dajVzporPrekrNeveljavniVhodUprizoritev(ApiTester $I)
+    {
+        /**
+         * vhodni parametri
+         */
+        $uprIdsVho = ["neveljavni", "podatki"];      //neveljavno
+        $alts      = [];
+
+        /**
+         * daj vzporednice
+         */
+        $respV = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        codecept_debug($respV);
+        $I->assertEquals(1001670, $respV['code']);
+
+
+        /**
+         * daj prekrivanja
+         */
+        $respP = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        codecept_debug($respP);
+        $I->assertEquals(1001670, $respP['code']);
+
+
+
+        /**
+         * vhodni parametri - spremenjeni
+         */
+        $uprIdsVho = [$this->lookOsebaA['id']];      //neveljavno - vendar upošteva, kot da je prazno
+        $alts      = [];
+
+        /**
+         * daj vzporednice
+         */
+        $respV = $I->successfullyCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        codecept_debug($respV);
+        $this->kontroleRezultatov($I, $uprIdsVho, $alts, $respV);
+
+
+        /**
+         * daj prekrivanja
+         */
+        $respP = $I->successfullyCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        codecept_debug($respP);
+        $this->kontroleRezultatov($I, $uprIdsVho, $alts, $respP);
+
+        /**
+         * kontrola kombinacij
+         */
+//        $this->kontroleObehRezultatov($I, $uprIdsVho, $respV, $respP);  // to ne uspe, ker vhodna uprizoritev ni uprizoritev
+    }
+
+    /**
+     * vzporednice in prekrivanja 
+     *  z neveljavnim vhodom
+     * 
+     * @param ApiTester $I
+     */
+    public function dajVzporPrekrNeveljavniVhodAlternacij(ApiTester $I)
+    {
+        /**
+         * vhodni parametri
+         */
+        $uprIdsVho = [];
+        $alts      = ["neveljavni", "podatki"];      //neveljavno
+        /**
+         * daj vzporednice
+         */
+        $respV     = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        codecept_debug($respV);
+        $I->assertEquals(1001676, $respV['code']);
+        /**
+         * daj prekrivanja
+         */
+        $respP     = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        codecept_debug($respP);
+        $I->assertEquals(1001676, $respP['code']);
+
+
+
+        /**
+         * spremenjeni vhodni parametri
+         */
+        $uprIdsVho = [];
+        $alts      = ["neveljavni" => [], "podatki" => []];      //neveljavno
+        codecept_debug($alts);
+
+        /**
+         * daj vzporednice
+         */
+        $respV = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        codecept_debug($respV);
+        $I->assertEquals(1001676, $respV['code']);
+        /**
+         * daj prekrivanja
+         */
+        $respP = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        codecept_debug($respP);
+        $I->assertEquals(1001676, $respP['code']);
+
+        /**
+         * spremenjeni vhodni parametri
+         */
+        $uprIdsVho = [];
+        $alts      = [["neveljavni" => []], ["podatki" => []]];      //neveljavno
+        codecept_debug($alts);
+        /**
+         * daj vzporednice
+         */
+        $respV = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        codecept_debug($respV);
+        $I->assertEquals(1001674, $respV['code']);
+        /**
+         * daj prekrivanja
+         */
+        $respP = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        codecept_debug($respP);
+        $I->assertEquals(1001674, $respP['code']);
+
+        /**
+         * spremenjeni vhodni parametri
+         */
+        $uprIdsVho = [];
+        $alts      = [[$this->lookOsebaB['id'] => [ "neveljavno"]]];      //neveljavno
+        codecept_debug($alts);
+        /**
+         * daj vzporednice
+         */
+        $respV = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        codecept_debug($respV);
+        $I->assertEquals(1001675, $respV['code']);
+        /**
+         * daj prekrivanja
+         */
+        $respP = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        codecept_debug($respP);
+        $I->assertEquals(1001675, $respP['code']);
     }
 
 }

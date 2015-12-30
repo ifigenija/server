@@ -282,7 +282,6 @@ class VzporedniceService
             foreach ($a as $key => $val) {
                 $fun = $funR->findOneById($key);
                 foreach ($val as $o) {
-
                     $ou[] = [$o, $fun->getUprizoritev()->getId()];
                 }
             }
