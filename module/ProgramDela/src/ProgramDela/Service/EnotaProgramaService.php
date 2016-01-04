@@ -72,8 +72,8 @@ class EnotaProgramaService
      * npr. v program premiera, program ponovitve premiere ipd.
      * 
      * @param entity  $uprizoritev
-     * @param string $zacetek       začetek programa dela v ISO8601 obliki, npr. "1970-01-01T01:00:00+01:00"
-     * @param string $konec         konec programa dela v ISO8601 obliki, npr. "2999-01-01T01:00:00+01:00"
+     * @param string $zacetek       začetek programa dela v ISO8601 obliki, npr. "1970-01-01T01:00:00+0100"
+     * @param string $konec         konec programa dela v ISO8601 obliki, npr. "2999-01-01T01:00:00+0100"
      * 
      * @returns data                strukturirani podatki uprizoritve 
      */

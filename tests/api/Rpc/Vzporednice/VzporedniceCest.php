@@ -569,13 +569,13 @@ class VzporedniceCest
         /**
          * daj vzporednice
          */
-        $respV = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        $respV     = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
         codecept_debug($respV);
         $I->assertEquals(1001674, $respV['code']);
         /**
          * daj prekrivanja
          */
-        $respP = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        $respP     = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
         codecept_debug($respP);
         $I->assertEquals(1001674, $respP['code']);
 
@@ -588,15 +588,174 @@ class VzporedniceCest
         /**
          * daj vzporednice
          */
-        $respV = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        $respV     = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
         codecept_debug($respV);
         $I->assertEquals(1001675, $respV['code']);
         /**
          * daj prekrivanja
          */
-        $respP = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        $respP     = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
         codecept_debug($respP);
         $I->assertEquals(1001675, $respP['code']);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function dajVzporPrekrNeveljavniVhodInterval(ApiTester $I)
+    {
+        /**
+         * vhodni parametri
+         */
+        $uprIdsVho = [];
+        $alts      = [];
+        /**
+         * parametra za interval sta zaenkrat ok
+         */
+        $zacetek   = "2016-04-20T10:00:00+0200";
+        $konec     = "2016-04-20T14:00:00+0200";
+        /**
+         * daj vzporednice
+         */
+        $respV     = $I->successfullyCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        /**
+         * daj prekrivanja
+         */
+        $respP     = $I->successfullyCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+
+
+        /**
+         * spremenjeni vhodni parametri
+         * prvi prazen, drugi poln
+         */
+        $zacetek = "";
+        $konec   = "2016-04-20T14:00:00+0200";
+        /**
+         * daj vzporednice
+         */
+        $respV   = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respV);
+        $I->assertEquals(1001673, $respV['code']);
+        /**
+         * daj prekrivanja
+         */
+        $respP   = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respP);
+        $I->assertEquals(1001673, $respP['code']);
+
+
+        /**
+         * spremenjeni vhodni parametri
+         * prvi poln, drugi prazen
+         */
+        $zacetek = "2016-04-20T14:00:00+0200";
+        $konec   = "";
+        /**
+         * daj vzporednice
+         */
+        $respV   = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respV);
+        $I->assertEquals(1001673, $respV['code']);
+        /**
+         * daj prekrivanja
+         */
+        $respP   = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respP);
+        $I->assertEquals(1001673, $respP['code']);
+
+        /**
+         * spremenjeni vhodni parametri
+         * prvi neveljavni datum
+         */
+        $zacetek = "2016-04-20T10:00:00+NEVELJAVNI0200";    // neveljavni
+        $konec   = "2016-04-20T14:00:00+0200";
+        /**
+         * daj vzporednice
+         */
+        $respV   = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respV);
+        $I->assertEquals(1001671, $respV['code']);
+        /**
+         * daj prekrivanja
+         */
+        $respP   = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respP);
+        $I->assertEquals(1001671, $respP['code']);
+
+        /**
+         * spremenjeni vhodni parametri
+         * drugi neveljavni datum
+         */
+        $zacetek = "2016-04-20T14:00:00+0200";
+        $konec   = "2016-04-20T10:00:00+NEVELJAVNI0200";    // neveljavni
+        /**
+         * daj vzporednice
+         */
+        $respV   = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respV);
+        $I->assertEquals(1001672, $respV['code']);
+        /**
+         * daj prekrivanja
+         */
+        $respP   = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respP);
+        $I->assertEquals(1001672, $respP['code']);
+
+
+        /**
+         * spremenjeni vhodni parametri
+         * konec pred začetkom
+         */
+        $zacetek = "2016-04-20T14:00:00+0200";
+        $konec   = "2016-04-20T10:00:00+0200";  //< od zacetek
+        /**
+         * daj vzporednice
+         */
+        $respV   = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respV);
+        $I->assertEquals(1001677, $respV['code']);
+        /**
+         * daj prekrivanja
+         */
+        $respP   = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respP);
+        $I->assertEquals(1001677, $respP['code']);
+
+        
+        /**
+         * spremenjeni vhodni parametri
+         * konec pred začetkom  - datuma sta v različnih time zone-ah
+         */
+        $zacetek = "2016-04-20T10:00:00+0200";
+        $konec   = "2016-04-20T14:00:00+1000";  //< od zacetek -različna cona
+        /**
+         * daj vzporednice
+         */
+        $respV   = $I->failCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respV);
+        $I->assertEquals(1001677, $respV['code']);
+        /**
+         * daj prekrivanja
+         */
+        $respP   = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respP);
+        $I->assertEquals(1001677, $respP['code']);
+
+        $I->fail('$$');
     }
 
 }

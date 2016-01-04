@@ -5,6 +5,7 @@
  */
 
 namespace Koledar\Rpc;
+use Max\Filter\IsoDateFilter;
 
 /**
  * Description of VzporedniceRpcService
@@ -24,8 +25,8 @@ class VzporedniceRpcService
      *
      * @param array $uprizoritveIds    seznam mora biti v obliki: [ "id-uprizoritve", ...]
      * @param array $alternacije       seznam mora biti v obliki: [ {"id-funkcije" : ["id-osebe", ...]}, ...]
-     * @param type $zacetek            začetek  intervala 
-     * @param type $konec              konec intervala v katerem iščemo že zasedene osebe iz terminov storitev
+     * @param string $zacetek            začetek  intervala v ISO8601 obliki, npr. "2016-04-20T00:00:00+0200"
+     * @param string $konec              konec intervala v katerem iščemo že zasedene osebe iz terminov storitev
      * @return string
      */
     public function dajVzporednice(array $uprizoritveIds = [], array $alternacije = [], $zacetek = null, $konec = null)
@@ -253,8 +254,22 @@ class VzporedniceRpcService
         if (!empty($konec)) {
             $this->expectIsoDate($konec, $this->translate('Konec (' . $konec . ') ni datum v ISO8601 obliki'), 1001672);
         }
-        $this->expect((empty($zacetek) && empty($konec) || (empty($zacetek) && empty($konec) ))
+        $this->expect((empty($zacetek) && empty($konec) || (!empty($zacetek) && !empty($konec) ))
                 , "Začetek in konec morata biti ali oba prazna ali oba čas", 1001673);
+        /**
+         * konec mora biti >=začetek
+         */
+        if (!empty($zacetek) && !empty($konec)) {
+            /*
+             * pretvorimo v datum za vsak slučaj, če bi bila $zacetek in $konec 
+             * v različnih time zone-ah
+             */
+            $idf     = new IsoDateFilter();
+            $zacTime = $idf->filter($zacetek);
+            $konTime = $idf->filter($konec);
+            $this->expect($zacTime <= $konTime
+                    , "Konec ne sme biti pred začetkom", 1001677);
+        }
     }
 
 }

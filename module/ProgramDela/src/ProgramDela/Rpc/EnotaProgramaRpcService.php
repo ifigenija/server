@@ -61,8 +61,8 @@ class EnotaProgramaRpcService
      * npr. v program premiera, program ponovitve premiere ipd.
      *
      * @param string $uprizoritevId
-     * @param string $zacetek začetek programa dela v ISO8601 obliki, npr. "1970-01-01T01:00:00+01:00"
-     * @param string $konec konec programa dela v ISO8601 obliki, npr. "2999-01-01T01:00:00+01:00"
+     * @param string $zacetek začetek programa dela v ISO8601 obliki, npr. "2015-10-27T11:33:29+0200"
+     * @param string $konec konec programa dela v ISO8601 obliki, npr. "2016-04-20T00:00:00+0200"
      * @return data strukturirani podatki uprizoritve
      * @throws \Max\Exception\UnauthException
      */
