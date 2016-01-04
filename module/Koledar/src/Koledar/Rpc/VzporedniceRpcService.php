@@ -5,6 +5,7 @@
  */
 
 namespace Koledar\Rpc;
+
 use Max\Filter\IsoDateFilter;
 
 /**
@@ -47,12 +48,7 @@ class VzporedniceRpcService
 
         $konfliktiOseUpr = $srv->getKonfliktOsebaUpriz($alternacije);
 
-        /**
-         * $$ še izpis katere
-         */
         $osebe = $this->getZasedeneOsebe($uprizoritveIds, $alternacije);
-
-
 
         $uprizoritveMozne = $srv->getMozneUprizoritve($osebe);
 
@@ -174,6 +170,7 @@ class VzporedniceRpcService
          */
         $jsonList = [];
         $osebaR   = $this->getEm()->getRepository('App\Entity\Oseba');
+        $uprR     = $this->getEm()->getRepository('Produkcija\Entity\Uprizoritev');
 
         foreach ($uprizoritveMozne as $u) {
             if (!in_array($u->getId(), $uprizoritveIds)) {
@@ -223,7 +220,21 @@ class VzporedniceRpcService
         if ($u !== '') {
             $jsonList[] = $array;
         }
-        $jsonResult['error'] = $konfliktiOseUpr;
+        $konfOsUpArray = [];
+        foreach ($konfliktiOseUpr as $osId => $upIdA) {
+            $oseba      = $osebaR->findOneById($osId);
+            $this->expect($oseba, "Vhodne alternacije vsebujejo id neobstoječe osebe $oseba", 1001678);
+            $osPolnoIme = $oseba->getPolnoIme();
+            $upNazivA = [];
+            foreach ($upIdA as $uid) {
+                $upr      = $uprR->findOneById($uid);
+                $this->expect($upr, "Vhodne alternacije vsebujejo id neobstoječe uprizoritve $upr", 1001679);
+                array_push($upNazivA, $upr->getNaslov());
+            }
+
+            array_push($konfOsUpArray, [$osPolnoIme => $upNazivA]);
+        }
+        $jsonResult['error'] = $konfOsUpArray;
         $jsonResult['data']  = $jsonList;
 
         return $jsonResult;

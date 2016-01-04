@@ -57,10 +57,8 @@ class ZaposlitevFixture
         $o->setZacetek($date);
         $date = empty($v[3]) ? null : date_create($v[3]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setKonec($date);
-        $o->setTip($v[4]);
         $o->setDelovnaObveza($v[5]);
         $o->setDelovnoMesto($v[12]);
-        $o->setMalica($v[6]);
         $o->setIzmenskoDelo($v[7]);
         $o->setIndividualnaPogodba($v[8]);
         $o->setJeZaposlenVdrugemJz($v[9]);

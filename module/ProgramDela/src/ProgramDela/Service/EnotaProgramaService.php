@@ -113,6 +113,8 @@ class EnotaProgramaService
             foreach ($funkcija->getAlternacije() as $numAlt => $alternacija) {
                 /**
                  * upoštevamo le tiste alternacije, ki se vsaj delno prekrivajo z intervalom začetka in konca programa dela 
+                 * 
+                 * $$ tu bi bilo bolje, da bi primerjali datume v datetime obliki zaradi morebitnih različnih con
                  */
                 $az = is_null($alternacija->getZacetek()) ? null : $alternacija->getZacetek()->format('c');
                 $ak = is_null($alternacija->getKonec()) ? null : $alternacija->getKonec()->format('c');

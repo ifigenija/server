@@ -62,9 +62,8 @@ class VzporedniceCest
      * npr:
      *  [[1, 2, 3], [ 4, 5]]     =>   [1,2,3,4,5]
      * 
-     * @param type $resp
-     * @param type $zasedene
-     * @return type
+     * @param array $resp
+     * @return array
      */
     private function subarrayValuesToArray(array $polje)
     {
@@ -74,6 +73,27 @@ class VzporedniceCest
         foreach ($polje as $p) {
             foreach ($p as $v) {
                 array_push($resultA, $v);
+            }
+        }
+        return $resultA;
+    }
+
+    /**
+     * vrne vrednosti ključev v subarrayih
+     * npr:
+     *  [ ["a"=> 1], ["b"=> 2]]     =>   [ "a", "b"]
+     * 
+     * @param array $resp
+     * @return array
+     */
+    private function subarraysKeys(array $polje)
+    {
+        codecept_debug(__FUNCTION__);
+
+        $resultA = [];
+        foreach ($polje as $p) {
+            foreach ($p as $k => $v) {
+                array_push($resultA, $k);
             }
         }
         return $resultA;
@@ -233,6 +253,7 @@ class VzporedniceCest
             $foo    = [];
         }
         codecept_debug($foos);
+
         /**
          * so vse alternacije od uprizoritve v obliki, ki je primerna za input 
          * alternacij vzporednic
@@ -260,6 +281,28 @@ class VzporedniceCest
          * alternacij vzporednic
          */
         $this->lookAlternacijaFOO2 = $foos;
+
+        /**
+         * še vse alternacije od tretje uprizoritve
+         */
+        $resp = $I->successfullyGetList($this->funkcijaUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev3['id'], []);
+        $list = $resp['data'];
+        $foos = [];
+        $foo  = [];
+        foreach ($list as $l) {
+            $foo[$l['id']] = [];
+            foreach ($l['alternacije'] as $alt) {
+                $foo[$l['id']] [] = $alt['oseba']['id'];
+            }
+            $foos[] = $foo;
+            $foo    = [];
+        }
+        codecept_debug($foos);
+        /**
+         * so vse alternacije od uprizoritve v obliki, ki je primerna za input 
+         * alternacij vzporednic
+         */
+        $this->lookAlternacijaFOO3 = $foos;
     }
 
     /**
@@ -418,7 +461,7 @@ class VzporedniceCest
          * vhodni parametri
          */
         $uprIdsVho = [];
-        $alts      = array_merge($this->lookAlternacijaFOO1, $this->lookAlternacijaFOO2);
+        $alts      = array_merge($this->lookAlternacijaFOO1, $this->lookAlternacijaFOO2, $this->lookAlternacijaFOO3);
         codecept_debug($alts);
 
         /**
@@ -432,7 +475,7 @@ class VzporedniceCest
          */
         $I->assertNotEmpty($respV['error'], 'error');
         codecept_debug($respV['error']);
-        $I->assertContains($this->lookOsebaB['id'], array_keys($respV['error']));
+        $I->assertContains($this->lookOsebaB['label'], $this->subarraysKeys($respV['error']));
 
 
         /**
@@ -446,7 +489,14 @@ class VzporedniceCest
          */
         $I->assertNotEmpty($respP['error'], 'error');
         codecept_debug($respP['error']);
-        $I->assertContains($this->lookOsebaB['id'], array_keys($respP['error']));
+
+        $tmp = $this->subarraysKeys($respV['error']);
+        codecept_debug($tmp);
+
+        $I->assertContains($this->lookOsebaB['label'], $this->subarraysKeys($respV['error']));
+        $I->assertContains($this->lookOsebaD['label'], $this->subarraysKeys($respV['error']));
+
+        $I->fail('$$');
 
         /**
          * kontrola kombinacij
@@ -537,8 +587,6 @@ class VzporedniceCest
         $respP     = $I->failCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
         codecept_debug($respP);
         $I->assertEquals(1001676, $respP['code']);
-
-
 
         /**
          * spremenjeni vhodni parametri
@@ -733,7 +781,7 @@ class VzporedniceCest
         codecept_debug($respP);
         $I->assertEquals(1001677, $respP['code']);
 
-        
+
         /**
          * spremenjeni vhodni parametri
          * konec pred začetkom  - datuma sta v različnih time zone-ah
@@ -754,8 +802,6 @@ class VzporedniceCest
             , "zacetek"        => $zacetek, "konec"          => $konec]);
         codecept_debug($respP);
         $I->assertEquals(1001677, $respP['code']);
-
-        $I->fail('$$');
     }
 
 }

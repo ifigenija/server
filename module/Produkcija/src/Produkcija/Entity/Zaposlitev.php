@@ -26,7 +26,7 @@ class Zaposlitev
      * @var string     
      */
     protected $id;
-    
+
     /**
      * $$ morali bi spremeniti v unique, ampak potem več ne sme šifre avtomatsko prenašati iz osebe
      * 
@@ -71,26 +71,11 @@ class Zaposlitev
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Max\I18n(label="zaposlitev.tip",  description="zaposlitev.d.tip")
-     * @Max\Ui(type="integer")
-     * @var integer
-     */
-    protected $tip;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="zaposlitev.delovnaObveza",  description="zaposlitev.d.delovnaObveza")
      * @Max\Ui(type="integer")
      * @var integer
      */
     protected $delovnaObveza;
-
-    /**
-     * @ORM\Column(nullable=true)
-     * @Max\I18n(label="zaposlitev.malica",  description="zaposlitev.d.malica")
-     * @var string
-     */
-    protected $malica;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -201,19 +186,9 @@ class Zaposlitev
         return $this->konec;
     }
 
-    public function getTip()
-    {
-        return $this->tip;
-    }
-
     public function getDelovnaObveza()
     {
         return $this->delovnaObveza;
-    }
-
-    public function getMalica()
-    {
-        return $this->malica;
     }
 
     public function getIzmenskoDelo()
@@ -226,7 +201,7 @@ class Zaposlitev
         return $this->individualnaPogodba;
     }
 
-    public function getJeZaposlenVdrugemJz()
+    function getJeZaposlenVdrugemJz()
     {
         return $this->jeZaposlenVdrugemJz;
     }
@@ -291,21 +266,9 @@ class Zaposlitev
         return $this;
     }
 
-    public function setTip($tip)
-    {
-        $this->tip = $tip;
-        return $this;
-    }
-
     public function setDelovnaObveza($delovnaObveza)
     {
         $this->delovnaObveza = $delovnaObveza;
-        return $this;
-    }
-
-    public function setMalica($malica)
-    {
-        $this->malica = $malica;
         return $this;
     }
 

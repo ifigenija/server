@@ -121,11 +121,6 @@ class Alternacije
             $object->getFunkcija()->getAlternacije()->add($object);
         }
 
-        if (empty($object->getSifra())) {
-            $num = $this->getServiceLocator()->get('stevilcenje.generator');
-            $object->setSifra($num->generate('alternacija'));
-        }
-
         $object->preracunaj();
 
         /**
@@ -148,8 +143,6 @@ class Alternacije
             }
             $object->setZaposlitev($zaposlitev);
         }
-
-
 
         if (empty($object->getSifra())) {
             $num = $this->getServiceLocator()->get('stevilcenje.generator');
@@ -199,6 +192,9 @@ class Alternacije
             ]);
 
             if ($zap) {
+                /*
+                 * $$ ali ni morda hrošč in mora biti get konec > datetime?
+                 */
                 if ($zap->getKonec() === null || ($zap->getKonec() < new DateTime())) {
                     $alternacija->setZaposlen(true);
                     $alternacija->setZaposlitev($zap);

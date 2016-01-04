@@ -16,10 +16,8 @@ forms:
                   required: false
             - zacetek
             - konec
-#            - tip      # zaenkrat izven forme, ker nimamo definiranih vrednosti
             - delovnaObveza
             - delovnoMesto
-#            - malica   # zaenkrat izven forme, ker nimamo definiranih vrednosti
             - izmenskoDelo
             - individualnaPogodba
             - jeZaposlenVdrugemJz
