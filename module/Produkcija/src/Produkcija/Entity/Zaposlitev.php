@@ -157,8 +157,29 @@ class Zaposlitev
 
     public function validate($mode = 'update')
     {
+        $this->expect($this->zacetek, "Začetek je obvezen podatek", 1000336);
         $this->expect($this->oseba, "Oseba je obvezna", 1000333);
+        $this->expect
+        (!$this->konec || $this->zacetek <= $this->konec, "Konec ne sme biti pred začetkom", 1000337);
+      
         $this->setSifra($this->oseba->getSifra());
+        /*
+         * oseba ima lahko največ 1 aktivno zaposlitev 
+         * intervali zaposlitev iste osebe se ne smejo prekrivati
+         */
+        foreach ($this->oseba->getZaposlitve() as $zap) {
+            /*
+             *  samega sebe ne sme primerjati
+             */
+            if ($this->getId() != $zap->getId()) {
+                $this->expect(!($this->getStatus() == 'A' || !$zap->getStatus() == 'A')
+                        , "Oseba ima lahko največ 1 aktivno zaposlitev", 1000334);
+
+                $this->expect(( $zap->getKonec() && $this->zacetek >= $zap->getKonec() ) ||
+                        ( $this->konec && $zap->getZacetek() >= $this->konec )
+                        , "Intervali zaposlitev iste osebe se ne smejo prekrivati", 1000335);
+            }
+        }
     }
 
     public function getId()

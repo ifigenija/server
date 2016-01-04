@@ -496,8 +496,6 @@ class VzporedniceCest
         $I->assertContains($this->lookOsebaB['label'], $this->subarraysKeys($respV['error']));
         $I->assertContains($this->lookOsebaD['label'], $this->subarraysKeys($respV['error']));
 
-        $I->fail('$$');
-
         /**
          * kontrola kombinacij
          */
