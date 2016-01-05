@@ -102,6 +102,12 @@
     description: Besedilo - spreminjanje
 
 -
+    name: Dodatek-read
+    description: Dodatek - branje
+-
+    name: Dodatek-write
+    description: Dodatek - spreminjanje
+-
     name: Dogodek-read
     description: Dogodek - branje
 -
@@ -486,6 +492,12 @@
     name: TerminStoritve-write
     description: TerminStoritve - spreminjanje
 
+-
+    name: TipDodatka-read
+    description: TipDodatka - branje
+-
+    name: TipDodatka-write
+    description: TipDodatka - spreminjanje
 -
     name: TipFunkcije-read
     description: TipFunkcije - branje

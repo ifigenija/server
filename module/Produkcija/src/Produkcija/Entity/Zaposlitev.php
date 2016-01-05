@@ -172,7 +172,7 @@ class Zaposlitev
              *  samega sebe ne sme primerjati
              */
             if ($this->getId() != $zap->getId()) {
-                $this->expect(!($this->getStatus() == 'A' || !$zap->getStatus() == 'A')
+                $this->expect(!($this->status == 'A' || !$zap->getStatus() == 'A')
                         , "Oseba ima lahko največ 1 aktivno zaposlitev", 1000334);
 
                 $this->expect(( $zap->getKonec() && $this->zacetek >= $zap->getKonec() ) ||

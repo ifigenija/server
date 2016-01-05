@@ -1,0 +1,21 @@
+## YAML Template.
+---
+type: rest
+entityClass: Prisotnost\Entity\Dodatek
+forms:
+    default: 
+        elements:
+#            - id
+            - trajanje
+            - terminStoritve
+            - tipdodatka
+lists:
+    default: 
+        filter:
+            elements:                 
+                - name: terminStoritve
+                  type: toone
+                  options:
+                      label: Termin storitve
+                      targetEntity: Prisotnost\Entity\TerminStoritve
+                      required: false

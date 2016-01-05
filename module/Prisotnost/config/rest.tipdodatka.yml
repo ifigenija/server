@@ -1,0 +1,25 @@
+## YAML Template.
+---
+type: rest
+entityClass: Prisotnost\Entity\TipDodatka
+forms:
+    default: 
+        elements:
+#            - id
+            - name: sifra
+              options: 
+                  required: false                  
+            - ime
+            - opis
+lists:
+    default: 
+        filter:
+            elements: 
+                - name: q
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči..
+                    label: Išči
+        hydrator:
+            - exclude: []

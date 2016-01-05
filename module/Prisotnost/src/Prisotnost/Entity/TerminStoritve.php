@@ -5,6 +5,7 @@ namespace Prisotnost\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Max\Ann\Entity as Max;
 use Max\Entity\Base;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Prisotnost\Repository\TerminiStoritve")
@@ -109,6 +110,17 @@ class TerminStoritve
      * @var boolean
      */
     protected $gost;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Prisotnost\Entity\Dodatek", mappedBy="terminStoritve", orphanRemoval=true)
+     * @var <Dodatki>
+     */
+    protected $dodatki;
+
+    public function __construct()
+    {
+        $this->dodatki = new ArrayCollection();
+    }
 
     public function validate($mode = 'update')
     {
@@ -247,6 +259,17 @@ class TerminStoritve
     function setGost($gost)
     {
         $this->gost = $gost;
+        return $this;
+    }
+
+    function getDodatki()
+    {
+        return $this->dodatki;
+    }
+
+    function setDodatki($dodatki)
+    {
+        $this->dodatki = $dodatki;
         return $this;
     }
 
