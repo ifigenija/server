@@ -667,7 +667,7 @@ class DogodekCest
         $ent['zacetek'] = '2012-02-01T00:00:00+0100';
         $ent['konec']   = '2012-01-01T00:00:00+0200';
         $resp           = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
-        $I->assertEquals(1000469, $resp[0]['code'], "konec pred začetkom");
+        $I->assertEquals(1001709, $resp[0]['code'], "konec pred začetkom");
     }
 
     /**
@@ -680,12 +680,23 @@ class DogodekCest
         /**
          * razred mora obstajati
          */
-        $ent           = $I->successfullyGet($this->restUrl, $this->obj2['id']);
-        $ent['razred'] = null;
-        $resp          = $I->failToUpdate($this->restUrl, $ent['id'], $ent);
+        $data           = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $data['razred'] = null;
+        $resp          = $I->failToUpdate($this->restUrl, $data['id'], $data);
         codecept_debug($resp);
 //        $I->assertTrue((strpos($resp[0]['message'], 'required') !== false), "razred je obvezen");
-        $I->assertEquals(1000464, $resp[0]['code'], "razred je obvezen");
+        $I->assertEquals(1001704, $resp[0]['code'], "razred je obvezen");
+
+        
+        /**
+         * razred, ki ni v seznamu dovoljenih
+         */
+        $data['razred'] = 'nepravilen'; 
+        $resp          = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        codecept_debug($resp);
+//        $I->assertTrue((strpos($resp[0]['message'], 'required') !== false), "razred je obvezen");
+        $I->assertEquals(1001702, $resp[0]['code'], "razred je obvezen");
+
     }
 
 }

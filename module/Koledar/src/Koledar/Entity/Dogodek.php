@@ -201,29 +201,32 @@ class Dogodek
     public function validate($mode = 'update')
     {
         if ($this->zacetek && $this->konec) {
-            $this->expect($this->zacetek <= $this->konec, "Datum konca mora biti za datumom začetka", 1000469);
+            $this->expect($this->zacetek <= $this->konec, "Datum konca mora biti za datumom začetka", 1001709);
         };
 
-        $this->expect($this->razred, "Razred dogodka ne sme biti prazen", 1000464);
-        $this->expect(array_search($this->razred, $this->razredi) > -1, "Razred dogodka ni pravilen", 1000462);
+        $this->expect($this->razred, "Razred dogodka ne sme biti prazen", 1001704);
+        $this->expect(in_array($this->razred, $this->razredi), "Razred dogodka ni pravilen", 1001702);
 
         if ($this->razred === self::VAJA) {
-            $this->expect($this->vaja, "Dogodek razreda vaja zahteva referenco na vajo", 1000463);
+            $this->expect($this->vaja, "Dogodek razreda vaja zahteva referenco na vajo", 1001703);
         }
         if ($this->razred === self::PREDSTAVA) {
-            $this->expect($this->predstava, "Dogodek razreda predstva zahteva referenco na predstavo", 1000465);
+            $this->expect($this->predstava, "Dogodek razreda predstva zahteva referenco na predstavo", 1001705);
         }
         if ($this->razred === self::GOSTOVANJE) {
-            $this->expect($this->gostovanje, "Dogodek razreda gostovanje zahteva referenco na gostovanje", 1000466);
+            $this->expect($this->gostovanje, "Dogodek razreda gostovanje zahteva referenco na gostovanje", 1001706);
         }
         if ($this->razred === self::SPLOSNO) {
-            $this->expect($this->splosni, "Dogodek razreda splošno zahteva referenco dogodekSplosni", 1000467);
+            $this->expect($this->splosni, "Dogodek razreda splošno zahteva referenco dogodekSplosni", 1001707);
             $this->expect($this->prostor, "Dogodek razreda splošno zahteva referenco Prostor", 1001050);
         }
         if ($this->razred === self::ZASEDENOST) {
-            $this->expect($this->zasedenost, "Dogodek razreda zasedenost zahteva referenco zasedenost", 1000468);
+            $this->expect($this->zasedenost, "Dogodek razreda zasedenost zahteva referenco zasedenost", 1001708);
             $this->expect($this->terminiStoritve->count() === 0, "Dogodek razreda zasedenost ne dovoljuje terminov storitve", 1001051);
             $this->expect(!$this->prostor, "Dogodek razreda zasedenost ne dovoljuje reference Prostor", 1001052);
+        }
+        if ($this->razred === self::TEHNICNI) {
+            $this->expect($this->tehnicni, "Dogodek razreda tehnični zahteva referenco na tehnični", 1001700);
         }
 
         $i = 0;
@@ -593,7 +596,7 @@ class Dogodek
         return $this->tehnicni;
     }
 
-    function setTehnicni(\Koledar\Entity\DogodekTehnicni $tehnicni=null)
+    function setTehnicni(\Koledar\Entity\DogodekTehnicni $tehnicni = null)
     {
         $this->tehnicni = $tehnicni;
         return $this;

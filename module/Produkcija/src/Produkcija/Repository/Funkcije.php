@@ -115,9 +115,37 @@ class Funkcije
             $qb->setParameter('upriz', "{$options['uprizoritev']}", "string");
         }
         $qb->andWhere($e->in('p.sePlanira', [TRUE]));
-        /**
-         * $$ preveri še, če je alternacija aktivna
+
+        $qb->join('p.alternacije', 'a');
+        /*
+         * ali je alternacija aktivna na določen datum
          */
+        if (!empty($options['datum'])) {
+            $datum = $options['datum'];
+        } else {
+            $datum = new \DateTime();     //danes
+        }
+        $qb->setParameter('dat', $datum, "date");
+        /*
+         * $$ pazi na problem con in datuma (še ni rešeno!
+         */
+        $zazacetkom = $e->orX(
+                $e->lt('a.zacetek', ':dat')
+                , $e->isNull('a.zacetek')
+        );
+        $predkoncem = $e->orX(
+                $e->gt('a.konec', ':dat')
+                , $e->isNull('a.konec')
+        );
+        $qb->andWhere($zazacetkom);
+        $qb->andWhere($predkoncem);
+
+
+        /*
+         * $$ začasno
+         */
+        $tmp = $qb->getDQL();
+
         return $qb;
     }
 

@@ -18,7 +18,7 @@ class PraznikRpcService
     /**
      * Preveri, če datum dela prost dan
      *
-     * @param string $datum datum, za katerega preverjamo, če je dela prost dan v ISO8601 obliki, npr. "1970-01-01T01:00:00+01:00"
+     * @param string $datum datum, za katerega preverjamo, če je dela prost dan v ISO8601 obliki, npr. "2017-01-01T01:00:00+0100"
      * @return true|false       true če je dela prost dan, false sicer
      * @throws \Max\Exception\UnauthException
      */

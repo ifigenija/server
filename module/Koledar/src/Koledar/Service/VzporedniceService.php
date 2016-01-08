@@ -138,12 +138,6 @@ class VzporedniceService
                 ->where($e->in('vzp.faza', $this->getStatusiUprizoritev()))
                 ->andWhere('vzp.gostujoca = FALSE OR vzp.gostujoca is NULL')
                 ->andWhere($e->notIn('vzp.id', $konfliktneUprizoritve->getDQL()));
-
-        /**
-         * $$ začasno
-         */
-        $tmp = $vzporednice->getDQL();
-
         return $vzporednice->getQuery()->getResult();
     }
 
@@ -251,16 +245,10 @@ class VzporedniceService
             $konfliktneFunkcijeZAlternacijami
                     ->andWhere($e->notIn('uprizoritev', $konfliktneUprizoritve->getDQL())); // brez konfliktnih
         }
-
-        /**
-         * $$ začasno
-         */
-        $tmp2 = $konfliktneFunkcijeZAlternacijami->getDQL();
-
         if (count($osebe) > 0) {
             $konfliktneFunkcijeZAlternacijami->andWhere($e->in('ose.id', $osebe));
         } else {
-            $konfliktneFunkcijeZAlternacijami->andWhere('1=0'); //$$ spremeni v false
+            $konfliktneFunkcijeZAlternacijami->andWhere('1=0'); // false
         }
 
 
@@ -289,7 +277,6 @@ class VzporedniceService
 
         /**
          * sort polja po osebi, uprizoritvi
-         * $$ ta sort še ne deluje v redu!
          */
         uasort($ou, function($a, $b) {
             return ($a[0] < $b[0]) ? -1 : (($a[0] > $b[0]) ? 1 : ( ($a[1] < $b[1]) ? -1 : 1));

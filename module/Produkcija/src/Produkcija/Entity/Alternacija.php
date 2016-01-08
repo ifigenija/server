@@ -59,6 +59,14 @@ class Alternacija
     protected $konec;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="alternacija.aktivna", description="alternacija.d.aktivna")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $aktivna;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="alternacija.opomba", description="alternacija.d.opomba")
      * @var string
@@ -80,14 +88,6 @@ class Alternacija
      * @var boolean
      */
     protected $privzeti;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="alternacija.aktivna", description="alternacija.d.aktivna")
-     * @Max\Ui(type="boolcheckbox")
-     * @var boolean
-     */
-    protected $aktivna;
 
     /**
      * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="alternacija", fetch="EXTRA_LAZY")
@@ -164,6 +164,40 @@ class Alternacija
 //        $this->zaposlen   se nastavi že v repozitoriju
     }
 
+    /**
+     * preveri, ali je alternacija  aktivna na določen datum
+     * 
+     * $$ nedokončana metoda
+     * 
+     * @param type $datum
+     * @return boolean
+     * @todo - dokončaj
+     */
+    public function aktivna($datum = null)
+    {
+        /**
+         * $$ problem za katero timecono naj gleda za datum
+         */
+        /**
+         * $$ pretvori date v datum
+         */
+//        $idf  = new IsoDateFilter();
+//        $date = $idf->filter($stringDate);
+//        if (!empty($date) && !($date instanceof \DateTime)) {
+//            /*
+//             * $$ še translacijo za urediti 
+//             */
+//            $message = "Neveljavna datumska oblika ($stringDate)";
+//            throw new MaxException("Pogoj: " . $message, $code);
+//        }
+//        return !empty($date) ? $date : NULL;
+
+
+
+
+        return true;
+    }
+
     public function validate($mode = 'update')
     {
         if ($this->getZaposlitev()) {
@@ -204,11 +238,9 @@ class Alternacija
             }
         }
 
-        $zacetek = empty($this->zacetek) ? "" : $this->zacetek->format('c');
-        $konec   = empty($this->konec) ? "" : $this->konec->format('c');
-        if (!empty($zacetek)) {
-            if (!empty($konec)) {
-                $this->expect($konec >= $zacetek
+        if (!empty($this->zacetek)) {
+            if (!empty($this->konec)) {
+                $this->expect($this->konec >= $this->zacetek
                         , 'Konec ne sme biti pred začetkom'
                         , 1000337);
             }
@@ -249,6 +281,11 @@ class Alternacija
 
     public function getZacetek()
     {
+        /**
+         * $$ začasno
+         */
+        $tmpzacetek=  $this->zacetek;
+        
         return $this->zacetek;
     }
 
@@ -270,11 +307,6 @@ class Alternacija
     public function getPrivzeti()
     {
         return $this->privzeti;
-    }
-
-    public function getAktivna()
-    {
-        return $this->aktivna;
     }
 
     public function getStoritve()
@@ -365,12 +397,6 @@ class Alternacija
         return $this;
     }
 
-    public function setAktivna($aktivna)
-    {
-        $this->aktivna = $aktivna;
-        return $this;
-    }
-
     public function setStoritve($storitve)
     {
         $this->storitve = $storitve;
@@ -388,13 +414,14 @@ class Alternacija
         $this->tmp1 = $tmp1;
         return $this;
     }
-    function setZaposlitev(\Produkcija\Entity\Zaposlitev $zaposlitev=null)
+
+    function setZaposlitev(\Produkcija\Entity\Zaposlitev $zaposlitev = null)
     {
         $this->zaposlitev = $zaposlitev;
         return $this;
     }
 
-        public function setOseba(Oseba $oseba = null)
+    public function setOseba(Oseba $oseba = null)
     {
         $this->oseba = $oseba;
         return $this;
@@ -415,6 +442,17 @@ class Alternacija
     public function setPomembna($pomembna)
     {
         $this->pomembna = $pomembna;
+        return $this;
+    }
+
+    function getAktivna()
+    {
+        return $this->aktivna;
+    }
+
+    function setAktivna($aktivna)
+    {
+        $this->aktivna = $aktivna;
         return $this;
     }
 

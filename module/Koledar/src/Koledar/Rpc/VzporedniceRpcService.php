@@ -7,6 +7,7 @@
 namespace Koledar\Rpc;
 
 use Max\Filter\IsoDateFilter;
+use Max\Functions;
 
 /**
  * Description of VzporedniceRpcService
@@ -41,8 +42,9 @@ class VzporedniceRpcService
         $this->expectPermission("Alternacija-read");
         $this->expectPermission("Oseba-read");
 
-
         $this->preveriVhodneParametre($uprizoritveIds, $alternacije, $zacetek, $konec);
+        $zacetekD = Functions::stringToDateTime($zacetek);
+        $konecD   = Functions::stringToDateTime($konec);
 
         $srv = $this->getServiceLocator()->get('vzporednice.service');
 
@@ -85,6 +87,9 @@ class VzporedniceRpcService
         $this->expectPermission("Oseba-read");
 
         $this->preveriVhodneParametre($uprizoritveIds, $alternacije, $zacetek, $konec);
+        $zacetekD = Functions::stringToDateTime($zacetek);
+        $konecD   = Functions::stringToDateTime($konec);
+
 
         $srv = $this->getServiceLocator()->get('vzporednice.service');
 
@@ -225,9 +230,9 @@ class VzporedniceRpcService
             $oseba      = $osebaR->findOneById($osId);
             $this->expect($oseba, "Vhodne alternacije vsebujejo id neobstoječe osebe $oseba", 1001678);
             $osPolnoIme = $oseba->getPolnoIme();
-            $upNazivA = [];
+            $upNazivA   = [];
             foreach ($upIdA as $uid) {
-                $upr      = $uprR->findOneById($uid);
+                $upr = $uprR->findOneById($uid);
                 $this->expect($upr, "Vhodne alternacije vsebujejo id neobstoječe uprizoritve $upr", 1001679);
                 array_push($upNazivA, $upr->getNaslov());
             }
