@@ -37,6 +37,7 @@ class Funkcije
                 $qb = $this->getVseQb($options);
                 break;
             case "default":
+
                 $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1000670);
                 $qb = $this->getDefaultQb($options);
                 break;
@@ -119,9 +120,6 @@ class Funkcije
         } else {
             $datum = new \DateTime();     //danes
         }
-        /*
-         * $$ pazi na problem con in datuma (še ni rešeno!
-         */
         $zazacetkom = $e->orX(
                 $e->lte('a.zacetek', ':dat')
                 , $e->isNull('a.zacetek')

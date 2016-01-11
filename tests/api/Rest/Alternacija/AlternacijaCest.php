@@ -82,11 +82,13 @@ class AlternacijaCest
     public function lookupFunkcijo(ApiTester $I)
     {
         $this->lookFunkcija1Ig = $look                  = $I->lookupEntity("funkcija", "Tezej", false);
+        codecept_debug($look);
         $I->assertGuid($look['id']);
         $ent                   = $I->successfullyGet($this->funkcijaUrl, $look['id']);
         $I->assertEquals('igralec', $ent['podrocje']);
 
-        $this->lookFunkcija2Te = $look                  = $I->lookupEntity("funkcija", "Razsvetljava", false);
+        $this->lookFunkcija2Te = $look                  = $I->lookupEntity("funkcija", "Tehnični vodja", false);
+        codecept_debug($look);
         $I->assertGuid($look['id']);
         $ent                   = $I->successfullyGet($this->funkcijaUrl, $look['id']);
         $I->assertEquals('tehnik', $ent['podrocje']);
@@ -181,7 +183,6 @@ class AlternacijaCest
             'opomba'     => 'zz',
             'sort'       => 1,
             'privzeti'   => true,
-            'aktivna'    => true,
             'funkcija'   => $this->lookFunkcija1Ig['id'],
             'zaposlitev' => $this->objZaposlitev['id'],
             'oseba'      => $this->lookOseba1['id'],
@@ -202,7 +203,6 @@ class AlternacijaCest
             'opomba'     => 'aa',
             'sort'       => 2,
             'privzeti'   => true,
-            'aktivna'    => true,
             'funkcija'   => $this->lookFunkcija1Ig['id'],
             'zaposlitev' => null,
             'oseba'      => $this->lookOseba1['id'],
@@ -226,7 +226,6 @@ class AlternacijaCest
             'opomba'     => 'ddd',
             'sort'       => 6,
             'privzeti'   => true,
-            'aktivna'    => true,
             'zaposlitev' => $this->objZaposlitev['id'],
             'oseba'      => $this->lookOseba1['id'],
             'pogodba'    => null,
@@ -250,7 +249,6 @@ class AlternacijaCest
             'opomba'     => 'bb',
             'sort'       => 3,
             'privzeti'   => TRUE,
-            'aktivna'    => true,
             'funkcija'   => $this->lookFunkcija2Te['id'],
             'zaposlitev' => $this->objZaposlitev['id'],
             'oseba'      => $this->lookOseba1['id'],
@@ -276,7 +274,6 @@ class AlternacijaCest
             'opomba'     => 'eee',
             'sort'       => 6,
             'privzeti'   => false,
-            'aktivna'    => true,
             'zaposlitev' => $this->objZaposlitev['id'],
             'oseba'      => $this->lookOseba1['id'],
             'pogodba'    => null,
@@ -340,6 +337,57 @@ class AlternacijaCest
     }
 
     /**
+     * preberi aktivne alternacije funkcij, ki se planirajo, po določeni uprizoritvi
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPlanirane(ApiTester $I)
+    {
+        /*
+         * 1. datum
+         */
+        $resp      = $I->successfullyGetList($this->restUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev2['id']
+                . "&datum=2015-01-01", []);
+        $list      = $resp['data'];
+        codecept_debug($list);
+        $funIdentA = array_column(array_column($list, "funkcija"), "ident");
+        codecept_debug($funIdentA);
+        $I->assertContains("Avtor", $funIdentA);
+        $I->assertNotContains("Razsvetljava", $funIdentA);
+        $I->assertContains("Inšpicient", $funIdentA);
+        $I->assertNotContains("Režija", $funIdentA);
+
+        /*
+         * 2. datum
+         */
+        $resp      = $I->successfullyGetList($this->restUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev2['id']
+                . "&datum=2016-01-01", []);
+        $list      = $resp['data'];
+        codecept_debug($list);
+        $funIdentA = array_column(array_column($list, "funkcija"), "ident");
+        codecept_debug($funIdentA);
+        $I->assertContains("Avtor", $funIdentA);
+        $I->assertContains("Razsvetljava", $funIdentA);
+        $I->assertContains("Inšpicient", $funIdentA);
+        $I->assertContains("Režija", $funIdentA);
+
+        /*
+         * 3. datum
+         */
+        $resp      = $I->successfullyGetList($this->restUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev2['id']
+                . "&datum=2016-01-20", []);
+        $list      = $resp['data'];
+        codecept_debug($list);
+        $funIdentA = array_column(array_column($list, "funkcija"), "ident");
+        codecept_debug($funIdentA);
+        $I->assertContains("Avtor", $funIdentA);
+        $I->assertNotContains("Razsvetljava", $funIdentA);
+        $I->assertNotContains("Inšpicient", $funIdentA);
+        $I->assertContains("Režija", $funIdentA);
+    }
+
+    /**
      * spremenim zapis
      * 
      * @depends create
@@ -400,17 +448,15 @@ class AlternacijaCest
      */
     public function updateSKratkimDatumom(ApiTester $I)
     {
-        $data           = $I->successfullyGet($this->restUrl, $this->obj4['id']);
-       
-        $data['zacetek'] = '2023-05-02';
-        $data['konec'  ] = '2024-05-02';
+        $data = $I->successfullyGet($this->restUrl, $this->obj4['id']);
 
-        $this->obj4 = $ent       = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        $data['zacetek'] = '2023-05-02';
+        $data['konec']   = '2024-05-02';
+
+        $this->obj4 = $ent        = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
         codecept_debug($ent);
-        $I->assertEquals(substr($ent['zacetek'],0,10), $data['zacetek']);
-        $I->assertEquals(substr($ent['konec'],0,10), $data['konec']);
-        
-        $I->fail('$$');
+        $I->assertEquals(substr($ent['zacetek'], 0, 10), $data['zacetek']);
+        $I->assertEquals(substr($ent['konec'], 0, 10), $data['konec']);
     }
 
     /**
@@ -430,7 +476,6 @@ class AlternacijaCest
         $I->assertEquals($ent['opomba'], 'uu');
         $I->assertEquals($ent['sort'], 1);
         $I->assertEquals($ent['privzeti'], FALSE, "privzeti");      //vmes se je spremenilo
-        $I->assertEquals($ent['aktivna'], true, "aktivna");
         $I->assertEquals($ent['funkcija']['id'], $this->lookFunkcija1Ig['id']);
         $I->assertEquals($ent['zaposlitev'], $this->objZaposlitev['id'], "zaposlitev");
         $I->assertEquals($ent['zaposlen'], true);               // v validaciji se bi moralo postaviti na true, če je zaposlitev
@@ -650,7 +695,6 @@ class AlternacijaCest
             'opomba'     => 'pomembna?',
             'sort'       => 1,
             'privzeti'   => true,
-            'aktivna'    => true,
             'funkcija'   => $this->lookFunkcija1Ig['id'],
             'zaposlitev' => $this->objZaposlitev['id'],
             'oseba'      => $this->lookOseba1['id'],
@@ -674,7 +718,6 @@ class AlternacijaCest
             'opomba'     => 'pomembna je false?',
             'sort'       => 1,
             'privzeti'   => true,
-            'aktivna'    => true,
             'funkcija'   => $this->lookFunkcija1Ig['id'],
             'zaposlitev' => $this->objZaposlitev['id'],
             'oseba'      => $this->lookOseba1['id'],
@@ -762,7 +805,6 @@ class AlternacijaCest
             'opomba'   => 'gg',
             'sort'     => 11,
             'privzeti' => true,
-            'aktivna'  => true,
             'funkcija' => $this->lookFunkcija1Ig['id'],
             'oseba'    => $this->lookOseba2['id'],
             'pomembna' => TRUE,

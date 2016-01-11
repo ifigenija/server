@@ -15,7 +15,6 @@ forms:
             - opomba
             - sort
             - privzeti
-            - aktivna
 #            - storitve
             - funkcija
             - oseba
@@ -72,6 +71,24 @@ lists:
                 - oseba
                 - funkcija
                 - pogodba
+    planirane: 
+        filter:
+            elements:                 
+                - name: uprizoritev
+                  type: toone
+                  options:
+                      label: Uprizoritev
+                      targetEntity: Produkcija\Entity\Uprizoritev
+                      required: true
+                - name: datum
+                  type: datetime
+                  options:
+                      label: Datum
+                      required: true
+        hydrator:
+            lookups:
+                - oseba
+                - funkcija
 #    vse: 
 #        filter:
 #            elements: 

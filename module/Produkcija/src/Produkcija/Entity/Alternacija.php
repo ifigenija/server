@@ -59,14 +59,6 @@ class Alternacija
     protected $konec;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="alternacija.aktivna", description="alternacija.d.aktivna")
-     * @Max\Ui(type="boolcheckbox")
-     * @var boolean
-     */
-    protected $aktivna;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      * @Max\I18n(label="alternacija.opomba", description="alternacija.d.opomba")
      * @var string
@@ -403,17 +395,6 @@ class Alternacija
     public function setPomembna($pomembna)
     {
         $this->pomembna = $pomembna;
-        return $this;
-    }
-
-    function getAktivna()
-    {
-        return $this->aktivna;
-    }
-
-    function setAktivna($aktivna)
-    {
-        $this->aktivna = $aktivna;
         return $this;
     }
 

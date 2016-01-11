@@ -33,7 +33,7 @@ class VzporedniceCest
 
     private $rpcUrl         = '/rpc/koledar/vzporednice';
     private $uprizoritevUrl = '/rest/uprizoritev';
-    private $funkcijaUrl    = '/rest/funkcija';
+    private $alternacijaUrl = '/rest/alternacija';
     private $uprizoritveVseNegostPlanIds;
     private $lookUprizoritev1;
     private $lookUprizoritev2;
@@ -53,7 +53,7 @@ class VzporedniceCest
 
     public function _before(ApiTester $I)
     {
-        // da testiramo vsa posamezna dovoljenja brez shortCurcuit
+// da testiramo vsa posamezna dovoljenja brez shortCurcuit
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vesna, \IfiTest\AuthPage::$vesnaPass);
     }
 
@@ -240,17 +240,19 @@ class VzporedniceCest
      */
     public function lookupAlternacijFoo(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->funkcijaUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev1['id'], []);
+        $resp = $I->successfullyGetList($this->alternacijaUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev1['id']
+                . "&datum=2015-01-01", []);
         $list = $resp['data'];
+        codecept_debug($list);
         $foos = [];
         $foo  = [];
-        foreach ($list as $l) {
-            $foo[$l['id']] = [];
-            foreach ($l['alternacije'] as $alt) {
-                $foo[$l['id']] [] = $alt['oseba']['id'];
+        foreach ($list as $a) {
+            if (!array_key_exists($a['funkcija']['id'], $foo)) {
+                $foo[$a['funkcija']['id']] = [];
             }
-            $foos[] = $foo;
-            $foo    = [];
+            $foo[$a['funkcija']['id']] [] = $a['oseba']['id'];
+            $foos[]                       = $foo;
+            $foo                          = [];
         }
         codecept_debug($foos);
 
@@ -261,19 +263,21 @@ class VzporedniceCest
         $this->lookAlternacijaFOO1 = $foos;
 
         /**
-         * še vse alternacije od druge uprizoritve
+         * še vse aktivne alternacije od druge uprizoritve
          */
-        $resp = $I->successfullyGetList($this->funkcijaUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev4['id'], []);
+        $resp = $I->successfullyGetList($this->alternacijaUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev4['id']
+                . "&datum=2015-01-01", []);
         $list = $resp['data'];
+        codecept_debug($list);
         $foos = [];
         $foo  = [];
-        foreach ($list as $l) {
-            $foo[$l['id']] = [];
-            foreach ($l['alternacije'] as $alt) {
-                $foo[$l['id']] [] = $alt['oseba']['id'];
+        foreach ($list as $a) {
+            if (!array_key_exists($a['funkcija']['id'], $foo)) {
+                $foo[$a['funkcija']['id']] = [];
             }
-            $foos[] = $foo;
-            $foo    = [];
+            $foo[$a['funkcija']['id']] [] = $a['oseba']['id'];
+            $foos[]                       = $foo;
+            $foo                          = [];
         }
         codecept_debug($foos);
         /**
@@ -285,21 +289,24 @@ class VzporedniceCest
         /**
          * še vse alternacije od tretje uprizoritve
          */
-        $resp = $I->successfullyGetList($this->funkcijaUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev3['id'], []);
+        $resp = $I->successfullyGetList($this->alternacijaUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev3['id']
+                . "&datum=2015-01-01", []);
         $list = $resp['data'];
+        codecept_debug($list);
         $foos = [];
         $foo  = [];
-        foreach ($list as $l) {
-            $foo[$l['id']] = [];
-            foreach ($l['alternacije'] as $alt) {
-                $foo[$l['id']] [] = $alt['oseba']['id'];
+        foreach ($list as $a) {
+            if (!array_key_exists($a['funkcija']['id'], $foo)) {
+                $foo[$a['funkcija']['id']] = [];
             }
-            $foos[] = $foo;
-            $foo    = [];
+            $foo[$a['funkcija']['id']] [] = $a['oseba']['id'];
+            $foos[]                       = $foo;
+            $foo                          = [];
         }
         codecept_debug($foos);
+
         /**
-         * so vse alternacije od uprizoritve v obliki, ki je primerna za input 
+         * so vse aktivne alternacije od uprizoritve v obliki, ki je primerna za input 
          * alternacij vzporednic
          */
         $this->lookAlternacijaFOO3 = $foos;
@@ -344,7 +351,7 @@ class VzporedniceCest
      */
     public function dajVzporednice(ApiTester $I)
     {
-        $uprIds = [ $this->lookUprizoritev1['id']
+        $uprIds = [$this->lookUprizoritev1['id']
             , $this->lookUprizoritev2['id']];
         $alts   = [];
         $resp   = $I->successfullyCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIds, "alternacije" => $alts]);
@@ -361,7 +368,7 @@ class VzporedniceCest
      */
     public function dajPrekrivanja(ApiTester $I)
     {
-        $uprIds = [ $this->lookUprizoritev1['id']
+        $uprIds = [$this->lookUprizoritev1['id']
             , $this->lookUprizoritev2['id']];
         $alts   = [];
         $resp   = $I->successfullyCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIds, "alternacije" => $alts]);
@@ -383,7 +390,7 @@ class VzporedniceCest
         /**
          * vhodni parametri
          */
-        $uprIdsVho = [ $this->lookUprizoritev1['id']];
+        $uprIdsVho = [$this->lookUprizoritev1['id']];
         $alts      = [];
 
         /**
@@ -477,12 +484,11 @@ class VzporedniceCest
         codecept_debug($respV['error']);
         $I->assertContains($this->lookOsebaB['label'], $this->subarraysKeys($respV['error']));
 
-
         /**
          * daj prekrivanja
          */
         $respP = $I->successfullyCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
-//        codecept_debug($respP);
+        codecept_debug($respP);
         $this->kontroleRezultatov($I, $uprIdsVho, $alts, $respP);
         /*
          * konfliktne alternacije - oseba je zasedena v dveh ali večih uprizoritvah
@@ -629,7 +635,7 @@ class VzporedniceCest
          * spremenjeni vhodni parametri
          */
         $uprIdsVho = [];
-        $alts      = [[$this->lookOsebaB['id'] => [ "neveljavno"]]];      //neveljavno
+        $alts      = [[$this->lookOsebaB['id'] => ["neveljavno"]]];      //neveljavno
         codecept_debug($alts);
         /**
          * daj vzporednice

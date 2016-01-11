@@ -23,7 +23,7 @@ class Alternacije
 {
 
     protected $sortOptions = [
-        "default" => [
+        "default"   => [
             "sifra"      => ["alias" => "p.sifra"],
             "pomembna"   => ["alias" => "p.pomembna"],
             "zacetek"    => ["alias" => "p.zacetek"],
@@ -31,7 +31,16 @@ class Alternacije
             "zaposlen"   => ["alias" => "p.zaposlen"],
             "imaPogodbo" => ["alias" => "p.imaPogodbo"]
         ],
-        "vse"     => [
+        "planirane" => [
+            "sort"       => ["alias" => "p.sort"],
+            "sifra"      => ["alias" => "p.sifra"],
+            "pomembna"   => ["alias" => "p.pomembna"],
+            "zacetek"    => ["alias" => "p.zacetek"],
+            "konec"      => ["alias" => "p.konec"],
+            "zaposlen"   => ["alias" => "p.zaposlen"],
+            "imaPogodbo" => ["alias" => "p.imaPogodbo"]
+        ],
+        "vse"       => [
             "sifra" => ["alias" => "p.sifra"],
         ]
     ];
@@ -40,18 +49,29 @@ class Alternacije
     {
         switch ($name) {
             case "vse":
-                $qb   = $this->getVseQb($options);
-                $sort = $this->getSort($name);
-                $qb->orderBy($sort->order, $sort->dir);
-                return new DoctrinePaginator(new Paginator($qb));
+                $qb = $this->getVseQb($options);
+                break;
             case "default":
-                $this->expect(!(empty($options['funkcija']) && empty($options['uprizoritev']) ), "Ali funkcija  ali uprizoritev je obvezna", 770081);
-                $this->expect(!(!empty($options['funkcija']) && !empty($options['uprizoritev']) ), "Le funkcija ali uprizoritev ne oba hkrati", 770082);
-                $qb   = $this->getDefaultQb($options);
-                $sort = $this->getSort($name);
-                $qb->orderBy($sort->order, $sort->dir);
-                return new DoctrinePaginator(new Paginator($qb));
+                $this->expect(!(empty($options['funkcija']) && empty($options['uprizoritev']) ), "Ali funkcija  ali uprizoritev je obvezna", 1001750);
+                $this->expect(!(!empty($options['funkcija']) && !empty($options['uprizoritev']) ), "Le funkcija ali uprizoritev ne oba hkrati", 1001751);
+                $qb = $this->getDefaultQb($options);
+                break;
+            case "planirane":
+                $this->expect($this->getAuthorizationService()->isGranted('Oseba-read')
+                        , 'Nimate dovoljenja za branje Osebe', 1001756);    // ker je v hidratorju
+                $this->expect($this->getAuthorizationService()->isGranted('Funkcija-read')
+                        , 'Nimate dovoljenja za branje Osebe', 1001757);    // ker je v hidratorju
+                $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1001752);
+                $this->expect(!empty($options['datum']), "Datum je obvezen", 1001753);
+                $this->expect(empty($options['funkcija']), "Funkcija ni dovoljen parameter", 1001755);
+                $qb = $this->getPlaniraneQb($options);
+                break;
+            default:
+                $this->expect(false, "Lista $name ne obstaja", 1001754);
         }
+        $sort = $this->getSort($name);
+        $qb->orderBy($sort->order, $sort->dir);
+        return new DoctrinePaginator(new Paginator($qb));
     }
 
     public function getVseQb($options)
@@ -78,7 +98,36 @@ class Alternacije
             $qb->andWhere($naz);
             $qb->setParameter('fun', "{$options['funkcija']}", "string");
         }
+        return $qb;
+    }
 
+    /**
+     * vrne vse planirane aktivne alternacije
+     * 
+     * @param type $options
+     * @return type
+     */
+    public function getPlaniraneQb($options)
+    {
+        $qb = $this->getVseQb($options);
+        $e  = $qb->expr();
+        if (!empty($options['datum'])) {
+            $datum = $options['datum'];
+        } else {
+            $datum = new \DateTime();     //danes
+        }
+        $zazacetkom = $e->orX(
+                $e->lte('p.zacetek', ':dat')
+                , $e->isNull('p.zacetek')
+        );
+        $predkoncem = $e->orX(
+                $e->gte('p.konec', ':dat')
+                , $e->isNull('p.konec')
+        );
+        $qb->andWhere($zazacetkom);
+        $qb->andWhere($predkoncem);
+        $qb->andWhere('funkcija.sePlanira=true');
+        $qb->setParameter('dat', $datum, "date");
         return $qb;
     }
 
