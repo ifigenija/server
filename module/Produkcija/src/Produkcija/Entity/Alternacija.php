@@ -164,40 +164,6 @@ class Alternacija
 //        $this->zaposlen   se nastavi že v repozitoriju
     }
 
-    /**
-     * preveri, ali je alternacija  aktivna na določen datum
-     * 
-     * $$ nedokončana metoda
-     * 
-     * @param type $datum
-     * @return boolean
-     * @todo - dokončaj
-     */
-    public function aktivna($datum = null)
-    {
-        /**
-         * $$ problem za katero timecono naj gleda za datum
-         */
-        /**
-         * $$ pretvori date v datum
-         */
-//        $idf  = new IsoDateFilter();
-//        $date = $idf->filter($stringDate);
-//        if (!empty($date) && !($date instanceof \DateTime)) {
-//            /*
-//             * $$ še translacijo za urediti 
-//             */
-//            $message = "Neveljavna datumska oblika ($stringDate)";
-//            throw new MaxException("Pogoj: " . $message, $code);
-//        }
-//        return !empty($date) ? $date : NULL;
-
-
-
-
-        return true;
-    }
-
     public function validate($mode = 'update')
     {
         if ($this->getZaposlitev()) {
@@ -281,11 +247,6 @@ class Alternacija
 
     public function getZacetek()
     {
-        /**
-         * $$ začasno
-         */
-        $tmpzacetek=  $this->zacetek;
-        
         return $this->zacetek;
     }
 

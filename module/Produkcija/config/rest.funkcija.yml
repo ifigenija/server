@@ -38,7 +38,7 @@ lists:
                       multiple: true
                       required: false
                       value_options: @funkcija.podrocje
-    planirane: 
+    planbrezakt: 
         filter:
             elements:                 
                 - name: uprizoritev
@@ -47,13 +47,11 @@ lists:
                       label: Uprizoritev
                       targetEntity: Produkcija\Entity\Uprizoritev
                       required: true
-        hydrator:
-            byValue:
-                - alternacije
-            lookups:
-                - alternacije.oseba
-#    vse: 
-#        filter:
+                - name: datum
+                  type: datetime
+                  options:
+                      label: Datum
+                      required: true
 hydrator:
    virtual: [imena]            
 relation:

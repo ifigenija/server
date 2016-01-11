@@ -19,13 +19,13 @@ class Funkcije
 {
 
     protected $sortOptions = [
-        "default"   => [
+        "default"     => [
             "sort" => ["alias" => "p.sort"]
         ],
-        "planirane" => [
+        "planbrezakt" => [
             "sort" => ["alias" => "p.sort"]
         ],
-        "vse"       => [
+        "vse"         => [
             "sort" => ["alias" => "p.sort"]
         ],
     ];
@@ -40,14 +40,13 @@ class Funkcije
                 $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1000670);
                 $qb = $this->getDefaultQb($options);
                 break;
-            case "planirane":
+            /**
+             * planirane brez aktivnih alternacij
+             */
+            case "planbrezakt":
                 $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1000674);
-                $this->expect($this->getAuthorizationService()->isGranted('Alternacija-read')
-                        , 'Nimate dovoljenja za branje alternacij', 1000675);
-                $this->expect($this->getAuthorizationService()->isGranted('Oseba-read')
-                        , 'Nimate dovoljenja za branje oseb', 1000676);
-
-                $qb = $this->getPlaniraneQb($options);
+                $this->expect(!empty($options['datum']), "Datum je obvezen", 1000678);
+                $qb = $this->getPlanBrezAktAltQb($options);
                 break;
             default:
                 $this->expect(false, "Lista $name ne obstaja", 1000673);
@@ -99,24 +98,19 @@ class Funkcije
     }
 
     /**
-     * vrne seznam planirajočih se funkcij z aktivnimi alternacijami
+     * vrne seznam planirajočih brez aktivnih alternacij
      * 
      * @param type $options
      * @return type
      */
-    public function getPlaniraneQb($options)
+    public function getPlanBrezAktAltQb($options)
     {
-        $qb = $this->createQueryBuilder('p');
-        $e  = $qb->expr();
-        if (!empty($options['uprizoritev'])) {
-            $qb->join('p.uprizoritev', 'uprizoritev');
-            $naz = $e->eq('uprizoritev.id', ':upriz');
-            $qb->andWhere($naz);
-            $qb->setParameter('upriz', "{$options['uprizoritev']}", "string");
-        }
-        $qb->andWhere($e->in('p.sePlanira', [TRUE]));
-
-        $qb->join('p.alternacije', 'a');
+        $stAktivnihAlt = $this->_em->createQueryBuilder();
+        $e             = $stAktivnihAlt->expr();
+        $stAktivnihAlt->select('count(a)')
+                ->from('Produkcija\Entity\Alternacija', 'a')
+                ->where('a.funkcija=p.id')
+        ;
         /*
          * ali je alternacija aktivna na določen datum
          */
@@ -125,23 +119,34 @@ class Funkcije
         } else {
             $datum = new \DateTime();     //danes
         }
-        $qb->setParameter('dat', $datum, "date");
         /*
          * $$ pazi na problem con in datuma (še ni rešeno!
          */
         $zazacetkom = $e->orX(
-                $e->lt('a.zacetek', ':dat')
+                $e->lte('a.zacetek', ':dat')
                 , $e->isNull('a.zacetek')
         );
         $predkoncem = $e->orX(
-                $e->gt('a.konec', ':dat')
+                $e->gte('a.konec', ':dat')
                 , $e->isNull('a.konec')
         );
-        $qb->andWhere($zazacetkom);
-        $qb->andWhere($predkoncem);
+        $stAktivnihAlt->andWhere($zazacetkom);
+        $stAktivnihAlt->andWhere($predkoncem);
+
+        $qb = $this->createQueryBuilder('p');
+        $e  = $qb->expr();
+        if (!empty($options['uprizoritev'])) {
+            $qb->join('p.uprizoritev', 'uprizoritev');
+            $naz = $e->eq('uprizoritev.id', ':upriz');
+            $qb->andWhere($naz);
+            $qb->setParameter('upriz', "{$options['uprizoritev']}", "string");
+            $qb->setParameter('dat', $datum, "date");
+        }
+        $qb->andWhere($e->in('p.sePlanira', [TRUE]));
+        $qb->andWhere("(" . $stAktivnihAlt->getDQL() . ")=0");  // le funkcije brez aktivnih alternacij
 
 
-        /*
+        /**
          * $$ začasno
          */
         $tmp = $qb->getDQL();

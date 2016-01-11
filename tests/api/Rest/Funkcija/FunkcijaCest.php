@@ -42,7 +42,11 @@ class FunkcijaCest
     private $obj3teh;
     private $obj4;
     private $objOseba;
-    private $lookOseba;
+    private $lookOseba1;
+    private $lookOseba2;
+    private $lookOseba3;
+    private $lookOseba4;
+    private $lookOseba5;
     private $objAlternacija;
     private $objAlternacija1;
     private $objAlternacija2;
@@ -123,8 +127,20 @@ class FunkcijaCest
      */
     public function lookupOsebo(ApiTester $I)
     {
-        $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0006", false);
-        $I->assertNotEmpty($ent);
+        $this->lookOseba1 = $look             = $I->lookupEntity("oseba", "0006", false);
+        $I->assertNotEmpty($look);
+
+        $this->lookOseba2 = $look             = $I->lookupEntity("oseba", "0007", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookOseba3 = $look             = $I->lookupEntity("oseba", "0008", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookOseba4 = $look             = $I->lookupEntity("oseba", "0009", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookOseba5 = $look             = $I->lookupEntity("oseba", "0010", false);
+        $I->assertGuid($look['id']);
     }
 
     /**
@@ -211,7 +227,7 @@ class FunkcijaCest
             'zaposlen'     => true,
             'funkcija'     => $this->obj2['id'],
             'sodelovanje'  => NULL,
-            'oseba'        => $this->lookOseba['id'],
+            'oseba'        => $this->lookOseba1['id'],
             'koprodukcija' => NULL,
             'pogodba'      => NULL,
         ];
@@ -222,11 +238,43 @@ class FunkcijaCest
             'zaposlen'     => true,
             'funkcija'     => $this->obj2['id'],
             'sodelovanje'  => NULL,
-            'oseba'        => $this->lookOseba['id'],
+            'oseba'        => $this->lookOseba1['id'],
             'koprodukcija' => NULL,
             'pogodba'      => NULL,
         ];
         $this->objAlternacija2 = $ent                   = $I->successfullyCreate($this->alternacijaUrl, $data);
+        $I->assertGuid($ent['id']);
+
+        /*
+         * jan-avgust
+         */
+        $data = [
+            'zacetek'      => '2010-01-01T00:00:00+0100',
+            'konec'        => '2010-08-31T00:00:00+0100',
+            'zaposlen'     => true,
+            'funkcija'     => $this->obj2['id'],
+            'sodelovanje'  => NULL,
+            'oseba'        => $this->lookOseba2['id'],
+            'koprodukcija' => NULL,
+            'pogodba'      => NULL,
+        ];
+        $ent  = $I->successfullyCreate($this->alternacijaUrl, $data);
+        $I->assertGuid($ent['id']);
+
+        /*
+         * junij-december
+         */
+        $data = [
+            'zacetek'      => '2010-06-01T00:00:00+0100',
+            'konec'        => '2010-12-31T00:00:00+0100',
+            'zaposlen'     => true,
+            'funkcija'     => $this->obj2['id'],
+            'sodelovanje'  => NULL,
+            'oseba'        => $this->lookOseba3['id'],
+            'koprodukcija' => NULL,
+            'pogodba'      => NULL,
+        ];
+        $ent  = $I->successfullyCreate($this->alternacijaUrl, $data);
         $I->assertGuid($ent['id']);
     }
 
@@ -296,22 +344,62 @@ class FunkcijaCest
     }
 
     /**
-     * preberi vse zapise od uprizoritve
+     * preberi planirane funkcije brez aktivnih alternacij
      * 
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPlanirane(ApiTester $I)
+    public function getListPlanBrezAktAlt(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev1['id'], []);
-        $list = $resp['data'];
+        /**
+         * 1. datum
+         */
+        $resp       = $I->successfullyGetList($this->restUrl . "/planbrezakt?uprizoritev=" . $this->lookUprizoritev2['id']
+                . "&datum=2015-01-01", []);
+        $list       = $resp['data'];
         codecept_debug($list);
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-
         $sePlaniraA = array_unique(array_column($list, "sePlanira"));
         codecept_debug($sePlaniraA);
         $I->assertEquals(1, count($sePlaniraA), "vsi vse planira morajo biti true");
         $I->assertEquals(true, $sePlaniraA[0]);
+        
+        $nazivA = array_unique(array_column($list, "naziv"));
+        $I->assertNotContains("Avtor", $nazivA);
+        $I->assertContains("Razsvetljava", $nazivA);
+        $I->assertNotContains("Inšpicient", $nazivA);
+        $I->assertContains("Režija",  $nazivA);
+
+        /**
+         * 2. datum
+         */
+        $resp       = $I->successfullyGetList($this->restUrl . "/planbrezakt?uprizoritev=" . $this->lookUprizoritev2['id']
+                . "&datum=2016-01-01", []);
+        $list       = $resp['data'];
+        codecept_debug($list);
+        $sePlaniraA = array_unique(array_column($list, "sePlanira"));
+        codecept_debug($sePlaniraA);
+        $nazivA = array_unique(array_column($list, "naziv"));
+        $I->assertNotContains("Avtor", $nazivA);
+        $I->assertNotContains("Razsvetljava", $nazivA);
+        $I->assertNotContains("Inšpicient", $nazivA);
+        $I->assertNotContains("Režija",  $nazivA);
+
+
+        /**
+         * 3. datum
+         */
+        $resp       = $I->successfullyGetList($this->restUrl . "/planbrezakt?uprizoritev=" . $this->lookUprizoritev2['id']
+                . "&datum=2016-01-20", []);
+        $list       = $resp['data'];
+        codecept_debug($list);
+        $sePlaniraA = array_unique(array_column($list, "sePlanira"));
+        codecept_debug($sePlaniraA);
+        $nazivA = array_unique(array_column($list, "naziv"));
+        $I->assertNotContains("Avtor", $nazivA);
+        $I->assertContains("Razsvetljava", $nazivA);
+        $I->assertContains("Inšpicient", $nazivA);
+        $I->assertNotContains("Režija",  $nazivA);
     }
 
     /**
@@ -423,7 +511,7 @@ class FunkcijaCest
     public function preberiRelacijeZAlternacijami(ApiTester $I)
     {
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "alternacije", "");
-        $I->assertEquals(2, count($resp));
+        $I->assertGreaterThanOrEqual(2, count($resp));
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "alternacije", $this->objAlternacija1['id']);
         $I->assertEquals(1, count($resp));

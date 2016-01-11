@@ -393,6 +393,27 @@ class AlternacijaCest
     }
 
     /**
+     * spremenim zapis - s kratko obliko datuma (cone niso pomembne)
+     * 
+     * @depends update
+     * @param ApiTester $I
+     */
+    public function updateSKratkimDatumom(ApiTester $I)
+    {
+        $data           = $I->successfullyGet($this->restUrl, $this->obj4['id']);
+       
+        $data['zacetek'] = '2023-05-02';
+        $data['konec'  ] = '2024-05-02';
+
+        $this->obj4 = $ent       = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        codecept_debug($ent);
+        $I->assertEquals(substr($ent['zacetek'],0,10), $data['zacetek']);
+        $I->assertEquals(substr($ent['konec'],0,10), $data['konec']);
+        
+        $I->fail('$$');
+    }
+
+    /**
      * Preberem zapis in preverim vsa polja
      * 
      * @depends create
