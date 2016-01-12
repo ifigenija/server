@@ -140,7 +140,7 @@ class VajaCest
             'porocilo'    => 'dd',
             'uprizoritev' => $this->lookUprizoritev1['id'],
             'title'       => "Vaja $zacetek",
-            'status'      => '100s',
+            'status'      => '200s',
             'zacetek'     => $zacetek,
             'konec'       => '2014-05-07T14:00:00+0200',
             'prostor'     => $this->lookProstor1['id'],
@@ -241,7 +241,7 @@ class VajaCest
         $I->assertEquals($ent['porocilo'], 'yy');
         $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev1['id']);
         $I->assertEquals($ent['title'], "Vaja $zacetek");
-        $I->assertEquals($ent['status'], '100s');
+        $I->assertEquals($ent['status'], '200s');
         $I->assertEquals($ent['zacetek'], $zacetek);
         $I->assertEquals($ent['konec'], '2014-05-07T14:00:00+0200');
         $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);

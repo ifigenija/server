@@ -232,7 +232,7 @@ class PredstavaCest
             'porocilo'     => "aa",
             'uprizoritev'  => $this->lookUprizoritev1['id'],
             'title'        => "Predstava $zacetek",
-            'status'       => '300s',
+            'status'       => '400s',
             'zacetek'      => $zacetek,
             'konec'        => '2014-05-08T23:00:00+0200',
             'prostor'      => null, // če je gostovanje ne rabimo prostora

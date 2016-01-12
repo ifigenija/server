@@ -107,10 +107,11 @@ class AssertTerminStoritve
              */
             // ali vodja ekipe umetnik ali igralec ali inšpicient
             $qbUI    = clone $qb;
-            $qbUI->andWhere('f.podrocje = :igralec OR f.podrocje = :umetnik OR f.podrocje = :inspicient');
+            $qbUI->andWhere('f.podrocje = :igralec OR f.podrocje = :umetnik OR f.podrocje = :inspicient OR f.podrocje = :sepetalec');
             $qbUI->setParameter('igralec', 'igralec', "string");
             $qbUI->setParameter('umetnik', 'umetnik', "string");
             $qbUI->setParameter('inspicient', 'inspicient', "string");
+            $qbUI->setParameter('sepetalec', 'sepetalec', "string");
             $queryUI = $qbUI->getQuery();
             $cntUI   = $queryUI->getSingleScalarResult();
             if ($cntUI >= 1) {             //vodja celotne ekipe 

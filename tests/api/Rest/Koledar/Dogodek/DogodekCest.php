@@ -189,7 +189,7 @@ class DogodekCest
             'porocilo'    => 'zz',
             'uprizoritev' => $this->lookUprizoritev1['id'],
             'title'       => "Vaja $zacetek",
-            'status'      => '100s',
+            'status'      => '200s',
             'zacetek'     => $zacetek,
             'konec'       => $konec,
             'prostor'     => $this->lookProstor1['id'],
@@ -202,7 +202,7 @@ class DogodekCest
         $I->assertEquals($ent['zacetek'], $data['zacetek']);
         $I->assertEquals($ent['konec'], $data['konec']);
 
-        
+
         /**
          * preveri dogodek
          */
@@ -222,14 +222,14 @@ class DogodekCest
         /**
          * še eno vajo
          */
-        $zacetekD       = new \DateTime();
+        $zacetekD = new \DateTime();
         $zacetekD->modify('+20 day');
-        $zacetek        = $zacetekD->format('c');
+        $zacetek  = $zacetekD->format('c');
         codecept_debug($zacetek);
-        $konecD         = clone $zacetekD;
+        $konecD   = clone $zacetekD;
         $konecD->modify('+4 hours');
-        $konec          = $konecD->format('c');
-        $data           = [
+        $konec    = $konecD->format('c');
+        $data     = [
 //            'tipvaje'     => $this->lookTipVaje1['id'],
             'tipvaje'     => null,
             'zaporedna'   => 3,
@@ -243,7 +243,7 @@ class DogodekCest
             'sezona'      => $this->lookSezona1['id'],
         ];
 
-        
+
         $this->objVaja2 = $ent            = $I->successfullyCreate($this->vajaUrl, $data);
         $I->assertGuid($ent['id']);
         $this->obj2     = $dogodek        = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']['id']);
@@ -330,7 +330,7 @@ class DogodekCest
         $zacetek = '2014-05-07T10:00:00+0200';
 
         $I->assertEquals($ent['title'], "uu");
-        $I->assertEquals($ent['status'], '100s');
+        $I->assertEquals($ent['status'], '200s');
         $I->assertEquals($ent['zacetek'], $this->zacetek1);
         $I->assertEquals($ent['konec'], $this->konec1);
         $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
@@ -496,7 +496,7 @@ class DogodekCest
         /**
          * pri default listi je status po defaultu >=500s
          */
-        $statusvsi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
+        $statusvsi = "status[]=200s&status[]=400s&status[]=500s&status[]=600s&status[]=610s&status[]=710s&status[]=720s&status[]=790s&";
 
         /**
          * začetek in konec
@@ -572,7 +572,8 @@ class DogodekCest
         /**
          *  status >=500s
          */
-        $statusi = "status[]=500s&status[]=600s&status[]=700s&";
+        $statusi = "status[]=500s&status[]=600s&status[]=610s&status[]=710s&status[]=720s&status[]=790s&";
+
         $resp    = $I->successfullyGetList($this->restUrl . "?" . $statusi, []);
         $list    = $resp['data'];
         codecept_debug($list);
@@ -582,7 +583,7 @@ class DogodekCest
         /**
          * sedaj pogledamo vse v default obdobju
          */
-        $statusi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
+        $statusi = "status[]=200s&status[]=400s&status[]=500s&status[]=600s&status[]=610s&status[]=710s&status[]=720s&status[]=790s&";
         $resp    = $I->successfullyGetList($this->restUrl . "?" . $statusi, []);
         $list    = $resp['data'];
         codecept_debug($list);
@@ -593,7 +594,7 @@ class DogodekCest
          * sedaj preverimo, če z navadnim uporabnikom prestavi default na 500? 
          */
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$irena, \IfiTest\AuthPage::$irenaPass);
-        $statusi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
+        $statusi = "status[]=200s&status[]=400s&status[]=500s&status[]=600s&status[]=610s&status[]=710s&status[]=720s&status[]=790s&";
         $resp    = $I->successfullyGetList($this->restUrl . "?" . $statusi, []);
         $list    = $resp['data'];
         codecept_debug($list);
@@ -607,7 +608,7 @@ class DogodekCest
      */
     public function getListDefaultPoUprizoritvi(ApiTester $I)
     {
-        $statusvsi = "status[]=100s&status[]=200s&status[]=300s&status[]=400s&status[]=500s&status[]=600s&status[]=700s&";
+        $statusvsi = "status[]=200s&status[]=400s&status[]=500s&status[]=600s&status[]=610s&status[]=710s&status[]=720s&status[]=790s&";
 
         $resp = $I->successfullyGetList($this->restUrl . "?" . $statusvsi . "uprizoritev[]=" . $this->lookUprizoritev1['id'], []);
         $list = $resp['data'];
@@ -682,21 +683,20 @@ class DogodekCest
          */
         $data           = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         $data['razred'] = null;
-        $resp          = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        $resp           = $I->failToUpdate($this->restUrl, $data['id'], $data);
         codecept_debug($resp);
 //        $I->assertTrue((strpos($resp[0]['message'], 'required') !== false), "razred je obvezen");
         $I->assertEquals(1001704, $resp[0]['code'], "razred je obvezen");
 
-        
+
         /**
          * razred, ki ni v seznamu dovoljenih
          */
-        $data['razred'] = 'nepravilen'; 
-        $resp          = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        $data['razred'] = 'nepravilen';
+        $resp           = $I->failToUpdate($this->restUrl, $data['id'], $data);
         codecept_debug($resp);
 //        $I->assertTrue((strpos($resp[0]['message'], 'required') !== false), "razred je obvezen");
         $I->assertEquals(1001702, $resp[0]['code'], "razred je obvezen");
-
     }
 
 }

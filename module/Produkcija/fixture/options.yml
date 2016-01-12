@@ -34,6 +34,8 @@
            label: Umetnik
         inspicient:
            label: Inšpicient
+        sepetalec:
+           label: Šepetalec
 #               vrednosti naj bodo enake kot pri funkcija.podrocje :
 -
     name: tipfunkcije.podrocje
@@ -50,6 +52,8 @@
            label: Umetnik
         inspicient:
            label: Inšpicient
+        sepetalec:
+           label: Šepetalec
 -
     name: funkcija.velikost
     type: array

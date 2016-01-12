@@ -7,21 +7,25 @@
     readOnly: true
     description: 'Tabela statusa dogodkov'
     defaultValue: 
-        100s:
-            label: Dolgoročno
+#        100s:
+#            label: Dolgoročno
         200s:  
             label: Planirano
-        300s: 
-            label: Fiksiran                 
+#        300s: 
+#            label: Fiksiran                 
         400s:
-            label: Potrjen - interno
+            label: Pregledan
         500s: 
-            label: Potrjen - javno
+            label: Odobren
         600s: 
             label: Zaključen
         610s:
             label: Odpovedan
-        700s: 
+        710s: 
+            label: Obdelan od inšpicienta
+        720s: 
+            label: Obdelan od tehničnega vodje
+        790s: 
             label: Obdelan
 -
     name: dogodek.razred

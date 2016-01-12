@@ -148,7 +148,7 @@ class AvtorizacijeDogodekCest
         codecept_debug($list);
 
         // poiščemo še neodobren dogodek
-        $key        = array_search('100s', array_column($list, 'status'));
+        $key        = array_search('200s', array_column($list, 'status'));
         $I->assertTrue($key !== false, "objekt ni najden");
         $this->obj1 = $ent        = $list[$key];
         codecept_debug($ent);

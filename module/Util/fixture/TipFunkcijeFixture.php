@@ -80,6 +80,7 @@ class TipFunkcijeFixture
             ['17', 'Tehnična in druga podpora', 'Tehnična in druga podpora', 'Tehnična in druga podpora', 'tehnik', 180,],
             // specifika Ifigenije:
             ['18', 'Inšpicient', 'Inšpicienti', 'Inšpicientka', 'inspicient', 170,],
+            ['19', 'Šepetalec', 'Šepetalci', 'Šepetalka', 'sepetalec', 190,],
         ];
     }
 

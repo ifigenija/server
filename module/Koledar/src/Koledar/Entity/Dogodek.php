@@ -26,20 +26,22 @@ class Dogodek
         extends \Max\Entity\Base
 {
 
-    const PREDSTAVA     = "100s";
-    const VAJA          = "200s";
-    const GOSTOVANJE    = "300s";
-    const SPLOSNO       = "400s";
-    const ZASEDENOST    = "500s";
-    const TEHNICNI      = "600s";
-    const DOLGOROCNO    = "100s";
-    const PLANIRAN      = "200s";
-    const FIKSIRAN      = "300s";
-    const POTRJEN       = "400s";
-    const POTRJEN_JAVNO = "500s";
-    const ODPOVEDAN     = "610s";
-    const ZAKLJUCEN     = "600s";
-    const OBDELAN       = "700s";
+    const PREDSTAVA              = "100s";
+    const VAJA                   = "200s";
+    const GOSTOVANJE             = "300s";
+    const SPLOSNO                = "400s";
+    const ZASEDENOST             = "500s";
+    const TEHNICNI               = "600s";
+//    const DOLGOROCNO    = "100s";
+    const PLANIRAN               = "200s";
+//    const FIKSIRAN      = "300s";
+    const PREGLEDAN              = "400s";
+    const ODOBREN                = "500s";
+    const ODPOVEDAN              = "610s";
+    const ZAKLJUCEN              = "600s";
+    const OBDELAN_OD_INSPICIENTA = "710s";
+    const OBDELAN_OD_TEHNICNEGA  = "720s";
+    const OBDELAN                = "790s";
 
     /**
      * @ORM\Id

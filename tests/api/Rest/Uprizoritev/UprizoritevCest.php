@@ -537,7 +537,7 @@ class UprizoritevCest
             'porocilo'    => 'zz',
             'uprizoritev' => $this->obj2['id'],
             'title'       => "Vaja $zacetek",
-            'status'      => '100s',
+            'status'      => '200s',
             'zacetek'     => $zacetek,
             'konec'       => '2015-05-07T14:00:00+0200',
         ];
@@ -550,7 +550,7 @@ class UprizoritevCest
             'porocilo'    => 'zz',
             'uprizoritev' => $this->obj2['id'],
             'title'       => "Vaja $zacetek",
-            'status'      => '100s',
+            'status'      => '200s',
             'zacetek'     => $zacetek,
             'konec'       => '2015-05-07T14:00:00+0200',
         ];

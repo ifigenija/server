@@ -71,7 +71,7 @@ class ZasedenostCest
             'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
             'oseba'   => $this->lookOseba1['id'],
             'title'   => "Zasedenost $zacetek",
-            'status'  => '100s',
+            'status'  => '200s',
             'zacetek' => $zacetek,
             'konec'   => '2014-05-07T14:00:00+0200',
         ];
@@ -104,7 +104,7 @@ class ZasedenostCest
             'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
             'oseba'   => $this->lookOseba1['id'],
             'title'   => "Zasedenost $zacetek",
-            'status'  => '100s',
+            'status'  => '200s',
             'zacetek' => $zacetek,
             'konec'   => '2014-03-07T14:00:00+0200',
         ];

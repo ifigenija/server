@@ -106,12 +106,12 @@ class Dogodki
          */
         if (!$this->getAuth()->isGranted('Dogodek-readVse')) {
             if (empty($options['status'])) {
-                $options['status'] = ['500s', '600s', '700s'];       //  > 500s
+                $options['status'] = ['600s','610s','710s','720s','790s'];       //  > 500s
             }
             /**
              * pobriši statuse < 500s
              */
-            $options['status'] = array_intersect(['500s', '600s', '700s'], $options['status']);
+            $options['status'] = array_intersect(['500s', '600s','610s','710s','720s','790s'], $options['status']);
         }
 
         if (!empty($options['status'])) {
