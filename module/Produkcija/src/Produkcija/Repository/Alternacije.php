@@ -197,13 +197,8 @@ class Alternacije
             $num = $this->getServiceLocator()->get('stevilcenje.generator');
             $object->setSifra($num->generate('alternacija'));
         }
-
-
         $this->preveriZaposlitev($object);
         $this->nastaviEnPrivzeti($object->getFunkcija());
-
-        // posodobim štetje alternacij
-        $object->getFunkcija()->setAlterCount($object->getFunkcija()->getAlternacije()->count());
 
         parent::create($object, $params);
     }
@@ -217,9 +212,6 @@ class Alternacije
     {
         $object->preracunaj();
         $this->nastaviEnPrivzeti($object->getFunkcija());
-
-        // posodobim štetje alternacij
-        $object->getFunkcija()->setAlterCount($object->getFunkcija()->getAlternacije()->count());
 
         parent::update($object, $params);
     }
@@ -265,8 +257,6 @@ class Alternacije
             $object->getFunkcija()->getAlternacije()->removeElement($object);
         }
         $this->nastaviEnPrivzeti($object->getFunkcija());
-        // posodobim štetje alternacij
-        $object->getFunkcija()->setAlterCount($object->getFunkcija()->getAlternacije()->count());
 
         parent::delete($object);
     }

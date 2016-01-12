@@ -19,11 +19,6 @@ class VzporedniceService
         extends AbstractMaxService
 {
     /**
-     * ./bin/util orm:run-dql 'update Produkcija\Entity\Funkcija f set f.alterCount = (select count(x) from Produkcija\Entity\Alternacija x where x.funkcija = f.id)'
-     * ./bin/util orm:run-dql 'update Produkcija\Entity\Uprizoritev f set f.gostujoca = FALSE where f.gostujoca is null'
-     */
-
-    /**
      *
      * Vrne seznam ključev oseb, ki sodelujejo na polju uprizoritev.
      * Privzete alternacije se lahko overridajo z $alternacije

@@ -129,18 +129,6 @@ class Funkcija
     protected $alternacije;
 
     /**
-     *
-     * Število alternacij, ki jih ima funkcija. To je interno polje, ki
-     * omogoči da lahko delamo queryje, s katerimi ugotovimo pogojno prekrivanje
-     *
-     * @ORM\Column(type="integer", nullable=false, options={"default":0})
-     * @Max\I18n(label="funkcija.alterCount", description="funkcija.d.alterCount")
-     * @Max\Ui(type="integer")
-     * @var integer
-     */
-    protected $alterCount = 0;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="funkcije")
      * @ORM\JoinColumn(name="uprizoritev_id", referencedColumnName="id", nullable=false)
      * @Max\I18n(label="funkcija.uprizoritev",  description="funkcija.d.uprizoritev")
@@ -378,24 +366,6 @@ class Funkcija
     public function setTipFunkcije(\Produkcija\Entity\TipFunkcije $tipFunkcije = null)
     {
         $this->tipFunkcije = $tipFunkcije;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAlterCount()
-    {
-        return $this->alterCount;
-    }
-
-    /**
-     * @param mixed $alterCount
-     * @return Funkcija
-     */
-    public function setAlterCount($alterCount)
-    {
-        $this->alterCount = $alterCount;
         return $this;
     }
 
