@@ -38,9 +38,9 @@ class TipVajeFixture
         $o   = $rep->findOneBySifra($v[0]);
         $nov = false;
         if (!$o) {
-            $o = new \Koledar\Entity\TipVaje();
+            $o   = new \Koledar\Entity\TipVaje();
             $o->setSifra(trim($v[0]));
-            $nov=true;
+            $nov = true;
         }
         $o->setIme($v[1]);
         $o->setOpis($v[2]);
@@ -69,6 +69,9 @@ class TipVajeFixture
             ['0013', 'pevska vaja', 'pevska vaja'],
             ['0014', 'postavitev scene', 'postavitev scene (za pripravo vaje)'],
             ['0015', 'postavitev luči', 'postavitev luči (za pripravo vaje)'],
+            ['0016', 'orientacijska vaja', 'orientacijska vaja'],
+            ['0017', 'situacijska vaja', 'situacijska vaja'],
+            ['0018', 'tonska vaja', 'tonska vaja'],
         ];
     }
 
