@@ -65,10 +65,10 @@ class TerminStoritveFixture
 
         $date = empty($v[2]) ? null : date_create($v[2]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o->setPlaniranKonec($date);
-        $date = empty($v[3]) ? null : date_create($v[3]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
-        $o->setZacetek($date);
-        $date = empty($v[4]) ? null : date_create($v[4]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
-        $o->setKonec($date);
+//        $date = empty($v[3]) ? null : date_create($v[3]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
+//        $o->setZacetek($date);
+//        $date = empty($v[4]) ? null : date_create($v[4]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
+//        $o->setKonec($date);
         $o->setPlaniranoTraja($v[5]);
         $o->setDezurni($v[9]);
         $o->setGost($v[10]);

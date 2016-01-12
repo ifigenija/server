@@ -8,7 +8,6 @@ forms:
 #            - id
             - tipvaje
             - zaporedna
-            - porocilo
 #            - dogodek
             - uprizoritev
             - name: title

@@ -46,14 +46,6 @@ class Vaja
     protected $zaporedna;
 
     /**
-     *
-     * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label = "vaja.porocilo", description = "vaja.d.porocilo")
-     * @var string
-     */
-    protected $porocilo;
-
-    /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="vaja", cascade={"persist"})
      * @Max\I18n(label = "vaja.dogodek", description = "vaja.d.dogodek")
      * @Max\Ui(type="toone")
@@ -132,11 +124,6 @@ class Vaja
         return $this->zaporedna;
     }
 
-    function getPorocilo()
-    {
-        return $this->porocilo;
-    }
-
     function setId($id)
     {
         $this->id = $id;
@@ -152,12 +139,6 @@ class Vaja
     function setZaporedna($zaporedna)
     {
         $this->zaporedna = $zaporedna;
-        return $this;
-    }
-
-    function setPorocilo($porocilo)
-    {
-        $this->porocilo = $porocilo;
         return $this;
     }
 

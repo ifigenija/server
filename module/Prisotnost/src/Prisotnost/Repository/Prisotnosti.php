@@ -10,21 +10,19 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 
 /**
- * Description of Dodatki
- *
  * @author rado
  */
-class Dodatki
+class Prisotnosti
         extends \Max\Repository\AbstractMaxRepository
 {
 
     protected $sortOptions = [
         "default" => [
-            "sifra" => ["alias" => "p.id"],
+            "zacetek" => ["alias" => "p.zacetek"]
         ],
         "vse"     => [
-            "sifra" => ["alias" => "p.id"],
-        ]
+            "zacetek" => ["alias" => "p.zacetek"]
+        ],
     ];
 
     public function getPaginator(array $options, $name = "default")
@@ -44,15 +42,9 @@ class Dodatki
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
-            $naz = $e->like('p.id', ':id');
-            $qb->andWhere($e->orX($id));
-            $qb->setParameter('id', "{$options['q']}%", "string");
-        }
-        if (!empty($options['prisotnost'])) {
-            $qb->join('p.prisotnost', 'prisotnost');
-            $naz = $e->eq('prisotnost.id', ':pris');
-            $qb->andWhere($naz);
-            $qb->setParameter('pris', "{$options['prisotnost']}", "string");
+            $naz = $e->like('p.zacetek', ':zacetek');
+            $qb->andWhere($e->orX($naz));
+            $qb->setParameter('zacetek', "{$options['q']}%", "string");
         }
         return $qb;
     }

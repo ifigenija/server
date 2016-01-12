@@ -366,8 +366,6 @@ class TerminStoritveCest
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['planiranZacetek'], '2021-02-01T00:00:00+0100');
         $I->assertEquals($ent['planiranKonec'], '2022-02-01T00:00:00+0100');
-        $I->assertEquals($ent['zacetek'], '2023-02-01T00:00:00+0100');
-        $I->assertEquals($ent['konec'], '2024-02-01T00:00:00+0100');
         $I->assertEquals($ent['planiranoTraja'], 7.89);
         $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
         $I->assertEquals($ent['alternacija'], $this->objAlternacija['id']);

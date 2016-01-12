@@ -56,7 +56,7 @@ class VajaFixture
             $nov = true;
         }
 
-        $o->setPorocilo($v[2]);
+//        $o->setPorocilo($v[2]);
         if ($v[3]) {
             // še za implementirati, če bo potrebno
             $getref = $this->getReference($v[3]);

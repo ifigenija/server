@@ -40,12 +40,12 @@ class Dodatek
     protected $trajanje;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Prisotnost\Entity\TerminStoritve", inversedBy="dodatki")
-     * @Max\I18n(label="dodatek.terminStoritve",  description="dodatek.d.terminStoritve")
+     * @ORM\ManyToOne(targetEntity="Prisotnost\Entity\Prisotnost", inversedBy="dodatki")
+     * @Max\I18n(label="dodatek.prisotnost",  description="dodatek.d.prisotnost")
      * @Max\Ui(type="toone", required=true)
-     * @var \Prisotnost\Entity\TerminStoritve
+     * @var \Prisotnost\Entity\Prisotnost
      */
-    protected $terminStoritve;
+    protected $prisotnost;
 
     /**
      * @ORM\ManyToOne(targetEntity="Prisotnost\Entity\TipDodatka", inversedBy="dodatki", fetch="EAGER")
@@ -62,13 +62,13 @@ class Dodatek
         /*
          * termin storitve ima lahko največ 1 dodatek z istim tipom dodatka 
          */
-        foreach ($this->terminStoritve->getDodatki() as $dod) {
+        foreach ($this->prisotnost->getDodatki() as $dod) {
             /*
              *  samega sebe ne sme primerjati
              */
             if ($this->getId() != $dod->getId()) {
                 $this->expect($this->tipdodatka != $dod->getTipdodatka()
-                        , "Termin storitva ne sme imeti 2 dodatka z istim tipom", 1001701);
+                        , "Prisotnost ne sme imeti 2 dodatka z istim tipom", 1001701);
             }
         }
     }
@@ -81,11 +81,6 @@ class Dodatek
     function getTrajanje()
     {
         return $this->trajanje;
-    }
-
-    function getTerminStoritve()
-    {
-        return $this->terminStoritve;
     }
 
     function getTipdodatka()
@@ -105,15 +100,20 @@ class Dodatek
         return $this;
     }
 
-    function setTerminStoritve(\Prisotnost\Entity\TerminStoritve $terminStoritve)
-    {
-        $this->terminStoritve = $terminStoritve;
-        return $this;
-    }
-
     function setTipdodatka(\Prisotnost\Entity\TipDodatka $tipdodatka)
     {
         $this->tipdodatka = $tipdodatka;
+        return $this;
+    }
+
+    function getPrisotnost()
+    {
+        return $this->prisotnost;
+    }
+
+    function setPrisotnost(\Prisotnost\Entity\Prisotnost $prisotnost=null)
+    {
+        $this->prisotnost = $prisotnost;
         return $this;
     }
 

@@ -1,0 +1,17 @@
+## YAML Template.
+---
+type: rest
+entityClass: Prisotnost\Entity\Prisotnost
+forms:
+    default: 
+        elements:
+#            - id
+            - zacetek
+            - konec
+            - oseba
+            - terminStoritve
+lists:
+    default: 
+        hydrator:
+            lookups:
+                - oseba

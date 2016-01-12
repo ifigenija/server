@@ -20,6 +20,7 @@ return [
             'Rest\terminStoritve' => 'Max\Factory\RestControllerFactory',
             'Rest\dodatek'        => 'Max\Factory\RestControllerFactory',
             'Rest\tipdodatka'     => 'Max\Factory\RestControllerFactory',
+            'Rest\prisotnost'     => 'Max\Factory\RestControllerFactory',
         ]
     ],
     'entity_map'      => [

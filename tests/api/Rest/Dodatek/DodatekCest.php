@@ -30,15 +30,15 @@ use ApiTester;
 class DodatekCest
 {
 
-    private $restUrl           = '/rest/dodatek';
-    private $terminStoritveUrl = '/rest/terminstoritve';
+    private $restUrl       = '/rest/dodatek';
+    private $prisotnostUrl = '/rest/prisotnost';
     private $obj1;
     private $obj2;
     private $obj3;
     private $obj4;
-    private $objTerminStoritve1;
-    private $objTerminStoritve2;
-    private $objTerminStoritve3;
+    private $objPrisotnost1;
+    private $objPrisotnost2;
+    private $objPrisotnost3;
     private $lookTipDodatka1;
     private $lookTipDodatka2;
     private $lookTipDodatka3;
@@ -57,19 +57,45 @@ class DodatekCest
      * 
      * @param ApiTester $I
      */
-    public function lookupTerminStoritve(ApiTester $I)
+    public function lookupOsebo(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->terminStoritveUrl, []);
-        $list = $resp['data'];
-        codecept_debug($list);
-
-        $this->objTerminStoritve1 = $look                     = array_pop($list);
+        $this->lookOseba1 = $look             = $I->lookupEntity("oseba", "0008", false);
         codecept_debug($look);
         $I->assertGuid($look['id']);
 
-        $this->objTerminStoritve2 = $look                     = array_pop($list);
+        $this->lookOseba2 = $look             = $I->lookupEntity("oseba", "0009", false);
         codecept_debug($look);
         $I->assertGuid($look['id']);
+    }
+
+    /**
+     *  kreiramo zapis
+     * 
+     * @depends lookupOsebo
+     * 
+     * @param ApiTester $I
+     */
+    public function createPrisotnosti(ApiTester $I)
+    {
+        $data       = [
+            'zacetek'        => '2015-02-01T08:00:00+0100',
+            'konec'          => '2015-02-01T15:00:00+0100',
+            'oseba'          => $this->lookOseba1['id'],
+            'terminStoritve' => null,
+        ];
+        $this->objPrisotnost1 = $ent        = $I->successfullyCreate($this->prisotnostUrl, $data);
+        codecept_debug($ent);
+        $I->assertGuid($ent['id']);
+
+        $data       = [
+            'zacetek'        => '2015-02-02T08:00:00+0100',
+            'konec'          => '2015-02-02T15:00:00+0100',
+            'oseba'          => $this->lookOseba1['id'],
+            'terminStoritve' => null,
+        ];
+        $this->objPrisotnost2 = $ent        = $I->successfullyCreate($this->prisotnostUrl, $data);
+        codecept_debug($ent);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -93,14 +119,15 @@ class DodatekCest
      * 
      * če je začetek naveden, se kreira zraven tudi dogodek
      * 
+     * @depends createPrisotnosti
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
     {
         $data       = [
-            'trajanje'       => 120,
-            'terminStoritve' => $this->objTerminStoritve1['id'],
-            'tipdodatka'     => $this->lookTipDodatka1['id'],
+            'trajanje'   => 120,
+            'prisotnost' => $this->objPrisotnost1['id'],
+            'tipdodatka' => $this->lookTipDodatka1['id'],
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         codecept_debug($ent);
@@ -108,9 +135,9 @@ class DodatekCest
 
 
         $data       = [
-            'trajanje'       => 30,
-            'terminStoritve' => $this->objTerminStoritve1['id'],
-            'tipdodatka'     => $this->lookTipDodatka2['id'],
+            'trajanje'   => 30,
+            'prisotnost' => $this->objPrisotnost1['id'],
+            'tipdodatka' => $this->lookTipDodatka2['id'],
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         codecept_debug($ent);
@@ -120,9 +147,9 @@ class DodatekCest
          * še en z drugim terminom storitve
          */
         $data       = [
-            'trajanje'       => 30,
-            'terminStoritve' => $this->objTerminStoritve2['id'],
-            'tipdodatka'     => $this->lookTipDodatka3['id'],
+            'trajanje'   => 30,
+            'prisotnost' => $this->objPrisotnost2['id'],
+            'tipdodatka' => $this->lookTipDodatka3['id'],
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         codecept_debug($ent);
@@ -133,9 +160,9 @@ class DodatekCest
          * validacija le 1 z istim tipom dodatka
          */
         $data = [
-            'trajanje'       => 45,
-            'terminStoritve' => $this->objTerminStoritve2['id'],
-            'tipdodatka'     => $this->lookTipDodatka3['id'], // isti tip dodatka in termin st. kot prejšnji
+            'trajanje'   => 45,
+            'prisotnost' => $this->objPrisotnost2['id'],
+            'tipdodatka' => $this->lookTipDodatka3['id'], // isti tip dodatka in termin st. kot prejšnji
         ];
         $resp = $I->failToCreate($this->restUrl, $data);
         codecept_debug($resp);
@@ -158,9 +185,9 @@ class DodatekCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoTerminuStoritev(ApiTester $I)
+    public function getListPoPrisotnosti(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl . '?terminStoritve=' . $this->objTerminStoritve1['id'], []);
+        $resp = $I->successfullyGetList($this->restUrl . '?prisotnost=' . $this->objPrisotnost1['id'], []);
         $list = $resp['data'];
         codecept_debug($list);
         $I->assertEquals(2, $resp['state']['totalRecords']);
@@ -213,7 +240,7 @@ class DodatekCest
         codecept_debug($ent);
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['trajanje'], 240);
-        $I->assertEquals($ent['terminStoritve'], $this->objTerminStoritve1['id']);
+        $I->assertEquals($ent['prisotnost'], $this->objPrisotnost1['id']);
         $I->assertEquals($ent['tipdodatka'], $this->lookTipDodatka1['id']);
     }
 

@@ -137,7 +137,6 @@ class VajaCest
         $data       = [
             'tipvaje'     => $this->lookTipVaje1['id'],
             'zaporedna'   => 9,
-            'porocilo'    => 'dd',
             'uprizoritev' => $this->lookUprizoritev1['id'],
             'title'       => "Vaja $zacetek",
             'status'      => '200s',
@@ -179,7 +178,6 @@ class VajaCest
         $data       = [
             'tipvaje'     => NULL,
             'zaporedna'   => 2,
-            'porocilo'    => 'ee',
             'uprizoritev' => $this->lookUprizoritev1['id'],
             'title'       => "Vaja $zacetek",
             'status'      => '200s',
@@ -216,11 +214,11 @@ class VajaCest
     public function update(ApiTester $I)
     {
         $ent             = $this->obj1;
-        $ent['porocilo'] = 'yy';
+        $ent['title'] = 'yy';
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['porocilo'], $ent['porocilo']);
+        $I->assertEquals($entR['title'], $ent['title']);
     }
 
     /**
@@ -238,9 +236,8 @@ class VajaCest
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['tipvaje'], $this->lookTipVaje1['id']);
         $I->assertEquals($ent['zaporedna'], 9);
-        $I->assertEquals($ent['porocilo'], 'yy');
         $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev1['id']);
-        $I->assertEquals($ent['title'], "Vaja $zacetek");
+        $I->assertEquals($ent['title'], "yy");
         $I->assertEquals($ent['status'], '200s');
         $I->assertEquals($ent['zacetek'], $zacetek);
         $I->assertEquals($ent['konec'], '2014-05-07T14:00:00+0200');

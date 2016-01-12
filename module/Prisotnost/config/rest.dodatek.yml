@@ -7,15 +7,15 @@ forms:
         elements:
 #            - id
             - trajanje
-            - terminStoritve
+            - prisotnost
             - tipdodatka
 lists:
     default: 
         filter:
             elements:                 
-                - name: terminStoritve
+                - name: prisotnost
                   type: toone
                   options:
-                      label: Termin storitve
-                      targetEntity: Prisotnost\Entity\TerminStoritve
+                      label: Prisotnost
+                      targetEntity: Prisotnost\Entity\Prisotnost
                       required: false

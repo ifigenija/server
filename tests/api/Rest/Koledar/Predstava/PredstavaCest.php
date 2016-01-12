@@ -194,7 +194,6 @@ class PredstavaCest
         $data       = [
             'zaporedna'    => 6,
             'zaporednaSez' => 3,
-            'porocilo'     => "zz",
             'uprizoritev'  => $this->lookUprizoritev1['id'],
             'title'        => "Predstava $zacetek",
             'status'       => '200s',
@@ -229,7 +228,6 @@ class PredstavaCest
         $data       = [
             'zaporedna'    => 2,
             'zaporednaSez' => 2,
-            'porocilo'     => "aa",
             'uprizoritev'  => $this->lookUprizoritev1['id'],
             'title'        => "Predstava $zacetek",
             'status'       => '400s',
@@ -267,17 +265,17 @@ class PredstavaCest
     public function update(ApiTester $I)
     {
         $ent             = $this->obj1;
-        $ent['porocilo'] = 'uu';
+        $ent['title'] = 'uu';
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($entR['porocilo'], $ent['porocilo']);
+        $I->assertEquals($entR['title'], $ent['title']);
     }
 
     /**
      * Preberem zapis in preverim vsa polja
      * 
-     * @depends create
+     * @depends update
      * @param ApiTester $I
      */
     public function read(\ApiTester $I)
@@ -290,9 +288,8 @@ class PredstavaCest
         $I->assertEquals($ent['dogodek']['id'], $this->objDogodek['id']);
         $I->assertEquals($ent['zaporedna'], 6);
         $I->assertEquals($ent['zaporednaSez'], 3);
-        $I->assertEquals($ent['porocilo'], 'uu');
         $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev1['id']);
-        $I->assertEquals($ent['title'], "Predstava $zacetek");
+        $I->assertEquals($ent['title'], "uu");
         $I->assertEquals($ent['status'], '200s');
         $I->assertEquals($ent['zacetek'], $zacetek);
         $I->assertEquals($ent['konec'], '2014-05-07T23:00:00+0200');

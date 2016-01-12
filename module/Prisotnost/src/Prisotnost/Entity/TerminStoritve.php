@@ -41,20 +41,6 @@ class TerminStoritve
     protected $planiranKonec;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Max\I18n(label="Začetek", description="Začetek termina")
-     * @var string
-     */
-    protected $zacetek;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Max\I18n(label="Konec", description="Konec termina")
-     * @var string
-     */
-    protected $konec;
-
-    /**
      * @ORM\Column(type="decimal", nullable=true,scale=2, precision=15)
      * @Max\I18n(label="Planirano traja", description="Planirano traja")
      * @var double
@@ -112,15 +98,13 @@ class TerminStoritve
     protected $gost;
 
     /**
-     * @ORM\OneToMany(targetEntity="Prisotnost\Entity\Dodatek", mappedBy="terminStoritve", orphanRemoval=true)
-     * @var <Dodatki>
+     * @ORM\OneToOne(targetEntity="Prisotnost\Entity\Prisotnost",inversedBy="terminStoritve")
+     * @ORM\JoinColumn(name="prisotnost_id", referencedColumnName="id", unique=true)
+     * @Max\I18n(label = "terminStoritve.prisotnost", description = "terminStoritve.d.prisotnost")
+     * @Max\Ui(type="toone")
+     * @var \Prisotnost\Entity\Prisotnost
      */
-    protected $dodatki;
-
-    public function __construct()
-    {
-        $this->dodatki = new ArrayCollection();
-    }
+    protected $prisotnost;
 
     public function validate($mode = 'update')
     {
@@ -154,16 +138,6 @@ class TerminStoritve
     public function getPlaniranKonec()
     {
         return $this->planiranKonec;
-    }
-
-    public function getZacetek()
-    {
-        return $this->zacetek;
-    }
-
-    public function getKonec()
-    {
-        return $this->konec;
     }
 
     public function getPlaniranoTraja()
@@ -201,18 +175,6 @@ class TerminStoritve
     public function setPlaniranKonec($planiranKonec)
     {
         $this->planiranKonec = $planiranKonec;
-        return $this;
-    }
-
-    public function setZacetek($zacetek)
-    {
-        $this->zacetek = $zacetek;
-        return $this;
-    }
-
-    public function setKonec($konec)
-    {
-        $this->konec = $konec;
         return $this;
     }
 
@@ -262,14 +224,14 @@ class TerminStoritve
         return $this;
     }
 
-    function getDodatki()
+    function getPrisotnost()
     {
-        return $this->dodatki;
+        return $this->prisotnost;
     }
 
-    function setDodatki($dodatki)
+    function setPrisotnost(\Prisotnost\Entity\Prisotnost $prisotnost = null)
     {
-        $this->dodatki = $dodatki;
+        $this->prisotnost = $prisotnost;
         return $this;
     }
 

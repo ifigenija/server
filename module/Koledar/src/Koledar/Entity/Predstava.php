@@ -55,15 +55,6 @@ class Predstava
     protected $objavljenZacetek;
 
     /**
-     * 
-     * @ORM\Column(type="text", nullable=true)
-     * @Max\I18n(label = "predstava.porocilo", description = "predstava.d.porocilo")
-     * @Max\I18n(label="Poročilo", description="Poročilo")
-     * @var string
-     */
-    protected $porocilo;
-
-    /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="predstava", cascade={"persist"})
      * @Max\I18n(label = "predstava.dogodek", description = "predstava.d.dogodek")
      * @Max\Ui(type="toone")
@@ -164,24 +155,6 @@ class Predstava
     public function setZaporedna($zaporedna)
     {
         $this->zaporedna = $zaporedna;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPorocilo()
-    {
-        return $this->porocilo;
-    }
-
-    /**
-     * @param string $porocilo
-     * @return Predstava
-     */
-    public function setPorocilo($porocilo)
-    {
-        $this->porocilo = $porocilo;
         return $this;
     }
 
