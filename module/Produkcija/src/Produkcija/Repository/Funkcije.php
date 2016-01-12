@@ -142,13 +142,6 @@ class Funkcije
         }
         $qb->andWhere($e->in('p.sePlanira', [TRUE]));
         $qb->andWhere("(" . $stAktivnihAlt->getDQL() . ")=0");  // le funkcije brez aktivnih alternacij
-
-
-        /**
-         * $$ začasno
-         */
-        $tmp = $qb->getDQL();
-
         return $qb;
     }
 

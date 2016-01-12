@@ -43,7 +43,7 @@ class PodatkiUprizoritveCest
         // uprizoritev s praznimi datumi:
         $this->lookUprizoritev2 = $look                   = $I->lookupEntity("uprizoritev", "0006", false);
         $I->assertNotEmpty($look);
-        
+
         // uprizoritev za analizo #1100 - število igralcev
         $this->lookUprizoritev3 = $look                   = $I->lookupEntity("uprizoritev", "0001", false);
         $I->assertNotEmpty($look);
@@ -89,11 +89,12 @@ class PodatkiUprizoritveCest
     public function podatkiUprizoritve(ApiTester $I)
     {
 //
-        $resp = $I->successfullyCallRpc($this->rpcUrl, 'podatkiUprizoritve', ["uprizoritevId" => $this->lookUprizoritev1['id']
+        $resp        = $I->successfullyCallRpc($this->rpcUrl, 'podatkiUprizoritve', ["uprizoritevId" => $this->lookUprizoritev1['id']
             , "zacetek"       => "1970-01-01T01:00:00+0100", "konec"         => "2999-01-01T01:00:00+0100"
         ]);
         codecept_debug($resp);
-        $I->assertNotEmpty($resp);
+        $stZaposUmet = $resp['stZaposUmet'];
+
         $I->seeResponseIsJson();
         $I->assertGreaterThanOrEqual(132, $resp['Do']['avtorskiHonorarji'], "avtorski do");
         $I->assertGreaterThanOrEqual(1058.2, $resp['Do']['nasDelez'], "naš delež do");
@@ -110,23 +111,20 @@ class PodatkiUprizoritveCest
         $I->assertGreaterThanOrEqual(1, $resp['Na']['stHonorarnihZunSamoz']);
         $I->assertEquals("2016-01-01T00:00:00+0100", $resp['datumZacStudija']);
         $I->assertEquals("2016-04-20T00:00:00+0200", $resp['datumPremiere']);
-    }
 
-    /**
-     * moral bi sešteti le tiste alternacije, ki se vsaj deloma prekrivajo z datumom in začetkom programa dela
-     * 
-     * @param ApiTester $I 
-     */
-    public function podatkiUprizoritveZOzjimIntervalom(ApiTester $I)
-    {
-//
+
+        /**
+         * podatkiUprizoritveZOzjimIntervalom
+         * moral bi sešteti le tiste alternacije, ki se vsaj deloma prekrivajo z datumom in začetkom programa dela
+         */
         $resp = $I->successfullyCallRpc($this->rpcUrl, 'podatkiUprizoritve', ["uprizoritevId" => $this->lookUprizoritev1['id']
             , "zacetek"       => "2016-01-01T00:00:00+0100", "konec"         => "2016-04-20T00:00:00+0200"
         ]);
         codecept_debug($resp);
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
-        $I->assertEquals(3, $resp['stZaposUmet'], "št. zaposlenih umetnikov -ali sedaj manjše?");
+        $I->assertGreaterThanOrEqual(3, $resp['stZaposUmet']);
+        $I->assertLessThan($stZaposUmet, $resp['stZaposUmet'], "št. zaposlenih umetnikov -ali sedaj manjše?");
         $I->assertEquals("2016-01-01T00:00:00+0100", $resp['datumZacStudija']);
         $I->assertEquals("2016-04-20T00:00:00+0200", $resp['datumPremiere']);
     }
@@ -213,5 +211,5 @@ class PodatkiUprizoritveCest
         $I->seeResponseIsJson();
 //        $I->assertEquals(1000972, $resp['code']);
     }
-    
+
 }

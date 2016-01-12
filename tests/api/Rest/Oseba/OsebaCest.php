@@ -1365,7 +1365,7 @@ class OsebaCest
         $I->assertNotEmpty($ent['id']);
 
         $data                 = [
-            'status'              => 'A',
+            'status'              => 'N',
             'zacetek'             => '2012-02-01T00:00:00+0100',
             'konec'               => '2012-02-01T00:00:00+0100',
             'tip'                 => 3,

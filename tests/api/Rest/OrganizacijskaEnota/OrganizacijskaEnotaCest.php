@@ -88,6 +88,7 @@ class OrganizacijskaEnotaCest
         $this->objZaposlitev1 = $ent                  = $I->successfullyCreate($this->restZaposlitev, $data);
         $I->assertNotEmpty($ent['id']);
 
+        
         $data                 = [
             'sifra'               => '22',
             'status'              => 'N',
@@ -113,8 +114,8 @@ class OrganizacijskaEnotaCest
          */
         $data                 = [
             'status'              => 'N',
-            'zacetek'             => '2016-02-01T00:00:00+0100',
-            'konec'               => '2017-02-01T00:00:00+0100',
+            'zacetek'             => '2006-02-01T00:00:00+0100',
+            'konec'               => '2007-02-01T00:00:00+0100',
             'tip'                 => 4,
             'delovnaObveza'       => 5,
             'delovnoMesto'        => 'XXX',
@@ -217,9 +218,9 @@ class OrganizacijskaEnotaCest
     {
         $data                 = [
             'sifra'               => '99',
-            'status'              => 'A',
-            'zacetek'             => '2010-02-01T00:00:00+0100',
-            'konec'               => '2010-02-01T00:00:00+0100',
+            'status'              => 'N',
+            'zacetek'             => '2008-02-01T00:00:00+0100',
+            'konec'               => '2008-02-01T00:00:00+0100',
             'tip'                 => 1,
             'delovnaObveza'       => 2,
             'malica'              => 'zz',
@@ -237,8 +238,8 @@ class OrganizacijskaEnotaCest
         $data                 = [
             'sifra'               => '00',
             'status'              => 'N',
-            'zacetek'             => '2015-02-01T00:00:00+0100',
-            'konec'               => '2016-02-01T00:00:00+0100',
+            'zacetek'             => '2004-02-01T00:00:00+0100',
+            'konec'               => '2005-02-01T00:00:00+0100',
             'tip'                 => 4,
             'delovnaObveza'       => 5,
             'delovnoMesto'        => 'XXX',
@@ -259,8 +260,8 @@ class OrganizacijskaEnotaCest
          */
         $data                 = [
             'status'              => 'N',
-            'zacetek'             => '2016-02-01T00:00:00+0100',
-            'konec'               => '2017-02-01T00:00:00+0100',
+            'zacetek'             => '2002-02-01T00:00:00+0100',
+            'konec'               => '2003-02-01T00:00:00+0100',
             'tip'                 => 4,
             'delovnaObveza'       => 5,
             'delovnoMesto'        => 'XXX',
@@ -351,23 +352,6 @@ class OrganizacijskaEnotaCest
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "children", $this->objChildren1['id']);
         $I->assertEquals(1, count($resp));
     }
-
-    /**
-     * preberemo relacije
-     * 
-     * @depends createVecZaposlitev
-     * @depends create
-     * 
-     * @param ApiTester $I
-     */
-//    public function preberiRelacijeZZaposlitvami(ApiTester $I)
-//    {
-//        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "zaposlitve", "");
-//        $I->assertEquals(3, count($resp));
-//
-//        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "zaposlitve", $this->objZaposlitev5['id']);
-//        $I->assertEquals(1, count($resp));
-//    }
 
     /**
      * brisanje zapisa

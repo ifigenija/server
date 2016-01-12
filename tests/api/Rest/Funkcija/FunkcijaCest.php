@@ -535,7 +535,7 @@ class FunkcijaCest
             'sePlanira'         => true,
             'dovoliPrekrivanje' => false,
             'uprizoritev'       => $this->lookUprizoritev1['id'],
-            'privzeti'          => $this->objAlternacija['id'], //$$ to ne deluje izgleda - jemlje kot null?
+            'privzeti'          => $this->objAlternacija['id'],
             'maxPrekrivanj'     => 34,
         ];
         $resp = $I->failToCreate($this->restUrl, $data);

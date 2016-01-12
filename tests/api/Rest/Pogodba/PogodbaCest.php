@@ -203,9 +203,9 @@ class PogodbaCest
     public function createZaposlitev(ApiTester $I)
     {
         $data                = [
-            'status'              => 'A',
-            'zacetek'             => '2010-02-01T00:00:00+0100',
-            'konec'               => '2010-02-01T00:00:00+0100',
+            'status'              => 'N',
+            'zacetek'             => '2000-02-01T00:00:00+0100',
+            'konec'               => '2000-02-01T00:00:00+0100',
             'tip'                 => 1,
             'delovnaObveza'       => 2,
             'malica'              => 'zz',
@@ -219,7 +219,7 @@ class PogodbaCest
         $this->objZaposlitev = $ent                 = $I->successfullyCreate($this->zaposlitevUrl, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['status'], 'A');
+        $I->assertEquals($ent['status'], 'N');
     }
 
     /**

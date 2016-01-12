@@ -123,7 +123,7 @@ class VzporedniceCest
         $subset = array_values(array_intersect($this->uprizoritveVseNegostPlanIds, $uprIzhodneIds));
         sort($subset);
         sort($uprIzhodneIds);
-        $I->assertTrue($uprIzhodneIds == $subset);
+        $I->assertTrue($uprIzhodneIds == $subset, 'subset');
     }
 
     /**
@@ -241,7 +241,8 @@ class VzporedniceCest
     public function lookupAlternacijFoo(ApiTester $I)
     {
         $resp = $I->successfullyGetList($this->alternacijaUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev1['id']
-                . "&datum=2015-01-01", []);
+                . "&datum=2016-01-01"   // datum izbran tako, da so aktivne alternacije vseh oseb (A,B, ...N3)
+                , []);
         $list = $resp['data'];
         codecept_debug($list);
         $foos = [];
@@ -266,7 +267,8 @@ class VzporedniceCest
          * še vse aktivne alternacije od druge uprizoritve
          */
         $resp = $I->successfullyGetList($this->alternacijaUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev4['id']
-                . "&datum=2015-01-01", []);
+                . "&datum=2016-01-01"   // datum izbran tako, da so aktivne alternacije vseh oseb (A,B, ...N3)
+                , []);
         $list = $resp['data'];
         codecept_debug($list);
         $foos = [];
@@ -290,7 +292,8 @@ class VzporedniceCest
          * še vse alternacije od tretje uprizoritve
          */
         $resp = $I->successfullyGetList($this->alternacijaUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev3['id']
-                . "&datum=2015-01-01", []);
+                . "&datum=2016-01-01"   // datum izbran tako, da so aktivne alternacije vseh oseb (A,B, ...N3)
+                , []);
         $list = $resp['data'];
         codecept_debug($list);
         $foos = [];
@@ -474,7 +477,7 @@ class VzporedniceCest
         /**
          * daj vzporednice
          */
-        $respV = $I->successfullyCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        $respV      = $I->successfullyCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
 //        codecept_debug($respV);
         $this->kontroleRezultatov($I, $uprIdsVho, $alts, $respV);
         /*
@@ -482,6 +485,8 @@ class VzporedniceCest
          */
         $I->assertNotEmpty($respV['error'], 'error');
         codecept_debug($respV['error']);
+        $tmpErrKeys = $this->subarraysKeys($respV['error']);
+        codecept_debug($tmpErrKeys);
         $I->assertContains($this->lookOsebaB['label'], $this->subarraysKeys($respV['error']));
 
         /**
@@ -496,10 +501,8 @@ class VzporedniceCest
         $I->assertNotEmpty($respP['error'], 'error');
         codecept_debug($respP['error']);
 
-        $tmp = $this->subarraysKeys($respV['error']);
-        codecept_debug($tmp);
-
         $I->assertContains($this->lookOsebaB['label'], $this->subarraysKeys($respV['error']));
+
         $I->assertContains($this->lookOsebaD['label'], $this->subarraysKeys($respV['error']));
 
         /**

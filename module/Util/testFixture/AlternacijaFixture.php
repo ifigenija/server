@@ -88,11 +88,6 @@ class AlternacijaFixture
 
         $o->setPrivzeti($v[13]);
 
-        /*
-         * $$ začasno
-         */
-        echo "  " . $v[0] . " " . $v[2] . PHP_EOL;
-
         if ($nov) {
             $rep->create($o);
         } else {
@@ -116,7 +111,7 @@ class AlternacijaFixture
             ['0006', false, 'Funkcija-Helena', null, 'Oseba-0006', null, 1, true, true, 'Pogodba-0002', null, '2016-01-01', '2016-04-20', true],
             ['0007', true, 'Funkcija-Hipolita', null, 'Oseba-0008', null, 14, false, true, null, "Zaposlitev-0008", '2016-01-01', '2016-04-20', true],
             ['0008', false, 'Funkcija-Lektoriranje', null, 'Oseba-0013', null, 12, true, true, 'Pogodba-0003', null, '2016-01-01', '2016-04-20', true],
-            ['0009', true, 'Funkcija-Hipolita', null, 'Oseba-0004', null, 15, false, true, null, "Zaposlitev-0004", '2017-01-01', '2017-04-20', true],
+            ['0009', true, 'Funkcija-Hipolita', null, 'Oseba-0004', null, 15, false, true, null, "Zaposlitev-0004", '2016-01-01', null, true],
             ['0010', true, 'Funkcija-Hipolita', null, 'Oseba-0009', null, 16, false, true, null, "Zaposlitev-0009", null, '2017-04-20', false],
             ['0011', true, 'Funkcija-Hipolita', null, 'Oseba-0007', null, 17, false, true, null, "Zaposlitev-0007", '2017-01-01', null, false],
             ['0012', false, 'Funkcija-Avtor', null, 'Oseba-0010', null, 2, true, true, 'Pogodba-0004', null, null, null, true,],
