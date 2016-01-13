@@ -27,6 +27,13 @@ class TerminStoritve
     protected $id;
 
     /**
+     * @ORM\Column(type="dateinterval", nullable=true)
+     * @Max\I18n(label="Planiran začetek", description="Planiran začetek termina")
+     * @var \DateInterval
+     */
+//    protected $deltaPlaniranZacetek;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Planiran začetek", description="Planiran začetek termina")
      * @var string

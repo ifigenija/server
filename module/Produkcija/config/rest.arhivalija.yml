@@ -16,7 +16,7 @@ forms:
             - objavljeno
             - naslov
             - avtorstvo
-            - dogodek
+#            - dogodek
             - uprizoritev
 lists:
     default: 

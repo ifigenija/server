@@ -30,7 +30,7 @@ class Zasedenost
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="zasedenost")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="zasedenosti")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id")
      * @Max\I18n(label="zasedenost.oseba",  description="zasedenost.d.oseba")
      * @Max\Ui(type="toone", required=true)

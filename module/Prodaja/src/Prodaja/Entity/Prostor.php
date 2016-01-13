@@ -93,7 +93,7 @@ class Prostor
     /**
      * naslov je lahko le eden od naslovov poslovnega partnerja
      * 
-     * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov", inversedBy="prostori")
      * @Max\I18n(label="prostor.naslov", description="prostor.d.naslov")
      * @Max\Ui(type="toone", empty="Izberi naslov", filters={"popa" : {"element":"popa"}})
      * @var PostniNaslov

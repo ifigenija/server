@@ -104,7 +104,7 @@ class Arhivalija
      * @Max\Ui(type="toone")
      * @var Dogodek
      */
-    protected $dogodek;
+//    protected $dogodek;
 
     /**
      * @ORM\ManyToOne(targetEntity="Produkcija\Entity\Uprizoritev", inversedBy="arhivi")
@@ -117,8 +117,8 @@ class Arhivalija
 
     public function validate($mode = 'update')
     {
-        $this->expect($this->uprizoritev || $this->dogodek, "Uprizoritev ali dogodek pri arhivaliji sta obvezna", 1000350);
-        $this->expect(!($this->uprizoritev && $this->dogodek), "Arhivalija ima  lahko samo ali uprizoritev ali dogodek - ne oba hkrati", 1000351);
+//        $this->expect($this->uprizoritev || $this->dogodek, "Uprizoritev ali dogodek pri arhivaliji sta obvezna", 1000350);
+//        $this->expect(!($this->uprizoritev && $this->dogodek), "Arhivalija ima  lahko samo ali uprizoritev ali dogodek - ne oba hkrati", 1000351);
     }
 
     public function getId()
