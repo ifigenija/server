@@ -29,9 +29,9 @@ class TerminStoritve
     /**
      * @ORM\Column(type="dateinterval", nullable=true)
      * @Max\I18n(label="Planiran začetek", description="Planiran začetek termina")
-     * @var \DateInterval
+     * @var string
      */
-//    protected $deltaPlaniranZacetek;
+    protected $deltaPlaniranZacetek;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -239,6 +239,17 @@ class TerminStoritve
     function setPrisotnost(\Prisotnost\Entity\Prisotnost $prisotnost = null)
     {
         $this->prisotnost = $prisotnost;
+        return $this;
+    }
+
+    function getDeltaPlaniranZacetek()
+    {
+        return $this->deltaPlaniranZacetek;
+    }
+
+    function setDeltaPlaniranZacetek($deltaPlaniranZacetek)
+    {
+        $this->deltaPlaniranZacetek = $deltaPlaniranZacetek;
         return $this;
     }
 
