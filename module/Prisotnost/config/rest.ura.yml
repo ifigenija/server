@@ -1,7 +1,7 @@
 ## YAML Template.
 ---
 type: rest
-entityClass: Prisotnost\Entity\Prisotnost
+entityClass: Prisotnost\Entity\Ura
 forms:
     default: 
         elements:

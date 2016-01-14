@@ -9,7 +9,7 @@ namespace Rest\Prisotnost;
 use ApiTester;
 
 /**
- * Description of PrisotnostCest
+ * Description of UraCest
  *
  * metode, ki jo podpira API
  * - create
@@ -23,10 +23,10 @@ use ApiTester;
  * 
  * @author rado
  */
-class PrisotnostCest
+class UraCest
 {
 
-    private $restUrl           = '/rest/prisotnost';
+    private $restUrl           = '/rest/ura';
     private $terminStoritveUrl = '/rest/terminstoritve';
     private $osebaUrl          = '/rest/oseba';
     private $obj1;

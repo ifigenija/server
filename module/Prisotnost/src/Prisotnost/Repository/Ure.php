@@ -12,7 +12,7 @@ use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 /**
  * @author rado
  */
-class Prisotnosti
+class Ure
         extends \Max\Repository\AbstractMaxRepository
 {
 

@@ -290,11 +290,11 @@
     description: Predstava - spreminjanje
 
 -
-    name: Prisotnost-read
-    description: Prisotnost - branje
+    name: Ura-read
+    description: Ura - branje
 -
-    name: Prisotnost-write
-    description: Prisotnost - spreminjanje
+    name: Ura-write
+    description: Ura - spreminjanje
 
 -
     name: ProdajaPredstave-read

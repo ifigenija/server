@@ -40,12 +40,12 @@ class Dodatek
     protected $trajanje;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Prisotnost\Entity\Prisotnost", inversedBy="dodatki")
-     * @Max\I18n(label="dodatek.prisotnost",  description="dodatek.d.prisotnost")
+     * @ORM\ManyToOne(targetEntity="Prisotnost\Entity\Ura", inversedBy="dodatki")
+     * @Max\I18n(label="dodatek.ura",  description="dodatek.d.ura")
      * @Max\Ui(type="toone", required=true)
-     * @var \Prisotnost\Entity\Prisotnost
+     * @var \Prisotnost\Entity\Ura
      */
-    protected $prisotnost;
+    protected $ura;
 
     /**
      * @ORM\ManyToOne(targetEntity="Prisotnost\Entity\TipDodatka", inversedBy="dodatki", fetch="EAGER")
@@ -62,7 +62,7 @@ class Dodatek
         /*
          * termin storitve ima lahko največ 1 dodatek z istim tipom dodatka 
          */
-        foreach ($this->prisotnost->getDodatki() as $dod) {
+        foreach ($this->ura->getDodatki() as $dod) {
             /*
              *  samega sebe ne sme primerjati
              */
@@ -106,16 +106,15 @@ class Dodatek
         return $this;
     }
 
-    function getPrisotnost()
+    function getUra()
     {
-        return $this->prisotnost;
+        return $this->ura;
     }
 
-    function setPrisotnost(\Prisotnost\Entity\Prisotnost $prisotnost=null)
+    function setUra(\Prisotnost\Entity\Ura $ura)
     {
-        $this->prisotnost = $prisotnost;
+        $this->ura = $ura;
         return $this;
     }
-
 
 }

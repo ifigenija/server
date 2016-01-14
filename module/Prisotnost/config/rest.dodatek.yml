@@ -7,15 +7,15 @@ forms:
         elements:
 #            - id
             - trajanje
-            - prisotnost
+            - ura
             - tipdodatka
 lists:
     default: 
         filter:
             elements:                 
-                - name: prisotnost
+                - name: ura
                   type: toone
                   options:
-                      label: Prisotnost
-                      targetEntity: Prisotnost\Entity\Prisotnost
+                      label: Ura
+                      targetEntity: Prisotnost\Entity\Ura
                       required: false

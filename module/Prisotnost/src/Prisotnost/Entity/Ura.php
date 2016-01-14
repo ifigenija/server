@@ -10,11 +10,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Ure prisotnosti zaposlenih
  * 
- * @ORM\Entity(repositoryClass="Prisotnost\Repository\Prisotnosti")
- * @Max\I18n(label="Prisotnost",plural="Prisotnosti")
+ * @ORM\Entity(repositoryClass="Prisotnost\Repository\Ure")
+ * @Max\I18n(label="Ura",plural="Ure")
  * @Max\Id(prefix="0071")
  */
-class Prisotnost
+class Ura
         extends Base
 {
 
@@ -30,36 +30,36 @@ class Prisotnost
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Max\I18n(label="prisotnost.zacetek", description="prisotnost.d.zacetek")
+     * @Max\I18n(label="ura.zacetek", description="ura.d.zacetek")
      * @var string
      */
     protected $zacetek;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Max\I18n(label="prisotnost.konec", description="prisotnost.d.konec")
+     * @Max\I18n(label="ura.konec", description="ura.d.konec")
      * @var string
      */
     protected $konec;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Oseba")
-     * @Max\I18n(label="prisotnost.oseba",  description="prisotnost.d.oseba")
+     * @Max\I18n(label="ura.oseba",  description="ura.d.oseba")
      * @Max\Ui(type="toone")
      * @var \App\Entity\Oseba
      */
     protected $oseba;
     
     /**
-     * @ORM\OneToOne(targetEntity="Prisotnost\Entity\TerminStoritve", inversedBy="prisotnost")
-     * @Max\I18n(label = "prisotnost.terminStoritve", description = "prisotnost.d.terminStoritve")
+     * @ORM\OneToOne(targetEntity="Prisotnost\Entity\TerminStoritve", inversedBy="ura")
+     * @Max\I18n(label = "ura.terminStoritve", description = "ura.d.terminStoritve")
      * @Max\Ui(type="hiddenid")
      * @var \Prisotnost\Entity\TerminStoritve
      */
     protected $terminStoritve;
 
     /**
-     * @ORM\OneToMany(targetEntity="Prisotnost\Entity\Dodatek", mappedBy="prisotnost", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Prisotnost\Entity\Dodatek", mappedBy="ura", orphanRemoval=true)
      * @var <Dodatki>
      */
     protected $dodatki;

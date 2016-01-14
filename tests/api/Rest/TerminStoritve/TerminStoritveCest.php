@@ -33,7 +33,7 @@ class TerminStoritveCest
 
     private $restUrl              = '/rest/terminstoritve';
     private $osebaUrl             = '/rest/oseba';
-    private $prisotnostUrl        = '/rest/prisotnost';
+    private $uraUrl               = '/rest/ura';
     private $alternacijaUrl       = '/rest/alternacija';
     private $dogodekUrl           = '/rest/dogodek';
     private $vajaUrl              = '/rest/vaja';
@@ -296,12 +296,12 @@ class TerminStoritveCest
     }
 
     /**
-     *  kreiramo zapis prisotnosti Termina storitve
+     *  kreiramo zapis ure prisotnosti Termina storitve
      * 
      * @depends create
      * @param ApiTester $I
      */
-    public function createPrisotnostTS(ApiTester $I)
+    public function createUraTS(ApiTester $I)
     {
         $ts = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         codecept_debug($ts);
@@ -312,7 +312,7 @@ class TerminStoritveCest
             'oseba'          => $ts['oseba'],
             'terminStoritve' => $ts['id'],
         ];
-        $ent  = $I->successfullyCreate($this->prisotnostUrl, $data);
+        $ent  = $I->successfullyCreate($this->uraUrl, $data);
         codecept_debug($ent);
         $I->assertGuid($ent['id']);
     }
@@ -320,7 +320,7 @@ class TerminStoritveCest
     /**
      * spremenim zapis za kontrolo validacije
      * 
-     * @depends createPrisotnostTS
+     * @depends createUraTS
      * @param ApiTester $I
      */
     public function updateZaValidacijo(ApiTester $I)

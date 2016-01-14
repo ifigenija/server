@@ -48,11 +48,11 @@ class Dodatki
             $qb->andWhere($e->orX($id));
             $qb->setParameter('id', "{$options['q']}%", "string");
         }
-        if (!empty($options['prisotnost'])) {
-            $qb->join('p.prisotnost', 'prisotnost');
-            $naz = $e->eq('prisotnost.id', ':pris');
+        if (!empty($options['ura'])) {
+            $qb->join('p.ura', 'ura');
+            $naz = $e->eq('ura.id', ':ur');
             $qb->andWhere($naz);
-            $qb->setParameter('pris', "{$options['prisotnost']}", "string");
+            $qb->setParameter('ur', "{$options['ura']}", "string");
         }
         return $qb;
     }

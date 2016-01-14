@@ -31,14 +31,14 @@ class DodatekCest
 {
 
     private $restUrl       = '/rest/dodatek';
-    private $prisotnostUrl = '/rest/prisotnost';
+    private $uraUrl = '/rest/ura';
     private $obj1;
     private $obj2;
     private $obj3;
     private $obj4;
-    private $objPrisotnost1;
-    private $objPrisotnost2;
-    private $objPrisotnost3;
+    private $objUra1;
+    private $objUra2;
+    private $objUra3;
     private $lookTipDodatka1;
     private $lookTipDodatka2;
     private $lookTipDodatka3;
@@ -75,7 +75,7 @@ class DodatekCest
      * 
      * @param ApiTester $I
      */
-    public function createPrisotnosti(ApiTester $I)
+    public function createUre(ApiTester $I)
     {
         $data       = [
             'zacetek'        => '2015-02-01T08:00:00+0100',
@@ -83,7 +83,7 @@ class DodatekCest
             'oseba'          => $this->lookOseba1['id'],
             'terminStoritve' => null,
         ];
-        $this->objPrisotnost1 = $ent        = $I->successfullyCreate($this->prisotnostUrl, $data);
+        $this->objUra1 = $ent        = $I->successfullyCreate($this->uraUrl, $data);
         codecept_debug($ent);
         $I->assertGuid($ent['id']);
 
@@ -93,7 +93,7 @@ class DodatekCest
             'oseba'          => $this->lookOseba1['id'],
             'terminStoritve' => null,
         ];
-        $this->objPrisotnost2 = $ent        = $I->successfullyCreate($this->prisotnostUrl, $data);
+        $this->objUra2 = $ent        = $I->successfullyCreate($this->uraUrl, $data);
         codecept_debug($ent);
         $I->assertGuid($ent['id']);
     }
@@ -119,14 +119,14 @@ class DodatekCest
      * 
      * če je začetek naveden, se kreira zraven tudi dogodek
      * 
-     * @depends createPrisotnosti
+     * @depends createUre
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
     {
         $data       = [
             'trajanje'   => 120,
-            'prisotnost' => $this->objPrisotnost1['id'],
+            'ura' => $this->objUra1['id'],
             'tipdodatka' => $this->lookTipDodatka1['id'],
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -136,7 +136,7 @@ class DodatekCest
 
         $data       = [
             'trajanje'   => 30,
-            'prisotnost' => $this->objPrisotnost1['id'],
+            'ura' => $this->objUra1['id'],
             'tipdodatka' => $this->lookTipDodatka2['id'],
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -148,7 +148,7 @@ class DodatekCest
          */
         $data       = [
             'trajanje'   => 30,
-            'prisotnost' => $this->objPrisotnost2['id'],
+            'ura' => $this->objUra2['id'],
             'tipdodatka' => $this->lookTipDodatka3['id'],
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -161,7 +161,7 @@ class DodatekCest
          */
         $data = [
             'trajanje'   => 45,
-            'prisotnost' => $this->objPrisotnost2['id'],
+            'ura' => $this->objUra2['id'],
             'tipdodatka' => $this->lookTipDodatka3['id'], // isti tip dodatka in termin st. kot prejšnji
         ];
         $resp = $I->failToCreate($this->restUrl, $data);
@@ -185,9 +185,9 @@ class DodatekCest
      * @depends create
      * @param ApiTester $I
      */
-    public function getListPoPrisotnosti(ApiTester $I)
+    public function getListPoUre(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl . '?prisotnost=' . $this->objPrisotnost1['id'], []);
+        $resp = $I->successfullyGetList($this->restUrl . '?ura=' . $this->objUra1['id'], []);
         $list = $resp['data'];
         codecept_debug($list);
         $I->assertEquals(2, $resp['state']['totalRecords']);
@@ -240,7 +240,7 @@ class DodatekCest
         codecept_debug($ent);
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['trajanje'], 240);
-        $I->assertEquals($ent['prisotnost'], $this->objPrisotnost1['id']);
+        $I->assertEquals($ent['ura'], $this->objUra1['id']);
         $I->assertEquals($ent['tipdodatka'], $this->lookTipDodatka1['id']);
     }
 

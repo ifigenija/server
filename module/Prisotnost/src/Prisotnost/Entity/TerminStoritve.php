@@ -133,16 +133,16 @@ class TerminStoritve
     protected $virtZasedenost;
 
     /**
-     * @ORM\OneToOne(targetEntity="Prisotnost\Entity\Prisotnost",mappedBy="terminStoritve")
-     * @Max\I18n(label = "terminStoritve.prisotnost", description = "terminStoritve.d.prisotnost")
+     * @ORM\OneToOne(targetEntity="Prisotnost\Entity\Ura",mappedBy="terminStoritve")
+     * @Max\I18n(label = "terminStoritve.ura", description = "terminStoritve.d.ura")
      * @Max\Ui(type="toone")
-     * @var \Prisotnost\Entity\Prisotnost
+     * @var \Prisotnost\Entity\Ura
      */
-    protected $prisotnost;
+    protected $ura;
 
     public function validate($mode = 'update')
     {
-        $this->expect(!$this->prisotnost, "Ure so že vnešene, spreminjanje terminov storitev ni mogoče", 1001088);
+        $this->expect(!$this->ura, "Ure so že vnešene, spreminjanje terminov storitev ni mogoče", 1001088);
         $i = 0;
         if ($this->alternacija) {
             $i++;
@@ -274,17 +274,6 @@ class TerminStoritve
         return $this;
     }
 
-    function getPrisotnost()
-    {
-        return $this->prisotnost;
-    }
-
-    function setPrisotnost(\Prisotnost\Entity\Prisotnost $prisotnost = null)
-    {
-        $this->prisotnost = $prisotnost;
-        return $this;
-    }
-
     function getZasedenost()
     {
         return $this->zasedenost;
@@ -326,6 +315,17 @@ class TerminStoritve
     function setDeltaPlaniranKonec($deltaPlaniranKonec)
     {
         $this->deltaPlaniranKonec = $deltaPlaniranKonec;
+        return $this;
+    }
+
+    function getUra()
+    {
+        return $this->ura;
+    }
+
+    function setUra(\Prisotnost\Entity\Ura $ura = null)
+    {
+        $this->ura = $ura;
         return $this;
     }
 
