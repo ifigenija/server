@@ -57,7 +57,7 @@ class Dodatek
 
     public function validate($mode = 'update')
     {
-        $this->validateIntGE0($this->trajanje, 'trajanje ne sme biti negativno', 1001700);
+        $this->validateIntGE0($this->trajanje, 'trajanje ne sme biti negativno', 1001730);
 
         /*
          * termin storitve ima lahko največ 1 dodatek z istim tipom dodatka 
@@ -68,7 +68,7 @@ class Dodatek
              */
             if ($this->getId() != $dod->getId()) {
                 $this->expect($this->tipdodatka != $dod->getTipdodatka()
-                        , "Prisotnost ne sme imeti 2 dodatka z istim tipom", 1001701);
+                        , "Prisotnost ne sme imeti 2 dodatka z istim tipom", 1001731);
             }
         }
     }

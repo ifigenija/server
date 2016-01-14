@@ -40,7 +40,7 @@ class TerminStoritveCest
     private $obj1;
     private $obj2;
     private $objOseba;
-    private $lookOseba;
+    private $lookOseba1;
     private $objVaja;
     private $objDogodek;
     private $objAlternacija;
@@ -121,7 +121,7 @@ class TerminStoritveCest
      */
     public function lookupOsebo(ApiTester $I)
     {
-        $this->lookOseba = $ent             = $I->lookupEntity("oseba", "0006", false);
+        $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0006", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -201,7 +201,7 @@ class TerminStoritveCest
             'konec'           => '2008-02-11T00:00:00+0100',
             'dogodek'         => $this->objDogodek['id'],
             'alternacija'     => null,
-            'oseba'           => $this->lookOseba['id'],
+            'oseba'           => $this->lookOseba1['id'],
             'dezurni'         => true,
             'gost'            => false,
         ];
@@ -218,7 +218,7 @@ class TerminStoritveCest
             'konec'           => '2008-12-11T00:00:00+0100',
             'dogodek'         => $this->objDogodek['id'],
             'alternacija'     => null,
-            'oseba'           => $this->lookOseba['id'],
+            'oseba'           => $this->lookOseba1['id'],
             'dezurni'         => false,
             'gost'            => true,
         ];
@@ -234,14 +234,25 @@ class TerminStoritveCest
      */
     public function getList(ApiTester $I)
     {
-        $resp   = $I->successfullyGetList($this->restUrl, []);
-        $list   = $resp['data'];
+        $resp      = $I->successfullyGetList($this->restUrl, []);
+        $list      = $resp['data'];
         codecept_debug($resp);
-        $totRec = $resp['state']['totalRecords'];
+        $totRecVsi = $totRec    = $resp['state']['totalRecords'];
         codecept_debug($totRec);
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
 //        $I->assertEquals("2005-02-01T00:00:00+0100", $list[0]['planiranZacetek']);
 //        $I->assertEquals("2021-02-01T00:00:00+0100", $list[$totRec - 1]['planiranZacetek']);
+
+
+        /**
+         * get list po osebi
+         */
+        $resp   = $I->successfullyGetList($this->restUrl . "?oseba=" . $this->lookOseba1['id'], []);
+        $list   = $resp['data'];
+        codecept_debug($resp);
+        $totRec = $resp['state']['totalRecords'];
+        codecept_debug($totRec);
+        $I->assertLessThan($totRecVsi, $resp['state']['totalRecords']);
     }
 
     /**
@@ -290,7 +301,7 @@ class TerminStoritveCest
          */
         $ent = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         $I->assertEquals($ent['alternacija'], null);
-        $I->assertEquals($ent['oseba'], $this->lookOseba['id']);
+        $I->assertEquals($ent['oseba'], $this->lookOseba1['id']);
         $I->assertEquals($ent['dezurni'], true);
         $I->assertEquals($ent['gost'], false);
     }

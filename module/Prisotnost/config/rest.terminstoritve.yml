@@ -20,5 +20,14 @@ forms:
 lists:
     default: 
         filter:
+            elements:                 
+                - name: oseba
+                  type: toone
+                  options:
+                      label: Oseba
+                      targetEntity: App\Entity\Oseba
+                      required: false
         hydrator:
             byValue: [oseba,alternacija]
+
+        
