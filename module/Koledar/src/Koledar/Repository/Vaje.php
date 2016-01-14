@@ -78,7 +78,6 @@ class Vaje
             $rep->create($object->getDogodek(), $params);
         }
         parent::create($object, $params);
-
     }
 
     /**
@@ -106,6 +105,5 @@ class Vaje
             $this->getEntityManager()->remove($object->getDogodek());
         }
     }
-
 
 }

@@ -38,10 +38,12 @@ class VajaCest
     private $obj3;
     private $obj4;
     private $objDogodek;
-    private $objUprizoritev;
     private $lookUprizoritev1;
     private $lookUprizoritev2;
     private $lookUprizoritev3;
+    private $altUpr1Ids;
+    private $altUpr2Ids;
+    private $altUpr3Ids;
     private $lookTipVaje1;
     private $lookTipVaje2;
     private $lookTipVaje3;
@@ -63,17 +65,61 @@ class VajaCest
     }
 
     /**
+     * vrne vrednosti subarray-ev v array z nivojem manj
+     * npr:
+     *  [[1, 2, 3], [ 4, 5]]     =>   [1,2,3,4,5]
+     * 
+     * @param array $resp
+     * @return array
+     */
+    private function subarrayValuesToArray(array $polje)
+    {
+        codecept_debug(__FUNCTION__);
+
+        $resultA = [];
+        foreach ($polje as $p) {
+            foreach ($p as $v) {
+                array_push($resultA, $v);
+            }
+        }
+        return $resultA;
+    }
+
+    /**
      * 
      * @param ApiTester $I
      */
     public function lookupUprizoritev(ApiTester $I)
     {
-        $this->lookUprizoritev1 = $look                   = $I->lookupEntity("uprizoritev", "0001", false);
+        $this->lookUprizoritev1 = $look                   = $I->lookupEntity("uprizoritev", "0002", false);
+        codecept_debug($look);
         $I->assertGuid($look['id']);
-        $this->lookUprizoritev2 = $look                   = $I->lookupEntity("uprizoritev", "0002", false);
+        /*
+         * še poiščemo vse pripadajoče alternacije
+         */
+        $upr                    = $I->successfullyGet($this->uprizoritevUrl, $look ['id']);
+        $this->altUpr1Ids       = $altUpr                 = array_column($this->subarrayValuesToArray(array_column($upr['funkcije'], 'alternacije')), 'id');
+        codecept_debug($altUpr);
+
+
+        $this->lookUprizoritev2 = $look                   = $I->lookupEntity("uprizoritev", "0001", false);
         $I->assertGuid($look['id']);
+        /*
+         * še poiščemo vse pripadajoče alternacije
+         */
+        $upr                    = $I->successfullyGet($this->uprizoritevUrl, $look ['id']);
+        $this->altUpr2Ids       = $altUpr                 = array_column($this->subarrayValuesToArray(array_column($upr['funkcije'], 'alternacije')), 'id');
+        codecept_debug($altUpr);
+
+
         $this->lookUprizoritev3 = $look                   = $I->lookupEntity("uprizoritev", "0003", false);
         $I->assertGuid($look['id']);
+        /*
+         * še poiščemo vse pripadajoče alternacije
+         */
+        $upr                    = $I->successfullyGet($this->uprizoritevUrl, $look ['id']);
+        $this->altUpr3Ids       = $altUpr                 = array_column($this->subarrayValuesToArray(array_column($upr['funkcije'], 'alternacije')), 'id');
+        codecept_debug($altUpr);
     }
 
     /**
@@ -133,11 +179,11 @@ class VajaCest
      */
     public function create(ApiTester $I)
     {
-        $zacetek    = '2014-05-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
-        $data       = [
+        $zacetek        = '2014-05-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data           = [
             'tipvaje'     => $this->lookTipVaje1['id'],
             'zaporedna'   => 9,
-            'uprizoritev' => $this->lookUprizoritev1['id'],
+            'uprizoritev' => $this->lookUprizoritev2['id'],
             'title'       => "Vaja $zacetek",
             'status'      => '200s',
             'zacetek'     => $zacetek,
@@ -145,7 +191,14 @@ class VajaCest
             'prostor'     => $this->lookProstor1['id'],
             'sezona'      => $this->lookSezona1['id'],
         ];
-        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        /*
+         * pripravimo parametre alternacij, npr. prve 3 te uprizoritve
+         */
+        $parAlternacije = '';   //init
+        for ($i = 1; $i <= 3; $i++) {
+            $parAlternacije .= 'alternacija[]=' . $this->altUpr1Ids[$i] . '&';
+        }
+        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl . "?" . $parAlternacije, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
         codecept_debug($data);
@@ -155,6 +208,9 @@ class VajaCest
         $I->assertEquals($ent['status'], $data['status']);
         $I->assertEquals($ent['prostor'], $data['prostor']);
         $I->assertEquals($ent['sezona'], $data['sezona']);
+
+
+        $I->fail('$$');
 
         /**
          * preveri dogodek
@@ -178,7 +234,7 @@ class VajaCest
         $data       = [
             'tipvaje'     => NULL,
             'zaporedna'   => 2,
-            'uprizoritev' => $this->lookUprizoritev1['id'],
+            'uprizoritev' => $this->lookUprizoritev2['id'],
             'title'       => "Vaja $zacetek",
             'status'      => '200s',
             'zacetek'     => $zacetek,
@@ -196,7 +252,7 @@ class VajaCest
      */
     public function getListDefaultPoUprizoritvi(ApiTester $I)
     {
-        $resp   = $I->successfullyGetList($this->restUrl . "?uprizoritev=" . $this->lookUprizoritev1['id'], []);
+        $resp   = $I->successfullyGetList($this->restUrl . "?uprizoritev=" . $this->lookUprizoritev2['id'], []);
         $list   = $resp['data'];
         $totRec = $resp['state']['totalRecords'];
         codecept_debug($list);
@@ -213,12 +269,18 @@ class VajaCest
      */
     public function update(ApiTester $I)
     {
-        $ent             = $this->obj1;
-        $ent['title'] = 'yy';
+        $data          = $this->obj1;
+        $data['title'] = 'yy';
+        $this->obj1    = $ent           = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        $I->assertEquals($ent['title'], $data['title']);
 
-        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
-
-        $I->assertEquals($entR['title'], $ent['title']);
+        /**
+         * preveri dogodek
+         */
+        $dogodek = $I->successfullyGet($this->dogodekUrl, $data['dogodek']['id']);
+        codecept_debug($dogodek);
+        $I->assertGuid($dogodek['id']);
+        $I->assertEquals($dogodek['title'], $data['title'], 'title');
     }
 
     /**
@@ -236,7 +298,7 @@ class VajaCest
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['tipvaje'], $this->lookTipVaje1['id']);
         $I->assertEquals($ent['zaporedna'], 9);
-        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev1['id']);
+        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev2['id']);
         $I->assertEquals($ent['title'], "yy");
         $I->assertEquals($ent['status'], '200s');
         $I->assertEquals($ent['zacetek'], $zacetek);
