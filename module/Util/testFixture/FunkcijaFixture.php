@@ -95,6 +95,7 @@ class FunkcijaFixture
             ['Helena', 'glavna vloga', 'Vloga', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0002', null,],
             ['Lektoriranje', '', 'Lektorstvo', false, '', TRUE, 22, true, true, 'Uprizoritev-0002', null,],
             ['Avtor', 'Avtor besedila', 'Avtor', false, '', TRUE, 2, true, FALSE, 'Uprizoritev-0002', null,],
+            ['Tonski mojster', 'funkcija brez alternacij', 'Tehnična in druga podpora', true, '', TRUE, 9, true, true, 'Uprizoritev-0002', null,],
             ['Konj', 'glavna vloga', 'Vloga', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0005', null,],
             ['Režiramo', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0005', null,],
             ['u11_DN fja', '', 'Režija', false, 'velika', TRUE, 5, true, true, 'Uprizoritev-0011', null,],

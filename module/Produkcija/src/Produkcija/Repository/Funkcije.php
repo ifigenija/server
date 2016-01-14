@@ -25,6 +25,9 @@ class Funkcije
         "planbrezakt" => [
             "sort" => ["alias" => "p.sort"]
         ],
+        "planirane" => [
+            "sort" => ["alias" => "p.sort"]
+        ],
         "vse"         => [
             "sort" => ["alias" => "p.sort"]
         ],
@@ -48,6 +51,10 @@ class Funkcije
                 $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1000674);
                 $this->expect(!empty($options['datum']), "Datum je obvezen", 1000678);
                 $qb = $this->getPlanBrezAktAltQb($options);
+                break;
+            case "planirane":
+                $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1000674);
+                $qb = $this->getPlaniraneQb($options);
                 break;
             default:
                 $this->expect(false, "Lista $name ne obstaja", 1000673);
@@ -104,21 +111,43 @@ class Funkcije
      * @param type $options
      * @return type
      */
+    public function getPlaniraneQb($options)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $e  = $qb->expr();
+        if (!empty($options['uprizoritev'])) {
+            $qb->join('p.uprizoritev', 'uprizoritev');
+            $naz = $e->eq('uprizoritev.id', ':upriz');
+            $qb->andWhere($naz);
+            $qb->setParameter('upriz', "{$options['uprizoritev']}", "string");
+        }
+        $qb->andWhere($e->in('p.sePlanira', [TRUE]));
+
+        return $qb;
+    }
+
+    /**
+     * vrne seznam planirajočih brez aktivnih alternacij
+     * 
+     * @param type $options
+     * @return type
+     */
     public function getPlanBrezAktAltQb($options)
     {
-        $stAktivnihAlt = $this->_em->createQueryBuilder();
-        $e             = $stAktivnihAlt->expr();
-        $stAktivnihAlt->select('count(a)')
+        $qb = $this->getPlaniraneQb($options);
+
+        $stAktivnihAltQb = $this->_em->createQueryBuilder();
+        $e               = $stAktivnihAltQb->expr();
+        $stAktivnihAltQb->select('count(a)')
                 ->from('Produkcija\Entity\Alternacija', 'a')
-                ->where('a.funkcija=p.id')
-        ;
+                ->where('a.funkcija=p.id');
         /*
          * ali je alternacija aktivna na določen datum
          */
         if (!empty($options['datum'])) {
             $datum = $options['datum'];
         } else {
-            $datum = new \DateTime();     //danes
+            $datum = new \DateTime();     //danes - to je za vsak slučaj, čeprav se ne uporablja
         }
         $zazacetkom = $e->orX(
                 $e->lte('a.zacetek', ':dat')
@@ -128,20 +157,12 @@ class Funkcije
                 $e->gte('a.konec', ':dat')
                 , $e->isNull('a.konec')
         );
-        $stAktivnihAlt->andWhere($zazacetkom);
-        $stAktivnihAlt->andWhere($predkoncem);
+        $stAktivnihAltQb->andWhere($zazacetkom);
+        $stAktivnihAltQb->andWhere($predkoncem);
 
-        $qb = $this->createQueryBuilder('p');
-        $e  = $qb->expr();
-        if (!empty($options['uprizoritev'])) {
-            $qb->join('p.uprizoritev', 'uprizoritev');
-            $naz = $e->eq('uprizoritev.id', ':upriz');
-            $qb->andWhere($naz);
-            $qb->setParameter('upriz', "{$options['uprizoritev']}", "string");
-            $qb->setParameter('dat', $datum, "date");
-        }
-        $qb->andWhere($e->in('p.sePlanira', [TRUE]));
-        $qb->andWhere("(" . $stAktivnihAlt->getDQL() . ")=0");  // le funkcije brez aktivnih alternacij
+        $qb->andWhere("(" . $stAktivnihAltQb->getDQL() . ")=0");  // le funkcije brez aktivnih alternacij
+        $qb->setParameter('dat', $datum, "date");
+
         return $qb;
     }
 

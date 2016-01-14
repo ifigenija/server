@@ -363,12 +363,13 @@ class FunkcijaCest
         codecept_debug($sePlaniraA);
         $I->assertEquals(1, count($sePlaniraA), "vsi vse planira morajo biti true");
         $I->assertEquals(true, $sePlaniraA[0]);
-        
+
         $nazivA = array_unique(array_column($list, "naziv"));
         $I->assertNotContains("Avtor", $nazivA);
         $I->assertContains("Razsvetljava", $nazivA);
         $I->assertNotContains("Inšpicient", $nazivA);
-        $I->assertContains("Režija",  $nazivA);
+        $I->assertContains("Režija", $nazivA);
+        $I->assertContains("Tonski mojster", $nazivA);   // nima nobene alternacije
 
         /**
          * 2. datum
@@ -379,11 +380,12 @@ class FunkcijaCest
         codecept_debug($list);
         $sePlaniraA = array_unique(array_column($list, "sePlanira"));
         codecept_debug($sePlaniraA);
-        $nazivA = array_unique(array_column($list, "naziv"));
+        $nazivA     = array_unique(array_column($list, "naziv"));
         $I->assertNotContains("Avtor", $nazivA);
         $I->assertNotContains("Razsvetljava", $nazivA);
         $I->assertNotContains("Inšpicient", $nazivA);
-        $I->assertNotContains("Režija",  $nazivA);
+        $I->assertNotContains("Režija", $nazivA);
+        $I->assertContains("Tonski mojster", $nazivA);   // nima nobene alternacije
 
 
         /**
@@ -395,11 +397,46 @@ class FunkcijaCest
         codecept_debug($list);
         $sePlaniraA = array_unique(array_column($list, "sePlanira"));
         codecept_debug($sePlaniraA);
-        $nazivA = array_unique(array_column($list, "naziv"));
+        $nazivA     = array_unique(array_column($list, "naziv"));
         $I->assertNotContains("Avtor", $nazivA);
         $I->assertContains("Razsvetljava", $nazivA);
         $I->assertContains("Inšpicient", $nazivA);
-        $I->assertNotContains("Režija",  $nazivA);
+        $I->assertNotContains("Režija", $nazivA);
+        $I->assertContains("Tonski mojster", $nazivA);   // nima nobene alternacije
+    }
+
+    /**
+     * preberi planirane funkcije 
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function getListPlanirane(ApiTester $I)
+    {
+        $resp       = $I->successfullyGetList($this->restUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev2['id'], []);
+        $list       = $resp['data'];
+        codecept_debug($list);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $sePlaniraA = array_unique(array_column($list, "sePlanira"));
+        $funIdentA  = array_column(array_column($list, "funkcija"), "ident");
+
+        codecept_debug($sePlaniraA);
+        $I->assertEquals(1, count($sePlaniraA), "vsi vse planira morajo biti true");
+        $I->assertEquals(true, $sePlaniraA[0]);
+
+        $nazivA = array_unique(array_column($list, "naziv"));
+        $I->assertContains("Avtor", $nazivA);
+        $I->assertContains("Razsvetljava", $nazivA);
+        $I->assertContains("Inšpicient", $nazivA);
+        $I->assertContains("Režija", $nazivA);
+        $I->assertContains("Tonski mojster", $nazivA);   // nima nobene alternacije
+
+        /**
+         * $$ kontrola, da ne hidrira alternacij
+         */
+        $altA = array_column($list, "alternacije");
+        codecept_debug($altA);
+        $I->assertEquals(0, count($altA), "alternacij naj ne hidrira");
     }
 
     /**

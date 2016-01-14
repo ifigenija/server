@@ -52,6 +52,18 @@ lists:
                   options:
                       label: Datum
                       required: true
+    planirane: 
+        filter:
+            elements:                 
+                - name: uprizoritev
+                  type: toone
+                  options:
+                      label: Uprizoritev
+                      targetEntity: Produkcija\Entity\Uprizoritev
+                      required: true
+        hydrator: 
+            exclude: 
+            - alternacije
 hydrator:
    virtual: [imena]            
 relation:

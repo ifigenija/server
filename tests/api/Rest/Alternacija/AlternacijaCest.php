@@ -398,8 +398,6 @@ class AlternacijaCest
         $I->assertContains("Razsvetljava", $funIdentA);
         $I->assertContains("Inšpicient", $funIdentA);
         $I->assertContains("Režija", $funIdentA);
-        
-        $I->fail('$$');
     }
 
     /**
@@ -584,10 +582,10 @@ class AlternacijaCest
         $this->objTerminStoritve1 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['planiranoTraja'], 1.23);
 
-
-// še en zapis
+        /*
+         *  še en zapis
+         */
         $data                     = [
             'planiranZacetek' => '2013-02-01T00:00:00+0100',
             'planiranKonec'   => '2014-02-01T00:00:00+0100',
@@ -598,7 +596,7 @@ class AlternacijaCest
             'alternacija'     => $this->obj2['id'],
             'oseba'           => $this->lookOseba1['id'],
         ];
-        $this->objTerminStoritve1 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
+        $this->objTerminStoritve2 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
         $I->assertGuid($ent['id']);
     }
 
