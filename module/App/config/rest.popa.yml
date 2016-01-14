@@ -34,7 +34,7 @@ forms:
             - zamejstvo    
             - nvo
             - panoga
-            - producent
+#            - producent
             - kupec
         hydrator: 
             byValue: [ naslovi,trrji,telefonske,kontaktneOsebe, kontaktneOsebe.oseba]

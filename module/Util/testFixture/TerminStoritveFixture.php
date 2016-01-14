@@ -69,7 +69,7 @@ class TerminStoritveFixture
 //        $o->setZacetek($date);
 //        $date = empty($v[4]) ? null : date_create($v[4]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
 //        $o->setKonec($date);
-        $o->setPlaniranoTraja($v[5]);
+//        $o->setPlaniranoTraja($v[5]);
         $o->setDezurni($v[9]);
         $o->setGost($v[10]);
         if ($nov) {
@@ -86,15 +86,15 @@ class TerminStoritveFixture
     public function getData()
     {
         return [
-            ['01', "2015-06-26 10:00:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0001", "Oseba-0001", false, false,],
-            ['02', "2015-06-26 10:00:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0002", "Oseba-0010", false, false,],
-            ['03', "2015-06-26 10:00:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0003", "Oseba-0003", false, false,],
-            ['04', "2015-06-26 10:00:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0004", "Oseba-0002", false, false,],
-            ['05', "2015-06-26 10:00:00", "2015-06-26 10:00", null, null, 2, "Dogodek-01", "Alternacija-0005", "Oseba-0012", false, false,],
+            ['01', "2015-06-26 10:00:00", "2015-06-26 11:00", null, null, 2, "Dogodek-01", "Alternacija-0001", "Oseba-0001", false, false,],
+            ['02', "2015-06-26 10:00:00", "2015-06-26 11:00", null, null, 2, "Dogodek-01", "Alternacija-0002", "Oseba-0010", false, false,],
+            ['03', "2015-06-26 10:00:00", "2015-06-26 11:00", null, null, 2, "Dogodek-01", "Alternacija-0003", "Oseba-0003", false, false,],
+            ['04', "2015-06-26 10:00:00", "2015-06-26 11:00", null, null, 2, "Dogodek-01", "Alternacija-0004", "Oseba-0002", false, false,],
+            ['05', "2015-06-26 10:00:00", "2015-06-26 11:00", null, null, 2, "Dogodek-01", "Alternacija-0005", "Oseba-0012", false, false,],
             // dezurni
-            ['06', "2015-08-01 20:00:00", "2015-08-01 23:00", null, null, 2, "Dogodek-03", null, "Oseba-0012", TRUE, false,],
+            ['06', "2015-08-01 20:00:00", "2015-08-01 23:30", null, null, 2, "Dogodek-03", null, "Oseba-0012", TRUE, false,],
             // gost
-            ['07', "2015-08-01 20:00:00", "2015-08-01 23:00", null, null, 2, "Dogodek-03", null, "Oseba-0010", false, TRUE,],
+            ['07', "2015-08-01 20:00:00", "2015-08-01 23:30", null, null, 2, "Dogodek-03", null, "Oseba-0010", false, TRUE,],
         ];
     }
 

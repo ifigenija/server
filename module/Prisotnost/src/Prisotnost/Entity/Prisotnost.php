@@ -51,7 +51,7 @@ class Prisotnost
     protected $oseba;
     
     /**
-     * @ORM\OneToOne(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="prisotnost")
+     * @ORM\OneToOne(targetEntity="Prisotnost\Entity\TerminStoritve", inversedBy="prisotnost")
      * @Max\I18n(label = "prisotnost.terminStoritve", description = "prisotnost.d.terminStoritve")
      * @Max\Ui(type="hiddenid")
      * @var \Prisotnost\Entity\TerminStoritve

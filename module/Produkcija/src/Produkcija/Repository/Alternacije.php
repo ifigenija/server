@@ -62,7 +62,6 @@ class Alternacije
                 $this->expect($this->getAuthorizationService()->isGranted('Funkcija-read')
                         , 'Nimate dovoljenja za branje Osebe', 1001757);    // ker je v hidratorju
                 $this->expect(!empty($options['uprizoritev']), "Uprizoritev je obvezna", 1001752);
-                $this->expect(!empty($options['datum']), "Datum je obvezen", 1001753);
                 $this->expect(empty($options['funkcija']), "Funkcija ni dovoljen parameter", 1001755);
                 $qb = $this->getPlaniraneQb($options);
                 break;
@@ -112,22 +111,23 @@ class Alternacije
         $qb = $this->getVseQb($options);
         $e  = $qb->expr();
         if (!empty($options['datum'])) {
-            $datum = $options['datum'];
-        } else {
-            $datum = new \DateTime();     //danes
+            /*
+             * če ni datuma to pomeni, da naj prikaže vse alternacije (ne le aktivnih)
+             */
+            $datum      = $options['datum'];
+            $zazacetkom = $e->orX(
+                    $e->lte('p.zacetek', ':dat')
+                    , $e->isNull('p.zacetek')
+            );
+            $predkoncem = $e->orX(
+                    $e->gte('p.konec', ':dat')
+                    , $e->isNull('p.konec')
+            );
+            $qb->andWhere($zazacetkom);
+            $qb->andWhere($predkoncem);
+            $qb->setParameter('dat', $datum, "date");
         }
-        $zazacetkom = $e->orX(
-                $e->lte('p.zacetek', ':dat')
-                , $e->isNull('p.zacetek')
-        );
-        $predkoncem = $e->orX(
-                $e->gte('p.konec', ':dat')
-                , $e->isNull('p.konec')
-        );
-        $qb->andWhere($zazacetkom);
-        $qb->andWhere($predkoncem);
         $qb->andWhere('funkcija.sePlanira=true');
-        $qb->setParameter('dat', $datum, "date");
         return $qb;
     }
 

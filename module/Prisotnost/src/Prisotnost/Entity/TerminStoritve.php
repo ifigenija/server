@@ -27,8 +27,11 @@ class TerminStoritve
     protected $id;
 
     /**
-     * @ORM\Column(type="dateinterval", nullable=true)
-     * @Max\I18n(label="Planiran začetek", description="Planiran začetek termina")
+     * število minut med začetkom dogodka in planiranim začetkom
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="Delta planiranega začetka", description="Delta planiran začetek termina")
+     * @Max\Ui(type="integer")
      * @var string
      */
     protected $deltaPlaniranZacetek;
@@ -41,18 +44,21 @@ class TerminStoritve
     protected $planiranZacetek;
 
     /**
+     * število minut med začetkom dogodka in planiranim začetkom
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label="Delta planiranega začetka", description="Delta planiran začetek termina")
+     * @Max\Ui(type="integer")
+     * @var string
+     */
+    protected $deltaPlaniranKonec;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Max\I18n(label="Planiran konec", description="Planiran konec termina")
      * @var string
      */
     protected $planiranKonec;
-
-    /**
-     * @ORM\Column(type="decimal", nullable=true,scale=2, precision=15)
-     * @Max\I18n(label="Planirano traja", description="Planirano traja")
-     * @var double
-     */
-    protected $planiranoTraja;
 
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Dogodek", inversedBy="terminiStoritve")
@@ -105,8 +111,29 @@ class TerminStoritve
     protected $gost;
 
     /**
-     * @ORM\OneToOne(targetEntity="Prisotnost\Entity\Prisotnost",inversedBy="terminStoritve")
-     * @ORM\JoinColumn(name="prisotnost_id", referencedColumnName="id", unique=true)
+     * Ali je zasedenost osebe?
+     * 
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="terminStoritve.oseba",  description="terminStoritve.d.oseba")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $zasedenost;
+
+    /**
+     * Ali je virtualna zasedenost osebe?
+     * 
+     * Virtualno zasedenost bomo morda uporabljali, da ugotavljamo ali je že preteklko 11 ur. 12 ur?
+     * 
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="terminStoritve.oseba",  description="terminStoritve.d.oseba")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $virtZasedenost;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Prisotnost\Entity\Prisotnost",mappedBy="terminStoritve")
      * @Max\I18n(label = "terminStoritve.prisotnost", description = "terminStoritve.d.prisotnost")
      * @Max\Ui(type="toone")
      * @var \Prisotnost\Entity\Prisotnost
@@ -115,6 +142,7 @@ class TerminStoritve
 
     public function validate($mode = 'update')
     {
+        $this->expect(!$this->prisotnost, "Ure so že vnešene, spreminjanje terminov storitev ni mogoče", 1001088);
         $i = 0;
         if ($this->alternacija) {
             $i++;
@@ -125,10 +153,36 @@ class TerminStoritve
         if ($this->gost) {
             $i++;
         }
-        $this->expect($i === 1, "Napačno število referenc ($i) v terminu storitve. Dovoljen natanko eden od alternacija/dezurni/gost", 1001080);
+        if ($this->zasedenost) {
+            $i++;
+        }
+        if ($this->virtZasedenost) {
+            $i++;
+        }
+        $this->expect($i === 1
+                , "Napačno število referenc ($i) v terminu storitve. Dovoljen natanko eden od alternacija/dezurni/gost/zasedenost/virt.zasedenost"
+                , 1001080);
+        $this->expect($this->planiranZacetek, "Planiran začetek  mora obstajati", 1001084);
+        $this->expect($this->planiranKonec, "Planiran konec mora obstajati", 1001085);
+        $this->expect($this->planiranZacetek < $this->planiranKonec, "Planiran konec mora biti za planiranim začetkom", 1001087);
 
         if ($this->alternacija) {
             $this->oseba = $this->alternacija->getOseba();
+        }
+        if ($this->alternacija || $this->gost || $this->dezurni) {
+            /*
+             * izračunamo delti glede na čase v dogodku
+             */
+            $this->expect($this->dogodek, "Dogodek pri takem tipu ermina storitve mora biti prisoten", 1001081);
+            $this->expect($this->dogodek->getZacetek(), "Začetek dogodka mora obstajati", 1001082);
+
+            /*
+             * izračunamo delti, ki sta v minutah
+             */
+            $this->deltaPlaniranZacetek = (int) (($this->planiranZacetek->getTimestamp() - $this->dogodek->getZacetek()->getTimestamp()) / 60);
+            $this->deltaPlaniranKonec   = (int) (($this->planiranKonec->getTimestamp() - $this->dogodek->getKonec()->getTimestamp()) / 60);
+        } else {
+            $this->dogodek = null;
         }
     }
 
@@ -145,11 +199,6 @@ class TerminStoritve
     public function getPlaniranKonec()
     {
         return $this->planiranKonec;
-    }
-
-    public function getPlaniranoTraja()
-    {
-        return $this->planiranoTraja;
     }
 
     public function getDogodek()
@@ -182,12 +231,6 @@ class TerminStoritve
     public function setPlaniranKonec($planiranKonec)
     {
         $this->planiranKonec = $planiranKonec;
-        return $this;
-    }
-
-    public function setPlaniranoTraja($planiranoTraja)
-    {
-        $this->planiranoTraja = $planiranoTraja;
         return $this;
     }
 
@@ -242,14 +285,47 @@ class TerminStoritve
         return $this;
     }
 
+    function getZasedenost()
+    {
+        return $this->zasedenost;
+    }
+
+    function getVirtZasedenost()
+    {
+        return $this->virtZasedenost;
+    }
+
+    function setZasedenost($zasedenost)
+    {
+        $this->zasedenost = $zasedenost;
+        return $this;
+    }
+
+    function setVirtZasedenost($virtZasedenost)
+    {
+        $this->virtZasedenost = $virtZasedenost;
+        return $this;
+    }
+
     function getDeltaPlaniranZacetek()
     {
         return $this->deltaPlaniranZacetek;
     }
 
+    function getDeltaPlaniranKonec()
+    {
+        return $this->deltaPlaniranKonec;
+    }
+
     function setDeltaPlaniranZacetek($deltaPlaniranZacetek)
     {
         $this->deltaPlaniranZacetek = $deltaPlaniranZacetek;
+        return $this;
+    }
+
+    function setDeltaPlaniranKonec($deltaPlaniranKonec)
+    {
+        $this->deltaPlaniranKonec = $deltaPlaniranKonec;
         return $this;
     }
 

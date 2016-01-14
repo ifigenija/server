@@ -26,8 +26,9 @@ use ApiTester;
 class PrisotnostCest
 {
 
-    private $restUrl  = '/rest/prisotnost';
-    private $osebaUrl = '/rest/oseba';
+    private $restUrl           = '/rest/prisotnost';
+    private $terminStoritveUrl = '/rest/terminstoritve';
+    private $osebaUrl          = '/rest/oseba';
     private $obj1;
     private $obj2;
     private $objOseba;
@@ -69,20 +70,20 @@ class PrisotnostCest
     public function create(ApiTester $I)
     {
         $data       = [
-            'zacetek' => '2015-02-01T08:00:00+0100',
-            'konec'   => '2015-02-01T15:00:00+0100',
-            'oseba'   => $this->lookOseba1['id'],
-            'terminStoritve'   => null,
+            'zacetek'        => '2015-02-01T08:00:00+0100',
+            'konec'          => '2015-02-01T15:00:00+0100',
+            'oseba'          => $this->lookOseba1['id'],
+            'terminStoritve' => null,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         codecept_debug($ent);
         $I->assertGuid($ent['id']);
 
         $data       = [
-            'zacetek' => '2015-02-02T08:00:00+0100',
-            'konec'   => '2015-02-02T15:00:00+0100',
-            'oseba'   => $this->lookOseba1['id'],
-            'terminStoritve'   => null,
+            'zacetek'        => '2015-02-02T08:00:00+0100',
+            'konec'          => '2015-02-02T15:00:00+0100',
+            'oseba'          => $this->lookOseba1['id'],
+            'terminStoritve' => null,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         codecept_debug($ent);

@@ -84,7 +84,7 @@ lists:
                   type: datetime
                   options:
                       label: Datum
-                      required: true
+                      required: false
         hydrator:
             lookups:
                 - oseba

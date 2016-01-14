@@ -6,14 +6,16 @@ forms:
     default: 
         elements:
 #            - id
-            - deltaPlaniranZacetek
+#            - deltaPlaniranZacetek
+#            - deltaPlaniranKonec
             - planiranZacetek
             - planiranKonec
-            - planiranoTraja
             - dogodek
             - alternacija
             - dezurni
             - gost
+            - zasedenost
+            - virtZasedenost
             - oseba
 lists:
     default: 

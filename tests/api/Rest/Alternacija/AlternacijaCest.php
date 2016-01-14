@@ -385,6 +385,21 @@ class AlternacijaCest
         $I->assertNotContains("Razsvetljava", $funIdentA);
         $I->assertNotContains("Inšpicient", $funIdentA);
         $I->assertContains("Režija", $funIdentA);
+
+        /*
+         * brez datuma
+         */
+        $resp      = $I->successfullyGetList($this->restUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev2['id'], []);
+        $list      = $resp['data'];
+        codecept_debug($list);
+        $funIdentA = array_column(array_column($list, "funkcija"), "ident");
+        codecept_debug($funIdentA);
+        $I->assertContains("Avtor", $funIdentA);
+        $I->assertContains("Razsvetljava", $funIdentA);
+        $I->assertContains("Inšpicient", $funIdentA);
+        $I->assertContains("Režija", $funIdentA);
+        
+        $I->fail('$$');
     }
 
     /**
