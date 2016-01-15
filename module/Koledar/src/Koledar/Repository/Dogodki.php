@@ -155,25 +155,38 @@ class Dogodki
 
         if (!empty($params['alternacija'])) {
             $this->expect(is_array($params['alternacija']), "Parameter alternacija mora biti array id-jev", 1000584);
-            $alternacijaIds = $params['alternacija']; //$$ glej , če je null
+            $alternacijaIds = $params['alternacija'];
         } else {
             $alternacijaIds = [];
         }
-
+        if (!empty($params['dezurni'])) {
+            $this->expect(is_array($params['dezurni']), "Parameter dezurni mora biti array id-jev", 1000588);
+            $dezurniIds = $params['dezurni'];
+        } else {
+            $dezurniIds = [];
+        }
+        if (!empty($params['gost'])) {
+            $this->expect(is_array($params['gost']), "Parameter gost mora biti array id-jev", 1000588);
+            $gostIds = $params['gost'];
+        } else {
+            $gostIds = [];
+        }
+        if (!empty($params['sodelujoc'])) {
+            $this->expect(is_array($params['sodelujoc']), "Parameter sodelujoč mora biti array id-jev", 1000588);
+            $sodelujocIds = $params['sodelujoc'];
+        } else {
+            $sodelujocIds = [];
+        }
 
         parent::create($object, $params);
+
         /*
          * $$ todo:
-         * - kreiraj termine storitve
-         *  . za vse alternacije 
-         *  . za vse goste
-         *  . za vse dežurne
-         * - v terminih storitve kontrola, za katere dogodke je so dovoljeni TS
          * - omogoči delete TS pri delete dogodka
          *   . prav tako popravi update
          * 
          */
-        
+
         /*
          * preberemo delte iz opcij
          */
@@ -181,7 +194,7 @@ class Dogodki
         $option  = $optionR->findOneByName("dogodek.delte");
         $this->expect($option, "Opcija dogodek.delte ne obstaja", 1000587);
         $delte   = $option->getDefaultValue();
-        
+
         /*
          * init delt
          */
@@ -211,13 +224,35 @@ class Dogodki
                 $deltaKonec      = 0;
                 break;
         }
+        /*
+         * če obstajajo delta parmetri, z njimi povozimo vrednosti: 
+         */
+        if (!empty($params['deltaZac'])) {
+            $deltaZacetek = $params['deltaZac'];
+        }
+        if (!empty($params['deltaZacTeh'])) {
+            $deltaZacetekTeh = $params['deltaZacTeh'];
+        }
+        if (!empty($params['deltaKon'])) {
+            $deltaKonec = $params['deltaKon'];
+        }
+        if (!empty($params['deltaKonTeh'])) {
+            $deltaKonecTeh = $params['deltaKonTeh'];
+        }
 
         $terminStoritveR = $this->getEntityManager()->getRepository('Prisotnost\Entity\TerminStoritve');
         $altR            = $this->getEntityManager()->getRepository('Produkcija\Entity\Alternacija');
+        $osebaR          = $this->getEntityManager()->getRepository('App\Entity\Oseba');
+        /*
+         * kreiram termine storitve za alternacije
+         */
         foreach ($alternacijaIds as $altId) {
             $alt = $altR->findOneById($altId);
             $this->expect($alt, "Alternacija ($altId) ne obstaja", 1000586);
 
+            /**
+             * $$ preveri, če alternacija pripada uprizoritvi dogodka - morda v validaciji TS
+             */
             $aliTehnik = false;   //init
             if ($alt->getFunkcija()) {
                 if ($alt->getFunkcija()->getPodrocje() == 'tehnik') {
@@ -231,10 +266,89 @@ class Dogodki
 
             $deltaZ = $aliTehnik ? $deltaZacetekTeh : $deltaZacetek;
             $ts->setPlaniranZacetek($this->dodajInterval($object->getZacetek(), $deltaZ));
-            
+
             $deltaK = $aliTehnik ? $deltaKonecTeh : $deltaKonec;
             $ts->setPlaniranKonec($this->dodajInterval($object->getKonec(), $deltaK));
-            
+
+            $ts->setDezurni(false);
+            $ts->setGost(false);
+            $ts->setZasedenost(false);
+            $ts->setVirtZasedenost(false);
+            $ts->setSodelujoc(FALSE);
+            $ts->setUra(null);
+            $object->terminiStoritve->add($ts); // verjetno to ni potrebno
+            $terminStoritveR->create($ts);
+        }
+        /*
+         * kreiram termine storitve za goste
+         */
+        foreach ($gostIds as $gostId) {
+            $oseba = $osebaR->findOneById($gostId);
+            $this->expect($oseba, "Oseba gost ($gostId) ne obstaja", 1000589);
+
+            $ts = new \Prisotnost\Entity\TerminStoritve();
+            $ts->setDogodek($object);
+            $ts->setGost(true);
+            $ts->setOseba($oseba);
+
+            $deltaZ = $deltaZacetek;
+            $ts->setPlaniranZacetek($this->dodajInterval($object->getZacetek(), $deltaZ));
+
+            $deltaK = $deltaKonec;
+            $ts->setPlaniranKonec($this->dodajInterval($object->getKonec(), $deltaK));
+
+            $ts->setDezurni(false);
+            $ts->setSodelujoc(FALSE);
+            $ts->setZasedenost(false);
+            $ts->setVirtZasedenost(false);
+            $ts->setUra(null);
+            $object->terminiStoritve->add($ts); // verjetno to ni potrebno
+            $terminStoritveR->create($ts);
+        }
+        /*
+         * kreiram termine storitve za dežurne
+         */
+        foreach ($dezurniIds as $dezurniId) {
+            $oseba = $osebaR->findOneById($dezurniId);
+            $this->expect($oseba, "Oseba dezurni ($dezurniId) ne obstaja", 1000590);
+
+            $ts = new \Prisotnost\Entity\TerminStoritve();
+            $ts->setDogodek($object);
+            $ts->setDezurni(TRUE);
+            $ts->setOseba($oseba);
+
+            $deltaZ = $deltaZacetek;
+            $ts->setPlaniranZacetek($this->dodajInterval($object->getZacetek(), $deltaZ));
+
+            $deltaK = $deltaKonec;
+            $ts->setPlaniranKonec($this->dodajInterval($object->getKonec(), $deltaK));
+
+            $ts->setGost(false);
+            $ts->setSodelujoc(FALSE);
+            $ts->setZasedenost(false);
+            $ts->setVirtZasedenost(false);
+            $ts->setUra(null);
+            $object->terminiStoritve->add($ts); // verjetno to ni potrebno
+            $terminStoritveR->create($ts);
+        }
+        /*
+         * kreiram termine storitve za sodelujoče
+         */
+        foreach ($sodelujocIds as $sodelujocId) {
+            $oseba = $osebaR->findOneById($sodelujocId);
+            $this->expect($oseba, "Oseba sodelujoč ($sodelujocId) ne obstaja", 1000590);
+
+            $ts = new \Prisotnost\Entity\TerminStoritve();
+            $ts->setDogodek($object);
+            $ts->setSodelujoc(TRUE);
+            $ts->setOseba($oseba);
+
+            $deltaZ = $deltaZacetek;
+            $ts->setPlaniranZacetek($this->dodajInterval($object->getZacetek(), $deltaZ));
+
+            $deltaK = $deltaKonec;
+            $ts->setPlaniranKonec($this->dodajInterval($object->getKonec(), $deltaK));
+
             $ts->setDezurni(false);
             $ts->setGost(false);
             $ts->setZasedenost(false);

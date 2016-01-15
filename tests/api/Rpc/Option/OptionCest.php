@@ -70,15 +70,13 @@ class OptionCest
 //        $I->assertEquals($pricakovano, $opt);
         $I->seeResponseIsJson();
         $I->assertEquals(-60, $opt['delPreZac']['value']);
+        $I->assertEquals(-60, $opt['delPreZacTeh']['value']);
         $I->assertEquals(0, $opt['delPreKon']['value']);
+        $I->assertEquals(0, $opt['delPreKonTeh']['value']);
         $I->assertEquals(0, $opt['delVajZac']['value']);
         $I->assertEquals(0, $opt['delVajKon']['value']);
-        $I->assertEquals(0, $opt['delPreZacTeh']['value']);
-        $I->assertEquals(0, $opt['delPreKonTeh']['value']);
-        $I->assertEquals(0, $opt['delVajZactTeh']['value']);
+        $I->assertEquals(0, $opt['delVajZacTeh']['value']);
         $I->assertEquals(0, $opt['delVajKonTeh']['value']);
-
-        $I->fail('$$');
     }
 
     /**
@@ -169,7 +167,7 @@ class OptionCest
     public function zamenjajVrednostUserOpcije(ApiTester $I)
     {
 
-        $odg = $I->successfullyCallRpc($this->rpcUrl, 'C', ["name"  => "test1.barva.ozadja",
+        $odg = $I->successfullyCallRpc($this->rpcUrl, 'setUserOption', ["name"  => "test1.barva.ozadja",
             "value" => "nova userjeva vrednost"]);
         $I->assertNotEmpty($odg);
         $I->assertTrue($odg);

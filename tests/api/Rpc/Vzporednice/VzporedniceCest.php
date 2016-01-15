@@ -57,47 +57,6 @@ class VzporedniceCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vesna, \IfiTest\AuthPage::$vesnaPass);
     }
 
-    /**
-     * vrne vrednosti subarray-ev v array z nivojem manj
-     * npr:
-     *  [[1, 2, 3], [ 4, 5]]     =>   [1,2,3,4,5]
-     * 
-     * @param array $resp
-     * @return array
-     */
-    private function subarrayValuesToArray(array $polje)
-    {
-        codecept_debug(__FUNCTION__);
-
-        $resultA = [];
-        foreach ($polje as $p) {
-            foreach ($p as $v) {
-                array_push($resultA, $v);
-            }
-        }
-        return $resultA;
-    }
-
-    /**
-     * vrne vrednosti ključev v subarrayih
-     * npr:
-     *  [ ["a"=> 1], ["b"=> 2]]     =>   [ "a", "b"]
-     * 
-     * @param array $resp
-     * @return array
-     */
-    private function subarraysKeys(array $polje)
-    {
-        codecept_debug(__FUNCTION__);
-
-        $resultA = [];
-        foreach ($polje as $p) {
-            foreach ($p as $k => $v) {
-                array_push($resultA, $k);
-            }
-        }
-        return $resultA;
-    }
 
     /**
      * metoda, ki se večkrat kliče zaradi preverjanja rezultatov rpc klica vzporednic
@@ -153,17 +112,18 @@ class VzporedniceCest
     /**
      * Iz Rpc response-a  izlušči iz konfliktnih funkcij zasedene oz. proste osebe
      * 
+     * @param ApiTester $I
      * @param type $resp
      * @param boolean $zasedene     
      * @return array
      */
-    private function osebeIds($resp, $zasedene = true)
+    private function osebeIds(ApiTester $I,$resp, $zasedene = true)
     {
         codecept_debug(__FUNCTION__);
 
         $kf = array_column($resp['data'], "konfliktneFunkcije");
 
-        $zasOsA = $this->subarrayValuesToArray($kf);
+        $zasOsA = $I->subarrayValuesToArray($kf);
 
         if ($zasedene) {
             $colName = "zasedeneOsebe";
@@ -171,7 +131,7 @@ class VzporedniceCest
             $colName = "nezasedeneOsebe";
         }
         $zasOsA      = array_column($zasOsA, $colName);
-        $zasOsebe    = $this->subarrayValuesToArray($zasOsA);
+        $zasOsebe    = $I->subarrayValuesToArray($zasOsA);
         $zasOsebeIds = array_column($zasOsebe, "id");
         return $zasOsebeIds;
     }
@@ -406,9 +366,9 @@ class VzporedniceCest
         /**
          * preverimo če so nekatere osebe v konfliktnih funkcijah zasedene oz. proste
          */
-        $zasOsebeIds   = $this->osebeIds($respV, true);
+        $zasOsebeIds   = $this->osebeIds($I, $respV, true);
         codecept_debug($zasOsebeIds);
-        $nezasOsebeIds = $this->osebeIds($respV, false);
+        $nezasOsebeIds = $this->osebeIds($I, $respV, false);
         codecept_debug($nezasOsebeIds);
         $I->assertContains($this->lookOsebaD['id'], $zasOsebeIds);
         $I->assertNotContains($this->lookOsebaD['id'], $nezasOsebeIds);
@@ -431,9 +391,9 @@ class VzporedniceCest
         /**
          * preverimo če so nekatere osebe v konfliktnih funkcijah zasedene oz. proste
          */
-        $zasOsebeIds   = $this->osebeIds($respP, true);
+        $zasOsebeIds   = $this->osebeIds($I, $respP, true);
         codecept_debug($zasOsebeIds);
-        $nezasOsebeIds = $this->osebeIds($respP, false);
+        $nezasOsebeIds = $this->osebeIds($I, $respP, false);
         codecept_debug($nezasOsebeIds);
         $I->assertContains($this->lookOsebaD['id'], $zasOsebeIds);
         $I->assertNotContains($this->lookOsebaD['id'], $nezasOsebeIds);
@@ -485,9 +445,9 @@ class VzporedniceCest
          */
         $I->assertNotEmpty($respV['error'], 'error');
         codecept_debug($respV['error']);
-        $tmpErrKeys = $this->subarraysKeys($respV['error']);
+        $tmpErrKeys = $I->subarraysKeys($respV['error']);
         codecept_debug($tmpErrKeys);
-        $I->assertContains($this->lookOsebaB['label'], $this->subarraysKeys($respV['error']));
+        $I->assertContains($this->lookOsebaB['label'], $I->subarraysKeys($respV['error']));
 
         /**
          * daj prekrivanja
@@ -501,9 +461,9 @@ class VzporedniceCest
         $I->assertNotEmpty($respP['error'], 'error');
         codecept_debug($respP['error']);
 
-        $I->assertContains($this->lookOsebaB['label'], $this->subarraysKeys($respV['error']));
+        $I->assertContains($this->lookOsebaB['label'], $I->subarraysKeys($respV['error']));
 
-        $I->assertContains($this->lookOsebaD['label'], $this->subarraysKeys($respV['error']));
+        $I->assertContains($this->lookOsebaD['label'], $I->subarraysKeys($respV['error']));
 
         /**
          * kontrola kombinacij
