@@ -575,13 +575,6 @@
     description: Zaposlitev - spreminjanje
 
 -
-    name: Zasedenost-read
-    description: Zasedenost - branje
--
-    name: Zasedenost-write
-    description: Zasedenost - spreminjanje
-
--
     name: ZvrstSurs-read
     description: ZvrstSurs - branje
 -

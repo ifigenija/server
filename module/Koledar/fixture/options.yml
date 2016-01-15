@@ -44,9 +44,9 @@
         400s: 
            label: Splošni dogodek           
            type: splošni
-        500s: 
-           label: Zasedenost           
-           type: zasedenost
+        600s: 
+           label: tehnični dogodek           
+           type: tehnicni
 -
     name: dogodek.delte
     description: 'Privzete vrednosti za delte terminov storitev glede na tipe dogodka v minutah'

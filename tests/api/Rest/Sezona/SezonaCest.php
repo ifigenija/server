@@ -40,9 +40,6 @@ class SezonaCest
     private $lookupSezonaUrl = '/lookup/sezona';
     private $lookUprizoritev1;
     private $lookUprizoritev2;
-    private $zasedenostUrl   = '/rest/zasedenost';
-    private $objZasedenost1;
-    private $objZasedenost2;
 
     public function _before(ApiTester $I)
     {
@@ -156,22 +153,6 @@ class SezonaCest
         $this->objDogodek2 = $ent               = array_pop($list);
         $I->assertNotEmpty($ent);
     }
-
-    /**
-     *  kreiramo zapis
-     * 
-     * @param ApiTester $I
-     */
-//    public function createZasedenost(ApiTester $I)
-//    {
-//        $data                = [
-//            'dogodek' => null,
-//        ];
-//        $this->objZasedenost1 = $ent                 = $I->successfullyCreate($this->zasedenostUrl, $data);
-//        $I->assertNotEmpty($ent['id']);
-//        codecept_debug($ent);
-//        $I->assertEquals($ent['dogodek'], null);
-//    }
 
     /**
      *  kreiramo zapis

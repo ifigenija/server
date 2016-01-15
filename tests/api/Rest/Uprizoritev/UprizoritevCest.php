@@ -668,12 +668,15 @@ class UprizoritevCest
      */
     public function update(ApiTester $I)
     {
-        $ent         = $this->obj;
-        $ent['opis'] = 'yy';
+        $data = $I->successfullyGet($this->restUrl, $this->obj['id']);
+                
+        $data         = $this->obj;
+        $data['opis'] = 'yy';
+        codecept_debug($data);
+        
+        $this->obj = $ent      = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
 
-        $this->obj = $entR      = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
-
-        $I->assertEquals($entR['opis'], 'yy');
+        $I->assertEquals($ent['opis'], 'yy');
     }
 
     /**

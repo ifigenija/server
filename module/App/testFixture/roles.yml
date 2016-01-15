@@ -168,8 +168,6 @@
         - Zapis-write
         - Zaposlitev-read
         - Zaposlitev-write
-        - Zasedenost-read
-        - Zasedenost-write
         - ZvrstSurs-read
         - ZvrstSurs-write
         - ZvrstUprizoritve-read

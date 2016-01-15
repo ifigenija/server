@@ -44,7 +44,6 @@ class OsebaCest
     private $alternacijaUrl       = '/rest/alternacija';
     private $sodelovanjeUrl       = '/rest/sodelovanje';
     private $zaposlitevUrl        = '/rest/zaposlitev';
-    private $zasedenostUrl        = '/rest/zasedenost';
     private $dogodekUrl           = '/rest/dogodek';
     private $id;
     private $obj1;
@@ -1383,50 +1382,6 @@ class OsebaCest
     }
 
     /**
-     * @depends create
-     * 
-     * @param ApiTester $I
-     */
-    public function createVecZasedenosti(ApiTester $I)
-    {
-        $zacetek              = '2014-05-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
-        $data                 = [
-            'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
-            'oseba'   => $this->obj3['id'],
-            'title'   => "Zasedenost $zacetek",
-            'status'  => '200s',
-            'zacetek' => $zacetek,
-            'konec'   => '2014-05-07T14:00:00+0200',
-        ];
-        $this->objZasedenost1 = $ent                  = $I->successfullyCreate($this->zasedenostUrl, $data);
-        $I->assertGuid($ent['id']);
-
-        $zacetek              = '2014-06-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
-        $data                 = [
-            'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
-            'oseba'   => $this->obj2['id'],
-            'title'   => "Zasedenost $zacetek",
-            'status'  => '200s',
-            'zacetek' => $zacetek,
-            'konec'   => '2014-06-07T14:00:00+0200',
-        ];
-        $this->objZasedenost2 = $ent                  = $I->successfullyCreate($this->zasedenostUrl, $data);
-        $I->assertGuid($ent['id']);
-
-        $zacetek              = '2014-08-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
-        $data                 = [
-            'dogodek' => null, // zaenkrat prazno, relacija se vzpostavi po kreiranju zapisa Dogodek
-            'oseba'   => $this->obj2['id'],
-            'title'   => "Zasedenost $zacetek",
-            'status'  => '200s',
-            'zacetek' => $zacetek,
-            'konec'   => '2014-08-07T14:00:00+0200',
-        ];
-        $this->objZasedenost3 = $ent                  = $I->successfullyCreate($this->zasedenostUrl, $data);
-        $I->assertGuid($ent['id']);
-    }
-
-    /**
      * preberemo relacije
      * 
      * @depends createVecTelefonskih
@@ -1644,22 +1599,6 @@ class OsebaCest
         $I->assertEquals(2, count($resp));
 
         $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "kontaktneOsebe", $this->objKontaktna1['id']);
-        $I->assertEquals(1, count($resp));
-    }
-
-    /**
-     * preberemo relacije
-     * 
-     * @depends createVecZasedenosti
-     * 
-     * @param ApiTester $I
-     */
-    public function preberiRelacijeZZasedenostmi(ApiTester $I)
-    {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "zasedenosti", "");
-        $I->assertEquals(2, count($resp));
-
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "zasedenosti", $this->objZasedenost2['id']);
         $I->assertEquals(1, count($resp));
     }
 

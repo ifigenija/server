@@ -36,7 +36,6 @@ return [
             'Rest\sezona'          => 'Max\Factory\RestControllerFactory',
             'Relation\sezona'      => 'Max\Factory\ToManyControllerFactory',
             'Rest\vaja'            => 'Max\Factory\RestControllerFactory',
-            'Rest\zasedenost'      => 'Max\Factory\RestControllerFactory',
             'Rest\tipVaje'         => 'Max\Factory\RestControllerFactory',
             'Rest\Praznik'         => 'Max\Factory\RestControllerFactory',
             'Rest\dogodekTehnicni' => 'Max\Factory\RestControllerFactory',

@@ -139,7 +139,7 @@ class DogodekTehnicniCest
         $I->assertEquals($dogodek['status'], $data['status'], 'status');
         $I->assertEquals($dogodek['zacetek'], $data['zacetek'], 'zacetek');
         $I->assertEquals($dogodek['konec'], $data['konec'], 'konec');
-        $I->assertEquals($dogodek['prostor'], $data['prostor'], 'prostor');
+        $I->assertEquals($dogodek['prostor']['id'], $data['prostor'], 'prostor');
         $I->assertEquals($dogodek['sezona'], $data['sezona'], 'sezona');
 
         /*

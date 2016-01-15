@@ -151,7 +151,7 @@ class DogodekSplosniCest
         $I->assertEquals($dogodek['status'], $data['status'], 'status');
         $I->assertEquals($dogodek['zacetek'], $data['zacetek'], 'zacetek');
         $I->assertEquals($dogodek['konec'], $data['konec'], 'konec');
-        $I->assertEquals($dogodek['prostor'], $data['prostor'], 'prostor');
+        $I->assertEquals($dogodek['prostor']['id'], $data['prostor'], 'prostor');
         $I->assertEquals($dogodek['sezona'], $data['sezona'], 'sezona');
 
         $zacetek       = '2014-06-07T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral

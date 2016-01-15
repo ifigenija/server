@@ -45,13 +45,13 @@ class DogodekFixture
         $rep = $manager->getRepository('Koledar\Entity\Dogodek');
 
         $predstavaId  = $v[8] ? $this->getReference($v[8]) : null;
-        $zasedenostId = $v[9] ? $this->getReference($v[9]) : null;
+//        $zasedenostId = $v[9] ? $this->getReference($v[9]) : null;
         $vajaId       = $v[10] ? $this->getReference($v[10]) : null;
         $gostovanjeId = $v[11] ? $this->getReference($v[11]) : null;
         $splosniId    = $v[12] ? $this->getReference($v[12]) : null;
         $o            = $rep->findOneBy([
             "predstava"  => $predstavaId,
-            "zasedenost" => $zasedenostId,
+//            "zasedenost" => $zasedenostId,
             "vaja"       => $vajaId,
             "gostovanje" => $gostovanjeId,
             "splosni"    => $splosniId,
@@ -60,7 +60,7 @@ class DogodekFixture
         if (!$o) {
             $o   = new \Koledar\Entity\Dogodek();
             $o->setPredstava($predstavaId);
-            $o->setZasedenost($zasedenostId);
+//            $o->setZasedenost($zasedenostId);
             $o->setVaja($vajaId);
             $o->setGostovanje($gostovanjeId);
             $o->setSplosni($splosniId);

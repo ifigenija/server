@@ -29,8 +29,6 @@ class TimeZoneCest
     private $lookupSezonaUrl = '/lookup/sezona';
     private $lookUprizoritev1;
     private $lookUprizoritev2;
-    private $zasedenostUrl   = '/rest/zasedenost';
-    private $objZasedenost;
 
     public function _before(ApiTester $I)
     {

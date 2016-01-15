@@ -30,7 +30,6 @@ forms:
 #            - trrji
 #            - alternacije
 #            - pogodbe
-#            - zasedenost
         hydrator: 
             exclude: 
             - alternacije
@@ -158,10 +157,6 @@ relation:
             hydrator:
                 lookups:
                     - oseba
-                exclude: []
-        zasedenosti:
-            enabled: true
-            hydrator:
                 exclude: []
         avtorjiBesedil:
             enabled: true

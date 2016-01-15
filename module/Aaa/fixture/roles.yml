@@ -66,8 +66,6 @@
 #        - Uprizoritev-write
 #        - Vaja-read
 #        - Vaja-write
-#        - Zasedenost-read
-#        - Zasedenost-write
 #        - ZvrstSurs-read
 #        - ZvrstUprizoritve-read
 #- 
@@ -132,7 +130,6 @@
 #        - Sezona-read
 #        - TipFunkcije-read
 #        - Vaja-read
-#        - Zasedenost-read
 #        - ZvrstSurs-read
 #        - ZvrstUprizoritve-read
 #- 

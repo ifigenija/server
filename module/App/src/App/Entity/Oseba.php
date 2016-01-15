@@ -267,14 +267,6 @@ class Oseba
     protected $zaposlitve;
 
     /**
-     * @ORM\OneToMany(targetEntity="Koledar\Entity\Zasedenost", mappedBy="oseba")
-     * @Max\I18n(label="Zasedenost", description="Zasedenost osebe")   
-     * @Max\Ui(type="tomany")
-     * @var <Zasedenosti>
-     */
-    protected $zasedenosti;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PostniNaslov")
      * @ORM\JoinColumn(name="naslov_id", referencedColumnName="id")
      * @Max\I18n(label="oseba.naslov", description="oseba.d.naslov")
@@ -290,7 +282,6 @@ class Oseba
         $this->alternacije    = new ArrayCollection();
         $this->pogodbe        = new ArrayCollection();
         $this->zaposlitve     = new ArrayCollection();
-        $this->zasedenosti    = new ArrayCollection();
         $this->avtorjiBesedil = new ArrayCollection();
     }
 
@@ -445,11 +436,6 @@ class Oseba
     public function getZaposlitve()
     {
         return $this->zaposlitve;
-    }
-
-    public function getZasedenosti()
-    {
-        return $this->zasedenosti;
     }
 
     public function getNaslov()
@@ -610,12 +596,6 @@ class Oseba
     public function setZaposlitve($zaposlitve)
     {
         $this->zaposlitve = $zaposlitve;
-        return $this;
-    }
-
-    public function setZasedenosti($zasedenosti)
-    {
-        $this->v = $zasedenosti;
         return $this;
     }
 

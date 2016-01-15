@@ -21,7 +21,6 @@ use ApiTester;
  * 
  * relacije z drugimi entitetami
  *      - predstava
- *      - zasedenost
  *      - vaja
  *      - gostovanje
  *      - prostor
@@ -41,7 +40,6 @@ class DogodekCest
 
     private $restUrl           = '/rest/dogodek';
     private $predstavaUrl      = '/rest/predstava';
-    private $zasedenostUrl     = '/rest/zasedenost';
     private $vajaUrl           = '/rest/vaja';
     private $gostovanjeUrl     = '/rest/gostovanje';
     private $dogodekUrl        = '/rest/dogodek';
@@ -64,7 +62,6 @@ class DogodekCest
     private $objPredstava5;
     private $objPredstava6;
     private $objPredstava7;
-    private $objZasedenost;
     private $objVaja1;
     private $objVaja2;
     private $objVaja3;
@@ -339,7 +336,6 @@ class DogodekCest
 //        $I->assertEquals($ent['termin'], 'uu');
         $I->assertEquals($ent['vaja'], $this->objVaja1['id']);
         $I->assertEquals($ent['predstava'], null);
-        $I->assertEquals($ent['zasedenost'], null);
         $I->assertEquals($ent['gostovanje'], null);
         $I->assertEquals($ent['splosni'], null);
 

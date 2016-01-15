@@ -30,7 +30,6 @@ class Dogodek
     const VAJA                   = "200s";
     const GOSTOVANJE             = "300s";
     const SPLOSNO                = "400s";
-    const ZASEDENOST             = "500s";
     const TEHNICNI               = "600s";
 //    const DOLGOROCNO    = "100s";
     const PLANIRAN               = "200s";
@@ -117,15 +116,6 @@ class Dogodek
     protected $predstava;
 
     /**
-     * @ORM\OneToOne(targetEntity="Koledar\Entity\Zasedenost", inversedBy="dogodek")
-     * @ORM\JoinColumn(name="zasedenost_id", referencedColumnName="id", unique=true)
-     * @Max\I18n(label = "dogodek.zasedenost", description = "dogodek.d.zasedenost")
-     * @Max\Ui(type="toone")
-     * @var Zasedenost
-     */
-    protected $zasedenost;
-
-    /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Vaja", inversedBy="dogodek")
      * @ORM\JoinColumn(name="vaja_id", referencedColumnName="id", unique=true)
      * @Max\I18n(label = "dogodek.vaja", description = "dogodek.d.vaja")
@@ -192,7 +182,7 @@ class Dogodek
      * @var \Koledar\Entity\Sezona
      */
     protected $sezona;
-    private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::SPLOSNO, self::ZASEDENOST, self::TEHNICNI];
+    private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::SPLOSNO, self::TEHNICNI];
 
     public function __construct()
     {
@@ -222,11 +212,6 @@ class Dogodek
             $this->expect($this->splosni, "Dogodek razreda splošno zahteva referenco dogodekSplosni", 1001707);
             $this->expect($this->prostor, "Dogodek razreda splošno zahteva referenco Prostor", 1001050);
         }
-        if ($this->razred === self::ZASEDENOST) {
-            $this->expect($this->zasedenost, "Dogodek razreda zasedenost zahteva referenco zasedenost", 1001708);
-            $this->expect($this->terminiStoritve->count() === 0, "Dogodek razreda zasedenost ne dovoljuje terminov storitve", 1001051);
-            $this->expect(!$this->prostor, "Dogodek razreda zasedenost ne dovoljuje reference Prostor", 1001052);
-        }
         if ($this->razred === self::TEHNICNI) {
             $this->expect($this->tehnicni, "Dogodek razreda tehnični zahteva referenco na tehnični", 1001700);
         }
@@ -236,9 +221,6 @@ class Dogodek
             $i++;
         }
         if ($this->predstava) {
-            $i++;
-        }
-        if ($this->zasedenost) {
             $i++;
         }
         if ($this->gostovanje) {
@@ -273,7 +255,7 @@ class Dogodek
     /**
      * Vrne podrobne podatke od dogodku, sktruktura glede na vrsto dogodka
      *
-     * @return DogodekSplosni|Gostovanje|Predstava|Vaja|Zasedenost
+     * @return DogodekSplosni|Gostovanje|Predstava|Vaja
      */
     public function getPodrobno()
     {
@@ -284,8 +266,6 @@ class Dogodek
                 return $this->vaja;
             case self::GOSTOVANJE:
                 return $this->gostovanje;
-            case self::ZASEDENOST:
-                return $this->zasedenost;
             case self::SPLOSNO:
                 return $this->splosni;
         }
@@ -450,24 +430,6 @@ class Dogodek
     public function setPredstava(Predstava $predstava = null)
     {
         $this->predstava = $predstava;
-        return $this;
-    }
-
-    /**
-     * @return Zasedenost
-     */
-    public function getZasedenost()
-    {
-        return $this->zasedenost;
-    }
-
-    /**
-     * @param Zasedenost $zasedenost
-     * @return Dogodek
-     */
-    public function setZasedenost(Zasedenost $zasedenost = null)
-    {
-        $this->zasedenost = $zasedenost;
         return $this;
     }
 
