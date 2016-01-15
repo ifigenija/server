@@ -111,6 +111,18 @@ class TerminStoritve
     protected $gost;
 
     /**
+     * Ali je sodelujoča oseba, ki ni alternacija in ni ne gost ne dežurni
+     * 
+     * npr. povabljen na Tehnični dogodek ali kakšen drug Dogodek
+     * 
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Max\I18n(label="terminStoritve.sodelujoc",  description="terminStoritve.d.sodelujoc")
+     * @Max\Ui(type="boolcheckbox")
+     * @var boolean
+     */
+    protected $sodelujoc;
+
+    /**
      * Ali je zasedenost osebe?
      * 
      * @ORM\Column(type="boolean", nullable=true)
@@ -159,8 +171,11 @@ class TerminStoritve
         if ($this->virtZasedenost) {
             $i++;
         }
+        if ($this->sodelujoc) {
+            $i++;
+        }
         $this->expect($i === 1
-                , "Napačno število referenc ($i) v terminu storitve. Dovoljen natanko eden od alternacija/dezurni/gost/zasedenost/virt.zasedenost"
+                , "Napačno število referenc ($i) v terminu storitve. Dovoljen natanko eden od alternacija/dezurni/gost/sodelujoč/zasedenost/virt.zasedenost"
                 , 1001080);
         $this->expect($this->planiranZacetek, "Planiran začetek  mora obstajati", 1001084);
         $this->expect($this->planiranKonec, "Planiran konec mora obstajati", 1001085);
@@ -168,12 +183,16 @@ class TerminStoritve
 
         if ($this->alternacija) {
             $this->oseba = $this->alternacija->getOseba();
+            /**
+             * $$preveri, če je alternacija od uprizoritve dogodka
+             * podobno preveri tudi, da je gost le pri vaji in dežurni na predstavi
+             */
         }
-        if ($this->alternacija || $this->gost || $this->dezurni) {
+        if ($this->alternacija || $this->gost || $this->dezurni || $this->sodelujoc) {
             /*
              * izračunamo delti glede na čase v dogodku
              */
-            $this->expect($this->dogodek, "Dogodek pri takem tipu ermina storitve mora biti prisoten", 1001081);
+            $this->expect($this->dogodek, "Dogodek pri takem tipu termina storitve mora biti prisoten", 1001081);
             $this->expect($this->dogodek->getZacetek(), "Začetek dogodka mora obstajati", 1001082);
 
             /*
@@ -326,6 +345,17 @@ class TerminStoritve
     function setUra(\Prisotnost\Entity\Ura $ura = null)
     {
         $this->ura = $ura;
+        return $this;
+    }
+
+    function getSodelujoc()
+    {
+        return $this->sodelujoc;
+    }
+
+    function setSodelujoc($sodelujoc)
+    {
+        $this->sodelujoc = $sodelujoc;
         return $this;
     }
 

@@ -173,7 +173,7 @@ class Dogodek
     protected $prostor;
 
     /**
-     * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="dogodek")
+     * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="dogodek", orphanRemoval=true)
      * @var <TerminiStoritve>
      */
     protected $terminiStoritve;

@@ -31,6 +31,10 @@ class DogodekTehnicniCest
     private $lookSezona1;
     private $lookSezona2;
     private $lookSezona3;
+    private $lookOseba1;
+    private $lookOseba2;
+    private $lookOseba3;
+    private $lookOseba4;
 
     public function _before(ApiTester $I)
     {
@@ -40,6 +44,25 @@ class DogodekTehnicniCest
     public function _after(ApiTester $I)
     {
         
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupOsebe(ApiTester $I)
+    {
+        $this->lookOseba1 = $look             = $I->lookupEntity("oseba", "0001", false);
+        codecept_debug($look);
+        $I->assertGuid($look['id']);
+
+        $this->lookOseba2 = $look             = $I->lookupEntity("oseba", "0002", false);
+        codecept_debug($look);
+        $I->assertGuid($look['id']);
+
+        $this->lookOseba3 = $look             = $I->lookupEntity("oseba", "0003", false);
+        codecept_debug($look);
+        $I->assertGuid($look['id']);
     }
 
     /**
@@ -81,8 +104,8 @@ class DogodekTehnicniCest
      */
     public function create(ApiTester $I)
     {
-        $zacetek    = '2014-05-07T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
-        $data       = [
+        $zacetek       = '2014-05-07T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data          = [
             'zacetek' => $zacetek,
             'title'   => "Tehnični $zacetek",
             'status'  => '200s',
@@ -90,7 +113,11 @@ class DogodekTehnicniCest
             'prostor' => $this->lookProstor1['id'],
             'sezona'  => $this->lookSezona1['id'],
         ];
-        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $parSodelujoci = 'sodelujoc[]=' . $this->lookOseba1['id'] . '&'
+                . 'sodelujoc[]=' . $this->lookOseba2['id'] . '&'
+                . 'sodelujoc[]=' . $this->lookOseba3['id'] . '&';
+        $parDelte      = 'deltaZac=21&';
+        $this->obj1    = $ent           = $I->successfullyCreate($this->restUrl . "?" . $parSodelujoci . $parDelte, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
         codecept_debug($data);
@@ -115,8 +142,11 @@ class DogodekTehnicniCest
         $I->assertEquals($dogodek['prostor'], $data['prostor'], 'prostor');
         $I->assertEquals($dogodek['sezona'], $data['sezona'], 'sezona');
 
-        $zacetek    = '2014-06-07T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
-        $data       = [
+        /*
+         * kreiram še en zapis
+         */
+        $zacetek       = '2014-06-07T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data          = [
             'zacetek' => $zacetek,
             'title'   => "Tehnični $zacetek",
             'status'  => '200s',
@@ -124,7 +154,10 @@ class DogodekTehnicniCest
             'prostor' => $this->lookProstor1['id'],
             'sezona'  => $this->lookSezona1['id'],
         ];
-        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $parSodelujoci = 'sodelujoc[]=' . $this->lookOseba1['id'] . '&'
+                . 'sodelujoc[]=' . $this->lookOseba3['id'] . '&';
+        $parDelte      = 'deltaKon=32&';
+        $this->obj2    = $ent           = $I->successfullyCreate($this->restUrl . "?" . $parSodelujoci . $parDelte, $data);
         $I->assertGuid($ent['id']);
     }
 

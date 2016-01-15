@@ -166,7 +166,7 @@ class DodatekCest
         ];
         $resp = $I->failToCreate($this->restUrl, $data);
         codecept_debug($resp);
-        $I->assertEquals(1001701, $resp[0]['code']);
+        $I->assertEquals(1001731, $resp[0]['code']);
     }
 
     /**

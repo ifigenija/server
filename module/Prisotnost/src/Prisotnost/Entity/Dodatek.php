@@ -68,7 +68,7 @@ class Dodatek
              */
             if ($this->getId() != $dod->getId()) {
                 $this->expect($this->tipdodatka != $dod->getTipdodatka()
-                        , "Prisotnost ne sme imeti 2 dodatka z istim tipom", 1001731);
+                        , "Ure ne smejo imeti 2 dodatka z istim tipom", 1001731);
             }
         }
     }

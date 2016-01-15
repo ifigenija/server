@@ -599,4 +599,45 @@ class ApiHelper
         return $this->getModule('PhpBrowser')->_getUrl();
     }
 
+    /**
+     * vrne vrednosti subarray-ev v array z nivojem manj
+     * npr:
+     *  [[1, 2, 3], [ 4, 5]]     =>   [1,2,3,4,5]
+     * 
+     * @param array $resp
+     * @return array
+     */
+    public function subarrayValuesToArray(array $polje)
+    {
+        codecept_debug(__FUNCTION__);
+
+        $resultA = [];
+        foreach ($polje as $p) {
+            foreach ($p as $v) {
+                array_push($resultA, $v);
+            }
+        }
+        return $resultA;
+    }
+    /**
+     * vrne vrednosti ključev v subarrayih
+     * npr:
+     *  [ ["a"=> 1], ["b"=> 2]]     =>   [ "a", "b"]
+     * 
+     * @param array $resp
+     * @return array
+     */
+    public function subarraysKeys(array $polje)
+    {
+        codecept_debug(__FUNCTION__);
+
+        $resultA = [];
+        foreach ($polje as $p) {
+            foreach ($p as $k => $v) {
+                array_push($resultA, $k);
+            }
+        }
+        return $resultA;
+    }
+
 }
