@@ -44,6 +44,9 @@ class PredstavaCest
     private $lookUprizoritev1;
     private $lookUprizoritev2;
     private $lookUprizoritev3;
+    private $altUpr2Ids;
+    private $altUpr1Ids;
+    private $altUpr3Ids;
     private $objGostovanje;
     private $objDrzava;
     private $lookProstor1;
@@ -81,17 +84,59 @@ class PredstavaCest
     }
 
     /**
+     * vrne vrednosti subarray-ev v array z nivojem manj
+     * npr:
+     *  [[1, 2, 3], [ 4, 5]]     =>   [1,2,3,4,5]
+     * 
+     * @param array $resp
+     * @return array
+     */
+    private function subarrayValuesToArray(array $polje)
+    {
+        codecept_debug(__FUNCTION__);
+
+        $resultA = [];
+        foreach ($polje as $p) {
+            foreach ($p as $v) {
+                array_push($resultA, $v);
+            }
+        }
+        return $resultA;
+    }
+
+    /**
      * 
      * @param ApiTester $I
      */
     public function lookupUprizoritev(ApiTester $I)
     {
-        $this->lookUprizoritev1 = $look                   = $I->lookupEntity("uprizoritev", "0001", false);
-        $I->assertNotEmpty($look);
-        $this->lookUprizoritev2 = $look                   = $I->lookupEntity("uprizoritev", "0002", false);
-        $I->assertNotEmpty($look);
+        $this->lookUprizoritev1 = $look                   = $I->lookupEntity("uprizoritev", "0002", false);
+        $I->assertGuid($look['id']);
+        /*
+         * še poiščemo vse pripadajoče alternacije
+         */
+        $upr                    = $I->successfullyGet($this->uprizoritevUrl, $look ['id']);
+        $this->altUpr1Ids       = $altUpr                 = array_column($this->subarrayValuesToArray(array_column($upr['funkcije'], 'alternacije')), 'id');
+        codecept_debug($altUpr);
+
+        $this->lookUprizoritev2 = $look                   = $I->lookupEntity("uprizoritev", "0001", false);
+        codecept_debug($look);
+        $I->assertGuid($look['id']);
+        /*
+         * še poiščemo vse pripadajoče alternacije
+         */
+        $upr                    = $I->successfullyGet($this->uprizoritevUrl, $look ['id']);
+        $this->altUpr2Ids       = $altUpr                 = array_column($this->subarrayValuesToArray(array_column($upr['funkcije'], 'alternacije')), 'id');
+        codecept_debug($altUpr);
+
         $this->lookUprizoritev3 = $look                   = $I->lookupEntity("uprizoritev", "0003", false);
-        $I->assertNotEmpty($look);
+        $I->assertGuid($look['id']);
+        /*
+         * še poiščemo vse pripadajoče alternacije
+         */
+        $upr                    = $I->successfullyGet($this->uprizoritevUrl, $look ['id']);
+        $this->altUpr3Ids       = $altUpr                 = array_column($this->subarrayValuesToArray(array_column($upr['funkcije'], 'alternacije')), 'id');
+        codecept_debug($altUpr);
     }
 
     /**
@@ -190,8 +235,9 @@ class PredstavaCest
      */
     public function create(ApiTester $I)
     {
-        $zacetek    = '2014-05-07T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
-        $data       = [
+        $I->assertTrue(true, '$$ 1');
+        $zacetek = '2014-05-07T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data    = [
             'zaporedna'    => 6,
             'zaporednaSez' => 3,
             'uprizoritev'  => $this->lookUprizoritev1['id'],
@@ -205,13 +251,30 @@ class PredstavaCest
 //            'gostovanje'  => $this->objGostovanje['id'],
 //            'dogodek'     => NULL,
         ];
-        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertTrue(true, '$$ 2');
+
+
+        /*
+         * pripravimo parametre alternacij, npr. prve 3 te uprizoritve
+         */
+        $parAlternacije = '';   //init
+        $I->assertTrue(true, '$$ 3');
+        for ($i = 1; $i <= 3; $i++) {
+            $I->assertTrue(true, "$i $$ 3.1");
+            codecept_debug($this->altUpr1Ids);
+            $parAlternacije .= 'alternacija[]=' . $this->altUpr1Ids[$i] . '&';
+        }
+        $I->assertTrue(true, '$$ 4');
+        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl . "?" . $parAlternacije, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
         codecept_debug($data);
         $I->assertEquals($ent['zaporedna'], $data['zaporedna']);
         $I->assertEquals($ent['zacetek'], $data['zacetek']);
         $I->assertEquals($ent['konec'], $data['konec']);
+
+        $I->fail('$$');
+
 
         /**
          * preveri dogodek
@@ -264,7 +327,7 @@ class PredstavaCest
      */
     public function update(ApiTester $I)
     {
-        $ent             = $this->obj1;
+        $ent          = $this->obj1;
         $ent['title'] = 'uu';
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);

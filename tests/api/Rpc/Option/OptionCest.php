@@ -35,7 +35,6 @@ class OptionCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
     }
 
-    
     /**
      * inicializira bazo  glede na DumpFunctional.sql
      * 
@@ -47,7 +46,6 @@ class OptionCest
         $I->initDB();
     }
 
-    
     /**
      *  -  getOptions  defaultValue 
      * 
@@ -62,6 +60,25 @@ class OptionCest
         $I->assertNotEmpty($opt);
         $I->assertEquals($pricakovano, $opt);
         $I->seeResponseIsJson();
+
+
+//  pričakujemo enako, kot smo nastavili v fixture-ju
+        $pricakovano = array("privzeta trojka");
+
+        $opt = $I->successfullyCallRpc($this->rpcUrl, 'getOptions', ["name" => "dogodek.delte"]);
+        codecept_debug($opt);
+//        $I->assertEquals($pricakovano, $opt);
+        $I->seeResponseIsJson();
+        $I->assertEquals(-60, $opt['delPreZac']['value']);
+        $I->assertEquals(0, $opt['delPreKon']['value']);
+        $I->assertEquals(0, $opt['delVajZac']['value']);
+        $I->assertEquals(0, $opt['delVajKon']['value']);
+        $I->assertEquals(0, $opt['delPreZacTeh']['value']);
+        $I->assertEquals(0, $opt['delPreKonTeh']['value']);
+        $I->assertEquals(0, $opt['delVajZactTeh']['value']);
+        $I->assertEquals(0, $opt['delVajKonTeh']['value']);
+
+        $I->fail('$$');
     }
 
     /**
@@ -152,7 +169,7 @@ class OptionCest
     public function zamenjajVrednostUserOpcije(ApiTester $I)
     {
 
-        $odg = $I->successfullyCallRpc($this->rpcUrl, 'setUserOption', ["name"  => "test1.barva.ozadja",
+        $odg = $I->successfullyCallRpc($this->rpcUrl, 'C', ["name"  => "test1.barva.ozadja",
             "value" => "nova userjeva vrednost"]);
         $I->assertNotEmpty($odg);
         $I->assertTrue($odg);
@@ -199,7 +216,7 @@ class OptionCest
         $resp = $I->failCallRpc($this->rpcUrl, 'getOptions', ["name" => "neobstojeca"]);
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
-        $I->assertEquals(1000403, $resp['code'], "opcije ne obstajajo" );
+        $I->assertEquals(1000403, $resp['code'], "opcije ne obstajajo");
     }
 
     //- setGlobalOption vrednosti ne more kreirati, ker je readonly
@@ -210,18 +227,18 @@ class OptionCest
             "value" => "onemogočena globalna opcija"]);
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
-        $I->assertEquals(1000402, $resp['code'], "opcija ni globalna" );
+        $I->assertEquals(1000402, $resp['code'], "opcija ni globalna");
     }
 
 //- setUserOption vrednosti ne more kreirati, ker ni perUser
     public function poskusiKreiratiOnemogocenoUserOpcijo(ApiTester $I)
     {
 
-        $resp= $I->failCallRpc($this->rpcUrl, 'setUserOption', ["name"  => "test5.notperUser",
+        $resp = $I->failCallRpc($this->rpcUrl, 'setUserOption', ["name"  => "test5.notperUser",
             "value" => "onemogočena user opcija"]);
         $I->assertNotEmpty($resp);
         $I->seeResponseIsJson();
-        $I->assertEquals(1000406, $resp['code'], "opcija ni user" );
+        $I->assertEquals(1000406, $resp['code'], "opcija ni user");
     }
 
 }
