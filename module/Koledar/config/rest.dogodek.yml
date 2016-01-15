@@ -54,6 +54,8 @@ lists:
                       multiple: true
                       value_options: @dogodek.razred
 hydrator:
+    lookups:
+        - prostor
     virtual:
        - name: uprizoritev
          type: lookup

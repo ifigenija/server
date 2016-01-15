@@ -207,9 +207,6 @@ class VajaCest
         $I->assertEquals($ent['prostor'], $data['prostor']);
         $I->assertEquals($ent['sezona'], $data['sezona']);
 
-
-        $I->fail('$$');
-
         /**
          * preveri dogodek
          */
@@ -220,7 +217,7 @@ class VajaCest
         $I->assertEquals($dogodek['status'], $data['status'], 'status');
         $I->assertEquals($dogodek['zacetek'], $data['zacetek'], 'zacetek');
         $I->assertEquals($dogodek['konec'], $data['konec'], 'konec');
-        $I->assertEquals($dogodek['prostor'], $data['prostor'], 'prostor');
+        $I->assertEquals($dogodek['prostor']['id'], $data['prostor'], 'prostor');
         $I->assertEquals($dogodek['sezona'], $data['sezona'], 'sezona');
 
 

@@ -50,7 +50,9 @@ forms:
             - producent
             - jeKoprodukcija
         hydrator: 
-           lookups: [ besedilo ]
+           lookups:
+               - besedilo
+               - maticniOder
            byValue:
                - funkcije
                - funkcije.alternacije

@@ -333,7 +333,7 @@ class DogodekCest
         $I->assertEquals($ent['status'], '200s');
         $I->assertEquals($ent['zacetek'], $this->zacetek1);
         $I->assertEquals($ent['konec'], $this->konec1);
-        $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
+        $I->assertEquals($ent['prostor']['id'], $this->lookProstor1['id']);
         $I->assertEquals($ent['sezona'], $this->lookSezona1['id']);
         $I->assertEquals($ent['razred'], '200s');
 //        $I->assertEquals($ent['termin'], 'uu');
