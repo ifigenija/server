@@ -207,6 +207,9 @@ class VajaCest
         $I->assertEquals($ent['prostor'], $data['prostor']);
         $I->assertEquals($ent['sezona'], $data['sezona']);
 
+
+        $I->fail('$$');
+
         /**
          * preveri dogodek
          */
