@@ -69,8 +69,8 @@ class PredstavaFixture
         $ref = $v[8] ? $this->getReference($v[8]) : null;
         $o->setSezona($ref);
 
-        $ref = $v[9] ? $this->getReference($v[9]) : null;
-        $o->setDezurni($ref);
+//        $ref = $v[9] ? $this->getReference($v[9]) : null;
+//        $o->setDezurni($ref);
 
         if ($nov) {
             $rep->create($o);

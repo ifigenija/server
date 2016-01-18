@@ -12,7 +12,6 @@ forms:
             - uprizoritev
             - gostovanje
             - objavljenZacetek
-            - dezurni
             - name: title
               type: text
               options:

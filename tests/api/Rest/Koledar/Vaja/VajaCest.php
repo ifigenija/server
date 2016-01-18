@@ -275,8 +275,8 @@ class VajaCest
         $parGosti   = 'gost[]=' . $this->lookOseba1['id'] . '&'
                 . 'gost[]=' . $this->lookOseba2['id'] . '&';
         $parDelte   = 'deltaZacTeh=22&deltaKonTeh=23&';
-        $parDezurni = 'dezurni[]=' . $this->lookOseba1['id'] ;
-        $resp = $I->failToCreate($this->restUrl . "?" . $parAlternacije, $data);
+        $parDezurni = 'dezurni[]=' . $this->lookOseba1['id'];
+        $resp       = $I->failToCreate($this->restUrl . "?" . $parAlternacije, $data);
         codecept_debug($resp);
         $I->assertEquals(1001090, $resp[0]['code']);
 
@@ -286,8 +286,6 @@ class VajaCest
         $resp = $I->failToCreate($this->restUrl . "?" . $parDezurni, $data);
         codecept_debug($resp);
         $I->assertEquals(1001092, $resp[0]['code']);
-        
-        $I->fail('$$')
     }
 
     /**
@@ -315,9 +313,10 @@ class VajaCest
     {
         $data          = $this->obj1;
         $data['title'] = 'yy';
+        codecept_debug($data);
         $this->obj1    = $ent           = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
         $I->assertEquals($ent['title'], $data['title']);
-
+        
         /**
          * preveri dogodek
          */
@@ -337,6 +336,9 @@ class VajaCest
         /*
          * $$ tu bi še lahko preveril čase terminov storitev
          */
+        
+        
+        
     }
 
     /**

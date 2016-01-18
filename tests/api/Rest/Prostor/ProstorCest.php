@@ -221,12 +221,17 @@ class ProstorCest
      */
     public function update(ApiTester $I)
     {
-        $ent          = $this->obj1;
-        $ent['naziv'] = 'yy';
+        $data          = $this->obj1;
+        $data['naziv'] = 'yy';
+        codecept_debug($data);
 
-        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $this->obj1 = $ent       = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
 
-        $I->assertEquals($entR['naziv'], 'yy');
+        $I->assertEquals($ent['naziv'], 'yy');
+
+        
+        
+        $I->fail('$$');
     }
 
     /**

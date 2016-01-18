@@ -243,6 +243,14 @@ class Oseba
     protected $alternacije;
 
     /**
+     * @ORM\OneToMany(targetEntity="Prisotnost\Entity\TerminStoritve", mappedBy="oseba")
+     * @Max\I18n(label="Termini storitev", description="Termini storitev")   
+     * @Max\Ui(type="tomany")
+     * @var <TerminiStoritev>
+     */
+    protected $terminiStoritev;
+
+    /**
      * @ORM\OneToMany(targetEntity="Produkcija\Entity\AvtorBesedila", mappedBy="oseba")
      * @Max\I18n(label="Avtorji besedil", description="Avtorji besedil")   
      * @Max\Ui(type="tomany")

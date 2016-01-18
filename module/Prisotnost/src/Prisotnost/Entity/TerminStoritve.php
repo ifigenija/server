@@ -79,7 +79,7 @@ class TerminStoritve
     protected $alternacija;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba", inversedBy="terminiStoritev")
      * @ORM\JoinColumn(name="oseba_id", referencedColumnName="id", nullable=false)
      * @Max\I18n(label="terminStoritve.oseba",  description="terminStoritve.d.oseba")
      * @Max\Ui(type="toone")

@@ -135,7 +135,6 @@ class Uprizoritev
      * v programu dela kot prizorišče
      * 
      * @ORM\ManyToOne(targetEntity="Prodaja\Entity\Prostor")
-     * @ORM\JoinColumn(name="maticniOder_id", referencedColumnName="id")
      * @Max\I18n(label="uprizoritev.maticniOder",  description="uprizoritev.d.maticniOder")
      * @Max\Ui(type="optionalselect",empty="Kjer koli")    //$$ rb zakaj select?
      * @var \Prodaja\Entity\Prostor
