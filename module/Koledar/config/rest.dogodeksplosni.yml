@@ -43,6 +43,8 @@ forms:
         hydrator:
             byValue:
                 - dogodek
+            lookups:
+                - dogodek.prostor
             virtual:
                 - name: zacetek
                   type: datetime
