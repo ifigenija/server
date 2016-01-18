@@ -232,8 +232,8 @@ class VajaCest
         /**
          * kreiramo še eno vajo
          */
-        $zacetek    = '2014-05-08T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
-        $data       = [
+        $zacetek        = '2014-05-08T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data           = [
             'tipvaje'     => NULL,
             'zaporedna'   => 2,
             'uprizoritev' => $this->lookUprizoritev1['id'],
@@ -290,6 +290,18 @@ class VajaCest
         codecept_debug($dogodek);
         $I->assertGuid($dogodek['id']);
         $I->assertEquals($dogodek['title'], $data['title'], 'title');
+
+
+        /*
+         * update čas - mora spremeniti čase terminov storitev glede na njihove delte
+         */
+        $data            = $this->obj2;
+        $data['zacetek'] = '2014-06-08T20:20:00+0200';
+        $data['konec']   = '2014-06-08T22:20:00+0200';
+        $this->obj2      = $ent             = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        /*
+         * $$ tu bi še lahko preveril čase terminov storitev
+         */
     }
 
     /**
@@ -305,7 +317,7 @@ class VajaCest
         codecept_debug($ent);
         $zacetek = '2014-05-07T10:00:00+0200';
         $I->assertGuid($ent['id']);
-        $I->assertEquals($ent['tipvaje'], $this->lookTipVaje1['id'],'tipvaje');
+        $I->assertEquals($ent['tipvaje'], $this->lookTipVaje1['id'], 'tipvaje');
         $I->assertEquals($ent['zaporedna'], 9);
         $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev1['id']);
         $I->assertEquals($ent['title'], "yy");

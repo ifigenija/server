@@ -291,8 +291,8 @@ class PredstavaCest
         $parDezurni = 'dezurni[]=' . $this->lookOseba1['id'] . '&'
                 . 'dezurni[]=' . $this->lookOseba2['id'] . '&'
                 . 'dezurni[]=' . $this->lookOseba3['id'] . '&';
-        $parDelte   = 'deltaZac=44&deltaKon=33&';
-        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl . "?" . $parAlternacije . $parDezurni .$parDelte, $data);
+        $parDelte   = 'deltaZac=-44&deltaKon=33&';
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl . "?" . $parAlternacije . $parDezurni . $parDelte, $data);
         $I->assertGuid($ent['id']);
     }
 
@@ -323,8 +323,18 @@ class PredstavaCest
         $ent['title'] = 'uu';
 
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
-
         $I->assertEquals($entR['title'], $ent['title']);
+
+        /*
+         * update čas - mora spremeniti čase terminov storitev glede na njihove delte
+         */
+        $data            = $this->obj2;
+        $data['zacetek'] = '2014-06-08T20:20:00+0200';
+        $data['konec']   = '2014-06-08T22:20:00+0200';
+        $this->obj2      = $ent             = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        /*
+         * $$ tu bi še lahko preveril čase terminov storitev
+         */
     }
 
     /**

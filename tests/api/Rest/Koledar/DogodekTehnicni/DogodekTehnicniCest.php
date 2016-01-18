@@ -186,11 +186,21 @@ class DogodekTehnicniCest
      */
     public function update(ApiTester $I)
     {
-        $ent           = $this->obj1;
-        $ent['status'] = '400s';
-        $this->obj1    = $entR          = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $data           = $this->obj1;
+        $data['status'] = '400s';
+        $this->obj1    = $ent          = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        $I->assertEquals($ent['status'], $data['status']);
 
-        $I->assertEquals($entR['status'], $ent['status']);
+        /*
+         * update čas - mora spremeniti čase terminov storitev glede na njihove delte
+         */
+        $data            = $this->obj2;
+        $data['zacetek'] = '2014-06-08T20:20:00+0200';
+        $data['konec']   = '2014-06-08T22:20:00+0200';
+        $this->obj2     = $ent           = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        /*
+         * $$ tu bi še lahko preveril čase terminov storitev
+         */
     }
 
     /**
