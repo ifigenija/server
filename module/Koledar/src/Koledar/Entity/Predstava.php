@@ -81,14 +81,6 @@ class Predstava
     protected $gostovanje;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Oseba")
-     * @Max\I18n(label = "predstava.dezurni", description = "predstava.d.dezurni")
-     * @Max\Ui(type="toone")
-     * @var \App\Entity\Oseba
-     */
-    protected $dezurni;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Abonmaji\Entity\Abonma", inversedBy="predstave")
      * @var <Abonmaji>
      */
@@ -249,17 +241,6 @@ class Predstava
     function setAbonmaji($abonmaji)
     {
         $this->abonmaji = $abonmaji;
-        return $this;
-    }
-
-    function getDezurni()
-    {
-        return $this->dezurni;
-    }
-
-    function setDezurni(\App\Entity\Oseba $dezurni = null)
-    {
-        $this->dezurni = $dezurni;
         return $this;
     }
 

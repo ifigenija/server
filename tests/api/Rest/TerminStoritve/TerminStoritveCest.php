@@ -36,11 +36,18 @@ class TerminStoritveCest
     private $uraUrl               = '/rest/ura';
     private $alternacijaUrl       = '/rest/alternacija';
     private $dogodekUrl           = '/rest/dogodek';
+    private $predstavaUrl         = '/rest/predstava';
     private $vajaUrl              = '/rest/vaja';
     private $obj1;
     private $obj2;
     private $objOseba;
     private $lookOseba1;
+    private $lookDogVaja1Id;
+    private $lookDogVaja2Id;
+    private $lookDogVaja3Id;
+    private $lookDogPredstava1Id;
+    private $lookPredstava2Id;
+    private $lookPredstava3Id;
     private $objVaja;
     private $objDogodek;
     private $objAlternacija;
@@ -74,46 +81,38 @@ class TerminStoritveCest
      */
     public function getListDogodek(ApiTester $I)
     {
-
-        /**
-         * default status >=500s
+        /*
+         * dogodki, ki so vaje
          */
-        $resp             = $I->successfullyGetList($this->dogodekUrl . "?zacetek=2000-01-01&konec=2200-05-05", []);
-        $list             = $resp['data'];
+        $resp = $I->successfullyGetList($this->dogodekUrl . "?zacetek=2000-01-01&konec=2200-05-05&razred[]=200s", []);
+        $list = $resp['data'];
         codecept_debug($list);
-        $totRDEf          = $totR             = $resp['state']['totalRecords'];
-        $I->assertGreaterThanOrEqual(1, $totR, "default default");
-        $this->objDogodek = $ent              = array_pop($list);
-    }
+        $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);
 
-    /**
-     * 
-     * @depends createVajo
-     * @param ApiTester $I
-     */
-//    public function createDogodek(ApiTester $I)
-//    {
-//        $data             = [
-//            'planiranZacetek' => '2011-02-01T00:00:00+0100',
-//            'zacetek'         => '2012-02-01T00:00:00+0100',
-//            'konec'           => '2013-02-01T00:00:00+0100',
-//            'status'          => 1,
-//            'razred'          => null,
-//            'termin'          => null,
-//            'ime'             => null,
-//            'predstava'       => null,
-//            'zasedenost'      => null,
-//            'vaja'            => $this->objVaja['id'],
-//            'gostovanje'      => null,
-//            'dogodekIzven'    => null,
-//            'prostor'         => null,
-//            'sezona'          => null,
-//        ];
-//        $this->objDogodek = $ent              = $I->successfullyCreate($this->dogodekUrl, $data);
-//        $I->assertNotEmpty($ent['id']);
-//        codecept_debug($ent);
-//        $I->assertEquals($ent['status'], 1);
-//    }
+        $ent                  = array_pop($list);
+        $this->lookDogVaja1Id = $look                 = $ent['id'];
+        codecept_debug($look);
+
+        $ent                  = array_pop($list);
+        $this->lookDogVaja2Id = $look                 = $ent['id'];
+        codecept_debug($look);
+
+        $ent                  = array_pop($list);
+        $this->lookDogVaja3Id = $look                 = $ent['id'];
+        codecept_debug($look);
+
+        /*
+         * dogodki, ki so predstave
+         */
+        $resp = $I->successfullyGetList($this->dogodekUrl . "?zacetek=2000-01-01&konec=2200-05-05&razred[]=100s", []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+
+        $ent                       = array_pop($list);
+        $this->lookDogPredstava1Id = $look                      = $ent['id'];
+        codecept_debug($look);
+    }
 
     /**
      * 
@@ -161,7 +160,7 @@ class TerminStoritveCest
         $data       = [
             'planiranZacetek' => '2012-08-01T19:00:00+0200',
             'planiranKonec'   => '2015-08-01T23:30:00+0200',
-            'dogodek'         => $this->objDogodek['id'],
+            'dogodek'         => $this->lookDogVaja1Id,
             'alternacija'     => $this->lookAlternacija['id'],
 // pri alternaciji osebo sam priredi
 //            'oseba'           => $this->lookOseba['id'],
@@ -180,7 +179,7 @@ class TerminStoritveCest
             'planiranKonec'   => '2006-02-01T00:00:00+0100',
             'zacetek'         => '2007-02-01T00:00:00+0100',
             'konec'           => '2008-02-01T00:00:00+0100',
-            'dogodek'         => $this->objDogodek['id'],
+            'dogodek'         => $this->lookDogVaja1Id,
             'alternacija'     => $this->lookAlternacija['id'],
 //            'oseba'           => $this->lookOseba['id'],
             'dezurni'         => null,
@@ -199,7 +198,7 @@ class TerminStoritveCest
             'planiranKonec'   => '2006-02-11T00:00:00+0100',
             'zacetek'         => '2007-02-11T00:00:00+0100',
             'konec'           => '2008-02-11T00:00:00+0100',
-            'dogodek'         => $this->objDogodek['id'],
+            'dogodek'         => $this->lookDogPredstava1Id,
             'alternacija'     => null,
             'oseba'           => $this->lookOseba1['id'],
             'dezurni'         => true,
@@ -216,7 +215,7 @@ class TerminStoritveCest
             'planiranKonec'   => '2006-12-11T00:00:00+0100',
             'zacetek'         => '2007-12-11T00:00:00+0100',
             'konec'           => '2008-12-11T00:00:00+0100',
-            'dogodek'         => $this->objDogodek['id'],
+            'dogodek'         => $this->lookDogVaja1Id,
             'alternacija'     => null,
             'oseba'           => $this->lookOseba1['id'],
             'dezurni'         => false,
@@ -287,7 +286,7 @@ class TerminStoritveCest
         $I->assertEquals($ent['deltaPlaniranZacetek'], -120);
         $I->assertEquals($ent['planiranKonec'], '2015-08-01T23:30:00+0200');
         $I->assertEquals($ent['deltaPlaniranKonec'], 30);
-        $I->assertEquals($ent['dogodek'], $this->objDogodek['id']);
+        $I->assertEquals($ent['dogodek'], $this->lookDogVaja1Id);
         $I->assertEquals($ent['alternacija'], $this->objAlternacija['id']);
         $I->assertEquals($ent['oseba'], $this->objAlternacija['oseba']['id']);
         $I->assertEquals($ent['dezurni'], false);
@@ -378,7 +377,7 @@ class TerminStoritveCest
      */
 //    public function getListUre(ApiTester $I)
 //    {
-//        $listUrl = $this->restUrl . "/ure?dogodek=" . $this->objDogodek['id'];
+//        $listUrl = $this->restUrl . "/ure?dogodek=" . $this->lookDogVaja1Id;
 //        codecept_debug($listUrl);
 //        $resp    = $I->successfullyGetList($listUrl, []);
 //        $list    = $resp['data'];
