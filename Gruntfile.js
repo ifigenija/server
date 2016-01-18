@@ -83,7 +83,8 @@ module.exports = function (grunt) {
         },
         clean: {
             config: [
-                "data/module*"
+                "data/module*",
+                "data/DoctrineModule/cache/*"
             ]
         },
         mkdir: {
@@ -100,6 +101,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-mkdir');
     // Default task(s).
-    grunt.registerTask('default', ['mkdir', 'exec', "clean"]);
+    grunt.registerTask('default', ['mkdir', "clean", 'exec']);
 
 };
