@@ -88,7 +88,6 @@ class VajaCest
     }
 
     /**
-      /**
      * 
      * @param ApiTester $I
      */
@@ -228,7 +227,6 @@ class VajaCest
         $I->assertEquals($dogodek['sezona'], $data['sezona'], 'sezona');
 
 
-
         /**
          * kreiramo še eno vajo
          */
@@ -253,6 +251,43 @@ class VajaCest
         $parDelte   = 'deltaZacTeh=22&deltaKonTeh=23&';
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl . "?" . $parAlternacije . $parGosti . $parDelte, $data);
         $I->assertGuid($ent['id']);
+
+
+        /**
+         * kreiranje vaje z napačnimi alternacijami
+         */
+        $zacetek        = '2014-05-08T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data           = [
+            'tipvaje'     => NULL,
+            'zaporedna'   => 2,
+            'uprizoritev' => $this->lookUprizoritev2['id'],
+            'title'       => "Vaja $zacetek",
+            'status'      => '200s',
+            'zacetek'     => $zacetek,
+            'konec'       => '2014-05-08T14:00:00+0200',
+            'prostor'     => null,
+            'sezona'      => null,
+        ];
+        $parAlternacije = '';   //init
+        for ($i = 1; $i <= 2; $i++) {
+            $parAlternacije .= 'alternacija[]=' . $this->altUpr1Ids[$i] . '&';  // alternacije z druge uprizoritve
+        }
+        $parGosti   = 'gost[]=' . $this->lookOseba1['id'] . '&'
+                . 'gost[]=' . $this->lookOseba2['id'] . '&';
+        $parDelte   = 'deltaZacTeh=22&deltaKonTeh=23&';
+        $parDezurni = 'dezurni[]=' . $this->lookOseba1['id'] ;
+        $resp = $I->failToCreate($this->restUrl . "?" . $parAlternacije, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001090, $resp[0]['code']);
+
+        /*
+         * dežurni ni dovoljen
+         */
+        $resp = $I->failToCreate($this->restUrl . "?" . $parDezurni, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001092, $resp[0]['code']);
+        
+        $I->fail('$$')
     }
 
     /**

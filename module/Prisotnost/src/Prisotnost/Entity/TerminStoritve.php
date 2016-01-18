@@ -182,11 +182,33 @@ class TerminStoritve
         $this->expect($this->planiranZacetek < $this->planiranKonec, "Planiran konec mora biti za planiranim začetkom", 1001087);
 
         if ($this->alternacija) {
-            $this->oseba = $this->alternacija->getOseba();
             /**
              * $$preveri, če je alternacija od uprizoritve dogodka
              * podobno preveri tudi, da je gost le pri vaji in dežurni na predstavi
              */
+            $this->expect(method_exists($this->dogodek->getPodrobno(), "getUprizoritev") &&
+                    $this->dogodek->getPodrobno()->getUprizoritev()
+                    , "Dogodek nima uprizoritve, termin storitve ima alternacijo", 1001089);
+            $aId = $this->alternacija->getId();
+            $this->expect(
+                    $this->dogodek->getPodrobno()->getUprizoritev()->getFunkcije()
+                            ->exists(function($key, $f) use(&$aId) {
+                                return (
+                                        $f->getAlternacije()->exists(function($k, $a) use(&$aId) {
+                                            return ($a->getId() === $aId);    // vrne true, če alternacija obstaja v uprizoritvi
+                                        }
+                                ));
+                            })
+                    , "Alternacija (" . $this->alternacija->getSifra() . ") ne pripada uprizoritvi dogodka", 1001090);
+            $this->oseba = $this->alternacija->getOseba();
+        }
+        if ($this->gost) {
+            $this->expect($this->dogodek->getRazred() === \Koledar\Entity\Dogodek::VAJA
+                    , "Gost je dovoljen le na vaji", 1001091);
+        }
+        if ($this->dezurni) {
+            $this->expect($this->dogodek->getRazred() === \Koledar\Entity\Dogodek::PREDSTAVA
+                    , "Dežurni je dovoljen le na predstavi", 1001092);
         }
         if ($this->alternacija || $this->gost || $this->dezurni || $this->sodelujoc) {
             /*

@@ -61,7 +61,7 @@ class TipVaje
 
     public function validate($mode = 'update')
     {
-        $this->expect($this->ime, "Ime je obvezen podatek", 1001090);
+        $this->expect($this->ime, "Ime je obvezen podatek", 1001150);
     }
 
     public function __construct()

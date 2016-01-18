@@ -79,7 +79,7 @@ class TerminStoritveFixture
         }
 
         $referenca = 'TerminStoritve-' . $v[0];
-        //var_dump($referenca);
+        var_dump($referenca);
         $this->addReference($referenca, $o);
     }
 
@@ -92,7 +92,7 @@ class TerminStoritveFixture
             ['04', "2015-06-26 10:00:00", "2015-06-26 11:00", null, null, 2, "Dogodek-01", "Alternacija-0004", "Oseba-0002", false, false,],
             ['05', "2015-06-26 10:00:00", "2015-06-26 11:00", null, null, 2, "Dogodek-01", "Alternacija-0005", "Oseba-0012", false, false,],
             // dezurni
-            ['06', "2015-08-01 20:00:00", "2015-08-01 23:30", null, null, 2, "Dogodek-03", null, "Oseba-0012", TRUE, false,],
+            ['06', "2015-08-01 20:00:00", "2015-08-01 23:30", null, null, 2, "DogodekPre-01", null, "Oseba-0012", TRUE, false,],
             // gost
             ['07', "2015-08-01 20:00:00", "2015-08-01 23:30", null, null, 2, "Dogodek-03", null, "Oseba-0010", false, TRUE,],
         ];
