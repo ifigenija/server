@@ -52,7 +52,6 @@ forms:
         hydrator: 
            lookups:
                - besedilo
-               - maticniOder
            byValue:
                - funkcije
                - funkcije.alternacije
