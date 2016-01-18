@@ -17,6 +17,8 @@ return [
             'praznik.service'         => 'Koledar\Service\PraznikService',
             'vzporednice.service'     => 'Koledar\Service\VzporedniceService',
             'vzporednice.rpc.service' => 'Koledar\Rpc\VzporedniceRpcService',
+            'operacije.service'       => 'Koledar\Service\OperacijeService',
+            'operacije.rpc.service'   => 'Koledar\Rpc\OperacijeRpcService',
         ],
     ],
     'controllers'     => [

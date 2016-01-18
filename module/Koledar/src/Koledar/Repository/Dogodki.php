@@ -181,13 +181,6 @@ class Dogodki
         parent::create($object, $params);
 
         /*
-         * $$ todo:
-         * - omogoči delete TS pri delete dogodka
-         *   . prav tako popravi update
-         * 
-         */
-
-        /*
          * preberemo delte iz opcij
          */
         $optionR = $this->getEntityManager()->getRepository('App\Entity\Option');
@@ -249,9 +242,6 @@ class Dogodki
             $alt = $altR->findOneById($altId);
             $this->expect($alt, "Alternacija ($altId) ne obstaja", 1000586);
 
-            /**
-             * $$ preveri, če alternacija pripada uprizoritvi dogodka - morda v validaciji TS
-             */
             $aliTehnik = false;   //init
             if ($alt->getFunkcija()) {
                 if ($alt->getFunkcija()->getPodrocje() == 'tehnik') {

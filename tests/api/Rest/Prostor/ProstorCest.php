@@ -225,13 +225,9 @@ class ProstorCest
         $data['naziv'] = 'yy';
         codecept_debug($data);
 
-        $this->obj1 = $ent       = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        $this->obj1 = $ent        = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
 
         $I->assertEquals($ent['naziv'], 'yy');
-
-        
-        
-        $I->fail('$$');
     }
 
     /**
@@ -248,7 +244,7 @@ class ProstorCest
         $I->assertEquals($ent['naziv'], 'yy');
         $I->assertEquals($ent['sifra'], '99');
         $I->assertEquals($ent['jePrizorisce'], true);
-        $I->assertEquals($ent['jeMaticniOder'], true,"jeMaticniOder");
+        $I->assertEquals($ent['jeMaticniOder'], true, "jeMaticniOder");
         $I->assertTrue($ent['sePlanira']);
         $I->assertEquals($ent['kapaciteta'], 1);
         $I->assertEquals($ent['opis'], 'aa');

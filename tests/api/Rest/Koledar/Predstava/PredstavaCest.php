@@ -232,7 +232,6 @@ class PredstavaCest
             'konec'        => '2014-05-07T23:00:00+0200',
             'prostor'      => $this->lookProstor1['id'],
             'sezona'       => $this->lookSezona1['id'],
-            'dezurni'      => $this->lookOseba1['id'],
 //            'gostovanje'  => $this->objGostovanje['id'],
 //            'dogodek'     => NULL,
         ];
@@ -279,7 +278,6 @@ class PredstavaCest
             'konec'        => '2014-05-08T23:00:00+0200',
             'prostor'      => null, // če je gostovanje ne rabimo prostora
             'sezona'       => null,
-            'dezurni'      => NULL,
         ];
         $parAlternacije = '';   //init
         for ($i = 1; $i <= 3; $i++) {
@@ -308,7 +306,6 @@ class PredstavaCest
             'konec'        => '2014-05-08T23:00:00+0200',
             'prostor'      => null, // če je gostovanje ne rabimo prostora
             'sezona'       => null,
-            'dezurni'      => NULL,
         ];
         $parAlternacije = '';   //init
         for ($i = 1; $i <= 3; $i++) {
@@ -398,7 +395,6 @@ class PredstavaCest
         $I->assertEquals($ent['konec'], '2014-05-07T23:00:00+0200');
         $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
         $I->assertEquals($ent['sezona'], $this->lookSezona1['id'], "sezona");
-        $I->assertEquals($ent['dezurni'], $this->lookOseba1['id']);
     }
 
     /**

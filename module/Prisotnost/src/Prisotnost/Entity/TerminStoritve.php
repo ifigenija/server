@@ -183,8 +183,7 @@ class TerminStoritve
 
         if ($this->alternacija) {
             /**
-             * $$preveri, če je alternacija od uprizoritve dogodka
-             * podobno preveri tudi, da je gost le pri vaji in dežurni na predstavi
+             * preveri, če je alternacija od uprizoritve dogodka
              */
             $this->expect(method_exists($this->dogodek->getPodrobno(), "getUprizoritev") &&
                     $this->dogodek->getPodrobno()->getUprizoritev()
