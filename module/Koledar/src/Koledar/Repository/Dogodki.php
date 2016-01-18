@@ -212,16 +212,15 @@ class Dogodki
                 $deltaKonecTeh   = $delte['delVajKonTeh']['value'];
                 break;
             case $object::SPLOSNO:
-                $deltaZacetek    = $delte['delSplZac']['value'];
-                $deltaKonec      = $delte['delSplKon']['value'];
+                $deltaZacetek    = $deltaZacetekTeh = $delte['delSplZac']['value'];
+                $deltaKonec      = $deltaKonecTeh   = $delte['delSplKon']['value'];
                 break;
             case $object::TEHNICNI:
-                $deltaZacetek    = $delte['delTehZac']['value'];
-                $deltaKonec      = $delte['delTehKon']['value'];
+                $deltaZacetek    = $deltaZacetekTeh = $delte['delTehZac']['value'];
+                $deltaKonec      = $deltaKonecTeh   = $delte['delTehKon']['value'];
                 break;
             default:
-                $deltaZacetek    = 0;
-                $deltaKonec      = 0;
+                $deltaZacetek    = $deltaZacetekTeh = $deltaKonecTeh   = $deltaKonec      = 0;
                 break;
         }
         /*

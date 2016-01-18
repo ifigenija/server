@@ -17,8 +17,9 @@ use ApiTester;
 class DogodekTehnicniCest
 {
 
-    private $restUrl    = '/rest/dogodekTehnicni';
-    private $dogodekUrl = '/rest/dogodek';
+    private $restUrl        = '/rest/dogodekTehnicni';
+    private $dogodekUrl     = '/rest/dogodek';
+    private $uprizoritevUrl = '/rest/uprizoritev';
     private $obj1;
     private $obj2;
     private $obj3;
@@ -35,6 +36,9 @@ class DogodekTehnicniCest
     private $lookOseba2;
     private $lookOseba3;
     private $lookOseba4;
+    private $altUpr1Ids;
+    private $altUpr2Ids;
+    private $altUpr3Ids;
 
     public function _before(ApiTester $I)
     {
@@ -95,6 +99,41 @@ class DogodekTehnicniCest
 
         $this->lookSezona3 = $look              = $I->lookupEntity("sezona", "2017", false);
         $I->assertGuid($look['id']);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupUprizoritev(ApiTester $I)
+    {
+        $this->lookUprizoritev1 = $look                   = $I->lookupEntity("uprizoritev", "0002", false);
+        $I->assertGuid($look['id']);
+        /*
+         * še poiščemo vse pripadajoče alternacije
+         */
+        $upr                    = $I->successfullyGet($this->uprizoritevUrl, $look ['id']);
+        $this->altUpr1Ids       = $altUpr                 = array_column($I->subarrayValuesToArray(array_column($upr['funkcije'], 'alternacije')), 'id');
+        codecept_debug($altUpr);
+
+        $this->lookUprizoritev2 = $look                   = $I->lookupEntity("uprizoritev", "0001", false);
+        codecept_debug($look);
+        $I->assertGuid($look['id']);
+        /*
+         * še poiščemo vse pripadajoče alternacije
+         */
+        $upr                    = $I->successfullyGet($this->uprizoritevUrl, $look ['id']);
+        $this->altUpr2Ids       = $altUpr                 = array_column($I->subarrayValuesToArray(array_column($upr['funkcije'], 'alternacije')), 'id');
+        codecept_debug($altUpr);
+
+        $this->lookUprizoritev3 = $look                   = $I->lookupEntity("uprizoritev", "0003", false);
+        $I->assertGuid($look['id']);
+        /*
+         * še poiščemo vse pripadajoče alternacije
+         */
+        $upr                    = $I->successfullyGet($this->uprizoritevUrl, $look ['id']);
+        $this->altUpr3Ids       = $altUpr                 = array_column($I->subarrayValuesToArray(array_column($upr['funkcije'], 'alternacije')), 'id');
+        codecept_debug($altUpr);
     }
 
     /**
@@ -159,6 +198,25 @@ class DogodekTehnicniCest
         $parDelte      = 'deltaKon=32&';
         $this->obj2    = $ent           = $I->successfullyCreate($this->restUrl . "?" . $parSodelujoci . $parDelte, $data);
         $I->assertGuid($ent['id']);
+
+        /*
+         * poskus kreiranja za alternacijami
+         */
+        $parAlternacije = '';   //init
+        for ($i = 1; $i <= 3; $i++) {
+            $parAlternacije .= 'alternacija[]=' . $this->altUpr1Ids[$i] . '&';
+        }
+        $data = [
+            'zacetek' => '2014-06-07T11:00:00+0200',
+            'konec'   => '2014-06-07T12:00:00+0200',
+            'title'   => "Tehnični $zacetek",
+            'status'  => '200s',
+            'prostor' => $this->lookProstor1['id'],
+            'sezona'  => $this->lookSezona1['id'],
+        ];
+        $resp = $I->failToCreate($this->restUrl . "?" . $parAlternacije, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001089, $resp[0]['code'], 'uprizoritev za ta dogodek ne obstaja');
     }
 
     /**
@@ -188,7 +246,7 @@ class DogodekTehnicniCest
     {
         $data           = $this->obj1;
         $data['status'] = '400s';
-        $this->obj1    = $ent          = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        $this->obj1     = $ent            = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
         $I->assertEquals($ent['status'], $data['status']);
 
         /*
@@ -197,7 +255,7 @@ class DogodekTehnicniCest
         $data            = $this->obj2;
         $data['zacetek'] = '2014-06-08T20:20:00+0200';
         $data['konec']   = '2014-06-08T22:20:00+0200';
-        $this->obj2     = $ent           = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        $this->obj2      = $ent             = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
         /*
          * $$ tu bi še lahko preveril čase terminov storitev
          */

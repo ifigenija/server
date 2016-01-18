@@ -64,7 +64,7 @@ class Vaja
 
     public function validate($mode = 'update')
     {
-        $this->expect($this->uprizoritev, "Vaja mora biti vezana na uprizoritev", 1000471);
+        $this->expect($this->uprizoritev, "Pri vaji je uprizoritev obvezna", 1000471);
     }
 
     public function getUprizoritev()

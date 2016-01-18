@@ -163,6 +163,28 @@ class DogodekCest
     }
 
     /**
+     * create dogodka mora biti blokiran
+     * 
+     * @depends lookupUprizoritev
+     * @param ApiTester $I
+     */
+    public function create(ApiTester $I)
+    {
+        $data           = [
+//            'tipvaje'     => $this->lookTipVaje1['id'],
+            'title'       => "Dogodek C",
+            'status'      => '200s',
+            'zacetek'     =>'2015-02-03T11:00:00+0200',
+            'konec'       =>'2015-02-03T12:00:00+0200',
+            'prostor'     => $this->lookProstor1['id'],
+            'sezona'      => $this->lookSezona1['id'],
+        ];
+        $resp           = $I->failToCreate($this->restUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1000022, $resp[0]['code'], "create disabled");
+    }
+
+    /**
      * @depends lookupUprizoritev
      * @param ApiTester $I
      */
