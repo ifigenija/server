@@ -43,22 +43,22 @@ class TerminStoritveFixture
 
         $rep = $manager->getRepository('Prisotnost\Entity\TerminStoritve');
 
-        $dogodekId       = $v[6] ? $this->getReference($v[6]) : null;
-        $alternacijaId   = $v[7] ? $this->getReference($v[7]) : null;
-        $osebaId         = $v[8] ? $this->getReference($v[8]) : null;
+        $dogodek       = $v[6] ? $this->getReference($v[6]) : null;
+        $alternacija   = $v[7] ? $this->getReference($v[7]) : null;
+        $oseba         = $v[8] ? $this->getReference($v[8]) : null;
         $planiranZacetek = empty($v[1]) ? null : date_create($v[1]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
         $o               = $rep->findOneBy([
-            "dogodek"         => $dogodekId,
-            "alternacija"     => $alternacijaId,
-            "oseba"           => $osebaId,
+            "dogodek"         => $dogodek,
+            "alternacija"     => $alternacija,
+            "oseba"           => $oseba,
             "planiranZacetek" => $planiranZacetek,
         ]);
         $nov             = false;
         if (!$o) {
             $o   = new \Prisotnost\Entity\TerminStoritve();
-            $o->setDogodek($dogodekId);
-            $o->setAlternacija($alternacijaId);
-            $o->setOseba($osebaId);
+            $o->setDogodek($dogodek);
+            $o->setAlternacija($alternacija);
+            $o->setOseba($oseba);
             $o->setPlaniranZacetek($planiranZacetek);
             $nov = true;
         }
@@ -95,6 +95,8 @@ class TerminStoritveFixture
             ['06', "2015-08-01 20:00:00", "2015-08-01 23:30", null, null, 2, "DogodekPre-01", null, "Oseba-0012", TRUE, false,],
             // gost
             ['07', "2015-08-01 20:00:00", "2015-08-01 23:30", null, null, 2, "Dogodek-03", null, "Oseba-0010", false, TRUE,],
+            // gost
+            ['08', "2015-08-01 20:00:00", "2015-08-01 23:30", null, null, 2, "Dogodek-01", null, "Oseba-0014", false, TRUE,],
         ];
     }
 

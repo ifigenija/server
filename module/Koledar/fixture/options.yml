@@ -91,4 +91,19 @@
         delTehKon:
             label: Delta konca pri tehničnem dogodku 
             value: 0
-            
+-
+    name: dogodek.termini
+    description: 'Privzete vrednosti za termine dogodkov'
+    public: false
+    readOnly: false
+    perUser: false
+    type: array
+    defaultValue: 
+        dopoldanZacetek:
+            label: Začetek dopoldanskega termina
+            value: 10:00
+           
+        dopoldanKonec:
+            label: Konec dopoldanskega termina
+            value: 14:00
+           

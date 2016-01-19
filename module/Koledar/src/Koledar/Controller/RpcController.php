@@ -39,4 +39,12 @@ class RpcController
         return $this->handleJsonRpcCall($srv);
     }
 
+    public function dogodekAction()
+    {
+
+        $srv = $this->getServiceLocator()->get('dogodek.rpc.service');
+
+        return $this->handleJsonRpcCall($srv);
+    }
+
 }

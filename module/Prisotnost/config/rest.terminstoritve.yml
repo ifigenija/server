@@ -4,19 +4,16 @@ type: rest
 entityClass: Prisotnost\Entity\TerminStoritve
 forms:
     default: 
+        disabledMethods:
+            - create
         elements:
-#            - id
-#            - deltaPlaniranZacetek
-#            - deltaPlaniranKonec
             - planiranZacetek
             - planiranKonec
-            - dogodek
-            - alternacija
-            - dezurni
-            - gost
-            - sodelujoc
+    zasedenost: 
+        elements:
+            - planiranZacetek
+            - planiranKonec
             - zasedenost
-            - virtZasedenost
             - oseba
 lists:
     default: 
@@ -27,6 +24,12 @@ lists:
                   options:
                       label: Oseba
                       targetEntity: App\Entity\Oseba
+                      required: false
+                - name: dogodek
+                  type: toone
+                  options:
+                      label: Dogodek
+                      targetEntity: Koledar\Entity\Dogodek
                       required: false
         hydrator:
             byValue: [oseba,alternacija]

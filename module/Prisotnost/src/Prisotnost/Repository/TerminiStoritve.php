@@ -63,6 +63,12 @@ class TerminiStoritve
             $qb->andWhere($naz);
             $qb->setParameter('os', "{$options['oseba']}", "string");
         }
+        if (!empty($options['dogodek'])) {
+            $qb->join('p.dogodek', 'dogodek');
+            $naz = $e->eq('dogodek.id', ':dogodek');
+            $qb->andWhere($naz);
+            $qb->setParameter('dogodek', "{$options['dogodek']}", "string");
+        }
         return $qb;
     }
 
