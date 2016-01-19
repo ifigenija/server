@@ -51,6 +51,7 @@ forms:
                 - dogodek
             lookups:
                 - dogodek.prostor
+                - uprizoritev
             virtual:
                 - name: zacetek
                   type: datetime

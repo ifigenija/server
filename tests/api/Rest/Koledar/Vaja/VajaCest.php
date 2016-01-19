@@ -356,7 +356,7 @@ class VajaCest
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['tipvaje'], $this->lookTipVaje1['id'], 'tipvaje');
         $I->assertEquals($ent['zaporedna'], 9);
-        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev1['id']);
+        $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev1['id']);
         $I->assertEquals($ent['title'], "yy");
         $I->assertEquals($ent['status'], '200s');
         $I->assertEquals($ent['zacetek'], $zacetek);

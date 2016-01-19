@@ -388,7 +388,7 @@ class PredstavaCest
         $I->assertEquals($ent['dogodek']['id'], $this->objDogodek['id']);
         $I->assertEquals($ent['zaporedna'], 6);
         $I->assertEquals($ent['zaporednaSez'], 3);
-        $I->assertEquals($ent['uprizoritev'], $this->lookUprizoritev1['id']);
+        $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev1['id']);
         $I->assertEquals($ent['title'], "uu");
         $I->assertEquals($ent['status'], '200s');
         $I->assertEquals($ent['zacetek'], $zacetek);
