@@ -3,8 +3,9 @@
 type: rest
 entityClass: Prisotnost\Entity\TerminStoritve
 forms:
-#    $$ le za update in delete
     default: 
+        disabledMethods:
+            - create
         elements:
             - planiranZacetek
             - planiranKonec
@@ -13,7 +14,6 @@ forms:
             - planiranZacetek
             - planiranKonec
             - zasedenost
-            - virtZasedenost
             - oseba
 lists:
     default: 

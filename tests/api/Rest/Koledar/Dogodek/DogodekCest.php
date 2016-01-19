@@ -369,70 +369,6 @@ class DogodekCest
     }
 
     /**
-     *  kreiramo zapis
-     * 
-     * @depends update
-     * 
-     * @param ApiTester $I
-     */
-    public function createVecTerminovStorive(ApiTester $I)
-    {
-        /**
-         * kreiramo gosta
-         */
-        $data = [
-            'planiranZacetek' => '2005-12-11T00:00:00+0100',
-            'planiranKonec'   => '2006-12-11T00:00:00+0100',
-            'zacetek'         => '2007-12-11T00:00:00+0100',
-            'konec'           => '2008-12-11T00:00:00+0100',
-            'planiranoTraja'  => 3.56,
-            'dogodek'         => $this->obj2['id'],
-            'alternacija'     => null,
-            'oseba'           => $this->lookOseba1['id'],
-            'dezurni'         => false,
-            'gost'            => true,
-        ];
-
-        $this->objTerminStoritve1 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
-        $I->assertGuid($ent['id']);
-        codecept_debug($ent);
-
-        // kreiramo še en zapis
-        $data                     = [
-            'planiranZacetek' => '2005-11-11T00:00:00+0100',
-            'planiranKonec'   => '2006-11-11T00:00:00+0100',
-            'zacetek'         => '2007-11-11T00:00:00+0100',
-            'konec'           => '2008-11-11T00:00:00+0100',
-            'planiranoTraja'  => 4.22,
-            'dogodek'         => $this->obj2['id'],
-            'alternacija'     => null,
-            'oseba'           => $this->lookOseba2['id'],
-            'dezurni'         => false,
-            'gost'            => true,
-        ];
-        $this->objTerminStoritve2 = $ent                      = $I->successfullyCreate($this->terminStoritveUrl, $data);
-        $I->assertGuid($ent['id']);
-    }
-
-//    /**
-//     * @depends update
-//     * @param ApiTester $I
-//     */
-//    public function getListVse(ApiTester $I)
-//    {
-//        $listUrl = $this->restUrl . "/vse";
-//        codecept_debug($listUrl);
-//        $resp    = $I->successfullyGetList($listUrl, []);
-//        $list    = $resp['data'];
-//
-//        codecept_debug($list);
-//        $totR = $resp['state']['totalRecords'];
-//        $I->assertGreaterThanOrEqual(4, $totR);
-//        $I->assertEquals("aa", $list[0]['title']);      //glede na sort
-//        $I->assertEquals("zz", $list[$totR - 1]['title']);      //glede na sort
-//    }
-
-    /**
      * @param ApiTester $I
      */
     public function createVloge(ApiTester $I)
@@ -656,23 +592,6 @@ class DogodekCest
     {
         $I->successfullyDelete($this->restUrl, $this->obj1['id']);
         $I->failToGet($this->restUrl, $this->obj1['id']);
-    }
-
-    /**
-     * preberemo relacije
-     * 
-     * @depends createVecTerminovStorive
-     * 
-     * @param ApiTester $I
-     */
-    public function preberiRelacijeSTerminiStoritve(ApiTester $I)
-    {
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "terminiStoritve", "");
-        $I->assertEquals(2, count($resp));
-
-        // get po popa id  
-        $resp = $I->successfullyGetRelation($this->restUrl, $this->obj2['id'], "terminiStoritve", $this->objTerminStoritve1['id']);
-        $I->assertEquals(1, count($resp));
     }
 
     /**

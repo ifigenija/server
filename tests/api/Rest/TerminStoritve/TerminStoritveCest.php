@@ -31,21 +31,18 @@ use ApiTester;
 class TerminStoritveCest
 {
 
-    private $restUrl              = '/rest/terminstoritve';
+    private $restUrl              = '/rest/terminstoritve/zasedenost';
+    private $restUrlDefault       = '/rest/terminstoritve';
     private $osebaUrl             = '/rest/oseba';
     private $uraUrl               = '/rest/ura';
     private $alternacijaUrl       = '/rest/alternacija';
-    private $dogodekUrl           = '/rest/dogodek';
     private $predstavaUrl         = '/rest/predstava';
     private $vajaUrl              = '/rest/vaja';
     private $obj1;
     private $obj2;
     private $objOseba;
     private $lookOseba1;
-    private $lookDogVaja1Id;
-    private $lookDogVaja2Id;
-    private $lookDogVaja3Id;
-    private $lookDogPredstava1Id;
+    private $lookOseba2;
     private $lookPredstava2Id;
     private $lookPredstava3Id;
     private $objVaja;
@@ -55,6 +52,15 @@ class TerminStoritveCest
     private $funkcijaUrl          = '/rest/funkcija';
     private $lookFunkcija;
     private $lookupAlternacijaUrl = '/lookup/alternacija';
+    private $objTSDog1A;
+    private $objTSDog1B;
+    private $objTSDog1C;
+    private $lookDogVaja1Id;
+    private $lookDogVaja2Id;
+    private $lookDogVaja3Id;
+    private $lookDogPredstava1Id;
+    private $dogodekUrl           = '/rest/dogodek';
+    private $terminStoritveUrl    = '/rest/terminstoritve';
 
     public function _before(ApiTester $I)
     {
@@ -67,13 +73,15 @@ class TerminStoritveCest
     }
 
     /**
+     * 
      * @param ApiTester $I
      */
-    public function lookupFunkcijo(ApiTester $I)
+    public function lookupOsebo(ApiTester $I)
     {
-        $this->lookFunkcija = $look               = $I->lookupEntity("funkcija", "Tezej", false);
-        codecept_debug($look);
-        $I->assertNotEmpty($look);
+        $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0006", false);
+        $I->assertNotEmpty($ent);
+        $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0007", false);
+        $I->assertNotEmpty($ent);
     }
 
     /**
@@ -84,74 +92,52 @@ class TerminStoritveCest
         /*
          * dogodki, ki so vaje
          */
-        $resp = $I->successfullyGetList($this->dogodekUrl . "?zacetek=2000-01-01&konec=2200-05-05&razred[]=200s", []);
+        $resp = $I->successfullyGetList($this->dogodekUrl . "?q=dogodek 1&zacetek=2000-01-01&konec=2200-05-05&razred[]=200s", []);
         $list = $resp['data'];
         codecept_debug($list);
-        $I->assertGreaterThanOrEqual(3, $resp['state']['totalRecords']);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+
 
         $ent                  = array_pop($list);
         $this->lookDogVaja1Id = $look                 = $ent['id'];
         codecept_debug($look);
 
-        $ent                  = array_pop($list);
-        $this->lookDogVaja2Id = $look                 = $ent['id'];
-        codecept_debug($look);
-
-        $ent                  = array_pop($list);
-        $this->lookDogVaja3Id = $look                 = $ent['id'];
-        codecept_debug($look);
 
         /*
          * dogodki, ki so predstave
          */
-        $resp = $I->successfullyGetList($this->dogodekUrl . "?zacetek=2000-01-01&konec=2200-05-05&razred[]=100s", []);
-        $list = $resp['data'];
+        $resp                      = $I->successfullyGetList($this->dogodekUrl . "?q=Predstava 1&zacetek=2000-01-01&konec=2200-05-05&razred[]=100s", []);
+        $list                      = $resp['data'];
         codecept_debug($list);
-        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-
+        $I->assertEquals(1, $resp['state']['totalRecords']);
         $ent                       = array_pop($list);
         $this->lookDogPredstava1Id = $look                      = $ent['id'];
         codecept_debug($look);
     }
 
     /**
+     * poišče obstoječe termine storitev
      * 
+     * @depends getListDogodek
      * @param ApiTester $I
      */
-    public function lookupOsebo(ApiTester $I)
+    public function getListTerminiStoritev(ApiTester $I)
     {
-        $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0006", false);
-        $I->assertNotEmpty($ent);
-    }
+        $resp = $I->successfullyGetList($this->terminStoritveUrl . "?dogodek=" . $this->lookDogVaja1Id, []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $I->assertGreaterThanOrEqual(6, $resp['state']['totalRecords']);
 
-    /**
-     * 
-     * @param ApiTester $I
-     */
-    public function lookupAlternacija(ApiTester $I)
-    {
-        // igralec
-        $resp                  = $I->successfullyGetList($this->lookupAlternacijaUrl . '?ident=0001', []);
-        $I->assertNotEmpty($resp);
-        codecept_debug($resp);
-        $I->assertTrue(array_key_exists('data', $resp), "ima data");
-        $I->assertTrue(array_key_exists('label', $resp['data'][0]), "ima labelo");
-        $I->assertTrue(array_key_exists('totalRecords', $resp['state']), "ima total records");
-        $I->assertEquals(1, $resp['state']['totalRecords'], "total records");
-        $this->lookAlternacija = $resp['data'][0];
-
-
-        /**
-         * še preberi osebo od alternacije
-         */
-        $this->objAlternacija = $ent                  = $I->successfullyGet($this->alternacijaUrl, $this->lookAlternacija['id']);
+        $this->objTSDog1A = $ts               = $list[0];
+        $this->objTSDog1B = $ts               = $list[1];
+        $this->objTSDog1C = $ts               = $list[5];
+        codecept_debug($ts);
     }
 
     /**
      *  kreiramo zapis
      * 
      * @depends lookupOsebo
-     * @depends lookupAlternacija
      * 
      * @param ApiTester $I
      */
@@ -160,69 +146,23 @@ class TerminStoritveCest
         $data       = [
             'planiranZacetek' => '2012-08-01T19:00:00+0200',
             'planiranKonec'   => '2015-08-01T23:30:00+0200',
-            'dogodek'         => $this->lookDogVaja1Id,
-            'alternacija'     => $this->lookAlternacija['id'],
-// pri alternaciji osebo sam priredi
-//            'oseba'           => $this->lookOseba['id'],
-            'dezurni'         => FALSE,
-            'gost'            => false,
-            'zasedenost'      => false,
-            'virtZasedenost'  => null,
+            'oseba'           => $this->lookOseba1['id'],
+            'zasedenost'      => TRUE,
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
         codecept_debug($ent);
 
         // kreiramo še en zapis
-        $data = [
+        $data       = [
             'planiranZacetek' => '2005-02-01T00:00:00+0100',
             'planiranKonec'   => '2006-02-01T00:00:00+0100',
-            'zacetek'         => '2007-02-01T00:00:00+0100',
-            'konec'           => '2008-02-01T00:00:00+0100',
-            'dogodek'         => $this->lookDogVaja1Id,
-            'alternacija'     => $this->lookAlternacija['id'],
-//            'oseba'           => $this->lookOseba['id'],
-            'dezurni'         => null,
-            'gost'            => null,
-        ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-        codecept_debug($ent);
-
-
-        /**
-         * kreiramo dežurnega
-         */
-        $data       = [
-            'planiranZacetek' => '2005-02-11T00:00:00+0100',
-            'planiranKonec'   => '2006-02-11T00:00:00+0100',
-            'zacetek'         => '2007-02-11T00:00:00+0100',
-            'konec'           => '2008-02-11T00:00:00+0100',
-            'dogodek'         => $this->lookDogPredstava1Id,
-            'alternacija'     => null,
-            'oseba'           => $this->lookOseba1['id'],
-            'dezurni'         => true,
-            'gost'            => false,
+            'oseba'           => $this->lookOseba2['id'],
+            'zasedenost'      => TRUE,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
-
-        /**
-         * kreiramo gosta
-         */
-        $data = [
-            'planiranZacetek' => '2006-12-10T00:00:00+0100',
-            'planiranKonec'   => '2006-12-11T00:00:00+0100',
-            'zacetek'         => '2007-12-11T00:00:00+0100',
-            'konec'           => '2008-12-11T00:00:00+0100',
-            'dogodek'         => $this->lookDogVaja1Id,
-            'alternacija'     => null,
-            'oseba'           => $this->lookOseba1['id'],
-            'dezurni'         => false,
-            'gost'            => true,
-        ];
-        $ent  = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertNotEmpty($ent['id']);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
     }
 
     /**
@@ -233,7 +173,7 @@ class TerminStoritveCest
      */
     public function getList(ApiTester $I)
     {
-        $resp      = $I->successfullyGetList($this->restUrl, []);
+        $resp      = $I->successfullyGetList($this->restUrlDefault, []);
         $list      = $resp['data'];
         codecept_debug($resp);
         $totRecVsi = $totRec    = $resp['state']['totalRecords'];
@@ -246,7 +186,7 @@ class TerminStoritveCest
         /**
          * get list po osebi
          */
-        $resp   = $I->successfullyGetList($this->restUrl . "?oseba=" . $this->lookOseba1['id'], []);
+        $resp   = $I->successfullyGetList($this->restUrlDefault . "?oseba=" . $this->lookOseba1['id'], []);
         $list   = $resp['data'];
         codecept_debug($resp);
         $totRec = $resp['state']['totalRecords'];
@@ -278,31 +218,21 @@ class TerminStoritveCest
      */
     public function read(\ApiTester $I)
     {
-        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
+        $ent = $I->successfullyGet($this->restUrlDefault, $this->obj1['id']);
         codecept_debug($ent);
 
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['planiranZacetek'], '2012-08-01T18:00:00+0200');
-        $I->assertEquals($ent['deltaPlaniranZacetek'], -120);
         $I->assertEquals($ent['planiranKonec'], '2015-08-01T23:30:00+0200');
-        $I->assertEquals($ent['deltaPlaniranKonec'], 30);
-        $I->assertEquals($ent['dogodek'], $this->lookDogVaja1Id);
-        $I->assertEquals($ent['alternacija'], $this->objAlternacija['id']);
-        $I->assertEquals($ent['oseba'], $this->objAlternacija['oseba']['id']);
+        $I->assertEquals($ent['zasedenost'], TRUE, 'zasedenost');
+        $I->assertEquals($ent['oseba'], $this->lookOseba1['id']);
+        $I->assertEquals($ent['deltaPlaniranZacetek'], null);
+        $I->assertEquals($ent['deltaPlaniranKonec'], null);
+        $I->assertEquals($ent['dogodek'], null);
+        $I->assertEquals($ent['alternacija'], null);
         $I->assertEquals($ent['dezurni'], false);
         $I->assertEquals($ent['gost'], false);
         $I->assertEquals($ent['virtZasedenost'], false);
-        $I->assertEquals($ent['zasedenost'], false, 'zasedenost');
-
-
-        /**
-         * preberemo dežurnega
-         */
-        $ent = $I->successfullyGet($this->restUrl, $this->obj2['id']);
-        $I->assertEquals($ent['alternacija'], null);
-        $I->assertEquals($ent['oseba'], $this->lookOseba1['id']);
-        $I->assertEquals($ent['dezurni'], true);
-        $I->assertEquals($ent['gost'], false);
     }
 
     /**
@@ -313,7 +243,7 @@ class TerminStoritveCest
      */
     public function createUraTS(ApiTester $I)
     {
-        $ts = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $ts = $I->successfullyGet($this->restUrlDefault, $this->objTSDog1A['id']);
         codecept_debug($ts);
 
         $data = [
@@ -335,56 +265,17 @@ class TerminStoritveCest
      */
     public function updateZaValidacijo(ApiTester $I)
     {
-        /**
-         * ne more hkrati biti alternacija in dežurni
-         */
-        $data            = $this->obj1;
-        $data['dezurni'] = true;
-        $resp            = $I->failToUpdate($this->restUrl, $data['id'], $data);
-        $I->assertEquals(1001080, $resp[0]['code']);
-
-        // neskladnost gost in alternacija
-        $data            = $this->obj1;
-        $data['dezurni'] = false;
-        $data['gost']    = true;
-        $resp            = $I->failToUpdate($this->restUrl, $data['id'], $data);
-        $I->assertEquals(1001080, $resp[0]['code']);
-
-        // niti alternacija niti gost niti dežurni
-        $data                = $this->obj1;
-        $data['dezurni']     = false;
-        $data['gost']        = false;
-        $data['alternacija'] = null;
-        $resp                = $I->failToUpdate($this->restUrl, $data['id'], $data);
-        $I->assertEquals(1001080, $resp[0]['code']);
-
 
         /**
          * če so vnešene ure ni več možno spreminjati termina storitve
          */
-        $data = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $data = $I->successfullyGet($this->restUrl, $this->objTSDog1A['id']);
         codecept_debug($data);
+        $I->assertNotEmpty($data['ura']);
 
         $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
         $I->assertEquals(1001088, $resp[0]['code']);
     }
-
-    /**
-     * Seznam, ki ga rabi inšpecient oz. vodja tehnike, ko vnaša ure za nek dogodek
-     * 
-     * @depends create
-     * @param ApiTester $I
-     */
-//    public function getListUre(ApiTester $I)
-//    {
-//        $listUrl = $this->restUrl . "/ure?dogodek=" . $this->lookDogVaja1Id;
-//        codecept_debug($listUrl);
-//        $resp    = $I->successfullyGetList($listUrl, []);
-//        $list    = $resp['data'];
-//
-//        $I->assertNotEmpty($list);
-//        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-//    }
 
     /**
      * brisanje zapisa
@@ -395,6 +286,54 @@ class TerminStoritveCest
     {
         $I->successfullyDelete($this->restUrl, $this->obj1['id']);
         $I->failToGet($this->restUrl, $this->obj1['id']);
+    }
+
+    /**
+     *  kreiramo zapis na default formi
+     * 
+     * @depends lookupOsebo
+     * 
+     * @param ApiTester $I
+     */
+    public function createDefault(ApiTester $I)
+    {
+        $data = [
+            'planiranZacetek' => '2014-09-01T19:00:00+0200',
+            'planiranKonec'   => '2014-09-01T23:30:00+0200',
+            'oseba'           => $this->lookOseba1['id'],
+            'zasedenost'      => TRUE,
+        ];
+        $resp = $I->failToCreate($this->restUrlDefault, $data);
+        codecept_debug($resp);
+    }
+
+    /**
+     * spremenim zapis
+     * 
+     * @depends getListTerminiStoritev
+     * @param ApiTester $I
+     */
+    public function updateDefault(ApiTester $I)
+    {
+        $data                    = $this->objTSDog1C;
+        $data['planiranZacetek'] = '2012-08-01T18:00:00+0200';
+        $data['planiranKonec']   = '2012-08-01T19:00:00+0200';
+
+        $ent = $I->successfullyUpdate($this->restUrlDefault, $data['id'], $data);
+
+        $I->assertEquals($data['planiranZacetek'], $ent['planiranZacetek']);
+        $I->assertEquals($data['planiranKonec'], $ent['planiranKonec']);
+    }
+
+    /**
+     * brisanje zapisa po default formi
+     * 
+     * @depends getListTerminiStoritev
+     */
+    public function deleteDefault(ApiTester $I)
+    {
+        $I->successfullyDelete($this->restUrlDefault, $this->objTSDog1B['id']);
+        $I->failToGet($this->restUrlDefault, $this->objTSDog1B['id']);
     }
 
 }
