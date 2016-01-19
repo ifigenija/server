@@ -77,6 +77,9 @@ class OptionCest
         $I->assertEquals(0, $opt['delVajKon']['value']);
         $I->assertEquals(0, $opt['delVajZacTeh']['value']);
         $I->assertEquals(0, $opt['delVajKonTeh']['value']);
+        
+        $opt = $I->successfullyCallRpc($this->rpcUrl, 'getOptions', ["name" => "dogodek.termini"]);
+        codecept_debug($opt);
     }
 
     /**
