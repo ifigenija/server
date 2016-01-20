@@ -32,6 +32,10 @@ lists:
                       targetEntity: Koledar\Entity\Dogodek
                       required: false
         hydrator:
-            byValue: [oseba,alternacija]
+            byValue: 
+                - oseba
+                - alternacija
+                - alternacija.funkcija
+                - alternacija.funkcija.tipFunkcije
 
         
