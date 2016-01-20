@@ -20,7 +20,7 @@ lists:
         filter:
             elements:                 
                 - name: oseba
-                  type: toone
+                  type: tomany
                   options:
                       label: Oseba
                       targetEntity: App\Entity\Oseba
@@ -30,6 +30,16 @@ lists:
                   options:
                       label: Dogodek
                       targetEntity: Koledar\Entity\Dogodek
+                      required: false
+                - name: zacetek
+                  type: datetime
+                  options:
+                      label: Začetek
+                      required: false
+                - name: konec
+                  type: datetime
+                  options:
+                      label: Začetek
                       required: false
         hydrator:
             byValue: [oseba,alternacija]
