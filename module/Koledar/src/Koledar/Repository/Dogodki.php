@@ -90,15 +90,15 @@ class Dogodki
 
             $cas = $e->gte('p.zacetek', ':zac');
             $qb->andWhere($cas);
-            $qb->setParameter('zac', $options['zacetek'], "date");
+            $qb->setParameter('zac', $options['zacetek'], "datetime");
         }
         if (!empty($options['konec'])) {
             /**
              * konec <= zacetek
              */
-            $cas = $e->lt('p.zacetek', ':konec');
+            $cas = $e->lte('p.zacetek', ':konec');
             $qb->andWhere($cas);
-            $qb->setParameter('konec', $options['konec'], "date");
+            $qb->setParameter('konec', $options['konec'], "datetime");
         }
 
         /**
