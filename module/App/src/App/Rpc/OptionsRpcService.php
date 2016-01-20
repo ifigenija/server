@@ -22,34 +22,16 @@ class OptionsRpcService
 {
 
     /**
-     * Za nastavljanje vrednosti opcij
-     * 
-     * @param string $name
-     * @param mixed $value
-     * @param bool $global
-     * retuns array errors
-     */
-//    public function setValue($name, $value, $global = false)
-//    {
-//        $em   = $this->getEm();
-//        $orep = $em->getRepository('App\Entity\Option');
-//
-//        $opt = $orep->find($name);
-//
-//        $user = $this->getIdentity();
-//
-//        $this->expectPermission('options-');
-//    }
-
-    /**
      * Vrne vrednost opcij po logiki per user -> globalno -> default 
      * 
      * Prebere iz entitet Option in OptionValue
      * 
      * @param string $name
+     * @param boolean $nouser   če true, potem ne prikaže user opcije
+     *                               tudi v primeru, če le-ta obstaja
      * @return mixed
      */
-    public function getOptions($name)
+    public function getOptions($name, $nouser=false)
     {
         // preverjanje avtorizacije
         $this->expectPermission("Option-read");
@@ -62,21 +44,26 @@ class OptionsRpcService
         /* @var $opt \App\Entity\Option */
         $opt = $rep->findOneByName($name);
 
-        // preverjanje avtorizacije s kontekstom
+        /*
+         *  preverjanje avtorizacije s kontekstom
+         */
         $this->expectPermission("Option-read", $opt);
-
 
         $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000403);
 
-        // najprej preveri ali je opcija uporabniško nastavljiva
-        if ($opt->getPerUser()) {
+        /*
+         *  najprej preveri ali je opcija uporabniško nastavljiva
+         */
+        if (!$nouser && $opt->getPerUser()) {
             //  s katerim uporabniškim imenom je uporabnik prijavljen
             $user = $this->getAuth()->getIdentity();
 
             $optValueR = $em->getRepository('App\Entity\OptionValue');
             $optValue  = $optValueR->getOptionValuesUserValue($opt, $user);
 
-            // preverjanje avtorizacije s kontekstom
+            /*
+             *  preverjanje avtorizacije s kontekstom
+             */
             $this->expectPermission("OptionValue-read", $optValue);
 
             if (!empty($optValue)) {
@@ -84,7 +71,9 @@ class OptionsRpcService
             }
         }
 
-        // preveri, če ima globalno opcijo
+        /*
+         *  preveri, če ima globalno opcijo
+         */
         if (!$opt->getReadOnly()) {
             $optValue = $em->getRepository('App\Entity\OptionValue')
                     ->getOptionValuesGlobalValue($opt);
@@ -188,6 +177,7 @@ class OptionsRpcService
         // preverjanje avtorizacije
         $this->expectPermission("Option-write");
         $this->expectPermission("OptionValue-write");
+        $this->expectPermission("OptionValue-writeGlobal");
         
         $em  = $this->getEm();
         $rep = $em->getRepository('App\Entity\Option');
@@ -219,6 +209,7 @@ class OptionsRpcService
         // preverjanje avtorizacije s kontekstom
         $this->expectPermission("Option-write",$opt);
         $this->expectPermission("OptionValue-write",$opt);
+        $this->expectPermission("OptionValue-writeGlobal",$opt);
 
         $em->flush();
 

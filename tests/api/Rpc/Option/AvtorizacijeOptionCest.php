@@ -29,7 +29,6 @@ class AvtorizacijeOptionCest
         $I->assertEquals('GO', $role['name']);
         $I->assertNotEmpty($role['id']);
 
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
         $data = [
             'name'        => 'SUO',
             'description' => 'Testna vloga za rpc klic setUserOption',
@@ -39,13 +38,20 @@ class AvtorizacijeOptionCest
         $I->assertEquals('SUO', $role['name']);
         $I->assertNotEmpty($role['id']);
 
-        $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
         $data = [
             'name'        => 'SGO',
             'description' => 'Testna vloga za rpc klic setGlobalOption',
         ];
         $role = $I->successfullyCreate($this->roleUrl, $data);
         $I->assertEquals('SGO', $role['name']);
+        $I->assertNotEmpty($role['id']);
+
+        $data = [
+            'name'        => 'SGOBWG',
+            'description' => 'Testna vloga podobno kot vloga SGO brez OptionValue-writeGlobal dovoljenja',
+        ];
+        $role = $I->successfullyCreate($this->roleUrl, $data);
+        $I->assertEquals('SGOBWG', $role['name']);
         $I->assertNotEmpty($role['id']);
     }
 
@@ -89,6 +95,7 @@ class AvtorizacijeOptionCest
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
 
+
         //2. vlogi write write
         $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
             'rolename' => "SGO",
@@ -102,6 +109,25 @@ class AvtorizacijeOptionCest
             'permname' => 'OptionValue-write',
         ]);
         $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "SGO",
+            'permname' => 'OptionValue-writeGlobal',
+        ]);
+        $I->assertTrue($res);
+
+        //3. vlogi write write brez writeGlobal
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "SGOBWG",
+            'permname' => 'Option-write',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+
+        $res = $I->successfullyCallRpc($this->rpcRoleUrl, 'grant', [
+            'rolename' => "SGOBWG",
+            'permname' => 'OptionValue-write',
+        ]);
         $I->assertTrue($res);
     }
 
@@ -130,6 +156,13 @@ class AvtorizacijeOptionCest
         $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
             'username' => \IfiTest\AuthPage::$tatjana,
             'rolename' => 'SGO',
+        ]);
+        $I->assertNotEmpty($res);
+        $I->assertTrue($res);
+
+        $res = $I->successfullyCallRpc($this->rpcUserUrl, 'grant', [
+            'username' => \IfiTest\AuthPage::$aaron,
+            'rolename' => 'SGOBWG',
         ]);
         $I->assertNotEmpty($res);
         $I->assertTrue($res);
@@ -324,18 +357,28 @@ class AvtorizacijeOptionCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$tatjana, \IfiTest\AuthPage::$tatjanaPass);
 
         $resp = $I->failCallRpc($this->rpcUrl, 'getOptions', ["name" => "test3.readonly"]);
-        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
         $I->assertEquals(420002, $resp['code'], "ni dovoljenja");
 
         $resp = $I->failCallRpc($this->rpcUrl, 'setUserOption', ["name"  => "test1.barva.ozadja",
             "value" => "nova userjeva vrednost A"]);
-        $I->assertNotEmpty($resp);
+        codecept_debug($resp);
         $I->assertEquals(420002, $resp['code'], "ni dovoljenja");
 
-        $odg = $I->successfullyCallRpc($this->rpcUrl, 'setGlobalOption', ["name"  => "test1.barva.ozadja",
+        $resp = $I->successfullyCallRpc($this->rpcUrl, 'setGlobalOption', ["name"  => "test1.barva.ozadja",
             "value" => "nova globalna vrednost ww"]);
-        $I->assertNotEmpty($odg);
-        $I->assertTrue($odg);
+        codecept_debug($resp);
+        $I->assertTrue($resp);
+
+        /*
+         * brez writeGlobal dovoljenja ne bi smel uspeti
+         */
+        $I->amHttpAuthenticated(\IfiTest\AuthPage::$aaron, \IfiTest\AuthPage::$aaronPass);
+        $resp = $I->failCallRpc($this->rpcUrl, 'setGlobalOption', ["name"  => "test1.barva.ozadja",
+            "value" => "nova globalna vrednost ww brez writeGlobal"]);
+        codecept_debug($resp);
+        $I->assertEquals(420002, $resp['code'], "ni dovoljenja");
+        $I->assertContains("OptionValue-writeGlobal", $resp['message']);
     }
 
 }

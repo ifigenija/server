@@ -29,6 +29,9 @@
 -
     name: Funkcija-vse
     description: Funkcija write dostop ne le do področje tehnike
+-
+    name: OptionValue-writeGlobal
+    description: OptionValue - dovoljenje za spreminjanje globalnih opcij
 
 # perm prefix za je Aaa
 #-

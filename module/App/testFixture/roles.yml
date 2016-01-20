@@ -57,6 +57,7 @@
         - Option-read
         - OptionValue-read
         - OptionValue-write
+        - OptionValue-writeGlobal
         - Option-write
         - OrganizacijskaEnota-read
         - OrganizacijskaEnota-write

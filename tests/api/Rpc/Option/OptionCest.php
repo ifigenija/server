@@ -66,7 +66,7 @@ class OptionCest
          *   pričakujemo enako, kot smo nastavili v fixture-ju
          */
         $pricakovano = array("privzeta trojka");
-        $opt = $I->successfullyCallRpc($this->rpcUrl, 'getOptions', ["name" => "dogodek.delte"]);
+        $opt         = $I->successfullyCallRpc($this->rpcUrl, 'getOptions', ["name" => "dogodek.delte"]);
         codecept_debug($opt);
 //        $I->assertEquals($pricakovano, $opt);
         $I->seeResponseIsJson();
@@ -94,10 +94,21 @@ class OptionCest
     public function preberiGlobalnoOpcijoIzFixturjev(ApiTester $I)
     {
         //  pričakujemo enako, kot smo nastavili v fixture-ju
-        $pricakovano = array(array("key" => "g", "value" => "globalna"));
+        $pricakovano = [["key" => "g", "value" => "globalna"]];
 
         $opt = $I->successfullyCallRpc($this->rpcUrl, 'getOptions', ["name" => "test2.glob"]);
         $I->assertNotEmpty($opt);
+        $I->assertEquals($pricakovano, $opt);
+        $I->seeResponseIsJson();
+
+        /*
+         * če user opcija obstaja:
+         */
+        $pricakovano = [["key" => "m", "value" => "modra"]];
+        $opt         = $I->successfullyCallRpc($this->rpcUrl, 'getOptions', ["name" => "test1.barva.ozadja", "nouser" => true]);
+        codecept_debug($pricakovano);
+        codecept_debug($opt);
+
         $I->assertEquals($pricakovano, $opt);
         $I->seeResponseIsJson();
     }
@@ -111,7 +122,7 @@ class OptionCest
     {
         //  pričakujemo enako, kot smo nastavili v fixture-ju
         //  rumena je pri admin@ifigenija.si
-        $pricakovano = array(array("key" => "r", "value" => "rumena"));
+        $pricakovano = [["key" => "r", "value" => "rumena"]];
 
         $opt = $I->successfullyCallRpc($this->rpcUrl, 'getOptions', ["name" => "test1.barva.ozadja"]);
         $I->assertNotEmpty($opt);
