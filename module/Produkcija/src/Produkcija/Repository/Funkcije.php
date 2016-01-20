@@ -77,7 +77,6 @@ class Funkcije
 
             $qb->setParameter('id', "{$options['q']}%", "string");
         }
-
         return $qb;
     }
 

@@ -73,6 +73,19 @@ class TerminStoritveCest
     }
 
     /**
+     * metoda, ki se večkrat kliče zaradi preverjanja rezultatov get list
+     * 
+     */
+    private function kontroleRezultatovGetList(ApiTester $I, array $osebeIds, array $list)
+    {
+        codecept_debug(__FUNCTION__);
+
+        foreach ($osebeIds as $oId) {
+            $I->assertContains($oId, array_column(array_column($list, "oseba"), "id"), "oseba id");
+        }
+    }
+
+    /**
      * 
      * @param ApiTester $I
      */
@@ -81,6 +94,8 @@ class TerminStoritveCest
         $this->lookOseba1 = $ent              = $I->lookupEntity("oseba", "0006", false);
         $I->assertNotEmpty($ent);
         $this->lookOseba2 = $ent              = $I->lookupEntity("oseba", "0007", false);
+        $I->assertNotEmpty($ent);
+        $this->lookOseba3 = $ent              = $I->lookupEntity("oseba", "0003", false);
         $I->assertNotEmpty($ent);
     }
 
@@ -145,7 +160,7 @@ class TerminStoritveCest
     {
         $data       = [
             'planiranZacetek' => '2012-08-01T19:00:00+0200',
-            'planiranKonec'   => '2015-08-01T23:30:00+0200',
+            'planiranKonec'   => '2012-08-01T23:30:00+0200',
             'oseba'           => $this->lookOseba1['id'],
             'zasedenost'      => TRUE,
         ];
@@ -186,12 +201,54 @@ class TerminStoritveCest
         /**
          * get list po osebi
          */
-        $resp   = $I->successfullyGetList($this->restUrlDefault . "?oseba=" . $this->lookOseba1['id'], []);
+        $osebeIds = [$this->lookOseba1['id'],];
+        $parOsebe = ""; //init
+        foreach ($osebeIds as $oId) {
+            $parOsebe .= "oseba[]=" . $oId . "&";
+        }
+        $resp   = $I->successfullyGetList($this->restUrlDefault . "?" . $parOsebe, []);
         $list   = $resp['data'];
         codecept_debug($resp);
         $totRec = $resp['state']['totalRecords'];
         codecept_debug($totRec);
         $I->assertLessThan($totRecVsi, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $this->kontroleRezultatovGetList($I, $osebeIds, $list);
+
+        /**
+         * get list po 2 osebah
+         */
+        $osebeIds = [
+            $this->lookOseba1['id'],
+            $this->lookOseba3['id'],
+        ];
+        $parOsebe = ""; //init
+        foreach ($osebeIds as $oId) {
+            $parOsebe .= "oseba[]=" . $oId . "&";
+        }
+        $resp        = $I->successfullyGetList($this->restUrlDefault . "?" . $parOsebe, []);
+        $list        = $resp['data'];
+        codecept_debug($resp);
+        $totRecOsebe = $totRec      = $resp['state']['totalRecords'];
+        codecept_debug($totRec);
+        $I->assertLessThan($totRecVsi, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $this->kontroleRezultatovGetList($I, $osebeIds, $list);
+
+
+        /**
+         * get list po 2 osebah z začetkom in koncem
+         */
+        $resp   = $I->successfullyGetList($this->restUrlDefault . "?" . $parOsebe
+                . "zacetek=" . urlencode("2012-08-01T00:00:00+0200") . "&"
+                . "konec=" . urlencode("2012-08-01T23:59:59+0200")
+                , []);
+        $list   = $resp['data'];
+        codecept_debug($resp);
+        $totRec = $resp['state']['totalRecords'];
+        codecept_debug($totRec);
+        $I->assertLessThan($totRecOsebe, $resp['state']['totalRecords'], "manj zaradi začetka in konca");
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
     }
 
     /**
@@ -223,7 +280,7 @@ class TerminStoritveCest
 
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['planiranZacetek'], '2012-08-01T18:00:00+0200');
-        $I->assertEquals($ent['planiranKonec'], '2015-08-01T23:30:00+0200');
+        $I->assertEquals($ent['planiranKonec'], '2012-08-01T23:30:00+0200');
         $I->assertEquals($ent['zasedenost'], TRUE, 'zasedenost');
         $I->assertEquals($ent['oseba'], $this->lookOseba1['id']);
         $I->assertEquals($ent['deltaPlaniranZacetek'], null);

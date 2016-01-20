@@ -40,7 +40,7 @@ class TerminiStoritve
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
             case "ure":
-                $this->expect(!empty($options['dogodek']), "Dogodek je obvezen", 770082);
+                $this->expect(!empty($options['dogodek']), "Dogodek je obvezen", 1001801);
                 $qb   = $this->getUreQb($options);
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
@@ -58,16 +58,30 @@ class TerminiStoritve
             $qb->setParameter('planiranZacetek', "{$options['q']}%", "string");
         }
         if (!empty($options['oseba'])) {
+            $this->expect(is_array($options['oseba']), "Parameter oseba mora biti array id-jev", 1001802);
             $qb->join('p.oseba', 'oseba');
-            $naz = $e->eq('oseba.id', ':os');
+            $naz = $e->in('oseba.id', ':osebe');
             $qb->andWhere($naz);
-            $qb->setParameter('os', "{$options['oseba']}", "string");
+            $qb->setParameter('osebe', $options['oseba']);
         }
         if (!empty($options['dogodek'])) {
             $qb->join('p.dogodek', 'dogodek');
             $naz = $e->eq('dogodek.id', ':dogodek');
             $qb->andWhere($naz);
             $qb->setParameter('dogodek', "{$options['dogodek']}", "string");
+        }
+        if (!empty($options['zacetek'])) {
+            $cas = $e->gte('p.planiranZacetek', ':zac');
+            $qb->andWhere($cas);
+            $qb->setParameter('zac', $options['zacetek'], "datetime");
+        }
+        if (!empty($options['konec'])) {
+            /**
+             * planiranZacetek <= konec
+             */
+            $cas = $e->lte('p.planiranZacetek', ':konec');
+            $qb->andWhere($cas);
+            $qb->setParameter('konec', $options['konec'], "datetime");
         }
         return $qb;
     }

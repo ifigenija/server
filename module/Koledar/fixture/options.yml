@@ -93,7 +93,7 @@
             value: 0
 -
     name: dogodek.termini
-    description: 'Privzete vrednosti za termine dogodkov v hh:mm'
+    description: Privzete vrednosti za termine dogodkov 
     public: false
     readOnly: false
     perUser: false
@@ -101,20 +101,26 @@
     defaultValue: 
         dopoldanZacetek:
             label: Začetek dopoldanskega termina
-            value: 10:00
+            h: 10
+            m: 00
         dopoldanKonec:
             label: Konec dopoldanskega termina 
-            value: 14:00
+            h: 14
+            m: 00
         popoldanZacetek:
             label: Začetek popoldanskega termina
-            value: 15:00
+            h: 15
+            m: 00
         popoldanKonec:
-            label: Konec dopoldanskega termina
-            value: 19:00
+            label: Konec popoldanskega termina
+            h: 19
+            m: 00
         vecerZacetek:
             label: Začetek večernega termina
-            value: 20:00
+            h: 20
+            m: 00
         vecerKonec:
             label: Konec večernega termina
-            value: 23:00
+            h: 23
+            m: 00
            
