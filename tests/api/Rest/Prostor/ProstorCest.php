@@ -100,6 +100,7 @@ class ProstorCest
             'opis'          => 'aa',
             'popa'          => $this->objPopa1['id'],
             'naslov'        => $this->objPopa1['naslovi'][0]['id'],
+            'barva'         => '#123456',
         ];
         $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
@@ -250,6 +251,7 @@ class ProstorCest
         $I->assertEquals($ent['opis'], 'aa');
         $I->assertEquals($ent['popa']['id'], $this->objPopa1['id']);
         $I->assertEquals($ent['naslov']['id'], $this->objPopa1['naslovi'][0]['id']);
+        $I->assertEquals($ent['barva'], '#123456','barva');
     }
 
     /**

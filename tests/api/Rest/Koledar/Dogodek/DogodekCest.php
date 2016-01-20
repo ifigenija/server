@@ -325,13 +325,14 @@ class DogodekCest
     {
         $data           = $this->obj1;
         $data['title']  = 'uu';
-        $data['termin'] = 'uu';
+        $data['barva'] = '#123456';
+        
         codecept_debug($data);
 
         $this->obj1 = $ent        = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
         $I->assertGuid($ent['id']);
-        $I->assertEquals('uu', $ent['title']);
-//        $I->assertEquals('uu', $ent['termin']);
+        $I->assertEquals($data['title'], $ent['title']);
+        $I->assertEquals($data['barva'], $ent['barva']);
     }
 
     /**
@@ -366,6 +367,7 @@ class DogodekCest
 
         $I->assertEquals(0, count($ent['terminiStoritve']));
         $I->assertEquals(0, count($ent['prodajaPredstave']));
+        $I->assertEquals($ent['barva'], '#123456','barva');
     }
 
     /**

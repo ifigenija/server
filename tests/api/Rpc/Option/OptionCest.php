@@ -62,9 +62,10 @@ class OptionCest
         $I->seeResponseIsJson();
 
 
-//  pričakujemo enako, kot smo nastavili v fixture-ju
+        /*
+         *   pričakujemo enako, kot smo nastavili v fixture-ju
+         */
         $pricakovano = array("privzeta trojka");
-
         $opt = $I->successfullyCallRpc($this->rpcUrl, 'getOptions', ["name" => "dogodek.delte"]);
         codecept_debug($opt);
 //        $I->assertEquals($pricakovano, $opt);
@@ -77,8 +78,11 @@ class OptionCest
         $I->assertEquals(0, $opt['delVajKon']['value']);
         $I->assertEquals(0, $opt['delVajZacTeh']['value']);
         $I->assertEquals(0, $opt['delVajKonTeh']['value']);
-        
+
         $opt = $I->successfullyCallRpc($this->rpcUrl, 'getOptions', ["name" => "dogodek.termini"]);
+        codecept_debug($opt);
+
+        $opt = $I->successfullyCallRpc($this->rpcUrl, 'getOptions', ["name" => "dogodek.barve"]);
         codecept_debug($opt);
     }
 

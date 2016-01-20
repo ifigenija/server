@@ -25,7 +25,9 @@ class AbonmaCest
 
     private $restUrl = '/rest/abonma';
     private $id;
-    private $obj;
+    private $obj1;
+    private $obj2;
+    private $obj3;
 
     public function _before(ApiTester $I)
     {
@@ -44,26 +46,28 @@ class AbonmaCest
      */
     public function create(ApiTester $I)
     {
-        $data      = [
+        $data       = [
             'stPredstav' => 5,
             'stKuponov'  => 55,
             'ime'        => 'zz',
             'opis'       => 'zz',
             'kapaciteta' => 555,
+            'barva'      => '#123456',
         ];
-        $this->obj = $abon      = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertEquals($abon['ime'], 'zz');
+        $this->obj1 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertEquals($ent['ime'], 'zz');
 
         // kreiramo še en zapis za test sortov
-        $data = [
+        $data       = [
             'stPredstav' => 7,
             'stKuponov'  => 8,
             'ime'        => 'Živa',
             'opis'       => 'aa',
             'kapaciteta' => 9,
+            'barva'      => '#aabbcc',
         ];
-        $abon = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertGuid($abon['id']);
+        $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
 
         // kreiramo še en zapis
         $data = [
@@ -73,8 +77,8 @@ class AbonmaCest
             'opis'       => 'aa',
             'kapaciteta' => 9,
         ];
-        $abon = $I->successfullyCreate($this->restUrl, $data);
-        $I->assertGuid($abon['id']);
+        $ent  = $I->successfullyCreate($this->restUrl, $data);
+        $I->assertGuid($ent['id']);
     }
 
     /**
@@ -85,12 +89,12 @@ class AbonmaCest
      */
     public function update(ApiTester $I)
     {
-        $abon               = $this->obj;
-        $abon['kapaciteta'] = '444';
+        $ent               = $this->obj1;
+        $ent['kapaciteta'] = '444';
 
-        $abon = $I->successfullyUpdate($this->restUrl, $abon['id'], $abon);
+        $ent = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
-        $I->assertEquals($abon['kapaciteta'], '444');
+        $I->assertEquals($ent['kapaciteta'], '444');
     }
 
     /**
@@ -101,30 +105,16 @@ class AbonmaCest
      */
     public function read(\ApiTester $I)
     {
-        $abon = $I->successfullyGet($this->restUrl, $this->obj['id']);
+        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
+        codecept_debug($ent);
 
-        $I->assertEquals($abon['stPredstav'], 5);
-        $I->assertEquals($abon['stKuponov'], 55);
-        $I->assertEquals($abon['ime'], 'zz');
-        $I->assertEquals($abon['opis'], 'zz');
-        $I->assertEquals($abon['kapaciteta'], 444);
+        $I->assertEquals($ent['stPredstav'], 5);
+        $I->assertEquals($ent['stKuponov'], 55);
+        $I->assertEquals($ent['ime'], 'zz');
+        $I->assertEquals($ent['opis'], 'zz');
+        $I->assertEquals($ent['kapaciteta'], 444);
+        $I->assertEquals($ent['barva'], '#123456');
     }
-
-    /**
-     * @depends create
-     * @param ApiTester $I
-     */
-//    public function getListVse(ApiTester $I)
-//    {
-//        $listUrl = $this->restUrl . "/vse";
-//        codecept_debug($listUrl);
-//        $resp    = $I->successfullyGetList($listUrl, []);
-//        $list    = $resp['data'];
-//
-//        $I->assertNotEmpty($list);
-//        $I->assertEquals(2, $resp['state']['totalRecords']);
-//        $I->assertEquals("aa", $list[0]['ime']);      //glede na sort
-//    }
 
     /**
      * @depends create
@@ -145,12 +135,42 @@ class AbonmaCest
     }
 
     /**
+     * sprobati validacijo filtra barv
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateBarv(ApiTester $I)
+    {
+        $data          = $this->obj1;
+        $data['barva'] = '#123';     // napačen format
+        $ent = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        $I->assertEquals($data['barva'],$ent['barva']);
+        
+        $data['barva'] = '#g00';     // napačen format
+        $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        codecept_debug($resp);
+        
+        $data['barva'] = '#12';     // napačen format
+        $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        codecept_debug($resp);
+        
+        $data['barva'] = '#1234';     // napačen format
+        $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        codecept_debug($resp);
+        
+        $data['barva'] = '#123456789';     // napačen format
+        $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        codecept_debug($resp);
+    }
+
+    /**
      * @depends create
      */
     public function delete(ApiTester $I)
     {
-        $user = $I->successfullyDelete($this->restUrl, $this->obj['id']);
-        $I->failToGet($this->restUrl, $this->obj['id']);
+        $user = $I->successfullyDelete($this->restUrl, $this->obj1['id']);
+        $I->failToGet($this->restUrl, $this->obj1['id']);
     }
 
     /**

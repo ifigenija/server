@@ -82,6 +82,18 @@ class Prostor
      */
     protected $opis;
 
+        /**
+     * barva v html obliki #XXXXXX ali #XXX 
+     * pri čemer X predstavlja šestnajstiško števko (0-9,a-f)
+     * 
+     * @ORM\Column(type="string", length=7, nullable=true)
+     * @Max\I18n(label="prostor.barva", description="prostor.d.barva")
+     * @Max\Ui(type="colour")
+     * @var string
+     */
+    protected $barva;
+
+    
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Popa", inversedBy="prostori")
      * @Max\I18n(label="prostor.popa",  description="prostor.d.popa")
@@ -225,5 +237,16 @@ class Prostor
         $this->jeMaticniOder = $jeMaticniOder;
         return $this;
     }
+    function getBarva()
+    {
+        return $this->barva;
+    }
+
+    function setBarva($barva)
+    {
+        $this->barva = $barva;
+        return $this;
+    }
+
 
 }

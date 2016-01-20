@@ -57,6 +57,17 @@ class Abonma
     protected $opis;
 
     /**
+     * barva v html obliki #XXXXXX ali #XXX 
+     * pri čemer X predstavlja šestnajstiško števko (0-9,a-f)
+     * 
+     * @ORM\Column(type="string", length=7, nullable=true)
+     * @Max\I18n(label="abonma.barva", description="abonma.d.barva")
+     * @Max\Ui(type="colour")
+     * @var string
+     */
+    protected $barva;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label="abonma.kapaciteta", description="abonma.d.kapaciteta")
      * @Max\Ui(type="integer")
@@ -154,6 +165,17 @@ class Abonma
     function setPredstave($predstave)
     {
         $this->predstave = $predstave;
+        return $this;
+    }
+
+    function getBarva()
+    {
+        return $this->barva;
+    }
+
+    function setBarva($barva)
+    {
+        $this->barva = $barva;
         return $this;
     }
 

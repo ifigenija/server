@@ -107,6 +107,17 @@ class Dogodek
     protected $title;
 
     /**
+     * barva v html obliki #XXXXXX ali #XXX 
+     * pri čemer X predstavlja šestnajstiško števko (0-9,a-f)
+     * 
+     * @ORM\Column(type="string", length=7, nullable=true)
+     * @Max\I18n(label="dogodek.barva", description="dogodek.d.barva")
+     * @Max\Ui(type="colour")
+     * @var string
+     */
+    protected $barva;
+
+    /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Predstava", inversedBy="dogodek")
      * @ORM\JoinColumn(name="predstava_id", referencedColumnName="id", unique=true)
      * @Max\I18n(label = "dogodek.predstava", description = "dogodek.d.predstava")
@@ -563,6 +574,16 @@ class Dogodek
     function setTehnicni(\Koledar\Entity\DogodekTehnicni $tehnicni = null)
     {
         $this->tehnicni = $tehnicni;
+        return $this;
+    }
+    function getBarva()
+    {
+        return $this->barva;
+    }
+
+    function setBarva($barva)
+    {
+        $this->barva = $barva;
         return $this;
     }
 

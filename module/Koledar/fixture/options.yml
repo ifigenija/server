@@ -124,3 +124,32 @@
             h: 23
             m: 00
            
+-
+    name: dogodek.barve
+    description: Privzete barve za različne tipe dogodkov 
+    public: true
+    readOnly: false
+    perUser: true
+    type: array
+    defaultValue: 
+        predstavaDoma:
+            label: Barva predstave doma
+            value: '#191a00'                # črna
+        gostovanje:
+            label: Barva gostovanja
+            value: '#ff3300'                # rdeča
+        gostujoca:
+            label: Barva gostujoce predstave
+            value: '#29a329'                # zelena
+        splosni:                                    # $$ predpostavka, da je splošni dogodek isto kot drugi javni dogodek
+            label: Barva drugega javnega dogodka
+            value: '#0066ff'                # modra
+        vaja:
+            label: Barva vaje
+            value: '#ffa74d'                # oker
+        obnovitvenaVaja:
+            label: Barva obnovitvene vaje
+            value: '#ffe6cc'                # $$ nimamo podatka, zato za začetek svetli oker
+        tehnicni:
+            label: Barva tehničnega dogodka
+            value: '#ac7339'                # rjava

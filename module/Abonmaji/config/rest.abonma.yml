@@ -11,6 +11,7 @@ forms:
             - ime
             - opis
             - kapaciteta
+            - barva
 lists:
     default: 
         hydrator:

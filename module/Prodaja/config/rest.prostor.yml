@@ -17,6 +17,7 @@ forms:
             - opis
             - popa
             - naslov
+            - barva
         hydrator:
             lookups:
                 - popa
