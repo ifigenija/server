@@ -112,7 +112,7 @@ class Dogodek
      * 
      * @ORM\Column(type="string", length=7, nullable=true)
      * @Max\I18n(label="dogodek.barva", description="dogodek.d.barva")
-     * @Max\Ui(type="colour")
+     * @Max\Ui(type="color")
      * @var string
      */
     protected $barva;
@@ -533,10 +533,11 @@ class Dogodek
     }
 
     /**
-     * @param ProdajaPredstave $prodajaPredstave
-     * @return Dogodek
+     * 
+     * @param ArrayCollection $prodajaPredstave
+     * @return \Koledar\Entity\Dogodek
      */
-    public function setProdajaPredstave(ProdajaPredstave $prodajaPredstave = null)
+    public function setProdajaPredstave($prodajaPredstave = null)
     {
         $this->prodajaPredstave = $prodajaPredstave;
         return $this;
@@ -576,6 +577,7 @@ class Dogodek
         $this->tehnicni = $tehnicni;
         return $this;
     }
+
     function getBarva()
     {
         return $this->barva;

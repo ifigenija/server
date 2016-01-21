@@ -62,7 +62,7 @@ class Abonma
      * 
      * @ORM\Column(type="string", length=7, nullable=true)
      * @Max\I18n(label="abonma.barva", description="abonma.d.barva")
-     * @Max\Ui(type="colour")
+     * @Max\Ui(type="color")
      * @var string
      */
     protected $barva;

@@ -88,7 +88,7 @@ class Prostor
      * 
      * @ORM\Column(type="string", length=7, nullable=true)
      * @Max\I18n(label="prostor.barva", description="prostor.d.barva")
-     * @Max\Ui(type="colour")
+     * @Max\Ui(type="color")
      * @var string
      */
     protected $barva;
