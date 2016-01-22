@@ -83,7 +83,7 @@ class DogodekFixture
         }
         if ($v[14]) {
             $getref = $this->getReference($v[14]);
-            $o->setSezona($getref);
+//            $o->setSezona($getref);
         }
         if ($nov) {
             $rep->create($o);
@@ -103,9 +103,9 @@ class DogodekFixture
             ['02', "2012-06-03 10:00", "2012-06-04 10:00", "2015-06-27 12:00", '400s', "200s", "", "dogodek 2", NULL, NULL, 'Vaja-02', NULL, NULL, 'Prostor-0005', NULL,],
             // oddaja prostora, ni vezano na uprizoritev
             ['03', "2012-08-01 20:00", "2012-08-01 20:00", "2015-08-01 23:00", '400s', "200s", "", "dogodek 3", NULL, NULL, 'Vaja-03', NULL, NULL, 'Prostor-0002', NULL,],
-            // status  še ni odobren (zaenkrat <500) $$
+            // status  še ni potrjen (zaenkrat <500) $$
             ['04', "2012-08-01 20:00", "2012-08-01 20:00", "2015-08-01 23:00", '200s', "200s", "", "dogodek 4", NULL, NULL, 'Vaja-04', NULL, NULL, 'Prostor-0003', NULL,],
-            // status odobren (zaenkrat >='500') $$
+            // status potrjen (zaenkrat >='500') $$
             ['05', "2012-08-01 20:00", "2012-08-01 20:00", "2015-08-01 23:00", '500s', "200s", "", "dogodek 5", NULL, NULL, 'Vaja-05', NULL, NULL, 'Prostor-0006', NULL,],
         ];
     }

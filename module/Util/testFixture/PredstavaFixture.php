@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  *
@@ -67,10 +68,17 @@ class PredstavaFixture
         $o->setProstor($ref);
 
         $ref = $v[8] ? $this->getReference($v[8]) : null;
-        $o->setSezona($ref);
+//        $o->setSezona($ref);
 
-//        $ref = $v[9] ? $this->getReference($v[9]) : null;
-//        $o->setDezurni($ref);
+        /*
+         * many to many
+         */
+        $o->abonmaji = new ArrayCollection();
+        foreach ($v[9] as $r) {
+            $abonma = $this->getReference($r);
+            $abonma->getPredstave()->add($o);
+            $o->getAbonmaji()->add($abonma);
+        }
 
         if ($nov) {
             $rep->create($o);
@@ -88,7 +96,9 @@ class PredstavaFixture
     public function getData()
     {
         return [
-            ['01', 1, 'Uprizoritev-0002', 'Predstava 1', '200s', '2014-05-10T23:00:00+0200', '2014-05-10T23:00:00+0200', 'Prostor-0001', null, 'Oseba-0002'],
+            ['01', 1, 'Uprizoritev-0002', 'Predstava 1', '400s', '2014-05-10T20:00:00+0200', '2014-05-10T23:00:00+0200', 'Prostor-0001', null, ['Abonma-01', 'Abonma-02'],],
+            ['02', 2, 'Uprizoritev-0002', 'Predstava 2', '200s', '2014-05-11T20:00:00+0200', '2014-05-11T23:00:00+0200', 'Prostor-0002', null, ['Abonma-02', 'Abonma-03'],],
+            ['03', 3, 'Uprizoritev-0002', 'Predstava 3', '200s', '2014-05-20T20:00:00+0200', '2014-05-20T23:00:00+0200', 'Prostor-0001', null, [],],
         ];
     }
 

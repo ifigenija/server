@@ -56,14 +56,6 @@ class Sezona
     protected $konec;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     * @Max\I18n(label="sezona.aktivna", description="sezona.d.aktivna")
-     * @Max\Ui(type="boolcheckbox")
-     * @var boolean
-     */
-    protected $aktivna;
-
-    /**
      * @ORM\OneToMany(targetEntity="Koledar\Entity\Dogodek", mappedBy="sezona")
      * @var <Dogodki>
      */
@@ -76,7 +68,8 @@ class Sezona
 
     public function validate($mode = 'update')
     {
-        
+        $this->expect($this->zacetek, "Začetek je obvezen podatek", 1001360);
+        $this->expect($this->konec, "Konec je obvezen podatek", 1001361);
     }
 
     function getId()
@@ -102,11 +95,6 @@ class Sezona
     function getKonec()
     {
         return $this->konec;
-    }
-
-    function getAktivna()
-    {
-        return $this->aktivna;
     }
 
     function getDogodki()
@@ -137,11 +125,6 @@ class Sezona
     function setKonec($konec)
     {
         $this->konec = $konec;
-    }
-
-    function setAktivna($aktivna)
-    {
-        $this->aktivna = $aktivna;
     }
 
     function setDogodki($dogodki)

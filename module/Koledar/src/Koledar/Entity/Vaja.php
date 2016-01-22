@@ -81,7 +81,7 @@ class Vaja
     public function lahkoBrisem()
     {
         if ($this->getDogodek()) {
-            $niPotrjen = $this->getDogodek()->getStatus() < Dogodek::ODOBREN;
+            $niPotrjen = $this->getDogodek()->getStatus() < Dogodek::POTRJEN;
             $this->expect($niPotrjen, "Dogodek je javno potrjen, brisanje ni mogoče", 1000544);
         }
     }

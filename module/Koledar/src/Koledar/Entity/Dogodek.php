@@ -5,7 +5,6 @@ namespace Koledar\Entity;
 use Doctrine\ORM\Mapping AS ORM,
     Max\Ann\Entity as Max;
 use Doctrine\Common\Collections\ArrayCollection;
-use Prodaja\Entity\ProdajaPredstave;
 use Prodaja\Entity\Prostor;
 use Produkcija\Entity\Uprizoritev;
 use Zend\I18n\Validator\DateTime;
@@ -35,7 +34,7 @@ class Dogodek
     const PLANIRAN               = "200s";
 //    const FIKSIRAN      = "300s";
     const PREGLEDAN              = "400s";
-    const ODOBREN                = "500s";
+    const POTRJEN                = "500s";
     const ODPOVEDAN              = "610s";
     const ZAKLJUCEN              = "600s";
     const OBDELAN_OD_INSPICIENTA = "710s";
@@ -51,15 +50,6 @@ class Dogodek
      * @var string
      */
     protected $id;
-
-    /**
-     *
-     * @ORM\Column(type="boolean", options = {"default"=false}, nullable=true)
-     * @Max\I18n(label = "dogodek.allDay", description = "dogodek.d.allDay")
-     * @Max\Ui(type="boolcheckbox")
-     * @var boolean
-     */
-    protected $allDay = false;
 
     /**
      *
@@ -179,11 +169,6 @@ class Dogodek
      */
     protected $terminiStoritve;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Prodaja\Entity\ProdajaPredstave", mappedBy="dogodek")
-     * @var <ProdajaPredstave>
-     */
-    protected $prodajaPredstave;
 
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona", inversedBy="dogodki")
@@ -198,7 +183,6 @@ class Dogodek
     public function __construct()
     {
         $this->terminiStoritve  = new ArrayCollection();
-        $this->prodajaPredstave = new ArrayCollection();
     }
 
     public function validate($mode = 'update')
@@ -297,24 +281,6 @@ class Dogodek
     public function setId($id)
     {
         $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getAllDay()
-    {
-        return $this->allDay;
-    }
-
-    /**
-     * @param boolean $allDay
-     * @return Dogodek
-     */
-    public function setAllDay($allDay)
-    {
-        $this->allDay = $allDay;
         return $this;
     }
 
@@ -521,25 +487,6 @@ class Dogodek
     public function setTerminiStoritve($terminiStoritve)
     {
         $this->terminiStoritve = $terminiStoritve;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProdajaPredstave()
-    {
-        return $this->prodajaPredstave;
-    }
-
-    /**
-     * 
-     * @param ArrayCollection $prodajaPredstave
-     * @return \Koledar\Entity\Dogodek
-     */
-    public function setProdajaPredstave($prodajaPredstave = null)
-    {
-        $this->prodajaPredstave = $prodajaPredstave;
         return $this;
     }
 

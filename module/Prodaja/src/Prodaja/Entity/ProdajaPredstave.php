@@ -39,12 +39,6 @@ class ProdajaPredstave
      */
     protected $sedezniRed;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Koledar\Entity\Dogodek", inversedBy="prodajaPredstave")
-     * @ORM\JoinColumn(name="dogodek_id", referencedColumnName="id", nullable=false)
-     */
-    protected $dogodek;
-
     public function __construct()
     {
         $this->racun         = new ArrayCollection();
@@ -77,11 +71,6 @@ class ProdajaPredstave
         return $this->sedezniRed;
     }
 
-    public function getDogodek()
-    {
-        return $this->dogodek;
-    }
-
     public function setId($id)
     {
         $this->id = $id;
@@ -109,12 +98,6 @@ class ProdajaPredstave
     public function setSedezniRed($sedezniRed)
     {
         $this->sedezniRed = $sedezniRed;
-        return $this;
-    }
-
-    public function setDogodek($dogodek)
-    {
-        $this->dogodek = $dogodek;
         return $this;
     }
 

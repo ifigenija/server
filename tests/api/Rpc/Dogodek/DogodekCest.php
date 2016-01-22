@@ -63,6 +63,7 @@ class DogodekCest
         $ent = $I->successfullyGet($this->dogodekUrl, $newId);
         codecept_debug($ent);
         $I->assertEquals($zacetek, $ent['zacetek'], "nov začetek");
+        $I->assertEquals('200s', $ent['status'], "nov začetek");
 
         /*
          * ali število terminov storitev v starem in novem dogodku enako
@@ -244,10 +245,10 @@ class DogodekCest
             "dogodekId"       => $dogodekId
             , "terminiStoritev" => $terminiStoritev]);
         codecept_debug($resp);
+        
         $this->kontroleRezultatovAzurirajTs($I, $dogodekId, $terminiStoritev);
 
-
-
+        
         /*
          * A,B -> B,C,D,E   - dva nova kreiramo, 1 zbrišemo
          */
@@ -320,7 +321,7 @@ class DogodekCest
         $this->kontroleRezultatovKopirajDogodek($I, $dogodekId, $zacetek, $newId);
 
         /*
-         * dogodek ki ni v statusu planiran
+         * dogodek ki ni v statusu planiran, pregledan ali potrjen
          */
         $dogodekId = $this->lookDogTehnicniDog2Id;
         $zacetek   = '2012-06-05T10:10:00+0200';

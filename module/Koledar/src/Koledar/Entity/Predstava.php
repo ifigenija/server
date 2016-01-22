@@ -47,14 +47,6 @@ class Predstava
     protected $zaporednaSez;
 
     /**
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Max\I18n(label = "predstava.objavljenZacetek", description = "predstava.d.objavljenZacetek")
-     * @var string
-     */
-    protected $objavljenZacetek;
-
-    /**
      * @ORM\OneToOne(targetEntity="Koledar\Entity\Dogodek", mappedBy="predstava", cascade={"persist"})
      * @Max\I18n(label = "predstava.dogodek", description = "predstava.d.dogodek")
      * @Max\Ui(type="toone")
@@ -99,7 +91,7 @@ class Predstava
     public function lahkoBrisem()
     {
         if ($this->getDogodek()) {
-            $niPotrjen = $this->getDogodek()->getStatus() < Dogodek::ODOBREN;
+            $niPotrjen = $this->getDogodek()->getStatus() < Dogodek::POTRJEN;
             $this->expect($niPotrjen, "Dogodek je javno potrjen, brisanje ni mogoče", 1000544);
         }
     }
@@ -201,24 +193,6 @@ class Predstava
     public function setGostovanje(Gostovanje $gostovanje = null)
     {
         $this->gostovanje = $gostovanje;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getObjavljenZacetek()
-    {
-        return $this->objavljenZacetek;
-    }
-
-    /**
-     * @param string $objavljenZacetek
-     * @return Predstava
-     */
-    public function setObjavljenZacetek($objavljenZacetek)
-    {
-        $this->objavljenZacetek = $objavljenZacetek;
         return $this;
     }
 

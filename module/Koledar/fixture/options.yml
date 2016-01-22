@@ -14,7 +14,7 @@
         400s:
             label: Pregledan
         500s: 
-            label: Odobren
+            label: Potrjen
         600s: 
             label: Zaključen
         610s:

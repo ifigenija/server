@@ -301,14 +301,14 @@ class ZaposlitevCest
          * lahko pa kreiram neaktivno zaposlitev
          */
         $data['status'] = 'N';
-        $resp           = $I->successfullyCreate($this->restUrl, $data);
+//        $resp           = $I->successfullyCreate($this->restUrl, $data);
 
 
         /*
          * ne sme se prekrivati v intervalu neaktivno zaposlitev
          */
-        $data['zacetek'] = '2018-01-01T00:00:00+0100';  //še vedno pred konce prejšnjega
-        $data['konec']   = null;
+        $data['zacetek'] = '2016-02-01T00:00:00+0100'; 
+        $data['konec']   = '2016-02-01T00:00:00+0100';         // isti dan kot začetek prejšnjega
         $resp            = $I->failToCreate($this->restUrl, $data);
         codecept_debug($resp);
         $I->assertEquals(1000335, $resp[0]['code']);
@@ -361,7 +361,7 @@ class ZaposlitevCest
         $list   = $resp['data'];
         codecept_debug($resp);
         $totRec = $resp['state']['totalRecords'];
-        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
         $I->assertNotEmpty($list);
 //        $I->assertEquals("00", $list[0]['sifra']);      // odvisno od sortiranja
 //        $I->assertEquals("99x", $list[$totRec - 1]['sifra']);      // odvisno od sortiranja

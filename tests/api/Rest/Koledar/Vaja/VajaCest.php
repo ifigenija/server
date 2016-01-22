@@ -50,9 +50,10 @@ class VajaCest
     private $lookProstor1;
     private $lookProstor2;
     private $lookProstor3;
-    private $lookSezona1;
-    private $lookSezona2;
-    private $lookSezona3;
+    private $lookSezona2014;
+    private $lookSezona2015;
+    private $lookSezona2016;
+    private $lookSezona2017;
     private $lookOseba1;
     private $lookOseba2;
     private $lookOseba3;
@@ -160,13 +161,16 @@ class VajaCest
      */
     public function lookupSezona(ApiTester $I)
     {
-        $this->lookSezona1 = $look              = $I->lookupEntity("sezona", "2015", false);
+        $this->lookSezona2014 = $look                 = $I->lookupEntity("sezona", "2014", false);
         $I->assertGuid($look['id']);
 
-        $this->lookSezona2 = $look              = $I->lookupEntity("sezona", "2016", false);
+        $this->lookSezona2015 = $look                 = $I->lookupEntity("sezona", "2015", false);
         $I->assertGuid($look['id']);
 
-        $this->lookSezona3 = $look              = $I->lookupEntity("sezona", "2017", false);
+        $this->lookSezona2016 = $look                 = $I->lookupEntity("sezona", "2016", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona2017 = $look                 = $I->lookupEntity("sezona", "2017", false);
         $I->assertGuid($look['id']);
     }
 
@@ -179,7 +183,7 @@ class VajaCest
      */
     public function create(ApiTester $I)
     {
-        $zacetek        = '2014-05-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $zacetek        = '2015-05-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data           = [
             'tipvaje'     => $this->lookTipVaje1['id'],
             'zaporedna'   => 9,
@@ -187,9 +191,8 @@ class VajaCest
             'title'       => "Vaja $zacetek",
             'status'      => '200s',
             'zacetek'     => $zacetek,
-            'konec'       => '2014-05-07T14:00:00+0200',
+            'konec'       => '2015-05-07T14:00:00+0200',
             'prostor'     => $this->lookProstor1['id'],
-            'sezona'      => $this->lookSezona1['id'],
         ];
         /*
          * pripravimo parametre alternacij, npr. prve 3 te uprizoritve
@@ -211,7 +214,7 @@ class VajaCest
         $I->assertEquals($ent['title'], $data['title']);
         $I->assertEquals($ent['status'], $data['status']);
         $I->assertEquals($ent['prostor'], $data['prostor']);
-        $I->assertEquals($ent['sezona'], $data['sezona']);
+        $I->assertEquals($ent['sezona'], $this->lookSezona2015['id']);
 
         /**
          * preveri dogodek
@@ -224,7 +227,7 @@ class VajaCest
         $I->assertEquals($dogodek['zacetek'], $data['zacetek'], 'zacetek');
         $I->assertEquals($dogodek['konec'], $data['konec'], 'konec');
         $I->assertEquals($dogodek['prostor']['id'], $data['prostor'], 'prostor');
-        $I->assertEquals($dogodek['sezona'], $data['sezona'], 'sezona');
+        $I->assertEquals($dogodek['sezona'], $ent['sezona']);
 
 
         /**
@@ -240,7 +243,6 @@ class VajaCest
             'zacetek'     => $zacetek,
             'konec'       => '2014-05-08T14:00:00+0200',
             'prostor'     => null,
-            'sezona'      => null,
         ];
         $parAlternacije = '';   //init
         for ($i = 1; $i <= 5; $i++) {
@@ -250,6 +252,31 @@ class VajaCest
                 . 'gost[]=' . $this->lookOseba2['id'] . '&';
         $parDelte   = 'deltaZacTeh=22&deltaKonTeh=23&';
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl . "?" . $parAlternacije . $parGosti . $parDelte, $data);
+        $I->assertGuid($ent['id']);
+        $I->assertEquals($ent['sezona'], $this->lookSezona2014['id']);
+
+        /**
+         * kreiramo še eno vajo
+         */
+        $zacetek        = '2016-05-08T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data           = [
+            'tipvaje'     => NULL,
+            'zaporedna'   => 2,
+            'uprizoritev' => $this->lookUprizoritev1['id'],
+            'title'       => "Vaja $zacetek",
+            'status'      => '200s',
+            'zacetek'     => $zacetek,
+            'konec'       => '2016-05-08T14:00:00+0200',
+            'prostor'     => null,
+        ];
+        $parAlternacije = '';   //init
+        for ($i = 1; $i <= 5; $i++) {
+            $parAlternacije .= 'alternacija[]=' . $this->altUpr1Ids[$i] . '&';
+        }
+        $parGosti   = 'gost[]=' . $this->lookOseba1['id'] . '&'
+                . 'gost[]=' . $this->lookOseba2['id'] . '&';
+        $parDelte   = 'deltaZacTeh=22&deltaKonTeh=23&';
+        $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl . "?" . $parAlternacije . $parGosti . $parDelte, $data);
         $I->assertGuid($ent['id']);
 
 
@@ -266,7 +293,6 @@ class VajaCest
             'zacetek'     => $zacetek,
             'konec'       => '2014-05-08T14:00:00+0200',
             'prostor'     => null,
-            'sezona'      => null,
         ];
         $parAlternacije = '';   //init
         for ($i = 1; $i <= 2; $i++) {
@@ -316,7 +342,7 @@ class VajaCest
         codecept_debug($data);
         $this->obj1    = $ent           = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
         $I->assertEquals($ent['title'], $data['title']);
-        
+
         /**
          * preveri dogodek
          */
@@ -336,9 +362,59 @@ class VajaCest
         /*
          * $$ tu bi še lahko preveril čase terminov storitev
          */
-        
-        
-        
+    }
+
+    /**
+     * glede na datum se sezona preračuna
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateZaPreracunSezone(ApiTester $I)
+    {
+        /*
+         * začetek v sezoni 2017
+         */
+        $data            = $this->obj3;
+        $data['zacetek'] = '2017-05-08T15:00:00+0200';
+        $data['konec']   = '2017-05-08T19:00:00+0200';
+        codecept_debug($data);
+        $this->obj3      = $ent             = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        /**
+         * preveri dogodek
+         */
+        $dogodek         = $I->successfullyGet($this->dogodekUrl, $data['dogodek']['id']);
+        codecept_debug($dogodek);
+        $I->assertEquals($dogodek['sezona'], $this->lookSezona2017['id']);
+
+
+        /*
+         * začetek v neobstoječi sezoni
+         */
+        $data['zacetek'] = '1999-05-08T15:00:00+0200';
+        $data['konec']   = '1999-05-08T19:00:00+0200';
+        codecept_debug($data);
+        $this->obj3      = $ent             = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        /**
+         * preveri dogodek
+         */
+        $dogodek         = $I->successfullyGet($this->dogodekUrl, $data['dogodek']['id']);
+        codecept_debug($dogodek);
+        $I->assertEquals($dogodek['sezona'], null);
+
+        /*
+         * začetek v dnevu konca sezone
+         */
+        $data['zacetek'] = '2016-12-31T15:00:00+0200';
+        $data['konec']   = '2017-01-01T08:00:00+0200';
+        codecept_debug($data);
+        $this->obj3      = $ent             = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        /**
+         * preveri dogodek
+         */
+        $dogodek         = $I->successfullyGet($this->dogodekUrl, $data['dogodek']['id']);
+        codecept_debug($dogodek);
+        $I->assertEquals($dogodek['sezona'], $this->lookSezona2016['id']);
     }
 
     /**
@@ -352,7 +428,7 @@ class VajaCest
         $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
 
         codecept_debug($ent);
-        $zacetek = '2014-05-07T10:00:00+0200';
+        $zacetek = '2015-05-07T10:00:00+0200';
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['tipvaje'], $this->lookTipVaje1['id'], 'tipvaje');
         $I->assertEquals($ent['zaporedna'], 9);
@@ -360,9 +436,9 @@ class VajaCest
         $I->assertEquals($ent['title'], "yy");
         $I->assertEquals($ent['status'], '200s');
         $I->assertEquals($ent['zacetek'], $zacetek);
-        $I->assertEquals($ent['konec'], '2014-05-07T14:00:00+0200');
+        $I->assertEquals($ent['konec'], '2015-05-07T14:00:00+0200');
         $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
-        $I->assertEquals($ent['sezona'], $this->lookSezona1['id']);
+        $I->assertEquals($ent['sezona'], $this->lookSezona2015['id']);
     }
 
     /**

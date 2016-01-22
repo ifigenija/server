@@ -7,8 +7,6 @@ disabledMethods:
 forms:
     default: 
         elements:
-#            - id
-            - allDay
             - zacetek
             - konec
             - status

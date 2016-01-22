@@ -56,9 +56,10 @@ class PredstavaCest
     private $objAbonma1;
     private $objAbonma2;
     private $objAbonma3;
-    private $lookSezona1;
-    private $lookSezona2;
-    private $lookSezona3;
+    private $lookSezona2015;
+    private $lookSezona2016;
+    private $lookSezona2017;
+    private $lookSezona2014;
     private $lookOseba1;
     private $lookOseba2;
     private $lookOseba3;
@@ -160,13 +161,16 @@ class PredstavaCest
      */
     public function lookupSezona(ApiTester $I)
     {
-        $this->lookSezona1 = $look              = $I->lookupEntity("sezona", "2015", false);
+        $this->lookSezona2014 = $look              = $I->lookupEntity("sezona", "2014", false);
         $I->assertGuid($look['id']);
 
-        $this->lookSezona2 = $look              = $I->lookupEntity("sezona", "2016", false);
+        $this->lookSezona2015 = $look              = $I->lookupEntity("sezona", "2015", false);
         $I->assertGuid($look['id']);
 
-        $this->lookSezona3 = $look              = $I->lookupEntity("sezona", "2017", false);
+        $this->lookSezona2016 = $look              = $I->lookupEntity("sezona", "2016", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona2017 = $look              = $I->lookupEntity("sezona", "2017", false);
         $I->assertGuid($look['id']);
     }
 
@@ -231,9 +235,6 @@ class PredstavaCest
             'zacetek'      => $zacetek,
             'konec'        => '2014-05-07T23:00:00+0200',
             'prostor'      => $this->lookProstor1['id'],
-            'sezona'       => $this->lookSezona1['id'],
-//            'gostovanje'  => $this->objGostovanje['id'],
-//            'dogodek'     => NULL,
         ];
 
 
@@ -277,7 +278,6 @@ class PredstavaCest
             'zacetek'      => $zacetek,
             'konec'        => '2014-05-08T23:00:00+0200',
             'prostor'      => null, // če je gostovanje ne rabimo prostora
-            'sezona'       => null,
         ];
         $parAlternacije = '';   //init
         for ($i = 1; $i <= 3; $i++) {
@@ -305,7 +305,6 @@ class PredstavaCest
             'zacetek'      => $zacetek,
             'konec'        => '2014-05-08T23:00:00+0200',
             'prostor'      => null, // če je gostovanje ne rabimo prostora
-            'sezona'       => null,
         ];
         $parAlternacije = '';   //init
         for ($i = 1; $i <= 3; $i++) {
@@ -394,7 +393,7 @@ class PredstavaCest
         $I->assertEquals($ent['zacetek'], $zacetek);
         $I->assertEquals($ent['konec'], '2014-05-07T23:00:00+0200');
         $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
-        $I->assertEquals($ent['sezona'], $this->lookSezona1['id'], "sezona");
+        $I->assertEquals($ent['sezona'], $this->lookSezona2014['id'], "sezona");
     }
 
     /**

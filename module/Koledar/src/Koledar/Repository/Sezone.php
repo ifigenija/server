@@ -48,7 +48,7 @@ class Sezone
         $e  = $qb->expr();
         if (!empty($options['q'])) {
 
-            $ime = $e->like('lower(p.ime)', ':query');
+            $ime   = $e->like('lower(p.ime)', ':query');
             $sifra = $e->like('lower(p.sifra)', ':query');
 
             $qb->andWhere($e->orX($ime, $sifra));
@@ -58,13 +58,51 @@ class Sezone
         return $qb;
     }
 
+    /**
+     * 
+     * @param type $object
+     * @param type $params
+     */
     public function create($object, $params = null)
     {
         if (empty($object->getSifra())) {
             $num = $this->getServiceLocator()->get('stevilcenje.generator');
             $object->setSifra($num->generate('sezona'));
         }
+        $this->preveriSezone($object);
+
         parent::create($object, $params);
+    }
+
+    public function update($object, $params = null)
+    {
+        $this->preveriSezone($object);
+
+        parent::update($object, $params);
+    }
+
+    /**
+     * Preveri ostale sezone 
+     * 
+     * ni v validate-u, ker moramo klicati repozitorij
+     * 
+     * @param type $object
+     */
+    private function preveriSezone($object)
+    {
+        $vsesezone = $this->getEntityManager()->getRepository('Koledar\Entity\Sezona')
+                ->findAll();
+
+        foreach ($vsesezone as $sez) {
+            /*
+             *  samega sebe ne sme primerjati
+             */
+            if ($object->getId() != $sez->getId()) {
+                $this->expect(( $sez->getKonec() && $object->zacetek > $sez->getKonec() ) ||
+                        ( $object->konec && $sez->getZacetek() > $object->konec )
+                        , "Interval sezone se prekriva s sezono (" . $sez->ime . ")", 1001340);
+            }
+        }
     }
 
 }

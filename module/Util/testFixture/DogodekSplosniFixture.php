@@ -59,7 +59,7 @@ class DogodekSplosniFixture
         $o->setProstor($ref);
 
         $ref = $v[6] ? $this->getReference($v[6]) : null;
-        $o->setSezona($ref);
+//        $o->setSezona($ref);
 
         if ($nov) {
             $rep->create($o);

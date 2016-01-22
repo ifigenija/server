@@ -59,7 +59,7 @@ class DogodekTehnicniFixture
         $o->setProstor($ref);
 
         $ref = $v[6] ? $this->getReference($v[6]) : null;
-        $o->setSezona($ref);
+//        $o->setSezona($ref);
 
         if ($nov) {
             $rep->create($o);
@@ -78,7 +78,7 @@ class DogodekTehnicniFixture
     {
         return [
             ['01', 'DogodekTehnicni 1', '200s', '2012-04-01T17:00:00+0200', '2012-04-01T17:00:00+0200', 'Prostor-0001', null],
-            ['02', 'DogodekTehnicni 2', '400s', '2012-04-02T17:00:00+0200', '2012-05-02T17:00:00+0200', 'Prostor-0002', null],
+            ['02', 'DogodekTehnicni 2', '600s', '2012-04-02T17:00:00+0200', '2012-05-02T17:00:00+0200', 'Prostor-0002', null],
         ];
     }
 

@@ -40,9 +40,10 @@ class DogodekSplosniCest
     private $lookProstor1;
     private $lookProstor2;
     private $lookProstor3;
-    private $lookSezona1;
-    private $lookSezona2;
-    private $lookSezona3;
+    private $lookSezona2014;
+    private $lookSezona2015;
+    private $lookSezona2016;
+    private $lookSezona2017;
     private $lookOseba1;
     private $lookOseba2;
     private $lookOseba3;
@@ -99,13 +100,16 @@ class DogodekSplosniCest
      */
     public function lookupSezona(ApiTester $I)
     {
-        $this->lookSezona1 = $look              = $I->lookupEntity("sezona", "2015", false);
+        $this->lookSezona2014 = $look                 = $I->lookupEntity("sezona", "2014", false);
+        $I->assertGuid($look['id']);
+        
+        $this->lookSezona2015 = $look                 = $I->lookupEntity("sezona", "2015", false);
         $I->assertGuid($look['id']);
 
-        $this->lookSezona2 = $look              = $I->lookupEntity("sezona", "2016", false);
+        $this->lookSezona2016 = $look                 = $I->lookupEntity("sezona", "2016", false);
         $I->assertGuid($look['id']);
 
-        $this->lookSezona3 = $look              = $I->lookupEntity("sezona", "2017", false);
+        $this->lookSezona2017 = $look                 = $I->lookupEntity("sezona", "2017", false);
         $I->assertGuid($look['id']);
     }
 
@@ -123,7 +127,6 @@ class DogodekSplosniCest
             'status'  => '200s',
             'konec'   => '2014-05-07T23:00:00+0200',
             'prostor' => $this->lookProstor1['id'],
-            'sezona'  => $this->lookSezona1['id'],
         ];
         $parSodelujoci = 'sodelujoc[]=' . $this->lookOseba1['id'] . '&'
                 . 'sodelujoc[]=' . $this->lookOseba2['id'] . '&'
@@ -138,13 +141,12 @@ class DogodekSplosniCest
         $I->assertEquals($ent['zacetek'], $data['zacetek']);
         $I->assertEquals($ent['konec'], $data['konec']);
         $I->assertEquals($ent['prostor'], $data['prostor']);
-        $I->assertEquals($ent['sezona'], $data['sezona']);
+        $I->assertEquals($ent['sezona'], $this->lookSezona2014['id']);
 
         /**
          * preveri dogodek
          */
         $this->objDogodek = $dogodek          = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']['id']);
-
         codecept_debug($dogodek);
         $I->assertGuid($dogodek['id']);
         $I->assertEquals($dogodek['title'], $data['title'], 'title');
@@ -152,7 +154,7 @@ class DogodekSplosniCest
         $I->assertEquals($dogodek['zacetek'], $data['zacetek'], 'zacetek');
         $I->assertEquals($dogodek['konec'], $data['konec'], 'konec');
         $I->assertEquals($dogodek['prostor']['id'], $data['prostor'], 'prostor');
-        $I->assertEquals($dogodek['sezona'], $data['sezona'], 'sezona');
+        $I->assertEquals($dogodek['sezona'], $ent['sezona'], 'sezona');
 
         $zacetek       = '2014-06-07T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data          = [
@@ -161,7 +163,6 @@ class DogodekSplosniCest
             'status'  => '200s',
             'konec'   => '2014-06-07T23:00:00+0200',
             'prostor' => $this->lookProstor1['id'],
-            'sezona'  => $this->lookSezona1['id'],
         ];
         $parSodelujoci = 'sodelujoc[]=' . $this->lookOseba1['id'] . '&'
                 . 'sodelujoc[]=' . $this->lookOseba2['id'] . '&'
@@ -233,7 +234,7 @@ class DogodekSplosniCest
         $I->assertEquals($ent['status'], '400s');
         $I->assertEquals($ent['konec'], '2014-05-07T23:00:00+0200');
         $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
-        $I->assertEquals($ent['sezona'], $this->lookSezona1['id']);
+        $I->assertEquals($ent['sezona'], $this->lookSezona2014['id']);
     }
 
     /**

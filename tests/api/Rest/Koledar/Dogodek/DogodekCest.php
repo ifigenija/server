@@ -87,9 +87,10 @@ class DogodekCest
     private $roleUrl           = '/rest/role';
     private $rpcRoleUrl        = '/rpc/aaa/role';
     private $rpcUserUrl        = '/rpc/aaa/user';
-    private $lookSezona1;
-    private $lookSezona2;
-    private $lookSezona3;
+    private $lookSezona2014;
+    private $lookSezona2015;
+    private $lookSezona2016;
+    private $lookSezona2017;
     private $zacetek1;
     private $konec1;
 
@@ -109,13 +110,16 @@ class DogodekCest
      */
     public function lookupSezona(ApiTester $I)
     {
-        $this->lookSezona1 = $look              = $I->lookupEntity("sezona", "2015", false);
+        $this->lookSezona2014 = $look              = $I->lookupEntity("sezona", "2015", false);
+        $I->assertGuid($look['id']);
+        
+        $this->lookSezona2015 = $look              = $I->lookupEntity("sezona", "2015", false);
         $I->assertGuid($look['id']);
 
-        $this->lookSezona2 = $look              = $I->lookupEntity("sezona", "2016", false);
+        $this->lookSezona2016 = $look              = $I->lookupEntity("sezona", "2016", false);
         $I->assertGuid($look['id']);
 
-        $this->lookSezona3 = $look              = $I->lookupEntity("sezona", "2017", false);
+        $this->lookSezona2017 = $look              = $I->lookupEntity("sezona", "2017", false);
         $I->assertGuid($look['id']);
     }
 
@@ -177,7 +181,7 @@ class DogodekCest
             'zacetek' => '2015-02-03T11:00:00+0200',
             'konec'   => '2015-02-03T12:00:00+0200',
             'prostor' => $this->lookProstor1['id'],
-            'sezona'  => $this->lookSezona1['id'],
+            'sezona'  => $this->lookSezona2015['id'],
         ];
         $resp = $I->failToCreate($this->restUrl, $data);
         codecept_debug($resp);
@@ -212,7 +216,7 @@ class DogodekCest
             'zacetek'     => $zacetek,
             'konec'       => $konec,
             'prostor'     => $this->lookProstor1['id'],
-            'sezona'      => $this->lookSezona1['id'],
+            'sezona'      => $this->lookSezona2015['id'],
         ];
         $this->objVaja1 = $ent            = $I->successfullyCreate($this->vajaUrl, $data);
         $I->assertGuid($ent['id']);
@@ -235,7 +239,6 @@ class DogodekCest
         $I->assertEquals($ent['title'], $data['title']);
         $I->assertEquals($ent['status'], $data['status']);
         $I->assertEquals($ent['prostor'], $data['prostor']);
-        $I->assertEquals($ent['sezona'], $data['sezona']);
 
 
         /**
@@ -259,7 +262,6 @@ class DogodekCest
             'zacetek'     => $zacetek,
             'konec'       => $konec,
             'prostor'     => $this->lookProstor1['id'],
-            'sezona'      => $this->lookSezona1['id'],
         ];
 
 
@@ -289,7 +291,6 @@ class DogodekCest
             'zacetek'     => $zacetek,
             'konec'       => $konec,
             'prostor'     => $this->lookProstor2['id'],
-            'sezona'      => $this->lookSezona1['id'],
         ];
         $this->objVaja3 = $ent            = $I->successfullyCreate($this->vajaUrl, $data);
         $I->assertGuid($ent['id']);
@@ -354,7 +355,7 @@ class DogodekCest
         $I->assertEquals($ent['zacetek'], $this->zacetek1);
         $I->assertEquals($ent['konec'], $this->konec1);
         $I->assertEquals($ent['prostor']['id'], $this->lookProstor1['id']);
-        $I->assertEquals($ent['sezona'], $this->lookSezona1['id']);
+//        $I->assertEquals($ent['sezona'], $this->lookSezona2014['id']); // ker dinamično kreiramo datum
         $I->assertEquals($ent['razred'], '200s');
 //        $I->assertEquals($ent['termin'], 'uu');
         $I->assertEquals($ent['vaja'], $this->objVaja1['id']);
@@ -363,10 +364,8 @@ class DogodekCest
         $I->assertEquals($ent['splosni'], null);
 
         $I->assertTrue(isset($ent['terminiStoritve']));
-        $I->assertTrue(isset($ent['prodajaPredstave']));
 
         $I->assertEquals(0, count($ent['terminiStoritve']));
-        $I->assertEquals(0, count($ent['prodajaPredstave']));
         $I->assertEquals($ent['barva'], '#123456','barva');
     }
 

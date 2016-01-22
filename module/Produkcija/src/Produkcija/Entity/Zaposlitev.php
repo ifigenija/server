@@ -175,8 +175,8 @@ class Zaposlitev
                 $this->expect(!($this->status == 'A' || !$zap->getStatus() == 'A')
                         , "Oseba ima lahko največ 1 aktivno zaposlitev", 1000334);
 
-                $this->expect(( $zap->getKonec() && $this->zacetek >= $zap->getKonec() ) ||
-                        ( $this->konec && $zap->getZacetek() >= $this->konec )
+                $this->expect(( $zap->getKonec() && $this->zacetek > $zap->getKonec() ) ||
+                        ( $this->konec && $zap->getZacetek() > $this->konec )
                         , "Intervali zaposlitev iste osebe se ne smejo prekrivati", 1000335);
             }
         }

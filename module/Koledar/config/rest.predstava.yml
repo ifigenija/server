@@ -11,7 +11,6 @@ forms:
             - zaporednaSez
             - uprizoritev
             - gostovanje
-            - objavljenZacetek
             - name: title
               type: text
               options:
@@ -39,12 +38,6 @@ forms:
               options:
                   targetEntity: Prodaja\Entity\Prostor
                   label: Prostor
-                  required: false
-            - name: sezona
-              type: toone
-              options:
-                  targetEntity: Koledar\Entity\Sezona
-                  label: Sezona
                   required: false
         hydrator:
             byValue:

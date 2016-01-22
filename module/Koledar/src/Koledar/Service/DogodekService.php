@@ -112,20 +112,20 @@ class DogodekService
      */
     public function kopirajDogodek(\Koledar\Entity\Dogodek $dogodek, $zacetekD)
     {
-        $this->expect($dogodek->getStatus() == \Koledar\Entity\Dogodek::PLANIRAN
-                , "Kopiranje dogodka je dovoljeno le za planirane dogodke", 1001261);
+        $this->expect(in_array($dogodek->getStatus(), [
+            \Koledar\Entity\Dogodek::PLANIRAN,
+            \Koledar\Entity\Dogodek::PREGLEDAN,
+            \Koledar\Entity\Dogodek::POTRJEN,])
+                , "Kopirati je možno planirane,pregledane ali potrjene dogodke", 1001261);
 
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
 
         $dogR = $em->getRepository("Koledar\Entity\Dogodek");
 
-        /*
-         * $$ ali se nov datum dogodka prekriva s starim?
-         */
-
         $newDog = $dogodek->copy();
         $this->getEm()->persist($newDog);
 
+        $newDog->setStatus(\Koledar\Entity\Dogodek::PLANIRAN);
         $newDog->setZacetek($zacetekD);
 
         /**
@@ -138,21 +138,11 @@ class DogodekService
          * spraznimo array collectione
          */
         $newDog
-                ->setTerminiStoritve(new \Doctrine\Common\Collections\ArrayCollection())
-                ->setProdajaPredstave(new \Doctrine\Common\Collections\ArrayCollection());
-        /*
-         * $$ ali se id samm postavi?
-         */
-
-        /*
-         * $$ ali pogoj določen status npr. planiran dogodek?
-         */
+                ->setTerminiStoritve(new \Doctrine\Common\Collections\ArrayCollection());
 
         /*
          * $$ razčisti polja:
          * $$ sezona  - ?? ali ista?        
-         * $$ allDay  - ?? ali ista? 
-         * $$ termini storitve
          * $$ prodaja predstave - verjetno še za implementirati!       
          */
         if ($dogodek->getVaja()) {
@@ -175,9 +165,8 @@ class DogodekService
              *  $$ preveri polja
              * zaporedna  - kdaj preračunamo vse?
              * zaporednaSez - kdaj preračunamo vse?
-             * objavljenZacetek ?? ali rabimo to polje?
              * gostovanje ?? ali je potrebno spreminjati - verjetno  lahko ostane isto!
-             * abonmaji  ?? 
+             *   abonmaji  - many to many relacij tehnično ni potrebno spreminjati
              * 
              * $$ uskladi kloniranje predstave tudi spodaj pri gostovanjih!
              */
@@ -221,9 +210,7 @@ class DogodekService
                  *  $$ preveri polja
                  * zaporedna  - kdaj preračunamo vse?
                  * zaporednaSez - kdaj preračunamo vse?
-                 * objavljenZacetek ?? ali rabimo to polje?
                  * gostovanje ?? ali je potrebno spreminjati - verjetno  lahko ostane isto!
-                 * abonmaji  ?? 
                  * 
                  * $$ uskladi kloniranje predstave tudi zoraj pri dogodku
                  */
@@ -239,34 +226,12 @@ class DogodekService
             $newTS = $ts->copy();
             $this->getEm()->persist($newTS);
 
-            /*
-             * $$ preveri polja
-             *  id
-             *  deltaPlaniranZacetek
-             *  deltaPlaniranKonec 
-             *  dogodek
-             *  alternacija
-             *  oseba
-             *  dezurni
-             *  gost
-             *  sodelujoc
-             *  zasedenost
-             *  virtZasedenost
-             *  planiranZacetek - preračunaj
-             *  planiranKonec- preračunaj 
-             *  ura -> null
-             */
             $newTS->setUra(null);
 
             $newTS->setDogodek($newDog);
             $newDog->getTerminiStoritve()->add($newTS);
         }
         $dogR->update($newDog); // da na novo preračuna termine storitve
-
-        /*
-         * $$ še dogodek update se naj kliče - če gre po create-u?
-         * da bi pravilno nastavil vse termine storitve glede na njihove delte? 
-         */
 
         return $newDog->getId();
     }

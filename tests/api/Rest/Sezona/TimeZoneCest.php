@@ -51,8 +51,8 @@ class TimeZoneCest
         $data       = [
             'sifra'   => '999',
             'ime'     => 'aa',
-            'zacetek' => '2023-02-01T00:00:00+0100',
-            'konec'   => '2024-02-01T00:00:00+0100',
+            'zacetek' => '2003-02-01T00:00:00+0100',
+            'konec'   => '2004-02-01T00:00:00+0100',
             'aktivna' => true,
         ];
         $this->obj2 = $ent        = $I->successfullyCreate($this->restUrl, $data);
@@ -64,15 +64,15 @@ class TimeZoneCest
         $data       = [
             'sifra'   => '991',
             'ime'     => 'bb',
-            'zacetek' => '2015-09-14T00:00:00.000Z', //isto kot se na klientu pošilja
-            'konec'   => '2015-09-20T00:00:00.000Z',
+            'zacetek' => '2009-09-14T00:00:00.000Z', //isto kot se na klientu pošilja
+            'konec'   => '2009-09-20T00:00:00.000Z',
             'aktivna' => true,
         ];
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl, $data);
         $I->assertNotEmpty($ent['id']);
         codecept_debug($ent);
-//        $I->assertEquals($ent['zacetek'], '2015-09-14T00:00:00+0000');  //konec spremenjen v +0000
-        $I->assertEquals($ent['zacetek'], '2015-09-14T02:00:00+0200',"po post setterju");  //če v setterju
+//        $I->assertEquals($ent['zacetek'], '2009-09-14T00:00:00+0000');  //konec spremenjen v +0000
+        $I->assertEquals($ent['zacetek'], '2009-09-14T02:00:00+0200', "po post setterju");  //če v setterju
     }
 
     /**
@@ -85,11 +85,10 @@ class TimeZoneCest
     {
         $ent = $I->successfullyGet($this->restUrl, $this->obj3['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['zacetek'], '2015-09-14T00:00:00+0200');  //konec spremenjen v +0200
- 
-        $ent = $I->successfullyGet($this->restUrl, $this->obj2['id']);
-        $I->assertEquals($ent['zacetek'], '2023-02-01T00:00:00+0100');
+        $I->assertEquals($ent['zacetek'], '2009-09-14T00:00:00+0200');  //konec spremenjen v +0200
 
+        $ent = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        $I->assertEquals($ent['zacetek'], '2003-02-01T00:00:00+0100');
     }
 
     /**
@@ -101,16 +100,16 @@ class TimeZoneCest
     public function datumVUtc(ApiTester $I)
     {
         $ent            = $this->obj2;
-        $ent['zacetek'] = '2015-09-14T00:00:00.000Z'; //utc
+        $ent['zacetek'] = '2008-09-14T00:00:00.000Z'; //utc
+        $ent['konec']   = '2008-09-14T00:00:00.000Z'; //utc
 
         $this->obj2 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
         codecept_debug($entR);
-//        $I->assertEquals($entR['zacetek'], '2015-09-14T00:00:00+0000', "utc");  // tudi po update /PUT je response +0000
-        $I->assertEquals($entR['zacetek'], '2015-09-14T02:00:00+0200', "cest setter");  // 
+        $I->assertEquals($entR['zacetek'], '2008-09-14T02:00:00+0200', "cest setter");  // 
 
         $ent = $I->successfullyGet($this->restUrl, $ent['id']);
         codecept_debug($ent);
-        $I->assertEquals($ent['zacetek'], '2015-09-14T00:00:00+0200', "po get cest");   // tudi sedaj po getu vrne +0200
+        $I->assertEquals($ent['zacetek'], '2008-09-14T00:00:00+0200', "po get cest");   // tudi sedaj po getu vrne +0200
     }
 
 }
