@@ -29,7 +29,7 @@ class VajaFixture
 
     public function getDependencies()
     {
-        return array('TestFixture\UprizoritevFixture'); // fixture classes fixture is dependent on , $$ rb dodaj še AlternacijaFixture, ko bo
+        return array('TestFixture\ProstorFixture','TestFixture\UprizoritevFixture'); // fixture classes fixture is dependent on , $$ rb dodaj še AlternacijaFixture, ko bo
     }
 
     /**
@@ -43,25 +43,31 @@ class VajaFixture
 
         $rep = $manager->getRepository('Koledar\Entity\Vaja');
 
-        $uprizoritevId = $v[4] ? $this->getReference($v[4]) : null;
-        $o             = $rep->findOneBy([
-            "uprizoritev" => $uprizoritevId,
-            "zaporedna"   => $v[1],
-        ]);
+        $uprizoritevId = $v[6] ? $this->getReference($v[6]) : null;
+//        $o             = $rep->findOneBy([
+//            "uprizoritev" => $uprizoritevId,
+//        ]);
+        $o             = null;
         $nov           = false;
         if (!$o) {
             $o   = new \Koledar\Entity\Vaja();
-            $o->setZaporedna($v[1]);
             $o->setUprizoritev($uprizoritevId);
             $nov = true;
         }
+        $date = empty($v[1]) ? null : date_create($v[1]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
+        $o->setZacetek($date);
+        $date = empty($v[2]) ? null : date_create($v[2]);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
+        $o->setKonec($date);
 
-//        $o->setPorocilo($v[2]);
-        if ($v[3]) {
-            // še za implementirati, če bo potrebno
-            $getref = $this->getReference($v[3]);
-            $o->setDogodek($getref);
+        $o->setStatus($v[3]);
+        $o->setTitle($v[4]);
+
+        if ($v[5]) {
+            $getref = $this->getReference($v[5]);
+            $o->setProstor($getref);
         }
+
+        
         if ($nov) {
             $rep->create($o);
         } else {
@@ -76,11 +82,13 @@ class VajaFixture
     public function getData()
     {
         return [
-            ['01', 1, "", NULL, 'Uprizoritev-0002',],
-            ['02', 2, "", NULL, 'Uprizoritev-0002',],
-            ['03', 3, "", NULL, 'Uprizoritev-0002',],
-            ['04', 4, "", NULL, 'Uprizoritev-0002',],
-            ['05', 5, "", NULL, 'Uprizoritev-0002',],
+            ['01', "2012-05-20 10:00", "2015-06-26 12:00", '200s', "dogodek 1", 'Prostor-0005', 'Uprizoritev-0002',],
+            ['02', "2012-06-04 10:00", "2015-06-27 12:00", '400s', "dogodek 2", 'Prostor-0005', 'Uprizoritev-0002',],
+            ['03', "2012-08-01 20:00", "2015-08-01 23:00", '400s', "dogodek 3", 'Prostor-0002', 'Uprizoritev-0002',],
+            // status  še ni potrjen (zaenkrat <500) 
+            ['04', "2012-08-01 20:00", "2015-08-01 23:00", '200s', "dogodek 4", 'Prostor-0003', 'Uprizoritev-0002',],
+            // status potrjen (zaenkrat >='500')
+            ['05', "2012-08-01 20:00", "2015-08-01 23:00", '500s', "dogodek 5", 'Prostor-0006', 'Uprizoritev-0002',],
         ];
     }
 

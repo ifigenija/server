@@ -282,7 +282,7 @@ class TerminStoritveCest
         $I->assertEquals($ent['planiranZacetek'], '2012-08-01T18:00:00+0200');
         $I->assertEquals($ent['planiranKonec'], '2012-08-01T23:30:00+0200');
         $I->assertEquals($ent['zasedenost'], TRUE, 'zasedenost');
-        $I->assertEquals($ent['oseba'], $this->lookOseba1['id']);
+        $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
         $I->assertEquals($ent['deltaPlaniranZacetek'], null);
         $I->assertEquals($ent['deltaPlaniranKonec'], null);
         $I->assertEquals($ent['dogodek'], null);
