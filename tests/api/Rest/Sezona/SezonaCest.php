@@ -232,12 +232,12 @@ class SezonaCest
      */
     public function update(ApiTester $I)
     {
-        $ent        = $this->obj1;
-        $ent['ime'] = 'uu';
+        $data        = $this->obj1;
+        $data['ime'] = 'uu';
 
-        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $this->obj1 = $ent       = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
 
-        $I->assertEquals($entR['ime'], 'uu');
+        $I->assertEquals($ent['ime'], 'uu');
     }
 
     /**

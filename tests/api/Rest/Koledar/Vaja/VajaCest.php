@@ -33,6 +33,7 @@ class VajaCest
     private $restUrl        = '/rest/vaja';
     private $dogodekUrl     = '/rest/dogodek';
     private $uprizoritevUrl = '/rest/uprizoritev';
+    private $sezonaUrl      = '/rest/sezona';
     private $obj1;
     private $obj2;
     private $obj3;
@@ -279,6 +280,30 @@ class VajaCest
         $this->obj3 = $ent        = $I->successfullyCreate($this->restUrl . "?" . $parAlternacije . $parGosti . $parDelte, $data);
         $I->assertGuid($ent['id']);
 
+        /**
+         * kreiramo še eno vajo v neobstoječi sezoni
+         */
+        $zacetek        = '1999-05-08T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data           = [
+            'tipvaje'     => NULL,
+            'zaporedna'   => 2,
+            'uprizoritev' => $this->lookUprizoritev1['id'],
+            'title'       => "Vaja $zacetek",
+            'status'      => '200s',
+            'zacetek'     => $zacetek,
+            'konec'       => '1999-05-08T14:00:00+0200',
+            'prostor'     => null,
+        ];
+        $parAlternacije = '';   //init
+        for ($i = 1; $i <= 5; $i++) {
+            $parAlternacije .= 'alternacija[]=' . $this->altUpr1Ids[$i] . '&';
+        }
+        $parGosti   = 'gost[]=' . $this->lookOseba1['id'] . '&'
+                . 'gost[]=' . $this->lookOseba2['id'] . '&';
+        $parDelte   = 'deltaZacTeh=22&deltaKonTeh=23&';
+        $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl . "?" . $parAlternacije . $parGosti . $parDelte, $data);
+        $I->assertGuid($ent['id']);
+
 
         /**
          * kreiranje vaje z napačnimi alternacijami
@@ -415,6 +440,73 @@ class VajaCest
         $dogodek         = $I->successfullyGet($this->dogodekUrl, $data['dogodek']['id']);
         codecept_debug($dogodek);
         $I->assertEquals($dogodek['sezona'], $this->lookSezona2016['id']);
+    }
+
+    /**
+     * glede na spremembo sezone bi se morale sezone dogodkov preračunati na novo
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateSezone(ApiTester $I)
+    {
+        $data1999 = $I->successfullyGet($this->restUrl, $this->obj4['id']);
+        codecept_debug($data1999);
+        $I->assertEquals(NULL, $data1999['dogodek']['sezona']);
+
+        $data2014 = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        codecept_debug($data2014);
+        $I->assertEquals($this->lookSezona2014['id'], $data2014['dogodek']['sezona']);
+
+        /*
+         * spremenimo podatke v sezoni
+         */
+        $data            = $I->successfullyGet($this->sezonaUrl, $this->lookSezona2014['id']);
+        $data['zacetek'] = '1999-01-01T00:00:00+0100';
+        $data['konec']   = '1999-12-31T00:00:00+0100';
+        $sezona          = $I->successfullyUpdate($this->sezonaUrl, $data['id'], $data);
+        codecept_debug($sezona);
+        /*
+         * ali se je popravila sezona v dogodkih?
+         */
+        $data1999        = $I->successfullyGet($this->restUrl, $this->obj4['id']);
+        codecept_debug($data1999);
+        $I->assertEquals($sezona['id'], $data1999['dogodek']['sezona']);
+
+        $data2014 = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        codecept_debug($data2014);
+        $I->assertEquals(NULL, $data2014['dogodek']['sezona']);
+
+        /*
+         * brišemo sezono
+         */
+        /*
+         * najprej spremenimo sezono v nekaj, kar ni v nobenem dogodku
+         * da ne zavrne brisanja zaradi referenčne integritete
+         */
+        $data            = $sezona;
+        $data['zacetek'] = '1998-01-01T00:00:00+0100';
+        $data['konec']   = '1998-12-31T00:00:00+0100';
+        $I->successfullyUpdate($this->sezonaUrl, $data['id'], $data);
+        $I->successfullyDelete($this->sezonaUrl, $sezona['id']);
+        /*
+         * ali se je popravila sezona v dogodkih?
+         */
+        $data1999        = $I->successfullyGet($this->restUrl, $this->obj4['id']);
+        codecept_debug($data1999);
+        $I->assertEquals(NULL, $data1999['dogodek']['sezona']);
+
+
+        /*
+         * kreiramo sezono
+         */
+        $sezona   = $I->successfullyCreate($this->sezonaUrl, $sezona);
+        /*
+         * ali se je popravila sezona v dogodkih?
+         */
+        $data1999 = $I->successfullyGet($this->restUrl, $this->obj4['id']);
+        codecept_debug($data1999);
+        $I->assertEquals($sezona['id'], $data1999['dogodek']['sezona']);
     }
 
     /**
