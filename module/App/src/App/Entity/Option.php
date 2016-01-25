@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping AS ORM;
 use Max\Entity\Base;
 
 /**
- *   @ORM\Entity
+ *   @ORM\Entity(repositoryClass="App\Repository\Options")
  *
  *   name        : ime opcije
  *                 opcija je lahko globalno in/ali uporabniško nastavljiva; v tem

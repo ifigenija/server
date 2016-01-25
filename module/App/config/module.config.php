@@ -34,11 +34,12 @@ return [
             'Rest\user'                    => 'Max\Factory\RestControllerFactory',
             'Rest\kontaktnaoseba'          => 'Max\Factory\RestControllerFactory',
             'Rest\tippopa'                 => 'Max\Factory\RestControllerFactory',
+            'Rest\option'                 => 'Max\Factory\RestControllerFactory',            
             'Rest\organizacijskaenota'     => 'Max\Factory\RestControllerFactory',
             'Relation\organizacijskaenota' => 'Max\Factory\ToManyControllerFactory',
         ],
         'invokables' => [
-            'Rest\options' => 'App\Controller\OptionsRestController',
+            //'Rest\options' => 'App\Controller\OptionsRestController',
             'Rpc\app'      => '\App\Controller\RpcController',
             'App\index'    => '\App\Controller\IndexController',
             'Lookup'       => '\Max\Controller\LookupController',
