@@ -41,12 +41,12 @@ lists:
                   options:
                       label: Začetek
                       required: false
-        hydrator:
-            byValue:
-                - alternacija
-                - alternacija.funkcija
-                - alternacija.funkcija.tipFunkcije
-            lookups:
-                - oseba
+hydrator:
+    byValue:
+        - alternacija
+        - alternacija.funkcija
+        - alternacija.funkcija.tipFunkcije
+    lookups:
+        - oseba
 
         
