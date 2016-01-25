@@ -350,7 +350,7 @@ class VajaCest
         $totRec = $resp['state']['totalRecords'];
         codecept_debug($list);
         $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
-//        $I->assertEquals(2, $list[0]['zaporedna']);      //  odvisno od sortiranja
+//        $I->assertEquals(1, $list[0]['zaporedna']);      //  odvisno od sortiranja
 //        $I->assertEquals(9, $list[$totRec - 1]['zaporedna']);      //  odvisno od sortiranja
     }
 
@@ -387,6 +387,44 @@ class VajaCest
         /*
          * $$ tu bi še lahko preveril čase terminov storitev
          */
+    }
+
+    /**
+     * Preberem zapis in preverim vsa polja
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function read(\ApiTester $I)
+    {
+        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
+
+        codecept_debug($ent);
+        $zacetek = '2015-05-07T10:00:00+0200';
+        $I->assertGuid($ent['id']);
+        $I->assertEquals($ent['tipvaje'], $this->lookTipVaje1['id'], 'tipvaje');
+//        $I->assertEquals($ent['zaporedna'], 9);   // $$ avtomatski izračun - napravi test za to
+        $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev1['id']);
+        $I->assertEquals($ent['title'], "yy");
+        $I->assertEquals($ent['status'], '200s');
+        $I->assertEquals($ent['zacetek'], $zacetek);
+        $I->assertEquals($ent['konec'], '2015-05-07T14:00:00+0200');
+        $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
+        $I->assertEquals($ent['sezona'], $this->lookSezona2015['id']);
+    }
+
+    /**
+     * brisanje zapisa
+     * @depends create
+     */
+    public function delete(ApiTester $I)
+    {
+        $I->successfullyDelete($this->restUrl, $this->obj1['id']);
+        $I->failToGet($this->restUrl, $this->obj1['id']);
+        /**
+         * ali je hkrati brisal tudi dogodek
+         */
+        $I->failToGet($this->dogodekUrl, $this->obj1['dogodek']['id']);
     }
 
     /**
@@ -510,41 +548,79 @@ class VajaCest
     }
 
     /**
-     * Preberem zapis in preverim vsa polja
      * 
-     * @depends create
      * @param ApiTester $I
      */
-    public function read(\ApiTester $I)
+    public function azurirajZaRacunanjeZaporednih(ApiTester $I)
     {
-        $ent = $I->successfullyGet($this->restUrl, $this->obj1['id']);
-
-        codecept_debug($ent);
-        $zacetek = '2015-05-07T10:00:00+0200';
-        $I->assertGuid($ent['id']);
-        $I->assertEquals($ent['tipvaje'], $this->lookTipVaje1['id'], 'tipvaje');
-        $I->assertEquals($ent['zaporedna'], 9);
-        $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev1['id']);
-        $I->assertEquals($ent['title'], "yy");
-        $I->assertEquals($ent['status'], '200s');
-        $I->assertEquals($ent['zacetek'], $zacetek);
-        $I->assertEquals($ent['konec'], '2015-05-07T14:00:00+0200');
-        $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
-        $I->assertEquals($ent['sezona'], $this->lookSezona2015['id']);
-    }
-
-    /**
-     * brisanje zapisa
-     * @depends create
-     */
-    public function delete(ApiTester $I)
-    {
-        $I->successfullyDelete($this->restUrl, $this->obj1['id']);
-        $I->failToGet($this->restUrl, $this->obj1['id']);
-        /**
-         * ali je hkrati brisal tudi dogodek
+        /*
+         * zapomnimo si začetni zaporedni
          */
-        $I->failToGet($this->dogodekUrl, $this->obj1['dogodek']['id']);
+        $entA = $I->successfullyGet($this->restUrl, $this->obj4['id']);
+        codecept_debug($entA);
+        $zapA = $entA['zaporedna'];
+
+        $entB = $I->successfullyGet($this->restUrl, $this->obj2['id']);
+        codecept_debug($entB);
+        $zapB = $entB['zaporedna'];
+
+        /*
+         * vrinemo vajo med njiju
+         */
+        $zacetek = '2000-05-08T10:00:00+0200';
+        $data    = [
+            'tipvaje'     => NULL,
+            'uprizoritev' => $this->lookUprizoritev1['id'],
+            'title'       => "Vaja $zacetek",
+            'status'      => '200s',
+            'zacetek'     => $zacetek,
+            'konec'       => '2000-05-08T14:00:00+0200',
+            'prostor'     => null,
+        ];
+        $entC    = $I->successfullyCreate($this->restUrl, $data);
+        /*
+         * preverimo, če se je druga zaporedna spremenila
+         */
+        $entA    = $I->successfullyGet($this->restUrl, $entA['id']);
+        $I->assertEquals($zapA, $entA['zaporedna']);
+
+        $entB = $I->successfullyGet($this->restUrl, $entB['id']);
+        $I->assertEquals($zapB + 1, $entB['zaporedna']);
+
+        $I->assertGreaterThan($entA['zaporedna'], $entC['zaporedna']);
+        $I->assertLessThan($entB['zaporedna'], $entC['zaporedna']);
+
+
+        /*
+         * premaknem  vajo pred prvo
+         */
+        $entC['zacetek'] = '1997-05-08T10:00:00+0200';
+        $entC['konec']   = '1997-05-08T14:00:00+0200';
+        $entC            = $I->successfullyUpdate($this->restUrl, $entC['id'], $entC);
+        /*
+         * preverimo, če se je prva zaporedna spremenila
+         */
+        $entA            = $I->successfullyGet($this->restUrl, $entA['id']);
+        $I->assertEquals($zapA + 1, $entA['zaporedna']);
+
+        $entB = $I->successfullyGet($this->restUrl, $entB['id']);
+        $I->assertEquals($zapB + 1, $entB['zaporedna']);
+
+        $I->assertLessThan($entA['zaporedna'], $entC['zaporedna']);
+        $I->assertLessThan($entB['zaporedna'], $entC['zaporedna']);
+
+        /*
+         * brišemo vajo
+         */
+        $entC = $I->successfullyDelete($this->restUrl, $entC['id']);
+        /*
+         * preverimo, če so se zaporedne vrnile v začetno stqanje
+         */
+        $entA = $I->successfullyGet($this->restUrl, $entA['id']);
+        $I->assertEquals($zapA, $entA['zaporedna']);
+
+        $entB = $I->successfullyGet($this->restUrl, $entB['id']);
+        $I->assertEquals($zapB, $entB['zaporedna']);
     }
 
 }

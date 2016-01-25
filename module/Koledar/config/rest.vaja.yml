@@ -7,7 +7,7 @@ forms:
         elements:
 #            - id
             - tipvaje
-            - zaporedna
+#            - zaporedna
 #            - dogodek
             - uprizoritev
             - name: title
