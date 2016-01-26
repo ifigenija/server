@@ -111,8 +111,7 @@ class Sezone
      */
     private function preveriSezone($object)
     {
-        $vsesezone = $this->getEntityManager()->getRepository('Koledar\Entity\Sezona')
-                ->findAll();
+        $vsesezone = $this->findAll();
 
         foreach ($vsesezone as $sez) {
             /*

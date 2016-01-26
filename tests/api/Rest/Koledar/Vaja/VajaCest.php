@@ -590,10 +590,26 @@ class VajaCest
         $I->assertGreaterThan($entA['zaporedna'], $entC['zaporedna']);
         $I->assertLessThan($entB['zaporedna'], $entC['zaporedna']);
 
-
+        
         /*
-         * premaknem  vajo pred prvo
+         * spremenimo status vaji v odpovedano
          */
+        $entC['status'] = "610s";       // odpovedan
+        $entC            = $I->successfullyUpdate($this->restUrl, $entC['id'], $entC);
+        /*
+         * preverimo, če so se zaporedne vrnile v začetno stqanje
+         */
+        $entA = $I->successfullyGet($this->restUrl, $entA['id']);
+        $I->assertEquals($zapA, $entA['zaporedna']);
+
+        $entB = $I->successfullyGet($this->restUrl, $entB['id']);
+        $I->assertEquals($zapB, $entB['zaporedna']);
+
+        
+        /*
+         * premaknem  vajo pred prvo , ni več odpovedana
+         */
+        $entC['status'] = "200s";       
         $entC['zacetek'] = '1997-05-08T10:00:00+0200';
         $entC['konec']   = '1997-05-08T14:00:00+0200';
         $entC            = $I->successfullyUpdate($this->restUrl, $entC['id'], $entC);
@@ -608,6 +624,7 @@ class VajaCest
 
         $I->assertLessThan($entA['zaporedna'], $entC['zaporedna']);
         $I->assertLessThan($entB['zaporedna'], $entC['zaporedna']);
+
 
         /*
          * brišemo vajo

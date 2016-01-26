@@ -134,6 +134,15 @@ class Vaje
                 break;
         endswitch;
 
+        /*
+         * ostranimo odpovedane dogodke
+         */
+        foreach ($vsevaje as $key => $v) {
+            if ($v->getDogodek()->getStatus()== \Koledar\Entity\Dogodek::ODPOVEDAN) {
+                unset($vsevaje[$key]);
+            }
+        }
+
         /**
          * sort po datumu začetka
          */

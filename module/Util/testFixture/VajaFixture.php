@@ -29,7 +29,7 @@ class VajaFixture
 
     public function getDependencies()
     {
-        return array('TestFixture\ProstorFixture','TestFixture\UprizoritevFixture'); // fixture classes fixture is dependent on , $$ rb dodaj še AlternacijaFixture, ko bo
+        return array('TestFixture\ProstorFixture', 'TestFixture\UprizoritevFixture'); // fixture classes fixture is dependent on , $$ rb dodaj še AlternacijaFixture, ko bo
     }
 
     /**
@@ -67,12 +67,18 @@ class VajaFixture
             $o->setProstor($getref);
         }
 
-        
+
         if ($nov) {
             $rep->create($o);
         } else {
             $rep->update($o);
         }
+
+        /*
+         * $$ sprotni flush potreben, da pravilno preračuna zaporedne številke
+         */
+        $manager->flush();
+
 
         $referenca = 'Vaja-' . $v[0];
         //var_dump($referenca);
@@ -89,6 +95,14 @@ class VajaFixture
             ['04', "2012-08-01 20:00", "2015-08-01 23:00", '200s', "dogodek 4", 'Prostor-0003', 'Uprizoritev-0002',],
             // status potrjen (zaenkrat >='500')
             ['05', "2012-08-01 20:00", "2015-08-01 23:00", '500s', "dogodek 5", 'Prostor-0006', 'Uprizoritev-0002',],
+            // druga uprizoritev
+            ['06', "2012-08-01 20:00", "2015-08-01 23:00", '400s', "dogodek 6", 'Prostor-0002', 'Uprizoritev-0001',],
+            // izven sezone
+            ['07', "1995-08-01 20:00", "1995-08-01 23:00", '500s', "dogodek 7", 'Prostor-0006', 'Uprizoritev-0002',],
+            // izven sezone
+            ['08', "1995-08-01 20:00", "1995-08-01 23:00", '500s', "dogodek 8", 'Prostor-0006', 'Uprizoritev-0002',],
+            // druga sezona
+            ['09', "2014-06-04 10:00", "2014-06-27 12:00", '400s', "dogodek 9", 'Prostor-0005', 'Uprizoritev-0002',],
         ];
     }
 
