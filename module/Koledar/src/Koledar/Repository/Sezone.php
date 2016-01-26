@@ -73,7 +73,7 @@ class Sezone
 
         parent::create($object, $params);
 
-        $this->preracunajSezoneVDogodkih($object);
+        $this->preracunajSezoneVDogodkih($object, 'create');
     }
 
     public function update($object, $params = null)
@@ -82,7 +82,7 @@ class Sezone
 
         parent::update($object, $params);
 
-        $this->preracunajSezoneVDogodkih($object);
+        $this->preracunajSezoneVDogodkih($object, 'update');
     }
 
     /**
@@ -98,11 +98,8 @@ class Sezone
          * za vsak slučaj.
          * Zaradi referenčne integritete brisanje sezone, ki
          * je uporabljena v dogodkih namreč ni mogoče.
-         * 
-         * $$ tudi ne bi delovalo v redu, ker pri findall sezone bi to sezono
-         * še vedno našel, ker še ni flush izveden!
          */
-        $this->preracunajSezoneVDogodkih($object);
+        $this->preracunajSezoneVDogodkih($object, 'delete');
     }
 
     /**
@@ -135,14 +132,15 @@ class Sezone
      * ni v validate-u, ker moramo klicati repozitorij
      * 
      * @param type $object
+     * @param type $mode
      */
-    private function preracunajSezoneVDogodkih($object)
+    private function preracunajSezoneVDogodkih($object, $mode = 'update')
     {
         $dogR       = $this->getEntityManager()->getRepository('Koledar\Entity\Dogodek');
         $vsidogodki = $dogR->findAll();
 
         foreach ($vsidogodki as $dog) {
-            $dogR->update($dog);
+            $dogR->preracunajSezono($dog, $object, $mode);
         }
     }
 

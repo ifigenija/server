@@ -7,6 +7,8 @@
 namespace App\Repository;
 
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 
 /**
  * 
@@ -23,7 +25,7 @@ class Options
         ]
     ];
 
-    public function getPaginator($options, $name = 'default')
+    public function getPaginator(array $options, $name = 'default')
     {
         $seznam =  $this->findBy(['readOnly' => false]);
         

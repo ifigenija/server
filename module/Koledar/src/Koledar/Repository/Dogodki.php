@@ -400,42 +400,29 @@ class Dogodki
     /**
      * določi sezono dogodka
      * 
+     * 
      * @param type $object
+     * @param \Koledar\Entity\Sezona $sezona        če kličemo funkcijo iz repozitorija sezone
+     * @param type $sezonamode                      če kličemo funkcijo iz repozitorija sezone
      */
-    private function preracunajSezono($object)
+    public function preracunajSezono($object, \Koledar\Entity\Sezona $sezona = null, $sezonamode = null)
     {
         $object->setSezona(null); // init
         $vsesezone = $this->getEntityManager()->getRepository('Koledar\Entity\Sezona')
                 ->findAll();
 
-        /*
-         * upoštevajmo tudi sezono (-e), ki še niso flush-ane,
-         * a so že fazi kreiranja ali brisanja
-         */
-        $uow    = $this->getEntityManager()->getUnitOfWork();
-        $schIns = $uow->getScheduledEntityInsertions();
-        $schDel = $uow->getScheduledEntityDeletions();
-        /*
-         * upoštevamo tudi sezono, ki se bo kreirala
-         */
-        foreach ($schIns as $ins) {
-            if ($ins instanceof \Koledar\Entity\Sezona) {
-                $vsesezone[] = $ins;
-            }
-        }
-        /*
-         * upoštevamo tudi sezono, ki se bo izbrisala
-         */
-        foreach ($schDel as $del) {
-            if ($del instanceof \Koledar\Entity\Sezona) {
+        switch ($sezonamode):
+            case "create":
+                $vsesezone[] = $sezona;
+                break;
+            case "delete":
                 foreach ($vsesezone as $key => $v) {
-                    if ($v->getId() == $del->getId()) {
+                    if ($v->getId() == $sezona->getId()) {
                         unset($vsesezone[$key]);
                     }
                 }
-            }
-        }
-
+                break;
+        endswitch;
 
         /*
          * $$ performančno bi bila boljša while zanka
