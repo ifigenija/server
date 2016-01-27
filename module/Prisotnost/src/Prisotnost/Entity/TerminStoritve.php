@@ -226,6 +226,14 @@ class TerminStoritve
         }
     }
 
+    public function getUprizoritev()
+    {
+        if ($this->dogodek && $this->dogodek->getPodrobno()) {
+            return $this->dogodek->getPodrobno()->getUprizoritev();
+        }
+        return null;
+    }
+
     public function getId()
     {
         return $this->id;

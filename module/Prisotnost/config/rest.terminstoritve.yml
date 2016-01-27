@@ -45,8 +45,12 @@ hydrator:
     byValue:
         - alternacija
         - alternacija.funkcija
-        - alternacija.funkcija.tipFunkcije
     lookups:
         - oseba
+        - alternacija.funkcija.tipFunkcije
+    virtual:
+       - name: uprizoritev
+         type: lookup
+         targetEntity: Produkcija\Entity\Uprizoritev
 
         
