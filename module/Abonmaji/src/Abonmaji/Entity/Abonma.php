@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="Abonmaji\Repository\Abonmaji")
  * @Max\Id(prefix="0010")
  * @Max\I18n(label="Abonma",plural="Abonmaji")
+ * @Max\Lookup(ident="ime", label="opis", search={"ime","opis"})
  */
 class Abonma
         extends \Max\Entity\Base
