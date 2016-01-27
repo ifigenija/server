@@ -41,6 +41,11 @@ lists:
                   options:
                       label: Začetek
                       required: false
+                - name: zasedenost
+                  type: boolcheckbox
+                  options:
+                      label: Zasedenost
+                      required: false
 hydrator:
     byValue:
         - alternacija

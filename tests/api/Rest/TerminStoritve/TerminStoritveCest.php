@@ -76,7 +76,7 @@ class TerminStoritveCest
      * metoda, ki se večkrat kliče zaradi preverjanja rezultatov get list
      * 
      */
-    private function kontroleRezultatovGetList(ApiTester $I, array $osebeIds, array $list)
+    private function kontroleRezultatovGetListPoOsebi(ApiTester $I, array $osebeIds, array $list)
     {
         codecept_debug(__FUNCTION__);
 
@@ -213,7 +213,7 @@ class TerminStoritveCest
         codecept_debug($totRec);
         $I->assertLessThan($totRecVsi, $resp['state']['totalRecords']);
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-        $this->kontroleRezultatovGetList($I, $osebeIds, $list);
+        $this->kontroleRezultatovGetListPoOsebi($I, $osebeIds, $list);
 
         /**
          * get list po 2 osebah
@@ -233,7 +233,7 @@ class TerminStoritveCest
         codecept_debug($totRec);
         $I->assertLessThan($totRecVsi, $resp['state']['totalRecords']);
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-        $this->kontroleRezultatovGetList($I, $osebeIds, $list);
+        $this->kontroleRezultatovGetListPoOsebi($I, $osebeIds, $list);
 
 
         /**
@@ -249,6 +249,21 @@ class TerminStoritveCest
         codecept_debug($totRec);
         $I->assertLessThan($totRecOsebe, $resp['state']['totalRecords'], "manj zaradi začetka in konca");
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+
+        /*
+         * po zasedenosti
+         */
+        $resp   = $I->successfullyGetList($this->restUrlDefault . "?zasedenost=true", []);
+        $list   = $resp['data'];
+        codecept_debug($resp);
+        $totRec = $resp['state']['totalRecords'];
+        codecept_debug($totRec);
+        $I->assertLessThan($totRecVsi, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+
+        $listzasedenosti = array_unique(array_column($list, "zasedenost"));
+        codecept_debug($listzasedenosti);
+        $I->assertEquals([true], $listzasedenosti);
     }
 
     /**

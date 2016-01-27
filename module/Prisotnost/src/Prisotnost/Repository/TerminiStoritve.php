@@ -83,6 +83,15 @@ class TerminiStoritve
             $qb->andWhere($cas);
             $qb->setParameter('konec', $options['konec'], "datetime");
         }
+        if (!empty($options['zasedenost'])) {
+            /*
+             * $$ zaenkrat prikazuje le zasedene
+             * ni rešeno null in false
+             */
+            $zas = $e->eq('p.zasedenost', ':zas');
+            $qb->andWhere($zas);
+            $qb->setParameter('zas', $options['zasedenost'], "boolean");
+        }
         return $qb;
     }
 
