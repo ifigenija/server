@@ -37,7 +37,11 @@ class DogodekCest
     private $objTSDog1C;
     private $objTSDog1D;
     private $objTSDog1E;
-
+    private $lookSezona2014;
+    private $lookSezona2015;
+    private $lookSezona2016;
+    private $lookSezona2017;
+    
     public function _before(ApiTester $I)
     {
 // da testiramo vsa posamezna dovoljenja brez shortCurcuit
@@ -114,6 +118,27 @@ class DogodekCest
         }
     }
 
+        /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupSezona(ApiTester $I)
+    {
+        $this->lookSezona2014 = $look                 = $I->lookupEntity("sezona", "2015", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona2015 = $look                 = $I->lookupEntity("sezona", "2015", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona2016 = $look                 = $I->lookupEntity("sezona", "2016", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona2017 = $look                 = $I->lookupEntity("sezona", "2017", false);
+        $I->assertGuid($look['id']);
+    }
+
+    
+    
     /**
      * @param ApiTester $I
      */
@@ -288,13 +313,21 @@ class DogodekCest
          * kopija predstave
          */
         $dogodekId = $this->lookDogPredstava1Id;
-        $zacetek   = '2012-06-02T10:10:00+0200';
+//        $zacetek   = '2015-03-03T10:10:00+0100';//$$ pri tem datumu so problemi, ker narobe izračunava delto v eno in drugo smer!
+        $zacetek   = '2015-04-03T10:10:00+0200';
         $newId     = $I->successfullyCallRpc($this->rpcUrl, 'kopirajDogodek', [
             "dogodekId" => $dogodekId
             , "zacetek"   => $zacetek
         ]);
         codecept_debug($newId);
         $this->kontroleRezultatovKopirajDogodek($I, $dogodekId, $zacetek, $newId);
+        /*
+         * preverimo še, če se je sezona spremenila
+         */
+        $ent = $I->successfullyGet($this->dogodekUrl, $newId);
+        codecept_debug($ent);
+        
+        $I->assertEquals($this->lookSezona2015['id'],$ent['sezona'], "spremenjena sezona glede na novi začetek");
 
         /*
          * kopija splošnega dogodka

@@ -25,11 +25,9 @@ class VajaFixture
         $manager->flush();
     }
 
-    // $$ morda bo še potrebno implementirati funkcijo getOrder()
-
     public function getDependencies()
     {
-        return array('TestFixture\ProstorFixture', 'TestFixture\UprizoritevFixture'); // fixture classes fixture is dependent on , $$ rb dodaj še AlternacijaFixture, ko bo
+        return array('TestFixture\ProstorFixture', 'TestFixture\UprizoritevFixture','TestFixture\AlternacijaFixture'); // fixture classes fixture is dependent on 
     }
 
     /**

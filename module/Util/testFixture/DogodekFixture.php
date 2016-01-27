@@ -26,8 +26,6 @@ class DogodekFixture
         $manager->flush();
     }
 
-    // $$ morda bo še potrebno implementirati funkcijo getOrder()
-
     public function getDependencies()
     {
         return array('TestFixture\VajaFixture', 'TestFixture\ProstorFixture'); // fixture classes fixture is dependent on , 

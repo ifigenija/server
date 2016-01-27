@@ -141,18 +141,12 @@ class DogodekService
                 ->setTerminiStoritve(new \Doctrine\Common\Collections\ArrayCollection());
 
         /*
-         * $$ razčisti polja:
-         * $$ sezona  - ?? ali ista?        
-         * $$ prodaja predstave - verjetno še za implementirati!       
+         * razčisti polja:
+         *  sezona  - se pri update-u sama preračuna
          */
         if ($dogodek->getVaja()) {
             $newPodDog = $dogodek->getVaja()->copy();
             $this->getEm()->persist($newPodDog);
-
-            /*
-             *  $$ preveri polja
-             *   zaporedna - ali na novo preračuna  $$
-             */
 
             $newPodDog->setDogodek($newDog);
             $newDog->setVaja($newPodDog);
@@ -163,8 +157,6 @@ class DogodekService
 
             /*
              *  $$ preveri polja
-             * zaporedna  - kdaj preračunamo vse?
-             * zaporednaSez - kdaj preračunamo vse?
              * gostovanje ?? ali je potrebno spreminjati - verjetno  lahko ostane isto!
              *   abonmaji  - many to many relacij tehnično ni potrebno spreminjati
              * 
@@ -189,6 +181,9 @@ class DogodekService
             $newPodDog = $dogodek->getGostovanje()->copy();
             $this->getEm()->persist($newPodDog);
 
+            /*
+             * $$ namesto predstave bodo dogodki!
+             */
             $newPodDog
                     ->setPredstave(new \Doctrine\Common\Collections\ArrayCollection());
             /*
@@ -200,6 +195,7 @@ class DogodekService
              *  dogodek
              *  predstave
              *  drzava
+             * $$ namesto predstave bodo dogodki !!
              */
 
             $coll = $dogodek->getGostovanje()->getPredstave();
@@ -208,8 +204,6 @@ class DogodekService
                 $this->getEm()->persist($newGPred);
                 /*
                  *  $$ preveri polja
-                 * zaporedna  - kdaj preračunamo vse?
-                 * zaporednaSez - kdaj preračunamo vse?
                  * gostovanje ?? ali je potrebno spreminjati - verjetno  lahko ostane isto!
                  * 
                  * $$ uskladi kloniranje predstave tudi zoraj pri dogodku

@@ -216,11 +216,35 @@ class TerminStoritve
             $this->expect($this->dogodek, "Dogodek pri takem tipu termina storitve mora biti prisoten", 1001081);
             $this->expect($this->dogodek->getZacetek(), "Začetek dogodka mora obstajati", 1001082);
 
+
+            /*
+             * $$ začasno
+             */
+            $tmpZTT         = $this->planiranZacetek->getTimestamp();
+            $tmpZDT         = $this->dogodek->getZacetek()->getTimestamp();
+            $tmpZT          = $this->planiranZacetek;
+            $tmpZD          = $this->dogodek->getZacetek();
+            $tmpZTdeltaPrej = $this->deltaPlaniranZacetek;
+            $tmpKTT         = $this->planiranKonec->getTimestamp();
+            $tmpKDT         = $this->dogodek->getKonec()->getTimestamp();
+            $tmpKT          = $this->planiranKonec;
+            $tmpKD          = $this->dogodek->getKonec();
+            $tmpKTdeltaPrej = $this->deltaPlaniranKonec;
+
             /*
              * izračunamo delti, ki sta v minutah
              */
             $this->deltaPlaniranZacetek = (int) (($this->planiranZacetek->getTimestamp() - $this->dogodek->getZacetek()->getTimestamp()) / 60);
             $this->deltaPlaniranKonec   = (int) (($this->planiranKonec->getTimestamp() - $this->dogodek->getKonec()->getTimestamp()) / 60);
+
+            /*
+             * $$ začasno
+             */
+            $tmpZTdeltaPo   = $this->deltaPlaniranZacetek;
+            $tmpKTdeltaPo   = $this->deltaPlaniranKonec;
+            $tmp=1;
+            
+            
         } else {
             $this->dogodek = null;
         }
