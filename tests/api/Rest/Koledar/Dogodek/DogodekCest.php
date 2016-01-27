@@ -110,16 +110,16 @@ class DogodekCest
      */
     public function lookupSezona(ApiTester $I)
     {
-        $this->lookSezona2014 = $look              = $I->lookupEntity("sezona", "2015", false);
-        $I->assertGuid($look['id']);
-        
-        $this->lookSezona2015 = $look              = $I->lookupEntity("sezona", "2015", false);
+        $this->lookSezona2014 = $look                 = $I->lookupEntity("sezona", "2015", false);
         $I->assertGuid($look['id']);
 
-        $this->lookSezona2016 = $look              = $I->lookupEntity("sezona", "2016", false);
+        $this->lookSezona2015 = $look                 = $I->lookupEntity("sezona", "2015", false);
         $I->assertGuid($look['id']);
 
-        $this->lookSezona2017 = $look              = $I->lookupEntity("sezona", "2017", false);
+        $this->lookSezona2016 = $look                 = $I->lookupEntity("sezona", "2016", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona2017 = $look                 = $I->lookupEntity("sezona", "2017", false);
         $I->assertGuid($look['id']);
     }
 
@@ -324,10 +324,10 @@ class DogodekCest
      */
     public function update(ApiTester $I)
     {
-        $data           = $this->obj1;
-        $data['title']  = 'uu';
+        $data          = $this->obj1;
+        $data['title'] = 'uu';
         $data['barva'] = '#123456';
-        
+
         codecept_debug($data);
 
         $this->obj1 = $ent        = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
@@ -366,7 +366,7 @@ class DogodekCest
         $I->assertTrue(isset($ent['terminiStoritve']));
 
         $I->assertEquals(0, count($ent['terminiStoritve']));
-        $I->assertEquals($ent['barva'], '#123456','barva');
+        $I->assertEquals($ent['barva'], '#123456', 'barva');
     }
 
     /**
@@ -417,27 +417,87 @@ class DogodekCest
     }
 
     /**
-     * @depends createVajo
-     * @depends lookupProstor
+     * test lista dogodka po začetku in koncu - posebaj preverimo, če 
+     * je vsaj del dogodka med začetkom in koncem
+     * 
+     * Dogodek          z------------k
+     * parametri:
+     * A            z--k 
+     * B            z-------k
+     * C                    z--k 
+     * D                    z------------k 
+     * E                               z-k 
+     * F            z--------------------k
      * @param ApiTester $I
      */
-    public function getListPoProstorih(ApiTester $I)
+    public function getListDefaultPoZacetkuInKoncuInterval(ApiTester $I)
     {
-        $resp = $I->successfullyGetList($this->restUrl . "?prostor[]=" . $this->lookProstor1['id'] . "&prostor[]=" . $this->lookProstor2['id'], []);
-        $totR = $resp['state']['totalRecords'];
-        $I->assertEquals(3, $totR);
-    }
+        $statusvsi = "status[]=200s&status[]=400s&status[]=500s&status[]=600s&status[]=610s&status[]=710s&status[]=720s&status[]=790s&";
+        $dog       = 'q=Vaja 10.&';
+        $par       = $dog . $statusvsi;
+        /*
+         * brez omejitve začetka in konca -> najde
+         * F
+         */
+        $resp      = $I->successfullyGetList($this->restUrl . "?" . $par
+                . "zacetek=2014-06-02&konec=2014-06-22", []);
+        $list      = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
 
-    /**
-     * @depends createVajo
-     * @depends lookupUprizoritev
-     * @param ApiTester $I
-     */
-    public function getListPoUprizoritvah(ApiTester $I)
-    {
-        $resp = $I->successfullyGetList($this->restUrl . "?uprizoritev[]=" . $this->lookUprizoritev2['id'] . "&uprizoritev[]=" . $this->lookUprizoritev1['id'], []);
-        $totR = $resp['state']['totalRecords'];
-        $I->assertEquals(3, $totR);
+        /*
+         * A
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $par
+                . "zacetek=" . urlencode("2014-06-02T00:00:00+0200") . "&"
+                . "konec=" . urlencode("2014-06-11T06:00:00+200")
+                , []);
+        $I->assertEquals(0, $resp['state']['totalRecords'], "A");
+
+        /*
+         * B
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $par
+                . "zacetek=" . urlencode("2014-06-02T00:00:00+0200") . "&"
+                . "konec=" . urlencode("2014-06-11T12:00:00+200")
+                , []);
+        $I->assertEquals(1, $resp['state']['totalRecords'], "B");
+
+        /*
+         * C
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $par
+                . "zacetek=" . urlencode("2014-06-11T12:00:00+200") . "&"
+                . "konec=" . urlencode("2014-06-11T14:00:00+200")
+                , []);
+        $I->assertEquals(1, $resp['state']['totalRecords'], "C");
+
+        /*
+         * D
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $par
+                . "zacetek=" . urlencode("2014-06-11T12:00:00+200") . "&"
+                . "konec=" . urlencode("2014-06-12T20:00:00+200")
+                , []);
+        $I->assertEquals(1, $resp['state']['totalRecords'], "D");
+
+        /*
+         * E
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $par
+                . "zacetek=" . urlencode("2014-06-12T16:00:00+200") . "&"
+                . "konec=" . urlencode("2014-06-12T20:00:00+200")
+                , []);
+        $I->assertEquals(0, $resp['state']['totalRecords'], "E");
+
+        /*
+         * F
+         */
+        $resp = $I->successfullyGetList($this->restUrl . "?" . $par
+                . "zacetek=" . urlencode("2014-06-02T00:00:00+0200") . "&"
+                . "konec=" . urlencode("2014-06-12T20:00:00+200")
+                , []);
+        $I->assertEquals(1, $resp['state']['totalRecords'], "F");
     }
 
     /**
@@ -504,6 +564,43 @@ class DogodekCest
         codecept_debug($list);
         $totR     = $resp['state']['totalRecords'];
         $I->assertEquals(1, $totR);
+    }
+
+    /**
+     * @depends createVajo
+     * @depends lookupProstor
+     * @param ApiTester $I
+     */
+    public function getListPoProstorih(ApiTester $I)
+    {
+        $statusvsi = "status[]=200s&status[]=400s&status[]=500s&status[]=600s&status[]=610s&status[]=710s&status[]=720s&status[]=790s&";
+        $interval  = "zacetek=1990-01-01&konec=2200-01-01&";
+        $par       = $interval . $statusvsi;
+//        $resp      = $I->successfullyGetList($this->restUrl . "?prostor[]=" . $this->lookProstor1['id'] . "&prostor[]=" . $this->lookProstor2['id'], []);
+        $resp      = $I->successfullyGetList($this->restUrl . "?" . $par . "prostor[]=" . $this->lookProstor1['id'] . "&prostor[]=" . $this->lookProstor2['id'], []);
+        $list      = $resp['data'];
+        codecept_debug($list);
+        $totR      = $resp['state']['totalRecords'];
+        $I->assertGreaterThanOrEqual(3, $totR);
+
+        $listprostori = array_unique(array_column(array_column($list, "prostor"), "id"));
+        codecept_debug($listprostori);
+        $I->assertGreaterThanOrEqual(1, count($listprostori));
+        foreach ($listprostori as $pid) {
+            $I->assertContains($pid, [$this->lookProstor1['id'], $this->lookProstor2['id']]);
+        }
+    }
+
+    /**
+     * @depends createVajo
+     * @depends lookupUprizoritev
+     * @param ApiTester $I
+     */
+    public function getListPoUprizoritvah(ApiTester $I)
+    {
+        $resp = $I->successfullyGetList($this->restUrl . "?uprizoritev[]=" . $this->lookUprizoritev2['id'] . "&uprizoritev[]=" . $this->lookUprizoritev1['id'], []);
+        $totR = $resp['state']['totalRecords'];
+        $I->assertEquals(3, $totR);
     }
 
     /**
