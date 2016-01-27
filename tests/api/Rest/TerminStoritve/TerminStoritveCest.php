@@ -107,7 +107,7 @@ class TerminStoritveCest
         /*
          * dogodki, ki so vaje
          */
-        $resp = $I->successfullyGetList($this->dogodekUrl . "?q=dogodek 1&zacetek=2000-01-01&konec=2200-05-05&razred[]=200s", []);
+        $resp = $I->successfullyGetList($this->dogodekUrl . "?q=Vaja 1.&zacetek=2000-01-01&konec=2200-05-05&razred[]=200s", []);
         $list = $resp['data'];
         codecept_debug($list);
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);

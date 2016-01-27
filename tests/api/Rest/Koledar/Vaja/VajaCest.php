@@ -38,6 +38,7 @@ class VajaCest
     private $obj2;
     private $obj3;
     private $obj4;
+    private $obj5;
     private $objDogodek;
     private $lookUprizoritev2;
     private $lookUprizoritev1;
@@ -187,7 +188,6 @@ class VajaCest
         $zacetek        = '2015-05-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data           = [
             'tipvaje'     => $this->lookTipVaje1['id'],
-            'zaporedna'   => 9,
             'uprizoritev' => $this->lookUprizoritev1['id'],
             'title'       => "Vaja $zacetek",
             'status'      => '200s',
@@ -237,7 +237,6 @@ class VajaCest
         $zacetek        = '2014-05-08T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data           = [
             'tipvaje'     => NULL,
-            'zaporedna'   => 2,
             'uprizoritev' => $this->lookUprizoritev1['id'],
             'title'       => "Vaja $zacetek",
             'status'      => '200s',
@@ -262,7 +261,6 @@ class VajaCest
         $zacetek        = '2016-05-08T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data           = [
             'tipvaje'     => NULL,
-            'zaporedna'   => 2,
             'uprizoritev' => $this->lookUprizoritev1['id'],
             'title'       => "Vaja $zacetek",
             'status'      => '200s',
@@ -286,7 +284,6 @@ class VajaCest
         $zacetek        = '1999-05-08T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data           = [
             'tipvaje'     => NULL,
-            'zaporedna'   => 2,
             'uprizoritev' => $this->lookUprizoritev1['id'],
             'title'       => "Vaja $zacetek",
             'status'      => '200s',
@@ -304,6 +301,29 @@ class VajaCest
         $this->obj4 = $ent        = $I->successfullyCreate($this->restUrl . "?" . $parAlternacije . $parGosti . $parDelte, $data);
         $I->assertGuid($ent['id']);
 
+        /*
+         * kreiramo še eno vajo z drugo uprizoritvijo
+         */
+        $zacetek        = '2014-07-01T10:00:00+0200';
+        $data           = [
+            'tipvaje'     => NULL,
+            'uprizoritev' => $this->lookUprizoritev2['id'],
+            'title'       => "Vaja $zacetek",
+            'status'      => '200s',
+            'zacetek'     => $zacetek,
+            'konec'       => '2014-07-01T10:00:00+0200',
+            'prostor'     => null,
+        ];
+        $parAlternacije = '';   //init
+        for ($i = 1; $i <= 5; $i++) {
+            $parAlternacije .= 'alternacija[]=' . $this->altUpr1Ids[$i] . '&';
+        }
+        $parGosti   = 'gost[]=' . $this->lookOseba1['id'] . '&'
+                . 'gost[]=' . $this->lookOseba2['id'] . '&';
+        $parDelte   = 'deltaZacTeh=22&deltaKonTeh=23&';
+        $this->obj5 = $ent        = $I->successfullyCreate($this->restUrl . "?", $data);
+        $I->assertGuid($ent['id']);
+        $I->assertEquals($ent['sezona'], $this->lookSezona2014['id']);
 
         /**
          * kreiranje vaje z napačnimi alternacijami
@@ -311,7 +331,6 @@ class VajaCest
         $zacetek        = '2014-05-08T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data           = [
             'tipvaje'     => NULL,
-            'zaporedna'   => 2,
             'uprizoritev' => $this->lookUprizoritev2['id'],
             'title'       => "Vaja $zacetek",
             'status'      => '200s',
@@ -403,7 +422,6 @@ class VajaCest
         $zacetek = '2015-05-07T10:00:00+0200';
         $I->assertGuid($ent['id']);
         $I->assertEquals($ent['tipvaje'], $this->lookTipVaje1['id'], 'tipvaje');
-//        $I->assertEquals($ent['zaporedna'], 9);   // $$ avtomatski izračun - napravi test za to
         $I->assertEquals($ent['uprizoritev']['id'], $this->lookUprizoritev1['id']);
         $I->assertEquals($ent['title'], "yy");
         $I->assertEquals($ent['status'], '200s');
@@ -548,13 +566,18 @@ class VajaCest
     }
 
     /**
+     *    ista uprizoritev
+     * A   1  
+     * 
+     * B   1
+     * C   0
      * 
      * @param ApiTester $I
      */
     public function azurirajZaRacunanjeZaporednih(ApiTester $I)
     {
         /*
-         * zapomnimo si začetni zaporedni
+         * zapomnimo si začetne zaporedne
          */
         $entA = $I->successfullyGet($this->restUrl, $this->obj4['id']);
         codecept_debug($entA);
@@ -563,6 +586,10 @@ class VajaCest
         $entB = $I->successfullyGet($this->restUrl, $this->obj2['id']);
         codecept_debug($entB);
         $zapB = $entB['zaporedna'];
+
+        $entC = $I->successfullyGet($this->restUrl, $this->obj5['id']);
+        codecept_debug($entB);
+        $zapC = $entC['zaporedna'];
 
         /*
          * vrinemo vajo med njiju
@@ -577,7 +604,7 @@ class VajaCest
             'konec'       => '2000-05-08T14:00:00+0200',
             'prostor'     => null,
         ];
-        $entC    = $I->successfullyCreate($this->restUrl, $data);
+        $entD    = $I->successfullyCreate($this->restUrl, $data);
         /*
          * preverimo, če se je druga zaporedna spremenila
          */
@@ -587,32 +614,38 @@ class VajaCest
         $entB = $I->successfullyGet($this->restUrl, $entB['id']);
         $I->assertEquals($zapB + 1, $entB['zaporedna']);
 
-        $I->assertGreaterThan($entA['zaporedna'], $entC['zaporedna']);
-        $I->assertLessThan($entB['zaporedna'], $entC['zaporedna']);
+        $entC = $I->successfullyGet($this->restUrl, $entC['id']);
+        $I->assertEquals($zapC, $entC['zaporedna']);    // se ne sme spremeniti, ker je druga uprizoritev
 
-        
+        $I->assertGreaterThan($entA['zaporedna'], $entD['zaporedna']);
+        $I->assertLessThan($entB['zaporedna'], $entD['zaporedna']);
+
+
         /*
          * spremenimo status vaji v odpovedano
          */
-        $entC['status'] = "610s";       // odpovedan
-        $entC            = $I->successfullyUpdate($this->restUrl, $entC['id'], $entC);
+        $entD['status'] = "610s";       // odpovedan
+        $entD           = $I->successfullyUpdate($this->restUrl, $entD['id'], $entD);
         /*
          * preverimo, če so se zaporedne vrnile v začetno stqanje
          */
-        $entA = $I->successfullyGet($this->restUrl, $entA['id']);
+        $entA           = $I->successfullyGet($this->restUrl, $entA['id']);
         $I->assertEquals($zapA, $entA['zaporedna']);
 
         $entB = $I->successfullyGet($this->restUrl, $entB['id']);
         $I->assertEquals($zapB, $entB['zaporedna']);
 
-        
+        $entC = $I->successfullyGet($this->restUrl, $entC['id']);
+        $I->assertEquals($zapC, $entC['zaporedna']);    // se ne sme spremeniti, ker je druga uprizoritev
+
+
         /*
          * premaknem  vajo pred prvo , ni več odpovedana
          */
-        $entC['status'] = "200s";       
-        $entC['zacetek'] = '1997-05-08T10:00:00+0200';
-        $entC['konec']   = '1997-05-08T14:00:00+0200';
-        $entC            = $I->successfullyUpdate($this->restUrl, $entC['id'], $entC);
+        $entD['status']  = "200s";
+        $entD['zacetek'] = '1997-05-08T10:00:00+0200';
+        $entD['konec']   = '1997-05-08T14:00:00+0200';
+        $entD            = $I->successfullyUpdate($this->restUrl, $entD['id'], $entD);
         /*
          * preverimo, če se je prva zaporedna spremenila
          */
@@ -622,14 +655,17 @@ class VajaCest
         $entB = $I->successfullyGet($this->restUrl, $entB['id']);
         $I->assertEquals($zapB + 1, $entB['zaporedna']);
 
-        $I->assertLessThan($entA['zaporedna'], $entC['zaporedna']);
-        $I->assertLessThan($entB['zaporedna'], $entC['zaporedna']);
+        $entC = $I->successfullyGet($this->restUrl, $entC['id']);
+        $I->assertEquals($zapC, $entC['zaporedna']);    // se ne sme spremeniti, ker je druga uprizoritev
+
+        $I->assertLessThan($entA['zaporedna'], $entD['zaporedna']);
+        $I->assertLessThan($entB['zaporedna'], $entD['zaporedna']);
 
 
         /*
          * brišemo vajo
          */
-        $entC = $I->successfullyDelete($this->restUrl, $entC['id']);
+        $entD = $I->successfullyDelete($this->restUrl, $entD['id']);
         /*
          * preverimo, če so se zaporedne vrnile v začetno stqanje
          */
@@ -638,6 +674,9 @@ class VajaCest
 
         $entB = $I->successfullyGet($this->restUrl, $entB['id']);
         $I->assertEquals($zapB, $entB['zaporedna']);
+
+        $entC = $I->successfullyGet($this->restUrl, $entC['id']);
+        $I->assertEquals($zapC, $entC['zaporedna']);    // se ne sme spremeniti, ker je druga uprizoritev
     }
 
 }
