@@ -245,10 +245,10 @@ class DogodekCest
             "dogodekId"       => $dogodekId
             , "terminiStoritev" => $terminiStoritev]);
         codecept_debug($resp);
-        
+
         $this->kontroleRezultatovAzurirajTs($I, $dogodekId, $terminiStoritev);
 
-        
+
         /*
          * A,B -> B,C,D,E   - dva nova kreiramo, 1 zbrišemo
          */

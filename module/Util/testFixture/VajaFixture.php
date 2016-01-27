@@ -103,6 +103,8 @@ class VajaFixture
             ['08', "1995-08-01 20:00", "1995-08-01 23:00", '500s', "Vaja 8.", 'Prostor-0006', 'Uprizoritev-0002',],
             // druga sezona
             ['09', "2014-06-04 10:00", "2014-06-27 12:00", '400s', "Vaja 9.", 'Prostor-0005', 'Uprizoritev-0002',],
+            // dva dni traja
+            ['10', "2014-06-11 07:00", "2014-06-12 15:00", '400s', "Vaja 10.", 'Prostor-0005', 'Uprizoritev-0002',],
         ];
     }
 
