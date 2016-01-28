@@ -131,6 +131,13 @@ class PredstavaFixture
                 , '2016-05-01T20:00:00+0200', '2016-05-01T23:00:00+0200', 'Prostor-0001', null, [],],
             ['14', 0, 'Uprizoritev-0001', 'Predstava 14.', '200s'            // druga sezona
                 , '2015-05-23T20:00:00+0200', '2015-05-23T23:00:00+0200', 'Prostor-0001', null, [],],
+            /*
+             * predstavi, ki sta del gostovanja
+             */
+            ['15', 0, 'Uprizoritev-0002', 'Predstava 15.', '200s'            
+                , '2015-03-15T20:00:00+0100', '2015-03-15-01T23:00:00+0100', null, null, [],],
+            ['16', 0, 'Uprizoritev-0002', 'Predstava 16.', '200s'            
+                , '2015-03-16T20:00:00+0100', '2015-03-16-01T23:00:00+0100', null, null, [],],
         ];
     }
 

@@ -32,6 +32,8 @@ class DogodekCest
     private $lookDogSplosDog3Id;
     private $lookDogTehnicniDog1Id;
     private $lookDogTehnicniDog2Id;
+    private $lookDogGostovanje1Id;
+    private $lookDogGostovanje2Id;
     private $objTSDog1A;
     private $objTSDog1B;
     private $objTSDog1C;
@@ -41,7 +43,7 @@ class DogodekCest
     private $lookSezona2015;
     private $lookSezona2016;
     private $lookSezona2017;
-    
+
     public function _before(ApiTester $I)
     {
 // da testiramo vsa posamezna dovoljenja brez shortCurcuit
@@ -118,7 +120,7 @@ class DogodekCest
         }
     }
 
-        /**
+    /**
      * 
      * @param ApiTester $I
      */
@@ -137,8 +139,6 @@ class DogodekCest
         $I->assertGuid($look['id']);
     }
 
-    
-    
     /**
      * @param ApiTester $I
      */
@@ -206,6 +206,18 @@ class DogodekCest
         $I->assertEquals(1, $resp['state']['totalRecords']);
         $ent                         = array_pop($list);
         $this->lookDogTehnicniDog2Id = $look                        = $ent['id'];
+        codecept_debug($look);
+
+        /*
+         * gostovanje
+         */
+        $resp                       = $I->successfullyGetList($this->dogodekUrl
+                . "?q=Gostovanje 1.&zacetek=2000-01-01&konec=2200-05-05&razred[]=300s", []);
+        $list                       = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $ent                        = array_pop($list);
+        $this->lookDogGostovanje1Id = $look                       = $ent['id'];
         codecept_debug($look);
     }
 
@@ -324,10 +336,10 @@ class DogodekCest
         /*
          * preverimo še, če se je sezona spremenila
          */
-        $ent = $I->successfullyGet($this->dogodekUrl, $newId);
+        $ent       = $I->successfullyGet($this->dogodekUrl, $newId);
         codecept_debug($ent);
-        
-        $I->assertEquals($this->lookSezona2015['id'],$ent['sezona'], "spremenjena sezona glede na novi začetek");
+
+        $I->assertEquals($this->lookSezona2015['id'], $ent['sezona'], "spremenjena sezona glede na novi začetek");
 
         /*
          * kopija splošnega dogodka
@@ -387,6 +399,18 @@ class DogodekCest
         ]);
         codecept_debug($resp);
         $I->assertEquals(1001243, $resp['code']);
+
+        /*
+         * neveljavni dogodek - gostovanje
+         */
+        $dogodekId = $this->lookDogGostovanje1Id;
+        $zacetek   = '2012-06-04T10:10:00+0200';
+        $resp      = $I->failCallRpc($this->rpcUrl, 'kopirajDogodek', [
+            "dogodekId" => $dogodekId
+            , "zacetek"   => $zacetek
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1001262, $resp['code']);
     }
 
 }

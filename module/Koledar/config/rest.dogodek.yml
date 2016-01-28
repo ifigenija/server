@@ -15,6 +15,7 @@ forms:
             - prostor
             - sezona
             - barva
+            - nadrejenoGostovanje
 lists:
     default: 
         filter:

@@ -117,6 +117,9 @@ class DogodekService
             \Koledar\Entity\Dogodek::PREGLEDAN,
             \Koledar\Entity\Dogodek::POTRJEN,])
                 , "Kopirati je možno planirane,pregledane ali potrjene dogodke", 1001261);
+        $this->expect($dogodek->getRazred() != \Koledar\Entity\Dogodek::GOSTOVANJE
+                , "Gostovanja ni možno kopirati", 1001262);
+        $this->expect(!$dogodek->getNadrejenoGostovanje(), "Dogodka, ki je del gostovanja, ni možno kopirati", 1001263);
 
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
 

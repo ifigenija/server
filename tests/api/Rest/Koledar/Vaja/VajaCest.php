@@ -40,6 +40,9 @@ class VajaCest
     private $obj4;
     private $obj5;
     private $objDogodek;
+    private $gostovanjeUrl  = '/rest/gostovanje';
+    private $objGostovanje;
+    private $lookDrzavaId; 
     private $lookUprizoritev2;
     private $lookUprizoritev1;
     private $lookUprizoritev3;
@@ -175,25 +178,59 @@ class VajaCest
         $this->lookSezona2017 = $look                 = $I->lookupEntity("sezona", "2017", false);
         $I->assertGuid($look['id']);
     }
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupDrzavo(ApiTester $I)
+    {
+        $this->lookDrzavaId = $look               = $I->lookupEntity("drzava", "SI");
+        $I->assertGuid($look);
+    }
+
+    
+    /**
+     * @depends lookupDrzavo
+     * @param ApiTester $I
+     */
+    public function createGostovanje(ApiTester $I)
+    {
+        $zacetek             = '2014-05-01T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data                = [
+            'vrsta'   => 'zz',
+            'drzava'  => $this->lookDrzavaId,
+            'zacetek' => $zacetek,
+            'title'   => "Gostovanje $zacetek",
+            'status'  => '200s',
+            'konec'   => '2014-05-09T23:00:00+0200',
+        ];
+        codecept_debug($data);
+        $this->objGostovanje = $ent                 = $I->successfullyCreate($this->gostovanjeUrl, $data);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+    }
 
     /**
      *  kreiramo zapisa vaja in dogodek
      * 
      * če je začetek naveden, se kreira zraven tudi dogodek
      * 
+     * @depends createGostovanje
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
     {
         $zacetek        = '2015-05-07T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data           = [
-            'tipvaje'     => $this->lookTipVaje1['id'],
-            'uprizoritev' => $this->lookUprizoritev1['id'],
-            'title'       => "Vaja $zacetek",
-            'status'      => '200s',
-            'zacetek'     => $zacetek,
-            'konec'       => '2015-05-07T14:00:00+0200',
-            'prostor'     => $this->lookProstor1['id'],
+            'tipvaje'             => $this->lookTipVaje1['id'],
+            'uprizoritev'         => $this->lookUprizoritev1['id'],
+            'title'               => "Vaja $zacetek",
+            'status'              => '200s',
+            'zacetek'             => $zacetek,
+            'konec'               => '2015-05-07T14:00:00+0200',
+            'prostor'             => $this->lookProstor1['id'],
+            'barva'               => '#123456',
+            'nadrejenoGostovanje' => $this->objGostovanje['id'],
         ];
         /*
          * pripravimo parametre alternacij, npr. prve 3 te uprizoritve
@@ -216,6 +253,8 @@ class VajaCest
         $I->assertEquals($ent['status'], $data['status']);
         $I->assertEquals($ent['prostor'], $data['prostor']);
         $I->assertEquals($ent['sezona'], $this->lookSezona2015['id']);
+        $I->assertEquals($ent['barva'], $data['barva']);
+        $I->assertEquals($ent['nadrejenoGostovanje'], $data['nadrejenoGostovanje']);
 
         /**
          * preveri dogodek
@@ -229,6 +268,8 @@ class VajaCest
         $I->assertEquals($dogodek['konec'], $data['konec'], 'konec');
         $I->assertEquals($dogodek['prostor']['id'], $data['prostor'], 'prostor');
         $I->assertEquals($dogodek['sezona'], $ent['sezona']);
+        $I->assertEquals($dogodek['barva'], $data['barva']);
+        $I->assertEquals($dogodek['nadrejenoGostovanje'], $data['nadrejenoGostovanje']);
 
 
         /**
@@ -429,6 +470,8 @@ class VajaCest
         $I->assertEquals($ent['konec'], '2015-05-07T14:00:00+0200');
         $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
         $I->assertEquals($ent['sezona'], $this->lookSezona2015['id']);
+        $I->assertEquals($ent['barva'], '#123456', "barva");
+        $I->assertEquals($ent['nadrejenoGostovanje'], $this->objGostovanje['id'], "nadrejeno gostovanje");
     }
 
     /**
@@ -572,6 +615,7 @@ class VajaCest
      * B   1
      * C   0
      * 
+     * @depends create
      * @param ApiTester $I
      */
     public function azurirajZaRacunanjeZaporednih(ApiTester $I)

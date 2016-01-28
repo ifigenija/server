@@ -91,6 +91,12 @@
         delTehKon:
             label: Delta konca pri tehničnem dogodku 
             value: 0
+        delGosZac:
+            label: Delta začetka pri dogodku gostovanje
+            value: 0
+        delGosKon:
+            label: Delta konca pri dogodku gostovanje 
+            value: 0
 -
     name: dogodek.termini
     description: Privzete vrednosti za termine dogodkov 

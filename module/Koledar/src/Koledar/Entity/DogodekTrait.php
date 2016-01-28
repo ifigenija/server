@@ -155,12 +155,63 @@ trait DogodekTrait
     }
 
     /**
-     * @return string
+     * 
+     * @return type
      */
     public function getSezona()
     {
         if ($this->dogodek) {
             return $this->dogodek->getSezona();
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @return self
+     */
+    public function setNadrejenoGostovanje($nadrejenoGostovanje = null)
+    {
+        if (!$this->dogodek) {
+            $this->dodajDogodek();
+        }
+        $this->dogodek->setNadrejenoGostovanje($nadrejenoGostovanje);
+        return $this;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getNadrejenoGostovanje()
+    {
+        if ($this->dogodek) {
+            return $this->getDogodek()->getNadrejenoGostovanje();
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param string $barva
+     * @return self
+     */
+    public function setBarva($barva = null)
+    {
+        if (!$this->dogodek) {
+            $this->dodajDogodek();
+        }
+        $this->dogodek->setBarva($barva);
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBarva()
+    {
+        if ($this->dogodek) {
+            return $this->getDogodek()->getBarva();
         }
         return null;
     }

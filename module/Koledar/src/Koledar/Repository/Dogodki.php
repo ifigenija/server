@@ -221,6 +221,10 @@ class Dogodki
                 $deltaZacetek    = $deltaZacetekTeh = $delte['delTehZac']['value'];
                 $deltaKonec      = $deltaKonecTeh   = $delte['delTehKon']['value'];
                 break;
+            case $object::GOSTOVANJE :
+                $deltaZacetek    = $deltaZacetekTeh = $delte['delGosZac']['value'];
+                $deltaKonec      = $deltaKonecTeh   = $delte['delGosKon']['value'];
+                break;
             default:
                 $deltaZacetek    = $deltaZacetekTeh = $deltaKonecTeh   = $deltaKonec      = 0;
                 break;

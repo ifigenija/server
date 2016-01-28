@@ -5,10 +5,7 @@ entityClass: Koledar\Entity\Gostovanje
 forms:
     default: 
         elements:
-#            - id
             - vrsta
-#            - dogodek
-#            - predstave
             - drzava
             - name: title
               type: text
@@ -31,30 +28,25 @@ forms:
               options: 
                   label: Konec
                   required: false
-#            - name: prostor
-#              type: toone
-#              options:
-#                  targetEntity: Prodaja\Entity\Prostor
-#                  label: Prostor
-#                  required: false
+            - name: barva
+              type: text
+              options:
+                  label: Barva dogodka
+                  required: false
         hydrator:
             byValue:
                 - dogodek
-#            lookups:
-#                - dogodek.prostor
             virtual:
                 - name: zacetek
                   type: datetime
                 - name: konec
                   type: datetime
-#                - name: prostor
-#                  type: byRef
-#                  targetEntity: Prodaja\Entity\Prostor
                 - name: sezona
                   type: byRef
                   targetEntity: Koledar\Entity\Sezona
                 - title
                 - status                  
+                - barva
             
 lists:
     default: 
@@ -67,10 +59,9 @@ lists:
                   type: datetime
                 - status
                 - title
-#                - prostor
 relation:
     default:
-        predstave:
+        podrejeniDogodki:
             enabled: true
             hydrator:
                 exclude: []            

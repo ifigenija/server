@@ -84,15 +84,6 @@ class Predstava
     protected $uprizoritev;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Koledar\Entity\Gostovanje", inversedBy="predstave")
-     * @ORM\JoinColumn(name="gostovanje_id", referencedColumnName="id")
-     * @Max\I18n(label = "predstava.gostovanje", description = "predstava.d.gostovanje")
-     * @Max\Ui(type="toone")
-     * @var Gostovanje
-     */
-    protected $gostovanje;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Abonmaji\Entity\Abonma", inversedBy="predstave")
      * @var <Abonmaji>
      */
@@ -198,24 +189,6 @@ class Predstava
     public function setUprizoritev($uprizoritev)
     {
         $this->uprizoritev = $uprizoritev;
-        return $this;
-    }
-
-    /**
-     * @return Gostovanje
-     */
-    public function getGostovanje()
-    {
-        return $this->gostovanje;
-    }
-
-    /**
-     * @param Gostovanje $gostovanje
-     * @return Predstava
-     */
-    public function setGostovanje(Gostovanje $gostovanje = null)
-    {
-        $this->gostovanje = $gostovanje;
         return $this;
     }
 

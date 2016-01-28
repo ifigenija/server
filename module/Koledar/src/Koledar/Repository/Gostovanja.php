@@ -36,17 +36,6 @@ class Gostovanja
                 $sort = $this->getSort($name);
                 $qb->orderBy($sort->order, $sort->dir);
                 return new DoctrinePaginator(new Paginator($qb));
-//            case "default":
-//                $this->expect(!(empty($options['drzava']) ), "Država je obvezna", 770121);
-//                $crit = new Criteria();
-//                $e    = $crit->expr();
-//
-//                if (!empty($options['drzava'])) {
-//                    $drzava = $this->getEntityManager()->find('App\Entity\Drzava', $options['drzava']);
-//                    $exp    = $e->eq('drzava', $drzava);
-//                }
-//                $crit->andWhere($exp);
-//                return new Selectable($this, $crit);
         }
     }
 
@@ -74,6 +63,30 @@ class Gostovanja
      */
     public function create($object, $params = null)
     {
+        if (!empty($params['dogodek'])) {
+            $this->expect(is_array($params['dogodek']), "Parameter dogodek mora biti array id-jev", 1001950);
+            $dogodekIds = $params['dogodek'];
+            $dogR       = $this->getEntityManager()->getRepository('Koledar\Entity\Dogodek');
+            /*
+             * dodam podrejene dogodke
+             */
+            foreach ($dogodekIds as $dogId) {
+                $dog = $dogR->findOneById($dogId);
+                $this->expect($dog, "Dogodek ($dogId) ne obstaja", 1001951);
+
+                 /*
+                 * da ni težave v expectu
+                 */
+                $dogGostovanjeId = $dog->getNadrejenoGostovanje() ? $dog->getNadrejenoGostovanje()->getId() : ""; 
+
+                $this->expect(!$dog->getNadrejenoGostovanje()
+                        , "Dogodek ($dogId) že obstaja v drugem gostovanju ("
+                        . $dogGostovanjeId. ")", 1001952);
+                $dog->setNadrejenoGostovanje($object);
+                $object->getPodrejeniDogodki()->add($dog);
+            }
+        }
+
         if ($object->dogodek) {
             /** @var Dogodki $rep */
             $rep = $this->getEntityManager()->getRepository('Koledar\Entity\Dogodek');
@@ -104,6 +117,13 @@ class Gostovanja
      */
     public function delete($object)
     {
+        /*
+         * izbriši to gostovanje v podrejenih dogodkih
+         */
+        foreach ($object->getPodrejeniDogodki() as $dog) {
+            $dog->setNadrejenoGostovanje(null);
+        }
+
         parent::delete($object);
         $this->getEntityManager()->remove($object->getDogodek());
     }
