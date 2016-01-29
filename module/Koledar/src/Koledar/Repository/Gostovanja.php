@@ -80,7 +80,7 @@ class Gostovanja
                 $dogGostovanjeId = $dog->getNadrejenoGostovanje() ? $dog->getNadrejenoGostovanje()->getId() : ""; 
 
                 $this->expect(!$dog->getNadrejenoGostovanje()
-                        , "Dogodek ($dogId) že obstaja v drugem gostovanju ("
+                        , "Dogodek ($dogId) že obstaja v gostovanju ("
                         . $dogGostovanjeId. ")", 1001952);
                 $dog->setNadrejenoGostovanje($object);
                 $object->getPodrejeniDogodki()->add($dog);
