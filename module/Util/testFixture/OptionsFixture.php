@@ -108,9 +108,9 @@ class OptionsFixture
                     $em->persist($optVal);
                 }
 //                echo "     opt val: " .
-                $val['optionValue']['global']['value'][0]['key'] . "  " .
-                $val['optionValue']['global']['value'][0]['value'] .
-                PHP_EOL;
+//                $val['optionValue']['global']['value'][0]['key'] . "  " .
+//                $val['optionValue']['global']['value'][0]['value'] .
+//                PHP_EOL;
             }
 
             /**

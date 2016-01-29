@@ -72,3 +72,19 @@
     description: 'za test - user opcija onemogočena'
     defaultValue: 
             - privzeta štirica
+            
+-
+    name: tomaz.barva.ozadja
+    type: array
+    public: false
+    readOnly: false
+    perUser: true
+    description: 'barva ozadja tomaž'
+    defaultValue: siva
+    optionValue:
+        global:
+            value: zelena
+        user:            
+            - 
+                email: admin@ifigenija.si
+                value: rdeča
