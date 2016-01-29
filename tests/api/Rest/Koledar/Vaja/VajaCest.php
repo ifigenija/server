@@ -195,14 +195,14 @@ class VajaCest
      */
     public function createGostovanje(ApiTester $I)
     {
-        $zacetek             = '2014-05-01T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $zacetek             = '2015-05-01T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data                = [
             'vrsta'   => 'zz',
             'drzava'  => $this->lookDrzavaId,
             'zacetek' => $zacetek,
             'title'   => "Gostovanje $zacetek",
             'status'  => '200s',
-            'konec'   => '2014-05-09T23:00:00+0200',
+            'konec'   => '2015-05-09T23:00:00+0200',
         ];
         codecept_debug($data);
         $this->objGostovanje = $ent                 = $I->successfullyCreate($this->gostovanjeUrl, $data);
@@ -452,7 +452,7 @@ class VajaCest
     /**
      * Preberem zapis in preverim vsa polja
      * 
-     * @depends create
+     * @depends update
      * @param ApiTester $I
      */
     public function read(\ApiTester $I)
