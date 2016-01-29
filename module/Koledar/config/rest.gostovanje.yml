@@ -7,6 +7,8 @@ forms:
         elements:
             - vrsta
             - drzava
+            - zamejstvo
+            - kraj
             - name: title
               type: text
               options:

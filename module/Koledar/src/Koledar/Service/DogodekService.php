@@ -159,12 +159,9 @@ class DogodekService
             $this->getEm()->persist($newPodDog);
 
             /*
-             *  $$ preveri polja
-             * gostovanje ?? ali je potrebno spreminjati - verjetno  lahko ostane isto!
              *   abonmaji  - many to many relacij tehnično ni potrebno spreminjati
-             * 
-             * $$ uskladi kloniranje predstave tudi spodaj pri gostovanjih!
              */
+
             $newPodDog->setDogodek($newDog);
             $newDog->setPredstava($newPodDog);
         }
@@ -181,42 +178,17 @@ class DogodekService
             $newDog->setTehnicni($newPodDog);
         }
         if ($dogodek->getGostovanje()) {
-            $newPodDog = $dogodek->getGostovanje()->copy();
-            $this->getEm()->persist($newPodDog);
-
             /*
-             * $$ namesto predstave bodo dogodki!
+             * še en expect za vsak slučaj
              */
-            $newPodDog
-                    ->setPredstave(new \Doctrine\Common\Collections\ArrayCollection());
-            /*
-             * $$ ppreglej polja
-             *  id
-             *  vrsta
-             *  zamejstvo
-             *  kraj
-             *  dogodek
-             *  predstave
-             *  drzava
-             * $$ namesto predstave bodo dogodki !!
-             */
+            $this->expect(false, "Gostovanja ni možno kopirati", 1001264);
+        }
 
-            $coll = $dogodek->getGostovanje()->getPredstave();
-            foreach ($coll as $pre) {
-                $newGPred = $pre->copy();
-                $this->getEm()->persist($newGPred);
-                /*
-                 *  $$ preveri polja
-                 * gostovanje ?? ali je potrebno spreminjati - verjetno  lahko ostane isto!
-                 * 
-                 * $$ uskladi kloniranje predstave tudi zoraj pri dogodku
-                 */
-                $newGPred->setGostovanje($newPodDog);
-                $newGPred->setDogodek($newPodDog);
-                $newPodDog->getPredstave()->add($newGPred);
-            }
-            $newPodDog->setDogodek($newDog);
-            $newDog->setGostovanje($newPodDog);
+        if ($dogodek->getNadrejenoGostovanje()) {
+            /*
+             * še en expect za vsak slučaj
+             */
+            $this->expect(false, "Dogodka, ki je del gostovanja, ni možno kopirati", 1001265);
         }
         $coll = $dogodek->getTerminiStoritve();
         foreach ($coll as $ts) {

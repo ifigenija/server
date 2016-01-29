@@ -90,71 +90,29 @@ class Gostovanje
         $this->dogodek->setGostovanje($this);
         $this->dogodek->setRazred(Dogodek::GOSTOVANJE);
     }
-
-    public function getId()
+    function getId()
     {
         return $this->id;
     }
 
-    public function getVrsta()
+    function getVrsta()
     {
         return $this->vrsta;
     }
 
-    public function getZamejstvo()
+    function getZamejstvo()
     {
         return $this->zamejstvo;
     }
 
-    public function getKraj()
+    function getKraj()
     {
-        return $this->vrsta;
+        return $this->kraj;
     }
 
-    public function getDogodek()
+    function getDogodek()
     {
         return $this->dogodek;
-    }
-
-    public function getDrzava()
-    {
-        return $this->drzava;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    public function setVrsta($vrsta)
-    {
-        $this->vrsta = $vrsta;
-        return $this;
-    }
-
-    public function setZamejstvo($zamejstvo)
-    {
-        $this->zamejstvo = $zamejstvo;
-        return $this;
-    }
-
-    public function setKraj($kraj)
-    {
-        $this->kraj = $kraj;
-        return $this;
-    }
-
-    public function setDogodek(\Koledar\Entity\Dogodek $dogodek = null)
-    {
-        $this->dogodek = $dogodek;
-        return $this;
-    }
-
-    public function setDrzava(\App\Entity\Drzava $drzava = null)
-    {
-        $this->drzava = $drzava;
-        return $this;
     }
 
     function getPodrejeniDogodki()
@@ -162,10 +120,53 @@ class Gostovanje
         return $this->podrejeniDogodki;
     }
 
+    function getDrzava()
+    {
+        return $this->drzava;
+    }
+
+    function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    function setVrsta($vrsta)
+    {
+        $this->vrsta = $vrsta;
+        return $this;
+    }
+
+    function setZamejstvo($zamejstvo)
+    {
+        $this->zamejstvo = $zamejstvo;
+        return $this;
+    }
+
+    function setKraj($kraj)
+    {
+        $this->kraj = $kraj;
+        return $this;
+    }
+
+    function setDogodek(\Koledar\Entity\Dogodek $dogodek=null)
+    {
+        $this->dogodek = $dogodek;
+        return $this;
+    }
+
     function setPodrejeniDogodki($podrejeniDogodki)
     {
         $this->podrejeniDogodki = $podrejeniDogodki;
         return $this;
     }
+
+    function setDrzava(\App\Entity\Drzava $drzava=null)
+    {
+        $this->drzava = $drzava;
+        return $this;
+    }
+
+
 
 }

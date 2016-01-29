@@ -29,7 +29,7 @@ class PredstavaFixture
     public function getDependencies()
     {
         return array('TestFixture\UprizoritevFixture', 'TestFixture\ProstorFixture'
-            , 'TestFixture\OsebaFixture', 'TestFixture\SezonaFixture');
+            , 'TestFixture\OsebaFixture', 'TestFixture\SezonaFixture', 'TestFixture\GostovanjeFixture');
     }
 
     /**
@@ -69,7 +69,7 @@ class PredstavaFixture
         $o->setProstor($ref);
 
         $ref = $v[8] ? $this->getReference($v[8]) : null;
-//        $o->setSezona($ref);
+        $o->setNadrejenoGostovanje($ref);
 
         /*
          * many to many
@@ -135,9 +135,9 @@ class PredstavaFixture
              * predstavi, ki sta del gostovanja
              */
             ['15', 0, 'Uprizoritev-0002', 'Predstava 15.', '200s'            
-                , '2015-03-15T20:00:00+0100', '2015-03-15-01T23:00:00+0100', null, null, [],],
+                , '2015-03-15T20:00:00+0100', '2015-03-15-01T23:00:00+0100', null, 'Gostovanje-01', [],],
             ['16', 0, 'Uprizoritev-0002', 'Predstava 16.', '200s'            
-                , '2015-03-16T20:00:00+0100', '2015-03-16-01T23:00:00+0100', null, null, [],],
+                , '2015-03-16T20:00:00+0100', '2015-03-16-01T23:00:00+0100', null, 'Gostovanje-01', [],],
         ];
     }
 

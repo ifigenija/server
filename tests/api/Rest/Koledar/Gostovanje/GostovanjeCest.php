@@ -189,15 +189,17 @@ class GostovanjeCest
      */
     public function create(ApiTester $I)
     {
-        $zacetek = '2014-05-01T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
-        $data    = [
-            'vrsta'   => 'zz',
-            'drzava'  => $this->lookDrzava1,
-            'zacetek' => $zacetek,
-            'title'   => "Gostovanje $zacetek",
-            'status'  => '200s',
-            'konec'   => '2014-05-09T23:00:00+0200',
-            'barva'   => '#123456',
+        $zacetek       = '2014-05-01T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data          = [
+            'vrsta'     => 'zz',
+            'drzava'    => $this->lookDrzava1,
+            'zacetek'   => $zacetek,
+            'title'     => "Gostovanje $zacetek",
+            'status'    => '200s',
+            'konec'     => '2014-05-09T23:00:00+0200',
+            'barva'     => '#123456',
+            'zamejstvo' => true,
+            'kraj'      => 'zzCity',
         ];
         $parDogodki    = 'dogodek[]=' . $this->objDogPredstava3['id'] . "&"
                 . 'dogodek[]=' . $this->objDogPredstava4['id'] . "&";
@@ -217,7 +219,9 @@ class GostovanjeCest
 //        $I->assertEquals($ent['prostor'], $data['prostor']);
         $I->assertEquals($ent['sezona'], $this->lookSezona2014['id']);
         $I->assertEquals($ent['barva'], $data['barva']);
-        
+        $I->assertEquals($ent['zamejstvo'], $data['zamejstvo']);
+        $I->assertEquals($ent['kraj'], $data['kraj']);
+
         /**
          * preveri dogodek
          */
@@ -329,9 +333,6 @@ class GostovanjeCest
         $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
 
         $I->assertEquals($entR['vrsta'], 'uu');
-
-        
-        
     }
 
     /**
@@ -355,11 +356,13 @@ class GostovanjeCest
         $I->assertEquals($ent['konec'], '2014-05-09T23:00:00+0200');
         $I->assertEquals($ent['sezona'], $this->lookSezona2014['id']);
         $I->assertEquals($ent['barva'], '#123456', "barva");
+        $I->assertEquals($ent['kraj'], 'zzCity');
+        $I->assertEquals($ent['zamejstvo'], true);
 
         $I->assertTrue(isset($ent['podrejeniDogodki']));
         $I->assertEquals(4, count($ent['podrejeniDogodki']), "število podrejenih dogodkov (2+2)");
         $I->assertEquals($ent['dogodek']['id'], $this->objDogodek['id']);
-        $I->assertEquals(3,count($ent['dogodek']['terminiStoritve']), "število terminov storitve");
+        $I->assertEquals(3, count($ent['dogodek']['terminiStoritve']), "število terminov storitve");
     }
 
     /**

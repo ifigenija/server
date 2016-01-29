@@ -27,6 +27,8 @@ class DogodekCest
     private $lookDogPredstava1Id;
     private $lookDogPredstava2Id;
     private $lookDogPredstava3Id;
+    private $lookDogPredstava15Id;
+    private $lookDogPredstava16Id;
     private $lookDogSplosDog1Id;
     private $lookDogSplosDog2Id;
     private $lookDogSplosDog3Id;
@@ -218,6 +220,19 @@ class DogodekCest
         $I->assertEquals(1, $resp['state']['totalRecords']);
         $ent                        = array_pop($list);
         $this->lookDogGostovanje1Id = $look                       = $ent['id'];
+        codecept_debug($look);
+
+
+        /*
+         * poddogodki gostovanja
+         */
+        $resp                       = $I->successfullyGetList($this->dogodekUrl
+                . "?q=Predstava 15.&zacetek=2000-01-01&konec=2200-05-05&razred[]=100s", []);
+        $list                       = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $ent                        = array_pop($list);
+        $this->lookDogPredstava15Id = $look                       = $ent['id'];
         codecept_debug($look);
     }
 
@@ -411,6 +426,18 @@ class DogodekCest
         ]);
         codecept_debug($resp);
         $I->assertEquals(1001262, $resp['code']);
+
+        /*
+         * neveljavni dogodek - dogodek, ki je del gostovanja
+         */
+        $dogodekId = $this->lookDogPredstava15Id;
+        $zacetek   = '2012-06-04T10:10:00+0200';
+        $resp      = $I->failCallRpc($this->rpcUrl, 'kopirajDogodek', [
+            "dogodekId" => $dogodekId
+            , "zacetek"   => $zacetek
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1001263, $resp['code']);
     }
 
 }
