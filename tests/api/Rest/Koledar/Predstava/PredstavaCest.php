@@ -609,7 +609,6 @@ class PredstavaCest
         /*
          * vrinemo predstavo med D  in E
          */
-        // kreiramo še en zapis
         $zacetek = '2015-05-19T10:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data    = [
             'uprizoritev' => $this->lookUprizoritev1['id'],
