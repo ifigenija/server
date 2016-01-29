@@ -45,10 +45,18 @@ class GostovanjeCest
     private $objPredstava2;
     private $objPredstava3;
     private $objPredstava4;
+    private $objPredstava5;
+    private $objPredstava6;
+    private $objPredstava7;
+    private $objPredstava8;
     private $objDogPredstava1;
     private $objDogPredstava2;
     private $objDogPredstava3;
     private $objDogPredstava4;
+    private $objDogPredstava5;
+    private $objDogPredstava6;
+    private $objDogPredstava7;
+    private $objDogPredstava8;
     private $lookSezona2015;
     private $lookSezona2016;
     private $lookSezona2017;
@@ -60,10 +68,32 @@ class GostovanjeCest
     private $lookOseba2;
     private $lookOseba3;
     private $lookOseba4;
+    private $lookGostovanjeId1;
+    private $lookDogGostovanje1;
 
     public function _before(ApiTester $I)
     {
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$admin, \IfiTest\AuthPage::$adminPass);
+    }
+
+    /**
+     * @param ApiTester $I
+     */
+    public function getListDogodke(ApiTester $I)
+    {
+        /*
+         * dogodek, ki je gostovanje
+         */
+        $resp                     = $I->successfullyGetList($this->dogodekUrl
+                . "?q=Gostovanje 1.&zacetek=2000-01-01&konec=2200-05-05&razred[]=300s", []);
+        $list                     = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $ent                      = array_pop($list);
+        $this->lookDogGostovanje1 = $look                     = $ent;
+        codecept_debug($look);
+        $this->lookGostovanjeId1  = $lookId                   = $ent['gostovanje'];
+        codecept_debug($lookId);
     }
 
     /**
@@ -178,6 +208,60 @@ class GostovanjeCest
         $this->objPredstava4    = $ent                    = $I->successfullyCreate($this->predstavaUrl, $data);
         $I->assertGuid($ent['id']);
         $this->objDogPredstava4 = $dogodek                = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']['id']);
+
+        /**
+         *  kreiramo še en zapis
+         */
+        $zacetek                = '2014-05-08T11:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data                   = [
+            'uprizoritev'         => $this->lookUprizoritev1['id'],
+            'title'               => "Predstava $zacetek",
+            'status'              => '200s',
+            'zacetek'             => $zacetek,
+            'konec'               => '2014-05-08T12:00:00+0200',
+            'prostor'             => null,
+            'dezurni'             => null,
+            'nadrejenoGostovanje' => null,
+        ];
+        $this->objPredstava5    = $ent                    = $I->successfullyCreate($this->predstavaUrl, $data);
+        $I->assertGuid($ent['id']);
+        $this->objDogPredstava5 = $dogodek                = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']['id']);
+
+        /**
+         *  kreiramo še en dogodek, katerega interval ni v celoti znotraj gostovanja
+         */
+        $zacetek                = '2014-04-30T00:00:00+0200'; // začetek pred gostovanjem
+        $data                   = [
+            'uprizoritev'         => $this->lookUprizoritev1['id'],
+            'title'               => "Predstava $zacetek",
+            'status'              => '200s',
+            'zacetek'             => $zacetek,
+            'konec'               => '2014-05-08T12:00:00+0200',
+            'prostor'             => null,
+            'dezurni'             => null,
+            'nadrejenoGostovanje' => null,
+        ];
+        $this->objPredstava6    = $ent                    = $I->successfullyCreate($this->predstavaUrl, $data);
+        $I->assertGuid($ent['id']);
+        $this->objDogPredstava6 = $dogodek                = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']['id']);
+
+        /**
+         *  kreiramo še en dogodek, katerega interval ni v celoti znotraj gostovanja
+         */
+        $zacetek                = '2014-05-09T11:00:00+0200';
+        $data                   = [
+            'uprizoritev'         => $this->lookUprizoritev1['id'],
+            'title'               => "Predstava $zacetek",
+            'status'              => '200s',
+            'zacetek'             => $zacetek,
+            'konec'               => '2014-05-21T12:00:00+0200', // konec po gostovanju
+            'prostor'             => null,
+            'dezurni'             => null,
+            'nadrejenoGostovanje' => null,
+        ];
+        $this->objPredstava7    = $ent                    = $I->successfullyCreate($this->predstavaUrl, $data);
+        $I->assertGuid($ent['id']);
+        $this->objDogPredstava7 = $dogodek                = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']['id']);
     }
 
     /**
@@ -196,7 +280,7 @@ class GostovanjeCest
             'zacetek'   => $zacetek,
             'title'     => "Gostovanje $zacetek",
             'status'    => '200s',
-            'konec'     => '2014-05-09T23:00:00+0200',
+            'konec'     => '2014-05-20T23:00:00+0200',
             'barva'     => '#123456',
             'zamejstvo' => true,
             'kraj'      => 'zzCity',
@@ -254,6 +338,61 @@ class GostovanjeCest
     }
 
     /**
+     * test validacij pri create-u gostovanja
+     * 
+     * @depends getListDogodke
+     * @param ApiTester $I
+     */
+    public function createZaValidacije(ApiTester $I)
+    {
+        /*
+         * probamo dodati zapis z poddogodkom , ki 2x nastopa
+         */
+        $zacetek    = '2014-05-01T20:01:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data       = [
+            'vrsta'     => 'vv',
+            'drzava'    => $this->lookDrzava1,
+            'zacetek'   => $zacetek,
+            'title'     => "Gostovanje $zacetek",
+            'status'    => '200s',
+            'konec'     => '2014-05-20T23:01:00+0200',
+            'barva'     => '#123456',
+            'zamejstvo' => false,
+            'kraj'      => 'vvCity',
+        ];
+        $parDogodki = 'dogodek[]=' . $this->objDogPredstava5['id'] . "&"
+                . 'dogodek[]=' . $this->objDogPredstava5['id'] . "&"; // še 1x isti dogodek
+        $resp       = $I->failToCreate($this->restUrl . "?" . $parDogodki, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001952, $resp[0]['code']); //ne pride do 1001972 - 
+
+        /*
+         * začetek poddogodka pred gostovanjem
+         */
+        $parDogodki = 'dogodek[]=' . $this->objDogPredstava6['id'] . "&";
+        $resp       = $I->failToCreate($this->restUrl . "?" . $parDogodki, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001970, $resp[0]['code']);
+
+        /*
+         *  konec poddogodka za gostovanjem
+         */
+        $parDogodki = 'dogodek[]=' . $this->objDogPredstava7['id'] . "&";
+        $resp       = $I->failToCreate($this->restUrl . "?" . $parDogodki, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001970, $resp[0]['code']);
+
+        /*
+         *  poddogodek je gostovanje
+         */
+        $parDogodki = 'dogodek[]=' . $this->lookDogGostovanje1['id'] . "&";
+        codecept_debug($parDogodki);
+        $resp       = $I->failToCreate($this->restUrl . "?" . $parDogodki, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001971, $resp[0]['code']);
+    }
+
+    /**
      *  kreiramo zapis
      * 
      * @depends create
@@ -304,6 +443,107 @@ class GostovanjeCest
     }
 
     /**
+     *  update razred poddogodka gostovanja
+     * 
+     * @depends createVecPodDogodkov
+     * 
+     * @param ApiTester $I
+     */
+    public function updateRazredPodDogodek(ApiTester $I)
+    {
+        /*
+         * ali sploh deluje update poddogodka?
+         */
+        $data                = $this->objPredstava1;
+        $data ['konec']      = '2014-05-07T23:01:00+0200';
+        $this->objPredstava1 = $ent                 = $I->successfullyUpdate($this->predstavaUrl, $data['id'], $data);
+        $I->assertGuid($ent['id']);
+        $I->assertEquals($ent ['konec'], $data ['konec']);
+
+        /*
+         * začetek izven intervala gostovanja
+         */
+        $data ['zacetek'] = '2014-04-30T00:00:00+0200';
+        $resp             = $I->failToUpdate($this->predstavaUrl, $data['id'], $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001711, $resp[0]['code']);
+    }
+
+    /**
+     *  update poddogodka gostovanja
+     * 
+     * @depends createVecPodDogodkov
+     * 
+     * @param ApiTester $I
+     */
+    public function updatePodDogodek(ApiTester $I)
+    {
+        /*
+         * ali sploh deluje update poddogodka?
+         */
+        $data           = $this->objDogPredstava1;
+        $data ['konec'] = '2014-05-07T23:02:00+0200';
+        $ent            = $I->successfullyUpdate($this->dogodekUrl, $data['id'], $data);
+        $I->assertGuid($ent['id']);
+        $I->assertEquals($ent ['konec'], $data ['konec']);
+
+        /*
+         * začetek izven intervala gostovanja
+         */
+        $data ['zacetek'] = '2014-04-30T00:00:00+0200';
+        $resp             = $I->failToUpdate($this->dogodekUrl, $data['id'], $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001711, $resp[0]['code']);
+
+        /*
+         *  - poddogodek ne more biti gostovanje
+         * 
+         */
+        $data            = $this->objDogPredstava1;
+        $data ['razred'] = '300s'; // gostovanje
+        $resp            = $I->failToUpdate($this->dogodekUrl, $data['id'], $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001706, $resp[0]['code'], "v restu dogodka ni dovoljeno spreminjanja razreda");
+    }
+
+    /**
+     *  testiranje validacij pri kreiranju poddogodkov
+     * 
+     * @depends create
+     * 
+     * @param ApiTester $I
+     */
+    public function createPodDogodekZaValidacijo(ApiTester $I)
+    {
+        /*
+         * čas poddogodka ni v celoti v intervalu gostovanja
+         */
+        $zacetek = '2014-04-30T20:00:00+0200'; // pred začetkom gostovanja
+        $data    = [
+            'uprizoritev'         => $this->lookUprizoritev1['id'],
+            'title'               => "Predstava $zacetek",
+            'status'              => '200s',
+            'zacetek'             => $zacetek,
+            'konec'               => '2014-05-07T23:00:00+0200',
+            'prostor'             => null,
+            'dezurni'             => null,
+            'nadrejenoGostovanje' => $this->obj1['id'],
+        ];
+        $resp    = $I->failToCreate($this->predstavaUrl, $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001711, $resp[0]['code']);
+
+        /*
+         * ni možno testirati:
+         *  - create gostovanja, ki je poddogodek drugega gostovanja, ker:
+         *      . ni možen POST dogodek
+         *      . v formi gostovanja ni polja nadrejen dogodek
+         *  - le 1 poddogodek na gostovanju
+         *      . ker če pri POST (razred poddogodka) zaradi M2O relacije ne moremo dodati istega dogodka v gostovanje
+         */
+    }
+
+    /**
      * @depends create
      * @param ApiTester $I
      */
@@ -327,12 +567,48 @@ class GostovanjeCest
      */
     public function update(ApiTester $I)
     {
-        $ent          = $this->obj1;
-        $ent['vrsta'] = 'uu';
+        $data          = $this->obj1;
+        $data['vrsta'] = 'uu';
 
-        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
+        $this->obj1 = $ent        = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
 
-        $I->assertEquals($entR['vrsta'], 'uu');
+        $I->assertEquals($ent['vrsta'], 'uu');
+    }
+
+    /**
+     * validacija pri update-u
+     * 
+     * @depends create
+     * @param ApiTester $I
+     */
+    public function updateZaValidacijo(ApiTester $I)
+    {
+        /*
+         * interval gostovanja mora vsebovati intervale vseh poddogodkov
+         */
+        $data            = $this->obj1;
+        $data['zacetek'] = '2014-05-07T21:00:00+0200'; // za začetkom poddogodka
+        $resp            = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001970, $resp[0]['code'], "napačen interval");
+
+
+        $data          = $this->obj1;
+        $data['konec'] = '2014-05-07T21:00:00+0200'; // pred koncem poddogodka
+        $resp          = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        codecept_debug($resp);
+        $I->assertEquals(1001970, $resp[0]['code'], "napačen interval");
+
+
+        /*
+         * gostovanje ne sme biti poddogodek gostovanja
+         */
+        $data                        = $this->obj1;
+        $data['nadrejenoGostovanje'] = $this->lookGostovanjeId1;
+        $ent                         = $I->successfullyUpdate($this->restUrl, $data['id'], $data);
+        codecept_debug($ent);
+        $I->assertTrue(array_key_exists('id', $ent));
+        $I->assertFalse(array_key_exists('nadrejenoGostovanje', $ent), "nadrejenega gostovanja pri gostovanju ne sme biti v formi");
     }
 
     /**
@@ -353,7 +629,7 @@ class GostovanjeCest
         $I->assertEquals($ent['title'], "Gostovanje $zacetek");
         $I->assertEquals($ent['status'], '200s');
         $I->assertEquals($ent['zacetek'], $zacetek);
-        $I->assertEquals($ent['konec'], '2014-05-09T23:00:00+0200');
+        $I->assertEquals($ent['konec'], '2014-05-20T23:00:00+0200');
         $I->assertEquals($ent['sezona'], $this->lookSezona2014['id']);
         $I->assertEquals($ent['barva'], '#123456', "barva");
         $I->assertEquals($ent['kraj'], 'zzCity');

@@ -50,7 +50,6 @@ class GostovanjeFixture
             $nov = true;
         }
         $date = empty($v[1]) ? null : date_create($v[1]);
-        var_dump($date);
         $o->setZacetek($date);
 
         $date = empty($v[2]) ? null : date_create($v[2]);
