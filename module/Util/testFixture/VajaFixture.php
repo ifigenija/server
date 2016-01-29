@@ -72,12 +72,6 @@ class VajaFixture
             $rep->update($o);
         }
 
-        /*
-         * $$ sprotni flush potreben, da pravilno preračuna zaporedne številke
-         */
-        $manager->flush();
-
-
         $referenca = 'Vaja-' . $v[0];
         //var_dump($referenca);
         $this->addReference($referenca, $o);
