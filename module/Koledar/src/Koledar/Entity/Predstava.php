@@ -31,6 +31,22 @@ class Predstava
     protected $id;
 
     /**
+     * 1. zaporedna: zaporedna številka predstave v sezoni (ne glede na uprizoritev)
+     * 
+     * štejejo se tudi gostovanja!
+     * 
+     * @ORM\Column(type="integer", nullable=true)
+     * @Max\I18n(label = "predstava.zaporednaSezVsehUpr", description = "predstava.d.zaporednaSezVsehUpr")
+     * @Max\Ui(type="integer")
+     * @var integer
+     */
+    protected $zaporednaSezVsehUpr;
+
+    /**
+     * 2. zaporedna:  zaporedna številka predstave določene uprizoritve  (v vseh sezonah)
+     * 
+     * štejejo se tudi gostovanja!
+     * 
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label = "predstava.zaporedna", description = "predstava.d.zaporedna")
      * @Max\Ui(type="integer")
@@ -39,6 +55,10 @@ class Predstava
     protected $zaporedna;
 
     /**
+     * 3. zaporedna:  zaporedna številka predstave določene uprizoritve v sezoni
+     * 
+     * štejejo se tudi gostovanja!
+     * 
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label = "predstava.zaporednaSez", description = "predstava.d.zaporednaSez")
      * @Max\Ui(type="integer")
@@ -64,15 +84,6 @@ class Predstava
     protected $uprizoritev;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Koledar\Entity\Gostovanje", inversedBy="predstave")
-     * @ORM\JoinColumn(name="gostovanje_id", referencedColumnName="id")
-     * @Max\I18n(label = "predstava.gostovanje", description = "predstava.d.gostovanje")
-     * @Max\Ui(type="toone")
-     * @var Gostovanje
-     */
-    protected $gostovanje;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Abonmaji\Entity\Abonma", inversedBy="predstave")
      * @var <Abonmaji>
      */
@@ -80,7 +91,10 @@ class Predstava
 
     public function validate($mode = 'update')
     {
-        $this->expect($this->uprizoritev, "Predstava mora biti vezana na uprizoritev", 1000472);
+        $this->expect($this->uprizoritev, "Predstava mora biti vezana na uprizoritev", 1001902);
+        $this->expect($this->dogodek, "Pri predstavi je dogodek obvezen", 1001902);
+        $this->expect($this->dogodek->getZacetek(), "Pri predstavi je začetek obvezen", 1001903);
+        $this->expect($this->dogodek->getKonec(), "Pri predstavi je konec obvezen", 1001904);
     }
 
     public function __construct()
@@ -92,7 +106,7 @@ class Predstava
     {
         if ($this->getDogodek()) {
             $niPotrjen = $this->getDogodek()->getStatus() < Dogodek::POTRJEN;
-            $this->expect($niPotrjen, "Dogodek je javno potrjen, brisanje ni mogoče", 1000544);
+            $this->expect($niPotrjen, "Dogodek je javno potrjen, brisanje ni mogoče", 1001905);
         }
     }
 
@@ -178,24 +192,6 @@ class Predstava
         return $this;
     }
 
-    /**
-     * @return Gostovanje
-     */
-    public function getGostovanje()
-    {
-        return $this->gostovanje;
-    }
-
-    /**
-     * @param Gostovanje $gostovanje
-     * @return Predstava
-     */
-    public function setGostovanje(Gostovanje $gostovanje = null)
-    {
-        $this->gostovanje = $gostovanje;
-        return $this;
-    }
-
     function getZaporednaSez()
     {
         return $this->zaporednaSez;
@@ -215,6 +211,17 @@ class Predstava
     function setAbonmaji($abonmaji)
     {
         $this->abonmaji = $abonmaji;
+        return $this;
+    }
+
+    function getZaporednaSezVsehUpr()
+    {
+        return $this->zaporednaSezVsehUpr;
+    }
+
+    function setZaporednaSezVsehUpr($zaporednaSezVsehUpr)
+    {
+        $this->zaporednaSezVsehUpr = $zaporednaSezVsehUpr;
         return $this;
     }
 

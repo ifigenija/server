@@ -25,6 +25,9 @@ class DogodekTehnicniCest
     private $obj3;
     private $obj4;
     private $objDogodek;
+    private $gostovanjeUrl  = '/rest/gostovanje';
+    private $objGostovanje;
+    private $lookDrzavaId;
     private $objVaja;
     private $lookProstor1;
     private $lookProstor2;
@@ -92,16 +95,16 @@ class DogodekTehnicniCest
      */
     public function lookupSezona(ApiTester $I)
     {
-        $this->lookSezona2014 = $look              = $I->lookupEntity("sezona", "2014", false);
-        $I->assertGuid($look['id']);
-        
-        $this->lookSezona2015 = $look              = $I->lookupEntity("sezona", "2015", false);
+        $this->lookSezona2014 = $look                 = $I->lookupEntity("sezona", "2014", false);
         $I->assertGuid($look['id']);
 
-        $this->lookSezona2016 = $look              = $I->lookupEntity("sezona", "2016", false);
+        $this->lookSezona2015 = $look                 = $I->lookupEntity("sezona", "2015", false);
         $I->assertGuid($look['id']);
 
-        $this->lookSezona2017 = $look              = $I->lookupEntity("sezona", "2017", false);
+        $this->lookSezona2016 = $look                 = $I->lookupEntity("sezona", "2016", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona2017 = $look                 = $I->lookupEntity("sezona", "2017", false);
         $I->assertGuid($look['id']);
     }
 
@@ -141,19 +144,53 @@ class DogodekTehnicniCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupDrzavo(ApiTester $I)
+    {
+        $this->lookDrzavaId = $look               = $I->lookupEntity("drzava", "SI");
+        $I->assertGuid($look);
+    }
+
+    /**
+     * @depends lookupDrzavo
+     * @param ApiTester $I
+     */
+    public function createGostovanje(ApiTester $I)
+    {
+        $zacetek             = '2014-05-01T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
+        $data                = [
+            'vrsta'   => 'zz',
+            'drzava'  => $this->lookDrzavaId,
+            'zacetek' => $zacetek,
+            'title'   => "Gostovanje $zacetek",
+            'status'  => '200s',
+            'konec'   => '2014-05-09T23:00:00+0200',
+        ];
+        codecept_debug($data);
+        $this->objGostovanje = $ent                 = $I->successfullyCreate($this->gostovanjeUrl, $data);
+        $I->assertGuid($ent['id']);
+        codecept_debug($ent);
+    }
+
+    /**
      *  kreiramo zapis
      * 
+     * @depends createGostovanje
      * @param ApiTester $I
      */
     public function create(ApiTester $I)
     {
         $zacetek       = '2014-05-07T20:00:00+0200'; // ker je začetek, bo tudi dogodek kreiral
         $data          = [
-            'zacetek' => $zacetek,
-            'title'   => "Tehnični $zacetek",
-            'status'  => '200s',
-            'konec'   => '2014-05-07T23:00:00+0200',
-            'prostor' => $this->lookProstor1['id'],
+            'zacetek'             => $zacetek,
+            'title'               => "Tehnični $zacetek",
+            'status'              => '200s',
+            'konec'               => '2014-05-07T23:00:00+0200',
+            'prostor'             => $this->lookProstor1['id'],
+            'barva'               => '#123456',
+            'nadrejenoGostovanje' => $this->objGostovanje['id'],
         ];
         $parSodelujoci = 'sodelujoc[]=' . $this->lookOseba1['id'] . '&'
                 . 'sodelujoc[]=' . $this->lookOseba2['id'] . '&'
@@ -169,6 +206,8 @@ class DogodekTehnicniCest
         $I->assertEquals($ent['konec'], $data['konec']);
         $I->assertEquals($ent['prostor'], $data['prostor']);
         $I->assertEquals($ent['sezona'], $this->lookSezona2014['id']);
+        $I->assertEquals($ent['barva'], $data['barva']);
+        $I->assertEquals($ent['nadrejenoGostovanje'], $data['nadrejenoGostovanje']);
 
         /**
          * preveri dogodek
@@ -183,6 +222,8 @@ class DogodekTehnicniCest
         $I->assertEquals($dogodek['konec'], $data['konec'], 'konec');
         $I->assertEquals($dogodek['prostor']['id'], $data['prostor'], 'prostor');
         $I->assertEquals($dogodek['sezona'], $ent['sezona'], 'sezona');
+        $I->assertEquals($dogodek['barva'], $data['barva']);
+        $I->assertEquals($dogodek['nadrejenoGostovanje'], $data['nadrejenoGostovanje']);
 
         /*
          * kreiram še en zapis
@@ -282,6 +323,8 @@ class DogodekTehnicniCest
         $I->assertEquals($ent['konec'], '2014-05-07T23:00:00+0200');
         $I->assertEquals($ent['prostor'], $this->lookProstor1['id']);
         $I->assertEquals($ent['sezona'], $this->lookSezona2014['id']);
+        $I->assertEquals($ent['barva'], '#123456', "barva");
+        $I->assertEquals($ent['nadrejenoGostovanje'], $this->objGostovanje['id'], "nadrejeno gostovanje");
     }
 
     /**

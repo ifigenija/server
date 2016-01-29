@@ -38,6 +38,8 @@ class Vaja
     protected $tipvaje = null;
 
     /**
+     * $$ za razčistiti - naj bo to zaporedna številka vaje določene uprizoritve 
+     * 
      * @ORM\Column(type="integer", nullable=true)
      * @Max\I18n(label = "vaja.zaporedna", description = "vaja.d.zaporedna")
      * @Max\Ui(type="integer", ident=true)
@@ -64,7 +66,10 @@ class Vaja
 
     public function validate($mode = 'update')
     {
-        $this->expect($this->uprizoritev, "Pri vaji je uprizoritev obvezna", 1000471);
+        $this->expect($this->uprizoritev, "Pri vaji je uprizoritev obvezna", 1001841);
+        $this->expect($this->dogodek, "Pri vaji je dogodek obvezen", 1001842);
+        $this->expect($this->dogodek->getZacetek(), "Pri vaji je začetek obvezen", 1001843);
+        $this->expect($this->dogodek->getKonec(), "Pri vaji je konec obvezen", 1001844);        
     }
 
     public function getUprizoritev()
@@ -82,7 +87,7 @@ class Vaja
     {
         if ($this->getDogodek()) {
             $niPotrjen = $this->getDogodek()->getStatus() < Dogodek::POTRJEN;
-            $this->expect($niPotrjen, "Dogodek je javno potrjen, brisanje ni mogoče", 1000544);
+            $this->expect($niPotrjen, "Dogodek je javno potrjen, brisanje ni mogoče", 1001845);
         }
     }
 

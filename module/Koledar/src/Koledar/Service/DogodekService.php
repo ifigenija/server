@@ -117,6 +117,9 @@ class DogodekService
             \Koledar\Entity\Dogodek::PREGLEDAN,
             \Koledar\Entity\Dogodek::POTRJEN,])
                 , "Kopirati je možno planirane,pregledane ali potrjene dogodke", 1001261);
+        $this->expect($dogodek->getRazred() != \Koledar\Entity\Dogodek::GOSTOVANJE
+                , "Gostovanja ni možno kopirati", 1001262);
+        $this->expect(!$dogodek->getNadrejenoGostovanje(), "Dogodka, ki je del gostovanja, ni možno kopirati", 1001263);
 
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
 
@@ -141,18 +144,12 @@ class DogodekService
                 ->setTerminiStoritve(new \Doctrine\Common\Collections\ArrayCollection());
 
         /*
-         * $$ razčisti polja:
-         * $$ sezona  - ?? ali ista?        
-         * $$ prodaja predstave - verjetno še za implementirati!       
+         * razčisti polja:
+         *  sezona  - se pri update-u sama preračuna
          */
         if ($dogodek->getVaja()) {
             $newPodDog = $dogodek->getVaja()->copy();
             $this->getEm()->persist($newPodDog);
-
-            /*
-             *  $$ preveri polja
-             *   zaporedna - ali na novo preračuna  $$
-             */
 
             $newPodDog->setDogodek($newDog);
             $newDog->setVaja($newPodDog);
@@ -162,14 +159,9 @@ class DogodekService
             $this->getEm()->persist($newPodDog);
 
             /*
-             *  $$ preveri polja
-             * zaporedna  - kdaj preračunamo vse?
-             * zaporednaSez - kdaj preračunamo vse?
-             * gostovanje ?? ali je potrebno spreminjati - verjetno  lahko ostane isto!
              *   abonmaji  - many to many relacij tehnično ni potrebno spreminjati
-             * 
-             * $$ uskladi kloniranje predstave tudi spodaj pri gostovanjih!
              */
+
             $newPodDog->setDogodek($newDog);
             $newDog->setPredstava($newPodDog);
         }
@@ -186,40 +178,17 @@ class DogodekService
             $newDog->setTehnicni($newPodDog);
         }
         if ($dogodek->getGostovanje()) {
-            $newPodDog = $dogodek->getGostovanje()->copy();
-            $this->getEm()->persist($newPodDog);
-
-            $newPodDog
-                    ->setPredstave(new \Doctrine\Common\Collections\ArrayCollection());
             /*
-             * $$ ppreglej polja
-             *  id
-             *  vrsta
-             *  zamejstvo
-             *  kraj
-             *  dogodek
-             *  predstave
-             *  drzava
+             * še en expect za vsak slučaj
              */
+            $this->expect(false, "Gostovanja ni možno kopirati", 1001264);
+        }
 
-            $coll = $dogodek->getGostovanje()->getPredstave();
-            foreach ($coll as $pre) {
-                $newGPred = $pre->copy();
-                $this->getEm()->persist($newGPred);
-                /*
-                 *  $$ preveri polja
-                 * zaporedna  - kdaj preračunamo vse?
-                 * zaporednaSez - kdaj preračunamo vse?
-                 * gostovanje ?? ali je potrebno spreminjati - verjetno  lahko ostane isto!
-                 * 
-                 * $$ uskladi kloniranje predstave tudi zoraj pri dogodku
-                 */
-                $newGPred->setGostovanje($newPodDog);
-                $newGPred->setDogodek($newPodDog);
-                $newPodDog->getPredstave()->add($newGPred);
-            }
-            $newPodDog->setDogodek($newDog);
-            $newDog->setGostovanje($newPodDog);
+        if ($dogodek->getNadrejenoGostovanje()) {
+            /*
+             * še en expect za vsak slučaj
+             */
+            $this->expect(false, "Dogodka, ki je del gostovanja, ni možno kopirati", 1001265);
         }
         $coll = $dogodek->getTerminiStoritve();
         foreach ($coll as $ts) {

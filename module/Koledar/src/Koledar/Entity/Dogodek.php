@@ -169,7 +169,6 @@ class Dogodek
      */
     protected $terminiStoritve;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="Koledar\Entity\Sezona", inversedBy="dogodki")
      * @ORM\JoinColumn(name="sezona_id", referencedColumnName="id")
@@ -178,12 +177,21 @@ class Dogodek
      * @var \Koledar\Entity\Sezona
      */
     protected $sezona;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Koledar\Entity\Gostovanje", inversedBy="podrejeniDogodki")
+     * @Max\I18n(label = "predstava.nadrejenoGostovanje", description = "predstava.d.nadrejenoGostovanje")
+     * @Max\Ui(type="toone")
+     * @var \Koledar\Entity\Gostovanje
+     */
+    protected $nadrejenoGostovanje;
+    
     private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::SPLOSNO, self::TEHNICNI];
 
     public function __construct()
     {
-        $this->terminiStoritve  = new ArrayCollection();
-    }
+        $this->terminiStoritve = new ArrayCollection();
+     }
 
     public function validate($mode = 'update')
     {
@@ -202,6 +210,8 @@ class Dogodek
         }
         if ($this->razred === self::GOSTOVANJE) {
             $this->expect($this->gostovanje, "Dogodek razreda gostovanje zahteva referenco na gostovanje", 1001706);
+            $this->nadrejenoGostovanje=null;
+            $this->prostor=null;
         }
         if ($this->razred === self::SPLOSNO) {
             $this->expect($this->splosni, "Dogodek razreda splošno zahteva referenco dogodekSplosni", 1001707);
@@ -533,6 +543,17 @@ class Dogodek
     function setBarva($barva)
     {
         $this->barva = $barva;
+        return $this;
+    }
+
+    function getNadrejenoGostovanje()
+    {
+        return $this->nadrejenoGostovanje;
+    }
+
+    function setNadrejenoGostovanje(\Koledar\Entity\Gostovanje $nadrejenoGostovanje = null)
+    {
+        $this->nadrejenoGostovanje = $nadrejenoGostovanje;
         return $this;
     }
 

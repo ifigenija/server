@@ -15,6 +15,7 @@ use Max\Entity\Base;
 class Gostovanje
         extends Base
 {
+
     use DogodekTrait;
 
     /**
@@ -33,7 +34,7 @@ class Gostovanje
      * @var string
      */
     protected $vrsta;
-    
+
     /**
      * @ORM\Column(type="boolean", nullable=true)
      * @Max\I18n(label="Zamejstvo", description="Zamejstvo")
@@ -41,7 +42,7 @@ class Gostovanje
      * @var boolean
      */
     protected $zamejstvo;
-    
+
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Max\I18n(label="Kraj", description="Kraj")
@@ -59,10 +60,10 @@ class Gostovanje
     protected $dogodek;
 
     /**
-     * @ORM\OneToMany(targetEntity="Koledar\Entity\Predstava", mappedBy="gostovanje")
-     * @var <Predstave>
+     * @ORM\OneToMany(targetEntity="Koledar\Entity\Dogodek", mappedBy="nadrejenoGostovanje")
+     * @var <PodrejeniDogodki>
      */
-    protected $predstave;
+    protected $podrejeniDogodki;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Drzava")
@@ -75,96 +76,97 @@ class Gostovanje
 
     public function __construct()
     {
-        $this->predstave = new ArrayCollection();
+        $this->podrejeniDogodki = new ArrayCollection();
     }
 
     public function validate($mode = 'update')
     {
         
     }
+
     function dodajDogodek()
     {
         $this->dogodek = new Dogodek();
         $this->dogodek->setGostovanje($this);
         $this->dogodek->setRazred(Dogodek::GOSTOVANJE);
     }
-
-
-    public function getId()
+    function getId()
     {
         return $this->id;
     }
 
-    public function getVrsta()
-    {
-        return $this->vrsta;
-    }
-    
-    public function getZamejstvo()
-    {
-        return $this->zamejstvo;
-    }
-    
-    public function getKraj()
+    function getVrsta()
     {
         return $this->vrsta;
     }
 
-    public function getDogodek()
+    function getZamejstvo()
+    {
+        return $this->zamejstvo;
+    }
+
+    function getKraj()
+    {
+        return $this->kraj;
+    }
+
+    function getDogodek()
     {
         return $this->dogodek;
     }
 
-    public function getPredstave()
+    function getPodrejeniDogodki()
     {
-        return $this->predstave;
+        return $this->podrejeniDogodki;
     }
 
-    public function getDrzava()
+    function getDrzava()
     {
         return $this->drzava;
     }
 
-    public function setId($id)
+    function setId($id)
     {
         $this->id = $id;
         return $this;
     }
 
-    public function setVrsta($vrsta)
+    function setVrsta($vrsta)
     {
         $this->vrsta = $vrsta;
         return $this;
     }
-    
-    public function setZamejstvo($zamejstvo)
+
+    function setZamejstvo($zamejstvo)
     {
         $this->zamejstvo = $zamejstvo;
         return $this;
     }
-    
-    public function setKraj($kraj)
+
+    function setKraj($kraj)
     {
         $this->kraj = $kraj;
         return $this;
     }
 
-    public function setDogodek(\Koledar\Entity\Dogodek $dogodek=null)
+    function setDogodek(\Koledar\Entity\Dogodek $dogodek=null)
     {
         $this->dogodek = $dogodek;
         return $this;
     }
 
-    public function setPredstave($predstave)
+    function setPodrejeniDogodki($podrejeniDogodki)
     {
-        $this->predstave = $predstave;
+        $this->podrejeniDogodki = $podrejeniDogodki;
         return $this;
     }
 
-    public function setDrzava(\App\Entity\Drzava $drzava=null)
+    function setDrzava(\App\Entity\Drzava $drzava=null)
     {
         $this->drzava = $drzava;
         return $this;
     }
+
+
 
 }

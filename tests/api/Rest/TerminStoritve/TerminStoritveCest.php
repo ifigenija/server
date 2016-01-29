@@ -76,7 +76,7 @@ class TerminStoritveCest
      * metoda, ki se večkrat kliče zaradi preverjanja rezultatov get list
      * 
      */
-    private function kontroleRezultatovGetList(ApiTester $I, array $osebeIds, array $list)
+    private function kontroleRezultatovGetListPoOsebi(ApiTester $I, array $osebeIds, array $list)
     {
         codecept_debug(__FUNCTION__);
 
@@ -107,10 +107,10 @@ class TerminStoritveCest
         /*
          * dogodki, ki so vaje
          */
-        $resp = $I->successfullyGetList($this->dogodekUrl . "?q=dogodek 1&zacetek=2000-01-01&konec=2200-05-05&razred[]=200s", []);
+        $resp = $I->successfullyGetList($this->dogodekUrl . "?q=Vaja 1.&zacetek=2000-01-01&konec=2200-05-05&razred[]=200s", []);
         $list = $resp['data'];
         codecept_debug($list);
-        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
 
 
         $ent                  = array_pop($list);
@@ -124,7 +124,7 @@ class TerminStoritveCest
         $resp                      = $I->successfullyGetList($this->dogodekUrl . "?q=Predstava 1&zacetek=2000-01-01&konec=2200-05-05&razred[]=100s", []);
         $list                      = $resp['data'];
         codecept_debug($list);
-        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
         $ent                       = array_pop($list);
         $this->lookDogPredstava1Id = $look                      = $ent['id'];
         codecept_debug($look);
@@ -213,7 +213,7 @@ class TerminStoritveCest
         codecept_debug($totRec);
         $I->assertLessThan($totRecVsi, $resp['state']['totalRecords']);
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-        $this->kontroleRezultatovGetList($I, $osebeIds, $list);
+        $this->kontroleRezultatovGetListPoOsebi($I, $osebeIds, $list);
 
         /**
          * get list po 2 osebah
@@ -233,7 +233,7 @@ class TerminStoritveCest
         codecept_debug($totRec);
         $I->assertLessThan($totRecVsi, $resp['state']['totalRecords']);
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
-        $this->kontroleRezultatovGetList($I, $osebeIds, $list);
+        $this->kontroleRezultatovGetListPoOsebi($I, $osebeIds, $list);
 
 
         /**
@@ -249,6 +249,21 @@ class TerminStoritveCest
         codecept_debug($totRec);
         $I->assertLessThan($totRecOsebe, $resp['state']['totalRecords'], "manj zaradi začetka in konca");
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+
+        /*
+         * po zasedenosti
+         */
+        $resp   = $I->successfullyGetList($this->restUrlDefault . "?zasedenost=true", []);
+        $list   = $resp['data'];
+        codecept_debug($resp);
+        $totRec = $resp['state']['totalRecords'];
+        codecept_debug($totRec);
+        $I->assertLessThan($totRecVsi, $resp['state']['totalRecords']);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+
+        $listzasedenosti = array_unique(array_column($list, "zasedenost"));
+        codecept_debug($listzasedenosti);
+        $I->assertEquals([true], $listzasedenosti);
     }
 
     /**
@@ -282,7 +297,7 @@ class TerminStoritveCest
         $I->assertEquals($ent['planiranZacetek'], '2012-08-01T18:00:00+0200');
         $I->assertEquals($ent['planiranKonec'], '2012-08-01T23:30:00+0200');
         $I->assertEquals($ent['zasedenost'], TRUE, 'zasedenost');
-        $I->assertEquals($ent['oseba'], $this->lookOseba1['id']);
+        $I->assertEquals($ent['oseba']['id'], $this->lookOseba1['id']);
         $I->assertEquals($ent['deltaPlaniranZacetek'], null);
         $I->assertEquals($ent['deltaPlaniranKonec'], null);
         $I->assertEquals($ent['dogodek'], null);

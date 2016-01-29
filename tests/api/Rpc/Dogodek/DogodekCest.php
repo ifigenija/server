@@ -27,16 +27,24 @@ class DogodekCest
     private $lookDogPredstava1Id;
     private $lookDogPredstava2Id;
     private $lookDogPredstava3Id;
+    private $lookDogPredstava15Id;
+    private $lookDogPredstava16Id;
     private $lookDogSplosDog1Id;
     private $lookDogSplosDog2Id;
     private $lookDogSplosDog3Id;
     private $lookDogTehnicniDog1Id;
     private $lookDogTehnicniDog2Id;
+    private $lookDogGostovanje1Id;
+    private $lookDogGostovanje2Id;
     private $objTSDog1A;
     private $objTSDog1B;
     private $objTSDog1C;
     private $objTSDog1D;
     private $objTSDog1E;
+    private $lookSezona2014;
+    private $lookSezona2015;
+    private $lookSezona2016;
+    private $lookSezona2017;
 
     public function _before(ApiTester $I)
     {
@@ -115,6 +123,25 @@ class DogodekCest
     }
 
     /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupSezona(ApiTester $I)
+    {
+        $this->lookSezona2014 = $look                 = $I->lookupEntity("sezona", "2015", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona2015 = $look                 = $I->lookupEntity("sezona", "2015", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona2016 = $look                 = $I->lookupEntity("sezona", "2016", false);
+        $I->assertGuid($look['id']);
+
+        $this->lookSezona2017 = $look                 = $I->lookupEntity("sezona", "2017", false);
+        $I->assertGuid($look['id']);
+    }
+
+    /**
      * @param ApiTester $I
      */
     public function getListDogodek(ApiTester $I)
@@ -123,7 +150,7 @@ class DogodekCest
          * dogodki, ki so vaje
          */
         $resp = $I->successfullyGetList($this->dogodekUrl
-                . "?q=dogodek 1&zacetek=2000-01-01&konec=2200-05-05&razred[]=200s", []);
+                . "?q=Vaja 1.&zacetek=2000-01-01&konec=2200-05-05&razred[]=200s", []);
         $list = $resp['data'];
         codecept_debug($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);
@@ -138,7 +165,7 @@ class DogodekCest
          * dogodki, ki so predstave
          */
         $resp                      = $I->successfullyGetList($this->dogodekUrl
-                . "?q=Predstava 1&zacetek=2000-01-01&konec=2200-05-05&razred[]=100s", []);
+                . "?q=Predstava 1.&zacetek=2000-01-01&konec=2200-05-05&razred[]=100s", []);
         $list                      = $resp['data'];
         codecept_debug($list);
         $I->assertEquals(1, $resp['state']['totalRecords']);
@@ -181,6 +208,31 @@ class DogodekCest
         $I->assertEquals(1, $resp['state']['totalRecords']);
         $ent                         = array_pop($list);
         $this->lookDogTehnicniDog2Id = $look                        = $ent['id'];
+        codecept_debug($look);
+
+        /*
+         * gostovanje
+         */
+        $resp                       = $I->successfullyGetList($this->dogodekUrl
+                . "?q=Gostovanje 1.&zacetek=2000-01-01&konec=2200-05-05&razred[]=300s", []);
+        $list                       = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $ent                        = array_pop($list);
+        $this->lookDogGostovanje1Id = $look                       = $ent['id'];
+        codecept_debug($look);
+
+
+        /*
+         * poddogodki gostovanja
+         */
+        $resp                       = $I->successfullyGetList($this->dogodekUrl
+                . "?q=Predstava 15.&zacetek=2000-01-01&konec=2200-05-05&razred[]=100s", []);
+        $list                       = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $ent                        = array_pop($list);
+        $this->lookDogPredstava15Id = $look                       = $ent['id'];
         codecept_debug($look);
     }
 
@@ -245,10 +297,10 @@ class DogodekCest
             "dogodekId"       => $dogodekId
             , "terminiStoritev" => $terminiStoritev]);
         codecept_debug($resp);
-        
+
         $this->kontroleRezultatovAzurirajTs($I, $dogodekId, $terminiStoritev);
 
-        
+
         /*
          * A,B -> B,C,D,E   - dva nova kreiramo, 1 zbrišemo
          */
@@ -288,13 +340,21 @@ class DogodekCest
          * kopija predstave
          */
         $dogodekId = $this->lookDogPredstava1Id;
-        $zacetek   = '2012-06-02T10:10:00+0200';
+//        $zacetek   = '2015-03-03T10:10:00+0100';//$$ pri tem datumu so problemi, ker narobe izračunava delto v eno in drugo smer!
+        $zacetek   = '2015-04-03T10:10:00+0200';
         $newId     = $I->successfullyCallRpc($this->rpcUrl, 'kopirajDogodek', [
             "dogodekId" => $dogodekId
             , "zacetek"   => $zacetek
         ]);
         codecept_debug($newId);
         $this->kontroleRezultatovKopirajDogodek($I, $dogodekId, $zacetek, $newId);
+        /*
+         * preverimo še, če se je sezona spremenila
+         */
+        $ent       = $I->successfullyGet($this->dogodekUrl, $newId);
+        codecept_debug($ent);
+
+        $I->assertEquals($this->lookSezona2015['id'], $ent['sezona'], "spremenjena sezona glede na novi začetek");
 
         /*
          * kopija splošnega dogodka
@@ -354,6 +414,30 @@ class DogodekCest
         ]);
         codecept_debug($resp);
         $I->assertEquals(1001243, $resp['code']);
+
+        /*
+         * neveljavni dogodek - gostovanje
+         */
+        $dogodekId = $this->lookDogGostovanje1Id;
+        $zacetek   = '2012-06-04T10:10:00+0200';
+        $resp      = $I->failCallRpc($this->rpcUrl, 'kopirajDogodek', [
+            "dogodekId" => $dogodekId
+            , "zacetek"   => $zacetek
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1001262, $resp['code']);
+
+        /*
+         * neveljavni dogodek - dogodek, ki je del gostovanja
+         */
+        $dogodekId = $this->lookDogPredstava15Id;
+        $zacetek   = '2012-06-04T10:10:00+0200';
+        $resp      = $I->failCallRpc($this->rpcUrl, 'kopirajDogodek', [
+            "dogodekId" => $dogodekId
+            , "zacetek"   => $zacetek
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1001263, $resp['code']);
     }
 
 }

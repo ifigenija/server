@@ -5,12 +5,7 @@ entityClass: Koledar\Entity\Predstava
 forms:
     default: 
         elements:
-#            - id
-#            - dogodek
-            - zaporedna
-            - zaporednaSez
             - uprizoritev
-            - gostovanje
             - name: title
               type: text
               options:
@@ -39,6 +34,17 @@ forms:
                   targetEntity: Prodaja\Entity\Prostor
                   label: Prostor
                   required: false
+            - name: barva
+              type: text
+              options:
+                  label: Barva dogodka
+                  required: false
+            - name: nadrejenoGostovanje
+              type: toone
+              options:
+                  targetEntity: Koledar\Entity\Gostovanje
+                  label: Gostovanje
+                  required: false
         hydrator:
             byValue:
                 - dogodek
@@ -57,7 +63,12 @@ forms:
                   type: byRef
                   targetEntity: Koledar\Entity\Sezona
                 - title
-                - status                  
+                - status          
+                - name: nadrejenoGostovanje
+                  type: byRef
+                  targetEntity: Koledar\Entity\Gostovanje
+                - barva 
+
 lists:
     default: 
         filter:
@@ -76,8 +87,6 @@ lists:
                   type: datetime
                 - name: konec
                   type: datetime
-#    vse: 
-#        filter:
 relation:
     default:
         abonmaji:

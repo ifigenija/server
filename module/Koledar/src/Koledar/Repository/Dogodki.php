@@ -55,6 +55,7 @@ class Dogodki
         /* Če ni postavljenega začetka, smatramo, da gledamo od danes naprej */
         if (empty($options['zacetek'])) {
             $options['zacetek'] = new DateTime();
+            $options['zacetek']->setTime(0, 0);    // datum oblika
         }
         /*
          * Če ni postavljenega konca smatramo, da nas zanima 1 mesec 
@@ -65,6 +66,7 @@ class Dogodki
              */
             $options['konec'] = clone $options['zacetek'];
             $options['konec']->modify('+1 month');
+            $options['konec']->setTime(0, 0);    // datum oblika
         }
 
 
@@ -87,16 +89,21 @@ class Dogodki
         }
 
         if (!empty($options['zacetek'])) {
+            /*
+             *  dk >= pz
+             */
+            $cas = $e->gte('p.konec', ':zac');
 
-            $cas = $e->gte('p.zacetek', ':zac');
             $qb->andWhere($cas);
             $qb->setParameter('zac', $options['zacetek'], "datetime");
         }
         if (!empty($options['konec'])) {
-            /**
-             * konec <= zacetek
+            /*
+             *  dz <= pk
              */
             $cas = $e->lte('p.zacetek', ':konec');
+
+
             $qb->andWhere($cas);
             $qb->setParameter('konec', $options['konec'], "datetime");
         }
@@ -213,6 +220,10 @@ class Dogodki
             case $object::TEHNICNI:
                 $deltaZacetek    = $deltaZacetekTeh = $delte['delTehZac']['value'];
                 $deltaKonec      = $deltaKonecTeh   = $delte['delTehKon']['value'];
+                break;
+            case $object::GOSTOVANJE :
+                $deltaZacetek    = $deltaZacetekTeh = $delte['delGosZac']['value'];
+                $deltaKonec      = $deltaKonecTeh   = $delte['delGosKon']['value'];
                 break;
             default:
                 $deltaZacetek    = $deltaZacetekTeh = $deltaKonecTeh   = $deltaKonec      = 0;
@@ -400,42 +411,29 @@ class Dogodki
     /**
      * določi sezono dogodka
      * 
+     * 
      * @param type $object
+     * @param \Koledar\Entity\Sezona $sezona        če kličemo funkcijo iz repozitorija sezone
+     * @param type $sezonamode                      če kličemo funkcijo iz repozitorija sezone
      */
-    private function preracunajSezono($object)
+    public function preracunajSezono($object, \Koledar\Entity\Sezona $sezona = null, $sezonamode = null)
     {
         $object->setSezona(null); // init
         $vsesezone = $this->getEntityManager()->getRepository('Koledar\Entity\Sezona')
                 ->findAll();
 
-        /*
-         * upoštevajmo tudi sezono (-e), ki še niso flush-ane,
-         * a so že fazi kreiranja ali brisanja
-         */
-        $uow    = $this->getEntityManager()->getUnitOfWork();
-        $schIns = $uow->getScheduledEntityInsertions();
-        $schDel = $uow->getScheduledEntityDeletions();
-        /*
-         * upoštevamo tudi sezono, ki se bo kreirala
-         */
-        foreach ($schIns as $ins) {
-            if ($ins instanceof \Koledar\Entity\Sezona) {
-                $vsesezone[] = $ins;
-            }
-        }
-        /*
-         * upoštevamo tudi sezono, ki se bo izbrisala
-         */
-        foreach ($schDel as $del) {
-            if ($del instanceof \Koledar\Entity\Sezona) {
+        switch ($sezonamode):
+            case "create":
+                $vsesezone[] = $sezona;
+                break;
+            case "delete":
                 foreach ($vsesezone as $key => $v) {
-                    if ($v->getId() == $del->getId()) {
+                    if ($v->getId() == $sezona->getId()) {
                         unset($vsesezone[$key]);
                     }
                 }
-            }
-        }
-
+                break;
+        endswitch;
 
         /*
          * $$ performančno bi bila boljša while zanka
