@@ -376,7 +376,7 @@ class TerminStoritveCest
 
         /*
          * interval TS poddogodka ne sme biti izven intervala  TS iste osebe v gostovanju
-         * oz. mora $$ obstajati vsaj 1 TS z intervalom ki je večji ali enak temu intervalu
+         * oz. mora obstajati vsaj 1 TS z intervalom ki je večji ali enak temu intervalu
          */
         $data                    = $I->successfullyGet($this->restUrl, $this->objTSPodDog['id']);
         codecept_debug($data);

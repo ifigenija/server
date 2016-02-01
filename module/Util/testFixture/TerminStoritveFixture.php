@@ -25,8 +25,6 @@ class TerminStoritveFixture
         $manager->flush();
     }
 
-    // $$ morda bo še potrebno implementirati funkcijo getOrder()
-
     public function getDependencies()
     {
         return array('TestFixture\DogodekFixture', 'TestFixture\PredstavaFixture', 'TestFixture\AlternacijaFixture', 'TestFixture\OsebaFixture'); // fixture classes fixture is dependent on , 

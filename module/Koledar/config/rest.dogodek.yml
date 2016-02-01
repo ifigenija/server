@@ -61,6 +61,50 @@ lists:
                       required: false
                       multiple: true
                       value_options: @dogodek.razred
+    mozniPoddogodki: 
+        filter:
+            elements:                 
+                - name: q
+                  type: text
+                  options:
+                    required: false
+                    placeholder: Išči..
+                    label: Išči
+                - name: prostor
+                  type: tomany
+                  options:
+                      label: Prostor
+                      targetEntity: Prodaja\Entity\Prostor
+                      required: false
+                - name: zacetek
+                  type: datetime
+                  options:
+                      label: Začetek
+                      required: false
+                - name: konec
+                  type: datetime
+                  options:
+                      label: Začetek
+                      required: false
+                - name: status
+                  type: multiselect
+                  options:
+                      label: Status
+                      multiple: true
+                      value_options: @dogodek.status
+                      required: false
+                - name: uprizoritev
+                  type: tomany
+                  options:
+                      label: Uprizoritev
+                      targetEntity: Produkcija\Entity\Uprizoritev
+                      required: false
+                - name: razred
+                  type: multiselect
+                  options:
+                      required: false
+                      multiple: true
+                      value_options: @dogodek.razred
 hydrator:
     lookups:
         - prostor
