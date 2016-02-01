@@ -71,6 +71,8 @@ class PredstavaCest
     private $lookPredstavaIdF;
     private $lookPredstavaIdG;
     private $lookPredstavaIdH;
+    private $rpcDogodekUrl  = '/rpc/koledar/dogodek';
+    private $altOsUpr1Ids;
 
     public function _before(ApiTester $I)
     {
@@ -219,6 +221,8 @@ class PredstavaCest
         $upr                    = $I->successfullyGet($this->uprizoritevUrl, $look ['id']);
         $this->altUpr1Ids       = $altUpr                 = array_column($I->subarrayValuesToArray(array_column($upr['funkcije'], 'alternacije')), 'id');
         codecept_debug($altUpr);
+        $this->altOsUpr1Ids     = $altOsUpr               = array_column($I->subarrayValuesToArray(array_column($upr['funkcije'], 'alternacije')), 'oseba');
+        codecept_debug($altOsUpr);
 
         $this->lookUprizoritev2 = $look                   = $I->lookupEntity("uprizoritev", "0001", false);
         codecept_debug($look);
@@ -328,6 +332,36 @@ class PredstavaCest
         $this->objGostovanje = $ent                 = $I->successfullyCreate($this->gostovanjeUrl, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
+
+        /*
+         * dodamo še termine storitve  (podobne kot jih bo potreboval create) 
+         */
+        $ts                    = [];
+        $ts['id']              = null;
+        $ts['planiranZacetek'] = '2014-05-01T20:00:00+0200';
+        $ts['planiranKonec']   = '2014-05-09T23:00:00+0200';
+        $ts['sodelujoc']       = true;
+        $ts['dezurni']         = false;
+        $ts['gost']            = false;
+        $ts['sodelujoc']       = true;
+        $ts['oseba']['id']     = ""; //init
+        codecept_debug($ts);
+        $terminiStoritev       = [];
+        for ($i = 1; $i <= 3; $i++) {
+            $ts['oseba']['id'] = $this->altOsUpr1Ids[$i];
+            $terminiStoritev[] = $ts;
+        }
+        $ts['oseba']['id'] = $this->lookOseba1['id'];
+        $terminiStoritev[] = $ts;
+        $ts['oseba']['id'] = $this->lookOseba2['id'];
+        $terminiStoritev[] = $ts;
+        $ts['oseba']['id'] = $this->lookOseba3['id'];
+        codecept_debug($terminiStoritev);
+        $terminiStoritev[] = $ts;
+        $dogodekId         = $this->objGostovanje['dogodek']['id'];
+        $resp              = $I->successfullyCallRpc($this->rpcDogodekUrl, 'azurirajTSDogodka', [
+            "dogodekId"       => $dogodekId
+            , "terminiStoritev" => $terminiStoritev]);
     }
 
     /**

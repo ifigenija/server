@@ -43,6 +43,8 @@ class DogodekTehnicniCest
     private $altUpr1Ids;
     private $altUpr2Ids;
     private $altUpr3Ids;
+    private $rpcDogodekUrl  = '/rpc/koledar/dogodek';
+    private $altOsUpr1Ids;
 
     public function _before(ApiTester $I)
     {
@@ -172,6 +174,32 @@ class DogodekTehnicniCest
         $this->objGostovanje = $ent                 = $I->successfullyCreate($this->gostovanjeUrl, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
+
+        /*
+         * dodamo še termine storitve  (podobne kot jih bo potreboval create) 
+         */
+        $ts                    = [];
+        $ts['id']              = null;
+        $ts['planiranZacetek'] = '2014-05-01T20:00:00+0200';
+        $ts['planiranKonec']   = '2014-05-09T23:00:00+0200';
+        $ts['sodelujoc']       = true;
+        $ts['dezurni']         = false;
+        $ts['gost']            = false;
+        $ts['sodelujoc']       = true;
+        $ts['oseba']['id']     = ""; //init
+        codecept_debug($ts);
+        $terminiStoritev       = [];
+        $ts['oseba']['id']     = $this->lookOseba1['id'];
+        $terminiStoritev[]     = $ts;
+        $ts['oseba']['id']     = $this->lookOseba2['id'];
+        $terminiStoritev[]     = $ts;
+        $ts['oseba']['id']     = $this->lookOseba3['id'];
+        codecept_debug($terminiStoritev);
+        $terminiStoritev[]     = $ts;
+        $dogodekId             = $this->objGostovanje['dogodek']['id'];
+        $resp                  = $I->successfullyCallRpc($this->rpcDogodekUrl, 'azurirajTSDogodka', [
+            "dogodekId"       => $dogodekId
+            , "terminiStoritev" => $terminiStoritev]);
     }
 
     /**

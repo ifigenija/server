@@ -232,7 +232,8 @@ class TerminStoritve
                                     $f->getPlaniranZacetek() <= $planiranZacetek &&
                                     $f->getPlaniranKonec() >= $planiranKonec );
                         })
-                        , "Termin storitve poddogodka mora imeti vsaj en termin storitve gostovanja, ki ustreza intervalu", 1001094);
+                        , "Termin storitve poddogodka (" . $this->oseba->getPolnoIme()
+                        . ") mora imeti vsaj en termin storitve gostovanja, ki ustreza intervalu", 1001094);
             }
 
             /*

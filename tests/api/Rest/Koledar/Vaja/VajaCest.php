@@ -34,6 +34,7 @@ class VajaCest
     private $dogodekUrl     = '/rest/dogodek';
     private $uprizoritevUrl = '/rest/uprizoritev';
     private $sezonaUrl      = '/rest/sezona';
+    private $rpcDogodekUrl  = '/rpc/koledar/dogodek';
     private $obj1;
     private $obj2;
     private $obj3;
@@ -42,11 +43,12 @@ class VajaCest
     private $objDogodek;
     private $gostovanjeUrl  = '/rest/gostovanje';
     private $objGostovanje;
-    private $lookDrzavaId; 
+    private $lookDrzavaId;
     private $lookUprizoritev2;
     private $lookUprizoritev1;
     private $lookUprizoritev3;
     private $altUpr1Ids;
+    private $altOsUpr1Ids;
     private $altUpr2Ids;
     private $altUpr3Ids;
     private $lookTipVaje1;
@@ -63,6 +65,7 @@ class VajaCest
     private $lookOseba2;
     private $lookOseba3;
     private $lookOseba4;
+    private $objTSGos;
 
     public function _before(ApiTester $I)
     {
@@ -105,8 +108,11 @@ class VajaCest
          * še poiščemo vse pripadajoče alternacije
          */
         $upr                    = $I->successfullyGet($this->uprizoritevUrl, $look ['id']);
+        codecept_debug($upr);
         $this->altUpr1Ids       = $altUpr                 = array_column($I->subarrayValuesToArray(array_column($upr['funkcije'], 'alternacije')), 'id');
+        $this->altOsUpr1Ids     = $altOsUpr               = array_column($I->subarrayValuesToArray(array_column($upr['funkcije'], 'alternacije')), 'oseba');
         codecept_debug($altUpr);
+        codecept_debug($altOsUpr);
 
         $this->lookUprizoritev2 = $look                   = $I->lookupEntity("uprizoritev", "0001", false);
         codecept_debug($look);
@@ -178,6 +184,7 @@ class VajaCest
         $this->lookSezona2017 = $look                 = $I->lookupEntity("sezona", "2017", false);
         $I->assertGuid($look['id']);
     }
+
     /**
      * 
      * @param ApiTester $I
@@ -188,7 +195,6 @@ class VajaCest
         $I->assertGuid($look);
     }
 
-    
     /**
      * @depends lookupDrzavo
      * @param ApiTester $I
@@ -208,6 +214,37 @@ class VajaCest
         $this->objGostovanje = $ent                 = $I->successfullyCreate($this->gostovanjeUrl, $data);
         $I->assertGuid($ent['id']);
         codecept_debug($ent);
+
+        /*
+         * dodamo še termine storitve  (podobne kot jih bo potreboval create) 
+         */
+        $ts                    = [];
+        $ts['id']              = null;
+        $ts['planiranZacetek'] = '2015-05-01T20:00:00+0200';
+        $ts['planiranKonec']   = '2015-05-09T23:00:00+0200';
+        $ts['sodelujoc']       = true;
+        $ts['dezurni']         = false;
+        $ts['gost']            = false;
+        $ts['sodelujoc']       = true;
+        $ts['oseba']['id']     = ""; //init
+        codecept_debug($ts);
+        codecept_debug($this->altUpr1Ids);
+        $terminiStoritev       = [];
+        for ($i = 1; $i <= 3; $i++) {
+            $ts['oseba']['id'] = $this->altOsUpr1Ids[$i];
+            $terminiStoritev[] = $ts;
+        }
+        $ts['oseba']['id'] = $this->lookOseba1['id'];
+        $terminiStoritev[] = $ts;
+        $ts['oseba']['id'] = $this->lookOseba2['id'];
+        $terminiStoritev[] = $ts;
+        $ts['oseba']['id'] = $this->lookOseba3['id'];
+        codecept_debug($terminiStoritev);
+        $terminiStoritev[] = $ts;
+        $dogodekId         = $this->objGostovanje['dogodek']['id'];
+        $resp              = $I->successfullyCallRpc($this->rpcDogodekUrl, 'azurirajTSDogodka', [
+            "dogodekId"       => $dogodekId
+            , "terminiStoritev" => $terminiStoritev]);
     }
 
     /**

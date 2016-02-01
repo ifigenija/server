@@ -52,8 +52,10 @@ class DogodekRpcService
          * ali vsi termini storitve pripadajo pravemu dogodku
          */
         foreach ($terminiStoritev as $ts) {
-            $this->expect(!array_key_exists("dogodek", $ts) || $ts['dogodek'] == $dogodekId
-                    , "Dogodek termina storitve " . $ts['dogodek'] . " ni isti kot pri Dogodku", 1001241);
+            if (array_key_exists("dogodek", $ts)) {
+                $this->expect(!array_key_exists("dogodek", $ts) || $ts['dogodek'] == $dogodekId
+                        , "Dogodek termina storitve " . $ts['dogodek'] . " ni isti kot pri Dogodku", 1001241);
+            }
         }
 
         $srv = $this->getServiceLocator()->get('dogodek.service');
@@ -97,7 +99,7 @@ class DogodekRpcService
 
         $srv = $this->getServiceLocator()->get('dogodek.service');
 
-        $novId=$srv->kopirajDogodek($dogodek, $zacetekD);
+        $novId = $srv->kopirajDogodek($dogodek, $zacetekD);
 
         $em->flush();
 

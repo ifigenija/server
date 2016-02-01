@@ -41,10 +41,14 @@ class DogodekCest
     private $objTSDog1C;
     private $objTSDog1D;
     private $objTSDog1E;
+    private $objTSGos;
     private $lookSezona2014;
     private $lookSezona2015;
     private $lookSezona2016;
     private $lookSezona2017;
+    private $lookOseba1;
+    private $lookOseba2;
+    private $lookOseba3;
 
     public function _before(ApiTester $I)
     {
@@ -138,6 +142,25 @@ class DogodekCest
         $I->assertGuid($look['id']);
 
         $this->lookSezona2017 = $look                 = $I->lookupEntity("sezona", "2017", false);
+        $I->assertGuid($look['id']);
+    }
+
+    /**
+     * 
+     * @param ApiTester $I
+     */
+    public function lookupOsebe(ApiTester $I)
+    {
+        $this->lookOseba1 = $look             = $I->lookupEntity("oseba", "0001", false);
+        codecept_debug($look);
+        $I->assertGuid($look['id']);
+
+        $this->lookOseba2 = $look             = $I->lookupEntity("oseba", "0002", false);
+        codecept_debug($look);
+        $I->assertGuid($look['id']);
+
+        $this->lookOseba3 = $look             = $I->lookupEntity("oseba", "0003", false);
+        codecept_debug($look);
         $I->assertGuid($look['id']);
     }
 
@@ -257,6 +280,8 @@ class DogodekCest
         $this->objTSDog1C      = $ts;
         codecept_debug($ts);
 
+        codecept_debug($ts);
+
         /*
          * naredimo enega, ki še ne obstaja
          */
@@ -277,6 +302,20 @@ class DogodekCest
         $ts['planiranZacetek'] = '2012-05-20T09:30:00+0200';
         $ts['planiranKonec']   = '2012-05-20T14:00:00+0200';
         $this->objTSDog1E      = $ts;
+
+        /*
+         * naredimo  še enega, ki še ne obstaja, za gostovanje
+         */
+        $ts=[];
+        $ts['id']              = null;    // ker bo novi dogodek
+        $ts['planiranZacetek'] = '2015-03-10T07:00:00+0100';
+        $ts['planiranKonec']   = '2015-03-20T23:00:00+0100';
+        $ts['sodelujoc']       = true;
+        $ts['dezurni']       = false;
+        $ts['gost']       = false;
+        $ts['sodelujoc']       = true;
+        $ts['oseba']['id']     = $this->lookOseba1['id'];
+        $this->objTSGos        = $ts;
         codecept_debug($ts);
     }
 
@@ -306,11 +345,27 @@ class DogodekCest
          */
         $dogodekId       = $this->lookDogVaja1Id;
         $terminiStoritev = [$this->objTSDog1B, $this->objTSDog1C, $this->objTSDog1D, $this->objTSDog1E];
+        codecept_debug($terminiStoritev);
         $resp            = $I->successfullyCallRpc($this->rpcUrl, 'azurirajTSDogodka', [
             "dogodekId"       => $dogodekId
             , "terminiStoritev" => $terminiStoritev]);
         codecept_debug($resp);
-        $resp            = $I->successfullyGetList($this->terminStoritveUrl . "?dogodek=" . $this->lookDogVaja1Id, []);
+        $resp            = $I->successfullyGetList($this->terminStoritveUrl . "?dogodek=" . $dogodekId, []);
+        $list            = $resp['data'];
+        codecept_debug($list);
+        $this->kontroleRezultatovAzurirajTs($I, $dogodekId, $terminiStoritev);
+
+
+        /*
+         * dodaj TS na gostovanje
+         */
+        $dogodekId       = $this->lookDogGostovanje1Id;
+        $terminiStoritev = [$this->objTSGos];
+        $resp            = $I->successfullyCallRpc($this->rpcUrl, 'azurirajTSDogodka', [
+            "dogodekId"       => $dogodekId
+            , "terminiStoritev" => $terminiStoritev]);
+        codecept_debug($resp);
+        $resp            = $I->successfullyGetList($this->terminStoritveUrl . "?dogodek=" . $dogodekId, []);
         $list            = $resp['data'];
         codecept_debug($list);
         $this->kontroleRezultatovAzurirajTs($I, $dogodekId, $terminiStoritev);
