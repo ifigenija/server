@@ -504,6 +504,56 @@ class GostovanjeCest
         $resp            = $I->failToUpdate($this->dogodekUrl, $data['id'], $data);
         codecept_debug($resp);
         $I->assertEquals(1001706, $resp[0]['code'], "v restu dogodka ni dovoljeno spreminjanja razreda");
+
+
+        /*
+         * dogodek odstranimo iz gostovanja
+         */
+        $data                        = $I->successfullyGet($this->dogodekUrl, $this->objDogPredstava1['id']);
+        /*
+         * kontrole, ali je dogodek trenutno v gostovanju
+         */
+        $I->assertNotEmpty($data['nadrejenoGostovanje'], 'zaenkrat je dogodek v gostovanju');
+        $gostId                      = $data['nadrejenoGostovanje'];
+        $entGost                     = $I->successfullyGet($this->restUrl, $gostId);
+        codecept_debug($entGost);
+        $I->assertContains($data['id'], $entGost['podrejeniDogodki']);
+        /*
+         * sprememba
+         */
+        $data['nadrejenoGostovanje'] = NULL;  // odstranimo dogodek iz gostovanja
+        $ent                         = $I->successfullyUpdate($this->dogodekUrl, $data['id'], $data);
+        /*
+         * kontrole, ali je dogodek ni več v gostovanju
+         */
+        $I->assertEmpty($ent['nadrejenoGostovanje']);
+        $entGost                     = $I->successfullyGet($this->restUrl, $gostId);
+        codecept_debug($entGost);
+        $I->assertNotContains($data['id'], $entGost['podrejeniDogodki']);
+
+
+        /*
+         * dogodek dodamo v gostovanje
+         */
+        $data                        = $I->successfullyGet($this->dogodekUrl, $this->objDogPredstava1['id']);
+        /*
+         * kontrole, ali je dogodek trenutno v gostovanju
+         */
+        $I->assertEmpty($data['nadrejenoGostovanje'], 'zaenkrat dogodek ni v gostovanju');
+        /*
+         * sprememba
+         */
+        $gostId                      = $this->obj1['id'];
+        $data['nadrejenoGostovanje'] = $gostId; // dodamo dogodek v gostovanje
+        $ent                         = $I->successfullyUpdate($this->dogodekUrl, $data['id'], $data);
+        /*
+         * kontrole, ali je dogodek ponovno v v gostovanju
+         */
+        $I->assertNotEmpty($ent['nadrejenoGostovanje']);
+        $I->assertEquals($gostId, $ent['nadrejenoGostovanje']);
+        $entGost                     = $I->successfullyGet($this->restUrl, $gostId);
+        codecept_debug($entGost);
+        $I->assertContains($data['id'], $entGost['podrejeniDogodki']);
     }
 
     /**

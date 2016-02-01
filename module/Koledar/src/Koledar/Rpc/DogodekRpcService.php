@@ -20,6 +20,7 @@ class DogodekRpcService
      * @param guid $dogodekId           
      * @param array $terminiStoritev   polje terminov storitev v obliki:
      *                                   [ { 'id' : 'id-ts'
+     *                                      ,'dogodek' : 'id-dogodek'
      *                                      ,'planiranZacetek' : 'iso-date'
      *                                      ,'planiranKonec' : 'iso-date'
      *                                      ,'alternacija' : 'id-alternacije'
