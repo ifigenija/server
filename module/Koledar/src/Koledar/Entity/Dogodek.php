@@ -245,13 +245,7 @@ class Dogodek
             $this->expect($this->razred != self::GOSTOVANJE, "Poddogodek gostovanja ne sme biti gostovanje(" . $this->title . ")"
                     , 1001710);
 
-            /*
-             *  interval poddogodka mora biti v intervalu gostovanja
-             */
-            $this->expect($this->zacetek >= $this->nadrejenoGostovanje->getZacetek() & $this->zacetek <= $this->nadrejenoGostovanje->getKonec() &&
-                    $this->konec >= $this->nadrejenoGostovanje->getZacetek() && $this->konec <= $this->nadrejenoGostovanje->getKonec()
-                    , "Interval poddogodka gostovanja (" . $this->getTitle() . ")" . " mora biti v celoti znotraj intervala gostovanja"
-                    , 1001711);
+            $this->nadrejenoGostovanje->validate();
         }
     }
 

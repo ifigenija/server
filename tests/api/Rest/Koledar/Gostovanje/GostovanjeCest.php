@@ -466,7 +466,7 @@ class GostovanjeCest
         $data ['zacetek'] = '2014-04-30T00:00:00+0200';
         $resp             = $I->failToUpdate($this->predstavaUrl, $data['id'], $data);
         codecept_debug($resp);
-        $I->assertEquals(1001711, $resp[0]['code']);
+        $I->assertEquals(1001970, $resp[0]['code']);
     }
 
     /**
@@ -493,7 +493,7 @@ class GostovanjeCest
         $data ['zacetek'] = '2014-04-30T00:00:00+0200';
         $resp             = $I->failToUpdate($this->dogodekUrl, $data['id'], $data);
         codecept_debug($resp);
-        $I->assertEquals(1001711, $resp[0]['code']);
+        $I->assertEquals(1001970, $resp[0]['code']);
 
         /*
          *  - poddogodek ne more biti gostovanje
@@ -531,7 +531,7 @@ class GostovanjeCest
         ];
         $resp    = $I->failToCreate($this->predstavaUrl, $data);
         codecept_debug($resp);
-        $I->assertEquals(1001711, $resp[0]['code']);
+        $I->assertEquals(1001970, $resp[0]['code']);
 
         /*
          * ni možno testirati:
