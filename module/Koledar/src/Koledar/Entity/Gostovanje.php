@@ -93,8 +93,7 @@ class Gostovanje
              *  interval poddogodka mora biti v intervalu gostovanja
              */
             $this->expect(
-                    $poddog->getZacetek() >= $this->getZacetek() && $poddog->getZacetek() <= $this->getKonec() &&
-                    $poddog->getKonec() >= $this->getZacetek() && $poddog->getKonec() <= $this->getKonec()
+                    $poddog->getZacetek() >= $this->getZacetek() && $poddog->getKonec() <= $this->getKonec()
                     , "Interval poddogodka gostovanja (" . $poddog->getTitle() . ")" . " mora biti v celoti znotraj intervala gostovanja"
                     , 1001970);
 
