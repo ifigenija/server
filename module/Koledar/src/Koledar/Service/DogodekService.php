@@ -6,6 +6,7 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Max\Service\AbstractMaxService;
 use Produkcija\Entity\Uprizoritev;
+use Max\Filter\IsoDateFilter;
 
 class DogodekService
         extends AbstractMaxService
@@ -67,8 +68,8 @@ class DogodekService
                 /*
                  * če je spremennjen začetek ali konec termina storitve ga osvežimo
                  */
-                $planiranZacetek = empty($newts['planiranZacetek']) ? null : date_create($newts['planiranZacetek']);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
-                $planiranKonec   = empty($newts['planiranKonec']) ? null : date_create($newts['planiranKonec']);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
+                $planiranZacetek = empty($newts['planiranZacetek']) ? null : $this->filterDate(date_create($newts['planiranZacetek']));     // polje mora biti v php-jevi PHP-jevem datetime  tipu
+                $planiranKonec   = empty($newts['planiranKonec']) ? null : $this->filterDate(date_create($newts['planiranKonec']));     // polje mora biti v php-jevi PHP-jevem datetime  tipu
 
                 if ($ts->getPlaniranZacetek() !== $planiranZacetek || $ts->getPlaniranKonec() !== $planiranKonec) {
                     $ts->setPlaniranZacetek($planiranZacetek);
@@ -82,10 +83,10 @@ class DogodekService
                 $ts = new \Prisotnost\Entity\TerminStoritve();
                 $ts->setDogodek($dogodek);
 
-                $planiranZacetek = empty($newts['planiranZacetek']) ? null : date_create($newts['planiranZacetek']);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
+                $planiranZacetek = empty($newts['planiranZacetek']) ? null : $this->filterDate(date_create($newts['planiranZacetek']));     // polje mora biti v php-jevi PHP-jevem datetime  tipu
                 $ts->setPlaniranZacetek($planiranZacetek);
 
-                $planiranKonec = empty($newts['planiranKonec']) ? null : date_create($newts['planiranKonec']);     // polje mora biti v php-jevi PHP-jevem datetime  tipu
+                $planiranKonec = empty($newts['planiranKonec']) ? null : $this->filterDate(date_create($newts['planiranKonec']));     // polje mora biti v php-jevi PHP-jevem datetime  tipu
                 $ts->setPlaniranKonec($planiranKonec);
 
                 $oseba = empty($newts['oseba']) ? null : $osebaR->findOneById($newts['oseba']['id']);
@@ -203,6 +204,18 @@ class DogodekService
         $dogR->update($newDog); // da na novo preračuna termine storitve
 
         return $newDog->getId();
+    }
+
+    /**
+     * nastavi default time zono
+     * 
+     * @param \DateTime $date
+     * @return type
+     */
+    private function filterDate(\DateTime $date)
+    {
+        $f = new IsoDateFilter();
+        return $f->filter($date);
     }
 
 }
