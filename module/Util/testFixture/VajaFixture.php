@@ -73,22 +73,22 @@ class VajaFixture
         }
 
         $referenca = 'Vaja-' . $v[0];
-        //var_dump($referenca);
+//        var_dump($referenca);
         $this->addReference($referenca, $o);
     }
 
     public function getData()
     {
         return [
-            ['01', "2012-05-20 10:00", "2015-06-26 12:00", '200s', "Vaja 1.", 'Prostor-0005', 'Uprizoritev-0002',],
-            ['02', "2012-06-04 10:00", "2015-06-27 12:00", '400s', "Vaja 2.", 'Prostor-0005', 'Uprizoritev-0002',],
-            ['03', "2012-08-01 20:00", "2015-08-01 23:00", '400s', "Vaja 3.", 'Prostor-0002', 'Uprizoritev-0002',],
+            ['01', "2012-05-20 10:00", "2012-05-20 12:00", '200s', "Vaja 1.", 'Prostor-0005', 'Uprizoritev-0002',],
+            ['02', "2015-06-04 10:00", "2015-06-04 12:00", '400s', "Vaja 2.", 'Prostor-0005', 'Uprizoritev-0002',],
+            ['03', "2012-08-01 20:00", "2012-08-01 23:00", '400s', "Vaja 3.", 'Prostor-0002', 'Uprizoritev-0002',],
             // status  še ni potrjen (zaenkrat <500) 
-            ['04', "2012-08-01 20:00", "2015-08-01 23:00", '200s', "Vaja 4.", 'Prostor-0003', 'Uprizoritev-0002',],
+            ['04', "2012-08-01 20:00", "2012-08-01 23:00", '200s', "Vaja 4.", 'Prostor-0003', 'Uprizoritev-0002',],
             // status potrjen (zaenkrat >='500')
-            ['05', "2012-08-01 20:00", "2015-08-01 23:00", '500s', "Vaja 5.", 'Prostor-0006', 'Uprizoritev-0002',],
+            ['05', "2012-08-01 20:00", "2012-08-01 23:00", '500s', "Vaja 5.", 'Prostor-0006', 'Uprizoritev-0002',],
             // druga uprizoritev
-            ['06', "2012-08-01 20:00", "2015-08-01 23:00", '400s', "Vaja 6.", 'Prostor-0002', 'Uprizoritev-0001',],
+            ['06', "2012-08-01 20:00", "2012-08-01 23:00", '400s', "Vaja 6.", 'Prostor-0002', 'Uprizoritev-0001',],
             // izven sezone
             ['07', "1995-08-01 20:00", "1995-08-01 23:00", '500s', "Vaja 7.", 'Prostor-0006', 'Uprizoritev-0002',],
             // izven sezone
