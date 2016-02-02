@@ -48,6 +48,7 @@ lists:
                       required: false
 hydrator:
     byValue:
+        - dogodek
         - alternacija
         - alternacija.funkcija
     lookups:
