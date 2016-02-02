@@ -394,10 +394,38 @@ class AlternacijaCest
         codecept_debug($list);
         $funIdentA = array_column(array_column($list, "funkcija"), "ident");
         codecept_debug($funIdentA);
+        $funPodrA  = array_column(array_column($list, "funkcija"), "tipFunkcije.podrocje");
+        codecept_debug($funPodrA);
         $I->assertContains("Avtor", $funIdentA);
         $I->assertContains("Razsvetljava", $funIdentA);
         $I->assertContains("Inšpicient", $funIdentA);
         $I->assertContains("Režija", $funIdentA);
+
+        $I->assertContains("inspicient", $funPodrA);
+        $I->assertContains("tehnik", $funPodrA);
+        $I->assertContains("umetnik", $funPodrA);
+        $I->assertContains("igralec", $funPodrA);
+
+        /*
+         * po področju
+         */
+        $resp      = $I->successfullyGetList($this->restUrl . "/planirane?uprizoritev=" . $this->lookUprizoritev2['id']
+                . "&podrocje[]=inspicient&podrocje[]=tehnik", []);
+        $list      = $resp['data'];
+        codecept_debug($list);
+        $funIdentA = array_column(array_column($list, "funkcija"), "ident");
+        codecept_debug($funIdentA);
+        $funPodrA  = array_column(array_column($list, "funkcija"), "tipFunkcije.podrocje");
+        codecept_debug($funPodrA);
+        $I->assertNotContains("Avtor", $funIdentA);
+        $I->assertContains("Razsvetljava", $funIdentA);
+        $I->assertContains("Inšpicient", $funIdentA);
+        $I->assertNotContains("Režija", $funIdentA);
+
+        $I->assertContains("inspicient", $funPodrA);
+        $I->assertContains("tehnik", $funPodrA);
+        $I->assertNotContains("umetnik", $funPodrA);
+        $I->assertNotContains("igralec", $funPodrA);
     }
 
     /**
@@ -497,26 +525,6 @@ class AlternacijaCest
         $I->assertEquals($ent['imaPogodbo'], false);
         $I->assertEquals($ent['pomembna'], true, "pomembna");
     }
-
-    /**
-     * spremenim zapis
-     * 
-     * @depends create
-     * @param ApiTester $I
-     */
-//    public function updateZbrisiZaposlitev(ApiTester $I)
-//    {
-//        $ent           = $I->successfullyGet($this->restUrl, $this->obj1['id']);
-//        codecept_debug($ent);
-//        $I->assertGuid($ent['zaposlitev']);
-//        $I->assertTrue($ent['zaposlen']);
-//
-//        $this->obj1 = $entR       = $I->successfullyUpdate($this->restUrl, $ent['id'], $ent);
-//        codecept_debug($entR);
-//        
-//        
-//        $I->assertTrue(false,"$$ začasno");
-//    }
 
     /**
      * spremenim zapis

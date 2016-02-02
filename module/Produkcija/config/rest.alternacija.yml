@@ -85,6 +85,13 @@ lists:
                   options:
                       label: Datum
                       required: false
+                - name: podrocje
+                  type: multiselect
+                  options:
+                      label: Področje
+                      multiple: true
+                      required: false
+                      value_options: @funkcija.podrocje     
         hydrator:
             lookups:
                 - oseba
