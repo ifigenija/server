@@ -105,6 +105,16 @@ lists:
                       required: false
                       multiple: true
                       value_options: @dogodek.razred
+        hydrator:
+            byValue:
+                - terminiStoritve
+            lookups:
+                - prostor
+                - terminiStoritve.oseba
+            virtual:
+               - name: uprizoritev
+                 type: lookup
+                 targetEntity: Produkcija\Entity\Uprizoritev
 hydrator:
     lookups:
         - prostor
