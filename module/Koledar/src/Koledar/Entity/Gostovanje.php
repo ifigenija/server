@@ -81,7 +81,30 @@ class Gostovanje
 
     public function validate($mode = 'update')
     {
-        
+        foreach ($this->podrejeniDogodki as $poddog) {
+            /*
+             *  - poddogodek ne sme biti gostovanje
+             */
+            $this->expect($poddog->getRazred() != \Koledar\Entity\Dogodek::GOSTOVANJE
+                    , "Poddogodek gostovanja ne sme biti gostovanje(" . $poddog->getTitle() . ")"
+                    , 1001971);
+
+            /*
+             *  interval poddogodka mora biti v intervalu gostovanja
+             */
+            $this->expect(
+                    $poddog->getZacetek() >= $this->getZacetek() && $poddog->getKonec() <= $this->getKonec()
+                    , "Interval poddogodka gostovanja (" . $poddog->getTitle() . ")" . " mora biti v celoti znotraj intervala gostovanja"
+                    , 1001970);
+
+            /*
+             * isti poddogodek lahko največ 1x 
+             */
+            $pdA = $this->podrejeniDogodki->filter(function($ent) use(&$poddog) {
+                return ($ent === $poddog);
+            });
+            $this->expect(count($pdA) == 1, "V gostovanju je lahko poddogodek le enkrat prisoten (" . $poddog->getTitle() . ")", 1001972);
+        }
     }
 
     function dodajDogodek()
@@ -90,6 +113,7 @@ class Gostovanje
         $this->dogodek->setGostovanje($this);
         $this->dogodek->setRazred(Dogodek::GOSTOVANJE);
     }
+
     function getId()
     {
         return $this->id;
@@ -149,7 +173,7 @@ class Gostovanje
         return $this;
     }
 
-    function setDogodek(\Koledar\Entity\Dogodek $dogodek=null)
+    function setDogodek(\Koledar\Entity\Dogodek $dogodek = null)
     {
         $this->dogodek = $dogodek;
         return $this;
@@ -161,12 +185,10 @@ class Gostovanje
         return $this;
     }
 
-    function setDrzava(\App\Entity\Drzava $drzava=null)
+    function setDrzava(\App\Entity\Drzava $drzava = null)
     {
         $this->drzava = $drzava;
         return $this;
     }
-
-
 
 }

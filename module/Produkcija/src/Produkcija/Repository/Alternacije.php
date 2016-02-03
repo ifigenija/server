@@ -127,6 +127,13 @@ class Alternacije
             $qb->andWhere($predkoncem);
             $qb->setParameter('dat', $datum, "date");
         }
+        if (!empty($options['podrocje'])) {
+            $this->expect(is_array($options['podrocje']), "Parameter področje mora biti array", 1001758);
+            $naz = $e->in('funkcija.podrocje', ':podrocja');
+            $qb->andWhere($naz);
+            $qb->setParameter('podrocja', $options['podrocje']);
+        }
+
         $qb->andWhere('funkcija.sePlanira=true');
         return $qb;
     }

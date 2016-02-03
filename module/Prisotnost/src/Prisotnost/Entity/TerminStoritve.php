@@ -181,6 +181,7 @@ class TerminStoritve
         $this->expect($this->planiranKonec, "Planiran konec mora obstajati", 1001085);
         $this->expect($this->planiranZacetek < $this->planiranKonec, "Planiran konec mora biti za planiranim začetkom", 1001087);
 
+
         if ($this->alternacija) {
             /**
              * preveri, če je alternacija od uprizoritve dogodka
@@ -215,6 +216,25 @@ class TerminStoritve
              */
             $this->expect($this->dogodek, "Dogodek pri takem tipu termina storitve mora biti prisoten", 1001081);
             $this->expect($this->dogodek->getZacetek(), "Začetek dogodka mora obstajati", 1001082);
+            $this->expect($this->dogodek->getKonec(), "Konec dogodka mora obstajati", 1001083);
+            /*
+             * če ts poddogodka, mora interval  biti v celoti intervalu ts iste osebe v gostovanju
+             */
+            $oseba           = $this->oseba;
+            $planiranZacetek = $this->planiranZacetek;
+            $planiranKonec   = $this->planiranKonec;
+            if ($this->dogodek->getNadrejenoGostovanje()) {
+                $this->expect($this->dogodek->getNadrejenoGostovanje()->getDogodek()->getTerminiStoritve()->exists(function($key, $f) use(&$oseba, &$planiranZacetek, &$planiranKonec) {
+                            /*
+                             *  obstaja TS iste osebe z intervalom, ki je večji ali enak od int. tega TS
+                             */
+                            return ( $f->getOseba() === $oseba &&
+                                    $f->getPlaniranZacetek() <= $planiranZacetek &&
+                                    $f->getPlaniranKonec() >= $planiranKonec );
+                        })
+                        , "Termin storitve poddogodka (" . $this->oseba->getPolnoIme()
+                        . ") mora imeti vsaj en termin storitve gostovanja, ki ustreza intervalu", 1001094);
+            }
 
             /*
              * izračunamo delti, ki sta v minutah
@@ -228,7 +248,10 @@ class TerminStoritve
 
     public function getUprizoritev()
     {
-        if ($this->dogodek && $this->dogodek->getPodrobno()) {
+        if ($this->dogodek &&
+                $this->dogodek->getPodrobno() &&
+                method_exists($this->dogodek->getPodrobno(), "getUprizoritev")
+        ) {
             return $this->dogodek->getPodrobno()->getUprizoritev();
         }
         return null;

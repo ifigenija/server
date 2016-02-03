@@ -22,10 +22,10 @@ class Dogodki
 {
 
     protected $sortOptions = [
-        "default" => [
+        "default"         => [
             "title" => ["alias" => "p.title"]
         ],
-        "vse"     => [
+        "mozniPoddogodki" => [
             "title" => ["alias" => "p.title"]
         ],
     ];
@@ -33,21 +33,95 @@ class Dogodki
     public function getPaginator(array $options, $name = "default")
     {
         switch ($name) {
-            case "vse":
-                $qb   = $this->getVseQb($options);
-                $sort = $this->getSort($name);
-                $qb->orderBy($sort->order, $sort->dir);
-                return new DoctrinePaginator(new Paginator($qb));
             case "default":
-                $qb   = $this->getDefaultQb($options);
-                $sort = $this->getSort($name);
-                $qb->orderBy($sort->order, $sort->dir);
-
-                return new DoctrinePaginator(new Paginator($qb));
+                $qb = $this->getDefaultQb($options);
+                break;
+            case "mozniPoddogodki":
+                $qb = $this->getMozniPoddogodkiQb($options);
+                break;
+            default:
+                $this->expect(false, "Lista $name ne obstaja", 1000592);
         }
+        $sort = $this->getSort($name);
+        $qb->orderBy($sort->order, $sort->dir);
+        return new DoctrinePaginator(new Paginator($qb));
     }
 
+    /**
+     * 
+     * @param type $options
+     * @return type
+     */
     public function getDefaultQb($options)
+    {
+        $qb = $this->getSkupniQb($options);
+        $e  = $qb->expr();
+
+        /*
+         * vsaj del dogodka mora biti v intervalu
+         */
+        if (!empty($options['zacetek'])) {
+            /*
+             *  dk >= pz
+             */
+            $cas = $e->gte('p.konec', ':zac');
+            $qb->andWhere($cas);
+            $qb->setParameter('zac', $options['zacetek'], "datetime");
+        }
+        if (!empty($options['konec'])) {
+            /*
+             *  dz <= pk
+             */
+            $cas = $e->lte('p.zacetek', ':konec');
+            $qb->andWhere($cas);
+            $qb->setParameter('konec', $options['konec'], "datetime");
+        }
+
+        return $qb;
+    }
+
+    /**
+     * 
+     * @param type $options
+     * @return type
+     */
+    public function getMozniPoddogodkiQb($options)
+    {
+        $qb = $this->getSkupniQb($options);
+        $e  = $qb->expr();
+
+        /*
+         * poišče take dogodke gostovanja, da je njihov celotni
+         * interval v intervalu
+         */
+        if (!empty($options['zacetek'])) {
+            /*
+             *  dz >= pz
+             */
+            $cas = $e->gte('p.zacetek', ':zac');
+            $qb->andWhere($cas);
+            $qb->setParameter('zac', $options['zacetek'], "datetime");
+        }
+        if (!empty($options['konec'])) {
+            /*
+             *  dk <= pk
+             */
+            $cas = $e->lte('p.konec', ':konec');
+            $qb->andWhere($cas);
+            $qb->setParameter('konec', $options['konec'], "datetime");
+        }
+        $qb->andWhere($e->notIn('p.razred', ['300s']));  // ni gostovanje
+        $qb->andWhere($e->isNull('p.nadrejenoGostovanje'));  // ni poddogodek
+
+        return $qb;
+    }
+
+    /**
+     * 
+     * @param type $options
+     * @return type
+     */
+    public function getSkupniQb(& $options)
     {
         /**
          * nastavimo defaultne vrednosti nekaterih opcij, če so prazne
@@ -69,12 +143,6 @@ class Dogodki
             $options['konec']->setTime(0, 0);    // datum oblika
         }
 
-
-        return $this->getVseQb($options);
-    }
-
-    public function getVseQb($options)
-    {
         $qb = $this->createQueryBuilder('p');
         $e  = $qb->expr();
         if (!empty($options['q'])) {
@@ -86,26 +154,6 @@ class Dogodki
             $raz = $e->in('p.razred', $options['razred']);
             $qb->andWhere($raz);
             //$qb->setParameter('razred', $options['razred'], "array");
-        }
-
-        if (!empty($options['zacetek'])) {
-            /*
-             *  dk >= pz
-             */
-            $cas = $e->gte('p.konec', ':zac');
-
-            $qb->andWhere($cas);
-            $qb->setParameter('zac', $options['zacetek'], "datetime");
-        }
-        if (!empty($options['konec'])) {
-            /*
-             *  dz <= pk
-             */
-            $cas = $e->lte('p.zacetek', ':konec');
-
-
-            $qb->andWhere($cas);
-            $qb->setParameter('konec', $options['konec'], "datetime");
         }
 
         /**
@@ -155,6 +203,10 @@ class Dogodki
      */
     public function create($object, $params = null)
     {
+
+        if ($object->getNadrejenoGostovanje()) {
+            $object->getNadrejenoGostovanje()->getPodrejeniDogodki()->add($object);
+        }
 
         if (!$object->getStatus()) {
             $object->setStatus(Dogodek::PLANIRAN);
@@ -373,6 +425,21 @@ class Dogodki
         parent::update($object, $params); // TODO: Change the autogenerated stub
 
         $this->osveziTS($object);
+    }
+
+    /**
+     * Privzeti postopek brisanja
+     * preverimo avtorizacijo in predpogoje brisanja
+     *
+     * @param Dogodek $object
+     */
+    public function delete($object)
+    {
+        if ($object->getNadrejenoGostovanje()) {
+            $object->getNadrejenoGostovanje()->getPodrejeniDogodki()->removeElement($object);
+        }
+
+        parent::delete($object); // TODO: Change the autogenerated stub
     }
 
     /**

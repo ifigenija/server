@@ -6,6 +6,8 @@
 
 namespace Koledar\Rpc;
 
+use Max\Functions;
+
 /**
  * Description of PraznikRpcService
  *
@@ -29,12 +31,13 @@ class PraznikRpcService
         $this->expectPermission("Praznik-read");
 
         $this->expectIsoDate($datum, $this->translate("Datum ($datum) ni datum v ISO8601 obliki"), 1001110);
+        $datumD = Functions::stringToDateTime($datum);
 
         /**
          * preračun imamo v posebnem servisu, tako, da ga lahko kličemo direktno iz PHP-ja na strežniški strani
          */
         $service = $this->serviceLocator->get('praznik.service');
-        return $service->delaProstDan($datum);
+        return $service->delaProstDan($datumD);
     }
 
 }

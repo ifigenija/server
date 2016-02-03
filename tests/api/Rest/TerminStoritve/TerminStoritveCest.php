@@ -55,10 +55,12 @@ class TerminStoritveCest
     private $objTSDog1A;
     private $objTSDog1B;
     private $objTSDog1C;
+    private $objTSPodDog;
     private $lookDogVaja1Id;
     private $lookDogVaja2Id;
     private $lookDogVaja3Id;
     private $lookDogPredstava1Id;
+    private $lookDogPredstava15Id;
     private $dogodekUrl           = '/rest/dogodek';
     private $terminStoritveUrl    = '/rest/terminstoritve';
 
@@ -121,12 +123,23 @@ class TerminStoritveCest
         /*
          * dogodki, ki so predstave
          */
-        $resp                      = $I->successfullyGetList($this->dogodekUrl . "?q=Predstava 1&zacetek=2000-01-01&konec=2200-05-05&razred[]=100s", []);
+        $resp                      = $I->successfullyGetList($this->dogodekUrl . "?q=Predstava 1.&zacetek=2000-01-01&konec=2200-05-05&razred[]=100s", []);
         $list                      = $resp['data'];
         codecept_debug($list);
         $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
         $ent                       = array_pop($list);
         $this->lookDogPredstava1Id = $look                      = $ent['id'];
+        codecept_debug($look);
+
+        /*
+         * poddogodek
+         */
+        $resp                       = $I->successfullyGetList($this->dogodekUrl . "?q=Predstava 15.&zacetek=2000-01-01&konec=2200-05-05&razred[]=100s", []);
+        $list                       = $resp['data'];
+        codecept_debug($list);
+        $I->assertGreaterThanOrEqual(1, $resp['state']['totalRecords']);
+        $ent                        = array_pop($list);
+        $this->lookDogPredstava15Id = $look                       = $ent['id'];
         codecept_debug($look);
     }
 
@@ -146,6 +159,17 @@ class TerminStoritveCest
         $this->objTSDog1A = $ts               = $list[0];
         $this->objTSDog1B = $ts               = $list[1];
         $this->objTSDog1C = $ts               = $list[5];
+        codecept_debug($ts);
+
+        /*
+         * TS poddogodka
+         */
+        $resp = $I->successfullyGetList($this->terminStoritveUrl . "?dogodek=" . $this->lookDogPredstava15Id, []);
+        $list = $resp['data'];
+        codecept_debug($list);
+        $I->assertGreaterThanOrEqual(2, $resp['state']['totalRecords']);
+
+        $this->objTSPodDog = $ts                = array_pop($list);
         codecept_debug($ts);
     }
 
@@ -310,6 +334,7 @@ class TerminStoritveCest
     /**
      *  kreiramo zapis ure prisotnosti Termina storitve
      * 
+     * @depends getListTerminiStoritev
      * @depends create
      * @param ApiTester $I
      */
@@ -332,13 +357,14 @@ class TerminStoritveCest
     /**
      * spremenim zapis za kontrolo validacije
      * 
+     * @depends getListTerminiStoritev
      * @depends createUraTS
      * @param ApiTester $I
      */
     public function updateZaValidacijo(ApiTester $I)
     {
 
-        /**
+        /*
          * če so vnešene ure ni več možno spreminjati termina storitve
          */
         $data = $I->successfullyGet($this->restUrl, $this->objTSDog1A['id']);
@@ -347,6 +373,22 @@ class TerminStoritveCest
 
         $resp = $I->failToUpdate($this->restUrl, $data['id'], $data);
         $I->assertEquals(1001088, $resp[0]['code']);
+
+        /*
+         * interval TS poddogodka ne sme biti izven intervala  TS iste osebe v gostovanju
+         * oz. mora obstajati vsaj 1 TS z intervalom ki je večji ali enak temu intervalu
+         */
+        $data                    = $I->successfullyGet($this->restUrl, $this->objTSPodDog['id']);
+        codecept_debug($data);
+        $data['planiranZacetek'] = '2015-03-09T00:00:00+0200';   // pred začetkom TS iste osebe v gostovanju
+        $resp                    = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        $I->assertEquals(1001094, $resp[0]['code'], 'izven intervala TS v gostovanju');
+
+        $data                  = $I->successfullyGet($this->restUrl, $this->objTSPodDog['id']);
+        codecept_debug($data);
+        $data['planiranKonec'] = '2015-03-21T00:00:00';   // za koncem TS iste osebe v gostovanju
+        $resp                  = $I->failToUpdate($this->restUrl, $data['id'], $data);
+        $I->assertEquals(1001094, $resp[0]['code'], 'izven intervala TS v gostovanju');
     }
 
     /**

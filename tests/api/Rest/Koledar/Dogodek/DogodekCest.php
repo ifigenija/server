@@ -38,17 +38,18 @@ use ApiTester;
 class DogodekCest
 {
 
-    private $restUrl           = '/rest/dogodek';
-    private $predstavaUrl      = '/rest/predstava';
-    private $vajaUrl           = '/rest/vaja';
-    private $gostovanjeUrl     = '/rest/gostovanje';
-    private $dogodekUrl        = '/rest/dogodek';
-    private $prostorUrl        = '/rest/prostor';
-    private $sezonaUrl         = '/rest/sezona';
-    private $drzavaUrl         = '/rest/drzava';
-    private $arhivalijaUrl     = '/rest/arhivalija';
-    private $terminStoritveUrl = '/rest/terminstoritve';
-    private $osebaUrl          = '/rest/oseba';
+    private $restUrl                = '/rest/dogodek';
+    private $restMozniPoddogodkiUrl = '/rest/dogodek/mozniPoddogodki';
+    private $predstavaUrl           = '/rest/predstava';
+    private $vajaUrl                = '/rest/vaja';
+    private $gostovanjeUrl          = '/rest/gostovanje';
+    private $dogodekUrl             = '/rest/dogodek';
+    private $prostorUrl             = '/rest/prostor';
+    private $sezonaUrl              = '/rest/sezona';
+    private $drzavaUrl              = '/rest/drzava';
+    private $arhivalijaUrl          = '/rest/arhivalija';
+    private $terminStoritveUrl      = '/rest/terminstoritve';
+    private $osebaUrl               = '/rest/oseba';
     private $obj1;
     private $obj2;
     private $obj3;
@@ -84,9 +85,9 @@ class DogodekCest
     private $lookOseba2;
     private $lookUprizoritev1;
     private $lookUprizoritev2;
-    private $roleUrl           = '/rest/role';
-    private $rpcRoleUrl        = '/rpc/aaa/role';
-    private $rpcUserUrl        = '/rpc/aaa/user';
+    private $roleUrl                = '/rest/role';
+    private $rpcRoleUrl             = '/rpc/aaa/role';
+    private $rpcUserUrl             = '/rpc/aaa/user';
     private $lookSezona2014;
     private $lookSezona2015;
     private $lookSezona2016;
@@ -296,7 +297,6 @@ class DogodekCest
         $I->assertGuid($ent['id']);
         $this->obj3     = $dogodek        = $I->successfullyGet($this->dogodekUrl, $ent['dogodek']['id']);
         $I->assertGuid($dogodek['id']);
-//        $I->fail('$$');
     }
 
     /**
@@ -494,6 +494,120 @@ class DogodekCest
          * F
          */
         $resp = $I->successfullyGetList($this->restUrl . "?" . $par
+                . "zacetek=" . urlencode("2014-06-02T00:00:00+0200") . "&"
+                . "konec=" . urlencode("2014-06-12T20:00:00+200")
+                , []);
+        $I->assertEquals(1, $resp['state']['totalRecords'], "F");
+    }
+
+    /**
+     * test lista dogodka po začetku in koncu - posebaj preverimo, če 
+     * je vsaj del dogodka med začetkom in koncem
+     * 
+     *      - ne gostovanj
+     *      - ne poddogodkov
+     * - celotni interval!
+     * 
+     * Dogodek          z------------k
+     * parametri:
+     * A            z--k 
+     * B            z-------k
+     * C                    z--k 
+     * D                    z------------k 
+     * E                               z-k 
+     * F            z--------------------k
+     * @param ApiTester $I
+     */
+    public function getListMozniPoddogodkiPoZacetkuInKoncuInterval(ApiTester $I)
+    {
+        $statusvsi = "status[]=200s&status[]=400s&status[]=500s&status[]=600s&status[]=610s&status[]=710s&status[]=720s&status[]=790s&";
+
+        /*
+         * gostovanj ne sme najti
+         */
+        $dog    = 'q=Gostovanje 1.&';
+        $zackon = "zacetek=1990-01-01&konec=2022-12-32&";
+        $par    = $dog . $statusvsi . $zackon;
+        $resp   = $I->successfullyGetList($this->restUrl . "?" . $par, []);
+        $list   = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $resp   = $I->successfullyGetList($this->restMozniPoddogodkiUrl . "?" . $par, []);
+        $list   = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(0, $resp['state']['totalRecords'], "gostovanja ne sme najti");
+
+        /*
+         * poddogodkov ne sme najti
+         */
+        $dog    = 'q=Predstava 15.&';
+        $zackon = "zacetek=1990-01-01&konec=2022-12-32&";
+        $par    = $dog . $statusvsi . $zackon;
+        $resp   = $I->successfullyGetList($this->restUrl . "?" . $par, []);
+        $list   = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $resp   = $I->successfullyGetList($this->restMozniPoddogodkiUrl . "?" . $par, []);
+        $list   = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(0, $resp['state']['totalRecords'], "poddogodkov ne sme najti");
+
+
+        /**
+         * celotni interval dogodka mora biti med začetkom in koncem
+         */
+        $dog  = 'q=Vaja 10.&';
+        $par  = $dog . $statusvsi;
+        /*
+         * A
+         */
+        $resp = $I->successfullyGetList($this->restMozniPoddogodkiUrl . "?" . $par
+                . "zacetek=" . urlencode("2014-06-02T00:00:00+0200") . "&"
+                . "konec=" . urlencode("2014-06-11T06:00:00+200")
+                , []);
+        $I->assertEquals(0, $resp['state']['totalRecords'], "A");
+
+
+        /*
+         * B
+         */
+        $resp = $I->successfullyGetList($this->restMozniPoddogodkiUrl . "?" . $par
+                . "zacetek=" . urlencode("2014-06-02T00:00:00+0200") . "&"
+                . "konec=" . urlencode("2014-06-11T12:00:00+200")
+                , []);
+        $I->assertEquals(0, $resp['state']['totalRecords'], "B");
+
+        /*
+         * C
+         */
+        $resp = $I->successfullyGetList($this->restMozniPoddogodkiUrl . "?" . $par
+                . "zacetek=" . urlencode("2014-06-11T12:00:00+200") . "&"
+                . "konec=" . urlencode("2014-06-11T14:00:00+200")
+                , []);
+        $I->assertEquals(0, $resp['state']['totalRecords'], "C");
+
+        /*
+         * D
+         */
+        $resp = $I->successfullyGetList($this->restMozniPoddogodkiUrl . "?" . $par
+                . "zacetek=" . urlencode("2014-06-11T12:00:00+200") . "&"
+                . "konec=" . urlencode("2014-06-12T20:00:00+200")
+                , []);
+        $I->assertEquals(0, $resp['state']['totalRecords'], "D");
+
+        /*
+         * E
+         */
+        $resp = $I->successfullyGetList($this->restMozniPoddogodkiUrl . "?" . $par
+                . "zacetek=" . urlencode("2014-06-12T16:00:00+200") . "&"
+                . "konec=" . urlencode("2014-06-12T20:00:00+200")
+                , []);
+        $I->assertEquals(0, $resp['state']['totalRecords'], "E");
+
+        /*
+         * F
+         */
+        $resp = $I->successfullyGetList($this->restMozniPoddogodkiUrl . "?" . $par
                 . "zacetek=" . urlencode("2014-06-02T00:00:00+0200") . "&"
                 . "konec=" . urlencode("2014-06-12T20:00:00+200")
                 , []);

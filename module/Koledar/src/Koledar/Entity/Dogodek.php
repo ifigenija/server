@@ -185,13 +185,12 @@ class Dogodek
      * @var \Koledar\Entity\Gostovanje
      */
     protected $nadrejenoGostovanje;
-    
     private $razredi = [self::PREDSTAVA, self::VAJA, self::GOSTOVANJE, self::SPLOSNO, self::TEHNICNI];
 
     public function __construct()
     {
         $this->terminiStoritve = new ArrayCollection();
-     }
+    }
 
     public function validate($mode = 'update')
     {
@@ -210,8 +209,8 @@ class Dogodek
         }
         if ($this->razred === self::GOSTOVANJE) {
             $this->expect($this->gostovanje, "Dogodek razreda gostovanje zahteva referenco na gostovanje", 1001706);
-            $this->nadrejenoGostovanje=null;
-            $this->prostor=null;
+            $this->nadrejenoGostovanje = null;
+            $this->prostor             = null;
         }
         if ($this->razred === self::SPLOSNO) {
             $this->expect($this->splosni, "Dogodek razreda splošno zahteva referenco dogodekSplosni", 1001707);
@@ -239,6 +238,15 @@ class Dogodek
         }
 
         $this->expect($i === 1, "Napaka - napačno število referenc na podrobnosti dogodka $i", 1000361);
+        if ($this->nadrejenoGostovanje) {
+            /*
+             *  - poddogodek ne sme biti gostovanje
+             */
+            $this->expect($this->razred != self::GOSTOVANJE, "Poddogodek gostovanja ne sme biti gostovanje(" . $this->title . ")"
+                    , 1001710);
+
+            $this->nadrejenoGostovanje->validate();
+        }
     }
 
     /**
