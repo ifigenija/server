@@ -43,9 +43,9 @@
            type: gostovanje 
         400s: 
            label: Splošni dogodek           
-           type: splošni
+           type: splosni
         600s: 
-           label: tehnični dogodek           
+           label: Tehnični dogodek           
            type: tehnicni
 -
     name: dogodek.delte
