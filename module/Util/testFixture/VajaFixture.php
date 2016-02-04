@@ -27,7 +27,7 @@ class VajaFixture
 
     public function getDependencies()
     {
-        return array('TestFixture\ProstorFixture', 'TestFixture\UprizoritevFixture','TestFixture\AlternacijaFixture'); // fixture classes fixture is dependent on 
+        return array('TestFixture\ProstorFixture', 'TestFixture\UprizoritevFixture', 'TestFixture\AlternacijaFixture'); // fixture classes fixture is dependent on 
     }
 
     /**
@@ -97,6 +97,7 @@ class VajaFixture
             ['09', "2014-06-04 10:00", "2014-06-27 12:00", '400s', "Vaja 9.", 'Prostor-0005', 'Uprizoritev-0002',],
             // dva dni traja
             ['10', "2014-06-11 07:00", "2014-06-12 15:00", '400s', "Vaja 10.", 'Prostor-0005', 'Uprizoritev-0002',],
+            ['11', "2012-06-04 10:00", "2012-06-04 12:00", '400s', "Vaja 11.", 'Prostor-0005', 'Uprizoritev-0002',],
         ];
     }
 

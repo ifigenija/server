@@ -22,22 +22,22 @@ class OptionsService
         extends AbstractMaxService
 {
 
-
-
     /**
      * Vrne vrednost opcij po logiki per user -> globalno -> default 
      * 
      * Prebere iz entitet Option in OptionValue
      * 
      * @param string $name
+     * @param boolean $nouser   če true, potem ne prikaže user opcije
+     *                               tudi v primeru, če le-ta obstaja
      * @return mixed
      */
-    public function getOptions($name)
+    public function getOptions($name, $nouser = false)
     {
 
         $em = $this->getEm();
 
-        $rep    = $em->getRepository('App\Entity\Option');
+        $rep = $em->getRepository('App\Entity\Option');
 
         /* @var $opt \App\Entity\Option */
         $opt = $rep->findOneByName($name);
@@ -47,20 +47,26 @@ class OptionsService
         $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000403);
 
         // najprej preveri ali je opcija uporabniško nastavljiva
-        if ($opt->getPerUser()) {
+        if (!$nouser && $opt->getPerUser()) {
             //  s katerim uporabniškim imenom je uporabnik prijavljen
             $user = $this->getAuth()->getIdentity();
 
             $optValueR = $em->getRepository('App\Entity\OptionValue');
             $optValue  = $optValueR->getOptionValuesUserValue($opt, $user);
 
+            /*
+             *  preverjanje avtorizacije s kontekstom
+             */
+            $this->expectPermission("OptionValue-read", $optValue);
 
             if (!empty($optValue)) {
                 return $optValue;
             }
         }
 
-        // preveri, če ima globalno opcijo
+        /*
+         * preveri, če ima globalno opcijo
+         */
         if (!$opt->getReadOnly()) {
             $optValue = $em->getRepository('App\Entity\OptionValue')
                     ->getOptionValuesGlobalValue($opt);
@@ -88,6 +94,5 @@ class OptionsService
             return $val['label'];
         }, $this->getOptions($object));
     }
-
 
 }

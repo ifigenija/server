@@ -106,10 +106,63 @@ class DogodekCest
      * @param ApiTester $I
      * @param type $dogodekId
      * @param type $newIds
+     * @param type $datumiJa
+     * @param type $datumiNe
      */
-    private function kontroleRezultatovRazmnozi(ApiTester $I, $dogodekId, $newIds)
+    private function kontroleRezultatovRazmnozi(ApiTester $I, $dogodekId, $newIds, $datumiJa = [], $datumiNe = [], $casiJa = [], $casiNe = [], $casiVsi = [])
     {
         codecept_debug(__FUNCTION__);
+        $dog = $I->successfullyGet($this->dogodekUrl, $dogodekId);
+
+//        codecept_debug($dog);
+//        codecept_debug($datumiJa);
+//        codecept_debug($datumiNe);
+
+        /*
+         * $$ ker se ne da narediti getlista po parametru id brez improvizacije
+         * na standarden način
+         * 
+         * je pa to lahko perfmančno zelo počasi!
+         */
+        $noviDogodki = [];
+        foreach ($newIds as $newId) {
+            $ent           = $I->successfullyGet($this->dogodekUrl, $newId);
+            $noviDogodki[] = $ent;
+        }
+//        codecept_debug($noviDogodki);
+        $zacetki    = array_column($noviDogodki, "zacetek");
+        $zacetkiDat = [];
+        $zacetkiCas = [];
+        foreach ($zacetki as $zac) {
+            $zacetkiDat[] = substr($zac, 0, 10);   // le datum
+            $zacetkiCas[] = substr($zac, 11, 5);   // le čas
+        }
+
+        codecept_debug($zacetki);
+        codecept_debug($zacetkiDat);
+        $zacetkiCasUq = array_unique($zacetkiCas);
+        codecept_debug($zacetkiCasUq);
+
+        foreach ($datumiJa as $dat) {
+            $I->assertContains($dat, $zacetkiDat);
+        }
+        foreach ($datumiNe as $dat) {
+            $I->assertNotContains($dat, $zacetkiDat);
+        }
+        foreach ($casiJa as $cas) {
+            $I->assertContains($cas, $zacetkiCasUq);
+        }
+        foreach ($casiNe as $cas) {
+            $I->assertNotContains($cas, $zacetkiCasUq);
+        }
+
+        if (count($casiVsi) > 0) {
+            $casiVsiUq = array_unique($casiVsi);
+            $I->assertEquals(count($casiVsiUq), count($zacetkiCasUq));
+            foreach ($casiVsiUq as $cas) {
+                $I->assertContains($cas, $zacetkiCasUq);
+            }
+        }
     }
 
     /**
@@ -377,12 +430,17 @@ class DogodekCest
         ]);
         codecept_debug($newIds);
         $I->assertEquals(3, count($newIds), "število novih");
-        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds);
+        $datumiJa  = ["2015-06-05", "2015-06-06", "2015-06-07"];
+        $datumiNe  = ["2015-06-04", "2015-06-08"];
+        $casiJa    = ["10:00"];
+        $casiNe    = [];
+        $casiVsi   = ["10:00"];
+        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds, $datumiJa, $datumiNe, $casiJa, $casiNe, $casiVsi);
 
         /*
          * napačno število ponovitev
          */
-        $resp      = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
+        $resp = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
             "dogodekId"        => $dogodekId
             , "steviloPonovitev" => -4
         ]);
@@ -392,39 +450,49 @@ class DogodekCest
         /*
          * kopija vaje z začetkom obdobja in upoštevanju sobot
          */
-        $newIds    = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
+        $newIds   = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
             "dogodekId"        => $dogodekId
-            , "zacetekObdobja"   => '2014-01-03T00:00:00+0200'    // petek 
+            , "zacetekObdobja"   => '2014-01-03T00:00:00+0100'    // petek 
             , "upostevajSobote"  => true
             , "steviloPonovitev" => 3
         ]);
         codecept_debug($newIds);
         /*
-         * $$ kontrola, da v soboto ni kreiral
+         * kontrola, da v soboto ni kreiral
          */
         $I->assertEquals(3, count($newIds), "število novih");
-        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds);
+        $datumiJa = ["2014-01-03", "2014-01-05"];
+        $datumiNe = ["2014-01-04"];     //sobota
+        $casiJa   = ["10:00"];
+        $casiNe   = [];
+        $casiVsi  = ["10:00"];
+        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds, $datumiJa, $datumiNe, $casiJa, $casiNe, $casiVsi);
 
         /*
          * kopija vaje z začetkom obdobja in upoštevanju nedelj
          */
-        $newIds    = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
+        $newIds   = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
             "dogodekId"        => $dogodekId
-            , "zacetekObdobja"   => '2014-01-10T00:00:00+0200'    // petek 
+            , "zacetekObdobja"   => '2014-01-10T00:00:00+0100'    // petek 
             , "upostevajNedelje" => true
             , "steviloPonovitev" => 3
         ]);
         codecept_debug($newIds);
+        $I->assertEquals(3, count($newIds), "število novih ned");
         /*
-         * $$ kontrola, da v nedeljo ni kreiral
+         * kontrola, da v nedeljo ni kreiral
          */
-        $I->assertEquals(3, count($newIds), "število novih");
-        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds);
+        $datumiJa = ["2014-01-10", "2014-01-13", "2014-01-13"];
+        $datumiNe = ["2014-01-12", "2014-01-09"];     // nedelja
+        $casiJa   = ["10:00"];
+        $casiNe   = [];
+        $casiVsi  = ["10:00"];
+        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds, $datumiJa, $datumiNe, $casiJa, $casiNe, $casiVsi);
 
         /*
          * upoštevanju praznikov
          */
-        $newIds    = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
+        $newIds   = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
             "dogodekId"         => $dogodekId
             , "zacetekObdobja"    => '2012-02-07T00:00:00+0200'    // dan pred praznikom
             , "upostevajPraznike" => true
@@ -432,15 +500,20 @@ class DogodekCest
         ]);
         codecept_debug($newIds);
         /*
-         * $$ kontrola, da ni na praznik
+         * kontrola, da ni na praznik
          */
         $I->assertEquals(3, count($newIds), "število novih");
-        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds);
+        $datumiJa = ["2012-02-07"];
+        $datumiNe = ["2012-02-08"];     //praznik
+        $casiJa   = ["10:00"];
+        $casiNe   = [];
+        $casiVsi  = ["10:00"];
+        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds, $datumiJa, $datumiNe, $casiJa, $casiNe, $casiVsi);
 
         /*
          * upoštevanju praznikov,sobot,nedelj
          */
-        $newIds    = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
+        $newIds   = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
             "dogodekId"         => $dogodekId
             , "zacetekObdobja"    => '2014-08-14T00:00:00+0200'    // četrtek pred praznikom
             , "upostevajPraznike" => true
@@ -449,20 +522,25 @@ class DogodekCest
             , "steviloPonovitev"  => 2
         ]);
         codecept_debug($newIds);
-        /*
-         * $$ kontrola, da ni na praznik, sob in ned
-         * 
-         * $$ kontrole 
-         *    ne Datumi
-         *    ja začetki
-         */
         $I->assertEquals(2, count($newIds), "število novih");
-        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds);
+        /*
+         * kontrola, da ni na praznik, sob in ned
+         */
+        $datumiJa = ["2014-08-14"];
+        $datumiNe = [
+            "2014-08-15", //praznik
+            "2014-08-16", //sobota
+            "2014-08-17", //nedelja
+        ];
+        $casiJa   = ["10:00"];
+        $casiNe   = [];
+        $casiVsi  = ["10:00"];
+        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds, $datumiJa, $datumiNe, $casiJa, $casiNe, $casiVsi);
 
         /*
          * konec obdobja pred številom ponovitev
          */
-        $newIds    = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
+        $newIds   = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
             "dogodekId"        => $dogodekId
             , "zacetekObdobja"   => '2011-09-01T00:00:00+0200'
             , "konecObdobja"     => '2011-09-02T23:59:59+0200'  //2 dni od začetka
@@ -470,60 +548,206 @@ class DogodekCest
         ]);
         codecept_debug($newIds);
         $I->assertEquals(2, count($newIds), "št. novih - upošteva konec obdobja");
-        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds);
+        $datumiJa = ["2011-09-02"];
+        $datumiNe = [ "2011-09-03",];       // po koncu obdobja
+        $casiJa   = ["10:00"];
+        $casiNe   = [];
+        $casiVsi  = ["10:00"];
+        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds, $datumiJa, $datumiNe, $casiJa, $casiNe, $casiVsi);
 
         /*
          * preveliko število ponovitev
          */
-        $resp      = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
+        $resp = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
             "dogodekId"        => $dogodekId
             , "zacetekObdobja"   => '2011-09-05T00:00:00+0200'
             , "steviloPonovitev" => 101                     // preveliko število ponovitev             
         ]);
         codecept_debug($resp);
         $I->assertEquals(1001259, $resp['code'], 'preveliko število');
-        
-        /*
-         * napačen parameter dopoldanOd
-         */
-        $resp      = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
-            "dogodekId"        => $dogodekId
-            , "zacetekObdobja"   => '2011-09-03T00:00:00+0200'
-            , "konecObdobja"     => '2011-09-23T23:59:59+0200'
-            , "dopoldanOd"       => ["h" => 9, "napaka brez minut" => 15]
-            , "steviloPonovitev" => 0
-        ]);
-        codecept_debug($resp);
-        $I->assertEquals(1001256, $resp['code'], 'napačen format dopoldanOd');
 
         /*
-         * napačen parameter dopoldanOd
+         *  ni parametra tedenski termini
          */
-        $resp      = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
-            "dogodekId"        => $dogodekId
-            , "zacetekObdobja"   => '2011-09-03T00:00:00+0200'
-            , "konecObdobja"     => '2011-09-23T23:59:59+0200'
-            , "dopoldanOd"       => ["h" => 9, "m" => 65]       // preveč minut
-            , "steviloPonovitev" => 0
+        $resp = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"      => $dogodekId
+            , "zacetekObdobja" => '2011-09-03T00:00:00+0200'
+            , "konecObdobja"   => '2011-09-23T23:59:59+0200'
+                // ni parametra tedenski termini
         ]);
         codecept_debug($resp);
-        $I->assertEquals(1001256, $resp['code'], 'napačen format dopoldanOd');
+        $I->assertEquals(1001263, $resp['code'], 'ni parametra tedenski termini');
 
         /*
-         * napačen parameter dopoldanOd
+         *  tedenski termini
          */
-        $resp      = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
-            "dogodekId"        => $dogodekId
-            , "zacetekObdobja"   => '2011-09-03T00:00:00+0200'
-            , "konecObdobja"     => '2011-09-23T23:59:59+0200'
-            , "dopoldanOd"       => ["h" => 30, "m" => 15]       // preveč ur
-            , "steviloPonovitev" => 0
+        $newIds   = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"       => $dogodekId
+            , "zacetekObdobja"  => '2010-01-01T00:00:00+0100'   //petek
+            , "konecObdobja"    => '2010-01-07T23:59:59+0100'
+            , "tedenskiTermini" => [ 1 => ["DOP"]]        // ponedeljek dopoldan
         ]);
-        codecept_debug($resp);
-        $I->assertEquals(1001256, $resp['code'], 'napačen format dopoldanOd');
+        codecept_debug($newIds);
+        $I->assertEquals(1, count($newIds), "št. novih");
+        $datumiJa = ["2010-01-04"];     // ponedeljek  
+        $datumiNe = [ "2010-01-01"];    //  ni v tedenskem terminu
+        $casiJa   = ["10:00"];          // dopoldan 
+        $casiNe   = [];
+        $casiVsi  = ["10:00"];
+        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds, $datumiJa, $datumiNe, $casiJa, $casiNe, $casiVsi);
 
+        /*
+         *  tedenski termini - več dni, več terminov, brez praznikov
+         */
+        $newIds   = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"         => $dogodekId
+            , "zacetekObdobja"    => '2010-02-01T00:00:00+0100'   //petek
+            , "konecObdobja"      => '2010-02-10T23:59:59+0100'   //sreda
+            , "upostevajPraznike" => true
+            , "tedenskiTermini"   => [
+                1 => ["DOP", "ZVE"]            // ponedeljek dopoldan,zvečer
+                , 3 => ['ZVE']                 // sreda zvečer
+                , 4 => ['ZVE']]                 // četrtek zvečer
+        ]);
+        codecept_debug($newIds);
+        $I->assertEquals(5, count($newIds), "št. novih");
+        $datumiJa = ["2010-02-01", "2010-02-03", "2010-02-04", "2010-02-10",];
+        $datumiNe = [ "2010-02-08", "2010-02-11"];    //  ni praznika in 2. četrtka
+        $casiJa   = ["10:00", "20:00"];  // dopoldan, zvečer 
+        $casiNe   = ["15:00"];          // popoldanski ne
+        $casiVsi  = ["10:00", "20:00"];
+        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds, $datumiJa, $datumiNe, $casiJa, $casiNe, $casiVsi);
+
+        /*
+         *  tedenski termini - več dni, več terminov, brez praznikov
+         *  spremenjen večerni termin
+         */
+        $newIds   = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"         => $dogodekId
+            , "zacetekObdobja"    => '2010-04-18T00:00:00+0200'   //petek
+            , "konecObdobja"      => '2010-04-30T23:59:59+0200'   //sreda
+            , "upostevajPraznike" => true
+            , "dopoldanOd"        => ["h" => 9, "m" => 15]
+            , "tedenskiTermini"   => [
+                2 => ["DOP", "POP"]            // torek dopoldan,zvečer
+                , 3 => ['POP']                 // sreda zvečer
+            ]
+        ]);
+        codecept_debug($newIds);
+        $I->assertEquals(4, count($newIds), "št. novih");
+        $datumiJa = ["2010-04-20", "2010-04-28"];
+        $datumiNe = [ "2010-04-27"];   // praznik
+        $casiJa   = ["09:15", "15:00"];  // dopoldan, zvečer 
+        $casiNe   = ["20:00", "10:00"];          // popoldanski ne
+        $casiVsi  = ["09:15", "15:00"];
+        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds, $datumiJa, $datumiNe, $casiJa, $casiNe, $casiVsi);
 
         $I->fail('$$');
+
+        /*
+         *  napačen parameter tedenski termini - vrednosti niso v polju
+         */
+        $resp = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"       => $dogodekId
+            , "zacetekObdobja"  => '2010-01-01T00:00:00+0100'
+            , "konecObdobja"    => '2010-01-07T23:59:59+0100'
+            , "tedenskiTermini" => [ 1 => "DOP"]        // ponedeljek dopoldan
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1001267, $resp['code'], 'vrednosti tedenskih terminov niso v polju');
+
+
+        /*
+         *  napačen parameter tedenski termini - vrednosti niso v polju
+         */
+        $resp = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"       => $dogodekId
+            , "zacetekObdobja"  => '2010-01-01T00:00:00+0100'
+            , "konecObdobja"    => '2010-01-07T23:59:59+0100'
+            , "tedenskiTermini" => [ 8 => "DOP"] // neveljavni dan       
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1001266, $resp['code'], 'dan ni med 1 in 7');
+
+        /*
+         *  napačen parameter tedenski termini - vrednosti niso v polju
+         */
+        $resp = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"       => $dogodekId
+            , "zacetekObdobja"  => '2010-01-01T00:00:00+0100'
+            , "konecObdobja"    => '2010-01-07T23:59:59+0100'
+            , "tedenskiTermini" => [ 7 => ["neveljavni dopoldan"]]  // neveljavni termin v dnevu       
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1001264, $resp['code'], 'termin je lahko le DOP,POP,ZVE');
+
+
+
+        /*
+         * napačen parameter dopoldanOd
+         */
+        $resp = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"       => $dogodekId
+            , "zacetekObdobja"  => '2011-09-03T00:00:00+0200'
+            , "konecObdobja"    => '2011-09-23T23:59:59+0200'
+            , "dopoldanOd"      => ["h" => 9, "napaka brez minut" => 15]
+            , "tedenskiTermini" => [ 1 => ["DOP"]]
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1001256, $resp['code'], 'napačen format dopoldanOd');
+
+        /*
+         * napačen parameter dopoldanOd
+         */
+        $resp = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"       => $dogodekId
+            , "zacetekObdobja"  => '2011-09-03T00:00:00+0200'
+            , "konecObdobja"    => '2011-09-23T23:59:59+0200'
+            , "dopoldanOd"      => ["h" => 9, "m" => 65]       // preveč minut
+            , "tedenskiTermini" => [ 1 => ["DOP"]]
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1001256, $resp['code'], 'napačen format dopoldanOd');
+
+        /*
+         * napačen parameter dopoldanOd
+         */
+        $resp = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"       => $dogodekId
+            , "zacetekObdobja"  => '2011-09-03T00:00:00+0200'
+            , "konecObdobja"    => '2011-09-23T23:59:59+0200'
+            , "dopoldanOd"      => ["h" => 30, "m" => 15]       // preveč ur
+            , "tedenskiTermini" => [ 1 => ["DOP"]]
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1001256, $resp['code'], 'napačen format dopoldanOd');
+
+        /*
+         * napačen parameter popoldan < dopoldan
+         */
+        $resp = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"       => $dogodekId
+            , "zacetekObdobja"  => '2011-09-03T00:00:00+0200'
+            , "konecObdobja"    => '2011-09-23T23:59:59+0200'
+            , "dopoldanOd"      => ["h" => 11, "m" => 00]
+            , "popoldanOd"      => ["h" => 6, "m" => 00]    // pred dopoldan       
+            , "tedenskiTermini" => [ 1 => ["DOP"]]
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1001268, $resp['code'], 'popoldan < popoldan');
+
+        /*
+         *  zvečer manjši od popoldan iz  opcij
+         */
+        $resp = $I->failCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"       => $dogodekId
+            , "zacetekObdobja"  => '2011-09-03T00:00:00+0200'
+            , "konecObdobja"    => '2011-09-23T23:59:59+0200'
+            , "zvecerOd"        => ["h" => 12, "m" => 00] // manjši od popoldan iz  opcij
+            , "tedenskiTermini" => [ 1 => ["DOP"]]
+        ]);
+        codecept_debug($resp);
+        $I->assertEquals(1001268, $resp['code'], 'zvečer < popoldan');
     }
 
     /**
@@ -684,7 +908,7 @@ class DogodekCest
             , "zacetek"   => $zacetek
         ]);
         codecept_debug($resp);
-        $I->assertEquals(1001261, $resp['code']);
+        $I->assertEquals(1001271, $resp['code']);
 
         /*
          * neveljavni parameter dogodekId
@@ -719,7 +943,7 @@ class DogodekCest
             , "zacetek"   => $zacetek
         ]);
         codecept_debug($resp);
-        $I->assertEquals(1001262, $resp['code']);
+        $I->assertEquals(1001272, $resp['code']);
 
         /*
          * neveljavni dogodek - dogodek, ki je del gostovanja
@@ -731,7 +955,7 @@ class DogodekCest
             , "zacetek"   => $zacetek
         ]);
         codecept_debug($resp);
-        $I->assertEquals(1001263, $resp['code']);
+        $I->assertEquals(1001273, $resp['code']);
     }
 
 }
