@@ -31,7 +31,7 @@ class OptionsRpcService
      *                               tudi v primeru, če le-ta obstaja
      * @return mixed
      */
-    public function getOptions($name, $nouser=false)
+    public function getOptions($name, $nouser = false)
     {
         // preverjanje avtorizacije
         $this->expectPermission("Option-read");
@@ -39,7 +39,7 @@ class OptionsRpcService
 
         $em = $this->getEm();
 
-        $rep    = $em->getRepository('App\Entity\Option');
+        $rep = $em->getRepository('App\Entity\Option');
 
         /* @var $opt \App\Entity\Option */
         $opt = $rep->findOneByName($name);
@@ -51,56 +51,9 @@ class OptionsRpcService
 
         $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000403);
 
-        /*
-         *  najprej preveri ali je opcija uporabniško nastavljiva
-         */
-        if (!$nouser && $opt->getPerUser()) {
-            //  s katerim uporabniškim imenom je uporabnik prijavljen
-            $user = $this->getAuth()->getIdentity();
+        $srv = $this->serviceLocator->get('options.service');
 
-            $optValueR = $em->getRepository('App\Entity\OptionValue');
-            $optValue  = $optValueR->getOptionValuesUserValue($opt, $user);
-
-            /*
-             *  preverjanje avtorizacije s kontekstom
-             */
-            $this->expectPermission("OptionValue-read", $optValue);
-
-            if (!empty($optValue)) {
-                return $optValue;
-            }
-        }
-
-        /*
-         *  preveri, če ima globalno opcijo
-         */
-        if (!$opt->getReadOnly()) {
-            $optValue = $em->getRepository('App\Entity\OptionValue')
-                    ->getOptionValuesGlobalValue($opt);
-
-            // preverjanje avtorizacije s kontekstom
-            $this->expectPermission("OptionValue-read", $optValue);
-
-            if (!empty($optValue)) {
-                return $optValue;
-            }
-        }
-
-        // če nima niti uporabniške niti globalne nastavitve
-        return $opt->getDefaultValue();
-    }
-
-    /**
-     * Vrne opcije pripravljene za uporabo v formi 
-     * val => label
-     * 
-     * @param type $name
-     */
-    public function getOptionValues($object)
-    {
-        return array_map(function($val) {
-            return $val['label'];
-        }, $this->getOptions($object));
+        return $srv->getOptions($name, $nouser);
     }
 
     /**
@@ -124,9 +77,9 @@ class OptionsRpcService
         $opt = $rep->findOneByName($name);
 
         // preverjanje avtorizacije s kontekstom
-        $this->expectPermission("Option-read",$opt);
+        $this->expectPermission("Option-read", $opt);
 
-        
+
         $this->expect($opt, 'Opcije ne obstajajo ' . $name, 1000404);
 
         // preveri, če ima globalno opcijo
@@ -155,7 +108,7 @@ class OptionsRpcService
         $em->persist($optVal);
 
         // preverjanje avtorizacije s kontekstom
-        $this->expectPermission("OptionValue-write",$optVal);
+        $this->expectPermission("OptionValue-write", $optVal);
 
         $em->flush();
 
@@ -178,7 +131,7 @@ class OptionsRpcService
         $this->expectPermission("Option-write");
         $this->expectPermission("OptionValue-write");
         $this->expectPermission("OptionValue-writeGlobal");
-        
+
         $em  = $this->getEm();
         $rep = $em->getRepository('App\Entity\Option');
 
@@ -203,23 +156,16 @@ class OptionsRpcService
             $optVal = $optValR->findOneById($globalValueId);
             $optVal->setValue($value);
         }
-        $em->persist($optVal); 
-        
-        
+        $em->persist($optVal);
+
+
         // preverjanje avtorizacije s kontekstom
-        $this->expectPermission("Option-write",$opt);
-        $this->expectPermission("OptionValue-write",$opt);
-        $this->expectPermission("OptionValue-writeGlobal",$opt);
+        $this->expectPermission("Option-write", $opt);
+        $this->expectPermission("OptionValue-write", $opt);
+        $this->expectPermission("OptionValue-writeGlobal", $opt);
 
         $em->flush();
 
         return true;
     }
-
-    public function getOptionsWithFlags($name)
-    {
-
-        throw new Exception('implementiraj ali ukini', 9999999);
-    }
-
 }

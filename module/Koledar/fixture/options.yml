@@ -36,17 +36,17 @@
             label: Predstava
             type: predstava
         200s: 
-           label: Vaja           
-           type: vaja
+            label: Vaja           
+            type: vaja
         300s: 
-           label: Gostovanje           
-           type: gostovanje 
+            label: Gostovanje           
+            type: gostovanje 
         400s: 
-           label: Splošni dogodek           
-           type: splosni
+            label: Splošni dogodek           
+            type: splosni
         600s: 
-           label: Tehnični dogodek           
-           type: tehnicni
+            label: Tehnični dogodek           
+            type: tehnicni
 -
     name: dogodek.delte
     description: 'Privzete vrednosti za delte terminov storitev glede na tipe dogodka v minutah'

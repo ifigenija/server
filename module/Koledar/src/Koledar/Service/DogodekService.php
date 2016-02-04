@@ -63,7 +63,7 @@ class DogodekService
                 $tsA = $dogodek->getTerminiStoritve()->filter(function($ent) use(&$newts) {
                     return ($ent->getId() === $newts['id']);    // nov ts obstaja v dogodku
                 });
-                $this->expect($tsA->count() == 1, "V dogodku je napačno število terminov storitev z id=" . $newts['id'], 1001260);
+                $this->expect($tsA->count() == 1, "V dogodku je napačno število terminov storitev z id=" . $newts['id'], 1001270);
                 $ts              = $tsA->first();
                 /*
                  * če je spremennjen začetek ali konec termina storitve ga osvežimo
@@ -117,10 +117,10 @@ class DogodekService
             \Koledar\Entity\Dogodek::PLANIRAN,
             \Koledar\Entity\Dogodek::PREGLEDAN,
             \Koledar\Entity\Dogodek::POTRJEN,])
-                , "Kopirati je možno planirane,pregledane ali potrjene dogodke", 1001261);
+                , "Kopirati je možno planirane,pregledane ali potrjene dogodke", 1001271);
         $this->expect($dogodek->getRazred() != \Koledar\Entity\Dogodek::GOSTOVANJE
-                , "Gostovanja ni možno kopirati", 1001262);
-        $this->expect(!$dogodek->getNadrejenoGostovanje(), "Dogodka, ki je del gostovanja, ni možno kopirati", 1001263);
+                , "Gostovanja ni možno kopirati", 1001272);
+        $this->expect(!$dogodek->getNadrejenoGostovanje(), "Dogodka, ki je del gostovanja, ni možno kopirati", 1001273);
 
         $em = $this->serviceLocator->get("\Doctrine\ORM\EntityManager");
 
@@ -130,7 +130,8 @@ class DogodekService
         $this->getEm()->persist($newDog);
 
         $newDog->setStatus(\Koledar\Entity\Dogodek::PLANIRAN);
-        $newDog->setZacetek($zacetekD);
+        $cas = clone $zacetekD;   // $$ da kasneje v uow ne spreminja začetka dogodka
+        $newDog->setZacetek($cas);
 
         /**
          * novi dogodek je enako dolg kot stari
@@ -182,14 +183,14 @@ class DogodekService
             /*
              * še en expect za vsak slučaj
              */
-            $this->expect(false, "Gostovanja ni možno kopirati", 1001264);
+            $this->expect(false, "Gostovanja ni možno kopirati", 1001274);
         }
 
         if ($dogodek->getNadrejenoGostovanje()) {
             /*
              * še en expect za vsak slučaj
              */
-            $this->expect(false, "Dogodka, ki je del gostovanja, ni možno kopirati", 1001265);
+            $this->expect(false, "Dogodka, ki je del gostovanja, ni možno kopirati", 1001275);
         }
         $coll = $dogodek->getTerminiStoritve();
         foreach ($coll as $ts) {
