@@ -46,17 +46,17 @@ lists:
                   options:
                       label: Zasedenost
                       required: false
-hydrator:
-    byValue:
-        - dogodek
-        - alternacija
-        - alternacija.funkcija
-    lookups:
-        - oseba
-        - alternacija.funkcija.tipFunkcije
-    virtual:
-       - name: uprizoritev
-         type: lookup
-         targetEntity: Produkcija\Entity\Uprizoritev
+        hydrator:
+            byValue:
+                - dogodek
+                - alternacija
+                - alternacija.funkcija
+            lookups:
+                - oseba
+                - alternacija.funkcija.tipFunkcije
+            virtual:
+               - name: uprizoritev
+                 type: lookup
+                 targetEntity: Produkcija\Entity\Uprizoritev
 
         
