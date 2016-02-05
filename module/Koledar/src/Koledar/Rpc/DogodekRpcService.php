@@ -209,7 +209,8 @@ class DogodekRpcService
                         , 1001264);
             });
             array_walk($tedenskiTermini, function ( $val, $key) {
-                $this->expect(is_integer($key) && $key >= 1 && $key <= 7
+                $this->expect(is_integer($key) && $key >= 0 && $key <= 7        //ključa 0 kasneje sploh ne upošteva ampak le od 1 do 7
+                                                                                // ključ 0 forsira javascript
                         , "Dovoljeno ključi za tedenskiTermini so med 1 in 7"
                         , 1001266);
                 $this->expect(is_array($val), "Vrednosti morajo biti v array-u"
@@ -267,7 +268,7 @@ class DogodekRpcService
             $zacetekNaslednjega = clone $zacetekObdobjaD;
             $zacetekNaslednjega->modify('-1 day');
             $zacetekNaslednjega->setTime(
-                    intval($dogodek->getZacetek()->format('h')) // ura
+                    intval($dogodek->getZacetek()->format('G')) // ura
                     , intval($dogodek->getZacetek()->format('i'))    //min
             );
             /*
