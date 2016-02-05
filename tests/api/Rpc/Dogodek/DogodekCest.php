@@ -642,8 +642,28 @@ class DogodekCest
         $casiVsi  = ["09:15", "15:00"];
         $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds, $datumiJa, $datumiNe, $casiJa, $casiNe, $casiVsi);
 
-        $I->fail('$$');
-
+        /*
+         *  tedenski termini z dodanimi praznimi ključi od 0 naprej, ki jih doda javascript
+         */
+        $newIds   = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"         => $dogodekId
+            , "zacetekObdobja"    => '2010-05-10T00:00:00+0200'   //ponedeljek
+            , "konecObdobja"      => '2010-05-16T23:59:59+0200'
+            , "tedenskiTermini"   => [
+                0 => []                     // kot doda javascript
+                , 1 => ["DOP"]              // ponedeljek
+                , 2 => []                   // kot doda javascript
+                , 3 => ['POP']              // sreda 
+            ]]);
+        codecept_debug($newIds);
+        $I->assertEquals(2, count($newIds), "št. novih");
+        $datumiJa = ["2010-05-10"];
+        $datumiNe = [ "2010-05-11"];
+        $casiJa   = ["10:00", "15:00"];  // dopoldan, zvečer 
+        $casiNe   = ["20:00"];          // popoldanski ne
+        $casiVsi  = ["10:00", "15:00"];
+        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds, $datumiJa, $datumiNe, $casiJa, $casiNe, $casiVsi);
+       
         /*
          *  napačen parameter tedenski termini - vrednosti niso v polju
          */
