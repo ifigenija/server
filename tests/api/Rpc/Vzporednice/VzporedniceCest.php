@@ -57,7 +57,6 @@ class VzporedniceCest
         $I->amHttpAuthenticated(\IfiTest\AuthPage::$vesna, \IfiTest\AuthPage::$vesnaPass);
     }
 
-
     /**
      * metoda, ki se večkrat kliče zaradi preverjanja rezultatov rpc klica vzporednic
      * 
@@ -117,7 +116,7 @@ class VzporedniceCest
      * @param boolean $zasedene     
      * @return array
      */
-    private function osebeIds(ApiTester $I,$resp, $zasedene = true)
+    private function osebeIds(ApiTester $I, $resp, $zasedene = true)
     {
         codecept_debug(__FUNCTION__);
 
@@ -615,6 +614,64 @@ class VzporedniceCest
     }
 
     /**
+     * dnimanične vzporednice (prisoten začetek in konec)
+     * 
+     * @param ApiTester $I
+     */
+    public function dajDinamicneVzporPrekr(ApiTester $I)
+    {
+        /**
+         * vhodni parametri
+         */
+        $uprIdsVho     = [$this->lookUprizoritev1['id']];
+        $alts          = [];
+        $zacetek       = "2015-03-15T23:10:00+0100";
+        $konec         = "2015-06-26T09:11:00+0200";    // osebaN je zasedena v tem času
+        /**
+         * daj vzporednice
+         */
+        $respV         = $I->successfullyCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respV);
+        $this->kontroleRezultatov($I, $uprIdsVho, $alts, $respV);
+        $I->assertEmpty($respV['error'], 'errorja ni');
+        /**
+         * preverimo če so nekatere osebe v konfliktnih funkcijah zasedene oz. proste
+         */
+        $zasOsebeIds   = $this->osebeIds($I, $respV, true);
+        codecept_debug($zasOsebeIds);
+        $nezasOsebeIds = $this->osebeIds($I, $respV, false);
+        codecept_debug($nezasOsebeIds);
+        $I->assertContains($this->lookOsebaN['id'], $zasOsebeIds);
+        $I->assertNotContains($this->lookOsebaN['id'], $nezasOsebeIds);
+
+
+
+        /**
+         * daj prekrivanja
+         */
+        /**
+         * daj prekrivanja
+         */
+        $respP         = $I->successfullyCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+            , "zacetek"        => $zacetek, "konec"          => $konec]);
+        codecept_debug($respP);
+        $this->kontroleRezultatov($I, $uprIdsVho, $alts, $respP);
+        codecept_debug($respP['error']);
+        $zasOsebeIds   = $this->osebeIds($I, $respV, true);
+        codecept_debug($zasOsebeIds);
+        $nezasOsebeIds = $this->osebeIds($I, $respV, false);
+        codecept_debug($nezasOsebeIds);
+        $I->assertContains($this->lookOsebaN['id'], $zasOsebeIds);
+        $I->assertNotContains($this->lookOsebaN['id'], $nezasOsebeIds);
+
+        /**
+         * kontrola kombinacij
+         */
+        $this->kontroleObehRezultatov($I, $uprIdsVho, $respV, $respP);
+    }
+
+    /**
      * 
      * @param ApiTester $I
      */
@@ -625,20 +682,21 @@ class VzporedniceCest
          */
         $uprIdsVho = [];
         $alts      = [];
+
         /**
          * parametra za interval sta zaenkrat ok
          */
-        $zacetek   = "2016-04-20T10:00:00+0200";
-        $konec     = "2016-04-20T14:00:00+0200";
+        $zacetek = "2016-04-20T10:00:00+0200";
+        $konec   = "2016-04-20T14:00:00+0200";
         /**
          * daj vzporednice
          */
-        $respV     = $I->successfullyCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
+        $respV   = $I->successfullyCallRpc($this->rpcUrl, 'dajVzporednice', ["uprizoritveIds" => $uprIdsVho, "alternacije"    => $alts
             , "zacetek"        => $zacetek, "konec"          => $konec]);
         /**
          * daj prekrivanja
          */
-        $respP     = $I->successfullyCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
+        $respP   = $I->successfullyCallRpc($this->rpcUrl, 'dajPrekrivanja', ["uprizoritveIds" => $uprIdsVho, "alternacije" => $alts]);
 
 
         /**

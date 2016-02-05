@@ -33,7 +33,6 @@ class VzporedniceRpcService
      */
     public function dajVzporednice(array $uprizoritveIds = [], array $alternacije = [], $zacetek = null, $konec = null)
     {
-
         /*
          *  preverjanje avtorizacije
          */
@@ -41,6 +40,7 @@ class VzporedniceRpcService
         $this->expectPermission("Funkcija-read");
         $this->expectPermission("Alternacija-read");
         $this->expectPermission("Oseba-read");
+        $this->expectPermission("TerminStoritve-read");
 
         $this->preveriVhodneParametre($uprizoritveIds, $alternacije, $zacetek, $konec);
         $zacetekD = Functions::stringToDateTime($zacetek);
@@ -50,7 +50,7 @@ class VzporedniceRpcService
 
         $konfliktiOseUpr = $srv->getKonfliktOsebaUpriz($alternacije);
 
-        $osebe = $this->getZasedeneOsebe($uprizoritveIds, $alternacije);
+        $osebe = $this->getZasedeneOsebe($uprizoritveIds, $alternacije, $zacetekD, $konecD);
 
         $uprizoritveMozne = $srv->getMozneUprizoritve($osebe);
 
@@ -95,7 +95,7 @@ class VzporedniceRpcService
 
         $konfliktiOseUpr = $srv->getKonfliktOsebaUpriz($alternacije);
 
-        $osebe = $this->getZasedeneOsebe($uprizoritveIds, $alternacije);
+        $osebe = $this->getZasedeneOsebe($uprizoritveIds, $alternacije, $zacetekD, $konecD);
 
 //        $konfliktneFunkcije = $srv->getKonfliktneFunkcije($osebe)->getQuery()->getResult();
         $vrniKonfliktne     = true;
@@ -140,16 +140,18 @@ class VzporedniceRpcService
      * 
      * @param array $uprizoritveIds
      * @param array $alternacije
+     * @param type $zacetekD
+     * @param type $konecD
      * @return type
      */
-    private function getZasedeneOsebe(array $uprizoritveIds = [], array $alternacije = [])
+    private function getZasedeneOsebe(array $uprizoritveIds = [], array $alternacije = [], $zacetekD = null, $konecD = null)
     {
         $uprA = $this->getEm()->getRepository('Produkcija\Entity\Uprizoritev')->findById($uprizoritveIds);
 
         /** @var VzporedniceService $srv */
         $srv = $this->getServiceLocator()->get('vzporednice.service');
 
-        $osebe = $srv->getSodelujoci($uprA, $alternacije);
+        $osebe = $srv->getSodelujoci($uprA, $alternacije, $zacetekD, $konecD);
         return $osebe;
     }
 
@@ -280,9 +282,8 @@ class VzporedniceRpcService
              * pretvorimo v datum za vsak slučaj, če bi bila $zacetek in $konec 
              * v različnih time zone-ah
              */
-            $idf     = new IsoDateFilter();
-            $zacTime = $idf->filter($zacetek);
-            $konTime = $idf->filter($konec);
+            $zacTime = Functions::stringToDateTime($zacetek);
+            $konTime = Functions::stringToDateTime($konec);
             $this->expect($zacTime <= $konTime
                     , "Konec ne sme biti pred začetkom", 1001677);
         }

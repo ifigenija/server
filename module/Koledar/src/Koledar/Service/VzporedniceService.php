@@ -18,20 +18,27 @@ use Produkcija\Entity\Uprizoritev;
 class VzporedniceService
         extends AbstractMaxService
 {
+
     /**
      *
-     * Vrne seznam ključev oseb, ki sodelujejo na polju uprizoritev.
+     * Vrne seznam ključev oseb, ki sodelujejo na polju uprizoritev 
+     * in v VSEH terminih storitve  med začetkom in koncem 
      * Privzete alternacije se lahko overridajo z $alternacije
      *
      *
      * @param array <Uprizoritev> $uprizoritve
      * @param array $alternacije - seznam mora biti v obliki: [ ['id-funkcije1'=> ['id-osebe1', 'id-osebe2, ...], ...]
+     * @param type $zacetekD         čas začetka
+     * @param type $konecD           čas konca
      * @return array
      */
-    function getSodelujoci($uprizoritve, $alternacije = [])
+    function getSodelujoci($uprizoritve, $alternacije = [], $zacetekD = null, $konecD = null)
     {
+        /*
+         * najdi osebe iz  uprizoritev in alternacij
+         */
 
-        /**
+        /*
          * $alternacije mora biti v obliki:
          *  [ ['id-funkcije1'=> ['id-osebe1', 'id-osebe2, ...], ...]
          * v tem primeru se defaultne alternacije prepišejo s podanimi in se zračunajo vzporednice za
@@ -59,12 +66,39 @@ class VzporedniceService
         }
 
         // funkcija se override-a, če obstaja alternacija za njo
-        $osebe = [];
+        $osebeU = [];
         foreach (array_merge($r, $altFO) as $t) {
             foreach ($t as $p) {
-                $osebe[] = $p;
+                $osebeU[] = $p;
             }
         }
+
+        /*
+         * najdi osebe iz terminov storitev med začetkom in koncem
+         */
+        $osebeTS = [];
+        if (!empty($zacetekD) && !empty($konecD)) {
+            $tsqb = $this->getEm()->createQueryBuilder();
+            $e    = $tsqb->expr();
+            $tsqb->select('os.id')
+                    ->from('Prisotnost\Entity\TerminStoritve', 'ts')
+                    ->join('ts.oseba', 'os')
+                    ->setParameter('zac', $zacetekD, "datetime")
+                    ->setParameter('kon', $konecD, "datetime");
+
+            $zac = $e->andX($e->lt('ts.planiranZacetek', ':zac')
+                    , $e->gt('ts.planiranKonec', ':zac'));
+            $kon = $e->andX($e->lt('ts.planiranZacetek', ':kon')
+                    , $e->gt('ts.planiranKonec', ':kon'));
+            $cas = $e->orX($zac, $kon);
+            $tsqb->andWhere($cas);
+
+            $tsA     = $tsqb->getQuery()
+                    ->getResult();
+            $osebeTS = array_column($tsA, 'id');
+        }
+
+        $osebe = array_merge($osebeU, $osebeTS);     // še poenostavi
         $osebe = array_unique($osebe);
 
         return $osebe;
