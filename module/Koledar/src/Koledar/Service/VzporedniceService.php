@@ -78,10 +78,24 @@ class VzporedniceService
          */
         $osebeTS = [];
         if (!empty($zacetekD) && !empty($konecD)) {
-            $tsR = $this->getEm()->getRepository('Prisotnost\Entity\TerminStoritve');
-            /*
-             * $$ dokončaj
-             */
+            $tsqb = $this->getEm()->createQueryBuilder();
+            $e    = $tsqb->expr();
+            $tsqb->select('os.id')
+                    ->from('Prisotnost\Entity\TerminStoritve', 'ts')
+                    ->join('ts.oseba', 'os')
+                    ->setParameter('zac', $zacetekD, "datetime")
+                    ->setParameter('kon', $konecD, "datetime");
+
+            $zac = $e->andX($e->lt('ts.planiranZacetek', ':zac')
+                    , $e->gt('ts.planiranKonec', ':zac'));
+            $kon = $e->andX($e->lt('ts.planiranZacetek', ':kon')
+                    , $e->gt('ts.planiranKonec', ':kon'));
+            $cas = $e->orX($zac, $kon);
+            $tsqb->andWhere($cas);
+
+            $tsA     = $tsqb->getQuery()
+                    ->getResult();
+            $osebeTS = array_column($tsA, 'id');
         }
 
         $osebe = array_merge($osebeU, $osebeTS);     // še poenostavi
