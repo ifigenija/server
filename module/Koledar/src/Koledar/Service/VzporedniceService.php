@@ -66,12 +66,25 @@ class VzporedniceService
         }
 
         // funkcija se override-a, če obstaja alternacija za njo
-        $osebe = [];
+        $osebeU = [];
         foreach (array_merge($r, $altFO) as $t) {
             foreach ($t as $p) {
-                $osebe[] = $p;
+                $osebeU[] = $p;
             }
         }
+
+        /*
+         * najdi osebe iz terminov storitev med začetkom in koncem
+         */
+        $osebeTS = [];
+        if (!empty($zacetekD) && !empty($konecD)) {
+            $tsR = $this->getEm()->getRepository('Prisotnost\Entity\TerminStoritve');
+            /*
+             * $$ dokončaj
+             */
+        }
+
+        $osebe = array_merge($osebeU, $osebeTS);     // še poenostavi
         $osebe = array_unique($osebe);
 
         return $osebe;
