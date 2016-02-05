@@ -268,7 +268,7 @@ class DogodekRpcService
             $zacetekNaslednjega = clone $zacetekObdobjaD;
             $zacetekNaslednjega->modify('-1 day');
             $zacetekNaslednjega->setTime(
-                    intval($dogodek->getZacetek()->format('h')) // ura
+                    intval($dogodek->getZacetek()->format('G')) // ura
                     , intval($dogodek->getZacetek()->format('i'))    //min
             );
             /*

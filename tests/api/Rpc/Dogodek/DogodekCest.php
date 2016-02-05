@@ -301,6 +301,15 @@ class DogodekCest
         $this->lookDogSplosDog1Id = $look                     = $ent['id'];
         codecept_debug($look);
 
+        $resp                     = $I->successfullyGetList($this->dogodekUrl
+                . "?q=DogodekSplosni 2&zacetek=2000-01-01&konec=2200-05-05&razred[]=400s", []);
+        $list                     = $resp['data'];
+        codecept_debug($list);
+        $I->assertEquals(1, $resp['state']['totalRecords']);
+        $ent                      = array_pop($list);
+        $this->lookDogSplosDog2Id = $look                     = $ent['id'];
+        codecept_debug($look);
+
         /*
          * tehnični dogodki
          */
@@ -421,6 +430,23 @@ class DogodekCest
     public function razmnozi(ApiTester $I)
     {
         /*
+         * kopija popoldanskega dogodka
+         */
+        $dogodekId = $this->lookDogSplosDog2Id;
+        $newIds    = $I->successfullyCallRpc($this->rpcUrl, 'razmnozi', [
+            "dogodekId"        => $dogodekId
+            , "steviloPonovitev" => 2
+        ]);
+        codecept_debug($newIds);
+        $I->assertEquals(2, count($newIds), "število novih");
+        $datumiJa  = ["2012-03-03","2012-03-04"];
+        $datumiNe  = [];
+        $casiJa    = ["17:00"];
+        $casiNe    = [];
+        $casiVsi   = ["17:00"];
+        $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds, $datumiJa, $datumiNe, $casiJa, $casiNe, $casiVsi);
+
+        /*
          * kopije vaje
          */
         $dogodekId = $this->lookDogVaja2Id;
@@ -436,6 +462,7 @@ class DogodekCest
         $casiNe    = [];
         $casiVsi   = ["10:00"];
         $this->kontroleRezultatovRazmnozi($I, $dogodekId, $newIds, $datumiJa, $datumiNe, $casiJa, $casiNe, $casiVsi);
+
 
         /*
          * napačno število ponovitev
