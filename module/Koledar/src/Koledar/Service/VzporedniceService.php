@@ -18,20 +18,27 @@ use Produkcija\Entity\Uprizoritev;
 class VzporedniceService
         extends AbstractMaxService
 {
+
     /**
      *
-     * Vrne seznam ključev oseb, ki sodelujejo na polju uprizoritev.
+     * Vrne seznam ključev oseb, ki sodelujejo na polju uprizoritev 
+     * in v VSEH terminih storitve  med začetkom in koncem 
      * Privzete alternacije se lahko overridajo z $alternacije
      *
      *
      * @param array <Uprizoritev> $uprizoritve
      * @param array $alternacije - seznam mora biti v obliki: [ ['id-funkcije1'=> ['id-osebe1', 'id-osebe2, ...], ...]
+     * @param type $zacetekD         čas začetka
+     * @param type $konecD           čas konca
      * @return array
      */
-    function getSodelujoci($uprizoritve, $alternacije = [])
+    function getSodelujoci($uprizoritve, $alternacije = [], $zacetekD = null, $konecD = null)
     {
+        /*
+         * najdi osebe iz  uprizoritev in alternacij
+         */
 
-        /**
+        /*
          * $alternacije mora biti v obliki:
          *  [ ['id-funkcije1'=> ['id-osebe1', 'id-osebe2, ...], ...]
          * v tem primeru se defaultne alternacije prepišejo s podanimi in se zračunajo vzporednice za
