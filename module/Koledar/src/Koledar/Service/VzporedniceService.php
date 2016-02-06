@@ -86,10 +86,10 @@ class VzporedniceService
                     ->setParameter('zac', $zacetekD, "datetime")
                     ->setParameter('kon', $konecD, "datetime");
 
-            $zac = $e->andX($e->lt('ts.planiranZacetek', ':zac')
-                    , $e->gt('ts.planiranKonec', ':zac'));
-            $kon = $e->andX($e->lt('ts.planiranZacetek', ':kon')
-                    , $e->gt('ts.planiranKonec', ':kon'));
+            $zac = $e->andX($e->lte('ts.planiranZacetek', ':zac')
+                    , $e->gte('ts.planiranKonec', ':zac'));
+            $kon = $e->andX($e->lte('ts.planiranZacetek', ':kon')
+                    , $e->gte('ts.planiranKonec', ':kon'));
             $cas = $e->orX($zac, $kon);
             $tsqb->andWhere($cas);
 
